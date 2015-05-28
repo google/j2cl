@@ -4,7 +4,7 @@ package(default_visibility = ["//:__subpackages__"])
 licenses(["unencumbered"])
 
 java_test(
-    name = "AllTests",
-    size = "medium",
-    srcs = glob(["*.java"]),
+    name = "FooTest",
+    srcs = ["FooTest.java"],
+    deps = ["//third_party/java/junit"],
 )
