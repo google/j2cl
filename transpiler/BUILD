@@ -7,6 +7,6 @@ package(default_visibility = ["//:__subpackages__"])
 licenses(["unencumbered"])
 
 java_library(
-    name = "j2cl",
-    runtime_deps = ["//transpiler/java/com/google/j2cl"],
+    name = "transpiler",
+    runtime_deps = ["//transpiler/java/com/google/j2cl/transpiler"],
 )

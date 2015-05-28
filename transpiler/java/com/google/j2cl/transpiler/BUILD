@@ -4,6 +4,10 @@ package(default_visibility = ["//:__subpackages__"])
 licenses(["unencumbered"])
 
 java_library(
-    name = "j2cl",
+    name = "transpiler",
     srcs = glob(["*.java"]),
+    deps = [
+        "//java/com/google/common/base",
+        "//java/com/google/common/io",
+    ],
 )
