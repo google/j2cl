@@ -4,12 +4,15 @@ package(default_visibility = ["//:__subpackages__"])
 licenses(["unencumbered"])
 
 java_library(
-    name = "transpiler",
+    name = "frontend",
     srcs = glob(["*.java"]),
     deps = [
+        "//java/com/google/common/annotations",
+        "//java/com/google/common/base",
+        "//java/com/google/common/collect",
         "//third_party/java/args4j",
         "//third_party/java/eclipse:eclipse-jdt-core-4.4",
+        "//third_party/java/jsr305_annotations",
         "//transpiler/java/com/google/j2cl/errors",
-        "//transpiler/java/com/google/j2cl/frontend",
     ],
 )
