@@ -15,13 +15,17 @@
  */
 package com.google.j2cl.transpiler;
 
-import org.eclipse.jdt.core.dom.CompilationUnit;
+import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.errors.Errors;
+import com.google.j2cl.frontend.FrontendFlags;
+import com.google.j2cl.frontend.FrontendOptions;
+import com.google.j2cl.frontend.JdtParser;
+import com.google.j2cl.generator.JavaScriptGenerator;
+
 import org.kohsuke.args4j.CmdLineException;
 
-import com.google.j2cl.errors.Errors;
-import com.google.j2cl.frontend.FrontendOptions;
-import com.google.j2cl.frontend.FrontendFlags;
-import com.google.j2cl.frontend.JdtParser;
+import java.io.File;
+import java.nio.charset.Charset;
 
 /**
  * Translation tool for generating JavaScript source files from Java sources.
@@ -36,15 +40,42 @@ public class J2clTranspiler implements JdtParser.Handler {
   }
 
   @Override
-  public void handleCompilationUnit(String path, CompilationUnit unit) {
-    System.out.println(path);
+  public void handleCompilationUnit(
+      String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit unit) {
+    System.out.println(sourceFilePath);
     System.out.println(unit);
 
     // transform JDT AST to J2cl AST
 
     // normalize J2cl AST
 
-    // output J2cl AST as JS source.
+    generateJsSource(sourceFilePath, unit);
+
+    // output source map file.
+  }
+
+  private void generateJsSource(
+      String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit unit) {
+    // The parameters may be changed after the previous passes are implemented.
+    String unitName =
+        sourceFilePath.substring(
+            sourceFilePath.lastIndexOf('/') + 1, sourceFilePath.lastIndexOf('.'));
+    String outputPath =
+        unit
+                .getPackage()
+                .getName()
+                .getFullyQualifiedName()
+                .replace('.', '/')
+            + "/"
+            + unitName;
+    File outputDirectory = options.getOutputDirectory();
+    Charset charset = Charset.forName(options.getEncoding());
+    // this is a dummy CompilationUnit instance, which should have been generated from
+    // the previous passes.
+    CompilationUnit compilationUnit = new CompilationUnit(unitName, sourceFilePath);
+    JavaScriptGenerator jsGenerator =
+        new JavaScriptGenerator(errors, outputPath, outputDirectory, charset, compilationUnit);
+    jsGenerator.writeToFile();
   }
 
   /**
@@ -57,8 +88,8 @@ public class J2clTranspiler implements JdtParser.Handler {
   }
 
   /**
-   * Entry point for the tool.
-   * Parses options, creates a J2cl transpiler and calls run()
+   * Entry point for the tool. Parses options, creates a J2cl transpiler and
+   * calls run()
    */
   public static void main(String[] args) {
     Errors errors = new Errors();

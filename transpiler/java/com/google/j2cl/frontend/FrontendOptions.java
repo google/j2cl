@@ -36,6 +36,7 @@ public class FrontendOptions {
   private List<String> classpathEntries;
   private List<String> sourcepathEntries;
   private List<String> bootclassPathEntries;
+  private File outputDirectory;
   private String encoding;
   private String sourceVersion;
   private List<String> sourceFilePaths;
@@ -55,6 +56,7 @@ public class FrontendOptions {
     setClasspathEntries(flags.classpath);
     setSourcepathEntries(flags.sourcepath);
     setBootclassPathEntries(flags.bootclasspath);
+    setOutputDirectory(flags.outputDir);
     setSourceFiles(flags.files);
     setSourceVersion(flags.source);
     setEncoding(flags.encoding);
@@ -94,6 +96,14 @@ public class FrontendOptions {
 
   public void setBootclassPathEntries(String bootclassPath) {
     this.bootclassPathEntries = getPathEntries(bootclassPath);
+  }
+
+  public File getOutputDirectory() {
+    return this.outputDirectory;
+  }
+
+  public void setOutputDirectory(File outputDirectory) {
+    this.outputDirectory = outputDirectory;
   }
 
   public String getEncoding() {

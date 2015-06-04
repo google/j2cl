@@ -26,6 +26,9 @@ public class Errors {
   public static final String ERR_INVALID_SOURCE_FILE = "invalid source file";
   public static final String ERR_INVALID_SOURCE_VERSION = "invalid source version";
   public static final String ERR_UNSUPPORTED_ENCODING = "unsupported encoding";
+  public static final String ERR_CANNOT_CREATE_DIRECTORY = "cannot create directory";
+  public static final String ERR_CANNOT_GENERATE_OUTPUT =
+      "cannot generate output, please see Velocity runtime log";
 
   private int errorCount = 0;
   private PrintStream errorStream;
