@@ -72,7 +72,8 @@ public class J2clTranspiler implements JdtParser.Handler {
     Charset charset = Charset.forName(options.getEncoding());
     // this is a dummy CompilationUnit instance, which should have been generated from
     // the previous passes.
-    CompilationUnit compilationUnit = new CompilationUnit(unitName, sourceFilePath);
+    String packageName = unit.getPackage().getName().getFullyQualifiedName();
+    CompilationUnit compilationUnit = new CompilationUnit(unitName, sourceFilePath, packageName);
     JavaScriptGenerator jsGenerator =
         new JavaScriptGenerator(errors, outputPath, outputDirectory, charset, compilationUnit);
     jsGenerator.writeToFile();

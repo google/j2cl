@@ -22,10 +22,12 @@ public class CompilationUnit {
 
   private String name;
   private String filePath;
+  private String packageName;
 
-  public CompilationUnit(String name, String filePath) {
+  public CompilationUnit(String name, String filePath, String packageName) {
     this.name = name;
     this.filePath = filePath;
+    this.packageName = packageName;
   }
 
   public void setName(String name) {
@@ -42,5 +44,9 @@ public class CompilationUnit {
 
   public void setFilePath(String filePath) {
     this.filePath = filePath;
+  }
+
+  public String getPackageName() {
+    return packageName;
   }
 }

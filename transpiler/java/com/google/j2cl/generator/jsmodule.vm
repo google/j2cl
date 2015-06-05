@@ -4,8 +4,15 @@
 *###
 #set ($moduleName = $compilationUnit.Name)
 #set ($filePath = $compilationUnit.FilePath)
+#set ($packageName = $compilationUnit.PackageName)
 /**
  * Transpiled from $filePath
  */
-export class $moduleName {
+goog.module('${packageName}.${moduleName}');
+
+
+class $moduleName {
+  testHelloWorld() {}
 };
+
+exports = $moduleName;
