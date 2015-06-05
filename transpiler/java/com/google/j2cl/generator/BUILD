@@ -6,7 +6,7 @@ licenses(["unencumbered"])
 java_library(
     name = "generator",
     srcs = glob(["*.java"]),
-    resources = ["jsmodule.vm"],
+    resources = ["JsCompilationUnit.vm"],
     deps = [
         "//java/com/google/common/annotations",
         "//java/com/google/common/base",

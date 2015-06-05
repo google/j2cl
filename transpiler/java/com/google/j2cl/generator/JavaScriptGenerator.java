@@ -20,19 +20,20 @@ import com.google.j2cl.errors.Errors;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.runtime.RuntimeConstants;
+import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Generates JavaScript source files.
  */
 public class JavaScriptGenerator extends AbstractSourceGenerator {
-  public static final String TEMPLATE_FILE_NAME = "jsmodule.vm";
+  private static final String CLASSPATH_RESOURCE_LOADER_CLASS = "classpath.resource.loader.class";
+  private static final String TEMPLATE_FILE_PATH = "com/google/j2cl/generator/JsCompilationUnit.vm";
   private final CompilationUnit compilationUnit;
 
   public JavaScriptGenerator(
@@ -47,32 +48,31 @@ public class JavaScriptGenerator extends AbstractSourceGenerator {
 
   @Override
   public String toSource() {
-    // create an instance of Velocity Engine.
-    VelocityEngine velocityEngine = new VelocityEngine();
-    // initialize the engine
-    velocityEngine.init();
-
-    // create velocity context.
+    VelocityEngine velocityEngine = createEngine();
     VelocityContext velocityContext = createContext();
+    StringWriter outputBuffer = new StringWriter();
 
-    Reader templateReader =
-        new BufferedReader(
-            new InputStreamReader(
-                JavaScriptGenerator.class.getResourceAsStream(TEMPLATE_FILE_NAME),
-                Charset.defaultCharset()));
-    StringWriter writer = new StringWriter();
-    // use the template file's name as log tag, which will be used as the template name for log
-    // messages in case of error.
-    String logTag = TEMPLATE_FILE_NAME.substring(0, TEMPLATE_FILE_NAME.length() - 3);
-    // render the input template file in the form of InputeStream by {@code templateReader},
-    // to an output Writer {@code writer}, using a Context {@code context}
-    boolean renderResult = velocityEngine.evaluate(velocityContext, writer, logTag, templateReader);
+    boolean success =
+        velocityEngine.mergeTemplate(
+            TEMPLATE_FILE_PATH, StandardCharsets.UTF_8.name(), velocityContext, outputBuffer);
 
-    if (!renderResult) {
+    if (!success) {
       errors.error(Errors.ERR_CANNOT_GENERATE_OUTPUT);
       return "";
     }
-    return writer.toString();
+    return outputBuffer.toString();
+  }
+
+  /**
+   * Creates and returns a VelocityEngine that will find templates on the classpath.
+   */
+  private VelocityEngine createEngine() {
+    VelocityEngine velocityEngine = new VelocityEngine();
+    velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+    velocityEngine.setProperty(
+        CLASSPATH_RESOURCE_LOADER_CLASS, ClasspathResourceLoader.class.getName());
+    velocityEngine.init();
+    return velocityEngine;
   }
 
   private VelocityContext createContext() {
