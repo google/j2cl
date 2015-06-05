@@ -20,8 +20,6 @@ import com.google.j2cl.errors.Errors;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
-import org.apache.velocity.runtime.RuntimeConstants;
-import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
 import java.io.File;
 import java.io.StringWriter;
@@ -32,23 +30,24 @@ import java.nio.charset.StandardCharsets;
  * Generates JavaScript source files.
  */
 public class JavaScriptGenerator extends AbstractSourceGenerator {
-  private static final String CLASSPATH_RESOURCE_LOADER_CLASS = "classpath.resource.loader.class";
   private static final String TEMPLATE_FILE_PATH = "com/google/j2cl/generator/JsCompilationUnit.vm";
   private final CompilationUnit compilationUnit;
+  private final VelocityEngine velocityEngine;
 
   public JavaScriptGenerator(
       Errors errors,
       String outputPath,
       File outputDirectory,
       Charset charset,
-      CompilationUnit compilationUnit) {
+      CompilationUnit compilationUnit,
+      VelocityEngine velocityEngine) {
     super(errors, outputPath, outputDirectory, charset);
     this.compilationUnit = compilationUnit;
+    this.velocityEngine = velocityEngine;
   }
 
   @Override
   public String toSource() {
-    VelocityEngine velocityEngine = createEngine();
     VelocityContext velocityContext = createContext();
     StringWriter outputBuffer = new StringWriter();
 
@@ -61,18 +60,6 @@ public class JavaScriptGenerator extends AbstractSourceGenerator {
       return "";
     }
     return outputBuffer.toString();
-  }
-
-  /**
-   * Creates and returns a VelocityEngine that will find templates on the classpath.
-   */
-  private VelocityEngine createEngine() {
-    VelocityEngine velocityEngine = new VelocityEngine();
-    velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
-    velocityEngine.setProperty(
-        CLASSPATH_RESOURCE_LOADER_CLASS, ClasspathResourceLoader.class.getName());
-    velocityEngine.init();
-    return velocityEngine;
   }
 
   private VelocityContext createContext() {

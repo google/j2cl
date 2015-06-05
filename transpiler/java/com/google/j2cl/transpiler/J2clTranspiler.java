@@ -21,7 +21,9 @@ import com.google.j2cl.frontend.FrontendFlags;
 import com.google.j2cl.frontend.FrontendOptions;
 import com.google.j2cl.frontend.JdtParser;
 import com.google.j2cl.generator.JavaScriptGenerator;
+import com.google.j2cl.generator.VelocityUtil;
 
+import org.apache.velocity.app.VelocityEngine;
 import org.kohsuke.args4j.CmdLineException;
 
 import java.io.File;
@@ -33,10 +35,16 @@ import java.nio.charset.Charset;
 public class J2clTranspiler implements JdtParser.Handler {
   private final Errors errors;
   private final FrontendOptions options;
+  /**
+   * A VelocityEngine instance that is used for code generation and shared by
+   * JavaScriptGenerator instances.
+   */
+  private final VelocityEngine velocityEngine;
 
   public J2clTranspiler(FrontendOptions options, Errors errors) {
     this.options = options;
     this.errors = errors;
+    this.velocityEngine = VelocityUtil.createEngine();
   }
 
   @Override
@@ -70,12 +78,13 @@ public class J2clTranspiler implements JdtParser.Handler {
             + unitName;
     File outputDirectory = options.getOutputDirectory();
     Charset charset = Charset.forName(options.getEncoding());
-    // this is a dummy CompilationUnit instance, which should have been generated from
-    // the previous passes.
+    // this is a dummy CompilationUnit instance, which should have been
+    // generated from the previous passes.
     String packageName = unit.getPackage().getName().getFullyQualifiedName();
     CompilationUnit compilationUnit = new CompilationUnit(unitName, sourceFilePath, packageName);
     JavaScriptGenerator jsGenerator =
-        new JavaScriptGenerator(errors, outputPath, outputDirectory, charset, compilationUnit);
+        new JavaScriptGenerator(
+            errors, outputPath, outputDirectory, charset, compilationUnit, velocityEngine);
     jsGenerator.writeToFile();
   }
 
