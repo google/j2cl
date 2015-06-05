@@ -31,20 +31,7 @@ j2cl_java_test(
 """
 
 load("//build_def/j2cl_java_library", "j2cl_java_library")
-
-def _get_java_root(pkg_name):
-  """Extract the path to java root from the build package"""
-  java_index = pkg_name.rfind("java/")
-  javatests_index = pkg_name.rfind("javatests/")
-
-  if java_index == -1 and javatests_index == -1:
-    fail("can not find java root")
-
-  if java_index > javatests_index:
-    index = java_index + len("java/")
-  else:
-    index = javatests_index + len("javatests/")
-  return pkg_name[:index]
+load("//build_def/j2cl_util", "get_java_root")
 
 def j2cl_java_test(**kwargs):
   """Macro for running a JUnit test cross compiled as a web test
@@ -55,7 +42,7 @@ def j2cl_java_test(**kwargs):
      This JavaScript is extracted from the jar with a genrule and then fed into
      a js_unit / web_test.
   """
-  java_root = _get_java_root(PACKAGE_NAME)
+  java_root = get_java_root(PACKAGE_NAME)
   base_name = kwargs["name"]
   kwargs["testonly"] = 1
 
@@ -92,6 +79,8 @@ def j2cl_java_test(**kwargs):
     ],
   )
 
+  # TODO(dankurka): Add support for different browsers
+  # TODO(dankurka): Investigate better setup with jsunit_test / web_test
   native.jsunit_test(
       name = base_name + "_js_test",
       srcs = [":" + base_name + "_extract_js",],
