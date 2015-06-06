@@ -3,16 +3,21 @@
  This .vm file is to be implemented.
 *###
 #set ($moduleName = $compilationUnit.Name)
+#set ($rootTypeName = $compilationUnit.Name)
 #set ($filePath = $compilationUnit.FilePath)
 #set ($packageName = $compilationUnit.PackageName)
+goog.module('gen.${packageName}.${moduleName}Module');
+
+
 /**
- * Transpiled from $filePath
+ * Transpiled from $filePath.
  */
-goog.module('${packageName}.${moduleName}');
-
-
-class $moduleName {
+class $rootTypeName {
   testHelloWorld() {}
 };
 
-exports = $moduleName;
+
+/**
+ * Exported class.
+ */
+exports.$rootTypeName = $rootTypeName;
