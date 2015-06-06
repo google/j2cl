@@ -1,4 +1,8 @@
-goog.require('goog.math.Long');
+goog.module('nativebootstrap.LongsModule');
+
+
+var Long = goog.require('goog.math.Long');
+
 
 /**
  * Defines utility static functions that map from transpiled Long instantiation
@@ -14,68 +18,66 @@ goog.require('goog.math.Long');
  * maintaining a private cache of Long instances) then the Long class would
  * become unstrippable even if these global constants were never used.
  */
-export class Longs {
+class Longs {
   /**
    * @param {string} longString A Long valueLong represented in readable string
    *          format.
    * @param {number=} opt_radix The radix in which the text is written.
-   * @return {!goog.math.Long} A Long corresponding to the given string.
+   * @return {!Long} A Long corresponding to the given string.
    * @public
    */
   static $fromString(longString, opt_radix) {
-    return goog.math.Long.fromString(longString, opt_radix);
+    return Long.fromString(longString, opt_radix);
   }
 
   /**
    * @param {number} longInDouble A double holding a small enough long value.
-   * @return {!goog.math.Long} A Long corresponding to the given double.
+   * @return {!Long} A Long corresponding to the given double.
    * @public
    */
-  static $fromInt(longInDouble) { return goog.math.Long.fromInt(longInDouble); }
+  static $fromInt(longInDouble) { return Long.fromInt(longInDouble); }
 
   /**
-   * @param {!goog.math.Long} leftLong The left Long in the operation.
-   * @param {!goog.math.Long} rightLong The right Long in the operation.
-   * @return {!goog.math.Long} The bitwise and of left and right.
+   * @param {!Long} leftLong The left Long in the operation.
+   * @param {!Long} rightLong The right Long in the operation.
+   * @return {!Long} The bitwise and of left and right.
    * @public
    */
   static $and(leftLong, rightLong) { return leftLong.and(rightLong); }
 
   /**
-   * @param {!goog.math.Long} valueLong The value to complement.
-   * @return {!goog.math.Long} The bitwise complement of the given value.
+   * @param {!Long} valueLong The value to complement.
+   * @return {!Long} The bitwise complement of the given value.
    * @public
    */
   static $complement(valueLong) { return valueLong.not(); }
 
   /**
-   * @param {!goog.math.Long} valueLong The value to decrement.
-   * @return {!goog.math.Long} The Long value one smaller than the given value.
+   * @param {!Long} valueLong The value to decrement.
+   * @return {!Long} The Long value one smaller than the given value.
    * @public
    */
-  static $decrement(valueLong) {
-    return valueLong.subtract(goog.math.Long.getOne());
-  }
+  static $decrement(valueLong) { return valueLong.subtract(Long.getOne()); }
 
   /**
-   * @param {!goog.math.Long} leftLong The left Long in the operation.
-   * @param {!goog.math.Long} rightLong The right Long in the operation.
-   * @return {!goog.math.Long} The division of left by right.
+   * @param {!Long} leftLong The left Long in the operation.
+   * @param {!Long} rightLong The right Long in the operation.
+   * @return {!Long} The division of left by right.
    * @public
    */
   static $divide(leftLong, rightLong) { return leftLong.div(rightLong); }
 
   /**
-   * @param {!goog.math.Long} leftLong The left Long in the operation.
-   * @param {!goog.math.Long} rightLong The right Long in the operation.
+   * @param {!Long} leftLong The left Long in the operation.
+   * @param {!Long} rightLong The right Long in the operation.
    * @return {boolean} Whether the values in left and right are equal.
    * @public
    */
   static $equals(leftLong, rightLong) { return leftLong.equals(rightLong); }
 
   /**
-   * @param {!goog.math.Long} leftLong The left Long in the operation.
-   * @param {!goog.math.Long} rightLong The right Long in the operation.
+   * @param {!Long} leftLong The left Long in the operation.
+   * @param {!Long} rightLong The right Long in the operation.
    * @return {boolean} Whether left is larger than right.
    * @public
    */
@@ -84,8 +86,8 @@ export class Longs {
   }
 
   /**
-   * @param {!goog.math.Long} leftLong The left Long in the operation.
-   * @param {!goog.math.Long} rightLong The right Long in the operation.
+   * @param {!Long} leftLong The left Long in the operation.
+   * @param {!Long} rightLong The right Long in the operation.
    * @return {boolean} Whether left is larger than or equal to right.
    * @public
    */
@@ -94,34 +96,32 @@ export class Longs {
   }
 
   /**
-   * @param {!goog.math.Long} valueLong The value to increment.
-   * @return {!goog.math.Long} The Long value resulting from adding one to the
+   * @param {!Long} valueLong The value to increment.
+   * @return {!Long} The Long value resulting from adding one to the
    *         given value.
    * @public
    */
-  static $increment(valueLong) {
-    return valueLong.add(goog.math.Long.getOne());
-  }
+  static $increment(valueLong) { return valueLong.add(Long.getOne()); }
 
   /**
-   * @param {!goog.math.Long} valueLong The starting value to shift.
+   * @param {!Long} valueLong The starting value to shift.
    * @param {number} numBits The number of bits to shift to the left.
-   * @return {!goog.math.Long} A Long representing the left shifted value.
+   * @return {!Long} A Long representing the left shifted value.
    * @public
    */
   static $leftShift(valueLong, numBits) { return valueLong.shiftLeft(numBits); }
 
   /**
-   * @param {!goog.math.Long} leftLong The left Long in the operation.
-   * @param {!goog.math.Long} rightLong The right Long in the operation.
+   * @param {!Long} leftLong The left Long in the operation.
+   * @param {!Long} rightLong The right Long in the operation.
    * @return {boolean} Whether left is smaller than right.
    * @public
    */
   static $less(leftLong, rightLong) { return leftLong.lessThan(rightLong); }
 
   /**
-   * @param {!goog.math.Long} leftLong The left Long in the operation.
-   * @param {!goog.math.Long} rightLong The right Long in the operation.
+   * @param {!Long} leftLong The left Long in the operation.
+   * @param {!Long} rightLong The right Long in the operation.
    * @return {boolean} Whether left is smaller than or equal to right.
    * @public
    */
@@ -130,24 +130,24 @@ export class Longs {
   }
 
   /**
-   * @param {!goog.math.Long} leftLong The left Long in the operation.
-   * @param {!goog.math.Long} rightLong The right Long in the operation.
-   * @return {!goog.math.Long} The Long value resulting from subtracting right
+   * @param {!Long} leftLong The left Long in the operation.
+   * @param {!Long} rightLong The right Long in the operation.
+   * @return {!Long} The Long value resulting from subtracting right
    *         from left.
    * @public
    */
   static $minus(leftLong, rightLong) { return leftLong.subtract(rightLong); }
 
   /**
-   * @param {!goog.math.Long} valueLong The value to negate.
-   * @return {!goog.math.Long} The Long value after multiplying by -1.
+   * @param {!Long} valueLong The value to negate.
+   * @return {!Long} The Long value after multiplying by -1.
    * @public
    */
   static $negate(valueLong) { return valueLong.negate(); }
 
   /**
-   * @param {!goog.math.Long} leftLong The left Long in the operation.
-   * @param {!goog.math.Long} rightLong The right Long in the operation.
+   * @param {!Long} leftLong The left Long in the operation.
+   * @param {!Long} rightLong The right Long in the operation.
    * @return {boolean} Whether left is not equal to right.
    * @public
    */
@@ -156,34 +156,34 @@ export class Longs {
   }
 
   /**
-   * @param {!goog.math.Long} leftLong The left Long in the operation.
-   * @param {!goog.math.Long} rightLong The right Long in the operation.
-   * @return {!goog.math.Long} The bitwise or of left and right.
+   * @param {!Long} leftLong The left Long in the operation.
+   * @param {!Long} rightLong The right Long in the operation.
+   * @return {!Long} The bitwise or of left and right.
    * @public
    */
   static $or(leftLong, rightLong) { return leftLong.or(rightLong); }
 
   /**
-   * @param {!goog.math.Long} leftLong The left Long in the operation.
-   * @param {!goog.math.Long} rightLong The right Long in the operation.
-   * @return {!goog.math.Long} The Long value resulting from adding left and
+   * @param {!Long} leftLong The left Long in the operation.
+   * @param {!Long} rightLong The right Long in the operation.
+   * @return {!Long} The Long value resulting from adding left and
    *         right.
    * @public
    */
   static $plus(leftLong, rightLong) { return leftLong.add(rightLong); }
 
   /**
-   * @param {!goog.math.Long} leftLong The left Long in the operation.
-   * @param {!goog.math.Long} rightLong The right Long in the operation.
-   * @return {!goog.math.Long} The Long remainder of left divided by right.
+   * @param {!Long} leftLong The left Long in the operation.
+   * @param {!Long} rightLong The right Long in the operation.
+   * @return {!Long} The Long remainder of left divided by right.
    * @public
    */
   static $remainder(leftLong, rightLong) { return leftLong.modulo(rightLong); }
 
   /**
-   * @param {!goog.math.Long} valueLong The starting value to shift.
+   * @param {!Long} valueLong The starting value to shift.
    * @param {number} numBits The number of bits to shift to the right.
-   * @return {!goog.math.Long} A Long representing the right shifted value.
+   * @return {!Long} A Long representing the right shifted value.
    * @public
    */
   static $rightShiftSigned(valueLong, numBits) {
@@ -191,9 +191,9 @@ export class Longs {
   }
 
   /**
-   * @param {!goog.math.Long} valueLong The starting value to shift.
+   * @param {!Long} valueLong The starting value to shift.
    * @param {number} numBits The number of bits to shift to the right.
-   * @return {!goog.math.Long} A Long representing the right shifted value.
+   * @return {!Long} A Long representing the right shifted value.
    * @public
    */
   static $rightShiftUnsigned(valueLong, numBits) {
@@ -201,19 +201,25 @@ export class Longs {
   }
 
   /**
-   * @param {!goog.math.Long} leftLong The left Long in the operation.
-   * @param {!goog.math.Long} rightLong The right Long in the operation.
-   * @return {!goog.math.Long} The Long value resulting from multiplying left
+   * @param {!Long} leftLong The left Long in the operation.
+   * @param {!Long} rightLong The right Long in the operation.
+   * @return {!Long} The Long value resulting from multiplying left
    *         and right.
    * @public
    */
   static $times(leftLong, rightLong) { return leftLong.multiply(rightLong); }
 
   /**
-   * @param {!goog.math.Long} leftLong The left Long in the operation.
-   * @param {!goog.math.Long} rightLong The right Long in the operation.
-   * @return {!goog.math.Long} The bitwise xor of left and right.
+   * @param {!Long} leftLong The left Long in the operation.
+   * @param {!Long} rightLong The right Long in the operation.
+   * @return {!Long} The bitwise xor of left and right.
    * @public
    */
   static $xor(leftLong, rightLong) { return leftLong.xor(rightLong); }
 };
+
+
+/**
+ * Exported class.
+ */
+exports.Longs = Longs;

@@ -10,3 +10,9 @@ java_library(
     name = "transpiler",
     runtime_deps = ["//transpiler/java/com/google/j2cl/transpiler"],
 )
+
+# Re-expose the nativebootstrap JS library at the top level.
+js_library(
+    name = "nativebootstrap",
+    deps = ["//transpiler/nativebootstrap"],
+)

@@ -1,4 +1,10 @@
-export class Util {
+goog.module('nativebootstrap.UtilModule');
+
+
+/**
+ * Miscellaneous utility functions.
+ */
+class Util {
   /**
    * Generates and returns a unique id from a String.
    *
@@ -23,3 +29,9 @@ export class Util {
             (fromClass == toClass || fromClass.prototype instanceof toClass));
   }
 };
+
+
+/**
+ * Exported class.
+ */
+exports.Util = Util;

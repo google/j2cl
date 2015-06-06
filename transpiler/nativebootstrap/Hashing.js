@@ -1,4 +1,10 @@
-export class Hashing {
+goog.module('nativebootstrap.HashingModule');
+
+
+/**
+ * Utility functions for setting and retrieving system level hashcodes.
+ */
+class Hashing {
   /**
    * Gets a hash code on the passed-in object.
    *
@@ -31,3 +37,9 @@ export class Hashing {
  * @private {number}
  */
 Hashing.$nextHashId_ = 0;
+
+
+/**
+ * Exported class.
+ */
+exports.Hashing = Hashing;

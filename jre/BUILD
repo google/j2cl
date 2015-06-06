@@ -6,4 +6,10 @@ package(default_visibility = ["//:__subpackages__"])
 # Google owns the copyright
 licenses(["unencumbered"])
 
-# TODO: add java/ and javatests/ dirs when there is code.
+# TODO: add javatests/ dir.
+
+# Re-expose the JRE library at the top level.
+js_library(
+    name = "jre",
+    deps = ["//jre/java:jre"],
+)
