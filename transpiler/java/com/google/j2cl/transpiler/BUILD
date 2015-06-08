@@ -9,7 +9,6 @@ java_library(
     deps = [
         "//java/com/google/common/base",
         "//java/com/google/common/io",
-        "//third_party/java/args4j",
         "//third_party/java/eclipse:eclipse-jdt-core-4.4",
         "//third_party/java/jakarta_velocity",
         "//transpiler/java/com/google/j2cl/ast",

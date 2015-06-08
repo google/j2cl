@@ -6,4 +6,7 @@ licenses(["unencumbered"])
 java_library(
     name = "errors",
     srcs = glob(["*.java"]),
+    deps = [
+        "//java/com/google/common/collect",
+    ],
 )

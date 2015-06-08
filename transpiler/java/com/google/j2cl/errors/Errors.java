@@ -15,7 +15,10 @@
  */
 package com.google.j2cl.errors;
 
+import com.google.common.collect.Lists;
+
 import java.io.PrintStream;
+import java.util.List;
 
 /**
  * An error logger class that records the number of errors and provides error print methods.
@@ -31,6 +34,7 @@ public class Errors {
       "cannot generate output, please see Velocity runtime log";
 
   private int errorCount = 0;
+  private List<String> errorMessages = Lists.newArrayList();
   private PrintStream errorStream;
 
   public Errors() {
@@ -45,18 +49,33 @@ public class Errors {
     return errorCount;
   }
 
+  public PrintStream getErrorStream() {
+    return errorStream;
+  }
+
   public void reset() {
     this.errorCount = 0;
+    this.errorMessages.clear();
   }
 
   public void error(String message) {
     errorCount++;
-    errorStream.println(message);
+    errorMessages.add(message);
   }
 
   public void error(String message, String detail) {
     errorCount++;
-    errorStream.println(message + ": " + detail);
+    errorMessages.add(message + ": " + detail);
+  }
+
+  /**
+   * Prints all error messages and a summary.
+   */
+  public void report() {
+    for (String message : errorMessages) {
+      errorStream.println(message);
+    }
+    errorStream.printf("%d error(s).%n", errorCount);
   }
 
   /**
@@ -64,7 +83,7 @@ public class Errors {
    */
   public void maybeReportAndExit() {
     if (errorCount > 0) {
-      errorStream.println(errorCount + " error" + (errorCount > 1 ? "s" : ""));
+      report();
       System.exit(errorCount);
     }
   }

@@ -15,10 +15,13 @@
  */
 package com.google.j2cl.frontend;
 
+import com.google.j2cl.errors.Errors;
+
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
+import org.kohsuke.args4j.OptionHandlerFilter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -67,11 +70,30 @@ public class FrontendFlags {
       usage = "Provide source compatibility with specified release")
   protected String source = "1.7";
 
+  @Option(name = "-h", aliases = "-help", usage = "print this message")
+  protected boolean help = false;
+
+  private final Errors errors;
+
+  public FrontendFlags(Errors errors) {
+    this.errors = errors;
+  }
+
   /**
    * Parses the given args list and updates values.
    */
-  public void parse(String[] args) throws CmdLineException {
+  public void parse(String[] args) {
     CmdLineParser parser = new CmdLineParser(this);
-    parser.parseArgument(args);
+    try {
+      parser.parseArgument(args);
+      if (help) {
+        parser.printUsage(errors.getErrorStream());
+      }
+    } catch (CmdLineException e) {
+      String message = e.getMessage() + "\n";
+      message += "Valid options: \n" + parser.printExample(OptionHandlerFilter.ALL);
+      message += "\nuse -help for a list of possible options in more details";
+      errors.error(Errors.ERR_INVALID_FLAG, message);
+    }
   }
 }

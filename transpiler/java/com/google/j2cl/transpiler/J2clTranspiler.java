@@ -24,7 +24,6 @@ import com.google.j2cl.generator.JavaScriptGenerator;
 import com.google.j2cl.generator.VelocityUtil;
 
 import org.apache.velocity.app.VelocityEngine;
-import org.kohsuke.args4j.CmdLineException;
 
 import java.io.File;
 import java.nio.charset.Charset;
@@ -91,30 +90,33 @@ public class J2clTranspiler implements JdtParser.Handler {
   /**
    * Runs the entire J2cl pipeline.
    */
-  public void run() {
+  public static void run(Errors errors, String[] args) {
+    FrontendFlags flags = new FrontendFlags(errors);
+    flags.parse(args);
+    if (errors.errorCount() > 0) {
+      errors.report();
+      return;
+    }
+
+    FrontendOptions options = new FrontendOptions(errors, flags);
+    if (errors.errorCount() > 0) {
+      errors.report();
+      return;
+    }
+
+    J2clTranspiler transpiler = new J2clTranspiler(options, errors);
     JdtParser parser = new JdtParser(options, errors);
-    parser.parseFiles(options.getSourceFiles(), this);
-    errors.maybeReportAndExit();
+    parser.parseFiles(options.getSourceFiles(), transpiler);
+    if (errors.errorCount() > 0) {
+      errors.report();
+    }
   }
 
   /**
-   * Entry point for the tool. Parses options, creates a J2cl transpiler and
-   * calls run()
+   * Entry point for the tool, which runs the entire J2cl pipeline.
    */
   public static void main(String[] args) {
     Errors errors = new Errors();
-    FrontendFlags flags = new FrontendFlags();
-    try {
-      flags.parse(args);
-    } catch (CmdLineException e) {
-      errors.error(Errors.ERR_INVALID_FLAG, e.getMessage());
-    }
-    errors.maybeReportAndExit();
-
-    FrontendOptions options = new FrontendOptions(errors, flags);
-    errors.maybeReportAndExit();
-
-    J2clTranspiler transpiler = new J2clTranspiler(options, errors);
-    transpiler.run();
+    run(errors, args);
   }
 }
