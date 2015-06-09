@@ -33,7 +33,7 @@ import java.util.List;
 public class FrontendFlags {
 
   @Argument(metaVar = "<source files>", usage = "source files")
-  protected List<String> files = new ArrayList<String>();
+  protected List<String> files = new ArrayList<>();
 
   @Option(
       name = "-classpath",
@@ -87,7 +87,7 @@ public class FrontendFlags {
     try {
       parser.parseArgument(args);
       if (help) {
-        parser.printUsage(errors.getErrorStream());
+        parser.printUsage(System.out);
       }
     } catch (CmdLineException e) {
       String message = e.getMessage() + "\n";
