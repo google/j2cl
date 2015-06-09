@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler;
 
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.errors.Errors;
+import com.google.j2cl.frontend.CompilationUnitBuilder;
 import com.google.j2cl.frontend.FrontendFlags;
 import com.google.j2cl.frontend.FrontendOptions;
 import com.google.j2cl.frontend.JdtParser;
@@ -48,43 +49,39 @@ public class J2clTranspiler implements JdtParser.Handler {
 
   @Override
   public void handleCompilationUnit(
-      String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit unit) {
+      String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
     System.out.println(sourceFilePath);
-    System.out.println(unit);
+    System.out.println(jdtCompilationUnit);
 
     // transform JDT AST to J2cl AST
+    CompilationUnit j2clCompilationUnit =
+        CompilationUnitBuilder.build(sourceFilePath, jdtCompilationUnit);
 
     // normalize J2cl AST
 
-    generateJsSource(sourceFilePath, unit);
+    generateJsSource(j2clCompilationUnit);
 
     // output source map file.
   }
 
-  private void generateJsSource(
-      String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit unit) {
+  private void generateJsSource(CompilationUnit unit) {
     // The parameters may be changed after the previous passes are implemented.
-    String unitName =
-        sourceFilePath.substring(
-            sourceFilePath.lastIndexOf('/') + 1, sourceFilePath.lastIndexOf('.'));
-    String outputPath =
-        unit
-                .getPackage()
-                .getName()
-                .getFullyQualifiedName()
-                .replace('.', '/')
-            + "/"
-            + unitName;
+    String outputPath = computeOutputPath(unit);
     File outputDirectory = options.getOutputDirectory();
     Charset charset = Charset.forName(options.getEncoding());
     // this is a dummy CompilationUnit instance, which should have been
     // generated from the previous passes.
-    String packageName = unit.getPackage().getName().getFullyQualifiedName();
-    CompilationUnit compilationUnit = new CompilationUnit(unitName, sourceFilePath, packageName);
     JavaScriptGenerator jsGenerator =
         new JavaScriptGenerator(
-            errors, outputPath, outputDirectory, charset, compilationUnit, velocityEngine);
+            errors, outputPath, outputDirectory, charset, unit, velocityEngine);
     jsGenerator.writeToFile();
+  }
+
+  private String computeOutputPath(CompilationUnit unit) {
+    String unitName = unit.getName();
+    String packageName = unit.getPackageName();
+
+    return packageName.replace('.', '/') + "/" + unitName;
   }
 
   /**

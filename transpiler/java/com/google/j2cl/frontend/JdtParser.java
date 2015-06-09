@@ -16,8 +16,6 @@
 package com.google.j2cl.frontend;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.j2cl.errors.Errors;
 
 import org.eclipse.jdt.core.JavaCore;
@@ -27,7 +25,9 @@ import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.FileASTRequestor;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,9 +37,9 @@ import java.util.Map;
  */
 public class JdtParser {
   private final Errors errors;
-  private final Map<String, String> compilerOptions = Maps.newHashMap();
-  private final List<String> classpathEntries = Lists.newArrayList();
-  private final List<String> sourcepathEntries = Lists.newArrayList();
+  private final Map<String, String> compilerOptions = new HashMap<>();
+  private final List<String> classpathEntries = new ArrayList<>();;
+  private final List<String> sourcepathEntries = new ArrayList<>();;
   private final String encoding;
 
   public JdtParser(FrontendOptions options, Errors errors) {

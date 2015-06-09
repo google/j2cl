@@ -13,6 +13,7 @@ java_library(
         "//third_party/java/args4j",
         "//third_party/java/eclipse:eclipse-jdt-core-4.4",
         "//third_party/java/jsr305_annotations",
+        "//transpiler/java/com/google/j2cl/ast",
         "//transpiler/java/com/google/j2cl/errors",
     ],
 )

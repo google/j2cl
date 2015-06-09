@@ -15,9 +15,8 @@
  */
 package com.google.j2cl.errors;
 
-import com.google.common.collect.Lists;
-
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,7 +33,7 @@ public class Errors {
       "cannot generate output, please see Velocity runtime log";
 
   private int errorCount = 0;
-  private List<String> errorMessages = Lists.newArrayList();
+  private List<String> errorMessages = new ArrayList<>();
   private PrintStream errorStream;
 
   public Errors() {

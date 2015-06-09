@@ -15,27 +15,27 @@
  */
 package com.google.j2cl.ast;
 
-/**
- * TODO: This is a dummy AST class.
- */
-public class CompilationUnit {
+import com.google.common.base.Preconditions;
 
-  private String name;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * A model class that represents a Java Compilation Unit.
+ */
+public class CompilationUnit extends Node {
+
   private String filePath;
   private String packageName;
+  @Visitable
+  private List<JavaType> types = new ArrayList<>();
 
-  public CompilationUnit(String name, String filePath, String packageName) {
-    this.name = name;
+  public CompilationUnit(String filePath, String packageName) {
+    Preconditions.checkArgument(filePath != null);
+    Preconditions.checkArgument(packageName != null);
     this.filePath = filePath;
     this.packageName = packageName;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getName() {
-    return this.name;
   }
 
   public String getFilePath() {
@@ -48,5 +48,17 @@ public class CompilationUnit {
 
   public String getPackageName() {
     return packageName;
+  }
+
+  public void addType(JavaType type) {
+    types.add(type);
+  }
+
+  public String getName() {
+    int endIndex = filePath.lastIndexOf(".java");
+    Preconditions.checkState(endIndex != -1);
+
+    return filePath.substring(filePath.lastIndexOf(File.separatorChar) + 1,
+        endIndex);
   }
 }

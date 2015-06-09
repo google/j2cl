@@ -17,13 +17,12 @@ package com.google.j2cl.frontend;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Lists;
-
 import com.google.j2cl.errors.Errors;
 
 import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -177,7 +176,7 @@ public class FrontendOptions {
   }
 
   private static List<String> getPathEntries(String path) {
-    List<String> entries = Lists.newArrayList();
+    List<String> entries = new ArrayList<>();
     for (String entry : Splitter.on(File.pathSeparatorChar).split(path)) {
       if (new File(entry).exists()) {
         entries.add(entry);

@@ -6,4 +6,7 @@ licenses(["unencumbered"])
 java_library(
     name = "ast",
     srcs = glob(["*.java"]),
+    deps = [
+        "//java/com/google/common/base",
+    ],
 )
