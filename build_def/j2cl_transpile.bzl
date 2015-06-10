@@ -1,7 +1,3 @@
-#!/usr/bin/python2.7
-#
-# Copyright 2015 Google Inc. All Rights Reserved.
-
 """j2cl_transpile build rule.
 
 This build extension defines a new rule j2cl_transpile, that takes a
@@ -29,7 +25,7 @@ j2cl_transpile directly.
 
 """
 
-load("//build_def/j2cl_util", "get_java_root")
+load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_root")
 
 def _impl(ctx):
   """Implementation for j2cl_transpile"""

@@ -1,7 +1,3 @@
-#!/usr/bin/python2.7
-#
-# Copyright 2015 Google Inc. All Rights Reserved.
-
 """j2cl_java_library macro
 
 A build macro that defines a java_library rule, a j2cl_transpile rule that
@@ -10,7 +6,7 @@ Note: All values defined on the rule are passed to the java_library rule.
 
 Here is an example of how to use j2cl_java_library:
 
-load("//build_def/j2cl_java_library", "j2cl_java_library")
+load("/third_party/java_src/j2cl/build_def/j2cl_java_library", "j2cl_java_library")
 
 j2cl_java_library(
     name = "my_name",
@@ -19,7 +15,7 @@ j2cl_java_library(
 
 """
 
-load("//build_def/j2cl_transpile", "j2cl_transpile")
+load("/third_party/java_src/j2cl/build_def/j2cl_transpile", "j2cl_transpile")
 
 def j2cl_java_library(**kwargs):
   """A macro that emits j2cl_transpile, java_library and js_library rules."""

@@ -1,7 +1,3 @@
-#!/usr/bin/python2.7
-#
-# Copyright 2015 Google Inc. All Rights Reserved.
-
 """j2cl_java_test macro
 
 A build macro that uses j2cl_java_library to cross compile Java to JavaScript
@@ -12,7 +8,7 @@ dependency.
 
 Here is an example usage:
 
-load("//build_def/j2cl_java_test", "j2cl_java_test")
+load("/third_party/java_src/j2cl/build_def/j2cl_java_test", "j2cl_java_test")
 
 j2cl_java_library(
     name = "my_library",
@@ -30,8 +26,8 @@ j2cl_java_test(
 
 """
 
-load("//build_def/j2cl_java_library", "j2cl_java_library")
-load("//build_def/j2cl_util", "get_java_root")
+load("/third_party/java_src/j2cl/build_def/j2cl_java_library", "j2cl_java_library")
+load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_root")
 
 def j2cl_java_test(**kwargs):
   """Macro for running a JUnit test cross compiled as a web test
