@@ -35,6 +35,9 @@ public class JavaType extends Node {
   @Visitable
   private List<Node> methods;
 
+  private TypeReference superType;
+  private List<TypeReference> superInterfaces;
+
   public JavaType(Kind kind, String name) {
     this.kind = kind;
     this.name = name;
