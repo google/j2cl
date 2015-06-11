@@ -8,7 +8,7 @@ var Util = goog.require('nativebootstrap.UtilModule').Util;
 
 /**
  * Transpiled from
- * com/google/j2cl/transpiler/readable/emptyclass/EmptyClass.java.
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/emptyclass/EmptyClass.java.
  */
 class EmptyClass extends Object {
   /**

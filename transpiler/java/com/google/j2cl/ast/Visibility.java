@@ -15,18 +15,28 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.auto.value.AutoValue;
-
 /**
- * A (by name) reference to a class.
+ * An enum for visibility.
  */
-@AutoValue
-public abstract class TypeReference {
-  public static TypeReference create(String packageName, String simpleName) {
-    return new AutoValue_TypeReference(packageName, simpleName);
+public enum Visibility {
+  PUBLIC,
+  PROTECTED,
+  PRIVATE,
+  PACKAGE_PRIVATE;
+
+  public boolean isPublic() {
+    return this == PUBLIC;
   }
 
-  public abstract String getPackageName();
+  public boolean isProtected() {
+    return this == PROTECTED;
+  }
 
-  public abstract String getSimpleName();
+  public boolean isPrivate() {
+    return this == PRIVATE;
+  }
+
+  public boolean isPackagePrivate() {
+    return this == PACKAGE_PRIVATE;
+  }
 }

@@ -81,12 +81,10 @@ def j2cl_java_test(**kwargs):
       name = base_name + "_js_test",
       srcs = [":" + base_name + "_extract_js",],
       compile = 1,
-      compiler = "//javascript/tools/jscompiler:head",
       defs = [
           "--language_in=ECMASCRIPT6",
           "--language_out=ECMASCRIPT5",
           "--jscomp_off=nonStandardJsDocs",
-          "--common_js_module_path_prefix=" + java_root,
           "--jscomp_off=checkTypes",
           "--jscomp_off=undefinedVars",
           "--export_test_functions=true",

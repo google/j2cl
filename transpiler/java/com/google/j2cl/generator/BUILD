@@ -6,7 +6,7 @@ licenses(["unencumbered"])
 java_library(
     name = "generator",
     srcs = glob(["*.java"]),
-    resources = ["JsCompilationUnit.vm"],
+    resources = glob(["*.vm"]),
     deps = [
         "//java/com/google/common/annotations",
         "//java/com/google/common/base",
@@ -15,5 +15,6 @@ java_library(
         "//third_party/java/jakarta_velocity",
         "//transpiler/java/com/google/j2cl/ast",
         "//transpiler/java/com/google/j2cl/errors",
+        "//transpiler/java/com/google/j2cl/frontend",
     ],
 )

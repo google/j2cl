@@ -18,8 +18,10 @@ package com.google.j2cl.frontend;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
+import com.google.j2cl.ast.TypeReference;
 
 import org.eclipse.jdt.core.dom.ASTVisitor;
+import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 
 /**
@@ -30,11 +32,28 @@ public class CompilationUnitBuilder {
   private class Builder extends ASTVisitor {
     @Override
     public boolean visit(TypeDeclaration node) {
+      ITypeBinding typeBinding = node.resolveBinding();
+      JavaType type = createJavaType(typeBinding);
+      j2clCompilationUnit.addType(type);
+      TypeMap.put(type.getTypeReference(), type);
+      return super.visit(node);
+    }
+
+    private JavaType createJavaType(ITypeBinding typeBinding) {
+      if (typeBinding == null) {
+        return null;
+      }
       JavaType type =
           new JavaType(
-              node.isInterface() ? Kind.INTERFACE : Kind.CLASS, node.getName().getIdentifier());
-      j2clCompilationUnit.addType(type);
-      return super.visit(node);
+              typeBinding.isInterface() ? Kind.INTERFACE : Kind.CLASS,
+              JdtUtils.getVisibility(typeBinding.getModifiers()),
+              JdtUtils.createTypeReference(typeBinding),
+              j2clCompilationUnit.getName());
+
+      ITypeBinding superclassBinding = typeBinding.getSuperclass();
+      TypeReference superType = JdtUtils.createTypeReference(superclassBinding);
+      type.setSuperType(superType);
+      return type;
     }
   }
 

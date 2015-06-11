@@ -48,6 +48,6 @@ def j2cl_java_library(**kwargs):
   native.js_library(
       name = kwargs["name"]  + "_js_library",
       srcs = [":" + kwargs["name"]  + "_j2cl_transpile",],
-      deps = js_deps,
+      deps = js_deps + ["//jre"],
       testonly = testonly,
   )

@@ -15,23 +15,48 @@
  */
 package com.google.j2cl.generator;
 
-import com.google.j2cl.ast.TypeReference;
+import com.google.j2cl.ast.JavaType;
 
 /**
  * Utility functions to transpile the j2cl AST.
  */
 public class TranspilerUtils {
-  // JdtUtil members are all package private. Code outside generator should not be aware of the
-  // the transpilation particularities.
-
-  static String getMangledName(TypeReference typeReference) {
-    // TODO(implement the mangling rules here.
-    throw new UnsupportedOperationException();
+  public static String getBinaryName(JavaType javaType) {
+    // The information in TypeReference is not enough to compute binary name,
+    // for example, the enclosing type, etc. so a JavaType object is needed.
+    //TODO: to be implemented.
+    return getCanonicName(javaType);
   }
 
-  static String getJsDocName(TypeReference typeReference) {
-    // TODO(implement the mangling rules here.
-    throw new UnsupportedOperationException();
+  public static String getCanonicName(JavaType javaType) {
+    // TODO: to be implemented
+    return javaType.getTypeReference().getPackageName()
+        + "."
+        + javaType.getTypeReference().getSimpleName();
+  }
+
+  /**
+   * Returns the unqualified name that will be used in JavaScript.
+   */
+  public static String getClassName(JavaType javaType) {
+    //TODO: to be implemented.
+    return javaType.getTypeReference().getSimpleName();
+  }
+
+  /**
+   * Returns the mangled name.
+   */
+  public static String getMangledName(JavaType javaType) {
+    //TODO: to be implemented.
+    return getCanonicName(javaType).replace('.', '_');
+  }
+
+  /**
+   * Returns the JsDoc type name.
+   */
+  public static String getJsDocName(JavaType javaType) {
+    //TODO: to be implemented.
+    return getClassName(javaType);
   }
 
   private TranspilerUtils() {}

@@ -20,6 +20,8 @@ import com.google.common.base.Preconditions;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * A model class that represents a Java Compilation Unit.
@@ -28,6 +30,7 @@ public class CompilationUnit extends Node {
 
   private String filePath;
   private String packageName;
+  private Set<Imports> requiredModules = new TreeSet<>();
   @Visitable private List<JavaType> types = new ArrayList<>();
 
   public CompilationUnit(String filePath, String packageName) {
@@ -35,6 +38,10 @@ public class CompilationUnit extends Node {
     Preconditions.checkArgument(packageName != null);
     this.filePath = filePath;
     this.packageName = packageName;
+    requiredModules.add(Imports.IMPORT_CLASS);
+    requiredModules.add(Imports.IMPORT_UTIL);
+    // TODO: remove when imports are correclty computed.
+    requiredModules.add(Imports.IMPORT_OBJECT);
   }
 
   public String getFilePath() {
@@ -51,6 +58,22 @@ public class CompilationUnit extends Node {
 
   public void addType(JavaType type) {
     types.add(type);
+  }
+
+  public List<JavaType> getTypes() {
+    return types;
+  }
+
+  public void addRequiredModule(Imports module) {
+    // only the class that is not in current module can be added.
+    if (module.getModuleName().equals(getName())) {
+      return;
+    }
+    requiredModules.add(module);
+  }
+
+  public Set<Imports> getRequiredModules() {
+    return requiredModules;
   }
 
   public String getName() {

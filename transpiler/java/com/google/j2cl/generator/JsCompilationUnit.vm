@@ -3,21 +3,39 @@
  This .vm file is to be implemented.
 *###
 #set ($moduleName = $compilationUnit.Name)
-#set ($rootTypeName = $compilationUnit.Name)
 #set ($filePath = $compilationUnit.FilePath)
 #set ($packageName = $compilationUnit.PackageName)
 goog.module('gen.${packageName}.${moduleName}Module');
 
 
+#foreach( $requiredModule in $compilationUnit.RequiredModules)
+#set ($importName = $requiredModule.ClassName)
+var $importName = goog.require('$requiredModule.ModuleName').$importName;
+#end
+
+
+#foreach($classType in $compilationUnit.Types)
 /**
  * Transpiled from $filePath.
  */
-class $rootTypeName {
-  testHelloWorld() {}
-};
+#parse( "com/google/j2cl/generator/JsClass.vm" )
+#if($velocityCount < $compilationUnit.getTypes().size())
+## three blank lines between class definitions.
+
+
+
+#end
+#end
+##
+##
+#foreach($classType in $compilationUnit.Types)
+#if(${classType.getVisibility().isPublic()})##
+#set ($className = ${ASTUtils.getClassName($classType)})
 
 
 /**
  * Exported class.
  */
-exports.$rootTypeName = $rootTypeName;
+exports.$className = $className;
+#end
+#end

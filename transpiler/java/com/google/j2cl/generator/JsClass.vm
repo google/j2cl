@@ -1,0 +1,111 @@
+#set ($superTypeReference = $classType.superType)
+#if ($superTypeReference)
+#set ($superType = ${TypeMap.get($superTypeReference)})
+#set ($superTypeName = ${TranspilerUtils.getClassName($superType)})
+#set ($superTypeMangledName = ${TranspilerUtils.getMangledName($superType)})
+#set ($extendsClause = "extends " + $superTypeName)
+#else
+#set ($extendsClause = "")
+#end
+#set ($className = ${TranspilerUtils.getClassName($classType)})
+#set ($jsDocName = ${TranspilerUtils.getJsDocName($classType)})
+#set ($mangledName = ${TranspilerUtils.getMangledName($classType)})
+#set ($simpleName = ${classType.getTypeReference().getSimpleName()})
+#set ($binaryName = ${TranspilerUtils.getBinaryName($classType)})
+#set ($canonicalName = ${TranspilerUtils.getCanonicName($classType)})
+class $className $extendsClause {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+#foreach($field in $classType.Fields)
+    $field
+#end
+  }
+
+  /**
+   * Runs inline instance field initializers.
+   * @param {$jsDocName} instance
+   * @private
+   */
+  static $init(instance) {
+#foreach($instanceInitializer in $classType.InstanceInitializers)
+    $instanceInitializer
+#end
+  }
+
+#set ($noConstructors = true)
+#foreach($method in $classType.Methods)
+#if($method.isConstructor())
+#set ($noConstructors = false)
+#end
+  $method
+
+#end
+#if( $noConstructors )## default constructor
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!$jsDocName}
+   * @public
+   */
+  static $create() {
+    $className.$clinit();
+    var instance = new $className;
+    $className.$ctor__$mangledName(instance);
+    return instance;
+  }
+
+  testHelloWorld() {}
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {$jsDocName} instance
+   * @protected
+   */
+  static $ctor__$mangledName(instance) {
+    $superTypeName.$ctor__$superTypeMangledName(instance);
+    $className.$init(instance);
+  }
+#else
+#end
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof $className; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, $className);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() {
+    $superTypeName.$clinit();
+#foreach($instanceInitializer in $classType.StaticInitializers)
+    $instanceInitializer
+#end
+  }
+};
+
+
+/**
+ * @public {Class}
+ */
+$className.$class = Class.$createForClass(
+    Util.$generateId('$simpleName'),
+    Util.$generateId('$binaryName'),
+    $superTypeName.$class,
+    Util.$generateId('$canonicalName'));

@@ -32,28 +32,37 @@ public class JavaType extends Node {
   }
 
   private Kind kind;
+  private TypeReference enclosingType;
+  private Visibility visibility;
+  private TypeReference superType;
+  private List<TypeReference> superInterfaces;
+  private TypeReference typeReference;
+  private String compilationUnitName;
 
-  private String name;
   @Visitable private List<Node> fields;
 
   @Visitable private List<Node> methods;
 
-  private TypeReference enclosingType;
+  /**
+   * instance initialization statements, including the initializations in instance field
+   * declarations and in non-static initialization blocks.
+   * TODO: to implement a concrete Node type for initializations.
+   */
+  @Visitable private List<Node> instanceInitializers;
 
-  private TypeReference superType;
-  private List<TypeReference> superInterfaces;
+  /**
+   * static initialization statements, including the initializations in static field declarations
+   * and in static initialization blocks.
+   * TODO: to implement a concrete Node type for initializations.
+   */
+  @Visitable private List<Node> staticInitializers;
 
-  public JavaType(Kind kind, String name) {
+  public JavaType(
+      Kind kind, Visibility visibility, TypeReference typeReference, String compilationUnitName) {
     this.kind = kind;
-    this.name = name;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
+    this.visibility = visibility;
+    this.typeReference = typeReference;
+    this.compilationUnitName = compilationUnitName;
   }
 
   public Kind getKind() {
@@ -70,6 +79,22 @@ public class JavaType extends Node {
 
   public List<Node> getMethods() {
     return methods;
+  }
+
+  public Visibility getVisibility() {
+    return visibility;
+  }
+
+  public void setVisibility(Visibility visibility) {
+    this.visibility = visibility;
+  }
+
+  public List<Node> getInstanceInitializer() {
+    return instanceInitializers;
+  }
+
+  public List<Node> getStaticInitializer() {
+    return staticInitializers;
   }
 
   public TypeReference getEnclosingType() {
@@ -94,5 +119,21 @@ public class JavaType extends Node {
 
   public void setSuperInterfaces(List<TypeReference> superInterfaces) {
     this.superInterfaces = superInterfaces;
+  }
+
+  public TypeReference getTypeReference() {
+    return typeReference;
+  }
+
+  public void setTypeReference(TypeReference typeReference) {
+    this.typeReference = typeReference;
+  }
+
+  public String getCompilationUnitName() {
+    return compilationUnitName;
+  }
+
+  public void setCompilationUnitName(String compilationUnitName) {
+    this.compilationUnitName = compilationUnitName;
   }
 }

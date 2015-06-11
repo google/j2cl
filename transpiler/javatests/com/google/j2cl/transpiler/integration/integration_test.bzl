@@ -77,7 +77,6 @@ def integration_test(name, srcs):
   native.js_binary(
       name = "optimized_js",
       srcs = ["OptHarness.js"],
-      compiler = "//javascript/tools/jscompiler:head",
       defs = CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
           "--language_in=ECMASCRIPT6",
           "--language_out=ECMASCRIPT5",
@@ -113,7 +112,6 @@ def integration_test(name, srcs):
       name = name + "_test_spec",
       srcs = ["TestHarness.js"],
       compile = 1,
-      compiler = "//javascript/tools/jscompiler:head",
       defs = [
           "--export_test_functions=true",
           "--jscomp_off=checkTypes",
