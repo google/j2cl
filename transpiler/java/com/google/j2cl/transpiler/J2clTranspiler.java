@@ -72,8 +72,7 @@ public class J2clTranspiler implements JdtParser.Handler {
     // this is a dummy CompilationUnit instance, which should have been
     // generated from the previous passes.
     JavaScriptGenerator jsGenerator =
-        new JavaScriptGenerator(
-            errors, outputPath, outputDirectory, charset, unit, velocityEngine);
+        new JavaScriptGenerator(errors, outputPath, outputDirectory, charset, unit, velocityEngine);
     jsGenerator.writeToFile();
   }
 

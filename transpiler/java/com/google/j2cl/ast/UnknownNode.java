@@ -18,5 +18,4 @@ package com.google.j2cl.ast;
 /**
  * A class for nodes that are not currently handled.
  */
-public final class UnknownNode extends Node {
-}
+public final class UnknownNode extends Node {}

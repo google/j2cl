@@ -29,13 +29,21 @@ public abstract class MethodReference {
       String methodName,
       TypeReference returnTypeReference,
       TypeReference... parameterTypeReferences) {
-    return new AutoValue_MethodReference(isStatic, enclosingClassReference, methodName,
-        ImmutableList.copyOf(parameterTypeReferences), returnTypeReference);
+    return new AutoValue_MethodReference(
+        isStatic,
+        enclosingClassReference,
+        methodName,
+        ImmutableList.copyOf(parameterTypeReferences),
+        returnTypeReference);
   }
 
   public abstract boolean isStatic();
+
   public abstract TypeReference getEnclosingClassReference();
+
   public abstract String getMethodName();
+
   public abstract ImmutableList<TypeReference> getParameterTypeReferences();
+
   public abstract TypeReference getReturnTypeReference();
 }

@@ -30,8 +30,9 @@ public class CompilationUnitBuilder {
   private class Builder extends ASTVisitor {
     @Override
     public boolean visit(TypeDeclaration node) {
-      JavaType type = new JavaType(node.isInterface() ? Kind.INTERFACE : Kind.CLASS,
-          node.getName().getIdentifier());
+      JavaType type =
+          new JavaType(
+              node.isInterface() ? Kind.INTERFACE : Kind.CLASS, node.getName().getIdentifier());
       j2clCompilationUnit.addType(type);
       return super.visit(node);
     }
@@ -39,13 +40,13 @@ public class CompilationUnitBuilder {
 
   private CompilationUnit j2clCompilationUnit;
 
-  public static CompilationUnit build(String sourceFilePath,
-      org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
+  public static CompilationUnit build(
+      String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
     return new CompilationUnitBuilder().buildCompilationUnit(sourceFilePath, jdtCompilationUnit);
   }
 
-  private CompilationUnit buildCompilationUnit(String sourceFilePath,
-      org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
+  private CompilationUnit buildCompilationUnit(
+      String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
     Builder builder = new Builder();
 
     String packageName = JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit);
@@ -55,7 +56,5 @@ public class CompilationUnitBuilder {
     return j2clCompilationUnit;
   }
 
-  private CompilationUnitBuilder() {
-  }
+  private CompilationUnitBuilder() {}
 }
-

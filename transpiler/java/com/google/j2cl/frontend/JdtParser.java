@@ -38,8 +38,8 @@ import java.util.Map;
 public class JdtParser {
   private final Errors errors;
   private final Map<String, String> compilerOptions = new HashMap<>();
-  private final List<String> classpathEntries = new ArrayList<>();;
-  private final List<String> sourcepathEntries = new ArrayList<>();;
+  private final List<String> classpathEntries = new ArrayList<>();
+  private final List<String> sourcepathEntries = new ArrayList<>();
   private final String encoding;
 
   public JdtParser(FrontendOptions options, Errors errors) {

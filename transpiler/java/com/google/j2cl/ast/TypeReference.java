@@ -16,7 +16,9 @@
 package com.google.j2cl.ast;
 
 import com.google.auto.value.AutoValue;
+import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
 import java.util.List;
 
@@ -25,12 +27,24 @@ import java.util.List;
  */
 @AutoValue
 public abstract class TypeReference {
-    public static TypeReference create(
-        List<String> packageComponents, List<String> classComponents) {
+  public static TypeReference create(List<String> packageComponents, List<String> classComponents) {
     return new AutoValue_TypeReference(
-        ImmutableList.copyOf(packageComponents),
-        ImmutableList.copyOf(classComponents));
+        ImmutableList.copyOf(packageComponents), ImmutableList.copyOf(classComponents));
   }
+
   public abstract ImmutableList<String> getPackageComponents();
+
   public abstract ImmutableList<String> getClassComponents();
+
+  public String getSimpleName() {
+    return Iterables.getLast(getClassComponents());
+  }
+
+  public String getBinaryName() {
+    return Joiner.on(".").join(getPackageComponents(), Joiner.on("$").join(getClassComponents()));
+  }
+
+  public String getSourceName() {
+    return Joiner.on(".").join(Iterables.concat(getPackageComponents(), getClassComponents()));
+  }
 }

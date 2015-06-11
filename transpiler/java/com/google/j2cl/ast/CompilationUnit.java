@@ -28,8 +28,7 @@ public class CompilationUnit extends Node {
 
   private String filePath;
   private String packageName;
-  @Visitable
-  private List<JavaType> types = new ArrayList<>();
+  @Visitable private List<JavaType> types = new ArrayList<>();
 
   public CompilationUnit(String filePath, String packageName) {
     Preconditions.checkArgument(filePath != null);
@@ -58,7 +57,6 @@ public class CompilationUnit extends Node {
     int endIndex = filePath.lastIndexOf(".java");
     Preconditions.checkState(endIndex != -1);
 
-    return filePath.substring(filePath.lastIndexOf(File.separatorChar) + 1,
-        endIndex);
+    return filePath.substring(filePath.lastIndexOf(File.separatorChar) + 1, endIndex);
   }
 }

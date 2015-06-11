@@ -25,11 +25,10 @@ public class JdtUtils {
   // dependency on JDT.
 
   static String getCompilationUnitPackageName(CompilationUnit compilationUnit) {
-    return compilationUnit.getPackage() == null ? ""
+    return compilationUnit.getPackage() == null
+        ? ""
         : compilationUnit.getPackage().getName().getFullyQualifiedName();
   }
 
-  private JdtUtils() {
-  }
+  private JdtUtils() {}
 }
-

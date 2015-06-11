@@ -25,15 +25,20 @@ public class JavaType extends Node {
   /**
    * Describes the kind of the Java type.
    */
-  public enum Kind { CLASS, INTERFACE, ENUM }
+  public enum Kind {
+    CLASS,
+    INTERFACE,
+    ENUM
+  }
+
   private Kind kind;
 
   private String name;
-  @Visitable
-  private List<Node> fields;
+  @Visitable private List<Node> fields;
 
-  @Visitable
-  private List<Node> methods;
+  @Visitable private List<Node> methods;
+
+  private TypeReference enclosingType;
 
   private TypeReference superType;
   private List<TypeReference> superInterfaces;
@@ -65,5 +70,29 @@ public class JavaType extends Node {
 
   public List<Node> getMethods() {
     return methods;
+  }
+
+  public TypeReference getEnclosingType() {
+    return enclosingType;
+  }
+
+  public void setEnclosingType(TypeReference enclosingType) {
+    this.enclosingType = enclosingType;
+  }
+
+  public TypeReference getSuperType() {
+    return superType;
+  }
+
+  public void setSuperType(TypeReference superType) {
+    this.superType = superType;
+  }
+
+  public List<TypeReference> getSuperInterfaces() {
+    return superInterfaces;
+  }
+
+  public void setSuperInterfaces(List<TypeReference> superInterfaces) {
+    this.superInterfaces = superInterfaces;
   }
 }

@@ -18,5 +18,4 @@ package com.google.j2cl.ast;
 /**
  * An abstract base class for AST nodes.
  */
-public abstract class Node {
-}
+public abstract class Node {}
