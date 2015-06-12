@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.generator;
 
+import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JavaType;
 
 /**
@@ -44,6 +45,14 @@ public class TranspilerUtils {
   }
 
   /**
+   * Returns the JsDoc type name.
+   */
+  public static String getJsDocName(JavaType javaType) {
+    //TODO: to be implemented.
+    return getClassName(javaType);
+  }
+
+  /**
    * Returns the mangled name.
    */
   public static String getMangledName(JavaType javaType) {
@@ -52,11 +61,12 @@ public class TranspilerUtils {
   }
 
   /**
-   * Returns the JsDoc type name.
+   * Returns the relative output path for a given compilation unit.
    */
-  public static String getJsDocName(JavaType javaType) {
-    //TODO: to be implemented.
-    return getClassName(javaType);
+  public static String getOutputPath(CompilationUnit compilationUnit) {
+    String unitName = compilationUnit.getName();
+    String packageName = compilationUnit.getPackageName();
+    return packageName.replace('.', '/') + "/" + unitName;
   }
 
   private TranspilerUtils() {}

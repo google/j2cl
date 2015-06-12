@@ -37,12 +37,11 @@ public class JavaScriptGenerator extends AbstractSourceGenerator {
 
   public JavaScriptGenerator(
       Errors errors,
-      String outputPath,
       File outputDirectory,
       Charset charset,
       CompilationUnit compilationUnit,
       VelocityEngine velocityEngine) {
-    super(errors, outputPath, outputDirectory, charset);
+    super(errors, TranspilerUtils.getOutputPath(compilationUnit), outputDirectory, charset);
     this.compilationUnit = compilationUnit;
     this.velocityEngine = velocityEngine;
   }

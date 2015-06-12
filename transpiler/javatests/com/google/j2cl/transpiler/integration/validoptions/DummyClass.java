@@ -16,5 +16,4 @@ package com.google.j2cl.transpiler.integration.validoptions;
 /**
  * Test data
  */
-public class DummyClass {
-}
+public class DummyClass {}

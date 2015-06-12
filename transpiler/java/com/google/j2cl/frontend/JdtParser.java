@@ -56,27 +56,28 @@ public class JdtParser {
     encoding = options.getEncoding();
   }
 
-  public interface Handler {
-    public void handleCompilationUnit(String path, CompilationUnit compilationUnit);
-  }
-
-  public void parseFiles(List<String> paths, final Handler handler) {
+  /**
+   * Returns a map from file paths to compilation units after JDT parsing.
+   */
+  public Map<String, CompilationUnit> parseFiles(List<String> filePaths) {
     ASTParser parser = newASTParser(true, false);
+    final Map<String, CompilationUnit> compilationUnitsByFilePath = new HashMap<>();
     FileASTRequestor astRequestor =
         new FileASTRequestor() {
           @Override
-          public void acceptAST(String sourceFilePath, CompilationUnit compilationUnit) {
-            if (checkCompilationErrors(sourceFilePath, compilationUnit)) {
-              handler.handleCompilationUnit(sourceFilePath, compilationUnit);
+          public void acceptAST(String filePath, CompilationUnit compilationUnit) {
+            if (checkCompilationErrors(filePath, compilationUnit)) {
+              compilationUnitsByFilePath.put(filePath, compilationUnit);
             }
           }
         };
     parser.createASTs(
-        Iterables.toArray(paths, String.class),
-        getEncodings(paths.size()),
+        Iterables.toArray(filePaths, String.class),
+        getEncodings(filePaths.size()),
         new String[] {},
         astRequestor,
         null);
+    return compilationUnitsByFilePath;
   }
 
   private ASTParser newASTParser(boolean resolveBinding, boolean includeRunningVMBootclasspath) {
