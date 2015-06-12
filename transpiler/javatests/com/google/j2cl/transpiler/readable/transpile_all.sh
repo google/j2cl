@@ -39,11 +39,11 @@ for example_dir in $examples_dir*/ ; do
   $transpiler_bin -d $java_dir $example_files > /dev/null
 done
 
-# Format all JS
+# Format all JS and rename to .js.txt to avoid the linter
 for js_file in $(find $examples_dir -name '*.js') ; do
   clang-format -style=Google -i $js_file > /dev/null
-  fixjsstyle $js_file > /dev/null
+  mv $js_file $js_file.txt
 done
 
 # Diff modified JS
-git difftool -y -- "$examples_dir**/*.js"
+git difftool -y -- "$examples_dir**/*.js.txt"
