@@ -17,7 +17,7 @@ j2cl_java_library(
 
 load("/third_party/java_src/j2cl/build_def/j2cl_transpile", "j2cl_transpile")
 
-def j2cl_java_library(add_jre_dep=True, **kwargs):
+def j2cl_java_library(add_jre_dep=True, show_debug_cmd=False, **kwargs):
   """A macro that emits j2cl_transpile, java_library and js_library rules.
 
   Most callers will implicitly depend on the JRE and so 'add_jre_dep' should
@@ -49,6 +49,7 @@ def j2cl_java_library(add_jre_dep=True, **kwargs):
       srcs = kwargs["srcs"],
       java_library = ":" + kwargs["name"],
       java_deps = java_deps,
+      show_debug_cmd = show_debug_cmd,
       testonly = testonly,
   )
 

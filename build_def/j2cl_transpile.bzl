@@ -59,7 +59,7 @@ def _impl(ctx):
     js_files_paths += [js_file_artifact.path[len(java_root):]]
 
     java_files_paths += [java_file.path]
-    index +=1
+    index += 1
 
   compiler_args = [
     "-d",
@@ -73,16 +73,20 @@ def _impl(ctx):
   compiler_args += java_files_paths
 
   ctx.action(
-      inputs=java_files + java_deps,
-      outputs=js_files,
+      inputs = java_files + java_deps,
+      outputs = js_files,
       executable = ctx.executable.compiler,
       arguments = compiler_args,
   )
 
+  if ctx.attr.show_debug_cmd:
+    print("\ntranspile command:\n" + ctx.executable.compiler.short_path +
+          " " + " ".join(compiler_args) + "\n\n")
+
   # We need to return the output files so that they get recognized as outputs
   # from blaze
   return struct(
-      files=set(js_files),
+      files = set(js_files),
   )
 
 # expose rule
@@ -104,6 +108,7 @@ j2cl_transpile = rule(
             mandatory = True,
             allow_files = FileType([".java"]),
         ),
+        "show_debug_cmd": attr.bool(default = False),
     },
     implementation = _impl,
 )
