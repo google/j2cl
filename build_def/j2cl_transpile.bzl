@@ -69,7 +69,8 @@ def _impl(ctx):
   if len(java_deps_paths) > 0:
     compiler_args += ["-cp", ",".join(java_deps_paths)]
 
-  compiler_args += [",".join(java_files_paths)]
+  # The transpiler expects each java file path as a separate argument.
+  compiler_args += java_files_paths
 
   ctx.action(
       inputs=java_files + java_deps,

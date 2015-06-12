@@ -2,8 +2,17 @@
 
 def _get_java_root_index(pkg_name):
   """Returns the index of the java_root within a build package"""
-  java_index = pkg_name.rfind("java/")
-  javatests_index = pkg_name.rfind("javatests/")
+  # Find the java folder in the beginning, middle or end of a path.
+  if pkg_name.endswith("java"):
+    java_index = pkg_name.rfind("java")
+  else:
+    java_index = pkg_name.rfind("java/")
+
+  # Find the javatests folder in the beginning, middle or end of a path.
+  if pkg_name.endswith("javatests"):
+    javatests_index = pkg_name.rfind("javatests")
+  else:
+    javatests_index = pkg_name.rfind("javatests/")
 
   if java_index == -1 and javatests_index == -1:
     fail("can not find java root")

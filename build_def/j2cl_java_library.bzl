@@ -17,8 +17,15 @@ j2cl_java_library(
 
 load("/third_party/java_src/j2cl/build_def/j2cl_transpile", "j2cl_transpile")
 
-def j2cl_java_library(**kwargs):
-  """A macro that emits j2cl_transpile, java_library and js_library rules."""
+def j2cl_java_library(add_jre_dep=True, **kwargs):
+  """A macro that emits j2cl_transpile, java_library and js_library rules.
+
+  Most callers will implicitly depend on the JRE and so 'add_jre_dep' should
+  usually be left alone. But when defining the JRE itself and its sub-libraries
+  it must be possible to turn off the implicit dependency to avoid a dependency
+  loop.
+  """
+
   testonly = 0
   if "testonly" in kwargs:
     testonly = kwargs["testonly"]
@@ -33,7 +40,7 @@ def j2cl_java_library(**kwargs):
         # TODO(dankurka) once we have decided how we deal with junit sort this out
       else:
         java_deps += [dep]
-        js_deps += [dep + "_js"]
+        js_deps += [dep + "_js_library"]
 
   native.java_library(**kwargs)
 
@@ -45,9 +52,12 @@ def j2cl_java_library(**kwargs):
       testonly = testonly,
   )
 
+  js_library_deps = js_deps
+  if add_jre_dep:
+    js_library_deps += ["//jre"]
   native.js_library(
       name = kwargs["name"]  + "_js_library",
       srcs = [":" + kwargs["name"]  + "_j2cl_transpile",],
-      deps = js_deps + ["//jre"],
+      deps = js_library_deps,
       testonly = testonly,
   )
