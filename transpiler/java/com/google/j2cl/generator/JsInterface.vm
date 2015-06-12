@@ -1,0 +1,66 @@
+#set ($interfaceName = ${TranspilerUtils.getClassName($classType)})
+#set ($mangledName = ${TranspilerUtils.getMangledName($classType)})
+#set ($simpleName = ${classType.getTypeReference().getSimpleName()})
+#set ($binaryName = ${TranspilerUtils.getBinaryName($classType)})
+#set ($canonicalName = ${TranspilerUtils.getCanonicName($classType)})
+class $interfaceName {
+#foreach($method in $classType.Methods)
+  $method
+
+#end
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__$mangledName = true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+           instance.$implements__$mangledName;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+           classConstructor.prototype
+               .$implements__$mangledName;
+  }
+
+  /**
+   * Runs inline static field initializers.
+##* @clinit to make js lint pass, removed the @clinit. we may get it back once it is supported.
+   * @protected
+   */
+  static $clinit() {}
+};
+
+
+$interfaceName.$markImplementor($interfaceName);
+
+
+/**
+ * @public {Class}
+ */
+$interfaceName.$class = Class.$createForInterface(
+    Util.$generateId('$simpleName'),
+    Util.$generateId('$binaryName'), null,
+    Util.$generateId('$canonicalName'));

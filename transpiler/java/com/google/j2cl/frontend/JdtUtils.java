@@ -36,7 +36,9 @@ public class JdtUtils {
   }
 
   static TypeReference createTypeReference(ITypeBinding typeBinding) {
-    return TypeReference.create(typeBinding.getPackage().getName(), typeBinding.getName());
+    return typeBinding == null
+        ? null
+        : TypeReference.create(typeBinding.getPackage().getName(), typeBinding.getName());
   }
 
   static Visibility getVisibility(int modifier) {

@@ -73,6 +73,10 @@ public class JavaType extends Node {
     this.kind = kind;
   }
 
+  public boolean isInterface() {
+    return this.kind == Kind.INTERFACE;
+  }
+
   public List<Node> getFields() {
     return fields;
   }

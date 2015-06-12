@@ -15,10 +15,18 @@ var $importName = goog.require('$requiredModule.ModuleName').$importName;
 
 
 #foreach($classType in $compilationUnit.Types)
+#set ($isInterface = $classType.isInterface())
 /**
  * Transpiled from $filePath.
+#if ($isInterface)
+ * @interface
+#end
  */
+#if($isInterface)
+#parse( "com/google/j2cl/generator/JsInterface.vm" )
+#else
 #parse( "com/google/j2cl/generator/JsClass.vm" )
+#end
 #if($velocityCount < $compilationUnit.getTypes().size())
 ## three blank lines between class definitions.
 
@@ -30,7 +38,7 @@ var $importName = goog.require('$requiredModule.ModuleName').$importName;
 ##
 #foreach($classType in $compilationUnit.Types)
 #if(${classType.getVisibility().isPublic()})##
-#set ($className = ${ASTUtils.getClassName($classType)})
+#set ($className = ${TranspilerUtils.getClassName($classType)})
 
 
 /**
