@@ -30,7 +30,7 @@ public class CompilationUnit extends Node {
 
   private String filePath;
   private String packageName;
-  private Set<Imports> requiredModules = new TreeSet<>();
+  private Set<Import> imports = new TreeSet<>();
   @Visitable private List<JavaType> types = new ArrayList<>();
 
   public CompilationUnit(String filePath, String packageName) {
@@ -38,10 +38,6 @@ public class CompilationUnit extends Node {
     Preconditions.checkArgument(packageName != null);
     this.filePath = filePath;
     this.packageName = packageName;
-    requiredModules.add(Imports.IMPORT_CLASS);
-    requiredModules.add(Imports.IMPORT_UTIL);
-    // TODO: remove when imports are correclty computed.
-    requiredModules.add(Imports.IMPORT_OBJECT);
   }
 
   public String getFilePath() {
@@ -64,16 +60,16 @@ public class CompilationUnit extends Node {
     return types;
   }
 
-  public void addRequiredModule(Imports module) {
+  public void addImport(Import importInstance) {
     // only the class that is not in current module can be added.
-    if (module.getModuleName().equals(getName())) {
+    if (importInstance.getModuleName().equals(getName())) {
       return;
     }
-    requiredModules.add(module);
+    imports.add(importInstance);
   }
 
-  public Set<Imports> getRequiredModules() {
-    return requiredModules;
+  public Set<Import> getRequiredModules() {
+    return imports;
   }
 
   public String getName() {

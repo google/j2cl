@@ -28,14 +28,20 @@ import java.util.Collections;
 @AutoValue
 public abstract class TypeReference {
   public static TypeReference create(
-      Iterable<String> packageComponents, Iterable<String> classComponents) {
+      Iterable<String> packageComponents,
+      Iterable<String> classComponents,
+      String compilationUnitSimpleName) {
     return new AutoValue_TypeReference(
-        ImmutableList.copyOf(packageComponents), ImmutableList.copyOf(classComponents));
+        ImmutableList.copyOf(packageComponents),
+        ImmutableList.copyOf(classComponents),
+        compilationUnitSimpleName);
   }
 
   public abstract ImmutableList<String> getPackageComponents();
 
   public abstract ImmutableList<String> getClassComponents();
+
+  public abstract String getCompilationSimpleName();
 
   public String getSimpleName() {
     return Iterables.getLast(getClassComponents());
@@ -47,6 +53,10 @@ public abstract class TypeReference {
             Iterables.concat(
                 getPackageComponents(),
                 Collections.singleton(Joiner.on("$").join(getClassComponents()))));
+  }
+
+  public String getCompilationUnitSourceName() {
+    return Joiner.on(".").join(getPackageComponents()) + "." + getCompilationSimpleName();
   }
 
   public String getSourceName() {

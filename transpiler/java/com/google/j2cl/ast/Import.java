@@ -19,18 +19,29 @@ package com.google.j2cl.ast;
  * A Node class that represents the goog.require statement
  * var ClassName = goog.require('moduleName').ClassName
  */
-public class Imports extends Node implements Comparable<Imports> {
+public class Import extends Node implements Comparable<Import> {
 
-  public static final Imports IMPORT_CLASS = new Imports("Class", "gen.java.lang.CoreModule");
-  public static final Imports IMPORT_OBJECT = new Imports("Object", "gen.java.lang.CoreModule");
-  public static final Imports IMPORT_UTIL = new Imports("Util", "nativebootstrap.UtilModule");
+  public static final Import IMPORT_CLASS = new Import("Class", "gen.java.lang.ClassModule");
+  public static final Import IMPORT_BOOTSTRAP_UTIL =
+      new Import("Util", "nativebootstrap.UtilModule");
 
   private String className;
   private String moduleName;
 
-  public Imports(String className, String moduleName) {
+  public Import(String className, String moduleName) {
+    // TODO: remove hack when Closure compiler supports circular references.
+    if (moduleName.equals("gen.java.lang.ClassModule")
+        || moduleName.equals("gen.java.lang.ObjectModule")) {
+      moduleName = "gen.java.lang.CoreModule";
+    }
     this.className = className;
     this.moduleName = moduleName;
+  }
+
+  public Import(TypeReference typeReference) {
+    this(
+        typeReference.getSimpleName(),
+        "gen." + typeReference.getCompilationUnitSourceName() + "Module");
   }
 
   public String getClassName() {
@@ -53,7 +64,7 @@ public class Imports extends Node implements Comparable<Imports> {
    * Imported items should be sorted by module name first, and then class name.
    */
   @Override
-  public int compareTo(Imports other) {
+  public int compareTo(Import other) {
     int compareModuleName = this.moduleName.compareTo(other.moduleName);
     if (compareModuleName == 0) {
       return this.className.compareTo(other.className);

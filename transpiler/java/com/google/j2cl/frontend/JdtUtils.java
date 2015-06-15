@@ -49,12 +49,26 @@ public class JdtUtils {
       nameComponents.add(0, currentType.getName());
       currentType = currentType.getDeclaringClass();
     }
+    String compilationUnitSourceName = getCompilationUnitSourceName(typeBinding);
 
     List<String> packageComponents = new LinkedList<>();
     if (typeBinding.getPackage() != null) {
       packageComponents = Arrays.asList(typeBinding.getPackage().getNameComponents());
     }
-    return TypeReference.create(packageComponents, nameComponents);
+    return TypeReference.create(packageComponents, nameComponents, compilationUnitSourceName);
+  }
+
+  static String getCompilationUnitSourceName(ITypeBinding typeBinding) {
+    if (typeBinding == null) {
+      return null;
+    }
+
+    // TODO: handle non-main root types.
+    if (typeBinding.isMember()) {
+      return getCompilationUnitSourceName(typeBinding.getDeclaringClass());
+    } else {
+      return typeBinding.getName();
+    }
   }
 
   static Visibility getVisibility(int modifier) {
