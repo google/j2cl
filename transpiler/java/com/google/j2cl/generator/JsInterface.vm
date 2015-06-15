@@ -1,8 +1,8 @@
-#set ($interfaceName = ${TranspilerUtils.getClassName($classType)})
-#set ($mangledName = ${TranspilerUtils.getMangledName($classType)})
-#set ($simpleName = ${classType.getTypeReference().getSimpleName()})
-#set ($binaryName = ${TranspilerUtils.getBinaryName($classType)})
-#set ($canonicalName = ${TranspilerUtils.getCanonicName($classType)})
+#set ($interfaceName = ${TranspilerUtils.getClassName($classType.getTypeReference())})
+#set ($mangledName = ${TranspilerUtils.getMangledName($classType.getTypeReference())})
+#set ($simpleName = $classType.getTypeReference().getSimpleName())
+#set ($binaryName = $classType.getTypeReference().getBinaryName())
+#set ($sourceName = ${TranspilerUtils.getSourceName($classType.getTypeReference())})
 class $interfaceName {
 #foreach($method in $classType.Methods)
   $method
@@ -63,4 +63,4 @@ $interfaceName.$markImplementor($interfaceName);
 $interfaceName.$class = Class.$createForInterface(
     Util.$generateId('$simpleName'),
     Util.$generateId('$binaryName'), null,
-    Util.$generateId('$canonicalName'));
+    Util.$generateId('$sourceName'));

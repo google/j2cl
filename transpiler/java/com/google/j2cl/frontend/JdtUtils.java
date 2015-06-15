@@ -22,6 +22,10 @@ import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.Modifier;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Utility functions to manipulate JDT internal representations.
  */
@@ -36,9 +40,17 @@ public class JdtUtils {
   }
 
   static TypeReference createTypeReference(ITypeBinding typeBinding) {
+    List<String> nameComponents = new LinkedList<>();
+    ITypeBinding currentType = typeBinding;
+    while (currentType != null) {
+      nameComponents.add(0, currentType.getName());
+      currentType = currentType.getDeclaringClass();
+    }
+
     return typeBinding == null
         ? null
-        : TypeReference.create(typeBinding.getPackage().getName(), typeBinding.getName());
+        : TypeReference.create(
+            Arrays.asList(typeBinding.getPackage().getNameComponents()), nameComponents);
   }
 
   static Visibility getVisibility(int modifier) {

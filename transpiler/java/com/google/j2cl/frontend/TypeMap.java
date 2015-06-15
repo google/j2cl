@@ -17,7 +17,6 @@ package com.google.j2cl.frontend;
 
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.TypeReference;
-import com.google.j2cl.ast.Visibility;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,17 +27,6 @@ import java.util.Map;
 public class TypeMap {
 
   private static Map<TypeReference, JavaType> typeMap = new HashMap<>();
-
-  public static final JavaType JAVA_LANG_OBJECT =
-      new JavaType(
-          JavaType.Kind.CLASS,
-          Visibility.PUBLIC,
-          TypeReference.create("java.lang", "Object"),
-          "Object");
-
-  static {
-    put(JAVA_LANG_OBJECT.getTypeReference(), JAVA_LANG_OBJECT);
-  }
 
   public static void put(TypeReference typeReference, JavaType type) {
     typeMap.put(typeReference, type);

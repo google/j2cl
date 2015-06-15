@@ -16,17 +16,40 @@
 package com.google.j2cl.ast;
 
 import com.google.auto.value.AutoValue;
+import com.google.common.base.Joiner;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
+
+import java.util.Collections;
 
 /**
  * A (by name) reference to a class.
  */
 @AutoValue
 public abstract class TypeReference {
-  public static TypeReference create(String packageName, String simpleName) {
-    return new AutoValue_TypeReference(packageName, simpleName);
+  public static TypeReference create(
+      Iterable<String> packageComponents, Iterable<String> classComponents) {
+    return new AutoValue_TypeReference(
+        ImmutableList.copyOf(packageComponents), ImmutableList.copyOf(classComponents));
   }
 
-  public abstract String getPackageName();
+  public abstract ImmutableList<String> getPackageComponents();
 
-  public abstract String getSimpleName();
+  public abstract ImmutableList<String> getClassComponents();
+
+  public String getSimpleName() {
+    return Iterables.getLast(getClassComponents());
+  }
+
+  public String getBinaryName() {
+    return Joiner.on(".")
+        .join(
+            Iterables.concat(
+                getPackageComponents(),
+                Collections.singleton(Joiner.on("$").join(getClassComponents()))));
+  }
+
+  public String getSourceName() {
+    return Joiner.on(".").join(Iterables.concat(getPackageComponents(), getClassComponents()));
+  }
 }

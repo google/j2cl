@@ -16,48 +16,42 @@
 package com.google.j2cl.generator;
 
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.TypeReference;
 
 /**
  * Utility functions to transpile the j2cl AST.
  */
 public class TranspilerUtils {
-  public static String getBinaryName(JavaType javaType) {
-    // The information in TypeReference is not enough to compute binary name,
-    // for example, the enclosing type, etc. so a JavaType object is needed.
-    //TODO: to be implemented.
-    return getCanonicName(javaType);
-  }
-
-  public static String getCanonicName(JavaType javaType) {
-    // TODO: to be implemented
-    return javaType.getTypeReference().getPackageName()
-        + "."
-        + javaType.getTypeReference().getSimpleName();
+  public static String getSourceName(TypeReference typeReference) {
+    // TODO(rluble): Stub implementation. Needs to be implemented for the cases in which a
+    // class might be refered by multiple different type references.
+    // TODO(rluble): See if the canonical name concept can be avoided in our AST but converting
+    // to canonical type references at AST construction.
+    return typeReference.getSourceName();
   }
 
   /**
    * Returns the unqualified name that will be used in JavaScript.
    */
-  public static String getClassName(JavaType javaType) {
-    //TODO: to be implemented.
-    return javaType.getTypeReference().getSimpleName();
+  public static String getClassName(TypeReference typeReference) {
+    //TODO(rluble): Stub implementation.
+    return typeReference.getSimpleName();
   }
 
   /**
    * Returns the JsDoc type name.
    */
-  public static String getJsDocName(JavaType javaType) {
+  public static String getJsDocName(TypeReference typeReference) {
     //TODO: to be implemented.
-    return getClassName(javaType);
+    return getClassName(typeReference);
   }
 
   /**
    * Returns the mangled name.
    */
-  public static String getMangledName(JavaType javaType) {
-    //TODO: to be implemented.
-    return getCanonicName(javaType).replace('.', '_');
+  public static String getMangledName(TypeReference typeReference) {
+    //TODO(rluble): Stub implementation.
+    return typeReference.getSourceName().replace('.', '_');
   }
 
   /**

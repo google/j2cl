@@ -35,7 +35,6 @@ public class CompilationUnitBuilder {
       ITypeBinding typeBinding = node.resolveBinding();
       JavaType type = createJavaType(typeBinding);
       j2clCompilationUnit.addType(type);
-      TypeMap.put(type.getTypeReference(), type);
       return super.visit(node);
     }
 
@@ -47,8 +46,7 @@ public class CompilationUnitBuilder {
           new JavaType(
               typeBinding.isInterface() ? Kind.INTERFACE : Kind.CLASS,
               JdtUtils.getVisibility(typeBinding.getModifiers()),
-              JdtUtils.createTypeReference(typeBinding),
-              j2clCompilationUnit.getName());
+              JdtUtils.createTypeReference(typeBinding));
 
       ITypeBinding superclassBinding = typeBinding.getSuperclass();
       TypeReference superType = JdtUtils.createTypeReference(superclassBinding);

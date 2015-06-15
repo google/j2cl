@@ -37,7 +37,6 @@ public class JavaType extends Node {
   private TypeReference superType;
   private List<TypeReference> superInterfaces;
   private TypeReference typeReference;
-  private String compilationUnitName;
 
   @Visitable private List<Node> fields;
 
@@ -57,12 +56,10 @@ public class JavaType extends Node {
    */
   @Visitable private List<Node> staticInitializers;
 
-  public JavaType(
-      Kind kind, Visibility visibility, TypeReference typeReference, String compilationUnitName) {
+  public JavaType(Kind kind, Visibility visibility, TypeReference typeReference) {
     this.kind = kind;
     this.visibility = visibility;
     this.typeReference = typeReference;
-    this.compilationUnitName = compilationUnitName;
   }
 
   public Kind getKind() {
@@ -131,13 +128,5 @@ public class JavaType extends Node {
 
   public void setTypeReference(TypeReference typeReference) {
     this.typeReference = typeReference;
-  }
-
-  public String getCompilationUnitName() {
-    return compilationUnitName;
-  }
-
-  public void setCompilationUnitName(String compilationUnitName) {
-    this.compilationUnitName = compilationUnitName;
   }
 }

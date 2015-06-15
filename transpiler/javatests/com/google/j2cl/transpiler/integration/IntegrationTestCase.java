@@ -13,23 +13,29 @@
  */
 package com.google.j2cl.transpiler.integration;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
-import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.io.CharStreams;
 import com.google.common.io.Files;
 import com.google.devtools.build.runtime.Runfiles;
 
 import junit.framework.TestCase;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Base class for integration tests.
@@ -50,7 +56,6 @@ public class IntegrationTestCase extends TestCase {
   }
 
   protected static final String TRANSPILER_BINARY = "third_party/java_src/j2cl/j2cl";
-  private static final Splitter LOG_SPLITTER = Splitter.on('\n').omitEmptyStrings().trimResults();
 
   protected static void assertLogContainsSnippet(List<String> logLines, String snippet) {
     boolean foundSnippet = false;
@@ -123,19 +128,52 @@ public class IntegrationTestCase extends TestCase {
 
   protected TranspileResult transpile(String[] args)
       throws IOException, InterruptedException, UnsupportedEncodingException {
-    Process transpileProcess = Runtime.getRuntime().exec(args);
+
+    class OutputProcessor implements Runnable {
+
+      private final InputStream inputStream;
+      private final OutputStream outputStream;
+      private final List<String> logLines;
+
+      OutputProcessor(InputStream inputStream, OutputStream outputStream, List<String> logLines) {
+        this.inputStream = inputStream;
+        this.outputStream = outputStream;
+        this.logLines = logLines;
+      }
+
+      @Override
+      public void run() {
+        String line;
+        try (BufferedReader reader =
+                new BufferedReader(new InputStreamReader(inputStream, Charsets.UTF_8));
+            PrintStream formattedOutput = new PrintStream(outputStream)) {
+          while ((line = reader.readLine()) != null) {
+            logLines.add(line);
+            formattedOutput.println(line);
+            formattedOutput.flush();
+          }
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+
+    ProcessBuilder processBuilder = new ProcessBuilder(args);
+    Process transpileProcess = processBuilder.start();
     TranspileResult transpileResult = new TranspileResult();
+    ExecutorService executorService = Executors.newFixedThreadPool(2);
+    executorService.execute(
+        new OutputProcessor(
+            transpileProcess.getInputStream(), System.out, transpileResult.outputLines));
+    executorService.execute(
+        new OutputProcessor(
+            transpileProcess.getErrorStream(), System.err, transpileResult.errorLines));
+    executorService.shutdown();
 
     // Wait for transpilation to finish, gather the results and return them.
     transpileResult.exitCode = transpileProcess.waitFor();
-    transpileResult.errorLines =
-        LOG_SPLITTER.splitToList(
-            CharStreams.toString(
-                new InputStreamReader(transpileProcess.getErrorStream(), "UTF-8")));
-    transpileResult.outputLines =
-        LOG_SPLITTER.splitToList(
-            CharStreams.toString(
-                new InputStreamReader(transpileProcess.getInputStream(), "UTF-8")));
+    executorService.awaitTermination(1, TimeUnit.MINUTES);
+
     return transpileResult;
   }
 }

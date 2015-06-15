@@ -26,7 +26,7 @@ transpiler_bin="blaze-bin/third_party/java_src/j2cl/j2cl"
 set -x
 
 # Build the transpiler
-blaze build third_party/java_src/j2cl:j2cl &> /dev/null
+blaze build third_party/java_src/j2cl:j2cl
 
 # Transpile each example
 for example_dir in $examples_dir*/ ; do
@@ -36,7 +36,7 @@ for example_dir in $examples_dir*/ ; do
     example_files="$example_files$java_file "
   done
   # Transpile them
-  $transpiler_bin -d $java_dir $example_files > /dev/null
+  $transpiler_bin -d $java_dir $example_files
 done
 
 # Format all JS and rename to .js.txt to avoid the linter
