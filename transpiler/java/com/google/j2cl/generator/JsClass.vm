@@ -8,7 +8,7 @@
 #end
 #set ($className = ${TranspilerUtils.getClassName($classType.getTypeReference())})
 #set ($jsDocName = ${TranspilerUtils.getJsDocName($classType.getTypeReference())})
-#set ($mangledName = ${TranspilerUtils.getMangledName($classType.getTypeReference())})
+#set ($mangledTypeName = ${TranspilerUtils.getMangledName($classType.getTypeReference())})
 #set ($simpleName = $classType.getTypeReference().getSimpleName())
 #set ($binaryName = $classType.getTypeReference().getBinaryName())
 #set ($sourceName = ${TranspilerUtils.getSourceName($classType.getTypeReference())})
@@ -19,8 +19,14 @@ class $className $extendsClause {
    */
   constructor() {
     super();
-#foreach($field in $classType.Fields)
-    $field
+#foreach ($field in $classType.Fields)
+#set ($fieldVisibility = $field.Visibility)
+#set ($fieldType = ${TranspilerUtils.getJsDocName($field.Type)})
+#set ($fieldName = ${field.Name})
+    /**
+     * @$fieldVisibility {?$fieldType}
+     */
+    this.f_${fieldName}__${mangledTypeName} = null;
 #end
   }
 
@@ -30,6 +36,11 @@ class $className $extendsClause {
    * @private
    */
   static $init(instance) {
+#foreach ($field in $classType.Fields)
+#if ($field.hasInitializer())
+    instance.f_${field.Name}__${mangledTypeName} = $field.Initializer;
+#end
+#end
 #foreach($instanceInitializer in $classType.InstanceInitializers)
     $instanceInitializer
 #end
@@ -52,7 +63,7 @@ class $className $extendsClause {
   static $create() {
     $className.$clinit();
     var instance = new $className;
-    $className.$ctor__$mangledName(instance);
+    $className.$ctor__$mangledTypeName(instance);
     return instance;
   }
 
@@ -63,7 +74,7 @@ class $className $extendsClause {
    * @param {$jsDocName} instance
    * @protected
    */
-  static $ctor__$mangledName(instance) {
+  static $ctor__$mangledTypeName(instance) {
     $superTypeName.$ctor__$superTypeMangledName(instance);
     $className.$init(instance);
   }

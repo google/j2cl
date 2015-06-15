@@ -42,7 +42,14 @@ public class TranspilerUtils {
    * Returns the JsDoc type name.
    */
   public static String getJsDocName(TypeReference typeReference) {
-    //TODO: to be implemented.
+    // TODO: Incomplete implementation.
+    switch (typeReference.getSourceName()) {
+      case "int":
+      case "double":
+      case "float":
+      case "short":
+        return "number";
+    }
     return getClassName(typeReference);
   }
 

@@ -16,38 +16,6 @@
 package com.google.j2cl.ast;
 
 /**
- * An enum for visibility.
+ * Base class for expressions.
  */
-public enum Visibility {
-  PUBLIC("public"),
-  PROTECTED("protected"),
-  PRIVATE("private"),
-  PACKAGE_PRIVATE("");
-
-  public String value;
-
-  Visibility(String value) {
-    this.value = value;
-  }
-
-  public boolean isPublic() {
-    return this == PUBLIC;
-  }
-
-  public boolean isProtected() {
-    return this == PROTECTED;
-  }
-
-  public boolean isPrivate() {
-    return this == PRIVATE;
-  }
-
-  public boolean isPackagePrivate() {
-    return this == PACKAGE_PRIVATE;
-  }
-
-  @Override
-  public String toString() {
-    return value;
-  }
-}
+public abstract class Expression extends Node {}

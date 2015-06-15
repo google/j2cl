@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,23 +39,23 @@ public class JavaType extends Node {
   private List<TypeReference> superInterfaces;
   private TypeReference typeReference;
 
-  @Visitable private List<Node> fields;
+  @Visitable private List<Field> fields = new ArrayList<>();
 
-  @Visitable private List<Node> methods;
+  @Visitable private List<Node> methods = new ArrayList<>();
 
   /**
    * instance initialization statements, including the initializations in instance field
    * declarations and in non-static initialization blocks.
    * TODO: to implement a concrete Node type for initializations.
    */
-  @Visitable private List<Node> instanceInitializers;
+  @Visitable private List<Node> instanceInitializers = new ArrayList<>();
 
   /**
    * static initialization statements, including the initializations in static field declarations
    * and in static initialization blocks.
    * TODO: to implement a concrete Node type for initializations.
    */
-  @Visitable private List<Node> staticInitializers;
+  @Visitable private List<Node> staticInitializers = new ArrayList<>();
 
   public JavaType(Kind kind, Visibility visibility, TypeReference typeReference) {
     this.kind = kind;
@@ -74,8 +75,12 @@ public class JavaType extends Node {
     return this.kind == Kind.INTERFACE;
   }
 
-  public List<Node> getFields() {
+  public List<Field> getFields() {
     return fields;
+  }
+
+  public void addField(Field field) {
+    fields.add(field);
   }
 
   public List<Node> getMethods() {

@@ -9,7 +9,6 @@ load(
 )
 
 # Creates verification target
-# blaze build :emptyclass_binary
 readable_example(
     name = "emptyinterface",
     srcs = glob(["*.java"]),

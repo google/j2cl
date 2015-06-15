@@ -16,13 +16,23 @@
 package com.google.j2cl.frontend;
 
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
+import com.google.j2cl.ast.Node;
+import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeReference;
+import com.google.j2cl.ast.Visibility;
 
 import org.eclipse.jdt.core.dom.ASTVisitor;
+import org.eclipse.jdt.core.dom.FieldDeclaration;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
+import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Creates a J2CL Java AST from the AST provided by JDT.
@@ -30,12 +40,54 @@ import org.eclipse.jdt.core.dom.TypeDeclaration;
 public class CompilationUnitBuilder {
 
   private class Builder extends ASTVisitor {
+    private JavaType currentType;
+    private List<Node> nodeStack = new ArrayList<>();
+
+    private void push(Node node) {
+      nodeStack.add(node);
+    }
+
+    private Node pop() {
+      return nodeStack.remove(nodeStack.size() - 1);
+    }
+
     @Override
     public boolean visit(TypeDeclaration node) {
       ITypeBinding typeBinding = node.resolveBinding();
       JavaType type = createJavaType(typeBinding);
+      currentType = type;
       j2clCompilationUnit.addType(type);
       return super.visit(node);
+    }
+
+    @Override
+    public void endVisit(TypeDeclaration node) {
+      currentType = null;
+    }
+
+    @Override
+    public void endVisit(FieldDeclaration node) {
+      TypeReference type = JdtUtils.createTypeReference(node.getType().resolveBinding());
+      int modifiers = node.getModifiers();
+      boolean isFinal = JdtUtils.isFinal(modifiers);
+      Visibility visibility = JdtUtils.getVisibility(modifiers);
+      for (Object object : node.fragments()) {
+        VariableDeclarationFragment fragment = (VariableDeclarationFragment) object;
+        Expression initializer = fragment.getInitializer() == null ? null : (Expression) pop();
+        currentType.addField(
+            new Field(
+                fragment.getName().getIdentifier(),
+                type,
+                isFinal,
+                initializer,
+                visibility,
+                currentType.getTypeReference()));
+      }
+    }
+
+    @Override
+    public void endVisit(org.eclipse.jdt.core.dom.NumberLiteral node) {
+      push(new NumberLiteral(node.getToken()));
     }
 
     private JavaType createJavaType(ITypeBinding typeBinding) {

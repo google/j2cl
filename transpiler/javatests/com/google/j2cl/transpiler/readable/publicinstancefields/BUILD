@@ -10,6 +10,6 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "emptyclass",
+    name = "publicinstancefields",
     srcs = glob(["*.java"]),
 )

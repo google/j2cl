@@ -40,6 +40,9 @@ public class JdtUtils {
   }
 
   static TypeReference createTypeReference(ITypeBinding typeBinding) {
+    if (typeBinding == null) {
+      return null;
+    }
     List<String> nameComponents = new LinkedList<>();
     ITypeBinding currentType = typeBinding;
     while (currentType != null) {
@@ -47,10 +50,11 @@ public class JdtUtils {
       currentType = currentType.getDeclaringClass();
     }
 
-    return typeBinding == null
-        ? null
-        : TypeReference.create(
-            Arrays.asList(typeBinding.getPackage().getNameComponents()), nameComponents);
+    List<String> packageComponents = new LinkedList<>();
+    if (typeBinding.getPackage() != null) {
+      packageComponents = Arrays.asList(typeBinding.getPackage().getNameComponents());
+    }
+    return TypeReference.create(packageComponents, nameComponents);
   }
 
   static Visibility getVisibility(int modifier) {
@@ -63,6 +67,10 @@ public class JdtUtils {
     } else {
       return Visibility.PACKAGE_PRIVATE;
     }
+  }
+
+  static boolean isFinal(int modifier) {
+    return Modifier.isFinal(modifier);
   }
 
   private JdtUtils() {}

@@ -16,38 +16,26 @@
 package com.google.j2cl.ast;
 
 /**
- * An enum for visibility.
+ * Number literal node.
  */
-public enum Visibility {
-  PUBLIC("public"),
-  PROTECTED("protected"),
-  PRIVATE("private"),
-  PACKAGE_PRIVATE("");
+public class NumberLiteral extends Expression {
+  // TODO: maybe use value instead.
+  private String token;
 
-  public String value;
-
-  Visibility(String value) {
-    this.value = value;
+  public NumberLiteral(String token) {
+    this.token = token;
   }
 
-  public boolean isPublic() {
-    return this == PUBLIC;
+  public String getToken() {
+    return token;
   }
 
-  public boolean isProtected() {
-    return this == PROTECTED;
-  }
-
-  public boolean isPrivate() {
-    return this == PRIVATE;
-  }
-
-  public boolean isPackagePrivate() {
-    return this == PACKAGE_PRIVATE;
+  public void setToken(String token) {
+    this.token = token;
   }
 
   @Override
   public String toString() {
-    return value;
+    return token;
   }
 }
