@@ -15,11 +15,13 @@
  */
 package com.google.j2cl.frontend;
 
+import com.google.j2cl.ast.FieldReference;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Visibility;
 
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.ITypeBinding;
+import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.Modifier;
 
 import java.util.Arrays;
@@ -58,6 +60,18 @@ public class JdtUtils {
     return TypeReference.create(packageComponents, nameComponents, compilationUnitSourceName);
   }
 
+  static FieldReference createFieldReference(IVariableBinding variableBinding) {
+    int modifiers = variableBinding.getModifiers();
+    boolean isStatic = isStatic(modifiers);
+    Visibility visibility = getVisibility(modifiers);
+    TypeReference enclosingClassReference =
+        createTypeReference(variableBinding.getDeclaringClass());
+    String fieldName = variableBinding.getName();
+    TypeReference type = createTypeReference(variableBinding.getType());
+    return FieldReference.create(
+        isStatic, visibility, enclosingClassReference, fieldName, type);
+  }
+
   static String getCompilationUnitSourceName(ITypeBinding typeBinding) {
     if (typeBinding == null) {
       return null;
@@ -85,6 +99,10 @@ public class JdtUtils {
 
   static boolean isFinal(int modifier) {
     return Modifier.isFinal(modifier);
+  }
+
+  static boolean isStatic(int modifier) {
+    return Modifier.isStatic(modifier);
   }
 
   private JdtUtils() {}

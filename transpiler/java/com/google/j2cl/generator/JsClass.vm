@@ -6,12 +6,12 @@
 #else
 #set ($extendsClause = "")
 #end
-#set ($className = ${TranspilerUtils.getClassName($classType.getTypeReference())})
-#set ($jsDocName = ${TranspilerUtils.getJsDocName($classType.getTypeReference())})
-#set ($mangledTypeName = ${TranspilerUtils.getMangledName($classType.getTypeReference())})
-#set ($simpleName = $classType.getTypeReference().getSimpleName())
-#set ($binaryName = $classType.getTypeReference().getBinaryName())
-#set ($sourceName = ${TranspilerUtils.getSourceName($classType.getTypeReference())})
+#set ($className = ${TranspilerUtils.getClassName($classType.getSelfReference())})
+#set ($jsDocName = ${TranspilerUtils.getJsDocName($classType.getSelfReference())})
+#set ($mangledTypeName = ${TranspilerUtils.getMangledName($classType.getSelfReference())})
+#set ($simpleName = $classType.getSelfReference().getSimpleName())
+#set ($binaryName = $classType.getSelfReference().getBinaryName())
+#set ($sourceName = ${TranspilerUtils.getSourceName($classType.getSelfReference())})
 class $className $extendsClause {
   /**
    * Defines instance fields.
@@ -20,9 +20,9 @@ class $className $extendsClause {
   constructor() {
     super();
 #foreach ($field in $classType.Fields)
-#set ($fieldVisibility = $field.Visibility)
-#set ($fieldType = ${TranspilerUtils.getJsDocName($field.Type)})
-#set ($fieldName = ${field.Name})
+#set ($fieldVisibility = $field.SelfReference.Visibility)
+#set ($fieldType = ${TranspilerUtils.getJsDocName($field.SelfReference.Type)})
+#set ($fieldName = ${field.SelfReference.FieldName})
     /**
      * @$fieldVisibility {?$fieldType}
      */
@@ -38,7 +38,7 @@ class $className $extendsClause {
   static $init(instance) {
 #foreach ($field in $classType.Fields)
 #if ($field.hasInitializer())
-    instance.f_${field.Name}__${mangledTypeName} = $field.Initializer;
+    instance.f_${field.SelfReference.FieldName}__${mangledTypeName} = $field.Initializer;
 #end
 #end
 #foreach($instanceInitializer in $classType.InstanceInitializers)

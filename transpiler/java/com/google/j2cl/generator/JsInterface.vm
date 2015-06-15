@@ -1,8 +1,8 @@
-#set ($interfaceName = ${TranspilerUtils.getClassName($classType.getTypeReference())})
-#set ($mangledName = ${TranspilerUtils.getMangledName($classType.getTypeReference())})
-#set ($simpleName = $classType.getTypeReference().getSimpleName())
-#set ($binaryName = $classType.getTypeReference().getBinaryName())
-#set ($sourceName = ${TranspilerUtils.getSourceName($classType.getTypeReference())})
+#set ($interfaceName = ${TranspilerUtils.getClassName($classType.getSelfReference())})
+#set ($mangledName = ${TranspilerUtils.getMangledName($classType.getSelfReference())})
+#set ($simpleName = $classType.getSelfReference().getSimpleName())
+#set ($binaryName = $classType.getSelfReference().getBinaryName())
+#set ($sourceName = ${TranspilerUtils.getSourceName($classType.getSelfReference())})
 class $interfaceName {
 #foreach($method in $classType.Methods)
   $method

@@ -37,7 +37,7 @@ public class JavaType extends Node {
   private Visibility visibility;
   private TypeReference superType;
   private List<TypeReference> superInterfaces = new ArrayList<>();
-  private TypeReference typeReference;
+  private TypeReference selfReference;
 
   @Visitable private List<Field> fields = new ArrayList<>();
 
@@ -57,10 +57,10 @@ public class JavaType extends Node {
    */
   @Visitable private List<Node> staticInitializers = new ArrayList<>();
 
-  public JavaType(Kind kind, Visibility visibility, TypeReference typeReference) {
+  public JavaType(Kind kind, Visibility visibility, TypeReference selfReference) {
     this.kind = kind;
     this.visibility = visibility;
-    this.typeReference = typeReference;
+    this.selfReference = selfReference;
   }
 
   public Kind getKind() {
@@ -127,11 +127,11 @@ public class JavaType extends Node {
     this.superInterfaces = superInterfaces;
   }
 
-  public TypeReference getTypeReference() {
-    return typeReference;
+  public TypeReference getSelfReference() {
+    return selfReference;
   }
 
-  public void setTypeReference(TypeReference typeReference) {
-    this.typeReference = typeReference;
+  public void setSelfReference(TypeReference selfReference) {
+    this.selfReference = selfReference;
   }
 }

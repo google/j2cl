@@ -16,37 +16,34 @@
 package com.google.j2cl.ast;
 
 /**
- * Field definition node.
+ * Field declaration node.
  */
-public class Field extends Variable {
-  private Visibility visibility;
-  private TypeReference declaringType;
+public class Field {
+  private FieldReference selfReference;
+  private Expression initializer;
 
-  public Field(
-      String name,
-      TypeReference type,
-      boolean isFinal,
-      Expression initializer,
-      Visibility visibility,
-      TypeReference declaringType) {
-    super(name, type, isFinal, initializer);
-    this.visibility = visibility;
-    this.declaringType = declaringType;
+  public Field(FieldReference selfReference, Expression initializer) {
+    this.selfReference = selfReference;
+    this.initializer = initializer;
   }
 
-  public Visibility getVisibility() {
-    return visibility;
+  public FieldReference getSelfReference() {
+    return selfReference;
   }
 
-  public void setVisibility(Visibility visibility) {
-    this.visibility = visibility;
+  public void setSelfReference(FieldReference selfReference) {
+    this.selfReference = selfReference;
   }
 
-  public TypeReference getDeclaringType() {
-    return declaringType;
+  public Expression getInitializer() {
+    return initializer;
   }
 
-  public void setDeclaringType(TypeReference declaringType) {
-    this.declaringType = declaringType;
+  public void setInitializer(Expression initializer) {
+    this.initializer = initializer;
+  }
+
+  public boolean hasInitializer() {
+    return this.initializer != null;
   }
 }

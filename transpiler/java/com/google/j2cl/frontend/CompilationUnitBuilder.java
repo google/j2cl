@@ -23,7 +23,6 @@ import com.google.j2cl.ast.JavaType.Kind;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeReference;
-import com.google.j2cl.ast.Visibility;
 
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
@@ -67,21 +66,11 @@ public class CompilationUnitBuilder {
 
     @Override
     public void endVisit(FieldDeclaration node) {
-      TypeReference type = JdtUtils.createTypeReference(node.getType().resolveBinding());
-      int modifiers = node.getModifiers();
-      boolean isFinal = JdtUtils.isFinal(modifiers);
-      Visibility visibility = JdtUtils.getVisibility(modifiers);
       for (Object object : node.fragments()) {
         VariableDeclarationFragment fragment = (VariableDeclarationFragment) object;
         Expression initializer = fragment.getInitializer() == null ? null : (Expression) pop();
         currentType.addField(
-            new Field(
-                fragment.getName().getIdentifier(),
-                type,
-                isFinal,
-                initializer,
-                visibility,
-                currentType.getTypeReference()));
+            new Field(JdtUtils.createFieldReference(fragment.resolveBinding()), initializer));
       }
     }
 
