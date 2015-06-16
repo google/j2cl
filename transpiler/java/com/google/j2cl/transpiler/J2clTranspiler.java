@@ -119,7 +119,7 @@ public class J2clTranspiler {
 
   private void normalizeUnits(@SuppressWarnings("unused") List<CompilationUnit> j2clUnits) {
     for (CompilationUnit j2clUnit : j2clUnits) {
-      ImportGatheringVisitor.run(j2clUnit);
+      ImportGatheringVisitor.gatherImports(j2clUnit);
     }
   }
 

@@ -107,10 +107,10 @@ public class CompilationUnitBuilder {
           new JavaType(
               typeBinding.isInterface() ? Kind.INTERFACE : Kind.CLASS,
               JdtUtils.getVisibility(typeBinding.getModifiers()),
-              JdtUtils.createTypeReference(typeBinding));
+              createTypeReference(typeBinding));
 
       ITypeBinding superclassBinding = typeBinding.getSuperclass();
-      TypeReference superType = JdtUtils.createTypeReference(superclassBinding);
+      TypeReference superType = createTypeReference(superclassBinding);
       type.setSuperType(superType);
       return type;
     }
@@ -132,6 +132,14 @@ public class CompilationUnitBuilder {
 
     jdtCompilationUnit.accept(builder);
     return j2clCompilationUnit;
+  }
+
+  private TypeReference createTypeReference(ITypeBinding typeBinding) {
+    if (typeBinding == null) {
+      return null;
+    }
+    TypeReference typeReference = JdtUtils.createTypeReference(typeBinding);
+    return typeReference;
   }
 
   private CompilationUnitBuilder() {}

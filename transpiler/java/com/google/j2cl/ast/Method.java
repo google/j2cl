@@ -21,9 +21,9 @@ import java.util.List;
 /**
  * Method declaration.
  */
-public class Method {
+public class Method extends Node {
   private final MethodReference selfReference;
-  private List<Variable> parameters = new ArrayList<>();
+  @Visitable List<Variable> parameters = new ArrayList<>();
   // TODO: implement concrete type for method body.
   private UnknownNode body;
 
@@ -51,5 +51,9 @@ public class Method {
 
   public void setBody(UnknownNode body) {
     this.body = body;
+  }
+
+  Method accept(Visitor visitor) {
+    return VisitorMethod.visit(visitor, this);
   }
 }

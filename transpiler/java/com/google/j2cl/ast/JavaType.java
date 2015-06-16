@@ -33,29 +33,29 @@ public class JavaType extends Node {
   }
 
   private Kind kind;
-  private TypeReference enclosingType;
   private Visibility visibility;
-  private TypeReference superType;
-  private List<TypeReference> superInterfaces = new ArrayList<>();
-  private TypeReference selfReference;
 
-  @Visitable private List<Field> fields = new ArrayList<>();
+  @Visitable TypeReference enclosingType;
 
-  @Visitable private List<Method> methods = new ArrayList<>();
+  @Visitable TypeReference superType;
+  @Visitable List<TypeReference> superInterfaces = new ArrayList<>();
+  @Visitable TypeReference selfReference;
+  @Visitable List<Field> fields = new ArrayList<>();
+  @Visitable List<Method> methods = new ArrayList<>();
 
   /**
    * instance initialization statements, including the initializations in instance field
    * declarations and in non-static initialization blocks.
    * TODO: to implement a concrete Node type for initializations.
    */
-  @Visitable private List<Node> instanceInitializers = new ArrayList<>();
+  @Visitable List<Node> instanceInitializers = new ArrayList<>();
 
   /**
    * static initialization statements, including the initializations in static field declarations
    * and in static initialization blocks.
    * TODO: to implement a concrete Node type for initializations.
    */
-  @Visitable private List<Node> staticInitializers = new ArrayList<>();
+  @Visitable List<Node> staticInitializers = new ArrayList<>();
 
   public JavaType(Kind kind, Visibility visibility, TypeReference selfReference) {
     this.kind = kind;
@@ -137,5 +137,9 @@ public class JavaType extends Node {
 
   public void setSelfReference(TypeReference selfReference) {
     this.selfReference = selfReference;
+  }
+
+  JavaType accept(Visitor visitor) {
+    return VisitorJavaType.visit(visitor, this);
   }
 }

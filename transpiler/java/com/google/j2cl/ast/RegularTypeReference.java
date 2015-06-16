@@ -18,6 +18,8 @@ package com.google.j2cl.ast;
 import com.google.auto.value.AutoValue;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Interner;
+import com.google.common.collect.Interners;
 import com.google.common.collect.Iterables;
 
 import java.util.Collections;
@@ -26,15 +28,16 @@ import java.util.Collections;
  * A (by name) reference to a class.
  */
 @AutoValue
-public abstract class RegularTypeReference implements TypeReference {
-  public static RegularTypeReference create(
+public abstract class RegularTypeReference extends TypeReference {
+  public static TypeReference create(
       Iterable<String> packageComponents,
       Iterable<String> classComponents,
       String compilationUnitSimpleName) {
-    return new AutoValue_RegularTypeReference(
-        ImmutableList.copyOf(packageComponents),
-        ImmutableList.copyOf(classComponents),
-        compilationUnitSimpleName);
+    return interner.intern(
+        new AutoValue_RegularTypeReference(
+            ImmutableList.copyOf(packageComponents),
+            ImmutableList.copyOf(classComponents),
+            compilationUnitSimpleName));
   }
 
   public abstract ImmutableList<String> getPackageComponents();
@@ -72,8 +75,8 @@ public abstract class RegularTypeReference implements TypeReference {
     return Joiner.on(".").join(getPackageComponents());
   }
 
-  public ArrayTypeReference getArray(int dimensions) {
-    return new AutoValue_ArrayTypeReference(dimensions, this);
+  public TypeReference getArray(int dimensions) {
+    return interner.intern(new AutoValue_ArrayTypeReference(dimensions, this));
   }
 
   @Override
@@ -90,4 +93,15 @@ public abstract class RegularTypeReference implements TypeReference {
   public TypeReference getLeafType() {
     return null;
   }
+
+  @Override
+  public int compareTo(TypeReference that) {
+    return this.getSourceName().compareTo(that.getSourceName());
+  }
+
+  TypeReference accept(Visitor visitor) {
+    return VisitorTypeReference.visit(visitor, this);
+  }
+
+  private static Interner<TypeReference> interner = Interners.newWeakInterner();
 }

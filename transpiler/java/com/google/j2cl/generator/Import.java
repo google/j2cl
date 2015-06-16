@@ -13,7 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast;
+package com.google.j2cl.generator;
+
+import com.google.j2cl.ast.Node;
+import com.google.j2cl.ast.TypeReference;
 
 /**
  * A Node class that represents the goog.require statement

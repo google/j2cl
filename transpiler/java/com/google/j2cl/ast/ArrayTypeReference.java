@@ -22,7 +22,8 @@ import com.google.common.base.Strings;
  * A (by name) reference to an Array type.
  */
 @AutoValue
-public abstract class ArrayTypeReference implements TypeReference {
+public abstract class ArrayTypeReference extends TypeReference {
+
   public abstract int getDimensions();
 
   public abstract TypeReference getLeafType();
@@ -57,11 +58,20 @@ public abstract class ArrayTypeReference implements TypeReference {
     return true;
   }
 
+  @Override
+  public int compareTo(TypeReference that) {
+    return this.getSourceName().compareTo(that.getSourceName());
+  }
+
   private String getSuffix() {
     return Strings.repeat("[]", getDimensions());
   }
 
   private String getPrefix() {
     return Strings.repeat("[", getDimensions());
+  }
+
+  TypeReference accept(Visitor visitor) {
+    return VisitorTypeReference.visit(visitor, this);
   }
 }

@@ -15,28 +15,43 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import com.google.common.collect.Sets;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Import;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.TypeReference;
+import com.google.j2cl.ast.Visitor;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Traverses a CompilationUnit and gathers imports for all its referenced types.
  */
 // TODO: turn into an actual Visitor once we have such a framework.
-public class ImportGatheringVisitor {
-  public static void run(CompilationUnit compilationUnit) {
-    compilationUnit.addImport(Import.IMPORT_CLASS);
-    compilationUnit.addImport(Import.IMPORT_BOOTSTRAP_UTIL);
+public class ImportGatheringVisitor extends Visitor {
+  private Set<TypeReference> typeReferences = new LinkedHashSet<>();
+  private Set<TypeReference> typeReferencesDefinedInCompilationUnit = new LinkedHashSet<>();
 
-    for (JavaType type : compilationUnit.getTypes()) {
-      TypeReference superTypeReference = type.getSuperType();
-      if (superTypeReference != null) {
-        compilationUnit.addImport(new Import(superTypeReference));
-      }
-      for (TypeReference superInterfaceReference : type.getSuperInterfaces()) {
-        compilationUnit.addImport(new Import(superInterfaceReference));
-      }
-    }
+  public static Set<TypeReference> gatherImports(CompilationUnit compilationUnit) {
+    return new ImportGatheringVisitor().doGatherImports(compilationUnit);
   }
+
+  @Override
+  public void exitTypeReference(TypeReference typeReference) {
+    typeReferences.add(typeReference);
+  }
+
+  @Override
+  public void exitJavaType(JavaType type) {
+    typeReferencesDefinedInCompilationUnit.add(type.getSelfReference());
+  }
+
+  private Set<TypeReference> doGatherImports(CompilationUnit compilationUnit) {
+    // Collect type references.
+    compilationUnit.accept(this);
+    return new TreeSet<>(Sets.difference(typeReferences, typeReferencesDefinedInCompilationUnit));
+  }
+
+  private ImportGatheringVisitor() {}
 }
