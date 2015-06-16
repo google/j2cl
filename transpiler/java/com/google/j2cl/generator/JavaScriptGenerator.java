@@ -17,7 +17,6 @@ package com.google.j2cl.generator;
 
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.errors.Errors;
-import com.google.j2cl.frontend.TypeMap;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -68,7 +67,6 @@ public class JavaScriptGenerator extends AbstractSourceGenerator {
     // TODO: to be implemented.
     context.put("compilationUnit", compilationUnit);
     context.put("TranspilerUtils", TranspilerUtils.class);
-    context.put("TypeMap", TypeMap.class);
 
     return context;
   }

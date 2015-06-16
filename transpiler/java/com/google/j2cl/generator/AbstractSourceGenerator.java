@@ -48,9 +48,7 @@ public abstract class AbstractSourceGenerator {
         errors.error(Errors.ERR_CANNOT_CREATE_DIRECTORY, outputDirectory.getAbsolutePath());
         errors.maybeReportAndExit();
       }
-      String source = toSource();
-      System.out.println("writing to file: " + outputFile.getAbsolutePath());
-      Files.write(source, outputFile, charset);
+      Files.write(toSource(), outputFile, charset);
     } catch (IOException e) {
       errors.error(e.getMessage());
     }

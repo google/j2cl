@@ -18,7 +18,9 @@ class $className $extendsClause {
    * @private
    */
   constructor() {
+#if ($superTypeReference)
     super();
+#end
 #foreach ($field in $classType.Fields)
 #set ($fieldVisibility = $field.SelfReference.Visibility)
 #set ($fieldType = ${TranspilerUtils.getJsDocName($field.SelfReference.Type)})
