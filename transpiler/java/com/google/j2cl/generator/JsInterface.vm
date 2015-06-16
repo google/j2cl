@@ -1,5 +1,5 @@
 #set ($interfaceName = ${TranspilerUtils.getClassName($classType.getSelfReference())})
-#set ($mangledName = ${TranspilerUtils.getMangledName($classType.getSelfReference())})
+#set ($mangledName = ${ManglingNameUtils.getMangledName($classType.getSelfReference())})
 #set ($simpleName = $classType.getSelfReference().getSimpleName())
 #set ($binaryName = $classType.getSelfReference().getBinaryName())
 #set ($sourceName = ${TranspilerUtils.getSourceName($classType.getSelfReference())})

@@ -16,8 +16,6 @@ integration_test(
     srcs = glob(["*.java"]),
 )
 """
-# TODO: call m_main_arrayOf_String() instead of testHelloWorld() when
-#       transpilation is more complete.
 
 load(
     "/third_party/java_src/j2cl/build_def/j2cl_java_library",
@@ -65,8 +63,7 @@ def integration_test(name, srcs):
   opt_harness = """
       goog.module('gen.opt.Harness');
       var Main = goog.require('gen.%s.MainModule').Main;
-      var main = new Main;
-      main.testHelloWorld();
+      Main.m_main__arrayOf_java_lang_String();
   """ % java_package
   native.genrule(
       name = "opt_harness_generator",
@@ -97,8 +94,7 @@ def integration_test(name, srcs):
       var Main = goog.require('gen.%s.MainModule').Main;
       testSuite({
         test_Main: function() {
-          var main = new Main;
-          main.testHelloWorld();
+          Main.m_main__arrayOf_java_lang_String();
         }
       });
   """ % java_package

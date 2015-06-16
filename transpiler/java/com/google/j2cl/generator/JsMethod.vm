@@ -1,0 +1,15 @@
+#if(${method.SelfReference.isStatic()})
+#set ($staticModifier = "static ")
+#else
+#set ($staticModifier = "")
+#end
+#set ($parameterList = $TranspilerUtils.getParameterList($method))
+  /**
+#foreach($parameter in $method.Parameters)
+#set ($parameterTypeName = $TranspilerUtils.getJsDocName($parameter.Type))
+   * @param {$parameterTypeName} $parameter.Name
+#end
+   * @${method.SelfReference.Visibility}
+   */
+  $staticModifier${ManglingNameUtils.getMangledName($method.SelfReference)}($parameterList) {
+  }

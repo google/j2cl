@@ -41,7 +41,7 @@ public class JavaType extends Node {
 
   @Visitable private List<Field> fields = new ArrayList<>();
 
-  @Visitable private List<Node> methods = new ArrayList<>();
+  @Visitable private List<Method> methods = new ArrayList<>();
 
   /**
    * instance initialization statements, including the initializations in instance field
@@ -83,8 +83,12 @@ public class JavaType extends Node {
     fields.add(field);
   }
 
-  public List<Node> getMethods() {
+  public List<Method> getMethods() {
     return methods;
+  }
+
+  public void addMethod(Method method) {
+    methods.add(method);
   }
 
   public Visibility getVisibility() {

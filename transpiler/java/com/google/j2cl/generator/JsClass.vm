@@ -1,14 +1,14 @@
 #set ($superTypeReference = $classType.superType)
 #if ($superTypeReference)
 #set ($superTypeName = ${TranspilerUtils.getClassName($superTypeReference)})
-#set ($superTypeMangledName = ${TranspilerUtils.getMangledName($superTypeReference)})
+#set ($superTypeMangledName = ${ManglingNameUtils.getMangledName($superTypeReference)})
 #set ($extendsClause = "extends " + $superTypeName)
 #else
 #set ($extendsClause = "")
 #end
 #set ($className = ${TranspilerUtils.getClassName($classType.getSelfReference())})
 #set ($jsDocName = ${TranspilerUtils.getJsDocName($classType.getSelfReference())})
-#set ($mangledTypeName = ${TranspilerUtils.getMangledName($classType.getSelfReference())})
+#set ($mangledTypeName = ${ManglingNameUtils.getMangledName($classType.getSelfReference())})
 #set ($simpleName = $classType.getSelfReference().getSimpleName())
 #set ($binaryName = $classType.getSelfReference().getBinaryName())
 #set ($sourceName = ${TranspilerUtils.getSourceName($classType.getSelfReference())})
@@ -53,7 +53,7 @@ class $className $extendsClause {
 #if($method.isConstructor())
 #set ($noConstructors = false)
 #end
-  $method
+#parse( "com/google/j2cl/generator/JsMethod.vm" )
 
 #end
 #if( $noConstructors )## default constructor
@@ -68,8 +68,6 @@ class $className $extendsClause {
     $className.$ctor__$mangledTypeName(instance);
     return instance;
   }
-
-  testHelloWorld() {}
 
   /**
    * Initializes instance fields for a particular Java constructor.

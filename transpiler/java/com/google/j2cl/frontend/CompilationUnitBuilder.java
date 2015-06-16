@@ -20,13 +20,18 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
+import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeReference;
+import com.google.j2cl.ast.UnknownNode;
+import com.google.j2cl.ast.Variable;
 
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
 import org.eclipse.jdt.core.dom.ITypeBinding;
+import org.eclipse.jdt.core.dom.MethodDeclaration;
+import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 
@@ -72,6 +77,21 @@ public class CompilationUnitBuilder {
         currentType.addField(
             new Field(JdtUtils.createFieldReference(fragment.resolveBinding()), initializer));
       }
+    }
+
+    @Override
+    public void endVisit(MethodDeclaration node) {
+      // TODO: resolve the method body.
+      List<Variable> parameters = new ArrayList<>();
+      for (Object element : node.parameters()) {
+        SingleVariableDeclaration parameter = (SingleVariableDeclaration) element;
+        parameters.add(JdtUtils.createVariable(parameter.resolveBinding()));
+      }
+      currentType.addMethod(
+          new Method(
+              JdtUtils.createMethodReference(node.resolveBinding()),
+              parameters,
+              new UnknownNode()));
     }
 
     @Override

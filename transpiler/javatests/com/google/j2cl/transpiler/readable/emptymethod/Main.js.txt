@@ -1,4 +1,4 @@
-goog.module('gen.com.google.j2cl.transpiler.readable.publicinstancefields.MainModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.emptymethod.MainModule');
 
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
@@ -8,36 +8,27 @@ var Util = goog.require('nativebootstrap.UtilModule').Util;
 
 /**
  * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/publicinstancefields/Main.java.
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/emptymethod/Main.java.
  */
 class Main extends Object {
   /**
    * Defines instance fields.
    * @private
    */
-  constructor() {
-    super();
-    /**
-     * @public {?number}
-     */
-    this.f_a__com_google_j2cl_transpiler_readable_publicinstancefields_Main =
-        null;
-    /**
-     * @public {?number}
-     */
-    this.f_b__com_google_j2cl_transpiler_readable_publicinstancefields_Main =
-        null;
-  }
+  constructor() { super(); }
 
   /**
    * Runs inline instance field initializers.
    * @param {Main} instance
    * @private
    */
-  static $init(instance) {
-    instance
-        .f_a__com_google_j2cl_transpiler_readable_publicinstancefields_Main = 1;
-  }
+  static $init(instance) {}
+
+  /**
+   * @param {Array<string>} args
+   * @public
+   */
+  static m_main__arrayOf_java_lang_String(args) {}
 
   /**
    * A particular Java constructor as a factory method.
@@ -47,8 +38,7 @@ class Main extends Object {
   static $create() {
     Main.$clinit();
     var instance = new Main;
-    Main.$ctor__com_google_j2cl_transpiler_readable_publicinstancefields_Main(
-        instance);
+    Main.$ctor__com_google_j2cl_transpiler_readable_emptymethod_Main(instance);
     return instance;
   }
 
@@ -57,8 +47,7 @@ class Main extends Object {
    * @param {Main} instance
    * @protected
    */
-  static $ctor__com_google_j2cl_transpiler_readable_publicinstancefields_Main(
-      instance) {
+  static $ctor__com_google_j2cl_transpiler_readable_emptymethod_Main(instance) {
     Object.$ctor__java_lang_Object(instance);
     Main.$init(instance);
   }
@@ -94,11 +83,9 @@ class Main extends Object {
  */
 Main.$class = Class.$createForClass(
     Util.$generateId('Main'),
-    Util.$generateId(
-        'com.google.j2cl.transpiler.readable.publicinstancefields.Main'),
+    Util.$generateId('com.google.j2cl.transpiler.readable.emptymethod.Main'),
     Object.$class,
-    Util.$generateId(
-        'com.google.j2cl.transpiler.readable.publicinstancefields.Main'));
+    Util.$generateId('com.google.j2cl.transpiler.readable.emptymethod.Main'));
 
 
 /**

@@ -15,51 +15,23 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.auto.value.AutoValue;
-import com.google.common.base.Joiner;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-
-import java.util.Collections;
-
 /**
- * A (by name) reference to a class.
+ * Interface for type reference.
  */
-@AutoValue
-public abstract class TypeReference {
-  public static TypeReference create(
-      Iterable<String> packageComponents,
-      Iterable<String> classComponents,
-      String compilationUnitSimpleName) {
-    return new AutoValue_TypeReference(
-        ImmutableList.copyOf(packageComponents),
-        ImmutableList.copyOf(classComponents),
-        compilationUnitSimpleName);
-  }
+public interface TypeReference {
+  String getSimpleName();
 
-  public abstract ImmutableList<String> getPackageComponents();
+  String getBinaryName();
 
-  public abstract ImmutableList<String> getClassComponents();
+  String getCompilationUnitSourceName();
 
-  public abstract String getCompilationSimpleName();
+  String getSourceName();
 
-  public String getSimpleName() {
-    return Iterables.getLast(getClassComponents());
-  }
+  String getPackageName();
 
-  public String getBinaryName() {
-    return Joiner.on(".")
-        .join(
-            Iterables.concat(
-                getPackageComponents(),
-                Collections.singleton(Joiner.on("$").join(getClassComponents()))));
-  }
+  boolean isArray();
 
-  public String getCompilationUnitSourceName() {
-    return Joiner.on(".").join(getPackageComponents()) + "." + getCompilationSimpleName();
-  }
+  int getDimensions();
 
-  public String getSourceName() {
-    return Joiner.on(".").join(Iterables.concat(getPackageComponents(), getClassComponents()));
-  }
+  TypeReference getLeafType();
 }

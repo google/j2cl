@@ -16,19 +16,19 @@
 package com.google.j2cl.ast;
 
 /**
- * Base class for any variable, including field, local variable, and parameter.
+ * Class for local variable and parameter.
  */
-public abstract class Variable extends Node {
-  protected String name;
-  protected TypeReference type;
-  protected boolean isFinal;
-  @Visitable protected Expression initializer;
+public class Variable extends Node {
+  private String name;
+  private TypeReference type;
+  private boolean isFinal;
+  private boolean isParameter;
 
-  public Variable(String name, TypeReference type, boolean isFinal, Expression initializer) {
+  public Variable(String name, TypeReference type, boolean isFinal, boolean isParameter) {
     this.name = name;
     this.type = type;
     this.isFinal = isFinal;
-    this.initializer = initializer;
+    this.isParameter = isParameter;
   }
 
   public String getName() {
@@ -43,12 +43,8 @@ public abstract class Variable extends Node {
     return isFinal;
   }
 
-  public Expression getInitializer() {
-    return initializer;
-  }
-
-  public boolean hasInitializer() {
-    return initializer != null;
+  public boolean isParameter() {
+    return isParameter;
   }
 
   public void setName(String name) {
@@ -63,7 +59,7 @@ public abstract class Variable extends Node {
     this.isFinal = isFinal;
   }
 
-  public void setInitializer(Expression initializer) {
-    this.initializer = initializer;
+  public void setParameter(boolean isParameter) {
+    this.isParameter = isParameter;
   }
 }

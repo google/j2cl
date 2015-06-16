@@ -16,10 +16,14 @@
 package com.google.j2cl.frontend;
 
 import com.google.j2cl.ast.FieldReference;
+import com.google.j2cl.ast.MethodReference;
+import com.google.j2cl.ast.RegularTypeReference;
 import com.google.j2cl.ast.TypeReference;
+import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 
 import org.eclipse.jdt.core.dom.CompilationUnit;
+import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.Modifier;
@@ -46,6 +50,13 @@ public class JdtUtils {
       return null;
     }
     List<String> nameComponents = new LinkedList<>();
+    List<String> packageComponents = new LinkedList<>();
+    if (typeBinding.isArray()) {
+      RegularTypeReference leafType =
+          (RegularTypeReference) createTypeReference(typeBinding.getElementType());
+      return leafType.getArray(typeBinding.getDimensions());
+    }
+
     ITypeBinding currentType = typeBinding;
     while (currentType != null) {
       nameComponents.add(0, currentType.getName());
@@ -53,11 +64,12 @@ public class JdtUtils {
     }
     String compilationUnitSourceName = getCompilationUnitSourceName(typeBinding);
 
-    List<String> packageComponents = new LinkedList<>();
     if (typeBinding.getPackage() != null) {
       packageComponents = Arrays.asList(typeBinding.getPackage().getNameComponents());
     }
-    return TypeReference.create(packageComponents, nameComponents, compilationUnitSourceName);
+
+    return RegularTypeReference.create(
+        packageComponents, nameComponents, compilationUnitSourceName);
   }
 
   static FieldReference createFieldReference(IVariableBinding variableBinding) {
@@ -68,8 +80,36 @@ public class JdtUtils {
         createTypeReference(variableBinding.getDeclaringClass());
     String fieldName = variableBinding.getName();
     TypeReference type = createTypeReference(variableBinding.getType());
-    return FieldReference.create(
-        isStatic, visibility, enclosingClassReference, fieldName, type);
+    return FieldReference.create(isStatic, visibility, enclosingClassReference, fieldName, type);
+  }
+
+  static MethodReference createMethodReference(IMethodBinding methodBinding) {
+    int modifiers = methodBinding.getModifiers();
+    boolean isStatic = isStatic(modifiers);
+    Visibility visibility = getVisibility(modifiers);
+    TypeReference enclosingClassReference = createTypeReference(methodBinding.getDeclaringClass());
+    String methodName = methodBinding.getName();
+    TypeReference returnTypeReference = createTypeReference(methodBinding.getReturnType());
+    int parameterSize = methodBinding.getParameterTypes().length;
+    TypeReference[] parameterTypeReferences = new TypeReference[parameterSize];
+    for (int i = 0; i < parameterSize; i++) {
+      parameterTypeReferences[i] = createTypeReference(methodBinding.getParameterTypes()[i]);
+    }
+    return MethodReference.create(
+        isStatic,
+        visibility,
+        enclosingClassReference,
+        methodName,
+        returnTypeReference,
+        parameterTypeReferences);
+  }
+
+  static Variable createVariable(IVariableBinding variableBinding) {
+    String name = variableBinding.getName();
+    TypeReference type = createTypeReference(variableBinding.getType());
+    boolean isFinal = isFinal(variableBinding.getModifiers());
+    boolean isParameter = variableBinding.isParameter();
+    return new Variable(name, type, isFinal, isParameter);
   }
 
   static String getCompilationUnitSourceName(ITypeBinding typeBinding) {

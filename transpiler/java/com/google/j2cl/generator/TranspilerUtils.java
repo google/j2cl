@@ -15,8 +15,16 @@
  */
 package com.google.j2cl.generator;
 
+import com.google.common.base.Function;
+import com.google.common.base.Joiner;
+import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.TypeReference;
+import com.google.j2cl.ast.Variable;
+
+import java.util.List;
 
 /**
  * Utility functions to transpile the j2cl AST.
@@ -43,22 +51,23 @@ public class TranspilerUtils {
    */
   public static String getJsDocName(TypeReference typeReference) {
     // TODO: Incomplete implementation.
+    if (typeReference.isArray()) {
+      return String.format(
+          "%s%s%s",
+          Strings.repeat("Array<", typeReference.getDimensions()),
+          getJsDocName(typeReference.getLeafType()),
+          Strings.repeat(">", typeReference.getDimensions()));
+    }
     switch (typeReference.getSourceName()) {
       case "int":
       case "double":
       case "float":
       case "short":
         return "number";
+      case "java.lang.String":
+        return "string";
     }
     return getClassName(typeReference);
-  }
-
-  /**
-   * Returns the mangled name.
-   */
-  public static String getMangledName(TypeReference typeReference) {
-    //TODO(rluble): Stub implementation.
-    return typeReference.getSourceName().replace('.', '_');
   }
 
   /**
@@ -68,6 +77,19 @@ public class TranspilerUtils {
     String unitName = compilationUnit.getName();
     String packageName = compilationUnit.getPackageName();
     return packageName.replace('.', '/') + "/" + unitName;
+  }
+
+  public static String getParameterList(Method method) {
+    List<String> parameterNameList =
+        Lists.transform(
+            method.getParameters(),
+            new Function<Variable, String>() {
+              @Override
+              public String apply(Variable variable) {
+                return variable.getName();
+              }
+            });
+    return Joiner.on(",").join(parameterNameList);
   }
 
   private TranspilerUtils() {}

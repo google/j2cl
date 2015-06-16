@@ -67,6 +67,7 @@ public class JavaScriptGenerator extends AbstractSourceGenerator {
     // TODO: to be implemented.
     context.put("compilationUnit", compilationUnit);
     context.put("TranspilerUtils", TranspilerUtils.class);
+    context.put("ManglingNameUtils", ManglingNameUtils.class);
 
     return context;
   }

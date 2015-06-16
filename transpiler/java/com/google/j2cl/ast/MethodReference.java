@@ -25,12 +25,14 @@ import com.google.common.collect.ImmutableList;
 public abstract class MethodReference {
   public static MethodReference create(
       boolean isStatic,
+      Visibility visibility,
       TypeReference enclosingClassReference,
       String methodName,
       TypeReference returnTypeReference,
       TypeReference... parameterTypeReferences) {
     return new AutoValue_MethodReference(
         isStatic,
+        visibility,
         enclosingClassReference,
         methodName,
         ImmutableList.copyOf(parameterTypeReferences),
@@ -38,6 +40,8 @@ public abstract class MethodReference {
   }
 
   public abstract boolean isStatic();
+
+  public abstract Visibility getVisibility();
 
   public abstract TypeReference getEnclosingClassReference();
 
