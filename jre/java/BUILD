@@ -15,6 +15,7 @@ j2cl_java_library(
     name = "JavaJre",
     srcs = glob(["**/*.java"]),
     add_jre_dep = False,
+    super_srcs = ["java/lang/Object.java"],
 )
 
 # Bundles together both hand-rolled JS versions of Java classes with transpiled

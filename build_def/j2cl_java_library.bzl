@@ -17,7 +17,7 @@ j2cl_java_library(
 
 load("/third_party/java_src/j2cl/build_def/j2cl_transpile", "j2cl_transpile")
 
-def j2cl_java_library(add_jre_dep=True, show_debug_cmd=False, **kwargs):
+def j2cl_java_library(add_jre_dep=True, show_debug_cmd=False, super_srcs=[], **kwargs):
   """A macro that emits j2cl_transpile, java_library and js_library rules.
 
   Most callers will implicitly depend on the JRE and so 'add_jre_dep' should
@@ -41,6 +41,9 @@ def j2cl_java_library(add_jre_dep=True, show_debug_cmd=False, **kwargs):
       else:
         java_deps += [dep]
         js_deps += [dep + "_js_library"]
+  if add_jre_dep:
+    java_deps += ["//jre/java:JavaJre"]
+    js_deps += ["//jre"]
 
   native.java_library(**kwargs)
 
@@ -50,12 +53,12 @@ def j2cl_java_library(add_jre_dep=True, show_debug_cmd=False, **kwargs):
       java_library = ":" + kwargs["name"],
       java_deps = java_deps,
       show_debug_cmd = show_debug_cmd,
+      super_srcs = super_srcs,
       testonly = testonly,
   )
 
   js_library_deps = js_deps
   if add_jre_dep:
-    js_library_deps += ["//jre"]
     js_library_deps += ["//transpiler:nativebootstrap"]
   native.js_library(
       name = kwargs["name"]  + "_js_library",

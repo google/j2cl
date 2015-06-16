@@ -30,6 +30,7 @@ load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_root")
 def _impl(ctx):
   """Implementation for j2cl_transpile"""
   java_files = ctx.files.srcs # java files that need to be compiled
+  super_java_files = ctx.files.super_srcs # java files whose js to ignore
   java_deps = ctx.files.java_deps
   java_deps_paths = []
   java_files_paths = []
@@ -48,12 +49,13 @@ def _impl(ctx):
     # the java file path is absolute therefore the javascript one is as well
     js_file_name = java_file.path[:-len("java")] + "js"
 
-    # make js file relative to the build package
-    base_js_file_name = js_file_name[len(package_name) + 1:]
+    if not java_file in super_java_files:
+      # make js file relative to the build package
+      base_js_file_name = js_file_name[len(package_name) + 1:]
+      # create new output file
+      js_file_artifact = ctx.new_file(base_js_file_name)
+      js_files += [js_file_artifact]
 
-    # create new output file
-    js_file_artifact = ctx.new_file(base_js_file_name)
-    js_files += [js_file_artifact]
     # cut off the base build package since this is included in the output dir
     # the compiler itself only outputs packages.
     js_files_paths += [js_file_artifact.path[len(java_root):]]
@@ -67,7 +69,8 @@ def _impl(ctx):
   ]
 
   if len(java_deps_paths) > 0:
-    compiler_args += ["-cp", ",".join(java_deps_paths)]
+    host_path_separator = ctx.configuration.host_path_separator
+    compiler_args += ["-cp", host_path_separator.join(java_deps_paths)]
 
   # The transpiler expects each java file path as a separate argument.
   compiler_args += java_files_paths
@@ -109,6 +112,9 @@ j2cl_transpile = rule(
             allow_files = FileType([".java"]),
         ),
         "show_debug_cmd": attr.bool(default = False),
+        "super_srcs": attr.label_list(
+            allow_files = FileType([".java"]),
+        ),
     },
     implementation = _impl,
 )
