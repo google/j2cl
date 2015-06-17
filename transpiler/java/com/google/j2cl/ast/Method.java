@@ -49,10 +49,15 @@ public class Method extends Node {
     parameters.add(parameter);
   }
 
+  public boolean isConstructor() {
+    return selfReference.isConstructor();
+  }
+
   public void setBody(UnknownNode body) {
     this.body = body;
   }
 
+  @Override
   Method accept(Visitor visitor) {
     return VisitorMethod.visit(visitor, this);
   }

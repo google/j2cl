@@ -47,15 +47,17 @@ class $className $extendsClause {
     $instanceInitializer
 #end
   }
-
 #set ($noConstructors = true)
 #foreach($method in $classType.Methods)
+
 #if($method.isConstructor())
 #set ($noConstructors = false)
-#end
+#parse( "com/google/j2cl/generator/JsConstructorMethods.vm" )
+#else
 #parse( "com/google/j2cl/generator/JsMethod.vm" )
-
 #end
+#end
+
 #if( $noConstructors )## default constructor
   /**
    * A particular Java constructor as a factory method.

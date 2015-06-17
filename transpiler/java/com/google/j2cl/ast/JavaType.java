@@ -36,7 +36,6 @@ public class JavaType extends Node {
   private Visibility visibility;
 
   @Visitable TypeReference enclosingType;
-
   @Visitable TypeReference superType;
   @Visitable List<TypeReference> superInterfaces = new ArrayList<>();
   @Visitable TypeReference selfReference;

@@ -111,6 +111,7 @@ public class JdtUtils {
     TypeReference enclosingClassReference =
         createTypeReference(methodBinding.getDeclaringClass(), compilationUnitNameLocator);
     String methodName = methodBinding.getName();
+    boolean isConstructor = methodBinding.isConstructor();
     TypeReference returnTypeReference =
         createTypeReference(methodBinding.getReturnType(), compilationUnitNameLocator);
     int parameterSize = methodBinding.getParameterTypes().length;
@@ -124,6 +125,7 @@ public class JdtUtils {
         visibility,
         enclosingClassReference,
         methodName,
+        isConstructor,
         returnTypeReference,
         parameterTypeReferences);
   }

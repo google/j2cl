@@ -1,0 +1,21 @@
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!$jsDocName}
+   * @${method.SelfReference.Visibility}
+   */
+  static $create() {
+    $className.$clinit();
+    var instance = new $className;
+    $className.$ctor__$mangledTypeName(instance);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {$jsDocName} instance
+   * @${method.SelfReference.Visibility}
+   */
+  static $ctor__$mangledTypeName(instance) {
+    $superTypeName.$ctor__$superTypeMangledName(instance);
+    $className.$init(instance);
+  }

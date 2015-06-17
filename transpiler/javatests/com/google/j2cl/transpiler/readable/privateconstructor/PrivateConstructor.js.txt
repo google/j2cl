@@ -1,0 +1,95 @@
+goog.module('gen.com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructorModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/privateconstructor/PrivateConstructor.java.
+ */
+class PrivateConstructor extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs inline instance field initializers.
+   * @param {PrivateConstructor} instance
+   * @private
+   */
+  static $init(instance) {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!PrivateConstructor}
+   * @private
+   */
+  static $create() {
+    PrivateConstructor.$clinit();
+    var instance = new PrivateConstructor;
+    PrivateConstructor
+        .$ctor__com_google_j2cl_transpiler_readable_privateconstructor_PrivateConstructor(
+            instance);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {PrivateConstructor} instance
+   * @private
+   */
+  static $ctor__com_google_j2cl_transpiler_readable_privateconstructor_PrivateConstructor(
+      instance) {
+    Object.$ctor__java_lang_Object(instance);
+    PrivateConstructor.$init(instance);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof PrivateConstructor;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, PrivateConstructor);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+PrivateConstructor.$class = Class.$createForClass(
+    Util.$generateId('PrivateConstructor'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor'));
+
+
+/**
+ * Exported class.
+ */
+exports.PrivateConstructor = PrivateConstructor;

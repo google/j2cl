@@ -28,6 +28,7 @@ public abstract class MethodReference {
       Visibility visibility,
       TypeReference enclosingClassReference,
       String methodName,
+      boolean isConstructor,
       TypeReference returnTypeReference,
       TypeReference... parameterTypeReferences) {
     return new AutoValue_MethodReference(
@@ -35,6 +36,7 @@ public abstract class MethodReference {
         visibility,
         enclosingClassReference,
         methodName,
+        isConstructor,
         ImmutableList.copyOf(parameterTypeReferences),
         returnTypeReference);
   }
@@ -46,6 +48,8 @@ public abstract class MethodReference {
   public abstract TypeReference getEnclosingClassReference();
 
   public abstract String getMethodName();
+
+  public abstract boolean isConstructor();
 
   public abstract ImmutableList<TypeReference> getParameterTypeReferences();
 

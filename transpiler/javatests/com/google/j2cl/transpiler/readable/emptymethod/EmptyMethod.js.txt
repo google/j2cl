@@ -1,4 +1,4 @@
-goog.module('gen.com.google.j2cl.transpiler.readable.emptymethod.MainModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.emptymethod.EmptyMethodModule');
 
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
@@ -8,9 +8,9 @@ var Util = goog.require('nativebootstrap.UtilModule').Util;
 
 /**
  * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/emptymethod/Main.java.
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/emptymethod/EmptyMethod.java.
  */
-class Main extends Object {
+class EmptyMethod extends Object {
   /**
    * Defines instance fields.
    * @private
@@ -19,7 +19,7 @@ class Main extends Object {
 
   /**
    * Runs inline instance field initializers.
-   * @param {Main} instance
+   * @param {EmptyMethod} instance
    * @private
    */
   static $init(instance) {}
@@ -32,24 +32,27 @@ class Main extends Object {
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!Main}
+   * @return {!EmptyMethod}
    * @public
    */
   static $create() {
-    Main.$clinit();
-    var instance = new Main;
-    Main.$ctor__com_google_j2cl_transpiler_readable_emptymethod_Main(instance);
+    EmptyMethod.$clinit();
+    var instance = new EmptyMethod;
+    EmptyMethod
+        .$ctor__com_google_j2cl_transpiler_readable_emptymethod_EmptyMethod(
+            instance);
     return instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {Main} instance
+   * @param {EmptyMethod} instance
    * @protected
    */
-  static $ctor__com_google_j2cl_transpiler_readable_emptymethod_Main(instance) {
+  static $ctor__com_google_j2cl_transpiler_readable_emptymethod_EmptyMethod(
+      instance) {
     Object.$ctor__java_lang_Object(instance);
-    Main.$init(instance);
+    EmptyMethod.$init(instance);
   }
 
   /**
@@ -57,7 +60,7 @@ class Main extends Object {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof Main; }
+  static $isInstance(instance) { return instance instanceof EmptyMethod; }
 
   /**
    * Returns whether the provided class is or extends this class.
@@ -66,7 +69,7 @@ class Main extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, Main);
+    return Util.$canCastClass(classConstructor, EmptyMethod);
   }
 
   /**
@@ -81,14 +84,16 @@ class Main extends Object {
 /**
  * @public {Class}
  */
-Main.$class = Class.$createForClass(
-    Util.$generateId('Main'),
-    Util.$generateId('com.google.j2cl.transpiler.readable.emptymethod.Main'),
+EmptyMethod.$class = Class.$createForClass(
+    Util.$generateId('EmptyMethod'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod'),
     Object.$class,
-    Util.$generateId('com.google.j2cl.transpiler.readable.emptymethod.Main'));
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod'));
 
 
 /**
  * Exported class.
  */
-exports.Main = Main;
+exports.EmptyMethod = EmptyMethod;
