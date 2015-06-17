@@ -26,6 +26,7 @@ import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.UnknownNode;
 import com.google.j2cl.ast.Variable;
+import com.google.j2cl.errors.Errors;
 
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
@@ -37,6 +38,8 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Creates a J2CL Java AST from the AST provided by JDT.
@@ -75,7 +78,10 @@ public class CompilationUnitBuilder {
         VariableDeclarationFragment fragment = (VariableDeclarationFragment) object;
         Expression initializer = fragment.getInitializer() == null ? null : (Expression) pop();
         currentType.addField(
-            new Field(JdtUtils.createFieldReference(fragment.resolveBinding()), initializer));
+            new Field(
+                JdtUtils.createFieldReference(
+                    fragment.resolveBinding(), compilationUnitNameLocator),
+                initializer));
       }
     }
 
@@ -85,11 +91,12 @@ public class CompilationUnitBuilder {
       List<Variable> parameters = new ArrayList<>();
       for (Object element : node.parameters()) {
         SingleVariableDeclaration parameter = (SingleVariableDeclaration) element;
-        parameters.add(JdtUtils.createVariable(parameter.resolveBinding()));
+        parameters.add(
+            JdtUtils.createVariable(parameter.resolveBinding(), compilationUnitNameLocator));
       }
       currentType.addMethod(
           new Method(
-              JdtUtils.createMethodReference(node.resolveBinding()),
+              JdtUtils.createMethodReference(node.resolveBinding(), compilationUnitNameLocator),
               parameters,
               new UnknownNode()));
     }
@@ -117,11 +124,7 @@ public class CompilationUnitBuilder {
   }
 
   private CompilationUnit j2clCompilationUnit;
-
-  public static CompilationUnit build(
-      String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
-    return new CompilationUnitBuilder().buildCompilationUnit(sourceFilePath, jdtCompilationUnit);
-  }
+  private CompilationUnitNameLocator compilationUnitNameLocator;
 
   private CompilationUnit buildCompilationUnit(
       String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
@@ -138,9 +141,29 @@ public class CompilationUnitBuilder {
     if (typeBinding == null) {
       return null;
     }
-    TypeReference typeReference = JdtUtils.createTypeReference(typeBinding);
+    TypeReference typeReference =
+        JdtUtils.createTypeReference(typeBinding, compilationUnitNameLocator);
     return typeReference;
   }
 
-  private CompilationUnitBuilder() {}
+  public static List<CompilationUnit> build(
+      Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath,
+      FrontendOptions options,
+      Errors errors) {
+    CompilationUnitBuilder compilationUnitBuilder =
+        new CompilationUnitBuilder(
+            new CompilationUnitNameLocator(jdtUnitsByFilePath, options, errors));
+
+    List<CompilationUnit> compilationUnits = new ArrayList<>();
+    for (Entry<String, org.eclipse.jdt.core.dom.CompilationUnit> entry :
+        jdtUnitsByFilePath.entrySet()) {
+      compilationUnits.add(
+          compilationUnitBuilder.buildCompilationUnit(entry.getKey(), entry.getValue()));
+    }
+    return compilationUnits;
+  }
+
+  private CompilationUnitBuilder(CompilationUnitNameLocator compilationUnitNameLocator) {
+    this.compilationUnitNameLocator = compilationUnitNameLocator;
+  }
 }

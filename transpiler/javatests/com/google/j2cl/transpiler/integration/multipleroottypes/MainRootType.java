@@ -13,28 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast;
+package com.google.j2cl.transpiler.integration.multipleroottypes;
 
 /**
- * Interface for type reference.
+ * Locating the compilation unit for the main top level type is easy.
  */
-public abstract class TypeReference extends Node implements Comparable<TypeReference> {
-  public abstract String getSimpleName();
+public class MainRootType {}
 
-  public abstract String getBinaryName();
-
-  public abstract String getCompilationUnitSourceName();
-
-  public abstract String getSourceName();
-
-  public abstract String getPackageName();
-
-  public abstract boolean isArray();
-
-  public abstract int getDimensions();
-
-  public abstract TypeReference getLeafType();
-
-  @Override
-  abstract TypeReference accept(Visitor visitor);
-}
+/**
+ * Locating the compilation unit for a non-main top level type is harder.
+ */
+class NonMainRootType {}

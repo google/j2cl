@@ -47,7 +47,7 @@ CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
     "--disambiguate_properties",
 ]
 
-def integration_test(name, srcs):
+def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
   """Macro that turns Java files into integration test targets."""
   # figure out the current location
   java_root_path = get_java_root(PACKAGE_NAME)
@@ -57,6 +57,8 @@ def integration_test(name, srcs):
   j2cl_java_library(
       name = name,
       srcs = srcs,
+      show_debug_cmd = show_debug_cmd,
+      deps = deps
   )
 
   # blaze build :optimized_js

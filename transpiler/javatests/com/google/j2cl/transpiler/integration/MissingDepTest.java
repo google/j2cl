@@ -13,28 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast;
+package com.google.j2cl.transpiler.integration;
+
+import java.io.IOException;
 
 /**
- * Interface for type reference.
+ * Tests that references to missing classes throw an error.
  */
-public abstract class TypeReference extends Node implements Comparable<TypeReference> {
-  public abstract String getSimpleName();
-
-  public abstract String getBinaryName();
-
-  public abstract String getCompilationUnitSourceName();
-
-  public abstract String getSourceName();
-
-  public abstract String getPackageName();
-
-  public abstract boolean isArray();
-
-  public abstract int getDimensions();
-
-  public abstract TypeReference getLeafType();
-
-  @Override
-  abstract TypeReference accept(Visitor visitor);
+public class MissingDepTest extends IntegrationTestCase {
+  public void testMissingDep() throws IOException, InterruptedException {
+    TranspileResult transpileResult = transpileDirectory("missingdep");
+    assertLogContainsSnippet(
+        transpileResult.errorLines, "cannot find CompilationUnit for type : java.lang.Object");
+  }
 }

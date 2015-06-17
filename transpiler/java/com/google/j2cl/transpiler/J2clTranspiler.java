@@ -27,10 +27,8 @@ import org.apache.velocity.app.VelocityEngine;
 
 import java.io.File;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  * Translation tool for generating JavaScript source files from Java sources.
@@ -56,16 +54,12 @@ public class J2clTranspiler {
     }
   }
 
-  private static List<CompilationUnit> convertUnits(
+  private List<CompilationUnit> convertUnits(
       Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath) {
-    List<CompilationUnit> j2clCompilationUnits = new ArrayList<>();
-    for (Entry<String, org.eclipse.jdt.core.dom.CompilationUnit> entry :
-        jdtUnitsByFilePath.entrySet()) {
-      CompilationUnit j2clCompilationUnit =
-          CompilationUnitBuilder.build(entry.getKey(), entry.getValue());
-      j2clCompilationUnits.add(j2clCompilationUnit);
-    }
-    return j2clCompilationUnits;
+    List<CompilationUnit> compilationUnits =
+        CompilationUnitBuilder.build(jdtUnitsByFilePath, options, errors);
+    maybeExitGracefully();
+    return compilationUnits;
   }
 
   private final String[] args;

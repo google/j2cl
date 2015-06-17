@@ -24,6 +24,8 @@ import com.google.common.collect.Iterables;
 
 import java.util.Collections;
 
+import javax.annotation.Nullable;
+
 /**
  * A (by name) reference to a class.
  */
@@ -44,7 +46,8 @@ public abstract class RegularTypeReference extends TypeReference {
 
   public abstract ImmutableList<String> getClassComponents();
 
-  public abstract String getCompilationSimpleName();
+  @Nullable
+  public abstract String getCompilationUnitSimpleName();
 
   @Override
   public String getSimpleName() {
@@ -62,7 +65,11 @@ public abstract class RegularTypeReference extends TypeReference {
 
   @Override
   public String getCompilationUnitSourceName() {
-    return Joiner.on(".").join(getPackageComponents()) + "." + getCompilationSimpleName();
+    if (getCompilationUnitSimpleName() == null) {
+      // Primitive type references don't have a compilation unit.
+      return null;
+    }
+    return Joiner.on(".").join(getPackageComponents()) + "." + getCompilationUnitSimpleName();
   }
 
   @Override

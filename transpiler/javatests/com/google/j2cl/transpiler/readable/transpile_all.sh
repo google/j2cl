@@ -21,12 +21,14 @@
 java_dir="third_party/java_src/j2cl/transpiler/javatests"
 examples_dir="$java_dir/com/google/j2cl/transpiler/readable/"
 transpiler_bin="blaze-bin/third_party/java_src/j2cl/j2cl"
+jre_jar="blaze-bin/third_party/java_src/j2cl/jre/java/libJavaJre.jar"
 
 # Show commands as they occur
 set -x
 
 # Build the transpiler
 blaze build third_party/java_src/j2cl:j2cl
+blaze build //third_party/java_src/j2cl/jre/java:JavaJre
 
 # Transpile each example
 for example_dir in $examples_dir*/ ; do
@@ -36,7 +38,7 @@ for example_dir in $examples_dir*/ ; do
     example_files="$example_files$java_file "
   done
   # Transpile them
-  $transpiler_bin -d $java_dir $example_files
+  $transpiler_bin -d $java_dir -cp $jre_jar $example_files
 done
 
 # Format all JS and rename to .js.txt to avoid the linter

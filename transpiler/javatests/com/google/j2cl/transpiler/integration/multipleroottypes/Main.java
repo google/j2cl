@@ -13,28 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast;
+package com.google.j2cl.transpiler.integration.multipleroottypes;
 
 /**
- * Interface for type reference.
+ * A class in the same package that refers to NonMainRootType.
+ * <p>
+ * The existence of this reference should cause an import for compilation unit *MainRootType*.
  */
-public abstract class TypeReference extends Node implements Comparable<TypeReference> {
-  public abstract String getSimpleName();
-
-  public abstract String getBinaryName();
-
-  public abstract String getCompilationUnitSourceName();
-
-  public abstract String getSourceName();
-
-  public abstract String getPackageName();
-
-  public abstract boolean isArray();
-
-  public abstract int getDimensions();
-
-  public abstract TypeReference getLeafType();
-
-  @Override
-  abstract TypeReference accept(Visitor visitor);
+public class Main extends NonMainRootType {
+  public static void main(String... args) {
+    @SuppressWarnings("unused")
+    // If the type is not imported properly or is not imported at all then Closure compilation will
+    // fail, causing the test definition to fail.
+    NonMainRootType nonMainRootType = new NonMainRootType();
+  }
 }

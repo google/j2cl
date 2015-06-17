@@ -37,6 +37,13 @@ java_test(
 )
 
 java_test(
+    name = "MissingDepTest",
+    srcs = ["MissingDepTest.java"],
+    data = glob(["missingdep/**/*"]),
+    deps = [":IntegrationTestCase"],
+)
+
+java_test(
     name = "ValidOptionsTest",
     srcs = ["ValidOptionsTest.java"],
     data = glob(["validoptions/**/*"]),

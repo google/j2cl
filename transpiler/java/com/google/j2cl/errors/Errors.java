@@ -31,6 +31,7 @@ public class Errors {
   public static final String ERR_CANNOT_CREATE_DIRECTORY = "cannot create directory";
   public static final String ERR_CANNOT_GENERATE_OUTPUT =
       "cannot generate output, please see Velocity runtime log";
+  public static final String ERR_CANNOT_FIND_UNIT = "cannot find CompilationUnit for type ";
 
   private int errorCount = 0;
   private List<String> errorMessages = new ArrayList<>();

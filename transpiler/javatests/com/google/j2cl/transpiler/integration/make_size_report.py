@@ -148,7 +148,13 @@ def process_cl(cl):
 
     optimized_size_change_count = 0
     for (test_name, js_file) in get_js_files_by_test_name():
-      optimized_size = os.path.getsize(MANAGED_GOOGLE3_PATH + "/" + js_file)
+      absolute_js_file_path = MANAGED_GOOGLE3_PATH + "/" + js_file
+      if not os.path.isfile(absolute_js_file_path):
+        # This test does not exist in the managed repo at the CL at which
+        # it is synced. Skip it
+        continue
+
+      optimized_size = os.path.getsize(absolute_js_file_path)
       optimized_size_log_path = (
           "%s/%s_optimized_size.dat" % (DATA_DIR_PATH, test_name))
 

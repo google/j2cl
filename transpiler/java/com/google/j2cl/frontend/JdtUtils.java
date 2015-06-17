@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.frontend;
 
+import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.FieldReference;
 import com.google.j2cl.ast.MethodReference;
 import com.google.j2cl.ast.RegularTypeReference;
@@ -27,6 +28,8 @@ import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.Modifier;
+import org.eclipse.jdt.internal.compiler.batch.FileSystem;
+import org.eclipse.jdt.internal.compiler.env.INameEnvironment;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -45,7 +48,23 @@ public class JdtUtils {
         : compilationUnit.getPackage().getName().getFullyQualifiedName();
   }
 
-  static TypeReference createTypeReference(ITypeBinding typeBinding) {
+  /**
+   * Creates and returns a JDT name environment for finding class files by name.
+   * <p>
+   * Sadly this work is redundant with work already done by the JDT parser, but it's not possible to
+   * grab the parser's internal name environment instance.
+   */
+  static INameEnvironment createNameEnvironment(FrontendOptions options) {
+    INameEnvironment nameEnvironment =
+        new FileSystem(
+            Iterables.toArray(options.getClasspathEntries(), String.class),
+            null,
+            options.getEncoding());
+    return nameEnvironment;
+  }
+
+  static TypeReference createTypeReference(
+      ITypeBinding typeBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
     if (typeBinding == null) {
       return null;
     }
@@ -53,7 +72,8 @@ public class JdtUtils {
     List<String> packageComponents = new LinkedList<>();
     if (typeBinding.isArray()) {
       RegularTypeReference leafType =
-          (RegularTypeReference) createTypeReference(typeBinding.getElementType());
+          (RegularTypeReference)
+              createTypeReference(typeBinding.getElementType(), compilationUnitNameLocator);
       return leafType.getArray(typeBinding.getDimensions());
     }
 
@@ -62,38 +82,42 @@ public class JdtUtils {
       nameComponents.add(0, currentType.getName());
       currentType = currentType.getDeclaringClass();
     }
-    String compilationUnitSourceName = getCompilationUnitSourceName(typeBinding);
 
     if (typeBinding.getPackage() != null) {
       packageComponents = Arrays.asList(typeBinding.getPackage().getNameComponents());
     }
 
     return RegularTypeReference.create(
-        packageComponents, nameComponents, compilationUnitSourceName);
+        packageComponents, nameComponents, compilationUnitNameLocator.find(typeBinding));
   }
 
-  static FieldReference createFieldReference(IVariableBinding variableBinding) {
+  static FieldReference createFieldReference(
+      IVariableBinding variableBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
     int modifiers = variableBinding.getModifiers();
     boolean isStatic = isStatic(modifiers);
     Visibility visibility = getVisibility(modifiers);
     TypeReference enclosingClassReference =
-        createTypeReference(variableBinding.getDeclaringClass());
+        createTypeReference(variableBinding.getDeclaringClass(), compilationUnitNameLocator);
     String fieldName = variableBinding.getName();
-    TypeReference type = createTypeReference(variableBinding.getType());
+    TypeReference type = createTypeReference(variableBinding.getType(), compilationUnitNameLocator);
     return FieldReference.create(isStatic, visibility, enclosingClassReference, fieldName, type);
   }
 
-  static MethodReference createMethodReference(IMethodBinding methodBinding) {
+  static MethodReference createMethodReference(
+      IMethodBinding methodBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
     int modifiers = methodBinding.getModifiers();
     boolean isStatic = isStatic(modifiers);
     Visibility visibility = getVisibility(modifiers);
-    TypeReference enclosingClassReference = createTypeReference(methodBinding.getDeclaringClass());
+    TypeReference enclosingClassReference =
+        createTypeReference(methodBinding.getDeclaringClass(), compilationUnitNameLocator);
     String methodName = methodBinding.getName();
-    TypeReference returnTypeReference = createTypeReference(methodBinding.getReturnType());
+    TypeReference returnTypeReference =
+        createTypeReference(methodBinding.getReturnType(), compilationUnitNameLocator);
     int parameterSize = methodBinding.getParameterTypes().length;
     TypeReference[] parameterTypeReferences = new TypeReference[parameterSize];
     for (int i = 0; i < parameterSize; i++) {
-      parameterTypeReferences[i] = createTypeReference(methodBinding.getParameterTypes()[i]);
+      parameterTypeReferences[i] =
+          createTypeReference(methodBinding.getParameterTypes()[i], compilationUnitNameLocator);
     }
     return MethodReference.create(
         isStatic,
@@ -104,25 +128,13 @@ public class JdtUtils {
         parameterTypeReferences);
   }
 
-  static Variable createVariable(IVariableBinding variableBinding) {
+  static Variable createVariable(
+      IVariableBinding variableBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
     String name = variableBinding.getName();
-    TypeReference type = createTypeReference(variableBinding.getType());
+    TypeReference type = createTypeReference(variableBinding.getType(), compilationUnitNameLocator);
     boolean isFinal = isFinal(variableBinding.getModifiers());
     boolean isParameter = variableBinding.isParameter();
     return new Variable(name, type, isFinal, isParameter);
-  }
-
-  static String getCompilationUnitSourceName(ITypeBinding typeBinding) {
-    if (typeBinding == null) {
-      return null;
-    }
-
-    // TODO: handle non-main root types.
-    if (typeBinding.isMember()) {
-      return getCompilationUnitSourceName(typeBinding.getDeclaringClass());
-    } else {
-      return typeBinding.getName();
-    }
   }
 
   static Visibility getVisibility(int modifier) {

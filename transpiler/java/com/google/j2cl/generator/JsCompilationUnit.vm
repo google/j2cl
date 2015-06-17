@@ -38,7 +38,7 @@ var $importName = goog.require('${requiredModule.getModuleName()}').$importName;
 ##
 ##
 #foreach($classType in $compilationUnit.Types)
-#if(${classType.getVisibility().isPublic()})##
+#if(! ${classType.getVisibility().isPrivate()})##
 #set ($className = ${TranspilerUtils.getClassName($classType.getSelfReference())})
 
 
