@@ -1,0 +1,10 @@
+Contained here are J2CL AST visitors.
+
+They should be for normalization and structural/interdependent AST changes and
+not for simple data gathering (simple data gathering should be generator
+package visitors that are run as part of template context construction).
+
+As a rule of thumb (when modifying AST) don't copy information, always
+reference. For example don't synthesize Import nodes from TypeReference data
+because doing so creates the opportunity for data desynchronization if
+TypeReference content is updated.
