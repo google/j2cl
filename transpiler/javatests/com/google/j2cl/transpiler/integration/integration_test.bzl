@@ -84,6 +84,7 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
           "--remove_unused_local_vars=ON",
           "--remove_unused_vars",
       ],
+      compiler = "//javascript/tools/jscompiler:head",
       externs_list = ["//javascript/externs:common"],
       deps = [":" + name + "_js_library"],
   )
@@ -121,6 +122,7 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
           "--strict",
           "--variable_renaming=OFF",
       ],
+      compiler = "//javascript/tools/jscompiler:head",
       externs_list = ["//javascript/externs:common"],
       deps = [
           ":" + name + "_js_library",

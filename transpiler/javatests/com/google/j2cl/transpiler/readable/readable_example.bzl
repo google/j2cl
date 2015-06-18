@@ -60,6 +60,7 @@ def readable_example(name, srcs):
           "--remove_unused_local_vars=ON",
           "--remove_dead_assignments",
       ],
+      compiler = "//javascript/tools/jscompiler:head",
       externs_list = ["//javascript/externs:common"],
       deps = [":" + name + "_js_library"],
   )
