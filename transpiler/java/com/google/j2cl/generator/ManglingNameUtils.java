@@ -61,10 +61,16 @@ public class ManglingNameUtils {
         suffix = "";
         break;
     }
-    String parameterSignature = Joiner.on("_").join(getMangledParameterTypes(methodReference));
-    return String.format("m_%s__%s%s", methodReference.getMethodName(), parameterSignature, suffix);
+    String parameterSignature = getMangledParameterSignature(methodReference);
+    return String.format("m_%s%s%s", methodReference.getMethodName(), parameterSignature, suffix);
   }
 
+  public static String getMangledParameterSignature(MethodReference methodReference) {
+    if (methodReference.getParameterTypeReferences().isEmpty()) {
+      return "";
+    }
+    return "__" + Joiner.on("_").join(getMangledParameterTypes(methodReference));
+  }
   /**
    * Returns the list of mangled name of parameters' types.
    */

@@ -20,14 +20,19 @@ import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
 import com.google.j2cl.ast.Method;
+import com.google.j2cl.ast.MethodReference;
+import com.google.j2cl.ast.MultipleStatements;
+import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
+import com.google.j2cl.ast.VariableDeclaration;
 import com.google.j2cl.errors.Errors;
 
 import org.eclipse.jdt.core.dom.ASTNode;
@@ -119,12 +124,26 @@ public class CompilationUnitBuilder {
           convert(node.getBody()));
     }
 
+    public NewInstance convert(org.eclipse.jdt.core.dom.ClassInstanceCreation node) {
+      Expression qualifier = node.getExpression() == null ? null : convert(node.getExpression());
+      MethodReference constructor =
+          JdtUtils.createMethodReference(
+              node.resolveConstructorBinding(), compilationUnitNameLocator);
+      List<Expression> arguments = new ArrayList<>();
+      for (Object argument : node.arguments()) {
+        arguments.add(convert((org.eclipse.jdt.core.dom.Expression) argument));
+      }
+      return new NewInstance(qualifier, constructor, arguments);
+    }
+
     public Expression convert(org.eclipse.jdt.core.dom.Expression node) {
       switch (node.getNodeType()) {
-        case ASTNode.NUMBER_LITERAL:
-          return convert((org.eclipse.jdt.core.dom.NumberLiteral) node);
+        case ASTNode.CLASS_INSTANCE_CREATION:
+          return convert((org.eclipse.jdt.core.dom.ClassInstanceCreation) node);
         case ASTNode.INFIX_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.InfixExpression) node);
+        case ASTNode.NUMBER_LITERAL:
+          return convert((org.eclipse.jdt.core.dom.NumberLiteral) node);
         default:
           throw new RuntimeException(
               "Need to implement translation for expression type: " + node.getClass().getName());
@@ -135,18 +154,14 @@ public class CompilationUnitBuilder {
       switch (node.getNodeType()) {
         case ASTNode.ASSERT_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.AssertStatement) node);
-        case ASTNode.VARIABLE_DECLARATION_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.VariableDeclarationStatement) node);
         case ASTNode.EXPRESSION_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.ExpressionStatement) node);
+        case ASTNode.VARIABLE_DECLARATION_STATEMENT:
+          return convert((org.eclipse.jdt.core.dom.VariableDeclarationStatement) node);
         default:
           throw new RuntimeException(
               "Need to implement translation for statement type: " + node.getClass().getName());
       }
-    }
-
-    public NumberLiteral convert(org.eclipse.jdt.core.dom.NumberLiteral node) {
-      return new NumberLiteral(node.getToken());
     }
 
     public AssertStatement convert(org.eclipse.jdt.core.dom.AssertStatement node) {
@@ -164,6 +179,10 @@ public class CompilationUnitBuilder {
       return new Block(body);
     }
 
+    public Statement convert(org.eclipse.jdt.core.dom.ExpressionStatement node) {
+      return new ExpressionStatement(convert(node.getExpression()));
+    }
+
     public BinaryExpression convert(org.eclipse.jdt.core.dom.InfixExpression node) {
       Expression leftOperand = convert(node.getLeftOperand());
       Expression rightOperand = convert(node.getRightOperand());
@@ -171,14 +190,26 @@ public class CompilationUnitBuilder {
           leftOperand, JdtUtils.getBinaryOperator(node.getOperator()), rightOperand);
     }
 
-    public Statement convert(org.eclipse.jdt.core.dom.VariableDeclarationStatement node) {
-      //TODO: dummy implementation to make the existing integration tests pass.
-      return new Statement();
+    public NumberLiteral convert(org.eclipse.jdt.core.dom.NumberLiteral node) {
+      return new NumberLiteral(node.getToken());
     }
 
-    public Statement convert(org.eclipse.jdt.core.dom.ExpressionStatement node) {
-      //TODO: dummy implementation to make the existing integration tests pass.
-      return new Statement();
+    public VariableDeclaration convert(org.eclipse.jdt.core.dom.VariableDeclarationFragment node) {
+      Variable variable =
+          JdtUtils.createVariable(node.resolveBinding(), compilationUnitNameLocator);
+      Expression initializer =
+          node.getInitializer() == null ? null : convert(node.getInitializer());
+      return new VariableDeclaration(variable, initializer);
+    }
+
+    public Statement convert(org.eclipse.jdt.core.dom.VariableDeclarationStatement node) {
+      List<Statement> variableDeclarations = new ArrayList<>();
+      for (Object object : node.fragments()) {
+        org.eclipse.jdt.core.dom.VariableDeclarationFragment fragment =
+            (org.eclipse.jdt.core.dom.VariableDeclarationFragment) object;
+        variableDeclarations.add(convert(fragment));
+      }
+      return new MultipleStatements(variableDeclarations);
     }
 
     private JavaType createJavaType(ITypeBinding typeBinding) {

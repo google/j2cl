@@ -15,11 +15,21 @@
  */
 package com.google.j2cl.ast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * A base class for Statement.
+ * Class for multiple statements. This is now used for translating multiple
+ * variable declaration fragments.
  */
-public abstract class Statement extends Node {
-  public Statement accept(Visitor visitor) {
-    return VisitorStatement.visit(visitor, this);
+public class MultipleStatements extends Statement {
+  private List<Statement> statements = new ArrayList<>();
+
+  public MultipleStatements(List<Statement> statements) {
+    this.statements.addAll(statements);
+  }
+
+  public List<Statement> getStatements() {
+    return statements;
   }
 }

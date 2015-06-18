@@ -12,7 +12,10 @@
    * @${method.SelfReference.Visibility}
    */
   $staticModifier${ManglingNameUtils.getMangledName($method.SelfReference)}($parameterList) {
+#if (${method.SelfReference.isStatic()})
+    $className.$clinit();
+#end
 #foreach ($stmt in ${method.Body.Statements})
-    $stmt
+    $StatementSourceGenerator.toSource($stmt)
 #end
   }

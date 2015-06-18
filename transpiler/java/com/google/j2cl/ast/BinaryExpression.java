@@ -53,10 +53,4 @@ public class BinaryExpression extends Expression {
   public void setRightOperand(Expression rightOperand) {
     this.rightOperand = rightOperand;
   }
-
-  @Override
-  public String toString() {
-    return String.format(
-        "%s %s %s", leftOperand.toString(), operator.toString(), rightOperand.toString());
-  }
 }

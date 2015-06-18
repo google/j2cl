@@ -16,10 +16,20 @@
 package com.google.j2cl.ast;
 
 /**
- * A base class for Statement.
+ * Class for expression statement;
  */
-public abstract class Statement extends Node {
-  public Statement accept(Visitor visitor) {
-    return VisitorStatement.visit(visitor, this);
+public class ExpressionStatement extends Statement {
+  private Expression expression;
+
+  public ExpressionStatement(Expression expression) {
+    this.expression = expression;
+  }
+
+  public Expression getExpression() {
+    return expression;
+  }
+
+  public void setExpression(Expression expression) {
+    this.expression = expression;
   }
 }

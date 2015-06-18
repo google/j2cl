@@ -16,10 +16,30 @@
 package com.google.j2cl.ast;
 
 /**
- * A base class for Statement.
+ * Class for variable declaration.
  */
-public abstract class Statement extends Node {
-  public Statement accept(Visitor visitor) {
-    return VisitorStatement.visit(visitor, this);
+public class VariableDeclaration extends Statement {
+  private Variable variable;
+  private Expression initializer;
+
+  public VariableDeclaration(Variable variable, Expression initializer) {
+    this.variable = variable;
+    this.initializer = initializer;
+  }
+
+  public Variable getVariable() {
+    return variable;
+  }
+
+  public Expression getInitializer() {
+    return initializer;
+  }
+
+  public void setVariable(Variable variable) {
+    this.variable = variable;
+  }
+
+  public void setInitializer(Expression initializer) {
+    this.initializer = initializer;
   }
 }

@@ -43,18 +43,6 @@ public class AssertStatement extends Statement {
     this.message = message;
   }
 
-  @Override
-  public String toString() {
-    if (message == null) {
-      return String.format("Asserts.$enabled() && Asserts.$assert(%s);", expression.toString());
-    } else {
-      return String.format(
-          "Asserts.$enabled() && Asserts.$assertWithMessage(%s, %s);",
-          expression.toString(),
-          message.toString());
-    }
-  }
-
   public AssertStatement accept(Visitor visitor) {
     return VisitorAssertStatement.visit(visitor, this);
   }
