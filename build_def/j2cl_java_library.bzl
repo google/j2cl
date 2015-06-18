@@ -59,7 +59,10 @@ def j2cl_java_library(add_jre_dep=True, show_debug_cmd=False, super_srcs=[], **k
 
   js_library_deps = js_deps
   if add_jre_dep:
-    js_library_deps += ["//transpiler:nativebootstrap"]
+    js_library_deps += [
+        "//transpiler:nativebootstrap",
+        "//transpiler:vmbootstrap",
+    ]
   native.js_library(
       name = kwargs["name"]  + "_js_library",
       srcs = [":" + kwargs["name"]  + "_j2cl_transpile",],

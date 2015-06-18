@@ -1,0 +1,16 @@
+VMBootstrap is the collection of native JS logic that needs to be
+available to transpiled output but that is not part of the JRE but
+references to the JRE.
+
+For example the implementation of the Java "assert" keyword is not
+JRE logic so it is implemented in a separate location, but it does
+throw the JRE's AssertionError class and so must have access to
+the JRE's classes.
+
+So, conceptually it is the third layer of JS because it depends
+upon JRE, which is the second layer.
+
+Build integration that synthesizes js_library rules from java_library
+rules should synthesize a dependency on VMBootstrap so that an
+implementation is available for the VMBootstrap functions that are
+called in the transpiled JS.

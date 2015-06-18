@@ -15,11 +15,12 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodReference;
-import com.google.j2cl.ast.UnknownNode;
+import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.Visitor;
@@ -66,7 +67,7 @@ public class CreateDefaultConstructorsVisitor extends Visitor {
             type.getSelfReference().getSimpleName(),
             true,
             type.getSelfReference());
-    UnknownNode body = new UnknownNode();
+    Block body = new Block(new ArrayList<Statement>());
     List<Variable> parameters = new ArrayList<>();
     Method defaultConstructor = new Method(methodReference, parameters, body);
     type.addMethod(defaultConstructor);

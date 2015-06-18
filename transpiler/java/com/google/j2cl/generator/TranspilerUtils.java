@@ -18,19 +18,17 @@ package com.google.j2cl.generator;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
-import com.google.j2cl.ast.visitors.ImportGatheringVisitor;
+import com.google.j2cl.generator.visitors.Import;
+import com.google.j2cl.generator.visitors.ImportGatheringVisitor;
 
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-
-import javax.annotation.Nullable;
 
 /**
  * Utility functions to transpile the j2cl AST.
@@ -93,21 +91,10 @@ public class TranspilerUtils {
    * Returns the relative output path for a given compilation unit.
    */
   public static Set<Import> getImports(CompilationUnit compilationUnit) {
-
     Set<Import> imports = new TreeSet<>();
     imports.add(IMPORT_CLASS);
     imports.add(IMPORT_BOOTSTRAP_UTIL);
-    imports.addAll(
-        FluentIterable.from(ImportGatheringVisitor.gatherImports(compilationUnit))
-            .transform(
-                new Function<TypeReference, Import>() {
-                  @Nullable
-                  @Override
-                  public Import apply(TypeReference typeReference) {
-                    return new Import(typeReference);
-                  }
-                })
-            .toList());
+    imports.addAll(ImportGatheringVisitor.gatherImports(compilationUnit));
     return imports;
   }
 

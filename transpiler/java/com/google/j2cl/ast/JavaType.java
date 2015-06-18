@@ -82,6 +82,10 @@ public class JavaType extends Node {
     fields.add(field);
   }
 
+  public void addFields(List<Field> fields) {
+    this.fields.addAll(fields);
+  }
+
   public List<Method> getMethods() {
     return methods;
   }

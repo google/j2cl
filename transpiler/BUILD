@@ -16,3 +16,8 @@ js_library(
     name = "nativebootstrap",
     deps = ["//transpiler/nativebootstrap"],
 )
+
+js_library(
+    name = "vmbootstrap",
+    deps = ["//transpiler/vmbootstrap"],
+)

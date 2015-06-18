@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.generator;
+package com.google.j2cl.generator.visitors;
 
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeReference;
@@ -27,6 +27,7 @@ public class Import extends Node implements Comparable<Import> {
   public static final Import IMPORT_CLASS = new Import("Class", "gen.java.lang.ClassModule");
   public static final Import IMPORT_BOOTSTRAP_UTIL =
       new Import("Util", "nativebootstrap.UtilModule");
+  public static final Import IMPORT_ASSERTS = new Import("Asserts", "vmbootstrap.AssertsModule");
 
   private String className;
   private String moduleName;

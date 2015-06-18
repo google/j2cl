@@ -16,6 +16,7 @@
 package com.google.j2cl.frontend;
 
 import com.google.common.collect.Iterables;
+import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.FieldReference;
 import com.google.j2cl.ast.MethodReference;
 import com.google.j2cl.ast.RegularTypeReference;
@@ -27,6 +28,7 @@ import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
+import org.eclipse.jdt.core.dom.InfixExpression;
 import org.eclipse.jdt.core.dom.Modifier;
 import org.eclipse.jdt.internal.compiler.batch.FileSystem;
 import org.eclipse.jdt.internal.compiler.env.INameEnvironment;
@@ -137,6 +139,50 @@ public class JdtUtils {
     boolean isFinal = isFinal(variableBinding.getModifiers());
     boolean isParameter = variableBinding.isParameter();
     return new Variable(name, type, isFinal, isParameter);
+  }
+
+  public static BinaryOperator getBinaryOperator(InfixExpression.Operator operator) {
+    switch (operator.toString()) {
+      case "*":
+        return BinaryOperator.TIMES;
+      case "/":
+        return BinaryOperator.DIVIDE;
+      case "%":
+        return BinaryOperator.REMAINDER;
+      case "+":
+        return BinaryOperator.PLUS;
+      case "-":
+        return BinaryOperator.MINUS;
+      case "<<":
+        return BinaryOperator.LEFT_SHIFT;
+      case ">>":
+        return BinaryOperator.RIGHT_SHIFT_SIGNED;
+      case ">>>":
+        return BinaryOperator.RIGHT_SHIFT_UNSIGNED;
+      case "<":
+        return BinaryOperator.LESS;
+      case ">":
+        return BinaryOperator.GREATER;
+      case "<=":
+        return BinaryOperator.LESS_EQUALS;
+      case ">=":
+        return BinaryOperator.GREATER_EQUALS;
+      case "==":
+        return BinaryOperator.EQUALS;
+      case "!=":
+        return BinaryOperator.NOT_EQUALS;
+      case "^":
+        return BinaryOperator.XOR;
+      case "&":
+        return BinaryOperator.AND;
+      case "|":
+        return BinaryOperator.OR;
+      case "&&":
+        return BinaryOperator.CONDITIONAL_AND;
+      case "||":
+        return BinaryOperator.CONDITIONAL_OR;
+    }
+    return null;
   }
 
   static Visibility getVisibility(int modifier) {

@@ -13,16 +13,20 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.transpiler.integration.instanceofclass;
+package com.google.j2cl.ast;
 
 /**
- * Test data
+ * A base class for Statement.
+ * TODO: change the class to abstract. Currently abstract is removed so that we can
+ * Instantiate a Statement instance for unimplemented Statement AST nodes.
  */
-public class Main {
-  public static void main(String... args) {
-//    Object object = new Main();
-//    assert object instanceof Main;
-//    assert object instanceof Object;
-//    assert !(object instanceof String);
+public class Statement extends Node {
+  @Override
+  public String toString() {
+    return "";
+  }
+
+  public Statement accept(Visitor visitor) {
+    return VisitorStatement.visit(visitor, this);
   }
 }

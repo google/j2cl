@@ -12,4 +12,7 @@
    * @${method.SelfReference.Visibility}
    */
   $staticModifier${ManglingNameUtils.getMangledName($method.SelfReference)}($parameterList) {
+#foreach ($stmt in ${method.Body.Statements})
+    $stmt
+#end
   }

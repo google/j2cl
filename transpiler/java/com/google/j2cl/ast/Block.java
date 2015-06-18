@@ -13,16 +13,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.transpiler.integration.instanceofclass;
+package com.google.j2cl.ast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Test data
+ * Block Statement.
  */
-public class Main {
-  public static void main(String... args) {
-//    Object object = new Main();
-//    assert object instanceof Main;
-//    assert object instanceof Object;
-//    assert !(object instanceof String);
+public class Block extends Statement {
+  @Visitable List<Statement> statements = new ArrayList<>();
+
+  public Block(List<Statement> statements) {
+    this.statements.addAll(statements);
+  }
+
+  public List<Statement> getStatements() {
+    return statements;
+  }
+
+  public Block accept(Visitor visitor) {
+    return VisitorBlock.visit(visitor, this);
   }
 }

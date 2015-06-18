@@ -1,0 +1,102 @@
+goog.module('gen.com.google.j2cl.transpiler.readable.assertsimple.AssertSimpleModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+var Asserts = goog.require('vmbootstrap.AssertsModule').Asserts;
+
+
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/assertsimple/AssertSimple.java.
+ */
+class AssertSimple extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs inline instance field initializers.
+   * @param {AssertSimple} instance
+   * @private
+   */
+  static $init(instance) {}
+
+  /**
+   * @param {Array<string>} args
+   * @public
+   */
+  static m_main__arrayOf_java_lang_String(args) {
+    Asserts.$enabled() && Asserts.$assert(1 + 2 == 3);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!AssertSimple}
+   * @public
+   */
+  static $create() {
+    AssertSimple.$clinit();
+    var instance = new AssertSimple;
+    AssertSimple
+        .$ctor__com_google_j2cl_transpiler_readable_assertsimple_AssertSimple(
+            instance);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {AssertSimple} instance
+   * @protected
+   */
+  static $ctor__com_google_j2cl_transpiler_readable_assertsimple_AssertSimple(
+      instance) {
+    Object.$ctor__java_lang_Object(instance);
+    AssertSimple.$init(instance);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof AssertSimple; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, AssertSimple);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+AssertSimple.$class = Class.$createForClass(
+    Util.$generateId('AssertSimple'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.assertsimple.AssertSimple'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.assertsimple.AssertSimple'));
+
+
+/**
+ * Exported class.
+ */
+exports.AssertSimple = AssertSimple;

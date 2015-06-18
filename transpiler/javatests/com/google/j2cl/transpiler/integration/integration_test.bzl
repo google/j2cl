@@ -118,6 +118,7 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
           "--language_in=ECMASCRIPT6",
           "--language_out=ECMASCRIPT5",
           "--property_renaming=OFF",
+          "--define=ASSERTIONS_ENABLED_=true",
           "--pretty_print",
           "--strict",
           "--variable_renaming=OFF",

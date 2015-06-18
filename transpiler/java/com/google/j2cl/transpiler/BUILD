@@ -17,5 +17,6 @@ java_library(
         "//transpiler/java/com/google/j2cl/errors",
         "//transpiler/java/com/google/j2cl/frontend",
         "//transpiler/java/com/google/j2cl/generator",
+        "//transpiler/java/com/google/j2cl/generator/visitors",
     ],
 )

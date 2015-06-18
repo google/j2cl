@@ -36,38 +36,45 @@ public class FrontendFlags {
   protected List<String> files = new ArrayList<>();
 
   @Option(
-      name = "-classpath",
-      aliases = {"-cp"},
-      metaVar = "<path>",
-      usage = "Specify where to find user class files and annotation processors")
+    name = "-classpath",
+    aliases = {"-cp"},
+    metaVar = "<path>",
+    usage = "Specify where to find user class files and annotation processors"
+  )
   protected String classpath = ".";
 
   @Option(
-      name = "-sourcepath", metaVar = "<file>", usage = "Specify where to find input source files")
+    name = "-sourcepath",
+    metaVar = "<file>",
+    usage = "Specify where to find input source files"
+  )
   protected String sourcepath = ".";
 
   /**
    * Option that allows users to swap out the location of the JRE library.
    */
   @Option(
-      name = "-bootclasspath",
-      metaVar = "<path>",
-      usage = "Override location of bootstrap class files")
+    name = "-bootclasspath",
+    metaVar = "<path>",
+    usage = "Override location of bootstrap class files"
+  )
   protected String bootclasspath = System.getProperty("sun.boot.class.path");
 
   @Option(name = "-d", metaVar = "<directory>", usage = "Specify where to place generated files")
   protected File outputDir = new File(".");
 
   @Option(
-      name = "-encoding",
-      metaVar = "<encoding>",
-      usage = "Specify character encoding used by source files")
+    name = "-encoding",
+    metaVar = "<encoding>",
+    usage = "Specify character encoding used by source files"
+  )
   protected String encoding = System.getProperty("file.encoding", "UTF-8");
 
   @Option(
-      name = "-source",
-      metaVar = "<release>",
-      usage = "Provide source compatibility with specified release")
+    name = "-source",
+    metaVar = "<release>",
+    usage = "Provide source compatibility with specified release"
+  )
   protected String source = "1.7";
 
   @Option(name = "-h", aliases = "-help", usage = "print this message")

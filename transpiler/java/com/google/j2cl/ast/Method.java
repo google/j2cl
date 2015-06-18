@@ -24,10 +24,9 @@ import java.util.List;
 public class Method extends Node {
   private final MethodReference selfReference;
   @Visitable List<Variable> parameters = new ArrayList<>();
-  // TODO: implement concrete type for method body.
-  private UnknownNode body;
+  @Visitable Block body;
 
-  public Method(MethodReference selfReference, List<Variable> parameters, UnknownNode body) {
+  public Method(MethodReference selfReference, List<Variable> parameters, Block body) {
     this.selfReference = selfReference;
     this.parameters.addAll(parameters);
     this.body = body;
@@ -41,7 +40,7 @@ public class Method extends Node {
     return parameters;
   }
 
-  public UnknownNode getBody() {
+  public Block getBody() {
     return body;
   }
 
@@ -53,7 +52,7 @@ public class Method extends Node {
     return selfReference.isConstructor();
   }
 
-  public void setBody(UnknownNode body) {
+  public void setBody(Block body) {
     this.body = body;
   }
 
