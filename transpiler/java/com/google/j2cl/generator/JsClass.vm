@@ -47,40 +47,13 @@ class $className $extendsClause {
     $instanceInitializer
 #end
   }
-#set ($noConstructors = true)
 #foreach($method in $classType.Methods)
 
 #if($method.isConstructor())
-#set ($noConstructors = false)
 #parse( "com/google/j2cl/generator/JsConstructorMethods.vm" )
 #else
 #parse( "com/google/j2cl/generator/JsMethod.vm" )
 #end
-#end
-
-#if( $noConstructors )## default constructor
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!$jsDocName}
-   * @public
-   */
-  static $create() {
-    $className.$clinit();
-    var instance = new $className;
-    $className.$ctor__$mangledTypeName(instance);
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @param {$jsDocName} instance
-   * @protected
-   */
-  static $ctor__$mangledTypeName(instance) {
-    $superTypeName.$ctor__$superTypeMangledName(instance);
-    $className.$init(instance);
-  }
-#else
 #end
 
   /**

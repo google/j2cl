@@ -37,7 +37,7 @@ def build_optimized_tests(cwd=None):
 def compute_synced_to_cl():
   """Returns the cl that git5 is currently synced to."""
   status_line = get_cmd_output(["git5", "status"])
-  synced_to_cl = extract_pattern("Synced at CL (.*) = ", status_line)
+  synced_to_cl = extract_pattern("Synced at CL (.*?) = ", status_line)
   return synced_to_cl
 
 
@@ -80,7 +80,7 @@ def find_key_cls_since(since_cl):
       find_cls_in_since("third_party/java/eclipse", since_cl))
 
   unprocessed_cls = sorted(
-      set([extract_pattern("http://cl/(.*) on .*", unprocessed_cl) for
+      set([extract_pattern("http://cl/(.*?) on .*", unprocessed_cl) for
            unprocessed_cl in unprocessed_cls if unprocessed_cl]))
 
   if unprocessed_cls:
@@ -114,7 +114,7 @@ def get_js_files_by_test_name():
 
   # Convert to a map of names<->jsFile pairs
   test_names = [
-      extract_pattern(".*integration/(.*):optimized_js", size_target)
+      extract_pattern(".*integration/(.*?):optimized_js", size_target)
       for size_target in test_targets]
   js_files = [
       size_target.replace("//", "blaze-bin/").replace(":", "/") + ".js"

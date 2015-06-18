@@ -14,7 +14,7 @@
 package com.google.j2cl.transpiler;
 
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.visitors.ImportGatheringVisitor;
+import com.google.j2cl.ast.visitors.CreateDefaultConstructorsVisitor;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.frontend.CompilationUnitBuilder;
 import com.google.j2cl.frontend.FrontendFlags;
@@ -113,7 +113,7 @@ public class J2clTranspiler {
 
   private void normalizeUnits(@SuppressWarnings("unused") List<CompilationUnit> j2clUnits) {
     for (CompilationUnit j2clUnit : j2clUnits) {
-      ImportGatheringVisitor.gatherImports(j2clUnit);
+      CreateDefaultConstructorsVisitor.doCreateDefaultConstructors(j2clUnit);
     }
   }
 
