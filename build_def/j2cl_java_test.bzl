@@ -26,8 +26,11 @@ j2cl_java_test(
 
 """
 
-load("/third_party/java_src/j2cl/build_def/j2cl_java_library", "j2cl_java_library")
+load(
+    "/third_party/java_src/j2cl/build_def/j2cl_java_library",
+    "j2cl_java_library")
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_root")
+
 
 def j2cl_java_test(**kwargs):
   """Macro for running a JUnit test cross compiled as a web test
@@ -45,7 +48,8 @@ def j2cl_java_test(**kwargs):
   # Add our APT to java plugins.
   if not "plugins" in kwargs:
     kwargs["plugins"] = []
-  kwargs["plugins"] = kwargs["plugins"] + ["//:junit_processor"]
+  kwargs["plugins"] = (
+      kwargs["plugins"] + ["//:junit_processor"])
 
   # JavaScript file names that will be produced by our APT
   js_names = []
@@ -62,26 +66,26 @@ def j2cl_java_test(**kwargs):
   j2cl_java_library(**kwargs)
 
   native.genrule(
-    name = base_name + "_extract_js",
-    srcs = [":" + base_name],
-    outs = js_names,
-    cmd = "$(location //third_party/unzip:unzip) -q -d $(GENDIR)/"
-        + java_root + " " + out_jar + "",
-    executable = 1,
-    testonly = 1,
-    tools = [
-        "lib" + base_name + ".jar",
-        "//third_party/unzip",
-    ],
+      name=base_name + "_extract_js",
+      srcs=[":" + base_name],
+      outs=js_names,
+      cmd="$(location //third_party/unzip:unzip) -q -d $(GENDIR)/"
+      + java_root + " " + out_jar + "",
+      executable=1,
+      testonly=1,
+      tools=[
+          "lib" + base_name + ".jar",
+          "//third_party/unzip",
+      ],
   )
 
   # TODO(dankurka): Add support for different browsers
   # TODO(dankurka): Investigate better setup with jsunit_test / web_test
   native.jsunit_test(
-      name = base_name + "_js_test",
-      srcs = [":" + base_name + "_extract_js",],
-      compile = 1,
-      defs = [
+      name=base_name + "_js_test",
+      srcs=[":" + base_name + "_extract_js",],
+      compile=1,
+      defs=[
           "--language_in=ECMASCRIPT6",
           "--language_out=ECMASCRIPT5",
           "--jscomp_off=nonStandardJsDocs",
@@ -93,19 +97,19 @@ def j2cl_java_test(**kwargs):
           "--variable_renaming=OFF",
           "--pretty_print",
       ],
-      externs_list = ["//javascript/externs:common"],
-      deps = [
+      externs_list=["//javascript/externs:common"],
+      deps=[
           ":" + base_name + "_js_library",
           "//javascript/closure/testing:testsuite",
       ],
-      jvm_flags = [
-         "-Dcom.google.testing.selenium.browser=CHROME_LINUX"
-     ],
-     data = ["//testing/matrix/nativebrowsers/chrome:stable_data",],
+      jvm_flags=[
+          "-Dcom.google.testing.selenium.browser=CHROME_LINUX"
+      ],
+      data=["//testing/matrix/nativebrowsers/chrome:stable_data",],
   )
 
   native.web_test(
-    name = base_name + "_web_test",
-    test = base_name + "_js_test",
-    browser = "chrome-linux",
+      name=base_name + "_web_test",
+      test=base_name + "_js_test",
+      browser="chrome-linux",
   )

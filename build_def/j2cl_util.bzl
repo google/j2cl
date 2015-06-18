@@ -1,5 +1,6 @@
 """Utility functions for the j2cl_* build rules / macros"""
 
+
 def _get_java_root_index(pkg_name):
   """Returns the index of the java_root within a build package"""
   # Find the java folder in the beginning, middle or end of a path.
@@ -23,9 +24,11 @@ def _get_java_root_index(pkg_name):
     index = javatests_index + len("javatests/")
   return index
 
+
 def get_java_root(pkg_name):
   """Extract the path to java root from the build package"""
   return pkg_name[:_get_java_root_index(pkg_name)]
+
 
 def get_java_package(pkg_name):
   """Extract the java package from the build package"""

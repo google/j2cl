@@ -17,7 +17,8 @@ j2cl_java_library(
 
 # Creates targets
 # blaze build :optimized_js
-# blaze test :readable_js
+# blaze test :compiled_test
+# blaze test :uncompiled_test
 integration_test(
     name = "multipleroottypes",
     # Src's JUST the Main class and gets MainRootType as a dependency. Do not

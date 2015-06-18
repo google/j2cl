@@ -10,7 +10,8 @@ Example usage:
 
 # Creates targets
 # blaze build :optimized_js
-# blaze test :readable_js
+# blaze test :compiled_test
+# blaze test :uncompiled_test
 integration_test(
     name = "foobar",
     srcs = glob(["*.java"]),
@@ -47,6 +48,7 @@ CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
     "--disambiguate_properties",
 ]
 
+
 def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
   """Macro that turns Java files into integration test targets."""
   # figure out the current location
@@ -55,10 +57,10 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
 
   # translate Java to JS
   j2cl_java_library(
-      name = name,
-      srcs = srcs,
-      show_debug_cmd = show_debug_cmd,
-      deps = deps
+      name=name,
+      srcs=srcs,
+      show_debug_cmd=show_debug_cmd,
+      deps=deps
   )
 
   # blaze build :optimized_js
@@ -68,15 +70,15 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
       Main.m_main__arrayOf_java_lang_String();
   """ % java_package
   native.genrule(
-      name = "opt_harness_generator",
-      outs = ["OptHarness.js"],
-      cmd = "echo \"%s\" > $@" % opt_harness,
-      executable = 1,
+      name="opt_harness_generator",
+      outs=["OptHarness.js"],
+      cmd="echo \"%s\" > $@" % opt_harness,
+      executable=1,
   )
   native.js_binary(
-      name = "optimized_js",
-      srcs = ["OptHarness.js"],
-      defs = CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
+      name="optimized_js",
+      srcs=["OptHarness.js"],
+      defs=CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
           "--language_in=ECMASCRIPT6",
           "--language_out=ECMASCRIPT5",
           "--remove_dead_assignments",
@@ -84,12 +86,13 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
           "--remove_unused_local_vars=ON",
           "--remove_unused_vars",
       ],
-      compiler = "//javascript/tools/jscompiler:head",
-      externs_list = ["//javascript/externs:common"],
-      deps = [":" + name + "_js_library"],
+      compiler="//javascript/tools/jscompiler:head",
+      externs_list=["//javascript/externs:common"],
+      deps=[":" + name + "_js_library"],
   )
 
-  # blaze test :readable_js
+  # blaze test :uncompiled_test
+  # blaze test :compiled_test
   test_harness = """
       goog.module('gen.test.Harness');
       goog.setTestOnly();
@@ -102,16 +105,35 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
       });
   """ % java_package
   native.genrule(
-      name = "test_harness_generator",
-      outs = ["TestHarness.js"],
-      cmd = "echo \"%s\" > $@" % test_harness,
+      name="test_harness_generator",
+      outs=["TestHarness.js"],
+      cmd="echo \"%s\" > $@" % test_harness,
   )
   # TODO: use google_js_test when it supports ES6
   native.jsunit_test(
-      name = name + "_test_spec",
-      srcs = ["TestHarness.js"],
-      compile = 1,
-      defs = [
+      name="uncompiled_test_spec",
+      srcs=["TestHarness.js"],
+      compile=0,
+      deps=[
+          ":" + name + "_js_library",
+          "//javascript/closure/testing:testsuite",
+      ],
+      deps_mgmt="closure",
+      externs_list=["//javascript/externs:common"],
+      jvm_flags=["-Dcom.google.testing.selenium.browser=CHROME_LINUX"],
+      data=["//testing/matrix/nativebrowsers/chrome:stable_data",],
+  )
+  native.web_test(
+      name="uncompiled_test",
+      test="uncompiled_test_spec",
+      browser="chrome-linux",
+  )
+  native.jsunit_test(
+      name="compiled_test_spec",
+      srcs=["TestHarness.js"],
+      compile=1,
+      compiler="//javascript/tools/jscompiler:head",
+      defs=[
           "--export_test_functions=true",
           "--jscomp_off=checkTypes",
           "--jscomp_off=undefinedVars",
@@ -123,19 +145,17 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
           "--strict",
           "--variable_renaming=OFF",
       ],
-      compiler = "//javascript/tools/jscompiler:head",
-      externs_list = ["//javascript/externs:common"],
-      deps = [
+      deps=[
           ":" + name + "_js_library",
           "//javascript/closure/testing:testsuite",
       ],
-      jvm_flags = [
-         "-Dcom.google.testing.selenium.browser=CHROME_LINUX"
-     ],
-     data = ["//testing/matrix/nativebrowsers/chrome:stable_data",],
+      deps_mgmt="closure",
+      externs_list=["//javascript/externs:common"],
+      jvm_flags=["-Dcom.google.testing.selenium.browser=CHROME_LINUX"],
+      data=["//testing/matrix/nativebrowsers/chrome:stable_data",],
   )
   native.web_test(
-    name = "readable_js",
-    test = name + "_test_spec",
-    browser = "chrome-linux",
+      name="compiled_test",
+      test="compiled_test_spec",
+      browser="chrome-linux",
   )

@@ -41,18 +41,19 @@ CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
     "--disambiguate_properties",
 ]
 
+
 def readable_example(name, srcs):
   """Macro that confirms the JS compilability of some transpiled Java."""
   # Transpile the Java files.
   j2cl_java_library(
-      name = name,
-      srcs = srcs,
+      name=name,
+      srcs=srcs,
   )
 
   # Verify compilability of generated JS.
   native.js_binary(
-      name = name + "_binary",
-      defs = CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
+      name=name + "_binary",
+      defs=CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
           "--language_in=ECMASCRIPT6",
           "--language_out=ECMASCRIPT5",
           "--remove_dead_code",
@@ -60,7 +61,7 @@ def readable_example(name, srcs):
           "--remove_unused_local_vars=ON",
           "--remove_dead_assignments",
       ],
-      compiler = "//javascript/tools/jscompiler:head",
-      externs_list = ["//javascript/externs:common"],
-      deps = [":" + name + "_js_library"],
+      compiler="//javascript/tools/jscompiler:head",
+      externs_list=["//javascript/externs:common"],
+      deps=[":" + name + "_js_library"],
   )

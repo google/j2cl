@@ -27,10 +27,11 @@ j2cl_transpile directly.
 
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_root")
 
+
 def _impl(ctx):
   """Implementation for j2cl_transpile"""
-  java_files = ctx.files.srcs # java files that need to be compiled
-  super_java_files = ctx.files.super_srcs # java files whose js to ignore
+  java_files = ctx.files.srcs  # java files that need to be compiled
+  super_java_files = ctx.files.super_srcs  # java files whose js to ignore
   java_deps = ctx.files.java_deps
   java_deps_paths = []
   java_files_paths = []
@@ -64,8 +65,8 @@ def _impl(ctx):
     index += 1
 
   compiler_args = [
-    "-d",
-    ctx.configuration.bin_dir.path + "/" + java_root,
+      "-d",
+      ctx.configuration.bin_dir.path + "/" + java_root,
   ]
 
   if len(java_deps_paths) > 0:
@@ -76,10 +77,10 @@ def _impl(ctx):
   compiler_args += java_files_paths
 
   ctx.action(
-      inputs = java_files + java_deps,
-      outputs = js_files,
-      executable = ctx.executable.compiler,
-      arguments = compiler_args,
+      inputs=java_files + java_deps,
+      outputs=js_files,
+      executable=ctx.executable.compiler,
+      arguments=compiler_args,
   )
 
   if ctx.attr.show_debug_cmd:
@@ -89,32 +90,32 @@ def _impl(ctx):
   # We need to return the output files so that they get recognized as outputs
   # from blaze
   return struct(
-      files = set(js_files),
+      files=set(js_files),
   )
 
 # expose rule
 j2cl_transpile = rule(
-    attrs = {
-        "java_library": attr.label(mandatory = True),
+    attrs={
+        "java_library": attr.label(mandatory=True),
         "java_deps": attr.label_list(
-            allow_files = FileType([".jar"]),
+            allow_files=FileType([".jar"]),
         ),
         "compiler": attr.label(
-            cfg = HOST_CFG,
-            executable = True,
-            allow_files = True,
-            default = Label("//:j2cl"),
+            cfg=HOST_CFG,
+            executable=True,
+            allow_files=True,
+            default=Label("//:j2cl"),
         ),
         # these need to go once we know how to read the inputs of
         # a java_library rule
         "srcs": attr.label_list(
-            mandatory = True,
-            allow_files = FileType([".java"]),
+            mandatory=True,
+            allow_files=FileType([".java"]),
         ),
-        "show_debug_cmd": attr.bool(default = False),
+        "show_debug_cmd": attr.bool(default=False),
         "super_srcs": attr.label_list(
-            allow_files = FileType([".java"]),
+            allow_files=FileType([".java"]),
         ),
     },
-    implementation = _impl,
+    implementation=_impl,
 )
