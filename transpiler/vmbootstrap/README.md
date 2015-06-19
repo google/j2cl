@@ -1,6 +1,9 @@
-VMBootstrap is the collection of native JS logic that needs to be
-available to transpiled output but that is not part of the JRE but
-references to the JRE.
+# Contained here is VM bootstrap JS logic.
+
+## Expectations
+- Needs to be available to transpiled output
+- Is not part of the JRE
+- References the JRE.
 
 For example the implementation of the Java "assert" keyword is not
 JRE logic so it is implemented in a separate location, but it does

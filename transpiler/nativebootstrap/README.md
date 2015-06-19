@@ -1,6 +1,9 @@
-NativeBootstrap is the collection of native JS logic that needs to be
-available to transpiled output but that is not part of the JRE and does
-not reference the JRE.
+# Contained here is native bootstrap JS logic.
+
+## Expectations
+- Needs to be available to transpiled output
+- Is not part of the JRE and does
+- Does not reference the JRE
 
 Conceptually it is the lowest layer of JS because it is depended upon
 by others but depends on no one.

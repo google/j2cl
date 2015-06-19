@@ -1,4 +1,4 @@
-Integration tests go here.
+# Contained here are integration tests.
 
 To make assertions about the std or err output of the Transpile process see
 //third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/integration:SyntaxErrorTest
@@ -11,7 +11,8 @@ tests and are not run using the j2cl_java_test() rule type (to avoid test
 harness overhead interfering with optimized size change tracking.) These tests
 must have a Main class with a main() function.
 
-Include an updated size_report.txt in every change.
+## Expectations
+- Include an updated size_report.txt in every change.
 
-Useful commands:
-  * python third_party/j/j/t/j/c/g/j/transpiler/integration/make_size_report.py
+## Useful commands
+- python third_party/j/j/t/j/c/g/j/transpiler/integration/make_size_report.py
