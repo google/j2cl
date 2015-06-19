@@ -13,16 +13,23 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.transpiler.integration.instanceofclass;
+package com.google.j2cl.ast;
 
 /**
- * Test data
+ * Class for parenthesized expression.
  */
-public class Main {
-  public static void main(String... args) {
-    //    Object object = new Main();
-    //    assert object instanceof Main;
-    //    assert object instanceof Object;
-    //    assert !(object instanceof String);
+public class ParenthesizedExpression extends Expression {
+  private Expression expression;
+
+  public ParenthesizedExpression(Expression expression) {
+    this.expression = expression;
+  }
+
+  public Expression getExpression() {
+    return expression;
+  }
+
+  public void setExpression(Expression expression) {
+    this.expression = expression;
   }
 }

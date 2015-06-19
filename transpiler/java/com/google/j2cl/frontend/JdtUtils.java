@@ -19,6 +19,8 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.FieldReference;
 import com.google.j2cl.ast.MethodReference;
+import com.google.j2cl.ast.PostfixOperator;
+import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.RegularTypeReference;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
@@ -30,6 +32,8 @@ import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.InfixExpression;
 import org.eclipse.jdt.core.dom.Modifier;
+import org.eclipse.jdt.core.dom.PostfixExpression;
+import org.eclipse.jdt.core.dom.PrefixExpression;
 import org.eclipse.jdt.internal.compiler.batch.FileSystem;
 import org.eclipse.jdt.internal.compiler.env.INameEnvironment;
 
@@ -181,6 +185,34 @@ public class JdtUtils {
         return BinaryOperator.CONDITIONAL_AND;
       case "||":
         return BinaryOperator.CONDITIONAL_OR;
+    }
+    return null;
+  }
+
+  public static PrefixOperator getPrefixOperator(PrefixExpression.Operator operator) {
+    switch (operator.toString()) {
+      case "++":
+        return PrefixOperator.INCREMENT;
+      case "--":
+        return PrefixOperator.DECREMENT;
+      case "+":
+        return PrefixOperator.PLUS;
+      case "-":
+        return PrefixOperator.MINUS;
+      case "~":
+        return PrefixOperator.COMPLEMENT;
+      case "!":
+        return PrefixOperator.NOT;
+    }
+    return null;
+  }
+
+  public static PostfixOperator getPostfixOperator(PostfixExpression.Operator operator) {
+    switch (operator.toString()) {
+      case "++":
+        return PostfixOperator.INCREMENT;
+      case "--":
+        return PostfixOperator.DECREMENT;
     }
     return null;
   }

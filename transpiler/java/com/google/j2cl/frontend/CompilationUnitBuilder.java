@@ -17,6 +17,7 @@ package com.google.j2cl.frontend;
 
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.BinaryExpression;
+import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
@@ -29,6 +30,9 @@ import com.google.j2cl.ast.MethodReference;
 import com.google.j2cl.ast.MultipleStatements;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.NumberLiteral;
+import com.google.j2cl.ast.ParenthesizedExpression;
+import com.google.j2cl.ast.PostfixExpression;
+import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
@@ -144,6 +148,12 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.InfixExpression) node);
         case ASTNode.NUMBER_LITERAL:
           return convert((org.eclipse.jdt.core.dom.NumberLiteral) node);
+        case ASTNode.PARENTHESIZED_EXPRESSION:
+          return convert((org.eclipse.jdt.core.dom.ParenthesizedExpression) node);
+        case ASTNode.POSTFIX_EXPRESSION:
+          return convert((org.eclipse.jdt.core.dom.PostfixExpression) node);
+        case ASTNode.PREFIX_EXPRESSION:
+          return convert((org.eclipse.jdt.core.dom.PrefixExpression) node);
         default:
           throw new RuntimeException(
               "Need to implement translation for expression type: " + node.getClass().getName());
@@ -186,12 +196,33 @@ public class CompilationUnitBuilder {
     public BinaryExpression convert(org.eclipse.jdt.core.dom.InfixExpression node) {
       Expression leftOperand = convert(node.getLeftOperand());
       Expression rightOperand = convert(node.getRightOperand());
-      return new BinaryExpression(
-          leftOperand, JdtUtils.getBinaryOperator(node.getOperator()), rightOperand);
+      BinaryOperator operator = JdtUtils.getBinaryOperator(node.getOperator());
+      BinaryExpression binaryExpression = new BinaryExpression(leftOperand, operator, rightOperand);
+      for (Object object : node.extendedOperands()) {
+        org.eclipse.jdt.core.dom.Expression extendedOperand =
+            (org.eclipse.jdt.core.dom.Expression) object;
+        binaryExpression =
+            new BinaryExpression(binaryExpression, operator, convert(extendedOperand));
+      }
+      return binaryExpression;
     }
 
     public NumberLiteral convert(org.eclipse.jdt.core.dom.NumberLiteral node) {
       return new NumberLiteral(node.getToken());
+    }
+
+    public ParenthesizedExpression convert(org.eclipse.jdt.core.dom.ParenthesizedExpression node) {
+      return new ParenthesizedExpression(convert(node.getExpression()));
+    }
+
+    public PostfixExpression convert(org.eclipse.jdt.core.dom.PostfixExpression node) {
+      return new PostfixExpression(
+          convert(node.getOperand()), JdtUtils.getPostfixOperator(node.getOperator()));
+    }
+
+    public PrefixExpression convert(org.eclipse.jdt.core.dom.PrefixExpression node) {
+      return new PrefixExpression(
+          convert(node.getOperand()), JdtUtils.getPrefixOperator(node.getOperator()));
     }
 
     public VariableDeclaration convert(org.eclipse.jdt.core.dom.VariableDeclarationFragment node) {

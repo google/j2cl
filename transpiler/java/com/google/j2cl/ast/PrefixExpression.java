@@ -13,16 +13,33 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.transpiler.integration.instanceofclass;
+package com.google.j2cl.ast;
 
 /**
- * Test data
+ * Class for Prefix Expression.
  */
-public class Main {
-  public static void main(String... args) {
-    //    Object object = new Main();
-    //    assert object instanceof Main;
-    //    assert object instanceof Object;
-    //    assert !(object instanceof String);
+public class PrefixExpression extends Expression {
+  private Expression operand;
+  private PrefixOperator operator;
+
+  public PrefixExpression(Expression operand, PrefixOperator operator) {
+    this.operand = operand;
+    this.operator = operator;
+  }
+
+  public Expression getOperand() {
+    return operand;
+  }
+
+  public PrefixOperator getOperator() {
+    return operator;
+  }
+
+  public void setOperand(Expression operand) {
+    this.operand = operand;
+  }
+
+  public void setOperator(PrefixOperator operator) {
+    this.operator = operator;
   }
 }

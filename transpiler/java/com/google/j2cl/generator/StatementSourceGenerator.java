@@ -25,6 +25,9 @@ import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.MultipleStatements;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.NumberLiteral;
+import com.google.j2cl.ast.ParenthesizedExpression;
+import com.google.j2cl.ast.PostfixExpression;
+import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.VariableDeclaration;
 
@@ -58,6 +61,12 @@ public class StatementSourceGenerator {
       return toSource((NewInstance) expression);
     } else if (expression instanceof NumberLiteral) {
       return toSource((NumberLiteral) expression);
+    } else if (expression instanceof ParenthesizedExpression) {
+      return toSource((ParenthesizedExpression) expression);
+    } else if (expression instanceof PostfixExpression) {
+      return toSource((PostfixExpression) expression);
+    } else if (expression instanceof PrefixExpression) {
+      return toSource((PrefixExpression) expression);
     } else {
       throw new RuntimeException(
           "Need to implement toSource() for expression type: " + expression.getClass().getName());
@@ -104,6 +113,20 @@ public class StatementSourceGenerator {
 
   public static String toSource(NumberLiteral expression) {
     return expression.getToken();
+  }
+
+  public static String toSource(ParenthesizedExpression expression) {
+    return String.format("(%s)", toSource(expression.getExpression()));
+  }
+
+  public static String toSource(PostfixExpression expression) {
+    return String.format(
+        "%s%s", toSource(expression.getOperand()), expression.getOperator().toString());
+  }
+
+  public static String toSource(PrefixExpression expression) {
+    return String.format(
+        "%s%s", expression.getOperator().toString(), toSource(expression.getOperand()));
   }
 
   public static String toSource(VariableDeclaration statement) {

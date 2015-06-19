@@ -81,6 +81,7 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
       defs=CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
           "--language_in=ECMASCRIPT6",
           "--language_out=ECMASCRIPT5",
+          "--define=ASSERTIONS_ENABLED_=true",
           "--remove_dead_assignments",
           "--remove_dead_code",
           "--remove_unused_local_vars=ON",

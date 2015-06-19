@@ -13,16 +13,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.transpiler.integration.instanceofclass;
+package com.google.j2cl.ast;
 
 /**
- * Test data
+ * Class for postfix operator.
  */
-public class Main {
-  public static void main(String... args) {
-    //    Object object = new Main();
-    //    assert object instanceof Main;
-    //    assert object instanceof Object;
-    //    assert !(object instanceof String);
+public enum PostfixOperator {
+  INCREMENT("++"),
+  DECREMENT("--");
+  private String symbol;
+
+  PostfixOperator(String symbol) {
+    this.symbol = symbol;
+  }
+
+  public String getSymbol() {
+    return symbol;
+  }
+
+  @Override
+  public String toString() {
+    return symbol;
   }
 }
