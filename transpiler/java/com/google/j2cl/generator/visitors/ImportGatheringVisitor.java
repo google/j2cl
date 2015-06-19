@@ -18,11 +18,12 @@ package com.google.j2cl.generator.visitors;
 import com.google.common.base.Function;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Sets;
+import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.RegularTypeReference;
 import com.google.j2cl.ast.TypeReference;
-import com.google.j2cl.ast.Visitor;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -34,7 +35,7 @@ import javax.annotation.Nullable;
  * Traverses a CompilationUnit and gathers imports for all its referenced types.
  */
 // TODO: turn into an actual Visitor once we have such a framework.
-public class ImportGatheringVisitor extends Visitor {
+public class ImportGatheringVisitor extends AbstractVisitor {
   private Set<Import> importModules = new LinkedHashSet<>();
   private Set<TypeReference> typeReferences = new LinkedHashSet<>();
   private Set<TypeReference> typeReferencesDefinedInCompilationUnit = new LinkedHashSet<>();
@@ -44,7 +45,7 @@ public class ImportGatheringVisitor extends Visitor {
   }
 
   @Override
-  public void exitTypeReference(TypeReference typeReference) {
+  public void exitRegularTypeReference(RegularTypeReference typeReference) {
     typeReferences.add(typeReference);
   }
 

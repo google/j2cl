@@ -15,11 +15,15 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Visitable;
+
 /**
  * Class for parenthesized expression.
  */
+@Visitable
 public class ParenthesizedExpression extends Expression {
-  private Expression expression;
+
+  @Visitable Expression expression;
 
   public ParenthesizedExpression(Expression expression) {
     this.expression = expression;
@@ -31,5 +35,10 @@ public class ParenthesizedExpression extends Expression {
 
   public void setExpression(Expression expression) {
     this.expression = expression;
+  }
+
+  @Override
+  ParenthesizedExpression accept(Visitor visitor) {
+    return Visitor_ParenthesizedExpression.visit(visitor, this);
   }
 }

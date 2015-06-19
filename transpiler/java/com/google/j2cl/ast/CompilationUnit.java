@@ -16,6 +16,7 @@
 package com.google.j2cl.ast;
 
 import com.google.common.base.Preconditions;
+import com.google.j2cl.ast.processors.Visitable;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import java.util.List;
 /**
  * A model class that represents a Java Compilation Unit.
  */
+@Visitable
 public class CompilationUnit extends Node {
 
   private String filePath;
@@ -66,6 +68,6 @@ public class CompilationUnit extends Node {
 
   @Override
   public CompilationUnit accept(Visitor visitor) {
-    return VisitorCompilationUnit.visit(visitor, this);
+    return Visitor_CompilationUnit.visit(visitor, this);
   }
 }

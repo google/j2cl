@@ -15,12 +15,17 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Visitable;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 /**
  * A node that represents a Java Type declaration in the compilation unit.
  */
+@Visitable
 public class JavaType extends Node {
 
   /**
@@ -35,11 +40,16 @@ public class JavaType extends Node {
   private Kind kind;
   private Visibility visibility;
 
-  @Visitable TypeReference enclosingType;
-  @Visitable TypeReference superType;
+  @Visitable @Nullable TypeReference enclosingType;
+
+  @Visitable @Nullable TypeReference superType;
+
   @Visitable List<TypeReference> superInterfaces = new ArrayList<>();
+
   @Visitable TypeReference selfReference;
+
   @Visitable List<Field> fields = new ArrayList<>();
+
   @Visitable List<Method> methods = new ArrayList<>();
 
   /**
@@ -144,6 +154,6 @@ public class JavaType extends Node {
 
   @Override
   JavaType accept(Visitor visitor) {
-    return VisitorJavaType.visit(visitor, this);
+    return Visitor_JavaType.visit(visitor, this);
   }
 }

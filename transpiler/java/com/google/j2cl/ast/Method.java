@@ -15,14 +15,17 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Visitable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Method declaration.
  */
+@Visitable
 public class Method extends Node {
-  private final MethodReference selfReference;
+  @Visitable MethodReference selfReference;
   @Visitable List<Variable> parameters = new ArrayList<>();
   @Visitable Block body;
 
@@ -58,6 +61,6 @@ public class Method extends Node {
 
   @Override
   Method accept(Visitor visitor) {
-    return VisitorMethod.visit(visitor, this);
+    return Visitor_Method.visit(visitor, this);
   }
 }

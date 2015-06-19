@@ -15,12 +15,15 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Visitable;
+
 /**
  * A base class for Statement.
  */
+@Visitable
 public abstract class Statement extends Node {
   @Override
-  public Statement accept(Visitor visitor) {
-    return VisitorStatement.visit(visitor, this);
+  Statement accept(Visitor visitor) {
+    return Visitor_Statement.visit(visitor, this);
   }
 }

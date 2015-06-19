@@ -15,9 +15,12 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Visitable;
+
 /**
  * Interface for type reference.
  */
+@Visitable
 public abstract class TypeReference extends Node implements Comparable<TypeReference> {
   public abstract String getSimpleName();
 
@@ -36,5 +39,7 @@ public abstract class TypeReference extends Node implements Comparable<TypeRefer
   public abstract TypeReference getLeafType();
 
   @Override
-  abstract TypeReference accept(Visitor visitor);
+  TypeReference accept(Visitor visitor) {
+    return Visitor_TypeReference.visit(visitor, this);
+  }
 }

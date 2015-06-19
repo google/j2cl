@@ -15,13 +15,16 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Visitable;
+
 /**
  * Binary operator expression.
  */
+@Visitable
 public class BinaryExpression extends Expression {
-  private Expression leftOperand;
+  @Visitable Expression leftOperand;
   private BinaryOperator operator;
-  private Expression rightOperand;
+  @Visitable Expression rightOperand;
 
   public BinaryExpression(
       Expression leftOperand, BinaryOperator operator, Expression rightOperand) {
@@ -52,5 +55,10 @@ public class BinaryExpression extends Expression {
 
   public void setRightOperand(Expression rightOperand) {
     this.rightOperand = rightOperand;
+  }
+
+  @Override
+  public BinaryExpression accept(Visitor visitor) {
+    return Visitor_BinaryExpression.visit(visitor, this);
   }
 }

@@ -15,11 +15,14 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Visitable;
+
 /**
  * Class for Prefix Expression.
  */
+@Visitable
 public class PrefixExpression extends Expression {
-  private Expression operand;
+  @Visitable Expression operand;
   private PrefixOperator operator;
 
   public PrefixExpression(Expression operand, PrefixOperator operator) {
@@ -41,5 +44,10 @@ public class PrefixExpression extends Expression {
 
   public void setOperator(PrefixOperator operator) {
     this.operator = operator;
+  }
+
+  @Override
+  PrefixExpression accept(Visitor visitor) {
+    return Visitor_PrefixExpression.visit(visitor, this);
   }
 }

@@ -15,12 +15,17 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Visitable;
+
+import javax.annotation.Nullable;
+
 /**
  * Field declaration node.
  */
-public class Field {
-  private FieldReference selfReference;
-  private Expression initializer;
+@Visitable
+public class Field extends Node {
+  @Visitable FieldReference selfReference;
+  @Visitable @Nullable Expression initializer;
 
   public Field(FieldReference selfReference, Expression initializer) {
     this.selfReference = selfReference;
@@ -45,5 +50,10 @@ public class Field {
 
   public boolean hasInitializer() {
     return this.initializer != null;
+  }
+
+  @Override
+  public Field accept(Visitor visitor) {
+    return Visitor_Field.visit(visitor, this);
   }
 }

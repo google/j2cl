@@ -15,12 +15,15 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Visitable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Block Statement.
  */
+@Visitable
 public class Block extends Statement {
   @Visitable List<Statement> statements = new ArrayList<>();
 
@@ -34,6 +37,6 @@ public class Block extends Statement {
 
   @Override
   public Block accept(Visitor visitor) {
-    return VisitorBlock.visit(visitor, this);
+    return Visitor_Block.visit(visitor, this);
   }
 }

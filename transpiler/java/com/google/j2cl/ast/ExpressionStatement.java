@@ -15,11 +15,14 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Visitable;
+
 /**
  * Class for expression statement;
  */
+@Visitable
 public class ExpressionStatement extends Statement {
-  private Expression expression;
+  @Visitable Expression expression;
 
   public ExpressionStatement(Expression expression) {
     this.expression = expression;
@@ -31,5 +34,10 @@ public class ExpressionStatement extends Statement {
 
   public void setExpression(Expression expression) {
     this.expression = expression;
+  }
+
+  @Override
+  ExpressionStatement accept(Visitor visitor) {
+    return Visitor_ExpressionStatement.visit(visitor, this);
   }
 }

@@ -15,12 +15,15 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Visitable;
+
 /**
  * Class for local variable and parameter.
  */
+@Visitable
 public class Variable extends Node {
   private String name;
-  private TypeReference type;
+  @Visitable TypeReference type;
   private boolean isFinal;
   private boolean isParameter;
 
@@ -61,5 +64,10 @@ public class Variable extends Node {
 
   public void setParameter(boolean isParameter) {
     this.isParameter = isParameter;
+  }
+
+  @Override
+  Variable accept(Visitor visitor) {
+    return Visitor_Variable.visit(visitor, this);
   }
 }

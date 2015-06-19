@@ -1,0 +1,24 @@
+package ${packageName};
+
+public class Visitor_${className} {
+
+  public static ${className} visit(Visitor visitor, ${className} node) {
+    if (visitor.enter${className}(node)) {
+#foreach($field in $fields)
+#if(${field.isNullable()})
+      if (node.${field.Name} != null) {
+#end
+#if(${field.isList()})
+        node.${field.Name} = VisitorUtils.visitList(visitor, node.${field.Name});
+#else
+        node.${field.Name} = node.${field.Name}.accept(visitor);
+#end
+#if(${field.isNullable()})
+      }
+#end
+#end
+    }
+    visitor.exit${className}(node);
+    return node;
+  }
+}

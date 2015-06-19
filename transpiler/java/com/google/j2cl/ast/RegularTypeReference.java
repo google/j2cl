@@ -21,6 +21,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
 import com.google.common.collect.Iterables;
+import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.Collections;
 
@@ -30,6 +31,7 @@ import javax.annotation.Nullable;
  * A (by name) reference to a class.
  */
 @AutoValue
+@Visitable
 public abstract class RegularTypeReference extends TypeReference {
   public static TypeReference create(
       Iterable<String> packageComponents,
@@ -108,7 +110,7 @@ public abstract class RegularTypeReference extends TypeReference {
 
   @Override
   TypeReference accept(Visitor visitor) {
-    return VisitorTypeReference.visit(visitor, this);
+    return Visitor_RegularTypeReference.visit(visitor, this);
   }
 
   private static Interner<TypeReference> interner = Interners.newWeakInterner();

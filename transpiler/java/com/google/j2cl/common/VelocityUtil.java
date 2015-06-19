@@ -1,4 +1,4 @@
-package com.google.j2cl.generator;
+package com.google.j2cl.common;
 
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;

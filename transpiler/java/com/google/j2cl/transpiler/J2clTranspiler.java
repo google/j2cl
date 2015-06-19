@@ -15,13 +15,13 @@ package com.google.j2cl.transpiler;
 
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.visitors.CreateDefaultConstructorsVisitor;
+import com.google.j2cl.common.VelocityUtil;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.frontend.CompilationUnitBuilder;
 import com.google.j2cl.frontend.FrontendFlags;
 import com.google.j2cl.frontend.FrontendOptions;
 import com.google.j2cl.frontend.JdtParser;
 import com.google.j2cl.generator.JavaScriptGenerator;
-import com.google.j2cl.generator.VelocityUtil;
 
 import org.apache.velocity.app.VelocityEngine;
 

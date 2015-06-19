@@ -16,12 +16,14 @@
 package com.google.j2cl.ast;
 
 import com.google.auto.value.AutoValue;
+import com.google.j2cl.ast.processors.Visitable;
 
 /**
  * A (by signature) reference to a field.
  */
 @AutoValue
-public abstract class FieldReference {
+@Visitable
+public abstract class FieldReference extends Node {
   public static FieldReference create(
       boolean isStatic,
       Visibility visibility,
@@ -41,4 +43,9 @@ public abstract class FieldReference {
   public abstract String getFieldName();
 
   public abstract TypeReference getType();
+
+  @Override
+  FieldReference accept(Visitor visitor) {
+    return Visitor_FieldReference.visit(visitor, this);
+  }
 }

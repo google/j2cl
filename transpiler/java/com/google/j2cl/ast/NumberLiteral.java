@@ -15,9 +15,12 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Visitable;
+
 /**
  * Number literal node.
  */
+@Visitable
 public class NumberLiteral extends Expression {
   // TODO: maybe use value instead.
   private String token;
@@ -32,5 +35,10 @@ public class NumberLiteral extends Expression {
 
   public void setToken(String token) {
     this.token = token;
+  }
+
+  @Override
+  NumberLiteral accept(Visitor visitor) {
+    return Visitor_NumberLiteral.visit(visitor, this);
   }
 }

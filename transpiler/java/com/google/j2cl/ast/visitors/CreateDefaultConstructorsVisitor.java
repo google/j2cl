@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JavaType;
@@ -23,7 +24,6 @@ import com.google.j2cl.ast.MethodReference;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
-import com.google.j2cl.ast.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ import java.util.List;
  * Ensures that all Types have a real materialized constructor and not just an implicit default
  * constructor.
  */
-public class CreateDefaultConstructorsVisitor extends Visitor {
+public class CreateDefaultConstructorsVisitor extends AbstractVisitor {
   public static void doCreateDefaultConstructors(CompilationUnit compilationUnit) {
     new CreateDefaultConstructorsVisitor().createDefaultConstructors(compilationUnit);
   }

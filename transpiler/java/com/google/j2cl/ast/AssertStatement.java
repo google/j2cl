@@ -15,12 +15,17 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Visitable;
+
+import javax.annotation.Nullable;
+
 /**
  * Assert Statement.
  */
+@Visitable
 public class AssertStatement extends Statement {
   @Visitable Expression expression;
-  @Visitable Expression message;
+  @Visitable @Nullable Expression message;
 
   public AssertStatement(Expression expression, Expression message) {
     this.expression = expression;
@@ -45,6 +50,6 @@ public class AssertStatement extends Statement {
 
   @Override
   public AssertStatement accept(Visitor visitor) {
-    return VisitorAssertStatement.visit(visitor, this);
+    return Visitor_AssertStatement.visit(visitor, this);
   }
 }

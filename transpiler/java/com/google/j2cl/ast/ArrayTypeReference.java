@@ -17,11 +17,13 @@ package com.google.j2cl.ast;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.base.Strings;
+import com.google.j2cl.ast.processors.Visitable;
 
 /**
  * A (by name) reference to an Array type.
  */
 @AutoValue
+@Visitable
 public abstract class ArrayTypeReference extends TypeReference {
 
   @Override
@@ -75,6 +77,6 @@ public abstract class ArrayTypeReference extends TypeReference {
 
   @Override
   TypeReference accept(Visitor visitor) {
-    return VisitorTypeReference.visit(visitor, this);
+    return Visitor_ArrayTypeReference.visit(visitor, this);
   }
 }

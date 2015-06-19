@@ -15,11 +15,14 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Visitable;
+
 /**
  * An abstract base class for AST nodes.
  */
+@Visitable
 public abstract class Node {
   Node accept(Visitor visitor) {
-    return VisitorNode.visit(visitor, this);
+    return Visitor_Node.visit(visitor, this);
   }
 }

@@ -15,7 +15,16 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Visitable;
+
 /**
  * Base class for expressions.
  */
-public abstract class Expression extends Node {}
+@Visitable
+public abstract class Expression extends Node {
+
+  @Override
+  Expression accept(Visitor visitor) {
+    return Visitor_Expression.visit(visitor, this);
+  }
+}

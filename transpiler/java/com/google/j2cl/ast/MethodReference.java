@@ -17,12 +17,14 @@ package com.google.j2cl.ast;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
+import com.google.j2cl.ast.processors.Visitable;
 
 /**
  * A (by signature) reference to a method.
  */
 @AutoValue
-public abstract class MethodReference {
+@Visitable
+public abstract class MethodReference extends Node {
   public static MethodReference create(
       boolean isStatic,
       Visibility visibility,
@@ -54,4 +56,9 @@ public abstract class MethodReference {
   public abstract ImmutableList<TypeReference> getParameterTypeReferences();
 
   public abstract TypeReference getReturnTypeReference();
+
+  @Override
+  MethodReference accept(Visitor visitor) {
+    return Visitor_MethodReference.visit(visitor, this);
+  }
 }

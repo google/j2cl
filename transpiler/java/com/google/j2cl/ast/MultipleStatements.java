@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Visitable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +24,9 @@ import java.util.List;
  * Class for multiple statements. This is now used for translating multiple
  * variable declaration fragments.
  */
+@Visitable
 public class MultipleStatements extends Statement {
-  private List<Statement> statements = new ArrayList<>();
+  @Visitable List<Statement> statements = new ArrayList<>();
 
   public MultipleStatements(List<Statement> statements) {
     this.statements.addAll(statements);
@@ -31,5 +34,10 @@ public class MultipleStatements extends Statement {
 
   public List<Statement> getStatements() {
     return statements;
+  }
+
+  @Override
+  MultipleStatements accept(Visitor visitor) {
+    return Visitor_MultipleStatements.visit(visitor, this);
   }
 }

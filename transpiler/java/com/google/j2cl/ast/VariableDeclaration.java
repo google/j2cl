@@ -15,12 +15,15 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Visitable;
+
 /**
  * Class for variable declaration.
  */
+@Visitable
 public class VariableDeclaration extends Statement {
-  private Variable variable;
-  private Expression initializer;
+  @Visitable Variable variable;
+  @Visitable Expression initializer;
 
   public VariableDeclaration(Variable variable, Expression initializer) {
     this.variable = variable;
@@ -41,5 +44,10 @@ public class VariableDeclaration extends Statement {
 
   public void setInitializer(Expression initializer) {
     this.initializer = initializer;
+  }
+
+  @Override
+  VariableDeclaration accept(Visitor visitor) {
+    return Visitor_VariableDeclaration.visit(visitor, this);
   }
 }

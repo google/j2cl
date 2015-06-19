@@ -15,16 +15,24 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Visitable;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 /**
  * Class for new instance expression.
  */
+@Visitable
 public class NewInstance extends Expression {
-  private Expression qualifier;
-  private MethodReference constructor;
-  private List<Expression> arguments = new ArrayList<>();
+
+  @Visitable @Nullable Expression qualifier;
+
+  @Visitable MethodReference constructor;
+
+  @Visitable List<Expression> arguments = new ArrayList<>();
 
   public NewInstance(
       Expression qualifier, MethodReference constructor, List<Expression> arguments) {
@@ -51,5 +59,10 @@ public class NewInstance extends Expression {
 
   public void setConstructor(MethodReference constructor) {
     this.constructor = constructor;
+  }
+
+  @Override
+  NewInstance accept(Visitor visitor) {
+    return Visitor_NewInstance.visit(visitor, this);
   }
 }

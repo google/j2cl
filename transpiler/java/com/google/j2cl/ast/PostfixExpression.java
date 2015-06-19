@@ -15,11 +15,14 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Visitable;
+
 /**
  * Class for Postfix Expression.
  */
+@Visitable
 public class PostfixExpression extends Expression {
-  private Expression operand;
+  @Visitable Expression operand;
   private PostfixOperator operator;
 
   public PostfixExpression(Expression operand, PostfixOperator operator) {
@@ -41,5 +44,10 @@ public class PostfixExpression extends Expression {
 
   public void setOperator(PostfixOperator operator) {
     this.operator = operator;
+  }
+
+  @Override
+  PostfixExpression accept(Visitor visitor) {
+    return Visitor_PostfixExpression.visit(visitor, this);
   }
 }

@@ -1,0 +1,23 @@
+package ${packageName};
+
+public abstract class AbstractVisitor implements Visitor {
+
+#foreach($clazz in $classes)
+  public boolean enter${clazz.SimpleName}(${clazz.SimpleName} node) {
+#if(${clazz.isTop()})
+    return true;
+#else
+    return enter${clazz.SuperclassName}(node);
+#end
+    }
+
+#end
+#foreach($clazz in $classes)
+  public void exit${clazz.SimpleName}(${clazz.SimpleName} node) {
+#if(!${clazz.isTop()})
+      exit${clazz.SuperclassName}(node);
+#end
+  }
+
+#end
+}

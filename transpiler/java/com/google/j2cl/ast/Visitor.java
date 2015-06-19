@@ -16,77 +16,102 @@
 package com.google.j2cl.ast;
 
 /**
- * A general Visitor class to traverse/modify the AST.
+ * A general Visitor intefeace to traverse/modify the AST.
  */
-public class Visitor {
+interface Visitor {
+  boolean enterArrayTypeReference(ArrayTypeReference arrayTypeReference);
 
-  public boolean enterJavaType(JavaType type) {
-    return enterNode(type);
-  }
+  boolean enterAssertStatement(AssertStatement assertStatement);
 
-  public void exitJavaType(JavaType type) {
-    exitNode(type);
-  }
+  boolean enterBinaryExpression(BinaryExpression node);
 
-  public void exitMethod(Method method) {
-    exitNode(method);
-  }
+  boolean enterBlock(Block block);
 
-  public void exitNode(Node node) {}
+  boolean enterCompilationUnit(CompilationUnit compilationUnit);
 
-  public boolean enterNode(Node node) {
-    return true;
-  }
+  boolean enterExpression(Expression expression);
 
-  public boolean enterMethod(Method method) {
-    return enterNode(method);
-  }
+  boolean enterExpressionStatement(ExpressionStatement node);
 
-  public boolean enterCompilationUnit(CompilationUnit compilationUnit) {
-    return enterNode(compilationUnit);
-  }
+  boolean enterField(Field field);
 
-  public void exitCompilationUnit(CompilationUnit compilationUnit) {
-    exitNode(compilationUnit);
-  }
+  boolean enterFieldReference(FieldReference fieldReference);
 
-  public boolean enterTypeReference(TypeReference typeReference) {
-    return enterNode(typeReference);
-  }
+  boolean enterJavaType(JavaType type);
 
-  public void exitTypeReference(TypeReference typeReference) {
-    exitNode(typeReference);
-  }
+  boolean enterMethod(Method method);
 
-  public boolean enterAssertStatement(AssertStatement assertStatement) {
-    return enterNode(assertStatement);
-  }
+  boolean enterMethodReference(MethodReference methodReference);
 
-  public void exitAssertStatement(AssertStatement assertStatement) {
-    exitNode(assertStatement);
-  }
+  boolean enterMultipleStatements(MultipleStatements node);
 
-  public boolean enterExpression(Expression expression) {
-    return enterNode(expression);
-  }
+  boolean enterNode(Node node);
 
-  public void exitExpression(Expression expression) {
-    exitNode(expression);
-  }
+  boolean enterNewInstance(NewInstance node);
 
-  public boolean enterBlock(Block block) {
-    return enterNode(block);
-  }
+  boolean enterNumberLiteral(NumberLiteral node);
 
-  public void exitBlock(Block block) {
-    exitNode(block);
-  }
+  boolean enterParenthesizedExpression(ParenthesizedExpression node);
 
-  public boolean enterStatement(Statement statement) {
-    return enterNode(statement);
-  }
+  boolean enterPostfixExpression(PostfixExpression node);
 
-  public void exitStatement(Statement statement) {
-    exitNode(statement);
-  }
+  boolean enterPrefixExpression(PrefixExpression node);
+
+  boolean enterRegularTypeReference(RegularTypeReference regularTypeReference);
+
+  boolean enterStatement(Statement statement);
+
+  boolean enterTypeReference(TypeReference typeReference);
+
+  boolean enterVariable(Variable node);
+
+  boolean enterVariableDeclaration(VariableDeclaration node);
+
+  void exitArrayTypeReference(ArrayTypeReference typeReference);
+
+  void exitAssertStatement(AssertStatement assertStatement);
+
+  void exitBinaryExpression(BinaryExpression node);
+
+  void exitBlock(Block block);
+
+  void exitCompilationUnit(CompilationUnit compilationUnit);
+
+  void exitExpression(Expression expression);
+
+  void exitExpressionStatement(ExpressionStatement node);
+
+  void exitField(Field field);
+
+  void exitFieldReference(FieldReference fieldReference);
+
+  void exitJavaType(JavaType type);
+
+  void exitMethod(Method method);
+
+  void exitMethodReference(MethodReference methodReference);
+
+  void exitMultipleStatements(MultipleStatements node);
+
+  void exitNewInstance(NewInstance node);
+
+  void exitNode(Node node);
+
+  void exitNumberLiteral(NumberLiteral node);
+
+  void exitParenthesizedExpression(ParenthesizedExpression node);
+
+  void exitPostfixExpression(PostfixExpression node);
+
+  void exitPrefixExpression(PrefixExpression node);
+
+  void exitRegularTypeReference(RegularTypeReference typeReference);
+
+  void exitStatement(Statement statement);
+
+  void exitTypeReference(TypeReference typeReference);
+
+  void exitVariable(Variable node);
+
+  void exitVariableDeclaration(VariableDeclaration node);
 }

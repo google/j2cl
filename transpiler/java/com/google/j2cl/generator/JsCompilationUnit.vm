@@ -9,7 +9,7 @@ goog.module('gen.${packageName}.${moduleName}Module');
 
 
 #set ($imports = ${TranspilerUtils.getImports(${compilationUnit})})
-#foreach( $requiredModule in ${imports})
+#foreach($requiredModule in ${imports})
 #set ($importName = ${requiredModule.getClassName()})
 var $importName = goog.require('${requiredModule.getModuleName()}').$importName;
 #end
