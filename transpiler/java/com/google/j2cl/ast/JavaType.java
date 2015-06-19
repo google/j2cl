@@ -142,6 +142,7 @@ public class JavaType extends Node {
     this.selfReference = selfReference;
   }
 
+  @Override
   JavaType accept(Visitor visitor) {
     return VisitorJavaType.visit(visitor, this);
   }

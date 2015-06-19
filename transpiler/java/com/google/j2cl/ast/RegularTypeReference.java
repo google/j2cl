@@ -106,6 +106,7 @@ public abstract class RegularTypeReference extends TypeReference {
     return this.getSourceName().compareTo(that.getSourceName());
   }
 
+  @Override
   TypeReference accept(Visitor visitor) {
     return VisitorTypeReference.visit(visitor, this);
   }

@@ -19,6 +19,7 @@ package com.google.j2cl.ast;
  * A base class for Statement.
  */
 public abstract class Statement extends Node {
+  @Override
   public Statement accept(Visitor visitor) {
     return VisitorStatement.visit(visitor, this);
   }

@@ -24,8 +24,10 @@ import com.google.common.base.Strings;
 @AutoValue
 public abstract class ArrayTypeReference extends TypeReference {
 
+  @Override
   public abstract int getDimensions();
 
+  @Override
   public abstract TypeReference getLeafType();
 
   @Override
@@ -71,6 +73,7 @@ public abstract class ArrayTypeReference extends TypeReference {
     return Strings.repeat("[", getDimensions());
   }
 
+  @Override
   TypeReference accept(Visitor visitor) {
     return VisitorTypeReference.visit(visitor, this);
   }

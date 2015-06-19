@@ -43,6 +43,7 @@ public class AssertStatement extends Statement {
     this.message = message;
   }
 
+  @Override
   public AssertStatement accept(Visitor visitor) {
     return VisitorAssertStatement.visit(visitor, this);
   }

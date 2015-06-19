@@ -32,6 +32,7 @@ public class Block extends Statement {
     return statements;
   }
 
+  @Override
   public Block accept(Visitor visitor) {
     return VisitorBlock.visit(visitor, this);
   }

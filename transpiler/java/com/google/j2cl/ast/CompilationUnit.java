@@ -64,6 +64,7 @@ public class CompilationUnit extends Node {
     return filePath.substring(filePath.lastIndexOf(File.separatorChar) + 1, endIndex);
   }
 
+  @Override
   public CompilationUnit accept(Visitor visitor) {
     return VisitorCompilationUnit.visit(visitor, this);
   }
