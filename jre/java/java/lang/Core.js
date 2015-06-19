@@ -194,6 +194,7 @@ class Class {
    * @param {string} simpleName
    * @param {string} name
    * @param {Class} superClassLiteral
+   * @param {string} canonicalName
    * @param {Array<Object>} enumConstants
    * @return {Class}
    * @public
