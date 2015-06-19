@@ -22,7 +22,7 @@ public enum Visibility {
   PUBLIC("public"),
   PROTECTED("protected"),
   PRIVATE("private"),
-  PACKAGE_PRIVATE("");
+  PACKAGE_PRIVATE("package");
 
   public String value;
 

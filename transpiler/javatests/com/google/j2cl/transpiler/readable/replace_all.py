@@ -108,7 +108,7 @@ def gather_closure_warnings():
     # Remove unstable build timing lines.
     build_log = "\n".join(
         [line for line in build_log.splitlines()
-         if not line.startswith("_")])
+         if not line.startswith("_") and "Running" not in line])
     build_log_path = extract_pattern("//(.*?):", build_log) + "/build.log"
     with open(build_log_path, "w") as build_log_file:
       build_log_file.write(build_log)
