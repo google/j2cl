@@ -1,9 +1,14 @@
-Contained are ABI examples that document output readability.
+Contained are ABI examples that document output readability and help to make
+sure that we do not generate Closure compiler warnings.
 
 Tests used for verification of output JS behavior and tests of output JS
-readability are being kept separate. These are the readability tests and
-they should not be executed as JS because the line between these two
-styles of tests should not be muddied.
+readability are being kept separate.
+
+These are the readability tests and they should not be executed as JS
+because the line between these two styles of tests should not be
+muddied. But when writing and reviewing do check build.log changes to make
+sure that we do not generate Closure compiler warnings. If a new warning is
+occurring and it is our mistake, fix it, otherwise file a bug with Closure.
 
 Example input Java and output JS source in this folder and its subfolders
 are copyright and licensed as follows:
@@ -27,8 +32,10 @@ Useful commands:
   * python third_party/b/c/d/e/replace_all.py
   * ./debug_transpile.sh <example_name>
 
-Todo list in transpiler:
-  * Collect Imports information.
+Tracking Closure warning issues:
+  * https://b.corp.google.com/hotlists/269212
+  * b/20102666 WARNING - actual parameter of Foo.$markImplementor does not match formal parameter
+  * b/21955161 WARNING - Access to protected property $ctor__java_lang_Object of gen.java.lang.CoreModule.Object not allowed here.
 
 Likely readable examples to add (remove some redundant):
   * anonymousclasswithcapture
