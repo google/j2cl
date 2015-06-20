@@ -27,7 +27,6 @@ import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodReference;
-import com.google.j2cl.ast.MultipleStatements;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.ParenthesizedExpression;
@@ -49,6 +48,8 @@ import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -160,18 +161,22 @@ public class CompilationUnitBuilder {
       }
     }
 
-    public Statement convert(org.eclipse.jdt.core.dom.Statement node) {
+    public Collection<Statement> convert(org.eclipse.jdt.core.dom.Statement node) {
       switch (node.getNodeType()) {
         case ASTNode.ASSERT_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.AssertStatement) node);
+          return singletonStatement(convert((org.eclipse.jdt.core.dom.AssertStatement) node));
         case ASTNode.EXPRESSION_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.ExpressionStatement) node);
+          return singletonStatement(convert((org.eclipse.jdt.core.dom.ExpressionStatement) node));
         case ASTNode.VARIABLE_DECLARATION_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.VariableDeclarationStatement) node);
         default:
           throw new RuntimeException(
               "Need to implement translation for statement type: " + node.getClass().getName());
       }
+    }
+
+    private Collection<Statement> singletonStatement(Statement statement) {
+      return Collections.singletonList(statement);
     }
 
     public AssertStatement convert(org.eclipse.jdt.core.dom.AssertStatement node) {
@@ -184,7 +189,7 @@ public class CompilationUnitBuilder {
       List<Statement> body = new ArrayList<>();
       for (Object object : node.statements()) {
         org.eclipse.jdt.core.dom.Statement statement = (org.eclipse.jdt.core.dom.Statement) object;
-        body.add(convert(statement));
+        body.addAll(convert(statement));
       }
       return new Block(body);
     }
@@ -233,14 +238,15 @@ public class CompilationUnitBuilder {
       return new VariableDeclaration(variable, initializer);
     }
 
-    public Statement convert(org.eclipse.jdt.core.dom.VariableDeclarationStatement node) {
+    public Collection<Statement> convert(
+        org.eclipse.jdt.core.dom.VariableDeclarationStatement node) {
       List<Statement> variableDeclarations = new ArrayList<>();
       for (Object object : node.fragments()) {
         org.eclipse.jdt.core.dom.VariableDeclarationFragment fragment =
             (org.eclipse.jdt.core.dom.VariableDeclarationFragment) object;
         variableDeclarations.add(convert(fragment));
       }
-      return new MultipleStatements(variableDeclarations);
+      return variableDeclarations;
     }
 
     private JavaType createJavaType(ITypeBinding typeBinding) {

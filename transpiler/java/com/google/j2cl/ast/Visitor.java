@@ -43,8 +43,6 @@ interface Visitor {
 
   boolean enterMethodReference(MethodReference methodReference);
 
-  boolean enterMultipleStatements(MultipleStatements node);
-
   boolean enterNode(Node node);
 
   boolean enterNewInstance(NewInstance node);
@@ -90,8 +88,6 @@ interface Visitor {
   void exitMethod(Method method);
 
   void exitMethodReference(MethodReference methodReference);
-
-  void exitMultipleStatements(MultipleStatements node);
 
   void exitNewInstance(NewInstance node);
 

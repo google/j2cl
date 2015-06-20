@@ -22,7 +22,6 @@ import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
-import com.google.j2cl.ast.MultipleStatements;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.ParenthesizedExpression;
@@ -44,8 +43,6 @@ public class StatementSourceGenerator {
       return toSource((AssertStatement) statement);
     } else if (statement instanceof ExpressionStatement) {
       return toSource((ExpressionStatement) statement);
-    } else if (statement instanceof MultipleStatements) {
-      return toSource((MultipleStatements) statement);
     } else if (statement instanceof VariableDeclaration) {
       return toSource((VariableDeclaration) statement);
     } else {
@@ -95,10 +92,6 @@ public class StatementSourceGenerator {
 
   public static String toSource(ExpressionStatement statement) {
     return toSource(statement.getExpression()) + ";";
-  }
-
-  public static String toSource(MultipleStatements statement) {
-    return Joiner.on("\n").join(transformStatementsToSource(statement.getStatements()));
   }
 
   public static String toSource(NewInstance expression) {
