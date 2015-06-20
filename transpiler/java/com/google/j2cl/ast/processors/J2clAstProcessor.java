@@ -52,6 +52,7 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.ElementFilter;
@@ -255,7 +256,7 @@ public class J2clAstProcessor extends AbstractProcessor {
     return processingEnv.getFiler().createSourceFile(claszzName);
   }
 
-  private VisitableClass extractVisitableClass(TypeElement typeElement) {
+  private VisitableClass extractVisitableClass(final TypeElement typeElement) {
     final Types typeUtils = processingEnv.getTypeUtils();
     ImmutableList<Field> allFieldsNames =
         FluentIterable.from(ElementFilter.fieldsIn(typeElement.getEnclosedElements()))
@@ -275,6 +276,10 @@ public class J2clAstProcessor extends AbstractProcessor {
                 })
             .toList();
 
+    if (!hasAcceptMethod(typeElement)) {
+      abortWithError(typeElement.getQualifiedName() + " does not implement \""
+          + typeElement.getSimpleName() + " accept(Visitor visitor)\"", typeElement);
+    }
     VisitableClass visitableClass = new VisitableClass();
     visitableClass.simpleName = typeElement.getSimpleName().toString();
     visitableClass.packageName = MoreElements.getPackage(typeElement).getQualifiedName().toString();
@@ -289,6 +294,24 @@ public class J2clAstProcessor extends AbstractProcessor {
           typeUtils.asElement(typeElement.getSuperclass()).getSimpleName().toString();
     }
     return visitableClass;
+  }
+
+  private boolean hasAcceptMethod(final TypeElement typeElement) {
+    return FluentIterable.from(ElementFilter.methodsIn(typeElement.getEnclosedElements())).anyMatch(
+        new Predicate<ExecutableElement>() {
+          @Override
+          public boolean apply(@Nullable ExecutableElement executableElement) {
+            return executableElement.getSimpleName().toString().equals("accept")
+                && executableElement.getParameters().size() == 1
+                && processingEnv.getTypeUtils().asElement(
+                    executableElement.getParameters().get(0).asType())
+                      .getSimpleName().toString().equals("Visitor")
+                && MoreElements.asType(processingEnv.getTypeUtils()
+                    .asElement(executableElement.getReturnType()))
+                    .getQualifiedName()
+                    .equals(typeElement.getQualifiedName());
+          }
+        });
   }
 
   private static Predicate<VariableElement> hasAnnotation(
@@ -314,6 +337,11 @@ public class J2clAstProcessor extends AbstractProcessor {
 
   private void reportError(String string, TypeElement typeElement) {
     processingEnv.getMessager().printMessage(Kind.ERROR, string, typeElement);
+  }
+
+  private void abortWithError(String string, TypeElement typeElement) {
+    processingEnv.getMessager().printMessage(Kind.ERROR, string, typeElement);
+    throw new AbortProcessingException();
   }
 
   private void writeString(String clazzName, String content) throws IOException {

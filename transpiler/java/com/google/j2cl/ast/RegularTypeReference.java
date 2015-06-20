@@ -109,7 +109,7 @@ public abstract class RegularTypeReference extends TypeReference {
   }
 
   @Override
-  TypeReference accept(Visitor visitor) {
+  RegularTypeReference accept(Visitor visitor) {
     return Visitor_RegularTypeReference.visit(visitor, this);
   }
 
