@@ -45,7 +45,9 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   @Override
   public void exitRegularTypeReference(RegularTypeReference typeReference) {
-    typeReferences.add(typeReference);
+    if (!typeReference.isPrimitive()) {
+      typeReferences.add(typeReference);
+    }
   }
 
   @Override

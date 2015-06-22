@@ -113,5 +113,17 @@ public abstract class RegularTypeReference extends TypeReference {
     return Visitor_RegularTypeReference.visit(visitor, this);
   }
 
+  public boolean isPrimitive() {
+    String name = getSimpleName();
+    return name.equals("byte")
+        || name.equals("short")
+        || name.equals("int")
+        || name.equals("long")
+        || name.equals("float")
+        || name.equals("double")
+        || name.equals("boolean")
+        || name.equals("char");
+  }
+
   private static Interner<TypeReference> interner = Interners.newWeakInterner();
 }

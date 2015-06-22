@@ -4,7 +4,6 @@ goog.module('gen.com.google.j2cl.transpiler.readable.arithmeticexpressions.Arith
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
 var Util = goog.require('nativebootstrap.UtilModule').Util;
-var Asserts = goog.require('vmbootstrap.AssertsModule').Asserts;
 
 
 /**
@@ -29,10 +28,18 @@ class ArithmeticExpressionsTest extends Object {
    * @public
    */
   m_test() {
-    Asserts.$enabled() && Asserts.$assert((1 + 1 + 2 - 5 == -1));
-    Asserts.$enabled() && Asserts.$assert(((1 + 2) * (3 + 4) == 21));
-    Asserts.$enabled() && Asserts.$assert((!(1 + 2 == 4)));
-    Asserts.$enabled() && Asserts.$assert((!(1 + 2 + 3 == 4)));
+    var a = 10;
+    var b = a++;
+    var c = a--;
+    var d = ++a;
+    var e = --a;
+    var f = -a;
+    var g = +a;
+    var h = ~a;
+    var i = 1 + 1 + 2 - 5;
+    var j = (1 + 2) * (3 + 4);
+    var k = !(1 + 2 + 3 == 4);
+    var l = (1 + 2 != 4);
   }
 
   /**
