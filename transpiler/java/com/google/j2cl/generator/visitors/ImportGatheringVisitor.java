@@ -34,7 +34,6 @@ import javax.annotation.Nullable;
 /**
  * Traverses a CompilationUnit and gathers imports for all its referenced types.
  */
-// TODO: turn into an actual Visitor once we have such a framework.
 public class ImportGatheringVisitor extends AbstractVisitor {
   private Set<Import> importModules = new LinkedHashSet<>();
   private Set<TypeReference> typeReferences = new LinkedHashSet<>();

@@ -23,6 +23,7 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Field;
+import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
 import com.google.j2cl.ast.Method;
@@ -36,12 +37,15 @@ import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclaration;
+import com.google.j2cl.ast.VariableReference;
 import com.google.j2cl.errors.Errors;
 
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
+import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
+import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
@@ -50,6 +54,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -60,6 +65,8 @@ import java.util.Map.Entry;
 public class CompilationUnitBuilder {
 
   private class ASTConverter {
+    private Map<IVariableBinding, Variable> variableByJdtBinding = new HashMap<>();
+
     public CompilationUnit convert(
         String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
       String packageName = JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit);
@@ -147,6 +154,8 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.ClassInstanceCreation) node);
         case ASTNode.INFIX_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.InfixExpression) node);
+        case ASTNode.INSTANCEOF_EXPRESSION:
+          return convert((org.eclipse.jdt.core.dom.InstanceofExpression) node);
         case ASTNode.NUMBER_LITERAL:
           return convert((org.eclipse.jdt.core.dom.NumberLiteral) node);
         case ASTNode.PARENTHESIZED_EXPRESSION:
@@ -155,6 +164,8 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.PostfixExpression) node);
         case ASTNode.PREFIX_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.PrefixExpression) node);
+        case ASTNode.SIMPLE_NAME:
+          return convert((org.eclipse.jdt.core.dom.SimpleName) node);
         default:
           throw new RuntimeException(
               "Need to implement translation for expression type: " + node.getClass().getName());
@@ -173,6 +184,12 @@ public class CompilationUnitBuilder {
           throw new RuntimeException(
               "Need to implement translation for statement type: " + node.getClass().getName());
       }
+    }
+
+    public InstanceOfExpression convert(org.eclipse.jdt.core.dom.InstanceofExpression node) {
+      Expression leftOperand = convert(node.getLeftOperand());
+      TypeReference rightOperand = createTypeReference(node.getRightOperand().resolveBinding());
+      return new InstanceOfExpression(leftOperand, rightOperand);
     }
 
     private Collection<Statement> singletonStatement(Statement statement) {
@@ -216,6 +233,29 @@ public class CompilationUnitBuilder {
       return new NumberLiteral(node.getToken());
     }
 
+    public Expression convert(org.eclipse.jdt.core.dom.SimpleName node) {
+      IBinding binding = node.resolveBinding();
+      if (binding instanceof IVariableBinding) {
+        IVariableBinding variableBinding = (IVariableBinding) binding;
+        if (variableBinding.isField()) {
+          // TODO: to be implemented.
+          throw new RuntimeException(
+              "Need to implement translation for SimpleName binding: " + node.getClass().getName());
+        } else if (variableBinding.isParameter()) {
+          // TODO: to be implemented.
+          throw new RuntimeException(
+              "Need to implement translation for SimpleName binding: " + node.getClass().getName());
+        } else {
+          // local variable.
+          return new VariableReference(variableByJdtBinding.get(variableBinding));
+        }
+      } else {
+        // TODO: to be implemented
+        throw new RuntimeException(
+            "Need to implement translation for SimpleName binding: " + node.getClass().getName());
+      }
+    }
+
     public ParenthesizedExpression convert(org.eclipse.jdt.core.dom.ParenthesizedExpression node) {
       return new ParenthesizedExpression(convert(node.getExpression()));
     }
@@ -231,10 +271,11 @@ public class CompilationUnitBuilder {
     }
 
     public VariableDeclaration convert(org.eclipse.jdt.core.dom.VariableDeclarationFragment node) {
-      Variable variable =
-          JdtUtils.createVariable(node.resolveBinding(), compilationUnitNameLocator);
+      IVariableBinding variableBinding = node.resolveBinding();
+      Variable variable = JdtUtils.createVariable(variableBinding, compilationUnitNameLocator);
       Expression initializer =
           node.getInitializer() == null ? null : convert(node.getInitializer());
+      variableByJdtBinding.put(variableBinding, variable);
       return new VariableDeclaration(variable, initializer);
     }
 

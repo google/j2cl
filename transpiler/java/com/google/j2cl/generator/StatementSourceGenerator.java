@@ -22,13 +22,16 @@ import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
+import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.ParenthesizedExpression;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.Statement;
+import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.VariableDeclaration;
+import com.google.j2cl.ast.VariableReference;
 
 import java.util.List;
 
@@ -54,10 +57,14 @@ public class StatementSourceGenerator {
   public static String toSource(Expression expression) {
     if (expression instanceof BinaryExpression) {
       return toSource((BinaryExpression) expression);
+    } else if (expression instanceof InstanceOfExpression) {
+      return toSource((InstanceOfExpression) expression);
     } else if (expression instanceof NewInstance) {
       return toSource((NewInstance) expression);
     } else if (expression instanceof NumberLiteral) {
       return toSource((NumberLiteral) expression);
+    } else if (expression instanceof VariableReference) {
+      return toSource((VariableReference) expression);
     } else if (expression instanceof ParenthesizedExpression) {
       return toSource((ParenthesizedExpression) expression);
     } else if (expression instanceof PostfixExpression) {
@@ -94,6 +101,17 @@ public class StatementSourceGenerator {
     return toSource(statement.getExpression()) + ";";
   }
 
+  public static String toSource(InstanceOfExpression expression) {
+    TypeReference checkType = expression.getTestType();
+    if (checkType.isArray()) {
+      throw new RuntimeException("Need to implement toSource() for instanceof ArrayTypeReference");
+    }
+    return String.format(
+        "%s.$isInstance(%s)",
+        TranspilerUtils.getClassName(checkType),
+        toSource(expression.getExpression()));
+  }
+
   public static String toSource(NewInstance expression) {
     String className =
         TranspilerUtils.getClassName(expression.getConstructor().getEnclosingClassReference());
@@ -106,6 +124,10 @@ public class StatementSourceGenerator {
 
   public static String toSource(NumberLiteral expression) {
     return expression.getToken();
+  }
+
+  public static String toSource(VariableReference expression) {
+    return expression.getTarget().getName();
   }
 
   public static String toSource(ParenthesizedExpression expression) {

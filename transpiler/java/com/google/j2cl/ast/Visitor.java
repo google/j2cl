@@ -37,6 +37,8 @@ interface Visitor {
 
   boolean enterFieldReference(FieldReference fieldReference);
 
+  boolean enterInstanceOfExpression(InstanceOfExpression instanceofExpression);
+
   boolean enterJavaType(JavaType type);
 
   boolean enterMethod(Method method);
@@ -65,6 +67,8 @@ interface Visitor {
 
   boolean enterVariableDeclaration(VariableDeclaration node);
 
+  boolean enterVariableReference(VariableReference variableRefernce);
+
   void exitArrayTypeReference(ArrayTypeReference typeReference);
 
   void exitAssertStatement(AssertStatement assertStatement);
@@ -82,6 +86,8 @@ interface Visitor {
   void exitField(Field field);
 
   void exitFieldReference(FieldReference fieldReference);
+
+  void exitInstanceOfExpression(InstanceOfExpression instanceofExpression);
 
   void exitJavaType(JavaType type);
 
@@ -110,4 +116,6 @@ interface Visitor {
   void exitVariable(Variable node);
 
   void exitVariableDeclaration(VariableDeclaration node);
+
+  void exitVariableReference(VariableReference variableReference);
 }

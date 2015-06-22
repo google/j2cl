@@ -13,16 +13,31 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.transpiler.integration.instanceofclass;
+package com.google.j2cl.ast;
+
+import com.google.j2cl.ast.processors.Visitable;
 
 /**
- * Test data
+ * Class for variable reference.
  */
-public class Main {
-  public static void main(String... args) {
-    Object object = new Main();
-    assert object instanceof Main;
-    assert object instanceof Object;
-    assert !(object instanceof String);
+@Visitable
+public class VariableReference extends Expression {
+  @Visitable Variable target;
+
+  public VariableReference(Variable target) {
+    this.target = target;
+  }
+
+  public Variable getTarget() {
+    return target;
+  }
+
+  public void setTarget(Variable target) {
+    this.target = target;
+  }
+
+  @Override
+  VariableReference accept(Visitor visitor) {
+    return Visitor_VariableReference.visit(visitor, this);
   }
 }
