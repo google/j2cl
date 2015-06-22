@@ -1,7 +1,7 @@
 package com.google.j2cl.transpiler.readable.arithmeticexpressions;
 
-public class ArithmeticExpressionsTest {
-  public void test() {
+public class ArithmeticExpressions {
+  public void main() {
     int a = 10;
     int b = a++;
     int c = a--;

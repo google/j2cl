@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.frontend;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
@@ -28,7 +30,9 @@ import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodReference;
+import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
+import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.ParenthesizedExpression;
 import com.google.j2cl.ast.PostfixExpression;
@@ -42,6 +46,7 @@ import com.google.j2cl.errors.Errors;
 
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
+import org.eclipse.jdt.core.dom.ArrayType;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
 import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
@@ -67,7 +72,7 @@ public class CompilationUnitBuilder {
   private class ASTConverter {
     private Map<IVariableBinding, Variable> variableByJdtBinding = new HashMap<>();
 
-    public CompilationUnit convert(
+    private CompilationUnit convert(
         String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
       String packageName = JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit);
       CompilationUnit j2clCompilationUnit = new CompilationUnit(sourceFilePath, packageName);
@@ -78,7 +83,7 @@ public class CompilationUnitBuilder {
       return j2clCompilationUnit;
     }
 
-    public JavaType convert(AbstractTypeDeclaration node) {
+    private JavaType convert(AbstractTypeDeclaration node) {
       switch (node.getNodeType()) {
         case ASTNode.TYPE_DECLARATION:
           return convert((TypeDeclaration) node);
@@ -89,7 +94,7 @@ public class CompilationUnitBuilder {
       }
     }
 
-    public JavaType convert(TypeDeclaration node) {
+    private JavaType convert(TypeDeclaration node) {
       ITypeBinding typeBinding = node.resolveBinding();
       JavaType type = createJavaType(typeBinding);
       for (Object object : node.bodyDeclarations()) {
@@ -108,7 +113,7 @@ public class CompilationUnitBuilder {
       return type;
     }
 
-    public List<Field> convert(FieldDeclaration node) {
+    private List<Field> convert(FieldDeclaration node) {
       List<Field> fields = new ArrayList<>();
       for (Object object : node.fragments()) {
         VariableDeclarationFragment fragment = (VariableDeclarationFragment) object;
@@ -123,7 +128,7 @@ public class CompilationUnitBuilder {
       return fields;
     }
 
-    public Method convert(MethodDeclaration node) {
+    private Method convert(MethodDeclaration node) {
       List<Variable> parameters = new ArrayList<>();
       for (Object element : node.parameters()) {
         SingleVariableDeclaration parameter = (SingleVariableDeclaration) element;
@@ -136,7 +141,25 @@ public class CompilationUnitBuilder {
           convert(node.getBody()));
     }
 
-    public NewInstance convert(org.eclipse.jdt.core.dom.ClassInstanceCreation node) {
+    @SuppressWarnings("cast")
+    private NewArray convert(org.eclipse.jdt.core.dom.ArrayCreation node) {
+      ArrayType arrayType = node.getType();
+
+      @SuppressWarnings("unchecked")
+      List<Expression> dimensionExpressions =
+          convert((List<org.eclipse.jdt.core.dom.Expression>) node.dimensions());
+      // If some dimensions are not initialized then make that explicit.
+      while (dimensionExpressions.size() < arrayType.getDimensions()) {
+        dimensionExpressions.add(new NullLiteral());
+      }
+
+      ITypeBinding leafTypeBinding = arrayType.getElementType().resolveBinding();
+      return new NewArray(
+          dimensionExpressions,
+          JdtUtils.createTypeReference(leafTypeBinding, compilationUnitNameLocator));
+    }
+
+    private NewInstance convert(org.eclipse.jdt.core.dom.ClassInstanceCreation node) {
       Expression qualifier = node.getExpression() == null ? null : convert(node.getExpression());
       MethodReference constructor =
           JdtUtils.createMethodReference(
@@ -148,8 +171,10 @@ public class CompilationUnitBuilder {
       return new NewInstance(qualifier, constructor, arguments);
     }
 
-    public Expression convert(org.eclipse.jdt.core.dom.Expression node) {
+    private Expression convert(org.eclipse.jdt.core.dom.Expression node) {
       switch (node.getNodeType()) {
+        case ASTNode.ARRAY_CREATION:
+          return convert((org.eclipse.jdt.core.dom.ArrayCreation) node);
         case ASTNode.CLASS_INSTANCE_CREATION:
           return convert((org.eclipse.jdt.core.dom.ClassInstanceCreation) node);
         case ASTNode.INFIX_EXPRESSION:
@@ -172,7 +197,19 @@ public class CompilationUnitBuilder {
       }
     }
 
-    public Collection<Statement> convert(org.eclipse.jdt.core.dom.Statement node) {
+    private List<Expression> convert(List<org.eclipse.jdt.core.dom.Expression> nodes) {
+      return new ArrayList<>(
+          Lists.transform(
+              nodes,
+              new Function<org.eclipse.jdt.core.dom.Expression, Expression>() {
+                @Override
+                public Expression apply(org.eclipse.jdt.core.dom.Expression expression) {
+                  return convert(expression);
+                }
+              }));
+    }
+
+    private Collection<Statement> convert(org.eclipse.jdt.core.dom.Statement node) {
       switch (node.getNodeType()) {
         case ASTNode.ASSERT_STATEMENT:
           return singletonStatement(convert((org.eclipse.jdt.core.dom.AssertStatement) node));
@@ -186,7 +223,7 @@ public class CompilationUnitBuilder {
       }
     }
 
-    public InstanceOfExpression convert(org.eclipse.jdt.core.dom.InstanceofExpression node) {
+    private InstanceOfExpression convert(org.eclipse.jdt.core.dom.InstanceofExpression node) {
       Expression leftOperand = convert(node.getLeftOperand());
       TypeReference rightOperand = createTypeReference(node.getRightOperand().resolveBinding());
       return new InstanceOfExpression(leftOperand, rightOperand);
@@ -196,13 +233,13 @@ public class CompilationUnitBuilder {
       return Collections.singletonList(statement);
     }
 
-    public AssertStatement convert(org.eclipse.jdt.core.dom.AssertStatement node) {
+    private AssertStatement convert(org.eclipse.jdt.core.dom.AssertStatement node) {
       Expression message = node.getMessage() == null ? null : convert(node.getMessage());
       Expression expression = convert(node.getExpression());
       return new AssertStatement(expression, message);
     }
 
-    public Block convert(org.eclipse.jdt.core.dom.Block node) {
+    private Block convert(org.eclipse.jdt.core.dom.Block node) {
       List<Statement> body = new ArrayList<>();
       for (Object object : node.statements()) {
         org.eclipse.jdt.core.dom.Statement statement = (org.eclipse.jdt.core.dom.Statement) object;
@@ -211,11 +248,11 @@ public class CompilationUnitBuilder {
       return new Block(body);
     }
 
-    public Statement convert(org.eclipse.jdt.core.dom.ExpressionStatement node) {
+    private Statement convert(org.eclipse.jdt.core.dom.ExpressionStatement node) {
       return new ExpressionStatement(convert(node.getExpression()));
     }
 
-    public BinaryExpression convert(org.eclipse.jdt.core.dom.InfixExpression node) {
+    private BinaryExpression convert(org.eclipse.jdt.core.dom.InfixExpression node) {
       Expression leftOperand = convert(node.getLeftOperand());
       Expression rightOperand = convert(node.getRightOperand());
       BinaryOperator operator = JdtUtils.getBinaryOperator(node.getOperator());
@@ -229,11 +266,11 @@ public class CompilationUnitBuilder {
       return binaryExpression;
     }
 
-    public NumberLiteral convert(org.eclipse.jdt.core.dom.NumberLiteral node) {
+    private NumberLiteral convert(org.eclipse.jdt.core.dom.NumberLiteral node) {
       return new NumberLiteral(node.getToken());
     }
 
-    public Expression convert(org.eclipse.jdt.core.dom.SimpleName node) {
+    private Expression convert(org.eclipse.jdt.core.dom.SimpleName node) {
       IBinding binding = node.resolveBinding();
       if (binding instanceof IVariableBinding) {
         IVariableBinding variableBinding = (IVariableBinding) binding;
@@ -256,21 +293,21 @@ public class CompilationUnitBuilder {
       }
     }
 
-    public ParenthesizedExpression convert(org.eclipse.jdt.core.dom.ParenthesizedExpression node) {
+    private ParenthesizedExpression convert(org.eclipse.jdt.core.dom.ParenthesizedExpression node) {
       return new ParenthesizedExpression(convert(node.getExpression()));
     }
 
-    public PostfixExpression convert(org.eclipse.jdt.core.dom.PostfixExpression node) {
+    private PostfixExpression convert(org.eclipse.jdt.core.dom.PostfixExpression node) {
       return new PostfixExpression(
           convert(node.getOperand()), JdtUtils.getPostfixOperator(node.getOperator()));
     }
 
-    public PrefixExpression convert(org.eclipse.jdt.core.dom.PrefixExpression node) {
+    private PrefixExpression convert(org.eclipse.jdt.core.dom.PrefixExpression node) {
       return new PrefixExpression(
           convert(node.getOperand()), JdtUtils.getPrefixOperator(node.getOperator()));
     }
 
-    public VariableDeclaration convert(org.eclipse.jdt.core.dom.VariableDeclarationFragment node) {
+    private VariableDeclaration convert(org.eclipse.jdt.core.dom.VariableDeclarationFragment node) {
       IVariableBinding variableBinding = node.resolveBinding();
       Variable variable = JdtUtils.createVariable(variableBinding, compilationUnitNameLocator);
       Expression initializer =
@@ -279,7 +316,7 @@ public class CompilationUnitBuilder {
       return new VariableDeclaration(variable, initializer);
     }
 
-    public Collection<Statement> convert(
+    private Collection<Statement> convert(
         org.eclipse.jdt.core.dom.VariableDeclarationStatement node) {
       List<Statement> variableDeclarations = new ArrayList<>();
       for (Object object : node.fragments()) {

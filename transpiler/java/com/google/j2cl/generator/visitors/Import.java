@@ -25,9 +25,9 @@ import com.google.j2cl.ast.TypeReference;
 public class Import extends Node implements Comparable<Import> {
 
   public static final Import IMPORT_CLASS = new Import("Class", "gen.java.lang.ClassModule");
-  public static final Import IMPORT_BOOTSTRAP_UTIL =
-      new Import("Util", "nativebootstrap.UtilModule");
-  public static final Import IMPORT_ASSERTS = new Import("Asserts", "vmbootstrap.AssertsModule");
+  public static final Import IMPORT_NATIVE_UTIL = new Import("Util", "nativebootstrap.UtilModule");
+  public static final Import IMPORT_VM_ASSERTS = new Import("Asserts", "vmbootstrap.AssertsModule");
+  public static final Import IMPORT_VM_ARRAYS = new Import("Arrays", "vmbootstrap.ArraysModule");
 
   private String className;
   private String moduleName;

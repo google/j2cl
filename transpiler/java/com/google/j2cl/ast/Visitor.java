@@ -47,7 +47,11 @@ interface Visitor {
 
   boolean enterNode(Node node);
 
-  boolean enterNewInstance(NewInstance node);
+  boolean enterNewArray(NewArray node);
+
+  boolean enterNewInstance(NewInstance newInstance);
+
+  boolean enterNullLiteral(NullLiteral nullLiteral);
 
   boolean enterNumberLiteral(NumberLiteral node);
 
@@ -95,9 +99,13 @@ interface Visitor {
 
   void exitMethodReference(MethodReference methodReference);
 
+  void exitNewArray(NewArray newArray);
+
   void exitNewInstance(NewInstance node);
 
   void exitNode(Node node);
+
+  void exitNullLiteral(NullLiteral nullLiteral);
 
   void exitNumberLiteral(NumberLiteral node);
 

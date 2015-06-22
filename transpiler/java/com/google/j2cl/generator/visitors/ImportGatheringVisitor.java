@@ -22,6 +22,7 @@ import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.RegularTypeReference;
 import com.google.j2cl.ast.TypeReference;
 
@@ -52,12 +53,17 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   @Override
   public void exitAssertStatement(AssertStatement assertStatement) {
-    importModules.add(Import.IMPORT_ASSERTS);
+    importModules.add(Import.IMPORT_VM_ASSERTS);
   }
 
   @Override
   public void exitJavaType(JavaType type) {
     typeReferencesDefinedInCompilationUnit.add(type.getSelfReference());
+  }
+
+  @Override
+  public void exitNewArray(NewArray newArray) {
+    importModules.add(Import.IMPORT_VM_ARRAYS);
   }
 
   private Set<Import> doGatherImports(CompilationUnit compilationUnit) {

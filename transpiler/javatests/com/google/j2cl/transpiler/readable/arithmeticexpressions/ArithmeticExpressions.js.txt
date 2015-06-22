@@ -1,4 +1,4 @@
-goog.module('gen.com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressionsTestModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressionsModule');
 
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
@@ -8,9 +8,9 @@ var Util = goog.require('nativebootstrap.UtilModule').Util;
 
 /**
  * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/arithmeticexpressions/ArithmeticExpressionsTest.java.
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/arithmeticexpressions/ArithmeticExpressions.java.
  */
-class ArithmeticExpressionsTest extends Object {
+class ArithmeticExpressions extends Object {
   /**
    * Defines instance fields.
    * @private
@@ -19,7 +19,7 @@ class ArithmeticExpressionsTest extends Object {
 
   /**
    * Runs inline instance field initializers.
-   * @param {ArithmeticExpressionsTest} instance
+   * @param {ArithmeticExpressions} instance
    * @private
    */
   static $init(instance) {}
@@ -27,7 +27,7 @@ class ArithmeticExpressionsTest extends Object {
   /**
    * @public
    */
-  m_test() {
+  m_main() {
     var a = 10;
     var b = a++;
     var c = a--;
@@ -44,27 +44,27 @@ class ArithmeticExpressionsTest extends Object {
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!ArithmeticExpressionsTest}
+   * @return {!ArithmeticExpressions}
    * @public
    */
   static $create() {
-    ArithmeticExpressionsTest.$clinit();
-    var instance = new ArithmeticExpressionsTest;
-    ArithmeticExpressionsTest
-        .$ctor__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressionsTest(
+    ArithmeticExpressions.$clinit();
+    var instance = new ArithmeticExpressions;
+    ArithmeticExpressions
+        .$ctor__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions(
             instance);
     return instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {ArithmeticExpressionsTest} instance
+   * @param {ArithmeticExpressions} instance
    * @protected
    */
-  static $ctor__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressionsTest(
+  static $ctor__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions(
       instance) {
     Object.$ctor__java_lang_Object(instance);
-    ArithmeticExpressionsTest.$init(instance);
+    ArithmeticExpressions.$init(instance);
   }
 
   /**
@@ -73,7 +73,7 @@ class ArithmeticExpressionsTest extends Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof ArithmeticExpressionsTest;
+    return instance instanceof ArithmeticExpressions;
   }
 
   /**
@@ -83,7 +83,7 @@ class ArithmeticExpressionsTest extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, ArithmeticExpressionsTest);
+    return Util.$canCastClass(classConstructor, ArithmeticExpressions);
   }
 
   /**
@@ -98,16 +98,16 @@ class ArithmeticExpressionsTest extends Object {
 /**
  * @public {Class}
  */
-ArithmeticExpressionsTest.$class = Class.$createForClass(
-    Util.$generateId('ArithmeticExpressionsTest'),
+ArithmeticExpressions.$class = Class.$createForClass(
+    Util.$generateId('ArithmeticExpressions'),
     Util.$generateId(
-        'com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressionsTest'),
+        'com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions'),
     Object.$class,
     Util.$generateId(
-        'com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressionsTest'));
+        'com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions'));
 
 
 /**
  * Exported class.
  */
-exports.ArithmeticExpressionsTest = ArithmeticExpressionsTest;
+exports.ArithmeticExpressions = ArithmeticExpressions;

@@ -23,7 +23,9 @@ import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
+import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
+import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.ParenthesizedExpression;
 import com.google.j2cl.ast.PostfixExpression;
@@ -59,8 +61,12 @@ public class StatementSourceGenerator {
       return toSource((BinaryExpression) expression);
     } else if (expression instanceof InstanceOfExpression) {
       return toSource((InstanceOfExpression) expression);
+    } else if (expression instanceof NewArray) {
+      return toSource((NewArray) expression);
     } else if (expression instanceof NewInstance) {
       return toSource((NewInstance) expression);
+    } else if (expression instanceof NullLiteral) {
+      return toSource((NullLiteral) expression);
     } else if (expression instanceof NumberLiteral) {
       return toSource((NumberLiteral) expression);
     } else if (expression instanceof VariableReference) {
@@ -112,6 +118,13 @@ public class StatementSourceGenerator {
         toSource(expression.getExpression()));
   }
 
+  public static String toSource(NewArray expression) {
+    String dimensionsList =
+        Joiner.on(", ").join(transformExpressionsToSource(expression.getDimensionExpressions()));
+    String leafTypeName = TranspilerUtils.getClassName(expression.getLeafTypeRef());
+    return String.format("Arrays.$create([%s], %s)", dimensionsList, leafTypeName);
+  }
+
   public static String toSource(NewInstance expression) {
     String className =
         TranspilerUtils.getClassName(expression.getConstructor().getEnclosingClassReference());
@@ -120,6 +133,10 @@ public class StatementSourceGenerator {
     String argumentsList =
         Joiner.on(", ").join(transformExpressionsToSource(expression.getArguments()));
     return String.format("%s.$create%s(%s)", className, parameterSignature, argumentsList);
+  }
+
+  public static String toSource(NullLiteral expression) {
+    return expression.toString();
   }
 
   public static String toSource(NumberLiteral expression) {

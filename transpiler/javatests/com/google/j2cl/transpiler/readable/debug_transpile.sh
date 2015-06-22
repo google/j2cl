@@ -21,6 +21,7 @@
 java_dir="third_party/java_src/j2cl/transpiler/javatests"
 examples_dir="$java_dir/com/google/j2cl/transpiler/readable/"
 transpiler_bin="blaze-bin/third_party/java_src/j2cl/j2cl"
+jre_jar="blaze-bin/third_party/java_src/j2cl/jre/java/libJavaJre.jar"
 example_name=$1
 
 # Show commands as they occur
@@ -39,4 +40,4 @@ for java_file in $(find $example_dir -name '*.java') ; do
 done
 
 # Transpile and debug it
-$transpiler_bin --debug -d /tmp/gen/$example_name $example_files
+$transpiler_bin --debug -d /tmp/gen/$example_name -cp $jre_jar $example_files

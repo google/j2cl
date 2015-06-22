@@ -11,6 +11,7 @@ licenses(["unencumbered"])
 js_library(
     name = "vmbootstrap",
     deps = [
+        ":Arrays",
         ":Asserts",
     ],
 )
@@ -18,4 +19,9 @@ js_library(
 js_library(
     name = "Asserts",
     srcs = ["Asserts.js"],
+)
+
+js_library(
+    name = "Arrays",
+    srcs = ["Arrays.js"],
 )

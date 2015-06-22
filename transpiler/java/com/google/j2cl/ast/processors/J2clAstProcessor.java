@@ -88,8 +88,8 @@ public class J2clAstProcessor extends AbstractProcessor {
       // Create abstract visitor class
 
       for (String packageName : processedVisitableClassesByPackageName.keySet()) {
-        writeVisitorClass(packageName,
-            new ArrayList<>(processedVisitableClassesByPackageName.get(packageName)));
+        writeVisitorClass(
+            packageName, new ArrayList<>(processedVisitableClassesByPackageName.get(packageName)));
       }
 
       // This means that the previous round didn't generate any new sources, so we can't have found
