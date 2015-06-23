@@ -45,7 +45,7 @@ public abstract class FieldReference extends Node {
   public abstract TypeReference getType();
 
   @Override
-  FieldReference accept(Processor processor) {
+  public FieldReference accept(Processor processor) {
     return Visitor_FieldReference.visit(processor, this);
   }
 }

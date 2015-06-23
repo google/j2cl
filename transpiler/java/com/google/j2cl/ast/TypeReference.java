@@ -39,7 +39,7 @@ public abstract class TypeReference extends Expression implements Comparable<Typ
   public abstract TypeReference getLeafTypeRef();
 
   @Override
-  TypeReference accept(Processor processor) {
+  public TypeReference accept(Processor processor) {
     return Visitor_TypeReference.visit(processor, this);
   }
 }

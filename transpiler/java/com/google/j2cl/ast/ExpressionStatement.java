@@ -37,7 +37,7 @@ public class ExpressionStatement extends Statement {
   }
 
   @Override
-  ExpressionStatement accept(Processor processor) {
+  public ExpressionStatement accept(Processor processor) {
     return Visitor_ExpressionStatement.visit(processor, this);
   }
 }

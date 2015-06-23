@@ -29,7 +29,7 @@ public class NullLiteral extends Expression {
   }
 
   @Override
-  NullLiteral accept(Processor processor) {
+  public NullLiteral accept(Processor processor) {
     return Visitor_NullLiteral.visit(processor, this);
   }
 }

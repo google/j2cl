@@ -180,7 +180,7 @@ public class JavaType extends Node {
   }
 
   @Override
-  JavaType accept(Processor processor) {
+  public JavaType accept(Processor processor) {
     return Visitor_JavaType.visit(processor, this);
   }
 }

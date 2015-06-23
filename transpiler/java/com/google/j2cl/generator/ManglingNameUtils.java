@@ -68,10 +68,18 @@ public class ManglingNameUtils {
    * Returns the mangled name of a field.
    */
   public static String getMangledName(FieldReference fieldRef) {
+    return getMangledName(fieldRef, false);
+  }
+
+  /**
+   * Returns the mangled name of a field.
+   */
+  public static String getMangledName(FieldReference fieldRef, boolean fromClinit) {
     String name = fieldRef.getFieldName();
     String typeMangledName = getMangledName(fieldRef.getEnclosingClassReference());
     String privateSuffix = fieldRef.getVisibility().isPrivate() ? "_" : "";
-    return String.format("f_%s__%s%s", name, typeMangledName, privateSuffix);
+    String prefix = fromClinit ? "$" : "";
+    return String.format("%sf_%s__%s%s", prefix, name, typeMangledName, privateSuffix);
   }
 
   public static String getMangledParameterSignature(MethodReference methodRef) {

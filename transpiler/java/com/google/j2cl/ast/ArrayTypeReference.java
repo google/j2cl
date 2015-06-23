@@ -76,7 +76,7 @@ public abstract class ArrayTypeReference extends TypeReference {
   }
 
   @Override
-  ArrayTypeReference accept(Processor processor) {
+  public ArrayTypeReference accept(Processor processor) {
     return Visitor_ArrayTypeReference.visit(processor, this);
   }
 }

@@ -47,7 +47,7 @@ public class PrefixExpression extends Expression {
   }
 
   @Override
-  PrefixExpression accept(Processor processor) {
+  public PrefixExpression accept(Processor processor) {
     return Visitor_PrefixExpression.visit(processor, this);
   }
 }

@@ -62,7 +62,7 @@ public class NewInstance extends Expression {
   }
 
   @Override
-  NewInstance accept(Processor processor) {
+  public NewInstance accept(Processor processor) {
     return Visitor_NewInstance.visit(processor, this);
   }
 }

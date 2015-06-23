@@ -1,0 +1,47 @@
+package ${packageName};
+
+import com.google.common.base.Preconditions;
+
+public abstract class AbstractTransformer<T> implements ProcessorPrivate {
+
+  private T result;
+
+  public T process(Node node) {
+    node.accept(this);
+    return result;
+  }
+#foreach($clazz in $classes)
+
+  @Override
+  final public boolean shouldProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
+    Preconditions.checkState(result == null);
+    result = transform${clazz.SimpleName}(node);
+    return false;
+  }
+#end
+#foreach($clazz in $classes)
+
+  @Override
+  final public <T extends Node> T preProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
+    return (T) node;
+  }
+#end
+#foreach($clazz in $classes)
+
+  @Override
+  final public <T extends Node> T postProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
+    return (T) node;
+  }
+#end
+#foreach($clazz in $classes)
+
+  public T transform${clazz.SimpleName}(${clazz.SimpleName} node) {
+#if(${clazz.isTop()})
+    throw new RuntimeException("\"" + getClass().getName() + "\" does not handle \""
+        + node.getClass().getName() + "\"");
+#else
+    return transform${clazz.SuperclassName}(node);
+#end
+  }
+#end
+}

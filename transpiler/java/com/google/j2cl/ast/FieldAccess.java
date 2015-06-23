@@ -50,7 +50,7 @@ public class FieldAccess extends Expression {
   }
 
   @Override
-  FieldAccess accept(Processor processor) {
+  public FieldAccess accept(Processor processor) {
     return Visitor_FieldAccess.visit(processor, this);
   }
 }

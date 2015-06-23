@@ -93,10 +93,12 @@ public class J2clAstProcessor extends AbstractProcessor {
             new ArrayList<>(processedVisitableClassesByPackageName.get(packageName));
         writeGeneralClass(ABSTRACT_VISITOR_TEMPLATE_FILE, "AbstractVisitor", packageName, classes);
         writeGeneralClass(
+            ABSTRACT_REWRITER_TEMPLATE_FILE, "AbstractRewriter", packageName, classes);
+        writeGeneralClass(
+            ABSTRACT_TRANSFORMER_TEMPLATE_FILE, "AbstractTransformer", packageName, classes);
+        writeGeneralClass(
             PROCESSOR_PRIVATE_INTERFACE_TEMPLATE_FILE, "ProcessorPrivate", packageName, classes);
         writeGeneralClass(VISITOR_INTERFACE_TEMPLATE_FILE, "Visitor", packageName, classes);
-        writeGeneralClass(
-            ABSTRACT_REWRITER_TEMPLATE_FILE, "AbstractRewriter", packageName, classes);
         writeGeneralClass(REWRITER_INTERFACE_TEMPLATE_FILE, "Rewriter", packageName, classes);
       }
 
@@ -243,6 +245,9 @@ public class J2clAstProcessor extends AbstractProcessor {
   private static final String ABSTRACT_REWRITER_TEMPLATE_FILE =
       "com/google/j2cl/ast/processors/AbstractRewriterClass.vm";
 
+  private static final String ABSTRACT_TRANSFORMER_TEMPLATE_FILE =
+      "com/google/j2cl/ast/processors/AbstractTransformerClass.vm";
+
   private static final String PROCESSOR_PRIVATE_INTERFACE_TEMPLATE_FILE =
       "com/google/j2cl/ast/processors/ProcessorPrivateInterface.vm";
 
@@ -329,17 +334,17 @@ public class J2clAstProcessor extends AbstractProcessor {
                 return executableElement.getSimpleName().toString().equals("accept")
                     && executableElement.getParameters().size() == 1
                     && processingEnv
-                        .getTypeUtils()
-                        .asElement(executableElement.getParameters().get(0).asType())
-                        .getSimpleName()
-                        .toString()
-                        .equals("Processor")
+                    .getTypeUtils()
+                    .asElement(executableElement.getParameters().get(0).asType())
+                    .getSimpleName()
+                    .toString()
+                    .equals("Processor")
                     && MoreElements.asType(
-                            processingEnv
-                                .getTypeUtils()
-                                .asElement(executableElement.getReturnType()))
-                        .getQualifiedName()
-                        .equals(typeElement.getQualifiedName());
+                    processingEnv
+                        .getTypeUtils()
+                        .asElement(executableElement.getReturnType()))
+                    .getQualifiedName()
+                    .equals(typeElement.getQualifiedName());
               }
             });
   }

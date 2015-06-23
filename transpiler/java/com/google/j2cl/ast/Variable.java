@@ -67,7 +67,7 @@ public class Variable extends Node {
   }
 
   @Override
-  Variable accept(Processor processor) {
+  public Variable accept(Processor processor) {
     return Visitor_Variable.visit(processor, this);
   }
 }

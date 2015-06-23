@@ -60,7 +60,7 @@ public class Method extends Node {
   }
 
   @Override
-  Method accept(Processor processor) {
+  public Method accept(Processor processor) {
     return Visitor_Method.visit(processor, this);
   }
 }

@@ -38,7 +38,7 @@ public class NumberLiteral extends Expression {
   }
 
   @Override
-  NumberLiteral accept(Processor processor) {
+  public NumberLiteral accept(Processor processor) {
     return Visitor_NumberLiteral.visit(processor, this);
   }
 }

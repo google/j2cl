@@ -58,7 +58,7 @@ public abstract class MethodReference extends Node {
   public abstract TypeReference getReturnTypeRef();
 
   @Override
-  MethodReference accept(Processor processor) {
+  public MethodReference accept(Processor processor) {
     return Visitor_MethodReference.visit(processor, this);
   }
 }

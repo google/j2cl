@@ -1,8 +1,8 @@
 package ${packageName};
 
 public abstract class AbstractRewriter implements Rewriter, ProcessorPrivate {
-
 #foreach($clazz in $classes)
+
   @Override
   public boolean shouldProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
   #if(${clazz.isTop()})
@@ -12,22 +12,22 @@ public abstract class AbstractRewriter implements Rewriter, ProcessorPrivate {
   #end
   }
 #end
-
 #foreach($clazz in $classes)
+
   @Override
   final public <T extends Node> T preProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
     return (T) node;
- }
+  }
 #end
-
 #foreach($clazz in $classes)
   @Override
   final public <T extends Node> T postProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
     return (T) rewrite${clazz.SimpleName}(node);
-    }
-#end
+  }
 
+#end
 #foreach($clazz in $classes)
+
   @Override
   public <T extends Node> T rewrite${clazz.SimpleName}(${clazz.SimpleName} node) {
 #if(${clazz.isTop()})
