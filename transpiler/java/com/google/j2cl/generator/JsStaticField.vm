@@ -1,0 +1,24 @@
+#set ($staticFieldVisibility = $staticField.SelfReference.Visibility)
+#set ($staticFieldType = ${TranspilerUtils.getJsDocName($staticField.SelfReference.Type)})
+#set ($staticFieldName = ${ManglingNameUtils.getMangledName($staticField.SelfReference)})
+#set ($directStaticFieldAccess = "$" + ${staticFieldName})
+
+
+/**
+ * @$staticFieldVisibility {?$staticFieldType}
+ */
+$className.$directStaticFieldAccess = null;
+
+
+window.Object.defineProperties($className, {
+  $staticFieldName: {
+    get: function() {
+      $className.$clinit();
+      return $className.$directStaticFieldAccess;
+    },
+    set: function(value) {
+      $className.$clinit();
+      $className.$directStaticFieldAccess = value;
+    }
+  }
+});

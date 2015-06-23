@@ -21,14 +21,14 @@ class $className $extendsClause {
 #if ($superTypeReference)
     super();
 #end
-#foreach ($field in $classType.Fields)
+#foreach ($field in $classType.getInstanceFields())
 #set ($fieldVisibility = $field.SelfReference.Visibility)
 #set ($fieldType = ${TranspilerUtils.getJsDocName($field.SelfReference.Type)})
-#set ($fieldName = ${field.SelfReference.FieldName})
+#set ($fieldName = ${ManglingNameUtils.getMangledName($field.SelfReference)})
     /**
      * @$fieldVisibility {?$fieldType}
      */
-    this.f_${fieldName}__${mangledTypeName} = null;
+    this.$fieldName = null;
 #end
   }
 
@@ -38,10 +38,10 @@ class $className $extendsClause {
    * @private
    */
   static $init(instance) {
-#foreach ($field in $classType.Fields)
+#foreach ($field in $classType.getInstanceFields())
 #if ($field.hasInitializer())
 #set ($fieldInitializer = $StatementSourceGenerator.toSource($field.Initializer))
-    instance.f_${field.SelfReference.FieldName}__${mangledTypeName} = $fieldInitializer;
+    instance.${ManglingNameUtils.getMangledName($field.SelfReference)} = $fieldInitializer;
 #end
 #end
 #foreach($instanceInitializer in $classType.InstanceInitializers)
@@ -74,17 +74,11 @@ class $className $extendsClause {
     return Util.$canCastClass(classConstructor, $className);
   }
 
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   */
-  static $clinit() {
-    $superTypeName.$clinit();
-#foreach($instanceInitializer in $classType.StaticInitializers)
-    $instanceInitializer
-#end
-  }
+#parse( "com/google/j2cl/generator/JsClinit.vm")
 };
+#foreach ($staticField in $classType.getStaticFields())
+#parse( "com/google/j2cl/generator/JsStaticField.vm" )
+#end
 
 
 /**

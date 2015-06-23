@@ -19,6 +19,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+import com.google.j2cl.ast.FieldReference;
 import com.google.j2cl.ast.MethodReference;
 import com.google.j2cl.ast.TypeReference;
 
@@ -53,9 +54,7 @@ public class ManglingNameUtils {
       case PACKAGE_PRIVATE:
         // To ensure that package private methods only override one another when
         // they are in the same package.
-        suffix =
-            "_$pp_"
-                + methodRef.getEnclosingClassRef().getPackageName().replace('.', '_');
+        suffix = "_$pp_" + methodRef.getEnclosingClassRef().getPackageName().replace('.', '_');
         break;
       default:
         suffix = "";
@@ -63,6 +62,16 @@ public class ManglingNameUtils {
     }
     String parameterSignature = getMangledParameterSignature(methodRef);
     return String.format("m_%s%s%s", methodRef.getMethodName(), parameterSignature, suffix);
+  }
+
+  /**
+   * Returns the mangled name of a field.
+   */
+  public static String getMangledName(FieldReference fieldRef) {
+    String name = fieldRef.getFieldName();
+    String typeMangledName = getMangledName(fieldRef.getEnclosingClassReference());
+    String privateSuffix = fieldRef.getVisibility().isPrivate() ? "_" : "";
+    return String.format("f_%s__%s%s", name, typeMangledName, privateSuffix);
   }
 
   public static String getMangledParameterSignature(MethodReference methodRef) {

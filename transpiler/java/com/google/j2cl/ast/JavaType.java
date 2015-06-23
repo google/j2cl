@@ -15,6 +15,9 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
@@ -150,6 +153,30 @@ public class JavaType extends Node {
 
   public void setSelfReference(TypeReference selfReference) {
     this.selfReference = selfReference;
+  }
+
+  public List<Field> getInstanceFields() {
+    return Lists.newArrayList(
+        Iterables.filter(
+            getFields(),
+            new Predicate<Field>() {
+              @Override
+              public boolean apply(Field field) {
+                return !field.getSelfReference().isStatic();
+              }
+            }));
+  }
+
+  public List<Field> getStaticFields() {
+    return Lists.newArrayList(
+        Iterables.filter(
+            getFields(),
+            new Predicate<Field>() {
+              @Override
+              public boolean apply(Field field) {
+                return field.getSelfReference().isStatic();
+              }
+            }));
   }
 
   @Override

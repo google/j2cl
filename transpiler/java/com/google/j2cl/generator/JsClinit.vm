@@ -1,0 +1,19 @@
+$StatementSourceGenerator.setInClinit($classType.getSelfReference())##
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() {
+#if ($TranspilerUtils.needRewriteClinit($classType))
+    $className.$clinit = function() {};
+#end
+    $superTypeName.$clinit();
+#foreach ($staticField in $classType.getStaticFields())
+#if ($staticField.hasInitializer())
+#set ($staticFieldName = ${ManglingNameUtils.getMangledName($staticField.SelfReference)})
+#set ($directStaticFieldAccess = "$" + ${staticFieldName})
+    $className.$directStaticFieldAccess = ${StatementSourceGenerator.toSource(${staticField.Initializer})};
+#end
+#end
+  }
+$StatementSourceGenerator.resetInClinit()##

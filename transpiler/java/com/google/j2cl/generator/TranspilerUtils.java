@@ -20,6 +20,8 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.Field;
+import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
@@ -109,6 +111,21 @@ public class TranspilerUtils {
               }
             });
     return Joiner.on(",").join(parameterNameList);
+  }
+
+  /**
+   * Returns whether the $clinit function should be rewritten as NOP.
+   */
+  public static boolean needRewriteClinit(JavaType type) {
+    for (Field staticField : type.getStaticFields()) {
+      if (staticField.hasInitializer()) {
+        return true;
+      }
+    }
+
+    // TODO: also check the static blocks here.
+
+    return false;
   }
 
   private TranspilerUtils() {}

@@ -1,3 +1,4 @@
+
 /*
  * Copyright 2015 Google Inc.
  *
@@ -17,29 +18,39 @@ package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.processors.Visitable;
 
+import javax.annotation.Nullable;
+
 /**
- * Base class for type reference.
+ * Class for field access.
  */
 @Visitable
-public abstract class TypeReference extends Expression implements Comparable<TypeReference> {
-  public abstract String getSimpleName();
+public class FieldAccess extends Expression {
+  @Visitable @Nullable Expression qualifier;
+  @Visitable FieldReference field;
 
-  public abstract String getBinaryName();
+  public FieldAccess(Expression qualifier, FieldReference field) {
+    this.qualifier = qualifier;
+    this.field = field;
+  }
 
-  public abstract String getCompilationUnitSourceName();
+  public Expression getQualifier() {
+    return qualifier;
+  }
 
-  public abstract String getSourceName();
+  public FieldReference getField() {
+    return field;
+  }
 
-  public abstract String getPackageName();
+  public void setQualifier(Expression qualifier) {
+    this.qualifier = qualifier;
+  }
 
-  public abstract boolean isArray();
-
-  public abstract int getDimensions();
-
-  public abstract TypeReference getLeafTypeRef();
+  public void setField(FieldReference field) {
+    this.field = field;
+  }
 
   @Override
-  TypeReference accept(Processor processor) {
-    return Visitor_TypeReference.visit(processor, this);
+  FieldAccess accept(Processor processor) {
+    return Visitor_FieldAccess.visit(processor, this);
   }
 }

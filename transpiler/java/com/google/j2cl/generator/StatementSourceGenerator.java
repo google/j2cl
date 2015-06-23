@@ -22,6 +22,8 @@ import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
+import com.google.j2cl.ast.FieldAccess;
+import com.google.j2cl.ast.FieldReference;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
@@ -43,6 +45,9 @@ import java.util.List;
  * a StringBuilder.
  */
 public class StatementSourceGenerator {
+  // TODO: static field may be a potential threading problem.
+  public static TypeReference inClinitForType = null;
+
   public static String toSource(Statement statement) {
     if (statement instanceof AssertStatement) {
       return toSource((AssertStatement) statement);
@@ -59,6 +64,8 @@ public class StatementSourceGenerator {
   public static String toSource(Expression expression) {
     if (expression instanceof BinaryExpression) {
       return toSource((BinaryExpression) expression);
+    } else if (expression instanceof FieldAccess) {
+      return toSource((FieldAccess) expression);
     } else if (expression instanceof InstanceOfExpression) {
       return toSource((InstanceOfExpression) expression);
     } else if (expression instanceof NewArray) {
@@ -77,6 +84,8 @@ public class StatementSourceGenerator {
       return toSource((PostfixExpression) expression);
     } else if (expression instanceof PrefixExpression) {
       return toSource((PrefixExpression) expression);
+    } else if (expression instanceof TypeReference) {
+      return toSource((TypeReference) expression);
     } else {
       throw new RuntimeException(
           "Need to implement toSource() for expression type: " + expression.getClass().getName());
@@ -105,6 +114,22 @@ public class StatementSourceGenerator {
 
   public static String toSource(ExpressionStatement statement) {
     return toSource(statement.getExpression()) + ";";
+  }
+
+  public static String toSource(FieldAccess fieldAccess) {
+    FieldReference target = fieldAccess.getField();
+    String fieldMangledName = ManglingNameUtils.getMangledName(target);
+    if (inClinitForType != null && target.getEnclosingClassReference().equals(inClinitForType)) {
+      fieldMangledName = "$" + fieldMangledName;
+    }
+    // make 'this.' reference and static reference explicit.
+    String qualifier =
+        fieldAccess.getQualifier() == null
+            ? (target.isStatic()
+                ? TranspilerUtils.getClassName(target.getEnclosingClassReference())
+                : "this")
+            : toSource(fieldAccess.getQualifier());
+    return String.format("%s.%s", qualifier, fieldMangledName);
   }
 
   public static String toSource(InstanceOfExpression expression) {
@@ -161,6 +186,10 @@ public class StatementSourceGenerator {
         "%s%s", expression.getOperator().toString(), toSource(expression.getOperand()));
   }
 
+  public static String toSource(TypeReference expression) {
+    return TranspilerUtils.getClassName(expression);
+  }
+
   public static String toSource(VariableDeclaration statement) {
     return String.format(
         "var %s = %s;", statement.getVariable().getName(), toSource(statement.getInitializer()));
@@ -186,5 +215,13 @@ public class StatementSourceGenerator {
             return toSource(statement);
           }
         });
+  }
+
+  public static void setInClinit(TypeReference type) {
+    inClinitForType = type;
+  }
+
+  public static void resetInClinit() {
+    inClinitForType = null;
   }
 }

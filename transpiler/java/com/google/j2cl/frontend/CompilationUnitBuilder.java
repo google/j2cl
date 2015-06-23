@@ -25,6 +25,7 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Field;
+import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
@@ -189,6 +190,8 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.PostfixExpression) node);
         case ASTNode.PREFIX_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.PrefixExpression) node);
+        case ASTNode.QUALIFIED_NAME:
+          return convert((org.eclipse.jdt.core.dom.QualifiedName) node);
         case ASTNode.SIMPLE_NAME:
           return convert((org.eclipse.jdt.core.dom.SimpleName) node);
         default:
@@ -270,29 +273,6 @@ public class CompilationUnitBuilder {
       return new NumberLiteral(node.getToken());
     }
 
-    private Expression convert(org.eclipse.jdt.core.dom.SimpleName node) {
-      IBinding binding = node.resolveBinding();
-      if (binding instanceof IVariableBinding) {
-        IVariableBinding variableBinding = (IVariableBinding) binding;
-        if (variableBinding.isField()) {
-          // TODO: to be implemented.
-          throw new RuntimeException(
-              "Need to implement translation for SimpleName binding: " + node.getClass().getName());
-        } else if (variableBinding.isParameter()) {
-          // TODO: to be implemented.
-          throw new RuntimeException(
-              "Need to implement translation for SimpleName binding: " + node.getClass().getName());
-        } else {
-          // local variable.
-          return new VariableReference(variableByJdtBinding.get(variableBinding));
-        }
-      } else {
-        // TODO: to be implemented
-        throw new RuntimeException(
-            "Need to implement translation for SimpleName binding: " + node.getClass().getName());
-      }
-    }
-
     private ParenthesizedExpression convert(org.eclipse.jdt.core.dom.ParenthesizedExpression node) {
       return new ParenthesizedExpression(convert(node.getExpression()));
     }
@@ -305,6 +285,52 @@ public class CompilationUnitBuilder {
     private PrefixExpression convert(org.eclipse.jdt.core.dom.PrefixExpression node) {
       return new PrefixExpression(
           convert(node.getOperand()), JdtUtils.getPrefixOperator(node.getOperator()));
+    }
+
+    public Expression convert(org.eclipse.jdt.core.dom.QualifiedName node) {
+      IBinding binding = node.resolveBinding();
+      if (binding instanceof IVariableBinding) {
+        IVariableBinding variableBinding = (IVariableBinding) binding;
+        if (variableBinding.isField()) {
+          return new FieldAccess(
+              convert(node.getQualifier()),
+              JdtUtils.createFieldReference(variableBinding, compilationUnitNameLocator));
+        } else {
+          throw new RuntimeException(
+              "Need to implement translation for QualifiedName that is not a field.");
+        }
+      } else if (binding instanceof ITypeBinding) {
+        ITypeBinding typeBinding = (ITypeBinding) binding;
+        return JdtUtils.createTypeReference(typeBinding, compilationUnitNameLocator);
+      } else {
+        throw new RuntimeException(
+            "Need to implement translation for QualifiedName that is not a variable or a type.");
+      }
+    }
+
+    public Expression convert(org.eclipse.jdt.core.dom.SimpleName node) {
+      IBinding binding = node.resolveBinding();
+      if (binding instanceof IVariableBinding) {
+        IVariableBinding variableBinding = (IVariableBinding) binding;
+        if (variableBinding.isField()) {
+          return new FieldAccess(
+              null, JdtUtils.createFieldReference(variableBinding, compilationUnitNameLocator));
+        } else if (variableBinding.isParameter()) {
+          // TODO: to be implemented.
+          throw new RuntimeException(
+              "Need to implement translation for SimpleName binding: " + node.getClass().getName());
+        } else {
+          // local variable.
+          return new VariableReference(variableByJdtBinding.get(variableBinding));
+        }
+      } else if (binding instanceof ITypeBinding) {
+        ITypeBinding typeBinding = (ITypeBinding) binding;
+        return JdtUtils.createTypeReference(typeBinding, compilationUnitNameLocator);
+      } else {
+        // TODO: to be implemented
+        throw new RuntimeException(
+            "Need to implement translation for SimpleName binding: " + node.getClass().getName());
+      }
     }
 
     private VariableDeclaration convert(org.eclipse.jdt.core.dom.VariableDeclarationFragment node) {

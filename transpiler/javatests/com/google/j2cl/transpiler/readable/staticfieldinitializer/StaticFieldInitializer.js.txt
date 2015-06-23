@@ -1,0 +1,156 @@
+goog.module('gen.com.google.j2cl.transpiler.readable.staticfieldinitializer.StaticFieldInitializerModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/staticfieldinitializer/StaticFieldInitializer.java.
+ */
+class StaticFieldInitializer extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs inline instance field initializers.
+   * @param {StaticFieldInitializer} instance
+   * @private
+   */
+  static $init(instance) {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!StaticFieldInitializer}
+   * @public
+   */
+  static $create() {
+    StaticFieldInitializer.$clinit();
+    var instance = new StaticFieldInitializer;
+    StaticFieldInitializer
+        .$ctor__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer(
+            instance);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {StaticFieldInitializer} instance
+   * @protected
+   */
+  static $ctor__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer(
+      instance) {
+    Object.$ctor__java_lang_Object(instance);
+    StaticFieldInitializer.$init(instance);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof StaticFieldInitializer;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, StaticFieldInitializer);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() {
+    StaticFieldInitializer.$clinit = function() {};
+    Object.$clinit();
+    StaticFieldInitializer
+        .$f_a__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer =
+        2;
+    StaticFieldInitializer
+        .$f_b__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer =
+        StaticFieldInitializer
+            .$f_a__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer *
+        4;
+  }
+}
+;
+
+
+/**
+ * @public {?number}
+ */
+StaticFieldInitializer
+    .$f_a__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer =
+    null;
+
+
+window.Object.defineProperties(StaticFieldInitializer, {
+  f_a__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer: {
+    get: function() {
+      StaticFieldInitializer.$clinit();
+      return StaticFieldInitializer
+          .$f_a__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer;
+    },
+    set: function(value) {
+      StaticFieldInitializer.$clinit();
+      StaticFieldInitializer
+          .$f_a__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer =
+          value;
+    }
+  }
+});
+
+
+/**
+ * @public {?number}
+ */
+StaticFieldInitializer
+    .$f_b__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer =
+    null;
+
+
+window.Object.defineProperties(StaticFieldInitializer, {
+  f_b__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer: {
+    get: function() {
+      StaticFieldInitializer.$clinit();
+      return StaticFieldInitializer
+          .$f_b__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer;
+    },
+    set: function(value) {
+      StaticFieldInitializer.$clinit();
+      StaticFieldInitializer
+          .$f_b__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer =
+          value;
+    }
+  }
+});
+
+
+/**
+ * @public {Class}
+ */
+StaticFieldInitializer.$class = Class.$createForClass(
+    Util.$generateId('StaticFieldInitializer'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.staticfieldinitializer.StaticFieldInitializer'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.staticfieldinitializer.StaticFieldInitializer'));
+
+
+/**
+ * Exported class.
+ */
+exports.StaticFieldInitializer = StaticFieldInitializer;
