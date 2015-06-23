@@ -38,8 +38,6 @@ are copyright and licensed as follows:
 - https://b.corp.google.com/hotlists/269212
 - b/20102666 WARNING - actual parameter of Foo.$markImplementor does not match
   formal parameter
-- b/21955161 WARNING - Access to protected property $ctor__java_lang_Object of
-  gen.java.lang.CoreModule.Object not allowed here.
 
 ## Likely readable examples to add (remove some redundant)
 - anonymousclasswithcapture
