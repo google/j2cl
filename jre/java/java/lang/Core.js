@@ -234,7 +234,7 @@ class Class {
 
   /**
    * Runs inline static field initializers.
-   * @public
+   * @protected
    */
   static $clinit() { Object.$clinit(); }
 };
@@ -360,7 +360,7 @@ class ArrayClass extends Class {
 
   /**
    * Runs inline static field initializers.
-   * @public
+   * @protected
    */
   static $clinit() { Class.$clinit(); }
 };
@@ -459,7 +459,7 @@ class Object {
 
   /**
    * Runs inline static field initializers.
-   * @public
+   * @protected
    */
   static $clinit() {}
 };

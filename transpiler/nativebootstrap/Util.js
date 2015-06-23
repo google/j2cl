@@ -23,6 +23,7 @@ class Util {
    *
    * Unlike instanceof, this function operates on classes instead of
    * instances.
+   * @public
    */
   static $canCastClass(fromClass, toClass) {
     return (fromClass != null &&
