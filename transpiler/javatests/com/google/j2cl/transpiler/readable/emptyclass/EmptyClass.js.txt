@@ -19,10 +19,9 @@ class EmptyClass extends Object {
 
   /**
    * Runs inline instance field initializers.
-   * @param {EmptyClass} instance
    * @private
    */
-  static $init(instance) {}
+  $init__com_google_j2cl_transpiler_readable_emptyclass_EmptyClass() {}
 
   /**
    * A particular Java constructor as a factory method.
@@ -32,20 +31,17 @@ class EmptyClass extends Object {
   static $create() {
     EmptyClass.$clinit();
     var instance = new EmptyClass;
-    EmptyClass.$ctor__com_google_j2cl_transpiler_readable_emptyclass_EmptyClass(
-        instance);
+    instance.$ctor__com_google_j2cl_transpiler_readable_emptyclass_EmptyClass();
     return instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {EmptyClass} instance
    * @protected
    */
-  static $ctor__com_google_j2cl_transpiler_readable_emptyclass_EmptyClass(
-      instance) {
-    Object.$ctor__java_lang_Object(instance);
-    EmptyClass.$init(instance);
+  $ctor__com_google_j2cl_transpiler_readable_emptyclass_EmptyClass() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_emptyclass_EmptyClass();
   }
 
   /**

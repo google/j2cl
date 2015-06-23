@@ -31,12 +31,10 @@ class PublicInstanceFields extends Object {
 
   /**
    * Runs inline instance field initializers.
-   * @param {PublicInstanceFields} instance
    * @private
    */
-  static $init(instance) {
-    instance
-        .f_a__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields =
+  $init__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields() {
+    this.f_a__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields =
         1;
   }
 
@@ -48,21 +46,18 @@ class PublicInstanceFields extends Object {
   static $create() {
     PublicInstanceFields.$clinit();
     var instance = new PublicInstanceFields;
-    PublicInstanceFields
-        .$ctor__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields(
-            instance);
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields();
     return instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {PublicInstanceFields} instance
    * @protected
    */
-  static $ctor__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields(
-      instance) {
-    Object.$ctor__java_lang_Object(instance);
-    PublicInstanceFields.$init(instance);
+  $ctor__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields();
   }
 
   /**

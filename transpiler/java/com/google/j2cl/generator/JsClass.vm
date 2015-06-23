@@ -34,14 +34,13 @@ class $className $extendsClause {
 
   /**
    * Runs inline instance field initializers.
-   * @param {$jsDocName} instance
    * @private
    */
-  static $init(instance) {
+  $init__$mangledTypeName() {
 #foreach ($field in $classType.getInstanceFields())
 #if ($field.hasInitializer())
 #set ($fieldInitializer = $StatementSourceGenerator.toSource($field.Initializer))
-    instance.${ManglingNameUtils.getMangledName($field.SelfReference)} = $fieldInitializer;
+    this.${ManglingNameUtils.getMangledName($field.SelfReference)} = $fieldInitializer;
 #end
 #end
 #foreach($instanceInitializer in $classType.InstanceInitializers)

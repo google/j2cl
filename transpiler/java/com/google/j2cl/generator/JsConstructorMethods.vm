@@ -11,16 +11,15 @@
   static $create() {
     $className.$clinit();
     var instance = new $className;
-    $className.$ctor__$mangledTypeName(instance);
+    instance.$ctor__$mangledTypeName();
     return instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {$jsDocName} instance
    * @$ctorVisibility
    */
-  static $ctor__$mangledTypeName(instance) {
-    $superTypeName.$ctor__$superTypeMangledName(instance);
-    $className.$init(instance);
+  $ctor__$mangledTypeName() {
+    this.$ctor__$superTypeMangledName();
+    this.$init__$mangledTypeName();
   }

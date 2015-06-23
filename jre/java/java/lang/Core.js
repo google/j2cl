@@ -379,10 +379,9 @@ class Object {
 
   /**
    * Runs inline instance field initializers.
-   * @param {Object} instance
-   * @public
+   * @private
    */
-  static $init(instance) {}
+  $init__java_lang_Object() {}
 
   /**
    * A particular Java constructor as a factory method.
@@ -392,16 +391,15 @@ class Object {
   static $create() {
     Object.$clinit();
     var instance = new Object;
-    Object.$ctor__java_lang_Object(instance);
+    instance.$ctor__java_lang_Object();
     return instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {Object} instance
    * @protected
    */
-  static $ctor__java_lang_Object(instance) { Object.$init(instance); }
+  $ctor__java_lang_Object() { this.$init__java_lang_Object(); }
 
   /**
    * @return {Class}

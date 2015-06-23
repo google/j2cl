@@ -19,10 +19,10 @@ class StaticFieldInitializer extends Object {
 
   /**
    * Runs inline instance field initializers.
-   * @param {StaticFieldInitializer} instance
    * @private
    */
-  static $init(instance) {}
+  $init__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer() {
+  }
 
   /**
    * A particular Java constructor as a factory method.
@@ -32,21 +32,18 @@ class StaticFieldInitializer extends Object {
   static $create() {
     StaticFieldInitializer.$clinit();
     var instance = new StaticFieldInitializer;
-    StaticFieldInitializer
-        .$ctor__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer(
-            instance);
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer();
     return instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {StaticFieldInitializer} instance
    * @protected
    */
-  static $ctor__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer(
-      instance) {
-    Object.$ctor__java_lang_Object(instance);
-    StaticFieldInitializer.$init(instance);
+  $ctor__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer();
   }
 
   /**

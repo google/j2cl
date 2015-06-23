@@ -19,10 +19,10 @@ class StaticFieldAccessLevels extends Object {
 
   /**
    * Runs inline instance field initializers.
-   * @param {StaticFieldAccessLevels} instance
    * @private
    */
-  static $init(instance) {}
+  $init__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels() {
+  }
 
   /**
    * A particular Java constructor as a factory method.
@@ -32,21 +32,18 @@ class StaticFieldAccessLevels extends Object {
   static $create() {
     StaticFieldAccessLevels.$clinit();
     var instance = new StaticFieldAccessLevels;
-    StaticFieldAccessLevels
-        .$ctor__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels(
-            instance);
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels();
     return instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {StaticFieldAccessLevels} instance
    * @protected
    */
-  static $ctor__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels(
-      instance) {
-    Object.$ctor__java_lang_Object(instance);
-    StaticFieldAccessLevels.$init(instance);
+  $ctor__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels();
   }
 
   /**

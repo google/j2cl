@@ -19,10 +19,9 @@ class EmptyMethod extends Object {
 
   /**
    * Runs inline instance field initializers.
-   * @param {EmptyMethod} instance
    * @private
    */
-  static $init(instance) {}
+  $init__com_google_j2cl_transpiler_readable_emptymethod_EmptyMethod() {}
 
   /**
    * @param {Array<string>} args
@@ -38,21 +37,18 @@ class EmptyMethod extends Object {
   static $create() {
     EmptyMethod.$clinit();
     var instance = new EmptyMethod;
-    EmptyMethod
-        .$ctor__com_google_j2cl_transpiler_readable_emptymethod_EmptyMethod(
-            instance);
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_emptymethod_EmptyMethod();
     return instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {EmptyMethod} instance
    * @protected
    */
-  static $ctor__com_google_j2cl_transpiler_readable_emptymethod_EmptyMethod(
-      instance) {
-    Object.$ctor__java_lang_Object(instance);
-    EmptyMethod.$init(instance);
+  $ctor__com_google_j2cl_transpiler_readable_emptymethod_EmptyMethod() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_emptymethod_EmptyMethod();
   }
 
   /**

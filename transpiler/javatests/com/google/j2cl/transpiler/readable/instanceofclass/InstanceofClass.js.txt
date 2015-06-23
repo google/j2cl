@@ -21,10 +21,10 @@ class InstanceofClass extends Object {
 
   /**
    * Runs inline instance field initializers.
-   * @param {InstanceofClass} instance
    * @private
    */
-  static $init(instance) {}
+  $init__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass() {
+  }
 
   /**
    * @public
@@ -44,21 +44,18 @@ class InstanceofClass extends Object {
   static $create() {
     InstanceofClass.$clinit();
     var instance = new InstanceofClass;
-    InstanceofClass
-        .$ctor__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass(
-            instance);
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass();
     return instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {InstanceofClass} instance
    * @protected
    */
-  static $ctor__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass(
-      instance) {
-    Object.$ctor__java_lang_Object(instance);
-    InstanceofClass.$init(instance);
+  $ctor__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass();
   }
 
   /**

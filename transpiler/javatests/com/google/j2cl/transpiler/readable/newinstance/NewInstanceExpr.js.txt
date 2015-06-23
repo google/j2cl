@@ -19,10 +19,9 @@ class NewInstanceExpr extends Object {
 
   /**
    * Runs inline instance field initializers.
-   * @param {NewInstanceExpr} instance
    * @private
    */
-  static $init(instance) {}
+  $init__com_google_j2cl_transpiler_readable_newinstance_NewInstanceExpr() {}
 
   /**
    * @param {Array<string>} args
@@ -41,21 +40,18 @@ class NewInstanceExpr extends Object {
   static $create() {
     NewInstanceExpr.$clinit();
     var instance = new NewInstanceExpr;
-    NewInstanceExpr
-        .$ctor__com_google_j2cl_transpiler_readable_newinstance_NewInstanceExpr(
-            instance);
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_newinstance_NewInstanceExpr();
     return instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {NewInstanceExpr} instance
    * @protected
    */
-  static $ctor__com_google_j2cl_transpiler_readable_newinstance_NewInstanceExpr(
-      instance) {
-    Object.$ctor__java_lang_Object(instance);
-    NewInstanceExpr.$init(instance);
+  $ctor__com_google_j2cl_transpiler_readable_newinstance_NewInstanceExpr() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_newinstance_NewInstanceExpr();
   }
 
   /**

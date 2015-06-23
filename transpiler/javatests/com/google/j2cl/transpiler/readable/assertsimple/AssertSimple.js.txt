@@ -20,10 +20,9 @@ class AssertSimple extends Object {
 
   /**
    * Runs inline instance field initializers.
-   * @param {AssertSimple} instance
    * @private
    */
-  static $init(instance) {}
+  $init__com_google_j2cl_transpiler_readable_assertsimple_AssertSimple() {}
 
   /**
    * @param {Array<string>} args
@@ -42,21 +41,18 @@ class AssertSimple extends Object {
   static $create() {
     AssertSimple.$clinit();
     var instance = new AssertSimple;
-    AssertSimple
-        .$ctor__com_google_j2cl_transpiler_readable_assertsimple_AssertSimple(
-            instance);
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_assertsimple_AssertSimple();
     return instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {AssertSimple} instance
    * @protected
    */
-  static $ctor__com_google_j2cl_transpiler_readable_assertsimple_AssertSimple(
-      instance) {
-    Object.$ctor__java_lang_Object(instance);
-    AssertSimple.$init(instance);
+  $ctor__com_google_j2cl_transpiler_readable_assertsimple_AssertSimple() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_assertsimple_AssertSimple();
   }
 
   /**
