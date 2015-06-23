@@ -40,11 +40,11 @@ public class JavaType extends Node {
   private Kind kind;
   private Visibility visibility;
 
-  @Visitable @Nullable TypeReference enclosingType;
+  @Visitable @Nullable TypeReference enclosingTypeRef;
 
-  @Visitable @Nullable TypeReference superType;
+  @Visitable @Nullable TypeReference superTypeRef;
 
-  @Visitable List<TypeReference> superInterfaces = new ArrayList<>();
+  @Visitable List<TypeReference> superInterfaceRefs = new ArrayList<>();
 
   @Visitable TypeReference selfReference;
 
@@ -120,28 +120,28 @@ public class JavaType extends Node {
     return staticInitializers;
   }
 
-  public TypeReference getEnclosingType() {
-    return enclosingType;
+  public TypeReference getEnclosingTypeRef() {
+    return enclosingTypeRef;
   }
 
-  public void setEnclosingType(TypeReference enclosingType) {
-    this.enclosingType = enclosingType;
+  public void setEnclosingTypeRef(TypeReference enclosingTypeRef) {
+    this.enclosingTypeRef = enclosingTypeRef;
   }
 
-  public TypeReference getSuperType() {
-    return superType;
+  public TypeReference getSuperTypeRef() {
+    return superTypeRef;
   }
 
-  public void setSuperType(TypeReference superType) {
-    this.superType = superType;
+  public void setSuperTypeRef(TypeReference superTypeRef) {
+    this.superTypeRef = superTypeRef;
   }
 
-  public List<TypeReference> getSuperInterfaces() {
-    return superInterfaces;
+  public List<TypeReference> getSuperInterfaceRefs() {
+    return superInterfaceRefs;
   }
 
-  public void setSuperInterfaces(List<TypeReference> superInterfaces) {
-    this.superInterfaces = superInterfaces;
+  public void setSuperInterfaceRefs(List<TypeReference> superInterfaceRefs) {
+    this.superInterfaceRefs = superInterfaceRefs;
   }
 
   public TypeReference getSelfReference() {
@@ -153,7 +153,7 @@ public class JavaType extends Node {
   }
 
   @Override
-  JavaType accept(Visitor visitor) {
-    return Visitor_JavaType.visit(visitor, this);
+  JavaType accept(Processor processor) {
+    return Visitor_JavaType.visit(processor, this);
   }
 }

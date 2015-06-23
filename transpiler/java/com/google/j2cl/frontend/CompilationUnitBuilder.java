@@ -339,7 +339,7 @@ public class CompilationUnitBuilder {
 
       ITypeBinding superclassBinding = typeBinding.getSuperclass();
       TypeReference superType = createTypeReference(superclassBinding);
-      type.setSuperType(superType);
+      type.setSuperTypeRef(superType);
       return type;
     }
   }

@@ -49,7 +49,7 @@ public class AssertStatement extends Statement {
   }
 
   @Override
-  public AssertStatement accept(Visitor visitor) {
-    return Visitor_AssertStatement.visit(visitor, this);
+  public AssertStatement accept(Processor processor) {
+    return Visitor_AssertStatement.visit(processor, this);
   }
 }

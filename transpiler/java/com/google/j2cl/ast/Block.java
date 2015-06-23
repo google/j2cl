@@ -36,7 +36,7 @@ public class Block extends Statement {
   }
 
   @Override
-  public Block accept(Visitor visitor) {
-    return Visitor_Block.visit(visitor, this);
+  public Block accept(Processor processor) {
+    return Visitor_Block.visit(processor, this);
   }
 }

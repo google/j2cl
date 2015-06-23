@@ -47,7 +47,7 @@ public class PostfixExpression extends Expression {
   }
 
   @Override
-  PostfixExpression accept(Visitor visitor) {
-    return Visitor_PostfixExpression.visit(visitor, this);
+  PostfixExpression accept(Processor processor) {
+    return Visitor_PostfixExpression.visit(processor, this);
   }
 }

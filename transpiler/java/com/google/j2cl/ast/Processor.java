@@ -15,21 +15,7 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.j2cl.ast.processors.Visitable;
-
 /**
- * Null literal node.
+ * A placeholder interface for APT generation.
  */
-@Visitable
-public class NullLiteral extends Expression {
-
-  @Override
-  public String toString() {
-    return "null";
-  }
-
-  @Override
-  NullLiteral accept(Processor processor) {
-    return Visitor_NullLiteral.visit(processor, this);
-  }
-}
+public interface Processor {}

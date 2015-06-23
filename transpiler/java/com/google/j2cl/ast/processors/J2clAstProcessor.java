@@ -20,6 +20,7 @@ import static com.google.auto.common.MoreElements.isAnnotationPresent;
 import com.google.auto.common.MoreElements;
 import com.google.auto.service.AutoService;
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.base.Throwables;
@@ -88,8 +89,15 @@ public class J2clAstProcessor extends AbstractProcessor {
       // Create abstract visitor class
 
       for (String packageName : processedVisitableClassesByPackageName.keySet()) {
-        writeVisitorClass(
-            packageName, new ArrayList<>(processedVisitableClassesByPackageName.get(packageName)));
+        List<VisitableClass> classes =
+            new ArrayList<>(processedVisitableClassesByPackageName.get(packageName));
+        writeGeneralClass(ABSTRACT_VISITOR_TEMPLATE_FILE, "AbstractVisitor", packageName, classes);
+        writeGeneralClass(
+            PROCESSOR_PRIVATE_INTERFACE_TEMPLATE_FILE, "ProcessorPrivate", packageName, classes);
+        writeGeneralClass(VISITOR_INTERFACE_TEMPLATE_FILE, "Visitor", packageName, classes);
+        writeGeneralClass(
+            ABSTRACT_REWRITER_TEMPLATE_FILE, "AbstractRewriter", packageName, classes);
+        writeGeneralClass(REWRITER_INTERFACE_TEMPLATE_FILE, "Rewriter", packageName, classes);
       }
 
       // This means that the previous round didn't generate any new sources, so we can't have found
@@ -229,8 +237,20 @@ public class J2clAstProcessor extends AbstractProcessor {
   private Multimap<String, VisitableClass> processedVisitableClassesByPackageName =
       LinkedHashMultimap.create();
 
-  private static final String VISITOR_TEMPLATE_FILE =
+  private static final String ABSTRACT_VISITOR_TEMPLATE_FILE =
       "com/google/j2cl/ast/processors/AbstractVisitorClass.vm";
+
+  private static final String ABSTRACT_REWRITER_TEMPLATE_FILE =
+      "com/google/j2cl/ast/processors/AbstractRewriterClass.vm";
+
+  private static final String PROCESSOR_PRIVATE_INTERFACE_TEMPLATE_FILE =
+      "com/google/j2cl/ast/processors/ProcessorPrivateInterface.vm";
+
+  private static final String VISITOR_INTERFACE_TEMPLATE_FILE =
+      "com/google/j2cl/ast/processors/VisitorInterface.vm";
+
+  private static final String REWRITER_INTERFACE_TEMPLATE_FILE =
+      "com/google/j2cl/ast/processors/RewriterInterface.vm";
 
   private static final String VISITABLE_CLASS_TEMPLATE_FILE =
       "com/google/j2cl/ast/processors/Visitable_Class.vm";
@@ -277,8 +297,12 @@ public class J2clAstProcessor extends AbstractProcessor {
             .toList();
 
     if (!hasAcceptMethod(typeElement)) {
-      abortWithError(typeElement.getQualifiedName() + " does not implement \""
-          + typeElement.getSimpleName() + " accept(Visitor visitor)\"", typeElement);
+      abortWithError(
+          typeElement.getQualifiedName()
+              + " does not implement \""
+              + typeElement.getSimpleName()
+              + " accept(Processor processor)\"",
+          typeElement);
     }
     VisitableClass visitableClass = new VisitableClass();
     visitableClass.simpleName = typeElement.getSimpleName().toString();
@@ -297,21 +321,27 @@ public class J2clAstProcessor extends AbstractProcessor {
   }
 
   private boolean hasAcceptMethod(final TypeElement typeElement) {
-    return FluentIterable.from(ElementFilter.methodsIn(typeElement.getEnclosedElements())).anyMatch(
-        new Predicate<ExecutableElement>() {
-          @Override
-          public boolean apply(@Nullable ExecutableElement executableElement) {
-            return executableElement.getSimpleName().toString().equals("accept")
-                && executableElement.getParameters().size() == 1
-                && processingEnv.getTypeUtils().asElement(
-                    executableElement.getParameters().get(0).asType())
-                      .getSimpleName().toString().equals("Visitor")
-                && MoreElements.asType(processingEnv.getTypeUtils()
-                    .asElement(executableElement.getReturnType()))
-                    .getQualifiedName()
-                    .equals(typeElement.getQualifiedName());
-          }
-        });
+    return FluentIterable.from(ElementFilter.methodsIn(typeElement.getEnclosedElements()))
+        .anyMatch(
+            new Predicate<ExecutableElement>() {
+              @Override
+              public boolean apply(@Nullable ExecutableElement executableElement) {
+                return executableElement.getSimpleName().toString().equals("accept")
+                    && executableElement.getParameters().size() == 1
+                    && processingEnv
+                        .getTypeUtils()
+                        .asElement(executableElement.getParameters().get(0).asType())
+                        .getSimpleName()
+                        .toString()
+                        .equals("Processor")
+                    && MoreElements.asType(
+                            processingEnv
+                                .getTypeUtils()
+                                .asElement(executableElement.getReturnType()))
+                        .getQualifiedName()
+                        .equals(typeElement.getQualifiedName());
+              }
+            });
   }
 
   private static Predicate<VariableElement> hasAnnotation(
@@ -374,7 +404,11 @@ public class J2clAstProcessor extends AbstractProcessor {
     }
   }
 
-  private void writeVisitorClass(String packageName, List<VisitableClass> visitableClasses) {
+  private void writeGeneralClass(
+      String templateName,
+      String className,
+      String packageName,
+      List<VisitableClass> visitableClasses) {
 
     boolean success = false;
     try {
@@ -384,8 +418,8 @@ public class J2clAstProcessor extends AbstractProcessor {
 
       success =
           velocityEngine.mergeTemplate(
-              VISITOR_TEMPLATE_FILE, StandardCharsets.UTF_8.name(), velocityContext, writer);
-      writeString(packageName + ".AbstractVisitor", writer.toString());
+              templateName, StandardCharsets.UTF_8.name(), velocityContext, writer);
+      writeString(Joiner.on('.').join(packageName, className), writer.toString());
     } catch (Throwable e) {
       StringWriter stringWriter = new StringWriter();
       e.printStackTrace(new PrintWriter(stringWriter));

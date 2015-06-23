@@ -1,8 +1,31 @@
 package ${packageName};
 
-public abstract class AbstractVisitor implements Visitor {
+public abstract class AbstractVisitor implements Visitor, ProcessorPrivate {
 
 #foreach($clazz in $classes)
+  @Override
+  final public boolean shouldProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
+    return enter${clazz.SimpleName}(node);
+  }
+#end
+
+#foreach($clazz in $classes)
+  @Override
+  final public <T extends Node> T preProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
+    return (T) node;
+ }
+#end
+
+#foreach($clazz in $classes)
+  @Override
+  final public <T extends Node> T postProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
+    exit${clazz.SimpleName}(node);
+    return (T) node;
+    }
+#end
+
+#foreach($clazz in $classes)
+  @Override
   public boolean enter${clazz.SimpleName}(${clazz.SimpleName} node) {
 #if(${clazz.isTop()})
     return true;
@@ -10,14 +33,14 @@ public abstract class AbstractVisitor implements Visitor {
     return enter${clazz.SuperclassName}(node);
 #end
     }
-
 #end
+
 #foreach($clazz in $classes)
+  @Override
   public void exit${clazz.SimpleName}(${clazz.SimpleName} node) {
 #if(!${clazz.isTop()})
-      exit${clazz.SuperclassName}(node);
+    exit${clazz.SuperclassName}(node);
 #end
   }
-
 #end
 }

@@ -108,7 +108,7 @@ public class StatementSourceGenerator {
   }
 
   public static String toSource(InstanceOfExpression expression) {
-    TypeReference checkType = expression.getTestType();
+    TypeReference checkType = expression.getTestTypeRef();
     if (checkType.isArray()) {
       throw new RuntimeException("Need to implement toSource() for instanceof ArrayTypeReference");
     }
@@ -127,9 +127,9 @@ public class StatementSourceGenerator {
 
   public static String toSource(NewInstance expression) {
     String className =
-        TranspilerUtils.getClassName(expression.getConstructor().getEnclosingClassReference());
+        TranspilerUtils.getClassName(expression.getConstructorRef().getEnclosingClassRef());
     String parameterSignature =
-        ManglingNameUtils.getMangledParameterSignature(expression.getConstructor());
+        ManglingNameUtils.getMangledParameterSignature(expression.getConstructorRef());
     String argumentsList =
         Joiner.on(", ").join(transformExpressionsToSource(expression.getArguments()));
     return String.format("%s.$create%s(%s)", className, parameterSignature, argumentsList);

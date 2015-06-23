@@ -22,11 +22,21 @@ import java.util.List;
  */
 public class VisitorUtils {
   @SuppressWarnings("unchecked")
-  static <T extends Node> List<T> visitList(Visitor visitor, List<T> nodeList) {
+  static <T extends Node> void visitList(Processor processor, List<T> nodeList) {
     for (int i = 0; i < nodeList.size(); i++) {
-      nodeList.set(i, (T) nodeList.get(i).accept(visitor));
+      T oldNode = nodeList.get(i);
+      T newNode = (T) oldNode.accept(processor);
+      if (newNode == null) {
+        // Node is removed from list.
+        nodeList.remove(i);
+        i--;
+        continue;
+      }
+      if (newNode != oldNode) {
+        // Node is replaced.
+        nodeList.set(i, newNode);
+      }
     }
-    return nodeList;
   }
 
   private VisitorUtils() {}

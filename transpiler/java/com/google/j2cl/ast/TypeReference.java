@@ -36,10 +36,10 @@ public abstract class TypeReference extends Node implements Comparable<TypeRefer
 
   public abstract int getDimensions();
 
-  public abstract TypeReference getLeafType();
+  public abstract TypeReference getLeafTypeRef();
 
   @Override
-  TypeReference accept(Visitor visitor) {
-    return Visitor_TypeReference.visit(visitor, this);
+  TypeReference accept(Processor processor) {
+    return Visitor_TypeReference.visit(processor, this);
   }
 }

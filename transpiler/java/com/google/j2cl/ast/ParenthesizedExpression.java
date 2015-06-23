@@ -38,7 +38,7 @@ public class ParenthesizedExpression extends Expression {
   }
 
   @Override
-  ParenthesizedExpression accept(Visitor visitor) {
-    return Visitor_ParenthesizedExpression.visit(visitor, this);
+  ParenthesizedExpression accept(Processor processor) {
+    return Visitor_ParenthesizedExpression.visit(processor, this);
   }
 }

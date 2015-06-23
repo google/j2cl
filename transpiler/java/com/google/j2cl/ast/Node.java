@@ -22,7 +22,7 @@ import com.google.j2cl.ast.processors.Visitable;
  */
 @Visitable
 public abstract class Node {
-  Node accept(Visitor visitor) {
-    return Visitor_Node.visit(visitor, this);
+  Node accept(Processor processor) {
+    return Visitor_Node.visit(processor, this);
   }
 }

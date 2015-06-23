@@ -28,37 +28,37 @@ public abstract class MethodReference extends Node {
   public static MethodReference create(
       boolean isStatic,
       Visibility visibility,
-      TypeReference enclosingClassReference,
+      TypeReference enclosingClassRef,
       String methodName,
       boolean isConstructor,
-      TypeReference returnTypeReference,
-      TypeReference... parameterTypeReferences) {
+      TypeReference returnTypeRef,
+      TypeReference... parameterTypeRefs) {
     return new AutoValue_MethodReference(
         isStatic,
         visibility,
-        enclosingClassReference,
+        enclosingClassRef,
         methodName,
         isConstructor,
-        ImmutableList.copyOf(parameterTypeReferences),
-        returnTypeReference);
+        ImmutableList.copyOf(parameterTypeRefs),
+        returnTypeRef);
   }
 
   public abstract boolean isStatic();
 
   public abstract Visibility getVisibility();
 
-  public abstract TypeReference getEnclosingClassReference();
+  public abstract TypeReference getEnclosingClassRef();
 
   public abstract String getMethodName();
 
   public abstract boolean isConstructor();
 
-  public abstract ImmutableList<TypeReference> getParameterTypeReferences();
+  public abstract ImmutableList<TypeReference> getParameterTypeRefs();
 
-  public abstract TypeReference getReturnTypeReference();
+  public abstract TypeReference getReturnTypeRef();
 
   @Override
-  MethodReference accept(Visitor visitor) {
-    return Visitor_MethodReference.visit(visitor, this);
+  MethodReference accept(Processor processor) {
+    return Visitor_MethodReference.visit(processor, this);
   }
 }

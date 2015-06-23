@@ -1,0 +1,12 @@
+package ${packageName};
+
+interface Rewriter {
+
+#foreach($clazz in $classes)
+  boolean shouldProcess${clazz.SimpleName}(${clazz.SimpleName} node);
+#end
+
+#foreach($clazz in $classes)
+  <T extends Node> T rewrite${clazz.SimpleName}(${clazz.SimpleName} node);
+#end
+}

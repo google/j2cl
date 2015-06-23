@@ -30,31 +30,31 @@ public abstract class ArrayTypeReference extends TypeReference {
   public abstract int getDimensions();
 
   @Override
-  public abstract TypeReference getLeafType();
+  public abstract TypeReference getLeafTypeRef();
 
   @Override
   public String getSimpleName() {
-    return getLeafType().getSimpleName() + getSuffix();
+    return getLeafTypeRef().getSimpleName() + getSuffix();
   }
 
   @Override
   public String getBinaryName() {
-    return getPrefix() + getLeafType().getBinaryName();
+    return getPrefix() + getLeafTypeRef().getBinaryName();
   }
 
   @Override
   public String getCompilationUnitSourceName() {
-    return getLeafType().getCompilationUnitSourceName();
+    return getLeafTypeRef().getCompilationUnitSourceName();
   }
 
   @Override
   public String getSourceName() {
-    return getLeafType().getSimpleName() + getSuffix();
+    return getLeafTypeRef().getSimpleName() + getSuffix();
   }
 
   @Override
   public String getPackageName() {
-    return getLeafType().getPackageName();
+    return getLeafTypeRef().getPackageName();
   }
 
   @Override
@@ -76,7 +76,7 @@ public abstract class ArrayTypeReference extends TypeReference {
   }
 
   @Override
-  ArrayTypeReference accept(Visitor visitor) {
-    return Visitor_ArrayTypeReference.visit(visitor, this);
+  ArrayTypeReference accept(Processor processor) {
+    return Visitor_ArrayTypeReference.visit(processor, this);
   }
 }

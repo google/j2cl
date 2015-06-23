@@ -1,4 +1,4 @@
-#set ($superTypeReference = $classType.superType)
+#set ($superTypeReference = $classType.SuperTypeRef)
 #if ($superTypeReference)
 #set ($superTypeName = ${TranspilerUtils.getClassName($superTypeReference)})
 #set ($superTypeMangledName = ${ManglingNameUtils.getMangledName($superTypeReference)})

@@ -27,11 +27,11 @@ public abstract class FieldReference extends Node {
   public static FieldReference create(
       boolean isStatic,
       Visibility visibility,
-      TypeReference enclosingClassReference,
+      TypeReference enclosingClassRef,
       String fieldName,
-      TypeReference type) {
+      TypeReference typeRef) {
     return new AutoValue_FieldReference(
-        isStatic, visibility, enclosingClassReference, fieldName, type);
+        isStatic, visibility, enclosingClassRef, fieldName, typeRef);
   }
 
   public abstract boolean isStatic();
@@ -45,7 +45,7 @@ public abstract class FieldReference extends Node {
   public abstract TypeReference getType();
 
   @Override
-  FieldReference accept(Visitor visitor) {
-    return Visitor_FieldReference.visit(visitor, this);
+  FieldReference accept(Processor processor) {
+    return Visitor_FieldReference.visit(processor, this);
   }
 }

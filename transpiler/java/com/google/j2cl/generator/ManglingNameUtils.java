@@ -31,52 +31,52 @@ public class ManglingNameUtils {
   /**
    * Returns the mangled name of a type.
    */
-  public static String getMangledName(TypeReference typeReference) {
+  public static String getMangledName(TypeReference typeRef) {
     //TODO(rluble): Stub implementation.
-    if (typeReference.isArray()) {
-      return Strings.repeat("arrayOf_", typeReference.getDimensions())
-          + getMangledName(typeReference.getLeafType());
+    if (typeRef.isArray()) {
+      return Strings.repeat("arrayOf_", typeRef.getDimensions())
+          + getMangledName(typeRef.getLeafTypeRef());
     }
-    return typeReference.getSourceName().replace('.', '_');
+    return typeRef.getSourceName().replace('.', '_');
   }
 
   /**
    * Returns the mangled name of a method.
    */
-  public static String getMangledName(MethodReference methodReference) {
+  public static String getMangledName(MethodReference methodRef) {
     String suffix;
-    switch (methodReference.getVisibility()) {
+    switch (methodRef.getVisibility()) {
       case PRIVATE:
         // To ensure that private methods never override each other.
-        suffix = "_$p_" + getMangledName(methodReference.getEnclosingClassReference());
+        suffix = "_$p_" + getMangledName(methodRef.getEnclosingClassRef());
         break;
       case PACKAGE_PRIVATE:
         // To ensure that package private methods only override one another when
         // they are in the same package.
         suffix =
             "_$pp_"
-                + methodReference.getEnclosingClassReference().getPackageName().replace('.', '_');
+                + methodRef.getEnclosingClassRef().getPackageName().replace('.', '_');
         break;
       default:
         suffix = "";
         break;
     }
-    String parameterSignature = getMangledParameterSignature(methodReference);
-    return String.format("m_%s%s%s", methodReference.getMethodName(), parameterSignature, suffix);
+    String parameterSignature = getMangledParameterSignature(methodRef);
+    return String.format("m_%s%s%s", methodRef.getMethodName(), parameterSignature, suffix);
   }
 
-  public static String getMangledParameterSignature(MethodReference methodReference) {
-    if (methodReference.getParameterTypeReferences().isEmpty()) {
+  public static String getMangledParameterSignature(MethodReference methodRef) {
+    if (methodRef.getParameterTypeRefs().isEmpty()) {
       return "";
     }
-    return "__" + Joiner.on("_").join(getMangledParameterTypes(methodReference));
+    return "__" + Joiner.on("_").join(getMangledParameterTypes(methodRef));
   }
   /**
    * Returns the list of mangled name of parameters' types.
    */
-  private static List<String> getMangledParameterTypes(MethodReference methodReference) {
+  private static List<String> getMangledParameterTypes(MethodReference methodRef) {
     return Lists.transform(
-        methodReference.getParameterTypeReferences(),
+        methodRef.getParameterTypeRefs(),
         new Function<TypeReference, String>() {
           @Override
           public String apply(TypeReference parameterType) {

@@ -6,7 +6,7 @@
 #set ($parameterList = $TranspilerUtils.getParameterList($method))
   /**
 #foreach($parameter in $method.Parameters)
-#set ($parameterTypeName = $TranspilerUtils.getJsDocName($parameter.Type))
+#set ($parameterTypeName = $TranspilerUtils.getJsDocName($parameter.TypeRef))
    * @param {$parameterTypeName} $parameter.Name
 #end
    * @${method.SelfReference.Visibility}

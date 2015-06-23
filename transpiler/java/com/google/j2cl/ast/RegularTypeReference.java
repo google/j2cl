@@ -99,7 +99,7 @@ public abstract class RegularTypeReference extends TypeReference {
   }
 
   @Override
-  public TypeReference getLeafType() {
+  public TypeReference getLeafTypeRef() {
     return null;
   }
 
@@ -109,8 +109,8 @@ public abstract class RegularTypeReference extends TypeReference {
   }
 
   @Override
-  RegularTypeReference accept(Visitor visitor) {
-    return Visitor_RegularTypeReference.visit(visitor, this);
+  RegularTypeReference accept(Processor processor) {
+    return Visitor_RegularTypeReference.visit(processor, this);
   }
 
   public boolean isPrimitive() {

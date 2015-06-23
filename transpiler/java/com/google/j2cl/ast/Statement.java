@@ -23,7 +23,7 @@ import com.google.j2cl.ast.processors.Visitable;
 @Visitable
 public abstract class Statement extends Node {
   @Override
-  Statement accept(Visitor visitor) {
-    return Visitor_Statement.visit(visitor, this);
+  Statement accept(Processor processor) {
+    return Visitor_Statement.visit(processor, this);
   }
 }

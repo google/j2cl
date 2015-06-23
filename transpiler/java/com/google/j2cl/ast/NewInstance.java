@@ -30,14 +30,14 @@ public class NewInstance extends Expression {
 
   @Visitable @Nullable Expression qualifier;
 
-  @Visitable MethodReference constructor;
+  @Visitable MethodReference constructorRef;
 
   @Visitable List<Expression> arguments = new ArrayList<>();
 
   public NewInstance(
-      Expression qualifier, MethodReference constructor, List<Expression> arguments) {
+      Expression qualifier, MethodReference constructorRef, List<Expression> arguments) {
     this.qualifier = qualifier;
-    this.constructor = constructor;
+    this.constructorRef = constructorRef;
     this.arguments.addAll(arguments);
   }
 
@@ -45,8 +45,8 @@ public class NewInstance extends Expression {
     return qualifier;
   }
 
-  public MethodReference getConstructor() {
-    return constructor;
+  public MethodReference getConstructorRef() {
+    return constructorRef;
   }
 
   public List<Expression> getArguments() {
@@ -57,12 +57,12 @@ public class NewInstance extends Expression {
     this.qualifier = qualifier;
   }
 
-  public void setConstructor(MethodReference constructor) {
-    this.constructor = constructor;
+  public void setConstructorRef(MethodReference constructorRef) {
+    this.constructorRef = constructorRef;
   }
 
   @Override
-  NewInstance accept(Visitor visitor) {
-    return Visitor_NewInstance.visit(visitor, this);
+  NewInstance accept(Processor processor) {
+    return Visitor_NewInstance.visit(processor, this);
   }
 }

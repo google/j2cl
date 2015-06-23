@@ -23,31 +23,31 @@ import com.google.j2cl.ast.processors.Visitable;
 @Visitable
 public class InstanceOfExpression extends Expression {
   @Visitable Expression expression;
-  @Visitable TypeReference testType;
+  @Visitable TypeReference testTypeRef;
 
   public InstanceOfExpression(Expression leftOperand, TypeReference rightOperand) {
     this.expression = leftOperand;
-    this.testType = rightOperand;
+    this.testTypeRef = rightOperand;
   }
 
   public Expression getExpression() {
     return expression;
   }
 
-  public TypeReference getTestType() {
-    return testType;
+  public TypeReference getTestTypeRef() {
+    return testTypeRef;
   }
 
   public void setExpression(Expression leftOperand) {
     this.expression = leftOperand;
   }
 
-  public void setTestType(TypeReference rightOperand) {
-    this.testType = rightOperand;
+  public void setTestTypeRef(TypeReference rightOperand) {
+    this.testTypeRef = rightOperand;
   }
 
   @Override
-  InstanceOfExpression accept(Visitor visitor) {
-    return Visitor_InstanceOfExpression.visit(visitor, this);
+  InstanceOfExpression accept(Processor processor) {
+    return Visitor_InstanceOfExpression.visit(processor, this);
   }
 }

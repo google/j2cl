@@ -34,35 +34,35 @@ import java.util.TreeSet;
  * Utility functions to transpile the j2cl AST.
  */
 public class TranspilerUtils {
-  public static String getSourceName(TypeReference typeReference) {
+  public static String getSourceName(TypeReference typeRef) {
     // TODO(rluble): Stub implementation. Needs to be implemented for the cases in which a
     // class might be refered by multiple different type references.
     // TODO(rluble): See if the canonical name concept can be avoided in our AST but converting
     // to canonical type references at AST construction.
-    return typeReference.getSourceName();
+    return typeRef.getSourceName();
   }
 
   /**
    * Returns the unqualified name that will be used in JavaScript.
    */
-  public static String getClassName(TypeReference typeReference) {
+  public static String getClassName(TypeReference typeRef) {
     //TODO(rluble): Stub implementation.
-    return typeReference.getSimpleName();
+    return typeRef.getSimpleName();
   }
 
   /**
    * Returns the JsDoc type name.
    */
-  public static String getJsDocName(TypeReference typeReference) {
+  public static String getJsDocName(TypeReference typeRef) {
     // TODO: Incomplete implementation.
-    if (typeReference.isArray()) {
+    if (typeRef.isArray()) {
       return String.format(
           "%s%s%s",
-          Strings.repeat("Array<", typeReference.getDimensions()),
-          getJsDocName(typeReference.getLeafType()),
-          Strings.repeat(">", typeReference.getDimensions()));
+          Strings.repeat("Array<", typeRef.getDimensions()),
+          getJsDocName(typeRef.getLeafTypeRef()),
+          Strings.repeat(">", typeRef.getDimensions()));
     }
-    switch (typeReference.getSourceName()) {
+    switch (typeRef.getSourceName()) {
       case "int":
       case "double":
       case "float":
@@ -71,7 +71,7 @@ public class TranspilerUtils {
       case "java.lang.String":
         return "string";
     }
-    return getClassName(typeReference);
+    return getClassName(typeRef);
   }
 
   /**

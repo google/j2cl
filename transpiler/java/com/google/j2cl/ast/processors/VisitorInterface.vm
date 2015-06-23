@@ -1,0 +1,12 @@
+package ${packageName};
+
+interface Visitor {
+
+#foreach($clazz in $classes)
+  boolean enter${clazz.SimpleName}(${clazz.SimpleName} node);
+#end
+
+#foreach($clazz in $classes)
+  void exit${clazz.SimpleName}(${clazz.SimpleName} node);
+#end
+}

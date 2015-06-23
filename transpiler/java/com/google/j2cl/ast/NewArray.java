@@ -42,7 +42,7 @@ public class NewArray extends Expression {
   }
 
   @Override
-  public NewArray accept(Visitor visitor) {
-    return Visitor_NewArray.visit(visitor, this);
+  public NewArray accept(Processor processor) {
+    return Visitor_NewArray.visit(processor, this);
   }
 }

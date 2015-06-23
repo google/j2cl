@@ -1,24 +1,32 @@
 package ${packageName};
 
+import com.google.common.base.Preconditions;
+
 public class Visitor_${className} {
 
-  public static ${className} visit(Visitor visitor, ${className} node) {
-    if (visitor.enter${className}(node)) {
+  public static ${className} visit(Processor processor, ${className} node) {
+    ProcessorPrivate processorImpl = (ProcessorPrivate) processor;
+    if (processorImpl.shouldProcess${className}(node)) {
+      node = processorImpl.preProcess${className}(node);
+
 #foreach($field in $fields)
 #if(${field.isNullable()})
       if (node.${field.Name} != null) {
 #end
 #if(${field.isList()})
-        node.${field.Name} = VisitorUtils.visitList(visitor, node.${field.Name});
+        VisitorUtils.visitList(processorImpl, node.${field.Name});
+#elseif (${field.isNullable()})
+        node.${field.Name} = node.${field.Name}.accept(processorImpl);
 #else
-        node.${field.Name} = node.${field.Name}.accept(visitor);
+        node.${field.Name} = Preconditions.checkNotNull(node.${field.Name}.accept(processorImpl),
+             "Field \"${field.Name}\" in class \"${className}\" cannot be null");
 #end
 #if(${field.isNullable()})
       }
 #end
 #end
+      node = processorImpl.postProcess${className}(node);
     }
-    visitor.exit${className}(node);
     return node;
   }
 }

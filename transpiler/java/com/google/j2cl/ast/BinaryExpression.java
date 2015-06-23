@@ -58,7 +58,7 @@ public class BinaryExpression extends Expression {
   }
 
   @Override
-  public BinaryExpression accept(Visitor visitor) {
-    return Visitor_BinaryExpression.visit(visitor, this);
+  public BinaryExpression accept(Processor processor) {
+    return Visitor_BinaryExpression.visit(processor, this);
   }
 }

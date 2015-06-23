@@ -47,7 +47,7 @@ public class VariableDeclaration extends Statement {
   }
 
   @Override
-  VariableDeclaration accept(Visitor visitor) {
-    return Visitor_VariableDeclaration.visit(visitor, this);
+  VariableDeclaration accept(Processor processor) {
+    return Visitor_VariableDeclaration.visit(processor, this);
   }
 }

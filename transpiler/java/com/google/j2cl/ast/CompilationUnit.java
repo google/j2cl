@@ -67,7 +67,7 @@ public class CompilationUnit extends Node {
   }
 
   @Override
-  public CompilationUnit accept(Visitor visitor) {
-    return Visitor_CompilationUnit.visit(visitor, this);
+  public CompilationUnit accept(Processor processor) {
+    return Visitor_CompilationUnit.visit(processor, this);
   }
 }

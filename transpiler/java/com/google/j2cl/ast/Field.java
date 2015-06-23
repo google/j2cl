@@ -53,7 +53,7 @@ public class Field extends Node {
   }
 
   @Override
-  public Field accept(Visitor visitor) {
-    return Visitor_Field.visit(visitor, this);
+  public Field accept(Processor processor) {
+    return Visitor_Field.visit(processor, this);
   }
 }
