@@ -91,6 +91,26 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
       externs_list=["//javascript/externs:common"],
       deps=[":" + name + "_js_library"],
   )
+  # For constructing readable optimized diffs.
+  native.js_binary(
+      name="readable_optimized_js",
+      srcs=["OptHarness.js"],
+      defs=CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
+          "--language_in=ECMASCRIPT6",
+          "--language_out=ECMASCRIPT5",
+          "--define=ASSERTIONS_ENABLED_=true",
+          "--remove_dead_assignments",
+          "--remove_dead_code",
+          "--remove_unused_local_vars=ON",
+          "--remove_unused_vars",
+          "--pretty_print",
+          "--property_renaming=OFF",
+          "--variable_renaming=OFF",
+      ],
+      compiler="//javascript/tools/jscompiler:head",
+      externs_list=["//javascript/externs:common"],
+      deps=[":" + name + "_js_library"],
+  )
 
   # blaze test :uncompiled_test
   # blaze test :compiled_test
