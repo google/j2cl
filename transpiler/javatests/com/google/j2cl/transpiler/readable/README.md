@@ -47,6 +47,7 @@ are copyright and licensed as follows:
 - bridgemethodmultipleoverrides
 - bridgemethodmultipletypevars
 - cascadedclinitrunsjustonce
+- cascadedconstructor
 - casttoarray
 - casttoclass
 - casttointerface
@@ -84,7 +85,6 @@ are copyright and licensed as follows:
 - methodreferences
 - multicatch
 - multipleanonymousclass
-- multipleconstructors
 - multipleparametersgenerictype
 - nestedanonymousclass
 - nestedclasses

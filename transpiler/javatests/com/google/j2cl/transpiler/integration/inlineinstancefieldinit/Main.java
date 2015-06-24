@@ -10,4 +10,3 @@ public class Main {
     assert m.b == 2;
   }
 }
-

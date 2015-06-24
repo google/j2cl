@@ -110,7 +110,7 @@ public class TranspilerUtils {
                 return variable.getName();
               }
             });
-    return Joiner.on(",").join(parameterNameList);
+    return Joiner.on(", ").join(parameterNameList);
   }
 
   /**

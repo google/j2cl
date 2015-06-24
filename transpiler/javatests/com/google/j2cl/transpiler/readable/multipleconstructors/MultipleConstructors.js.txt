@@ -1,0 +1,174 @@
+goog.module('gen.com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructorsModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/multipleconstructors/MultipleConstructors.java.
+ */
+class MultipleConstructors extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @private {?number}
+     */
+    this.f_id__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ =
+        null;
+    /**
+     * @private {?boolean}
+     */
+    this.f_flag__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ =
+        null;
+  }
+
+  /**
+   * Runs inline instance field initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {number} id
+   * @return {!MultipleConstructors}
+   * @public
+   */
+  static $create__int(id) {
+    MultipleConstructors.$clinit();
+    var instance = new MultipleConstructors;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors__int(
+            id);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {number} id
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors__int(
+      id) {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors();
+    this.f_id__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ =
+        id;
+    this.f_flag__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ =
+        (id == 0);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {boolean} flag
+   * @return {!MultipleConstructors}
+   * @public
+   */
+  static $create__boolean(flag) {
+    MultipleConstructors.$clinit();
+    var instance = new MultipleConstructors;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors__boolean(
+            flag);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {boolean} flag
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors__boolean(
+      flag) {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors();
+    this.f_id__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ =
+        -1;
+    this.f_flag__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ =
+        flag;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {number} id
+   * @param {boolean} flag
+   * @return {!MultipleConstructors}
+   * @public
+   */
+  static $create__int__boolean(id, flag) {
+    MultipleConstructors.$clinit();
+    var instance = new MultipleConstructors;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors__int__boolean(
+            id, flag);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {number} id
+   * @param {boolean} flag
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors__int__boolean(
+      id, flag) {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors();
+    this.f_id__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ =
+        id;
+    this.f_flag__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors_ =
+        flag;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof MultipleConstructors;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, MultipleConstructors);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+MultipleConstructors.$class = Class.$createForClass(
+    Util.$generateId('MultipleConstructors'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors'));
+
+
+/**
+ * Exported class.
+ */
+exports.MultipleConstructors = MultipleConstructors;

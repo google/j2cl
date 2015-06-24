@@ -21,11 +21,13 @@ import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
+import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
+import com.google.j2cl.ast.FieldReference;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
@@ -38,7 +40,9 @@ import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.ParenthesizedExpression;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PrefixExpression;
+import com.google.j2cl.ast.RegularTypeReference;
 import com.google.j2cl.ast.Statement;
+import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclaration;
@@ -133,8 +137,11 @@ public class CompilationUnitBuilder {
       List<Variable> parameters = new ArrayList<>();
       for (Object element : node.parameters()) {
         SingleVariableDeclaration parameter = (SingleVariableDeclaration) element;
-        parameters.add(
-            JdtUtils.createVariable(parameter.resolveBinding(), compilationUnitNameLocator));
+        IVariableBinding parameterBinding = parameter.resolveBinding();
+        Variable j2clParameter =
+            JdtUtils.createVariable(parameterBinding, compilationUnitNameLocator);
+        parameters.add(j2clParameter);
+        variableByJdtBinding.put(parameterBinding, j2clParameter);
       }
       return new Method(
           JdtUtils.createMethodReference(node.resolveBinding(), compilationUnitNameLocator),
@@ -160,6 +167,10 @@ public class CompilationUnitBuilder {
           JdtUtils.createTypeReference(leafTypeBinding, compilationUnitNameLocator));
     }
 
+    private BooleanLiteral convert(org.eclipse.jdt.core.dom.BooleanLiteral node) {
+      return node.booleanValue() ? BooleanLiteral.TRUE : BooleanLiteral.FALSE;
+    }
+
     private NewInstance convert(org.eclipse.jdt.core.dom.ClassInstanceCreation node) {
       Expression qualifier = node.getExpression() == null ? null : convert(node.getExpression());
       MethodReference constructor =
@@ -174,10 +185,16 @@ public class CompilationUnitBuilder {
 
     private Expression convert(org.eclipse.jdt.core.dom.Expression node) {
       switch (node.getNodeType()) {
+        case ASTNode.ASSIGNMENT:
+          return convert((org.eclipse.jdt.core.dom.Assignment) node);
         case ASTNode.ARRAY_CREATION:
           return convert((org.eclipse.jdt.core.dom.ArrayCreation) node);
+        case ASTNode.BOOLEAN_LITERAL:
+          return convert((org.eclipse.jdt.core.dom.BooleanLiteral) node);
         case ASTNode.CLASS_INSTANCE_CREATION:
           return convert((org.eclipse.jdt.core.dom.ClassInstanceCreation) node);
+        case ASTNode.FIELD_ACCESS:
+          return convert((org.eclipse.jdt.core.dom.FieldAccess) node);
         case ASTNode.INFIX_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.InfixExpression) node);
         case ASTNode.INSTANCEOF_EXPRESSION:
@@ -194,6 +211,8 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.QualifiedName) node);
         case ASTNode.SIMPLE_NAME:
           return convert((org.eclipse.jdt.core.dom.SimpleName) node);
+        case ASTNode.THIS_EXPRESSION:
+          return convert((org.eclipse.jdt.core.dom.ThisExpression) node);
         default:
           throw new RuntimeException(
               "Need to implement translation for expression type: " + node.getClass().getName());
@@ -242,6 +261,13 @@ public class CompilationUnitBuilder {
       return new AssertStatement(expression, message);
     }
 
+    private BinaryExpression convert(org.eclipse.jdt.core.dom.Assignment node) {
+      Expression leftHandSide = convert(node.getLeftHandSide());
+      Expression rightHandSide = convert(node.getRightHandSide());
+      BinaryOperator operator = JdtUtils.getBinaryOperator(node.getOperator());
+      return new BinaryExpression(leftHandSide, operator, rightHandSide);
+    }
+
     private Block convert(org.eclipse.jdt.core.dom.Block node) {
       List<Statement> body = new ArrayList<>();
       for (Object object : node.statements()) {
@@ -253,6 +279,14 @@ public class CompilationUnitBuilder {
 
     private Statement convert(org.eclipse.jdt.core.dom.ExpressionStatement node) {
       return new ExpressionStatement(convert(node.getExpression()));
+    }
+
+    private FieldAccess convert(org.eclipse.jdt.core.dom.FieldAccess node) {
+      Expression qualifier = convert(node.getExpression());
+      IVariableBinding variableBinding = node.resolveFieldBinding();
+      FieldReference field =
+          JdtUtils.createFieldReference(variableBinding, compilationUnitNameLocator);
+      return new FieldAccess(qualifier, field);
     }
 
     private BinaryExpression convert(org.eclipse.jdt.core.dom.InfixExpression node) {
@@ -316,9 +350,7 @@ public class CompilationUnitBuilder {
           return new FieldAccess(
               null, JdtUtils.createFieldReference(variableBinding, compilationUnitNameLocator));
         } else if (variableBinding.isParameter()) {
-          // TODO: to be implemented.
-          throw new RuntimeException(
-              "Need to implement translation for SimpleName binding: " + node.getClass().getName());
+          return new VariableReference(variableByJdtBinding.get(variableBinding));
         } else {
           // local variable.
           return new VariableReference(variableByJdtBinding.get(variableBinding));
@@ -331,6 +363,12 @@ public class CompilationUnitBuilder {
         throw new RuntimeException(
             "Need to implement translation for SimpleName binding: " + node.getClass().getName());
       }
+    }
+
+    public ThisReference convert(org.eclipse.jdt.core.dom.ThisExpression node) {
+      RegularTypeReference typeRef =
+          node.getQualifier() == null ? null : (RegularTypeReference) convert(node.getQualifier());
+      return new ThisReference(typeRef);
     }
 
     private VariableDeclaration convert(org.eclipse.jdt.core.dom.VariableDeclarationFragment node) {

@@ -17,10 +17,12 @@ package com.google.j2cl.generator;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractTransformer;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.BinaryExpression;
+import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldReference;
@@ -33,6 +35,7 @@ import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.ParenthesizedExpression;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PrefixExpression;
+import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.VariableDeclaration;
 import com.google.j2cl.ast.VariableReference;
@@ -73,6 +76,11 @@ public class StatementSourceGenerator {
       }
 
       @Override
+      public String transformBooleanLiteral(BooleanLiteral expression) {
+        return expression.getValue() ? "true" : "false";
+      }
+
+      @Override
       public String transformExpressionStatement(ExpressionStatement statement) {
         return toSource(statement.getExpression()) + ";";
       }
@@ -80,8 +88,9 @@ public class StatementSourceGenerator {
       @Override
       public String transformFieldAccess(FieldAccess fieldAccess) {
         FieldReference target = fieldAccess.getField();
-        String fieldMangledName = ManglingNameUtils.getMangledName(
-            target, isInClinit(target.getEnclosingClassReference()));
+        String fieldMangledName =
+            ManglingNameUtils.getMangledName(
+                target, isInClinit(target.getEnclosingClassReference()));
 
         // make 'this.' reference and static reference explicit.
         // TODO(rluble): We should probably make this explicit at the AST level, either by a
@@ -89,8 +98,8 @@ public class StatementSourceGenerator {
         String qualifier =
             fieldAccess.getQualifier() == null
                 ? (target.isStatic()
-                ? TranspilerUtils.getClassName(target.getEnclosingClassReference())
-                : "this")
+                    ? TranspilerUtils.getClassName(target.getEnclosingClassReference())
+                    : "this")
                 : toSource(fieldAccess.getQualifier());
         return String.format("%s.%s", qualifier, fieldMangledName);
       }
@@ -99,8 +108,8 @@ public class StatementSourceGenerator {
       public String transformInstanceOfExpression(InstanceOfExpression expression) {
         TypeReference checkType = expression.getTestTypeRef();
         if (checkType.isArray()) {
-          throw
-              new RuntimeException("TODO: Implement toSource() for instanceOf ArrayTypeReference");
+          throw new RuntimeException(
+              "TODO: Implement toSource() for instanceOf ArrayTypeReference");
         }
         return String.format(
             "%s.$isInstance(%s)",
@@ -111,8 +120,7 @@ public class StatementSourceGenerator {
       @Override
       public String transformNewArray(NewArray expression) {
         String dimensionsList =
-            Joiner.on(", ")
-                .join(transformNodesToSource(expression.getDimensionExpressions()));
+            Joiner.on(", ").join(transformNodesToSource(expression.getDimensionExpressions()));
         String leafTypeName = TranspilerUtils.getClassName(expression.getLeafTypeRef());
         return String.format("Arrays.$create([%s], %s)", dimensionsList, leafTypeName);
       }
@@ -121,26 +129,21 @@ public class StatementSourceGenerator {
       public String transformNewInstance(NewInstance expression) {
         String className =
             TranspilerUtils.getClassName(expression.getConstructorRef().getEnclosingClassRef());
-        String parameterSignature =
-            ManglingNameUtils.getMangledParameterSignature(expression.getConstructorRef());
+        String constructorMangledName =
+            ManglingNameUtils.getConstructorMangledName(expression.getConstructorRef());
         String argumentsList =
             Joiner.on(", ").join(transformNodesToSource(expression.getArguments()));
-        return String.format("%s.$create%s(%s)", className, parameterSignature, argumentsList);
+        return String.format("%s.%s(%s)", className, constructorMangledName, argumentsList);
       }
 
       @Override
       public String transformNullLiteral(NullLiteral expression) {
-        return expression.toString();
+        return "null";
       }
 
       @Override
       public String transformNumberLiteral(NumberLiteral expression) {
         return expression.getToken();
-      }
-
-      @Override
-      public String transformVariableReference(VariableReference expression) {
-        return expression.getTarget().getName();
       }
 
       @Override
@@ -161,17 +164,33 @@ public class StatementSourceGenerator {
       }
 
       @Override
-      public String transformVariableDeclaration(VariableDeclaration statement) {
-        return String.format(
-            "var %s = %s;", statement.getVariable().getName(),
-            toSource(statement.getInitializer()));
+      public String transformThisReference(ThisReference expression) {
+        // We expect that after normalization (InnerClassExtractor) there should be no qualified
+        // this reference.
+        Preconditions.checkArgument(
+            expression.getTypeRef() == null,
+            "There should be no qualified thisRef after normalization.");
+        return "this";
       }
 
       @Override
       public String transformTypeReference(TypeReference typeRef) {
         return TranspilerUtils.getClassName(typeRef);
       }
-     }
+
+      @Override
+      public String transformVariableDeclaration(VariableDeclaration statement) {
+        return String.format(
+            "var %s = %s;",
+            statement.getVariable().getName(),
+            toSource(statement.getInitializer()));
+      }
+
+      @Override
+      public String transformVariableReference(VariableReference expression) {
+        return expression.getTarget().getName();
+      }
+    }
     return new ToSourceTransformer().process(node);
   }
 

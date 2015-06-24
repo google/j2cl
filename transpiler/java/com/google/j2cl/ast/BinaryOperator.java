@@ -37,7 +37,20 @@ public enum BinaryOperator {
   AND("&"),
   OR("|"),
   CONDITIONAL_AND("&&"),
-  CONDITIONAL_OR("||");
+  CONDITIONAL_OR("||"),
+  // TODO: add tests for each operator.
+  ASSIGN("="),
+  PLUS_ASSIGN("+="),
+  MINUS_ASSIGN("-="),
+  TIMES_ASSIGN("*="),
+  DIVIDE_ASSIGN("/="),
+  BIT_AND_ASSIGN("&="),
+  BIT_OR_ASSIGN("|="),
+  BIT_XOR_ASSIGN("^="),
+  REMAINDER_ASSIGN("%="),
+  LEFT_SHIFT_ASSIGN("<<="),
+  RIGHT_SHIFT_SIGNED_ASSIGN(">>="),
+  RIGHT_SHIFT_UNSIGNED_ASSIGN(">>>=");
   private String symbol;
 
   BinaryOperator(String symbol) {

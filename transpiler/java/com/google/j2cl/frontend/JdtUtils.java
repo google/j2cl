@@ -26,6 +26,7 @@ import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 
+import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
@@ -185,6 +186,36 @@ public class JdtUtils {
         return BinaryOperator.CONDITIONAL_AND;
       case "||":
         return BinaryOperator.CONDITIONAL_OR;
+    }
+    return null;
+  }
+
+  public static BinaryOperator getBinaryOperator(Assignment.Operator operator) {
+    switch (operator.toString()) {
+      case "=":
+        return BinaryOperator.ASSIGN;
+      case "+=":
+        return BinaryOperator.PLUS_ASSIGN;
+      case "-=":
+        return BinaryOperator.MINUS_ASSIGN;
+      case "*=":
+        return BinaryOperator.TIMES_ASSIGN;
+      case "/=":
+        return BinaryOperator.DIVIDE_ASSIGN;
+      case "&=":
+        return BinaryOperator.BIT_AND_ASSIGN;
+      case "|=":
+        return BinaryOperator.BIT_OR_ASSIGN;
+      case "^=":
+        return BinaryOperator.BIT_XOR_ASSIGN;
+      case "%=":
+        return BinaryOperator.REMAINDER_ASSIGN;
+      case "<<=":
+        return BinaryOperator.LEFT_SHIFT_ASSIGN;
+      case ">>=":
+        return BinaryOperator.RIGHT_SHIFT_SIGNED_ASSIGN;
+      case ">>>=":
+        return BinaryOperator.RIGHT_SHIFT_UNSIGNED_ASSIGN;
     }
     return null;
   }

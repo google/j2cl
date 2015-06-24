@@ -3,23 +3,37 @@
 #else
 #set ($ctorVisibility = $method.SelfReference.Visibility)
 #end
+#set ($parameterList = $TranspilerUtils.getParameterList($method))
+#set ($mangledNameOfCreate = $ManglingNameUtils.getConstructorMangledName($method.SelfReference))
+#set ($mangledNameOfCtor = $ManglingNameUtils.getCtorMangledName($method.SelfReference))
   /**
    * A particular Java constructor as a factory method.
+#foreach($parameter in $method.Parameters)
+#set ($parameterTypeName = $TranspilerUtils.getJsDocName($parameter.TypeRef))
+   * @param {$parameterTypeName} $parameter.Name
+#end
    * @return {!$jsDocName}
    * @${method.SelfReference.Visibility}
    */
-  static $create() {
+  static ${mangledNameOfCreate}($parameterList) {
     $className.$clinit();
     var instance = new $className;
-    instance.$ctor__$mangledTypeName();
+    instance.$mangledNameOfCtor($parameterList);
     return instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
+#foreach($parameter in $method.Parameters)
+#set ($parameterTypeName = $TranspilerUtils.getJsDocName($parameter.TypeRef))
+   * @param {$parameterTypeName} $parameter.Name
+#end
    * @$ctorVisibility
    */
-  $ctor__$mangledTypeName() {
+  $mangledNameOfCtor($parameterList) {
     this.$ctor__$superTypeMangledName();
     this.$init__$mangledTypeName();
+#foreach ($stmt in ${method.Body.Statements})
+    $StatementSourceGenerator.toSource($stmt)
+#end
   }

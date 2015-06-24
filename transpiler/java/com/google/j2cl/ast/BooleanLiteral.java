@@ -18,12 +18,24 @@ package com.google.j2cl.ast;
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
- * Null literal node.
+ * Boolean literal node.
  */
 @Visitable
-public class NullLiteral extends Expression {
+public class BooleanLiteral extends Expression {
+  public static final BooleanLiteral FALSE = new BooleanLiteral(false);
+  public static final BooleanLiteral TRUE = new BooleanLiteral(true);
+  private final boolean value;
+
+  private BooleanLiteral(boolean value) {
+    this.value = value;
+  }
+
+  public boolean getValue() {
+    return value;
+  }
+
   @Override
-  public NullLiteral accept(Processor processor) {
-    return Visitor_NullLiteral.visit(processor, this);
+  public BooleanLiteral accept(Processor processor) {
+    return Visitor_BooleanLiteral.visit(processor, this);
   }
 }

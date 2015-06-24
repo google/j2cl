@@ -17,13 +17,29 @@ package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.processors.Visitable;
 
+import javax.annotation.Nullable;
+
 /**
- * Null literal node.
+ * Class for this reference.
  */
 @Visitable
-public class NullLiteral extends Expression {
+public class ThisReference extends Expression {
+  @Visitable @Nullable RegularTypeReference typeRef;
+
+  public ThisReference(RegularTypeReference typeRef) {
+    this.typeRef = typeRef;
+  }
+
+  public RegularTypeReference getTypeRef() {
+    return typeRef;
+  }
+
+  public void setTypeRef(RegularTypeReference qualifier) {
+    this.typeRef = qualifier;
+  }
+
   @Override
-  public NullLiteral accept(Processor processor) {
-    return Visitor_NullLiteral.visit(processor, this);
+  public ThisReference accept(Processor processor) {
+    return Visitor_ThisReference.visit(processor, this);
   }
 }

@@ -65,6 +65,22 @@ public class ManglingNameUtils {
   }
 
   /**
+   * Returns the mangled name of the constructor factory method $create.
+   */
+  public static String getConstructorMangledName(MethodReference methodRef) {
+    return "$create" + getMangledParameterSignature(methodRef);
+  }
+
+  /**
+   * Returns the mangled name of $ctor method for a particular constructor.
+   */
+  public static String getCtorMangledName(MethodReference methodRef) {
+    return "$ctor__"
+        + getMangledName(methodRef.getEnclosingClassRef())
+        + getMangledParameterSignature(methodRef);
+  }
+
+  /**
    * Returns the mangled name of a field.
    */
   public static String getMangledName(FieldReference fieldRef) {
@@ -82,12 +98,13 @@ public class ManglingNameUtils {
     return String.format("%sf_%s__%s%s", prefix, name, typeMangledName, privateSuffix);
   }
 
-  public static String getMangledParameterSignature(MethodReference methodRef) {
+  private static String getMangledParameterSignature(MethodReference methodRef) {
     if (methodRef.getParameterTypeRefs().isEmpty()) {
       return "";
     }
-    return "__" + Joiner.on("_").join(getMangledParameterTypes(methodRef));
+    return "__" + Joiner.on("__").join(getMangledParameterTypes(methodRef));
   }
+
   /**
    * Returns the list of mangled name of parameters' types.
    */
