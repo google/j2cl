@@ -10,16 +10,7 @@ import os
 import time
 
 
-import process_util
 import repo_util
-
-
-def compute_synced_to_cl():
-  """Returns the cl that git5 is currently synced to."""
-  status_line = process_util.run_cmd_get_output(["git5", "status"])
-  synced_to_cl = process_util.extract_pattern(
-      "Synced at CL (.*?) = ", status_line)
-  return synced_to_cl
 
 
 def find_last_stats(stat_lines, synced_to_cl):
@@ -48,7 +39,7 @@ def make_size_report():
 
   repo_util.build_optimized_tests()
 
-  synced_to_cl = compute_synced_to_cl()
+  synced_to_cl = repo_util.compute_synced_to_cl()
 
   size_report_file.write("Integration tests optimized size report:\n")
   size_report_file.write("**************************************\n")

@@ -15,6 +15,13 @@ import process_util
 # pylint: disable=global-variable-not-assigned
 TEST_TARGET_PATTERN = ("third_party/java_src/j2cl/transpiler/javatests/"
                        "com/google/j2cl/transpiler/integration/...:all")
+READABLE_TEST_PATTERN = ("//third_party/java_src/j2cl/transpiler/javatests/"
+                         "com/google/j2cl/transpiler/integration/"
+                         "%s:readable_optimized_js")
+READABLE_TEST_FILE = (
+    "blaze-bin/third_party/java_src/j2cl/transpiler/javatests/"
+    "com/google/j2cl/transpiler/integration/"
+    "%s/readable_optimized_js.js")
 HOME_DIR_PATH = expanduser("~")
 MANAGED_REPO_PATH = HOME_DIR_PATH + "/.j2cl-size-repo"
 MANAGED_GOOGLE3_PATH = MANAGED_REPO_PATH + "/google3"
@@ -29,13 +36,36 @@ def build_optimized_tests(cwd=None):
       ["blaze", "build", TEST_TARGET_PATTERN], cwd=cwd)
 
 
+def get_readable_optimized_test_file(test_name):
+  """Returns the path to the readable opt JS file the given test."""
+  global READABLE_TEST_FILE
+
+  return READABLE_TEST_FILE % test_name
+
+
+def build_readable_optimized_test(test_name, cwd=None):
+  """Blaze builds the readable JS for a particular test."""
+  global READABLE_TEST_PATTERN
+
+  process_util.run_cmd_get_output(
+      ["blaze", "build", READABLE_TEST_PATTERN % test_name], cwd=cwd)
+
+
+def compute_synced_to_cl():
+  """Returns the cl that git5 is currently synced to."""
+  status_line = process_util.run_cmd_get_output(["git5", "status"])
+  synced_to_cl = process_util.extract_pattern(
+      "Synced at CL (.*?) = ", status_line)
+  return int(synced_to_cl)
+
+
 def get_js_files_by_test_name():
   """Finds and returns a test_name<->optimized_js_file map."""
   # Gather a list of the names of the test targets we care about
   test_targets = (
       process_util.run_cmd_get_output(
           ["blaze", "query",
-           "filter('.*optimized_js', kind(%s, %s))" %
+           "filter('.*:optimized_js', kind(%s, %s))" %
            ("js_binary", TEST_TARGET_PATTERN)]).split("\n"))
   test_targets = filter(bool, test_targets)
 
@@ -88,6 +118,11 @@ def managed_repo_compute_test_size_path(test_name):
   return "%s/%s_optimized_size.dat" % (MANAGED_DATA_DIR_PATH, test_name)
 
 
+def managed_repo_sync_to(cl):
+  process_util.run_cmd_get_output(
+      ["git5", "sync", "@" + str(cl), "--rebase"], cwd=MANAGED_GOOGLE3_PATH)
+
+
 def managed_repo_process_cl(cl):
   """Record optimized test sizes at the given cl."""
   global MANAGED_DATA_DIR_PATH
@@ -95,8 +130,7 @@ def managed_repo_process_cl(cl):
   global MANAGED_GOOGLE3_PATH
 
   print "    processing CL " + str(cl)
-  process_util.run_cmd_get_output(
-      ["git5", "sync", "@" + str(cl), "--rebase"], cwd=MANAGED_GOOGLE3_PATH)
+  managed_repo_sync_to(cl)
 
   try:
     print "      blaze building optimized tests"
