@@ -1,12 +1,10 @@
-package com.google.j2cl.transpiler.integration.arithmeticexpressions;
+package com.google.j2cl.transpiler.integration.unaryexpressions;
 
+/**
+ * Test unary operations.
+ */
 public class Main {
   public static void main(String[] args) {
-    assert (1 + 1 + 2 - 5 == -1);
-    assert ((1 + 2) * (3 + 4) == 21);
-    assert (!(1 + 2 == 4));
-    assert (!(1 + 2 + 3 == 4));
-
     int a = 10;
     assert a == 10;
 
@@ -34,5 +32,8 @@ public class Main {
 
     int h = ~a;
     assert h == ~10;
+
+    boolean i = (a == 100);
+    assert !i;
   }
 }

@@ -1,5 +1,8 @@
 package com.google.j2cl.transpiler.integration.inlineinstancefieldinit;
 
+/**
+ * Test instance field initializer and instance field reference in field declaration.
+ */
 public class Main {
   public int a = 1;
   public int b = a * 2;

@@ -16,7 +16,7 @@
 package com.google.j2cl.transpiler.integration.instanceofclass;
 
 /**
- * Test data
+ * Test instanceof class type.
  */
 public class Main {
   public static void main(String... args) {

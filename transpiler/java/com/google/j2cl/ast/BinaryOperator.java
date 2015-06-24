@@ -38,7 +38,6 @@ public enum BinaryOperator {
   OR("|"),
   CONDITIONAL_AND("&&"),
   CONDITIONAL_OR("||"),
-  // TODO: add tests for each operator.
   ASSIGN("="),
   PLUS_ASSIGN("+="),
   MINUS_ASSIGN("-="),

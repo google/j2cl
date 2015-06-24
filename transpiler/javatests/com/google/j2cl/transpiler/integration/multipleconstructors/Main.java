@@ -1,5 +1,8 @@
 package com.google.j2cl.transpiler.integration.multipleconstructors;
 
+/**
+ * Test multiple constructors.
+ */
 public class Main {
   private int id;
   private boolean flag;

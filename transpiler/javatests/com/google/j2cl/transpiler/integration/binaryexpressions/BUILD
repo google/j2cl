@@ -12,6 +12,6 @@ load(
 # blaze build :optimized_js
 # blaze test :readable_js
 integration_test(
-    name = "arithmeticexpressions",
+    name = "binaryexpressions",
     srcs = glob(["*.java"]),
 )
