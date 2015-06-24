@@ -7,43 +7,19 @@
 
 import getpass
 import os
-from os.path import expanduser
-import re
-from subprocess import PIPE
-from subprocess import Popen
 import time
 
 
-# pylint: disable=global-variable-not-assigned
-HOME_DIR_PATH = expanduser("~")
-MANAGED_REPO_PATH = HOME_DIR_PATH + "/.j2cl-size-repo"
-MANAGED_GOOGLE3_PATH = MANAGED_REPO_PATH + "/google3"
-TEST_TARGET_PATTERN = ("third_party/java_src/j2cl/transpiler/javatests/"
-                       "com/google/j2cl/transpiler/integration/...:all")
-DATA_DIR_PATH = HOME_DIR_PATH + "/.j2cl-size-data"
-LAST_OPT_SIZE_CL_PATH = DATA_DIR_PATH + "/last_optimized_size_cl.txt"
-SUCCESS_CODE = 0
-
-
-class CmdExecutionError(Exception):
-  """Indicates that a cmd execution returned a non-zero exit code."""
-
-
-def build_optimized_tests(cwd=None):
-  """Blaze builds all integration tests in parallel."""
-  run_cmd_get_output(["blaze", "build", TEST_TARGET_PATTERN], cwd=cwd)
+import process_util
+import repo_util
 
 
 def compute_synced_to_cl():
   """Returns the cl that git5 is currently synced to."""
-  status_line = run_cmd_get_output(["git5", "status"])
-  synced_to_cl = extract_pattern("Synced at CL (.*?) = ", status_line)
+  status_line = process_util.run_cmd_get_output(["git5", "status"])
+  synced_to_cl = process_util.extract_pattern(
+      "Synced at CL (.*?) = ", status_line)
   return synced_to_cl
-
-
-def extract_pattern(pattern_string, from_value):
-  """Returns the regex matched value."""
-  return re.compile(pattern_string).search(from_value).group(1)
 
 
 def find_last_stats(stat_lines, synced_to_cl):
@@ -63,176 +39,6 @@ def find_last_stats(stat_lines, synced_to_cl):
   return last_optimized_size
 
 
-def find_cls_in_since(in_dir, since_cl):
-  """Returns committed changes since the given cl in the given dir."""
-  return run_cmd_get_output(
-      ["clsearch", "file:" + in_dir, "from:" + str(since_cl + 1)]).split("\n")
-
-
-def find_key_cls_since(since_cl):
-  """Returns important changes since the given cl."""
-  unprocessed_cls = []
-  unprocessed_cls.extend(
-      find_cls_in_since("third_party/java_src/j2cl", since_cl))
-  unprocessed_cls.extend(
-      find_cls_in_since("third_party/java_src/jscomp", since_cl))
-  unprocessed_cls.extend(
-      find_cls_in_since("third_party/java/eclipse", since_cl))
-
-  unprocessed_cls = sorted(
-      set([extract_pattern("http://cl/(.*?) on .*", unprocessed_cl) for
-           unprocessed_cl in unprocessed_cls if unprocessed_cl]))
-
-  if unprocessed_cls:
-    print("    There are changes (in j2cl/jscomp/jdt) to record for CLs: " +
-          str(unprocessed_cls))
-
-  return unprocessed_cls
-
-
-def run_cmd_get_output(cmd_args, cwd=None):
-  """Runs a command and returns output as a string."""
-  global SUCCESS_CODE
-
-  process = Popen(cmd_args, stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=cwd)
-  output = process.communicate()[0]
-  if process.wait() != SUCCESS_CODE:
-    raise CmdExecutionError("cmd invocation " + str(cmd_args) + " FAILED")
-
-  return output
-
-
-def get_js_files_by_test_name():
-  """Finds and returns a test_name<->optimized_js_file map."""
-  # Gather a list of the names of the test targets we care about
-  test_targets = (
-      run_cmd_get_output(
-          ["blaze", "query",
-           "filter('.*optimized_js', kind(%s, %s))" %
-           ("js_binary", TEST_TARGET_PATTERN)]).split("\n"))
-  test_targets = filter(bool, test_targets)
-
-  # Convert to a map of names<->jsFile pairs
-  test_names = [
-      extract_pattern(".*integration/(.*?):optimized_js", size_target)
-      for size_target in test_targets]
-  js_files = [
-      size_target.replace("//", "blaze-bin/").replace(":", "/") + ".js"
-      for size_target in test_targets]
-  return zip(test_names, js_files)
-
-
-def get_last_processed_cl():
-  """Read and return the last processed cl number from disk."""
-  global LAST_OPT_SIZE_CL_PATH
-
-  last_processed_cl_file = open(LAST_OPT_SIZE_CL_PATH, "r")
-  last_optimized_size_cl = int(last_processed_cl_file.read())
-  last_processed_cl_file.close()
-  return last_optimized_size_cl
-
-
-def process_cl(cl):
-  """Record optimized test sizes at the given cl."""
-  global DATA_DIR_PATH
-  global LAST_OPT_SIZE_CL_PATH
-  global MANAGED_GOOGLE3_PATH
-
-  print "    processing CL " + str(cl)
-  run_cmd_get_output(
-      ["git5", "sync", "@" + str(cl), "--rebase"], cwd=MANAGED_GOOGLE3_PATH)
-
-  try:
-    print "      blaze building optimized tests"
-    build_optimized_tests(MANAGED_GOOGLE3_PATH)
-
-    optimized_size_change_count = 0
-    for (test_name, js_file) in get_js_files_by_test_name():
-      absolute_js_file_path = MANAGED_GOOGLE3_PATH + "/" + js_file
-      if not os.path.isfile(absolute_js_file_path):
-        # This test does not exist in the managed repo at the CL at which
-        # it is synced. Skip it
-        continue
-
-      optimized_size = os.path.getsize(absolute_js_file_path)
-      optimized_size_log_path = (
-          "%s/%s_optimized_size.dat" % (DATA_DIR_PATH, test_name))
-
-      # If the file does not exist then open in a mode that will create it.
-      write_mode = "ra+" if os.path.isfile(optimized_size_log_path) else "w+"
-      optimized_size_log_file = open(optimized_size_log_path, write_mode)
-
-      if os.path.getsize(optimized_size_log_path) == 0:
-        # Write the first entry.
-        optimized_size_log_file.write("%s\t%s\n" % (cl, optimized_size))
-        print("        '%s' first optimized size: %s bytes" %
-              (test_name, optimized_size))
-        optimized_size_change_count += 1
-      else:
-        # See if size has changed since the last recording.
-        last_line = optimized_size_log_file.readlines()[-1]
-        last_cl, last_optimized_size = last_line.split("\t")
-
-        last_cl = int(last_cl)
-        last_optimized_size = int(last_optimized_size)
-
-        if last_optimized_size != optimized_size:
-          # If size has changed, add a record.
-          optimized_size_log_file.write("%s\t%s\n" % (cl, optimized_size))
-          print("        '%s' updated optimized size: %s->%s bytes" %
-                (test_name, last_optimized_size, optimized_size))
-          optimized_size_change_count += 1
-      optimized_size_log_file.close()
-
-    print(
-        "      there were %s optimized size changes" %
-        optimized_size_change_count)
-  except CmdExecutionError:
-    print "Failed to blaze build @%s, skipping the unanalyzable CL." % str(cl)
-
-  # Record progress
-  last_processed_cl_file = open(LAST_OPT_SIZE_CL_PATH, "w+")
-  last_processed_cl_file.write(str(cl))
-  last_processed_cl_file.close()
-
-
-def update_sizes_cache():
-  """Caches optimized test sizes for newly seen committed cls."""
-  print "  Refreshing the size cache (requires clsearch)."
-  last_processed_cl = get_last_processed_cl()
-  unprocessed_cls = find_key_cls_since(last_processed_cl)
-  for unprocessed_cl in unprocessed_cls:
-    process_cl(unprocessed_cl)
-  print "  Size cache is fresh."
-
-
-def validate_environment():
-  """Ensure expected directories exist."""
-  global MANAGED_REPO_PATH
-  global DATA_DIR_PATH
-  global LAST_OPT_SIZE_CL_PATH
-
-  if not os.path.isdir(MANAGED_REPO_PATH):
-    print("  Creating managed opt size tracking git5 repo at '%s'" %
-          MANAGED_REPO_PATH)
-    os.mkdir(MANAGED_REPO_PATH)
-    run_cmd_get_output(
-        ["git5", "start", "base", "//depot/google3/third_party/java_src/j2cl"],
-        cwd=MANAGED_REPO_PATH)
-
-  if not os.path.isdir(DATA_DIR_PATH):
-    print("  Creating managed opt size tracking data dir at '%s'" %
-          DATA_DIR_PATH)
-    os.mkdir(DATA_DIR_PATH)
-
-  if not os.path.isfile(LAST_OPT_SIZE_CL_PATH):
-    first_cl = 95664485
-    print "  Starting tracking at cl %s" % first_cl
-    last_processed_cl_file = open(LAST_OPT_SIZE_CL_PATH, "w+")
-    last_processed_cl_file.write(str(first_cl))
-    last_processed_cl_file.close()
-
-
 def make_size_report():
   """Compare current test sizes and generate a report."""
   size_report_file = open(
@@ -240,11 +46,11 @@ def make_size_report():
           os.path.dirname(__file__), "size_report.txt"),
       "w+")
 
-  build_optimized_tests()
+  repo_util.build_optimized_tests()
 
   synced_to_cl = compute_synced_to_cl()
 
-  size_report_file.write("Integration tests size report:")
+  size_report_file.write("Integration tests optimized size report:\n")
   size_report_file.write("**************************************\n")
   size_report_file.write("Generated by %s at %s.\n" %
                          (getpass.getuser(), time.strftime("%c")))
@@ -259,10 +65,10 @@ def make_size_report():
   shrinkage_reports = []
   expansion_reports = []
   optimized_size_change_count = 0
-  for (test_name, js_file) in get_js_files_by_test_name():
+  for (test_name, js_file) in repo_util.get_js_files_by_test_name():
     optimized_size = os.path.getsize(js_file)
     optimized_size_log_path = (
-        "%s/%s_optimized_size.dat" % (DATA_DIR_PATH, test_name))
+        repo_util.managed_repo_compute_test_size_path(test_name))
 
     if os.path.isfile(optimized_size_log_path):
       # compare old and new size
@@ -305,6 +111,10 @@ def make_size_report():
                     decreased_percent))
         all_reports.append(message)
         shrinkage_reports.append((decreased_percent, message))
+      else:
+        message = ("  '%s' %s bytes (unchanged)\n" %
+                   (test_name, optimized_size))
+        all_reports.append(message)
     else:
       # record initial size
       optimized_size_change_count += 1
@@ -381,8 +191,8 @@ def make_size_report():
 def main():
   print "Generating the size change report:"
 
-  validate_environment()
-  update_sizes_cache()
+  repo_util.managed_repo_validate_environment()
+  repo_util.managed_repo_update_sizes_cache()
   make_size_report()
 
 

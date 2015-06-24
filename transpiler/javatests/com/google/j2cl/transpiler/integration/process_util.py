@@ -1,0 +1,35 @@
+#!/usr/bin/python2.7
+#
+# Copyright 2015 Google Inc. All Rights Reserved.
+
+"""Util funcs for running commands and parsing results."""
+
+
+import re
+from subprocess import PIPE
+from subprocess import Popen
+
+
+# pylint: disable=global-variable-not-assigned
+SUCCESS_CODE = 0
+
+
+class CmdExecutionError(Exception):
+  """Indicates that a cmd execution returned a non-zero exit code."""
+
+
+def extract_pattern(pattern_string, from_value):
+  """Returns the regex matched value."""
+  return re.compile(pattern_string).search(from_value).group(1)
+
+
+def run_cmd_get_output(cmd_args, cwd=None):
+  """Runs a command and returns output as a string."""
+  global SUCCESS_CODE
+
+  process = Popen(cmd_args, stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=cwd)
+  output = process.communicate()[0]
+  if process.wait() != SUCCESS_CODE:
+    raise CmdExecutionError("cmd invocation " + str(cmd_args) + " FAILED")
+
+  return output
