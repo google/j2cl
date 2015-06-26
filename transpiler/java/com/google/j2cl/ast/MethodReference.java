@@ -24,7 +24,7 @@ import com.google.j2cl.ast.processors.Visitable;
  */
 @AutoValue
 @Visitable
-public abstract class MethodReference extends Node {
+public abstract class MethodReference extends Node implements Member {
   public static MethodReference create(
       boolean isStatic,
       Visibility visibility,
@@ -43,10 +43,12 @@ public abstract class MethodReference extends Node {
         returnTypeRef);
   }
 
+  @Override
   public abstract boolean isStatic();
 
   public abstract Visibility getVisibility();
 
+  @Override
   public abstract TypeReference getEnclosingClassRef();
 
   public abstract String getMethodName();

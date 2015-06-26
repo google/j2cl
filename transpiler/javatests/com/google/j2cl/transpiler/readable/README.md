@@ -47,7 +47,6 @@ are copyright and licensed as follows:
 - bridgemethodmultipleoverrides
 - bridgemethodmultipletypevars
 - cascadedclinitrunsjustonce
-- cascadedconstructor
 - casttoarray
 - casttointerface
 - casttoprimitive
@@ -121,6 +120,7 @@ are copyright and licensed as follows:
 - strings
 - subclassgenericclass
 - subclassgenericclasswithparam
+- supercall
 - twodimensionalarrayliteral
 - typeinference
 - typewildcards

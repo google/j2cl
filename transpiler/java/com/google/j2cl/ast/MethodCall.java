@@ -17,41 +17,50 @@ package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.processors.Visitable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nullable;
 
 /**
- * Class for field access.
+ * Class for method call expression.
  */
 @Visitable
-public class FieldAccess extends Expression implements MemberReference {
+public class MethodCall extends Expression implements MemberReference {
   @Visitable @Nullable Expression qualifier;
-  @Visitable FieldReference target;
+  @Visitable MethodReference target;
+  @Visitable List<Expression> arguments = new ArrayList<>();
 
-  public FieldAccess(Expression qualifier, FieldReference target) {
+  public MethodCall(Expression qualifier, MethodReference target, List<Expression> arguments) {
     this.qualifier = qualifier;
     this.target = target;
+    this.arguments.addAll(arguments);
   }
 
   @Override
   public Expression getQualifier() {
-    return qualifier;
+    return this.qualifier;
   }
 
   @Override
-  public FieldReference getTarget() {
-    return target;
+  public MethodReference getTarget() {
+    return this.target;
+  }
+
+  public List<Expression> getArguments() {
+    return this.arguments;
   }
 
   public void setQualifier(Expression qualifier) {
     this.qualifier = qualifier;
   }
 
-  public void setTarget(FieldReference target) {
+  public void setTarget(MethodReference target) {
     this.target = target;
   }
 
   @Override
-  public FieldAccess accept(Processor processor) {
-    return Visitor_FieldAccess.visit(processor, this);
+  public MethodCall accept(Processor processor) {
+    return Visitor_MethodCall.visit(processor, this);
   }
 }

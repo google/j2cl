@@ -24,10 +24,15 @@ import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.CastExpression;
+import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldReference;
 import com.google.j2cl.ast.InstanceOfExpression;
+import com.google.j2cl.ast.Member;
+import com.google.j2cl.ast.MemberReference;
+import com.google.j2cl.ast.MethodCall;
+import com.google.j2cl.ast.MethodReference;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
@@ -37,6 +42,7 @@ import com.google.j2cl.ast.ParenthesizedExpression;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.RegularTypeReference;
+import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.VariableDeclaration;
@@ -107,20 +113,14 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformFieldAccess(FieldAccess fieldAccess) {
-        FieldReference target = fieldAccess.getField();
+        FieldReference target = fieldAccess.getTarget();
         String fieldMangledName =
-            ManglingNameUtils.getMangledName(
-                target, isInClinit(target.getEnclosingClassReference()));
+            ManglingNameUtils.getMangledName(target, isInClinit(target.getEnclosingClassRef()));
 
         // make 'this.' reference and static reference explicit.
         // TODO(rluble): We should probably make this explicit at the AST level, either by a
         // normalization pass or by construction.
-        String qualifier =
-            fieldAccess.getQualifier() == null
-                ? (target.isStatic()
-                    ? TranspilerUtils.getClassName(target.getEnclosingClassReference())
-                    : "this")
-                : toSource(fieldAccess.getQualifier());
+        String qualifier = transformQualifier(fieldAccess);
         return String.format("%s.%s", qualifier, fieldMangledName);
       }
 
@@ -135,6 +135,24 @@ public class StatementSourceGenerator {
             "%s.$isInstance(%s)",
             TranspilerUtils.getClassName(checkType),
             toSource(expression.getExpression()));
+      }
+
+      @Override
+      public String transformMethodCall(MethodCall expression) {
+        MethodReference methodRef = expression.getTarget();
+        String qualifier = transformQualifier(expression);
+        String argumentList =
+            Joiner.on(", ").join(transformNodesToSource(expression.getArguments()));
+        return String.format("%s.%s(%s)", qualifier, toSource(methodRef), argumentList);
+      }
+
+      @Override
+      public String transformMethodReference(MethodReference methodRef) {
+        if (methodRef.isConstructor()) {
+          return ManglingNameUtils.getCtorMangledName(methodRef);
+        } else {
+          return ManglingNameUtils.getMangledName(methodRef);
+        }
       }
 
       @Override
@@ -184,6 +202,16 @@ public class StatementSourceGenerator {
       }
 
       @Override
+      public String transformReturnStatement(ReturnStatement statement) {
+        Expression expression = statement.getExpression();
+        if (expression == null) {
+          return "return;";
+        } else {
+          return "return " + toSource(expression) + ";";
+        }
+      }
+
+      @Override
       public String transformThisReference(ThisReference expression) {
         // We expect that after normalization (InnerClassExtractor) there should be no qualified
         // this reference.
@@ -209,6 +237,17 @@ public class StatementSourceGenerator {
       @Override
       public String transformVariableReference(VariableReference expression) {
         return expression.getTarget().getName();
+      }
+
+      private String transformQualifier(MemberReference memberRef) {
+        Member member = memberRef.getTarget();
+        String qualifier =
+            memberRef.getQualifier() == null
+                ? (member.isStatic()
+                    ? TranspilerUtils.getClassName(member.getEnclosingClassRef())
+                    : "this")
+                : toSource(memberRef.getQualifier());
+        return qualifier;
       }
     }
     return new ToSourceTransformer().process(node);

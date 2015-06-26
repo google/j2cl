@@ -92,7 +92,7 @@ public class ManglingNameUtils {
    */
   public static String getMangledName(FieldReference fieldRef, boolean fromClinit) {
     String name = fieldRef.getFieldName();
-    String typeMangledName = getMangledName(fieldRef.getEnclosingClassReference());
+    String typeMangledName = getMangledName(fieldRef.getEnclosingClassRef());
     String privateSuffix = fieldRef.getVisibility().isPrivate() ? "_" : "";
     String prefix = fromClinit ? "$" : "";
     return String.format("%sf_%s__%s%s", prefix, name, typeMangledName, privateSuffix);

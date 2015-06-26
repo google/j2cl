@@ -20,38 +20,26 @@ import com.google.j2cl.ast.processors.Visitable;
 import javax.annotation.Nullable;
 
 /**
- * Class for field access.
+ * Class for return statement.
  */
 @Visitable
-public class FieldAccess extends Expression implements MemberReference {
-  @Visitable @Nullable Expression qualifier;
-  @Visitable FieldReference target;
+public class ReturnStatement extends Statement {
+  @Visitable @Nullable Expression expression;
 
-  public FieldAccess(Expression qualifier, FieldReference target) {
-    this.qualifier = qualifier;
-    this.target = target;
+  public ReturnStatement(Expression expression) {
+    this.expression = expression;
+  }
+
+  public Expression getExpression() {
+    return expression;
+  }
+
+  public void setExpression(Expression expression) {
+    this.expression = expression;
   }
 
   @Override
-  public Expression getQualifier() {
-    return qualifier;
-  }
-
-  @Override
-  public FieldReference getTarget() {
-    return target;
-  }
-
-  public void setQualifier(Expression qualifier) {
-    this.qualifier = qualifier;
-  }
-
-  public void setTarget(FieldReference target) {
-    this.target = target;
-  }
-
-  @Override
-  public FieldAccess accept(Processor processor) {
-    return Visitor_FieldAccess.visit(processor, this);
+  public ReturnStatement accept(Processor processor) {
+    return Visitor_ReturnStatement.visit(processor, this);
   }
 }

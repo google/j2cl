@@ -23,7 +23,7 @@ import com.google.j2cl.ast.processors.Visitable;
  */
 @AutoValue
 @Visitable
-public abstract class FieldReference extends Node {
+public abstract class FieldReference extends Node implements Member {
   public static FieldReference create(
       boolean isStatic,
       Visibility visibility,
@@ -34,11 +34,13 @@ public abstract class FieldReference extends Node {
         isStatic, visibility, enclosingClassRef, fieldName, typeRef);
   }
 
+  @Override
   public abstract boolean isStatic();
 
   public abstract Visibility getVisibility();
 
-  public abstract TypeReference getEnclosingClassReference();
+  @Override
+  public abstract TypeReference getEnclosingClassRef();
 
   public abstract String getFieldName();
 

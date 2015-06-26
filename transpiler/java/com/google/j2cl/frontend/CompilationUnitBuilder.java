@@ -33,6 +33,7 @@ import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
 import com.google.j2cl.ast.Method;
+import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodReference;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
@@ -42,6 +43,7 @@ import com.google.j2cl.ast.ParenthesizedExpression;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.RegularTypeReference;
+import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeReference;
@@ -55,6 +57,7 @@ import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
 import org.eclipse.jdt.core.dom.ArrayType;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
 import org.eclipse.jdt.core.dom.IBinding;
+import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
@@ -209,6 +212,8 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.InfixExpression) node);
         case ASTNode.INSTANCEOF_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.InstanceofExpression) node);
+        case ASTNode.METHOD_INVOCATION:
+          return convert((org.eclipse.jdt.core.dom.MethodInvocation) node);
         case ASTNode.NULL_LITERAL:
           return convert((org.eclipse.jdt.core.dom.NullLiteral) node);
         case ASTNode.NUMBER_LITERAL:
@@ -247,8 +252,12 @@ public class CompilationUnitBuilder {
       switch (node.getNodeType()) {
         case ASTNode.ASSERT_STATEMENT:
           return singletonStatement(convert((org.eclipse.jdt.core.dom.AssertStatement) node));
+        case ASTNode.CONSTRUCTOR_INVOCATION:
+          return singletonStatement(convert((org.eclipse.jdt.core.dom.ConstructorInvocation) node));
         case ASTNode.EXPRESSION_STATEMENT:
           return singletonStatement(convert((org.eclipse.jdt.core.dom.ExpressionStatement) node));
+        case ASTNode.RETURN_STATEMENT:
+          return singletonStatement(convert((org.eclipse.jdt.core.dom.ReturnStatement) node));
         case ASTNode.VARIABLE_DECLARATION_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.VariableDeclarationStatement) node);
         default:
@@ -289,6 +298,15 @@ public class CompilationUnitBuilder {
       return new Block(body);
     }
 
+    private ExpressionStatement convert(org.eclipse.jdt.core.dom.ConstructorInvocation node) {
+      IMethodBinding constructorBinding = node.resolveConstructorBinding();
+      MethodReference methodRef =
+          JdtUtils.createMethodReference(constructorBinding, compilationUnitNameLocator);
+      @SuppressWarnings("unchecked")
+      List<Expression> arguments = convert(node.arguments());
+      return new ExpressionStatement(new MethodCall(null, methodRef, arguments));
+    }
+
     private Statement convert(org.eclipse.jdt.core.dom.ExpressionStatement node) {
       return new ExpressionStatement(convert(node.getExpression()));
     }
@@ -313,6 +331,16 @@ public class CompilationUnitBuilder {
             new BinaryExpression(binaryExpression, operator, convert(extendedOperand));
       }
       return binaryExpression;
+    }
+
+    private MethodCall convert(org.eclipse.jdt.core.dom.MethodInvocation node) {
+      IMethodBinding methodBinding = node.resolveMethodBinding();
+      Expression qualifier = node.getExpression() == null ? null : convert(node.getExpression());
+      MethodReference methodRef =
+          JdtUtils.createMethodReference(methodBinding, compilationUnitNameLocator);
+      @SuppressWarnings("unchecked")
+      List<Expression> arguments = convert(node.arguments());
+      return new MethodCall(qualifier, methodRef, arguments);
     }
 
     private NullLiteral convert(org.eclipse.jdt.core.dom.NullLiteral node) {
@@ -356,6 +384,11 @@ public class CompilationUnitBuilder {
         throw new RuntimeException(
             "Need to implement translation for QualifiedName that is not a variable or a type.");
       }
+    }
+
+    public ReturnStatement convert(org.eclipse.jdt.core.dom.ReturnStatement node) {
+      Expression expression = node.getExpression() == null ? null : convert(node.getExpression());
+      return new ReturnStatement(expression);
     }
 
     public Expression convert(org.eclipse.jdt.core.dom.SimpleName node) {
