@@ -334,17 +334,17 @@ public class J2clAstProcessor extends AbstractProcessor {
                 return executableElement.getSimpleName().toString().equals("accept")
                     && executableElement.getParameters().size() == 1
                     && processingEnv
-                    .getTypeUtils()
-                    .asElement(executableElement.getParameters().get(0).asType())
-                    .getSimpleName()
-                    .toString()
-                    .equals("Processor")
-                    && MoreElements.asType(
-                    processingEnv
                         .getTypeUtils()
-                        .asElement(executableElement.getReturnType()))
-                    .getQualifiedName()
-                    .equals(typeElement.getQualifiedName());
+                        .asElement(executableElement.getParameters().get(0).asType())
+                        .getSimpleName()
+                        .toString()
+                        .equals("Processor")
+                    && MoreElements.asType(
+                            processingEnv
+                                .getTypeUtils()
+                                .asElement(executableElement.getReturnType()))
+                        .getQualifiedName()
+                        .equals(typeElement.getQualifiedName());
               }
             });
   }

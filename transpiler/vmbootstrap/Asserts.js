@@ -4,6 +4,7 @@ goog.module('vmbootstrap.AssertsModule');
 var AssertionError =
     goog.require('gen.java.lang.AssertionErrorModule').AssertionError;
 
+
 class Asserts {
   /**
    * @param {boolean} condition

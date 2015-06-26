@@ -159,8 +159,17 @@ public class StatementSourceGenerator {
       public String transformNewArray(NewArray expression) {
         String dimensionsList =
             Joiner.on(", ").join(transformNodesToSource(expression.getDimensionExpressions()));
-        String leafTypeName = TranspilerUtils.getClassName(expression.getLeafTypeRef());
-        return String.format("Arrays.$create([%s], %s)", dimensionsList, leafTypeName);
+
+        TypeReference leafTypeRef = expression.getLeafTypeRef();
+        String className = TranspilerUtils.getClassName(leafTypeRef);
+        if (leafTypeRef instanceof RegularTypeReference
+            && ((RegularTypeReference) leafTypeRef).isPrimitive()) {
+          // Primitive array creations look like Arrays.$createByte, etc.
+          return String.format(
+              "Arrays.$create%s([%s])", TranspilerUtils.toProperCase(className), dimensionsList);
+        }
+
+        return String.format("Arrays.$create([%s], %s)", dimensionsList, className);
       }
 
       @Override

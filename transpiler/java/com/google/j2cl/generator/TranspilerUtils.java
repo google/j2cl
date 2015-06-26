@@ -155,5 +155,17 @@ public class TranspilerUtils {
             .equals(method.getSelfReference().getEnclosingClassRef());
   }
 
+  /**
+   * Return the String with first letter capitalized.
+   */
+  public static String toProperCase(String string) {
+    if (string.isEmpty()) {
+      return string;
+    } else if (string.length() == 1) {
+      return string.toUpperCase();
+    }
+    return string.substring(0, 1).toUpperCase() + string.substring(1, string.length());
+  }
+
   private TranspilerUtils() {}
 }

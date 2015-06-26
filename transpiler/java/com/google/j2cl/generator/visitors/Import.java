@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.generator.visitors;
 
+import com.google.common.collect.ComparisonChain;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeReference;
 
@@ -69,12 +70,10 @@ public class Import extends Node implements Comparable<Import> {
    * Imported items should be sorted by module name first, and then class name.
    */
   @Override
-  public int compareTo(Import other) {
-    int compareModuleName = this.moduleName.compareTo(other.moduleName);
-    if (compareModuleName == 0) {
-      return this.className.compareTo(other.className);
-    } else {
-      return compareModuleName;
-    }
+  public int compareTo(Import that) {
+    return ComparisonChain.start()
+        .compare(this.moduleName, that.moduleName)
+        .compare(this.className, that.className)
+        .result();
   }
 }

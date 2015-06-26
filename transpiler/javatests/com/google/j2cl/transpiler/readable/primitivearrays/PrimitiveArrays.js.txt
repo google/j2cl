@@ -1,0 +1,113 @@
+goog.module('gen.com.google.j2cl.transpiler.readable.primitivearrays.PrimitiveArraysModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+var Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+
+
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/primitivearrays/PrimitiveArrays.java.
+ */
+class PrimitiveArrays extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs inline instance field initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_primitivearrays_PrimitiveArrays() {
+  }
+
+  /**
+   * @public
+   */
+  m_main() {
+    var bytes = Arrays.$createByte([100]);
+    var bytes2d = Arrays.$createByte([5, 10]);
+    var shorts = Arrays.$createShort([100]);
+    var shorts2d = Arrays.$createShort([5, 10]);
+    var ints = Arrays.$createInt([100]);
+    var ints2d = Arrays.$createInt([5, 10]);
+    var longs = Arrays.$createLong([100]);
+    var longs2d = Arrays.$createLong([5, 10]);
+    var floats = Arrays.$createFloat([100]);
+    var floats2d = Arrays.$createFloat([5, 10]);
+    var doubles = Arrays.$createDouble([100]);
+    var doubles2d = Arrays.$createDouble([5, 10]);
+    var chars = Arrays.$createChar([100]);
+    var chars2d = Arrays.$createChar([5, 10]);
+    var booleans = Arrays.$createBoolean([100]);
+    var booleans2d = Arrays.$createBoolean([5, 10]);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!PrimitiveArrays}
+   * @public
+   */
+  static $create() {
+    PrimitiveArrays.$clinit();
+    var instance = new PrimitiveArrays;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_primitivearrays_PrimitiveArrays();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_primitivearrays_PrimitiveArrays() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_primitivearrays_PrimitiveArrays();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof PrimitiveArrays; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, PrimitiveArrays);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+PrimitiveArrays.$class = Class.$createForClass(
+    Util.$generateId('PrimitiveArrays'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.primitivearrays.PrimitiveArrays'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.primitivearrays.PrimitiveArrays'));
+
+
+/**
+ * Exported class.
+ */
+exports.PrimitiveArrays = PrimitiveArrays;
