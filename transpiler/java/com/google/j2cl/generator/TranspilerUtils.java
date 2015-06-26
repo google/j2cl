@@ -129,10 +129,7 @@ public class TranspilerUtils {
         return true;
       }
     }
-
-    // TODO: also check the static blocks here.
-
-    return false;
+    return !type.getStaticInitializerBlocks().isEmpty();
   }
 
   /**

@@ -43,8 +43,8 @@ class $className $extendsClause {
     this.${ManglingNameUtils.getMangledName($field.SelfReference)} = $fieldInitializer;
 #end
 #end
-#foreach($instanceInitializer in $classType.InstanceInitializers)
-#foreach( $statementInInitializer in $instanceInitializer.Statements)
+#foreach ($instanceInitializerBlock in $classType.InstanceInitializerBlocks)
+#foreach ($statementInInitializer in $instanceInitializerBlock.Statements)
     $StatementSourceGenerator.toSource($statementInInitializer)
 #end
 #end

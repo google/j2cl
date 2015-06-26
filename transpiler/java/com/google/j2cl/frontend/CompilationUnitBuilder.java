@@ -118,9 +118,9 @@ public class CompilationUnitBuilder {
         } else if (object instanceof Initializer) {
           Initializer initializer = (Initializer) object;
           if (JdtUtils.isStatic(initializer.getModifiers())) {
-            type.addStaticInitializer(convert(initializer.getBody()));
+            type.addStaticInitializerBlock(convert(initializer.getBody()));
           } else {
-            type.addInstanceInitializer(convert(initializer.getBody()));
+            type.addInstanceInitializerBlock(convert(initializer.getBody()));
           }
         } else {
           throw new RuntimeException(

@@ -15,5 +15,10 @@ $StatementSourceGenerator.setInClinit($classType.getSelfReference())##
     $className.$directStaticFieldAccess = ${StatementSourceGenerator.toSource(${staticField.Initializer})};
 #end
 #end
+#foreach ($staticInitializerBlock in $classType.StaticInitializerBlocks)
+#foreach ($statementInInitializer in $staticInitializerBlock.Statements)
+    $StatementSourceGenerator.toSource($statementInInitializer)
+#end
+#end
   }
 $StatementSourceGenerator.resetInClinit()##

@@ -1,0 +1,156 @@
+goog.module('gen.com.google.j2cl.transpiler.readable.staticinitializers.StaticInitializersModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/staticinitializers/StaticInitializers.java.
+ */
+class StaticInitializers extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!StaticInitializers}
+   * @public
+   */
+  static $create() {
+    StaticInitializers.$clinit();
+    var instance = new StaticInitializers;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof StaticInitializers;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, StaticInitializers);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() {
+    StaticInitializers.$clinit = function() {};
+    Object.$clinit();
+    StaticInitializers
+        .$f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers =
+        5;
+    StaticInitializers
+        .$f_b__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers =
+        StaticInitializers
+            .$f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers *
+        2;
+    StaticInitializers
+        .$f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers =
+        10;
+  }
+}
+;
+
+
+/**
+ * @public {?number}
+ */
+StaticInitializers
+    .$f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers =
+    null;
+
+
+window.Object.defineProperties(StaticInitializers, {
+  f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers: {
+    get: function() {
+      StaticInitializers.$clinit();
+      return StaticInitializers
+          .$f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers;
+    },
+    set: function(value) {
+      StaticInitializers.$clinit();
+      StaticInitializers
+          .$f_a__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers =
+          value;
+    }
+  }
+});
+
+
+/**
+ * @public {?number}
+ */
+StaticInitializers
+    .$f_b__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers =
+    null;
+
+
+window.Object.defineProperties(StaticInitializers, {
+  f_b__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers: {
+    get: function() {
+      StaticInitializers.$clinit();
+      return StaticInitializers
+          .$f_b__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers;
+    },
+    set: function(value) {
+      StaticInitializers.$clinit();
+      StaticInitializers
+          .$f_b__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers =
+          value;
+    }
+  }
+});
+
+
+/**
+ * @public {Class}
+ */
+StaticInitializers.$class = Class.$createForClass(
+    Util.$generateId('StaticInitializers'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.staticinitializers.StaticInitializers'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.staticinitializers.StaticInitializers'));
+
+
+/**
+ * Exported class.
+ */
+exports.StaticInitializers = StaticInitializers;

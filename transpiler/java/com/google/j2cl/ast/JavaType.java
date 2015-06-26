@@ -55,9 +55,9 @@ public class JavaType extends Node {
 
   @Visitable List<Method> methods = new ArrayList<>();
 
-  @Visitable List<Block> instanceInitializers = new ArrayList<>();
+  @Visitable List<Block> instanceInitializerBlocks = new ArrayList<>();
 
-  @Visitable List<Block> staticInitializers = new ArrayList<>();
+  @Visitable List<Block> staticInitializerBlocks = new ArrayList<>();
 
   public JavaType(Kind kind, Visibility visibility, TypeReference selfReference) {
     this.kind = kind;
@@ -105,20 +105,20 @@ public class JavaType extends Node {
     this.visibility = visibility;
   }
 
-  public List<Block> getInstanceInitializers() {
-    return instanceInitializers;
+  public List<Block> getInstanceInitializerBlocks() {
+    return instanceInitializerBlocks;
   }
 
-  public void addInstanceInitializer(Block instanceInitializer) {
-    this.instanceInitializers.add(instanceInitializer);
+  public void addInstanceInitializerBlock(Block instanceInitializer) {
+    this.instanceInitializerBlocks.add(instanceInitializer);
   }
 
-  public List<Block> getStaticInitializers() {
-    return staticInitializers;
+  public List<Block> getStaticInitializerBlocks() {
+    return staticInitializerBlocks;
   }
 
-  public void addStaticInitializer(Block staticInitializer) {
-    this.staticInitializers.add(staticInitializer);
+  public void addStaticInitializerBlock(Block staticInitializer) {
+    this.staticInitializerBlocks.add(staticInitializer);
   }
 
   public TypeReference getEnclosingTypeRef() {
