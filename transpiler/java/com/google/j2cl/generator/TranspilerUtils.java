@@ -17,8 +17,10 @@ package com.google.j2cl.generator;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
@@ -168,4 +170,57 @@ public class TranspilerUtils {
   }
 
   private TranspilerUtils() {}
+
+  public static boolean isAssignment(BinaryOperator binaryOperator) {
+    switch (binaryOperator) {
+      case ASSIGN:
+      case PLUS_ASSIGN:
+      case MINUS_ASSIGN:
+      case TIMES_ASSIGN:
+      case DIVIDE_ASSIGN:
+      case BIT_AND_ASSIGN:
+      case BIT_OR_ASSIGN:
+      case BIT_XOR_ASSIGN:
+      case REMAINDER_ASSIGN:
+      case LEFT_SHIFT_ASSIGN:
+      case RIGHT_SHIFT_SIGNED_ASSIGN:
+      case RIGHT_SHIFT_UNSIGNED_ASSIGN:
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  public static String getArrayAssignmentFunctionName(BinaryOperator binaryOperator) {
+    switch (binaryOperator) {
+      case ASSIGN:
+        return "$set";
+      case PLUS_ASSIGN:
+        return "$addSet";
+      case MINUS_ASSIGN:
+        return "$subSet";
+      case TIMES_ASSIGN:
+        return "$mulSet";
+      case DIVIDE_ASSIGN:
+        return "$divSet";
+      case BIT_AND_ASSIGN:
+        return "$andSet";
+      case BIT_OR_ASSIGN:
+        return "$orSet";
+      case BIT_XOR_ASSIGN:
+        return "$xorSet";
+      case REMAINDER_ASSIGN:
+        return "$modSet";
+      case LEFT_SHIFT_ASSIGN:
+        return "$lshiftSet";
+      case RIGHT_SHIFT_SIGNED_ASSIGN:
+        return "$rshiftSet";
+      case RIGHT_SHIFT_UNSIGNED_ASSIGN:
+        return "$rshiftUSet";
+      default:
+        Preconditions.checkState(
+            false, "Requested the Arrays function name for a non-assignment operator.");
+        return null;
+    }
+  }
 }

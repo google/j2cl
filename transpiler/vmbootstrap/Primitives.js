@@ -41,6 +41,12 @@ class $byte {
 
 
 /**
+ * @public {?}
+ */
+$byte.$initialArrayValue = 0;
+
+
+/**
  * @public {Class}
  */
 $byte.$class =
@@ -86,6 +92,12 @@ class $short {
     return classConstructor === $short;
   }
 };
+
+
+/**
+ * @public {?}
+ */
+$short.$initialArrayValue = 0;
 
 
 /**
@@ -137,6 +149,12 @@ class $int {
 
 
 /**
+ * @public {?}
+ */
+$int.$initialArrayValue = 0;
+
+
+/**
  * @public {Class}
  */
 $int.$class =
@@ -182,6 +200,12 @@ class $long {
     return classConstructor === $long;
   }
 };
+
+
+/**
+ * @public {?}
+ */
+$long.$initialArrayValue = 0;
 
 
 /**
@@ -233,6 +257,12 @@ class $float {
 
 
 /**
+ * @public {?}
+ */
+$float.$initialArrayValue = 0;
+
+
+/**
  * @public {Class}
  */
 $float.$class =
@@ -278,6 +308,12 @@ class $double {
     return classConstructor === $double;
   }
 };
+
+
+/**
+ * @public {?}
+ */
+$double.$initialArrayValue = 0;
 
 
 /**
@@ -329,6 +365,12 @@ class $char {
 
 
 /**
+ * @public {?}
+ */
+$char.$initialArrayValue = 0;
+
+
+/**
  * @public {Class}
  */
 $char.$class =
@@ -374,6 +416,12 @@ class $boolean {
     return classConstructor === $boolean;
   }
 };
+
+
+/**
+ * @public {?}
+ */
+$boolean.$initialArrayValue = false;
 
 
 /**

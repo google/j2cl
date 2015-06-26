@@ -19,7 +19,7 @@ class PrimitiveArrays extends Object {
   constructor() { super(); }
 
   /**
-   * Runs inline instance field initializers.
+   * Runs instance field and block initializers.
    * @private
    */
   $init__com_google_j2cl_transpiler_readable_primitivearrays_PrimitiveArrays() {
@@ -45,6 +45,12 @@ class PrimitiveArrays extends Object {
     var chars2d = Arrays.$createChar([5, 10]);
     var booleans = Arrays.$createBoolean([100]);
     var booleans2d = Arrays.$createBoolean([5, 10]);
+    var foo = ints[0];
+    foo = ints2d[0][1];
+    Arrays.$set(ints, 0, 10);
+    Arrays.$set(ints2d[0], 1, 20);
+    Arrays.$addSet(ints, 0, 1);
+    Arrays.$subSet(ints2d[0], 1, 1);
   }
 
   /**

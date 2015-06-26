@@ -26,6 +26,16 @@ public class PrimitiveArrays {
     boolean[] booleans = new boolean[100];
     boolean[][] booleans2d = new boolean[5][10];
 
-    // TODO: show array access and assignment.
+    // Access
+    int foo = ints[0];
+    foo = ints2d[0][1];
+
+    // Assignment
+    ints[0] = 10;
+    ints2d[0][1] = 20;
+
+    // Compound Assignment
+    ints[0] += 1;
+    ints2d[0][1] -= 1;
   }
 }

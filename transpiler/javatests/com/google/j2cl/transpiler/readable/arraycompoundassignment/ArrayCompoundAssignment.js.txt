@@ -1,0 +1,111 @@
+goog.module('gen.com.google.j2cl.transpiler.readable.arraycompoundassignment.ArrayCompoundAssignmentModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+var Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+
+
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/arraycompoundassignment/ArrayCompoundAssignment.java.
+ */
+class ArrayCompoundAssignment extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_arraycompoundassignment_ArrayCompoundAssignment() {
+  }
+
+  /**
+   * @public
+   */
+  m_main() {
+    var ints = Arrays.$createInt([100]);
+    Arrays.$addSet(ints, 0, 1);
+    Arrays.$subSet(ints, 0, 1);
+    Arrays.$mulSet(ints, 0, 1);
+    Arrays.$divSet(ints, 0, 1);
+    Arrays.$andSet(ints, 0, 1);
+    Arrays.$xorSet(ints, 0, 1);
+    Arrays.$orSet(ints, 0, 1);
+    Arrays.$modSet(ints, 0, 1);
+    Arrays.$lshiftSet(ints, 0, 1);
+    Arrays.$rshiftSet(ints, 0, 1);
+    Arrays.$rshiftUSet(ints, 0, 1);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!ArrayCompoundAssignment}
+   * @public
+   */
+  static $create() {
+    ArrayCompoundAssignment.$clinit();
+    var instance = new ArrayCompoundAssignment;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_arraycompoundassignment_ArrayCompoundAssignment();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_arraycompoundassignment_ArrayCompoundAssignment() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_arraycompoundassignment_ArrayCompoundAssignment();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof ArrayCompoundAssignment;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, ArrayCompoundAssignment);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+ArrayCompoundAssignment.$class = Class.$createForClass(
+    Util.$generateId('ArrayCompoundAssignment'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.arraycompoundassignment.ArrayCompoundAssignment'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.arraycompoundassignment.ArrayCompoundAssignment'));
+
+
+/**
+ * Exported class.
+ */
+exports.ArrayCompoundAssignment = ArrayCompoundAssignment;

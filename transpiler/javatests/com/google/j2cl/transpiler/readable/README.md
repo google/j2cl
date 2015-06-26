@@ -113,8 +113,6 @@ are copyright and licensed as follows:
 - simplegenerictype
 - simpleinterface
 - simplelambda
-- simpleobjectarray
-- simpleprimitivearray
 - staticinitorder
 - strings
 - subclassgenericclass

@@ -20,6 +20,7 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractTransformer;
+import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BooleanLiteral;
@@ -76,10 +77,38 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformBinaryExpression(BinaryExpression expression) {
+        if (TranspilerUtils.isAssignment(expression.getOperator())
+            && expression.getLeftOperand() instanceof ArrayAccess) {
+          return transformArrayAssignmentBinaryExpression(expression);
+        } else {
+          return transformRegularBinaryExpression(expression);
+        }
+      }
+
+      private String transformRegularBinaryExpression(BinaryExpression expression) {
+        Preconditions.checkState(
+            !(TranspilerUtils.isAssignment(expression.getOperator())
+                && expression.getLeftOperand() instanceof ArrayAccess));
+
         return String.format(
             "%s %s %s",
             toSource(expression.getLeftOperand()),
             expression.getOperator().toString(),
+            toSource(expression.getRightOperand()));
+      }
+
+      // TODO: extend to handle long[].
+      private String transformArrayAssignmentBinaryExpression(BinaryExpression expression) {
+        Preconditions.checkState(
+            TranspilerUtils.isAssignment(expression.getOperator())
+                && expression.getLeftOperand() instanceof ArrayAccess);
+
+        ArrayAccess arrayAccess = (ArrayAccess) expression.getLeftOperand();
+        return String.format(
+            "Arrays.%s(%s, %s, %s)",
+            TranspilerUtils.getArrayAssignmentFunctionName(expression.getOperator()),
+            toSource(arrayAccess.getArrayExpression()),
+            toSource(arrayAccess.getIndexExpression()),
             toSource(expression.getRightOperand()));
       }
 
@@ -153,6 +182,14 @@ public class StatementSourceGenerator {
         } else {
           return ManglingNameUtils.getMangledName(methodRef);
         }
+      }
+
+      @Override
+      public String transformArrayAccess(ArrayAccess arrayAccess) {
+        return String.format(
+            "%s[%s]",
+            toSource(arrayAccess.getArrayExpression()),
+            toSource(arrayAccess.getIndexExpression()));
       }
 
       @Override

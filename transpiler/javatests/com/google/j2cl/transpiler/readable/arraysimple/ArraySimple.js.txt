@@ -31,6 +31,10 @@ class ArraySimple extends Object {
     var objects = Arrays.$create([100], Object);
     var objects2d = Arrays.$create([5, 10], Object);
     var objectsPartial = Arrays.$create([20, null], Object);
+    var object = objects[0];
+    object = objects2d[0][1];
+    Arrays.$set(objects, 0, null);
+    Arrays.$set(objects2d[0], 1, null);
   }
 
   /**

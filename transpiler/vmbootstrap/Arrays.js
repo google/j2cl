@@ -1,17 +1,21 @@
 goog.module('vmbootstrap.ArraysModule');
 
 
+// Don't reformat these imports! The uncompiled test harness contains a bug that
+// will miss some multiline goog.require's.
 var Serializable = goog.require('gen.java.io.SerializableModule').Serializable;
-var ArrayIndexOutOfBoundsException = goog.require(
-  'gen.java.lang.ArrayIndexOutOfBoundsExceptionModule'
-).ArrayIndexOutOfBoundsException;
-var ArrayStoreException = goog.require(
-  'gen.java.lang.ArrayStoreExceptionModule').ArrayStoreException;
+var ArrayIndexOutOfBoundsException =
+  goog.require('gen.java.lang.ArrayIndexOutOfBoundsExceptionModule')
+    .ArrayIndexOutOfBoundsException;
+var ArrayStoreException =
+  goog.require('gen.java.lang.ArrayStoreExceptionModule')
+    .ArrayStoreException;
 var Cloneable = goog.require('gen.java.lang.CloneableModule').Cloneable;
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var NullPointerException = goog.require(
-  'gen.java.lang.NullPointerExceptionModule').NullPointerException;
+var NullPointerException =
+  goog.require('gen.java.lang.NullPointerExceptionModule')
+    .NullPointerException;
 var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
 var $byte = goog.require('vmbootstrap.PrimitivesModule').$byte;
 var $char = goog.require('vmbootstrap.PrimitivesModule').$char;
@@ -56,9 +60,22 @@ class Arrays {
 
     array.length = length;
     if (array.dimensionCount > 1) {
+      // Contains sub arrays.
       var subDimensionLengths = dimensionLengths.slice(1);
       for (var i = 0; i < length; i++) {
         array[i] = Arrays.$create(subDimensionLengths, leafType);
+      }
+    } else {
+      // Contains leaf type values.
+      if (leafType.$initialArrayValue !== undefined) {
+        // Replace with Array.fill() when there is broad browser support.
+        var initialValue = leafType.$initialArrayValue;
+        for (var index = 0; index < length; index++) {
+          array[index] = initialValue;
+        }
+      } else {
+        // Object leaf types don't need a defined initial value because the
+        // Javascript array's default of 'undefined' works fine.
       }
     }
 
@@ -120,9 +137,9 @@ class Arrays {
   /**
    * Sets the given value into the given index in the given array.
    *
-   * @param {Array<Object>} array
+   * @param {Array<?>} array
    * @param {number} index
-   * @param {Object} value
+   * @param {?} value
    * @public
    */
   static $set(array, index, value) {
@@ -306,6 +323,127 @@ class Arrays {
    */
   static $createBoolean(dimensionLengths) {
     return Arrays.$create(dimensionLengths, $boolean);
+  }
+
+  /**
+   * @param {Array<number>} array
+   * @param {number} index
+   * @param {number} value
+   * @public
+   */
+  static $addSet(array, index, value) {
+    // TODO: apply array.leafType.narrow() after computation.
+    Arrays.$set(array, index, array[index] + value);
+  }
+
+  /**
+   * @param {Array<number>} array
+   * @param {number} index
+   * @param {number} value
+   * @public
+   */
+  static $subSet(array, index, value) {
+    // TODO: apply array.leafType.narrow() after computation.
+    Arrays.$set(array, index, array[index] - value);
+  }
+
+  /**
+   * @param {Array<number>} array
+   * @param {number} index
+   * @param {number} value
+   * @public
+   */
+  static $mulSet(array, index, value) {
+    // TODO: apply array.leafType.narrow() after computation.
+    Arrays.$set(array, index, array[index] * value);
+  }
+
+  /**
+   * @param {Array<number>} array
+   * @param {number} index
+   * @param {number} value
+   * @public
+   */
+  static $divSet(array, index, value) {
+    // TODO: apply array.leafType.narrow() after computation.
+    Arrays.$set(array, index, array[index] / value);
+  }
+
+  /**
+   * @param {Array<number>} array
+   * @param {number} index
+   * @param {number} value
+   * @public
+   */
+  static $andSet(array, index, value) {
+    // TODO: apply array.leafType.narrow() after computation.
+    Arrays.$set(array, index, array[index] & value);
+  }
+
+  /**
+   * @param {Array<number>} array
+   * @param {number} index
+   * @param {number} value
+   * @public
+   */
+  static $orSet(array, index, value) {
+    // TODO: apply array.leafType.narrow() after computation.
+    Arrays.$set(array, index, array[index] | value);
+  }
+
+  /**
+   * @param {Array<number>} array
+   * @param {number} index
+   * @param {number} value
+   * @public
+   */
+  static $xorSet(array, index, value) {
+    // TODO: apply array.leafType.narrow() after computation.
+    Arrays.$set(array, index, array[index] ^ value);
+  }
+
+  /**
+   * @param {Array<number>} array
+   * @param {number} index
+   * @param {number} value
+   * @public
+   */
+  static $modSet(array, index, value) {
+    // TODO: apply array.leafType.narrow() after computation.
+    Arrays.$set(array, index, array[index] % value);
+  }
+
+  /**
+   * @param {Array<number>} array
+   * @param {number} index
+   * @param {number} value
+   * @public
+   */
+  static $lshiftSet(array, index, value) {
+    // TODO: apply array.leafType.narrow() after computation.
+    Arrays.$set(array, index, array[index] << value);
+  }
+
+  /**
+   * @param {Array<number>} array
+   * @param {number} index
+   * @param {number} value
+   * @public
+   */
+  static $rshiftSet(array, index, value) {
+    // TODO: apply array.leafType.narrow() after computation.
+    Arrays.$set(array, index, array[index] >> value);
+  }
+
+  /**
+   * @param {Array<number>} array
+   * @param {number} index
+   * @param {number} value
+   * @public
+   */
+  static $rshiftUSet(array, index, value) {
+    // TODO: apply array.leafType.narrow() after computation.
+    Arrays.$set(array, index, array[index] >>> value);
   }
 };
 

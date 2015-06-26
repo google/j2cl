@@ -17,6 +17,7 @@ package com.google.j2cl.frontend;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
@@ -162,6 +163,11 @@ public class CompilationUnitBuilder {
     }
 
     @SuppressWarnings("cast")
+    private ArrayAccess convert(org.eclipse.jdt.core.dom.ArrayAccess node) {
+      return new ArrayAccess(convert(node.getArray()), convert(node.getIndex()));
+    }
+
+    @SuppressWarnings("cast")
     private NewArray convert(org.eclipse.jdt.core.dom.ArrayCreation node) {
       ArrayType arrayType = node.getType();
 
@@ -204,10 +210,12 @@ public class CompilationUnitBuilder {
 
     private Expression convert(org.eclipse.jdt.core.dom.Expression node) {
       switch (node.getNodeType()) {
-        case ASTNode.ASSIGNMENT:
-          return convert((org.eclipse.jdt.core.dom.Assignment) node);
+        case ASTNode.ARRAY_ACCESS:
+          return convert((org.eclipse.jdt.core.dom.ArrayAccess) node);
         case ASTNode.ARRAY_CREATION:
           return convert((org.eclipse.jdt.core.dom.ArrayCreation) node);
+        case ASTNode.ASSIGNMENT:
+          return convert((org.eclipse.jdt.core.dom.Assignment) node);
         case ASTNode.BOOLEAN_LITERAL:
           return convert((org.eclipse.jdt.core.dom.BooleanLiteral) node);
         case ASTNode.CAST_EXPRESSION:
