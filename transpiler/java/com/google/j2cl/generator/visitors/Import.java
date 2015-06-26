@@ -28,6 +28,7 @@ public class Import extends Node implements Comparable<Import> {
   public static final Import IMPORT_NATIVE_UTIL = new Import("Util", "nativebootstrap.UtilModule");
   public static final Import IMPORT_VM_ASSERTS = new Import("Asserts", "vmbootstrap.AssertsModule");
   public static final Import IMPORT_VM_ARRAYS = new Import("Arrays", "vmbootstrap.ArraysModule");
+  public static final Import IMPORT_VM_CASTS = new Import("Casts", "vmbootstrap.CastsModule");
 
   private String className;
   private String moduleName;

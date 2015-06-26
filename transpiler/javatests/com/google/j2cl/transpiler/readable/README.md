@@ -49,7 +49,6 @@ are copyright and licensed as follows:
 - cascadedclinitrunsjustonce
 - cascadedconstructor
 - casttoarray
-- casttoclass
 - casttointerface
 - casttoprimitive
 - catchjsexception

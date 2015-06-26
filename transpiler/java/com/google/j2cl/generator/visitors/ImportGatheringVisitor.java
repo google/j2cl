@@ -20,6 +20,7 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AssertStatement;
+import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.NewArray;
@@ -54,6 +55,11 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   @Override
   public void exitAssertStatement(AssertStatement assertStatement) {
     importModules.add(Import.IMPORT_VM_ASSERTS);
+  }
+
+  @Override
+  public void exitCastExpression(CastExpression castExpression) {
+    importModules.add(Import.IMPORT_VM_CASTS);
   }
 
   @Override

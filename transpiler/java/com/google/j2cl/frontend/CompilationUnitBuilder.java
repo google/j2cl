@@ -22,6 +22,7 @@ import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.BooleanLiteral;
+import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
@@ -171,6 +172,13 @@ public class CompilationUnitBuilder {
       return node.booleanValue() ? BooleanLiteral.TRUE : BooleanLiteral.FALSE;
     }
 
+    private CastExpression convert(org.eclipse.jdt.core.dom.CastExpression node) {
+      Expression expression = convert(node.getExpression());
+      TypeReference castType =
+          JdtUtils.createTypeReference(node.getType().resolveBinding(), compilationUnitNameLocator);
+      return new CastExpression(expression, castType);
+    }
+
     private NewInstance convert(org.eclipse.jdt.core.dom.ClassInstanceCreation node) {
       Expression qualifier = node.getExpression() == null ? null : convert(node.getExpression());
       MethodReference constructor =
@@ -191,6 +199,8 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.ArrayCreation) node);
         case ASTNode.BOOLEAN_LITERAL:
           return convert((org.eclipse.jdt.core.dom.BooleanLiteral) node);
+        case ASTNode.CAST_EXPRESSION:
+          return convert((org.eclipse.jdt.core.dom.CastExpression) node);
         case ASTNode.CLASS_INSTANCE_CREATION:
           return convert((org.eclipse.jdt.core.dom.ClassInstanceCreation) node);
         case ASTNode.FIELD_ACCESS:
@@ -199,6 +209,8 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.InfixExpression) node);
         case ASTNode.INSTANCEOF_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.InstanceofExpression) node);
+        case ASTNode.NULL_LITERAL:
+          return convert((org.eclipse.jdt.core.dom.NullLiteral) node);
         case ASTNode.NUMBER_LITERAL:
           return convert((org.eclipse.jdt.core.dom.NumberLiteral) node);
         case ASTNode.PARENTHESIZED_EXPRESSION:
@@ -301,6 +313,10 @@ public class CompilationUnitBuilder {
             new BinaryExpression(binaryExpression, operator, convert(extendedOperand));
       }
       return binaryExpression;
+    }
+
+    private NullLiteral convert(org.eclipse.jdt.core.dom.NullLiteral node) {
+      return new NullLiteral();
     }
 
     private NumberLiteral convert(org.eclipse.jdt.core.dom.NumberLiteral node) {

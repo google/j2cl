@@ -23,6 +23,7 @@ import com.google.j2cl.ast.AbstractTransformer;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BooleanLiteral;
+import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldReference;
@@ -35,6 +36,7 @@ import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.ParenthesizedExpression;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PrefixExpression;
+import com.google.j2cl.ast.RegularTypeReference;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.VariableDeclaration;
@@ -78,6 +80,24 @@ public class StatementSourceGenerator {
       @Override
       public String transformBooleanLiteral(BooleanLiteral expression) {
         return expression.getValue() ? "true" : "false";
+      }
+
+      @Override
+      public String transformCastExpression(CastExpression expression) {
+        TypeReference castType = expression.getCastType();
+        if (castType.isArray()) {
+          throw new RuntimeException("TODO: Implement toSource() for cast to array type");
+        }
+        RegularTypeReference regularTypeRef = (RegularTypeReference) castType;
+        if (regularTypeRef.isPrimitive()) {
+          throw new RuntimeException("TODO: Implement toSource() for cast to primitive type");
+        }
+        String jsDocTypeName = TranspilerUtils.getJsDocName(regularTypeRef);
+        String typeName = TranspilerUtils.getClassName(regularTypeRef);
+        String expressionStr = toSource(expression.getExpression());
+        String isInstanceCallStr = String.format("%s.$isInstance(%s)", typeName, expressionStr);
+        return String.format(
+            "/**@type {%s} */ (Casts.to(%s, %s))", jsDocTypeName, expressionStr, isInstanceCallStr);
       }
 
       @Override

@@ -13,6 +13,7 @@ js_library(
     deps = [
         ":Arrays",
         ":Asserts",
+        ":Casts",
     ],
 )
 
@@ -24,4 +25,9 @@ js_library(
 js_library(
     name = "Arrays",
     srcs = ["Arrays.js"],
+)
+
+js_library(
+    name = "Casts",
+    srcs = ["Casts.js"],
 )
