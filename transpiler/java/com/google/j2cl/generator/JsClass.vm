@@ -33,7 +33,7 @@ class $className $extendsClause {
   }
 
   /**
-   * Runs inline instance field initializers.
+   * Runs instance field and block initializers.
    * @private
    */
   $init__$mangledTypeName() {
@@ -44,7 +44,9 @@ class $className $extendsClause {
 #end
 #end
 #foreach($instanceInitializer in $classType.InstanceInitializers)
-    $instanceInitializer
+#foreach( $statementInInitializer in $instanceInitializer.Statements)
+    $StatementSourceGenerator.toSource($statementInInitializer)
+#end
 #end
   }
 #foreach($method in $classType.Methods)

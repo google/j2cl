@@ -69,7 +69,6 @@ are copyright and licensed as follows:
 - implicitconversions
 - importsjavalangs
 - importsparent
-- instanceinitorder
 - instanceinnerclass
 - instanceofarray
 - instanceofinterface

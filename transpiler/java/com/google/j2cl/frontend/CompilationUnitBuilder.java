@@ -60,6 +60,7 @@ import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
+import org.eclipse.jdt.core.dom.Initializer;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
@@ -113,6 +114,13 @@ public class CompilationUnitBuilder {
         } else if (object instanceof MethodDeclaration) {
           MethodDeclaration methodDeclaration = (MethodDeclaration) object;
           type.addMethod(convert(methodDeclaration));
+        } else if (object instanceof Initializer) {
+          Initializer initializer = (Initializer) object;
+          if (JdtUtils.isStatic(initializer.getModifiers())) {
+            type.addStaticInitializer(convert(initializer.getBody()));
+          } else {
+            type.addInstanceInitializer(convert(initializer.getBody()));
+          }
         } else {
           throw new RuntimeException(
               "Need to implement translation for BodyDeclaration type: "
@@ -343,6 +351,7 @@ public class CompilationUnitBuilder {
       return new MethodCall(qualifier, methodRef, arguments);
     }
 
+    @SuppressWarnings("unused")
     private NullLiteral convert(org.eclipse.jdt.core.dom.NullLiteral node) {
       return new NullLiteral();
     }

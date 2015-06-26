@@ -90,17 +90,13 @@ public class TranspilerUtils {
     return packageName.replace('.', '/') + "/" + unitName;
   }
 
-  private static final Import IMPORT_CLASS = new Import("Class", "gen.java.lang.ClassModule");
-  private static final Import IMPORT_BOOTSTRAP_UTIL =
-      new Import("Util", "nativebootstrap.UtilModule");
-
   /**
    * Returns the relative output path for a given compilation unit.
    */
   public static Set<Import> getImports(CompilationUnit compilationUnit) {
     Set<Import> imports = new TreeSet<>();
-    imports.add(IMPORT_CLASS);
-    imports.add(IMPORT_BOOTSTRAP_UTIL);
+    imports.add(Import.IMPORT_CLASS);
+    imports.add(Import.IMPORT_NATIVE_UTIL);
     imports.addAll(ImportGatheringVisitor.gatherImports(compilationUnit));
     return imports;
   }
@@ -116,6 +112,10 @@ public class TranspilerUtils {
               }
             });
     return Joiner.on(", ").join(parameterNameList);
+  }
+
+  public static boolean isVoid(TypeReference typeRef) {
+    return typeRef.getSimpleName().equals("void");
   }
 
   /**

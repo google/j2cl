@@ -55,19 +55,9 @@ public class JavaType extends Node {
 
   @Visitable List<Method> methods = new ArrayList<>();
 
-  /**
-   * instance initialization statements, including the initializations in instance field
-   * declarations and in non-static initialization blocks.
-   * TODO: to implement a concrete Node type for initializations.
-   */
-  @Visitable List<Node> instanceInitializers = new ArrayList<>();
+  @Visitable List<Block> instanceInitializers = new ArrayList<>();
 
-  /**
-   * static initialization statements, including the initializations in static field declarations
-   * and in static initialization blocks.
-   * TODO: to implement a concrete Node type for initializations.
-   */
-  @Visitable List<Node> staticInitializers = new ArrayList<>();
+  @Visitable List<Block> staticInitializers = new ArrayList<>();
 
   public JavaType(Kind kind, Visibility visibility, TypeReference selfReference) {
     this.kind = kind;
@@ -115,12 +105,20 @@ public class JavaType extends Node {
     this.visibility = visibility;
   }
 
-  public List<Node> getInstanceInitializer() {
+  public List<Block> getInstanceInitializers() {
     return instanceInitializers;
   }
 
-  public List<Node> getStaticInitializer() {
+  public void addInstanceInitializer(Block instanceInitializer) {
+    this.instanceInitializers.add(instanceInitializer);
+  }
+
+  public List<Block> getStaticInitializers() {
     return staticInitializers;
+  }
+
+  public void addStaticInitializer(Block staticInitializer) {
+    this.staticInitializers.add(staticInitializer);
   }
 
   public TypeReference getEnclosingTypeRef() {

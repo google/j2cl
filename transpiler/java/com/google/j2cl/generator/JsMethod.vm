@@ -9,6 +9,10 @@
 #set ($parameterTypeName = $TranspilerUtils.getJsDocName($parameter.TypeRef))
    * @param {$parameterTypeName} $parameter.Name
 #end
+#set ($returnTypeRef = ${method.SelfReference.getReturnTypeRef()})
+#if (!$TranspilerUtils.isVoid($returnTypeRef))
+   * @return {$TranspilerUtils.getJsDocName($returnTypeRef)}
+#end
    * @${method.SelfReference.Visibility}
    */
   $staticModifier${ManglingNameUtils.getMangledName($method.SelfReference)}($parameterList) {
