@@ -23,8 +23,6 @@ import com.google.common.collect.Interners;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.processors.Visitable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 import javax.annotation.Nullable;
@@ -35,15 +33,18 @@ import javax.annotation.Nullable;
 @AutoValue
 @Visitable
 public abstract class RegularTypeReference extends TypeReference {
+  private static Interner<TypeReference> interner;
+
   public static TypeReference create(
       Iterable<String> packageComponents,
       Iterable<String> classComponents,
       String compilationUnitSimpleName) {
-    return interner.intern(
-        new AutoValue_RegularTypeReference(
-            ImmutableList.copyOf(packageComponents),
-            ImmutableList.copyOf(classComponents),
-            compilationUnitSimpleName));
+    return getInterner()
+        .intern(
+            new AutoValue_RegularTypeReference(
+                ImmutableList.copyOf(packageComponents),
+                ImmutableList.copyOf(classComponents),
+                compilationUnitSimpleName));
   }
 
   public abstract ImmutableList<String> getPackageComponents();
@@ -87,7 +88,7 @@ public abstract class RegularTypeReference extends TypeReference {
   }
 
   public TypeReference getArray(int dimensions) {
-    return interner.intern(new AutoValue_ArrayTypeReference(dimensions, this));
+    return getInterner().intern(new AutoValue_ArrayTypeReference(dimensions, this));
   }
 
   @Override
@@ -127,12 +128,10 @@ public abstract class RegularTypeReference extends TypeReference {
         || name.equals("char");
   }
 
-  /**
-   * Create "void" type.
-   */
-  public static TypeReference createVoid() {
-    return RegularTypeReference.create(new ArrayList<String>() {}, Arrays.asList("void"), "");
+  private static Interner<TypeReference> getInterner() {
+    if (interner == null) {
+      interner = Interners.newWeakInterner();
+    }
+    return interner;
   }
-
-  private static Interner<TypeReference> interner = Interners.newWeakInterner();
 }

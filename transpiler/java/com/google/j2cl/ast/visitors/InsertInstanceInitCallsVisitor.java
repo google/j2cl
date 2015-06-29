@@ -23,9 +23,6 @@ import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodReference;
-import com.google.j2cl.ast.RegularTypeReference;
-import com.google.j2cl.ast.TypeReference;
-import com.google.j2cl.ast.Visibility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,13 +50,8 @@ public class InsertInstanceInitCallsVisitor extends AbstractVisitor {
   }
 
   private void synthesizeInstanceInitCall(Method method) {
-    // "void" type.
-    TypeReference voidTypeRef = RegularTypeReference.createVoid();
-
-    // "$init" method reference.
-    TypeReference enclosingClassRef = method.getSelfReference().getEnclosingClassRef();
-    MethodReference initMethodRef = MethodReference.create(
-        false, Visibility.PRIVATE, enclosingClassRef, "$init", false, voidTypeRef);
+    MethodReference initMethodRef =
+        ASTUtils.createInitMethodRef(method.getSelfReference().getEnclosingClassRef());
 
     List<Expression> arguments = new ArrayList<>();
     MethodCall initCall = new MethodCall(null, initMethodRef, arguments);

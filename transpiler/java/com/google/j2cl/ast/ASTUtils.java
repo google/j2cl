@@ -22,6 +22,20 @@ import com.google.common.base.Preconditions;
  */
 public class ASTUtils {
   /**
+   * Create "$init" MethodReference.
+   */
+  public static MethodReference createInitMethodRef(TypeReference enclosingClassRef) {
+    TypeReference voidTypeRef = TypeReference.VOID_TYPEREF;
+    return MethodReference.create(
+        false,
+        Visibility.PRIVATE,
+        enclosingClassRef,
+        MethodReference.METHOD_INIT,
+        false,
+        voidTypeRef);
+  }
+
+  /**
    * Returns the constructor invocation (super call or this call) in a specified constructor,
    * or returns null if it does not have one.
    */

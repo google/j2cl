@@ -25,6 +25,8 @@ import com.google.j2cl.ast.processors.Visitable;
 @AutoValue
 @Visitable
 public abstract class MethodReference extends Node implements Member {
+  public static final String METHOD_INIT = "$init";
+
   public static MethodReference create(
       boolean isStatic,
       Visibility visibility,
@@ -58,6 +60,10 @@ public abstract class MethodReference extends Node implements Member {
   public abstract ImmutableList<TypeReference> getParameterTypeRefs();
 
   public abstract TypeReference getReturnTypeRef();
+
+  public boolean isInit() {
+    return getMethodName().equals(METHOD_INIT);
+  }
 
   @Override
   public MethodReference accept(Processor processor) {

@@ -179,7 +179,7 @@ public class StatementSourceGenerator {
       public String transformMethodReference(MethodReference methodRef) {
         if (methodRef.isConstructor()) {
           return ManglingNameUtils.getCtorMangledName(methodRef);
-        } else if (methodRef.getMethodName().equals("$init")) {
+        } else if (methodRef.isInit()) {
           return ManglingNameUtils.getInitMangledName(methodRef.getEnclosingClassRef());
         } else {
           return ManglingNameUtils.getMangledName(methodRef);

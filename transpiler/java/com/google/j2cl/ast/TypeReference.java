@@ -17,11 +17,17 @@ package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.processors.Visitable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Base class for type reference.
  */
 @Visitable
 public abstract class TypeReference extends Expression implements Comparable<TypeReference> {
+  public static final TypeReference VOID_TYPEREF =
+      RegularTypeReference.create(new ArrayList<String>() {}, Arrays.asList("void"), "");
+
   public abstract String getSimpleName();
 
   public abstract String getBinaryName();
