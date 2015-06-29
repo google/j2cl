@@ -80,7 +80,7 @@ def j2cl_java_test(**kwargs):
   )
 
   # TODO(dankurka): Add support for different browsers
-  # TODO(dankurka): Investigate better setup with jsunit_test / web_test
+  # TODO(dankurka): Investigate better setup for IE
   native.jsunit_test(
       name=base_name + "_js_test",
       srcs=[":" + base_name + "_extract_js",],
@@ -106,10 +106,4 @@ def j2cl_java_test(**kwargs):
           "-Dcom.google.testing.selenium.browser=CHROME_LINUX"
       ],
       data=["//testing/matrix/nativebrowsers/chrome:stable_data",],
-  )
-
-  native.web_test(
-      name=base_name + "_web_test",
-      test=base_name + "_js_test",
-      browser="chrome-linux",
   )

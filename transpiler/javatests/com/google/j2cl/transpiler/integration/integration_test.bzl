@@ -117,6 +117,8 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
   test_harness = """
       goog.module('gen.test.Harness');
       goog.setTestOnly();
+      // Enable assertions in uncompiled test mode.
+      window.ASSERTIONS_ENABLED_ = true;
       var testSuite = goog.require('goog.testing.testSuite');
       var Main = goog.require('gen.%s.MainModule').Main;
       testSuite({
@@ -130,9 +132,8 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
       outs=["TestHarness.js"],
       cmd="echo \"%s\" > $@" % test_harness,
   )
-  # TODO: use google_js_test when it supports ES6
   native.jsunit_test(
-      name="uncompiled_test_spec",
+      name="uncompiled_test",
       srcs=["TestHarness.js"],
       compile=0,
       deps=[
@@ -144,13 +145,9 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
       jvm_flags=["-Dcom.google.testing.selenium.browser=CHROME_LINUX"],
       data=["//testing/matrix/nativebrowsers/chrome:stable_data",],
   )
-  native.web_test(
-      name="uncompiled_test",
-      test="uncompiled_test_spec",
-      browser="chrome-linux",
-  )
+
   native.jsunit_test(
-      name="compiled_test_spec",
+      name="compiled_test",
       srcs=["TestHarness.js"],
       compile=1,
       compiler="//javascript/tools/jscompiler:head",
@@ -160,8 +157,8 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
           "--jscomp_off=undefinedVars",
           "--language_in=ECMASCRIPT6",
           "--language_out=ECMASCRIPT5",
-          "--property_renaming=OFF",
           "--define=ASSERTIONS_ENABLED_=true",
+          "--property_renaming=OFF",
           "--pretty_print",
           "--strict",
           "--variable_renaming=OFF",
@@ -174,9 +171,4 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
       externs_list=["//javascript/externs:common"],
       jvm_flags=["-Dcom.google.testing.selenium.browser=CHROME_LINUX"],
       data=["//testing/matrix/nativebrowsers/chrome:stable_data",],
-  )
-  native.web_test(
-      name="compiled_test",
-      test="compiled_test_spec",
-      browser="chrome-linux",
   )
