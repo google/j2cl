@@ -109,6 +109,12 @@ def gather_closure_warnings():
     build_log = "\n".join(
         [line for line in build_log.splitlines()
          if not line.startswith("_") and "Running" not in line])
+
+    # Filter out the unstable ", ##% typed" message
+    percent_typed_msg = (
+        extract_pattern(r"g\(s\)(, .*? typed)", build_log))
+    build_log = build_log.replace(percent_typed_msg, "")
+
     build_log_path = extract_pattern("//(.*?):", build_log) + "/build.log"
     with open(build_log_path, "w") as build_log_file:
       build_log_file.write(build_log)
