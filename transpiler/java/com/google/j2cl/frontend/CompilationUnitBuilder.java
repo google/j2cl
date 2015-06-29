@@ -274,6 +274,9 @@ public class CompilationUnitBuilder {
           return singletonStatement(convert((org.eclipse.jdt.core.dom.ExpressionStatement) node));
         case ASTNode.RETURN_STATEMENT:
           return singletonStatement(convert((org.eclipse.jdt.core.dom.ReturnStatement) node));
+        case ASTNode.SUPER_CONSTRUCTOR_INVOCATION:
+          return singletonStatement(
+              convert((org.eclipse.jdt.core.dom.SuperConstructorInvocation) node));
         case ASTNode.VARIABLE_DECLARATION_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.VariableDeclarationStatement) node);
         default:
@@ -382,7 +385,7 @@ public class CompilationUnitBuilder {
           convert(node.getOperand()), JdtUtils.getPrefixOperator(node.getOperator()));
     }
 
-    public Expression convert(org.eclipse.jdt.core.dom.QualifiedName node) {
+    private Expression convert(org.eclipse.jdt.core.dom.QualifiedName node) {
       IBinding binding = node.resolveBinding();
       if (binding instanceof IVariableBinding) {
         IVariableBinding variableBinding = (IVariableBinding) binding;
@@ -403,12 +406,12 @@ public class CompilationUnitBuilder {
       }
     }
 
-    public ReturnStatement convert(org.eclipse.jdt.core.dom.ReturnStatement node) {
+    private ReturnStatement convert(org.eclipse.jdt.core.dom.ReturnStatement node) {
       Expression expression = node.getExpression() == null ? null : convert(node.getExpression());
       return new ReturnStatement(expression);
     }
 
-    public Expression convert(org.eclipse.jdt.core.dom.SimpleName node) {
+    private Expression convert(org.eclipse.jdt.core.dom.SimpleName node) {
       IBinding binding = node.resolveBinding();
       if (binding instanceof IVariableBinding) {
         IVariableBinding variableBinding = (IVariableBinding) binding;
@@ -431,7 +434,16 @@ public class CompilationUnitBuilder {
       }
     }
 
-    public ThisReference convert(org.eclipse.jdt.core.dom.ThisExpression node) {
+    private ExpressionStatement convert(org.eclipse.jdt.core.dom.SuperConstructorInvocation node) {
+      IMethodBinding constructorBinding = node.resolveConstructorBinding();
+      MethodReference methodRef =
+          JdtUtils.createMethodReference(constructorBinding, compilationUnitNameLocator);
+      @SuppressWarnings("unchecked")
+      List<Expression> arguments = convert(node.arguments());
+      return new ExpressionStatement(new MethodCall(null, methodRef, arguments));
+    }
+
+    private ThisReference convert(org.eclipse.jdt.core.dom.ThisExpression node) {
       RegularTypeReference typeRef =
           node.getQualifier() == null ? null : (RegularTypeReference) convert(node.getQualifier());
       return new ThisReference(typeRef);

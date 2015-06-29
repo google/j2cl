@@ -31,10 +31,6 @@
    * @$ctorVisibility
    */
   $mangledNameOfCtor($parameterList) {
-#if (!${TranspilerUtils.hasThisCall($method)})
-    this.$ctor__$superTypeMangledName();
-    this.$init__$mangledTypeName();
-#end
 #foreach ($stmt in ${method.Body.Statements})
     $StatementSourceGenerator.toSource($stmt)
 #end

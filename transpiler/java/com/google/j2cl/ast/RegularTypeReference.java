@@ -23,6 +23,8 @@ import com.google.common.collect.Interners;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.processors.Visitable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 import javax.annotation.Nullable;
@@ -123,6 +125,13 @@ public abstract class RegularTypeReference extends TypeReference {
         || name.equals("double")
         || name.equals("boolean")
         || name.equals("char");
+  }
+
+  /**
+   * Create "void" type.
+   */
+  public static TypeReference createVoid() {
+    return RegularTypeReference.create(new ArrayList<String>() {}, Arrays.asList("void"), "");
   }
 
   private static Interner<TypeReference> interner = Interners.newWeakInterner();

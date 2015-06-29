@@ -81,6 +81,13 @@ public class ManglingNameUtils {
   }
 
   /**
+   * Returns the mangled name of $init method for a type.
+   */
+  public static String getInitMangledName(TypeReference typeRef) {
+    return "$init__" + getMangledName(typeRef);
+  }
+
+  /**
    * Returns the mangled name of a field.
    */
   public static String getMangledName(FieldReference fieldRef) {

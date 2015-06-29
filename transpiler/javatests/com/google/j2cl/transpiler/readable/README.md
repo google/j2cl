@@ -86,7 +86,6 @@ are copyright and licensed as follows:
 - nestedanonymousclass
 - nestedclasses
 - nestedtrycatch
-- nondefaultconstructors
 - notimportinternals
 - numbermethods
 - objectmethods

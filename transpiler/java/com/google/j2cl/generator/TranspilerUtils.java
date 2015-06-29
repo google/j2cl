@@ -22,14 +22,9 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodReference;
-import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.generator.visitors.Import;
@@ -130,28 +125,6 @@ public class TranspilerUtils {
       }
     }
     return !type.getStaticInitializerBlocks().isEmpty();
-  }
-
-  /**
-   * Returns whether the specified constructor has a this() call.
-   */
-  public static boolean hasThisCall(Method method) {
-    if (method.getBody().getStatements().isEmpty()) {
-      return false;
-    }
-    Statement firstStatement = method.getBody().getStatements().get(0);
-    if (!(firstStatement instanceof ExpressionStatement)) {
-      return false;
-    }
-    Expression expression = ((ExpressionStatement) firstStatement).getExpression();
-    if (!(expression instanceof MethodCall)) {
-      return false;
-    }
-    MethodReference methodRef = ((MethodCall) expression).getTarget();
-    return methodRef.isConstructor()
-        && methodRef
-            .getEnclosingClassRef()
-            .equals(method.getSelfReference().getEnclosingClassRef());
   }
 
   /**

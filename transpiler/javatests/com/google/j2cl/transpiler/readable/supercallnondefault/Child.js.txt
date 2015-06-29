@@ -1,0 +1,93 @@
+goog.module('gen.com.google.j2cl.transpiler.readable.supercallnondefault.ChildModule');
+
+
+var Parent = goog.require('gen.com.google.j2cl.transpiler.readable.supercallnondefault.ParentModule').Parent;
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/supercallnondefault/Child.java.
+ */
+class Child extends Parent {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_supercallnondefault_Child() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {number} a
+   * @return {!Child}
+   * @public
+   */
+  static $create__int(a) {
+    Child.$clinit();
+    var instance = new Child;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Child__int(
+            a);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {number} a
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Child__int(a) {
+    this.$ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Parent__int(
+        a);
+    this.$init__com_google_j2cl_transpiler_readable_supercallnondefault_Child();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Child; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, Child);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Parent.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+Child.$class = Class.$createForClass(
+    Util.$generateId('Child'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.supercallnondefault.Child'),
+    Parent.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.supercallnondefault.Child'));
+
+
+/**
+ * Exported class.
+ */
+exports.Child = Child;

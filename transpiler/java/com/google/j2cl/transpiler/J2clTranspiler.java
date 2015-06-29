@@ -15,6 +15,8 @@ package com.google.j2cl.transpiler;
 
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.visitors.CreateDefaultConstructorsVisitor;
+import com.google.j2cl.ast.visitors.InsertExplicitSuperCallsVisitor;
+import com.google.j2cl.ast.visitors.InsertInstanceInitCallsVisitor;
 import com.google.j2cl.common.VelocityUtil;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.frontend.CompilationUnitBuilder;
@@ -114,6 +116,8 @@ public class J2clTranspiler {
   private void normalizeUnits(@SuppressWarnings("unused") List<CompilationUnit> j2clUnits) {
     for (CompilationUnit j2clUnit : j2clUnits) {
       CreateDefaultConstructorsVisitor.doCreateDefaultConstructors(j2clUnit);
+      InsertExplicitSuperCallsVisitor.doInsertExplicitSuperCalls(j2clUnit);
+      InsertInstanceInitCallsVisitor.doInsertInstanceInitCall(j2clUnit);
       // TODO: create field initializers for any primitive fields that are currently implicitly set
       // to a default value.
     }

@@ -1,0 +1,90 @@
+goog.module('gen.com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefaultModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/supercalldefault/SuperCallDefault.java.
+ */
+class SuperCallDefault extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_supercalldefault_SuperCallDefault() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!SuperCallDefault}
+   * @public
+   */
+  static $create() {
+    SuperCallDefault.$clinit();
+    var instance = new SuperCallDefault;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_supercalldefault_SuperCallDefault();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_supercalldefault_SuperCallDefault() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_supercalldefault_SuperCallDefault();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof SuperCallDefault; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, SuperCallDefault);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+SuperCallDefault.$class = Class.$createForClass(
+    Util.$generateId('SuperCallDefault'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault'));
+
+
+/**
+ * Exported class.
+ */
+exports.SuperCallDefault = SuperCallDefault;
