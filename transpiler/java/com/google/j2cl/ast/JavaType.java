@@ -141,8 +141,8 @@ public class JavaType extends Node {
     return superInterfaceRefs;
   }
 
-  public void setSuperInterfaceRefs(List<TypeReference> superInterfaceRefs) {
-    this.superInterfaceRefs = superInterfaceRefs;
+  public void addSuperInterfaceRef(TypeReference superInterfaceRef) {
+    this.superInterfaceRefs.add(superInterfaceRef);
   }
 
   public TypeReference getSelfReference() {

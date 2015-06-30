@@ -12,6 +12,12 @@
 #set ($simpleName = $classType.getSelfReference().getSimpleName())
 #set ($binaryName = $classType.getSelfReference().getBinaryName())
 #set ($sourceName = ${TranspilerUtils.getSourceName($classType.getSelfReference())})
+/**
+ * Transpiled from $filePath.
+#foreach ($superInterface in $classType.SuperInterfaceRefs)
+ * @implements {${TranspilerUtils.getClassName($superInterface)}}
+#end
+ */
 class $className $extendsClause {
   /**
    * Defines instance fields.
@@ -82,6 +88,11 @@ class $className $extendsClause {
 #end
 
 
+#foreach ($superInterface in $classType.SuperInterfaceRefs)
+${TranspilerUtils.getClassName($superInterface)}.$markImplementor($className);
+
+
+#end
 /**
  * @public {Class}
  */

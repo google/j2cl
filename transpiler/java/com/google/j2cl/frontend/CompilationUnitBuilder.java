@@ -156,10 +156,13 @@ public class CompilationUnitBuilder {
         parameters.add(j2clParameter);
         variableByJdtBinding.put(parameterBinding, j2clParameter);
       }
+      // If a method has no body, initialize the body with an empty list of statements.
+      Block body =
+          node.getBody() == null ? new Block(new ArrayList<Statement>()) : convert(node.getBody());
       return new Method(
           JdtUtils.createMethodReference(node.resolveBinding(), compilationUnitNameLocator),
           parameters,
-          convert(node.getBody()));
+          body);
     }
 
     @SuppressWarnings("cast")
@@ -482,6 +485,9 @@ public class CompilationUnitBuilder {
       ITypeBinding superclassBinding = typeBinding.getSuperclass();
       TypeReference superType = createTypeReference(superclassBinding);
       type.setSuperTypeRef(superType);
+      for (ITypeBinding superInterface : typeBinding.getInterfaces()) {
+        type.addSuperInterfaceRef(createTypeReference(superInterface));
+      }
       return type;
     }
   }

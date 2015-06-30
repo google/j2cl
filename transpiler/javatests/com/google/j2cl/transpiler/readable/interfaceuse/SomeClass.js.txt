@@ -1,0 +1,105 @@
+goog.module('gen.com.google.j2cl.transpiler.readable.interfaceuse.SomeClassModule');
+
+
+var AnotherInterface = goog.require('gen.com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterfaceModule').AnotherInterface;
+var SomeInterface = goog.require('gen.com.google.j2cl.transpiler.readable.interfaceuse.SomeInterfaceModule').SomeInterface;
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/interfaceuse/SomeClass.java.
+ * @implements {SomeInterface}
+ * @implements {AnotherInterface}
+ */
+class SomeClass extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_interfaceuse_SomeClass() {}
+
+  /**
+   * @return {number}
+   * @public
+   */
+  m_run() { return 0; }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!SomeClass}
+   * @public
+   */
+  static $create() {
+    SomeClass.$clinit();
+    var instance = new SomeClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_interfaceuse_SomeClass();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_interfaceuse_SomeClass() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_interfaceuse_SomeClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof SomeClass; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, SomeClass);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+SomeInterface.$markImplementor(SomeClass);
+
+
+AnotherInterface.$markImplementor(SomeClass);
+
+
+/**
+ * @public {Class}
+ */
+SomeClass.$class = Class.$createForClass(
+    Util.$generateId('SomeClass'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.interfaceuse.SomeClass'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.interfaceuse.SomeClass'));
+
+
+/**
+ * Exported class.
+ */
+exports.SomeClass = SomeClass;

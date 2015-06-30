@@ -1,0 +1,88 @@
+goog.module('gen.com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterfaceModule');
+
+
+var SomeInterface = goog.require('gen.com.google.j2cl.transpiler.readable.interfaceuse.SomeInterfaceModule').SomeInterface;
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/interfaceuse/AnotherInterface.java.
+ * @interface
+ * @extends {SomeInterface}
+ */
+class AnotherInterface {
+  /**
+   * @return {number}
+   * @public
+   */
+  m_run() {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    SomeInterface.$markImplementor(classConstructor);
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_interfaceuse_AnotherInterface =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+           instance
+               .$implements__com_google_j2cl_transpiler_readable_interfaceuse_AnotherInterface;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+           classConstructor.prototype
+               .$implements__com_google_j2cl_transpiler_readable_interfaceuse_AnotherInterface;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() {}
+}
+;
+
+
+AnotherInterface.$markImplementor(AnotherInterface);
+
+
+/**
+ * @public {Class}
+ */
+AnotherInterface.$class = Class.$createForInterface(
+    Util.$generateId('AnotherInterface'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface'),
+    null,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface'));
+
+
+/**
+ * Exported class.
+ */
+exports.AnotherInterface = AnotherInterface;

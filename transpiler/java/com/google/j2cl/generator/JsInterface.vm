@@ -3,18 +3,27 @@
 #set ($simpleName = $classType.getSelfReference().getSimpleName())
 #set ($binaryName = $classType.getSelfReference().getBinaryName())
 #set ($sourceName = ${TranspilerUtils.getSourceName($classType.getSelfReference())})
+/**
+ * Transpiled from $filePath.
+ * @interface
+#foreach ($superInterface in $classType.SuperInterfaceRefs)
+ * @extends {${TranspilerUtils.getClassName($superInterface)}}
+#end
+ */
 class $interfaceName {
 #foreach($method in $classType.Methods)
-  $method
+#parse( "com/google/j2cl/generator/JsMethod.vm" )
 
 #end
-
   /**
    * Marks the provided class as implementing this interface.
    * @param {Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
+#foreach ($superInterface in $classType.SuperInterfaceRefs)
+    ${TranspilerUtils.getClassName($superInterface)}.$markImplementor(classConstructor);
+#end
     /**
      * @public {boolean}
      */

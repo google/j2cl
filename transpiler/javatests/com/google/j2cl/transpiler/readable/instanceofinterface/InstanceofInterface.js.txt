@@ -1,0 +1,102 @@
+goog.module('gen.com.google.j2cl.transpiler.readable.instanceofinterface.InstanceofInterfaceModule');
+
+
+var Serializable = goog.require('gen.java.io.SerializableModule').Serializable;
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/instanceofinterface/InstanceofInterface.java.
+ */
+class InstanceofInterface extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_instanceofinterface_InstanceofInterface() {
+  }
+
+  /**
+   * @return {boolean}
+   * @public
+   */
+  m_test() {
+    var o = Object.$create();
+    return Serializable.$isInstance(o);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!InstanceofInterface}
+   * @public
+   */
+  static $create() {
+    InstanceofInterface.$clinit();
+    var instance = new InstanceofInterface;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_instanceofinterface_InstanceofInterface();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_instanceofinterface_InstanceofInterface() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_instanceofinterface_InstanceofInterface();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof InstanceofInterface;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, InstanceofInterface);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+InstanceofInterface.$class = Class.$createForClass(
+    Util.$generateId('InstanceofInterface'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.instanceofinterface.InstanceofInterface'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.instanceofinterface.InstanceofInterface'));
+
+
+/**
+ * Exported class.
+ */
+exports.InstanceofInterface = InstanceofInterface;

@@ -71,9 +71,7 @@ are copyright and licensed as follows:
 - importsparent
 - instanceinnerclass
 - instanceofarray
-- instanceofinterface
 - interfacedefaultmethod
-- interfaceuse
 - jsinteropclass
 - jsinteropdispatch
 - jsinteropinterface
@@ -106,7 +104,6 @@ are copyright and licensed as follows:
 - simplebridgemethod
 - simpleenum
 - simplegenerictype
-- simpleinterface
 - simplelambda
 - strings
 - subclassgenericclass

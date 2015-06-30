@@ -17,12 +17,6 @@ var $importName = goog.require('${requiredModule.getModuleName()}').$importName;
 
 #foreach($classType in $compilationUnit.Types)
 #set ($isInterface = $classType.isInterface())
-/**
- * Transpiled from $filePath.
-#if ($isInterface)
- * @interface
-#end
- */
 #if($isInterface)
 #parse( "com/google/j2cl/generator/JsInterface.vm" )
 #else
