@@ -13,17 +13,23 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.transpiler.integration.instanceofclass;
+package com.google.j2cl.transpiler.integration.stringescapecodes;
 
 /**
- * Test instanceof class type.
+ * Test String escape codes.
  */
 public class Main {
   public static void main(String... args) {
-    Object object = new Main();
-    assert object instanceof Main;
-    assert object instanceof Object;
-    assert !(object instanceof String);
-    assert "A String Literal" instanceof String;
+    // TODO: implement String method devirtualization.
+    // assert "".length() == 0;
+    // assert "\b".length() == 1;
+    // assert "\f".length() == 1;
+    // assert "\n".length() == 1;
+    // assert "\r".length() == 1;
+    // assert "\t".length() == 1;
+    // assert "\u0000".length() == 1;
+    // assert "\\".length() == 1;
+    // assert "\"".length() == 1;
+    // assert "\'".length() == 1;
   }
 }

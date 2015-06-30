@@ -13,17 +13,27 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.transpiler.integration.instanceofclass;
+package com.google.j2cl.ast;
+
+import com.google.j2cl.ast.processors.Visitable;
 
 /**
- * Test instanceof class type.
+ * String literal node.
  */
-public class Main {
-  public static void main(String... args) {
-    Object object = new Main();
-    assert object instanceof Main;
-    assert object instanceof Object;
-    assert !(object instanceof String);
-    assert "A String Literal" instanceof String;
+@Visitable
+public class StringLiteral extends Expression {
+  private final String escapedValue;
+
+  public StringLiteral(String escapedValue) {
+    this.escapedValue = escapedValue;
+  }
+
+  public String getEscapedValue() {
+    return escapedValue;
+  }
+
+  @Override
+  public StringLiteral accept(Processor processor) {
+    return Visitor_StringLiteral.visit(processor, this);
   }
 }

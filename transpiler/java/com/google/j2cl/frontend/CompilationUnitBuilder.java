@@ -46,6 +46,7 @@ import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.RegularTypeReference;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
+import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
@@ -247,6 +248,8 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.QualifiedName) node);
         case ASTNode.SIMPLE_NAME:
           return convert((org.eclipse.jdt.core.dom.SimpleName) node);
+        case ASTNode.STRING_LITERAL:
+          return convert((org.eclipse.jdt.core.dom.StringLiteral) node);
         case ASTNode.THIS_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.ThisExpression) node);
         default:
@@ -435,6 +438,10 @@ public class CompilationUnitBuilder {
         throw new RuntimeException(
             "Need to implement translation for SimpleName binding: " + node.getClass().getName());
       }
+    }
+
+    private StringLiteral convert(org.eclipse.jdt.core.dom.StringLiteral node) {
+      return new StringLiteral(node.getEscapedValue());
     }
 
     private ExpressionStatement convert(org.eclipse.jdt.core.dom.SuperConstructorInvocation node) {

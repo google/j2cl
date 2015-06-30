@@ -105,7 +105,7 @@ are copyright and licensed as follows:
 - simpleenum
 - simplegenerictype
 - simplelambda
-- strings
+- string devirtualization
 - subclassgenericclass
 - subclassgenericclasswithparam
 - supercall

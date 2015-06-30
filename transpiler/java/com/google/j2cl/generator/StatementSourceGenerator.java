@@ -44,6 +44,7 @@ import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.RegularTypeReference;
 import com.google.j2cl.ast.ReturnStatement;
+import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.VariableDeclaration;
@@ -257,6 +258,11 @@ public class StatementSourceGenerator {
         } else {
           return "return " + toSource(expression) + ";";
         }
+      }
+
+      @Override
+      public String transformStringLiteral(StringLiteral expression) {
+        return expression.getEscapedValue();
       }
 
       @Override

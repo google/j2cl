@@ -1,0 +1,106 @@
+goog.module('gen.com.google.j2cl.transpiler.readable.stringliteral.StringLiteralModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/stringliteral/StringLiteral.java.
+ */
+class StringLiteral extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @private {?string}
+     */
+    this.f_someString__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
+        null;
+    /**
+     * @private {?string}
+     */
+    this.f_escapeCodes__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral() {
+    this.f_someString__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
+        "This is a string literal";
+    this.f_escapeCodes__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
+        "\b\f\n\r\t\"\'\\\u0000";
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!StringLiteral}
+   * @public
+   */
+  static $create() {
+    StringLiteral.$clinit();
+    var instance = new StringLiteral;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof StringLiteral; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, StringLiteral);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+StringLiteral.$class = Class.$createForClass(
+    Util.$generateId('StringLiteral'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.stringliteral.StringLiteral'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.stringliteral.StringLiteral'));
+
+
+/**
+ * Exported class.
+ */
+exports.StringLiteral = StringLiteral;

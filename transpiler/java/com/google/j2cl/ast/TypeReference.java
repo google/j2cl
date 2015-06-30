@@ -26,7 +26,7 @@ import java.util.Arrays;
 @Visitable
 public abstract class TypeReference extends Expression implements Comparable<TypeReference> {
   public static final TypeReference VOID_TYPEREF =
-      RegularTypeReference.create(new ArrayList<String>() {}, Arrays.asList("void"), "");
+      RegularTypeReference.create(new ArrayList<String>(), Arrays.asList("void"), "");
 
   public abstract String getSimpleName();
 
