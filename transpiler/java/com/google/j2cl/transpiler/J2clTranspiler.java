@@ -118,8 +118,6 @@ public class J2clTranspiler {
       CreateDefaultConstructorsVisitor.doCreateDefaultConstructors(j2clUnit);
       InsertExplicitSuperCallsVisitor.doInsertExplicitSuperCalls(j2clUnit);
       InsertInstanceInitCallsVisitor.doInsertInstanceInitCall(j2clUnit);
-      // TODO: create field initializers for any primitive fields that are currently implicitly set
-      // to a default value.
     }
   }
 

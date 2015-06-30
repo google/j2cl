@@ -193,4 +193,15 @@ public class TranspilerUtils {
         return null;
     }
   }
+
+  public static String getDefaultInitialValue(TypeReference typeRef) {
+    String jsDocName = getJsDocName(typeRef);
+    if (jsDocName.equals("number")) {
+      return "0";
+    } else if (jsDocName.equals("boolean")) {
+      return "false";
+    } else {
+      return "null";
+    }
+  }
 }
