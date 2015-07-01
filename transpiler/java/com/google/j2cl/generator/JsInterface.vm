@@ -4,7 +4,6 @@
 #set ($binaryName = $classType.getSelfReference().getBinaryName())
 #set ($sourceName = ${TranspilerUtils.getSourceName($classType.getSelfReference())})
 /**
- * Transpiled from $filePath.
  * @interface
 #foreach ($superInterface in $classType.SuperInterfaceRefs)
  * @extends {${TranspilerUtils.getClassName($superInterface)}}

@@ -55,7 +55,8 @@ public class InsertExplicitSuperCallsVisitor extends AbstractVisitor {
      * Only inserts explicit super() call to a constructor that does not have
      * a super() or this() call, and the corresponding type does have a super class.
      */
-    if (!method.isConstructor() || ASTUtils.hasConstructorInvocation(method)
+    if (!method.isConstructor()
+        || ASTUtils.hasConstructorInvocation(method)
         || currentJavaType.getSuperTypeRef() == null) {
       return false;
     }
@@ -73,8 +74,14 @@ public class InsertExplicitSuperCallsVisitor extends AbstractVisitor {
   }
 
   private void synthesizeSuperCall(Method method, TypeReference superTypeRef) {
-    MethodReference methodRef = MethodReference.create(
-        false, Visibility.PUBLIC, superTypeRef, superTypeRef.getSimpleName(), true, superTypeRef);
+    MethodReference methodRef =
+        MethodReference.create(
+            false,
+            Visibility.PUBLIC,
+            superTypeRef,
+            superTypeRef.getClassName(),
+            true,
+            superTypeRef);
     List<Expression> arguments = new ArrayList<>();
     MethodCall superCall = new MethodCall(null, methodRef, arguments);
     method.getBody().getStatements().add(0, new ExpressionStatement(superCall));

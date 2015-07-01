@@ -1,0 +1,175 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/staticnestedclass/StaticNestedClassParent.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParentModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+class StaticNestedClassParent extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_staticnestedclass_StaticNestedClassParent() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!StaticNestedClassParent}
+   * @public
+   */
+  static $create() {
+    StaticNestedClassParent.$clinit();
+    var instance = new StaticNestedClassParent;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_staticnestedclass_StaticNestedClassParent();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_staticnestedclass_StaticNestedClassParent() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_staticnestedclass_StaticNestedClassParent();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof StaticNestedClassParent;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, StaticNestedClassParent);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+StaticNestedClassParent.$class = Class.$createForClass(
+    Util.$generateId('StaticNestedClassParent'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent'));
+
+/**
+ * Export class.
+ */
+exports.StaticNestedClassParent = StaticNestedClassParent;
+
+
+
+class StaticNestedClassParent$StaticNestedClass extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_staticnestedclass_StaticNestedClassParent$StaticNestedClass() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!StaticNestedClassParent$StaticNestedClass}
+   * @public
+   */
+  static $create() {
+    StaticNestedClassParent$StaticNestedClass.$clinit();
+    var instance = new StaticNestedClassParent$StaticNestedClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_staticnestedclass_StaticNestedClassParent$StaticNestedClass();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_staticnestedclass_StaticNestedClassParent$StaticNestedClass() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_staticnestedclass_StaticNestedClassParent$StaticNestedClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof StaticNestedClassParent$StaticNestedClass;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor,
+                              StaticNestedClassParent$StaticNestedClass);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+StaticNestedClassParent$StaticNestedClass.$class = Class.$createForClass(
+    Util.$generateId('StaticNestedClass'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent$StaticNestedClass'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent.StaticNestedClass'));
+
+/**
+ * Export class.
+ */
+exports.StaticNestedClassParent$StaticNestedClass =
+    StaticNestedClassParent$StaticNestedClass;

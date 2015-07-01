@@ -82,8 +82,8 @@ are copyright and licensed as follows:
 - multipleanonymousclass
 - multipleparametersgenerictype
 - nestedanonymousclass
-- nestedclasses
 - nestedtrycatch
+- nonstaticnestedclasses
 - notimportinternals
 - numbermethods
 - objectmethods

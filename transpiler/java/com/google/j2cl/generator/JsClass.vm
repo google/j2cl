@@ -12,12 +12,13 @@
 #set ($simpleName = $classType.getSelfReference().getSimpleName())
 #set ($binaryName = $classType.getSelfReference().getBinaryName())
 #set ($sourceName = ${TranspilerUtils.getSourceName($classType.getSelfReference())})
+#if (!${classType.SuperInterfaceRefs.isEmpty()})
 /**
- * Transpiled from $filePath.
 #foreach ($superInterface in $classType.SuperInterfaceRefs)
  * @implements {${TranspilerUtils.getClassName($superInterface)}}
 #end
  */
+#end
 class $className $extendsClause {
   /**
    * Defines instance fields.

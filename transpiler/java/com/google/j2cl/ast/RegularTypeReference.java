@@ -55,11 +55,6 @@ public abstract class RegularTypeReference extends TypeReference {
   public abstract String getCompilationUnitSimpleName();
 
   @Override
-  public String getSimpleName() {
-    return Iterables.getLast(getClassComponents());
-  }
-
-  @Override
   public String getBinaryName() {
     return Joiner.on(".")
         .join(
@@ -69,12 +64,22 @@ public abstract class RegularTypeReference extends TypeReference {
   }
 
   @Override
+  public String getClassName() {
+    return Joiner.on('$').join(getClassComponents());
+  }
+
+  @Override
   public String getCompilationUnitSourceName() {
     if (getCompilationUnitSimpleName() == null) {
       // Primitive type references don't have a compilation unit.
       return null;
     }
     return Joiner.on(".").join(getPackageComponents()) + "." + getCompilationUnitSimpleName();
+  }
+
+  @Override
+  public String getSimpleName() {
+    return Iterables.getLast(getClassComponents());
   }
 
   @Override
@@ -107,25 +112,25 @@ public abstract class RegularTypeReference extends TypeReference {
   }
 
   @Override
-  public int compareTo(TypeReference that) {
-    return this.getSourceName().compareTo(that.getSourceName());
-  }
-
-  @Override
   public RegularTypeReference accept(Processor processor) {
     return Visitor_RegularTypeReference.visit(processor, this);
   }
 
   public boolean isPrimitive() {
-    String name = getSimpleName();
-    return name.equals("byte")
-        || name.equals("short")
-        || name.equals("int")
-        || name.equals("long")
-        || name.equals("float")
-        || name.equals("double")
-        || name.equals("boolean")
-        || name.equals("char");
+    switch (getSourceName()) {
+      case "boolean":
+      case "byte":
+      case "char":
+      case "double":
+      case "float":
+      case "int":
+      case "long":
+      case "short":
+      case "void":
+        return true;
+      default:
+        return false;
+    }
   }
 
   private static Interner<TypeReference> getInterner() {

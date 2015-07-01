@@ -5,6 +5,9 @@
 #set ($moduleName = $compilationUnit.Name)
 #set ($filePath = $compilationUnit.FilePath)
 #set ($packageName = $compilationUnit.PackageName)
+/**
+ * Transpiled from $filePath.
+ */
 goog.module('gen.${packageName}.${moduleName}Module');
 
 
@@ -16,29 +19,23 @@ var $importName = goog.require('${requiredModule.getModuleName()}').$importName;
 
 
 #foreach($classType in $compilationUnit.Types)
-#set ($isInterface = $classType.isInterface())
-#if($isInterface)
+#if (${classType.isInterface()})
 #parse( "com/google/j2cl/generator/JsInterface.vm" )
 #else
 #parse( "com/google/j2cl/generator/JsClass.vm" )
+#end
+#if(! ${classType.getVisibility().isPrivate()})##
+#set ($className = ${TranspilerUtils.getClassName($classType.getSelfReference())})
+
+/**
+ * Export class.
+ */
+exports.$className = $className;
 #end
 #if($velocityCount < $compilationUnit.getTypes().size())
 ## three blank lines between class definitions.
 
 
 
-#end
-#end
-##
-##
-#foreach($classType in $compilationUnit.Types)
-#if(! ${classType.getVisibility().isPrivate()})##
-#set ($className = ${TranspilerUtils.getClassName($classType.getSelfReference())})
-
-
-/**
- * Exported class.
- */
-exports.$className = $className;
 #end
 #end

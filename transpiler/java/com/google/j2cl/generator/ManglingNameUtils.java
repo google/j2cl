@@ -38,7 +38,7 @@ public class ManglingNameUtils {
       return Strings.repeat("arrayOf_", typeRef.getDimensions())
           + getMangledName(typeRef.getLeafTypeRef());
     }
-    return typeRef.getSourceName().replace('.', '_');
+    return typeRef.getBinaryName().replace('.', '_');
   }
 
   /**

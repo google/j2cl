@@ -64,7 +64,7 @@ public class CreateDefaultConstructorsVisitor extends AbstractVisitor {
             true,
             Visibility.PUBLIC,
             type.getSelfReference(),
-            type.getSelfReference().getSimpleName(),
+            type.getSelfReference().getClassName(),
             true,
             type.getSelfReference());
     Block body = new Block(new ArrayList<Statement>());

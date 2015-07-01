@@ -51,7 +51,7 @@ public class TranspilerUtils {
    */
   public static String getClassName(TypeReference typeRef) {
     //TODO(rluble): Stub implementation.
-    return typeRef.getSimpleName();
+    return typeRef.getClassName();
   }
 
   /**
@@ -112,7 +112,7 @@ public class TranspilerUtils {
   }
 
   public static boolean isVoid(TypeReference typeRef) {
-    return typeRef.getSimpleName().equals("void");
+    return typeRef.getClassName().equals("void");
   }
 
   /**

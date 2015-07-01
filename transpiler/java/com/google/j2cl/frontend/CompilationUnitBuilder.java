@@ -90,12 +90,12 @@ public class CompilationUnitBuilder {
       CompilationUnit j2clCompilationUnit = new CompilationUnit(sourceFilePath, packageName);
       for (Object object : jdtCompilationUnit.types()) {
         AbstractTypeDeclaration abstractTypeDeclaration = (AbstractTypeDeclaration) object;
-        j2clCompilationUnit.addType(convert(abstractTypeDeclaration));
+        j2clCompilationUnit.addTypes(convert(abstractTypeDeclaration));
       }
       return j2clCompilationUnit;
     }
 
-    private JavaType convert(AbstractTypeDeclaration node) {
+    private Collection<JavaType> convert(AbstractTypeDeclaration node) {
       switch (node.getNodeType()) {
         case ASTNode.TYPE_DECLARATION:
           return convert((TypeDeclaration) node);
@@ -106,9 +106,11 @@ public class CompilationUnitBuilder {
       }
     }
 
-    private JavaType convert(TypeDeclaration node) {
+    private Collection<JavaType> convert(TypeDeclaration node) {
       ITypeBinding typeBinding = node.resolveBinding();
       JavaType type = createJavaType(typeBinding);
+      List<JavaType> types = new ArrayList<>();
+      types.add(type);
       for (Object object : node.bodyDeclarations()) {
         if (object instanceof FieldDeclaration) {
           FieldDeclaration fieldDeclaration = (FieldDeclaration) object;
@@ -123,13 +125,20 @@ public class CompilationUnitBuilder {
           } else {
             type.addInstanceInitializerBlock(convert(initializer.getBody()));
           }
+        } else if (object instanceof TypeDeclaration) {
+          // Nested class
+          TypeDeclaration nestedTypeDeclaration = (TypeDeclaration) object;
+          if (!JdtUtils.isStatic(nestedTypeDeclaration.getModifiers())) {
+            throw new RuntimeException("Need to implement translation for (nested) inner classes");
+          }
+          types.addAll(convert(nestedTypeDeclaration));
         } else {
           throw new RuntimeException(
               "Need to implement translation for BodyDeclaration type: "
                   + node.getClass().getName());
         }
       }
-      return type;
+      return types;
     }
 
     private List<Field> convert(FieldDeclaration node) {

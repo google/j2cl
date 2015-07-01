@@ -46,7 +46,7 @@ public class Import extends Node implements Comparable<Import> {
 
   public Import(TypeReference typeReference) {
     this(
-        typeReference.getSimpleName(),
+        typeReference.getClassName(),
         "gen." + typeReference.getCompilationUnitSourceName() + "Module");
   }
 

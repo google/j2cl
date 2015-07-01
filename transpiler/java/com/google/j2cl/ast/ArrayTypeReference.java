@@ -33,13 +33,13 @@ public abstract class ArrayTypeReference extends TypeReference {
   public abstract TypeReference getLeafTypeRef();
 
   @Override
-  public String getSimpleName() {
-    return getLeafTypeRef().getSimpleName() + getSuffix();
+  public String getBinaryName() {
+    return getPrefix() + getLeafTypeRef().getBinaryName();
   }
 
   @Override
-  public String getBinaryName() {
-    return getPrefix() + getLeafTypeRef().getBinaryName();
+  public String getClassName() {
+    return getLeafTypeRef().getClassName() + getSuffix();
   }
 
   @Override
@@ -48,8 +48,13 @@ public abstract class ArrayTypeReference extends TypeReference {
   }
 
   @Override
-  public String getSourceName() {
+  public String getSimpleName() {
     return getLeafTypeRef().getSimpleName() + getSuffix();
+  }
+
+  @Override
+  public String getSourceName() {
+    return getLeafTypeRef().getSourceName() + getSuffix();
   }
 
   @Override
@@ -60,11 +65,6 @@ public abstract class ArrayTypeReference extends TypeReference {
   @Override
   public boolean isArray() {
     return true;
-  }
-
-  @Override
-  public int compareTo(TypeReference that) {
-    return this.getSourceName().compareTo(that.getSourceName());
   }
 
   private String getSuffix() {

@@ -28,11 +28,13 @@ public abstract class TypeReference extends Expression implements Comparable<Typ
   public static final TypeReference VOID_TYPEREF =
       RegularTypeReference.create(new ArrayList<String>(), Arrays.asList("void"), "");
 
-  public abstract String getSimpleName();
-
   public abstract String getBinaryName();
 
+  public abstract String getClassName();
+
   public abstract String getCompilationUnitSourceName();
+
+  public abstract String getSimpleName();
 
   public abstract String getSourceName();
 
@@ -43,6 +45,11 @@ public abstract class TypeReference extends Expression implements Comparable<Typ
   public abstract int getDimensions();
 
   public abstract TypeReference getLeafTypeRef();
+
+  @Override
+  public int compareTo(TypeReference that) {
+    return getBinaryName().compareTo(that.getBinaryName());
+  }
 
   @Override
   public TypeReference accept(Processor processor) {
