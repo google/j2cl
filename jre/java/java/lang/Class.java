@@ -15,7 +15,11 @@ package java.lang;
 
 /**
  * See <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Error.html">the
+ * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html">the
  * official Java API doc</a> for details.
  */
-public class Error extends Throwable {}
+public class Class {
+  public String getName() {return null;}
+  public boolean isArray() {return false;}
+}
+

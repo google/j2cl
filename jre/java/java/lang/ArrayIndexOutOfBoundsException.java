@@ -18,4 +18,4 @@ package java.lang;
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/ArrayIndexOutOfBoundsException.html">the
  * official Java API doc</a> for details.
  */
-public class ArrayIndexOutOfBoundsException extends Exception {}
+public class ArrayIndexOutOfBoundsException extends RuntimeException {}

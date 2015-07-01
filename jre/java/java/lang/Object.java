@@ -18,4 +18,17 @@ package java.lang;
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html">the
  * official Java API doc</a> for details.
  */
-public class Object {}
+public class Object {
+
+  public boolean equals(Object obj) {
+    return false;
+  }
+
+  public String toString() {
+    return null;
+  }
+
+  public Class getClass() {
+    return null;
+  }
+}

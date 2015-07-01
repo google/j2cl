@@ -39,9 +39,9 @@ def j2cl_java_library(
   if "deps" in kwargs:
     for dep in kwargs["deps"]:
       if dep == "//third_party/java/junit":
-        java_deps += ["//junit/java/org/junit:junit_emul"]
-        # TODO(dankurka) once we have decided how we deal with junit sort this
-        # out
+        java_deps += ["//junit/java:junit_annotations"]
+        java_deps += ["//junit/java:junit_emul"]
+        js_deps += ["//junit/java:junit_emul_js_library"]
       else:
         java_deps += [dep]
         js_deps += [dep + "_js_library"]

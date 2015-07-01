@@ -18,4 +18,25 @@ package java.lang;
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html">the
  * official Java API doc</a> for details.
  */
-public class String {}
+public class String {
+
+  public static String valueOf(Object o) {
+    return null;
+  }
+
+  public int length() {
+    return 0;
+  }
+
+  public char charAt(int index) {
+    return 0;
+  }
+
+  public String substring(int start, int length) {
+    return null;
+  }
+
+  public String substring(int start) {
+    return null;
+  }
+}

@@ -18,4 +18,9 @@ package java.lang;
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/AssertionError.html">the
  * official Java API doc</a> for details.
  */
-public class AssertionError extends Error {}
+public class AssertionError extends Error {
+
+  public AssertionError() {}
+
+  public AssertionError(Object detailMessage) {}
+}

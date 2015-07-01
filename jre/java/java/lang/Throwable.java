@@ -13,9 +13,23 @@
  */
 package java.lang;
 
+import java.util.Objects;
+
 /**
  * See <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html">the
  * official Java API doc</a> for details.
  */
-public class Throwable {}
+public class Throwable {
+  public String getMessage() {
+    return null;
+  }
+
+  public Throwable initCause(Throwable cause) {
+    return null;
+  }
+
+  public Throwable getCause() {
+    return null;
+  }
+}

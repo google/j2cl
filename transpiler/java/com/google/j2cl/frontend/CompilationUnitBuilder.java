@@ -84,8 +84,11 @@ public class CompilationUnitBuilder {
   private class ASTConverter {
     private Map<IVariableBinding, Variable> variableByJdtBinding = new HashMap<>();
 
+    private String currentSourceFile;
+    
     private CompilationUnit convert(
         String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
+      currentSourceFile = sourceFilePath;
       String packageName = JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit);
       CompilationUnit j2clCompilationUnit = new CompilationUnit(sourceFilePath, packageName);
       for (Object object : jdtCompilationUnit.types()) {
@@ -102,7 +105,7 @@ public class CompilationUnitBuilder {
         default:
           throw new RuntimeException(
               "Need to implement translation for AbstractTypeDeclaration type: "
-                  + node.getClass().getName());
+                  + node.getClass().getName() + " file triggering this: " + currentSourceFile);
       }
     }
 
@@ -135,7 +138,7 @@ public class CompilationUnitBuilder {
         } else {
           throw new RuntimeException(
               "Need to implement translation for BodyDeclaration type: "
-                  + node.getClass().getName());
+                  + node.getClass().getName() + " file triggering this: " + currentSourceFile);
         }
       }
       return types;
@@ -262,8 +265,8 @@ public class CompilationUnitBuilder {
         case ASTNode.THIS_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.ThisExpression) node);
         default:
-          throw new RuntimeException(
-              "Need to implement translation for expression type: " + node.getClass().getName());
+          throw new RuntimeException("Need to implement translation for expression type: "
+              + node.getClass().getName() + " file triggering this: " + currentSourceFile);
       }
     }
 
@@ -295,8 +298,8 @@ public class CompilationUnitBuilder {
         case ASTNode.VARIABLE_DECLARATION_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.VariableDeclarationStatement) node);
         default:
-          throw new RuntimeException(
-              "Need to implement translation for statement type: " + node.getClass().getName());
+          throw new RuntimeException("Need to implement translation for statement type: "
+              + node.getClass().getName() + " file triggering this: " + currentSourceFile);
       }
     }
 
