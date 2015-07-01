@@ -33,7 +33,7 @@ class $className $extendsClause {
 #set ($fieldType = ${TranspilerUtils.getJsDocName($field.SelfReference.Type)})
 #set ($fieldName = ${ManglingNameUtils.getMangledName($field.SelfReference)})
     /**
-     * @$fieldVisibility {?$fieldType}
+     * @$fieldVisibility {$fieldType}
      */
     this.$fieldName = ${TranspilerUtils.getDefaultInitialValue($field.SelfReference.Type)};
 #end

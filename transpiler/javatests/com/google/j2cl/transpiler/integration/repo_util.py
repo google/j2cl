@@ -215,7 +215,7 @@ def managed_repo_validate_environment():
     os.mkdir(MANAGED_DATA_DIR_PATH)
 
   if not os.path.isfile(MANAGED_DATA_LAST_CL_PATH):
-    first_cl = 95664485
+    first_cl = 97364419
     print "  Starting tracking at cl %s" % first_cl
     last_processed_cl_file = open(MANAGED_DATA_LAST_CL_PATH, "w+")
     last_processed_cl_file.write(str(first_cl))

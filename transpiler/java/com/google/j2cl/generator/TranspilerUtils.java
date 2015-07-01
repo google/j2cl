@@ -73,7 +73,7 @@ public class TranspilerUtils {
       case "short":
         return "number";
       case "java.lang.String":
-        return "string";
+        return "?string";
     }
     return getClassName(typeRef);
   }

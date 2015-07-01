@@ -22,6 +22,7 @@ import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.RegularTypeReference;
@@ -49,6 +50,17 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   public void exitRegularTypeReference(RegularTypeReference typeReference) {
     if (!typeReference.isPrimitive()) {
       typeReferences.add(typeReference);
+    }
+  }
+
+  @Override
+  public void exitField(Field field) {
+    TypeReference typeReference = field.getSelfReference().getType();
+    if (typeReference instanceof RegularTypeReference) {
+      RegularTypeReference regularTypeReference = (RegularTypeReference) typeReference;
+      if (!regularTypeReference.isPrimitive()) {
+        typeReferences.add(regularTypeReference);
+      }
     }
   }
 

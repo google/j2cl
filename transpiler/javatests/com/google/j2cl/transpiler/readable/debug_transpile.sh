@@ -30,6 +30,9 @@ set -x
 # Fail on any error
 set -e
 
+# Build  JRE
+blaze build third_party/java_src/j2cl/jre/java:JavaJre &> /dev/null
+
 # Build the transpiler
 blaze build third_party/java_src/j2cl:j2cl &> /dev/null
 
