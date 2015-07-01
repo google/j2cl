@@ -27,6 +27,9 @@ example_name=$1
 # Show commands as they occur
 set -x
 
+# Fail on any error
+set -e
+
 # Build the transpiler
 blaze build third_party/java_src/j2cl:j2cl &> /dev/null
 
