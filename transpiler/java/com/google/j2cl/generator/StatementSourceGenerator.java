@@ -52,6 +52,7 @@ import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.VariableDeclaration;
 import com.google.j2cl.ast.VariableReference;
+import com.google.j2cl.ast.WhileStatement;
 
 import java.util.List;
 
@@ -313,6 +314,13 @@ public class StatementSourceGenerator {
 
         return String.format(
             "if (%s) {%s} else %s", conditionAsString, trueBlockAsString, falseBlockAsString);
+      }
+
+      @Override
+      public String transformWhileStatement(WhileStatement whileStatement) {
+        String conditionAsString = toSource(whileStatement.getConditionExpression());
+        String blockAsString = toSource(whileStatement.getBlock());
+        return String.format("while (%s) {%s}", conditionAsString, blockAsString);
       }
 
       @Override

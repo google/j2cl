@@ -53,6 +53,7 @@ import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclaration;
 import com.google.j2cl.ast.VariableReference;
+import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.errors.Errors;
 
 import org.eclipse.jdt.core.dom.ASTNode;
@@ -307,6 +308,8 @@ public class CompilationUnitBuilder {
               convert((org.eclipse.jdt.core.dom.SuperConstructorInvocation) node));
         case ASTNode.VARIABLE_DECLARATION_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.VariableDeclarationStatement) node);
+        case ASTNode.WHILE_STATEMENT:
+          return singletonStatement(convert((org.eclipse.jdt.core.dom.WhileStatement) node));
         default:
           throw new RuntimeException(
               "Need to implement translation for statement type: "
@@ -314,6 +317,17 @@ public class CompilationUnitBuilder {
                   + " file triggering this: "
                   + currentSourceFile);
       }
+    }
+
+    private WhileStatement convert(org.eclipse.jdt.core.dom.WhileStatement jdtWhileStatement) {
+      Expression conditionExpression = convert(jdtWhileStatement.getExpression());
+
+      Block block =
+          jdtWhileStatement.getBody() instanceof org.eclipse.jdt.core.dom.Block
+              ? convert((org.eclipse.jdt.core.dom.Block) jdtWhileStatement.getBody())
+              : new Block(Lists.newArrayList(convert(jdtWhileStatement.getBody())));
+
+      return new WhileStatement(conditionExpression, block);
     }
 
     private IfStatement convert(org.eclipse.jdt.core.dom.IfStatement jdtIf) {

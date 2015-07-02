@@ -41,6 +41,7 @@ are copyright and licensed as follows:
 
 ## Likely readable examples to add (remove some redundant)
 - anonymousclasswithcapture
+- block scoped variables
 - boxing
 - bridgemethodaccidentaloverride
 - bridgemethodboundedtypes
