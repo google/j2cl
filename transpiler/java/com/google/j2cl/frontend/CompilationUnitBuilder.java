@@ -30,6 +30,7 @@ import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldReference;
+import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
@@ -85,7 +86,7 @@ public class CompilationUnitBuilder {
     private Map<IVariableBinding, Variable> variableByJdtBinding = new HashMap<>();
 
     private String currentSourceFile;
-    
+
     private CompilationUnit convert(
         String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
       currentSourceFile = sourceFilePath;
@@ -105,7 +106,9 @@ public class CompilationUnitBuilder {
         default:
           throw new RuntimeException(
               "Need to implement translation for AbstractTypeDeclaration type: "
-                  + node.getClass().getName() + " file triggering this: " + currentSourceFile);
+                  + node.getClass().getName()
+                  + " file triggering this: "
+                  + currentSourceFile);
       }
     }
 
@@ -138,7 +141,9 @@ public class CompilationUnitBuilder {
         } else {
           throw new RuntimeException(
               "Need to implement translation for BodyDeclaration type: "
-                  + node.getClass().getName() + " file triggering this: " + currentSourceFile);
+                  + node.getClass().getName()
+                  + " file triggering this: "
+                  + currentSourceFile);
         }
       }
       return types;
@@ -265,8 +270,11 @@ public class CompilationUnitBuilder {
         case ASTNode.THIS_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.ThisExpression) node);
         default:
-          throw new RuntimeException("Need to implement translation for expression type: "
-              + node.getClass().getName() + " file triggering this: " + currentSourceFile);
+          throw new RuntimeException(
+              "Need to implement translation for expression type: "
+                  + node.getClass().getName()
+                  + " file triggering this: "
+                  + currentSourceFile);
       }
     }
 
@@ -290,6 +298,8 @@ public class CompilationUnitBuilder {
           return singletonStatement(convert((org.eclipse.jdt.core.dom.ConstructorInvocation) node));
         case ASTNode.EXPRESSION_STATEMENT:
           return singletonStatement(convert((org.eclipse.jdt.core.dom.ExpressionStatement) node));
+        case ASTNode.IF_STATEMENT:
+          return singletonStatement(convert((org.eclipse.jdt.core.dom.IfStatement) node));
         case ASTNode.RETURN_STATEMENT:
           return singletonStatement(convert((org.eclipse.jdt.core.dom.ReturnStatement) node));
         case ASTNode.SUPER_CONSTRUCTOR_INVOCATION:
@@ -298,9 +308,30 @@ public class CompilationUnitBuilder {
         case ASTNode.VARIABLE_DECLARATION_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.VariableDeclarationStatement) node);
         default:
-          throw new RuntimeException("Need to implement translation for statement type: "
-              + node.getClass().getName() + " file triggering this: " + currentSourceFile);
+          throw new RuntimeException(
+              "Need to implement translation for statement type: "
+                  + node.getClass().getName()
+                  + " file triggering this: "
+                  + currentSourceFile);
       }
+    }
+
+    private IfStatement convert(org.eclipse.jdt.core.dom.IfStatement jdtIf) {
+      Expression conditionExpression = convert(jdtIf.getExpression());
+
+      org.eclipse.jdt.core.dom.Statement jdtTrueStatement = jdtIf.getThenStatement();
+      org.eclipse.jdt.core.dom.Statement jdtFalseStatement = jdtIf.getElseStatement();
+      Block trueBlock =
+          jdtTrueStatement instanceof org.eclipse.jdt.core.dom.Block
+              ? convert((org.eclipse.jdt.core.dom.Block) jdtTrueStatement)
+              : new Block(Lists.newArrayList(convert(jdtTrueStatement)));
+
+      Block falseBlock =
+          jdtFalseStatement instanceof org.eclipse.jdt.core.dom.Block
+              ? convert((org.eclipse.jdt.core.dom.Block) jdtFalseStatement)
+              : new Block(Lists.newArrayList(convert(jdtFalseStatement)));
+
+      return new IfStatement(conditionExpression, trueBlock, falseBlock);
     }
 
     private InstanceOfExpression convert(org.eclipse.jdt.core.dom.InstanceofExpression node) {

@@ -23,12 +23,14 @@ import com.google.j2cl.ast.AbstractTransformer;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.BinaryExpression;
+import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldReference;
+import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberReference;
@@ -44,6 +46,7 @@ import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.RegularTypeReference;
 import com.google.j2cl.ast.ReturnStatement;
+import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeReference;
@@ -291,6 +294,36 @@ public class StatementSourceGenerator {
       @Override
       public String transformVariableReference(VariableReference expression) {
         return expression.getTarget().getName();
+      }
+
+      @Override
+      public String transformIfStatement(IfStatement ifStatement) {
+        String conditionAsString = toSource(ifStatement.getConditionExpression());
+        String trueBlockAsString = toSource(ifStatement.getTrueBlock());
+
+        Block falseBlock = ifStatement.getFalseBlock();
+        String falseBlockAsString = null;
+        if (falseBlock.getStatements().size() == 1
+            && falseBlock.getStatements().get(0) instanceof IfStatement) {
+          IfStatement nestedIfStatement = (IfStatement) falseBlock.getStatements().get(0);
+          falseBlockAsString = toSource(nestedIfStatement);
+        } else {
+          falseBlockAsString = "{" + toSource(ifStatement.getFalseBlock()) + "}";
+        }
+
+        return String.format(
+            "if (%s) {%s} else %s", conditionAsString, trueBlockAsString, falseBlockAsString);
+      }
+
+      @Override
+      public String transformBlock(Block block) {
+        List<Statement> statements = block.getStatements();
+        StringBuilder builder = new StringBuilder();
+        for (Statement statement : statements) {
+          builder.append(toSource(statement));
+        }
+
+        return builder.toString();
       }
 
       private String transformQualifier(MemberReference memberRef) {
