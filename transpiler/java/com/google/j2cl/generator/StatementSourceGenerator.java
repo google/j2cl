@@ -26,6 +26,7 @@ import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.CastExpression;
+import com.google.j2cl.ast.EmptyStatement;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldAccess;
@@ -303,6 +304,10 @@ public class StatementSourceGenerator {
         String trueBlockAsString = toSource(ifStatement.getTrueBlock());
 
         Block falseBlock = ifStatement.getFalseBlock();
+
+        if (falseBlock == null) {
+          return String.format("if (%s) {%s}", conditionAsString, trueBlockAsString);
+        }
         String falseBlockAsString = null;
         if (falseBlock.getStatements().size() == 1
             && falseBlock.getStatements().get(0) instanceof IfStatement) {
@@ -314,6 +319,11 @@ public class StatementSourceGenerator {
 
         return String.format(
             "if (%s) {%s} else %s", conditionAsString, trueBlockAsString, falseBlockAsString);
+      }
+
+      @Override
+      public String transformEmptyStatement(EmptyStatement emptyStatement) {
+        return ";";
       }
 
       @Override

@@ -12,5 +12,8 @@ public class IfStatement {
     } else {
       number = 4;
     }
+
+    if (a) number = 5;
+    else number = 6;
   }
 }

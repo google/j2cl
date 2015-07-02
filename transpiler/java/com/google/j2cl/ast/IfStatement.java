@@ -17,6 +17,8 @@ package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.processors.Visitable;
 
+import javax.annotation.Nullable;
+
 /**
  * If Statement.
  */
@@ -24,7 +26,7 @@ import com.google.j2cl.ast.processors.Visitable;
 public class IfStatement extends Statement {
   @Visitable Expression conditionExpression;
   @Visitable Block trueBlock;
-  @Visitable Block falseBlock;
+  @Visitable @Nullable Block falseBlock;
 
   public IfStatement(Expression conditionExpression, Block trueBlock, Block falseBlock) {
     this.conditionExpression = conditionExpression;

@@ -25,6 +25,7 @@ import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.EmptyStatement;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Field;
@@ -297,6 +298,8 @@ public class CompilationUnitBuilder {
           return singletonStatement(convert((org.eclipse.jdt.core.dom.AssertStatement) node));
         case ASTNode.CONSTRUCTOR_INVOCATION:
           return singletonStatement(convert((org.eclipse.jdt.core.dom.ConstructorInvocation) node));
+        case ASTNode.EMPTY_STATEMENT:
+          return singletonStatement(new EmptyStatement());
         case ASTNode.EXPRESSION_STATEMENT:
           return singletonStatement(convert((org.eclipse.jdt.core.dom.ExpressionStatement) node));
         case ASTNode.IF_STATEMENT:
@@ -321,12 +324,7 @@ public class CompilationUnitBuilder {
 
     private WhileStatement convert(org.eclipse.jdt.core.dom.WhileStatement jdtWhileStatement) {
       Expression conditionExpression = convert(jdtWhileStatement.getExpression());
-
-      Block block =
-          jdtWhileStatement.getBody() instanceof org.eclipse.jdt.core.dom.Block
-              ? convert((org.eclipse.jdt.core.dom.Block) jdtWhileStatement.getBody())
-              : new Block(Lists.newArrayList(convert(jdtWhileStatement.getBody())));
-
+      Block block = extractBlock(jdtWhileStatement.getBody());
       return new WhileStatement(conditionExpression, block);
     }
 
@@ -335,17 +333,20 @@ public class CompilationUnitBuilder {
 
       org.eclipse.jdt.core.dom.Statement jdtTrueStatement = jdtIf.getThenStatement();
       org.eclipse.jdt.core.dom.Statement jdtFalseStatement = jdtIf.getElseStatement();
-      Block trueBlock =
-          jdtTrueStatement instanceof org.eclipse.jdt.core.dom.Block
-              ? convert((org.eclipse.jdt.core.dom.Block) jdtTrueStatement)
-              : new Block(Lists.newArrayList(convert(jdtTrueStatement)));
-
-      Block falseBlock =
-          jdtFalseStatement instanceof org.eclipse.jdt.core.dom.Block
-              ? convert((org.eclipse.jdt.core.dom.Block) jdtFalseStatement)
-              : new Block(Lists.newArrayList(convert(jdtFalseStatement)));
+      Block trueBlock = extractBlock(jdtTrueStatement);
+      Block falseBlock = extractBlock(jdtFalseStatement);
 
       return new IfStatement(conditionExpression, trueBlock, falseBlock);
+    }
+
+    private Block extractBlock(org.eclipse.jdt.core.dom.Statement statement) {
+      if (statement == null) {
+        return null;
+      }
+      if (statement instanceof org.eclipse.jdt.core.dom.Block) {
+        return convert((org.eclipse.jdt.core.dom.Block) statement);
+      }
+      return new Block(Lists.newArrayList(convert(statement)));
     }
 
     private InstanceOfExpression convert(org.eclipse.jdt.core.dom.InstanceofExpression node) {

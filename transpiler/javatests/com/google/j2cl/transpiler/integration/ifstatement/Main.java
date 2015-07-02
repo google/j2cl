@@ -47,5 +47,19 @@ public class Main {
     }
 
     assert count == 3;
+
+    // Make sure we add a block for ifs without a block
+    if (count == 3) count = 4;
+    assert count == 4;
+
+    if (count != 4) assert false;
+    else count = 5;
+
+    assert count == 5;
+
+    if (count == 5) ;
+    else count = 6;
+
+    assert count == 5;
   }
 }
