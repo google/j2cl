@@ -1,0 +1,99 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/dowhilestatement/DoWhileStatement.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.dowhilestatement.DoWhileStatementModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+class DoWhileStatement extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_dowhilestatement_DoWhileStatement() {
+  }
+
+  /**
+   * @public
+   */
+  m_test() {
+    var count = 0;
+    do {
+      count++;
+    } while (count < 5);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!DoWhileStatement}
+   * @public
+   */
+  static $create() {
+    DoWhileStatement.$clinit();
+    var instance = new DoWhileStatement;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_dowhilestatement_DoWhileStatement();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_dowhilestatement_DoWhileStatement() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_dowhilestatement_DoWhileStatement();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof DoWhileStatement; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, DoWhileStatement);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+DoWhileStatement.$class = Class.$createForClass(
+    Util.$generateId('DoWhileStatement'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.dowhilestatement.DoWhileStatement'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.dowhilestatement.DoWhileStatement'));
+
+/**
+ * Export class.
+ */
+exports.DoWhileStatement = DoWhileStatement;

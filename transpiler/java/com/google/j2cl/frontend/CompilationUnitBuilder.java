@@ -25,6 +25,7 @@ import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.DoWhileStatement;
 import com.google.j2cl.ast.EmptyStatement;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
@@ -298,6 +299,8 @@ public class CompilationUnitBuilder {
           return singletonStatement(convert((org.eclipse.jdt.core.dom.AssertStatement) node));
         case ASTNode.CONSTRUCTOR_INVOCATION:
           return singletonStatement(convert((org.eclipse.jdt.core.dom.ConstructorInvocation) node));
+        case ASTNode.DO_STATEMENT:
+          return singletonStatement(convert((org.eclipse.jdt.core.dom.DoStatement) node));
         case ASTNode.EMPTY_STATEMENT:
           return singletonStatement(new EmptyStatement());
         case ASTNode.EXPRESSION_STATEMENT:
@@ -320,6 +323,12 @@ public class CompilationUnitBuilder {
                   + " file triggering this: "
                   + currentSourceFile);
       }
+    }
+
+    private DoWhileStatement convert(org.eclipse.jdt.core.dom.DoStatement jdtDoStatement) {
+      Block block = extractBlock(jdtDoStatement.getBody());
+      Expression conditionExpression = convert(jdtDoStatement.getExpression());
+      return new DoWhileStatement(conditionExpression, block);
     }
 
     private WhileStatement convert(org.eclipse.jdt.core.dom.WhileStatement jdtWhileStatement) {

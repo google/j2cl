@@ -26,6 +26,7 @@ import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.CastExpression;
+import com.google.j2cl.ast.DoWhileStatement;
 import com.google.j2cl.ast.EmptyStatement;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
@@ -331,6 +332,13 @@ public class StatementSourceGenerator {
         String conditionAsString = toSource(whileStatement.getConditionExpression());
         String blockAsString = toSource(whileStatement.getBlock());
         return String.format("while (%s) {%s}", conditionAsString, blockAsString);
+      }
+
+      @Override
+      public String transformDoWhileStatement(DoWhileStatement doWhileStatement) {
+        String conditionAsString = toSource(doWhileStatement.getConditionExpression());
+        String blockAsString = toSource(doWhileStatement.getBlock());
+        return String.format("do {%s} while(%s);", blockAsString, conditionAsString);
       }
 
       @Override
