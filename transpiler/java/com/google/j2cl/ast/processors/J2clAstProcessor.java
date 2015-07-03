@@ -54,6 +54,7 @@ import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.util.ElementFilter;
@@ -89,8 +90,27 @@ public class J2clAstProcessor extends AbstractProcessor {
       // Create abstract visitor class
 
       for (String packageName : processedVisitableClassesByPackageName.keySet()) {
+
+        PackageElement packageElement =
+            processingEnv.getElementUtils().getPackageElement(packageName);
         List<VisitableClass> classes =
-            new ArrayList<>(processedVisitableClassesByPackageName.get(packageName));
+            FluentIterable.from(ElementFilter.typesIn(packageElement.getEnclosedElements()))
+                .filter(
+                    new Predicate<TypeElement>() {
+                      @Override
+                      public boolean apply(TypeElement input) {
+                        return isAnnotationPresent(input, Visitable.class);
+                      }
+                    })
+                .transform(
+                    new Function<TypeElement, VisitableClass>() {
+                      @Override
+                      public VisitableClass apply(TypeElement input) {
+                        return extractVisitableClass(input);
+                      }
+                    })
+                .toList();
+
         writeGeneralClass(ABSTRACT_VISITOR_TEMPLATE_FILE, "AbstractVisitor", packageName, classes);
         writeGeneralClass(
             ABSTRACT_REWRITER_TEMPLATE_FILE, "AbstractRewriter", packageName, classes);
