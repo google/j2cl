@@ -90,6 +90,7 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
       deps=[":" + name + "_js_library"],
+      tags = ["manual", "notap"],
   )
   # For constructing readable optimized diffs.
   native.js_binary(
@@ -110,6 +111,7 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
       deps=[":" + name + "_js_library"],
+      tags = ["manual", "notap"],
   )
 
   # blaze test :uncompiled_test
