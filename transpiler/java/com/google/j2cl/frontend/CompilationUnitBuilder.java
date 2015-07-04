@@ -50,6 +50,7 @@ import com.google.j2cl.ast.RegularTypeReference;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.StringLiteral;
+import com.google.j2cl.ast.TernaryExpression;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
@@ -246,6 +247,8 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.CastExpression) node);
         case ASTNode.CLASS_INSTANCE_CREATION:
           return convert((org.eclipse.jdt.core.dom.ClassInstanceCreation) node);
+        case ASTNode.CONDITIONAL_EXPRESSION:
+          return convert((org.eclipse.jdt.core.dom.ConditionalExpression) node);
         case ASTNode.FIELD_ACCESS:
           return convert((org.eclipse.jdt.core.dom.FieldAccess) node);
         case ASTNode.INFIX_EXPRESSION:
@@ -291,6 +294,14 @@ public class CompilationUnitBuilder {
                   return convert(expression);
                 }
               }));
+    }
+
+    private TernaryExpression convert(
+        org.eclipse.jdt.core.dom.ConditionalExpression jdtConditionalExpression) {
+      Expression conditionExpression = convert(jdtConditionalExpression.getExpression());
+      Expression trueExpression = convert(jdtConditionalExpression.getThenExpression());
+      Expression falseExpression = convert(jdtConditionalExpression.getElseExpression());
+      return new TernaryExpression(conditionExpression, trueExpression, falseExpression);
     }
 
     private Collection<Statement> convert(org.eclipse.jdt.core.dom.Statement node) {

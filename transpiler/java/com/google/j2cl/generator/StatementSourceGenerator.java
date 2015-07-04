@@ -50,6 +50,7 @@ import com.google.j2cl.ast.RegularTypeReference;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.StringLiteral;
+import com.google.j2cl.ast.TernaryExpression;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.VariableDeclaration;
@@ -325,6 +326,18 @@ public class StatementSourceGenerator {
       @Override
       public String transformEmptyStatement(EmptyStatement emptyStatement) {
         return ";";
+      }
+
+      @Override
+      public String transformTernaryExpression(TernaryExpression ternaryExpression) {
+        String conditionExpressionAsString = toSource(ternaryExpression.getConditionExpression());
+        String trueExpressionAsString = toSource(ternaryExpression.getTrueExpression());
+        String falseExpressionAsString = toSource(ternaryExpression.getFalseExpression());
+        return String.format(
+            "%s ? %s : %s",
+            conditionExpressionAsString,
+            trueExpressionAsString,
+            falseExpressionAsString);
       }
 
       @Override
