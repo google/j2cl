@@ -50,20 +50,23 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   @Override
   public void exitRegularTypeReference(RegularTypeReference typeReference) {
-    if (!typeReference.isPrimitive()) {
-      typeReferences.add(typeReference);
+    if (typeReference.isPrimitive()) {
+      return;
     }
+    typeReferences.add(typeReference);
   }
 
   @Override
   public void exitField(Field field) {
     TypeReference typeReference = field.getSelfReference().getType();
-    if (typeReference instanceof RegularTypeReference) {
-      RegularTypeReference regularTypeReference = (RegularTypeReference) typeReference;
-      if (!regularTypeReference.isPrimitive()) {
-        typeReferences.add(regularTypeReference);
-      }
+    if (!(typeReference instanceof RegularTypeReference)) {
+      return;
     }
+    RegularTypeReference regularTypeReference = (RegularTypeReference) typeReference;
+    if (regularTypeReference.isPrimitive()) {
+      return;
+    }
+    typeReferences.add(regularTypeReference);
   }
 
   @Override
@@ -110,6 +113,10 @@ public class ImportGatheringVisitor extends AbstractVisitor {
                   @Nullable
                   @Override
                   public Import apply(TypeReference typeReference) {
+                    // TODO: if there are multiple of these exceptions then create a pattern for it.
+                    if (typeReference == TypeReference.OBJECTS_TYPEREF) {
+                      return Import.IMPORT_VM_OBJECTS;
+                    }
                     return new Import(typeReference);
                   }
                 })

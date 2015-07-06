@@ -30,6 +30,7 @@ public class Import extends Node implements Comparable<Import> {
   public static final Import IMPORT_VM_ASSERTS = new Import("Asserts", "vmbootstrap.AssertsModule");
   public static final Import IMPORT_VM_ARRAYS = new Import("Arrays", "vmbootstrap.ArraysModule");
   public static final Import IMPORT_VM_CASTS = new Import("Casts", "vmbootstrap.CastsModule");
+  public static final Import IMPORT_VM_OBJECTS = new Import("Objects", "vmbootstrap.ObjectsModule");
 
   private String className;
   private String moduleName;
@@ -45,9 +46,7 @@ public class Import extends Node implements Comparable<Import> {
   }
 
   public Import(TypeReference typeReference) {
-    this(
-        typeReference.getClassName(),
-        "gen." + typeReference.getCompilationUnitSourceName() + "Module");
+    this(typeReference.getClassName(), typeReference.computeModuleName());
   }
 
   public String getClassName() {

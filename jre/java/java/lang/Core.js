@@ -233,6 +233,26 @@ class Class {
   }
 
   /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {Object} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Class;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, Class);
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    */
@@ -425,8 +445,10 @@ class Object {
    * @public
    */
   m_toString() {
-    // TODO: implement properly.
-    return '';
+    // TODO: fix this implementation. The hash code should be returned in hex
+    // but can't currently depend on Integer to get access to that static
+    // function because Closure doesn't yet support module circular references.
+    return this.constructor.$class.m_getName() + '@' + this.m_hashCode();
   }
 
   /**
@@ -464,10 +486,11 @@ class Object {
 
 
 /**
-* @public {Class}
+ * @public {Class}
  */
-Object.$class = Class.$createForClass(Util.$generateId('java.lang.Object'),
-                                      Util.$generateId('Object'), null);
+Object.$class = Class.$createForClass(
+    Util.$generateId('Object'), Util.$generateId('java.lang.Object'), null,
+    Util.$generateId('java.lang.Object'));
 
 
 /**
@@ -475,8 +498,9 @@ Object.$class = Class.$createForClass(Util.$generateId('java.lang.Object'),
  * literal exists, so that it is not a reference error.
  * @public {Class}
  */
-Class.$class = Class.$createForClass(Util.$generateId('java.lang.Class'),
-                                     Util.$generateId('Class'), Object.$class);
+Class.$class = Class.$createForClass(
+  Util.$generateId('Class'), Util.$generateId('java.lang.Class'), Object.$class,
+  Util.$generateId('java.lang.Class'));
 
 
 /**
@@ -525,6 +549,14 @@ Class.$doubleLiteral = Class.$createForPrimitive('double');
  * @public {Class}
  */
 Class.$charLiteral = Class.$createForPrimitive('char');
+
+
+/**
+ * @public {Class}
+ */
+Class.$stringLiteral = Class.$createForClass(
+    Util.$generateId('String'), Util.$generateId('java.lang.String'),
+    Object.$class, Util.$generateId('java.lang.String'));
 
 
 /**

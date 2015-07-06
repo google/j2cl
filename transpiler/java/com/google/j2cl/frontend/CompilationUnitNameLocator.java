@@ -42,7 +42,7 @@ public class CompilationUnitNameLocator {
     @Override
     public boolean visit(TypeDeclaration node) {
       ITypeBinding typeBinding = node.resolveBinding();
-      sourceUnitNamesByTypeBinding.put(typeBinding, currentCompilationUnitName);
+      sourceUnitNamesByTypeBinaryName.put(typeBinding.getBinaryName(), currentCompilationUnitName);
       return super.visit(node);
     }
   }
@@ -62,7 +62,7 @@ public class CompilationUnitNameLocator {
 
   private final INameEnvironment binaryNameEnvironment;
   private String currentCompilationUnitName;
-  private final Map<ITypeBinding, String> sourceUnitNamesByTypeBinding = new HashMap<>();
+  private final Map<String, String> sourceUnitNamesByTypeBinaryName = new HashMap<>();
   private final Errors errors;
 
   public CompilationUnitNameLocator(
@@ -98,8 +98,8 @@ public class CompilationUnitNameLocator {
       return null;
     }
 
-    if (sourceUnitNamesByTypeBinding.containsKey(typeBinding)) {
-      return sourceUnitNamesByTypeBinding.get(typeBinding);
+    if (sourceUnitNamesByTypeBinaryName.containsKey(typeBinding.getBinaryName())) {
+      return sourceUnitNamesByTypeBinaryName.get(typeBinding.getBinaryName());
     }
 
     String binaryCompilationUnitName = getBinaryCompilationUnitName(typeBinding);
@@ -108,7 +108,7 @@ public class CompilationUnitNameLocator {
     }
 
     // Most likely resulting from a missing dependency.
-    errors.error(Errors.ERR_CANNOT_FIND_UNIT, typeBinding.getQualifiedName());
+    errors.error(Errors.ERR_CANNOT_FIND_UNIT, typeBinding.getBinaryName());
     return null;
   }
 
@@ -118,7 +118,7 @@ public class CompilationUnitNameLocator {
     }
 
     NameEnvironmentAnswer answer =
-        binaryNameEnvironment.findType(toCompoundName(typeBinding.getQualifiedName()));
+        binaryNameEnvironment.findType(toCompoundName(typeBinding.getBinaryName()));
     if (answer != null && answer.isBinaryType()) {
       return removeExtension(new String(answer.getBinaryType().sourceFileName()));
     }

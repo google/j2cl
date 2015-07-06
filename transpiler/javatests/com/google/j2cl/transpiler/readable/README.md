@@ -44,6 +44,7 @@ are copyright and licensed as follows:
 
 ## Likely readable examples to add (remove some redundant)
 - anonymousclasswithcapture
+- array devirtualization
 - block scoped variables
 - boxing
 - bridgemethodaccidentaloverride
@@ -88,6 +89,7 @@ are copyright and licensed as follows:
 - nonstaticnestedclasses
 - notimportinternals
 - numbermethods
+- number devirtualization
 - objectmethods
 - overloadedconstructors
 - overloadedmethodswithdeclaredtype
@@ -107,7 +109,6 @@ are copyright and licensed as follows:
 - simpleenum
 - simplegenerictype
 - simplelambda
-- string devirtualization
 - subclassgenericclass
 - subclassgenericclasswithparam
 - supercall

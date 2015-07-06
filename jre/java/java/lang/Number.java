@@ -15,10 +15,7 @@ package java.lang;
 
 /**
  * See <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html">the
+ * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Number.html">the
  * official Java API doc</a> for details.
  */
-public class Class<T> implements java.io.Serializable {
-  public String getName() {return null;}
-  public boolean isArray() {return false;}
-}
+public class Number {}

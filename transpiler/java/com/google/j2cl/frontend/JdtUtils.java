@@ -86,7 +86,7 @@ public class JdtUtils {
 
     ITypeBinding currentType = typeBinding;
     while (currentType != null) {
-      nameComponents.add(0, currentType.getName());
+      nameComponents.add(0, currentType.getErasure().getName());
       currentType = currentType.getDeclaringClass();
     }
 

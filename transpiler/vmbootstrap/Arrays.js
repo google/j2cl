@@ -13,9 +13,11 @@ var ArrayStoreException =
 var Cloneable = goog.require('gen.java.lang.CloneableModule').Cloneable;
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Integer = goog.require('gen.java.lang.IntegerModule').Integer;
 var NullPointerException =
   goog.require('gen.java.lang.NullPointerExceptionModule')
     .NullPointerException;
+var Hashing = goog.require('nativebootstrap.HashingModule').Hashing;
 var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
 var $byte = goog.require('vmbootstrap.PrimitivesModule').$byte;
 var $char = goog.require('vmbootstrap.PrimitivesModule').$char;
@@ -32,7 +34,7 @@ var $short = goog.require('vmbootstrap.PrimitivesModule').$short;
 
 
 /**
- * Static Array helper functions.
+ * Static Array helper and devirtualized functions.
  *
  * @public
  */
@@ -197,6 +199,44 @@ class Arrays {
       return Object.$isAssignableFrom(requiredLeafType);
     }
     return false;
+  }
+
+  /**
+   * @param {?} obj
+   * @param {?} other
+   * @return {boolean}
+   * @public
+   */
+  static m_equals__java_lang_Object__java_lang_Object(obj, other) {
+    return obj === other;
+  }
+
+  /**
+   * @param {?} obj
+   * @return {number}
+   * @public
+   */
+  static m_hashCode__java_lang_Object(obj) {
+    return Hashing.$getHashCode(obj);
+  }
+
+  /**
+   * @param {?} obj
+   * @return {?string}
+   * @public
+   */
+  static m_toString__java_lang_Object(obj) {
+    return obj.$class.m_getName() + '@' +
+        Integer.m_toHexString__int(Hashing.$getHashCode(obj));
+  }
+
+  /**
+   * @param {?} obj
+   * @return {Class}
+   * @public
+   */
+  static m_getClass__java_lang_Object(obj) {
+    return obj.$class;
   }
 
   /**

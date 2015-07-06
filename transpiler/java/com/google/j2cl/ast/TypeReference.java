@@ -27,6 +27,16 @@ import java.util.Arrays;
 public abstract class TypeReference extends Expression implements Comparable<TypeReference> {
   public static final TypeReference VOID_TYPEREF =
       RegularTypeReference.create(new ArrayList<String>(), Arrays.asList("void"), "");
+  public static final TypeReference OBJECT_TYPEREF =
+      RegularTypeReference.create(Arrays.asList("java", "lang"), Arrays.asList("Object"), "Object");
+
+  /**
+   * Implements devirtualized Object methods that allow us to special case some behavior and treat
+   * some native JS classes as the same and some matching Java classes.
+   */
+  public static final TypeReference OBJECTS_TYPEREF =
+      RegularTypeReference.create(
+          Arrays.asList("vmbootstrap"), Arrays.asList("Objects"), "Objects");
 
   public abstract String getBinaryName();
 
@@ -45,6 +55,10 @@ public abstract class TypeReference extends Expression implements Comparable<Typ
   public abstract int getDimensions();
 
   public abstract TypeReference getLeafTypeRef();
+
+  public String computeModuleName() {
+    return "gen." + getCompilationUnitSourceName() + "Module";
+  }
 
   @Override
   public int compareTo(TypeReference that) {

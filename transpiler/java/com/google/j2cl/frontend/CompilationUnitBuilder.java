@@ -76,6 +76,7 @@ import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.Initializer;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
+import org.eclipse.jdt.core.dom.MethodInvocation;
 import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 
@@ -94,11 +95,14 @@ public class CompilationUnitBuilder {
 
   private class ASTConverter {
     private Map<IVariableBinding, Variable> variableByJdtBinding = new HashMap<>();
+    private ITypeBinding javaLangObjectBinding;
 
     private String currentSourceFile;
 
     private CompilationUnit convert(
         String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
+      javaLangObjectBinding = jdtCompilationUnit.getAST().resolveWellKnownType("java.lang.Object");
+
       currentSourceFile = sourceFilePath;
       String packageName = JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit);
       CompilationUnit j2clCompilationUnit = new CompilationUnit(sourceFilePath, packageName);
@@ -493,12 +497,53 @@ public class CompilationUnitBuilder {
 
     private MethodCall convert(org.eclipse.jdt.core.dom.MethodInvocation node) {
       IMethodBinding methodBinding = node.resolveMethodBinding();
+
+      // Perform Object method devirtualization.
+      if (isObjectMethodBinding(methodBinding)) {
+        return createDevirtualizedObjectMethodCall(node);
+      }
+
       Expression qualifier = node.getExpression() == null ? null : convert(node.getExpression());
       MethodReference methodRef =
           JdtUtils.createMethodReference(methodBinding, compilationUnitNameLocator);
       @SuppressWarnings("unchecked")
       List<Expression> arguments = convert(node.arguments());
       return new MethodCall(qualifier, methodRef, arguments);
+    }
+
+    private MethodCall createDevirtualizedObjectMethodCall(MethodInvocation node) {
+      IMethodBinding methodBinding = node.resolveMethodBinding();
+      Expression originalQualifier =
+          node.getExpression() == null ? null : convert(node.getExpression());
+      String methodName = methodBinding.getName();
+      TypeReference returnTypeReference =
+          JdtUtils.createTypeReference(methodBinding.getReturnType(), compilationUnitNameLocator);
+      int originalParameterCount = methodBinding.getParameterTypes().length;
+
+      TypeReference[] parameterTypeReferences = new TypeReference[originalParameterCount + 1];
+      // Turn the instance into now a first parameter to the devirtualized method.
+      parameterTypeReferences[0] = TypeReference.OBJECT_TYPEREF;
+      for (int i = 0; i < originalParameterCount; i++) {
+        parameterTypeReferences[i + 1] =
+            JdtUtils.createTypeReference(
+                methodBinding.getParameterTypes()[i], compilationUnitNameLocator);
+      }
+      MethodReference methodRef =
+          MethodReference.create(
+              true, // Static method.
+              JdtUtils.getVisibility(methodBinding.getModifiers()),
+              TypeReference.OBJECTS_TYPEREF, // Enclosing class reference.
+              methodName,
+              false, // Not a constructor.
+              returnTypeReference,
+              parameterTypeReferences);
+      @SuppressWarnings("unchecked")
+
+      List<Expression> arguments = convert(node.arguments());
+      // Turn the instance into now a first parameter to the devirtualized method.
+      arguments.add(0, originalQualifier);
+      // Call the method like Objects.foo(instance, ...)
+      return new MethodCall(TypeReference.OBJECTS_TYPEREF, methodRef, arguments);
     }
 
     @SuppressWarnings("unused")
@@ -666,6 +711,15 @@ public class CompilationUnitBuilder {
         type.addSuperInterfaceRef(createTypeReference(superInterface));
       }
       return type;
+    }
+
+    private boolean isObjectMethodBinding(IMethodBinding methodBinding) {
+      for (IMethodBinding objectMethodBinding : javaLangObjectBinding.getDeclaredMethods()) {
+        if (methodBinding == objectMethodBinding || methodBinding.overrides(objectMethodBinding)) {
+          return true;
+        }
+      }
+      return false;
     }
   }
 

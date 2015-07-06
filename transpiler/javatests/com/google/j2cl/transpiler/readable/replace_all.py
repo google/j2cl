@@ -106,9 +106,11 @@ def gather_closure_warnings():
   build_logs = filter(None, build_logs)
   for build_log in build_logs:
     # Remove unstable build timing lines.
-    build_log = "\n".join(
-        [line for line in build_log.splitlines()
-         if not line.startswith("_") and "Running" not in line])
+    build_log = "\n".join([
+        line for line in build_log.splitlines()
+        if not line.startswith("_") and
+        "  Compiling" not in line and
+        "Running" not in line])
 
     # Filter out the unstable ", ##% typed" message
     percent_typed_msg = (

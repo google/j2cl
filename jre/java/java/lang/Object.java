@@ -20,15 +20,23 @@ package java.lang;
  */
 public class Object {
 
-  public boolean equals(Object obj) {
+  public boolean equals(Object that) {
+    // Super-source replaced.
     return false;
   }
 
-  public String toString() {
+  public final Class<?> getClass() {
+    // Super-source replaced.
     return null;
   }
 
-  public Class getClass() {
+  public int hashCode() {
+    // Super-source replaced.
+    return 0;
+  }
+
+  public String toString() {
+    // Super-source replaced.
     return null;
   }
 }
