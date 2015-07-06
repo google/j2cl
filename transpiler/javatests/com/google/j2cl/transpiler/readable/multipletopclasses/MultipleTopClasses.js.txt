@@ -1,0 +1,171 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/multipletopclasses/MultipleTopClasses.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.multipletopclasses.MultipleTopClassesModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+class AnotherClass extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_multipletopclasses_AnotherClass() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!AnotherClass}
+   * @public
+   */
+  static $create() {
+    AnotherClass.$clinit();
+    var instance = new AnotherClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_multipletopclasses_AnotherClass();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_multipletopclasses_AnotherClass() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_multipletopclasses_AnotherClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof AnotherClass; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, AnotherClass);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+AnotherClass.$class = Class.$createForClass(
+    Util.$generateId('AnotherClass'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.multipletopclasses.AnotherClass'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.multipletopclasses.AnotherClass'));
+
+/**
+ * Export class.
+ */
+exports.AnotherClass = AnotherClass;
+
+
+
+class MultipleTopClasses extends AnotherClass {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_multipletopclasses_MultipleTopClasses() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!MultipleTopClasses}
+   * @public
+   */
+  static $create() {
+    MultipleTopClasses.$clinit();
+    var instance = new MultipleTopClasses;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_multipletopclasses_MultipleTopClasses();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_multipletopclasses_MultipleTopClasses() {
+    this.$ctor__com_google_j2cl_transpiler_readable_multipletopclasses_AnotherClass();
+    this.$init__com_google_j2cl_transpiler_readable_multipletopclasses_MultipleTopClasses();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof MultipleTopClasses;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, MultipleTopClasses);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { AnotherClass.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+MultipleTopClasses.$class = Class.$createForClass(
+    Util.$generateId('MultipleTopClasses'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.multipletopclasses.MultipleTopClasses'),
+    AnotherClass.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.multipletopclasses.MultipleTopClasses'));
+
+/**
+ * Export class.
+ */
+exports.MultipleTopClasses = MultipleTopClasses;
