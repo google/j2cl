@@ -19,6 +19,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.AbstractVisitor;
+import com.google.j2cl.ast.ArrayTypeReference;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
@@ -76,6 +77,12 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   @Override
   public void exitCastExpression(CastExpression castExpression) {
+    if (castExpression.getCastType() instanceof ArrayTypeReference) {
+      // Arrays.$castTo()
+      importModules.add(Import.IMPORT_VM_ARRAYS);
+      return;
+    }
+    // Casts.$to()
     importModules.add(Import.IMPORT_VM_CASTS);
   }
 

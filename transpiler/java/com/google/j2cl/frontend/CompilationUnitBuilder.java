@@ -672,7 +672,6 @@ public class CompilationUnitBuilder {
       return UnionTypeReference.create(types);
     }
 
-
     private VariableDeclarationFragment convert(
         org.eclipse.jdt.core.dom.VariableDeclarationFragment node) {
       IVariableBinding variableBinding = node.resolveBinding();

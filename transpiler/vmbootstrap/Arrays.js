@@ -18,6 +18,7 @@ var NullPointerException =
   goog.require('gen.java.lang.NullPointerExceptionModule')
     .NullPointerException;
 var Hashing = goog.require('nativebootstrap.HashingModule').Hashing;
+var Casts = goog.require('vmbootstrap.CastsModule').Casts;
 var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
 var $byte = goog.require('vmbootstrap.PrimitivesModule').$byte;
 var $char = goog.require('vmbootstrap.PrimitivesModule').$char;
@@ -158,8 +159,8 @@ class Arrays {
       // have it.
       if (array.leafType != null) {
         if (array.dimensionCount > 1) {
-          if (!Arrays.$instanceIsOfType(
-                  value, array.leafType, array.dimensionCount - 1)) {
+          if (!Arrays.$instanceIsOfType(value, array.leafType,
+                                        array.dimensionCount - 1)) {
             // The inserted array must fit dimensions and the array leaf
             // type.
             Arrays.$throwArrayStoreException();
@@ -202,6 +203,24 @@ class Arrays {
   }
 
   /**
+   * Casts the provided instance to the provided array type.
+   * <p>
+   * If the cast is invalid then an exception will be thrown otherwise the
+   * provided instance is returned.
+   *
+   * @param {?} instance
+   * @param {Function} requiredLeafType
+   * @param {number} requiredDimensionCount
+   * @return {?}
+   * @public
+   */
+  static $castTo(instance, requiredLeafType, requiredDimensionCount) {
+    return Casts.to(instance,
+                    Arrays.$instanceIsOfType(instance, requiredLeafType,
+                                             requiredDimensionCount));
+  }
+
+  /**
    * @param {?} obj
    * @param {?} other
    * @return {boolean}
@@ -216,9 +235,7 @@ class Arrays {
    * @return {number}
    * @public
    */
-  static m_hashCode__java_lang_Object(obj) {
-    return Hashing.$getHashCode(obj);
-  }
+  static m_hashCode__java_lang_Object(obj) { return Hashing.$getHashCode(obj); }
 
   /**
    * @param {?} obj
@@ -227,7 +244,7 @@ class Arrays {
    */
   static m_toString__java_lang_Object(obj) {
     return obj.$class.m_getName() + '@' +
-        Integer.m_toHexString__int(Hashing.$getHashCode(obj));
+           Integer.m_toHexString__int(Hashing.$getHashCode(obj));
   }
 
   /**
@@ -235,9 +252,7 @@ class Arrays {
    * @return {Class}
    * @public
    */
-  static m_getClass__java_lang_Object(obj) {
-    return obj.$class;
-  }
+  static m_getClass__java_lang_Object(obj) { return obj.$class; }
 
   /**
    * Isolates the exception throw here so that calling functions that perform
@@ -255,9 +270,7 @@ class Arrays {
    *
    * @private
    */
-  static $throwArrayStoreException() {
-    throw ArrayStoreException.$create();
-  }
+  static $throwArrayStoreException() { throw ArrayStoreException.$create(); }
 
   /**
    * Isolates the exception throw here so that calling functions that perform
@@ -265,9 +278,7 @@ class Arrays {
    *
    * @private
    */
-  static $throwNullPointerException() {
-    throw NullPointerException.$create();
-  }
+  static $throwNullPointerException() { throw NullPointerException.$create(); }
 
   /**
    * Creates, initializes, and returns a byte array with the given number of

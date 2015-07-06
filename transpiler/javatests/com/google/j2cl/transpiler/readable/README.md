@@ -52,7 +52,6 @@ are copyright and licensed as follows:
 - bridgemethodmultipleoverrides
 - bridgemethodmultipletypevars
 - cascadedclinitrunsjustonce
-- casttoarray
 - casttointerface
 - casttoprimitive
 - catchjsexception

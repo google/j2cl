@@ -21,6 +21,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractTransformer;
 import com.google.j2cl.ast.ArrayAccess;
+import com.google.j2cl.ast.ArrayTypeReference;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.Block;
@@ -142,19 +143,44 @@ public class StatementSourceGenerator {
       @Override
       public String transformCastExpression(CastExpression expression) {
         TypeReference castType = expression.getCastType();
-        if (castType.isArray()) {
-          throw new RuntimeException("TODO: Implement toSource() for cast to array type");
+        if (castType instanceof ArrayTypeReference) {
+          return transformArrayCastExpression(expression);
+        } else if (castType instanceof RegularTypeReference) {
+          return transformRegularCastExpression(expression);
         }
-        RegularTypeReference regularTypeRef = (RegularTypeReference) castType;
+        throw new RuntimeException(
+            "TODO: Implement toSource() for cast to " + castType.getClass().getName());
+      }
+
+      private String transformRegularCastExpression(CastExpression castExpression) {
+        Preconditions.checkArgument(castExpression.getCastType() instanceof RegularTypeReference);
+        RegularTypeReference regularTypeRef = (RegularTypeReference) castExpression.getCastType();
+
         if (regularTypeRef.isPrimitive()) {
           throw new RuntimeException("TODO: Implement toSource() for cast to primitive type");
         }
+
         String jsDocTypeName = TranspilerUtils.getJsDocName(regularTypeRef);
         String typeName = TranspilerUtils.getClassName(regularTypeRef);
-        String expressionStr = toSource(expression.getExpression());
+        String expressionStr = toSource(castExpression.getExpression());
         String isInstanceCallStr = String.format("%s.$isInstance(%s)", typeName, expressionStr);
         return String.format(
             "/**@type {%s} */ (Casts.to(%s, %s))", jsDocTypeName, expressionStr, isInstanceCallStr);
+      }
+
+      private String transformArrayCastExpression(CastExpression castExpression) {
+        Preconditions.checkArgument(castExpression.getCastType() instanceof ArrayTypeReference);
+        ArrayTypeReference arrayCastType = (ArrayTypeReference) castExpression.getCastType();
+
+        String jsDocTypeName = TranspilerUtils.getJsDocName(arrayCastType);
+        String leafTypeName = TranspilerUtils.getClassName(arrayCastType.getLeafTypeRef());
+        String expressionStr = toSource(castExpression.getExpression());
+        return String.format(
+            "/**@type {%s} */ (Arrays.$castTo(%s, %s, %s))",
+            jsDocTypeName,
+            expressionStr,
+            leafTypeName,
+            arrayCastType.getDimensions());
       }
 
       @Override
