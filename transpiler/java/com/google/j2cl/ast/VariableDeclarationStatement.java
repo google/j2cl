@@ -18,28 +18,27 @@ package com.google.j2cl.ast;
 import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
+import java.util.List;
+
 /**
- * Class for variable reference.
+ * Represents a variable declaration statement.
  */
 @Visitable
-public class VariableReference extends Expression {
-  @Visitable Variable target;
+public class VariableDeclarationStatement extends Statement {
 
-  public VariableReference(Variable target) {
-    Preconditions.checkNotNull(target);
-    this.target = target;
+  @Visitable List<VariableDeclarationFragment> fragments;
+
+  public VariableDeclarationStatement(List<VariableDeclarationFragment> fragments) {
+    Preconditions.checkNotNull(fragments);
+    this.fragments = fragments;
   }
 
-  public Variable getTarget() {
-    return target;
-  }
-
-  public void setTarget(Variable target) {
-    this.target = target;
+  public List<VariableDeclarationFragment> getFragments() {
+    return fragments;
   }
 
   @Override
-  public VariableReference accept(Processor processor) {
-    return Visitor_VariableReference.visit(processor, this);
+  public VariableDeclarationStatement accept(Processor processor) {
+    return Visitor_VariableDeclarationStatement.visit(processor, this);
   }
 }

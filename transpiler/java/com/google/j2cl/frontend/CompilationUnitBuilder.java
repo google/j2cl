@@ -32,6 +32,7 @@ import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldReference;
+import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaType;
@@ -54,7 +55,9 @@ import com.google.j2cl.ast.TernaryExpression;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
-import com.google.j2cl.ast.VariableDeclaration;
+import com.google.j2cl.ast.VariableDeclarationExpression;
+import com.google.j2cl.ast.VariableDeclarationFragment;
+import com.google.j2cl.ast.VariableDeclarationStatement;
 import com.google.j2cl.ast.VariableReference;
 import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.errors.Errors;
@@ -71,7 +74,6 @@ import org.eclipse.jdt.core.dom.Initializer;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
-import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -156,7 +158,8 @@ public class CompilationUnitBuilder {
     private List<Field> convert(FieldDeclaration node) {
       List<Field> fields = new ArrayList<>();
       for (Object object : node.fragments()) {
-        VariableDeclarationFragment fragment = (VariableDeclarationFragment) object;
+        org.eclipse.jdt.core.dom.VariableDeclarationFragment fragment =
+            (org.eclipse.jdt.core.dom.VariableDeclarationFragment) object;
         Expression initializer =
             fragment.getInitializer() == null ? null : convert(fragment.getInitializer());
         fields.add(
@@ -275,6 +278,8 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.StringLiteral) node);
         case ASTNode.THIS_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.ThisExpression) node);
+        case ASTNode.VARIABLE_DECLARATION_EXPRESSION:
+          return convert((org.eclipse.jdt.core.dom.VariableDeclarationExpression) node);
         default:
           throw new RuntimeException(
               "Need to implement translation for expression type: "
@@ -282,6 +287,20 @@ public class CompilationUnitBuilder {
                   + " file triggering this: "
                   + currentSourceFile);
       }
+    }
+
+    private VariableDeclarationExpression convert(
+        org.eclipse.jdt.core.dom.VariableDeclarationExpression node) {
+      @SuppressWarnings("unchecked")
+      List<org.eclipse.jdt.core.dom.VariableDeclarationFragment> fragments = node.fragments();
+
+      List<VariableDeclarationFragment> variableDeclarations = new ArrayList<>();
+
+      for (org.eclipse.jdt.core.dom.VariableDeclarationFragment variableDeclarationFragment :
+          fragments) {
+        variableDeclarations.add(convert(variableDeclarationFragment));
+      }
+      return new VariableDeclarationExpression(variableDeclarations);
     }
 
     private List<Expression> convert(List<org.eclipse.jdt.core.dom.Expression> nodes) {
@@ -316,6 +335,8 @@ public class CompilationUnitBuilder {
           return singletonStatement(new EmptyStatement());
         case ASTNode.EXPRESSION_STATEMENT:
           return singletonStatement(convert((org.eclipse.jdt.core.dom.ExpressionStatement) node));
+        case ASTNode.FOR_STATEMENT:
+          return singletonStatement(convert((org.eclipse.jdt.core.dom.ForStatement) node));
         case ASTNode.IF_STATEMENT:
           return singletonStatement(convert((org.eclipse.jdt.core.dom.IfStatement) node));
         case ASTNode.RETURN_STATEMENT:
@@ -324,7 +345,8 @@ public class CompilationUnitBuilder {
           return singletonStatement(
               convert((org.eclipse.jdt.core.dom.SuperConstructorInvocation) node));
         case ASTNode.VARIABLE_DECLARATION_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.VariableDeclarationStatement) node);
+          return singletonStatement(
+              convert((org.eclipse.jdt.core.dom.VariableDeclarationStatement) node));
         case ASTNode.WHILE_STATEMENT:
           return singletonStatement(convert((org.eclipse.jdt.core.dom.WhileStatement) node));
         default:
@@ -334,6 +356,26 @@ public class CompilationUnitBuilder {
                   + " file triggering this: "
                   + currentSourceFile);
       }
+    }
+
+    private ForStatement convert(org.eclipse.jdt.core.dom.ForStatement jdtForStatement) {
+      // The order here is important since initializers can define new variables
+      // These can be used in the expression, updaters or the block
+      // This is why we need to process initializers first
+      @SuppressWarnings("unchecked")
+      List<org.eclipse.jdt.core.dom.VariableDeclarationExpression> jdtInitializers =
+          jdtForStatement.initializers();
+      List<Expression> initializers = Lists.newArrayList();
+      for (org.eclipse.jdt.core.dom.Expression expression : jdtInitializers) {
+        initializers.add(convert(expression));
+      }
+
+      Expression conditionExpression = convert(jdtForStatement.getExpression());
+      Block block = extractBlock(jdtForStatement.getBody());
+      @SuppressWarnings("unchecked")
+      List<Expression> updaters =
+          convert((List<org.eclipse.jdt.core.dom.Expression>) jdtForStatement.updaters());
+      return new ForStatement(conditionExpression, block, initializers, updaters);
     }
 
     private DoWhileStatement convert(org.eclipse.jdt.core.dom.DoStatement jdtDoStatement) {
@@ -537,24 +579,25 @@ public class CompilationUnitBuilder {
       return new ThisReference(typeRef);
     }
 
-    private VariableDeclaration convert(org.eclipse.jdt.core.dom.VariableDeclarationFragment node) {
+    private VariableDeclarationFragment convert(
+        org.eclipse.jdt.core.dom.VariableDeclarationFragment node) {
       IVariableBinding variableBinding = node.resolveBinding();
       Variable variable = JdtUtils.createVariable(variableBinding, compilationUnitNameLocator);
       Expression initializer =
           node.getInitializer() == null ? null : convert(node.getInitializer());
       variableByJdtBinding.put(variableBinding, variable);
-      return new VariableDeclaration(variable, initializer);
+      return new VariableDeclarationFragment(variable, initializer);
     }
 
-    private Collection<Statement> convert(
+    private VariableDeclarationStatement convert(
         org.eclipse.jdt.core.dom.VariableDeclarationStatement node) {
-      List<Statement> variableDeclarations = new ArrayList<>();
+      List<VariableDeclarationFragment> variableDeclarations = new ArrayList<>();
       for (Object object : node.fragments()) {
         org.eclipse.jdt.core.dom.VariableDeclarationFragment fragment =
             (org.eclipse.jdt.core.dom.VariableDeclarationFragment) object;
         variableDeclarations.add(convert(fragment));
       }
-      return variableDeclarations;
+      return new VariableDeclarationStatement(variableDeclarations);
     }
 
     private JavaType createJavaType(ITypeBinding typeBinding) {

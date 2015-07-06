@@ -15,39 +15,30 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
+import java.util.List;
+
 /**
- * Class for variable declaration.
+ * Class for variable declaration expression.
  */
 @Visitable
-public class VariableDeclaration extends Statement {
-  @Visitable Variable variable;
-  @Visitable Expression initializer;
+public class VariableDeclarationExpression extends Expression {
 
-  public VariableDeclaration(Variable variable, Expression initializer) {
-    this.variable = variable;
-    this.initializer = initializer;
+  @Visitable List<VariableDeclarationFragment> fragments;
+
+  public VariableDeclarationExpression(List<VariableDeclarationFragment> fragments) {
+    Preconditions.checkNotNull(fragments);
+    this.fragments = fragments;
   }
 
-  public Variable getVariable() {
-    return variable;
-  }
-
-  public Expression getInitializer() {
-    return initializer;
-  }
-
-  public void setVariable(Variable variable) {
-    this.variable = variable;
-  }
-
-  public void setInitializer(Expression initializer) {
-    this.initializer = initializer;
+  public List<VariableDeclarationFragment> getFragments() {
+    return fragments;
   }
 
   @Override
-  public VariableDeclaration accept(Processor processor) {
-    return Visitor_VariableDeclaration.visit(processor, this);
+  public VariableDeclarationExpression accept(Processor processor) {
+    return Visitor_VariableDeclarationExpression.visit(processor, this);
   }
 }

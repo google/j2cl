@@ -32,6 +32,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldReference;
+import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.Member;
@@ -53,10 +54,14 @@ import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.TernaryExpression;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeReference;
-import com.google.j2cl.ast.VariableDeclaration;
+import com.google.j2cl.ast.Variable;
+import com.google.j2cl.ast.VariableDeclarationExpression;
+import com.google.j2cl.ast.VariableDeclarationFragment;
+import com.google.j2cl.ast.VariableDeclarationStatement;
 import com.google.j2cl.ast.VariableReference;
 import com.google.j2cl.ast.WhileStatement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -288,14 +293,6 @@ public class StatementSourceGenerator {
       }
 
       @Override
-      public String transformVariableDeclaration(VariableDeclaration statement) {
-        return String.format(
-            "var %s = %s;",
-            statement.getVariable().getName(),
-            toSource(statement.getInitializer()));
-      }
-
-      @Override
       public String transformVariableReference(VariableReference expression) {
         return expression.getTarget().getName();
       }
@@ -363,6 +360,70 @@ public class StatementSourceGenerator {
         }
 
         return builder.toString();
+      }
+
+      @Override
+      public String transformForStatement(ForStatement forStatement) {
+
+        List<String> initializers = new ArrayList<>();
+        for (Expression e : forStatement.getInitializers()) {
+          initializers.add(toSource(e));
+        }
+        String initializerAsString = Joiner.on(",").join(initializers);
+
+        String conditionExpressionAsString =
+            forStatement.getConditionExpression() == null
+                ? ""
+                : toSource(forStatement.getConditionExpression());
+
+        List<String> updaters = new ArrayList<>();
+        for (Expression e : forStatement.getUpdaters()) {
+          updaters.add(toSource(e));
+        }
+        String updatersAsString = Joiner.on(",").join(updaters);
+
+        String blockAsString = toSource(forStatement.getBlock());
+
+        return String.format(
+            "for (%s; %s; %s) {\n%s\n}",
+            initializerAsString,
+            conditionExpressionAsString,
+            updatersAsString,
+            blockAsString);
+      }
+
+      @Override
+      public String transformVariableDeclarationExpression(
+          VariableDeclarationExpression variableDeclarationExpression) {
+        List<String> fragmentsAsString =
+            transformNodesToSource(variableDeclarationExpression.getFragments());
+        return "var " + Joiner.on(", ").join(fragmentsAsString);
+      }
+
+      @Override
+      public String transformVariableDeclarationStatement(
+          VariableDeclarationStatement variableDeclarationStatement) {
+        List<String> fragmentsAsString =
+            transformNodesToSource(variableDeclarationStatement.getFragments());
+        return "var " + Joiner.on(", ").join(fragmentsAsString) + ";";
+      }
+
+      @Override
+      public String transformVariableDeclarationFragment(
+          VariableDeclarationFragment variableDeclarationFragment) {
+
+        String variableAsString = toSource(variableDeclarationFragment.getVariable());
+        if (variableDeclarationFragment.getInitializer() == null) {
+          return variableAsString;
+        }
+
+        String initializerAsString = toSource(variableDeclarationFragment.getInitializer());
+        return String.format("%s = %s", variableAsString, initializerAsString);
+      }
+
+      @Override
+      public String transformVariable(Variable variable) {
+        return variable.getName();
       }
 
       private String transformQualifier(MemberReference memberRef) {

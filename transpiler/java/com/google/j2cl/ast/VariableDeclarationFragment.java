@@ -18,28 +18,35 @@ package com.google.j2cl.ast;
 import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
+import javax.annotation.Nullable;
+
 /**
- * Class for variable reference.
+ * Represents a part of a variable declaration.
+ *
+ * <p>From the statement int i = 0; the fragment would represent i = 0;
  */
 @Visitable
-public class VariableReference extends Expression {
-  @Visitable Variable target;
+public class VariableDeclarationFragment extends Node {
 
-  public VariableReference(Variable target) {
-    Preconditions.checkNotNull(target);
-    this.target = target;
+  @Visitable Variable variable;
+  @Visitable @Nullable Expression initializer;
+
+  public VariableDeclarationFragment(Variable variable, Expression initializer) {
+    Preconditions.checkNotNull(variable);
+    this.variable = variable;
+    this.initializer = initializer;
   }
 
-  public Variable getTarget() {
-    return target;
+  public Variable getVariable() {
+    return variable;
   }
 
-  public void setTarget(Variable target) {
-    this.target = target;
+  public Expression getInitializer() {
+    return initializer;
   }
 
   @Override
-  public VariableReference accept(Processor processor) {
-    return Visitor_VariableReference.visit(processor, this);
+  public VariableDeclarationFragment accept(Processor processor) {
+    return Visitor_VariableDeclarationFragment.visit(processor, this);
   }
 }
