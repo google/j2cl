@@ -26,6 +26,7 @@ import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.CastExpression;
+import com.google.j2cl.ast.CatchClause;
 import com.google.j2cl.ast.DoWhileStatement;
 import com.google.j2cl.ast.EmptyStatement;
 import com.google.j2cl.ast.Expression;
@@ -49,11 +50,13 @@ import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.RegularTypeReference;
 import com.google.j2cl.ast.ReturnStatement;
-import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.TernaryExpression;
 import com.google.j2cl.ast.ThisReference;
+import com.google.j2cl.ast.ThrowStatement;
+import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.TypeReference;
+import com.google.j2cl.ast.UnionTypeReference;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
@@ -123,6 +126,12 @@ public class StatementSourceGenerator {
             toSource(arrayAccess.getArrayExpression()),
             toSource(arrayAccess.getIndexExpression()),
             toSource(expression.getRightOperand()));
+      }
+
+      @Override
+      public String transformBlock(Block statement) {
+        // brackets "{ }" should be inserted by caller explicitly.
+        return Joiner.on("\n").join(transformNodesToSource(statement.getStatements()));
       }
 
       @Override
@@ -288,6 +297,107 @@ public class StatementSourceGenerator {
       }
 
       @Override
+      public String transformThrowStatement(ThrowStatement statement) {
+        return "throw " + toSource(statement.getExpression()) + ";";
+      }
+
+      @Override
+      public String transformTryStatement(TryStatement statement) {
+        String tryBlock = String.format("try { %s }\n", toSource(statement.getBody()));
+        String catchBlock;
+        if (statement.getCatchClauses().isEmpty()) {
+          catchBlock = "";
+        } else {
+          String exceptionVarName =
+              statement
+                  .getCatchClauses()
+                  .get(0)
+                  .getExceptionVar()
+                  .getName();
+          catchBlock =
+              String.format(
+                  "catch (%s) { %s }\n",
+                  exceptionVarName,
+                  transformCatchClauses(statement.getCatchClauses(), exceptionVarName));
+        }
+        String finallyBlock =
+            statement.getFinallyBlock() == null
+                ? ""
+                : String.format("finally { %s }", toSource(statement.getFinallyBlock()));
+        return tryBlock + catchBlock + finallyBlock;
+      }
+
+      /**
+       * Translates multiple catch clauses to if-else statement.
+       */
+      private String transformCatchClauses(
+          List<CatchClause> catchClauses, final String exceptionVarName) {
+        List<String> transformedCatchClauses =
+            Lists.transform(
+                catchClauses,
+                new Function<CatchClause, String>() {
+                  @Override
+                  public String apply(CatchClause catchClause) {
+                    return transformCatchClause(catchClause, exceptionVarName);
+                  }
+                });
+        String ifBranches = Joiner.on(" else ").join(transformedCatchClauses);
+        String elseBranch = String.format("else { throw %s; }", exceptionVarName);
+        return ifBranches + elseBranch;
+      }
+
+      /**
+       * Translates a catch clause like catch (Exception e) { ...body... }
+       * to a if statement like
+       * if ($Exception.isInstance(e)) { ...body... }
+       */
+      private String transformCatchClause(
+          CatchClause catchClause, final String globalExceptionVarName) {
+        Variable localExceptionVar = catchClause.getExceptionVar();
+        // If this catch clause uses a different exception variable name than the global one, then
+        // re-expose the exception variable via the global exception variable name.
+        String localVarDecl =
+            localExceptionVar.getName().equals(globalExceptionVarName)
+                ? ""
+                : String.format(
+                    "var %s = %s;", localExceptionVar.getName(), globalExceptionVarName);
+        return String.format(
+            "if (%s) {%s %s}",
+            transformExceptionVariable(localExceptionVar.getTypeRef(), globalExceptionVarName),
+            localVarDecl,
+            toSource(catchClause.getBody()));
+      }
+
+      /**
+       * Translates exception variable declaration in a catch clause like
+       * (RuntimeException | NullPointerException e)
+       * to the condition expression in a if statement like
+       * (RuntimeException.$isInstance(e) || NullPointerException.$isInstance(e))
+       */
+      private String transformExceptionVariable(
+          TypeReference exceptionTypeRef, final String globalExceptionVarName) {
+        List<TypeReference> exceptionTypeRefs = new ArrayList<>();
+        if (exceptionTypeRef instanceof UnionTypeReference) {
+          exceptionTypeRefs.addAll(((UnionTypeReference) exceptionTypeRef).getTypes());
+        } else {
+          exceptionTypeRefs.add(exceptionTypeRef);
+        }
+        List<String> isInstanceCalls =
+            Lists.transform(
+                exceptionTypeRefs,
+                new Function<TypeReference, String>() {
+                  @Override
+                  public String apply(TypeReference typeRef) {
+                    return String.format(
+                        "%s.$isInstance(%s)",
+                        TranspilerUtils.getClassName(typeRef),
+                        globalExceptionVarName);
+                  }
+                });
+        return Joiner.on(" || ").join(isInstanceCalls);
+      }
+
+      @Override
       public String transformTypeReference(TypeReference typeRef) {
         return TranspilerUtils.getClassName(typeRef);
       }
@@ -349,17 +459,6 @@ public class StatementSourceGenerator {
         String conditionAsString = toSource(doWhileStatement.getConditionExpression());
         String blockAsString = toSource(doWhileStatement.getBlock());
         return String.format("do {%s} while(%s);", blockAsString, conditionAsString);
-      }
-
-      @Override
-      public String transformBlock(Block block) {
-        List<Statement> statements = block.getStatements();
-        StringBuilder builder = new StringBuilder();
-        for (Statement statement : statements) {
-          builder.append(toSource(statement));
-        }
-
-        return builder.toString();
       }
 
       @Override

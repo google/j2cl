@@ -39,6 +39,9 @@ are copyright and licensed as follows:
 - b/20102666 WARNING - actual parameter of Foo.$markImplementor does not match
   formal parameter
 
+## Useful tools/testings to add
+- testing the cost of adding more parents in a hierarchy.
+
 ## Likely readable examples to add (remove some redundant)
 - anonymousclasswithcapture
 - block scoped variables
@@ -79,11 +82,9 @@ are copyright and licensed as follows:
 - longliteral
 - longoperations
 - methodreferences
-- multicatch
 - multipleanonymousclass
 - multipleparametersgenerictype
 - nestedanonymousclass
-- nestedtrycatch
 - nonstaticnestedclasses
 - notimportinternals
 - numbermethods

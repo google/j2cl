@@ -24,9 +24,11 @@ import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.MethodReference;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.RegularTypeReference;
 import com.google.j2cl.ast.TypeReference;
+import com.google.j2cl.ast.UnionTypeReference;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -82,6 +84,18 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   @Override
   public void exitNewArray(NewArray newArray) {
     importModules.add(Import.IMPORT_VM_ARRAYS);
+  }
+
+  @Override
+  public void exitMethodReference(MethodReference methodRef) {
+    typeReferences.add(methodRef.getEnclosingClassRef());
+  }
+
+  @Override
+  public void exitUnionTypeReference(UnionTypeReference unionTypeRef) {
+    for (TypeReference typeRef : unionTypeRef.getTypes()) {
+      typeReferences.add(typeRef);
+    }
   }
 
   private Set<Import> doGatherImports(CompilationUnit compilationUnit) {

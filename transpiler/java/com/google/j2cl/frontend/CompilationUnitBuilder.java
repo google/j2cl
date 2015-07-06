@@ -24,6 +24,7 @@ import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.CastExpression;
+import com.google.j2cl.ast.CatchClause;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.DoWhileStatement;
 import com.google.j2cl.ast.EmptyStatement;
@@ -53,7 +54,10 @@ import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.TernaryExpression;
 import com.google.j2cl.ast.ThisReference;
+import com.google.j2cl.ast.ThrowStatement;
+import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.TypeReference;
+import com.google.j2cl.ast.UnionTypeReference;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
@@ -344,6 +348,10 @@ public class CompilationUnitBuilder {
         case ASTNode.SUPER_CONSTRUCTOR_INVOCATION:
           return singletonStatement(
               convert((org.eclipse.jdt.core.dom.SuperConstructorInvocation) node));
+        case ASTNode.THROW_STATEMENT:
+          return singletonStatement(convert((org.eclipse.jdt.core.dom.ThrowStatement) node));
+        case ASTNode.TRY_STATEMENT:
+          return singletonStatement(convert((org.eclipse.jdt.core.dom.TryStatement) node));
         case ASTNode.VARIABLE_DECLARATION_STATEMENT:
           return singletonStatement(
               convert((org.eclipse.jdt.core.dom.VariableDeclarationStatement) node));
@@ -373,8 +381,7 @@ public class CompilationUnitBuilder {
       Expression conditionExpression = convert(jdtForStatement.getExpression());
       Block block = extractBlock(jdtForStatement.getBody());
       @SuppressWarnings("unchecked")
-      List<Expression> updaters =
-          convert((List<org.eclipse.jdt.core.dom.Expression>) jdtForStatement.updaters());
+      List<Expression> updaters = convert(jdtForStatement.updaters());
       return new ForStatement(conditionExpression, block, initializers, updaters);
     }
 
@@ -441,6 +448,12 @@ public class CompilationUnitBuilder {
         body.addAll(convert(statement));
       }
       return new Block(body);
+    }
+
+    private CatchClause convert(org.eclipse.jdt.core.dom.CatchClause node) {
+      Variable exceptionVar = convert(node.getException());
+      Block body = convert(node.getBody());
+      return new CatchClause(body, exceptionVar);
     }
 
     private ExpressionStatement convert(org.eclipse.jdt.core.dom.ConstructorInvocation node) {
@@ -560,6 +573,18 @@ public class CompilationUnitBuilder {
       }
     }
 
+    private Variable convert(org.eclipse.jdt.core.dom.SingleVariableDeclaration node) {
+      String name = node.getName().getFullyQualifiedName();
+      TypeReference typeRef =
+          node.getType() instanceof org.eclipse.jdt.core.dom.UnionType
+              ? convert((org.eclipse.jdt.core.dom.UnionType) node.getType())
+              : JdtUtils.createTypeReference(
+                  node.getType().resolveBinding(), compilationUnitNameLocator);
+      Variable variable = new Variable(name, typeRef, false, false);
+      variableByJdtBinding.put(node.resolveBinding(), variable);
+      return variable;
+    }
+
     private StringLiteral convert(org.eclipse.jdt.core.dom.StringLiteral node) {
       return new StringLiteral(node.getEscapedValue());
     }
@@ -578,6 +603,30 @@ public class CompilationUnitBuilder {
           node.getQualifier() == null ? null : (RegularTypeReference) convert(node.getQualifier());
       return new ThisReference(typeRef);
     }
+
+    private ThrowStatement convert(org.eclipse.jdt.core.dom.ThrowStatement node) {
+      return new ThrowStatement(convert(node.getExpression()));
+    }
+
+    private TryStatement convert(org.eclipse.jdt.core.dom.TryStatement node) {
+      Block body = convert(node.getBody());
+      List<CatchClause> catchClauses = new ArrayList<>();
+      for (Object catchClause : node.catchClauses()) {
+        catchClauses.add(convert((org.eclipse.jdt.core.dom.CatchClause) catchClause));
+      }
+      Block finallyBlock = node.getFinally() == null ? null : convert(node.getFinally());
+      return new TryStatement(body, catchClauses, finallyBlock);
+    }
+
+    private UnionTypeReference convert(org.eclipse.jdt.core.dom.UnionType node) {
+      List<TypeReference> types = new ArrayList<>();
+      for (Object object : node.types()) {
+        org.eclipse.jdt.core.dom.Type type = (org.eclipse.jdt.core.dom.Type) object;
+        types.add(JdtUtils.createTypeReference(type.resolveBinding(), compilationUnitNameLocator));
+      }
+      return UnionTypeReference.create(types);
+    }
+
 
     private VariableDeclarationFragment convert(
         org.eclipse.jdt.core.dom.VariableDeclarationFragment node) {
