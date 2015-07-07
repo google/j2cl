@@ -56,7 +56,7 @@ are copyright and licensed as follows:
 - casttoprimitive
 - catchjsexception
 - classclasscollision
-- classliteral
+- classliteralForEnums (tests are in classliteral)
 - complexlongincrement
 - complexobjectarray
 - complextypeinference

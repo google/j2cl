@@ -18,8 +18,6 @@ package com.google.j2cl.ast;
 import com.google.auto.value.AutoValue;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Interner;
-import com.google.common.collect.Interners;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.processors.Visitable;
 
@@ -33,19 +31,6 @@ import javax.annotation.Nullable;
 @AutoValue
 @Visitable
 public abstract class RegularTypeReference extends TypeReference {
-  private static Interner<TypeReference> interner;
-
-  public static TypeReference create(
-      Iterable<String> packageComponents,
-      Iterable<String> classComponents,
-      String compilationUnitSimpleName) {
-    return getInterner()
-        .intern(
-            new AutoValue_RegularTypeReference(
-                ImmutableList.copyOf(packageComponents),
-                ImmutableList.copyOf(classComponents),
-                compilationUnitSimpleName));
-  }
 
   public abstract ImmutableList<String> getPackageComponents();
 
@@ -53,6 +38,8 @@ public abstract class RegularTypeReference extends TypeReference {
 
   @Nullable
   public abstract String getCompilationUnitSimpleName();
+
+  public abstract boolean isRaw();
 
   @Override
   public String getBinaryName() {
@@ -65,7 +52,7 @@ public abstract class RegularTypeReference extends TypeReference {
 
   @Override
   public String getClassName() {
-    return Joiner.on('$').join(getClassComponents());
+    return isPrimitive() ? "$" + getSimpleName() : Joiner.on('$').join(getClassComponents());
   }
 
   @Override
@@ -114,29 +101,5 @@ public abstract class RegularTypeReference extends TypeReference {
   @Override
   public RegularTypeReference accept(Processor processor) {
     return Visitor_RegularTypeReference.visit(processor, this);
-  }
-
-  public boolean isPrimitive() {
-    switch (getSourceName()) {
-      case "boolean":
-      case "byte":
-      case "char":
-      case "double":
-      case "float":
-      case "int":
-      case "long":
-      case "short":
-      case "void":
-        return true;
-      default:
-        return false;
-    }
-  }
-
-  private static Interner<TypeReference> getInterner() {
-    if (interner == null) {
-      interner = Interners.newWeakInterner();
-    }
-    return interner;
   }
 }

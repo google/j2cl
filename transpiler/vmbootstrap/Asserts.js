@@ -11,21 +11,24 @@ class Asserts {
    */
   static $assert(condition) {
     if (!condition) {
-      throw AssertionError.$create();
+      // TODO(rluble): replace this with AssertionError. We are throwing Error
+      // here to make debugging possible. Current tooling does not recover a
+      // stack trace if a custom object is thrown.
+      throw Error('Assertion failed.');
     }
   }
 
-  // TODO: uncomment this function once AssertionError.java is fully
-  // implemented.
   /**
    * @param {boolean} condition
    * @param {?string} message
    */
-  //static $assertWithMessage(condition, message) {
-  //  if (!condition) {
-  //    throw AssertionError.$create__java_lang_String(message);
-  //  }
-  //}
+  static $assertWithMessage(condition, message) {
+    if (!condition) {
+      // TODO(rluble): replace this with
+      //    throw AssertionError.$create__java_lang_String(message);
+      throw Error(message);
+    }
+  }
 
   /**
    * @return {boolean} whether assertions are enabled

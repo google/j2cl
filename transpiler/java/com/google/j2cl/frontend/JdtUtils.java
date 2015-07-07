@@ -72,6 +72,7 @@ public class JdtUtils {
 
   static TypeReference createTypeReference(
       ITypeBinding typeBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
+    // TODO(rluble): Add support for generics.
     if (typeBinding == null) {
       return null;
     }
@@ -94,7 +95,7 @@ public class JdtUtils {
       packageComponents = Arrays.asList(typeBinding.getPackage().getNameComponents());
     }
 
-    return RegularTypeReference.create(
+    return TypeReference.create(
         packageComponents, nameComponents, compilationUnitNameLocator.find(typeBinding));
   }
 

@@ -2,8 +2,9 @@ goog.module('vmbootstrap.DoublesModule');
 
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
+var $double = goog.require('vmbootstrap.PrimitivesModule').$double;
 
-
+// TODO(rluble): Maybe this should be merged with $double
 /**
  * Provides devirtualized method implementations for Doubles.
  */
@@ -42,7 +43,7 @@ class Doubles {
    * @public
    */
   static m_getClass__java_lang_Object(obj) {
-    return Class.$doubleLiteral;
+    return $double.$class;
   }
 };
 

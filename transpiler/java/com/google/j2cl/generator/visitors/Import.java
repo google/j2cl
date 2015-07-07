@@ -16,21 +16,20 @@
 package com.google.j2cl.generator.visitors;
 
 import com.google.common.collect.ComparisonChain;
-import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeReference;
 
 /**
  * A Node class that represents the goog.require statement
  * var ClassName = goog.require('moduleName').ClassName
  */
-public class Import extends Node implements Comparable<Import> {
+public class Import implements Comparable<Import> {
 
   public static final Import IMPORT_CLASS = new Import("Class", "gen.java.lang.ClassModule");
   public static final Import IMPORT_NATIVE_UTIL = new Import("Util", "nativebootstrap.UtilModule");
   public static final Import IMPORT_VM_ASSERTS = new Import("Asserts", "vmbootstrap.AssertsModule");
   public static final Import IMPORT_VM_ARRAYS = new Import("Arrays", "vmbootstrap.ArraysModule");
   public static final Import IMPORT_VM_CASTS = new Import("Casts", "vmbootstrap.CastsModule");
-  public static final Import IMPORT_VM_OBJECTS = new Import("Objects", "vmbootstrap.ObjectsModule");
+  public static final String IMPORT_VM_PRIMITIVES_MODULE = "vmbootstrap.PrimitivesModule";
 
   private String className;
   private String moduleName;
@@ -46,7 +45,7 @@ public class Import extends Node implements Comparable<Import> {
   }
 
   public Import(TypeReference typeReference) {
-    this(typeReference.getClassName(), typeReference.computeModuleName());
+    this(typeReference.getClassName(), computeModule(typeReference));
   }
 
   public String getClassName() {
@@ -74,5 +73,15 @@ public class Import extends Node implements Comparable<Import> {
         .compare(this.moduleName, that.moduleName)
         .compare(this.className, that.className)
         .result();
+  }
+
+  private static String computeModule(TypeReference typeReference) {
+    if (typeReference.isPrimitive()) {
+      return IMPORT_VM_PRIMITIVES_MODULE;
+    }
+    if (typeReference.isRaw()) {
+      return typeReference.getCompilationUnitSourceName();
+    }
+    return "gen." + typeReference.getCompilationUnitSourceName() + "Module";
   }
 }

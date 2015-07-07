@@ -34,7 +34,8 @@ set -e
 blaze build third_party/java_src/j2cl/jre/java:JavaJre &> /dev/null
 
 # Build the transpiler
-blaze build third_party/java_src/j2cl:j2cl &> /dev/null
+blaze build third_party/java_src/j2cl:j2cl third_party/java_src/j2cl/jre:jre \
+    third_party/java_src/j2cl/jre/java:JavaJre
 
 # Figure out where the referenced example lives
 example_dir=$examples_dir$example_name
@@ -46,4 +47,4 @@ for java_file in $(find $example_dir -name '*.java') ; do
 done
 
 # Transpile and debug it
-$transpiler_bin --debug -d /tmp/gen/$example_name -cp $jre_jar $example_files
+$transpiler_bin --debug --jvm_flag=-ea -d /tmp/gen/$example_name -cp $jre_jar $example_files

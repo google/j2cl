@@ -9,6 +9,14 @@ var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
 var Util = goog.require('nativebootstrap.UtilModule').Util;
 var Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
+var $byte = goog.require('vmbootstrap.PrimitivesModule').$byte;
+var $char = goog.require('vmbootstrap.PrimitivesModule').$char;
+var $double = goog.require('vmbootstrap.PrimitivesModule').$double;
+var $float = goog.require('vmbootstrap.PrimitivesModule').$float;
+var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+var $long = goog.require('vmbootstrap.PrimitivesModule').$long;
+var $short = goog.require('vmbootstrap.PrimitivesModule').$short;
 
 
 class PrimitiveArrays extends Object {
@@ -26,6 +34,7 @@ class PrimitiveArrays extends Object {
   }
 
   /**
+   * @return {void}
    * @public
    */
   m_main() {

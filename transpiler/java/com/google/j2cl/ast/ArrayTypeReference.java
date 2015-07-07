@@ -67,6 +67,11 @@ public abstract class ArrayTypeReference extends TypeReference {
     return true;
   }
 
+  @Override
+  public boolean isRaw() {
+    return getLeafTypeRef().isRaw();
+  }
+
   private String getSuffix() {
     return Strings.repeat("[]", getDimensions());
   }

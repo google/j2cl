@@ -6,6 +6,106 @@ var Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 /**
+ * Transpiled from java/lang/Object.java.
+ */
+class Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {}
+
+  /**
+   * Runs inline instance field initializers.
+   * @private
+   */
+  $init__java_lang_Object() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Object}
+   * @public
+   */
+  static $create() {
+    Object.$clinit();
+    var instance = new Object;
+    instance.$ctor__java_lang_Object();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__java_lang_Object() { this.$init__java_lang_Object(); }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+
+  m_getClass() { return this.constructor.$class; }
+
+  /**
+   * @return {?number}
+   * @public
+   */
+  m_hashCode() { return Hashing.$getHashCode(this); }
+
+  /**
+   * @param {Object} other
+   * @return {boolean}   q
+   * @public
+   */
+  m_equals__java_lang_Object(other) { return this === other; }
+
+  /**
+   * @return {?string}
+   * @public
+   */
+  m_toString() {
+    // TODO: fix this implementation. The hash code should be returned in hex
+    // but can't currently depend on Integer to get access to that static
+    // function because Closure doesn't yet support module circular references.
+    return this.constructor.$class.m_getName() + '@' + this.m_hashCode();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {Object} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    // Accepts all Java and JS Objects, including native arrays.
+    // TODO: decide how to handle Strings.
+    return typeof(instance) == 'object';
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    // Special case for Array.
+    if (classConstructor == Array) {
+      return true;
+    }
+    return Util.$canCastClass(classConstructor, Object);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() {}
+};
+
+
+
+/**
  * A model object that describes a Class or Interface.
  * <p>
  * Commonly referred to as a class literal.
@@ -13,20 +113,21 @@ var Util = goog.require('nativebootstrap.UtilModule').Util;
  * Answers questions like "is this an enum?", "what is the name of this class?",
  * "is it an array class?", etc.
  */
-class Class {
+class Class extends Object {
   /**
    * Defines instance fields.
    * @param {?string} simpleName
    * @param {?string} name
    * @param {Class.Type_} type
    * @param {Class} superClassLiteral
-   * @param {Class} arrayElementClassLiteral
    * @param {?string} canonicalName
    * @param {Array<Object>} enumConstants
    * @private
    */
-  constructor(simpleName, name, type, superClassLiteral,
-              arrayElementClassLiteral, canonicalName, enumConstants) {
+  constructor(simpleName, name, type, superClassLiteral, canonicalName,
+      enumConstants) {
+    super();
+
     /**
      * @private {?string}
      */
@@ -46,12 +147,6 @@ class Class {
      * @private {Class}
      */
     this.$superClassLiteral_ = superClassLiteral;
-
-    /**
-     * Only used for Array class literals.
-     * @private {Class}
-     */
-    this.$arrayElementClassLiteral_ = arrayElementClassLiteral;
 
     /**
      * @private {?string}
@@ -92,7 +187,7 @@ class Class {
    * @return {Class}
    * @public
    */
-  m_getComponentType() { return this.$arrayElementClassLiteral_; }
+  m_getComponentType() { return null; }
 
   /**
    * @return {Array<Object>}
@@ -148,8 +243,25 @@ class Class {
    */
   m_toString() {
     return (this.m_isInterface() ? 'interface ' :
-                                   (this.m_isPrimitive() ? '' : 'class ')) +
-           this.m_getName();
+            (this.m_isPrimitive() ? '' : 'class ')) +
+        this.m_getName();
+  }
+
+  /**
+   * @param {number} dimensionCount
+   * @return {Class}
+   * @public
+   */
+  $forArray(dimensionCount) {
+    var arrayClassLiteral =
+        this.$arrayClassLiteralsByDimensions_[dimensionCount];
+    if (arrayClassLiteral != null) {
+      return arrayClassLiteral;
+    }
+
+    arrayClassLiteral = ArrayClass.$create(this, dimensionCount);
+    this.$arrayClassLiteralsByDimensions_[dimensionCount] = arrayClassLiteral;
+    return arrayClassLiteral;
   }
 
   /**
@@ -162,31 +274,10 @@ class Class {
    * @public
    */
   static $createForClass(simpleName, name, superClassLiteral,
-                         opt_canonicalName) {
+      opt_canonicalName) {
     Class.$clinit();
     return new Class(simpleName, name, Class.Type_.PLAIN, superClassLiteral,
-                     null, opt_canonicalName || null, null);
-  }
-
-  /**
-   * @param {Class} arrayElementClassLiteral
-   * @param {number} dimensionCount
-   * @return {Class}
-   * @public
-   */
-  static $createForArray(arrayElementClassLiteral, dimensionCount) {
-    var arrayClassLiteral =
-        arrayElementClassLiteral
-            .$arrayClassLiteralsByDimensions_[dimensionCount];
-    if (arrayClassLiteral != null) {
-      return arrayClassLiteral;
-    }
-
-    arrayClassLiteral = ArrayClass.$create(
-        null, null, Object.$class, arrayElementClassLiteral, dimensionCount);
-    arrayElementClassLiteral.$arrayClassLiteralsByDimensions_[dimensionCount] =
-        arrayClassLiteral;
-    return arrayClassLiteral;
+        opt_canonicalName || null, null);
   }
 
   /**
@@ -200,10 +291,10 @@ class Class {
    * @public
    */
   static $createForEnum(simpleName, name, superClassLiteral, canonicalName,
-                        enumConstants) {
+      enumConstants) {
     Class.$clinit();
     return new Class(simpleName, name, Class.Type_.ENUM, superClassLiteral,
-                     null, canonicalName, enumConstants);
+        canonicalName, enumConstants);
   }
 
   /**
@@ -215,10 +306,10 @@ class Class {
    * @public
    */
   static $createForInterface(simpleName, name, superClassLiteral,
-                             opt_canonicalName) {
+      opt_canonicalName) {
     Class.$clinit();
     return new Class(simpleName, name, Class.Type_.INTERFACE, superClassLiteral,
-                     null, opt_canonicalName || null, null);
+        opt_canonicalName || null, null);
   }
 
   /**
@@ -228,8 +319,8 @@ class Class {
    */
   static $createForPrimitive(simpleName) {
     Class.$clinit();
-    return new Class(simpleName, simpleName, Class.Type_.PRIMITIVE, null, null,
-                     simpleName, null);
+    return new Class(simpleName, simpleName, Class.Type_.PRIMITIVE, null,
+        simpleName, null);
   }
 
   /**
@@ -283,17 +374,18 @@ Class.Type_ = {
 class ArrayClass extends Class {
   /**
    * Defines instance fields.
-   * @param {?string} simpleName
-   * @param {?string} name
-   * @param {Class} superClassLiteral
    * @param {Class} arrayElementClassLiteral
    * @param {number} dimensionCount
    * @private
    */
-  constructor(simpleName, name, superClassLiteral, arrayElementClassLiteral,
-              dimensionCount) {
-    super(simpleName, name, Class.Type_.ARRAY, superClassLiteral,
-          arrayElementClassLiteral, name, null);
+  constructor(arrayElementClassLiteral, dimensionCount) {
+    super(null, null, Class.Type_.ARRAY, Object.$class, null, null);
+
+    /**
+     * Only used for Array class literals.
+     * @private {Class}
+     */
+    this.$arrayElementClassLiteral_ = arrayElementClassLiteral;
 
     /**
      * @private {number}
@@ -306,21 +398,17 @@ class ArrayClass extends Class {
    * @public
    */
   m_getName() {
-    if (CLASS_NAMES_ENABLED_) {
-      if (this.$name_ == null) {
-        var namePrefix = '';
-        for (var i = 0; i < this.$dimensionCount_; i++) {
-          namePrefix = namePrefix + '[';
-        }
-        var isPrimitive =
-            this.$arrayElementClassLiteral_.$type_ == Class.Type_.PRIMITIVE;
-        var typePrefix = isPrimitive ? '' : 'L';
-        var typeSuffix = isPrimitive ? '' : ';';
-        this.$name_ = namePrefix + typePrefix +
-                      this.$arrayElementClassLiteral_.m_getName() + typeSuffix;
+    if (this.$name_ == null) {
+      var namePrefix = '';
+      for (var i = 0; i < this.$dimensionCount_; i++) {
+        namePrefix = namePrefix + '[';
       }
-    } else {
-      return 'unknown';
+      var isPrimitive =
+          this.$arrayElementClassLiteral_.$type_ == Class.Type_.PRIMITIVE;
+      var typePrefix = isPrimitive ? '' : 'L';
+      var typeSuffix = isPrimitive ? '' : ';';
+      this.$name_ = namePrefix + typePrefix +
+          this.$arrayElementClassLiteral_.m_getName() + typeSuffix;
     }
     return this.$name_;
   }
@@ -346,36 +434,37 @@ class ArrayClass extends Class {
    * @public
    */
   m_getCanonicalName() {
-    if (CLASS_NAMES_ENABLED_) {
-      if (this.$canonicalName_ == null) {
-        var canonicalNameSuffix = '';
-        for (var i = 0; i < this.$dimensionCount_; i++) {
-          canonicalNameSuffix = canonicalNameSuffix + '[]';
-        }
-        this.$canonicalName_ =
-            this.$arrayElementClassLiteral_.m_getCanonicalName() +
-            canonicalNameSuffix;
+    if (this.$canonicalName_ == null) {
+      var canonicalNameSuffix = '';
+      for (var i = 0; i < this.$dimensionCount_; i++) {
+        canonicalNameSuffix = canonicalNameSuffix + '[]';
       }
-    } else {
-      return 'unknown';
+      this.$canonicalName_ =
+          this.$arrayElementClassLiteral_.m_getCanonicalName() +
+          canonicalNameSuffix;
     }
     return this.$canonicalName_;
   }
 
   /**
-   * @param {?string} simpleName
-   * @param {?string} name
-   * @param {Class} superClassLiteral
+   * @return {Class}
+   * @public
+   */
+  m_getComponentType() {
+    return this.$dimensionCount_ == 1 ?
+        this.$arrayElementClassLiteral_ :
+        this.$arrayElementClassLiteral_.$forArray(this.$dimensionCount_ - 1);
+  }
+
+  /**
    * @param {Class} arrayElementClassLiteral
    * @param {number} dimensionCount
    * @return {!ArrayClass}
    * @public
    */
-  static $create(simpleName, name, superClassLiteral, arrayElementClassLiteral,
-                 dimensionCount) {
+  static $create(arrayElementClassLiteral, dimensionCount) {
     ArrayClass.$clinit();
-    return new ArrayClass(simpleName, name, superClassLiteral,
-                          arrayElementClassLiteral, dimensionCount);
+    return new ArrayClass(arrayElementClassLiteral, dimensionCount);
   }
 
   /**
@@ -385,104 +474,6 @@ class ArrayClass extends Class {
   static $clinit() { Class.$clinit(); }
 };
 
-
-
-/**
- * Transpiled from java/lang/Object.java.
- */
-class Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() {}
-
-  /**
-   * Runs inline instance field initializers.
-   * @private
-   */
-  $init__java_lang_Object() {}
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!Object}
-   * @public
-   */
-  static $create() {
-    Object.$clinit();
-    var instance = new Object;
-    instance.$ctor__java_lang_Object();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__java_lang_Object() { this.$init__java_lang_Object(); }
-
-  /**
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return this.constructor.$class; }
-
-  /**
-   * @return {?number}
-   * @public
-   */
-  m_hashCode() { return Hashing.$getHashCode(this); }
-
-  /**
-   * @param {Object} other
-   * @return {boolean}
-   * @public
-   */
-  m_equals__java_lang_Object(other) { return this === other; }
-
-  /**
-   * @return {?string}
-   * @public
-   */
-  m_toString() {
-    // TODO: fix this implementation. The hash code should be returned in hex
-    // but can't currently depend on Integer to get access to that static
-    // function because Closure doesn't yet support module circular references.
-    return this.constructor.$class.m_getName() + '@' + this.m_hashCode();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @param {Object} instance
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
-    // Accepts all Java and JS Objects, including native arrays.
-    // TODO: decide how to handle Strings.
-    return typeof(instance) == 'object';
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   */
-  static $isAssignableFrom(classConstructor) {
-    // Special case for Array.
-    if (classConstructor == Array) {
-      return true;
-    }
-    return Util.$canCastClass(classConstructor, Object);
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   */
-  static $clinit() {}
-};
 
 
 /**
@@ -501,62 +492,6 @@ Object.$class = Class.$createForClass(
 Class.$class = Class.$createForClass(
   Util.$generateId('Class'), Util.$generateId('java.lang.Class'), Object.$class,
   Util.$generateId('java.lang.Class'));
-
-
-/**
- * @public {Class}
- */
-Class.$booleanLiteral = Class.$createForPrimitive('boolean');
-
-
-/**
- * @public {Class}
- */
-Class.$byteLiteral = Class.$createForPrimitive('byte');
-
-
-/**
- * @public {Class}
- */
-Class.$shortLiteral = Class.$createForPrimitive('short');
-
-
-/**
- * @public {Class}
- */
-Class.$intLiteral = Class.$createForPrimitive('int');
-
-
-/**
- * @public {Class}
- */
-Class.$longLiteral = Class.$createForPrimitive('long');
-
-
-/**
- * @public {Class}
- */
-Class.$floatLiteral = Class.$createForPrimitive('float');
-
-
-/**
- * @public {Class}
- */
-Class.$doubleLiteral = Class.$createForPrimitive('double');
-
-
-/**
- * @public {Class}
- */
-Class.$charLiteral = Class.$createForPrimitive('char');
-
-
-/**
- * @public {Class}
- */
-Class.$stringLiteral = Class.$createForClass(
-    Util.$generateId('String'), Util.$generateId('java.lang.String'),
-    Object.$class, Util.$generateId('java.lang.String'));
 
 
 /**

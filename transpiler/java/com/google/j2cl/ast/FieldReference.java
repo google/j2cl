@@ -31,11 +31,26 @@ public abstract class FieldReference extends Node implements Member {
       String fieldName,
       TypeReference typeRef) {
     return new AutoValue_FieldReference(
-        isStatic, visibility, enclosingClassRef, fieldName, typeRef);
+        isStatic, false, visibility, enclosingClassRef, fieldName, typeRef);
+  }
+
+  /**
+   * Creates a raw field reference.
+   */
+  public static FieldReference createRaw(
+      boolean isStatic, TypeReference enclosingClassRef, String fieldName, TypeReference typeRef) {
+    return new AutoValue_FieldReference(
+        isStatic, true, Visibility.PUBLIC, enclosingClassRef, fieldName, typeRef);
   }
 
   @Override
   public abstract boolean isStatic();
+
+  /**
+   * Returns whether this is a Raw reference. Raw references are not mangled in the output and
+   * thus can be used to describe reference to JS apis.
+   */
+  public abstract boolean isRaw();
 
   public abstract Visibility getVisibility();
 

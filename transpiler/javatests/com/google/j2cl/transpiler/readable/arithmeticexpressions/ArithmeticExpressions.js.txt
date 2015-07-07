@@ -8,6 +8,8 @@ goog.module('gen.com.google.j2cl.transpiler.readable.arithmeticexpressions.Arith
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
 var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
+var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
 class ArithmeticExpressions extends Object {
@@ -25,6 +27,7 @@ class ArithmeticExpressions extends Object {
   }
 
   /**
+   * @return {void}
    * @public
    */
   m_main() {

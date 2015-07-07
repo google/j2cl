@@ -49,9 +49,7 @@ $byte.$initialArrayValue = 0;
 /**
  * @public {Class}
  */
-$byte.$class =
-    Class.$createForClass(Util.$generateId('byte'), Util.$generateId('byte'),
-                          Object.$class, Util.$generateId('byte'));
+$byte.$class = Class.$createForPrimitive('byte');
 
 
 /**
@@ -103,9 +101,7 @@ $short.$initialArrayValue = 0;
 /**
  * @public {Class}
  */
-$short.$class =
-    Class.$createForClass(Util.$generateId('short'), Util.$generateId('short'),
-                          Object.$class, Util.$generateId('short'));
+$short.$class = Class.$createForPrimitive('short');
 
 
 /**
@@ -157,9 +153,7 @@ $int.$initialArrayValue = 0;
 /**
  * @public {Class}
  */
-$int.$class =
-    Class.$createForClass(Util.$generateId('int'), Util.$generateId('int'),
-                          Object.$class, Util.$generateId('int'));
+$int.$class = Class.$createForPrimitive('int');
 
 
 /**
@@ -211,9 +205,7 @@ $long.$initialArrayValue = 0;
 /**
  * @public {Class}
  */
-$long.$class =
-    Class.$createForClass(Util.$generateId('long'), Util.$generateId('long'),
-                          Object.$class, Util.$generateId('long'));
+$long.$class = Class.$createForPrimitive('long');
 
 
 /**
@@ -265,9 +257,7 @@ $float.$initialArrayValue = 0;
 /**
  * @public {Class}
  */
-$float.$class =
-    Class.$createForClass(Util.$generateId('float'), Util.$generateId('float'),
-                          Object.$class, Util.$generateId('float'));
+$float.$class = Class.$createForPrimitive('float');
 
 
 /**
@@ -319,9 +309,7 @@ $double.$initialArrayValue = 0;
 /**
  * @public {Class}
  */
-$double.$class = Class.$createForClass(
-    Util.$generateId('double'), Util.$generateId('double'), Object.$class,
-    Util.$generateId('double'));
+$double.$class = Class.$createForPrimitive('double');
 
 
 /**
@@ -373,9 +361,7 @@ $char.$initialArrayValue = 0;
 /**
  * @public {Class}
  */
-$char.$class =
-    Class.$createForClass(Util.$generateId('char'), Util.$generateId('char'),
-                          Object.$class, Util.$generateId('char'));
+$char.$class = Class.$createForPrimitive('char');
 
 
 /**
@@ -427,12 +413,61 @@ $boolean.$initialArrayValue = false;
 /**
  * @public {Class}
  */
-$boolean.$class = Class.$createForClass(
-    Util.$generateId('boolean'), Util.$generateId('boolean'), Object.$class,
-    Util.$generateId('boolean'));
+$boolean.$class = Class.$createForPrimitive('boolean');
 
 
 /**
  * Exported class.
  */
 exports.$boolean = $boolean;
+
+/**
+ * Placeholder class definition for the primitive class void.
+ *
+ * Non-instantiable.
+ */
+class $void {
+  /**
+   * Defines instance fields.
+   *
+   * @private
+   */
+  constructor() {}
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   *
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return false; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   *
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor === $void;
+  }
+};
+
+
+/**
+ * @public {?}
+ */
+$void.$initialArrayValue = false;
+
+
+/**
+ * @public {Class}
+ */
+$void.$class = Class.$createForPrimitive('void');
+
+
+/**
+ * Exported class.
+ */
+exports.$void = $void;

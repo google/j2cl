@@ -75,6 +75,10 @@ public class TranspilerUtils {
       case "java.lang.String":
         return "?string";
     }
+
+    if (typeRef.isPrimitive()) {
+      return typeRef.getSimpleName();
+    }
     return getClassName(typeRef);
   }
 

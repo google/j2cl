@@ -8,6 +8,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.whilestatement.WhileStateme
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
 var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
 class WhileStatement extends Object {
@@ -24,6 +25,7 @@ class WhileStatement extends Object {
   $init__com_google_j2cl_transpiler_readable_whilestatement_WhileStatement() {}
 
   /**
+   * @return {void}
    * @public
    */
   m_test() {

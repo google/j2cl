@@ -1,8 +1,8 @@
 goog.module('vmbootstrap.ArraysModule');
 
 
-// Don't reformat these imports! The uncompiled test harness contains a bug that
-// will miss some multiline goog.require's.
+// Don't reformat these imports! The uncompiled test harness contains a bug
+// that will miss some multiline goog.require's.
 var Serializable = goog.require('gen.java.io.SerializableModule').Serializable;
 var ArrayIndexOutOfBoundsException =
   goog.require('gen.java.lang.ArrayIndexOutOfBoundsExceptionModule')
@@ -59,7 +59,7 @@ class Arrays {
     array.leafType = leafType;
     array.dimensionCount = dimensionLengths.length;
 
-    array.$class = Class.$createForArray(leafType.$class, array.dimensionCount);
+    array.$class = leafType.$class.$forArray(array.dimensionCount);
 
     array.length = length;
     if (array.dimensionCount > 1) {
@@ -122,7 +122,7 @@ class Arrays {
     array.leafType = leafType;
     array.dimensionCount = dimensionCount;
 
-    array.$class = Class.$createForArray(leafType.$class, array.dimensionCount);
+    array.$class = leafType.$class.$forArray(array.dimensionCount);
 
     // Length is not set since the provided array already contain values and
     // knows its own length.

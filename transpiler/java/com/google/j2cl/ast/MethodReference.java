@@ -37,6 +37,7 @@ public abstract class MethodReference extends Node implements Member {
       TypeReference... parameterTypeRefs) {
     return new AutoValue_MethodReference(
         isStatic,
+        false,
         visibility,
         enclosingClassRef,
         methodName,
@@ -45,8 +46,30 @@ public abstract class MethodReference extends Node implements Member {
         returnTypeRef);
   }
 
+  /**
+   * Creates a raw method reference.
+   */
+  public static MethodReference createRaw(
+      boolean isStatic, TypeReference enclosingClassRef, String methodName) {
+    return new AutoValue_MethodReference(
+        isStatic,
+        true,
+        Visibility.PUBLIC,
+        enclosingClassRef,
+        methodName,
+        false,
+        ImmutableList.<TypeReference>of(),
+        TypeReference.VOID_TYPEREF);
+  }
+
   @Override
   public abstract boolean isStatic();
+
+  /**
+   * Returns whether this is a Raw reference. Raw references are not mangled in the output and
+   * thus can be used to describe reference to JS apis.
+   */
+  public abstract boolean isRaw();
 
   public abstract Visibility getVisibility();
 

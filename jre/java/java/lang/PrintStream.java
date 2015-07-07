@@ -21,4 +21,3 @@ package java.lang;
 public class PrintStream {
   public void println(Object o) {}
 }
-

@@ -16,6 +16,7 @@
 package com.google.j2cl.frontend;
 
 import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.AssertStatement;
@@ -286,6 +287,8 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.StringLiteral) node);
         case ASTNode.THIS_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.ThisExpression) node);
+        case ASTNode.TYPE_LITERAL:
+          return convert((org.eclipse.jdt.core.dom.TypeLiteral) node);
         case ASTNode.VARIABLE_DECLARATION_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.VariableDeclarationExpression) node);
         default:
@@ -649,6 +652,36 @@ public class CompilationUnitBuilder {
       RegularTypeReference typeRef =
           node.getQualifier() == null ? null : (RegularTypeReference) convert(node.getQualifier());
       return new ThisReference(typeRef);
+    }
+
+    private Expression convert(org.eclipse.jdt.core.dom.TypeLiteral typeLiteral) {
+      ITypeBinding typeBinding = typeLiteral.getType().resolveBinding();
+
+      TypeReference literalTypeRef =
+          JdtUtils.createTypeReference(typeBinding, compilationUnitNameLocator);
+      TypeReference javaLangClassTypeRef =
+          JdtUtils.createTypeReference(
+              typeLiteral.resolveTypeBinding(), compilationUnitNameLocator);
+      if (typeBinding.getDimensions() == 0) {
+        // <ClassLiteralClass>.$class
+        FieldReference classFieldReferrence =
+            FieldReference.createRaw(true, literalTypeRef, "$class", javaLangClassTypeRef);
+        return new FieldAccess(null, classFieldReferrence);
+      }
+
+      FieldReference classFieldReferrence =
+          FieldReference.createRaw(
+              true, literalTypeRef.getLeafTypeRef(), "$class", javaLangClassTypeRef);
+
+      MethodReference forArray =
+          MethodReference.createRaw(true, javaLangClassTypeRef, "$forArray");
+
+      // <ClassLiteralClass>.$class.forArray(<dimensions>)
+      return new MethodCall(
+          new FieldAccess(null, classFieldReferrence),
+          forArray,
+          ImmutableList.<Expression>of(
+              new NumberLiteral(String.valueOf(typeBinding.getDimensions()))));
     }
 
     private ThrowStatement convert(org.eclipse.jdt.core.dom.ThrowStatement node) {

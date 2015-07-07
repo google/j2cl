@@ -23,7 +23,7 @@ import com.google.j2cl.ast.ArrayTypeReference;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Field;
+import com.google.j2cl.ast.FieldReference;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.MethodReference;
 import com.google.j2cl.ast.NewArray;
@@ -51,23 +51,10 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   @Override
   public void exitRegularTypeReference(RegularTypeReference typeReference) {
-    if (typeReference.isPrimitive()) {
-      return;
-    }
-    typeReferences.add(typeReference);
-  }
-
-  @Override
-  public void exitField(Field field) {
-    TypeReference typeReference = field.getSelfReference().getType();
-    if (!(typeReference instanceof RegularTypeReference)) {
-      return;
-    }
-    RegularTypeReference regularTypeReference = (RegularTypeReference) typeReference;
-    if (regularTypeReference.isPrimitive()) {
-      return;
-    }
-    typeReferences.add(regularTypeReference);
+    // TODO(rluble): Maybe stop collecting TypeReferences indiscriminately and
+    // only collect the ones where the import is needed (ie, due to field references, method
+    // references or class literals.
+    addTypeReference(typeReference);
   }
 
   @Override
@@ -84,6 +71,12 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     }
     // Casts.$to()
     importModules.add(Import.IMPORT_VM_CASTS);
+  }
+
+  @Override
+  public void exitFieldReference(FieldReference fieldReference) {
+    addTypeReference(fieldReference.getEnclosingClassRef());
+    addTypeReference(fieldReference.getType());
   }
 
   @Override
@@ -108,6 +101,10 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     }
   }
 
+  private void addTypeReference(TypeReference typeReference) {
+    typeReferences.add(typeReference);
+  }
+
   private Set<Import> doGatherImports(CompilationUnit compilationUnit) {
     // Collect type references.
     compilationUnit.accept(this);
@@ -120,10 +117,6 @@ public class ImportGatheringVisitor extends AbstractVisitor {
                   @Nullable
                   @Override
                   public Import apply(TypeReference typeReference) {
-                    // TODO: if there are multiple of these exceptions then create a pattern for it.
-                    if (typeReference == TypeReference.OBJECTS_TYPEREF) {
-                      return Import.IMPORT_VM_OBJECTS;
-                    }
                     return new Import(typeReference);
                   }
                 })

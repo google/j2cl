@@ -76,6 +76,11 @@ public abstract class UnionTypeReference extends TypeReference {
   }
 
   @Override
+  public boolean isRaw() {
+    return false;
+  }
+
+  @Override
   public UnionTypeReference accept(Processor processor) {
     return Visitor_UnionTypeReference.visit(processor, this);
   }

@@ -1,17 +1,16 @@
 /**
  * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/casttoclass/CastToClass.java.
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/classliteral/ClassLiteral.java.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.casttoclass.CastToClassModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.classliteral.ClassLiteralModule');
 
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
 var Util = goog.require('nativebootstrap.UtilModule').Util;
-var Casts = goog.require('vmbootstrap.CastsModule').Casts;
 
 
-class CastToClass extends Object {
+class ClassLiteral extends Object {
   /**
    * Defines instance fields.
    * @private
@@ -22,27 +21,27 @@ class CastToClass extends Object {
    * Runs instance field and block initializers.
    * @private
    */
-  $init__com_google_j2cl_transpiler_readable_casttoclass_CastToClass() {}
+  $init__com_google_j2cl_transpiler_readable_classliteral_ClassLiteral() {}
 
   /**
    * @return {void}
    * @public
    */
   m_main() {
-    let o = CastToClass.$create();
-    let c = /**@type {CastToClass} */ (Casts.to(o, CastToClass.$isInstance(o)));
+    let o = ClassLiteral.$class;
+    o = ClassLiteral.$class.$forArray(2);
   }
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!CastToClass}
+   * @return {!ClassLiteral}
    * @public
    */
   static $create() {
-    CastToClass.$clinit();
-    var instance = new CastToClass;
+    ClassLiteral.$clinit();
+    var instance = new ClassLiteral;
     instance
-        .$ctor__com_google_j2cl_transpiler_readable_casttoclass_CastToClass();
+        .$ctor__com_google_j2cl_transpiler_readable_classliteral_ClassLiteral();
     return instance;
   }
 
@@ -50,9 +49,9 @@ class CastToClass extends Object {
    * Initializes instance fields for a particular Java constructor.
    * @protected
    */
-  $ctor__com_google_j2cl_transpiler_readable_casttoclass_CastToClass() {
+  $ctor__com_google_j2cl_transpiler_readable_classliteral_ClassLiteral() {
     this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_casttoclass_CastToClass();
+    this.$init__com_google_j2cl_transpiler_readable_classliteral_ClassLiteral();
   }
 
   /**
@@ -60,7 +59,7 @@ class CastToClass extends Object {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof CastToClass; }
+  static $isInstance(instance) { return instance instanceof ClassLiteral; }
 
   /**
    * Returns whether the provided class is or extends this class.
@@ -69,7 +68,7 @@ class CastToClass extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, CastToClass);
+    return Util.$canCastClass(classConstructor, ClassLiteral);
   }
 
   /**
@@ -84,15 +83,15 @@ class CastToClass extends Object {
 /**
  * @public {Class}
  */
-CastToClass.$class = Class.$createForClass(
-    Util.$generateId('CastToClass'),
+ClassLiteral.$class = Class.$createForClass(
+    Util.$generateId('ClassLiteral'),
     Util.$generateId(
-        'com.google.j2cl.transpiler.readable.casttoclass.CastToClass'),
+        'com.google.j2cl.transpiler.readable.classliteral.ClassLiteral'),
     Object.$class,
     Util.$generateId(
-        'com.google.j2cl.transpiler.readable.casttoclass.CastToClass'));
+        'com.google.j2cl.transpiler.readable.classliteral.ClassLiteral'));
 
 /**
  * Export class.
  */
-exports.CastToClass = CastToClass;
+exports.ClassLiteral = ClassLiteral;

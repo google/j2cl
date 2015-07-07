@@ -2,6 +2,7 @@ goog.module('vmbootstrap.StringsModule');
 
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
+var String = goog.require('gen.java.lang.StringModule').String;
 
 
 /**
@@ -47,7 +48,7 @@ class Strings {
    * @public
    */
   static m_getClass__java_lang_Object(obj) {
-    return Class.$stringLiteral;
+    return String.$class;
   }
 };
 

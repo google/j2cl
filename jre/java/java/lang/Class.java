@@ -18,7 +18,29 @@ package java.lang;
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html">the
  * official Java API doc</a> for details.
  */
-public class Class<T> implements java.io.Serializable {
-  public String getName() {return null;}
-  public boolean isArray() {return false;}
+public abstract class Class<T> implements java.io.Serializable {
+
+  public abstract boolean desiredAssertionStatus();
+
+  public abstract String getCanonicalName();
+
+  public abstract Class<?> getComponentType();
+
+  public abstract T[] getEnumConstants();
+
+  public abstract String getName();
+
+  public abstract String getSimpleName();
+
+  public abstract Class<?> getSuperclass();
+
+  public abstract boolean isArray();
+
+  public abstract boolean isEnum();
+
+  public abstract boolean isInterface();
+
+  public abstract boolean isPrimitive();
+
+  public abstract String toString();
 }

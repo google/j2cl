@@ -17,6 +17,7 @@ package com.google.j2cl.generator;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.FieldReference;
@@ -45,6 +46,9 @@ public class ManglingNameUtils {
    * Returns the mangled name of a method.
    */
   public static String getMangledName(MethodReference methodRef) {
+    if (methodRef.isRaw()) {
+      return methodRef.getMethodName();
+    }
     String suffix;
     switch (methodRef.getVisibility()) {
       case PRIVATE:
@@ -98,6 +102,11 @@ public class ManglingNameUtils {
    * Returns the mangled name of a field.
    */
   public static String getMangledName(FieldReference fieldRef, boolean fromClinit) {
+    if (fieldRef.isRaw()) {
+      return fieldRef.getFieldName();
+    }
+
+    Preconditions.checkArgument(!fieldRef.getEnclosingClassRef().isArray());
     String name = fieldRef.getFieldName();
     String typeMangledName = getMangledName(fieldRef.getEnclosingClassRef());
     String privateSuffix = fieldRef.getVisibility().isPrivate() ? "_" : "";

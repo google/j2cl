@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.frontend;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.errors.Errors;
 
 import org.eclipse.jdt.core.dom.ASTVisitor;
@@ -52,6 +53,7 @@ public class CompilationUnitNameLocator {
   }
 
   private static char[][] toCompoundName(String qualifiedName) {
+    Preconditions.checkArgument(!qualifiedName.contains("<") && !qualifiedName.contains(">"));
     String[] parts = qualifiedName.split("\\.");
     char[][] compoundName = new char[parts.length][];
     for (int i = 0; i < parts.length; i++) {
@@ -92,14 +94,27 @@ public class CompilationUnitNameLocator {
     if (typeBinding == null) {
       return null;
     }
+    // Compute the erasure to resolve type variables; type parameters in general are taken care by
+    // computing the binary name. E.g.
+    //
+    //            Type          |  Binary name  |  Erasure       |  Erasure then Binary name
+    //               A          |       A       |    A           |     A
+    //             A<T>         |       A       |    A<Object>   |     A
+    //          A<T extends N>  |       A       |    A<Object>   |     A
+    // (T extends N)    T       |       T       |    N           |     N
+    //
+    //  computing the erasure
+
+    typeBinding = typeBinding.getErasure();
 
     if (typeBinding.isPrimitive()) {
       // Primitives don't come from a compilation unit.
       return null;
     }
 
-    if (sourceUnitNamesByTypeBinaryName.containsKey(typeBinding.getBinaryName())) {
-      return sourceUnitNamesByTypeBinaryName.get(typeBinding.getBinaryName());
+    String binaryName = typeBinding.getBinaryName();
+    if (sourceUnitNamesByTypeBinaryName.containsKey(binaryName)) {
+      return sourceUnitNamesByTypeBinaryName.get(binaryName);
     }
 
     String binaryCompilationUnitName = getBinaryCompilationUnitName(typeBinding);
