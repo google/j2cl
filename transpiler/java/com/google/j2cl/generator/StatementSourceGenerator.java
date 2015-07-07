@@ -131,8 +131,9 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformBlock(Block statement) {
-        // brackets "{ }" should be inserted by caller explicitly.
-        return Joiner.on("\n").join(transformNodesToSource(statement.getStatements()));
+        String statementsAsString =
+            Joiner.on("\n").join(transformNodesToSource(statement.getStatements()));
+        return "{\n" + statementsAsString + "}";
       }
 
       @Override
@@ -329,7 +330,7 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformTryStatement(TryStatement statement) {
-        String tryBlock = String.format("try { %s }\n", toSource(statement.getBody()));
+        String tryBlock = String.format("try %s", toSource(statement.getBody()));
         String catchBlock;
         if (statement.getCatchClauses().isEmpty()) {
           catchBlock = "";
@@ -349,7 +350,7 @@ public class StatementSourceGenerator {
         String finallyBlock =
             statement.getFinallyBlock() == null
                 ? ""
-                : String.format("finally { %s }", toSource(statement.getFinallyBlock()));
+                : String.format("finally %s", toSource(statement.getFinallyBlock()));
         return tryBlock + catchBlock + finallyBlock;
       }
 
@@ -386,12 +387,14 @@ public class StatementSourceGenerator {
             localExceptionVar.getName().equals(globalExceptionVarName)
                 ? ""
                 : String.format(
-                    "var %s = %s;", localExceptionVar.getName(), globalExceptionVarName);
+                    "let %s = %s;", localExceptionVar.getName(), globalExceptionVarName);
+        String blockStatementsAsString =
+            Joiner.on("\n").join(transformNodesToSource(catchClause.getBody().getStatements()));
         return String.format(
             "if (%s) {%s %s}",
             transformExceptionVariable(localExceptionVar.getTypeRef(), globalExceptionVarName),
             localVarDecl,
-            toSource(catchClause.getBody()));
+            blockStatementsAsString);
       }
 
       /**
@@ -441,7 +444,7 @@ public class StatementSourceGenerator {
         Block falseBlock = ifStatement.getFalseBlock();
 
         if (falseBlock == null) {
-          return String.format("if (%s) {%s}", conditionAsString, trueBlockAsString);
+          return String.format("if (%s) %s", conditionAsString, trueBlockAsString);
         }
         String falseBlockAsString = null;
         if (falseBlock.getStatements().size() == 1
@@ -449,11 +452,11 @@ public class StatementSourceGenerator {
           IfStatement nestedIfStatement = (IfStatement) falseBlock.getStatements().get(0);
           falseBlockAsString = toSource(nestedIfStatement);
         } else {
-          falseBlockAsString = "{" + toSource(ifStatement.getFalseBlock()) + "}";
+          falseBlockAsString = toSource(ifStatement.getFalseBlock());
         }
 
         return String.format(
-            "if (%s) {%s} else %s", conditionAsString, trueBlockAsString, falseBlockAsString);
+            "if (%s) %s else %s", conditionAsString, trueBlockAsString, falseBlockAsString);
       }
 
       @Override
@@ -477,14 +480,14 @@ public class StatementSourceGenerator {
       public String transformWhileStatement(WhileStatement whileStatement) {
         String conditionAsString = toSource(whileStatement.getConditionExpression());
         String blockAsString = toSource(whileStatement.getBlock());
-        return String.format("while (%s) {%s}", conditionAsString, blockAsString);
+        return String.format("while (%s) %s", conditionAsString, blockAsString);
       }
 
       @Override
       public String transformDoWhileStatement(DoWhileStatement doWhileStatement) {
         String conditionAsString = toSource(doWhileStatement.getConditionExpression());
         String blockAsString = toSource(doWhileStatement.getBlock());
-        return String.format("do {%s} while(%s);", blockAsString, conditionAsString);
+        return String.format("do %s while(%s);", blockAsString, conditionAsString);
       }
 
       @Override
@@ -510,7 +513,7 @@ public class StatementSourceGenerator {
         String blockAsString = toSource(forStatement.getBlock());
 
         return String.format(
-            "for (%s; %s; %s) {\n%s\n}",
+            "for (%s; %s; %s) %s",
             initializerAsString,
             conditionExpressionAsString,
             updatersAsString,
@@ -522,7 +525,7 @@ public class StatementSourceGenerator {
           VariableDeclarationExpression variableDeclarationExpression) {
         List<String> fragmentsAsString =
             transformNodesToSource(variableDeclarationExpression.getFragments());
-        return "var " + Joiner.on(", ").join(fragmentsAsString);
+        return "let " + Joiner.on(", ").join(fragmentsAsString);
       }
 
       @Override
@@ -530,7 +533,7 @@ public class StatementSourceGenerator {
           VariableDeclarationStatement variableDeclarationStatement) {
         List<String> fragmentsAsString =
             transformNodesToSource(variableDeclarationStatement.getFragments());
-        return "var " + Joiner.on(", ").join(fragmentsAsString) + ";";
+        return "let " + Joiner.on(", ").join(fragmentsAsString) + ";";
       }
 
       @Override

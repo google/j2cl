@@ -36,7 +36,7 @@ class MultipleCatch extends Object {
       if (NullPointerException.$isInstance(e) ||
           ClassCastException.$isInstance(e)) {
       } else if (RuntimeException.$isInstance(e)) {
-        var r = e;
+        let r = e;
         r = null;
       } else {
         throw e;

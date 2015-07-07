@@ -335,6 +335,8 @@ public class CompilationUnitBuilder {
       switch (node.getNodeType()) {
         case ASTNode.ASSERT_STATEMENT:
           return singletonStatement(convert((org.eclipse.jdt.core.dom.AssertStatement) node));
+        case ASTNode.BLOCK:
+          return singletonStatement(convert((org.eclipse.jdt.core.dom.Block) node));
         case ASTNode.CONSTRUCTOR_INVOCATION:
           return singletonStatement(convert((org.eclipse.jdt.core.dom.ConstructorInvocation) node));
         case ASTNode.DO_STATEMENT:

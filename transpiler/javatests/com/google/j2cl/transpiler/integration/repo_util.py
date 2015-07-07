@@ -59,14 +59,14 @@ def compute_synced_to_cl():
   return int(synced_to_cl)
 
 
-def get_js_files_by_test_name():
+def get_js_files_by_test_name(cwd=None):
   """Finds and returns a test_name<->optimized_js_file map."""
   # Gather a list of the names of the test targets we care about
   test_targets = (
       process_util.run_cmd_get_output(
           ["blaze", "query",
            "filter('.*:optimized_js', kind(%s, %s))" %
-           ("js_binary", TEST_TARGET_PATTERN)]).split("\n"))
+           ("js_binary", TEST_TARGET_PATTERN)], cwd=cwd).split("\n"))
   test_targets = filter(bool, test_targets)
 
   # Convert to a map of names<->jsFile pairs
@@ -137,7 +137,9 @@ def managed_repo_process_cl(cl):
     build_optimized_tests(MANAGED_GOOGLE3_PATH)
 
     optimized_size_change_count = 0
-    for (test_name, js_file) in get_js_files_by_test_name():
+    # For every test that exists in the managed repo at its currently synced CL.
+    js_files_by_test_name = get_js_files_by_test_name(cwd=MANAGED_GOOGLE3_PATH)
+    for (test_name, js_file) in js_files_by_test_name:
       absolute_js_file_path = MANAGED_GOOGLE3_PATH + "/" + js_file
       if not os.path.isfile(absolute_js_file_path):
         # This test does not exist in the managed repo at the CL at which

@@ -30,7 +30,7 @@ class InstanceofClass extends Object {
    * @public
    */
   m_test() {
-    var object = InstanceofClass.$create();
+    let object = InstanceofClass.$create();
     Asserts.$enabled() && Asserts.$assert(InstanceofClass.$isInstance(object));
     Asserts.$enabled() && Asserts.$assert(Object.$isInstance(object));
     Asserts.$enabled() && Asserts.$assert(!(String.$isInstance(object)));

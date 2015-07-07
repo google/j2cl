@@ -1,8 +1,8 @@
 /**
  * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/whilestatement/WhileStatement.java.
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/blockscoping/BlockScoping.java.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.whilestatement.WhileStatementModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.blockscoping.BlockScopingModule');
 
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
@@ -10,7 +10,7 @@ var Object = goog.require('gen.java.lang.CoreModule').Object;
 var Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
-class WhileStatement extends Object {
+class BlockScoping extends Object {
   /**
    * Defines instance fields.
    * @private
@@ -21,28 +21,26 @@ class WhileStatement extends Object {
    * Runs instance field and block initializers.
    * @private
    */
-  $init__com_google_j2cl_transpiler_readable_whilestatement_WhileStatement() {}
+  $init__com_google_j2cl_transpiler_readable_blockscoping_BlockScoping() {}
 
   /**
    * @public
    */
-  m_test() {
-    let count = 0;
-    while (count < 5) {
-      count++;
-    }
+  m_main() {
+    { let i = 0; }
+    { let i = 1; }
   }
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!WhileStatement}
+   * @return {!BlockScoping}
    * @public
    */
   static $create() {
-    WhileStatement.$clinit();
-    var instance = new WhileStatement;
+    BlockScoping.$clinit();
+    var instance = new BlockScoping;
     instance
-        .$ctor__com_google_j2cl_transpiler_readable_whilestatement_WhileStatement();
+        .$ctor__com_google_j2cl_transpiler_readable_blockscoping_BlockScoping();
     return instance;
   }
 
@@ -50,9 +48,9 @@ class WhileStatement extends Object {
    * Initializes instance fields for a particular Java constructor.
    * @protected
    */
-  $ctor__com_google_j2cl_transpiler_readable_whilestatement_WhileStatement() {
+  $ctor__com_google_j2cl_transpiler_readable_blockscoping_BlockScoping() {
     this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_whilestatement_WhileStatement();
+    this.$init__com_google_j2cl_transpiler_readable_blockscoping_BlockScoping();
   }
 
   /**
@@ -60,7 +58,7 @@ class WhileStatement extends Object {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof WhileStatement; }
+  static $isInstance(instance) { return instance instanceof BlockScoping; }
 
   /**
    * Returns whether the provided class is or extends this class.
@@ -69,7 +67,7 @@ class WhileStatement extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, WhileStatement);
+    return Util.$canCastClass(classConstructor, BlockScoping);
   }
 
   /**
@@ -84,15 +82,15 @@ class WhileStatement extends Object {
 /**
  * @public {Class}
  */
-WhileStatement.$class = Class.$createForClass(
-    Util.$generateId('WhileStatement'),
+BlockScoping.$class = Class.$createForClass(
+    Util.$generateId('BlockScoping'),
     Util.$generateId(
-        'com.google.j2cl.transpiler.readable.whilestatement.WhileStatement'),
+        'com.google.j2cl.transpiler.readable.blockscoping.BlockScoping'),
     Object.$class,
     Util.$generateId(
-        'com.google.j2cl.transpiler.readable.whilestatement.WhileStatement'));
+        'com.google.j2cl.transpiler.readable.blockscoping.BlockScoping'));
 
 /**
  * Export class.
  */
-exports.WhileStatement = WhileStatement;
+exports.BlockScoping = BlockScoping;
