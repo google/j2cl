@@ -25,6 +25,7 @@ def main():
     print "must pass the name of the test to diff as an argument"
     return
   test_name = sys.argv[1]
+  js_file_path = repo_util.get_readable_optimized_test_file(test_name)
 
   print "Constructing a diff of opt JS changes in '%s'." % test_name
 
@@ -43,13 +44,16 @@ def main():
   print ("  blaze building readable opt JS for '%s' in the managed repo" %
          test_name)
   repo_util.build_readable_optimized_test(test_name, cwd=MANAGED_GOOGLE3_PATH)
+  process_util.run_cmd_get_output(
+      ["clang-format", "-i",
+       MANAGED_GOOGLE3_PATH + "/" + js_file_path])
 
   print ("  blaze building readable opt JS for '%s' in the live repo" %
          test_name)
   repo_util.build_readable_optimized_test(test_name)
+  process_util.run_cmd_get_output(["clang-format", "-i", js_file_path])
 
   print "  starting meld"
-  js_file_path = repo_util.get_readable_optimized_test_file(test_name)
   process_util.run_cmd_get_output(
       ["meld",
        MANAGED_GOOGLE3_PATH + "/" + js_file_path,

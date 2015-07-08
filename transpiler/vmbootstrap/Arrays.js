@@ -235,7 +235,7 @@ class Arrays {
    * @public
    */
   static m_toString__java_lang_Object(obj) {
-    return obj.$class.m_getName() + '@' +
+    return Arrays.m_getClass__java_lang_Object(obj).m_getName() + '@' +
            Integer.m_toHexString__int(Hashing.$getHashCode(obj));
   }
 
@@ -244,7 +244,13 @@ class Arrays {
    * @return {Class}
    * @public
    */
-  static m_getClass__java_lang_Object(obj) { return obj.$class; }
+  static m_getClass__java_lang_Object(obj) {
+    if (obj.$class) {
+      return obj.$class;
+    }
+    // Uninitialized arrays lack a .$class field but are implicitly Object[].
+    return Object.$class.$forArray(1);
+  }
 
   /**
    * Isolates the exception throw here so that calling functions that perform

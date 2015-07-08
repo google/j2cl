@@ -285,8 +285,16 @@ public class StatementSourceGenerator {
         String arrayLiteralAsString = toSource(newArrayExpression.getArrayLiteral());
 
         if (dimensionCount == 1) {
+          // It's 1 dimensional.
+          if (RegularTypeReference.OBJECT_TYPEREF.equals(newArrayExpression.getLeafTypeRef())) {
+            // And the leaf type is Object. All arrays are implicitly Array<Object> so leave out the
+            // init.
+            return arrayLiteralAsString;
+          }
+          // Number of dimensions defaults to 1 so we can leave that parameter out.
           return String.format("Arrays.$init(%s, %s)", arrayLiteralAsString, leafTypeName);
         } else {
+          // It's multidimensional, make dimensions explicit.
           return String.format(
               "Arrays.$init(%s, %s, %s)", arrayLiteralAsString, leafTypeName, dimensionCount);
         }
