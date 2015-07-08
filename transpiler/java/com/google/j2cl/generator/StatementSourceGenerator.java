@@ -21,6 +21,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractTransformer;
 import com.google.j2cl.ast.ArrayAccess;
+import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.ArrayTypeReference;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.BinaryExpression;
@@ -244,21 +245,45 @@ public class StatementSourceGenerator {
       }
 
       @Override
-      public String transformNewArray(NewArray expression) {
-        String dimensionsList =
-            Joiner.on(", ").join(transformNodesToSource(expression.getDimensionExpressions()));
+      public String transformArrayLiteral(ArrayLiteral arrayLiteral) {
+        String valuesAsString =
+            Joiner.on(", ").join(transformNodesToSource(arrayLiteral.getValueExpressions()));
+        return "[ " + valuesAsString + " ]";
+      }
 
-        TypeReference leafTypeRef = expression.getLeafTypeRef();
-        if (leafTypeRef.isPrimitive()) {
-          // Primitive array creations look like Arrays.$createByte, etc.
-          return String.format(
-              "Arrays.$create%s([%s])",
-              TranspilerUtils.toProperCase(leafTypeRef.getSimpleName()),
-              dimensionsList);
+      @Override
+      public String transformNewArray(NewArray newArrayExpression) {
+        if (newArrayExpression.getArrayLiteral() != null) {
+          return transformArrayInit(newArrayExpression);
         }
+        return transformArrayCreate(newArrayExpression);
+      }
 
+      private String transformArrayCreate(NewArray newArrayExpression) {
+        Preconditions.checkArgument(newArrayExpression.getArrayLiteral() == null);
+
+        String dimensionsList =
+            Joiner.on(", ")
+                .join(transformNodesToSource(newArrayExpression.getDimensionExpressions()));
         return String.format(
-            "Arrays.$create([%s], %s)", dimensionsList, TranspilerUtils.getClassName(leafTypeRef));
+            "Arrays.$create([%s], %s)",
+            dimensionsList,
+            TranspilerUtils.getClassName(newArrayExpression.getLeafTypeRef()));
+      }
+
+      private String transformArrayInit(NewArray newArrayExpression) {
+        Preconditions.checkArgument(newArrayExpression.getArrayLiteral() != null);
+
+        String leafTypeName = TranspilerUtils.getClassName(newArrayExpression.getLeafTypeRef());
+        int dimensionCount = newArrayExpression.getDimensionExpressions().size();
+        String arrayLiteralAsString = toSource(newArrayExpression.getArrayLiteral());
+
+        if (dimensionCount == 1) {
+          return String.format("Arrays.$init(%s, %s)", arrayLiteralAsString, leafTypeName);
+        } else {
+          return String.format(
+              "Arrays.$init(%s, %s, %s)", arrayLiteralAsString, leafTypeName, dimensionCount);
+        }
       }
 
       @Override

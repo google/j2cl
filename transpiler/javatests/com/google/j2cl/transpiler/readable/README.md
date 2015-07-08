@@ -45,20 +45,16 @@ are copyright and licensed as follows:
 ## Likely readable examples to add (remove some redundant)
 - anonymousclasswithcapture
 - array devirtualization
-- block scoped variables
 - boxing
 - bridgemethodaccidentaloverride
 - bridgemethodboundedtypes
 - bridgemethodmultipleoverrides
 - bridgemethodmultipletypevars
-- cascadedclinitrunsjustonce
-- casttointerface
 - casttoprimitive
 - catchjsexception
 - classclasscollision
 - classliteralForEnums (tests are in classliteral)
 - complexlongincrement
-- complexobjectarray
 - complextypeinference
 - enumwithanonymousclass
 - enumwithbody
@@ -71,7 +67,6 @@ are copyright and licensed as follows:
 - implementgenericinterface
 - implementgenericinterfacewithparam
 - implicitconversions
-- importsjavalangs
 - importsparent
 - instanceinnerclass
 - instanceofarray
@@ -103,7 +98,6 @@ are copyright and licensed as follows:
 - protectedinstancemethods
 - shadowedfield
 - simpleanonymousclass
-- simplearrayliteral
 - simplebridgemethod
 - simpleenum
 - simplegenerictype
@@ -111,8 +105,6 @@ are copyright and licensed as follows:
 - subclassgenericclass
 - subclassgenericclasswithparam
 - supercall
-- twodimensionalarrayliteral
 - typeinference
 - typewildcards
-- unbalancedarrayliteral
 - varargs

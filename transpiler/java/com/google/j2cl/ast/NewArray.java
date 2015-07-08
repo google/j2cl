@@ -15,10 +15,13 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 /**
  * Class for new array expression.
@@ -27,10 +30,19 @@ import java.util.List;
 public class NewArray extends Expression {
   @Visitable List<Expression> dimensionExpressions = new ArrayList<>();
   @Visitable TypeReference leafTypeRef;
+  @Nullable @Visitable ArrayLiteral arrayLiteral;
 
-  public NewArray(List<Expression> dimensionExpressions, TypeReference leafTypeRef) {
+  public NewArray(
+      List<Expression> dimensionExpressions, TypeReference leafTypeRef, ArrayLiteral arrayLiteral) {
+    Preconditions.checkNotNull(leafTypeRef);
+
     this.dimensionExpressions.addAll(dimensionExpressions);
     this.leafTypeRef = leafTypeRef;
+    this.arrayLiteral = arrayLiteral;
+  }
+
+  public ArrayLiteral getArrayLiteral() {
+    return arrayLiteral;
   }
 
   public List<Expression> getDimensionExpressions() {

@@ -19,14 +19,6 @@ var NullPointerException =
     .NullPointerException;
 var Hashing = goog.require('nativebootstrap.HashingModule').Hashing;
 var Casts = goog.require('vmbootstrap.CastsModule').Casts;
-var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
-var $byte = goog.require('vmbootstrap.PrimitivesModule').$byte;
-var $char = goog.require('vmbootstrap.PrimitivesModule').$char;
-var $double = goog.require('vmbootstrap.PrimitivesModule').$double;
-var $float = goog.require('vmbootstrap.PrimitivesModule').$float;
-var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
-var $long = goog.require('vmbootstrap.PrimitivesModule').$long;
-var $short = goog.require('vmbootstrap.PrimitivesModule').$short;
 
 
 // java.lang.Object/Serializable/Cloneable cast check functions contain special
@@ -279,102 +271,6 @@ class Arrays {
    * @private
    */
   static $throwNullPointerException() { throw NullPointerException.$create(); }
-
-  /**
-   * Creates, initializes, and returns a byte array with the given number of
-   * dimensions and lengths.
-   *
-   * @param {Array<number>} dimensionLengths
-   * @return {Array<?>}
-   * @public
-   */
-  static $createByte(dimensionLengths) {
-    return Arrays.$create(dimensionLengths, $byte);
-  }
-
-  /**
-   * Creates, initializes, and returns a short array with the given number of
-   * dimensions and lengths.
-   *
-   * @param {Array<number>} dimensionLengths
-   * @return {Array<?>}
-   * @public
-   */
-  static $createShort(dimensionLengths) {
-    return Arrays.$create(dimensionLengths, $short);
-  }
-
-  /**
-   * Creates, initializes, and returns a int array with the given number of
-   * dimensions and lengths.
-   *
-   * @param {Array<number>} dimensionLengths
-   * @return {Array<?>}
-   * @public
-   */
-  static $createInt(dimensionLengths) {
-    return Arrays.$create(dimensionLengths, $int);
-  }
-
-  /**
-   * Creates, initializes, and returns a long array with the given number of
-   * dimensions and lengths.
-   *
-   * @param {Array<number>} dimensionLengths
-   * @return {Array<?>}
-   * @public
-   */
-  static $createLong(dimensionLengths) {
-    return Arrays.$create(dimensionLengths, $long);
-  }
-
-  /**
-   * Creates, initializes, and returns a float array with the given number of
-   * dimensions and lengths.
-   *
-   * @param {Array<number>} dimensionLengths
-   * @return {Array<?>}
-   * @public
-   */
-  static $createFloat(dimensionLengths) {
-    return Arrays.$create(dimensionLengths, $float);
-  }
-
-  /**
-   * Creates, initializes, and returns a double array with the given number of
-   * dimensions and lengths.
-   *
-   * @param {Array<number>} dimensionLengths
-   * @return {Array<?>}
-   * @public
-   */
-  static $createDouble(dimensionLengths) {
-    return Arrays.$create(dimensionLengths, $double);
-  }
-
-  /**
-   * Creates, initializes, and returns a char array with the given number of
-   * dimensions and lengths.
-   *
-   * @param {Array<number>} dimensionLengths
-   * @return {Array<?>}
-   * @public
-   */
-  static $createChar(dimensionLengths) {
-    return Arrays.$create(dimensionLengths, $char);
-  }
-
-  /**
-   * Creates, initializes, and returns a boolean array with the given number of
-   * dimensions and lengths.
-   *
-   * @param {Array<number>} dimensionLengths
-   * @return {Array<?>}
-   * @public
-   */
-  static $createBoolean(dimensionLengths) {
-    return Arrays.$create(dimensionLengths, $boolean);
-  }
 
   /**
    * @param {Array<number>} array

@@ -19,6 +19,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.ArrayAccess;
+import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
@@ -204,11 +205,10 @@ public class CompilationUnitBuilder {
       return new ArrayAccess(convert(node.getArray()), convert(node.getIndex()));
     }
 
-    @SuppressWarnings("cast")
+    @SuppressWarnings({"cast", "unchecked"})
     private NewArray convert(org.eclipse.jdt.core.dom.ArrayCreation node) {
       ArrayType arrayType = node.getType();
 
-      @SuppressWarnings("unchecked")
       List<Expression> dimensionExpressions =
           convert((List<org.eclipse.jdt.core.dom.Expression>) node.dimensions());
       // If some dimensions are not initialized then make that explicit.
@@ -216,10 +216,20 @@ public class CompilationUnitBuilder {
         dimensionExpressions.add(new NullLiteral());
       }
 
+      ArrayLiteral arrayLiteral =
+          node.getInitializer() == null ? null : convert(node.getInitializer());
+
       ITypeBinding leafTypeBinding = arrayType.getElementType().resolveBinding();
       return new NewArray(
           dimensionExpressions,
-          JdtUtils.createTypeReference(leafTypeBinding, compilationUnitNameLocator));
+          JdtUtils.createTypeReference(leafTypeBinding, compilationUnitNameLocator),
+          arrayLiteral);
+    }
+
+    @SuppressWarnings({"cast", "unchecked"})
+    private ArrayLiteral convert(org.eclipse.jdt.core.dom.ArrayInitializer node) {
+      return new ArrayLiteral(
+          convert((List<org.eclipse.jdt.core.dom.Expression>) node.expressions()));
     }
 
     private BooleanLiteral convert(org.eclipse.jdt.core.dom.BooleanLiteral node) {
@@ -251,6 +261,8 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.ArrayAccess) node);
         case ASTNode.ARRAY_CREATION:
           return convert((org.eclipse.jdt.core.dom.ArrayCreation) node);
+        case ASTNode.ARRAY_INITIALIZER:
+          return convert((org.eclipse.jdt.core.dom.ArrayInitializer) node);
         case ASTNode.ASSIGNMENT:
           return convert((org.eclipse.jdt.core.dom.Assignment) node);
         case ASTNode.BOOLEAN_LITERAL:
@@ -673,8 +685,7 @@ public class CompilationUnitBuilder {
           FieldReference.createRaw(
               true, literalTypeRef.getLeafTypeRef(), "$class", javaLangClassTypeRef);
 
-      MethodReference forArray =
-          MethodReference.createRaw(true, javaLangClassTypeRef, "$forArray");
+      MethodReference forArray = MethodReference.createRaw(true, javaLangClassTypeRef, "$forArray");
 
       // <ClassLiteralClass>.$class.forArray(<dimensions>)
       return new MethodCall(
