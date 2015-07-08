@@ -67,7 +67,7 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
   opt_harness = """
       goog.module('gen.opt.Harness');
       var Main = goog.require('gen.%s.MainModule').Main;
-      Main.m_main__arrayOf_java_lang_String();
+      Main.m_main__arrayOf_java_lang_String([]);
   """ % java_package
   native.genrule(
       name="opt_harness_generator",
@@ -123,7 +123,7 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
       var Main = goog.require('gen.%s.MainModule').Main;
       testSuite({
         test_Main: function() {
-          Main.m_main__arrayOf_java_lang_String();
+          Main.m_main__arrayOf_java_lang_String([]);
         }
       });
   """ % java_package

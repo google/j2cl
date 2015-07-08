@@ -32,6 +32,7 @@ import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.BreakStatement;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CatchClause;
+import com.google.j2cl.ast.CharacterLiteral;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.DoWhileStatement;
 import com.google.j2cl.ast.EmptyStatement;
@@ -274,6 +275,10 @@ public class CompilationUnitBuilder {
       return new CastExpression(expression, castType);
     }
 
+    private CharacterLiteral convert(org.eclipse.jdt.core.dom.CharacterLiteral node) {
+      return new CharacterLiteral(node.charValue(), node.getEscapedValue());
+    }
+
     private NewInstance convert(org.eclipse.jdt.core.dom.ClassInstanceCreation node) {
       Expression qualifier = node.getExpression() == null ? null : convert(node.getExpression());
       MethodDescriptor constructor =
@@ -319,6 +324,8 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.BooleanLiteral) node);
         case ASTNode.CAST_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.CastExpression) node);
+        case ASTNode.CHARACTER_LITERAL:
+          return convert((org.eclipse.jdt.core.dom.CharacterLiteral) node);
         case ASTNode.CLASS_INSTANCE_CREATION:
           return convert((org.eclipse.jdt.core.dom.ClassInstanceCreation) node);
         case ASTNode.CONDITIONAL_EXPRESSION:

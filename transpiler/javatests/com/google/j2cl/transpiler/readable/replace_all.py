@@ -40,7 +40,8 @@ def run_cmd_get_output(cmd_args, include_stderr=False, cwd=None):
   if include_stderr:
     output = (output + "\n" if output else "") + results[1]
   if process.wait() != SUCCESS_CODE:
-    raise CmdExecutionError("cmd invocation " + str(cmd_args) + " FAILED")
+    raise CmdExecutionError(
+        "cmd invocation " + str(cmd_args) + " failed with\n" + results[1])
 
   return output
 

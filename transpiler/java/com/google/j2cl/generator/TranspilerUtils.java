@@ -40,7 +40,7 @@ import java.util.TreeSet;
 public class TranspilerUtils {
   public static String getSourceName(TypeDescriptor typeDescriptor) {
     // TODO(rluble): Stub implementation. Needs to be implemented for the cases in which a
-    // class might be refered by multiple different type references.
+    // class might be referred by multiple different type references.
     // TODO(rluble): See if the canonical name concept can be avoided in our AST but converting
     // to canonical type references at AST construction.
     return typeDescriptor.getSourceName();
@@ -58,7 +58,6 @@ public class TranspilerUtils {
    * Returns the JsDoc type name.
    */
   public static String getJsDocName(TypeDescriptor typeDescriptor) {
-    // TODO: Incomplete implementation.
     if (typeDescriptor.isArray()) {
       return String.format(
           "%s%s%s",
@@ -66,11 +65,15 @@ public class TranspilerUtils {
           getJsDocName(typeDescriptor.getLeafTypeDescriptor()),
           Strings.repeat(">", typeDescriptor.getDimensions()));
     }
+
+    // Special cases.
     switch (typeDescriptor.getSourceName()) {
-      case TypeDescriptor.INT_TYPE_NAME:
-      case TypeDescriptor.DOUBLE_TYPE_NAME:
-      case TypeDescriptor.FLOAT_TYPE_NAME:
+      case TypeDescriptor.BYTE_TYPE_NAME:
       case TypeDescriptor.SHORT_TYPE_NAME:
+      case TypeDescriptor.INT_TYPE_NAME:
+      case TypeDescriptor.FLOAT_TYPE_NAME:
+      case TypeDescriptor.DOUBLE_TYPE_NAME:
+      case TypeDescriptor.CHAR_TYPE_NAME:
         return "number";
       case "java.lang.String":
         return "?string";

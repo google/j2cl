@@ -30,6 +30,7 @@ import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.BreakStatement;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CatchClause;
+import com.google.j2cl.ast.CharacterLiteral;
 import com.google.j2cl.ast.DoWhileStatement;
 import com.google.j2cl.ast.EmptyStatement;
 import com.google.j2cl.ast.Expression;
@@ -187,6 +188,14 @@ public class StatementSourceGenerator {
             expressionStr,
             leafTypeName,
             arrayCastType.getDimensions());
+      }
+
+      @Override
+      public String transformCharacterLiteral(CharacterLiteral characterLiteral) {
+        return String.format(
+            "%s /* %s */",
+            Integer.toString(characterLiteral.getValue()),
+            characterLiteral.getEscapedValue());
       }
 
       @Override
