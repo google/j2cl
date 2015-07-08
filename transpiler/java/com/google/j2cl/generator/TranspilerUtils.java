@@ -25,7 +25,7 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.TypeReference;
+import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatheringVisitor;
@@ -38,48 +38,47 @@ import java.util.TreeSet;
  * Utility functions to transpile the j2cl AST.
  */
 public class TranspilerUtils {
-  public static String getSourceName(TypeReference typeRef) {
+  public static String getSourceName(TypeDescriptor typeDescriptor) {
     // TODO(rluble): Stub implementation. Needs to be implemented for the cases in which a
     // class might be refered by multiple different type references.
     // TODO(rluble): See if the canonical name concept can be avoided in our AST but converting
     // to canonical type references at AST construction.
-    return typeRef.getSourceName();
+    return typeDescriptor.getSourceName();
   }
 
   /**
    * Returns the unqualified name that will be used in JavaScript.
    */
-  public static String getClassName(TypeReference typeRef) {
+  public static String getClassName(TypeDescriptor typeDescriptor) {
     //TODO(rluble): Stub implementation.
-    return typeRef.getClassName();
+    return typeDescriptor.getClassName();
   }
 
   /**
    * Returns the JsDoc type name.
    */
-  public static String getJsDocName(TypeReference typeRef) {
+  public static String getJsDocName(TypeDescriptor typeDescriptor) {
     // TODO: Incomplete implementation.
-    if (typeRef.isArray()) {
+    if (typeDescriptor.isArray()) {
       return String.format(
           "%s%s%s",
-          Strings.repeat("Array<", typeRef.getDimensions()),
-          getJsDocName(typeRef.getLeafTypeRef()),
-          Strings.repeat(">", typeRef.getDimensions()));
+          Strings.repeat("Array<", typeDescriptor.getDimensions()),
+          getJsDocName(typeDescriptor.getLeafTypeDescriptor()),
+          Strings.repeat(">", typeDescriptor.getDimensions()));
     }
-    switch (typeRef.getSourceName()) {
-      case "int":
-      case "double":
-      case "float":
-      case "short":
+    switch (typeDescriptor.getSourceName()) {
+      case TypeDescriptor.INT_TYPE_NAME:
+      case TypeDescriptor.DOUBLE_TYPE_NAME:
+      case TypeDescriptor.FLOAT_TYPE_NAME:
+      case TypeDescriptor.SHORT_TYPE_NAME:
         return "number";
       case "java.lang.String":
         return "?string";
     }
-
-    if (typeRef.isPrimitive()) {
-      return typeRef.getSimpleName();
+    if (typeDescriptor.isPrimitive()) {
+      return typeDescriptor.getSimpleName();
     }
-    return getClassName(typeRef);
+    return getClassName(typeDescriptor);
   }
 
   /**
@@ -115,8 +114,8 @@ public class TranspilerUtils {
     return Joiner.on(", ").join(parameterNameList);
   }
 
-  public static boolean isVoid(TypeReference typeRef) {
-    return typeRef.getClassName().equals("void");
+  public static boolean isVoid(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.getClassName().equals("void");
   }
 
   /**
@@ -198,8 +197,8 @@ public class TranspilerUtils {
     }
   }
 
-  public static String getDefaultInitialValue(TypeReference typeRef) {
-    String jsDocName = getJsDocName(typeRef);
+  public static String getDefaultInitialValue(TypeDescriptor typeDescriptor) {
+    String jsDocName = getJsDocName(typeDescriptor);
     if (jsDocName.equals("number")) {
       return "0";
     } else if (jsDocName.equals("boolean")) {

@@ -20,7 +20,7 @@ import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodReference;
+import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
@@ -59,17 +59,17 @@ public class CreateDefaultConstructorsVisitor extends AbstractVisitor {
   }
 
   private void synthesizeDefaultConstructor(JavaType type) {
-    MethodReference methodReference =
-        MethodReference.create(
+    MethodDescriptor methodDescriptor =
+        MethodDescriptor.create(
             true,
             Visibility.PUBLIC,
-            type.getSelfReference(),
-            type.getSelfReference().getClassName(),
+            type.getDescriptor(),
+            type.getDescriptor().getClassName(),
             true,
-            type.getSelfReference());
+            type.getDescriptor());
     Block body = new Block(new ArrayList<Statement>());
     List<Variable> parameters = new ArrayList<>();
-    Method defaultConstructor = new Method(methodReference, parameters, body);
+    Method defaultConstructor = new Method(methodDescriptor, parameters, body);
     type.addMethod(defaultConstructor);
   }
 }

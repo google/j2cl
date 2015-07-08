@@ -17,12 +17,12 @@ package com.google.j2cl.frontend;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.BinaryOperator;
-import com.google.j2cl.ast.FieldReference;
-import com.google.j2cl.ast.MethodReference;
+import com.google.j2cl.ast.FieldDescriptor;
+import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.PostfixOperator;
 import com.google.j2cl.ast.PrefixOperator;
-import com.google.j2cl.ast.RegularTypeReference;
-import com.google.j2cl.ast.TypeReference;
+import com.google.j2cl.ast.RegularTypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 
@@ -70,7 +70,7 @@ public class JdtUtils {
     return nameEnvironment;
   }
 
-  static TypeReference createTypeReference(
+  static TypeDescriptor createTypeDescriptor(
       ITypeBinding typeBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
     // TODO(rluble): Add support for generics.
     if (typeBinding == null) {
@@ -79,10 +79,10 @@ public class JdtUtils {
     List<String> nameComponents = new LinkedList<>();
     List<String> packageComponents = new LinkedList<>();
     if (typeBinding.isArray()) {
-      RegularTypeReference leafType =
-          (RegularTypeReference)
-              createTypeReference(typeBinding.getElementType(), compilationUnitNameLocator);
-      return leafType.getArray(typeBinding.getDimensions());
+      RegularTypeDescriptor leafTypeDescriptor =
+          (RegularTypeDescriptor)
+              createTypeDescriptor(typeBinding.getElementType(), compilationUnitNameLocator);
+      return leafTypeDescriptor.getArray(typeBinding.getDimensions());
     }
 
     ITypeBinding currentType = typeBinding;
@@ -104,53 +104,55 @@ public class JdtUtils {
       packageComponents = Arrays.asList(typeBinding.getPackage().getNameComponents());
     }
 
-    return TypeReference.create(
+    return TypeDescriptor.create(
         packageComponents, nameComponents, compilationUnitNameLocator.find(typeBinding));
   }
 
-  static FieldReference createFieldReference(
+  static FieldDescriptor createFieldDescriptor(
       IVariableBinding variableBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
     int modifiers = variableBinding.getModifiers();
     boolean isStatic = isStatic(modifiers);
     Visibility visibility = getVisibility(modifiers);
-    TypeReference enclosingClassReference =
-        createTypeReference(variableBinding.getDeclaringClass(), compilationUnitNameLocator);
+    TypeDescriptor enclosingClassReference =
+        createTypeDescriptor(variableBinding.getDeclaringClass(), compilationUnitNameLocator);
     String fieldName = variableBinding.getName();
-    TypeReference type = createTypeReference(variableBinding.getType(), compilationUnitNameLocator);
-    return FieldReference.create(isStatic, visibility, enclosingClassReference, fieldName, type);
+    TypeDescriptor type =
+        createTypeDescriptor(variableBinding.getType(), compilationUnitNameLocator);
+    return FieldDescriptor.create(isStatic, visibility, enclosingClassReference, fieldName, type);
   }
 
-  static MethodReference createMethodReference(
+  static MethodDescriptor createMethodDescriptor(
       IMethodBinding methodBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
     int modifiers = methodBinding.getModifiers();
     boolean isStatic = isStatic(modifiers);
     Visibility visibility = getVisibility(modifiers);
-    TypeReference enclosingClassReference =
-        createTypeReference(methodBinding.getDeclaringClass(), compilationUnitNameLocator);
+    TypeDescriptor enclosingClassReference =
+        createTypeDescriptor(methodBinding.getDeclaringClass(), compilationUnitNameLocator);
     String methodName = methodBinding.getName();
     boolean isConstructor = methodBinding.isConstructor();
-    TypeReference returnTypeReference =
-        createTypeReference(methodBinding.getReturnType(), compilationUnitNameLocator);
+    TypeDescriptor returnTypeDescriptor =
+        createTypeDescriptor(methodBinding.getReturnType(), compilationUnitNameLocator);
     int parameterSize = methodBinding.getParameterTypes().length;
-    TypeReference[] parameterTypeReferences = new TypeReference[parameterSize];
+    TypeDescriptor[] parameterTypeDescriptors = new TypeDescriptor[parameterSize];
     for (int i = 0; i < parameterSize; i++) {
-      parameterTypeReferences[i] =
-          createTypeReference(methodBinding.getParameterTypes()[i], compilationUnitNameLocator);
+      parameterTypeDescriptors[i] =
+          createTypeDescriptor(methodBinding.getParameterTypes()[i], compilationUnitNameLocator);
     }
-    return MethodReference.create(
+    return MethodDescriptor.create(
         isStatic,
         visibility,
         enclosingClassReference,
         methodName,
         isConstructor,
-        returnTypeReference,
-        parameterTypeReferences);
+        returnTypeDescriptor,
+        parameterTypeDescriptors);
   }
 
   static Variable createVariable(
       IVariableBinding variableBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
     String name = variableBinding.getName();
-    TypeReference type = createTypeReference(variableBinding.getType(), compilationUnitNameLocator);
+    TypeDescriptor type =
+        createTypeDescriptor(variableBinding.getType(), compilationUnitNameLocator);
     boolean isFinal = isFinal(variableBinding.getModifiers());
     boolean isParameter = variableBinding.isParameter();
     return new Variable(name, type, isFinal, isParameter);

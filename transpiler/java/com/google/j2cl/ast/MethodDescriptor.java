@@ -24,42 +24,42 @@ import com.google.j2cl.ast.processors.Visitable;
  */
 @AutoValue
 @Visitable
-public abstract class MethodReference extends Node implements Member {
+public abstract class MethodDescriptor extends Node implements Member {
   public static final String METHOD_INIT = "$init";
 
-  public static MethodReference create(
+  public static MethodDescriptor create(
       boolean isStatic,
       Visibility visibility,
-      TypeReference enclosingClassRef,
+      TypeDescriptor enclosingClassDescriptor,
       String methodName,
       boolean isConstructor,
-      TypeReference returnTypeRef,
-      TypeReference... parameterTypeRefs) {
-    return new AutoValue_MethodReference(
+      TypeDescriptor returnTypeDescriptor,
+      TypeDescriptor... parameterTypeDescriptors) {
+    return new AutoValue_MethodDescriptor(
         isStatic,
         false,
         visibility,
-        enclosingClassRef,
+        enclosingClassDescriptor,
         methodName,
         isConstructor,
-        ImmutableList.copyOf(parameterTypeRefs),
-        returnTypeRef);
+        ImmutableList.copyOf(parameterTypeDescriptors),
+        returnTypeDescriptor);
   }
 
   /**
    * Creates a raw method reference.
    */
-  public static MethodReference createRaw(
-      boolean isStatic, TypeReference enclosingClassRef, String methodName) {
-    return new AutoValue_MethodReference(
+  public static MethodDescriptor createRaw(
+      boolean isStatic, TypeDescriptor enclosingClassRef, String methodName) {
+    return new AutoValue_MethodDescriptor(
         isStatic,
         true,
         Visibility.PUBLIC,
         enclosingClassRef,
         methodName,
         false,
-        ImmutableList.<TypeReference>of(),
-        TypeReference.VOID_TYPEREF);
+        ImmutableList.<TypeDescriptor>of(),
+        TypeDescriptor.VOID_TYPE_DESCRIPTOR);
   }
 
   @Override
@@ -74,22 +74,22 @@ public abstract class MethodReference extends Node implements Member {
   public abstract Visibility getVisibility();
 
   @Override
-  public abstract TypeReference getEnclosingClassRef();
+  public abstract TypeDescriptor getEnclosingClassDescriptor();
 
   public abstract String getMethodName();
 
   public abstract boolean isConstructor();
 
-  public abstract ImmutableList<TypeReference> getParameterTypeRefs();
+  public abstract ImmutableList<TypeDescriptor> getParameterTypeDescriptors();
 
-  public abstract TypeReference getReturnTypeRef();
+  public abstract TypeDescriptor getReturnTypeDescriptor();
 
   public boolean isInit() {
     return getMethodName().equals(METHOD_INIT);
   }
 
   @Override
-  public MethodReference accept(Processor processor) {
-    return Visitor_MethodReference.visit(processor, this);
+  public MethodDescriptor accept(Processor processor) {
+    return Visitor_MethodDescriptor.visit(processor, this);
   }
 }

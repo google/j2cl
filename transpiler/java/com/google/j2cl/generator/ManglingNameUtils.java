@@ -20,9 +20,9 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import com.google.j2cl.ast.FieldReference;
-import com.google.j2cl.ast.MethodReference;
-import com.google.j2cl.ast.TypeReference;
+import com.google.j2cl.ast.FieldDescriptor;
+import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.TypeDescriptor;
 
 import java.util.List;
 
@@ -33,103 +33,105 @@ public class ManglingNameUtils {
   /**
    * Returns the mangled name of a type.
    */
-  public static String getMangledName(TypeReference typeRef) {
+  public static String getMangledName(TypeDescriptor typeDescriptor) {
     //TODO(rluble): Stub implementation.
-    if (typeRef.isArray()) {
-      return Strings.repeat("arrayOf_", typeRef.getDimensions())
-          + getMangledName(typeRef.getLeafTypeRef());
+    if (typeDescriptor.isArray()) {
+      return Strings.repeat("arrayOf_", typeDescriptor.getDimensions())
+          + getMangledName(typeDescriptor.getLeafTypeDescriptor());
     }
-    return typeRef.getBinaryName().replace('.', '_');
+    return typeDescriptor.getBinaryName().replace('.', '_');
   }
 
   /**
    * Returns the mangled name of a method.
    */
-  public static String getMangledName(MethodReference methodRef) {
-    if (methodRef.isRaw()) {
-      return methodRef.getMethodName();
+  public static String getMangledName(MethodDescriptor methodDescriptor) {
+    if (methodDescriptor.isRaw()) {
+      return methodDescriptor.getMethodName();
     }
     String suffix;
-    switch (methodRef.getVisibility()) {
+    switch (methodDescriptor.getVisibility()) {
       case PRIVATE:
         // To ensure that private methods never override each other.
-        suffix = "_$p_" + getMangledName(methodRef.getEnclosingClassRef());
+        suffix = "_$p_" + getMangledName(methodDescriptor.getEnclosingClassDescriptor());
         break;
       case PACKAGE_PRIVATE:
         // To ensure that package private methods only override one another when
         // they are in the same package.
-        suffix = "_$pp_" + methodRef.getEnclosingClassRef().getPackageName().replace('.', '_');
+        suffix =
+            "_$pp_"
+                + methodDescriptor.getEnclosingClassDescriptor().getPackageName().replace('.', '_');
         break;
       default:
         suffix = "";
         break;
     }
-    String parameterSignature = getMangledParameterSignature(methodRef);
-    return String.format("m_%s%s%s", methodRef.getMethodName(), parameterSignature, suffix);
+    String parameterSignature = getMangledParameterSignature(methodDescriptor);
+    return String.format("m_%s%s%s", methodDescriptor.getMethodName(), parameterSignature, suffix);
   }
 
   /**
    * Returns the mangled name of the constructor factory method $create.
    */
-  public static String getConstructorMangledName(MethodReference methodRef) {
-    return "$create" + getMangledParameterSignature(methodRef);
+  public static String getConstructorMangledName(MethodDescriptor methodDescriptor) {
+    return "$create" + getMangledParameterSignature(methodDescriptor);
   }
 
   /**
    * Returns the mangled name of $ctor method for a particular constructor.
    */
-  public static String getCtorMangledName(MethodReference methodRef) {
+  public static String getCtorMangledName(MethodDescriptor methodDescriptor) {
     return "$ctor__"
-        + getMangledName(methodRef.getEnclosingClassRef())
-        + getMangledParameterSignature(methodRef);
+        + getMangledName(methodDescriptor.getEnclosingClassDescriptor())
+        + getMangledParameterSignature(methodDescriptor);
   }
 
   /**
    * Returns the mangled name of $init method for a type.
    */
-  public static String getInitMangledName(TypeReference typeRef) {
-    return "$init__" + getMangledName(typeRef);
+  public static String getInitMangledName(TypeDescriptor typeDescriptor) {
+    return "$init__" + getMangledName(typeDescriptor);
   }
 
   /**
    * Returns the mangled name of a field.
    */
-  public static String getMangledName(FieldReference fieldRef) {
-    return getMangledName(fieldRef, false);
+  public static String getMangledName(FieldDescriptor fieldDescriptor) {
+    return getMangledName(fieldDescriptor, false);
   }
 
   /**
    * Returns the mangled name of a field.
    */
-  public static String getMangledName(FieldReference fieldRef, boolean fromClinit) {
-    if (fieldRef.isRaw()) {
-      return fieldRef.getFieldName();
+  public static String getMangledName(FieldDescriptor fieldDescriptor, boolean fromClinit) {
+    if (fieldDescriptor.isRaw()) {
+      return fieldDescriptor.getFieldName();
     }
 
-    Preconditions.checkArgument(!fieldRef.getEnclosingClassRef().isArray());
-    String name = fieldRef.getFieldName();
-    String typeMangledName = getMangledName(fieldRef.getEnclosingClassRef());
-    String privateSuffix = fieldRef.getVisibility().isPrivate() ? "_" : "";
+    Preconditions.checkArgument(!fieldDescriptor.getEnclosingClassDescriptor().isArray());
+    String name = fieldDescriptor.getFieldName();
+    String typeMangledName = getMangledName(fieldDescriptor.getEnclosingClassDescriptor());
+    String privateSuffix = fieldDescriptor.getVisibility().isPrivate() ? "_" : "";
     String prefix = fromClinit ? "$" : "";
     return String.format("%sf_%s__%s%s", prefix, name, typeMangledName, privateSuffix);
   }
 
-  private static String getMangledParameterSignature(MethodReference methodRef) {
-    if (methodRef.getParameterTypeRefs().isEmpty()) {
+  private static String getMangledParameterSignature(MethodDescriptor methodDescriptor) {
+    if (methodDescriptor.getParameterTypeDescriptors().isEmpty()) {
       return "";
     }
-    return "__" + Joiner.on("__").join(getMangledParameterTypes(methodRef));
+    return "__" + Joiner.on("__").join(getMangledParameterTypes(methodDescriptor));
   }
 
   /**
    * Returns the list of mangled name of parameters' types.
    */
-  private static List<String> getMangledParameterTypes(MethodReference methodRef) {
+  private static List<String> getMangledParameterTypes(MethodDescriptor methodDescriptor) {
     return Lists.transform(
-        methodRef.getParameterTypeRefs(),
-        new Function<TypeReference, String>() {
+        methodDescriptor.getParameterTypeDescriptors(),
+        new Function<TypeDescriptor, String>() {
           @Override
-          public String apply(TypeReference parameterType) {
+          public String apply(TypeDescriptor parameterType) {
             return getMangledName(parameterType);
           }
         });

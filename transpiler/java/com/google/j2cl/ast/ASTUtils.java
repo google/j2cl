@@ -26,15 +26,16 @@ public class ASTUtils {
   /**
    * Create "$init" MethodReference.
    */
-  public static MethodReference createInitMethodRef(TypeReference enclosingClassRef) {
-    TypeReference voidTypeRef = TypeReference.VOID_TYPEREF;
-    return MethodReference.create(
+  public static MethodDescriptor createInitMethodDescriptor(
+      TypeDescriptor enclosingClassDescriptor) {
+    TypeDescriptor voidTypeDescriptor = TypeDescriptor.VOID_TYPE_DESCRIPTOR;
+    return MethodDescriptor.create(
         false,
         Visibility.PRIVATE,
-        enclosingClassRef,
-        MethodReference.METHOD_INIT,
+        enclosingClassDescriptor,
+        MethodDescriptor.METHOD_INIT,
         false,
-        voidTypeRef);
+        voidTypeDescriptor);
   }
 
   /**
@@ -66,8 +67,8 @@ public class ASTUtils {
     return constructorInvocation != null
         && constructorInvocation
             .getTarget()
-            .getEnclosingClassRef()
-            .equals(method.getSelfReference().getEnclosingClassRef());
+            .getEnclosingClassDescriptor()
+            .equals(method.getDescriptor().getEnclosingClassDescriptor());
   }
 
   /**
@@ -78,8 +79,8 @@ public class ASTUtils {
     return constructorInvocation != null
         && !constructorInvocation
             .getTarget()
-            .getEnclosingClassRef()
-            .equals(method.getSelfReference().getEnclosingClassRef());
+            .getEnclosingClassDescriptor()
+            .equals(method.getDescriptor().getEnclosingClassDescriptor());
   }
 
   /**
@@ -93,21 +94,21 @@ public class ASTUtils {
   /**
    * Returns the added field corresponding to the captured variable.
    */
-  public static FieldReference createFieldForCapture(
-      TypeReference enclosingClassRef, Variable capturedVariable) {
-    return FieldReference.createRaw(
+  public static FieldDescriptor createFieldForCapture(
+      TypeDescriptor enclosingClassRef, Variable capturedVariable) {
+    return FieldDescriptor.createRaw(
         false,
         enclosingClassRef,
         CAPTURES_PREFIX + capturedVariable.getName(),
-        capturedVariable.getTypeRef());
+        capturedVariable.getTypeDescriptor());
   }
 
   /**
    * Returns the added outer parameter in constructor corresponding to the captured variable.
    */
   public static Variable createParamForCapture(Variable capturedVariable) {
-    return new Variable(
-        CAPTURES_PREFIX + capturedVariable.getName(), capturedVariable.getTypeRef(), true, true);
+    return new Variable(CAPTURES_PREFIX + capturedVariable.getName(),
+        capturedVariable.getTypeDescriptor(), true, true);
   }
 
   /**
@@ -115,6 +116,6 @@ public class ASTUtils {
    */
   public static Variable createOuterParamByField(Field field) {
     return new Variable(
-        field.getSelfReference().getFieldName(), field.getSelfReference().getType(), true, true);
+        field.getDescriptor().getFieldName(), field.getDescriptor().getType(), true, true);
   }
 }

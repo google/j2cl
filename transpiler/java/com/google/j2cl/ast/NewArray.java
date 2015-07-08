@@ -29,15 +29,14 @@ import javax.annotation.Nullable;
 @Visitable
 public class NewArray extends Expression {
   @Visitable List<Expression> dimensionExpressions = new ArrayList<>();
-  @Visitable TypeReference leafTypeRef;
+  @Visitable TypeDescriptor leafTypeDescriptor;
   @Nullable @Visitable ArrayLiteral arrayLiteral;
 
-  public NewArray(
-      List<Expression> dimensionExpressions, TypeReference leafTypeRef, ArrayLiteral arrayLiteral) {
-    Preconditions.checkNotNull(leafTypeRef);
-
+  public NewArray(List<Expression> dimensionExpressions, TypeDescriptor leafTypeDescriptor,
+      ArrayLiteral arrayLiteral) {
+    Preconditions.checkNotNull(leafTypeDescriptor);
     this.dimensionExpressions.addAll(dimensionExpressions);
-    this.leafTypeRef = leafTypeRef;
+    this.leafTypeDescriptor = leafTypeDescriptor;
     this.arrayLiteral = arrayLiteral;
   }
 
@@ -49,8 +48,8 @@ public class NewArray extends Expression {
     return dimensionExpressions;
   }
 
-  public TypeReference getLeafTypeRef() {
-    return leafTypeRef;
+  public TypeDescriptor getLeafTypeDescriptor() {
+    return leafTypeDescriptor;
   }
 
   @Override

@@ -1,4 +1,4 @@
-#if(${method.SelfReference.isStatic()})
+#if(${method.Descriptor.isStatic()})
 #set ($staticModifier = "static ")
 #else
 #set ($staticModifier = "")
@@ -6,17 +6,17 @@
 #set ($parameterList = $TranspilerUtils.getParameterList($method))
   /**
 #foreach($parameter in $method.Parameters)
-#set ($parameterTypeName = $TranspilerUtils.getJsDocName($parameter.TypeRef))
+#set ($parameterTypeName = $TranspilerUtils.getJsDocName($parameter.TypeDescriptor))
    * @param {$parameterTypeName} $parameter.Name
 #end
-#set ($returnTypeRef = ${method.SelfReference.getReturnTypeRef()})
-#if (!$TranspilerUtils.isVoid($returnTypeRef))
-   * @return {$TranspilerUtils.getJsDocName($returnTypeRef)}
+#set ($returnTypeDescriptor = ${method.Descriptor.getReturnTypeDescriptor()})
+#if (!$TranspilerUtils.isVoid($returnTypeDescriptor))
+   * @return {$TranspilerUtils.getJsDocName($returnTypeDescriptor)}
 #end
-   * @${method.SelfReference.Visibility}
+   * @${method.Descriptor.Visibility}
    */
-  $staticModifier${ManglingNameUtils.getMangledName($method.SelfReference)}($parameterList) {
-#if (${method.SelfReference.isStatic()})
+  $staticModifier${ManglingNameUtils.getMangledName($method.Descriptor)}($parameterList) {
+#if (${method.Descriptor.isStatic()})
     $className.$clinit();
 #end
 #foreach ($statementInBody in $method.Body.Statements)

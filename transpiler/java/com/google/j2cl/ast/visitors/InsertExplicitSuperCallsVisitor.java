@@ -23,8 +23,8 @@ import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodReference;
-import com.google.j2cl.ast.TypeReference;
+import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Visibility;
 
 import java.util.ArrayList;
@@ -57,10 +57,10 @@ public class InsertExplicitSuperCallsVisitor extends AbstractVisitor {
      */
     if (!method.isConstructor()
         || ASTUtils.hasConstructorInvocation(method)
-        || currentJavaType.getSuperTypeRef() == null) {
+        || currentJavaType.getSuperTypeDescriptor() == null) {
       return false;
     }
-    synthesizeSuperCall(method, currentJavaType.getSuperTypeRef());
+    synthesizeSuperCall(method, currentJavaType.getSuperTypeDescriptor());
     return false;
   }
 
@@ -73,17 +73,17 @@ public class InsertExplicitSuperCallsVisitor extends AbstractVisitor {
     compilationUnit.accept(this);
   }
 
-  private void synthesizeSuperCall(Method method, TypeReference superTypeRef) {
-    MethodReference methodRef =
-        MethodReference.create(
+  private void synthesizeSuperCall(Method method, TypeDescriptor superTypeDescriptor) {
+    MethodDescriptor methodDescriptor =
+        MethodDescriptor.create(
             false,
             Visibility.PUBLIC,
-            superTypeRef,
-            superTypeRef.getClassName(),
+            superTypeDescriptor,
+            superTypeDescriptor.getClassName(),
             true,
-            superTypeRef);
+            superTypeDescriptor);
     List<Expression> arguments = new ArrayList<>();
-    MethodCall superCall = new MethodCall(null, methodRef, arguments);
+    MethodCall superCall = new MethodCall(null, methodDescriptor, arguments);
     method.getBody().getStatements().add(0, new ExpressionStatement(superCall));
   }
 }

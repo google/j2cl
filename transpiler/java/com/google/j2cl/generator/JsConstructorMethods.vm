@@ -1,19 +1,19 @@
-#if(${method.SelfReference.Visibility.isPublic()})
+#if(${method.Descriptor.Visibility.isPublic()})
 #set ($ctorVisibility = "protected")
 #else
-#set ($ctorVisibility = $method.SelfReference.Visibility)
+#set ($ctorVisibility = $method.Descriptor.Visibility)
 #end
 #set ($parameterList = $TranspilerUtils.getParameterList($method))
-#set ($mangledNameOfCreate = $ManglingNameUtils.getConstructorMangledName($method.SelfReference))
-#set ($mangledNameOfCtor = $ManglingNameUtils.getCtorMangledName($method.SelfReference))
+#set ($mangledNameOfCreate = $ManglingNameUtils.getConstructorMangledName($method.Descriptor))
+#set ($mangledNameOfCtor = $ManglingNameUtils.getCtorMangledName($method.Descriptor))
   /**
    * A particular Java constructor as a factory method.
 #foreach($parameter in $method.Parameters)
-#set ($parameterTypeName = $TranspilerUtils.getJsDocName($parameter.TypeRef))
+#set ($parameterTypeName = $TranspilerUtils.getJsDocName($parameter.TypeDescriptor))
    * @param {$parameterTypeName} $parameter.Name
 #end
    * @return {!$jsDocName}
-   * @${method.SelfReference.Visibility}
+   * @${method.Descriptor.Visibility}
    */
   static ${mangledNameOfCreate}($parameterList) {
     $className.$clinit();
@@ -25,7 +25,7 @@
   /**
    * Initializes instance fields for a particular Java constructor.
 #foreach($parameter in $method.Parameters)
-#set ($parameterTypeName = $TranspilerUtils.getJsDocName($parameter.TypeRef))
+#set ($parameterTypeName = $TranspilerUtils.getJsDocName($parameter.TypeDescriptor))
    * @param {$parameterTypeName} $parameter.Name
 #end
    * @$ctorVisibility

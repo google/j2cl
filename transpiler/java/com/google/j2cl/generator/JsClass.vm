@@ -1,20 +1,20 @@
-#set ($superTypeReference = $classType.SuperTypeRef)
-#if ($superTypeReference)
-#set ($superTypeName = ${TranspilerUtils.getClassName($superTypeReference)})
-#set ($superTypeMangledName = ${ManglingNameUtils.getMangledName($superTypeReference)})
+#set ($superTypeDescriptor = $classType.SuperTypeDescriptor)
+#if ($superTypeDescriptor)
+#set ($superTypeName = ${TranspilerUtils.getClassName($superTypeDescriptor)})
+#set ($superTypeMangledName = ${ManglingNameUtils.getMangledName($superTypeDescriptor)})
 #set ($extendsClause = "extends " + $superTypeName)
 #else
 #set ($extendsClause = "")
 #end
-#set ($className = ${TranspilerUtils.getClassName($classType.getSelfReference())})
-#set ($jsDocName = ${TranspilerUtils.getJsDocName($classType.getSelfReference())})
-#set ($mangledTypeName = ${ManglingNameUtils.getMangledName($classType.getSelfReference())})
-#set ($simpleName = $classType.getSelfReference().getSimpleName())
-#set ($binaryName = $classType.getSelfReference().getBinaryName())
-#set ($sourceName = ${TranspilerUtils.getSourceName($classType.getSelfReference())})
-#if (!${classType.SuperInterfaceRefs.isEmpty()})
+#set ($className = ${TranspilerUtils.getClassName($classType.Descriptor)})
+#set ($jsDocName = ${TranspilerUtils.getJsDocName($classType.Descriptor)})
+#set ($mangledTypeName = ${ManglingNameUtils.getMangledName($classType.Descriptor)})
+#set ($simpleName = $classType.Descriptor.SimpleName)
+#set ($binaryName = $classType.Descriptor.BinaryName)
+#set ($sourceName = ${TranspilerUtils.getSourceName($classType.Descriptor)})
+#if (!${classType.SuperInterfaceDescriptors.isEmpty()})
 /**
-#foreach ($superInterface in $classType.SuperInterfaceRefs)
+#foreach ($superInterface in $classType.SuperInterfaceDescriptors)
  * @implements {${TranspilerUtils.getClassName($superInterface)}}
 #end
  */
@@ -25,17 +25,17 @@ class $className $extendsClause {
    * @private
    */
   constructor() {
-#if ($superTypeReference)
+#if ($superTypeDescriptor)
     super();
 #end
 #foreach ($field in $classType.getInstanceFields())
-#set ($fieldVisibility = $field.SelfReference.Visibility)
-#set ($fieldType = ${TranspilerUtils.getJsDocName($field.SelfReference.Type)})
-#set ($fieldName = ${ManglingNameUtils.getMangledName($field.SelfReference)})
+#set ($fieldVisibility = $field.Descriptor.Visibility)
+#set ($fieldType = ${TranspilerUtils.getJsDocName($field.Descriptor.Type)})
+#set ($fieldName = ${ManglingNameUtils.getMangledName($field.Descriptor)})
     /**
      * @$fieldVisibility {$fieldType}
      */
-    this.$fieldName = ${TranspilerUtils.getDefaultInitialValue($field.SelfReference.Type)};
+    this.$fieldName = ${TranspilerUtils.getDefaultInitialValue($field.Descriptor.Type)};
 #end
   }
 
@@ -47,7 +47,7 @@ class $className $extendsClause {
 #foreach ($field in $classType.getInstanceFields())
 #if ($field.hasInitializer())
 #set ($fieldInitializer = $StatementSourceGenerator.toSource($field.Initializer))
-    this.${ManglingNameUtils.getMangledName($field.SelfReference)} = $fieldInitializer;
+    this.${ManglingNameUtils.getMangledName($field.Descriptor)} = $fieldInitializer;
 #end
 #end
 #foreach ($instanceInitializerBlock in $classType.InstanceInitializerBlocks)
@@ -89,7 +89,7 @@ class $className $extendsClause {
 #end
 
 
-#foreach ($superInterface in $classType.SuperInterfaceRefs)
+#foreach ($superInterface in $classType.SuperInterfaceDescriptors)
 ${TranspilerUtils.getClassName($superInterface)}.$markImplementor($className);
 
 

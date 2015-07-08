@@ -22,5 +22,5 @@ public interface Member {
 
   boolean isStatic();
 
-  TypeReference getEnclosingClassRef();
+  TypeDescriptor getEnclosingClassDescriptor();
 }

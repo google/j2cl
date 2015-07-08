@@ -16,7 +16,7 @@
 package com.google.j2cl.generator.visitors;
 
 import com.google.common.collect.ComparisonChain;
-import com.google.j2cl.ast.TypeReference;
+import com.google.j2cl.ast.TypeDescriptor;
 
 /**
  * A Node class that represents the goog.require statement
@@ -44,8 +44,8 @@ public class Import implements Comparable<Import> {
     this.moduleName = moduleName;
   }
 
-  public Import(TypeReference typeReference) {
-    this(typeReference.getClassName(), computeModule(typeReference));
+  public Import(TypeDescriptor typeDescriptor) {
+    this(typeDescriptor.getClassName(), computeModule(typeDescriptor));
   }
 
   public String getClassName() {
@@ -75,13 +75,13 @@ public class Import implements Comparable<Import> {
         .result();
   }
 
-  private static String computeModule(TypeReference typeReference) {
-    if (typeReference.isPrimitive()) {
+  private static String computeModule(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.isPrimitive()) {
       return IMPORT_VM_PRIMITIVES_MODULE;
     }
-    if (typeReference.isRaw()) {
-      return typeReference.getCompilationUnitSourceName();
+    if (typeDescriptor.isRaw()) {
+      return typeDescriptor.getCompilationUnitSourceName();
     }
-    return "gen." + typeReference.getCompilationUnitSourceName() + "Module";
+    return "gen." + typeDescriptor.getCompilationUnitSourceName() + "Module";
   }
 }

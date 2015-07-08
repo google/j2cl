@@ -23,13 +23,14 @@ import com.google.j2cl.ast.processors.Visitable;
 @Visitable
 public class Variable extends Node {
   private String name;
-  @Visitable TypeReference typeRef;
+  @Visitable TypeDescriptor typeDescriptor;
   private boolean isFinal;
   private boolean isParameter;
 
-  public Variable(String name, TypeReference typeRef, boolean isFinal, boolean isParameter) {
+  public Variable(
+      String name, TypeDescriptor typeDescriptor, boolean isFinal, boolean isParameter) {
     this.name = name;
-    this.typeRef = typeRef;
+    this.typeDescriptor = typeDescriptor;
     this.isFinal = isFinal;
     this.isParameter = isParameter;
   }
@@ -38,8 +39,8 @@ public class Variable extends Node {
     return name;
   }
 
-  public TypeReference getTypeRef() {
-    return typeRef;
+  public TypeDescriptor getTypeDescriptor() {
+    return typeDescriptor;
   }
 
   public boolean isFinal() {
@@ -54,8 +55,8 @@ public class Variable extends Node {
     this.name = name;
   }
 
-  public void setTypeRef(TypeReference typeRef) {
-    this.typeRef = typeRef;
+  public void setTypeDescriptor(TypeDescriptor typeDescriptor) {
+    this.typeDescriptor = typeDescriptor;
   }
 
   public void setFinal(boolean isFinal) {

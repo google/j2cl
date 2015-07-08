@@ -14,12 +14,17 @@ import java.util.List;
  */
 @AutoValue
 @Visitable
-public abstract class UnionTypeReference extends TypeReference {
-  public static UnionTypeReference create(List<TypeReference> types) {
-    return new AutoValue_UnionTypeReference(ImmutableList.copyOf(types));
+public abstract class UnionTypeDescriptor extends TypeDescriptor {
+  public static UnionTypeDescriptor create(List<TypeDescriptor> types) {
+    return new AutoValue_UnionTypeDescriptor(ImmutableList.copyOf(types));
   }
 
-  public abstract ImmutableList<TypeReference> getTypes();
+  public abstract ImmutableList<TypeDescriptor> getTypes();
+
+  @Override
+  public boolean isRaw() {
+    return false;
+  }
 
   @Override
   public int getDimensions() {
@@ -27,7 +32,7 @@ public abstract class UnionTypeReference extends TypeReference {
   }
 
   @Override
-  public TypeReference getLeafTypeRef() {
+  public TypeDescriptor getLeafTypeDescriptor() {
     throw new UnsupportedOperationException();
   }
 
@@ -42,9 +47,9 @@ public abstract class UnionTypeReference extends TypeReference {
         .join(
             Lists.transform(
                 getTypes(),
-                new Function<TypeReference, String>() {
+                new Function<TypeDescriptor, String>() {
                   @Override
-                  public String apply(TypeReference type) {
+                  public String apply(TypeDescriptor type) {
                     return type.getBinaryName();
                   }
                 }));
@@ -76,12 +81,8 @@ public abstract class UnionTypeReference extends TypeReference {
   }
 
   @Override
-  public boolean isRaw() {
-    return false;
+  public UnionTypeDescriptor accept(Processor processor) {
+    return Visitor_UnionTypeDescriptor.visit(processor, this);
   }
 
-  @Override
-  public UnionTypeReference accept(Processor processor) {
-    return Visitor_UnionTypeReference.visit(processor, this);
-  }
 }

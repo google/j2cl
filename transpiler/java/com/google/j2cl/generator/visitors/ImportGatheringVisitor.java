@@ -19,17 +19,16 @@ import com.google.common.base.Function;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.AbstractVisitor;
-import com.google.j2cl.ast.ArrayTypeReference;
+import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.FieldReference;
+import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JavaType;
-import com.google.j2cl.ast.MethodReference;
+import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewArray;
-import com.google.j2cl.ast.RegularTypeReference;
-import com.google.j2cl.ast.TypeReference;
-import com.google.j2cl.ast.UnionTypeReference;
+import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.UnionTypeDescriptor;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -42,19 +41,26 @@ import javax.annotation.Nullable;
  */
 public class ImportGatheringVisitor extends AbstractVisitor {
   private Set<Import> importModules = new LinkedHashSet<>();
-  private Set<TypeReference> typeReferences = new LinkedHashSet<>();
-  private Set<TypeReference> typeReferencesDefinedInCompilationUnit = new LinkedHashSet<>();
+  private Set<TypeDescriptor> typeDescriptors = new LinkedHashSet<>();
+  private Set<TypeDescriptor> typeDescriptorsDefinedInCompilationUnit = new LinkedHashSet<>();
 
   public static Set<Import> gatherImports(CompilationUnit compilationUnit) {
     return new ImportGatheringVisitor().doGatherImports(compilationUnit);
   }
 
   @Override
-  public void exitRegularTypeReference(RegularTypeReference typeReference) {
-    // TODO(rluble): Maybe stop collecting TypeReferences indiscriminately and
-    // only collect the ones where the import is needed (ie, due to field references, method
-    // references or class literals.
-    addTypeReference(typeReference);
+  public void exitArrayTypeDescriptor(ArrayTypeDescriptor arrayTypeDescriptor) {
+  }
+
+  @Override
+  public void exitTypeDescriptor(TypeDescriptor typeDescriptor) {
+    addTypeDescriptor(typeDescriptor);
+  }
+
+  @Override
+  public void exitFieldDescriptor(FieldDescriptor fieldDescriptor) {
+    addTypeDescriptor(fieldDescriptor.getType());
+    addTypeDescriptor(fieldDescriptor.getEnclosingClassDescriptor());
   }
 
   @Override
@@ -64,7 +70,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   @Override
   public void exitCastExpression(CastExpression castExpression) {
-    if (castExpression.getCastType() instanceof ArrayTypeReference) {
+    if (castExpression.getCastType() instanceof ArrayTypeDescriptor) {
       // Arrays.$castTo()
       importModules.add(Import.IMPORT_VM_ARRAYS);
       return;
@@ -74,14 +80,8 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   }
 
   @Override
-  public void exitFieldReference(FieldReference fieldReference) {
-    addTypeReference(fieldReference.getEnclosingClassRef());
-    addTypeReference(fieldReference.getType());
-  }
-
-  @Override
   public void exitJavaType(JavaType type) {
-    typeReferencesDefinedInCompilationUnit.add(type.getSelfReference());
+    typeDescriptorsDefinedInCompilationUnit.add(type.getDescriptor());
   }
 
   @Override
@@ -90,38 +90,38 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   }
 
   @Override
-  public void exitMethodReference(MethodReference methodRef) {
-    typeReferences.add(methodRef.getEnclosingClassRef());
+  public void exitMethodDescriptor(MethodDescriptor methodDescriptor) {
+    typeDescriptors.add(methodDescriptor.getEnclosingClassDescriptor());
   }
 
   @Override
-  public void exitUnionTypeReference(UnionTypeReference unionTypeRef) {
-    for (TypeReference typeRef : unionTypeRef.getTypes()) {
-      typeReferences.add(typeRef);
+  public void exitUnionTypeDescriptor(UnionTypeDescriptor unionTypeDescriptor) {
+    for (TypeDescriptor typeRef : unionTypeDescriptor.getTypes()) {
+      typeDescriptors.add(typeRef);
     }
-  }
-
-  private void addTypeReference(TypeReference typeReference) {
-    typeReferences.add(typeReference);
   }
 
   private Set<Import> doGatherImports(CompilationUnit compilationUnit) {
     // Collect type references.
     compilationUnit.accept(this);
-    Set<TypeReference> importTypeReferences =
-        new TreeSet<>(Sets.difference(typeReferences, typeReferencesDefinedInCompilationUnit));
+    Set<TypeDescriptor> importTypeDescriptors =
+        new TreeSet<>(Sets.difference(typeDescriptors, typeDescriptorsDefinedInCompilationUnit));
     importModules.addAll(
-        FluentIterable.from(importTypeReferences)
+        FluentIterable.from(importTypeDescriptors)
             .transform(
-                new Function<TypeReference, Import>() {
+                new Function<TypeDescriptor, Import>() {
                   @Nullable
                   @Override
-                  public Import apply(TypeReference typeReference) {
-                    return new Import(typeReference);
+                  public Import apply(TypeDescriptor typeDescriptor) {
+                    return new Import(typeDescriptor);
                   }
                 })
             .toList());
     return importModules;
+  }
+
+  private void addTypeDescriptor(TypeDescriptor typeDescriptor) {
+    typeDescriptors.add(typeDescriptor);
   }
 
   private ImportGatheringVisitor() {}

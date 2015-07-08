@@ -1,13 +1,13 @@
-#set ($staticFieldVisibility = $staticField.SelfReference.Visibility)
-#set ($staticFieldType = ${TranspilerUtils.getJsDocName($staticField.SelfReference.Type)})
-#set ($staticFieldName = ${ManglingNameUtils.getMangledName($staticField.SelfReference)})
+#set ($staticFieldVisibility = $staticField.Descriptor.Visibility)
+#set ($staticFieldType = ${TranspilerUtils.getJsDocName($staticField.Descriptor.Type)})
+#set ($staticFieldName = ${ManglingNameUtils.getMangledName($staticField.Descriptor)})
 #set ($directStaticFieldAccess = "$" + ${staticFieldName})
 
 
 /**
  * @$staticFieldVisibility {?$staticFieldType}
  */
-$className.$directStaticFieldAccess = ${TranspilerUtils.getDefaultInitialValue($staticField.SelfReference.Type)};
+$className.$directStaticFieldAccess = ${TranspilerUtils.getDefaultInitialValue($staticField.Descriptor.Type)};
 
 
 window.Object.defineProperties($className, {

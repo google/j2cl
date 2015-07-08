@@ -44,13 +44,13 @@ public class JavaType extends Node {
   private Visibility visibility;
   private boolean isLocal;
 
-  @Visitable @Nullable TypeReference enclosingTypeRef;
+  @Visitable @Nullable TypeDescriptor enclosingTypeDescriptor;
 
-  @Visitable @Nullable TypeReference superTypeRef;
+  @Visitable @Nullable TypeDescriptor superTypeDescriptor;
 
-  @Visitable List<TypeReference> superInterfaceRefs = new ArrayList<>();
+  @Visitable List<TypeDescriptor> superInterfaceDescriptors = new ArrayList<>();
 
-  @Visitable TypeReference selfReference;
+  @Visitable TypeDescriptor typeDescriptor;
 
   @Visitable List<Field> fields = new ArrayList<>();
 
@@ -60,10 +60,10 @@ public class JavaType extends Node {
 
   @Visitable List<Block> staticInitializerBlocks = new ArrayList<>();
 
-  public JavaType(Kind kind, Visibility visibility, TypeReference selfReference) {
+  public JavaType(Kind kind, Visibility visibility, TypeDescriptor typeDescriptor) {
     this.kind = kind;
     this.visibility = visibility;
-    this.selfReference = selfReference;
+    this.typeDescriptor = typeDescriptor;
   }
 
   public Kind getKind() {
@@ -130,36 +130,36 @@ public class JavaType extends Node {
     this.staticInitializerBlocks.add(staticInitializer);
   }
 
-  public TypeReference getEnclosingTypeRef() {
-    return enclosingTypeRef;
+  public TypeDescriptor getEnclosingTypeDescriptor() {
+    return enclosingTypeDescriptor;
   }
 
-  public void setEnclosingTypeRef(TypeReference enclosingTypeRef) {
-    this.enclosingTypeRef = enclosingTypeRef;
+  public void setEnclosingTypeDescriptor(TypeDescriptor enclosingTypeDescriptor) {
+    this.enclosingTypeDescriptor = enclosingTypeDescriptor;
   }
 
-  public TypeReference getSuperTypeRef() {
-    return superTypeRef;
+  public TypeDescriptor getSuperTypeDescriptor() {
+    return superTypeDescriptor;
   }
 
-  public void setSuperTypeRef(TypeReference superTypeRef) {
-    this.superTypeRef = superTypeRef;
+  public void setSuperTypeDescriptor(TypeDescriptor superTypeDescriptor) {
+    this.superTypeDescriptor = superTypeDescriptor;
   }
 
-  public List<TypeReference> getSuperInterfaceRefs() {
-    return superInterfaceRefs;
+  public List<TypeDescriptor> getSuperInterfaceDescriptors() {
+    return superInterfaceDescriptors;
   }
 
-  public void addSuperInterfaceRef(TypeReference superInterfaceRef) {
-    this.superInterfaceRefs.add(superInterfaceRef);
+  public void addSuperInterfaceDescriptor(TypeDescriptor superInterfaceDescriptor) {
+    this.superInterfaceDescriptors.add(superInterfaceDescriptor);
   }
 
-  public TypeReference getSelfReference() {
-    return selfReference;
+  public TypeDescriptor getDescriptor() {
+    return typeDescriptor;
   }
 
-  public void setSelfReference(TypeReference selfReference) {
-    this.selfReference = selfReference;
+  public void setDescriptor(TypeDescriptor typeDescriptor) {
+    this.typeDescriptor = typeDescriptor;
   }
 
   public List<Field> getInstanceFields() {
@@ -169,7 +169,7 @@ public class JavaType extends Node {
             new Predicate<Field>() {
               @Override
               public boolean apply(Field field) {
-                return !field.getSelfReference().isStatic();
+                return !field.getDescriptor().isStatic();
               }
             }));
   }
@@ -181,7 +181,7 @@ public class JavaType extends Node {
             new Predicate<Field>() {
               @Override
               public boolean apply(Field field) {
-                return field.getSelfReference().isStatic();
+                return field.getDescriptor().isStatic();
               }
             }));
   }

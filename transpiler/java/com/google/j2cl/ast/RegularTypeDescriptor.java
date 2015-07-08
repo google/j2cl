@@ -30,8 +30,7 @@ import javax.annotation.Nullable;
  */
 @AutoValue
 @Visitable
-public abstract class RegularTypeReference extends TypeReference {
-
+public abstract class RegularTypeDescriptor extends TypeDescriptor {
   public abstract ImmutableList<String> getPackageComponents();
 
   public abstract ImmutableList<String> getClassComponents();
@@ -79,8 +78,8 @@ public abstract class RegularTypeReference extends TypeReference {
     return Joiner.on(".").join(getPackageComponents());
   }
 
-  public TypeReference getArray(int dimensions) {
-    return getInterner().intern(new AutoValue_ArrayTypeReference(dimensions, this));
+  public TypeDescriptor getArray(int dimensions) {
+    return getInterner().intern(new AutoValue_ArrayTypeDescriptor(dimensions, this));
   }
 
   @Override
@@ -94,12 +93,12 @@ public abstract class RegularTypeReference extends TypeReference {
   }
 
   @Override
-  public TypeReference getLeafTypeRef() {
+  public TypeDescriptor getLeafTypeDescriptor() {
     return null;
   }
 
   @Override
-  public RegularTypeReference accept(Processor processor) {
-    return Visitor_RegularTypeReference.visit(processor, this);
+  public RegularTypeDescriptor accept(Processor processor) {
+    return Visitor_RegularTypeDescriptor.visit(processor, this);
   }
 }

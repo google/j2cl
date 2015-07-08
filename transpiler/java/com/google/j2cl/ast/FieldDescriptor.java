@@ -23,24 +23,24 @@ import com.google.j2cl.ast.processors.Visitable;
  */
 @AutoValue
 @Visitable
-public abstract class FieldReference extends Node implements Member {
-  public static FieldReference create(
+public abstract class FieldDescriptor extends Node implements Member {
+  public static FieldDescriptor create(
       boolean isStatic,
       Visibility visibility,
-      TypeReference enclosingClassRef,
+      TypeDescriptor enclosingClassDescriptor,
       String fieldName,
-      TypeReference typeRef) {
-    return new AutoValue_FieldReference(
-        isStatic, false, visibility, enclosingClassRef, fieldName, typeRef);
+      TypeDescriptor typeDescriptor) {
+    return new AutoValue_FieldDescriptor(
+        isStatic, false, visibility, enclosingClassDescriptor, fieldName, typeDescriptor);
   }
 
   /**
    * Creates a raw field reference.
    */
-  public static FieldReference createRaw(
-      boolean isStatic, TypeReference enclosingClassRef, String fieldName, TypeReference typeRef) {
-    return new AutoValue_FieldReference(
-        isStatic, true, Visibility.PUBLIC, enclosingClassRef, fieldName, typeRef);
+  public static FieldDescriptor createRaw(boolean isStatic, TypeDescriptor enclosingClassDescriptor,
+      String fieldName, TypeDescriptor typeDescriptor) {
+    return new AutoValue_FieldDescriptor(
+        isStatic, true, Visibility.PUBLIC, enclosingClassDescriptor, fieldName, typeDescriptor);
   }
 
   @Override
@@ -55,14 +55,14 @@ public abstract class FieldReference extends Node implements Member {
   public abstract Visibility getVisibility();
 
   @Override
-  public abstract TypeReference getEnclosingClassRef();
+  public abstract TypeDescriptor getEnclosingClassDescriptor();
 
   public abstract String getFieldName();
 
-  public abstract TypeReference getType();
+  public abstract TypeDescriptor getType();
 
   @Override
-  public FieldReference accept(Processor processor) {
-    return Visitor_FieldReference.visit(processor, this);
+  public FieldDescriptor accept(Processor processor) {
+    return Visitor_FieldDescriptor.visit(processor, this);
   }
 }

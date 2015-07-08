@@ -22,7 +22,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodReference;
+import com.google.j2cl.ast.MethodDescriptor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,11 +50,11 @@ public class InsertInstanceInitCallsVisitor extends AbstractVisitor {
   }
 
   private void synthesizeInstanceInitCall(Method method) {
-    MethodReference initMethodRef =
-        ASTUtils.createInitMethodRef(method.getSelfReference().getEnclosingClassRef());
+    MethodDescriptor initMethodDescriptor =
+        ASTUtils.createInitMethodDescriptor(method.getDescriptor().getEnclosingClassDescriptor());
 
     List<Expression> arguments = new ArrayList<>();
-    MethodCall initCall = new MethodCall(null, initMethodRef, arguments);
+    MethodCall initCall = new MethodCall(null, initMethodDescriptor, arguments);
     // If the constructor has a super() call, insert $init call after it. Otherwise, insert
     // to the top of the method body.
     int insertIndex = ASTUtils.hasSuperCall(method) ? 1 : 0;

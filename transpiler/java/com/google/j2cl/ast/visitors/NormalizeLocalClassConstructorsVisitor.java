@@ -119,14 +119,14 @@ public class NormalizeLocalClassConstructorsVisitor extends AbstractVisitor {
       Variable parameter = ASTUtils.createOuterParamByField(field);
       method.addParameter(parameter);
       if (constructorCall != null
-          && constructorCall.getTarget().getEnclosingClassRef().equals(
-              currentType.getSelfReference())) { // this() call
+          && constructorCall.getTarget().getEnclosingClassDescriptor().equals(
+              currentType.getDescriptor())) { // this() call
         // add argument (reference to outer parameter) to this() call.
         constructorCall.getArguments().add(new VariableReference(parameter));
       } else {
         // add initializer.
         BinaryExpression initializer =
-            new BinaryExpression(new FieldAccess(new ThisReference(null), field.getSelfReference()),
+            new BinaryExpression(new FieldAccess(new ThisReference(null), field.getDescriptor()),
                 BinaryOperator.ASSIGN, new VariableReference(parameter));
         method.getBody().getStatements().add(i + 1, new ExpressionStatement(initializer));
       }

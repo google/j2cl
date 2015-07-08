@@ -1,11 +1,11 @@
-#set ($interfaceName = ${TranspilerUtils.getClassName($classType.getSelfReference())})
-#set ($mangledName = ${ManglingNameUtils.getMangledName($classType.getSelfReference())})
-#set ($simpleName = $classType.getSelfReference().getSimpleName())
-#set ($binaryName = $classType.getSelfReference().getBinaryName())
-#set ($sourceName = ${TranspilerUtils.getSourceName($classType.getSelfReference())})
+#set ($interfaceName = ${TranspilerUtils.getClassName($classType.Descriptor)})
+#set ($mangledName = ${ManglingNameUtils.getMangledName($classType.Descriptor)})
+#set ($simpleName = $classType.Descriptor.SimpleName)
+#set ($binaryName = $classType.Descriptor.BinaryName)
+#set ($sourceName = ${TranspilerUtils.getSourceName($classType.Descriptor)})
 /**
  * @interface
-#foreach ($superInterface in $classType.SuperInterfaceRefs)
+#foreach ($superInterface in $classType.SuperInterfaceDescriptors)
  * @extends {${TranspilerUtils.getClassName($superInterface)}}
 #end
  */
@@ -20,7 +20,7 @@ class $interfaceName {
    * @public
    */
   static $markImplementor(classConstructor) {
-#foreach ($superInterface in $classType.SuperInterfaceRefs)
+#foreach ($superInterface in $classType.SuperInterfaceDescriptors)
     ${TranspilerUtils.getClassName($superInterface)}.$markImplementor(classConstructor);
 #end
     /**

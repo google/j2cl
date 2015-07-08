@@ -6,6 +6,6 @@
   be generator package visitors that are run as part of template context
   construction).
 - When modifying AST, don't copy information, always reference. (For example
-  don't synthesize Import nodes from TypeReference data because doing so
-  creates the opportunity for data desynchronization if TypeReference content
+  don't synthesize Import nodes from TypeDescriptor data because doing so
+  creates the opportunity for data desynchronization if TypeDescriptor content
   is updated.)

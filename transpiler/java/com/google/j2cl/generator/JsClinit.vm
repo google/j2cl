@@ -1,4 +1,4 @@
-$StatementSourceGenerator.setInClinit($classType.getSelfReference())##
+$StatementSourceGenerator.setInClinit($classType.Descriptor)##
   /**
    * Runs inline static field initializers.
    * @protected
@@ -10,7 +10,7 @@ $StatementSourceGenerator.setInClinit($classType.getSelfReference())##
     $superTypeName.$clinit();
 #foreach ($staticField in $classType.getStaticFields())
 #if ($staticField.hasInitializer())
-#set ($staticFieldName = ${ManglingNameUtils.getMangledName($staticField.SelfReference)})
+#set ($staticFieldName = ${ManglingNameUtils.getMangledName($staticField.Descriptor)})
 #set ($directStaticFieldAccess = "$" + ${staticFieldName})
     $className.$directStaticFieldAccess = ${StatementSourceGenerator.toSource(${staticField.Initializer})};
 #end

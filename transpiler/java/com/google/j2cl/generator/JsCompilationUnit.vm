@@ -21,7 +21,7 @@ var $importName = goog.require('${requiredModule.getModuleName()}').$importName;
 #parse( "com/google/j2cl/generator/JsClass.vm" )
 #end
 #if( ${TranspilerUtils.shouldExport($classType)})##
-#set ($className = ${TranspilerUtils.getClassName($classType.getSelfReference())})
+#set ($className = ${TranspilerUtils.getClassName($classType.Descriptor)})
 
 /**
  * Export class.

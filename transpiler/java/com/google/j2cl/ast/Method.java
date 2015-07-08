@@ -25,18 +25,18 @@ import java.util.List;
  */
 @Visitable
 public class Method extends Node {
-  @Visitable MethodReference selfReference;
+  @Visitable MethodDescriptor methodDescriptor;
   @Visitable List<Variable> parameters = new ArrayList<>();
   @Visitable Block body;
 
-  public Method(MethodReference selfReference, List<Variable> parameters, Block body) {
-    this.selfReference = selfReference;
+  public Method(MethodDescriptor methodDescriptor, List<Variable> parameters, Block body) {
+    this.methodDescriptor = methodDescriptor;
     this.parameters.addAll(parameters);
     this.body = body;
   }
 
-  public MethodReference getSelfReference() {
-    return selfReference;
+  public MethodDescriptor getDescriptor() {
+    return methodDescriptor;
   }
 
   public List<Variable> getParameters() {
@@ -52,7 +52,7 @@ public class Method extends Node {
   }
 
   public boolean isConstructor() {
-    return selfReference.isConstructor();
+    return methodDescriptor.isConstructor();
   }
 
   public void setBody(Block body) {

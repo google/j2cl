@@ -24,18 +24,18 @@ import javax.annotation.Nullable;
  */
 @Visitable
 public class ThisReference extends Expression {
-  @Visitable @Nullable RegularTypeReference typeRef;
+  @Visitable @Nullable RegularTypeDescriptor typeDescriptor;
 
-  public ThisReference(RegularTypeReference typeRef) {
-    this.typeRef = typeRef;
+  public ThisReference(RegularTypeDescriptor typeDescriptor) {
+    this.typeDescriptor = typeDescriptor;
   }
 
-  public RegularTypeReference getTypeRef() {
-    return typeRef;
+  public RegularTypeDescriptor getTypeDescriptor() {
+    return typeDescriptor;
   }
 
-  public void setTypeRef(RegularTypeReference qualifier) {
-    this.typeRef = qualifier;
+  public void setTypeDescriptor(RegularTypeDescriptor qualifier) {
+    this.typeDescriptor = qualifier;
   }
 
   @Override

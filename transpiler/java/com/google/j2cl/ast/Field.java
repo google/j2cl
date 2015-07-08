@@ -24,26 +24,25 @@ import javax.annotation.Nullable;
  */
 @Visitable
 public class Field extends Node {
-  @Visitable FieldReference selfReference;
+  @Visitable FieldDescriptor fieldDescriptor;
   @Visitable @Nullable Expression initializer;
   private boolean isCapturedField;
 
-  public Field(FieldReference selfReference, Expression initializer) {
-    this.selfReference = selfReference;
+  public Field(FieldDescriptor fieldDescriptor, Expression initializer) {
+    this.fieldDescriptor = fieldDescriptor;
     this.initializer = initializer;
   }
 
-  public Field(FieldReference selfReference, Expression initializer, boolean isCaptured) {
-    this(selfReference, initializer);
+  public Field(FieldDescriptor fieldDescriptor, Expression initializer, boolean isCaptured) {
+    this(fieldDescriptor, initializer);
     this.isCapturedField = isCaptured;
   }
 
-  public FieldReference getSelfReference() {
-    return selfReference;
+  public FieldDescriptor getDescriptor() {
+    return fieldDescriptor;
   }
-
-  public void setSelfReference(FieldReference selfReference) {
-    this.selfReference = selfReference;
+  public void setDescriptor(FieldDescriptor fieldDescriptor) {
+    this.fieldDescriptor = fieldDescriptor;
   }
 
   public Expression getInitializer() {

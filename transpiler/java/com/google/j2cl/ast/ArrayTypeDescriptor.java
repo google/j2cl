@@ -24,42 +24,42 @@ import com.google.j2cl.ast.processors.Visitable;
  */
 @AutoValue
 @Visitable
-public abstract class ArrayTypeReference extends TypeReference {
+public abstract class ArrayTypeDescriptor extends TypeDescriptor {
 
   @Override
   public abstract int getDimensions();
 
   @Override
-  public abstract TypeReference getLeafTypeRef();
+  public abstract TypeDescriptor getLeafTypeDescriptor();
 
   @Override
   public String getBinaryName() {
-    return getPrefix() + getLeafTypeRef().getBinaryName();
+    return getPrefix() + getLeafTypeDescriptor().getBinaryName();
   }
 
   @Override
   public String getClassName() {
-    return getLeafTypeRef().getClassName() + getSuffix();
+    return getLeafTypeDescriptor().getClassName() + getSuffix();
   }
 
   @Override
   public String getCompilationUnitSourceName() {
-    return getLeafTypeRef().getCompilationUnitSourceName();
+    return getLeafTypeDescriptor().getCompilationUnitSourceName();
   }
 
   @Override
   public String getSimpleName() {
-    return getLeafTypeRef().getSimpleName() + getSuffix();
+    return getLeafTypeDescriptor().getSimpleName() + getSuffix();
   }
 
   @Override
   public String getSourceName() {
-    return getLeafTypeRef().getSourceName() + getSuffix();
+    return getLeafTypeDescriptor().getSourceName() + getSuffix();
   }
 
   @Override
   public String getPackageName() {
-    return getLeafTypeRef().getPackageName();
+    return getLeafTypeDescriptor().getPackageName();
   }
 
   @Override
@@ -69,7 +69,7 @@ public abstract class ArrayTypeReference extends TypeReference {
 
   @Override
   public boolean isRaw() {
-    return getLeafTypeRef().isRaw();
+    return getLeafTypeDescriptor().isRaw();
   }
 
   private String getSuffix() {
@@ -81,7 +81,7 @@ public abstract class ArrayTypeReference extends TypeReference {
   }
 
   @Override
-  public ArrayTypeReference accept(Processor processor) {
-    return Visitor_ArrayTypeReference.visit(processor, this);
+  public ArrayTypeDescriptor accept(Processor processor) {
+    return Visitor_ArrayTypeDescriptor.visit(processor, this);
   }
 }

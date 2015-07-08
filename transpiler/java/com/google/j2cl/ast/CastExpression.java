@@ -23,9 +23,9 @@ import com.google.j2cl.ast.processors.Visitable;
 @Visitable
 public class CastExpression extends Expression {
   @Visitable Expression expression;
-  @Visitable TypeReference castType;
+  @Visitable TypeDescriptor castType;
 
-  public CastExpression(Expression expression, TypeReference castType) {
+  public CastExpression(Expression expression, TypeDescriptor castType) {
     this.expression = expression;
     this.castType = castType;
   }
@@ -34,7 +34,7 @@ public class CastExpression extends Expression {
     return expression;
   }
 
-  public TypeReference getCastType() {
+  public TypeDescriptor getCastType() {
     return castType;
   }
 
@@ -42,7 +42,7 @@ public class CastExpression extends Expression {
     this.expression = expression;
   }
 
-  public void setCastType(TypeReference castType) {
+  public void setCastType(TypeDescriptor castType) {
     this.castType = castType;
   }
 
