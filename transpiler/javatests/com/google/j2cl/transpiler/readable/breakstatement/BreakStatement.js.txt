@@ -1,0 +1,97 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/breakstatement/BreakStatement.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.breakstatement.BreakStatementModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+class BreakStatement extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_breakstatement_BreakStatement() {}
+
+  /**
+   * @public
+   */
+  m_test() {
+    for (;;) {
+      break;
+    }
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!BreakStatement}
+   * @public
+   */
+  static $create() {
+    BreakStatement.$clinit();
+    var instance = new BreakStatement;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_breakstatement_BreakStatement();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_breakstatement_BreakStatement() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_breakstatement_BreakStatement();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof BreakStatement; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, BreakStatement);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+BreakStatement.$class = Class.$createForClass(
+    Util.$generateId('BreakStatement'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.breakstatement.BreakStatement'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.breakstatement.BreakStatement'));
+
+/**
+ * Export class.
+ */
+exports.BreakStatement = BreakStatement;

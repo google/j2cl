@@ -29,6 +29,7 @@ import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.BooleanLiteral;
+import com.google.j2cl.ast.BreakStatement;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CatchClause;
 import com.google.j2cl.ast.CompilationUnit;
@@ -400,6 +401,8 @@ public class CompilationUnitBuilder {
           return singletonStatement(convert((org.eclipse.jdt.core.dom.AssertStatement) node));
         case ASTNode.BLOCK:
           return singletonStatement(convert((org.eclipse.jdt.core.dom.Block) node));
+        case ASTNode.BREAK_STATEMENT:
+          return singletonStatement(convert((org.eclipse.jdt.core.dom.BreakStatement) node));
         case ASTNode.CONSTRUCTOR_INVOCATION:
           return singletonStatement(convert((org.eclipse.jdt.core.dom.ConstructorInvocation) node));
         case ASTNode.DO_STATEMENT:
@@ -437,6 +440,12 @@ public class CompilationUnitBuilder {
       }
     }
 
+    private BreakStatement convert(org.eclipse.jdt.core.dom.BreakStatement jdtBreakStatement) {
+      Preconditions.checkState(
+          jdtBreakStatement.getLabel() == null, "Break statement with label not supported yet");
+      return new BreakStatement();
+    }
+
     private ForStatement convert(org.eclipse.jdt.core.dom.ForStatement jdtForStatement) {
       // The order here is important since initializers can define new variables
       // These can be used in the expression, updaters or the block
@@ -449,7 +458,9 @@ public class CompilationUnitBuilder {
         initializers.add(convert(expression));
       }
 
-      Expression conditionExpression = convert(jdtForStatement.getExpression());
+      Expression conditionExpression =
+          jdtForStatement.getExpression() != null ? convert(jdtForStatement.getExpression()) : null;
+
       Block block = extractBlock(jdtForStatement.getBody());
       @SuppressWarnings("unchecked")
       List<Expression> updaters = convert(jdtForStatement.updaters());

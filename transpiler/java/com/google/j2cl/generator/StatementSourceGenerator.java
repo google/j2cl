@@ -27,6 +27,7 @@ import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.BooleanLiteral;
+import com.google.j2cl.ast.BreakStatement;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CatchClause;
 import com.google.j2cl.ast.DoWhileStatement;
@@ -101,6 +102,11 @@ public class StatementSourceGenerator {
         } else {
           return transformRegularBinaryExpression(expression);
         }
+      }
+
+      @Override
+      public String transformBreakStatement(BreakStatement statement) {
+        return "break;";
       }
 
       private String transformRegularBinaryExpression(BinaryExpression expression) {

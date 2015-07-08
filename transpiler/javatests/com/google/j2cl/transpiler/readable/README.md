@@ -46,6 +46,7 @@ are copyright and licensed as follows:
 - anonymousclasswithcapture
 - array devirtualization
 - boxing
+- break with label
 - bridgemethodaccidentaloverride
 - bridgemethodboundedtypes
 - bridgemethodmultipleoverrides
