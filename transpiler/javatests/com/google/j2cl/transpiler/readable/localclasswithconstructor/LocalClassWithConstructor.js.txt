@@ -1,0 +1,241 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/localclasswithconstructor/LocalClassWithConstructor.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructorModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+
+
+class LocalClassWithConstructor$1LocalClass extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {number}
+     */
+    this.f_field__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor$1LocalClass =
+        0;
+    /**
+     * @public {number}
+     */
+    this.$c_localVar = 0;
+    /**
+     * @public {number}
+     */
+    this.$c_p = 0;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor$1LocalClass() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {number} a
+   * @param {number} b
+   * @param {number} $c_localVar
+   * @param {number} $c_p
+   * @return {!LocalClassWithConstructor$1LocalClass}
+   * @public
+   */
+  static $create__int__int(a, b, $c_localVar, $c_p) {
+    LocalClassWithConstructor$1LocalClass.$clinit();
+    var instance = new LocalClassWithConstructor$1LocalClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor$1LocalClass__int__int(
+            a, b, $c_localVar, $c_p);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {number} a
+   * @param {number} b
+   * @param {number} $c_localVar
+   * @param {number} $c_p
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor$1LocalClass__int__int(
+      a, b, $c_localVar, $c_p) {
+    this.$ctor__java_lang_Object();
+    this.$c_localVar = $c_localVar;
+    this.$c_p = $c_p;
+    this.$init__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor$1LocalClass();
+    this.f_field__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor$1LocalClass =
+        $c_localVar + a + b;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {number} a
+   * @param {number} $c_localVar
+   * @param {number} $c_p
+   * @return {!LocalClassWithConstructor$1LocalClass}
+   * @public
+   */
+  static $create__int(a, $c_localVar, $c_p) {
+    LocalClassWithConstructor$1LocalClass.$clinit();
+    var instance = new LocalClassWithConstructor$1LocalClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor$1LocalClass__int(
+            a, $c_localVar, $c_p);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {number} a
+   * @param {number} $c_localVar
+   * @param {number} $c_p
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor$1LocalClass__int(
+      a, $c_localVar, $c_p) {
+    this.$ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor$1LocalClass__int__int(
+        a, $c_p, $c_localVar, $c_p);
+    this.f_field__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor$1LocalClass =
+        $c_localVar;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof LocalClassWithConstructor$1LocalClass;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor,
+                              LocalClassWithConstructor$1LocalClass);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+LocalClassWithConstructor$1LocalClass.$class = Class.$createForClass(
+    Util.$generateId('1LocalClass'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor$1LocalClass'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.1LocalClass'));
+
+
+
+class LocalClassWithConstructor extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor() {
+  }
+
+  /**
+   * @param {number} p
+   * @return {void}
+   * @public
+   */
+  m_test__int(p) {
+    let localVar = 1;
+    LocalClassWithConstructor$1LocalClass.$create__int(1, localVar, p);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!LocalClassWithConstructor}
+   * @public
+   */
+  static $create() {
+    LocalClassWithConstructor.$clinit();
+    var instance = new LocalClassWithConstructor;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof LocalClassWithConstructor;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, LocalClassWithConstructor);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+LocalClassWithConstructor.$class = Class.$createForClass(
+    Util.$generateId('LocalClassWithConstructor'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor'));
+
+/**
+ * Export class.
+ */
+exports.LocalClassWithConstructor = LocalClassWithConstructor;

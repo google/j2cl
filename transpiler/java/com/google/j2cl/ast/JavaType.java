@@ -42,6 +42,7 @@ public class JavaType extends Node {
 
   private Kind kind;
   private Visibility visibility;
+  private boolean isLocal;
 
   @Visitable @Nullable TypeReference enclosingTypeRef;
 
@@ -71,6 +72,14 @@ public class JavaType extends Node {
 
   public void setKind(Kind kind) {
     this.kind = kind;
+  }
+
+  public boolean isLocal() {
+    return isLocal;
+  }
+
+  public void setLocal(boolean isLocal) {
+    this.isLocal = isLocal;
   }
 
   public boolean isInterface() {

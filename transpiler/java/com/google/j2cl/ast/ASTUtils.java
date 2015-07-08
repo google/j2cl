@@ -21,6 +21,8 @@ import com.google.common.base.Preconditions;
  * Utility functions to manipulate J2CL AST.
  */
 public class ASTUtils {
+  public static final String CAPTURES_PREFIX = "$c_";
+
   /**
    * Create "$init" MethodReference.
    */
@@ -39,7 +41,7 @@ public class ASTUtils {
    * Returns the constructor invocation (super call or this call) in a specified constructor,
    * or returns null if it does not have one.
    */
-  private static MethodCall getConstructorInvocation(Method method) {
+  public static MethodCall getConstructorInvocation(Method method) {
     Preconditions.checkArgument(method.isConstructor());
     if (method.getBody().getStatements().isEmpty()) {
       return null;
@@ -86,5 +88,33 @@ public class ASTUtils {
   public static boolean hasConstructorInvocation(Method method) {
     MethodCall constructorInvocation = getConstructorInvocation(method);
     return constructorInvocation != null;
+  }
+
+  /**
+   * Returns the added field corresponding to the captured variable.
+   */
+  public static FieldReference createFieldForCapture(
+      TypeReference enclosingClassRef, Variable capturedVariable) {
+    return FieldReference.createRaw(
+        false,
+        enclosingClassRef,
+        CAPTURES_PREFIX + capturedVariable.getName(),
+        capturedVariable.getTypeRef());
+  }
+
+  /**
+   * Returns the added outer parameter in constructor corresponding to the captured variable.
+   */
+  public static Variable createParamForCapture(Variable capturedVariable) {
+    return new Variable(
+        CAPTURES_PREFIX + capturedVariable.getName(), capturedVariable.getTypeRef(), true, true);
+  }
+
+  /**
+   * Returns the added outer parameter in constructor corresponding to the added field.
+   */
+  public static Variable createOuterParamByField(Field field) {
+    return new Variable(
+        field.getSelfReference().getFieldName(), field.getSelfReference().getType(), true, true);
   }
 }

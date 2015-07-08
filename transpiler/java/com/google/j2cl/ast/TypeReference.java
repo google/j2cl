@@ -57,18 +57,19 @@ public abstract class TypeReference extends Expression implements Comparable<Typ
             new AutoValue_RegularTypeReference(
                 ImmutableList.copyOf(packageComponents),
                 ImmutableList.copyOf(classComponents),
-                compilationUnitSimpleName, false));
+                compilationUnitSimpleName,
+                false));
   }
+
   public static TypeReference createRaw(
-      Iterable<String> nameSpaceComponents,
-      String className,
-      String moduleName) {
+      Iterable<String> nameSpaceComponents, String className, String moduleName) {
     return getInterner()
         .intern(
             new AutoValue_RegularTypeReference(
                 ImmutableList.copyOf(nameSpaceComponents),
                 ImmutableList.of(className),
-                moduleName, true));
+                moduleName,
+                true));
   }
 
   static TypeReference createPrimitive(String primitiveTypeName) {

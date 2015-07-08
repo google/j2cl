@@ -1,0 +1,300 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/nestedlocalclasses/NestedLocalClasses.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClassesModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+
+
+class NestedLocalClasses$1InnerClass$1InnerInnerClass extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {number}
+     */
+    this.f_fieldInInnerInnerClass__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses$1InnerClass$1InnerInnerClass =
+        0;
+    /**
+     * @public {number}
+     */
+    this.$c_localVar = 0;
+    /**
+     * @public {number}
+     */
+    this.$c_localVarInInnerClass = 0;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses$1InnerClass$1InnerInnerClass() {
+    this.f_fieldInInnerInnerClass__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses$1InnerClass$1InnerInnerClass =
+        this.$c_localVar + this.$c_localVarInInnerClass;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {number} $c_localVar
+   * @param {number} $c_localVarInInnerClass
+   * @return {!NestedLocalClasses$1InnerClass$1InnerInnerClass}
+   * @public
+   */
+  static $create($c_localVar, $c_localVarInInnerClass) {
+    NestedLocalClasses$1InnerClass$1InnerInnerClass.$clinit();
+    var instance = new NestedLocalClasses$1InnerClass$1InnerInnerClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses$1InnerClass$1InnerInnerClass(
+            $c_localVar, $c_localVarInInnerClass);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {number} $c_localVar
+   * @param {number} $c_localVarInInnerClass
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses$1InnerClass$1InnerInnerClass(
+      $c_localVar, $c_localVarInInnerClass) {
+    this.$ctor__java_lang_Object();
+    this.$c_localVar = $c_localVar;
+    this.$c_localVarInInnerClass = $c_localVarInInnerClass;
+    this.$init__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses$1InnerClass$1InnerInnerClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof NestedLocalClasses$1InnerClass$1InnerInnerClass;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor,
+                              NestedLocalClasses$1InnerClass$1InnerInnerClass);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+NestedLocalClasses$1InnerClass$1InnerInnerClass.$class = Class.$createForClass(
+    Util.$generateId('1InnerInnerClass'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses$1InnerClass$1InnerInnerClass'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass'));
+
+
+
+class NestedLocalClasses$1InnerClass extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {number}
+     */
+    this.$c_localVar = 0;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses$1InnerClass() {
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_fun() {
+    let localVarInInnerClass = 1;
+    NestedLocalClasses$1InnerClass$1InnerInnerClass.$create(
+        this.$c_localVar, localVarInInnerClass);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {number} $c_localVar
+   * @return {!NestedLocalClasses$1InnerClass}
+   * @public
+   */
+  static $create($c_localVar) {
+    NestedLocalClasses$1InnerClass.$clinit();
+    var instance = new NestedLocalClasses$1InnerClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses$1InnerClass(
+            $c_localVar);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {number} $c_localVar
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses$1InnerClass(
+      $c_localVar) {
+    this.$ctor__java_lang_Object();
+    this.$c_localVar = $c_localVar;
+    this.$init__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses$1InnerClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof NestedLocalClasses$1InnerClass;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, NestedLocalClasses$1InnerClass);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+NestedLocalClasses$1InnerClass.$class = Class.$createForClass(
+    Util.$generateId('1InnerClass'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses$1InnerClass'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.1InnerClass'));
+
+
+
+class NestedLocalClasses extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses() {
+  }
+
+  /**
+   * @param {number} p
+   * @return {void}
+   * @public
+   */
+  m_test__int(p) { let localVar = 1; }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!NestedLocalClasses}
+   * @public
+   */
+  static $create() {
+    NestedLocalClasses.$clinit();
+    var instance = new NestedLocalClasses;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof NestedLocalClasses;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, NestedLocalClasses);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+NestedLocalClasses.$class = Class.$createForClass(
+    Util.$generateId('NestedLocalClasses'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses'));
+
+/**
+ * Export class.
+ */
+exports.NestedLocalClasses = NestedLocalClasses;

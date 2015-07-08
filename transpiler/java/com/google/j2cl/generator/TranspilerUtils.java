@@ -208,4 +208,8 @@ public class TranspilerUtils {
       return "null";
     }
   }
+
+  public static boolean shouldExport(JavaType type) {
+    return !type.getVisibility().isPrivate() && !type.isLocal();
+  }
 }

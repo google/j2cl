@@ -17,6 +17,7 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.visitors.CreateDefaultConstructorsVisitor;
 import com.google.j2cl.ast.visitors.InsertExplicitSuperCallsVisitor;
 import com.google.j2cl.ast.visitors.InsertInstanceInitCallsVisitor;
+import com.google.j2cl.ast.visitors.NormalizeLocalClassConstructorsVisitor;
 import com.google.j2cl.common.VelocityUtil;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.frontend.CompilationUnitBuilder;
@@ -118,6 +119,7 @@ public class J2clTranspiler {
       CreateDefaultConstructorsVisitor.doCreateDefaultConstructors(j2clUnit);
       InsertExplicitSuperCallsVisitor.doInsertExplicitSuperCalls(j2clUnit);
       InsertInstanceInitCallsVisitor.doInsertInstanceInitCall(j2clUnit);
+      NormalizeLocalClassConstructorsVisitor.doNormalizeLocalClassConstructors(j2clUnit);
     }
   }
 

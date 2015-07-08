@@ -87,7 +87,16 @@ public class JdtUtils {
 
     ITypeBinding currentType = typeBinding;
     while (currentType != null) {
-      nameComponents.add(0, currentType.getErasure().getName());
+      String simpleName;
+      if (currentType.isLocal()) {
+        // JDT binary name for local class is like package.components.EnclosingClass$1SimpleName
+        // Extract the name after the last '$' as the class component here.
+        String binaryName = currentType.getErasure().getBinaryName();
+        simpleName = binaryName.substring(binaryName.lastIndexOf('$') + 1);
+      } else {
+        simpleName = currentType.getErasure().getName();
+      }
+      nameComponents.add(0, simpleName);
       currentType = currentType.getDeclaringClass();
     }
 

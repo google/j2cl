@@ -16,8 +16,12 @@
 package com.google.j2cl.frontend;
 
 import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
+import com.google.j2cl.ast.ASTUtils;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.AssertStatement;
@@ -94,12 +98,26 @@ import java.util.Map.Entry;
  * Creates a J2CL Java AST from the AST provided by JDT.
  */
 public class CompilationUnitBuilder {
-
   private class ASTConverter {
     private Map<IVariableBinding, Variable> variableByJdtBinding = new HashMap<>();
+    private Multimap<TypeReference, Variable> capturesByTypeRef = LinkedHashMultimap.create();
+    private List<JavaType> typeStack = new ArrayList<>();
+    private JavaType currentType = null;
+    private boolean inConstructor = false;
     private ITypeBinding javaLangObjectBinding;
 
     private String currentSourceFile;
+    private CompilationUnit j2clCompilationUnit;
+
+    private void pushType(JavaType type) {
+      typeStack.add(type);
+      currentType = type;
+    }
+
+    private void popType() {
+      typeStack.remove(typeStack.size() - 1);
+      currentType = typeStack.isEmpty() ? null : typeStack.get(typeStack.size() - 1);
+    }
 
     private CompilationUnit convert(
         String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
@@ -107,7 +125,7 @@ public class CompilationUnitBuilder {
 
       currentSourceFile = sourceFilePath;
       String packageName = JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit);
-      CompilationUnit j2clCompilationUnit = new CompilationUnit(sourceFilePath, packageName);
+      j2clCompilationUnit = new CompilationUnit(sourceFilePath, packageName);
       for (Object object : jdtCompilationUnit.types()) {
         AbstractTypeDeclaration abstractTypeDeclaration = (AbstractTypeDeclaration) object;
         j2clCompilationUnit.addTypes(convert(abstractTypeDeclaration));
@@ -131,6 +149,7 @@ public class CompilationUnitBuilder {
     private Collection<JavaType> convert(TypeDeclaration node) {
       ITypeBinding typeBinding = node.resolveBinding();
       JavaType type = createJavaType(typeBinding);
+      pushType(type);
       List<JavaType> types = new ArrayList<>();
       types.add(type);
       for (Object object : node.bodyDeclarations()) {
@@ -162,6 +181,12 @@ public class CompilationUnitBuilder {
                   + currentSourceFile);
         }
       }
+      TypeReference currentTypeRef = currentType.getSelfReference();
+      for (Variable capturedVariable : capturesByTypeRef.get(currentTypeRef)) {
+        FieldReference fieldRef = ASTUtils.createFieldForCapture(currentTypeRef, capturedVariable);
+        currentType.addField(new Field(fieldRef, null, true)); // captured field.
+      }
+      popType();
       return types;
     }
 
@@ -191,13 +216,18 @@ public class CompilationUnitBuilder {
         parameters.add(j2clParameter);
         variableByJdtBinding.put(parameterBinding, j2clParameter);
       }
+
+      inConstructor = node.resolveBinding().isConstructor();
       // If a method has no body, initialize the body with an empty list of statements.
       Block body =
           node.getBody() == null ? new Block(new ArrayList<Statement>()) : convert(node.getBody());
-      return new Method(
-          JdtUtils.createMethodReference(node.resolveBinding(), compilationUnitNameLocator),
-          parameters,
-          body);
+      Method method =
+          new Method(
+              JdtUtils.createMethodReference(node.resolveBinding(), compilationUnitNameLocator),
+              parameters,
+              body);
+      inConstructor = false;
+      return method;
     }
 
     @SuppressWarnings("cast")
@@ -252,7 +282,25 @@ public class CompilationUnitBuilder {
       for (Object argument : node.arguments()) {
         arguments.add(convert((org.eclipse.jdt.core.dom.Expression) argument));
       }
-      return new NewInstance(qualifier, constructor, arguments);
+      NewInstance newInstance = new NewInstance(qualifier, constructor, arguments);
+      // If the class has captures, add corresponding arguments to NewInstance's extraArguments,
+      // which will be added to real arguments by {@code NormalizeLocalClassConstructorsVisitor}.
+      for (Variable capturedVariable : capturesByTypeRef.get(constructor.getEnclosingClassRef())) {
+        if (capturesByTypeRef.containsEntry(currentType.getSelfReference(), capturedVariable)) {
+          // If the capturedVariable is also a captured variable in current type, pass the
+          // corresponding field in current type as an argument.
+          newInstance.addExtraArgument(
+              new FieldAccess(
+                  new ThisReference(null),
+                  ASTUtils.createFieldForCapture(
+                      currentType.getSelfReference(), capturedVariable)));
+        } else {
+          // otherwise, the captured variable is in the scope of the current type, so pass the
+          // variable directly as an argument.
+          newInstance.addExtraArgument(new VariableReference(capturedVariable));
+        }
+      }
+      return newInstance;
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.Expression node) {
@@ -373,6 +421,8 @@ public class CompilationUnitBuilder {
           return singletonStatement(convert((org.eclipse.jdt.core.dom.ThrowStatement) node));
         case ASTNode.TRY_STATEMENT:
           return singletonStatement(convert((org.eclipse.jdt.core.dom.TryStatement) node));
+        case ASTNode.TYPE_DECLARATION_STATEMENT:
+          return convert((org.eclipse.jdt.core.dom.TypeDeclarationStatement) node);
         case ASTNode.VARIABLE_DECLARATION_STATEMENT:
           return singletonStatement(
               convert((org.eclipse.jdt.core.dom.VariableDeclarationStatement) node));
@@ -410,6 +460,12 @@ public class CompilationUnitBuilder {
       Block block = extractBlock(jdtDoStatement.getBody());
       Expression conditionExpression = convert(jdtDoStatement.getExpression());
       return new DoWhileStatement(conditionExpression, block);
+    }
+
+    private Collection<Statement> convert(
+        org.eclipse.jdt.core.dom.TypeDeclarationStatement jdtTypeDeclStatement) {
+      j2clCompilationUnit.addTypes(convert(jdtTypeDeclStatement.getDeclaration()));
+      return Collections.emptyList();
     }
 
     private WhileStatement convert(org.eclipse.jdt.core.dom.WhileStatement jdtWhileStatement) {
@@ -619,11 +675,39 @@ public class CompilationUnitBuilder {
         if (variableBinding.isField()) {
           return new FieldAccess(
               null, JdtUtils.createFieldReference(variableBinding, compilationUnitNameLocator));
-        } else if (variableBinding.isParameter()) {
-          return new VariableReference(variableByJdtBinding.get(variableBinding));
         } else {
-          // local variable.
-          return new VariableReference(variableByJdtBinding.get(variableBinding));
+          // local variable or parameter.
+          Preconditions.checkNotNull(variableBinding.getDeclaringMethod());
+          Variable variable = variableByJdtBinding.get(variableBinding);
+          // the innermost type that this variable are declared.
+          TypeReference enclosingClassRef =
+              JdtUtils.createTypeReference(
+                  variableBinding.getDeclaringMethod().getDeclaringClass(),
+                  compilationUnitNameLocator);
+          TypeReference currentTypeRef = currentType.getSelfReference();
+          if (!enclosingClassRef.equals(currentTypeRef)) {
+            // the variable is declared outside current type, i.e. a captured variable to current
+            // type, and also a captured variable to the outer class in the type stack that is
+            // inside {@code enclosingClassRef}.
+            for (int i = typeStack.size() - 1; i >= 0; i--) {
+              if (typeStack.get(i).getSelfReference().equals(enclosingClassRef)) {
+                break;
+              }
+              capturesByTypeRef.put(typeStack.get(i).getSelfReference(), variable);
+            }
+            // for reference to a captured variable, if it is in a constructor, translate to
+            // reference to outer parameter, otherwise, translate to reference to corresponding
+            // field created for the captured variable.
+            if (inConstructor) {
+              Variable param = ASTUtils.createParamForCapture(variable);
+              return new VariableReference(param);
+            } else {
+              FieldReference fieldRef = ASTUtils.createFieldForCapture(currentTypeRef, variable);
+              return new FieldAccess(new ThisReference(null), fieldRef);
+            }
+          } else {
+            return new VariableReference(variable);
+          }
         }
       } else if (binding instanceof ITypeBinding) {
         ITypeBinding typeBinding = (ITypeBinding) binding;
@@ -755,6 +839,8 @@ public class CompilationUnitBuilder {
       for (ITypeBinding superInterface : typeBinding.getInterfaces()) {
         type.addSuperInterfaceRef(createTypeReference(superInterface));
       }
+      type.setEnclosingTypeRef(createTypeReference(typeBinding.getDeclaringClass()));
+      type.setLocal(typeBinding.isLocal());
       return type;
     }
 
@@ -768,14 +854,12 @@ public class CompilationUnitBuilder {
     }
   }
 
-  private CompilationUnit j2clCompilationUnit;
   private CompilationUnitNameLocator compilationUnitNameLocator;
 
   private CompilationUnit buildCompilationUnit(
       String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
     ASTConverter converter = new ASTConverter();
-    j2clCompilationUnit = converter.convert(sourceFilePath, jdtCompilationUnit);
-    return j2clCompilationUnit;
+    return converter.convert(sourceFilePath, jdtCompilationUnit);
   }
 
   private TypeReference createTypeReference(ITypeBinding typeBinding) {
