@@ -30,10 +30,6 @@ are copyright and licensed as follows:
  * the License.
  */
 
-## Useful commands
-- python third_party/b/c/d/e/replace_all.py
-- ./debug_transpile.sh <example_name>
-
 ## Tracking Closure warning issues
 - https://b.corp.google.com/hotlists/269212
 - b/20102666 WARNING - actual parameter of Foo.$markImplementor does not match

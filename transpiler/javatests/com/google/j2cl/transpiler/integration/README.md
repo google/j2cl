@@ -13,7 +13,3 @@ must have a Main class with a main() function.
 
 ## Expectations
 - Include an updated size_report.txt in every change.
-
-## Useful commands
-- python third_party/j/j/t/j/c/g/j/transpiler/integration/make_size_report.py
-- python third_party/j/j/t/j/c/g/j/transpiler/integration/diff_readable_opt_js.py TEST_NAME
