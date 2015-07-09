@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.j2cl.ast.processors.Context;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ import javax.annotation.Nullable;
 /**
  * A node that represents a Java Type declaration in the compilation unit.
  */
-@Visitable
+@Visitable @Context
 public class JavaType extends Node {
 
   /**

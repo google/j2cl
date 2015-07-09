@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Context;
 import com.google.j2cl.ast.processors.Visitable;
 
 import javax.annotation.Nullable;
@@ -22,7 +23,7 @@ import javax.annotation.Nullable;
 /**
  * Field declaration node.
  */
-@Visitable
+@Visitable @Context
 public class Field extends Node {
   @Visitable FieldDescriptor fieldDescriptor;
   @Visitable @Nullable Expression initializer;

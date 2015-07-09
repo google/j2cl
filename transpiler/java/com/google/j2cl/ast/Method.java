@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.processors.Context;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import java.util.List;
 /**
  * Method declaration.
  */
-@Visitable
+@Visitable @Context
 public class Method extends Node {
   @Visitable MethodDescriptor methodDescriptor;
   @Visitable List<Variable> parameters = new ArrayList<>();

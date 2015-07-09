@@ -6,6 +6,10 @@ public class Visitor_${className} {
 
   public static ${className} visit(Processor processor, ${className} node) {
     ProcessorPrivate processorImpl = (ProcessorPrivate) processor;
+#if (${visitableClass.isContext()})
+    Preconditions.checkState(processorImpl.getCurrent${className}() == null);
+    processorImpl.setCurrent${className}(node);
+#end
     if (processorImpl.shouldProcess${className}(node)) {
       node = processorImpl.preProcess${className}(node);
 
@@ -27,6 +31,10 @@ public class Visitor_${className} {
 #end
       node = processorImpl.postProcess${className}(node);
     }
+#if (${visitableClass.isContext()})
+    Preconditions.checkState(processorImpl.getCurrent${className}() != null);
+    processorImpl.setCurrent${className}(null);
+#end
     return node;
   }
 }

@@ -1,0 +1,23 @@
+package ${packageName};
+
+abstract class ProcessorPrivate implements Processor {
+#foreach($clazz in $classes)
+#if(${clazz.isContext()})
+
+  abstract void setCurrent${clazz.SimpleName}(${clazz.SimpleName} node);
+  abstract ${clazz.SimpleName} getCurrent${clazz.SimpleName}();
+#end
+#end
+
+#foreach($clazz in $classes)
+  abstract boolean shouldProcess${clazz.SimpleName}(${clazz.SimpleName} node);
+#end
+
+#foreach($clazz in $classes)
+  abstract <T extends Node> T preProcess${clazz.SimpleName}(${clazz.SimpleName} node);
+#end
+
+#foreach($clazz in $classes)
+  abstract <T extends Node> T postProcess${clazz.SimpleName}(${clazz.SimpleName} node);
+#end
+}

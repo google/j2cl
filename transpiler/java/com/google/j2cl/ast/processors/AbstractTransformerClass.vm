@@ -2,18 +2,31 @@ package ${packageName};
 
 import com.google.common.base.Preconditions;
 
-public abstract class AbstractTransformer<T> implements ProcessorPrivate {
+public abstract class AbstractTransformer<T> extends ProcessorPrivate {
 
   private T result;
 
   public T process(Node node) {
+    Preconditions.checkState(result == null);
     node.accept(this);
     return result;
   }
 #foreach($clazz in $classes)
+#if(${clazz.isContext()})
+
+  private ${clazz.SimpleName} current${clazz.SimpleName} = null;
+  final void setCurrent${clazz.SimpleName}(${clazz.SimpleName} node) {
+    current${clazz.SimpleName} = node;
+  }
+  public final ${clazz.SimpleName} getCurrent${clazz.SimpleName}() {
+    return current${clazz.SimpleName};
+  }
+#end
+#end
+#foreach($clazz in $classes)
 
   @Override
-  final public boolean shouldProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
+  final boolean shouldProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
     Preconditions.checkState(result == null);
     result = transform${clazz.SimpleName}(node);
     return false;
@@ -22,14 +35,14 @@ public abstract class AbstractTransformer<T> implements ProcessorPrivate {
 #foreach($clazz in $classes)
 
   @Override
-  final public <T extends Node> T preProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
+  final <T extends Node> T preProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
     return (T) node;
   }
 #end
 #foreach($clazz in $classes)
 
   @Override
-  final public <T extends Node> T postProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
+  final <T extends Node> T postProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
     return (T) node;
   }
 #end

@@ -43,30 +43,10 @@ public class NormalizeLocalClassConstructorsVisitor extends AbstractVisitor {
     new NormalizeLocalClassConstructorsVisitor().normalizeLocalClassConstructors(compilationUnit);
   }
 
-  private JavaType currentType;
-  private Method currentMethod;
-
-  @Override
-  public boolean enterJavaType(JavaType type) {
-    currentType = type;
-    return true;
-  }
-
-  @Override
-  public void exitJavaType(JavaType type) {
-    currentType = null;
-  }
-
   @Override
   public boolean enterMethod(Method method) {
-    currentMethod = method;
     addParametersToConstructor(method);
     return true;
-  }
-
-  @Override
-  public void exitMethod(Method method) {
-    currentMethod = null;
   }
 
   @Override
@@ -78,11 +58,13 @@ public class NormalizeLocalClassConstructorsVisitor extends AbstractVisitor {
   @Override
   public boolean enterVariableReference(VariableReference variableRef) {
     // replace references to outer parameters in the constructor with the real outer parameter.
-    if (!currentType.isLocal() || currentMethod == null || !currentMethod.isConstructor()
+    if (!getCurrentJavaType().isLocal()
+        || getCurrentMethod() == null
+        || !getCurrentMethod().isConstructor()
         || !variableRef.getTarget().isParameter()) {
       return false;
     }
-    Variable parameter = findParamByName(variableRef.getTarget().getName(), currentMethod);
+    Variable parameter = findParamByName(variableRef.getTarget().getName(), getCurrentMethod());
     Preconditions.checkNotNull(parameter);
     variableRef.setTarget(parameter);
     return false;
@@ -109,10 +91,10 @@ public class NormalizeLocalClassConstructorsVisitor extends AbstractVisitor {
    */
   private void addParametersToConstructor(Method method) {
     // only applys on constructors of local class.
-    if (!currentType.isLocal() || !method.isConstructor()) {
+    if (!getCurrentJavaType().isLocal() || !method.isConstructor()) {
       return;
     }
-    Iterable<Field> capturedFields = getFieldsForCapturedVariables(currentType);
+    Iterable<Field> capturedFields = getFieldsForCapturedVariables(getCurrentJavaType());
     MethodCall constructorCall = ASTUtils.getConstructorInvocation(method);
     int i = 0;
     for (Field field : capturedFields) {
@@ -120,7 +102,7 @@ public class NormalizeLocalClassConstructorsVisitor extends AbstractVisitor {
       method.addParameter(parameter);
       if (constructorCall != null
           && constructorCall.getTarget().getEnclosingClassDescriptor().equals(
-              currentType.getDescriptor())) { // this() call
+              getCurrentJavaType().getDescriptor())) { // this() call
         // add argument (reference to outer parameter) to this() call.
         constructorCall.getArguments().add(new VariableReference(parameter));
       } else {

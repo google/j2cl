@@ -117,7 +117,7 @@ public class J2clAstProcessor extends AbstractProcessor {
         writeGeneralClass(
             ABSTRACT_TRANSFORMER_TEMPLATE_FILE, "AbstractTransformer", packageName, classes);
         writeGeneralClass(
-            PROCESSOR_PRIVATE_INTERFACE_TEMPLATE_FILE, "ProcessorPrivate", packageName, classes);
+            PROCESSOR_PRIVATE_CLASS_TEMPLATE_FILE, "ProcessorPrivate", packageName, classes);
         writeGeneralClass(VISITOR_INTERFACE_TEMPLATE_FILE, "Visitor", packageName, classes);
         writeGeneralClass(REWRITER_INTERFACE_TEMPLATE_FILE, "Rewriter", packageName, classes);
       }
@@ -212,6 +212,8 @@ public class J2clAstProcessor extends AbstractProcessor {
     String simpleName;
     String superclassName;
     List<Field> fieldNames;
+    boolean isContext;
+
 
     @Override
     public int hashCode() {
@@ -237,6 +239,10 @@ public class J2clAstProcessor extends AbstractProcessor {
       return superclassName == null;
     }
 
+    public boolean isContext() {
+      return isContext;
+    }
+
     public String getSuperclassName() {
       return superclassName;
     }
@@ -247,6 +253,7 @@ public class J2clAstProcessor extends AbstractProcessor {
     vc.put("className", visitableClass.simpleName);
     vc.put("packageName", visitableClass.packageName);
     vc.put("fields", visitableClass.fieldNames);
+    vc.put("visitableClass", visitableClass);
     return vc;
   }
 
@@ -268,8 +275,8 @@ public class J2clAstProcessor extends AbstractProcessor {
   private static final String ABSTRACT_TRANSFORMER_TEMPLATE_FILE =
       "com/google/j2cl/ast/processors/AbstractTransformerClass.vm";
 
-  private static final String PROCESSOR_PRIVATE_INTERFACE_TEMPLATE_FILE =
-      "com/google/j2cl/ast/processors/ProcessorPrivateInterface.vm";
+  private static final String PROCESSOR_PRIVATE_CLASS_TEMPLATE_FILE =
+      "com/google/j2cl/ast/processors/ProcessorPrivateClass.vm";
 
   private static final String VISITOR_INTERFACE_TEMPLATE_FILE =
       "com/google/j2cl/ast/processors/VisitorInterface.vm";
@@ -333,6 +340,7 @@ public class J2clAstProcessor extends AbstractProcessor {
     visitableClass.simpleName = typeElement.getSimpleName().toString();
     visitableClass.packageName = MoreElements.getPackage(typeElement).getQualifiedName().toString();
     visitableClass.fieldNames = allFieldsNames;
+    visitableClass.isContext = isAnnotationPresent(typeElement, Context.class);
     if (typeElement.getSuperclass() != null
         && MoreElements.getPackage(typeElement)
             .getQualifiedName()

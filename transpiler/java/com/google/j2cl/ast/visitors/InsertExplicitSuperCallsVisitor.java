@@ -38,15 +38,9 @@ public class InsertExplicitSuperCallsVisitor extends AbstractVisitor {
     new InsertExplicitSuperCallsVisitor().insertExplicitSuperCalls(compilationUnit);
   }
 
-  private JavaType currentJavaType;
-
   @Override
   public boolean enterJavaType(JavaType type) {
-    if (type.isInterface()) {
-      return false;
-    }
-    currentJavaType = type;
-    return true;
+    return !type.isInterface();
   }
 
   @Override
@@ -57,16 +51,11 @@ public class InsertExplicitSuperCallsVisitor extends AbstractVisitor {
      */
     if (!method.isConstructor()
         || ASTUtils.hasConstructorInvocation(method)
-        || currentJavaType.getSuperTypeDescriptor() == null) {
+        || getCurrentJavaType().getSuperTypeDescriptor() == null) {
       return false;
     }
-    synthesizeSuperCall(method, currentJavaType.getSuperTypeDescriptor());
+    synthesizeSuperCall(method, getCurrentJavaType().getSuperTypeDescriptor());
     return false;
-  }
-
-  @Override
-  public void exitJavaType(JavaType type) {
-    currentJavaType = null;
   }
 
   private void insertExplicitSuperCalls(CompilationUnit compilationUnit) {

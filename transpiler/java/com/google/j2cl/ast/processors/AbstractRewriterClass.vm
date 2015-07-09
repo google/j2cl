@@ -1,27 +1,39 @@
 package ${packageName};
 
-public abstract class AbstractRewriter implements Rewriter, ProcessorPrivate {
+public abstract class AbstractRewriter extends ProcessorPrivate implements Rewriter {
+#foreach($clazz in $classes)
+#if(${clazz.isContext()})
+
+  private ${clazz.SimpleName} current${clazz.SimpleName} = null;
+  final void setCurrent${clazz.SimpleName}(${clazz.SimpleName} node) {
+    current${clazz.SimpleName} = node;
+  }
+  public final  ${clazz.SimpleName} getCurrent${clazz.SimpleName}() {
+    return current${clazz.SimpleName};
+  }
+#end
+#end
 #foreach($clazz in $classes)
 
   @Override
   public boolean shouldProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
-  #if(${clazz.isTop()})
+#if(${clazz.isTop()})
     return true;
-  #else
+#else
     return shouldProcess${clazz.SuperclassName}(node);
-  #end
+#end
   }
 #end
 #foreach($clazz in $classes)
 
   @Override
-  final public <T extends Node> T preProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
+  public <T extends Node> T preProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
     return (T) node;
   }
 #end
 #foreach($clazz in $classes)
   @Override
-  final public <T extends Node> T postProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
+  public <T extends Node> T postProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
     return (T) rewrite${clazz.SimpleName}(node);
   }
 
