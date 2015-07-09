@@ -1,6 +1,6 @@
 package com.google.j2cl.transpiler.readable.devirtualizedcalls;
 
-public class DevirtualizedCalls {
+public class ObjectCalls {
   public void main() {
     Object object = new Object();
 

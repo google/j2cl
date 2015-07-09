@@ -110,6 +110,11 @@ public class JdtUtils {
 
   static FieldDescriptor createFieldDescriptor(
       IVariableBinding variableBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
+    if (isArrayLengthBinding(variableBinding)) {
+      return FieldDescriptor.createRaw(
+          false, TypeDescriptor.VOID_TYPE_DESCRIPTOR, "length", TypeDescriptor.INT_TYPE_DESCRIPTOR);
+    }
+
     int modifiers = variableBinding.getModifiers();
     boolean isStatic = isStatic(modifiers);
     Visibility visibility = getVisibility(modifiers);
@@ -270,6 +275,12 @@ public class JdtUtils {
     } else {
       return Visibility.PACKAGE_PRIVATE;
     }
+  }
+
+  static boolean isArrayLengthBinding(IVariableBinding variableBinding) {
+    return variableBinding.getName().equals("length")
+        && variableBinding.isField()
+        && variableBinding.getDeclaringClass() == null;
   }
 
   static boolean isFinal(int modifier) {

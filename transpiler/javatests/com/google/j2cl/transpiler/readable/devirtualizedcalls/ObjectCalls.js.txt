@@ -1,8 +1,8 @@
 /**
  * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/devirtualizedcalls/DevirtualizedCalls.java.
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/devirtualizedcalls/ObjectCalls.java.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.devirtualizedcalls.DevirtualizedCallsModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCallsModule');
 
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
@@ -11,7 +11,7 @@ var Util = goog.require('nativebootstrap.UtilModule').Util;
 var Objects = goog.require('vmbootstrap.ObjectsModule').Objects;
 
 
-class DevirtualizedCalls extends Object {
+class ObjectCalls extends Object {
   /**
    * Defines instance fields.
    * @private
@@ -22,8 +22,7 @@ class DevirtualizedCalls extends Object {
    * Runs instance field and block initializers.
    * @private
    */
-  $init__com_google_j2cl_transpiler_readable_devirtualizedcalls_DevirtualizedCalls() {
-  }
+  $init__com_google_j2cl_transpiler_readable_devirtualizedcalls_ObjectCalls() {}
 
   /**
    * @return {void}
@@ -39,14 +38,14 @@ class DevirtualizedCalls extends Object {
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!DevirtualizedCalls}
+   * @return {!ObjectCalls}
    * @public
    */
   static $create() {
-    DevirtualizedCalls.$clinit();
-    var instance = new DevirtualizedCalls;
+    ObjectCalls.$clinit();
+    var instance = new ObjectCalls;
     instance
-        .$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_DevirtualizedCalls();
+        .$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_ObjectCalls();
     return instance;
   }
 
@@ -54,9 +53,9 @@ class DevirtualizedCalls extends Object {
    * Initializes instance fields for a particular Java constructor.
    * @protected
    */
-  $ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_DevirtualizedCalls() {
+  $ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_ObjectCalls() {
     this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_devirtualizedcalls_DevirtualizedCalls();
+    this.$init__com_google_j2cl_transpiler_readable_devirtualizedcalls_ObjectCalls();
   }
 
   /**
@@ -64,9 +63,7 @@ class DevirtualizedCalls extends Object {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) {
-    return instance instanceof DevirtualizedCalls;
-  }
+  static $isInstance(instance) { return instance instanceof ObjectCalls; }
 
   /**
    * Returns whether the provided class is or extends this class.
@@ -75,7 +72,7 @@ class DevirtualizedCalls extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, DevirtualizedCalls);
+    return Util.$canCastClass(classConstructor, ObjectCalls);
   }
 
   /**
@@ -90,15 +87,15 @@ class DevirtualizedCalls extends Object {
 /**
  * @public {Class}
  */
-DevirtualizedCalls.$class = Class.$createForClass(
-    Util.$generateId('DevirtualizedCalls'),
+ObjectCalls.$class = Class.$createForClass(
+    Util.$generateId('ObjectCalls'),
     Util.$generateId(
-        'com.google.j2cl.transpiler.readable.devirtualizedcalls.DevirtualizedCalls'),
+        'com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls'),
     Object.$class,
     Util.$generateId(
-        'com.google.j2cl.transpiler.readable.devirtualizedcalls.DevirtualizedCalls'));
+        'com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls'));
 
 /**
  * Export class.
  */
-exports.DevirtualizedCalls = DevirtualizedCalls;
+exports.ObjectCalls = ObjectCalls;

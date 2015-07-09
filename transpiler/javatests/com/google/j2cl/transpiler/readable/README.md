@@ -40,7 +40,6 @@ are copyright and licensed as follows:
 
 ## Likely readable examples to add (remove some redundant)
 - anonymousclasswithcapture
-- array devirtualization
 - boxing
 - break with label
 - bridgemethodaccidentaloverride

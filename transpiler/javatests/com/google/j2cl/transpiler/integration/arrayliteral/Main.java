@@ -11,6 +11,7 @@ public class Main {
 
   private static void testEmptyArrayLiteral() {
     Object[] empty = new Object[] {};
+    assert empty.length == 0;
     try {
       empty[0] = null;
       assert false : "Should have already thrown IndexOutOfBounds.";
@@ -21,6 +22,7 @@ public class Main {
 
   private static void testOneD() {
     int[] oneD = new int[] {0, 1, 2};
+    assert oneD.length == 3;
 
     // Values read fine.
     assert oneD[0] == 0;
@@ -43,6 +45,7 @@ public class Main {
 
   private static void testPartial2D() {
     Object[][] partial2D = new Object[][] {null};
+    assert partial2D.length == 1;
 
     // Values read fine.
     assert partial2D[0] == null;
@@ -57,11 +60,15 @@ public class Main {
 
     // You can replace it with a fully initialized array with the right dimensions.
     partial2D = new Object[2][2];
+    assert partial2D.length == 2;
+    assert partial2D[0].length == 2;
   }
 
   private static void testTwoD() {
     Main main = new Main();
     Object[][] twoD = new Main[][] {{main, main}, {main, main}};
+    assert twoD.length == 2;
+    assert twoD[0].length == 2;
 
     // Values read fine.
     assert twoD[0][0] == main;
@@ -103,9 +110,11 @@ public class Main {
 
   private static void testUnbalanced2D() {
     Object[][] unbalanced2D = new Object[][] {{null, null}, null};
+    assert unbalanced2D.length == 2;
 
     // The first branch is actually fully initialized.
     assert unbalanced2D[0][0] == null;
+    assert unbalanced2D[0].length == 2;
     // The second branch less so.
     assert unbalanced2D[1] == null;
   }
