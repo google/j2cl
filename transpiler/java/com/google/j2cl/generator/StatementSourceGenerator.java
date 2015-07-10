@@ -221,13 +221,26 @@ public class StatementSourceGenerator {
       public String transformInstanceOfExpression(InstanceOfExpression expression) {
         TypeDescriptor checkType = expression.getTestTypeDescriptor();
         if (checkType.isArray()) {
-          throw new RuntimeException(
-              "TODO: Implement toSource() for instanceOf ArrayTypeReference");
+          return transformArrayInstanceOfExpression(expression);
         }
         return String.format(
             "%s.$isInstance(%s)",
             TranspilerUtils.getClassName(checkType),
             toSource(expression.getExpression()));
+      }
+
+      private String transformArrayInstanceOfExpression(
+          InstanceOfExpression arrayInstanceOfExpression) {
+        TypeDescriptor checkType = arrayInstanceOfExpression.getTestTypeDescriptor();
+        Preconditions.checkArgument(checkType.isArray());
+
+        String leafTypeName = TranspilerUtils.getClassName(checkType.getLeafTypeDescriptor());
+        String expressionStr = toSource(arrayInstanceOfExpression.getExpression());
+        return String.format(
+            "Arrays.$instanceIsOfType(%s, %s, %s)",
+            expressionStr,
+            leafTypeName,
+            checkType.getDimensions());
       }
 
       @Override

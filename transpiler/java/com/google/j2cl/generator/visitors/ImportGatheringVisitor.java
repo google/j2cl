@@ -49,7 +49,10 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   }
 
   @Override
-  public void exitArrayTypeDescriptor(ArrayTypeDescriptor arrayTypeDescriptor) {}
+  public void exitArrayTypeDescriptor(ArrayTypeDescriptor arrayTypeDescriptor) {
+    importModules.add(Import.IMPORT_VM_ARRAYS);
+    return;
+  }
 
   @Override
   public void exitTypeDescriptor(TypeDescriptor typeDescriptor) {

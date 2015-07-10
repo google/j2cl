@@ -188,8 +188,8 @@ class Arrays {
       return requiredLeafType.$isAssignableFrom(instance.leafType);
     }
     if (instance.dimensionCount > requiredDimensionCount) {
-      // If shrinking the dimensions then the new leaf type must be object.
-      return Object.$isAssignableFrom(requiredLeafType);
+      // If shrinking the dimensions then the new leaf type must *be* Object.
+      return Object == requiredLeafType;
     }
     return false;
   }

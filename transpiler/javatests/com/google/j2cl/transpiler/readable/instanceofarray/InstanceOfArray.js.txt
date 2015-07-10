@@ -1,0 +1,101 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/instanceofarray/InstanceOfArray.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.instanceofarray.InstanceOfArrayModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+var Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
+
+
+class InstanceOfArray extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_instanceofarray_InstanceOfArray() {
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    let object = Object.$create();
+    let a = Arrays.$instanceIsOfType(object, Object, 1);
+    let b = Arrays.$instanceIsOfType(object, Object, 2);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!InstanceOfArray}
+   * @public
+   */
+  static $create() {
+    InstanceOfArray.$clinit();
+    var instance = new InstanceOfArray;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_instanceofarray_InstanceOfArray();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_instanceofarray_InstanceOfArray() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_instanceofarray_InstanceOfArray();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof InstanceOfArray; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, InstanceOfArray);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+InstanceOfArray.$class = Class.$createForClass(
+    Util.$generateId('InstanceOfArray'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.instanceofarray.InstanceOfArray'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.instanceofarray.InstanceOfArray'));
+
+/**
+ * Export class.
+ */
+exports.InstanceOfArray = InstanceOfArray;
