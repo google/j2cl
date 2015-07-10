@@ -8,7 +8,7 @@ public abstract class AbstractRewriter extends ProcessorPrivate implements Rewri
   final void setCurrent${clazz.SimpleName}(${clazz.SimpleName} node) {
     current${clazz.SimpleName} = node;
   }
-  public final  ${clazz.SimpleName} getCurrent${clazz.SimpleName}() {
+  public final ${clazz.SimpleName} getCurrent${clazz.SimpleName}() {
     return current${clazz.SimpleName};
   }
 #end
@@ -27,23 +27,23 @@ public abstract class AbstractRewriter extends ProcessorPrivate implements Rewri
 #foreach($clazz in $classes)
 
   @Override
-  public <T extends Node> T preProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
-    return (T) node;
+  public ${clazz.SimpleName} preProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
+    return node;
   }
 #end
 #foreach($clazz in $classes)
   @Override
-  public <T extends Node> T postProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
-    return (T) rewrite${clazz.SimpleName}(node);
+  public Node postProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
+    return rewrite${clazz.SimpleName}(node);
   }
 
 #end
 #foreach($clazz in $classes)
 
   @Override
-  public <T extends Node> T rewrite${clazz.SimpleName}(${clazz.SimpleName} node) {
+  public Node rewrite${clazz.SimpleName}(${clazz.SimpleName} node) {
 #if(${clazz.isTop()})
-    return (T) node;
+    return node;
 #else
     return rewrite${clazz.SuperclassName}(node);
 #end
