@@ -23,7 +23,8 @@ import javax.annotation.Nullable;
 /**
  * Field declaration node.
  */
-@Visitable @Context
+@Visitable
+@Context
 public class Field extends Node {
   @Visitable FieldDescriptor fieldDescriptor;
   @Visitable @Nullable Expression initializer;
@@ -42,6 +43,7 @@ public class Field extends Node {
   public FieldDescriptor getDescriptor() {
     return fieldDescriptor;
   }
+
   public void setDescriptor(FieldDescriptor fieldDescriptor) {
     this.fieldDescriptor = fieldDescriptor;
   }

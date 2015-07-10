@@ -49,8 +49,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   }
 
   @Override
-  public void exitArrayTypeDescriptor(ArrayTypeDescriptor arrayTypeDescriptor) {
-  }
+  public void exitArrayTypeDescriptor(ArrayTypeDescriptor arrayTypeDescriptor) {}
 
   @Override
   public void exitTypeDescriptor(TypeDescriptor typeDescriptor) {

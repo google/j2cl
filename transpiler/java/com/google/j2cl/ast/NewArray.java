@@ -32,7 +32,9 @@ public class NewArray extends Expression {
   @Visitable TypeDescriptor leafTypeDescriptor;
   @Nullable @Visitable ArrayLiteral arrayLiteral;
 
-  public NewArray(List<Expression> dimensionExpressions, TypeDescriptor leafTypeDescriptor,
+  public NewArray(
+      List<Expression> dimensionExpressions,
+      TypeDescriptor leafTypeDescriptor,
       ArrayLiteral arrayLiteral) {
     Preconditions.checkNotNull(leafTypeDescriptor);
     this.dimensionExpressions.addAll(dimensionExpressions);

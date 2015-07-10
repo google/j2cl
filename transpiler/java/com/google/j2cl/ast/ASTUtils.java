@@ -104,14 +104,6 @@ public class ASTUtils {
   }
 
   /**
-   * Returns the added outer parameter in constructor corresponding to the captured variable.
-   */
-  public static Variable createParamForCapture(Variable capturedVariable) {
-    return new Variable(CAPTURES_PREFIX + capturedVariable.getName(),
-        capturedVariable.getTypeDescriptor(), true, true);
-  }
-
-  /**
    * Returns the added outer parameter in constructor corresponding to the added field.
    */
   public static Variable createOuterParamByField(Field field) {

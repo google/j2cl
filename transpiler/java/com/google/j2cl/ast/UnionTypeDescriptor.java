@@ -84,5 +84,4 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   public Node accept(Processor processor) {
     return Visitor_UnionTypeDescriptor.visit(processor, this);
   }
-
 }

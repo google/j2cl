@@ -105,7 +105,6 @@ public class CompilationUnitBuilder {
         LinkedHashMultimap.create();
     private List<JavaType> typeStack = new ArrayList<>();
     private JavaType currentType = null;
-    private boolean inConstructor = false;
     private ITypeBinding javaLangObjectBinding;
 
     private String currentSourceFile;
@@ -220,11 +219,9 @@ public class CompilationUnitBuilder {
         variableByJdtBinding.put(parameterBinding, j2clParameter);
       }
 
-      inConstructor = node.resolveBinding().isConstructor();
       // If a method has no body, initialize the body with an empty list of statements.
       Block body =
           node.getBody() == null ? new Block(new ArrayList<Statement>()) : convert(node.getBody());
-      inConstructor = false;
       return new Method(
           JdtUtils.createMethodDescriptor(node.resolveBinding(), compilationUnitNameLocator),
           parameters,
@@ -299,8 +296,7 @@ public class CompilationUnitBuilder {
           newInstance.addExtraArgument(
               new FieldAccess(
                   new ThisReference(null),
-                  ASTUtils.createFieldForCapture(
-                      currentType.getDescriptor(), capturedVariable)));
+                  ASTUtils.createFieldForCapture(currentType.getDescriptor(), capturedVariable)));
         } else {
           // otherwise, the captured variable is in the scope of the current type, so pass the
           // variable directly as an argument.
@@ -713,17 +709,11 @@ public class CompilationUnitBuilder {
               }
               capturesByTypeDescriptor.put(typeStack.get(i).getDescriptor(), variable);
             }
-            // for reference to a captured variable, if it is in a constructor, translate to
-            // reference to outer parameter, otherwise, translate to reference to corresponding
+            // for reference to a captured variable, translate to reference to corresponding
             // field created for the captured variable.
-            if (inConstructor) {
-              Variable param = ASTUtils.createParamForCapture(variable);
-              return new VariableReference(param);
-            } else {
-              FieldDescriptor fieldDescriptor =
-                  ASTUtils.createFieldForCapture(currentTypeDescriptor, variable);
-              return new FieldAccess(new ThisReference(null), fieldDescriptor);
-            }
+            FieldDescriptor fieldDescriptor =
+                ASTUtils.createFieldForCapture(currentTypeDescriptor, variable);
+            return new FieldAccess(new ThisReference(null), fieldDescriptor);
           } else {
             return new VariableReference(variable);
           }
@@ -778,14 +768,18 @@ public class CompilationUnitBuilder {
               typeLiteral.resolveTypeBinding(), compilationUnitNameLocator);
       if (typeBinding.getDimensions() == 0) {
         // <ClassLiteralClass>.$class
-        FieldDescriptor classFieldDescriptor = FieldDescriptor.createRaw(
-            true, literalTypeDescriptor, "$class", javaLangClassTypeDescriptor);
+        FieldDescriptor classFieldDescriptor =
+            FieldDescriptor.createRaw(
+                true, literalTypeDescriptor, "$class", javaLangClassTypeDescriptor);
         return new FieldAccess(null, classFieldDescriptor);
       }
 
       FieldDescriptor classFieldDescriptor =
-          FieldDescriptor.createRaw(true, literalTypeDescriptor.getLeafTypeDescriptor(),
-              "$class", javaLangClassTypeDescriptor);
+          FieldDescriptor.createRaw(
+              true,
+              literalTypeDescriptor.getLeafTypeDescriptor(),
+              "$class",
+              javaLangClassTypeDescriptor);
 
       MethodDescriptor forArray =
           MethodDescriptor.createRaw(true, javaLangClassTypeDescriptor, "$forArray");

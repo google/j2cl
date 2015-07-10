@@ -37,8 +37,11 @@ public abstract class FieldDescriptor extends Node implements Member {
   /**
    * Creates a raw field reference.
    */
-  public static FieldDescriptor createRaw(boolean isStatic, TypeDescriptor enclosingClassDescriptor,
-      String fieldName, TypeDescriptor typeDescriptor) {
+  public static FieldDescriptor createRaw(
+      boolean isStatic,
+      TypeDescriptor enclosingClassDescriptor,
+      String fieldName,
+      TypeDescriptor typeDescriptor) {
     return new AutoValue_FieldDescriptor(
         isStatic, true, Visibility.PUBLIC, enclosingClassDescriptor, fieldName, typeDescriptor);
   }

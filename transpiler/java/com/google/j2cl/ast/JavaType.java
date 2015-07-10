@@ -29,7 +29,8 @@ import javax.annotation.Nullable;
 /**
  * A node that represents a Java Type declaration in the compilation unit.
  */
-@Visitable @Context
+@Visitable
+@Context
 public class JavaType extends Node {
   /**
    * Describes the kind of the Java type.

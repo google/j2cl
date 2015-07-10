@@ -220,7 +220,6 @@ public class J2clAstProcessor extends AbstractProcessor {
     List<Field> fieldNames;
     boolean isContext;
 
-
     @Override
     public int hashCode() {
       return Objects.hashCode(packageName, simpleName);

@@ -24,7 +24,8 @@ import java.util.List;
 /**
  * Method declaration.
  */
-@Visitable @Context
+@Visitable
+@Context
 public class Method extends Node {
   @Visitable MethodDescriptor methodDescriptor;
   @Visitable List<Variable> parameters = new ArrayList<>();
