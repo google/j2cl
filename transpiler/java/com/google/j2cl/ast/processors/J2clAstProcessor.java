@@ -177,8 +177,9 @@ public class J2clAstProcessor extends AbstractProcessor {
     }
 
     String name;
-
     Type type;
+    String typeName;
+
     boolean isNullable;
 
     Field(String name, TypeElement type, boolean isNullable) {
@@ -189,10 +190,15 @@ public class J2clAstProcessor extends AbstractProcessor {
       } else {
         this.type = Type.SCALAR;
       }
+      this.typeName = type.getSimpleName().toString();
     }
 
     public String getName() {
       return name;
+    }
+
+    public String getTypeName() {
+      return typeName;
     }
 
     public boolean isList() {
@@ -332,7 +338,6 @@ public class J2clAstProcessor extends AbstractProcessor {
       abortWithError(
           typeElement.getQualifiedName()
               + " does not implement \""
-              + typeElement.getSimpleName()
               + " accept(Processor processor)\"",
           typeElement);
     }
@@ -366,13 +371,7 @@ public class J2clAstProcessor extends AbstractProcessor {
                         .asElement(executableElement.getParameters().get(0).asType())
                         .getSimpleName()
                         .toString()
-                        .equals("Processor")
-                    && MoreElements.asType(
-                            processingEnv
-                                .getTypeUtils()
-                                .asElement(executableElement.getReturnType()))
-                        .getQualifiedName()
-                        .equals(typeElement.getQualifiedName());
+                        .equals("Processor");
               }
             });
   }

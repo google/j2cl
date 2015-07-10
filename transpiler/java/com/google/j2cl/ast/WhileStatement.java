@@ -39,7 +39,7 @@ public class WhileStatement extends Statement {
   }
 
   @Override
-  public WhileStatement accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_WhileStatement.visit(processor, this);
   }
 }

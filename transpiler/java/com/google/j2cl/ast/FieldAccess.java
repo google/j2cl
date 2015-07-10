@@ -51,7 +51,7 @@ public class FieldAccess extends Expression implements MemberReference {
   }
 
   @Override
-  public FieldAccess accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_FieldAccess.visit(processor, this);
   }
 }

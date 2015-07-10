@@ -47,7 +47,7 @@ public class InstanceOfExpression extends Expression {
   }
 
   @Override
-  public InstanceOfExpression accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_InstanceOfExpression.visit(processor, this);
   }
 }

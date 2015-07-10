@@ -89,7 +89,7 @@ public abstract class MethodDescriptor extends Node implements Member {
   }
 
   @Override
-  public MethodDescriptor accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_MethodDescriptor.visit(processor, this);
   }
 }

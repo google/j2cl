@@ -38,7 +38,7 @@ public class VariableDeclarationExpression extends Expression {
   }
 
   @Override
-  public VariableDeclarationExpression accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_VariableDeclarationExpression.visit(processor, this);
   }
 }

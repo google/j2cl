@@ -24,22 +24,22 @@ import javax.annotation.Nullable;
  */
 @Visitable
 public class ThisReference extends Expression {
-  @Visitable @Nullable RegularTypeDescriptor typeDescriptor;
+  @Visitable @Nullable TypeDescriptor typeDescriptor;
 
   public ThisReference(RegularTypeDescriptor typeDescriptor) {
     this.typeDescriptor = typeDescriptor;
   }
 
-  public RegularTypeDescriptor getTypeDescriptor() {
+  public TypeDescriptor getTypeDescriptor() {
     return typeDescriptor;
   }
 
-  public void setTypeDescriptor(RegularTypeDescriptor qualifier) {
+  public void setTypeDescriptor(TypeDescriptor qualifier) {
     this.typeDescriptor = qualifier;
   }
 
   @Override
-  public ThisReference accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_ThisReference.visit(processor, this);
   }
 }

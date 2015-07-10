@@ -81,7 +81,7 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public UnionTypeDescriptor accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_UnionTypeDescriptor.visit(processor, this);
   }
 

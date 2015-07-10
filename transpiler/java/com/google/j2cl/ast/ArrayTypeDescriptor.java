@@ -81,7 +81,7 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public ArrayTypeDescriptor accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_ArrayTypeDescriptor.visit(processor, this);
   }
 }

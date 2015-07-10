@@ -98,7 +98,7 @@ public abstract class RegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public RegularTypeDescriptor accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_RegularTypeDescriptor.visit(processor, this);
   }
 }

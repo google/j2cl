@@ -46,7 +46,7 @@ public class TernaryExpression extends Expression {
   }
 
   @Override
-  public TernaryExpression accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_TernaryExpression.visit(processor, this);
   }
 }

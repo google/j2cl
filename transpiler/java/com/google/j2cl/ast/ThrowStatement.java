@@ -37,7 +37,7 @@ public class ThrowStatement extends Statement {
   }
 
   @Override
-  public ThrowStatement accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_ThrowStatement.visit(processor, this);
   }
 }

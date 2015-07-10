@@ -31,7 +31,6 @@ import javax.annotation.Nullable;
  */
 @Visitable @Context
 public class JavaType extends Node {
-
   /**
    * Describes the kind of the Java type.
    */
@@ -81,6 +80,10 @@ public class JavaType extends Node {
 
   public void setLocal(boolean isLocal) {
     this.isLocal = isLocal;
+  }
+
+  public boolean isEnum() {
+    return this.kind == Kind.ENUM;
   }
 
   public boolean isInterface() {
@@ -188,7 +191,7 @@ public class JavaType extends Node {
   }
 
   @Override
-  public JavaType accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_JavaType.visit(processor, this);
   }
 }

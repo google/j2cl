@@ -62,7 +62,7 @@ public abstract class FieldDescriptor extends Node implements Member {
   public abstract TypeDescriptor getType();
 
   @Override
-  public FieldDescriptor accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_FieldDescriptor.visit(processor, this);
   }
 }

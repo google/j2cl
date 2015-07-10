@@ -23,7 +23,7 @@ import com.google.j2cl.ast.processors.Visitable;
 @Visitable
 public class NullLiteral extends Expression {
   @Override
-  public NullLiteral accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_NullLiteral.visit(processor, this);
   }
 }

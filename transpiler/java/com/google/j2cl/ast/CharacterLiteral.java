@@ -39,7 +39,7 @@ public class CharacterLiteral extends Expression {
   }
 
   @Override
-  public CharacterLiteral accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_CharacterLiteral.visit(processor, this);
   }
 }

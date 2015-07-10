@@ -35,7 +35,7 @@ public class BooleanLiteral extends Expression {
   }
 
   @Override
-  public BooleanLiteral accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_BooleanLiteral.visit(processor, this);
   }
 }

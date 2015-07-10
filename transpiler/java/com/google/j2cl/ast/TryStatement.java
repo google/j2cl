@@ -59,7 +59,7 @@ public class TryStatement extends Statement {
   }
 
   @Override
-  public TryStatement accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_TryStatement.visit(processor, this);
   }
 }

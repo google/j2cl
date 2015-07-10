@@ -47,7 +47,7 @@ public class IfStatement extends Statement {
   }
 
   @Override
-  public IfStatement accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_IfStatement.visit(processor, this);
   }
 }

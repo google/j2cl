@@ -39,7 +39,7 @@ public class DoWhileStatement extends Statement {
   }
 
   @Override
-  public DoWhileStatement accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_DoWhileStatement.visit(processor, this);
   }
 }

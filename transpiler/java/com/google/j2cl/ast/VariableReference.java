@@ -39,7 +39,7 @@ public class VariableReference extends Expression {
   }
 
   @Override
-  public VariableReference accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_VariableReference.visit(processor, this);
   }
 }

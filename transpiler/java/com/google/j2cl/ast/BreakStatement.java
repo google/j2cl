@@ -23,7 +23,7 @@ import com.google.j2cl.ast.processors.Visitable;
 @Visitable
 public class BreakStatement extends Statement {
   @Override
-  public BreakStatement accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_BreakStatement.visit(processor, this);
   }
 }

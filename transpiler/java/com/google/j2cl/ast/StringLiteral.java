@@ -33,7 +33,7 @@ public class StringLiteral extends Expression {
   }
 
   @Override
-  public StringLiteral accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_StringLiteral.visit(processor, this);
   }
 }

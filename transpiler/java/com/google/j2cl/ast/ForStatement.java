@@ -59,7 +59,7 @@ public class ForStatement extends Statement {
   }
 
   @Override
-  public ForStatement accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_ForStatement.visit(processor, this);
   }
 }

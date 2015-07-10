@@ -60,7 +60,7 @@ public class MethodCall extends Expression implements MemberReference {
   }
 
   @Override
-  public MethodCall accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_MethodCall.visit(processor, this);
   }
 }

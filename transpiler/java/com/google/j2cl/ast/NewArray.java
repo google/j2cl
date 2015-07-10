@@ -53,7 +53,7 @@ public class NewArray extends Expression {
   }
 
   @Override
-  public NewArray accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_NewArray.visit(processor, this);
   }
 }

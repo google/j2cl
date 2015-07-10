@@ -39,7 +39,7 @@ public class ArrayAccess extends Expression {
   }
 
   @Override
-  public ArrayAccess accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_ArrayAccess.visit(processor, this);
   }
 }

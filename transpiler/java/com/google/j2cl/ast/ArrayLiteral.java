@@ -36,7 +36,7 @@ public class ArrayLiteral extends Expression {
   }
 
   @Override
-  public ArrayLiteral accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_ArrayLiteral.visit(processor, this);
   }
 }

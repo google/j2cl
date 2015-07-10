@@ -47,7 +47,7 @@ public class CatchClause extends Node {
   }
 
   @Override
-  public CatchClause accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_CatchClause.visit(processor, this);
   }
 }

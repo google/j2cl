@@ -39,7 +39,7 @@ public class ReturnStatement extends Statement {
   }
 
   @Override
-  public ReturnStatement accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_ReturnStatement.visit(processor, this);
   }
 }

@@ -4,7 +4,8 @@ import com.google.common.base.Preconditions;
 
 public class Visitor_${className} {
 
-  public static ${className} visit(Processor processor, ${className} node) {
+  public static Node visit(Processor processor, ${className} node) {
+    Node result = node;
     ProcessorPrivate processorImpl = (ProcessorPrivate) processor;
 #if (${visitableClass.isContext()})
     Preconditions.checkState(processorImpl.getCurrent${className}() == null);
@@ -20,21 +21,22 @@ public class Visitor_${className} {
 #if(${field.isList()})
         VisitorUtils.visitList(processorImpl, node.${field.Name});
 #elseif (${field.isNullable()})
-        node.${field.Name} = node.${field.Name}.accept(processorImpl);
+        node.${field.Name} = (${field.TypeName}) node.${field.Name}.accept(processorImpl);
 #else
-        node.${field.Name} = Preconditions.checkNotNull(node.${field.Name}.accept(processorImpl),
+        node.${field.Name} = (${field.TypeName}) Preconditions.checkNotNull(
+             node.${field.Name}.accept(processorImpl),
              "Field \"${field.Name}\" in class \"${className}\" cannot be null");
 #end
 #if(${field.isNullable()})
       }
 #end
 #end
-      node = processorImpl.postProcess${className}(node);
+      result = processorImpl.postProcess${className}(node);
     }
 #if (${visitableClass.isContext()})
     Preconditions.checkState(processorImpl.getCurrent${className}() != null);
     processorImpl.setCurrent${className}(null);
 #end
-    return node;
+    return result;
   }
 }

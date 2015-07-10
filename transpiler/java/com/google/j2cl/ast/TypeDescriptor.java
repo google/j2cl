@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Interner;
@@ -137,7 +138,20 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
   }
 
   @Override
-  public TypeDescriptor accept(Processor processor) {
+  public boolean equals(Object o) {
+    if (o instanceof TypeDescriptor) {
+      return getBinaryName().equals(((TypeDescriptor) o).getBinaryName());
+    }
+    return false;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(getBinaryName());
+  }
+
+  @Override
+  public Node accept(Processor processor) {
     return Visitor_TypeDescriptor.visit(processor, this);
   }
 }

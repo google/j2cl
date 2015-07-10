@@ -68,7 +68,7 @@ public class CompilationUnit extends Node {
   }
 
   @Override
-  public CompilationUnit accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_CompilationUnit.visit(processor, this);
   }
 }

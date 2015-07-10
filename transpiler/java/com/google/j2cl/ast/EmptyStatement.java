@@ -23,7 +23,7 @@ import com.google.j2cl.ast.processors.Visitable;
 @Visitable
 public class EmptyStatement extends Statement {
   @Override
-  public EmptyStatement accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_EmptyStatement.visit(processor, this);
   }
 }

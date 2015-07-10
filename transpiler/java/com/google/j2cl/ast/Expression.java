@@ -24,7 +24,7 @@ import com.google.j2cl.ast.processors.Visitable;
 public abstract class Expression extends Node {
 
   @Override
-  public Expression accept(Processor processor) {
+  public Node accept(Processor processor) {
     return Visitor_Expression.visit(processor, this);
   }
 }
