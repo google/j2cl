@@ -36,6 +36,7 @@ public class NewArray extends Expression {
       List<Expression> dimensionExpressions,
       TypeDescriptor leafTypeDescriptor,
       ArrayLiteral arrayLiteral) {
+    Preconditions.checkNotNull(dimensionExpressions);
     Preconditions.checkNotNull(leafTypeDescriptor);
     this.dimensionExpressions.addAll(dimensionExpressions);
     this.leafTypeDescriptor = leafTypeDescriptor;

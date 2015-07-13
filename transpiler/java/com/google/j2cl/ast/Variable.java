@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -29,6 +30,7 @@ public class Variable extends Node {
 
   public Variable(
       String name, TypeDescriptor typeDescriptor, boolean isFinal, boolean isParameter) {
+    Preconditions.checkNotNull(typeDescriptor);
     this.name = name;
     this.typeDescriptor = typeDescriptor;
     this.isFinal = isFinal;

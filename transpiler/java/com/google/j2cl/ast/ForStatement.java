@@ -15,8 +15,10 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -28,18 +30,21 @@ import javax.annotation.Nullable;
 public class ForStatement extends Statement {
   @Visitable @Nullable Expression conditionExpression;
   @Visitable Block block;
-  @Visitable List<Expression> initializers;
-  @Visitable List<Expression> updaters;
+  @Visitable List<Expression> initializers = new ArrayList<>();
+  @Visitable List<Expression> updaters = new ArrayList<>();
 
   public ForStatement(
       Expression conditionExpression,
       Block block,
       List<Expression> initializers,
       List<Expression> updaters) {
+    Preconditions.checkNotNull(block);
+    Preconditions.checkNotNull(initializers);
+    Preconditions.checkNotNull(updaters);
     this.conditionExpression = conditionExpression;
     this.block = block;
-    this.initializers = initializers;
-    this.updaters = updaters;
+    this.initializers.addAll(initializers);
+    this.updaters.addAll(updaters);
   }
 
   public Expression getConditionExpression() {

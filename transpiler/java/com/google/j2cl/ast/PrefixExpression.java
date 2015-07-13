@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -26,6 +27,7 @@ public class PrefixExpression extends Expression {
   private PrefixOperator operator;
 
   public PrefixExpression(Expression operand, PrefixOperator operator) {
+    Preconditions.checkNotNull(operand);
     this.operand = operand;
     this.operator = operator;
   }

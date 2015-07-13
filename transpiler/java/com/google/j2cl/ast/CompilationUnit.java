@@ -28,14 +28,13 @@ import java.util.List;
  */
 @Visitable
 public class CompilationUnit extends Node {
-
   private String filePath;
   private String packageName;
   @Visitable List<JavaType> types = new ArrayList<>();
 
   public CompilationUnit(String filePath, String packageName) {
-    Preconditions.checkArgument(filePath != null);
-    Preconditions.checkArgument(packageName != null);
+    Preconditions.checkNotNull(filePath);
+    Preconditions.checkNotNull(packageName);
     this.filePath = filePath;
     this.packageName = packageName;
   }
@@ -53,6 +52,7 @@ public class CompilationUnit extends Node {
   }
 
   public void addTypes(Collection<JavaType> types) {
+    Preconditions.checkNotNull(types);
     this.types.addAll(types);
   }
 

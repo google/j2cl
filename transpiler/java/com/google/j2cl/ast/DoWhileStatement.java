@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -26,6 +27,8 @@ public class DoWhileStatement extends Statement {
   @Visitable Block block;
 
   public DoWhileStatement(Expression conditionExpression, Block block) {
+    Preconditions.checkNotNull(conditionExpression);
+    Preconditions.checkNotNull(block);
     this.conditionExpression = conditionExpression;
     this.block = block;
   }

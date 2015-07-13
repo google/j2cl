@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 import javax.annotation.Nullable;
@@ -28,6 +29,7 @@ public class AssertStatement extends Statement {
   @Visitable @Nullable Expression message;
 
   public AssertStatement(Expression expression, Expression message) {
+    Preconditions.checkNotNull(expression);
     this.expression = expression;
     this.message = message;
   }

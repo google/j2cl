@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -26,6 +27,8 @@ public class ArrayAccess extends Expression {
   @Visitable Expression indexExpression;
 
   public ArrayAccess(Expression arrayExpression, Expression indexExpression) {
+    Preconditions.checkNotNull(arrayExpression);
+    Preconditions.checkNotNull(indexExpression);
     this.arrayExpression = arrayExpression;
     this.indexExpression = indexExpression;
   }

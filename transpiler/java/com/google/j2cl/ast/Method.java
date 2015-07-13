@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Context;
 import com.google.j2cl.ast.processors.Visitable;
 
@@ -33,6 +34,9 @@ public class Method extends Node {
   private boolean isOverride;
 
   public Method(MethodDescriptor methodDescriptor, List<Variable> parameters, Block body) {
+    Preconditions.checkNotNull(methodDescriptor);
+    Preconditions.checkNotNull(parameters);
+    Preconditions.checkNotNull(body);
     this.methodDescriptor = methodDescriptor;
     this.parameters.addAll(parameters);
     this.body = body;

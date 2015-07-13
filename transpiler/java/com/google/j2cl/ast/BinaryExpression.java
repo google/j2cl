@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -28,6 +29,9 @@ public class BinaryExpression extends Expression {
 
   public BinaryExpression(
       Expression leftOperand, BinaryOperator operator, Expression rightOperand) {
+    Preconditions.checkNotNull(leftOperand);
+    Preconditions.checkNotNull(operator);
+    Preconditions.checkNotNull(rightOperand);
     this.leftOperand = leftOperand;
     this.operator = operator;
     this.rightOperand = rightOperand;

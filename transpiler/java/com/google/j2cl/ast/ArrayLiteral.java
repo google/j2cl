@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class ArrayLiteral extends Expression {
   @Visitable List<Expression> valueExpressions = new ArrayList<>();
 
   public ArrayLiteral(List<Expression> valueExpressions) {
+    Preconditions.checkNotNull(valueExpressions);
     this.valueExpressions.addAll(valueExpressions);
   }
 

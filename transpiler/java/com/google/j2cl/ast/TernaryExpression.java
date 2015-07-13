@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -28,6 +29,9 @@ public class TernaryExpression extends Expression {
 
   public TernaryExpression(
       Expression conditionExpression, Expression trueExpression, Expression falseExpression) {
+    Preconditions.checkNotNull(conditionExpression);
+    Preconditions.checkNotNull(trueExpression);
+    Preconditions.checkNotNull(falseExpression);
     this.conditionExpression = conditionExpression;
     this.trueExpression = trueExpression;
     this.falseExpression = falseExpression;

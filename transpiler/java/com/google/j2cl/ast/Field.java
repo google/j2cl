@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Context;
 import com.google.j2cl.ast.processors.Visitable;
 
@@ -31,6 +32,7 @@ public class Field extends Node {
   private boolean isCapturedField;
 
   public Field(FieldDescriptor fieldDescriptor, Expression initializer) {
+    Preconditions.checkNotNull(fieldDescriptor);
     this.fieldDescriptor = fieldDescriptor;
     this.initializer = initializer;
   }

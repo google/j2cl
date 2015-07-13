@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -26,6 +27,8 @@ public class CastExpression extends Expression {
   @Visitable TypeDescriptor castType;
 
   public CastExpression(Expression expression, TypeDescriptor castType) {
+    Preconditions.checkNotNull(expression);
+    Preconditions.checkNotNull(castType);
     this.expression = expression;
     this.castType = castType;
   }

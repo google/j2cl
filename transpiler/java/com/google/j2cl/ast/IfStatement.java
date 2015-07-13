@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 import javax.annotation.Nullable;
@@ -29,6 +30,8 @@ public class IfStatement extends Statement {
   @Visitable @Nullable Block falseBlock;
 
   public IfStatement(Expression conditionExpression, Block trueBlock, Block falseBlock) {
+    Preconditions.checkNotNull(conditionExpression);
+    Preconditions.checkNotNull(trueBlock);
     this.conditionExpression = conditionExpression;
     this.trueBlock = trueBlock;
     this.falseBlock = falseBlock;

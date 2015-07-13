@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -26,6 +27,7 @@ public class PostfixExpression extends Expression {
   private PostfixOperator operator;
 
   public PostfixExpression(Expression operand, PostfixOperator operator) {
+    Preconditions.checkNotNull(operand);
     this.operand = operand;
     this.operator = operator;
   }

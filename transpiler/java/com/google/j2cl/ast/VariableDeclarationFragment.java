@@ -27,9 +27,7 @@ import javax.annotation.Nullable;
  */
 @Visitable
 public class VariableDeclarationFragment extends Node {
-
   @Visitable Variable variable;
-
   @Visitable @Nullable Expression initializer;
 
   public VariableDeclarationFragment(Variable variable, Expression initializer) {

@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -25,6 +26,7 @@ public class ThrowStatement extends Statement {
   @Visitable Expression expression;
 
   public ThrowStatement(Expression expression) {
+    Preconditions.checkNotNull(expression);
     this.expression = expression;
   }
 

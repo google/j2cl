@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class Block extends Statement {
   @Visitable List<Statement> statements = new ArrayList<>();
 
   public Block(List<Statement> statements) {
+    Preconditions.checkNotNull(statements);
     this.statements.addAll(statements);
   }
 

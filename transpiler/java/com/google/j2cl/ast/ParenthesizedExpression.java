@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -22,10 +23,10 @@ import com.google.j2cl.ast.processors.Visitable;
  */
 @Visitable
 public class ParenthesizedExpression extends Expression {
-
   @Visitable Expression expression;
 
   public ParenthesizedExpression(Expression expression) {
+    Preconditions.checkNotNull(expression);
     this.expression = expression;
   }
 

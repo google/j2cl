@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
@@ -27,17 +28,15 @@ import javax.annotation.Nullable;
  */
 @Visitable
 public class NewInstance extends Expression {
-
   @Visitable @Nullable Expression qualifier;
-
   @Visitable MethodDescriptor constructorDescriptor;
-
   @Visitable List<Expression> arguments = new ArrayList<>();
-
   private List<Expression> extraArguments = new ArrayList<>();
 
   public NewInstance(
       Expression qualifier, MethodDescriptor constructorDescriptor, List<Expression> arguments) {
+    Preconditions.checkNotNull(constructorDescriptor);
+    Preconditions.checkNotNull(arguments);
     this.qualifier = qualifier;
     this.constructorDescriptor = constructorDescriptor;
     this.arguments.addAll(arguments);

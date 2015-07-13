@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
@@ -32,6 +33,8 @@ public class MethodCall extends Expression implements MemberReference {
   @Visitable List<Expression> arguments = new ArrayList<>();
 
   public MethodCall(Expression qualifier, MethodDescriptor target, List<Expression> arguments) {
+    Preconditions.checkNotNull(target);
+    Preconditions.checkNotNull(arguments);
     this.qualifier = qualifier;
     this.target = target;
     this.arguments.addAll(arguments);

@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -46,19 +47,12 @@ public class JavaType extends Node {
   private boolean isLocal;
 
   @Visitable @Nullable TypeDescriptor enclosingTypeDescriptor;
-
   @Visitable @Nullable TypeDescriptor superTypeDescriptor;
-
   @Visitable List<TypeDescriptor> superInterfaceDescriptors = new ArrayList<>();
-
   @Visitable TypeDescriptor typeDescriptor;
-
   @Visitable List<Field> fields = new ArrayList<>();
-
   @Visitable List<Method> methods = new ArrayList<>();
-
   @Visitable List<Block> instanceInitializerBlocks = new ArrayList<>();
-
   @Visitable List<Block> staticInitializerBlocks = new ArrayList<>();
 
   public JavaType(Kind kind, Visibility visibility, TypeDescriptor typeDescriptor) {
@@ -100,6 +94,7 @@ public class JavaType extends Node {
   }
 
   public void addFields(List<Field> fields) {
+    Preconditions.checkNotNull(fields);
     this.fields.addAll(fields);
   }
 

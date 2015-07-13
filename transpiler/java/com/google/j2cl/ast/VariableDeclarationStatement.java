@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,12 +26,11 @@ import java.util.List;
  */
 @Visitable
 public class VariableDeclarationStatement extends Statement {
-
-  @Visitable List<VariableDeclarationFragment> fragments;
+  @Visitable List<VariableDeclarationFragment> fragments = new ArrayList<>();
 
   public VariableDeclarationStatement(List<VariableDeclarationFragment> fragments) {
     Preconditions.checkNotNull(fragments);
-    this.fragments = fragments;
+    this.fragments.addAll(fragments);
   }
 
   public List<VariableDeclarationFragment> getFragments() {
