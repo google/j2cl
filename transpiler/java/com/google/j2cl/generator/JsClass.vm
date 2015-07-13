@@ -12,10 +12,10 @@
 #set ($simpleName = $classType.Descriptor.SimpleName)
 #set ($binaryName = $classType.Descriptor.BinaryName)
 #set ($sourceName = ${TranspilerUtils.getSourceName($classType.Descriptor)})
-#if (!${classType.SuperInterfaceDescriptors.isEmpty()})
+#if (!${classType.SuperInterfaceTypeDescriptors.isEmpty()})
 /**
-#foreach ($superInterface in $classType.SuperInterfaceDescriptors)
- * @implements {${TranspilerUtils.getClassName($superInterface)}}
+#foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
+ * @implements {${TranspilerUtils.getClassName($superInterfaceTypeDescriptor)}}
 #end
  */
 #end
@@ -30,12 +30,12 @@ class $className $extendsClause {
 #end
 #foreach ($field in $classType.getInstanceFields())
 #set ($fieldVisibility = $field.Descriptor.Visibility)
-#set ($fieldType = ${TranspilerUtils.getJsDocName($field.Descriptor.Type)})
+#set ($fieldType = ${TranspilerUtils.getJsDocName($field.Descriptor.TypeDescriptor)})
 #set ($fieldName = ${ManglingNameUtils.getMangledName($field.Descriptor)})
     /**
      * @$fieldVisibility {$fieldType}
      */
-    this.$fieldName = ${TranspilerUtils.getDefaultInitialValue($field.Descriptor.Type)};
+    this.$fieldName = ${TranspilerUtils.getDefaultInitialValue($field.Descriptor.TypeDescriptor)};
 #end
   }
 
@@ -89,8 +89,8 @@ class $className $extendsClause {
 #end
 
 
-#foreach ($superInterface in $classType.SuperInterfaceDescriptors)
-${TranspilerUtils.getClassName($superInterface)}.$markImplementor($className);
+#foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
+${TranspilerUtils.getClassName($superInterfaceTypeDescriptor)}.$markImplementor($className);
 
 
 #end

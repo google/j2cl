@@ -29,16 +29,18 @@ import javax.annotation.Nullable;
 @Visitable
 public class NewInstance extends Expression {
   @Visitable @Nullable Expression qualifier;
-  @Visitable MethodDescriptor constructorDescriptor;
+  @Visitable MethodDescriptor constructorMethodDescriptor;
   @Visitable List<Expression> arguments = new ArrayList<>();
   private List<Expression> extraArguments = new ArrayList<>();
 
   public NewInstance(
-      Expression qualifier, MethodDescriptor constructorDescriptor, List<Expression> arguments) {
-    Preconditions.checkNotNull(constructorDescriptor);
+      Expression qualifier,
+      MethodDescriptor constructorMethodDescriptor,
+      List<Expression> arguments) {
+    Preconditions.checkNotNull(constructorMethodDescriptor);
     Preconditions.checkNotNull(arguments);
     this.qualifier = qualifier;
-    this.constructorDescriptor = constructorDescriptor;
+    this.constructorMethodDescriptor = constructorMethodDescriptor;
     this.arguments.addAll(arguments);
   }
 
@@ -46,8 +48,8 @@ public class NewInstance extends Expression {
     return qualifier;
   }
 
-  public MethodDescriptor getConstructorDescriptor() {
-    return constructorDescriptor;
+  public MethodDescriptor getConstructorMethodDescriptor() {
+    return constructorMethodDescriptor;
   }
 
   public List<Expression> getArguments() {
@@ -58,8 +60,8 @@ public class NewInstance extends Expression {
     this.qualifier = qualifier;
   }
 
-  public void setConstructorDescriptor(MethodDescriptor constructorDescriptor) {
-    this.constructorDescriptor = constructorDescriptor;
+  public void setConstructorMethodDescriptor(MethodDescriptor constructorDescriptor) {
+    this.constructorMethodDescriptor = constructorDescriptor;
   }
 
   public List<Expression> getExtraArguments() {

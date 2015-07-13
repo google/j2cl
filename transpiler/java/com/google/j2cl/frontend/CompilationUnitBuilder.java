@@ -185,7 +185,7 @@ public class CompilationUnitBuilder {
       TypeDescriptor currentTypeDescriptor = currentType.getDescriptor();
       for (Variable capturedVariable : capturesByTypeDescriptor.get(currentTypeDescriptor)) {
         FieldDescriptor fieldDescriptor =
-            ASTUtils.createFieldForCapture(currentTypeDescriptor, capturedVariable);
+            ASTUtils.createFieldDescriptorForCapture(currentTypeDescriptor, capturedVariable);
         currentType.addField(new Field(fieldDescriptor, null, true)); // captured field.
       }
       popType();
@@ -269,10 +269,10 @@ public class CompilationUnitBuilder {
 
     private CastExpression convert(org.eclipse.jdt.core.dom.CastExpression node) {
       Expression expression = convert(node.getExpression());
-      TypeDescriptor castType =
+      TypeDescriptor castTypeDescriptor =
           JdtUtils.createTypeDescriptor(
               node.getType().resolveBinding(), compilationUnitNameLocator);
-      return new CastExpression(expression, castType);
+      return new CastExpression(expression, castTypeDescriptor);
     }
 
     private CharacterLiteral convert(org.eclipse.jdt.core.dom.CharacterLiteral node) {
@@ -281,25 +281,27 @@ public class CompilationUnitBuilder {
 
     private NewInstance convert(org.eclipse.jdt.core.dom.ClassInstanceCreation node) {
       Expression qualifier = node.getExpression() == null ? null : convert(node.getExpression());
-      MethodDescriptor constructor =
+      MethodDescriptor constructorMethodDescriptor =
           JdtUtils.createMethodDescriptor(
               node.resolveConstructorBinding(), compilationUnitNameLocator);
       List<Expression> arguments = new ArrayList<>();
       for (Object argument : node.arguments()) {
         arguments.add(convert((org.eclipse.jdt.core.dom.Expression) argument));
       }
-      NewInstance newInstance = new NewInstance(qualifier, constructor, arguments);
+      NewInstance newInstance = new NewInstance(qualifier, constructorMethodDescriptor, arguments);
       // If the class has captures, add corresponding arguments to NewInstance's extraArguments,
       // which will be added to real arguments by {@code NormalizeLocalClassConstructorsVisitor}.
       for (Variable capturedVariable :
-          capturesByTypeDescriptor.get(constructor.getEnclosingClassDescriptor())) {
-        if (capturesByTypeDescriptor.containsEntry(currentType.getDescriptor(), capturedVariable)) {
+          capturesByTypeDescriptor.get(constructorMethodDescriptor.getEnclosingClassTypeDescriptor())) {
+        if (capturesByTypeDescriptor.containsEntry(
+            currentType.getDescriptor(), capturedVariable)) {
           // If the capturedVariable is also a captured variable in current type, pass the
           // corresponding field in current type as an argument.
           newInstance.addExtraArgument(
               new FieldAccess(
                   new ThisReference(null),
-                  ASTUtils.createFieldForCapture(currentType.getDescriptor(), capturedVariable)));
+                  ASTUtils.createFieldDescriptorForCapture(
+                      currentType.getDescriptor(), capturedVariable)));
         } else {
           // otherwise, the captured variable is in the scope of the current type, so pass the
           // variable directly as an argument.
@@ -515,8 +517,9 @@ public class CompilationUnitBuilder {
 
     private InstanceOfExpression convert(org.eclipse.jdt.core.dom.InstanceofExpression node) {
       Expression leftOperand = convert(node.getLeftOperand());
-      TypeDescriptor rightOperand = createTypeDescriptor(node.getRightOperand().resolveBinding());
-      return new InstanceOfExpression(leftOperand, rightOperand);
+      TypeDescriptor testTypeDescriptor =
+          createTypeDescriptor(node.getRightOperand().resolveBinding());
+      return new InstanceOfExpression(leftOperand, testTypeDescriptor);
     }
 
     private Collection<Statement> singletonStatement(Statement statement) {
@@ -567,9 +570,9 @@ public class CompilationUnitBuilder {
     private FieldAccess convert(org.eclipse.jdt.core.dom.FieldAccess node) {
       Expression qualifier = convert(node.getExpression());
       IVariableBinding variableBinding = node.resolveFieldBinding();
-      FieldDescriptor field =
+      FieldDescriptor fieldDescriptor =
           JdtUtils.createFieldDescriptor(variableBinding, compilationUnitNameLocator);
-      return new FieldAccess(qualifier, field);
+      return new FieldAccess(qualifier, fieldDescriptor);
     }
 
     private BinaryExpression convert(org.eclipse.jdt.core.dom.InfixExpression node) {
@@ -715,7 +718,7 @@ public class CompilationUnitBuilder {
             // for reference to a captured variable, translate to reference to corresponding
             // field created for the captured variable.
             FieldDescriptor fieldDescriptor =
-                ASTUtils.createFieldForCapture(currentTypeDescriptor, variable);
+                ASTUtils.createFieldDescriptorForCapture(currentTypeDescriptor, variable);
             return new FieldAccess(new ThisReference(null), fieldDescriptor);
           } else {
             return new VariableReference(variable);
@@ -784,13 +787,13 @@ public class CompilationUnitBuilder {
               "$class",
               javaLangClassTypeDescriptor);
 
-      MethodDescriptor forArray =
+      MethodDescriptor forArrayMethodDescriptor =
           MethodDescriptor.createRaw(true, javaLangClassTypeDescriptor, "$forArray");
 
       // <ClassLiteralClass>.$class.forArray(<dimensions>)
       return new MethodCall(
           new FieldAccess(null, classFieldDescriptor),
-          forArray,
+          forArrayMethodDescriptor,
           ImmutableList.<Expression>of(
               new NumberLiteral(String.valueOf(typeBinding.getDimensions()))));
     }
@@ -852,8 +855,8 @@ public class CompilationUnitBuilder {
 
       type.setEnclosingTypeDescriptor(createTypeDescriptor(typeBinding.getDeclaringClass()));
 
-      TypeDescriptor superType = createTypeDescriptor(superclassBinding);
-      type.setSuperTypeDescriptor(superType);
+      TypeDescriptor superTypeDescriptor = createTypeDescriptor(superclassBinding);
+      type.setSuperTypeDescriptor(superTypeDescriptor);
       for (ITypeBinding superInterface : typeBinding.getInterfaces()) {
         type.addSuperInterfaceDescriptor(createTypeDescriptor(superInterface));
       }

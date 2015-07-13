@@ -53,14 +53,14 @@ public class ManglingNameUtils {
     switch (methodDescriptor.getVisibility()) {
       case PRIVATE:
         // To ensure that private methods never override each other.
-        suffix = "_$p_" + getMangledName(methodDescriptor.getEnclosingClassDescriptor());
+        suffix = "_$p_" + getMangledName(methodDescriptor.getEnclosingClassTypeDescriptor());
         break;
       case PACKAGE_PRIVATE:
         // To ensure that package private methods only override one another when
         // they are in the same package.
         suffix =
             "_$pp_"
-                + methodDescriptor.getEnclosingClassDescriptor().getPackageName().replace('.', '_');
+                + methodDescriptor.getEnclosingClassTypeDescriptor().getPackageName().replace('.', '_');
         break;
       default:
         suffix = "";
@@ -82,7 +82,7 @@ public class ManglingNameUtils {
    */
   public static String getCtorMangledName(MethodDescriptor methodDescriptor) {
     return "$ctor__"
-        + getMangledName(methodDescriptor.getEnclosingClassDescriptor())
+        + getMangledName(methodDescriptor.getEnclosingClassTypeDescriptor())
         + getMangledParameterSignature(methodDescriptor);
   }
 
@@ -108,9 +108,9 @@ public class ManglingNameUtils {
       return fieldDescriptor.getFieldName();
     }
 
-    Preconditions.checkArgument(!fieldDescriptor.getEnclosingClassDescriptor().isArray());
+    Preconditions.checkArgument(!fieldDescriptor.getEnclosingClassTypeDescriptor().isArray());
     String name = fieldDescriptor.getFieldName();
-    String typeMangledName = getMangledName(fieldDescriptor.getEnclosingClassDescriptor());
+    String typeMangledName = getMangledName(fieldDescriptor.getEnclosingClassTypeDescriptor());
     String privateSuffix = fieldDescriptor.getVisibility().isPrivate() ? "_" : "";
     String prefix = fromClinit ? "$" : "";
     return String.format("%sf_%s__%s%s", prefix, name, typeMangledName, privateSuffix);
@@ -131,8 +131,8 @@ public class ManglingNameUtils {
         methodDescriptor.getParameterTypeDescriptors(),
         new Function<TypeDescriptor, String>() {
           @Override
-          public String apply(TypeDescriptor parameterType) {
-            return getMangledName(parameterType);
+          public String apply(TypeDescriptor parameterTypeDescriptor) {
+            return getMangledName(parameterTypeDescriptor);
           }
         });
   }

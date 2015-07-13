@@ -78,7 +78,7 @@ public abstract class RegularTypeDescriptor extends TypeDescriptor {
     return Joiner.on(".").join(getPackageComponents());
   }
 
-  public TypeDescriptor getArray(int dimensions) {
+  public TypeDescriptor getForArray(int dimensions) {
     return getInterner().intern(new AutoValue_ArrayTypeDescriptor(dimensions, this));
   }
 

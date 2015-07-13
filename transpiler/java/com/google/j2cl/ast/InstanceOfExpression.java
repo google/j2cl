@@ -45,8 +45,8 @@ public class InstanceOfExpression extends Expression {
     this.expression = leftOperand;
   }
 
-  public void setTestTypeDescriptor(TypeDescriptor rightOperand) {
-    this.testTypeDescriptor = rightOperand;
+  public void setTestTypeDescriptor(TypeDescriptor testTypeDescriptor) {
+    this.testTypeDescriptor = testTypeDescriptor;
   }
 
   @Override

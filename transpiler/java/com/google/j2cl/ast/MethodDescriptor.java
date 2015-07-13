@@ -30,7 +30,7 @@ public abstract class MethodDescriptor extends Node implements Member {
   public static MethodDescriptor create(
       boolean isStatic,
       Visibility visibility,
-      TypeDescriptor enclosingClassDescriptor,
+      TypeDescriptor enclosingClassTypeDescriptor,
       String methodName,
       boolean isConstructor,
       TypeDescriptor returnTypeDescriptor,
@@ -39,7 +39,7 @@ public abstract class MethodDescriptor extends Node implements Member {
         isStatic,
         false,
         visibility,
-        enclosingClassDescriptor,
+        enclosingClassTypeDescriptor,
         methodName,
         isConstructor,
         ImmutableList.copyOf(parameterTypeDescriptors),
@@ -50,12 +50,12 @@ public abstract class MethodDescriptor extends Node implements Member {
    * Creates a raw method reference.
    */
   public static MethodDescriptor createRaw(
-      boolean isStatic, TypeDescriptor enclosingClassRef, String methodName) {
+      boolean isStatic, TypeDescriptor enclosingClassTypeDescriptor, String methodName) {
     return new AutoValue_MethodDescriptor(
         isStatic,
         true,
         Visibility.PUBLIC,
-        enclosingClassRef,
+        enclosingClassTypeDescriptor,
         methodName,
         false,
         ImmutableList.<TypeDescriptor>of(),
@@ -74,7 +74,7 @@ public abstract class MethodDescriptor extends Node implements Member {
   public abstract Visibility getVisibility();
 
   @Override
-  public abstract TypeDescriptor getEnclosingClassDescriptor();
+  public abstract TypeDescriptor getEnclosingClassTypeDescriptor();
 
   public abstract String getMethodName();
 

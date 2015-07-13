@@ -15,8 +15,8 @@ import java.util.List;
 @AutoValue
 @Visitable
 public abstract class UnionTypeDescriptor extends TypeDescriptor {
-  public static UnionTypeDescriptor create(List<TypeDescriptor> types) {
-    return new AutoValue_UnionTypeDescriptor(ImmutableList.copyOf(types));
+  public static UnionTypeDescriptor create(List<TypeDescriptor> typeDescriptors) {
+    return new AutoValue_UnionTypeDescriptor(ImmutableList.copyOf(typeDescriptors));
   }
 
   public abstract ImmutableList<TypeDescriptor> getTypes();
@@ -49,8 +49,8 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
                 getTypes(),
                 new Function<TypeDescriptor, String>() {
                   @Override
-                  public String apply(TypeDescriptor type) {
-                    return type.getBinaryName();
+                  public String apply(TypeDescriptor typeDescriptor) {
+                    return typeDescriptor.getBinaryName();
                   }
                 }));
   }

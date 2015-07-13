@@ -121,7 +121,7 @@ public class NormalizeLocalClassConstructorsVisitor extends AbstractRewriter {
       if (constructorCall != null
           && constructorCall
               .getTarget()
-              .getEnclosingClassDescriptor()
+              .getEnclosingClassTypeDescriptor()
               .equals(getCurrentJavaType().getDescriptor())) { // this() call
         // add argument (reference to outer parameter) to this() call.
         constructorCall.getArguments().add(new VariableReference(parameter));

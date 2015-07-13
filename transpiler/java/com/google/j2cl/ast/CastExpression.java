@@ -24,29 +24,29 @@ import com.google.j2cl.ast.processors.Visitable;
 @Visitable
 public class CastExpression extends Expression {
   @Visitable Expression expression;
-  @Visitable TypeDescriptor castType;
+  @Visitable TypeDescriptor castTypeDescriptor;
 
-  public CastExpression(Expression expression, TypeDescriptor castType) {
+  public CastExpression(Expression expression, TypeDescriptor castTypeDescriptor) {
     Preconditions.checkNotNull(expression);
-    Preconditions.checkNotNull(castType);
+    Preconditions.checkNotNull(castTypeDescriptor);
     this.expression = expression;
-    this.castType = castType;
+    this.castTypeDescriptor = castTypeDescriptor;
   }
 
   public Expression getExpression() {
     return expression;
   }
 
-  public TypeDescriptor getCastType() {
-    return castType;
+  public TypeDescriptor getCastTypeDescriptor() {
+    return castTypeDescriptor;
   }
 
   public void setExpression(Expression expression) {
     this.expression = expression;
   }
 
-  public void setCastType(TypeDescriptor castType) {
-    this.castType = castType;
+  public void setCastType(TypeDescriptor castTypeDescriptor) {
+    this.castTypeDescriptor = castTypeDescriptor;
   }
 
   @Override

@@ -29,14 +29,15 @@ import javax.annotation.Nullable;
 @Visitable
 public class MethodCall extends Expression implements MemberReference {
   @Visitable @Nullable Expression qualifier;
-  @Visitable MethodDescriptor target;
+  @Visitable MethodDescriptor targetMethodDescriptor;
   @Visitable List<Expression> arguments = new ArrayList<>();
 
-  public MethodCall(Expression qualifier, MethodDescriptor target, List<Expression> arguments) {
-    Preconditions.checkNotNull(target);
+  public MethodCall(
+      Expression qualifier, MethodDescriptor targetMethodDescriptor, List<Expression> arguments) {
+    Preconditions.checkNotNull(targetMethodDescriptor);
     Preconditions.checkNotNull(arguments);
     this.qualifier = qualifier;
-    this.target = target;
+    this.targetMethodDescriptor = targetMethodDescriptor;
     this.arguments.addAll(arguments);
   }
 
@@ -45,9 +46,13 @@ public class MethodCall extends Expression implements MemberReference {
     return this.qualifier;
   }
 
+  /**
+   * Would normally be named getTargetMethodDescriptor() but in this situation it was more important
+   * to implement the MemberReference interface.
+   */
   @Override
   public MethodDescriptor getTarget() {
-    return this.target;
+    return this.targetMethodDescriptor;
   }
 
   public List<Expression> getArguments() {
@@ -58,8 +63,8 @@ public class MethodCall extends Expression implements MemberReference {
     this.qualifier = qualifier;
   }
 
-  public void setTarget(MethodDescriptor target) {
-    this.target = target;
+  public void setTargetMethodDescriptor(MethodDescriptor targetMethodDescriptor) {
+    this.targetMethodDescriptor = targetMethodDescriptor;
   }
 
   @Override

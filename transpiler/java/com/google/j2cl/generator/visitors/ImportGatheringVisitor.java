@@ -61,8 +61,8 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   @Override
   public void exitFieldDescriptor(FieldDescriptor fieldDescriptor) {
-    addTypeDescriptor(fieldDescriptor.getType());
-    addTypeDescriptor(fieldDescriptor.getEnclosingClassDescriptor());
+    addTypeDescriptor(fieldDescriptor.getTypeDescriptor());
+    addTypeDescriptor(fieldDescriptor.getEnclosingClassTypeDescriptor());
   }
 
   @Override
@@ -72,7 +72,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   @Override
   public void exitCastExpression(CastExpression castExpression) {
-    if (castExpression.getCastType() instanceof ArrayTypeDescriptor) {
+    if (castExpression.getCastTypeDescriptor() instanceof ArrayTypeDescriptor) {
       // Arrays.$castTo()
       importModules.add(Import.IMPORT_VM_ARRAYS);
       return;
@@ -93,13 +93,13 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   @Override
   public void exitMethodDescriptor(MethodDescriptor methodDescriptor) {
-    typeDescriptors.add(methodDescriptor.getEnclosingClassDescriptor());
+    typeDescriptors.add(methodDescriptor.getEnclosingClassTypeDescriptor());
   }
 
   @Override
   public void exitUnionTypeDescriptor(UnionTypeDescriptor unionTypeDescriptor) {
-    for (TypeDescriptor typeRef : unionTypeDescriptor.getTypes()) {
-      typeDescriptors.add(typeRef);
+    for (TypeDescriptor typeDescriptor : unionTypeDescriptor.getTypes()) {
+      typeDescriptors.add(typeDescriptor);
     }
   }
 

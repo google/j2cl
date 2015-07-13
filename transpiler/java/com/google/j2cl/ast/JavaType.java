@@ -48,7 +48,7 @@ public class JavaType extends Node {
 
   @Visitable @Nullable TypeDescriptor enclosingTypeDescriptor;
   @Visitable @Nullable TypeDescriptor superTypeDescriptor;
-  @Visitable List<TypeDescriptor> superInterfaceDescriptors = new ArrayList<>();
+  @Visitable List<TypeDescriptor> superInterfaceTypeDescriptors = new ArrayList<>();
   @Visitable TypeDescriptor typeDescriptor;
   @Visitable List<Field> fields = new ArrayList<>();
   @Visitable List<Method> methods = new ArrayList<>();
@@ -146,12 +146,12 @@ public class JavaType extends Node {
     this.superTypeDescriptor = superTypeDescriptor;
   }
 
-  public List<TypeDescriptor> getSuperInterfaceDescriptors() {
-    return superInterfaceDescriptors;
+  public List<TypeDescriptor> getSuperInterfaceTypeDescriptors() {
+    return superInterfaceTypeDescriptors;
   }
 
-  public void addSuperInterfaceDescriptor(TypeDescriptor superInterfaceDescriptor) {
-    this.superInterfaceDescriptors.add(superInterfaceDescriptor);
+  public void addSuperInterfaceDescriptor(TypeDescriptor superInterfaceTypeDescriptor) {
+    this.superInterfaceTypeDescriptors.add(superInterfaceTypeDescriptor);
   }
 
   public TypeDescriptor getDescriptor() {

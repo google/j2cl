@@ -82,7 +82,7 @@ public class JdtUtils {
       RegularTypeDescriptor leafTypeDescriptor =
           (RegularTypeDescriptor)
               createTypeDescriptor(typeBinding.getElementType(), compilationUnitNameLocator);
-      return leafTypeDescriptor.getArray(typeBinding.getDimensions());
+      return leafTypeDescriptor.getForArray(typeBinding.getDimensions());
     }
 
     ITypeBinding currentType = typeBinding;
@@ -118,12 +118,13 @@ public class JdtUtils {
     int modifiers = variableBinding.getModifiers();
     boolean isStatic = isStatic(modifiers);
     Visibility visibility = getVisibility(modifiers);
-    TypeDescriptor enclosingClassReference =
+    TypeDescriptor enclosingClassTypeDescriptor =
         createTypeDescriptor(variableBinding.getDeclaringClass(), compilationUnitNameLocator);
     String fieldName = variableBinding.getName();
-    TypeDescriptor type =
+    TypeDescriptor thisTypeDescriptor =
         createTypeDescriptor(variableBinding.getType(), compilationUnitNameLocator);
-    return FieldDescriptor.create(isStatic, visibility, enclosingClassReference, fieldName, type);
+    return FieldDescriptor.create(
+        isStatic, visibility, enclosingClassTypeDescriptor, fieldName, thisTypeDescriptor);
   }
 
   static MethodDescriptor createMethodDescriptor(
@@ -131,7 +132,7 @@ public class JdtUtils {
     int modifiers = methodBinding.getModifiers();
     boolean isStatic = isStatic(modifiers);
     Visibility visibility = getVisibility(modifiers);
-    TypeDescriptor enclosingClassReference =
+    TypeDescriptor enclosingClassTypeDescriptor =
         createTypeDescriptor(methodBinding.getDeclaringClass(), compilationUnitNameLocator);
     String methodName = methodBinding.getName();
     boolean isConstructor = methodBinding.isConstructor();
@@ -146,7 +147,7 @@ public class JdtUtils {
     return MethodDescriptor.create(
         isStatic,
         visibility,
-        enclosingClassReference,
+        enclosingClassTypeDescriptor,
         methodName,
         isConstructor,
         returnTypeDescriptor,
@@ -156,11 +157,11 @@ public class JdtUtils {
   static Variable createVariable(
       IVariableBinding variableBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
     String name = variableBinding.getName();
-    TypeDescriptor type =
+    TypeDescriptor typeDescriptor =
         createTypeDescriptor(variableBinding.getType(), compilationUnitNameLocator);
     boolean isFinal = isFinal(variableBinding.getModifiers());
     boolean isParameter = variableBinding.isParameter();
-    return new Variable(name, type, isFinal, isParameter);
+    return new Variable(name, typeDescriptor, isFinal, isParameter);
   }
 
   public static BinaryOperator getBinaryOperator(InfixExpression.Operator operator) {

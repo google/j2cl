@@ -27,11 +27,11 @@ public abstract class FieldDescriptor extends Node implements Member {
   public static FieldDescriptor create(
       boolean isStatic,
       Visibility visibility,
-      TypeDescriptor enclosingClassDescriptor,
+      TypeDescriptor enclosingClassTypeDescriptor,
       String fieldName,
       TypeDescriptor typeDescriptor) {
     return new AutoValue_FieldDescriptor(
-        isStatic, false, visibility, enclosingClassDescriptor, fieldName, typeDescriptor);
+        isStatic, false, visibility, enclosingClassTypeDescriptor, fieldName, typeDescriptor);
   }
 
   /**
@@ -39,11 +39,11 @@ public abstract class FieldDescriptor extends Node implements Member {
    */
   public static FieldDescriptor createRaw(
       boolean isStatic,
-      TypeDescriptor enclosingClassDescriptor,
+      TypeDescriptor enclosingClassTypeDescriptor,
       String fieldName,
       TypeDescriptor typeDescriptor) {
     return new AutoValue_FieldDescriptor(
-        isStatic, true, Visibility.PUBLIC, enclosingClassDescriptor, fieldName, typeDescriptor);
+        isStatic, true, Visibility.PUBLIC, enclosingClassTypeDescriptor, fieldName, typeDescriptor);
   }
 
   @Override
@@ -58,11 +58,11 @@ public abstract class FieldDescriptor extends Node implements Member {
   public abstract Visibility getVisibility();
 
   @Override
-  public abstract TypeDescriptor getEnclosingClassDescriptor();
+  public abstract TypeDescriptor getEnclosingClassTypeDescriptor();
 
   public abstract String getFieldName();
 
-  public abstract TypeDescriptor getType();
+  public abstract TypeDescriptor getTypeDescriptor();
 
   @Override
   public Node accept(Processor processor) {

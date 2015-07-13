@@ -5,8 +5,8 @@
 #set ($sourceName = ${TranspilerUtils.getSourceName($classType.Descriptor)})
 /**
  * @interface
-#foreach ($superInterface in $classType.SuperInterfaceDescriptors)
- * @extends {${TranspilerUtils.getClassName($superInterface)}}
+#foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
+ * @extends {${TranspilerUtils.getClassName($superInterfaceTypeDescriptor)}}
 #end
  */
 class $interfaceName {
@@ -20,8 +20,8 @@ class $interfaceName {
    * @public
    */
   static $markImplementor(classConstructor) {
-#foreach ($superInterface in $classType.SuperInterfaceDescriptors)
-    ${TranspilerUtils.getClassName($superInterface)}.$markImplementor(classConstructor);
+#foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
+    ${TranspilerUtils.getClassName($superInterfaceTypeDescriptor)}.$markImplementor(classConstructor);
 #end
     /**
      * @public {boolean}

@@ -78,7 +78,7 @@ import java.util.List;
  */
 public class StatementSourceGenerator {
   // TODO: static field may be a potential threading problem.
-  private static TypeDescriptor inClinitForType = null;
+  private static TypeDescriptor inClinitForTypeDescriptor = null;
 
   public static String toSource(Node node) {
     class ToSourceTransformer extends AbstractTransformer<String> {
@@ -151,17 +151,18 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformCastExpression(CastExpression expression) {
-        TypeDescriptor castType = expression.getCastType();
-        if (castType.isArray()) {
+        TypeDescriptor castTypeDescriptor = expression.getCastTypeDescriptor();
+        if (castTypeDescriptor.isArray()) {
           return transformArrayCastExpression(expression);
         }
         return transformRegularCastExpression(expression);
       }
 
       private String transformRegularCastExpression(CastExpression castExpression) {
-        Preconditions.checkArgument(castExpression.getCastType() instanceof RegularTypeDescriptor);
+        Preconditions.checkArgument(
+            castExpression.getCastTypeDescriptor() instanceof RegularTypeDescriptor);
         RegularTypeDescriptor castTypeDescriptor =
-            (RegularTypeDescriptor) castExpression.getCastType();
+            (RegularTypeDescriptor) castExpression.getCastTypeDescriptor();
 
         if (castTypeDescriptor.isPrimitive()) {
           throw new RuntimeException("TODO: Implement toSource() for cast to primitive type");
@@ -176,18 +177,21 @@ public class StatementSourceGenerator {
       }
 
       private String transformArrayCastExpression(CastExpression castExpression) {
-        Preconditions.checkArgument(castExpression.getCastType() instanceof ArrayTypeDescriptor);
-        ArrayTypeDescriptor arrayCastType = (ArrayTypeDescriptor) castExpression.getCastType();
+        Preconditions.checkArgument(
+            castExpression.getCastTypeDescriptor() instanceof ArrayTypeDescriptor);
+        ArrayTypeDescriptor arrayCastTypeDescriptor =
+            (ArrayTypeDescriptor) castExpression.getCastTypeDescriptor();
 
-        String jsDocTypeName = TranspilerUtils.getJsDocName(arrayCastType);
-        String leafTypeName = TranspilerUtils.getClassName(arrayCastType.getLeafTypeDescriptor());
+        String jsDocTypeName = TranspilerUtils.getJsDocName(arrayCastTypeDescriptor);
+        String leafTypeName =
+            TranspilerUtils.getClassName(arrayCastTypeDescriptor.getLeafTypeDescriptor());
         String expressionStr = toSource(castExpression.getExpression());
         return String.format(
             "/**@type {%s} */ (Arrays.$castTo(%s, %s, %s))",
             jsDocTypeName,
             expressionStr,
             leafTypeName,
-            arrayCastType.getDimensions());
+            arrayCastTypeDescriptor.getDimensions());
       }
 
       @Override
@@ -205,10 +209,11 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformFieldAccess(FieldAccess fieldAccess) {
-        FieldDescriptor target = fieldAccess.getTarget();
+        FieldDescriptor targetFieldDescriptor = fieldAccess.getTarget();
         String fieldMangledName =
             ManglingNameUtils.getMangledName(
-                target, isInClinit(target.getEnclosingClassDescriptor()));
+                targetFieldDescriptor,
+                isInClinit(targetFieldDescriptor.getEnclosingClassTypeDescriptor()));
 
         // make 'this.' reference and static reference explicit.
         // TODO(rluble): We should probably make this explicit at the AST level, either by a
@@ -219,37 +224,38 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformInstanceOfExpression(InstanceOfExpression expression) {
-        TypeDescriptor checkType = expression.getTestTypeDescriptor();
-        if (checkType.isArray()) {
+        TypeDescriptor checkTypeDescriptor = expression.getTestTypeDescriptor();
+        if (checkTypeDescriptor.isArray()) {
           return transformArrayInstanceOfExpression(expression);
         }
         return String.format(
             "%s.$isInstance(%s)",
-            TranspilerUtils.getClassName(checkType),
+            TranspilerUtils.getClassName(checkTypeDescriptor),
             toSource(expression.getExpression()));
       }
 
       private String transformArrayInstanceOfExpression(
           InstanceOfExpression arrayInstanceOfExpression) {
-        TypeDescriptor checkType = arrayInstanceOfExpression.getTestTypeDescriptor();
-        Preconditions.checkArgument(checkType.isArray());
+        TypeDescriptor checkTypeDescriptor = arrayInstanceOfExpression.getTestTypeDescriptor();
+        Preconditions.checkArgument(checkTypeDescriptor.isArray());
 
-        String leafTypeName = TranspilerUtils.getClassName(checkType.getLeafTypeDescriptor());
+        String leafTypeName =
+            TranspilerUtils.getClassName(checkTypeDescriptor.getLeafTypeDescriptor());
         String expressionStr = toSource(arrayInstanceOfExpression.getExpression());
         return String.format(
             "Arrays.$instanceIsOfType(%s, %s, %s)",
             expressionStr,
             leafTypeName,
-            checkType.getDimensions());
+            checkTypeDescriptor.getDimensions());
       }
 
       @Override
       public String transformMethodCall(MethodCall expression) {
-        MethodDescriptor methodRef = expression.getTarget();
+        MethodDescriptor methodDescriptor = expression.getTarget();
         String qualifier = transformQualifier(expression);
         String argumentList =
             Joiner.on(", ").join(transformNodesToSource(expression.getArguments()));
-        return String.format("%s.%s(%s)", qualifier, toSource(methodRef), argumentList);
+        return String.format("%s.%s(%s)", qualifier, toSource(methodDescriptor), argumentList);
       }
 
       @Override
@@ -258,7 +264,7 @@ public class StatementSourceGenerator {
           return ManglingNameUtils.getCtorMangledName(methodDescriptor);
         } else if (methodDescriptor.isInit()) {
           return ManglingNameUtils.getInitMangledName(
-              methodDescriptor.getEnclosingClassDescriptor());
+              methodDescriptor.getEnclosingClassTypeDescriptor());
         } else {
           return ManglingNameUtils.getMangledName(methodDescriptor);
         }
@@ -328,9 +334,10 @@ public class StatementSourceGenerator {
       public String transformNewInstance(NewInstance expression) {
         String className =
             TranspilerUtils.getClassName(
-                expression.getConstructorDescriptor().getEnclosingClassDescriptor());
+                expression.getConstructorMethodDescriptor().getEnclosingClassTypeDescriptor());
         String constructorMangledName =
-            ManglingNameUtils.getConstructorMangledName(expression.getConstructorDescriptor());
+            ManglingNameUtils.getConstructorMangledName(
+                expression.getConstructorMethodDescriptor());
         String argumentsList =
             Joiner.on(", ").join(transformNodesToSource(expression.getArguments()));
         return String.format("%s.%s(%s)", className, constructorMangledName, argumentsList);
@@ -470,22 +477,23 @@ public class StatementSourceGenerator {
        * (RuntimeException.$isInstance(e) || NullPointerException.$isInstance(e))
        */
       private String transformExceptionVariable(
-          TypeDescriptor exceptionTypeRef, final String globalExceptionVarName) {
-        List<TypeDescriptor> exceptionTypeRefs = new ArrayList<>();
-        if (exceptionTypeRef instanceof UnionTypeDescriptor) {
-          exceptionTypeRefs.addAll(((UnionTypeDescriptor) exceptionTypeRef).getTypes());
+          TypeDescriptor exceptionTypeDescriptor, final String globalExceptionVarName) {
+        List<TypeDescriptor> exceptionTypeDescriptors = new ArrayList<>();
+        if (exceptionTypeDescriptor instanceof UnionTypeDescriptor) {
+          exceptionTypeDescriptors.addAll(
+              ((UnionTypeDescriptor) exceptionTypeDescriptor).getTypes());
         } else {
-          exceptionTypeRefs.add(exceptionTypeRef);
+          exceptionTypeDescriptors.add(exceptionTypeDescriptor);
         }
         List<String> isInstanceCalls =
             Lists.transform(
-                exceptionTypeRefs,
+                exceptionTypeDescriptors,
                 new Function<TypeDescriptor, String>() {
                   @Override
-                  public String apply(TypeDescriptor typeRef) {
+                  public String apply(TypeDescriptor typeDescriptor) {
                     return String.format(
                         "%s.$isInstance(%s)",
-                        TranspilerUtils.getClassName(typeRef),
+                        TranspilerUtils.getClassName(typeDescriptor),
                         globalExceptionVarName);
                   }
                 });
@@ -625,7 +633,7 @@ public class StatementSourceGenerator {
         String qualifier =
             memberRef.getQualifier() == null
                 ? (member.isStatic()
-                    ? TranspilerUtils.getClassName(member.getEnclosingClassDescriptor())
+                    ? TranspilerUtils.getClassName(member.getEnclosingClassTypeDescriptor())
                     : "this")
                 : toSource(memberRef.getQualifier());
         return qualifier;
@@ -645,15 +653,15 @@ public class StatementSourceGenerator {
         });
   }
 
-  public static void setInClinit(TypeDescriptor type) {
-    inClinitForType = type;
+  public static void setInClinit(TypeDescriptor typeDescriptor) {
+    inClinitForTypeDescriptor = typeDescriptor;
   }
 
   public static void resetInClinit() {
-    inClinitForType = null;
+    inClinitForTypeDescriptor = null;
   }
 
-  private static boolean isInClinit(TypeDescriptor type) {
-    return type.equals(inClinitForType);
+  private static boolean isInClinit(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.equals(inClinitForTypeDescriptor);
   }
 }

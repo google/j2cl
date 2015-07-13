@@ -51,7 +51,7 @@ public class InsertInstanceInitCallsVisitor extends AbstractVisitor {
 
   private void synthesizeInstanceInitCall(Method method) {
     MethodDescriptor initMethodDescriptor =
-        ASTUtils.createInitMethodDescriptor(method.getDescriptor().getEnclosingClassDescriptor());
+        ASTUtils.createInitMethodDescriptor(method.getDescriptor().getEnclosingClassTypeDescriptor());
 
     List<Expression> arguments = new ArrayList<>();
     MethodCall initCall = new MethodCall(null, initMethodDescriptor, arguments);

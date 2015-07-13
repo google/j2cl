@@ -34,8 +34,8 @@ public class ThisReference extends Expression {
     return typeDescriptor;
   }
 
-  public void setTypeDescriptor(TypeDescriptor qualifier) {
-    this.typeDescriptor = qualifier;
+  public void setTypeDescriptor(TypeDescriptor typeDescriptor) {
+    this.typeDescriptor = typeDescriptor;
   }
 
   @Override

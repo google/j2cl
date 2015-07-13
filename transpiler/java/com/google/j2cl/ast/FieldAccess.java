@@ -26,12 +26,12 @@ import javax.annotation.Nullable;
 @Visitable
 public class FieldAccess extends Expression implements MemberReference {
   @Visitable @Nullable Expression qualifier;
-  @Visitable FieldDescriptor target;
+  @Visitable FieldDescriptor targetFieldDescriptor;
 
-  public FieldAccess(Expression qualifier, FieldDescriptor target) {
-    Preconditions.checkNotNull(target);
+  public FieldAccess(Expression qualifier, FieldDescriptor targetFieldDescriptor) {
+    Preconditions.checkNotNull(targetFieldDescriptor);
     this.qualifier = qualifier;
-    this.target = target;
+    this.targetFieldDescriptor = targetFieldDescriptor;
   }
 
   @Override
@@ -39,17 +39,21 @@ public class FieldAccess extends Expression implements MemberReference {
     return qualifier;
   }
 
+  /**
+   * Would normally be named getTargetFieldDescriptor() but in this situation it was more important
+   * to implement the MemberReference interface.
+   */
   @Override
   public FieldDescriptor getTarget() {
-    return target;
+    return targetFieldDescriptor;
   }
 
   public void setQualifier(Expression qualifier) {
     this.qualifier = qualifier;
   }
 
-  public void setTarget(FieldDescriptor target) {
-    this.target = target;
+  public void setTargetFieldDescriptor(FieldDescriptor targetFieldDescriptor) {
+    this.targetFieldDescriptor = targetFieldDescriptor;
   }
 
   @Override
