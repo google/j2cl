@@ -4,45 +4,45 @@ public class Main {
 
   static class Foo {}
 
-/* TODO(rluble): uncomment when enums are in.
+  /* TODO(rluble): uncomment when enums are in.
 
-  static enum Bar {
-    BAR, BAZ {};
-  }
+   static enum Bar {
+   BAR, BAZ {};
+   }
 
-  public static void testEnum() {
-    Object o = Bar.BAR;
-    assertSame(Bar.class, o.getClass());
+   public static void testEnum() {
+   Object o = Bar.BAR;
+   assertSame(Bar.class, o.getClass());
 
-    assertEquals("com.google.j2cl.transpiler.integration.classliteral.Main$Bar",
-        o.getClass().getName());
-    assertEquals("com.google.j2cl.transpiler.integration.classliteral.Main.Bar",
-        o.getClass().getCanonicalName());
-    assertEquals("Bar", o.getClass().getSimpleName());
-    assertEquals("com.google.j2cl.transpiler.integration.classliteral.Main$Bar",
-        o.getClass().toString());
+   assertEquals("com.google.j2cl.transpiler.integration.classliteral.Main$Bar",
+   o.getClass().getName());
+   assertEquals("com.google.j2cl.transpiler.integration.classliteral.Main.Bar",
+   o.getClass().getCanonicalName());
+   assertEquals("Bar", o.getClass().getSimpleName());
+   assertEquals("com.google.j2cl.transpiler.integration.classliteral.Main$Bar",
+   o.getClass().toString());
 
-    assert !o.getClass().isArray() : "Bar.BAR.class.isArray() returned true";
-    assert o.getClass().isEnum() : "Bar.BAR.class.isEnum() returned false";
-    assert !o.getClass().isPrimitive() : "Bar.BAR.class.isPrimitive() returned true";
-    assert !o.getClass().isInterface() : "Bar.BAR.class.isInterface() returned true";
-  }
+   assert !o.getClass().isArray() : "Bar.BAR.class.isArray() returned true";
+   assert o.getClass().isEnum() : "Bar.BAR.class.isEnum() returned false";
+   assert !o.getClass().isPrimitive() : "Bar.BAR.class.isPrimitive() returned true";
+   assert !o.getClass().isInterface() : "Bar.BAR.class.isInterface() returned true";
+   }
 
-  public static void testEnumSubclass() {
-    Object o = Bar.BAZ;
-    assert Bar.class != o.getClass();
+   public static void testEnumSubclass() {
+   Object o = Bar.BAZ;
+   assert Bar.class != o.getClass();
 
-    assertEquals("com.google.j2cl.transpiler.integration.classliteral.Main$Bar$1",
-        o.getClass().getName());
-    assertEquals("class com.google.j2cl.transpiler.integration.classliteral.Main$Bar$1",
-        o.getClass().toString());
+   assertEquals("com.google.j2cl.transpiler.integration.classliteral.Main$Bar$1",
+   o.getClass().getName());
+   assertEquals("class com.google.j2cl.transpiler.integration.classliteral.Main$Bar$1",
+   o.getClass().toString());
 
-    assert !o.getClass().isArray() : "Bar.BAZ.class.isArray() returned true";
-    assert !o.getClass().isEnum() : "Bar.BAZ.class.isEnum() returned true";
-    assert !o.getClass().isPrimitive() : "Bar.BAZ.class.isPrimitive() returned true";
-    assert !o.getClass().isInterface() : "Bar.BAZ.class.isInterface() returned true";
-  }
-*/
+   assert !o.getClass().isArray() : "Bar.BAZ.class.isArray() returned true";
+   assert !o.getClass().isEnum() : "Bar.BAZ.class.isEnum() returned true";
+   assert !o.getClass().isPrimitive() : "Bar.BAZ.class.isPrimitive() returned true";
+   assert !o.getClass().isInterface() : "Bar.BAZ.class.isInterface() returned true";
+   }
+   */
 
   public static void testArray() {
     Object o = new Foo[3];
@@ -68,12 +68,12 @@ public class Main {
 
   public static void testInterface() {
     assertSame(null, IFoo.class.getSuperclass());
-    assertEquals(
-        "com.google.j2cl.transpiler.integration.classliteral.IFoo", IFoo.class.getName());
+    assertEquals("com.google.j2cl.transpiler.integration.classliteral.IFoo", IFoo.class.getName());
     assertEquals(
         "com.google.j2cl.transpiler.integration.classliteral.IFoo", IFoo.class.getCanonicalName());
     assertEquals("IFoo", IFoo.class.getSimpleName());
-    assertEquals("interface com.google.j2cl.transpiler.integration.classliteral.IFoo",
+    assertEquals(
+        "interface com.google.j2cl.transpiler.integration.classliteral.IFoo",
         IFoo.class.toString());
 
     assert !IFoo.class.isArray() : "IFoo.class.isArray() returned true";
@@ -143,16 +143,15 @@ public class Main {
   }
 
   private static void assertEquals(Object expected, Object actual) {
-    assertEquals(
-        getFailureMessage(expected, actual), expected, actual);
+    assertEquals(getFailureMessage(expected, actual), expected, actual);
   }
 
   private static void assertEquals(String message, Object expected, Object actual) {
     assert expected == null ? actual == null : expected.equals(actual) : message;
   }
+
   private static void assertSame(Object expected, Object actual) {
-    assertSame(
-        getFailureMessage(expected, actual), expected, actual);
+    assertSame(getFailureMessage(expected, actual), expected, actual);
   }
 
   private static String getFailureMessage(Object expected, Object actual) {
@@ -164,7 +163,6 @@ public class Main {
   private static void assertSame(String message, Object expected, Object actual) {
     assert expected == actual : message;
   }
-
 }
 
 interface IFoo {}

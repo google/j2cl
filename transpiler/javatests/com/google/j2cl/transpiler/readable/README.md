@@ -79,8 +79,6 @@ are copyright and licensed as follows:
 - numbermethods
 - number devirtualization
 - objectmethods
-- overridingclassmethods
-- overridinginterfacemethods
 - packageclasscollision
 - packageprivateinstancemethods
 - primitiveoverflow

@@ -1,0 +1,86 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/overridingmethods/SomeInterface.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.overridingmethods.SomeInterfaceModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+/**
+ * @interface
+ */
+class SomeInterface {
+  /**
+   * @return {void}
+   * @public
+   */
+  m_bar() {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_overridingmethods_SomeInterface =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+           instance
+               .$implements__com_google_j2cl_transpiler_readable_overridingmethods_SomeInterface;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+           classConstructor.prototype
+               .$implements__com_google_j2cl_transpiler_readable_overridingmethods_SomeInterface;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() {}
+}
+;
+
+
+SomeInterface.$markImplementor(SomeInterface);
+
+
+/**
+ * @public {Class}
+ */
+SomeInterface.$class = Class.$createForInterface(
+    Util.$generateId('SomeInterface'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.overridingmethods.SomeInterface'),
+    null,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.overridingmethods.SomeInterface'));
+
+/**
+ * Export class.
+ */
+exports.SomeInterface = SomeInterface;

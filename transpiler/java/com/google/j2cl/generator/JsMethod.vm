@@ -5,6 +5,9 @@
 #end
 #set ($parameterList = $TranspilerUtils.getParameterList($method))
   /**
+#if ($method.isOverride())
+   * @override
+#end
 #foreach($parameter in $method.Parameters)
 #set ($parameterTypeName = $TranspilerUtils.getJsDocName($parameter.TypeDescriptor))
    * @param {$parameterTypeName} $parameter.Name

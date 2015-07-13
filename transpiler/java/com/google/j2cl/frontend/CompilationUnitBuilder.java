@@ -222,10 +222,13 @@ public class CompilationUnitBuilder {
       // If a method has no body, initialize the body with an empty list of statements.
       Block body =
           node.getBody() == null ? new Block(new ArrayList<Statement>()) : convert(node.getBody());
-      return new Method(
+
+      Method method = new Method(
           JdtUtils.createMethodDescriptor(node.resolveBinding(), compilationUnitNameLocator),
           parameters,
           body);
+      method.setOverride(JdtUtils.isOverride(node.resolveBinding()));
+      return method;
     }
 
     @SuppressWarnings("cast")

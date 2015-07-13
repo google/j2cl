@@ -30,6 +30,7 @@ public class Method extends Node {
   @Visitable MethodDescriptor methodDescriptor;
   @Visitable List<Variable> parameters = new ArrayList<>();
   @Visitable Block body;
+  private boolean isOverride;
 
   public Method(MethodDescriptor methodDescriptor, List<Variable> parameters, Block body) {
     this.methodDescriptor = methodDescriptor;
@@ -59,6 +60,14 @@ public class Method extends Node {
 
   public void setBody(Block body) {
     this.body = body;
+  }
+
+  public boolean isOverride() {
+    return this.isOverride;
+  }
+
+  public void setOverride(boolean isOverride) {
+    this.isOverride = isOverride;
   }
 
   @Override

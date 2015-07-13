@@ -291,5 +291,42 @@ public class JdtUtils {
     return Modifier.isStatic(modifier);
   }
 
+  static boolean isOverride(IMethodBinding overridingMethod) {
+    ITypeBinding type = overridingMethod.getDeclaringClass();
+
+    // Check immediate super class and interfaces for overridden method.
+    if (type.getSuperclass() != null && hasOverideeInType(overridingMethod, type.getSuperclass())) {
+      return true;
+    }
+    for (ITypeBinding interfaceBinding : type.getInterfaces()) {
+      if (hasOverideeInType(overridingMethod, interfaceBinding)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  private static boolean hasOverideeInType(IMethodBinding overridingMethod, ITypeBinding type) {
+    for (IMethodBinding method : type.getDeclaredMethods()) {
+      // TODO: this may need to be fixed for generic methods overriding.
+      if (overridingMethod.overrides(method)) {
+        return true;
+      }
+    }
+
+    // Recurse into immediate super class and interfaces for overridden method.
+    if (type.getSuperclass() != null && hasOverideeInType(overridingMethod, type.getSuperclass())) {
+      return true;
+    }
+    for (ITypeBinding interfaceBinding : type.getInterfaces()) {
+      if (hasOverideeInType(overridingMethod, interfaceBinding)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   private JdtUtils() {}
 }
