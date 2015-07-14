@@ -29,20 +29,20 @@ import javax.annotation.Nullable;
 @Visitable
 public class ForStatement extends Statement {
   @Visitable @Nullable Expression conditionExpression;
-  @Visitable Block block;
+  @Visitable Statement body;
   @Visitable List<Expression> initializers = new ArrayList<>();
   @Visitable List<Expression> updaters = new ArrayList<>();
 
   public ForStatement(
       Expression conditionExpression,
-      Block block,
+      Statement body,
       List<Expression> initializers,
       List<Expression> updaters) {
-    Preconditions.checkNotNull(block);
+    Preconditions.checkNotNull(body);
     Preconditions.checkNotNull(initializers);
     Preconditions.checkNotNull(updaters);
     this.conditionExpression = conditionExpression;
-    this.block = block;
+    this.body = body;
     this.initializers.addAll(initializers);
     this.updaters.addAll(updaters);
   }
@@ -51,8 +51,8 @@ public class ForStatement extends Statement {
     return conditionExpression;
   }
 
-  public Block getBlock() {
-    return block;
+  public Statement getBody() {
+    return body;
   }
 
   public List<Expression> getInitializers() {

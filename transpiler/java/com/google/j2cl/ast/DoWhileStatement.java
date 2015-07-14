@@ -24,21 +24,21 @@ import com.google.j2cl.ast.processors.Visitable;
 @Visitable
 public class DoWhileStatement extends Statement {
   @Visitable Expression conditionExpression;
-  @Visitable Block block;
+  @Visitable Statement body;
 
-  public DoWhileStatement(Expression conditionExpression, Block block) {
+  public DoWhileStatement(Expression conditionExpression, Statement body) {
     Preconditions.checkNotNull(conditionExpression);
-    Preconditions.checkNotNull(block);
+    Preconditions.checkNotNull(body);
     this.conditionExpression = conditionExpression;
-    this.block = block;
+    this.body = body;
   }
 
   public Expression getConditionExpression() {
     return conditionExpression;
   }
 
-  public Block getBlock() {
-    return block;
+  public Statement getBody() {
+    return body;
   }
 
   @Override

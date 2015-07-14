@@ -507,25 +507,17 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformIfStatement(IfStatement ifStatement) {
-        String conditionAsString = toSource(ifStatement.getConditionExpression());
-        String trueBlockAsString = toSource(ifStatement.getTrueBlock());
-
-        Block falseBlock = ifStatement.getFalseBlock();
-
-        if (falseBlock == null) {
-          return String.format("if (%s) %s", conditionAsString, trueBlockAsString);
+        if (ifStatement.getElseStatement() == null) {
+          return String.format(
+              "if (%s) %s",
+              toSource(ifStatement.getConditionExpression()),
+              toSource(ifStatement.getThenStatement()));
         }
-        String falseBlockAsString = null;
-        if (falseBlock.getStatements().size() == 1
-            && falseBlock.getStatements().get(0) instanceof IfStatement) {
-          IfStatement nestedIfStatement = (IfStatement) falseBlock.getStatements().get(0);
-          falseBlockAsString = toSource(nestedIfStatement);
-        } else {
-          falseBlockAsString = toSource(ifStatement.getFalseBlock());
-        }
-
         return String.format(
-            "if (%s) %s else %s", conditionAsString, trueBlockAsString, falseBlockAsString);
+            "if (%s) %s else %s",
+            toSource(ifStatement.getConditionExpression()),
+            toSource(ifStatement.getThenStatement()),
+            toSource(ifStatement.getElseStatement()));
       }
 
       @Override
@@ -548,14 +540,14 @@ public class StatementSourceGenerator {
       @Override
       public String transformWhileStatement(WhileStatement whileStatement) {
         String conditionAsString = toSource(whileStatement.getConditionExpression());
-        String blockAsString = toSource(whileStatement.getBlock());
+        String blockAsString = toSource(whileStatement.getBody());
         return String.format("while (%s) %s", conditionAsString, blockAsString);
       }
 
       @Override
       public String transformDoWhileStatement(DoWhileStatement doWhileStatement) {
         String conditionAsString = toSource(doWhileStatement.getConditionExpression());
-        String blockAsString = toSource(doWhileStatement.getBlock());
+        String blockAsString = toSource(doWhileStatement.getBody());
         return String.format("do %s while(%s);", blockAsString, conditionAsString);
       }
 
@@ -579,7 +571,7 @@ public class StatementSourceGenerator {
         }
         String updatersAsString = Joiner.on(",").join(updaters);
 
-        String blockAsString = toSource(forStatement.getBlock());
+        String blockAsString = toSource(forStatement.getBody());
 
         return String.format(
             "for (%s; %s; %s) %s",

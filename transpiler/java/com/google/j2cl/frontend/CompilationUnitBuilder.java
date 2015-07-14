@@ -92,7 +92,6 @@ import org.eclipse.jdt.core.dom.TypeDeclaration;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -125,34 +124,34 @@ public class CompilationUnitBuilder {
     }
 
     private CompilationUnit convert(
-        String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
-      javaLangObjectBinding = jdtCompilationUnit.getAST().resolveWellKnownType("java.lang.Object");
+        String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
+      javaLangObjectBinding = compilationUnit.getAST().resolveWellKnownType("java.lang.Object");
 
       currentSourceFile = sourceFilePath;
-      String packageName = JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit);
+      String packageName = JdtUtils.getCompilationUnitPackageName(compilationUnit);
       j2clCompilationUnit = new CompilationUnit(sourceFilePath, packageName);
-      for (Object object : jdtCompilationUnit.types()) {
+      for (Object object : compilationUnit.types()) {
         AbstractTypeDeclaration abstractTypeDeclaration = (AbstractTypeDeclaration) object;
         j2clCompilationUnit.addTypes(convert(abstractTypeDeclaration));
       }
       return j2clCompilationUnit;
     }
 
-    private Collection<JavaType> convert(AbstractTypeDeclaration node) {
-      switch (node.getNodeType()) {
+    private Collection<JavaType> convert(AbstractTypeDeclaration typeDeclaration) {
+      switch (typeDeclaration.getNodeType()) {
         case ASTNode.TYPE_DECLARATION:
-          return convert((TypeDeclaration) node);
+          return convert((TypeDeclaration) typeDeclaration);
         default:
           throw new RuntimeException(
               "Need to implement translation for AbstractTypeDeclaration type: "
-                  + node.getClass().getName()
+                  + typeDeclaration.getClass().getName()
                   + " file triggering this: "
                   + currentSourceFile);
       }
     }
 
-    private Collection<JavaType> convert(TypeDeclaration node) {
-      ITypeBinding typeBinding = node.resolveBinding();
+    private Collection<JavaType> convert(TypeDeclaration typeDeclaration) {
+      ITypeBinding typeBinding = typeDeclaration.resolveBinding();
       JavaType type = createJavaType(typeBinding);
       pushType(type);
       List<JavaType> types = new ArrayList<>();
@@ -165,7 +164,7 @@ public class CompilationUnitBuilder {
             currentTypeDescriptor,
             capturesByTypeDescriptor.get(currentType.getSuperTypeDescriptor()));
       }
-      for (Object object : node.bodyDeclarations()) {
+      for (Object object : typeDeclaration.bodyDeclarations()) {
         if (object instanceof FieldDeclaration) {
           FieldDeclaration fieldDeclaration = (FieldDeclaration) object;
           type.addFields(convert(fieldDeclaration));
@@ -189,7 +188,7 @@ public class CompilationUnitBuilder {
         } else {
           throw new RuntimeException(
               "Need to implement translation for BodyDeclaration type: "
-                  + node.getClass().getName()
+                  + typeDeclaration.getClass().getName()
                   + " file triggering this: "
                   + currentSourceFile);
         }
@@ -251,9 +250,9 @@ public class CompilationUnitBuilder {
       return new ExpressionStatement(superCall);
     }
 
-    private List<Field> convert(FieldDeclaration node) {
+    private List<Field> convert(FieldDeclaration fieldDeclaration) {
       List<Field> fields = new ArrayList<>();
-      for (Object object : node.fragments()) {
+      for (Object object : fieldDeclaration.fragments()) {
         org.eclipse.jdt.core.dom.VariableDeclarationFragment fragment =
             (org.eclipse.jdt.core.dom.VariableDeclarationFragment) object;
         Expression initializer =
@@ -267,9 +266,9 @@ public class CompilationUnitBuilder {
       return fields;
     }
 
-    private Method convert(MethodDeclaration node) {
+    private Method convert(MethodDeclaration methodDeclaration) {
       List<Variable> parameters = new ArrayList<>();
-      for (Object element : node.parameters()) {
+      for (Object element : methodDeclaration.parameters()) {
         SingleVariableDeclaration parameter = (SingleVariableDeclaration) element;
         IVariableBinding parameterBinding = parameter.resolveBinding();
         Variable j2clParameter =
@@ -280,20 +279,26 @@ public class CompilationUnitBuilder {
 
       // If a method has no body, initialize the body with an empty list of statements.
       Block body =
-          node.getBody() == null ? new Block(new ArrayList<Statement>()) : convert(node.getBody());
+          methodDeclaration.getBody() == null
+              ? new Block(new ArrayList<Statement>())
+              : convert(methodDeclaration.getBody());
       // synthesize default super() call.
-      if (node.isConstructor() && needSynthesizeSuperCall(node)) {
+      if (methodDeclaration.isConstructor() && needSynthesizeSuperCall(methodDeclaration)) {
         body
             .getStatements()
-            .add(0, synthesizeSuperCall(node.resolveBinding().getDeclaringClass().getSuperclass()));
+            .add(
+                0,
+                synthesizeSuperCall(
+                    methodDeclaration.resolveBinding().getDeclaringClass().getSuperclass()));
       }
 
       Method method =
           new Method(
-              JdtUtils.createMethodDescriptor(node.resolveBinding(), compilationUnitNameLocator),
+              JdtUtils.createMethodDescriptor(
+                  methodDeclaration.resolveBinding(), compilationUnitNameLocator),
               parameters,
               body);
-      method.setOverride(JdtUtils.isOverride(node.resolveBinding()));
+      method.setOverride(JdtUtils.isOverride(methodDeclaration.resolveBinding()));
       return method;
     }
 
@@ -309,53 +314,55 @@ public class CompilationUnitBuilder {
     }
 
     @SuppressWarnings("cast")
-    private ArrayAccess convert(org.eclipse.jdt.core.dom.ArrayAccess node) {
-      return new ArrayAccess(convert(node.getArray()), convert(node.getIndex()));
+    private ArrayAccess convert(org.eclipse.jdt.core.dom.ArrayAccess expression) {
+      return new ArrayAccess(convert(expression.getArray()), convert(expression.getIndex()));
     }
 
     @SuppressWarnings({"cast", "unchecked"})
-    private NewArray convert(org.eclipse.jdt.core.dom.ArrayCreation node) {
-      ArrayType arrayType = node.getType();
+    private NewArray convert(org.eclipse.jdt.core.dom.ArrayCreation expression) {
+      ArrayType arrayType = expression.getType();
 
       List<Expression> dimensionExpressions =
-          convert((List<org.eclipse.jdt.core.dom.Expression>) node.dimensions());
+          convert((List<org.eclipse.jdt.core.dom.Expression>) expression.dimensions());
       // If some dimensions are not initialized then make that explicit.
       while (dimensionExpressions.size() < arrayType.getDimensions()) {
         dimensionExpressions.add(new NullLiteral());
       }
 
       ArrayLiteral arrayLiteral =
-          node.getInitializer() == null ? null : convert(node.getInitializer());
+          expression.getInitializer() == null ? null : convert(expression.getInitializer());
 
       ArrayTypeDescriptor typeDescriptor =
-          (ArrayTypeDescriptor) createTypeDescriptor(node.resolveTypeBinding());
+          (ArrayTypeDescriptor) createTypeDescriptor(expression.resolveTypeBinding());
       return new NewArray(typeDescriptor, dimensionExpressions, arrayLiteral);
     }
 
     @SuppressWarnings({"cast", "unchecked"})
-    private ArrayLiteral convert(org.eclipse.jdt.core.dom.ArrayInitializer node) {
+    private ArrayLiteral convert(org.eclipse.jdt.core.dom.ArrayInitializer expression) {
       return new ArrayLiteral(
-          createTypeDescriptor(node.resolveTypeBinding()),
-          convert((List<org.eclipse.jdt.core.dom.Expression>) node.expressions()));
+          createTypeDescriptor(expression.resolveTypeBinding()),
+          convert((List<org.eclipse.jdt.core.dom.Expression>) expression.expressions()));
     }
 
-    private BooleanLiteral convert(org.eclipse.jdt.core.dom.BooleanLiteral node) {
-      return node.booleanValue() ? BooleanLiteral.TRUE : BooleanLiteral.FALSE;
+    private BooleanLiteral convert(org.eclipse.jdt.core.dom.BooleanLiteral literal) {
+      return literal.booleanValue() ? BooleanLiteral.TRUE : BooleanLiteral.FALSE;
     }
 
-    private CastExpression convert(org.eclipse.jdt.core.dom.CastExpression node) {
-      Expression expression = convert(node.getExpression());
-      TypeDescriptor castTypeDescriptor = createTypeDescriptor(node.getType().resolveBinding());
-      return new CastExpression(expression, castTypeDescriptor);
+    private CastExpression convert(org.eclipse.jdt.core.dom.CastExpression expression) {
+      TypeDescriptor castTypeDescriptor =
+          JdtUtils.createTypeDescriptor(
+              expression.getType().resolveBinding(), compilationUnitNameLocator);
+      return new CastExpression(convert(expression.getExpression()), castTypeDescriptor);
     }
 
-    private CharacterLiteral convert(org.eclipse.jdt.core.dom.CharacterLiteral node) {
-      return new CharacterLiteral(node.charValue(), node.getEscapedValue());
+    private CharacterLiteral convert(org.eclipse.jdt.core.dom.CharacterLiteral literal) {
+      return new CharacterLiteral(literal.charValue(), literal.getEscapedValue());
     }
 
-    private NewInstance convert(org.eclipse.jdt.core.dom.ClassInstanceCreation node) {
-      Expression qualifier = node.getExpression() == null ? null : convert(node.getExpression());
-      IMethodBinding constructorBinding = node.resolveConstructorBinding();
+    private NewInstance convert(org.eclipse.jdt.core.dom.ClassInstanceCreation expression) {
+      Expression qualifier =
+          expression.getExpression() == null ? null : convert(expression.getExpression());
+      IMethodBinding constructorBinding = expression.resolveConstructorBinding();
       // If the constructor is an instance nested class, add explicit qualifier.
       if (JdtUtils.isInstanceNestedClass(constructorBinding.getDeclaringClass())
           && qualifier == null) {
@@ -367,75 +374,75 @@ public class CompilationUnitBuilder {
       MethodDescriptor constructorMethodDescriptor =
           JdtUtils.createMethodDescriptor(constructorBinding, compilationUnitNameLocator);
       List<Expression> arguments = new ArrayList<>();
-      for (Object argument : node.arguments()) {
+      for (Object argument : expression.arguments()) {
         arguments.add(convert((org.eclipse.jdt.core.dom.Expression) argument));
       }
       return new NewInstance(qualifier, constructorMethodDescriptor, arguments);
     }
 
-    private Expression convert(org.eclipse.jdt.core.dom.Expression node) {
-      switch (node.getNodeType()) {
+    private Expression convert(org.eclipse.jdt.core.dom.Expression expression) {
+      switch (expression.getNodeType()) {
         case ASTNode.ARRAY_ACCESS:
-          return convert((org.eclipse.jdt.core.dom.ArrayAccess) node);
+          return convert((org.eclipse.jdt.core.dom.ArrayAccess) expression);
         case ASTNode.ARRAY_CREATION:
-          return convert((org.eclipse.jdt.core.dom.ArrayCreation) node);
+          return convert((org.eclipse.jdt.core.dom.ArrayCreation) expression);
         case ASTNode.ARRAY_INITIALIZER:
-          return convert((org.eclipse.jdt.core.dom.ArrayInitializer) node);
+          return convert((org.eclipse.jdt.core.dom.ArrayInitializer) expression);
         case ASTNode.ASSIGNMENT:
-          return convert((org.eclipse.jdt.core.dom.Assignment) node);
+          return convert((org.eclipse.jdt.core.dom.Assignment) expression);
         case ASTNode.BOOLEAN_LITERAL:
-          return convert((org.eclipse.jdt.core.dom.BooleanLiteral) node);
+          return convert((org.eclipse.jdt.core.dom.BooleanLiteral) expression);
         case ASTNode.CAST_EXPRESSION:
-          return convert((org.eclipse.jdt.core.dom.CastExpression) node);
+          return convert((org.eclipse.jdt.core.dom.CastExpression) expression);
         case ASTNode.CHARACTER_LITERAL:
-          return convert((org.eclipse.jdt.core.dom.CharacterLiteral) node);
+          return convert((org.eclipse.jdt.core.dom.CharacterLiteral) expression);
         case ASTNode.CLASS_INSTANCE_CREATION:
-          return convert((org.eclipse.jdt.core.dom.ClassInstanceCreation) node);
+          return convert((org.eclipse.jdt.core.dom.ClassInstanceCreation) expression);
         case ASTNode.CONDITIONAL_EXPRESSION:
-          return convert((org.eclipse.jdt.core.dom.ConditionalExpression) node);
+          return convert((org.eclipse.jdt.core.dom.ConditionalExpression) expression);
         case ASTNode.FIELD_ACCESS:
-          return convert((org.eclipse.jdt.core.dom.FieldAccess) node);
+          return convert((org.eclipse.jdt.core.dom.FieldAccess) expression);
         case ASTNode.INFIX_EXPRESSION:
-          return convert((org.eclipse.jdt.core.dom.InfixExpression) node);
+          return convert((org.eclipse.jdt.core.dom.InfixExpression) expression);
         case ASTNode.INSTANCEOF_EXPRESSION:
-          return convert((org.eclipse.jdt.core.dom.InstanceofExpression) node);
+          return convert((org.eclipse.jdt.core.dom.InstanceofExpression) expression);
         case ASTNode.METHOD_INVOCATION:
-          return convert((org.eclipse.jdt.core.dom.MethodInvocation) node);
+          return convert((org.eclipse.jdt.core.dom.MethodInvocation) expression);
         case ASTNode.NULL_LITERAL:
-          return convert((org.eclipse.jdt.core.dom.NullLiteral) node);
+          return convert((org.eclipse.jdt.core.dom.NullLiteral) expression);
         case ASTNode.NUMBER_LITERAL:
-          return convert((org.eclipse.jdt.core.dom.NumberLiteral) node);
+          return convert((org.eclipse.jdt.core.dom.NumberLiteral) expression);
         case ASTNode.PARENTHESIZED_EXPRESSION:
-          return convert((org.eclipse.jdt.core.dom.ParenthesizedExpression) node);
+          return convert((org.eclipse.jdt.core.dom.ParenthesizedExpression) expression);
         case ASTNode.POSTFIX_EXPRESSION:
-          return convert((org.eclipse.jdt.core.dom.PostfixExpression) node);
+          return convert((org.eclipse.jdt.core.dom.PostfixExpression) expression);
         case ASTNode.PREFIX_EXPRESSION:
-          return convert((org.eclipse.jdt.core.dom.PrefixExpression) node);
+          return convert((org.eclipse.jdt.core.dom.PrefixExpression) expression);
         case ASTNode.QUALIFIED_NAME:
-          return convert((org.eclipse.jdt.core.dom.QualifiedName) node);
+          return convert((org.eclipse.jdt.core.dom.QualifiedName) expression);
         case ASTNode.SIMPLE_NAME:
-          return convert((org.eclipse.jdt.core.dom.SimpleName) node);
+          return convert((org.eclipse.jdt.core.dom.SimpleName) expression);
         case ASTNode.STRING_LITERAL:
-          return convert((org.eclipse.jdt.core.dom.StringLiteral) node);
+          return convert((org.eclipse.jdt.core.dom.StringLiteral) expression);
         case ASTNode.THIS_EXPRESSION:
-          return convert((org.eclipse.jdt.core.dom.ThisExpression) node);
+          return convert((org.eclipse.jdt.core.dom.ThisExpression) expression);
         case ASTNode.TYPE_LITERAL:
-          return convert((org.eclipse.jdt.core.dom.TypeLiteral) node);
+          return convert((org.eclipse.jdt.core.dom.TypeLiteral) expression);
         case ASTNode.VARIABLE_DECLARATION_EXPRESSION:
-          return convert((org.eclipse.jdt.core.dom.VariableDeclarationExpression) node);
+          return convert((org.eclipse.jdt.core.dom.VariableDeclarationExpression) expression);
         default:
           throw new RuntimeException(
               "Need to implement translation for expression type: "
-                  + node.getClass().getName()
+                  + expression.getClass().getName()
                   + " file triggering this: "
                   + currentSourceFile);
       }
     }
 
     private VariableDeclarationExpression convert(
-        org.eclipse.jdt.core.dom.VariableDeclarationExpression node) {
+        org.eclipse.jdt.core.dom.VariableDeclarationExpression expression) {
       @SuppressWarnings("unchecked")
-      List<org.eclipse.jdt.core.dom.VariableDeclarationFragment> fragments = node.fragments();
+      List<org.eclipse.jdt.core.dom.VariableDeclarationFragment> fragments = expression.fragments();
 
       List<VariableDeclarationFragment> variableDeclarations = new ArrayList<>();
 
@@ -446,10 +453,10 @@ public class CompilationUnitBuilder {
       return new VariableDeclarationExpression(variableDeclarations);
     }
 
-    private List<Expression> convert(List<org.eclipse.jdt.core.dom.Expression> nodes) {
+    private List<Expression> convert(List<org.eclipse.jdt.core.dom.Expression> expressions) {
       return new ArrayList<>(
           Lists.transform(
-              nodes,
+              expressions,
               new Function<org.eclipse.jdt.core.dom.Expression, Expression>() {
                 @Override
                 public Expression apply(org.eclipse.jdt.core.dom.Expression expression) {
@@ -470,191 +477,179 @@ public class CompilationUnitBuilder {
           falseExpression);
     }
 
-    private Collection<Statement> convert(org.eclipse.jdt.core.dom.Statement node) {
-      switch (node.getNodeType()) {
+    private Statement convert(org.eclipse.jdt.core.dom.Statement statement) {
+      switch (statement.getNodeType()) {
         case ASTNode.ASSERT_STATEMENT:
-          return singletonStatement(convert((org.eclipse.jdt.core.dom.AssertStatement) node));
+          return convert((org.eclipse.jdt.core.dom.AssertStatement) statement);
         case ASTNode.BLOCK:
-          return singletonStatement(convert((org.eclipse.jdt.core.dom.Block) node));
+          return convert((org.eclipse.jdt.core.dom.Block) statement);
         case ASTNode.BREAK_STATEMENT:
-          return singletonStatement(convert((org.eclipse.jdt.core.dom.BreakStatement) node));
+          return convert((org.eclipse.jdt.core.dom.BreakStatement) statement);
         case ASTNode.CONSTRUCTOR_INVOCATION:
-          return singletonStatement(convert((org.eclipse.jdt.core.dom.ConstructorInvocation) node));
+          return convert((org.eclipse.jdt.core.dom.ConstructorInvocation) statement);
         case ASTNode.DO_STATEMENT:
-          return singletonStatement(convert((org.eclipse.jdt.core.dom.DoStatement) node));
+          return convert((org.eclipse.jdt.core.dom.DoStatement) statement);
         case ASTNode.EMPTY_STATEMENT:
-          return singletonStatement(new EmptyStatement());
+          return new EmptyStatement();
         case ASTNode.EXPRESSION_STATEMENT:
-          return singletonStatement(convert((org.eclipse.jdt.core.dom.ExpressionStatement) node));
+          return convert((org.eclipse.jdt.core.dom.ExpressionStatement) statement);
         case ASTNode.FOR_STATEMENT:
-          return singletonStatement(convert((org.eclipse.jdt.core.dom.ForStatement) node));
+          return convert((org.eclipse.jdt.core.dom.ForStatement) statement);
         case ASTNode.IF_STATEMENT:
-          return singletonStatement(convert((org.eclipse.jdt.core.dom.IfStatement) node));
+          return convert((org.eclipse.jdt.core.dom.IfStatement) statement);
         case ASTNode.RETURN_STATEMENT:
-          return singletonStatement(convert((org.eclipse.jdt.core.dom.ReturnStatement) node));
+          return convert((org.eclipse.jdt.core.dom.ReturnStatement) statement);
         case ASTNode.SUPER_CONSTRUCTOR_INVOCATION:
-          return singletonStatement(
-              convert((org.eclipse.jdt.core.dom.SuperConstructorInvocation) node));
+          return convert((org.eclipse.jdt.core.dom.SuperConstructorInvocation) statement);
         case ASTNode.THROW_STATEMENT:
-          return singletonStatement(convert((org.eclipse.jdt.core.dom.ThrowStatement) node));
+          return convert((org.eclipse.jdt.core.dom.ThrowStatement) statement);
         case ASTNode.TRY_STATEMENT:
-          return singletonStatement(convert((org.eclipse.jdt.core.dom.TryStatement) node));
+          return convert((org.eclipse.jdt.core.dom.TryStatement) statement);
         case ASTNode.TYPE_DECLARATION_STATEMENT:
-          return convert((org.eclipse.jdt.core.dom.TypeDeclarationStatement) node);
+          return convert((org.eclipse.jdt.core.dom.TypeDeclarationStatement) statement);
         case ASTNode.VARIABLE_DECLARATION_STATEMENT:
-          return singletonStatement(
-              convert((org.eclipse.jdt.core.dom.VariableDeclarationStatement) node));
+          return convert((org.eclipse.jdt.core.dom.VariableDeclarationStatement) statement);
         case ASTNode.WHILE_STATEMENT:
-          return singletonStatement(convert((org.eclipse.jdt.core.dom.WhileStatement) node));
+          return convert((org.eclipse.jdt.core.dom.WhileStatement) statement);
         default:
           throw new RuntimeException(
               "Need to implement translation for statement type: "
-                  + node.getClass().getName()
+                  + statement.getClass().getName()
                   + " file triggering this: "
                   + currentSourceFile);
       }
     }
 
-    private BreakStatement convert(org.eclipse.jdt.core.dom.BreakStatement jdtBreakStatement) {
+    private BreakStatement convert(org.eclipse.jdt.core.dom.BreakStatement statement) {
       Preconditions.checkState(
-          jdtBreakStatement.getLabel() == null, "Break statement with label not supported yet");
+          statement.getLabel() == null, "Break statement with label not supported yet");
       return new BreakStatement();
     }
 
-    private ForStatement convert(org.eclipse.jdt.core.dom.ForStatement jdtForStatement) {
+    private ForStatement convert(org.eclipse.jdt.core.dom.ForStatement statement) {
       // The order here is important since initializers can define new variables
-      // These can be used in the expression, updaters or the block
+      // These can be used in the expression, updaters or the body
       // This is why we need to process initializers first
       @SuppressWarnings("unchecked")
       List<org.eclipse.jdt.core.dom.VariableDeclarationExpression> jdtInitializers =
-          jdtForStatement.initializers();
+          statement.initializers();
       List<Expression> initializers = Lists.newArrayList();
       for (org.eclipse.jdt.core.dom.Expression expression : jdtInitializers) {
         initializers.add(convert(expression));
       }
 
       Expression conditionExpression =
-          jdtForStatement.getExpression() != null ? convert(jdtForStatement.getExpression()) : null;
+          statement.getExpression() != null ? convert(statement.getExpression()) : null;
 
-      Block block = extractBlock(jdtForStatement.getBody());
+      Statement body = convert(statement.getBody());
       @SuppressWarnings("unchecked")
-      List<Expression> updaters = convert(jdtForStatement.updaters());
-      return new ForStatement(conditionExpression, block, initializers, updaters);
+      List<Expression> updaters = convert(statement.updaters());
+      return new ForStatement(conditionExpression, body, initializers, updaters);
     }
 
-    private DoWhileStatement convert(org.eclipse.jdt.core.dom.DoStatement jdtDoStatement) {
-      Block block = extractBlock(jdtDoStatement.getBody());
-      Expression conditionExpression = convert(jdtDoStatement.getExpression());
-      return new DoWhileStatement(conditionExpression, block);
+    private DoWhileStatement convert(org.eclipse.jdt.core.dom.DoStatement statement) {
+      Statement body = convert(statement.getBody());
+      Expression conditionExpression = convert(statement.getExpression());
+      return new DoWhileStatement(conditionExpression, body);
     }
 
-    private Collection<Statement> convert(
+    private Statement convert(
         org.eclipse.jdt.core.dom.TypeDeclarationStatement jdtTypeDeclStatement) {
       j2clCompilationUnit.addTypes(convert(jdtTypeDeclStatement.getDeclaration()));
-      return Collections.emptyList();
+      return null;
     }
 
-    private WhileStatement convert(org.eclipse.jdt.core.dom.WhileStatement jdtWhileStatement) {
-      Expression conditionExpression = convert(jdtWhileStatement.getExpression());
-      Block block = extractBlock(jdtWhileStatement.getBody());
-      return new WhileStatement(conditionExpression, block);
+    private WhileStatement convert(org.eclipse.jdt.core.dom.WhileStatement statement) {
+      Expression conditionExpression = convert(statement.getExpression());
+      Statement body = convert(statement.getBody());
+      return new WhileStatement(conditionExpression, body);
     }
 
-    private IfStatement convert(org.eclipse.jdt.core.dom.IfStatement jdtIf) {
-      Expression conditionExpression = convert(jdtIf.getExpression());
-
-      org.eclipse.jdt.core.dom.Statement jdtTrueStatement = jdtIf.getThenStatement();
-      org.eclipse.jdt.core.dom.Statement jdtFalseStatement = jdtIf.getElseStatement();
-      Block trueBlock = extractBlock(jdtTrueStatement);
-      Block falseBlock = extractBlock(jdtFalseStatement);
-
-      return new IfStatement(conditionExpression, trueBlock, falseBlock);
+    private IfStatement convert(org.eclipse.jdt.core.dom.IfStatement statement) {
+      Expression conditionExpression = convert(statement.getExpression());
+      Statement thenStatement = convert(statement.getThenStatement());
+      Statement elseStatement =
+          statement.getElseStatement() == null ? null : convert(statement.getElseStatement());
+      return new IfStatement(conditionExpression, thenStatement, elseStatement);
     }
 
-    private Block extractBlock(org.eclipse.jdt.core.dom.Statement statement) {
-      if (statement == null) {
-        return null;
-      }
-      if (statement instanceof org.eclipse.jdt.core.dom.Block) {
-        return convert((org.eclipse.jdt.core.dom.Block) statement);
-      }
-      return new Block(Lists.newArrayList(convert(statement)));
-    }
-
-    private InstanceOfExpression convert(org.eclipse.jdt.core.dom.InstanceofExpression node) {
-      Expression leftOperand = convert(node.getLeftOperand());
+    private InstanceOfExpression convert(org.eclipse.jdt.core.dom.InstanceofExpression expression) {
       TypeDescriptor testTypeDescriptor =
-          createTypeDescriptor(node.getRightOperand().resolveBinding());
-      return new InstanceOfExpression(leftOperand, testTypeDescriptor);
+          createTypeDescriptor(expression.getRightOperand().resolveBinding());
+      return new InstanceOfExpression(convert(expression.getLeftOperand()), testTypeDescriptor);
     }
 
-    private Collection<Statement> singletonStatement(Statement statement) {
-      return Collections.singletonList(statement);
-    }
-
-    private AssertStatement convert(org.eclipse.jdt.core.dom.AssertStatement node) {
-      Expression message = node.getMessage() == null ? null : convert(node.getMessage());
-      Expression expression = convert(node.getExpression());
+    private AssertStatement convert(org.eclipse.jdt.core.dom.AssertStatement statement) {
+      Expression message = statement.getMessage() == null ? null : convert(statement.getMessage());
+      Expression expression = convert(statement.getExpression());
       return new AssertStatement(expression, message);
     }
 
-    private BinaryExpression convert(org.eclipse.jdt.core.dom.Assignment node) {
-      Expression leftHandSide = convert(node.getLeftHandSide());
-      Expression rightHandSide = convert(node.getRightHandSide());
-      BinaryOperator operator = JdtUtils.getBinaryOperator(node.getOperator());
+    private BinaryExpression convert(org.eclipse.jdt.core.dom.Assignment expression) {
+      Expression leftHandSide = convert(expression.getLeftHandSide());
+      Expression rightHandSide = convert(expression.getRightHandSide());
+      BinaryOperator operator = JdtUtils.getBinaryOperator(expression.getOperator());
       return new BinaryExpression(
-          createTypeDescriptor(node.resolveTypeBinding()), leftHandSide, operator, rightHandSide);
+          createTypeDescriptor(expression.resolveTypeBinding()),
+          leftHandSide,
+          operator,
+          rightHandSide);
     }
 
-    private Block convert(org.eclipse.jdt.core.dom.Block node) {
+    private Block convert(org.eclipse.jdt.core.dom.Block block) {
       List<Statement> body = new ArrayList<>();
-      for (Object object : node.statements()) {
-        org.eclipse.jdt.core.dom.Statement statement = (org.eclipse.jdt.core.dom.Statement) object;
-        body.addAll(convert(statement));
+      for (Object object : block.statements()) {
+        Statement statement = convert((org.eclipse.jdt.core.dom.Statement) object);
+        if (statement != null) {
+          body.add(statement);
+        }
       }
       return new Block(body);
     }
 
-    private CatchClause convert(org.eclipse.jdt.core.dom.CatchClause node) {
-      Variable exceptionVar = convert(node.getException());
-      Block body = convert(node.getBody());
+    private CatchClause convert(org.eclipse.jdt.core.dom.CatchClause catchClause) {
+      Variable exceptionVar = convert(catchClause.getException());
+      Block body = convert(catchClause.getBody());
       return new CatchClause(body, exceptionVar);
     }
 
-    private ExpressionStatement convert(org.eclipse.jdt.core.dom.ConstructorInvocation node) {
-      IMethodBinding constructorBinding = node.resolveConstructorBinding();
+    private ExpressionStatement convert(org.eclipse.jdt.core.dom.ConstructorInvocation statement) {
+      IMethodBinding constructorBinding = statement.resolveConstructorBinding();
       MethodDescriptor methodDescriptor =
           JdtUtils.createMethodDescriptor(constructorBinding, compilationUnitNameLocator);
       @SuppressWarnings("unchecked")
-      List<Expression> arguments = convert(node.arguments());
+      List<Expression> arguments = convert(statement.arguments());
       return new ExpressionStatement(new MethodCall(null, methodDescriptor, arguments));
     }
 
-    private Statement convert(org.eclipse.jdt.core.dom.ExpressionStatement node) {
-      return new ExpressionStatement(convert(node.getExpression()));
+    private Statement convert(org.eclipse.jdt.core.dom.ExpressionStatement statement) {
+      return new ExpressionStatement(convert(statement.getExpression()));
     }
 
-    private FieldAccess convert(org.eclipse.jdt.core.dom.FieldAccess node) {
-      Expression qualifier = convert(node.getExpression());
-      IVariableBinding variableBinding = node.resolveFieldBinding();
+    private FieldAccess convert(org.eclipse.jdt.core.dom.FieldAccess expression) {
+      Expression qualifier = convert(expression.getExpression());
+      IVariableBinding variableBinding = expression.resolveFieldBinding();
       FieldDescriptor fieldDescriptor =
           JdtUtils.createFieldDescriptor(variableBinding, compilationUnitNameLocator);
       return new FieldAccess(qualifier, fieldDescriptor);
     }
 
-    private BinaryExpression convert(org.eclipse.jdt.core.dom.InfixExpression node) {
-      Expression leftOperand = convert(node.getLeftOperand());
-      Expression rightOperand = convert(node.getRightOperand());
-      BinaryOperator operator = JdtUtils.getBinaryOperator(node.getOperator());
+    private BinaryExpression convert(org.eclipse.jdt.core.dom.InfixExpression expression) {
+      Expression leftOperand = convert(expression.getLeftOperand());
+      Expression rightOperand = convert(expression.getRightOperand());
+      BinaryOperator operator = JdtUtils.getBinaryOperator(expression.getOperator());
       BinaryExpression binaryExpression =
           new BinaryExpression(
-              createTypeDescriptor(node.resolveTypeBinding()), leftOperand, operator, rightOperand);
-      for (Object object : node.extendedOperands()) {
+              createTypeDescriptor(expression.resolveTypeBinding()),
+              leftOperand,
+              operator,
+              rightOperand);
+      for (Object object : expression.extendedOperands()) {
         org.eclipse.jdt.core.dom.Expression extendedOperand =
             (org.eclipse.jdt.core.dom.Expression) object;
         binaryExpression =
             new BinaryExpression(
-                createTypeDescriptor(node.resolveTypeBinding()),
+                createTypeDescriptor(expression.resolveTypeBinding()),
                 binaryExpression,
                 operator,
                 convert(extendedOperand));
@@ -662,26 +657,27 @@ public class CompilationUnitBuilder {
       return binaryExpression;
     }
 
-    private MethodCall convert(org.eclipse.jdt.core.dom.MethodInvocation node) {
-      IMethodBinding methodBinding = node.resolveMethodBinding();
+    private MethodCall convert(org.eclipse.jdt.core.dom.MethodInvocation expression) {
+      IMethodBinding methodBinding = expression.resolveMethodBinding();
 
       // Perform Object method devirtualization.
       if (isObjectMethodBinding(methodBinding)) {
-        return createDevirtualizedObjectMethodCall(node);
+        return createDevirtualizedObjectMethodCall(expression);
       }
 
-      Expression qualifier = node.getExpression() == null ? null : convert(node.getExpression());
+      Expression qualifier =
+          expression.getExpression() == null ? null : convert(expression.getExpression());
       MethodDescriptor methodDescriptor =
           JdtUtils.createMethodDescriptor(methodBinding, compilationUnitNameLocator);
       @SuppressWarnings("unchecked")
-      List<Expression> arguments = convert(node.arguments());
+      List<Expression> arguments = convert(expression.arguments());
       return new MethodCall(qualifier, methodDescriptor, arguments);
     }
 
-    private MethodCall createDevirtualizedObjectMethodCall(MethodInvocation node) {
-      IMethodBinding methodBinding = node.resolveMethodBinding();
+    private MethodCall createDevirtualizedObjectMethodCall(MethodInvocation invocation) {
+      IMethodBinding methodBinding = invocation.resolveMethodBinding();
       Expression originalQualifier =
-          node.getExpression() == null ? null : convert(node.getExpression());
+          invocation.getExpression() == null ? null : convert(invocation.getExpression());
       String methodName = methodBinding.getName();
       TypeDescriptor returnTypeDescriptor = createTypeDescriptor(methodBinding.getReturnType());
       int originalParameterCount = methodBinding.getParameterTypes().length;
@@ -704,7 +700,7 @@ public class CompilationUnitBuilder {
               parameterTypeDescriptors);
       @SuppressWarnings("unchecked")
 
-      List<Expression> arguments = convert(node.arguments());
+      List<Expression> arguments = convert(invocation.arguments());
       // Turn the instance into now a first parameter to the devirtualized method.
       arguments.add(0, originalQualifier);
       // Call the method like Objects.foo(instance, ...)
@@ -712,39 +708,41 @@ public class CompilationUnitBuilder {
     }
 
     @SuppressWarnings("unused")
-    private NullLiteral convert(org.eclipse.jdt.core.dom.NullLiteral node) {
+    private NullLiteral convert(org.eclipse.jdt.core.dom.NullLiteral literal) {
       return new NullLiteral();
     }
 
-    private NumberLiteral convert(org.eclipse.jdt.core.dom.NumberLiteral node) {
-      return new NumberLiteral(createTypeDescriptor(node.resolveTypeBinding()), node.getToken());
+    private NumberLiteral convert(org.eclipse.jdt.core.dom.NumberLiteral literal) {
+      return new NumberLiteral(
+          createTypeDescriptor(literal.resolveTypeBinding()), literal.getToken());
     }
 
-    private ParenthesizedExpression convert(org.eclipse.jdt.core.dom.ParenthesizedExpression node) {
-      return new ParenthesizedExpression(convert(node.getExpression()));
+    private ParenthesizedExpression convert(
+        org.eclipse.jdt.core.dom.ParenthesizedExpression expression) {
+      return new ParenthesizedExpression(convert(expression.getExpression()));
     }
 
-    private PostfixExpression convert(org.eclipse.jdt.core.dom.PostfixExpression node) {
+    private PostfixExpression convert(org.eclipse.jdt.core.dom.PostfixExpression expression) {
       return new PostfixExpression(
-          createTypeDescriptor(node.resolveTypeBinding()),
-          convert(node.getOperand()),
-          JdtUtils.getPostfixOperator(node.getOperator()));
+          createTypeDescriptor(expression.resolveTypeBinding()),
+          convert(expression.getOperand()),
+          JdtUtils.getPostfixOperator(expression.getOperator()));
     }
 
-    private PrefixExpression convert(org.eclipse.jdt.core.dom.PrefixExpression node) {
+    private PrefixExpression convert(org.eclipse.jdt.core.dom.PrefixExpression expression) {
       return new PrefixExpression(
-          createTypeDescriptor(node.resolveTypeBinding()),
-          convert(node.getOperand()),
-          JdtUtils.getPrefixOperator(node.getOperator()));
+          createTypeDescriptor(expression.resolveTypeBinding()),
+          convert(expression.getOperand()),
+          JdtUtils.getPrefixOperator(expression.getOperator()));
     }
 
-    private Expression convert(org.eclipse.jdt.core.dom.QualifiedName node) {
-      IBinding binding = node.resolveBinding();
+    private Expression convert(org.eclipse.jdt.core.dom.QualifiedName expression) {
+      IBinding binding = expression.resolveBinding();
       if (binding instanceof IVariableBinding) {
         IVariableBinding variableBinding = (IVariableBinding) binding;
         if (variableBinding.isField()) {
           return new FieldAccess(
-              convert(node.getQualifier()),
+              convert(expression.getQualifier()),
               JdtUtils.createFieldDescriptor(variableBinding, compilationUnitNameLocator));
         } else {
           throw new RuntimeException(
@@ -758,13 +756,14 @@ public class CompilationUnitBuilder {
       }
     }
 
-    private ReturnStatement convert(org.eclipse.jdt.core.dom.ReturnStatement node) {
-      Expression expression = node.getExpression() == null ? null : convert(node.getExpression());
+    private ReturnStatement convert(org.eclipse.jdt.core.dom.ReturnStatement statement) {
+      Expression expression =
+          statement.getExpression() == null ? null : convert(statement.getExpression());
       return new ReturnStatement(expression);
     }
 
-    private Expression convert(org.eclipse.jdt.core.dom.SimpleName node) {
-      IBinding binding = node.resolveBinding();
+    private Expression convert(org.eclipse.jdt.core.dom.SimpleName expression) {
+      IBinding binding = expression.resolveBinding();
       if (binding instanceof IVariableBinding) {
         IVariableBinding variableBinding = (IVariableBinding) binding;
         if (variableBinding.isField()) {
@@ -798,7 +797,8 @@ public class CompilationUnitBuilder {
       } else {
         // TODO: to be implemented
         throw new RuntimeException(
-            "Need to implement translation for SimpleName binding: " + node.getClass().getName());
+            "Need to implement translation for SimpleName binding: "
+                + expression.getClass().getName());
       }
     }
 
@@ -866,20 +866,22 @@ public class CompilationUnitBuilder {
       return variable;
     }
 
-    private StringLiteral convert(org.eclipse.jdt.core.dom.StringLiteral node) {
-      return new StringLiteral(node.getEscapedValue());
+    private StringLiteral convert(org.eclipse.jdt.core.dom.StringLiteral literal) {
+      return new StringLiteral(literal.getEscapedValue());
     }
 
-    private ExpressionStatement convert(org.eclipse.jdt.core.dom.SuperConstructorInvocation node) {
-      IMethodBinding superConstructorBinding = node.resolveConstructorBinding();
+    private ExpressionStatement convert(
+        org.eclipse.jdt.core.dom.SuperConstructorInvocation expression) {
+      IMethodBinding superConstructorBinding = expression.resolveConstructorBinding();
       ITypeBinding superclassBinding = superConstructorBinding.getDeclaringClass();
       TypeDescriptor superclassDescriptor =
           createTypeDescriptor(superclassBinding.getDeclaringClass());
       MethodDescriptor methodDescriptor =
           JdtUtils.createMethodDescriptor(superConstructorBinding, compilationUnitNameLocator);
       @SuppressWarnings("unchecked")
-      List<Expression> arguments = convert(node.arguments());
-      Expression qualifier = node.getExpression() == null ? null : convert(node.getExpression());
+      List<Expression> arguments = convert(expression.arguments());
+      Expression qualifier =
+          expression.getExpression() == null ? null : convert(expression.getExpression());
       // super() call to an inner class without explicit qualifier, find the enclosing instance.
       if (qualifier == null && JdtUtils.isInstanceNestedClass(superclassBinding)) {
         qualifier = convertOuterClassReference(superclassDescriptor);
@@ -888,21 +890,21 @@ public class CompilationUnitBuilder {
       return new ExpressionStatement(superCall);
     }
 
-    private Expression convert(org.eclipse.jdt.core.dom.ThisExpression node) {
-      if (node.getQualifier() == null) {
-        TypeDescriptor thisTypeDescriptor = createTypeDescriptor(node.resolveTypeBinding());
+    private Expression convert(org.eclipse.jdt.core.dom.ThisExpression expression) {
+      if (expression.getQualifier() == null) {
+        TypeDescriptor thisTypeDescriptor = createTypeDescriptor(expression.resolveTypeBinding());
         return new ThisReference((RegularTypeDescriptor) thisTypeDescriptor);
       } else {
-        return convertOuterClassReference(createTypeDescriptor(node.resolveTypeBinding()));
+        return convertOuterClassReference(createTypeDescriptor(expression.resolveTypeBinding()));
       }
     }
 
-    private Expression convert(org.eclipse.jdt.core.dom.TypeLiteral typeLiteral) {
-      ITypeBinding typeBinding = typeLiteral.getType().resolveBinding();
+    private Expression convert(org.eclipse.jdt.core.dom.TypeLiteral literal) {
+      ITypeBinding typeBinding = literal.getType().resolveBinding();
 
       TypeDescriptor literalTypeDescriptor = createTypeDescriptor(typeBinding);
       TypeDescriptor javaLangClassTypeDescriptor =
-          createTypeDescriptor(typeLiteral.resolveTypeBinding());
+          createTypeDescriptor(literal.resolveTypeBinding());
       if (typeBinding.getDimensions() == 0) {
         // <ClassLiteralClass>.$class
         FieldDescriptor classFieldDescriptor =
@@ -931,23 +933,23 @@ public class CompilationUnitBuilder {
                   String.valueOf(typeBinding.getDimensions()))));
     }
 
-    private ThrowStatement convert(org.eclipse.jdt.core.dom.ThrowStatement node) {
-      return new ThrowStatement(convert(node.getExpression()));
+    private ThrowStatement convert(org.eclipse.jdt.core.dom.ThrowStatement statement) {
+      return new ThrowStatement(convert(statement.getExpression()));
     }
 
-    private TryStatement convert(org.eclipse.jdt.core.dom.TryStatement node) {
-      Block body = convert(node.getBody());
+    private TryStatement convert(org.eclipse.jdt.core.dom.TryStatement statement) {
+      Block body = convert(statement.getBody());
       List<CatchClause> catchClauses = new ArrayList<>();
-      for (Object catchClause : node.catchClauses()) {
+      for (Object catchClause : statement.catchClauses()) {
         catchClauses.add(convert((org.eclipse.jdt.core.dom.CatchClause) catchClause));
       }
-      Block finallyBlock = node.getFinally() == null ? null : convert(node.getFinally());
+      Block finallyBlock = statement.getFinally() == null ? null : convert(statement.getFinally());
       return new TryStatement(body, catchClauses, finallyBlock);
     }
 
-    private UnionTypeDescriptor convert(org.eclipse.jdt.core.dom.UnionType node) {
+    private UnionTypeDescriptor convert(org.eclipse.jdt.core.dom.UnionType unionType) {
       List<TypeDescriptor> types = new ArrayList<>();
-      for (Object object : node.types()) {
+      for (Object object : unionType.types()) {
         org.eclipse.jdt.core.dom.Type type = (org.eclipse.jdt.core.dom.Type) object;
         types.add(createTypeDescriptor(type.resolveBinding()));
       }
@@ -955,19 +957,21 @@ public class CompilationUnitBuilder {
     }
 
     private VariableDeclarationFragment convert(
-        org.eclipse.jdt.core.dom.VariableDeclarationFragment node) {
-      IVariableBinding variableBinding = node.resolveBinding();
+        org.eclipse.jdt.core.dom.VariableDeclarationFragment variableDeclarationFragment) {
+      IVariableBinding variableBinding = variableDeclarationFragment.resolveBinding();
       Variable variable = JdtUtils.createVariable(variableBinding, compilationUnitNameLocator);
       Expression initializer =
-          node.getInitializer() == null ? null : convert(node.getInitializer());
+          variableDeclarationFragment.getInitializer() == null
+              ? null
+              : convert(variableDeclarationFragment.getInitializer());
       variableByJdtBinding.put(variableBinding, variable);
       return new VariableDeclarationFragment(variable, initializer);
     }
 
     private VariableDeclarationStatement convert(
-        org.eclipse.jdt.core.dom.VariableDeclarationStatement node) {
+        org.eclipse.jdt.core.dom.VariableDeclarationStatement statement) {
       List<VariableDeclarationFragment> variableDeclarations = new ArrayList<>();
-      for (Object object : node.fragments()) {
+      for (Object object : statement.fragments()) {
         org.eclipse.jdt.core.dom.VariableDeclarationFragment fragment =
             (org.eclipse.jdt.core.dom.VariableDeclarationFragment) object;
         variableDeclarations.add(convert(fragment));
@@ -1011,9 +1015,9 @@ public class CompilationUnitBuilder {
   private CompilationUnitNameLocator compilationUnitNameLocator;
 
   private CompilationUnit buildCompilationUnit(
-      String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
+      String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
     ASTConverter converter = new ASTConverter();
-    return converter.convert(sourceFilePath, jdtCompilationUnit);
+    return converter.convert(sourceFilePath, compilationUnit);
   }
 
   private TypeDescriptor createTypeDescriptor(ITypeBinding typeBinding) {

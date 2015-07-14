@@ -7,6 +7,7 @@ public class OuterClass {
       public OuterClass y = OuterClass.this;
     }
   }
+
   public void test() {
     new OuterClass().new InnerClass().new InnerInnerClass();
   }

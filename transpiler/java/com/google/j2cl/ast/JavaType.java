@@ -48,12 +48,19 @@ public class JavaType extends Node {
   private boolean isLocal;
 
   @Visitable @Nullable TypeDescriptor enclosingTypeDescriptor;
+
   @Visitable @Nullable TypeDescriptor superTypeDescriptor;
+
   @Visitable List<TypeDescriptor> superInterfaceTypeDescriptors = new ArrayList<>();
+
   @Visitable TypeDescriptor typeDescriptor;
+
   @Visitable List<Field> fields = new ArrayList<>();
+
   @Visitable List<Method> methods = new ArrayList<>();
+
   @Visitable List<Block> instanceInitializerBlocks = new ArrayList<>();
+
   @Visitable List<Block> staticInitializerBlocks = new ArrayList<>();
 
   public JavaType(Kind kind, Visibility visibility, TypeDescriptor typeDescriptor) {

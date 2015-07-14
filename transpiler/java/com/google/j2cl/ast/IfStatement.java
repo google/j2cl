@@ -26,27 +26,28 @@ import javax.annotation.Nullable;
 @Visitable
 public class IfStatement extends Statement {
   @Visitable Expression conditionExpression;
-  @Visitable Block trueBlock;
-  @Visitable @Nullable Block falseBlock;
+  @Visitable Statement thenStatement;
+  @Visitable @Nullable Statement elseStatement;
 
-  public IfStatement(Expression conditionExpression, Block trueBlock, Block falseBlock) {
+  public IfStatement(
+      Expression conditionExpression, Statement thenStatement, Statement elseStatement) {
     Preconditions.checkNotNull(conditionExpression);
-    Preconditions.checkNotNull(trueBlock);
+    Preconditions.checkNotNull(thenStatement);
     this.conditionExpression = conditionExpression;
-    this.trueBlock = trueBlock;
-    this.falseBlock = falseBlock;
+    this.thenStatement = thenStatement;
+    this.elseStatement = elseStatement;
   }
 
   public Expression getConditionExpression() {
     return conditionExpression;
   }
 
-  public Block getTrueBlock() {
-    return trueBlock;
+  public Statement getThenStatement() {
+    return thenStatement;
   }
 
-  public Block getFalseBlock() {
-    return falseBlock;
+  public Statement getElseStatement() {
+    return elseStatement;
   }
 
   @Override
