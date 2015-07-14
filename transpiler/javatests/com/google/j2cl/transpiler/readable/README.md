@@ -89,6 +89,8 @@ are copyright and licensed as follows:
 - simplelambda
 - subclassgenericclass
 - subclassgenericclasswithparam
+- supermethodcalls (nonconstructor)
+- devirtualizedsupermethodcalls (nonconstructor)
 - typeinference
 - typewildcards
 - varargs
