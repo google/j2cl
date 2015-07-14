@@ -31,6 +31,11 @@ class LocalClassWithConstructor$1LocalClass extends Object {
      * @public {number}
      */
     this.$c_p = 0;
+    /**
+     * @public {LocalClassWithConstructor}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor$1LocalClass =
+        null;
   }
 
   /**
@@ -46,15 +51,16 @@ class LocalClassWithConstructor$1LocalClass extends Object {
    * @param {number} b
    * @param {number} $c_localVar
    * @param {number} $c_p
+   * @param {LocalClassWithConstructor} $outer_this
    * @return {!LocalClassWithConstructor$1LocalClass}
    * @public
    */
-  static $create__int__int(a, b, $c_localVar, $c_p) {
+  static $create__int__int(a, b, $c_localVar, $c_p, $outer_this) {
     LocalClassWithConstructor$1LocalClass.$clinit();
     var instance = new LocalClassWithConstructor$1LocalClass;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor$1LocalClass__int__int(
-            a, b, $c_localVar, $c_p);
+            a, b, $c_localVar, $c_p, $outer_this);
     return instance;
   }
 
@@ -64,13 +70,16 @@ class LocalClassWithConstructor$1LocalClass extends Object {
    * @param {number} b
    * @param {number} $c_localVar
    * @param {number} $c_p
+   * @param {LocalClassWithConstructor} $outer_this
    * @protected
    */
   $ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor$1LocalClass__int__int(
-      a, b, $c_localVar, $c_p) {
+      a, b, $c_localVar, $c_p, $outer_this) {
     this.$ctor__java_lang_Object();
     this.$c_localVar = $c_localVar;
     this.$c_p = $c_p;
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor$1LocalClass =
+        $outer_this;
     this.$init__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor$1LocalClass();
     this.f_field__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor$1LocalClass =
         $c_localVar + a + b;
@@ -81,15 +90,16 @@ class LocalClassWithConstructor$1LocalClass extends Object {
    * @param {number} a
    * @param {number} $c_localVar
    * @param {number} $c_p
+   * @param {LocalClassWithConstructor} $outer_this
    * @return {!LocalClassWithConstructor$1LocalClass}
    * @public
    */
-  static $create__int(a, $c_localVar, $c_p) {
+  static $create__int(a, $c_localVar, $c_p, $outer_this) {
     LocalClassWithConstructor$1LocalClass.$clinit();
     var instance = new LocalClassWithConstructor$1LocalClass;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor$1LocalClass__int(
-            a, $c_localVar, $c_p);
+            a, $c_localVar, $c_p, $outer_this);
     return instance;
   }
 
@@ -98,12 +108,13 @@ class LocalClassWithConstructor$1LocalClass extends Object {
    * @param {number} a
    * @param {number} $c_localVar
    * @param {number} $c_p
+   * @param {LocalClassWithConstructor} $outer_this
    * @protected
    */
   $ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor$1LocalClass__int(
-      a, $c_localVar, $c_p) {
+      a, $c_localVar, $c_p, $outer_this) {
     this.$ctor__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor$1LocalClass__int__int(
-        a, $c_p, $c_localVar, $c_p);
+        a, $c_p, $c_localVar, $c_p, $outer_this);
     this.f_field__com_google_j2cl_transpiler_readable_localclasswithconstructor_LocalClassWithConstructor$1LocalClass =
         $c_localVar;
   }
@@ -171,7 +182,7 @@ class LocalClassWithConstructor extends Object {
    */
   m_test__int(p) {
     let localVar = 1;
-    LocalClassWithConstructor$1LocalClass.$create__int(1, localVar, p);
+    LocalClassWithConstructor$1LocalClass.$create__int(1, localVar, p, this);
   }
 
   /**

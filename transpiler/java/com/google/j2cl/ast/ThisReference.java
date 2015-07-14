@@ -23,7 +23,6 @@ import com.google.j2cl.ast.processors.Visitable;
  */
 @Visitable
 public class ThisReference extends Expression {
-
   @Visitable RegularTypeDescriptor typeDescriptor;
 
   public ThisReference(RegularTypeDescriptor typeDescriptor) {

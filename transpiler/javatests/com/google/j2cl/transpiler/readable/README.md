@@ -62,7 +62,6 @@ are copyright and licensed as follows:
 - implementgenericinterface
 - implementgenericinterfacewithparam
 - implicitconversions
-- instanceinnerclass
 - instanceofarray
 - interfacedefaultmethod
 - jsinteropclass
@@ -74,7 +73,6 @@ are copyright and licensed as follows:
 - multipleanonymousclass
 - multipleparametersgenerictype
 - nestedanonymousclass
-- nonstaticnestedclasses
 - notimportinternals
 - numbermethods
 - number devirtualization

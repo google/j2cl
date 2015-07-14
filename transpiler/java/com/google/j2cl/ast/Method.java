@@ -42,6 +42,15 @@ public class Method extends Node {
     this.body = body;
   }
 
+  public Method(
+      MethodDescriptor methodDescriptor,
+      List<Variable> parameters,
+      Block body,
+      boolean isOverride) {
+    this(methodDescriptor, parameters, body);
+    this.isOverride = isOverride;
+  }
+
   public MethodDescriptor getDescriptor() {
     return methodDescriptor;
   }

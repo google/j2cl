@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
 public class Field extends Node {
   @Visitable FieldDescriptor fieldDescriptor;
   @Visitable @Nullable Expression initializer;
-  private boolean isCapturedField;
+  private Variable capturedVariable;
 
   public Field(FieldDescriptor fieldDescriptor, Expression initializer) {
     Preconditions.checkNotNull(fieldDescriptor);
@@ -37,9 +37,9 @@ public class Field extends Node {
     this.initializer = initializer;
   }
 
-  public Field(FieldDescriptor fieldDescriptor, Expression initializer, boolean isCaptured) {
+  public Field(FieldDescriptor fieldDescriptor, Expression initializer, Variable capturedVariable) {
     this(fieldDescriptor, initializer);
-    this.isCapturedField = isCaptured;
+    this.capturedVariable = capturedVariable;
   }
 
   public FieldDescriptor getDescriptor() {
@@ -59,11 +59,12 @@ public class Field extends Node {
   }
 
   public boolean isCapturedField() {
-    return isCapturedField;
+    return capturedVariable != null
+        || fieldDescriptor.getFieldName().equals(ASTUtils.ENCLOSING_INSTANCE_NAME);
   }
 
-  public void setCapturedField(boolean isCaptured) {
-    this.isCapturedField = isCaptured;
+  public Variable getCapturedVariable() {
+    return this.capturedVariable;
   }
 
   public boolean hasInitializer() {

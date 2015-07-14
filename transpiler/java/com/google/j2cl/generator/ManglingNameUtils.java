@@ -60,7 +60,10 @@ public class ManglingNameUtils {
         // they are in the same package.
         suffix =
             "_$pp_"
-                + methodDescriptor.getEnclosingClassTypeDescriptor().getPackageName().replace('.', '_');
+                + methodDescriptor
+                    .getEnclosingClassTypeDescriptor()
+                    .getPackageName()
+                    .replace('.', '_');
         break;
       default:
         suffix = "";

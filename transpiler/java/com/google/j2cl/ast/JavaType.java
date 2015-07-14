@@ -44,6 +44,7 @@ public class JavaType extends Node {
 
   private Kind kind;
   private Visibility visibility;
+  private boolean isStatic;
   private boolean isLocal;
 
   @Visitable @Nullable TypeDescriptor enclosingTypeDescriptor;
@@ -75,6 +76,14 @@ public class JavaType extends Node {
 
   public void setLocal(boolean isLocal) {
     this.isLocal = isLocal;
+  }
+
+  public boolean isStatic() {
+    return isStatic;
+  }
+
+  public void setStatic(boolean isStatic) {
+    this.isStatic = isStatic;
   }
 
   public boolean isEnum() {

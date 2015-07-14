@@ -48,10 +48,31 @@ public class Main {
     return new InnerClass().test(20); // 30
   }
 
+  public int testClassWithParent() {
+    final int a = 10;
+    class ParentClass {
+      int fun(int p) {
+        return a + p;
+      }
+    }
+
+    // local classes with/without explicit super() whose parent is also a local class
+    class ChildClass extends ParentClass {}
+
+    class AnotherChild extends ParentClass {
+      public AnotherChild() {
+        super();
+      }
+    }
+
+    return new ChildClass().fun(20) + new AnotherChild().fun(100); // 30 + 110 = 140;
+  }
+
   public static void main(String[] args) {
     Main m = new Main();
     assert m.testSimple(100) == 201;
     assert m.testConstructor(100) == 108;
     assert m.testClassWithSameName() == 30;
+    assert m.testClassWithParent() == 140;
   }
 }

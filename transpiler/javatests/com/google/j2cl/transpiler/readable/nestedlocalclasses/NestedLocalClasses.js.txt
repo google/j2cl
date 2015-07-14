@@ -31,6 +31,11 @@ class NestedLocalClasses$1InnerClass$1InnerInnerClass extends Object {
      * @public {number}
      */
     this.$c_localVarInInnerClass = 0;
+    /**
+     * @public {NestedLocalClasses$1InnerClass}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses$1InnerClass$1InnerInnerClass =
+        null;
   }
 
   /**
@@ -46,15 +51,16 @@ class NestedLocalClasses$1InnerClass$1InnerInnerClass extends Object {
    * A particular Java constructor as a factory method.
    * @param {number} $c_localVar
    * @param {number} $c_localVarInInnerClass
+   * @param {NestedLocalClasses$1InnerClass} $outer_this
    * @return {!NestedLocalClasses$1InnerClass$1InnerInnerClass}
-   * @public
+   * @package
    */
-  static $create($c_localVar, $c_localVarInInnerClass) {
+  static $create($c_localVar, $c_localVarInInnerClass, $outer_this) {
     NestedLocalClasses$1InnerClass$1InnerInnerClass.$clinit();
     var instance = new NestedLocalClasses$1InnerClass$1InnerInnerClass;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses$1InnerClass$1InnerInnerClass(
-            $c_localVar, $c_localVarInInnerClass);
+            $c_localVar, $c_localVarInInnerClass, $outer_this);
     return instance;
   }
 
@@ -62,13 +68,16 @@ class NestedLocalClasses$1InnerClass$1InnerInnerClass extends Object {
    * Initializes instance fields for a particular Java constructor.
    * @param {number} $c_localVar
    * @param {number} $c_localVarInInnerClass
-   * @protected
+   * @param {NestedLocalClasses$1InnerClass} $outer_this
+   * @package
    */
   $ctor__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses$1InnerClass$1InnerInnerClass(
-      $c_localVar, $c_localVarInInnerClass) {
+      $c_localVar, $c_localVarInInnerClass, $outer_this) {
     this.$ctor__java_lang_Object();
     this.$c_localVar = $c_localVar;
     this.$c_localVarInInnerClass = $c_localVarInInnerClass;
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses$1InnerClass$1InnerInnerClass =
+        $outer_this;
     this.$init__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses$1InnerClass$1InnerInnerClass();
   }
 
@@ -125,6 +134,11 @@ class NestedLocalClasses$1InnerClass extends Object {
      * @public {number}
      */
     this.$c_localVar = 0;
+    /**
+     * @public {NestedLocalClasses}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses$1InnerClass =
+        null;
   }
 
   /**
@@ -141,33 +155,37 @@ class NestedLocalClasses$1InnerClass extends Object {
   m_fun() {
     let localVarInInnerClass = 1;
     NestedLocalClasses$1InnerClass$1InnerInnerClass.$create(
-        this.$c_localVar, localVarInInnerClass);
+        this.$c_localVar, localVarInInnerClass, this);
   }
 
   /**
    * A particular Java constructor as a factory method.
    * @param {number} $c_localVar
+   * @param {NestedLocalClasses} $outer_this
    * @return {!NestedLocalClasses$1InnerClass}
-   * @public
+   * @package
    */
-  static $create($c_localVar) {
+  static $create($c_localVar, $outer_this) {
     NestedLocalClasses$1InnerClass.$clinit();
     var instance = new NestedLocalClasses$1InnerClass;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses$1InnerClass(
-            $c_localVar);
+            $c_localVar, $outer_this);
     return instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
    * @param {number} $c_localVar
-   * @protected
+   * @param {NestedLocalClasses} $outer_this
+   * @package
    */
   $ctor__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses$1InnerClass(
-      $c_localVar) {
+      $c_localVar, $outer_this) {
     this.$ctor__java_lang_Object();
     this.$c_localVar = $c_localVar;
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses$1InnerClass =
+        $outer_this;
     this.$init__com_google_j2cl_transpiler_readable_nestedlocalclasses_NestedLocalClasses$1InnerClass();
   }
 

@@ -72,6 +72,7 @@ import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableDeclarationStatement;
 import com.google.j2cl.ast.VariableReference;
+import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.errors.Errors;
 
@@ -156,12 +157,23 @@ public class CompilationUnitBuilder {
       pushType(type);
       List<JavaType> types = new ArrayList<>();
       types.add(type);
+      boolean hasConstructor = false;
+      TypeDescriptor currentTypeDescriptor = currentType.getDescriptor();
+      ITypeBinding superclassBinding = typeBinding.getSuperclass();
+      if (superclassBinding != null) {
+        capturesByTypeDescriptor.putAll(
+            currentTypeDescriptor,
+            capturesByTypeDescriptor.get(currentType.getSuperTypeDescriptor()));
+      }
       for (Object object : node.bodyDeclarations()) {
         if (object instanceof FieldDeclaration) {
           FieldDeclaration fieldDeclaration = (FieldDeclaration) object;
           type.addFields(convert(fieldDeclaration));
         } else if (object instanceof MethodDeclaration) {
           MethodDeclaration methodDeclaration = (MethodDeclaration) object;
+          if (methodDeclaration.isConstructor()) {
+            hasConstructor = true;
+          }
           type.addMethod(convert(methodDeclaration));
         } else if (object instanceof Initializer) {
           Initializer initializer = (Initializer) object;
@@ -173,9 +185,6 @@ public class CompilationUnitBuilder {
         } else if (object instanceof TypeDeclaration) {
           // Nested class
           TypeDeclaration nestedTypeDeclaration = (TypeDeclaration) object;
-          if (!JdtUtils.isStatic(nestedTypeDeclaration.getModifiers())) {
-            throw new RuntimeException("Need to implement translation for (nested) inner classes");
-          }
           types.addAll(convert(nestedTypeDeclaration));
         } else {
           throw new RuntimeException(
@@ -185,14 +194,61 @@ public class CompilationUnitBuilder {
                   + currentSourceFile);
         }
       }
-      TypeDescriptor currentTypeDescriptor = currentType.getDescriptor();
+
       for (Variable capturedVariable : capturesByTypeDescriptor.get(currentTypeDescriptor)) {
         FieldDescriptor fieldDescriptor =
-            ASTUtils.createFieldDescriptorForCapture(currentTypeDescriptor, capturedVariable);
-        currentType.addField(new Field(fieldDescriptor, null, true)); // captured field.
+            ASTUtils.getFieldDescriptorForCapture(currentTypeDescriptor, capturedVariable);
+        currentType.addField(new Field(fieldDescriptor, null, capturedVariable)); // captured field.
+      }
+      if (JdtUtils.isInstanceNestedClass(typeBinding)) {
+        // add field for enclosing instance.
+        currentType.addField(
+            new Field(
+                ASTUtils.getFieldDescriptorForEnclosingInstance(
+                    currentTypeDescriptor, currentType.getEnclosingTypeDescriptor()),
+                null));
+      }
+
+      // If the class has no default constructor, synthesize the default constructor.
+      if (!typeBinding.isInterface() && !hasConstructor) {
+        currentType.addMethod(
+            synthesizeDefaultConstructor(
+                currentType.getDescriptor(), superclassBinding, currentType.getVisibility()));
       }
       popType();
       return types;
+    }
+
+    private Method synthesizeDefaultConstructor(
+        TypeDescriptor typeDescriptor, ITypeBinding superclassBinding, Visibility visibility) {
+      MethodDescriptor methodDescriptor =
+          ASTUtils.createConstructorDescriptor(typeDescriptor, visibility);
+      List<Statement> statements = new ArrayList<>();
+      if (superclassBinding != null) {
+        // add super() call.
+        statements.add(synthesizeSuperCall(superclassBinding));
+      }
+      Block body = new Block(statements);
+      List<Variable> parameters = new ArrayList<>();
+      Method defaultConstructor = new Method(methodDescriptor, parameters, body);
+      return defaultConstructor;
+    }
+
+    private Statement synthesizeSuperCall(ITypeBinding superTypeBinding) {
+      TypeDescriptor superTypeDescriptor = createTypeDescriptor(superTypeBinding);
+      MethodDescriptor superMethodDescriptor =
+          ASTUtils.createConstructorDescriptor(
+              superTypeDescriptor, JdtUtils.getVisibility(superTypeBinding.getModifiers()));
+
+      // find the qualifier of the super() call.
+      Expression qualifier =
+          JdtUtils.isInstanceNestedClass(superTypeBinding)
+              ? convertOuterClassReference(
+                  createTypeDescriptor(superTypeBinding.getDeclaringClass()))
+              : null;
+      MethodCall superCall =
+          new MethodCall(qualifier, superMethodDescriptor, new ArrayList<Expression>());
+      return new ExpressionStatement(superCall);
     }
 
     private List<Field> convert(FieldDeclaration node) {
@@ -225,13 +281,31 @@ public class CompilationUnitBuilder {
       // If a method has no body, initialize the body with an empty list of statements.
       Block body =
           node.getBody() == null ? new Block(new ArrayList<Statement>()) : convert(node.getBody());
+      // synthesize default super() call.
+      if (node.isConstructor() && needSynthesizeSuperCall(node)) {
+        body
+            .getStatements()
+            .add(0, synthesizeSuperCall(node.resolveBinding().getDeclaringClass().getSuperclass()));
+      }
 
-      Method method = new Method(
-          JdtUtils.createMethodDescriptor(node.resolveBinding(), compilationUnitNameLocator),
-          parameters,
-          body);
+      Method method =
+          new Method(
+              JdtUtils.createMethodDescriptor(node.resolveBinding(), compilationUnitNameLocator),
+              parameters,
+              body);
       method.setOverride(JdtUtils.isOverride(node.resolveBinding()));
       return method;
+    }
+
+    private boolean needSynthesizeSuperCall(MethodDeclaration method) {
+      Preconditions.checkArgument(method.isConstructor());
+      if (method.getBody().statements().isEmpty()) {
+        return true;
+      }
+      int firstStatementType = ((ASTNode) method.getBody().statements().get(0)).getNodeType();
+
+      return firstStatementType != ASTNode.SUPER_CONSTRUCTOR_INVOCATION
+          && firstStatementType != ASTNode.CONSTRUCTOR_INVOCATION;
     }
 
     @SuppressWarnings("cast")
@@ -281,35 +355,22 @@ public class CompilationUnitBuilder {
 
     private NewInstance convert(org.eclipse.jdt.core.dom.ClassInstanceCreation node) {
       Expression qualifier = node.getExpression() == null ? null : convert(node.getExpression());
+      IMethodBinding constructorBinding = node.resolveConstructorBinding();
+      // If the constructor is an instance nested class, add explicit qualifier.
+      if (JdtUtils.isInstanceNestedClass(constructorBinding.getDeclaringClass())
+          && qualifier == null) {
+        qualifier =
+            new ThisReference(
+                (RegularTypeDescriptor)
+                    createTypeDescriptor(constructorBinding.getDeclaringClass()));
+      }
       MethodDescriptor constructorMethodDescriptor =
-          JdtUtils.createMethodDescriptor(
-              node.resolveConstructorBinding(), compilationUnitNameLocator);
+          JdtUtils.createMethodDescriptor(constructorBinding, compilationUnitNameLocator);
       List<Expression> arguments = new ArrayList<>();
       for (Object argument : node.arguments()) {
         arguments.add(convert((org.eclipse.jdt.core.dom.Expression) argument));
       }
-      NewInstance newInstance = new NewInstance(qualifier, constructorMethodDescriptor, arguments);
-      // If the class has captures, add corresponding arguments to NewInstance's extraArguments,
-      // which will be added to real arguments by {@code NormalizeLocalClassConstructorsVisitor}.
-      for (Variable capturedVariable :
-          capturesByTypeDescriptor.get(constructorMethodDescriptor.getEnclosingClassTypeDescriptor())) {
-        if (capturesByTypeDescriptor.containsEntry(
-            currentType.getDescriptor(), capturedVariable)) {
-          // If the capturedVariable is also a captured variable in current type, pass the
-          // corresponding field in current type as an argument.
-          newInstance.addExtraArgument(
-              new FieldAccess(
-                  new ThisReference((RegularTypeDescriptor) currentType.getDescriptor()),
-                  ASTUtils.createFieldDescriptorForCapture(
-                      currentType.getDescriptor(), capturedVariable)));
-        } else {
-          // otherwise, the captured variable is in the scope of the current type, so pass the
-          // variable directly as an argument.
-          newInstance.addExtraArgument(
-              new VariableReference(capturedVariable));
-        }
-      }
-      return newInstance;
+      return new NewInstance(qualifier, constructorMethodDescriptor, arguments);
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.Expression node) {
@@ -382,8 +443,7 @@ public class CompilationUnitBuilder {
           fragments) {
         variableDeclarations.add(convert(variableDeclarationFragment));
       }
-      return new VariableDeclarationExpression(
-          variableDeclarations);
+      return new VariableDeclarationExpression(variableDeclarations);
     }
 
     private List<Expression> convert(List<org.eclipse.jdt.core.dom.Expression> nodes) {
@@ -708,8 +768,17 @@ public class CompilationUnitBuilder {
       if (binding instanceof IVariableBinding) {
         IVariableBinding variableBinding = (IVariableBinding) binding;
         if (variableBinding.isField()) {
-          return new FieldAccess(
-              null, JdtUtils.createFieldDescriptor(variableBinding, compilationUnitNameLocator));
+          FieldDescriptor fieldDescriptor =
+              JdtUtils.createFieldDescriptor(variableBinding, compilationUnitNameLocator);
+          if (!fieldDescriptor
+              .getEnclosingClassTypeDescriptor()
+              .equals(currentType.getDescriptor())) {
+            return new FieldAccess(
+                convertOuterClassReference(fieldDescriptor.getEnclosingClassTypeDescriptor()),
+                fieldDescriptor);
+          } else {
+            return new FieldAccess(null, fieldDescriptor);
+          }
         } else {
           // local variable or parameter.
           Preconditions.checkNotNull(variableBinding.getDeclaringMethod());
@@ -719,22 +788,7 @@ public class CompilationUnitBuilder {
               createTypeDescriptor(variableBinding.getDeclaringMethod().getDeclaringClass());
           TypeDescriptor currentTypeDescriptor = currentType.getDescriptor();
           if (!enclosingTypeDescriptor.equals(currentTypeDescriptor)) {
-            // the variable is declared outside current type, i.e. a captured variable to current
-            // type, and also a captured variable to the outer class in the type stack that is
-            // inside {@code enclosingTypeDescriptor}.
-            for (int i = typeStack.size() - 1; i >= 0; i--) {
-              if (typeStack.get(i).getDescriptor().equals(enclosingTypeDescriptor)) {
-                break;
-              }
-              capturesByTypeDescriptor.put(typeStack.get(i).getDescriptor(), variable);
-            }
-            // for reference to a captured variable, translate to reference to corresponding
-            // field created for the captured variable.
-            FieldDescriptor fieldDescriptor =
-                ASTUtils.createFieldDescriptorForCapture(currentTypeDescriptor, variable);
-            return new FieldAccess(
-                new ThisReference((RegularTypeDescriptor) currentType.getDescriptor()),
-                fieldDescriptor);
+            return convertCapturedVariableReference(variable, enclosingTypeDescriptor);
           } else {
             return new VariableReference(variable);
           }
@@ -746,6 +800,59 @@ public class CompilationUnitBuilder {
         throw new RuntimeException(
             "Need to implement translation for SimpleName binding: " + node.getClass().getName());
       }
+    }
+
+    /**
+     * Convert A.this to corresponding field access.
+     * <p>
+     * In the case of outside a constructor,
+     * if A is the direct enclosing class, A.this => this.f_$outer_this.
+     * if A is the enclosing class of the direct enclosing class,
+     * A.this => this.f_$outer_this$.f_$outer_this.
+     * <p>
+     * In the case of inside a constructor, the above two cases should be translated to
+     * this$ and this$.f_this$, this$ is the added parameter of the constructor.
+     */
+    private Expression convertOuterClassReference(TypeDescriptor typeDescriptor) {
+      Expression qualifier = new ThisReference((RegularTypeDescriptor) currentType.getDescriptor());
+      int i = typeStack.size() - 1;
+      for (; i > 0; i--) {
+        if (typeStack.get(i).getDescriptor().equals(typeDescriptor)) {
+          break;
+        }
+        TypeDescriptor enclosingTypeDescriptor = typeStack.get(i).getDescriptor();
+        TypeDescriptor fieldTypeDescriptor = typeStack.get(i - 1).getDescriptor();
+        qualifier =
+            new FieldAccess(
+                qualifier,
+                ASTUtils.getFieldDescriptorForEnclosingInstance(
+                    enclosingTypeDescriptor, fieldTypeDescriptor));
+      }
+      if (!typeStack.get(i).getDescriptor().equals(typeDescriptor)) {
+        // not a type of the outer classes.
+        qualifier = new ThisReference((RegularTypeDescriptor) currentType.getDescriptor());
+      }
+      return qualifier;
+    }
+
+    private Expression convertCapturedVariableReference(
+        Variable variable, TypeDescriptor enclosingClassDescriptor) {
+      // the variable is declared outside current type, i.e. a captured variable to current
+      // type, and also a captured variable to the outer class in the type stack that is
+      // inside {@code enclosingClassRef}.
+      for (int i = typeStack.size() - 1; i >= 0; i--) {
+        if (typeStack.get(i).getDescriptor().equals(enclosingClassDescriptor)) {
+          break;
+        }
+        capturesByTypeDescriptor.put(typeStack.get(i).getDescriptor(), variable);
+      }
+      // for reference to a captured variable, if it is in a constructor, translate to
+      // reference to outer parameter, otherwise, translate to reference to corresponding
+      // field created for the captured variable.
+      FieldDescriptor fieldDescriptor =
+          ASTUtils.getFieldDescriptorForCapture(currentType.getDescriptor(), variable);
+      return new FieldAccess(
+          new ThisReference((RegularTypeDescriptor) currentType.getDescriptor()), fieldDescriptor);
     }
 
     private Variable convert(org.eclipse.jdt.core.dom.SingleVariableDeclaration node) {
@@ -764,20 +871,30 @@ public class CompilationUnitBuilder {
     }
 
     private ExpressionStatement convert(org.eclipse.jdt.core.dom.SuperConstructorInvocation node) {
-      IMethodBinding constructorBinding = node.resolveConstructorBinding();
+      IMethodBinding superConstructorBinding = node.resolveConstructorBinding();
+      ITypeBinding superclassBinding = superConstructorBinding.getDeclaringClass();
+      TypeDescriptor superclassDescriptor =
+          createTypeDescriptor(superclassBinding.getDeclaringClass());
       MethodDescriptor methodDescriptor =
-          JdtUtils.createMethodDescriptor(constructorBinding, compilationUnitNameLocator);
+          JdtUtils.createMethodDescriptor(superConstructorBinding, compilationUnitNameLocator);
       @SuppressWarnings("unchecked")
       List<Expression> arguments = convert(node.arguments());
-      return new ExpressionStatement(new MethodCall(null, methodDescriptor, arguments));
+      Expression qualifier = node.getExpression() == null ? null : convert(node.getExpression());
+      // super() call to an inner class without explicit qualifier, find the enclosing instance.
+      if (qualifier == null && JdtUtils.isInstanceNestedClass(superclassBinding)) {
+        qualifier = convertOuterClassReference(superclassDescriptor);
+      }
+      MethodCall superCall = new MethodCall(qualifier, methodDescriptor, arguments);
+      return new ExpressionStatement(superCall);
     }
 
-    private ThisReference convert(org.eclipse.jdt.core.dom.ThisExpression node) {
-      Preconditions.checkState(
-          node.getQualifier() == null, "Qualified this expression not yet implemented");
-      TypeDescriptor thisTypeDescriptor = createTypeDescriptor(node.resolveTypeBinding());
-      Preconditions.checkState(thisTypeDescriptor instanceof RegularTypeDescriptor);
-      return new ThisReference((RegularTypeDescriptor) thisTypeDescriptor);
+    private Expression convert(org.eclipse.jdt.core.dom.ThisExpression node) {
+      if (node.getQualifier() == null) {
+        TypeDescriptor thisTypeDescriptor = createTypeDescriptor(node.resolveTypeBinding());
+        return new ThisReference((RegularTypeDescriptor) thisTypeDescriptor);
+      } else {
+        return convertOuterClassReference(createTypeDescriptor(node.resolveTypeBinding()));
+      }
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.TypeLiteral typeLiteral) {
@@ -877,6 +994,7 @@ public class CompilationUnitBuilder {
         type.addSuperInterfaceDescriptor(createTypeDescriptor(superInterface));
       }
       type.setLocal(typeBinding.isLocal());
+      type.setStatic(JdtUtils.isStatic(typeBinding.getModifiers()));
       return type;
     }
 

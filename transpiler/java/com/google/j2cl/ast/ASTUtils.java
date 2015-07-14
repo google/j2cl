@@ -22,9 +22,10 @@ import com.google.common.base.Preconditions;
  */
 public class ASTUtils {
   public static final String CAPTURES_PREFIX = "$c_";
+  public static final String ENCLOSING_INSTANCE_NAME = "$outer_this";
 
   /**
-   * Create "$init" MethodReference.
+   * Create "$init" MethodDescriptor.
    */
   public static MethodDescriptor createInitMethodDescriptor(
       TypeDescriptor enclosingClassTypeDescriptor) {
@@ -34,6 +35,20 @@ public class ASTUtils {
         enclosingClassTypeDescriptor,
         MethodDescriptor.METHOD_INIT,
         false,
+        TypeDescriptor.VOID_TYPE_DESCRIPTOR);
+  }
+
+  /**
+   * Create constructor MethodDescriptor.
+   */
+  public static MethodDescriptor createConstructorDescriptor(
+      TypeDescriptor typeDescriptor, Visibility visibility) {
+    return MethodDescriptor.create(
+        false,
+        visibility,
+        typeDescriptor,
+        typeDescriptor.getClassName(),
+        true,
         TypeDescriptor.VOID_TYPE_DESCRIPTOR);
   }
 
@@ -93,13 +108,26 @@ public class ASTUtils {
   /**
    * Returns the added field descriptor corresponding to the captured variable.
    */
-  public static FieldDescriptor createFieldDescriptorForCapture(
+  public static FieldDescriptor getFieldDescriptorForCapture(
       TypeDescriptor enclosingClassTypeDescriptor, Variable capturedVariable) {
     return FieldDescriptor.createRaw(
         false,
         enclosingClassTypeDescriptor,
         CAPTURES_PREFIX + capturedVariable.getName(),
         capturedVariable.getTypeDescriptor());
+  }
+
+  /**
+   * Returns the added field corresponding to the enclosing instance.
+   */
+  public static FieldDescriptor getFieldDescriptorForEnclosingInstance(
+      TypeDescriptor enclosingClassDescriptor, TypeDescriptor fieldTypeDescriptor) {
+    return FieldDescriptor.create(
+        false, // not static
+        Visibility.PUBLIC,
+        enclosingClassDescriptor,
+        ENCLOSING_INSTANCE_NAME,
+        fieldTypeDescriptor);
   }
 
   /**

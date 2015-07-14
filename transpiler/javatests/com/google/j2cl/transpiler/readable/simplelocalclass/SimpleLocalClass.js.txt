@@ -26,6 +26,11 @@ class SimpleLocalClass$1InnerClass extends Object {
      * @public {number}
      */
     this.$c_p = 0;
+    /**
+     * @public {SimpleLocalClass}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$1InnerClass =
+        null;
   }
 
   /**
@@ -45,15 +50,16 @@ class SimpleLocalClass$1InnerClass extends Object {
    * A particular Java constructor as a factory method.
    * @param {number} $c_localVar
    * @param {number} $c_p
+   * @param {SimpleLocalClass} $outer_this
    * @return {!SimpleLocalClass$1InnerClass}
-   * @public
+   * @package
    */
-  static $create($c_localVar, $c_p) {
+  static $create($c_localVar, $c_p, $outer_this) {
     SimpleLocalClass$1InnerClass.$clinit();
     var instance = new SimpleLocalClass$1InnerClass;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$1InnerClass(
-            $c_localVar, $c_p);
+            $c_localVar, $c_p, $outer_this);
     return instance;
   }
 
@@ -61,13 +67,16 @@ class SimpleLocalClass$1InnerClass extends Object {
    * Initializes instance fields for a particular Java constructor.
    * @param {number} $c_localVar
    * @param {number} $c_p
-   * @protected
+   * @param {SimpleLocalClass} $outer_this
+   * @package
    */
   $ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$1InnerClass(
-      $c_localVar, $c_p) {
+      $c_localVar, $c_p, $outer_this) {
     this.$ctor__java_lang_Object();
     this.$c_localVar = $c_localVar;
     this.$c_p = $c_p;
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$1InnerClass =
+        $outer_this;
     this.$init__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$1InnerClass();
   }
 
@@ -117,7 +126,14 @@ class SimpleLocalClass$1InnerClassWithoutCaptures extends Object {
    * Defines instance fields.
    * @private
    */
-  constructor() { super(); }
+  constructor() {
+    super();
+    /**
+     * @public {SimpleLocalClass}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$1InnerClassWithoutCaptures =
+        null;
+  }
 
   /**
    * Runs instance field and block initializers.
@@ -128,23 +144,29 @@ class SimpleLocalClass$1InnerClassWithoutCaptures extends Object {
 
   /**
    * A particular Java constructor as a factory method.
+   * @param {SimpleLocalClass} $outer_this
    * @return {!SimpleLocalClass$1InnerClassWithoutCaptures}
-   * @public
+   * @package
    */
-  static $create() {
+  static $create($outer_this) {
     SimpleLocalClass$1InnerClassWithoutCaptures.$clinit();
     var instance = new SimpleLocalClass$1InnerClassWithoutCaptures;
     instance
-        .$ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$1InnerClassWithoutCaptures();
+        .$ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$1InnerClassWithoutCaptures(
+            $outer_this);
     return instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @protected
+   * @param {SimpleLocalClass} $outer_this
+   * @package
    */
-  $ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$1InnerClassWithoutCaptures() {
+  $ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$1InnerClassWithoutCaptures(
+      $outer_this) {
     this.$ctor__java_lang_Object();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$1InnerClassWithoutCaptures =
+        $outer_this;
     this.$init__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$1InnerClassWithoutCaptures();
   }
 
@@ -206,6 +228,11 @@ class SimpleLocalClass$2InnerClass extends Object {
      * @public {number}
      */
     this.$c_localVar = 0;
+    /**
+     * @public {SimpleLocalClass}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$2InnerClass =
+        null;
   }
 
   /**
@@ -220,27 +247,31 @@ class SimpleLocalClass$2InnerClass extends Object {
   /**
    * A particular Java constructor as a factory method.
    * @param {number} $c_localVar
+   * @param {SimpleLocalClass} $outer_this
    * @return {!SimpleLocalClass$2InnerClass}
-   * @public
+   * @package
    */
-  static $create($c_localVar) {
+  static $create($c_localVar, $outer_this) {
     SimpleLocalClass$2InnerClass.$clinit();
     var instance = new SimpleLocalClass$2InnerClass;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$2InnerClass(
-            $c_localVar);
+            $c_localVar, $outer_this);
     return instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
    * @param {number} $c_localVar
-   * @protected
+   * @param {SimpleLocalClass} $outer_this
+   * @package
    */
   $ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$2InnerClass(
-      $c_localVar) {
+      $c_localVar, $outer_this) {
     this.$ctor__java_lang_Object();
     this.$c_localVar = $c_localVar;
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$2InnerClass =
+        $outer_this;
     this.$init__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$2InnerClass();
   }
 
@@ -306,8 +337,8 @@ class SimpleLocalClass extends Object {
    */
   m_test__int(p) {
     let localVar = 1;
-    SimpleLocalClass$1InnerClass.$create(localVar, p).m_fun();
-    SimpleLocalClass$1InnerClassWithoutCaptures.$create();
+    SimpleLocalClass$1InnerClass.$create(localVar, p, this).m_fun();
+    SimpleLocalClass$1InnerClassWithoutCaptures.$create(this);
   }
 
   /**

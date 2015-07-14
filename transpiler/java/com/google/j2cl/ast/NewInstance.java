@@ -31,7 +31,6 @@ public class NewInstance extends Expression {
   @Visitable @Nullable Expression qualifier;
   @Visitable MethodDescriptor constructorMethodDescriptor;
   @Visitable List<Expression> arguments = new ArrayList<>();
-  private List<Expression> extraArguments = new ArrayList<>();
 
   public NewInstance(
       Expression qualifier,
@@ -62,14 +61,6 @@ public class NewInstance extends Expression {
 
   public void setConstructorMethodDescriptor(MethodDescriptor constructorDescriptor) {
     this.constructorMethodDescriptor = constructorDescriptor;
-  }
-
-  public List<Expression> getExtraArguments() {
-    return this.extraArguments;
-  }
-
-  public void addExtraArgument(Expression argument) {
-    this.extraArguments.add(argument);
   }
 
   @Override
