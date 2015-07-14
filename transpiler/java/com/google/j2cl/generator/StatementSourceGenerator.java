@@ -387,11 +387,6 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformThisReference(ThisReference expression) {
-        // We expect that after normalization (InnerClassExtractor) there should be no qualified
-        // this reference.
-        Preconditions.checkArgument(
-            expression.getTypeDescriptor() == null,
-            "There should be no qualified thisRef after normalization.");
         return "this";
       }
 

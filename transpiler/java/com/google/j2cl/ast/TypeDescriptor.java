@@ -41,15 +41,21 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
   public static final String LONG_TYPE_NAME = "long";
   public static final String SHORT_TYPE_NAME = "short";
 
-  public static final TypeDescriptor VOID_TYPE_DESCRIPTOR = createPrimitive(VOID_TYPE_NAME);
+  public static final TypeDescriptor BOOLEAN_TYPE_DESCRIPTOR = createPrimitive(BOOLEAN_TYPE_NAME);
+  public static final TypeDescriptor BYTE_TYPE_DESCRIPTOR = createPrimitive(BYTE_TYPE_NAME);
+  public static final TypeDescriptor SHORT_TYPE_DESCRIPTOR = createPrimitive(SHORT_TYPE_NAME);
   public static final TypeDescriptor INT_TYPE_DESCRIPTOR = createPrimitive(INT_TYPE_NAME);
+  public static final TypeDescriptor LONG_TYPE_DESCRIPTOR = createPrimitive(LONG_TYPE_NAME);
+  public static final TypeDescriptor FLOAT_TYPE_DESCRIPTOR = createPrimitive(FLOAT_TYPE_NAME);
+  public static final TypeDescriptor DOUBLE_TYPE_DESCRIPTOR = createPrimitive(DOUBLE_TYPE_NAME);
+  public static final TypeDescriptor CHAR_TYPE_DESCRIPTOR = createPrimitive(CHAR_TYPE_NAME);
+  public static final TypeDescriptor VOID_TYPE_DESCRIPTOR = createPrimitive(VOID_TYPE_NAME);
   public static final TypeDescriptor OBJECT_TYPE_DESCRIPTOR =
       RegularTypeDescriptor.create(
           Arrays.asList("java", "lang"), Arrays.asList("Object"), "Object");
-  /**
-   * Implements devirtualized Object methods that allow us to special case some behavior and treat
-   * some native JS classes as the same as some matching Java classes.
-   */
+  public static final TypeDescriptor STRING_TYPE_DESCRIPTOR =
+      RegularTypeDescriptor.create(
+          Arrays.asList("java", "lang"), Arrays.asList("String"), "String");
   public static final TypeDescriptor OBJECTS_TYPE_DESCRIPTOR =
       RegularTypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Objects", "ObjectsModule");
 
@@ -131,6 +137,17 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
   public abstract int getDimensions();
 
   public abstract TypeDescriptor getLeafTypeDescriptor();
+
+  public TypeDescriptor getComponentTypeDescriptor() {
+    return getLeafTypeDescriptor();
+  }
+
+  public TypeDescriptor getForArray(int dimensions) {
+    if (dimensions == 0) {
+      return this;
+    }
+    return getInterner().intern(new AutoValue_ArrayTypeDescriptor(dimensions, this));
+  }
 
   @Override
   public int compareTo(TypeDescriptor that) {

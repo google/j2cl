@@ -15,27 +15,25 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
-
-import javax.annotation.Nullable;
 
 /**
  * Class for this reference.
  */
 @Visitable
 public class ThisReference extends Expression {
-  @Visitable @Nullable TypeDescriptor typeDescriptor;
+
+  @Visitable RegularTypeDescriptor typeDescriptor;
 
   public ThisReference(RegularTypeDescriptor typeDescriptor) {
+    Preconditions.checkNotNull(typeDescriptor);
     this.typeDescriptor = typeDescriptor;
   }
 
+  @Override
   public TypeDescriptor getTypeDescriptor() {
     return typeDescriptor;
-  }
-
-  public void setTypeDescriptor(TypeDescriptor typeDescriptor) {
-    this.typeDescriptor = typeDescriptor;
   }
 
   @Override

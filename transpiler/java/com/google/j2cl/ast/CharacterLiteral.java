@@ -39,6 +39,11 @@ public class CharacterLiteral extends Expression {
   }
 
   @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return TypeDescriptor.CHAR_TYPE_DESCRIPTOR;
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_CharacterLiteral.visit(processor, this);
   }

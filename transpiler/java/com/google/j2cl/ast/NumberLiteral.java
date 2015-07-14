@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -22,10 +23,12 @@ import com.google.j2cl.ast.processors.Visitable;
  */
 @Visitable
 public class NumberLiteral extends Expression {
-  // TODO: maybe use value instead.
+  private TypeDescriptor typeDescriptor;
   private String token;
 
-  public NumberLiteral(String token) {
+  public NumberLiteral(TypeDescriptor typeDescriptor, String token) {
+    Preconditions.checkNotNull(typeDescriptor);
+    this.typeDescriptor = typeDescriptor;
     this.token = token;
   }
 
@@ -33,8 +36,9 @@ public class NumberLiteral extends Expression {
     return token;
   }
 
-  public void setToken(String token) {
-    this.token = token;
+  @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return typeDescriptor;
   }
 
   @Override

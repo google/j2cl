@@ -26,7 +26,6 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.UnionTypeDescriptor;
 
@@ -51,7 +50,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   @Override
   public void exitArrayTypeDescriptor(ArrayTypeDescriptor arrayTypeDescriptor) {
     importModules.add(Import.IMPORT_VM_ARRAYS);
-    return;
+    addTypeDescriptor(arrayTypeDescriptor.getLeafTypeDescriptor());
   }
 
   @Override
@@ -84,11 +83,6 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   @Override
   public void exitJavaType(JavaType type) {
     typeDescriptorsDefinedInCompilationUnit.add(type.getDescriptor());
-  }
-
-  @Override
-  public void exitNewArray(NewArray newArray) {
-    importModules.add(Import.IMPORT_VM_ARRAYS);
   }
 
   @Override

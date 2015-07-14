@@ -42,4 +42,9 @@ public class ParenthesizedExpression extends Expression {
   public Node accept(Processor processor) {
     return Visitor_ParenthesizedExpression.visit(processor, this);
   }
+
+  @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return expression.getTypeDescriptor();
+  }
 }

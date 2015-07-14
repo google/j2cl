@@ -38,6 +38,11 @@ public class VariableDeclarationExpression extends Expression {
   }
 
   @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return fragments.get(0).getVariable().getTypeDescriptor();
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_VariableDeclarationExpression.visit(processor, this);
   }

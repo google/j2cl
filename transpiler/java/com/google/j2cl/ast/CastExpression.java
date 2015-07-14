@@ -33,11 +33,16 @@ public class CastExpression extends Expression {
     this.castTypeDescriptor = castTypeDescriptor;
   }
 
+  public TypeDescriptor getCastTypeDescriptor() {
+    return castTypeDescriptor;
+  }
+
   public Expression getExpression() {
     return expression;
   }
 
-  public TypeDescriptor getCastTypeDescriptor() {
+  @Override
+  public TypeDescriptor getTypeDescriptor() {
     return castTypeDescriptor;
   }
 

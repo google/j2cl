@@ -54,7 +54,8 @@ public class InsertInstanceInitCallsVisitor extends AbstractVisitor {
         ASTUtils.createInitMethodDescriptor(method.getDescriptor().getEnclosingClassTypeDescriptor());
 
     List<Expression> arguments = new ArrayList<>();
-    MethodCall initCall = new MethodCall(null, initMethodDescriptor, arguments);
+    MethodCall initCall =
+        new MethodCall(null, initMethodDescriptor, arguments);
     // If the constructor has a super() call, insert $init call after it. Otherwise, insert
     // to the top of the method body.
     int insertIndex = ASTUtils.hasSuperCall(method) ? 1 : 0;

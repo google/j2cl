@@ -26,15 +26,23 @@ import java.util.List;
  */
 @Visitable
 public class ArrayLiteral extends Expression {
+  private TypeDescriptor typeDescriptor;
   @Visitable List<Expression> valueExpressions = new ArrayList<>();
 
-  public ArrayLiteral(List<Expression> valueExpressions) {
+  public ArrayLiteral(TypeDescriptor typeDescriptor, List<Expression> valueExpressions) {
+    Preconditions.checkNotNull(typeDescriptor);
     Preconditions.checkNotNull(valueExpressions);
+    this.typeDescriptor = typeDescriptor;
     this.valueExpressions.addAll(valueExpressions);
   }
 
   public List<Expression> getValueExpressions() {
     return valueExpressions;
+  }
+
+  @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return typeDescriptor;
   }
 
   @Override

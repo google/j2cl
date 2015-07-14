@@ -38,6 +38,7 @@ public abstract class RegularTypeDescriptor extends TypeDescriptor {
   @Nullable
   public abstract String getCompilationUnitSimpleName();
 
+  @Override
   public abstract boolean isRaw();
 
   @Override
@@ -76,10 +77,6 @@ public abstract class RegularTypeDescriptor extends TypeDescriptor {
   @Override
   public String getPackageName() {
     return Joiner.on(".").join(getPackageComponents());
-  }
-
-  public TypeDescriptor getForArray(int dimensions) {
-    return getInterner().intern(new AutoValue_ArrayTypeDescriptor(dimensions, this));
   }
 
   @Override

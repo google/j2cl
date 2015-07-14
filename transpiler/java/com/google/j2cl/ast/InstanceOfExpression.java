@@ -50,6 +50,11 @@ public class InstanceOfExpression extends Expression {
   }
 
   @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return TypeDescriptor.BOOLEAN_TYPE_DESCRIPTOR;
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_InstanceOfExpression.visit(processor, this);
   }

@@ -23,15 +23,21 @@ import com.google.j2cl.ast.processors.Visitable;
  */
 @Visitable
 public class BinaryExpression extends Expression {
+  private TypeDescriptor typeDescriptor;
   @Visitable Expression leftOperand;
   private BinaryOperator operator;
   @Visitable Expression rightOperand;
 
   public BinaryExpression(
-      Expression leftOperand, BinaryOperator operator, Expression rightOperand) {
+      TypeDescriptor typeDescriptor,
+      Expression leftOperand,
+      BinaryOperator operator,
+      Expression rightOperand) {
+    Preconditions.checkNotNull(typeDescriptor);
     Preconditions.checkNotNull(leftOperand);
     Preconditions.checkNotNull(operator);
     Preconditions.checkNotNull(rightOperand);
+    this.typeDescriptor = typeDescriptor;
     this.leftOperand = leftOperand;
     this.operator = operator;
     this.rightOperand = rightOperand;
@@ -59,6 +65,11 @@ public class BinaryExpression extends Expression {
 
   public void setRightOperand(Expression rightOperand) {
     this.rightOperand = rightOperand;
+  }
+
+  @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return typeDescriptor;
   }
 
   @Override

@@ -39,6 +39,11 @@ public class VariableReference extends Expression {
   }
 
   @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return target.getTypeDescriptor();
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_VariableReference.visit(processor, this);
   }

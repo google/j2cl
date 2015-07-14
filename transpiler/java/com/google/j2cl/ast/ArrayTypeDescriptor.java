@@ -33,6 +33,11 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   public abstract TypeDescriptor getLeafTypeDescriptor();
 
   @Override
+  public TypeDescriptor getComponentTypeDescriptor() {
+    return getLeafTypeDescriptor().getForArray(getDimensions() - 1);
+  }
+
+  @Override
   public String getBinaryName() {
     return getPrefix() + getLeafTypeDescriptor().getBinaryName();
   }

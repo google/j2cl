@@ -29,6 +29,8 @@ public class ArrayAccess extends Expression {
   public ArrayAccess(Expression arrayExpression, Expression indexExpression) {
     Preconditions.checkNotNull(arrayExpression);
     Preconditions.checkNotNull(indexExpression);
+    Preconditions.checkArgument(
+        arrayExpression.getTypeDescriptor() instanceof ArrayTypeDescriptor);
     this.arrayExpression = arrayExpression;
     this.indexExpression = indexExpression;
   }
@@ -39,6 +41,13 @@ public class ArrayAccess extends Expression {
 
   public Expression getIndexExpression() {
     return indexExpression;
+  }
+
+  @Override
+  public TypeDescriptor getTypeDescriptor() {
+    ArrayTypeDescriptor arrayTypeDescriptor =
+        (ArrayTypeDescriptor) arrayExpression.getTypeDescriptor();
+    return arrayTypeDescriptor.getComponentTypeDescriptor();
   }
 
   @Override

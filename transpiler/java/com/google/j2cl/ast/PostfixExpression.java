@@ -23,11 +23,15 @@ import com.google.j2cl.ast.processors.Visitable;
  */
 @Visitable
 public class PostfixExpression extends Expression {
+  private TypeDescriptor typeDescriptor;
   @Visitable Expression operand;
   private PostfixOperator operator;
 
-  public PostfixExpression(Expression operand, PostfixOperator operator) {
+  public PostfixExpression(
+      TypeDescriptor typeDescriptor, Expression operand, PostfixOperator operator) {
+    Preconditions.checkNotNull(typeDescriptor);
     Preconditions.checkNotNull(operand);
+    this.typeDescriptor = typeDescriptor;
     this.operand = operand;
     this.operator = operator;
   }
@@ -46,6 +50,11 @@ public class PostfixExpression extends Expression {
 
   public void setOperator(PostfixOperator operator) {
     this.operator = operator;
+  }
+
+  @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return typeDescriptor;
   }
 
   @Override

@@ -31,6 +31,7 @@ import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
+import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableReference;
@@ -89,7 +90,8 @@ public class NormalizeLocalClassConstructorsVisitor extends AbstractRewriter {
         || !parameterByFieldForCaptures.containsKey(fieldAccess.getTarget())) {
       return fieldAccess;
     }
-    return new VariableReference(parameterByFieldForCaptures.get(fieldAccess.getTarget()));
+    return new VariableReference(
+        parameterByFieldForCaptures.get(fieldAccess.getTarget()));
   }
 
   private void normalizeLocalClassConstructors(CompilationUnit compilationUnit) {
@@ -124,12 +126,17 @@ public class NormalizeLocalClassConstructorsVisitor extends AbstractRewriter {
               .getEnclosingClassTypeDescriptor()
               .equals(getCurrentJavaType().getDescriptor())) { // this() call
         // add argument (reference to outer parameter) to this() call.
-        constructorCall.getArguments().add(new VariableReference(parameter));
+        constructorCall
+            .getArguments()
+            .add(new VariableReference(parameter));
       } else {
         // add initializer.
         BinaryExpression initializer =
             new BinaryExpression(
-                new FieldAccess(new ThisReference(null), field.getDescriptor()),
+                field.getDescriptor().getTypeDescriptor(),
+                new FieldAccess(
+                    new ThisReference((RegularTypeDescriptor) getCurrentJavaType().getDescriptor()),
+                    field.getDescriptor()),
                 BinaryOperator.ASSIGN,
                 new VariableReference(parameter));
         method.getBody().getStatements().add(i + 1, new ExpressionStatement(initializer));

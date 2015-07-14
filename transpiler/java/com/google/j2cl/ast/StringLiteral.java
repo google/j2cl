@@ -36,4 +36,9 @@ public class StringLiteral extends Expression {
   public Node accept(Processor processor) {
     return Visitor_StringLiteral.visit(processor, this);
   }
+
+  @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return TypeDescriptor.STRING_TYPE_DESCRIPTOR;
+  }
 }

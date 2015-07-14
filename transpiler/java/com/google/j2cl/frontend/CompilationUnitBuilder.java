@@ -24,6 +24,7 @@ import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.ASTUtils;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
+import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
@@ -56,6 +57,7 @@ import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.ParenthesizedExpression;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PrefixExpression;
+import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.StringLiteral;
@@ -111,6 +113,7 @@ public class CompilationUnitBuilder {
     private CompilationUnit j2clCompilationUnit;
 
     private void pushType(JavaType type) {
+      Preconditions.checkArgument(type.getDescriptor() instanceof RegularTypeDescriptor);
       typeStack.add(type);
       currentType = type;
     }
@@ -250,16 +253,15 @@ public class CompilationUnitBuilder {
       ArrayLiteral arrayLiteral =
           node.getInitializer() == null ? null : convert(node.getInitializer());
 
-      ITypeBinding leafTypeBinding = arrayType.getElementType().resolveBinding();
-      return new NewArray(
-          dimensionExpressions,
-          JdtUtils.createTypeDescriptor(leafTypeBinding, compilationUnitNameLocator),
-          arrayLiteral);
+      ArrayTypeDescriptor typeDescriptor =
+          (ArrayTypeDescriptor) createTypeDescriptor(node.resolveTypeBinding());
+      return new NewArray(typeDescriptor, dimensionExpressions, arrayLiteral);
     }
 
     @SuppressWarnings({"cast", "unchecked"})
     private ArrayLiteral convert(org.eclipse.jdt.core.dom.ArrayInitializer node) {
       return new ArrayLiteral(
+          createTypeDescriptor(node.resolveTypeBinding()),
           convert((List<org.eclipse.jdt.core.dom.Expression>) node.expressions()));
     }
 
@@ -269,9 +271,7 @@ public class CompilationUnitBuilder {
 
     private CastExpression convert(org.eclipse.jdt.core.dom.CastExpression node) {
       Expression expression = convert(node.getExpression());
-      TypeDescriptor castTypeDescriptor =
-          JdtUtils.createTypeDescriptor(
-              node.getType().resolveBinding(), compilationUnitNameLocator);
+      TypeDescriptor castTypeDescriptor = createTypeDescriptor(node.getType().resolveBinding());
       return new CastExpression(expression, castTypeDescriptor);
     }
 
@@ -299,13 +299,14 @@ public class CompilationUnitBuilder {
           // corresponding field in current type as an argument.
           newInstance.addExtraArgument(
               new FieldAccess(
-                  new ThisReference(null),
+                  new ThisReference((RegularTypeDescriptor) currentType.getDescriptor()),
                   ASTUtils.createFieldDescriptorForCapture(
                       currentType.getDescriptor(), capturedVariable)));
         } else {
           // otherwise, the captured variable is in the scope of the current type, so pass the
           // variable directly as an argument.
-          newInstance.addExtraArgument(new VariableReference(capturedVariable));
+          newInstance.addExtraArgument(
+              new VariableReference(capturedVariable));
         }
       }
       return newInstance;
@@ -381,7 +382,8 @@ public class CompilationUnitBuilder {
           fragments) {
         variableDeclarations.add(convert(variableDeclarationFragment));
       }
-      return new VariableDeclarationExpression(variableDeclarations);
+      return new VariableDeclarationExpression(
+          variableDeclarations);
     }
 
     private List<Expression> convert(List<org.eclipse.jdt.core.dom.Expression> nodes) {
@@ -401,7 +403,11 @@ public class CompilationUnitBuilder {
       Expression conditionExpression = convert(jdtConditionalExpression.getExpression());
       Expression trueExpression = convert(jdtConditionalExpression.getThenExpression());
       Expression falseExpression = convert(jdtConditionalExpression.getElseExpression());
-      return new TernaryExpression(conditionExpression, trueExpression, falseExpression);
+      return new TernaryExpression(
+          createTypeDescriptor(jdtConditionalExpression.resolveTypeBinding()),
+          conditionExpression,
+          trueExpression,
+          falseExpression);
     }
 
     private Collection<Statement> convert(org.eclipse.jdt.core.dom.Statement node) {
@@ -536,7 +542,8 @@ public class CompilationUnitBuilder {
       Expression leftHandSide = convert(node.getLeftHandSide());
       Expression rightHandSide = convert(node.getRightHandSide());
       BinaryOperator operator = JdtUtils.getBinaryOperator(node.getOperator());
-      return new BinaryExpression(leftHandSide, operator, rightHandSide);
+      return new BinaryExpression(
+          createTypeDescriptor(node.resolveTypeBinding()), leftHandSide, operator, rightHandSide);
     }
 
     private Block convert(org.eclipse.jdt.core.dom.Block node) {
@@ -579,12 +586,18 @@ public class CompilationUnitBuilder {
       Expression leftOperand = convert(node.getLeftOperand());
       Expression rightOperand = convert(node.getRightOperand());
       BinaryOperator operator = JdtUtils.getBinaryOperator(node.getOperator());
-      BinaryExpression binaryExpression = new BinaryExpression(leftOperand, operator, rightOperand);
+      BinaryExpression binaryExpression =
+          new BinaryExpression(
+              createTypeDescriptor(node.resolveTypeBinding()), leftOperand, operator, rightOperand);
       for (Object object : node.extendedOperands()) {
         org.eclipse.jdt.core.dom.Expression extendedOperand =
             (org.eclipse.jdt.core.dom.Expression) object;
         binaryExpression =
-            new BinaryExpression(binaryExpression, operator, convert(extendedOperand));
+            new BinaryExpression(
+                createTypeDescriptor(node.resolveTypeBinding()),
+                binaryExpression,
+                operator,
+                convert(extendedOperand));
       }
       return binaryExpression;
     }
@@ -610,8 +623,7 @@ public class CompilationUnitBuilder {
       Expression originalQualifier =
           node.getExpression() == null ? null : convert(node.getExpression());
       String methodName = methodBinding.getName();
-      TypeDescriptor returnTypeDescriptor =
-          JdtUtils.createTypeDescriptor(methodBinding.getReturnType(), compilationUnitNameLocator);
+      TypeDescriptor returnTypeDescriptor = createTypeDescriptor(methodBinding.getReturnType());
       int originalParameterCount = methodBinding.getParameterTypes().length;
 
       TypeDescriptor[] parameterTypeDescriptors = new TypeDescriptor[originalParameterCount + 1];
@@ -619,8 +631,7 @@ public class CompilationUnitBuilder {
       parameterTypeDescriptors[0] = TypeDescriptor.OBJECT_TYPE_DESCRIPTOR;
       for (int i = 0; i < originalParameterCount; i++) {
         parameterTypeDescriptors[i + 1] =
-            JdtUtils.createTypeDescriptor(
-                methodBinding.getParameterTypes()[i], compilationUnitNameLocator);
+            createTypeDescriptor(methodBinding.getParameterTypes()[i]);
       }
       MethodDescriptor methodDescriptor =
           MethodDescriptor.create(
@@ -646,7 +657,7 @@ public class CompilationUnitBuilder {
     }
 
     private NumberLiteral convert(org.eclipse.jdt.core.dom.NumberLiteral node) {
-      return new NumberLiteral(node.getToken());
+      return new NumberLiteral(createTypeDescriptor(node.resolveTypeBinding()), node.getToken());
     }
 
     private ParenthesizedExpression convert(org.eclipse.jdt.core.dom.ParenthesizedExpression node) {
@@ -655,12 +666,16 @@ public class CompilationUnitBuilder {
 
     private PostfixExpression convert(org.eclipse.jdt.core.dom.PostfixExpression node) {
       return new PostfixExpression(
-          convert(node.getOperand()), JdtUtils.getPostfixOperator(node.getOperator()));
+          createTypeDescriptor(node.resolveTypeBinding()),
+          convert(node.getOperand()),
+          JdtUtils.getPostfixOperator(node.getOperator()));
     }
 
     private PrefixExpression convert(org.eclipse.jdt.core.dom.PrefixExpression node) {
       return new PrefixExpression(
-          convert(node.getOperand()), JdtUtils.getPrefixOperator(node.getOperator()));
+          createTypeDescriptor(node.resolveTypeBinding()),
+          convert(node.getOperand()),
+          JdtUtils.getPrefixOperator(node.getOperator()));
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.QualifiedName node) {
@@ -701,9 +716,7 @@ public class CompilationUnitBuilder {
           Variable variable = variableByJdtBinding.get(variableBinding);
           // the innermost type that this variable are declared.
           TypeDescriptor enclosingTypeDescriptor =
-              JdtUtils.createTypeDescriptor(
-                  variableBinding.getDeclaringMethod().getDeclaringClass(),
-                  compilationUnitNameLocator);
+              createTypeDescriptor(variableBinding.getDeclaringMethod().getDeclaringClass());
           TypeDescriptor currentTypeDescriptor = currentType.getDescriptor();
           if (!enclosingTypeDescriptor.equals(currentTypeDescriptor)) {
             // the variable is declared outside current type, i.e. a captured variable to current
@@ -719,7 +732,9 @@ public class CompilationUnitBuilder {
             // field created for the captured variable.
             FieldDescriptor fieldDescriptor =
                 ASTUtils.createFieldDescriptorForCapture(currentTypeDescriptor, variable);
-            return new FieldAccess(new ThisReference(null), fieldDescriptor);
+            return new FieldAccess(
+                new ThisReference((RegularTypeDescriptor) currentType.getDescriptor()),
+                fieldDescriptor);
           } else {
             return new VariableReference(variable);
           }
@@ -738,8 +753,7 @@ public class CompilationUnitBuilder {
       TypeDescriptor typeDescriptor =
           node.getType() instanceof org.eclipse.jdt.core.dom.UnionType
               ? convert((org.eclipse.jdt.core.dom.UnionType) node.getType())
-              : JdtUtils.createTypeDescriptor(
-                  node.getType().resolveBinding(), compilationUnitNameLocator);
+              : createTypeDescriptor(node.getType().resolveBinding());
       Variable variable = new Variable(name, typeDescriptor, false, false);
       variableByJdtBinding.put(node.resolveBinding(), variable);
       return variable;
@@ -761,17 +775,17 @@ public class CompilationUnitBuilder {
     private ThisReference convert(org.eclipse.jdt.core.dom.ThisExpression node) {
       Preconditions.checkState(
           node.getQualifier() == null, "Qualified this expression not yet implemented");
-      return new ThisReference(null);
+      TypeDescriptor thisTypeDescriptor = createTypeDescriptor(node.resolveTypeBinding());
+      Preconditions.checkState(thisTypeDescriptor instanceof RegularTypeDescriptor);
+      return new ThisReference((RegularTypeDescriptor) thisTypeDescriptor);
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.TypeLiteral typeLiteral) {
       ITypeBinding typeBinding = typeLiteral.getType().resolveBinding();
 
-      TypeDescriptor literalTypeDescriptor =
-          JdtUtils.createTypeDescriptor(typeBinding, compilationUnitNameLocator);
+      TypeDescriptor literalTypeDescriptor = createTypeDescriptor(typeBinding);
       TypeDescriptor javaLangClassTypeDescriptor =
-          JdtUtils.createTypeDescriptor(
-              typeLiteral.resolveTypeBinding(), compilationUnitNameLocator);
+          createTypeDescriptor(typeLiteral.resolveTypeBinding());
       if (typeBinding.getDimensions() == 0) {
         // <ClassLiteralClass>.$class
         FieldDescriptor classFieldDescriptor =
@@ -795,7 +809,9 @@ public class CompilationUnitBuilder {
           new FieldAccess(null, classFieldDescriptor),
           forArrayMethodDescriptor,
           ImmutableList.<Expression>of(
-              new NumberLiteral(String.valueOf(typeBinding.getDimensions()))));
+              new NumberLiteral(
+                  TypeDescriptor.INT_TYPE_DESCRIPTOR,
+                  String.valueOf(typeBinding.getDimensions()))));
     }
 
     private ThrowStatement convert(org.eclipse.jdt.core.dom.ThrowStatement node) {
@@ -816,7 +832,7 @@ public class CompilationUnitBuilder {
       List<TypeDescriptor> types = new ArrayList<>();
       for (Object object : node.types()) {
         org.eclipse.jdt.core.dom.Type type = (org.eclipse.jdt.core.dom.Type) object;
-        types.add(JdtUtils.createTypeDescriptor(type.resolveBinding(), compilationUnitNameLocator));
+        types.add(createTypeDescriptor(type.resolveBinding()));
       }
       return UnionTypeDescriptor.create(types);
     }

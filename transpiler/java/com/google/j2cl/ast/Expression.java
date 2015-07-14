@@ -23,6 +23,12 @@ import com.google.j2cl.ast.processors.Visitable;
 @Visitable
 public abstract class Expression extends Node {
 
+  /**
+   * Returns the type descriptor of the value that either this expression is (in the case of a
+   * literal) or the value returned by this expression (in the case of computation).
+   */
+  public abstract TypeDescriptor getTypeDescriptor();
+
   @Override
   public Node accept(Processor processor) {
     return Visitor_Expression.visit(processor, this);

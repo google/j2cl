@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.frontend;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.FieldDescriptor;
@@ -75,6 +76,31 @@ public class JdtUtils {
     // TODO(rluble): Add support for generics.
     if (typeBinding == null) {
       return null;
+    }
+    if (typeBinding.isPrimitive()) {
+      switch (typeBinding.getName()) {
+        case TypeDescriptor.BOOLEAN_TYPE_NAME:
+          return TypeDescriptor.BOOLEAN_TYPE_DESCRIPTOR;
+        case TypeDescriptor.BYTE_TYPE_NAME:
+          return TypeDescriptor.BYTE_TYPE_DESCRIPTOR;
+        case TypeDescriptor.SHORT_TYPE_NAME:
+          return TypeDescriptor.SHORT_TYPE_DESCRIPTOR;
+        case TypeDescriptor.INT_TYPE_NAME:
+          return TypeDescriptor.INT_TYPE_DESCRIPTOR;
+        case TypeDescriptor.LONG_TYPE_NAME:
+          return TypeDescriptor.LONG_TYPE_DESCRIPTOR;
+        case TypeDescriptor.FLOAT_TYPE_NAME:
+          return TypeDescriptor.FLOAT_TYPE_DESCRIPTOR;
+        case TypeDescriptor.DOUBLE_TYPE_NAME:
+          return TypeDescriptor.DOUBLE_TYPE_DESCRIPTOR;
+        case TypeDescriptor.CHAR_TYPE_NAME:
+          return TypeDescriptor.CHAR_TYPE_DESCRIPTOR;
+        case TypeDescriptor.VOID_TYPE_NAME:
+          return TypeDescriptor.VOID_TYPE_DESCRIPTOR;
+        default:
+          Preconditions.checkArgument(
+              false, "Primitive type name '" + typeBinding.getName() + "' is unrecognized.");
+      }
     }
     List<String> nameComponents = new LinkedList<>();
     List<String> packageComponents = new LinkedList<>();

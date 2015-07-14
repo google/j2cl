@@ -28,18 +28,21 @@ import javax.annotation.Nullable;
  */
 @Visitable
 public class NewArray extends Expression {
+  @Visitable ArrayTypeDescriptor typeDescriptor;
   @Visitable List<Expression> dimensionExpressions = new ArrayList<>();
-  @Visitable TypeDescriptor leafTypeDescriptor;
   @Nullable @Visitable ArrayLiteral arrayLiteral;
 
   public NewArray(
+      ArrayTypeDescriptor typeDescriptor,
       List<Expression> dimensionExpressions,
-      TypeDescriptor leafTypeDescriptor,
       ArrayLiteral arrayLiteral) {
+    Preconditions.checkNotNull(typeDescriptor);
     Preconditions.checkNotNull(dimensionExpressions);
-    Preconditions.checkNotNull(leafTypeDescriptor);
+    Preconditions.checkState(typeDescriptor.getDimensions() == dimensionExpressions.size());
+    Preconditions.checkState(
+        arrayLiteral == null || arrayLiteral.getTypeDescriptor() == typeDescriptor);
+    this.typeDescriptor = typeDescriptor;
     this.dimensionExpressions.addAll(dimensionExpressions);
-    this.leafTypeDescriptor = leafTypeDescriptor;
     this.arrayLiteral = arrayLiteral;
   }
 
@@ -52,7 +55,12 @@ public class NewArray extends Expression {
   }
 
   public TypeDescriptor getLeafTypeDescriptor() {
-    return leafTypeDescriptor;
+    return typeDescriptor.getLeafTypeDescriptor();
+  }
+
+  @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return typeDescriptor;
   }
 
   @Override

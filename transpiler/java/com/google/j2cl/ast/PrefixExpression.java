@@ -23,11 +23,15 @@ import com.google.j2cl.ast.processors.Visitable;
  */
 @Visitable
 public class PrefixExpression extends Expression {
+  private TypeDescriptor typeDescriptor;
   @Visitable Expression operand;
   private PrefixOperator operator;
 
-  public PrefixExpression(Expression operand, PrefixOperator operator) {
+  public PrefixExpression(
+      TypeDescriptor typeDescriptor, Expression operand, PrefixOperator operator) {
+    Preconditions.checkNotNull(typeDescriptor);
     Preconditions.checkNotNull(operand);
+    this.typeDescriptor = typeDescriptor;
     this.operand = operand;
     this.operator = operator;
   }
@@ -46,6 +50,11 @@ public class PrefixExpression extends Expression {
 
   public void setOperator(PrefixOperator operator) {
     this.operator = operator;
+  }
+
+  @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return typeDescriptor;
   }
 
   @Override

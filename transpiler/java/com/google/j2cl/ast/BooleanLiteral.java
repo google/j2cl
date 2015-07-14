@@ -35,6 +35,11 @@ public class BooleanLiteral extends Expression {
   }
 
   @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return TypeDescriptor.BOOLEAN_TYPE_DESCRIPTOR;
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_BooleanLiteral.visit(processor, this);
   }

@@ -23,15 +23,21 @@ import com.google.j2cl.ast.processors.Visitable;
  */
 @Visitable
 public class TernaryExpression extends Expression {
+  private TypeDescriptor typeDescriptor;
   @Visitable Expression conditionExpression;
   @Visitable Expression trueExpression;
   @Visitable Expression falseExpression;
 
   public TernaryExpression(
-      Expression conditionExpression, Expression trueExpression, Expression falseExpression) {
+      TypeDescriptor typeDescriptor,
+      Expression conditionExpression,
+      Expression trueExpression,
+      Expression falseExpression) {
+    Preconditions.checkNotNull(typeDescriptor);
     Preconditions.checkNotNull(conditionExpression);
     Preconditions.checkNotNull(trueExpression);
     Preconditions.checkNotNull(falseExpression);
+    this.typeDescriptor = typeDescriptor;
     this.conditionExpression = conditionExpression;
     this.trueExpression = trueExpression;
     this.falseExpression = falseExpression;
@@ -47,6 +53,11 @@ public class TernaryExpression extends Expression {
 
   public Expression getFalseExpression() {
     return falseExpression;
+  }
+
+  @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return typeDescriptor;
   }
 
   @Override

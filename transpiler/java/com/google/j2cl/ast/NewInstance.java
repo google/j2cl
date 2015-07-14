@@ -73,6 +73,11 @@ public class NewInstance extends Expression {
   }
 
   @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return constructorMethodDescriptor.getEnclosingClassTypeDescriptor();
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_NewInstance.visit(processor, this);
   }
