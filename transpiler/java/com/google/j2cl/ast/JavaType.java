@@ -202,6 +202,18 @@ public class JavaType extends Node {
             }));
   }
 
+  public List<Method> getConstructors() {
+    return Lists.newArrayList(
+        Iterables.filter(
+            getMethods(),
+            new Predicate<Method>() {
+              @Override
+              public boolean apply(Method method) {
+                return method.isConstructor();
+              }
+            }));
+  }
+
   @Override
   public Node accept(Processor processor) {
     return Visitor_JavaType.visit(processor, this);

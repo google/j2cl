@@ -214,6 +214,17 @@ public class CompilationUnitBuilder {
             synthesizeDefaultConstructor(
                 currentType.getDescriptor(), superclassBinding, currentType.getVisibility()));
       }
+
+      // Add wrapper function to its enclosing class for each constructor.
+      if (JdtUtils.isInstanceMemberClass(typeBinding)) {
+        Preconditions.checkArgument(typeStack.size() >= 2);
+        JavaType outerclassType = typeStack.get(typeStack.size() - 2);
+        for (Method innerclassConstructor : currentType.getConstructors()) {
+          outerclassType.addMethod(
+              ASTUtils.createMethodForInnerClassCreation(
+                  outerclassType.getDescriptor(), innerclassConstructor));
+        }
+      }
       popType();
       return types;
     }
@@ -359,25 +370,28 @@ public class CompilationUnitBuilder {
       return new CharacterLiteral(literal.charValue(), literal.getEscapedValue());
     }
 
-    private NewInstance convert(org.eclipse.jdt.core.dom.ClassInstanceCreation expression) {
+    private Expression convert(org.eclipse.jdt.core.dom.ClassInstanceCreation expression) {
       Expression qualifier =
           expression.getExpression() == null ? null : convert(expression.getExpression());
       IMethodBinding constructorBinding = expression.resolveConstructorBinding();
-      // If the constructor is an instance nested class, add explicit qualifier.
-      if (JdtUtils.isInstanceNestedClass(constructorBinding.getDeclaringClass())
-          && qualifier == null) {
-        qualifier =
-            new ThisReference(
-                (RegularTypeDescriptor)
-                    createTypeDescriptor(constructorBinding.getDeclaringClass()));
-      }
       MethodDescriptor constructorMethodDescriptor =
           JdtUtils.createMethodDescriptor(constructorBinding, compilationUnitNameLocator);
       List<Expression> arguments = new ArrayList<>();
       for (Object argument : expression.arguments()) {
         arguments.add(convert((org.eclipse.jdt.core.dom.Expression) argument));
       }
-      return new NewInstance(qualifier, constructorMethodDescriptor, arguments);
+      if (JdtUtils.isInstanceMemberClass(constructorBinding.getDeclaringClass())) {
+        // outerclass.new InnerClass() => outerClass.$create_InnerClass();
+        TypeDescriptor outerclassTypeDescriptor =
+            createTypeDescriptor(constructorBinding.getDeclaringClass());
+        return new MethodCall(
+            qualifier,
+            ASTUtils.createMethodDescriptorForInnerClassCreation(
+                outerclassTypeDescriptor, constructorMethodDescriptor),
+            arguments);
+      } else {
+        return new NewInstance(qualifier, constructorMethodDescriptor, arguments);
+      }
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.Expression expression) {

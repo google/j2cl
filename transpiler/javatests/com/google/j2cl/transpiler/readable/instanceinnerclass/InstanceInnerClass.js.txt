@@ -33,11 +33,19 @@ class InstanceInnerClass extends Object {
   }
 
   /**
+   * @return {InstanceInnerClass$InnerClass}
+   * @public
+   */
+  m_$create_InstanceInnerClass$InnerClass() {
+    return InstanceInnerClass$InnerClass.$create(this);
+  }
+
+  /**
    * @return {void}
    * @public
    */
   m_test() {
-    InstanceInnerClass$InnerClass.$create(InstanceInnerClass.$create());
+    InstanceInnerClass.$create().m_$create_InstanceInnerClass$InnerClass();
   }
 
   /**

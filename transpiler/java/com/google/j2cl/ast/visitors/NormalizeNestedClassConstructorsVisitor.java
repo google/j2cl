@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.ASTUtils;
@@ -85,15 +86,21 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
 
   @Override
   public Node rewriteNewInstance(NewInstance newInstance) {
+    TypeDescriptor typeDescriptor =
+        newInstance.getConstructorMethodDescriptor().getEnclosingClassTypeDescriptor();
+    JavaType type = javaTypeByDescriptor.get(typeDescriptor);
+    if (type == null || type.isStatic() || type.getEnclosingTypeDescriptor() == null) {
+      return newInstance;
+    }
     List<Expression> arguments = new ArrayList<>(newInstance.getArguments());
-    arguments.addAll(
-        collectArgumentsForCaptures(
-            newInstance.getConstructorMethodDescriptor().getEnclosingClassTypeDescriptor()));
-    // outerClass.new InnerClass() => InnerClass.$create(outerClass);
-    if (newInstance.getQualifier() != null) {
-      arguments.add(newInstance.getQualifier());
+    arguments.addAll(collectArgumentsForCaptures(typeDescriptor));
+    // add 'this' as the last argument to the constructor of a local class.
+    if (type.isLocal()) {
+      arguments.add(
+          new ThisReference((RegularTypeDescriptor) getCurrentJavaType().getDescriptor()));
     }
     MethodDescriptor target = newInstance.getConstructorMethodDescriptor();
+    Preconditions.checkArgument(newInstance.getQualifier() == null);
     return new NewInstance(null, target, arguments);
   }
 

@@ -326,6 +326,10 @@ public class JdtUtils {
     return typeBinding.getDeclaringClass() != null && !isStatic(typeBinding.getModifiers());
   }
 
+  static boolean isInstanceMemberClass(ITypeBinding typeBinding) {
+    return typeBinding.isMember() && !isStatic(typeBinding.getModifiers());
+  }
+
   static boolean isOverride(IMethodBinding overridingMethod) {
     ITypeBinding type = overridingMethod.getDeclaringClass();
 

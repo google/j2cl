@@ -33,6 +33,23 @@ class InnerClassWithConstructor extends Object {
   }
 
   /**
+   * @param {number} b
+   * @return {InnerClassWithConstructor$InnerClass}
+   * @public
+   */
+  m_$create_InnerClassWithConstructor$InnerClass__int(b) {
+    return InnerClassWithConstructor$InnerClass.$create__int(b, this);
+  }
+
+  /**
+   * @return {InnerClassWithConstructor$InnerClass}
+   * @public
+   */
+  m_$create_InnerClassWithConstructor$InnerClass() {
+    return InnerClassWithConstructor$InnerClass.$create(this);
+  }
+
+  /**
    * A particular Java constructor as a factory method.
    * @return {!InnerClassWithConstructor}
    * @public

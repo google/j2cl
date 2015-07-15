@@ -16,6 +16,10 @@
 package com.google.j2cl.ast;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Iterables;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Utility functions to manipulate J2CL AST.
@@ -139,5 +143,53 @@ public class ASTUtils {
         field.getDescriptor().getTypeDescriptor(),
         true,
         true);
+  }
+
+  /**
+   * Returns the MethodDescriptor for the wrapper function in outer class that creates its
+   * inner class by calling the corresponding inner class constructor.
+   */
+  public static MethodDescriptor createMethodDescriptorForInnerClassCreation(
+      TypeDescriptor outerclassTypeDescriptor, MethodDescriptor innerclassConstructorDescriptor) {
+    boolean isStatic = false;
+    String methodName = "$create_" + innerclassConstructorDescriptor.getMethodName();
+    boolean isConstructor = false;
+    TypeDescriptor returnTypeDescriptor =
+        innerclassConstructorDescriptor.getEnclosingClassTypeDescriptor();
+    return MethodDescriptor.create(
+        isStatic,
+        innerclassConstructorDescriptor.getVisibility(),
+        outerclassTypeDescriptor,
+        methodName,
+        isConstructor,
+        returnTypeDescriptor,
+        Iterables.toArray(
+            innerclassConstructorDescriptor.getParameterTypeDescriptors(), TypeDescriptor.class));
+  }
+
+  /**
+   * Returns the Method for the wrapper function in outer class that creates its inner class
+   * by calling the corresponding inner class constructor.
+   */
+  public static Method createMethodForInnerClassCreation(
+      TypeDescriptor outerclassTypeDescriptor, Method innerclassConstructor) {
+    MethodDescriptor innerclassConstructorDescriptor = innerclassConstructor.getDescriptor();
+    MethodDescriptor methodDescriptor =
+        createMethodDescriptorForInnerClassCreation(
+            outerclassTypeDescriptor, innerclassConstructorDescriptor);
+
+    // create arguments.
+    List<Expression> arguments = new ArrayList<>();
+    for (Variable parameter : innerclassConstructor.getParameters()) {
+      arguments.add(new VariableReference(parameter));
+    }
+    // adds 'this' as the last argument.
+    arguments.add(new ThisReference((RegularTypeDescriptor) outerclassTypeDescriptor));
+
+    Expression newInnerClass = new NewInstance(null, innerclassConstructorDescriptor, arguments);
+    List<Statement> statements = new ArrayList<>();
+    statements.add(new ReturnStatement(newInnerClass)); // return new InnerClass();
+    Block body = new Block(statements);
+    return new Method(methodDescriptor, innerclassConstructor.getParameters(), body);
   }
 }

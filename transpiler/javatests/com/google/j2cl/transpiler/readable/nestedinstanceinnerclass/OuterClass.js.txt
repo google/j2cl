@@ -25,12 +25,21 @@ class OuterClass extends Object {
   }
 
   /**
+   * @return {OuterClass$InnerClass}
+   * @public
+   */
+  m_$create_OuterClass$InnerClass() {
+    return OuterClass$InnerClass.$create(this);
+  }
+
+  /**
    * @return {void}
    * @public
    */
   m_test() {
-    OuterClass$InnerClass$InnerInnerClass.$create(
-        OuterClass$InnerClass.$create(OuterClass.$create()));
+    OuterClass.$create()
+        .m_$create_OuterClass$InnerClass()
+        .m_$create_OuterClass$InnerClass$InnerInnerClass();
   }
 
   /**
@@ -118,6 +127,14 @@ class OuterClass$InnerClass extends Object {
    * @private
    */
   $init__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass$InnerClass() {
+  }
+
+  /**
+   * @return {OuterClass$InnerClass$InnerInnerClass}
+   * @public
+   */
+  m_$create_OuterClass$InnerClass$InnerInnerClass() {
+    return OuterClass$InnerClass$InnerInnerClass.$create(this);
   }
 
   /**
