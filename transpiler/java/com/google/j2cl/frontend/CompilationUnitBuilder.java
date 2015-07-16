@@ -728,7 +728,8 @@ public class CompilationUnitBuilder {
 
     private NumberLiteral convert(org.eclipse.jdt.core.dom.NumberLiteral literal) {
       return new NumberLiteral(
-          createTypeDescriptor(literal.resolveTypeBinding()), literal.getToken());
+          createTypeDescriptor(literal.resolveTypeBinding()),
+          (Number) literal.resolveConstantExpressionValue());
     }
 
     private ParenthesizedExpression convert(
@@ -942,9 +943,7 @@ public class CompilationUnitBuilder {
           new FieldAccess(null, classFieldDescriptor),
           forArrayMethodDescriptor,
           ImmutableList.<Expression>of(
-              new NumberLiteral(
-                  TypeDescriptor.INT_TYPE_DESCRIPTOR,
-                  String.valueOf(typeBinding.getDimensions()))));
+              new NumberLiteral(TypeDescriptor.INT_TYPE_DESCRIPTOR, typeBinding.getDimensions())));
     }
 
     private ThrowStatement convert(org.eclipse.jdt.core.dom.ThrowStatement statement) {

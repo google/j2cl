@@ -1,0 +1,156 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/simplelongs/SimpleLongs.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.simplelongs.SimpleLongsModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Long = goog.require('nativebootstrap.LongsModule').Long;
+var Longs = goog.require('nativebootstrap.LongsModule').Longs;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+var $long = goog.require('vmbootstrap.PrimitivesModule').$long;
+
+
+class SimpleLongs extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {!Long}
+     */
+    this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
+        Longs.$fromInt(0);
+    /**
+     * @private {number}
+     */
+    this.f_sideEffect__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs_ =
+        0;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs() {}
+
+  /**
+   * @return {SimpleLongs}
+   * @public
+   */
+  m_getWithSideEffect() {
+    this.f_sideEffect__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs_++;
+    return this;
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    let a = Longs.$fromInt(0);
+    a = Longs.$negate(Longs.$fromInt(100000));
+    a = Longs.$fromInt(100000);
+    let b = Longs.$negate(Longs.$fromString('2147483648'));
+    b = Longs.$fromString('2147483648');
+    b = Longs.$fromString('-9223372036854775808');
+    b = Longs.$fromString('9223372036854775807');
+    let c = Longs.$plus(a, b);
+    c = Longs.$divide(a, b);
+    let e = (a = Longs.$increment(a));
+    e = (this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
+             Longs.$increment(
+                 this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs));
+    e = (window.$q = this.m_getWithSideEffect(),
+         window.$q
+             .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
+             Longs.$increment(
+                 window.$q
+                     .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs));
+    let f = (window.$v = a, a = Longs.$increment(a), window.$v);
+    f = (window.$v =
+             this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
+         this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
+             Longs.$increment(
+                 this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs),
+         window.$v);
+    f = (window.$q = this.m_getWithSideEffect(),
+         window.$v =
+             window.$q
+                 .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
+         window.$q
+             .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
+             Longs.$increment(
+                 window.$q
+                     .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs),
+         window.$v);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!SimpleLongs}
+   * @public
+   */
+  static $create() {
+    SimpleLongs.$clinit();
+    var instance = new SimpleLongs;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof SimpleLongs; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, SimpleLongs);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+SimpleLongs.$class = Class.$createForClass(
+    Util.$generateId('SimpleLongs'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs'));
+
+/**
+ * Export class.
+ */
+exports.SimpleLongs = SimpleLongs;

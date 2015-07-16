@@ -46,11 +46,11 @@ class Longs {
   static $and(leftLong, rightLong) { return leftLong.and(rightLong); }
 
   /**
-   * @param {!Long} valueLong The value to complement.
-   * @return {!Long} The bitwise complement of the given value.
+   * @param {!Long} valueLong The value to bitwise not.
+   * @return {!Long} The bitwise not of the given value.
    * @public
    */
-  static $complement(valueLong) { return valueLong.not(); }
+  static $not(valueLong) { return valueLong.not(); }
 
   /**
    * @param {!Long} valueLong The value to decrement.
@@ -223,3 +223,9 @@ class Longs {
  * Exported class.
  */
 exports.Longs = Longs;
+
+
+/**
+ * Exported class.
+ */
+exports.Long = Long;

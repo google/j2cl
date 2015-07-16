@@ -22,9 +22,13 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.Method;
+import com.google.j2cl.ast.PostfixOperator;
+import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.generator.visitors.Import;
@@ -75,6 +79,8 @@ public class TranspilerUtils {
       case TypeDescriptor.DOUBLE_TYPE_NAME:
       case TypeDescriptor.CHAR_TYPE_NAME:
         return "number";
+      case TypeDescriptor.LONG_TYPE_NAME:
+        return "!Long";
       case "java.lang.String":
         return "?string";
     }
@@ -201,17 +207,169 @@ public class TranspilerUtils {
   }
 
   public static String getDefaultInitialValue(TypeDescriptor typeDescriptor) {
-    String jsDocName = getJsDocName(typeDescriptor);
-    if (jsDocName.equals("number")) {
-      return "0";
-    } else if (jsDocName.equals("boolean")) {
-      return "false";
-    } else {
-      return "null";
+    // Primitives.
+    switch (typeDescriptor.getSourceName()) {
+      case TypeDescriptor.BOOLEAN_TYPE_NAME:
+        return "false";
+      case TypeDescriptor.BYTE_TYPE_NAME:
+      case TypeDescriptor.SHORT_TYPE_NAME:
+      case TypeDescriptor.INT_TYPE_NAME:
+      case TypeDescriptor.FLOAT_TYPE_NAME:
+      case TypeDescriptor.DOUBLE_TYPE_NAME:
+      case TypeDescriptor.CHAR_TYPE_NAME:
+        return "0";
+      case TypeDescriptor.LONG_TYPE_NAME:
+        return "Longs.$fromInt(0)";
     }
+
+    // Objects.
+    return "null";
   }
 
   public static boolean shouldExport(JavaType type) {
     return !type.getVisibility().isPrivate() && !type.isLocal();
+  }
+
+  public static boolean isValidForLongs(BinaryOperator binaryOperator) {
+    return binaryOperator != BinaryOperator.CONDITIONAL_AND
+        && binaryOperator != BinaryOperator.CONDITIONAL_OR;
+  }
+
+  public static boolean isValidForLongs(PrefixOperator prefixOperator) {
+    return prefixOperator != PrefixOperator.NOT;
+  }
+
+  public static String getLongOperationFunctionName(PrefixOperator prefixOperator) {
+    switch (prefixOperator) {
+      case DECREMENT:
+        return "$decrement";
+      case INCREMENT:
+        return "$increment";
+      case PLUS:
+        Preconditions.checkArgument(false, "The '+' prefix operator is a NOP for longs.");
+        return null;
+      case MINUS:
+        return "$negate"; // Multiply by -1;
+      case COMPLEMENT:
+        return "$not"; // Bitwise not
+      case NOT:
+        Preconditions.checkArgument(false, "The 'not' operator isn't applicable for longs.");
+        return null;
+      default:
+        Preconditions.checkArgument(
+            false,
+            "Requested the Longs function name for unrecognized prefix operator "
+                + prefixOperator
+                + ".");
+        return null;
+    }
+  }
+
+  public static String getLongOperationFunctionName(PostfixOperator postfixOperator) {
+    switch (postfixOperator) {
+      case DECREMENT:
+        return "$decrement";
+      case INCREMENT:
+        return "$increment";
+      default:
+        Preconditions.checkArgument(
+            false,
+            "Requested the Longs function name for unrecognized postfix operator "
+                + postfixOperator
+                + ".");
+        return null;
+    }
+  }
+
+  public static String getLongOperationFunctionName(BinaryOperator binaryOperator) {
+    switch (binaryOperator) {
+      case TIMES:
+        return "$times";
+      case DIVIDE:
+        return "$divide";
+      case REMAINDER:
+        return "$remainder";
+      case PLUS:
+        return "$plus";
+      case MINUS:
+        return "$minus";
+      case LEFT_SHIFT:
+        return "$leftShift";
+      case RIGHT_SHIFT_SIGNED:
+        return "$rightShiftSigned";
+      case RIGHT_SHIFT_UNSIGNED:
+        return "$rightShiftUnsigned";
+      case LESS:
+        return "$less";
+      case GREATER:
+        return "$greater";
+      case LESS_EQUALS:
+        return "$lessEquals";
+      case GREATER_EQUALS:
+        return "$greaterEquals";
+      case EQUALS:
+        return "$equals";
+      case NOT_EQUALS:
+        return "$notEquals";
+      case XOR:
+        return "$xor";
+      case AND:
+        return "$and";
+      case OR:
+        return "$or";
+      case CONDITIONAL_AND:
+        Preconditions.checkArgument(false, "The '&&' operator isn't applicable for longs.");
+        return null;
+      case CONDITIONAL_OR:
+        Preconditions.checkArgument(false, "The '||' operator isn't applicable for longs.");
+        return null;
+      case ASSIGN:
+        Preconditions.checkArgument(
+            false, "The '=' operator doesn't require special handling for longs.");
+        return null;
+      case PLUS_ASSIGN:
+        return "$plus";
+      case MINUS_ASSIGN:
+        return "$minus";
+      case TIMES_ASSIGN:
+        return "$times";
+      case DIVIDE_ASSIGN:
+        return "$divide";
+      case BIT_AND_ASSIGN:
+        return "$and";
+      case BIT_OR_ASSIGN:
+        return "$or";
+      case BIT_XOR_ASSIGN:
+        return "$xor";
+      case REMAINDER_ASSIGN:
+        return "$remainder";
+      case LEFT_SHIFT_ASSIGN:
+        return "$leftShift";
+      case RIGHT_SHIFT_SIGNED_ASSIGN:
+        return "$rightShiftSigned";
+      case RIGHT_SHIFT_UNSIGNED_ASSIGN:
+        return "$rightShiftUnsigned";
+      default:
+        Preconditions.checkArgument(
+            false,
+            "Requested the Longs function name for unrecognized binary operator "
+                + binaryOperator
+                + ".");
+        return null;
+    }
+  }
+
+  public static boolean hasSideEffect(PrefixOperator prefixOperator) {
+    return prefixOperator == PrefixOperator.INCREMENT || prefixOperator == PrefixOperator.DECREMENT;
+  }
+
+  /**
+   * If possible, returns the qualifier of the provided expression, otherwise null.
+   */
+  public static Expression getQualifier(Expression expression) {
+    if (!(expression instanceof MemberReference)) {
+      return null;
+    }
+    return ((MemberReference) expression).getQualifier();
   }
 }

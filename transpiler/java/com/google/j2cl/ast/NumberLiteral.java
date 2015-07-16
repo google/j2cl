@@ -24,16 +24,16 @@ import com.google.j2cl.ast.processors.Visitable;
 @Visitable
 public class NumberLiteral extends Expression {
   private TypeDescriptor typeDescriptor;
-  private String token;
+  private Number value;
 
-  public NumberLiteral(TypeDescriptor typeDescriptor, String token) {
+  public NumberLiteral(TypeDescriptor typeDescriptor, Number value) {
     Preconditions.checkNotNull(typeDescriptor);
     this.typeDescriptor = typeDescriptor;
-    this.token = token;
+    this.value = value;
   }
 
-  public String getToken() {
-    return token;
+  public Number getValue() {
+    return value;
   }
 
   @Override

@@ -1,0 +1,105 @@
+package com.google.j2cl.transpiler.integration.longoperationsinglesideeffect;
+
+public class Main {
+  public static void main(String... args) {
+    Main m = new Main();
+    m.testIncrementDecrementSideEffects();
+    m.testCompoundAssignmentSideEffects();
+    m.testNestedIncrements();
+  }
+
+  public long longField = 0L;
+
+  public int sideEffectCount;
+
+  public Main causeSideEffect() {
+    sideEffectCount++;
+    return this;
+  }
+
+  public Main fluentAssert(long expectedValue, long testValue) {
+    assert expectedValue == testValue : "expected " + expectedValue + " but was " + testValue;
+    return this;
+  }
+
+  /**
+   * Long emulation of increment and decrement operators forces multiple accesses of the subject
+   * field but it's important that it be done in a way that doesn't invoke earlier parts of the
+   * qualifier chain multiple times.
+   */
+  public void testIncrementDecrementSideEffects() {
+    longField = 0L;
+    sideEffectCount = 0;
+
+    assert sideEffectCount == 0;
+
+    assert causeSideEffect().longField++ == 0L;
+    assert longField == 1L;
+    assert sideEffectCount == 1;
+
+    assert causeSideEffect().longField-- == 1L;
+    assert longField == 0L;
+    assert sideEffectCount == 2;
+
+    assert ++causeSideEffect().longField == 1L;
+    assert longField == 1L;
+    assert sideEffectCount == 3;
+
+    assert --causeSideEffect().longField == 0L;
+    assert longField == 0L;
+    assert sideEffectCount == 4;
+
+    causeSideEffect().longField += 1L;
+    assert longField == 1L;
+    assert sideEffectCount == 5;
+
+    causeSideEffect().longField -= 1L;
+    assert longField == 0L;
+    assert sideEffectCount == 6;
+  }
+
+  /**
+   * Long emulation of increment and decrement operators forces multiple accesses of the subject
+   * field but it's important that it be done in a way that doesn't invoke earlier parts of the
+   * qualifier chain multiple times.
+   */
+  public void testCompoundAssignmentSideEffects() {
+    longField = 0L;
+    sideEffectCount = 0;
+
+    assert sideEffectCount == 0;
+
+    causeSideEffect().longField += 1L;
+    assert longField == 1L;
+    assert sideEffectCount == 1;
+
+    causeSideEffect().longField -= 1L;
+    assert longField == 0L;
+    assert sideEffectCount == 2;
+
+    causeSideEffect().longField *= 1L;
+    assert longField == 0L;
+    assert sideEffectCount == 3;
+
+    causeSideEffect().longField /= 1L;
+    assert longField == 0L;
+    assert sideEffectCount == 4;
+  }
+
+  /**
+   * Stresses the Long emulation increment rewriting.
+   */
+  public void testNestedIncrements() {
+    longField = 0L;
+    sideEffectCount = 0;
+
+    fluentAssert(2L, fluentAssert(1L, fluentAssert(0L, longField++).longField++).longField++);
+
+    longField = 0L;
+    fluentAssert(0L, longField++).fluentAssert(1L, longField++).fluentAssert(2L, longField++);
+
+    longField = 0L;
+    fluentAssert(2L, fluentAssert(0L, longField++).fluentAssert(1L, longField++).longField++)
+        .fluentAssert(5L, fluentAssert(3L, longField++).fluentAssert(4L, longField++).longField++);
+  }
+}

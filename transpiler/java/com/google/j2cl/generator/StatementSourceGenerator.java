@@ -25,6 +25,7 @@ import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.BinaryExpression;
+import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.BreakStatement;
@@ -52,6 +53,7 @@ import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.ParenthesizedExpression;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PrefixExpression;
+import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.StringLiteral;
@@ -97,12 +99,65 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformBinaryExpression(BinaryExpression expression) {
-        if (TranspilerUtils.isAssignment(expression.getOperator())
-            && expression.getLeftOperand() instanceof ArrayAccess) {
+        Expression leftOperand = expression.getLeftOperand();
+        BinaryOperator operator = expression.getOperator();
+
+        if (TranspilerUtils.isAssignment(operator) && leftOperand instanceof ArrayAccess) {
           return transformArrayAssignmentBinaryExpression(expression);
+        } else if (TypeDescriptor.LONG_TYPE_DESCRIPTOR == leftOperand.getTypeDescriptor()
+            && operator != BinaryOperator.ASSIGN) {
+          // Skips assignment because it doesn't need special handling.
+          return transformLongBinaryExpression(expression);
         } else {
           return transformRegularBinaryExpression(expression);
         }
+      }
+
+      private String transformLongBinaryExpression(BinaryExpression expression) {
+        Preconditions.checkArgument(TranspilerUtils.isValidForLongs(expression.getOperator()));
+
+        String longOperationFunctionName =
+            TranspilerUtils.getLongOperationFunctionName(expression.getOperator());
+        Expression leftOperand = expression.getLeftOperand();
+        Expression rightOperand = expression.getRightOperand();
+        Expression qualifier = TranspilerUtils.getQualifier(leftOperand);
+
+        boolean hasSideEffect = TranspilerUtils.isAssignment(expression.getOperator());
+        if (!hasSideEffect) {
+          // The simplest case. The referenced long is not being modified so all that's necessary is
+          // to do some computation and return a new value.
+          return String.format(
+              "Longs.%s(%s, %s)",
+              longOperationFunctionName,
+              toSource(leftOperand),
+              toSource(rightOperand));
+        }
+
+        if (qualifier == null) {
+          // The medium case. The referenced long *is* being modified but it has no qualifier so no
+          // care needs to be taken to avoid double side-effects from dereferencing the qualifier
+          // twice.
+          String leftOperandAsSource = toSource(leftOperand);
+          return String.format(
+              "%s = Longs.%s(%s, %s)",
+              leftOperandAsSource,
+              longOperationFunctionName,
+              leftOperandAsSource,
+              toSource(rightOperand));
+        }
+
+        // The hard case. The referenced long is being modified and it has a qualifier. Take special
+        // care to only dereference the qualifier once (to avoid double side effects), store it in a
+        // temporary variable and use that temporary variable in the rest of the computation.
+        MemberReference memberReference = (MemberReference) leftOperand;
+        String fieldOrMethodDescriptorAsString = toSource((Node) memberReference.getTarget());
+        return String.format(
+            "window.$q = %s, window.$q.%s = Longs.%s(window.$q.%s, %s)",
+            toSource(qualifier),
+            fieldOrMethodDescriptorAsString,
+            longOperationFunctionName,
+            fieldOrMethodDescriptorAsString,
+            toSource(rightOperand));
       }
 
       @Override
@@ -208,12 +263,14 @@ public class StatementSourceGenerator {
       }
 
       @Override
+      public String transformFieldDescriptor(FieldDescriptor fieldDescriptor) {
+        return ManglingNameUtils.getMangledName(
+            fieldDescriptor, isInClinit(fieldDescriptor.getEnclosingClassTypeDescriptor()));
+      }
+
+      @Override
       public String transformFieldAccess(FieldAccess fieldAccess) {
-        FieldDescriptor targetFieldDescriptor = fieldAccess.getTarget();
-        String fieldMangledName =
-            ManglingNameUtils.getMangledName(
-                targetFieldDescriptor,
-                isInClinit(targetFieldDescriptor.getEnclosingClassTypeDescriptor()));
+        String fieldMangledName = toSource(fieldAccess.getTarget());
 
         // make 'this.' reference and static reference explicit.
         // TODO(rluble): We should probably make this explicit at the AST level, either by a
@@ -315,8 +372,7 @@ public class StatementSourceGenerator {
 
         if (dimensionCount == 1) {
           // It's 1 dimensional.
-          if (TypeDescriptor.OBJECT_TYPE_DESCRIPTOR.equals(
-              newArrayExpression.getLeafTypeDescriptor())) {
+          if (TypeDescriptor.OBJECT_TYPE_DESCRIPTOR == newArrayExpression.getLeafTypeDescriptor()) {
             // And the leaf type is Object. All arrays are implicitly Array<Object> so leave out the
             // init.
             return arrayLiteralAsString;
@@ -350,7 +406,25 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformNumberLiteral(NumberLiteral expression) {
-        return expression.getToken();
+        if (TypeDescriptor.LONG_TYPE_DESCRIPTOR == expression.getTypeDescriptor()) {
+          return transformLongNumberLiteral(expression);
+        }
+        return expression.getValue().toString();
+      }
+
+      private String transformLongNumberLiteral(NumberLiteral expression) {
+        Preconditions.checkArgument(expression.getValue() instanceof Long);
+
+        long longValue = (long) expression.getValue();
+
+        if (longValue < Integer.MAX_VALUE && longValue > Integer.MIN_VALUE) {
+          // The long value is small enough to fit in an int. Emit the terse initialization.
+          return String.format("Longs.$fromInt(%s)", Long.toString((long) expression.getValue()));
+        }
+
+        // The long value is pretty large. Emit the verbose initialization.
+        return String.format(
+            "Longs.$fromString('%s')", Long.toString((long) expression.getValue()));
       }
 
       @Override
@@ -360,12 +434,102 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformPostfixExpression(PostfixExpression expression) {
+        if (TypeDescriptor.LONG_TYPE_DESCRIPTOR == expression.getTypeDescriptor()) {
+          return transformLongPostfixExpression(expression);
+        }
         return String.format(
             "%s%s", toSource(expression.getOperand()), expression.getOperator().toString());
       }
 
+      private String transformLongPostfixExpression(PostfixExpression expression) {
+        Expression operand = expression.getOperand();
+        Expression qualifier = TranspilerUtils.getQualifier(operand);
+
+        if (qualifier == null) {
+          // The easier case. The referenced long is being modified but since the pre-modified value
+          // must be returned it is first stored in a temporary variable which is returned at the
+          // end. Since there is no qualifier no care needs to be taken to avoid double side-effects
+          // from dereferencing the qualifier twice.
+          String operandAsSource = toSource(operand);
+          return String.format(
+              "(window.$v = %s, %s = Longs.%s(%s), window.$v)",
+              operandAsSource,
+              operandAsSource,
+              TranspilerUtils.getLongOperationFunctionName(expression.getOperator()),
+              operandAsSource);
+        }
+
+        // The harder case. Like the easier case except that special care needs to be taken to only
+        // dereference the qualifier once (to avoid double side effects). This is accomplished by
+        // storing it in a temporary variable and using that temporary variable in the rest of the
+        // computation.
+        MemberReference memberReference = (MemberReference) operand;
+        Member target = memberReference.getTarget();
+        String fieldOrMethodDescriptorAsString = toSource((Node) target);
+        return String.format(
+            "(window.$q = %s, window.$v = window.$q.%s, "
+                + "window.$q.%s = Longs.%s(window.$q.%s), window.$v)",
+            toSource(qualifier),
+            fieldOrMethodDescriptorAsString,
+            fieldOrMethodDescriptorAsString,
+            TranspilerUtils.getLongOperationFunctionName(expression.getOperator()),
+            fieldOrMethodDescriptorAsString);
+      }
+
       @Override
       public String transformPrefixExpression(PrefixExpression expression) {
+        if (TypeDescriptor.LONG_TYPE_DESCRIPTOR == expression.getTypeDescriptor()
+            && expression.getOperator() != PrefixOperator.PLUS) {
+          // Skips the + prefix because it is a NOP.
+          return transformLongPrefixExpression(expression);
+        }
+        return transformRegularPrefixExpression(expression);
+      }
+
+      private String transformLongPrefixExpression(PrefixExpression expression) {
+        Preconditions.checkArgument(TranspilerUtils.isValidForLongs(expression.getOperator()));
+
+        String longOperationFunctionName =
+            TranspilerUtils.getLongOperationFunctionName(expression.getOperator());
+        Expression operand = expression.getOperand();
+        Expression qualifier = TranspilerUtils.getQualifier(operand);
+
+        if (!TranspilerUtils.hasSideEffect(expression.getOperator())) {
+          // The simplest case. The referenced long is not being modified so all that's necessary is
+          // to do some computation and return a new value.
+          return String.format("Longs.%s(%s)", longOperationFunctionName, toSource(operand));
+        }
+
+        if (qualifier == null) {
+          // The medium case. The referenced long *is* being modified but it has no qualifier so no
+          // care needs to be taken to avoid double side-effects from dereferencing the qualifier
+          // twice.
+          return String.format(
+              "(%s = Longs.%s(%s))",
+              toSource(operand),
+              longOperationFunctionName,
+              toSource(operand));
+        }
+
+        // The hard case. The referenced long is being modified and it has a qualifier. Take special
+        // care to only dereference the qualifier once (to avoid double side effects), store it in a
+        // temporary variable and use that temporary variable in the rest of the computation.
+        MemberReference memberReference = (MemberReference) operand;
+        String fieldOrMethodDescriptorAsString = toSource((Node) memberReference.getTarget());
+        return String.format(
+            "(window.$q = %s, window.$q.%s = Longs.%s(window.$q.%s))",
+            toSource(qualifier),
+            fieldOrMethodDescriptorAsString,
+            longOperationFunctionName,
+            fieldOrMethodDescriptorAsString);
+      }
+
+      private String transformRegularPrefixExpression(PrefixExpression expression) {
+        // The + prefix operator is a NOP.
+        if (expression.getOperator() == PrefixOperator.PLUS) {
+          return toSource(expression.getOperand());
+        }
+
         return String.format(
             "%s%s", expression.getOperator().toString(), toSource(expression.getOperand()));
       }
@@ -649,6 +813,6 @@ public class StatementSourceGenerator {
   }
 
   private static boolean isInClinit(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.equals(inClinitForTypeDescriptor);
+    return typeDescriptor == inClinitForTypeDescriptor;
   }
 }

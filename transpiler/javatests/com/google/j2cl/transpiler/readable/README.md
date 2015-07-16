@@ -51,7 +51,6 @@ are copyright and licensed as follows:
 - classclasscollision
 - classlocalvarcollision
 - classliteralForEnums (tests are in classliteral)
-- complexlongincrement
 - complextypeinference
 - enumwithanonymousclass
 - enumwithbody
@@ -67,8 +66,6 @@ are copyright and licensed as follows:
 - jsinteropclass
 - jsinteropdispatch
 - jsinteropinterface
-- longliteral
-- longoperations
 - methodreferences
 - multipleanonymousclass
 - multipleparametersgenerictype

@@ -25,6 +25,9 @@ import com.google.j2cl.ast.TypeDescriptor;
 public class Import implements Comparable<Import> {
 
   public static final Import IMPORT_CLASS = new Import("Class", "gen.java.lang.ClassModule");
+  public static final Import IMPORT_NATIVE_LONGS =
+      new Import("Longs", "nativebootstrap.LongsModule");
+  public static final Import IMPORT_NATIVE_LONG = new Import("Long", "nativebootstrap.LongsModule");
   public static final Import IMPORT_NATIVE_UTIL = new Import("Util", "nativebootstrap.UtilModule");
   public static final Import IMPORT_VM_ASSERTS = new Import("Asserts", "vmbootstrap.AssertsModule");
   public static final Import IMPORT_VM_ARRAYS = new Import("Arrays", "vmbootstrap.ArraysModule");

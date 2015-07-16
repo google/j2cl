@@ -23,6 +23,8 @@ import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -56,6 +58,10 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   @Override
   public void exitTypeDescriptor(TypeDescriptor typeDescriptor) {
     addTypeDescriptor(typeDescriptor);
+    if (TypeDescriptor.LONG_TYPE_DESCRIPTOR == typeDescriptor) {
+      // for function parameter JsDoc.
+      importModules.add(Import.IMPORT_NATIVE_LONG);
+    }
   }
 
   @Override
@@ -83,6 +89,24 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   @Override
   public void exitJavaType(JavaType type) {
     typeDescriptorsDefinedInCompilationUnit.add(type.getDescriptor());
+  }
+
+  @Override
+  public void exitExpression(Expression expression) {
+    if (TypeDescriptor.LONG_TYPE_DESCRIPTOR == expression.getTypeDescriptor()) {
+      // for Long operation method dispatch.
+      importModules.add(Import.IMPORT_NATIVE_LONGS);
+      importModules.add(Import.IMPORT_NATIVE_LONG);
+    }
+  }
+
+  @Override
+  public void exitField(Field field) {
+    if (TypeDescriptor.LONG_TYPE_DESCRIPTOR == field.getDescriptor().getTypeDescriptor()) {
+      // for default initial value of Longs.$fromInt(0).
+      importModules.add(Import.IMPORT_NATIVE_LONGS);
+      importModules.add(Import.IMPORT_NATIVE_LONG);
+    }
   }
 
   @Override
