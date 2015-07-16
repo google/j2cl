@@ -18,6 +18,9 @@
 #end
    * @${method.Descriptor.Visibility}
    */
+#if ($method.isNative())
+  // native $staticModifier${ManglingNameUtils.getMangledName($method.Descriptor)}($parameterList)
+#else
   $staticModifier${ManglingNameUtils.getMangledName($method.Descriptor)}($parameterList) {
 #if (${method.Descriptor.isStatic()})
     $className.$clinit();
@@ -26,3 +29,4 @@
     $StatementSourceGenerator.toSource($statementInBody)
 #end
   }
+#end

@@ -158,6 +158,7 @@ public class JdtUtils {
     int modifiers = methodBinding.getModifiers();
     boolean isStatic = isStatic(modifiers);
     Visibility visibility = getVisibility(modifiers);
+    boolean isNative = isNative(modifiers);
     TypeDescriptor enclosingClassTypeDescriptor =
         createTypeDescriptor(methodBinding.getDeclaringClass(), compilationUnitNameLocator);
     boolean isConstructor = methodBinding.isConstructor();
@@ -180,6 +181,7 @@ public class JdtUtils {
         enclosingClassTypeDescriptor,
         methodName,
         isConstructor,
+        isNative,
         returnTypeDescriptor,
         parameterTypeDescriptors);
   }
@@ -320,6 +322,10 @@ public class JdtUtils {
 
   static boolean isStatic(int modifier) {
     return Modifier.isStatic(modifier);
+  }
+
+  static boolean isNative(int modifier) {
+    return Modifier.isNative(modifier);
   }
 
   static boolean isInstanceNestedClass(ITypeBinding typeBinding) {

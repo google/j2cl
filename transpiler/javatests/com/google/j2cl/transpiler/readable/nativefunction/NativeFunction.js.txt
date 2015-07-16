@@ -1,0 +1,109 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/nativefunction/NativeFunction.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.nativefunction.NativeFunctionModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+class NativeFunction extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_nativefunction_NativeFunction() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  // native static m_doFoo()
+
+  /**
+   * @return {void}
+   * @public
+   */
+  // native m_doBar()
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    NativeFunction.m_doFoo();
+    this.m_doBar();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!NativeFunction}
+   * @public
+   */
+  static $create() {
+    NativeFunction.$clinit();
+    var instance = new NativeFunction;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_nativefunction_NativeFunction();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_nativefunction_NativeFunction() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_nativefunction_NativeFunction();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof NativeFunction; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, NativeFunction);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+NativeFunction.$class = Class.$createForClass(
+    Util.$generateId('NativeFunction'),
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.nativefunction.NativeFunction'),
+    Object.$class,
+    Util.$generateId(
+        'com.google.j2cl.transpiler.readable.nativefunction.NativeFunction'));
+
+/**
+ * Export class.
+ */
+exports.NativeFunction = NativeFunction;

@@ -39,6 +39,7 @@ public class ASTUtils {
         enclosingClassTypeDescriptor,
         MethodDescriptor.METHOD_INIT,
         false,
+        false,
         TypeDescriptor.VOID_TYPE_DESCRIPTOR);
   }
 
@@ -53,6 +54,7 @@ public class ASTUtils {
         typeDescriptor,
         typeDescriptor.getClassName(),
         true,
+        false,
         TypeDescriptor.VOID_TYPE_DESCRIPTOR);
   }
 
@@ -154,6 +156,7 @@ public class ASTUtils {
     boolean isStatic = false;
     String methodName = "$create_" + innerclassConstructorDescriptor.getMethodName();
     boolean isConstructor = false;
+    boolean isNative = false;
     TypeDescriptor returnTypeDescriptor =
         innerclassConstructorDescriptor.getEnclosingClassTypeDescriptor();
     return MethodDescriptor.create(
@@ -162,6 +165,7 @@ public class ASTUtils {
         outerclassTypeDescriptor,
         methodName,
         isConstructor,
+        isNative,
         returnTypeDescriptor,
         Iterables.toArray(
             innerclassConstructorDescriptor.getParameterTypeDescriptors(), TypeDescriptor.class));

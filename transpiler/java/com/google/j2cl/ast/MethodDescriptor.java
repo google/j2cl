@@ -33,6 +33,7 @@ public abstract class MethodDescriptor extends Node implements Member {
       TypeDescriptor enclosingClassTypeDescriptor,
       String methodName,
       boolean isConstructor,
+      boolean isNative,
       TypeDescriptor returnTypeDescriptor,
       TypeDescriptor... parameterTypeDescriptors) {
     return new AutoValue_MethodDescriptor(
@@ -42,6 +43,7 @@ public abstract class MethodDescriptor extends Node implements Member {
         enclosingClassTypeDescriptor,
         methodName,
         isConstructor,
+        isNative,
         ImmutableList.copyOf(parameterTypeDescriptors),
         returnTypeDescriptor);
   }
@@ -57,6 +59,7 @@ public abstract class MethodDescriptor extends Node implements Member {
         Visibility.PUBLIC,
         enclosingClassTypeDescriptor,
         methodName,
+        false,
         false,
         ImmutableList.<TypeDescriptor>of(),
         TypeDescriptor.VOID_TYPE_DESCRIPTOR);
@@ -79,6 +82,8 @@ public abstract class MethodDescriptor extends Node implements Member {
   public abstract String getMethodName();
 
   public abstract boolean isConstructor();
+
+  public abstract boolean isNative();
 
   public abstract ImmutableList<TypeDescriptor> getParameterTypeDescriptors();
 

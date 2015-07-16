@@ -69,6 +69,7 @@ are copyright and licensed as follows:
 - methodreferences
 - multipleanonymousclass
 - multipleparametersgenerictype
+- nativefunction + provided Foo.native.js
 - nestedanonymousclass
 - notimportinternals
 - numbermethods

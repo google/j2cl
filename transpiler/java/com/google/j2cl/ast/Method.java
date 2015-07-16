@@ -71,6 +71,10 @@ public class Method extends Node {
     return methodDescriptor.isConstructor();
   }
 
+  public boolean isNative() {
+    return methodDescriptor.isNative();
+  }
+
   public void setBody(Block body) {
     this.body = body;
   }

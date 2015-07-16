@@ -675,7 +675,7 @@ public class CompilationUnitBuilder {
       IMethodBinding methodBinding = expression.resolveMethodBinding();
 
       // Perform Object method devirtualization.
-      if (isObjectMethodBinding(methodBinding)) {
+      if (isObjectInstanceMethodBinding(methodBinding)) {
         return createDevirtualizedObjectMethodCall(expression);
       }
 
@@ -689,12 +689,19 @@ public class CompilationUnitBuilder {
     }
 
     private MethodCall createDevirtualizedObjectMethodCall(MethodInvocation invocation) {
+      Preconditions.checkArgument(!invocation.resolveMethodBinding().isConstructor());
+      Preconditions.checkArgument(
+          !JdtUtils.isStatic(invocation.resolveMethodBinding().getModifiers()));
+
       IMethodBinding methodBinding = invocation.resolveMethodBinding();
       Expression originalQualifier =
           invocation.getExpression() == null ? null : convert(invocation.getExpression());
       String methodName = methodBinding.getName();
       TypeDescriptor returnTypeDescriptor = createTypeDescriptor(methodBinding.getReturnType());
       int originalParameterCount = methodBinding.getParameterTypes().length;
+      int modifiers = methodBinding.getModifiers();
+      boolean isConstructor = methodBinding.isConstructor();
+      boolean isNative = JdtUtils.isNative(modifiers);
 
       TypeDescriptor[] parameterTypeDescriptors = new TypeDescriptor[originalParameterCount + 1];
       // Turn the instance into now a first parameter to the devirtualized method.
@@ -709,7 +716,8 @@ public class CompilationUnitBuilder {
               JdtUtils.getVisibility(methodBinding.getModifiers()),
               TypeDescriptor.OBJECTS_TYPE_DESCRIPTOR, // Enclosing class reference.
               methodName,
-              false, // Not a constructor.
+              isConstructor,
+              isNative,
               returnTypeDescriptor,
               parameterTypeDescriptors);
       @SuppressWarnings("unchecked")
@@ -1015,9 +1023,13 @@ public class CompilationUnitBuilder {
       return type;
     }
 
-    private boolean isObjectMethodBinding(IMethodBinding methodBinding) {
+    private boolean isObjectInstanceMethodBinding(IMethodBinding methodBinding) {
       for (IMethodBinding objectMethodBinding : javaLangObjectBinding.getDeclaredMethods()) {
-        if (methodBinding == objectMethodBinding || methodBinding.overrides(objectMethodBinding)) {
+        boolean overrides =
+            methodBinding == objectMethodBinding || methodBinding.overrides(objectMethodBinding);
+        boolean instanceMethod =
+            !methodBinding.isConstructor() && !JdtUtils.isStatic(methodBinding.getModifiers());
+        if (overrides && instanceMethod) {
           return true;
         }
       }
