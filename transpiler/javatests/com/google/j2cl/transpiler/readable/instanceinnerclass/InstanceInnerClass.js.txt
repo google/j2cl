@@ -7,7 +7,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.instanceinnerclass.Instance
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
@@ -86,7 +86,7 @@ class InstanceInnerClass extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, InstanceInnerClass);
+    return $Util.$canCastClass(classConstructor, InstanceInnerClass);
   }
 
   /**
@@ -102,11 +102,11 @@ class InstanceInnerClass extends Object {
  * @public {Class}
  */
 InstanceInnerClass.$class = Class.$createForClass(
-    Util.$generateId('InstanceInnerClass'),
-    Util.$generateId(
+    $Util.$generateId('InstanceInnerClass'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass'));
 
 /**
@@ -198,7 +198,7 @@ class InstanceInnerClass$InnerClass extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, InstanceInnerClass$InnerClass);
+    return $Util.$canCastClass(classConstructor, InstanceInnerClass$InnerClass);
   }
 
   /**
@@ -214,11 +214,11 @@ class InstanceInnerClass$InnerClass extends Object {
  * @public {Class}
  */
 InstanceInnerClass$InnerClass.$class = Class.$createForClass(
-    Util.$generateId('InnerClass'),
-    Util.$generateId(
+    $Util.$generateId('InnerClass'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass$InnerClass'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass.InnerClass'));
 
 /**

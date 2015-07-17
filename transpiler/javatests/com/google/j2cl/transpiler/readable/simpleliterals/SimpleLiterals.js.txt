@@ -8,7 +8,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.simpleliterals.SimpleLitera
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
 var String = goog.require('gen.java.lang.StringModule').String;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
 var $char = goog.require('vmbootstrap.PrimitivesModule').$char;
 var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
@@ -76,7 +76,7 @@ class SimpleLiterals extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, SimpleLiterals);
+    return $Util.$canCastClass(classConstructor, SimpleLiterals);
   }
 
   /**
@@ -92,11 +92,11 @@ class SimpleLiterals extends Object {
  * @public {Class}
  */
 SimpleLiterals.$class = Class.$createForClass(
-    Util.$generateId('SimpleLiterals'),
-    Util.$generateId(
+    $Util.$generateId('SimpleLiterals'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals'));
 
 /**

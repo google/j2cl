@@ -18,7 +18,6 @@ package com.google.j2cl.generator;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
@@ -31,12 +30,8 @@ import com.google.j2cl.ast.PostfixOperator;
 import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
-import com.google.j2cl.generator.visitors.Import;
-import com.google.j2cl.generator.visitors.ImportGatheringVisitor;
 
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * Utility functions to transpile the j2cl AST.
@@ -59,55 +54,12 @@ public class TranspilerUtils {
   }
 
   /**
-   * Returns the JsDoc type name.
-   */
-  public static String getJsDocName(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor.isArray()) {
-      return String.format(
-          "%s%s%s",
-          Strings.repeat("Array<", typeDescriptor.getDimensions()),
-          getJsDocName(typeDescriptor.getLeafTypeDescriptor()),
-          Strings.repeat(">", typeDescriptor.getDimensions()));
-    }
-
-    // Special cases.
-    switch (typeDescriptor.getSourceName()) {
-      case TypeDescriptor.BYTE_TYPE_NAME:
-      case TypeDescriptor.SHORT_TYPE_NAME:
-      case TypeDescriptor.INT_TYPE_NAME:
-      case TypeDescriptor.FLOAT_TYPE_NAME:
-      case TypeDescriptor.DOUBLE_TYPE_NAME:
-      case TypeDescriptor.CHAR_TYPE_NAME:
-        return "number";
-      case TypeDescriptor.LONG_TYPE_NAME:
-        return "!Long";
-      case "java.lang.String":
-        return "?string";
-    }
-    if (typeDescriptor.isPrimitive()) {
-      return typeDescriptor.getSimpleName();
-    }
-    return getClassName(typeDescriptor);
-  }
-
-  /**
    * Returns the relative output path for a given compilation unit.
    */
   public static String getOutputPath(CompilationUnit compilationUnit) {
     String unitName = compilationUnit.getName();
     String packageName = compilationUnit.getPackageName();
     return packageName.replace('.', '/') + "/" + unitName;
-  }
-
-  /**
-   * Returns the relative output path for a given compilation unit.
-   */
-  public static Set<Import> getImports(CompilationUnit compilationUnit) {
-    Set<Import> imports = new TreeSet<>();
-    imports.add(Import.IMPORT_CLASS);
-    imports.add(Import.IMPORT_NATIVE_UTIL);
-    imports.addAll(ImportGatheringVisitor.gatherImports(compilationUnit));
-    return imports;
   }
 
   public static String getParameterList(Method method) {
@@ -204,26 +156,6 @@ public class TranspilerUtils {
             false, "Requested the Arrays function name for a non-assignment operator.");
         return null;
     }
-  }
-
-  public static String getDefaultInitialValue(TypeDescriptor typeDescriptor) {
-    // Primitives.
-    switch (typeDescriptor.getSourceName()) {
-      case TypeDescriptor.BOOLEAN_TYPE_NAME:
-        return "false";
-      case TypeDescriptor.BYTE_TYPE_NAME:
-      case TypeDescriptor.SHORT_TYPE_NAME:
-      case TypeDescriptor.INT_TYPE_NAME:
-      case TypeDescriptor.FLOAT_TYPE_NAME:
-      case TypeDescriptor.DOUBLE_TYPE_NAME:
-      case TypeDescriptor.CHAR_TYPE_NAME:
-        return "0";
-      case TypeDescriptor.LONG_TYPE_NAME:
-        return "Longs.$fromInt(0)";
-    }
-
-    // Objects.
-    return "null";
   }
 
   public static boolean shouldExport(JavaType type) {

@@ -7,7 +7,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.jsdocreturn.JsDocReturnModu
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 class JsDocReturn extends Object {
@@ -71,7 +71,7 @@ class JsDocReturn extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, JsDocReturn);
+    return $Util.$canCastClass(classConstructor, JsDocReturn);
   }
 
   /**
@@ -87,11 +87,11 @@ class JsDocReturn extends Object {
  * @public {Class}
  */
 JsDocReturn.$class = Class.$createForClass(
-    Util.$generateId('JsDocReturn'),
-    Util.$generateId(
+    $Util.$generateId('JsDocReturn'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.jsdocreturn.JsDocReturn'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.jsdocreturn.JsDocReturn'));
 
 /**

@@ -1,4 +1,4 @@
-#set ($interfaceName = ${TranspilerUtils.getClassName($classType.Descriptor)})
+#set ($interfaceName = ${statementSourceGenerator.toSource($classType.Descriptor)})
 #set ($mangledName = ${ManglingNameUtils.getMangledName($classType.Descriptor)})
 #set ($simpleName = $classType.Descriptor.SimpleName)
 #set ($binaryName = $classType.Descriptor.BinaryName)
@@ -6,7 +6,7 @@
 /**
  * @interface
 #foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
- * @extends {${TranspilerUtils.getClassName($superInterfaceTypeDescriptor)}}
+ * @extends {${statementSourceGenerator.toSource($superInterfaceTypeDescriptor)}}
 #end
  */
 class $interfaceName {
@@ -21,7 +21,7 @@ class $interfaceName {
    */
   static $markImplementor(classConstructor) {
 #foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
-    ${TranspilerUtils.getClassName($superInterfaceTypeDescriptor)}.$markImplementor(classConstructor);
+    ${statementSourceGenerator.toSource($superInterfaceTypeDescriptor)}.$markImplementor(classConstructor);
 #end
     /**
      * @public {boolean}
@@ -65,10 +65,12 @@ class $interfaceName {
 $interfaceName.$markImplementor($interfaceName);
 
 
+#set ($classAlias = ${statementSourceGenerator.toSource($javaLangClassTypeDecriptor)} )
+#set ($utilAlias = ${statementSourceGenerator.toSource($nativeUtilTypeDecriptor)} )
 /**
- * @public {Class}
+ * @public {${classAlias}}
  */
-$interfaceName.$class = Class.$createForInterface(
-    Util.$generateId('$simpleName'),
-    Util.$generateId('$binaryName'), null,
-    Util.$generateId('$sourceName'));
+$interfaceName.$class = $classAlias.$createForInterface(
+    $utilAlias.$generateId('$simpleName'),
+    $utilAlias.$generateId('$binaryName'), null,
+    $utilAlias.$generateId('$sourceName'));

@@ -1,13 +1,14 @@
+#set ($utilAlias = ${statementSourceGenerator.toSource($nativeUtilTypeDecriptor)} )
 #set ($superTypeDescriptor = $classType.SuperTypeDescriptor)
 #if ($superTypeDescriptor)
-#set ($superTypeName = ${TranspilerUtils.getClassName($superTypeDescriptor)})
+#set ($superTypeName = ${statementSourceGenerator.toSource($superTypeDescriptor)})
 #set ($superTypeMangledName = ${ManglingNameUtils.getMangledName($superTypeDescriptor)})
 #set ($extendsClause = "extends " + $superTypeName)
 #else
 #set ($extendsClause = "")
 #end
-#set ($className = ${TranspilerUtils.getClassName($classType.Descriptor)})
-#set ($jsDocName = ${TranspilerUtils.getJsDocName($classType.Descriptor)})
+#set ($className = ${statementSourceGenerator.toSource($classType.Descriptor)})
+#set ($jsDocName = ${statementSourceGenerator.getJsDocName(${classType.Descriptor})})
 #set ($mangledTypeName = ${ManglingNameUtils.getMangledName($classType.Descriptor)})
 #set ($simpleName = $classType.Descriptor.SimpleName)
 #set ($binaryName = $classType.Descriptor.BinaryName)
@@ -15,7 +16,7 @@
 #if (!${classType.SuperInterfaceTypeDescriptors.isEmpty()})
 /**
 #foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
- * @implements {${TranspilerUtils.getClassName($superInterfaceTypeDescriptor)}}
+ * @implements {${statementSourceGenerator.toSource($superInterfaceTypeDescriptor)}}
 #end
  */
 #end
@@ -30,12 +31,13 @@ class $className $extendsClause {
 #end
 #foreach ($field in $classType.getInstanceFields())
 #set ($fieldVisibility = $field.Descriptor.Visibility)
-#set ($fieldType = ${TranspilerUtils.getJsDocName($field.Descriptor.TypeDescriptor)})
+#set ($fieldType = ${statementSourceGenerator.getJsDocName($field.Descriptor.TypeDescriptor)})
 #set ($fieldName = ${ManglingNameUtils.getMangledName($field.Descriptor)})
+#set ($defaultValue = ${field.Descriptor.TypeDescriptor.DefaultValue})
     /**
      * @$fieldVisibility {$fieldType}
      */
-    this.$fieldName = ${TranspilerUtils.getDefaultInitialValue($field.Descriptor.TypeDescriptor)};
+    this.$fieldName = ${statementSourceGenerator.toSource($defaultValue)};
 #end
   }
 
@@ -46,13 +48,13 @@ class $className $extendsClause {
   $init__$mangledTypeName() {
 #foreach ($field in $classType.getInstanceFields())
 #if ($field.hasInitializer())
-#set ($fieldInitializer = $StatementSourceGenerator.toSource($field.Initializer))
+#set ($fieldInitializer = $statementSourceGenerator.toSource($field.Initializer))
     this.${ManglingNameUtils.getMangledName($field.Descriptor)} = $fieldInitializer;
 #end
 #end
 #foreach ($instanceInitializerBlock in $classType.InstanceInitializerBlocks)
 #foreach ($statementInInitializer in $instanceInitializerBlock.Statements)
-    $StatementSourceGenerator.toSource($statementInInitializer)
+    $statementSourceGenerator.toSource($statementInInitializer)
 #end
 #end
   }
@@ -79,7 +81,7 @@ class $className $extendsClause {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, $className);
+    return ${utilAlias}.$canCastClass(classConstructor, $className);
   }
 
 #parse( "com/google/j2cl/generator/JsClinit.vm")
@@ -90,15 +92,16 @@ class $className $extendsClause {
 
 
 #foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
-${TranspilerUtils.getClassName($superInterfaceTypeDescriptor)}.$markImplementor($className);
+${statementSourceGenerator.toSource($superInterfaceTypeDescriptor)}.$markImplementor($className);
 
 
 #end
+#set ($classAlias = ${statementSourceGenerator.toSource($javaLangClassTypeDecriptor)} )
 /**
- * @public {Class}
+ * @public {${classAlias}}
  */
-$className.$class = Class.$createForClass(
-    Util.$generateId('$simpleName'),
-    Util.$generateId('$binaryName'),
+$className.$class = $classAlias.$createForClass(
+    $utilAlias.$generateId('$simpleName'),
+    $utilAlias.$generateId('$binaryName'),
     $superTypeName.$class,
-    Util.$generateId('$sourceName'));
+    $utilAlias.$generateId('$sourceName'));

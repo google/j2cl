@@ -7,7 +7,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.forstatement.ForStatementMo
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
@@ -70,7 +70,7 @@ class ForStatement extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, ForStatement);
+    return $Util.$canCastClass(classConstructor, ForStatement);
   }
 
   /**
@@ -86,11 +86,11 @@ class ForStatement extends Object {
  * @public {Class}
  */
 ForStatement.$class = Class.$createForClass(
-    Util.$generateId('ForStatement'),
-    Util.$generateId(
+    $Util.$generateId('ForStatement'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.forstatement.ForStatement'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.forstatement.ForStatement'));
 
 /**

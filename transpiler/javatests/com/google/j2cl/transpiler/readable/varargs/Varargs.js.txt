@@ -7,8 +7,8 @@ goog.module('gen.com.google.j2cl.transpiler.readable.varargs.VarargsModule');
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
-var Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
 var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
@@ -106,7 +106,7 @@ class Varargs extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, Varargs);
+    return $Util.$canCastClass(classConstructor, Varargs);
   }
 
   /**
@@ -122,10 +122,10 @@ class Varargs extends Object {
  * @public {Class}
  */
 Varargs.$class = Class.$createForClass(
-    Util.$generateId('Varargs'),
-    Util.$generateId('com.google.j2cl.transpiler.readable.varargs.Varargs'),
+    $Util.$generateId('Varargs'),
+    $Util.$generateId('com.google.j2cl.transpiler.readable.varargs.Varargs'),
     Object.$class,
-    Util.$generateId('com.google.j2cl.transpiler.readable.varargs.Varargs'));
+    $Util.$generateId('com.google.j2cl.transpiler.readable.varargs.Varargs'));
 
 /**
  * Export class.
@@ -183,7 +183,7 @@ class Child extends Varargs {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, Child);
+    return $Util.$canCastClass(classConstructor, Child);
   }
 
   /**
@@ -199,10 +199,10 @@ class Child extends Varargs {
  * @public {Class}
  */
 Child.$class = Class.$createForClass(
-    Util.$generateId('Child'),
-    Util.$generateId('com.google.j2cl.transpiler.readable.varargs.Child'),
+    $Util.$generateId('Child'),
+    $Util.$generateId('com.google.j2cl.transpiler.readable.varargs.Child'),
     Varargs.$class,
-    Util.$generateId('com.google.j2cl.transpiler.readable.varargs.Child'));
+    $Util.$generateId('com.google.j2cl.transpiler.readable.varargs.Child'));
 
 /**
  * Export class.

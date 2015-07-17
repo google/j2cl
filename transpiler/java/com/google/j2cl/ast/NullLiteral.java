@@ -23,13 +23,17 @@ import com.google.j2cl.ast.processors.Visitable;
 @Visitable
 public class NullLiteral extends Expression {
 
+  public static final NullLiteral NULL = new NullLiteral();
+
   @Override
   public TypeDescriptor getTypeDescriptor() {
-    return TypeDescriptor.VOID_TYPE_DESCRIPTOR;
+    return TypeDescriptors.VOID_TYPE_DESCRIPTOR;
   }
 
   @Override
   public Node accept(Processor processor) {
     return Visitor_NullLiteral.visit(processor, this);
   }
+
+  private NullLiteral() {}
 }

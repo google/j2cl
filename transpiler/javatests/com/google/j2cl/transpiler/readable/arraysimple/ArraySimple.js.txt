@@ -7,8 +7,8 @@ goog.module('gen.com.google.j2cl.transpiler.readable.arraysimple.ArraySimpleModu
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
-var Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
 
 
 class ArraySimple extends Object {
@@ -29,13 +29,13 @@ class ArraySimple extends Object {
    * @public
    */
   m_main() {
-    let objects = Arrays.$create([100], Object);
-    let objects2d = Arrays.$create([5, 10], Object);
-    let objectsPartial = Arrays.$create([20, null], Object);
+    let objects = $Arrays.$create([100], Object);
+    let objects2d = $Arrays.$create([5, 10], Object);
+    let objectsPartial = $Arrays.$create([20, null], Object);
     let object = objects[0];
     object = objects2d[0][1];
-    Arrays.$set(objects, 0, null);
-    Arrays.$set(objects2d[0], 1, null);
+    $Arrays.$set(objects, 0, null);
+    $Arrays.$set(objects2d[0], 1, null);
   }
 
   /**
@@ -74,7 +74,7 @@ class ArraySimple extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, ArraySimple);
+    return $Util.$canCastClass(classConstructor, ArraySimple);
   }
 
   /**
@@ -90,11 +90,11 @@ class ArraySimple extends Object {
  * @public {Class}
  */
 ArraySimple.$class = Class.$createForClass(
-    Util.$generateId('ArraySimple'),
-    Util.$generateId(
+    $Util.$generateId('ArraySimple'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.arraysimple.ArraySimple'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.arraysimple.ArraySimple'));
 
 /**

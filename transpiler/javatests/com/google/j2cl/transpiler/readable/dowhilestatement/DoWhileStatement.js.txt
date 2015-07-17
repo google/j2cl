@@ -7,7 +7,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.dowhilestatement.DoWhileSta
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
@@ -72,7 +72,7 @@ class DoWhileStatement extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, DoWhileStatement);
+    return $Util.$canCastClass(classConstructor, DoWhileStatement);
   }
 
   /**
@@ -88,11 +88,11 @@ class DoWhileStatement extends Object {
  * @public {Class}
  */
 DoWhileStatement.$class = Class.$createForClass(
-    Util.$generateId('DoWhileStatement'),
-    Util.$generateId(
+    $Util.$generateId('DoWhileStatement'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.dowhilestatement.DoWhileStatement'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.dowhilestatement.DoWhileStatement'));
 
 /**

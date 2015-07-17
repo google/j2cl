@@ -1,0 +1,95 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/localnamecollision/Class.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.localnamecollision.ClassModule');
+
+
+var java_lang_Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Objects = goog.require('vmbootstrap.ObjectsModule').Objects;
+
+
+class Class extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_localnamecollision_Class() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() { $Objects.m_getClass__java_lang_Object(Class.$create()); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Class}
+   * @public
+   */
+  static $create() {
+    Class.$clinit();
+    var instance = new Class;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_localnamecollision_Class();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_localnamecollision_Class() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_localnamecollision_Class();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Class; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Class);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {java_lang_Class}
+ */
+Class.$class = java_lang_Class.$createForClass(
+    $Util.$generateId('Class'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.localnamecollision.Class'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.localnamecollision.Class'));
+
+/**
+ * Export class.
+ */
+exports.Class = Class;

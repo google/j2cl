@@ -8,7 +8,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCat
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
 var Exception = goog.require('gen.java.lang.ExceptionModule').Exception;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 class NestedTryCatch extends Object {
@@ -83,7 +83,7 @@ class NestedTryCatch extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, NestedTryCatch);
+    return $Util.$canCastClass(classConstructor, NestedTryCatch);
   }
 
   /**
@@ -99,11 +99,11 @@ class NestedTryCatch extends Object {
  * @public {Class}
  */
 NestedTryCatch.$class = Class.$createForClass(
-    Util.$generateId('NestedTryCatch'),
-    Util.$generateId(
+    $Util.$generateId('NestedTryCatch'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch'));
 
 /**

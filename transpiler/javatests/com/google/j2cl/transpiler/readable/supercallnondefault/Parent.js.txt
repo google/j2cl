@@ -7,7 +7,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.supercallnondefault.ParentM
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
@@ -73,7 +73,7 @@ class Parent extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, Parent);
+    return $Util.$canCastClass(classConstructor, Parent);
   }
 
   /**
@@ -89,11 +89,11 @@ class Parent extends Object {
  * @public {Class}
  */
 Parent.$class = Class.$createForClass(
-    Util.$generateId('Parent'),
-    Util.$generateId(
+    $Util.$generateId('Parent'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.supercallnondefault.Parent'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.supercallnondefault.Parent'));
 
 /**

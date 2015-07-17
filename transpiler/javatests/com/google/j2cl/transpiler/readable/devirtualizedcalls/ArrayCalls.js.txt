@@ -7,8 +7,8 @@ goog.module('gen.com.google.j2cl.transpiler.readable.devirtualizedcalls.ArrayCal
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
-var Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
 var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 var $void = goog.require('vmbootstrap.PrimitivesModule').$void;
 
@@ -31,7 +31,7 @@ class ArrayCalls extends Object {
    * @public
    */
   m_main() {
-    let array2d = Arrays.$create([1, 1], Object);
+    let array2d = $Arrays.$create([1, 1], Object);
     let length1 = array2d[0].length;
     let length2 = array2d.length;
   }
@@ -72,7 +72,7 @@ class ArrayCalls extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, ArrayCalls);
+    return $Util.$canCastClass(classConstructor, ArrayCalls);
   }
 
   /**
@@ -88,11 +88,11 @@ class ArrayCalls extends Object {
  * @public {Class}
  */
 ArrayCalls.$class = Class.$createForClass(
-    Util.$generateId('ArrayCalls'),
-    Util.$generateId(
+    $Util.$generateId('ArrayCalls'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.devirtualizedcalls.ArrayCalls'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.devirtualizedcalls.ArrayCalls'));
 
 /**

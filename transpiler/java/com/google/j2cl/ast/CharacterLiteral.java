@@ -40,7 +40,7 @@ public class CharacterLiteral extends Expression {
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
-    return TypeDescriptor.CHAR_TYPE_DESCRIPTOR;
+    return TypeDescriptors.CHAR_TYPE_DESCRIPTOR;
   }
 
   @Override

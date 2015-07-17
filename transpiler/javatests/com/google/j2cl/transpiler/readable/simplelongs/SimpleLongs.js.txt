@@ -7,9 +7,9 @@ goog.module('gen.com.google.j2cl.transpiler.readable.simplelongs.SimpleLongsModu
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Long = goog.require('nativebootstrap.LongsModule').Long;
-var Longs = goog.require('nativebootstrap.LongsModule').Longs;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Long = goog.require('nativebootstrap.LongsModule').Long;
+var $Longs = goog.require('nativebootstrap.LongsModule').Longs;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 var $long = goog.require('vmbootstrap.PrimitivesModule').$long;
 
@@ -22,10 +22,10 @@ class SimpleLongs extends Object {
   constructor() {
     super();
     /**
-     * @public {!Long}
+     * @public {!$Long}
      */
     this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
-        Longs.$fromInt(0);
+        $Longs.$fromInt(0);
     /**
      * @private {number}
      */
@@ -53,30 +53,30 @@ class SimpleLongs extends Object {
    * @public
    */
   m_main() {
-    let a = Longs.$fromInt(0);
-    a = Longs.$negate(Longs.$fromInt(100000));
-    a = Longs.$fromInt(100000);
-    let b = Longs.$negate(Longs.$fromString('2147483648'));
-    b = Longs.$fromString('2147483648');
-    b = Longs.$fromString('-9223372036854775808');
-    b = Longs.$fromString('9223372036854775807');
-    let c = Longs.$plus(a, b);
-    c = Longs.$divide(a, b);
-    let e = (a = Longs.$increment(a));
+    let a = $Longs.$fromInt(0);
+    a = $Longs.$negate($Longs.$fromInt(100000));
+    a = $Longs.$fromInt(100000);
+    let b = $Longs.$negate($Longs.$fromString('2147483648'));
+    b = $Longs.$fromString('2147483648');
+    b = $Longs.$fromString('-9223372036854775808');
+    b = $Longs.$fromString('9223372036854775807');
+    let c = $Longs.$plus(a, b);
+    c = $Longs.$divide(a, b);
+    let e = (a = $Longs.$increment(a));
     e = (this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
-             Longs.$increment(
+             $Longs.$increment(
                  this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs));
     e = (window.$q = this.m_getWithSideEffect(),
          window.$q
              .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
-             Longs.$increment(
+             $Longs.$increment(
                  window.$q
                      .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs));
-    let f = (window.$v = a, a = Longs.$increment(a), window.$v);
+    let f = (window.$v = a, a = $Longs.$increment(a), window.$v);
     f = (window.$v =
              this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
          this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
-             Longs.$increment(
+             $Longs.$increment(
                  this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs),
          window.$v);
     f = (window.$q = this.m_getWithSideEffect(),
@@ -85,7 +85,7 @@ class SimpleLongs extends Object {
                  .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
          window.$q
              .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
-             Longs.$increment(
+             $Longs.$increment(
                  window.$q
                      .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs),
          window.$v);
@@ -127,7 +127,7 @@ class SimpleLongs extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, SimpleLongs);
+    return $Util.$canCastClass(classConstructor, SimpleLongs);
   }
 
   /**
@@ -143,11 +143,11 @@ class SimpleLongs extends Object {
  * @public {Class}
  */
 SimpleLongs.$class = Class.$createForClass(
-    Util.$generateId('SimpleLongs'),
-    Util.$generateId(
+    $Util.$generateId('SimpleLongs'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs'));
 
 /**

@@ -9,7 +9,7 @@ var ClassCastException = goog.require('gen.java.lang.ClassCastExceptionModule').
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
 var NullPointerException = goog.require('gen.java.lang.NullPointerExceptionModule').NullPointerException;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 class SimpleTryCatchThrow extends Object {
@@ -81,7 +81,7 @@ class SimpleTryCatchThrow extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, SimpleTryCatchThrow);
+    return $Util.$canCastClass(classConstructor, SimpleTryCatchThrow);
   }
 
   /**
@@ -97,11 +97,11 @@ class SimpleTryCatchThrow extends Object {
  * @public {Class}
  */
 SimpleTryCatchThrow.$class = Class.$createForClass(
-    Util.$generateId('SimpleTryCatchThrow'),
-    Util.$generateId(
+    $Util.$generateId('SimpleTryCatchThrow'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow'));
 
 /**

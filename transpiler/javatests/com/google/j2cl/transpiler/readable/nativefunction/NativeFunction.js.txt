@@ -7,7 +7,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.nativefunction.NativeFuncti
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 class NativeFunction extends Object {
@@ -80,7 +80,7 @@ class NativeFunction extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, NativeFunction);
+    return $Util.$canCastClass(classConstructor, NativeFunction);
   }
 
   /**
@@ -96,11 +96,11 @@ class NativeFunction extends Object {
  * @public {Class}
  */
 NativeFunction.$class = Class.$createForClass(
-    Util.$generateId('NativeFunction'),
-    Util.$generateId(
+    $Util.$generateId('NativeFunction'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.nativefunction.NativeFunction'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.nativefunction.NativeFunction'));
 
 /**

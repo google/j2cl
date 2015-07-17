@@ -18,6 +18,7 @@ package com.google.j2cl.generator;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractTransformer;
 import com.google.j2cl.ast.ArrayAccess;
@@ -62,6 +63,7 @@ import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
@@ -69,9 +71,13 @@ import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableDeclarationStatement;
 import com.google.j2cl.ast.VariableReference;
 import com.google.j2cl.ast.WhileStatement;
+import com.google.j2cl.generator.visitors.Import;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Generate javascript source code for {@code Statement}.
@@ -79,19 +85,70 @@ import java.util.List;
  * a StringBuilder.
  */
 public class StatementSourceGenerator {
-  // TODO: static field may be a potential threading problem.
-  private static TypeDescriptor inClinitForTypeDescriptor = null;
+  private Map<TypeDescriptor, String> aliasByTypeDescriptor = new HashMap<>();
 
-  public static String toSource(Node node) {
+  public StatementSourceGenerator(Set<Import> imports) {
+    for (Import anImport : imports) {
+      aliasByTypeDescriptor.put(anImport.getTypeDescriptor(), anImport.getAlias());
+    }
+  }
+
+  /**
+   * Returns the JsDoc type name.
+   */
+  public String getJsDocName(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.isArray()) {
+      return String.format(
+          "%s%s%s",
+          Strings.repeat("Array<", typeDescriptor.getDimensions()),
+          getJsDocName(typeDescriptor.getLeafTypeDescriptor()),
+          Strings.repeat(">", typeDescriptor.getDimensions()));
+    }
+
+    // Special cases.
+    switch (typeDescriptor.getSourceName()) {
+      case TypeDescriptor.BYTE_TYPE_NAME:
+      case TypeDescriptor.SHORT_TYPE_NAME:
+      case TypeDescriptor.INT_TYPE_NAME:
+      case TypeDescriptor.FLOAT_TYPE_NAME:
+      case TypeDescriptor.DOUBLE_TYPE_NAME:
+      case TypeDescriptor.CHAR_TYPE_NAME:
+        return "number";
+      case TypeDescriptor.LONG_TYPE_NAME:
+        return "!" + toSource(TypeDescriptors.NATIVE_LONG_TYPE_DESCRIPTOR);
+      case "java.lang.String":
+        return "?string";
+    }
+    if (typeDescriptor.isPrimitive()) {
+      return typeDescriptor.getSimpleName();
+    }
+    return toSource(typeDescriptor);
+  }
+
+  public String toSource(Node node) {
+    return toSource(node, null);
+  }
+
+  public String toSource(Node node, final TypeDescriptor inClinitForTypeDescriptor) {
     class ToSourceTransformer extends AbstractTransformer<String> {
+
+      String toSource(Node node) {
+        return StatementSourceGenerator.this.toSource(node, inClinitForTypeDescriptor);
+      }
+
       @Override
       public String transformAssertStatement(AssertStatement statement) {
         if (statement.getMessage() == null) {
           return String.format(
-              "Asserts.$enabled() && Asserts.$assert(%s);", toSource(statement.getExpression()));
+              "%s.$enabled() && %s.$assert(%s);",
+              assertsTypeAlias(),
+              assertsTypeAlias(),
+              toSource(statement.getExpression()));
         } else {
           return String.format(
-              "Asserts.$enabled() && Asserts.$assertWithMessage(%s, %s);",
+              "%s.$enabled() && %s.$assertWithMessage(%s, %s);",
+              assertsTypeAlias(),
+              assertsTypeAlias(),
               toSource(statement.getExpression()),
               toSource(statement.getMessage()));
         }
@@ -104,7 +161,7 @@ public class StatementSourceGenerator {
 
         if (TranspilerUtils.isAssignment(operator) && leftOperand instanceof ArrayAccess) {
           return transformArrayAssignmentBinaryExpression(expression);
-        } else if (TypeDescriptor.LONG_TYPE_DESCRIPTOR == leftOperand.getTypeDescriptor()
+        } else if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == leftOperand.getTypeDescriptor()
             && operator != BinaryOperator.ASSIGN) {
           // Skips assignment because it doesn't need special handling.
           return transformLongBinaryExpression(expression);
@@ -127,7 +184,8 @@ public class StatementSourceGenerator {
           // The simplest case. The referenced long is not being modified so all that's necessary is
           // to do some computation and return a new value.
           return String.format(
-              "Longs.%s(%s, %s)",
+              "%s.%s(%s, %s)",
+              longsTypeAlias(),
               longOperationFunctionName,
               toSource(leftOperand),
               toSource(rightOperand));
@@ -139,8 +197,9 @@ public class StatementSourceGenerator {
           // twice.
           String leftOperandAsSource = toSource(leftOperand);
           return String.format(
-              "%s = Longs.%s(%s, %s)",
+              "%s = %s.%s(%s, %s)",
               leftOperandAsSource,
+              longsTypeAlias(),
               longOperationFunctionName,
               leftOperandAsSource,
               toSource(rightOperand));
@@ -152,9 +211,10 @@ public class StatementSourceGenerator {
         MemberReference memberReference = (MemberReference) leftOperand;
         String fieldOrMethodDescriptorAsString = toSource((Node) memberReference.getTarget());
         return String.format(
-            "window.$q = %s, window.$q.%s = Longs.%s(window.$q.%s, %s)",
+            "window.$q = %s, window.$q.%s = %s.%s(window.$q.%s, %s)",
             toSource(qualifier),
             fieldOrMethodDescriptorAsString,
+            longsTypeAlias(),
             longOperationFunctionName,
             fieldOrMethodDescriptorAsString,
             toSource(rightOperand));
@@ -185,7 +245,8 @@ public class StatementSourceGenerator {
 
         ArrayAccess arrayAccess = (ArrayAccess) expression.getLeftOperand();
         return String.format(
-            "Arrays.%s(%s, %s, %s)",
+            "%s.%s(%s, %s, %s)",
+            arraysTypeAlias(),
             TranspilerUtils.getArrayAssignmentFunctionName(expression.getOperator()),
             toSource(arrayAccess.getArrayExpression()),
             toSource(arrayAccess.getIndexExpression()),
@@ -223,12 +284,16 @@ public class StatementSourceGenerator {
           throw new RuntimeException("TODO: Implement toSource() for cast to primitive type");
         }
 
-        String jsDocTypeName = TranspilerUtils.getJsDocName(castTypeDescriptor);
-        String typeName = TranspilerUtils.getClassName(castTypeDescriptor);
+        String jsDocTypeName = getJsDocName(castTypeDescriptor);
+        String typeName = getAlias(castTypeDescriptor);
         String expressionStr = toSource(castExpression.getExpression());
         String isInstanceCallStr = String.format("%s.$isInstance(%s)", typeName, expressionStr);
         return String.format(
-            "/**@type {%s} */ (Casts.to(%s, %s))", jsDocTypeName, expressionStr, isInstanceCallStr);
+            "/**@type {%s} */ (%s.to(%s, %s))",
+            jsDocTypeName,
+            castsTypeAlias(),
+            expressionStr,
+            isInstanceCallStr);
       }
 
       private String transformArrayCastExpression(CastExpression castExpression) {
@@ -237,13 +302,13 @@ public class StatementSourceGenerator {
         ArrayTypeDescriptor arrayCastTypeDescriptor =
             (ArrayTypeDescriptor) castExpression.getCastTypeDescriptor();
 
-        String jsDocTypeName = TranspilerUtils.getJsDocName(arrayCastTypeDescriptor);
-        String leafTypeName =
-            TranspilerUtils.getClassName(arrayCastTypeDescriptor.getLeafTypeDescriptor());
+        String jsDocTypeName = getJsDocName(arrayCastTypeDescriptor);
+        String leafTypeName = getAlias(arrayCastTypeDescriptor.getLeafTypeDescriptor());
         String expressionStr = toSource(castExpression.getExpression());
         return String.format(
-            "/**@type {%s} */ (Arrays.$castTo(%s, %s, %s))",
+            "/**@type {%s} */ (%s.$castTo(%s, %s, %s))",
             jsDocTypeName,
+            arraysTypeAlias(),
             expressionStr,
             leafTypeName,
             arrayCastTypeDescriptor.getDimensions());
@@ -287,7 +352,7 @@ public class StatementSourceGenerator {
         }
         return String.format(
             "%s.$isInstance(%s)",
-            TranspilerUtils.getClassName(checkTypeDescriptor),
+            getAlias(checkTypeDescriptor),
             toSource(expression.getExpression()));
       }
 
@@ -296,11 +361,11 @@ public class StatementSourceGenerator {
         TypeDescriptor checkTypeDescriptor = arrayInstanceOfExpression.getTestTypeDescriptor();
         Preconditions.checkArgument(checkTypeDescriptor.isArray());
 
-        String leafTypeName =
-            TranspilerUtils.getClassName(checkTypeDescriptor.getLeafTypeDescriptor());
+        String leafTypeName = getAlias(checkTypeDescriptor.getLeafTypeDescriptor());
         String expressionStr = toSource(arrayInstanceOfExpression.getExpression());
         return String.format(
-            "Arrays.$instanceIsOfType(%s, %s, %s)",
+            "%s.$instanceIsOfType(%s, %s, %s)",
+            arraysTypeAlias(),
             expressionStr,
             leafTypeName,
             checkTypeDescriptor.getDimensions());
@@ -357,40 +422,46 @@ public class StatementSourceGenerator {
             Joiner.on(", ")
                 .join(transformNodesToSource(newArrayExpression.getDimensionExpressions()));
         return String.format(
-            "Arrays.$create([%s], %s)",
+            "%s.$create([%s], %s)",
+            arraysTypeAlias(),
             dimensionsList,
-            TranspilerUtils.getClassName(newArrayExpression.getLeafTypeDescriptor()));
+            getAlias(newArrayExpression.getLeafTypeDescriptor()));
       }
 
       private String transformArrayInit(NewArray newArrayExpression) {
+
         Preconditions.checkArgument(newArrayExpression.getArrayLiteral() != null);
 
-        String leafTypeName =
-            TranspilerUtils.getClassName(newArrayExpression.getLeafTypeDescriptor());
+        String leafTypeName = getAlias(newArrayExpression.getLeafTypeDescriptor());
         int dimensionCount = newArrayExpression.getDimensionExpressions().size();
         String arrayLiteralAsString = toSource(newArrayExpression.getArrayLiteral());
 
         if (dimensionCount == 1) {
           // It's 1 dimensional.
-          if (TypeDescriptor.OBJECT_TYPE_DESCRIPTOR == newArrayExpression.getLeafTypeDescriptor()) {
+          if (TypeDescriptors.OBJECT_TYPE_DESCRIPTOR
+              == newArrayExpression.getLeafTypeDescriptor()) {
             // And the leaf type is Object. All arrays are implicitly Array<Object> so leave out the
             // init.
             return arrayLiteralAsString;
           }
           // Number of dimensions defaults to 1 so we can leave that parameter out.
-          return String.format("Arrays.$init(%s, %s)", arrayLiteralAsString, leafTypeName);
+          return String.format(
+              "%s.$init(%s, %s)", arraysTypeAlias(), arrayLiteralAsString, leafTypeName);
         } else {
           // It's multidimensional, make dimensions explicit.
           return String.format(
-              "Arrays.$init(%s, %s, %s)", arrayLiteralAsString, leafTypeName, dimensionCount);
+              "%s.$init(%s, %s, %s)",
+              arraysTypeAlias(),
+              arrayLiteralAsString,
+              leafTypeName,
+              dimensionCount);
         }
       }
 
       @Override
       public String transformNewInstance(NewInstance expression) {
         String className =
-            TranspilerUtils.getClassName(
-                expression.getConstructorMethodDescriptor().getEnclosingClassTypeDescriptor());
+            getAlias(expression.getConstructorMethodDescriptor().getEnclosingClassTypeDescriptor());
         String constructorMangledName =
             ManglingNameUtils.getConstructorMangledName(
                 expression.getConstructorMethodDescriptor());
@@ -406,7 +477,7 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformNumberLiteral(NumberLiteral expression) {
-        if (TypeDescriptor.LONG_TYPE_DESCRIPTOR == expression.getTypeDescriptor()) {
+        if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == expression.getTypeDescriptor()) {
           return transformLongNumberLiteral(expression);
         }
         return expression.getValue().toString();
@@ -419,12 +490,13 @@ public class StatementSourceGenerator {
 
         if (longValue < Integer.MAX_VALUE && longValue > Integer.MIN_VALUE) {
           // The long value is small enough to fit in an int. Emit the terse initialization.
-          return String.format("Longs.$fromInt(%s)", Long.toString((long) expression.getValue()));
+          return String.format(
+              "%s.$fromInt(%s)", longsTypeAlias(), Long.toString((long) expression.getValue()));
         }
 
         // The long value is pretty large. Emit the verbose initialization.
         return String.format(
-            "Longs.$fromString('%s')", Long.toString((long) expression.getValue()));
+            "%s.$fromString('%s')", longsTypeAlias(), Long.toString((long) expression.getValue()));
       }
 
       @Override
@@ -434,7 +506,7 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformPostfixExpression(PostfixExpression expression) {
-        if (TypeDescriptor.LONG_TYPE_DESCRIPTOR == expression.getTypeDescriptor()) {
+        if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == expression.getTypeDescriptor()) {
           return transformLongPostfixExpression(expression);
         }
         return String.format(
@@ -452,11 +524,13 @@ public class StatementSourceGenerator {
           // from dereferencing the qualifier twice.
           String operandAsSource = toSource(operand);
           return String.format(
-              "(window.$v = %s, %s = Longs.%s(%s), window.$v)",
+              "(window.$v = %s, %s = %s.%s(%s), window.$v)",
               operandAsSource,
               operandAsSource,
+              longsTypeAlias(),
               TranspilerUtils.getLongOperationFunctionName(expression.getOperator()),
-              operandAsSource);
+              operandAsSource
+              );
         }
 
         // The harder case. Like the easier case except that special care needs to be taken to only
@@ -468,17 +542,18 @@ public class StatementSourceGenerator {
         String fieldOrMethodDescriptorAsString = toSource((Node) target);
         return String.format(
             "(window.$q = %s, window.$v = window.$q.%s, "
-                + "window.$q.%s = Longs.%s(window.$q.%s), window.$v)",
+                + "window.$q.%s = %s.%s(window.$q.%s), window.$v)",
             toSource(qualifier),
             fieldOrMethodDescriptorAsString,
             fieldOrMethodDescriptorAsString,
+            longsTypeAlias(),
             TranspilerUtils.getLongOperationFunctionName(expression.getOperator()),
             fieldOrMethodDescriptorAsString);
       }
 
       @Override
       public String transformPrefixExpression(PrefixExpression expression) {
-        if (TypeDescriptor.LONG_TYPE_DESCRIPTOR == expression.getTypeDescriptor()
+        if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == expression.getTypeDescriptor()
             && expression.getOperator() != PrefixOperator.PLUS) {
           // Skips the + prefix because it is a NOP.
           return transformLongPrefixExpression(expression);
@@ -497,7 +572,8 @@ public class StatementSourceGenerator {
         if (!TranspilerUtils.hasSideEffect(expression.getOperator())) {
           // The simplest case. The referenced long is not being modified so all that's necessary is
           // to do some computation and return a new value.
-          return String.format("Longs.%s(%s)", longOperationFunctionName, toSource(operand));
+          return String.format(
+              "%s.%s(%s)", longsTypeAlias(), longOperationFunctionName, toSource(operand));
         }
 
         if (qualifier == null) {
@@ -505,8 +581,9 @@ public class StatementSourceGenerator {
           // care needs to be taken to avoid double side-effects from dereferencing the qualifier
           // twice.
           return String.format(
-              "(%s = Longs.%s(%s))",
+              "(%s = %s.%s(%s))",
               toSource(operand),
+              longsTypeAlias(),
               longOperationFunctionName,
               toSource(operand));
         }
@@ -517,9 +594,10 @@ public class StatementSourceGenerator {
         MemberReference memberReference = (MemberReference) operand;
         String fieldOrMethodDescriptorAsString = toSource((Node) memberReference.getTarget());
         return String.format(
-            "(window.$q = %s, window.$q.%s = Longs.%s(window.$q.%s))",
+            "(window.$q = %s, window.$q.%s = %s.%s(window.$q.%s))",
             toSource(qualifier),
             fieldOrMethodDescriptorAsString,
+            longsTypeAlias(),
             longOperationFunctionName,
             fieldOrMethodDescriptorAsString);
       }
@@ -651,9 +729,7 @@ public class StatementSourceGenerator {
                   @Override
                   public String apply(TypeDescriptor typeDescriptor) {
                     return String.format(
-                        "%s.$isInstance(%s)",
-                        TranspilerUtils.getClassName(typeDescriptor),
-                        globalExceptionVarName);
+                        "%s.$isInstance(%s)", getAlias(typeDescriptor), globalExceptionVarName);
                   }
                 });
         return Joiner.on(" || ").join(isInstanceCalls);
@@ -661,7 +737,7 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformTypeDescriptor(TypeDescriptor typeDescriptor) {
-        return TranspilerUtils.getClassName(typeDescriptor);
+        return getAlias(typeDescriptor);
       }
 
       @Override
@@ -783,36 +859,47 @@ public class StatementSourceGenerator {
         Member member = memberRef.getTarget();
         String qualifier =
             memberRef.getQualifier() == null
-                ? (member.isStatic()
-                    ? TranspilerUtils.getClassName(member.getEnclosingClassTypeDescriptor())
-                    : "this")
+                ? (member.isStatic() ? getAlias(member.getEnclosingClassTypeDescriptor()) : "this")
                 : toSource(memberRef.getQualifier());
         return qualifier;
       }
+
+      public List<String> transformNodesToSource(List<? extends Node> nodes) {
+        return Lists.transform(
+            nodes,
+            new Function<Node, String>() {
+              @Override
+              public String apply(Node node) {
+                return toSource(node);
+              }
+            });
+      }
+
+      public String getAlias(TypeDescriptor typeDescriptor) {
+        String alias = aliasByTypeDescriptor.get(typeDescriptor);
+        return alias == null ? typeDescriptor.getClassName() : alias;
+      }
+
+      private String arraysTypeAlias() {
+        return toSource(TypeDescriptors.VM_ARRAYS_TYPE_DESCRIPTOR);
+      }
+
+      private String assertsTypeAlias() {
+        return toSource(TypeDescriptors.VM_ASSERTS_TYPE_DESCRIPTOR);
+      }
+
+      private String castsTypeAlias() {
+        return toSource(TypeDescriptors.VM_CASTS_TYPE_DESCRIPTOR);
+      }
+
+      private String longsTypeAlias() {
+        return toSource(TypeDescriptors.NATIVE_LONGS_TYPE_DESCRIPTOR);
+      }
+
+      private boolean isInClinit(TypeDescriptor typeDescriptor) {
+        return typeDescriptor.equals(inClinitForTypeDescriptor);
+      }
     }
     return new ToSourceTransformer().process(node);
-  }
-
-  public static List<String> transformNodesToSource(List<? extends Node> nodes) {
-    return Lists.transform(
-        nodes,
-        new Function<Node, String>() {
-          @Override
-          public String apply(Node node) {
-            return toSource(node);
-          }
-        });
-  }
-
-  public static void setInClinit(TypeDescriptor typeDescriptor) {
-    inClinitForTypeDescriptor = typeDescriptor;
-  }
-
-  public static void resetInClinit() {
-    inClinitForTypeDescriptor = null;
-  }
-
-  private static boolean isInClinit(TypeDescriptor typeDescriptor) {
-    return typeDescriptor == inClinitForTypeDescriptor;
   }
 }

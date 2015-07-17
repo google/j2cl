@@ -10,7 +10,7 @@ var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
 var NullPointerException = goog.require('gen.java.lang.NullPointerExceptionModule').NullPointerException;
 var RuntimeException = goog.require('gen.java.lang.RuntimeExceptionModule').RuntimeException;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 class MultipleCatch extends Object {
@@ -81,7 +81,7 @@ class MultipleCatch extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, MultipleCatch);
+    return $Util.$canCastClass(classConstructor, MultipleCatch);
   }
 
   /**
@@ -97,11 +97,11 @@ class MultipleCatch extends Object {
  * @public {Class}
  */
 MultipleCatch.$class = Class.$createForClass(
-    Util.$generateId('MultipleCatch'),
-    Util.$generateId(
+    $Util.$generateId('MultipleCatch'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch'));
 
 /**

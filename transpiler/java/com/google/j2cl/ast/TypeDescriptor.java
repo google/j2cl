@@ -41,24 +41,6 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
   public static final String LONG_TYPE_NAME = "long";
   public static final String SHORT_TYPE_NAME = "short";
 
-  public static final TypeDescriptor BOOLEAN_TYPE_DESCRIPTOR = createPrimitive(BOOLEAN_TYPE_NAME);
-  public static final TypeDescriptor BYTE_TYPE_DESCRIPTOR = createPrimitive(BYTE_TYPE_NAME);
-  public static final TypeDescriptor SHORT_TYPE_DESCRIPTOR = createPrimitive(SHORT_TYPE_NAME);
-  public static final TypeDescriptor INT_TYPE_DESCRIPTOR = createPrimitive(INT_TYPE_NAME);
-  public static final TypeDescriptor LONG_TYPE_DESCRIPTOR = createPrimitive(LONG_TYPE_NAME);
-  public static final TypeDescriptor FLOAT_TYPE_DESCRIPTOR = createPrimitive(FLOAT_TYPE_NAME);
-  public static final TypeDescriptor DOUBLE_TYPE_DESCRIPTOR = createPrimitive(DOUBLE_TYPE_NAME);
-  public static final TypeDescriptor CHAR_TYPE_DESCRIPTOR = createPrimitive(CHAR_TYPE_NAME);
-  public static final TypeDescriptor VOID_TYPE_DESCRIPTOR = createPrimitive(VOID_TYPE_NAME);
-  public static final TypeDescriptor OBJECT_TYPE_DESCRIPTOR =
-      RegularTypeDescriptor.create(
-          Arrays.asList("java", "lang"), Arrays.asList("Object"), "Object");
-  public static final TypeDescriptor STRING_TYPE_DESCRIPTOR =
-      RegularTypeDescriptor.create(
-          Arrays.asList("java", "lang"), Arrays.asList("String"), "String");
-  public static final TypeDescriptor OBJECTS_TYPE_DESCRIPTOR =
-      RegularTypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Objects", "ObjectsModule");
-
   private static Interner<TypeDescriptor> interner;
 
   public static TypeDescriptor create(
@@ -140,6 +122,26 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
 
   public TypeDescriptor getComponentTypeDescriptor() {
     return getLeafTypeDescriptor();
+  }
+
+  public Expression getDefaultValue() {
+    // Primitives.
+    switch (this.getSourceName()) {
+      case TypeDescriptor.BOOLEAN_TYPE_NAME:
+        return BooleanLiteral.FALSE;
+      case TypeDescriptor.BYTE_TYPE_NAME:
+      case TypeDescriptor.SHORT_TYPE_NAME:
+      case TypeDescriptor.INT_TYPE_NAME:
+      case TypeDescriptor.FLOAT_TYPE_NAME:
+      case TypeDescriptor.DOUBLE_TYPE_NAME:
+      case TypeDescriptor.CHAR_TYPE_NAME:
+        return new NumberLiteral(this, 0);
+      case TypeDescriptor.LONG_TYPE_NAME:
+        return new NumberLiteral(this, 0L);
+    }
+
+    // Objects.
+    return NullLiteral.NULL;
   }
 
   public TypeDescriptor getForArray(int dimensions) {

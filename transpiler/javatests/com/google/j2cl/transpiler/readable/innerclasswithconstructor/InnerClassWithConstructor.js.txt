@@ -7,7 +7,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.innerclasswithconstructor.I
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
@@ -87,7 +87,7 @@ class InnerClassWithConstructor extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, InnerClassWithConstructor);
+    return $Util.$canCastClass(classConstructor, InnerClassWithConstructor);
   }
 
   /**
@@ -103,11 +103,11 @@ class InnerClassWithConstructor extends Object {
  * @public {Class}
  */
 InnerClassWithConstructor.$class = Class.$createForClass(
-    Util.$generateId('InnerClassWithConstructor'),
-    Util.$generateId(
+    $Util.$generateId('InnerClassWithConstructor'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor'));
 
 /**
@@ -221,8 +221,8 @@ class InnerClassWithConstructor$InnerClass extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor,
-                              InnerClassWithConstructor$InnerClass);
+    return $Util.$canCastClass(classConstructor,
+                               InnerClassWithConstructor$InnerClass);
   }
 
   /**
@@ -238,11 +238,11 @@ class InnerClassWithConstructor$InnerClass extends Object {
  * @public {Class}
  */
 InnerClassWithConstructor$InnerClass.$class = Class.$createForClass(
-    Util.$generateId('InnerClass'),
-    Util.$generateId(
+    $Util.$generateId('InnerClass'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor$InnerClass'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor.InnerClass'));
 
 /**

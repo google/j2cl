@@ -39,6 +39,6 @@ public class StringLiteral extends Expression {
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
-    return TypeDescriptor.STRING_TYPE_DESCRIPTOR;
+    return TypeDescriptors.STRING_TYPE_DESCRIPTOR;
   }
 }

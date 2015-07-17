@@ -1,0 +1,115 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/localnamecollision/LocalNameCollision.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollisionModule');
+
+
+var Asserts = goog.require('gen.com.google.j2cl.transpiler.readable.localnamecollision.AssertsModule').Asserts;
+var com_google_j2cl_transpiler_readable_localnamecollision_Class = goog.require('gen.com.google.j2cl.transpiler.readable.localnamecollision.ClassModule').Class;
+var com_google_j2cl_transpiler_readable_localnamecollision_package1_A = goog.require('gen.com.google.j2cl.transpiler.readable.localnamecollision.package1.AModule').A;
+var com_google_j2cl_transpiler_readable_localnamecollision_package2_A = goog.require('gen.com.google.j2cl.transpiler.readable.localnamecollision.package2.AModule').A;
+var java_lang_Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Asserts = goog.require('vmbootstrap.AssertsModule').Asserts;
+
+
+class LocalNameCollision extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_localnamecollision_LocalNameCollision() {
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    com_google_j2cl_transpiler_readable_localnamecollision_package1_A.$create()
+        .m_m();
+    com_google_j2cl_transpiler_readable_localnamecollision_package2_A.$create()
+        .m_m();
+    Asserts.$create()
+        .m_n_$pp_com_google_j2cl_transpiler_readable_localnamecollision();
+    com_google_j2cl_transpiler_readable_localnamecollision_Class.$create()
+        .m_main();
+    $Asserts.$enabled() &&
+        $Asserts.$assert(
+            com_google_j2cl_transpiler_readable_localnamecollision_Class
+                .$create() != null);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!LocalNameCollision}
+   * @public
+   */
+  static $create() {
+    LocalNameCollision.$clinit();
+    var instance = new LocalNameCollision;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_localnamecollision_LocalNameCollision();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_localnamecollision_LocalNameCollision() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_localnamecollision_LocalNameCollision();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof LocalNameCollision;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, LocalNameCollision);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {java_lang_Class}
+ */
+LocalNameCollision.$class = java_lang_Class.$createForClass(
+    $Util.$generateId('LocalNameCollision'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollision'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollision'));
+
+/**
+ * Export class.
+ */
+exports.LocalNameCollision = LocalNameCollision;

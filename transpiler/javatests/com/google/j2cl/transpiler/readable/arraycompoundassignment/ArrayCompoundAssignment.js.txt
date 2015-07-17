@@ -7,8 +7,8 @@ goog.module('gen.com.google.j2cl.transpiler.readable.arraycompoundassignment.Arr
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
-var Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
 var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
@@ -31,18 +31,18 @@ class ArrayCompoundAssignment extends Object {
    * @public
    */
   m_main() {
-    let ints = Arrays.$create([100], $int);
-    Arrays.$addSet(ints, 0, 1);
-    Arrays.$subSet(ints, 0, 1);
-    Arrays.$mulSet(ints, 0, 1);
-    Arrays.$divSet(ints, 0, 1);
-    Arrays.$andSet(ints, 0, 1);
-    Arrays.$xorSet(ints, 0, 1);
-    Arrays.$orSet(ints, 0, 1);
-    Arrays.$modSet(ints, 0, 1);
-    Arrays.$lshiftSet(ints, 0, 1);
-    Arrays.$rshiftSet(ints, 0, 1);
-    Arrays.$rshiftUSet(ints, 0, 1);
+    let ints = $Arrays.$create([100], $int);
+    $Arrays.$addSet(ints, 0, 1);
+    $Arrays.$subSet(ints, 0, 1);
+    $Arrays.$mulSet(ints, 0, 1);
+    $Arrays.$divSet(ints, 0, 1);
+    $Arrays.$andSet(ints, 0, 1);
+    $Arrays.$xorSet(ints, 0, 1);
+    $Arrays.$orSet(ints, 0, 1);
+    $Arrays.$modSet(ints, 0, 1);
+    $Arrays.$lshiftSet(ints, 0, 1);
+    $Arrays.$rshiftSet(ints, 0, 1);
+    $Arrays.$rshiftUSet(ints, 0, 1);
   }
 
   /**
@@ -83,7 +83,7 @@ class ArrayCompoundAssignment extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, ArrayCompoundAssignment);
+    return $Util.$canCastClass(classConstructor, ArrayCompoundAssignment);
   }
 
   /**
@@ -99,11 +99,11 @@ class ArrayCompoundAssignment extends Object {
  * @public {Class}
  */
 ArrayCompoundAssignment.$class = Class.$createForClass(
-    Util.$generateId('ArrayCompoundAssignment'),
-    Util.$generateId(
+    $Util.$generateId('ArrayCompoundAssignment'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.arraycompoundassignment.ArrayCompoundAssignment'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.arraycompoundassignment.ArrayCompoundAssignment'));
 
 /**

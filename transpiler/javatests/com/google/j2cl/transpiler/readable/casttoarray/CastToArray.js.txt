@@ -7,8 +7,8 @@ goog.module('gen.com.google.j2cl.transpiler.readable.casttoarray.CastToArrayModu
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
-var Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
 
 
 class CastToArray extends Object {
@@ -29,9 +29,9 @@ class CastToArray extends Object {
    * @public
    */
   m_main() {
-    let foo = /**@type {Array<Object>} */ (Arrays.$castTo(null, Object, 1));
+    let foo = /**@type {Array<Object>} */ ($Arrays.$castTo(null, Object, 1));
     let bar =
-        /**@type {Array<Array<Object>>} */ (Arrays.$castTo(null, Object, 2));
+        /**@type {Array<Array<Object>>} */ ($Arrays.$castTo(null, Object, 2));
   }
 
   /**
@@ -70,7 +70,7 @@ class CastToArray extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, CastToArray);
+    return $Util.$canCastClass(classConstructor, CastToArray);
   }
 
   /**
@@ -86,11 +86,11 @@ class CastToArray extends Object {
  * @public {Class}
  */
 CastToArray.$class = Class.$createForClass(
-    Util.$generateId('CastToArray'),
-    Util.$generateId(
+    $Util.$generateId('CastToArray'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.casttoarray.CastToArray'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.casttoarray.CastToArray'));
 
 /**

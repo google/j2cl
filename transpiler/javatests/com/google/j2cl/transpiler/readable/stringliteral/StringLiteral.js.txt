@@ -8,7 +8,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.stringliteral.StringLiteral
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
 var String = goog.require('gen.java.lang.StringModule').String;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 class StringLiteral extends Object {
@@ -77,7 +77,7 @@ class StringLiteral extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, StringLiteral);
+    return $Util.$canCastClass(classConstructor, StringLiteral);
   }
 
   /**
@@ -93,11 +93,11 @@ class StringLiteral extends Object {
  * @public {Class}
  */
 StringLiteral.$class = Class.$createForClass(
-    Util.$generateId('StringLiteral'),
-    Util.$generateId(
+    $Util.$generateId('StringLiteral'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.stringliteral.StringLiteral'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.stringliteral.StringLiteral'));
 
 /**

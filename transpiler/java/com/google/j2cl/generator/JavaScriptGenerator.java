@@ -16,7 +16,10 @@
 package com.google.j2cl.generator;
 
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.errors.Errors;
+import com.google.j2cl.generator.visitors.Import;
+import com.google.j2cl.generator.visitors.ImportGatheringVisitor;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -25,6 +28,7 @@ import java.io.File;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Set;
 
 /**
  * Generates JavaScript source files.
@@ -64,11 +68,16 @@ public class JavaScriptGenerator extends AbstractSourceGenerator {
   private VelocityContext createContext() {
     VelocityContext context = new VelocityContext();
 
-    // TODO: to be implemented.
+    Set<Import> imports = ImportGatheringVisitor.gatherImports(compilationUnit);
+    StatementSourceGenerator statementSourceGenerator = new StatementSourceGenerator(imports);
+
     context.put("compilationUnit", compilationUnit);
     context.put("TranspilerUtils", TranspilerUtils.class);
     context.put("ManglingNameUtils", ManglingNameUtils.class);
-    context.put("StatementSourceGenerator", StatementSourceGenerator.class);
+    context.put("imports", imports);
+    context.put("statementSourceGenerator", statementSourceGenerator);
+    context.put("javaLangClassTypeDecriptor", TypeDescriptors.CLASS_TYPE_DESCRIPTOR);
+    context.put("nativeUtilTypeDecriptor", TypeDescriptors.NATIVE_UTIL_TYPE_DESCRIPTOR);
 
     return context;
   }

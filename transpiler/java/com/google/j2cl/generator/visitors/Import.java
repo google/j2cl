@@ -17,54 +17,61 @@ package com.google.j2cl.generator.visitors;
 
 import com.google.common.collect.ComparisonChain;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptors;
 
 /**
  * A Node class that represents the goog.require statement
- * var ClassName = goog.require('moduleName').ClassName
+ * var ClassNameAlias = goog.require('moduleName').ClassName
  */
 public class Import implements Comparable<Import> {
-
-  public static final Import IMPORT_CLASS = new Import("Class", "gen.java.lang.ClassModule");
-  public static final Import IMPORT_NATIVE_LONGS =
-      new Import("Longs", "nativebootstrap.LongsModule");
-  public static final Import IMPORT_NATIVE_LONG = new Import("Long", "nativebootstrap.LongsModule");
-  public static final Import IMPORT_NATIVE_UTIL = new Import("Util", "nativebootstrap.UtilModule");
-  public static final Import IMPORT_VM_ASSERTS = new Import("Asserts", "vmbootstrap.AssertsModule");
-  public static final Import IMPORT_VM_ARRAYS = new Import("Arrays", "vmbootstrap.ArraysModule");
-  public static final Import IMPORT_VM_CASTS = new Import("Casts", "vmbootstrap.CastsModule");
   public static final String IMPORT_VM_PRIMITIVES_MODULE = "vmbootstrap.PrimitivesModule";
 
   private String className;
   private String moduleName;
+  private String alias;
+  private TypeDescriptor typeDescriptor;
 
-  public Import(String className, String moduleName) {
+  Import(String alias, TypeDescriptor typeDescriptor) {
+    String className = typeDescriptor.getClassName();
+    String moduleName = computeModuleName(typeDescriptor);
+
     // TODO: remove hack when Closure compiler supports circular references.
-    if (moduleName.equals("gen.java.lang.ClassModule")
-        || moduleName.equals("gen.java.lang.ObjectModule")) {
-      moduleName = "gen.java.lang.CoreModule";
+    if (typeDescriptor == TypeDescriptors.OBJECT_TYPE_DESCRIPTOR
+        || typeDescriptor == TypeDescriptors.CLASS_TYPE_DESCRIPTOR) {
+      moduleName = computeModuleName("java.lang.Core");
     }
     this.className = className;
     this.moduleName = moduleName;
+    this.alias = alias;
+    this.typeDescriptor = typeDescriptor;
   }
 
-  public Import(TypeDescriptor typeDescriptor) {
-    this(typeDescriptor.getClassName(), computeModule(typeDescriptor));
-  }
-
+  /**
+   * Returns the class name.
+   */
   public String getClassName() {
     return className;
   }
 
-  public void setClassName(String className) {
-    this.className = className;
+  /**
+   * Returns the alias.
+   */
+  public String getAlias() {
+    return alias;
   }
 
+  /**
+   * Returns the module name.
+   */
   public String getModuleName() {
     return moduleName;
   }
 
-  public void setModuleName(String moduleName) {
-    this.moduleName = moduleName;
+  /**
+   * Returns the associated type descriptor.
+   */
+  public TypeDescriptor getTypeDescriptor() {
+    return typeDescriptor;
   }
 
   /**
@@ -78,13 +85,17 @@ public class Import implements Comparable<Import> {
         .result();
   }
 
-  private static String computeModule(TypeDescriptor typeDescriptor) {
+  private static String computeModuleName(TypeDescriptor typeDescriptor) {
     if (typeDescriptor.isPrimitive()) {
       return IMPORT_VM_PRIMITIVES_MODULE;
     }
     if (typeDescriptor.isRaw()) {
       return typeDescriptor.getCompilationUnitSourceName();
     }
-    return "gen." + typeDescriptor.getCompilationUnitSourceName() + "Module";
+    return computeModuleName(typeDescriptor.getCompilationUnitSourceName());
+  }
+
+  private static String computeModuleName(String compilationUnitSourceName) {
+    return "gen." + compilationUnitSourceName + "Module";
   }
 }

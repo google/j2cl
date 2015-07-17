@@ -7,8 +7,8 @@ goog.module('gen.com.google.j2cl.transpiler.readable.primitivearrays.PrimitiveAr
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
-var Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
 var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
 var $byte = goog.require('vmbootstrap.PrimitivesModule').$byte;
 var $char = goog.require('vmbootstrap.PrimitivesModule').$char;
@@ -38,28 +38,28 @@ class PrimitiveArrays extends Object {
    * @public
    */
   m_main() {
-    let bytes = Arrays.$create([100], $byte);
-    let bytes2d = Arrays.$create([5, 10], $byte);
-    let shorts = Arrays.$create([100], $short);
-    let shorts2d = Arrays.$create([5, 10], $short);
-    let ints = Arrays.$create([100], $int);
-    let ints2d = Arrays.$create([5, 10], $int);
-    let longs = Arrays.$create([100], $long);
-    let longs2d = Arrays.$create([5, 10], $long);
-    let floats = Arrays.$create([100], $float);
-    let floats2d = Arrays.$create([5, 10], $float);
-    let doubles = Arrays.$create([100], $double);
-    let doubles2d = Arrays.$create([5, 10], $double);
-    let chars = Arrays.$create([100], $char);
-    let chars2d = Arrays.$create([5, 10], $char);
-    let booleans = Arrays.$create([100], $boolean);
-    let booleans2d = Arrays.$create([5, 10], $boolean);
+    let bytes = $Arrays.$create([100], $byte);
+    let bytes2d = $Arrays.$create([5, 10], $byte);
+    let shorts = $Arrays.$create([100], $short);
+    let shorts2d = $Arrays.$create([5, 10], $short);
+    let ints = $Arrays.$create([100], $int);
+    let ints2d = $Arrays.$create([5, 10], $int);
+    let longs = $Arrays.$create([100], $long);
+    let longs2d = $Arrays.$create([5, 10], $long);
+    let floats = $Arrays.$create([100], $float);
+    let floats2d = $Arrays.$create([5, 10], $float);
+    let doubles = $Arrays.$create([100], $double);
+    let doubles2d = $Arrays.$create([5, 10], $double);
+    let chars = $Arrays.$create([100], $char);
+    let chars2d = $Arrays.$create([5, 10], $char);
+    let booleans = $Arrays.$create([100], $boolean);
+    let booleans2d = $Arrays.$create([5, 10], $boolean);
     let foo = ints[0];
     foo = ints2d[0][1];
-    Arrays.$set(ints, 0, 10);
-    Arrays.$set(ints2d[0], 1, 20);
-    Arrays.$addSet(ints, 0, 1);
-    Arrays.$subSet(ints2d[0], 1, 1);
+    $Arrays.$set(ints, 0, 10);
+    $Arrays.$set(ints2d[0], 1, 20);
+    $Arrays.$addSet(ints, 0, 1);
+    $Arrays.$subSet(ints2d[0], 1, 1);
   }
 
   /**
@@ -98,7 +98,7 @@ class PrimitiveArrays extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, PrimitiveArrays);
+    return $Util.$canCastClass(classConstructor, PrimitiveArrays);
   }
 
   /**
@@ -114,11 +114,11 @@ class PrimitiveArrays extends Object {
  * @public {Class}
  */
 PrimitiveArrays.$class = Class.$createForClass(
-    Util.$generateId('PrimitiveArrays'),
-    Util.$generateId(
+    $Util.$generateId('PrimitiveArrays'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.primitivearrays.PrimitiveArrays'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.primitivearrays.PrimitiveArrays'));
 
 /**

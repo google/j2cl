@@ -8,8 +8,8 @@ goog.module('gen.com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
 var String = goog.require('gen.java.lang.StringModule').String;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
-var Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
 
 
 class NewInstanceExpr extends Object {
@@ -71,7 +71,7 @@ class NewInstanceExpr extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, NewInstanceExpr);
+    return $Util.$canCastClass(classConstructor, NewInstanceExpr);
   }
 
   /**
@@ -87,11 +87,11 @@ class NewInstanceExpr extends Object {
  * @public {Class}
  */
 NewInstanceExpr.$class = Class.$createForClass(
-    Util.$generateId('NewInstanceExpr'),
-    Util.$generateId(
+    $Util.$generateId('NewInstanceExpr'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr'));
 
 /**

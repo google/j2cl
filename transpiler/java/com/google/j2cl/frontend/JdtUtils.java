@@ -24,6 +24,7 @@ import com.google.j2cl.ast.PostfixOperator;
 import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 
@@ -80,23 +81,23 @@ public class JdtUtils {
     if (typeBinding.isPrimitive()) {
       switch (typeBinding.getName()) {
         case TypeDescriptor.BOOLEAN_TYPE_NAME:
-          return TypeDescriptor.BOOLEAN_TYPE_DESCRIPTOR;
+          return TypeDescriptors.BOOLEAN_TYPE_DESCRIPTOR;
         case TypeDescriptor.BYTE_TYPE_NAME:
-          return TypeDescriptor.BYTE_TYPE_DESCRIPTOR;
+          return TypeDescriptors.BYTE_TYPE_DESCRIPTOR;
         case TypeDescriptor.SHORT_TYPE_NAME:
-          return TypeDescriptor.SHORT_TYPE_DESCRIPTOR;
+          return TypeDescriptors.SHORT_TYPE_DESCRIPTOR;
         case TypeDescriptor.INT_TYPE_NAME:
-          return TypeDescriptor.INT_TYPE_DESCRIPTOR;
+          return TypeDescriptors.INT_TYPE_DESCRIPTOR;
         case TypeDescriptor.LONG_TYPE_NAME:
-          return TypeDescriptor.LONG_TYPE_DESCRIPTOR;
+          return TypeDescriptors.LONG_TYPE_DESCRIPTOR;
         case TypeDescriptor.FLOAT_TYPE_NAME:
-          return TypeDescriptor.FLOAT_TYPE_DESCRIPTOR;
+          return TypeDescriptors.FLOAT_TYPE_DESCRIPTOR;
         case TypeDescriptor.DOUBLE_TYPE_NAME:
-          return TypeDescriptor.DOUBLE_TYPE_DESCRIPTOR;
+          return TypeDescriptors.DOUBLE_TYPE_DESCRIPTOR;
         case TypeDescriptor.CHAR_TYPE_NAME:
-          return TypeDescriptor.CHAR_TYPE_DESCRIPTOR;
+          return TypeDescriptors.CHAR_TYPE_DESCRIPTOR;
         case TypeDescriptor.VOID_TYPE_NAME:
-          return TypeDescriptor.VOID_TYPE_DESCRIPTOR;
+          return TypeDescriptors.VOID_TYPE_DESCRIPTOR;
         default:
           Preconditions.checkArgument(
               false, "Primitive type name '" + typeBinding.getName() + "' is unrecognized.");
@@ -138,7 +139,10 @@ public class JdtUtils {
       IVariableBinding variableBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
     if (isArrayLengthBinding(variableBinding)) {
       return FieldDescriptor.createRaw(
-          false, TypeDescriptor.VOID_TYPE_DESCRIPTOR, "length", TypeDescriptor.INT_TYPE_DESCRIPTOR);
+          false,
+          TypeDescriptors.VOID_TYPE_DESCRIPTOR,
+          "length",
+          TypeDescriptors.INT_TYPE_DESCRIPTOR);
     }
 
     int modifiers = variableBinding.getModifiers();

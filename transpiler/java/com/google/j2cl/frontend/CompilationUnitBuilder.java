@@ -66,6 +66,7 @@ import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
@@ -349,7 +350,7 @@ public class CompilationUnitBuilder {
           convert((List<org.eclipse.jdt.core.dom.Expression>) expression.dimensions());
       // If some dimensions are not initialized then make that explicit.
       while (dimensionExpressions.size() < arrayType.getDimensions()) {
-        dimensionExpressions.add(new NullLiteral());
+        dimensionExpressions.add(NullLiteral.NULL);
       }
 
       ArrayLiteral arrayLiteral =
@@ -780,7 +781,7 @@ public class CompilationUnitBuilder {
 
       TypeDescriptor[] parameterTypeDescriptors = new TypeDescriptor[originalParameterCount + 1];
       // Turn the instance into now a first parameter to the devirtualized method.
-      parameterTypeDescriptors[0] = TypeDescriptor.OBJECT_TYPE_DESCRIPTOR;
+      parameterTypeDescriptors[0] = TypeDescriptors.OBJECT_TYPE_DESCRIPTOR;
       for (int i = 0; i < originalParameterCount; i++) {
         parameterTypeDescriptors[i + 1] =
             createTypeDescriptor(methodBinding.getParameterTypes()[i]);
@@ -789,7 +790,7 @@ public class CompilationUnitBuilder {
           MethodDescriptor.create(
               true, // Static method.
               JdtUtils.getVisibility(methodBinding.getModifiers()),
-              TypeDescriptor.OBJECTS_TYPE_DESCRIPTOR, // Enclosing class reference.
+              TypeDescriptors.OBJECTS_TYPE_DESCRIPTOR, // Enclosing class reference.
               methodName,
               isConstructor,
               isNative,
@@ -806,7 +807,7 @@ public class CompilationUnitBuilder {
 
     @SuppressWarnings("unused")
     private NullLiteral convert(org.eclipse.jdt.core.dom.NullLiteral literal) {
-      return new NullLiteral();
+      return NullLiteral.NULL;
     }
 
     private NumberLiteral convert(org.eclipse.jdt.core.dom.NumberLiteral literal) {
@@ -1028,7 +1029,7 @@ public class CompilationUnitBuilder {
           new FieldAccess(null, classFieldDescriptor),
           forArrayMethodDescriptor,
           ImmutableList.<Expression>of(
-              new NumberLiteral(TypeDescriptor.INT_TYPE_DESCRIPTOR, typeBinding.getDimensions())));
+              new NumberLiteral(TypeDescriptors.INT_TYPE_DESCRIPTOR, typeBinding.getDimensions())));
     }
 
     private ThrowStatement convert(org.eclipse.jdt.core.dom.ThrowStatement statement) {

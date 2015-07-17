@@ -7,7 +7,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterfa
 
 var SomeInterface = goog.require('gen.com.google.j2cl.transpiler.readable.interfaceuse.SomeInterfaceModule').SomeInterface;
 var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 /**
@@ -76,11 +76,11 @@ AnotherInterface.$markImplementor(AnotherInterface);
  * @public {Class}
  */
 AnotherInterface.$class = Class.$createForInterface(
-    Util.$generateId('AnotherInterface'),
-    Util.$generateId(
+    $Util.$generateId('AnotherInterface'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface'),
     null,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface'));
 
 /**

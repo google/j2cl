@@ -7,7 +7,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.instancefieldinitializer.In
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
@@ -80,7 +80,7 @@ class InstanceFieldInitializer extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, InstanceFieldInitializer);
+    return $Util.$canCastClass(classConstructor, InstanceFieldInitializer);
   }
 
   /**
@@ -96,11 +96,11 @@ class InstanceFieldInitializer extends Object {
  * @public {Class}
  */
 InstanceFieldInitializer.$class = Class.$createForClass(
-    Util.$generateId('InstanceFieldInitializer'),
-    Util.$generateId(
+    $Util.$generateId('InstanceFieldInitializer'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.instancefieldinitializer.InstanceFieldInitializer'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.instancefieldinitializer.InstanceFieldInitializer'));
 
 /**

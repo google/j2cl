@@ -40,7 +40,7 @@ public class ASTUtils {
         MethodDescriptor.METHOD_INIT,
         false,
         false,
-        TypeDescriptor.VOID_TYPE_DESCRIPTOR);
+        TypeDescriptors.VOID_TYPE_DESCRIPTOR);
   }
 
   /**
@@ -55,7 +55,7 @@ public class ASTUtils {
         typeDescriptor.getClassName(),
         true,
         false,
-        TypeDescriptor.VOID_TYPE_DESCRIPTOR);
+        TypeDescriptors.VOID_TYPE_DESCRIPTOR);
   }
 
   /**

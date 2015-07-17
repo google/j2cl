@@ -62,7 +62,7 @@ public abstract class MethodDescriptor extends Node implements Member {
         false,
         false,
         ImmutableList.<TypeDescriptor>of(),
-        TypeDescriptor.VOID_TYPE_DESCRIPTOR);
+        TypeDescriptors.VOID_TYPE_DESCRIPTOR);
   }
 
   @Override

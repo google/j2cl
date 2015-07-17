@@ -7,7 +7,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.multipletopclasses.Multiple
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 class AnotherClass extends Object {
@@ -60,7 +60,7 @@ class AnotherClass extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, AnotherClass);
+    return $Util.$canCastClass(classConstructor, AnotherClass);
   }
 
   /**
@@ -76,11 +76,11 @@ class AnotherClass extends Object {
  * @public {Class}
  */
 AnotherClass.$class = Class.$createForClass(
-    Util.$generateId('AnotherClass'),
-    Util.$generateId(
+    $Util.$generateId('AnotherClass'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.multipletopclasses.AnotherClass'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.multipletopclasses.AnotherClass'));
 
 /**
@@ -142,7 +142,7 @@ class MultipleTopClasses extends AnotherClass {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, MultipleTopClasses);
+    return $Util.$canCastClass(classConstructor, MultipleTopClasses);
   }
 
   /**
@@ -158,11 +158,11 @@ class MultipleTopClasses extends AnotherClass {
  * @public {Class}
  */
 MultipleTopClasses.$class = Class.$createForClass(
-    Util.$generateId('MultipleTopClasses'),
-    Util.$generateId(
+    $Util.$generateId('MultipleTopClasses'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.multipletopclasses.MultipleTopClasses'),
     AnotherClass.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.multipletopclasses.MultipleTopClasses'));
 
 /**

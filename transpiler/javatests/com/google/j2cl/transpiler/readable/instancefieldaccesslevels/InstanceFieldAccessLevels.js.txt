@@ -7,7 +7,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.instancefieldaccesslevels.I
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
 var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
@@ -86,7 +86,7 @@ class InstanceFieldAccessLevels extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, InstanceFieldAccessLevels);
+    return $Util.$canCastClass(classConstructor, InstanceFieldAccessLevels);
   }
 
   /**
@@ -102,11 +102,11 @@ class InstanceFieldAccessLevels extends Object {
  * @public {Class}
  */
 InstanceFieldAccessLevels.$class = Class.$createForClass(
-    Util.$generateId('InstanceFieldAccessLevels'),
-    Util.$generateId(
+    $Util.$generateId('InstanceFieldAccessLevels'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.instancefieldaccesslevels.InstanceFieldAccessLevels'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.instancefieldaccesslevels.InstanceFieldAccessLevels'));
 
 /**

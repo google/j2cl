@@ -6,7 +6,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.emptyinterface.EmptyInterfa
 
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 /**
@@ -67,11 +67,11 @@ EmptyInterface.$markImplementor(EmptyInterface);
  * @public {Class}
  */
 EmptyInterface.$class = Class.$createForInterface(
-    Util.$generateId('EmptyInterface'),
-    Util.$generateId(
+    $Util.$generateId('EmptyInterface'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.emptyinterface.EmptyInterface'),
     null,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.emptyinterface.EmptyInterface'));
 
 /**

@@ -7,7 +7,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.overridingmethods.ParentMod
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 class Parent extends Object {
@@ -65,7 +65,7 @@ class Parent extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, Parent);
+    return $Util.$canCastClass(classConstructor, Parent);
   }
 
   /**
@@ -81,11 +81,11 @@ class Parent extends Object {
  * @public {Class}
  */
 Parent.$class = Class.$createForClass(
-    Util.$generateId('Parent'),
-    Util.$generateId(
+    $Util.$generateId('Parent'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.overridingmethods.Parent'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.overridingmethods.Parent'));
 
 /**

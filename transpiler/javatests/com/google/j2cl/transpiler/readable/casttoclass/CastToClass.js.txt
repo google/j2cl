@@ -7,8 +7,8 @@ goog.module('gen.com.google.j2cl.transpiler.readable.casttoclass.CastToClassModu
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
-var Casts = goog.require('vmbootstrap.CastsModule').Casts;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Casts = goog.require('vmbootstrap.CastsModule').Casts;
 
 
 class CastToClass extends Object {
@@ -30,7 +30,8 @@ class CastToClass extends Object {
    */
   m_main() {
     let o = CastToClass.$create();
-    let c = /**@type {CastToClass} */ (Casts.to(o, CastToClass.$isInstance(o)));
+    let c =
+        /**@type {CastToClass} */ ($Casts.to(o, CastToClass.$isInstance(o)));
   }
 
   /**
@@ -69,7 +70,7 @@ class CastToClass extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, CastToClass);
+    return $Util.$canCastClass(classConstructor, CastToClass);
   }
 
   /**
@@ -85,11 +86,11 @@ class CastToClass extends Object {
  * @public {Class}
  */
 CastToClass.$class = Class.$createForClass(
-    Util.$generateId('CastToClass'),
-    Util.$generateId(
+    $Util.$generateId('CastToClass'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.casttoclass.CastToClass'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.casttoclass.CastToClass'));
 
 /**

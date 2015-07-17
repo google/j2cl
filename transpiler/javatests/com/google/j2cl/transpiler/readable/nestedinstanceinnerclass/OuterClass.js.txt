@@ -7,7 +7,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.Ou
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 class OuterClass extends Object {
@@ -78,7 +78,7 @@ class OuterClass extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, OuterClass);
+    return $Util.$canCastClass(classConstructor, OuterClass);
   }
 
   /**
@@ -94,11 +94,11 @@ class OuterClass extends Object {
  * @public {Class}
  */
 OuterClass.$class = Class.$createForClass(
-    Util.$generateId('OuterClass'),
-    Util.$generateId(
+    $Util.$generateId('OuterClass'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass'));
 
 /**
@@ -181,7 +181,7 @@ class OuterClass$InnerClass extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, OuterClass$InnerClass);
+    return $Util.$canCastClass(classConstructor, OuterClass$InnerClass);
   }
 
   /**
@@ -197,11 +197,11 @@ class OuterClass$InnerClass extends Object {
  * @public {Class}
  */
 OuterClass$InnerClass.$class = Class.$createForClass(
-    Util.$generateId('InnerClass'),
-    Util.$generateId(
+    $Util.$generateId('InnerClass'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$InnerClass'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass'));
 
 /**
@@ -291,8 +291,8 @@ class OuterClass$InnerClass$InnerInnerClass extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor,
-                              OuterClass$InnerClass$InnerInnerClass);
+    return $Util.$canCastClass(classConstructor,
+                               OuterClass$InnerClass$InnerInnerClass);
   }
 
   /**
@@ -308,11 +308,11 @@ class OuterClass$InnerClass$InnerInnerClass extends Object {
  * @public {Class}
  */
 OuterClass$InnerClass$InnerInnerClass.$class = Class.$createForClass(
-    Util.$generateId('InnerInnerClass'),
-    Util.$generateId(
+    $Util.$generateId('InnerInnerClass'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$InnerClass$InnerInnerClass'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass'));
 
 /**

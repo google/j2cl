@@ -9,7 +9,7 @@ var AnotherInterface = goog.require('gen.com.google.j2cl.transpiler.readable.int
 var SomeInterface = goog.require('gen.com.google.j2cl.transpiler.readable.interfaceuse.SomeInterfaceModule').SomeInterface;
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 /**
@@ -72,7 +72,7 @@ class SomeClass extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, SomeClass);
+    return $Util.$canCastClass(classConstructor, SomeClass);
   }
 
   /**
@@ -94,11 +94,11 @@ AnotherInterface.$markImplementor(SomeClass);
  * @public {Class}
  */
 SomeClass.$class = Class.$createForClass(
-    Util.$generateId('SomeClass'),
-    Util.$generateId(
+    $Util.$generateId('SomeClass'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.interfaceuse.SomeClass'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.interfaceuse.SomeClass'));
 
 /**

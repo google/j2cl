@@ -9,7 +9,7 @@
   /**
    * A particular Java constructor as a factory method.
 #foreach($parameter in $method.Parameters)
-#set ($parameterTypeName = $TranspilerUtils.getJsDocName($parameter.TypeDescriptor))
+#set ($parameterTypeName = ${statementSourceGenerator.getJsDocName(${parameter.TypeDescriptor})})
    * @param {$parameterTypeName} $parameter.Name
 #end
    * @return {!$jsDocName}
@@ -25,13 +25,13 @@
   /**
    * Initializes instance fields for a particular Java constructor.
 #foreach($parameter in $method.Parameters)
-#set ($parameterTypeName = $TranspilerUtils.getJsDocName($parameter.TypeDescriptor))
+#set ($parameterTypeName = ${statementSourceGenerator.getJsDocName(${parameter.TypeDescriptor})})
    * @param {$parameterTypeName} $parameter.Name
 #end
    * @$ctorVisibility
    */
   $mangledNameOfCtor($parameterList) {
 #foreach ($statementInBody in $method.Body.Statements)
-    $StatementSourceGenerator.toSource($statementInBody)
+    $statementSourceGenerator.toSource($statementInBody)
 #end
   }

@@ -1,0 +1,98 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/localnamecollision/Asserts.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.localnamecollision.AssertsModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Asserts = goog.require('vmbootstrap.AssertsModule').Asserts;
+
+
+class Asserts extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_localnamecollision_Asserts() {}
+
+  /**
+   * @return {number}
+   * @package
+   */
+  m_n_$pp_com_google_j2cl_transpiler_readable_localnamecollision() {
+    $Asserts.$enabled() && $Asserts.$assert(5 != 4);
+    return 5;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Asserts}
+   * @public
+   */
+  static $create() {
+    Asserts.$clinit();
+    var instance = new Asserts;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_localnamecollision_Asserts();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_localnamecollision_Asserts() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_localnamecollision_Asserts();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Asserts; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Asserts);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+Asserts.$class = Class.$createForClass(
+    $Util.$generateId('Asserts'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.localnamecollision.Asserts'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.localnamecollision.Asserts'));
+
+/**
+ * Export class.
+ */
+exports.Asserts = Asserts;

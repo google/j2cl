@@ -7,7 +7,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.arithmeticexpressions.Arith
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
 var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
@@ -83,7 +83,7 @@ class ArithmeticExpressions extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, ArithmeticExpressions);
+    return $Util.$canCastClass(classConstructor, ArithmeticExpressions);
   }
 
   /**
@@ -99,11 +99,11 @@ class ArithmeticExpressions extends Object {
  * @public {Class}
  */
 ArithmeticExpressions.$class = Class.$createForClass(
-    Util.$generateId('ArithmeticExpressions'),
-    Util.$generateId(
+    $Util.$generateId('ArithmeticExpressions'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions'));
 
 /**

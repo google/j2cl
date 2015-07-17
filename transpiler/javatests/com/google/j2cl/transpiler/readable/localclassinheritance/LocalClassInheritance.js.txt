@@ -7,7 +7,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.localclassinheritance.Local
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
@@ -89,7 +89,7 @@ class LocalClassInheritance$1Parent extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, LocalClassInheritance$1Parent);
+    return $Util.$canCastClass(classConstructor, LocalClassInheritance$1Parent);
   }
 
   /**
@@ -105,11 +105,11 @@ class LocalClassInheritance$1Parent extends Object {
  * @public {Class}
  */
 LocalClassInheritance$1Parent.$class = Class.$createForClass(
-    Util.$generateId('1Parent'),
-    Util.$generateId(
+    $Util.$generateId('1Parent'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance$1Parent'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance.1Parent'));
 
 
@@ -194,7 +194,7 @@ class LocalClassInheritance$1Child extends LocalClassInheritance$1Parent {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, LocalClassInheritance$1Child);
+    return $Util.$canCastClass(classConstructor, LocalClassInheritance$1Child);
   }
 
   /**
@@ -210,11 +210,11 @@ class LocalClassInheritance$1Child extends LocalClassInheritance$1Parent {
  * @public {Class}
  */
 LocalClassInheritance$1Child.$class = Class.$createForClass(
-    Util.$generateId('1Child'),
-    Util.$generateId(
+    $Util.$generateId('1Child'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance$1Child'),
     LocalClassInheritance$1Parent.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance.1Child'));
 
 
@@ -277,7 +277,7 @@ class LocalClassInheritance extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, LocalClassInheritance);
+    return $Util.$canCastClass(classConstructor, LocalClassInheritance);
   }
 
   /**
@@ -293,11 +293,11 @@ class LocalClassInheritance extends Object {
  * @public {Class}
  */
 LocalClassInheritance.$class = Class.$createForClass(
-    Util.$generateId('LocalClassInheritance'),
-    Util.$generateId(
+    $Util.$generateId('LocalClassInheritance'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance'));
 
 /**

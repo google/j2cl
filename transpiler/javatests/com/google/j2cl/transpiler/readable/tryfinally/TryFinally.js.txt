@@ -7,8 +7,8 @@ goog.module('gen.com.google.j2cl.transpiler.readable.tryfinally.TryFinallyModule
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
-var Asserts = goog.require('vmbootstrap.AssertsModule').Asserts;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Asserts = goog.require('vmbootstrap.AssertsModule').Asserts;
 
 
 class TryFinally extends Object {
@@ -30,7 +30,7 @@ class TryFinally extends Object {
    */
   m_main() {
     try {
-      Asserts.$enabled() && Asserts.$assert(true);
+      $Asserts.$enabled() && $Asserts.$assert(true);
     } finally {
     }
   }
@@ -70,7 +70,7 @@ class TryFinally extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, TryFinally);
+    return $Util.$canCastClass(classConstructor, TryFinally);
   }
 
   /**
@@ -86,11 +86,11 @@ class TryFinally extends Object {
  * @public {Class}
  */
 TryFinally.$class = Class.$createForClass(
-    Util.$generateId('TryFinally'),
-    Util.$generateId(
+    $Util.$generateId('TryFinally'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.tryfinally.TryFinally'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.tryfinally.TryFinally'));
 
 /**

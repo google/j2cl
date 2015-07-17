@@ -7,7 +7,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.staticnestedclass.StaticNes
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 class StaticNestedClassParent extends Object {
@@ -62,7 +62,7 @@ class StaticNestedClassParent extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, StaticNestedClassParent);
+    return $Util.$canCastClass(classConstructor, StaticNestedClassParent);
   }
 
   /**
@@ -78,11 +78,11 @@ class StaticNestedClassParent extends Object {
  * @public {Class}
  */
 StaticNestedClassParent.$class = Class.$createForClass(
-    Util.$generateId('StaticNestedClassParent'),
-    Util.$generateId(
+    $Util.$generateId('StaticNestedClassParent'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent'));
 
 /**
@@ -144,8 +144,8 @@ class StaticNestedClassParent$StaticNestedClass extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor,
-                              StaticNestedClassParent$StaticNestedClass);
+    return $Util.$canCastClass(classConstructor,
+                               StaticNestedClassParent$StaticNestedClass);
   }
 
   /**
@@ -161,11 +161,11 @@ class StaticNestedClassParent$StaticNestedClass extends Object {
  * @public {Class}
  */
 StaticNestedClassParent$StaticNestedClass.$class = Class.$createForClass(
-    Util.$generateId('StaticNestedClass'),
-    Util.$generateId(
+    $Util.$generateId('StaticNestedClass'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent$StaticNestedClass'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent.StaticNestedClass'));
 
 /**

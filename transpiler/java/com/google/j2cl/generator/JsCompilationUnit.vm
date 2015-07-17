@@ -7,10 +7,10 @@
 goog.module('gen.${packageName}.${moduleName}Module');
 
 
-#set ($imports = ${TranspilerUtils.getImports(${compilationUnit})})
 #foreach($requiredModule in ${imports})
-#set ($importName = ${requiredModule.getClassName()})
-var $importName = goog.require('${requiredModule.getModuleName()}').$importName;
+#set ($importedName = ${requiredModule.ClassName})
+#set ($alias = ${requiredModule.Alias})
+var $alias = goog.require('${requiredModule.getModuleName()}').$importedName;
 #end
 
 
@@ -21,7 +21,7 @@ var $importName = goog.require('${requiredModule.getModuleName()}').$importName;
 #parse( "com/google/j2cl/generator/JsClass.vm" )
 #end
 #if( ${TranspilerUtils.shouldExport($classType)})##
-#set ($className = ${TranspilerUtils.getClassName($classType.Descriptor)})
+#set ($className = ${statementSourceGenerator.toSource($classType.Descriptor)})
 
 /**
  * Export class.

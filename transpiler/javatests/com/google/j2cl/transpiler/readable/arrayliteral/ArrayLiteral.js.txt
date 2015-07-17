@@ -7,8 +7,8 @@ goog.module('gen.com.google.j2cl.transpiler.readable.arrayliteral.ArrayLiteralMo
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
-var Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
 var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
@@ -31,11 +31,11 @@ class ArrayLiteral extends Object {
    */
   m_main() {
     let object = Object.$create();
-    let ints = Arrays.$init([0, 1, 2], $int);
+    let ints = $Arrays.$init([0, 1, 2], $int);
     let objects2d =
-        Arrays.$init([[object, object], [object, object]], Object, 2);
-    let partial = Arrays.$init([], $int, 2);
-    let unbalanced = Arrays.$init([[object, object], null], Object, 2);
+        $Arrays.$init([[object, object], [object, object]], Object, 2);
+    let partial = $Arrays.$init([], $int, 2);
+    let unbalanced = $Arrays.$init([[object, object], null], Object, 2);
   }
 
   /**
@@ -74,7 +74,7 @@ class ArrayLiteral extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, ArrayLiteral);
+    return $Util.$canCastClass(classConstructor, ArrayLiteral);
   }
 
   /**
@@ -90,11 +90,11 @@ class ArrayLiteral extends Object {
  * @public {Class}
  */
 ArrayLiteral.$class = Class.$createForClass(
-    Util.$generateId('ArrayLiteral'),
-    Util.$generateId(
+    $Util.$generateId('ArrayLiteral'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.arrayliteral.ArrayLiteral'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.arrayliteral.ArrayLiteral'));
 
 /**

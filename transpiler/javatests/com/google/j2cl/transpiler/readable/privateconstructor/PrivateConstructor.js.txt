@@ -7,7 +7,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.privateconstructor.PrivateC
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 class PrivateConstructor extends Object {
@@ -62,7 +62,7 @@ class PrivateConstructor extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, PrivateConstructor);
+    return $Util.$canCastClass(classConstructor, PrivateConstructor);
   }
 
   /**
@@ -78,11 +78,11 @@ class PrivateConstructor extends Object {
  * @public {Class}
  */
 PrivateConstructor.$class = Class.$createForClass(
-    Util.$generateId('PrivateConstructor'),
-    Util.$generateId(
+    $Util.$generateId('PrivateConstructor'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor'));
 
 /**

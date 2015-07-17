@@ -17,6 +17,9 @@ package com.google.j2cl.generator.visitors;
 
 import com.google.common.base.Function;
 import com.google.common.collect.FluentIterable;
+import com.google.common.collect.HashMultiset;
+import com.google.common.collect.ImmutableMultiset;
+import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
@@ -29,19 +32,18 @@ import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.UnionTypeDescriptor;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
-import javax.annotation.Nullable;
-
 /**
- * Traverses a CompilationUnit and gathers imports for all its referenced types.
+ * Traverses a CompilationUnit and gathers imports for all its referenced types and creates
+ * non colliding local aliases for each import.
  */
 public class ImportGatheringVisitor extends AbstractVisitor {
-  private Set<Import> importModules = new LinkedHashSet<>();
   private Set<TypeDescriptor> typeDescriptors = new LinkedHashSet<>();
   private Set<TypeDescriptor> typeDescriptorsDefinedInCompilationUnit = new LinkedHashSet<>();
 
@@ -50,17 +52,11 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   }
 
   @Override
-  public void exitArrayTypeDescriptor(ArrayTypeDescriptor arrayTypeDescriptor) {
-    importModules.add(Import.IMPORT_VM_ARRAYS);
-    addTypeDescriptor(arrayTypeDescriptor.getLeafTypeDescriptor());
-  }
-
-  @Override
   public void exitTypeDescriptor(TypeDescriptor typeDescriptor) {
     addTypeDescriptor(typeDescriptor);
-    if (TypeDescriptor.LONG_TYPE_DESCRIPTOR == typeDescriptor) {
+    if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == typeDescriptor) {
       // for function parameter JsDoc.
-      importModules.add(Import.IMPORT_NATIVE_LONG);
+      addTypeDescriptor(TypeDescriptors.NATIVE_LONG_TYPE_DESCRIPTOR);
     }
   }
 
@@ -72,18 +68,18 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   @Override
   public void exitAssertStatement(AssertStatement assertStatement) {
-    importModules.add(Import.IMPORT_VM_ASSERTS);
+    addTypeDescriptor(TypeDescriptors.VM_ASSERTS_TYPE_DESCRIPTOR);
   }
 
   @Override
   public void exitCastExpression(CastExpression castExpression) {
     if (castExpression.getCastTypeDescriptor() instanceof ArrayTypeDescriptor) {
       // Arrays.$castTo()
-      importModules.add(Import.IMPORT_VM_ARRAYS);
+      addTypeDescriptor(TypeDescriptors.VM_ARRAYS_TYPE_DESCRIPTOR);
       return;
     }
     // Casts.$to()
-    importModules.add(Import.IMPORT_VM_CASTS);
+    addTypeDescriptor(TypeDescriptors.VM_CASTS_TYPE_DESCRIPTOR);
   }
 
   @Override
@@ -93,19 +89,19 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   @Override
   public void exitExpression(Expression expression) {
-    if (TypeDescriptor.LONG_TYPE_DESCRIPTOR == expression.getTypeDescriptor()) {
+    if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == expression.getTypeDescriptor()) {
       // for Long operation method dispatch.
-      importModules.add(Import.IMPORT_NATIVE_LONGS);
-      importModules.add(Import.IMPORT_NATIVE_LONG);
+      addTypeDescriptor(TypeDescriptors.NATIVE_LONGS_TYPE_DESCRIPTOR);
+      addTypeDescriptor(TypeDescriptors.NATIVE_LONG_TYPE_DESCRIPTOR);
     }
   }
 
   @Override
   public void exitField(Field field) {
-    if (TypeDescriptor.LONG_TYPE_DESCRIPTOR == field.getDescriptor().getTypeDescriptor()) {
+    if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == field.getDescriptor().getTypeDescriptor()) {
       // for default initial value of Longs.$fromInt(0).
-      importModules.add(Import.IMPORT_NATIVE_LONGS);
-      importModules.add(Import.IMPORT_NATIVE_LONG);
+      addTypeDescriptor(TypeDescriptors.NATIVE_LONGS_TYPE_DESCRIPTOR);
+      addTypeDescriptor(TypeDescriptors.NATIVE_LONG_TYPE_DESCRIPTOR);
     }
   }
 
@@ -122,30 +118,62 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   }
 
   private Set<Import> doGatherImports(CompilationUnit compilationUnit) {
+    addTypeDescriptor(TypeDescriptors.CLASS_TYPE_DESCRIPTOR);
+    addTypeDescriptor(TypeDescriptors.NATIVE_UTIL_TYPE_DESCRIPTOR);
+
+    HashMultiset.create();
+
     // Collect type references.
     compilationUnit.accept(this);
     Set<TypeDescriptor> importTypeDescriptors =
         new TreeSet<>(Sets.difference(typeDescriptors, typeDescriptorsDefinedInCompilationUnit));
-    importModules.addAll(
+
+    final Multiset<String> localNameUses =
+        ImmutableMultiset.copyOf(
+            FluentIterable.from(
+                    Sets.union(typeDescriptorsDefinedInCompilationUnit, importTypeDescriptors))
+                .transform(
+                    new Function<TypeDescriptor, String>() {
+                      @Override
+                      public String apply(TypeDescriptor typeDescriptor) {
+                        return getShortAliasName(typeDescriptor);
+                      }
+                    }));
+
+    return new TreeSet<>(
         FluentIterable.from(importTypeDescriptors)
             .transform(
                 new Function<TypeDescriptor, Import>() {
-                  @Nullable
                   @Override
                   public Import apply(TypeDescriptor typeDescriptor) {
-                    return new Import(typeDescriptor);
+
+                    String shortAliasName = getShortAliasName(typeDescriptor);
+                    int usageCount = localNameUses.count(shortAliasName);
+                    String aliasName =
+                        usageCount == 1 ? shortAliasName : computeLongAliasName(typeDescriptor);
+                    return new Import(aliasName, typeDescriptor);
                   }
                 })
             .toList());
-    return importModules;
   }
 
   private void addTypeDescriptor(TypeDescriptor typeDescriptor) {
     if (typeDescriptor.isArray()) {
+      addTypeDescriptor(TypeDescriptors.VM_ARRAYS_TYPE_DESCRIPTOR);
       typeDescriptors.add(typeDescriptor.getLeafTypeDescriptor());
     } else {
       typeDescriptors.add(typeDescriptor);
     }
+  }
+
+  private static String computeLongAliasName(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.getBinaryName().replaceAll("_", "__").replaceAll("\\" + ".", "_");
+  }
+
+  private static String getShortAliasName(TypeDescriptor typeDescriptor) {
+    return TypeDescriptors.bootstrapTypeDescriptors.contains(typeDescriptor)
+        ? "$" + typeDescriptor.getClassName()
+        : typeDescriptor.getClassName();
   }
 
   private ImportGatheringVisitor() {}

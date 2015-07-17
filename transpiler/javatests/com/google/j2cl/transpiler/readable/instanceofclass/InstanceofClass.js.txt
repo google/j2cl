@@ -8,8 +8,8 @@ goog.module('gen.com.google.j2cl.transpiler.readable.instanceofclass.InstanceofC
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
 var String = goog.require('gen.java.lang.StringModule').String;
-var Util = goog.require('nativebootstrap.UtilModule').Util;
-var Asserts = goog.require('vmbootstrap.AssertsModule').Asserts;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Asserts = goog.require('vmbootstrap.AssertsModule').Asserts;
 
 
 class InstanceofClass extends Object {
@@ -32,9 +32,10 @@ class InstanceofClass extends Object {
    */
   m_test() {
     let object = InstanceofClass.$create();
-    Asserts.$enabled() && Asserts.$assert(InstanceofClass.$isInstance(object));
-    Asserts.$enabled() && Asserts.$assert(Object.$isInstance(object));
-    Asserts.$enabled() && Asserts.$assert(!(String.$isInstance(object)));
+    $Asserts.$enabled() &&
+        $Asserts.$assert(InstanceofClass.$isInstance(object));
+    $Asserts.$enabled() && $Asserts.$assert(Object.$isInstance(object));
+    $Asserts.$enabled() && $Asserts.$assert(!(String.$isInstance(object)));
   }
 
   /**
@@ -73,7 +74,7 @@ class InstanceofClass extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return Util.$canCastClass(classConstructor, InstanceofClass);
+    return $Util.$canCastClass(classConstructor, InstanceofClass);
   }
 
   /**
@@ -89,11 +90,11 @@ class InstanceofClass extends Object {
  * @public {Class}
  */
 InstanceofClass.$class = Class.$createForClass(
-    Util.$generateId('InstanceofClass'),
-    Util.$generateId(
+    $Util.$generateId('InstanceofClass'),
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass'),
     Object.$class,
-    Util.$generateId(
+    $Util.$generateId(
         'com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass'));
 
 /**
