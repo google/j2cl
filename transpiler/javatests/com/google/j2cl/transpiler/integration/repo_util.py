@@ -15,13 +15,28 @@ import process_util
 # pylint: disable=global-variable-not-assigned
 TEST_TARGET_PATTERN = ("third_party/java_src/j2cl/transpiler/javatests/"
                        "com/google/j2cl/transpiler/integration/...:all")
-READABLE_TEST_PATTERN = ("//third_party/java_src/j2cl/transpiler/javatests/"
-                         "com/google/j2cl/transpiler/integration/"
-                         "%s:readable_optimized_js")
-READABLE_TEST_FILE = (
+OBFUSCATED_OPT_TEST_PATTERN = (
+    "//third_party/java_src/j2cl/transpiler/javatests/"
+    "com/google/j2cl/transpiler/integration/"
+    "%s:optimized_js")
+OBFUSCATED_OPT_TEST_FILE = (
+    "blaze-bin/third_party/java_src/j2cl/transpiler/javatests/"
+    "com/google/j2cl/transpiler/integration/"
+    "%s/optimized_js.js")
+READABLE_OPT_TEST_PATTERN = ("//third_party/java_src/j2cl/transpiler/javatests/"
+                             "com/google/j2cl/transpiler/integration/"
+                             "%s:readable_optimized_js")
+READABLE_OPT_TEST_FILE = (
     "blaze-bin/third_party/java_src/j2cl/transpiler/javatests/"
     "com/google/j2cl/transpiler/integration/"
     "%s/readable_optimized_js.js")
+READABLE_TEST_PATTERN = ("//third_party/java_src/j2cl/transpiler/javatests/"
+                         "com/google/j2cl/transpiler/integration/"
+                         "%s:readable_unoptimized_js")
+READABLE_TEST_FILE = (
+    "blaze-bin/third_party/java_src/j2cl/transpiler/javatests/"
+    "com/google/j2cl/transpiler/integration/"
+    "%s/readable_unoptimized_js.js")
 HOME_DIR_PATH = expanduser("~")
 MANAGED_REPO_PATH = HOME_DIR_PATH + "/.j2cl-size-repo"
 MANAGED_GOOGLE3_PATH = MANAGED_REPO_PATH + "/google3"
@@ -36,15 +51,45 @@ def build_optimized_tests(cwd=None):
       ["blaze", "build", TEST_TARGET_PATTERN], cwd=cwd)
 
 
+def get_obfuscated_optimized_test_file(test_name):
+  """Returns the path to the obfuscated opt JS file the given test."""
+  global OBFUSCATED_OPT_TEST_FILE
+
+  return OBFUSCATED_OPT_TEST_FILE % test_name
+
+
+def build_obfuscated_optimized_test(test_name, cwd=None):
+  """Blaze builds the obfuscated opt JS for a particular test."""
+  global OBFUSCATED_OPT_TEST_PATTERN
+
+  process_util.run_cmd_get_output(
+      ["blaze", "build", OBFUSCATED_OPT_TEST_PATTERN % test_name], cwd=cwd)
+
+
 def get_readable_optimized_test_file(test_name):
   """Returns the path to the readable opt JS file the given test."""
+  global READABLE_OPT_TEST_FILE
+
+  return READABLE_OPT_TEST_FILE % test_name
+
+
+def build_readable_optimized_test(test_name, cwd=None):
+  """Blaze builds the readable opt JS for a particular test."""
+  global READABLE_OPT_TEST_PATTERN
+
+  process_util.run_cmd_get_output(
+      ["blaze", "build", READABLE_OPT_TEST_PATTERN % test_name], cwd=cwd)
+
+
+def get_readable_unoptimized_test_file(test_name):
+  """Returns the path to the readable unoptimized JS file the given test."""
   global READABLE_TEST_FILE
 
   return READABLE_TEST_FILE % test_name
 
 
-def build_readable_optimized_test(test_name, cwd=None):
-  """Blaze builds the readable JS for a particular test."""
+def build_readable_unoptimized_test(test_name, cwd=None):
+  """Blaze builds the readable unoptimized JS for a particular test."""
   global READABLE_TEST_PATTERN
 
   process_util.run_cmd_get_output(
