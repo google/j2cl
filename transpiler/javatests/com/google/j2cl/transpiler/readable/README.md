@@ -48,7 +48,6 @@ are copyright and licensed as follows:
 - bridgemethodmultipletypevars
 - casttoprimitive
 - catchjsexception
-- classclasscollision
 - classlocalvarcollision
 - classliteralForEnums (tests are in classliteral)
 - complextypeinference
