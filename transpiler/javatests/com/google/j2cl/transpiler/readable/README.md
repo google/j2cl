@@ -89,4 +89,3 @@ are copyright and licensed as follows:
 - devirtualizedsupermethodcalls (nonconstructor)
 - typeinference
 - typewildcards
-- varargs

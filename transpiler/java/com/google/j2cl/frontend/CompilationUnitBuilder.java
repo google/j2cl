@@ -370,6 +370,7 @@ public class CompilationUnitBuilder {
       return new CharacterLiteral(literal.charValue(), literal.getEscapedValue());
     }
 
+    @SuppressWarnings("unchecked")
     private Expression convert(org.eclipse.jdt.core.dom.ClassInstanceCreation expression) {
       Expression qualifier =
           expression.getExpression() == null ? null : convert(expression.getExpression());
@@ -380,6 +381,7 @@ public class CompilationUnitBuilder {
       for (Object argument : expression.arguments()) {
         arguments.add(convert((org.eclipse.jdt.core.dom.Expression) argument));
       }
+      maybePackageVarargs(constructorBinding, expression.arguments(), arguments);
       if (JdtUtils.isInstanceMemberClass(constructorBinding.getDeclaringClass())) {
         // outerclass.new InnerClass() => outerClass.$create_InnerClass();
         TypeDescriptor outerclassTypeDescriptor =
@@ -627,12 +629,13 @@ public class CompilationUnitBuilder {
       return new CatchClause(body, exceptionVar);
     }
 
+    @SuppressWarnings("unchecked")
     private ExpressionStatement convert(org.eclipse.jdt.core.dom.ConstructorInvocation statement) {
       IMethodBinding constructorBinding = statement.resolveConstructorBinding();
       MethodDescriptor methodDescriptor =
           JdtUtils.createMethodDescriptor(constructorBinding, compilationUnitNameLocator);
-      @SuppressWarnings("unchecked")
       List<Expression> arguments = convert(statement.arguments());
+      maybePackageVarargs(constructorBinding, statement.arguments(), arguments);
       return new ExpressionStatement(new MethodCall(null, methodDescriptor, arguments));
     }
 
@@ -671,6 +674,7 @@ public class CompilationUnitBuilder {
       return binaryExpression;
     }
 
+    @SuppressWarnings("unchecked")
     private MethodCall convert(org.eclipse.jdt.core.dom.MethodInvocation expression) {
       IMethodBinding methodBinding = expression.resolveMethodBinding();
 
@@ -683,9 +687,64 @@ public class CompilationUnitBuilder {
           expression.getExpression() == null ? null : convert(expression.getExpression());
       MethodDescriptor methodDescriptor =
           JdtUtils.createMethodDescriptor(methodBinding, compilationUnitNameLocator);
-      @SuppressWarnings("unchecked")
       List<Expression> arguments = convert(expression.arguments());
+      maybePackageVarargs(methodBinding, expression.arguments(), arguments);
       return new MethodCall(qualifier, methodDescriptor, arguments);
+    }
+
+    /**
+     * Returns if a method call is invoked with varargs that are not in an explicit array format.
+     */
+    private boolean shouldPackageVarargs(
+        IMethodBinding methodBinding, List<org.eclipse.jdt.core.dom.Expression> jdtArguments) {
+      int parametersLength = methodBinding.getParameterTypes().length;
+      if (!methodBinding.isVarargs()) {
+        return false;
+      }
+      if (jdtArguments.size() != parametersLength) {
+        return true;
+      }
+      org.eclipse.jdt.core.dom.Expression lastArgument = jdtArguments.get(parametersLength - 1);
+      return !lastArgument
+          .resolveTypeBinding()
+          .isAssignmentCompatible(methodBinding.getParameterTypes()[parametersLength - 1]);
+    }
+
+    /**
+     * Packages the varargs into an array and returns the array.
+     */
+    private Expression getPackagedVarargs(
+        IMethodBinding methodBinding, List<Expression> j2clArguments) {
+      Preconditions.checkArgument(methodBinding.isVarargs());
+      int parametersLength = methodBinding.getParameterTypes().length;
+      TypeDescriptor varargsTypeDescriptor =
+          createTypeDescriptor(methodBinding.getParameterTypes()[parametersLength - 1]);
+      if (j2clArguments.size() < parametersLength) {
+        // no argument for the varargs, add an empty array.
+        return new ArrayLiteral(varargsTypeDescriptor, new ArrayList<Expression>());
+      }
+      List<Expression> valueExpressions = new ArrayList<>();
+      for (int i = parametersLength - 1; i < j2clArguments.size(); i++) {
+        valueExpressions.add(j2clArguments.get(i));
+      }
+      return new ArrayLiteral(varargsTypeDescriptor, valueExpressions);
+    }
+
+    /**
+     * Replaces the var arguments with packaged array.
+     */
+    private void maybePackageVarargs(
+        IMethodBinding methodBinding,
+        List<org.eclipse.jdt.core.dom.Expression> jdtArguments,
+        List<Expression> j2clArguments) {
+      if (shouldPackageVarargs(methodBinding, jdtArguments)) {
+        Expression packagedVarargs = getPackagedVarargs(methodBinding, j2clArguments);
+        int parameterLength = methodBinding.getParameterTypes().length;
+        while (j2clArguments.size() >= parameterLength) {
+          j2clArguments.remove(parameterLength - 1);
+        }
+        j2clArguments.add(packagedVarargs);
+      }
     }
 
     private MethodCall createDevirtualizedObjectMethodCall(MethodInvocation invocation) {
@@ -893,6 +952,7 @@ public class CompilationUnitBuilder {
       return new StringLiteral(literal.getEscapedValue());
     }
 
+    @SuppressWarnings("unchecked")
     private ExpressionStatement convert(
         org.eclipse.jdt.core.dom.SuperConstructorInvocation expression) {
       IMethodBinding superConstructorBinding = expression.resolveConstructorBinding();
@@ -903,6 +963,7 @@ public class CompilationUnitBuilder {
           JdtUtils.createMethodDescriptor(superConstructorBinding, compilationUnitNameLocator);
       @SuppressWarnings("unchecked")
       List<Expression> arguments = convert(expression.arguments());
+      maybePackageVarargs(superConstructorBinding, expression.arguments(), arguments);
       Expression qualifier =
           expression.getExpression() == null ? null : convert(expression.getExpression());
       // super() call to an inner class without explicit qualifier, find the enclosing instance.

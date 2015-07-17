@@ -1,0 +1,210 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/varargs/Varargs.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.varargs.VarargsModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Util = goog.require('nativebootstrap.UtilModule').Util;
+var Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+
+
+class Varargs extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_varargs_Varargs() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {Array<number>} args
+   * @return {!Varargs}
+   * @public
+   */
+  static $create__arrayOf_int(args) {
+    Varargs.$clinit();
+    var instance = new Varargs;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(
+            args);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {Array<number>} args
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(
+      args) {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_varargs_Varargs();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Varargs}
+   * @public
+   */
+  static $create() {
+    Varargs.$clinit();
+    var instance = new Varargs;
+    instance.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_varargs_Varargs() {
+    this.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(
+        [1]);
+  }
+
+  /**
+   * @param {number} a
+   * @param {Array<Object>} args
+   * @return {void}
+   * @public
+   */
+  m_test__int__arrayOf_java_lang_Object(a, args) {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    let v = Varargs.$create();
+    v.m_test__int__arrayOf_java_lang_Object(1, []);
+    v.m_test__int__arrayOf_java_lang_Object(1, [Object.$create()]);
+    v.m_test__int__arrayOf_java_lang_Object(1, [Object.$create()]);
+    v.m_test__int__arrayOf_java_lang_Object(1, []);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Varargs; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, Varargs);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+Varargs.$class = Class.$createForClass(
+    Util.$generateId('Varargs'),
+    Util.$generateId('com.google.j2cl.transpiler.readable.varargs.Varargs'),
+    Object.$class,
+    Util.$generateId('com.google.j2cl.transpiler.readable.varargs.Varargs'));
+
+/**
+ * Export class.
+ */
+exports.Varargs = Varargs;
+
+
+
+class Child extends Varargs {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_varargs_Child() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Child}
+   * @public
+   */
+  static $create() {
+    Child.$clinit();
+    var instance = new Child;
+    instance.$ctor__com_google_j2cl_transpiler_readable_varargs_Child();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_varargs_Child() {
+    this.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(
+        [1]);
+    this.$init__com_google_j2cl_transpiler_readable_varargs_Child();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Child; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return Util.$canCastClass(classConstructor, Child);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Varargs.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+Child.$class = Class.$createForClass(
+    Util.$generateId('Child'),
+    Util.$generateId('com.google.j2cl.transpiler.readable.varargs.Child'),
+    Varargs.$class,
+    Util.$generateId('com.google.j2cl.transpiler.readable.varargs.Child'));
+
+/**
+ * Export class.
+ */
+exports.Child = Child;
