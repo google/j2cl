@@ -19,6 +19,7 @@ import com.google.common.base.Preconditions;
 import com.google.j2cl.errors.Errors;
 
 import org.eclipse.jdt.core.dom.ASTVisitor;
+import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
@@ -42,6 +43,13 @@ public class CompilationUnitNameLocator {
   private class SourceCompilationUnitIndexBuilder extends ASTVisitor {
     @Override
     public boolean visit(TypeDeclaration node) {
+      ITypeBinding typeBinding = node.resolveBinding();
+      sourceUnitNamesByTypeBinaryName.put(typeBinding.getBinaryName(), currentCompilationUnitName);
+      return super.visit(node);
+    }
+
+    @Override
+    public boolean visit(AnonymousClassDeclaration node) {
       ITypeBinding typeBinding = node.resolveBinding();
       sourceUnitNamesByTypeBinaryName.put(typeBinding.getBinaryName(), currentCompilationUnitName);
       return super.visit(node);

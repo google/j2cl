@@ -39,7 +39,7 @@ are copyright and licensed as follows:
 - testing the cost of adding more parents in a hierarchy.
 
 ## Likely readable examples to add (remove some redundant)
-- anonymousclasswithcapture
+- anonymousclassforfunctionalinterface (transpiled to function)
 - boxing
 - break with label
 - bridgemethodaccidentaloverride
@@ -67,10 +67,8 @@ are copyright and licensed as follows:
 - jsinteropdispatch
 - jsinteropinterface
 - methodreferences
-- multipleanonymousclass
 - multipleparametersgenerictype
 - nativefunction + provided Foo.native.js
-- nestedanonymousclass
 - notimportinternals
 - numbermethods
 - number devirtualization
@@ -78,7 +76,6 @@ are copyright and licensed as follows:
 - packageclasscollision
 - packageprivateinstancemethods
 - primitiveoverflow
-- simpleanonymousclass
 - simplebridgemethod
 - simpleenum
 - simplegenerictype

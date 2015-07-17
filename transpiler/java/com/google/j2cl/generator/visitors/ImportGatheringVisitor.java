@@ -111,13 +111,13 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   @Override
   public void exitMethodDescriptor(MethodDescriptor methodDescriptor) {
-    typeDescriptors.add(methodDescriptor.getEnclosingClassTypeDescriptor());
+    addTypeDescriptor(methodDescriptor.getEnclosingClassTypeDescriptor());
   }
 
   @Override
   public void exitUnionTypeDescriptor(UnionTypeDescriptor unionTypeDescriptor) {
     for (TypeDescriptor typeDescriptor : unionTypeDescriptor.getTypes()) {
-      typeDescriptors.add(typeDescriptor);
+      addTypeDescriptor(typeDescriptor);
     }
   }
 
@@ -141,7 +141,11 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   }
 
   private void addTypeDescriptor(TypeDescriptor typeDescriptor) {
-    typeDescriptors.add(typeDescriptor);
+    if (typeDescriptor.isArray()) {
+      typeDescriptors.add(typeDescriptor.getLeafTypeDescriptor());
+    } else {
+      typeDescriptors.add(typeDescriptor);
+    }
   }
 
   private ImportGatheringVisitor() {}

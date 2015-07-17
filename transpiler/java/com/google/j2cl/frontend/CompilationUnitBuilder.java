@@ -78,7 +78,9 @@ import com.google.j2cl.errors.Errors;
 
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
+import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.ArrayType;
+import org.eclipse.jdt.core.dom.BodyDeclaration;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
 import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
@@ -150,8 +152,18 @@ public class CompilationUnitBuilder {
       }
     }
 
-    private Collection<JavaType> convert(TypeDeclaration typeDeclaration) {
-      ITypeBinding typeBinding = typeDeclaration.resolveBinding();
+    @SuppressWarnings("unchecked")
+    private Collection<JavaType> convert(TypeDeclaration node) {
+      return convertJavaType(node.resolveBinding(), node.bodyDeclarations());
+    }
+
+    @SuppressWarnings("unchecked")
+    private Collection<JavaType> convert(AnonymousClassDeclaration node) {
+      return convertJavaType(node.resolveBinding(), node.bodyDeclarations());
+    }
+
+    private Collection<JavaType> convertJavaType(
+        ITypeBinding typeBinding, List<BodyDeclaration> bodyDeclarations) {
       JavaType type = createJavaType(typeBinding);
       pushType(type);
       List<JavaType> types = new ArrayList<>();
@@ -164,7 +176,7 @@ public class CompilationUnitBuilder {
             currentTypeDescriptor,
             capturesByTypeDescriptor.get(currentType.getSuperTypeDescriptor()));
       }
-      for (Object object : typeDeclaration.bodyDeclarations()) {
+      for (Object object : bodyDeclarations) {
         if (object instanceof FieldDeclaration) {
           FieldDeclaration fieldDeclaration = (FieldDeclaration) object;
           type.addFields(convert(fieldDeclaration));
@@ -188,7 +200,7 @@ public class CompilationUnitBuilder {
         } else {
           throw new RuntimeException(
               "Need to implement translation for BodyDeclaration type: "
-                  + typeDeclaration.getClass().getName()
+                  + object.getClass().getName()
                   + " file triggering this: "
                   + currentSourceFile);
         }
@@ -372,6 +384,10 @@ public class CompilationUnitBuilder {
 
     @SuppressWarnings("unchecked")
     private Expression convert(org.eclipse.jdt.core.dom.ClassInstanceCreation expression) {
+      if (expression.getAnonymousClassDeclaration() != null) {
+        j2clCompilationUnit.addTypes(convert(expression.getAnonymousClassDeclaration()));
+      }
+
       Expression qualifier =
           expression.getExpression() == null ? null : convert(expression.getExpression());
       IMethodBinding constructorBinding = expression.resolveConstructorBinding();
