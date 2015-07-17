@@ -19,13 +19,13 @@ import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
- * Class for this reference.
+ * Class for super reference.
  */
 @Visitable
-public class ThisReference extends Expression {
+public class SuperReference extends Expression {
   @Visitable TypeDescriptor typeDescriptor;
 
-  public ThisReference(TypeDescriptor typeDescriptor) {
+  public SuperReference(TypeDescriptor typeDescriptor) {
     Preconditions.checkNotNull(typeDescriptor);
     this.typeDescriptor = typeDescriptor;
   }
@@ -37,6 +37,6 @@ public class ThisReference extends Expression {
 
   @Override
   public Node accept(Processor processor) {
-    return Visitor_ThisReference.visit(processor, this);
+    return Visitor_SuperReference.visit(processor, this);
   }
 }

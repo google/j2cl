@@ -83,7 +83,5 @@ are copyright and licensed as follows:
 - staticfieldaccess (readable example + warning log)
 - subclassgenericclass
 - subclassgenericclasswithparam
-- supermethodcalls (nonconstructor)
-- devirtualizedsupermethodcalls (nonconstructor)
 - typeinference
 - typewildcards

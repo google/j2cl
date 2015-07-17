@@ -1,0 +1,108 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/supermethodcall/Parent.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.supermethodcall.ParentModule');
+
+
+var GrandParent = goog.require('gen.com.google.j2cl.transpiler.readable.supermethodcall.GrandParentModule').GrandParent;
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+
+
+class Parent extends GrandParent {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_supermethodcall_Parent() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_parentSimplest() {}
+
+  /**
+   * @param {number} foo
+   * @return {void}
+   * @public
+   */
+  m_parentWithParams__int(foo) {}
+
+  /**
+   * @return {Object}
+   * @public
+   */
+  m_parentWithChangingReturn() { return null; }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Parent}
+   * @public
+   */
+  static $create() {
+    Parent.$clinit();
+    var instance = new Parent;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_supermethodcall_Parent();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_supermethodcall_Parent() {
+    this.$ctor__com_google_j2cl_transpiler_readable_supermethodcall_GrandParent();
+    this.$init__com_google_j2cl_transpiler_readable_supermethodcall_Parent();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Parent; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Parent);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { GrandParent.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+Parent.$class = Class.$createForClass(
+    $Util.$generateId('Parent'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.supermethodcall.Parent'),
+    GrandParent.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.supermethodcall.Parent'));
+
+/**
+ * Export class.
+ */
+exports.Parent = Parent;

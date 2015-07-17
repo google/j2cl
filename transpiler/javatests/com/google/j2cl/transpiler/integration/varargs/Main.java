@@ -15,15 +15,30 @@ class Parent {
   }
 
   public Parent(String f) {
-    // call the vararg-constructor by this() call.
+    // call the vararg-constructor by this() constructor call.
     this(1);
+  }
+
+  public int sum(int... args) {
+    int sum = 0;
+    if (args != null) {
+      for (int i = 0; i < args.length; i++) {
+        sum += args[i];
+      }
+    }
+    return sum;
   }
 }
 
 class Child extends Parent {
   public Child() {
-    // call the vararg-constructor by super() call.
+    // call the vararg-constructor by super() constructor call.
     super(2);
+  }
+
+  public int sum(int a, int b, int c, int d) {
+    // call the vararg-constructor by super() method call.
+    return super.sum(a, b, c, d);
   }
 }
 
@@ -74,7 +89,10 @@ public class Main {
     Parent pp = new Parent(""); // constructor call with varargs is invoked by this() call.
     assert (pp.value == 1);
 
-    Child cc = new Child(); // constructor call with varargs is invoked by super() call.
+    Child cc = new Child(); // constructor call with varargs is invoked by super() constructor call.
     assert (cc.value == 2);
+
+    // method call with varargs is invoked by super() method call.
+    assert (new Child().sum(1, 2, 3, 4) == new Parent().sum(1, 2, 3, 4));
   }
 }

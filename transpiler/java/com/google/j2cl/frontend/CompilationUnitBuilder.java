@@ -61,6 +61,7 @@ import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.StringLiteral;
+import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.TernaryExpression;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.ThrowStatement;
@@ -499,6 +500,8 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.SimpleName) expression);
         case ASTNode.STRING_LITERAL:
           return convert((org.eclipse.jdt.core.dom.StringLiteral) expression);
+        case ASTNode.SUPER_METHOD_INVOCATION:
+          return convert((org.eclipse.jdt.core.dom.SuperMethodInvocation) expression);
         case ASTNode.THIS_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.ThisExpression) expression);
         case ASTNode.TYPE_LITERAL:
@@ -751,6 +754,25 @@ public class CompilationUnitBuilder {
       return new MethodCall(qualifier, methodDescriptor, arguments);
     }
 
+    @SuppressWarnings("unchecked")
+    private MethodCall convert(org.eclipse.jdt.core.dom.SuperMethodInvocation expression) {
+      IMethodBinding methodBinding = expression.resolveMethodBinding();
+
+      // Do *not* perform Object method devirtualization. The point with super method calls is to
+      // *not* call the default version of the method on the prototype and instead call the specific
+      // version of the method in the super class. If we were to perform Object method
+      // devirtualization then the resulting routing through Objects.doFoo() would end up calling
+      // back onto the version of the method on the prototype (aka the wrong one).
+
+      MethodDescriptor methodDescriptor =
+          JdtUtils.createMethodDescriptor(methodBinding, compilationUnitNameLocator);
+      @SuppressWarnings("unchecked")
+      List<Expression> arguments = convert(expression.arguments());
+      maybePackageVarargs(methodBinding, expression.arguments(), arguments);
+      return new MethodCall(
+          new SuperReference(currentType.getSuperTypeDescriptor()), methodDescriptor, arguments);
+    }
+
     /**
      * Returns if a method call is invoked with varargs that are not in an explicit array format.
      */
@@ -955,7 +977,7 @@ public class CompilationUnitBuilder {
      * this$ and this$.f_this$, this$ is the added parameter of the constructor.
      */
     private Expression convertOuterClassReference(TypeDescriptor typeDescriptor) {
-      Expression qualifier = new ThisReference((RegularTypeDescriptor) currentType.getDescriptor());
+      Expression qualifier = new ThisReference(currentType.getDescriptor());
       int i = typeStack.size() - 1;
       for (; i > 0; i--) {
         if (typeStack.get(i).getDescriptor().equals(typeDescriptor)) {
@@ -971,7 +993,7 @@ public class CompilationUnitBuilder {
       }
       if (!typeStack.get(i).getDescriptor().equals(typeDescriptor)) {
         // not a type of the outer classes.
-        qualifier = new ThisReference((RegularTypeDescriptor) currentType.getDescriptor());
+        qualifier = new ThisReference(currentType.getDescriptor());
       }
       return qualifier;
     }
@@ -992,8 +1014,7 @@ public class CompilationUnitBuilder {
       // field created for the captured variable.
       FieldDescriptor fieldDescriptor =
           ASTUtils.getFieldDescriptorForCapture(currentType.getDescriptor(), variable);
-      return new FieldAccess(
-          new ThisReference((RegularTypeDescriptor) currentType.getDescriptor()), fieldDescriptor);
+      return new FieldAccess(new ThisReference(currentType.getDescriptor()), fieldDescriptor);
     }
 
     private Variable convert(org.eclipse.jdt.core.dom.SingleVariableDeclaration node) {
@@ -1036,7 +1057,7 @@ public class CompilationUnitBuilder {
     private Expression convert(org.eclipse.jdt.core.dom.ThisExpression expression) {
       if (expression.getQualifier() == null) {
         TypeDescriptor thisTypeDescriptor = createTypeDescriptor(expression.resolveTypeBinding());
-        return new ThisReference((RegularTypeDescriptor) thisTypeDescriptor);
+        return new ThisReference(thisTypeDescriptor);
       } else {
         return convertOuterClassReference(createTypeDescriptor(expression.resolveTypeBinding()));
       }

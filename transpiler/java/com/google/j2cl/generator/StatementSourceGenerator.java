@@ -58,6 +58,7 @@ import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.StringLiteral;
+import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.TernaryExpression;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.ThrowStatement;
@@ -624,6 +625,11 @@ public class StatementSourceGenerator {
       @Override
       public String transformStringLiteral(StringLiteral expression) {
         return expression.getEscapedValue();
+      }
+
+      @Override
+      public String transformSuperReference(SuperReference expression) {
+        return "super";
       }
 
       @Override

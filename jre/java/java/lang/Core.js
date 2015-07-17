@@ -47,7 +47,7 @@ class Object {
   m_getClass() { return this.constructor.$class; }
 
   /**
-   * @return {?number}
+   * @return {number}
    * @public
    */
   m_hashCode() { return Hashing.$getHashCode(this); }
