@@ -17,6 +17,7 @@ package com.google.j2cl.frontend;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
@@ -46,7 +47,6 @@ import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaType;
-import com.google.j2cl.ast.JavaType.Kind;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -72,7 +72,6 @@ import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableDeclarationStatement;
-import com.google.j2cl.ast.VariableReference;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.errors.Errors;
@@ -82,6 +81,8 @@ import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
 import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.ArrayType;
 import org.eclipse.jdt.core.dom.BodyDeclaration;
+import org.eclipse.jdt.core.dom.EnumConstantDeclaration;
+import org.eclipse.jdt.core.dom.EnumDeclaration;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
 import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
@@ -141,9 +142,15 @@ public class CompilationUnitBuilder {
     }
 
     private Collection<JavaType> convert(AbstractTypeDeclaration typeDeclaration) {
+      Preconditions.checkArgument(
+          typeDeclaration instanceof TypeDeclaration || typeDeclaration instanceof EnumDeclaration);
       switch (typeDeclaration.getNodeType()) {
         case ASTNode.TYPE_DECLARATION:
-          return convert((TypeDeclaration) typeDeclaration);
+          return convertJavaType(
+              typeDeclaration.resolveBinding(),
+              JdtUtils.<BodyDeclaration>getTypedCollection(typeDeclaration.bodyDeclarations()));
+        case ASTNode.ENUM_DECLARATION:
+          return convert((EnumDeclaration) typeDeclaration);
         default:
           throw new RuntimeException(
               "Need to implement translation for AbstractTypeDeclaration type: "
@@ -153,14 +160,33 @@ public class CompilationUnitBuilder {
       }
     }
 
-    @SuppressWarnings("unchecked")
-    private Collection<JavaType> convert(TypeDeclaration node) {
-      return convertJavaType(node.resolveBinding(), node.bodyDeclarations());
+    private Collection<JavaType> convert(AnonymousClassDeclaration typeDeclaration) {
+      return convertJavaType(
+          typeDeclaration.resolveBinding(),
+          JdtUtils.<BodyDeclaration>getTypedCollection(typeDeclaration.bodyDeclarations()));
     }
 
-    @SuppressWarnings("unchecked")
-    private Collection<JavaType> convert(AnonymousClassDeclaration node) {
-      return convertJavaType(node.resolveBinding(), node.bodyDeclarations());
+    private Collection<JavaType> convert(EnumDeclaration enumDeclaration) {
+      Collection<JavaType> types =
+          convertJavaType(
+              enumDeclaration.resolveBinding(),
+              JdtUtils.<BodyDeclaration>getTypedCollection(enumDeclaration.bodyDeclarations()));
+      JavaType type = types.iterator().next();
+      // this is an Enum.
+      Preconditions.checkState(type.isEnum());
+      type.addFields(
+          FluentIterable.from(
+                  JdtUtils.<EnumConstantDeclaration>getTypedCollection(
+                      enumDeclaration.enumConstants()))
+              .transform(
+                  new Function<EnumConstantDeclaration, Field>() {
+                    @Override
+                    public Field apply(EnumConstantDeclaration enumConstantDeclaration) {
+                      return convert(enumConstantDeclaration);
+                    }
+                  })
+              .toList());
+      return types;
     }
 
     private Collection<JavaType> convertJavaType(
@@ -194,9 +220,9 @@ public class CompilationUnitBuilder {
           } else {
             type.addInstanceInitializerBlock(convert(initializer.getBody()));
           }
-        } else if (object instanceof TypeDeclaration) {
+        } else if (object instanceof AbstractTypeDeclaration) {
           // Nested class
-          TypeDeclaration nestedTypeDeclaration = (TypeDeclaration) object;
+          AbstractTypeDeclaration nestedTypeDeclaration = (AbstractTypeDeclaration) object;
           types.addAll(convert(nestedTypeDeclaration));
         } else {
           throw new RuntimeException(
@@ -240,6 +266,22 @@ public class CompilationUnitBuilder {
       }
       popType();
       return types;
+    }
+
+    private Field convert(EnumConstantDeclaration enumConstantDeclaration) {
+      Preconditions.checkArgument(enumConstantDeclaration.getAnonymousClassDeclaration() == null);
+      Expression initializer =
+          new NewInstance(
+              null,
+              JdtUtils.createMethodDescriptor(
+                  enumConstantDeclaration.resolveConstructorBinding(), compilationUnitNameLocator),
+              convert(
+                  JdtUtils.<org.eclipse.jdt.core.dom.Expression>getTypedCollection(
+                      enumConstantDeclaration.arguments())));
+      return new Field(
+          JdtUtils.createFieldDescriptor(
+              enumConstantDeclaration.resolveVariable(), compilationUnitNameLocator),
+          initializer);
     }
 
     private Method synthesizeDefaultConstructor(
@@ -888,7 +930,7 @@ public class CompilationUnitBuilder {
           if (!enclosingTypeDescriptor.equals(currentTypeDescriptor)) {
             return convertCapturedVariableReference(variable, enclosingTypeDescriptor);
           } else {
-            return new VariableReference(variable);
+            return variable.getReference();
           }
         }
       } else if (binding instanceof ITypeBinding) {
@@ -1085,7 +1127,7 @@ public class CompilationUnitBuilder {
       ITypeBinding superclassBinding = typeBinding.getSuperclass();
       JavaType type =
           new JavaType(
-              typeBinding.isInterface() ? Kind.INTERFACE : Kind.CLASS,
+              JdtUtils.getKindFromTypeBinding(typeBinding),
               JdtUtils.getVisibility(typeBinding.getModifiers()),
               createTypeDescriptor(typeBinding));
 

@@ -52,7 +52,7 @@ are copyright and licensed as follows:
 - classliteralForEnums (tests are in classliteral)
 - complextypeinference
 - enumwithanonymousclass
-- enumwithbody
+- enum special functions (values, valueOf, etc).
 - equals
 - finalfield (readable JsDoc and no static setter)
 - genericconstructorofgenericclass

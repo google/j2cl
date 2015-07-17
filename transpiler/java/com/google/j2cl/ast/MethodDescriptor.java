@@ -19,6 +19,8 @@ import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.processors.Visitable;
 
+import java.util.Arrays;
+
 /**
  * A (by signature) reference to a method.
  */
@@ -35,7 +37,7 @@ public abstract class MethodDescriptor extends Node implements Member {
       boolean isConstructor,
       boolean isNative,
       TypeDescriptor returnTypeDescriptor,
-      TypeDescriptor... parameterTypeDescriptors) {
+      Iterable<TypeDescriptor> parameterTypeDescriptors) {
     return new AutoValue_MethodDescriptor(
         isStatic,
         false,
@@ -46,6 +48,26 @@ public abstract class MethodDescriptor extends Node implements Member {
         isNative,
         ImmutableList.copyOf(parameterTypeDescriptors),
         returnTypeDescriptor);
+  }
+
+  public static MethodDescriptor create(
+      boolean isStatic,
+      Visibility visibility,
+      TypeDescriptor enclosingClassDescriptor,
+      String methodName,
+      boolean isConstructor,
+      boolean isNative,
+      TypeDescriptor returnTypeDescriptor,
+      TypeDescriptor... parameterTypeDescriptors) {
+    return create(
+        isStatic,
+        visibility,
+        enclosingClassDescriptor,
+        methodName,
+        isConstructor,
+        isNative,
+        returnTypeDescriptor,
+        Arrays.asList(parameterTypeDescriptors));
   }
 
   /**

@@ -16,6 +16,7 @@ package com.google.j2cl.transpiler;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.visitors.ControlStatementFormatter;
 import com.google.j2cl.ast.visitors.InsertInstanceInitCallsVisitor;
+import com.google.j2cl.ast.visitors.MakeExplicitEnumConstructionVisitor;
 import com.google.j2cl.ast.visitors.NormalizeNestedClassConstructorsVisitor;
 import com.google.j2cl.common.VelocityUtil;
 import com.google.j2cl.errors.Errors;
@@ -115,6 +116,7 @@ public class J2clTranspiler {
 
   private void normalizeUnits(@SuppressWarnings("unused") List<CompilationUnit> j2clUnits) {
     for (CompilationUnit j2clUnit : j2clUnits) {
+      MakeExplicitEnumConstructionVisitor.doMakeEnumConstructionExplicit(j2clUnit);
       InsertInstanceInitCallsVisitor.doInsertInstanceInitCall(j2clUnit);
       ControlStatementFormatter.doFormatControlStatements(j2clUnit);
       NormalizeNestedClassConstructorsVisitor.doNormalizeNestedClassConstructors(j2clUnit);

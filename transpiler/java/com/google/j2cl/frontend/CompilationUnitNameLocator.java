@@ -21,6 +21,7 @@ import com.google.j2cl.errors.Errors;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.CompilationUnit;
+import org.eclipse.jdt.core.dom.EnumDeclaration;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.internal.compiler.env.INameEnvironment;
@@ -42,17 +43,25 @@ import java.util.Map.Entry;
 public class CompilationUnitNameLocator {
   private class SourceCompilationUnitIndexBuilder extends ASTVisitor {
     @Override
-    public boolean visit(TypeDeclaration node) {
-      ITypeBinding typeBinding = node.resolveBinding();
-      sourceUnitNamesByTypeBinaryName.put(typeBinding.getBinaryName(), currentCompilationUnitName);
-      return super.visit(node);
+    public boolean visit(TypeDeclaration typeDeclaration) {
+      addSourceBinding(typeDeclaration.resolveBinding());
+      return super.visit(typeDeclaration);
     }
 
     @Override
-    public boolean visit(AnonymousClassDeclaration node) {
-      ITypeBinding typeBinding = node.resolveBinding();
+    public boolean visit(EnumDeclaration enumDeclaration) {
+      addSourceBinding(enumDeclaration.resolveBinding());
+      return super.visit(enumDeclaration);
+    }
+
+    @Override
+    public boolean visit(AnonymousClassDeclaration anonymousClassDeclaration) {
+      addSourceBinding(anonymousClassDeclaration.resolveBinding());
+      return super.visit(anonymousClassDeclaration);
+    }
+
+    private void addSourceBinding(ITypeBinding typeBinding) {
       sourceUnitNamesByTypeBinaryName.put(typeBinding.getBinaryName(), currentCompilationUnitName);
-      return super.visit(node);
     }
   }
 

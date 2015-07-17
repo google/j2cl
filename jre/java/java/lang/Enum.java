@@ -1,0 +1,55 @@
+/*
+ * Copyright 2015 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
+ */
+package java.lang;
+
+import java.io.Serializable;
+
+/**
+ * See <a
+ * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Enum.html">the
+ * official Java API doc</a> for details.
+ */
+// TODO(rluble): Replace Comparable<Object> by Comparable<E> once we synthesize bridges.
+public abstract class Enum<E extends Enum<E>> implements Comparable<Object>, Serializable {
+
+  private final String name;
+
+  private final int ordinal;
+
+  protected Enum(String name, int ordinal) {
+    this.name = name;
+    this.ordinal = ordinal;
+  }
+
+  public final String name() {
+    return name != null ? name : "" + ordinal;
+  }
+
+  public final int ordinal() {
+    return ordinal;
+  }
+
+  // TODO(rluble): remove this explicit bridge when we start synthesizing them.
+  @Override
+  public int compareTo(Object other) {
+    if (!(other instanceof Enum)) {
+      return 1;
+    }
+    return compareTo((Enum<?>) other);
+  }
+
+  public int compareTo(Enum<?> other) {
+    return this.ordinal - ((Enum<?>) other).ordinal;
+  }
+}

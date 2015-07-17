@@ -19,6 +19,7 @@ import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -31,6 +32,11 @@ public class NewInstance extends Expression {
   @Visitable @Nullable Expression qualifier;
   @Visitable MethodDescriptor constructorMethodDescriptor;
   @Visitable List<Expression> arguments = new ArrayList<>();
+
+  public NewInstance(
+      Expression qualifier, MethodDescriptor constructorDescriptor, Expression... arguments) {
+    this(qualifier, constructorDescriptor, Arrays.asList(arguments));
+  }
 
   public NewInstance(
       Expression qualifier,

@@ -4,28 +4,35 @@ public class Main {
 
   static class Foo {}
 
-  /* TODO(rluble): uncomment when enums are in.
+  static enum Bar {
+    BAR,
+    BAZ
+  }
+
+  public static void testEnum() {
+    Object o = Bar.BAR;
+    assertSame(Bar.class, o.getClass());
+
+    assertEquals(
+        "com.google.j2cl.transpiler.integration.classliteral.Main$Bar", o.getClass().getName());
+    assertEquals(
+        "com.google.j2cl.transpiler.integration.classliteral.Main.Bar",
+        o.getClass().getCanonicalName());
+    assertEquals("Bar", o.getClass().getSimpleName());
+    assertEquals(
+        "class com.google.j2cl.transpiler.integration.classliteral.Main$Bar",
+        o.getClass().toString());
+
+    assert !o.getClass().isArray() : "Bar.BAR.class.isArray() returned true";
+    assert o.getClass().isEnum() : "Bar.BAR.class.isEnum() returned false";
+    assert !o.getClass().isPrimitive() : "Bar.BAR.class.isPrimitive() returned true";
+    assert !o.getClass().isInterface() : "Bar.BAR.class.isInterface() returned true";
+  }
+
+  /* TODO(rluble): uncomment once the full enum implementation is in.
 
    static enum Bar {
    BAR, BAZ {};
-   }
-
-   public static void testEnum() {
-   Object o = Bar.BAR;
-   assertSame(Bar.class, o.getClass());
-
-   assertEquals("com.google.j2cl.transpiler.integration.classliteral.Main$Bar",
-   o.getClass().getName());
-   assertEquals("com.google.j2cl.transpiler.integration.classliteral.Main.Bar",
-   o.getClass().getCanonicalName());
-   assertEquals("Bar", o.getClass().getSimpleName());
-   assertEquals("com.google.j2cl.transpiler.integration.classliteral.Main$Bar",
-   o.getClass().toString());
-
-   assert !o.getClass().isArray() : "Bar.BAR.class.isArray() returned true";
-   assert o.getClass().isEnum() : "Bar.BAR.class.isEnum() returned false";
-   assert !o.getClass().isPrimitive() : "Bar.BAR.class.isPrimitive() returned true";
-   assert !o.getClass().isInterface() : "Bar.BAR.class.isInterface() returned true";
    }
 
    public static void testEnumSubclass() {
@@ -137,8 +144,8 @@ public class Main {
     testArray();
     testPrimitive();
     testMisc();
-    // TODO(rluble):uncomment once enums are in.
-    // testEmum();
+    testEnum();
+    // TODO(rluble):uncomment once the full implementation of enums is in.
     // testEnumSubclass();
   }
 

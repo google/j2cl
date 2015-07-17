@@ -1,0 +1,351 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/simpleenum/SimpleEnum.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.simpleenum.SimpleEnumModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Enum = goog.require('gen.java.lang.EnumModule').Enum;
+var String = goog.require('gen.java.lang.StringModule').String;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+
+
+class SimpleEnum extends Enum {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @return {!SimpleEnum}
+   * @public
+   */
+  static $create__java_lang_String__int($name, $ordinal) {
+    SimpleEnum.$clinit();
+    var instance = new SimpleEnum;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum__java_lang_String__int(
+            $name, $ordinal);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum__java_lang_String__int(
+      $name, $ordinal) {
+    this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);
+    this.$init__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof SimpleEnum; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SimpleEnum);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() {
+    SimpleEnum.$clinit = function() {};
+    Enum.$clinit();
+    SimpleEnum
+        .$f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum =
+        SimpleEnum.$create__java_lang_String__int("V1", 0);
+    SimpleEnum
+        .$f_V2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum =
+        SimpleEnum.$create__java_lang_String__int("V2", 1);
+  }
+}
+;
+
+
+/**
+ * @public {?SimpleEnum}
+ */
+SimpleEnum.$f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum =
+    null;
+
+
+window.Object.defineProperties(SimpleEnum, {
+  f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum: {
+    get: function() {
+      SimpleEnum.$clinit();
+      return SimpleEnum
+          .$f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum;
+    },
+    set: function(value) {
+      SimpleEnum.$clinit();
+      SimpleEnum
+          .$f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum =
+          value;
+    }
+  }
+});
+
+
+/**
+ * @public {?SimpleEnum}
+ */
+SimpleEnum.$f_V2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum =
+    null;
+
+
+window.Object.defineProperties(SimpleEnum, {
+  f_V2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum: {
+    get: function() {
+      SimpleEnum.$clinit();
+      return SimpleEnum
+          .$f_V2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum;
+    },
+    set: function(value) {
+      SimpleEnum.$clinit();
+      SimpleEnum
+          .$f_V2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum =
+          value;
+    }
+  }
+});
+
+
+/**
+ * @public {Class}
+ */
+SimpleEnum.$class = Class.$createForEnum(
+    $Util.$generateId('SimpleEnum'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum'),
+    Enum.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum'),
+    // TODO(rluble): emit here the enum values
+    null);
+
+/**
+ * Export class.
+ */
+exports.SimpleEnum = SimpleEnum;
+
+
+
+class SimpleEnum2 extends Enum {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @package {number}
+     */
+    this.f_foo__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 = 0;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2() {
+    this.f_foo__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
+        SimpleEnum
+            .f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum
+            .m_ordinal();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {number} foo
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @return {!SimpleEnum2}
+   * @private
+   */
+  static $create__int__java_lang_String__int(foo, $name, $ordinal) {
+    SimpleEnum2.$clinit();
+    var instance = new SimpleEnum2;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__int__java_lang_String__int(
+            foo, $name, $ordinal);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {number} foo
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @private
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__int__java_lang_String__int(
+      foo, $name, $ordinal) {
+    this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);
+    this.$init__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2();
+    this.f_foo__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
+        foo;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {SimpleEnum} foo
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @return {!SimpleEnum2}
+   * @private
+   */
+  static $create__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum__java_lang_String__int(
+      foo, $name, $ordinal) {
+    SimpleEnum2.$clinit();
+    var instance = new SimpleEnum2;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum__java_lang_String__int(
+            foo, $name, $ordinal);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {SimpleEnum} foo
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @private
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum__java_lang_String__int(
+      foo, $name, $ordinal) {
+    this.$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__int__java_lang_String__int(
+        foo.m_ordinal(), $name, $ordinal);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof SimpleEnum2; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SimpleEnum2);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() {
+    SimpleEnum2.$clinit = function() {};
+    Enum.$clinit();
+    SimpleEnum2
+        .$f_VALUE1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
+        SimpleEnum2.$create__int__java_lang_String__int(2, "VALUE1", 0);
+    SimpleEnum2
+        .$f_VALUE2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
+        SimpleEnum2
+            .$create__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum__java_lang_String__int(
+                SimpleEnum
+                    .f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum,
+                "VALUE2", 1);
+  }
+}
+;
+
+
+/**
+ * @public {?SimpleEnum2}
+ */
+SimpleEnum2
+    .$f_VALUE1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
+    null;
+
+
+window.Object.defineProperties(SimpleEnum2, {
+  f_VALUE1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2: {
+    get: function() {
+      SimpleEnum2.$clinit();
+      return SimpleEnum2
+          .$f_VALUE1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2;
+    },
+    set: function(value) {
+      SimpleEnum2.$clinit();
+      SimpleEnum2
+          .$f_VALUE1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
+          value;
+    }
+  }
+});
+
+
+/**
+ * @public {?SimpleEnum2}
+ */
+SimpleEnum2
+    .$f_VALUE2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
+    null;
+
+
+window.Object.defineProperties(SimpleEnum2, {
+  f_VALUE2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2: {
+    get: function() {
+      SimpleEnum2.$clinit();
+      return SimpleEnum2
+          .$f_VALUE2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2;
+    },
+    set: function(value) {
+      SimpleEnum2.$clinit();
+      SimpleEnum2
+          .$f_VALUE2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
+          value;
+    }
+  }
+});
+
+
+/**
+ * @public {Class}
+ */
+SimpleEnum2.$class = Class.$createForEnum(
+    $Util.$generateId('SimpleEnum2'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2'),
+    Enum.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2'),
+    // TODO(rluble): emit here the enum values
+    null);
+
+/**
+ * Export class.
+ */
+exports.SimpleEnum2 = SimpleEnum2;

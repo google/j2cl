@@ -529,8 +529,7 @@ public class StatementSourceGenerator {
               operandAsSource,
               longsTypeAlias(),
               TranspilerUtils.getLongOperationFunctionName(expression.getOperator()),
-              operandAsSource
-              );
+              operandAsSource);
         }
 
         // The harder case. Like the easier case except that special care needs to be taken to only

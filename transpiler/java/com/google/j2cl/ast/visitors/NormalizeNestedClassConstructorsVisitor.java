@@ -38,7 +38,6 @@ import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
-import com.google.j2cl.ast.VariableReference;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -129,7 +128,7 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
         || !parameterByFieldForCaptures.containsKey(fieldAccess.getTarget())) {
       return fieldAccess;
     }
-    return new VariableReference(parameterByFieldForCaptures.get(fieldAccess.getTarget()));
+    return parameterByFieldForCaptures.get(fieldAccess.getTarget()).getReference();
   }
 
   private List<Expression> collectArgumentsForCaptures(TypeDescriptor typeDescriptor) {
@@ -154,7 +153,7 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
       } else {
         // otherwise, the captured variable is in the scope of the current type, so pass the
         // variable directly as an argument.
-        extraArguments.add(new VariableReference(capturedVariable));
+        extraArguments.add(capturedVariable.getReference());
       }
     }
     return extraArguments;
@@ -178,7 +177,7 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
       method.addParameter(parameter);
       if (isThisCall) { // this() call
         // add argument (reference to outer parameter) to this() call.
-        constructorCall.getArguments().add(new VariableReference(parameter));
+        constructorCall.getArguments().add(parameter.getReference());
       } else {
         // add initializer.
         BinaryExpression initializer =
@@ -190,7 +189,7 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
                             method.getDescriptor().getEnclosingClassTypeDescriptor()),
                     field.getDescriptor()),
                 BinaryOperator.ASSIGN,
-                new VariableReference(parameter));
+                parameter.getReference());
         method.getBody().getStatements().add(i + 1, new ExpressionStatement(initializer));
       }
       i++;

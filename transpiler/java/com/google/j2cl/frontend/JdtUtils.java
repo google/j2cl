@@ -15,14 +15,16 @@
  */
 package com.google.j2cl.frontend;
 
+import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.FieldDescriptor;
+import com.google.j2cl.ast.JavaType.Kind;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.PostfixOperator;
 import com.google.j2cl.ast.PrefixOperator;
-import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
@@ -78,6 +80,10 @@ public class JdtUtils {
     if (typeBinding == null) {
       return null;
     }
+    // TODO(rluble): This is a Generics catch all that prevents Generics siping through
+    // TypeDescriptors. Remove to implement Generics support.
+
+    typeBinding = typeBinding.getErasure();
     if (typeBinding.isPrimitive()) {
       switch (typeBinding.getName()) {
         case TypeDescriptor.BOOLEAN_TYPE_NAME:
@@ -106,9 +112,8 @@ public class JdtUtils {
     List<String> nameComponents = new LinkedList<>();
     List<String> packageComponents = new LinkedList<>();
     if (typeBinding.isArray()) {
-      RegularTypeDescriptor leafTypeDescriptor =
-          (RegularTypeDescriptor)
-              createTypeDescriptor(typeBinding.getElementType(), compilationUnitNameLocator);
+      TypeDescriptor leafTypeDescriptor =
+          createTypeDescriptor(typeBinding.getElementType(), compilationUnitNameLocator);
       return leafTypeDescriptor.getForArray(typeBinding.getDimensions());
     }
 
@@ -118,10 +123,10 @@ public class JdtUtils {
       if (currentType.isLocal()) {
         // JDT binary name for local class is like package.components.EnclosingClass$1SimpleName
         // Extract the name after the last '$' as the class component here.
-        String binaryName = currentType.getErasure().getBinaryName();
+        String binaryName = currentType.getBinaryName();
         simpleName = binaryName.substring(binaryName.lastIndexOf('$') + 1);
       } else {
-        simpleName = currentType.getErasure().getName();
+        simpleName = currentType.getName();
       }
       nameComponents.add(0, simpleName);
       currentType = currentType.getDeclaringClass();
@@ -158,7 +163,7 @@ public class JdtUtils {
   }
 
   static MethodDescriptor createMethodDescriptor(
-      IMethodBinding methodBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
+      IMethodBinding methodBinding, final CompilationUnitNameLocator compilationUnitNameLocator) {
     int modifiers = methodBinding.getModifiers();
     boolean isStatic = isStatic(modifiers);
     Visibility visibility = getVisibility(modifiers);
@@ -173,12 +178,15 @@ public class JdtUtils {
             : methodBinding.getName();
     TypeDescriptor returnTypeDescriptor =
         createTypeDescriptor(methodBinding.getReturnType(), compilationUnitNameLocator);
-    int parameterSize = methodBinding.getParameterTypes().length;
-    TypeDescriptor[] parameterTypeDescriptors = new TypeDescriptor[parameterSize];
-    for (int i = 0; i < parameterSize; i++) {
-      parameterTypeDescriptors[i] =
-          createTypeDescriptor(methodBinding.getParameterTypes()[i], compilationUnitNameLocator);
-    }
+    Iterable<TypeDescriptor> parameterTypeDescriptors =
+        FluentIterable.from(Arrays.asList(methodBinding.getParameterTypes()))
+            .transform(
+                new Function<ITypeBinding, TypeDescriptor>() {
+                  @Override
+                  public TypeDescriptor apply(ITypeBinding typeBinding) {
+                    return createTypeDescriptor(typeBinding, compilationUnitNameLocator);
+                  }
+                });
     return MethodDescriptor.create(
         isStatic,
         visibility,
@@ -242,6 +250,18 @@ public class JdtUtils {
         return BinaryOperator.CONDITIONAL_OR;
     }
     return null;
+  }
+
+  public static Kind getKindFromTypeBinding(ITypeBinding typeBinding) {
+    if (typeBinding.isInterface()) {
+      return Kind.INTERFACE;
+    } else if (typeBinding.isEnum()) {
+      return Kind.ENUM;
+    } else if (typeBinding.isClass()) {
+      return Kind.CLASS;
+    }
+
+    throw new RuntimeException("Type binding " + typeBinding + " not handled");
   }
 
   public static BinaryOperator getBinaryOperator(Assignment.Operator operator) {
@@ -375,6 +395,15 @@ public class JdtUtils {
     }
 
     return false;
+  }
+
+  /**
+   * Helper method to work around JDT habit of returning raw collections.
+   */
+  public static <T> List<T> getTypedCollection(List<?> jdtRawCollection) {
+    @SuppressWarnings("unchecked")
+    List<T> typedList = (List) jdtRawCollection;
+    return typedList;
   }
 
   private JdtUtils() {}

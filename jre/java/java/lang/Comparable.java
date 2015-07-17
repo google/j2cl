@@ -15,32 +15,9 @@ package java.lang;
 
 /**
  * See <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html">the
+ * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Comparable.html">the
  * official Java API doc</a> for details.
  */
-public abstract class Class<T> implements java.io.Serializable {
-
-  public abstract boolean desiredAssertionStatus();
-
-  public abstract String getCanonicalName();
-
-  public abstract Class<?> getComponentType();
-
-  public abstract T[] getEnumConstants();
-
-  public abstract String getName();
-
-  public abstract String getSimpleName();
-
-  public abstract Class<? super T> getSuperclass();
-
-  public abstract boolean isArray();
-
-  public abstract boolean isEnum();
-
-  public abstract boolean isInterface();
-
-  public abstract boolean isPrimitive();
-
-  public abstract String toString();
+public interface Comparable<T> {
+  int compareTo(T other);
 }

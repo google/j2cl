@@ -73,4 +73,8 @@ public class Variable extends Node {
   public Node accept(Processor processor) {
     return Visitor_Variable.visit(processor, this);
   }
+
+  public Expression getReference() {
+    return new VariableReference(this);
+  }
 }

@@ -19,6 +19,8 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -27,6 +29,32 @@ import java.util.List;
 public class ASTUtils {
   public static final String CAPTURES_PREFIX = "$c_";
   public static final String ENCLOSING_INSTANCE_NAME = "$outer_this";
+
+  /**
+   * Construct a new method descriptor for {@code methodDescriptor} with the additional
+   * parameters {@code extraParameters} at the end.
+   */
+  public static MethodDescriptor addParametersToMethodDescriptor(
+      MethodDescriptor methodDescriptor, TypeDescriptor... extraParameters) {
+    return addParametersToMethodDescriptor(methodDescriptor, Arrays.asList(extraParameters));
+  }
+
+  /**
+   * Construct a new method descriptor for {@code methodDescriptor} with the additional
+   * parameters {@code extraParameters} at the end.
+   */
+  public static MethodDescriptor addParametersToMethodDescriptor(
+      MethodDescriptor methodDescriptor, Collection<TypeDescriptor> extraParameters) {
+    return MethodDescriptor.create(
+        methodDescriptor.isStatic(),
+        methodDescriptor.getVisibility(),
+        methodDescriptor.getEnclosingClassTypeDescriptor(),
+        methodDescriptor.getMethodName(),
+        methodDescriptor.isConstructor(),
+        methodDescriptor.isNative(),
+        methodDescriptor.getReturnTypeDescriptor(),
+        Iterables.concat(methodDescriptor.getParameterTypeDescriptors(), extraParameters));
+  }
 
   /**
    * Create "$init" MethodDescriptor.
