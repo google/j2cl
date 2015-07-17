@@ -54,6 +54,7 @@ are copyright and licensed as follows:
 - enumwithanonymousclass
 - enumwithbody
 - equals
+- finalfield (readable JsDoc and no static setter)
 - genericconstructorofgenericclass
 - genericconstructorofnongenericclass
 - genericinstancemethod
@@ -79,6 +80,7 @@ are copyright and licensed as follows:
 - simpleenum
 - simplegenerictype
 - simplelambda
+- staticfieldaccess (readable example + warning log)
 - subclassgenericclass
 - subclassgenericclasswithparam
 - supermethodcalls (nonconstructor)
