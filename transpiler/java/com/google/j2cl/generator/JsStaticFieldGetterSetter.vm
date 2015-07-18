@@ -1,0 +1,25 @@
+#set ($staticFieldVisibility = $staticField.Descriptor.Visibility)
+#set ($staticFieldType = ${statementSourceGenerator.getJsDocName(${staticField.Descriptor.TypeDescriptor})})
+#set ($indirectStaticFieldName = ${ManglingNameUtils.getMangledName($staticField.Descriptor)})
+#set ($directStaticFieldAccess = ${ManglingNameUtils.getMangledName($staticField.Descriptor, true)})
+  /**
+   * A static field getter.
+   * @return {$staticFieldType}
+   * @$staticFieldVisibility
+   */
+  static get $indirectStaticFieldName() {
+      $className.$clinit();
+      return $className.$directStaticFieldAccess;
+  }
+
+  /**
+   * A static field setter.
+   * @param {$staticFieldType} value
+   * @return {void}
+   * @$staticFieldVisibility
+   */
+  static set $indirectStaticFieldName (value) {
+      $className.$clinit();
+      $className.$directStaticFieldAccess = value;
+  }
+

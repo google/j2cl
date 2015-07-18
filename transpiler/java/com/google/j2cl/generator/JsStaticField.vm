@@ -1,25 +1,10 @@
 #set ($staticFieldVisibility = $staticField.Descriptor.Visibility)
 #set ($staticFieldType = ${statementSourceGenerator.getJsDocName(${staticField.Descriptor.TypeDescriptor})})
-#set ($staticFieldName = ${ManglingNameUtils.getMangledName($staticField.Descriptor)})
-#set ($directStaticFieldAccess = "$" + ${staticFieldName})
+#set ($directStaticFieldAccess = ${ManglingNameUtils.getMangledName($staticField.Descriptor, true)})
+#set ($defaultValue = ${staticField.Descriptor.TypeDescriptor.DefaultValue})
 
 
 /**
- * @$staticFieldVisibility {?$staticFieldType}
+ * @$staticFieldVisibility {$staticFieldType}
  */
-#set ($defaultValue = ${staticField.Descriptor.TypeDescriptor.DefaultValue})
 $className.$directStaticFieldAccess = ${statementSourceGenerator.toSource($defaultValue)};
-
-
-window.Object.defineProperties($className, {
-  $staticFieldName: {
-    get: function() {
-      $className.$clinit();
-      return $className.$directStaticFieldAccess;
-    },
-    set: function(value) {
-      $className.$clinit();
-      $className.$directStaticFieldAccess = value;
-    }
-  }
-});

@@ -119,7 +119,7 @@ def make_size_report():
       [0: 4])
   # Keep a maximum of 4 of the largest expansions.
   expansion_reports = (
-      sorted(expansion_reports, key=lambda report: report[0], reverse=False)
+      sorted(expansion_reports, key=lambda report: report[0], reverse=True)
       [0: 4])
 
   size_report_file.write(

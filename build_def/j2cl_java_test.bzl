@@ -85,6 +85,7 @@ def j2cl_java_test(**kwargs):
       name=base_name + "_js_test",
       srcs=[":" + base_name + "_extract_js",],
       compile=1,
+      compiler="//javascript/tools/jscompiler:head",
       defs=[
           "--language_in=ECMASCRIPT6",
           "--language_out=ECMASCRIPT5",
