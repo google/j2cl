@@ -35,9 +35,6 @@ are copyright and licensed as follows:
 - b/20102666 WARNING - actual parameter of Foo.$markImplementor does not match
   formal parameter
 
-## Useful tools/testings to add
-- testing the cost of adding more parents in a hierarchy.
-
 ## Likely readable examples to add (remove some redundant)
 - anonymousclassforfunctionalinterface (transpiled to function)
 - boxing
