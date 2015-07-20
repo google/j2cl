@@ -41,7 +41,7 @@ are copyright and licensed as follows:
 ## Likely readable examples to add (remove some redundant)
 - anonymousclassforfunctionalinterface (transpiled to function)
 - boxing
-- break with label
+- breakwithlabel
 - bridgemethodaccidentaloverride
 - bridgemethodboundedtypes
 - bridgemethodmultipleoverrides
@@ -51,6 +51,7 @@ are copyright and licensed as follows:
 - classlocalvarcollision
 - classliteralForEnums (tests are in classliteral)
 - complextypeinference
+- continuewithlabel
 - enumwithanonymousclass
 - enum special functions (values, valueOf, etc).
 - equals

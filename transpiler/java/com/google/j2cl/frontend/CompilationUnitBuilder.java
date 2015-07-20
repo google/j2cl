@@ -36,6 +36,7 @@ import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CatchClause;
 import com.google.j2cl.ast.CharacterLiteral;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.ContinueStatement;
 import com.google.j2cl.ast.DoWhileStatement;
 import com.google.j2cl.ast.EmptyStatement;
 import com.google.j2cl.ast.Expression;
@@ -565,6 +566,8 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.BreakStatement) statement);
         case ASTNode.CONSTRUCTOR_INVOCATION:
           return convert((org.eclipse.jdt.core.dom.ConstructorInvocation) statement);
+        case ASTNode.CONTINUE_STATEMENT:
+          return convert((org.eclipse.jdt.core.dom.ContinueStatement) statement);
         case ASTNode.DO_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.DoStatement) statement);
         case ASTNode.EMPTY_STATEMENT:
@@ -602,6 +605,12 @@ public class CompilationUnitBuilder {
       Preconditions.checkState(
           statement.getLabel() == null, "Break statement with label not supported yet");
       return new BreakStatement();
+    }
+
+    private ContinueStatement convert(org.eclipse.jdt.core.dom.ContinueStatement statement) {
+      Preconditions.checkState(
+          statement.getLabel() == null, "Continue statement with label not supported yet");
+      return new ContinueStatement();
     }
 
     private ForStatement convert(org.eclipse.jdt.core.dom.ForStatement statement) {

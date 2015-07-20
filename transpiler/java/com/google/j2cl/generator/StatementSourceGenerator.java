@@ -33,6 +33,7 @@ import com.google.j2cl.ast.BreakStatement;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CatchClause;
 import com.google.j2cl.ast.CharacterLiteral;
+import com.google.j2cl.ast.ContinueStatement;
 import com.google.j2cl.ast.DoWhileStatement;
 import com.google.j2cl.ast.EmptyStatement;
 import com.google.j2cl.ast.Expression;
@@ -224,6 +225,11 @@ public class StatementSourceGenerator {
       @Override
       public String transformBreakStatement(BreakStatement statement) {
         return "break;";
+      }
+
+      @Override
+      public String transformContinueStatement(ContinueStatement statement) {
+        return "continue;";
       }
 
       private String transformRegularBinaryExpression(BinaryExpression expression) {
