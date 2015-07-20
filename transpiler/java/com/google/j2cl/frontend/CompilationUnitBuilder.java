@@ -109,6 +109,7 @@ import java.util.Map.Entry;
 public class CompilationUnitBuilder {
   private class ASTConverter {
     private Map<IVariableBinding, Variable> variableByJdtBinding = new HashMap<>();
+    private Map<Variable, JavaType> enclosingTypeByVariable = new HashMap<>();
     private Multimap<TypeDescriptor, Variable> capturesByTypeDescriptor =
         LinkedHashMultimap.create();
     private List<JavaType> typeStack = new ArrayList<>();
@@ -934,11 +935,38 @@ public class CompilationUnitBuilder {
       return new ReturnStatement(expression);
     }
 
+    /**
+     * Finds and returns the descriptor of the type that encloses the variable referenced by the
+     * provided binding.
+     */
+    private TypeDescriptor findEnclosingTypeDescriptor(IVariableBinding variableBinding) {
+      // The binding is a simple field and JDT provides direct knowledge of the declaring class.
+      if (variableBinding.getDeclaringClass() != null) {
+        return createTypeDescriptor(variableBinding.getDeclaringClass());
+      }
+      // The binding is a local variable or parameter in method. JDT provides an indirect path to
+      // the enclosing class.
+      if (variableBinding.getDeclaringMethod() != null) {
+        return createTypeDescriptor(variableBinding.getDeclaringMethod().getDeclaringClass());
+      }
+      // The binding is for a local variable in a static or instance block. JDT does not allow for
+      // retrieving the enclosing class. Answer the question from information we've been gathering
+      // while processing the compilation unit.
+      JavaType javaType = enclosingTypeByVariable.get(variableByJdtBinding.get(variableBinding));
+      if (javaType != null) {
+        return javaType.getDescriptor();
+      }
+
+      throw new RuntimeException(
+          "Need to be able to locate the declaring class for variable binding: " + variableBinding);
+    }
+
     private Expression convert(org.eclipse.jdt.core.dom.SimpleName expression) {
       IBinding binding = expression.resolveBinding();
       if (binding instanceof IVariableBinding) {
         IVariableBinding variableBinding = (IVariableBinding) binding;
         if (variableBinding.isField()) {
+          // It refers to a field.
           FieldDescriptor fieldDescriptor =
               JdtUtils.createFieldDescriptor(variableBinding, compilationUnitNameLocator);
           if (!fieldDescriptor
@@ -951,12 +979,10 @@ public class CompilationUnitBuilder {
             return new FieldAccess(null, fieldDescriptor);
           }
         } else {
-          // local variable or parameter.
-          Preconditions.checkNotNull(variableBinding.getDeclaringMethod());
+          // It refers to a local variable or parameter in a method or block.
           Variable variable = variableByJdtBinding.get(variableBinding);
-          // the innermost type that this variable are declared.
-          TypeDescriptor enclosingTypeDescriptor =
-              createTypeDescriptor(variableBinding.getDeclaringMethod().getDeclaringClass());
+          // The innermost type in which this variable is declared.
+          TypeDescriptor enclosingTypeDescriptor = findEnclosingTypeDescriptor(variableBinding);
           TypeDescriptor currentTypeDescriptor = currentType.getDescriptor();
           if (!enclosingTypeDescriptor.equals(currentTypeDescriptor)) {
             return convertCapturedVariableReference(variable, enclosingTypeDescriptor);
@@ -1131,12 +1157,23 @@ public class CompilationUnitBuilder {
         org.eclipse.jdt.core.dom.VariableDeclarationFragment variableDeclarationFragment) {
       IVariableBinding variableBinding = variableDeclarationFragment.resolveBinding();
       Variable variable = JdtUtils.createVariable(variableBinding, compilationUnitNameLocator);
+      recordEnclosingType(variable, currentType);
       Expression initializer =
           variableDeclarationFragment.getInitializer() == null
               ? null
               : convert(variableDeclarationFragment.getInitializer());
       variableByJdtBinding.put(variableBinding, variable);
       return new VariableDeclarationFragment(variable, initializer);
+    }
+
+    /**
+     * Records associations of variables and their enclosing type.
+     * <p>
+     * Enclosing type is a broader category than declaring type since some variables (fields) have a
+     * declaring type (that is also their enclosing type) while other variables do not.
+     */
+    private void recordEnclosingType(Variable variable, JavaType enclosingType) {
+      enclosingTypeByVariable.put(variable, enclosingType);
     }
 
     private VariableDeclarationStatement convert(
