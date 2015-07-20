@@ -55,14 +55,14 @@ class $interfaceName {
 
   /**
    * Runs inline static field initializers.
-##* @clinit to make js lint pass, removed the @clinit. we may get it back once it is supported.
    * @protected
    */
   static $clinit() {}
 };
 
 
-$interfaceName.$markImplementor($interfaceName);
+## TODO: remove cast after b/20102666 is handled in Closure.
+$interfaceName.$markImplementor(/** @type {Function} */($interfaceName));
 
 
 #set ($classAlias = ${statementSourceGenerator.toSource($javaLangClassTypeDecriptor)} )
