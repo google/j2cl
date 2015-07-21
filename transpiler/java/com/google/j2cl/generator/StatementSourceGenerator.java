@@ -60,6 +60,8 @@ import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.SuperReference;
+import com.google.j2cl.ast.SwitchCase;
+import com.google.j2cl.ast.SwitchStatement;
 import com.google.j2cl.ast.TernaryExpression;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.ThrowStatement;
@@ -631,6 +633,24 @@ public class StatementSourceGenerator {
       @Override
       public String transformStringLiteral(StringLiteral expression) {
         return expression.getEscapedValue();
+      }
+
+      @Override
+      public String transformSwitchCase(SwitchCase switchCase) {
+        if (switchCase.isDefault()) {
+          return "default:";
+        }
+        return "case " + toSource(switchCase.getMatchExpression()) + ":";
+      }
+
+      @Override
+      public String transformSwitchStatement(SwitchStatement switchStatement) {
+        String switchCasesAsString =
+            Joiner.on("\n").join(transformNodesToSource(switchStatement.getBodyStatements()));
+        return String.format(
+            "switch (%s) { %s }",
+            toSource(switchStatement.getMatchExpression()),
+            switchCasesAsString);
       }
 
       @Override

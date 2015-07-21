@@ -74,6 +74,7 @@ are copyright and licensed as follows:
 - packageclasscollision
 - packageprivateinstancemethods
 - primitiveoverflow
+- shorterfieldmangling (for fields in final classes, like enums)
 - simplebridgemethod
 - simpleenum
 - simplegenerictype

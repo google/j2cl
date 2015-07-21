@@ -1,0 +1,129 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/switchstatement/SwitchStatement.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.switchstatement.SwitchStatementModule');
+
+
+var Numbers = goog.require('gen.com.google.j2cl.transpiler.readable.switchstatement.NumbersModule').Numbers;
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+class SwitchStatement extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_switchstatement_SwitchStatement() {
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    switch ("one") {
+      case "one":
+      case "two":
+        break;
+      default:
+        return;
+    }
+    switch (49 /* '1' */) {
+      case 49 /* '1' */:
+      case 50 /* '2' */:
+        break;
+      default:
+        return;
+    }
+    switch (1) {
+      case 1:
+      case 2:
+        break;
+      default:
+        return;
+    }
+    switch (
+        Numbers
+            .f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers) {
+      case Numbers
+          .f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers:
+      case Numbers
+          .f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers:
+        break;
+      default:
+        return;
+    }
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!SwitchStatement}
+   * @public
+   */
+  static $create() {
+    SwitchStatement.$clinit();
+    var instance = new SwitchStatement;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_switchstatement_SwitchStatement();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_switchstatement_SwitchStatement() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_switchstatement_SwitchStatement();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof SwitchStatement; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SwitchStatement);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+SwitchStatement.$class = Class.$createForClass(
+    $Util.$generateId('SwitchStatement'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement'));
+
+/**
+ * Export class.
+ */
+exports.SwitchStatement = SwitchStatement;

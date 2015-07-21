@@ -63,6 +63,8 @@ import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.SuperReference;
+import com.google.j2cl.ast.SwitchCase;
+import com.google.j2cl.ast.SwitchStatement;
 import com.google.j2cl.ast.TernaryExpression;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.ThrowStatement;
@@ -278,7 +280,7 @@ public class CompilationUnitBuilder {
               null,
               JdtUtils.createMethodDescriptor(
                   enumConstantDeclaration.resolveConstructorBinding(), compilationUnitNameLocator),
-              convert(
+              convertExpressions(
                   JdtUtils.<org.eclipse.jdt.core.dom.Expression>getTypedCollection(
                       enumConstantDeclaration.arguments())));
       return new Field(
@@ -392,7 +394,7 @@ public class CompilationUnitBuilder {
       ArrayType arrayType = expression.getType();
 
       List<Expression> dimensionExpressions =
-          convert((List<org.eclipse.jdt.core.dom.Expression>) expression.dimensions());
+          convertExpressions((List<org.eclipse.jdt.core.dom.Expression>) expression.dimensions());
       // If some dimensions are not initialized then make that explicit.
       while (dimensionExpressions.size() < arrayType.getDimensions()) {
         dimensionExpressions.add(NullLiteral.NULL);
@@ -410,7 +412,7 @@ public class CompilationUnitBuilder {
     private ArrayLiteral convert(org.eclipse.jdt.core.dom.ArrayInitializer expression) {
       return new ArrayLiteral(
           createTypeDescriptor(expression.resolveTypeBinding()),
-          convert((List<org.eclipse.jdt.core.dom.Expression>) expression.expressions()));
+          convertExpressions((List<org.eclipse.jdt.core.dom.Expression>) expression.expressions()));
     }
 
     private BooleanLiteral convert(org.eclipse.jdt.core.dom.BooleanLiteral literal) {
@@ -533,13 +535,26 @@ public class CompilationUnitBuilder {
       return new VariableDeclarationExpression(variableDeclarations);
     }
 
-    private List<Expression> convert(List<org.eclipse.jdt.core.dom.Expression> expressions) {
+    private List<Expression> convertExpressions(
+        List<org.eclipse.jdt.core.dom.Expression> expressions) {
       return new ArrayList<>(
           Lists.transform(
               expressions,
               new Function<org.eclipse.jdt.core.dom.Expression, Expression>() {
                 @Override
                 public Expression apply(org.eclipse.jdt.core.dom.Expression expression) {
+                  return convert(expression);
+                }
+              }));
+    }
+
+    private List<Statement> convertStatements(List<org.eclipse.jdt.core.dom.Statement> statements) {
+      return new ArrayList<>(
+          Lists.transform(
+              statements,
+              new Function<org.eclipse.jdt.core.dom.Statement, Statement>() {
+                @Override
+                public Statement apply(org.eclipse.jdt.core.dom.Statement expression) {
                   return convert(expression);
                 }
               }));
@@ -583,6 +598,10 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.ReturnStatement) statement);
         case ASTNode.SUPER_CONSTRUCTOR_INVOCATION:
           return convert((org.eclipse.jdt.core.dom.SuperConstructorInvocation) statement);
+        case ASTNode.SWITCH_CASE:
+          return convert((org.eclipse.jdt.core.dom.SwitchCase) statement);
+        case ASTNode.SWITCH_STATEMENT:
+          return convert((org.eclipse.jdt.core.dom.SwitchStatement) statement);
         case ASTNode.THROW_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.ThrowStatement) statement);
         case ASTNode.TRY_STATEMENT:
@@ -631,7 +650,7 @@ public class CompilationUnitBuilder {
 
       Statement body = convert(statement.getBody());
       @SuppressWarnings("unchecked")
-      List<Expression> updaters = convert(statement.updaters());
+      List<Expression> updaters = convertExpressions(statement.updaters());
       return new ForStatement(conditionExpression, body, initializers, updaters);
     }
 
@@ -706,7 +725,7 @@ public class CompilationUnitBuilder {
       IMethodBinding constructorBinding = statement.resolveConstructorBinding();
       MethodDescriptor methodDescriptor =
           JdtUtils.createMethodDescriptor(constructorBinding, compilationUnitNameLocator);
-      List<Expression> arguments = convert(statement.arguments());
+      List<Expression> arguments = convertExpressions(statement.arguments());
       maybePackageVarargs(constructorBinding, statement.arguments(), arguments);
       return new ExpressionStatement(new MethodCall(null, methodDescriptor, arguments));
     }
@@ -759,7 +778,7 @@ public class CompilationUnitBuilder {
           expression.getExpression() == null ? null : convert(expression.getExpression());
       MethodDescriptor methodDescriptor =
           JdtUtils.createMethodDescriptor(methodBinding, compilationUnitNameLocator);
-      List<Expression> arguments = convert(expression.arguments());
+      List<Expression> arguments = convertExpressions(expression.arguments());
       maybePackageVarargs(methodBinding, expression.arguments(), arguments);
       return new MethodCall(qualifier, methodDescriptor, arguments);
     }
@@ -777,7 +796,7 @@ public class CompilationUnitBuilder {
       MethodDescriptor methodDescriptor =
           JdtUtils.createMethodDescriptor(methodBinding, compilationUnitNameLocator);
       @SuppressWarnings("unchecked")
-      List<Expression> arguments = convert(expression.arguments());
+      List<Expression> arguments = convertExpressions(expression.arguments());
       maybePackageVarargs(methodBinding, expression.arguments(), arguments);
       return new MethodCall(
           new SuperReference(currentType.getSuperTypeDescriptor()), methodDescriptor, arguments);
@@ -872,7 +891,7 @@ public class CompilationUnitBuilder {
               parameterTypeDescriptors);
       @SuppressWarnings("unchecked")
 
-      List<Expression> arguments = convert(invocation.arguments());
+      List<Expression> arguments = convertExpressions(invocation.arguments());
       // Turn the instance into now a first parameter to the devirtualized method.
       arguments.add(0, originalQualifier);
       // Call the method like Objects.foo(instance, ...)
@@ -969,9 +988,10 @@ public class CompilationUnitBuilder {
           // It refers to a field.
           FieldDescriptor fieldDescriptor =
               JdtUtils.createFieldDescriptor(variableBinding, compilationUnitNameLocator);
-          if (!fieldDescriptor
-              .getEnclosingClassTypeDescriptor()
-              .equals(currentType.getDescriptor())) {
+          if (!fieldDescriptor.isStatic()
+              && !fieldDescriptor
+                  .getEnclosingClassTypeDescriptor()
+                  .equals(currentType.getDescriptor())) {
             return new FieldAccess(
                 convertOuterClassReference(fieldDescriptor.getEnclosingClassTypeDescriptor()),
                 fieldDescriptor);
@@ -1068,6 +1088,19 @@ public class CompilationUnitBuilder {
     }
 
     @SuppressWarnings("unchecked")
+    private SwitchCase convert(org.eclipse.jdt.core.dom.SwitchCase statement) {
+      return statement.isDefault()
+          ? new SwitchCase()
+          : new SwitchCase(convert(statement.getExpression()));
+    }
+
+    @SuppressWarnings("unchecked")
+    private SwitchStatement convert(org.eclipse.jdt.core.dom.SwitchStatement statement) {
+      return new SwitchStatement(
+          convert(statement.getExpression()), convertStatements(statement.statements()));
+    }
+
+    @SuppressWarnings("unchecked")
     private ExpressionStatement convert(
         org.eclipse.jdt.core.dom.SuperConstructorInvocation expression) {
       IMethodBinding superConstructorBinding = expression.resolveConstructorBinding();
@@ -1077,7 +1110,7 @@ public class CompilationUnitBuilder {
       MethodDescriptor methodDescriptor =
           JdtUtils.createMethodDescriptor(superConstructorBinding, compilationUnitNameLocator);
       @SuppressWarnings("unchecked")
-      List<Expression> arguments = convert(expression.arguments());
+      List<Expression> arguments = convertExpressions(expression.arguments());
       maybePackageVarargs(superConstructorBinding, expression.arguments(), arguments);
       Expression qualifier =
           expression.getExpression() == null ? null : convert(expression.getExpression());

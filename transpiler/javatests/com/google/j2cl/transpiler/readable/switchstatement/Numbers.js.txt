@@ -1,0 +1,173 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/switchstatement/Numbers.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.switchstatement.NumbersModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Enum = goog.require('gen.java.lang.EnumModule').Enum;
+var String = goog.require('gen.java.lang.StringModule').String;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+
+
+class Numbers extends Enum {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_switchstatement_Numbers() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @return {!Numbers}
+   * @public
+   */
+  static $create__java_lang_String__int($name, $ordinal) {
+    Numbers.$clinit();
+    var instance = new Numbers;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_switchstatement_Numbers__java_lang_String__int(
+            $name, $ordinal);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_switchstatement_Numbers__java_lang_String__int(
+      $name, $ordinal) {
+    this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);
+    this.$init__com_google_j2cl_transpiler_readable_switchstatement_Numbers();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Numbers; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Numbers);
+  }
+
+  /**
+   * A static field getter.
+   * @return {Numbers}
+   * @public
+   */
+  static get
+  f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers() {
+    Numbers.$clinit();
+    return Numbers
+        .$f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers;
+  }
+
+  /**
+   * A static field setter.
+   * @param {Numbers} value
+   * @return {void}
+   * @public
+   */
+  static set f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers(
+      value) {
+    Numbers.$clinit();
+    Numbers
+        .$f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers =
+        value;
+  }
+
+  /**
+   * A static field getter.
+   * @return {Numbers}
+   * @public
+   */
+  static get
+  f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers() {
+    Numbers.$clinit();
+    return Numbers
+        .$f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers;
+  }
+
+  /**
+   * A static field setter.
+   * @param {Numbers} value
+   * @return {void}
+   * @public
+   */
+  static set f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers(
+      value) {
+    Numbers.$clinit();
+    Numbers
+        .$f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers =
+        value;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() {
+    Numbers.$clinit = function() {};
+    Enum.$clinit();
+    Numbers
+        .$f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers =
+        Numbers.$create__java_lang_String__int("ONE", 0);
+    Numbers
+        .$f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers =
+        Numbers.$create__java_lang_String__int("TWO", 1);
+  }
+}
+;
+
+
+/**
+ * @public {Numbers}
+ */
+Numbers.$f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers =
+    null;
+
+
+/**
+ * @public {Numbers}
+ */
+Numbers.$f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers =
+    null;
+
+
+/**
+ * @public {Class}
+ */
+Numbers.$class = Class.$createForEnum(
+    $Util.$generateId('Numbers'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.switchstatement.Numbers'),
+    Enum.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.switchstatement.Numbers'),
+    // TODO(rluble): emit here the enum values
+    null);
+
+/**
+ * Export class.
+ */
+exports.Numbers = Numbers;
