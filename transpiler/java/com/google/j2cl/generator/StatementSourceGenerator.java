@@ -215,7 +215,7 @@ public class StatementSourceGenerator {
         MemberReference memberReference = (MemberReference) leftOperand;
         String fieldOrMethodDescriptorAsString = toSource((Node) memberReference.getTarget());
         return String.format(
-            "window.$q = %s, window.$q.%s = %s.%s(window.$q.%s, %s)",
+            "$Longs.$q = %s, $Longs.$q.%s = %s.%s($Longs.$q.%s, %s)",
             toSource(qualifier),
             fieldOrMethodDescriptorAsString,
             longsTypeAlias(),
@@ -533,7 +533,7 @@ public class StatementSourceGenerator {
           // from dereferencing the qualifier twice.
           String operandAsSource = toSource(operand);
           return String.format(
-              "(window.$v = %s, %s = %s.%s(%s), window.$v)",
+              "($Longs.$v = %s, %s = %s.%s(%s), $Longs.$v)",
               operandAsSource,
               operandAsSource,
               longsTypeAlias(),
@@ -549,8 +549,8 @@ public class StatementSourceGenerator {
         Member target = memberReference.getTarget();
         String fieldOrMethodDescriptorAsString = toSource((Node) target);
         return String.format(
-            "(window.$q = %s, window.$v = window.$q.%s, "
-                + "window.$q.%s = %s.%s(window.$q.%s), window.$v)",
+            "($Longs.$q = %s, $Longs.$v = $Longs.$q.%s, "
+                + "$Longs.$q.%s = %s.%s($Longs.$q.%s), $Longs.$v)",
             toSource(qualifier),
             fieldOrMethodDescriptorAsString,
             fieldOrMethodDescriptorAsString,
@@ -602,7 +602,7 @@ public class StatementSourceGenerator {
         MemberReference memberReference = (MemberReference) operand;
         String fieldOrMethodDescriptorAsString = toSource((Node) memberReference.getTarget());
         return String.format(
-            "(window.$q = %s, window.$q.%s = %s.%s(window.$q.%s))",
+            "($Longs.$q = %s, $Longs.$q.%s = %s.%s($Longs.$q.%s))",
             toSource(qualifier),
             fieldOrMethodDescriptorAsString,
             longsTypeAlias(),

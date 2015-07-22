@@ -220,6 +220,18 @@ class Longs {
 
 
 /**
+ * @public {?}
+ */
+Longs.$q;
+
+
+/**
+ * @public {!Long}
+ */
+Longs.$v;
+
+
+/**
  * Exported class.
  */
 exports.Longs = Longs;
