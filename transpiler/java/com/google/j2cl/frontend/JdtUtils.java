@@ -400,7 +400,8 @@ public class JdtUtils {
   /**
    * Helper method to work around JDT habit of returning raw collections.
    */
-  public static <T> List<T> getTypedCollection(List<?> jdtRawCollection) {
+  @SuppressWarnings("rawtypes")
+  public static <T> List<T> asTypedList(List jdtRawCollection) {
     @SuppressWarnings("unchecked")
     List<T> typedList = (List) jdtRawCollection;
     return typedList;

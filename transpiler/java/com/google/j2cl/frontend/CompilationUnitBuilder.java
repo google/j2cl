@@ -153,7 +153,7 @@ public class CompilationUnitBuilder {
         case ASTNode.TYPE_DECLARATION:
           return convertJavaType(
               typeDeclaration.resolveBinding(),
-              JdtUtils.<BodyDeclaration>getTypedCollection(typeDeclaration.bodyDeclarations()));
+              JdtUtils.<BodyDeclaration>asTypedList(typeDeclaration.bodyDeclarations()));
         case ASTNode.ENUM_DECLARATION:
           return convert((EnumDeclaration) typeDeclaration);
         default:
@@ -168,20 +168,20 @@ public class CompilationUnitBuilder {
     private Collection<JavaType> convert(AnonymousClassDeclaration typeDeclaration) {
       return convertJavaType(
           typeDeclaration.resolveBinding(),
-          JdtUtils.<BodyDeclaration>getTypedCollection(typeDeclaration.bodyDeclarations()));
+          JdtUtils.<BodyDeclaration>asTypedList(typeDeclaration.bodyDeclarations()));
     }
 
     private Collection<JavaType> convert(EnumDeclaration enumDeclaration) {
       Collection<JavaType> types =
           convertJavaType(
               enumDeclaration.resolveBinding(),
-              JdtUtils.<BodyDeclaration>getTypedCollection(enumDeclaration.bodyDeclarations()));
+              JdtUtils.<BodyDeclaration>asTypedList(enumDeclaration.bodyDeclarations()));
       JavaType type = types.iterator().next();
       // this is an Enum.
       Preconditions.checkState(type.isEnum());
       type.addFields(
           FluentIterable.from(
-                  JdtUtils.<EnumConstantDeclaration>getTypedCollection(
+                  JdtUtils.<EnumConstantDeclaration>asTypedList(
                       enumDeclaration.enumConstants()))
               .transform(
                   new Function<EnumConstantDeclaration, Field>() {
@@ -281,7 +281,7 @@ public class CompilationUnitBuilder {
               JdtUtils.createMethodDescriptor(
                   enumConstantDeclaration.resolveConstructorBinding(), compilationUnitNameLocator),
               convertExpressions(
-                  JdtUtils.<org.eclipse.jdt.core.dom.Expression>getTypedCollection(
+                  JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(
                       enumConstantDeclaration.arguments())));
       return new Field(
           JdtUtils.createFieldDescriptor(
