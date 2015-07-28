@@ -22,9 +22,7 @@ import com.google.common.collect.ImmutableMultiset;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.AbstractVisitor;
-import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AssertStatement;
-import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
@@ -69,17 +67,6 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   @Override
   public void exitAssertStatement(AssertStatement assertStatement) {
     addTypeDescriptor(TypeDescriptors.VM_ASSERTS_TYPE_DESCRIPTOR);
-  }
-
-  @Override
-  public void exitCastExpression(CastExpression castExpression) {
-    if (castExpression.getCastTypeDescriptor() instanceof ArrayTypeDescriptor) {
-      // Arrays.$castTo()
-      addTypeDescriptor(TypeDescriptors.VM_ARRAYS_TYPE_DESCRIPTOR);
-      return;
-    }
-    // Casts.$to()
-    addTypeDescriptor(TypeDescriptors.VM_CASTS_TYPE_DESCRIPTOR);
   }
 
   @Override

@@ -75,6 +75,18 @@ public abstract class MethodDescriptor extends Node implements Member {
    */
   public static MethodDescriptor createRaw(
       boolean isStatic, TypeDescriptor enclosingClassTypeDescriptor, String methodName) {
+    return createRaw(
+        isStatic, enclosingClassTypeDescriptor, methodName, TypeDescriptors.VOID_TYPE_DESCRIPTOR);
+  }
+
+  /**
+   * Creates a raw method reference.
+   */
+  public static MethodDescriptor createRaw(
+      boolean isStatic,
+      TypeDescriptor enclosingClassTypeDescriptor,
+      String methodName,
+      TypeDescriptor returnTypeDescriptor) {
     return new AutoValue_MethodDescriptor(
         isStatic,
         true,
@@ -84,7 +96,7 @@ public abstract class MethodDescriptor extends Node implements Member {
         false,
         false,
         ImmutableList.<TypeDescriptor>of(),
-        TypeDescriptors.VOID_TYPE_DESCRIPTOR);
+        returnTypeDescriptor);
   }
 
   @Override

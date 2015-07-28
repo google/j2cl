@@ -216,7 +216,7 @@ public class ASTUtils {
       arguments.add(new VariableReference(parameter));
     }
     // adds 'this' as the last argument.
-    arguments.add(new ThisReference((RegularTypeDescriptor) outerclassTypeDescriptor));
+    arguments.add(new ThisReference(outerclassTypeDescriptor));
 
     Expression newInnerClass = new NewInstance(null, innerclassConstructorDescriptor, arguments);
     List<Statement> statements = new ArrayList<>();

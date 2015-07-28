@@ -23,7 +23,6 @@ import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractTransformer;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
-import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
@@ -56,7 +55,6 @@ import com.google.j2cl.ast.ParenthesizedExpression;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.PrefixOperator;
-import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.SuperReference;
@@ -276,51 +274,10 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformCastExpression(CastExpression expression) {
-        TypeDescriptor castTypeDescriptor = expression.getCastTypeDescriptor();
-        if (castTypeDescriptor.isArray()) {
-          return transformArrayCastExpression(expression);
-        }
-        return transformRegularCastExpression(expression);
-      }
-
-      private String transformRegularCastExpression(CastExpression castExpression) {
-        Preconditions.checkArgument(
-            castExpression.getCastTypeDescriptor() instanceof RegularTypeDescriptor);
-        RegularTypeDescriptor castTypeDescriptor =
-            (RegularTypeDescriptor) castExpression.getCastTypeDescriptor();
-
-        if (castTypeDescriptor.isPrimitive()) {
-          throw new RuntimeException("TODO: Implement toSource() for cast to primitive type");
-        }
-
-        String jsDocTypeName = getJsDocName(castTypeDescriptor);
-        String typeName = getAlias(castTypeDescriptor);
-        String expressionStr = toSource(castExpression.getExpression());
-        String isInstanceCallStr = String.format("%s.$isInstance(%s)", typeName, expressionStr);
         return String.format(
-            "/**@type {%s} */ (%s.to(%s, %s))",
-            jsDocTypeName,
-            castsTypeAlias(),
-            expressionStr,
-            isInstanceCallStr);
-      }
-
-      private String transformArrayCastExpression(CastExpression castExpression) {
-        Preconditions.checkArgument(
-            castExpression.getCastTypeDescriptor() instanceof ArrayTypeDescriptor);
-        ArrayTypeDescriptor arrayCastTypeDescriptor =
-            (ArrayTypeDescriptor) castExpression.getCastTypeDescriptor();
-
-        String jsDocTypeName = getJsDocName(arrayCastTypeDescriptor);
-        String leafTypeName = getAlias(arrayCastTypeDescriptor.getLeafTypeDescriptor());
-        String expressionStr = toSource(castExpression.getExpression());
-        return String.format(
-            "/**@type {%s} */ (%s.$castTo(%s, %s, %s))",
-            jsDocTypeName,
-            arraysTypeAlias(),
-            expressionStr,
-            leafTypeName,
-            arrayCastTypeDescriptor.getDimensions());
+            "/**@type {%s} */ (%s)",
+            getJsDocName(expression.getCastTypeDescriptor()),
+            toSource(expression.getExpression()));
       }
 
       @Override
@@ -917,10 +874,6 @@ public class StatementSourceGenerator {
 
       private String assertsTypeAlias() {
         return toSource(TypeDescriptors.VM_ASSERTS_TYPE_DESCRIPTOR);
-      }
-
-      private String castsTypeAlias() {
-        return toSource(TypeDescriptors.VM_CASTS_TYPE_DESCRIPTOR);
       }
 
       private String longsTypeAlias() {

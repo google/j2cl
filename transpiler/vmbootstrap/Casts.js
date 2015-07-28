@@ -3,6 +3,8 @@ goog.module('vmbootstrap.CastsModule');
 
 var ClassCastException =
     goog.require('gen.java.lang.ClassCastExceptionModule').ClassCastException;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+
 
 class Casts {
   /**

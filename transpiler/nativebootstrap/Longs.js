@@ -38,6 +38,27 @@ class Longs {
   static $fromInt(longInDouble) { return Long.fromInt(longInDouble); }
 
   /**
+   * @param {number} value A double value.
+   * @return {!Long} A Long corresponding to the given double.
+   * @public
+   */
+  static $fromNumber(value) { return Long.fromNumber(value); }
+
+  /**
+   * @param {Long} longValue A Long value.
+   * @return {number} A 32-bit integer corresponding to the given Long.
+   * @public
+   */
+  static $toInt(longValue) { return longValue.toInt(); }
+
+  /**
+   * @param {Long} longValue A Long value.
+   * @return {number} The closest floating-point value to the given Long.
+   * @public
+   */
+  static $toNumber(longValue) { return longValue.toNumber(); }
+
+  /**
    * @param {!Long} leftLong The left Long in the operation.
    * @param {!Long} rightLong The right Long in the operation.
    * @return {!Long} The bitwise and of left and right.

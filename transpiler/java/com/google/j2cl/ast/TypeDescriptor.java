@@ -30,7 +30,7 @@ import java.util.Arrays;
  * Base class for type reference.
  */
 @Visitable
-public abstract class TypeDescriptor extends Node implements Comparable<TypeDescriptor> {
+public abstract class TypeDescriptor extends Expression implements Comparable<TypeDescriptor> {
   public static final String VOID_TYPE_NAME = "void";
   public static final String INT_TYPE_NAME = "int";
   public static final String BOOLEAN_TYPE_NAME = "boolean";
@@ -119,6 +119,11 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
   public abstract int getDimensions();
 
   public abstract TypeDescriptor getLeafTypeDescriptor();
+
+  @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return this;
+  }
 
   public TypeDescriptor getComponentTypeDescriptor() {
     return getLeafTypeDescriptor();
