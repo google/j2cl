@@ -158,6 +158,7 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
           "-ea",
       ],
       module_target=":gwt_module",
+      tags = ["manual"],
   )
 
   # blaze test :uncompiled_test

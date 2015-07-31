@@ -134,6 +134,7 @@ public class Main {
     assert !int.class.isInterface() : "int.class.isInterface() returned true";
   }
 
+  @SuppressWarnings("GetClassOnClass")
   public static void testMisc() {
     assertSame(Class.class, int.class.getClass());
   }
