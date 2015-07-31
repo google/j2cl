@@ -304,4 +304,11 @@ public class TranspilerUtils {
     }
     return ((MemberReference) expression).getQualifier();
   }
+
+  public static Expression getInitialValue(Field field) {
+    if (field.isCompileTimeConstant()) {
+      return field.getInitializer();
+    }
+    return field.getDescriptor().getTypeDescriptor().getDefaultValue();
+  }
 }

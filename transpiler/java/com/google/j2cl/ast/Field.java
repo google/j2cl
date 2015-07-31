@@ -29,6 +29,8 @@ import javax.annotation.Nullable;
 public class Field extends Node {
   @Visitable FieldDescriptor fieldDescriptor;
   @Visitable @Nullable Expression initializer;
+  private boolean compileTimeConstant;
+
   private Variable capturedVariable;
 
   public Field(FieldDescriptor fieldDescriptor, Expression initializer) {
@@ -68,7 +70,15 @@ public class Field extends Node {
   }
 
   public boolean hasInitializer() {
-    return this.initializer != null;
+    return initializer != null;
+  }
+
+  public boolean isCompileTimeConstant() {
+    return compileTimeConstant;
+  }
+
+  public void setCompileTimeConstant(boolean compileTimeConstant) {
+    this.compileTimeConstant = compileTimeConstant;
   }
 
   @Override

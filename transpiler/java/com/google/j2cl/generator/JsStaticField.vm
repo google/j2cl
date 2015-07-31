@@ -1,10 +1,10 @@
 #set ($staticFieldVisibility = $staticField.Descriptor.Visibility)
 #set ($staticFieldType = ${statementSourceGenerator.getJsDocName(${staticField.Descriptor.TypeDescriptor})})
 #set ($directStaticFieldAccess = ${ManglingNameUtils.getMangledName($staticField.Descriptor, true)})
-#set ($defaultValue = ${staticField.Descriptor.TypeDescriptor.DefaultValue})
+#set ($initialValue = ${TranspilerUtils.getInitialValue($staticField)})
 
 
 /**
  * @$staticFieldVisibility {$staticFieldType}
  */
-$className.$directStaticFieldAccess = ${statementSourceGenerator.toSource($defaultValue)};
+$className.$directStaticFieldAccess = ${statementSourceGenerator.toSource($initialValue)};

@@ -33,11 +33,11 @@ class $className $extendsClause {
 #set ($fieldVisibility = $field.Descriptor.Visibility)
 #set ($fieldType = ${statementSourceGenerator.getJsDocName($field.Descriptor.TypeDescriptor)})
 #set ($fieldName = ${ManglingNameUtils.getMangledName($field.Descriptor)})
-#set ($defaultValue = ${field.Descriptor.TypeDescriptor.DefaultValue})
+#set ($initialValue = ${TranspilerUtils.getInitialValue($field)})
     /**
      * @$fieldVisibility {$fieldType}
      */
-    this.$fieldName = ${statementSourceGenerator.toSource($defaultValue)};
+    this.$fieldName = ${statementSourceGenerator.toSource($initialValue)};
 #end
   }
 
@@ -48,8 +48,10 @@ class $className $extendsClause {
   $init__$mangledTypeName() {
 #foreach ($field in $classType.getInstanceFields())
 #if ($field.hasInitializer())
+#if (!$field.isCompileTimeConstant())
 #set ($fieldInitializer = $statementSourceGenerator.toSource($field.Initializer))
     this.${ManglingNameUtils.getMangledName($field.Descriptor)} = $fieldInitializer;
+#end
 #end
 #end
 #foreach ($instanceInitializerBlock in $classType.InstanceInitializerBlocks)

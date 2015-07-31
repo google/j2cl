@@ -80,6 +80,7 @@ import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.errors.Errors;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
 import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
@@ -181,8 +182,7 @@ public class CompilationUnitBuilder {
       Preconditions.checkState(type.isEnum());
       type.addFields(
           FluentIterable.from(
-                  JdtUtils.<EnumConstantDeclaration>asTypedList(
-                      enumDeclaration.enumConstants()))
+                  JdtUtils.<EnumConstantDeclaration>asTypedList(enumDeclaration.enumConstants()))
               .transform(
                   new Function<EnumConstantDeclaration, Field>() {
                     @Override
@@ -326,15 +326,46 @@ public class CompilationUnitBuilder {
       for (Object object : fieldDeclaration.fragments()) {
         org.eclipse.jdt.core.dom.VariableDeclarationFragment fragment =
             (org.eclipse.jdt.core.dom.VariableDeclarationFragment) object;
-        Expression initializer =
-            fragment.getInitializer() == null ? null : convert(fragment.getInitializer());
-        fields.add(
+        Expression initializer;
+        IVariableBinding variableBinding = fragment.resolveBinding();
+        if (variableBinding.getConstantValue() == null) {
+          initializer =
+              fragment.getInitializer() == null ? null : convert(fragment.getInitializer());
+        } else {
+          initializer = convertConstantToLiteral(variableBinding);
+        }
+        Field field =
             new Field(
-                JdtUtils.createFieldDescriptor(
-                    fragment.resolveBinding(), compilationUnitNameLocator),
-                initializer));
+                JdtUtils.createFieldDescriptor(variableBinding, compilationUnitNameLocator),
+                initializer);
+        field.setCompileTimeConstant(variableBinding.getConstantValue() != null);
+        fields.add(field);
       }
       return fields;
+    }
+
+    private Expression convertConstantToLiteral(IVariableBinding variableBinding) {
+      Object constantValue = variableBinding.getConstantValue();
+      if (constantValue instanceof Number) {
+        return new NumberLiteral(
+            createTypeDescriptor(variableBinding.getType()), (Number) constantValue);
+      }
+      if (constantValue instanceof String) {
+        return new StringLiteral(
+            "\"" + StringEscapeUtils.escapeJava((String) constantValue) + "\"");
+      }
+      if (constantValue instanceof Character) {
+        return new CharacterLiteral(
+            (char) constantValue,
+            "\"" + StringEscapeUtils.escapeJava(String.valueOf((char) constantValue)) + "\"");
+      }
+      if (constantValue instanceof Boolean) {
+        return (boolean) constantValue ? BooleanLiteral.TRUE : BooleanLiteral.FALSE;
+      }
+      throw new RuntimeException(
+          "Need to implement translation for compile time constants of type: "
+              + constantValue.getClass().getSimpleName()
+              + ".");
     }
 
     private Method convert(MethodDeclaration methodDeclaration) {

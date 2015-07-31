@@ -9,9 +9,11 @@
     $superTypeName.$clinit();
 #foreach ($staticField in $classType.getStaticFields())
 #if ($staticField.hasInitializer())
+#if (!$staticField.isCompileTimeConstant())
 #set ($staticFieldName = ${ManglingNameUtils.getMangledName($staticField.Descriptor)})
 #set ($directStaticFieldAccess = "$" + ${staticFieldName})
     $className.$directStaticFieldAccess = ${statementSourceGenerator.toSource(${staticField.Initializer}, $classType.Descriptor)};
+#end
 #end
 #end
 #foreach ($staticInitializerBlock in $classType.StaticInitializerBlocks)
