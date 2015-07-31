@@ -6,7 +6,9 @@
 
 
 from os import listdir
+from os import walk
 from os.path import isfile
+from os.path import join
 import re
 import shutil
 from subprocess import PIPE
@@ -71,10 +73,10 @@ def get_transpiled_js_file_paths():
   example_js_file_paths = []
 
   for example_name in example_names:
-    example_js_file_paths += [
-        EXAMPLES_DIR + example_name + "/" + f[: -5] + ".js"
-        for f in listdir(EXAMPLES_DIR + example_name)
-        if f.endswith(".java")]
+    for root, _, files in walk(EXAMPLES_DIR + example_name):
+      example_js_file_paths += [
+          join(root, f)[: -5] + ".js"
+          for f in files if f.endswith(".java")]
 
   return example_js_file_paths
 
