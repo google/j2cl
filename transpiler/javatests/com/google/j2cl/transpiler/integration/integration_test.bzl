@@ -126,6 +126,40 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
       deps=[":" + name + "_js_library"],
   )
 
+  # For constructing GWT transpiled output.
+  gwt_harness = """
+      package %s;
+      import com.google.gwt.core.client.EntryPoint;
+      public class MainEntryPoint implements EntryPoint {
+        @Override
+        public void onModuleLoad() {
+          Main.main(new String[] {});
+        }
+      }
+  """ % java_package
+  native.genrule(
+      name="gwt_harness_generator",
+      outs=["MainEntryPoint.java"],
+      cmd="echo \"%s\" > $@" % gwt_harness,
+      executable=1,
+  )
+  native.gwt_module(
+      name="gwt_module",
+      srcs=srcs + ["MainEntryPoint.java"],
+      deps=deps,
+      entry_points = [java_package + ".MainEntryPoint"],
+  )
+  native.gwt_application(
+      name="readable_gwt_application",
+      compiler_opts=[
+          "-optimize 0",
+          "-style PRETTY",
+          "-setProperty user.agent=safari",
+          "-ea",
+      ],
+      module_target=":gwt_module",
+  )
+
   # blaze test :uncompiled_test
   # blaze test :compiled_test
   test_harness = """
