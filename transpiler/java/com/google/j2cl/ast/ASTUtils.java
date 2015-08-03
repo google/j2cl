@@ -250,4 +250,40 @@ public class ASTUtils {
 
     return new Method(methodDescriptor, innerclassConstructor.getParameters(), body, false);
   }
+
+  /**
+   * Returns forwarding method for exposed package private methods (which means that one of its
+   * overriding method is public or protected, so the package private method is exposed).
+   * The forwarding method is like:
+   * exposedMethodDescriptor (args) {return this.forwardToMethodDescriptor(args);}
+   */
+  public static Method createForwardingMethod(
+      MethodDescriptor exposedMethodDescriptor, MethodDescriptor forwardToMethodDescriptor) {
+    MethodDescriptor forwardinghMethodDescriptor =
+        MethodDescriptor.create(
+            exposedMethodDescriptor.isStatic(),
+            exposedMethodDescriptor.getVisibility(),
+            forwardToMethodDescriptor.getEnclosingClassTypeDescriptor(), // enclosing class
+            exposedMethodDescriptor.getMethodName(),
+            exposedMethodDescriptor.isConstructor(),
+            false, // is native
+            forwardToMethodDescriptor.getReturnTypeDescriptor(), // return type
+            exposedMethodDescriptor.getParameterTypeDescriptors());
+    List<Variable> parameters = new ArrayList<>();
+    List<Expression> arguments = new ArrayList<>();
+    for (int i = 0; i < exposedMethodDescriptor.getParameterTypeDescriptors().size(); i++) {
+      Variable parameter =
+          new Variable(
+              "arg" + i, exposedMethodDescriptor.getParameterTypeDescriptors().get(i), false, true);
+      parameters.add(parameter);
+      arguments.add(parameter.getReference());
+    }
+    Expression forwardingMethodCall = new MethodCall(null, forwardToMethodDescriptor, arguments);
+    Statement statement =
+        exposedMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.VOID_TYPE_DESCRIPTOR
+            ? new ExpressionStatement(forwardingMethodCall)
+            : new ReturnStatement(forwardingMethodCall);
+    return Method.createSynthetic(
+        forwardinghMethodDescriptor, parameters, new Block(Arrays.asList(statement)), true);
+  }
 }

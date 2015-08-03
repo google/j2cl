@@ -472,11 +472,11 @@ public class JdtUtils {
     ITypeBinding type = overridingMethod.getDeclaringClass();
 
     // Check immediate super class and interfaces for overridden method.
-    if (type.getSuperclass() != null && hasOverideeInType(overridingMethod, type.getSuperclass())) {
+    if (type.getSuperclass() != null && isOveriddenInType(overridingMethod, type.getSuperclass())) {
       return true;
     }
     for (ITypeBinding interfaceBinding : type.getInterfaces()) {
-      if (hasOverideeInType(overridingMethod, interfaceBinding)) {
+      if (isOveriddenInType(overridingMethod, interfaceBinding)) {
         return true;
       }
     }
@@ -484,25 +484,37 @@ public class JdtUtils {
     return false;
   }
 
-  private static boolean hasOverideeInType(IMethodBinding overridingMethod, ITypeBinding type) {
+  private static boolean isOveriddenInType(IMethodBinding overridingMethod, ITypeBinding type) {
     for (IMethodBinding method : type.getDeclaredMethods()) {
       // TODO: this may need to be fixed for generic methods overriding.
-      if (overridingMethod.overrides(method)) {
+      // exposed overriding is not real overriding in JavaScript because the two methods
+      // have different method names and they are connected by dispatch method,
+      if (overridingMethod.overrides(method)
+          && (!upgradesPackagePrivateVisibility(overridingMethod, method))) {
         return true;
       }
     }
 
     // Recurse into immediate super class and interfaces for overridden method.
-    if (type.getSuperclass() != null && hasOverideeInType(overridingMethod, type.getSuperclass())) {
+    if (type.getSuperclass() != null && isOveriddenInType(overridingMethod, type.getSuperclass())) {
       return true;
     }
     for (ITypeBinding interfaceBinding : type.getInterfaces()) {
-      if (hasOverideeInType(overridingMethod, interfaceBinding)) {
+      if (isOveriddenInType(overridingMethod, interfaceBinding)) {
         return true;
       }
     }
 
     return false;
+  }
+
+  static boolean upgradesPackagePrivateVisibility(
+      IMethodBinding overridingMethod, IMethodBinding overriddenMethod) {
+    Preconditions.checkArgument(overridingMethod.overrides(overriddenMethod));
+    Visibility overriddenMethodVisibility = getVisibility(overriddenMethod.getModifiers());
+    Visibility overridingMethodVisibility = getVisibility(overridingMethod.getModifiers());
+    return overriddenMethodVisibility.isPackagePrivate()
+        && (overridingMethodVisibility.isPublic() || overridingMethodVisibility.isProtected());
   }
 
   /**

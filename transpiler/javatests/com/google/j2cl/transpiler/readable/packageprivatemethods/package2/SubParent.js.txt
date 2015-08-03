@@ -1,0 +1,100 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/packageprivatemethods/package2/SubParent.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParentModule');
+
+
+var Parent = goog.require('gen.com.google.j2cl.transpiler.readable.packageprivatemethods.package1.ParentModule').Parent;
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+
+
+class SubParent extends Parent {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubParent() {
+  }
+
+  /**
+   * @param {number} a
+   * @return {number}
+   * @package
+   */
+  m_foo__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package2(
+      a) {
+    return a;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!SubParent}
+   * @public
+   */
+  static $create() {
+    SubParent.$clinit();
+    var instance = new SubParent;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubParent();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubParent() {
+    this.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Parent();
+    this.$init__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubParent();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof SubParent; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SubParent);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Parent.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+SubParent.$class = Class.$createForClass(
+    $Util.$generateId('SubParent'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent'),
+    Parent.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent'));
+
+/**
+ * Export class.
+ */
+exports.SubParent = SubParent;

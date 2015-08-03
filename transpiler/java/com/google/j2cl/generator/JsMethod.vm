@@ -5,6 +5,9 @@
 #end
 #set ($parameterList = $TranspilerUtils.getParameterList($method))
   /**
+#if ($method.isSynthetic())
+   * Synthetic method.
+#end
 #if ($method.isOverride())
    * @override
 #end

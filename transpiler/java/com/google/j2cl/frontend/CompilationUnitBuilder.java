@@ -269,6 +269,14 @@ public class CompilationUnitBuilder {
                   outerclassType.getDescriptor(), innerclassConstructor));
         }
       }
+
+      // Add dispatch methods for package private methods.
+      for (Map.Entry<MethodDescriptor, MethodDescriptor> entry :
+          PackagePrivateMethodsChecker.findExposedOverriddenMethods(
+                  typeBinding, compilationUnitNameLocator)
+              .entrySet()) {
+        currentType.addMethod(ASTUtils.createForwardingMethod(entry.getValue(), entry.getKey()));
+      }
       popType();
       return types;
     }

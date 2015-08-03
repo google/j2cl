@@ -1,0 +1,123 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/packageprivatemethods/package1/SuperParent.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.packageprivatemethods.package1.SuperParentModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+
+
+class SuperParent extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_SuperParent() {
+  }
+
+  /**
+   * @param {number} a
+   * @return {number}
+   * @package
+   */
+  m_foo__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package1(
+      a) {
+    return a - 1;
+  }
+
+  /**
+   * @param {number} a
+   * @param {number} b
+   * @return {number}
+   * @package
+   */
+  m_fun__int__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package1(
+      a, b) {
+    return a + b;
+  }
+
+  /**
+   * @param {number} a
+   * @param {number} b
+   * @param {number} c
+   * @return {number}
+   * @package
+   */
+  m_bar__int__int__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package1(
+      a, b, c) {
+    return a + b + c;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!SuperParent}
+   * @public
+   */
+  static $create() {
+    SuperParent.$clinit();
+    var instance = new SuperParent;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_SuperParent();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_SuperParent() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_SuperParent();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof SuperParent; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SuperParent);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+SuperParent.$class = Class.$createForClass(
+    $Util.$generateId('SuperParent'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.packageprivatemethods.package1.SuperParent'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.packageprivatemethods.package1.SuperParent'));
+
+/**
+ * Export class.
+ */
+exports.SuperParent = SuperParent;

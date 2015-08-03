@@ -1,0 +1,98 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/packageprivatemethods/package2/SubChild.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubChildModule');
+
+
+var Child = goog.require('gen.com.google.j2cl.transpiler.readable.packageprivatemethods.package1.ChildModule').Child;
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+
+
+class SubChild extends Child {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubChild() {
+  }
+
+  /**
+   * @override
+   * @param {number} a
+   * @return {number}
+   * @public
+   */
+  m_foo__int(a) { return a + 3; }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!SubChild}
+   * @public
+   */
+  static $create() {
+    SubChild.$clinit();
+    var instance = new SubChild;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubChild();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubChild() {
+    this.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Child();
+    this.$init__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubChild();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof SubChild; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SubChild);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Child.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+SubChild.$class = Class.$createForClass(
+    $Util.$generateId('SubChild'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubChild'),
+    Child.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubChild'));
+
+/**
+ * Export class.
+ */
+exports.SubChild = SubChild;
