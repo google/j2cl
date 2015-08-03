@@ -17,6 +17,7 @@ package com.google.j2cl.ast;
 
 import com.google.common.collect.ImmutableSet;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
 
@@ -42,6 +43,8 @@ public class TypeDescriptors {
       TypeDescriptor.createPrimitive(TypeDescriptor.CHAR_TYPE_NAME);
   public static final TypeDescriptor VOID_TYPE_DESCRIPTOR =
       TypeDescriptor.createPrimitive(TypeDescriptor.VOID_TYPE_NAME);
+  public static final TypeDescriptor WILD_CARD_TYPE_DESCRIPTOR =
+      TypeDescriptor.createTypeVariable(new ArrayList<String>(), Arrays.asList("?"), "");
   public static final TypeDescriptor CLASS_TYPE_DESCRIPTOR =
       TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Class"), "Class");
   public static final TypeDescriptor OBJECT_TYPE_DESCRIPTOR =

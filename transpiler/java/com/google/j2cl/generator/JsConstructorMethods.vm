@@ -6,8 +6,15 @@
 #set ($parameterList = $TranspilerUtils.getParameterList($method))
 #set ($mangledNameOfCreate = $ManglingNameUtils.getConstructorMangledName($method.Descriptor))
 #set ($mangledNameOfCtor = $ManglingNameUtils.getCtorMangledName($method.Descriptor))
+#set ($enclosingClassTypeDescriptor = ${method.Descriptor.getEnclosingClassTypeDescriptor()})
   /**
    * A particular Java constructor as a factory method.
+#if (${classType.Descriptor.isParameterizedType()})
+   * @template ${statementSourceGenerator.getJsDocNames(${classType.Descriptor.getTypeArgumentDescriptors()})}
+#end
+#if (!${method.Descriptor.getTypeParameterDescriptors().isEmpty()})
+   * @template ${statementSourceGenerator.getJsDocNames(${method.Descriptor.getTypeParameterDescriptors()})}
+#end
 #foreach($parameter in $method.Parameters)
 #set ($parameterTypeName = ${statementSourceGenerator.getJsDocName(${parameter.TypeDescriptor})})
    * @param {$parameterTypeName} $parameter.Name
@@ -24,6 +31,9 @@
 
   /**
    * Initializes instance fields for a particular Java constructor.
+#if (!${method.Descriptor.getTypeParameterDescriptors().isEmpty()})
+   * @template ${statementSourceGenerator.getJsDocNames(${method.Descriptor.getTypeParameterDescriptors()})}
+#end
 #foreach($parameter in $method.Parameters)
 #set ($parameterTypeName = ${statementSourceGenerator.getJsDocName(${parameter.TypeDescriptor})})
    * @param {$parameterTypeName} $parameter.Name

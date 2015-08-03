@@ -16,7 +16,9 @@
 package com.google.j2cl.ast;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +31,9 @@ import java.util.List;
 public class ASTUtils {
   public static final String CAPTURES_PREFIX = "$c_";
   public static final String ENCLOSING_INSTANCE_NAME = "$outer_this";
+  public static final String CREATE_PREFIX = "$create_";
+  public static final String TYPE_VARIABLE_IN_METHOD_PREFIX = "M_";
+  public static final String TYPE_VARIABLE_IN_TYPE_PREFIX = "C_";
 
   /**
    * Construct a new method descriptor for {@code methodDescriptor} with the additional
@@ -180,13 +185,32 @@ public class ASTUtils {
    * inner class by calling the corresponding inner class constructor.
    */
   public static MethodDescriptor createMethodDescriptorForInnerClassCreation(
-      TypeDescriptor outerclassTypeDescriptor, MethodDescriptor innerclassConstructorDescriptor) {
+      final TypeDescriptor outerclassTypeDescriptor,
+      MethodDescriptor innerclassConstructorDescriptor) {
     boolean isStatic = false;
-    String methodName = "$create_" + innerclassConstructorDescriptor.getMethodName();
+    String methodName = CREATE_PREFIX + innerclassConstructorDescriptor.getMethodName();
     boolean isConstructor = false;
     boolean isNative = false;
     TypeDescriptor returnTypeDescriptor =
         innerclassConstructorDescriptor.getEnclosingClassTypeDescriptor();
+    // if the inner class is a generic type, add its type parameters to the wrapper method.
+    List<TypeDescriptor> typeParameterDescriptors = new ArrayList<>();
+    TypeDescriptor innerclassTypeDescriptor =
+        innerclassConstructorDescriptor.getEnclosingClassTypeDescriptor();
+    if (innerclassTypeDescriptor.isParameterizedType()) {
+      typeParameterDescriptors.addAll(
+          Lists.newArrayList(
+              Iterables.filter( // filters out the type parameters declared in the outer class.
+                  innerclassTypeDescriptor.getTypeArgumentDescriptors(),
+                  new Predicate<TypeDescriptor>() {
+                    @Override
+                    public boolean apply(TypeDescriptor typeParameter) {
+                      return !outerclassTypeDescriptor
+                          .getTypeArgumentDescriptors()
+                          .contains(typeParameter);
+                    }
+                  })));
+    }
     return MethodDescriptor.create(
         isStatic,
         innerclassConstructorDescriptor.getVisibility(),
@@ -195,8 +219,9 @@ public class ASTUtils {
         isConstructor,
         isNative,
         returnTypeDescriptor,
-        Iterables.toArray(
-            innerclassConstructorDescriptor.getParameterTypeDescriptors(), TypeDescriptor.class));
+        innerclassConstructorDescriptor.getParameterTypeDescriptors(),
+        typeParameterDescriptors,
+        innerclassConstructorDescriptor.getErasureMethodDescriptor());
   }
 
   /**
@@ -204,7 +229,7 @@ public class ASTUtils {
    * by calling the corresponding inner class constructor.
    */
   public static Method createMethodForInnerClassCreation(
-      TypeDescriptor outerclassTypeDescriptor, Method innerclassConstructor) {
+      final TypeDescriptor outerclassTypeDescriptor, Method innerclassConstructor) {
     MethodDescriptor innerclassConstructorDescriptor = innerclassConstructor.getDescriptor();
     MethodDescriptor methodDescriptor =
         createMethodDescriptorForInnerClassCreation(
@@ -222,6 +247,7 @@ public class ASTUtils {
     List<Statement> statements = new ArrayList<>();
     statements.add(new ReturnStatement(newInnerClass)); // return new InnerClass();
     Block body = new Block(statements);
-    return new Method(methodDescriptor, innerclassConstructor.getParameters(), body);
+
+    return new Method(methodDescriptor, innerclassConstructor.getParameters(), body, false);
   }
 }

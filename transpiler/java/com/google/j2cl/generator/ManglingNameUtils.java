@@ -34,12 +34,13 @@ public class ManglingNameUtils {
    * Returns the mangled name of a type.
    */
   public static String getMangledName(TypeDescriptor typeDescriptor) {
-    //TODO(rluble): Stub implementation.
-    if (typeDescriptor.isArray()) {
-      return Strings.repeat("arrayOf_", typeDescriptor.getDimensions())
-          + getMangledName(typeDescriptor.getLeafTypeDescriptor());
+    // Method signature should be decided by the erasure type.
+    TypeDescriptor erasureTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
+    if (erasureTypeDescriptor.isArray()) {
+      return Strings.repeat("arrayOf_", erasureTypeDescriptor.getDimensions())
+          + getMangledName(erasureTypeDescriptor.getLeafTypeDescriptor());
     }
-    return typeDescriptor.getBinaryName().replace('.', '_');
+    return erasureTypeDescriptor.getBinaryName().replace('.', '_');
   }
 
   /**
@@ -123,7 +124,11 @@ public class ManglingNameUtils {
     if (methodDescriptor.getParameterTypeDescriptors().isEmpty()) {
       return "";
     }
-    return "__" + Joiner.on("__").join(getMangledParameterTypes(methodDescriptor));
+    MethodDescriptor erasureMethodDescriptor =
+        methodDescriptor.isParameterizedMethod()
+            ? methodDescriptor.getErasureMethodDescriptor()
+            : methodDescriptor;
+    return "__" + Joiner.on("__").join(getMangledParameterTypes(erasureMethodDescriptor));
   }
 
   /**

@@ -21,6 +21,8 @@ import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.Arrays;
 
+import javax.annotation.Nullable;
+
 /**
  * A (by signature) reference to a method.
  */
@@ -28,6 +30,31 @@ import java.util.Arrays;
 @Visitable
 public abstract class MethodDescriptor extends Node implements Member {
   public static final String METHOD_INIT = "$init";
+
+  public static MethodDescriptor create(
+      boolean isStatic,
+      Visibility visibility,
+      TypeDescriptor enclosingClassTypeDescriptor,
+      String methodName,
+      boolean isConstructor,
+      boolean isNative,
+      TypeDescriptor returnTypeDescriptor,
+      Iterable<TypeDescriptor> parameterTypeDescriptors,
+      Iterable<TypeDescriptor> typeParameterDescriptors,
+      MethodDescriptor erasureMethodDescriptor) {
+    return new AutoValue_MethodDescriptor(
+        isStatic,
+        false,
+        visibility,
+        enclosingClassTypeDescriptor,
+        methodName,
+        isConstructor,
+        isNative,
+        ImmutableList.copyOf(parameterTypeDescriptors),
+        returnTypeDescriptor,
+        ImmutableList.copyOf(typeParameterDescriptors),
+        erasureMethodDescriptor);
+  }
 
   public static MethodDescriptor create(
       boolean isStatic,
@@ -47,7 +74,9 @@ public abstract class MethodDescriptor extends Node implements Member {
         isConstructor,
         isNative,
         ImmutableList.copyOf(parameterTypeDescriptors),
-        returnTypeDescriptor);
+        returnTypeDescriptor,
+        ImmutableList.<TypeDescriptor>of(),
+        null);
   }
 
   public static MethodDescriptor create(
@@ -96,7 +125,9 @@ public abstract class MethodDescriptor extends Node implements Member {
         false,
         false,
         ImmutableList.<TypeDescriptor>of(),
-        returnTypeDescriptor);
+        returnTypeDescriptor,
+        ImmutableList.<TypeDescriptor>of(),
+        null);
   }
 
   @Override
@@ -123,8 +154,25 @@ public abstract class MethodDescriptor extends Node implements Member {
 
   public abstract TypeDescriptor getReturnTypeDescriptor();
 
+  /**
+   * Type parameters declared in the method.
+   */
+  public abstract ImmutableList<TypeDescriptor> getTypeParameterDescriptors();
+
+  /**
+   * The erasure of a parameterized method is the method with erasure parameter types.
+   * For example, {@code a.m(List<Number>, Number)} or {@code m(List<T>, T)} =>
+   * {@code m(List, Object)}
+   */
+  @Nullable
+  public abstract MethodDescriptor getErasureMethodDescriptor();
+
   public boolean isInit() {
     return getMethodName().equals(METHOD_INIT);
+  }
+
+  public boolean isParameterizedMethod() {
+    return getErasureMethodDescriptor() != null && getErasureMethodDescriptor() != this;
   }
 
   @Override

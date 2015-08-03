@@ -38,11 +38,11 @@ import java.util.List;
  */
 public class TranspilerUtils {
   public static String getSourceName(TypeDescriptor typeDescriptor) {
-    // TODO(rluble): Stub implementation. Needs to be implemented for the cases in which a
-    // class might be referred by multiple different type references.
-    // TODO(rluble): See if the canonical name concept can be avoided in our AST but converting
-    // to canonical type references at AST construction.
-    return typeDescriptor.getSourceName();
+    return typeDescriptor.getRawTypeDescriptor().getSourceName().replace('$', '.');
+  }
+
+  public static String getBinaryName(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.getBinaryName();
   }
 
   /**

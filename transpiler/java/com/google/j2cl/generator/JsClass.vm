@@ -11,12 +11,15 @@
 #set ($jsDocName = ${statementSourceGenerator.getJsDocName(${classType.Descriptor})})
 #set ($mangledTypeName = ${ManglingNameUtils.getMangledName($classType.Descriptor)})
 #set ($simpleName = $classType.Descriptor.SimpleName)
-#set ($binaryName = $classType.Descriptor.BinaryName)
+#set ($binaryName = ${TranspilerUtils.getBinaryName($classType.Descriptor)})
 #set ($sourceName = ${TranspilerUtils.getSourceName($classType.Descriptor)})
-#if (!${classType.SuperInterfaceTypeDescriptors.isEmpty()})
+#if (!${classType.SuperInterfaceTypeDescriptors.isEmpty()} || ${classType.Descriptor.isParameterizedType()})
 /**
 #foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
  * @implements {${statementSourceGenerator.toSource($superInterfaceTypeDescriptor)}}
+#end
+#if (${classType.Descriptor.isParameterizedType()})
+ * @template ${statementSourceGenerator.getJsDocNames($classType.Descriptor.getTypeArgumentDescriptors())}
 #end
  */
 #end

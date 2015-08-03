@@ -19,6 +19,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
+import com.google.j2cl.ast.ASTUtils;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JavaType.Kind;
@@ -42,6 +43,7 @@ import org.eclipse.jdt.core.dom.PrefixExpression;
 import org.eclipse.jdt.internal.compiler.batch.FileSystem;
 import org.eclipse.jdt.internal.compiler.env.INameEnvironment;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -75,15 +77,10 @@ public class JdtUtils {
   }
 
   static TypeDescriptor createTypeDescriptor(
-      ITypeBinding typeBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
-    // TODO(rluble): Add support for generics.
+      ITypeBinding typeBinding, final CompilationUnitNameLocator compilationUnitNameLocator) {
     if (typeBinding == null) {
       return null;
     }
-    // TODO(rluble): This is a Generics catch all that prevents Generics siping through
-    // TypeDescriptors. Remove to implement Generics support.
-
-    typeBinding = typeBinding.getErasure();
     if (typeBinding.isPrimitive()) {
       switch (typeBinding.getName()) {
         case TypeDescriptor.BOOLEAN_TYPE_NAME:
@@ -111,10 +108,20 @@ public class JdtUtils {
     }
     List<String> nameComponents = new LinkedList<>();
     List<String> packageComponents = new LinkedList<>();
+
+    if (typeBinding.getPackage() != null) {
+      packageComponents = Arrays.asList(typeBinding.getPackage().getNameComponents());
+    }
+
     if (typeBinding.isArray()) {
       TypeDescriptor leafTypeDescriptor =
           createTypeDescriptor(typeBinding.getElementType(), compilationUnitNameLocator);
       return leafTypeDescriptor.getForArray(typeBinding.getDimensions());
+    }
+
+    // WildCard type and its capture are translated to WildCardType '?'.
+    if (typeBinding.isWildcardType() || typeBinding.isCapture()) {
+      return TypeDescriptors.WILD_CARD_TYPE_DESCRIPTOR;
     }
 
     ITypeBinding currentType = typeBinding;
@@ -123,21 +130,81 @@ public class JdtUtils {
       if (currentType.isLocal()) {
         // JDT binary name for local class is like package.components.EnclosingClass$1SimpleName
         // Extract the name after the last '$' as the class component here.
-        String binaryName = currentType.getBinaryName();
+        String binaryName = currentType.getErasure().getBinaryName();
         simpleName = binaryName.substring(binaryName.lastIndexOf('$') + 1);
+      } else if (currentType.isTypeVariable()) {
+        if (currentType.getDeclaringClass() != null) {
+          // If it is a class-level type variable, use the simple name (with prefix "C_") as the
+          // current name component.
+          simpleName = ASTUtils.TYPE_VARIABLE_IN_TYPE_PREFIX + currentType.getName();
+        } else {
+          // If it is a method-level type variable, use the simple name (with prefix "M_") as the
+          // current name component, and add declaringClass_declaringMethod as the next name
+          // component, and set currentType to declaringClass for the next iteration.
+          nameComponents.add(0, ASTUtils.TYPE_VARIABLE_IN_METHOD_PREFIX + currentType.getName());
+          simpleName =
+              currentType.getDeclaringMethod().getDeclaringClass().getName()
+                  + "_"
+                  + currentType.getDeclaringMethod().getName();
+          currentType = currentType.getDeclaringMethod().getDeclaringClass();
+        }
       } else {
-        simpleName = currentType.getName();
+        simpleName = currentType.getErasure().getName();
       }
       nameComponents.add(0, simpleName);
       currentType = currentType.getDeclaringClass();
     }
 
-    if (typeBinding.getPackage() != null) {
-      packageComponents = Arrays.asList(typeBinding.getPackage().getNameComponents());
+    if (typeBinding.isTypeVariable()) {
+      return TypeDescriptor.createTypeVariable(
+          packageComponents, nameComponents, compilationUnitNameLocator.find(typeBinding));
     }
 
-    return TypeDescriptor.create(
-        packageComponents, nameComponents, compilationUnitNameLocator.find(typeBinding));
+    if (typeBinding.isParameterizedType()) {
+      Iterable<TypeDescriptor> typeArguments =
+          createTypeDescriptors(typeBinding.getTypeArguments(), compilationUnitNameLocator);
+      return TypeDescriptor.createParameterizedType(
+          packageComponents,
+          nameComponents,
+          compilationUnitNameLocator.find(typeBinding),
+          typeArguments);
+    }
+
+    List<TypeDescriptor> typeParameters = new ArrayList<>();
+    if (typeBinding.isGenericType()) {
+      Iterables.addAll(
+          typeParameters,
+          createTypeDescriptors(typeBinding.getTypeParameters(), compilationUnitNameLocator));
+    }
+    // add captured type parameters
+    if (isInstanceNestedClass(typeBinding)) {
+      if (typeBinding.getDeclaringMethod() != null) {
+        Iterables.addAll(
+            typeParameters,
+            createTypeDescriptors(
+                typeBinding.getDeclaringMethod().getTypeParameters(), compilationUnitNameLocator));
+      }
+      typeParameters.addAll(
+          createTypeDescriptor(typeBinding.getDeclaringClass(), compilationUnitNameLocator)
+              .getTypeArgumentDescriptors());
+    }
+    return TypeDescriptor.createParameterizedType(
+        packageComponents,
+        nameComponents,
+        compilationUnitNameLocator.find(typeBinding),
+        typeParameters);
+  }
+
+  static Iterable<TypeDescriptor> createTypeDescriptors(
+      ITypeBinding[] typeBindings, final CompilationUnitNameLocator compilationUnitNameLocator) {
+    return FluentIterable.from(Arrays.asList(typeBindings))
+        .transform(
+            new Function<ITypeBinding, TypeDescriptor>() {
+              @Override
+              public TypeDescriptor apply(ITypeBinding typeBinding) {
+                return createTypeDescriptor(typeBinding, compilationUnitNameLocator);
+              }
+            });
   }
 
   static FieldDescriptor createFieldDescriptor(
@@ -178,6 +245,8 @@ public class JdtUtils {
             : methodBinding.getName();
     TypeDescriptor returnTypeDescriptor =
         createTypeDescriptor(methodBinding.getReturnType(), compilationUnitNameLocator);
+
+    // generate parameters type descriptors.
     Iterable<TypeDescriptor> parameterTypeDescriptors =
         FluentIterable.from(Arrays.asList(methodBinding.getParameterTypes()))
             .transform(
@@ -187,6 +256,43 @@ public class JdtUtils {
                     return createTypeDescriptor(typeBinding, compilationUnitNameLocator);
                   }
                 });
+    // generate type parameters declared in the method.
+    Iterable<TypeDescriptor> typeParameterDescriptors =
+        FluentIterable.from(Arrays.asList(methodBinding.getTypeParameters()))
+            .transform(
+                new Function<ITypeBinding, TypeDescriptor>() {
+                  @Override
+                  public TypeDescriptor apply(ITypeBinding typeBinding) {
+                    return createTypeDescriptor(typeBinding, compilationUnitNameLocator);
+                  }
+                });
+
+    // If it is a parameterized method, declaredMethodBinding is the binding of the generic method.
+    // For example, <T> void foo(T a); foo("a");
+    // methodBinding is void foo(String), and declaredMethodBinding is void foo(T)
+    IMethodBinding declaredMethodBinding = methodBinding.getMethodDeclaration();
+    // generate erasureMethodDescriptor using erasure of parameter types.
+    Iterable<TypeDescriptor> erasureParameterTypeDescriptors =
+        FluentIterable.from(Arrays.asList(declaredMethodBinding.getParameterTypes()))
+            .transform(
+                new Function<ITypeBinding, TypeDescriptor>() {
+                  @Override
+                  public TypeDescriptor apply(ITypeBinding typeBinding) {
+                    return createTypeDescriptor(
+                        typeBinding.getErasure(), compilationUnitNameLocator);
+                  }
+                });
+    MethodDescriptor erasureMethodDescriptor =
+        MethodDescriptor.create(
+            isStatic,
+            visibility,
+            enclosingClassTypeDescriptor,
+            methodName,
+            isConstructor,
+            isNative,
+            returnTypeDescriptor,
+            erasureParameterTypeDescriptors);
+
     return MethodDescriptor.create(
         isStatic,
         visibility,
@@ -195,7 +301,9 @@ public class JdtUtils {
         isConstructor,
         isNative,
         returnTypeDescriptor,
-        parameterTypeDescriptors);
+        parameterTypeDescriptors,
+        typeParameterDescriptors,
+        erasureMethodDescriptor);
   }
 
   static Variable createVariable(
@@ -403,7 +511,7 @@ public class JdtUtils {
   @SuppressWarnings("rawtypes")
   public static <T> List<T> asTypedList(List jdtRawCollection) {
     @SuppressWarnings("unchecked")
-    List<T> typedList = (List) jdtRawCollection;
+    List<T> typedList = jdtRawCollection;
     return typedList;
   }
 

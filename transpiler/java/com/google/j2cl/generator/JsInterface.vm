@@ -1,12 +1,15 @@
 #set ($interfaceName = ${statementSourceGenerator.toSource($classType.Descriptor)})
 #set ($mangledName = ${ManglingNameUtils.getMangledName($classType.Descriptor)})
 #set ($simpleName = $classType.Descriptor.SimpleName)
-#set ($binaryName = $classType.Descriptor.BinaryName)
+#set ($binaryName = ${TranspilerUtils.getBinaryName($classType.Descriptor)})
 #set ($sourceName = ${TranspilerUtils.getSourceName($classType.Descriptor)})
 /**
  * @interface
 #foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
  * @extends {${statementSourceGenerator.toSource($superInterfaceTypeDescriptor)}}
+#end
+#if (${classType.Descriptor.isParameterizedType()})
+ * @template ${statementSourceGenerator.getJsDocNames($classType.Descriptor.getTypeArgumentDescriptors())}
 #end
  */
 class $interfaceName {

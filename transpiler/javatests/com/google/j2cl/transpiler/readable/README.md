@@ -53,9 +53,6 @@ are copyright and licensed as follows:
 - enum special functions (values, valueOf, etc).
 - equals
 - finalfield (readable JsDoc and no static setter)
-- genericconstructorofgenericclass
-- genericconstructorofnongenericclass
-- genericinstancemethod
 - implementgenericinterface
 - implementgenericinterfacewithparam
 - implicitconversions
@@ -65,7 +62,6 @@ are copyright and licensed as follows:
 - jsinteropdispatch
 - jsinteropinterface
 - methodreferences
-- multipleparametersgenerictype
 - nativefunction + provided Foo.native.js
 - notimportinternals
 - numbermethods
@@ -77,10 +73,7 @@ are copyright and licensed as follows:
 - shorterfieldmangling (for fields in final classes, like enums)
 - simplebridgemethod
 - simpleenum
-- simplegenerictype
 - simplelambda
 - staticfieldaccess (readable example + warning log)
 - subclassgenericclass
 - subclassgenericclasswithparam
-- typeinference
-- typewildcards

@@ -8,7 +8,10 @@
 #if ($method.isOverride())
    * @override
 #end
-#foreach($parameter in $method.Parameters)
+#if (!${method.Descriptor.getTypeParameterDescriptors().isEmpty()})
+   * @template ${statementSourceGenerator.getJsDocNames(${method.Descriptor.getTypeParameterDescriptors()})}
+#end
+#foreach ($parameter in $method.Parameters)
 #set ($parameterTypeName = ${statementSourceGenerator.getJsDocName(${parameter.TypeDescriptor})})
    * @param {$parameterTypeName} $parameter.Name
 #end

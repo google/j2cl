@@ -32,6 +32,9 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
 
   @Override
   public Node rewriteCastExpression(CastExpression expression) {
+    if (expression.isRaw()) {
+      return expression;
+    }
     TypeDescriptor castTypeDescriptor = expression.getCastTypeDescriptor();
     if (castTypeDescriptor.isArray()) {
       return rewriteArrayCastExpression(expression);
@@ -65,7 +68,7 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
     // Casts.to(expr, TypeName.$isInstance(expr));
     MethodCall castMethodCall = new MethodCall(null, castToMethodDescriptor, arguments);
     // /**@type {}*/ ()
-    return new CastExpression(castMethodCall, castTypeDescriptor);
+    return CastExpression.createRaw(castMethodCall, castTypeDescriptor);
   }
 
   private Node rewriteArrayCastExpression(CastExpression castExpression) {
@@ -87,7 +90,7 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
     // Arrays.$castTo(expr, leafType, dimension);
     MethodCall castMethodCall = new MethodCall(null, castToMethodDescriptor, arguments);
     // /**@type {}*/ ()
-    return new CastExpression(castMethodCall, arrayCastTypeDescriptor);
+    return CastExpression.createRaw(castMethodCall, arrayCastTypeDescriptor);
   }
 
   private Node rewritePrimitiveCastExpression(CastExpression castExpression) {

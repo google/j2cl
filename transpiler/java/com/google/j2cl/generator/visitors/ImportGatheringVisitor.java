@@ -52,6 +52,9 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   @Override
   public void exitTypeDescriptor(TypeDescriptor typeDescriptor) {
     addTypeDescriptor(typeDescriptor);
+    for (TypeDescriptor typeArgument : typeDescriptor.getTypeArgumentDescriptors()) {
+      addTypeDescriptor(typeArgument);
+    }
     if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == typeDescriptor) {
       // for function parameter JsDoc.
       addTypeDescriptor(TypeDescriptors.NATIVE_LONG_TYPE_DESCRIPTOR);
@@ -71,7 +74,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   @Override
   public void exitJavaType(JavaType type) {
-    typeDescriptorsDefinedInCompilationUnit.add(type.getDescriptor());
+    typeDescriptorsDefinedInCompilationUnit.add(type.getDescriptor().getRawTypeDescriptor());
   }
 
   @Override
@@ -145,11 +148,15 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   }
 
   private void addTypeDescriptor(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor.isArray()) {
+    if (typeDescriptor.isTypeVariable()) {
+      return;
+    }
+    TypeDescriptor rawTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
+    if (rawTypeDescriptor.isArray()) {
       addTypeDescriptor(TypeDescriptors.VM_ARRAYS_TYPE_DESCRIPTOR);
-      typeDescriptors.add(typeDescriptor.getLeafTypeDescriptor());
+      typeDescriptors.add(rawTypeDescriptor.getLeafTypeDescriptor());
     } else {
-      typeDescriptors.add(typeDescriptor);
+      typeDescriptors.add(rawTypeDescriptor);
     }
   }
 

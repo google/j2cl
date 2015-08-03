@@ -25,6 +25,8 @@ import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Base class for type reference.
@@ -54,6 +56,8 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
                 ImmutableList.copyOf(packageComponents),
                 ImmutableList.copyOf(classComponents),
                 compilationUnitSimpleName,
+                false,
+                ImmutableList.<TypeDescriptor>of(),
                 false));
   }
 
@@ -65,6 +69,39 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
                 ImmutableList.copyOf(nameSpaceComponents),
                 ImmutableList.of(className),
                 moduleName,
+                true,
+                ImmutableList.<TypeDescriptor>of(),
+                false));
+  }
+
+  public static TypeDescriptor createParameterizedType(
+      Iterable<String> packageComponents,
+      Iterable<String> classComponents,
+      String compilationUnitSimpleName,
+      Iterable<TypeDescriptor> typeArgumentDescriptors) {
+    return getInterner()
+        .intern(
+            new AutoValue_RegularTypeDescriptor(
+                ImmutableList.copyOf(packageComponents),
+                ImmutableList.copyOf(classComponents),
+                compilationUnitSimpleName,
+                false,
+                ImmutableList.copyOf(typeArgumentDescriptors),
+                false));
+  }
+
+  public static TypeDescriptor createTypeVariable(
+      Iterable<String> packageComponents,
+      Iterable<String> classComponents,
+      String compilationUnitSimpleName) {
+    return getInterner()
+        .intern(
+            new AutoValue_RegularTypeDescriptor(
+                ImmutableList.copyOf(packageComponents),
+                ImmutableList.copyOf(classComponents),
+                compilationUnitSimpleName,
+                false,
+                ImmutableList.<TypeDescriptor>of(),
                 true));
   }
 
@@ -116,6 +153,14 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
     }
   }
 
+  public boolean isParameterizedType() {
+    return false;
+  }
+
+  public boolean isTypeVariable() {
+    return false;
+  }
+
   public abstract int getDimensions();
 
   public abstract TypeDescriptor getLeafTypeDescriptor();
@@ -149,6 +194,14 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
     return NullLiteral.NULL;
   }
 
+  public TypeDescriptor getRawTypeDescriptor() {
+    return this;
+  }
+
+  public List<TypeDescriptor> getTypeArgumentDescriptors() {
+    return Collections.emptyList();
+  }
+
   public TypeDescriptor getForArray(int dimensions) {
     if (dimensions == 0) {
       return this;
@@ -158,20 +211,20 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
 
   @Override
   public int compareTo(TypeDescriptor that) {
-    return getBinaryName().compareTo(that.getBinaryName());
+    return getSourceName().compareTo(that.getSourceName());
   }
 
   @Override
   public boolean equals(Object o) {
     if (o instanceof TypeDescriptor) {
-      return getBinaryName().equals(((TypeDescriptor) o).getBinaryName());
+      return getSourceName().equals(((TypeDescriptor) o).getSourceName());
     }
     return false;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hashCode(getBinaryName());
+    return Objects.hashCode(getSourceName());
   }
 
   @Override

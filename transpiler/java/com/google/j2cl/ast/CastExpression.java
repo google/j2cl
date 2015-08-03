@@ -25,12 +25,22 @@ import com.google.j2cl.ast.processors.Visitable;
 public class CastExpression extends Expression {
   @Visitable Expression expression;
   @Visitable TypeDescriptor castTypeDescriptor;
+  boolean isRaw;
 
-  public CastExpression(Expression expression, TypeDescriptor castTypeDescriptor) {
+  private CastExpression(Expression expression, TypeDescriptor castTypeDescriptor, boolean isRaw) {
     Preconditions.checkNotNull(expression);
     Preconditions.checkNotNull(castTypeDescriptor);
     this.expression = expression;
     this.castTypeDescriptor = castTypeDescriptor;
+    this.isRaw = isRaw;
+  }
+
+  public CastExpression(Expression expression, TypeDescriptor castTypeDescriptor) {
+    this(expression, castTypeDescriptor, false);
+  }
+
+  public static CastExpression createRaw(Expression expression, TypeDescriptor castTypeDescriptor) {
+    return new CastExpression(expression, castTypeDescriptor, true);
   }
 
   public TypeDescriptor getCastTypeDescriptor() {
@@ -52,6 +62,14 @@ public class CastExpression extends Expression {
 
   public void setCastType(TypeDescriptor castTypeDescriptor) {
     this.castTypeDescriptor = castTypeDescriptor;
+  }
+
+  /**
+   * Returns if the CastExpression isRaw. A raw CastExpression represents the type cast in
+   * JavaScript which is output as @type {} (expression);
+   */
+  public boolean isRaw() {
+    return isRaw;
   }
 
   @Override

@@ -107,6 +107,13 @@ public class StatementSourceGenerator {
           Strings.repeat(">", typeDescriptor.getDimensions()));
     }
 
+    if (typeDescriptor.isParameterizedType()) {
+      return String.format(
+          "%s<%s>",
+          getJsDocName(typeDescriptor.getRawTypeDescriptor()),
+          getJsDocNames(typeDescriptor.getTypeArgumentDescriptors()));
+    }
+
     // Special cases.
     switch (typeDescriptor.getSourceName()) {
       case TypeDescriptor.BYTE_TYPE_NAME:
@@ -125,6 +132,22 @@ public class StatementSourceGenerator {
       return typeDescriptor.getSimpleName();
     }
     return toSource(typeDescriptor);
+  }
+
+  /**
+   * Returns the list of JsDoc names of a list of type descriptors.
+   */
+  public String getJsDocNames(List<TypeDescriptor> typeDescriptors) {
+    List<String> typeParameterDescriptors =
+        Lists.transform(
+            typeDescriptors,
+            new Function<TypeDescriptor, String>() {
+              @Override
+              public String apply(TypeDescriptor typeDescriptor) {
+                return getJsDocName(typeDescriptor);
+              }
+            });
+    return Joiner.on(", ").join(typeParameterDescriptors);
   }
 
   public String toSource(Node node) {
@@ -274,6 +297,8 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformCastExpression(CastExpression expression) {
+        Preconditions.checkArgument(
+            expression.isRaw(), "Java CastExpression should have been normalized to method call.");
         return String.format(
             "/**@type {%s} */ (%s)",
             getJsDocName(expression.getCastTypeDescriptor()),

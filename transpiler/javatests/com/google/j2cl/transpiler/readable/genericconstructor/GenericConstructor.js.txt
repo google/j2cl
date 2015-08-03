@@ -1,0 +1,146 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/genericconstructor/GenericConstructor.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructorModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Error = goog.require('gen.java.lang.ErrorModule').Error;
+var Exception = goog.require('gen.java.lang.ExceptionModule').Exception;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+/**
+ * @template C_T
+ */
+class GenericConstructor extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_T
+   * @template M_S
+   * @param {M_S} s
+   * @param {C_T} t
+   * @return {!GenericConstructor<C_T>}
+   * @public
+   */
+  static $create__java_lang_Object__java_lang_Object(s, t) {
+    GenericConstructor.$clinit();
+    var instance = new GenericConstructor;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor__java_lang_Object__java_lang_Object(
+            s, t);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @template M_S
+   * @param {M_S} s
+   * @param {C_T} t
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor__java_lang_Object__java_lang_Object(
+      s, t) {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_T
+   * @template M_T
+   * @param {M_T} t
+   * @return {!GenericConstructor<C_T>}
+   * @public
+   */
+  static $create__java_lang_Object(t) {
+    GenericConstructor.$clinit();
+    var instance = new GenericConstructor;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor__java_lang_Object(
+            t);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @template M_T
+   * @param {M_T} t
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor__java_lang_Object(
+      t) {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    /**@type {GenericConstructor<Error>} */ (
+        GenericConstructor.$create__java_lang_Object__java_lang_Object(
+            Exception.$create(), Error.$create()));
+    /**@type {GenericConstructor<Error>} */ (
+        GenericConstructor.$create__java_lang_Object(Exception.$create()));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof GenericConstructor;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, GenericConstructor);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+GenericConstructor.$class = Class.$createForClass(
+    $Util.$generateId('GenericConstructor'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor'));
+
+/**
+ * Export class.
+ */
+exports.GenericConstructor = GenericConstructor;

@@ -1,0 +1,126 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/simplegenerictype/SimpleGenericType.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericTypeModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Error = goog.require('gen.java.lang.ErrorModule').Error;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+/**
+ * @template C_T, C_S
+ */
+class SimpleGenericType extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {C_T}
+     */
+    this.f_first__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType =
+        null;
+    /**
+     * @public {C_S}
+     */
+    this.f_second__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_T, C_S
+   * @param {C_T} t
+   * @param {C_S} s
+   * @return {!SimpleGenericType<C_T, C_S>}
+   * @public
+   */
+  static $create__java_lang_Object__java_lang_Object(t, s) {
+    SimpleGenericType.$clinit();
+    var instance = new SimpleGenericType;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType__java_lang_Object__java_lang_Object(
+            t, s);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {C_T} t
+   * @param {C_S} s
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType__java_lang_Object__java_lang_Object(
+      t, s) {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType();
+    this.f_first__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType =
+        t;
+    this.f_second__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType =
+        s;
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    let g = /**@type {SimpleGenericType<Object, Error>} */ (
+        SimpleGenericType.$create__java_lang_Object__java_lang_Object(
+            Object.$create(), Error.$create()));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof SimpleGenericType; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SimpleGenericType);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+SimpleGenericType.$class = Class.$createForClass(
+    $Util.$generateId('SimpleGenericType'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType'));
+
+/**
+ * Export class.
+ */
+exports.SimpleGenericType = SimpleGenericType;

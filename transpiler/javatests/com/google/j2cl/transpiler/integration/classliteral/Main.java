@@ -1,5 +1,9 @@
 package com.google.j2cl.transpiler.integration.classliteral;
 
+class GenericClass<T> {}
+
+interface GenericInterface<T> {}
+
 public class Main {
 
   static class Foo {}
@@ -139,6 +143,31 @@ public class Main {
     assertSame(Class.class, int.class.getClass());
   }
 
+  public static void testGeneric() {
+    GenericClass<Number> g = new GenericClass<>();
+    assertEquals(
+        "com.google.j2cl.transpiler.integration.classliteral.GenericClass",
+        GenericClass.class.getName());
+    assertEquals(
+        "com.google.j2cl.transpiler.integration.classliteral.GenericClass",
+        GenericClass.class.getCanonicalName());
+    assertEquals("GenericClass", GenericClass.class.getSimpleName());
+    assertEquals(
+        "com.google.j2cl.transpiler.integration.classliteral.GenericClass", g.getClass().getName());
+    assertEquals(
+        "com.google.j2cl.transpiler.integration.classliteral.GenericClass",
+        g.getClass().getCanonicalName());
+    assertEquals("GenericClass", g.getClass().getSimpleName());
+
+    assertEquals(
+        "com.google.j2cl.transpiler.integration.classliteral.GenericInterface",
+        GenericInterface.class.getName());
+    assertEquals(
+        "com.google.j2cl.transpiler.integration.classliteral.GenericInterface",
+        GenericInterface.class.getCanonicalName());
+    assertEquals("GenericInterface", GenericInterface.class.getSimpleName());
+  }
+
   public static void main(String[] args) {
     testClass();
     testInterface();
@@ -146,6 +175,7 @@ public class Main {
     testPrimitive();
     testMisc();
     testEnum();
+    testGeneric();
     // TODO(rluble):uncomment once the full implementation of enums is in.
     // testEnumSubclass();
   }

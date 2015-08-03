@@ -399,8 +399,8 @@ public class CompilationUnitBuilder {
               JdtUtils.createMethodDescriptor(
                   methodDeclaration.resolveBinding(), compilationUnitNameLocator),
               parameters,
-              body);
-      method.setOverride(JdtUtils.isOverride(methodDeclaration.resolveBinding()));
+              body,
+              JdtUtils.isOverride(methodDeclaration.resolveBinding()));
       return method;
     }
 
@@ -477,17 +477,25 @@ public class CompilationUnitBuilder {
         arguments.add(convert((org.eclipse.jdt.core.dom.Expression) argument));
       }
       maybePackageVarargs(constructorBinding, expression.arguments(), arguments);
+      Expression newInstance = null;
       if (JdtUtils.isInstanceMemberClass(constructorBinding.getDeclaringClass())) {
         // outerclass.new InnerClass() => outerClass.$create_InnerClass();
         TypeDescriptor outerclassTypeDescriptor =
             createTypeDescriptor(constructorBinding.getDeclaringClass());
-        return new MethodCall(
-            qualifier,
-            ASTUtils.createMethodDescriptorForInnerClassCreation(
-                outerclassTypeDescriptor, constructorMethodDescriptor),
-            arguments);
+        newInstance =
+            new MethodCall(
+                qualifier,
+                ASTUtils.createMethodDescriptorForInnerClassCreation(
+                    outerclassTypeDescriptor, constructorMethodDescriptor),
+                arguments);
       } else {
-        return new NewInstance(qualifier, constructorMethodDescriptor, arguments);
+        newInstance = new NewInstance(qualifier, constructorMethodDescriptor, arguments);
+      }
+      if (newInstance.getTypeDescriptor().isParameterizedType()) {
+        // add type annotation to ClassInstanceCreation of generic type.
+        return CastExpression.createRaw(newInstance, newInstance.getTypeDescriptor());
+      } else {
+        return newInstance;
       }
     }
 

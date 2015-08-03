@@ -55,7 +55,7 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
 
   private void normalizeNestedClassConstructors(CompilationUnit compilationUnit) {
     for (JavaType type : compilationUnit.getTypes()) {
-      javaTypeByDescriptor.put(type.getDescriptor(), type);
+      javaTypeByDescriptor.put(type.getDescriptor().getRawTypeDescriptor(), type);
       if (type.getEnclosingTypeDescriptor() == null || type.isStatic()) {
         continue;
       }
@@ -75,10 +75,11 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
   @SuppressWarnings("unchecked")
   @Override
   public Node rewriteMethod(Method method) {
-    MethodDescriptor methodDescriptor = method.getDescriptor();
-    if (isConstructorOfNestedClass(method)) {
-      addParamsAndInitsToConstructor(method);
+    if (!isConstructorOfNestedClass(method)) {
+      return method;
     }
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+    addParamsAndInitsToConstructor(method);
     return new Method(
         methodDescriptor, method.getParameters(), method.getBody(), method.isOverride());
   }
@@ -87,7 +88,7 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
   public Node rewriteNewInstance(NewInstance newInstance) {
     TypeDescriptor typeDescriptor =
         newInstance.getConstructorMethodDescriptor().getEnclosingClassTypeDescriptor();
-    JavaType type = javaTypeByDescriptor.get(typeDescriptor);
+    JavaType type = javaTypeByDescriptor.get(typeDescriptor.getRawTypeDescriptor());
     if (type == null || type.isStatic() || type.getEnclosingTypeDescriptor() == null) {
       return newInstance;
     }
@@ -133,7 +134,7 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
 
   private List<Expression> collectArgumentsForCaptures(TypeDescriptor typeDescriptor) {
     List<Expression> extraArguments = new ArrayList<>();
-    JavaType type = javaTypeByDescriptor.get(typeDescriptor);
+    JavaType type = javaTypeByDescriptor.get(typeDescriptor.getRawTypeDescriptor());
     if (type == null) {
       return extraArguments;
     }
@@ -147,9 +148,7 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
         // If the capturedVariable is also a captured variable in current type, pass the
         // corresponding field in current type as an argument.
         extraArguments.add(
-            new FieldAccess(
-                new ThisReference((RegularTypeDescriptor) typeDescriptor),
-                capturingField.getDescriptor()));
+            new FieldAccess(new ThisReference(typeDescriptor), capturingField.getDescriptor()));
       } else {
         // otherwise, the captured variable is in the scope of the current type, so pass the
         // variable directly as an argument.
@@ -184,9 +183,7 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
             new BinaryExpression(
                 field.getDescriptor().getTypeDescriptor(),
                 new FieldAccess(
-                    new ThisReference(
-                        (RegularTypeDescriptor)
-                            method.getDescriptor().getEnclosingClassTypeDescriptor()),
+                    new ThisReference(method.getDescriptor().getEnclosingClassTypeDescriptor()),
                     field.getDescriptor()),
                 BinaryOperator.ASSIGN,
                 parameter.getReference());

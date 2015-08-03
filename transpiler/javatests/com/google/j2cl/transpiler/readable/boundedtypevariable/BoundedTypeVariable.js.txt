@@ -1,0 +1,95 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/boundedtypevariable/BoundedTypeVariable.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.boundedtypevariable.BoundedTypeVariableModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+/**
+ * @template C_T
+ */
+class BoundedTypeVariable extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_boundedtypevariable_BoundedTypeVariable() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_T
+   * @return {!BoundedTypeVariable<C_T>}
+   * @public
+   */
+  static $create() {
+    BoundedTypeVariable.$clinit();
+    var instance = new BoundedTypeVariable;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_boundedtypevariable_BoundedTypeVariable();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_boundedtypevariable_BoundedTypeVariable() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_boundedtypevariable_BoundedTypeVariable();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof BoundedTypeVariable;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, BoundedTypeVariable);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+BoundedTypeVariable.$class = Class.$createForClass(
+    $Util.$generateId('BoundedTypeVariable'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.boundedtypevariable.BoundedTypeVariable'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.boundedtypevariable.BoundedTypeVariable'));
+
+/**
+ * Export class.
+ */
+exports.BoundedTypeVariable = BoundedTypeVariable;
