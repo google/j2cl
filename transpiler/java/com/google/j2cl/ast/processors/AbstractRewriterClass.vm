@@ -27,13 +27,13 @@ public abstract class AbstractRewriter extends ProcessorPrivate implements Rewri
 #foreach($clazz in $classes)
 
   @Override
-  public ${clazz.SimpleName} preProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
+  final ${clazz.SimpleName} preProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
     return node;
   }
 #end
 #foreach($clazz in $classes)
   @Override
-  public Node postProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
+  final Node postProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
     return rewrite${clazz.SimpleName}(node);
   }
 
