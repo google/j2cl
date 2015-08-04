@@ -11,6 +11,103 @@ var $Util = goog.require('nativebootstrap.UtilModule').Util;
 var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
+class SimpleLocalClass extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass() {
+  }
+
+  /**
+   * @param {number} p
+   * @return {void}
+   * @public
+   */
+  m_test__int(p) {
+    let localVar = 1;
+    SimpleLocalClass$1InnerClass.$create(localVar, p, this).m_fun();
+    SimpleLocalClass$1InnerClassWithoutCaptures.$create(this);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_fun() { let localVar = 1; }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!SimpleLocalClass}
+   * @public
+   */
+  static $create() {
+    SimpleLocalClass.$clinit();
+    var instance = new SimpleLocalClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof SimpleLocalClass; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SimpleLocalClass);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+SimpleLocalClass.$class = Class.$createForClass(
+    $Util.$generateId('SimpleLocalClass'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass'));
+
+/**
+ * Export class.
+ */
+exports.SimpleLocalClass = SimpleLocalClass;
+
+
+
 class SimpleLocalClass$1InnerClass extends Object {
   /**
    * Defines instance fields.
@@ -313,100 +410,3 @@ SimpleLocalClass$2InnerClass.$class = Class.$createForClass(
     Object.$class,
     $Util.$generateId(
         'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.2InnerClass'));
-
-
-
-class SimpleLocalClass extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass() {
-  }
-
-  /**
-   * @param {number} p
-   * @return {void}
-   * @public
-   */
-  m_test__int(p) {
-    let localVar = 1;
-    SimpleLocalClass$1InnerClass.$create(localVar, p, this).m_fun();
-    SimpleLocalClass$1InnerClassWithoutCaptures.$create(this);
-  }
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_fun() { let localVar = 1; }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!SimpleLocalClass}
-   * @public
-   */
-  static $create() {
-    SimpleLocalClass.$clinit();
-    var instance = new SimpleLocalClass;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) { return instance instanceof SimpleLocalClass; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @private
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, SimpleLocalClass);
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-/**
- * @public {Class}
- */
-SimpleLocalClass.$class = Class.$createForClass(
-    $Util.$generateId('SimpleLocalClass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass'));
-
-/**
- * Export class.
- */
-exports.SimpleLocalClass = SimpleLocalClass;

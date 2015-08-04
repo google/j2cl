@@ -80,7 +80,9 @@ public class ASTUtils {
    * Create constructor MethodDescriptor.
    */
   public static MethodDescriptor createConstructorDescriptor(
-      TypeDescriptor typeDescriptor, Visibility visibility) {
+      TypeDescriptor typeDescriptor,
+      Visibility visibility,
+      TypeDescriptor... parameterTypeDescriptors) {
     return MethodDescriptor.create(
         false,
         visibility,
@@ -88,7 +90,8 @@ public class ASTUtils {
         typeDescriptor.getClassName(),
         true,
         false,
-        TypeDescriptors.VOID_TYPE_DESCRIPTOR);
+        TypeDescriptors.VOID_TYPE_DESCRIPTOR,
+        parameterTypeDescriptors);
   }
 
   /**

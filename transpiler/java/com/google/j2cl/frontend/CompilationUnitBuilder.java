@@ -100,7 +100,9 @@ import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -142,21 +144,23 @@ public class CompilationUnitBuilder {
       j2clCompilationUnit = new CompilationUnit(sourceFilePath, packageName);
       for (Object object : compilationUnit.types()) {
         AbstractTypeDeclaration abstractTypeDeclaration = (AbstractTypeDeclaration) object;
-        j2clCompilationUnit.addTypes(convert(abstractTypeDeclaration));
+        convert(abstractTypeDeclaration);
       }
       return j2clCompilationUnit;
     }
 
-    private Collection<JavaType> convert(AbstractTypeDeclaration typeDeclaration) {
+    private void convert(AbstractTypeDeclaration typeDeclaration) {
       Preconditions.checkArgument(
           typeDeclaration instanceof TypeDeclaration || typeDeclaration instanceof EnumDeclaration);
       switch (typeDeclaration.getNodeType()) {
         case ASTNode.TYPE_DECLARATION:
-          return convertJavaType(
+          convertAndAddJavaType(
               typeDeclaration.resolveBinding(),
               JdtUtils.<BodyDeclaration>asTypedList(typeDeclaration.bodyDeclarations()));
+          break;
         case ASTNode.ENUM_DECLARATION:
-          return convert((EnumDeclaration) typeDeclaration);
+          convert((EnumDeclaration) typeDeclaration);
+          break;
         default:
           throw new RuntimeException(
               "Need to implement translation for AbstractTypeDeclaration type: "
@@ -166,21 +170,24 @@ public class CompilationUnitBuilder {
       }
     }
 
-    private Collection<JavaType> convert(AnonymousClassDeclaration typeDeclaration) {
-      return convertJavaType(
-          typeDeclaration.resolveBinding(),
-          JdtUtils.<BodyDeclaration>asTypedList(typeDeclaration.bodyDeclarations()));
-    }
-
-    private Collection<JavaType> convert(EnumDeclaration enumDeclaration) {
-      Collection<JavaType> types =
-          convertJavaType(
+    private void convert(EnumDeclaration enumDeclaration) {
+      JavaType enumType =
+          convertAndAddJavaType(
               enumDeclaration.resolveBinding(),
               JdtUtils.<BodyDeclaration>asTypedList(enumDeclaration.bodyDeclarations()));
-      JavaType type = types.iterator().next();
+
+      for (EnumConstantDeclaration enumConstantDeclaration :
+          JdtUtils.<EnumConstantDeclaration>asTypedList(enumDeclaration.enumConstants())) {
+        if (enumConstantDeclaration.getAnonymousClassDeclaration() != null) {
+          convertAnonymousClassDeclaration(
+              enumConstantDeclaration.getAnonymousClassDeclaration(),
+              enumConstantDeclaration.resolveConstructorBinding());
+        }
+      }
+
       // this is an Enum.
-      Preconditions.checkState(type.isEnum());
-      type.addFields(
+      Preconditions.checkState(enumType.isEnum());
+      enumType.addFields(
           FluentIterable.from(
                   JdtUtils.<EnumConstantDeclaration>asTypedList(enumDeclaration.enumConstants()))
               .transform(
@@ -191,22 +198,21 @@ public class CompilationUnitBuilder {
                     }
                   })
               .toList());
-      return types;
     }
 
-    private Collection<JavaType> convertJavaType(
-        ITypeBinding typeBinding, List<BodyDeclaration> bodyDeclarations) {
+    private JavaType convertAndAddJavaType(
+        ITypeBinding typeBinding,
+        List<BodyDeclaration> bodyDeclarations,
+        TypeDescriptor... constructorImplicitParameterTypeDescriptors) {
       JavaType type = createJavaType(typeBinding);
       pushType(type);
-      List<JavaType> types = new ArrayList<>();
-      types.add(type);
+      j2clCompilationUnit.addType(type);
       boolean hasConstructor = false;
-      TypeDescriptor currentTypeDescriptor = currentType.getDescriptor();
+      TypeDescriptor currentTypeDescriptor = type.getDescriptor();
       ITypeBinding superclassBinding = typeBinding.getSuperclass();
       if (superclassBinding != null) {
         capturesByTypeDescriptor.putAll(
-            currentTypeDescriptor,
-            capturesByTypeDescriptor.get(currentType.getSuperTypeDescriptor()));
+            currentTypeDescriptor, capturesByTypeDescriptor.get(type.getSuperTypeDescriptor()));
       }
       for (Object object : bodyDeclarations) {
         if (object instanceof FieldDeclaration) {
@@ -228,7 +234,7 @@ public class CompilationUnitBuilder {
         } else if (object instanceof AbstractTypeDeclaration) {
           // Nested class
           AbstractTypeDeclaration nestedTypeDeclaration = (AbstractTypeDeclaration) object;
-          types.addAll(convert(nestedTypeDeclaration));
+          convert(nestedTypeDeclaration);
         } else {
           throw new RuntimeException(
               "Need to implement translation for BodyDeclaration type: "
@@ -241,29 +247,32 @@ public class CompilationUnitBuilder {
       for (Variable capturedVariable : capturesByTypeDescriptor.get(currentTypeDescriptor)) {
         FieldDescriptor fieldDescriptor =
             ASTUtils.getFieldDescriptorForCapture(currentTypeDescriptor, capturedVariable);
-        currentType.addField(new Field(fieldDescriptor, null, capturedVariable)); // captured field.
+        type.addField(new Field(fieldDescriptor, null, capturedVariable)); // captured field.
       }
       if (JdtUtils.isInstanceNestedClass(typeBinding)) {
         // add field for enclosing instance.
-        currentType.addField(
+        type.addField(
             new Field(
                 ASTUtils.getFieldDescriptorForEnclosingInstance(
-                    currentTypeDescriptor, currentType.getEnclosingTypeDescriptor()),
+                    currentTypeDescriptor, type.getEnclosingTypeDescriptor()),
                 null));
       }
 
       // If the class has no default constructor, synthesize the default constructor.
       if (!typeBinding.isInterface() && !hasConstructor) {
-        currentType.addMethod(
+        type.addMethod(
             synthesizeDefaultConstructor(
-                currentType.getDescriptor(), superclassBinding, currentType.getVisibility()));
+                type.getDescriptor(),
+                superclassBinding,
+                type.getVisibility(),
+                constructorImplicitParameterTypeDescriptors));
       }
 
       // Add wrapper function to its enclosing class for each constructor.
       if (JdtUtils.isInstanceMemberClass(typeBinding)) {
         Preconditions.checkArgument(typeStack.size() >= 2);
         JavaType outerclassType = typeStack.get(typeStack.size() - 2);
-        for (Method innerclassConstructor : currentType.getConstructors()) {
+        for (Method innerclassConstructor : type.getConstructors()) {
           outerclassType.addMethod(
               ASTUtils.createMethodForInnerClassCreation(
                   outerclassType.getDescriptor(), innerclassConstructor));
@@ -278,11 +287,10 @@ public class CompilationUnitBuilder {
         currentType.addMethod(ASTUtils.createForwardingMethod(entry.getValue(), entry.getKey()));
       }
       popType();
-      return types;
+      return type;
     }
 
     private Field convert(EnumConstantDeclaration enumConstantDeclaration) {
-      Preconditions.checkArgument(enumConstantDeclaration.getAnonymousClassDeclaration() == null);
       Expression initializer =
           new NewInstance(
               null,
@@ -298,25 +306,44 @@ public class CompilationUnitBuilder {
     }
 
     private Method synthesizeDefaultConstructor(
-        TypeDescriptor typeDescriptor, ITypeBinding superclassBinding, Visibility visibility) {
+        TypeDescriptor typeDescriptor,
+        ITypeBinding superclassBinding,
+        Visibility visibility,
+        TypeDescriptor... constructorImplicitParameterTypeDescriptors) {
       MethodDescriptor methodDescriptor =
-          ASTUtils.createConstructorDescriptor(typeDescriptor, visibility);
-      List<Statement> statements = new ArrayList<>();
+          ASTUtils.createConstructorDescriptor(
+              typeDescriptor, visibility, constructorImplicitParameterTypeDescriptors);
+      Block body = new Block();
+      List<Variable> parameters = new ArrayList<>();
+      int i = 0;
+      for (TypeDescriptor parameterTypeDescriptor : constructorImplicitParameterTypeDescriptors) {
+        parameters.add(new Variable("$_" + i++, parameterTypeDescriptor, false, true));
+      }
       if (superclassBinding != null) {
         // add super() call.
-        statements.add(synthesizeSuperCall(superclassBinding));
+        body.getStatements().add(synthesizeSuperCall(superclassBinding, parameters));
       }
-      Block body = new Block(statements);
-      List<Variable> parameters = new ArrayList<>();
+
       Method defaultConstructor = new Method(methodDescriptor, parameters, body);
       return defaultConstructor;
     }
 
-    private Statement synthesizeSuperCall(ITypeBinding superTypeBinding) {
+    private Statement synthesizeSuperCall(
+        ITypeBinding superTypeBinding, Collection<Variable> constructorImplicitParameters) {
       TypeDescriptor superTypeDescriptor = createTypeDescriptor(superTypeBinding);
       MethodDescriptor superMethodDescriptor =
           ASTUtils.createConstructorDescriptor(
-              superTypeDescriptor, JdtUtils.getVisibility(superTypeBinding.getModifiers()));
+              superTypeDescriptor,
+              JdtUtils.getVisibility(superTypeBinding.getModifiers()),
+              FluentIterable.from(constructorImplicitParameters)
+                  .transform(
+                      new Function<Variable, TypeDescriptor>() {
+                        @Override
+                        public TypeDescriptor apply(Variable variable) {
+                          return variable.getTypeDescriptor();
+                        }
+                      })
+                  .toArray(TypeDescriptor.class));
 
       // find the qualifier of the super() call.
       Expression qualifier =
@@ -325,7 +352,18 @@ public class CompilationUnitBuilder {
                   createTypeDescriptor(superTypeBinding.getDeclaringClass()))
               : null;
       MethodCall superCall =
-          new MethodCall(qualifier, superMethodDescriptor, new ArrayList<Expression>());
+          new MethodCall(
+              qualifier,
+              superMethodDescriptor,
+              FluentIterable.from(constructorImplicitParameters)
+                  .transform(
+                      new Function<Variable, Expression>() {
+                        @Override
+                        public Expression apply(Variable variable) {
+                          return variable.getReference();
+                        }
+                      })
+                  .toList());
       return new ExpressionStatement(superCall);
     }
 
@@ -399,7 +437,8 @@ public class CompilationUnitBuilder {
             .add(
                 0,
                 synthesizeSuperCall(
-                    methodDeclaration.resolveBinding().getDeclaringClass().getSuperclass()));
+                    methodDeclaration.resolveBinding().getDeclaringClass().getSuperclass(),
+                    Collections.<Variable>emptyList()));
       }
 
       Method method =
@@ -471,13 +510,15 @@ public class CompilationUnitBuilder {
 
     @SuppressWarnings("unchecked")
     private Expression convert(org.eclipse.jdt.core.dom.ClassInstanceCreation expression) {
+      IMethodBinding constructorBinding = expression.resolveConstructorBinding();
+
       if (expression.getAnonymousClassDeclaration() != null) {
-        j2clCompilationUnit.addTypes(convert(expression.getAnonymousClassDeclaration()));
+        convertAnonymousClassDeclaration(
+            expression.getAnonymousClassDeclaration(), constructorBinding);
       }
 
       Expression qualifier =
           expression.getExpression() == null ? null : convert(expression.getExpression());
-      IMethodBinding constructorBinding = expression.resolveConstructorBinding();
       MethodDescriptor constructorMethodDescriptor =
           JdtUtils.createMethodDescriptor(constructorBinding, compilationUnitNameLocator);
       List<Expression> arguments = new ArrayList<>();
@@ -505,6 +546,29 @@ public class CompilationUnitBuilder {
       } else {
         return newInstance;
       }
+    }
+
+    private void convertAnonymousClassDeclaration(
+        AnonymousClassDeclaration typeDeclaration, IMethodBinding constructorBinding) {
+
+      // Anonymous classes might have default synthesized constructors take parameters.
+      // {@code constructorImplicitParameterTypeDescriptors} are the types for the aforementioned
+      // parameters.
+      TypeDescriptor[] constructorImplicitParameterTypeDescriptors =
+          FluentIterable.from(Arrays.asList(constructorBinding.getParameterTypes()))
+              .transform(
+                  new Function<ITypeBinding, TypeDescriptor>() {
+                    @Override
+                    public TypeDescriptor apply(ITypeBinding typeBinding) {
+                      return createTypeDescriptor(typeBinding);
+                    }
+                  })
+              .toArray(TypeDescriptor.class);
+
+      convertAndAddJavaType(
+          typeDeclaration.resolveBinding(),
+          JdtUtils.<BodyDeclaration>asTypedList(typeDeclaration.bodyDeclarations()),
+          constructorImplicitParameterTypeDescriptors);
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.Expression expression) {
@@ -709,7 +773,7 @@ public class CompilationUnitBuilder {
 
     private Statement convert(
         org.eclipse.jdt.core.dom.TypeDeclarationStatement jdtTypeDeclStatement) {
-      j2clCompilationUnit.addTypes(convert(jdtTypeDeclStatement.getDeclaration()));
+      convert(jdtTypeDeclStatement.getDeclaration());
       return null;
     }
 

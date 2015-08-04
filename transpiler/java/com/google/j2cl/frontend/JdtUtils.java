@@ -159,7 +159,6 @@ public class JdtUtils {
       return TypeDescriptor.createTypeVariable(
           packageComponents, nameComponents, compilationUnitNameLocator.find(typeBinding));
     }
-
     if (typeBinding.isParameterizedType()) {
       Iterable<TypeDescriptor> typeArguments =
           createTypeDescriptors(typeBinding.getTypeArguments(), compilationUnitNameLocator);
@@ -363,10 +362,13 @@ public class JdtUtils {
   public static Kind getKindFromTypeBinding(ITypeBinding typeBinding) {
     if (typeBinding.isInterface()) {
       return Kind.INTERFACE;
-    } else if (typeBinding.isEnum()) {
-      return Kind.ENUM;
-    } else if (typeBinding.isClass()) {
+    } else if (typeBinding.isClass() || typeBinding.isEnum() && typeBinding.isAnonymous()) {
+      // Enum values that are anonymous inner classes, are not consider enums classes in
+      // our AST, but are considered enum classes by JDT.
       return Kind.CLASS;
+    } else if (typeBinding.isEnum()) {
+      Preconditions.checkArgument(!typeBinding.isAnonymous());
+      return Kind.ENUM;
     }
 
     throw new RuntimeException("Type binding " + typeBinding + " not handled");

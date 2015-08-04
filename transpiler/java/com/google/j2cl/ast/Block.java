@@ -33,6 +33,8 @@ public class Block extends Statement {
     this.statements.addAll(statements);
   }
 
+  public Block() {}
+
   public List<Statement> getStatements() {
     return statements;
   }

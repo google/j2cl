@@ -16,6 +16,8 @@
 package com.google.j2cl.ast;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicate;
+import com.google.common.collect.FluentIterable;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.io.File;
@@ -56,8 +58,25 @@ public class CompilationUnit extends Node {
     this.types.addAll(types);
   }
 
+  public void addType(JavaType type) {
+    this.types.add(Preconditions.checkNotNull(type));
+  }
+
   public List<JavaType> getTypes() {
     return types;
+  }
+
+  public JavaType getType(final TypeDescriptor typeDescriptor) {
+    return FluentIterable.from(types)
+        .firstMatch(
+            new Predicate<JavaType>() {
+              @Override
+              public boolean apply(JavaType javaType) {
+                return javaType.getDescriptor().getRawTypeDescriptor()
+                    == typeDescriptor.getRawTypeDescriptor();
+              }
+            })
+        .orNull();
   }
 
   public String getName() {

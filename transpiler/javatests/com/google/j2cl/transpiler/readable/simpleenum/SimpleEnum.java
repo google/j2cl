@@ -7,7 +7,8 @@ public enum SimpleEnum {
 
 enum SimpleEnum2 {
   VALUE1(2),
-  VALUE2(SimpleEnum.V1);
+  VALUE2(SimpleEnum.V1),
+  VALUE3(5) {};
 
   int foo = SimpleEnum.V1.ordinal();
 

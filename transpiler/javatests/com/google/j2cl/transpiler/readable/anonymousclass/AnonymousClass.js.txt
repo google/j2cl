@@ -8,12 +8,22 @@ goog.module('gen.com.google.j2cl.transpiler.readable.anonymousclass.AnonymousCla
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
 var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
-/**
- * @interface
- */
-class AnonymousInterface {
+class SomeClass extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_anonymousclass_SomeClass() {}
+
   /**
    * @return {?string}
    * @public
@@ -21,131 +31,28 @@ class AnonymousInterface {
   m_foo() {}
 
   /**
-   * Marks the provided class as implementing this interface.
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
-        .$implements__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousInterface =
-        true;
-  }
-
-  /**
-   * Returns whether the provided instance is of a class that implements this
-   * interface.
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
-    return instance != null &&
-           instance
-               .$implements__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousInterface;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @private
-   */
-  static $isAssignableFrom(classConstructor) {
-    return classConstructor != null &&
-           classConstructor.prototype
-               .$implements__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousInterface;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   */
-  static $clinit() {}
-}
-;
-
-
-AnonymousInterface.$markImplementor(
-    /** @type {Function} */ (AnonymousInterface));
-
-
-/**
- * @public {Class}
- */
-AnonymousInterface.$class = Class.$createForInterface(
-    $Util.$generateId('AnonymousInterface'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousInterface'),
-    null,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousInterface'));
-
-/**
- * Export class.
- */
-exports.AnonymousInterface = AnonymousInterface;
-
-
-
-/**
- * @implements {AnonymousInterface}
- */
-class AnonymousClass$1 extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() {
-    super();
-    /**
-     * @public {AnonymousClass}
-     */
-    this.f_$outer_this__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass$1 =
-        null;
-  }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass$1() {
-  }
-
-  /**
-   * @override
-   * @return {?string}
-   * @public
-   */
-  m_foo() { return "a"; }
-
-  /**
    * A particular Java constructor as a factory method.
-   * @param {AnonymousClass} $outer_this
-   * @return {!AnonymousClass$1}
+   * @param {number} i
+   * @return {!SomeClass}
    * @package
    */
-  static $create($outer_this) {
-    AnonymousClass$1.$clinit();
-    var instance = new AnonymousClass$1;
+  static $create__int(i) {
+    SomeClass.$clinit();
+    var instance = new SomeClass;
     instance
-        .$ctor__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass$1(
-            $outer_this);
+        .$ctor__com_google_j2cl_transpiler_readable_anonymousclass_SomeClass__int(
+            i);
     return instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {AnonymousClass} $outer_this
+   * @param {number} i
    * @package
    */
-  $ctor__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass$1(
-      $outer_this) {
+  $ctor__com_google_j2cl_transpiler_readable_anonymousclass_SomeClass__int(i) {
     this.$ctor__java_lang_Object();
-    this.f_$outer_this__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass$1 =
-        $outer_this;
-    this.$init__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass$1();
+    this.$init__com_google_j2cl_transpiler_readable_anonymousclass_SomeClass();
   }
 
   /**
@@ -153,7 +60,7 @@ class AnonymousClass$1 extends Object {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof AnonymousClass$1; }
+  static $isInstance(instance) { return instance instanceof SomeClass; }
 
   /**
    * Returns whether the provided class is or extends this class.
@@ -162,7 +69,7 @@ class AnonymousClass$1 extends Object {
    * @private
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, AnonymousClass$1);
+    return $Util.$canCastClass(classConstructor, SomeClass);
   }
 
   /**
@@ -174,19 +81,21 @@ class AnonymousClass$1 extends Object {
 ;
 
 
-AnonymousInterface.$markImplementor(AnonymousClass$1);
-
-
 /**
  * @public {Class}
  */
-AnonymousClass$1.$class = Class.$createForClass(
-    $Util.$generateId('1'),
+SomeClass.$class = Class.$createForClass(
+    $Util.$generateId('SomeClass'),
     $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass$1'),
+        'com.google.j2cl.transpiler.readable.anonymousclass.SomeClass'),
     Object.$class,
     $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass.1'));
+        'com.google.j2cl.transpiler.readable.anonymousclass.SomeClass'));
+
+/**
+ * Export class.
+ */
+exports.SomeClass = SomeClass;
 
 
 
@@ -207,7 +116,7 @@ class AnonymousClass extends Object {
    * @return {void}
    * @public
    */
-  m_main() { let instance = AnonymousClass$1.$create(this); }
+  m_main() { let instance = AnonymousClass$1.$create__int(1, this); }
 
   /**
    * A particular Java constructor as a factory method.
@@ -272,3 +181,101 @@ AnonymousClass.$class = Class.$createForClass(
  * Export class.
  */
 exports.AnonymousClass = AnonymousClass;
+
+
+
+class AnonymousClass$1 extends SomeClass {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {AnonymousClass}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass$1 =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass$1() {
+  }
+
+  /**
+   * @override
+   * @return {?string}
+   * @public
+   */
+  m_foo() { return "a"; }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {number} $_0
+   * @param {AnonymousClass} $outer_this
+   * @return {!AnonymousClass$1}
+   * @package
+   */
+  static $create__int($_0, $outer_this) {
+    AnonymousClass$1.$clinit();
+    var instance = new AnonymousClass$1;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass$1__int(
+            $_0, $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {number} $_0
+   * @param {AnonymousClass} $outer_this
+   * @package
+   */
+  $ctor__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass$1__int(
+      $_0, $outer_this) {
+    this.$ctor__com_google_j2cl_transpiler_readable_anonymousclass_SomeClass__int(
+        $_0);
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass$1 =
+        $outer_this;
+    this.$init__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass$1();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof AnonymousClass$1; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, AnonymousClass$1);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { SomeClass.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+AnonymousClass$1.$class = Class.$createForClass(
+    $Util.$generateId('1'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass$1'),
+    SomeClass.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass.1'));

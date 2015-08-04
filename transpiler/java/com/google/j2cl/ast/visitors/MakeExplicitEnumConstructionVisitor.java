@@ -26,6 +26,7 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
+import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -44,10 +45,11 @@ import java.util.List;
 public class MakeExplicitEnumConstructionVisitor extends AbstractRewriter {
   private static final String ORDINAL_PARAMETER_NAME = "$ordinal";
   private static final String VALUE_NAME_PARAMETER_NAME = "$name";
-  private Multiset<TypeDescriptor> ordinalsByTypeDescriptor = HashMultiset.create();
+  private final Multiset<TypeDescriptor> ordinalsByEnumTypeDescriptor = HashMultiset.create();
+  private final CompilationUnit compilationUnit;
 
   public static void doMakeEnumConstructionExplicit(CompilationUnit compilationUnit) {
-    new MakeExplicitEnumConstructionVisitor().makeEnumConstructionExplicit(compilationUnit);
+    new MakeExplicitEnumConstructionVisitor(compilationUnit).makeEnumConstructionExplicit();
   }
 
   @Override
@@ -56,7 +58,7 @@ public class MakeExplicitEnumConstructionVisitor extends AbstractRewriter {
      * Only inserts explicit super() call to a constructor that does not have
      * a super() or this() call, and the corresponding type does have a super class.
      */
-    if (!method.isConstructor() || !getCurrentJavaType().isEnum()) {
+    if (!method.isConstructor() || !isEnumOrSubclass(getCurrentJavaType())) {
       return method;
     }
     Variable ordinalVariable =
@@ -79,20 +81,27 @@ public class MakeExplicitEnumConstructionVisitor extends AbstractRewriter {
 
   @Override
   public NewInstance rewriteNewInstance(NewInstance newInstance) {
-    TypeDescriptor targetTypeDescriptor =
-        newInstance.getConstructorMethodDescriptor().getEnclosingClassTypeDescriptor();
-
+    // Rewrite newInstances for the creation of the enum constants to include the assigned ordinal
+    // and name.
     if (!getCurrentJavaType().isEnum()
-        || !targetTypeDescriptor.equals(getCurrentJavaType().getDescriptor())) {
+        || getCurrentField() == null
+        || getCurrentField().getDescriptor().getTypeDescriptor()
+            != getCurrentJavaType().getDescriptor()) {
+
+      // Enum constants creations are exactly those that are field initializers for fields
+      // whose class is then enum class.
       return newInstance;
     }
+    // This is definitely an enum initialization NewInstance.
 
     Field enumField = getCurrentField();
     Preconditions.checkState(
         enumField != null,
         "Enum values can only be instantiated inside their field initialization");
 
-    int currentOrdinal = ordinalsByTypeDescriptor.add(targetTypeDescriptor, 1);
+    int currentOrdinal =
+        ordinalsByEnumTypeDescriptor.add(
+            enumField.getDescriptor().getEnclosingClassTypeDescriptor(), 1);
 
     return new NewInstance(
         newInstance.getQualifier(),
@@ -107,7 +116,7 @@ public class MakeExplicitEnumConstructionVisitor extends AbstractRewriter {
             .build());
   }
 
-  private void makeEnumConstructionExplicit(CompilationUnit compilationUnit) {
+  private void makeEnumConstructionExplicit() {
     compilationUnit.accept(this);
   }
 
@@ -140,5 +149,23 @@ public class MakeExplicitEnumConstructionVisitor extends AbstractRewriter {
 
     constructorInvocation.setTargetMethodDescriptor(modifiedConstructorDescriptor);
     constructorInvocation.getArguments().addAll(arguments);
+  }
+
+  private boolean isEnumOrSubclass(JavaType type) {
+    if (type.isEnum()) {
+      return true;
+    }
+
+    // Anonymous classes used for enum values are subtypes of an enum type that is defined in the
+    // same compilation unit.
+    JavaType superType =
+        type.getSuperTypeDescriptor() == null
+            ? null
+            : compilationUnit.getType(type.getSuperTypeDescriptor());
+    return superType != null && superType.isEnum();
+  }
+
+  private MakeExplicitEnumConstructionVisitor(CompilationUnit compilationUnit) {
+    this.compilationUnit = compilationUnit;
   }
 }

@@ -10,7 +10,7 @@ public class Main {
 
   static enum Bar {
     BAR,
-    BAZ
+    BAZ {};
   }
 
   public static void testEnum() {
@@ -33,27 +33,21 @@ public class Main {
     assert !o.getClass().isInterface() : "Bar.BAR.class.isInterface() returned true";
   }
 
-  /* TODO(rluble): uncomment once the full enum implementation is in.
+  public static void testEnumSubclass() {
+    Object o = Bar.BAZ;
+    assertNotSame(Bar.class, o.getClass());
 
-   static enum Bar {
-   BAR, BAZ {};
-   }
+    assertEquals(
+        "com.google.j2cl.transpiler.integration.classliteral.Main$Bar$1", o.getClass().getName());
+    assertEquals(
+        "class com.google.j2cl.transpiler.integration.classliteral.Main$Bar$1",
+        o.getClass().toString());
 
-   public static void testEnumSubclass() {
-   Object o = Bar.BAZ;
-   assert Bar.class != o.getClass();
-
-   assertEquals("com.google.j2cl.transpiler.integration.classliteral.Main$Bar$1",
-   o.getClass().getName());
-   assertEquals("class com.google.j2cl.transpiler.integration.classliteral.Main$Bar$1",
-   o.getClass().toString());
-
-   assert !o.getClass().isArray() : "Bar.BAZ.class.isArray() returned true";
-   assert !o.getClass().isEnum() : "Bar.BAZ.class.isEnum() returned true";
-   assert !o.getClass().isPrimitive() : "Bar.BAZ.class.isPrimitive() returned true";
-   assert !o.getClass().isInterface() : "Bar.BAZ.class.isInterface() returned true";
-   }
-   */
+    assert !o.getClass().isArray() : "Bar.BAZ.class.isArray() returned true";
+    assert !o.getClass().isEnum() : "Bar.BAZ.class.isEnum() returned true";
+    assert !o.getClass().isPrimitive() : "Bar.BAZ.class.isPrimitive() returned true";
+    assert !o.getClass().isInterface() : "Bar.BAZ.class.isInterface() returned true";
+  }
 
   public static void testArray() {
     Object o = new Foo[3];
@@ -176,8 +170,7 @@ public class Main {
     testMisc();
     testEnum();
     testGeneric();
-    // TODO(rluble):uncomment once the full implementation of enums is in.
-    // testEnumSubclass();
+    testEnumSubclass();
   }
 
   private static void assertEquals(Object expected, Object actual) {
@@ -192,6 +185,13 @@ public class Main {
     assertSame(getFailureMessage(expected, actual), expected, actual);
   }
 
+  private static void assertNotSame(Object expected, Object actual) {
+    String expectedString = expected == null ? null : expected.toString();
+    String actualString = actual == null ? null : actual.toString();
+    assertNotSame(
+        "<" + actualString + "> should not be equal to <" + expectedString + ">", expected, actual);
+  }
+
   private static String getFailureMessage(Object expected, Object actual) {
     String expectedString = expected == null ? null : expected.toString();
     String actualString = actual == null ? null : actual.toString();
@@ -200,6 +200,10 @@ public class Main {
 
   private static void assertSame(String message, Object expected, Object actual) {
     assert expected == actual : message;
+  }
+
+  private static void assertNotSame(String message, Object expected, Object actual) {
+    assert expected != actual : message;
   }
 }
 

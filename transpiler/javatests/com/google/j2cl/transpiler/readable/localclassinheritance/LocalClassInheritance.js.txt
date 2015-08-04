@@ -11,6 +11,94 @@ var $Util = goog.require('nativebootstrap.UtilModule').Util;
 var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
+class LocalClassInheritance extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance() {
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() { let f = 1; }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!LocalClassInheritance}
+   * @public
+   */
+  static $create() {
+    LocalClassInheritance.$clinit();
+    var instance = new LocalClassInheritance;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof LocalClassInheritance;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, LocalClassInheritance);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+LocalClassInheritance.$class = Class.$createForClass(
+    $Util.$generateId('LocalClassInheritance'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance'));
+
+/**
+ * Export class.
+ */
+exports.LocalClassInheritance = LocalClassInheritance;
+
+
+
 class LocalClassInheritance$1Parent extends Object {
   /**
    * Defines instance fields.
@@ -216,91 +304,3 @@ LocalClassInheritance$1Child.$class = Class.$createForClass(
     LocalClassInheritance$1Parent.$class,
     $Util.$generateId(
         'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance.1Child'));
-
-
-
-class LocalClassInheritance extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance() {
-  }
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_test() { let f = 1; }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!LocalClassInheritance}
-   * @public
-   */
-  static $create() {
-    LocalClassInheritance.$clinit();
-    var instance = new LocalClassInheritance;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_localclassinheritance_LocalClassInheritance();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   */
-  static $isInstance(instance) {
-    return instance instanceof LocalClassInheritance;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @private
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, LocalClassInheritance);
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-/**
- * @public {Class}
- */
-LocalClassInheritance.$class = Class.$createForClass(
-    $Util.$generateId('LocalClassInheritance'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance'));
-
-/**
- * Export class.
- */
-exports.LocalClassInheritance = LocalClassInheritance;
