@@ -1,0 +1,265 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/subclassgenericclass/SubclassGenericClass.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.subclassgenericclass.SubclassGenericClassModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+/**
+ * @template C_T
+ */
+class GenericClass extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_T
+   * @return {!GenericClass<C_T>}
+   * @package
+   */
+  static $create() {
+    GenericClass.$clinit();
+    var instance = new GenericClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @package
+   */
+  $ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof GenericClass; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, GenericClass);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+GenericClass.$class = Class.$createForClass(
+    $Util.$generateId('GenericClass'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass'));
+
+/**
+ * Export class.
+ */
+exports.GenericClass = GenericClass;
+
+
+
+/**
+ * @template C_T
+ * @extends {GenericClass<C_T>}
+ */
+class GenericSubclassGenericClass extends GenericClass {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericSubclassGenericClass() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_T
+   * @return {!GenericSubclassGenericClass<C_T>}
+   * @package
+   */
+  static $create() {
+    GenericSubclassGenericClass.$clinit();
+    var instance = new GenericSubclassGenericClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericSubclassGenericClass();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @package
+   */
+  $ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericSubclassGenericClass() {
+    this.$ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass();
+    this.$init__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericSubclassGenericClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof GenericSubclassGenericClass;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, GenericSubclassGenericClass);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { GenericClass.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+GenericSubclassGenericClass.$class = Class.$createForClass(
+    $Util.$generateId('GenericSubclassGenericClass'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.subclassgenericclass.GenericSubclassGenericClass'),
+    GenericClass.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.subclassgenericclass.GenericSubclassGenericClass'));
+
+/**
+ * Export class.
+ */
+exports.GenericSubclassGenericClass = GenericSubclassGenericClass;
+
+
+
+/**
+ * @extends {GenericClass<SubclassGenericClass>}
+ */
+class SubclassGenericClass extends GenericClass {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_subclassgenericclass_SubclassGenericClass() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!SubclassGenericClass}
+   * @public
+   */
+  static $create() {
+    SubclassGenericClass.$clinit();
+    var instance = new SubclassGenericClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_SubclassGenericClass();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_SubclassGenericClass() {
+    this.$ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass();
+    this.$init__com_google_j2cl_transpiler_readable_subclassgenericclass_SubclassGenericClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof SubclassGenericClass;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SubclassGenericClass);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { GenericClass.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+SubclassGenericClass.$class = Class.$createForClass(
+    $Util.$generateId('SubclassGenericClass'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.subclassgenericclass.SubclassGenericClass'),
+    GenericClass.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.subclassgenericclass.SubclassGenericClass'));
+
+/**
+ * Export class.
+ */
+exports.SubclassGenericClass = SubclassGenericClass;

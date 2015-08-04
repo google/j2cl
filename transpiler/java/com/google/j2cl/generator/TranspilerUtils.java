@@ -311,4 +311,11 @@ public class TranspilerUtils {
     }
     return field.getDescriptor().getTypeDescriptor().getDefaultValue();
   }
+
+  public static boolean hasJsDoc(JavaType type) {
+    return !type.getSuperInterfaceTypeDescriptors().isEmpty()
+        || type.getDescriptor().isParameterizedType()
+        || (type.getSuperTypeDescriptor() != null
+            && type.getSuperTypeDescriptor().isParameterizedType());
+  }
 }

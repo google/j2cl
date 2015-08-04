@@ -5,11 +5,11 @@
 #set ($sourceName = ${TranspilerUtils.getSourceName($classType.Descriptor)})
 /**
  * @interface
-#foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
- * @extends {${statementSourceGenerator.toSource($superInterfaceTypeDescriptor)}}
-#end
 #if (${classType.Descriptor.isParameterizedType()})
  * @template ${statementSourceGenerator.getJsDocNames($classType.Descriptor.getTypeArgumentDescriptors())}
+#end
+#foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
+ * @extends {${statementSourceGenerator.getJsDocName($superInterfaceTypeDescriptor)}}
 #end
  */
 class $interfaceName {

@@ -13,13 +13,16 @@
 #set ($simpleName = $classType.Descriptor.SimpleName)
 #set ($binaryName = ${TranspilerUtils.getBinaryName($classType.Descriptor)})
 #set ($sourceName = ${TranspilerUtils.getSourceName($classType.Descriptor)})
-#if (!${classType.SuperInterfaceTypeDescriptors.isEmpty()} || ${classType.Descriptor.isParameterizedType()})
+#if (${TranspilerUtils.hasJsDoc($classType)})
 /**
-#foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
- * @implements {${statementSourceGenerator.toSource($superInterfaceTypeDescriptor)}}
-#end
 #if (${classType.Descriptor.isParameterizedType()})
  * @template ${statementSourceGenerator.getJsDocNames($classType.Descriptor.getTypeArgumentDescriptors())}
+#end
+#if (${classType.SuperTypeDescriptor.isParameterizedType()})
+ * @extends {${statementSourceGenerator.getJsDocName($classType.SuperTypeDescriptor)}}
+#end
+#foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
+ * @implements {${statementSourceGenerator.getJsDocName($superInterfaceTypeDescriptor)}}
 #end
  */
 #end
