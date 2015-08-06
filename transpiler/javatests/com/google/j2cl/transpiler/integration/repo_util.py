@@ -144,9 +144,9 @@ def find_key_cls_since(since_cl):
   unprocessed_cls = sorted(
       set(
           [
-              process_util.extract_pattern(
+              int(process_util.extract_pattern(
                   "http://cl/(.*?) on .*",
-                  unprocessed_cl)
+                  unprocessed_cl))
               for unprocessed_cl in unprocessed_cls if unprocessed_cl]))
 
   if unprocessed_cls:
