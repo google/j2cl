@@ -20,6 +20,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.Arrays;
+import java.util.List;
 
 import javax.annotation.Nullable;
 
@@ -103,18 +104,10 @@ public abstract class MethodDescriptor extends Node implements Member {
    * Creates a raw method reference.
    */
   public static MethodDescriptor createRaw(
-      boolean isStatic, TypeDescriptor enclosingClassTypeDescriptor, String methodName) {
-    return createRaw(
-        isStatic, enclosingClassTypeDescriptor, methodName, TypeDescriptors.VOID_TYPE_DESCRIPTOR);
-  }
-
-  /**
-   * Creates a raw method reference.
-   */
-  public static MethodDescriptor createRaw(
       boolean isStatic,
       TypeDescriptor enclosingClassTypeDescriptor,
       String methodName,
+      List<TypeDescriptor> parameterTypeDescriptors,
       TypeDescriptor returnTypeDescriptor) {
     return new AutoValue_MethodDescriptor(
         isStatic,
@@ -124,7 +117,7 @@ public abstract class MethodDescriptor extends Node implements Member {
         methodName,
         false,
         false,
-        ImmutableList.<TypeDescriptor>of(),
+        ImmutableList.copyOf(parameterTypeDescriptors),
         returnTypeDescriptor,
         ImmutableList.<TypeDescriptor>of(),
         null);

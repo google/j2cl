@@ -44,6 +44,10 @@ public class VariableDeclarationFragment extends Node {
     return initializer;
   }
 
+  public void setInitializer(Expression initializer) {
+    this.initializer = initializer;
+  }
+
   @Override
   public Node accept(Processor processor) {
     return Visitor_VariableDeclarationFragment.visit(processor, this);

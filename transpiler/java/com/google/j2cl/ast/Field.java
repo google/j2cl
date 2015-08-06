@@ -77,6 +77,10 @@ public class Field extends Node {
     return compileTimeConstant;
   }
 
+  public void setCapturedVariable(Variable capturedVariable) {
+    this.capturedVariable = capturedVariable;
+  }
+
   public void setCompileTimeConstant(boolean compileTimeConstant) {
     this.compileTimeConstant = compileTimeConstant;
   }

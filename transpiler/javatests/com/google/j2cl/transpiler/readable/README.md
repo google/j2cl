@@ -49,7 +49,9 @@ are copyright and licensed as follows:
 - enum special functions (values, valueOf, etc).
 - equals
 - finalfield (readable JsDoc and no static setter)
-- implicitconversions
+- implicitconversions (method call params)
+- implicitconversions (String + operator)
+- implicitconversions (binary operations and field initializers)
 - interfacedefaultmethod
 - jsinteropclass
 - jsinteropdispatch

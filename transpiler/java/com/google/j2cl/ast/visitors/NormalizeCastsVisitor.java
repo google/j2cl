@@ -1,6 +1,8 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
+import com.google.j2cl.ast.ASTUtils;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.CastExpression;
@@ -54,13 +56,22 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
     // TypeName.$isInstance(expr);
     MethodDescriptor isInstanceMethodDescriptor =
         MethodDescriptor.createRaw(
-            true, castTypeDescriptor, "$isInstance", TypeDescriptors.BOOLEAN_TYPE_DESCRIPTOR);
+            true,
+            castTypeDescriptor,
+            "$isInstance",
+            Lists.newArrayList(TypeDescriptors.OBJECT_TYPE_DESCRIPTOR),
+            TypeDescriptors.BOOLEAN_TYPE_DESCRIPTOR);
     Expression isInstanceMethodCall =
         new MethodCall(null, isInstanceMethodDescriptor, Arrays.asList(expression));
 
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.createRaw(
-            true, TypeDescriptors.VM_CASTS_TYPE_DESCRIPTOR, "to", castTypeDescriptor);
+            true,
+            TypeDescriptors.VM_CASTS_TYPE_DESCRIPTOR,
+            "to",
+            Lists.newArrayList(
+                TypeDescriptors.OBJECT_TYPE_DESCRIPTOR, TypeDescriptors.BOOLEAN_TYPE_DESCRIPTOR),
+            castTypeDescriptor);
     List<Expression> arguments = new ArrayList<>();
     arguments.add(expression);
     arguments.add(isInstanceMethodCall);
@@ -79,7 +90,14 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
 
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.createRaw(
-            true, TypeDescriptors.VM_ARRAYS_TYPE_DESCRIPTOR, "$castTo", arrayCastTypeDescriptor);
+            true,
+            TypeDescriptors.VM_ARRAYS_TYPE_DESCRIPTOR,
+            "$castTo",
+            Lists.newArrayList(
+                TypeDescriptors.OBJECT_TYPE_DESCRIPTOR,
+                TypeDescriptors.OBJECT_TYPE_DESCRIPTOR,
+                TypeDescriptors.INT_TYPE_DESCRIPTOR),
+            arrayCastTypeDescriptor);
     List<Expression> arguments = new ArrayList<>();
     arguments.add(castExpression.getExpression());
     arguments.add(arrayCastTypeDescriptor.getLeafTypeDescriptor());
@@ -99,7 +117,7 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
     Expression expression = castExpression.getExpression();
     TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
     TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
-    if (canRemoveCast(fromTypeDescriptor, toTypeDescriptor)) {
+    if (ASTUtils.canRemoveCast(fromTypeDescriptor, toTypeDescriptor)) {
       return expression;
     }
     String castMethodName =
@@ -109,50 +127,13 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
             toProperCase(toTypeDescriptor.getSimpleName()));
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.createRaw(
-            true, TypeDescriptors.VM_PRIMITIVES_TYPE_DESCRIPTOR, castMethodName, toTypeDescriptor);
+            true,
+            TypeDescriptors.VM_PRIMITIVES_TYPE_DESCRIPTOR,
+            castMethodName,
+            Lists.newArrayList(fromTypeDescriptor),
+            toTypeDescriptor);
     // Primitives.$castAToB(expr);
     return new MethodCall(null, castToMethodDescriptor, Arrays.asList(expression));
-  }
-
-  /**
-   * The following is the cast table between primitive types. The cell marked as 'X'
-   * indicates that no cast is needed.
-   * <p>
-   * For other cases, cast from A to B is translated to method call $castAToB.
-   * <p>
-   * from\to       byte |  char | short | int   | long | float | double|
-   * -------------------------------------------------------------------
-   * byte        |  X   |       |   X   |   X   |      |   X   |   X   |
-   * -------------------------------------------------------------------
-   * char        |      |   X   |       |   X   |      |   X   |   X   |
-   * -------------------------------------------------------------------
-   * short       |      |       |   X   |   X   |      |   X   |   X   |
-   * -------------------------------------------------------------------
-   * int         |      |       |       |   X   |      |   X   |   X   |
-   * -------------------------------------------------------------------
-   * long        |      |       |       |       |   X  |       |       |
-   * -------------------------------------------------------------------
-   * float       |      |       |       |       |      |   X   |   X   |
-   * -------------------------------------------------------------------
-   * double      |      |       |       |       |      |   X   |   X   |
-   */
-  private boolean canRemoveCast(
-      TypeDescriptor fromTypeDescriptor, TypeDescriptor toTypeDescriptor) {
-    if (fromTypeDescriptor == toTypeDescriptor) {
-      return true;
-    }
-    if (fromTypeDescriptor == TypeDescriptors.LONG_TYPE_DESCRIPTOR
-        || toTypeDescriptor == TypeDescriptors.LONG_TYPE_DESCRIPTOR) {
-      return false;
-    }
-    return toTypeDescriptor == TypeDescriptors.FLOAT_TYPE_DESCRIPTOR
-        || toTypeDescriptor == TypeDescriptors.DOUBLE_TYPE_DESCRIPTOR
-        || (toTypeDescriptor == TypeDescriptors.INT_TYPE_DESCRIPTOR
-            && (fromTypeDescriptor == TypeDescriptors.BYTE_TYPE_DESCRIPTOR
-                || fromTypeDescriptor == TypeDescriptors.CHAR_TYPE_DESCRIPTOR
-                || fromTypeDescriptor == TypeDescriptors.SHORT_TYPE_DESCRIPTOR))
-        || (toTypeDescriptor == TypeDescriptors.SHORT_TYPE_DESCRIPTOR
-            && fromTypeDescriptor == TypeDescriptors.BYTE_TYPE_DESCRIPTOR);
   }
 
   private String toProperCase(String string) {

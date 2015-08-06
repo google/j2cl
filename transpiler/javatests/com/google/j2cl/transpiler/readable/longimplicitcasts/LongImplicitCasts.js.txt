@@ -1,0 +1,188 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/longimplicitcasts/LongImplicitCasts.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCastsModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var $Long = goog.require('nativebootstrap.LongsModule').Long;
+var $Longs = goog.require('nativebootstrap.LongsModule').Longs;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $byte = goog.require('vmbootstrap.PrimitivesModule').$byte;
+var $char = goog.require('vmbootstrap.PrimitivesModule').$char;
+var $double = goog.require('vmbootstrap.PrimitivesModule').$double;
+var $float = goog.require('vmbootstrap.PrimitivesModule').$float;
+var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+var $long = goog.require('vmbootstrap.PrimitivesModule').$long;
+var $short = goog.require('vmbootstrap.PrimitivesModule').$short;
+var $Primitives = goog.require('vmbootstrap.PrimitivesModule').Primitives;
+
+
+class LongImplicitCasts extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {!$Long}
+     */
+    this.f_fieldLong__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts =
+        $Longs.$fromInt(0);
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts() {
+    this.f_fieldLong__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts =
+        $Primitives.$castIntToLong(100);
+  }
+
+  /**
+   * @param {!$Long} leftValue
+   * @return {void}
+   * @public
+   */
+  m_compareLong__long(leftValue) {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!LongImplicitCasts}
+   * @public
+   */
+  static $create() {
+    LongImplicitCasts.$clinit();
+    var instance = new LongImplicitCasts;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts() {
+    this.$ctor__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts__long(
+        $Primitives.$castIntToLong(100));
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {!$Long} someValue
+   * @return {!LongImplicitCasts}
+   * @public
+   */
+  static $create__long(someValue) {
+    LongImplicitCasts.$clinit();
+    var instance = new LongImplicitCasts;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts__long(
+            someValue);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {!$Long} someValue
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts__long(
+      someValue) {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    let fbyte = 11;
+    let fchar = 12;
+    let fshort = 13;
+    let fint = 14;
+    let flong = $Primitives.$castIntToLong(15);
+    let ffloat = 16;
+    let fdouble = 17;
+    let tlong = $Primitives.$castIntToLong(0);
+    {
+      tlong = $Primitives.$castByteToLong(fbyte);
+      tlong = flong;
+    }
+    {
+      tlong = $Primitives.$castIntToLong(fint);
+      tlong = $Longs.$plus(tlong, $Primitives.$castIntToLong(fint));
+      tlong = $Longs.$leftShift(tlong, fint);
+    }
+    {
+      tlong = $Longs.$plus(tlong, $Primitives.$castCharToLong(fchar));
+      tlong = $Longs.$plus(tlong, flong);
+      tlong = $Longs.$plus(tlong, $Primitives.$castFloatToLong(ffloat));
+    }
+    {
+      tlong = $Longs.$times(flong, $Primitives.$castIntToLong(fint));
+      tlong = $Longs.$rightShiftSigned(flong, fint);
+    }
+    {
+      tlong = $Longs.$plus(flong, $Primitives.$castShortToLong(fshort));
+      tlong = $Longs.$plus(flong, flong);
+    }
+    {
+      this.m_compareLong__long($Primitives.$castIntToLong(fint));
+      LongImplicitCasts.$create__long($Primitives.$castIntToLong(fint));
+      this.m_compareLong__long(flong);
+      LongImplicitCasts.$create__long(flong);
+    }
+    {
+      tlong = $Longs.$leftShift(flong, $Primitives.$castLongToInt(flong));
+      tlong = $Longs.$leftShift(tlong, $Primitives.$castLongToInt(flong));
+    }
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof LongImplicitCasts; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, LongImplicitCasts);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+LongImplicitCasts.$class = Class.$createForClass(
+    $Util.$generateId('LongImplicitCasts'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts'));
+
+/**
+ * Export class.
+ */
+exports.LongImplicitCasts = LongImplicitCasts;

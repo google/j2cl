@@ -627,7 +627,7 @@ class Primitives {
    * Casts a byte to a Long.
    *
    * @param {number} instance
-   * @return {Long}
+   * @return {!Long}
    * @public
    */
   static $castByteToLong(instance) {
@@ -638,7 +638,7 @@ class Primitives {
    * Casts a char to a Long.
    *
    * @param {number} instance
-   * @return {Long}
+   * @return {!Long}
    * @public
    */
   static $castCharToLong(instance) {
@@ -649,7 +649,7 @@ class Primitives {
    * Casts a short to a Long.
    *
    * @param {number} instance
-   * @return {Long}
+   * @return {!Long}
    * @public
    */
   static $castShortToLong(instance) {
@@ -660,7 +660,7 @@ class Primitives {
    * Casts an int to a Long.
    *
    * @param {number} instance
-   * @return {Long}
+   * @return {!Long}
    * @public
    */
   static $castIntToLong(instance) {
@@ -671,7 +671,7 @@ class Primitives {
    * Casts a float number to a Long.
    *
    * @param {number} instance
-   * @return {Long}
+   * @return {!Long}
    * @public
    */
   static $castFloatToLong(instance) {
@@ -682,7 +682,7 @@ class Primitives {
    * Casts a double number to a Long.
    *
    * @param {number} instance
-   * @return {Long}
+   * @return {!Long}
    * @public
    */
   static $castDoubleToLong(instance) {

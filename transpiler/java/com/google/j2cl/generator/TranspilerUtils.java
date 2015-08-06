@@ -46,14 +46,6 @@ public class TranspilerUtils {
   }
 
   /**
-   * Returns the unqualified name that will be used in JavaScript.
-   */
-  public static String getClassName(TypeDescriptor typeDescriptor) {
-    //TODO(rluble): Stub implementation.
-    return typeDescriptor.getClassName();
-  }
-
-  /**
    * Returns the relative output path for a given compilation unit.
    */
   public static String getOutputPath(CompilationUnit compilationUnit) {

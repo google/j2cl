@@ -148,6 +148,65 @@ public class ASTUtils {
   }
 
   /**
+   * The following is the cast table between primitive types. The cell marked as 'X'
+   * indicates that no cast is needed.
+   * <p>
+   * For other cases, cast from A to B is translated to method call $castAToB.
+   * <p>
+   * The general pattern is that you need casts that shrink, all casts involving
+   * 'long' (because it has a custom boxed implementation) and the byte->char and
+   * char->short casts because char is unsigned.
+   * <p>
+   * from\to       byte |  char | short | int   | long | float | double|
+   * -------------------------------------------------------------------
+   * byte        |  X   |       |   X   |   X   |      |   X   |   X   |
+   * -------------------------------------------------------------------
+   * char        |      |   X   |       |   X   |      |   X   |   X   |
+   * -------------------------------------------------------------------
+   * short       |      |       |   X   |   X   |      |   X   |   X   |
+   * -------------------------------------------------------------------
+   * int         |      |       |       |   X   |      |   X   |   X   |
+   * -------------------------------------------------------------------
+   * long        |      |       |       |       |   X  |       |       |
+   * -------------------------------------------------------------------
+   * float       |      |       |       |       |      |   X   |   X   |
+   * -------------------------------------------------------------------
+   * double      |      |       |       |       |      |   X   |   X   |
+   */
+  public static boolean canRemoveCast(
+      TypeDescriptor fromTypeDescriptor, TypeDescriptor toTypeDescriptor) {
+    if (fromTypeDescriptor == toTypeDescriptor) {
+      return true;
+    }
+    if (fromTypeDescriptor == TypeDescriptors.LONG_TYPE_DESCRIPTOR
+        || toTypeDescriptor == TypeDescriptors.LONG_TYPE_DESCRIPTOR) {
+      return false;
+    }
+    return toTypeDescriptor == TypeDescriptors.FLOAT_TYPE_DESCRIPTOR
+        || toTypeDescriptor == TypeDescriptors.DOUBLE_TYPE_DESCRIPTOR
+        || (toTypeDescriptor == TypeDescriptors.INT_TYPE_DESCRIPTOR
+            && (fromTypeDescriptor == TypeDescriptors.BYTE_TYPE_DESCRIPTOR
+                || fromTypeDescriptor == TypeDescriptors.CHAR_TYPE_DESCRIPTOR
+                || fromTypeDescriptor == TypeDescriptors.SHORT_TYPE_DESCRIPTOR))
+        || (toTypeDescriptor == TypeDescriptors.SHORT_TYPE_DESCRIPTOR
+            && fromTypeDescriptor == TypeDescriptors.BYTE_TYPE_DESCRIPTOR);
+  }
+
+  public static boolean isShiftOperator(BinaryOperator binaryOperator) {
+    switch (binaryOperator) {
+      case LEFT_SHIFT:
+      case RIGHT_SHIFT_SIGNED:
+      case RIGHT_SHIFT_UNSIGNED:
+      case LEFT_SHIFT_ASSIGN:
+      case RIGHT_SHIFT_SIGNED_ASSIGN:
+      case RIGHT_SHIFT_UNSIGNED_ASSIGN:
+        return false;
+      default:
+        return true;
+    }
+  }
+
+  /**
    * Returns the added field descriptor corresponding to the captured variable.
    */
   public static FieldDescriptor getFieldDescriptorForCapture(

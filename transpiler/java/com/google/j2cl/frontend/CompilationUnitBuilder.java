@@ -1264,7 +1264,12 @@ public class CompilationUnitBuilder {
               javaLangClassTypeDescriptor);
 
       MethodDescriptor forArrayMethodDescriptor =
-          MethodDescriptor.createRaw(true, javaLangClassTypeDescriptor, "$forArray");
+          MethodDescriptor.createRaw(
+              true,
+              javaLangClassTypeDescriptor,
+              "$forArray",
+              Lists.newArrayList(TypeDescriptors.INT_TYPE_DESCRIPTOR),
+              javaLangClassTypeDescriptor);
 
       // <ClassLiteralClass>.$class.forArray(<dimensions>)
       return new MethodCall(
