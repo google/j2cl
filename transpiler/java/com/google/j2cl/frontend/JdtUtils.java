@@ -281,6 +281,9 @@ public class JdtUtils {
                         typeBinding.getErasure(), compilationUnitNameLocator);
                   }
                 });
+    TypeDescriptor erasureReturnTypeDescriptor =
+        createTypeDescriptor(
+            declaredMethodBinding.getReturnType().getErasure(), compilationUnitNameLocator);
     MethodDescriptor erasureMethodDescriptor =
         MethodDescriptor.create(
             isStatic,
@@ -289,7 +292,7 @@ public class JdtUtils {
             methodName,
             isConstructor,
             isNative,
-            returnTypeDescriptor,
+            erasureReturnTypeDescriptor,
             erasureParameterTypeDescriptors);
 
     return MethodDescriptor.create(
@@ -488,11 +491,11 @@ public class JdtUtils {
 
   private static boolean isOveriddenInType(IMethodBinding overridingMethod, ITypeBinding type) {
     for (IMethodBinding method : type.getDeclaredMethods()) {
-      // TODO: this may need to be fixed for generic methods overriding.
       // exposed overriding is not real overriding in JavaScript because the two methods
       // have different method names and they are connected by dispatch method,
-      if (overridingMethod.overrides(method)
-          && (!upgradesPackagePrivateVisibility(overridingMethod, method))) {
+      if (overridingMethod.overrides(method.getMethodDeclaration())
+          && (!upgradesPackagePrivateVisibility(overridingMethod, method.getMethodDeclaration()))
+          && areParameterErasureEqual(overridingMethod, method.getMethodDeclaration())) {
         return true;
       }
     }
@@ -517,6 +520,25 @@ public class JdtUtils {
     Visibility overridingMethodVisibility = getVisibility(overridingMethod.getModifiers());
     return overriddenMethodVisibility.isPackagePrivate()
         && (overridingMethodVisibility.isPublic() || overridingMethodVisibility.isProtected());
+  }
+
+  /**
+   * Two methods are parameter erasure equal if the erasure of their parameters' types are equal.
+   * Parameter erasure equal means that they are overriding signature equal, which means that they
+   * are real overriding/overridden or accidental overriding/overridden.
+   */
+  static boolean areParameterErasureEqual(IMethodBinding oneMethod, IMethodBinding otherMethod) {
+    if (!oneMethod.getName().equals(otherMethod.getName())
+        || oneMethod.getParameterTypes().length != otherMethod.getParameterTypes().length) {
+      return false;
+    }
+    for (int i = 0; i < oneMethod.getParameterTypes().length; i++) {
+      if (!oneMethod.getParameterTypes()[i]
+          .getErasure().isEqualTo(otherMethod.getParameterTypes()[i].getErasure())) {
+        return false;
+      }
+    }
+    return true;
   }
 
   /**

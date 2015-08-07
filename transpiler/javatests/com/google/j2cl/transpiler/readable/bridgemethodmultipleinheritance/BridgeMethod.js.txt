@@ -1,0 +1,468 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/bridgemethodmultipleinheritance/BridgeMethod.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethodModule');
+
+
+var AssertionError = goog.require('gen.java.lang.AssertionErrorModule').AssertionError;
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Error = goog.require('gen.java.lang.ErrorModule').Error;
+var Number = goog.require('gen.java.lang.NumberModule').Number;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Casts = goog.require('vmbootstrap.CastsModule').Casts;
+
+
+/**
+ * @interface
+ * @template C_T, C_S
+ */
+class SomeInterface {
+  /**
+   * @param {C_T} t
+   * @param {C_S} s
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object__java_lang_Object(t, s) {}
+
+  /**
+   * @param {C_T} t
+   * @param {Number} n
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object__java_lang_Number(t, n) {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SomeInterface =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+           instance
+               .$implements__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SomeInterface;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+           classConstructor.prototype
+               .$implements__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SomeInterface;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() {}
+}
+;
+
+
+SomeInterface.$markImplementor(/** @type {Function} */ (SomeInterface));
+
+
+/**
+ * @public {Class}
+ */
+SomeInterface.$class = Class.$createForInterface(
+    $Util.$generateId('SomeInterface'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeInterface'),
+    null,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeInterface'));
+
+/**
+ * Export class.
+ */
+exports.SomeInterface = SomeInterface;
+
+
+
+/**
+ * @template C_T, C_S
+ */
+class SuperParent extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SuperParent() {
+  }
+
+  /**
+   * @param {C_T} t
+   * @param {C_S} s
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object__java_lang_Object(t, s) {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_T, C_S
+   * @return {!SuperParent<C_T, C_S>}
+   * @package
+   */
+  static $create() {
+    SuperParent.$clinit();
+    var instance = new SuperParent;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SuperParent();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @package
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SuperParent() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SuperParent();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof SuperParent; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SuperParent);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+SuperParent.$class = Class.$createForClass(
+    $Util.$generateId('SuperParent'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent'));
+
+/**
+ * Export class.
+ */
+exports.SuperParent = SuperParent;
+
+
+
+/**
+ * @template C_T
+ * @extends {SuperParent<C_T, Number>}
+ */
+class Parent extends SuperParent {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_Parent() {
+  }
+
+  /**
+   * @param {C_T} t
+   * @param {Number} s
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Error__java_lang_Number(t, s) {}
+
+  /**
+   * @template M_T
+   * @param {M_T} t
+   * @return {void}
+   * @public
+   */
+  m_bar__java_lang_Number(t) {}
+
+  /**
+   * @template M_T
+   * @param {M_T} t
+   * @return {void}
+   * @public
+   */
+  m_fun__java_lang_Object(t) {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_T
+   * @return {!Parent<C_T>}
+   * @package
+   */
+  static $create() {
+    Parent.$clinit();
+    var instance = new Parent;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_Parent();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @package
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_Parent() {
+    this.$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SuperParent();
+    this.$init__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_Parent();
+  }
+
+  /**
+   * Synthetic method.
+   * @param {Object} arg0
+   * @param {Object} arg1
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object__java_lang_Object(arg0, arg1) {
+    this.m_foo__java_lang_Error__java_lang_Number(
+        /**@type {Error} */ ($Casts.to(arg0, Error.$isInstance(arg0))),
+        /**@type {Number} */ ($Casts.to(arg1, Number.$isInstance(arg1))));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Parent; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Parent);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { SuperParent.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+Parent.$class = Class.$createForClass(
+    $Util.$generateId('Parent'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent'),
+    SuperParent.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent'));
+
+/**
+ * Export class.
+ */
+exports.Parent = Parent;
+
+
+
+/**
+ * @extends {Parent<AssertionError>}
+ * @implements {SomeInterface<AssertionError, Number>}
+ */
+class BridgeMethod extends Parent {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_BridgeMethod() {
+  }
+
+  /**
+   * @param {AssertionError} a
+   * @param {Number} n
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_AssertionError__java_lang_Number(a, n) {}
+
+  /**
+   * @override
+   * @param {Number} t
+   * @return {void}
+   * @public
+   */
+  m_bar__java_lang_Number(t) {}
+
+  /**
+   * @param {Number} t
+   * @return {void}
+   * @public
+   */
+  m_fun__java_lang_Number(t) {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!BridgeMethod}
+   * @public
+   */
+  static $create() {
+    BridgeMethod.$clinit();
+    var instance = new BridgeMethod;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_BridgeMethod();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_BridgeMethod() {
+    this.$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_Parent();
+    this.$init__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_BridgeMethod();
+  }
+
+  /**
+   * Synthetic method.
+   * @param {Error} arg0
+   * @param {Number} arg1
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Error__java_lang_Number(arg0, arg1) {
+    this.m_foo__java_lang_AssertionError__java_lang_Number(
+        /**@type {AssertionError} */ (
+            $Casts.to(arg0, AssertionError.$isInstance(arg0))),
+        arg1);
+  }
+
+  /**
+   * Synthetic method.
+   * @param {Object} arg0
+   * @param {Object} arg1
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object__java_lang_Object(arg0, arg1) {
+    this.m_foo__java_lang_AssertionError__java_lang_Number(
+        /**@type {AssertionError} */ (
+            $Casts.to(arg0, AssertionError.$isInstance(arg0))),
+        /**@type {Number} */ ($Casts.to(arg1, Number.$isInstance(arg1))));
+  }
+
+  /**
+   * Synthetic method.
+   * @param {Object} arg0
+   * @param {Number} arg1
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object__java_lang_Number(arg0, arg1) {
+    this.m_foo__java_lang_AssertionError__java_lang_Number(
+        /**@type {AssertionError} */ (
+            $Casts.to(arg0, AssertionError.$isInstance(arg0))),
+        arg1);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof BridgeMethod; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, BridgeMethod);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Parent.$clinit(); }
+}
+;
+
+
+SomeInterface.$markImplementor(BridgeMethod);
+
+
+/**
+ * @public {Class}
+ */
+BridgeMethod.$class = Class.$createForClass(
+    $Util.$generateId('BridgeMethod'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod'),
+    Parent.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod'));
+
+/**
+ * Export class.
+ */
+exports.BridgeMethod = BridgeMethod;

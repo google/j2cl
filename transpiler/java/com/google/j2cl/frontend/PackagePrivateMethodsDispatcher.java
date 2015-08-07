@@ -15,20 +15,37 @@
  */
 package com.google.j2cl.frontend;
 
+import com.google.j2cl.ast.ASTUtils;
+import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.Modifier;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
- * Checks package private method that is exposed by its public or protected overriding methods.
- * The returned overriding/overridden methods mapping is used for creating dispatch methods.
+ * Checks package private method that is exposed by its public or protected overriding methods,
+ * and returns the generated dispatch methods.
  */
-public class PackagePrivateMethodsChecker {
+public class PackagePrivateMethodsDispatcher {
+  /**
+   * Returns generated dispatch methods.
+   */
+  public static List<Method> createDispatchMethods(
+      ITypeBinding typeBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
+    List<Method> dispatchMethods = new ArrayList<>();
+    for (Map.Entry<MethodDescriptor, MethodDescriptor> entry :
+        findExposedOverriddenMethods(typeBinding, compilationUnitNameLocator).entrySet()) {
+      dispatchMethods.add(ASTUtils.createForwardingMethod(entry.getValue(), entry.getKey()));
+    }
+    return dispatchMethods;
+  }
+
   /**
    * Returns the mapping from public/protected method to its package private overridden method.
    */

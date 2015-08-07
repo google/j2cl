@@ -20,8 +20,7 @@ import java.io.Serializable;
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Enum.html">the
  * official Java API doc</a> for details.
  */
-// TODO(rluble): Replace Comparable<Object> by Comparable<E> once we synthesize bridges.
-public abstract class Enum<E extends Enum<E>> implements Comparable<Object>, Serializable {
+public abstract class Enum<E extends Enum<E>> implements Comparable<E>, Serializable {
 
   private final String name;
 
@@ -40,16 +39,8 @@ public abstract class Enum<E extends Enum<E>> implements Comparable<Object>, Ser
     return ordinal;
   }
 
-  // TODO(rluble): remove this explicit bridge when we start synthesizing them.
   @Override
-  public int compareTo(Object other) {
-    if (!(other instanceof Enum)) {
-      return 1;
-    }
-    return compareTo((Enum<?>) other);
-  }
-
-  public int compareTo(Enum<?> other) {
-    return this.ordinal - ((Enum<?>) other).ordinal;
+  public int compareTo(E other) {
+    return this.ordinal - ((Enum) other).ordinal;
   }
 }

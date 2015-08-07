@@ -122,6 +122,10 @@ public class JavaType extends Node {
     methods.add(method);
   }
 
+  public void addMethods(List<Method> methods) {
+    this.methods.addAll(methods);
+  }
+
   public Visibility getVisibility() {
     return visibility;
   }

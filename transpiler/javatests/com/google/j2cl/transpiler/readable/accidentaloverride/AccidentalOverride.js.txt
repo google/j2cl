@@ -1,0 +1,382 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/accidentaloverride/AccidentalOverride.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.accidentaloverride.AccidentalOverrideModule');
+
+
+var AssertionError = goog.require('gen.java.lang.AssertionErrorModule').AssertionError;
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Error = goog.require('gen.java.lang.ErrorModule').Error;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Casts = goog.require('vmbootstrap.CastsModule').Casts;
+
+
+/**
+ * @template C_T
+ */
+class Parent extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_accidentaloverride_Parent() {}
+
+  /**
+   * @param {C_T} e
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Error(e) {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_T
+   * @return {!Parent<C_T>}
+   * @package
+   */
+  static $create() {
+    Parent.$clinit();
+    var instance = new Parent;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_accidentaloverride_Parent();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @package
+   */
+  $ctor__com_google_j2cl_transpiler_readable_accidentaloverride_Parent() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_accidentaloverride_Parent();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Parent; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Parent);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+Parent.$class = Class.$createForClass(
+    $Util.$generateId('Parent'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.accidentaloverride.Parent'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.accidentaloverride.Parent'));
+
+/**
+ * Export class.
+ */
+exports.Parent = Parent;
+
+
+
+/**
+ * @interface
+ * @template C_T
+ */
+class SuperInterface {
+  /**
+   * @param {C_T} t
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object(t) {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_accidentaloverride_SuperInterface =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+           instance
+               .$implements__com_google_j2cl_transpiler_readable_accidentaloverride_SuperInterface;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+           classConstructor.prototype
+               .$implements__com_google_j2cl_transpiler_readable_accidentaloverride_SuperInterface;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() {}
+}
+;
+
+
+SuperInterface.$markImplementor(/** @type {Function} */ (SuperInterface));
+
+
+/**
+ * @public {Class}
+ */
+SuperInterface.$class = Class.$createForInterface(
+    $Util.$generateId('SuperInterface'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface'),
+    null,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface'));
+
+/**
+ * Export class.
+ */
+exports.SuperInterface = SuperInterface;
+
+
+
+/**
+ * @extends {Parent<AssertionError>}
+ * @implements {SuperInterface<AssertionError>}
+ */
+class AnotherAccidentalOverride extends Parent {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_accidentaloverride_AnotherAccidentalOverride() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!AnotherAccidentalOverride}
+   * @package
+   */
+  static $create() {
+    AnotherAccidentalOverride.$clinit();
+    var instance = new AnotherAccidentalOverride;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_accidentaloverride_AnotherAccidentalOverride();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @package
+   */
+  $ctor__com_google_j2cl_transpiler_readable_accidentaloverride_AnotherAccidentalOverride() {
+    this.$ctor__com_google_j2cl_transpiler_readable_accidentaloverride_Parent();
+    this.$init__com_google_j2cl_transpiler_readable_accidentaloverride_AnotherAccidentalOverride();
+  }
+
+  /**
+   * Synthetic method.
+   * @param {Object} arg0
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object(arg0) {
+    this.m_foo__java_lang_Error(/**@type {AssertionError} */ (
+        $Casts.to(arg0, AssertionError.$isInstance(arg0))));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof AnotherAccidentalOverride;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, AnotherAccidentalOverride);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Parent.$clinit(); }
+}
+;
+
+
+SuperInterface.$markImplementor(AnotherAccidentalOverride);
+
+
+/**
+ * @public {Class}
+ */
+AnotherAccidentalOverride.$class = Class.$createForClass(
+    $Util.$generateId('AnotherAccidentalOverride'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.accidentaloverride.AnotherAccidentalOverride'),
+    Parent.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.accidentaloverride.AnotherAccidentalOverride'));
+
+/**
+ * Export class.
+ */
+exports.AnotherAccidentalOverride = AnotherAccidentalOverride;
+
+
+
+/**
+ * @extends {Parent<Error>}
+ * @implements {SuperInterface<Error>}
+ */
+class AccidentalOverride extends Parent {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_accidentaloverride_AccidentalOverride() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!AccidentalOverride}
+   * @public
+   */
+  static $create() {
+    AccidentalOverride.$clinit();
+    var instance = new AccidentalOverride;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_accidentaloverride_AccidentalOverride();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_accidentaloverride_AccidentalOverride() {
+    this.$ctor__com_google_j2cl_transpiler_readable_accidentaloverride_Parent();
+    this.$init__com_google_j2cl_transpiler_readable_accidentaloverride_AccidentalOverride();
+  }
+
+  /**
+   * Synthetic method.
+   * @param {Object} arg0
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object(arg0) {
+    this.m_foo__java_lang_Error(
+        /**@type {Error} */ ($Casts.to(arg0, Error.$isInstance(arg0))));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof AccidentalOverride;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, AccidentalOverride);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Parent.$clinit(); }
+}
+;
+
+
+SuperInterface.$markImplementor(AccidentalOverride);
+
+
+/**
+ * @public {Class}
+ */
+AccidentalOverride.$class = Class.$createForClass(
+    $Util.$generateId('AccidentalOverride'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.accidentaloverride.AccidentalOverride'),
+    Parent.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.accidentaloverride.AccidentalOverride'));
+
+/**
+ * Export class.
+ */
+exports.AccidentalOverride = AccidentalOverride;

@@ -6,9 +6,11 @@ goog.module('gen.com.google.j2cl.transpiler.readable.switchstatement.NumbersModu
 
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
 var Enum = goog.require('gen.java.lang.EnumModule').Enum;
 var String = goog.require('gen.java.lang.StringModule').String;
 var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Casts = goog.require('vmbootstrap.CastsModule').Casts;
 var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
@@ -54,6 +56,17 @@ class Numbers extends Enum {
       $name, $ordinal) {
     this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);
     this.$init__com_google_j2cl_transpiler_readable_switchstatement_Numbers();
+  }
+
+  /**
+   * Synthetic method.
+   * @param {Object} arg0
+   * @return {number}
+   * @public
+   */
+  m_compareTo__java_lang_Object(arg0) {
+    return this.m_compareTo__java_lang_Enum(
+        /**@type {Numbers} */ ($Casts.to(arg0, Numbers.$isInstance(arg0))));
   }
 
   /**

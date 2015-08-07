@@ -1,0 +1,650 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/simplebridgemethods/SimpleBridgeMethods.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.simplebridgemethods.SimpleBridgeMethodsModule');
+
+
+var AssertionError = goog.require('gen.java.lang.AssertionErrorModule').AssertionError;
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Error = goog.require('gen.java.lang.ErrorModule').Error;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Casts = goog.require('vmbootstrap.CastsModule').Casts;
+
+
+/**
+ * @template C_T
+ */
+class Superclass extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass() {}
+
+  /**
+   * @param {C_T} t
+   * @return {void}
+   * @public
+   */
+  m_m1__java_lang_Error(t) {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_T
+   * @return {!Superclass<C_T>}
+   * @package
+   */
+  static $create() {
+    Superclass.$clinit();
+    var instance = new Superclass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @package
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Superclass; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Superclass);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+Superclass.$class = Class.$createForClass(
+    $Util.$generateId('Superclass'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass'));
+
+/**
+ * Export class.
+ */
+exports.Superclass = Superclass;
+
+
+
+/**
+ * @extends {Superclass<AssertionError>}
+ */
+class Subclass extends Superclass {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simplebridgemethods_Subclass() {}
+
+  /**
+   * @param {AssertionError} a
+   * @return {void}
+   * @public
+   */
+  m_m1__java_lang_AssertionError(a) {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Subclass}
+   * @package
+   */
+  static $create() {
+    Subclass.$clinit();
+    var instance = new Subclass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Subclass();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @package
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Subclass() {
+    this.$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass();
+    this.$init__com_google_j2cl_transpiler_readable_simplebridgemethods_Subclass();
+  }
+
+  /**
+   * Synthetic method.
+   * @param {Error} arg0
+   * @return {void}
+   * @public
+   */
+  m_m1__java_lang_Error(arg0) {
+    this.m_m1__java_lang_AssertionError(/**@type {AssertionError} */ (
+        $Casts.to(arg0, AssertionError.$isInstance(arg0))));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Subclass; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Subclass);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Superclass.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+Subclass.$class = Class.$createForClass(
+    $Util.$generateId('Subclass'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass'),
+    Superclass.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass'));
+
+/**
+ * Export class.
+ */
+exports.Subclass = Subclass;
+
+
+
+/**
+ * @extends {Superclass<AssertionError>}
+ */
+class AnotherSubclass extends Superclass {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherSubclass() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!AnotherSubclass}
+   * @package
+   */
+  static $create() {
+    AnotherSubclass.$clinit();
+    var instance = new AnotherSubclass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherSubclass();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @package
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherSubclass() {
+    this.$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass();
+    this.$init__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherSubclass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof AnotherSubclass; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, AnotherSubclass);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Superclass.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+AnotherSubclass.$class = Class.$createForClass(
+    $Util.$generateId('AnotherSubclass'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherSubclass'),
+    Superclass.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherSubclass'));
+
+/**
+ * Export class.
+ */
+exports.AnotherSubclass = AnotherSubclass;
+
+
+
+/**
+ * @interface
+ * @template C_V
+ */
+class Callable {
+  /**
+   * @param {C_V} v
+   * @return {void}
+   * @public
+   */
+  m_call__java_lang_Object(v) {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_simplebridgemethods_Callable =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+           instance
+               .$implements__com_google_j2cl_transpiler_readable_simplebridgemethods_Callable;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+           classConstructor.prototype
+               .$implements__com_google_j2cl_transpiler_readable_simplebridgemethods_Callable;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() {}
+}
+;
+
+
+Callable.$markImplementor(/** @type {Function} */ (Callable));
+
+
+/**
+ * @public {Class}
+ */
+Callable.$class = Class.$createForInterface(
+    $Util.$generateId('Callable'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplebridgemethods.Callable'),
+    null,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplebridgemethods.Callable'));
+
+/**
+ * Export class.
+ */
+exports.Callable = Callable;
+
+
+
+/**
+ * @template C_T
+ * @implements {Callable<C_T>}
+ */
+class Task extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simplebridgemethods_Task() {}
+
+  /**
+   * @override
+   * @param {C_T} t
+   * @return {void}
+   * @public
+   */
+  m_call__java_lang_Object(t) {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_T
+   * @return {!Task<C_T>}
+   * @package
+   */
+  static $create() {
+    Task.$clinit();
+    var instance = new Task;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Task();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @package
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_Task() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_simplebridgemethods_Task();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Task; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Task);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+Callable.$markImplementor(Task);
+
+
+/**
+ * @public {Class}
+ */
+Task.$class = Class.$createForClass(
+    $Util.$generateId('Task'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplebridgemethods.Task'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplebridgemethods.Task'));
+
+/**
+ * Export class.
+ */
+exports.Task = Task;
+
+
+
+/**
+ * @template C_T
+ * @implements {Callable<Superclass<C_T>>}
+ */
+class AnotherTask extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherTask() {
+  }
+
+  /**
+   * @param {Superclass<C_T>} t
+   * @return {void}
+   * @public
+   */
+  m_call__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass(
+      t) {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_T
+   * @return {!AnotherTask<C_T>}
+   * @package
+   */
+  static $create() {
+    AnotherTask.$clinit();
+    var instance = new AnotherTask;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherTask();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @package
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherTask() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherTask();
+  }
+
+  /**
+   * Synthetic method.
+   * @param {Object} arg0
+   * @return {void}
+   * @public
+   */
+  m_call__java_lang_Object(arg0) {
+    this.m_call__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass(
+        /**@type {Superclass<C_T>} */ (
+            $Casts.to(arg0, Superclass.$isInstance(arg0))));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof AnotherTask; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, AnotherTask);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+Callable.$markImplementor(AnotherTask);
+
+
+/**
+ * @public {Class}
+ */
+AnotherTask.$class = Class.$createForClass(
+    $Util.$generateId('AnotherTask'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask'));
+
+/**
+ * Export class.
+ */
+exports.AnotherTask = AnotherTask;
+
+
+
+class SimpleBridgeMethods extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simplebridgemethods_SimpleBridgeMethods() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!SimpleBridgeMethods}
+   * @public
+   */
+  static $create() {
+    SimpleBridgeMethods.$clinit();
+    var instance = new SimpleBridgeMethods;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_SimpleBridgeMethods();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_SimpleBridgeMethods() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_simplebridgemethods_SimpleBridgeMethods();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof SimpleBridgeMethods;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SimpleBridgeMethods);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ */
+SimpleBridgeMethods.$class = Class.$createForClass(
+    $Util.$generateId('SimpleBridgeMethods'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplebridgemethods.SimpleBridgeMethods'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplebridgemethods.SimpleBridgeMethods'));
+
+/**
+ * Export class.
+ */
+exports.SimpleBridgeMethods = SimpleBridgeMethods;

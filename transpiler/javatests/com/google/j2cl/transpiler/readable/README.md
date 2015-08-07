@@ -39,10 +39,6 @@ are copyright and licensed as follows:
 - anonymousclassforfunctionalinterface (transpiled to function)
 - boxing
 - breakwithlabel
-- bridgemethodaccidentaloverride
-- bridgemethodboundedtypes
-- bridgemethodmultipleoverrides
-- bridgemethodmultipletypevars
 - catchjsexception
 - classlocalvarcollision
 - continuewithlabel
@@ -65,7 +61,6 @@ are copyright and licensed as follows:
 - packageclasscollision
 - primitiveoverflow
 - shorterfieldmangling (for fields in final classes, like enums)
-- simplebridgemethod
 - simpleenum
 - simplelambda
 - staticfieldaccess (readable example + warning log)

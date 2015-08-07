@@ -280,12 +280,13 @@ public class CompilationUnitBuilder {
       }
 
       // Add dispatch methods for package private methods.
-      for (Map.Entry<MethodDescriptor, MethodDescriptor> entry :
-          PackagePrivateMethodsChecker.findExposedOverriddenMethods(
-                  typeBinding, compilationUnitNameLocator)
-              .entrySet()) {
-        currentType.addMethod(ASTUtils.createForwardingMethod(entry.getValue(), entry.getKey()));
-      }
+      currentType.addMethods(
+          PackagePrivateMethodsDispatcher.createDispatchMethods(
+              typeBinding, compilationUnitNameLocator));
+
+      // Add bridge methods.
+      currentType.addMethods(
+          BridgeMethodsCreator.createBridgeMethods(typeBinding, compilationUnitNameLocator));
       popType();
       return type;
     }
