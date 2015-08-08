@@ -95,7 +95,6 @@ import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.Initializer;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
-import org.eclipse.jdt.core.dom.MethodInvocation;
 import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 
@@ -119,10 +118,10 @@ public class CompilationUnitBuilder {
         LinkedHashMultimap.create();
     private List<JavaType> typeStack = new ArrayList<>();
     private JavaType currentType = null;
-    private ITypeBinding javaLangObjectBinding;
 
     private String currentSourceFile;
     private CompilationUnit j2clCompilationUnit;
+    private org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit;
 
     private void pushType(JavaType type) {
       Preconditions.checkArgument(type.getDescriptor() instanceof RegularTypeDescriptor);
@@ -136,13 +135,12 @@ public class CompilationUnitBuilder {
     }
 
     private CompilationUnit convert(
-        String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
-      javaLangObjectBinding = compilationUnit.getAST().resolveWellKnownType("java.lang.Object");
-
+        String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
+      this.jdtCompilationUnit = jdtCompilationUnit;
       currentSourceFile = sourceFilePath;
-      String packageName = JdtUtils.getCompilationUnitPackageName(compilationUnit);
+      String packageName = JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit);
       j2clCompilationUnit = new CompilationUnit(sourceFilePath, packageName);
-      for (Object object : compilationUnit.types()) {
+      for (Object object : jdtCompilationUnit.types()) {
         AbstractTypeDeclaration abstractTypeDeclaration = (AbstractTypeDeclaration) object;
         convert(abstractTypeDeclaration);
       }
@@ -881,18 +879,22 @@ public class CompilationUnitBuilder {
     private MethodCall convert(org.eclipse.jdt.core.dom.MethodInvocation expression) {
       IMethodBinding methodBinding = expression.resolveMethodBinding();
 
-      // Perform Object method devirtualization.
-      if (isObjectInstanceMethodBinding(methodBinding)) {
-        return createDevirtualizedObjectMethodCall(expression);
-      }
-
       Expression qualifier =
           expression.getExpression() == null ? null : convert(expression.getExpression());
       MethodDescriptor methodDescriptor =
           JdtUtils.createMethodDescriptor(methodBinding, compilationUnitNameLocator);
       List<Expression> arguments = convertExpressions(expression.arguments());
       maybePackageVarargs(methodBinding, expression.arguments(), arguments);
-      return new MethodCall(qualifier, methodDescriptor, arguments);
+      MethodCall methodCall = new MethodCall(qualifier, methodDescriptor, arguments);
+
+      // Perform Object method devirtualization.
+      if (JdtUtils.isObjectInstanceMethodBinding(methodBinding, jdtCompilationUnit)) {
+        return ASTUtils.createDevirtualizedMethodCall(
+            methodCall,
+            TypeDescriptors.OBJECTS_TYPE_DESCRIPTOR,
+            TypeDescriptors.OBJECT_TYPE_DESCRIPTOR);
+      }
+      return methodCall;
     }
 
     @SuppressWarnings("unchecked")
@@ -967,47 +969,6 @@ public class CompilationUnitBuilder {
         }
         j2clArguments.add(packagedVarargs);
       }
-    }
-
-    private MethodCall createDevirtualizedObjectMethodCall(MethodInvocation invocation) {
-      Preconditions.checkArgument(!invocation.resolveMethodBinding().isConstructor());
-      Preconditions.checkArgument(
-          !JdtUtils.isStatic(invocation.resolveMethodBinding().getModifiers()));
-
-      IMethodBinding methodBinding = invocation.resolveMethodBinding();
-      Expression originalQualifier =
-          invocation.getExpression() == null ? null : convert(invocation.getExpression());
-      String methodName = methodBinding.getName();
-      TypeDescriptor returnTypeDescriptor = createTypeDescriptor(methodBinding.getReturnType());
-      int originalParameterCount = methodBinding.getParameterTypes().length;
-      int modifiers = methodBinding.getModifiers();
-      boolean isConstructor = methodBinding.isConstructor();
-      boolean isNative = JdtUtils.isNative(modifiers);
-
-      TypeDescriptor[] parameterTypeDescriptors = new TypeDescriptor[originalParameterCount + 1];
-      // Turn the instance into now a first parameter to the devirtualized method.
-      parameterTypeDescriptors[0] = TypeDescriptors.OBJECT_TYPE_DESCRIPTOR;
-      for (int i = 0; i < originalParameterCount; i++) {
-        parameterTypeDescriptors[i + 1] =
-            createTypeDescriptor(methodBinding.getParameterTypes()[i]);
-      }
-      MethodDescriptor methodDescriptor =
-          MethodDescriptor.create(
-              true, // Static method.
-              JdtUtils.getVisibility(methodBinding.getModifiers()),
-              TypeDescriptors.OBJECTS_TYPE_DESCRIPTOR, // Enclosing class reference.
-              methodName,
-              isConstructor,
-              isNative,
-              returnTypeDescriptor,
-              parameterTypeDescriptors);
-      @SuppressWarnings("unchecked")
-
-      List<Expression> arguments = convertExpressions(invocation.arguments());
-      // Turn the instance into now a first parameter to the devirtualized method.
-      arguments.add(0, originalQualifier);
-      // Call the method like Objects.foo(instance, ...)
-      return new MethodCall(null, methodDescriptor, arguments);
     }
 
     @SuppressWarnings("unused")
@@ -1358,19 +1319,6 @@ public class CompilationUnitBuilder {
       type.setLocal(typeBinding.isLocal());
       type.setStatic(JdtUtils.isStatic(typeBinding.getModifiers()));
       return type;
-    }
-
-    private boolean isObjectInstanceMethodBinding(IMethodBinding methodBinding) {
-      for (IMethodBinding objectMethodBinding : javaLangObjectBinding.getDeclaredMethods()) {
-        boolean overrides =
-            methodBinding == objectMethodBinding || methodBinding.overrides(objectMethodBinding);
-        boolean instanceMethod =
-            !methodBinding.isConstructor() && !JdtUtils.isStatic(methodBinding.getModifiers());
-        if (overrides && instanceMethod) {
-          return true;
-        }
-      }
-      return false;
     }
   }
 

@@ -541,6 +541,23 @@ public class JdtUtils {
     return true;
   }
 
+  static boolean isObjectInstanceMethodBinding(
+      IMethodBinding methodBinding, org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
+    boolean instanceMethod =
+        !methodBinding.isConstructor() && !JdtUtils.isStatic(methodBinding.getModifiers());
+    if (!instanceMethod) {
+      return false;
+    }
+    ITypeBinding javaLangObjectBinding =
+        compilationUnit.getAST().resolveWellKnownType("java.lang.Object");
+    for (IMethodBinding objectMethodBinding : javaLangObjectBinding.getDeclaredMethods()) {
+      if (methodBinding == objectMethodBinding || methodBinding.overrides(objectMethodBinding)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   /**
    * Helper method to work around JDT habit of returning raw collections.
    */

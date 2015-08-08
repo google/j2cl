@@ -348,4 +348,38 @@ public class ASTUtils {
     return Method.createSynthetic(
         forwardinghMethodDescriptor, parameters, new Block(Arrays.asList(statement)), true);
   }
+
+  /**
+   * Creates devirtualized method call of {@code methodCall} as method call to the static method
+   * in {@code enclosingClassTypeDescriptor} with the {@code instanceTypeDescriptor} as the first
+   * parameter type.
+   */
+  public static MethodCall createDevirtualizedMethodCall(
+      MethodCall methodCall,
+      TypeDescriptor enclosingClassTypeDescriptor,
+      TypeDescriptor instanceTypeDescriptor) {
+    MethodDescriptor targetMethodDescriptor = methodCall.getTarget();
+    Preconditions.checkArgument(!targetMethodDescriptor.isConstructor());
+    Preconditions.checkArgument(!targetMethodDescriptor.isStatic());
+
+    MethodDescriptor methodDescriptor =
+        MethodDescriptor.create(
+            true, // Static method.
+            targetMethodDescriptor.getVisibility(),
+            enclosingClassTypeDescriptor, // enclosing class
+            targetMethodDescriptor.getMethodName(),
+            targetMethodDescriptor.isConstructor(),
+            targetMethodDescriptor.isNative(),
+            targetMethodDescriptor.getReturnTypeDescriptor(),
+            Iterables.concat(
+                Arrays.asList(instanceTypeDescriptor), // add the first parameter type.
+                targetMethodDescriptor.getParameterTypeDescriptors()));
+    @SuppressWarnings("unchecked")
+
+    List<Expression> arguments = methodCall.getArguments();
+    // Turn the instance into now a first parameter to the devirtualized method.
+    arguments.add(0, methodCall.getQualifier());
+    // Call the method like Objects.foo(instance, ...)
+    return new MethodCall(null, methodDescriptor, arguments);
+  }
 }
