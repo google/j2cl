@@ -10,8 +10,8 @@ var $double = goog.require('vmbootstrap.PrimitivesModule').$double;
  */
 class Doubles {
   /**
-   * @param {?} obj
-   * @param {?} other
+   * @param {*} obj
+   * @param {*} other
    * @return {boolean}
    * @public
    */
@@ -20,25 +20,25 @@ class Doubles {
   }
 
   /**
-   * @param {?} obj
+   * @param {*} obj
    * @return {number}
    * @public
    */
   static m_hashCode__java_lang_Object(obj) {
-    return obj;
+    return /** @type {number} */ (obj);
   }
 
   /**
-   * @param {?} obj
+   * @param {*} obj
    * @return {?string}
    * @public
    */
   static m_toString__java_lang_Object(obj) {
-    return obj.toString();
+    return  /** @type {Object} */ (obj).toString();
   }
 
   /**
-   * @param {?} obj
+   * @param {*} obj
    * @return {Class}
    * @public
    */

@@ -19,10 +19,10 @@
  * @template ${statementSourceGenerator.getJsDocNames($classType.Descriptor.getTypeArgumentDescriptors())}
 #end
 #if (${classType.SuperTypeDescriptor.isParameterizedType()})
- * @extends {${statementSourceGenerator.getJsDocName($classType.SuperTypeDescriptor)}}
+ * @extends {${statementSourceGenerator.getJsDocName($classType.SuperTypeDescriptor, true)}}
 #end
 #foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
- * @implements {${statementSourceGenerator.getJsDocName($superInterfaceTypeDescriptor)}}
+ * @implements {${statementSourceGenerator.getJsDocName($superInterfaceTypeDescriptor, true)}}
 #end
  */
 #end

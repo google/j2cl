@@ -53,7 +53,7 @@ class Object {
   m_hashCode() { return Hashing.$getHashCode(this); }
 
   /**
-   * @param {Object} other
+   * @param {*} other
    * @return {boolean}   q
    * @public
    */
@@ -72,7 +72,7 @@ class Object {
 
   /**
    * Returns whether the provided instance is an instance of this class.
-   * @param {Object} instance
+   * @param {*} instance
    * @return {boolean}
    * @public
    */

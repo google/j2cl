@@ -12,8 +12,8 @@ var Strings = goog.require('vmbootstrap.StringsModule').Strings;
  */
 class Objects {
   /**
-   * @param {?} obj
-   * @param {?} other
+   * @param {*} obj
+   * @param {*} other
    * @return {boolean}
    * @public
    */
@@ -31,7 +31,7 @@ class Objects {
   }
 
   /**
-   * @param {?} obj
+   * @param {*} obj
    * @return {number}
    * @public
    */
@@ -49,7 +49,7 @@ class Objects {
   }
 
   /**
-   * @param {?} obj
+   * @param {*} obj
    * @return {?string}
    * @public
    */
@@ -67,7 +67,7 @@ class Objects {
   }
 
   /**
-   * @param {?} obj
+   * @param {*} obj
    * @return {Class}
    * @public
    */

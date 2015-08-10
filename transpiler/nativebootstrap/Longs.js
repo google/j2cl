@@ -241,7 +241,7 @@ class Longs {
 
 
 /**
- * @public {?}
+ * @public {*}
  */
 Longs.$q;
 

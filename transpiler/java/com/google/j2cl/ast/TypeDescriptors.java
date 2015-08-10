@@ -51,6 +51,7 @@ public class TypeDescriptors {
       TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Object"), "Object");
   public static final TypeDescriptor STRING_TYPE_DESCRIPTOR =
       TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("String"), "String");
+
   /**
    * Bootstrap types.
    */

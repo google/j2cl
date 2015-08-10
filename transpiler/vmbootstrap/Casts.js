@@ -3,14 +3,13 @@ goog.module('vmbootstrap.CastsModule');
 
 var ClassCastException =
     goog.require('gen.java.lang.ClassCastExceptionModule').ClassCastException;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
 
 
 class Casts {
   /**
-   * @param {Object} instance
+   * @param {*} instance
    * @param {boolean} condition
-   * @return {Object}
+   * @return {*}
    */
   static to(instance, condition) {
     if (CAST_CHECKS_ENABLED_ && !condition) {

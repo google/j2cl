@@ -7,6 +7,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.supermethodcall.ParentModul
 
 var GrandParent = goog.require('gen.com.google.j2cl.transpiler.readable.supermethodcall.GrandParentModule').GrandParent;
 var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
 var $Util = goog.require('nativebootstrap.UtilModule').Util;
 var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
@@ -38,7 +39,7 @@ class Parent extends GrandParent {
   m_parentWithParams__int(foo) {}
 
   /**
-   * @return {Object}
+   * @return {*}
    * @public
    */
   m_parentWithChangingReturn() { return null; }

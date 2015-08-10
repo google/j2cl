@@ -8,19 +8,20 @@ class Hashing {
   /**
    * Gets a hash code on the passed-in object.
    *
-   * @param {Object} obj
+   * @param {*} obj
    * @return {number}
    * @public
    */
   static $getHashCode(obj) {
-    return obj.$systemHashCode ||
+    let o = /** @type {Object} */ (obj);
+    return o.$systemHashCode ||
            (window.Object.defineProperties(
-                obj,
+                o,
                 {
                   $systemHashCode:
                       {value: Hashing.$getNextHashId(), enumerable: false}
                 }),
-            obj.$systemHashCode);
+            o.$systemHashCode);
   }
 
   /**

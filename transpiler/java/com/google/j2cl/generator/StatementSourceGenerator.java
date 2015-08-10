@@ -99,18 +99,25 @@ public class StatementSourceGenerator {
    * Returns the JsDoc type name.
    */
   public String getJsDocName(TypeDescriptor typeDescriptor) {
+    return getJsDocName(typeDescriptor, false);
+  }
+
+  /**
+   * Returns the JsDoc type name.
+   */
+  public String getJsDocName(TypeDescriptor typeDescriptor, boolean forUseInExtendsOrImplements) {
     if (typeDescriptor.isArray()) {
       return String.format(
           "%s%s%s",
           Strings.repeat("Array<", typeDescriptor.getDimensions()),
-          getJsDocName(typeDescriptor.getLeafTypeDescriptor()),
+          getJsDocName(typeDescriptor.getLeafTypeDescriptor(), false),
           Strings.repeat(">", typeDescriptor.getDimensions()));
     }
 
     if (typeDescriptor.isParameterizedType()) {
       return String.format(
           "%s<%s>",
-          getJsDocName(typeDescriptor.getRawTypeDescriptor()),
+          getJsDocName(typeDescriptor.getRawTypeDescriptor(), forUseInExtendsOrImplements),
           getJsDocNames(typeDescriptor.getTypeArgumentDescriptors()));
     }
 
@@ -127,6 +134,18 @@ public class StatementSourceGenerator {
         return "!" + toSource(TypeDescriptors.NATIVE_LONG_TYPE_DESCRIPTOR);
       case "java.lang.String":
         return "?string";
+      case "java.io.Serializable":
+      case "java.lang.CharSequence":
+      case "java.lang.Comparable":
+        if (!forUseInExtendsOrImplements) {
+          // Interfaces that might be also implemented by string
+          return "(" + toSource(typeDescriptor) + "|string)";
+        }
+      case "java.lang.Object":
+        if (!forUseInExtendsOrImplements) {
+          // Object covers also string and arrays.
+          return "*";
+        }
     }
     if (typeDescriptor.isPrimitive()) {
       return typeDescriptor.getSimpleName();
@@ -144,7 +163,7 @@ public class StatementSourceGenerator {
             new Function<TypeDescriptor, String>() {
               @Override
               public String apply(TypeDescriptor typeDescriptor) {
-                return getJsDocName(typeDescriptor);
+                return getJsDocName(typeDescriptor, false);
               }
             });
     return Joiner.on(", ").join(typeParameterDescriptors);
@@ -301,7 +320,7 @@ public class StatementSourceGenerator {
             expression.isRaw(), "Java CastExpression should have been normalized to method call.");
         return String.format(
             "/**@type {%s} */ (%s)",
-            getJsDocName(expression.getCastTypeDescriptor()),
+            getJsDocName(expression.getCastTypeDescriptor(), false),
             toSource(expression.getExpression()));
       }
 

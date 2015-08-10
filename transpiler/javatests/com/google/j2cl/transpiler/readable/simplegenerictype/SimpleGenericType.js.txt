@@ -78,7 +78,7 @@ class SimpleGenericType extends Object {
    * @public
    */
   m_test() {
-    let g = /**@type {SimpleGenericType<Object, Error>} */ (
+    let g = /**@type {SimpleGenericType<*, Error>} */ (
         SimpleGenericType.$create__java_lang_Object__java_lang_Object(
             Object.$create(), Error.$create()));
   }

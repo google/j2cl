@@ -98,6 +98,10 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   @Override
   public void exitMethodDescriptor(MethodDescriptor methodDescriptor) {
     addTypeDescriptor(methodDescriptor.getEnclosingClassTypeDescriptor());
+    TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
+    if (needImportForJsDoc(returnTypeDescriptor)) {
+      addTypeDescriptor(returnTypeDescriptor);
+    }
   }
 
   @Override
@@ -168,6 +172,11 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     return TypeDescriptors.bootstrapTypeDescriptors.contains(typeDescriptor)
         ? "$" + typeDescriptor.getClassName()
         : typeDescriptor.getClassName();
+  }
+
+  private static boolean needImportForJsDoc(TypeDescriptor returnTypeDescriptor) {
+    return !returnTypeDescriptor.isPrimitive()
+        && returnTypeDescriptor != TypeDescriptors.STRING_TYPE_DESCRIPTOR;
   }
 
   private ImportGatheringVisitor() {}

@@ -132,9 +132,9 @@ class Arrays {
   /**
    * Sets the given value into the given index in the given array.
    *
-   * @param {Array<?>} array
+   * @param {Array<*>} array
    * @param {number} index
-   * @param {?} value
+   * @param {*} value
    * @public
    */
   static $set(array, index, value) {
@@ -172,7 +172,7 @@ class Arrays {
    * number of dimensions and whether its leaf type is assignable from the given
    * leaf type.
    *
-   * @param {?} instance
+   * @param {*} instance
    * @param {Function} requiredLeafType
    * @param {number} requiredDimensionCount
    * @return {boolean}
@@ -200,10 +200,10 @@ class Arrays {
    * If the cast is invalid then an exception will be thrown otherwise the
    * provided instance is returned.
    *
-   * @param {?} instance
+   * @param {*} instance
    * @param {Function} requiredLeafType
    * @param {number} requiredDimensionCount
-   * @return {?}
+   * @return {*}
    * @public
    */
   static $castTo(instance, requiredLeafType, requiredDimensionCount) {
@@ -213,8 +213,8 @@ class Arrays {
   }
 
   /**
-   * @param {?} obj
-   * @param {?} other
+   * @param {*} obj
+   * @param {*} other
    * @return {boolean}
    * @public
    */
@@ -223,14 +223,16 @@ class Arrays {
   }
 
   /**
-   * @param {?} obj
+   * @param {*} obj
    * @return {number}
    * @public
    */
-  static m_hashCode__java_lang_Object(obj) { return Hashing.$getHashCode(obj); }
+  static m_hashCode__java_lang_Object(obj) {
+    return Hashing.$getHashCode(/** @type {Object} */ (obj));
+  }
 
   /**
-   * @param {?} obj
+   * @param {*} obj
    * @return {?string}
    * @public
    */
@@ -240,7 +242,7 @@ class Arrays {
   }
 
   /**
-   * @param {?} obj
+   * @param {*} obj
    * @return {Class}
    * @public
    */

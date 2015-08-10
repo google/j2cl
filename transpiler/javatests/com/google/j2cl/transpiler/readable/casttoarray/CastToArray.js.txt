@@ -29,9 +29,8 @@ class CastToArray extends Object {
    * @public
    */
   m_main() {
-    let foo = /**@type {Array<Object>} */ ($Arrays.$castTo(null, Object, 1));
-    let bar =
-        /**@type {Array<Array<Object>>} */ ($Arrays.$castTo(null, Object, 2));
+    let foo = /**@type {Array<*>} */ ($Arrays.$castTo(null, Object, 1));
+    let bar = /**@type {Array<Array<*>>} */ ($Arrays.$castTo(null, Object, 2));
   }
 
   /**

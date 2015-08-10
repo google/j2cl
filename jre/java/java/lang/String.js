@@ -9,7 +9,7 @@ class String extends Object {
   /**
    * Returns whether the provided instance is of a class that implements this
    * interface.
-   * @param {Object} instance
+   * @param {*} instance
    */
   static $isInstance(instance) {
     return typeof instance == 'string';

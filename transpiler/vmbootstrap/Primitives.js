@@ -2,7 +2,6 @@ goog.module('vmbootstrap.PrimitivesModule');
 
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
 var Long = goog.require('nativebootstrap.LongsModule').Long;
 var Longs = goog.require('nativebootstrap.LongsModule').Longs;
 var Util = goog.require('nativebootstrap.UtilModule').Util;
@@ -43,7 +42,7 @@ class $byte {
 
 
 /**
- * @public {?}
+ * @public {number}
  */
 $byte.$initialArrayValue = 0;
 
@@ -95,7 +94,7 @@ class $short {
 
 
 /**
- * @public {?}
+ * @public {number}
  */
 $short.$initialArrayValue = 0;
 
@@ -147,7 +146,7 @@ class $int {
 
 
 /**
- * @public {?}
+ * @public {number}
  */
 $int.$initialArrayValue = 0;
 
@@ -211,7 +210,7 @@ class $long {
 
 
 /**
- * @public {?}
+ * @public {number}
  */
 $long.$initialArrayValue = 0;
 
@@ -263,7 +262,7 @@ class $float {
 
 
 /**
- * @public {?}
+ * @public {number}
  */
 $float.$initialArrayValue = 0;
 
@@ -315,7 +314,7 @@ class $double {
 
 
 /**
- * @public {?}
+ * @public {number}
  */
 $double.$initialArrayValue = 0;
 
@@ -367,7 +366,7 @@ class $char {
 
 
 /**
- * @public {?}
+ * @public {number}
  */
 $char.$initialArrayValue = 0;
 
@@ -419,7 +418,7 @@ class $boolean {
 
 
 /**
- * @public {?}
+ * @public {boolean}
  */
 $boolean.$initialArrayValue = false;
 
@@ -470,7 +469,7 @@ class $void {
 
 
 /**
- * @public {?}
+ * @public {boolean}
  */
 $void.$initialArrayValue = false;
 

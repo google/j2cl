@@ -10,8 +10,8 @@ var String = goog.require('gen.java.lang.StringModule').String;
  */
 class Strings {
   /**
-   * @param {?} obj
-   * @param {?} other
+   * @param {*} obj
+   * @param {*} other
    * @return {boolean}
    * @public
    */
@@ -20,7 +20,7 @@ class Strings {
   }
 
   /**
-   * @param {?} obj
+   * @param {*} obj
    * @return {number}
    * @public
    */
@@ -34,16 +34,16 @@ class Strings {
   }
 
   /**
-   * @param {?} obj
+   * @param {*} obj
    * @return {?string}
    * @public
    */
   static m_toString__java_lang_Object(obj) {
-    return obj;
+    return /** @type {?string} */ (obj);
   }
 
   /**
-   * @param {?} obj
+   * @param {*} obj
    * @return {Class}
    * @public
    */

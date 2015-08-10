@@ -9,7 +9,7 @@
  * @template ${statementSourceGenerator.getJsDocNames($classType.Descriptor.getTypeArgumentDescriptors())}
 #end
 #foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
- * @extends {${statementSourceGenerator.getJsDocName($superInterfaceTypeDescriptor)}}
+ * @extends {${statementSourceGenerator.getJsDocName($superInterfaceTypeDescriptor, true)}}
 #end
  */
 class $interfaceName {
