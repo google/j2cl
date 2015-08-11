@@ -82,7 +82,6 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == expression.getTypeDescriptor()) {
       // for Long operation method dispatch.
       addTypeDescriptor(TypeDescriptors.NATIVE_LONGS_TYPE_DESCRIPTOR);
-      addTypeDescriptor(TypeDescriptors.NATIVE_LONG_TYPE_DESCRIPTOR);
     }
   }
 
@@ -91,7 +90,6 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == field.getDescriptor().getTypeDescriptor()) {
       // for default initial value of Longs.$fromInt(0).
       addTypeDescriptor(TypeDescriptors.NATIVE_LONGS_TYPE_DESCRIPTOR);
-      addTypeDescriptor(TypeDescriptors.NATIVE_LONG_TYPE_DESCRIPTOR);
     }
   }
 
@@ -152,13 +150,16 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   }
 
   private void addTypeDescriptor(TypeDescriptor typeDescriptor) {
+    if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == typeDescriptor) {
+      addTypeDescriptor(TypeDescriptors.NATIVE_LONG_TYPE_DESCRIPTOR);
+    }
     if (typeDescriptor.isTypeVariable()) {
       return;
     }
     TypeDescriptor rawTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
     if (rawTypeDescriptor.isArray()) {
       addTypeDescriptor(TypeDescriptors.VM_ARRAYS_TYPE_DESCRIPTOR);
-      typeDescriptors.add(rawTypeDescriptor.getLeafTypeDescriptor());
+      addTypeDescriptor(rawTypeDescriptor.getLeafTypeDescriptor());
     } else {
       typeDescriptors.add(rawTypeDescriptor);
     }

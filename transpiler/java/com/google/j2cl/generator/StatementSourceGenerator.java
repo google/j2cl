@@ -110,7 +110,7 @@ public class StatementSourceGenerator {
       return String.format(
           "%s%s%s",
           Strings.repeat("Array<", typeDescriptor.getDimensions()),
-          getJsDocName(typeDescriptor.getLeafTypeDescriptor(), false),
+          getJsDocName(typeDescriptor.getLeafTypeDescriptor()),
           Strings.repeat(">", typeDescriptor.getDimensions()));
     }
 
@@ -163,7 +163,7 @@ public class StatementSourceGenerator {
             new Function<TypeDescriptor, String>() {
               @Override
               public String apply(TypeDescriptor typeDescriptor) {
-                return getJsDocName(typeDescriptor, false);
+                return getJsDocName(typeDescriptor);
               }
             });
     return Joiner.on(", ").join(typeParameterDescriptors);
@@ -318,10 +318,8 @@ public class StatementSourceGenerator {
       public String transformCastExpression(CastExpression expression) {
         Preconditions.checkArgument(
             expression.isRaw(), "Java CastExpression should have been normalized to method call.");
-        return String.format(
-            "/**@type {%s} */ (%s)",
-            getJsDocName(expression.getCastTypeDescriptor(), false),
-            toSource(expression.getExpression()));
+        return annotateWithJsDoc(
+            expression.getCastTypeDescriptor(), toSource(expression.getExpression()));
       }
 
       @Override
@@ -431,11 +429,13 @@ public class StatementSourceGenerator {
         String dimensionsList =
             Joiner.on(", ")
                 .join(transformNodesToSource(newArrayExpression.getDimensionExpressions()));
-        return String.format(
-            "%s.$create([%s], %s)",
-            arraysTypeAlias(),
-            dimensionsList,
-            getAlias(newArrayExpression.getLeafTypeDescriptor()));
+        return annotateWithJsDoc(
+            newArrayExpression.getTypeDescriptor(),
+            String.format(
+                "%s.$create([%s], %s)",
+                arraysTypeAlias(),
+                dimensionsList,
+                getAlias(newArrayExpression.getLeafTypeDescriptor())));
       }
 
       private String transformArrayInit(NewArray newArrayExpression) {
@@ -455,16 +455,20 @@ public class StatementSourceGenerator {
             return arrayLiteralAsString;
           }
           // Number of dimensions defaults to 1 so we can leave that parameter out.
-          return String.format(
-              "%s.$init(%s, %s)", arraysTypeAlias(), arrayLiteralAsString, leafTypeName);
+          return annotateWithJsDoc(
+              newArrayExpression.getTypeDescriptor(),
+              String.format(
+                  "%s.$init(%s, %s)", arraysTypeAlias(), arrayLiteralAsString, leafTypeName));
         } else {
           // It's multidimensional, make dimensions explicit.
-          return String.format(
-              "%s.$init(%s, %s, %s)",
-              arraysTypeAlias(),
-              arrayLiteralAsString,
-              leafTypeName,
-              dimensionCount);
+          return annotateWithJsDoc(
+              newArrayExpression.getTypeDescriptor(),
+              String.format(
+                  "%s.$init(%s, %s, %s)",
+                  arraysTypeAlias(),
+                  arrayLiteralAsString,
+                  leafTypeName,
+                  dimensionCount));
         }
       }
 
@@ -693,6 +697,10 @@ public class StatementSourceGenerator {
                 ? ""
                 : String.format("finally %s", toSource(statement.getFinallyBlock()));
         return tryBlock + catchBlock + finallyBlock;
+      }
+
+      private String annotateWithJsDoc(TypeDescriptor castTypeDescriptor, String expression) {
+        return String.format("/**@type {%s} */ (%s)", getJsDocName(castTypeDescriptor), expression);
       }
 
       /**

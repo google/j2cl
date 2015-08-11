@@ -7,6 +7,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.primitivearrays.PrimitiveAr
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
+var $Long = goog.require('nativebootstrap.LongsModule').Long;
 var $Util = goog.require('nativebootstrap.UtilModule').Util;
 var $Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
 var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
@@ -38,22 +39,31 @@ class PrimitiveArrays extends Object {
    * @public
    */
   m_main() {
-    let bytes = $Arrays.$create([100], $byte);
-    let bytes2d = $Arrays.$create([5, 10], $byte);
-    let shorts = $Arrays.$create([100], $short);
-    let shorts2d = $Arrays.$create([5, 10], $short);
-    let ints = $Arrays.$create([100], $int);
-    let ints2d = $Arrays.$create([5, 10], $int);
-    let longs = $Arrays.$create([100], $long);
-    let longs2d = $Arrays.$create([5, 10], $long);
-    let floats = $Arrays.$create([100], $float);
-    let floats2d = $Arrays.$create([5, 10], $float);
-    let doubles = $Arrays.$create([100], $double);
-    let doubles2d = $Arrays.$create([5, 10], $double);
-    let chars = $Arrays.$create([100], $char);
-    let chars2d = $Arrays.$create([5, 10], $char);
-    let booleans = $Arrays.$create([100], $boolean);
-    let booleans2d = $Arrays.$create([5, 10], $boolean);
+    let bytes = /**@type {Array<number>} */ ($Arrays.$create([100], $byte));
+    let bytes2d =
+        /**@type {Array<Array<number>>} */ ($Arrays.$create([5, 10], $byte));
+    let shorts = /**@type {Array<number>} */ ($Arrays.$create([100], $short));
+    let shorts2d =
+        /**@type {Array<Array<number>>} */ ($Arrays.$create([5, 10], $short));
+    let ints = /**@type {Array<number>} */ ($Arrays.$create([100], $int));
+    let ints2d =
+        /**@type {Array<Array<number>>} */ ($Arrays.$create([5, 10], $int));
+    let longs = /**@type {Array<!$Long>} */ ($Arrays.$create([100], $long));
+    let longs2d =
+        /**@type {Array<Array<!$Long>>} */ ($Arrays.$create([5, 10], $long));
+    let floats = /**@type {Array<number>} */ ($Arrays.$create([100], $float));
+    let floats2d =
+        /**@type {Array<Array<number>>} */ ($Arrays.$create([5, 10], $float));
+    let doubles = /**@type {Array<number>} */ ($Arrays.$create([100], $double));
+    let doubles2d =
+        /**@type {Array<Array<number>>} */ ($Arrays.$create([5, 10], $double));
+    let chars = /**@type {Array<number>} */ ($Arrays.$create([100], $char));
+    let chars2d =
+        /**@type {Array<Array<number>>} */ ($Arrays.$create([5, 10], $char));
+    let booleans =
+        /**@type {Array<boolean>} */ ($Arrays.$create([100], $boolean));
+    let booleans2d = /**@type {Array<Array<boolean>>} */ (
+        $Arrays.$create([5, 10], $boolean));
     let foo = ints[0];
     foo = ints2d[0][1];
     $Arrays.$set(ints, 0, 10);

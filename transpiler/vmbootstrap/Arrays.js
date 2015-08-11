@@ -37,8 +37,8 @@ class Arrays {
    * dimensions, lengths and of the given type.
    *
    * @param {Array<number>} dimensionLengths
-   * @param {Function} leafType
-   * @return {Array<?>}
+   * @param {*} leafType
+   * @return {Array<*>}
    * @public
    */
   static $create(dimensionLengths, leafType) {
@@ -89,10 +89,10 @@ class Arrays {
    * This modification is potentially destructive and should only ever be
    * applied to brand new array literals.
    *
-   * @param {Array<?>} array
+   * @param {Array<*>} array
    * @param {Function} leafType
    * @param {number} opt_dimensionCount
-   * @return {Array<?>}
+   * @return {Array<*>}
    * @public
    */
   static $init(array, leafType, opt_dimensionCount) {
@@ -105,7 +105,7 @@ class Arrays {
    * Recursively marks the given array and any contained arrays with known
    * dimensions and leafType.
    *
-   * @param {Array<?>} array
+   * @param {Array<*>} array
    * @param {Function} leafType
    * @param {number} dimensionCount
    * @private
@@ -124,7 +124,8 @@ class Arrays {
         if (nestedArray == null) {
           continue;
         }
-        Arrays.$initRecursive(nestedArray, leafType, dimensionCount - 1);
+        Arrays.$initRecursive(/** @type {Array<*>} */ (nestedArray), leafType,
+            dimensionCount - 1);
       }
     }
   }
