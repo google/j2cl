@@ -57,7 +57,6 @@ are copyright and licensed as follows:
 - nativefunction + provided Foo.native.js
 - notimportinternals
 - objectmethods
-- objectmethodsofnumbertypes
 - packageclasscollision
 - primitiveoverflow
 - shorterfieldmangling (for fields in final classes, like enums)

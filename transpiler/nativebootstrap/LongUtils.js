@@ -237,6 +237,27 @@ class LongUtils {
    * @public
    */
   static $xor(leftLong, rightLong) { return leftLong.xor(rightLong); }
+
+  /**
+   * @param {!Long} valueLong The value to get high bits from.
+   * @return {number} The high 32-bits as a signed value.
+   * @public
+   */
+  static $getHighBits(valueLong) { return valueLong.getHighBits(); }
+
+  /**
+   * @param {!Long} valueLong The long value to get low bits from.
+   * @return {number} The low 32-bits as a signed value.
+   * @public
+   */
+  static $getLowBits(valueLong) { return valueLong.getLowBits(); }
+
+  /**
+   * @param {!Long} valueLong The long value.
+   * @return {string} The textual representation of this value.
+   * @public
+   */
+  static $toString(valueLong) { return valueLong.toString(); }
 };
 
 
