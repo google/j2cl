@@ -2,8 +2,8 @@ goog.module('vmbootstrap.PrimitivesModule');
 
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Long = goog.require('nativebootstrap.LongsModule').Long;
-var Longs = goog.require('nativebootstrap.LongsModule').Longs;
+var Long = goog.require('nativebootstrap.LongUtilsModule').Long;
+var LongUtils = goog.require('nativebootstrap.LongUtilsModule').LongUtils;
 var Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
@@ -630,7 +630,7 @@ class Primitives {
    * @public
    */
   static $castByteToLong(instance) {
-    return Longs.$fromInt(instance);
+    return LongUtils.$fromInt(instance);
   }
 
   /**
@@ -641,7 +641,7 @@ class Primitives {
    * @public
    */
   static $castCharToLong(instance) {
-    return Longs.$fromInt(instance);
+    return LongUtils.$fromInt(instance);
   }
 
   /**
@@ -652,7 +652,7 @@ class Primitives {
    * @public
    */
   static $castShortToLong(instance) {
-    return Longs.$fromInt(instance);
+    return LongUtils.$fromInt(instance);
   }
 
   /**
@@ -663,7 +663,7 @@ class Primitives {
    * @public
    */
   static $castIntToLong(instance) {
-    return Longs.$fromInt(instance);
+    return LongUtils.$fromInt(instance);
   }
 
   /**
@@ -674,7 +674,7 @@ class Primitives {
    * @public
    */
   static $castFloatToLong(instance) {
-    return Longs.$fromNumber(instance);
+    return LongUtils.$fromNumber(instance);
   }
 
   /**
@@ -685,7 +685,7 @@ class Primitives {
    * @public
    */
   static $castDoubleToLong(instance) {
-    return Longs.$fromNumber(instance);
+    return LongUtils.$fromNumber(instance);
   }
 
   /**
@@ -696,7 +696,7 @@ class Primitives {
    * @public
    */
   static $castLongToByte(instance) {
-    var intValue = Longs.$toInt(instance);
+    var intValue = LongUtils.$toInt(instance);
     return Primitives.$toByte(intValue);
   }
 
@@ -708,7 +708,7 @@ class Primitives {
    * @public
    */
   static $castLongToChar(instance) {
-    var intValue = Longs.$toInt(instance);
+    var intValue = LongUtils.$toInt(instance);
     return Primitives.$toChar(intValue);
   }
 
@@ -720,7 +720,7 @@ class Primitives {
    * @public
    */
   static $castLongToShort(instance) {
-    var intValue = Longs.$toInt(instance);
+    var intValue = LongUtils.$toInt(instance);
     return Primitives.$toShort(intValue);
   }
 
@@ -732,7 +732,7 @@ class Primitives {
    * @public
    */
   static $castLongToInt(instance) {
-    var intValue = Longs.$toInt(instance);
+    var intValue = LongUtils.$toInt(instance);
     return Primitives.$toInt(intValue);
   }
 
@@ -744,7 +744,7 @@ class Primitives {
    * @public
    */
   static $castLongToFloat(instance) {
-    return Longs.$toNumber(instance);
+    return LongUtils.$toNumber(instance);
   }
 
   /**
@@ -755,7 +755,7 @@ class Primitives {
    * @public
    */
   static $castLongToDouble(instance) {
-    return Longs.$toNumber(instance);
+    return LongUtils.$toNumber(instance);
   }
 
   /**

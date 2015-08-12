@@ -525,6 +525,18 @@ public class CompilationUnitBuilder {
         arguments.add(convert((org.eclipse.jdt.core.dom.Expression) argument));
       }
       maybePackageVarargs(constructorBinding, expression.arguments(), arguments);
+
+      // Perform devirtualization for NewInstance of java.lang.Number Sub Types.
+      if (JdtUtils.isNumberType(constructorBinding.getDeclaringClass(), jdtCompilationUnit)) {
+        return new NewInstance(
+            qualifier,
+            ASTUtils.createNumberConstructorDescriptor(
+                JdtUtils.getBootStrapTypeDescriptor(
+                    constructorBinding.getDeclaringClass(), jdtCompilationUnit),
+                constructorMethodDescriptor.getParameterTypeDescriptors()),
+            arguments);
+      }
+
       Expression newInstance = null;
       if (JdtUtils.isInstanceMemberClass(constructorBinding.getDeclaringClass())) {
         // outerclass.new InnerClass() => outerClass.$create_InnerClass();
@@ -893,6 +905,16 @@ public class CompilationUnitBuilder {
             methodCall,
             TypeDescriptors.OBJECTS_TYPE_DESCRIPTOR,
             TypeDescriptors.OBJECT_TYPE_DESCRIPTOR);
+      }
+
+      // Perform Number method devirtualization.
+      if (JdtUtils.isNumberInstanceMethodBinding(methodBinding, jdtCompilationUnit)
+          && qualifier != null) { // do not devirtualize inside the same declaring class.
+        return ASTUtils.createDevirtualizedMethodCall(
+            methodCall,
+            JdtUtils.getBootStrapTypeDescriptor(
+                methodBinding.getDeclaringClass(), jdtCompilationUnit),
+            methodDescriptor.getEnclosingClassTypeDescriptor());
       }
       return methodCall;
     }

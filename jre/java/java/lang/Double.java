@@ -19,7 +19,39 @@ package java.lang;
  * official Java API doc</a> for details.
  */
 public class Double extends Number {
-  public Double(int value) {
+  private double value;
+
+  public Double(double value) {
     // Super-source replaced.
+  }
+
+  @Override
+  public byte byteValue() {
+    return (byte) value;
+  }
+
+  @Override
+  public double doubleValue() {
+    return value;
+  }
+
+  @Override
+  public float floatValue() {
+    return (float) value;
+  }
+
+  @Override
+  public int intValue() {
+    return (int) value;
+  }
+
+  @Override
+  public long longValue() {
+    return (long) value;
+  }
+
+  @Override
+  public short shortValue() {
+    return (short) value;
   }
 }

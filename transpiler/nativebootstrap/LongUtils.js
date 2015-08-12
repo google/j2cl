@@ -1,4 +1,4 @@
-goog.module('nativebootstrap.LongsModule');
+goog.module('nativebootstrap.LongUtilsModule');
 
 
 var Long = goog.require('goog.math.Long');
@@ -18,7 +18,7 @@ var Long = goog.require('goog.math.Long');
  * maintaining a private cache of Long instances) then the Long class would
  * become unstrippable even if these global constants were never used.
  */
-class Longs {
+class LongUtils {
   /**
    * @param {string} longString A Long valueLong represented in readable string
    *          format.
@@ -243,19 +243,19 @@ class Longs {
 /**
  * @public {*}
  */
-Longs.$q;
+LongUtils.$q;
 
 
 /**
  * @public {!Long}
  */
-Longs.$v;
+LongUtils.$v;
 
 
 /**
  * Exported class.
  */
-exports.Longs = Longs;
+exports.LongUtils = LongUtils;
 
 
 /**

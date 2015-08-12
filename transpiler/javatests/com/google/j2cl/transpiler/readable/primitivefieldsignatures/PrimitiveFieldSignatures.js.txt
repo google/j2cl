@@ -7,8 +7,8 @@ goog.module('gen.com.google.j2cl.transpiler.readable.primitivefieldsignatures.Pr
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Long = goog.require('nativebootstrap.LongsModule').Long;
-var $Longs = goog.require('nativebootstrap.LongsModule').Longs;
+var $Long = goog.require('nativebootstrap.LongUtilsModule').Long;
+var $LongUtils = goog.require('nativebootstrap.LongUtilsModule').LongUtils;
 var $Util = goog.require('nativebootstrap.UtilModule').Util;
 var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
 var $byte = goog.require('vmbootstrap.PrimitivesModule').$byte;
@@ -46,7 +46,7 @@ class PrimitiveFieldSignatures extends Object {
      * @public {!$Long}
      */
     this.f_d__com_google_j2cl_transpiler_readable_primitivefieldsignatures_PrimitiveFieldSignatures =
-        $Longs.$fromInt(0);
+        $LongUtils.$fromInt(0);
     /**
      * @public {number}
      */

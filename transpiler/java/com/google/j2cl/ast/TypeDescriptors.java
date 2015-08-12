@@ -58,6 +58,21 @@ public class TypeDescriptors {
   public static final TypeDescriptor OBJECTS_TYPE_DESCRIPTOR =
       TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Objects", "ObjectsModule");
 
+  public static final TypeDescriptor NUMBERS_TYPE_DESCRIPTOR =
+      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Numbers", "NumbersModule");
+  public static final TypeDescriptor BYTES_TYPE_DESCRIPTOR =
+      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Bytes", "BytesModule");
+  public static final TypeDescriptor DOUBLES_TYPE_DESCRIPTOR =
+      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Doubles", "DoublesModule");
+  public static final TypeDescriptor FLOATS_TYPE_DESCRIPTOR =
+      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Floats", "FloatsModule");
+  public static final TypeDescriptor INTEGERS_TYPE_DESCRIPTOR =
+      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Integers", "IntegersModule");
+  public static final TypeDescriptor LONGS_TYPE_DESCRIPTOR =
+      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Longs", "LongsModule");
+  public static final TypeDescriptor SHORTS_TYPE_DESCRIPTOR =
+      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Shorts", "ShortsModule");
+
   public static final TypeDescriptor NATIVE_UTIL_TYPE_DESCRIPTOR =
       TypeDescriptor.createRaw(Arrays.asList("nativebootstrap"), "Util", "UtilModule");
   public static final TypeDescriptor VM_ASSERTS_TYPE_DESCRIPTOR =
@@ -69,9 +84,9 @@ public class TypeDescriptors {
   public static final TypeDescriptor VM_PRIMITIVES_TYPE_DESCRIPTOR =
       TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Primitives", "PrimitivesModule");
   public static final TypeDescriptor NATIVE_LONGS_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("nativebootstrap"), "Longs", "LongsModule");
+      TypeDescriptor.createRaw(Arrays.asList("nativebootstrap"), "LongUtils", "LongUtilsModule");
   public static final TypeDescriptor NATIVE_LONG_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("nativebootstrap"), "Long", "LongsModule");
+      TypeDescriptor.createRaw(Arrays.asList("nativebootstrap"), "Long", "LongUtilsModule");
 
   /**
    * Bootstrap type set.
@@ -85,7 +100,14 @@ public class TypeDescriptors {
           VM_PRIMITIVES_TYPE_DESCRIPTOR,
           NATIVE_LONGS_TYPE_DESCRIPTOR,
           NATIVE_LONG_TYPE_DESCRIPTOR,
-          OBJECTS_TYPE_DESCRIPTOR);
+          OBJECTS_TYPE_DESCRIPTOR,
+          NUMBERS_TYPE_DESCRIPTOR,
+          BYTES_TYPE_DESCRIPTOR,
+          DOUBLES_TYPE_DESCRIPTOR,
+          FLOATS_TYPE_DESCRIPTOR,
+          INTEGERS_TYPE_DESCRIPTOR,
+          LONGS_TYPE_DESCRIPTOR,
+          SHORTS_TYPE_DESCRIPTOR);
 
   private TypeDescriptors() {}
 }

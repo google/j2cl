@@ -8,8 +8,8 @@ goog.module('gen.com.google.j2cl.transpiler.readable.compiletimeconstant.Compile
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
 var String = goog.require('gen.java.lang.StringModule').String;
-var $Long = goog.require('nativebootstrap.LongsModule').Long;
-var $Longs = goog.require('nativebootstrap.LongsModule').Longs;
+var $Long = goog.require('nativebootstrap.LongUtilsModule').Long;
+var $LongUtils = goog.require('nativebootstrap.LongUtilsModule').LongUtils;
 var $Util = goog.require('nativebootstrap.UtilModule').Util;
 var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
 var $char = goog.require('vmbootstrap.PrimitivesModule').$char;
@@ -58,7 +58,7 @@ class CompileTimeConstant extends Object {
      * @public {!$Long}
      */
     this.f_G2__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant =
-        $Longs.$fromInt(10000);
+        $LongUtils.$fromInt(10000);
     /**
      * @public {number}
      */
@@ -427,7 +427,7 @@ CompileTimeConstant
  */
 CompileTimeConstant
     .$f_G__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant =
-    $Longs.$fromInt(10000);
+    $LongUtils.$fromInt(10000);
 
 
 /**

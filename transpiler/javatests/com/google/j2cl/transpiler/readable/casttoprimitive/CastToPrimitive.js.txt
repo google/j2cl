@@ -7,8 +7,8 @@ goog.module('gen.com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimi
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Long = goog.require('nativebootstrap.LongsModule').Long;
-var $Longs = goog.require('nativebootstrap.LongsModule').Longs;
+var $Long = goog.require('nativebootstrap.LongUtilsModule').Long;
+var $LongUtils = goog.require('nativebootstrap.LongUtilsModule').LongUtils;
 var $Util = goog.require('nativebootstrap.UtilModule').Util;
 var $byte = goog.require('vmbootstrap.PrimitivesModule').$byte;
 var $char = goog.require('vmbootstrap.PrimitivesModule').$char;
@@ -43,7 +43,7 @@ class CastToPrimitive extends Object {
     let c = 1;
     let s = 1;
     let i = 1;
-    let l = $Longs.$fromInt(1);
+    let l = $LongUtils.$fromInt(1);
     let f = 1.1;
     let d = 1.1;
     b = b;

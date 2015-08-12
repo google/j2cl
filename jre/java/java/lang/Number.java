@@ -18,4 +18,20 @@ package java.lang;
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Number.html">the
  * official Java API doc</a> for details.
  */
-public class Number {}
+public abstract class Number {
+  public byte byteValue() {
+    return (byte) intValue();
+  }
+
+  public abstract double doubleValue();
+
+  public abstract float floatValue();
+
+  public abstract int intValue();
+
+  public abstract long longValue();
+
+  public short shortValue() {
+    return (short) intValue();
+  }
+}

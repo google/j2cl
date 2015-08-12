@@ -45,19 +45,19 @@ are copyright and licensed as follows:
 - enum special functions (values, valueOf, etc).
 - equals
 - finalfield (readable JsDoc and no static setter)
-- implicitconversions (method call params)
+- implicitconversions (method call params and return expression)
 - implicitconversions (String + operator)
 - implicitconversions (binary operations and field initializers)
 - interfacedefaultmethod
+- interfacedevirtualization (Comparable, CharSequence, etc).
 - jsinteropclass
 - jsinteropdispatch
 - jsinteropinterface
 - methodreferences
 - nativefunction + provided Foo.native.js
 - notimportinternals
-- numbermethods
-- number devirtualization
 - objectmethods
+- objectmethodsofnumbertypes
 - packageclasscollision
 - primitiveoverflow
 - shorterfieldmangling (for fields in final classes, like enums)

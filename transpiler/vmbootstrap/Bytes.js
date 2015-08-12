@@ -1,16 +1,15 @@
-goog.module('vmbootstrap.DoublesModule');
+goog.module('vmbootstrap.BytesModule');
 
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Long = goog.require('nativebootstrap.LongUtilsModule').Long;
-var $double = goog.require('vmbootstrap.PrimitivesModule').$double;
+var $byte = goog.require('vmbootstrap.PrimitivesModule').$byte;
 var Primitives = goog.require('vmbootstrap.PrimitivesModule').Primitives;
 
-// TODO(rluble): Maybe this should be merged with $double
 /**
- * Provides devirtualized method implementations for Doubles.
+ * Provides devirtualized method implementations for Bytes.
  */
-class Doubles {
+class Bytes {
   /**
    * @param {*} obj
    * @param {*} other
@@ -45,7 +44,7 @@ class Doubles {
    * @public
    */
   static m_getClass__java_lang_Object(obj) {
-    return $double.$class;
+    return $byte.$class;
   }
 
   /**
@@ -53,16 +52,7 @@ class Doubles {
    * @return {number}
    * @public
    */
-  static m_byteValue__java_lang_Double(obj) {
-    return Primitives.$castDoubleToByte(obj);
-  }
-
-  /**
-   * @param {number} obj
-   * @return {number}
-   * @public
-   */
-  static m_doubleValue__java_lang_Double(obj) {
+  static m_byteValue__java_lang_Byte(obj) {
     return obj;
   }
 
@@ -71,7 +61,7 @@ class Doubles {
    * @return {number}
    * @public
    */
-  static m_floatValue__java_lang_Double(obj) {
+  static m_doubleValue__java_lang_Byte(obj) {
     return obj;
   }
 
@@ -80,8 +70,17 @@ class Doubles {
    * @return {number}
    * @public
    */
-  static m_intValue__java_lang_Double(obj) {
-    return Primitives.$castDoubleToInt(obj);
+  static m_floatValue__java_lang_Byte(obj) {
+    return obj;
+  }
+
+  /**
+   * @param {number} obj
+   * @return {number}
+   * @public
+   */
+  static m_intValue__java_lang_Byte(obj) {
+    return obj;
   }
 
   /**
@@ -89,8 +88,8 @@ class Doubles {
    * @return {!Long}
    * @public
    */
-  static m_longValue__java_lang_Double(obj) {
-    return Primitives.$castDoubleToLong(obj);
+  static m_longValue__java_lang_Byte(obj) {
+    return Primitives.$castByteToLong(obj);
   }
 
   /**
@@ -98,8 +97,8 @@ class Doubles {
    * @return {number}
    * @public
    */
-  static m_shortValue__java_lang_Double(obj) {
-    return Primitives.$castDoubleToShort(obj);
+  static m_shortValue__java_lang_Byte(obj) {
+    return obj;
   }
 
   /**
@@ -107,7 +106,7 @@ class Doubles {
    * @return {number}
    * @public
    */
-  static $create__double(obj) {
+  static $create__byte(obj) {
     return obj;
   }
 };
@@ -116,4 +115,4 @@ class Doubles {
 /**
  * Exported class.
  */
-exports.Doubles = Doubles;
+exports.Bytes = Bytes;

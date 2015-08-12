@@ -255,7 +255,7 @@ public class StatementSourceGenerator {
         MemberReference memberReference = (MemberReference) leftOperand;
         String fieldOrMethodDescriptorAsString = toSource((Node) memberReference.getTarget());
         return String.format(
-            "$Longs.$q = %s, $Longs.$q.%s = %s.%s($Longs.$q.%s, %s)",
+            "$LongUtils.$q = %s, $LongUtils.$q.%s = %s.%s($LongUtils.$q.%s, %s)",
             toSource(qualifier),
             fieldOrMethodDescriptorAsString,
             longsTypeAlias(),
@@ -538,7 +538,7 @@ public class StatementSourceGenerator {
           // from dereferencing the qualifier twice.
           String operandAsSource = toSource(operand);
           return String.format(
-              "($Longs.$v = %s, %s = %s.%s(%s), $Longs.$v)",
+              "($LongUtils.$v = %s, %s = %s.%s(%s), $LongUtils.$v)",
               operandAsSource,
               operandAsSource,
               longsTypeAlias(),
@@ -554,8 +554,8 @@ public class StatementSourceGenerator {
         Member target = memberReference.getTarget();
         String fieldOrMethodDescriptorAsString = toSource((Node) target);
         return String.format(
-            "($Longs.$q = %s, $Longs.$v = $Longs.$q.%s, "
-                + "$Longs.$q.%s = %s.%s($Longs.$q.%s), $Longs.$v)",
+            "($LongUtils.$q = %s, $LongUtils.$v = $LongUtils.$q.%s, "
+                + "$LongUtils.$q.%s = %s.%s($LongUtils.$q.%s), $LongUtils.$v)",
             toSource(qualifier),
             fieldOrMethodDescriptorAsString,
             fieldOrMethodDescriptorAsString,
@@ -607,7 +607,7 @@ public class StatementSourceGenerator {
         MemberReference memberReference = (MemberReference) operand;
         String fieldOrMethodDescriptorAsString = toSource((Node) memberReference.getTarget());
         return String.format(
-            "($Longs.$q = %s, $Longs.$q.%s = %s.%s($Longs.$q.%s))",
+            "($LongUtils.$q = %s, $LongUtils.$q.%s = %s.%s($LongUtils.$q.%s))",
             toSource(qualifier),
             fieldOrMethodDescriptorAsString,
             longsTypeAlias(),

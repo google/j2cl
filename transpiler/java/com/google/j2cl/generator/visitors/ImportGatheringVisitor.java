@@ -28,6 +28,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -55,10 +56,6 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     for (TypeDescriptor typeArgument : typeDescriptor.getTypeArgumentDescriptors()) {
       addTypeDescriptor(typeArgument);
     }
-    if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == typeDescriptor) {
-      // for function parameter JsDoc.
-      addTypeDescriptor(TypeDescriptors.NATIVE_LONG_TYPE_DESCRIPTOR);
-    }
   }
 
   @Override
@@ -75,6 +72,15 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   @Override
   public void exitJavaType(JavaType type) {
     typeDescriptorsDefinedInCompilationUnit.add(type.getDescriptor().getRawTypeDescriptor());
+  }
+
+  @Override
+  public void exitMethod(Method method) {
+    TypeDescriptor returnTypeDescriptor = method.getDescriptor().getReturnTypeDescriptor();
+    if (!returnTypeDescriptor.isPrimitive()
+        || returnTypeDescriptor == TypeDescriptors.LONG_TYPE_DESCRIPTOR) {
+      addTypeDescriptor(returnTypeDescriptor);
+    }
   }
 
   @Override

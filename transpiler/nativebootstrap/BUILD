@@ -12,7 +12,7 @@ js_library(
     name = "nativebootstrap",
     deps = [
         ":Hashing",
-        ":Longs",
+        ":LongUtils",
         ":Util",
     ],
 )
@@ -23,8 +23,8 @@ js_library(
 )
 
 js_library(
-    name = "Longs",
-    srcs = ["Longs.js"],
+    name = "LongUtils",
+    srcs = ["LongUtils.js"],
     deps = ["//javascript/closure/math:long"],
 )
 
