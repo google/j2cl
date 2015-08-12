@@ -5,4 +5,8 @@ public class StaticFieldAccessLevels {
   private static boolean b;
   protected static Object c;
   static int d;
+
+  public int test() {
+    return b ? a : StaticFieldAccessLevels.d;
+  }
 }

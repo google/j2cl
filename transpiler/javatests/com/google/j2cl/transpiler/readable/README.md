@@ -63,4 +63,3 @@ are copyright and licensed as follows:
 - shorterfieldmangling (for fields in final classes, like enums)
 - simpleenum
 - simplelambda
-- staticfieldaccess (readable example + warning log)
