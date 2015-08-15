@@ -13,6 +13,7 @@ class Util {
    *
    * @param {string} id
    * @return {string}
+   * @idGenerator {stable}
    * @public
    */
   static $generateId(id) { return id; }
