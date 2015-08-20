@@ -76,6 +76,7 @@ class PrimitiveArrays extends Object {
    * A particular Java constructor as a factory method.
    * @return {!PrimitiveArrays}
    * @public
+   * @nocollapse
    */
   static $create() {
     PrimitiveArrays.$clinit();
@@ -98,6 +99,7 @@ class PrimitiveArrays extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof PrimitiveArrays; }
 
@@ -106,6 +108,7 @@ class PrimitiveArrays extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, PrimitiveArrays);
@@ -114,6 +117,7 @@ class PrimitiveArrays extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -122,6 +126,7 @@ class PrimitiveArrays extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 PrimitiveArrays.$class = Class.$createForClass(
     $Util.$generateId('PrimitiveArrays'),

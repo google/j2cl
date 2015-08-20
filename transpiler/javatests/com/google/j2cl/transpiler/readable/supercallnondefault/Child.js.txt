@@ -29,6 +29,7 @@ class Child extends Parent {
    * @param {number} a
    * @return {!Child}
    * @public
+   * @nocollapse
    */
   static $create__int(a) {
     Child.$clinit();
@@ -54,6 +55,7 @@ class Child extends Parent {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof Child; }
 
@@ -62,6 +64,7 @@ class Child extends Parent {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Child);
@@ -70,6 +73,7 @@ class Child extends Parent {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Parent.$clinit(); }
 }
@@ -78,6 +82,7 @@ class Child extends Parent {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 Child.$class = Class.$createForClass(
     $Util.$generateId('Child'),

@@ -87,6 +87,7 @@ class GenericMethod extends Object {
    * @template C_T
    * @return {!GenericMethod<C_T>}
    * @public
+   * @nocollapse
    */
   static $create() {
     GenericMethod.$clinit();
@@ -109,6 +110,7 @@ class GenericMethod extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof GenericMethod; }
 
@@ -117,6 +119,7 @@ class GenericMethod extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, GenericMethod);
@@ -125,6 +128,7 @@ class GenericMethod extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -133,6 +137,7 @@ class GenericMethod extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 GenericMethod.$class = Class.$createForClass(
     $Util.$generateId('GenericMethod'),

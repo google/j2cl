@@ -35,6 +35,7 @@ class LocalClassInheritance extends Object {
    * A particular Java constructor as a factory method.
    * @return {!LocalClassInheritance}
    * @public
+   * @nocollapse
    */
   static $create() {
     LocalClassInheritance.$clinit();
@@ -57,6 +58,7 @@ class LocalClassInheritance extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof LocalClassInheritance;
@@ -67,6 +69,7 @@ class LocalClassInheritance extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, LocalClassInheritance);
@@ -75,6 +78,7 @@ class LocalClassInheritance extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -83,6 +87,7 @@ class LocalClassInheritance extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 LocalClassInheritance.$class = Class.$createForClass(
     $Util.$generateId('LocalClassInheritance'),
@@ -136,6 +141,7 @@ class LocalClassInheritance$1Parent extends Object {
    * @param {LocalClassInheritance} $outer_this
    * @return {!LocalClassInheritance$1Parent}
    * @package
+   * @nocollapse
    */
   static $create($c_f, $outer_this) {
     LocalClassInheritance$1Parent.$clinit();
@@ -165,6 +171,7 @@ class LocalClassInheritance$1Parent extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof LocalClassInheritance$1Parent;
@@ -175,6 +182,7 @@ class LocalClassInheritance$1Parent extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, LocalClassInheritance$1Parent);
@@ -183,6 +191,7 @@ class LocalClassInheritance$1Parent extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -191,6 +200,7 @@ class LocalClassInheritance$1Parent extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 LocalClassInheritance$1Parent.$class = Class.$createForClass(
     $Util.$generateId('1Parent'),
@@ -240,6 +250,7 @@ class LocalClassInheritance$1Child extends LocalClassInheritance$1Parent {
    * @param {LocalClassInheritance} $outer_this
    * @return {!LocalClassInheritance$1Child}
    * @package
+   * @nocollapse
    */
   static $create($c_f, $outer_this) {
     LocalClassInheritance$1Child.$clinit();
@@ -270,6 +281,7 @@ class LocalClassInheritance$1Child extends LocalClassInheritance$1Parent {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof LocalClassInheritance$1Child;
@@ -280,6 +292,7 @@ class LocalClassInheritance$1Child extends LocalClassInheritance$1Parent {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, LocalClassInheritance$1Child);
@@ -288,6 +301,7 @@ class LocalClassInheritance$1Child extends LocalClassInheritance$1Parent {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { LocalClassInheritance$1Parent.$clinit(); }
 }
@@ -296,6 +310,7 @@ class LocalClassInheritance$1Child extends LocalClassInheritance$1Parent {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 LocalClassInheritance$1Child.$class = Class.$createForClass(
     $Util.$generateId('1Child'),

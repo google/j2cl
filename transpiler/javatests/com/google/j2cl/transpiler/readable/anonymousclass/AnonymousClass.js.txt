@@ -36,6 +36,7 @@ class SomeClass extends Object {
    * @param {number} i
    * @return {!SomeClass}
    * @package
+   * @nocollapse
    */
   static $create__int(i) {
     SomeClass.$clinit();
@@ -60,6 +61,7 @@ class SomeClass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof SomeClass; }
 
@@ -68,6 +70,7 @@ class SomeClass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SomeClass);
@@ -76,6 +79,7 @@ class SomeClass extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -84,6 +88,7 @@ class SomeClass extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 SomeClass.$class = Class.$createForClass(
     $Util.$generateId('SomeClass'),
@@ -123,6 +128,7 @@ class AnonymousClass extends Object {
    * A particular Java constructor as a factory method.
    * @return {!AnonymousClass}
    * @public
+   * @nocollapse
    */
   static $create() {
     AnonymousClass.$clinit();
@@ -145,6 +151,7 @@ class AnonymousClass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof AnonymousClass; }
 
@@ -153,6 +160,7 @@ class AnonymousClass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, AnonymousClass);
@@ -161,6 +169,7 @@ class AnonymousClass extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -169,6 +178,7 @@ class AnonymousClass extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 AnonymousClass.$class = Class.$createForClass(
     $Util.$generateId('AnonymousClass'),
@@ -219,6 +229,7 @@ class AnonymousClass$1 extends SomeClass {
    * @param {AnonymousClass} $outer_this
    * @return {!AnonymousClass$1}
    * @package
+   * @nocollapse
    */
   static $create__int($_0, $outer_this) {
     AnonymousClass$1.$clinit();
@@ -248,6 +259,7 @@ class AnonymousClass$1 extends SomeClass {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof AnonymousClass$1; }
 
@@ -256,6 +268,7 @@ class AnonymousClass$1 extends SomeClass {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, AnonymousClass$1);
@@ -264,6 +277,7 @@ class AnonymousClass$1 extends SomeClass {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { SomeClass.$clinit(); }
 }
@@ -272,6 +286,7 @@ class AnonymousClass$1 extends SomeClass {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 AnonymousClass$1.$class = Class.$createForClass(
     $Util.$generateId('1'),

@@ -39,6 +39,7 @@ class TryFinally extends Object {
    * A particular Java constructor as a factory method.
    * @return {!TryFinally}
    * @public
+   * @nocollapse
    */
   static $create() {
     TryFinally.$clinit();
@@ -60,6 +61,7 @@ class TryFinally extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof TryFinally; }
 
@@ -68,6 +70,7 @@ class TryFinally extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, TryFinally);
@@ -76,6 +79,7 @@ class TryFinally extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -84,6 +88,7 @@ class TryFinally extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 TryFinally.$class = Class.$createForClass(
     $Util.$generateId('TryFinally'),

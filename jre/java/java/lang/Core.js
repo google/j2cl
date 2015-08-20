@@ -25,6 +25,7 @@ class Object {
    * A particular Java constructor as a factory method.
    * @return {!Object}
    * @public
+   * @nocollapse
    */
   static $create() {
     Object.$clinit();
@@ -75,6 +76,7 @@ class Object {
    * @param {*} instance
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     // Accepts all Java and JS Objects, including native arrays.
@@ -87,6 +89,7 @@ class Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     // Special case for Array.
@@ -99,6 +102,7 @@ class Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() {}
 };
@@ -328,6 +332,7 @@ class Class extends Object {
    * @param {Object} instance
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof Class;
@@ -338,6 +343,7 @@ class Class extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return Util.$canCastClass(classConstructor, Class);
@@ -346,6 +352,7 @@ class Class extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 };
@@ -470,6 +477,7 @@ class ArrayClass extends Class {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Class.$clinit(); }
 };
@@ -478,6 +486,7 @@ class ArrayClass extends Class {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 Object.$class = Class.$createForClass(
     Util.$generateId('Object'), Util.$generateId('java.lang.Object'), null,
@@ -488,6 +497,7 @@ Object.$class = Class.$createForClass(
  * Creates the class literal (for the Class class) after the Object class
  * literal exists, so that it is not a reference error.
  * @public {Class}
+ * @nocollapse
  */
 Class.$class = Class.$createForClass(
   Util.$generateId('Class'), Util.$generateId('java.lang.Class'), Object.$class,

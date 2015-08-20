@@ -28,6 +28,7 @@ class PublicConstructor extends Object {
    * A particular Java constructor as a factory method.
    * @return {!PublicConstructor}
    * @public
+   * @nocollapse
    */
   static $create() {
     PublicConstructor.$clinit();
@@ -50,6 +51,7 @@ class PublicConstructor extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof PublicConstructor; }
 
@@ -58,6 +60,7 @@ class PublicConstructor extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, PublicConstructor);
@@ -66,6 +69,7 @@ class PublicConstructor extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -74,6 +78,7 @@ class PublicConstructor extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 PublicConstructor.$class = Class.$createForClass(
     $Util.$generateId('PublicConstructor'),

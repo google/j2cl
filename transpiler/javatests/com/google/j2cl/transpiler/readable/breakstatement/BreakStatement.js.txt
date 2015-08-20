@@ -37,6 +37,7 @@ class BreakStatement extends Object {
    * A particular Java constructor as a factory method.
    * @return {!BreakStatement}
    * @public
+   * @nocollapse
    */
   static $create() {
     BreakStatement.$clinit();
@@ -59,6 +60,7 @@ class BreakStatement extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof BreakStatement; }
 
@@ -67,6 +69,7 @@ class BreakStatement extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, BreakStatement);
@@ -75,6 +78,7 @@ class BreakStatement extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -83,6 +87,7 @@ class BreakStatement extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 BreakStatement.$class = Class.$createForClass(
     $Util.$generateId('BreakStatement'),

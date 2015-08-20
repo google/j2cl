@@ -156,6 +156,7 @@ class CharacterLiteral extends Object {
    * A particular Java constructor as a factory method.
    * @return {!CharacterLiteral}
    * @public
+   * @nocollapse
    */
   static $create() {
     CharacterLiteral.$clinit();
@@ -178,6 +179,7 @@ class CharacterLiteral extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof CharacterLiteral; }
 
@@ -186,6 +188,7 @@ class CharacterLiteral extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, CharacterLiteral);
@@ -194,6 +197,7 @@ class CharacterLiteral extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -202,6 +206,7 @@ class CharacterLiteral extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 CharacterLiteral.$class = Class.$createForClass(
     $Util.$generateId('CharacterLiteral'),

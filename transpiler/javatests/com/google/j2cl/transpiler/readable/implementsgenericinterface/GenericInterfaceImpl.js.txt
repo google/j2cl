@@ -35,6 +35,7 @@ class GenericInterface {
    * interface.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance != null &&
@@ -47,6 +48,7 @@ class GenericInterface {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
@@ -57,6 +59,7 @@ class GenericInterface {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() {}
 }
@@ -68,6 +71,7 @@ GenericInterface.$markImplementor(/** @type {Function} */ (GenericInterface));
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 GenericInterface.$class = Class.$createForInterface(
     $Util.$generateId('GenericInterface'),
@@ -110,6 +114,7 @@ class GenericSubInterface {
    * interface.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance != null &&
@@ -122,6 +127,7 @@ class GenericSubInterface {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
@@ -132,6 +138,7 @@ class GenericSubInterface {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() {}
 }
@@ -144,6 +151,7 @@ GenericSubInterface.$markImplementor(
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 GenericSubInterface.$class = Class.$createForInterface(
     $Util.$generateId('GenericSubInterface'),
@@ -183,6 +191,7 @@ class GenericInterfaceGenericImpl extends Object {
    * @template C_T
    * @return {!GenericInterfaceGenericImpl<C_T>}
    * @package
+   * @nocollapse
    */
   static $create() {
     GenericInterfaceGenericImpl.$clinit();
@@ -205,6 +214,7 @@ class GenericInterfaceGenericImpl extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof GenericInterfaceGenericImpl;
@@ -215,6 +225,7 @@ class GenericInterfaceGenericImpl extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, GenericInterfaceGenericImpl);
@@ -223,6 +234,7 @@ class GenericInterfaceGenericImpl extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -234,6 +246,7 @@ GenericInterface.$markImplementor(GenericInterfaceGenericImpl);
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 GenericInterfaceGenericImpl.$class = Class.$createForClass(
     $Util.$generateId('GenericInterfaceGenericImpl'),
@@ -271,6 +284,7 @@ class GenericInterfaceImpl extends Object {
    * A particular Java constructor as a factory method.
    * @return {!GenericInterfaceImpl}
    * @public
+   * @nocollapse
    */
   static $create() {
     GenericInterfaceImpl.$clinit();
@@ -293,6 +307,7 @@ class GenericInterfaceImpl extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof GenericInterfaceImpl;
@@ -303,6 +318,7 @@ class GenericInterfaceImpl extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, GenericInterfaceImpl);
@@ -311,6 +327,7 @@ class GenericInterfaceImpl extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -322,6 +339,7 @@ GenericInterface.$markImplementor(GenericInterfaceImpl);
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 GenericInterfaceImpl.$class = Class.$createForClass(
     $Util.$generateId('GenericInterfaceImpl'),

@@ -52,6 +52,7 @@ class InstanceFieldAccessLevels extends Object {
    * A particular Java constructor as a factory method.
    * @return {!InstanceFieldAccessLevels}
    * @public
+   * @nocollapse
    */
   static $create() {
     InstanceFieldAccessLevels.$clinit();
@@ -74,6 +75,7 @@ class InstanceFieldAccessLevels extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof InstanceFieldAccessLevels;
@@ -84,6 +86,7 @@ class InstanceFieldAccessLevels extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InstanceFieldAccessLevels);
@@ -92,6 +95,7 @@ class InstanceFieldAccessLevels extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -100,6 +104,7 @@ class InstanceFieldAccessLevels extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 InstanceFieldAccessLevels.$class = Class.$createForClass(
     $Util.$generateId('InstanceFieldAccessLevels'),

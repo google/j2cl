@@ -31,6 +31,7 @@ class GenericType extends Object {
    * @template C_T
    * @return {!GenericType<C_T>}
    * @package
+   * @nocollapse
    */
   static $create() {
     GenericType.$clinit();
@@ -53,6 +54,7 @@ class GenericType extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof GenericType; }
 
@@ -61,6 +63,7 @@ class GenericType extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, GenericType);
@@ -69,6 +72,7 @@ class GenericType extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -77,6 +81,7 @@ class GenericType extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 GenericType.$class = Class.$createForClass(
     $Util.$generateId('GenericType'),
@@ -147,6 +152,7 @@ class TypeWildCards extends Object {
    * A particular Java constructor as a factory method.
    * @return {!TypeWildCards}
    * @public
+   * @nocollapse
    */
   static $create() {
     TypeWildCards.$clinit();
@@ -169,6 +175,7 @@ class TypeWildCards extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof TypeWildCards; }
 
@@ -177,6 +184,7 @@ class TypeWildCards extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, TypeWildCards);
@@ -185,6 +193,7 @@ class TypeWildCards extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -193,6 +202,7 @@ class TypeWildCards extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 TypeWildCards.$class = Class.$createForClass(
     $Util.$generateId('TypeWildCards'),

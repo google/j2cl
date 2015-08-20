@@ -47,6 +47,7 @@ class Main extends Object {
    * A particular Java constructor as a factory method.
    * @return {!Main}
    * @public
+   * @nocollapse
    */
   static $create() {
     Main.$clinit();
@@ -69,6 +70,7 @@ class Main extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof Main; }
 
@@ -77,6 +79,7 @@ class Main extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Main);
@@ -85,6 +88,7 @@ class Main extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -93,6 +97,7 @@ class Main extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 Main.$class = Class.$createForClass(
     $Util.$generateId('Main'),

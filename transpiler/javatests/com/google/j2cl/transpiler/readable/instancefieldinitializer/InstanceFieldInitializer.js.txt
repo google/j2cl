@@ -46,6 +46,7 @@ class InstanceFieldInitializer extends Object {
    * A particular Java constructor as a factory method.
    * @return {!InstanceFieldInitializer}
    * @public
+   * @nocollapse
    */
   static $create() {
     InstanceFieldInitializer.$clinit();
@@ -68,6 +69,7 @@ class InstanceFieldInitializer extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof InstanceFieldInitializer;
@@ -78,6 +80,7 @@ class InstanceFieldInitializer extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InstanceFieldInitializer);
@@ -86,6 +89,7 @@ class InstanceFieldInitializer extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -94,6 +98,7 @@ class InstanceFieldInitializer extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 InstanceFieldInitializer.$class = Class.$createForClass(
     $Util.$generateId('InstanceFieldInitializer'),

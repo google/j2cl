@@ -42,6 +42,7 @@ class InstanceofClass extends Object {
    * A particular Java constructor as a factory method.
    * @return {!InstanceofClass}
    * @public
+   * @nocollapse
    */
   static $create() {
     InstanceofClass.$clinit();
@@ -64,6 +65,7 @@ class InstanceofClass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof InstanceofClass; }
 
@@ -72,6 +74,7 @@ class InstanceofClass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InstanceofClass);
@@ -80,6 +83,7 @@ class InstanceofClass extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -88,6 +92,7 @@ class InstanceofClass extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 InstanceofClass.$class = Class.$createForClass(
     $Util.$generateId('InstanceofClass'),

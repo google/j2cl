@@ -49,6 +49,7 @@ class ArrayCompoundAssignment extends Object {
    * A particular Java constructor as a factory method.
    * @return {!ArrayCompoundAssignment}
    * @public
+   * @nocollapse
    */
   static $create() {
     ArrayCompoundAssignment.$clinit();
@@ -71,6 +72,7 @@ class ArrayCompoundAssignment extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof ArrayCompoundAssignment;
@@ -81,6 +83,7 @@ class ArrayCompoundAssignment extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, ArrayCompoundAssignment);
@@ -89,6 +92,7 @@ class ArrayCompoundAssignment extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -97,6 +101,7 @@ class ArrayCompoundAssignment extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 ArrayCompoundAssignment.$class = Class.$createForClass(
     $Util.$generateId('ArrayCompoundAssignment'),

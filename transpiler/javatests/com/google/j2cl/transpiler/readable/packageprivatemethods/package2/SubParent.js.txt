@@ -39,6 +39,7 @@ class SubParent extends Parent {
    * A particular Java constructor as a factory method.
    * @return {!SubParent}
    * @public
+   * @nocollapse
    */
   static $create() {
     SubParent.$clinit();
@@ -61,6 +62,7 @@ class SubParent extends Parent {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof SubParent; }
 
@@ -69,6 +71,7 @@ class SubParent extends Parent {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SubParent);
@@ -77,6 +80,7 @@ class SubParent extends Parent {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Parent.$clinit(); }
 }
@@ -85,6 +89,7 @@ class SubParent extends Parent {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 SubParent.$class = Class.$createForClass(
     $Util.$generateId('SubParent'),

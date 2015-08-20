@@ -54,6 +54,7 @@ class SomeInterface {
    * interface.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance != null &&
@@ -66,6 +67,7 @@ class SomeInterface {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
@@ -76,6 +78,7 @@ class SomeInterface {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() {}
 }
@@ -87,6 +90,7 @@ SomeInterface.$markImplementor(/** @type {Function} */ (SomeInterface));
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 SomeInterface.$class = Class.$createForInterface(
     $Util.$generateId('SomeInterface'),
@@ -133,6 +137,7 @@ class SuperParent extends Object {
    * @template C_T, C_S
    * @return {!SuperParent<C_T, C_S>}
    * @package
+   * @nocollapse
    */
   static $create() {
     SuperParent.$clinit();
@@ -155,6 +160,7 @@ class SuperParent extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof SuperParent; }
 
@@ -163,6 +169,7 @@ class SuperParent extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SuperParent);
@@ -171,6 +178,7 @@ class SuperParent extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -179,6 +187,7 @@ class SuperParent extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 SuperParent.$class = Class.$createForClass(
     $Util.$generateId('SuperParent'),
@@ -242,6 +251,7 @@ class Parent extends SuperParent {
    * @template C_T
    * @return {!Parent<C_T>}
    * @package
+   * @nocollapse
    */
   static $create() {
     Parent.$clinit();
@@ -277,6 +287,7 @@ class Parent extends SuperParent {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof Parent; }
 
@@ -285,6 +296,7 @@ class Parent extends SuperParent {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Parent);
@@ -293,6 +305,7 @@ class Parent extends SuperParent {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { SuperParent.$clinit(); }
 }
@@ -301,6 +314,7 @@ class Parent extends SuperParent {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 Parent.$class = Class.$createForClass(
     $Util.$generateId('Parent'),
@@ -362,6 +376,7 @@ class BridgeMethod extends Parent {
    * A particular Java constructor as a factory method.
    * @return {!BridgeMethod}
    * @public
+   * @nocollapse
    */
   static $create() {
     BridgeMethod.$clinit();
@@ -426,6 +441,7 @@ class BridgeMethod extends Parent {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof BridgeMethod; }
 
@@ -434,6 +450,7 @@ class BridgeMethod extends Parent {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, BridgeMethod);
@@ -442,6 +459,7 @@ class BridgeMethod extends Parent {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Parent.$clinit(); }
 }
@@ -453,6 +471,7 @@ SomeInterface.$markImplementor(BridgeMethod);
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 BridgeMethod.$class = Class.$createForClass(
     $Util.$generateId('BridgeMethod'),

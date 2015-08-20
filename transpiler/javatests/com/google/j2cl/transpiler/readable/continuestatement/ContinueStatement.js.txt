@@ -38,6 +38,7 @@ class ContinueStatement extends Object {
    * A particular Java constructor as a factory method.
    * @return {!ContinueStatement}
    * @public
+   * @nocollapse
    */
   static $create() {
     ContinueStatement.$clinit();
@@ -60,6 +61,7 @@ class ContinueStatement extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof ContinueStatement; }
 
@@ -68,6 +70,7 @@ class ContinueStatement extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, ContinueStatement);
@@ -76,6 +79,7 @@ class ContinueStatement extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -84,6 +88,7 @@ class ContinueStatement extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 ContinueStatement.$class = Class.$createForClass(
     $Util.$generateId('ContinueStatement'),

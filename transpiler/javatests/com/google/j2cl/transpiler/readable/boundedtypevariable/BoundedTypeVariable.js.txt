@@ -32,6 +32,7 @@ class BoundedTypeVariable extends Object {
    * @template C_T
    * @return {!BoundedTypeVariable<C_T>}
    * @public
+   * @nocollapse
    */
   static $create() {
     BoundedTypeVariable.$clinit();
@@ -54,6 +55,7 @@ class BoundedTypeVariable extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof BoundedTypeVariable;
@@ -64,6 +66,7 @@ class BoundedTypeVariable extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, BoundedTypeVariable);
@@ -72,6 +75,7 @@ class BoundedTypeVariable extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -80,6 +84,7 @@ class BoundedTypeVariable extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 BoundedTypeVariable.$class = Class.$createForClass(
     $Util.$generateId('BoundedTypeVariable'),

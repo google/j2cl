@@ -47,6 +47,7 @@ class GrandParent extends Object {
    * A particular Java constructor as a factory method.
    * @return {!GrandParent}
    * @public
+   * @nocollapse
    */
   static $create() {
     GrandParent.$clinit();
@@ -69,6 +70,7 @@ class GrandParent extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof GrandParent; }
 
@@ -77,6 +79,7 @@ class GrandParent extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, GrandParent);
@@ -85,6 +88,7 @@ class GrandParent extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -93,6 +97,7 @@ class GrandParent extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 GrandParent.$class = Class.$createForClass(
     $Util.$generateId('GrandParent'),

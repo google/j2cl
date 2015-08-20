@@ -40,6 +40,7 @@ class InstanceOfArray extends Object {
    * A particular Java constructor as a factory method.
    * @return {!InstanceOfArray}
    * @public
+   * @nocollapse
    */
   static $create() {
     InstanceOfArray.$clinit();
@@ -62,6 +63,7 @@ class InstanceOfArray extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof InstanceOfArray; }
 
@@ -70,6 +72,7 @@ class InstanceOfArray extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InstanceOfArray);
@@ -78,6 +81,7 @@ class InstanceOfArray extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -86,6 +90,7 @@ class InstanceOfArray extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 InstanceOfArray.$class = Class.$createForClass(
     $Util.$generateId('InstanceOfArray'),

@@ -37,6 +37,7 @@ class LongParameterSignature extends Object {
    * A particular Java constructor as a factory method.
    * @return {!LongParameterSignature}
    * @public
+   * @nocollapse
    */
   static $create() {
     LongParameterSignature.$clinit();
@@ -59,6 +60,7 @@ class LongParameterSignature extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof LongParameterSignature;
@@ -69,6 +71,7 @@ class LongParameterSignature extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, LongParameterSignature);
@@ -77,6 +80,7 @@ class LongParameterSignature extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -85,6 +89,7 @@ class LongParameterSignature extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 LongParameterSignature.$class = Class.$createForClass(
     $Util.$generateId('LongParameterSignature'),

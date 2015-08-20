@@ -46,6 +46,7 @@ class OuterClass extends Object {
    * A particular Java constructor as a factory method.
    * @return {!OuterClass}
    * @public
+   * @nocollapse
    */
   static $create() {
     OuterClass.$clinit();
@@ -68,6 +69,7 @@ class OuterClass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof OuterClass; }
 
@@ -76,6 +78,7 @@ class OuterClass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, OuterClass);
@@ -84,6 +87,7 @@ class OuterClass extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -92,6 +96,7 @@ class OuterClass extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 OuterClass.$class = Class.$createForClass(
     $Util.$generateId('OuterClass'),
@@ -142,6 +147,7 @@ class OuterClass$InnerClass extends Object {
    * @param {OuterClass} $outer_this
    * @return {!OuterClass$InnerClass}
    * @public
+   * @nocollapse
    */
   static $create($outer_this) {
     OuterClass$InnerClass.$clinit();
@@ -169,6 +175,7 @@ class OuterClass$InnerClass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof OuterClass$InnerClass;
@@ -179,6 +186,7 @@ class OuterClass$InnerClass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, OuterClass$InnerClass);
@@ -187,6 +195,7 @@ class OuterClass$InnerClass extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -195,6 +204,7 @@ class OuterClass$InnerClass extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 OuterClass$InnerClass.$class = Class.$createForClass(
     $Util.$generateId('InnerClass'),
@@ -252,6 +262,7 @@ class OuterClass$InnerClass$InnerInnerClass extends Object {
    * @param {OuterClass$InnerClass} $outer_this
    * @return {!OuterClass$InnerClass$InnerInnerClass}
    * @public
+   * @nocollapse
    */
   static $create($outer_this) {
     OuterClass$InnerClass$InnerInnerClass.$clinit();
@@ -279,6 +290,7 @@ class OuterClass$InnerClass$InnerInnerClass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof OuterClass$InnerClass$InnerInnerClass;
@@ -289,6 +301,7 @@ class OuterClass$InnerClass$InnerInnerClass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor,
@@ -298,6 +311,7 @@ class OuterClass$InnerClass$InnerInnerClass extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -306,6 +320,7 @@ class OuterClass$InnerClass$InnerInnerClass extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 OuterClass$InnerClass$InnerInnerClass.$class = Class.$createForClass(
     $Util.$generateId('InnerInnerClass'),

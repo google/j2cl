@@ -39,6 +39,7 @@ class NewInstanceExpr extends Object {
    * A particular Java constructor as a factory method.
    * @return {!NewInstanceExpr}
    * @public
+   * @nocollapse
    */
   static $create() {
     NewInstanceExpr.$clinit();
@@ -61,6 +62,7 @@ class NewInstanceExpr extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof NewInstanceExpr; }
 
@@ -69,6 +71,7 @@ class NewInstanceExpr extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, NewInstanceExpr);
@@ -77,6 +80,7 @@ class NewInstanceExpr extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -85,6 +89,7 @@ class NewInstanceExpr extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 NewInstanceExpr.$class = Class.$createForClass(
     $Util.$generateId('NewInstanceExpr'),

@@ -48,6 +48,7 @@ class Parent extends GrandParent {
    * A particular Java constructor as a factory method.
    * @return {!Parent}
    * @public
+   * @nocollapse
    */
   static $create() {
     Parent.$clinit();
@@ -70,6 +71,7 @@ class Parent extends GrandParent {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof Parent; }
 
@@ -78,6 +80,7 @@ class Parent extends GrandParent {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Parent);
@@ -86,6 +89,7 @@ class Parent extends GrandParent {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { GrandParent.$clinit(); }
 }
@@ -94,6 +98,7 @@ class Parent extends GrandParent {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 Parent.$class = Class.$createForClass(
     $Util.$generateId('Parent'),

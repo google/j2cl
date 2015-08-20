@@ -33,6 +33,7 @@ class A extends Object {
    * A particular Java constructor as a factory method.
    * @return {!A}
    * @public
+   * @nocollapse
    */
   static $create() {
     A.$clinit();
@@ -55,6 +56,7 @@ class A extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof A; }
 
@@ -63,6 +65,7 @@ class A extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, A);
@@ -71,6 +74,7 @@ class A extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -79,6 +83,7 @@ class A extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 A.$class = Class.$createForClass(
     $Util.$generateId('A'),

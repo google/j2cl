@@ -39,6 +39,7 @@ class LocalClassWithConstructor extends Object {
    * A particular Java constructor as a factory method.
    * @return {!LocalClassWithConstructor}
    * @public
+   * @nocollapse
    */
   static $create() {
     LocalClassWithConstructor.$clinit();
@@ -61,6 +62,7 @@ class LocalClassWithConstructor extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof LocalClassWithConstructor;
@@ -71,6 +73,7 @@ class LocalClassWithConstructor extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, LocalClassWithConstructor);
@@ -79,6 +82,7 @@ class LocalClassWithConstructor extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -87,6 +91,7 @@ class LocalClassWithConstructor extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 LocalClassWithConstructor.$class = Class.$createForClass(
     $Util.$generateId('LocalClassWithConstructor'),
@@ -146,6 +151,7 @@ class LocalClassWithConstructor$1LocalClass extends Object {
    * @param {LocalClassWithConstructor} $outer_this
    * @return {!LocalClassWithConstructor$1LocalClass}
    * @public
+   * @nocollapse
    */
   static $create__int__int(a, b, $c_localVar, $c_p, $outer_this) {
     LocalClassWithConstructor$1LocalClass.$clinit();
@@ -185,6 +191,7 @@ class LocalClassWithConstructor$1LocalClass extends Object {
    * @param {LocalClassWithConstructor} $outer_this
    * @return {!LocalClassWithConstructor$1LocalClass}
    * @public
+   * @nocollapse
    */
   static $create__int(a, $c_localVar, $c_p, $outer_this) {
     LocalClassWithConstructor$1LocalClass.$clinit();
@@ -215,6 +222,7 @@ class LocalClassWithConstructor$1LocalClass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof LocalClassWithConstructor$1LocalClass;
@@ -225,6 +233,7 @@ class LocalClassWithConstructor$1LocalClass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor,
@@ -234,6 +243,7 @@ class LocalClassWithConstructor$1LocalClass extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -242,6 +252,7 @@ class LocalClassWithConstructor$1LocalClass extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 LocalClassWithConstructor$1LocalClass.$class = Class.$createForClass(
     $Util.$generateId('1LocalClass'),

@@ -43,7 +43,6 @@ CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
     "--remove_unused_prototype_props",
     "--remove_unused_prototype_props_in_externs",
     "--smart_name_removal",
-    "--variable_renaming=ALL",
     "--ambiguate_properties",
     "--disambiguate_properties",
 ]
@@ -86,6 +85,7 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
           "--remove_dead_code",
           "--remove_unused_local_vars=ON",
           "--remove_unused_vars",
+          "--variable_renaming=ALL",
       ],
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
@@ -147,7 +147,7 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
       name="gwt_module",
       srcs=srcs + ["MainEntryPoint.java"],
       deps=deps,
-      entry_points = [java_package + ".MainEntryPoint"],
+      entry_points=[java_package + ".MainEntryPoint"],
   )
   native.gwt_application(
       name="readable_gwt_application",
@@ -158,7 +158,7 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
           "-ea",
       ],
       module_target=":gwt_module",
-      tags = ["manual"],
+      tags=["manual"],
   )
 
   # blaze test :uncompiled_test
@@ -200,7 +200,7 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
       srcs=["TestHarness.js"],
       compile=1,
       compiler="//javascript/tools/jscompiler:head",
-      defs=[
+      defs=CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
           "--export_test_functions=true",
           "--jscomp_off=checkTypes",
           "--jscomp_off=undefinedVars",

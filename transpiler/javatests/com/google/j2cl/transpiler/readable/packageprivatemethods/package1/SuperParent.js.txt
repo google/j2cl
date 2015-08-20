@@ -62,6 +62,7 @@ class SuperParent extends Object {
    * A particular Java constructor as a factory method.
    * @return {!SuperParent}
    * @public
+   * @nocollapse
    */
   static $create() {
     SuperParent.$clinit();
@@ -84,6 +85,7 @@ class SuperParent extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof SuperParent; }
 
@@ -92,6 +94,7 @@ class SuperParent extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SuperParent);
@@ -100,6 +103,7 @@ class SuperParent extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -108,6 +112,7 @@ class SuperParent extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 SuperParent.$class = Class.$createForClass(
     $Util.$generateId('SuperParent'),

@@ -60,6 +60,7 @@ class SubNumber extends Number {
    * A particular Java constructor as a factory method.
    * @return {!SubNumber}
    * @public
+   * @nocollapse
    */
   static $create() {
     SubNumber.$clinit();
@@ -82,6 +83,7 @@ class SubNumber extends Number {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof SubNumber; }
 
@@ -90,6 +92,7 @@ class SubNumber extends Number {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SubNumber);
@@ -98,6 +101,7 @@ class SubNumber extends Number {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Number.$clinit(); }
 }
@@ -106,6 +110,7 @@ class SubNumber extends Number {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 SubNumber.$class = Class.$createForClass(
     $Util.$generateId('SubNumber'),

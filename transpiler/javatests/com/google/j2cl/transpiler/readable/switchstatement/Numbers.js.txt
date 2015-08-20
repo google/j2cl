@@ -36,6 +36,7 @@ class Numbers extends Enum {
    * @param {number} $ordinal
    * @return {!Numbers}
    * @public
+   * @nocollapse
    */
   static $create__java_lang_String__int($name, $ordinal) {
     Numbers.$clinit();
@@ -73,6 +74,7 @@ class Numbers extends Enum {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof Numbers; }
 
@@ -81,6 +83,7 @@ class Numbers extends Enum {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Numbers);
@@ -141,6 +144,7 @@ class Numbers extends Enum {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() {
     Numbers.$clinit = function() {};
@@ -172,6 +176,7 @@ Numbers.$f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers =
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 Numbers.$class = Class.$createForEnum(
     $Util.$generateId('Numbers'),

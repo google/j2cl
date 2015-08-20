@@ -46,6 +46,7 @@ class SimpleLocalClass extends Object {
    * A particular Java constructor as a factory method.
    * @return {!SimpleLocalClass}
    * @public
+   * @nocollapse
    */
   static $create() {
     SimpleLocalClass.$clinit();
@@ -68,6 +69,7 @@ class SimpleLocalClass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof SimpleLocalClass; }
 
@@ -76,6 +78,7 @@ class SimpleLocalClass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SimpleLocalClass);
@@ -84,6 +87,7 @@ class SimpleLocalClass extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -92,6 +96,7 @@ class SimpleLocalClass extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 SimpleLocalClass.$class = Class.$createForClass(
     $Util.$generateId('SimpleLocalClass'),
@@ -150,6 +155,7 @@ class SimpleLocalClass$1InnerClass extends Object {
    * @param {SimpleLocalClass} $outer_this
    * @return {!SimpleLocalClass$1InnerClass}
    * @package
+   * @nocollapse
    */
   static $create($c_localVar, $c_p, $outer_this) {
     SimpleLocalClass$1InnerClass.$clinit();
@@ -181,6 +187,7 @@ class SimpleLocalClass$1InnerClass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof SimpleLocalClass$1InnerClass;
@@ -191,6 +198,7 @@ class SimpleLocalClass$1InnerClass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SimpleLocalClass$1InnerClass);
@@ -199,6 +207,7 @@ class SimpleLocalClass$1InnerClass extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -207,6 +216,7 @@ class SimpleLocalClass$1InnerClass extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 SimpleLocalClass$1InnerClass.$class = Class.$createForClass(
     $Util.$generateId('1InnerClass'),
@@ -244,6 +254,7 @@ class SimpleLocalClass$1InnerClassWithoutCaptures extends Object {
    * @param {SimpleLocalClass} $outer_this
    * @return {!SimpleLocalClass$1InnerClassWithoutCaptures}
    * @package
+   * @nocollapse
    */
   static $create($outer_this) {
     SimpleLocalClass$1InnerClassWithoutCaptures.$clinit();
@@ -271,6 +282,7 @@ class SimpleLocalClass$1InnerClassWithoutCaptures extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof SimpleLocalClass$1InnerClassWithoutCaptures;
@@ -281,6 +293,7 @@ class SimpleLocalClass$1InnerClassWithoutCaptures extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor,
@@ -290,6 +303,7 @@ class SimpleLocalClass$1InnerClassWithoutCaptures extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -298,6 +312,7 @@ class SimpleLocalClass$1InnerClassWithoutCaptures extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 SimpleLocalClass$1InnerClassWithoutCaptures.$class = Class.$createForClass(
     $Util.$generateId('1InnerClassWithoutCaptures'),
@@ -347,6 +362,7 @@ class SimpleLocalClass$2InnerClass extends Object {
    * @param {SimpleLocalClass} $outer_this
    * @return {!SimpleLocalClass$2InnerClass}
    * @package
+   * @nocollapse
    */
   static $create($c_localVar, $outer_this) {
     SimpleLocalClass$2InnerClass.$clinit();
@@ -376,6 +392,7 @@ class SimpleLocalClass$2InnerClass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof SimpleLocalClass$2InnerClass;
@@ -386,6 +403,7 @@ class SimpleLocalClass$2InnerClass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SimpleLocalClass$2InnerClass);
@@ -394,6 +412,7 @@ class SimpleLocalClass$2InnerClass extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -402,6 +421,7 @@ class SimpleLocalClass$2InnerClass extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 SimpleLocalClass$2InnerClass.$class = Class.$createForClass(
     $Util.$generateId('2InnerClass'),

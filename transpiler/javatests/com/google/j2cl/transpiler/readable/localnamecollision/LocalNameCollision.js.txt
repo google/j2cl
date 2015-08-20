@@ -52,6 +52,7 @@ class LocalNameCollision extends Object {
    * A particular Java constructor as a factory method.
    * @return {!LocalNameCollision}
    * @public
+   * @nocollapse
    */
   static $create() {
     LocalNameCollision.$clinit();
@@ -74,6 +75,7 @@ class LocalNameCollision extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof LocalNameCollision;
@@ -84,6 +86,7 @@ class LocalNameCollision extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, LocalNameCollision);
@@ -92,6 +95,7 @@ class LocalNameCollision extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -100,6 +104,7 @@ class LocalNameCollision extends Object {
 
 /**
  * @public {java_lang_Class}
+ * @nocollapse
  */
 LocalNameCollision.$class = java_lang_Class.$createForClass(
     $Util.$generateId('LocalNameCollision'),

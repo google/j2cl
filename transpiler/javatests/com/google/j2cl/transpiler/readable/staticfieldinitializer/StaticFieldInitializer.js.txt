@@ -29,6 +29,7 @@ class StaticFieldInitializer extends Object {
    * A particular Java constructor as a factory method.
    * @return {!StaticFieldInitializer}
    * @public
+   * @nocollapse
    */
   static $create() {
     StaticFieldInitializer.$clinit();
@@ -51,6 +52,7 @@ class StaticFieldInitializer extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof StaticFieldInitializer;
@@ -61,6 +63,7 @@ class StaticFieldInitializer extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, StaticFieldInitializer);
@@ -123,6 +126,7 @@ class StaticFieldInitializer extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() {
     StaticFieldInitializer.$clinit = function() {};
@@ -158,6 +162,7 @@ StaticFieldInitializer
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 StaticFieldInitializer.$class = Class.$createForClass(
     $Util.$generateId('StaticFieldInitializer'),

@@ -95,6 +95,7 @@ class SimpleLongs extends Object {
    * A particular Java constructor as a factory method.
    * @return {!SimpleLongs}
    * @public
+   * @nocollapse
    */
   static $create() {
     SimpleLongs.$clinit();
@@ -117,6 +118,7 @@ class SimpleLongs extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof SimpleLongs; }
 
@@ -125,6 +127,7 @@ class SimpleLongs extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SimpleLongs);
@@ -133,6 +136,7 @@ class SimpleLongs extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -141,6 +145,7 @@ class SimpleLongs extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 SimpleLongs.$class = Class.$createForClass(
     $Util.$generateId('SimpleLongs'),

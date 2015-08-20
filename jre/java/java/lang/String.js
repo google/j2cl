@@ -10,6 +10,7 @@ class String extends Object {
    * Returns whether the provided instance is of a class that implements this
    * interface.
    * @param {*} instance
+   * @nocollapse
    */
   static $isInstance(instance) {
     return typeof instance == 'string';
@@ -20,6 +21,7 @@ class String extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return Util.$canCastClass(classConstructor, String);
@@ -29,6 +31,7 @@ class String extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 String.$class = Class.$createForClass(
     Util.$generateId('String'),

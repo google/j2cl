@@ -134,6 +134,7 @@ class NumberCalls extends Object {
    * A particular Java constructor as a factory method.
    * @return {!NumberCalls}
    * @public
+   * @nocollapse
    */
   static $create() {
     NumberCalls.$clinit();
@@ -156,6 +157,7 @@ class NumberCalls extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof NumberCalls; }
 
@@ -164,6 +166,7 @@ class NumberCalls extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, NumberCalls);
@@ -172,6 +175,7 @@ class NumberCalls extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -180,6 +184,7 @@ class NumberCalls extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 NumberCalls.$class = Class.$createForClass(
     $Util.$generateId('NumberCalls'),

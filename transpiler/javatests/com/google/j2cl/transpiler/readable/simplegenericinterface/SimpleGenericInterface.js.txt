@@ -40,6 +40,7 @@ class SimpleGenericInterface {
    * interface.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance != null &&
@@ -52,6 +53,7 @@ class SimpleGenericInterface {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
@@ -62,6 +64,7 @@ class SimpleGenericInterface {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() {}
 }
@@ -74,6 +77,7 @@ SimpleGenericInterface.$markImplementor(
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 SimpleGenericInterface.$class = Class.$createForInterface(
     $Util.$generateId('SimpleGenericInterface'),

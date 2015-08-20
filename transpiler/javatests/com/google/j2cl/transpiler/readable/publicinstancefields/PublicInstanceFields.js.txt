@@ -43,6 +43,7 @@ class PublicInstanceFields extends Object {
    * A particular Java constructor as a factory method.
    * @return {!PublicInstanceFields}
    * @public
+   * @nocollapse
    */
   static $create() {
     PublicInstanceFields.$clinit();
@@ -65,6 +66,7 @@ class PublicInstanceFields extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof PublicInstanceFields;
@@ -75,6 +77,7 @@ class PublicInstanceFields extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, PublicInstanceFields);
@@ -83,6 +86,7 @@ class PublicInstanceFields extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -91,6 +95,7 @@ class PublicInstanceFields extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 PublicInstanceFields.$class = Class.$createForClass(
     $Util.$generateId('PublicInstanceFields'),

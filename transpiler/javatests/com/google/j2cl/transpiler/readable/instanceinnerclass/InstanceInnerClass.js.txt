@@ -52,6 +52,7 @@ class InstanceInnerClass extends Object {
    * A particular Java constructor as a factory method.
    * @return {!InstanceInnerClass}
    * @public
+   * @nocollapse
    */
   static $create() {
     InstanceInnerClass.$clinit();
@@ -74,6 +75,7 @@ class InstanceInnerClass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof InstanceInnerClass;
@@ -84,6 +86,7 @@ class InstanceInnerClass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InstanceInnerClass);
@@ -92,6 +95,7 @@ class InstanceInnerClass extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -100,6 +104,7 @@ class InstanceInnerClass extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 InstanceInnerClass.$class = Class.$createForClass(
     $Util.$generateId('InstanceInnerClass'),
@@ -159,6 +164,7 @@ class InstanceInnerClass$InnerClass extends Object {
    * @param {InstanceInnerClass} $outer_this
    * @return {!InstanceInnerClass$InnerClass}
    * @public
+   * @nocollapse
    */
   static $create($outer_this) {
     InstanceInnerClass$InnerClass.$clinit();
@@ -186,6 +192,7 @@ class InstanceInnerClass$InnerClass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof InstanceInnerClass$InnerClass;
@@ -196,6 +203,7 @@ class InstanceInnerClass$InnerClass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InstanceInnerClass$InnerClass);
@@ -204,6 +212,7 @@ class InstanceInnerClass$InnerClass extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -212,6 +221,7 @@ class InstanceInnerClass$InnerClass extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 InstanceInnerClass$InnerClass.$class = Class.$createForClass(
     $Util.$generateId('InnerClass'),

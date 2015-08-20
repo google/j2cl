@@ -95,6 +95,7 @@ class NestedGenericClass extends Object {
    * @template C_T
    * @return {!NestedGenericClass<C_T>}
    * @public
+   * @nocollapse
    */
   static $create() {
     NestedGenericClass.$clinit();
@@ -117,6 +118,7 @@ class NestedGenericClass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof NestedGenericClass;
@@ -127,6 +129,7 @@ class NestedGenericClass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, NestedGenericClass);
@@ -135,6 +138,7 @@ class NestedGenericClass extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -143,6 +147,7 @@ class NestedGenericClass extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 NestedGenericClass.$class = Class.$createForClass(
     $Util.$generateId('NestedGenericClass'),
@@ -198,6 +203,7 @@ class NestedGenericClass$A extends Object {
    * @param {NestedGenericClass<C_T>} $outer_this
    * @return {!NestedGenericClass$A<C_A_T, C_T>}
    * @public
+   * @nocollapse
    */
   static $create($outer_this) {
     NestedGenericClass$A.$clinit();
@@ -225,6 +231,7 @@ class NestedGenericClass$A extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof NestedGenericClass$A;
@@ -235,6 +242,7 @@ class NestedGenericClass$A extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, NestedGenericClass$A);
@@ -243,6 +251,7 @@ class NestedGenericClass$A extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -251,6 +260,7 @@ class NestedGenericClass$A extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 NestedGenericClass$A.$class = Class.$createForClass(
     $Util.$generateId('A'),
@@ -297,6 +307,7 @@ class NestedGenericClass$A$B extends Object {
    * @param {NestedGenericClass$A<C_A_T, C_T>} $outer_this
    * @return {!NestedGenericClass$A$B<C_A_B_T, C_A_T, C_T>}
    * @public
+   * @nocollapse
    */
   static $create($outer_this) {
     NestedGenericClass$A$B.$clinit();
@@ -324,6 +335,7 @@ class NestedGenericClass$A$B extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof NestedGenericClass$A$B;
@@ -334,6 +346,7 @@ class NestedGenericClass$A$B extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, NestedGenericClass$A$B);
@@ -342,6 +355,7 @@ class NestedGenericClass$A$B extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -350,6 +364,7 @@ class NestedGenericClass$A$B extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 NestedGenericClass$A$B.$class = Class.$createForClass(
     $Util.$generateId('B'),
@@ -409,6 +424,7 @@ class NestedGenericClass$C extends Object {
    * @param {NestedGenericClass<C_T>} $outer_this
    * @return {!NestedGenericClass$C<C_T>}
    * @public
+   * @nocollapse
    */
   static $create($outer_this) {
     NestedGenericClass$C.$clinit();
@@ -436,6 +452,7 @@ class NestedGenericClass$C extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof NestedGenericClass$C;
@@ -446,6 +463,7 @@ class NestedGenericClass$C extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, NestedGenericClass$C);
@@ -454,6 +472,7 @@ class NestedGenericClass$C extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -462,6 +481,7 @@ class NestedGenericClass$C extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 NestedGenericClass$C.$class = Class.$createForClass(
     $Util.$generateId('C'),
@@ -513,6 +533,7 @@ class NestedGenericClass$C$D extends Object {
    * @param {NestedGenericClass$C<C_T>} $outer_this
    * @return {!NestedGenericClass$C$D<C_T>}
    * @public
+   * @nocollapse
    */
   static $create($outer_this) {
     NestedGenericClass$C$D.$clinit();
@@ -540,6 +561,7 @@ class NestedGenericClass$C$D extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof NestedGenericClass$C$D;
@@ -550,6 +572,7 @@ class NestedGenericClass$C$D extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, NestedGenericClass$C$D);
@@ -558,6 +581,7 @@ class NestedGenericClass$C$D extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -566,6 +590,7 @@ class NestedGenericClass$C$D extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 NestedGenericClass$C$D.$class = Class.$createForClass(
     $Util.$generateId('D'),
@@ -612,6 +637,7 @@ class NestedGenericClass$1E extends Object {
    * @param {NestedGenericClass<C_T>} $outer_this
    * @return {!NestedGenericClass$1E<C_1E_S, M_S, C_T>}
    * @package
+   * @nocollapse
    */
   static $create($outer_this) {
     NestedGenericClass$1E.$clinit();
@@ -639,6 +665,7 @@ class NestedGenericClass$1E extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof NestedGenericClass$1E;
@@ -649,6 +676,7 @@ class NestedGenericClass$1E extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, NestedGenericClass$1E);
@@ -657,6 +685,7 @@ class NestedGenericClass$1E extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -665,6 +694,7 @@ class NestedGenericClass$1E extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 NestedGenericClass$1E.$class = Class.$createForClass(
     $Util.$generateId('1E'),
@@ -711,6 +741,7 @@ class NestedGenericClass$1F extends Object {
    * @param {NestedGenericClass<C_T>} $outer_this
    * @return {!NestedGenericClass$1F<M_S, C_T>}
    * @package
+   * @nocollapse
    */
   static $create($outer_this) {
     NestedGenericClass$1F.$clinit();
@@ -738,6 +769,7 @@ class NestedGenericClass$1F extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof NestedGenericClass$1F;
@@ -748,6 +780,7 @@ class NestedGenericClass$1F extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, NestedGenericClass$1F);
@@ -756,6 +789,7 @@ class NestedGenericClass$1F extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -764,6 +798,7 @@ class NestedGenericClass$1F extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 NestedGenericClass$1F.$class = Class.$createForClass(
     $Util.$generateId('1F'),
@@ -815,6 +850,7 @@ class NestedGenericClass$1G extends Object {
    * @param {NestedGenericClass<C_T>} $outer_this
    * @return {!NestedGenericClass$1G<C_1G_T, M_T, C_T>}
    * @package
+   * @nocollapse
    */
   static $create($outer_this) {
     NestedGenericClass$1G.$clinit();
@@ -842,6 +878,7 @@ class NestedGenericClass$1G extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof NestedGenericClass$1G;
@@ -852,6 +889,7 @@ class NestedGenericClass$1G extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, NestedGenericClass$1G);
@@ -860,6 +898,7 @@ class NestedGenericClass$1G extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -868,6 +907,7 @@ class NestedGenericClass$1G extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 NestedGenericClass$1G.$class = Class.$createForClass(
     $Util.$generateId('1G'),
@@ -909,6 +949,7 @@ class NestedGenericClass$1G$1H extends Object {
    * @param {NestedGenericClass$1G<C_1G_T, M_T, C_T>} $outer_this
    * @return {!NestedGenericClass$1G$1H<C_1G_1H_T, M_G_bar_T, C_1G_T, M_T, C_T>}
    * @package
+   * @nocollapse
    */
   static $create($outer_this) {
     NestedGenericClass$1G$1H.$clinit();
@@ -936,6 +977,7 @@ class NestedGenericClass$1G$1H extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof NestedGenericClass$1G$1H;
@@ -946,6 +988,7 @@ class NestedGenericClass$1G$1H extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, NestedGenericClass$1G$1H);
@@ -954,6 +997,7 @@ class NestedGenericClass$1G$1H extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -962,6 +1006,7 @@ class NestedGenericClass$1G$1H extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 NestedGenericClass$1G$1H.$class = Class.$createForClass(
     $Util.$generateId('1H'),

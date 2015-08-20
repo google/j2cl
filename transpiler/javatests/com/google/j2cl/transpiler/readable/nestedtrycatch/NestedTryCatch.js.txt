@@ -51,6 +51,7 @@ class NestedTryCatch extends Object {
    * A particular Java constructor as a factory method.
    * @return {!NestedTryCatch}
    * @public
+   * @nocollapse
    */
   static $create() {
     NestedTryCatch.$clinit();
@@ -73,6 +74,7 @@ class NestedTryCatch extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof NestedTryCatch; }
 
@@ -81,6 +83,7 @@ class NestedTryCatch extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, NestedTryCatch);
@@ -89,6 +92,7 @@ class NestedTryCatch extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -97,6 +101,7 @@ class NestedTryCatch extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 NestedTryCatch.$class = Class.$createForClass(
     $Util.$generateId('NestedTryCatch'),

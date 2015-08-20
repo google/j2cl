@@ -101,6 +101,7 @@ class CastToPrimitive extends Object {
    * A particular Java constructor as a factory method.
    * @return {!CastToPrimitive}
    * @public
+   * @nocollapse
    */
   static $create() {
     CastToPrimitive.$clinit();
@@ -123,6 +124,7 @@ class CastToPrimitive extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof CastToPrimitive; }
 
@@ -131,6 +133,7 @@ class CastToPrimitive extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, CastToPrimitive);
@@ -139,6 +142,7 @@ class CastToPrimitive extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -147,6 +151,7 @@ class CastToPrimitive extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 CastToPrimitive.$class = Class.$createForClass(
     $Util.$generateId('CastToPrimitive'),

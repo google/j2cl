@@ -30,6 +30,7 @@ class Varargs extends Object {
    * @param {Array<number>} args
    * @return {!Varargs}
    * @public
+   * @nocollapse
    */
   static $create__arrayOf_int(args) {
     Varargs.$clinit();
@@ -55,6 +56,7 @@ class Varargs extends Object {
    * A particular Java constructor as a factory method.
    * @return {!Varargs}
    * @public
+   * @nocollapse
    */
   static $create() {
     Varargs.$clinit();
@@ -96,6 +98,7 @@ class Varargs extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof Varargs; }
 
@@ -104,6 +107,7 @@ class Varargs extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Varargs);
@@ -112,6 +116,7 @@ class Varargs extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -120,6 +125,7 @@ class Varargs extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 Varargs.$class = Class.$createForClass(
     $Util.$generateId('Varargs'),
@@ -151,6 +157,7 @@ class Child extends Varargs {
    * A particular Java constructor as a factory method.
    * @return {!Child}
    * @public
+   * @nocollapse
    */
   static $create() {
     Child.$clinit();
@@ -173,6 +180,7 @@ class Child extends Varargs {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof Child; }
 
@@ -181,6 +189,7 @@ class Child extends Varargs {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Child);
@@ -189,6 +198,7 @@ class Child extends Varargs {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Varargs.$clinit(); }
 }
@@ -197,6 +207,7 @@ class Child extends Varargs {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 Child.$class = Class.$createForClass(
     $Util.$generateId('Child'),

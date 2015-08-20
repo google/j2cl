@@ -37,6 +37,7 @@ class SubChild extends Child {
    * A particular Java constructor as a factory method.
    * @return {!SubChild}
    * @public
+   * @nocollapse
    */
   static $create() {
     SubChild.$clinit();
@@ -59,6 +60,7 @@ class SubChild extends Child {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof SubChild; }
 
@@ -67,6 +69,7 @@ class SubChild extends Child {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SubChild);
@@ -75,6 +78,7 @@ class SubChild extends Child {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Child.$clinit(); }
 }
@@ -83,6 +87,7 @@ class SubChild extends Child {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 SubChild.$class = Class.$createForClass(
     $Util.$generateId('SubChild'),

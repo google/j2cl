@@ -27,6 +27,7 @@ class EmptyClass extends Object {
    * A particular Java constructor as a factory method.
    * @return {!EmptyClass}
    * @public
+   * @nocollapse
    */
   static $create() {
     EmptyClass.$clinit();
@@ -48,6 +49,7 @@ class EmptyClass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof EmptyClass; }
 
@@ -56,6 +58,7 @@ class EmptyClass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, EmptyClass);
@@ -64,6 +67,7 @@ class EmptyClass extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -72,6 +76,7 @@ class EmptyClass extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 EmptyClass.$class = Class.$createForClass(
     $Util.$generateId('EmptyClass'),

@@ -41,6 +41,7 @@ class Superclass extends Object {
    * @template C_T
    * @return {!Superclass<C_T>}
    * @package
+   * @nocollapse
    */
   static $create() {
     Superclass.$clinit();
@@ -63,6 +64,7 @@ class Superclass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof Superclass; }
 
@@ -71,6 +73,7 @@ class Superclass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Superclass);
@@ -79,6 +82,7 @@ class Superclass extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -87,6 +91,7 @@ class Superclass extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 Superclass.$class = Class.$createForClass(
     $Util.$generateId('Superclass'),
@@ -130,6 +135,7 @@ class Subclass extends Superclass {
    * A particular Java constructor as a factory method.
    * @return {!Subclass}
    * @package
+   * @nocollapse
    */
   static $create() {
     Subclass.$clinit();
@@ -163,6 +169,7 @@ class Subclass extends Superclass {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof Subclass; }
 
@@ -171,6 +178,7 @@ class Subclass extends Superclass {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Subclass);
@@ -179,6 +187,7 @@ class Subclass extends Superclass {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Superclass.$clinit(); }
 }
@@ -187,6 +196,7 @@ class Subclass extends Superclass {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 Subclass.$class = Class.$createForClass(
     $Util.$generateId('Subclass'),
@@ -224,6 +234,7 @@ class AnotherSubclass extends Superclass {
    * A particular Java constructor as a factory method.
    * @return {!AnotherSubclass}
    * @package
+   * @nocollapse
    */
   static $create() {
     AnotherSubclass.$clinit();
@@ -246,6 +257,7 @@ class AnotherSubclass extends Superclass {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof AnotherSubclass; }
 
@@ -254,6 +266,7 @@ class AnotherSubclass extends Superclass {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, AnotherSubclass);
@@ -262,6 +275,7 @@ class AnotherSubclass extends Superclass {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Superclass.$clinit(); }
 }
@@ -270,6 +284,7 @@ class AnotherSubclass extends Superclass {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 AnotherSubclass.$class = Class.$createForClass(
     $Util.$generateId('AnotherSubclass'),
@@ -317,6 +332,7 @@ class Callable {
    * interface.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance != null &&
@@ -329,6 +345,7 @@ class Callable {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
@@ -339,6 +356,7 @@ class Callable {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() {}
 }
@@ -350,6 +368,7 @@ Callable.$markImplementor(/** @type {Function} */ (Callable));
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 Callable.$class = Class.$createForInterface(
     $Util.$generateId('Callable'),
@@ -396,6 +415,7 @@ class Task extends Object {
    * @template C_T
    * @return {!Task<C_T>}
    * @package
+   * @nocollapse
    */
   static $create() {
     Task.$clinit();
@@ -418,6 +438,7 @@ class Task extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof Task; }
 
@@ -426,6 +447,7 @@ class Task extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Task);
@@ -434,6 +456,7 @@ class Task extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -445,6 +468,7 @@ Callable.$markImplementor(Task);
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 Task.$class = Class.$createForClass(
     $Util.$generateId('Task'),
@@ -492,6 +516,7 @@ class AnotherTask extends Object {
    * @template C_T
    * @return {!AnotherTask<C_T>}
    * @package
+   * @nocollapse
    */
   static $create() {
     AnotherTask.$clinit();
@@ -526,6 +551,7 @@ class AnotherTask extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof AnotherTask; }
 
@@ -534,6 +560,7 @@ class AnotherTask extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, AnotherTask);
@@ -542,6 +569,7 @@ class AnotherTask extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -553,6 +581,7 @@ Callable.$markImplementor(AnotherTask);
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 AnotherTask.$class = Class.$createForClass(
     $Util.$generateId('AnotherTask'),
@@ -587,6 +616,7 @@ class SimpleBridgeMethods extends Object {
    * A particular Java constructor as a factory method.
    * @return {!SimpleBridgeMethods}
    * @public
+   * @nocollapse
    */
   static $create() {
     SimpleBridgeMethods.$clinit();
@@ -609,6 +639,7 @@ class SimpleBridgeMethods extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof SimpleBridgeMethods;
@@ -619,6 +650,7 @@ class SimpleBridgeMethods extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SimpleBridgeMethods);
@@ -627,6 +659,7 @@ class SimpleBridgeMethods extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -635,6 +668,7 @@ class SimpleBridgeMethods extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 SimpleBridgeMethods.$class = Class.$createForClass(
     $Util.$generateId('SimpleBridgeMethods'),

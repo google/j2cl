@@ -37,6 +37,7 @@ class GenericConstructor extends Object {
    * @param {C_T} t
    * @return {!GenericConstructor<C_T>}
    * @public
+   * @nocollapse
    */
   static $create__java_lang_Object__java_lang_Object(s, t) {
     GenericConstructor.$clinit();
@@ -67,6 +68,7 @@ class GenericConstructor extends Object {
    * @param {M_T} t
    * @return {!GenericConstructor<C_T>}
    * @public
+   * @nocollapse
    */
   static $create__java_lang_Object(t) {
     GenericConstructor.$clinit();
@@ -105,6 +107,7 @@ class GenericConstructor extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof GenericConstructor;
@@ -115,6 +118,7 @@ class GenericConstructor extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, GenericConstructor);
@@ -123,6 +127,7 @@ class GenericConstructor extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -131,6 +136,7 @@ class GenericConstructor extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 GenericConstructor.$class = Class.$createForClass(
     $Util.$generateId('GenericConstructor'),

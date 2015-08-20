@@ -79,6 +79,7 @@ class $className $extendsClause {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof $className; }
 
@@ -87,6 +88,7 @@ class $className $extendsClause {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return ${utilAlias}.$canCastClass(classConstructor, $className);
@@ -110,6 +112,7 @@ ${statementSourceGenerator.toSource($superInterfaceTypeDescriptor)}.$markImpleme
 #set ($classAlias = ${statementSourceGenerator.toSource($javaLangClassTypeDecriptor)} )
 /**
  * @public {${classAlias}}
+ * @nocollapse
  */
 #if (${classType.isEnum()})
 $className.$class = $classAlias.$createForEnum(

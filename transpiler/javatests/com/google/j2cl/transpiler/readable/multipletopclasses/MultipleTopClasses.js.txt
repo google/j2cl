@@ -28,6 +28,7 @@ class AnotherClass extends Object {
    * A particular Java constructor as a factory method.
    * @return {!AnotherClass}
    * @package
+   * @nocollapse
    */
   static $create() {
     AnotherClass.$clinit();
@@ -50,6 +51,7 @@ class AnotherClass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof AnotherClass; }
 
@@ -58,6 +60,7 @@ class AnotherClass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, AnotherClass);
@@ -66,6 +69,7 @@ class AnotherClass extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -74,6 +78,7 @@ class AnotherClass extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 AnotherClass.$class = Class.$createForClass(
     $Util.$generateId('AnotherClass'),
@@ -108,6 +113,7 @@ class MultipleTopClasses extends AnotherClass {
    * A particular Java constructor as a factory method.
    * @return {!MultipleTopClasses}
    * @public
+   * @nocollapse
    */
   static $create() {
     MultipleTopClasses.$clinit();
@@ -130,6 +136,7 @@ class MultipleTopClasses extends AnotherClass {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof MultipleTopClasses;
@@ -140,6 +147,7 @@ class MultipleTopClasses extends AnotherClass {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, MultipleTopClasses);
@@ -148,6 +156,7 @@ class MultipleTopClasses extends AnotherClass {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { AnotherClass.$clinit(); }
 }
@@ -156,6 +165,7 @@ class MultipleTopClasses extends AnotherClass {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 MultipleTopClasses.$class = Class.$createForClass(
     $Util.$generateId('MultipleTopClasses'),

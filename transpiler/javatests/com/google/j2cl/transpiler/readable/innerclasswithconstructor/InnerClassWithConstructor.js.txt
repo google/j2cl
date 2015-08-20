@@ -53,6 +53,7 @@ class InnerClassWithConstructor extends Object {
    * A particular Java constructor as a factory method.
    * @return {!InnerClassWithConstructor}
    * @public
+   * @nocollapse
    */
   static $create() {
     InnerClassWithConstructor.$clinit();
@@ -75,6 +76,7 @@ class InnerClassWithConstructor extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof InnerClassWithConstructor;
@@ -85,6 +87,7 @@ class InnerClassWithConstructor extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InnerClassWithConstructor);
@@ -93,6 +96,7 @@ class InnerClassWithConstructor extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -101,6 +105,7 @@ class InnerClassWithConstructor extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 InnerClassWithConstructor.$class = Class.$createForClass(
     $Util.$generateId('InnerClassWithConstructor'),
@@ -149,6 +154,7 @@ class InnerClassWithConstructor$InnerClass extends Object {
    * @param {InnerClassWithConstructor} $outer_this
    * @return {!InnerClassWithConstructor$InnerClass}
    * @public
+   * @nocollapse
    */
   static $create__int(b, $outer_this) {
     InnerClassWithConstructor$InnerClass.$clinit();
@@ -182,6 +188,7 @@ class InnerClassWithConstructor$InnerClass extends Object {
    * @param {InnerClassWithConstructor} $outer_this
    * @return {!InnerClassWithConstructor$InnerClass}
    * @public
+   * @nocollapse
    */
   static $create($outer_this) {
     InnerClassWithConstructor$InnerClass.$clinit();
@@ -209,6 +216,7 @@ class InnerClassWithConstructor$InnerClass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof InnerClassWithConstructor$InnerClass;
@@ -219,6 +227,7 @@ class InnerClassWithConstructor$InnerClass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor,
@@ -228,6 +237,7 @@ class InnerClassWithConstructor$InnerClass extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -236,6 +246,7 @@ class InnerClassWithConstructor$InnerClass extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 InnerClassWithConstructor$InnerClass.$class = Class.$createForClass(
     $Util.$generateId('InnerClass'),

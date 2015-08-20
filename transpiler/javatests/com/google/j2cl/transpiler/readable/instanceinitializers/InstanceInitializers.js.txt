@@ -40,6 +40,7 @@ class InstanceInitializers extends Object {
    * A particular Java constructor as a factory method.
    * @return {!InstanceInitializers}
    * @public
+   * @nocollapse
    */
   static $create() {
     InstanceInitializers.$clinit();
@@ -62,6 +63,7 @@ class InstanceInitializers extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof InstanceInitializers;
@@ -72,6 +74,7 @@ class InstanceInitializers extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InstanceInitializers);
@@ -80,6 +83,7 @@ class InstanceInitializers extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -88,6 +92,7 @@ class InstanceInitializers extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 InstanceInitializers.$class = Class.$createForClass(
     $Util.$generateId('InstanceInitializers'),

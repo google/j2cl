@@ -43,6 +43,7 @@ class MultipleConstructors extends Object {
    * @param {number} id
    * @return {!MultipleConstructors}
    * @public
+   * @nocollapse
    */
   static $create__int(id) {
     MultipleConstructors.$clinit();
@@ -73,6 +74,7 @@ class MultipleConstructors extends Object {
    * @param {boolean} flag
    * @return {!MultipleConstructors}
    * @public
+   * @nocollapse
    */
   static $create__boolean(flag) {
     MultipleConstructors.$clinit();
@@ -104,6 +106,7 @@ class MultipleConstructors extends Object {
    * @param {boolean} flag
    * @return {!MultipleConstructors}
    * @public
+   * @nocollapse
    */
   static $create__int__boolean(id, flag) {
     MultipleConstructors.$clinit();
@@ -134,6 +137,7 @@ class MultipleConstructors extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof MultipleConstructors;
@@ -144,6 +148,7 @@ class MultipleConstructors extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, MultipleConstructors);
@@ -152,6 +157,7 @@ class MultipleConstructors extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -160,6 +166,7 @@ class MultipleConstructors extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 MultipleConstructors.$class = Class.$createForClass(
     $Util.$generateId('MultipleConstructors'),

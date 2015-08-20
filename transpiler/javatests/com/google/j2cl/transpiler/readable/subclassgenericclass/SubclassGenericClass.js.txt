@@ -32,6 +32,7 @@ class GenericClass extends Object {
    * @template C_T
    * @return {!GenericClass<C_T>}
    * @package
+   * @nocollapse
    */
   static $create() {
     GenericClass.$clinit();
@@ -54,6 +55,7 @@ class GenericClass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof GenericClass; }
 
@@ -62,6 +64,7 @@ class GenericClass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, GenericClass);
@@ -70,6 +73,7 @@ class GenericClass extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -78,6 +82,7 @@ class GenericClass extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 GenericClass.$class = Class.$createForClass(
     $Util.$generateId('GenericClass'),
@@ -117,6 +122,7 @@ class GenericSubclassGenericClass extends GenericClass {
    * @template C_T
    * @return {!GenericSubclassGenericClass<C_T>}
    * @package
+   * @nocollapse
    */
   static $create() {
     GenericSubclassGenericClass.$clinit();
@@ -139,6 +145,7 @@ class GenericSubclassGenericClass extends GenericClass {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof GenericSubclassGenericClass;
@@ -149,6 +156,7 @@ class GenericSubclassGenericClass extends GenericClass {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, GenericSubclassGenericClass);
@@ -157,6 +165,7 @@ class GenericSubclassGenericClass extends GenericClass {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { GenericClass.$clinit(); }
 }
@@ -165,6 +174,7 @@ class GenericSubclassGenericClass extends GenericClass {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 GenericSubclassGenericClass.$class = Class.$createForClass(
     $Util.$generateId('GenericSubclassGenericClass'),
@@ -202,6 +212,7 @@ class SubclassGenericClass extends GenericClass {
    * A particular Java constructor as a factory method.
    * @return {!SubclassGenericClass}
    * @public
+   * @nocollapse
    */
   static $create() {
     SubclassGenericClass.$clinit();
@@ -224,6 +235,7 @@ class SubclassGenericClass extends GenericClass {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof SubclassGenericClass;
@@ -234,6 +246,7 @@ class SubclassGenericClass extends GenericClass {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SubclassGenericClass);
@@ -242,6 +255,7 @@ class SubclassGenericClass extends GenericClass {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { GenericClass.$clinit(); }
 }
@@ -250,6 +264,7 @@ class SubclassGenericClass extends GenericClass {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 SubclassGenericClass.$class = Class.$createForClass(
     $Util.$generateId('SubclassGenericClass'),

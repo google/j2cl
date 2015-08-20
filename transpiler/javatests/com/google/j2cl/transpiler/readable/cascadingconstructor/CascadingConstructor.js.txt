@@ -43,6 +43,7 @@ class CascadingConstructor extends Object {
    * @param {number} b
    * @return {!CascadingConstructor}
    * @private
+   * @nocollapse
    */
   static $create__int__int(a, b) {
     CascadingConstructor.$clinit();
@@ -74,6 +75,7 @@ class CascadingConstructor extends Object {
    * @param {number} a
    * @return {!CascadingConstructor}
    * @public
+   * @nocollapse
    */
   static $create__int(a) {
     CascadingConstructor.$clinit();
@@ -99,6 +101,7 @@ class CascadingConstructor extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof CascadingConstructor;
@@ -109,6 +112,7 @@ class CascadingConstructor extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, CascadingConstructor);
@@ -117,6 +121,7 @@ class CascadingConstructor extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
+   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 }
@@ -125,6 +130,7 @@ class CascadingConstructor extends Object {
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 CascadingConstructor.$class = Class.$createForClass(
     $Util.$generateId('CascadingConstructor'),

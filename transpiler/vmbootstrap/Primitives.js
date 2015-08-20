@@ -25,6 +25,7 @@ class $byte {
    *
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return typeof instance === 'number'; }
 
@@ -34,6 +35,7 @@ class $byte {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $byte;
@@ -43,12 +45,14 @@ class $byte {
 
 /**
  * @public {number}
+ * @nocollapse
  */
 $byte.$initialArrayValue = 0;
 
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 $byte.$class = Class.$createForPrimitive('byte');
 
@@ -77,6 +81,7 @@ class $short {
    *
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return typeof instance === 'number'; }
 
@@ -86,6 +91,7 @@ class $short {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $short;
@@ -95,12 +101,14 @@ class $short {
 
 /**
  * @public {number}
+ * @nocollapse
  */
 $short.$initialArrayValue = 0;
 
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 $short.$class = Class.$createForPrimitive('short');
 
@@ -129,6 +137,7 @@ class $int {
    *
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return typeof instance === 'number'; }
 
@@ -138,6 +147,7 @@ class $int {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $int;
@@ -147,6 +157,7 @@ class $int {
 
 /**
  * @public {number}
+ * @nocollapse
  */
 $int.$initialArrayValue = 0;
 
@@ -165,6 +176,7 @@ $int.MIN_VALUE = -0x80000000;
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 $int.$class = Class.$createForPrimitive('int');
 
@@ -193,6 +205,7 @@ class $long {
    *
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return typeof instance === 'number'; }
 
@@ -202,6 +215,7 @@ class $long {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $long;
@@ -211,12 +225,14 @@ class $long {
 
 /**
  * @public {number}
+ * @nocollapse
  */
 $long.$initialArrayValue = 0;
 
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 $long.$class = Class.$createForPrimitive('long');
 
@@ -245,6 +261,7 @@ class $float {
    *
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return typeof instance === 'number'; }
 
@@ -254,6 +271,7 @@ class $float {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $float;
@@ -263,12 +281,14 @@ class $float {
 
 /**
  * @public {number}
+ * @nocollapse
  */
 $float.$initialArrayValue = 0;
 
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 $float.$class = Class.$createForPrimitive('float');
 
@@ -297,6 +317,7 @@ class $double {
    *
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return typeof instance === 'number'; }
 
@@ -306,6 +327,7 @@ class $double {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $double;
@@ -315,12 +337,14 @@ class $double {
 
 /**
  * @public {number}
+ * @nocollapse
  */
 $double.$initialArrayValue = 0;
 
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 $double.$class = Class.$createForPrimitive('double');
 
@@ -349,6 +373,7 @@ class $char {
    *
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return typeof instance === 'number'; }
 
@@ -358,6 +383,7 @@ class $char {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $char;
@@ -367,12 +393,14 @@ class $char {
 
 /**
  * @public {number}
+ * @nocollapse
  */
 $char.$initialArrayValue = 0;
 
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 $char.$class = Class.$createForPrimitive('char');
 
@@ -401,6 +429,7 @@ class $boolean {
    *
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return typeof instance === 'boolean'; }
 
@@ -410,6 +439,7 @@ class $boolean {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $boolean;
@@ -419,12 +449,14 @@ class $boolean {
 
 /**
  * @public {boolean}
+ * @nocollapse
  */
 $boolean.$initialArrayValue = false;
 
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 $boolean.$class = Class.$createForPrimitive('boolean');
 
@@ -452,6 +484,7 @@ class $void {
    *
    * @return {boolean}
    * @public
+   * @nocollapse
    */
   static $isInstance(instance) { return false; }
 
@@ -461,6 +494,7 @@ class $void {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
+   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $void;
@@ -470,12 +504,14 @@ class $void {
 
 /**
  * @public {boolean}
+ * @nocollapse
  */
 $void.$initialArrayValue = false;
 
 
 /**
  * @public {Class}
+ * @nocollapse
  */
 $void.$class = Class.$createForPrimitive('void');
 
