@@ -43,6 +43,7 @@ are copyright and licensed as follows:
 - classlocalvarcollision
 - continuewithlabel
 - enum special functions (values, valueOf, etc).
+- enumoptimization
 - equals
 - finalfield (readable JsDoc and no static setter)
 - implicitconversions (method call params and return expression)
@@ -59,6 +60,7 @@ are copyright and licensed as follows:
 - objectmethods
 - packageclasscollision
 - primitiveoverflow
+- private static clinit optimization
 - shorterfieldmangling (for fields in final classes, like enums)
 - simpleenum
 - simplelambda
