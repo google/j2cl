@@ -20,6 +20,8 @@ JAVA_DIR = "third_party/java_src/j2cl/transpiler/javatests"
 EXAMPLES_DIR = JAVA_DIR + "/com/google/j2cl/transpiler/readable/"
 READABLE_TARGET_PATTERN = ("third_party/java_src/j2cl/transpiler/javatests/"
                            "com/google/j2cl/transpiler/readable/...")
+JAVA8_BOOT_CLASS_PATH = ("--javac_bootclasspath="
+                         "//third_party/java/jdk:langtools8-bootclasspath")
 SUCCESS_CODE = 0
 
 
@@ -83,7 +85,8 @@ def get_transpiled_js_file_paths():
 
 def blaze_build_all():
   """Blaze build everything in 1-go, for speed."""
-  return run_cmd_get_output(["blaze", "build", EXAMPLES_DIR + "..."])
+  return run_cmd_get_output(["blaze", "build", EXAMPLES_DIR + "...",
+                             JAVA8_BOOT_CLASS_PATH])
 
 
 def replace_transpiled_js():
@@ -103,7 +106,7 @@ def gather_closure_warnings():
   run_cmd_get_output(["rm", "-fr"] + get_js_binary_file_paths())
 
   build_logs = run_cmd_get_output(
-      ["blaze", "build", EXAMPLES_DIR + "..."],
+      ["blaze", "build", EXAMPLES_DIR + "...", JAVA8_BOOT_CLASS_PATH],
       include_stderr=True)
   build_logs = build_logs.split("____From Compiling JavaScript ")[1:]
   build_logs = filter(None, build_logs)

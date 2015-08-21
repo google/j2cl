@@ -97,6 +97,7 @@ import org.eclipse.jdt.core.dom.Initializer;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
+import org.eclipse.jdt.core.dom.VariableDeclaration;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -608,6 +609,8 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.InfixExpression) expression);
         case ASTNode.INSTANCEOF_EXPRESSION:
           return convert((org.eclipse.jdt.core.dom.InstanceofExpression) expression);
+        case ASTNode.LAMBDA_EXPRESSION:
+          return convert((org.eclipse.jdt.core.dom.LambdaExpression) expression);
         case ASTNode.METHOD_INVOCATION:
           return convert((org.eclipse.jdt.core.dom.MethodInvocation) expression);
         case ASTNode.NULL_LITERAL:
@@ -808,6 +811,118 @@ public class CompilationUnitBuilder {
       return new InstanceOfExpression(convert(expression.getLeftOperand()), testTypeDescriptor);
     }
 
+    private Expression convert(org.eclipse.jdt.core.dom.LambdaExpression expression) {
+      /**
+       * Lambda expression is converted to an inner class:
+       *
+       * class Enclosing$lambda$0 implements I {
+       *   Enclosing$lambda$0(captures) {// initialize captures}
+       *   private T lambda$0(args) {...lambda_expression_with_captures ... }
+       *   public T samMethod0(args) { return this.lambda$0(args); }
+       * }
+       *
+       * And replaces the lambda with new Enclosing$lambda$0(captures).
+       */
+      // Construct a class for the lambda expression.
+      JavaType lambdaType =
+          JdtUtils.createLambdaJavaType(
+              expression.resolveTypeBinding(),
+              expression.resolveMethodBinding(),
+              (RegularTypeDescriptor) currentType.getDescriptor(),
+              compilationUnitNameLocator);
+      pushType(lambdaType);
+      TypeDescriptor lambdaTypeDescriptor = lambdaType.getDescriptor();
+
+      // Construct lambda method and add it to lambda inner class.
+      Method lambdaMethod = createLambdaMethod(expression, lambdaType.getDescriptor());
+      lambdaType.addMethod(lambdaMethod);
+
+      // Construct and add SAM method that delegates to the lambda method.
+      Method samMethod =
+          JdtUtils.createSamMethod(
+              expression.resolveTypeBinding(),
+              lambdaMethod.getDescriptor(),
+              compilationUnitNameLocator);
+      lambdaType.addMethod(samMethod);
+
+      // Add fields for captured local variables.
+      for (Variable capturedVariable : capturesByTypeDescriptor.get(lambdaTypeDescriptor)) {
+        FieldDescriptor fieldDescriptor =
+            ASTUtils.getFieldDescriptorForCapture(lambdaTypeDescriptor, capturedVariable);
+        lambdaType.addField(new Field(fieldDescriptor, null, capturedVariable)); // captured field.
+      }
+      // Add field for enclosing instance.
+      lambdaType.addField(
+          new Field(
+              ASTUtils.getFieldDescriptorForEnclosingInstance(
+                  lambdaTypeDescriptor, lambdaType.getEnclosingTypeDescriptor()),
+              null));
+
+      // Synthesize default constructor
+      lambdaType.addMethod(
+          synthesizeDefaultConstructor(
+              lambdaType.getDescriptor(),
+              jdtCompilationUnit.getAST().resolveWellKnownType("java.lang.Object"),
+              Visibility.PRIVATE));
+
+      // Add lambda class to compilation unit.
+      j2clCompilationUnit.addType(lambdaType);
+      popType();
+
+      // Replace the lambda with new LambdaClass()
+      Preconditions.checkArgument(lambdaType.getConstructors().size() == 1);
+      MethodDescriptor constructorMethodDescriptor =
+          lambdaType.getConstructors().get(0).getDescriptor();
+      return new NewInstance(null, constructorMethodDescriptor);
+    }
+
+    private Method createLambdaMethod(
+        org.eclipse.jdt.core.dom.LambdaExpression expression,
+        TypeDescriptor enclosingClassTypeDescriptor) {
+      List<Variable> parameters = new ArrayList<>();
+      for (Object parameter : expression.parameters()) {
+        parameters.add(convert((VariableDeclaration) parameter));
+      }
+
+      // the lambda expression body, which can be either a Block or an Expression.
+      ASTNode lambdaBody = expression.getBody();
+      Block body;
+      if (lambdaBody.getNodeType() == ASTNode.BLOCK) {
+        body = convert((org.eclipse.jdt.core.dom.Block) lambdaBody);
+      } else {
+        Preconditions.checkArgument(lambdaBody instanceof org.eclipse.jdt.core.dom.Expression);
+        Statement returnStatement =
+            new ReturnStatement(convert((org.eclipse.jdt.core.dom.Expression) lambdaBody));
+        body = new Block(Arrays.asList(returnStatement));
+      }
+
+      IMethodBinding methodBinding = expression.resolveMethodBinding();
+      String methodName = methodBinding.getName();
+      TypeDescriptor returnTypeDescriptor =
+          JdtUtils.createTypeDescriptor(methodBinding.getReturnType(), compilationUnitNameLocator);
+
+      // generate parameters type descriptors.
+      List<TypeDescriptor> parameterTypeDescriptors =
+          Lists.transform(
+              Arrays.asList(methodBinding.getParameterTypes()),
+              new Function<ITypeBinding, TypeDescriptor>() {
+                @Override
+                public TypeDescriptor apply(ITypeBinding typeBinding) {
+                  return JdtUtils.createTypeDescriptor(typeBinding, compilationUnitNameLocator);
+                }
+              });
+
+      MethodDescriptor methodDescriptor =
+          MethodDescriptor.createRaw(
+              false, // isStatic
+              Visibility.PRIVATE,
+              enclosingClassTypeDescriptor,
+              methodName,
+              parameterTypeDescriptors,
+              returnTypeDescriptor);
+      return new Method(methodDescriptor, parameters, body, false);
+    }
+
     private AssertStatement convert(org.eclipse.jdt.core.dom.AssertStatement statement) {
       Expression message = statement.getMessage() == null ? null : convert(statement.getMessage());
       Expression expression = convert(statement.getExpression());
@@ -861,6 +976,16 @@ public class CompilationUnitBuilder {
       IVariableBinding variableBinding = expression.resolveFieldBinding();
       FieldDescriptor fieldDescriptor =
           JdtUtils.createFieldDescriptor(variableBinding, compilationUnitNameLocator);
+      // If the field is referenced like a current type field with explicit 'this' but is part of
+      // some other type. (It may happen in lambda, where 'this' refers to the enclosing instance).
+      if (qualifier instanceof ThisReference
+          && !fieldDescriptor
+              .getEnclosingClassTypeDescriptor()
+              .equals(currentType.getDescriptor())) {
+        return new FieldAccess(
+            convertOuterClassReference(fieldDescriptor.getEnclosingClassTypeDescriptor()),
+            fieldDescriptor);
+      }
       return new FieldAccess(qualifier, fieldDescriptor);
     }
 
@@ -1054,6 +1179,13 @@ public class CompilationUnitBuilder {
      * provided binding.
      */
     private TypeDescriptor findEnclosingTypeDescriptor(IVariableBinding variableBinding) {
+      // The binding is for a local variable in a static or instance block. JDT does not allow for
+      // retrieving the enclosing class. Answer the question from information we've been gathering
+      // while processing the compilation unit.
+      JavaType javaType = enclosingTypeByVariable.get(variableByJdtBinding.get(variableBinding));
+      if (javaType != null) {
+        return javaType.getDescriptor();
+      }
       // The binding is a simple field and JDT provides direct knowledge of the declaring class.
       if (variableBinding.getDeclaringClass() != null) {
         return createTypeDescriptor(variableBinding.getDeclaringClass());
@@ -1062,13 +1194,6 @@ public class CompilationUnitBuilder {
       // the enclosing class.
       if (variableBinding.getDeclaringMethod() != null) {
         return createTypeDescriptor(variableBinding.getDeclaringMethod().getDeclaringClass());
-      }
-      // The binding is for a local variable in a static or instance block. JDT does not allow for
-      // retrieving the enclosing class. Answer the question from information we've been gathering
-      // while processing the compilation unit.
-      JavaType javaType = enclosingTypeByVariable.get(variableByJdtBinding.get(variableBinding));
-      if (javaType != null) {
-        return javaType.getDescriptor();
       }
 
       throw new RuntimeException(
@@ -1096,6 +1221,7 @@ public class CompilationUnitBuilder {
         } else {
           // It refers to a local variable or parameter in a method or block.
           Variable variable = variableByJdtBinding.get(variableBinding);
+          Preconditions.checkNotNull(variable);
           // The innermost type in which this variable is declared.
           TypeDescriptor enclosingTypeDescriptor = findEnclosingTypeDescriptor(variableBinding);
           TypeDescriptor currentTypeDescriptor = currentType.getDescriptor();
@@ -1175,6 +1301,7 @@ public class CompilationUnitBuilder {
               : createTypeDescriptor(node.getType().resolveBinding());
       Variable variable = new Variable(name, typeDescriptor, false, false);
       variableByJdtBinding.put(node.resolveBinding(), variable);
+      recordEnclosingType(variable, currentType);
       return variable;
     }
 
@@ -1250,6 +1377,7 @@ public class CompilationUnitBuilder {
       MethodDescriptor forArrayMethodDescriptor =
           MethodDescriptor.createRaw(
               true,
+              Visibility.PUBLIC,
               javaLangClassTypeDescriptor,
               "$forArray",
               Lists.newArrayList(TypeDescriptors.INT_TYPE_DESCRIPTOR),
@@ -1297,6 +1425,15 @@ public class CompilationUnitBuilder {
               : convert(variableDeclarationFragment.getInitializer());
       variableByJdtBinding.put(variableBinding, variable);
       return new VariableDeclarationFragment(variable, initializer);
+    }
+
+    private Variable convert(org.eclipse.jdt.core.dom.VariableDeclaration variableDeclaration) {
+      if (variableDeclaration instanceof org.eclipse.jdt.core.dom.SingleVariableDeclaration) {
+        return convert((org.eclipse.jdt.core.dom.SingleVariableDeclaration) variableDeclaration);
+      } else {
+        return convert((org.eclipse.jdt.core.dom.VariableDeclarationFragment) variableDeclaration)
+            .getVariable();
+      }
     }
 
     /**

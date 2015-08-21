@@ -1,0 +1,317 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/lambdawithgenerics/LambdaWithGenerics.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenericsModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Error = goog.require('gen.java.lang.ErrorModule').Error;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+/**
+ * @interface
+ * @template C_T
+ */
+class MyInterface {
+  /**
+   * @param {C_T} i
+   * @return {C_T}
+   * @public
+   */
+  m_foo__java_lang_Object(i) {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+           instance
+               .$implements__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+           classConstructor.prototype
+               .$implements__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {}
+}
+;
+
+
+MyInterface.$markImplementor(/** @type {Function} */ (MyInterface));
+
+
+/**
+ * @public {Class}
+ * @nocollapse
+ */
+MyInterface.$class = Class.$createForInterface(
+    $Util.$generateId('MyInterface'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface'),
+    null,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface'));
+
+/**
+ * Export class.
+ */
+exports.MyInterface = MyInterface;
+
+
+
+class LambdaWithGenerics extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics() {
+  }
+
+  /**
+   * @param {MyInterface<Error>} intf
+   * @param {Error} e
+   * @return {Error}
+   * @public
+   */
+  m_test__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Error(
+      intf, e) {
+    return intf.m_foo__java_lang_Object(e);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testLambdaNoCapture() {
+    this.m_test__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Error(
+        LambdaWithGenerics$lambda$0.$create(this), Error.$create());
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!LambdaWithGenerics}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    LambdaWithGenerics.$clinit();
+    var instance = new LambdaWithGenerics;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof LambdaWithGenerics;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, LambdaWithGenerics);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ * @nocollapse
+ */
+LambdaWithGenerics.$class = Class.$createForClass(
+    $Util.$generateId('LambdaWithGenerics'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics'));
+
+/**
+ * Export class.
+ */
+exports.LambdaWithGenerics = LambdaWithGenerics;
+
+
+
+/**
+ * @implements {MyInterface<Error>}
+ */
+class LambdaWithGenerics$lambda$0 extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {LambdaWithGenerics}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$lambda$0 =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$lambda$0() {
+  }
+
+  /**
+   * @param {Error} i
+   * @return {Error}
+   * @private
+   */
+  lambda$0(i) { return i; }
+
+  /**
+   * @override
+   * @param {Error} arg0
+   * @return {Error}
+   * @public
+   */
+  m_foo__java_lang_Object(arg0) { return this.lambda$0(arg0); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {LambdaWithGenerics} $outer_this
+   * @return {!LambdaWithGenerics$lambda$0}
+   * @private
+   * @nocollapse
+   */
+  static $create($outer_this) {
+    LambdaWithGenerics$lambda$0.$clinit();
+    var instance = new LambdaWithGenerics$lambda$0;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$lambda$0(
+            $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {LambdaWithGenerics} $outer_this
+   * @private
+   */
+  $ctor__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$lambda$0(
+      $outer_this) {
+    this.$ctor__java_lang_Object();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$lambda$0 =
+        $outer_this;
+    this.$init__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$lambda$0();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof LambdaWithGenerics$lambda$0;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, LambdaWithGenerics$lambda$0);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+MyInterface.$markImplementor(LambdaWithGenerics$lambda$0);
+
+
+/**
+ * @public {Class}
+ * @nocollapse
+ */
+LambdaWithGenerics$lambda$0.$class = Class.$createForClass(
+    $Util.$generateId('lambda$0'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$lambda$0'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.lambda.0'));

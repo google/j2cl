@@ -105,6 +105,7 @@ public abstract class MethodDescriptor extends Node implements Member {
    */
   public static MethodDescriptor createRaw(
       boolean isStatic,
+      Visibility visibility,
       TypeDescriptor enclosingClassTypeDescriptor,
       String methodName,
       List<TypeDescriptor> parameterTypeDescriptors,
@@ -112,7 +113,7 @@ public abstract class MethodDescriptor extends Node implements Member {
     return new AutoValue_MethodDescriptor(
         isStatic,
         true,
-        Visibility.PUBLIC,
+        visibility,
         enclosingClassTypeDescriptor,
         methodName,
         false,

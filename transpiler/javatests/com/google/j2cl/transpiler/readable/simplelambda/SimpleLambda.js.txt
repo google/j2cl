@@ -1,0 +1,847 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/simplelambda/SimpleLambda.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.simplelambda.SimpleLambdaModule');
+
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+
+
+/**
+ * @interface
+ */
+class MyInterface {
+  /**
+   * @param {number} i
+   * @return {number}
+   * @public
+   */
+  m_foo__int(i) {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_simplelambda_MyInterface =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+           instance
+               .$implements__com_google_j2cl_transpiler_readable_simplelambda_MyInterface;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+           classConstructor.prototype
+               .$implements__com_google_j2cl_transpiler_readable_simplelambda_MyInterface;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {}
+}
+;
+
+
+MyInterface.$markImplementor(/** @type {Function} */ (MyInterface));
+
+
+/**
+ * @public {Class}
+ * @nocollapse
+ */
+MyInterface.$class = Class.$createForInterface(
+    $Util.$generateId('MyInterface'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplelambda.MyInterface'),
+    null, $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplelambda.MyInterface'));
+
+/**
+ * Export class.
+ */
+exports.MyInterface = MyInterface;
+
+
+
+class SimpleLambda extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {number}
+     */
+    this.f_field__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda =
+        0;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda() {
+    this.f_field__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda =
+        100;
+  }
+
+  /**
+   * @param {MyInterface} intf
+   * @param {number} n
+   * @return {number}
+   * @public
+   */
+  m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(
+      intf, n) {
+    return this.f_field__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda +
+           intf.m_foo__int(n);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testLambdaNoCapture() {
+    let result =
+        this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(
+            SimpleLambda$lambda$0.$create(this), 10);
+    result =
+        this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(
+            SimpleLambda$lambda$1.$create(this), 10);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testLambdaCaptureField() {
+    let result =
+        this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(
+            SimpleLambda$lambda$2.$create(this), 10);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testLambdaCaptureLocal() {
+    let x = 1;
+    let result =
+        this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(
+            SimpleLambda$lambda$3.$create(x, this), 10);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testLambdaCaptureFieldAndLocal() {
+    let x = 1;
+    let result =
+        this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(
+            SimpleLambda$lambda$4.$create(x, this), 10);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!SimpleLambda}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    SimpleLambda.$clinit();
+    var instance = new SimpleLambda;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof SimpleLambda; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SimpleLambda);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ * @nocollapse
+ */
+SimpleLambda.$class = Class.$createForClass(
+    $Util.$generateId('SimpleLambda'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda'));
+
+/**
+ * Export class.
+ */
+exports.SimpleLambda = SimpleLambda;
+
+
+
+/**
+ * @implements {MyInterface}
+ */
+class SimpleLambda$lambda$0 extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {SimpleLambda}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$0 =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$0() {
+  }
+
+  /**
+   * @param {number} i
+   * @return {number}
+   * @private
+   */
+  lambda$0(i) { return i + 1; }
+
+  /**
+   * @override
+   * @param {number} arg0
+   * @return {number}
+   * @public
+   */
+  m_foo__int(arg0) { return this.lambda$0(arg0); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {SimpleLambda} $outer_this
+   * @return {!SimpleLambda$lambda$0}
+   * @private
+   * @nocollapse
+   */
+  static $create($outer_this) {
+    SimpleLambda$lambda$0.$clinit();
+    var instance = new SimpleLambda$lambda$0;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$0(
+            $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {SimpleLambda} $outer_this
+   * @private
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$0(
+      $outer_this) {
+    this.$ctor__java_lang_Object();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$0 =
+        $outer_this;
+    this.$init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$0();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof SimpleLambda$lambda$0;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SimpleLambda$lambda$0);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+MyInterface.$markImplementor(SimpleLambda$lambda$0);
+
+
+/**
+ * @public {Class}
+ * @nocollapse
+ */
+SimpleLambda$lambda$0.$class = Class.$createForClass(
+    $Util.$generateId('lambda$0'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$lambda$0'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.lambda.0'));
+
+
+
+/**
+ * @implements {MyInterface}
+ */
+class SimpleLambda$lambda$1 extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {SimpleLambda}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$1 =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$1() {
+  }
+
+  /**
+   * @param {number} i
+   * @return {number}
+   * @private
+   */
+  lambda$1(i) { return i + 2; }
+
+  /**
+   * @override
+   * @param {number} arg0
+   * @return {number}
+   * @public
+   */
+  m_foo__int(arg0) { return this.lambda$1(arg0); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {SimpleLambda} $outer_this
+   * @return {!SimpleLambda$lambda$1}
+   * @private
+   * @nocollapse
+   */
+  static $create($outer_this) {
+    SimpleLambda$lambda$1.$clinit();
+    var instance = new SimpleLambda$lambda$1;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$1(
+            $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {SimpleLambda} $outer_this
+   * @private
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$1(
+      $outer_this) {
+    this.$ctor__java_lang_Object();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$1 =
+        $outer_this;
+    this.$init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$1();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof SimpleLambda$lambda$1;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SimpleLambda$lambda$1);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+MyInterface.$markImplementor(SimpleLambda$lambda$1);
+
+
+/**
+ * @public {Class}
+ * @nocollapse
+ */
+SimpleLambda$lambda$1.$class = Class.$createForClass(
+    $Util.$generateId('lambda$1'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$lambda$1'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.lambda.1'));
+
+
+
+/**
+ * @implements {MyInterface}
+ */
+class SimpleLambda$lambda$2 extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {SimpleLambda}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$2 =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$2() {
+  }
+
+  /**
+   * @param {number} i
+   * @return {number}
+   * @private
+   */
+  lambda$2(i) {
+    return this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$2
+               .f_field__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda +
+           i + 1;
+  }
+
+  /**
+   * @override
+   * @param {number} arg0
+   * @return {number}
+   * @public
+   */
+  m_foo__int(arg0) { return this.lambda$2(arg0); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {SimpleLambda} $outer_this
+   * @return {!SimpleLambda$lambda$2}
+   * @private
+   * @nocollapse
+   */
+  static $create($outer_this) {
+    SimpleLambda$lambda$2.$clinit();
+    var instance = new SimpleLambda$lambda$2;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$2(
+            $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {SimpleLambda} $outer_this
+   * @private
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$2(
+      $outer_this) {
+    this.$ctor__java_lang_Object();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$2 =
+        $outer_this;
+    this.$init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$2();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof SimpleLambda$lambda$2;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SimpleLambda$lambda$2);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+MyInterface.$markImplementor(SimpleLambda$lambda$2);
+
+
+/**
+ * @public {Class}
+ * @nocollapse
+ */
+SimpleLambda$lambda$2.$class = Class.$createForClass(
+    $Util.$generateId('lambda$2'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$lambda$2'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.lambda.2'));
+
+
+
+/**
+ * @implements {MyInterface}
+ */
+class SimpleLambda$lambda$3 extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {number}
+     */
+    this.$c_x = 0;
+    /**
+     * @public {SimpleLambda}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$3 =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$3() {
+  }
+
+  /**
+   * @param {number} i
+   * @return {number}
+   * @private
+   */
+  lambda$3(i) { return this.$c_x + i + 1; }
+
+  /**
+   * @override
+   * @param {number} arg0
+   * @return {number}
+   * @public
+   */
+  m_foo__int(arg0) { return this.lambda$3(arg0); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {number} $c_x
+   * @param {SimpleLambda} $outer_this
+   * @return {!SimpleLambda$lambda$3}
+   * @private
+   * @nocollapse
+   */
+  static $create($c_x, $outer_this) {
+    SimpleLambda$lambda$3.$clinit();
+    var instance = new SimpleLambda$lambda$3;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$3(
+            $c_x, $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {number} $c_x
+   * @param {SimpleLambda} $outer_this
+   * @private
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$3(
+      $c_x, $outer_this) {
+    this.$ctor__java_lang_Object();
+    this.$c_x = $c_x;
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$3 =
+        $outer_this;
+    this.$init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$3();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof SimpleLambda$lambda$3;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SimpleLambda$lambda$3);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+MyInterface.$markImplementor(SimpleLambda$lambda$3);
+
+
+/**
+ * @public {Class}
+ * @nocollapse
+ */
+SimpleLambda$lambda$3.$class = Class.$createForClass(
+    $Util.$generateId('lambda$3'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$lambda$3'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.lambda.3'));
+
+
+
+/**
+ * @implements {MyInterface}
+ */
+class SimpleLambda$lambda$4 extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {number}
+     */
+    this.$c_x = 0;
+    /**
+     * @public {SimpleLambda}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$4 =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$4() {
+  }
+
+  /**
+   * @param {number} i
+   * @return {number}
+   * @private
+   */
+  lambda$4(i) {
+    let y = 1;
+    return this.$c_x + y +
+           this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$4
+               .f_field__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda +
+           i + 1;
+  }
+
+  /**
+   * @override
+   * @param {number} arg0
+   * @return {number}
+   * @public
+   */
+  m_foo__int(arg0) { return this.lambda$4(arg0); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {number} $c_x
+   * @param {SimpleLambda} $outer_this
+   * @return {!SimpleLambda$lambda$4}
+   * @private
+   * @nocollapse
+   */
+  static $create($c_x, $outer_this) {
+    SimpleLambda$lambda$4.$clinit();
+    var instance = new SimpleLambda$lambda$4;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$4(
+            $c_x, $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {number} $c_x
+   * @param {SimpleLambda} $outer_this
+   * @private
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$4(
+      $c_x, $outer_this) {
+    this.$ctor__java_lang_Object();
+    this.$c_x = $c_x;
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$4 =
+        $outer_this;
+    this.$init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$4();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof SimpleLambda$lambda$4;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @private
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SimpleLambda$lambda$4);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+MyInterface.$markImplementor(SimpleLambda$lambda$4);
+
+
+/**
+ * @public {Class}
+ * @nocollapse
+ */
+SimpleLambda$lambda$4.$class = Class.$createForClass(
+    $Util.$generateId('lambda$4'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$lambda$4'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.lambda.4'));

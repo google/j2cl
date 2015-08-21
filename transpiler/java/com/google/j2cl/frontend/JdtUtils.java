@@ -21,11 +21,20 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.ASTUtils;
 import com.google.j2cl.ast.BinaryOperator;
+import com.google.j2cl.ast.Block;
+import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldDescriptor;
+import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
+import com.google.j2cl.ast.Method;
+import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.PostfixOperator;
 import com.google.j2cl.ast.PrefixOperator;
+import com.google.j2cl.ast.RegularTypeDescriptor;
+import com.google.j2cl.ast.ReturnStatement;
+import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
@@ -611,6 +620,73 @@ public class JdtUtils {
       return TypeDescriptors.NUMBERS_TYPE_DESCRIPTOR;
     }
     return null;
+  }
+
+  static IMethodBinding findSamMethodBinding(ITypeBinding typeBinding) {
+    // TODO: there maybe an issue in which case it inherits a default method from an interface
+    // and inherits an abstract method with the same signature from another interface. Add an
+    // example to address the potential issue.
+    Preconditions.checkArgument(typeBinding.isInterface());
+    for (IMethodBinding method : typeBinding.getDeclaredMethods()) {
+      if (Modifier.isAbstract(method.getModifiers())) {
+        return method;
+      }
+    }
+    for (ITypeBinding superInterface : typeBinding.getInterfaces()) {
+      IMethodBinding samMethodFromSuperInterface = findSamMethodBinding(superInterface);
+      if (samMethodFromSuperInterface != null) {
+        return samMethodFromSuperInterface;
+      }
+    }
+    return null;
+  }
+
+  static JavaType createLambdaJavaType(
+      ITypeBinding lambdaInterfaceBinding,
+      IMethodBinding lambdaMethodBinding,
+      RegularTypeDescriptor enclosingClassTypeDescriptor,
+      CompilationUnitNameLocator compilationUnitNameLocator) {
+    TypeDescriptor lambdaClassTypeDescriptor =
+        TypeDescriptor.create(
+            enclosingClassTypeDescriptor.getPackageComponents(),
+            Iterables.concat(
+                enclosingClassTypeDescriptor.getClassComponents(),
+                Arrays.asList(lambdaMethodBinding.getName())),
+            enclosingClassTypeDescriptor.getCompilationUnitSimpleName());
+    JavaType lambdaType = new JavaType(Kind.CLASS, Visibility.PRIVATE, lambdaClassTypeDescriptor);
+
+    lambdaType.setEnclosingTypeDescriptor(enclosingClassTypeDescriptor);
+    lambdaType.addSuperInterfaceDescriptor(
+        createTypeDescriptor(lambdaInterfaceBinding, compilationUnitNameLocator));
+    lambdaType.setLocal(true);
+    return lambdaType;
+  }
+
+  static Method createSamMethod(
+      ITypeBinding lambdaInterfaceBinding,
+      MethodDescriptor lambdaMethodDescriptor,
+      CompilationUnitNameLocator compilationUnitNameLocator) {
+    IMethodBinding samMethodBinding = JdtUtils.findSamMethodBinding(lambdaInterfaceBinding);
+    Preconditions.checkNotNull(samMethodBinding);
+    MethodDescriptor samMethodDescriptor =
+        JdtUtils.createMethodDescriptor(samMethodBinding, compilationUnitNameLocator);
+    List<Variable> parameters = new ArrayList<>();
+    List<Expression> arguments = new ArrayList<>();
+    for (int i = 0; i < lambdaMethodDescriptor.getParameterTypeDescriptors().size(); i++) {
+      Variable parameter =
+          new Variable(
+              "arg" + i, lambdaMethodDescriptor.getParameterTypeDescriptors().get(i), false, true);
+      parameters.add(parameter);
+      arguments.add(parameter.getReference());
+    }
+    Expression callLambda = new MethodCall(null, lambdaMethodDescriptor, arguments);
+    Statement statement =
+        lambdaMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.VOID_TYPE_DESCRIPTOR
+            ? new ExpressionStatement(callLambda)
+            : new ReturnStatement(callLambda);
+    Method samMethod =
+        new Method(samMethodDescriptor, parameters, new Block(Arrays.asList(statement)), true);
+    return samMethod;
   }
 
   /**

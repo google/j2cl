@@ -43,12 +43,14 @@ MANAGED_GOOGLE3_PATH = MANAGED_REPO_PATH + "/google3"
 MANAGED_DATA_DIR_PATH = HOME_DIR_PATH + "/.j2cl-size-data"
 MANAGED_DATA_LAST_CL_PATH = (
     MANAGED_DATA_DIR_PATH + "/last_optimized_size_cl.txt")
+JAVA8_BOOT_CLASS_PATH = ("--javac_bootclasspath="
+                         "//third_party/java/jdk:langtools8-bootclasspath")
 
 
 def build_optimized_tests(cwd=None):
   """Blaze builds all integration tests in parallel."""
   process_util.run_cmd_get_output(
-      ["blaze", "build", TEST_TARGET_PATTERN], cwd=cwd)
+      ["blaze", "build", TEST_TARGET_PATTERN, JAVA8_BOOT_CLASS_PATH], cwd=cwd)
 
 
 def get_obfuscated_optimized_test_file(test_name):

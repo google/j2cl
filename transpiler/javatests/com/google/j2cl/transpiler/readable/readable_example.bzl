@@ -48,6 +48,10 @@ def readable_example(name, srcs):
   j2cl_java_library(
       name=name,
       srcs=srcs,
+      javacopts=[
+        "-source 8",
+        "-target 8"
+      ],
   )
 
   # Verify compilability of generated JS.

@@ -63,4 +63,4 @@ are copyright and licensed as follows:
 - private static clinit optimization
 - shorterfieldmangling (for fields in final classes, like enums)
 - simpleenum
-- simplelambda
+- nestedlambdas

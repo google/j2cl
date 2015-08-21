@@ -75,7 +75,7 @@ public class FrontendFlags {
     metaVar = "<release>",
     usage = "Provide source compatibility with specified release"
   )
-  protected String source = "1.7";
+  protected String source = "1.8";
 
   @Option(name = "-h", aliases = "-help", usage = "print this message")
   protected boolean help = false;

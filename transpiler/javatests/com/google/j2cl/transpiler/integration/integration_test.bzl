@@ -59,7 +59,11 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
       name=name,
       srcs=srcs,
       show_debug_cmd=show_debug_cmd,
-      deps=deps
+      deps=deps,
+      javacopts=[
+        "-source 8",
+        "-target 8"
+      ]
   )
 
   # blaze build :optimized_js
@@ -148,6 +152,10 @@ def integration_test(name, srcs, show_debug_cmd=False, deps=[]):
       srcs=srcs + ["MainEntryPoint.java"],
       deps=deps,
       entry_points=[java_package + ".MainEntryPoint"],
+      javacopts=[
+        "-source 8",
+        "-target 8"
+      ]
   )
   native.gwt_application(
       name="readable_gwt_application",
