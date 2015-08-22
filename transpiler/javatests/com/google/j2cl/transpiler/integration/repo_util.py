@@ -62,7 +62,8 @@ def build_obfuscated_optimized_test(test_name, cwd=None):
   global OBFUSCATED_OPT_TEST_PATTERN
 
   process_util.run_cmd_get_output(
-      ["blaze", "build", OBFUSCATED_OPT_TEST_PATTERN % test_name], cwd=cwd)
+      ["blaze", "build", OBFUSCATED_OPT_TEST_PATTERN % test_name,
+       JAVA8_BOOT_CLASS_PATH], cwd=cwd)
 
 
 def get_readable_optimized_test_file(test_name):
@@ -77,7 +78,8 @@ def build_readable_optimized_test(test_name, cwd=None):
   global READABLE_OPT_TEST_PATTERN
 
   process_util.run_cmd_get_output(
-      ["blaze", "build", READABLE_OPT_TEST_PATTERN % test_name], cwd=cwd)
+      ["blaze", "build", READABLE_OPT_TEST_PATTERN % test_name,
+       JAVA8_BOOT_CLASS_PATH], cwd=cwd)
 
 
 def get_readable_unoptimized_test_file(test_name):
@@ -92,7 +94,8 @@ def build_readable_unoptimized_test(test_name, cwd=None):
   global READABLE_TEST_PATTERN
 
   process_util.run_cmd_get_output(
-      ["blaze", "build", READABLE_TEST_PATTERN % test_name], cwd=cwd)
+      ["blaze", "build", READABLE_TEST_PATTERN % test_name,
+       JAVA8_BOOT_CLASS_PATH], cwd=cwd)
 
 
 def compute_synced_to_cl():
