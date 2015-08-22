@@ -13,6 +13,10 @@ import time
 import repo_util
 
 
+# pylint: disable=global-variable-not-assigned
+MANAGED_GOOGLE3_PATH = repo_util.MANAGED_GOOGLE3_PATH
+
+
 def find_last_stats(stat_lines, synced_to_cl):
   """Returns the opt size in the highest CL before the current sync cl."""
   last_optimized_size = 0
@@ -37,8 +41,6 @@ def make_size_report():
           os.path.dirname(__file__), "size_report.txt"),
       "w+")
 
-  repo_util.build_optimized_tests()
-
   synced_to_cl = repo_util.compute_synced_to_cl()
 
   size_report_file.write("Integration tests optimized size report:\n")
@@ -48,70 +50,89 @@ def make_size_report():
 
   size_report_file.write("Synced @%s.\n" % synced_to_cl)
 
-  print "  Comparing sizes."
-  last_total_size = 0
-  total_size = 0
+  print "  Collecting original optimized sizes."
+  repo_util.build_optimized_tests(cwd=MANAGED_GOOGLE3_PATH)
+  original_js_files_by_test_name = (
+      repo_util.get_js_files_by_test_name(cwd=MANAGED_GOOGLE3_PATH))
+  print "  Collecting modified optimized sizes."
+  repo_util.build_optimized_tests()
+  modified_js_files_by_test_name = repo_util.get_js_files_by_test_name()
+
+  print "  Comparing results."
+  # Collect all test names
+  all_test_names = set()
+  all_test_names.update(original_js_files_by_test_name.keys())
+  all_test_names.update(modified_js_files_by_test_name.keys())
+  all_test_names = sorted(list(all_test_names))
+
+  original_total_size = 0
+  modified_total_size = 0
+  optimized_size_change_count = 0
   all_reports = []
   new_reports = []
   shrinkage_reports = []
   expansion_reports = []
-  optimized_size_change_count = 0
-  for (test_name, js_file) in repo_util.get_js_files_by_test_name():
-    optimized_size = os.path.getsize(js_file)
-    optimized_size_log_path = (
-        repo_util.managed_repo_compute_test_size_path(test_name))
 
-    if os.path.isfile(optimized_size_log_path):
-      # compare old and new size
-      optimized_size_log_file = open(optimized_size_log_path, "r")
+  for test_name in all_test_names:
+    original_js_file = original_js_files_by_test_name.get(test_name)
+    modified_js_file = modified_js_files_by_test_name.get(test_name)
 
-      last_optimized_size = find_last_stats(
-          optimized_size_log_file.readlines(), synced_to_cl)
+    if original_js_file:
+      original_js_file = MANAGED_GOOGLE3_PATH + "/" + original_js_file
 
-      # This can only happen if you have synced back in time such that the
-      # optimized size cache does already contain a file for your new
-      # tests but that file does not contain any entries older than the
-      # cl at which you are synced.
-      if last_optimized_size == 0:
-        # record initial size
+    original_optimized_size = os.path.getsize(
+        original_js_file) if original_js_file else -1
+    modified_optimized_size = os.path.getsize(
+        modified_js_file) if modified_js_file else -1
+
+    # If this is a pre-existing test
+    if original_optimized_size >= 0:
+      # Log it's prexisting size
+      original_total_size += original_optimized_size
+      # And if an updated size exists then
+      if modified_optimized_size >= 0:
+        # Log that too
+        modified_total_size += modified_optimized_size
+
+    # If the original optimized JS file exists
+    if original_optimized_size >= 0:
+      # If the modified optimized JS file exists
+      if modified_optimized_size >= 0:
+        # Both files exist, so compare their sizes.
+        if modified_optimized_size > original_optimized_size:
+          optimized_size_change_count += 1
+          increased_percent = (
+              modified_optimized_size / float(original_optimized_size) - 1)
+          increased_percent *= 100
+          message = (
+              "  '%s' %s->%s bytes (+%2.2f%%)\n" %
+              (test_name, original_optimized_size, modified_optimized_size,
+               increased_percent))
+          all_reports.append(message)
+          expansion_reports.append((increased_percent, message))
+        elif modified_optimized_size < original_optimized_size:
+          optimized_size_change_count += 1
+          decreased_percent = (
+              1 - modified_optimized_size / float(original_optimized_size))
+          decreased_percent *= 100
+          message = (
+              "  '%s' %s->%s bytes (-%2.2f%%)\n" %
+              (test_name, original_optimized_size, modified_optimized_size,
+               decreased_percent))
+          all_reports.append(message)
+          shrinkage_reports.append((decreased_percent, message))
+        else:
+          message = ("  '%s' %s bytes (unchanged)\n" %
+                     (test_name, modified_optimized_size))
+          all_reports.append(message)
+    else:
+      if modified_optimized_size >= 0:
+        # The original optimized JS file doesn't exist and the
+        # modified one does, this is a new result.
         optimized_size_change_count += 1
-        message = "  '%s' is %s bytes\n" % (test_name, optimized_size)
+        message = "  '%s' is %s bytes\n" % (test_name, modified_optimized_size)
         all_reports.append(message)
         new_reports.append(message)
-        continue
-
-      last_total_size += last_optimized_size
-      total_size += optimized_size
-
-      if optimized_size > last_optimized_size:
-        optimized_size_change_count += 1
-        increased_percent = (
-            optimized_size / float(last_optimized_size) - 1) * 100
-        message = (
-            "  '%s' %s->%s bytes (+%2.2f%%)\n" %
-            (test_name, last_optimized_size, optimized_size,
-             increased_percent))
-        all_reports.append(message)
-        expansion_reports.append((increased_percent, message))
-      elif optimized_size < last_optimized_size:
-        optimized_size_change_count += 1
-        decreased_percent = (
-            1 - optimized_size / float(last_optimized_size)) * 100
-        message = ("  '%s' %s->%s bytes (-%2.2f%%)\n" %
-                   (test_name, last_optimized_size, optimized_size,
-                    decreased_percent))
-        all_reports.append(message)
-        shrinkage_reports.append((decreased_percent, message))
-      else:
-        message = ("  '%s' %s bytes (unchanged)\n" %
-                   (test_name, optimized_size))
-        all_reports.append(message)
-    else:
-      # record initial size
-      optimized_size_change_count += 1
-      message = "  '%s' is %s bytes\n" % (test_name, optimized_size)
-      all_reports.append(message)
-      new_reports.append(message)
 
   # Keep a maximum of 4 of the largest shrinkages.
   shrinkage_reports = (
@@ -125,13 +146,13 @@ def make_size_report():
   size_report_file.write(
       "There are %s size changes.\n" % optimized_size_change_count)
 
-  if total_size != last_total_size:
+  if modified_total_size != original_total_size:
     total_percent = (
-        total_size / float(last_total_size)) * 100
+        modified_total_size / float(original_total_size)) * 100
     size_report_file.write(
         "Total size (of already existing tests) "
         "changed from %s to %s bytes (100%%->%2.2f%%).\n" %
-        (last_total_size, total_size, total_percent))
+        (original_total_size, modified_total_size, total_percent))
   else:
     size_report_file.write(
         "Total size (of already existing tests) did not change.\n")
@@ -183,7 +204,6 @@ def main():
   print "Generating the size change report:"
 
   repo_util.managed_repo_validate_environment()
-  repo_util.managed_repo_update_sizes_cache()
   make_size_report()
 
 
