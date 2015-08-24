@@ -219,11 +219,7 @@ public class JdtUtils {
   static FieldDescriptor createFieldDescriptor(
       IVariableBinding variableBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
     if (isArrayLengthBinding(variableBinding)) {
-      return FieldDescriptor.createRaw(
-          false,
-          TypeDescriptors.VOID_TYPE_DESCRIPTOR,
-          "length",
-          TypeDescriptors.INT_TYPE_DESCRIPTOR);
+      return ASTUtils.ARRAY_LENGTH_FIELD_DESCRIPTION;
     }
 
     int modifiers = variableBinding.getModifiers();
@@ -413,6 +409,17 @@ public class JdtUtils {
         return BinaryOperator.RIGHT_SHIFT_SIGNED_ASSIGN;
       case ">>>=":
         return BinaryOperator.RIGHT_SHIFT_UNSIGNED_ASSIGN;
+    }
+    return null;
+  }
+
+  static IMethodBinding getMethodBinding(
+      ITypeBinding typeBinding, String methodName, ITypeBinding... parameterTypes) {
+    for (IMethodBinding methodBinding : typeBinding.getDeclaredMethods()) {
+      if (methodBinding.getName().equals(methodName)
+          && Arrays.equals(methodBinding.getParameterTypes(), parameterTypes)) {
+        return methodBinding;
+      }
     }
     return null;
   }

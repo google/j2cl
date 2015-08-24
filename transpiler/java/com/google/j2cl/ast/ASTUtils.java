@@ -34,6 +34,12 @@ public class ASTUtils {
   public static final String CREATE_PREFIX = "$create_";
   public static final String TYPE_VARIABLE_IN_METHOD_PREFIX = "M_";
   public static final String TYPE_VARIABLE_IN_TYPE_PREFIX = "C_";
+  public static final FieldDescriptor ARRAY_LENGTH_FIELD_DESCRIPTION =
+      FieldDescriptor.createRaw(
+          false,
+          TypeDescriptors.VOID_TYPE_DESCRIPTOR,
+          "length",
+          TypeDescriptors.INT_TYPE_DESCRIPTOR);
 
   /**
    * Construct a new method descriptor for {@code methodDescriptor} with the additional
