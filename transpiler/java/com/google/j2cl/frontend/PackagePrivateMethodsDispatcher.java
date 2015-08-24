@@ -24,7 +24,7 @@ import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.Modifier;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,7 +52,7 @@ public class PackagePrivateMethodsDispatcher {
   public static Map<MethodDescriptor, MethodDescriptor> findExposedOverriddenMethods(
       ITypeBinding type, CompilationUnitNameLocator compilationUnitNameLocator) {
     Map<MethodDescriptor, MethodDescriptor> exposedOverriddenMethodsByOverridingMethod =
-        new HashMap<>();
+        new LinkedHashMap<>();
     for (IMethodBinding method : type.getDeclaredMethods()) {
       int modifiers = method.getModifiers();
       if (!(Modifier.isPublic(modifiers) || Modifier.isProtected(modifiers)) // public/protected.

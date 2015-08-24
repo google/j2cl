@@ -39,8 +39,8 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -85,7 +85,7 @@ public class BridgeMethodsCreator {
    * Returns the mappings from the needed bridge method to the delegated method.
    */
   public Map<IMethodBinding, IMethodBinding> findBridgeMethods() {
-    Map<IMethodBinding, IMethodBinding> bridgeMethodByDelegateMethod = new HashMap<>();
+    Map<IMethodBinding, IMethodBinding> bridgeMethodByDelegateMethod = new LinkedHashMap<>();
     for (IMethodBinding bridgeMethod : getPotentialBridgeMethods(typeBinding)) {
       IMethodBinding delegateMethod = findDelegatedMethod(bridgeMethod, typeBinding);
       // If no delegated method is found, it means that no overriding method exists, then no bridge
