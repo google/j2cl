@@ -42,6 +42,7 @@ def make_size_report():
       "w+")
 
   synced_to_cl = repo_util.compute_synced_to_cl()
+  repo_util.managed_repo_sync_to(synced_to_cl)
 
   size_report_file.write("Integration tests optimized size report:\n")
   size_report_file.write("**************************************\n")
