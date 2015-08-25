@@ -1,9 +1,23 @@
 goog.module('gen.java.lang.BooleanModule');
 
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
 /**
- * Transpiled from java/lang/Boolean.java.
+ * Super-sourcing java/lang/Boolean.java.
  */
-class Boolean {
+class Boolean extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+  }
+
   /**
    * @param {boolean} obj
    * @return {boolean}
@@ -23,8 +37,29 @@ class Boolean {
   static $isInstance(instance) {
     return typeof instance == 'boolean';
   }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Boolean);
+  }
 };
 
+
+/**
+ * @public {Class}
+ * @nocollapse
+ */
+Boolean.$class = Class.$createForClass(
+  $Util.$generateId('Boolean'),
+  $Util.$generateId('java.lang.Boolean'),
+  Object.$class,
+  $Util.$generateId('java.lang.Boolean'));
 
 /**
  * Exported class.

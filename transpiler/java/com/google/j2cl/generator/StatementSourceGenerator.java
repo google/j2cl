@@ -130,6 +130,15 @@ public class StatementSourceGenerator {
       case TypeDescriptor.DOUBLE_TYPE_NAME:
       case TypeDescriptor.CHAR_TYPE_NAME:
         return "number";
+      case "java.lang.Boolean":
+        return "boolean";
+      case "java.lang.Double":
+        return "number";
+      case "java.lang.Number":
+        if (!forUseInExtendsOrImplements) {
+          return "Number | number";
+        }
+        break;
       case TypeDescriptor.LONG_TYPE_NAME:
         return "!" + toSource(TypeDescriptors.NATIVE_LONG_TYPE_DESCRIPTOR);
       case "java.lang.String":
@@ -141,11 +150,13 @@ public class StatementSourceGenerator {
           // Interfaces that might be also implemented by string
           return "(" + toSource(typeDescriptor) + "|string)";
         }
+        break;
       case "java.lang.Object":
         if (!forUseInExtendsOrImplements) {
           // Object covers also string and arrays.
           return "*";
         }
+        break;
     }
     if (typeDescriptor.isPrimitive()) {
       return typeDescriptor.getSimpleName();

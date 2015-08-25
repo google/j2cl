@@ -54,7 +54,7 @@ class NestedGenericClass extends Object {
    * @public
    */
   m_fun__java_lang_Object(t) {
-    /**@type {NestedGenericClass$1E<Number>} */ (
+    /**@type {NestedGenericClass$1E<Number | number>} */ (
         NestedGenericClass$1E.$create(this));
     /**@type {NestedGenericClass$1F<C_T>} */ (
         NestedGenericClass$1F.$create(this));
@@ -76,16 +76,16 @@ class NestedGenericClass extends Object {
    * @public
    */
   m_test() {
-    let n =
-        /**@type {NestedGenericClass<Number>} */ (NestedGenericClass.$create());
+    let n = /**@type {NestedGenericClass<Number | number>} */ (
+        NestedGenericClass.$create());
     let a = /**@type {NestedGenericClass$A<Error>} */ (
         n.m_$create_NestedGenericClass$A());
     let b = /**@type {NestedGenericClass$A$B<Exception>} */ (
         a.m_$create_NestedGenericClass$A$B());
-    /**@type {NestedGenericClass$C<Number>} */ (
+    /**@type {NestedGenericClass$C<Number | number>} */ (
         n.m_$create_NestedGenericClass$C());
-    /**@type {NestedGenericClass$C$D<Number>} */ (
-        /**@type {NestedGenericClass$C<Number>} */ (
+    /**@type {NestedGenericClass$C$D<Number | number>} */ (
+        /**@type {NestedGenericClass$C<Number | number>} */ (
             n.m_$create_NestedGenericClass$C())
             .m_$create_NestedGenericClass$C$D());
   }
@@ -840,7 +840,7 @@ class NestedGenericClass$1G extends Object {
    * @public
    */
   m_bar() {
-    /**@type {NestedGenericClass$1G$1H<Number>} */ (
+    /**@type {NestedGenericClass$1G$1H<Number | number>} */ (
         NestedGenericClass$1G$1H.$create(this));
   }
 

@@ -1,0 +1,144 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/arrayofboxedtype/ArrayOfBoxedType.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.arrayofboxedtype.ArrayOfBoxedTypeModule');
+
+
+var Boolean = goog.require('gen.java.lang.BooleanModule').Boolean;
+var Byte = goog.require('gen.java.lang.ByteModule').Byte;
+var Character = goog.require('gen.java.lang.CharacterModule').Character;
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Double = goog.require('gen.java.lang.DoubleModule').Double;
+var Float = goog.require('gen.java.lang.FloatModule').Float;
+var Integer = goog.require('gen.java.lang.IntegerModule').Integer;
+var Long = goog.require('gen.java.lang.LongModule').Long;
+var Number = goog.require('gen.java.lang.NumberModule').Number;
+var Short = goog.require('gen.java.lang.ShortModule').Short;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+
+
+class ArrayOfBoxedType extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_arrayofboxedtype_ArrayOfBoxedType() {
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    let numberArray =
+        /**@type {Array<Number | number>} */ ($Arrays.$create([2], Number));
+    let byteArray = /**@type {Array<Byte>} */ ($Arrays.$create([2], Byte));
+    let doublerArray =
+        /**@type {Array<number>} */ ($Arrays.$create([2], Double));
+    let floatArray = /**@type {Array<Float>} */ ($Arrays.$create([2], Float));
+    let integerArray =
+        /**@type {Array<Integer>} */ ($Arrays.$create([2], Integer));
+    let longArray = /**@type {Array<Long>} */ ($Arrays.$create([2], Long));
+    let shortArray = /**@type {Array<Short>} */ ($Arrays.$create([2], Short));
+    let characterArray =
+        /**@type {Array<Character>} */ ($Arrays.$create([2], Character));
+    let booleanArray =
+        /**@type {Array<boolean>} */ ($Arrays.$create([2], Boolean));
+    let nArray = /**@type {Array<Number | number>} */ (
+        $Arrays.$castTo(byteArray, Number, 1));
+    let bArray =
+        /**@type {Array<Byte>} */ ($Arrays.$castTo(byteArray, Byte, 1));
+    let dArray =
+        /**@type {Array<number>} */ ($Arrays.$castTo(byteArray, Double, 1));
+    let fArray =
+        /**@type {Array<Float>} */ ($Arrays.$castTo(byteArray, Float, 1));
+    let iArray =
+        /**@type {Array<Integer>} */ ($Arrays.$castTo(byteArray, Integer, 1));
+    let lArray =
+        /**@type {Array<Long>} */ ($Arrays.$castTo(byteArray, Long, 1));
+    let sArray =
+        /**@type {Array<Short>} */ ($Arrays.$castTo(byteArray, Short, 1));
+    let cArray = /**@type {Array<Character>} */ (
+        $Arrays.$castTo(byteArray, Character, 1));
+    let boolArray =
+        /**@type {Array<boolean>} */ ($Arrays.$castTo(byteArray, Boolean, 1));
+    $Arrays.$set(numberArray, 1, Integer.$create__int(1));
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!ArrayOfBoxedType}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    ArrayOfBoxedType.$clinit();
+    var instance = new ArrayOfBoxedType;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_arrayofboxedtype_ArrayOfBoxedType();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_arrayofboxedtype_ArrayOfBoxedType() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_arrayofboxedtype_ArrayOfBoxedType();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof ArrayOfBoxedType; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, ArrayOfBoxedType);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ * @nocollapse
+ */
+ArrayOfBoxedType.$class = Class.$createForClass(
+    $Util.$generateId('ArrayOfBoxedType'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.arrayofboxedtype.ArrayOfBoxedType'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.arrayofboxedtype.ArrayOfBoxedType'));
+
+/**
+ * Export class.
+ */
+exports.ArrayOfBoxedType = ArrayOfBoxedType;

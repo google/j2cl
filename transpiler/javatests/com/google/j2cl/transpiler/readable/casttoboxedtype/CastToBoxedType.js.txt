@@ -1,0 +1,121 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/casttoboxedtype/CastToBoxedType.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.casttoboxedtype.CastToBoxedTypeModule');
+
+
+var Boolean = goog.require('gen.java.lang.BooleanModule').Boolean;
+var Byte = goog.require('gen.java.lang.ByteModule').Byte;
+var Character = goog.require('gen.java.lang.CharacterModule').Character;
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Double = goog.require('gen.java.lang.DoubleModule').Double;
+var Float = goog.require('gen.java.lang.FloatModule').Float;
+var Integer = goog.require('gen.java.lang.IntegerModule').Integer;
+var Long = goog.require('gen.java.lang.LongModule').Long;
+var Number = goog.require('gen.java.lang.NumberModule').Number;
+var Short = goog.require('gen.java.lang.ShortModule').Short;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $Casts = goog.require('vmbootstrap.CastsModule').Casts;
+
+
+class CastToBoxedType extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_casttoboxedtype_CastToBoxedType() {
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    let o = Integer.$create__int(1);
+    let b = /**@type {Byte} */ ($Casts.to(o, Byte.$isInstance(o)));
+    let d = /**@type {number} */ ($Casts.to(o, Double.$isInstance(o)));
+    let f = /**@type {Float} */ ($Casts.to(o, Float.$isInstance(o)));
+    let i = /**@type {Integer} */ ($Casts.to(o, Integer.$isInstance(o)));
+    let l = /**@type {Long} */ ($Casts.to(o, Long.$isInstance(o)));
+    let s = /**@type {Short} */ ($Casts.to(o, Short.$isInstance(o)));
+    let n = /**@type {Number | number} */ ($Casts.to(o, Number.$isInstance(o)));
+    let c = /**@type {Character} */ ($Casts.to(o, Character.$isInstance(o)));
+    let bool = /**@type {boolean} */ ($Casts.to(o, Boolean.$isInstance(o)));
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!CastToBoxedType}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    CastToBoxedType.$clinit();
+    var instance = new CastToBoxedType;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_casttoboxedtype_CastToBoxedType();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_casttoboxedtype_CastToBoxedType() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_casttoboxedtype_CastToBoxedType();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof CastToBoxedType; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, CastToBoxedType);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ * @nocollapse
+ */
+CastToBoxedType.$class = Class.$createForClass(
+    $Util.$generateId('CastToBoxedType'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.casttoboxedtype.CastToBoxedType'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.casttoboxedtype.CastToBoxedType'));
+
+/**
+ * Export class.
+ */
+exports.CastToBoxedType = CastToBoxedType;

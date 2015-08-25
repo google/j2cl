@@ -19,6 +19,7 @@ j2cl_java_library(
         "java/lang/Boolean.java",
         "java/lang/Class.java",
         "java/lang/Double.java",
+        "java/lang/Number.java",
         "java/lang/Object.java",
         "java/lang/String.java",
     ],

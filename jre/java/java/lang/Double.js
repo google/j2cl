@@ -1,9 +1,23 @@
 goog.module('gen.java.lang.DoubleModule');
 
+
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Number = goog.require('gen.java.lang.NumberModule').Number;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
 /**
- * Transpiled from java/lang/Double.java.
+ * Super-sourcing java/lang/Double.java.
  */
-class Double {
+class Double extends Number {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+  }
+
   /**
    * @param {number} obj
    * @return {number}
@@ -23,8 +37,29 @@ class Double {
   static $isInstance(instance) {
     return typeof instance == 'number';
   }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Double);
+  }
 };
 
+
+/**
+ * @public {Class}
+ * @nocollapse
+ */
+Double.$class = Class.$createForClass(
+  $Util.$generateId('Double'),
+  $Util.$generateId('java.lang.Double'),
+  Number.$class,
+  $Util.$generateId('java.lang.Double'));
 
 /**
  * Exported class.

@@ -1,0 +1,123 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/instanceofboxedtype/InstanceofBoxedType.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.instanceofboxedtype.InstanceofBoxedTypeModule');
+
+
+var Boolean = goog.require('gen.java.lang.BooleanModule').Boolean;
+var Byte = goog.require('gen.java.lang.ByteModule').Byte;
+var Character = goog.require('gen.java.lang.CharacterModule').Character;
+var Class = goog.require('gen.java.lang.CoreModule').Class;
+var Object = goog.require('gen.java.lang.CoreModule').Object;
+var Double = goog.require('gen.java.lang.DoubleModule').Double;
+var Float = goog.require('gen.java.lang.FloatModule').Float;
+var Integer = goog.require('gen.java.lang.IntegerModule').Integer;
+var Long = goog.require('gen.java.lang.LongModule').Long;
+var Number = goog.require('gen.java.lang.NumberModule').Number;
+var Short = goog.require('gen.java.lang.ShortModule').Short;
+var $Util = goog.require('nativebootstrap.UtilModule').Util;
+var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
+
+
+class InstanceofBoxedType extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_instanceofboxedtype_InstanceofBoxedType() {
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    let b = Integer.$create__int(1);
+    let a = Byte.$isInstance(b);
+    a = Double.$isInstance(b);
+    a = Float.$isInstance(b);
+    a = Integer.$isInstance(b);
+    a = Long.$isInstance(b);
+    a = Short.$isInstance(b);
+    a = Number.$isInstance(b);
+    a = Character.$isInstance(b);
+    a = Boolean.$isInstance(b);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!InstanceofBoxedType}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    InstanceofBoxedType.$clinit();
+    var instance = new InstanceofBoxedType;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_instanceofboxedtype_InstanceofBoxedType();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_instanceofboxedtype_InstanceofBoxedType() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_instanceofboxedtype_InstanceofBoxedType();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof InstanceofBoxedType;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, InstanceofBoxedType);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+/**
+ * @public {Class}
+ * @nocollapse
+ */
+InstanceofBoxedType.$class = Class.$createForClass(
+    $Util.$generateId('InstanceofBoxedType'),
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.instanceofboxedtype.InstanceofBoxedType'),
+    Object.$class,
+    $Util.$generateId(
+        'com.google.j2cl.transpiler.readable.instanceofboxedtype.InstanceofBoxedType'));
+
+/**
+ * Export class.
+ */
+exports.InstanceofBoxedType = InstanceofBoxedType;
