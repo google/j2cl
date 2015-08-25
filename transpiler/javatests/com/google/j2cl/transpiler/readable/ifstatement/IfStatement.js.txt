@@ -5,11 +5,11 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.ifstatement.IfStatementModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
-var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
+let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
 class IfStatement extends Object {
@@ -55,7 +55,7 @@ class IfStatement extends Object {
    */
   static $create() {
     IfStatement.$clinit();
-    var instance = new IfStatement;
+    let instance = new IfStatement;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_ifstatement_IfStatement();
     return instance;

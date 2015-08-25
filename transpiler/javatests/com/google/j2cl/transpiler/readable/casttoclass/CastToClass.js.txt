@@ -5,10 +5,10 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.casttoclass.CastToClassModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $Casts = goog.require('vmbootstrap.CastsModule').Casts;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $Casts = goog.require('vmbootstrap.CastsModule').Casts;
 
 
 class CastToClass extends Object {
@@ -42,7 +42,7 @@ class CastToClass extends Object {
    */
   static $create() {
     CastToClass.$clinit();
-    var instance = new CastToClass;
+    let instance = new CastToClass;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_casttoclass_CastToClass();
     return instance;

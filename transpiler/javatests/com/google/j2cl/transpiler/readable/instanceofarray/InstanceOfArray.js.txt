@@ -5,11 +5,11 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.instanceofarray.InstanceOfArrayModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
-var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+let $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
 
 
 class InstanceOfArray extends Object {
@@ -44,7 +44,7 @@ class InstanceOfArray extends Object {
    */
   static $create() {
     InstanceOfArray.$clinit();
-    var instance = new InstanceOfArray;
+    let instance = new InstanceOfArray;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_instanceofarray_InstanceOfArray();
     return instance;

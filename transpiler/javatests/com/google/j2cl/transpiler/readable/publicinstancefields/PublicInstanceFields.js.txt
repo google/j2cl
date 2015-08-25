@@ -5,10 +5,10 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.publicinstancefields.PublicInstanceFieldsModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
 class PublicInstanceFields extends Object {
@@ -47,7 +47,7 @@ class PublicInstanceFields extends Object {
    */
   static $create() {
     PublicInstanceFields.$clinit();
-    var instance = new PublicInstanceFields;
+    let instance = new PublicInstanceFields;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields();
     return instance;

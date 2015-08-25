@@ -5,13 +5,13 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethodModule');
 
 
-var AssertionError = goog.require('gen.java.lang.AssertionErrorModule').AssertionError;
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Error = goog.require('gen.java.lang.ErrorModule').Error;
-var Number = goog.require('gen.java.lang.NumberModule').Number;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $Casts = goog.require('vmbootstrap.CastsModule').Casts;
+let AssertionError = goog.require('gen.java.lang.AssertionErrorModule').AssertionError;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let Error = goog.require('gen.java.lang.ErrorModule').Error;
+let Number = goog.require('gen.java.lang.NumberModule').Number;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $Casts = goog.require('vmbootstrap.CastsModule').Casts;
 
 
 /**
@@ -141,7 +141,7 @@ class SuperParent extends Object {
    */
   static $create() {
     SuperParent.$clinit();
-    var instance = new SuperParent;
+    let instance = new SuperParent;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SuperParent();
     return instance;
@@ -255,7 +255,7 @@ class Parent extends SuperParent {
    */
   static $create() {
     Parent.$clinit();
-    var instance = new Parent;
+    let instance = new Parent;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_Parent();
     return instance;
@@ -381,7 +381,7 @@ class BridgeMethod extends Parent {
    */
   static $create() {
     BridgeMethod.$clinit();
-    var instance = new BridgeMethod;
+    let instance = new BridgeMethod;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_BridgeMethod();
     return instance;

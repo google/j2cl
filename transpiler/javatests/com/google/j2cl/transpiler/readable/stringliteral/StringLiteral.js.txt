@@ -5,10 +5,10 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.stringliteral.StringLiteralModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var String = goog.require('gen.java.lang.StringModule').String;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let String = goog.require('gen.java.lang.StringModule').String;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 class StringLiteral extends Object {
@@ -49,7 +49,7 @@ class StringLiteral extends Object {
    */
   static $create() {
     StringLiteral.$clinit();
-    var instance = new StringLiteral;
+    let instance = new StringLiteral;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral();
     return instance;

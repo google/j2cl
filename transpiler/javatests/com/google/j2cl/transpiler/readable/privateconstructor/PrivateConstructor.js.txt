@@ -5,9 +5,9 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructorModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 class PrivateConstructor extends Object {
@@ -32,7 +32,7 @@ class PrivateConstructor extends Object {
    */
   static $create() {
     PrivateConstructor.$clinit();
-    var instance = new PrivateConstructor;
+    let instance = new PrivateConstructor;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_privateconstructor_PrivateConstructor();
     return instance;

@@ -5,12 +5,12 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatchModule');
 
 
-var ClassCastException = goog.require('gen.java.lang.ClassCastExceptionModule').ClassCastException;
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var NullPointerException = goog.require('gen.java.lang.NullPointerExceptionModule').NullPointerException;
-var RuntimeException = goog.require('gen.java.lang.RuntimeExceptionModule').RuntimeException;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
+let ClassCastException = goog.require('gen.java.lang.ClassCastExceptionModule').ClassCastException;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let NullPointerException = goog.require('gen.java.lang.NullPointerExceptionModule').NullPointerException;
+let RuntimeException = goog.require('gen.java.lang.RuntimeExceptionModule').RuntimeException;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 class MultipleCatch extends Object {
@@ -53,7 +53,7 @@ class MultipleCatch extends Object {
    */
   static $create() {
     MultipleCatch.$clinit();
-    var instance = new MultipleCatch;
+    let instance = new MultipleCatch;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_multiplecatch_MultipleCatch();
     return instance;

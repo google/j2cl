@@ -5,13 +5,13 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.MainModule');
 
 
-var FooCallsSuperObjectMethod = goog.require('gen.com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.FooCallsSuperObjectMethodModule').FooCallsSuperObjectMethod;
-var SubNumber = goog.require('gen.com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumberModule').SubNumber;
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $Numbers = goog.require('vmbootstrap.NumbersModule').Numbers;
-var $Objects = goog.require('vmbootstrap.ObjectsModule').Objects;
+let FooCallsSuperObjectMethod = goog.require('gen.com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.FooCallsSuperObjectMethodModule').FooCallsSuperObjectMethod;
+let SubNumber = goog.require('gen.com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumberModule').SubNumber;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $Numbers = goog.require('vmbootstrap.NumbersModule').Numbers;
+let $Objects = goog.require('vmbootstrap.ObjectsModule').Objects;
 
 
 class Main extends Object {
@@ -51,7 +51,7 @@ class Main extends Object {
    */
   static $create() {
     Main.$clinit();
-    var instance = new Main;
+    let instance = new Main;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_Main();
     return instance;

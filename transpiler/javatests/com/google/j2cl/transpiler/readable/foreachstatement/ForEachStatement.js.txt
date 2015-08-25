@@ -5,16 +5,16 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatementModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Iterable = goog.require('gen.java.lang.IterableModule').Iterable;
-var Throwable = goog.require('gen.java.lang.ThrowableModule').Throwable;
-var Iterator = goog.require('gen.java.util.IteratorModule').Iterator;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
-var $Objects = goog.require('vmbootstrap.ObjectsModule').Objects;
-var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
-var $void = goog.require('vmbootstrap.PrimitivesModule').$void;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let Iterable = goog.require('gen.java.lang.IterableModule').Iterable;
+let Throwable = goog.require('gen.java.lang.ThrowableModule').Throwable;
+let Iterator = goog.require('gen.java.util.IteratorModule').Iterator;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+let $Objects = goog.require('vmbootstrap.ObjectsModule').Objects;
+let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+let $void = goog.require('vmbootstrap.PrimitivesModule').$void;
 
 
 class ForEachStatement extends Object {
@@ -58,7 +58,7 @@ class ForEachStatement extends Object {
    */
   static $create() {
     ForEachStatement.$clinit();
-    var instance = new ForEachStatement;
+    let instance = new ForEachStatement;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement();
     return instance;

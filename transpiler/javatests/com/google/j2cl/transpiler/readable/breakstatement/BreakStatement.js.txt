@@ -5,9 +5,9 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.breakstatement.BreakStatementModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 class BreakStatement extends Object {
@@ -41,7 +41,7 @@ class BreakStatement extends Object {
    */
   static $create() {
     BreakStatement.$clinit();
-    var instance = new BreakStatement;
+    let instance = new BreakStatement;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_breakstatement_BreakStatement();
     return instance;

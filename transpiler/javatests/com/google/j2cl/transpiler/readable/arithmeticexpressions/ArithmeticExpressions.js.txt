@@ -5,11 +5,11 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressionsModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
-var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
+let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
 class ArithmeticExpressions extends Object {
@@ -53,7 +53,7 @@ class ArithmeticExpressions extends Object {
    */
   static $create() {
     ArithmeticExpressions.$clinit();
-    var instance = new ArithmeticExpressions;
+    let instance = new ArithmeticExpressions;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions();
     return instance;

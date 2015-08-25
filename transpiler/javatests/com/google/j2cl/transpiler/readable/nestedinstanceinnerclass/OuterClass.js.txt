@@ -5,9 +5,9 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClassModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 class OuterClass extends Object {
@@ -50,7 +50,7 @@ class OuterClass extends Object {
    */
   static $create() {
     OuterClass.$clinit();
-    var instance = new OuterClass;
+    let instance = new OuterClass;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass();
     return instance;
@@ -151,7 +151,7 @@ class OuterClass$InnerClass extends Object {
    */
   static $create($outer_this) {
     OuterClass$InnerClass.$clinit();
-    var instance = new OuterClass$InnerClass;
+    let instance = new OuterClass$InnerClass;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass$InnerClass(
             $outer_this);
@@ -266,7 +266,7 @@ class OuterClass$InnerClass$InnerInnerClass extends Object {
    */
   static $create($outer_this) {
     OuterClass$InnerClass$InnerInnerClass.$clinit();
-    var instance = new OuterClass$InnerClass$InnerInnerClass;
+    let instance = new OuterClass$InnerClass$InnerInnerClass;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass$InnerClass$InnerInnerClass(
             $outer_this);

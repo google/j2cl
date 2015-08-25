@@ -5,12 +5,12 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.genericmethod.GenericMethodModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Error = goog.require('gen.java.lang.ErrorModule').Error;
-var Exception = goog.require('gen.java.lang.ExceptionModule').Exception;
-var Number = goog.require('gen.java.lang.NumberModule').Number;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let Error = goog.require('gen.java.lang.ErrorModule').Error;
+let Exception = goog.require('gen.java.lang.ExceptionModule').Exception;
+let Number = goog.require('gen.java.lang.NumberModule').Number;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 /**
@@ -92,7 +92,7 @@ class GenericMethod extends Object {
    */
   static $create() {
     GenericMethod.$clinit();
-    var instance = new GenericMethod;
+    let instance = new GenericMethod;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod();
     return instance;

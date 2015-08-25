@@ -5,10 +5,10 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.characterliteral.CharacterLiteralModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $char = goog.require('vmbootstrap.PrimitivesModule').$char;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $char = goog.require('vmbootstrap.PrimitivesModule').$char;
 
 
 class CharacterLiteral extends Object {
@@ -160,7 +160,7 @@ class CharacterLiteral extends Object {
    */
   static $create() {
     CharacterLiteral.$clinit();
-    var instance = new CharacterLiteral;
+    let instance = new CharacterLiteral;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_characterliteral_CharacterLiteral();
     return instance;

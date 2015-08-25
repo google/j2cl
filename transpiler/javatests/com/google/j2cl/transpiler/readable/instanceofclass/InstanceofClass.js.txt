@@ -5,11 +5,11 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClassModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var String = goog.require('gen.java.lang.StringModule').String;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $Asserts = goog.require('vmbootstrap.AssertsModule').Asserts;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let String = goog.require('gen.java.lang.StringModule').String;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $Asserts = goog.require('vmbootstrap.AssertsModule').Asserts;
 
 
 class InstanceofClass extends Object {
@@ -46,7 +46,7 @@ class InstanceofClass extends Object {
    */
   static $create() {
     InstanceofClass.$clinit();
-    var instance = new InstanceofClass;
+    let instance = new InstanceofClass;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass();
     return instance;

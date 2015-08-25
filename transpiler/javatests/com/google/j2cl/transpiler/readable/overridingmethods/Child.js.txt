@@ -5,10 +5,10 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.overridingmethods.ChildModule');
 
 
-var Parent = goog.require('gen.com.google.j2cl.transpiler.readable.overridingmethods.ParentModule').Parent;
-var SomeInterface = goog.require('gen.com.google.j2cl.transpiler.readable.overridingmethods.SomeInterfaceModule').SomeInterface;
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
+let Parent = goog.require('gen.com.google.j2cl.transpiler.readable.overridingmethods.ParentModule').Parent;
+let SomeInterface = goog.require('gen.com.google.j2cl.transpiler.readable.overridingmethods.SomeInterfaceModule').SomeInterface;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 /**
@@ -49,7 +49,7 @@ class Child extends Parent {
    */
   static $create() {
     Child.$clinit();
-    var instance = new Child;
+    let instance = new Child;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_overridingmethods_Child();
     return instance;

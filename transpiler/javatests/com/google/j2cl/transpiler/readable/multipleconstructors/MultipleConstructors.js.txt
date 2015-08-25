@@ -5,11 +5,11 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructorsModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
-var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
+let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
 class MultipleConstructors extends Object {
@@ -47,7 +47,7 @@ class MultipleConstructors extends Object {
    */
   static $create__int(id) {
     MultipleConstructors.$clinit();
-    var instance = new MultipleConstructors;
+    let instance = new MultipleConstructors;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors__int(
             id);
@@ -78,7 +78,7 @@ class MultipleConstructors extends Object {
    */
   static $create__boolean(flag) {
     MultipleConstructors.$clinit();
-    var instance = new MultipleConstructors;
+    let instance = new MultipleConstructors;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors__boolean(
             flag);
@@ -110,7 +110,7 @@ class MultipleConstructors extends Object {
    */
   static $create__int__boolean(id, flag) {
     MultipleConstructors.$clinit();
-    var instance = new MultipleConstructors;
+    let instance = new MultipleConstructors;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_multipleconstructors_MultipleConstructors__int__boolean(
             id, flag);

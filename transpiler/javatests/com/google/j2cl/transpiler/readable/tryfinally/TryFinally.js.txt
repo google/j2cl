@@ -5,10 +5,10 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.tryfinally.TryFinallyModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $Asserts = goog.require('vmbootstrap.AssertsModule').Asserts;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $Asserts = goog.require('vmbootstrap.AssertsModule').Asserts;
 
 
 class TryFinally extends Object {
@@ -43,7 +43,7 @@ class TryFinally extends Object {
    */
   static $create() {
     TryFinally.$clinit();
-    var instance = new TryFinally;
+    let instance = new TryFinally;
     instance.$ctor__com_google_j2cl_transpiler_readable_tryfinally_TryFinally();
     return instance;
   }

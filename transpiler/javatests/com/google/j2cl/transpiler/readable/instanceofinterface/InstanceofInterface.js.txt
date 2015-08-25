@@ -5,10 +5,10 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.instanceofinterface.InstanceofInterfaceModule');
 
 
-var Serializable = goog.require('gen.java.io.SerializableModule').Serializable;
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
+let Serializable = goog.require('gen.java.io.SerializableModule').Serializable;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 class InstanceofInterface extends Object {
@@ -42,7 +42,7 @@ class InstanceofInterface extends Object {
    */
   static $create() {
     InstanceofInterface.$clinit();
-    var instance = new InstanceofInterface;
+    let instance = new InstanceofInterface;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_instanceofinterface_InstanceofInterface();
     return instance;

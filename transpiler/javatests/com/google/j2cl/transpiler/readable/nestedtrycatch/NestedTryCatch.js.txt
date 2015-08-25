@@ -5,10 +5,10 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatchModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Exception = goog.require('gen.java.lang.ExceptionModule').Exception;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let Exception = goog.require('gen.java.lang.ExceptionModule').Exception;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 class NestedTryCatch extends Object {
@@ -55,7 +55,7 @@ class NestedTryCatch extends Object {
    */
   static $create() {
     NestedTryCatch.$clinit();
-    var instance = new NestedTryCatch;
+    let instance = new NestedTryCatch;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_nestedtrycatch_NestedTryCatch();
     return instance;

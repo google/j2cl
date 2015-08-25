@@ -5,16 +5,16 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstantModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var String = goog.require('gen.java.lang.StringModule').String;
-var $Long = goog.require('nativebootstrap.LongUtilsModule').Long;
-var $LongUtils = goog.require('nativebootstrap.LongUtilsModule').LongUtils;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
-var $char = goog.require('vmbootstrap.PrimitivesModule').$char;
-var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
-var $long = goog.require('vmbootstrap.PrimitivesModule').$long;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let String = goog.require('gen.java.lang.StringModule').String;
+let $Long = goog.require('nativebootstrap.LongUtilsModule').Long;
+let $LongUtils = goog.require('nativebootstrap.LongUtilsModule').LongUtils;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
+let $char = goog.require('vmbootstrap.PrimitivesModule').$char;
+let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+let $long = goog.require('vmbootstrap.PrimitivesModule').$long;
 
 
 class CompileTimeConstant extends Object {
@@ -86,7 +86,7 @@ class CompileTimeConstant extends Object {
    */
   static $create() {
     CompileTimeConstant.$clinit();
-    var instance = new CompileTimeConstant;
+    let instance = new CompileTimeConstant;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant();
     return instance;

@@ -5,12 +5,12 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.supermethodcall.ChildModule');
 
 
-var GrandParent = goog.require('gen.com.google.j2cl.transpiler.readable.supermethodcall.GrandParentModule').GrandParent;
-var Parent = goog.require('gen.com.google.j2cl.transpiler.readable.supermethodcall.ParentModule').Parent;
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+let GrandParent = goog.require('gen.com.google.j2cl.transpiler.readable.supermethodcall.GrandParentModule').GrandParent;
+let Parent = goog.require('gen.com.google.j2cl.transpiler.readable.supermethodcall.ParentModule').Parent;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
 class Child extends Parent {
@@ -84,7 +84,7 @@ class Child extends Parent {
    */
   static $create() {
     Child.$clinit();
-    var instance = new Child;
+    let instance = new Child;
     instance.$ctor__com_google_j2cl_transpiler_readable_supermethodcall_Child();
     return instance;
   }

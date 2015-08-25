@@ -5,13 +5,13 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiteralsModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var String = goog.require('gen.java.lang.StringModule').String;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
-var $char = goog.require('vmbootstrap.PrimitivesModule').$char;
-var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let String = goog.require('gen.java.lang.StringModule').String;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
+let $char = goog.require('vmbootstrap.PrimitivesModule').$char;
+let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
 class SimpleLiterals extends Object {
@@ -48,7 +48,7 @@ class SimpleLiterals extends Object {
    */
   static $create() {
     SimpleLiterals.$clinit();
-    var instance = new SimpleLiterals;
+    let instance = new SimpleLiterals;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_simpleliterals_SimpleLiterals();
     return instance;

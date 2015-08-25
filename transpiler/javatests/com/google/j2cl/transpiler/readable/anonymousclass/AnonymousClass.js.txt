@@ -5,11 +5,11 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClassModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var String = goog.require('gen.java.lang.StringModule').String;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let String = goog.require('gen.java.lang.StringModule').String;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
 class SomeClass extends Object {
@@ -40,7 +40,7 @@ class SomeClass extends Object {
    */
   static $create__int(i) {
     SomeClass.$clinit();
-    var instance = new SomeClass;
+    let instance = new SomeClass;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_anonymousclass_SomeClass__int(
             i);
@@ -132,7 +132,7 @@ class AnonymousClass extends Object {
    */
   static $create() {
     AnonymousClass.$clinit();
-    var instance = new AnonymousClass;
+    let instance = new AnonymousClass;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass();
     return instance;
@@ -233,7 +233,7 @@ class AnonymousClass$1 extends SomeClass {
    */
   static $create__int($_0, $outer_this) {
     AnonymousClass$1.$clinit();
-    var instance = new AnonymousClass$1;
+    let instance = new AnonymousClass$1;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass$1__int(
             $_0, $outer_this);

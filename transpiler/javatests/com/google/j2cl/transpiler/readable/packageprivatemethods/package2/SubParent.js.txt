@@ -5,10 +5,10 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParentModule');
 
 
-var Parent = goog.require('gen.com.google.j2cl.transpiler.readable.packageprivatemethods.package1.ParentModule').Parent;
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+let Parent = goog.require('gen.com.google.j2cl.transpiler.readable.packageprivatemethods.package1.ParentModule').Parent;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
 class SubParent extends Parent {
@@ -43,7 +43,7 @@ class SubParent extends Parent {
    */
   static $create() {
     SubParent.$clinit();
-    var instance = new SubParent;
+    let instance = new SubParent;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubParent();
     return instance;

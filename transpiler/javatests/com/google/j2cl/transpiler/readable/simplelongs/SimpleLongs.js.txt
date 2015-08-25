@@ -5,13 +5,13 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.simplelongs.SimpleLongsModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Long = goog.require('nativebootstrap.LongUtilsModule').Long;
-var $LongUtils = goog.require('nativebootstrap.LongUtilsModule').LongUtils;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
-var $long = goog.require('vmbootstrap.PrimitivesModule').$long;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Long = goog.require('nativebootstrap.LongUtilsModule').Long;
+let $LongUtils = goog.require('nativebootstrap.LongUtilsModule').LongUtils;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+let $long = goog.require('vmbootstrap.PrimitivesModule').$long;
 
 
 class SimpleLongs extends Object {
@@ -99,7 +99,7 @@ class SimpleLongs extends Object {
    */
   static $create() {
     SimpleLongs.$clinit();
-    var instance = new SimpleLongs;
+    let instance = new SimpleLongs;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs();
     return instance;

@@ -5,11 +5,11 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.ternaryexpression.TernaryExpressionModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
-var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
+let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
 class TernaryExpression extends Object {
@@ -44,7 +44,7 @@ class TernaryExpression extends Object {
    */
   static $create() {
     TernaryExpression.$clinit();
-    var instance = new TernaryExpression;
+    let instance = new TernaryExpression;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_ternaryexpression_TernaryExpression();
     return instance;

@@ -5,10 +5,10 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructorModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
 class CascadingConstructor extends Object {
@@ -47,7 +47,7 @@ class CascadingConstructor extends Object {
    */
   static $create__int__int(a, b) {
     CascadingConstructor.$clinit();
-    var instance = new CascadingConstructor;
+    let instance = new CascadingConstructor;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int__int(
             a, b);
@@ -79,7 +79,7 @@ class CascadingConstructor extends Object {
    */
   static $create__int(a) {
     CascadingConstructor.$clinit();
-    var instance = new CascadingConstructor;
+    let instance = new CascadingConstructor;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int(
             a);

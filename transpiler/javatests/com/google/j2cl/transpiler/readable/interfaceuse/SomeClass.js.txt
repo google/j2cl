@@ -5,11 +5,11 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.interfaceuse.SomeClassModule');
 
 
-var AnotherInterface = goog.require('gen.com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterfaceModule').AnotherInterface;
-var SomeInterface = goog.require('gen.com.google.j2cl.transpiler.readable.interfaceuse.SomeInterfaceModule').SomeInterface;
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
+let AnotherInterface = goog.require('gen.com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterfaceModule').AnotherInterface;
+let SomeInterface = goog.require('gen.com.google.j2cl.transpiler.readable.interfaceuse.SomeInterfaceModule').SomeInterface;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 /**
@@ -44,7 +44,7 @@ class SomeClass extends Object {
    */
   static $create() {
     SomeClass.$clinit();
-    var instance = new SomeClass;
+    let instance = new SomeClass;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_interfaceuse_SomeClass();
     return instance;

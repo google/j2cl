@@ -5,11 +5,11 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructorModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Error = goog.require('gen.java.lang.ErrorModule').Error;
-var Exception = goog.require('gen.java.lang.ExceptionModule').Exception;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let Error = goog.require('gen.java.lang.ErrorModule').Error;
+let Exception = goog.require('gen.java.lang.ExceptionModule').Exception;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 /**
@@ -41,7 +41,7 @@ class GenericConstructor extends Object {
    */
   static $create__java_lang_Object__java_lang_Object(s, t) {
     GenericConstructor.$clinit();
-    var instance = new GenericConstructor;
+    let instance = new GenericConstructor;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor__java_lang_Object__java_lang_Object(
             s, t);
@@ -72,7 +72,7 @@ class GenericConstructor extends Object {
    */
   static $create__java_lang_Object(t) {
     GenericConstructor.$clinit();
-    var instance = new GenericConstructor;
+    let instance = new GenericConstructor;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor__java_lang_Object(
             t);

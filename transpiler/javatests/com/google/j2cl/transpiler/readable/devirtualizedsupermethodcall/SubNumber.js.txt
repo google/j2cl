@@ -5,13 +5,13 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumberModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Number = goog.require('gen.java.lang.NumberModule').Number;
-var $Long = goog.require('nativebootstrap.LongUtilsModule').Long;
-var $LongUtils = goog.require('nativebootstrap.LongUtilsModule').LongUtils;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $long = goog.require('vmbootstrap.PrimitivesModule').$long;
-var $Primitives = goog.require('vmbootstrap.PrimitivesModule').Primitives;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Number = goog.require('gen.java.lang.NumberModule').Number;
+let $Long = goog.require('nativebootstrap.LongUtilsModule').Long;
+let $LongUtils = goog.require('nativebootstrap.LongUtilsModule').LongUtils;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $long = goog.require('vmbootstrap.PrimitivesModule').$long;
+let $Primitives = goog.require('vmbootstrap.PrimitivesModule').Primitives;
 
 
 class SubNumber extends Number {
@@ -64,7 +64,7 @@ class SubNumber extends Number {
    */
   static $create() {
     SubNumber.$clinit();
-    var instance = new SubNumber;
+    let instance = new SubNumber;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_SubNumber();
     return instance;

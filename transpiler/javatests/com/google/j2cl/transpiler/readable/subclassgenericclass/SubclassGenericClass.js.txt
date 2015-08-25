@@ -5,9 +5,9 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.subclassgenericclass.SubclassGenericClassModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 /**
@@ -36,7 +36,7 @@ class GenericClass extends Object {
    */
   static $create() {
     GenericClass.$clinit();
-    var instance = new GenericClass;
+    let instance = new GenericClass;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass();
     return instance;
@@ -126,7 +126,7 @@ class GenericSubclassGenericClass extends GenericClass {
    */
   static $create() {
     GenericSubclassGenericClass.$clinit();
-    var instance = new GenericSubclassGenericClass;
+    let instance = new GenericSubclassGenericClass;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericSubclassGenericClass();
     return instance;
@@ -216,7 +216,7 @@ class SubclassGenericClass extends GenericClass {
    */
   static $create() {
     SubclassGenericClass.$clinit();
-    var instance = new SubclassGenericClass;
+    let instance = new SubclassGenericClass;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_SubclassGenericClass();
     return instance;

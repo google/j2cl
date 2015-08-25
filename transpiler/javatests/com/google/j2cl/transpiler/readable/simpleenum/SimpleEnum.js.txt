@@ -5,13 +5,13 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.simpleenum.SimpleEnumModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Enum = goog.require('gen.java.lang.EnumModule').Enum;
-var String = goog.require('gen.java.lang.StringModule').String;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $Casts = goog.require('vmbootstrap.CastsModule').Casts;
-var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let Enum = goog.require('gen.java.lang.EnumModule').Enum;
+let String = goog.require('gen.java.lang.StringModule').String;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $Casts = goog.require('vmbootstrap.CastsModule').Casts;
+let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
 /**
@@ -40,7 +40,7 @@ class SimpleEnum extends Enum {
    */
   static $create__java_lang_String__int($name, $ordinal) {
     SimpleEnum.$clinit();
-    var instance = new SimpleEnum;
+    let instance = new SimpleEnum;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum__java_lang_String__int(
             $name, $ordinal);
@@ -231,7 +231,7 @@ class SimpleEnum2 extends Enum {
    */
   static $create__int__java_lang_String__int(foo, $name, $ordinal) {
     SimpleEnum2.$clinit();
-    var instance = new SimpleEnum2;
+    let instance = new SimpleEnum2;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__int__java_lang_String__int(
             foo, $name, $ordinal);
@@ -265,7 +265,7 @@ class SimpleEnum2 extends Enum {
   static $create__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum__java_lang_String__int(
       foo, $name, $ordinal) {
     SimpleEnum2.$clinit();
-    var instance = new SimpleEnum2;
+    let instance = new SimpleEnum2;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum__java_lang_String__int(
             foo, $name, $ordinal);
@@ -500,7 +500,7 @@ class SimpleEnum2$1 extends SimpleEnum2 {
   static $create__int__java_lang_String__int($_0, $name, $ordinal,
                                              $outer_this) {
     SimpleEnum2$1.$clinit();
-    var instance = new SimpleEnum2$1;
+    let instance = new SimpleEnum2$1;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2$1__int__java_lang_String__int(
             $_0, $name, $ordinal, $outer_this);

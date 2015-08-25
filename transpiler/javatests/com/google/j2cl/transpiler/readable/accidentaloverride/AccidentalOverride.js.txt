@@ -5,12 +5,12 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.accidentaloverride.AccidentalOverrideModule');
 
 
-var AssertionError = goog.require('gen.java.lang.AssertionErrorModule').AssertionError;
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Error = goog.require('gen.java.lang.ErrorModule').Error;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $Casts = goog.require('vmbootstrap.CastsModule').Casts;
+let AssertionError = goog.require('gen.java.lang.AssertionErrorModule').AssertionError;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let Error = goog.require('gen.java.lang.ErrorModule').Error;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $Casts = goog.require('vmbootstrap.CastsModule').Casts;
 
 
 /**
@@ -45,7 +45,7 @@ class Parent extends Object {
    */
   static $create() {
     Parent.$clinit();
-    var instance = new Parent;
+    let instance = new Parent;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_accidentaloverride_Parent();
     return instance;
@@ -218,7 +218,7 @@ class AnotherAccidentalOverride extends Parent {
    */
   static $create() {
     AnotherAccidentalOverride.$clinit();
-    var instance = new AnotherAccidentalOverride;
+    let instance = new AnotherAccidentalOverride;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_accidentaloverride_AnotherAccidentalOverride();
     return instance;
@@ -323,7 +323,7 @@ class AccidentalOverride extends Parent {
    */
   static $create() {
     AccidentalOverride.$clinit();
-    var instance = new AccidentalOverride;
+    let instance = new AccidentalOverride;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_accidentaloverride_AccidentalOverride();
     return instance;

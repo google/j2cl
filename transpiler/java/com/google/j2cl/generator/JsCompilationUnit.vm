@@ -10,7 +10,7 @@ goog.module('gen.${packageName}.${moduleName}Module');
 #foreach($requiredModule in ${imports})
 #set ($importedName = ${requiredModule.ClassName})
 #set ($alias = ${requiredModule.Alias})
-var $alias = goog.require('${requiredModule.getModuleName()}').$importedName;
+let $alias = goog.require('${requiredModule.getModuleName()}').$importedName;
 #end
 
 

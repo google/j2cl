@@ -5,9 +5,9 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.multipletopclasses.MultipleTopClassesModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 class AnotherClass extends Object {
@@ -32,7 +32,7 @@ class AnotherClass extends Object {
    */
   static $create() {
     AnotherClass.$clinit();
-    var instance = new AnotherClass;
+    let instance = new AnotherClass;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_multipletopclasses_AnotherClass();
     return instance;
@@ -117,7 +117,7 @@ class MultipleTopClasses extends AnotherClass {
    */
   static $create() {
     MultipleTopClasses.$clinit();
-    var instance = new MultipleTopClasses;
+    let instance = new MultipleTopClasses;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_multipletopclasses_MultipleTopClasses();
     return instance;

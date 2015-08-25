@@ -5,11 +5,11 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.longparametersignature.LongParameterSignatureModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Long = goog.require('nativebootstrap.LongUtilsModule').Long;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $long = goog.require('vmbootstrap.PrimitivesModule').$long;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Long = goog.require('nativebootstrap.LongUtilsModule').Long;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $long = goog.require('vmbootstrap.PrimitivesModule').$long;
 
 
 class LongParameterSignature extends Object {
@@ -41,7 +41,7 @@ class LongParameterSignature extends Object {
    */
   static $create() {
     LongParameterSignature.$clinit();
-    var instance = new LongParameterSignature;
+    let instance = new LongParameterSignature;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_longparametersignature_LongParameterSignature();
     return instance;

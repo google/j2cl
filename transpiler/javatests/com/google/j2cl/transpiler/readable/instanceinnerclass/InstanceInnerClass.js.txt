@@ -5,10 +5,10 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClassModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
 class InstanceInnerClass extends Object {
@@ -56,7 +56,7 @@ class InstanceInnerClass extends Object {
    */
   static $create() {
     InstanceInnerClass.$clinit();
-    var instance = new InstanceInnerClass;
+    let instance = new InstanceInnerClass;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass();
     return instance;
@@ -168,7 +168,7 @@ class InstanceInnerClass$InnerClass extends Object {
    */
   static $create($outer_this) {
     InstanceInnerClass$InnerClass.$clinit();
-    var instance = new InstanceInnerClass$InnerClass;
+    let instance = new InstanceInnerClass$InnerClass;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass$InnerClass(
             $outer_this);

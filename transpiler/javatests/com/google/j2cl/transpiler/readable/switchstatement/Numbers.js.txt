@@ -5,13 +5,13 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.switchstatement.NumbersModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var Enum = goog.require('gen.java.lang.EnumModule').Enum;
-var String = goog.require('gen.java.lang.StringModule').String;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
-var $Casts = goog.require('vmbootstrap.CastsModule').Casts;
-var $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let Enum = goog.require('gen.java.lang.EnumModule').Enum;
+let String = goog.require('gen.java.lang.StringModule').String;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $Casts = goog.require('vmbootstrap.CastsModule').Casts;
+let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 
 
 /**
@@ -40,7 +40,7 @@ class Numbers extends Enum {
    */
   static $create__java_lang_String__int($name, $ordinal) {
     Numbers.$clinit();
-    var instance = new Numbers;
+    let instance = new Numbers;
     instance
         .$ctor__com_google_j2cl_transpiler_readable_switchstatement_Numbers__java_lang_String__int(
             $name, $ordinal);
