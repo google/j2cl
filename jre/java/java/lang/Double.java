@@ -19,39 +19,61 @@ package java.lang;
  * official Java API doc</a> for details.
  */
 public class Double extends Number {
-  private double value;
-
   public Double(double value) {
     // Super-source replaced.
   }
 
   @Override
   public byte byteValue() {
-    return (byte) value;
+    // Super-source replaced.
+    throw new RuntimeException();
   }
 
   @Override
   public double doubleValue() {
-    return value;
+    // Super-source replaced.
+    throw new RuntimeException();
   }
 
   @Override
   public float floatValue() {
-    return (float) value;
+    // Super-source replaced.
+    throw new RuntimeException();
   }
 
   @Override
   public int intValue() {
-    return (int) value;
+    // Super-source replaced.
+    throw new RuntimeException();
   }
 
   @Override
   public long longValue() {
-    return (long) value;
+    // Super-source replaced.
+    throw new RuntimeException();
   }
 
   @Override
   public short shortValue() {
-    return (short) value;
+    // Super-source replaced.
+    throw new RuntimeException();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    // Super-source replaced.
+    throw new RuntimeException();
+  }
+
+  @Override
+  public int hashCode() {
+    // Super-source replaced.
+    throw new RuntimeException();
+  }
+
+  @Override
+  public String toString() {
+    // Super-source replaced.
+    throw new RuntimeException();
   }
 }

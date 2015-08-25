@@ -59,4 +59,19 @@ public class Integer extends Number {
   public short shortValue() {
     return (short) value;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    return (o instanceof Integer) && (((Integer) o).value == value);
+  }
+
+  @Override
+  public int hashCode() {
+    return value;
+  }
+
+  @Override
+  public String toString() {
+    return "" + value;
+  }
 }

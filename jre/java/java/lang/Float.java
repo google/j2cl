@@ -41,4 +41,19 @@ public class Float extends Number {
   public short shortValue() {
     return (short) value;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    return (o instanceof Float) && (((Float) o).value == value);
+  }
+
+  @Override
+  public int hashCode() {
+    return (int) value;
+  }
+
+  @Override
+  public String toString() {
+    return "" + value;
+  }
 }

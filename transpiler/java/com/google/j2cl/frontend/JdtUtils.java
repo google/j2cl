@@ -40,7 +40,6 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 
-import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.IMethodBinding;
@@ -558,11 +557,13 @@ public class JdtUtils {
     return true;
   }
 
+  static boolean isInstanceMethod(IMethodBinding methodBinding) {
+    return !methodBinding.isConstructor() && !JdtUtils.isStatic(methodBinding.getModifiers());
+  }
+
   static boolean isObjectInstanceMethodBinding(
       IMethodBinding methodBinding, org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
-    boolean instanceMethod =
-        !methodBinding.isConstructor() && !JdtUtils.isStatic(methodBinding.getModifiers());
-    if (!instanceMethod) {
+    if (!isInstanceMethod(methodBinding)) {
       return false;
     }
     ITypeBinding javaLangObjectBinding =
@@ -576,57 +577,24 @@ public class JdtUtils {
   }
 
   /**
-   * Returns true if {@code methodBinding} is an instance method, and is declared by
-   * Number, Byte, Double, Float, Integer, Long, or Short.
+   * Returns true if {@code methodBinding} is an instance method declared by Double or Number.
    */
   static boolean isNumberInstanceMethodBinding(
       IMethodBinding methodBinding, org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
-    boolean instanceMethod =
-        !methodBinding.isConstructor() && !JdtUtils.isStatic(methodBinding.getModifiers());
-    if (!instanceMethod) {
-      return false;
-    }
-    return isNumberType(methodBinding.getDeclaringClass(), compilationUnit);
+    ITypeBinding javaLangDoubleBinding =
+        compilationUnit.getAST().resolveWellKnownType("java.lang.Double");
+    ITypeBinding javaLangNumberBinding = javaLangDoubleBinding.getSuperclass();
+    return isInstanceMethod(methodBinding)
+        && (methodBinding.getDeclaringClass().isEqualTo(javaLangDoubleBinding)
+            || methodBinding.getDeclaringClass().isEqualTo(javaLangNumberBinding));
   }
 
-  static boolean isNumberType(
-      ITypeBinding typeBinding, org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
-    AST ast = compilationUnit.getAST();
-    ITypeBinding javaLangDoubleBinding = ast.resolveWellKnownType("java.lang.Double");
-    ITypeBinding javaLangFloatBinding = ast.resolveWellKnownType("java.lang.Float");
-    ITypeBinding javaLangByteBinding = ast.resolveWellKnownType("java.lang.Byte");
-    ITypeBinding javaLangShortBinding = ast.resolveWellKnownType("java.lang.Short");
-    ITypeBinding javaLangIntegerBinding = ast.resolveWellKnownType("java.lang.Integer");
-    ITypeBinding javaLangLongBinding = ast.resolveWellKnownType("java.lang.Long");
-    ITypeBinding javaLangNumberBinding = javaLangDoubleBinding.getSuperclass(); // java.lang.Number
-    return typeBinding == javaLangDoubleBinding
-        || typeBinding == javaLangFloatBinding
-        || typeBinding == javaLangByteBinding
-        || typeBinding == javaLangShortBinding
-        || typeBinding == javaLangIntegerBinding
-        || typeBinding == javaLangLongBinding
-        || typeBinding == javaLangNumberBinding;
-  }
-
-  static TypeDescriptor getBootStrapTypeDescriptor(
-      ITypeBinding typeBinding, org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
-    AST ast = compilationUnit.getAST();
-    if (typeBinding == ast.resolveWellKnownType("java.lang.Byte")) {
-      return TypeDescriptors.BYTES_TYPE_DESCRIPTOR;
-    } else if (typeBinding == ast.resolveWellKnownType("java.lang.Double")) {
-      return TypeDescriptors.DOUBLES_TYPE_DESCRIPTOR;
-    } else if (typeBinding == ast.resolveWellKnownType("java.lang.Float")) {
-      return TypeDescriptors.FLOATS_TYPE_DESCRIPTOR;
-    } else if (typeBinding == ast.resolveWellKnownType("java.lang.Integer")) {
-      return TypeDescriptors.INTEGERS_TYPE_DESCRIPTOR;
-    } else if (typeBinding == ast.resolveWellKnownType("java.lang.Short")) {
-      return TypeDescriptors.SHORTS_TYPE_DESCRIPTOR;
-    } else if (typeBinding == ast.resolveWellKnownType("java.lang.Long")) {
-      return TypeDescriptors.LONGS_TYPE_DESCRIPTOR;
-    } else if (typeBinding == ast.resolveWellKnownType("java.lang.Double").getSuperclass()) {
-      return TypeDescriptors.NUMBERS_TYPE_DESCRIPTOR;
-    }
-    return null;
+  static boolean isBooleanInstanceMethodBinding(
+      IMethodBinding methodBinding, org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
+    ITypeBinding javaLangBooleanBinding =
+        compilationUnit.getAST().resolveWellKnownType("java.lang.Boolean");
+    return isInstanceMethod(methodBinding)
+        && methodBinding.getDeclaringClass().isEqualTo(javaLangBooleanBinding);
   }
 
   static IMethodBinding findSamMethodBinding(ITypeBinding typeBinding) {

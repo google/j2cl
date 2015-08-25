@@ -16,7 +16,9 @@ j2cl_java_library(
     srcs = glob(["**/*.java"]),
     add_jre_dep = False,
     super_srcs = [
+        "java/lang/Boolean.java",
         "java/lang/Class.java",
+        "java/lang/Double.java",
         "java/lang/Object.java",
         "java/lang/String.java",
     ],

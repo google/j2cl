@@ -41,4 +41,19 @@ public class Long extends Number {
   public short shortValue() {
     return (short) value;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    return (o instanceof Long) && (((Long) o).value == value);
+  }
+
+  @Override
+  public int hashCode() {
+    return (int) (this.longValue() ^ (this.longValue() >>> 32));
+  }
+
+  @Override
+  public String toString() {
+    return "" + value;
+  }
 }

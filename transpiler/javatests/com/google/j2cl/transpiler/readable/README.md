@@ -37,7 +37,9 @@ are copyright and licensed as follows:
 
 ## Likely readable examples to add (remove some redundant)
 - anonymousclassforfunctionalinterface (transpiled to function)
-- boxing
+- autoboxing
+- instanceofboxedtype
+- casttoboxedtype
 - breakwithlabel
 - catchjsexception
 - classlocalvarcollision

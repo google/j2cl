@@ -9,6 +9,8 @@ public class Main {
     Integer i = new Integer(1);
     Long l = new Long(1L);
     Short s = new Short((short) 1);
+    Character c = new Character('a');
+    Boolean bool = new Boolean(true);
 
     // equals
     assert (b.equals(b));
@@ -23,8 +25,23 @@ public class Main {
     assert (l.equals(new Long(1L)));
     assert (s.equals(s));
     assert (s.equals(new Short((short) 1)));
-    assert (!l.equals(i)); // Long is transpiled fine.
-    // assert (!b.equals(i)); // b.equals(i) returns true in the transpiled code.
+    assert (!l.equals(i));
+    assert (!b.equals(d));
+    assert (!b.equals(f));
+    assert (!b.equals(i));
+    assert (!b.equals(l));
+    assert (!b.equals(s));
+    assert (!d.equals(b));
+    assert (!d.equals(f));
+    assert (!d.equals(i));
+    assert (!d.equals(l));
+    assert (!d.equals(s));
+    assert (c.equals(c));
+    assert (c.equals(new Character('a')));
+    assert (!c.equals(new Character('b')));
+    assert (bool.equals(bool));
+    assert (bool.equals(new Boolean(true)));
+    assert (!bool.equals(new Boolean(false)));
 
     // hashCode
     assert (b.hashCode() == b.hashCode());
@@ -36,6 +53,9 @@ public class Main {
     assert (b.hashCode() == i.hashCode());
     assert (l.hashCode() == i.hashCode());
     assert (new Long(9223372036854775807L).hashCode() == -2147483648);
+    assert (c.hashCode() == c.hashCode());
+    assert (bool.hashCode() == bool.hashCode());
+    assert (bool.hashCode() != new Boolean(false).hashCode());
 
     // toString
     assert (b.toString().equals("1"));
@@ -44,6 +64,7 @@ public class Main {
     assert (i.toString().equals("1"));
     assert (l.toString().equals("1"));
     assert (s.toString().equals("1"));
+    assert (bool.toString().equals("true"));
 
     // getClass
     assert (b.getClass() instanceof Class);
@@ -52,12 +73,13 @@ public class Main {
     assert (i.getClass() instanceof Class);
     assert (l.getClass() instanceof Class);
     assert (s.getClass() instanceof Class);
-    // getClass().getName() returns "double", and l.getClass().getName() returns "long"
-    //    assert (b.getClass().getName().equals("java.lang.Byte"));
-    //    assert (d.getClass().getName().equals("java.lang.Double"));
-    //    assert (f.getClass().getName().equals("java.lang.Float"));
-    //    assert (i.getClass().getName().equals("java.lang.Integer"));
-    //    assert (l.getClass().getName().equals("java.lang.Long"));
-    //    assert (s.getClass().getName().equals("java.lang.Short"));
+    assert (b.getClass().getName().equals("java.lang.Byte"));
+    // assert (d.getClass().getName().equals("java.lang.Double"));
+    assert (f.getClass().getName().equals("java.lang.Float"));
+    assert (i.getClass().getName().equals("java.lang.Integer"));
+    assert (l.getClass().getName().equals("java.lang.Long"));
+    assert (s.getClass().getName().equals("java.lang.Short"));
+    assert (c.getClass().getName().equals("java.lang.Character"));
+    // assert (bool.getClass().getName().equals("java.lang.Boolean"));
   }
 }

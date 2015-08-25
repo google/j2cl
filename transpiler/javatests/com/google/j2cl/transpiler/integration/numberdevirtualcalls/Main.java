@@ -94,5 +94,11 @@ public class Main {
     assert (ms.intValue() == 32767);
     assert (ms.longValue() == 32767L);
     assert (ms.shortValue() == 32767);
+
+    Character c = new Character('a');
+    assert (c.charValue() == 'a');
+
+    Boolean bool = new Boolean(true);
+    assert bool.booleanValue();
   }
 }

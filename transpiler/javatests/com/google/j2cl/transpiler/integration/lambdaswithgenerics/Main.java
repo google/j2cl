@@ -25,11 +25,10 @@ public class Main {
     Main m = new Main(100);
     int result =
         test(
-            i
-                -> {
-                  int f = i.field + field;
-                  return new Main(f);
-                },
+            i -> {
+              int f = i.field + field;
+              return new Main(f);
+            },
             m);
     assert (result == 120);
   }
@@ -38,11 +37,10 @@ public class Main {
     final Main m = new Main(100);
     int result =
         test(
-            i
-                -> {
-                  int f = i.field + m.field;
-                  return new Main(f);
-                },
+            i -> {
+              int f = i.field + m.field;
+              return new Main(f);
+            },
             m);
     assert (result == 210);
   }

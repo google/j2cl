@@ -3,10 +3,9 @@ goog.module('vmbootstrap.ObjectsModule');
 
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
-var Longs = goog.require('vmbootstrap.LongsModule').Longs;
+var Booleans = goog.require('vmbootstrap.BooleansModule').Booleans;
 var Numbers = goog.require('vmbootstrap.NumbersModule').Numbers;
 var Strings = goog.require('vmbootstrap.StringsModule').Strings;
-var Long = goog.require('nativebootstrap.LongUtilsModule').Long;
 
 
 /**
@@ -23,8 +22,8 @@ class Objects {
     var type = typeof obj;
     if (type == 'number') {
       return Numbers.m_equals__java_lang_Object__java_lang_Object(obj, other);
-    } else if (obj instanceof Long) {
-      return Longs.m_equals__java_lang_Object__java_lang_Object(obj, other);
+    } else if (type == 'boolean') {
+      return Booleans.m_equals__java_lang_Object__java_lang_Object(obj, other);
     } else if (type == 'string') {
       return Strings.m_equals__java_lang_Object__java_lang_Object(obj, other);
     } else if (obj instanceof Array) {
@@ -43,8 +42,8 @@ class Objects {
     var type = typeof obj;
     if (type == 'number') {
       return Numbers.m_hashCode__java_lang_Object(obj);
-    } else if (obj instanceof Long) {
-      return Longs.m_hashCode__java_lang_Object(obj);
+    } else if (type == 'boolean') {
+      return Booleans.m_hashCode__java_lang_Object(obj);
     } else if (type == 'string') {
       return Strings.m_hashCode__java_lang_Object(obj);
     } else if (obj instanceof Array) {
@@ -63,8 +62,8 @@ class Objects {
     var type = typeof obj;
     if (type == 'number') {
       return Numbers.m_toString__java_lang_Object(obj);
-    } else if (obj instanceof Long) {
-      return Longs.m_toString__java_lang_Object(obj);
+    } else if (type == 'boolean') {
+      return Booleans.m_toString__java_lang_Object(obj);
     } else if (type == 'string') {
       return Strings.m_toString__java_lang_Object(obj);
     } else if (obj instanceof Array) {
@@ -83,8 +82,8 @@ class Objects {
     var type = typeof obj;
     if (type == 'number') {
       return Numbers.m_getClass__java_lang_Object(obj);
-    } else if (obj instanceof Long) {
-      return Longs.m_getClass__java_lang_Object(obj);
+    } else if (type == 'boolean') {
+      return Booleans.m_getClass__java_lang_Object(obj);
     } else if (type == 'string') {
       return Strings.m_getClass__java_lang_Object(obj);
     } else if (obj instanceof Array) {

@@ -49,90 +49,78 @@ class Numbers {
   }
 
   /**
-   * @param {Number|number|!Long} obj
+   * @param {Number|number} obj
    * @return {number}
    * @public
    */
   static m_byteValue__java_lang_Number(obj) {
     if (typeof obj == 'number') {
       return Primitives.$castDoubleToByte(obj);
-    } else if (obj instanceof Long) {
-      return Primitives.$castLongToByte(obj);
     } else {
       return obj.m_byteValue();
     }
   }
 
   /**
-   * @param {Number|number|!Long} obj
+   * @param {Number|number} obj
    * @return {number}
    * @public
    */
   static m_doubleValue__java_lang_Number(obj) {
     if (typeof obj == 'number') {
       return obj;
-    } else if (obj instanceof Long) {
-      return Primitives.$castLongToDouble(obj);
     } else {
       return obj.m_doubleValue();
     }
   }
 
   /**
-   * @param {Number|number|!Long} obj
+   * @param {Number|number} obj
    * @return {number}
    * @public
    */
   static m_floatValue__java_lang_Number(obj) {
     if (typeof obj == 'number') {
       return obj;
-    } else if (obj instanceof Long) {
-      return Primitives.$castLongToFloat(obj);
     } else {
       return obj.m_floatValue();
     }
   }
 
   /**
-   * @param {Number|number|!Long} obj
+   * @param {Number|number} obj
    * @return {number}
    * @public
    */
   static m_intValue__java_lang_Number(obj) {
     if (typeof obj == 'number') {
       return Primitives.$castDoubleToInt(obj);
-    } else if (obj instanceof Long) {
-      return Primitives.$castLongToInt(obj);
     } else {
       return obj.m_intValue();
     }
   }
 
   /**
-   * @param {Number|number|!Long} obj
+   * @param {Number|number} obj
    * @return {!Long}
    * @public
    */
   static m_longValue__java_lang_Number(obj) {
     if (typeof obj == 'number') {
       return Primitives.$castDoubleToLong(obj);
-    } else if (obj instanceof Long) {
-      return /**@type{!Long} */ (obj);
     } else {
       return obj.m_longValue();
     }
   }
 
   /**
-   * @param {Number|number|!Long} obj
+   * @param {Number|number} obj
    * @return {number}
    * @public
    */
   static m_shortValue__java_lang_Number(obj) {
     if (typeof obj == 'number') {
       return Primitives.$castDoubleToShort(obj);
-    } else if (obj instanceof Long) {
-      return Primitives.$castLongToShort(obj);
     } else {
       return obj.m_shortValue();
     }

@@ -21,10 +21,9 @@ public class Main {
     assert result == 111;
     result =
         test(
-            i
-                -> {
-                  return i + 2;
-                },
+            i -> {
+              return i + 2;
+            },
             10);
     assert result == 112;
   }
@@ -49,11 +48,10 @@ public class Main {
     int x = 1;
     int result =
         test(
-            i
-                -> {
-                  int y = 1;
-                  return x + y + this.field + i + 1;
-                },
+            i -> {
+              int y = 1;
+              return x + y + this.field + i + 1;
+            },
             10);
     assert result == 213;
   }

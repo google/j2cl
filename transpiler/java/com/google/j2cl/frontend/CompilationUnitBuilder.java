@@ -531,17 +531,6 @@ public class CompilationUnitBuilder {
           JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(expression.arguments()),
           arguments);
 
-      // Perform devirtualization for NewInstance of java.lang.Number Sub Types.
-      if (JdtUtils.isNumberType(constructorBinding.getDeclaringClass(), jdtCompilationUnit)) {
-        return new NewInstance(
-            qualifier,
-            ASTUtils.createNumberConstructorDescriptor(
-                JdtUtils.getBootStrapTypeDescriptor(
-                    constructorBinding.getDeclaringClass(), jdtCompilationUnit),
-                constructorMethodDescriptor.getParameterTypeDescriptors()),
-            arguments);
-      }
-
       Expression newInstance = null;
       if (JdtUtils.isInstanceMemberClass(constructorBinding.getDeclaringClass())) {
         // outerclass.new InnerClass() => outerClass.$create_InnerClass();
@@ -1174,7 +1163,9 @@ public class CompilationUnitBuilder {
           expression.getExpression() == null ? null : convert(expression.getExpression());
       MethodDescriptor methodDescriptor =
           JdtUtils.createMethodDescriptor(methodBinding, compilationUnitNameLocator);
-      List<Expression> arguments = convertExpressions(expression.arguments());
+      List<Expression> arguments =
+          convertExpressions(
+              JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(expression.arguments()));
       maybePackageVarargs(
           methodBinding,
           JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(expression.arguments()),
@@ -1189,14 +1180,20 @@ public class CompilationUnitBuilder {
             TypeDescriptors.OBJECT_TYPE_DESCRIPTOR);
       }
 
-      // Perform Number method devirtualization.
+      // Perform Boxed method devirtualization.
       if (JdtUtils.isNumberInstanceMethodBinding(methodBinding, jdtCompilationUnit)
           && qualifier != null) { // do not devirtualize inside the same declaring class.
         return ASTUtils.createDevirtualizedMethodCall(
             methodCall,
-            JdtUtils.getBootStrapTypeDescriptor(
-                methodBinding.getDeclaringClass(), jdtCompilationUnit),
-            methodDescriptor.getEnclosingClassTypeDescriptor());
+            TypeDescriptors.NUMBERS_TYPE_DESCRIPTOR,
+            TypeDescriptors.NUMBER_TYPE_DESCRIPTOR);
+      }
+      if (JdtUtils.isBooleanInstanceMethodBinding(methodBinding, jdtCompilationUnit)
+          && qualifier != null) { // do not devirtualize inside the same declaring class.
+        return ASTUtils.createDevirtualizedMethodCall(
+            methodCall,
+            TypeDescriptors.BOOLEANS_TYPE_DESCRIPTOR,
+            TypeDescriptors.BOOLEAN_TYPE_DESCRIPTOR);
       }
       return methodCall;
     }
@@ -1548,8 +1545,7 @@ public class CompilationUnitBuilder {
 
       // <ClassLiteralClass>.$class.forArray(<dimensions>)
       return new MethodCall(
-          new FieldAccess(null, classFieldDescriptor),
-          forArrayMethodDescriptor,
+          new FieldAccess(null, classFieldDescriptor), forArrayMethodDescriptor,
           ImmutableList.<Expression>of(
               new NumberLiteral(TypeDescriptors.INT_TYPE_DESCRIPTOR, typeBinding.getDimensions())));
     }

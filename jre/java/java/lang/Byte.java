@@ -42,4 +42,19 @@ public class Byte extends Number {
   public short shortValue() {
     return value;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    return (o instanceof Byte) && (((Byte) o).value == value);
+  }
+
+  @Override
+  public int hashCode() {
+    return value;
+  }
+
+  @Override
+  public String toString() {
+    return "" + value;
+  }
 }

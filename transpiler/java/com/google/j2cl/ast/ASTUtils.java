@@ -390,24 +390,4 @@ public class ASTUtils {
     // Call the method like Objects.foo(instance, ...)
     return new MethodCall(null, methodDescriptor, arguments);
   }
-
-  /**
-   * Create constructor MethodDescriptor for Number types.
-   * <p>
-   * NewInstance of Number types (Byte, Double, Float, Integer, Long, Short) are
-   * transpiled to corresponding calls: Bytes.$create__byte(b), Doubles.$create__double(d), etc.
-   */
-  public static MethodDescriptor createNumberConstructorDescriptor(
-      TypeDescriptor enclosingClassTypeDescriptor,
-      Iterable<TypeDescriptor> parameterTypeDescriptors) {
-    return MethodDescriptor.create(
-        false, // not static
-        Visibility.PUBLIC,
-        enclosingClassTypeDescriptor, // enclosing class
-        enclosingClassTypeDescriptor.getClassName(), // constructor name
-        true, // is constructor
-        false, // not native
-        TypeDescriptors.VOID_TYPE_DESCRIPTOR, // return type
-        parameterTypeDescriptors); // parameter type
-  }
 }

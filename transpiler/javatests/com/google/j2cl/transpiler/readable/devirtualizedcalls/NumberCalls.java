@@ -97,5 +97,11 @@ public class NumberCalls {
     ll.intValue();
     ll.longValue();
     ll.shortValue();
+
+    Character c = new Character('a');
+    c.charValue();
+
+    Boolean bool = new Boolean(true);
+    bool.booleanValue();
   }
 }
