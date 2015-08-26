@@ -84,10 +84,6 @@ def _impl(ctx):
       arguments=compiler_args,
   )
 
-  if ctx.attr.show_debug_cmd:
-    print("\ntranspile command:\n" + ctx.executable.compiler.short_path +
-          " " + " ".join(compiler_args) + "\n\n")
-
   # We need to return the output files so that they get recognized as outputs
   # from blaze
   return struct(
@@ -113,7 +109,6 @@ j2cl_transpile = rule(
             mandatory=True,
             allow_files=FileType([".java"]),
         ),
-        "show_debug_cmd": attr.bool(default=False),
         "super_srcs": attr.label_list(
             allow_files=FileType([".java"]),
         ),
