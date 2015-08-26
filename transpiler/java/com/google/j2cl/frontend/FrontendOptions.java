@@ -20,10 +20,19 @@ import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.errors.Errors;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -35,10 +44,11 @@ public class FrontendOptions {
   private List<String> classpathEntries;
   private List<String> sourcepathEntries;
   private List<String> bootclassPathEntries;
-  private File outputDirectory;
+  private String output;
   private String encoding;
   private String sourceVersion;
   private List<String> sourceFilePaths;
+  private FileSystem outputFileSystem;
 
   private static final Set<String> VALID_JAVA_VERSIONS =
       ImmutableSet.of("1.8", "1.7", "1.6", "1.5");
@@ -55,7 +65,7 @@ public class FrontendOptions {
     setClasspathEntries(flags.classpath);
     setSourcepathEntries(flags.sourcepath);
     setBootclassPathEntries(flags.bootclasspath);
-    setOutputDirectory(flags.outputDir);
+    setOutput(flags.output);
     setSourceFiles(flags.files);
     setSourceVersion(flags.source);
     setEncoding(flags.encoding);
@@ -97,12 +107,32 @@ public class FrontendOptions {
     this.bootclassPathEntries = getPathEntries(bootclassPath);
   }
 
-  public File getOutputDirectory() {
-    return this.outputDirectory;
+  public String getOutput() {
+    return this.output;
   }
 
-  public void setOutputDirectory(File outputDirectory) {
-    this.outputDirectory = outputDirectory;
+  /**
+   * Sets the output location.
+   * <p>
+   * The location can be either a directory or a zip file.
+   */
+  public void setOutput(String output) {
+    Path outputPath = Paths.get(output);
+    if (Files.exists(outputPath) && !Files.isDirectory(outputPath) && !output.endsWith(".zip")) {
+      errors.error(Errors.ERR_OUTPUT_LOCATION);
+    }
+
+    if (output.endsWith(".zip")) {
+      // jar:file://output/Location/Path.zip!relative/File/Path.js
+      initZipOutput(outputPath);
+      return;
+    }
+    // file://output/Location/Path/relative/File/Path.js
+    initDirOutput(output);
+  }
+
+  public FileSystem getOutputFileSystem() {
+    return outputFileSystem;
   }
 
   public String getEncoding() {
@@ -175,6 +205,24 @@ public class FrontendOptions {
     return true;
   }
 
+  private void initDirOutput(String output) {
+    this.outputFileSystem = FileSystems.getDefault();
+    this.output = output;
+  }
+
+  private void initZipOutput(Path outputPath) {
+    try {
+      Map<String, String> env = new HashMap<>();
+      env.put("create", "true");
+      this.outputFileSystem =
+          FileSystems.newFileSystem(
+              URI.create("jar:file:" + outputPath.toUri().getPath()), env, null);
+    } catch (IOException e) {
+      errors.error(Errors.ERR_CANNOT_OPEN_ZIP, outputPath.toString());
+    }
+    this.output = null;
+  }
+
   private static List<String> getPathEntries(String path) {
     List<String> entries = new ArrayList<>();
     for (String entry : Splitter.on(File.pathSeparatorChar).split(path)) {
@@ -183,5 +231,15 @@ public class FrontendOptions {
       }
     }
     return entries;
+  }
+
+  public void maybeCloseFileSystem() {
+    if (outputFileSystem instanceof com.sun.nio.zipfs.ZipFileSystem) {
+      try {
+        outputFileSystem.close();
+      } catch (IOException e) {
+        errors.error(Errors.ERR_CANNOT_CLOSE_ZIP);
+      }
+    }
   }
 }

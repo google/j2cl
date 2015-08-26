@@ -1,11 +1,11 @@
-"""j2cl_transpile build rule.
+"""j2cl_transpile_zip build rule.
 
-This build extension defines a new rule j2cl_transpile, that takes a
-java_library as input and emits JavaScript for each Java file from the
-java_library. Since skylark does not allow access to native providers yet, one
-still has to list srcs and dependencies manually.
+This build extension defines a new rule j2cl_transpile_zip, that takes a
+java_library as input and emits a bundle zip of JavaScript transpiled from
+the Java files in the java_library. Since skylark does not allow access to
+native providers yet, one still has to list srcs and dependencies manually.
 
-Here is an example use of j2cl_transpile:
+Here is an example use of j2cl_transpile_zip:
 
 java_library(
    name = "my_java_library",
@@ -13,7 +13,7 @@ java_library(
    deps = [":my_deps"],
 )
 
-j2cl_transpile(
+j2cl_transpile_zip(
     name = "my_transpile",
     srcs = ["MyJavaFile.java"],
     java_library = ":my_java_library",
@@ -21,23 +21,23 @@ j2cl_transpile(
 )
 
 Note: in general you want to be using j2cl_java_library instead of using
-j2cl_transpile directly.
+j2cl_transpile_zip directly.
 
 """
 
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_root")
 
 
-# TODO: replace with j2cl_transpile_zip.bzl when Blaze is ready.
+# TODO: replace j2cl_transpile.bzl when Blaze is ready.
+# TODO: update python scripts to use this path.
 def _impl(ctx):
-  """Implementation for j2cl_transpile"""
+  """Implementation for j2cl_transpile_zip"""
   java_files = ctx.files.srcs  # java files that need to be compiled
   super_java_files = ctx.files.super_srcs  # java files whose js to ignore
   java_deps = ctx.files.java_deps
   java_deps_paths = []
   java_files_paths = []
   js_files = []
-  js_files_paths = []
 
   # base package for the build
   package_name = ctx.label.package
@@ -45,30 +45,14 @@ def _impl(ctx):
   for java_dep in java_deps:
     java_deps_paths += [java_dep.path]
 
-  java_root = get_java_root(package_name)
-  index = 0
   for java_file in java_files:
-    # the java file path is absolute therefore the javascript one is as well
-    js_file_name = java_file.path[:-len("java")] + "js"
-
-    if not java_file in super_java_files:
-      # make js file relative to the build package
-      base_js_file_name = js_file_name[len(package_name) + 1:]
-      # create new output file
-      js_file_artifact = ctx.new_file(base_js_file_name)
-      js_files += [js_file_artifact]
-
-    # cut off the base build package since this is included in the output dir
-    # the compiler itself only outputs packages.
-    js_files_paths += [js_file_artifact.path[len(java_root):]]
-
     java_files_paths += [java_file.path]
-    index += 1
 
+  js_zip_name = ctx.label.name + ".js.zip"
   compiler_args = [
       "-d",
-      ctx.configuration.bin_dir.path + "/" + java_root,
-  ]
+      ctx.configuration.bin_dir.path + "/" + ctx.label.package + "/" +
+      js_zip_name,]
 
   if len(java_deps_paths) > 0:
     host_path_separator = ctx.configuration.host_path_separator
@@ -77,25 +61,20 @@ def _impl(ctx):
   # The transpiler expects each java file path as a separate argument.
   compiler_args += java_files_paths
 
+  js_zip_artifact = ctx.new_file(js_zip_name)
   ctx.action(
       inputs=java_files + java_deps,
-      outputs=js_files,
+      outputs=[js_zip_artifact],
       executable=ctx.executable.compiler,
       arguments=compiler_args,
   )
 
-  if ctx.attr.show_debug_cmd:
-    print("\ntranspile command:\n" + ctx.executable.compiler.short_path +
-          " " + " ".join(compiler_args) + "\n\n")
-
-  # We need to return the output files so that they get recognized as outputs
-  # from blaze
   return struct(
-      files=set(js_files),
+      files=set([js_zip_artifact]),
   )
 
 # expose rule
-j2cl_transpile = rule(
+j2cl_transpile_zip = rule(
     attrs={
         "java_library": attr.label(mandatory=True),
         "java_deps": attr.label_list(
@@ -113,7 +92,6 @@ j2cl_transpile = rule(
             mandatory=True,
             allow_files=FileType([".java"]),
         ),
-        "show_debug_cmd": attr.bool(default=False),
         "super_srcs": attr.label_list(
             allow_files=FileType([".java"]),
         ),

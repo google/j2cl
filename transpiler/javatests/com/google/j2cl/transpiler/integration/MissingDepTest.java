@@ -22,7 +22,7 @@ import java.io.IOException;
  */
 public class MissingDepTest extends IntegrationTestCase {
   public void testMissingDep() throws IOException, InterruptedException {
-    TranspileResult transpileResult = transpileDirectory("missingdep");
+    TranspileResult transpileResult = transpileDirectory("missingdep", OutputType.DIR);
     assertLogContainsSnippet(
         transpileResult.errorLines, "cannot find CompilationUnit for type : java.lang.Object");
   }

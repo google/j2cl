@@ -9,6 +9,7 @@ package(default_visibility = ["//:__subpackages__"])
 licenses(["unencumbered"])
 
 load("/third_party/java_src/j2cl/build_def/j2cl_java_library", "j2cl_java_library")
+load("/third_party/java_src/j2cl/build_def/j2cl_transpile_zip", "j2cl_transpile_zip")
 
 # Transpiles the parts of the jre that are implemented as Java.
 j2cl_java_library(
@@ -34,4 +35,13 @@ js_library(
         "//transpiler:nativebootstrap",
         ":JavaJre_js_library",
     ],
+)
+
+# TODO: this is example usage of j2cl_transpile_zip, remove when blaze supports
+# zips in js_library rules and j2cl_transpile is replaced with
+# j2cl_transpile_zip.
+j2cl_transpile_zip(
+    name = "JavaJreBundle",
+    srcs = glob(["**/*.java"]),
+    java_library = ":JavaJre",
 )

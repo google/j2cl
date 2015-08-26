@@ -28,10 +28,13 @@ public class Errors {
   public static final String ERR_INVALID_SOURCE_FILE = "invalid source file";
   public static final String ERR_INVALID_SOURCE_VERSION = "invalid source version";
   public static final String ERR_UNSUPPORTED_ENCODING = "unsupported encoding";
-  public static final String ERR_CANNOT_CREATE_DIRECTORY = "cannot create directory";
   public static final String ERR_CANNOT_GENERATE_OUTPUT =
       "cannot generate output, please see Velocity runtime log";
   public static final String ERR_CANNOT_FIND_UNIT = "cannot find CompilationUnit for type ";
+  public static final String ERR_OUTPUT_LOCATION =
+      "-output location must be a directory or .zip file";
+  public static final String ERR_CANNOT_OPEN_ZIP = "cannot open zip";
+  public static final String ERR_CANNOT_CLOSE_ZIP = "cannot close zip";
 
   private int errorCount = 0;
   private List<String> errorMessages = new ArrayList<>();

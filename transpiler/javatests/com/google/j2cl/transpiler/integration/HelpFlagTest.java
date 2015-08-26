@@ -28,7 +28,7 @@ public class HelpFlagTest extends IntegrationTestCase {
     assertLogContainsSnippet(transpileResult.outputLines, "<source files>");
     assertLogContainsSnippet(transpileResult.outputLines, "-bootclasspath <path>");
     assertLogContainsSnippet(transpileResult.outputLines, "-classpath (-cp) <path>");
-    assertLogContainsSnippet(transpileResult.outputLines, "-d <directory>");
+    assertLogContainsSnippet(transpileResult.outputLines, "-d <file>");
     assertLogContainsSnippet(transpileResult.outputLines, "-encoding <encoding>");
     assertLogContainsSnippet(transpileResult.outputLines, "-h (-help)");
     assertLogContainsSnippet(transpileResult.outputLines, "-source <release>");

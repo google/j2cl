@@ -24,10 +24,10 @@ import com.google.j2cl.generator.visitors.ImportGatheringVisitor;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
-import java.io.File;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystem;
 import java.util.Set;
 
 /**
@@ -36,17 +36,27 @@ import java.util.Set;
 public class JavaScriptGenerator extends AbstractSourceGenerator {
   private static final String TEMPLATE_FILE_PATH = "com/google/j2cl/generator/JsCompilationUnit.vm";
   private final CompilationUnit compilationUnit;
-  private final VelocityEngine velocityEngine;
+  protected final VelocityEngine velocityEngine;
 
   public JavaScriptGenerator(
       Errors errors,
-      File outputDirectory,
+      FileSystem outputFileSystem,
+      String outputLocationPath,
       Charset charset,
       CompilationUnit compilationUnit,
       VelocityEngine velocityEngine) {
-    super(errors, TranspilerUtils.getOutputPath(compilationUnit), outputDirectory, charset);
+    super(
+        errors,
+        outputFileSystem,
+        outputLocationPath,
+        createRelativeFilePath(compilationUnit),
+        charset);
     this.compilationUnit = compilationUnit;
     this.velocityEngine = velocityEngine;
+  }
+
+  private static String createRelativeFilePath(CompilationUnit compilationUnit) {
+    return TranspilerUtils.getOutputPath(compilationUnit);
   }
 
   @Override

@@ -15,6 +15,9 @@
  */
 package com.google.j2cl.transpiler.integration;
 
+import com.google.common.io.Files;
+
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -27,5 +30,25 @@ public class InvalidOptionTest extends IntegrationTestCase {
     TranspileResult transpileResult = transpile(args);
     assertLogContainsSnippet(transpileResult.errorLines, "invalid source version: 2.0");
     assertLogContainsSnippet(transpileResult.errorLines, "unsupported encoding: abc");
+  }
+
+  public void testInvalidOutputOption() throws IOException, InterruptedException {
+    String[] extraArgs = {"-source", "1.8", "-encoding", "UTF-8"};
+
+    // Output to a location that is not a directory and is not a zip file.
+    File outputLocation = Files.createTempDir();
+    outputLocation = new File(outputLocation, "Foo.txt");
+    outputLocation.createNewFile();
+
+    // Run the transpile
+    String[] transpileArgs =
+        IntegrationTestCase.getTranspileArgs(
+            outputLocation, this.getClass(), "invalidoutputoption", extraArgs);
+    TranspileResult transpileResult =
+        transpile(transpileArgs, outputLocation);
+
+    // Verify that the output location was rejected.
+    assertLogContainsSnippet(
+        transpileResult.errorLines, "-output location must be a directory or .zip file");
   }
 }

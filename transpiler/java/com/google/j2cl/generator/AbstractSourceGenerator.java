@@ -15,12 +15,13 @@
  */
 package com.google.j2cl.generator;
 
-import com.google.common.io.Files;
 import com.google.j2cl.errors.Errors;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.FileSystem;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * A base class for source generators. We may have two subclasses, which are
@@ -28,37 +29,41 @@ import java.nio.charset.Charset;
  */
 public abstract class AbstractSourceGenerator {
   protected final Errors errors;
-  protected final String outputPath;
-  protected final File outputDirectory;
+  protected final FileSystem outputFileSystem;
+  protected final String relativeFilePath;
+  protected final String outputLocationPath;
   protected final Charset charset;
 
   public AbstractSourceGenerator(
-      Errors errors, String outputPath, File outputDirectory, Charset charset) {
+      Errors errors,
+      FileSystem outputFileSystem,
+      String outputLocationPath,
+      String relativeFilePath,
+      Charset charset) {
     this.errors = errors;
-    this.outputPath = outputPath;
-    this.outputDirectory = outputDirectory;
+    this.outputFileSystem = outputFileSystem;
+    this.outputLocationPath = outputLocationPath;
+    this.relativeFilePath = relativeFilePath;
     this.charset = charset;
   }
 
   public void writeToFile() {
     try {
-      File outputFile = new File(outputDirectory, getOutputPath());
-      File parentFile = outputFile.getParentFile();
-      if (!parentFile.exists() && !parentFile.mkdirs()) {
-        errors.error(Errors.ERR_CANNOT_CREATE_DIRECTORY, outputDirectory.getAbsolutePath());
-        errors.maybeReportAndExit();
-      }
-      Files.write(toSource(), outputFile, charset);
+      Path absoluteOutputPath =
+          outputLocationPath != null
+              ? outputFileSystem.getPath(outputLocationPath, relativeFilePath + getSuffix())
+              : outputFileSystem.getPath(relativeFilePath + getSuffix());
+      // Write using the provided fileSystem (which might be the regular file system or might be a
+      // zip file.)
+      Files.createDirectories(absoluteOutputPath.getParent());
+      Files.write(absoluteOutputPath, toSource().getBytes(charset));
     } catch (IOException e) {
       errors.error(e.getMessage());
+      errors.maybeReportAndExit();
     }
   }
 
   public abstract String toSource();
 
   public abstract String getSuffix();
-
-  public String getOutputPath() {
-    return outputPath + getSuffix();
-  }
 }

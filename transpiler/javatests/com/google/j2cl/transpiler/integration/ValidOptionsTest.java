@@ -23,7 +23,7 @@ import java.io.IOException;
 public class ValidOptionsTest extends IntegrationTestCase {
   public void testValidOptions() throws IOException, InterruptedException {
     TranspileResult transpileResult =
-        transpileDirectory("validoptions", "-source", "1.7", "-encoding", "UTF-8");
+        transpileDirectory("validoptions", OutputType.DIR, "-source", "1.8", "-encoding", "UTF-8");
     assertEquals(0, transpileResult.exitCode);
     assertTrue(transpileResult.errorLines.isEmpty());
   }

@@ -45,14 +45,19 @@ import java.util.concurrent.TimeUnit;
  */
 public class IntegrationTestCase extends TestCase {
 
+  public enum OutputType {
+    DIR,
+    ZIP
+  }
+
   /**
    * A bundle of data recording the results of a transpile operation.
    */
   public static class TranspileResult {
-    // TODO: track output JS files.
     public List<String> errorLines = new ArrayList<>();
     public int exitCode;
     public List<String> outputLines = new ArrayList<>();
+    public File outputLocation;
   }
 
   protected static final String TRANSPILER_BINARY = "third_party/java_src/j2cl/j2cl";
@@ -74,15 +79,15 @@ public class IntegrationTestCase extends TestCase {
         foundSnippet);
   }
 
-  private static String[] getTranspileArgs(
-      File outputDirectory, Class<?> testClass, String inputDirectoryName, String... extraArgs) {
+  protected static String[] getTranspileArgs(
+      File outputLocation, Class<?> testClass, String inputDirectoryName, String... extraArgs) {
     List<String> argList = new ArrayList<>();
 
     argList.add(TRANSPILER_BINARY);
 
     // Output dir
     argList.add("-d");
-    argList.add(outputDirectory.getAbsolutePath());
+    argList.add(outputLocation.getAbsolutePath());
 
     // Input source
     for (File javaFile : listJavaFilesInDir(testClass, inputDirectoryName)) {
@@ -117,16 +122,25 @@ public class IntegrationTestCase extends TestCase {
     return listExtensionFilesInDir(".java", clazz, directoryName);
   }
 
-  protected TranspileResult transpileDirectory(String directoryName, String... extraArgs)
+  protected TranspileResult transpileDirectory(
+      String directoryName, OutputType outputType, String... extraArgs)
       throws IOException, InterruptedException {
-    File outputDirectory = Files.createTempDir();
+    File outputLocation = Files.createTempDir();
+    if (outputType == OutputType.ZIP) {
+      outputLocation = new File(outputLocation, "output.zip");
+    }
     String[] transpileArgs =
         IntegrationTestCase.getTranspileArgs(
-            outputDirectory, this.getClass(), directoryName, extraArgs);
-    return transpile(transpileArgs);
+            outputLocation, this.getClass(), directoryName, extraArgs);
+    return transpile(transpileArgs, outputLocation);
   }
 
   protected TranspileResult transpile(String[] args)
+      throws UnsupportedEncodingException, IOException, InterruptedException {
+    return transpile(args, null);
+  }
+
+  protected TranspileResult transpile(String[] args, File outputLocation)
       throws IOException, InterruptedException, UnsupportedEncodingException {
 
     class OutputProcessor implements Runnable {
@@ -161,6 +175,7 @@ public class IntegrationTestCase extends TestCase {
     ProcessBuilder processBuilder = new ProcessBuilder(args);
     Process transpileProcess = processBuilder.start();
     TranspileResult transpileResult = new TranspileResult();
+    transpileResult.outputLocation = outputLocation;
     ExecutorService executorService = Executors.newFixedThreadPool(2);
     executorService.execute(
         new OutputProcessor(

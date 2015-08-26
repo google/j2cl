@@ -30,7 +30,6 @@ import com.google.j2cl.generator.JavaScriptGenerator;
 
 import org.apache.velocity.app.VelocityEngine;
 
-import java.io.File;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
@@ -87,13 +86,20 @@ public class J2clTranspiler {
   private void generateJsSources(List<CompilationUnit> j2clCompilationUnits) {
     for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
       // The parameters may be changed after the previous passes are implemented.
-      File outputDirectory = options.getOutputDirectory();
       Charset charset = Charset.forName(options.getEncoding());
+
       JavaScriptGenerator jsGenerator =
           new JavaScriptGenerator(
-              errors, outputDirectory, charset, j2clCompilationUnit, velocityEngine);
+              errors,
+              options.getOutputFileSystem(),
+              options.getOutput(),
+              charset,
+              j2clCompilationUnit,
+              velocityEngine);
       jsGenerator.writeToFile();
     }
+
+    options.maybeCloseFileSystem();
   }
 
   private void generateSourceMaps(@SuppressWarnings("unused") List<CompilationUnit> j2clUnits) {

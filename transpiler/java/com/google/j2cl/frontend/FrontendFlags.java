@@ -23,7 +23,6 @@ import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 import org.kohsuke.args4j.OptionHandlerFilter;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,8 +59,13 @@ public class FrontendFlags {
   )
   protected String bootclasspath = System.getProperty("sun.boot.class.path");
 
-  @Option(name = "-d", metaVar = "<directory>", usage = "Specify where to place generated files")
-  protected File outputDir = new File(".");
+  @Option(
+    name = "-d",
+    metaVar = "<file>",
+    usage = "Directory or zip into which to place generated files"
+  )
+  // TODO: replace with -output instead of -d
+  protected String output = ".";
 
   @Option(
     name = "-encoding",

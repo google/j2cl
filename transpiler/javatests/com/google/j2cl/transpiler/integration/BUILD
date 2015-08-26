@@ -26,7 +26,11 @@ java_test(
 java_test(
     name = "InvalidOptionTest",
     srcs = ["InvalidOptionTest.java"],
-    deps = [":IntegrationTestCase"],
+    data = glob(["invalidoutputoption/**/*"]),
+    deps = [
+        ":IntegrationTestCase",
+        "//java/com/google/common/io",
+    ],
 )
 
 java_test(
@@ -40,6 +44,13 @@ java_test(
     name = "MissingDepTest",
     srcs = ["MissingDepTest.java"],
     data = glob(["missingdep/**/*"]),
+    deps = [":IntegrationTestCase"],
+)
+
+java_test(
+    name = "OutputTest",
+    srcs = ["OutputTest.java"],
+    data = glob(["output/**/*"]) + ["//jre/java:libJavaJre.jar"],
     deps = [":IntegrationTestCase"],
 )
 
