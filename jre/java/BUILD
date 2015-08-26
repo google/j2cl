@@ -45,3 +45,35 @@ j2cl_transpile_zip(
     srcs = glob(["**/*.java"]),
     java_library = ":JavaJre",
 )
+
+load("/third_party/java_src/j2cl/build_def/j2cl_source_copy", "j2cl_source_copy")
+
+j2cl_source_copy(
+    name = "emul_dev",
+    srcs = ["//third_party/java_src/gwt/svn/trunk/dev:emul"],
+    base_strip_path = "third_party/java_src/gwt/svn/trunk/dev/core/super/",
+)
+
+j2cl_source_copy(
+    name = "emul_user",
+    srcs = ["//third_party/java_src/gwt/svn/trunk/user:emul"],
+    base_strip_path = "third_party/java_src/gwt/svn/trunk/user/super/com/google/gwt/emul/",
+    excludes = [
+        "java/lang/Class.java",
+        "java/lang/Enum.java",
+        "java/lang/Object.java",
+        "java/lang/String.java",
+        "java/util/InternalJsMapFactory.java",
+    ],
+)
+
+# TODO(dankurka): this target should be the java_lib target we hand to JDT for resolving compilation
+java_library(
+    name = "emul",
+    srcs = [
+        "java/util/InternalJsMapFactory.java",
+        "javaemul/internal/JsDate.java",
+        ":emul_dev",
+        ":emul_user",
+    ],
+)
