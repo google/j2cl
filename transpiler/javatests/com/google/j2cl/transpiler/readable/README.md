@@ -37,6 +37,7 @@ are copyright and licensed as follows:
 
 ## Likely readable examples to add (remove some redundant)
 - anonymousclassforfunctionalinterface (transpiled to function)
+- arithmetic exception for integers (e.g. divide by zero / mod by zero)
 - autoboxing
 - instanceofboxedtype
 - casttoboxedtype
@@ -46,8 +47,8 @@ are copyright and licensed as follows:
 - continuewithlabel
 - enum special functions (values, valueOf, etc).
 - enumoptimization
-- equals
 - finalfield (readable JsDoc and no static setter)
+- indentity equality (double equality / triple equality, null / undefined)
 - implicitconversions (method call params and return expression)
 - implicitconversions (String + operator)
 - implicitconversions (binary operations and field initializers)
@@ -57,6 +58,7 @@ are copyright and licensed as follows:
 - jsinteropdispatch
 - jsinteropinterface
 - methodreferences
+- nestedlambdas
 - nativefunction + provided Foo.native.js
 - notimportinternals
 - objectmethods
@@ -65,4 +67,3 @@ are copyright and licensed as follows:
 - private static clinit optimization
 - shorterfieldmangling (for fields in final classes, like enums)
 - simpleenum
-- nestedlambdas
