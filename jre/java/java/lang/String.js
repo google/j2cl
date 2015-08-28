@@ -26,20 +26,23 @@ class String extends Object {
   static $isAssignableFrom(classConstructor) {
     return Util.$canCastClass(classConstructor, String);
   }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!String.$classString) {
+      String.$classString = Class.$createForClass(
+          Util.$generateId('String'),
+          Util.$generateId('java.lang.String'),
+          Object.$getClass(),
+          Util.$generateId('java.lang.String'));
+    }
+    return String.$classString;
+  }
 };
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-String.$class = Class.$createForClass(
-    Util.$generateId('String'),
-    Util.$generateId(
-        'java.lang.String'),
-    Object.$class,
-    Util.$generateId(
-        'java.lang.String'));
 
 
 /**

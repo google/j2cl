@@ -63,6 +63,24 @@ class AnotherInterface {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!AnotherInterface.$classAnotherInterface) {
+      AnotherInterface.$classAnotherInterface = Class.$createForInterface(
+          $Util.$generateId('AnotherInterface'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface'),
+          null,
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface'));
+    }
+    return AnotherInterface.$classAnotherInterface;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -73,19 +91,6 @@ class AnotherInterface {
 
 
 AnotherInterface.$markImplementor(/** @type {Function} */ (AnotherInterface));
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-AnotherInterface.$class = Class.$createForInterface(
-    $Util.$generateId('AnotherInterface'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface'),
-    null,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface'));
 
 /**
  * Export class.

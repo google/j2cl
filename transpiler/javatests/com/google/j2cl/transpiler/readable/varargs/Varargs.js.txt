@@ -114,6 +114,24 @@ class Varargs extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!Varargs.$classVarargs) {
+      Varargs.$classVarargs = Class.$createForClass(
+          $Util.$generateId('Varargs'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.varargs.Varargs'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.varargs.Varargs'));
+    }
+    return Varargs.$classVarargs;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -123,15 +141,6 @@ class Varargs extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-Varargs.$class = Class.$createForClass(
-    $Util.$generateId('Varargs'),
-    $Util.$generateId('com.google.j2cl.transpiler.readable.varargs.Varargs'),
-    Object.$class,
-    $Util.$generateId('com.google.j2cl.transpiler.readable.varargs.Varargs'));
 
 /**
  * Export class.
@@ -196,6 +205,24 @@ class Child extends Varargs {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!Child.$classChild) {
+      Child.$classChild = Class.$createForClass(
+          $Util.$generateId('Child'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.varargs.Child'),
+          Varargs.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.varargs.Child'));
+    }
+    return Child.$classChild;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -205,15 +232,6 @@ class Child extends Varargs {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-Child.$class = Class.$createForClass(
-    $Util.$generateId('Child'),
-    $Util.$generateId('com.google.j2cl.transpiler.readable.varargs.Child'),
-    Varargs.$class,
-    $Util.$generateId('com.google.j2cl.transpiler.readable.varargs.Child'));
 
 /**
  * Export class.

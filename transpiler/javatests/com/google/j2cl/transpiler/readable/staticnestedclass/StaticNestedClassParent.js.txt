@@ -69,6 +69,25 @@ class StaticNestedClassParent extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!StaticNestedClassParent.$classStaticNestedClassParent) {
+      StaticNestedClassParent
+          .$classStaticNestedClassParent = Class.$createForClass(
+          $Util.$generateId('StaticNestedClassParent'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent'));
+    }
+    return StaticNestedClassParent.$classStaticNestedClassParent;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -78,17 +97,6 @@ class StaticNestedClassParent extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-StaticNestedClassParent.$class = Class.$createForClass(
-    $Util.$generateId('StaticNestedClassParent'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent'));
 
 /**
  * Export class.
@@ -157,6 +165,27 @@ class StaticNestedClassParent$StaticNestedClass extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!StaticNestedClassParent$StaticNestedClass
+             .$classStaticNestedClassParent$StaticNestedClass) {
+      StaticNestedClassParent$StaticNestedClass
+          .$classStaticNestedClassParent$StaticNestedClass = Class.$createForClass(
+          $Util.$generateId('StaticNestedClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent$StaticNestedClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent.StaticNestedClass'));
+    }
+    return StaticNestedClassParent$StaticNestedClass
+        .$classStaticNestedClassParent$StaticNestedClass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -166,17 +195,6 @@ class StaticNestedClassParent$StaticNestedClass extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-StaticNestedClassParent$StaticNestedClass.$class = Class.$createForClass(
-    $Util.$generateId('StaticNestedClass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent$StaticNestedClass'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent.StaticNestedClass'));
 
 /**
  * Export class.

@@ -174,6 +174,24 @@ class NumberCalls extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!NumberCalls.$classNumberCalls) {
+      NumberCalls.$classNumberCalls = Class.$createForClass(
+          $Util.$generateId('NumberCalls'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.devirtualizedcalls.NumberCalls'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.devirtualizedcalls.NumberCalls'));
+    }
+    return NumberCalls.$classNumberCalls;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -183,17 +201,6 @@ class NumberCalls extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-NumberCalls.$class = Class.$createForClass(
-    $Util.$generateId('NumberCalls'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.devirtualizedcalls.NumberCalls'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.devirtualizedcalls.NumberCalls'));
 
 /**
  * Export class.

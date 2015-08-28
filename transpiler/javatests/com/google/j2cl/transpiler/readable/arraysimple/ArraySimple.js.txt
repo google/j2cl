@@ -83,6 +83,24 @@ class ArraySimple extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!ArraySimple.$classArraySimple) {
+      ArraySimple.$classArraySimple = Class.$createForClass(
+          $Util.$generateId('ArraySimple'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.arraysimple.ArraySimple'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.arraysimple.ArraySimple'));
+    }
+    return ArraySimple.$classArraySimple;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -92,17 +110,6 @@ class ArraySimple extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-ArraySimple.$class = Class.$createForClass(
-    $Util.$generateId('ArraySimple'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.arraysimple.ArraySimple'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.arraysimple.ArraySimple'));
 
 /**
  * Export class.

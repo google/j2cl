@@ -28,8 +28,8 @@ class ClassLiteral extends Object {
    * @public
    */
   m_main() {
-    let o = ClassLiteral.$class;
-    o = ClassLiteral.$class.$forArray(2);
+    let o = ClassLiteral.$getClass();
+    o = ClassLiteral.$getClass().$forArray(2);
   }
 
   /**
@@ -75,6 +75,24 @@ class ClassLiteral extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!ClassLiteral.$classClassLiteral) {
+      ClassLiteral.$classClassLiteral = Class.$createForClass(
+          $Util.$generateId('ClassLiteral'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.classliteral.ClassLiteral'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.classliteral.ClassLiteral'));
+    }
+    return ClassLiteral.$classClassLiteral;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -84,17 +102,6 @@ class ClassLiteral extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-ClassLiteral.$class = Class.$createForClass(
-    $Util.$generateId('ClassLiteral'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.classliteral.ClassLiteral'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.classliteral.ClassLiteral'));
 
 /**
  * Export class.

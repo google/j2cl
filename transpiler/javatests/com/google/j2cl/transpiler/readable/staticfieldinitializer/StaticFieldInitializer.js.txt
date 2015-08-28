@@ -70,6 +70,25 @@ class StaticFieldInitializer extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!StaticFieldInitializer.$classStaticFieldInitializer) {
+      StaticFieldInitializer
+          .$classStaticFieldInitializer = Class.$createForClass(
+          $Util.$generateId('StaticFieldInitializer'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.staticfieldinitializer.StaticFieldInitializer'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.staticfieldinitializer.StaticFieldInitializer'));
+    }
+    return StaticFieldInitializer.$classStaticFieldInitializer;
+  }
+
+  /**
    * A static field getter.
    * @return {number}
    * @public
@@ -160,17 +179,6 @@ StaticFieldInitializer
     0;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-StaticFieldInitializer.$class = Class.$createForClass(
-    $Util.$generateId('StaticFieldInitializer'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.staticfieldinitializer.StaticFieldInitializer'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.staticfieldinitializer.StaticFieldInitializer'));
 
 /**
  * Export class.

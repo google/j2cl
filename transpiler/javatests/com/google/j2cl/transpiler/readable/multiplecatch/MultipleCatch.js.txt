@@ -88,6 +88,24 @@ class MultipleCatch extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!MultipleCatch.$classMultipleCatch) {
+      MultipleCatch.$classMultipleCatch = Class.$createForClass(
+          $Util.$generateId('MultipleCatch'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch'));
+    }
+    return MultipleCatch.$classMultipleCatch;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -97,17 +115,6 @@ class MultipleCatch extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-MultipleCatch.$class = Class.$createForClass(
-    $Util.$generateId('MultipleCatch'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch'));
 
 /**
  * Export class.

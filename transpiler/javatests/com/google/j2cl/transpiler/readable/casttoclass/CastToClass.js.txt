@@ -77,6 +77,24 @@ class CastToClass extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!CastToClass.$classCastToClass) {
+      CastToClass.$classCastToClass = Class.$createForClass(
+          $Util.$generateId('CastToClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.casttoclass.CastToClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.casttoclass.CastToClass'));
+    }
+    return CastToClass.$classCastToClass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -86,17 +104,6 @@ class CastToClass extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-CastToClass.$class = Class.$createForClass(
-    $Util.$generateId('CastToClass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.casttoclass.CastToClass'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.casttoclass.CastToClass'));
 
 /**
  * Export class.

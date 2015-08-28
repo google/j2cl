@@ -76,6 +76,24 @@ class BreakStatement extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!BreakStatement.$classBreakStatement) {
+      BreakStatement.$classBreakStatement = Class.$createForClass(
+          $Util.$generateId('BreakStatement'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.breakstatement.BreakStatement'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.breakstatement.BreakStatement'));
+    }
+    return BreakStatement.$classBreakStatement;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -85,17 +103,6 @@ class BreakStatement extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-BreakStatement.$class = Class.$createForClass(
-    $Util.$generateId('BreakStatement'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.breakstatement.BreakStatement'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.breakstatement.BreakStatement'));
 
 /**
  * Export class.

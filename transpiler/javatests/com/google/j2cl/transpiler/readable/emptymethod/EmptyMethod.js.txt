@@ -75,6 +75,24 @@ class EmptyMethod extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!EmptyMethod.$classEmptyMethod) {
+      EmptyMethod.$classEmptyMethod = Class.$createForClass(
+          $Util.$generateId('EmptyMethod'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod'));
+    }
+    return EmptyMethod.$classEmptyMethod;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -84,17 +102,6 @@ class EmptyMethod extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-EmptyMethod.$class = Class.$createForClass(
-    $Util.$generateId('EmptyMethod'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod'));
 
 /**
  * Export class.

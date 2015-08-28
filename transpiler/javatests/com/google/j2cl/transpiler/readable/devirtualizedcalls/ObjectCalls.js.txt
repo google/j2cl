@@ -79,6 +79,24 @@ class ObjectCalls extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!ObjectCalls.$classObjectCalls) {
+      ObjectCalls.$classObjectCalls = Class.$createForClass(
+          $Util.$generateId('ObjectCalls'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls'));
+    }
+    return ObjectCalls.$classObjectCalls;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -88,17 +106,6 @@ class ObjectCalls extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-ObjectCalls.$class = Class.$createForClass(
-    $Util.$generateId('ObjectCalls'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls'));
 
 /**
  * Export class.

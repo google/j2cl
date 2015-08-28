@@ -73,6 +73,24 @@ class BoundedTypeVariable extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!BoundedTypeVariable.$classBoundedTypeVariable) {
+      BoundedTypeVariable.$classBoundedTypeVariable = Class.$createForClass(
+          $Util.$generateId('BoundedTypeVariable'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.boundedtypevariable.BoundedTypeVariable'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.boundedtypevariable.BoundedTypeVariable'));
+    }
+    return BoundedTypeVariable.$classBoundedTypeVariable;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -82,17 +100,6 @@ class BoundedTypeVariable extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-BoundedTypeVariable.$class = Class.$createForClass(
-    $Util.$generateId('BoundedTypeVariable'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.boundedtypevariable.BoundedTypeVariable'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.boundedtypevariable.BoundedTypeVariable'));
 
 /**
  * Export class.

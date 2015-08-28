@@ -40,6 +40,18 @@ class $byte {
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $byte;
   }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!$byte.$classByte) {
+      $byte.$classByte = Class.$createForPrimitive('byte');
+    }
+    return $byte.$classByte;
+  }
 };
 
 
@@ -48,13 +60,6 @@ class $byte {
  * @nocollapse
  */
 $byte.$initialArrayValue = 0;
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-$byte.$class = Class.$createForPrimitive('byte');
 
 
 /**
@@ -96,6 +101,18 @@ class $short {
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $short;
   }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!$short.$classShort) {
+      $short.$classShort = Class.$createForPrimitive('short');
+    }
+    return $short.$classShort;
+  }
 };
 
 
@@ -104,13 +121,6 @@ class $short {
  * @nocollapse
  */
 $short.$initialArrayValue = 0;
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-$short.$class = Class.$createForPrimitive('short');
 
 
 /**
@@ -152,6 +162,18 @@ class $int {
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $int;
   }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!$int.$classInt) {
+      $int.$classInt = Class.$createForPrimitive('int');
+    }
+    return $int.$classInt;
+  }
 };
 
 
@@ -172,13 +194,6 @@ $int.MAX_VALUE = 0x7fffffff;
  * @public {number}
  */
 $int.MIN_VALUE = -0x80000000;
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-$int.$class = Class.$createForPrimitive('int');
 
 
 /**
@@ -220,6 +235,18 @@ class $long {
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $long;
   }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!$long.$classLong) {
+      $long.$classLong = Class.$createForPrimitive('long');
+    }
+    return $long.$classLong;
+  }
 };
 
 
@@ -228,13 +255,6 @@ class $long {
  * @nocollapse
  */
 $long.$initialArrayValue = 0;
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-$long.$class = Class.$createForPrimitive('long');
 
 
 /**
@@ -276,6 +296,18 @@ class $float {
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $float;
   }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!$float.$classFloat) {
+      $float.$classFloat = Class.$createForPrimitive('float');
+    }
+    return $float.$classFloat;
+  }
 };
 
 
@@ -284,13 +316,6 @@ class $float {
  * @nocollapse
  */
 $float.$initialArrayValue = 0;
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-$float.$class = Class.$createForPrimitive('float');
 
 
 /**
@@ -332,6 +357,18 @@ class $double {
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $double;
   }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!$double.$classDouble) {
+      $double.$classDouble = Class.$createForPrimitive('double');
+    }
+    return $double.$classDouble;
+  }
 };
 
 
@@ -340,13 +377,6 @@ class $double {
  * @nocollapse
  */
 $double.$initialArrayValue = 0;
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-$double.$class = Class.$createForPrimitive('double');
 
 
 /**
@@ -388,6 +418,18 @@ class $char {
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $char;
   }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!$char.$classChar) {
+      $char.$classChar = Class.$createForPrimitive('char');
+    }
+    return $char.$classChar;
+  }
 };
 
 
@@ -396,13 +438,6 @@ class $char {
  * @nocollapse
  */
 $char.$initialArrayValue = 0;
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-$char.$class = Class.$createForPrimitive('char');
 
 
 /**
@@ -444,6 +479,18 @@ class $boolean {
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $boolean;
   }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!$boolean.$classBoolean) {
+      $boolean.$classBoolean = Class.$createForPrimitive('boolean');
+    }
+    return $boolean.$classBoolean;
+  }
 };
 
 
@@ -452,13 +499,6 @@ class $boolean {
  * @nocollapse
  */
 $boolean.$initialArrayValue = false;
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-$boolean.$class = Class.$createForPrimitive('boolean');
 
 
 /**
@@ -499,6 +539,18 @@ class $void {
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $void;
   }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!$void.$classVoid) {
+      $void.$classVoid = Class.$createForPrimitive('void');
+    }
+    return $void.$classVoid;
+  }
 };
 
 
@@ -507,13 +559,6 @@ class $void {
  * @nocollapse
  */
 $void.$initialArrayValue = false;
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-$void.$class = Class.$createForPrimitive('void');
 
 
 /**

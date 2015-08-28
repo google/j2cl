@@ -48,7 +48,7 @@ class Strings {
    * @public
    */
   static m_getClass__java_lang_Object(obj) {
-    return String.$class;
+    return String.$getClass();
   }
 };
 

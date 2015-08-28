@@ -76,6 +76,24 @@ class SubChild extends Child {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SubChild.$classSubChild) {
+      SubChild.$classSubChild = Class.$createForClass(
+          $Util.$generateId('SubChild'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubChild'),
+          Child.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubChild'));
+    }
+    return SubChild.$classSubChild;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -85,17 +103,6 @@ class SubChild extends Child {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-SubChild.$class = Class.$createForClass(
-    $Util.$generateId('SubChild'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubChild'),
-    Child.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubChild'));
 
 /**
  * Export class.

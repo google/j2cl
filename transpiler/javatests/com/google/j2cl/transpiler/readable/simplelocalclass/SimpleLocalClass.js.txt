@@ -85,6 +85,24 @@ class SimpleLocalClass extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SimpleLocalClass.$classSimpleLocalClass) {
+      SimpleLocalClass.$classSimpleLocalClass = Class.$createForClass(
+          $Util.$generateId('SimpleLocalClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass'));
+    }
+    return SimpleLocalClass.$classSimpleLocalClass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -94,17 +112,6 @@ class SimpleLocalClass extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-SimpleLocalClass.$class = Class.$createForClass(
-    $Util.$generateId('SimpleLocalClass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass'));
 
 /**
  * Export class.
@@ -205,6 +212,25 @@ class SimpleLocalClass$1InnerClass extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SimpleLocalClass$1InnerClass.$classSimpleLocalClass$1InnerClass) {
+      SimpleLocalClass$1InnerClass
+          .$classSimpleLocalClass$1InnerClass = Class.$createForClass(
+          $Util.$generateId('1InnerClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass$1InnerClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.1InnerClass'));
+    }
+    return SimpleLocalClass$1InnerClass.$classSimpleLocalClass$1InnerClass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -212,19 +238,6 @@ class SimpleLocalClass$1InnerClass extends Object {
   static $clinit() { Object.$clinit(); }
 }
 ;
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-SimpleLocalClass$1InnerClass.$class = Class.$createForClass(
-    $Util.$generateId('1InnerClass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass$1InnerClass'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.1InnerClass'));
 
 
 
@@ -301,6 +314,27 @@ class SimpleLocalClass$1InnerClassWithoutCaptures extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SimpleLocalClass$1InnerClassWithoutCaptures
+             .$classSimpleLocalClass$1InnerClassWithoutCaptures) {
+      SimpleLocalClass$1InnerClassWithoutCaptures
+          .$classSimpleLocalClass$1InnerClassWithoutCaptures = Class.$createForClass(
+          $Util.$generateId('1InnerClassWithoutCaptures'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass$1InnerClassWithoutCaptures'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures'));
+    }
+    return SimpleLocalClass$1InnerClassWithoutCaptures
+        .$classSimpleLocalClass$1InnerClassWithoutCaptures;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -308,19 +342,6 @@ class SimpleLocalClass$1InnerClassWithoutCaptures extends Object {
   static $clinit() { Object.$clinit(); }
 }
 ;
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-SimpleLocalClass$1InnerClassWithoutCaptures.$class = Class.$createForClass(
-    $Util.$generateId('1InnerClassWithoutCaptures'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass$1InnerClassWithoutCaptures'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures'));
 
 
 
@@ -410,6 +431,25 @@ class SimpleLocalClass$2InnerClass extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SimpleLocalClass$2InnerClass.$classSimpleLocalClass$2InnerClass) {
+      SimpleLocalClass$2InnerClass
+          .$classSimpleLocalClass$2InnerClass = Class.$createForClass(
+          $Util.$generateId('2InnerClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass$2InnerClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.2InnerClass'));
+    }
+    return SimpleLocalClass$2InnerClass.$classSimpleLocalClass$2InnerClass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -417,16 +457,3 @@ class SimpleLocalClass$2InnerClass extends Object {
   static $clinit() { Object.$clinit(); }
 }
 ;
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-SimpleLocalClass$2InnerClass.$class = Class.$createForClass(
-    $Util.$generateId('2InnerClass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass$2InnerClass'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.2InnerClass'));

@@ -70,6 +70,24 @@ class GenericType extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!GenericType.$classGenericType) {
+      GenericType.$classGenericType = Class.$createForClass(
+          $Util.$generateId('GenericType'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.typewildcards.GenericType'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.typewildcards.GenericType'));
+    }
+    return GenericType.$classGenericType;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -79,17 +97,6 @@ class GenericType extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-GenericType.$class = Class.$createForClass(
-    $Util.$generateId('GenericType'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.typewildcards.GenericType'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.typewildcards.GenericType'));
 
 /**
  * Export class.
@@ -191,6 +198,24 @@ class TypeWildCards extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!TypeWildCards.$classTypeWildCards) {
+      TypeWildCards.$classTypeWildCards = Class.$createForClass(
+          $Util.$generateId('TypeWildCards'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards'));
+    }
+    return TypeWildCards.$classTypeWildCards;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -200,17 +225,6 @@ class TypeWildCards extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-TypeWildCards.$class = Class.$createForClass(
-    $Util.$generateId('TypeWildCards'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards'));
 
 /**
  * Export class.

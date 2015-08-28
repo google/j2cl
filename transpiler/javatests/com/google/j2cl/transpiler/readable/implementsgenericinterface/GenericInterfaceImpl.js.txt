@@ -57,6 +57,24 @@ class GenericInterface {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!GenericInterface.$classGenericInterface) {
+      GenericInterface.$classGenericInterface = Class.$createForInterface(
+          $Util.$generateId('GenericInterface'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterface'),
+          null,
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterface'));
+    }
+    return GenericInterface.$classGenericInterface;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -67,19 +85,6 @@ class GenericInterface {
 
 
 GenericInterface.$markImplementor(/** @type {Function} */ (GenericInterface));
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-GenericInterface.$class = Class.$createForInterface(
-    $Util.$generateId('GenericInterface'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterface'),
-    null,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterface'));
 
 /**
  * Export class.
@@ -136,6 +141,24 @@ class GenericSubInterface {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!GenericSubInterface.$classGenericSubInterface) {
+      GenericSubInterface.$classGenericSubInterface = Class.$createForInterface(
+          $Util.$generateId('GenericSubInterface'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericSubInterface'),
+          null,
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericSubInterface'));
+    }
+    return GenericSubInterface.$classGenericSubInterface;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -147,19 +170,6 @@ class GenericSubInterface {
 
 GenericSubInterface.$markImplementor(
     /** @type {Function} */ (GenericSubInterface));
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-GenericSubInterface.$class = Class.$createForInterface(
-    $Util.$generateId('GenericSubInterface'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericSubInterface'),
-    null,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericSubInterface'));
 
 /**
  * Export class.
@@ -232,6 +242,25 @@ class GenericInterfaceGenericImpl extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!GenericInterfaceGenericImpl.$classGenericInterfaceGenericImpl) {
+      GenericInterfaceGenericImpl
+          .$classGenericInterfaceGenericImpl = Class.$createForClass(
+          $Util.$generateId('GenericInterfaceGenericImpl'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterfaceGenericImpl'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterfaceGenericImpl'));
+    }
+    return GenericInterfaceGenericImpl.$classGenericInterfaceGenericImpl;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -244,17 +273,6 @@ class GenericInterfaceGenericImpl extends Object {
 GenericInterface.$markImplementor(GenericInterfaceGenericImpl);
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-GenericInterfaceGenericImpl.$class = Class.$createForClass(
-    $Util.$generateId('GenericInterfaceGenericImpl'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterfaceGenericImpl'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterfaceGenericImpl'));
 
 /**
  * Export class.
@@ -325,6 +343,24 @@ class GenericInterfaceImpl extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!GenericInterfaceImpl.$classGenericInterfaceImpl) {
+      GenericInterfaceImpl.$classGenericInterfaceImpl = Class.$createForClass(
+          $Util.$generateId('GenericInterfaceImpl'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterfaceImpl'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterfaceImpl'));
+    }
+    return GenericInterfaceImpl.$classGenericInterfaceImpl;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -337,17 +373,6 @@ class GenericInterfaceImpl extends Object {
 GenericInterface.$markImplementor(GenericInterfaceImpl);
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-GenericInterfaceImpl.$class = Class.$createForClass(
-    $Util.$generateId('GenericInterfaceImpl'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterfaceImpl'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterfaceImpl'));
 
 /**
  * Export class.

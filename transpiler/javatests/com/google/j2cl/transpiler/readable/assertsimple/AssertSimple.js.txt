@@ -79,6 +79,24 @@ class AssertSimple extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!AssertSimple.$classAssertSimple) {
+      AssertSimple.$classAssertSimple = Class.$createForClass(
+          $Util.$generateId('AssertSimple'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.assertsimple.AssertSimple'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.assertsimple.AssertSimple'));
+    }
+    return AssertSimple.$classAssertSimple;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -88,17 +106,6 @@ class AssertSimple extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-AssertSimple.$class = Class.$createForClass(
-    $Util.$generateId('AssertSimple'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.assertsimple.AssertSimple'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.assertsimple.AssertSimple'));
 
 /**
  * Export class.

@@ -77,6 +77,24 @@ class TryFinally extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!TryFinally.$classTryFinally) {
+      TryFinally.$classTryFinally = Class.$createForClass(
+          $Util.$generateId('TryFinally'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.tryfinally.TryFinally'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.tryfinally.TryFinally'));
+    }
+    return TryFinally.$classTryFinally;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -86,17 +104,6 @@ class TryFinally extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-TryFinally.$class = Class.$createForClass(
-    $Util.$generateId('TryFinally'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.tryfinally.TryFinally'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.tryfinally.TryFinally'));
 
 /**
  * Export class.

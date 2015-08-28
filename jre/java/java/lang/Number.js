@@ -116,6 +116,22 @@ class Number extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!Number.$classNumber) {
+      Number.$classNumber = Class.$createForClass(
+          $Util.$generateId('Number'),
+          $Util.$generateId('java.lang.Number'),
+          Object.$getClass(),
+          $Util.$generateId('java.lang.Number'));
+    }
+    return Number.$classNumber;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -124,16 +140,6 @@ class Number extends Object {
     Object.$clinit();
   }};
 
-
-/**
- * @public {Class}
- * @nocollapse
- */
-Number.$class = Class.$createForClass(
-  $Util.$generateId('Number'),
-  $Util.$generateId('java.lang.Number'),
-  Object.$class,
-  $Util.$generateId('java.lang.Number'));
 
 /**
  * Export class.

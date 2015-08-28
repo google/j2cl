@@ -90,6 +90,26 @@ class SimpleEnum extends Enum {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SimpleEnum.$classSimpleEnum) {
+      SimpleEnum.$classSimpleEnum = Class.$createForEnum(
+          $Util.$generateId('SimpleEnum'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum'),
+          Enum.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum'),
+          // TODO(rluble): emit here the enum values
+          null);
+    }
+    return SimpleEnum.$classSimpleEnum;
+  }
+
+  /**
    * A static field getter.
    * @return {SimpleEnum}
    * @public
@@ -172,19 +192,6 @@ SimpleEnum.$f_V2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum =
     null;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-SimpleEnum.$class = Class.$createForEnum(
-    $Util.$generateId('SimpleEnum'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum'),
-    Enum.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum'),
-    // TODO(rluble): emit here the enum values
-    null);
 
 /**
  * Export class.
@@ -313,6 +320,26 @@ class SimpleEnum2 extends Enum {
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SimpleEnum2);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SimpleEnum2.$classSimpleEnum2) {
+      SimpleEnum2.$classSimpleEnum2 = Class.$createForEnum(
+          $Util.$generateId('SimpleEnum2'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2'),
+          Enum.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2'),
+          // TODO(rluble): emit here the enum values
+          null);
+    }
+    return SimpleEnum2.$classSimpleEnum2;
   }
 
   /**
@@ -446,19 +473,6 @@ SimpleEnum2
     null;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-SimpleEnum2.$class = Class.$createForEnum(
-    $Util.$generateId('SimpleEnum2'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2'),
-    Enum.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2'),
-    // TODO(rluble): emit here the enum values
-    null);
 
 /**
  * Export class.
@@ -555,6 +569,24 @@ class SimpleEnum2$1 extends SimpleEnum2 {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SimpleEnum2$1.$classSimpleEnum2$1) {
+      SimpleEnum2$1.$classSimpleEnum2$1 = Class.$createForClass(
+          $Util.$generateId('1'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2$1'),
+          SimpleEnum2.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2.1'));
+    }
+    return SimpleEnum2$1.$classSimpleEnum2$1;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -562,16 +594,3 @@ class SimpleEnum2$1 extends SimpleEnum2 {
   static $clinit() { SimpleEnum2.$clinit(); }
 }
 ;
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-SimpleEnum2$1.$class = Class.$createForClass(
-    $Util.$generateId('1'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2$1'),
-    SimpleEnum2.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2.1'));

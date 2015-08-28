@@ -94,6 +94,25 @@ class InnerClassWithConstructor extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!InnerClassWithConstructor.$classInnerClassWithConstructor) {
+      InnerClassWithConstructor
+          .$classInnerClassWithConstructor = Class.$createForClass(
+          $Util.$generateId('InnerClassWithConstructor'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor'));
+    }
+    return InnerClassWithConstructor.$classInnerClassWithConstructor;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -103,17 +122,6 @@ class InnerClassWithConstructor extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-InnerClassWithConstructor.$class = Class.$createForClass(
-    $Util.$generateId('InnerClassWithConstructor'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor'));
 
 /**
  * Export class.
@@ -235,6 +243,27 @@ class InnerClassWithConstructor$InnerClass extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!InnerClassWithConstructor$InnerClass
+             .$classInnerClassWithConstructor$InnerClass) {
+      InnerClassWithConstructor$InnerClass
+          .$classInnerClassWithConstructor$InnerClass = Class.$createForClass(
+          $Util.$generateId('InnerClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor$InnerClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor.InnerClass'));
+    }
+    return InnerClassWithConstructor$InnerClass
+        .$classInnerClassWithConstructor$InnerClass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -244,17 +273,6 @@ class InnerClassWithConstructor$InnerClass extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-InnerClassWithConstructor$InnerClass.$class = Class.$createForClass(
-    $Util.$generateId('InnerClass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor$InnerClass'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor.InnerClass'));
 
 /**
  * Export class.

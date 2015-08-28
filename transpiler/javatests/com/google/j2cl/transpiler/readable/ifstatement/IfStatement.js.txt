@@ -90,6 +90,24 @@ class IfStatement extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!IfStatement.$classIfStatement) {
+      IfStatement.$classIfStatement = Class.$createForClass(
+          $Util.$generateId('IfStatement'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.ifstatement.IfStatement'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.ifstatement.IfStatement'));
+    }
+    return IfStatement.$classIfStatement;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -99,17 +117,6 @@ class IfStatement extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-IfStatement.$class = Class.$createForClass(
-    $Util.$generateId('IfStatement'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.ifstatement.IfStatement'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.ifstatement.IfStatement'));
 
 /**
  * Export class.

@@ -87,6 +87,24 @@ class NativeFunction extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!NativeFunction.$classNativeFunction) {
+      NativeFunction.$classNativeFunction = Class.$createForClass(
+          $Util.$generateId('NativeFunction'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.nativefunction.NativeFunction'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.nativefunction.NativeFunction'));
+    }
+    return NativeFunction.$classNativeFunction;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -96,17 +114,6 @@ class NativeFunction extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-NativeFunction.$class = Class.$createForClass(
-    $Util.$generateId('NativeFunction'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.nativefunction.NativeFunction'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.nativefunction.NativeFunction'));
 
 /**
  * Export class.

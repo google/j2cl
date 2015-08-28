@@ -77,6 +77,24 @@ class SomeClass extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SomeClass.$classSomeClass) {
+      SomeClass.$classSomeClass = Class.$createForClass(
+          $Util.$generateId('SomeClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.anonymousclass.SomeClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.anonymousclass.SomeClass'));
+    }
+    return SomeClass.$classSomeClass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -86,17 +104,6 @@ class SomeClass extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-SomeClass.$class = Class.$createForClass(
-    $Util.$generateId('SomeClass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.anonymousclass.SomeClass'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.anonymousclass.SomeClass'));
 
 /**
  * Export class.
@@ -167,6 +174,24 @@ class AnonymousClass extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!AnonymousClass.$classAnonymousClass) {
+      AnonymousClass.$classAnonymousClass = Class.$createForClass(
+          $Util.$generateId('AnonymousClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass'));
+    }
+    return AnonymousClass.$classAnonymousClass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -176,17 +201,6 @@ class AnonymousClass extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-AnonymousClass.$class = Class.$createForClass(
-    $Util.$generateId('AnonymousClass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass'));
 
 /**
  * Export class.
@@ -275,6 +289,24 @@ class AnonymousClass$1 extends SomeClass {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!AnonymousClass$1.$classAnonymousClass$1) {
+      AnonymousClass$1.$classAnonymousClass$1 = Class.$createForClass(
+          $Util.$generateId('1'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass$1'),
+          SomeClass.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass.1'));
+    }
+    return AnonymousClass$1.$classAnonymousClass$1;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -282,16 +314,3 @@ class AnonymousClass$1 extends SomeClass {
   static $clinit() { SomeClass.$clinit(); }
 }
 ;
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-AnonymousClass$1.$class = Class.$createForClass(
-    $Util.$generateId('1'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass$1'),
-    SomeClass.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass.1'));

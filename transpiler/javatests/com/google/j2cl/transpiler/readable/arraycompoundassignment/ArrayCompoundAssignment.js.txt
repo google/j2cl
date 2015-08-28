@@ -90,6 +90,25 @@ class ArrayCompoundAssignment extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!ArrayCompoundAssignment.$classArrayCompoundAssignment) {
+      ArrayCompoundAssignment
+          .$classArrayCompoundAssignment = Class.$createForClass(
+          $Util.$generateId('ArrayCompoundAssignment'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.arraycompoundassignment.ArrayCompoundAssignment'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.arraycompoundassignment.ArrayCompoundAssignment'));
+    }
+    return ArrayCompoundAssignment.$classArrayCompoundAssignment;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -99,17 +118,6 @@ class ArrayCompoundAssignment extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-ArrayCompoundAssignment.$class = Class.$createForClass(
-    $Util.$generateId('ArrayCompoundAssignment'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.arraycompoundassignment.ArrayCompoundAssignment'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.arraycompoundassignment.ArrayCompoundAssignment'));
 
 /**
  * Export class.

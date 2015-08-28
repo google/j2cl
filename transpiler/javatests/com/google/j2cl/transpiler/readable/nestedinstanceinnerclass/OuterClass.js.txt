@@ -85,6 +85,24 @@ class OuterClass extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!OuterClass.$classOuterClass) {
+      OuterClass.$classOuterClass = Class.$createForClass(
+          $Util.$generateId('OuterClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass'));
+    }
+    return OuterClass.$classOuterClass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -94,17 +112,6 @@ class OuterClass extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-OuterClass.$class = Class.$createForClass(
-    $Util.$generateId('OuterClass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass'));
 
 /**
  * Export class.
@@ -193,6 +200,24 @@ class OuterClass$InnerClass extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!OuterClass$InnerClass.$classOuterClass$InnerClass) {
+      OuterClass$InnerClass.$classOuterClass$InnerClass = Class.$createForClass(
+          $Util.$generateId('InnerClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$InnerClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass'));
+    }
+    return OuterClass$InnerClass.$classOuterClass$InnerClass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -202,17 +227,6 @@ class OuterClass$InnerClass extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-OuterClass$InnerClass.$class = Class.$createForClass(
-    $Util.$generateId('InnerClass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$InnerClass'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass'));
 
 /**
  * Export class.
@@ -309,6 +323,27 @@ class OuterClass$InnerClass$InnerInnerClass extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!OuterClass$InnerClass$InnerInnerClass
+             .$classOuterClass$InnerClass$InnerInnerClass) {
+      OuterClass$InnerClass$InnerInnerClass
+          .$classOuterClass$InnerClass$InnerInnerClass = Class.$createForClass(
+          $Util.$generateId('InnerInnerClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$InnerClass$InnerInnerClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass'));
+    }
+    return OuterClass$InnerClass$InnerInnerClass
+        .$classOuterClass$InnerClass$InnerInnerClass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -318,17 +353,6 @@ class OuterClass$InnerClass$InnerInnerClass extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-OuterClass$InnerClass$InnerInnerClass.$class = Class.$createForClass(
-    $Util.$generateId('InnerInnerClass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$InnerClass$InnerInnerClass'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass'));
 
 /**
  * Export class.

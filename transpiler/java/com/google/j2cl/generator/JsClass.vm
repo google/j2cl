@@ -1,4 +1,5 @@
 #set ($utilAlias = ${statementSourceGenerator.toSource($nativeUtilTypeDecriptor)} )
+#set ($classAlias = ${statementSourceGenerator.toSource($javaLangClassTypeDecriptor)} )
 #set ($superTypeDescriptor = $classType.SuperTypeDescriptor)
 #if ($superTypeDescriptor)
 #set ($superTypeName = ${statementSourceGenerator.toSource($superTypeDescriptor)})
@@ -94,6 +95,37 @@ class $className $extendsClause {
     return ${utilAlias}.$canCastClass(classConstructor, $className);
   }
 
+  /**
+   * @return {${classAlias}}
+   * @public
+   * @nocollapse
+   */
+#if (${classType.isEnum()})
+  static $getClass() {
+    if (!${className}.$class${className}) {
+      ${className}.$class${className} = $classAlias.$createForEnum(
+          $utilAlias.$generateId('$simpleName'),
+          $utilAlias.$generateId('$binaryName'),
+          $superTypeName.$getClass(),
+          $utilAlias.$generateId('$sourceName'),
+          // TODO(rluble): emit here the enum values
+          null);
+    }
+    return ${className}.$class${className};
+  }
+#else
+  static $getClass() {
+    if (!${className}.$class${className}) {
+      ${className}.$class${className} = $classAlias.$createForClass(
+          $utilAlias.$generateId('$simpleName'),
+          $utilAlias.$generateId('$binaryName'),
+          $superTypeName.$getClass(),
+          $utilAlias.$generateId('$sourceName'));
+    }
+    return ${className}.$class${className};
+  }
+#end
+
 #foreach ($staticField in $classType.getStaticFields())
 #parse( "com/google/j2cl/generator/JsStaticFieldGetterSetter.vm" )
 #end
@@ -108,24 +140,4 @@ class $className $extendsClause {
 ${statementSourceGenerator.toSource($superInterfaceTypeDescriptor)}.$markImplementor($className);
 
 
-#end
-#set ($classAlias = ${statementSourceGenerator.toSource($javaLangClassTypeDecriptor)} )
-/**
- * @public {${classAlias}}
- * @nocollapse
- */
-#if (${classType.isEnum()})
-$className.$class = $classAlias.$createForEnum(
-  $utilAlias.$generateId('$simpleName'),
-  $utilAlias.$generateId('$binaryName'),
-  $superTypeName.$class,
-  $utilAlias.$generateId('$sourceName'),
-  // TODO(rluble): emit here the enum values
-  null);
-#else
-$className.$class = $classAlias.$createForClass(
-  $utilAlias.$generateId('$simpleName'),
-  $utilAlias.$generateId('$binaryName'),
-  $superTypeName.$class,
-  $utilAlias.$generateId('$sourceName'));
 #end

@@ -84,6 +84,24 @@ class Child extends Parent {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!Child.$classChild) {
+      Child.$classChild = Class.$createForClass(
+          $Util.$generateId('Child'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.overridingmethods.Child'),
+          Parent.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.overridingmethods.Child'));
+    }
+    return Child.$classChild;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -96,17 +114,6 @@ class Child extends Parent {
 SomeInterface.$markImplementor(Child);
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-Child.$class = Class.$createForClass(
-    $Util.$generateId('Child'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.overridingmethods.Child'),
-    Parent.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.overridingmethods.Child'));
 
 /**
  * Export class.

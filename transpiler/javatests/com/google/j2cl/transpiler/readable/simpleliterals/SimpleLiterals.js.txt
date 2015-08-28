@@ -37,7 +37,7 @@ class SimpleLiterals extends Object {
     let c = null;
     let d = 101;
     let e = "foo";
-    let f = SimpleLiterals.$class;
+    let f = SimpleLiterals.$getClass();
   }
 
   /**
@@ -83,6 +83,24 @@ class SimpleLiterals extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SimpleLiterals.$classSimpleLiterals) {
+      SimpleLiterals.$classSimpleLiterals = Class.$createForClass(
+          $Util.$generateId('SimpleLiterals'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals'));
+    }
+    return SimpleLiterals.$classSimpleLiterals;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -92,17 +110,6 @@ class SimpleLiterals extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-SimpleLiterals.$class = Class.$createForClass(
-    $Util.$generateId('SimpleLiterals'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals'));
 
 /**
  * Export class.

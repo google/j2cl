@@ -79,6 +79,24 @@ class SomeClass extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SomeClass.$classSomeClass) {
+      SomeClass.$classSomeClass = Class.$createForClass(
+          $Util.$generateId('SomeClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.interfaceuse.SomeClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.interfaceuse.SomeClass'));
+    }
+    return SomeClass.$classSomeClass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -94,17 +112,6 @@ SomeInterface.$markImplementor(SomeClass);
 AnotherInterface.$markImplementor(SomeClass);
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-SomeClass.$class = Class.$createForClass(
-    $Util.$generateId('SomeClass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.interfaceuse.SomeClass'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.interfaceuse.SomeClass'));
 
 /**
  * Export class.

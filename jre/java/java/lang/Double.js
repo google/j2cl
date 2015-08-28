@@ -48,18 +48,24 @@ class Double extends Number {
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Double);
   }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!Double.$classDouble) {
+      Double.$classDouble = Class.$createForClass(
+          $Util.$generateId('Double'),
+          $Util.$generateId('java.lang.Double'),
+          Number.$getClass(),
+          $Util.$generateId('java.lang.Double'));
+    }
+    return Double.$classDouble;
+  }
 };
 
-
-/**
- * @public {Class}
- * @nocollapse
- */
-Double.$class = Class.$createForClass(
-  $Util.$generateId('Double'),
-  $Util.$generateId('java.lang.Double'),
-  Number.$class,
-  $Util.$generateId('java.lang.Double'));
 
 /**
  * Exported class.

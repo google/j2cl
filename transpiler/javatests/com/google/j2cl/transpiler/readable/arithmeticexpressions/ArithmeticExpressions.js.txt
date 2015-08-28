@@ -90,6 +90,24 @@ class ArithmeticExpressions extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!ArithmeticExpressions.$classArithmeticExpressions) {
+      ArithmeticExpressions.$classArithmeticExpressions = Class.$createForClass(
+          $Util.$generateId('ArithmeticExpressions'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions'));
+    }
+    return ArithmeticExpressions.$classArithmeticExpressions;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -99,17 +117,6 @@ class ArithmeticExpressions extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-ArithmeticExpressions.$class = Class.$createForClass(
-    $Util.$generateId('ArithmeticExpressions'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions'));
 
 /**
  * Export class.

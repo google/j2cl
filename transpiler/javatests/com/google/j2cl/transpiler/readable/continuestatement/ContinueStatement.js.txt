@@ -77,6 +77,24 @@ class ContinueStatement extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!ContinueStatement.$classContinueStatement) {
+      ContinueStatement.$classContinueStatement = Class.$createForClass(
+          $Util.$generateId('ContinueStatement'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.continuestatement.ContinueStatement'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.continuestatement.ContinueStatement'));
+    }
+    return ContinueStatement.$classContinueStatement;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -86,17 +104,6 @@ class ContinueStatement extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-ContinueStatement.$class = Class.$createForClass(
-    $Util.$generateId('ContinueStatement'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.continuestatement.ContinueStatement'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.continuestatement.ContinueStatement'));
 
 /**
  * Export class.

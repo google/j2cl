@@ -76,6 +76,24 @@ class SomeInterface {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SomeInterface.$classSomeInterface) {
+      SomeInterface.$classSomeInterface = Class.$createForInterface(
+          $Util.$generateId('SomeInterface'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeInterface'),
+          null,
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeInterface'));
+    }
+    return SomeInterface.$classSomeInterface;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -86,19 +104,6 @@ class SomeInterface {
 
 
 SomeInterface.$markImplementor(/** @type {Function} */ (SomeInterface));
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-SomeInterface.$class = Class.$createForInterface(
-    $Util.$generateId('SomeInterface'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeInterface'),
-    null,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeInterface'));
 
 /**
  * Export class.
@@ -176,6 +181,24 @@ class SuperParent extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SuperParent.$classSuperParent) {
+      SuperParent.$classSuperParent = Class.$createForClass(
+          $Util.$generateId('SuperParent'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent'));
+    }
+    return SuperParent.$classSuperParent;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -185,17 +208,6 @@ class SuperParent extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-SuperParent.$class = Class.$createForClass(
-    $Util.$generateId('SuperParent'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent'));
 
 /**
  * Export class.
@@ -304,6 +316,24 @@ class Parent extends SuperParent {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!Parent.$classParent) {
+      Parent.$classParent = Class.$createForClass(
+          $Util.$generateId('Parent'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent'),
+          SuperParent.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent'));
+    }
+    return Parent.$classParent;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -313,17 +343,6 @@ class Parent extends SuperParent {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-Parent.$class = Class.$createForClass(
-    $Util.$generateId('Parent'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent'),
-    SuperParent.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent'));
 
 /**
  * Export class.
@@ -459,6 +478,24 @@ class BridgeMethod extends Parent {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!BridgeMethod.$classBridgeMethod) {
+      BridgeMethod.$classBridgeMethod = Class.$createForClass(
+          $Util.$generateId('BridgeMethod'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod'),
+          Parent.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod'));
+    }
+    return BridgeMethod.$classBridgeMethod;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -471,17 +508,6 @@ class BridgeMethod extends Parent {
 SomeInterface.$markImplementor(BridgeMethod);
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-BridgeMethod.$class = Class.$createForClass(
-    $Util.$generateId('BridgeMethod'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod'),
-    Parent.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod'));
 
 /**
  * Export class.

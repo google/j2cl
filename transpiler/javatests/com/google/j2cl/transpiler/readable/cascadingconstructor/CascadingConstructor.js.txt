@@ -119,6 +119,24 @@ class CascadingConstructor extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!CascadingConstructor.$classCascadingConstructor) {
+      CascadingConstructor.$classCascadingConstructor = Class.$createForClass(
+          $Util.$generateId('CascadingConstructor'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor'));
+    }
+    return CascadingConstructor.$classCascadingConstructor;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -128,17 +146,6 @@ class CascadingConstructor extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-CascadingConstructor.$class = Class.$createForClass(
-    $Util.$generateId('CascadingConstructor'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor'));
 
 /**
  * Export class.

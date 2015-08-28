@@ -54,6 +54,24 @@ class EmptyInterface {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!EmptyInterface.$classEmptyInterface) {
+      EmptyInterface.$classEmptyInterface = Class.$createForInterface(
+          $Util.$generateId('EmptyInterface'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.emptyinterface.EmptyInterface'),
+          null,
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.emptyinterface.EmptyInterface'));
+    }
+    return EmptyInterface.$classEmptyInterface;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -64,19 +82,6 @@ class EmptyInterface {
 
 
 EmptyInterface.$markImplementor(/** @type {Function} */ (EmptyInterface));
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-EmptyInterface.$class = Class.$createForInterface(
-    $Util.$generateId('EmptyInterface'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.emptyinterface.EmptyInterface'),
-    null,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.emptyinterface.EmptyInterface'));
 
 /**
  * Export class.

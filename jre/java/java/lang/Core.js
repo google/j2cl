@@ -45,7 +45,7 @@ class Object {
    * @public
    */
 
-  m_getClass() { return this.constructor.$class; }
+  m_getClass() { return this.constructor.$getClass(); }
 
   /**
    * @return {number}
@@ -68,7 +68,7 @@ class Object {
     // TODO: fix this implementation. The hash code should be returned in hex
     // but can't currently depend on Integer to get access to that static
     // function because Closure doesn't yet support module circular references.
-    return this.constructor.$class.m_getName() + '@' + this.m_hashCode();
+    return this.constructor.$getClass().m_getName() + '@' + this.m_hashCode();
   }
 
   /**
@@ -100,6 +100,22 @@ class Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!Object.$classObject) {
+      Object.$classObject = Class.$createForClass(
+        Util.$generateId('Object'),
+        Util.$generateId('java.lang.Object'),
+        null,
+        Util.$generateId('java.lang.Object'));
+    }
+    return Object.$classObject;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -126,10 +142,12 @@ class Class extends Object {
    * @param {Class} superClassLiteral
    * @param {?string} canonicalName
    * @param {Array<Object>} enumConstants
+   * @param {Class} arrayElementClassLiteral
+   * @param {number} dimensionCount
    * @private
    */
   constructor(simpleName, name, type, superClassLiteral, canonicalName,
-      enumConstants) {
+      enumConstants, arrayElementClassLiteral, dimensionCount) {
     super();
 
     /**
@@ -163,12 +181,23 @@ class Class extends Object {
     this.$enumConstants_ = enumConstants;
 
     /**
+     * Only used for Array class literals.
+     * @private {Class}
+     */
+    this.$arrayElementClassLiteral_ = arrayElementClassLiteral;
+
+    /**
+     * @private {number}
+     */
+    this.$dimensionCount_ = dimensionCount;
+
+    /**
      * An array of lazily created class literals that describe Arrays of the
      * same type as the type being described by this class literal. For example
      * if this class literal is for class "Bar" then when array classes Bar[]
      * and Bar[][] are created class literals to describe them will be created
      * and stored here.
-     * @private {Array<ArrayClass>}
+     * @private {Array<Class>}
      */
     this.$arrayClassLiteralsByDimensions_ = [];
   }
@@ -183,7 +212,18 @@ class Class extends Object {
    * @return {?string}
    * @public
    */
-  m_getCanonicalName() { return this.$canonicalName_; }
+  m_getCanonicalName() {
+    if (this.m_isArray() && this.$canonicalName_ == null) {
+      var canonicalNameSuffix = '';
+      for (var i = 0; i < this.$dimensionCount_; i++) {
+        canonicalNameSuffix = canonicalNameSuffix + '[]';
+      }
+      this.$canonicalName_ =
+          this.$arrayElementClassLiteral_.m_getCanonicalName() +
+          canonicalNameSuffix;
+    }
+    return this.$canonicalName_;
+  }
 
   /**
    * If the current class literal is for an array then the class literal of its
@@ -191,7 +231,14 @@ class Class extends Object {
    * @return {Class}
    * @public
    */
-  m_getComponentType() { return null; }
+  m_getComponentType() {
+    if (this.m_isArray()) {
+      return this.$dimensionCount_ == 1 ?
+          this.$arrayElementClassLiteral_ :
+          this.$arrayElementClassLiteral_.$forArray(this.$dimensionCount_ - 1);
+    }
+    return null;
+  }
 
   /**
    * @return {Array<Object>}
@@ -203,13 +250,37 @@ class Class extends Object {
    * @return {?string}
    * @public
    */
-  m_getName() { return this.$name_; }
+  m_getName() {
+    if (this.m_isArray() && this.$name_ == null) {
+      var namePrefix = '';
+      for (var i = 0; i < this.$dimensionCount_; i++) {
+        namePrefix = namePrefix + '[';
+      }
+      var isPrimitive =
+          this.$arrayElementClassLiteral_.$type_ == Class.Type_.PRIMITIVE;
+      var typePrefix = isPrimitive ? '' : 'L';
+      var typeSuffix = isPrimitive ? '' : ';';
+      this.$name_ = namePrefix + typePrefix +
+          this.$arrayElementClassLiteral_.m_getName() + typeSuffix;
+    }
+    return this.$name_;
+  }
 
   /**
    * @return {?string}
    * @public
    */
-  m_getSimpleName() { return this.$simpleName_; }
+  m_getSimpleName() {
+    if (this.m_isArray() && this.$simpleName_ == null) {
+      var simpleNameSuffix = '';
+      for (var i = 0; i < this.$dimensionCount_; i++) {
+        simpleNameSuffix = simpleNameSuffix + '[]';
+      }
+      this.$simpleName_ =
+          this.$arrayElementClassLiteral_.m_getSimpleName() + simpleNameSuffix;
+    }
+    return this.$simpleName_;
+  }
 
   /**
    * @return {Class}
@@ -263,7 +334,9 @@ class Class extends Object {
       return arrayClassLiteral;
     }
 
-    arrayClassLiteral = ArrayClass.$create(this, dimensionCount);
+    arrayClassLiteral = new Class(
+        null, null, Class.Type_.ARRAY, Object.$getClass(),
+        null, null, this, dimensionCount);
     this.$arrayClassLiteralsByDimensions_[dimensionCount] = arrayClassLiteral;
     return arrayClassLiteral;
   }
@@ -281,7 +354,7 @@ class Class extends Object {
       opt_canonicalName) {
     Class.$clinit();
     return new Class(simpleName, name, Class.Type_.PLAIN, superClassLiteral,
-        opt_canonicalName || null, null);
+        opt_canonicalName || null, null, null, 0);
   }
 
   /**
@@ -298,7 +371,7 @@ class Class extends Object {
       enumConstants) {
     Class.$clinit();
     return new Class(simpleName, name, Class.Type_.ENUM, superClassLiteral,
-        canonicalName, enumConstants);
+        canonicalName, enumConstants, null, 0);
   }
 
   /**
@@ -313,7 +386,7 @@ class Class extends Object {
       opt_canonicalName) {
     Class.$clinit();
     return new Class(simpleName, name, Class.Type_.INTERFACE, superClassLiteral,
-        opt_canonicalName || null, null);
+        opt_canonicalName || null, null, null, 0);
   }
 
   /**
@@ -324,7 +397,7 @@ class Class extends Object {
   static $createForPrimitive(simpleName) {
     Class.$clinit();
     return new Class(simpleName, simpleName, Class.Type_.PRIMITIVE, null,
-        simpleName, null);
+        simpleName, null, null, 0);
   }
 
   /**
@@ -350,6 +423,22 @@ class Class extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!Class.$classClass) {
+      Class.$classClass = Class.$createForClass(
+          Util.$generateId('Class'),
+          Util.$generateId('java.lang.Class'),
+          Object.$getClass(),
+          Util.$generateId('java.lang.Class'));
+    }
+    return Class.$classClass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -369,139 +458,6 @@ Class.Type_ = {
   INTERFACE: 3,
   PRIMITIVE: 4
 };
-
-
-
-/**
- * Like a Class except that it lazily constructs name and simpleName.
- */
-// TODO: delete this when all class literal construction is wrapped in lazy
-// function access, since it will supercede the benefit of lazy name
-// construction and will fix subtle edge cases here of Class != ArrayClass.
-class ArrayClass extends Class {
-  /**
-   * Defines instance fields.
-   * @param {Class} arrayElementClassLiteral
-   * @param {number} dimensionCount
-   * @private
-   */
-  constructor(arrayElementClassLiteral, dimensionCount) {
-    super(null, null, Class.Type_.ARRAY, Object.$class, null, null);
-
-    /**
-     * Only used for Array class literals.
-     * @private {Class}
-     */
-    this.$arrayElementClassLiteral_ = arrayElementClassLiteral;
-
-    /**
-     * @private {number}
-     */
-    this.$dimensionCount_ = dimensionCount;
-  }
-
-  /**
-   * @return {string}
-   * @public
-   */
-  m_getName() {
-    if (this.$name_ == null) {
-      var namePrefix = '';
-      for (var i = 0; i < this.$dimensionCount_; i++) {
-        namePrefix = namePrefix + '[';
-      }
-      var isPrimitive =
-          this.$arrayElementClassLiteral_.$type_ == Class.Type_.PRIMITIVE;
-      var typePrefix = isPrimitive ? '' : 'L';
-      var typeSuffix = isPrimitive ? '' : ';';
-      this.$name_ = namePrefix + typePrefix +
-          this.$arrayElementClassLiteral_.m_getName() + typeSuffix;
-    }
-    return this.$name_;
-  }
-
-  /**
-   * @return {string}
-   * @public
-   */
-  m_getSimpleName() {
-    if (this.$simpleName_ == null) {
-      var simpleNameSuffix = '';
-      for (var i = 0; i < this.$dimensionCount_; i++) {
-        simpleNameSuffix = simpleNameSuffix + '[]';
-      }
-      this.$simpleName_ =
-          this.$arrayElementClassLiteral_.m_getSimpleName() + simpleNameSuffix;
-    }
-    return this.$simpleName_;
-  }
-
-  /**
-   * @return {string}
-   * @public
-   */
-  m_getCanonicalName() {
-    if (this.$canonicalName_ == null) {
-      var canonicalNameSuffix = '';
-      for (var i = 0; i < this.$dimensionCount_; i++) {
-        canonicalNameSuffix = canonicalNameSuffix + '[]';
-      }
-      this.$canonicalName_ =
-          this.$arrayElementClassLiteral_.m_getCanonicalName() +
-          canonicalNameSuffix;
-    }
-    return this.$canonicalName_;
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   */
-  m_getComponentType() {
-    return this.$dimensionCount_ == 1 ?
-        this.$arrayElementClassLiteral_ :
-        this.$arrayElementClassLiteral_.$forArray(this.$dimensionCount_ - 1);
-  }
-
-  /**
-   * @param {Class} arrayElementClassLiteral
-   * @param {number} dimensionCount
-   * @return {!ArrayClass}
-   * @public
-   */
-  static $create(arrayElementClassLiteral, dimensionCount) {
-    ArrayClass.$clinit();
-    return new ArrayClass(arrayElementClassLiteral, dimensionCount);
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Class.$clinit(); }
-};
-
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-Object.$class = Class.$createForClass(
-    Util.$generateId('Object'), Util.$generateId('java.lang.Object'), null,
-    Util.$generateId('java.lang.Object'));
-
-
-/**
- * Creates the class literal (for the Class class) after the Object class
- * literal exists, so that it is not a reference error.
- * @public {Class}
- * @nocollapse
- */
-Class.$class = Class.$createForClass(
-  Util.$generateId('Class'), Util.$generateId('java.lang.Class'), Object.$class,
-  Util.$generateId('java.lang.Class'));
 
 
 /**

@@ -102,6 +102,24 @@ class Parent extends SuperParent {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!Parent.$classParent) {
+      Parent.$classParent = Class.$createForClass(
+          $Util.$generateId('Parent'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent'),
+          SuperParent.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent'));
+    }
+    return Parent.$classParent;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -111,17 +129,6 @@ class Parent extends SuperParent {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-Parent.$class = Class.$createForClass(
-    $Util.$generateId('Parent'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent'),
-    SuperParent.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent'));
 
 /**
  * Export class.

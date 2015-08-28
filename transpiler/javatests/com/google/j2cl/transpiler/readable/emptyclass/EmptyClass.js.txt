@@ -65,6 +65,24 @@ class EmptyClass extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!EmptyClass.$classEmptyClass) {
+      EmptyClass.$classEmptyClass = Class.$createForClass(
+          $Util.$generateId('EmptyClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.emptyclass.EmptyClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.emptyclass.EmptyClass'));
+    }
+    return EmptyClass.$classEmptyClass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -74,17 +92,6 @@ class EmptyClass extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-EmptyClass.$class = Class.$createForClass(
-    $Util.$generateId('EmptyClass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.emptyclass.EmptyClass'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.emptyclass.EmptyClass'));
 
 /**
  * Export class.

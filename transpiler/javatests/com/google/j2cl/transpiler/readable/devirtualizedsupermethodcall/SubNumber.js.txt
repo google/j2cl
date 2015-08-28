@@ -99,6 +99,24 @@ class SubNumber extends Number {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SubNumber.$classSubNumber) {
+      SubNumber.$classSubNumber = Class.$createForClass(
+          $Util.$generateId('SubNumber'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber'),
+          Number.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber'));
+    }
+    return SubNumber.$classSubNumber;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -108,17 +126,6 @@ class SubNumber extends Number {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-SubNumber.$class = Class.$createForClass(
-    $Util.$generateId('SubNumber'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber'),
-    Number.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber'));
 
 /**
  * Export class.

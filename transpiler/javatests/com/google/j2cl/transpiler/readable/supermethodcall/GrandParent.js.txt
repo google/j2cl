@@ -86,6 +86,24 @@ class GrandParent extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!GrandParent.$classGrandParent) {
+      GrandParent.$classGrandParent = Class.$createForClass(
+          $Util.$generateId('GrandParent'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.supermethodcall.GrandParent'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.supermethodcall.GrandParent'));
+    }
+    return GrandParent.$classGrandParent;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -95,17 +113,6 @@ class GrandParent extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-GrandParent.$class = Class.$createForClass(
-    $Util.$generateId('GrandParent'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.supermethodcall.GrandParent'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.supermethodcall.GrandParent'));
 
 /**
  * Export class.

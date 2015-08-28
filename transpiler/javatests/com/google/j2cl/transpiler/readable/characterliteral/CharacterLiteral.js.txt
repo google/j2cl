@@ -195,6 +195,24 @@ class CharacterLiteral extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!CharacterLiteral.$classCharacterLiteral) {
+      CharacterLiteral.$classCharacterLiteral = Class.$createForClass(
+          $Util.$generateId('CharacterLiteral'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.characterliteral.CharacterLiteral'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.characterliteral.CharacterLiteral'));
+    }
+    return CharacterLiteral.$classCharacterLiteral;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -204,17 +222,6 @@ class CharacterLiteral extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-CharacterLiteral.$class = Class.$createForClass(
-    $Util.$generateId('CharacterLiteral'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.characterliteral.CharacterLiteral'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.characterliteral.CharacterLiteral'));
 
 /**
  * Export class.

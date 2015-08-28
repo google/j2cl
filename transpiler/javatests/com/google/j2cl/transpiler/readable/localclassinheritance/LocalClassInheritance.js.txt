@@ -76,6 +76,24 @@ class LocalClassInheritance extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!LocalClassInheritance.$classLocalClassInheritance) {
+      LocalClassInheritance.$classLocalClassInheritance = Class.$createForClass(
+          $Util.$generateId('LocalClassInheritance'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance'));
+    }
+    return LocalClassInheritance.$classLocalClassInheritance;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -85,17 +103,6 @@ class LocalClassInheritance extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-LocalClassInheritance.$class = Class.$createForClass(
-    $Util.$generateId('LocalClassInheritance'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance'));
 
 /**
  * Export class.
@@ -189,6 +196,25 @@ class LocalClassInheritance$1Parent extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!LocalClassInheritance$1Parent.$classLocalClassInheritance$1Parent) {
+      LocalClassInheritance$1Parent
+          .$classLocalClassInheritance$1Parent = Class.$createForClass(
+          $Util.$generateId('1Parent'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance$1Parent'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance.1Parent'));
+    }
+    return LocalClassInheritance$1Parent.$classLocalClassInheritance$1Parent;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -196,19 +222,6 @@ class LocalClassInheritance$1Parent extends Object {
   static $clinit() { Object.$clinit(); }
 }
 ;
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-LocalClassInheritance$1Parent.$class = Class.$createForClass(
-    $Util.$generateId('1Parent'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance$1Parent'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance.1Parent'));
 
 
 
@@ -299,6 +312,25 @@ class LocalClassInheritance$1Child extends LocalClassInheritance$1Parent {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!LocalClassInheritance$1Child.$classLocalClassInheritance$1Child) {
+      LocalClassInheritance$1Child
+          .$classLocalClassInheritance$1Child = Class.$createForClass(
+          $Util.$generateId('1Child'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance$1Child'),
+          LocalClassInheritance$1Parent.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance.1Child'));
+    }
+    return LocalClassInheritance$1Child.$classLocalClassInheritance$1Child;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -306,16 +338,3 @@ class LocalClassInheritance$1Child extends LocalClassInheritance$1Parent {
   static $clinit() { LocalClassInheritance$1Parent.$clinit(); }
 }
 ;
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-LocalClassInheritance$1Child.$class = Class.$createForClass(
-    $Util.$generateId('1Child'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance$1Child'),
-    LocalClassInheritance$1Parent.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance.1Child'));

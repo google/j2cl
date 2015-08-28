@@ -125,6 +125,24 @@ class GenericConstructor extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!GenericConstructor.$classGenericConstructor) {
+      GenericConstructor.$classGenericConstructor = Class.$createForClass(
+          $Util.$generateId('GenericConstructor'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor'));
+    }
+    return GenericConstructor.$classGenericConstructor;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -134,17 +152,6 @@ class GenericConstructor extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-GenericConstructor.$class = Class.$createForClass(
-    $Util.$generateId('GenericConstructor'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor'));
 
 /**
  * Export class.

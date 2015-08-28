@@ -62,6 +62,25 @@ class SimpleGenericInterface {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SimpleGenericInterface.$classSimpleGenericInterface) {
+      SimpleGenericInterface
+          .$classSimpleGenericInterface = Class.$createForInterface(
+          $Util.$generateId('SimpleGenericInterface'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplegenericinterface.SimpleGenericInterface'),
+          null,
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplegenericinterface.SimpleGenericInterface'));
+    }
+    return SimpleGenericInterface.$classSimpleGenericInterface;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -73,19 +92,6 @@ class SimpleGenericInterface {
 
 SimpleGenericInterface.$markImplementor(
     /** @type {Function} */ (SimpleGenericInterface));
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-SimpleGenericInterface.$class = Class.$createForInterface(
-    $Util.$generateId('SimpleGenericInterface'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplegenericinterface.SimpleGenericInterface'),
-    null,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplegenericinterface.SimpleGenericInterface'));
 
 /**
  * Export class.

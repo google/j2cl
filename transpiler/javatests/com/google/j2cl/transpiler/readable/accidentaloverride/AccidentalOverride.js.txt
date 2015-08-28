@@ -80,6 +80,24 @@ class Parent extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!Parent.$classParent) {
+      Parent.$classParent = Class.$createForClass(
+          $Util.$generateId('Parent'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.accidentaloverride.Parent'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.accidentaloverride.Parent'));
+    }
+    return Parent.$classParent;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -89,17 +107,6 @@ class Parent extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-Parent.$class = Class.$createForClass(
-    $Util.$generateId('Parent'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.accidentaloverride.Parent'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.accidentaloverride.Parent'));
 
 /**
  * Export class.
@@ -161,6 +168,24 @@ class SuperInterface {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SuperInterface.$classSuperInterface) {
+      SuperInterface.$classSuperInterface = Class.$createForInterface(
+          $Util.$generateId('SuperInterface'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface'),
+          null,
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface'));
+    }
+    return SuperInterface.$classSuperInterface;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -171,19 +196,6 @@ class SuperInterface {
 
 
 SuperInterface.$markImplementor(/** @type {Function} */ (SuperInterface));
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-SuperInterface.$class = Class.$createForInterface(
-    $Util.$generateId('SuperInterface'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface'),
-    null,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface'));
 
 /**
  * Export class.
@@ -266,6 +278,25 @@ class AnotherAccidentalOverride extends Parent {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!AnotherAccidentalOverride.$classAnotherAccidentalOverride) {
+      AnotherAccidentalOverride
+          .$classAnotherAccidentalOverride = Class.$createForClass(
+          $Util.$generateId('AnotherAccidentalOverride'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.accidentaloverride.AnotherAccidentalOverride'),
+          Parent.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.accidentaloverride.AnotherAccidentalOverride'));
+    }
+    return AnotherAccidentalOverride.$classAnotherAccidentalOverride;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -278,17 +309,6 @@ class AnotherAccidentalOverride extends Parent {
 SuperInterface.$markImplementor(AnotherAccidentalOverride);
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-AnotherAccidentalOverride.$class = Class.$createForClass(
-    $Util.$generateId('AnotherAccidentalOverride'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.accidentaloverride.AnotherAccidentalOverride'),
-    Parent.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.accidentaloverride.AnotherAccidentalOverride'));
 
 /**
  * Export class.
@@ -371,6 +391,24 @@ class AccidentalOverride extends Parent {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!AccidentalOverride.$classAccidentalOverride) {
+      AccidentalOverride.$classAccidentalOverride = Class.$createForClass(
+          $Util.$generateId('AccidentalOverride'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.accidentaloverride.AccidentalOverride'),
+          Parent.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.accidentaloverride.AccidentalOverride'));
+    }
+    return AccidentalOverride.$classAccidentalOverride;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -383,17 +421,6 @@ class AccidentalOverride extends Parent {
 SuperInterface.$markImplementor(AccidentalOverride);
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-AccidentalOverride.$class = Class.$createForClass(
-    $Util.$generateId('AccidentalOverride'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.accidentaloverride.AccidentalOverride'),
-    Parent.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.accidentaloverride.AccidentalOverride'));
 
 /**
  * Export class.

@@ -104,6 +104,24 @@ class SimpleGenericType extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SimpleGenericType.$classSimpleGenericType) {
+      SimpleGenericType.$classSimpleGenericType = Class.$createForClass(
+          $Util.$generateId('SimpleGenericType'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType'));
+    }
+    return SimpleGenericType.$classSimpleGenericType;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -113,17 +131,6 @@ class SimpleGenericType extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-SimpleGenericType.$class = Class.$createForClass(
-    $Util.$generateId('SimpleGenericType'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType'));
 
 /**
  * Export class.

@@ -51,7 +51,12 @@ class Arrays {
     array.leafType = leafType;
     array.dimensionCount = dimensionLengths.length;
 
-    array.$class = leafType.$class.$forArray(array.dimensionCount);
+    array.$getClass = function() {
+      if (!array.$class) {
+        array.$class = leafType.$getClass().$forArray(array.dimensionCount);
+      }
+      return array.$class;
+    };
 
     array.length = length;
     if (array.dimensionCount > 1) {
@@ -114,7 +119,12 @@ class Arrays {
     array.leafType = leafType;
     array.dimensionCount = dimensionCount;
 
-    array.$class = leafType.$class.$forArray(array.dimensionCount);
+    array.$getClass = function() {
+      if (!array.$class) {
+        array.$class = leafType.$getClass().$forArray(array.dimensionCount);
+      }
+      return array.$class;
+    };
 
     // Length is not set since the provided array already contain values and
     // knows its own length.
@@ -249,11 +259,12 @@ class Arrays {
    * @public
    */
   static m_getClass__java_lang_Object(obj) {
-    if (obj.$class) {
-      return obj.$class;
+    if (obj.$getClass) {
+      return obj.$getClass();
     }
-    // Uninitialized arrays lack a .$class field but are implicitly Object[].
-    return Object.$class.$forArray(1);
+    // Uninitialized arrays lack a .$getClass() method but are implicitly
+    // Object[].
+    return Object.$getClass().$forArray(1);
   }
 
   /**

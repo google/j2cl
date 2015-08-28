@@ -78,6 +78,25 @@ class LongParameterSignature extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!LongParameterSignature.$classLongParameterSignature) {
+      LongParameterSignature
+          .$classLongParameterSignature = Class.$createForClass(
+          $Util.$generateId('LongParameterSignature'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.longparametersignature.LongParameterSignature'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.longparametersignature.LongParameterSignature'));
+    }
+    return LongParameterSignature.$classLongParameterSignature;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -87,17 +106,6 @@ class LongParameterSignature extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-LongParameterSignature.$class = Class.$createForClass(
-    $Util.$generateId('LongParameterSignature'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.longparametersignature.LongParameterSignature'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.longparametersignature.LongParameterSignature'));
 
 /**
  * Export class.

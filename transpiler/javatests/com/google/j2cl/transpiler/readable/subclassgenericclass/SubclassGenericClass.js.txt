@@ -71,6 +71,24 @@ class GenericClass extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!GenericClass.$classGenericClass) {
+      GenericClass.$classGenericClass = Class.$createForClass(
+          $Util.$generateId('GenericClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass'));
+    }
+    return GenericClass.$classGenericClass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -80,17 +98,6 @@ class GenericClass extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-GenericClass.$class = Class.$createForClass(
-    $Util.$generateId('GenericClass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass'));
 
 /**
  * Export class.
@@ -163,6 +170,25 @@ class GenericSubclassGenericClass extends GenericClass {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!GenericSubclassGenericClass.$classGenericSubclassGenericClass) {
+      GenericSubclassGenericClass
+          .$classGenericSubclassGenericClass = Class.$createForClass(
+          $Util.$generateId('GenericSubclassGenericClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.subclassgenericclass.GenericSubclassGenericClass'),
+          GenericClass.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.subclassgenericclass.GenericSubclassGenericClass'));
+    }
+    return GenericSubclassGenericClass.$classGenericSubclassGenericClass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -172,17 +198,6 @@ class GenericSubclassGenericClass extends GenericClass {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-GenericSubclassGenericClass.$class = Class.$createForClass(
-    $Util.$generateId('GenericSubclassGenericClass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.subclassgenericclass.GenericSubclassGenericClass'),
-    GenericClass.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.subclassgenericclass.GenericSubclassGenericClass'));
 
 /**
  * Export class.
@@ -253,6 +268,24 @@ class SubclassGenericClass extends GenericClass {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SubclassGenericClass.$classSubclassGenericClass) {
+      SubclassGenericClass.$classSubclassGenericClass = Class.$createForClass(
+          $Util.$generateId('SubclassGenericClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.subclassgenericclass.SubclassGenericClass'),
+          GenericClass.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.subclassgenericclass.SubclassGenericClass'));
+    }
+    return SubclassGenericClass.$classSubclassGenericClass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -262,17 +295,6 @@ class SubclassGenericClass extends GenericClass {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-SubclassGenericClass.$class = Class.$createForClass(
-    $Util.$generateId('SubclassGenericClass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.subclassgenericclass.SubclassGenericClass'),
-    GenericClass.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.subclassgenericclass.SubclassGenericClass'));
 
 /**
  * Export class.

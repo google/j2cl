@@ -90,6 +90,26 @@ class Numbers extends Enum {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!Numbers.$classNumbers) {
+      Numbers.$classNumbers = Class.$createForEnum(
+          $Util.$generateId('Numbers'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.switchstatement.Numbers'),
+          Enum.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.switchstatement.Numbers'),
+          // TODO(rluble): emit here the enum values
+          null);
+    }
+    return Numbers.$classNumbers;
+  }
+
+  /**
    * A static field getter.
    * @return {Numbers}
    * @public
@@ -174,19 +194,6 @@ Numbers.$f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers =
     null;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-Numbers.$class = Class.$createForEnum(
-    $Util.$generateId('Numbers'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.switchstatement.Numbers'),
-    Enum.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.switchstatement.Numbers'),
-    // TODO(rluble): emit here the enum values
-    null);
 
 /**
  * Export class.

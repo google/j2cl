@@ -86,6 +86,24 @@ class Main extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!Main.$classMain) {
+      Main.$classMain = Class.$createForClass(
+          $Util.$generateId('Main'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.Main'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.Main'));
+    }
+    return Main.$classMain;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -95,17 +113,6 @@ class Main extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-Main.$class = Class.$createForClass(
-    $Util.$generateId('Main'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.Main'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.Main'));
 
 /**
  * Export class.

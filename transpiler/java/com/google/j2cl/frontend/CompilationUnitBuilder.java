@@ -1520,18 +1520,25 @@ public class CompilationUnitBuilder {
       TypeDescriptor javaLangClassTypeDescriptor =
           createTypeDescriptor(literal.resolveTypeBinding());
       if (typeBinding.getDimensions() == 0) {
-        // <ClassLiteralClass>.$class
-        FieldDescriptor classFieldDescriptor =
-            FieldDescriptor.createRaw(
-                true, literalTypeDescriptor, "$class", javaLangClassTypeDescriptor);
-        return new FieldAccess(null, classFieldDescriptor);
+        // <ClassLiteralClass>.$getClass()
+        MethodDescriptor classMethodDescriptor =
+            MethodDescriptor.createRaw(
+                true,
+                Visibility.PUBLIC,
+                literalTypeDescriptor,
+                "$getClass",
+                new ArrayList<>(),
+                javaLangClassTypeDescriptor);
+        return new MethodCall(null, classMethodDescriptor, new ArrayList<>());
       }
 
-      FieldDescriptor classFieldDescriptor =
-          FieldDescriptor.createRaw(
+      MethodDescriptor classMethodDescriptor =
+          MethodDescriptor.createRaw(
               true,
+              Visibility.PUBLIC,
               literalTypeDescriptor.getLeafTypeDescriptor(),
-              "$class",
+              "$getClass",
+              new ArrayList<>(),
               javaLangClassTypeDescriptor);
 
       MethodDescriptor forArrayMethodDescriptor =
@@ -1543,9 +1550,10 @@ public class CompilationUnitBuilder {
               Lists.newArrayList(TypeDescriptors.INT_TYPE_DESCRIPTOR),
               javaLangClassTypeDescriptor);
 
-      // <ClassLiteralClass>.$class.forArray(<dimensions>)
+      // <ClassLiteralClass>.$getClass().forArray(<dimensions>)
       return new MethodCall(
-          new FieldAccess(null, classFieldDescriptor), forArrayMethodDescriptor,
+          new MethodCall(null, classMethodDescriptor, new ArrayList<>()),
+          forArrayMethodDescriptor,
           ImmutableList.<Expression>of(
               new NumberLiteral(TypeDescriptors.INT_TYPE_DESCRIPTOR, typeBinding.getDimensions())));
     }

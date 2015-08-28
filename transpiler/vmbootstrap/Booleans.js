@@ -42,7 +42,7 @@ class Booleans {
    * @public
    */
   static m_getClass__java_lang_Object(obj) {
-    return $boolean.$class;
+    return $boolean.$getClass();
   }
 
   /**

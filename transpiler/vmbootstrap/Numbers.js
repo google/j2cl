@@ -45,7 +45,7 @@ class Numbers {
    * @public
    */
   static m_getClass__java_lang_Object(obj) {
-    return $double.$class;
+    return $double.$getClass();
   }
 
   /**

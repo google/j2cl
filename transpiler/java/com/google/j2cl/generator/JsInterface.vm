@@ -1,3 +1,5 @@
+#set ($utilAlias = ${statementSourceGenerator.toSource($nativeUtilTypeDecriptor)} )
+#set ($classAlias = ${statementSourceGenerator.toSource($javaLangClassTypeDecriptor)} )
 #set ($interfaceName = ${statementSourceGenerator.toSource($classType.Descriptor)})
 #set ($mangledName = ${ManglingNameUtils.getMangledName($classType.Descriptor)})
 #set ($simpleName = $classType.Descriptor.SimpleName)
@@ -59,6 +61,21 @@ class $interfaceName {
   }
 
   /**
+   * @return {${classAlias}}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!${interfaceName}.$class${interfaceName}) {
+      ${interfaceName}.$class${interfaceName} = $classAlias.$createForInterface(
+          $utilAlias.$generateId('$simpleName'),
+          $utilAlias.$generateId('$binaryName'), null,
+          $utilAlias.$generateId('$sourceName'));
+    }
+    return ${interfaceName}.$class${interfaceName};
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -69,15 +86,3 @@ class $interfaceName {
 
 ## TODO: remove cast after b/20102666 is handled in Closure.
 $interfaceName.$markImplementor(/** @type {Function} */($interfaceName));
-
-
-#set ($classAlias = ${statementSourceGenerator.toSource($javaLangClassTypeDecriptor)} )
-#set ($utilAlias = ${statementSourceGenerator.toSource($nativeUtilTypeDecriptor)} )
-/**
- * @public {${classAlias}}
- * @nocollapse
- */
-$interfaceName.$class = $classAlias.$createForInterface(
-    $utilAlias.$generateId('$simpleName'),
-    $utilAlias.$generateId('$binaryName'), null,
-    $utilAlias.$generateId('$sourceName'));

@@ -60,6 +60,24 @@ class SomeInterface {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SomeInterface.$classSomeInterface) {
+      SomeInterface.$classSomeInterface = Class.$createForInterface(
+          $Util.$generateId('SomeInterface'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.overridingmethods.SomeInterface'),
+          null,
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.overridingmethods.SomeInterface'));
+    }
+    return SomeInterface.$classSomeInterface;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -70,19 +88,6 @@ class SomeInterface {
 
 
 SomeInterface.$markImplementor(/** @type {Function} */ (SomeInterface));
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-SomeInterface.$class = Class.$createForInterface(
-    $Util.$generateId('SomeInterface'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.overridingmethods.SomeInterface'),
-    null,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.overridingmethods.SomeInterface'));
 
 /**
  * Export class.

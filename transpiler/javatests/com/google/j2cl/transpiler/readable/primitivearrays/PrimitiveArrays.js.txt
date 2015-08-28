@@ -115,6 +115,24 @@ class PrimitiveArrays extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!PrimitiveArrays.$classPrimitiveArrays) {
+      PrimitiveArrays.$classPrimitiveArrays = Class.$createForClass(
+          $Util.$generateId('PrimitiveArrays'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.primitivearrays.PrimitiveArrays'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.primitivearrays.PrimitiveArrays'));
+    }
+    return PrimitiveArrays.$classPrimitiveArrays;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -124,17 +142,6 @@ class PrimitiveArrays extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-PrimitiveArrays.$class = Class.$createForClass(
-    $Util.$generateId('PrimitiveArrays'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.primitivearrays.PrimitiveArrays'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.primitivearrays.PrimitiveArrays'));
 
 /**
  * Export class.

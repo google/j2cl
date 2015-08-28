@@ -64,6 +64,24 @@ class MyInterface {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!MyInterface.$classMyInterface) {
+      MyInterface.$classMyInterface = Class.$createForInterface(
+          $Util.$generateId('MyInterface'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface'),
+          null,
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface'));
+    }
+    return MyInterface.$classMyInterface;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -74,19 +92,6 @@ class MyInterface {
 
 
 MyInterface.$markImplementor(/** @type {Function} */ (MyInterface));
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-MyInterface.$class = Class.$createForInterface(
-    $Util.$generateId('MyInterface'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface'),
-    null,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface'));
 
 /**
  * Export class.
@@ -174,6 +179,24 @@ class LambdaWithGenerics extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!LambdaWithGenerics.$classLambdaWithGenerics) {
+      LambdaWithGenerics.$classLambdaWithGenerics = Class.$createForClass(
+          $Util.$generateId('LambdaWithGenerics'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics'));
+    }
+    return LambdaWithGenerics.$classLambdaWithGenerics;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -183,17 +206,6 @@ class LambdaWithGenerics extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-LambdaWithGenerics.$class = Class.$createForClass(
-    $Util.$generateId('LambdaWithGenerics'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics'));
 
 /**
  * Export class.
@@ -292,6 +304,25 @@ class LambdaWithGenerics$lambda$0 extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!LambdaWithGenerics$lambda$0.$classLambdaWithGenerics$lambda$0) {
+      LambdaWithGenerics$lambda$0
+          .$classLambdaWithGenerics$lambda$0 = Class.$createForClass(
+          $Util.$generateId('lambda$0'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$lambda$0'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.lambda.0'));
+    }
+    return LambdaWithGenerics$lambda$0.$classLambdaWithGenerics$lambda$0;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -302,16 +333,3 @@ class LambdaWithGenerics$lambda$0 extends Object {
 
 
 MyInterface.$markImplementor(LambdaWithGenerics$lambda$0);
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-LambdaWithGenerics$lambda$0.$class = Class.$createForClass(
-    $Util.$generateId('lambda$0'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$lambda$0'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.lambda.0'));

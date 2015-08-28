@@ -80,6 +80,24 @@ class Superclass extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!Superclass.$classSuperclass) {
+      Superclass.$classSuperclass = Class.$createForClass(
+          $Util.$generateId('Superclass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass'));
+    }
+    return Superclass.$classSuperclass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -89,17 +107,6 @@ class Superclass extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-Superclass.$class = Class.$createForClass(
-    $Util.$generateId('Superclass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass'));
 
 /**
  * Export class.
@@ -185,6 +192,24 @@ class Subclass extends Superclass {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!Subclass.$classSubclass) {
+      Subclass.$classSubclass = Class.$createForClass(
+          $Util.$generateId('Subclass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass'),
+          Superclass.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass'));
+    }
+    return Subclass.$classSubclass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -194,17 +219,6 @@ class Subclass extends Superclass {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-Subclass.$class = Class.$createForClass(
-    $Util.$generateId('Subclass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass'),
-    Superclass.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass'));
 
 /**
  * Export class.
@@ -273,6 +287,24 @@ class AnotherSubclass extends Superclass {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!AnotherSubclass.$classAnotherSubclass) {
+      AnotherSubclass.$classAnotherSubclass = Class.$createForClass(
+          $Util.$generateId('AnotherSubclass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherSubclass'),
+          Superclass.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherSubclass'));
+    }
+    return AnotherSubclass.$classAnotherSubclass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -282,17 +314,6 @@ class AnotherSubclass extends Superclass {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-AnotherSubclass.$class = Class.$createForClass(
-    $Util.$generateId('AnotherSubclass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherSubclass'),
-    Superclass.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherSubclass'));
 
 /**
  * Export class.
@@ -354,6 +375,24 @@ class Callable {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!Callable.$classCallable) {
+      Callable.$classCallable = Class.$createForInterface(
+          $Util.$generateId('Callable'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplebridgemethods.Callable'),
+          null,
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplebridgemethods.Callable'));
+    }
+    return Callable.$classCallable;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -364,19 +403,6 @@ class Callable {
 
 
 Callable.$markImplementor(/** @type {Function} */ (Callable));
-
-
-/**
- * @public {Class}
- * @nocollapse
- */
-Callable.$class = Class.$createForInterface(
-    $Util.$generateId('Callable'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplebridgemethods.Callable'),
-    null,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplebridgemethods.Callable'));
 
 /**
  * Export class.
@@ -454,6 +480,24 @@ class Task extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!Task.$classTask) {
+      Task.$classTask = Class.$createForClass(
+          $Util.$generateId('Task'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplebridgemethods.Task'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplebridgemethods.Task'));
+    }
+    return Task.$classTask;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -466,17 +510,6 @@ class Task extends Object {
 Callable.$markImplementor(Task);
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-Task.$class = Class.$createForClass(
-    $Util.$generateId('Task'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplebridgemethods.Task'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplebridgemethods.Task'));
 
 /**
  * Export class.
@@ -567,6 +600,24 @@ class AnotherTask extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!AnotherTask.$classAnotherTask) {
+      AnotherTask.$classAnotherTask = Class.$createForClass(
+          $Util.$generateId('AnotherTask'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask'));
+    }
+    return AnotherTask.$classAnotherTask;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -579,17 +630,6 @@ class AnotherTask extends Object {
 Callable.$markImplementor(AnotherTask);
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-AnotherTask.$class = Class.$createForClass(
-    $Util.$generateId('AnotherTask'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask'));
 
 /**
  * Export class.
@@ -657,6 +697,24 @@ class SimpleBridgeMethods extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SimpleBridgeMethods.$classSimpleBridgeMethods) {
+      SimpleBridgeMethods.$classSimpleBridgeMethods = Class.$createForClass(
+          $Util.$generateId('SimpleBridgeMethods'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplebridgemethods.SimpleBridgeMethods'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplebridgemethods.SimpleBridgeMethods'));
+    }
+    return SimpleBridgeMethods.$classSimpleBridgeMethods;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -666,17 +724,6 @@ class SimpleBridgeMethods extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-SimpleBridgeMethods.$class = Class.$createForClass(
-    $Util.$generateId('SimpleBridgeMethods'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplebridgemethods.SimpleBridgeMethods'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplebridgemethods.SimpleBridgeMethods'));
 
 /**
  * Export class.

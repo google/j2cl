@@ -93,6 +93,24 @@ class InstanceInnerClass extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!InstanceInnerClass.$classInstanceInnerClass) {
+      InstanceInnerClass.$classInstanceInnerClass = Class.$createForClass(
+          $Util.$generateId('InstanceInnerClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass'));
+    }
+    return InstanceInnerClass.$classInstanceInnerClass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -102,17 +120,6 @@ class InstanceInnerClass extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-InstanceInnerClass.$class = Class.$createForClass(
-    $Util.$generateId('InstanceInnerClass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass'));
 
 /**
  * Export class.
@@ -210,6 +217,25 @@ class InstanceInnerClass$InnerClass extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!InstanceInnerClass$InnerClass.$classInstanceInnerClass$InnerClass) {
+      InstanceInnerClass$InnerClass
+          .$classInstanceInnerClass$InnerClass = Class.$createForClass(
+          $Util.$generateId('InnerClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass$InnerClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass.InnerClass'));
+    }
+    return InstanceInnerClass$InnerClass.$classInstanceInnerClass$InnerClass;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -219,17 +245,6 @@ class InstanceInnerClass$InnerClass extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-InstanceInnerClass$InnerClass.$class = Class.$createForClass(
-    $Util.$generateId('InnerClass'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass$InnerClass'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass.InnerClass'));
 
 /**
  * Export class.

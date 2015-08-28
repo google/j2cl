@@ -123,6 +123,24 @@ class CompileTimeConstant extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!CompileTimeConstant.$classCompileTimeConstant) {
+      CompileTimeConstant.$classCompileTimeConstant = Class.$createForClass(
+          $Util.$generateId('CompileTimeConstant'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant'));
+    }
+    return CompileTimeConstant.$classCompileTimeConstant;
+  }
+
+  /**
    * A static field getter.
    * @return {number}
    * @public
@@ -450,17 +468,6 @@ CompileTimeConstant
     true;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-CompileTimeConstant.$class = Class.$createForClass(
-    $Util.$generateId('CompileTimeConstant'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant'));
 
 /**
  * Export class.

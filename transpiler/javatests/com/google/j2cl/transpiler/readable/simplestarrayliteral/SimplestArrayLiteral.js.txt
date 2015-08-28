@@ -76,6 +76,24 @@ class SimplestArrayLiteral extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!SimplestArrayLiteral.$classSimplestArrayLiteral) {
+      SimplestArrayLiteral.$classSimplestArrayLiteral = Class.$createForClass(
+          $Util.$generateId('SimplestArrayLiteral'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplestarrayliteral.SimplestArrayLiteral'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplestarrayliteral.SimplestArrayLiteral'));
+    }
+    return SimplestArrayLiteral.$classSimplestArrayLiteral;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -85,17 +103,6 @@ class SimplestArrayLiteral extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-SimplestArrayLiteral.$class = Class.$createForClass(
-    $Util.$generateId('SimplestArrayLiteral'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplestarrayliteral.SimplestArrayLiteral'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.simplestarrayliteral.SimplestArrayLiteral'));
 
 /**
  * Export class.

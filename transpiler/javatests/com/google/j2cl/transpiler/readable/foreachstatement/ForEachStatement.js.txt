@@ -93,6 +93,24 @@ class ForEachStatement extends Object {
   }
 
   /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!ForEachStatement.$classForEachStatement) {
+      ForEachStatement.$classForEachStatement = Class.$createForClass(
+          $Util.$generateId('ForEachStatement'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement'));
+    }
+    return ForEachStatement.$classForEachStatement;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse
@@ -102,17 +120,6 @@ class ForEachStatement extends Object {
 ;
 
 
-/**
- * @public {Class}
- * @nocollapse
- */
-ForEachStatement.$class = Class.$createForClass(
-    $Util.$generateId('ForEachStatement'),
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement'),
-    Object.$class,
-    $Util.$generateId(
-        'com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement'));
 
 /**
  * Export class.
