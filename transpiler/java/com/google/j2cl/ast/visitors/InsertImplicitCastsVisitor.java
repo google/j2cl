@@ -213,7 +213,8 @@ public class InsertImplicitCastsVisitor extends AbstractRewriter {
    * following NormalizeCastsVisitor's filter.
    */
   private static Expression maybeCastTo(Expression expression, TypeDescriptor typeDescriptor) {
-    if (expression != null && expression.getTypeDescriptor() != typeDescriptor
+    if (expression != null
+        && expression.getTypeDescriptor() != typeDescriptor
         && !ASTUtils.canRemoveCast(expression.getTypeDescriptor(), typeDescriptor)) {
       expression = new CastExpression(expression, typeDescriptor);
     }

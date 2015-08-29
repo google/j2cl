@@ -58,7 +58,6 @@ are copyright and licensed as follows:
 - jsinteropdispatch
 - jsinteropinterface
 - methodreferences
-- nestedlambdas
 - nativefunction + provided Foo.native.js
 - notimportinternals
 - objectmethods

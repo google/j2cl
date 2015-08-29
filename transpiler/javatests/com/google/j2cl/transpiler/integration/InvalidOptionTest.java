@@ -44,8 +44,7 @@ public class InvalidOptionTest extends IntegrationTestCase {
     String[] transpileArgs =
         IntegrationTestCase.getTranspileArgs(
             outputLocation, this.getClass(), "invalidoutputoption", extraArgs);
-    TranspileResult transpileResult =
-        transpile(transpileArgs, outputLocation);
+    TranspileResult transpileResult = transpile(transpileArgs, outputLocation);
 
     // Verify that the output location was rejected.
     assertLogContainsSnippet(

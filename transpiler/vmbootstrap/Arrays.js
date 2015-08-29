@@ -146,6 +146,7 @@ class Arrays {
    * @param {Array<*>} array
    * @param {number} index
    * @param {*} value
+   * @return {*}
    * @public
    */
   static $set(array, index, value) {
@@ -175,7 +176,7 @@ class Arrays {
       }
     }
 
-    array[index] = value;
+    return array[index] = value;
   }
 
   /**

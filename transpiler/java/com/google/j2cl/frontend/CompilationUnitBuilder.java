@@ -1527,9 +1527,9 @@ public class CompilationUnitBuilder {
                 Visibility.PUBLIC,
                 literalTypeDescriptor,
                 "$getClass",
-                new ArrayList<>(),
+                new ArrayList<TypeDescriptor>(),
                 javaLangClassTypeDescriptor);
-        return new MethodCall(null, classMethodDescriptor, new ArrayList<>());
+        return new MethodCall(null, classMethodDescriptor, new ArrayList<Expression>());
       }
 
       MethodDescriptor classMethodDescriptor =
@@ -1538,7 +1538,7 @@ public class CompilationUnitBuilder {
               Visibility.PUBLIC,
               literalTypeDescriptor.getLeafTypeDescriptor(),
               "$getClass",
-              new ArrayList<>(),
+              new ArrayList<TypeDescriptor>(),
               javaLangClassTypeDescriptor);
 
       MethodDescriptor forArrayMethodDescriptor =
@@ -1552,7 +1552,7 @@ public class CompilationUnitBuilder {
 
       // <ClassLiteralClass>.$getClass().forArray(<dimensions>)
       return new MethodCall(
-          new MethodCall(null, classMethodDescriptor, new ArrayList<>()),
+          new MethodCall(null, classMethodDescriptor, new ArrayList<Expression>()),
           forArrayMethodDescriptor,
           ImmutableList.<Expression>of(
               new NumberLiteral(TypeDescriptors.INT_TYPE_DESCRIPTOR, typeBinding.getDimensions())));
