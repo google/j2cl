@@ -1,6 +1,7 @@
 goog.module('vmbootstrap.NumbersModule');
 
 
+var Character = goog.require('gen.java.lang.CharacterModule').Character;
 var Class = goog.require('gen.java.lang.CoreModule').Class;
 var Number = goog.require('gen.java.lang.NumberModule').Number;
 var Long = goog.require('nativebootstrap.LongUtilsModule').Long;
@@ -126,6 +127,20 @@ class Numbers {
     }
   }
 };
+
+
+/**
+ * Used to store qualifier of a boxed object to avoid double side effects.
+ * @public {*}
+ */
+Numbers.$q;
+
+
+/**
+ * Used to store pre-modified value of a boxed object in a postfix expression.
+ * @public {Number | Character}
+ */
+Numbers.$v;
 
 
 /**

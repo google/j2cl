@@ -69,4 +69,9 @@ public class Short extends Number {
   public String toString() {
     return "" + value;
   }
+
+  public static Short valueOf(short s) {
+    //TODO: caching
+    return new Short(s);
+  }
 }

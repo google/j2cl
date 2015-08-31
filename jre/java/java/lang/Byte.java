@@ -70,4 +70,9 @@ public class Byte extends Number {
   public String toString() {
     return "" + value;
   }
+
+  public static Byte valueOf(byte b) {
+    //TODO: caching
+    return new Byte(b);
+  }
 }

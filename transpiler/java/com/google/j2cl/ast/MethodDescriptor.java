@@ -30,7 +30,9 @@ import javax.annotation.Nullable;
 @AutoValue
 @Visitable
 public abstract class MethodDescriptor extends Node implements Member {
-  public static final String METHOD_INIT = "$init";
+  public static final String INIT_METHOD_NAME = "$init";
+  public static final String VALUE_OF_METHOD_NAME = "valueOf"; // Boxed type valueOf() method.
+  public static final String VALUE_METHOD_SUFFIX = "Value"; // Boxed type **Value() method.
 
   public static MethodDescriptor create(
       boolean isStatic,
@@ -162,7 +164,7 @@ public abstract class MethodDescriptor extends Node implements Member {
   public abstract MethodDescriptor getErasureMethodDescriptor();
 
   public boolean isInit() {
-    return getMethodName().equals(METHOD_INIT);
+    return getMethodName().equals(INIT_METHOD_NAME);
   }
 
   public boolean isParameterizedMethod() {

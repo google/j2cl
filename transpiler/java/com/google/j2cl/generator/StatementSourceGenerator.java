@@ -46,6 +46,7 @@ import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
@@ -536,6 +537,13 @@ public class StatementSourceGenerator {
         }
         return String.format(
             "%s%s", toSource(expression.getOperand()), expression.getOperator().toString());
+      }
+
+      @Override
+      public String transformMultiExpression(MultiExpression multipleExpression) {
+        String expressionsAsString =
+            Joiner.on(", ").join(transformNodesToSource(multipleExpression.getExpressions()));
+        return "( " + expressionsAsString + " )";
       }
 
       private String transformLongPostfixExpression(PostfixExpression expression) {

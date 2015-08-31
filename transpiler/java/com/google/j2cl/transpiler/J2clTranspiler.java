@@ -15,6 +15,7 @@ package com.google.j2cl.transpiler;
 
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.visitors.ControlStatementFormatter;
+import com.google.j2cl.ast.visitors.FixBoxingOnSideEffectOperationsVisitor;
 import com.google.j2cl.ast.visitors.InsertImplicitCastsVisitor;
 import com.google.j2cl.ast.visitors.InsertInstanceInitCallsVisitor;
 import com.google.j2cl.ast.visitors.MakeExplicitEnumConstructionVisitor;
@@ -133,6 +134,7 @@ public class J2clTranspiler {
       ControlStatementFormatter.doFormatControlStatements(j2clUnit);
       InsertImplicitCastsVisitor.doInsertImplicitCasts(j2clUnit);
       NormalizeCastsVisitor.doNormalizeCasts(j2clUnit);
+      FixBoxingOnSideEffectOperationsVisitor.doFixBoxingOnSideEffectOperations(j2clUnit);
     }
   }
 

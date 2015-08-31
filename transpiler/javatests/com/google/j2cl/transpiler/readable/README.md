@@ -30,6 +30,13 @@ are copyright and licensed as follows:
  * the License.
  */
 
+## Designs to be re-examined
+- Normalize compound assignment, increment and decrement operations for long and
+  boxed objects. Refer to previous dicussion at cl/101709039 and cl/98361767.
+
+## Tasks
+- Sync all multiexpression generation to use the MultiExpression node class.
+
 ## Tracking Closure warning issues
 - https://b.corp.google.com/hotlists/269212
 - b/20102666 WARNING - actual parameter of Foo.$markImplementor does not match
@@ -38,9 +45,6 @@ are copyright and licensed as follows:
 ## Likely readable examples to add (remove some redundant)
 - anonymousclassforfunctionalinterface (transpiled to function)
 - arithmetic exception for integers (e.g. divide by zero / mod by zero)
-- autoboxing
-- instanceofboxedtype
-- casttoboxedtype
 - breakwithlabel
 - catchjsexception
 - classlocalvarcollision

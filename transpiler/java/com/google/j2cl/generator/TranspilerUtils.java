@@ -283,6 +283,61 @@ public class TranspilerUtils {
     }
   }
 
+  public static BinaryOperator getBinaryOperator(BinaryOperator binaryOperator) {
+    switch (binaryOperator) {
+      case PLUS_ASSIGN:
+        return BinaryOperator.PLUS;
+      case MINUS_ASSIGN:
+        return BinaryOperator.MINUS;
+      case TIMES_ASSIGN:
+        return BinaryOperator.TIMES;
+      case DIVIDE_ASSIGN:
+        return BinaryOperator.DIVIDE;
+      case BIT_AND_ASSIGN:
+        return BinaryOperator.AND;
+      case BIT_OR_ASSIGN:
+        return BinaryOperator.OR;
+      case BIT_XOR_ASSIGN:
+        return BinaryOperator.XOR;
+      case REMAINDER_ASSIGN:
+        return BinaryOperator.REMAINDER;
+      case LEFT_SHIFT_ASSIGN:
+        return BinaryOperator.LEFT_SHIFT;
+      case RIGHT_SHIFT_SIGNED_ASSIGN:
+        return BinaryOperator.RIGHT_SHIFT_SIGNED;
+      case RIGHT_SHIFT_UNSIGNED_ASSIGN:
+        return BinaryOperator.RIGHT_SHIFT_UNSIGNED;
+      default:
+        return binaryOperator;
+    }
+  }
+
+  public static BinaryOperator getBinaryOperator(PrefixOperator prefixOperator) {
+    Preconditions.checkArgument(hasSideEffect(prefixOperator));
+    switch (prefixOperator) {
+      case DECREMENT:
+        return BinaryOperator.MINUS;
+      case INCREMENT:
+        return BinaryOperator.PLUS;
+      default:
+        Preconditions.checkArgument(
+            false,
+            "The prefix operator" + prefixOperator + "is not applicable for getBinaryOperator().");
+        return null;
+    }
+  }
+
+  public static BinaryOperator getBinaryOperator(PostfixOperator postfixOperator) {
+    switch (postfixOperator) {
+      case DECREMENT:
+        return BinaryOperator.MINUS;
+      case INCREMENT:
+        return BinaryOperator.PLUS;
+      default:
+        return null;
+    }
+  }
+
   public static boolean hasSideEffect(PrefixOperator prefixOperator) {
     return prefixOperator == PrefixOperator.INCREMENT || prefixOperator == PrefixOperator.DECREMENT;
   }

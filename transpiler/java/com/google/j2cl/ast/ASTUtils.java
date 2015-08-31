@@ -76,7 +76,7 @@ public class ASTUtils {
         false,
         Visibility.PRIVATE,
         enclosingClassTypeDescriptor,
-        MethodDescriptor.METHOD_INIT,
+        MethodDescriptor.INIT_METHOD_NAME,
         false,
         false,
         TypeDescriptors.VOID_TYPE_DESCRIPTOR);
@@ -389,5 +389,59 @@ public class ASTUtils {
     arguments.add(0, instance);
     // Call the method like Objects.foo(instance, ...)
     return new MethodCall(null, methodDescriptor, arguments);
+  }
+
+  /**
+   * Boxes {@code expression} using the valueOf() method of the corresponding boxed type.
+   * e.g. expression => Integer.valueOf(expression).
+   */
+  public static Expression box(Expression expression) {
+    TypeDescriptor primitiveType = expression.getTypeDescriptor();
+    // skip double and boolean.
+    if (primitiveType.getSimpleName().equals(TypeDescriptor.DOUBLE_TYPE_NAME)
+        || primitiveType.getSimpleName().equals(TypeDescriptor.BOOLEAN_TYPE_NAME)) {
+      return expression;
+    }
+    Preconditions.checkArgument(primitiveType.isPrimitive());
+    TypeDescriptor boxType = TypeDescriptors.boxedTypeByPrimitiveType.get(primitiveType);
+    Preconditions.checkNotNull(boxType);
+    MethodDescriptor valueOfMethodDescriptor =
+        MethodDescriptor.create(
+            true, // isStatic
+            Visibility.PUBLIC,
+            boxType, // enclosingClass
+            MethodDescriptor.VALUE_OF_METHOD_NAME,
+            false, // isConstructor,
+            false, // isNative,
+            boxType, // returnTypeDescriptor,
+            primitiveType // parameterTypeDescriptor
+            );
+    return new MethodCall(null, valueOfMethodDescriptor, Arrays.asList(expression));
+  }
+
+  /**
+   * Unboxes {expression} using the ***Value() method of the corresponding boxed type.
+   * e.g expression => expression.intValue().
+   */
+  public static Expression unbox(Expression expression) {
+    TypeDescriptor boxType = expression.getTypeDescriptor();
+    TypeDescriptor primitiveType = TypeDescriptors.boxedTypeByPrimitiveType.inverse().get(boxType);
+    Preconditions.checkNotNull(primitiveType);
+    // skip double and boolean.
+    if (primitiveType.getSimpleName().equals(TypeDescriptor.DOUBLE_TYPE_NAME)
+        || primitiveType.getSimpleName().equals(TypeDescriptor.BOOLEAN_TYPE_NAME)) {
+      return expression;
+    }
+    MethodDescriptor valueMethodDescriptor =
+        MethodDescriptor.create(
+            false, // isStatic
+            Visibility.PUBLIC,
+            boxType, // enclosingClass
+            primitiveType.getSimpleName() + MethodDescriptor.VALUE_METHOD_SUFFIX,
+            false, // isConstructor,
+            false, // isNative,
+            primitiveType // returnTypeDescriptor
+            );
+    return new MethodCall(expression, valueMethodDescriptor, new ArrayList<Expression>());
   }
 }

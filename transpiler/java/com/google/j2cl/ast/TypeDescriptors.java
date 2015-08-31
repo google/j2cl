@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableSet;
 
 import java.util.ArrayList;
@@ -95,6 +97,40 @@ public class TypeDescriptors {
           OBJECTS_TYPE_DESCRIPTOR,
           NUMBERS_TYPE_DESCRIPTOR,
           BOOLEANS_TYPE_DESCRIPTOR);
+
+  /**
+   * Primitive type descriptors and boxed type descriptors mapping.
+   */
+  public static final BiMap<TypeDescriptor, TypeDescriptor> boxedTypeByPrimitiveType =
+      HashBiMap.create();
+
+  static {
+    boxedTypeByPrimitiveType.put(
+        BOOLEAN_TYPE_DESCRIPTOR,
+        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Boolean"), "Boolean"));
+    boxedTypeByPrimitiveType.put(
+        BYTE_TYPE_DESCRIPTOR,
+        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Byte"), "Byte"));
+    boxedTypeByPrimitiveType.put(
+        CHAR_TYPE_DESCRIPTOR,
+        TypeDescriptor.create(
+            Arrays.asList("java", "lang"), Arrays.asList("Character"), "Character"));
+    boxedTypeByPrimitiveType.put(
+        DOUBLE_TYPE_DESCRIPTOR,
+        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Double"), "Double"));
+    boxedTypeByPrimitiveType.put(
+        FLOAT_TYPE_DESCRIPTOR,
+        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Float"), "Float"));
+    boxedTypeByPrimitiveType.put(
+        INT_TYPE_DESCRIPTOR,
+        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Integer"), "Integer"));
+    boxedTypeByPrimitiveType.put(
+        LONG_TYPE_DESCRIPTOR,
+        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Long"), "Long"));
+    boxedTypeByPrimitiveType.put(
+        SHORT_TYPE_DESCRIPTOR,
+        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Short"), "Short"));
+  }
 
   private TypeDescriptors() {}
 }

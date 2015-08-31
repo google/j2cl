@@ -69,4 +69,9 @@ public class Long extends Number {
   public String toString() {
     return "" + value;
   }
+
+  public static Long valueOf(long l) {
+    //TODO: caching.
+    return new Long(l);
+  }
 }

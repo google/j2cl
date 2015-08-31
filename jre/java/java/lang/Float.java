@@ -69,4 +69,8 @@ public class Float extends Number {
   public String toString() {
     return "" + value;
   }
+
+  public static Float valueOf(float f) {
+    return new Float(f);
+  }
 }

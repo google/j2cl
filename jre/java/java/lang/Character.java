@@ -43,4 +43,9 @@ public class Character {
   public String toString() {
     return "" + value;
   }
+
+  public static Character valueOf(char c) {
+    //TODO: caching
+    return new Character(c);
+  }
 }

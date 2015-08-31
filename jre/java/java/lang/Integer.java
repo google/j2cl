@@ -74,4 +74,9 @@ public class Integer extends Number {
   public String toString() {
     return "" + value;
   }
+
+  public static Integer valueOf(int i) {
+    // TODO: cache -128 ~ 127.
+    return new Integer(i);
+  }
 }
