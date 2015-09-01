@@ -10,6 +10,7 @@ let Object = goog.require('gen.java.lang.CoreModule').Object;
 let $Long = goog.require('nativebootstrap.LongUtilsModule').Long;
 let $LongUtils = goog.require('nativebootstrap.LongUtilsModule').LongUtils;
 let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $Numbers = goog.require('vmbootstrap.NumbersModule').Numbers;
 let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 let $long = goog.require('vmbootstrap.PrimitivesModule').$long;
 
@@ -62,33 +63,38 @@ class SimpleLongs extends Object {
     b = $LongUtils.$fromString('9223372036854775807');
     let c = $LongUtils.$plus(a, b);
     c = $LongUtils.$divide(a, b);
-    let e = (a = $LongUtils.$increment(a));
-    e = (this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
-             $LongUtils.$increment(
-                 this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs));
-    e = ($LongUtils.$q = this.m_getWithSideEffect(),
-         $LongUtils.$q
+    let e = a = $LongUtils.$plus(a, $LongUtils.$getOne());
+    e = this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
+        $LongUtils.$plus(
+            this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
+            $LongUtils.$getOne());
+    e = ($Numbers.$q = this.m_getWithSideEffect(),
+         $Numbers.$q
              .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
-             $LongUtils.$increment(
-                 $LongUtils.$q
-                     .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs));
-    let f = ($LongUtils.$v = a, a = $LongUtils.$increment(a), $LongUtils.$v);
-    f = ($LongUtils.$v =
+             $LongUtils.$plus(
+                 $Numbers.$q
+                     .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
+                 $LongUtils.$getOne()));
+    let f = ($Numbers.$v = a, a = $LongUtils.$plus(a, $LongUtils.$getOne()),
+             $Numbers.$v);
+    f = ($Numbers.$v =
              this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
          this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
-             $LongUtils.$increment(
-                 this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs),
-         $LongUtils.$v);
-    f = ($LongUtils.$q = this.m_getWithSideEffect(),
-         $LongUtils.$v =
-             $LongUtils.$q
+             $LongUtils.$plus(
+                 this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
+                 $LongUtils.$getOne()),
+         $Numbers.$v);
+    f = ($Numbers.$q = this.m_getWithSideEffect(),
+         $Numbers.$v =
+             $Numbers.$q
                  .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
-         $LongUtils.$q
+         $Numbers.$q
              .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
-             $LongUtils.$increment(
-                 $LongUtils.$q
-                     .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs),
-         $LongUtils.$v);
+             $LongUtils.$plus(
+                 $Numbers.$q
+                     .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
+                 $LongUtils.$getOne()),
+         $Numbers.$v);
   }
 
   /**

@@ -74,13 +74,6 @@ class LongUtils {
   static $not(valueLong) { return valueLong.not(); }
 
   /**
-   * @param {!Long} valueLong The value to decrement.
-   * @return {!Long} The Long value one smaller than the given value.
-   * @public
-   */
-  static $decrement(valueLong) { return valueLong.subtract(Long.getOne()); }
-
-  /**
    * @param {!Long} leftLong The left Long in the operation.
    * @param {!Long} rightLong The right Long in the operation.
    * @return {!Long} The division of left by right.
@@ -115,14 +108,6 @@ class LongUtils {
   static $greaterEquals(leftLong, rightLong) {
     return leftLong.greaterThanOrEqual(rightLong);
   }
-
-  /**
-   * @param {!Long} valueLong The value to increment.
-   * @return {!Long} The Long value resulting from adding one to the
-   *         given value.
-   * @public
-   */
-  static $increment(valueLong) { return valueLong.add(Long.getOne()); }
 
   /**
    * @param {!Long} valueLong The starting value to shift.
@@ -258,19 +243,13 @@ class LongUtils {
    * @public
    */
   static $toString(valueLong) { return valueLong.toString(); }
+
+  /**
+   * @return {!Long}
+   * @public
+   */
+  static $getOne() { return Long.getOne(); }
 };
-
-
-/**
- * @public {*}
- */
-LongUtils.$q;
-
-
-/**
- * @public {!Long}
- */
-LongUtils.$v;
 
 
 /**

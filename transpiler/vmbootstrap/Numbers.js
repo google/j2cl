@@ -138,7 +138,7 @@ Numbers.$q;
 
 /**
  * Used to store pre-modified value of a boxed object in a postfix expression.
- * @public {Number | Character}
+ * @public {Number | Character | Long}
  */
 Numbers.$v;
 

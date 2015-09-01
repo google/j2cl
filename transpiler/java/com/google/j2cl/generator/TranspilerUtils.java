@@ -165,10 +165,6 @@ public class TranspilerUtils {
 
   public static String getLongOperationFunctionName(PrefixOperator prefixOperator) {
     switch (prefixOperator) {
-      case DECREMENT:
-        return "$decrement";
-      case INCREMENT:
-        return "$increment";
       case PLUS:
         Preconditions.checkArgument(false, "The '+' prefix operator is a NOP for longs.");
         return null;
@@ -184,22 +180,6 @@ public class TranspilerUtils {
             false,
             "Requested the Longs function name for unrecognized prefix operator "
                 + prefixOperator
-                + ".");
-        return null;
-    }
-  }
-
-  public static String getLongOperationFunctionName(PostfixOperator postfixOperator) {
-    switch (postfixOperator) {
-      case DECREMENT:
-        return "$decrement";
-      case INCREMENT:
-        return "$increment";
-      default:
-        Preconditions.checkArgument(
-            false,
-            "Requested the Longs function name for unrecognized postfix operator "
-                + postfixOperator
                 + ".");
         return null;
     }
@@ -251,28 +231,6 @@ public class TranspilerUtils {
         Preconditions.checkArgument(
             false, "The '=' operator doesn't require special handling for longs.");
         return null;
-      case PLUS_ASSIGN:
-        return "$plus";
-      case MINUS_ASSIGN:
-        return "$minus";
-      case TIMES_ASSIGN:
-        return "$times";
-      case DIVIDE_ASSIGN:
-        return "$divide";
-      case BIT_AND_ASSIGN:
-        return "$and";
-      case BIT_OR_ASSIGN:
-        return "$or";
-      case BIT_XOR_ASSIGN:
-        return "$xor";
-      case REMAINDER_ASSIGN:
-        return "$remainder";
-      case LEFT_SHIFT_ASSIGN:
-        return "$leftShift";
-      case RIGHT_SHIFT_SIGNED_ASSIGN:
-        return "$rightShiftSigned";
-      case RIGHT_SHIFT_UNSIGNED_ASSIGN:
-        return "$rightShiftUnsigned";
       default:
         Preconditions.checkArgument(
             false,

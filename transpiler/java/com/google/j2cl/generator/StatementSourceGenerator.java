@@ -228,51 +228,19 @@ public class StatementSourceGenerator {
 
       private String transformLongBinaryExpression(BinaryExpression expression) {
         Preconditions.checkArgument(TranspilerUtils.isValidForLongs(expression.getOperator()));
-
+        Preconditions.checkArgument(
+            !TranspilerUtils.isAssignment(expression.getOperator()),
+            "Normalization should have already rewritten all long assignment operations.");
         String longOperationFunctionName =
             TranspilerUtils.getLongOperationFunctionName(expression.getOperator());
         Expression leftOperand = expression.getLeftOperand();
         Expression rightOperand = expression.getRightOperand();
-        Expression qualifier = TranspilerUtils.getQualifier(leftOperand);
 
-        boolean hasSideEffect = TranspilerUtils.isAssignment(expression.getOperator());
-        if (!hasSideEffect) {
-          // The simplest case. The referenced long is not being modified so all that's necessary is
-          // to do some computation and return a new value.
-          return String.format(
-              "%s.%s(%s, %s)",
-              longsTypeAlias(),
-              longOperationFunctionName,
-              toSource(leftOperand),
-              toSource(rightOperand));
-        }
-
-        if (qualifier == null) {
-          // The medium case. The referenced long *is* being modified but it has no qualifier so no
-          // care needs to be taken to avoid double side-effects from dereferencing the qualifier
-          // twice.
-          String leftOperandAsSource = toSource(leftOperand);
-          return String.format(
-              "%s = %s.%s(%s, %s)",
-              leftOperandAsSource,
-              longsTypeAlias(),
-              longOperationFunctionName,
-              leftOperandAsSource,
-              toSource(rightOperand));
-        }
-
-        // The hard case. The referenced long is being modified and it has a qualifier. Take special
-        // care to only dereference the qualifier once (to avoid double side effects), store it in a
-        // temporary variable and use that temporary variable in the rest of the computation.
-        MemberReference memberReference = (MemberReference) leftOperand;
-        String fieldOrMethodDescriptorAsString = toSource((Node) memberReference.getTarget());
         return String.format(
-            "$LongUtils.$q = %s, $LongUtils.$q.%s = %s.%s($LongUtils.$q.%s, %s)",
-            toSource(qualifier),
-            fieldOrMethodDescriptorAsString,
+            "%s.%s(%s, %s)",
             longsTypeAlias(),
             longOperationFunctionName,
-            fieldOrMethodDescriptorAsString,
+            toSource(leftOperand),
             toSource(rightOperand));
       }
 
@@ -532,9 +500,8 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformPostfixExpression(PostfixExpression expression) {
-        if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == expression.getTypeDescriptor()) {
-          return transformLongPostfixExpression(expression);
-        }
+        Preconditions.checkArgument(
+            TypeDescriptors.LONG_TYPE_DESCRIPTOR != expression.getTypeDescriptor());
         return String.format(
             "%s%s", toSource(expression.getOperand()), expression.getOperator().toString());
       }
@@ -544,43 +511,6 @@ public class StatementSourceGenerator {
         String expressionsAsString =
             Joiner.on(", ").join(transformNodesToSource(multipleExpression.getExpressions()));
         return "( " + expressionsAsString + " )";
-      }
-
-      private String transformLongPostfixExpression(PostfixExpression expression) {
-        Expression operand = expression.getOperand();
-        Expression qualifier = TranspilerUtils.getQualifier(operand);
-
-        if (qualifier == null) {
-          // The easier case. The referenced long is being modified but since the pre-modified value
-          // must be returned it is first stored in a temporary variable which is returned at the
-          // end. Since there is no qualifier no care needs to be taken to avoid double side-effects
-          // from dereferencing the qualifier twice.
-          String operandAsSource = toSource(operand);
-          return String.format(
-              "($LongUtils.$v = %s, %s = %s.%s(%s), $LongUtils.$v)",
-              operandAsSource,
-              operandAsSource,
-              longsTypeAlias(),
-              TranspilerUtils.getLongOperationFunctionName(expression.getOperator()),
-              operandAsSource);
-        }
-
-        // The harder case. Like the easier case except that special care needs to be taken to only
-        // dereference the qualifier once (to avoid double side effects). This is accomplished by
-        // storing it in a temporary variable and using that temporary variable in the rest of the
-        // computation.
-        MemberReference memberReference = (MemberReference) operand;
-        Member target = memberReference.getTarget();
-        String fieldOrMethodDescriptorAsString = toSource((Node) target);
-        return String.format(
-            "($LongUtils.$q = %s, $LongUtils.$v = $LongUtils.$q.%s, "
-                + "$LongUtils.$q.%s = %s.%s($LongUtils.$q.%s), $LongUtils.$v)",
-            toSource(qualifier),
-            fieldOrMethodDescriptorAsString,
-            fieldOrMethodDescriptorAsString,
-            longsTypeAlias(),
-            TranspilerUtils.getLongOperationFunctionName(expression.getOperator()),
-            fieldOrMethodDescriptorAsString);
       }
 
       @Override
@@ -599,39 +529,10 @@ public class StatementSourceGenerator {
         String longOperationFunctionName =
             TranspilerUtils.getLongOperationFunctionName(expression.getOperator());
         Expression operand = expression.getOperand();
-        Expression qualifier = TranspilerUtils.getQualifier(operand);
 
-        if (!TranspilerUtils.hasSideEffect(expression.getOperator())) {
-          // The simplest case. The referenced long is not being modified so all that's necessary is
-          // to do some computation and return a new value.
-          return String.format(
-              "%s.%s(%s)", longsTypeAlias(), longOperationFunctionName, toSource(operand));
-        }
-
-        if (qualifier == null) {
-          // The medium case. The referenced long *is* being modified but it has no qualifier so no
-          // care needs to be taken to avoid double side-effects from dereferencing the qualifier
-          // twice.
-          return String.format(
-              "(%s = %s.%s(%s))",
-              toSource(operand),
-              longsTypeAlias(),
-              longOperationFunctionName,
-              toSource(operand));
-        }
-
-        // The hard case. The referenced long is being modified and it has a qualifier. Take special
-        // care to only dereference the qualifier once (to avoid double side effects), store it in a
-        // temporary variable and use that temporary variable in the rest of the computation.
-        MemberReference memberReference = (MemberReference) operand;
-        String fieldOrMethodDescriptorAsString = toSource((Node) memberReference.getTarget());
+        Preconditions.checkArgument(!TranspilerUtils.hasSideEffect(expression.getOperator()));
         return String.format(
-            "($LongUtils.$q = %s, $LongUtils.$q.%s = %s.%s($LongUtils.$q.%s))",
-            toSource(qualifier),
-            fieldOrMethodDescriptorAsString,
-            longsTypeAlias(),
-            longOperationFunctionName,
-            fieldOrMethodDescriptorAsString);
+            "%s.%s(%s)", longsTypeAlias(), longOperationFunctionName, toSource(operand));
       }
 
       private String transformRegularPrefixExpression(PrefixExpression expression) {
