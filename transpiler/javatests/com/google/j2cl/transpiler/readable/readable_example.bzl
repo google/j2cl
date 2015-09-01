@@ -21,7 +21,6 @@ load(
 # TODO: source these flags from the authoritative location once they're
 #       accessible from .bzl
 CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
-    "--aggressive_var_check_level=WARNING",
     "--check_global_names_level=ERROR",
     "--check_provides=WARNING",
     "--closure_pass",
