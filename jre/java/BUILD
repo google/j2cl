@@ -58,11 +58,14 @@ j2cl_source_copy(
     name = "emul_user",
     srcs = ["//third_party/java_src/gwt/svn/trunk/user:emul"],
     base_strip_path = "third_party/java_src/gwt/svn/trunk/user/super/com/google/gwt/emul/",
+    # Java classes that are different in j2cl and thus should not be copied from GWT
     excludes = [
         "java/lang/Class.java",
         "java/lang/Enum.java",
         "java/lang/Object.java",
         "java/lang/String.java",
+        # TODO(dankurka): once JsInterop lands in GWT this class can be changed
+        # to work with both GWT and j2cl
         "java/util/InternalJsMapFactory.java",
     ],
 )
@@ -75,5 +78,23 @@ java_library(
         "javaemul/internal/JsDate.java",
         ":emul_dev",
         ":emul_user",
+    ],
+)
+
+load("/third_party/java_src/j2cl/build_def/j2cl_tool", "jsni_to_j2cl_converter")
+
+jsni_to_j2cl_converter(
+    name = "convert_jsni_emul",
+    srcs = [
+        ":emul_dev",
+        ":emul_user",
+    ],
+    # Files containing JSNI field / method references.
+    # These would be rejected by the jsni converter.
+    excludes = [
+        "javaemul/internal/ArrayStamper.java",
+        "javaemul/internal/HashCodes.java",
+        "javaemul/internal/LongCompareHolder.java",
+        "java/lang/Throwable.java",
     ],
 )

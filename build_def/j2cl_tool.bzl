@@ -12,8 +12,14 @@ jsni_to_j2cl_converter(
 
 """
 
+def _should_be_included(java_file, excludes):
+  for exclude in excludes:
+    if java_file.path.endswith(exclude):
+      return False
+  return True;
+
 def _impl(ctx):
-  java_files = ctx.files.srcs  # java files that need to be converted
+  java_files = [f for f in ctx.files.srcs if _should_be_included(f, ctx.attr.excludes)]
   zip_file = ctx.new_file(ctx.label.name + "_native_js.zip") # output zip file
 
   if ctx.attr.debug:
@@ -45,6 +51,7 @@ jsni_to_j2cl_converter = rule(
       allow_files=FileType([".java"]),
     ),
     "debug": attr.bool(default=False),
+    "excludes": attr.string_list(default=[]),
     "converter_tool": attr.label(
       cfg=HOST_CFG,
       allow_files=True,
