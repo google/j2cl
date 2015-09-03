@@ -97,7 +97,6 @@ import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.Initializer;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
-import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclaration;
 
 import java.util.ArrayList;
@@ -150,9 +149,10 @@ public class CompilationUnitBuilder {
     }
 
     private void convert(AbstractTypeDeclaration typeDeclaration) {
-      Preconditions.checkArgument(
-          typeDeclaration instanceof TypeDeclaration || typeDeclaration instanceof EnumDeclaration);
       switch (typeDeclaration.getNodeType()) {
+        case ASTNode.ANNOTATION_TYPE_DECLARATION:
+          // We currently do not produce any output for annotations.
+          break;
         case ASTNode.TYPE_DECLARATION:
           convertAndAddJavaType(
               typeDeclaration.resolveBinding(),
