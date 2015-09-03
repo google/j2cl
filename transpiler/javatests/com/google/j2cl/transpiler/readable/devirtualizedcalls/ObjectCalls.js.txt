@@ -37,6 +37,21 @@ class ObjectCalls extends Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    this.m_equals__java_lang_Object(Object.$create());
+    this.m_hashCode();
+    this.m_toString();
+    this.m_getClass();
+    this.m_equals__java_lang_Object(Object.$create());
+    this.m_hashCode();
+    this.m_toString();
+    this.m_getClass();
+  }
+
+  /**
    * A particular Java constructor as a factory method.
    * @return {!ObjectCalls}
    * @public

@@ -46,5 +46,7 @@ public class Main {
     // GetClass
     assert childClass1.getClass() instanceof Class;
     assert childClass1.getClass() == childClass2.getClass();
+
+    new ChildClassOverrides().test();
   }
 }

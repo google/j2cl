@@ -1207,8 +1207,13 @@ public class CompilationUnitBuilder {
           arguments);
       MethodCall methodCall = new MethodCall(qualifier, methodDescriptor, arguments);
 
+      boolean dispatchesToSomeOtherClass =
+          qualifier != null && !(qualifier instanceof ThisReference);
       // Perform Object method devirtualization.
-      if (JdtUtils.isObjectInstanceMethodBinding(methodBinding, jdtCompilationUnit)) {
+      if (JdtUtils.isObjectInstanceMethodBinding(methodBinding, jdtCompilationUnit)
+          && dispatchesToSomeOtherClass) {
+        // Do not devirtualize inside the same declaring class, because it does not need to go
+        // through the trampoline path in Objects functions.
         return ASTUtils.createDevirtualizedMethodCall(
             methodCall,
             TypeDescriptors.OBJECTS_TYPE_DESCRIPTOR,
@@ -1217,14 +1222,18 @@ public class CompilationUnitBuilder {
 
       // Perform Boxed method devirtualization.
       if (JdtUtils.isNumberInstanceMethodBinding(methodBinding, jdtCompilationUnit)
-          && qualifier != null) { // do not devirtualize inside the same declaring class.
+          && dispatchesToSomeOtherClass) {
+        // Do not devirtualize inside the same declaring class, because it does not need to go
+        // through the trampoline path in Numbers functions.
         return ASTUtils.createDevirtualizedMethodCall(
             methodCall,
             TypeDescriptors.NUMBERS_TYPE_DESCRIPTOR,
             TypeDescriptors.NUMBER_TYPE_DESCRIPTOR);
       }
       if (JdtUtils.isBooleanInstanceMethodBinding(methodBinding, jdtCompilationUnit)
-          && qualifier != null) { // do not devirtualize inside the same declaring class.
+          && dispatchesToSomeOtherClass) {
+        // Do not devirtualize inside the same declaring class, because it does not need to go
+        // throug the trampoline path in Booleans functions.
         return ASTUtils.createDevirtualizedMethodCall(
             methodCall,
             TypeDescriptors.BOOLEANS_TYPE_DESCRIPTOR,

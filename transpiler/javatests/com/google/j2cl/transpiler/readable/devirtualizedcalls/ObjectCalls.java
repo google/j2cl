@@ -9,4 +9,17 @@ public class ObjectCalls {
     object.toString();
     object.getClass();
   }
+
+  // test object calls in the same declaring class with implicit qualifiers and this qualifier.
+  public void test() {
+    equals(new Object());
+    hashCode();
+    toString();
+    getClass();
+
+    this.equals(new Object());
+    this.hashCode();
+    this.toString();
+    this.getClass();
+  }
 }

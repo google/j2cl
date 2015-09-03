@@ -81,5 +81,7 @@ public class Main {
     assert (s.getClass().getName().equals("java.lang.Short"));
     assert (c.getClass().getName().equals("java.lang.Character"));
     // assert (bool.getClass().getName().equals("java.lang.Boolean"));
+
+    new SubNumber().test();
   }
 }
