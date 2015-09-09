@@ -8,7 +8,6 @@ goog.module('gen.com.google.j2cl.transpiler.readable.simplebridgemethods.SimpleB
 let AssertionError = goog.require('gen.java.lang.AssertionErrorModule').AssertionError;
 let Class = goog.require('gen.java.lang.CoreModule').Class;
 let Object = goog.require('gen.java.lang.CoreModule').Object;
-let Error = goog.require('gen.java.lang.ErrorModule').Error;
 let $Util = goog.require('nativebootstrap.UtilModule').Util;
 let $Casts = goog.require('vmbootstrap.CastsModule').Casts;
 
@@ -163,7 +162,7 @@ class Subclass extends Superclass {
 
   /**
    * Synthetic method.
-   * @param {Error} arg0
+   * @param {AssertionError} arg0
    * @return {void}
    * @public
    */
@@ -570,7 +569,7 @@ class AnotherTask extends Object {
 
   /**
    * Synthetic method.
-   * @param {*} arg0
+   * @param {Superclass<C_T>} arg0
    * @return {void}
    * @public
    */

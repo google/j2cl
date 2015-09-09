@@ -18,6 +18,8 @@ package com.google.j2cl.frontend;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.FluentIterable;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CastExpression;
@@ -31,6 +33,7 @@ import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
+import com.google.j2cl.ast.Visibility;
 
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
@@ -177,28 +180,63 @@ public class BridgeMethodsCreator {
 
   /**
    * Creates MethodDescriptor in current class that has the same erasure signature of
-   * {@code method}.
+   * {@code methodBinding}.
    */
-  private MethodDescriptor createMethodDescriptorInCurrentType(IMethodBinding method) {
+  private MethodDescriptor createMethodDescriptorInCurrentType(IMethodBinding methodBinding) {
+    boolean isStatic = JdtUtils.isStatic(methodBinding.getModifiers());
+    Visibility visibility = JdtUtils.getVisibility(methodBinding.getModifiers());
+    TypeDescriptor enclosingClassTypeDescriptor =
+        JdtUtils.createTypeDescriptor(typeBinding, compilationUnitNameLocator);
+    String methodName = methodBinding.getName();
+    boolean isConstructor = methodBinding.isConstructor();
+    boolean isNative = false;
+
+    // create erasureMethodDescriptor by the original method declaration.
+    IMethodBinding declaredMethodBinding = methodBinding.getMethodDeclaration();
+    Iterable<TypeDescriptor> erasureParameterTypeDescriptors =
+        FluentIterable.from(Arrays.asList(declaredMethodBinding.getParameterTypes()))
+            .transform(
+                new Function<ITypeBinding, TypeDescriptor>() {
+                  @Override
+                  public TypeDescriptor apply(ITypeBinding typeBinding) {
+                    return JdtUtils.createTypeDescriptor(
+                        typeBinding.getErasure(), compilationUnitNameLocator);
+                  }
+                });
+    TypeDescriptor erasureReturnTypeDescriptor =
+        JdtUtils.createTypeDescriptor(
+            declaredMethodBinding.getReturnType().getErasure(), compilationUnitNameLocator);
+    MethodDescriptor erasureMethodDescriptor =
+        MethodDescriptor.create(
+            isStatic,
+            visibility,
+            enclosingClassTypeDescriptor,
+            methodName,
+            isConstructor,
+            isNative,
+            erasureReturnTypeDescriptor,
+            erasureParameterTypeDescriptors);
+
     return MethodDescriptor.create(
-        JdtUtils.isStatic(method.getModifiers()),
-        JdtUtils.getVisibility(method.getModifiers()),
+        isStatic,
+        visibility,
+        enclosingClassTypeDescriptor,
+        methodName,
+        isConstructor,
+        isNative,
         JdtUtils.createTypeDescriptor(
-            typeBinding, compilationUnitNameLocator), // enclosing class is the current class.
-        method.getName(),
-        method.isConstructor(),
-        false,
-        JdtUtils.createTypeDescriptor(
-            method.getReturnType().getErasure(), compilationUnitNameLocator), // return type
+            methodBinding.getReturnType().getErasure(), compilationUnitNameLocator), // return type
         Iterables.transform(
-            Arrays.asList(method.getParameterTypes()),
+            Arrays.asList(methodBinding.getParameterTypes()),
             new Function<ITypeBinding, TypeDescriptor>() {
               @Override
               public TypeDescriptor apply(ITypeBinding typeBinding) {
                 return JdtUtils.createTypeDescriptor(
                     typeBinding.getErasure(), compilationUnitNameLocator); // use erasure type.
               }
-            }));
+            }),
+        ImmutableList.<TypeDescriptor>of(),
+        erasureMethodDescriptor);
   }
 
   /**
@@ -211,8 +249,7 @@ public class BridgeMethodsCreator {
   private Method createBridgeMethod(IMethodBinding bridgeMethod, IMethodBinding targetMethod) {
     // The MethodDescriptor of the generated bridge method should have the same signature as the
     // original declared method.
-    MethodDescriptor bridgeMethodDescriptor =
-        createMethodDescriptorInCurrentType(bridgeMethod.getMethodDeclaration());
+    MethodDescriptor bridgeMethodDescriptor = createMethodDescriptorInCurrentType(bridgeMethod);
     // The MethodDescriptor of the delegated method.
     MethodDescriptor targetMethodDescriptor =
         createMethodDescriptorInCurrentType(targetMethod.getMethodDeclaration());
@@ -222,9 +259,14 @@ public class BridgeMethodsCreator {
     for (int i = 0; i < bridgeMethodDescriptor.getParameterTypeDescriptors().size(); i++) {
       Variable parameter =
           new Variable(
-              "arg" + i, bridgeMethodDescriptor.getParameterTypeDescriptors().get(i), false, true);
+              "arg" + i,
+              JdtUtils.createTypeDescriptor(
+                  bridgeMethod.getParameterTypes()[i], compilationUnitNameLocator),
+              false,
+              true);
       parameters.add(parameter);
       Expression parameterReference = parameter.getReference();
+
       // The type the argument should be casted to.
       TypeDescriptor castToParameterTypeDescriptor =
           JdtUtils.createTypeDescriptor(
@@ -232,7 +274,7 @@ public class BridgeMethodsCreator {
       // if the parameter type in bridge method is different from that in parameterized method,
       // add a cast.
       Expression argument =
-          bridgeMethodDescriptor.getParameterTypeDescriptors().get(i)
+          bridgeMethodDescriptor.getErasureMethodDescriptor().getParameterTypeDescriptors().get(i)
                   == castToParameterTypeDescriptor
               ? parameterReference
               : new CastExpression(parameterReference, castToParameterTypeDescriptor);
