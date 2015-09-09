@@ -41,14 +41,15 @@ class CastToBoxedType extends Object {
   m_test() {
     let o = Integer.$create__int(1);
     let b = /**@type {Byte} */ ($Casts.to(o, Byte.$isInstance(o)));
-    let d = /**@type {number} */ ($Casts.to(o, Double.$isInstance(o)));
+    let d = /**@type {?number} */ ($Casts.to(o, Double.$isInstance(o)));
     let f = /**@type {Float} */ ($Casts.to(o, Float.$isInstance(o)));
     let i = /**@type {Integer} */ ($Casts.to(o, Integer.$isInstance(o)));
     let l = /**@type {Long} */ ($Casts.to(o, Long.$isInstance(o)));
     let s = /**@type {Short} */ ($Casts.to(o, Short.$isInstance(o)));
-    let n = /**@type {Number | number} */ ($Casts.to(o, Number.$isInstance(o)));
+    let n =
+        /**@type {Number | ?number} */ ($Casts.to(o, Number.$isInstance(o)));
     let c = /**@type {Character} */ ($Casts.to(o, Character.$isInstance(o)));
-    let bool = /**@type {boolean} */ ($Casts.to(o, Boolean.$isInstance(o)));
+    let bool = /**@type {?boolean} */ ($Casts.to(o, Boolean.$isInstance(o)));
   }
 
   /**

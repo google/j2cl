@@ -46,6 +46,7 @@ import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.InfixExpression;
+import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.Modifier;
 import org.eclipse.jdt.core.dom.PostfixExpression;
 import org.eclipse.jdt.core.dom.PrefixExpression;
@@ -658,7 +659,7 @@ public class JdtUtils {
     Statement statement =
         lambdaMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.VOID_TYPE_DESCRIPTOR
             ? new ExpressionStatement(callLambda)
-            : new ReturnStatement(callLambda);
+            : new ReturnStatement(callLambda, samMethodDescriptor.getReturnTypeDescriptor());
     Method samMethod =
         new Method(samMethodDescriptor, parameters, new Block(Arrays.asList(statement)), true);
     return samMethod;
@@ -672,6 +673,14 @@ public class JdtUtils {
     @SuppressWarnings("unchecked")
     List<T> typedList = jdtRawCollection;
     return typedList;
+  }
+
+  public static MethodDeclaration findCurrentMethodDeclaration(
+      org.eclipse.jdt.core.dom.ASTNode node) {
+    while (node != null && !(node instanceof MethodDeclaration)) {
+      node = node.getParent();
+    }
+    return (MethodDeclaration) node;
   }
 
   private JdtUtils() {}

@@ -11,6 +11,7 @@ import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
+import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.VariableDeclarationFragment;
@@ -121,6 +122,14 @@ public class InsertImplicitCastsVisitor extends AbstractRewriter {
   }
 
   @Override
+  public Node rewriteReturnStatement(ReturnStatement returnStatement) {
+    if (returnStatement.getTypeDescriptor() == LONG) {
+      return rewriteLongReturnStatement(returnStatement);
+    }
+    return returnStatement;
+  }
+
+  @Override
   public Node rewriteVariableDeclarationFragment(
       VariableDeclarationFragment variableDeclarationFragment) {
     if (variableDeclarationFragment.getVariable().getTypeDescriptor() == LONG) {
@@ -191,6 +200,12 @@ public class InsertImplicitCastsVisitor extends AbstractRewriter {
       return rewriteLongNonAssignmentBinaryExpression(binaryExpression);
     }
     return binaryExpression;
+  }
+
+  private Node rewriteLongReturnStatement(ReturnStatement returnStatement) {
+    // promote return 0; to return (long) 0;
+    return new ReturnStatement(
+        maybeCastToLong(returnStatement.getExpression()), returnStatement.getTypeDescriptor());
   }
 
   private Node rewriteLongVariableDeclarationFragment(

@@ -35,7 +35,12 @@ are copyright and licensed as follows:
   boxed objects. Refer to previous dicussion at cl/101709039 and cl/98361767.
 
 ## Tasks
-- Sync all multiexpression generation to use the MultiExpression node class.
+- Fix "simpleautoboxing" build.log, we're currently omitting Double->double and Boolean->boolean
+    boxing operations and it's resulting in Closure seeing us try to collapse ?number->number and
+    ?boolean->boolean.
+- Fix "inconsistent return type" error with checktypes in "LambdaNestingInAnonymousClasses"
+- Fix "mismatch of overriding property type" error with checktypes in
+    "implementsgenericinterface", "bridgemethodaccidentaloverride", "bridgemethodbasic"
 
 ## Tracking Closure warning issues
 - https://b.corp.google.com/hotlists/269212

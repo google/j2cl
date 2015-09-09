@@ -313,7 +313,10 @@ public class ASTUtils {
 
     Expression newInnerClass = new NewInstance(null, innerclassConstructorDescriptor, arguments);
     List<Statement> statements = new ArrayList<>();
-    statements.add(new ReturnStatement(newInnerClass)); // return new InnerClass();
+    statements.add(
+        new ReturnStatement(
+            newInnerClass,
+            innerclassConstructorDescriptor.getReturnTypeDescriptor())); // return new InnerClass();
     Block body = new Block(statements);
 
     return new Method(methodDescriptor, innerclassConstructor.getParameters(), body, false);
@@ -350,7 +353,8 @@ public class ASTUtils {
     Statement statement =
         exposedMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.VOID_TYPE_DESCRIPTOR
             ? new ExpressionStatement(forwardingMethodCall)
-            : new ReturnStatement(forwardingMethodCall);
+            : new ReturnStatement(
+                forwardingMethodCall, exposedMethodDescriptor.getReturnTypeDescriptor());
     return Method.createSynthetic(
         forwardinghMethodDescriptor, parameters, new Block(Arrays.asList(statement)), true);
   }

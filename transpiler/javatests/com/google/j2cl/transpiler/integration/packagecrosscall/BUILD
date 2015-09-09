@@ -13,8 +13,6 @@ load(
 # blaze test :compiled_test
 # blaze test :uncompiled_test
 integration_test(
-    name = "implementsgenericinterface",
-    srcs = glob(["*.java"]),
-    # TODO: fix the hidden JS output bug and remove this suppression.
-    defs = ["--jscomp_warning=checkTypes"],
+    name = "packagecrosscall",
+    srcs = glob(["**/*.java"]),
 )

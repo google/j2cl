@@ -1,7 +1,11 @@
 package com.google.j2cl.transpiler.readable.simplelongs;
 
 public class SimpleLongs {
-  public long foo;
+  public long foo = 0;
+
+  public long getBar() {
+    return 0;
+  }
 
   @SuppressWarnings("unused")
   private int sideEffect;
@@ -37,5 +41,9 @@ public class SimpleLongs {
     long f = a++;
     f = foo++;
     f = getWithSideEffect().foo++;
+
+    // Field initializers and function return statements.
+    long g = foo;
+    g = getBar();
   }
 }

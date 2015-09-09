@@ -9,8 +9,10 @@ public class Main {
     char b = 'a';
     assert b == 97;
 
+    // Avoiding a "condition always evaluates to true" error in JSComp type checking.
+    Object maybeNull = b == 97 ? null : new Object();
     Object c = null;
-    assert c == null;
+    assert c == maybeNull;
 
     int d = 100;
     assert d == 50 + 50;

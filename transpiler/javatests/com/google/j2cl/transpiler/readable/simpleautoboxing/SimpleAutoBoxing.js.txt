@@ -45,14 +45,14 @@ class SimpleAutoBoxing extends Object {
 
   /**
    * @param {boolean} b
-   * @return {boolean}
+   * @return {?boolean}
    * @public
    */
   m_box__boolean(b) { return b; }
 
   /**
    * @param {number} d
-   * @return {number}
+   * @return {?number}
    * @public
    */
   m_box__double(d) { return d; }
@@ -100,14 +100,14 @@ class SimpleAutoBoxing extends Object {
   m_box__char(c) { return Character.m_valueOf__char(c); }
 
   /**
-   * @param {boolean} b
+   * @param {?boolean} b
    * @return {boolean}
    * @public
    */
   m_unbox__java_lang_Boolean(b) { return b; }
 
   /**
-   * @param {number} d
+   * @param {?number} d
    * @return {number}
    * @public
    */

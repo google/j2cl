@@ -131,13 +131,13 @@ public class StatementSourceGenerator {
       case TypeDescriptor.DOUBLE_TYPE_NAME:
       case TypeDescriptor.CHAR_TYPE_NAME:
         return "number";
-      case "java.lang.Boolean":
-        return "boolean";
-      case "java.lang.Double":
-        return "number";
-      case "java.lang.Number":
+      case TypeDescriptor.JAVA_LANG_BOOLEAN_TYPE_NAME:
+        return "?boolean";
+      case TypeDescriptor.JAVA_LANG_DOUBLE_TYPE_NAME:
+        return "?number";
+      case TypeDescriptor.JAVA_LANG_NUMBER_TYPE_NAME:
         if (!forUseInExtendsOrImplements) {
-          return "Number | number";
+          return "Number | ?number";
         }
         break;
       case TypeDescriptor.LONG_TYPE_NAME:
@@ -149,7 +149,7 @@ public class StatementSourceGenerator {
       case "java.lang.Comparable":
         if (!forUseInExtendsOrImplements) {
           // Interfaces that might be also implemented by string
-          return "(" + toSource(typeDescriptor) + "|string)";
+          return "(" + toSource(typeDescriptor) + "|?string)";
         }
         break;
       case "java.lang.Object":

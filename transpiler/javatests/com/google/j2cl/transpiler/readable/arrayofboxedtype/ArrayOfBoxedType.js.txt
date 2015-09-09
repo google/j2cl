@@ -40,10 +40,10 @@ class ArrayOfBoxedType extends Object {
    */
   m_test() {
     let numberArray =
-        /**@type {Array<Number | number>} */ ($Arrays.$create([2], Number));
+        /**@type {Array<Number | ?number>} */ ($Arrays.$create([2], Number));
     let byteArray = /**@type {Array<Byte>} */ ($Arrays.$create([2], Byte));
     let doublerArray =
-        /**@type {Array<number>} */ ($Arrays.$create([2], Double));
+        /**@type {Array<?number>} */ ($Arrays.$create([2], Double));
     let floatArray = /**@type {Array<Float>} */ ($Arrays.$create([2], Float));
     let integerArray =
         /**@type {Array<Integer>} */ ($Arrays.$create([2], Integer));
@@ -52,13 +52,13 @@ class ArrayOfBoxedType extends Object {
     let characterArray =
         /**@type {Array<Character>} */ ($Arrays.$create([2], Character));
     let booleanArray =
-        /**@type {Array<boolean>} */ ($Arrays.$create([2], Boolean));
-    let nArray = /**@type {Array<Number | number>} */ (
+        /**@type {Array<?boolean>} */ ($Arrays.$create([2], Boolean));
+    let nArray = /**@type {Array<Number | ?number>} */ (
         $Arrays.$castTo(byteArray, Number, 1));
     let bArray =
         /**@type {Array<Byte>} */ ($Arrays.$castTo(byteArray, Byte, 1));
     let dArray =
-        /**@type {Array<number>} */ ($Arrays.$castTo(byteArray, Double, 1));
+        /**@type {Array<?number>} */ ($Arrays.$castTo(byteArray, Double, 1));
     let fArray =
         /**@type {Array<Float>} */ ($Arrays.$castTo(byteArray, Float, 1));
     let iArray =
@@ -70,7 +70,7 @@ class ArrayOfBoxedType extends Object {
     let cArray = /**@type {Array<Character>} */ (
         $Arrays.$castTo(byteArray, Character, 1));
     let boolArray =
-        /**@type {Array<boolean>} */ ($Arrays.$castTo(byteArray, Boolean, 1));
+        /**@type {Array<?boolean>} */ ($Arrays.$castTo(byteArray, Boolean, 1));
     $Arrays.$set(numberArray, 1, Integer.$create__int(1));
   }
 

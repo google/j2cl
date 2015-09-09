@@ -48,7 +48,7 @@ CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
 ]
 
 
-def integration_test(name, srcs, deps=[]):
+def integration_test(name, srcs, deps=[], defs=[]):
   """Macro that turns Java files into integration test targets."""
   # figure out the current location
   java_root_path = get_java_root(PACKAGE_NAME)
@@ -89,7 +89,7 @@ def integration_test(name, srcs, deps=[]):
           "--remove_unused_local_vars=ON",
           "--remove_unused_vars",
           "--variable_renaming=ALL",
-      ],
+      ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
       deps=[":" + name + "_js_library"],
@@ -109,7 +109,7 @@ def integration_test(name, srcs, deps=[]):
           "--pretty_print",
           "--property_renaming=OFF",
           "--variable_renaming=OFF",
-      ],
+      ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
       deps=[":" + name + "_js_library"],
@@ -123,7 +123,7 @@ def integration_test(name, srcs, deps=[]):
           "--language_out=ECMASCRIPT5",
           "--define=ASSERTIONS_ENABLED_=true",
           "--pretty_print",
-      ],
+      ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
       deps=[":" + name + "_js_library"],
@@ -209,7 +209,6 @@ def integration_test(name, srcs, deps=[]):
       compiler="//javascript/tools/jscompiler:head",
       defs=CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
           "--export_test_functions=true",
-          "--jscomp_off=checkTypes",
           "--jscomp_off=undefinedVars",
           "--language_in=ECMASCRIPT6",
           "--language_out=ECMASCRIPT5",
@@ -218,7 +217,7 @@ def integration_test(name, srcs, deps=[]):
           "--pretty_print",
           "--strict",
           "--variable_renaming=OFF",
-      ],
+      ] + defs,
       deps=[
           ":" + name + "_js_library",
           "//javascript/closure/testing:testsuite",

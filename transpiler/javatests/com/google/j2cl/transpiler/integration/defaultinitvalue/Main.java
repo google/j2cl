@@ -15,9 +15,12 @@ public class Main {
     Main m = new Main();
     assert m.instanceInt == 0;
     assert !m.instanceBoolean;
-    assert m.instanceObject == null;
     assert Main.staticInt == 0;
     assert !Main.staticBoolean;
-    assert Main.staticObject == null;
+
+    // Avoiding a "condition always evaluates to true" error in JSComp type checking.
+    Object maybeNull = Main.staticInt == 0 ? null : new Object();
+    assert Main.staticObject == maybeNull;
+    assert m.instanceObject == maybeNull;
   }
 }

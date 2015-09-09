@@ -9,6 +9,7 @@ public class Main {
     testOverAndUnderflow();
     testLiteralFormats();
     testExtendedOperands();
+    testInitialization();
   }
 
   public static void testAssignmentOperators() {
@@ -133,5 +134,18 @@ public class Main {
     assert 100L == +a;
     assert -100L == -a;
     assert -101L == ~a;
+  }
+
+  private static long fieldLong = 100;
+
+  private static long getReturnInitializerLong() {
+    return 100;
+  }
+
+  public static void testInitialization() {
+    long localVariableLong = 100;
+
+    assert localVariableLong == fieldLong;
+    assert fieldLong == getReturnInitializerLong();
   }
 }

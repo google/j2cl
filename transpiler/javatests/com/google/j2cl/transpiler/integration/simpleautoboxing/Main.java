@@ -199,15 +199,19 @@ public class Main {
     assert (b);
   }
 
+  private int foo = 0;
   public void testNull() {
+    // Avoiding a "condition always evaluates to true" error in JSComp type checking.
+    Object maybeNull = foo == 0 ? null : new Object();
+
     Boolean bool = null;
     Double d = null;
     Integer i = null;
     Long l = null;
-    assert bool == null;
-    assert d == null;
-    assert i == null;
-    assert l == null;
+    assert bool == maybeNull;
+    assert d == maybeNull;
+    assert i == maybeNull;
+    assert l == maybeNull;
   }
 
   public static void main(String[] args) {

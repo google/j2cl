@@ -46,12 +46,16 @@ class Booleans {
   }
 
   /**
-   * @param {boolean} obj
+   * @param {?boolean} obj
    * @return {boolean}
    * @public
    */
   static m_booleanValue__boolean(obj) {
-    return obj;
+    if (obj != null) {
+      return obj;
+    } else {
+      return obj.m_booleanValue();
+    }
   }
 };
 

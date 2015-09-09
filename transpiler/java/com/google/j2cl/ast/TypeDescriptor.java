@@ -42,6 +42,9 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
   public static final String FLOAT_TYPE_NAME = "float";
   public static final String LONG_TYPE_NAME = "long";
   public static final String SHORT_TYPE_NAME = "short";
+  public static final String JAVA_LANG_BOOLEAN_TYPE_NAME = "java.lang.Boolean";
+  public static final String JAVA_LANG_DOUBLE_TYPE_NAME = "java.lang.Double";
+  public static final String JAVA_LANG_NUMBER_TYPE_NAME = "java.lang.Number";
 
   private static Interner<TypeDescriptor> interner;
 

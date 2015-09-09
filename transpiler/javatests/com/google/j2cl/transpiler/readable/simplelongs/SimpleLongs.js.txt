@@ -13,6 +13,7 @@ let $Util = goog.require('nativebootstrap.UtilModule').Util;
 let $Numbers = goog.require('vmbootstrap.NumbersModule').Numbers;
 let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
 let $long = goog.require('vmbootstrap.PrimitivesModule').$long;
+let $Primitives = goog.require('vmbootstrap.PrimitivesModule').Primitives;
 
 
 class SimpleLongs extends Object {
@@ -38,7 +39,16 @@ class SimpleLongs extends Object {
    * Runs instance field and block initializers.
    * @private
    */
-  $init__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs() {}
+  $init__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs() {
+    this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
+        $Primitives.$castIntToLong(0);
+  }
+
+  /**
+   * @return {!$Long}
+   * @public
+   */
+  m_getBar() { return $Primitives.$castIntToLong(0); }
 
   /**
    * @return {SimpleLongs}
@@ -95,6 +105,9 @@ class SimpleLongs extends Object {
                      .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
                  $LongUtils.$getOne()),
          $Numbers.$v);
+    let g =
+        this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs;
+    g = this.m_getBar();
   }
 
   /**

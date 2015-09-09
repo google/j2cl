@@ -242,7 +242,8 @@ public class BridgeMethodsCreator {
     Statement statement =
         bridgeMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.VOID_TYPE_DESCRIPTOR
             ? new ExpressionStatement(dispatchMethodCall)
-            : new ReturnStatement(dispatchMethodCall);
+            : new ReturnStatement(
+                dispatchMethodCall, bridgeMethodDescriptor.getReturnTypeDescriptor());
     return Method.createSynthetic(
         bridgeMethodDescriptor, parameters, new Block(Arrays.asList(statement)), false);
   }

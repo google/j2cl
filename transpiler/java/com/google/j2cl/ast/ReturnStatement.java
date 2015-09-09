@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 import javax.annotation.Nullable;
@@ -25,9 +26,19 @@ import javax.annotation.Nullable;
 @Visitable
 public class ReturnStatement extends Statement {
   @Visitable @Nullable Expression expression;
+  private final TypeDescriptor returnTypeDescriptor;
 
-  public ReturnStatement(Expression expression) {
+  public ReturnStatement(Expression expression, TypeDescriptor returnTypeDescriptor) {
+    Preconditions.checkNotNull(returnTypeDescriptor);
     this.expression = expression;
+    this.returnTypeDescriptor = returnTypeDescriptor;
+  }
+
+  /**
+   * Returns the type descriptor of the type expected to be returned by this statement.
+   */
+  public TypeDescriptor getTypeDescriptor() {
+    return returnTypeDescriptor;
   }
 
   public Expression getExpression() {

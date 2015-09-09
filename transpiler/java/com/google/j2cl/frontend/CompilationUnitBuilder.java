@@ -1059,6 +1059,11 @@ public class CompilationUnitBuilder {
         parameters.add(convert((VariableDeclaration) parameter));
       }
 
+      IMethodBinding methodBinding = expression.resolveMethodBinding();
+      String methodName = methodBinding.getName();
+      TypeDescriptor returnTypeDescriptor =
+          JdtUtils.createTypeDescriptor(methodBinding.getReturnType(), compilationUnitNameLocator);
+
       // the lambda expression body, which can be either a Block or an Expression.
       ASTNode lambdaBody = expression.getBody();
       Block body;
@@ -1067,14 +1072,10 @@ public class CompilationUnitBuilder {
       } else {
         Preconditions.checkArgument(lambdaBody instanceof org.eclipse.jdt.core.dom.Expression);
         Statement returnStatement =
-            new ReturnStatement(convert((org.eclipse.jdt.core.dom.Expression) lambdaBody));
+            new ReturnStatement(
+                convert((org.eclipse.jdt.core.dom.Expression) lambdaBody), returnTypeDescriptor);
         body = new Block(Arrays.asList(returnStatement));
       }
-
-      IMethodBinding methodBinding = expression.resolveMethodBinding();
-      String methodName = methodBinding.getName();
-      TypeDescriptor returnTypeDescriptor =
-          JdtUtils.createTypeDescriptor(methodBinding.getReturnType(), compilationUnitNameLocator);
 
       // generate parameters type descriptors.
       List<TypeDescriptor> parameterTypeDescriptors =
@@ -1370,9 +1371,13 @@ public class CompilationUnitBuilder {
     }
 
     private ReturnStatement convert(org.eclipse.jdt.core.dom.ReturnStatement statement) {
+      MethodDeclaration currentMethodDeclaration = JdtUtils.findCurrentMethodDeclaration(statement);
+      Preconditions.checkNotNull(currentMethodDeclaration);
       Expression expression =
           statement.getExpression() == null ? null : convert(statement.getExpression());
-      return new ReturnStatement(expression);
+      TypeDescriptor returnTypeDescriptor =
+          createTypeDescriptor(currentMethodDeclaration.resolveBinding().getReturnType());
+      return new ReturnStatement(expression, returnTypeDescriptor);
     }
 
     /**
