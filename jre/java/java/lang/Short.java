@@ -47,7 +47,7 @@ public class Short extends Number {
 
   @Override
   public long longValue() {
-    return (long) value;
+    return value;
   }
 
   @Override

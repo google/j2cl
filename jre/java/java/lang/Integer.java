@@ -51,8 +51,7 @@ public class Integer extends Number {
 
   @Override
   public long longValue() {
-    // TODO: remove explicit cast after implicit cast is supported.
-    return (long) value;
+    return value;
   }
 
   @Override

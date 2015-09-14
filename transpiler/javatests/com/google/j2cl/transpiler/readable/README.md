@@ -56,7 +56,7 @@ are copyright and licensed as follows:
 - enumoptimization
 - finalfield (readable JsDoc and no static setter)
 - indentity equality (double equality / triple equality, null / undefined)
-- implicitconversions (method call params and return expression)
+- implicitconversions (method call params)
 - implicitconversions (String + operator)
 - implicitconversions (binary operations and field initializers)
 - interfacedefaultmethod

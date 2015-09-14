@@ -1371,12 +1371,12 @@ public class CompilationUnitBuilder {
     }
 
     private ReturnStatement convert(org.eclipse.jdt.core.dom.ReturnStatement statement) {
-      MethodDeclaration currentMethodDeclaration = JdtUtils.findCurrentMethodDeclaration(statement);
-      Preconditions.checkNotNull(currentMethodDeclaration);
+      IMethodBinding currentMethodBinding = JdtUtils.findCurrentMethodBinding(statement);
+      Preconditions.checkNotNull(currentMethodBinding);
       Expression expression =
           statement.getExpression() == null ? null : convert(statement.getExpression());
       TypeDescriptor returnTypeDescriptor =
-          createTypeDescriptor(currentMethodDeclaration.resolveBinding().getReturnType());
+          createTypeDescriptor(currentMethodBinding.getReturnType());
       return new ReturnStatement(expression, returnTypeDescriptor);
     }
 

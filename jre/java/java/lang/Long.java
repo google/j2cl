@@ -32,12 +32,12 @@ public class Long extends Number {
 
   @Override
   public double doubleValue() {
-    return (double) value;
+    return value;
   }
 
   @Override
   public float floatValue() {
-    return (float) value;
+    return value;
   }
 
   @Override

@@ -123,10 +123,9 @@ public class InsertImplicitCastsVisitor extends AbstractRewriter {
 
   @Override
   public Node rewriteReturnStatement(ReturnStatement returnStatement) {
-    if (returnStatement.getTypeDescriptor() == LONG) {
-      return rewriteLongReturnStatement(returnStatement);
-    }
-    return returnStatement;
+    return new ReturnStatement(
+        maybeCastTo(returnStatement.getExpression(), returnStatement.getTypeDescriptor()),
+        returnStatement.getTypeDescriptor());
   }
 
   @Override
@@ -202,12 +201,6 @@ public class InsertImplicitCastsVisitor extends AbstractRewriter {
     return binaryExpression;
   }
 
-  private Node rewriteLongReturnStatement(ReturnStatement returnStatement) {
-    // promote return 0; to return (long) 0;
-    return new ReturnStatement(
-        maybeCastToLong(returnStatement.getExpression()), returnStatement.getTypeDescriptor());
-  }
-
   private Node rewriteLongVariableDeclarationFragment(
       VariableDeclarationFragment variableDeclarationFragment) {
     // promote long foo = int; to long foo = long;
@@ -227,12 +220,27 @@ public class InsertImplicitCastsVisitor extends AbstractRewriter {
    * The cast is omitted either if it is redundant or it is known that it would be removed by the
    * following NormalizeCastsVisitor's filter.
    */
-  private static Expression maybeCastTo(Expression expression, TypeDescriptor typeDescriptor) {
-    if (expression != null
-        && expression.getTypeDescriptor() != typeDescriptor
-        && !ASTUtils.canRemoveCast(expression.getTypeDescriptor(), typeDescriptor)) {
-      expression = new CastExpression(expression, typeDescriptor);
+  private static Expression maybeCastTo(Expression expression, TypeDescriptor toTypeDescriptor) {
+    if (expression == null) {
+      // Can't cast a null expression.
+      return expression;
     }
-    return expression;
+    TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
+    if (!fromTypeDescriptor.isPrimitive() || !toTypeDescriptor.isPrimitive()) {
+      // Non-primitives don't get implicit casts.
+      return expression;
+    }
+    if (fromTypeDescriptor == toTypeDescriptor) {
+      // If the type didn't change there's no need for a cast.
+      return expression;
+    }
+    if (ASTUtils.canRemoveCast(expression.getTypeDescriptor(), toTypeDescriptor)) {
+      // If a cast would make no difference (because both types are both already encoded as JS
+      // number primitives and have compatible sign and truncation conventions) then don't bother
+      // emitting a cast.
+      return expression;
+    }
+
+    return new CastExpression(expression, toTypeDescriptor);
   }
 }
