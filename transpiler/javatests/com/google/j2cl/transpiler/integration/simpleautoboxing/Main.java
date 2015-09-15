@@ -200,6 +200,7 @@ public class Main {
   }
 
   private int foo = 0;
+
   public void testNull() {
     // Avoiding a "condition always evaluates to true" error in JSComp type checking.
     Object maybeNull = foo == 0 ? null : new Object();

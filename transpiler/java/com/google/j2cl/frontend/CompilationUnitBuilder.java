@@ -1071,10 +1071,12 @@ public class CompilationUnitBuilder {
         body = convert((org.eclipse.jdt.core.dom.Block) lambdaBody);
       } else {
         Preconditions.checkArgument(lambdaBody instanceof org.eclipse.jdt.core.dom.Expression);
-        Statement returnStatement =
-            new ReturnStatement(
-                convert((org.eclipse.jdt.core.dom.Expression) lambdaBody), returnTypeDescriptor);
-        body = new Block(Arrays.asList(returnStatement));
+        Expression lambdaMethodBody = convert((org.eclipse.jdt.core.dom.Expression) lambdaBody);
+        Statement statement =
+            returnTypeDescriptor == TypeDescriptors.VOID_TYPE_DESCRIPTOR
+                ? new ExpressionStatement(lambdaMethodBody)
+                : new ReturnStatement(lambdaMethodBody, returnTypeDescriptor);
+        body = new Block(Arrays.asList(statement));
       }
 
       // generate parameters type descriptors.
