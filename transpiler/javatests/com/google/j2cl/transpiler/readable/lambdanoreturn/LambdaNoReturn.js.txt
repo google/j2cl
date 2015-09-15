@@ -1,0 +1,315 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/lambdanoreturn/LambdaNoReturn.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturnModule');
+
+
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+class LambdaNoReturn extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_lambdanoreturn_LambdaNoReturn() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() { let runner = LambdaNoReturn$lambda$0.$create(this); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!LambdaNoReturn}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    LambdaNoReturn.$clinit();
+    let instance = new LambdaNoReturn;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_lambdanoreturn_LambdaNoReturn();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_lambdanoreturn_LambdaNoReturn() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_lambdanoreturn_LambdaNoReturn();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof LambdaNoReturn; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, LambdaNoReturn);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!LambdaNoReturn.$classLambdaNoReturn) {
+      LambdaNoReturn.$classLambdaNoReturn = Class.$createForClass(
+          $Util.$generateId('LambdaNoReturn'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn'));
+    }
+    return LambdaNoReturn.$classLambdaNoReturn;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports.LambdaNoReturn = LambdaNoReturn;
+
+
+
+/**
+ * @interface
+ */
+class LambdaNoReturn$Runner {
+  /**
+   * @return {void}
+   * @public
+   */
+  m_run() {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_lambdanoreturn_LambdaNoReturn$Runner =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+           instance
+               .$implements__com_google_j2cl_transpiler_readable_lambdanoreturn_LambdaNoReturn$Runner;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+           classConstructor.prototype
+               .$implements__com_google_j2cl_transpiler_readable_lambdanoreturn_LambdaNoReturn$Runner;
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!LambdaNoReturn$Runner.$classLambdaNoReturn$Runner) {
+      LambdaNoReturn$Runner
+          .$classLambdaNoReturn$Runner = Class.$createForInterface(
+          $Util.$generateId('Runner'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn$Runner'),
+          null,
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn.Runner'));
+    }
+    return LambdaNoReturn$Runner.$classLambdaNoReturn$Runner;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {}
+}
+;
+
+
+LambdaNoReturn$Runner.$markImplementor(
+    /** @type {Function} */ (LambdaNoReturn$Runner));
+
+/**
+ * Export class.
+ */
+exports.LambdaNoReturn$Runner = LambdaNoReturn$Runner;
+
+
+
+/**
+ * @implements {LambdaNoReturn$Runner}
+ */
+class LambdaNoReturn$lambda$0 extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {LambdaNoReturn}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_lambdanoreturn_LambdaNoReturn$lambda$0 =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_lambdanoreturn_LambdaNoReturn$lambda$0() {
+  }
+
+  /**
+   * @return {void}
+   * @private
+   */
+  lambda$0() { return Object.$create(); }
+
+  /**
+   * @override
+   * @return {void}
+   * @public
+   */
+  m_run() { this.lambda$0(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {LambdaNoReturn} $outer_this
+   * @return {!LambdaNoReturn$lambda$0}
+   * @private
+   * @nocollapse
+   */
+  static $create($outer_this) {
+    LambdaNoReturn$lambda$0.$clinit();
+    let instance = new LambdaNoReturn$lambda$0;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_lambdanoreturn_LambdaNoReturn$lambda$0(
+            $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {LambdaNoReturn} $outer_this
+   * @private
+   */
+  $ctor__com_google_j2cl_transpiler_readable_lambdanoreturn_LambdaNoReturn$lambda$0(
+      $outer_this) {
+    this.$ctor__java_lang_Object();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_lambdanoreturn_LambdaNoReturn$lambda$0 =
+        $outer_this;
+    this.$init__com_google_j2cl_transpiler_readable_lambdanoreturn_LambdaNoReturn$lambda$0();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof LambdaNoReturn$lambda$0;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, LambdaNoReturn$lambda$0);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!LambdaNoReturn$lambda$0.$classLambdaNoReturn$lambda$0) {
+      LambdaNoReturn$lambda$0
+          .$classLambdaNoReturn$lambda$0 = Class.$createForClass(
+          $Util.$generateId('lambda$0'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn$lambda$0'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn.lambda.0'));
+    }
+    return LambdaNoReturn$lambda$0.$classLambdaNoReturn$lambda$0;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+LambdaNoReturn$Runner.$markImplementor(LambdaNoReturn$lambda$0);
