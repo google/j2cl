@@ -4,6 +4,7 @@ public class Main {
   public static void main(String... args) {
     testObjects();
     testInts();
+    testMains();
   }
 
   private static void testInts() {
@@ -32,5 +33,16 @@ public class Main {
     // Assignment.
     objects[0] = expectedObject;
     assert objects[0] == expectedObject;
+  }
+
+  private static void testMains() {
+    Main m = new Main();
+    Main[] mains = new Main[100];
+
+    mains[0] = null;
+    assert mains[0] == null;
+
+    mains[0] = m;
+    assert mains[0] == m;
   }
 }

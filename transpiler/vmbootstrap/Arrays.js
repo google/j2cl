@@ -169,8 +169,11 @@ class Arrays {
             // type.
             Arrays.$throwArrayStoreException();
           }
-        } else if (!array.leafType.$isInstance(value)) {
+        } else if (value != null && !array.leafType.$isInstance(value)) {
           // The inserted value must fit the array leaf type.
+          // If leafType is not a primitive type, a 'null' should always be a
+          // legal value. If leafType is a primitive type, value cannot be null
+          // because that is illegal in Java.
           Arrays.$throwArrayStoreException();
         }
       }
