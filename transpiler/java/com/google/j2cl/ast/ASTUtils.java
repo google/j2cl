@@ -122,6 +122,19 @@ public class ASTUtils {
   }
 
   /**
+   * When requested on an inner type, returns the field that references the enclosing instance,
+   * otherwise null.
+   */
+  public static Field getEnclosingInstanceField(JavaType type) {
+    for (Field field : type.getFields()) {
+      if (field.getDescriptor().getFieldName().equals(ASTUtils.ENCLOSING_INSTANCE_NAME)) {
+        return field;
+      }
+    }
+    return null;
+  }
+
+  /**
    * Returns whether the specified constructor has a this() call.
    */
   public static boolean hasThisCall(Method method) {

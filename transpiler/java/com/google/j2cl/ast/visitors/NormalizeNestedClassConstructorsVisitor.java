@@ -34,7 +34,6 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
@@ -96,8 +95,25 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
     arguments.addAll(collectArgumentsForCaptures(typeDescriptor));
     // add 'this' as the last argument to the constructor of a local class.
     if (type.isLocal()) {
-      arguments.add(
-          new ThisReference((RegularTypeDescriptor) getCurrentJavaType().getDescriptor()));
+      TypeDescriptor currentTypeDescriptor = getCurrentJavaType().getDescriptor();
+      // Expression: this;
+      Expression outerThisExpression = new ThisReference(currentTypeDescriptor);
+
+      // Lambdas never enclose any other type, so when an inner class is defined inside of a lambda
+      // its recorded enclosing type is actually the enclosing type of the lambda.
+      while (type.getEnclosingTypeDescriptor() != currentTypeDescriptor) {
+        // To reference that progressively more distant enclosing instance expand:
+        // Expression: this -> this.$outer_this;
+        JavaType currentType =
+            javaTypeByDescriptor.get(currentTypeDescriptor.getRawTypeDescriptor());
+        Field enclosingInstanceField = ASTUtils.getEnclosingInstanceField(currentType);
+        outerThisExpression =
+            new FieldAccess(outerThisExpression, enclosingInstanceField.getDescriptor());
+
+        currentTypeDescriptor = enclosingInstanceField.getDescriptor().getTypeDescriptor();
+      }
+
+      arguments.add(outerThisExpression);
     }
     MethodDescriptor target = newInstance.getConstructorMethodDescriptor();
     Preconditions.checkArgument(newInstance.getQualifier() == null);
