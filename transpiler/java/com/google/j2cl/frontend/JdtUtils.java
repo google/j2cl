@@ -416,11 +416,14 @@ public class JdtUtils {
 
   static IMethodBinding getMethodBinding(
       ITypeBinding typeBinding, String methodName, ITypeBinding... parameterTypes) {
-    for (IMethodBinding methodBinding : typeBinding.getDeclaredMethods()) {
-      if (methodBinding.getName().equals(methodName)
-          && Arrays.equals(methodBinding.getParameterTypes(), parameterTypes)) {
-        return methodBinding;
+    while (typeBinding != null) {
+      for (IMethodBinding methodBinding : typeBinding.getDeclaredMethods()) {
+        if (methodBinding.getName().equals(methodName)
+            && Arrays.equals(methodBinding.getParameterTypes(), parameterTypes)) {
+          return methodBinding;
+        }
       }
+      typeBinding = typeBinding.getSuperclass();
     }
     return null;
   }
