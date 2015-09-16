@@ -17,26 +17,30 @@ package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.processors.Visitable;
 
-import javax.annotation.Nullable;
-
 /**
- * Break Statement.
+ * Labeled Statement.
  */
 @Visitable
-public class BreakStatement extends Statement {
+public class LabeledStatement extends Statement {
 
-  @Nullable private final String labelName;
+  private final String labelName;
+  @Visitable Statement body;
 
-  public BreakStatement(String labelName) {
+  public LabeledStatement(String labelName, Statement body) {
     this.labelName = labelName;
+    this.body = body;
   }
 
   public String getLabelName() {
     return labelName;
   }
 
+  public Statement getBody() {
+    return body;
+  }
+
   @Override
   public Node accept(Processor processor) {
-    return Visitor_BreakStatement.visit(processor, this);
+    return Visitor_LabeledStatement.visit(processor, this);
   }
 }

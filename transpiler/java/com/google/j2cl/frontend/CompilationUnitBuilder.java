@@ -48,6 +48,7 @@ import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.LabeledStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -749,6 +750,8 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.EnhancedForStatement) statement);
         case ASTNode.IF_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.IfStatement) statement);
+        case ASTNode.LABELED_STATEMENT:
+          return convert((org.eclipse.jdt.core.dom.LabeledStatement) statement);
         case ASTNode.RETURN_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.ReturnStatement) statement);
         case ASTNode.SUPER_CONSTRUCTOR_INVOCATION:
@@ -776,16 +779,19 @@ public class CompilationUnitBuilder {
       }
     }
 
+    private LabeledStatement convert(org.eclipse.jdt.core.dom.LabeledStatement statement) {
+      return new LabeledStatement(
+          statement.getLabel().getIdentifier(), convert(statement.getBody()));
+    }
+
     private BreakStatement convert(org.eclipse.jdt.core.dom.BreakStatement statement) {
-      Preconditions.checkState(
-          statement.getLabel() == null, "Break statement with label not supported yet");
-      return new BreakStatement();
+      String labelName = statement.getLabel() == null ? null : statement.getLabel().getIdentifier();
+      return new BreakStatement(labelName);
     }
 
     private ContinueStatement convert(org.eclipse.jdt.core.dom.ContinueStatement statement) {
-      Preconditions.checkState(
-          statement.getLabel() == null, "Continue statement with label not supported yet");
-      return new ContinueStatement();
+      String labelName = statement.getLabel() == null ? null : statement.getLabel().getIdentifier();
+      return new ContinueStatement(labelName);
     }
 
     private ForStatement convert(org.eclipse.jdt.core.dom.ForStatement statement) {

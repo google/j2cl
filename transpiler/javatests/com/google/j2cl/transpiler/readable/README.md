@@ -39,6 +39,7 @@ are copyright and licensed as follows:
     boxing operations and it's resulting in Closure seeing us try to collapse ?number->number and
     ?boolean->boolean.
 - Fix "inconsistent return type" error with checktypes in "LambdaNestingInAnonymousClasses"
+- Investigate if label names (from LabeledStatements) are allowed to collide with other identifiers.
 
 ## Tracking Closure warning issues
 - https://b.corp.google.com/hotlists/269212

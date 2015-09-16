@@ -42,6 +42,7 @@ import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
+import com.google.j2cl.ast.LabeledStatement;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.MethodCall;
@@ -245,13 +246,24 @@ public class StatementSourceGenerator {
       }
 
       @Override
+      public String transformLabeledStatement(LabeledStatement statement) {
+        return String.format("%s: %s", statement.getLabelName(), toSource(statement.getBody()));
+      }
+
+      @Override
       public String transformBreakStatement(BreakStatement statement) {
-        return "break;";
+        if (statement.getLabelName() == null) {
+          return "break;";
+        }
+        return String.format("break %s;", statement.getLabelName());
       }
 
       @Override
       public String transformContinueStatement(ContinueStatement statement) {
-        return "continue;";
+        if (statement.getLabelName() == null) {
+          return "continue;";
+        }
+        return String.format("continue %s;", statement.getLabelName());
       }
 
       private String transformRegularBinaryExpression(BinaryExpression expression) {
@@ -600,12 +612,7 @@ public class StatementSourceGenerator {
         if (statement.getCatchClauses().isEmpty()) {
           catchBlock = "";
         } else {
-          String exceptionVarName =
-              statement
-                  .getCatchClauses()
-                  .get(0)
-                  .getExceptionVar()
-                  .getName();
+          String exceptionVarName = statement.getCatchClauses().get(0).getExceptionVar().getName();
           catchBlock =
               String.format(
                   "catch (%s) { %s }\n",

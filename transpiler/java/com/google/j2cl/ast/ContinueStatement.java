@@ -17,11 +17,24 @@ package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.processors.Visitable;
 
+import javax.annotation.Nullable;
+
 /**
  * Continue Statement.
  */
 @Visitable
 public class ContinueStatement extends Statement {
+
+  @Nullable private final String labelName;
+
+  public ContinueStatement(String labelName) {
+    this.labelName = labelName;
+  }
+
+  public String getLabelName() {
+    return labelName;
+  }
+
   @Override
   public Node accept(Processor processor) {
     return Visitor_ContinueStatement.visit(processor, this);
