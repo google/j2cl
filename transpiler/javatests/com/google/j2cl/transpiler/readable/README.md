@@ -65,6 +65,7 @@ are copyright and licensed as follows:
 - jsinteropclass
 - jsinteropdispatch
 - jsinteropinterface
+- javascriptkeywordscollision
 - methodreferences
 - nativefunction + provided Foo.native.js
 - notimportinternals
