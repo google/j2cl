@@ -18,7 +18,7 @@ package java.lang;
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Long.html">the
  * official Java API doc</a> for details.
  */
-public class Long extends Number {
+public class Long extends Number implements Comparable<Long> {
   private long value;
 
   public Long(long value) {
@@ -73,5 +73,20 @@ public class Long extends Number {
   public static Long valueOf(long l) {
     //TODO: caching.
     return new Long(l);
+  }
+
+  public static int compare(long x, long y) {
+    if (x < y) {
+      return -1;
+    } else if (x > y) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  @Override
+  public int compareTo(Long l) {
+    return compare(value, l.value);
   }
 }

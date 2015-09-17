@@ -18,7 +18,7 @@ package java.lang;
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Short.html">the
  * official Java API doc</a> for details.
  */
-public class Short extends Number {
+public class Short extends Number implements Comparable<Short> {
   private short value;
 
   public Short(short value) {
@@ -73,5 +73,14 @@ public class Short extends Number {
   public static Short valueOf(short s) {
     //TODO: caching
     return new Short(s);
+  }
+
+  public static int compare(short x, short y) {
+    return x - y;
+  }
+
+  @Override
+  public int compareTo(Short s) {
+    return compare(value, s.value);
   }
 }

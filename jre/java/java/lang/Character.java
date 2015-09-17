@@ -18,7 +18,7 @@ package java.lang;
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Character.html">the
  * official Java API doc</a> for details.
  */
-public class Character {
+public class Character implements Comparable<Character> {
   private char value;
 
   public Character(char value) {
@@ -47,5 +47,14 @@ public class Character {
   public static Character valueOf(char c) {
     //TODO: caching
     return new Character(c);
+  }
+
+  public static int compare(char x, char y) {
+    return x - y;
+  }
+
+  @Override
+  public int compareTo(Character c) {
+    return compare(value, c.value);
   }
 }

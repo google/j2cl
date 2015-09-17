@@ -18,7 +18,7 @@ package java.lang;
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Boolean.html">the
  * official Java API doc</a> for details.
  */
-public class Boolean {
+public class Boolean implements Comparable<Boolean> {
   public Boolean(boolean value) {
     // Super-source replaced.
   }
@@ -42,6 +42,17 @@ public class Boolean {
 
   @Override
   public String toString() {
+    // Super-source replaced.
+    throw new RuntimeException();
+  }
+
+  public static int compare(boolean a, boolean b) {
+    // Super-source replaced.
+    throw new RuntimeException();
+  }
+
+  @Override
+  public int compareTo(Boolean b) {
     // Super-source replaced.
     throw new RuntimeException();
   }

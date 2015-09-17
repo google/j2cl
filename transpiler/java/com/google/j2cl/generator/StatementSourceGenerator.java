@@ -18,7 +18,6 @@ package com.google.j2cl.generator;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractTransformer;
 import com.google.j2cl.ast.ArrayAccess;
@@ -97,89 +96,16 @@ public class StatementSourceGenerator {
     }
   }
 
-  /**
-   * Returns the JsDoc type name.
-   */
   public String getJsDocName(TypeDescriptor typeDescriptor) {
-    return getJsDocName(typeDescriptor, false);
+    return JsDocNameUtils.getJsDocName(typeDescriptor, this);
   }
 
-  /**
-   * Returns the JsDoc type name.
-   */
-  public String getJsDocName(TypeDescriptor typeDescriptor, boolean forUseInExtendsOrImplements) {
-    if (typeDescriptor.isArray()) {
-      return String.format(
-          "%s%s%s",
-          Strings.repeat("Array<", typeDescriptor.getDimensions()),
-          getJsDocName(typeDescriptor.getLeafTypeDescriptor()),
-          Strings.repeat(">", typeDescriptor.getDimensions()));
-    }
-
-    if (typeDescriptor.isParameterizedType()) {
-      return String.format(
-          "%s<%s>",
-          getJsDocName(typeDescriptor.getRawTypeDescriptor(), forUseInExtendsOrImplements),
-          getJsDocNames(typeDescriptor.getTypeArgumentDescriptors()));
-    }
-
-    // Special cases.
-    switch (typeDescriptor.getSourceName()) {
-      case TypeDescriptor.BYTE_TYPE_NAME:
-      case TypeDescriptor.SHORT_TYPE_NAME:
-      case TypeDescriptor.INT_TYPE_NAME:
-      case TypeDescriptor.FLOAT_TYPE_NAME:
-      case TypeDescriptor.DOUBLE_TYPE_NAME:
-      case TypeDescriptor.CHAR_TYPE_NAME:
-        return "number";
-      case TypeDescriptor.JAVA_LANG_BOOLEAN_TYPE_NAME:
-        return "?boolean";
-      case TypeDescriptor.JAVA_LANG_DOUBLE_TYPE_NAME:
-        return "?number";
-      case TypeDescriptor.JAVA_LANG_NUMBER_TYPE_NAME:
-        if (!forUseInExtendsOrImplements) {
-          return "Number | ?number";
-        }
-        break;
-      case TypeDescriptor.LONG_TYPE_NAME:
-        return "!" + toSource(TypeDescriptors.NATIVE_LONG_TYPE_DESCRIPTOR);
-      case "java.lang.String":
-        return "?string";
-      case "java.io.Serializable":
-      case "java.lang.CharSequence":
-      case "java.lang.Comparable":
-        if (!forUseInExtendsOrImplements) {
-          // Interfaces that might be also implemented by string
-          return "(" + toSource(typeDescriptor) + "|?string)";
-        }
-        break;
-      case "java.lang.Object":
-        if (!forUseInExtendsOrImplements) {
-          // Object covers also string and arrays.
-          return "*";
-        }
-        break;
-    }
-    if (typeDescriptor.isPrimitive()) {
-      return typeDescriptor.getSimpleName();
-    }
-    return toSource(typeDescriptor);
+  public String getJsDocName(TypeDescriptor typeDescriptor, boolean shouldUseClassName) {
+    return JsDocNameUtils.getJsDocName(typeDescriptor, shouldUseClassName, this);
   }
 
-  /**
-   * Returns the list of JsDoc names of a list of type descriptors.
-   */
   public String getJsDocNames(List<TypeDescriptor> typeDescriptors) {
-    List<String> typeParameterDescriptors =
-        Lists.transform(
-            typeDescriptors,
-            new Function<TypeDescriptor, String>() {
-              @Override
-              public String apply(TypeDescriptor typeDescriptor) {
-                return getJsDocName(typeDescriptor);
-              }
-            });
-    return Joiner.on(", ").join(typeParameterDescriptors);
+    return JsDocNameUtils.getJsDocNames(typeDescriptors, this);
   }
 
   public String toSource(Node node) {

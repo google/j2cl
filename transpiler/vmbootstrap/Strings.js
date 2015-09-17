@@ -1,8 +1,9 @@
 goog.module('vmbootstrap.StringsModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var String = goog.require('gen.java.lang.StringModule').String;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let String = goog.require('gen.java.lang.StringModule').String;
+let $Casts = goog.require('vmbootstrap.CastsModule').Casts;
 
 
 /**
@@ -49,6 +50,30 @@ class Strings {
    */
   static m_getClass__java_lang_Object(obj) {
     return String.$getClass();
+  }
+
+  /**
+   * @param {string} a
+   * @param {string} b
+   * @return {number}
+   * @public
+   */
+  static m_compareTo__java_lang_String__java_lang_String(a, b) {
+    if (a == b) {
+      return 0;
+    }
+    return a < b ? -1 : 1;
+  }
+
+  /**
+   * @param {string} a
+   * @param {*} b
+   * @return {number}
+   * @public
+   */
+  static m_compareTo__java_lang_String__java_lang_Object(a, b) {
+    return Strings.m_compareTo__java_lang_String__java_lang_String(
+      a, /**@type {string} */ ($Casts.to(b, String.$isInstance(b))));
   }
 };
 

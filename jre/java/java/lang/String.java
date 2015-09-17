@@ -17,6 +17,7 @@ package java.lang;
  * See <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html">the
  * official Java API doc</a> for details.
+ * TODO: implements Comparable, CharSequence
  */
 public final class String {
 

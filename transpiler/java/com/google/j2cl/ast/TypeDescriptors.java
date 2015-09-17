@@ -49,6 +49,9 @@ public class TypeDescriptors {
       TypeDescriptor.createTypeVariable(new ArrayList<String>(), Arrays.asList("?"), "");
   public static final TypeDescriptor CLASS_TYPE_DESCRIPTOR =
       TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Class"), "Class");
+  public static final TypeDescriptor COMPARABLE_TYPE_DESCRIPTOR =
+      TypeDescriptor.create(
+          Arrays.asList("java", "lang"), Arrays.asList("Comparable"), "Comparable");
   public static final TypeDescriptor OBJECT_TYPE_DESCRIPTOR =
       TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Object"), "Object");
   public static final TypeDescriptor NUMBER_TYPE_DESCRIPTOR =
@@ -61,6 +64,9 @@ public class TypeDescriptors {
    */
   public static final TypeDescriptor OBJECTS_TYPE_DESCRIPTOR =
       TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Objects", "ObjectsModule");
+
+  public static final TypeDescriptor COMPARABLES_TYPE_DESCRIPTOR =
+      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Comparables", "ComparablesModule");
 
   public static final TypeDescriptor NUMBERS_TYPE_DESCRIPTOR =
       TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Numbers", "NumbersModule");
@@ -95,6 +101,7 @@ public class TypeDescriptors {
           NATIVE_LONGS_TYPE_DESCRIPTOR,
           NATIVE_LONG_TYPE_DESCRIPTOR,
           OBJECTS_TYPE_DESCRIPTOR,
+          COMPARABLES_TYPE_DESCRIPTOR,
           NUMBERS_TYPE_DESCRIPTOR,
           BOOLEANS_TYPE_DESCRIPTOR);
 

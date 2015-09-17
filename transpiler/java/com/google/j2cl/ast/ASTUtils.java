@@ -385,18 +385,22 @@ public class ASTUtils {
     Preconditions.checkArgument(!targetMethodDescriptor.isConstructor());
     Preconditions.checkArgument(!targetMethodDescriptor.isStatic());
 
+    MethodDescriptor erasureMethodDescriptor =
+        targetMethodDescriptor.getErasureMethodDescriptor() == null
+            ? targetMethodDescriptor
+            : targetMethodDescriptor.getErasureMethodDescriptor();
     MethodDescriptor methodDescriptor =
         MethodDescriptor.create(
             true, // Static method.
-            targetMethodDescriptor.getVisibility(),
+            erasureMethodDescriptor.getVisibility(),
             enclosingClassTypeDescriptor, // enclosing class
-            targetMethodDescriptor.getMethodName(),
-            targetMethodDescriptor.isConstructor(),
-            targetMethodDescriptor.isNative(),
-            targetMethodDescriptor.getReturnTypeDescriptor(),
+            erasureMethodDescriptor.getMethodName(),
+            erasureMethodDescriptor.isConstructor(),
+            erasureMethodDescriptor.isNative(),
+            erasureMethodDescriptor.getReturnTypeDescriptor(),
             Iterables.concat(
                 Arrays.asList(instanceTypeDescriptor), // add the first parameter type.
-                targetMethodDescriptor.getParameterTypeDescriptors()));
+                erasureMethodDescriptor.getParameterTypeDescriptors()));
     @SuppressWarnings("unchecked")
 
     List<Expression> arguments = methodCall.getArguments();

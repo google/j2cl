@@ -47,7 +47,7 @@ class CastToBoxedType extends Object {
     let l = /**@type {Long} */ ($Casts.to(o, Long.$isInstance(o)));
     let s = /**@type {Short} */ ($Casts.to(o, Short.$isInstance(o)));
     let n =
-        /**@type {Number | ?number} */ ($Casts.to(o, Number.$isInstance(o)));
+        /**@type {(Number|?number)} */ ($Casts.to(o, Number.$isInstance(o)));
     let c = /**@type {Character} */ ($Casts.to(o, Character.$isInstance(o)));
     let bool = /**@type {?boolean} */ ($Casts.to(o, Boolean.$isInstance(o)));
   }

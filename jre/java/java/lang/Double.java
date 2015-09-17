@@ -18,7 +18,7 @@ package java.lang;
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Double.html">the
  * official Java API doc</a> for details.
  */
-public class Double extends Number {
+public class Double extends Number implements Comparable<Double> {
   public Double(double value) {
     // Super-source replaced.
   }
@@ -73,6 +73,17 @@ public class Double extends Number {
 
   @Override
   public String toString() {
+    // Super-source replaced.
+    throw new RuntimeException();
+  }
+
+  public int compare(double a, double b) {
+    // Super-source replaced.
+    throw new RuntimeException();
+  }
+
+  @Override
+  public int compareTo(Double d) {
     // Super-source replaced.
     throw new RuntimeException();
   }

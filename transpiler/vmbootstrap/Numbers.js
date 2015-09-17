@@ -1,12 +1,14 @@
 goog.module('vmbootstrap.NumbersModule');
 
 
-var Character = goog.require('gen.java.lang.CharacterModule').Character;
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Number = goog.require('gen.java.lang.NumberModule').Number;
-var Long = goog.require('nativebootstrap.LongUtilsModule').Long;
-var $double = goog.require('vmbootstrap.PrimitivesModule').$double;
-var Primitives = goog.require('vmbootstrap.PrimitivesModule').Primitives;
+let Character = goog.require('gen.java.lang.CharacterModule').Character;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Double = goog.require('gen.java.lang.DoubleModule').Double;
+let Number = goog.require('gen.java.lang.NumberModule').Number;
+let Long = goog.require('nativebootstrap.LongUtilsModule').Long;
+let $Casts = goog.require('vmbootstrap.CastsModule').Casts;
+let $double = goog.require('vmbootstrap.PrimitivesModule').$double;
+let Primitives = goog.require('vmbootstrap.PrimitivesModule').Primitives;
 
 /**
  * Provides devirtualized method implementations for Numbers.
@@ -125,6 +127,35 @@ class Numbers {
     } else {
       return obj.m_shortValue();
     }
+  }
+
+  /**
+   * @param {?number} a
+   * @param {?number} b
+   * @return {number}
+   * @public
+   */
+  static m_compareTo__java_lang_Number__java_lang_Double(a, b) {
+    if (a != null) {
+      if (b != null) {
+        return Double.m_compareTo__double__double(a, b);
+      } else {
+        return Double.m_compareTo__double__double(a, b.m_doubleValue());
+      }
+    } else {
+      return a.m_compareTo__java_lang_Double(b);
+    }
+  }
+
+  /**
+   * @param {?number} a
+   * @param {*} b
+   * @return {number}
+   * @public
+   */
+  static m_compareTo__java_lang_Number__java_lang_Object(a, b) {
+    return Numbers.m_compareTo__java_lang_Number__java_lang_Double(
+      a, /**@type {number} */ ($Casts.to(b, Double.$isInstance(b))));
   }
 };
 

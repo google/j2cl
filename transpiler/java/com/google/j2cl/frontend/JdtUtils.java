@@ -555,7 +555,8 @@ public class JdtUtils {
     }
     for (int i = 0; i < oneMethod.getParameterTypes().length; i++) {
       if (!oneMethod.getParameterTypes()[i]
-          .getErasure().isEqualTo(otherMethod.getParameterTypes()[i].getErasure())) {
+          .getErasure()
+          .isEqualTo(otherMethod.getParameterTypes()[i].getErasure())) {
         return false;
       }
     }
@@ -600,6 +601,11 @@ public class JdtUtils {
         compilationUnit.getAST().resolveWellKnownType("java.lang.Boolean");
     return isInstanceMethod(methodBinding)
         && methodBinding.getDeclaringClass().isEqualTo(javaLangBooleanBinding);
+  }
+
+  static boolean isComparableInstanceMethodBinding(IMethodBinding methodBinding) {
+    return isInstanceMethod(methodBinding)
+        && methodBinding.getDeclaringClass().getBinaryName().equals("java.lang.Comparable");
   }
 
   static IMethodBinding findSamMethodBinding(ITypeBinding typeBinding) {

@@ -9,7 +9,7 @@
 #set ($extendsClause = "")
 #end
 #set ($className = ${statementSourceGenerator.toSource($classType.Descriptor)})
-#set ($jsDocName = ${statementSourceGenerator.getJsDocName(${classType.Descriptor})})
+#set ($jsDocName = ${statementSourceGenerator.getJsDocName(${classType.Descriptor}, true)})
 #set ($mangledTypeName = ${ManglingNameUtils.getMangledName($classType.Descriptor)})
 #set ($simpleName = $classType.Descriptor.SimpleName)
 #set ($binaryName = ${TranspilerUtils.getBinaryName($classType.Descriptor)})

@@ -61,7 +61,7 @@ are copyright and licensed as follows:
 - implicitconversions (String + operator)
 - implicitconversions (binary operations and field initializers)
 - interfacedefaultmethod
-- interfacedevirtualization (Comparable, CharSequence, etc).
+- interfacedevirtualization (Comparable, CharSequence test on String).
 - jsinteropclass
 - jsinteropdispatch
 - jsinteropinterface
@@ -75,3 +75,4 @@ are copyright and licensed as follows:
 - private static clinit optimization
 - shorterfieldmangling (for fields in final classes, like enums)
 - simpleenum
+- stringunboxing

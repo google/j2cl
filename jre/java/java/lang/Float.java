@@ -18,7 +18,7 @@ package java.lang;
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Float.html">the
  * official Java API doc</a> for details.
  */
-public class Float extends Number {
+public class Float extends Number implements Comparable<Float> {
   private float value;
 
   public Float(float value) {
@@ -72,5 +72,21 @@ public class Float extends Number {
 
   public static Float valueOf(float f) {
     return new Float(f);
+  }
+
+  public static int compare(float x, float y) {
+    if (x < y) {
+      return -1;
+    }
+    if (x > y) {
+      return 1;
+    }
+    return 0;
+    // TODO: NaN.
+  }
+
+  @Override
+  public int compareTo(Float f) {
+    return compare(value, f.value);
   }
 }

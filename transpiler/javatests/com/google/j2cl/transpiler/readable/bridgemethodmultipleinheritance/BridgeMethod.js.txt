@@ -29,7 +29,7 @@ class SomeInterface {
 
   /**
    * @param {C_T} t
-   * @param {Number | ?number} n
+   * @param {(Number|?number)} n
    * @return {void}
    * @public
    */
@@ -218,7 +218,7 @@ exports.SuperParent = SuperParent;
 
 /**
  * @template C_T
- * @extends {SuperParent<C_T, Number | ?number>}
+ * @extends {SuperParent<C_T, (Number|?number)>}
  */
 class Parent extends SuperParent {
   /**
@@ -236,7 +236,7 @@ class Parent extends SuperParent {
 
   /**
    * @param {C_T} t
-   * @param {Number | ?number} s
+   * @param {(Number|?number)} s
    * @return {void}
    * @public
    */
@@ -285,14 +285,14 @@ class Parent extends SuperParent {
   /**
    * Synthetic method.
    * @param {C_T} arg0
-   * @param {Number | ?number} arg1
+   * @param {(Number|?number)} arg1
    * @return {void}
    * @public
    */
   m_foo__java_lang_Object__java_lang_Object(arg0, arg1) {
     this.m_foo__java_lang_Error__java_lang_Number(
         /**@type {Error} */ ($Casts.to(arg0, Error.$isInstance(arg0))),
-        /**@type {Number | ?number} */ (
+        /**@type {(Number|?number)} */ (
             $Casts.to(arg1, Number.$isInstance(arg1))));
   }
 
@@ -353,7 +353,7 @@ exports.Parent = Parent;
 
 /**
  * @extends {Parent<AssertionError>}
- * @implements {SomeInterface<AssertionError, Number | ?number>}
+ * @implements {SomeInterface<AssertionError, (Number|?number)>}
  */
 class BridgeMethod extends Parent {
   /**
@@ -371,7 +371,7 @@ class BridgeMethod extends Parent {
 
   /**
    * @param {AssertionError} a
-   * @param {Number | ?number} n
+   * @param {(Number|?number)} n
    * @return {void}
    * @public
    */
@@ -379,14 +379,14 @@ class BridgeMethod extends Parent {
 
   /**
    * @override
-   * @param {Number | ?number} t
+   * @param {(Number|?number)} t
    * @return {void}
    * @public
    */
   m_bar__java_lang_Number(t) {}
 
   /**
-   * @param {Number | ?number} t
+   * @param {(Number|?number)} t
    * @return {void}
    * @public
    */
@@ -418,7 +418,7 @@ class BridgeMethod extends Parent {
   /**
    * Synthetic method.
    * @param {AssertionError} arg0
-   * @param {Number | ?number} arg1
+   * @param {(Number|?number)} arg1
    * @return {void}
    * @public
    */
@@ -432,7 +432,7 @@ class BridgeMethod extends Parent {
   /**
    * Synthetic method.
    * @param {AssertionError} arg0
-   * @param {Number | ?number} arg1
+   * @param {(Number|?number)} arg1
    * @return {void}
    * @public
    */
@@ -440,14 +440,14 @@ class BridgeMethod extends Parent {
     this.m_foo__java_lang_AssertionError__java_lang_Number(
         /**@type {AssertionError} */ (
             $Casts.to(arg0, AssertionError.$isInstance(arg0))),
-        /**@type {Number | ?number} */ (
+        /**@type {(Number|?number)} */ (
             $Casts.to(arg1, Number.$isInstance(arg1))));
   }
 
   /**
    * Synthetic method.
    * @param {AssertionError} arg0
-   * @param {Number | ?number} arg1
+   * @param {(Number|?number)} arg1
    * @return {void}
    * @public
    */

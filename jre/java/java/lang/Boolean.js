@@ -1,9 +1,9 @@
 goog.module('gen.java.lang.BooleanModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Object = goog.require('gen.java.lang.CoreModule').Object;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 /**
@@ -26,6 +26,17 @@ class Boolean extends Object {
    */
   static $create__boolean(obj) {
     return obj;
+  }
+
+  /**
+   * @param {boolean} x
+   * @param {boolean} y
+   * @return {number}
+   * @public
+   * @nocollapse
+   */
+  static m_compareTo__boolean__boolean(x, y) {
+    return (x === y) ? 0 : (x ? 1 : -1);
   }
 
   /**

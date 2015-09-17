@@ -1,9 +1,9 @@
 goog.module('gen.java.lang.DoubleModule');
 
 
-var Class = goog.require('gen.java.lang.CoreModule').Class;
-var Number = goog.require('gen.java.lang.NumberModule').Number;
-var $Util = goog.require('nativebootstrap.UtilModule').Util;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Number = goog.require('gen.java.lang.NumberModule').Number;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
 
 
 /**
@@ -26,6 +26,23 @@ class Double extends Number {
    */
   static $create__double(obj) {
     return obj;
+  }
+
+  /**
+   * @param {number} x
+   * @param {number} y
+   * @return {number}
+   * @public
+   * @nocollapse
+   */
+  static m_compareTo__double__double(x, y) {
+    if (x < y) {
+      return -1;
+    } else if (x > y) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 
   /**

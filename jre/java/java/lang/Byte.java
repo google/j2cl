@@ -18,7 +18,7 @@ package java.lang;
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Byte.html">the
  * official Java API doc</a> for details.
  */
-public class Byte extends Number {
+public class Byte extends Number implements Comparable<Byte> {
   private byte value;
 
   public Byte(byte value) {
@@ -73,5 +73,14 @@ public class Byte extends Number {
   public static Byte valueOf(byte b) {
     //TODO: caching
     return new Byte(b);
+  }
+
+  public static int compare(byte x, byte y) {
+    return x - y;
+  }
+
+  @Override
+  public int compareTo(Byte b) {
+    return compare(value, b.value);
   }
 }
