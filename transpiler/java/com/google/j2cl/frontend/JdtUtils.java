@@ -40,12 +40,17 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 
+import org.eclipse.jdt.core.dom.ASTNode;
+import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
+import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.CompilationUnit;
+import org.eclipse.jdt.core.dom.FieldDeclaration;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.InfixExpression;
+import org.eclipse.jdt.core.dom.Initializer;
 import org.eclipse.jdt.core.dom.LambdaExpression;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.Modifier;
@@ -676,6 +681,27 @@ public class JdtUtils {
   }
 
   /**
+   * Returns whether {@code subTypeBinding} is a subtype of {@code superTypeBinding}.
+   */
+  static boolean isSubType(ITypeBinding subTypeBinding, ITypeBinding superTypeBinding) {
+    if (areSameErasedType(superTypeBinding, subTypeBinding)) {
+      return true;
+    }
+    ITypeBinding superClass = subTypeBinding.getSuperclass();
+    while (superClass != null) {
+      if (areSameErasedType(superTypeBinding, superClass)) {
+        return true;
+      }
+      superClass = superClass.getSuperclass();
+    }
+    return false;
+  }
+
+  static boolean areSameErasedType(ITypeBinding typeBinding, ITypeBinding otherTypeBinding) {
+    return typeBinding.getErasure().isEqualTo(otherTypeBinding.getErasure());
+  }
+
+  /**
    * Helper method to work around JDT habit of returning raw collections.
    */
   @SuppressWarnings("rawtypes")
@@ -700,6 +726,43 @@ public class JdtUtils {
       }
       node = node.getParent();
     }
+  }
+
+  /**
+   * Returns the type binding of the immediately enclosing type.
+   */
+  public static ITypeBinding findCurrentTypeBinding(org.eclipse.jdt.core.dom.ASTNode node) {
+    while (true) {
+      if (node == null) {
+        return null;
+      } else if (node instanceof AbstractTypeDeclaration) {
+        return ((AbstractTypeDeclaration) node).resolveBinding();
+      } else if (node instanceof AnonymousClassDeclaration) {
+        return ((AnonymousClassDeclaration) node).resolveBinding();
+      }
+      node = node.getParent();
+    }
+  }
+
+  /**
+   * Returns whether the ASTNode is in a static context.
+   */
+  public static boolean isInStaticContext(org.eclipse.jdt.core.dom.ASTNode node) {
+    org.eclipse.jdt.core.dom.ASTNode currentNode = node.getParent();
+    while (currentNode != null) {
+      switch (currentNode.getNodeType()) {
+        case ASTNode.METHOD_DECLARATION:
+          return isStatic(((MethodDeclaration) currentNode).getModifiers());
+        case ASTNode.FIELD_DECLARATION:
+          return isStatic(((FieldDeclaration) currentNode).getModifiers());
+        case ASTNode.INITIALIZER:
+          return isStatic(((Initializer) currentNode).getModifiers());
+        case ASTNode.ENUM_CONSTANT_DECLARATION: // enum constants are implicitly static.
+          return true;
+      }
+      currentNode = currentNode.getParent();
+    }
+    return false;
   }
 
   private JdtUtils() {}

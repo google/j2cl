@@ -143,10 +143,11 @@ class Arrays {
   /**
    * Sets the given value into the given index in the given array.
    *
+   * @template T
    * @param {Array<*>} array
    * @param {number} index
-   * @param {*} value
-   * @return {*}
+   * @param {T} value
+   * @return {T}
    * @public
    */
   static $set(array, index, value) {

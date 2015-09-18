@@ -1,0 +1,100 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/javascriptkeywords/JSKeyWords.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWordsModule');
+
+
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+
+
+class JSKeyWords extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_javascriptkeywords_JSKeyWords() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!JSKeyWords}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    JSKeyWords.$clinit();
+    let instance = new JSKeyWords;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_javascriptkeywords_JSKeyWords();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_javascriptkeywords_JSKeyWords() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_javascriptkeywords_JSKeyWords();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof JSKeyWords; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, JSKeyWords);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!JSKeyWords.$classJSKeyWords) {
+      JSKeyWords.$classJSKeyWords = Class.$createForClass(
+          $Util.$generateId('JSKeyWords'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords'));
+    }
+    return JSKeyWords.$classJSKeyWords;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports.JSKeyWords = JSKeyWords;

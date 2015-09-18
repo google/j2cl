@@ -4,6 +4,14 @@ package com.google.j2cl.transpiler.integration.localclasswithcaptures;
  * Test local classes with captured variables.
  */
 public class Main {
+  public int funInMain(int a, int b) {
+    return a + b + 11;
+  }
+
+  public int foo(int a) {
+    return a + 4;
+  }
+
   public int testSimple(final int p) {
     final int localVar = 1;
     class InnerClass {
@@ -17,6 +25,21 @@ public class Main {
       }
     }
     return new InnerClass().fun() + p; // localVar + p + p
+  }
+
+  public int testFunctionCall(final int p) {
+    final int localVar = 1;
+    class InnerClass {
+      public int fun() {
+        class InnerInnerClass {
+          public int bar() {
+            return funInMain(localVar, p) + Main.this.funInMain(localVar, p);
+          }
+        }
+        return new InnerInnerClass().bar(); // (localVar + p + 11) * 2
+      }
+    }
+    return new InnerClass().fun(); // (localVar + p + 11) * 2
   }
 
   public int testConstructor(final int p) {
@@ -68,11 +91,32 @@ public class Main {
     return new ChildClass().fun(20) + new AnotherChild().fun(100); // 30 + 110 = 140;
   }
 
+  public int testFunctionCallWithOverriding() {
+    class SubMain extends Main {
+      @Override
+      public int foo(int a) {
+        return a + 5;
+      }
+
+      public int test(int a) {
+        int result = funInMain(a, a); // a+a+11
+        result += Main.this.funInMain(a, a); // a+a+11
+        result += foo(a); // a+5
+        result += this.foo(a); // a+5
+        result += Main.this.foo(a); // it should be a+4, not a + 5.
+        return result;
+      }
+    }
+
+    return new SubMain().test(9);
+  }
+
   public static void main(String[] args) {
     Main m = new Main();
     assert m.testSimple(100) == 201;
     assert m.testConstructor(100) == 108;
     assert m.testClassWithSameName() == 30;
     assert m.testClassWithParent() == 140;
+    assert m.testFunctionCallWithOverriding() == 99;
   }
 }

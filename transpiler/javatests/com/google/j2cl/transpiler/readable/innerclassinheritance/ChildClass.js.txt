@@ -1,0 +1,403 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/innerclassinheritance/ChildClass.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClassModule');
+
+
+let ParentInner = goog.require('gen.com.google.j2cl.transpiler.readable.innerclassinheritance.ParentInnerModule').ParentInner;
+let ParentOuter = goog.require('gen.com.google.j2cl.transpiler.readable.innerclassinheritance.ParentOuterModule').ParentOuter;
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+
+
+class ChildClass extends ParentOuter {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {number}
+     */
+    this.f_fieldInOuter__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass =
+        0;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass() {
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_funInOuter() {}
+
+  /**
+   * @return {ChildClass$InnerClass}
+   * @package
+   */
+  m_$create_ChildClass$InnerClass_$pp_com_google_j2cl_transpiler_readable_innerclassinheritance() {
+    return ChildClass$InnerClass.$create(this);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testLocalClass() { ChildClass$1LocalClass.$create(this).m_test(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!ChildClass}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    ChildClass.$clinit();
+    let instance = new ChildClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass() {
+    this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentOuter();
+    this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof ChildClass; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, ChildClass);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!ChildClass.$classChildClass) {
+      ChildClass.$classChildClass = Class.$createForClass(
+          $Util.$generateId('ChildClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass'),
+          ParentOuter.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass'));
+    }
+    return ChildClass.$classChildClass;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { ParentOuter.$clinit(); }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports.ChildClass = ChildClass;
+
+
+
+class ChildClass$InnerClass extends ParentInner {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {number}
+     */
+    this.f_fieldInInner__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass =
+        0;
+    /**
+     * @public {ChildClass}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass() {
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_funInInner() {}
+
+  /**
+   * @return {number}
+   * @public
+   */
+  m_testInnerClass() {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass
+        .m_funInParentOuter();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass
+        .m_funInParentOuter();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass
+        .m_funInOuter();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass
+        .m_funInOuter();
+    this.m_funInParentInner();
+    this.m_funInParentInner();
+    this.m_funInInner();
+    this.m_funInInner();
+    let a =
+        this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass
+            .f_fieldInParentOuter__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentOuter;
+    a = this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass
+            .f_fieldInParentOuter__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentOuter;
+    a = this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass
+            .f_fieldInOuter__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass;
+    a = this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass
+            .f_fieldInOuter__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass;
+    a = this.f_fieldInParentInner__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentInner;
+    a = this.f_fieldInParentInner__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentInner;
+    a = this.f_fieldInInner__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass;
+    a = this.f_fieldInInner__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass;
+    return a;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {ChildClass} $outer_this
+   * @return {!ChildClass$InnerClass}
+   * @package
+   * @nocollapse
+   */
+  static $create($outer_this) {
+    ChildClass$InnerClass.$clinit();
+    let instance = new ChildClass$InnerClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass(
+            $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {ChildClass} $outer_this
+   * @package
+   */
+  $ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass =
+        $outer_this;
+    this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentInner();
+    this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof ChildClass$InnerClass;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, ChildClass$InnerClass);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!ChildClass$InnerClass.$classChildClass$InnerClass) {
+      ChildClass$InnerClass.$classChildClass$InnerClass = Class.$createForClass(
+          $Util.$generateId('InnerClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass'),
+          ParentInner.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.InnerClass'));
+    }
+    return ChildClass$InnerClass.$classChildClass$InnerClass;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { ParentInner.$clinit(); }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports.ChildClass$InnerClass = ChildClass$InnerClass;
+
+
+
+class ChildClass$1LocalClass extends ChildClass {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {ChildClass}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$1LocalClass =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$1LocalClass() {
+  }
+
+  /**
+   * @override
+   * @return {void}
+   * @public
+   */
+  m_funInParentOuter() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    this.m_funInOuter();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$1LocalClass
+        .m_funInOuter();
+    this.m_funInParentOuter();
+    this.m_funInParentOuter();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$1LocalClass
+        .m_funInParentOuter();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {ChildClass} $outer_this
+   * @return {!ChildClass$1LocalClass}
+   * @package
+   * @nocollapse
+   */
+  static $create($outer_this) {
+    ChildClass$1LocalClass.$clinit();
+    let instance = new ChildClass$1LocalClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$1LocalClass(
+            $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {ChildClass} $outer_this
+   * @package
+   */
+  $ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$1LocalClass(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$1LocalClass =
+        $outer_this;
+    this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass();
+    this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$1LocalClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof ChildClass$1LocalClass;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, ChildClass$1LocalClass);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!ChildClass$1LocalClass.$classChildClass$1LocalClass) {
+      ChildClass$1LocalClass
+          .$classChildClass$1LocalClass = Class.$createForClass(
+          $Util.$generateId('1LocalClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$1LocalClass'),
+          ChildClass.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.1LocalClass'));
+    }
+    return ChildClass$1LocalClass.$classChildClass$1LocalClass;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { ChildClass.$clinit(); }
+}
+;

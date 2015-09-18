@@ -73,6 +73,7 @@ are copyright and licensed as follows:
 - packageclasscollision
 - primitiveoverflow
 - private static clinit optimization
+- qualifiedsupermethodcall
 - shorterfieldmangling (for fields in final classes, like enums)
 - simpleenum
 - stringunboxing

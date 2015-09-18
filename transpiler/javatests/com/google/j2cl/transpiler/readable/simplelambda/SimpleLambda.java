@@ -7,6 +7,8 @@ interface MyInterface {
 public class SimpleLambda {
   public int field = 100;
 
+  public void funOuter() {}
+
   public int test(MyInterface intf, int n) {
     return this.field + intf.foo(n);
   }
@@ -37,6 +39,18 @@ public class SimpleLambda {
             i -> {
               int y = 1;
               return x + y + this.field + i + 1;
+            },
+            10);
+  }
+
+  public void testLambdaCallOuterFunction() {
+    int result =
+        test(
+            i -> {
+              funOuter();
+              this.funOuter();
+              SimpleLambda.this.funOuter();
+              return i + 2;
             },
             10);
   }

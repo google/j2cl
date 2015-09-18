@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.ASTUtils;
@@ -93,30 +92,12 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
     }
     List<Expression> arguments = new ArrayList<>(newInstance.getArguments());
     arguments.addAll(collectArgumentsForCaptures(typeDescriptor));
-    // add 'this' as the last argument to the constructor of a local class.
-    if (type.isLocal()) {
-      TypeDescriptor currentTypeDescriptor = getCurrentJavaType().getDescriptor();
-      // Expression: this;
-      Expression outerThisExpression = new ThisReference(currentTypeDescriptor);
-
-      // Lambdas never enclose any other type, so when an inner class is defined inside of a lambda
-      // its recorded enclosing type is actually the enclosing type of the lambda.
-      while (type.getEnclosingTypeDescriptor() != currentTypeDescriptor) {
-        // To reference that progressively more distant enclosing instance expand:
-        // Expression: this -> this.$outer_this;
-        JavaType currentType =
-            javaTypeByDescriptor.get(currentTypeDescriptor.getRawTypeDescriptor());
-        Field enclosingInstanceField = ASTUtils.getEnclosingInstanceField(currentType);
-        outerThisExpression =
-            new FieldAccess(outerThisExpression, enclosingInstanceField.getDescriptor());
-
-        currentTypeDescriptor = enclosingInstanceField.getDescriptor().getTypeDescriptor();
-      }
-
-      arguments.add(outerThisExpression);
+    // add qualifier of the NewInstance as the last argument to the constructor of a local class.
+    // the qualifier may be null if the local class is in a static context.
+    if (type.isLocal() && newInstance.getQualifier() != null) {
+      arguments.add(newInstance.getQualifier());
     }
     MethodDescriptor target = newInstance.getConstructorMethodDescriptor();
-    Preconditions.checkArgument(newInstance.getQualifier() == null);
     return new NewInstance(null, target, arguments);
   }
 
@@ -141,11 +122,13 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
   @Override
   public Node rewriteFieldAccess(FieldAccess fieldAccess) {
     // replace references to added field in the constructor with the reference to parameter.
-    if (!isConstructorOfNestedClass(getCurrentMethod())
-        || !parameterByFieldForCaptures.containsKey(fieldAccess.getTarget())) {
-      return fieldAccess;
+    if (isConstructorOfNestedClass(getCurrentMethod())
+        && parameterByFieldForCaptures.containsKey(fieldAccess.getTarget())
+        && fieldAccess.getTarget().getEnclosingClassTypeDescriptor()
+            == getCurrentJavaType().getDescriptor()) {
+      return parameterByFieldForCaptures.get(fieldAccess.getTarget()).getReference();
     }
-    return parameterByFieldForCaptures.get(fieldAccess.getTarget()).getReference();
+    return fieldAccess;
   }
 
   private List<Expression> collectArgumentsForCaptures(TypeDescriptor typeDescriptor) {
@@ -186,7 +169,8 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
             && constructorCall
                 .getTarget()
                 .getEnclosingClassTypeDescriptor()
-                .equals(getCurrentJavaType().getDescriptor());
+                .getRawTypeDescriptor()
+                .equals(getCurrentJavaType().getDescriptor().getRawTypeDescriptor());
     for (Field field : capturedFields) {
       Variable parameter = parameterByFieldForCaptures.get(field.getDescriptor());
       method.addParameter(parameter);
@@ -203,7 +187,7 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
                     field.getDescriptor()),
                 BinaryOperator.ASSIGN,
                 parameter.getReference());
-        method.getBody().getStatements().add(i + 1, new ExpressionStatement(initializer));
+        method.getBody().getStatements().add(i, new ExpressionStatement(initializer));
       }
       i++;
     }

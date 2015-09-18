@@ -1,0 +1,952 @@
+/**
+ * Transpiled from
+ * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/mixednestings/MixedNestings.java.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.mixednestings.MixedNestingsModule');
+
+
+let Class = goog.require('gen.java.lang.CoreModule').Class;
+let Object = goog.require('gen.java.lang.CoreModule').Object;
+let $Util = goog.require('nativebootstrap.UtilModule').Util;
+let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+
+
+/**
+ * @interface
+ */
+class MyInterface {
+  /**
+   * @param {number} a
+   * @return {number}
+   * @public
+   */
+  m_fun__int(a) {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_mixednestings_MyInterface =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+           instance
+               .$implements__com_google_j2cl_transpiler_readable_mixednestings_MyInterface;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+           classConstructor.prototype
+               .$implements__com_google_j2cl_transpiler_readable_mixednestings_MyInterface;
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!MyInterface.$classMyInterface) {
+      MyInterface.$classMyInterface = Class.$createForInterface(
+          $Util.$generateId('MyInterface'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.mixednestings.MyInterface'),
+          null,
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.mixednestings.MyInterface'));
+    }
+    return MyInterface.$classMyInterface;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {}
+}
+;
+
+
+MyInterface.$markImplementor(/** @type {Function} */ (MyInterface));
+
+/**
+ * Export class.
+ */
+exports.MyInterface = MyInterface;
+
+
+
+class MixedNestings extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_mm() {}
+
+  /**
+   * @return {MixedNestings$A}
+   * @package
+   */
+  m_$create_MixedNestings$A_$pp_com_google_j2cl_transpiler_readable_mixednestings() {
+    return MixedNestings$A.$create(this);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    this.m_$create_MixedNestings$A_$pp_com_google_j2cl_transpiler_readable_mixednestings()
+        .m_a();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!MixedNestings}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    MixedNestings.$clinit();
+    let instance = new MixedNestings;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof MixedNestings; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, MixedNestings);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!MixedNestings.$classMixedNestings) {
+      MixedNestings.$classMixedNestings = Class.$createForClass(
+          $Util.$generateId('MixedNestings'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings'));
+    }
+    return MixedNestings.$classMixedNestings;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports.MixedNestings = MixedNestings;
+
+
+
+class MixedNestings$A extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {MixedNestings}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_aa() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_a() { MixedNestings$A$1B.$create(this).m_b(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {MixedNestings} $outer_this
+   * @return {!MixedNestings$A}
+   * @package
+   * @nocollapse
+   */
+  static $create($outer_this) {
+    MixedNestings$A.$clinit();
+    let instance = new MixedNestings$A;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A(
+            $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {MixedNestings} $outer_this
+   * @package
+   */
+  $ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A =
+        $outer_this;
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof MixedNestings$A; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, MixedNestings$A);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!MixedNestings$A.$classMixedNestings$A) {
+      MixedNestings$A.$classMixedNestings$A = Class.$createForClass(
+          $Util.$generateId('A'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A'));
+    }
+    return MixedNestings$A.$classMixedNestings$A;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports.MixedNestings$A = MixedNestings$A;
+
+
+
+class MixedNestings$A$1B extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {MixedNestings$A}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B() {
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_bb() {}
+
+  /**
+   * @return {number}
+   * @public
+   */
+  m_b() {
+    let i = MixedNestings$A$1B$1.$create(this);
+    return i.m_fun__int(400);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {MixedNestings$A} $outer_this
+   * @return {!MixedNestings$A$1B}
+   * @package
+   * @nocollapse
+   */
+  static $create($outer_this) {
+    MixedNestings$A$1B.$clinit();
+    let instance = new MixedNestings$A$1B;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B(
+            $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {MixedNestings$A} $outer_this
+   * @package
+   */
+  $ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B =
+        $outer_this;
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof MixedNestings$A$1B;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, MixedNestings$A$1B);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!MixedNestings$A$1B.$classMixedNestings$A$1B) {
+      MixedNestings$A$1B.$classMixedNestings$A$1B = Class.$createForClass(
+          $Util.$generateId('1B'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A.1B'));
+    }
+    return MixedNestings$A$1B.$classMixedNestings$A$1B;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+
+/**
+ * @implements {MyInterface}
+ */
+class MixedNestings$A$1B$1 extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {MixedNestings$A$1B}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1 =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1() {
+  }
+
+  /**
+   * @override
+   * @param {number} a
+   * @return {number}
+   * @public
+   */
+  m_fun__int(a) {
+    let ii = MixedNestings$A$1B$1$lambda$0.$create(this);
+    return ii.m_fun__int(300);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {MixedNestings$A$1B} $outer_this
+   * @return {!MixedNestings$A$1B$1}
+   * @package
+   * @nocollapse
+   */
+  static $create($outer_this) {
+    MixedNestings$A$1B$1.$clinit();
+    let instance = new MixedNestings$A$1B$1;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1(
+            $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {MixedNestings$A$1B} $outer_this
+   * @package
+   */
+  $ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1 =
+        $outer_this;
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof MixedNestings$A$1B$1;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, MixedNestings$A$1B$1);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!MixedNestings$A$1B$1.$classMixedNestings$A$1B$1) {
+      MixedNestings$A$1B$1.$classMixedNestings$A$1B$1 = Class.$createForClass(
+          $Util.$generateId('1'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$1'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A.1B.1'));
+    }
+    return MixedNestings$A$1B$1.$classMixedNestings$A$1B$1;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+MyInterface.$markImplementor(MixedNestings$A$1B$1);
+
+
+
+/**
+ * @implements {MyInterface}
+ */
+class MixedNestings$A$1B$1$1 extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {MixedNestings$A$1B$1}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$1 =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$1() {
+  }
+
+  /**
+   * @override
+   * @param {number} b
+   * @return {number}
+   * @public
+   */
+  m_fun__int(b) { return b; }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {MixedNestings$A$1B$1} $outer_this
+   * @return {!MixedNestings$A$1B$1$1}
+   * @package
+   * @nocollapse
+   */
+  static $create($outer_this) {
+    MixedNestings$A$1B$1$1.$clinit();
+    let instance = new MixedNestings$A$1B$1$1;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$1(
+            $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {MixedNestings$A$1B$1} $outer_this
+   * @package
+   */
+  $ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$1(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$1 =
+        $outer_this;
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$1();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof MixedNestings$A$1B$1$1;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, MixedNestings$A$1B$1$1);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!MixedNestings$A$1B$1$1.$classMixedNestings$A$1B$1$1) {
+      MixedNestings$A$1B$1$1
+          .$classMixedNestings$A$1B$1$1 = Class.$createForClass(
+          $Util.$generateId('1'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$1$1'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A.1B.1.1'));
+    }
+    return MixedNestings$A$1B$1$1.$classMixedNestings$A$1B$1$1;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+MyInterface.$markImplementor(MixedNestings$A$1B$1$1);
+
+
+
+/**
+ * @implements {MyInterface}
+ */
+class MixedNestings$A$1B$1$lambda$1 extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {MixedNestings$A$1B$1}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$lambda$1 =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$lambda$1() {
+  }
+
+  /**
+   * @param {number} m
+   * @return {number}
+   * @private
+   */
+  lambda$1(m) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$lambda$1
+        .f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1
+        .f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B
+        .f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A
+        .m_mm();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$lambda$1
+        .f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1
+        .f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B
+        .m_aa();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$lambda$1
+        .f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1
+        .m_bb();
+    return MixedNestings$A$1B$1$1
+        .$create(
+            this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$lambda$1)
+        .m_fun__int(100);
+  }
+
+  /**
+   * @override
+   * @param {number} arg0
+   * @return {number}
+   * @public
+   */
+  m_fun__int(arg0) { return this.lambda$1(arg0); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {MixedNestings$A$1B$1} $outer_this
+   * @return {!MixedNestings$A$1B$1$lambda$1}
+   * @private
+   * @nocollapse
+   */
+  static $create($outer_this) {
+    MixedNestings$A$1B$1$lambda$1.$clinit();
+    let instance = new MixedNestings$A$1B$1$lambda$1;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$lambda$1(
+            $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {MixedNestings$A$1B$1} $outer_this
+   * @private
+   */
+  $ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$lambda$1(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$lambda$1 =
+        $outer_this;
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$lambda$1();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof MixedNestings$A$1B$1$lambda$1;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, MixedNestings$A$1B$1$lambda$1);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!MixedNestings$A$1B$1$lambda$1.$classMixedNestings$A$1B$1$lambda$1) {
+      MixedNestings$A$1B$1$lambda$1
+          .$classMixedNestings$A$1B$1$lambda$1 = Class.$createForClass(
+          $Util.$generateId('lambda$1'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$1$lambda$1'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A.1B.1.lambda.1'));
+    }
+    return MixedNestings$A$1B$1$lambda$1.$classMixedNestings$A$1B$1$lambda$1;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+MyInterface.$markImplementor(MixedNestings$A$1B$1$lambda$1);
+
+
+
+/**
+ * @implements {MyInterface}
+ */
+class MixedNestings$A$1B$1$lambda$0 extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {MixedNestings$A$1B$1}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$lambda$0 =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$lambda$0() {
+  }
+
+  /**
+   * @param {number} n
+   * @return {number}
+   * @private
+   */
+  lambda$0(n) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$lambda$0
+        .f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1
+        .f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B
+        .f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A
+        .m_mm();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$lambda$0
+        .f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1
+        .f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B
+        .m_aa();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$lambda$0
+        .f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1
+        .m_bb();
+    let iii = MixedNestings$A$1B$1$lambda$1.$create(
+        this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$lambda$0);
+    return iii.m_fun__int(200);
+  }
+
+  /**
+   * @override
+   * @param {number} arg0
+   * @return {number}
+   * @public
+   */
+  m_fun__int(arg0) { return this.lambda$0(arg0); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {MixedNestings$A$1B$1} $outer_this
+   * @return {!MixedNestings$A$1B$1$lambda$0}
+   * @private
+   * @nocollapse
+   */
+  static $create($outer_this) {
+    MixedNestings$A$1B$1$lambda$0.$clinit();
+    let instance = new MixedNestings$A$1B$1$lambda$0;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$lambda$0(
+            $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {MixedNestings$A$1B$1} $outer_this
+   * @private
+   */
+  $ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$lambda$0(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$lambda$0 =
+        $outer_this;
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$lambda$0();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof MixedNestings$A$1B$1$lambda$0;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, MixedNestings$A$1B$1$lambda$0);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    if (!MixedNestings$A$1B$1$lambda$0.$classMixedNestings$A$1B$1$lambda$0) {
+      MixedNestings$A$1B$1$lambda$0
+          .$classMixedNestings$A$1B$1$lambda$0 = Class.$createForClass(
+          $Util.$generateId('lambda$0'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$1$lambda$0'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A.1B.1.lambda.0'));
+    }
+    return MixedNestings$A$1B$1$lambda$0.$classMixedNestings$A$1B$1$lambda$0;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Object.$clinit(); }
+}
+;
+
+
+MyInterface.$markImplementor(MixedNestings$A$1B$1$lambda$0);
