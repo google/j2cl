@@ -40,6 +40,12 @@ are copyright and licensed as follows:
     ?boolean->boolean.
 - Fix "inconsistent return type" error with checktypes in "LambdaNestingInAnonymousClasses"
 - Investigate if label names (from LabeledStatements) are allowed to collide with other identifiers.
+- Investigate if the size regression by cl/103334620 can be fixed.
+    The direct cause of the size regression is that making
+    Byte/Character/Float/Integer/Long/Short implement Comparable,
+    and each Comparable.$markImplementor(...) was not stripped, even though
+    they are not called. See cl/103587701 for a repro case and a deeper
+    investigation of the cause.
 
 ## Tracking Closure warning issues
 - https://b.corp.google.com/hotlists/269212
