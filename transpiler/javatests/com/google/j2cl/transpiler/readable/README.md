@@ -46,7 +46,7 @@ are copyright and licensed as follows:
 - b/20102666 WARNING - actual parameter of Foo.$markImplementor does not match
   formal parameter
 
-## Likely readable examples to add (remove some redundant)
+## TODOs
 - anonymousclassforfunctionalinterface (transpiled to function)
 - arithmetic exception for integers (e.g. divide by zero / mod by zero)
 - breakwithlabel
