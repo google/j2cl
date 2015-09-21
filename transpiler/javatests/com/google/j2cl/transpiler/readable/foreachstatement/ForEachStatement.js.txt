@@ -1,127 +1,24 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/foreachstatement/ForEachStatement.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatementModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let Iterable = goog.require('gen.java.lang.IterableModule').Iterable;
-let Throwable = goog.require('gen.java.lang.ThrowableModule').Throwable;
-let Iterator = goog.require('gen.java.util.IteratorModule').Iterator;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
-let $Objects = goog.require('vmbootstrap.ObjectsModule').Objects;
-let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
-let $void = goog.require('vmbootstrap.PrimitivesModule').$void;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _Iterable = goog.require('gen.java.lang.Iterable');
+let _Throwable = goog.require('gen.java.lang.Throwable');
+let _Iterator = goog.require('gen.java.util.Iterator');
+let _$Arrays = goog.require('vmbootstrap.Arrays');
+let _$Objects = goog.require('vmbootstrap.Objects');
+let _$int = goog.require('vmbootstrap.primitives.$int');
+let _$void = goog.require('vmbootstrap.primitives.$void');
 
 
-class ForEachStatement extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement() {
-  }
-
-  /**
-   * @param {Iterable<Throwable>} iterable
-   * @return {void}
-   * @public
-   */
-  m_test__java_lang_Iterable(iterable) {
-    for (let $iterator = iterable.m_iterator(); $iterator.m_hasNext();) {
-      let t = $iterator.m_next();
-      $Objects.m_toString__java_lang_Object(t);
-    }
-    for (let $array = /**@type {Array<Throwable>} */ (
-                 $Arrays.$create([10], Throwable)),
-             $index = 0;
-         $index < $array.length; $index++) {
-      let t = $array[$index];
-      $Objects.m_toString__java_lang_Object(t);
-    }
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!ForEachStatement}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    ForEachStatement.$clinit();
-    let instance = new ForEachStatement;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof ForEachStatement; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, ForEachStatement);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!ForEachStatement.$classForEachStatement) {
-      ForEachStatement.$classForEachStatement = Class.$createForClass(
-          $Util.$generateId('ForEachStatement'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement'));
-    }
-    return ForEachStatement.$classForEachStatement;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.ForEachStatement = ForEachStatement;
+// Re-exports the implementation.
+var ForEachStatement = goog.require('gen.com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement$impl');
+exports = ForEachStatement;

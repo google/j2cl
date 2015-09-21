@@ -1,0 +1,139 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Iterable = goog.forwardDeclare('gen.java.lang.Iterable$impl');
+let Throwable = goog.forwardDeclare('gen.java.lang.Throwable$impl');
+let Iterator = goog.forwardDeclare('gen.java.util.Iterator$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
+
+
+class ForEachStatement extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement() {
+  }
+
+  /**
+   * @param {Iterable<Throwable>} iterable
+   * @return {void}
+   * @public
+   */
+  m_test__java_lang_Iterable(iterable) {
+    for (let $iterator = iterable.m_iterator(); $iterator.m_hasNext();) {
+      let t = $iterator.m_next();
+      $Objects.m_toString__java_lang_Object(t);
+    }
+    for (let $array = /**@type {Array<Throwable>} */ (
+                 $Arrays.$create([10], Throwable)),
+             $index = 0;
+         $index < $array.length; $index++) {
+      let t = $array[$index];
+      $Objects.m_toString__java_lang_Object(t);
+    }
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!ForEachStatement}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    ForEachStatement.$clinit();
+    let instance = new ForEachStatement;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof ForEachStatement; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, ForEachStatement);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    ForEachStatement.$clinit();
+    if (!ForEachStatement.$classForEachStatement) {
+      ForEachStatement.$classForEachStatement = Class.$createForClass(
+          $Util.$generateId('ForEachStatement'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement'));
+    }
+    return ForEachStatement.$classForEachStatement;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Iterable = goog.module.get('gen.java.lang.Iterable$impl');
+    Throwable = goog.module.get('gen.java.lang.Throwable$impl');
+    Iterator = goog.module.get('gen.java.util.Iterator$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $Objects = goog.module.get('vmbootstrap.Objects$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = ForEachStatement;

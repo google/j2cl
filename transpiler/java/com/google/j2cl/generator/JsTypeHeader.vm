@@ -1,0 +1,23 @@
+/**
+ * Header transpiled from $classType.Descriptor.RawTypeDescriptor.SourceName.
+ */
+goog.module('${selfImport.getHeaderFileName()}');
+
+
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+#foreach($eagerImport in ${eagerImports})
+#set ($alias = ${eagerImport.Alias})
+let _$alias = goog.require('${eagerImport.getHeaderFileName()}');
+#end
+#foreach($lazyImport in ${lazyImports})
+#set ($alias = ${lazyImport.Alias})
+let _$alias = goog.require('${lazyImport.getHeaderFileName()}');
+#end
+
+
+// Re-exports the implementation.
+#set ($className = ${statementSourceGenerator.toSource($classType.Descriptor)})
+var $className = goog.require('${selfImport.getImplFileName()}');
+#set ($className = ${statementSourceGenerator.toSource($classType.Descriptor)})
+exports = $className;

@@ -1,0 +1,147 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$1LocalClass.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$1LocalClass$impl');
+
+
+let ChildClass = goog.require('gen.com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let ParentOuter = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.innerclassinheritance.ParentOuter$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+class ChildClass$1LocalClass extends ChildClass {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {ChildClass}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$1LocalClass =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$1LocalClass() {
+  }
+
+  /**
+   * @override
+   * @return {void}
+   * @public
+   */
+  m_funInParentOuter() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    this.m_funInOuter();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$1LocalClass
+        .m_funInOuter();
+    this.m_funInParentOuter();
+    this.m_funInParentOuter();
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$1LocalClass
+        .m_funInParentOuter();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {ChildClass} $outer_this
+   * @return {!ChildClass$1LocalClass}
+   * @public
+   * @nocollapse
+   */
+  static $create($outer_this) {
+    ChildClass$1LocalClass.$clinit();
+    let instance = new ChildClass$1LocalClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$1LocalClass(
+            $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {ChildClass} $outer_this
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$1LocalClass(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$1LocalClass =
+        $outer_this;
+    this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass();
+    this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$1LocalClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof ChildClass$1LocalClass;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, ChildClass$1LocalClass);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    ChildClass$1LocalClass.$clinit();
+    if (!ChildClass$1LocalClass.$classChildClass$1LocalClass) {
+      ChildClass$1LocalClass
+          .$classChildClass$1LocalClass = Class.$createForClass(
+          $Util.$generateId('1LocalClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$1LocalClass'),
+          ChildClass.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.1LocalClass'));
+    }
+    return ChildClass$1LocalClass.$classChildClass$1LocalClass;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    ParentOuter = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.innerclassinheritance.ParentOuter$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    ChildClass.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = ChildClass$1LocalClass;

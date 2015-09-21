@@ -61,11 +61,6 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public String getCompilationUnitSourceName() {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
   public String getSourceName() {
     throw new UnsupportedOperationException();
   }

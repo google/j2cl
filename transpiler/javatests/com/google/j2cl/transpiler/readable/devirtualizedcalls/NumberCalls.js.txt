@@ -1,208 +1,30 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/devirtualizedcalls/NumberCalls.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.devirtualizedcalls.NumberCalls.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.devirtualizedcalls.NumberCallsModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.devirtualizedcalls.NumberCalls');
 
 
-let Boolean = goog.require('gen.java.lang.BooleanModule').Boolean;
-let Byte = goog.require('gen.java.lang.ByteModule').Byte;
-let Character = goog.require('gen.java.lang.CharacterModule').Character;
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let Double = goog.require('gen.java.lang.DoubleModule').Double;
-let Float = goog.require('gen.java.lang.FloatModule').Float;
-let Integer = goog.require('gen.java.lang.IntegerModule').Integer;
-let Long = goog.require('gen.java.lang.LongModule').Long;
-let Number = goog.require('gen.java.lang.NumberModule').Number;
-let Short = goog.require('gen.java.lang.ShortModule').Short;
-let $LongUtils = goog.require('nativebootstrap.LongUtilsModule').LongUtils;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $Booleans = goog.require('vmbootstrap.BooleansModule').Booleans;
-let $Numbers = goog.require('vmbootstrap.NumbersModule').Numbers;
-let $Primitives = goog.require('vmbootstrap.PrimitivesModule').Primitives;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$LongUtils = goog.require('nativebootstrap.LongUtils');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Boolean = goog.require('gen.java.lang.Boolean');
+let _Byte = goog.require('gen.java.lang.Byte');
+let _Character = goog.require('gen.java.lang.Character');
+let _Class = goog.require('gen.java.lang.Class');
+let _Double = goog.require('gen.java.lang.Double');
+let _Float = goog.require('gen.java.lang.Float');
+let _Integer = goog.require('gen.java.lang.Integer');
+let _Long = goog.require('gen.java.lang.Long');
+let _Number = goog.require('gen.java.lang.Number');
+let _Short = goog.require('gen.java.lang.Short');
+let _$Booleans = goog.require('vmbootstrap.Booleans');
+let _$Numbers = goog.require('vmbootstrap.Numbers');
+let _$Primitives = goog.require('vmbootstrap.primitives.Primitives');
 
 
-class NumberCalls extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_devirtualizedcalls_NumberCalls() {}
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_main() {
-    let i = Integer.$create__int(1);
-    $Numbers.m_byteValue__java_lang_Number(i);
-    $Numbers.m_doubleValue__java_lang_Number(i);
-    $Numbers.m_floatValue__java_lang_Number(i);
-    $Numbers.m_intValue__java_lang_Number(i);
-    $Numbers.m_longValue__java_lang_Number(i);
-    $Numbers.m_shortValue__java_lang_Number(i);
-    let ii = Integer.$create__int(1);
-    ii.m_byteValue();
-    ii.m_doubleValue();
-    ii.m_floatValue();
-    ii.m_intValue();
-    ii.m_longValue();
-    ii.m_shortValue();
-    let d = Double.$create__double(1.1);
-    $Numbers.m_byteValue__java_lang_Number(d);
-    $Numbers.m_doubleValue__java_lang_Number(d);
-    $Numbers.m_floatValue__java_lang_Number(d);
-    $Numbers.m_intValue__java_lang_Number(d);
-    $Numbers.m_longValue__java_lang_Number(d);
-    $Numbers.m_shortValue__java_lang_Number(d);
-    let dd = Double.$create__double(1.1);
-    $Numbers.m_byteValue__java_lang_Number(dd);
-    $Numbers.m_doubleValue__java_lang_Number(dd);
-    $Numbers.m_floatValue__java_lang_Number(dd);
-    $Numbers.m_intValue__java_lang_Number(dd);
-    $Numbers.m_longValue__java_lang_Number(dd);
-    $Numbers.m_shortValue__java_lang_Number(dd);
-    let s = Short.$create__short($Primitives.$castIntToShort(1));
-    $Numbers.m_byteValue__java_lang_Number(s);
-    $Numbers.m_doubleValue__java_lang_Number(s);
-    $Numbers.m_floatValue__java_lang_Number(s);
-    $Numbers.m_intValue__java_lang_Number(s);
-    $Numbers.m_longValue__java_lang_Number(s);
-    $Numbers.m_shortValue__java_lang_Number(s);
-    let ss = Short.$create__short($Primitives.$castIntToShort(1));
-    ss.m_byteValue();
-    ss.m_doubleValue();
-    ss.m_floatValue();
-    ss.m_intValue();
-    ss.m_longValue();
-    ss.m_shortValue();
-    let b = Byte.$create__byte($Primitives.$castIntToByte(1));
-    $Numbers.m_byteValue__java_lang_Number(b);
-    $Numbers.m_doubleValue__java_lang_Number(b);
-    $Numbers.m_floatValue__java_lang_Number(b);
-    $Numbers.m_intValue__java_lang_Number(b);
-    $Numbers.m_longValue__java_lang_Number(b);
-    $Numbers.m_shortValue__java_lang_Number(b);
-    let bb = Byte.$create__byte($Primitives.$castIntToByte(1));
-    bb.m_byteValue();
-    bb.m_doubleValue();
-    bb.m_floatValue();
-    bb.m_intValue();
-    bb.m_longValue();
-    bb.m_shortValue();
-    let f = Float.$create__float(1.1);
-    $Numbers.m_byteValue__java_lang_Number(f);
-    $Numbers.m_doubleValue__java_lang_Number(f);
-    $Numbers.m_floatValue__java_lang_Number(f);
-    $Numbers.m_intValue__java_lang_Number(f);
-    $Numbers.m_longValue__java_lang_Number(f);
-    $Numbers.m_shortValue__java_lang_Number(f);
-    let ff = Float.$create__float(1.1);
-    ff.m_byteValue();
-    ff.m_doubleValue();
-    ff.m_floatValue();
-    ff.m_intValue();
-    ff.m_longValue();
-    ff.m_shortValue();
-    let l = Long.$create__long($LongUtils.$fromInt(1));
-    $Numbers.m_byteValue__java_lang_Number(l);
-    $Numbers.m_doubleValue__java_lang_Number(l);
-    $Numbers.m_floatValue__java_lang_Number(l);
-    $Numbers.m_intValue__java_lang_Number(l);
-    $Numbers.m_longValue__java_lang_Number(l);
-    $Numbers.m_shortValue__java_lang_Number(l);
-    let ll = Long.$create__long($LongUtils.$fromInt(1));
-    ll.m_byteValue();
-    ll.m_doubleValue();
-    ll.m_floatValue();
-    ll.m_intValue();
-    ll.m_longValue();
-    ll.m_shortValue();
-    let c = Character.$create__char(97 /* 'a' */);
-    c.m_charValue();
-    let bool = Boolean.$create__boolean(true);
-    $Booleans.m_booleanValue__java_lang_Boolean(bool);
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!NumberCalls}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    NumberCalls.$clinit();
-    let instance = new NumberCalls;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_NumberCalls();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_NumberCalls() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_devirtualizedcalls_NumberCalls();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof NumberCalls; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, NumberCalls);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!NumberCalls.$classNumberCalls) {
-      NumberCalls.$classNumberCalls = Class.$createForClass(
-          $Util.$generateId('NumberCalls'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.devirtualizedcalls.NumberCalls'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.devirtualizedcalls.NumberCalls'));
-    }
-    return NumberCalls.$classNumberCalls;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.NumberCalls = NumberCalls;
+// Re-exports the implementation.
+var NumberCalls = goog.require('gen.com.google.j2cl.transpiler.readable.devirtualizedcalls.NumberCalls$impl');
+exports = NumberCalls;

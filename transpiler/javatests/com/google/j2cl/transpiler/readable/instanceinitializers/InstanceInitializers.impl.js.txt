@@ -1,0 +1,121 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.instanceinitializers.InstanceInitializers.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.instanceinitializers.InstanceInitializers$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class InstanceInitializers extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {number}
+     */
+    this.f_field__com_google_j2cl_transpiler_readable_instanceinitializers_InstanceInitializers =
+        0;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_instanceinitializers_InstanceInitializers() {
+    this.f_field__com_google_j2cl_transpiler_readable_instanceinitializers_InstanceInitializers =
+        1;
+    this.f_field__com_google_j2cl_transpiler_readable_instanceinitializers_InstanceInitializers =
+        2;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!InstanceInitializers}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    InstanceInitializers.$clinit();
+    let instance = new InstanceInitializers;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_instanceinitializers_InstanceInitializers();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_instanceinitializers_InstanceInitializers() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_instanceinitializers_InstanceInitializers();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof InstanceInitializers;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, InstanceInitializers);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    InstanceInitializers.$clinit();
+    if (!InstanceInitializers.$classInstanceInitializers) {
+      InstanceInitializers.$classInstanceInitializers = Class.$createForClass(
+          $Util.$generateId('InstanceInitializers'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.instanceinitializers.InstanceInitializers'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.instanceinitializers.InstanceInitializers'));
+    }
+    return InstanceInitializers.$classInstanceInitializers;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = InstanceInitializers;

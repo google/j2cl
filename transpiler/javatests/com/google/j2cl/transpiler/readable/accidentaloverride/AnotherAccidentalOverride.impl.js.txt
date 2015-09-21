@@ -1,0 +1,132 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.accidentaloverride.AnotherAccidentalOverride.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.accidentaloverride.AnotherAccidentalOverride$impl');
+
+
+let Parent = goog.require('gen.com.google.j2cl.transpiler.readable.accidentaloverride.Parent$impl');
+let SuperInterface = goog.require('gen.com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let AssertionError = goog.forwardDeclare('gen.java.lang.AssertionError$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+/**
+ * @extends {Parent<AssertionError>}
+ * @implements {SuperInterface<AssertionError>}
+ */
+class AnotherAccidentalOverride extends Parent {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_accidentaloverride_AnotherAccidentalOverride() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!AnotherAccidentalOverride}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    AnotherAccidentalOverride.$clinit();
+    let instance = new AnotherAccidentalOverride;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_accidentaloverride_AnotherAccidentalOverride();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_accidentaloverride_AnotherAccidentalOverride() {
+    this.$ctor__com_google_j2cl_transpiler_readable_accidentaloverride_Parent();
+    this.$init__com_google_j2cl_transpiler_readable_accidentaloverride_AnotherAccidentalOverride();
+  }
+
+  /**
+   * Synthetic method.
+   * @param {AssertionError} arg0
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object(arg0) {
+    this.m_foo__java_lang_Error(/**@type {AssertionError} */ (
+        $Casts.to(arg0, AssertionError.$isInstance(arg0))));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof AnotherAccidentalOverride;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, AnotherAccidentalOverride);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    AnotherAccidentalOverride.$clinit();
+    if (!AnotherAccidentalOverride.$classAnotherAccidentalOverride) {
+      AnotherAccidentalOverride
+          .$classAnotherAccidentalOverride = Class.$createForClass(
+          $Util.$generateId('AnotherAccidentalOverride'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.accidentaloverride.AnotherAccidentalOverride'),
+          Parent.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.accidentaloverride.AnotherAccidentalOverride'));
+    }
+    return AnotherAccidentalOverride.$classAnotherAccidentalOverride;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    AssertionError = goog.module.get('gen.java.lang.AssertionError$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    Parent.$clinit();
+  }
+}
+;
+
+
+SuperInterface.$markImplementor(AnotherAccidentalOverride);
+
+
+
+/**
+ * Export class.
+ */
+exports = AnotherAccidentalOverride;

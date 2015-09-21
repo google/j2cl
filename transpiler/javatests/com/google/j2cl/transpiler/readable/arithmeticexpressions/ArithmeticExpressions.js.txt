@@ -1,124 +1,19 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/arithmeticexpressions/ArithmeticExpressions.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressionsModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
-let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _$boolean = goog.require('vmbootstrap.primitives.$boolean');
+let _$int = goog.require('vmbootstrap.primitives.$int');
 
 
-class ArithmeticExpressions extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions() {
-  }
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_main() {
-    let a = 10;
-    let b = a++;
-    let c = a--;
-    let d = ++a;
-    let e = --a;
-    let f = -a;
-    let g = a;
-    let h = ~a;
-    let i = 1 + 1 + 2 - 5;
-    let j = (1 + 2) * (3 + 4);
-    let k = !(1 + 2 + 3 == 4);
-    let l = (1 + 2 != 4);
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!ArithmeticExpressions}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    ArithmeticExpressions.$clinit();
-    let instance = new ArithmeticExpressions;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) {
-    return instance instanceof ArithmeticExpressions;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, ArithmeticExpressions);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!ArithmeticExpressions.$classArithmeticExpressions) {
-      ArithmeticExpressions.$classArithmeticExpressions = Class.$createForClass(
-          $Util.$generateId('ArithmeticExpressions'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions'));
-    }
-    return ArithmeticExpressions.$classArithmeticExpressions;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.ArithmeticExpressions = ArithmeticExpressions;
+// Re-exports the implementation.
+var ArithmeticExpressions = goog.require('gen.com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions$impl');
+exports = ArithmeticExpressions;

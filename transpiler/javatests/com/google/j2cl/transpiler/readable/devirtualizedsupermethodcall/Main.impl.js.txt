@@ -1,0 +1,133 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.Main.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.Main$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let FooCallsSuperObjectMethod = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.FooCallsSuperObjectMethod$impl');
+let SubNumber = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+
+class Main extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_Main() {
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    let fooCallsSuperObjectMethods = FooCallsSuperObjectMethod.$create();
+    $Objects.m_hashCode__java_lang_Object(fooCallsSuperObjectMethods);
+    let sn = SubNumber.$create();
+    $Numbers.m_byteValue__java_lang_Number(sn);
+    sn.m_doubleValue();
+    sn.m_floatValue();
+    sn.m_intValue();
+    $Numbers.m_shortValue__java_lang_Number(sn);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Main}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    Main.$clinit();
+    let instance = new Main;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_Main();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_Main() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_Main();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof Main; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Main);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    Main.$clinit();
+    if (!Main.$classMain) {
+      Main.$classMain = Class.$createForClass(
+          $Util.$generateId('Main'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.Main'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.Main'));
+    }
+    return Main.$classMain;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    FooCallsSuperObjectMethod = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.FooCallsSuperObjectMethod$impl');
+    SubNumber = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
+    $Objects = goog.module.get('vmbootstrap.Objects$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = Main;

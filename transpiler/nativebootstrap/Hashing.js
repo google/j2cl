@@ -1,46 +1,9 @@
-goog.module('nativebootstrap.HashingModule');
-
-
 /**
- * Utility functions for setting and retrieving system level hashcodes.
+ * Header hand rolled.
  */
-class Hashing {
-  /**
-   * Gets a hash code on the passed-in object.
-   *
-   * @param {*} obj
-   * @return {number}
-   * @public
-   */
-  static $getHashCode(obj) {
-    let o = /** @type {Object} */ (obj);
-    return o.$systemHashCode ||
-           (window.Object.defineProperties(
-                o,
-                {
-                  $systemHashCode:
-                      {value: Hashing.$getNextHashId(), enumerable: false}
-                }),
-            o.$systemHashCode);
-  }
-
-  /**
-   * Gets the next hash code.
-   *
-   * @return {number}
-   * @private
-   */
-  static $getNextHashId() { return ++Hashing.$nextHashId_; }
-};
+goog.module('nativebootstrap.Hashing');
 
 
-/**
- * @private {number}
- */
-Hashing.$nextHashId_ = 0;
-
-
-/**
- * Exported class.
- */
-exports.Hashing = Hashing;
+// Re-exports the implementation.
+let Hashing = goog.require('nativebootstrap.Hashing$impl');
+exports = Hashing;

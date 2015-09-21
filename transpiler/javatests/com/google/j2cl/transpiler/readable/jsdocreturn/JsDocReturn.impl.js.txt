@@ -1,0 +1,117 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsdocreturn.JsDocReturn.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.jsdocreturn.JsDocReturn$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+class JsDocReturn extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsdocreturn_JsDocReturn() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test1() {}
+
+  /**
+   * @return {number}
+   * @public
+   */
+  m_test2() { return 1; }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!JsDocReturn}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    JsDocReturn.$clinit();
+    let instance = new JsDocReturn;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsdocreturn_JsDocReturn();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsdocreturn_JsDocReturn() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_jsdocreturn_JsDocReturn();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof JsDocReturn; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, JsDocReturn);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    JsDocReturn.$clinit();
+    if (!JsDocReturn.$classJsDocReturn) {
+      JsDocReturn.$classJsDocReturn = Class.$createForClass(
+          $Util.$generateId('JsDocReturn'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsdocreturn.JsDocReturn'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsdocreturn.JsDocReturn'));
+    }
+    return JsDocReturn.$classJsDocReturn;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = JsDocReturn;

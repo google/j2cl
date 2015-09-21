@@ -1,9 +1,9 @@
 """j2cl_transpile build rule.
 
 This build extension defines a new rule j2cl_transpile, that takes a
-java_library as input and emits JavaScript for each Java file from the
-java_library. Since skylark does not allow access to native providers yet, one
-still has to list srcs and dependencies manually.
+java_library as input and emits a bundle zip of JavaScript transpiled from
+the Java files in the java_library. Since skylark does not allow access to
+native providers yet, one still has to list srcs and dependencies manually.
 
 Here is an example use of j2cl_transpile:
 
@@ -28,16 +28,16 @@ j2cl_transpile directly.
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_root")
 
 
-# TODO: replace with j2cl_transpile_zip.bzl when Blaze is ready.
 def _impl(ctx):
   """Implementation for j2cl_transpile"""
+  separator = ctx.configuration.host_path_separator
   java_files = ctx.files.srcs  # java files that need to be compiled
   super_java_files = ctx.files.super_srcs  # java files whose js to ignore
   java_deps = ctx.files.java_deps
   java_deps_paths = []
   java_files_paths = []
+  super_java_files_paths = []
   js_files = []
-  js_files_paths = []
 
   # base package for the build
   package_name = ctx.label.package
@@ -45,49 +45,37 @@ def _impl(ctx):
   for java_dep in java_deps:
     java_deps_paths += [java_dep.path]
 
-  java_root = get_java_root(package_name)
-  index = 0
   for java_file in java_files:
-    # the java file path is absolute therefore the javascript one is as well
-    js_file_name = java_file.path[:-len("java")] + "js"
-
-    if not java_file in super_java_files:
-      # make js file relative to the build package
-      base_js_file_name = js_file_name[len(package_name) + 1:]
-      # create new output file
-      js_file_artifact = ctx.new_file(base_js_file_name)
-      js_files += [js_file_artifact]
-
-    # cut off the base build package since this is included in the output dir
-    # the compiler itself only outputs packages.
-    js_files_paths += [js_file_artifact.path[len(java_root):]]
-
+    if java_file in super_java_files:
+      super_java_files_paths += [java_file.path]
     java_files_paths += [java_file.path]
-    index += 1
 
+  # TODO: use .js.zip extension when Blaze allows it.
+  js_zip_name = ctx.label.name + ".pintozip"
   compiler_args = [
       "-d",
-      ctx.configuration.bin_dir.path + "/" + java_root,
-  ]
+      ctx.configuration.bin_dir.path + "/" + ctx.label.package + "/" +
+      js_zip_name,]
 
   if len(java_deps_paths) > 0:
-    host_path_separator = ctx.configuration.host_path_separator
-    compiler_args += ["-cp", host_path_separator.join(java_deps_paths)]
+    compiler_args += ["-cp", separator.join(java_deps_paths)]
+
+  if len(super_java_files_paths) > 0:
+    compiler_args += ["-superfiles", separator.join(super_java_files_paths)]
 
   # The transpiler expects each java file path as a separate argument.
   compiler_args += java_files_paths
 
+  js_zip_artifact = ctx.new_file(js_zip_name)
   ctx.action(
       inputs=java_files + java_deps,
-      outputs=js_files,
+      outputs=[js_zip_artifact],
       executable=ctx.executable.compiler,
       arguments=compiler_args,
   )
 
-  # We need to return the output files so that they get recognized as outputs
-  # from blaze
   return struct(
-      files=set(js_files),
+      files=set([js_zip_artifact]),
   )
 
 # expose rule

@@ -1,0 +1,266 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.staticfieldaccesslevels.StaticFieldAccessLevels.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.staticfieldaccesslevels.StaticFieldAccessLevels$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class StaticFieldAccessLevels extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels() {
+  }
+
+  /**
+   * @return {number}
+   * @public
+   */
+  m_test() {
+    return StaticFieldAccessLevels
+                   .f_b__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels_ ?
+               StaticFieldAccessLevels
+                   .f_a__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels :
+               StaticFieldAccessLevels
+                   .f_d__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!StaticFieldAccessLevels}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    StaticFieldAccessLevels.$clinit();
+    let instance = new StaticFieldAccessLevels;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof StaticFieldAccessLevels;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, StaticFieldAccessLevels);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    StaticFieldAccessLevels.$clinit();
+    if (!StaticFieldAccessLevels.$classStaticFieldAccessLevels) {
+      StaticFieldAccessLevels
+          .$classStaticFieldAccessLevels = Class.$createForClass(
+          $Util.$generateId('StaticFieldAccessLevels'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.staticfieldaccesslevels.StaticFieldAccessLevels'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.staticfieldaccesslevels.StaticFieldAccessLevels'));
+    }
+    return StaticFieldAccessLevels.$classStaticFieldAccessLevels;
+  }
+
+  /**
+   * A static field getter.
+   * @return {number}
+   * @public
+   */
+  static get
+  f_a__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels() {
+    StaticFieldAccessLevels.$clinit();
+    return StaticFieldAccessLevels
+        .$f_a__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels;
+  }
+
+  /**
+   * A static field setter.
+   * @param {number} value
+   * @return {void}
+   * @public
+   */
+  static set
+      f_a__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels(
+          value) {
+    StaticFieldAccessLevels.$clinit();
+    StaticFieldAccessLevels
+        .$f_a__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels =
+        value;
+  }
+
+  /**
+   * A static field getter.
+   * @return {boolean}
+   * @public
+   */
+  static get
+  f_b__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels_() {
+    StaticFieldAccessLevels.$clinit();
+    return StaticFieldAccessLevels
+        .$f_b__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels_;
+  }
+
+  /**
+   * A static field setter.
+   * @param {boolean} value
+   * @return {void}
+   * @public
+   */
+  static set
+      f_b__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels_(
+          value) {
+    StaticFieldAccessLevels.$clinit();
+    StaticFieldAccessLevels
+        .$f_b__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels_ =
+        value;
+  }
+
+  /**
+   * A static field getter.
+   * @return {*}
+   * @public
+   */
+  static get
+  f_c__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels() {
+    StaticFieldAccessLevels.$clinit();
+    return StaticFieldAccessLevels
+        .$f_c__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels;
+  }
+
+  /**
+   * A static field setter.
+   * @param {*} value
+   * @return {void}
+   * @public
+   */
+  static set
+      f_c__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels(
+          value) {
+    StaticFieldAccessLevels.$clinit();
+    StaticFieldAccessLevels
+        .$f_c__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels =
+        value;
+  }
+
+  /**
+   * A static field getter.
+   * @return {number}
+   * @public
+   */
+  static get
+  f_d__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels() {
+    StaticFieldAccessLevels.$clinit();
+    return StaticFieldAccessLevels
+        .$f_d__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels;
+  }
+
+  /**
+   * A static field setter.
+   * @param {number} value
+   * @return {void}
+   * @public
+   */
+  static set
+      f_d__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels(
+          value) {
+    StaticFieldAccessLevels.$clinit();
+    StaticFieldAccessLevels
+        .$f_d__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels =
+        value;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * @public {number}
+ */
+StaticFieldAccessLevels
+    .$f_a__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels =
+    0;
+
+
+/**
+ * @public {boolean}
+ */
+StaticFieldAccessLevels
+    .$f_b__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels_ =
+    false;
+
+
+/**
+ * @public {*}
+ */
+StaticFieldAccessLevels
+    .$f_c__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels =
+    null;
+
+
+/**
+ * @public {number}
+ */
+StaticFieldAccessLevels
+    .$f_d__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels =
+    0;
+
+
+
+/**
+ * Export class.
+ */
+exports = StaticFieldAccessLevels;

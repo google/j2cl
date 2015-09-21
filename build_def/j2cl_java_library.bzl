@@ -17,6 +17,7 @@ j2cl_java_library(
 """
 
 load("/third_party/java_src/j2cl/build_def/j2cl_transpile", "j2cl_transpile")
+load("/third_party/java_src/j2cl/build_def/js_import", "js_import")
 
 
 def j2cl_java_library(add_jre_dep=True, super_srcs=[], **kwargs):
@@ -65,9 +66,14 @@ def j2cl_java_library(add_jre_dep=True, super_srcs=[], **kwargs):
         "//transpiler:nativebootstrap",
         "//transpiler:vmbootstrap",
     ]
+  # Bring j2cl_transpile's zip output into the js_library tree via js_import
+  js_import(
+      name=kwargs["name"] + "_js_import",
+      srczips=[":" + kwargs["name"] + "_j2cl_transpile"],
+      testonly=testonly,
+  )
   native.js_library(
       name=kwargs["name"] + "_js_library",
-      srcs=[":" + kwargs["name"] + "_j2cl_transpile",],
-      deps=js_library_deps,
+      deps=js_library_deps + [":" + kwargs["name"] + "_js_import"],
       testonly=testonly,
   )

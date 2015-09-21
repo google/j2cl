@@ -1,101 +1,17 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/publicconstructor/PublicConstructor.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructor.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructorModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructor');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
 
 
-class PublicConstructor extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_publicconstructor_PublicConstructor() {
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!PublicConstructor}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    PublicConstructor.$clinit();
-    let instance = new PublicConstructor;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_publicconstructor_PublicConstructor();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_publicconstructor_PublicConstructor() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_publicconstructor_PublicConstructor();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof PublicConstructor; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, PublicConstructor);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!PublicConstructor.$classPublicConstructor) {
-      PublicConstructor.$classPublicConstructor = Class.$createForClass(
-          $Util.$generateId('PublicConstructor'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructor'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructor'));
-    }
-    return PublicConstructor.$classPublicConstructor;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.PublicConstructor = PublicConstructor;
+// Re-exports the implementation.
+var PublicConstructor = goog.require('gen.com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructor$impl');
+exports = PublicConstructor;

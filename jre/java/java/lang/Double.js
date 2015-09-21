@@ -1,90 +1,16 @@
-goog.module('gen.java.lang.DoubleModule');
-
-
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Number = goog.require('gen.java.lang.NumberModule').Number;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-
-
 /**
- * Super-sourcing java/lang/Double.java.
+ * Header super source for java.lang.Double.
  */
-class Double extends Number {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() {
-    super();
-  }
-
-  /**
-   * @param {number} obj
-   * @return {number}
-   * @public
-   * @nocollapse
-   */
-  static $create__double(obj) {
-    return obj;
-  }
-
-  /**
-   * @param {number} x
-   * @param {number} y
-   * @return {number}
-   * @public
-   * @nocollapse
-   */
-  static m_compareTo__double__double(x, y) {
-    if (x < y) {
-      return -1;
-    } else if (x > y) {
-      return 1;
-    } else {
-      return 0;
-    }
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) {
-    return typeof instance == 'number';
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Double);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!Double.$classDouble) {
-      Double.$classDouble = Class.$createForClass(
-          $Util.$generateId('Double'),
-          $Util.$generateId('java.lang.Double'),
-          Number.$getClass(),
-          $Util.$generateId('java.lang.Double'));
-    }
-    return Double.$classDouble;
-  }
-};
+goog.module('gen.java.lang.Double');
 
 
-/**
- * Exported class.
- */
-exports.Double = Double;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _Number = goog.require('gen.java.lang.Number');
+
+
+// Re-exports the implementation.
+let Double = goog.require('gen.java.lang.Double$impl');
+exports = Double;

@@ -5,17 +5,14 @@
 """Regenerates readable JS and build logs."""
 
 
-from os import listdir
-from os import walk
-from os.path import isfile
-from os.path import join
 import re
-import shutil
 from subprocess import PIPE
 from subprocess import Popen
 
 
 # pylint: disable=global-variable-not-assigned
+TEST_TARGET_PATTERN = ("third_party/java_src/j2cl/transpiler/javatests/"
+                       "com/google/j2cl/transpiler/readable/...:all")
 JAVA_DIR = "third_party/java_src/j2cl/transpiler/javatests"
 EXAMPLES_DIR = JAVA_DIR + "/com/google/j2cl/transpiler/readable/"
 READABLE_TARGET_PATTERN = ("third_party/java_src/j2cl/transpiler/javatests/"
@@ -65,36 +62,53 @@ def get_js_binary_file_paths():
       for size_target in test_targets]
 
 
-def get_transpiled_js_file_paths():
-  """Finds and returns transpiled js file paths."""
-  global EXAMPLES_DIR
+def get_readable_target_names():
+  """Finds and returns the names of readable targets."""
+  global TEST_TARGET_PATTERN
 
-  example_names = [
-      example_name for example_name in listdir(EXAMPLES_DIR)
-      if not isfile(EXAMPLES_DIR + example_name)]
-  example_js_file_paths = []
+  test_targets = (
+      run_cmd_get_output(
+          ["blaze", "query",
+           "filter('.*:.*_j2cl_transpile', kind(%s, %s))" %
+           ("j2cl_transpile", TEST_TARGET_PATTERN)]).split("\n"))
+  test_targets = filter(bool, test_targets)
 
-  for example_name in example_names:
-    for root, _, files in walk(EXAMPLES_DIR + example_name):
-      example_js_file_paths += [
-          join(root, f)[: -5] + ".js"
-          for f in files if f.endswith(".java")]
-
-  return example_js_file_paths
+  return [
+      extract_pattern(
+          ".*readable/(.*?):.*_j2cl_transpile", size_target)
+      for size_target in test_targets]
 
 
-def blaze_build_all():
+def blaze_build(target_names):
   """Blaze build everything in 1-go, for speed."""
-  return run_cmd_get_output(["blaze", "build", EXAMPLES_DIR + "...",
-                             JAVA8_BOOT_CLASS_PATH])
+  args = ["blaze", "build"]
+  args += [EXAMPLES_DIR + target_name + ":" + target_name + "_j2cl_transpile"
+           for target_name in target_names]
+  args += [JAVA8_BOOT_CLASS_PATH]
+  return run_cmd_get_output(args)
 
 
-def replace_transpiled_js():
+def replace_transpiled_js(target_names):
   """Copy and reformat and replace with Blaze built JS."""
-  for js_file_path in get_transpiled_js_file_paths():
-    shutil.move("blaze-bin/" + js_file_path, js_file_path)
-    run_cmd_get_output(["clang-format", "-style=Google", "-i", js_file_path])
-    shutil.move(js_file_path, js_file_path + ".txt")
+  pairs = zip(target_names, ["blaze-bin/%s/%s/%s_j2cl_transpile.pintozip" %
+                             (EXAMPLES_DIR, target_name, target_name)
+                             for target_name in target_names])
+
+  for (target_name, zip_file_path) in pairs:
+    run_cmd_get_output(
+        ["unzip", "-o", "-d", JAVA_DIR + "/", zip_file_path])
+
+  run_cmd_get_output(
+      ["find", EXAMPLES_DIR, "-name", "*.js", "-exec",
+       "clang-format", "-i", "{}", "+"])
+
+  run_cmd_get_output(
+      ["find", EXAMPLES_DIR, "-name", "*.js.txt", "-exec",
+       "rm", "{}", ";"])
+
+  run_cmd_get_output(
+      ["find", EXAMPLES_DIR, "-name", "*.js", "-exec",
+       "mv", "{}", "{}.txt", ";"])
 
 
 def gather_closure_warnings():
@@ -118,6 +132,10 @@ def gather_closure_warnings():
         "  Compiling" not in line and
         "Running" not in line])
 
+    # Remove folder path spam.
+    build_log = build_log.replace(
+        "blaze-out/gcc-4.X.Y-crosstool-v18-hybrid-grtev4-k8-fastbuild/bin/",
+        "")
     # Filter out the unstable ", ##% typed" message
     percent_typed_msg = (
         extract_pattern(r"g\(s\)(, .*? typed)", build_log))
@@ -130,12 +148,13 @@ def gather_closure_warnings():
 
 def main():
   print "Generating readable JS and build logs:"
+  readable_target_names = get_readable_target_names()
 
   print "  Blaze building everything"
-  blaze_build_all()
+  blaze_build(readable_target_names)
 
   print "  Copying and reformatting transpiled JS"
-  replace_transpiled_js()
+  replace_transpiled_js(readable_target_names)
 
   print "  Re-Closure compiling examples to gather logs"
   gather_closure_warnings()

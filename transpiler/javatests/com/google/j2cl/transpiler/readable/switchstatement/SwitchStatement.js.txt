@@ -1,141 +1,18 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/switchstatement/SwitchStatement.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.switchstatement.SwitchStatementModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement');
 
 
-let Numbers = goog.require('gen.com.google.j2cl.transpiler.readable.switchstatement.NumbersModule').Numbers;
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Numbers = goog.require('gen.com.google.j2cl.transpiler.readable.switchstatement.Numbers');
+let _Class = goog.require('gen.java.lang.Class');
 
 
-class SwitchStatement extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_switchstatement_SwitchStatement() {
-  }
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_main() {
-    switch ("one") {
-      case "one":
-      case "two":
-        break;
-      default:
-        return;
-    }
-    switch (49 /* '1' */) {
-      case 49 /* '1' */:
-      case 50 /* '2' */:
-        break;
-      default:
-        return;
-    }
-    switch (1) {
-      case 1:
-      case 2:
-        break;
-      default:
-        return;
-    }
-    switch (
-        Numbers
-            .f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers) {
-      case Numbers
-          .f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers:
-      case Numbers
-          .f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers:
-        break;
-      default:
-        return;
-    }
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!SwitchStatement}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    SwitchStatement.$clinit();
-    let instance = new SwitchStatement;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_switchstatement_SwitchStatement();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_switchstatement_SwitchStatement() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_switchstatement_SwitchStatement();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof SwitchStatement; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, SwitchStatement);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!SwitchStatement.$classSwitchStatement) {
-      SwitchStatement.$classSwitchStatement = Class.$createForClass(
-          $Util.$generateId('SwitchStatement'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement'));
-    }
-    return SwitchStatement.$classSwitchStatement;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.SwitchStatement = SwitchStatement;
+// Re-exports the implementation.
+var SwitchStatement = goog.require('gen.com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement$impl');
+exports = SwitchStatement;

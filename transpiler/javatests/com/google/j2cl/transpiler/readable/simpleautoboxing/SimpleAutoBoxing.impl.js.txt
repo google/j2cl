@@ -1,0 +1,344 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Long = goog.require('nativebootstrap.Long$impl');
+let $LongUtils = goog.require('nativebootstrap.LongUtils$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Boolean = goog.forwardDeclare('gen.java.lang.Boolean$impl');
+let Byte = goog.forwardDeclare('gen.java.lang.Byte$impl');
+let Character = goog.forwardDeclare('gen.java.lang.Character$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Double = goog.forwardDeclare('gen.java.lang.Double$impl');
+let Float = goog.forwardDeclare('gen.java.lang.Float$impl');
+let Integer = goog.forwardDeclare('gen.java.lang.Integer$impl');
+let Long = goog.forwardDeclare('gen.java.lang.Long$impl');
+let Short = goog.forwardDeclare('gen.java.lang.Short$impl');
+let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
+let $byte = goog.forwardDeclare('vmbootstrap.primitives.$byte$impl');
+let $char = goog.forwardDeclare('vmbootstrap.primitives.$char$impl');
+let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
+let $float = goog.forwardDeclare('vmbootstrap.primitives.$float$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $short = goog.forwardDeclare('vmbootstrap.primitives.$short$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.primitives.Primitives$impl');
+
+
+class SimpleAutoBoxing extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing() {
+  }
+
+  /**
+   * @param {boolean} b
+   * @return {?boolean}
+   * @public
+   */
+  m_box__boolean(b) { return b; }
+
+  /**
+   * @param {number} d
+   * @return {?number}
+   * @public
+   */
+  m_box__double(d) { return d; }
+
+  /**
+   * @param {number} b
+   * @return {Byte}
+   * @public
+   */
+  m_box__byte(b) { return Byte.m_valueOf__byte(b); }
+
+  /**
+   * @param {number} f
+   * @return {Float}
+   * @public
+   */
+  m_box__float(f) { return Float.m_valueOf__float(f); }
+
+  /**
+   * @param {number} i
+   * @return {Integer}
+   * @public
+   */
+  m_box__int(i) { return Integer.m_valueOf__int(i); }
+
+  /**
+   * @param {!$Long} l
+   * @return {Long}
+   * @public
+   */
+  m_box__long(l) { return Long.m_valueOf__long(l); }
+
+  /**
+   * @param {number} s
+   * @return {Short}
+   * @public
+   */
+  m_box__short(s) { return Short.m_valueOf__short(s); }
+
+  /**
+   * @param {number} c
+   * @return {Character}
+   * @public
+   */
+  m_box__char(c) { return Character.m_valueOf__char(c); }
+
+  /**
+   * @param {?boolean} b
+   * @return {boolean}
+   * @public
+   */
+  m_unbox__java_lang_Boolean(b) { return b; }
+
+  /**
+   * @param {?number} d
+   * @return {number}
+   * @public
+   */
+  m_unbox__java_lang_Double(d) { return d; }
+
+  /**
+   * @param {Byte} b
+   * @return {number}
+   * @public
+   */
+  m_unbox__java_lang_Byte(b) { return b.m_byteValue(); }
+
+  /**
+   * @param {Float} f
+   * @return {number}
+   * @public
+   */
+  m_unbox__java_lang_Float(f) { return f.m_floatValue(); }
+
+  /**
+   * @param {Integer} i
+   * @return {number}
+   * @public
+   */
+  m_unbox__java_lang_Integer(i) { return i.m_intValue(); }
+
+  /**
+   * @param {Long} l
+   * @return {!$Long}
+   * @public
+   */
+  m_unbox__java_lang_Long(l) { return l.m_longValue(); }
+
+  /**
+   * @param {Short} s
+   * @return {number}
+   * @public
+   */
+  m_unbox__java_lang_Short(s) { return s.m_shortValue(); }
+
+  /**
+   * @param {Character} c
+   * @return {number}
+   * @public
+   */
+  m_unbox__java_lang_Character(c) { return c.m_charValue(); }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testNull() {
+    let b = null;
+    let d = null;
+    let i = null;
+    let l = null;
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testBoxing() {
+    let bool = true;
+    let d = 1111.0;
+    let b = $Primitives.$castIntToByte(100);
+    let f = 1111.0;
+    let i = 1111;
+    let l = $LongUtils.$fromInt(1111);
+    let s = $Primitives.$castIntToShort(100);
+    let c = 97 /* 'a' */;
+    let boxBool = bool;
+    let boxD = d;
+    let boxB = Byte.m_valueOf__byte(b);
+    let boxF = Float.m_valueOf__float(f);
+    let boxI = Integer.m_valueOf__int(i);
+    let boxL = Long.m_valueOf__long(l);
+    let boxS = Short.m_valueOf__short(s);
+    let boxC = Character.m_valueOf__char(c);
+    bool = this.m_unbox__java_lang_Boolean(bool);
+    d = this.m_unbox__java_lang_Double(d);
+    b = this.m_unbox__java_lang_Byte(Byte.m_valueOf__byte(b));
+    f = this.m_unbox__java_lang_Float(Float.m_valueOf__float(f));
+    i = this.m_unbox__java_lang_Integer(Integer.m_valueOf__int(i));
+    l = this.m_unbox__java_lang_Long(Long.m_valueOf__long(l));
+    s = this.m_unbox__java_lang_Short(Short.m_valueOf__short(s));
+    c = this.m_unbox__java_lang_Character(Character.m_valueOf__char(c));
+    boxBool = boxBool && boxBool;
+    boxD = boxD + boxD;
+    boxF = Float.m_valueOf__float(boxF.m_floatValue() - boxF.m_floatValue());
+    boxI = Integer.m_valueOf__int(boxI.m_intValue() * boxI.m_intValue());
+    boxL = Long.m_valueOf__long(
+        $LongUtils.$divide(boxL.m_longValue(), boxL.m_longValue()));
+    boxBool = !boxBool;
+    boxI = Integer.m_valueOf__int(boxI.m_intValue());
+    boxI = Integer.m_valueOf__int(-boxI.m_intValue());
+    boxI = Integer.m_valueOf__int(~boxI.m_intValue());
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testUnboxing() {
+    let boxBool = Boolean.$create__boolean(true);
+    let boxD = Double.$create__double(1111.0);
+    let boxB = Byte.$create__byte($Primitives.$castIntToByte(100));
+    let boxF = Float.$create__float(1111.0);
+    let boxI = Integer.$create__int(1111);
+    let boxL = Long.$create__long($LongUtils.$fromInt(1111));
+    let boxS = Short.$create__short($Primitives.$castIntToShort(100));
+    let boxC = Character.$create__char(97 /* 'a' */);
+    let bool = boxBool;
+    let d = boxD;
+    let b = boxB.m_byteValue();
+    let f = boxF.m_floatValue();
+    let i = boxI.m_intValue();
+    let l = boxL.m_longValue();
+    let s = boxS.m_shortValue();
+    let c = boxC.m_charValue();
+    boxBool = this.m_box__boolean(boxBool);
+    boxD = this.m_box__double(boxD);
+    boxB = this.m_box__byte(boxB.m_byteValue());
+    boxF = this.m_box__float(boxF.m_floatValue());
+    boxI = this.m_box__int(boxI.m_intValue());
+    boxL = this.m_box__long(boxL.m_longValue());
+    boxS = this.m_box__short(boxS.m_shortValue());
+    boxC = this.m_box__char(boxC.m_charValue());
+    bool = boxBool && boxBool;
+    d = boxD + boxD;
+    f = boxF.m_floatValue() - boxF.m_floatValue();
+    i = boxI.m_intValue() * boxI.m_intValue();
+    l = $LongUtils.$divide(boxL.m_longValue(), boxL.m_longValue());
+    bool = !boxBool;
+    i = boxI.m_intValue();
+    i = -boxI.m_intValue();
+    i = ~boxI.m_intValue();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!SimpleAutoBoxing}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    SimpleAutoBoxing.$clinit();
+    let instance = new SimpleAutoBoxing;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof SimpleAutoBoxing; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SimpleAutoBoxing);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    SimpleAutoBoxing.$clinit();
+    if (!SimpleAutoBoxing.$classSimpleAutoBoxing) {
+      SimpleAutoBoxing.$classSimpleAutoBoxing = Class.$createForClass(
+          $Util.$generateId('SimpleAutoBoxing'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing'));
+    }
+    return SimpleAutoBoxing.$classSimpleAutoBoxing;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Boolean = goog.module.get('gen.java.lang.Boolean$impl');
+    Byte = goog.module.get('gen.java.lang.Byte$impl');
+    Character = goog.module.get('gen.java.lang.Character$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Double = goog.module.get('gen.java.lang.Double$impl');
+    Float = goog.module.get('gen.java.lang.Float$impl');
+    Integer = goog.module.get('gen.java.lang.Integer$impl');
+    Long = goog.module.get('gen.java.lang.Long$impl');
+    Short = goog.module.get('gen.java.lang.Short$impl');
+    $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
+    $byte = goog.module.get('vmbootstrap.primitives.$byte$impl');
+    $char = goog.module.get('vmbootstrap.primitives.$char$impl');
+    $double = goog.module.get('vmbootstrap.primitives.$double$impl');
+    $float = goog.module.get('vmbootstrap.primitives.$float$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $short = goog.module.get('vmbootstrap.primitives.$short$impl');
+    $Primitives = goog.module.get('vmbootstrap.primitives.Primitives$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = SimpleAutoBoxing;

@@ -36,11 +36,10 @@ public class PackagePrivateMethodsDispatcher {
   /**
    * Returns generated dispatch methods.
    */
-  public static List<Method> createDispatchMethods(
-      ITypeBinding typeBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
+  public static List<Method> createDispatchMethods(ITypeBinding typeBinding) {
     List<Method> dispatchMethods = new ArrayList<>();
     for (Map.Entry<MethodDescriptor, MethodDescriptor> entry :
-        findExposedOverriddenMethods(typeBinding, compilationUnitNameLocator).entrySet()) {
+        findExposedOverriddenMethods(typeBinding).entrySet()) {
       dispatchMethods.add(ASTUtils.createForwardingMethod(entry.getValue(), entry.getKey()));
     }
     return dispatchMethods;
@@ -50,7 +49,7 @@ public class PackagePrivateMethodsDispatcher {
    * Returns the mapping from public/protected method to its package private overridden method.
    */
   public static Map<MethodDescriptor, MethodDescriptor> findExposedOverriddenMethods(
-      ITypeBinding type, CompilationUnitNameLocator compilationUnitNameLocator) {
+      ITypeBinding type) {
     Map<MethodDescriptor, MethodDescriptor> exposedOverriddenMethodsByOverridingMethod =
         new LinkedHashMap<>();
     for (IMethodBinding method : type.getDeclaredMethods()) {
@@ -68,8 +67,8 @@ public class PackagePrivateMethodsDispatcher {
         continue;
       }
       exposedOverriddenMethodsByOverridingMethod.put(
-          JdtUtils.createMethodDescriptor(method, compilationUnitNameLocator),
-          JdtUtils.createMethodDescriptor(overriddenMethod, compilationUnitNameLocator));
+          JdtUtils.createMethodDescriptor(method),
+          JdtUtils.createMethodDescriptor(overriddenMethod));
     }
     return exposedOverriddenMethodsByOverridingMethod;
   }

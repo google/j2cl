@@ -48,10 +48,13 @@ public class FrontendOptions {
   private String encoding;
   private String sourceVersion;
   private List<String> sourceFilePaths;
+  private List<String> superSourceFilePaths;
   private FileSystem outputFileSystem;
 
   private static final Set<String> VALID_JAVA_VERSIONS =
       ImmutableSet.of("1.8", "1.7", "1.6", "1.5");
+
+  private static final String ZIP_EXTENSION = "zip";
 
   public FrontendOptions(Errors errors, FrontendFlags flags) {
     this.errors = errors;
@@ -67,6 +70,7 @@ public class FrontendOptions {
     setBootclassPathEntries(flags.bootclasspath);
     setOutput(flags.output);
     setSourceFiles(flags.files);
+    setSuperSourceFiles(flags.superfiles);
     setSourceVersion(flags.source);
     setEncoding(flags.encoding);
   }
@@ -118,11 +122,13 @@ public class FrontendOptions {
    */
   public void setOutput(String output) {
     Path outputPath = Paths.get(output);
-    if (Files.exists(outputPath) && !Files.isDirectory(outputPath) && !output.endsWith(".zip")) {
+    if (Files.exists(outputPath)
+        && !Files.isDirectory(outputPath)
+        && !output.endsWith(ZIP_EXTENSION)) {
       errors.error(Errors.ERR_OUTPUT_LOCATION);
     }
 
-    if (output.endsWith(".zip")) {
+    if (output.endsWith(ZIP_EXTENSION)) {
       // jar:file://output/Location/Path.zip!relative/File/Path.js
       initZipOutput(outputPath);
       return;
@@ -178,9 +184,21 @@ public class FrontendOptions {
     return this.sourceFilePaths;
   }
 
+  public List<String> getSuperSourceFiles() {
+    return this.superSourceFilePaths;
+  }
+
   public void setSourceFiles(List<String> sourceFiles) {
     if (checkSourceFiles(sourceFiles)) {
       this.sourceFilePaths = sourceFiles;
+    }
+  }
+
+  public void setSuperSourceFiles(String superSourceFiles) {
+    List<String> superSourceFilePaths =
+        Splitter.on(File.pathSeparator).omitEmptyStrings().splitToList(superSourceFiles);
+    if (checkSourceFiles(superSourceFilePaths)) {
+      this.superSourceFilePaths = superSourceFilePaths;
     }
   }
 
@@ -225,7 +243,7 @@ public class FrontendOptions {
 
   private static List<String> getPathEntries(String path) {
     List<String> entries = new ArrayList<>();
-    for (String entry : Splitter.on(File.pathSeparatorChar).split(path)) {
+    for (String entry : Splitter.on(File.pathSeparatorChar).omitEmptyStrings().split(path)) {
       if (new File(entry).exists()) {
         entries.add(entry);
       }

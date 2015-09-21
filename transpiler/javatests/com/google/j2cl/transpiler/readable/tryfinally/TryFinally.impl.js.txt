@@ -1,0 +1,117 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.tryfinally.TryFinally.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.tryfinally.TryFinally$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
+
+
+class TryFinally extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_tryfinally_TryFinally() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    try {
+      $Asserts.$enabled() && $Asserts.$assert(true);
+    } finally {
+    }
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!TryFinally}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    TryFinally.$clinit();
+    let instance = new TryFinally;
+    instance.$ctor__com_google_j2cl_transpiler_readable_tryfinally_TryFinally();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_tryfinally_TryFinally() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_tryfinally_TryFinally();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof TryFinally; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, TryFinally);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    TryFinally.$clinit();
+    if (!TryFinally.$classTryFinally) {
+      TryFinally.$classTryFinally = Class.$createForClass(
+          $Util.$generateId('TryFinally'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.tryfinally.TryFinally'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.tryfinally.TryFinally'));
+    }
+    return TryFinally.$classTryFinally;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = TryFinally;

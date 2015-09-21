@@ -13,8 +13,6 @@
  */
 package java.lang;
 
-import java.util.Objects;
-
 /**
  * See <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Throwable.html">the

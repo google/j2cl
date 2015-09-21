@@ -1,0 +1,116 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.continuestatement.ContinueStatement.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.continuestatement.ContinueStatement$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+class ContinueStatement extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_continuestatement_ContinueStatement() {
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    for (;;) {
+      continue;
+    }
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!ContinueStatement}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    ContinueStatement.$clinit();
+    let instance = new ContinueStatement;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_continuestatement_ContinueStatement();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_continuestatement_ContinueStatement() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_continuestatement_ContinueStatement();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof ContinueStatement; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, ContinueStatement);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    ContinueStatement.$clinit();
+    if (!ContinueStatement.$classContinueStatement) {
+      ContinueStatement.$classContinueStatement = Class.$createForClass(
+          $Util.$generateId('ContinueStatement'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.continuestatement.ContinueStatement'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.continuestatement.ContinueStatement'));
+    }
+    return ContinueStatement.$classContinueStatement;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = ContinueStatement;

@@ -1,0 +1,113 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.localnamecollision.Class.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.localnamecollision.Class$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let java_lang_Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+
+class Class extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_localnamecollision_Class() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() { $Objects.m_getClass__java_lang_Object(Class.$create()); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Class}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    Class.$clinit();
+    let instance = new Class;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_localnamecollision_Class();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_localnamecollision_Class() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_localnamecollision_Class();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof Class; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Class);
+  }
+
+  /**
+   * @return {java_lang_Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    Class.$clinit();
+    if (!Class.$classClass) {
+      Class.$classClass = java_lang_Class.$createForClass(
+          $Util.$generateId('Class'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.localnamecollision.Class'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.localnamecollision.Class'));
+    }
+    return Class.$classClass;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    java_lang_Class = goog.module.get('gen.java.lang.Class$impl');
+    $Objects = goog.module.get('vmbootstrap.Objects$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = Class;

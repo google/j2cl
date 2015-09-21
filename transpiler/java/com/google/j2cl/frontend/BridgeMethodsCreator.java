@@ -55,10 +55,8 @@ public class BridgeMethodsCreator {
   /**
    * Returns generated bridge methods.
    */
-  public static List<Method> createBridgeMethods(
-      ITypeBinding typeBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
-    BridgeMethodsCreator bridgeMethodsCreator =
-        new BridgeMethodsCreator(typeBinding, compilationUnitNameLocator);
+  public static List<Method> createBridgeMethods(ITypeBinding typeBinding) {
+    BridgeMethodsCreator bridgeMethodsCreator = new BridgeMethodsCreator(typeBinding);
     List<Method> generatedBridgeMethods = new ArrayList<>();
     Set<MethodDescriptor> generatedBridgeMethodDescriptors = new HashSet<>();
     for (Map.Entry<IMethodBinding, IMethodBinding> entry :
@@ -76,12 +74,9 @@ public class BridgeMethodsCreator {
   }
 
   private final ITypeBinding typeBinding;
-  private final CompilationUnitNameLocator compilationUnitNameLocator;
 
-  private BridgeMethodsCreator(
-      ITypeBinding typeBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
+  private BridgeMethodsCreator(ITypeBinding typeBinding) {
     this.typeBinding = typeBinding;
-    this.compilationUnitNameLocator = compilationUnitNameLocator;
   }
 
   /**
@@ -185,8 +180,7 @@ public class BridgeMethodsCreator {
   private MethodDescriptor createMethodDescriptorInCurrentType(IMethodBinding methodBinding) {
     boolean isStatic = JdtUtils.isStatic(methodBinding.getModifiers());
     Visibility visibility = JdtUtils.getVisibility(methodBinding.getModifiers());
-    TypeDescriptor enclosingClassTypeDescriptor =
-        JdtUtils.createTypeDescriptor(typeBinding, compilationUnitNameLocator);
+    TypeDescriptor enclosingClassTypeDescriptor = JdtUtils.createTypeDescriptor(typeBinding);
     String methodName = methodBinding.getName();
     boolean isConstructor = methodBinding.isConstructor();
     boolean isNative = false;
@@ -199,13 +193,11 @@ public class BridgeMethodsCreator {
                 new Function<ITypeBinding, TypeDescriptor>() {
                   @Override
                   public TypeDescriptor apply(ITypeBinding typeBinding) {
-                    return JdtUtils.createTypeDescriptor(
-                        typeBinding.getErasure(), compilationUnitNameLocator);
+                    return JdtUtils.createTypeDescriptor(typeBinding.getErasure());
                   }
                 });
     TypeDescriptor erasureReturnTypeDescriptor =
-        JdtUtils.createTypeDescriptor(
-            declaredMethodBinding.getReturnType().getErasure(), compilationUnitNameLocator);
+        JdtUtils.createTypeDescriptor(declaredMethodBinding.getReturnType().getErasure());
     MethodDescriptor erasureMethodDescriptor =
         MethodDescriptor.create(
             isStatic,
@@ -224,15 +216,13 @@ public class BridgeMethodsCreator {
         methodName,
         isConstructor,
         isNative,
-        JdtUtils.createTypeDescriptor(
-            methodBinding.getReturnType().getErasure(), compilationUnitNameLocator), // return type
+        JdtUtils.createTypeDescriptor(methodBinding.getReturnType().getErasure()), // return type
         Iterables.transform(
             Arrays.asList(methodBinding.getParameterTypes()),
             new Function<ITypeBinding, TypeDescriptor>() {
               @Override
               public TypeDescriptor apply(ITypeBinding typeBinding) {
-                return JdtUtils.createTypeDescriptor(
-                    typeBinding.getErasure(), compilationUnitNameLocator); // use erasure type.
+                return JdtUtils.createTypeDescriptor(typeBinding.getErasure()); // use erasure type.
               }
             }),
         ImmutableList.<TypeDescriptor>of(),
@@ -260,8 +250,7 @@ public class BridgeMethodsCreator {
       Variable parameter =
           new Variable(
               "arg" + i,
-              JdtUtils.createTypeDescriptor(
-                  bridgeMethod.getParameterTypes()[i], compilationUnitNameLocator),
+              JdtUtils.createTypeDescriptor(bridgeMethod.getParameterTypes()[i]),
               false,
               true);
       parameters.add(parameter);
@@ -269,8 +258,7 @@ public class BridgeMethodsCreator {
 
       // The type the argument should be casted to.
       TypeDescriptor castToParameterTypeDescriptor =
-          JdtUtils.createTypeDescriptor(
-              bridgeMethod.getParameterTypes()[i].getErasure(), compilationUnitNameLocator);
+          JdtUtils.createTypeDescriptor(bridgeMethod.getParameterTypes()[i].getErasure());
       // if the parameter type in bridge method is different from that in parameterized method,
       // add a cast.
       Expression argument =

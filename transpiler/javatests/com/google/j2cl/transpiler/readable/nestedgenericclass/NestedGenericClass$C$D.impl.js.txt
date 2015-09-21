@@ -1,0 +1,135 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass$C$D.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass$C$D$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let NestedGenericClass$C = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass$C$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+/**
+ * @template C_T
+ */
+class NestedGenericClass$C$D extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {C_T}
+     */
+    this.f_d__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$C$D =
+        null;
+    /**
+     * @public {NestedGenericClass$C<C_T>}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$C$D =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$C$D() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_T
+   * @param {NestedGenericClass$C<C_T>} $outer_this
+   * @return {!NestedGenericClass$C$D<C_T>}
+   * @public
+   * @nocollapse
+   */
+  static $create($outer_this) {
+    NestedGenericClass$C$D.$clinit();
+    let instance = new NestedGenericClass$C$D;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$C$D(
+            $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {NestedGenericClass$C<C_T>} $outer_this
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$C$D(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$C$D =
+        $outer_this;
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$C$D();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof NestedGenericClass$C$D;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, NestedGenericClass$C$D);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    NestedGenericClass$C$D.$clinit();
+    if (!NestedGenericClass$C$D.$classNestedGenericClass$C$D) {
+      NestedGenericClass$C$D
+          .$classNestedGenericClass$C$D = Class.$createForClass(
+          $Util.$generateId('D'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass$C$D'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.C.D'));
+    }
+    return NestedGenericClass$C$D.$classNestedGenericClass$C$D;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    NestedGenericClass$C = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass$C$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = NestedGenericClass$C$D;

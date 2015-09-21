@@ -10,25 +10,9 @@ licenses(["unencumbered"])
 
 js_library(
     name = "nativebootstrap",
+    srcs = glob(["*.js"]),
     deps = [
-        ":Hashing",
-        ":LongUtils",
-        ":Util",
+        "//javascript/closure/math:long",
+        "//javascript/closure:base",
     ],
-)
-
-js_library(
-    name = "Hashing",
-    srcs = ["Hashing.js"],
-)
-
-js_library(
-    name = "LongUtils",
-    srcs = ["LongUtils.js"],
-    deps = ["//javascript/closure/math:long"],
-)
-
-js_library(
-    name = "Util",
-    srcs = ["Util.js"],
 )

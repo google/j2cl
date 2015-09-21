@@ -1,103 +1,17 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/privateconstructor/PrivateConstructor.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructorModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
 
 
-class PrivateConstructor extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_privateconstructor_PrivateConstructor() {
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!PrivateConstructor}
-   * @private
-   * @nocollapse
-   */
-  static $create() {
-    PrivateConstructor.$clinit();
-    let instance = new PrivateConstructor;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_privateconstructor_PrivateConstructor();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @private
-   */
-  $ctor__com_google_j2cl_transpiler_readable_privateconstructor_PrivateConstructor() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_privateconstructor_PrivateConstructor();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) {
-    return instance instanceof PrivateConstructor;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, PrivateConstructor);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!PrivateConstructor.$classPrivateConstructor) {
-      PrivateConstructor.$classPrivateConstructor = Class.$createForClass(
-          $Util.$generateId('PrivateConstructor'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor'));
-    }
-    return PrivateConstructor.$classPrivateConstructor;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.PrivateConstructor = PrivateConstructor;
+// Re-exports the implementation.
+var PrivateConstructor = goog.require('gen.com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor$impl');
+exports = PrivateConstructor;

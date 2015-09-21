@@ -92,8 +92,7 @@ public class JdtUtils {
     return nameEnvironment;
   }
 
-  static TypeDescriptor createTypeDescriptor(
-      ITypeBinding typeBinding, final CompilationUnitNameLocator compilationUnitNameLocator) {
+  static TypeDescriptor createTypeDescriptor(ITypeBinding typeBinding) {
     if (typeBinding == null) {
       return null;
     }
@@ -130,8 +129,7 @@ public class JdtUtils {
     }
 
     if (typeBinding.isArray()) {
-      TypeDescriptor leafTypeDescriptor =
-          createTypeDescriptor(typeBinding.getElementType(), compilationUnitNameLocator);
+      TypeDescriptor leafTypeDescriptor = createTypeDescriptor(typeBinding.getElementType());
       return leafTypeDescriptor.getForArray(typeBinding.getDimensions());
     }
 
@@ -172,58 +170,45 @@ public class JdtUtils {
     }
 
     if (typeBinding.isTypeVariable()) {
-      return TypeDescriptor.createTypeVariable(
-          packageComponents, nameComponents, compilationUnitNameLocator.find(typeBinding));
+      return TypeDescriptor.createTypeVariable(packageComponents, nameComponents);
     }
     if (typeBinding.isParameterizedType()) {
       Iterable<TypeDescriptor> typeArguments =
-          createTypeDescriptors(typeBinding.getTypeArguments(), compilationUnitNameLocator);
+          createTypeDescriptors(typeBinding.getTypeArguments());
       return TypeDescriptor.createParameterizedType(
-          packageComponents,
-          nameComponents,
-          compilationUnitNameLocator.find(typeBinding),
-          typeArguments);
+          packageComponents, nameComponents, typeArguments);
     }
 
     List<TypeDescriptor> typeParameters = new ArrayList<>();
     if (typeBinding.isGenericType()) {
-      Iterables.addAll(
-          typeParameters,
-          createTypeDescriptors(typeBinding.getTypeParameters(), compilationUnitNameLocator));
+      Iterables.addAll(typeParameters, createTypeDescriptors(typeBinding.getTypeParameters()));
     }
     // add captured type parameters
     if (isInstanceNestedClass(typeBinding)) {
       if (typeBinding.getDeclaringMethod() != null) {
         Iterables.addAll(
             typeParameters,
-            createTypeDescriptors(
-                typeBinding.getDeclaringMethod().getTypeParameters(), compilationUnitNameLocator));
+            createTypeDescriptors(typeBinding.getDeclaringMethod().getTypeParameters()));
       }
       typeParameters.addAll(
-          createTypeDescriptor(typeBinding.getDeclaringClass(), compilationUnitNameLocator)
-              .getTypeArgumentDescriptors());
+          createTypeDescriptor(typeBinding.getDeclaringClass()).getTypeArgumentDescriptors());
     }
     return TypeDescriptor.createParameterizedType(
-        packageComponents,
-        nameComponents,
-        compilationUnitNameLocator.find(typeBinding),
-        typeParameters);
+        packageComponents, nameComponents, typeParameters);
   }
 
-  static Iterable<TypeDescriptor> createTypeDescriptors(
-      ITypeBinding[] typeBindings, final CompilationUnitNameLocator compilationUnitNameLocator) {
+  static Iterable<TypeDescriptor> createTypeDescriptors(ITypeBinding[] typeBindings) {
     return FluentIterable.from(Arrays.asList(typeBindings))
         .transform(
             new Function<ITypeBinding, TypeDescriptor>() {
               @Override
               public TypeDescriptor apply(ITypeBinding typeBinding) {
-                return createTypeDescriptor(typeBinding, compilationUnitNameLocator);
+                return createTypeDescriptor(typeBinding);
               }
             });
   }
 
-  static FieldDescriptor createFieldDescriptor(
-      IVariableBinding variableBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
+  static FieldDescriptor createFieldDescriptor(IVariableBinding variableBinding) {
     if (isArrayLengthBinding(variableBinding)) {
       return ASTUtils.ARRAY_LENGTH_FIELD_DESCRIPTION;
     }
@@ -232,30 +217,26 @@ public class JdtUtils {
     boolean isStatic = isStatic(modifiers);
     Visibility visibility = getVisibility(modifiers);
     TypeDescriptor enclosingClassTypeDescriptor =
-        createTypeDescriptor(variableBinding.getDeclaringClass(), compilationUnitNameLocator);
+        createTypeDescriptor(variableBinding.getDeclaringClass());
     String fieldName = variableBinding.getName();
-    TypeDescriptor thisTypeDescriptor =
-        createTypeDescriptor(variableBinding.getType(), compilationUnitNameLocator);
+    TypeDescriptor thisTypeDescriptor = createTypeDescriptor(variableBinding.getType());
     return FieldDescriptor.create(
         isStatic, visibility, enclosingClassTypeDescriptor, fieldName, thisTypeDescriptor);
   }
 
-  static MethodDescriptor createMethodDescriptor(
-      IMethodBinding methodBinding, final CompilationUnitNameLocator compilationUnitNameLocator) {
+  static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
     int modifiers = methodBinding.getModifiers();
     boolean isStatic = isStatic(modifiers);
     Visibility visibility = getVisibility(modifiers);
     boolean isNative = isNative(modifiers);
     TypeDescriptor enclosingClassTypeDescriptor =
-        createTypeDescriptor(methodBinding.getDeclaringClass(), compilationUnitNameLocator);
+        createTypeDescriptor(methodBinding.getDeclaringClass());
     boolean isConstructor = methodBinding.isConstructor();
     String methodName =
         isConstructor
-            ? createTypeDescriptor(methodBinding.getDeclaringClass(), compilationUnitNameLocator)
-                .getClassName()
+            ? createTypeDescriptor(methodBinding.getDeclaringClass()).getClassName()
             : methodBinding.getName();
-    TypeDescriptor returnTypeDescriptor =
-        createTypeDescriptor(methodBinding.getReturnType(), compilationUnitNameLocator);
+    TypeDescriptor returnTypeDescriptor = createTypeDescriptor(methodBinding.getReturnType());
 
     // generate parameters type descriptors.
     Iterable<TypeDescriptor> parameterTypeDescriptors =
@@ -264,7 +245,7 @@ public class JdtUtils {
                 new Function<ITypeBinding, TypeDescriptor>() {
                   @Override
                   public TypeDescriptor apply(ITypeBinding typeBinding) {
-                    return createTypeDescriptor(typeBinding, compilationUnitNameLocator);
+                    return createTypeDescriptor(typeBinding);
                   }
                 });
     // generate type parameters declared in the method.
@@ -274,7 +255,7 @@ public class JdtUtils {
                 new Function<ITypeBinding, TypeDescriptor>() {
                   @Override
                   public TypeDescriptor apply(ITypeBinding typeBinding) {
-                    return createTypeDescriptor(typeBinding, compilationUnitNameLocator);
+                    return createTypeDescriptor(typeBinding);
                   }
                 });
 
@@ -289,13 +270,11 @@ public class JdtUtils {
                 new Function<ITypeBinding, TypeDescriptor>() {
                   @Override
                   public TypeDescriptor apply(ITypeBinding typeBinding) {
-                    return createTypeDescriptor(
-                        typeBinding.getErasure(), compilationUnitNameLocator);
+                    return createTypeDescriptor(typeBinding.getErasure());
                   }
                 });
     TypeDescriptor erasureReturnTypeDescriptor =
-        createTypeDescriptor(
-            declaredMethodBinding.getReturnType().getErasure(), compilationUnitNameLocator);
+        createTypeDescriptor(declaredMethodBinding.getReturnType().getErasure());
     MethodDescriptor erasureMethodDescriptor =
         MethodDescriptor.create(
             isStatic,
@@ -320,11 +299,9 @@ public class JdtUtils {
         erasureMethodDescriptor);
   }
 
-  static Variable createVariable(
-      IVariableBinding variableBinding, CompilationUnitNameLocator compilationUnitNameLocator) {
+  static Variable createVariable(IVariableBinding variableBinding) {
     String name = variableBinding.getName();
-    TypeDescriptor typeDescriptor =
-        createTypeDescriptor(variableBinding.getType(), compilationUnitNameLocator);
+    TypeDescriptor typeDescriptor = createTypeDescriptor(variableBinding.getType());
     boolean isFinal = isFinal(variableBinding.getModifiers());
     boolean isParameter = variableBinding.isParameter();
     return new Variable(name, typeDescriptor, isFinal, isParameter);
@@ -635,32 +612,27 @@ public class JdtUtils {
   static JavaType createLambdaJavaType(
       ITypeBinding lambdaInterfaceBinding,
       IMethodBinding lambdaMethodBinding,
-      RegularTypeDescriptor enclosingClassTypeDescriptor,
-      CompilationUnitNameLocator compilationUnitNameLocator) {
+      RegularTypeDescriptor enclosingClassTypeDescriptor) {
     TypeDescriptor lambdaClassTypeDescriptor =
         TypeDescriptor.create(
             enclosingClassTypeDescriptor.getPackageComponents(),
             Iterables.concat(
                 enclosingClassTypeDescriptor.getClassComponents(),
-                Arrays.asList(lambdaMethodBinding.getName())),
-            enclosingClassTypeDescriptor.getCompilationUnitSimpleName());
+                Arrays.asList(lambdaMethodBinding.getName())));
     JavaType lambdaType = new JavaType(Kind.CLASS, Visibility.PRIVATE, lambdaClassTypeDescriptor);
 
     lambdaType.setEnclosingTypeDescriptor(enclosingClassTypeDescriptor);
-    lambdaType.addSuperInterfaceDescriptor(
-        createTypeDescriptor(lambdaInterfaceBinding, compilationUnitNameLocator));
+    lambdaType.setSuperTypeDescriptor(TypeDescriptors.OBJECT_TYPE_DESCRIPTOR);
+    lambdaType.addSuperInterfaceDescriptor(createTypeDescriptor(lambdaInterfaceBinding));
     lambdaType.setLocal(true);
     return lambdaType;
   }
 
   static Method createSamMethod(
-      ITypeBinding lambdaInterfaceBinding,
-      MethodDescriptor lambdaMethodDescriptor,
-      CompilationUnitNameLocator compilationUnitNameLocator) {
+      ITypeBinding lambdaInterfaceBinding, MethodDescriptor lambdaMethodDescriptor) {
     IMethodBinding samMethodBinding = JdtUtils.findSamMethodBinding(lambdaInterfaceBinding);
     Preconditions.checkNotNull(samMethodBinding);
-    MethodDescriptor samMethodDescriptor =
-        JdtUtils.createMethodDescriptor(samMethodBinding, compilationUnitNameLocator);
+    MethodDescriptor samMethodDescriptor = JdtUtils.createMethodDescriptor(samMethodBinding);
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
     for (int i = 0; i < lambdaMethodDescriptor.getParameterTypeDescriptors().size(); i++) {

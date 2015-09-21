@@ -1,0 +1,122 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.devirtualizedcalls.ArrayCalls.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.devirtualizedcalls.ArrayCalls$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
+
+
+class ArrayCalls extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_devirtualizedcalls_ArrayCalls() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    let array2d =
+        /**@type {Array<Array<*>>} */ ($Arrays.$create([1, 1], Object));
+    let length1 = array2d[0].length;
+    let length2 = array2d.length;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!ArrayCalls}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    ArrayCalls.$clinit();
+    let instance = new ArrayCalls;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_ArrayCalls();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_ArrayCalls() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_devirtualizedcalls_ArrayCalls();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof ArrayCalls; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, ArrayCalls);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    ArrayCalls.$clinit();
+    if (!ArrayCalls.$classArrayCalls) {
+      ArrayCalls.$classArrayCalls = Class.$createForClass(
+          $Util.$generateId('ArrayCalls'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.devirtualizedcalls.ArrayCalls'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.devirtualizedcalls.ArrayCalls'));
+    }
+    return ArrayCalls.$classArrayCalls;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = ArrayCalls;

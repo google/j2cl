@@ -1,0 +1,131 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class ArithmeticExpressions extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions() {
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    let a = 10;
+    let b = a++;
+    let c = a--;
+    let d = ++a;
+    let e = --a;
+    let f = -a;
+    let g = a;
+    let h = ~a;
+    let i = 1 + 1 + 2 - 5;
+    let j = (1 + 2) * (3 + 4);
+    let k = !(1 + 2 + 3 == 4);
+    let l = (1 + 2 != 4);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!ArithmeticExpressions}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    ArithmeticExpressions.$clinit();
+    let instance = new ArithmeticExpressions;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_arithmeticexpressions_ArithmeticExpressions();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof ArithmeticExpressions;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, ArithmeticExpressions);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    ArithmeticExpressions.$clinit();
+    if (!ArithmeticExpressions.$classArithmeticExpressions) {
+      ArithmeticExpressions.$classArithmeticExpressions = Class.$createForClass(
+          $Util.$generateId('ArithmeticExpressions'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions'));
+    }
+    return ArithmeticExpressions.$classArithmeticExpressions;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = ArithmeticExpressions;

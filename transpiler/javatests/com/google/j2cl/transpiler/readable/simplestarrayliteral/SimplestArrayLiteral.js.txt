@@ -1,110 +1,18 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/simplestarrayliteral/SimplestArrayLiteral.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.simplestarrayliteral.SimplestArrayLiteral.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.simplestarrayliteral.SimplestArrayLiteralModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.simplestarrayliteral.SimplestArrayLiteral');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _$Arrays = goog.require('vmbootstrap.Arrays');
 
 
-class SimplestArrayLiteral extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_simplestarrayliteral_SimplestArrayLiteral() {
-  }
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_main() { let values = ["sam", "bob", "charlie"]; }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!SimplestArrayLiteral}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    SimplestArrayLiteral.$clinit();
-    let instance = new SimplestArrayLiteral;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_simplestarrayliteral_SimplestArrayLiteral();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_simplestarrayliteral_SimplestArrayLiteral() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_simplestarrayliteral_SimplestArrayLiteral();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) {
-    return instance instanceof SimplestArrayLiteral;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, SimplestArrayLiteral);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!SimplestArrayLiteral.$classSimplestArrayLiteral) {
-      SimplestArrayLiteral.$classSimplestArrayLiteral = Class.$createForClass(
-          $Util.$generateId('SimplestArrayLiteral'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplestarrayliteral.SimplestArrayLiteral'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplestarrayliteral.SimplestArrayLiteral'));
-    }
-    return SimplestArrayLiteral.$classSimplestArrayLiteral;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.SimplestArrayLiteral = SimplestArrayLiteral;
+// Re-exports the implementation.
+var SimplestArrayLiteral = goog.require('gen.com.google.j2cl.transpiler.readable.simplestarrayliteral.SimplestArrayLiteral$impl');
+exports = SimplestArrayLiteral;

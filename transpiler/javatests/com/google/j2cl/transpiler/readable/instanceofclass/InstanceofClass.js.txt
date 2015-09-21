@@ -1,115 +1,19 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/instanceofclass/InstanceofClass.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClassModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let String = goog.require('gen.java.lang.StringModule').String;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $Asserts = goog.require('vmbootstrap.AssertsModule').Asserts;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _String = goog.require('gen.java.lang.String');
+let _$Asserts = goog.require('vmbootstrap.Asserts');
 
 
-class InstanceofClass extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass() {
-  }
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_test() {
-    let object = InstanceofClass.$create();
-    $Asserts.$enabled() &&
-        $Asserts.$assert(InstanceofClass.$isInstance(object));
-    $Asserts.$enabled() && $Asserts.$assert(Object.$isInstance(object));
-    $Asserts.$enabled() && $Asserts.$assert(!(String.$isInstance(object)));
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!InstanceofClass}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    InstanceofClass.$clinit();
-    let instance = new InstanceofClass;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof InstanceofClass; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, InstanceofClass);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!InstanceofClass.$classInstanceofClass) {
-      InstanceofClass.$classInstanceofClass = Class.$createForClass(
-          $Util.$generateId('InstanceofClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass'));
-    }
-    return InstanceofClass.$classInstanceofClass;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.InstanceofClass = InstanceofClass;
+// Re-exports the implementation.
+var InstanceofClass = goog.require('gen.com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass$impl');
+exports = InstanceofClass;

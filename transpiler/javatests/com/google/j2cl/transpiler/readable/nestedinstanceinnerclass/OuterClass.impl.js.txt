@@ -1,0 +1,132 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let OuterClass$InnerClass$InnerInnerClass = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$InnerClass$InnerInnerClass$impl');
+let OuterClass$InnerClass = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$InnerClass$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+class OuterClass extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass() {
+  }
+
+  /**
+   * @return {OuterClass$InnerClass}
+   * @public
+   */
+  m_$create_OuterClass$InnerClass() {
+    return OuterClass$InnerClass.$create(this);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    OuterClass.$create()
+        .m_$create_OuterClass$InnerClass()
+        .m_$create_OuterClass$InnerClass$InnerInnerClass();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!OuterClass}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    OuterClass.$clinit();
+    let instance = new OuterClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof OuterClass; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, OuterClass);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    OuterClass.$clinit();
+    if (!OuterClass.$classOuterClass) {
+      OuterClass.$classOuterClass = Class.$createForClass(
+          $Util.$generateId('OuterClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass'));
+    }
+    return OuterClass.$classOuterClass;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    OuterClass$InnerClass$InnerInnerClass = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$InnerClass$InnerInnerClass$impl');
+    OuterClass$InnerClass = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$InnerClass$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = OuterClass;

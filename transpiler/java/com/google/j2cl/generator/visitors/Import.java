@@ -15,42 +15,26 @@
  */
 package com.google.j2cl.generator.visitors;
 
-import com.google.common.collect.ComparisonChain;
 import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
 
 /**
  * A Node class that represents the goog.require statement
- * var ClassNameAlias = goog.require('moduleName').ClassName
+ * var ClassNameAlias = goog.require('gen.class.File.Name').
  */
 public class Import implements Comparable<Import> {
-  public static final String IMPORT_VM_PRIMITIVES_MODULE = "vmbootstrap.PrimitivesModule";
 
-  private String className;
-  private String moduleName;
+  private String implFileName;
+  private String headerFileName;
   private String alias;
   private TypeDescriptor typeDescriptor;
 
-  Import(String alias, TypeDescriptor typeDescriptor) {
-    String className = typeDescriptor.getClassName();
-    String moduleName = computeModuleName(typeDescriptor);
+  public Import(String alias, TypeDescriptor typeDescriptor) {
+    String baseFileName = computeBaseFileName(typeDescriptor);
 
-    // TODO: remove hack when Closure compiler supports circular references.
-    if (typeDescriptor == TypeDescriptors.OBJECT_TYPE_DESCRIPTOR
-        || typeDescriptor == TypeDescriptors.CLASS_TYPE_DESCRIPTOR) {
-      moduleName = computeModuleName("java.lang.Core");
-    }
-    this.className = className;
-    this.moduleName = moduleName;
+    this.headerFileName = baseFileName;
+    this.implFileName = baseFileName + "$impl";
     this.alias = alias;
     this.typeDescriptor = typeDescriptor;
-  }
-
-  /**
-   * Returns the class name.
-   */
-  public String getClassName() {
-    return className;
   }
 
   /**
@@ -61,10 +45,17 @@ public class Import implements Comparable<Import> {
   }
 
   /**
-   * Returns the module name.
+   * Returns the class file name.
    */
-  public String getModuleName() {
-    return moduleName;
+  public String getImplFileName() {
+    return implFileName;
+  }
+
+  /**
+   * Returns the header file name.
+   */
+  public String getHeaderFileName() {
+    return headerFileName;
   }
 
   /**
@@ -79,23 +70,16 @@ public class Import implements Comparable<Import> {
    */
   @Override
   public int compareTo(Import that) {
-    return ComparisonChain.start()
-        .compare(this.moduleName, that.moduleName)
-        .compare(this.className, that.className)
-        .result();
+    return this.implFileName.compareTo(that.implFileName);
   }
 
-  private static String computeModuleName(TypeDescriptor typeDescriptor) {
+  private static String computeBaseFileName(TypeDescriptor typeDescriptor) {
     if (typeDescriptor.isPrimitive()) {
-      return IMPORT_VM_PRIMITIVES_MODULE;
+      return "vmbootstrap.primitives.$" + typeDescriptor.getSourceName();
     }
     if (typeDescriptor.isRaw()) {
-      return typeDescriptor.getCompilationUnitSourceName();
+      return typeDescriptor.getSourceName();
     }
-    return computeModuleName(typeDescriptor.getCompilationUnitSourceName());
-  }
-
-  private static String computeModuleName(String compilationUnitSourceName) {
-    return "gen." + compilationUnitSourceName + "Module";
+    return "gen." + typeDescriptor.getSourceName();
   }
 }

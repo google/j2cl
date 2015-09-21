@@ -51,7 +51,6 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
   private static TypeDescriptor create(
       Iterable<String> packageComponents,
       Iterable<String> classComponents,
-      String compilationUnitSimpleName,
       boolean isRaw,
       Iterable<TypeDescriptor> typeArgumentDescriptors,
       boolean isTypeVariable) {
@@ -61,31 +60,21 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
             new AutoValue_RegularTypeDescriptor(
                 ImmutableList.copyOf(packageComponents),
                 ImmutableList.copyOf(classComponents),
-                compilationUnitSimpleName,
                 isRaw,
                 ImmutableList.copyOf(typeArgumentDescriptors),
                 isTypeVariable));
   }
 
   public static TypeDescriptor create(
-      Iterable<String> packageComponents,
-      Iterable<String> classComponents,
-      String compilationUnitSimpleName) {
+      Iterable<String> packageComponents, Iterable<String> classComponents) {
     return create(
-        packageComponents,
-        classComponents,
-        compilationUnitSimpleName,
-        false,
-        ImmutableList.<TypeDescriptor>of(),
-        false);
+        packageComponents, classComponents, false, ImmutableList.<TypeDescriptor>of(), false);
   }
 
-  public static TypeDescriptor createRaw(
-      Iterable<String> nameSpaceComponents, String className, String moduleName) {
+  public static TypeDescriptor createRaw(Iterable<String> nameSpaceComponents, String className) {
     return create(
         nameSpaceComponents,
         Collections.singleton(className),
-        moduleName,
         true,
         ImmutableList.<TypeDescriptor>of(),
         false);
@@ -94,32 +83,23 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
   public static TypeDescriptor createParameterizedType(
       Iterable<String> packageComponents,
       Iterable<String> classComponents,
-      String compilationUnitSimpleName,
       Iterable<TypeDescriptor> typeArgumentDescriptors) {
     return create(
         packageComponents,
         classComponents,
-        compilationUnitSimpleName,
         false,
         ImmutableList.copyOf(typeArgumentDescriptors),
         false);
   }
 
   public static TypeDescriptor createTypeVariable(
-      Iterable<String> packageComponents,
-      Iterable<String> classComponents,
-      String compilationUnitSimpleName) {
+      Iterable<String> packageComponents, Iterable<String> classComponents) {
     return create(
-        packageComponents,
-        classComponents,
-        compilationUnitSimpleName,
-        false,
-        ImmutableList.<TypeDescriptor>of(),
-        true);
+        packageComponents, classComponents, false, ImmutableList.<TypeDescriptor>of(), true);
   }
 
   static TypeDescriptor createPrimitive(String primitiveTypeName) {
-    return create(new ArrayList<String>(), Arrays.asList(primitiveTypeName), "");
+    return create(new ArrayList<String>(), Arrays.asList(primitiveTypeName));
   }
 
   static Interner<TypeDescriptor> getInterner() {
@@ -132,8 +112,6 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
   public abstract String getBinaryName();
 
   public abstract String getClassName();
-
-  public abstract String getCompilationUnitSourceName();
 
   public abstract String getSimpleName();
 

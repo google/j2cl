@@ -1,0 +1,148 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass$1InnerClass.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass$1InnerClass$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let SimpleLocalClass = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class SimpleLocalClass$1InnerClass extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {number}
+     */
+    this.$c_localVar = 0;
+    /**
+     * @public {number}
+     */
+    this.$c_p = 0;
+    /**
+     * @public {SimpleLocalClass}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$1InnerClass =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$1InnerClass() {
+  }
+
+  /**
+   * @return {number}
+   * @public
+   */
+  m_fun() { return this.$c_localVar + this.$c_p; }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {number} $c_localVar
+   * @param {number} $c_p
+   * @param {SimpleLocalClass} $outer_this
+   * @return {!SimpleLocalClass$1InnerClass}
+   * @public
+   * @nocollapse
+   */
+  static $create($c_localVar, $c_p, $outer_this) {
+    SimpleLocalClass$1InnerClass.$clinit();
+    let instance = new SimpleLocalClass$1InnerClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$1InnerClass(
+            $c_localVar, $c_p, $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {number} $c_localVar
+   * @param {number} $c_p
+   * @param {SimpleLocalClass} $outer_this
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$1InnerClass(
+      $c_localVar, $c_p, $outer_this) {
+    this.$c_localVar = $c_localVar;
+    this.$c_p = $c_p;
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$1InnerClass =
+        $outer_this;
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass$1InnerClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof SimpleLocalClass$1InnerClass;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SimpleLocalClass$1InnerClass);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    SimpleLocalClass$1InnerClass.$clinit();
+    if (!SimpleLocalClass$1InnerClass.$classSimpleLocalClass$1InnerClass) {
+      SimpleLocalClass$1InnerClass
+          .$classSimpleLocalClass$1InnerClass = Class.$createForClass(
+          $Util.$generateId('1InnerClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass$1InnerClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.1InnerClass'));
+    }
+    return SimpleLocalClass$1InnerClass.$classSimpleLocalClass$1InnerClass;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    SimpleLocalClass = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = SimpleLocalClass$1InnerClass;

@@ -102,6 +102,7 @@ class $className $extendsClause {
    */
 #if (${classType.isEnum()})
   static $getClass() {
+    $className.$clinit();
     if (!${className}.$class${className}) {
       ${className}.$class${className} = $classAlias.$createForEnum(
           $utilAlias.$generateId('$simpleName'),
@@ -115,6 +116,7 @@ class $className $extendsClause {
   }
 #else
   static $getClass() {
+    $className.$clinit();
     if (!${className}.$class${className}) {
       ${className}.$class${className} = $classAlias.$createForClass(
           $utilAlias.$generateId('$simpleName'),

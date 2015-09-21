@@ -1,0 +1,118 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterfaceGenericImpl.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterfaceGenericImpl$impl');
+
+
+let GenericInterface = goog.require('gen.com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterface$impl');
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+/**
+ * @template C_T
+ * @implements {GenericInterface<C_T>}
+ */
+class GenericInterfaceGenericImpl extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericInterfaceGenericImpl() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_T
+   * @return {!GenericInterfaceGenericImpl<C_T>}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    GenericInterfaceGenericImpl.$clinit();
+    let instance = new GenericInterfaceGenericImpl;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericInterfaceGenericImpl();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericInterfaceGenericImpl() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericInterfaceGenericImpl();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof GenericInterfaceGenericImpl;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, GenericInterfaceGenericImpl);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    GenericInterfaceGenericImpl.$clinit();
+    if (!GenericInterfaceGenericImpl.$classGenericInterfaceGenericImpl) {
+      GenericInterfaceGenericImpl
+          .$classGenericInterfaceGenericImpl = Class.$createForClass(
+          $Util.$generateId('GenericInterfaceGenericImpl'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterfaceGenericImpl'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterfaceGenericImpl'));
+    }
+    return GenericInterfaceGenericImpl.$classGenericInterfaceGenericImpl;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+GenericInterface.$markImplementor(GenericInterfaceGenericImpl);
+
+
+
+/**
+ * Export class.
+ */
+exports = GenericInterfaceGenericImpl;

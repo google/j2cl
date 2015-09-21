@@ -1,0 +1,96 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericSubInterface.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericSubInterface$impl');
+
+
+let GenericInterface = goog.require('gen.com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterface$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+/**
+ * @interface
+ * @template C_T
+ * @extends {GenericInterface<C_T>}
+ */
+class GenericSubInterface {
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    GenericInterface.$markImplementor(classConstructor);
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericSubInterface =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+           instance
+               .$implements__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericSubInterface;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+           classConstructor.prototype
+               .$implements__com_google_j2cl_transpiler_readable_implementsgenericinterface_GenericSubInterface;
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    GenericSubInterface.$clinit();
+    if (!GenericSubInterface.$classGenericSubInterface) {
+      GenericSubInterface.$classGenericSubInterface = Class.$createForInterface(
+          $Util.$generateId('GenericSubInterface'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericSubInterface'),
+          null,
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericSubInterface'));
+    }
+    return GenericSubInterface.$classGenericSubInterface;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
+}
+;
+
+
+GenericSubInterface.$markImplementor(
+    /** @type {Function} */ (GenericSubInterface));
+
+/**
+ * Export class.
+ */
+exports = GenericSubInterface;

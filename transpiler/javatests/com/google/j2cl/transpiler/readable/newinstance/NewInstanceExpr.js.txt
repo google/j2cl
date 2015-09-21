@@ -1,112 +1,19 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/newinstance/NewInstanceExpr.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.newinstance.NewInstanceExprModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let String = goog.require('gen.java.lang.StringModule').String;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _String = goog.require('gen.java.lang.String');
+let _$Arrays = goog.require('vmbootstrap.Arrays');
 
 
-class NewInstanceExpr extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_newinstance_NewInstanceExpr() {}
-
-  /**
-   * @param {Array<?string>} args
-   * @return {void}
-   * @public
-   */
-  static m_main__arrayOf_java_lang_String(args) {
-    NewInstanceExpr.$clinit();
-    let a = NewInstanceExpr.$create();
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!NewInstanceExpr}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    NewInstanceExpr.$clinit();
-    let instance = new NewInstanceExpr;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_newinstance_NewInstanceExpr();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_newinstance_NewInstanceExpr() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_newinstance_NewInstanceExpr();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof NewInstanceExpr; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, NewInstanceExpr);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!NewInstanceExpr.$classNewInstanceExpr) {
-      NewInstanceExpr.$classNewInstanceExpr = Class.$createForClass(
-          $Util.$generateId('NewInstanceExpr'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr'));
-    }
-    return NewInstanceExpr.$classNewInstanceExpr;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.NewInstanceExpr = NewInstanceExpr;
+// Re-exports the implementation.
+var NewInstanceExpr = goog.require('gen.com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr$impl');
+exports = NewInstanceExpr;

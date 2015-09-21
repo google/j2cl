@@ -10,6 +10,6 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "overridingclassmethods",
+    name = "overridingmethods",
     srcs = glob(["*.java"]),
 )

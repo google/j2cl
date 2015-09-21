@@ -1,0 +1,113 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.staticblocklocalvar.StaticBlockLocalVar.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.staticblocklocalvar.StaticBlockLocalVar$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class StaticBlockLocalVar extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_staticblocklocalvar_StaticBlockLocalVar() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!StaticBlockLocalVar}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    StaticBlockLocalVar.$clinit();
+    let instance = new StaticBlockLocalVar;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_staticblocklocalvar_StaticBlockLocalVar();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_staticblocklocalvar_StaticBlockLocalVar() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_staticblocklocalvar_StaticBlockLocalVar();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof StaticBlockLocalVar;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, StaticBlockLocalVar);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    StaticBlockLocalVar.$clinit();
+    if (!StaticBlockLocalVar.$classStaticBlockLocalVar) {
+      StaticBlockLocalVar.$classStaticBlockLocalVar = Class.$createForClass(
+          $Util.$generateId('StaticBlockLocalVar'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.staticblocklocalvar.StaticBlockLocalVar'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.staticblocklocalvar.StaticBlockLocalVar'));
+    }
+    return StaticBlockLocalVar.$classStaticBlockLocalVar;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    StaticBlockLocalVar.$clinit = function() {};
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+    let i = 10;
+    i += 20;
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = StaticBlockLocalVar;

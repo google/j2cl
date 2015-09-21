@@ -1,0 +1,105 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn$Runner.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn$Runner$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let LambdaNoReturn = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+/**
+ * @interface
+ */
+class LambdaNoReturn$Runner {
+  /**
+   * @return {void}
+   * @public
+   */
+  m_run() {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_lambdanoreturn_LambdaNoReturn$Runner =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+           instance
+               .$implements__com_google_j2cl_transpiler_readable_lambdanoreturn_LambdaNoReturn$Runner;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+           classConstructor.prototype
+               .$implements__com_google_j2cl_transpiler_readable_lambdanoreturn_LambdaNoReturn$Runner;
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    LambdaNoReturn$Runner.$clinit();
+    if (!LambdaNoReturn$Runner.$classLambdaNoReturn$Runner) {
+      LambdaNoReturn$Runner
+          .$classLambdaNoReturn$Runner = Class.$createForInterface(
+          $Util.$generateId('Runner'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn$Runner'),
+          null,
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn.Runner'));
+    }
+    return LambdaNoReturn$Runner.$classLambdaNoReturn$Runner;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    LambdaNoReturn = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+  }
+}
+;
+
+
+LambdaNoReturn$Runner.$markImplementor(
+    /** @type {Function} */ (LambdaNoReturn$Runner));
+
+/**
+ * Export class.
+ */
+exports = LambdaNoReturn$Runner;

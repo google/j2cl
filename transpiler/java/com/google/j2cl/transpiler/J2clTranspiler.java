@@ -14,6 +14,7 @@
 package com.google.j2cl.transpiler;
 
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.visitors.ControlStatementFormatter;
 import com.google.j2cl.ast.visitors.InsertImplicitCastsVisitor;
 import com.google.j2cl.ast.visitors.InsertInstanceInitCallsVisitor;
@@ -27,13 +28,16 @@ import com.google.j2cl.frontend.CompilationUnitBuilder;
 import com.google.j2cl.frontend.FrontendFlags;
 import com.google.j2cl.frontend.FrontendOptions;
 import com.google.j2cl.frontend.JdtParser;
-import com.google.j2cl.generator.JavaScriptGenerator;
+import com.google.j2cl.generator.JavaScriptHeaderGenerator;
+import com.google.j2cl.generator.JavaScriptImplGenerator;
 
 import org.apache.velocity.app.VelocityEngine;
 
 import java.nio.charset.Charset;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Translation tool for generating JavaScript source files from Java sources.
@@ -55,14 +59,14 @@ public class J2clTranspiler {
     try {
       transpiler.run();
     } catch (ExitGracefullyException e) {
-      // Error already reported. End execution now.
+      // Error already reported. End execution now and with an exit code that indicates failure.
+      System.exit(1);
     }
   }
 
   private List<CompilationUnit> convertUnits(
       Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath) {
-    List<CompilationUnit> compilationUnits =
-        CompilationUnitBuilder.build(jdtUnitsByFilePath, options, errors);
+    List<CompilationUnit> compilationUnits = CompilationUnitBuilder.build(jdtUnitsByFilePath);
     maybeExitGracefully();
     return compilationUnits;
   }
@@ -85,19 +89,39 @@ public class J2clTranspiler {
   }
 
   private void generateJsSources(List<CompilationUnit> j2clCompilationUnits) {
-    for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
-      // The parameters may be changed after the previous passes are implemented.
-      Charset charset = Charset.forName(options.getEncoding());
+    // The parameters may be changed after the previous passes are implemented.
+    Charset charset = Charset.forName(options.getEncoding());
 
-      JavaScriptGenerator jsGenerator =
-          new JavaScriptGenerator(
-              errors,
-              options.getOutputFileSystem(),
-              options.getOutput(),
-              charset,
-              j2clCompilationUnit,
-              velocityEngine);
-      jsGenerator.writeToFile();
+    Set<String> superSourceFiles = new HashSet<>();
+    superSourceFiles.addAll(options.getSuperSourceFiles());
+
+    for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
+      // Don't output anything for super sourced files.
+      if (superSourceFiles.contains(j2clCompilationUnit.getFilePath())) {
+        continue;
+      }
+
+      for (JavaType javaType : j2clCompilationUnit.getTypes()) {
+        JavaScriptImplGenerator jsImplGenerator =
+            new JavaScriptImplGenerator(
+                errors,
+                options.getOutputFileSystem(),
+                options.getOutput(),
+                charset,
+                javaType,
+                velocityEngine);
+        jsImplGenerator.writeToFile();
+
+        JavaScriptHeaderGenerator jsHeaderGenerator =
+            new JavaScriptHeaderGenerator(
+                errors,
+                options.getOutputFileSystem(),
+                options.getOutput(),
+                charset,
+                javaType,
+                velocityEngine);
+        jsHeaderGenerator.writeToFile();
+      }
     }
 
     options.maybeCloseFileSystem();

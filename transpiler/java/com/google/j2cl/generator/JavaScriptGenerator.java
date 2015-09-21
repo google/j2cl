@@ -15,11 +15,14 @@
  */
 package com.google.j2cl.generator;
 
-import com.google.j2cl.ast.CompilationUnit;
+import com.google.common.collect.Lists;
+import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatheringVisitor;
+import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -28,14 +31,18 @@ import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystem;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
- * Generates JavaScript source files.
+ * A base class for JavaScript source generators. We may have two subclasses, which are
+ * for Header and Impl generation.
  */
-public class JavaScriptGenerator extends AbstractSourceGenerator {
-  private static final String TEMPLATE_FILE_PATH = "com/google/j2cl/generator/JsCompilationUnit.vm";
-  private final CompilationUnit compilationUnit;
+public abstract class JavaScriptGenerator extends AbstractSourceGenerator {
+  private final JavaType javaType;
   protected final VelocityEngine velocityEngine;
 
   public JavaScriptGenerator(
@@ -43,20 +50,11 @@ public class JavaScriptGenerator extends AbstractSourceGenerator {
       FileSystem outputFileSystem,
       String outputLocationPath,
       Charset charset,
-      CompilationUnit compilationUnit,
+      JavaType javaType,
       VelocityEngine velocityEngine) {
-    super(
-        errors,
-        outputFileSystem,
-        outputLocationPath,
-        createRelativeFilePath(compilationUnit),
-        charset);
-    this.compilationUnit = compilationUnit;
+    super(errors, outputFileSystem, outputLocationPath, createRelativeFilePath(javaType), charset);
+    this.javaType = javaType;
     this.velocityEngine = velocityEngine;
-  }
-
-  private static String createRelativeFilePath(CompilationUnit compilationUnit) {
-    return TranspilerUtils.getOutputPath(compilationUnit);
   }
 
   @Override
@@ -66,7 +64,7 @@ public class JavaScriptGenerator extends AbstractSourceGenerator {
 
     boolean success =
         velocityEngine.mergeTemplate(
-            TEMPLATE_FILE_PATH, StandardCharsets.UTF_8.name(), velocityContext, outputBuffer);
+            getTemplateFilePath(), StandardCharsets.UTF_8.name(), velocityContext, outputBuffer);
 
     if (!success) {
       errors.error(Errors.ERR_CANNOT_GENERATE_OUTPUT);
@@ -75,16 +73,26 @@ public class JavaScriptGenerator extends AbstractSourceGenerator {
     return outputBuffer.toString();
   }
 
-  private VelocityContext createContext() {
+  protected VelocityContext createContext() {
     VelocityContext context = new VelocityContext();
 
-    Set<Import> imports = ImportGatheringVisitor.gatherImports(compilationUnit);
-    StatementSourceGenerator statementSourceGenerator = new StatementSourceGenerator(imports);
+    Map<ImportCategory, Set<Import>> importsByCategory =
+        ImportGatheringVisitor.gatherImports(javaType);
 
-    context.put("compilationUnit", compilationUnit);
+    StatementSourceGenerator statementSourceGenerator =
+        new StatementSourceGenerator(
+            sortedList(
+                union(
+                    importsByCategory.get(ImportCategory.EAGER),
+                    importsByCategory.get(ImportCategory.LAZY))));
+
+    TypeDescriptor selfTypeDescriptor = javaType.getDescriptor().getRawTypeDescriptor();
+    context.put("classType", javaType);
+    context.put("selfImport", new Import(selfTypeDescriptor.getSimpleName(), selfTypeDescriptor));
     context.put("TranspilerUtils", TranspilerUtils.class);
     context.put("ManglingNameUtils", ManglingNameUtils.class);
-    context.put("imports", imports);
+    context.put("eagerImports", sortedList(importsByCategory.get(ImportCategory.EAGER)));
+    context.put("lazyImports", sortedList(importsByCategory.get(ImportCategory.LAZY)));
     context.put("statementSourceGenerator", statementSourceGenerator);
     context.put("javaLangClassTypeDecriptor", TypeDescriptors.CLASS_TYPE_DESCRIPTOR);
     context.put("nativeUtilTypeDecriptor", TypeDescriptors.NATIVE_UTIL_TYPE_DESCRIPTOR);
@@ -92,8 +100,20 @@ public class JavaScriptGenerator extends AbstractSourceGenerator {
     return context;
   }
 
-  @Override
-  public String getSuffix() {
-    return ".js";
+  private static <T extends Comparable<T>> List<T> sortedList(Set<T> set) {
+    List<T> sortedList = Lists.newArrayList(set);
+    Collections.sort(sortedList);
+    return sortedList;
+  }
+
+  private static <T> Set<T> union(Set<T> left, Set<T> right) {
+    HashSet<T> union = new HashSet<>();
+    union.addAll(left);
+    union.addAll(right);
+    return union;
+  }
+
+  private static String createRelativeFilePath(JavaType javaType) {
+    return TranspilerUtils.getOutputPath(javaType);
   }
 }

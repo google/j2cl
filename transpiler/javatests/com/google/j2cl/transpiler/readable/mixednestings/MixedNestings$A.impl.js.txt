@@ -1,0 +1,138 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let MixedNestings$A$1B = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$impl');
+let MixedNestings = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+class MixedNestings$A extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {MixedNestings}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_aa() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_a() { MixedNestings$A$1B.$create(this).m_b(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {MixedNestings} $outer_this
+   * @return {!MixedNestings$A}
+   * @public
+   * @nocollapse
+   */
+  static $create($outer_this) {
+    MixedNestings$A.$clinit();
+    let instance = new MixedNestings$A;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A(
+            $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {MixedNestings} $outer_this
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A =
+        $outer_this;
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof MixedNestings$A; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, MixedNestings$A);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    MixedNestings$A.$clinit();
+    if (!MixedNestings$A.$classMixedNestings$A) {
+      MixedNestings$A.$classMixedNestings$A = Class.$createForClass(
+          $Util.$generateId('A'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A'));
+    }
+    return MixedNestings$A.$classMixedNestings$A;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    MixedNestings$A$1B = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$impl');
+    MixedNestings = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = MixedNestings$A;

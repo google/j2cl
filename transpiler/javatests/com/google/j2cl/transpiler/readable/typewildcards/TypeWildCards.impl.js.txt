@@ -1,0 +1,146 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let GenericType = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.typewildcards.GenericType$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+class TypeWildCards extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards() {}
+
+  /**
+   * @param {GenericType<?>} g
+   * @return {void}
+   * @public
+   */
+  m_unbounded__com_google_j2cl_transpiler_readable_typewildcards_GenericType(
+      g) {}
+
+  /**
+   * @param {GenericType<?>} g
+   * @return {void}
+   * @public
+   */
+  m_upperBound__com_google_j2cl_transpiler_readable_typewildcards_GenericType(
+      g) {}
+
+  /**
+   * @param {GenericType<?>} g
+   * @return {void}
+   * @public
+   */
+  m_lowerBound__com_google_j2cl_transpiler_readable_typewildcards_GenericType(
+      g) {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    this.m_unbounded__com_google_j2cl_transpiler_readable_typewildcards_GenericType(
+        /**@type {GenericType<TypeWildCards>} */ (GenericType.$create()));
+    this.m_upperBound__com_google_j2cl_transpiler_readable_typewildcards_GenericType(
+        /**@type {GenericType<TypeWildCards>} */ (GenericType.$create()));
+    this.m_lowerBound__com_google_j2cl_transpiler_readable_typewildcards_GenericType(
+        /**@type {GenericType<TypeWildCards>} */ (GenericType.$create()));
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!TypeWildCards}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    TypeWildCards.$clinit();
+    let instance = new TypeWildCards;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof TypeWildCards; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, TypeWildCards);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    TypeWildCards.$clinit();
+    if (!TypeWildCards.$classTypeWildCards) {
+      TypeWildCards.$classTypeWildCards = Class.$createForClass(
+          $Util.$generateId('TypeWildCards'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards'));
+    }
+    return TypeWildCards.$classTypeWildCards;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    GenericType = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.typewildcards.GenericType$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = TypeWildCards;

@@ -1,0 +1,116 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.FooCallsSuperObjectMethod.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.FooCallsSuperObjectMethod$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+class FooCallsSuperObjectMethod extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_FooCallsSuperObjectMethod() {
+  }
+
+  /**
+   * @override
+   * @return {number}
+   * @public
+   */
+  m_hashCode() { return super.m_hashCode(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!FooCallsSuperObjectMethod}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    FooCallsSuperObjectMethod.$clinit();
+    let instance = new FooCallsSuperObjectMethod;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_FooCallsSuperObjectMethod();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_FooCallsSuperObjectMethod() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_FooCallsSuperObjectMethod();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof FooCallsSuperObjectMethod;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, FooCallsSuperObjectMethod);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    FooCallsSuperObjectMethod.$clinit();
+    if (!FooCallsSuperObjectMethod.$classFooCallsSuperObjectMethod) {
+      FooCallsSuperObjectMethod
+          .$classFooCallsSuperObjectMethod = Class.$createForClass(
+          $Util.$generateId('FooCallsSuperObjectMethod'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.FooCallsSuperObjectMethod'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.FooCallsSuperObjectMethod'));
+    }
+    return FooCallsSuperObjectMethod.$classFooCallsSuperObjectMethod;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = FooCallsSuperObjectMethod;

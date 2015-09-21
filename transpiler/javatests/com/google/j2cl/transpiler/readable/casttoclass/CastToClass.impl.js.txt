@@ -1,0 +1,117 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.casttoclass.CastToClass.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.casttoclass.CastToClass$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+class CastToClass extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_casttoclass_CastToClass() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    let o = CastToClass.$create();
+    let c =
+        /**@type {CastToClass} */ ($Casts.to(o, CastToClass.$isInstance(o)));
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!CastToClass}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    CastToClass.$clinit();
+    let instance = new CastToClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_casttoclass_CastToClass();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_casttoclass_CastToClass() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_casttoclass_CastToClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof CastToClass; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, CastToClass);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    CastToClass.$clinit();
+    if (!CastToClass.$classCastToClass) {
+      CastToClass.$classCastToClass = Class.$createForClass(
+          $Util.$generateId('CastToClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.casttoclass.CastToClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.casttoclass.CastToClass'));
+    }
+    return CastToClass.$classCastToClass;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = CastToClass;

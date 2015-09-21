@@ -47,7 +47,17 @@ public class OutputTest extends IntegrationTestCase {
     assertTrue(
         new File(
                 transpileResult.outputLocation,
+                "com/google/j2cl/transpiler/integration/output/Foo.impl.js")
+            .exists());
+    assertTrue(
+        new File(
+                transpileResult.outputLocation,
                 "com/google/j2cl/transpiler/integration/output/Bar.js")
+            .exists());
+    assertTrue(
+        new File(
+                transpileResult.outputLocation,
+                "com/google/j2cl/transpiler/integration/output/Bar.impl.js")
             .exists());
     assertFalse(new File(transpileResult.outputLocation, "some/thing/Bogus.js").exists());
   }
@@ -70,7 +80,9 @@ public class OutputTest extends IntegrationTestCase {
 
     try (ZipFile zipFile = new ZipFile(transpileResult.outputLocation)) {
       assertNotNull(zipFile.getEntry("com/google/j2cl/transpiler/integration/output/Foo.js"));
+      assertNotNull(zipFile.getEntry("com/google/j2cl/transpiler/integration/output/Foo.impl.js"));
       assertNotNull(zipFile.getEntry("com/google/j2cl/transpiler/integration/output/Bar.js"));
+      assertNotNull(zipFile.getEntry("com/google/j2cl/transpiler/integration/output/Bar.impl.js"));
       assertNull(zipFile.getEntry("some/thing/Bogus.js"));
     }
   }

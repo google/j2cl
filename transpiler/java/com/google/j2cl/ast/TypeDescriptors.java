@@ -46,47 +46,46 @@ public class TypeDescriptors {
   public static final TypeDescriptor VOID_TYPE_DESCRIPTOR =
       TypeDescriptor.createPrimitive(TypeDescriptor.VOID_TYPE_NAME);
   public static final TypeDescriptor WILD_CARD_TYPE_DESCRIPTOR =
-      TypeDescriptor.createTypeVariable(new ArrayList<String>(), Arrays.asList("?"), "");
+      TypeDescriptor.createTypeVariable(new ArrayList<String>(), Arrays.asList("?"));
   public static final TypeDescriptor CLASS_TYPE_DESCRIPTOR =
-      TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Class"), "Class");
+      TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Class"));
   public static final TypeDescriptor COMPARABLE_TYPE_DESCRIPTOR =
-      TypeDescriptor.create(
-          Arrays.asList("java", "lang"), Arrays.asList("Comparable"), "Comparable");
+      TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Comparable"));
   public static final TypeDescriptor OBJECT_TYPE_DESCRIPTOR =
-      TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Object"), "Object");
+      TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Object"));
   public static final TypeDescriptor NUMBER_TYPE_DESCRIPTOR =
-      TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Number"), "Number");
+      TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Number"));
   public static final TypeDescriptor STRING_TYPE_DESCRIPTOR =
-      TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("String"), "String");
+      TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("String"));
 
   /**
    * Bootstrap types.
    */
   public static final TypeDescriptor OBJECTS_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Objects", "ObjectsModule");
+      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Objects");
 
   public static final TypeDescriptor COMPARABLES_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Comparables", "ComparablesModule");
+      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Comparables");
 
   public static final TypeDescriptor NUMBERS_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Numbers", "NumbersModule");
+      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Numbers");
   public static final TypeDescriptor BOOLEANS_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Booleans", "BooleansModule");
+      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Booleans");
 
   public static final TypeDescriptor NATIVE_UTIL_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("nativebootstrap"), "Util", "UtilModule");
+      TypeDescriptor.createRaw(Arrays.asList("nativebootstrap"), "Util");
   public static final TypeDescriptor VM_ASSERTS_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Asserts", "AssertsModule");
+      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Asserts");
   public static final TypeDescriptor VM_ARRAYS_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Arrays", "ArraysModule");
+      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Arrays");
   public static final TypeDescriptor VM_CASTS_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Casts", "CastsModule");
+      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Casts");
   public static final TypeDescriptor VM_PRIMITIVES_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Primitives", "PrimitivesModule");
+      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap", "primitives"), "Primitives");
   public static final TypeDescriptor NATIVE_LONGS_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("nativebootstrap"), "LongUtils", "LongUtilsModule");
+      TypeDescriptor.createRaw(Arrays.asList("nativebootstrap"), "LongUtils");
   public static final TypeDescriptor NATIVE_LONG_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("nativebootstrap"), "Long", "LongUtilsModule");
+      TypeDescriptor.createRaw(Arrays.asList("nativebootstrap"), "Long");
 
   /**
    * Bootstrap type set.
@@ -114,29 +113,28 @@ public class TypeDescriptors {
   static {
     boxedTypeByPrimitiveType.put(
         BOOLEAN_TYPE_DESCRIPTOR,
-        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Boolean"), "Boolean"));
+        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Boolean")));
     boxedTypeByPrimitiveType.put(
         BYTE_TYPE_DESCRIPTOR,
-        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Byte"), "Byte"));
+        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Byte")));
     boxedTypeByPrimitiveType.put(
         CHAR_TYPE_DESCRIPTOR,
-        TypeDescriptor.create(
-            Arrays.asList("java", "lang"), Arrays.asList("Character"), "Character"));
+        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Character")));
     boxedTypeByPrimitiveType.put(
         DOUBLE_TYPE_DESCRIPTOR,
-        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Double"), "Double"));
+        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Double")));
     boxedTypeByPrimitiveType.put(
         FLOAT_TYPE_DESCRIPTOR,
-        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Float"), "Float"));
+        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Float")));
     boxedTypeByPrimitiveType.put(
         INT_TYPE_DESCRIPTOR,
-        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Integer"), "Integer"));
+        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Integer")));
     boxedTypeByPrimitiveType.put(
         LONG_TYPE_DESCRIPTOR,
-        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Long"), "Long"));
+        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Long")));
     boxedTypeByPrimitiveType.put(
         SHORT_TYPE_DESCRIPTOR,
-        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Short"), "Short"));
+        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Short")));
   }
 
   private TypeDescriptors() {}

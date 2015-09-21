@@ -1,0 +1,124 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.publicinstancefields.PublicInstanceFields.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.publicinstancefields.PublicInstanceFields$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class PublicInstanceFields extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {number}
+     */
+    this.f_a__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields =
+        0;
+    /**
+     * @public {number}
+     */
+    this.f_b__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields =
+        0;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields() {
+    this.f_a__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields =
+        1;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!PublicInstanceFields}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    PublicInstanceFields.$clinit();
+    let instance = new PublicInstanceFields;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof PublicInstanceFields;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, PublicInstanceFields);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    PublicInstanceFields.$clinit();
+    if (!PublicInstanceFields.$classPublicInstanceFields) {
+      PublicInstanceFields.$classPublicInstanceFields = Class.$createForClass(
+          $Util.$generateId('PublicInstanceFields'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.publicinstancefields.PublicInstanceFields'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.publicinstancefields.PublicInstanceFields'));
+    }
+    return PublicInstanceFields.$classPublicInstanceFields;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = PublicInstanceFields;

@@ -77,10 +77,10 @@ import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.generator.visitors.Import;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Generate javascript source code for {@code Statement}.
@@ -90,7 +90,7 @@ import java.util.Set;
 public class StatementSourceGenerator {
   private Map<TypeDescriptor, String> aliasByTypeDescriptor = new HashMap<>();
 
-  public StatementSourceGenerator(Set<Import> imports) {
+  public StatementSourceGenerator(Collection<Import> imports) {
     for (Import anImport : imports) {
       aliasByTypeDescriptor.put(anImport.getTypeDescriptor(), anImport.getAlias());
     }

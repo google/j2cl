@@ -1,133 +1,20 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/devirtualizedsupermethodcall/SubNumber.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumberModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Number = goog.require('gen.java.lang.NumberModule').Number;
-let $Long = goog.require('nativebootstrap.LongUtilsModule').Long;
-let $LongUtils = goog.require('nativebootstrap.LongUtilsModule').LongUtils;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $long = goog.require('vmbootstrap.PrimitivesModule').$long;
-let $Primitives = goog.require('vmbootstrap.PrimitivesModule').Primitives;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Number = goog.require('gen.java.lang.Number');
+let _$Long = goog.require('nativebootstrap.Long');
+let _$LongUtils = goog.require('nativebootstrap.LongUtils');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _$Primitives = goog.require('vmbootstrap.primitives.Primitives');
 
 
-class SubNumber extends Number {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_SubNumber() {
-  }
-
-  /**
-   * @override
-   * @return {number}
-   * @public
-   */
-  m_intValue() { return 0; }
-
-  /**
-   * @override
-   * @return {!$Long}
-   * @public
-   */
-  m_longValue() { return $Primitives.$castIntToLong(0); }
-
-  /**
-   * @override
-   * @return {number}
-   * @public
-   */
-  m_floatValue() { return 0; }
-
-  /**
-   * @override
-   * @return {number}
-   * @public
-   */
-  m_doubleValue() { return 0; }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!SubNumber}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    SubNumber.$clinit();
-    let instance = new SubNumber;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_SubNumber();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_SubNumber() {
-    this.$ctor__java_lang_Number();
-    this.$init__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_SubNumber();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof SubNumber; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, SubNumber);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!SubNumber.$classSubNumber) {
-      SubNumber.$classSubNumber = Class.$createForClass(
-          $Util.$generateId('SubNumber'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber'),
-          Number.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber'));
-    }
-    return SubNumber.$classSubNumber;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Number.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.SubNumber = SubNumber;
+// Re-exports the implementation.
+var SubNumber = goog.require('gen.com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber$impl');
+exports = SubNumber;

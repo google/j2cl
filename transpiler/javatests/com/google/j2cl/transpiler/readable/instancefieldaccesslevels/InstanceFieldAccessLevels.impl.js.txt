@@ -1,0 +1,135 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.instancefieldaccesslevels.InstanceFieldAccessLevels.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.instancefieldaccesslevels.InstanceFieldAccessLevels$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class InstanceFieldAccessLevels extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {number}
+     */
+    this.f_a__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels =
+        0;
+    /**
+     * @public {boolean}
+     */
+    this.f_b__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels_ =
+        false;
+    /**
+     * @public {*}
+     */
+    this.f_c__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels =
+        null;
+    /**
+     * @public {number}
+     */
+    this.f_d__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels =
+        0;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!InstanceFieldAccessLevels}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    InstanceFieldAccessLevels.$clinit();
+    let instance = new InstanceFieldAccessLevels;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_instancefieldaccesslevels_InstanceFieldAccessLevels();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof InstanceFieldAccessLevels;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, InstanceFieldAccessLevels);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    InstanceFieldAccessLevels.$clinit();
+    if (!InstanceFieldAccessLevels.$classInstanceFieldAccessLevels) {
+      InstanceFieldAccessLevels
+          .$classInstanceFieldAccessLevels = Class.$createForClass(
+          $Util.$generateId('InstanceFieldAccessLevels'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.instancefieldaccesslevels.InstanceFieldAccessLevels'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.instancefieldaccesslevels.InstanceFieldAccessLevels'));
+    }
+    return InstanceFieldAccessLevels.$classInstanceFieldAccessLevels;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = InstanceFieldAccessLevels;

@@ -1,0 +1,143 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let InstanceInnerClass$InnerClass = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass$InnerClass$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class InstanceInnerClass extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {number}
+     */
+    this.f_instanceField__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass =
+        0;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass() {
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_funOuter() {}
+
+  /**
+   * @return {InstanceInnerClass$InnerClass}
+   * @public
+   */
+  m_$create_InstanceInnerClass$InnerClass() {
+    return InstanceInnerClass$InnerClass.$create(this);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    InstanceInnerClass.$create().m_$create_InstanceInnerClass$InnerClass();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!InstanceInnerClass}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    InstanceInnerClass.$clinit();
+    let instance = new InstanceInnerClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof InstanceInnerClass;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, InstanceInnerClass);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    InstanceInnerClass.$clinit();
+    if (!InstanceInnerClass.$classInstanceInnerClass) {
+      InstanceInnerClass.$classInstanceInnerClass = Class.$createForClass(
+          $Util.$generateId('InstanceInnerClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass'));
+    }
+    return InstanceInnerClass.$classInstanceInnerClass;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    InstanceInnerClass$InnerClass = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass$InnerClass$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = InstanceInnerClass;

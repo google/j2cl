@@ -68,7 +68,7 @@ def integration_test(name, srcs, deps=[], defs=[]):
   # blaze build :optimized_js
   opt_harness = """
       goog.module('gen.opt.Harness');
-      var Main = goog.require('gen.%s.MainModule').Main;
+      var Main = goog.require('gen.%s.Main');
       Main.m_main__arrayOf_java_lang_String([]);
   """ % java_package
   native.genrule(
@@ -89,6 +89,8 @@ def integration_test(name, srcs, deps=[], defs=[]):
           "--remove_unused_local_vars=ON",
           "--remove_unused_vars",
           "--variable_renaming=ALL",
+          "--jscomp_off=lateProvide",
+          "--jscomp_off=extraRequire",
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
@@ -109,6 +111,8 @@ def integration_test(name, srcs, deps=[], defs=[]):
           "--pretty_print",
           "--property_renaming=OFF",
           "--variable_renaming=OFF",
+          "--jscomp_off=lateProvide",
+          "--jscomp_off=extraRequire",
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
@@ -123,6 +127,8 @@ def integration_test(name, srcs, deps=[], defs=[]):
           "--language_out=ECMASCRIPT5",
           "--define=ASSERTIONS_ENABLED_=true",
           "--pretty_print",
+          "--jscomp_off=lateProvide",
+          "--jscomp_off=extraRequire",
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
@@ -176,7 +182,7 @@ def integration_test(name, srcs, deps=[], defs=[]):
       // Enable assertions in uncompiled test mode.
       window.ASSERTIONS_ENABLED_ = true;
       var testSuite = goog.require('goog.testing.testSuite');
-      var Main = goog.require('gen.%s.MainModule').Main;
+      var Main = goog.require('gen.%s.Main');
       testSuite({
         test_Main: function() {
           Main.m_main__arrayOf_java_lang_String([]);
@@ -188,19 +194,20 @@ def integration_test(name, srcs, deps=[], defs=[]):
       outs=["TestHarness.js"],
       cmd="echo \"%s\" > $@" % test_harness,
   )
-  native.jsunit_test(
-      name="uncompiled_test",
-      srcs=["TestHarness.js"],
-      compile=0,
-      deps=[
-          ":" + name + "_js_library",
-          "//javascript/closure/testing:testsuite",
-      ],
-      deps_mgmt="closure",
-      externs_list=["//javascript/externs:common"],
-      jvm_flags=["-Dcom.google.testing.selenium.browser=CHROME_LINUX"],
-      data=["//testing/matrix/nativebrowsers/chrome:stable_data",],
-  )
+# TODO: restore when Blaze, DepsGenerator and JsTestRunner are ready for zips.
+#   native.jsunit_test(
+#       name="uncompiled_test",
+#       srcs=["TestHarness.js"],
+#       compile=0,
+#       deps=[
+#           ":" + name + "_js_library",
+#           "//javascript/closure/testing:testsuite",
+#       ],
+#       deps_mgmt="closure",
+#       externs_list=["//javascript/externs:common"],
+#       jvm_flags=["-Dcom.google.testing.selenium.browser=CHROME_LINUX"],
+#       data=["//testing/matrix/nativebrowsers/chrome:stable_data",],
+#   )
 
   native.jsunit_test(
       name="compiled_test",
@@ -217,6 +224,8 @@ def integration_test(name, srcs, deps=[], defs=[]):
           "--pretty_print",
           "--strict",
           "--variable_renaming=OFF",
+          "--jscomp_off=lateProvide",
+          "--jscomp_off=extraRequire",
       ] + defs,
       deps=[
           ":" + name + "_js_library",

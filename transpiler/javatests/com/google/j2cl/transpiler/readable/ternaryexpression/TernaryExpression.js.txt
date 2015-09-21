@@ -1,113 +1,19 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/ternaryexpression/TernaryExpression.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.ternaryexpression.TernaryExpression.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.ternaryexpression.TernaryExpressionModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.ternaryexpression.TernaryExpression');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
-let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _$boolean = goog.require('vmbootstrap.primitives.$boolean');
+let _$int = goog.require('vmbootstrap.primitives.$int');
 
 
-class TernaryExpression extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_ternaryexpression_TernaryExpression() {
-  }
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_test() {
-    let a = true;
-    let number = a ? 1 : 2;
-    let b = number == 1 ? number == 2 : number == 1;
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!TernaryExpression}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    TernaryExpression.$clinit();
-    let instance = new TernaryExpression;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_ternaryexpression_TernaryExpression();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_ternaryexpression_TernaryExpression() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_ternaryexpression_TernaryExpression();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof TernaryExpression; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, TernaryExpression);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!TernaryExpression.$classTernaryExpression) {
-      TernaryExpression.$classTernaryExpression = Class.$createForClass(
-          $Util.$generateId('TernaryExpression'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.ternaryexpression.TernaryExpression'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.ternaryexpression.TernaryExpression'));
-    }
-    return TernaryExpression.$classTernaryExpression;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.TernaryExpression = TernaryExpression;
+// Re-exports the implementation.
+var TernaryExpression = goog.require('gen.com.google.j2cl.transpiler.readable.ternaryexpression.TernaryExpression$impl');
+exports = TernaryExpression;

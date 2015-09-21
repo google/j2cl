@@ -97,6 +97,8 @@ def j2cl_java_test(**kwargs):
           "--strict",
           "--variable_renaming=OFF",
           "--pretty_print",
+          "--jscomp_off=lateProvide",
+          "--jscomp_off=extraRequire",
       ],
       externs_list=["//javascript/externs:common"],
       deps=[

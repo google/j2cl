@@ -1,0 +1,138 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber$impl');
+
+
+let Number = goog.require('gen.java.lang.Number$impl');
+let $Long = goog.require('nativebootstrap.Long$impl');
+let $LongUtils = goog.require('nativebootstrap.LongUtils$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.primitives.Primitives$impl');
+
+
+class SubNumber extends Number {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_SubNumber() {
+  }
+
+  /**
+   * @override
+   * @return {number}
+   * @public
+   */
+  m_intValue() { return 0; }
+
+  /**
+   * @override
+   * @return {!$Long}
+   * @public
+   */
+  m_longValue() { return $Primitives.$castIntToLong(0); }
+
+  /**
+   * @override
+   * @return {number}
+   * @public
+   */
+  m_floatValue() { return 0; }
+
+  /**
+   * @override
+   * @return {number}
+   * @public
+   */
+  m_doubleValue() { return 0; }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!SubNumber}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    SubNumber.$clinit();
+    let instance = new SubNumber;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_SubNumber();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_SubNumber() {
+    this.$ctor__java_lang_Number();
+    this.$init__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_SubNumber();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof SubNumber; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SubNumber);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    SubNumber.$clinit();
+    if (!SubNumber.$classSubNumber) {
+      SubNumber.$classSubNumber = Class.$createForClass(
+          $Util.$generateId('SubNumber'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber'),
+          Number.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber'));
+    }
+    return SubNumber.$classSubNumber;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $Primitives = goog.module.get('vmbootstrap.primitives.Primitives$impl');
+    Number.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = SubNumber;

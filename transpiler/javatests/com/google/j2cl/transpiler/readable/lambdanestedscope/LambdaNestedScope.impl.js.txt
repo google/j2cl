@@ -1,0 +1,120 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let LambdaNestedScope$Runner = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope$Runner$impl');
+let LambdaNestedScope$lambda$0 = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope$lambda$0$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+class LambdaNestedScope extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_lambdanestedscope_LambdaNestedScope() {
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() { let runner = LambdaNestedScope$lambda$0.$create(this); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!LambdaNestedScope}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    LambdaNestedScope.$clinit();
+    let instance = new LambdaNestedScope;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_lambdanestedscope_LambdaNestedScope();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_lambdanestedscope_LambdaNestedScope() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_lambdanestedscope_LambdaNestedScope();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof LambdaNestedScope; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, LambdaNestedScope);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    LambdaNestedScope.$clinit();
+    if (!LambdaNestedScope.$classLambdaNestedScope) {
+      LambdaNestedScope.$classLambdaNestedScope = Class.$createForClass(
+          $Util.$generateId('LambdaNestedScope'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope'));
+    }
+    return LambdaNestedScope.$classLambdaNestedScope;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    LambdaNestedScope$Runner = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope$Runner$impl');
+    LambdaNestedScope$lambda$0 = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope$lambda$0$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = LambdaNestedScope;

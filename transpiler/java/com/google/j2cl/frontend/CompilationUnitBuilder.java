@@ -80,7 +80,6 @@ import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableDeclarationStatement;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.WhileStatement;
-import com.google.j2cl.errors.Errors;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.eclipse.jdt.core.dom.ASTNode;
@@ -285,31 +284,24 @@ public class CompilationUnitBuilder {
       }
 
       // Add dispatch methods for package private methods.
-      currentType.addMethods(
-          PackagePrivateMethodsDispatcher.createDispatchMethods(
-              typeBinding, compilationUnitNameLocator));
+      currentType.addMethods(PackagePrivateMethodsDispatcher.createDispatchMethods(typeBinding));
 
       // Add bridge methods.
-      currentType.addMethods(
-          BridgeMethodsCreator.createBridgeMethods(typeBinding, compilationUnitNameLocator));
+      currentType.addMethods(BridgeMethodsCreator.createBridgeMethods(typeBinding));
       popType();
       return type;
     }
 
     private Field convert(EnumConstantDeclaration enumConstantDeclaration) {
-      IMethodBinding constructorBinding = enumConstantDeclaration.resolveConstructorBinding();
-
       Expression initializer =
           new NewInstance(
               null,
-              JdtUtils.createMethodDescriptor(constructorBinding, compilationUnitNameLocator),
+              JdtUtils.createMethodDescriptor(enumConstantDeclaration.resolveConstructorBinding()),
               convertExpressions(
                   JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(
                       enumConstantDeclaration.arguments())));
       return new Field(
-          JdtUtils.createFieldDescriptor(
-              enumConstantDeclaration.resolveVariable(), compilationUnitNameLocator),
-          initializer);
+          JdtUtils.createFieldDescriptor(enumConstantDeclaration.resolveVariable()), initializer);
     }
 
     private Method synthesizeDefaultConstructor(
@@ -342,7 +334,7 @@ public class CompilationUnitBuilder {
         ITypeBinding currentTypeBinding,
         ITypeBinding superTypeBinding,
         Collection<Variable> constructorImplicitParameters) {
-      TypeDescriptor superTypeDescriptor = createTypeDescriptor(superTypeBinding);
+      TypeDescriptor superTypeDescriptor = JdtUtils.createTypeDescriptor(superTypeBinding);
       MethodDescriptor superMethodDescriptor =
           ASTUtils.createConstructorDescriptor(
               superTypeDescriptor,
@@ -392,10 +384,7 @@ public class CompilationUnitBuilder {
         } else {
           initializer = convertConstantToLiteral(variableBinding);
         }
-        Field field =
-            new Field(
-                JdtUtils.createFieldDescriptor(variableBinding, compilationUnitNameLocator),
-                initializer);
+        Field field = new Field(JdtUtils.createFieldDescriptor(variableBinding), initializer);
         field.setCompileTimeConstant(variableBinding.getConstantValue() != null);
         fields.add(field);
       }
@@ -406,7 +395,7 @@ public class CompilationUnitBuilder {
       Object constantValue = variableBinding.getConstantValue();
       if (constantValue instanceof Number) {
         return new NumberLiteral(
-            createTypeDescriptor(variableBinding.getType()), (Number) constantValue);
+            JdtUtils.createTypeDescriptor(variableBinding.getType()), (Number) constantValue);
       }
       if (constantValue instanceof String) {
         return new StringLiteral(
@@ -431,8 +420,7 @@ public class CompilationUnitBuilder {
       for (Object element : methodDeclaration.parameters()) {
         SingleVariableDeclaration parameter = (SingleVariableDeclaration) element;
         IVariableBinding parameterBinding = parameter.resolveBinding();
-        Variable j2clParameter =
-            JdtUtils.createVariable(parameterBinding, compilationUnitNameLocator);
+        Variable j2clParameter = JdtUtils.createVariable(parameterBinding);
         parameters.add(j2clParameter);
         variableByJdtBinding.put(parameterBinding, j2clParameter);
       }
@@ -456,8 +444,7 @@ public class CompilationUnitBuilder {
 
       Method method =
           new Method(
-              JdtUtils.createMethodDescriptor(
-                  methodDeclaration.resolveBinding(), compilationUnitNameLocator),
+              JdtUtils.createMethodDescriptor(methodDeclaration.resolveBinding()),
               parameters,
               body,
               JdtUtils.isOverride(methodDeclaration.resolveBinding()));
@@ -496,14 +483,14 @@ public class CompilationUnitBuilder {
           expression.getInitializer() == null ? null : convert(expression.getInitializer());
 
       ArrayTypeDescriptor typeDescriptor =
-          (ArrayTypeDescriptor) createTypeDescriptor(expression.resolveTypeBinding());
+          (ArrayTypeDescriptor) JdtUtils.createTypeDescriptor(expression.resolveTypeBinding());
       return new NewArray(typeDescriptor, dimensionExpressions, arrayLiteral);
     }
 
     @SuppressWarnings({"cast", "unchecked"})
     private ArrayLiteral convert(org.eclipse.jdt.core.dom.ArrayInitializer expression) {
       return new ArrayLiteral(
-          createTypeDescriptor(expression.resolveTypeBinding()),
+          JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
           convertExpressions((List<org.eclipse.jdt.core.dom.Expression>) expression.expressions()));
     }
 
@@ -513,8 +500,7 @@ public class CompilationUnitBuilder {
 
     private CastExpression convert(org.eclipse.jdt.core.dom.CastExpression expression) {
       TypeDescriptor castTypeDescriptor =
-          JdtUtils.createTypeDescriptor(
-              expression.getType().resolveBinding(), compilationUnitNameLocator);
+          JdtUtils.createTypeDescriptor(expression.getType().resolveBinding());
       return new CastExpression(convert(expression.getExpression()), castTypeDescriptor);
     }
 
@@ -533,7 +519,7 @@ public class CompilationUnitBuilder {
       Expression qualifier =
           expression.getExpression() == null ? null : convert(expression.getExpression());
       MethodDescriptor constructorMethodDescriptor =
-          JdtUtils.createMethodDescriptor(constructorBinding, compilationUnitNameLocator);
+          JdtUtils.createMethodDescriptor(constructorBinding);
       List<Expression> arguments = new ArrayList<>();
       for (Object argument : expression.arguments()) {
         arguments.add(convert((org.eclipse.jdt.core.dom.Expression) argument));
@@ -548,7 +534,7 @@ public class CompilationUnitBuilder {
       if (JdtUtils.isInstanceMemberClass(newInstanceTypeBinding)) {
         // outerclass.new InnerClass() => outerClass.$create_InnerClass();
         TypeDescriptor outerclassTypeDescriptor =
-            createTypeDescriptor(constructorBinding.getDeclaringClass());
+            JdtUtils.createTypeDescriptor(constructorBinding.getDeclaringClass());
         newInstance =
             new MethodCall(
                 qualifier,
@@ -592,7 +578,7 @@ public class CompilationUnitBuilder {
                   new Function<ITypeBinding, TypeDescriptor>() {
                     @Override
                     public TypeDescriptor apply(ITypeBinding typeBinding) {
-                      return createTypeDescriptor(typeBinding);
+                      return JdtUtils.createTypeDescriptor(typeBinding);
                     }
                   })
               .toArray(TypeDescriptor.class);
@@ -747,7 +733,7 @@ public class CompilationUnitBuilder {
       Expression trueExpression = convert(jdtConditionalExpression.getThenExpression());
       Expression falseExpression = convert(jdtConditionalExpression.getElseExpression());
       return new TernaryExpression(
-          createTypeDescriptor(jdtConditionalExpression.resolveTypeBinding()),
+          JdtUtils.createTypeDescriptor(jdtConditionalExpression.resolveTypeBinding()),
           conditionExpression,
           trueExpression,
           falseExpression);
@@ -867,7 +853,7 @@ public class CompilationUnitBuilder {
 
       // T[] array = exp.
       Variable arrayVariable =
-          new Variable("$array", createTypeDescriptor(expressionTypeBinding), true, false);
+          new Variable("$array", JdtUtils.createTypeDescriptor(expressionTypeBinding), true, false);
       VariableDeclarationFragment arrayVariableDeclarationFragment =
           new VariableDeclarationFragment(arrayVariable, convert(statement.getExpression()));
 
@@ -938,7 +924,7 @@ public class CompilationUnitBuilder {
       Variable iteratorVariable =
           new Variable(
               "$iterator",
-              createTypeDescriptor(iteratorMethodBinding.getReturnType()),
+              JdtUtils.createTypeDescriptor(iteratorMethodBinding.getReturnType()),
               true,
               false);
       VariableDeclarationFragment iteratorDeclaration =
@@ -946,8 +932,7 @@ public class CompilationUnitBuilder {
               iteratorVariable,
               new MethodCall(
                   convert(statement.getExpression()),
-                  JdtUtils.createMethodDescriptor(
-                      iteratorMethodBinding, compilationUnitNameLocator),
+                  JdtUtils.createMethodDescriptor(iteratorMethodBinding),
                   Collections.<Expression>emptyList()));
 
       // $iterator.hasNext();
@@ -956,7 +941,7 @@ public class CompilationUnitBuilder {
       Expression condition =
           new MethodCall(
               iteratorVariable.getReference(),
-              JdtUtils.createMethodDescriptor(hasNextMethodBinding, compilationUnitNameLocator),
+              JdtUtils.createMethodDescriptor(hasNextMethodBinding),
               Collections.<Expression>emptyList());
 
       // T v = $iterator.next();
@@ -969,8 +954,7 @@ public class CompilationUnitBuilder {
                       convert(statement.getParameter()),
                       new MethodCall(
                           iteratorVariable.getReference(),
-                          JdtUtils.createMethodDescriptor(
-                              nextMethodBinding, compilationUnitNameLocator),
+                          JdtUtils.createMethodDescriptor(nextMethodBinding),
                           Collections.<Expression>emptyList()))));
 
       Statement body = convert(statement.getBody());
@@ -1015,7 +999,7 @@ public class CompilationUnitBuilder {
 
     private InstanceOfExpression convert(org.eclipse.jdt.core.dom.InstanceofExpression expression) {
       TypeDescriptor testTypeDescriptor =
-          createTypeDescriptor(expression.getRightOperand().resolveBinding());
+          JdtUtils.createTypeDescriptor(expression.getRightOperand().resolveBinding());
       return new InstanceOfExpression(convert(expression.getLeftOperand()), testTypeDescriptor);
     }
 
@@ -1037,8 +1021,7 @@ public class CompilationUnitBuilder {
           JdtUtils.createLambdaJavaType(
               expression.resolveTypeBinding(),
               expression.resolveMethodBinding(),
-              (RegularTypeDescriptor) createTypeDescriptor(enclosingClassTypeBinding),
-              compilationUnitNameLocator);
+              (RegularTypeDescriptor) JdtUtils.createTypeDescriptor(enclosingClassTypeBinding));
       pushType(lambdaType);
       TypeDescriptor lambdaTypeDescriptor = lambdaType.getDescriptor();
 
@@ -1048,10 +1031,7 @@ public class CompilationUnitBuilder {
 
       // Construct and add SAM method that delegates to the lambda method.
       Method samMethod =
-          JdtUtils.createSamMethod(
-              expression.resolveTypeBinding(),
-              lambdaMethod.getDescriptor(),
-              compilationUnitNameLocator);
+          JdtUtils.createSamMethod(expression.resolveTypeBinding(), lambdaMethod.getDescriptor());
       lambdaType.addMethod(samMethod);
 
       // Add fields for captured local variables.
@@ -1100,7 +1080,7 @@ public class CompilationUnitBuilder {
       IMethodBinding methodBinding = expression.resolveMethodBinding();
       String methodName = methodBinding.getName();
       TypeDescriptor returnTypeDescriptor =
-          JdtUtils.createTypeDescriptor(methodBinding.getReturnType(), compilationUnitNameLocator);
+          JdtUtils.createTypeDescriptor(methodBinding.getReturnType());
 
       // the lambda expression body, which can be either a Block or an Expression.
       ASTNode lambdaBody = expression.getBody();
@@ -1124,7 +1104,7 @@ public class CompilationUnitBuilder {
               new Function<ITypeBinding, TypeDescriptor>() {
                 @Override
                 public TypeDescriptor apply(ITypeBinding typeBinding) {
-                  return JdtUtils.createTypeDescriptor(typeBinding, compilationUnitNameLocator);
+                  return JdtUtils.createTypeDescriptor(typeBinding);
                 }
               });
 
@@ -1150,7 +1130,7 @@ public class CompilationUnitBuilder {
       Expression rightHandSide = convert(expression.getRightHandSide());
       BinaryOperator operator = JdtUtils.getBinaryOperator(expression.getOperator());
       return new BinaryExpression(
-          createTypeDescriptor(expression.resolveTypeBinding()),
+          JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
           leftHandSide,
           operator,
           rightHandSide);
@@ -1175,8 +1155,7 @@ public class CompilationUnitBuilder {
 
     private ExpressionStatement convert(org.eclipse.jdt.core.dom.ConstructorInvocation statement) {
       IMethodBinding constructorBinding = statement.resolveConstructorBinding();
-      MethodDescriptor methodDescriptor =
-          JdtUtils.createMethodDescriptor(constructorBinding, compilationUnitNameLocator);
+      MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(constructorBinding);
       List<Expression> arguments =
           convertExpressions(
               JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(statement.arguments()));
@@ -1194,8 +1173,7 @@ public class CompilationUnitBuilder {
     private FieldAccess convert(org.eclipse.jdt.core.dom.FieldAccess expression) {
       Expression qualifier = convert(expression.getExpression());
       IVariableBinding variableBinding = expression.resolveFieldBinding();
-      FieldDescriptor fieldDescriptor =
-          JdtUtils.createFieldDescriptor(variableBinding, compilationUnitNameLocator);
+      FieldDescriptor fieldDescriptor = JdtUtils.createFieldDescriptor(variableBinding);
       // If the field is referenced like a current type field with explicit 'this' but is part of
       // some other type. (It may happen in lambda, where 'this' refers to the enclosing instance).
       if (qualifier instanceof ThisReference
@@ -1218,7 +1196,7 @@ public class CompilationUnitBuilder {
       BinaryOperator operator = JdtUtils.getBinaryOperator(expression.getOperator());
       BinaryExpression binaryExpression =
           new BinaryExpression(
-              createTypeDescriptor(expression.resolveTypeBinding()),
+              JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
               leftOperand,
               operator,
               rightOperand);
@@ -1227,7 +1205,7 @@ public class CompilationUnitBuilder {
             (org.eclipse.jdt.core.dom.Expression) object;
         binaryExpression =
             new BinaryExpression(
-                createTypeDescriptor(expression.resolveTypeBinding()),
+                JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
                 binaryExpression,
                 operator,
                 convert(extendedOperand));
@@ -1248,8 +1226,7 @@ public class CompilationUnitBuilder {
                       methodBinding.getDeclaringClass(),
                       false))
               : convert(expression.getExpression());
-      MethodDescriptor methodDescriptor =
-          JdtUtils.createMethodDescriptor(methodBinding, compilationUnitNameLocator);
+      MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
       List<Expression> arguments =
           convertExpressions(
               JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(expression.arguments()));
@@ -1273,8 +1250,7 @@ public class CompilationUnitBuilder {
       // devirtualization then the resulting routing through Objects.doFoo() would end up calling
       // back onto the version of the method on the prototype (aka the wrong one).
 
-      MethodDescriptor methodDescriptor =
-          JdtUtils.createMethodDescriptor(methodBinding, compilationUnitNameLocator);
+      MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
       List<Expression> arguments =
           convertExpressions(
               JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(expression.arguments()));
@@ -1312,7 +1288,7 @@ public class CompilationUnitBuilder {
       Preconditions.checkArgument(methodBinding.isVarargs());
       int parametersLength = methodBinding.getParameterTypes().length;
       TypeDescriptor varargsTypeDescriptor =
-          createTypeDescriptor(methodBinding.getParameterTypes()[parametersLength - 1]);
+          JdtUtils.createTypeDescriptor(methodBinding.getParameterTypes()[parametersLength - 1]);
       if (j2clArguments.size() < parametersLength) {
         // no argument for the varargs, add an empty array.
         return new ArrayLiteral(varargsTypeDescriptor, new ArrayList<Expression>());
@@ -1348,7 +1324,7 @@ public class CompilationUnitBuilder {
 
     private NumberLiteral convert(org.eclipse.jdt.core.dom.NumberLiteral literal) {
       return new NumberLiteral(
-          createTypeDescriptor(literal.resolveTypeBinding()),
+          JdtUtils.createTypeDescriptor(literal.resolveTypeBinding()),
           (Number) literal.resolveConstantExpressionValue());
     }
 
@@ -1359,14 +1335,14 @@ public class CompilationUnitBuilder {
 
     private PostfixExpression convert(org.eclipse.jdt.core.dom.PostfixExpression expression) {
       return new PostfixExpression(
-          createTypeDescriptor(expression.resolveTypeBinding()),
+          JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
           convert(expression.getOperand()),
           JdtUtils.getPostfixOperator(expression.getOperator()));
     }
 
     private PrefixExpression convert(org.eclipse.jdt.core.dom.PrefixExpression expression) {
       return new PrefixExpression(
-          createTypeDescriptor(expression.resolveTypeBinding()),
+          JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
           convert(expression.getOperand()),
           JdtUtils.getPrefixOperator(expression.getOperator()));
     }
@@ -1377,8 +1353,7 @@ public class CompilationUnitBuilder {
         IVariableBinding variableBinding = (IVariableBinding) binding;
         if (variableBinding.isField()) {
           return new FieldAccess(
-              convert(expression.getQualifier()),
-              JdtUtils.createFieldDescriptor(variableBinding, compilationUnitNameLocator));
+              convert(expression.getQualifier()), JdtUtils.createFieldDescriptor(variableBinding));
         } else {
           throw new RuntimeException(
               "Need to implement translation for QualifiedName that is not a field.");
@@ -1397,7 +1372,7 @@ public class CompilationUnitBuilder {
       Expression expression =
           statement.getExpression() == null ? null : convert(statement.getExpression());
       TypeDescriptor returnTypeDescriptor =
-          createTypeDescriptor(currentMethodBinding.getReturnType());
+          JdtUtils.createTypeDescriptor(currentMethodBinding.getReturnType());
       return new ReturnStatement(expression, returnTypeDescriptor);
     }
 
@@ -1415,12 +1390,13 @@ public class CompilationUnitBuilder {
       }
       // The binding is a simple field and JDT provides direct knowledge of the declaring class.
       if (variableBinding.getDeclaringClass() != null) {
-        return createTypeDescriptor(variableBinding.getDeclaringClass());
+        return JdtUtils.createTypeDescriptor(variableBinding.getDeclaringClass());
       }
       // The binding is a local variable or parameter in method. JDT provides an indirect path to
       // the enclosing class.
       if (variableBinding.getDeclaringMethod() != null) {
-        return createTypeDescriptor(variableBinding.getDeclaringMethod().getDeclaringClass());
+        return JdtUtils.createTypeDescriptor(
+            variableBinding.getDeclaringMethod().getDeclaringClass());
       }
 
       throw new RuntimeException(
@@ -1433,8 +1409,7 @@ public class CompilationUnitBuilder {
         IVariableBinding variableBinding = (IVariableBinding) binding;
         if (variableBinding.isField()) {
           // It refers to a field.
-          FieldDescriptor fieldDescriptor =
-              JdtUtils.createFieldDescriptor(variableBinding, compilationUnitNameLocator);
+          FieldDescriptor fieldDescriptor = JdtUtils.createFieldDescriptor(variableBinding);
           if (!fieldDescriptor.isStatic()
               && !fieldDescriptor
                   .getEnclosingClassTypeDescriptor()
@@ -1492,7 +1467,7 @@ public class CompilationUnitBuilder {
         ITypeBinding currentTypeBinding, ITypeBinding outerTypeBinding, boolean strict) {
       Expression qualifier = new ThisReference(currentType.getDescriptor());
       ITypeBinding innerTypeBinding = currentTypeBinding;
-      if (createTypeDescriptor(innerTypeBinding) != currentType.getDescriptor()) {
+      if (JdtUtils.createTypeDescriptor(innerTypeBinding) != currentType.getDescriptor()) {
         // currentType is a lambda type.
         qualifier =
             new FieldAccess(
@@ -1509,9 +1484,9 @@ public class CompilationUnitBuilder {
           break;
         }
 
-        TypeDescriptor enclosingTypeDescriptor = createTypeDescriptor(innerTypeBinding);
+        TypeDescriptor enclosingTypeDescriptor = JdtUtils.createTypeDescriptor(innerTypeBinding);
         TypeDescriptor fieldTypeDescriptor =
-            createTypeDescriptor(innerTypeBinding.getDeclaringClass());
+            JdtUtils.createTypeDescriptor(innerTypeBinding.getDeclaringClass());
 
         qualifier =
             new FieldAccess(
@@ -1547,7 +1522,7 @@ public class CompilationUnitBuilder {
       TypeDescriptor typeDescriptor =
           node.getType() instanceof org.eclipse.jdt.core.dom.UnionType
               ? convert((org.eclipse.jdt.core.dom.UnionType) node.getType())
-              : createTypeDescriptor(node.getType().resolveBinding());
+              : JdtUtils.createTypeDescriptor(node.getType().resolveBinding());
       Variable variable = new Variable(name, typeDescriptor, false, false);
       variableByJdtBinding.put(node.resolveBinding(), variable);
       recordEnclosingType(variable, currentType);
@@ -1575,8 +1550,7 @@ public class CompilationUnitBuilder {
         org.eclipse.jdt.core.dom.SuperConstructorInvocation expression) {
       IMethodBinding superConstructorBinding = expression.resolveConstructorBinding();
       ITypeBinding superclassBinding = superConstructorBinding.getDeclaringClass();
-      MethodDescriptor methodDescriptor =
-          JdtUtils.createMethodDescriptor(superConstructorBinding, compilationUnitNameLocator);
+      MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(superConstructorBinding);
       List<Expression> arguments =
           convertExpressions(
               JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(expression.arguments()));
@@ -1606,9 +1580,9 @@ public class CompilationUnitBuilder {
     private Expression convert(org.eclipse.jdt.core.dom.TypeLiteral literal) {
       ITypeBinding typeBinding = literal.getType().resolveBinding();
 
-      TypeDescriptor literalTypeDescriptor = createTypeDescriptor(typeBinding);
+      TypeDescriptor literalTypeDescriptor = JdtUtils.createTypeDescriptor(typeBinding);
       TypeDescriptor javaLangClassTypeDescriptor =
-          createTypeDescriptor(literal.resolveTypeBinding());
+          JdtUtils.createTypeDescriptor(literal.resolveTypeBinding());
       if (typeBinding.getDimensions() == 0) {
         // <ClassLiteralClass>.$getClass()
         MethodDescriptor classMethodDescriptor =
@@ -1666,7 +1640,7 @@ public class CompilationUnitBuilder {
       List<TypeDescriptor> types = new ArrayList<>();
       for (Object object : unionType.types()) {
         org.eclipse.jdt.core.dom.Type type = (org.eclipse.jdt.core.dom.Type) object;
-        types.add(createTypeDescriptor(type.resolveBinding()));
+        types.add(JdtUtils.createTypeDescriptor(type.resolveBinding()));
       }
       return UnionTypeDescriptor.create(types);
     }
@@ -1674,7 +1648,7 @@ public class CompilationUnitBuilder {
     private VariableDeclarationFragment convert(
         org.eclipse.jdt.core.dom.VariableDeclarationFragment variableDeclarationFragment) {
       IVariableBinding variableBinding = variableDeclarationFragment.resolveBinding();
-      Variable variable = JdtUtils.createVariable(variableBinding, compilationUnitNameLocator);
+      Variable variable = JdtUtils.createVariable(variableBinding);
       recordEnclosingType(variable, currentType);
       Expression initializer =
           variableDeclarationFragment.getInitializer() == null
@@ -1723,14 +1697,15 @@ public class CompilationUnitBuilder {
           new JavaType(
               JdtUtils.getKindFromTypeBinding(typeBinding),
               JdtUtils.getVisibility(typeBinding.getModifiers()),
-              createTypeDescriptor(typeBinding));
+              JdtUtils.createTypeDescriptor(typeBinding));
 
-      type.setEnclosingTypeDescriptor(createTypeDescriptor(typeBinding.getDeclaringClass()));
+      type.setEnclosingTypeDescriptor(
+          JdtUtils.createTypeDescriptor(typeBinding.getDeclaringClass()));
 
-      TypeDescriptor superTypeDescriptor = createTypeDescriptor(superclassBinding);
+      TypeDescriptor superTypeDescriptor = JdtUtils.createTypeDescriptor(superclassBinding);
       type.setSuperTypeDescriptor(superTypeDescriptor);
       for (ITypeBinding superInterface : typeBinding.getInterfaces()) {
-        type.addSuperInterfaceDescriptor(createTypeDescriptor(superInterface));
+        type.addSuperInterfaceDescriptor(JdtUtils.createTypeDescriptor(superInterface));
       }
       type.setLocal(typeBinding.isLocal());
       type.setStatic(JdtUtils.isStatic(typeBinding.getModifiers()));
@@ -1738,30 +1713,15 @@ public class CompilationUnitBuilder {
     }
   }
 
-  private CompilationUnitNameLocator compilationUnitNameLocator;
-
   private CompilationUnit buildCompilationUnit(
       String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
     ASTConverter converter = new ASTConverter();
     return converter.convert(sourceFilePath, compilationUnit);
   }
 
-  private TypeDescriptor createTypeDescriptor(ITypeBinding typeBinding) {
-    if (typeBinding == null) {
-      return null;
-    }
-    TypeDescriptor typeDescriptor =
-        JdtUtils.createTypeDescriptor(typeBinding, compilationUnitNameLocator);
-    return typeDescriptor;
-  }
-
   public static List<CompilationUnit> build(
-      Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath,
-      FrontendOptions options,
-      Errors errors) {
-    CompilationUnitBuilder compilationUnitBuilder =
-        new CompilationUnitBuilder(
-            new CompilationUnitNameLocator(jdtUnitsByFilePath, options, errors));
+      Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath) {
+    CompilationUnitBuilder compilationUnitBuilder = new CompilationUnitBuilder();
 
     List<CompilationUnit> compilationUnits = new ArrayList<>();
     for (Entry<String, org.eclipse.jdt.core.dom.CompilationUnit> entry :
@@ -1772,7 +1732,5 @@ public class CompilationUnitBuilder {
     return compilationUnits;
   }
 
-  private CompilationUnitBuilder(CompilationUnitNameLocator compilationUnitNameLocator) {
-    this.compilationUnitNameLocator = compilationUnitNameLocator;
-  }
+  private CompilationUnitBuilder() {}
 }

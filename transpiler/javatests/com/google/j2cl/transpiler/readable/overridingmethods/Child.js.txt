@@ -1,121 +1,18 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/overridingmethods/Child.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.overridingmethods.Child.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.overridingmethods.ChildModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.overridingmethods.Child');
 
 
-let Parent = goog.require('gen.com.google.j2cl.transpiler.readable.overridingmethods.ParentModule').Parent;
-let SomeInterface = goog.require('gen.com.google.j2cl.transpiler.readable.overridingmethods.SomeInterfaceModule').SomeInterface;
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Parent = goog.require('gen.com.google.j2cl.transpiler.readable.overridingmethods.Parent');
+let _SomeInterface = goog.require('gen.com.google.j2cl.transpiler.readable.overridingmethods.SomeInterface');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
 
 
-/**
- * @implements {SomeInterface}
- */
-class Child extends Parent {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_overridingmethods_Child() {}
-
-  /**
-   * @override
-   * @return {void}
-   * @public
-   */
-  m_fun() {}
-
-  /**
-   * @override
-   * @return {void}
-   * @public
-   */
-  m_bar() {}
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!Child}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    Child.$clinit();
-    let instance = new Child;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_overridingmethods_Child();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_overridingmethods_Child() {
-    this.$ctor__com_google_j2cl_transpiler_readable_overridingmethods_Parent();
-    this.$init__com_google_j2cl_transpiler_readable_overridingmethods_Child();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof Child; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Child);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!Child.$classChild) {
-      Child.$classChild = Class.$createForClass(
-          $Util.$generateId('Child'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.overridingmethods.Child'),
-          Parent.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.overridingmethods.Child'));
-    }
-    return Child.$classChild;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Parent.$clinit(); }
-}
-;
-
-
-SomeInterface.$markImplementor(Child);
-
-
-
-/**
- * Export class.
- */
-exports.Child = Child;
+// Re-exports the implementation.
+var Child = goog.require('gen.com.google.j2cl.transpiler.readable.overridingmethods.Child$impl');
+exports = Child;

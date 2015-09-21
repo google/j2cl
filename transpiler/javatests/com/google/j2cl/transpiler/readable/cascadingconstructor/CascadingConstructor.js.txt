@@ -1,153 +1,18 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/cascadingconstructor/CascadingConstructor.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructorModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _$int = goog.require('vmbootstrap.primitives.$int');
 
 
-class CascadingConstructor extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() {
-    super();
-    /**
-     * @private {number}
-     */
-    this.f_a__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor_ =
-        0;
-    /**
-     * @private {number}
-     */
-    this.f_b__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor_ =
-        0;
-  }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor() {
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @param {number} a
-   * @param {number} b
-   * @return {!CascadingConstructor}
-   * @private
-   * @nocollapse
-   */
-  static $create__int__int(a, b) {
-    CascadingConstructor.$clinit();
-    let instance = new CascadingConstructor;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int__int(
-            a, b);
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @param {number} a
-   * @param {number} b
-   * @private
-   */
-  $ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int__int(
-      a, b) {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor();
-    this.f_a__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor_ =
-        a;
-    this.f_b__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor_ =
-        b;
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @param {number} a
-   * @return {!CascadingConstructor}
-   * @public
-   * @nocollapse
-   */
-  static $create__int(a) {
-    CascadingConstructor.$clinit();
-    let instance = new CascadingConstructor;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int(
-            a);
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @param {number} a
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int(
-      a) {
-    this.$ctor__com_google_j2cl_transpiler_readable_cascadingconstructor_CascadingConstructor__int__int(
-        a, a * 2);
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) {
-    return instance instanceof CascadingConstructor;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, CascadingConstructor);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!CascadingConstructor.$classCascadingConstructor) {
-      CascadingConstructor.$classCascadingConstructor = Class.$createForClass(
-          $Util.$generateId('CascadingConstructor'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor'));
-    }
-    return CascadingConstructor.$classCascadingConstructor;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.CascadingConstructor = CascadingConstructor;
+// Re-exports the implementation.
+var CascadingConstructor = goog.require('gen.com.google.j2cl.transpiler.readable.cascadingconstructor.CascadingConstructor$impl');
+exports = CascadingConstructor;

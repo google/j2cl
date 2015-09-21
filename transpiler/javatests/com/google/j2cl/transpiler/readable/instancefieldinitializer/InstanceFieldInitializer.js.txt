@@ -1,122 +1,18 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/instancefieldinitializer/InstanceFieldInitializer.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.instancefieldinitializer.InstanceFieldInitializer.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.instancefieldinitializer.InstanceFieldInitializerModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.instancefieldinitializer.InstanceFieldInitializer');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _$int = goog.require('vmbootstrap.primitives.$int');
 
 
-class InstanceFieldInitializer extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() {
-    super();
-    /**
-     * @public {number}
-     */
-    this.f_a__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer =
-        0;
-    /**
-     * @public {number}
-     */
-    this.f_b__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer =
-        0;
-  }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer() {
-    this.f_a__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer =
-        1;
-    this.f_b__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer =
-        this.f_a__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer *
-        2;
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!InstanceFieldInitializer}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    InstanceFieldInitializer.$clinit();
-    let instance = new InstanceFieldInitializer;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_instancefieldinitializer_InstanceFieldInitializer();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) {
-    return instance instanceof InstanceFieldInitializer;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, InstanceFieldInitializer);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!InstanceFieldInitializer.$classInstanceFieldInitializer) {
-      InstanceFieldInitializer
-          .$classInstanceFieldInitializer = Class.$createForClass(
-          $Util.$generateId('InstanceFieldInitializer'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.instancefieldinitializer.InstanceFieldInitializer'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.instancefieldinitializer.InstanceFieldInitializer'));
-    }
-    return InstanceFieldInitializer.$classInstanceFieldInitializer;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.InstanceFieldInitializer = InstanceFieldInitializer;
+// Re-exports the implementation.
+var InstanceFieldInitializer = goog.require('gen.com.google.j2cl.transpiler.readable.instancefieldinitializer.InstanceFieldInitializer$impl');
+exports = InstanceFieldInitializer;

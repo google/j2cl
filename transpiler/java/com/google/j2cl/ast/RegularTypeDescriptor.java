@@ -28,8 +28,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.annotation.Nullable;
-
 /**
  * A (by name) reference to a class.
  */
@@ -39,9 +37,6 @@ public abstract class RegularTypeDescriptor extends TypeDescriptor {
   public abstract ImmutableList<String> getPackageComponents();
 
   public abstract ImmutableList<String> getClassComponents();
-
-  @Nullable
-  public abstract String getCompilationUnitSimpleName();
 
   @Override
   public abstract boolean isRaw();
@@ -89,15 +84,6 @@ public abstract class RegularTypeDescriptor extends TypeDescriptor {
       return prefix + Joiner.on('_').join(nameComponents);
     }
     return Joiner.on('$').join(getClassComponents());
-  }
-
-  @Override
-  public String getCompilationUnitSourceName() {
-    if (getCompilationUnitSimpleName() == null) {
-      // Primitive type references don't have a compilation unit.
-      return null;
-    }
-    return Joiner.on(".").join(getPackageComponents()) + "." + getCompilationUnitSimpleName();
   }
 
   @Override
@@ -159,10 +145,7 @@ public abstract class RegularTypeDescriptor extends TypeDescriptor {
   @Override
   public TypeDescriptor getRawTypeDescriptor() {
     if (isParameterizedType()) {
-      return TypeDescriptor.create(
-          this.getPackageComponents(),
-          this.getClassComponents(),
-          this.getCompilationUnitSimpleName());
+      return TypeDescriptor.create(this.getPackageComponents(), this.getClassComponents());
     }
     return this;
   }

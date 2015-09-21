@@ -1,112 +1,18 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/whilestatement/WhileStatement.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.whilestatement.WhileStatement.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.whilestatement.WhileStatementModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.whilestatement.WhileStatement');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _$int = goog.require('vmbootstrap.primitives.$int');
 
 
-class WhileStatement extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_whilestatement_WhileStatement() {}
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_test() {
-    let count = 0;
-    while (count < 5) {
-      count++;
-    }
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!WhileStatement}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    WhileStatement.$clinit();
-    let instance = new WhileStatement;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_whilestatement_WhileStatement();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_whilestatement_WhileStatement() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_whilestatement_WhileStatement();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof WhileStatement; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, WhileStatement);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!WhileStatement.$classWhileStatement) {
-      WhileStatement.$classWhileStatement = Class.$createForClass(
-          $Util.$generateId('WhileStatement'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.whilestatement.WhileStatement'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.whilestatement.WhileStatement'));
-    }
-    return WhileStatement.$classWhileStatement;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.WhileStatement = WhileStatement;
+// Re-exports the implementation.
+var WhileStatement = goog.require('gen.com.google.j2cl.transpiler.readable.whilestatement.WhileStatement$impl');
+exports = WhileStatement;

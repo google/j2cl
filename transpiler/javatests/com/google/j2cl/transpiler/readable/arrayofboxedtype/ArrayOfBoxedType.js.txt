@@ -1,151 +1,27 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/arrayofboxedtype/ArrayOfBoxedType.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.arrayofboxedtype.ArrayOfBoxedType.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.arrayofboxedtype.ArrayOfBoxedTypeModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.arrayofboxedtype.ArrayOfBoxedType');
 
 
-let Boolean = goog.require('gen.java.lang.BooleanModule').Boolean;
-let Byte = goog.require('gen.java.lang.ByteModule').Byte;
-let Character = goog.require('gen.java.lang.CharacterModule').Character;
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let Double = goog.require('gen.java.lang.DoubleModule').Double;
-let Float = goog.require('gen.java.lang.FloatModule').Float;
-let Integer = goog.require('gen.java.lang.IntegerModule').Integer;
-let Long = goog.require('gen.java.lang.LongModule').Long;
-let Number = goog.require('gen.java.lang.NumberModule').Number;
-let Short = goog.require('gen.java.lang.ShortModule').Short;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Boolean = goog.require('gen.java.lang.Boolean');
+let _Byte = goog.require('gen.java.lang.Byte');
+let _Character = goog.require('gen.java.lang.Character');
+let _Class = goog.require('gen.java.lang.Class');
+let _Double = goog.require('gen.java.lang.Double');
+let _Float = goog.require('gen.java.lang.Float');
+let _Integer = goog.require('gen.java.lang.Integer');
+let _Long = goog.require('gen.java.lang.Long');
+let _Number = goog.require('gen.java.lang.Number');
+let _Short = goog.require('gen.java.lang.Short');
+let _$Arrays = goog.require('vmbootstrap.Arrays');
 
 
-class ArrayOfBoxedType extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_arrayofboxedtype_ArrayOfBoxedType() {
-  }
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_test() {
-    let numberArray =
-        /**@type {Array<(Number|?number)>} */ ($Arrays.$create([2], Number));
-    let byteArray = /**@type {Array<Byte>} */ ($Arrays.$create([2], Byte));
-    let doublerArray =
-        /**@type {Array<?number>} */ ($Arrays.$create([2], Double));
-    let floatArray = /**@type {Array<Float>} */ ($Arrays.$create([2], Float));
-    let integerArray =
-        /**@type {Array<Integer>} */ ($Arrays.$create([2], Integer));
-    let longArray = /**@type {Array<Long>} */ ($Arrays.$create([2], Long));
-    let shortArray = /**@type {Array<Short>} */ ($Arrays.$create([2], Short));
-    let characterArray =
-        /**@type {Array<Character>} */ ($Arrays.$create([2], Character));
-    let booleanArray =
-        /**@type {Array<?boolean>} */ ($Arrays.$create([2], Boolean));
-    let nArray = /**@type {Array<(Number|?number)>} */ (
-        $Arrays.$castTo(byteArray, Number, 1));
-    let bArray =
-        /**@type {Array<Byte>} */ ($Arrays.$castTo(byteArray, Byte, 1));
-    let dArray =
-        /**@type {Array<?number>} */ ($Arrays.$castTo(byteArray, Double, 1));
-    let fArray =
-        /**@type {Array<Float>} */ ($Arrays.$castTo(byteArray, Float, 1));
-    let iArray =
-        /**@type {Array<Integer>} */ ($Arrays.$castTo(byteArray, Integer, 1));
-    let lArray =
-        /**@type {Array<Long>} */ ($Arrays.$castTo(byteArray, Long, 1));
-    let sArray =
-        /**@type {Array<Short>} */ ($Arrays.$castTo(byteArray, Short, 1));
-    let cArray = /**@type {Array<Character>} */ (
-        $Arrays.$castTo(byteArray, Character, 1));
-    let boolArray =
-        /**@type {Array<?boolean>} */ ($Arrays.$castTo(byteArray, Boolean, 1));
-    $Arrays.$set(numberArray, 1, Integer.$create__int(1));
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!ArrayOfBoxedType}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    ArrayOfBoxedType.$clinit();
-    let instance = new ArrayOfBoxedType;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_arrayofboxedtype_ArrayOfBoxedType();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_arrayofboxedtype_ArrayOfBoxedType() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_arrayofboxedtype_ArrayOfBoxedType();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof ArrayOfBoxedType; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, ArrayOfBoxedType);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!ArrayOfBoxedType.$classArrayOfBoxedType) {
-      ArrayOfBoxedType.$classArrayOfBoxedType = Class.$createForClass(
-          $Util.$generateId('ArrayOfBoxedType'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.arrayofboxedtype.ArrayOfBoxedType'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.arrayofboxedtype.ArrayOfBoxedType'));
-    }
-    return ArrayOfBoxedType.$classArrayOfBoxedType;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.ArrayOfBoxedType = ArrayOfBoxedType;
+// Re-exports the implementation.
+var ArrayOfBoxedType = goog.require('gen.com.google.j2cl.transpiler.readable.arrayofboxedtype.ArrayOfBoxedType$impl');
+exports = ArrayOfBoxedType;

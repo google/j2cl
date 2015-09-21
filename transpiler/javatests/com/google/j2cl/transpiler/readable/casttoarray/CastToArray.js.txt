@@ -1,110 +1,18 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/casttoarray/CastToArray.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.casttoarray.CastToArray.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.casttoarray.CastToArrayModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.casttoarray.CastToArray');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _$Arrays = goog.require('vmbootstrap.Arrays');
 
 
-class CastToArray extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_casttoarray_CastToArray() {}
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_main() {
-    let foo = /**@type {Array<*>} */ ($Arrays.$castTo(null, Object, 1));
-    let bar = /**@type {Array<Array<*>>} */ ($Arrays.$castTo(null, Object, 2));
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!CastToArray}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    CastToArray.$clinit();
-    let instance = new CastToArray;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_casttoarray_CastToArray();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_casttoarray_CastToArray() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_casttoarray_CastToArray();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof CastToArray; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, CastToArray);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!CastToArray.$classCastToArray) {
-      CastToArray.$classCastToArray = Class.$createForClass(
-          $Util.$generateId('CastToArray'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.casttoarray.CastToArray'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.casttoarray.CastToArray'));
-    }
-    return CastToArray.$classCastToArray;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.CastToArray = CastToArray;
+// Re-exports the implementation.
+var CastToArray = goog.require('gen.com.google.j2cl.transpiler.readable.casttoarray.CastToArray$impl');
+exports = CastToArray;

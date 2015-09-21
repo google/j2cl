@@ -1,40 +1,14 @@
-goog.module('vmbootstrap.CastsModule');
-
-
-var ClassCastException =
-    goog.require('gen.java.lang.ClassCastExceptionModule').ClassCastException;
-
-
-class Casts {
-  /**
-   * @param {*} instance
-   * @param {boolean} condition
-   * @return {*}
-   */
-  static to(instance, condition) {
-    if (CAST_CHECKS_ENABLED_ && !condition) {
-      Casts.throwCastException();
-    }
-    return instance;
-  }
-
-  /**
-   * Isolates the exception throw here so that calling functions that perform
-   * casts can still be optimized by V8.
-   */
-  static throwCastException() {
-    throw ClassCastException.$create();
-  }
-};
-
-
 /**
- * @define {boolean} Whether or not to check casts.
- * @private
+ * Header hand rolled.
  */
-goog.define('CAST_CHECKS_ENABLED_', true);
+goog.module('vmbootstrap.Casts');
 
-/**
- * Exported class.
- */
-exports.Casts = Casts;
+
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _ClassCastException = goog.require('gen.java.lang.ClassCastException');
+
+
+// Re-exports the implementation.
+let Casts = goog.require('vmbootstrap.Casts$impl');
+exports = Casts;

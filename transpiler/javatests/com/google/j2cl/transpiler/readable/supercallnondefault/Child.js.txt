@@ -1,105 +1,18 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/supercallnondefault/Child.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.supercallnondefault.Child.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.supercallnondefault.ChildModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.supercallnondefault.Child');
 
 
-let Parent = goog.require('gen.com.google.j2cl.transpiler.readable.supercallnondefault.ParentModule').Parent;
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Parent = goog.require('gen.com.google.j2cl.transpiler.readable.supercallnondefault.Parent');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _$int = goog.require('vmbootstrap.primitives.$int');
 
 
-class Child extends Parent {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_supercallnondefault_Child() {}
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @param {number} a
-   * @return {!Child}
-   * @public
-   * @nocollapse
-   */
-  static $create__int(a) {
-    Child.$clinit();
-    let instance = new Child;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Child__int(
-            a);
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @param {number} a
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Child__int(a) {
-    this.$ctor__com_google_j2cl_transpiler_readable_supercallnondefault_Parent__int(
-        a);
-    this.$init__com_google_j2cl_transpiler_readable_supercallnondefault_Child();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof Child; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, Child);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!Child.$classChild) {
-      Child.$classChild = Class.$createForClass(
-          $Util.$generateId('Child'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.supercallnondefault.Child'),
-          Parent.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.supercallnondefault.Child'));
-    }
-    return Child.$classChild;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Parent.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.Child = Child;
+// Re-exports the implementation.
+var Child = goog.require('gen.com.google.j2cl.transpiler.readable.supercallnondefault.Child$impl');
+exports = Child;

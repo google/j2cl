@@ -1,196 +1,24 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/interfacedevirtualize/InterfaceDevirtualize.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualizeModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize');
 
 
-let Boolean = goog.require('gen.java.lang.BooleanModule').Boolean;
-let Comparable = goog.require('gen.java.lang.ComparableModule').Comparable;
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let Double = goog.require('gen.java.lang.DoubleModule').Double;
-let Integer = goog.require('gen.java.lang.IntegerModule').Integer;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $Booleans = goog.require('vmbootstrap.BooleansModule').Booleans;
-let $Comparables = goog.require('vmbootstrap.ComparablesModule').Comparables;
-let $Numbers = goog.require('vmbootstrap.NumbersModule').Numbers;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Boolean = goog.require('gen.java.lang.Boolean');
+let _Class = goog.require('gen.java.lang.Class');
+let _Comparable = goog.require('gen.java.lang.Comparable');
+let _Double = goog.require('gen.java.lang.Double');
+let _Integer = goog.require('gen.java.lang.Integer');
+let _$Booleans = goog.require('vmbootstrap.Booleans');
+let _$Comparables = goog.require('vmbootstrap.Comparables');
+let _$Numbers = goog.require('vmbootstrap.Numbers');
 
 
-class InterfaceDevirtualize extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_interfacedevirtualize_InterfaceDevirtualize() {
-  }
-
-  /**
-   * @template M_T
-   * @param {(Comparable<M_T>|?number|?boolean|?string)} c
-   * @param {M_T} t
-   * @return {number}
-   * @public
-   */
-  m_compare0__java_lang_Comparable__java_lang_Object(c, t) {
-    return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(c,
-                                                                            t);
-  }
-
-  /**
-   * @param {(Comparable|?number|?boolean|?string)} c
-   * @param {*} o
-   * @return {number}
-   * @public
-   */
-  m_compare1__java_lang_Comparable__java_lang_Object(c, o) {
-    return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(c,
-                                                                            o);
-  }
-
-  /**
-   * @param {(Comparable<?number>|?number|?boolean|?string)} c
-   * @param {?number} d
-   * @return {number}
-   * @public
-   */
-  m_compare2__java_lang_Comparable__java_lang_Double(c, d) {
-    return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(c,
-                                                                            d);
-  }
-
-  /**
-   * @param {?number} d1
-   * @param {?number} d2
-   * @return {number}
-   * @public
-   */
-  m_compare3__java_lang_Double__java_lang_Double(d1, d2) {
-    return $Numbers.m_compareTo__java_lang_Number__java_lang_Double(d1, d2);
-  }
-
-  /**
-   * @param {(Comparable<?boolean>|?number|?boolean|?string)} c
-   * @param {?boolean} d
-   * @return {number}
-   * @public
-   */
-  m_compare2__java_lang_Comparable__java_lang_Boolean(c, d) {
-    return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(c,
-                                                                            d);
-  }
-
-  /**
-   * @param {?boolean} d1
-   * @param {?boolean} d2
-   * @return {number}
-   * @public
-   */
-  m_compare3__java_lang_Boolean__java_lang_Boolean(d1, d2) {
-    return $Booleans.m_compareTo__java_lang_Boolean__java_lang_Boolean(d1, d2);
-  }
-
-  /**
-   * @param {(Comparable<Integer>|?number|?boolean|?string)} c
-   * @param {Integer} d
-   * @return {number}
-   * @public
-   */
-  m_compare2__java_lang_Comparable__java_lang_Integer(c, d) {
-    return $Comparables.m_compareTo__java_lang_Comparable__java_lang_Object(c,
-                                                                            d);
-  }
-
-  /**
-   * @param {Integer} d1
-   * @param {Integer} d2
-   * @return {number}
-   * @public
-   */
-  m_compare3__java_lang_Integer__java_lang_Integer(d1, d2) {
-    return d1.m_compareTo__java_lang_Integer(d2);
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!InterfaceDevirtualize}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    InterfaceDevirtualize.$clinit();
-    let instance = new InterfaceDevirtualize;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_interfacedevirtualize_InterfaceDevirtualize();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_interfacedevirtualize_InterfaceDevirtualize() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_interfacedevirtualize_InterfaceDevirtualize();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) {
-    return instance instanceof InterfaceDevirtualize;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, InterfaceDevirtualize);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!InterfaceDevirtualize.$classInterfaceDevirtualize) {
-      InterfaceDevirtualize.$classInterfaceDevirtualize = Class.$createForClass(
-          $Util.$generateId('InterfaceDevirtualize'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize'));
-    }
-    return InterfaceDevirtualize.$classInterfaceDevirtualize;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.InterfaceDevirtualize = InterfaceDevirtualize;
+// Re-exports the implementation.
+var InterfaceDevirtualize = goog.require('gen.com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize$impl');
+exports = InterfaceDevirtualize;

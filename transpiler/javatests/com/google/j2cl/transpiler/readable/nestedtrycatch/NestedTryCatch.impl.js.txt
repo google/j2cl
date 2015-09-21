@@ -1,0 +1,130 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Exception = goog.forwardDeclare('gen.java.lang.Exception$impl');
+
+
+class NestedTryCatch extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_nestedtrycatch_NestedTryCatch() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    try {
+      throw Exception.$create();
+    } catch (ae) {
+      if (Exception.$isInstance(ae)) {
+        try {
+          throw Exception.$create();
+        } catch (ie) {
+          if (Exception.$isInstance(ie)) {
+          } else {
+            throw ie;
+          }
+        }
+      } else {
+        throw ae;
+      }
+    }
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!NestedTryCatch}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    NestedTryCatch.$clinit();
+    let instance = new NestedTryCatch;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_nestedtrycatch_NestedTryCatch();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_nestedtrycatch_NestedTryCatch() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_nestedtrycatch_NestedTryCatch();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof NestedTryCatch; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, NestedTryCatch);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    NestedTryCatch.$clinit();
+    if (!NestedTryCatch.$classNestedTryCatch) {
+      NestedTryCatch.$classNestedTryCatch = Class.$createForClass(
+          $Util.$generateId('NestedTryCatch'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch'));
+    }
+    return NestedTryCatch.$classNestedTryCatch;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Exception = goog.module.get('gen.java.lang.Exception$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = NestedTryCatch;

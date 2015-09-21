@@ -63,6 +63,8 @@ def readable_example(name, srcs):
           "--remove_unused_vars",
           "--remove_unused_local_vars=ON",
           "--remove_dead_assignments",
+          "--jscomp_off=lateProvide",
+          "--jscomp_off=extraRequire",
       ],
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],

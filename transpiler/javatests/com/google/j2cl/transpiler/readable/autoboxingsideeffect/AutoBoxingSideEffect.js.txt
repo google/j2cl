@@ -1,186 +1,20 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/autoboxingsideeffect/AutoBoxingSideEffect.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffectModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let Integer = goog.require('gen.java.lang.IntegerModule').Integer;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $Numbers = goog.require('vmbootstrap.NumbersModule').Numbers;
-let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _Integer = goog.require('gen.java.lang.Integer');
+let _$Numbers = goog.require('vmbootstrap.Numbers');
+let _$int = goog.require('vmbootstrap.primitives.$int');
 
 
-class AutoBoxingSideEffect extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() {
-    super();
-    /**
-     * @public {Integer}
-     */
-    this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect =
-        null;
-    /**
-     * @private {number}
-     */
-    this.f_sideEffect__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect_ =
-        0;
-  }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect() {
-  }
-
-  /**
-   * @return {AutoBoxingSideEffect}
-   * @public
-   */
-  m_getWithSideEffect() {
-    this.f_sideEffect__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect_++;
-    return this;
-  }
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_main() {
-    let i = Integer.m_valueOf__int(10000);
-    let c = Integer.m_valueOf__int(1000);
-    c = Integer.m_valueOf__int(c.m_intValue() + i.m_intValue());
-    this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect =
-        Integer.m_valueOf__int(
-            this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect
-                .m_intValue() +
-            i.m_intValue());
-    ($Numbers.$q = this.m_getWithSideEffect(),
-     $Numbers.$q
-         .f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect =
-         Integer.m_valueOf__int(
-             $Numbers.$q
-                 .f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect
-                 .m_intValue() +
-             i.m_intValue()));
-    let e = c = Integer.m_valueOf__int(c.m_intValue() + 1);
-    e = this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect =
-        Integer.m_valueOf__int(
-            this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect
-                .m_intValue() +
-            1);
-    e = ($Numbers.$q = this.m_getWithSideEffect(),
-         $Numbers.$q
-             .f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect =
-             Integer.m_valueOf__int(
-                 $Numbers.$q
-                     .f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect
-                     .m_intValue() +
-                 1));
-    let f = ($Numbers.$v = i, i = Integer.m_valueOf__int(i.m_intValue() + 1),
-             $Numbers.$v);
-    f = ($Numbers.$v =
-             this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect,
-         this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect =
-             Integer.m_valueOf__int(
-                 this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect
-                     .m_intValue() +
-                 1),
-         $Numbers.$v);
-    f = ($Numbers.$q = this.m_getWithSideEffect(),
-         $Numbers.$v =
-             $Numbers.$q
-                 .f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect,
-         $Numbers.$q
-             .f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect =
-             Integer.m_valueOf__int(
-                 $Numbers.$q
-                     .f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect
-                     .m_intValue() +
-                 1),
-         $Numbers.$v);
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!AutoBoxingSideEffect}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    AutoBoxingSideEffect.$clinit();
-    let instance = new AutoBoxingSideEffect;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) {
-    return instance instanceof AutoBoxingSideEffect;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, AutoBoxingSideEffect);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!AutoBoxingSideEffect.$classAutoBoxingSideEffect) {
-      AutoBoxingSideEffect.$classAutoBoxingSideEffect = Class.$createForClass(
-          $Util.$generateId('AutoBoxingSideEffect'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect'));
-    }
-    return AutoBoxingSideEffect.$classAutoBoxingSideEffect;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.AutoBoxingSideEffect = AutoBoxingSideEffect;
+// Re-exports the implementation.
+var AutoBoxingSideEffect = goog.require('gen.com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect$impl');
+exports = AutoBoxingSideEffect;

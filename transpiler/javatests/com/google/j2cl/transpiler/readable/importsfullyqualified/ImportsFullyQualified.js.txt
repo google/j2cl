@@ -1,110 +1,18 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/importsfullyqualified/ImportsFullyQualified.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.importsfullyqualified.ImportsFullyQualified.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.importsfullyqualified.ImportsFullyQualifiedModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.importsfullyqualified.ImportsFullyQualified');
 
 
-let Serializable = goog.require('gen.java.io.SerializableModule').Serializable;
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Serializable = goog.require('gen.java.io.Serializable');
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
 
 
-/**
- * @implements {Serializable}
- */
-class ImportsFullyQualified extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_importsfullyqualified_ImportsFullyQualified() {
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!ImportsFullyQualified}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    ImportsFullyQualified.$clinit();
-    let instance = new ImportsFullyQualified;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_importsfullyqualified_ImportsFullyQualified();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_importsfullyqualified_ImportsFullyQualified() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_importsfullyqualified_ImportsFullyQualified();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) {
-    return instance instanceof ImportsFullyQualified;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, ImportsFullyQualified);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!ImportsFullyQualified.$classImportsFullyQualified) {
-      ImportsFullyQualified.$classImportsFullyQualified = Class.$createForClass(
-          $Util.$generateId('ImportsFullyQualified'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.importsfullyqualified.ImportsFullyQualified'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.importsfullyqualified.ImportsFullyQualified'));
-    }
-    return ImportsFullyQualified.$classImportsFullyQualified;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-Serializable.$markImplementor(ImportsFullyQualified);
-
-
-
-/**
- * Export class.
- */
-exports.ImportsFullyQualified = ImportsFullyQualified;
+// Re-exports the implementation.
+var ImportsFullyQualified = goog.require('gen.com.google.j2cl.transpiler.readable.importsfullyqualified.ImportsFullyQualified$impl');
+exports = ImportsFullyQualified;

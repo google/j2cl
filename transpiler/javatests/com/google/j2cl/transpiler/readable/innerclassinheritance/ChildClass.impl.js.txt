@@ -1,0 +1,143 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$impl');
+
+
+let ParentOuter = goog.require('gen.com.google.j2cl.transpiler.readable.innerclassinheritance.ParentOuter$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let ChildClass$1LocalClass = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$1LocalClass$impl');
+let ChildClass$InnerClass = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class ChildClass extends ParentOuter {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {number}
+     */
+    this.f_fieldInOuter__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass =
+        0;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass() {
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_funInOuter() {}
+
+  /**
+   * @return {ChildClass$InnerClass}
+   * @public
+   */
+  m_$create_ChildClass$InnerClass_$pp_com_google_j2cl_transpiler_readable_innerclassinheritance() {
+    return ChildClass$InnerClass.$create(this);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testLocalClass() { ChildClass$1LocalClass.$create(this).m_test(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!ChildClass}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    ChildClass.$clinit();
+    let instance = new ChildClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass() {
+    this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentOuter();
+    this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof ChildClass; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, ChildClass);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    ChildClass.$clinit();
+    if (!ChildClass.$classChildClass) {
+      ChildClass.$classChildClass = Class.$createForClass(
+          $Util.$generateId('ChildClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass'),
+          ParentOuter.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass'));
+    }
+    return ChildClass.$classChildClass;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    ChildClass$1LocalClass = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$1LocalClass$impl');
+    ChildClass$InnerClass = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    ParentOuter.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = ChildClass;

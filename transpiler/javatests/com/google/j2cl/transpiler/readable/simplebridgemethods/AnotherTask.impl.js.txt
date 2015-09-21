@@ -1,0 +1,141 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask$impl');
+
+
+let Callable = goog.require('gen.com.google.j2cl.transpiler.readable.simplebridgemethods.Callable$impl');
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Superclass = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+/**
+ * @template C_T
+ * @implements {Callable<Superclass<C_T>>}
+ */
+class AnotherTask extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherTask() {
+  }
+
+  /**
+   * @param {Superclass<C_T>} t
+   * @return {void}
+   * @public
+   */
+  m_call__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass(
+      t) {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_T
+   * @return {!AnotherTask<C_T>}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    AnotherTask.$clinit();
+    let instance = new AnotherTask;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherTask();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherTask() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_simplebridgemethods_AnotherTask();
+  }
+
+  /**
+   * Synthetic method.
+   * @param {Superclass<C_T>} arg0
+   * @return {void}
+   * @public
+   */
+  m_call__java_lang_Object(arg0) {
+    this.m_call__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass(
+        /**@type {Superclass<C_T>} */ (
+            $Casts.to(arg0, Superclass.$isInstance(arg0))));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof AnotherTask; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, AnotherTask);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    AnotherTask.$clinit();
+    if (!AnotherTask.$classAnotherTask) {
+      AnotherTask.$classAnotherTask = Class.$createForClass(
+          $Util.$generateId('AnotherTask'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask'));
+    }
+    return AnotherTask.$classAnotherTask;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Superclass = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+Callable.$markImplementor(AnotherTask);
+
+
+
+/**
+ * Export class.
+ */
+exports = AnotherTask;

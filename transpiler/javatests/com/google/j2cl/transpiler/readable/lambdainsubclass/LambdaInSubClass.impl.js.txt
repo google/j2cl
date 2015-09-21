@@ -1,0 +1,120 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass$impl');
+
+
+let Parent = goog.require('gen.com.google.j2cl.transpiler.readable.lambdainsubclass.Parent$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let LambdaInSubClass$lambda$0 = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass$lambda$0$impl');
+let LambdaInterface = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInterface$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+class LambdaInSubClass extends Parent {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_lambdainsubclass_LambdaInSubClass() {
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() { let l = (LambdaInSubClass$lambda$0.$create(this)); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!LambdaInSubClass}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    LambdaInSubClass.$clinit();
+    let instance = new LambdaInSubClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_lambdainsubclass_LambdaInSubClass();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_lambdainsubclass_LambdaInSubClass() {
+    this.$ctor__com_google_j2cl_transpiler_readable_lambdainsubclass_Parent();
+    this.$init__com_google_j2cl_transpiler_readable_lambdainsubclass_LambdaInSubClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof LambdaInSubClass; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, LambdaInSubClass);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    LambdaInSubClass.$clinit();
+    if (!LambdaInSubClass.$classLambdaInSubClass) {
+      LambdaInSubClass.$classLambdaInSubClass = Class.$createForClass(
+          $Util.$generateId('LambdaInSubClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass'),
+          Parent.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass'));
+    }
+    return LambdaInSubClass.$classLambdaInSubClass;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    LambdaInSubClass$lambda$0 = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass$lambda$0$impl');
+    LambdaInterface = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInterface$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Parent.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = LambdaInSubClass;

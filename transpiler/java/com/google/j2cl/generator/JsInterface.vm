@@ -66,6 +66,7 @@ class $interfaceName {
    * @nocollapse
    */
   static $getClass() {
+    $interfaceName.$clinit();
     if (!${interfaceName}.$class${interfaceName}) {
       ${interfaceName}.$class${interfaceName} = $classAlias.$createForInterface(
           $utilAlias.$generateId('$simpleName'),
@@ -75,12 +76,7 @@ class $interfaceName {
     return ${interfaceName}.$class${interfaceName};
   }
 
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() {}
+#parse( "com/google/j2cl/generator/JsClinit.vm")
 };
 
 

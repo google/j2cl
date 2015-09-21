@@ -1,120 +1,18 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/supermethodcall/GrandParent.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.supermethodcall.GrandParent.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.supermethodcall.GrandParentModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.supermethodcall.GrandParent');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _$int = goog.require('vmbootstrap.primitives.$int');
 
 
-class GrandParent extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_supermethodcall_GrandParent() {}
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_grandParentSimplest() {}
-
-  /**
-   * @param {number} foo
-   * @return {void}
-   * @public
-   */
-  m_grandParentWithParams__int(foo) {}
-
-  /**
-   * @return {*}
-   * @public
-   */
-  m_grandParentWithChangingReturn() { return null; }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!GrandParent}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    GrandParent.$clinit();
-    let instance = new GrandParent;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_supermethodcall_GrandParent();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_supermethodcall_GrandParent() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_supermethodcall_GrandParent();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof GrandParent; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, GrandParent);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!GrandParent.$classGrandParent) {
-      GrandParent.$classGrandParent = Class.$createForClass(
-          $Util.$generateId('GrandParent'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.supermethodcall.GrandParent'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.supermethodcall.GrandParent'));
-    }
-    return GrandParent.$classGrandParent;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.GrandParent = GrandParent;
+// Re-exports the implementation.
+var GrandParent = goog.require('gen.com.google.j2cl.transpiler.readable.supermethodcall.GrandParent$impl');
+exports = GrandParent;

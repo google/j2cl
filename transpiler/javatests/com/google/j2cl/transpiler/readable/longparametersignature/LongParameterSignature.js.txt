@@ -1,113 +1,18 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/longparametersignature/LongParameterSignature.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.longparametersignature.LongParameterSignature.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.longparametersignature.LongParameterSignatureModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.longparametersignature.LongParameterSignature');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let $Long = goog.require('nativebootstrap.LongUtilsModule').Long;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $long = goog.require('vmbootstrap.PrimitivesModule').$long;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Long = goog.require('nativebootstrap.Long');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
 
 
-class LongParameterSignature extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_longparametersignature_LongParameterSignature() {
-  }
-
-  /**
-   * @param {!$Long} foo
-   * @return {void}
-   * @public
-   */
-  m_main__long(foo) {}
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!LongParameterSignature}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    LongParameterSignature.$clinit();
-    let instance = new LongParameterSignature;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_longparametersignature_LongParameterSignature();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_longparametersignature_LongParameterSignature() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_longparametersignature_LongParameterSignature();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) {
-    return instance instanceof LongParameterSignature;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, LongParameterSignature);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!LongParameterSignature.$classLongParameterSignature) {
-      LongParameterSignature
-          .$classLongParameterSignature = Class.$createForClass(
-          $Util.$generateId('LongParameterSignature'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.longparametersignature.LongParameterSignature'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.longparametersignature.LongParameterSignature'));
-    }
-    return LongParameterSignature.$classLongParameterSignature;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.LongParameterSignature = LongParameterSignature;
+// Re-exports the implementation.
+var LongParameterSignature = goog.require('gen.com.google.j2cl.transpiler.readable.longparametersignature.LongParameterSignature$impl');
+exports = LongParameterSignature;

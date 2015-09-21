@@ -1,128 +1,18 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/devirtualizedcalls/ObjectCalls.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCallsModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $Objects = goog.require('vmbootstrap.ObjectsModule').Objects;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _$Objects = goog.require('vmbootstrap.Objects');
 
 
-class ObjectCalls extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_devirtualizedcalls_ObjectCalls() {}
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_main() {
-    let object = Object.$create();
-    $Objects.m_equals__java_lang_Object__java_lang_Object(object, object);
-    $Objects.m_hashCode__java_lang_Object(object);
-    $Objects.m_toString__java_lang_Object(object);
-    $Objects.m_getClass__java_lang_Object(object);
-  }
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_test() {
-    this.m_equals__java_lang_Object(Object.$create());
-    this.m_hashCode();
-    this.m_toString();
-    this.m_getClass();
-    this.m_equals__java_lang_Object(Object.$create());
-    this.m_hashCode();
-    this.m_toString();
-    this.m_getClass();
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!ObjectCalls}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    ObjectCalls.$clinit();
-    let instance = new ObjectCalls;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_ObjectCalls();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_ObjectCalls() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_devirtualizedcalls_ObjectCalls();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof ObjectCalls; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, ObjectCalls);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!ObjectCalls.$classObjectCalls) {
-      ObjectCalls.$classObjectCalls = Class.$createForClass(
-          $Util.$generateId('ObjectCalls'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls'));
-    }
-    return ObjectCalls.$classObjectCalls;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.ObjectCalls = ObjectCalls;
+// Re-exports the implementation.
+var ObjectCalls = goog.require('gen.com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls$impl');
+exports = ObjectCalls;

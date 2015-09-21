@@ -1,98 +1,17 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/interfaceuse/AnotherInterface.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterfaceModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface');
 
 
-let SomeInterface = goog.require('gen.com.google.j2cl.transpiler.readable.interfaceuse.SomeInterfaceModule').SomeInterface;
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _SomeInterface = goog.require('gen.com.google.j2cl.transpiler.readable.interfaceuse.SomeInterface');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
 
 
-/**
- * @interface
- * @extends {SomeInterface}
- */
-class AnotherInterface {
-  /**
-   * @return {number}
-   * @public
-   */
-  m_run() {}
-
-  /**
-   * Marks the provided class as implementing this interface.
-   * @param {Function} classConstructor
-   * @public
-   */
-  static $markImplementor(classConstructor) {
-    SomeInterface.$markImplementor(classConstructor);
-    /**
-     * @public {boolean}
-     */
-    classConstructor.prototype
-        .$implements__com_google_j2cl_transpiler_readable_interfaceuse_AnotherInterface =
-        true;
-  }
-
-  /**
-   * Returns whether the provided instance is of a class that implements this
-   * interface.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) {
-    return instance != null &&
-           instance
-               .$implements__com_google_j2cl_transpiler_readable_interfaceuse_AnotherInterface;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return classConstructor != null &&
-           classConstructor.prototype
-               .$implements__com_google_j2cl_transpiler_readable_interfaceuse_AnotherInterface;
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!AnotherInterface.$classAnotherInterface) {
-      AnotherInterface.$classAnotherInterface = Class.$createForInterface(
-          $Util.$generateId('AnotherInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface'),
-          null,
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface'));
-    }
-    return AnotherInterface.$classAnotherInterface;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() {}
-}
-;
-
-
-AnotherInterface.$markImplementor(/** @type {Function} */ (AnotherInterface));
-
-/**
- * Export class.
- */
-exports.AnotherInterface = AnotherInterface;
+// Re-exports the implementation.
+var AnotherInterface = goog.require('gen.com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface$impl');
+exports = AnotherInterface;

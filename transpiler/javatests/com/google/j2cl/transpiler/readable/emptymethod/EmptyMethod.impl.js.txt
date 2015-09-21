@@ -1,0 +1,116 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let String = goog.forwardDeclare('gen.java.lang.String$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+
+class EmptyMethod extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_emptymethod_EmptyMethod() {}
+
+  /**
+   * @param {Array<?string>} args
+   * @return {void}
+   * @public
+   */
+  static m_main__arrayOf_java_lang_String(args) { EmptyMethod.$clinit(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!EmptyMethod}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    EmptyMethod.$clinit();
+    let instance = new EmptyMethod;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_emptymethod_EmptyMethod();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_emptymethod_EmptyMethod() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_emptymethod_EmptyMethod();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof EmptyMethod; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, EmptyMethod);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    EmptyMethod.$clinit();
+    if (!EmptyMethod.$classEmptyMethod) {
+      EmptyMethod.$classEmptyMethod = Class.$createForClass(
+          $Util.$generateId('EmptyMethod'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod'));
+    }
+    return EmptyMethod.$classEmptyMethod;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    String = goog.module.get('gen.java.lang.String$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = EmptyMethod;

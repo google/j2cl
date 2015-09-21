@@ -1,0 +1,28 @@
+/**
+ * Impl transpiled from $classType.Descriptor.RawTypeDescriptor.SourceName.
+ */
+goog.module('${selfImport.getImplFileName()}');
+
+
+#foreach($eagerImport in ${eagerImports})
+#set ($alias = ${eagerImport.Alias})
+let $alias = goog.require('${eagerImport.getImplFileName()}');
+#end
+
+#foreach($lazyImport in ${lazyImports})
+#set ($alias = ${lazyImport.Alias})
+let $alias = goog.forwardDeclare('${lazyImport.getImplFileName()}');
+#end
+
+
+#if (${classType.isInterface()})
+#parse( "com/google/j2cl/generator/JsInterface.vm" )
+#else
+#parse( "com/google/j2cl/generator/JsClass.vm" )
+#end
+#set ($className = ${statementSourceGenerator.toSource($classType.Descriptor)})
+
+/**
+ * Export class.
+ */
+exports = $className;

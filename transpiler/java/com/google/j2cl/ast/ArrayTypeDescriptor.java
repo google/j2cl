@@ -48,11 +48,6 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public String getCompilationUnitSourceName() {
-    return getLeafTypeDescriptor().getCompilationUnitSourceName();
-  }
-
-  @Override
   public String getSimpleName() {
     return getLeafTypeDescriptor().getSimpleName() + getSuffix();
   }

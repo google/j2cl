@@ -1,118 +1,18 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/stringliteral/StringLiteral.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.stringliteral.StringLiteral.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.stringliteral.StringLiteralModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.stringliteral.StringLiteral');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let String = goog.require('gen.java.lang.StringModule').String;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _String = goog.require('gen.java.lang.String');
 
 
-class StringLiteral extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() {
-    super();
-    /**
-     * @private {?string}
-     */
-    this.f_someString__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
-        null;
-    /**
-     * @private {?string}
-     */
-    this.f_escapeCodes__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
-        null;
-  }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral() {
-    this.f_someString__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
-        "This is a string literal";
-    this.f_escapeCodes__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
-        "\b\f\n\r\t\"\'\\\u0000";
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!StringLiteral}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    StringLiteral.$clinit();
-    let instance = new StringLiteral;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof StringLiteral; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, StringLiteral);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!StringLiteral.$classStringLiteral) {
-      StringLiteral.$classStringLiteral = Class.$createForClass(
-          $Util.$generateId('StringLiteral'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.stringliteral.StringLiteral'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.stringliteral.StringLiteral'));
-    }
-    return StringLiteral.$classStringLiteral;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.StringLiteral = StringLiteral;
+// Re-exports the implementation.
+var StringLiteral = goog.require('gen.com.google.j2cl.transpiler.readable.stringliteral.StringLiteral$impl');
+exports = StringLiteral;

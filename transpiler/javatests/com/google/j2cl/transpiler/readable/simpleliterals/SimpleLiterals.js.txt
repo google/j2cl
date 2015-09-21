@@ -1,117 +1,21 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/simpleliterals/SimpleLiterals.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiteralsModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let String = goog.require('gen.java.lang.StringModule').String;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $boolean = goog.require('vmbootstrap.PrimitivesModule').$boolean;
-let $char = goog.require('vmbootstrap.PrimitivesModule').$char;
-let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _String = goog.require('gen.java.lang.String');
+let _$boolean = goog.require('vmbootstrap.primitives.$boolean');
+let _$char = goog.require('vmbootstrap.primitives.$char');
+let _$int = goog.require('vmbootstrap.primitives.$int');
 
 
-class SimpleLiterals extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_simpleliterals_SimpleLiterals() {}
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_main() {
-    let a = false;
-    let b = 97 /* 'a' */;
-    let c = null;
-    let d = 101;
-    let e = "foo";
-    let f = SimpleLiterals.$getClass();
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!SimpleLiterals}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    SimpleLiterals.$clinit();
-    let instance = new SimpleLiterals;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_simpleliterals_SimpleLiterals();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_simpleliterals_SimpleLiterals() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_simpleliterals_SimpleLiterals();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof SimpleLiterals; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, SimpleLiterals);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!SimpleLiterals.$classSimpleLiterals) {
-      SimpleLiterals.$classSimpleLiterals = Class.$createForClass(
-          $Util.$generateId('SimpleLiterals'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals'));
-    }
-    return SimpleLiterals.$classSimpleLiterals;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.SimpleLiterals = SimpleLiterals;
+// Re-exports the implementation.
+var SimpleLiterals = goog.require('gen.com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals$impl');
+exports = SimpleLiterals;

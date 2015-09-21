@@ -31,6 +31,15 @@ import java.util.List;
  */
 public class FrontendFlags {
 
+  @Option(
+    name = "-superfiles",
+    metaVar = "<paths>",
+    usage =
+        "List of files that should be included in the compile but whose "
+            + "output JS should not be kept because the user expects to provide a replacement."
+  )
+  protected String superfiles = "";
+
   @Argument(metaVar = "<source files>", usage = "source files")
   protected List<String> files = new ArrayList<>();
 
@@ -40,14 +49,14 @@ public class FrontendFlags {
     metaVar = "<path>",
     usage = "Specify where to find user class files and annotation processors"
   )
-  protected String classpath = ".";
+  protected String classpath = "";
 
   @Option(
     name = "-sourcepath",
     metaVar = "<file>",
     usage = "Specify where to find input source files"
   )
-  protected String sourcepath = ".";
+  protected String sourcepath = "";
 
   /**
    * Option that allows users to swap out the location of the JRE library.
@@ -57,7 +66,7 @@ public class FrontendFlags {
     metaVar = "<path>",
     usage = "Override location of bootstrap class files"
   )
-  protected String bootclasspath = System.getProperty("sun.boot.class.path");
+  protected String bootclasspath = "";
 
   @Option(
     name = "-d",

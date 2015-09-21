@@ -1,161 +1,20 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/genericmethod/GenericMethod.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.genericmethod.GenericMethod.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.genericmethod.GenericMethodModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.genericmethod.GenericMethod');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let Error = goog.require('gen.java.lang.ErrorModule').Error;
-let Exception = goog.require('gen.java.lang.ExceptionModule').Exception;
-let Number = goog.require('gen.java.lang.NumberModule').Number;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _Error = goog.require('gen.java.lang.Error');
+let _Exception = goog.require('gen.java.lang.Exception');
+let _Number = goog.require('gen.java.lang.Number');
 
 
-/**
- * @template C_T
- */
-class GenericMethod extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod() {}
-
-  /**
-   * @template M_T, M_S
-   * @param {M_T} f
-   * @param {M_S} s
-   * @return {void}
-   * @public
-   */
-  m_foo__java_lang_Object__java_lang_Object(f, s) {}
-
-  /**
-   * @param {*} o
-   * @return {void}
-   * @public
-   */
-  m_fun__java_lang_Object(o) {}
-
-  /**
-   * @template M_T
-   * @param {M_T} t
-   * @return {void}
-   * @public
-   */
-  m_fun__java_lang_Exception(t) {}
-
-  /**
-   * @template M_T
-   * @param {M_T} t
-   * @return {void}
-   * @public
-   */
-  m_fun__java_lang_Error(t) {}
-
-  /**
-   * @template M_T
-   * @return {GenericMethod<M_T>}
-   * @public
-   */
-  m_bar() { return null; }
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_test() {
-    let g =
-        /**@type {GenericMethod<(Number|?number)>} */ (GenericMethod.$create());
-    g.m_foo__java_lang_Object__java_lang_Object(g, g);
-    g.m_foo__java_lang_Object__java_lang_Object(Error.$create(),
-                                                Exception.$create());
-    g.m_fun__java_lang_Object(Object.$create());
-    g.m_fun__java_lang_Exception(Exception.$create());
-    g.m_fun__java_lang_Error(Error.$create());
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @template C_T
-   * @return {!GenericMethod<C_T>}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    GenericMethod.$clinit();
-    let instance = new GenericMethod;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof GenericMethod; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, GenericMethod);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!GenericMethod.$classGenericMethod) {
-      GenericMethod.$classGenericMethod = Class.$createForClass(
-          $Util.$generateId('GenericMethod'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.genericmethod.GenericMethod'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.genericmethod.GenericMethod'));
-    }
-    return GenericMethod.$classGenericMethod;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.GenericMethod = GenericMethod;
+// Re-exports the implementation.
+var GenericMethod = goog.require('gen.com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$impl');
+exports = GenericMethod;

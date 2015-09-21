@@ -10,6 +10,6 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "simplestarray",
+    name = "simplestarrayliteral",
     srcs = glob(["*.java"]),
 )

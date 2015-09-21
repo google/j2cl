@@ -1,0 +1,143 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$1$1.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$1$1$impl');
+
+
+let MyInterface = goog.require('gen.com.google.j2cl.transpiler.readable.mixednestings.MyInterface$impl');
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let MixedNestings$A$1B$1 = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$1$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+/**
+ * @implements {MyInterface}
+ */
+class MixedNestings$A$1B$1$1 extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {MixedNestings$A$1B$1}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$1 =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$1() {
+  }
+
+  /**
+   * @override
+   * @param {number} b
+   * @return {number}
+   * @public
+   */
+  m_fun__int(b) { return b; }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {MixedNestings$A$1B$1} $outer_this
+   * @return {!MixedNestings$A$1B$1$1}
+   * @public
+   * @nocollapse
+   */
+  static $create($outer_this) {
+    MixedNestings$A$1B$1$1.$clinit();
+    let instance = new MixedNestings$A$1B$1$1;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$1(
+            $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {MixedNestings$A$1B$1} $outer_this
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$1(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$1 =
+        $outer_this;
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$1();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof MixedNestings$A$1B$1$1;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, MixedNestings$A$1B$1$1);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    MixedNestings$A$1B$1$1.$clinit();
+    if (!MixedNestings$A$1B$1$1.$classMixedNestings$A$1B$1$1) {
+      MixedNestings$A$1B$1$1
+          .$classMixedNestings$A$1B$1$1 = Class.$createForClass(
+          $Util.$generateId('1'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$1$1'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A.1B.1.1'));
+    }
+    return MixedNestings$A$1B$1$1.$classMixedNestings$A$1B$1$1;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    MixedNestings$A$1B$1 = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$1$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+MyInterface.$markImplementor(MixedNestings$A$1B$1$1);
+
+
+
+/**
+ * Export class.
+ */
+exports = MixedNestings$A$1B$1$1;

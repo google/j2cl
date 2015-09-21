@@ -1,0 +1,123 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.arraysimple.ArraySimple.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.arraysimple.ArraySimple$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+
+class ArraySimple extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_arraysimple_ArraySimple() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    let objects = /**@type {Array<*>} */ ($Arrays.$create([100], Object));
+    let objects2d =
+        /**@type {Array<Array<*>>} */ ($Arrays.$create([5, 10], Object));
+    let objectsPartial =
+        /**@type {Array<Array<*>>} */ ($Arrays.$create([20, null], Object));
+    let object = objects[0];
+    object = objects2d[0][1];
+    $Arrays.$set(objects, 0, null);
+    $Arrays.$set(objects2d[0], 1, null);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!ArraySimple}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    ArraySimple.$clinit();
+    let instance = new ArraySimple;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_arraysimple_ArraySimple();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_arraysimple_ArraySimple() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_arraysimple_ArraySimple();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof ArraySimple; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, ArraySimple);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    ArraySimple.$clinit();
+    if (!ArraySimple.$classArraySimple) {
+      ArraySimple.$classArraySimple = Class.$createForClass(
+          $Util.$generateId('ArraySimple'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.arraysimple.ArraySimple'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.arraysimple.ArraySimple'));
+    }
+    return ArraySimple.$classArraySimple;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = ArraySimple;

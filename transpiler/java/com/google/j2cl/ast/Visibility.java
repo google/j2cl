@@ -20,14 +20,16 @@ package com.google.j2cl.ast;
  */
 public enum Visibility {
   PUBLIC("public"),
-  PROTECTED("protected"),
-  PRIVATE("private"),
-  PACKAGE_PRIVATE("package");
+  // Per-class output needs to put each class in a separate file even if the classes originally came
+  // from a single Java file. So even private things need to be marked as public.
+  PROTECTED("public"),
+  PRIVATE("public"),
+  PACKAGE_PRIVATE("public");
 
-  public String value;
+  public String jsText;
 
-  Visibility(String value) {
-    this.value = value;
+  Visibility(String jsText) {
+    this.jsText = jsText;
   }
 
   public boolean isPublic() {
@@ -48,6 +50,6 @@ public enum Visibility {
 
   @Override
   public String toString() {
-    return value;
+    return jsText;
   }
 }

@@ -34,8 +34,7 @@ set -e
 blaze build third_party/java_src/j2cl/jre/java:JavaJre &> /dev/null
 
 # Build the transpiler
-blaze build third_party/java_src/j2cl:j2cl third_party/java_src/j2cl/jre:jre \
-    third_party/java_src/j2cl/jre/java:JavaJre
+blaze build third_party/java_src/j2cl:j2cl
 
 # Figure out where the referenced example lives
 example_dir=$examples_dir$example_name

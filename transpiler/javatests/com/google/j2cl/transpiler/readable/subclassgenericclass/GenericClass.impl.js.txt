@@ -1,0 +1,110 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+/**
+ * @template C_T
+ */
+class GenericClass extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_T
+   * @return {!GenericClass<C_T>}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    GenericClass.$clinit();
+    let instance = new GenericClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof GenericClass; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, GenericClass);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    GenericClass.$clinit();
+    if (!GenericClass.$classGenericClass) {
+      GenericClass.$classGenericClass = Class.$createForClass(
+          $Util.$generateId('GenericClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass'));
+    }
+    return GenericClass.$classGenericClass;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = GenericClass;

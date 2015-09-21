@@ -20,7 +20,6 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.BinaryOperator;
-import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
@@ -46,12 +45,13 @@ public class TranspilerUtils {
   }
 
   /**
-   * Returns the relative output path for a given compilation unit.
+   * Returns the relative output path for a given type.
    */
-  public static String getOutputPath(CompilationUnit compilationUnit) {
-    String unitName = compilationUnit.getName();
-    String packageName = compilationUnit.getPackageName();
-    return packageName.replace('.', '/') + "/" + unitName;
+  public static String getOutputPath(JavaType javaType) {
+    TypeDescriptor descriptor = javaType.getDescriptor();
+    String typeName = descriptor.getClassName();
+    String packageName = descriptor.getPackageName();
+    return packageName.replace('.', '/') + "/" + typeName;
   }
 
   public static String getParameterList(Method method) {
@@ -148,10 +148,6 @@ public class TranspilerUtils {
             false, "Requested the Arrays function name for a non-assignment operator.");
         return null;
     }
-  }
-
-  public static boolean shouldExport(JavaType type) {
-    return !type.getVisibility().isPrivate() && !type.isLocal();
   }
 
   public static boolean isValidForLongs(BinaryOperator binaryOperator) {

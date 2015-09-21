@@ -1,117 +1,18 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/arraysimple/ArraySimple.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.arraysimple.ArraySimple.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.arraysimple.ArraySimpleModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.arraysimple.ArraySimple');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $Arrays = goog.require('vmbootstrap.ArraysModule').Arrays;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _$Arrays = goog.require('vmbootstrap.Arrays');
 
 
-class ArraySimple extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_arraysimple_ArraySimple() {}
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_main() {
-    let objects = /**@type {Array<*>} */ ($Arrays.$create([100], Object));
-    let objects2d =
-        /**@type {Array<Array<*>>} */ ($Arrays.$create([5, 10], Object));
-    let objectsPartial =
-        /**@type {Array<Array<*>>} */ ($Arrays.$create([20, null], Object));
-    let object = objects[0];
-    object = objects2d[0][1];
-    $Arrays.$set(objects, 0, null);
-    $Arrays.$set(objects2d[0], 1, null);
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!ArraySimple}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    ArraySimple.$clinit();
-    let instance = new ArraySimple;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_arraysimple_ArraySimple();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_arraysimple_ArraySimple() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_arraysimple_ArraySimple();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof ArraySimple; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, ArraySimple);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!ArraySimple.$classArraySimple) {
-      ArraySimple.$classArraySimple = Class.$createForClass(
-          $Util.$generateId('ArraySimple'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.arraysimple.ArraySimple'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.arraysimple.ArraySimple'));
-    }
-    return ArraySimple.$classArraySimple;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.ArraySimple = ArraySimple;
+// Re-exports the implementation.
+var ArraySimple = goog.require('gen.com.google.j2cl.transpiler.readable.arraysimple.ArraySimple$impl');
+exports = ArraySimple;

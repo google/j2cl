@@ -15,15 +15,10 @@
  */
 package com.google.j2cl.generator.visitors;
 
-import com.google.common.base.Function;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.HashMultiset;
-import com.google.common.collect.ImmutableMultiset;
 import com.google.common.collect.Multiset;
-import com.google.common.collect.Sets;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AssertStatement;
-import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldDescriptor;
@@ -34,44 +29,66 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.UnionTypeDescriptor;
 
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
- * Traverses a CompilationUnit and gathers imports for all its referenced types and creates
+ * Traverses a Type, gathers imports for all things it references and creates
  * non colliding local aliases for each import.
  */
 public class ImportGatheringVisitor extends AbstractVisitor {
-  private Set<TypeDescriptor> typeDescriptors = new LinkedHashSet<>();
-  private Set<TypeDescriptor> typeDescriptorsDefinedInCompilationUnit = new LinkedHashSet<>();
 
-  public static Set<Import> gatherImports(CompilationUnit compilationUnit) {
-    return new ImportGatheringVisitor().doGatherImports(compilationUnit);
+  /**
+   * Enums for describing the category of an import. An eager import is one that should occur in the
+   * declaration phase because it provides a supertype. A lazy import should defer to the execution
+   * phase so that circular imports are avoided.
+   */
+  public enum ImportCategory {
+    EAGER,
+    LAZY
+  }
+
+  private Set<TypeDescriptor> typeDescriptorsDefinedInCompilationUnit = new LinkedHashSet<>();
+  private Map<ImportCategory, Set<TypeDescriptor>> typeDescriptorsByCategory =
+      new LinkedHashMap<>();
+
+  public static Map<ImportCategory, Set<Import>> gatherImports(JavaType javaType) {
+    return new ImportGatheringVisitor().doGatherImports(javaType);
   }
 
   @Override
   public void exitTypeDescriptor(TypeDescriptor typeDescriptor) {
-    addTypeDescriptor(typeDescriptor);
+    addTypeDescriptor(typeDescriptor, ImportCategory.LAZY);
     for (TypeDescriptor typeArgument : typeDescriptor.getTypeArgumentDescriptors()) {
-      addTypeDescriptor(typeArgument);
+      addTypeDescriptor(typeArgument, ImportCategory.LAZY);
     }
   }
 
   @Override
   public void exitFieldDescriptor(FieldDescriptor fieldDescriptor) {
-    addTypeDescriptor(fieldDescriptor.getTypeDescriptor());
-    addTypeDescriptor(fieldDescriptor.getEnclosingClassTypeDescriptor());
+    addTypeDescriptor(fieldDescriptor.getTypeDescriptor(), ImportCategory.LAZY);
+    addTypeDescriptor(fieldDescriptor.getEnclosingClassTypeDescriptor(), ImportCategory.LAZY);
   }
 
   @Override
   public void exitAssertStatement(AssertStatement assertStatement) {
-    addTypeDescriptor(TypeDescriptors.VM_ASSERTS_TYPE_DESCRIPTOR);
+    addTypeDescriptor(TypeDescriptors.VM_ASSERTS_TYPE_DESCRIPTOR, ImportCategory.LAZY);
   }
 
   @Override
   public void exitJavaType(JavaType type) {
     typeDescriptorsDefinedInCompilationUnit.add(type.getDescriptor().getRawTypeDescriptor());
+
+    // Super type and super interface imports are needed eagerly because they are used during the
+    // declaration phase of JS execution. All other imports are lazy.
+    if (type.getSuperTypeDescriptor() != null) {
+      addTypeDescriptor(type.getSuperTypeDescriptor(), ImportCategory.EAGER);
+    }
+    for (TypeDescriptor superInterfaceTypeDescriptor : type.getSuperInterfaceTypeDescriptors()) {
+      addTypeDescriptor(superInterfaceTypeDescriptor, ImportCategory.EAGER);
+    }
   }
 
   @Override
@@ -79,7 +96,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     TypeDescriptor returnTypeDescriptor = method.getDescriptor().getReturnTypeDescriptor();
     if (!returnTypeDescriptor.isPrimitive()
         || returnTypeDescriptor == TypeDescriptors.LONG_TYPE_DESCRIPTOR) {
-      addTypeDescriptor(returnTypeDescriptor);
+      addTypeDescriptor(returnTypeDescriptor, ImportCategory.LAZY);
     }
   }
 
@@ -87,88 +104,105 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   public void exitExpression(Expression expression) {
     if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == expression.getTypeDescriptor()) {
       // for Long operation method dispatch.
-      addTypeDescriptor(TypeDescriptors.NATIVE_LONGS_TYPE_DESCRIPTOR);
+      addLongsTypeDescriptor();
     }
   }
 
   @Override
   public void exitField(Field field) {
     if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == field.getDescriptor().getTypeDescriptor()) {
-      // for default initial value of Longs.$fromInt(0).
-      addTypeDescriptor(TypeDescriptors.NATIVE_LONGS_TYPE_DESCRIPTOR);
+      addLongsTypeDescriptor();
     }
   }
 
   @Override
   public void exitMethodDescriptor(MethodDescriptor methodDescriptor) {
-    addTypeDescriptor(methodDescriptor.getEnclosingClassTypeDescriptor());
+    addTypeDescriptor(methodDescriptor.getEnclosingClassTypeDescriptor(), ImportCategory.LAZY);
     TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
     if (needImportForJsDoc(returnTypeDescriptor)) {
-      addTypeDescriptor(returnTypeDescriptor);
+      addTypeDescriptor(returnTypeDescriptor, ImportCategory.LAZY);
     }
   }
 
   @Override
   public void exitUnionTypeDescriptor(UnionTypeDescriptor unionTypeDescriptor) {
     for (TypeDescriptor typeDescriptor : unionTypeDescriptor.getTypes()) {
-      addTypeDescriptor(typeDescriptor);
+      addTypeDescriptor(typeDescriptor, ImportCategory.LAZY);
     }
   }
 
-  private Set<Import> doGatherImports(CompilationUnit compilationUnit) {
-    addTypeDescriptor(TypeDescriptors.CLASS_TYPE_DESCRIPTOR);
-    addTypeDescriptor(TypeDescriptors.NATIVE_UTIL_TYPE_DESCRIPTOR);
+  private Multiset<String> localNameUses = HashMultiset.create();
 
-    HashMultiset.create();
+  private Map<ImportCategory, Set<Import>> doGatherImports(JavaType javaType) {
+    addTypeDescriptor(TypeDescriptors.CLASS_TYPE_DESCRIPTOR, ImportCategory.LAZY);
+    addTypeDescriptor(TypeDescriptors.NATIVE_UTIL_TYPE_DESCRIPTOR, ImportCategory.EAGER);
 
     // Collect type references.
-    compilationUnit.accept(this);
-    Set<TypeDescriptor> importTypeDescriptors =
-        new TreeSet<>(Sets.difference(typeDescriptors, typeDescriptorsDefinedInCompilationUnit));
+    javaType.accept(this);
 
-    final Multiset<String> localNameUses =
-        ImmutableMultiset.copyOf(
-            FluentIterable.from(
-                    Sets.union(typeDescriptorsDefinedInCompilationUnit, importTypeDescriptors))
-                .transform(
-                    new Function<TypeDescriptor, String>() {
-                      @Override
-                      public String apply(TypeDescriptor typeDescriptor) {
-                        return getShortAliasName(typeDescriptor);
-                      }
-                    }));
+    typeDescriptorsByCategory
+        .get(ImportCategory.LAZY)
+        .removeAll(typeDescriptorsByCategory.get(ImportCategory.EAGER));
+    typeDescriptorsByCategory
+        .get(ImportCategory.LAZY)
+        .removeAll(typeDescriptorsDefinedInCompilationUnit);
+    typeDescriptorsByCategory
+        .get(ImportCategory.EAGER)
+        .removeAll(typeDescriptorsDefinedInCompilationUnit);
 
-    return new TreeSet<>(
-        FluentIterable.from(importTypeDescriptors)
-            .transform(
-                new Function<TypeDescriptor, Import>() {
-                  @Override
-                  public Import apply(TypeDescriptor typeDescriptor) {
+    recordLocalNameUses(typeDescriptorsDefinedInCompilationUnit);
+    recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.LAZY));
+    recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.EAGER));
 
-                    String shortAliasName = getShortAliasName(typeDescriptor);
-                    int usageCount = localNameUses.count(shortAliasName);
-                    String aliasName =
-                        usageCount == 1 ? shortAliasName : computeLongAliasName(typeDescriptor);
-                    return new Import(aliasName, typeDescriptor);
-                  }
-                })
-            .toList());
+    Map<ImportCategory, Set<Import>> importsByCategory = new LinkedHashMap<>();
+    importsByCategory.put(
+        ImportCategory.LAZY, toImports(typeDescriptorsByCategory.get(ImportCategory.LAZY)));
+    importsByCategory.put(
+        ImportCategory.EAGER, toImports(typeDescriptorsByCategory.get(ImportCategory.EAGER)));
+
+    return importsByCategory;
   }
 
-  private void addTypeDescriptor(TypeDescriptor typeDescriptor) {
+  private Set<Import> toImports(Set<TypeDescriptor> typeDescriptors) {
+    Set<Import> imports = new LinkedHashSet<>();
+    for (TypeDescriptor typeDescriptor : typeDescriptors) {
+      String shortAliasName = getShortAliasName(typeDescriptor);
+      int usageCount = localNameUses.count(shortAliasName);
+      String aliasName = usageCount == 1 ? shortAliasName : computeLongAliasName(typeDescriptor);
+      imports.add(new Import(aliasName, typeDescriptor));
+    }
+    return imports;
+  }
+
+  private void recordLocalNameUses(Set<TypeDescriptor> typeDescriptors) {
+    for (TypeDescriptor typeDescriptor : typeDescriptors) {
+      localNameUses.add(getShortAliasName(typeDescriptor));
+    }
+  }
+
+  private void addTypeDescriptor(TypeDescriptor typeDescriptor, ImportCategory importCategory) {
     if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == typeDescriptor) {
-      addTypeDescriptor(TypeDescriptors.NATIVE_LONG_TYPE_DESCRIPTOR);
+      addTypeDescriptor(TypeDescriptors.NATIVE_LONG_TYPE_DESCRIPTOR, ImportCategory.EAGER);
+      return;
     }
     if (typeDescriptor.isTypeVariable()) {
       return;
     }
     TypeDescriptor rawTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
     if (rawTypeDescriptor.isArray()) {
-      addTypeDescriptor(TypeDescriptors.VM_ARRAYS_TYPE_DESCRIPTOR);
-      addTypeDescriptor(rawTypeDescriptor.getLeafTypeDescriptor());
+      addTypeDescriptor(TypeDescriptors.VM_ARRAYS_TYPE_DESCRIPTOR, ImportCategory.LAZY);
+      typeDescriptorsByCategory.get(importCategory).add(rawTypeDescriptor.getLeafTypeDescriptor());
     } else {
-      typeDescriptors.add(rawTypeDescriptor);
+      typeDescriptorsByCategory.get(importCategory).add(rawTypeDescriptor);
     }
+  }
+
+  private void addLongsTypeDescriptor() {
+    // In particular this import is being done eagerly both because it is safe to do so (the Longs
+    // library should not have extended dependencies) but also because the initialization of
+    // compile time constant values occurs during the declaration phase and this initialization
+    // might use the Longs library $fromString/$fromInt etc.
+    addTypeDescriptor(TypeDescriptors.NATIVE_LONGS_TYPE_DESCRIPTOR, ImportCategory.EAGER);
   }
 
   private static String computeLongAliasName(TypeDescriptor typeDescriptor) {
@@ -186,5 +220,8 @@ public class ImportGatheringVisitor extends AbstractVisitor {
         && returnTypeDescriptor != TypeDescriptors.STRING_TYPE_DESCRIPTOR;
   }
 
-  private ImportGatheringVisitor() {}
+  private ImportGatheringVisitor() {
+    typeDescriptorsByCategory.put(ImportCategory.EAGER, new LinkedHashSet<TypeDescriptor>());
+    typeDescriptorsByCategory.put(ImportCategory.LAZY, new LinkedHashSet<TypeDescriptor>());
+  }
 }

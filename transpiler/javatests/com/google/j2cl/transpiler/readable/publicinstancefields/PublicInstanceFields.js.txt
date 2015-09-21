@@ -1,118 +1,18 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/publicinstancefields/PublicInstanceFields.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.publicinstancefields.PublicInstanceFields.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.publicinstancefields.PublicInstanceFieldsModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.publicinstancefields.PublicInstanceFields');
 
 
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _$int = goog.require('vmbootstrap.primitives.$int');
 
 
-class PublicInstanceFields extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() {
-    super();
-    /**
-     * @public {number}
-     */
-    this.f_a__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields =
-        0;
-    /**
-     * @public {number}
-     */
-    this.f_b__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields =
-        0;
-  }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields() {
-    this.f_a__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields =
-        1;
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!PublicInstanceFields}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    PublicInstanceFields.$clinit();
-    let instance = new PublicInstanceFields;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_publicinstancefields_PublicInstanceFields();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) {
-    return instance instanceof PublicInstanceFields;
-  }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, PublicInstanceFields);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!PublicInstanceFields.$classPublicInstanceFields) {
-      PublicInstanceFields.$classPublicInstanceFields = Class.$createForClass(
-          $Util.$generateId('PublicInstanceFields'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.publicinstancefields.PublicInstanceFields'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.publicinstancefields.PublicInstanceFields'));
-    }
-    return PublicInstanceFields.$classPublicInstanceFields;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.PublicInstanceFields = PublicInstanceFields;
+// Re-exports the implementation.
+var PublicInstanceFields = goog.require('gen.com.google.j2cl.transpiler.readable.publicinstancefields.PublicInstanceFields$impl');
+exports = PublicInstanceFields;

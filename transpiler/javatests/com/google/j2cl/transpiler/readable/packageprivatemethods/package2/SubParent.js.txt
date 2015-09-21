@@ -1,112 +1,18 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/packageprivatemethods/package2/SubParent.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParentModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent');
 
 
-let Parent = goog.require('gen.com.google.j2cl.transpiler.readable.packageprivatemethods.package1.ParentModule').Parent;
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
-let $int = goog.require('vmbootstrap.PrimitivesModule').$int;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Parent = goog.require('gen.com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Parent');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _$int = goog.require('vmbootstrap.primitives.$int');
 
 
-class SubParent extends Parent {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubParent() {
-  }
-
-  /**
-   * @param {number} a
-   * @return {number}
-   * @package
-   */
-  m_foo__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package2(
-      a) {
-    return a;
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!SubParent}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    SubParent.$clinit();
-    let instance = new SubParent;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubParent();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubParent() {
-    this.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Parent();
-    this.$init__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubParent();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof SubParent; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, SubParent);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!SubParent.$classSubParent) {
-      SubParent.$classSubParent = Class.$createForClass(
-          $Util.$generateId('SubParent'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent'),
-          Parent.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent'));
-    }
-    return SubParent.$classSubParent;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Parent.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.SubParent = SubParent;
+// Re-exports the implementation.
+var SubParent = goog.require('gen.com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent$impl');
+exports = SubParent;

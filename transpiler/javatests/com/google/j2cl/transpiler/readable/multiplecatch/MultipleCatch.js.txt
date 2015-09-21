@@ -1,122 +1,20 @@
 /**
- * Transpiled from
- * third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/readable/multiplecatch/MultipleCatch.java.
+ * Header transpiled from
+ * com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatchModule');
+goog.module('gen.com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch');
 
 
-let ClassCastException = goog.require('gen.java.lang.ClassCastExceptionModule').ClassCastException;
-let Class = goog.require('gen.java.lang.CoreModule').Class;
-let Object = goog.require('gen.java.lang.CoreModule').Object;
-let NullPointerException = goog.require('gen.java.lang.NullPointerExceptionModule').NullPointerException;
-let RuntimeException = goog.require('gen.java.lang.RuntimeExceptionModule').RuntimeException;
-let $Util = goog.require('nativebootstrap.UtilModule').Util;
+// Imports headers for both eager and lazy dependencies to ensure that
+// all files are included in the dependency tree.
+let _Object = goog.require('gen.java.lang.Object');
+let _$Util = goog.require('nativebootstrap.Util');
+let _Class = goog.require('gen.java.lang.Class');
+let _ClassCastException = goog.require('gen.java.lang.ClassCastException');
+let _NullPointerException = goog.require('gen.java.lang.NullPointerException');
+let _RuntimeException = goog.require('gen.java.lang.RuntimeException');
 
 
-class MultipleCatch extends Object {
-  /**
-   * Defines instance fields.
-   * @private
-   */
-  constructor() { super(); }
-
-  /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_multiplecatch_MultipleCatch() {}
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_main() {
-    try {
-      throw ClassCastException.$create();
-    } catch (e) {
-      if (NullPointerException.$isInstance(e) ||
-          ClassCastException.$isInstance(e)) {
-      } else if (RuntimeException.$isInstance(e)) {
-        let r = e;
-        r = null;
-      } else {
-        throw e;
-      }
-    }
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!MultipleCatch}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    MultipleCatch.$clinit();
-    let instance = new MultipleCatch;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_multiplecatch_MultipleCatch();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_multiplecatch_MultipleCatch() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_multiplecatch_MultipleCatch();
-  }
-
-  /**
-   * Returns whether the provided instance is an instance of this class.
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isInstance(instance) { return instance instanceof MultipleCatch; }
-
-  /**
-   * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, MultipleCatch);
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static $getClass() {
-    if (!MultipleCatch.$classMultipleCatch) {
-      MultipleCatch.$classMultipleCatch = Class.$createForClass(
-          $Util.$generateId('MultipleCatch'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch'),
-          Object.$getClass(),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch'));
-    }
-    return MultipleCatch.$classMultipleCatch;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   * @nocollapse
-   */
-  static $clinit() { Object.$clinit(); }
-}
-;
-
-
-
-/**
- * Export class.
- */
-exports.MultipleCatch = MultipleCatch;
+// Re-exports the implementation.
+var MultipleCatch = goog.require('gen.com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch$impl');
+exports = MultipleCatch;

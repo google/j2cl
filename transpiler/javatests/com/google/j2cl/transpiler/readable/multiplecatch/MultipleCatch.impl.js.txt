@@ -1,0 +1,135 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let ClassCastException =
+    goog.forwardDeclare('gen.java.lang.ClassCastException$impl');
+let NullPointerException =
+    goog.forwardDeclare('gen.java.lang.NullPointerException$impl');
+let RuntimeException =
+    goog.forwardDeclare('gen.java.lang.RuntimeException$impl');
+
+
+class MultipleCatch extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_multiplecatch_MultipleCatch() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    try {
+      throw ClassCastException.$create();
+    } catch (e) {
+      if (NullPointerException.$isInstance(e) ||
+          ClassCastException.$isInstance(e)) {
+      } else if (RuntimeException.$isInstance(e)) {
+        let r = e;
+        r = null;
+      } else {
+        throw e;
+      }
+    }
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!MultipleCatch}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    MultipleCatch.$clinit();
+    let instance = new MultipleCatch;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_multiplecatch_MultipleCatch();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_multiplecatch_MultipleCatch() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_multiplecatch_MultipleCatch();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof MultipleCatch; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, MultipleCatch);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    MultipleCatch.$clinit();
+    if (!MultipleCatch.$classMultipleCatch) {
+      MultipleCatch.$classMultipleCatch = Class.$createForClass(
+          $Util.$generateId('MultipleCatch'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch'));
+    }
+    return MultipleCatch.$classMultipleCatch;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    ClassCastException =
+        goog.module.get('gen.java.lang.ClassCastException$impl');
+    NullPointerException =
+        goog.module.get('gen.java.lang.NullPointerException$impl');
+    RuntimeException = goog.module.get('gen.java.lang.RuntimeException$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = MultipleCatch;

@@ -1,0 +1,111 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.overridingmethods.Parent.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.overridingmethods.Parent$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+class Parent extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_overridingmethods_Parent() {}
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_fun() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Parent}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    Parent.$clinit();
+    let instance = new Parent;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_overridingmethods_Parent();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_overridingmethods_Parent() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_overridingmethods_Parent();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof Parent; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Parent);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    Parent.$clinit();
+    if (!Parent.$classParent) {
+      Parent.$classParent = Class.$createForClass(
+          $Util.$generateId('Parent'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.overridingmethods.Parent'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.overridingmethods.Parent'));
+    }
+    return Parent.$classParent;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = Parent;
