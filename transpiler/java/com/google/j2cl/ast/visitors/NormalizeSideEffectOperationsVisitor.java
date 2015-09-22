@@ -57,6 +57,7 @@ public class NormalizeSideEffectOperationsVisitor extends AbstractRewriter {
     compilationUnit.accept(this);
   }
 
+  @Override
   public Node rewriteBinaryExpression(BinaryExpression expression) {
     if (!shouldNormalize(expression)) {
       return expression;
@@ -92,6 +93,7 @@ public class NormalizeSideEffectOperationsVisitor extends AbstractRewriter {
     return new MultiExpression(Arrays.<Expression>asList(assignQualifier, assignment));
   }
 
+  @Override
   public Node rewritePrefixExpression(PrefixExpression expression) {
     if (!shouldNormalize(expression)) {
       return expression;
@@ -127,6 +129,7 @@ public class NormalizeSideEffectOperationsVisitor extends AbstractRewriter {
     return new MultiExpression(Arrays.<Expression>asList(assignQualifier, assignment));
   }
 
+  @Override
   public Node rewritePostfixExpression(PostfixExpression expression) {
     if (!shouldNormalize(expression)) {
       return expression;

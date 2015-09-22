@@ -22,6 +22,7 @@ import com.google.j2cl.ast.visitors.MakeExplicitEnumConstructionVisitor;
 import com.google.j2cl.ast.visitors.NormalizeCastsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeNestedClassConstructorsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeSideEffectOperationsVisitor;
+import com.google.j2cl.ast.visitors.RemoveUnusedMultiExpressionReturnValues;
 import com.google.j2cl.common.VelocityUtil;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.frontend.CompilationUnitBuilder;
@@ -159,6 +160,7 @@ public class J2clTranspiler {
       InsertImplicitCastsVisitor.doInsertImplicitCasts(j2clUnit);
       NormalizeCastsVisitor.doNormalizeCasts(j2clUnit);
       NormalizeSideEffectOperationsVisitor.doNormalizeSideEffectOperations(j2clUnit);
+      RemoveUnusedMultiExpressionReturnValues.doRemoveUnused(j2clUnit);
     }
   }
 
