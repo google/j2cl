@@ -13,6 +13,10 @@ public class GenericMethod<T> {
     return null;
   } // return parameterized type.
 
+  public <T> T[] fun(T[] array) { // generic array type
+    return array;
+  }
+
   public void test() {
     GenericMethod<Number> g = new GenericMethod<>();
     g.foo(g, g); // call generic method without diamond.
@@ -21,5 +25,6 @@ public class GenericMethod<T> {
     g.fun(new Object());
     g.fun(new Exception());
     g.fun(new Error());
+    g.fun(new String[] {"asdf"});
   }
 }

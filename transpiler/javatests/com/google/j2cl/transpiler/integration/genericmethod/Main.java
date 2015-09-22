@@ -13,10 +13,15 @@ public class Main {
     return t;
   }
 
+  public <T> T[] foo(T[] array) {
+    return array;
+  }
+
   public static void main(String[] args) {
     Main m = new Main();
     assert m.foo(new Object()) instanceof Object;
     assert m.foo(new Error()) instanceof Error;
     assert m.foo(new Exception()) instanceof Exception;
+    assert m.foo(new String[] {"asdf"}) instanceof String[];
   }
 }

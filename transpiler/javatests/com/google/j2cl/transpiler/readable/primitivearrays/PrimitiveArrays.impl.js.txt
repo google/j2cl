@@ -6,6 +6,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.primitivearrays.PrimitiveAr
 
 
 let Object = goog.require('gen.java.lang.Object$impl');
+let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
@@ -48,9 +49,9 @@ class PrimitiveArrays extends Object {
     let ints = /**@type {Array<number>} */ ($Arrays.$create([100], $int));
     let ints2d =
         /**@type {Array<Array<number>>} */ ($Arrays.$create([5, 10], $int));
-    let longs = /**@type {Array<!Long>} */ ($Arrays.$create([100], $long));
+    let longs = /**@type {Array<!$Long>} */ ($Arrays.$create([100], $long));
     let longs2d =
-        /**@type {Array<Array<!Long>>} */ ($Arrays.$create([5, 10], $long));
+        /**@type {Array<Array<!$Long>>} */ ($Arrays.$create([5, 10], $long));
     let floats = /**@type {Array<number>} */ ($Arrays.$create([100], $float));
     let floats2d =
         /**@type {Array<Array<number>>} */ ($Arrays.$create([5, 10], $float));

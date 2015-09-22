@@ -12,6 +12,8 @@ let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let Error = goog.forwardDeclare('gen.java.lang.Error$impl');
 let Exception = goog.forwardDeclare('gen.java.lang.Exception$impl');
 let Number = goog.forwardDeclare('gen.java.lang.Number$impl');
+let String = goog.forwardDeclare('gen.java.lang.String$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 
 /**
@@ -70,6 +72,14 @@ class GenericMethod extends Object {
   m_bar() { return null; }
 
   /**
+   * @template M_T
+   * @param {Array<M_T>} array
+   * @return {Array<M_T>}
+   * @public
+   */
+  m_fun__arrayOf_java_lang_Object(array) { return array; }
+
+  /**
    * @return {void}
    * @public
    */
@@ -82,6 +92,8 @@ class GenericMethod extends Object {
     g.m_fun__java_lang_Object(Object.$create());
     g.m_fun__java_lang_Exception(Exception.$create());
     g.m_fun__java_lang_Error(Error.$create());
+    g.m_fun__arrayOf_java_lang_Object(
+        /**@type {Array<?string>} */ ($Arrays.$init(["asdf"], String)));
   }
 
   /**
@@ -156,6 +168,8 @@ class GenericMethod extends Object {
     Error = goog.module.get('gen.java.lang.Error$impl');
     Exception = goog.module.get('gen.java.lang.Exception$impl');
     Number = goog.module.get('gen.java.lang.Number$impl');
+    String = goog.module.get('gen.java.lang.String$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     Object.$clinit();
   }
 }

@@ -15,9 +15,11 @@
  */
 package com.google.j2cl.generator.visitors;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import com.google.j2cl.ast.AbstractVisitor;
+import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
@@ -25,6 +27,7 @@ import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.UnionTypeDescriptor;
@@ -50,8 +53,9 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     LAZY
   }
 
-  private Set<TypeDescriptor> typeDescriptorsDefinedInCompilationUnit = new LinkedHashSet<>();
-  private Map<ImportCategory, Set<TypeDescriptor>> typeDescriptorsByCategory =
+  private Set<RegularTypeDescriptor> typeDescriptorsDefinedInCompilationUnit =
+      new LinkedHashSet<>();
+  private Map<ImportCategory, Set<RegularTypeDescriptor>> typeDescriptorsByCategory =
       new LinkedHashMap<>();
 
   public static Map<ImportCategory, Set<Import>> gatherImports(JavaType javaType) {
@@ -79,7 +83,8 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   @Override
   public void exitJavaType(JavaType type) {
-    typeDescriptorsDefinedInCompilationUnit.add(type.getDescriptor().getRawTypeDescriptor());
+    typeDescriptorsDefinedInCompilationUnit.add(
+        (RegularTypeDescriptor) type.getDescriptor().getRawTypeDescriptor());
 
     // Super type and super interface imports are needed eagerly because they are used during the
     // declaration phase of JS execution. All other imports are lazy.
@@ -126,9 +131,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   @Override
   public void exitUnionTypeDescriptor(UnionTypeDescriptor unionTypeDescriptor) {
-    for (TypeDescriptor typeDescriptor : unionTypeDescriptor.getTypes()) {
-      addTypeDescriptor(typeDescriptor, ImportCategory.LAZY);
-    }
+    addTypeDescriptor(unionTypeDescriptor, ImportCategory.LAZY);
   }
 
   private Multiset<String> localNameUses = HashMultiset.create();
@@ -163,9 +166,11 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     return importsByCategory;
   }
 
-  private Set<Import> toImports(Set<TypeDescriptor> typeDescriptors) {
+  private Set<Import> toImports(Set<RegularTypeDescriptor> typeDescriptors) {
     Set<Import> imports = new LinkedHashSet<>();
     for (TypeDescriptor typeDescriptor : typeDescriptors) {
+      Preconditions.checkState(!typeDescriptor.isTypeVariable());
+      Preconditions.checkState(!typeDescriptor.isParameterizedType());
       String shortAliasName = getShortAliasName(typeDescriptor);
       int usageCount = localNameUses.count(shortAliasName);
       String aliasName = usageCount == 1 ? shortAliasName : computeLongAliasName(typeDescriptor);
@@ -174,27 +179,51 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     return imports;
   }
 
-  private void recordLocalNameUses(Set<TypeDescriptor> typeDescriptors) {
+  private void recordLocalNameUses(Set<RegularTypeDescriptor> typeDescriptors) {
     for (TypeDescriptor typeDescriptor : typeDescriptors) {
       localNameUses.add(getShortAliasName(typeDescriptor));
     }
   }
 
   private void addTypeDescriptor(TypeDescriptor typeDescriptor, ImportCategory importCategory) {
-    if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == typeDescriptor) {
-      addTypeDescriptor(TypeDescriptors.NATIVE_LONG_TYPE_DESCRIPTOR, ImportCategory.EAGER);
-      return;
-    }
+    // Type variables can't be depended upon.
     if (typeDescriptor.isTypeVariable()) {
       return;
     }
-    TypeDescriptor rawTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
-    if (rawTypeDescriptor.isArray()) {
-      addTypeDescriptor(TypeDescriptors.VM_ARRAYS_TYPE_DESCRIPTOR, ImportCategory.LAZY);
-      typeDescriptorsByCategory.get(importCategory).add(rawTypeDescriptor.getLeafTypeDescriptor());
-    } else {
-      typeDescriptorsByCategory.get(importCategory).add(rawTypeDescriptor);
+
+    // Special case expand a dependency on the 'long' primitive into a dependency on both the 'long'
+    // primitive and the native JS 'Long' emulation class.
+    if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == typeDescriptor) {
+      typeDescriptorsByCategory
+          .get(ImportCategory.EAGER)
+          .add((RegularTypeDescriptor) TypeDescriptors.NATIVE_LONG_TYPE_DESCRIPTOR);
+      typeDescriptorsByCategory
+          .get(importCategory)
+          .add((RegularTypeDescriptor) TypeDescriptors.LONG_TYPE_DESCRIPTOR);
+      return;
     }
+
+    // Unroll the types inside of a union type.
+    if (typeDescriptor instanceof UnionTypeDescriptor) {
+      UnionTypeDescriptor unionTypeDescriptor = (UnionTypeDescriptor) typeDescriptor;
+      for (TypeDescriptor containedTypeDescriptor : unionTypeDescriptor.getTypes()) {
+        addTypeDescriptor(containedTypeDescriptor, importCategory);
+      }
+      return;
+    }
+
+    // Unroll the leaf type in an array type and special case add the native Array utilities.
+    if (typeDescriptor instanceof ArrayTypeDescriptor) {
+      addTypeDescriptor(TypeDescriptors.VM_ARRAYS_TYPE_DESCRIPTOR, ImportCategory.LAZY);
+
+      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
+      addTypeDescriptor(arrayTypeDescriptor.getLeafTypeDescriptor(), importCategory);
+      return;
+    }
+
+    typeDescriptorsByCategory
+        .get(importCategory)
+        .add((RegularTypeDescriptor) typeDescriptor.getRawTypeDescriptor());
   }
 
   private void addLongsTypeDescriptor() {
@@ -221,7 +250,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   }
 
   private ImportGatheringVisitor() {
-    typeDescriptorsByCategory.put(ImportCategory.EAGER, new LinkedHashSet<TypeDescriptor>());
-    typeDescriptorsByCategory.put(ImportCategory.LAZY, new LinkedHashSet<TypeDescriptor>());
+    typeDescriptorsByCategory.put(ImportCategory.EAGER, new LinkedHashSet<RegularTypeDescriptor>());
+    typeDescriptorsByCategory.put(ImportCategory.LAZY, new LinkedHashSet<RegularTypeDescriptor>());
   }
 }

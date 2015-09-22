@@ -10,6 +10,7 @@ let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 
 
 class LongParameterSignature extends Object {
@@ -104,6 +105,7 @@ class LongParameterSignature extends Object {
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
+    $long = goog.module.get('vmbootstrap.primitives.$long$impl');
     Object.$clinit();
   }
 }
