@@ -15,14 +15,16 @@
  */
 package com.google.j2cl.generator;
 
-import com.google.common.collect.Lists;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.Variable;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatheringVisitor;
 import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
+import com.google.j2cl.generator.visitors.ImportUtils;
+import com.google.j2cl.generator.visitors.VariableAliasesGatheringVisitor;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -31,8 +33,6 @@ import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystem;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -79,38 +79,27 @@ public abstract class JavaScriptGenerator extends AbstractSourceGenerator {
     Map<ImportCategory, Set<Import>> importsByCategory =
         ImportGatheringVisitor.gatherImports(javaType);
 
+    List<Import> sortedImports = ImportUtils.getSortedImports(importsByCategory);
+
+    Map<Variable, String> aliasByVariable =
+        VariableAliasesGatheringVisitor.gatherVariableAliases(sortedImports, javaType);
+
     StatementSourceGenerator statementSourceGenerator =
-        new StatementSourceGenerator(
-            sortedList(
-                union(
-                    importsByCategory.get(ImportCategory.EAGER),
-                    importsByCategory.get(ImportCategory.LAZY))));
+        new StatementSourceGenerator(sortedImports, aliasByVariable);
 
     TypeDescriptor selfTypeDescriptor = javaType.getDescriptor().getRawTypeDescriptor();
     context.put("classType", javaType);
     context.put("selfImport", new Import(selfTypeDescriptor.getSimpleName(), selfTypeDescriptor));
     context.put("TranspilerUtils", TranspilerUtils.class);
     context.put("ManglingNameUtils", ManglingNameUtils.class);
-    context.put("eagerImports", sortedList(importsByCategory.get(ImportCategory.EAGER)));
-    context.put("lazyImports", sortedList(importsByCategory.get(ImportCategory.LAZY)));
+    context.put(
+        "eagerImports", ImportUtils.sortedList(importsByCategory.get(ImportCategory.EAGER)));
+    context.put("lazyImports", ImportUtils.sortedList(importsByCategory.get(ImportCategory.LAZY)));
     context.put("statementSourceGenerator", statementSourceGenerator);
     context.put("javaLangClassTypeDecriptor", TypeDescriptors.CLASS_TYPE_DESCRIPTOR);
     context.put("nativeUtilTypeDecriptor", TypeDescriptors.NATIVE_UTIL_TYPE_DESCRIPTOR);
 
     return context;
-  }
-
-  private static <T extends Comparable<T>> List<T> sortedList(Set<T> set) {
-    List<T> sortedList = Lists.newArrayList(set);
-    Collections.sort(sortedList);
-    return sortedList;
-  }
-
-  private static <T> Set<T> union(Set<T> left, Set<T> right) {
-    HashSet<T> union = new HashSet<>();
-    union.addAll(left);
-    union.addAll(right);
-    return union;
   }
 
   private static String createRelativeFilePath(JavaType javaType) {

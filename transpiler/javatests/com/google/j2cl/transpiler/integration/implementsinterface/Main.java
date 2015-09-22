@@ -1,8 +1,6 @@
 package com.google.j2cl.transpiler.integration.implementsinterface;
 
-interface MyInterface {
-  
-}
+interface MyInterface {}
 
 class A implements MyInterface {}
 

@@ -3,7 +3,7 @@
 #else
 #set ($ctorVisibility = $method.Descriptor.Visibility)
 #end
-#set ($parameterList = $TranspilerUtils.getParameterList($method))
+#set ($parameterList = $TranspilerUtils.getParameterList($method, $statementSourceGenerator))
 #set ($mangledNameOfCreate = $ManglingNameUtils.getConstructorMangledName($method.Descriptor))
 #set ($mangledNameOfCtor = $ManglingNameUtils.getCtorMangledName($method.Descriptor))
 #set ($enclosingClassTypeDescriptor = ${method.Descriptor.getEnclosingClassTypeDescriptor()})
@@ -17,7 +17,7 @@
 #end
 #foreach($parameter in $method.Parameters)
 #set ($parameterTypeName = ${statementSourceGenerator.getJsDocName(${parameter.TypeDescriptor})})
-   * @param {$parameterTypeName} $parameter.Name
+   * @param {$parameterTypeName} ${statementSourceGenerator.toSource($parameter)}
 #end
    * @return {!$jsDocName}
    * @${method.Descriptor.Visibility}
@@ -37,7 +37,7 @@
 #end
 #foreach($parameter in $method.Parameters)
 #set ($parameterTypeName = ${statementSourceGenerator.getJsDocName(${parameter.TypeDescriptor})})
-   * @param {$parameterTypeName} $parameter.Name
+   * @param {$parameterTypeName} ${statementSourceGenerator.toSource($parameter)}
 #end
    * @$ctorVisibility
    */

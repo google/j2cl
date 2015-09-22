@@ -3,7 +3,7 @@
 #else
 #set ($staticModifier = "")
 #end
-#set ($parameterList = $TranspilerUtils.getParameterList($method))
+#set ($parameterList = $TranspilerUtils.getParameterList($method, $statementSourceGenerator))
   /**
 #if ($method.isSynthetic())
    * Synthetic method.
@@ -16,7 +16,7 @@
 #end
 #foreach ($parameter in $method.Parameters)
 #set ($parameterTypeName = ${statementSourceGenerator.getJsDocName(${parameter.TypeDescriptor})})
-   * @param {$parameterTypeName} $parameter.Name
+   * @param {$parameterTypeName} $statementSourceGenerator.toSource($parameter)
 #end
 #set ($returnTypeDescriptor = ${method.Descriptor.getReturnTypeDescriptor()})
 #if (!$TranspilerUtils.isVoid($returnTypeDescriptor))

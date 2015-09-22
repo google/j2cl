@@ -54,14 +54,15 @@ public class TranspilerUtils {
     return packageName.replace('.', '/') + "/" + typeName;
   }
 
-  public static String getParameterList(Method method) {
+  public static String getParameterList(
+      Method method, final StatementSourceGenerator statementSourceGenerator) {
     List<String> parameterNameList =
         Lists.transform(
             method.getParameters(),
             new Function<Variable, String>() {
               @Override
               public String apply(Variable variable) {
-                return variable.getName();
+                return statementSourceGenerator.toSource(variable);
               }
             });
     return Joiner.on(", ").join(parameterNameList);

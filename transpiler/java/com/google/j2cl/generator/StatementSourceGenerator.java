@@ -89,11 +89,14 @@ import java.util.Map;
  */
 public class StatementSourceGenerator {
   private Map<TypeDescriptor, String> aliasByTypeDescriptor = new HashMap<>();
+  private final Map<Variable, String> aliasByVariable;
 
-  public StatementSourceGenerator(Collection<Import> imports) {
+  public StatementSourceGenerator(
+      Collection<Import> imports, Map<Variable, String> aliasByVariable) {
     for (Import anImport : imports) {
       aliasByTypeDescriptor.put(anImport.getTypeDescriptor(), anImport.getAlias());
     }
+    this.aliasByVariable = aliasByVariable;
   }
 
   public String getJsDocName(TypeDescriptor typeDescriptor) {
@@ -635,7 +638,7 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformVariableReference(VariableReference expression) {
-        return expression.getTarget().getName();
+        return toSource(expression.getTarget());
       }
 
       @Override
@@ -745,7 +748,9 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformVariable(Variable variable) {
-        return variable.getName();
+        return aliasByVariable.containsKey(variable)
+            ? aliasByVariable.get(variable)
+            : variable.getName();
       }
 
       private String transformQualifier(MemberReference memberRef) {

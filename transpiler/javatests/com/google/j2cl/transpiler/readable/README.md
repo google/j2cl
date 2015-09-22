@@ -57,7 +57,6 @@ are copyright and licensed as follows:
 - arithmetic exception for integers (e.g. divide by zero / mod by zero)
 - breakwithlabel
 - catchjsexception
-- classlocalvarcollision
 - continuewithlabel
 - enum special functions (values, valueOf, etc).
 - enumoptimization
@@ -71,7 +70,6 @@ are copyright and licensed as follows:
 - jsinteropclass
 - jsinteropdispatch
 - jsinteropinterface
-- javascriptkeywordscollision
 - methodreferences
 - nativefunction + provided Foo.native.js
 - notimportinternals

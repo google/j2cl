@@ -9,6 +9,7 @@ let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class JSKeyWords extends Object {
@@ -23,6 +24,16 @@ class JSKeyWords extends Object {
    * @private
    */
   $init__com_google_j2cl_transpiler_readable_javascriptkeywords_JSKeyWords() {}
+
+  /**
+   * @param {number} l_in
+   * @return {number}
+   * @public
+   */
+  m_test__int(l_in) {
+    let l_let = 0;
+    return l_let + l_in;
+  }
 
   /**
    * A particular Java constructor as a factory method.
@@ -92,6 +103,7 @@ class JSKeyWords extends Object {
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Object.$clinit();
   }
 }
