@@ -1,0 +1,113 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType$Entry.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType$Entry$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let ImportsReturnType = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+class ImportsReturnType$Entry extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_importsreturntype_ImportsReturnType$Entry() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!ImportsReturnType$Entry}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    ImportsReturnType$Entry.$clinit();
+    let instance = new ImportsReturnType$Entry;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_importsreturntype_ImportsReturnType$Entry();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_importsreturntype_ImportsReturnType$Entry() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_importsreturntype_ImportsReturnType$Entry();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof ImportsReturnType$Entry;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, ImportsReturnType$Entry);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    ImportsReturnType$Entry.$clinit();
+    if (!ImportsReturnType$Entry.$classImportsReturnType$Entry) {
+      ImportsReturnType$Entry
+          .$classImportsReturnType$Entry = Class.$createForClass(
+          $Util.$generateId('Entry'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType$Entry'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType.Entry'));
+    }
+    return ImportsReturnType$Entry.$classImportsReturnType$Entry;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    ImportsReturnType = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = ImportsReturnType$Entry;

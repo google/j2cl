@@ -221,6 +221,16 @@ public class ImportGatheringVisitor extends AbstractVisitor {
       return;
     }
 
+    // If there is a type signature like Map<Entry<K, V>> then the Entry type argument needs to be
+    // imported.
+    if (typeDescriptor.isParameterizedType()) {
+      for (TypeDescriptor typeArgumentDescriptor : typeDescriptor.getTypeArgumentDescriptors()) {
+        // But the type argument imports do not need to be eager since they are not acting here as
+        // super type or super interface.
+        addTypeDescriptor(typeArgumentDescriptor, ImportCategory.LAZY);
+      }
+    }
+
     typeDescriptorsByCategory
         .get(importCategory)
         .add((RegularTypeDescriptor) typeDescriptor.getRawTypeDescriptor());
