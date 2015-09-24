@@ -1,0 +1,127 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.nobridgemethods.CharSet.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.nobridgemethods.CharSet$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let CharSet$1 = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.nobridgemethods.CharSet$1$impl');
+let TreeMap = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let String = goog.forwardDeclare('gen.java.lang.String$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+
+class CharSet extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_nobridgemethods_CharSet() {}
+
+  /**
+   * @param {Array<?string>} args
+   * @return {void}
+   * @public
+   */
+  static m_main__arrayOf_java_lang_String(args) {
+    CharSet.$clinit();
+    let treeMap = CharSet$1.$create();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!CharSet}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    CharSet.$clinit();
+    let instance = new CharSet;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_nobridgemethods_CharSet();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_nobridgemethods_CharSet() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_nobridgemethods_CharSet();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof CharSet; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, CharSet);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    CharSet.$clinit();
+    if (!CharSet.$classCharSet) {
+      CharSet.$classCharSet = Class.$createForClass(
+          $Util.$generateId('CharSet'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.nobridgemethods.CharSet'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.nobridgemethods.CharSet'));
+    }
+    return CharSet.$classCharSet;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    CharSet$1 = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.nobridgemethods.CharSet$1$impl');
+    TreeMap = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    String = goog.module.get('gen.java.lang.String$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = CharSet;

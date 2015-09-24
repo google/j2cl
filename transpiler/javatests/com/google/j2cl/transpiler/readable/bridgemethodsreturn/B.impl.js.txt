@@ -1,0 +1,149 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.bridgemethodsreturn.B.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.bridgemethodsreturn.B$impl');
+
+
+let A = goog.require('gen.com.google.j2cl.transpiler.readable.bridgemethodsreturn.A$impl');
+let I = goog.require('gen.com.google.j2cl.transpiler.readable.bridgemethodsreturn.I$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Integer = goog.forwardDeclare('gen.java.lang.Integer$impl');
+let Number = goog.forwardDeclare('gen.java.lang.Number$impl');
+let String = goog.forwardDeclare('gen.java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+/**
+ * @extends {A<(Number|?number), ?string>}
+ * @implements {I<Integer, ?string>}
+ */
+class B extends A {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_bridgemethodsreturn_B() {}
+
+  /**
+   * @param {?string} s
+   * @return {Integer}
+   * @public
+   */
+  m_fun__java_lang_String(s) { return Integer.$create__int(1); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!B}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    B.$clinit();
+    let instance = new B;
+    instance.$ctor__com_google_j2cl_transpiler_readable_bridgemethodsreturn_B();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgemethodsreturn_B() {
+    this.$ctor__com_google_j2cl_transpiler_readable_bridgemethodsreturn_A();
+    this.$init__com_google_j2cl_transpiler_readable_bridgemethodsreturn_B();
+  }
+
+  /**
+   * Synthetic method.
+   * @param {?string} arg0
+   * @return {(Number|?number)}
+   * @public
+   */
+  m_fun__java_lang_Object(arg0) {
+    return this.m_fun__java_lang_String(
+        /**@type {?string} */ ($Casts.to(arg0, String.$isInstance(arg0))));
+  }
+
+  /**
+   * Synthetic method.
+   * @param {?string} arg0
+   * @return {Integer}
+   * @public
+   */
+  m_fun__java_lang_Object(arg0) {
+    return this.m_fun__java_lang_String(
+        /**@type {?string} */ ($Casts.to(arg0, String.$isInstance(arg0))));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof B; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, B);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    B.$clinit();
+    if (!B.$classB) {
+      B.$classB = Class.$createForClass(
+          $Util.$generateId('B'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.bridgemethodsreturn.B'),
+          A.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.bridgemethodsreturn.B'));
+    }
+    return B.$classB;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Integer = goog.module.get('gen.java.lang.Integer$impl');
+    Number = goog.module.get('gen.java.lang.Number$impl');
+    String = goog.module.get('gen.java.lang.String$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    A.$clinit();
+  }
+}
+;
+
+
+I.$markImplementor(B);
+
+
+
+/**
+ * Export class.
+ */
+exports = B;

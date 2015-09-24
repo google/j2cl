@@ -129,6 +129,11 @@ public class BridgeMethodsCreator {
         Arrays.asList(type.getDeclaredMethods()),
         new Predicate<IMethodBinding>() {
           @Override
+          /**
+           * If {@code method}, the concrete method with specialized type arguments, has different
+           * method signature with {@code method.getMethodDeclaration()}, the original generic
+           * method, it means this method is a potential method that may need a bridge method.
+           */
           public boolean apply(IMethodBinding method) {
             return !method.isConstructor()
                 && !method.isSynthetic()
@@ -143,13 +148,22 @@ public class BridgeMethodsCreator {
   /**
    * Returns the delegated method (implemented or inherited) by {@code type} that
    * {@code bridgeMethod} should be delegated to.
+   * <p>
+   * If a method (a concrete method with specialized type arguments) in {@code type} or in its super
+   * types has the same erasured signature with {@code bridgeMethod}, it is an overriding
+   * method for {@code bridgeMethod}. And if their original method declarations are different then
+   * a bridge method is needed to make overriding work.
    */
   private static IMethodBinding findDelegatedMethod(
       IMethodBinding bridgeMethod, ITypeBinding type) {
     for (IMethodBinding method : type.getDeclaredMethods()) {
       if (!method.isEqualTo(bridgeMethod) // should not delegate to itself
           && !Modifier.isAbstract(method.getModifiers()) // should be a concrete implementation.
-          && JdtUtils.areParameterErasureEqual(method, bridgeMethod)) { // has the same signature
+          && JdtUtils.areParameterErasureEqual(
+              method, bridgeMethod) // concrete methods have the same signature, thus an overriding.
+          && !JdtUtils
+              .areParameterErasureEqual( // original method declarations have different signatures
+              method.getMethodDeclaration(), bridgeMethod.getMethodDeclaration())) {
         // find a overriding method (also possible accidental overriding), this is the method that
         // should be delegated to.
         return method;

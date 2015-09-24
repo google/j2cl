@@ -1,0 +1,124 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap$impl');
+
+
+let Map = goog.require('gen.com.google.j2cl.transpiler.readable.nobridgemethods.Map$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let TreeMap$InnerEntry = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap$InnerEntry$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+/**
+ * @template C_K
+ * @extends {Map<C_K>}
+ */
+class TreeMap extends Map {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_nobridgemethods_TreeMap() {}
+
+  /**
+   * @override
+   * @param {C_K} key
+   * @return {TreeMap$InnerEntry<C_K>}
+   * @public
+   */
+  m_getCeilingEntry__java_lang_Object(key) {
+    return /**@type {TreeMap$InnerEntry<C_K>} */ (TreeMap$InnerEntry.$create());
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_K
+   * @return {!TreeMap<C_K>}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    TreeMap.$clinit();
+    let instance = new TreeMap;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_nobridgemethods_TreeMap();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_nobridgemethods_TreeMap() {
+    this.$ctor__com_google_j2cl_transpiler_readable_nobridgemethods_Map();
+    this.$init__com_google_j2cl_transpiler_readable_nobridgemethods_TreeMap();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof TreeMap; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, TreeMap);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    TreeMap.$clinit();
+    if (!TreeMap.$classTreeMap) {
+      TreeMap.$classTreeMap = Class.$createForClass(
+          $Util.$generateId('TreeMap'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap'),
+          Map.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap'));
+    }
+    return TreeMap.$classTreeMap;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    TreeMap$InnerEntry = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap$InnerEntry$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Map.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = TreeMap;
