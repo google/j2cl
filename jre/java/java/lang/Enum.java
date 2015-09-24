@@ -31,6 +31,10 @@ public abstract class Enum<E extends Enum<E>> implements Comparable<E>, Serializ
     this.ordinal = ordinal;
   }
 
+  public Class<E> getDeclaringClass() {
+    return null;
+  }
+
   public final String name() {
     return name != null ? name : "" + ordinal;
   }

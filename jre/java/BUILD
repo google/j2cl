@@ -60,15 +60,23 @@ j2cl_source_copy(
     ],
 )
 
+JRE_SRC = [
+    "java/lang/Class.java",
+    "java/lang/Enum.java",
+    "java/lang/Object.java",
+    "java/util/InternalJsMapFactory.java",
+    "java/nio/charset/CharsetEncoder.java",
+    "java/nio/charset/CharsetDecoder.java",
+    "javaemul/internal/JsDate.java",
+    "java/lang/invoke/MethodHandles.java",
+    ":emul_dev",
+    ":emul_user",
+]
+
 # TODO(dankurka): this target should be the java_lib target we hand to JDT for resolving compilation
 java_library(
     name = "emul",
-    srcs = [
-        "java/util/InternalJsMapFactory.java",
-        "javaemul/internal/JsDate.java",
-        ":emul_dev",
-        ":emul_user",
-    ],
+    srcs = JRE_SRC,
 )
 
 load("/third_party/java_src/j2cl/build_def/j2cl_tool", "jsni_to_j2cl_converter")
