@@ -22,6 +22,7 @@ j2cl_java_library(
         "java/lang/Number.java",
         "java/lang/Object.java",
         "java/lang/String.java",
+        "javaemul/internal/JsDate.java",
     ] + glob(["java/lang/annotation/*.java"]),
 )
 
