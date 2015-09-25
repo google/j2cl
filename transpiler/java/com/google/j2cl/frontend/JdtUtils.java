@@ -63,6 +63,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Utility functions to manipulate JDT internal representations.
@@ -398,14 +399,29 @@ public class JdtUtils {
 
   static IMethodBinding getMethodBinding(
       ITypeBinding typeBinding, String methodName, ITypeBinding... parameterTypes) {
-    while (typeBinding != null) {
+
+    Queue<ITypeBinding> deque = new LinkedList<>();
+    deque.add(typeBinding);
+
+    while (!deque.isEmpty()) {
+      typeBinding = deque.poll();
       for (IMethodBinding methodBinding : typeBinding.getDeclaredMethods()) {
         if (methodBinding.getName().equals(methodName)
             && Arrays.equals(methodBinding.getParameterTypes(), parameterTypes)) {
           return methodBinding;
         }
       }
-      typeBinding = typeBinding.getSuperclass();
+      ITypeBinding superclass = typeBinding.getSuperclass();
+      if (superclass != null) {
+        deque.add(superclass);
+      }
+
+      ITypeBinding[] superInterfaces = typeBinding.getInterfaces();
+      if (superInterfaces != null) {
+        for (ITypeBinding superInterface : superInterfaces) {
+          deque.add(superInterface);
+        }
+      }
     }
     return null;
   }

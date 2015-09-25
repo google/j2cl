@@ -22,7 +22,9 @@ import java.util.Iterator;
  */
 public class Main {
 
-  private static class Base implements Iterable<String> {
+  public interface MyList extends Iterable<String> {}
+
+  private static class Base implements MyList {
 
     private String[] content = new String[] {"1", "2", "3"};
 
@@ -58,6 +60,15 @@ public class Main {
   public static void main(String... args) {
     int count = 1;
     for (String string : new Concrete()) {
+      assert string.equals("" + count);
+      count++;
+    }
+
+
+    // Refer to the type by interface
+    MyList myList = new Concrete();
+    count = 1;
+    for (String string : myList) {
       assert string.equals("" + count);
       count++;
     }
