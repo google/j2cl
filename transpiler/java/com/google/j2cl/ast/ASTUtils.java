@@ -106,10 +106,18 @@ public class ASTUtils {
    */
   public static MethodCall getConstructorInvocation(Method method) {
     Preconditions.checkArgument(method.isConstructor());
-    if (method.getBody().getStatements().isEmpty()) {
+    return getConstructorInvocation(method.getBody().getStatements());
+  }
+
+  /**
+   * Returns the constructor invocation (super call or this call) in the provided statements,
+   * or returns null if there isn't one.
+   */
+  public static MethodCall getConstructorInvocation(List<Statement> statements) {
+    if (statements.isEmpty()) {
       return null;
     }
-    Statement firstStatement = method.getBody().getStatements().get(0);
+    Statement firstStatement = statements.get(0);
     if (!(firstStatement instanceof ExpressionStatement)) {
       return null;
     }
@@ -464,5 +472,27 @@ public class ASTUtils {
             primitiveType // returnTypeDescriptor
             );
     return new MethodCall(expression, valueMethodDescriptor, new ArrayList<Expression>());
+  }
+
+  public static boolean isConstructorOfImmediateNestedClass(Method method, JavaType targetType) {
+    if (method == null || targetType == null || targetType.getEnclosingTypeDescriptor() == null) {
+      return false;
+    }
+    if (method.getDescriptor().getEnclosingClassTypeDescriptor() != targetType.getDescriptor()) {
+      return false;
+    }
+    return !targetType.isStatic() && method.isConstructor();
+  }
+
+  public static boolean isDelegatedConstructorCall(
+      MethodCall methodCall, TypeDescriptor targetTypeDescriptor) {
+    if (methodCall == null || !methodCall.getTarget().isConstructor()) {
+      return false;
+    }
+    return methodCall
+        .getTarget()
+        .getEnclosingClassTypeDescriptor()
+        .getRawTypeDescriptor()
+        .equals(targetTypeDescriptor.getRawTypeDescriptor());
   }
 }
