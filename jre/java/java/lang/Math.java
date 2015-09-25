@@ -15,12 +15,19 @@ package java.lang;
 
 /**
  * See <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/RuntimeException.html">the
+ * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Math.html">the
  * official Java API doc</a> for details.
  */
-public class RuntimeException extends Exception {
+public class Math {
+  public static double abs(double d) {
+    return 0;
+  }
 
-  public RuntimeException() {}
+  public static int max(int i1, int i2) {
+    return 0;
+  }
 
-  public RuntimeException(String message) {}
+  public static int min(int i1, int i2) {
+    return 0;
+  }
 }

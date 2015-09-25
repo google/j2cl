@@ -11,16 +11,13 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package java.lang;
+package java.util;
 
 /**
  * See <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/RuntimeException.html">the
+ * href="http://java.sun.com/j2se/1.5.0/docs/api/java/util/ArrayList.html">the
  * official Java API doc</a> for details.
  */
-public class RuntimeException extends Exception {
-
-  public RuntimeException() {}
-
-  public RuntimeException(String message) {}
+public interface List<T> extends Iterable<T> {
+  public void add(int index, T element);
 }

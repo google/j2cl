@@ -19,6 +19,11 @@ package java.lang;
  * official Java API doc</a> for details.
  */
 public class Boolean implements Comparable<Boolean> {
+
+  public static Boolean valueOf(boolean b) {
+    return null;
+  }
+
   public Boolean(boolean value) {
     // Super-source replaced.
   }

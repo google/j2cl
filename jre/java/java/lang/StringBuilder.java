@@ -15,12 +15,29 @@ package java.lang;
 
 /**
  * See <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/RuntimeException.html">the
+ * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/StringBuilder.html">the
  * official Java API doc</a> for details.
  */
-public class RuntimeException extends Exception {
+public class StringBuilder {
+  public StringBuilder() {}
 
-  public RuntimeException() {}
+  public StringBuilder(String s) {}
 
-  public RuntimeException(String message) {}
+  public StringBuilder(int cap) {}
+
+  public StringBuilder append(int b) {
+    return this;
+  }
+
+  public StringBuilder append(long l) {
+    return this;
+  }
+
+  public StringBuilder append(String s) {
+    return this;
+  }
+
+  public StringBuilder append(float f) {
+    return this;
+  }
 }

@@ -19,6 +19,11 @@ package java.lang;
  * official Java API doc</a> for details.
  */
 public class Double extends Number implements Comparable<Double> {
+
+  public static Double valueOf(double d) {
+    return null;
+  }
+
   public Double(double value) {
     // Super-source replaced.
   }
@@ -77,7 +82,7 @@ public class Double extends Number implements Comparable<Double> {
     throw new RuntimeException();
   }
 
-  public int compare(double a, double b) {
+  public static int compare(double a, double b) {
     // Super-source replaced.
     throw new RuntimeException();
   }

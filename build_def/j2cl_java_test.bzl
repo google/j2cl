@@ -71,7 +71,6 @@ def j2cl_java_test(**kwargs):
       outs=js_names,
       cmd="$(location //third_party/unzip:unzip) -q -d $(GENDIR)/"
       + java_root + " " + out_jar + "",
-      executable=1,
       testonly=1,
       tools=[
           "lib" + base_name + ".jar",
