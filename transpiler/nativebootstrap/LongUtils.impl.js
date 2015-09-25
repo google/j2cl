@@ -23,6 +23,17 @@ let Long = goog.require('nativebootstrap.Long$impl');
  */
 class LongUtils {
   /**
+   * Compares two Longs.
+   * @param {!Long} a the first long for comparison.
+   * @param {!Long} b the second long for comparison.
+   * @return {number} 0 if they are the same, 1 if the this is greater, and -1
+   *     if the given one is greater.
+   */
+  static $compare(a, b) {
+    return a.compare(b);
+  }
+
+  /**
    * @param {string} longString A Long valueLong represented in readable string
    *          format.
    * @param {number=} opt_radix The radix in which the text is written.

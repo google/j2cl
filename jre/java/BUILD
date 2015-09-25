@@ -30,7 +30,10 @@ j2cl_java_library(
 # versions of Java classes into a complete JRE.
 js_library(
     name = "jre",
-    srcs = glob(["**/*.js"]),
+    srcs = glob(
+        ["**/*.js"],
+        exclude = ["**/*.native.js"],
+    ),
     deps = [
         "//transpiler:nativebootstrap",
         ":JavaJre_js_library",
@@ -95,5 +98,17 @@ jsni_to_j2cl_converter(
         "javaemul/internal/HashCodes.java",
         "javaemul/internal/LongCompareHolder.java",
         "java/lang/Throwable.java",
+    ],
+)
+
+load("/third_party/java_src/j2cl/build_def/j2cl_create_zip", "j2cl_create_zip")
+
+j2cl_create_zip(
+    name = "native_js",
+    js = [
+        "java/lang/Throwable.native.js",
+        "javaemul/internal/ArrayStamper.native.js",
+        "javaemul/internal/HashCodes.native.js",
+        "javaemul/internal/LongCompareHolder.native.js",
     ],
 )

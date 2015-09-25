@@ -179,6 +179,19 @@ class Arrays {
   }
 
   /**
+   * Changes the given array's to the given leafType.
+   *
+   * @param {Array<*>} array
+   * @param {Array<*>} otherArray
+   * @public
+   */
+   static $stampType(array, otherArray) {
+     array.leafType = otherArray.leafType;
+     array.dimensionCount = otherArray.dimensionCount;
+     array.$getClass = otherArray.$getClass;
+   }
+
+  /**
    * Returns whether the given instance is an array, whether it has the given
    * number of dimensions and whether its leaf type is assignable from the given
    * leaf type.
