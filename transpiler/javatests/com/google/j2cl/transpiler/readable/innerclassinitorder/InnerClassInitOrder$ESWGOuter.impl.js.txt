@@ -1,0 +1,149 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let InnerClassInitOrder$ESWGOuter$ESWGInner = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter$ESWGInner$impl');
+let InnerClassInitOrder = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+/**
+ * @template C_ESWGOuter_T
+ */
+class InnerClassInitOrder$ESWGOuter extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter() {
+  }
+
+  /**
+   * @return {InnerClassInitOrder$ESWGOuter$ESWGInner<C_ESWGOuter_T>}
+   * @public
+   */
+  m_$create_InnerClassInitOrder$ESWGOuter$ESWGInner() {
+    return InnerClassInitOrder$ESWGOuter$ESWGInner.$create(this);
+  }
+
+  /**
+   * @param {number} value
+   * @return {InnerClassInitOrder$ESWGOuter$ESWGInner<C_ESWGOuter_T>}
+   * @public
+   */
+  m_$create_InnerClassInitOrder$ESWGOuter$ESWGInner__int(value) {
+    return InnerClassInitOrder$ESWGOuter$ESWGInner.$create__int(value, this);
+  }
+
+  /**
+   * @return {InnerClassInitOrder$ESWGOuter$ESWGInner<C_ESWGOuter_T>}
+   * @public
+   */
+  m_newESWGInner() {
+    return /**@type {InnerClassInitOrder$ESWGOuter$ESWGInner<C_ESWGOuter_T>} */ (
+        this.m_$create_InnerClassInitOrder$ESWGOuter$ESWGInner());
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_ESWGOuter_T
+   * @return {!InnerClassInitOrder$ESWGOuter<C_ESWGOuter_T>}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    InnerClassInitOrder$ESWGOuter.$clinit();
+    let instance = new InnerClassInitOrder$ESWGOuter;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof InnerClassInitOrder$ESWGOuter;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, InnerClassInitOrder$ESWGOuter);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    InnerClassInitOrder$ESWGOuter.$clinit();
+    if (!InnerClassInitOrder$ESWGOuter.$classInnerClassInitOrder$ESWGOuter) {
+      InnerClassInitOrder$ESWGOuter
+          .$classInnerClassInitOrder$ESWGOuter = Class.$createForClass(
+          $Util.$generateId('ESWGOuter'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter'));
+    }
+    return InnerClassInitOrder$ESWGOuter.$classInnerClassInitOrder$ESWGOuter;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    InnerClassInitOrder$ESWGOuter$ESWGInner = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter$ESWGInner$impl');
+    InnerClassInitOrder = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = InnerClassInitOrder$ESWGOuter;

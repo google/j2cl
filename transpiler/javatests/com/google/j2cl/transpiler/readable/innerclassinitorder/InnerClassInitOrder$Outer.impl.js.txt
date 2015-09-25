@@ -1,0 +1,171 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let InnerClassInitOrder$Outer$OuterIsNotSuper = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$OuterIsNotSuper$impl');
+let InnerClassInitOrder$Outer$OuterIsSuper = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$OuterIsSuper$impl');
+let InnerClassInitOrder$Outer$TestUnqualifiedSuperCall = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestUnqualifiedSuperCall$impl');
+let InnerClassInitOrder = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class InnerClassInitOrder$Outer extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {number}
+     */
+    this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer =
+        0;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer() {
+  }
+
+  /**
+   * @return {InnerClassInitOrder$Outer$OuterIsNotSuper}
+   * @public
+   */
+  m_$create_InnerClassInitOrder$Outer$OuterIsNotSuper() {
+    return InnerClassInitOrder$Outer$OuterIsNotSuper.$create(this);
+  }
+
+  /**
+   * @param {number} i
+   * @return {InnerClassInitOrder$Outer$OuterIsSuper}
+   * @public
+   */
+  m_$create_InnerClassInitOrder$Outer$OuterIsSuper__int(i) {
+    return InnerClassInitOrder$Outer$OuterIsSuper.$create__int(i, this);
+  }
+
+  /**
+   * @return {InnerClassInitOrder$Outer$TestUnqualifiedSuperCall}
+   * @public
+   */
+  m_$create_InnerClassInitOrder$Outer$TestUnqualifiedSuperCall() {
+    return InnerClassInitOrder$Outer$TestUnqualifiedSuperCall.$create(this);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {number} i
+   * @return {!InnerClassInitOrder$Outer}
+   * @public
+   * @nocollapse
+   */
+  static $create__int(i) {
+    InnerClassInitOrder$Outer.$clinit();
+    let instance = new InnerClassInitOrder$Outer;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer__int(
+            i);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {number} i
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer__int(
+      i) {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer();
+    this.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer =
+        i;
+  }
+
+  /**
+   * @return {number}
+   * @public
+   */
+  m_checkDispatch() { return 1; }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof InnerClassInitOrder$Outer;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, InnerClassInitOrder$Outer);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    InnerClassInitOrder$Outer.$clinit();
+    if (!InnerClassInitOrder$Outer.$classInnerClassInitOrder$Outer) {
+      InnerClassInitOrder$Outer
+          .$classInnerClassInitOrder$Outer = Class.$createForClass(
+          $Util.$generateId('Outer'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer'));
+    }
+    return InnerClassInitOrder$Outer.$classInnerClassInitOrder$Outer;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    InnerClassInitOrder$Outer$OuterIsNotSuper = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$OuterIsNotSuper$impl');
+    InnerClassInitOrder$Outer$OuterIsSuper = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$OuterIsSuper$impl');
+    InnerClassInitOrder$Outer$TestUnqualifiedSuperCall = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestUnqualifiedSuperCall$impl');
+    InnerClassInitOrder = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+
+/**
+ * Export class.
+ */
+exports = InnerClassInitOrder$Outer;
