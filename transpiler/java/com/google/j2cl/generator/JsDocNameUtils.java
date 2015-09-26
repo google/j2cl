@@ -22,7 +22,6 @@ import com.google.common.base.Strings;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
-
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 
@@ -41,48 +40,63 @@ public class JsDocNameUtils {
   /**
    * Mapping from unboxed type descriptor (Boolean, Double, String) to its JsDoc name.
    */
-  private static final Map<TypeDescriptor, String> jsDocNamesByUnboxedTypeDescriptor =
-      new HashMap<>();
+  private static Map<TypeDescriptor, String> jsDocNamesByUnboxedTypeDescriptor;
   /**
    * Mapping from super type descriptor (super classes or super interfaces) to its sub classes
    * or implementing classes that are unboxed types.
    */
-  private static final Multimap<TypeDescriptor, TypeDescriptor>
-      unboxedTypeDescriptorsBySuperTypeDescriptor = HashMultimap.create();
+  private static Multimap<TypeDescriptor, TypeDescriptor>
+      unboxedTypeDescriptorsBySuperTypeDescriptor;
 
-  // initialize special cases for unboxed type descriptors
-  static {
+  public static void init() {
+    initUnboxedTypeDescriptor();
+    initSuperTypesOfUnboxedTypeDescriptor();
+  }
+
+  /**
+   * Initialize special cases for unboxed type descriptors
+   */
+  private static void initUnboxedTypeDescriptor() {
+    if (jsDocNamesByUnboxedTypeDescriptor != null) {
+      // Already initialized.
+      return;
+    }
+    jsDocNamesByUnboxedTypeDescriptor = new HashMap<>();
     // unboxed types: Boolean => boolean, Double => number, String => ?string.
-    TypeDescriptor javaLangBoolean =
-        TypeDescriptors.boxedTypeByPrimitiveType.get(TypeDescriptors.BOOLEAN_TYPE_DESCRIPTOR);
-    TypeDescriptor javaLangDouble =
-        TypeDescriptors.boxedTypeByPrimitiveType.get(TypeDescriptors.DOUBLE_TYPE_DESCRIPTOR);
-    TypeDescriptor javaLangString = TypeDescriptors.STRING_TYPE_DESCRIPTOR;
+    TypeDescriptor javaLangBoolean = TypeDescriptors.get().javaLangBoolean;
+    TypeDescriptor javaLangDouble = TypeDescriptors.get().javaLangDouble;
+    TypeDescriptor javaLangString = TypeDescriptors.get().javaLangString;
     jsDocNamesByUnboxedTypeDescriptor.put(
         javaLangBoolean, JS_NULLABLE_PREFIX + JS_BOOLEAN_TYPE_NAME);
     jsDocNamesByUnboxedTypeDescriptor.put(javaLangDouble, JS_NULLABLE_PREFIX + JS_NUMBER_TYPE_NAME);
     jsDocNamesByUnboxedTypeDescriptor.put(javaLangString, JS_NULLABLE_PREFIX + JS_STRING_TYPE_NAME);
   }
 
-  // initialize mapping from super types to its child unboxed types.
-  static {
-    TypeDescriptor javaLangComparable = TypeDescriptors.COMPARABLE_TYPE_DESCRIPTOR;
-    TypeDescriptor javaLangBoolean =
-        TypeDescriptors.boxedTypeByPrimitiveType.get(TypeDescriptors.BOOLEAN_TYPE_DESCRIPTOR);
-    TypeDescriptor javaLangDouble =
-        TypeDescriptors.boxedTypeByPrimitiveType.get(TypeDescriptors.DOUBLE_TYPE_DESCRIPTOR);
-    TypeDescriptor javaLangString = TypeDescriptors.STRING_TYPE_DESCRIPTOR;
-    TypeDescriptor javaLangNumber = TypeDescriptors.NUMBER_TYPE_DESCRIPTOR;
+  /**
+   * Initialize mapping from super types to its child unboxed types.
+   */
+  private static void initSuperTypesOfUnboxedTypeDescriptor() {
+    if (unboxedTypeDescriptorsBySuperTypeDescriptor != null) {
+      // Already initialized.
+      return;
+    }
+    unboxedTypeDescriptorsBySuperTypeDescriptor = HashMultimap.create();
+    TypeDescriptor rawJavaLangComparable =
+        TypeDescriptors.get().javaLangComparable.getRawTypeDescriptor();
+    TypeDescriptor javaLangBoolean = TypeDescriptors.get().javaLangBoolean;
+    TypeDescriptor javaLangDouble = TypeDescriptors.get().javaLangDouble;
+    TypeDescriptor javaLangString = TypeDescriptors.get().javaLangString;
+    TypeDescriptor javaLangNumber = TypeDescriptors.get().javaLangNumber;
 
     // Boolean implements Comparable
-    unboxedTypeDescriptorsBySuperTypeDescriptor.put(javaLangComparable, javaLangBoolean);
+    unboxedTypeDescriptorsBySuperTypeDescriptor.put(rawJavaLangComparable, javaLangBoolean);
 
     // Double extends Number implements Comparable
-    unboxedTypeDescriptorsBySuperTypeDescriptor.put(javaLangComparable, javaLangDouble);
+    unboxedTypeDescriptorsBySuperTypeDescriptor.put(rawJavaLangComparable, javaLangDouble);
     unboxedTypeDescriptorsBySuperTypeDescriptor.put(javaLangNumber, javaLangDouble);
 
     // TODO: register String implements CharSequence
-    unboxedTypeDescriptorsBySuperTypeDescriptor.put(javaLangComparable, javaLangString);
+    unboxedTypeDescriptorsBySuperTypeDescriptor.put(rawJavaLangComparable, javaLangString);
   }
 
   /**

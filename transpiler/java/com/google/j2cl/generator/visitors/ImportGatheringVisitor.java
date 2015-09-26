@@ -100,14 +100,14 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   public void exitMethod(Method method) {
     TypeDescriptor returnTypeDescriptor = method.getDescriptor().getReturnTypeDescriptor();
     if (!returnTypeDescriptor.isPrimitive()
-        || returnTypeDescriptor == TypeDescriptors.LONG_TYPE_DESCRIPTOR) {
+        || returnTypeDescriptor == TypeDescriptors.get().primitiveLong) {
       addTypeDescriptor(returnTypeDescriptor, ImportCategory.LAZY);
     }
   }
 
   @Override
   public void exitExpression(Expression expression) {
-    if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == expression.getTypeDescriptor()) {
+    if (TypeDescriptors.get().primitiveLong == expression.getTypeDescriptor()) {
       // for Long operation method dispatch.
       addLongsTypeDescriptor();
     }
@@ -115,7 +115,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   @Override
   public void exitField(Field field) {
-    if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == field.getDescriptor().getTypeDescriptor()) {
+    if (TypeDescriptors.get().primitiveLong == field.getDescriptor().getTypeDescriptor()) {
       addLongsTypeDescriptor();
     }
   }
@@ -137,7 +137,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   private Multiset<String> localNameUses = HashMultiset.create();
 
   private Map<ImportCategory, Set<Import>> doGatherImports(JavaType javaType) {
-    addTypeDescriptor(TypeDescriptors.CLASS_TYPE_DESCRIPTOR, ImportCategory.LAZY);
+    addTypeDescriptor(TypeDescriptors.get().javaLangClass, ImportCategory.LAZY);
     addTypeDescriptor(TypeDescriptors.NATIVE_UTIL_TYPE_DESCRIPTOR, ImportCategory.EAGER);
 
     // Collect type references.
@@ -187,19 +187,19 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   private void addTypeDescriptor(TypeDescriptor typeDescriptor, ImportCategory importCategory) {
     // Type variables can't be depended upon.
-    if (typeDescriptor.isTypeVariable()) {
+    if (typeDescriptor.isTypeVariable() || typeDescriptor.isWildCard()) {
       return;
     }
 
     // Special case expand a dependency on the 'long' primitive into a dependency on both the 'long'
     // primitive and the native JS 'Long' emulation class.
-    if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == typeDescriptor) {
+    if (TypeDescriptors.get().primitiveLong == typeDescriptor) {
       typeDescriptorsByCategory
           .get(ImportCategory.EAGER)
           .add((RegularTypeDescriptor) TypeDescriptors.NATIVE_LONG_TYPE_DESCRIPTOR);
       typeDescriptorsByCategory
           .get(importCategory)
-          .add((RegularTypeDescriptor) TypeDescriptors.LONG_TYPE_DESCRIPTOR);
+          .add((RegularTypeDescriptor) TypeDescriptors.get().primitiveLong);
       return;
     }
 
@@ -256,7 +256,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   private static boolean needImportForJsDoc(TypeDescriptor returnTypeDescriptor) {
     return !returnTypeDescriptor.isPrimitive()
-        && returnTypeDescriptor != TypeDescriptors.STRING_TYPE_DESCRIPTOR;
+        && returnTypeDescriptor != TypeDescriptors.get().javaLangString;
   }
 
   private ImportGatheringVisitor() {

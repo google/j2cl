@@ -36,7 +36,7 @@ public class BooleanLiteral extends Expression {
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
-    return TypeDescriptors.BOOLEAN_TYPE_DESCRIPTOR;
+    return TypeDescriptors.get().primitiveBoolean;
   }
 
   @Override

@@ -59,10 +59,10 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
         MethodDescriptor.createRaw(
             true,
             Visibility.PUBLIC,
-            castTypeDescriptor,
+            castTypeDescriptor.getRawTypeDescriptor(),
             "$isInstance",
-            Lists.newArrayList(TypeDescriptors.OBJECT_TYPE_DESCRIPTOR),
-            TypeDescriptors.BOOLEAN_TYPE_DESCRIPTOR);
+            Lists.newArrayList(TypeDescriptors.get().javaLangObject),
+            TypeDescriptors.get().primitiveBoolean);
     Expression isInstanceMethodCall =
         new MethodCall(null, isInstanceMethodDescriptor, Arrays.asList(expression));
 
@@ -73,7 +73,7 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
             TypeDescriptors.VM_CASTS_TYPE_DESCRIPTOR,
             "to",
             Lists.newArrayList(
-                TypeDescriptors.OBJECT_TYPE_DESCRIPTOR, TypeDescriptors.BOOLEAN_TYPE_DESCRIPTOR),
+                TypeDescriptors.get().javaLangObject, TypeDescriptors.get().primitiveBoolean),
             castTypeDescriptor);
     List<Expression> arguments = new ArrayList<>();
     arguments.add(expression);
@@ -98,16 +98,16 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
             TypeDescriptors.VM_ARRAYS_TYPE_DESCRIPTOR,
             "$castTo",
             Lists.newArrayList(
-                TypeDescriptors.OBJECT_TYPE_DESCRIPTOR,
-                TypeDescriptors.OBJECT_TYPE_DESCRIPTOR,
-                TypeDescriptors.INT_TYPE_DESCRIPTOR),
+                TypeDescriptors.get().javaLangObject,
+                TypeDescriptors.get().javaLangObject,
+                TypeDescriptors.get().primitiveInt),
             arrayCastTypeDescriptor);
     List<Expression> arguments = new ArrayList<>();
     arguments.add(castExpression.getExpression());
-    arguments.add(arrayCastTypeDescriptor.getLeafTypeDescriptor());
+    arguments.add(arrayCastTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor());
     arguments.add(
         new NumberLiteral(
-            TypeDescriptors.INT_TYPE_DESCRIPTOR, arrayCastTypeDescriptor.getDimensions()));
+            TypeDescriptors.get().primitiveInt, arrayCastTypeDescriptor.getDimensions()));
 
     // Arrays.$castTo(expr, leafType, dimension);
     MethodCall castMethodCall = new MethodCall(null, castToMethodDescriptor, arguments);

@@ -36,10 +36,7 @@ public class ASTUtils {
   public static final String TYPE_VARIABLE_IN_TYPE_PREFIX = "C_";
   public static final FieldDescriptor ARRAY_LENGTH_FIELD_DESCRIPTION =
       FieldDescriptor.createRaw(
-          false,
-          TypeDescriptors.VOID_TYPE_DESCRIPTOR,
-          "length",
-          TypeDescriptors.INT_TYPE_DESCRIPTOR);
+          false, TypeDescriptors.get().primitiveVoid, "length", TypeDescriptors.get().primitiveInt);
 
   /**
    * Construct a new method descriptor for {@code methodDescriptor} with the additional
@@ -79,7 +76,7 @@ public class ASTUtils {
         MethodDescriptor.INIT_METHOD_NAME,
         false,
         false,
-        TypeDescriptors.VOID_TYPE_DESCRIPTOR);
+        TypeDescriptors.get().primitiveVoid);
   }
 
   /**
@@ -96,7 +93,7 @@ public class ASTUtils {
         typeDescriptor.getClassName(),
         true,
         false,
-        TypeDescriptors.VOID_TYPE_DESCRIPTOR,
+        TypeDescriptors.get().primitiveVoid,
         parameterTypeDescriptors);
   }
 
@@ -205,18 +202,18 @@ public class ASTUtils {
     if (fromTypeDescriptor == toTypeDescriptor) {
       return true;
     }
-    if (fromTypeDescriptor == TypeDescriptors.LONG_TYPE_DESCRIPTOR
-        || toTypeDescriptor == TypeDescriptors.LONG_TYPE_DESCRIPTOR) {
+    if (fromTypeDescriptor == TypeDescriptors.get().primitiveLong
+        || toTypeDescriptor == TypeDescriptors.get().primitiveLong) {
       return false;
     }
-    return toTypeDescriptor == TypeDescriptors.FLOAT_TYPE_DESCRIPTOR
-        || toTypeDescriptor == TypeDescriptors.DOUBLE_TYPE_DESCRIPTOR
-        || (toTypeDescriptor == TypeDescriptors.INT_TYPE_DESCRIPTOR
-            && (fromTypeDescriptor == TypeDescriptors.BYTE_TYPE_DESCRIPTOR
-                || fromTypeDescriptor == TypeDescriptors.CHAR_TYPE_DESCRIPTOR
-                || fromTypeDescriptor == TypeDescriptors.SHORT_TYPE_DESCRIPTOR))
-        || (toTypeDescriptor == TypeDescriptors.SHORT_TYPE_DESCRIPTOR
-            && fromTypeDescriptor == TypeDescriptors.BYTE_TYPE_DESCRIPTOR);
+    return toTypeDescriptor == TypeDescriptors.get().primitiveFloat
+        || toTypeDescriptor == TypeDescriptors.get().primitiveDouble
+        || (toTypeDescriptor == TypeDescriptors.get().primitiveInt
+            && (fromTypeDescriptor == TypeDescriptors.get().primitiveByte
+                || fromTypeDescriptor == TypeDescriptors.get().primitiveChar
+                || fromTypeDescriptor == TypeDescriptors.get().primitiveShort))
+        || (toTypeDescriptor == TypeDescriptors.get().primitiveShort
+            && fromTypeDescriptor == TypeDescriptors.get().primitiveByte);
   }
 
   public static boolean isShiftOperator(BinaryOperator binaryOperator) {
@@ -372,7 +369,7 @@ public class ASTUtils {
     }
     Expression forwardingMethodCall = new MethodCall(null, forwardToMethodDescriptor, arguments);
     Statement statement =
-        exposedMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.VOID_TYPE_DESCRIPTOR
+        exposedMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.get().primitiveVoid
             ? new ExpressionStatement(forwardingMethodCall)
             : new ReturnStatement(
                 forwardingMethodCall, exposedMethodDescriptor.getReturnTypeDescriptor());
@@ -432,7 +429,7 @@ public class ASTUtils {
       return expression;
     }
     Preconditions.checkArgument(primitiveType.isPrimitive());
-    TypeDescriptor boxType = TypeDescriptors.boxedTypeByPrimitiveType.get(primitiveType);
+    TypeDescriptor boxType = TypeDescriptors.getBoxTypeFromPrimitiveType(primitiveType);
     Preconditions.checkNotNull(boxType);
     MethodDescriptor valueOfMethodDescriptor =
         MethodDescriptor.create(
@@ -454,7 +451,7 @@ public class ASTUtils {
    */
   public static Expression unbox(Expression expression) {
     TypeDescriptor boxType = expression.getTypeDescriptor();
-    TypeDescriptor primitiveType = TypeDescriptors.boxedTypeByPrimitiveType.inverse().get(boxType);
+    TypeDescriptor primitiveType = TypeDescriptors.getPrimitiveTypeFromBoxType(boxType);
     Preconditions.checkNotNull(primitiveType);
     // skip double and boolean.
     if (primitiveType.getSimpleName().equals(TypeDescriptor.DOUBLE_TYPE_NAME)

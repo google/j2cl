@@ -75,11 +75,11 @@ public class Import implements Comparable<Import> {
 
   private static String computeBaseFileName(TypeDescriptor typeDescriptor) {
     if (typeDescriptor.isPrimitive()) {
-      return "vmbootstrap.primitives.$" + typeDescriptor.getSourceName();
+      return "vmbootstrap.primitives.$" + typeDescriptor.getBinaryName();
     }
     if (typeDescriptor.isRaw()) {
-      return typeDescriptor.getSourceName();
+      return typeDescriptor.getBinaryName();
     }
-    return "gen." + typeDescriptor.getSourceName();
+    return "gen." + typeDescriptor.getBinaryName();
   }
 }

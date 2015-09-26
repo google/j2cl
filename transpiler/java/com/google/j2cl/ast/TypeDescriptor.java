@@ -23,7 +23,8 @@ import com.google.common.collect.Interners;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.processors.Visitable;
 
-import java.util.ArrayList;
+import org.eclipse.jdt.core.dom.ITypeBinding;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -42,64 +43,39 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
   public static final String FLOAT_TYPE_NAME = "float";
   public static final String LONG_TYPE_NAME = "long";
   public static final String SHORT_TYPE_NAME = "short";
-  public static final String JAVA_LANG_BOOLEAN_TYPE_NAME = "java.lang.Boolean";
-  public static final String JAVA_LANG_DOUBLE_TYPE_NAME = "java.lang.Double";
-  public static final String JAVA_LANG_NUMBER_TYPE_NAME = "java.lang.Number";
 
   private static Interner<TypeDescriptor> interner;
+
+  // This is only used by TypeProxyUtils, and cannot be used elsewhere. Because to create a
+  // TypeDescriptor from a TypeBinding, it should go through the path to check array type.
+  static TypeDescriptor create(ITypeBinding typeBinding) {
+    Preconditions.checkArgument(!typeBinding.isArray());
+    return getInterner().intern(new RegularTypeDescriptor(typeBinding));
+  }
 
   private static TypeDescriptor create(
       Iterable<String> packageComponents,
       Iterable<String> classComponents,
       boolean isRaw,
-      Iterable<TypeDescriptor> typeArgumentDescriptors,
-      boolean isTypeVariable) {
+      Iterable<TypeDescriptor> typeArgumentDescriptors) {
     Preconditions.checkArgument(!Iterables.getLast(classComponents).contains("<"));
     return getInterner()
         .intern(
-            new AutoValue_RegularTypeDescriptor(
+            new SyntheticRegularTypeDescriptor(
                 ImmutableList.copyOf(packageComponents),
                 ImmutableList.copyOf(classComponents),
                 isRaw,
-                ImmutableList.copyOf(typeArgumentDescriptors),
-                isTypeVariable));
+                ImmutableList.copyOf(typeArgumentDescriptors)));
   }
 
-  public static TypeDescriptor create(
+  public static TypeDescriptor createSynthetic(
       Iterable<String> packageComponents, Iterable<String> classComponents) {
-    return create(
-        packageComponents, classComponents, false, ImmutableList.<TypeDescriptor>of(), false);
+    return create(packageComponents, classComponents, false, ImmutableList.<TypeDescriptor>of());
   }
 
   public static TypeDescriptor createRaw(Iterable<String> nameSpaceComponents, String className) {
     return create(
-        nameSpaceComponents,
-        Collections.singleton(className),
-        true,
-        ImmutableList.<TypeDescriptor>of(),
-        false);
-  }
-
-  public static TypeDescriptor createParameterizedType(
-      Iterable<String> packageComponents,
-      Iterable<String> classComponents,
-      Iterable<TypeDescriptor> typeArgumentDescriptors) {
-    return create(
-        packageComponents,
-        classComponents,
-        false,
-        ImmutableList.copyOf(typeArgumentDescriptors),
-        false);
-  }
-
-  public static TypeDescriptor createTypeVariable(
-      Iterable<String> packageComponents, Iterable<String> classComponents) {
-    return create(
-        packageComponents, classComponents, false, ImmutableList.<TypeDescriptor>of(), true);
-  }
-
-  static TypeDescriptor createPrimitive(String primitiveTypeName) {
-    return create(new ArrayList<String>(), Arrays.asList(primitiveTypeName));
+        nameSpaceComponents, Arrays.asList(className), true, ImmutableList.<TypeDescriptor>of());
   }
 
   static Interner<TypeDescriptor> getInterner() {
@@ -149,6 +125,10 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
   }
 
   public boolean isTypeVariable() {
+    return false;
+  }
+
+  public boolean isWildCard() {
     return false;
   }
 

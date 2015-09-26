@@ -246,11 +246,11 @@ public class NormalizeSideEffectOperationsVisitor extends AbstractRewriter {
     MethodCall methodCall = (MethodCall) expression;
     MethodDescriptor target = methodCall.getTarget();
     TypeDescriptor enclosingTypeDescriptor = target.getEnclosingClassTypeDescriptor();
-    if (!TypeDescriptors.boxedTypeByPrimitiveType.containsValue(enclosingTypeDescriptor)) {
+    if (!TypeDescriptors.isBoxedType(enclosingTypeDescriptor)) {
       return false; // not a boxed type.
     }
     TypeDescriptor primitiveTypeDescriptor =
-        TypeDescriptors.boxedTypeByPrimitiveType.inverse().get(enclosingTypeDescriptor);
+        TypeDescriptors.getPrimitiveTypeFromBoxType(enclosingTypeDescriptor);
     String expectedMethodName =
         primitiveTypeDescriptor.getSimpleName() + MethodDescriptor.VALUE_METHOD_SUFFIX;
     return target.getMethodName().equals(expectedMethodName);
@@ -322,7 +322,7 @@ public class NormalizeSideEffectOperationsVisitor extends AbstractRewriter {
 
     TypeDescriptor primitiveType = leftOperand.getTypeDescriptor();
     Preconditions.checkArgument(primitiveType.isPrimitive());
-    TypeDescriptor boxType = TypeDescriptors.boxedTypeByPrimitiveType.get(primitiveType);
+    TypeDescriptor boxType = TypeDescriptors.getBoxTypeFromPrimitiveType(primitiveType);
 
     return new BinaryExpression(
         boxType, boxedInstance, BinaryOperator.ASSIGN, ASTUtils.box(rightOperand));
@@ -346,7 +346,7 @@ public class NormalizeSideEffectOperationsVisitor extends AbstractRewriter {
    * Returns number literal with value 1.
    */
   private static Expression getOne(TypeDescriptor typeDescriptor) {
-    return (TypeDescriptors.LONG_TYPE_DESCRIPTOR == typeDescriptor)
+    return (TypeDescriptors.get().primitiveLong == typeDescriptor)
         ? new MethodCall(
             null,
             MethodDescriptor.createRaw(
@@ -355,7 +355,7 @@ public class NormalizeSideEffectOperationsVisitor extends AbstractRewriter {
                 TypeDescriptors.NATIVE_LONGS_TYPE_DESCRIPTOR,
                 MethodDescriptor.GET_ONE_METHOD_NAME,
                 new ArrayList<TypeDescriptor>(),
-                TypeDescriptors.LONG_TYPE_DESCRIPTOR),
+                TypeDescriptors.get().primitiveLong),
             new ArrayList<Expression>()) // LongUtils.$getOne()
         : new NumberLiteral(typeDescriptor, 1);
   }
@@ -363,18 +363,18 @@ public class NormalizeSideEffectOperationsVisitor extends AbstractRewriter {
   private static boolean shouldNormalize(BinaryExpression expression) {
     return expression.getOperator() != BinaryOperator.ASSIGN
         && TranspilerUtils.isAssignment(expression.getOperator())
-        && (TypeDescriptors.LONG_TYPE_DESCRIPTOR == expression.getLeftOperand().getTypeDescriptor()
+        && (TypeDescriptors.get().primitiveLong == expression.getLeftOperand().getTypeDescriptor()
             || isValueMethodCall(expression.getLeftOperand()));
   }
 
   private static boolean shouldNormalize(PrefixExpression expression) {
     return TranspilerUtils.hasSideEffect(expression.getOperator())
-        && (TypeDescriptors.LONG_TYPE_DESCRIPTOR == expression.getTypeDescriptor()
+        && (TypeDescriptors.get().primitiveLong == expression.getTypeDescriptor()
             || isValueMethodCall(expression.getOperand()));
   }
 
   private static boolean shouldNormalize(PostfixExpression expression) {
-    return TypeDescriptors.LONG_TYPE_DESCRIPTOR == expression.getTypeDescriptor()
+    return TypeDescriptors.get().primitiveLong == expression.getTypeDescriptor()
         || isValueMethodCall(expression.getOperand());
   }
 }

@@ -62,10 +62,9 @@ public class MakeExplicitEnumConstructionVisitor extends AbstractRewriter {
       return method;
     }
     Variable ordinalVariable =
-        new Variable(ORDINAL_PARAMETER_NAME, TypeDescriptors.INT_TYPE_DESCRIPTOR, false, true);
+        new Variable(ORDINAL_PARAMETER_NAME, TypeDescriptors.get().primitiveInt, false, true);
     Variable nameVariable =
-        new Variable(
-            VALUE_NAME_PARAMETER_NAME, TypeDescriptors.STRING_TYPE_DESCRIPTOR, false, true);
+        new Variable(VALUE_NAME_PARAMETER_NAME, TypeDescriptors.get().javaLangString, false, true);
     method.addParameter(nameVariable);
     method.addParameter(ordinalVariable);
     replaceConstructorInvocationCall(method, ImmutableList.of(nameVariable, ordinalVariable));
@@ -107,12 +106,12 @@ public class MakeExplicitEnumConstructionVisitor extends AbstractRewriter {
         newInstance.getQualifier(),
         ASTUtils.addParametersToMethodDescriptor(
             newInstance.getConstructorMethodDescriptor(),
-            TypeDescriptors.STRING_TYPE_DESCRIPTOR,
-            TypeDescriptors.INT_TYPE_DESCRIPTOR),
+            TypeDescriptors.get().javaLangString,
+            TypeDescriptors.get().primitiveInt),
         ImmutableList.<Expression>builder()
             .addAll(newInstance.getArguments())
             .add(new StringLiteral("\"" + enumField.getDescriptor().getFieldName() + "\""))
-            .add(new NumberLiteral(TypeDescriptors.INT_TYPE_DESCRIPTOR, currentOrdinal))
+            .add(new NumberLiteral(TypeDescriptors.get().primitiveInt, currentOrdinal))
             .build());
   }
 

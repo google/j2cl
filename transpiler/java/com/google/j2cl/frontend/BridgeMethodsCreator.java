@@ -284,7 +284,7 @@ public class BridgeMethodsCreator {
     }
     Expression dispatchMethodCall = new MethodCall(null, targetMethodDescriptor, arguments);
     Statement statement =
-        bridgeMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.VOID_TYPE_DESCRIPTOR
+        bridgeMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.get().primitiveVoid
             ? new ExpressionStatement(dispatchMethodCall)
             : new ReturnStatement(
                 dispatchMethodCall, bridgeMethodDescriptor.getReturnTypeDescriptor());

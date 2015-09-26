@@ -27,7 +27,7 @@ public class NullLiteral extends Expression {
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
-    return TypeDescriptors.VOID_TYPE_DESCRIPTOR;
+    return TypeDescriptors.get().primitiveVoid;
   }
 
   @Override

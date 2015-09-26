@@ -29,7 +29,7 @@ import java.util.List;
 // assignment/non-assignment binary operations.
 public class InsertImplicitCastsVisitor extends AbstractRewriter {
 
-  private static final TypeDescriptor LONG = TypeDescriptors.LONG_TYPE_DESCRIPTOR;
+  private static final TypeDescriptor LONG = TypeDescriptors.get().primitiveLong;
 
   public static void doInsertImplicitCasts(CompilationUnit compilationUnit) {
     new InsertImplicitCastsVisitor().insertImplicitCasts(compilationUnit);
@@ -161,7 +161,7 @@ public class InsertImplicitCastsVisitor extends AbstractRewriter {
           binaryExpression.getTypeDescriptor(),
           maybeCastToLong(binaryExpression.getLeftOperand()),
           binaryExpression.getOperator(),
-          maybeCastTo(binaryExpression.getRightOperand(), TypeDescriptors.INT_TYPE_DESCRIPTOR));
+          maybeCastTo(binaryExpression.getRightOperand(), TypeDescriptors.get().primitiveInt));
     } else {
       return binaryExpression;
     }
@@ -181,7 +181,7 @@ public class InsertImplicitCastsVisitor extends AbstractRewriter {
           binaryExpression.getTypeDescriptor(),
           maybeCastToLong(binaryExpression.getLeftOperand()),
           binaryExpression.getOperator(),
-          maybeCastTo(binaryExpression.getRightOperand(), TypeDescriptors.INT_TYPE_DESCRIPTOR));
+          maybeCastTo(binaryExpression.getRightOperand(), TypeDescriptors.get().primitiveInt));
     } else {
       return binaryExpression;
     }

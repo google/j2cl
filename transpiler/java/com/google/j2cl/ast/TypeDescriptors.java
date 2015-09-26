@@ -15,11 +15,15 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableSet;
 
-import java.util.ArrayList;
+import org.eclipse.jdt.core.dom.AST;
+import org.eclipse.jdt.core.dom.ITypeBinding;
+
 import java.util.Arrays;
 import java.util.Set;
 
@@ -27,36 +31,131 @@ import java.util.Set;
  * Utility class holding type descriptors that need to be referenced directly.
  */
 public class TypeDescriptors {
-  public static final TypeDescriptor BOOLEAN_TYPE_DESCRIPTOR =
-      TypeDescriptor.createPrimitive(TypeDescriptor.BOOLEAN_TYPE_NAME);
-  public static final TypeDescriptor BYTE_TYPE_DESCRIPTOR =
-      TypeDescriptor.createPrimitive(TypeDescriptor.BYTE_TYPE_NAME);
-  public static final TypeDescriptor SHORT_TYPE_DESCRIPTOR =
-      TypeDescriptor.createPrimitive(TypeDescriptor.SHORT_TYPE_NAME);
-  public static final TypeDescriptor INT_TYPE_DESCRIPTOR =
-      TypeDescriptor.createPrimitive(TypeDescriptor.INT_TYPE_NAME);
-  public static final TypeDescriptor LONG_TYPE_DESCRIPTOR =
-      TypeDescriptor.createPrimitive(TypeDescriptor.LONG_TYPE_NAME);
-  public static final TypeDescriptor FLOAT_TYPE_DESCRIPTOR =
-      TypeDescriptor.createPrimitive(TypeDescriptor.FLOAT_TYPE_NAME);
-  public static final TypeDescriptor DOUBLE_TYPE_DESCRIPTOR =
-      TypeDescriptor.createPrimitive(TypeDescriptor.DOUBLE_TYPE_NAME);
-  public static final TypeDescriptor CHAR_TYPE_DESCRIPTOR =
-      TypeDescriptor.createPrimitive(TypeDescriptor.CHAR_TYPE_NAME);
-  public static final TypeDescriptor VOID_TYPE_DESCRIPTOR =
-      TypeDescriptor.createPrimitive(TypeDescriptor.VOID_TYPE_NAME);
-  public static final TypeDescriptor WILD_CARD_TYPE_DESCRIPTOR =
-      TypeDescriptor.createTypeVariable(new ArrayList<String>(), Arrays.asList("?"));
-  public static final TypeDescriptor CLASS_TYPE_DESCRIPTOR =
-      TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Class"));
-  public static final TypeDescriptor COMPARABLE_TYPE_DESCRIPTOR =
-      TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Comparable"));
-  public static final TypeDescriptor OBJECT_TYPE_DESCRIPTOR =
-      TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Object"));
-  public static final TypeDescriptor NUMBER_TYPE_DESCRIPTOR =
-      TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Number"));
-  public static final TypeDescriptor STRING_TYPE_DESCRIPTOR =
-      TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("String"));
+  public TypeDescriptor primitiveBoolean;
+  public TypeDescriptor primitiveByte;
+  public TypeDescriptor primitiveChar;
+  public TypeDescriptor primitiveDouble;
+  public TypeDescriptor primitiveFloat;
+  public TypeDescriptor primitiveInt;
+  public TypeDescriptor primitiveLong;
+  public TypeDescriptor primitiveShort;
+  public TypeDescriptor primitiveVoid;
+
+  public TypeDescriptor javaLangBoolean;
+  public TypeDescriptor javaLangByte;
+  public TypeDescriptor javaLangCharacter;
+  public TypeDescriptor javaLangDouble;
+  public TypeDescriptor javaLangFloat;
+  public TypeDescriptor javaLangInteger;
+  public TypeDescriptor javaLangLong;
+  public TypeDescriptor javaLangShort;
+  public TypeDescriptor javaLangString;
+
+  public TypeDescriptor javaLangClass;
+  public TypeDescriptor javaLangObject;
+
+  public TypeDescriptor javaLangNumber;
+  public TypeDescriptor javaLangComparable;
+
+  /**
+   * Primitive type descriptors and boxed type descriptors mapping.
+   */
+  private BiMap<TypeDescriptor, TypeDescriptor> boxedTypeByPrimitiveType = HashBiMap.create();
+
+  private static ThreadLocal<TypeDescriptors> typeDescriptorsStorage = new ThreadLocal<>();
+
+  public static void init(AST ast) {
+    if (typeDescriptorsStorage.get() != null) {
+      // Already initialized.
+      return;
+    }
+    TypeDescriptors typeDescriptors = new TypeDescriptors();
+
+    // initialize primitive types.
+    typeDescriptors.primitiveBoolean = create(ast, TypeDescriptor.BOOLEAN_TYPE_NAME);
+    typeDescriptors.primitiveByte = create(ast, TypeDescriptor.BYTE_TYPE_NAME);
+    typeDescriptors.primitiveChar = create(ast, TypeDescriptor.CHAR_TYPE_NAME);
+    typeDescriptors.primitiveDouble = create(ast, TypeDescriptor.DOUBLE_TYPE_NAME);
+    typeDescriptors.primitiveFloat = create(ast, TypeDescriptor.FLOAT_TYPE_NAME);
+    typeDescriptors.primitiveInt = create(ast, TypeDescriptor.INT_TYPE_NAME);
+    typeDescriptors.primitiveLong = create(ast, TypeDescriptor.LONG_TYPE_NAME);
+    typeDescriptors.primitiveShort = create(ast, TypeDescriptor.SHORT_TYPE_NAME);
+    typeDescriptors.primitiveVoid = create(ast, TypeDescriptor.VOID_TYPE_NAME);
+
+    // initialize boxed types.
+    typeDescriptors.javaLangBoolean = create(ast, "java.lang.Boolean");
+    typeDescriptors.javaLangByte = create(ast, "java.lang.Byte");
+    typeDescriptors.javaLangCharacter = create(ast, "java.lang.Character");
+    typeDescriptors.javaLangDouble = create(ast, "java.lang.Double");
+    typeDescriptors.javaLangFloat = create(ast, "java.lang.Float");
+    typeDescriptors.javaLangInteger = create(ast, "java.lang.Integer");
+    typeDescriptors.javaLangLong = create(ast, "java.lang.Long");
+    typeDescriptors.javaLangShort = create(ast, "java.lang.Short");
+    typeDescriptors.javaLangString = create(ast, "java.lang.String");
+
+    typeDescriptors.javaLangClass = create(ast, "java.lang.Class");
+    typeDescriptors.javaLangObject = create(ast, "java.lang.Object");
+
+    typeDescriptors.javaLangNumber = createJavaLangNumber(ast);
+    typeDescriptors.javaLangComparable = createJavaLangComparable(ast);
+
+    initBoxedPrimitiveTypeMapping(typeDescriptors);
+
+    typeDescriptorsStorage.set(typeDescriptors);
+  }
+
+  private static void initBoxedPrimitiveTypeMapping(TypeDescriptors typeDescriptors) {
+    BiMap<TypeDescriptor, TypeDescriptor> boxedTypeByPrimitiveType = HashBiMap.create();
+    boxedTypeByPrimitiveType.put(typeDescriptors.primitiveBoolean, typeDescriptors.javaLangBoolean);
+    boxedTypeByPrimitiveType.put(typeDescriptors.primitiveByte, typeDescriptors.javaLangByte);
+    boxedTypeByPrimitiveType.put(typeDescriptors.primitiveChar, typeDescriptors.javaLangCharacter);
+    boxedTypeByPrimitiveType.put(typeDescriptors.primitiveDouble, typeDescriptors.javaLangDouble);
+    boxedTypeByPrimitiveType.put(typeDescriptors.primitiveFloat, typeDescriptors.javaLangFloat);
+    boxedTypeByPrimitiveType.put(typeDescriptors.primitiveInt, typeDescriptors.javaLangInteger);
+    boxedTypeByPrimitiveType.put(typeDescriptors.primitiveLong, typeDescriptors.javaLangLong);
+    boxedTypeByPrimitiveType.put(typeDescriptors.primitiveShort, typeDescriptors.javaLangShort);
+    typeDescriptors.boxedTypeByPrimitiveType = ImmutableBiMap.copyOf(boxedTypeByPrimitiveType);
+  }
+
+  public static TypeDescriptors get() {
+    return typeDescriptorsStorage.get();
+  }
+
+  public static TypeDescriptor getBoxTypeFromPrimitiveType(TypeDescriptor primitiveType) {
+    return TypeDescriptors.get().boxedTypeByPrimitiveType.get(primitiveType);
+  }
+
+  public static TypeDescriptor getPrimitiveTypeFromBoxType(TypeDescriptor boxType) {
+    return TypeDescriptors.get().boxedTypeByPrimitiveType.inverse().get(boxType);
+  }
+
+  public static boolean isBoxedType(TypeDescriptor typeDescriptor) {
+    return TypeDescriptors.get().boxedTypeByPrimitiveType.containsValue(typeDescriptor);
+  }
+
+  private static TypeDescriptor create(AST ast, String typeName) {
+    return TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType(typeName));
+  }
+
+  /**
+   * Create TypeDescriptor for java.lang.Number, which is not a well known type by JDT.
+   */
+  private static TypeDescriptor createJavaLangNumber(AST ast) {
+    ITypeBinding javaLangInteger = ast.resolveWellKnownType("java.lang.Integer");
+    Preconditions.checkNotNull(javaLangInteger);
+    return TypeProxyUtils.createTypeDescriptor(javaLangInteger.getSuperclass());
+  }
+
+  /**
+   * Create TypeDescriptor for java.lang.Comparable, which is not a well known type by JDT.
+   */
+  private static TypeDescriptor createJavaLangComparable(AST ast) {
+    ITypeBinding javaLangInteger = ast.resolveWellKnownType("java.lang.Integer");
+    Preconditions.checkNotNull(javaLangInteger);
+    ITypeBinding[] interfaces = javaLangInteger.getInterfaces();
+    Preconditions.checkArgument(interfaces.length == 1);
+    return TypeProxyUtils.createTypeDescriptor(interfaces[0].getErasure());
+  }
 
   /**
    * Bootstrap types.
@@ -104,38 +203,6 @@ public class TypeDescriptors {
           NUMBERS_TYPE_DESCRIPTOR,
           BOOLEANS_TYPE_DESCRIPTOR);
 
-  /**
-   * Primitive type descriptors and boxed type descriptors mapping.
-   */
-  public static final BiMap<TypeDescriptor, TypeDescriptor> boxedTypeByPrimitiveType =
-      HashBiMap.create();
-
-  static {
-    boxedTypeByPrimitiveType.put(
-        BOOLEAN_TYPE_DESCRIPTOR,
-        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Boolean")));
-    boxedTypeByPrimitiveType.put(
-        BYTE_TYPE_DESCRIPTOR,
-        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Byte")));
-    boxedTypeByPrimitiveType.put(
-        CHAR_TYPE_DESCRIPTOR,
-        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Character")));
-    boxedTypeByPrimitiveType.put(
-        DOUBLE_TYPE_DESCRIPTOR,
-        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Double")));
-    boxedTypeByPrimitiveType.put(
-        FLOAT_TYPE_DESCRIPTOR,
-        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Float")));
-    boxedTypeByPrimitiveType.put(
-        INT_TYPE_DESCRIPTOR,
-        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Integer")));
-    boxedTypeByPrimitiveType.put(
-        LONG_TYPE_DESCRIPTOR,
-        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Long")));
-    boxedTypeByPrimitiveType.put(
-        SHORT_TYPE_DESCRIPTOR,
-        TypeDescriptor.create(Arrays.asList("java", "lang"), Arrays.asList("Short")));
-  }
-
+  // Not externally instantiable.
   private TypeDescriptors() {}
 }

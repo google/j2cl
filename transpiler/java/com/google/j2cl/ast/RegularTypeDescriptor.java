@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.auto.value.AutoValue;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
@@ -24,6 +23,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.processors.Visitable;
 
+import org.eclipse.jdt.core.dom.ITypeBinding;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,21 +32,62 @@ import java.util.List;
 /**
  * A (by name) reference to a class.
  */
-@AutoValue
 @Visitable
-public abstract class RegularTypeDescriptor extends TypeDescriptor {
-  public abstract ImmutableList<String> getPackageComponents();
+public class RegularTypeDescriptor extends TypeDescriptor {
+  private ITypeBinding typeBinding;
 
-  public abstract ImmutableList<String> getClassComponents();
+  protected ImmutableList<String> packageComponents;
+  protected ImmutableList<String> classComponents;
+  protected boolean isRaw;
+  protected ImmutableList<TypeDescriptor> typeArgumentDescriptors;
+
+  RegularTypeDescriptor(ITypeBinding typeBinding) {
+    this.typeBinding = typeBinding;
+  }
+
+  public ImmutableList<String> getPackageComponents() {
+    // Lazily initialize packageComponents.
+    if (packageComponents == null) {
+      Preconditions.checkNotNull(typeBinding);
+      packageComponents = ImmutableList.copyOf(TypeProxyUtils.getPackageComponents(typeBinding));
+    }
+    return packageComponents;
+  }
+
+  public ImmutableList<String> getClassComponents() {
+    // Lazily initialize classComponents.
+    if (classComponents == null) {
+      Preconditions.checkNotNull(typeBinding);
+      classComponents = ImmutableList.copyOf(TypeProxyUtils.getClassComponents(typeBinding));
+    }
+    return classComponents;
+  }
 
   @Override
-  public abstract boolean isRaw();
+  public boolean isRaw() {
+    return false;
+  }
 
   @Override
-  public abstract ImmutableList<TypeDescriptor> getTypeArgumentDescriptors();
+  public ImmutableList<TypeDescriptor> getTypeArgumentDescriptors() {
+    // Lazily initialize typeArgumentDescriptors.
+    if (typeArgumentDescriptors == null) {
+      Preconditions.checkNotNull(typeBinding);
+      typeArgumentDescriptors =
+          ImmutableList.copyOf(TypeProxyUtils.getTypeArgumentDescriptors(typeBinding));
+    }
+    return typeArgumentDescriptors;
+  }
 
   @Override
-  public abstract boolean isTypeVariable();
+  public boolean isTypeVariable() {
+    return typeBinding != null && typeBinding.isTypeVariable();
+  }
+
+  @Override
+  public boolean isWildCard() {
+    return (typeBinding != null && (typeBinding.isWildcardType() || typeBinding.isCapture()));
+  }
 
   @Override
   public String getBinaryName() {
@@ -93,25 +135,25 @@ public abstract class RegularTypeDescriptor extends TypeDescriptor {
 
   @Override
   public String getSourceName() {
-    // source name is used to do comparison. Add type arguments to its binary name to distinguish
-    // parameterized types with the same raw type, and generic types.
-    String rawSourceName = getBinaryName();
-    String typeArguments =
-        getTypeArgumentDescriptors().isEmpty()
-            ? ""
-            : String.format(
-                "<%s>",
-                Joiner.on(", ")
-                    .join(
-                        Lists.transform(
-                            getTypeArgumentDescriptors(),
-                            new Function<TypeDescriptor, String>() {
-                              @Override
-                              public String apply(TypeDescriptor typeParameter) {
-                                return typeParameter.getSourceName();
-                              }
-                            })));
-    return rawSourceName + typeArguments;
+    return getBinaryName() + getTypeArgumentsName();
+  }
+
+  private String getTypeArgumentsName() {
+    if (isParameterizedType()) {
+      return String.format(
+          "<%s>",
+          Joiner.on(", ")
+              .join(
+                  Lists.transform(
+                      getTypeArgumentDescriptors(),
+                      new Function<TypeDescriptor, String>() {
+                        @Override
+                        public String apply(TypeDescriptor typeDescriptor) {
+                          return typeDescriptor.getSourceName();
+                        }
+                      })));
+    }
+    return "";
   }
 
   @Override
@@ -141,11 +183,16 @@ public abstract class RegularTypeDescriptor extends TypeDescriptor {
 
   /**
    * Raw type of a parameterized type is the type without type parameters or type arguments.
+   * Raw type of a type variable is its bound.
    */
   @Override
   public TypeDescriptor getRawTypeDescriptor() {
     if (isParameterizedType()) {
-      return TypeDescriptor.create(this.getPackageComponents(), this.getClassComponents());
+      return TypeDescriptor.createSynthetic(getPackageComponents(), getClassComponents());
+    }
+    if (isTypeVariable()) {
+      Preconditions.checkNotNull(typeBinding);
+      return TypeProxyUtils.createTypeDescriptor(typeBinding.getErasure());
     }
     return this;
   }

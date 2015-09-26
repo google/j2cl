@@ -137,6 +137,7 @@ public class CompilationUnitBuilder {
 
     private CompilationUnit convert(
         String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
+      TypeDescriptors.init(jdtCompilationUnit.getAST());
       this.jdtCompilationUnit = jdtCompilationUnit;
       currentSourceFile = sourceFilePath;
       String packageName = JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit);
@@ -859,15 +860,15 @@ public class CompilationUnitBuilder {
 
       // int index = 0;
       Variable indexVariable =
-          new Variable("$index", TypeDescriptors.INT_TYPE_DESCRIPTOR, true, false);
+          new Variable("$index", TypeDescriptors.get().primitiveInt, true, false);
       VariableDeclarationFragment indexVariableDeclarationFragment =
           new VariableDeclarationFragment(
-              indexVariable, new NumberLiteral(TypeDescriptors.INT_TYPE_DESCRIPTOR, 0));
+              indexVariable, new NumberLiteral(TypeDescriptors.get().primitiveInt, 0));
 
       // $index < $array.length
       Expression condition =
           new BinaryExpression(
-              TypeDescriptors.BOOLEAN_TYPE_DESCRIPTOR,
+              TypeDescriptors.get().primitiveBoolean,
               indexVariable.getReference(),
               BinaryOperator.LESS,
               new FieldAccess(
@@ -897,7 +898,7 @@ public class CompilationUnitBuilder {
                       arrayVariableDeclarationFragment, indexVariableDeclarationFragment))),
           Collections.<Expression>singletonList(
               new PostfixExpression(
-                  TypeDescriptors.INT_TYPE_DESCRIPTOR,
+                  TypeDescriptors.get().primitiveInt,
                   indexVariable.getReference(),
                   PostfixOperator.INCREMENT)));
     }
@@ -1091,7 +1092,7 @@ public class CompilationUnitBuilder {
         Preconditions.checkArgument(lambdaBody instanceof org.eclipse.jdt.core.dom.Expression);
         Expression lambdaMethodBody = convert((org.eclipse.jdt.core.dom.Expression) lambdaBody);
         Statement statement =
-            returnTypeDescriptor == TypeDescriptors.VOID_TYPE_DESCRIPTOR
+            returnTypeDescriptor == TypeDescriptors.get().primitiveVoid
                 ? new ExpressionStatement(lambdaMethodBody)
                 : new ReturnStatement(lambdaMethodBody, returnTypeDescriptor);
         body = new Block(Arrays.asList(statement));
@@ -1611,7 +1612,7 @@ public class CompilationUnitBuilder {
               Visibility.PUBLIC,
               javaLangClassTypeDescriptor,
               "$forArray",
-              Lists.newArrayList(TypeDescriptors.INT_TYPE_DESCRIPTOR),
+              Lists.newArrayList(TypeDescriptors.get().primitiveInt),
               javaLangClassTypeDescriptor);
 
       // <ClassLiteralClass>.$getClass().forArray(<dimensions>)
@@ -1619,7 +1620,7 @@ public class CompilationUnitBuilder {
           new MethodCall(null, classMethodDescriptor, new ArrayList<Expression>()),
           forArrayMethodDescriptor,
           ImmutableList.<Expression>of(
-              new NumberLiteral(TypeDescriptors.INT_TYPE_DESCRIPTOR, typeBinding.getDimensions())));
+              new NumberLiteral(TypeDescriptors.get().primitiveInt, typeBinding.getDimensions())));
     }
 
     private ThrowStatement convert(org.eclipse.jdt.core.dom.ThrowStatement statement) {

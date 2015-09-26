@@ -37,6 +37,7 @@ import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeProxyUtils;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 
@@ -94,108 +95,7 @@ public class JdtUtils {
   }
 
   static TypeDescriptor createTypeDescriptor(ITypeBinding typeBinding) {
-    if (typeBinding == null) {
-      return null;
-    }
-    if (typeBinding.isPrimitive()) {
-      switch (typeBinding.getName()) {
-        case TypeDescriptor.BOOLEAN_TYPE_NAME:
-          return TypeDescriptors.BOOLEAN_TYPE_DESCRIPTOR;
-        case TypeDescriptor.BYTE_TYPE_NAME:
-          return TypeDescriptors.BYTE_TYPE_DESCRIPTOR;
-        case TypeDescriptor.SHORT_TYPE_NAME:
-          return TypeDescriptors.SHORT_TYPE_DESCRIPTOR;
-        case TypeDescriptor.INT_TYPE_NAME:
-          return TypeDescriptors.INT_TYPE_DESCRIPTOR;
-        case TypeDescriptor.LONG_TYPE_NAME:
-          return TypeDescriptors.LONG_TYPE_DESCRIPTOR;
-        case TypeDescriptor.FLOAT_TYPE_NAME:
-          return TypeDescriptors.FLOAT_TYPE_DESCRIPTOR;
-        case TypeDescriptor.DOUBLE_TYPE_NAME:
-          return TypeDescriptors.DOUBLE_TYPE_DESCRIPTOR;
-        case TypeDescriptor.CHAR_TYPE_NAME:
-          return TypeDescriptors.CHAR_TYPE_DESCRIPTOR;
-        case TypeDescriptor.VOID_TYPE_NAME:
-          return TypeDescriptors.VOID_TYPE_DESCRIPTOR;
-        default:
-          Preconditions.checkArgument(
-              false, "Primitive type name '" + typeBinding.getName() + "' is unrecognized.");
-      }
-    }
-    List<String> nameComponents = new LinkedList<>();
-    List<String> packageComponents = new LinkedList<>();
-
-    if (typeBinding.getPackage() != null) {
-      packageComponents = Arrays.asList(typeBinding.getPackage().getNameComponents());
-    }
-
-    if (typeBinding.isArray()) {
-      TypeDescriptor leafTypeDescriptor = createTypeDescriptor(typeBinding.getElementType());
-      return leafTypeDescriptor.getForArray(typeBinding.getDimensions());
-    }
-
-    // WildCard type and its capture are translated to WildCardType '?'.
-    if (typeBinding.isWildcardType() || typeBinding.isCapture()) {
-      return TypeDescriptors.WILD_CARD_TYPE_DESCRIPTOR;
-    }
-
-    ITypeBinding currentType = typeBinding;
-    while (currentType != null) {
-      String simpleName;
-      if (currentType.isLocal()) {
-        // JDT binary name for local class is like package.components.EnclosingClass$1SimpleName
-        // Extract the name after the last '$' as the class component here.
-        String binaryName = currentType.getErasure().getBinaryName();
-        simpleName = binaryName.substring(binaryName.lastIndexOf('$') + 1);
-      } else if (currentType.isTypeVariable()) {
-        if (currentType.getDeclaringClass() != null) {
-          // If it is a class-level type variable, use the simple name (with prefix "C_") as the
-          // current name component.
-          simpleName = ASTUtils.TYPE_VARIABLE_IN_TYPE_PREFIX + currentType.getName();
-        } else {
-          // If it is a method-level type variable, use the simple name (with prefix "M_") as the
-          // current name component, and add declaringClass_declaringMethod as the next name
-          // component, and set currentType to declaringClass for the next iteration.
-          nameComponents.add(0, ASTUtils.TYPE_VARIABLE_IN_METHOD_PREFIX + currentType.getName());
-          simpleName =
-              currentType.getDeclaringMethod().getDeclaringClass().getName()
-                  + "_"
-                  + currentType.getDeclaringMethod().getName();
-          currentType = currentType.getDeclaringMethod().getDeclaringClass();
-        }
-      } else {
-        simpleName = currentType.getErasure().getName();
-      }
-      nameComponents.add(0, simpleName);
-      currentType = currentType.getDeclaringClass();
-    }
-
-    if (typeBinding.isTypeVariable()) {
-      return TypeDescriptor.createTypeVariable(packageComponents, nameComponents);
-    }
-    if (typeBinding.isParameterizedType()) {
-      Iterable<TypeDescriptor> typeArguments =
-          createTypeDescriptors(typeBinding.getTypeArguments());
-      return TypeDescriptor.createParameterizedType(
-          packageComponents, nameComponents, typeArguments);
-    }
-
-    List<TypeDescriptor> typeParameters = new ArrayList<>();
-    if (typeBinding.isGenericType()) {
-      Iterables.addAll(typeParameters, createTypeDescriptors(typeBinding.getTypeParameters()));
-    }
-    // add captured type parameters
-    if (isInstanceNestedClass(typeBinding)) {
-      if (typeBinding.getDeclaringMethod() != null) {
-        Iterables.addAll(
-            typeParameters,
-            createTypeDescriptors(typeBinding.getDeclaringMethod().getTypeParameters()));
-      }
-      typeParameters.addAll(
-          createTypeDescriptor(typeBinding.getDeclaringClass()).getTypeArgumentDescriptors());
-    }
-    return TypeDescriptor.createParameterizedType(
-        packageComponents, nameComponents, typeParameters);
+    return TypeProxyUtils.createTypeDescriptor(typeBinding);
   }
 
   static Iterable<TypeDescriptor> createTypeDescriptors(ITypeBinding[] typeBindings) {
@@ -630,7 +530,7 @@ public class JdtUtils {
       IMethodBinding lambdaMethodBinding,
       RegularTypeDescriptor enclosingClassTypeDescriptor) {
     TypeDescriptor lambdaClassTypeDescriptor =
-        TypeDescriptor.create(
+        TypeDescriptor.createSynthetic(
             enclosingClassTypeDescriptor.getPackageComponents(),
             Iterables.concat(
                 enclosingClassTypeDescriptor.getClassComponents(),
@@ -638,7 +538,7 @@ public class JdtUtils {
     JavaType lambdaType = new JavaType(Kind.CLASS, Visibility.PRIVATE, lambdaClassTypeDescriptor);
 
     lambdaType.setEnclosingTypeDescriptor(enclosingClassTypeDescriptor);
-    lambdaType.setSuperTypeDescriptor(TypeDescriptors.OBJECT_TYPE_DESCRIPTOR);
+    lambdaType.setSuperTypeDescriptor(TypeDescriptors.get().javaLangObject);
     lambdaType.addSuperInterfaceDescriptor(createTypeDescriptor(lambdaInterfaceBinding));
     lambdaType.setLocal(true);
     return lambdaType;
@@ -660,7 +560,7 @@ public class JdtUtils {
     }
     Expression callLambda = new MethodCall(null, lambdaMethodDescriptor, arguments);
     Statement statement =
-        lambdaMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.VOID_TYPE_DESCRIPTOR
+        lambdaMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.get().primitiveVoid
             ? new ExpressionStatement(callLambda)
             : new ReturnStatement(callLambda, samMethodDescriptor.getReturnTypeDescriptor());
     Method samMethod =

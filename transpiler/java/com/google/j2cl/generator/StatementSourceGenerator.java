@@ -93,6 +93,7 @@ public class StatementSourceGenerator {
 
   public StatementSourceGenerator(
       Collection<Import> imports, Map<Variable, String> aliasByVariable) {
+    JsDocNameUtils.init();
     for (Import anImport : imports) {
       aliasByTypeDescriptor.put(anImport.getTypeDescriptor(), anImport.getAlias());
     }
@@ -147,7 +148,7 @@ public class StatementSourceGenerator {
 
         if (TranspilerUtils.isAssignment(operator) && leftOperand instanceof ArrayAccess) {
           return transformArrayAssignmentBinaryExpression(expression);
-        } else if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == leftOperand.getTypeDescriptor()
+        } else if (TypeDescriptors.get().primitiveLong == leftOperand.getTypeDescriptor()
             && operator != BinaryOperator.ASSIGN) {
           // Skips assignment because it doesn't need special handling.
           return transformLongBinaryExpression(expression);
@@ -369,8 +370,7 @@ public class StatementSourceGenerator {
 
         if (dimensionCount == 1) {
           // It's 1 dimensional.
-          if (TypeDescriptors.OBJECT_TYPE_DESCRIPTOR
-              == newArrayExpression.getLeafTypeDescriptor()) {
+          if (TypeDescriptors.get().javaLangObject == newArrayExpression.getLeafTypeDescriptor()) {
             // And the leaf type is Object. All arrays are implicitly Array<Object> so leave out the
             // init.
             return arrayLiteralAsString;
@@ -412,7 +412,7 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformNumberLiteral(NumberLiteral expression) {
-        if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == expression.getTypeDescriptor()) {
+        if (TypeDescriptors.get().primitiveLong == expression.getTypeDescriptor()) {
           return transformLongNumberLiteral(expression);
         }
         return expression.getValue().toString();
@@ -442,7 +442,7 @@ public class StatementSourceGenerator {
       @Override
       public String transformPostfixExpression(PostfixExpression expression) {
         Preconditions.checkArgument(
-            TypeDescriptors.LONG_TYPE_DESCRIPTOR != expression.getTypeDescriptor());
+            TypeDescriptors.get().primitiveLong != expression.getTypeDescriptor());
         return String.format(
             "%s%s", toSource(expression.getOperand()), expression.getOperator().toString());
       }
@@ -456,7 +456,7 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformPrefixExpression(PrefixExpression expression) {
-        if (TypeDescriptors.LONG_TYPE_DESCRIPTOR == expression.getTypeDescriptor()
+        if (TypeDescriptors.get().primitiveLong == expression.getTypeDescriptor()
             && expression.getOperator() != PrefixOperator.PLUS) {
           // Skips the + prefix because it is a NOP.
           return transformLongPrefixExpression(expression);

@@ -62,7 +62,7 @@ public class MethodCallDevirtualizer {
 
         @Override
         public TypeDescriptor getInstanceTypeDescriptor() {
-          return TypeDescriptors.OBJECT_TYPE_DESCRIPTOR;
+          return TypeDescriptors.get().javaLangObject;
         }
       };
 
@@ -86,7 +86,7 @@ public class MethodCallDevirtualizer {
 
         @Override
         public TypeDescriptor getInstanceTypeDescriptor() {
-          return TypeDescriptors.NUMBER_TYPE_DESCRIPTOR;
+          return TypeDescriptors.get().javaLangNumber;
         }
       };
 
@@ -110,8 +110,7 @@ public class MethodCallDevirtualizer {
 
         @Override
         public TypeDescriptor getInstanceTypeDescriptor() {
-          return TypeDescriptors.boxedTypeByPrimitiveType.get(
-              TypeDescriptors.BOOLEAN_TYPE_DESCRIPTOR);
+          return TypeDescriptors.get().javaLangBoolean;
         }
       };
 
@@ -135,7 +134,7 @@ public class MethodCallDevirtualizer {
 
         @Override
         public TypeDescriptor getInstanceTypeDescriptor() {
-          return TypeDescriptors.COMPARABLE_TYPE_DESCRIPTOR;
+          return TypeDescriptors.get().javaLangComparable;
         }
       };
 

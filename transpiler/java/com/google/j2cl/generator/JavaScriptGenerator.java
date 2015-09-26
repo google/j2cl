@@ -96,7 +96,8 @@ public abstract class JavaScriptGenerator extends AbstractSourceGenerator {
         "eagerImports", ImportUtils.sortedList(importsByCategory.get(ImportCategory.EAGER)));
     context.put("lazyImports", ImportUtils.sortedList(importsByCategory.get(ImportCategory.LAZY)));
     context.put("statementSourceGenerator", statementSourceGenerator);
-    context.put("javaLangClassTypeDecriptor", TypeDescriptors.CLASS_TYPE_DESCRIPTOR);
+    context.put(
+        "javaLangClassTypeDecriptor", TypeDescriptors.get().javaLangClass.getRawTypeDescriptor());
     context.put("nativeUtilTypeDecriptor", TypeDescriptors.NATIVE_UTIL_TYPE_DESCRIPTOR);
 
     return context;

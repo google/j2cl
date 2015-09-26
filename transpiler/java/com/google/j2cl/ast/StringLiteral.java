@@ -45,6 +45,6 @@ public class StringLiteral extends Expression {
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
-    return TypeDescriptors.STRING_TYPE_DESCRIPTOR;
+    return TypeDescriptors.get().javaLangString;
   }
 }
