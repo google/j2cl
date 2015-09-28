@@ -21,27 +21,26 @@ import com.google.j2cl.ast.ASTUtils;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
-import com.google.j2cl.ast.Block;
+import com.google.j2cl.ast.CallBuilder;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
+import com.google.j2cl.ast.MethodBuilder;
 import com.google.j2cl.ast.MethodCall;
+import com.google.j2cl.ast.MethodCallBuilder;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewInstance;
+import com.google.j2cl.ast.NewInstanceBuilder;
 import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -74,74 +73,72 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
 
   @Override
   public Node rewriteMethod(Method method) {
+    MethodBuilder methodBuilder = MethodBuilder.from(method);
     if (!ASTUtils.isConstructorOfImmediateNestedClass(method, getCurrentJavaType())) {
       return method;
     }
 
     // Maybe add capturing field initialization statements if the current constructor method does
     // not delegate to any other constructor method in the current class.
-    List<Statement> statements = new ArrayList<>(method.getBody().getStatements());
     if (!ASTUtils.isDelegatedConstructorCall(
-        ASTUtils.getConstructorInvocation(statements), getCurrentJavaType().getDescriptor())) {
+        ASTUtils.getConstructorInvocation(method), getCurrentJavaType().getDescriptor())) {
       addCapturingFieldInitializers(
-          statements, method.getDescriptor().getEnclosingClassTypeDescriptor());
+          methodBuilder, method.getDescriptor().getEnclosingClassTypeDescriptor());
     }
 
     // Add parameters through which to pass captured variables for the current type.
-    List<Variable> parameters = new ArrayList<>(method.getParameters());
-    addCapturedValueParameters(parameters);
+    addCapturedValueParameters(methodBuilder);
 
-    return new Method(
-        method.getDescriptor(), parameters, new Block(statements), method.isOverride());
+    return methodBuilder.build();
   }
 
   @Override
   public Node rewriteNewInstance(NewInstance newInstance) {
-    TypeDescriptor typeDescriptor =
-        newInstance.getConstructorMethodDescriptor().getEnclosingClassTypeDescriptor();
+    NewInstanceBuilder newInstanceBuilder = NewInstanceBuilder.from(newInstance);
+    TypeDescriptor typeDescriptor = newInstance.getTarget().getEnclosingClassTypeDescriptor();
     JavaType type = getJavaType(typeDescriptor);
     if (type == null || type.isStatic() || type.getEnclosingTypeDescriptor() == null) {
       return newInstance;
     }
 
     // Add arguments that reference the variables captured by the given type.
-    List<Expression> arguments = new ArrayList<>(newInstance.getArguments());
-    addCapturedVariableArguments(arguments, typeDescriptor);
+    addCapturedVariableArguments(newInstanceBuilder, typeDescriptor);
 
     // Maybe add the qualifier of the NewInstance as the last argument to the constructor of a
     // local class. The qualifier may be null if the local class is in a static context.
     if (type.isLocal() && newInstance.getQualifier() != null) {
-      arguments.add(newInstance.getQualifier());
+      newInstanceBuilder.argument(
+          newInstance.getQualifier(), newInstance.getQualifier().getTypeDescriptor());
     }
 
-    return new NewInstance(null, newInstance.getConstructorMethodDescriptor(), arguments);
+    return newInstanceBuilder.build();
   }
 
   @Override
   public Node rewriteMethodCall(MethodCall methodCall) {
+    MethodCallBuilder methodCallBuilder = MethodCallBuilder.from(methodCall);
     MethodDescriptor target = methodCall.getTarget();
     if (!target.isConstructor()) {
       return methodCall;
     }
 
-    Expression qualifier = methodCall.getQualifier();
-    List<Expression> arguments = new ArrayList<>(methodCall.getArguments());
-
     if (ASTUtils.isDelegatedConstructorCall(methodCall, getCurrentJavaType().getDescriptor())) {
       // this() call
-      addCapturedVariableArgumentsInConstructorCascade(arguments);
+      addCapturedVariableArgumentsInConstructorCascade(methodCallBuilder);
     } else {
       // super() call
-      addCapturedVariableArguments(arguments, target.getEnclosingClassTypeDescriptor());
+      TypeDescriptor superTypeDescriptor = target.getEnclosingClassTypeDescriptor();
+      addCapturedVariableArguments(methodCallBuilder, superTypeDescriptor);
 
       // a.super() => super(a)
       if (methodCall.getQualifier() != null) {
-        arguments.add(methodCall.getQualifier());
-        qualifier = null;
+        methodCallBuilder
+            .argument(methodCall.getQualifier(), superTypeDescriptor.getEnclosingTypeDescriptor())
+            .qualifier(null);
       }
     }
 
-    return new MethodCall(qualifier, target, arguments);
+    return methodCallBuilder.build();
   }
 
   @Override
@@ -160,7 +157,7 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
    * Expands the given arguments list with references to the variables captured by the given type.
    */
   private void addCapturedVariableArguments(
-      List<Expression> arguments, TypeDescriptor typeDescriptor) {
+      CallBuilder<?> callBuilder, TypeDescriptor typeDescriptor) {
     JavaType type = getJavaType(typeDescriptor);
     if (type == null) {
       return;
@@ -175,12 +172,13 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
       if (capturingField != null) {
         // If the capturedVariable is also a captured variable in current type, pass the
         // corresponding field in current type as an argument.
-        arguments.add(
-            new FieldAccess(new ThisReference(typeDescriptor), capturingField.getDescriptor()));
+        callBuilder.argument(
+            new FieldAccess(new ThisReference(typeDescriptor), capturingField.getDescriptor()),
+            capturingField.getDescriptor().getTypeDescriptor());
       } else {
         // otherwise, the captured variable is in the scope of the current type, so pass the
         // variable directly as an argument.
-        arguments.add(capturedVariable.getReference());
+        callBuilder.argument(capturedVariable.getReference(), capturedVariable.getTypeDescriptor());
       }
     }
   }
@@ -190,9 +188,11 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
    * arguments list with references to the captured variable passing parameters in the current
    * constructor method.
    */
-  private void addCapturedVariableArgumentsInConstructorCascade(List<Expression> arguments) {
+  private void addCapturedVariableArgumentsInConstructorCascade(
+      MethodCallBuilder methodCallBuilder) {
     for (Field capturedField : getFieldsForCapturedVariables(getCurrentJavaType())) {
-      arguments.add(parameterByFieldForCaptures.get(capturedField.getDescriptor()).getReference());
+      Variable parameter = parameterByFieldForCaptures.get(capturedField.getDescriptor());
+      methodCallBuilder.argument(parameter.getReference(), parameter.getTypeDescriptor());
     }
   }
 
@@ -201,7 +201,7 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
    * hold references to the variables captured by the current type.
    */
   private void addCapturingFieldInitializers(
-      List<Statement> statements, TypeDescriptor enclosingTypeDescriptor) {
+      MethodBuilder methodBuilder, TypeDescriptor enclosingTypeDescriptor) {
     int i = 0;
     for (Field capturedField : getFieldsForCapturedVariables(getCurrentJavaType())) {
       Variable parameter = parameterByFieldForCaptures.get(capturedField.getDescriptor());
@@ -212,7 +212,7 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
                   new ThisReference(enclosingTypeDescriptor), capturedField.getDescriptor()),
               BinaryOperator.ASSIGN,
               parameter.getReference());
-      statements.add(i++, new ExpressionStatement(initializer));
+      methodBuilder.statement(i++, new ExpressionStatement(initializer));
     }
   }
 
@@ -220,9 +220,10 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
    * Expands the given parameters list with parameters through which to pass captured variables for
    * the current type.
    */
-  private void addCapturedValueParameters(List<Variable> parameters) {
+  private void addCapturedValueParameters(MethodBuilder methodBuilder) {
     for (Field capturedField : getFieldsForCapturedVariables(getCurrentJavaType())) {
-      parameters.add(parameterByFieldForCaptures.get(capturedField.getDescriptor()));
+      Variable parameter = parameterByFieldForCaptures.get(capturedField.getDescriptor());
+      methodBuilder.parameter(parameter, parameter.getTypeDescriptor());
     }
   }
 

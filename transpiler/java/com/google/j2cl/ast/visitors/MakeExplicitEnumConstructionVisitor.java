@@ -15,29 +15,25 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.HashMultiset;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Multiset;
-import com.google.j2cl.ast.ASTUtils;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
+import com.google.j2cl.ast.MethodBuilder;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodCallBuilder;
 import com.google.j2cl.ast.NewInstance;
+import com.google.j2cl.ast.NewInstanceBuilder;
+import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
-
-import java.util.List;
 
 /**
  * Make the implicit parameters and super calls in enum constructors explicit.
@@ -47,39 +43,55 @@ public class MakeExplicitEnumConstructionVisitor extends AbstractRewriter {
   private static final String VALUE_NAME_PARAMETER_NAME = "$name";
   private final Multiset<TypeDescriptor> ordinalsByEnumTypeDescriptor = HashMultiset.create();
   private final CompilationUnit compilationUnit;
+  private Variable ordinalVariable =
+      new Variable(ORDINAL_PARAMETER_NAME, TypeDescriptors.get().primitiveInt, false, true);
+  private Variable nameVariable =
+      new Variable(VALUE_NAME_PARAMETER_NAME, TypeDescriptors.get().javaLangString, false, true);
 
   public static void doMakeEnumConstructionExplicit(CompilationUnit compilationUnit) {
     new MakeExplicitEnumConstructionVisitor(compilationUnit).makeEnumConstructionExplicit();
   }
 
   @Override
-  public Method rewriteMethod(Method method) {
+  public Node rewriteMethod(Method method) {
     /*
-     * Only inserts explicit super() call to a constructor that does not have
-     * a super() or this() call, and the corresponding type does have a super class.
+     * Only add parameters to constructor methods in Enum classes..
      */
     if (!method.isConstructor() || !isEnumOrSubclass(getCurrentJavaType())) {
       return method;
     }
-    Variable ordinalVariable =
-        new Variable(ORDINAL_PARAMETER_NAME, TypeDescriptors.get().primitiveInt, false, true);
-    Variable nameVariable =
-        new Variable(VALUE_NAME_PARAMETER_NAME, TypeDescriptors.get().javaLangString, false, true);
-    method.addParameter(nameVariable);
-    method.addParameter(ordinalVariable);
-    replaceConstructorInvocationCall(method, ImmutableList.of(nameVariable, ordinalVariable));
+    MethodBuilder methodBuilder = MethodBuilder.from(method);
 
-    return new Method(
-        ASTUtils.addParametersToMethodDescriptor(
-            method.getDescriptor(),
-            nameVariable.getTypeDescriptor(),
-            ordinalVariable.getTypeDescriptor()),
-        method.getParameters(),
-        method.getBody());
+    methodBuilder.parameter(nameVariable, nameVariable.getTypeDescriptor());
+    methodBuilder.parameter(ordinalVariable, ordinalVariable.getTypeDescriptor());
+
+    Method newMethod = methodBuilder.build();
+
+    return newMethod;
   }
 
   @Override
-  public NewInstance rewriteNewInstance(NewInstance newInstance) {
+  public Node rewriteMethodCall(MethodCall methodCall) {
+    /*
+     * Only add arguments to super() calls inside of constructor methods in Enum classes.
+     */
+    if (getCurrentMethod() == null
+        || !getCurrentMethod().isConstructor()
+        || !isEnumOrSubclass(getCurrentJavaType())
+        || !methodCall.getTarget().isConstructor()) {
+      return methodCall;
+    }
+
+    MethodCallBuilder methodCallBuilder = MethodCallBuilder.from(methodCall);
+
+    methodCallBuilder.argument(nameVariable.getReference(), nameVariable.getTypeDescriptor());
+    methodCallBuilder.argument(ordinalVariable.getReference(), ordinalVariable.getTypeDescriptor());
+
+    return methodCallBuilder.build();
+  }
+
+  @Override
+  public Node rewriteNewInstance(NewInstance newInstance) {
     // Rewrite newInstances for the creation of the enum constants to include the assigned ordinal
     // and name.
     if (!getCurrentJavaType().isEnum()
@@ -93,6 +105,8 @@ public class MakeExplicitEnumConstructionVisitor extends AbstractRewriter {
     }
     // This is definitely an enum initialization NewInstance.
 
+    NewInstanceBuilder newInstanceBuilder = NewInstanceBuilder.from(newInstance);
+
     Field enumField = getCurrentField();
     Preconditions.checkState(
         enumField != null,
@@ -102,52 +116,18 @@ public class MakeExplicitEnumConstructionVisitor extends AbstractRewriter {
         ordinalsByEnumTypeDescriptor.add(
             enumField.getDescriptor().getEnclosingClassTypeDescriptor(), 1);
 
-    return new NewInstance(
-        newInstance.getQualifier(),
-        ASTUtils.addParametersToMethodDescriptor(
-            newInstance.getConstructorMethodDescriptor(),
-            TypeDescriptors.get().javaLangString,
-            TypeDescriptors.get().primitiveInt),
-        ImmutableList.<Expression>builder()
-            .addAll(newInstance.getArguments())
-            .add(new StringLiteral("\"" + enumField.getDescriptor().getFieldName() + "\""))
-            .add(new NumberLiteral(TypeDescriptors.get().primitiveInt, currentOrdinal))
-            .build());
+    newInstanceBuilder.argument(
+        new StringLiteral("\"" + enumField.getDescriptor().getFieldName() + "\""),
+        TypeDescriptors.get().javaLangString);
+    newInstanceBuilder.argument(
+        new NumberLiteral(TypeDescriptors.get().primitiveInt, currentOrdinal),
+        TypeDescriptors.get().primitiveInt);
+
+    return newInstanceBuilder.build();
   }
 
   private void makeEnumConstructionExplicit() {
     compilationUnit.accept(this);
-  }
-
-  private void replaceConstructorInvocationCall(Method method, List<Variable> implicitArguments) {
-
-    MethodCall constructorInvocation =
-        Preconditions.checkNotNull(ASTUtils.getConstructorInvocation(method));
-
-    MethodDescriptor modifiedConstructorDescriptor =
-        ASTUtils.addParametersToMethodDescriptor(
-            constructorInvocation.getTarget(),
-            Lists.transform(
-                implicitArguments,
-                new Function<Variable, TypeDescriptor>() {
-                  @Override
-                  public TypeDescriptor apply(Variable variable) {
-                    return variable.getTypeDescriptor();
-                  }
-                }));
-
-    List<Expression> arguments =
-        Lists.transform(
-            implicitArguments,
-            new Function<Variable, Expression>() {
-              @Override
-              public Expression apply(Variable variable) {
-                return variable.getReference();
-              }
-            });
-
-    constructorInvocation.setTargetMethodDescriptor(modifiedConstructorDescriptor);
-    constructorInvocation.getArguments().addAll(arguments);
   }
 
   private boolean isEnumOrSubclass(JavaType type) {

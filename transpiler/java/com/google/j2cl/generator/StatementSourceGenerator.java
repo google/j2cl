@@ -395,11 +395,9 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformNewInstance(NewInstance expression) {
-        String className =
-            getAlias(expression.getConstructorMethodDescriptor().getEnclosingClassTypeDescriptor());
+        String className = getAlias(expression.getTarget().getEnclosingClassTypeDescriptor());
         String constructorMangledName =
-            ManglingNameUtils.getConstructorMangledName(
-                expression.getConstructorMethodDescriptor());
+            ManglingNameUtils.getConstructorMangledName(expression.getTarget());
         String argumentsList =
             Joiner.on(", ").join(transformNodesToSource(expression.getArguments()));
         return String.format("%s.%s(%s)", className, constructorMangledName, argumentsList);

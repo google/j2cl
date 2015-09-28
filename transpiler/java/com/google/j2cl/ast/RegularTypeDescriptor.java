@@ -198,6 +198,18 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  public TypeDescriptor getSuperTypeDescriptor() {
+    // Will return a consistent interned copy, should be decently fast.
+    return TypeProxyUtils.createTypeDescriptor(typeBinding.getSuperclass());
+  }
+
+  @Override
+  public TypeDescriptor getEnclosingTypeDescriptor() {
+    // Will return a consistent interned copy, should be decently fast.
+    return TypeProxyUtils.createTypeDescriptor(typeBinding.getDeclaringClass());
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_RegularTypeDescriptor.visit(processor, this);
   }

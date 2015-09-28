@@ -22,7 +22,6 @@ import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -37,32 +36,6 @@ public class ASTUtils {
   public static final FieldDescriptor ARRAY_LENGTH_FIELD_DESCRIPTION =
       FieldDescriptor.createRaw(
           false, TypeDescriptors.get().primitiveVoid, "length", TypeDescriptors.get().primitiveInt);
-
-  /**
-   * Construct a new method descriptor for {@code methodDescriptor} with the additional
-   * parameters {@code extraParameters} at the end.
-   */
-  public static MethodDescriptor addParametersToMethodDescriptor(
-      MethodDescriptor methodDescriptor, TypeDescriptor... extraParameters) {
-    return addParametersToMethodDescriptor(methodDescriptor, Arrays.asList(extraParameters));
-  }
-
-  /**
-   * Construct a new method descriptor for {@code methodDescriptor} with the additional
-   * parameters {@code extraParameters} at the end.
-   */
-  public static MethodDescriptor addParametersToMethodDescriptor(
-      MethodDescriptor methodDescriptor, Collection<TypeDescriptor> extraParameters) {
-    return MethodDescriptor.create(
-        methodDescriptor.isStatic(),
-        methodDescriptor.getVisibility(),
-        methodDescriptor.getEnclosingClassTypeDescriptor(),
-        methodDescriptor.getMethodName(),
-        methodDescriptor.isConstructor(),
-        methodDescriptor.isNative(),
-        methodDescriptor.getReturnTypeDescriptor(),
-        Iterables.concat(methodDescriptor.getParameterTypeDescriptors(), extraParameters));
-  }
 
   /**
    * Create "$init" MethodDescriptor.
@@ -103,18 +76,10 @@ public class ASTUtils {
    */
   public static MethodCall getConstructorInvocation(Method method) {
     Preconditions.checkArgument(method.isConstructor());
-    return getConstructorInvocation(method.getBody().getStatements());
-  }
-
-  /**
-   * Returns the constructor invocation (super call or this call) in the provided statements,
-   * or returns null if there isn't one.
-   */
-  public static MethodCall getConstructorInvocation(List<Statement> statements) {
-    if (statements.isEmpty()) {
+    if (method.getBody().getStatements().isEmpty()) {
       return null;
     }
-    Statement firstStatement = statements.get(0);
+    Statement firstStatement = method.getBody().getStatements().get(0);
     if (!(firstStatement instanceof ExpressionStatement)) {
       return null;
     }
@@ -329,7 +294,12 @@ public class ASTUtils {
     // adds 'this' as the last argument.
     arguments.add(new ThisReference(outerclassTypeDescriptor));
 
-    Expression newInnerClass = new NewInstance(null, innerclassConstructorDescriptor, arguments);
+    // adds 'this' as the last parameter.
+    MethodDescriptor newInnerclassConstructorDescriptor =
+        MethodDescriptors.createModifiedCopy(
+            innerclassConstructorDescriptor, Lists.newArrayList(outerclassTypeDescriptor));
+
+    Expression newInnerClass = new NewInstance(null, newInnerclassConstructorDescriptor, arguments);
     List<Statement> statements = new ArrayList<>();
     statements.add(
         new ReturnStatement(

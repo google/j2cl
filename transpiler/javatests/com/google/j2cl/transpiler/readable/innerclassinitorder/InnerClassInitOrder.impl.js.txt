@@ -99,7 +99,9 @@ class InnerClassInitOrder extends Object {
    * @public
    */
   m_$create_InnerClassInitOrder$OuterRefFromSuperCtorCall_$pp_com_google_j2cl_transpiler_readable_innerclassinitorder() {
-    return InnerClassInitOrder$OuterRefFromSuperCtorCall.$create(this);
+    return InnerClassInitOrder$OuterRefFromSuperCtorCall
+        .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
+            this);
   }
 
   /**
@@ -110,7 +112,8 @@ class InnerClassInitOrder extends Object {
   m_$create_InnerClassInitOrder$OuterRefFromThisCtorCall__java_lang_Object(
       object) {
     return InnerClassInitOrder$OuterRefFromThisCtorCall
-        .$create__java_lang_Object(object, this);
+        .$create__java_lang_Object__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
+            object, this);
   }
 
   /**
@@ -118,7 +121,9 @@ class InnerClassInitOrder extends Object {
    * @public
    */
   m_$create_InnerClassInitOrder$OuterRefFromThisCtorCall() {
-    return InnerClassInitOrder$OuterRefFromThisCtorCall.$create(this);
+    return InnerClassInitOrder$OuterRefFromThisCtorCall
+        .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
+            this);
   }
 
   /**
@@ -150,7 +155,9 @@ class InnerClassInitOrder extends Object {
    * @public
    */
   m_$create_InnerClassInitOrder$InnerClass_$pp_com_google_j2cl_transpiler_readable_innerclassinitorder() {
-    return InnerClassInitOrder$InnerClass.$create(this);
+    return InnerClassInitOrder$InnerClass
+        .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
+            this);
   }
 
   /**
@@ -285,7 +292,10 @@ class InnerClassInitOrder extends Object {
     let results = /**@type {Array<InnerClassInitOrder$1AddNumber>} */ (
         $Arrays.$create([10], InnerClassInitOrder$1AddNumber));
     for (let i = 0; i < 10; i++) {
-      let ap = InnerClassInitOrder$1.$create__int(i, this);
+      let ap =
+          InnerClassInitOrder$1
+              .$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
+                  i, this);
       $Arrays.$set(results, i, ap);
     }
     for (let $array = results, $index = 0; $index < $array.length; $index++) {
@@ -323,7 +333,10 @@ class InnerClassInitOrder extends Object {
    * @public
    */
   m_testQualifiedSuperCallAnon() {
-    let x = InnerClassInitOrder$2.$create(this);
+    let x =
+        InnerClassInitOrder$2
+            .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
+                this);
     $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue()));
   }
 

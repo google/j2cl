@@ -92,7 +92,7 @@ public class InsertImplicitCastsVisitor extends AbstractRewriter {
   @Override
   public Node rewriteNewInstance(NewInstance newInstance) {
     ImmutableList<TypeDescriptor> parameterTypeDescriptors =
-        newInstance.getConstructorMethodDescriptor().getParameterTypeDescriptors();
+        newInstance.getTarget().getParameterTypeDescriptors();
     List<Expression> arguments = newInstance.getArguments();
 
     // Look at each param/argument pair.
@@ -115,8 +115,7 @@ public class InsertImplicitCastsVisitor extends AbstractRewriter {
     // TODO: stop checking for changes and instead always return a replacement once it becomes safe
     // to do so (when MethodDescriptors and Methods parameter types are kept in sync).
     if (madeChanges) {
-      return new NewInstance(
-          newInstance.getQualifier(), newInstance.getConstructorMethodDescriptor(), newArguments);
+      return new NewInstance(newInstance.getQualifier(), newInstance.getTarget(), newArguments);
     }
     return newInstance;
   }

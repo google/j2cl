@@ -37,8 +37,13 @@ class SimpleLocalClass extends Object {
    */
   m_test__int(p) {
     let localVar = 1;
-    SimpleLocalClass$1InnerClass.$create(localVar, p, this).m_fun();
-    SimpleLocalClass$1InnerClassWithoutCaptures.$create(this);
+    SimpleLocalClass$1InnerClass
+        .$create__int__int__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass(
+            localVar, p, this)
+        .m_fun();
+    SimpleLocalClass$1InnerClassWithoutCaptures
+        .$create__com_google_j2cl_transpiler_readable_simplelocalclass_SimpleLocalClass(
+            this);
   }
 
   /**

@@ -23,6 +23,7 @@ import com.google.j2cl.ast.visitors.NormalizeCastsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeNestedClassConstructorsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeSideEffectOperationsVisitor;
 import com.google.j2cl.ast.visitors.RemoveUnusedMultiExpressionReturnValues;
+import com.google.j2cl.ast.visitors.VerifyParamAndArgCountsVisitor;
 import com.google.j2cl.common.VelocityUtil;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.frontend.CompilationUnitBuilder;
@@ -148,8 +149,10 @@ public class J2clTranspiler {
     }
   }
 
-  private void normalizeUnits(@SuppressWarnings("unused") List<CompilationUnit> j2clUnits) {
+  private void normalizeUnits(List<CompilationUnit> j2clUnits) {
     for (CompilationUnit j2clUnit : j2clUnits) {
+      verifyUnit(j2clUnit);
+
       // Class structure normalizations.
       MakeExplicitEnumConstructionVisitor.doMakeEnumConstructionExplicit(j2clUnit);
       InsertInstanceInitCallsVisitor.doInsertInstanceInitCall(j2clUnit);
@@ -161,7 +164,13 @@ public class J2clTranspiler {
       NormalizeCastsVisitor.doNormalizeCasts(j2clUnit);
       NormalizeSideEffectOperationsVisitor.doNormalizeSideEffectOperations(j2clUnit);
       RemoveUnusedMultiExpressionReturnValues.doRemoveUnused(j2clUnit);
+
+      verifyUnit(j2clUnit);
     }
+  }
+
+  private void verifyUnit(CompilationUnit j2clUnit) {
+     VerifyParamAndArgCountsVisitor.doVerifyParamAndArgCountsVisitor(j2clUnit);
   }
 
   /**

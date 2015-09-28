@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
  * Class for new instance expression.
  */
 @Visitable
-public class NewInstance extends Expression {
+public class NewInstance extends Expression implements MemberReference, Call {
   @Visitable @Nullable Expression qualifier;
   @Visitable MethodDescriptor constructorMethodDescriptor;
   @Visitable List<Expression> arguments = new ArrayList<>();
@@ -49,14 +49,17 @@ public class NewInstance extends Expression {
     this.arguments.addAll(arguments);
   }
 
+  @Override
   public Expression getQualifier() {
     return qualifier;
   }
 
-  public MethodDescriptor getConstructorMethodDescriptor() {
+  @Override
+  public MethodDescriptor getTarget() {
     return constructorMethodDescriptor;
   }
 
+  @Override
   public List<Expression> getArguments() {
     return arguments;
   }

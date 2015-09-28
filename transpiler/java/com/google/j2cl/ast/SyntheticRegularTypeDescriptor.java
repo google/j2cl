@@ -53,6 +53,18 @@ public class SyntheticRegularTypeDescriptor extends RegularTypeDescriptor {
   }
 
   @Override
+  public TypeDescriptor getSuperTypeDescriptor() {
+    throw new UnsupportedOperationException(
+        "Synthetic type descriptors do not know their super type.");
+  }
+
+  @Override
+  public TypeDescriptor getEnclosingTypeDescriptor() {
+    throw new UnsupportedOperationException(
+        "Synthetic type descriptors do not know their enclosing type.");
+  }
+
+  @Override
   public boolean isRaw() {
     return isRaw;
   }

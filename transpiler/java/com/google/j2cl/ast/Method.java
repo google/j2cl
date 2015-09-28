@@ -55,7 +55,7 @@ public class Method extends Node {
     this.isOverride = isOverride;
   }
 
-  private Method(
+  public Method(
       MethodDescriptor methodDescriptor,
       List<Variable> parameters,
       Block body,
@@ -84,10 +84,6 @@ public class Method extends Node {
 
   public Block getBody() {
     return body;
-  }
-
-  public void addParameter(Variable parameter) {
-    parameters.add(parameter);
   }
 
   public boolean isConstructor() {

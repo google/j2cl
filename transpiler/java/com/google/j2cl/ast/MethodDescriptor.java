@@ -17,6 +17,8 @@ package com.google.j2cl.ast;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Interner;
+import com.google.common.collect.Interners;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.Arrays;
@@ -35,6 +37,36 @@ public abstract class MethodDescriptor extends Node implements Member {
   public static final String VALUE_METHOD_SUFFIX = "Value"; // Boxed type **Value() method.
   public static final String GET_ONE_METHOD_NAME = "$getOne"; // LongUtils.$getOne() method.
 
+  private static Interner<MethodDescriptor> interner;
+
+  public static MethodDescriptor create(
+      boolean isStatic,
+      boolean isRaw,
+      Visibility visibility,
+      TypeDescriptor enclosingClassTypeDescriptor,
+      String methodName,
+      boolean isConstructor,
+      boolean isNative,
+      TypeDescriptor returnTypeDescriptor,
+      Iterable<TypeDescriptor> parameterTypeDescriptors,
+      Iterable<TypeDescriptor> typeParameterDescriptors,
+      MethodDescriptor erasureMethodDescriptor) {
+    return getInterner()
+        .intern(
+            new AutoValue_MethodDescriptor(
+                isStatic,
+                isRaw,
+                visibility,
+                enclosingClassTypeDescriptor,
+                methodName,
+                isConstructor,
+                isNative,
+                ImmutableList.copyOf(parameterTypeDescriptors),
+                returnTypeDescriptor,
+                ImmutableList.copyOf(typeParameterDescriptors),
+                erasureMethodDescriptor));
+  }
+
   public static MethodDescriptor create(
       boolean isStatic,
       Visibility visibility,
@@ -46,7 +78,7 @@ public abstract class MethodDescriptor extends Node implements Member {
       Iterable<TypeDescriptor> parameterTypeDescriptors,
       Iterable<TypeDescriptor> typeParameterDescriptors,
       MethodDescriptor erasureMethodDescriptor) {
-    return new AutoValue_MethodDescriptor(
+    return create(
         isStatic,
         false,
         visibility,
@@ -54,9 +86,9 @@ public abstract class MethodDescriptor extends Node implements Member {
         methodName,
         isConstructor,
         isNative,
-        ImmutableList.copyOf(parameterTypeDescriptors),
         returnTypeDescriptor,
-        ImmutableList.copyOf(typeParameterDescriptors),
+        parameterTypeDescriptors,
+        typeParameterDescriptors,
         erasureMethodDescriptor);
   }
 
@@ -69,7 +101,7 @@ public abstract class MethodDescriptor extends Node implements Member {
       boolean isNative,
       TypeDescriptor returnTypeDescriptor,
       Iterable<TypeDescriptor> parameterTypeDescriptors) {
-    return new AutoValue_MethodDescriptor(
+    return create(
         isStatic,
         false,
         visibility,
@@ -77,8 +109,8 @@ public abstract class MethodDescriptor extends Node implements Member {
         methodName,
         isConstructor,
         isNative,
-        ImmutableList.copyOf(parameterTypeDescriptors),
         returnTypeDescriptor,
+        parameterTypeDescriptors,
         ImmutableList.<TypeDescriptor>of(),
         null);
   }
@@ -113,7 +145,7 @@ public abstract class MethodDescriptor extends Node implements Member {
       String methodName,
       List<TypeDescriptor> parameterTypeDescriptors,
       TypeDescriptor returnTypeDescriptor) {
-    return new AutoValue_MethodDescriptor(
+    return create(
         isStatic,
         true,
         visibility,
@@ -121,10 +153,17 @@ public abstract class MethodDescriptor extends Node implements Member {
         methodName,
         false,
         false,
-        ImmutableList.copyOf(parameterTypeDescriptors),
         returnTypeDescriptor,
+        parameterTypeDescriptors,
         ImmutableList.<TypeDescriptor>of(),
         null);
+  }
+
+  static Interner<MethodDescriptor> getInterner() {
+    if (interner == null) {
+      interner = Interners.newWeakInterner();
+    }
+    return interner;
   }
 
   @Override

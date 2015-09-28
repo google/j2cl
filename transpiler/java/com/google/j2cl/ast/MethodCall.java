@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
  * Class for method call expression.
  */
 @Visitable
-public class MethodCall extends Expression implements MemberReference {
+public class MethodCall extends Expression implements MemberReference, Call {
   @Visitable @Nullable Expression qualifier;
   @Visitable MethodDescriptor targetMethodDescriptor;
   @Visitable List<Expression> arguments = new ArrayList<>();
@@ -55,6 +55,7 @@ public class MethodCall extends Expression implements MemberReference {
     return this.targetMethodDescriptor;
   }
 
+  @Override
   public List<Expression> getArguments() {
     return this.arguments;
   }

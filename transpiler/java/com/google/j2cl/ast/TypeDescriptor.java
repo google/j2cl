@@ -169,6 +169,14 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
     return this;
   }
 
+  public TypeDescriptor getSuperTypeDescriptor() {
+    return null;
+  }
+
+  public TypeDescriptor getEnclosingTypeDescriptor() {
+    return null;
+  }
+
   public List<TypeDescriptor> getTypeArgumentDescriptors() {
     return Collections.emptyList();
   }
