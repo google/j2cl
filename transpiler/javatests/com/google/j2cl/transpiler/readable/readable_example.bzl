@@ -65,6 +65,7 @@ def readable_example(name, srcs):
           "--remove_dead_assignments",
           "--jscomp_off=lateProvide",
           "--jscomp_off=extraRequire",
+          "--jscomp_off=uselessCode",
       ],
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],

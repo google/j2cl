@@ -45,6 +45,7 @@ CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
     "--ambiguate_properties",
     "--disambiguate_properties",
     "--remove_unused_constructor_properties=ON",
+    "--jscomp_off=uselessCode",
 ]
 
 
