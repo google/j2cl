@@ -31,8 +31,10 @@ public class NewInstanceBuilder extends CallBuilder<NewInstance> {
   }
 
   @Override
-  protected NewInstance createReplacement(Expression qualifierExpression,
-      MethodDescriptor methodDescriptor, List<Expression> arguments) {
+  protected NewInstance createReplacement(
+      Expression qualifierExpression,
+      MethodDescriptor methodDescriptor,
+      List<Expression> arguments) {
     return new NewInstance(qualifierExpression, methodDescriptor, arguments);
   }
 }

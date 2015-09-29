@@ -93,7 +93,7 @@ class Booleans {
   static m_compareTo__java_lang_Boolean__java_lang_Object(a, b) {
     Booleans.$clinit();
     return Booleans.m_compareTo__java_lang_Boolean__java_lang_Boolean(
-      a, /**@type {boolean} */ ($Casts.to(b, Boolean.$isInstance(b))));
+      a, /**@type {boolean} */ ($Casts.to(b, Boolean)));
   }
 
   /**

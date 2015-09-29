@@ -44,14 +44,10 @@ def main():
   print ("  blaze building readable opt JS for '%s' in the managed repo" %
          test_name)
   repo_util.build_readable_optimized_test(test_name, cwd=MANAGED_GOOGLE3_PATH)
-  process_util.run_cmd_get_output(
-      ["clang-format", "-i",
-       MANAGED_GOOGLE3_PATH + "/" + js_file_path])
 
   print ("  blaze building readable opt JS for '%s' in the live repo" %
          test_name)
   repo_util.build_readable_optimized_test(test_name)
-  process_util.run_cmd_get_output(["clang-format", "-i", js_file_path])
 
   print "  starting meld"
   process_util.run_cmd_get_output(

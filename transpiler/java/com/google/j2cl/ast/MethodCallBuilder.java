@@ -31,8 +31,10 @@ public class MethodCallBuilder extends CallBuilder<MethodCall> {
   }
 
   @Override
-  protected MethodCall createReplacement(Expression qualifierExpression,
-      MethodDescriptor methodDescriptor, List<Expression> arguments) {
+  protected MethodCall createReplacement(
+      Expression qualifierExpression,
+      MethodDescriptor methodDescriptor,
+      List<Expression> arguments) {
     return new MethodCall(qualifierExpression, methodDescriptor, arguments);
   }
 }

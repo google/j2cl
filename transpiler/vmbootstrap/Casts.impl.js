@@ -15,8 +15,21 @@ class Casts {
    * @return {*}
    * @nocollapse
    */
-  static to(instance, condition) {
+  static check(instance, condition) {
     if (CAST_CHECKS_ENABLED_ && !condition) {
+      Casts.throwCastException();
+    }
+    return instance;
+  }
+
+  /**
+   * @param {*} instance
+   * @param {*} castType
+   * @return {*}
+   * @nocollapse
+   */
+  static to(instance, castType) {
+    if (CAST_CHECKS_ENABLED_ && !castType.$isInstance(instance)) {
       Casts.throwCastException();
     }
     return instance;

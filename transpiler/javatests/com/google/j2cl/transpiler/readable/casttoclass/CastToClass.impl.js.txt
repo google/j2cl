@@ -31,8 +31,7 @@ class CastToClass extends Object {
    */
   m_main() {
     let o = CastToClass.$create();
-    let c =
-        /**@type {CastToClass} */ ($Casts.to(o, CastToClass.$isInstance(o)));
+    let c = /**@type {CastToClass} */ ($Casts.to(o, CastToClass));
   }
 
   /**

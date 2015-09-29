@@ -64,7 +64,6 @@ public class Main {
       count++;
     }
 
-
     // Refer to the type by interface
     MyList myList = new Concrete();
     count = 1;

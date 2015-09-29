@@ -234,7 +234,7 @@ class Arrays {
    */
   static $castTo(instance, requiredLeafType, requiredDimensionCount) {
     Arrays.$clinit();
-    return Casts.to(instance,
+    return Casts.check(instance,
                     Arrays.$instanceIsOfType(instance, requiredLeafType,
                                              requiredDimensionCount));
   }

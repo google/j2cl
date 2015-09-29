@@ -54,18 +54,6 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
         (RegularTypeDescriptor) castExpression.getCastTypeDescriptor();
     Expression expression = castExpression.getExpression();
 
-    // TypeName.$isInstance(expr);
-    MethodDescriptor isInstanceMethodDescriptor =
-        MethodDescriptor.createRaw(
-            true,
-            Visibility.PUBLIC,
-            castTypeDescriptor.getRawTypeDescriptor(),
-            "$isInstance",
-            Lists.newArrayList(TypeDescriptors.get().javaLangObject),
-            TypeDescriptors.get().primitiveBoolean);
-    Expression isInstanceMethodCall =
-        new MethodCall(null, isInstanceMethodDescriptor, Arrays.asList(expression));
-
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.createRaw(
             true,
@@ -77,9 +65,9 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
             castTypeDescriptor);
     List<Expression> arguments = new ArrayList<>();
     arguments.add(expression);
-    arguments.add(isInstanceMethodCall);
+    arguments.add(castTypeDescriptor.getRawTypeDescriptor());
 
-    // Casts.to(expr, TypeName.$isInstance(expr));
+    // Casts.to(expr, TypeName);
     MethodCall castMethodCall = new MethodCall(null, castToMethodDescriptor, arguments);
     // /**@type {}*/ ()
     return CastExpression.createRaw(castMethodCall, castTypeDescriptor);

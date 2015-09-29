@@ -39,14 +39,14 @@ class CastToGenerics extends Object {
    */
   m_test() {
     let o = Integer.$create__int(1);
-    let e = /**@type {C_E} */ ($Casts.to(o, Number.$isInstance(o)));
-    let t = /**@type {C_T} */ ($Casts.to(o, Object.$isInstance(o)));
+    let e = /**@type {C_E} */ ($Casts.to(o, Number));
+    let t = /**@type {C_T} */ ($Casts.to(o, Object));
     let es = /**@type {Array<C_E>} */ ($Arrays.$castTo(o, Number, 1));
     let ts = /**@type {Array<C_T>} */ ($Arrays.$castTo(o, Object, 1));
     let c = /**@type {CastToGenerics<?string, (Number|?number)>} */ (
         CastToGenerics.$create());
     let cc = /**@type {CastToGenerics<Error, (Number|?number)>} */ (
-        $Casts.to(c, CastToGenerics.$isInstance(c)));
+        $Casts.to(c, CastToGenerics));
   }
 
   /**

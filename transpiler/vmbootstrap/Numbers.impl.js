@@ -177,7 +177,7 @@ class Numbers {
   static m_compareTo__java_lang_Number__java_lang_Object(a, b) {
     Numbers.$clinit();
     return Numbers.m_compareTo__java_lang_Number__java_lang_Double(
-      a, /**@type {number} */ ($Casts.to(b, Double.$isInstance(b))));
+      a, /**@type {number} */ ($Casts.to(b, Double)));
   }
 
   /**

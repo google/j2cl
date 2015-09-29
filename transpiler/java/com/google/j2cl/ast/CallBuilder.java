@@ -64,6 +64,8 @@ public abstract class CallBuilder<C extends Call> {
     return createReplacement(qualifierExpression, finalMethodDescriptor, finalArguments);
   }
 
-  protected abstract C createReplacement(Expression qualifierExpression,
-      MethodDescriptor finalMethodDescriptor, List<Expression> finalArguments);
+  protected abstract C createReplacement(
+      Expression qualifierExpression,
+      MethodDescriptor finalMethodDescriptor,
+      List<Expression> finalArguments);
 }
