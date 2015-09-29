@@ -31,6 +31,23 @@ load(
     "j2cl_java_library")
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_root")
 
+J2CL_JAVA_TEST_CLOSURE_DEFS = [
+  "--language_in=ECMASCRIPT6",
+  "--language_out=ECMASCRIPT5",
+  "--jscomp_off=nonStandardJsDocs",
+  "--jscomp_off=checkTypes",
+  "--jscomp_off=undefinedVars",
+  "--export_test_functions=true",
+  "--property_renaming=OFF",
+  "--strict",
+  "--variable_renaming=OFF",
+  "--pretty_print",
+  "--jscomp_off=lateProvide",
+  "--jscomp_off=extraRequire",
+  "--jscomp_off=uselessCode",
+]
+
+
 
 def j2cl_java_test(**kwargs):
   """Macro for running a JUnit test cross compiled as a web test
@@ -78,6 +95,10 @@ def j2cl_java_test(**kwargs):
       ],
   )
 
+  tags = []
+  if "tags" in kwargs:
+    tags = kwargs['tags']
+
   # TODO(dankurka): Add support for different browsers
   # TODO(dankurka): Investigate better setup for IE
   native.jsunit_test(
@@ -85,21 +106,7 @@ def j2cl_java_test(**kwargs):
       srcs=[":" + base_name + "_extract_js",],
       compile=1,
       compiler="//javascript/tools/jscompiler:head",
-      defs=[
-          "--language_in=ECMASCRIPT6",
-          "--language_out=ECMASCRIPT5",
-          "--jscomp_off=nonStandardJsDocs",
-          "--jscomp_off=checkTypes",
-          "--jscomp_off=undefinedVars",
-          "--export_test_functions=true",
-          "--property_renaming=OFF",
-          "--strict",
-          "--variable_renaming=OFF",
-          "--pretty_print",
-          "--jscomp_off=lateProvide",
-          "--jscomp_off=extraRequire",
-          "--jscomp_off=uselessCode",
-      ],
+      defs = J2CL_JAVA_TEST_CLOSURE_DEFS,
       externs_list=["//javascript/externs:common"],
       deps=[
           ":" + base_name + "_js_library",
@@ -109,4 +116,5 @@ def j2cl_java_test(**kwargs):
           "-Dcom.google.testing.selenium.browser=CHROME_LINUX"
       ],
       data=["//testing/matrix/nativebrowsers/chrome:stable_data",],
+      tags = tags,
   )
