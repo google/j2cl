@@ -1,0 +1,139 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts$IntValueHolder.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts$IntValueHolder$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let ArgumentImplicitCasts = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class ArgumentImplicitCasts$IntValueHolder extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {number}
+     */
+    this.f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts$IntValueHolder_ =
+        0;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts$IntValueHolder() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {number} value
+   * @return {!ArgumentImplicitCasts$IntValueHolder}
+   * @public
+   * @nocollapse
+   */
+  static $create__int(value) {
+    ArgumentImplicitCasts$IntValueHolder.$clinit();
+    let instance = new ArgumentImplicitCasts$IntValueHolder;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts$IntValueHolder__int(
+            value);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {number} value
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts$IntValueHolder__int(
+      value) {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts$IntValueHolder();
+    this.f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts$IntValueHolder_ =
+        value;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof ArgumentImplicitCasts$IntValueHolder;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor,
+                               ArgumentImplicitCasts$IntValueHolder);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    ArgumentImplicitCasts$IntValueHolder.$clinit();
+    if (!ArgumentImplicitCasts$IntValueHolder
+             .$classArgumentImplicitCasts$IntValueHolder_) {
+      ArgumentImplicitCasts$IntValueHolder
+          .$classArgumentImplicitCasts$IntValueHolder_ = Class.$createForClass(
+          $Util.$generateId('IntValueHolder'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts$IntValueHolder'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.IntValueHolder'));
+    }
+    return ArgumentImplicitCasts$IntValueHolder
+        .$classArgumentImplicitCasts$IntValueHolder_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    ArgumentImplicitCasts = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+ArgumentImplicitCasts$IntValueHolder
+    .$classArgumentImplicitCasts$IntValueHolder_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = ArgumentImplicitCasts$IntValueHolder;

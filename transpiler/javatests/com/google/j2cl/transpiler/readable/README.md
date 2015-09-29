@@ -47,7 +47,7 @@ are copyright and licensed as follows:
     and each Comparable.$markImplementor(...) was not stripped, even though
     they are not called. See cl/103587701 for a repro case and a deeper
     investigation of the cause.
-- Fix "redefined varaible" error with bridge method creation in
+- Fix "redefined variable" error with bridge method creation in
   "bridgemethodsreturn".
 
 ## Tracking Closure warning issues
@@ -58,14 +58,11 @@ are copyright and licensed as follows:
 ## TODOs
 - anonymousclassforfunctionalinterface (transpiled to function)
 - arithmetic exception for integers (e.g. divide by zero / mod by zero)
-- breakwithlabel
 - catchjsexception
-- continuewithlabel
 - enum special functions (values, valueOf, etc).
 - enumoptimization
 - finalfield (readable JsDoc and no static setter)
-- indentity equality (double equality / triple equality, null / undefined)
-- implicitconversions (method call params)
+- identity equality (double equality / triple equality, null / undefined)
 - implicitconversions (String + operator)
 - implicitconversions (binary operations and field initializers)
 - interfacedefaultmethod
@@ -75,7 +72,6 @@ are copyright and licensed as follows:
 - jsinteropinterface
 - methodreferences
 - nativefunction + provided Foo.native.js
-- notimportinternals
 - objectmethods
 - packageclasscollision
 - primitiveoverflow

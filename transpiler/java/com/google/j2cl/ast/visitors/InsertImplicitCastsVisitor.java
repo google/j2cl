@@ -66,27 +66,12 @@ public class InsertImplicitCastsVisitor extends AbstractRewriter {
 
     // Look at each param/argument pair.
     List<Expression> newArguments = new ArrayList<>();
-    boolean madeChanges = false;
     for (int argIndex = 0; argIndex < parameterTypeDescriptors.size(); argIndex++) {
       TypeDescriptor parameterTypeDescriptor = parameterTypeDescriptors.get(argIndex);
-
-      if (parameterTypeDescriptor == LONG) {
-        // Argument needs a cast to long, add it.
-        newArguments.add(maybeCastToLong(arguments.get(argIndex)));
-        madeChanges = true;
-      } else {
-        // No casts needed (yet), just collect the argument.
-        // TODO: support more than just long casts.
-        newArguments.add(arguments.get(argIndex));
-      }
+      newArguments.add(maybeCastTo(arguments.get(argIndex), parameterTypeDescriptor));
     }
 
-    // TODO: stop checking for changes and instead always return a replacement once it becomes safe
-    // to do so (when MethodDescriptors and Methods parameter types are kept in sync).
-    if (madeChanges) {
-      return new MethodCall(methodCall.getQualifier(), methodCall.getTarget(), newArguments);
-    }
-    return methodCall;
+    return new MethodCall(methodCall.getQualifier(), methodCall.getTarget(), newArguments);
   }
 
   @Override
@@ -97,27 +82,12 @@ public class InsertImplicitCastsVisitor extends AbstractRewriter {
 
     // Look at each param/argument pair.
     List<Expression> newArguments = new ArrayList<>();
-    boolean madeChanges = false;
     for (int argIndex = 0; argIndex < parameterTypeDescriptors.size(); argIndex++) {
       TypeDescriptor parameterTypeDescriptor = parameterTypeDescriptors.get(argIndex);
-
-      if (parameterTypeDescriptor == LONG) {
-        // Argument needs a cast to long, add it.
-        newArguments.add(maybeCastToLong(arguments.get(argIndex)));
-        madeChanges = true;
-      } else {
-        // No casts needed (yet), just collect the argument.
-        // TODO: support more than just long casts.
-        newArguments.add(arguments.get(argIndex));
-      }
+      newArguments.add(maybeCastTo(arguments.get(argIndex), parameterTypeDescriptor));
     }
 
-    // TODO: stop checking for changes and instead always return a replacement once it becomes safe
-    // to do so (when MethodDescriptors and Methods parameter types are kept in sync).
-    if (madeChanges) {
-      return new NewInstance(newInstance.getQualifier(), newInstance.getTarget(), newArguments);
-    }
-    return newInstance;
+    return new NewInstance(newInstance.getQualifier(), newInstance.getTarget(), newArguments);
   }
 
   @Override
