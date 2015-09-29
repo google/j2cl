@@ -48,7 +48,7 @@ public class MakeExplicitEnumConstructionVisitor extends AbstractRewriter {
   private Variable nameVariable =
       new Variable(VALUE_NAME_PARAMETER_NAME, TypeDescriptors.get().javaLangString, false, true);
 
-  public static void doMakeEnumConstructionExplicit(CompilationUnit compilationUnit) {
+  public static void applyTo(CompilationUnit compilationUnit) {
     new MakeExplicitEnumConstructionVisitor(compilationUnit).makeEnumConstructionExplicit();
   }
 

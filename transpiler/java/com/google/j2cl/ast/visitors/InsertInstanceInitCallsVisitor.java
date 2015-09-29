@@ -31,7 +31,7 @@ import java.util.List;
  * Insert instance $init call to each constructor.
  */
 public class InsertInstanceInitCallsVisitor extends AbstractVisitor {
-  public static void doInsertInstanceInitCall(CompilationUnit compilationUnit) {
+  public static void applyTo(CompilationUnit compilationUnit) {
     new InsertInstanceInitCallsVisitor().insertInstanceInitCall(compilationUnit);
   }
 

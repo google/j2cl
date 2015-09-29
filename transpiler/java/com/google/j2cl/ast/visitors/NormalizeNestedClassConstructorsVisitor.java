@@ -48,7 +48,7 @@ import java.util.Map;
  * instances, and add initializers to the added fields in each constructor.
  */
 public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
-  public static void doNormalizeNestedClassConstructors(CompilationUnit compilationUnit) {
+  public static void applyTo(CompilationUnit compilationUnit) {
     new NormalizeNestedClassConstructorsVisitor().normalizeNestedClassConstructors(compilationUnit);
   }
 

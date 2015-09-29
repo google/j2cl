@@ -20,22 +20,14 @@ import com.google.j2cl.errors.Errors;
 
 import org.apache.velocity.app.VelocityEngine;
 
-import java.nio.charset.Charset;
-import java.nio.file.FileSystem;
-
 /**
  * Generates JavaScript source header files.
  */
 public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
 
   public JavaScriptHeaderGenerator(
-      Errors errors,
-      FileSystem outputFileSystem,
-      String outputLocationPath,
-      Charset charset,
-      JavaType javaType,
-      VelocityEngine velocityEngine) {
-    super(errors, outputFileSystem, outputLocationPath, charset, javaType, velocityEngine);
+      Errors errors, JavaType javaType, VelocityEngine velocityEngine) {
+    super(errors, javaType, velocityEngine);
   }
 
   @Override

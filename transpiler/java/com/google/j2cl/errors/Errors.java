@@ -23,18 +23,31 @@ import java.util.List;
  * An error logger class that records the number of errors and provides error print methods.
  */
 public class Errors {
-  public static final String ERR_INVALID_FLAG = "invalid flag";
-  public static final String ERR_FILE_NOT_FOUND = "file not found";
-  public static final String ERR_INVALID_SOURCE_FILE = "invalid source file";
-  public static final String ERR_INVALID_SOURCE_VERSION = "invalid source version";
-  public static final String ERR_UNSUPPORTED_ENCODING = "unsupported encoding";
-  public static final String ERR_CANNOT_GENERATE_OUTPUT =
-      "cannot generate output, please see Velocity runtime log";
-  public static final String ERR_CANNOT_FIND_UNIT = "cannot find CompilationUnit for type ";
-  public static final String ERR_OUTPUT_LOCATION =
-      "-output location must be a directory or .zip file";
-  public static final String ERR_CANNOT_OPEN_ZIP = "cannot open zip";
-  public static final String ERR_CANNOT_CLOSE_ZIP = "cannot close zip";
+  /**
+   * Represents compiler errors.
+   */
+  public enum Error {
+    ERR_INVALID_FLAG("invalid flag"),
+    ERR_FILE_NOT_FOUND("file not found"),
+    ERR_INVALID_SOURCE_FILE("invalid source file"),
+    ERR_INVALID_SOURCE_VERSION("invalid source version"),
+    ERR_UNSUPPORTED_ENCODING("unsupported encoding"),
+    ERR_CANNOT_GENERATE_OUTPUT("cannot generate output, please see Velocity runtime log"),
+    ERR_CANNOT_FIND_UNIT("cannot find CompilationUnit for type "),
+    ERR_OUTPUT_LOCATION("-output location must be a directory or .zip file"),
+    ERR_CANNOT_OPEN_ZIP("cannot open zip"),
+    ERR_CANNOT_CLOSE_ZIP("cannot close zip"),
+    ERR_ERROR("error"); // used for customized error message.
+    private String errorMessage;
+
+    Error(String errorMessage) {
+      this.errorMessage = errorMessage;
+    }
+
+    public String getErrorMessage() {
+      return errorMessage;
+    }
+  }
 
   private int errorCount = 0;
   private List<String> errorMessages = new ArrayList<>();
@@ -61,14 +74,14 @@ public class Errors {
     this.errorMessages.clear();
   }
 
-  public void error(String message) {
+  public void error(Error error) {
     errorCount++;
-    errorMessages.add(message);
+    errorMessages.add(error.getErrorMessage());
   }
 
-  public void error(String message, String detail) {
+  public void error(Error error, String detailMessage) {
     errorCount++;
-    errorMessages.add(message + ": " + detail);
+    errorMessages.add(error.getErrorMessage() + ": " + detailMessage);
   }
 
   /**

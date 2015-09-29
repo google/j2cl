@@ -25,7 +25,7 @@ import java.util.List;
  * Replaces cast expression with corresponding cast method call.
  */
 public class NormalizeCastsVisitor extends AbstractRewriter {
-  public static void doNormalizeCasts(CompilationUnit compilationUnit) {
+  public static void applyTo(CompilationUnit compilationUnit) {
     new NormalizeCastsVisitor().normalizeCasts(compilationUnit);
   }
 

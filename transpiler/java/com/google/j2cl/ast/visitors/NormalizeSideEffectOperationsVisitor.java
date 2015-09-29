@@ -49,7 +49,7 @@ public class NormalizeSideEffectOperationsVisitor extends AbstractRewriter {
   private static final String NUMBERS_Q = "$q";
   private static final String NUMBERS_V = "$v";
 
-  public static void doNormalizeSideEffectOperations(CompilationUnit compilationUnit) {
+  public static void applyTo(CompilationUnit compilationUnit) {
     new NormalizeSideEffectOperationsVisitor().normalizeSideEffectOperations(compilationUnit);
   }
 

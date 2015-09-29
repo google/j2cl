@@ -30,9 +30,7 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
 import java.io.StringWriter;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystem;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -45,14 +43,8 @@ public abstract class JavaScriptGenerator extends AbstractSourceGenerator {
   private final JavaType javaType;
   protected final VelocityEngine velocityEngine;
 
-  public JavaScriptGenerator(
-      Errors errors,
-      FileSystem outputFileSystem,
-      String outputLocationPath,
-      Charset charset,
-      JavaType javaType,
-      VelocityEngine velocityEngine) {
-    super(errors, outputFileSystem, outputLocationPath, createRelativeFilePath(javaType), charset);
+  public JavaScriptGenerator(Errors errors, JavaType javaType, VelocityEngine velocityEngine) {
+    super(errors);
     this.javaType = javaType;
     this.velocityEngine = velocityEngine;
   }
@@ -67,7 +59,7 @@ public abstract class JavaScriptGenerator extends AbstractSourceGenerator {
             getTemplateFilePath(), StandardCharsets.UTF_8.name(), velocityContext, outputBuffer);
 
     if (!success) {
-      errors.error(Errors.ERR_CANNOT_GENERATE_OUTPUT);
+      errors.error(Errors.Error.ERR_CANNOT_GENERATE_OUTPUT);
       return "";
     }
     return outputBuffer.toString();
@@ -101,9 +93,5 @@ public abstract class JavaScriptGenerator extends AbstractSourceGenerator {
     context.put("nativeUtilTypeDecriptor", TypeDescriptors.NATIVE_UTIL_TYPE_DESCRIPTOR);
 
     return context;
-  }
-
-  private static String createRelativeFilePath(JavaType javaType) {
-    return TranspilerUtils.getOutputPath(javaType);
   }
 }

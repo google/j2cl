@@ -20,22 +20,13 @@ import com.google.j2cl.errors.Errors;
 
 import org.apache.velocity.app.VelocityEngine;
 
-import java.nio.charset.Charset;
-import java.nio.file.FileSystem;
-
 /**
  * Generates JavaScript source impl files.
  */
 public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
-  public JavaScriptImplGenerator(
-      Errors errors,
-      FileSystem outputFileSystem,
-      String outputLocationPath,
-      Charset charset,
-      JavaType javaType,
-      VelocityEngine velocityEngine) {
-    super(errors, outputFileSystem, outputLocationPath, charset, javaType, velocityEngine);
+  public JavaScriptImplGenerator(Errors errors, JavaType javaType, VelocityEngine velocityEngine) {
+    super(errors, javaType, velocityEngine);
   }
 
   @Override

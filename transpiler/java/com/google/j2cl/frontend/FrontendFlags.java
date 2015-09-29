@@ -113,7 +113,7 @@ public class FrontendFlags {
       String message = e.getMessage() + "\n";
       message += "Valid options: \n" + parser.printExample(OptionHandlerFilter.ALL);
       message += "\nuse -help for a list of possible options in more details";
-      errors.error(Errors.ERR_INVALID_FLAG, message);
+      errors.error(Errors.Error.ERR_INVALID_FLAG, message);
     }
   }
 }

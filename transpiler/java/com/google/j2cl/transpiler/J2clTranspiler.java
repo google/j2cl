@@ -32,10 +32,12 @@ import com.google.j2cl.frontend.FrontendOptions;
 import com.google.j2cl.frontend.JdtParser;
 import com.google.j2cl.generator.JavaScriptHeaderGenerator;
 import com.google.j2cl.generator.JavaScriptImplGenerator;
+import com.google.j2cl.generator.TranspilerUtils;
 
 import org.apache.velocity.app.VelocityEngine;
 
 import java.nio.charset.Charset;
+import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -45,11 +47,127 @@ import java.util.Set;
  * Translation tool for generating JavaScript source files from Java sources.
  */
 public class J2clTranspiler {
+  private final String[] args;
+  private final Errors errors = new Errors();
+  private FrontendOptions options;
+  private final VelocityEngine velocityEngine = VelocityUtil.createEngine();
+
+  private J2clTranspiler(String[] args) {
+    this.args = args;
+  }
+
+  /**
+   * Runs the entire J2CL pipeline.
+   */
+  private void run() {
+    loadOptions();
+    List<CompilationUnit> j2clUnits = convertUnits(createJdtUnits());
+    normalizeUnits(j2clUnits);
+    generateJsSources(j2clUnits);
+    generateSourceMaps(j2clUnits);
+  }
+
+  private void loadOptions() {
+    FrontendFlags flags = new FrontendFlags(errors);
+    flags.parse(args);
+    maybeExitGracefully();
+
+    options = new FrontendOptions(errors, flags);
+    maybeExitGracefully();
+  }
+
+  private List<CompilationUnit> convertUnits(
+      Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath) {
+    List<CompilationUnit> compilationUnits = CompilationUnitBuilder.build(jdtUnitsByFilePath);
+    maybeExitGracefully();
+    return compilationUnits;
+  }
+
+  private Map<String, org.eclipse.jdt.core.dom.CompilationUnit> createJdtUnits() {
+    JdtParser parser = new JdtParser(options, errors);
+    Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath =
+        parser.parseFiles(options.getSourceFiles());
+    maybeExitGracefully();
+    return jdtUnitsByFilePath;
+  }
+
+  private void normalizeUnits(@SuppressWarnings("unused") List<CompilationUnit> j2clUnits) {
+    for (CompilationUnit j2clUnit : j2clUnits) {
+      verifyUnit(j2clUnit);
+
+      // Class structure normalizations.
+      MakeExplicitEnumConstructionVisitor.applyTo(j2clUnit);
+      InsertInstanceInitCallsVisitor.applyTo(j2clUnit);
+      NormalizeNestedClassConstructorsVisitor.applyTo(j2clUnit);
+
+      // Statement/Expression normalizations
+      ControlStatementFormatter.applyTo(j2clUnit);
+      InsertImplicitCastsVisitor.applyTo(j2clUnit);
+      NormalizeCastsVisitor.applyTo(j2clUnit);
+      NormalizeSideEffectOperationsVisitor.applyTo(j2clUnit);
+      RemoveUnusedMultiExpressionReturnValues.applyTo(j2clUnit);
+
+      verifyUnit(j2clUnit);
+    }
+  }
+
+  private void verifyUnit(CompilationUnit j2clUnit) {
+    VerifyParamAndArgCountsVisitor.applyTo(j2clUnit);
+  }
+
+  private void generateJsSources(List<CompilationUnit> j2clCompilationUnits) {
+    // The parameters may be changed after the previous passes are implemented.
+    Charset charset = Charset.forName(options.getEncoding());
+
+    Set<String> superSourceFiles = new HashSet<>();
+    superSourceFiles.addAll(options.getSuperSourceFiles());
+
+    for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
+      if (superSourceFiles.contains(j2clCompilationUnit.getFilePath())) {
+        continue;
+      }
+
+      for (JavaType javaType : j2clCompilationUnit.getTypes()) {
+        JavaScriptImplGenerator jsImplGenerator =
+            new JavaScriptImplGenerator(errors, javaType, velocityEngine);
+        Path absolutePathForImpl =
+            TranspilerUtils.getAbsolutePath(
+                options.getOutputFileSystem(),
+                options.getOutput(),
+                TranspilerUtils.getRelativePath(javaType),
+                jsImplGenerator.getSuffix());
+        jsImplGenerator.writeToFile(absolutePathForImpl, charset);
+
+        JavaScriptHeaderGenerator jsHeaderGenerator =
+            new JavaScriptHeaderGenerator(errors, javaType, velocityEngine);
+        Path absolutePathForHeader =
+            TranspilerUtils.getAbsolutePath(
+                options.getOutputFileSystem(),
+                options.getOutput(),
+                TranspilerUtils.getRelativePath(javaType),
+                jsHeaderGenerator.getSuffix());
+        jsHeaderGenerator.writeToFile(absolutePathForHeader, charset);
+      }
+    }
+
+    options.maybeCloseFileSystem();
+  }
+
+  private void generateSourceMaps(@SuppressWarnings("unused") List<CompilationUnit> j2clUnits) {
+    // TODO: implement.
+  }
+
+  private void maybeExitGracefully() {
+    if (errors.errorCount() > 0) {
+      errors.report();
+      throw new ExitGracefullyException();
+    }
+  }
 
   /**
    * Indicates that errors were found and reported and transpiler execution should now end silently.
-   * <p>
-   * Is preferred over System.exit() since it is caught here and will not end an external caller.
+   *
+   * <p>Is preferred over System.exit() since it is caught here and will not end an external caller.
    */
   private class ExitGracefullyException extends RuntimeException {}
 
@@ -64,123 +182,5 @@ public class J2clTranspiler {
       // Error already reported. End execution now and with an exit code that indicates failure.
       System.exit(1);
     }
-  }
-
-  private List<CompilationUnit> convertUnits(
-      Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath) {
-    List<CompilationUnit> compilationUnits = CompilationUnitBuilder.build(jdtUnitsByFilePath);
-    maybeExitGracefully();
-    return compilationUnits;
-  }
-
-  private final String[] args;
-  private final Errors errors = new Errors();
-  private FrontendOptions options;
-  private final VelocityEngine velocityEngine = VelocityUtil.createEngine();
-
-  private J2clTranspiler(String[] args) {
-    this.args = args;
-  }
-
-  private Map<String, org.eclipse.jdt.core.dom.CompilationUnit> createJdtUnits() {
-    JdtParser parser = new JdtParser(options, errors);
-    Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath =
-        parser.parseFiles(options.getSourceFiles());
-    maybeExitGracefully();
-    return jdtUnitsByFilePath;
-  }
-
-  private void generateJsSources(List<CompilationUnit> j2clCompilationUnits) {
-    // The parameters may be changed after the previous passes are implemented.
-    Charset charset = Charset.forName(options.getEncoding());
-
-    Set<String> superSourceFiles = new HashSet<>();
-    superSourceFiles.addAll(options.getSuperSourceFiles());
-
-    for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
-      // Don't output anything for super sourced files.
-      if (superSourceFiles.contains(j2clCompilationUnit.getFilePath())) {
-        continue;
-      }
-
-      for (JavaType javaType : j2clCompilationUnit.getTypes()) {
-        JavaScriptImplGenerator jsImplGenerator =
-            new JavaScriptImplGenerator(
-                errors,
-                options.getOutputFileSystem(),
-                options.getOutput(),
-                charset,
-                javaType,
-                velocityEngine);
-        jsImplGenerator.writeToFile();
-
-        JavaScriptHeaderGenerator jsHeaderGenerator =
-            new JavaScriptHeaderGenerator(
-                errors,
-                options.getOutputFileSystem(),
-                options.getOutput(),
-                charset,
-                javaType,
-                velocityEngine);
-        jsHeaderGenerator.writeToFile();
-      }
-    }
-
-    options.maybeCloseFileSystem();
-  }
-
-  private void generateSourceMaps(@SuppressWarnings("unused") List<CompilationUnit> j2clUnits) {
-    // TODO: implement.
-  }
-
-  private void loadOptions() {
-    FrontendFlags flags = new FrontendFlags(errors);
-    flags.parse(args);
-    maybeExitGracefully();
-
-    options = new FrontendOptions(errors, flags);
-    maybeExitGracefully();
-  }
-
-  private void maybeExitGracefully() {
-    if (errors.errorCount() > 0) {
-      errors.report();
-      throw new ExitGracefullyException();
-    }
-  }
-
-  private void normalizeUnits(List<CompilationUnit> j2clUnits) {
-    for (CompilationUnit j2clUnit : j2clUnits) {
-      verifyUnit(j2clUnit);
-
-      // Class structure normalizations.
-      MakeExplicitEnumConstructionVisitor.doMakeEnumConstructionExplicit(j2clUnit);
-      InsertInstanceInitCallsVisitor.doInsertInstanceInitCall(j2clUnit);
-      NormalizeNestedClassConstructorsVisitor.doNormalizeNestedClassConstructors(j2clUnit);
-
-      // Statement/Expression normalizations
-      ControlStatementFormatter.doFormatControlStatements(j2clUnit);
-      InsertImplicitCastsVisitor.doInsertImplicitCasts(j2clUnit);
-      NormalizeCastsVisitor.doNormalizeCasts(j2clUnit);
-      NormalizeSideEffectOperationsVisitor.doNormalizeSideEffectOperations(j2clUnit);
-      RemoveUnusedMultiExpressionReturnValues.doRemoveUnused(j2clUnit);
-
-      verifyUnit(j2clUnit);
-    }
-  }
-
-  private void verifyUnit(CompilationUnit j2clUnit) {
-     VerifyParamAndArgCountsVisitor.doVerifyParamAndArgCountsVisitor(j2clUnit);
-  }
-
-  /**
-   * Runs the entire J2CL pipeline.
-   */
-  private void run() {
-    loadOptions();
-    List<CompilationUnit> j2clUnits = convertUnits(createJdtUnits());
-    normalizeUnits(j2clUnits);
-    generateJsSources(j2clUnits);
-    generateSourceMaps(j2clUnits);
   }
 }

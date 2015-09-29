@@ -30,7 +30,7 @@ import java.util.Collections;
  * Makes sure that body of conditional are always blocks (except in the else if case).
  */
 public class ControlStatementFormatter extends AbstractRewriter {
-  public static void doFormatControlStatements(CompilationUnit compilationUnit) {
+  public static void applyTo(CompilationUnit compilationUnit) {
     new ControlStatementFormatter().formatControlStatements(compilationUnit);
   }
 

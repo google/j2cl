@@ -107,6 +107,7 @@ public class JdtParser {
     for (IProblem problem : unit.getProblems()) {
       if (problem.isError()) {
         errors.error(
+            Errors.Error.ERR_ERROR,
             String.format(
                 "%s:%s: %s", filename, problem.getSourceLineNumber(), problem.getMessage()));
         hasErrors = true;

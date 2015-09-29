@@ -38,7 +38,7 @@ import java.util.List;
  */
 public class RemoveUnusedMultiExpressionReturnValues extends AbstractRewriter {
 
-  public static void doRemoveUnused(CompilationUnit compilationUnit) {
+  public static void applyTo(CompilationUnit compilationUnit) {
     new RemoveUnusedMultiExpressionReturnValues().removeUnused(compilationUnit);
   }
 

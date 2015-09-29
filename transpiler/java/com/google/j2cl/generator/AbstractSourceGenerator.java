@@ -19,7 +19,6 @@ import com.google.j2cl.errors.Errors;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.file.FileSystem;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -29,36 +28,19 @@ import java.nio.file.Path;
  */
 public abstract class AbstractSourceGenerator {
   protected final Errors errors;
-  protected final FileSystem outputFileSystem;
-  protected final String relativeFilePath;
-  protected final String outputLocationPath;
-  protected final Charset charset;
 
-  public AbstractSourceGenerator(
-      Errors errors,
-      FileSystem outputFileSystem,
-      String outputLocationPath,
-      String relativeFilePath,
-      Charset charset) {
+  public AbstractSourceGenerator(Errors errors) {
     this.errors = errors;
-    this.outputFileSystem = outputFileSystem;
-    this.outputLocationPath = outputLocationPath;
-    this.relativeFilePath = relativeFilePath;
-    this.charset = charset;
   }
 
-  public void writeToFile() {
+  public void writeToFile(Path outputPath, Charset charset) {
     try {
-      Path absoluteOutputPath =
-          outputLocationPath != null
-              ? outputFileSystem.getPath(outputLocationPath, relativeFilePath + getSuffix())
-              : outputFileSystem.getPath(relativeFilePath + getSuffix());
       // Write using the provided fileSystem (which might be the regular file system or might be a
       // zip file.)
-      Files.createDirectories(absoluteOutputPath.getParent());
-      Files.write(absoluteOutputPath, toSource().getBytes(charset));
+      Files.createDirectories(outputPath.getParent());
+      Files.write(outputPath, toSource().getBytes(charset));
     } catch (IOException e) {
-      errors.error(e.getMessage());
+      errors.error(Errors.Error.ERR_ERROR, e.getMessage());
       errors.maybeReportAndExit();
     }
   }

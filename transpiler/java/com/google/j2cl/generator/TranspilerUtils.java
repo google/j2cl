@@ -30,6 +30,8 @@ import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 
+import java.nio.file.FileSystem;
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -47,11 +49,24 @@ public class TranspilerUtils {
   /**
    * Returns the relative output path for a given type.
    */
-  public static String getOutputPath(JavaType javaType) {
+  public static String getRelativePath(JavaType javaType) {
     TypeDescriptor descriptor = javaType.getDescriptor();
     String typeName = descriptor.getClassName();
     String packageName = descriptor.getPackageName();
     return packageName.replace('.', '/') + "/" + typeName;
+  }
+
+  /**
+   * Returns the absolute path for the given output FileSystem and output paths.
+   */
+  public static Path getAbsolutePath(
+      FileSystem outputFileSystem,
+      String outputLocationPath,
+      String relativeFilePath,
+      String suffix) {
+    return outputLocationPath != null
+        ? outputFileSystem.getPath(outputLocationPath, relativeFilePath + suffix)
+        : outputFileSystem.getPath(relativeFilePath + suffix);
   }
 
   public static String getParameterList(

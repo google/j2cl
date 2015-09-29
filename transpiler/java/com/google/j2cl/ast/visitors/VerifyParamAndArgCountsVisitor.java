@@ -19,7 +19,7 @@ import java.util.List;
  * method declaration parameter counts match the method descriptor.
  */
 public class VerifyParamAndArgCountsVisitor extends AbstractVisitor {
-  public static void doVerifyParamAndArgCountsVisitor(CompilationUnit compilationUnit) {
+  public static void applyTo(CompilationUnit compilationUnit) {
     new VerifyParamAndArgCountsVisitor().verifyParamAndArgCountsVisitor(compilationUnit);
   }
 

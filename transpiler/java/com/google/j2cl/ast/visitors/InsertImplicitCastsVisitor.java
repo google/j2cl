@@ -31,7 +31,7 @@ public class InsertImplicitCastsVisitor extends AbstractRewriter {
 
   private static final TypeDescriptor LONG = TypeDescriptors.get().primitiveLong;
 
-  public static void doInsertImplicitCasts(CompilationUnit compilationUnit) {
+  public static void applyTo(CompilationUnit compilationUnit) {
     new InsertImplicitCastsVisitor().insertImplicitCasts(compilationUnit);
   }
 
