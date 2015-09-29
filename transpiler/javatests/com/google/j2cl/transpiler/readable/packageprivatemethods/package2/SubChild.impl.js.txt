@@ -83,8 +83,8 @@ class SubChild extends Child {
    */
   static $getClass() {
     SubChild.$clinit();
-    if (!SubChild.$classSubChild) {
-      SubChild.$classSubChild = Class.$createForClass(
+    if (!SubChild.$classSubChild_) {
+      SubChild.$classSubChild_ = Class.$createForClass(
           $Util.$generateId('SubChild'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubChild'),
@@ -92,7 +92,7 @@ class SubChild extends Child {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubChild'));
     }
-    return SubChild.$classSubChild;
+    return SubChild.$classSubChild_;
   }
 
   /**
@@ -107,6 +107,13 @@ class SubChild extends Child {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+SubChild.$classSubChild_ = null;
 
 
 

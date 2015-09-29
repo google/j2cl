@@ -89,8 +89,8 @@ class LambdaInSubClass extends Parent {
    */
   static $getClass() {
     LambdaInSubClass.$clinit();
-    if (!LambdaInSubClass.$classLambdaInSubClass) {
-      LambdaInSubClass.$classLambdaInSubClass = Class.$createForClass(
+    if (!LambdaInSubClass.$classLambdaInSubClass_) {
+      LambdaInSubClass.$classLambdaInSubClass_ = Class.$createForClass(
           $Util.$generateId('LambdaInSubClass'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass'),
@@ -98,7 +98,7 @@ class LambdaInSubClass extends Parent {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass'));
     }
-    return LambdaInSubClass.$classLambdaInSubClass;
+    return LambdaInSubClass.$classLambdaInSubClass_;
   }
 
   /**
@@ -116,6 +116,13 @@ class LambdaInSubClass extends Parent {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+LambdaInSubClass.$classLambdaInSubClass_ = null;
 
 
 

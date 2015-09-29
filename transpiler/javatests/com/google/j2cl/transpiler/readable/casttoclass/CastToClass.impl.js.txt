@@ -84,8 +84,8 @@ class CastToClass extends Object {
    */
   static $getClass() {
     CastToClass.$clinit();
-    if (!CastToClass.$classCastToClass) {
-      CastToClass.$classCastToClass = Class.$createForClass(
+    if (!CastToClass.$classCastToClass_) {
+      CastToClass.$classCastToClass_ = Class.$createForClass(
           $Util.$generateId('CastToClass'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.casttoclass.CastToClass'),
@@ -93,7 +93,7 @@ class CastToClass extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.casttoclass.CastToClass'));
     }
-    return CastToClass.$classCastToClass;
+    return CastToClass.$classCastToClass_;
   }
 
   /**
@@ -108,6 +108,13 @@ class CastToClass extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+CastToClass.$classCastToClass_ = null;
 
 
 

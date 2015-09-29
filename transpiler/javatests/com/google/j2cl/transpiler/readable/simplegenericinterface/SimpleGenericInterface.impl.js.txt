@@ -69,9 +69,9 @@ class SimpleGenericInterface {
    */
   static $getClass() {
     SimpleGenericInterface.$clinit();
-    if (!SimpleGenericInterface.$classSimpleGenericInterface) {
+    if (!SimpleGenericInterface.$classSimpleGenericInterface_) {
       SimpleGenericInterface
-          .$classSimpleGenericInterface = Class.$createForInterface(
+          .$classSimpleGenericInterface_ = Class.$createForInterface(
           $Util.$generateId('SimpleGenericInterface'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simplegenericinterface.SimpleGenericInterface'),
@@ -79,7 +79,7 @@ class SimpleGenericInterface {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simplegenericinterface.SimpleGenericInterface'));
     }
-    return SimpleGenericInterface.$classSimpleGenericInterface;
+    return SimpleGenericInterface.$classSimpleGenericInterface_;
   }
 
   /**
@@ -90,6 +90,13 @@ class SimpleGenericInterface {
   static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+SimpleGenericInterface.$classSimpleGenericInterface_ = null;
 
 
 SimpleGenericInterface.$markImplementor(

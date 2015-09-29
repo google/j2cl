@@ -115,8 +115,8 @@ class SwitchStatement extends Object {
    */
   static $getClass() {
     SwitchStatement.$clinit();
-    if (!SwitchStatement.$classSwitchStatement) {
-      SwitchStatement.$classSwitchStatement = Class.$createForClass(
+    if (!SwitchStatement.$classSwitchStatement_) {
+      SwitchStatement.$classSwitchStatement_ = Class.$createForClass(
           $Util.$generateId('SwitchStatement'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement'),
@@ -124,7 +124,7 @@ class SwitchStatement extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.switchstatement.SwitchStatement'));
     }
-    return SwitchStatement.$classSwitchStatement;
+    return SwitchStatement.$classSwitchStatement_;
   }
 
   /**
@@ -140,6 +140,13 @@ class SwitchStatement extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+SwitchStatement.$classSwitchStatement_ = null;
 
 
 

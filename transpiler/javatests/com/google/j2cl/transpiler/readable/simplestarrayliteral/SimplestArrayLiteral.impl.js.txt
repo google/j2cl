@@ -83,8 +83,8 @@ class SimplestArrayLiteral extends Object {
    */
   static $getClass() {
     SimplestArrayLiteral.$clinit();
-    if (!SimplestArrayLiteral.$classSimplestArrayLiteral) {
-      SimplestArrayLiteral.$classSimplestArrayLiteral = Class.$createForClass(
+    if (!SimplestArrayLiteral.$classSimplestArrayLiteral_) {
+      SimplestArrayLiteral.$classSimplestArrayLiteral_ = Class.$createForClass(
           $Util.$generateId('SimplestArrayLiteral'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simplestarrayliteral.SimplestArrayLiteral'),
@@ -92,7 +92,7 @@ class SimplestArrayLiteral extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simplestarrayliteral.SimplestArrayLiteral'));
     }
-    return SimplestArrayLiteral.$classSimplestArrayLiteral;
+    return SimplestArrayLiteral.$classSimplestArrayLiteral_;
   }
 
   /**
@@ -107,6 +107,13 @@ class SimplestArrayLiteral extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+SimplestArrayLiteral.$classSimplestArrayLiteral_ = null;
 
 
 

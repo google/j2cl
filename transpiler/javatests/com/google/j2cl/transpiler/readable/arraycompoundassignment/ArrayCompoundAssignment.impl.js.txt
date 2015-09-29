@@ -97,9 +97,9 @@ class ArrayCompoundAssignment extends Object {
    */
   static $getClass() {
     ArrayCompoundAssignment.$clinit();
-    if (!ArrayCompoundAssignment.$classArrayCompoundAssignment) {
+    if (!ArrayCompoundAssignment.$classArrayCompoundAssignment_) {
       ArrayCompoundAssignment
-          .$classArrayCompoundAssignment = Class.$createForClass(
+          .$classArrayCompoundAssignment_ = Class.$createForClass(
           $Util.$generateId('ArrayCompoundAssignment'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.arraycompoundassignment.ArrayCompoundAssignment'),
@@ -107,7 +107,7 @@ class ArrayCompoundAssignment extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.arraycompoundassignment.ArrayCompoundAssignment'));
     }
-    return ArrayCompoundAssignment.$classArrayCompoundAssignment;
+    return ArrayCompoundAssignment.$classArrayCompoundAssignment_;
   }
 
   /**
@@ -123,6 +123,13 @@ class ArrayCompoundAssignment extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+ArrayCompoundAssignment.$classArrayCompoundAssignment_ = null;
 
 
 

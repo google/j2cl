@@ -132,9 +132,9 @@ class InnerClassInitOrder$OuterRefFromThisCtorCall extends
   static $getClass() {
     InnerClassInitOrder$OuterRefFromThisCtorCall.$clinit();
     if (!InnerClassInitOrder$OuterRefFromThisCtorCall
-             .$classInnerClassInitOrder$OuterRefFromThisCtorCall) {
+             .$classInnerClassInitOrder$OuterRefFromThisCtorCall_) {
       InnerClassInitOrder$OuterRefFromThisCtorCall
-          .$classInnerClassInitOrder$OuterRefFromThisCtorCall = Class.$createForClass(
+          .$classInnerClassInitOrder$OuterRefFromThisCtorCall_ = Class.$createForClass(
           $Util.$generateId('OuterRefFromThisCtorCall'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromThisCtorCall'),
@@ -143,7 +143,7 @@ class InnerClassInitOrder$OuterRefFromThisCtorCall extends
               'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall'));
     }
     return InnerClassInitOrder$OuterRefFromThisCtorCall
-        .$classInnerClassInitOrder$OuterRefFromThisCtorCall;
+        .$classInnerClassInitOrder$OuterRefFromThisCtorCall_;
   }
 
   /**
@@ -162,6 +162,14 @@ class InnerClassInitOrder$OuterRefFromThisCtorCall extends
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+InnerClassInitOrder$OuterRefFromThisCtorCall
+    .$classInnerClassInitOrder$OuterRefFromThisCtorCall_ = null;
 
 
 

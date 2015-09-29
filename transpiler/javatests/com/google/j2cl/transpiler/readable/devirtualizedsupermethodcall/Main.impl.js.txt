@@ -95,8 +95,8 @@ class Main extends Object {
    */
   static $getClass() {
     Main.$clinit();
-    if (!Main.$classMain) {
-      Main.$classMain = Class.$createForClass(
+    if (!Main.$classMain_) {
+      Main.$classMain_ = Class.$createForClass(
           $Util.$generateId('Main'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.Main'),
@@ -104,7 +104,7 @@ class Main extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.Main'));
     }
-    return Main.$classMain;
+    return Main.$classMain_;
   }
 
   /**
@@ -124,6 +124,13 @@ class Main extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Main.$classMain_ = null;
 
 
 

@@ -83,8 +83,8 @@ class BreakStatement extends Object {
    */
   static $getClass() {
     BreakStatement.$clinit();
-    if (!BreakStatement.$classBreakStatement) {
-      BreakStatement.$classBreakStatement = Class.$createForClass(
+    if (!BreakStatement.$classBreakStatement_) {
+      BreakStatement.$classBreakStatement_ = Class.$createForClass(
           $Util.$generateId('BreakStatement'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.breakstatement.BreakStatement'),
@@ -92,7 +92,7 @@ class BreakStatement extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.breakstatement.BreakStatement'));
     }
-    return BreakStatement.$classBreakStatement;
+    return BreakStatement.$classBreakStatement_;
   }
 
   /**
@@ -106,6 +106,13 @@ class BreakStatement extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+BreakStatement.$classBreakStatement_ = null;
 
 
 

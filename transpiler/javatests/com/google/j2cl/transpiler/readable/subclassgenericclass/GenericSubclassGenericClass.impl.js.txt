@@ -81,9 +81,9 @@ class GenericSubclassGenericClass extends GenericClass {
    */
   static $getClass() {
     GenericSubclassGenericClass.$clinit();
-    if (!GenericSubclassGenericClass.$classGenericSubclassGenericClass) {
+    if (!GenericSubclassGenericClass.$classGenericSubclassGenericClass_) {
       GenericSubclassGenericClass
-          .$classGenericSubclassGenericClass = Class.$createForClass(
+          .$classGenericSubclassGenericClass_ = Class.$createForClass(
           $Util.$generateId('GenericSubclassGenericClass'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.subclassgenericclass.GenericSubclassGenericClass'),
@@ -91,7 +91,7 @@ class GenericSubclassGenericClass extends GenericClass {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.subclassgenericclass.GenericSubclassGenericClass'));
     }
-    return GenericSubclassGenericClass.$classGenericSubclassGenericClass;
+    return GenericSubclassGenericClass.$classGenericSubclassGenericClass_;
   }
 
   /**
@@ -105,6 +105,13 @@ class GenericSubclassGenericClass extends GenericClass {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+GenericSubclassGenericClass.$classGenericSubclassGenericClass_ = null;
 
 
 

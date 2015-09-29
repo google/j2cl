@@ -83,8 +83,8 @@ class CastToArray extends Object {
    */
   static $getClass() {
     CastToArray.$clinit();
-    if (!CastToArray.$classCastToArray) {
-      CastToArray.$classCastToArray = Class.$createForClass(
+    if (!CastToArray.$classCastToArray_) {
+      CastToArray.$classCastToArray_ = Class.$createForClass(
           $Util.$generateId('CastToArray'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.casttoarray.CastToArray'),
@@ -92,7 +92,7 @@ class CastToArray extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.casttoarray.CastToArray'));
     }
-    return CastToArray.$classCastToArray;
+    return CastToArray.$classCastToArray_;
   }
 
   /**
@@ -107,6 +107,13 @@ class CastToArray extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+CastToArray.$classCastToArray_ = null;
 
 
 

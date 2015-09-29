@@ -93,8 +93,8 @@ class GrandParent extends Object {
    */
   static $getClass() {
     GrandParent.$clinit();
-    if (!GrandParent.$classGrandParent) {
-      GrandParent.$classGrandParent = Class.$createForClass(
+    if (!GrandParent.$classGrandParent_) {
+      GrandParent.$classGrandParent_ = Class.$createForClass(
           $Util.$generateId('GrandParent'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.supermethodcall.GrandParent'),
@@ -102,7 +102,7 @@ class GrandParent extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.supermethodcall.GrandParent'));
     }
-    return GrandParent.$classGrandParent;
+    return GrandParent.$classGrandParent_;
   }
 
   /**
@@ -117,6 +117,13 @@ class GrandParent extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+GrandParent.$classGrandParent_ = null;
 
 
 

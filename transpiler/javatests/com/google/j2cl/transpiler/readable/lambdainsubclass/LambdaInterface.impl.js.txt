@@ -69,8 +69,8 @@ class LambdaInterface {
    */
   static $getClass() {
     LambdaInterface.$clinit();
-    if (!LambdaInterface.$classLambdaInterface) {
-      LambdaInterface.$classLambdaInterface = Class.$createForInterface(
+    if (!LambdaInterface.$classLambdaInterface_) {
+      LambdaInterface.$classLambdaInterface_ = Class.$createForInterface(
           $Util.$generateId('LambdaInterface'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInterface'),
@@ -78,7 +78,7 @@ class LambdaInterface {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInterface'));
     }
-    return LambdaInterface.$classLambdaInterface;
+    return LambdaInterface.$classLambdaInterface_;
   }
 
   /**
@@ -92,6 +92,13 @@ class LambdaInterface {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+LambdaInterface.$classLambdaInterface_ = null;
 
 
 LambdaInterface.$markImplementor(/** @type {Function} */ (LambdaInterface));

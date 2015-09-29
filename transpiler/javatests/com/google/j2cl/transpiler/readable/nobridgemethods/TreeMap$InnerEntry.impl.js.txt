@@ -84,8 +84,8 @@ class TreeMap$InnerEntry extends Object {
    */
   static $getClass() {
     TreeMap$InnerEntry.$clinit();
-    if (!TreeMap$InnerEntry.$classTreeMap$InnerEntry) {
-      TreeMap$InnerEntry.$classTreeMap$InnerEntry = Class.$createForClass(
+    if (!TreeMap$InnerEntry.$classTreeMap$InnerEntry_) {
+      TreeMap$InnerEntry.$classTreeMap$InnerEntry_ = Class.$createForClass(
           $Util.$generateId('InnerEntry'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap$InnerEntry'),
@@ -93,7 +93,7 @@ class TreeMap$InnerEntry extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.InnerEntry'));
     }
-    return TreeMap$InnerEntry.$classTreeMap$InnerEntry;
+    return TreeMap$InnerEntry.$classTreeMap$InnerEntry_;
   }
 
   /**
@@ -109,6 +109,13 @@ class TreeMap$InnerEntry extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+TreeMap$InnerEntry.$classTreeMap$InnerEntry_ = null;
 
 
 Entry.$markImplementor(TreeMap$InnerEntry);

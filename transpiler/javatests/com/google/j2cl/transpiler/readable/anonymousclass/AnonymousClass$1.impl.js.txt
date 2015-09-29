@@ -102,8 +102,8 @@ class AnonymousClass$1 extends SomeClass {
    */
   static $getClass() {
     AnonymousClass$1.$clinit();
-    if (!AnonymousClass$1.$classAnonymousClass$1) {
-      AnonymousClass$1.$classAnonymousClass$1 = Class.$createForClass(
+    if (!AnonymousClass$1.$classAnonymousClass$1_) {
+      AnonymousClass$1.$classAnonymousClass$1_ = Class.$createForClass(
           $Util.$generateId('1'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass$1'),
@@ -111,7 +111,7 @@ class AnonymousClass$1 extends SomeClass {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass.1'));
     }
-    return AnonymousClass$1.$classAnonymousClass$1;
+    return AnonymousClass$1.$classAnonymousClass$1_;
   }
 
   /**
@@ -129,6 +129,13 @@ class AnonymousClass$1 extends SomeClass {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+AnonymousClass$1.$classAnonymousClass$1_ = null;
 
 
 

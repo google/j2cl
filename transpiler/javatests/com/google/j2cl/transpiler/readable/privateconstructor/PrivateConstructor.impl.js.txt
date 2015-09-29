@@ -76,8 +76,8 @@ class PrivateConstructor extends Object {
    */
   static $getClass() {
     PrivateConstructor.$clinit();
-    if (!PrivateConstructor.$classPrivateConstructor) {
-      PrivateConstructor.$classPrivateConstructor = Class.$createForClass(
+    if (!PrivateConstructor.$classPrivateConstructor_) {
+      PrivateConstructor.$classPrivateConstructor_ = Class.$createForClass(
           $Util.$generateId('PrivateConstructor'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor'),
@@ -85,7 +85,7 @@ class PrivateConstructor extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor'));
     }
-    return PrivateConstructor.$classPrivateConstructor;
+    return PrivateConstructor.$classPrivateConstructor_;
   }
 
   /**
@@ -99,6 +99,13 @@ class PrivateConstructor extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+PrivateConstructor.$classPrivateConstructor_ = null;
 
 
 

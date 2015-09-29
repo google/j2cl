@@ -97,8 +97,8 @@ class NestedTryCatch extends Object {
    */
   static $getClass() {
     NestedTryCatch.$clinit();
-    if (!NestedTryCatch.$classNestedTryCatch) {
-      NestedTryCatch.$classNestedTryCatch = Class.$createForClass(
+    if (!NestedTryCatch.$classNestedTryCatch_) {
+      NestedTryCatch.$classNestedTryCatch_ = Class.$createForClass(
           $Util.$generateId('NestedTryCatch'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch'),
@@ -106,7 +106,7 @@ class NestedTryCatch extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch'));
     }
-    return NestedTryCatch.$classNestedTryCatch;
+    return NestedTryCatch.$classNestedTryCatch_;
   }
 
   /**
@@ -121,6 +121,13 @@ class NestedTryCatch extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+NestedTryCatch.$classNestedTryCatch_ = null;
 
 
 

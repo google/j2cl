@@ -121,9 +121,9 @@ class InnerClassInitOrder$ESInnerSubclass extends
   static $getClass() {
     InnerClassInitOrder$ESInnerSubclass.$clinit();
     if (!InnerClassInitOrder$ESInnerSubclass
-             .$classInnerClassInitOrder$ESInnerSubclass) {
+             .$classInnerClassInitOrder$ESInnerSubclass_) {
       InnerClassInitOrder$ESInnerSubclass
-          .$classInnerClassInitOrder$ESInnerSubclass = Class.$createForClass(
+          .$classInnerClassInitOrder$ESInnerSubclass_ = Class.$createForClass(
           $Util.$generateId('ESInnerSubclass'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESInnerSubclass'),
@@ -132,7 +132,7 @@ class InnerClassInitOrder$ESInnerSubclass extends
               'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass'));
     }
     return InnerClassInitOrder$ESInnerSubclass
-        .$classInnerClassInitOrder$ESInnerSubclass;
+        .$classInnerClassInitOrder$ESInnerSubclass_;
   }
 
   /**
@@ -151,6 +151,14 @@ class InnerClassInitOrder$ESInnerSubclass extends
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+InnerClassInitOrder$ESInnerSubclass.$classInnerClassInitOrder$ESInnerSubclass_ =
+    null;
 
 
 

@@ -189,8 +189,8 @@ class SimpleLambda extends Object {
    */
   static $getClass() {
     SimpleLambda.$clinit();
-    if (!SimpleLambda.$classSimpleLambda) {
-      SimpleLambda.$classSimpleLambda = Class.$createForClass(
+    if (!SimpleLambda.$classSimpleLambda_) {
+      SimpleLambda.$classSimpleLambda_ = Class.$createForClass(
           $Util.$generateId('SimpleLambda'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda'),
@@ -198,7 +198,7 @@ class SimpleLambda extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda'));
     }
-    return SimpleLambda.$classSimpleLambda;
+    return SimpleLambda.$classSimpleLambda_;
   }
 
   /**
@@ -227,6 +227,13 @@ class SimpleLambda extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+SimpleLambda.$classSimpleLambda_ = null;
 
 
 

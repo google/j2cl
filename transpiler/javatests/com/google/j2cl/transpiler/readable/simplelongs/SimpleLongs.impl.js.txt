@@ -160,8 +160,8 @@ class SimpleLongs extends Object {
    */
   static $getClass() {
     SimpleLongs.$clinit();
-    if (!SimpleLongs.$classSimpleLongs) {
-      SimpleLongs.$classSimpleLongs = Class.$createForClass(
+    if (!SimpleLongs.$classSimpleLongs_) {
+      SimpleLongs.$classSimpleLongs_ = Class.$createForClass(
           $Util.$generateId('SimpleLongs'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs'),
@@ -169,7 +169,7 @@ class SimpleLongs extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs'));
     }
-    return SimpleLongs.$classSimpleLongs;
+    return SimpleLongs.$classSimpleLongs_;
   }
 
   /**
@@ -187,6 +187,13 @@ class SimpleLongs extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+SimpleLongs.$classSimpleLongs_ = null;
 
 
 

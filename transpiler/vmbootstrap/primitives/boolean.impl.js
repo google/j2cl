@@ -48,10 +48,10 @@ class $boolean {
    */
   static $getClass() {
     $boolean.$clinit();
-    if (!$boolean.$classBoolean) {
-      $boolean.$classBoolean = Class.$createForPrimitive('boolean');
+    if (!$boolean.$classBoolean_) {
+      $boolean.$classBoolean_ = Class.$createForPrimitive('boolean');
     }
-    return $boolean.$classBoolean;
+    return $boolean.$classBoolean_;
   }
 
   /**
@@ -63,6 +63,13 @@ class $boolean {
     Class = goog.module.get('gen.java.lang.Class$impl');
   }
 };
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+$boolean.$classBoolean_ = null;
 
 
 /**

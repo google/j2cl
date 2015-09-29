@@ -108,8 +108,8 @@ class SuperParent extends Object {
    */
   static $getClass() {
     SuperParent.$clinit();
-    if (!SuperParent.$classSuperParent) {
-      SuperParent.$classSuperParent = Class.$createForClass(
+    if (!SuperParent.$classSuperParent_) {
+      SuperParent.$classSuperParent_ = Class.$createForClass(
           $Util.$generateId('SuperParent'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.packageprivatemethods.package1.SuperParent'),
@@ -117,7 +117,7 @@ class SuperParent extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.packageprivatemethods.package1.SuperParent'));
     }
-    return SuperParent.$classSuperParent;
+    return SuperParent.$classSuperParent_;
   }
 
   /**
@@ -132,6 +132,13 @@ class SuperParent extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+SuperParent.$classSuperParent_ = null;
 
 
 

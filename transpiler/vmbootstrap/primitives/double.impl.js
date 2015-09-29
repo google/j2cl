@@ -48,10 +48,10 @@ class $double {
    */
   static $getClass() {
     $double.$clinit();
-    if (!$double.$classDouble) {
-      $double.$classDouble = Class.$createForPrimitive('double');
+    if (!$double.$classDouble_) {
+      $double.$classDouble_ = Class.$createForPrimitive('double');
     }
-    return $double.$classDouble;
+    return $double.$classDouble_;
   }
 
   /**
@@ -63,6 +63,13 @@ class $double {
     Class = goog.module.get('gen.java.lang.Class$impl');
   }
 };
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+$double.$classDouble_ = null;
 
 
 /**

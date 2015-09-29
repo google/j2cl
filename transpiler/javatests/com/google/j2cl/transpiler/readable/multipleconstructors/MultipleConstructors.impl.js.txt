@@ -162,8 +162,8 @@ class MultipleConstructors extends Object {
    */
   static $getClass() {
     MultipleConstructors.$clinit();
-    if (!MultipleConstructors.$classMultipleConstructors) {
-      MultipleConstructors.$classMultipleConstructors = Class.$createForClass(
+    if (!MultipleConstructors.$classMultipleConstructors_) {
+      MultipleConstructors.$classMultipleConstructors_ = Class.$createForClass(
           $Util.$generateId('MultipleConstructors'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors'),
@@ -171,7 +171,7 @@ class MultipleConstructors extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors'));
     }
-    return MultipleConstructors.$classMultipleConstructors;
+    return MultipleConstructors.$classMultipleConstructors_;
   }
 
   /**
@@ -187,6 +187,13 @@ class MultipleConstructors extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+MultipleConstructors.$classMultipleConstructors_ = null;
 
 
 

@@ -88,8 +88,8 @@ class ParentOuter extends Object {
    */
   static $getClass() {
     ParentOuter.$clinit();
-    if (!ParentOuter.$classParentOuter) {
-      ParentOuter.$classParentOuter = Class.$createForClass(
+    if (!ParentOuter.$classParentOuter_) {
+      ParentOuter.$classParentOuter_ = Class.$createForClass(
           $Util.$generateId('ParentOuter'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.innerclassinheritance.ParentOuter'),
@@ -97,7 +97,7 @@ class ParentOuter extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.innerclassinheritance.ParentOuter'));
     }
-    return ParentOuter.$classParentOuter;
+    return ParentOuter.$classParentOuter_;
   }
 
   /**
@@ -112,6 +112,13 @@ class ParentOuter extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+ParentOuter.$classParentOuter_ = null;
 
 
 

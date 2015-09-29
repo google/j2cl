@@ -79,8 +79,8 @@ class CharSet$1 extends TreeMap {
    */
   static $getClass() {
     CharSet$1.$clinit();
-    if (!CharSet$1.$classCharSet$1) {
-      CharSet$1.$classCharSet$1 = Class.$createForClass(
+    if (!CharSet$1.$classCharSet$1_) {
+      CharSet$1.$classCharSet$1_ = Class.$createForClass(
           $Util.$generateId('1'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.nobridgemethods.CharSet$1'),
@@ -88,7 +88,7 @@ class CharSet$1 extends TreeMap {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.nobridgemethods.CharSet.1'));
     }
-    return CharSet$1.$classCharSet$1;
+    return CharSet$1.$classCharSet$1_;
   }
 
   /**
@@ -105,6 +105,13 @@ class CharSet$1 extends TreeMap {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+CharSet$1.$classCharSet$1_ = null;
 
 
 

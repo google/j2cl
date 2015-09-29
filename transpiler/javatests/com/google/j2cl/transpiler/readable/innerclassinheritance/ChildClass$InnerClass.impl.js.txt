@@ -139,8 +139,9 @@ class ChildClass$InnerClass extends ParentInner {
    */
   static $getClass() {
     ChildClass$InnerClass.$clinit();
-    if (!ChildClass$InnerClass.$classChildClass$InnerClass) {
-      ChildClass$InnerClass.$classChildClass$InnerClass = Class.$createForClass(
+    if (!ChildClass$InnerClass.$classChildClass$InnerClass_) {
+      ChildClass$InnerClass
+          .$classChildClass$InnerClass_ = Class.$createForClass(
           $Util.$generateId('InnerClass'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$InnerClass'),
@@ -148,7 +149,7 @@ class ChildClass$InnerClass extends ParentInner {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.InnerClass'));
     }
-    return ChildClass$InnerClass.$classChildClass$InnerClass;
+    return ChildClass$InnerClass.$classChildClass$InnerClass_;
   }
 
   /**
@@ -167,6 +168,13 @@ class ChildClass$InnerClass extends ParentInner {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+ChildClass$InnerClass.$classChildClass$InnerClass_ = null;
 
 
 

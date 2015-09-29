@@ -125,9 +125,9 @@ class InnerClassInitOrder$ESWGInnerSubclass extends
   static $getClass() {
     InnerClassInitOrder$ESWGInnerSubclass.$clinit();
     if (!InnerClassInitOrder$ESWGInnerSubclass
-             .$classInnerClassInitOrder$ESWGInnerSubclass) {
+             .$classInnerClassInitOrder$ESWGInnerSubclass_) {
       InnerClassInitOrder$ESWGInnerSubclass
-          .$classInnerClassInitOrder$ESWGInnerSubclass = Class.$createForClass(
+          .$classInnerClassInitOrder$ESWGInnerSubclass_ = Class.$createForClass(
           $Util.$generateId('ESWGInnerSubclass'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGInnerSubclass'),
@@ -136,7 +136,7 @@ class InnerClassInitOrder$ESWGInnerSubclass extends
               'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass'));
     }
     return InnerClassInitOrder$ESWGInnerSubclass
-        .$classInnerClassInitOrder$ESWGInnerSubclass;
+        .$classInnerClassInitOrder$ESWGInnerSubclass_;
   }
 
   /**
@@ -156,6 +156,14 @@ class InnerClassInitOrder$ESWGInnerSubclass extends
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+InnerClassInitOrder$ESWGInnerSubclass
+    .$classInnerClassInitOrder$ESWGInnerSubclass_ = null;
 
 
 

@@ -297,8 +297,8 @@ class SimpleAutoBoxing extends Object {
    */
   static $getClass() {
     SimpleAutoBoxing.$clinit();
-    if (!SimpleAutoBoxing.$classSimpleAutoBoxing) {
-      SimpleAutoBoxing.$classSimpleAutoBoxing = Class.$createForClass(
+    if (!SimpleAutoBoxing.$classSimpleAutoBoxing_) {
+      SimpleAutoBoxing.$classSimpleAutoBoxing_ = Class.$createForClass(
           $Util.$generateId('SimpleAutoBoxing'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing'),
@@ -306,7 +306,7 @@ class SimpleAutoBoxing extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing'));
     }
-    return SimpleAutoBoxing.$classSimpleAutoBoxing;
+    return SimpleAutoBoxing.$classSimpleAutoBoxing_;
   }
 
   /**
@@ -337,6 +337,13 @@ class SimpleAutoBoxing extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+SimpleAutoBoxing.$classSimpleAutoBoxing_ = null;
 
 
 

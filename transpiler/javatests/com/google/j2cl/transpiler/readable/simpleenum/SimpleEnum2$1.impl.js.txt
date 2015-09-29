@@ -96,8 +96,8 @@ class SimpleEnum2$1 extends SimpleEnum2 {
    */
   static $getClass() {
     SimpleEnum2$1.$clinit();
-    if (!SimpleEnum2$1.$classSimpleEnum2$1) {
-      SimpleEnum2$1.$classSimpleEnum2$1 = Class.$createForClass(
+    if (!SimpleEnum2$1.$classSimpleEnum2$1_) {
+      SimpleEnum2$1.$classSimpleEnum2$1_ = Class.$createForClass(
           $Util.$generateId('1'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2$1'),
@@ -105,7 +105,7 @@ class SimpleEnum2$1 extends SimpleEnum2 {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2.1'));
     }
-    return SimpleEnum2$1.$classSimpleEnum2$1;
+    return SimpleEnum2$1.$classSimpleEnum2$1_;
   }
 
   /**
@@ -122,6 +122,13 @@ class SimpleEnum2$1 extends SimpleEnum2 {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+SimpleEnum2$1.$classSimpleEnum2$1_ = null;
 
 
 

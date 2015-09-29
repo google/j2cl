@@ -48,10 +48,10 @@ class $void {
    */
   static $getClass() {
     $void.$clinit();
-    if (!$void.$classVoid) {
-      $void.$classVoid = Class.$createForPrimitive('void');
+    if (!$void.$classVoid_) {
+      $void.$classVoid_ = Class.$createForPrimitive('void');
     }
-    return $void.$classVoid;
+    return $void.$classVoid_;
   }
 
   /**
@@ -63,6 +63,13 @@ class $void {
     Class = goog.module.get('gen.java.lang.Class$impl');
   }
 };
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+$void.$classVoid_ = null;
 
 
 /**

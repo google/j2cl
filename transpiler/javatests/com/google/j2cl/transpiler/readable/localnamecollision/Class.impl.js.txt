@@ -80,8 +80,8 @@ class Class extends Object {
    */
   static $getClass() {
     Class.$clinit();
-    if (!Class.$classClass) {
-      Class.$classClass = java_lang_Class.$createForClass(
+    if (!Class.$classClass_) {
+      Class.$classClass_ = java_lang_Class.$createForClass(
           $Util.$generateId('Class'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.localnamecollision.Class'),
@@ -89,7 +89,7 @@ class Class extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.localnamecollision.Class'));
     }
-    return Class.$classClass;
+    return Class.$classClass_;
   }
 
   /**
@@ -104,6 +104,13 @@ class Class extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {java_lang_Class}
+ */
+Class.$classClass_ = null;
 
 
 

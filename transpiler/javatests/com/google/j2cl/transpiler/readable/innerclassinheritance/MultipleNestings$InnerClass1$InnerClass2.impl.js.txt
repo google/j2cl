@@ -126,9 +126,9 @@ class MultipleNestings$InnerClass1$InnerClass2 extends MultipleNestings$Parent {
   static $getClass() {
     MultipleNestings$InnerClass1$InnerClass2.$clinit();
     if (!MultipleNestings$InnerClass1$InnerClass2
-             .$classMultipleNestings$InnerClass1$InnerClass2) {
+             .$classMultipleNestings$InnerClass1$InnerClass2_) {
       MultipleNestings$InnerClass1$InnerClass2
-          .$classMultipleNestings$InnerClass1$InnerClass2 = Class.$createForClass(
+          .$classMultipleNestings$InnerClass1$InnerClass2_ = Class.$createForClass(
           $Util.$generateId('InnerClass2'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$InnerClass1$InnerClass2'),
@@ -137,7 +137,7 @@ class MultipleNestings$InnerClass1$InnerClass2 extends MultipleNestings$Parent {
               'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2'));
     }
     return MultipleNestings$InnerClass1$InnerClass2
-        .$classMultipleNestings$InnerClass1$InnerClass2;
+        .$classMultipleNestings$InnerClass1$InnerClass2_;
   }
 
   /**
@@ -155,6 +155,14 @@ class MultipleNestings$InnerClass1$InnerClass2 extends MultipleNestings$Parent {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+MultipleNestings$InnerClass1$InnerClass2
+    .$classMultipleNestings$InnerClass1$InnerClass2_ = null;
 
 
 

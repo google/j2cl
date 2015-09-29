@@ -89,8 +89,8 @@ class CharSet extends Object {
    */
   static $getClass() {
     CharSet.$clinit();
-    if (!CharSet.$classCharSet) {
-      CharSet.$classCharSet = Class.$createForClass(
+    if (!CharSet.$classCharSet_) {
+      CharSet.$classCharSet_ = Class.$createForClass(
           $Util.$generateId('CharSet'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.nobridgemethods.CharSet'),
@@ -98,7 +98,7 @@ class CharSet extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.nobridgemethods.CharSet'));
     }
-    return CharSet.$classCharSet;
+    return CharSet.$classCharSet_;
   }
 
   /**
@@ -118,6 +118,13 @@ class CharSet extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+CharSet.$classCharSet_ = null;
 
 
 

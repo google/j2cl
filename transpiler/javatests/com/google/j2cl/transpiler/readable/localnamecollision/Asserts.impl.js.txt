@@ -83,8 +83,8 @@ class Asserts extends Object {
    */
   static $getClass() {
     Asserts.$clinit();
-    if (!Asserts.$classAsserts) {
-      Asserts.$classAsserts = Class.$createForClass(
+    if (!Asserts.$classAsserts_) {
+      Asserts.$classAsserts_ = Class.$createForClass(
           $Util.$generateId('Asserts'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.localnamecollision.Asserts'),
@@ -92,7 +92,7 @@ class Asserts extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.localnamecollision.Asserts'));
     }
-    return Asserts.$classAsserts;
+    return Asserts.$classAsserts_;
   }
 
   /**
@@ -107,6 +107,13 @@ class Asserts extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Asserts.$classAsserts_ = null;
 
 
 

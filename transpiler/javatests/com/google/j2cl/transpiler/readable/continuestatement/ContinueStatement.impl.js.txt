@@ -84,8 +84,8 @@ class ContinueStatement extends Object {
    */
   static $getClass() {
     ContinueStatement.$clinit();
-    if (!ContinueStatement.$classContinueStatement) {
-      ContinueStatement.$classContinueStatement = Class.$createForClass(
+    if (!ContinueStatement.$classContinueStatement_) {
+      ContinueStatement.$classContinueStatement_ = Class.$createForClass(
           $Util.$generateId('ContinueStatement'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.continuestatement.ContinueStatement'),
@@ -93,7 +93,7 @@ class ContinueStatement extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.continuestatement.ContinueStatement'));
     }
-    return ContinueStatement.$classContinueStatement;
+    return ContinueStatement.$classContinueStatement_;
   }
 
   /**
@@ -107,6 +107,13 @@ class ContinueStatement extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+ContinueStatement.$classContinueStatement_ = null;
 
 
 

@@ -94,9 +94,9 @@ class InstanceFieldInitializer extends Object {
    */
   static $getClass() {
     InstanceFieldInitializer.$clinit();
-    if (!InstanceFieldInitializer.$classInstanceFieldInitializer) {
+    if (!InstanceFieldInitializer.$classInstanceFieldInitializer_) {
       InstanceFieldInitializer
-          .$classInstanceFieldInitializer = Class.$createForClass(
+          .$classInstanceFieldInitializer_ = Class.$createForClass(
           $Util.$generateId('InstanceFieldInitializer'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.instancefieldinitializer.InstanceFieldInitializer'),
@@ -104,7 +104,7 @@ class InstanceFieldInitializer extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.instancefieldinitializer.InstanceFieldInitializer'));
     }
-    return InstanceFieldInitializer.$classInstanceFieldInitializer;
+    return InstanceFieldInitializer.$classInstanceFieldInitializer_;
   }
 
   /**
@@ -119,6 +119,13 @@ class InstanceFieldInitializer extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+InstanceFieldInitializer.$classInstanceFieldInitializer_ = null;
 
 
 

@@ -101,8 +101,8 @@ class ObjectCalls extends Object {
    */
   static $getClass() {
     ObjectCalls.$clinit();
-    if (!ObjectCalls.$classObjectCalls) {
-      ObjectCalls.$classObjectCalls = Class.$createForClass(
+    if (!ObjectCalls.$classObjectCalls_) {
+      ObjectCalls.$classObjectCalls_ = Class.$createForClass(
           $Util.$generateId('ObjectCalls'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls'),
@@ -110,7 +110,7 @@ class ObjectCalls extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls'));
     }
-    return ObjectCalls.$classObjectCalls;
+    return ObjectCalls.$classObjectCalls_;
   }
 
   /**
@@ -125,6 +125,13 @@ class ObjectCalls extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+ObjectCalls.$classObjectCalls_ = null;
 
 
 

@@ -128,9 +128,9 @@ class PrimitiveFieldSignatures extends Object {
    */
   static $getClass() {
     PrimitiveFieldSignatures.$clinit();
-    if (!PrimitiveFieldSignatures.$classPrimitiveFieldSignatures) {
+    if (!PrimitiveFieldSignatures.$classPrimitiveFieldSignatures_) {
       PrimitiveFieldSignatures
-          .$classPrimitiveFieldSignatures = Class.$createForClass(
+          .$classPrimitiveFieldSignatures_ = Class.$createForClass(
           $Util.$generateId('PrimitiveFieldSignatures'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.primitivefieldsignatures.PrimitiveFieldSignatures'),
@@ -138,7 +138,7 @@ class PrimitiveFieldSignatures extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.primitivefieldsignatures.PrimitiveFieldSignatures'));
     }
-    return PrimitiveFieldSignatures.$classPrimitiveFieldSignatures;
+    return PrimitiveFieldSignatures.$classPrimitiveFieldSignatures_;
   }
 
   /**
@@ -160,6 +160,13 @@ class PrimitiveFieldSignatures extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+PrimitiveFieldSignatures.$classPrimitiveFieldSignatures_ = null;
 
 
 

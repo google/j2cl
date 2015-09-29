@@ -84,8 +84,8 @@ class ForStatement extends Object {
    */
   static $getClass() {
     ForStatement.$clinit();
-    if (!ForStatement.$classForStatement) {
-      ForStatement.$classForStatement = Class.$createForClass(
+    if (!ForStatement.$classForStatement_) {
+      ForStatement.$classForStatement_ = Class.$createForClass(
           $Util.$generateId('ForStatement'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.forstatement.ForStatement'),
@@ -93,7 +93,7 @@ class ForStatement extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.forstatement.ForStatement'));
     }
-    return ForStatement.$classForStatement;
+    return ForStatement.$classForStatement_;
   }
 
   /**
@@ -108,6 +108,13 @@ class ForStatement extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+ForStatement.$classForStatement_ = null;
 
 
 

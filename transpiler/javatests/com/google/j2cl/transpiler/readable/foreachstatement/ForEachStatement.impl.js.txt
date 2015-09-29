@@ -100,8 +100,8 @@ class ForEachStatement extends Object {
    */
   static $getClass() {
     ForEachStatement.$clinit();
-    if (!ForEachStatement.$classForEachStatement) {
-      ForEachStatement.$classForEachStatement = Class.$createForClass(
+    if (!ForEachStatement.$classForEachStatement_) {
+      ForEachStatement.$classForEachStatement_ = Class.$createForClass(
           $Util.$generateId('ForEachStatement'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement'),
@@ -109,7 +109,7 @@ class ForEachStatement extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement'));
     }
-    return ForEachStatement.$classForEachStatement;
+    return ForEachStatement.$classForEachStatement_;
   }
 
   /**
@@ -130,6 +130,13 @@ class ForEachStatement extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+ForEachStatement.$classForEachStatement_ = null;
 
 
 

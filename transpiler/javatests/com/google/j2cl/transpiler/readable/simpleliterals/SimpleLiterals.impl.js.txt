@@ -90,8 +90,8 @@ class SimpleLiterals extends Object {
    */
   static $getClass() {
     SimpleLiterals.$clinit();
-    if (!SimpleLiterals.$classSimpleLiterals) {
-      SimpleLiterals.$classSimpleLiterals = Class.$createForClass(
+    if (!SimpleLiterals.$classSimpleLiterals_) {
+      SimpleLiterals.$classSimpleLiterals_ = Class.$createForClass(
           $Util.$generateId('SimpleLiterals'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals'),
@@ -99,7 +99,7 @@ class SimpleLiterals extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals'));
     }
-    return SimpleLiterals.$classSimpleLiterals;
+    return SimpleLiterals.$classSimpleLiterals_;
   }
 
   /**
@@ -117,6 +117,13 @@ class SimpleLiterals extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+SimpleLiterals.$classSimpleLiterals_ = null;
 
 
 

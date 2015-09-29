@@ -156,6 +156,7 @@ class Numbers {
    * @public
    */
   static m_compareTo__java_lang_Number__java_lang_Double(a, b) {
+    Numbers.$clinit();
     if (a != null) {
       if (b != null) {
         return Double.m_compareTo__double__double(a, b);
@@ -174,6 +175,7 @@ class Numbers {
    * @public
    */
   static m_compareTo__java_lang_Number__java_lang_Object(a, b) {
+    Numbers.$clinit();
     return Numbers.m_compareTo__java_lang_Number__java_lang_Double(
       a, /**@type {number} */ ($Casts.to(b, Double.$isInstance(b))));
   }
@@ -199,14 +201,14 @@ class Numbers {
  * Used to store qualifier of a boxed object to avoid double side effects.
  * @public {*}
  */
-Numbers.$q;
+Numbers.$q = null;
 
 
 /**
  * Used to store pre-modified value of a boxed object in a postfix expression.
  * @public {Number | Character | $Long}
  */
-Numbers.$v;
+Numbers.$v = null;
 
 
 /**

@@ -69,14 +69,14 @@ class Boolean extends Object {
    */
   static $getClass() {
     Boolean.$clinit();
-    if (!Boolean.$classBoolean) {
-      Boolean.$classBoolean = Class.$createForClass(
+    if (!Boolean.$classBoolean_) {
+      Boolean.$classBoolean_ = Class.$createForClass(
           $Util.$generateId('Boolean'),
           $Util.$generateId('java.lang.Boolean'),
           Object.$getClass(),
           $Util.$generateId('java.lang.Boolean'));
     }
-    return Boolean.$classBoolean;
+    return Boolean.$classBoolean_;
   }
 
   /**
@@ -89,6 +89,13 @@ class Boolean extends Object {
     Object.$clinit();
   }
 };
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Boolean.$classBoolean_ = null;
 
 
 /**

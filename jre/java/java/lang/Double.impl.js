@@ -75,14 +75,14 @@ class Double extends Number {
    */
   static $getClass() {
     Double.$clinit();
-    if (!Double.$classDouble) {
-      Double.$classDouble = Class.$createForClass(
+    if (!Double.$classDouble_) {
+      Double.$classDouble_ = Class.$createForClass(
           $Util.$generateId('Double'),
           $Util.$generateId('java.lang.Double'),
           Number.$getClass(),
           $Util.$generateId('java.lang.Double'));
     }
-    return Double.$classDouble;
+    return Double.$classDouble_;
   }
 
   /**
@@ -95,6 +95,13 @@ class Double extends Number {
     Number.$clinit();
   }
 };
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Double.$classDouble_ = null;
 
 
 /**

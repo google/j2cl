@@ -77,8 +77,8 @@ class GenericType extends Object {
    */
   static $getClass() {
     GenericType.$clinit();
-    if (!GenericType.$classGenericType) {
-      GenericType.$classGenericType = Class.$createForClass(
+    if (!GenericType.$classGenericType_) {
+      GenericType.$classGenericType_ = Class.$createForClass(
           $Util.$generateId('GenericType'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.typewildcards.GenericType'),
@@ -86,7 +86,7 @@ class GenericType extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.typewildcards.GenericType'));
     }
-    return GenericType.$classGenericType;
+    return GenericType.$classGenericType_;
   }
 
   /**
@@ -100,6 +100,13 @@ class GenericType extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+GenericType.$classGenericType_ = null;
 
 
 

@@ -69,8 +69,8 @@ class MyInterface {
    */
   static $getClass() {
     MyInterface.$clinit();
-    if (!MyInterface.$classMyInterface) {
-      MyInterface.$classMyInterface = Class.$createForInterface(
+    if (!MyInterface.$classMyInterface_) {
+      MyInterface.$classMyInterface_ = Class.$createForInterface(
           $Util.$generateId('MyInterface'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface'),
@@ -78,7 +78,7 @@ class MyInterface {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface'));
     }
-    return MyInterface.$classMyInterface;
+    return MyInterface.$classMyInterface_;
   }
 
   /**
@@ -89,6 +89,13 @@ class MyInterface {
   static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+MyInterface.$classMyInterface_ = null;
 
 
 MyInterface.$markImplementor(/** @type {Function} */ (MyInterface));

@@ -86,8 +86,8 @@ class AssertSimple extends Object {
    */
   static $getClass() {
     AssertSimple.$clinit();
-    if (!AssertSimple.$classAssertSimple) {
-      AssertSimple.$classAssertSimple = Class.$createForClass(
+    if (!AssertSimple.$classAssertSimple_) {
+      AssertSimple.$classAssertSimple_ = Class.$createForClass(
           $Util.$generateId('AssertSimple'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.assertsimple.AssertSimple'),
@@ -95,7 +95,7 @@ class AssertSimple extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.assertsimple.AssertSimple'));
     }
-    return AssertSimple.$classAssertSimple;
+    return AssertSimple.$classAssertSimple_;
   }
 
   /**
@@ -112,6 +112,13 @@ class AssertSimple extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+AssertSimple.$classAssertSimple_ = null;
 
 
 

@@ -62,8 +62,8 @@ class Entry {
    */
   static $getClass() {
     Entry.$clinit();
-    if (!Entry.$classEntry) {
-      Entry.$classEntry = Class.$createForInterface(
+    if (!Entry.$classEntry_) {
+      Entry.$classEntry_ = Class.$createForInterface(
           $Util.$generateId('Entry'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.nobridgemethods.Entry'),
@@ -71,7 +71,7 @@ class Entry {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.nobridgemethods.Entry'));
     }
-    return Entry.$classEntry;
+    return Entry.$classEntry_;
   }
 
   /**
@@ -82,6 +82,13 @@ class Entry {
   static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Entry.$classEntry_ = null;
 
 
 Entry.$markImplementor(/** @type {Function} */ (Entry));

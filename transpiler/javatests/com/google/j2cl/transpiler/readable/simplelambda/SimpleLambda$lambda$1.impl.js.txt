@@ -112,8 +112,9 @@ class SimpleLambda$lambda$1 extends Object {
    */
   static $getClass() {
     SimpleLambda$lambda$1.$clinit();
-    if (!SimpleLambda$lambda$1.$classSimpleLambda$lambda$1) {
-      SimpleLambda$lambda$1.$classSimpleLambda$lambda$1 = Class.$createForClass(
+    if (!SimpleLambda$lambda$1.$classSimpleLambda$lambda$1_) {
+      SimpleLambda$lambda$1
+          .$classSimpleLambda$lambda$1_ = Class.$createForClass(
           $Util.$generateId('lambda$1'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$lambda$1'),
@@ -121,7 +122,7 @@ class SimpleLambda$lambda$1 extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.lambda.1'));
     }
-    return SimpleLambda$lambda$1.$classSimpleLambda$lambda$1;
+    return SimpleLambda$lambda$1.$classSimpleLambda$lambda$1_;
   }
 
   /**
@@ -138,6 +139,13 @@ class SimpleLambda$lambda$1 extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+SimpleLambda$lambda$1.$classSimpleLambda$lambda$1_ = null;
 
 
 MyInterface.$markImplementor(SimpleLambda$lambda$1);

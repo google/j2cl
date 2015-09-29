@@ -99,8 +99,8 @@ class CastToGenerics extends Object {
    */
   static $getClass() {
     CastToGenerics.$clinit();
-    if (!CastToGenerics.$classCastToGenerics) {
-      CastToGenerics.$classCastToGenerics = Class.$createForClass(
+    if (!CastToGenerics.$classCastToGenerics_) {
+      CastToGenerics.$classCastToGenerics_ = Class.$createForClass(
           $Util.$generateId('CastToGenerics'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics'),
@@ -108,7 +108,7 @@ class CastToGenerics extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics'));
     }
-    return CastToGenerics.$classCastToGenerics;
+    return CastToGenerics.$classCastToGenerics_;
   }
 
   /**
@@ -128,6 +128,13 @@ class CastToGenerics extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+CastToGenerics.$classCastToGenerics_ = null;
 
 
 

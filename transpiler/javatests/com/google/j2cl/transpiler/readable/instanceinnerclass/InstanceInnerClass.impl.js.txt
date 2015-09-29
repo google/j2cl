@@ -110,8 +110,8 @@ class InstanceInnerClass extends Object {
    */
   static $getClass() {
     InstanceInnerClass.$clinit();
-    if (!InstanceInnerClass.$classInstanceInnerClass) {
-      InstanceInnerClass.$classInstanceInnerClass = Class.$createForClass(
+    if (!InstanceInnerClass.$classInstanceInnerClass_) {
+      InstanceInnerClass.$classInstanceInnerClass_ = Class.$createForClass(
           $Util.$generateId('InstanceInnerClass'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass'),
@@ -119,7 +119,7 @@ class InstanceInnerClass extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass'));
     }
-    return InstanceInnerClass.$classInstanceInnerClass;
+    return InstanceInnerClass.$classInstanceInnerClass_;
   }
 
   /**
@@ -136,6 +136,13 @@ class InstanceInnerClass extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+InstanceInnerClass.$classInstanceInnerClass_ = null;
 
 
 

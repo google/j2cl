@@ -98,8 +98,8 @@ class OuterClass extends Object {
    */
   static $getClass() {
     OuterClass.$clinit();
-    if (!OuterClass.$classOuterClass) {
-      OuterClass.$classOuterClass = Class.$createForClass(
+    if (!OuterClass.$classOuterClass_) {
+      OuterClass.$classOuterClass_ = Class.$createForClass(
           $Util.$generateId('OuterClass'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass'),
@@ -107,7 +107,7 @@ class OuterClass extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass'));
     }
-    return OuterClass.$classOuterClass;
+    return OuterClass.$classOuterClass_;
   }
 
   /**
@@ -125,6 +125,13 @@ class OuterClass extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+OuterClass.$classOuterClass_ = null;
 
 
 

@@ -86,8 +86,8 @@ class TernaryExpression extends Object {
    */
   static $getClass() {
     TernaryExpression.$clinit();
-    if (!TernaryExpression.$classTernaryExpression) {
-      TernaryExpression.$classTernaryExpression = Class.$createForClass(
+    if (!TernaryExpression.$classTernaryExpression_) {
+      TernaryExpression.$classTernaryExpression_ = Class.$createForClass(
           $Util.$generateId('TernaryExpression'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.ternaryexpression.TernaryExpression'),
@@ -95,7 +95,7 @@ class TernaryExpression extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.ternaryexpression.TernaryExpression'));
     }
-    return TernaryExpression.$classTernaryExpression;
+    return TernaryExpression.$classTernaryExpression_;
   }
 
   /**
@@ -111,6 +111,13 @@ class TernaryExpression extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+TernaryExpression.$classTernaryExpression_ = null;
 
 
 

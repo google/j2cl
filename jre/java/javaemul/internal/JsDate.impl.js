@@ -321,13 +321,13 @@ class JsDate extends Object {
    */
   static $getClass() {
     JsDate.$clinit();
-    if (!JsDate.$classJsDate) {
-      JsDate.$classJsDate = Class.$createForClass(
+    if (!JsDate.$classJsDate_) {
+      JsDate.$classJsDate_ = Class.$createForClass(
           $Util.$generateId('JsDate'),
           $Util.$generateId('javaemul.internal.JsDate'), Object.$getClass(),
           $Util.$generateId('javaemul.internal.JsDate'));
     }
-    return JsDate.$classJsDate;
+    return JsDate.$classJsDate_;
   }
 
   /**
@@ -344,6 +344,12 @@ class JsDate extends Object {
   }
 };
 
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+JsDate.$classJsDate_ = null;
 
 
 /**

@@ -130,8 +130,8 @@ class CompileTimeConstant extends Object {
    */
   static $getClass() {
     CompileTimeConstant.$clinit();
-    if (!CompileTimeConstant.$classCompileTimeConstant) {
-      CompileTimeConstant.$classCompileTimeConstant = Class.$createForClass(
+    if (!CompileTimeConstant.$classCompileTimeConstant_) {
+      CompileTimeConstant.$classCompileTimeConstant_ = Class.$createForClass(
           $Util.$generateId('CompileTimeConstant'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant'),
@@ -139,7 +139,7 @@ class CompileTimeConstant extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant'));
     }
-    return CompileTimeConstant.$classCompileTimeConstant;
+    return CompileTimeConstant.$classCompileTimeConstant_;
   }
 
   /**
@@ -474,6 +474,13 @@ CompileTimeConstant
 CompileTimeConstant
     .$f_I__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant =
     true;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+CompileTimeConstant.$classCompileTimeConstant_ = null;
 
 
 

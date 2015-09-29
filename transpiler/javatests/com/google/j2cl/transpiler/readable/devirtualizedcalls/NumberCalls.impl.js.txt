@@ -181,8 +181,8 @@ class NumberCalls extends Object {
    */
   static $getClass() {
     NumberCalls.$clinit();
-    if (!NumberCalls.$classNumberCalls) {
-      NumberCalls.$classNumberCalls = Class.$createForClass(
+    if (!NumberCalls.$classNumberCalls_) {
+      NumberCalls.$classNumberCalls_ = Class.$createForClass(
           $Util.$generateId('NumberCalls'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.devirtualizedcalls.NumberCalls'),
@@ -190,7 +190,7 @@ class NumberCalls extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.devirtualizedcalls.NumberCalls'));
     }
-    return NumberCalls.$classNumberCalls;
+    return NumberCalls.$classNumberCalls_;
   }
 
   /**
@@ -216,6 +216,13 @@ class NumberCalls extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+NumberCalls.$classNumberCalls_ = null;
 
 
 

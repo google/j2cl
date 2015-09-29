@@ -96,8 +96,8 @@ class Subclass extends Superclass {
    */
   static $getClass() {
     Subclass.$clinit();
-    if (!Subclass.$classSubclass) {
-      Subclass.$classSubclass = Class.$createForClass(
+    if (!Subclass.$classSubclass_) {
+      Subclass.$classSubclass_ = Class.$createForClass(
           $Util.$generateId('Subclass'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass'),
@@ -105,7 +105,7 @@ class Subclass extends Superclass {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass'));
     }
-    return Subclass.$classSubclass;
+    return Subclass.$classSubclass_;
   }
 
   /**
@@ -121,6 +121,13 @@ class Subclass extends Superclass {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Subclass.$classSubclass_ = null;
 
 
 

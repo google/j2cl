@@ -86,8 +86,8 @@ class InstanceofInterface extends Object {
    */
   static $getClass() {
     InstanceofInterface.$clinit();
-    if (!InstanceofInterface.$classInstanceofInterface) {
-      InstanceofInterface.$classInstanceofInterface = Class.$createForClass(
+    if (!InstanceofInterface.$classInstanceofInterface_) {
+      InstanceofInterface.$classInstanceofInterface_ = Class.$createForClass(
           $Util.$generateId('InstanceofInterface'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.instanceofinterface.InstanceofInterface'),
@@ -95,7 +95,7 @@ class InstanceofInterface extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.instanceofinterface.InstanceofInterface'));
     }
-    return InstanceofInterface.$classInstanceofInterface;
+    return InstanceofInterface.$classInstanceofInterface_;
   }
 
   /**
@@ -110,6 +110,13 @@ class InstanceofInterface extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+InstanceofInterface.$classInstanceofInterface_ = null;
 
 
 

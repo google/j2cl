@@ -103,8 +103,8 @@ class InstanceofBoxedType extends Object {
    */
   static $getClass() {
     InstanceofBoxedType.$clinit();
-    if (!InstanceofBoxedType.$classInstanceofBoxedType) {
-      InstanceofBoxedType.$classInstanceofBoxedType = Class.$createForClass(
+    if (!InstanceofBoxedType.$classInstanceofBoxedType_) {
+      InstanceofBoxedType.$classInstanceofBoxedType_ = Class.$createForClass(
           $Util.$generateId('InstanceofBoxedType'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.instanceofboxedtype.InstanceofBoxedType'),
@@ -112,7 +112,7 @@ class InstanceofBoxedType extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.instanceofboxedtype.InstanceofBoxedType'));
     }
-    return InstanceofBoxedType.$classInstanceofBoxedType;
+    return InstanceofBoxedType.$classInstanceofBoxedType_;
   }
 
   /**
@@ -136,6 +136,13 @@ class InstanceofBoxedType extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+InstanceofBoxedType.$classInstanceofBoxedType_ = null;
 
 
 

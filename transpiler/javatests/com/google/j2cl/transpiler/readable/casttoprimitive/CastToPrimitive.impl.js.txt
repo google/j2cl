@@ -147,8 +147,8 @@ class CastToPrimitive extends Object {
    */
   static $getClass() {
     CastToPrimitive.$clinit();
-    if (!CastToPrimitive.$classCastToPrimitive) {
-      CastToPrimitive.$classCastToPrimitive = Class.$createForClass(
+    if (!CastToPrimitive.$classCastToPrimitive_) {
+      CastToPrimitive.$classCastToPrimitive_ = Class.$createForClass(
           $Util.$generateId('CastToPrimitive'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive'),
@@ -156,7 +156,7 @@ class CastToPrimitive extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.casttoprimitive.CastToPrimitive'));
     }
-    return CastToPrimitive.$classCastToPrimitive;
+    return CastToPrimitive.$classCastToPrimitive_;
   }
 
   /**
@@ -178,6 +178,13 @@ class CastToPrimitive extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+CastToPrimitive.$classCastToPrimitive_ = null;
 
 
 

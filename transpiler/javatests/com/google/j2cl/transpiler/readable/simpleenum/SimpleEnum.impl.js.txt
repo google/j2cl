@@ -96,8 +96,8 @@ class SimpleEnum extends Enum {
    */
   static $getClass() {
     SimpleEnum.$clinit();
-    if (!SimpleEnum.$classSimpleEnum) {
-      SimpleEnum.$classSimpleEnum = Class.$createForEnum(
+    if (!SimpleEnum.$classSimpleEnum_) {
+      SimpleEnum.$classSimpleEnum_ = Class.$createForEnum(
           $Util.$generateId('SimpleEnum'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum'),
@@ -107,7 +107,7 @@ class SimpleEnum extends Enum {
           // TODO(rluble): emit here the enum values
           null);
     }
-    return SimpleEnum.$classSimpleEnum;
+    return SimpleEnum.$classSimpleEnum_;
   }
 
   /**
@@ -195,6 +195,13 @@ SimpleEnum.$f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum =
  */
 SimpleEnum.$f_V2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum =
     null;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+SimpleEnum.$classSimpleEnum_ = null;
 
 
 

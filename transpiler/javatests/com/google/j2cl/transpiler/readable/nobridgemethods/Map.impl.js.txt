@@ -84,8 +84,8 @@ class Map extends Object {
    */
   static $getClass() {
     Map.$clinit();
-    if (!Map.$classMap) {
-      Map.$classMap = Class.$createForClass(
+    if (!Map.$classMap_) {
+      Map.$classMap_ = Class.$createForClass(
           $Util.$generateId('Map'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.nobridgemethods.Map'),
@@ -93,7 +93,7 @@ class Map extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.nobridgemethods.Map'));
     }
-    return Map.$classMap;
+    return Map.$classMap_;
   }
 
   /**
@@ -109,6 +109,13 @@ class Map extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Map.$classMap_ = null;
 
 
 

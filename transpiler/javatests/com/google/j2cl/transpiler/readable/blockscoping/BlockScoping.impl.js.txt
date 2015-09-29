@@ -83,8 +83,8 @@ class BlockScoping extends Object {
    */
   static $getClass() {
     BlockScoping.$clinit();
-    if (!BlockScoping.$classBlockScoping) {
-      BlockScoping.$classBlockScoping = Class.$createForClass(
+    if (!BlockScoping.$classBlockScoping_) {
+      BlockScoping.$classBlockScoping_ = Class.$createForClass(
           $Util.$generateId('BlockScoping'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.blockscoping.BlockScoping'),
@@ -92,7 +92,7 @@ class BlockScoping extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.blockscoping.BlockScoping'));
     }
-    return BlockScoping.$classBlockScoping;
+    return BlockScoping.$classBlockScoping_;
   }
 
   /**
@@ -107,6 +107,13 @@ class BlockScoping extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+BlockScoping.$classBlockScoping_ = null;
 
 
 

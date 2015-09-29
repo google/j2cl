@@ -120,8 +120,8 @@ class Varargs extends Object {
    */
   static $getClass() {
     Varargs.$clinit();
-    if (!Varargs.$classVarargs) {
-      Varargs.$classVarargs = Class.$createForClass(
+    if (!Varargs.$classVarargs_) {
+      Varargs.$classVarargs_ = Class.$createForClass(
           $Util.$generateId('Varargs'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.varargs.Varargs'),
@@ -129,7 +129,7 @@ class Varargs extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.varargs.Varargs'));
     }
-    return Varargs.$classVarargs;
+    return Varargs.$classVarargs_;
   }
 
   /**
@@ -145,6 +145,13 @@ class Varargs extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Varargs.$classVarargs_ = null;
 
 
 

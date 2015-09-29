@@ -85,8 +85,8 @@ class NewInstanceExpr extends Object {
    */
   static $getClass() {
     NewInstanceExpr.$clinit();
-    if (!NewInstanceExpr.$classNewInstanceExpr) {
-      NewInstanceExpr.$classNewInstanceExpr = Class.$createForClass(
+    if (!NewInstanceExpr.$classNewInstanceExpr_) {
+      NewInstanceExpr.$classNewInstanceExpr_ = Class.$createForClass(
           $Util.$generateId('NewInstanceExpr'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr'),
@@ -94,7 +94,7 @@ class NewInstanceExpr extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr'));
     }
-    return NewInstanceExpr.$classNewInstanceExpr;
+    return NewInstanceExpr.$classNewInstanceExpr_;
   }
 
   /**
@@ -110,6 +110,13 @@ class NewInstanceExpr extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+NewInstanceExpr.$classNewInstanceExpr_ = null;
 
 
 

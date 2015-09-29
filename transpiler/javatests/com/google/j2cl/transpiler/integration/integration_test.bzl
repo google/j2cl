@@ -195,20 +195,20 @@ def integration_test(name, srcs, deps=[], defs=[]):
       outs=["TestHarness.js"],
       cmd="echo \"%s\" > $@" % test_harness,
   )
-# TODO: restore when Blaze, DepsGenerator and JsTestRunner are ready for zips.
-#   native.jsunit_test(
-#       name="uncompiled_test",
-#       srcs=["TestHarness.js"],
-#       compile=0,
-#       deps=[
-#           ":" + name + "_js_library",
-#           "//javascript/closure/testing:testsuite",
-#       ],
-#       deps_mgmt="closure",
-#       externs_list=["//javascript/externs:common"],
-#       jvm_flags=["-Dcom.google.testing.selenium.browser=CHROME_LINUX"],
-#       data=["//testing/matrix/nativebrowsers/chrome:stable_data",],
-#   )
+
+  native.jsunit_test(
+      name="uncompiled_test",
+      srcs=["TestHarness.js"],
+      compile=0,
+      deps=[
+          ":" + name + "_js_library",
+          "//javascript/closure/testing:testsuite",
+      ],
+      deps_mgmt="closure",
+      externs_list=["//javascript/externs:common"],
+      jvm_flags=["-Dcom.google.testing.selenium.browser=CHROME_LINUX"],
+      data=["//testing/matrix/nativebrowsers/chrome:stable_data",],
+  )
 
   native.jsunit_test(
       name="compiled_test",

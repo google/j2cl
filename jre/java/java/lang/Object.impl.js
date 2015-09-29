@@ -108,14 +108,14 @@ class Object {
    */
   static $getClass() {
     Object.$clinit();
-    if (!Object.$classObject) {
-      Object.$classObject = Class.$createForClass(
+    if (!Object.$classObject_) {
+      Object.$classObject_ = Class.$createForClass(
         $Util.$generateId('Object'),
         $Util.$generateId('java.lang.Object'),
         null,
         $Util.$generateId('java.lang.Object'));
     }
-    return Object.$classObject;
+    return Object.$classObject_;
   }
 
   /**
@@ -128,6 +128,12 @@ class Object {
   }
 };
 
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Object.$classObject_ = null;
 
 
 /**

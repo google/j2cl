@@ -91,8 +91,8 @@ class PublicInstanceFields extends Object {
    */
   static $getClass() {
     PublicInstanceFields.$clinit();
-    if (!PublicInstanceFields.$classPublicInstanceFields) {
-      PublicInstanceFields.$classPublicInstanceFields = Class.$createForClass(
+    if (!PublicInstanceFields.$classPublicInstanceFields_) {
+      PublicInstanceFields.$classPublicInstanceFields_ = Class.$createForClass(
           $Util.$generateId('PublicInstanceFields'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.publicinstancefields.PublicInstanceFields'),
@@ -100,7 +100,7 @@ class PublicInstanceFields extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.publicinstancefields.PublicInstanceFields'));
     }
-    return PublicInstanceFields.$classPublicInstanceFields;
+    return PublicInstanceFields.$classPublicInstanceFields_;
   }
 
   /**
@@ -115,6 +115,13 @@ class PublicInstanceFields extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+PublicInstanceFields.$classPublicInstanceFields_ = null;
 
 
 

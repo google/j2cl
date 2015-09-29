@@ -76,9 +76,9 @@ class StaticNestedClassParent extends Object {
    */
   static $getClass() {
     StaticNestedClassParent.$clinit();
-    if (!StaticNestedClassParent.$classStaticNestedClassParent) {
+    if (!StaticNestedClassParent.$classStaticNestedClassParent_) {
       StaticNestedClassParent
-          .$classStaticNestedClassParent = Class.$createForClass(
+          .$classStaticNestedClassParent_ = Class.$createForClass(
           $Util.$generateId('StaticNestedClassParent'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent'),
@@ -86,7 +86,7 @@ class StaticNestedClassParent extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.staticnestedclass.StaticNestedClassParent'));
     }
-    return StaticNestedClassParent.$classStaticNestedClassParent;
+    return StaticNestedClassParent.$classStaticNestedClassParent_;
   }
 
   /**
@@ -100,6 +100,13 @@ class StaticNestedClassParent extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+StaticNestedClassParent.$classStaticNestedClassParent_ = null;
 
 
 

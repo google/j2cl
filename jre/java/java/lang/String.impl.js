@@ -37,14 +37,14 @@ class String extends Object {
    */
   static $getClass() {
     String.$clinit();
-    if (!String.$classString) {
-      String.$classString = Class.$createForClass(
+    if (!String.$classString_) {
+      String.$classString_ = Class.$createForClass(
         $Util.$generateId('String'),
         $Util.$generateId('java.lang.String'),
         Object.$getClass(),
         $Util.$generateId('java.lang.String'));
     }
-    return String.$classString;
+    return String.$classString_;
   }
 
   /**
@@ -57,6 +57,13 @@ class String extends Object {
     Object.$clinit();
   }
 };
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+String.$classString_ = null;
 
 
 /**

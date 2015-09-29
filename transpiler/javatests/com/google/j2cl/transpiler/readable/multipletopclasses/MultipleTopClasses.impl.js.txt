@@ -76,8 +76,8 @@ class MultipleTopClasses extends AnotherClass {
    */
   static $getClass() {
     MultipleTopClasses.$clinit();
-    if (!MultipleTopClasses.$classMultipleTopClasses) {
-      MultipleTopClasses.$classMultipleTopClasses = Class.$createForClass(
+    if (!MultipleTopClasses.$classMultipleTopClasses_) {
+      MultipleTopClasses.$classMultipleTopClasses_ = Class.$createForClass(
           $Util.$generateId('MultipleTopClasses'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.multipletopclasses.MultipleTopClasses'),
@@ -85,7 +85,7 @@ class MultipleTopClasses extends AnotherClass {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.multipletopclasses.MultipleTopClasses'));
     }
-    return MultipleTopClasses.$classMultipleTopClasses;
+    return MultipleTopClasses.$classMultipleTopClasses_;
   }
 
   /**
@@ -99,6 +99,13 @@ class MultipleTopClasses extends AnotherClass {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+MultipleTopClasses.$classMultipleTopClasses_ = null;
 
 
 

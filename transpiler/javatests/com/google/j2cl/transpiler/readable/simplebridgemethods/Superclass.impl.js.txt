@@ -84,8 +84,8 @@ class Superclass extends Object {
    */
   static $getClass() {
     Superclass.$clinit();
-    if (!Superclass.$classSuperclass) {
-      Superclass.$classSuperclass = Class.$createForClass(
+    if (!Superclass.$classSuperclass_) {
+      Superclass.$classSuperclass_ = Class.$createForClass(
           $Util.$generateId('Superclass'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass'),
@@ -93,7 +93,7 @@ class Superclass extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass'));
     }
-    return Superclass.$classSuperclass;
+    return Superclass.$classSuperclass_;
   }
 
   /**
@@ -107,6 +107,13 @@ class Superclass extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Superclass.$classSuperclass_ = null;
 
 
 

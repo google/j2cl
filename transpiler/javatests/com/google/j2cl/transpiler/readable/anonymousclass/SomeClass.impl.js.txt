@@ -84,8 +84,8 @@ class SomeClass extends Object {
    */
   static $getClass() {
     SomeClass.$clinit();
-    if (!SomeClass.$classSomeClass) {
-      SomeClass.$classSomeClass = Class.$createForClass(
+    if (!SomeClass.$classSomeClass_) {
+      SomeClass.$classSomeClass_ = Class.$createForClass(
           $Util.$generateId('SomeClass'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.anonymousclass.SomeClass'),
@@ -93,7 +93,7 @@ class SomeClass extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.anonymousclass.SomeClass'));
     }
-    return SomeClass.$classSomeClass;
+    return SomeClass.$classSomeClass_;
   }
 
   /**
@@ -109,6 +109,13 @@ class SomeClass extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+SomeClass.$classSomeClass_ = null;
 
 
 

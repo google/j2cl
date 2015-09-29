@@ -132,9 +132,9 @@ class InnerClassInitOrder$Outer$OuterIsSuper extends InnerClassInitOrder$Outer {
   static $getClass() {
     InnerClassInitOrder$Outer$OuterIsSuper.$clinit();
     if (!InnerClassInitOrder$Outer$OuterIsSuper
-             .$classInnerClassInitOrder$Outer$OuterIsSuper) {
+             .$classInnerClassInitOrder$Outer$OuterIsSuper_) {
       InnerClassInitOrder$Outer$OuterIsSuper
-          .$classInnerClassInitOrder$Outer$OuterIsSuper = Class.$createForClass(
+          .$classInnerClassInitOrder$Outer$OuterIsSuper_ = Class.$createForClass(
           $Util.$generateId('OuterIsSuper'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$OuterIsSuper'),
@@ -143,7 +143,7 @@ class InnerClassInitOrder$Outer$OuterIsSuper extends InnerClassInitOrder$Outer {
               'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper'));
     }
     return InnerClassInitOrder$Outer$OuterIsSuper
-        .$classInnerClassInitOrder$Outer$OuterIsSuper;
+        .$classInnerClassInitOrder$Outer$OuterIsSuper_;
   }
 
   /**
@@ -162,6 +162,14 @@ class InnerClassInitOrder$Outer$OuterIsSuper extends InnerClassInitOrder$Outer {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+InnerClassInitOrder$Outer$OuterIsSuper
+    .$classInnerClassInitOrder$Outer$OuterIsSuper_ = null;
 
 
 

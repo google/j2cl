@@ -125,8 +125,8 @@ class Child extends Parent {
    */
   static $getClass() {
     Child.$clinit();
-    if (!Child.$classChild) {
-      Child.$classChild = Class.$createForClass(
+    if (!Child.$classChild_) {
+      Child.$classChild_ = Class.$createForClass(
           $Util.$generateId('Child'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child'),
@@ -134,7 +134,7 @@ class Child extends Parent {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.packageprivatemethods.package1.Child'));
     }
-    return Child.$classChild;
+    return Child.$classChild_;
   }
 
   /**
@@ -149,6 +149,13 @@ class Child extends Parent {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Child.$classChild_ = null;
 
 
 

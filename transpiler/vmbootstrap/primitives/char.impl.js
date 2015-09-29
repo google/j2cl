@@ -48,10 +48,10 @@ class $char {
    */
   static $getClass() {
     $char.$clinit();
-    if (!$char.$classChar) {
-      $char.$classChar = Class.$createForPrimitive('char');
+    if (!$char.$classChar_) {
+      $char.$classChar_ = Class.$createForPrimitive('char');
     }
-    return $char.$classChar;
+    return $char.$classChar_;
   }
 
   /**
@@ -63,6 +63,13 @@ class $char {
     Class = goog.module.get('gen.java.lang.Class$impl');
   }
 };
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+$char.$classChar_ = null;
 
 
 /**

@@ -83,8 +83,8 @@ class ClassLiteral extends Object {
    */
   static $getClass() {
     ClassLiteral.$clinit();
-    if (!ClassLiteral.$classClassLiteral) {
-      ClassLiteral.$classClassLiteral = Class.$createForClass(
+    if (!ClassLiteral.$classClassLiteral_) {
+      ClassLiteral.$classClassLiteral_ = Class.$createForClass(
           $Util.$generateId('ClassLiteral'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.classliteral.ClassLiteral'),
@@ -92,7 +92,7 @@ class ClassLiteral extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.classliteral.ClassLiteral'));
     }
-    return ClassLiteral.$classClassLiteral;
+    return ClassLiteral.$classClassLiteral_;
   }
 
   /**
@@ -107,6 +107,13 @@ class ClassLiteral extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+ClassLiteral.$classClassLiteral_ = null;
 
 
 

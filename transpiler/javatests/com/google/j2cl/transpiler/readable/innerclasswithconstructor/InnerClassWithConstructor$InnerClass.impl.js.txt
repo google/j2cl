@@ -136,9 +136,9 @@ class InnerClassWithConstructor$InnerClass extends Object {
   static $getClass() {
     InnerClassWithConstructor$InnerClass.$clinit();
     if (!InnerClassWithConstructor$InnerClass
-             .$classInnerClassWithConstructor$InnerClass) {
+             .$classInnerClassWithConstructor$InnerClass_) {
       InnerClassWithConstructor$InnerClass
-          .$classInnerClassWithConstructor$InnerClass = Class.$createForClass(
+          .$classInnerClassWithConstructor$InnerClass_ = Class.$createForClass(
           $Util.$generateId('InnerClass'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor$InnerClass'),
@@ -147,7 +147,7 @@ class InnerClassWithConstructor$InnerClass extends Object {
               'com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor.InnerClass'));
     }
     return InnerClassWithConstructor$InnerClass
-        .$classInnerClassWithConstructor$InnerClass;
+        .$classInnerClassWithConstructor$InnerClass_;
   }
 
   /**
@@ -164,6 +164,14 @@ class InnerClassWithConstructor$InnerClass extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+InnerClassWithConstructor$InnerClass
+    .$classInnerClassWithConstructor$InnerClass_ = null;
 
 
 

@@ -86,8 +86,8 @@ class InstanceOfArray extends Object {
    */
   static $getClass() {
     InstanceOfArray.$clinit();
-    if (!InstanceOfArray.$classInstanceOfArray) {
-      InstanceOfArray.$classInstanceOfArray = Class.$createForClass(
+    if (!InstanceOfArray.$classInstanceOfArray_) {
+      InstanceOfArray.$classInstanceOfArray_ = Class.$createForClass(
           $Util.$generateId('InstanceOfArray'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.instanceofarray.InstanceOfArray'),
@@ -95,7 +95,7 @@ class InstanceOfArray extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.instanceofarray.InstanceOfArray'));
     }
-    return InstanceOfArray.$classInstanceOfArray;
+    return InstanceOfArray.$classInstanceOfArray_;
   }
 
   /**
@@ -111,6 +111,13 @@ class InstanceOfArray extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+InstanceOfArray.$classInstanceOfArray_ = null;
 
 
 

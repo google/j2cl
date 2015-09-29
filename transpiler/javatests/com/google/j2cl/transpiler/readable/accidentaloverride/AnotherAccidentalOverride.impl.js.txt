@@ -94,9 +94,9 @@ class AnotherAccidentalOverride extends Parent {
    */
   static $getClass() {
     AnotherAccidentalOverride.$clinit();
-    if (!AnotherAccidentalOverride.$classAnotherAccidentalOverride) {
+    if (!AnotherAccidentalOverride.$classAnotherAccidentalOverride_) {
       AnotherAccidentalOverride
-          .$classAnotherAccidentalOverride = Class.$createForClass(
+          .$classAnotherAccidentalOverride_ = Class.$createForClass(
           $Util.$generateId('AnotherAccidentalOverride'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.accidentaloverride.AnotherAccidentalOverride'),
@@ -104,7 +104,7 @@ class AnotherAccidentalOverride extends Parent {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.accidentaloverride.AnotherAccidentalOverride'));
     }
-    return AnotherAccidentalOverride.$classAnotherAccidentalOverride;
+    return AnotherAccidentalOverride.$classAnotherAccidentalOverride_;
   }
 
   /**
@@ -120,6 +120,13 @@ class AnotherAccidentalOverride extends Parent {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+AnotherAccidentalOverride.$classAnotherAccidentalOverride_ = null;
 
 
 SuperInterface.$markImplementor(AnotherAccidentalOverride);

@@ -78,9 +78,9 @@ class LocalClassInStaticContext$2 extends Object {
    */
   static $getClass() {
     LocalClassInStaticContext$2.$clinit();
-    if (!LocalClassInStaticContext$2.$classLocalClassInStaticContext$2) {
+    if (!LocalClassInStaticContext$2.$classLocalClassInStaticContext$2_) {
       LocalClassInStaticContext$2
-          .$classLocalClassInStaticContext$2 = Class.$createForClass(
+          .$classLocalClassInStaticContext$2_ = Class.$createForClass(
           $Util.$generateId('2'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext$2'),
@@ -88,7 +88,7 @@ class LocalClassInStaticContext$2 extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.2'));
     }
-    return LocalClassInStaticContext$2.$classLocalClassInStaticContext$2;
+    return LocalClassInStaticContext$2.$classLocalClassInStaticContext$2_;
   }
 
   /**
@@ -104,6 +104,13 @@ class LocalClassInStaticContext$2 extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+LocalClassInStaticContext$2.$classLocalClassInStaticContext$2_ = null;
 
 
 

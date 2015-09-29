@@ -84,8 +84,8 @@ class TryFinally extends Object {
    */
   static $getClass() {
     TryFinally.$clinit();
-    if (!TryFinally.$classTryFinally) {
-      TryFinally.$classTryFinally = Class.$createForClass(
+    if (!TryFinally.$classTryFinally_) {
+      TryFinally.$classTryFinally_ = Class.$createForClass(
           $Util.$generateId('TryFinally'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.tryfinally.TryFinally'),
@@ -93,7 +93,7 @@ class TryFinally extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.tryfinally.TryFinally'));
     }
-    return TryFinally.$classTryFinally;
+    return TryFinally.$classTryFinally_;
   }
 
   /**
@@ -108,6 +108,13 @@ class TryFinally extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+TryFinally.$classTryFinally_ = null;
 
 
 

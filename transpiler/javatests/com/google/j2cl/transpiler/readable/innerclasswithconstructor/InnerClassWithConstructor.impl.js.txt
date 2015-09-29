@@ -107,9 +107,9 @@ class InnerClassWithConstructor extends Object {
    */
   static $getClass() {
     InnerClassWithConstructor.$clinit();
-    if (!InnerClassWithConstructor.$classInnerClassWithConstructor) {
+    if (!InnerClassWithConstructor.$classInnerClassWithConstructor_) {
       InnerClassWithConstructor
-          .$classInnerClassWithConstructor = Class.$createForClass(
+          .$classInnerClassWithConstructor_ = Class.$createForClass(
           $Util.$generateId('InnerClassWithConstructor'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor'),
@@ -117,7 +117,7 @@ class InnerClassWithConstructor extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.innerclasswithconstructor.InnerClassWithConstructor'));
     }
-    return InnerClassWithConstructor.$classInnerClassWithConstructor;
+    return InnerClassWithConstructor.$classInnerClassWithConstructor_;
   }
 
   /**
@@ -134,6 +134,13 @@ class InnerClassWithConstructor extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+InnerClassWithConstructor.$classInnerClassWithConstructor_ = null;
 
 
 

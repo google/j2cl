@@ -91,9 +91,9 @@ class StaticFieldAccessLevels extends Object {
    */
   static $getClass() {
     StaticFieldAccessLevels.$clinit();
-    if (!StaticFieldAccessLevels.$classStaticFieldAccessLevels) {
+    if (!StaticFieldAccessLevels.$classStaticFieldAccessLevels_) {
       StaticFieldAccessLevels
-          .$classStaticFieldAccessLevels = Class.$createForClass(
+          .$classStaticFieldAccessLevels_ = Class.$createForClass(
           $Util.$generateId('StaticFieldAccessLevels'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.staticfieldaccesslevels.StaticFieldAccessLevels'),
@@ -101,7 +101,7 @@ class StaticFieldAccessLevels extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.staticfieldaccesslevels.StaticFieldAccessLevels'));
     }
-    return StaticFieldAccessLevels.$classStaticFieldAccessLevels;
+    return StaticFieldAccessLevels.$classStaticFieldAccessLevels_;
   }
 
   /**
@@ -257,6 +257,13 @@ StaticFieldAccessLevels
 StaticFieldAccessLevels
     .$f_d__com_google_j2cl_transpiler_readable_staticfieldaccesslevels_StaticFieldAccessLevels =
     0;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+StaticFieldAccessLevels.$classStaticFieldAccessLevels_ = null;
 
 
 

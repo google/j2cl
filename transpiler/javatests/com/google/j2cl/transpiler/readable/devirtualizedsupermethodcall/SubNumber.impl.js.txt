@@ -106,8 +106,8 @@ class SubNumber extends Number {
    */
   static $getClass() {
     SubNumber.$clinit();
-    if (!SubNumber.$classSubNumber) {
-      SubNumber.$classSubNumber = Class.$createForClass(
+    if (!SubNumber.$classSubNumber_) {
+      SubNumber.$classSubNumber_ = Class.$createForClass(
           $Util.$generateId('SubNumber'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber'),
@@ -115,7 +115,7 @@ class SubNumber extends Number {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber'));
     }
-    return SubNumber.$classSubNumber;
+    return SubNumber.$classSubNumber_;
   }
 
   /**
@@ -131,6 +131,13 @@ class SubNumber extends Number {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+SubNumber.$classSubNumber_ = null;
 
 
 

@@ -100,9 +100,9 @@ class InstanceFieldAccessLevels extends Object {
    */
   static $getClass() {
     InstanceFieldAccessLevels.$clinit();
-    if (!InstanceFieldAccessLevels.$classInstanceFieldAccessLevels) {
+    if (!InstanceFieldAccessLevels.$classInstanceFieldAccessLevels_) {
       InstanceFieldAccessLevels
-          .$classInstanceFieldAccessLevels = Class.$createForClass(
+          .$classInstanceFieldAccessLevels_ = Class.$createForClass(
           $Util.$generateId('InstanceFieldAccessLevels'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.instancefieldaccesslevels.InstanceFieldAccessLevels'),
@@ -110,7 +110,7 @@ class InstanceFieldAccessLevels extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.instancefieldaccesslevels.InstanceFieldAccessLevels'));
     }
-    return InstanceFieldAccessLevels.$classInstanceFieldAccessLevels;
+    return InstanceFieldAccessLevels.$classInstanceFieldAccessLevels_;
   }
 
   /**
@@ -126,6 +126,13 @@ class InstanceFieldAccessLevels extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+InstanceFieldAccessLevels.$classInstanceFieldAccessLevels_ = null;
 
 
 

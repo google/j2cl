@@ -48,10 +48,10 @@ class $byte {
    */
   static $getClass() {
     $byte.$clinit();
-    if (!$byte.$classByte) {
-      $byte.$classByte = Class.$createForPrimitive('byte');
+    if (!$byte.$classByte_) {
+      $byte.$classByte_ = Class.$createForPrimitive('byte');
     }
-    return $byte.$classByte;
+    return $byte.$classByte_;
   }
 
   /**
@@ -63,6 +63,13 @@ class $byte {
     Class = goog.module.get('gen.java.lang.Class$impl');
   }
 };
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+$byte.$classByte_ = null;
 
 
 /**

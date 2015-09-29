@@ -84,8 +84,8 @@ class Parent extends Object {
    */
   static $getClass() {
     Parent.$clinit();
-    if (!Parent.$classParent) {
-      Parent.$classParent = Class.$createForClass(
+    if (!Parent.$classParent_) {
+      Parent.$classParent_ = Class.$createForClass(
           $Util.$generateId('Parent'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.accidentaloverride.Parent'),
@@ -93,7 +93,7 @@ class Parent extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.accidentaloverride.Parent'));
     }
-    return Parent.$classParent;
+    return Parent.$classParent_;
   }
 
   /**
@@ -107,6 +107,13 @@ class Parent extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Parent.$classParent_ = null;
 
 
 

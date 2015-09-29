@@ -202,8 +202,8 @@ class CharacterLiteral extends Object {
    */
   static $getClass() {
     CharacterLiteral.$clinit();
-    if (!CharacterLiteral.$classCharacterLiteral) {
-      CharacterLiteral.$classCharacterLiteral = Class.$createForClass(
+    if (!CharacterLiteral.$classCharacterLiteral_) {
+      CharacterLiteral.$classCharacterLiteral_ = Class.$createForClass(
           $Util.$generateId('CharacterLiteral'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.characterliteral.CharacterLiteral'),
@@ -211,7 +211,7 @@ class CharacterLiteral extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.characterliteral.CharacterLiteral'));
     }
-    return CharacterLiteral.$classCharacterLiteral;
+    return CharacterLiteral.$classCharacterLiteral_;
   }
 
   /**
@@ -226,6 +226,13 @@ class CharacterLiteral extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+CharacterLiteral.$classCharacterLiteral_ = null;
 
 
 

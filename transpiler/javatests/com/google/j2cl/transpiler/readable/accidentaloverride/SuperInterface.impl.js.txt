@@ -69,8 +69,8 @@ class SuperInterface {
    */
   static $getClass() {
     SuperInterface.$clinit();
-    if (!SuperInterface.$classSuperInterface) {
-      SuperInterface.$classSuperInterface = Class.$createForInterface(
+    if (!SuperInterface.$classSuperInterface_) {
+      SuperInterface.$classSuperInterface_ = Class.$createForInterface(
           $Util.$generateId('SuperInterface'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface'),
@@ -78,7 +78,7 @@ class SuperInterface {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface'));
     }
-    return SuperInterface.$classSuperInterface;
+    return SuperInterface.$classSuperInterface_;
   }
 
   /**
@@ -89,6 +89,13 @@ class SuperInterface {
   static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+SuperInterface.$classSuperInterface_ = null;
 
 
 SuperInterface.$markImplementor(/** @type {Function} */ (SuperInterface));

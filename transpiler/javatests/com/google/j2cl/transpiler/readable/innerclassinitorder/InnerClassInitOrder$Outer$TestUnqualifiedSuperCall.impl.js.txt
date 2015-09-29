@@ -97,9 +97,9 @@ class InnerClassInitOrder$Outer$TestUnqualifiedSuperCall extends
   static $getClass() {
     InnerClassInitOrder$Outer$TestUnqualifiedSuperCall.$clinit();
     if (!InnerClassInitOrder$Outer$TestUnqualifiedSuperCall
-             .$classInnerClassInitOrder$Outer$TestUnqualifiedSuperCall) {
+             .$classInnerClassInitOrder$Outer$TestUnqualifiedSuperCall_) {
       InnerClassInitOrder$Outer$TestUnqualifiedSuperCall
-          .$classInnerClassInitOrder$Outer$TestUnqualifiedSuperCall = Class.$createForClass(
+          .$classInnerClassInitOrder$Outer$TestUnqualifiedSuperCall_ = Class.$createForClass(
           $Util.$generateId('TestUnqualifiedSuperCall'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestUnqualifiedSuperCall'),
@@ -108,7 +108,7 @@ class InnerClassInitOrder$Outer$TestUnqualifiedSuperCall extends
               'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall'));
     }
     return InnerClassInitOrder$Outer$TestUnqualifiedSuperCall
-        .$classInnerClassInitOrder$Outer$TestUnqualifiedSuperCall;
+        .$classInnerClassInitOrder$Outer$TestUnqualifiedSuperCall_;
   }
 
   /**
@@ -124,6 +124,14 @@ class InnerClassInitOrder$Outer$TestUnqualifiedSuperCall extends
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+InnerClassInitOrder$Outer$TestUnqualifiedSuperCall
+    .$classInnerClassInitOrder$Outer$TestUnqualifiedSuperCall_ = null;
 
 
 

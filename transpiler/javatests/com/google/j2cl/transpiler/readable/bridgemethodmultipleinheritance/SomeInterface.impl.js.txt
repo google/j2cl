@@ -79,8 +79,8 @@ class SomeInterface {
    */
   static $getClass() {
     SomeInterface.$clinit();
-    if (!SomeInterface.$classSomeInterface) {
-      SomeInterface.$classSomeInterface = Class.$createForInterface(
+    if (!SomeInterface.$classSomeInterface_) {
+      SomeInterface.$classSomeInterface_ = Class.$createForInterface(
           $Util.$generateId('SomeInterface'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeInterface'),
@@ -88,7 +88,7 @@ class SomeInterface {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeInterface'));
     }
-    return SomeInterface.$classSomeInterface;
+    return SomeInterface.$classSomeInterface_;
   }
 
   /**
@@ -102,6 +102,13 @@ class SomeInterface {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+SomeInterface.$classSomeInterface_ = null;
 
 
 SomeInterface.$markImplementor(/** @type {Function} */ (SomeInterface));

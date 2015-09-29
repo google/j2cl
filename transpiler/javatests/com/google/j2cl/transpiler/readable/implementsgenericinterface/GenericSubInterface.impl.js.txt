@@ -65,8 +65,9 @@ class GenericSubInterface {
    */
   static $getClass() {
     GenericSubInterface.$clinit();
-    if (!GenericSubInterface.$classGenericSubInterface) {
-      GenericSubInterface.$classGenericSubInterface = Class.$createForInterface(
+    if (!GenericSubInterface.$classGenericSubInterface_) {
+      GenericSubInterface
+          .$classGenericSubInterface_ = Class.$createForInterface(
           $Util.$generateId('GenericSubInterface'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericSubInterface'),
@@ -74,7 +75,7 @@ class GenericSubInterface {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericSubInterface'));
     }
-    return GenericSubInterface.$classGenericSubInterface;
+    return GenericSubInterface.$classGenericSubInterface_;
   }
 
   /**
@@ -85,6 +86,13 @@ class GenericSubInterface {
   static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+GenericSubInterface.$classGenericSubInterface_ = null;
 
 
 GenericSubInterface.$markImplementor(

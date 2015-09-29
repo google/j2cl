@@ -103,8 +103,8 @@ class $className $extendsClause {
 #if (${classType.isEnum()})
   static $getClass() {
     $className.$clinit();
-    if (!${className}.$class${className}) {
-      ${className}.$class${className} = $classAlias.$createForEnum(
+    if (!${className}.$class${className}_) {
+      ${className}.$class${className}_ = $classAlias.$createForEnum(
           $utilAlias.$generateId('$simpleName'),
           $utilAlias.$generateId('$binaryName'),
           $superTypeName.$getClass(),
@@ -112,19 +112,19 @@ class $className $extendsClause {
           // TODO(rluble): emit here the enum values
           null);
     }
-    return ${className}.$class${className};
+    return ${className}.$class${className}_;
   }
 #else
   static $getClass() {
     $className.$clinit();
-    if (!${className}.$class${className}) {
-      ${className}.$class${className} = $classAlias.$createForClass(
+    if (!${className}.$class${className}_) {
+      ${className}.$class${className}_ = $classAlias.$createForClass(
           $utilAlias.$generateId('$simpleName'),
           $utilAlias.$generateId('$binaryName'),
           $superTypeName.$getClass(),
           $utilAlias.$generateId('$sourceName'));
     }
-    return ${className}.$class${className};
+    return ${className}.$class${className}_;
   }
 #end
 
@@ -136,6 +136,13 @@ class $className $extendsClause {
 #foreach ($staticField in $classType.getStaticFields())
 #parse( "com/google/j2cl/generator/JsStaticField.vm" )
 #end
+
+
+/**
+ * The class literal field.
+ * @private {$classAlias}
+ */
+${className}.$class${className}_ = null;
 
 
 #foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)

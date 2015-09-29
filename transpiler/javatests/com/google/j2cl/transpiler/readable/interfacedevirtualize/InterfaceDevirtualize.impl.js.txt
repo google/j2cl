@@ -169,8 +169,9 @@ class InterfaceDevirtualize extends Object {
    */
   static $getClass() {
     InterfaceDevirtualize.$clinit();
-    if (!InterfaceDevirtualize.$classInterfaceDevirtualize) {
-      InterfaceDevirtualize.$classInterfaceDevirtualize = Class.$createForClass(
+    if (!InterfaceDevirtualize.$classInterfaceDevirtualize_) {
+      InterfaceDevirtualize
+          .$classInterfaceDevirtualize_ = Class.$createForClass(
           $Util.$generateId('InterfaceDevirtualize'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize'),
@@ -178,7 +179,7 @@ class InterfaceDevirtualize extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize'));
     }
-    return InterfaceDevirtualize.$classInterfaceDevirtualize;
+    return InterfaceDevirtualize.$classInterfaceDevirtualize_;
   }
 
   /**
@@ -199,6 +200,13 @@ class InterfaceDevirtualize extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+InterfaceDevirtualize.$classInterfaceDevirtualize_ = null;
 
 
 

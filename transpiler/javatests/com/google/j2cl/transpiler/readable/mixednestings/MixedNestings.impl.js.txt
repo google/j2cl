@@ -100,8 +100,8 @@ class MixedNestings extends Object {
    */
   static $getClass() {
     MixedNestings.$clinit();
-    if (!MixedNestings.$classMixedNestings) {
-      MixedNestings.$classMixedNestings = Class.$createForClass(
+    if (!MixedNestings.$classMixedNestings_) {
+      MixedNestings.$classMixedNestings_ = Class.$createForClass(
           $Util.$generateId('MixedNestings'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings'),
@@ -109,7 +109,7 @@ class MixedNestings extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings'));
     }
-    return MixedNestings.$classMixedNestings;
+    return MixedNestings.$classMixedNestings_;
   }
 
   /**
@@ -125,6 +125,13 @@ class MixedNestings extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+MixedNestings.$classMixedNestings_ = null;
 
 
 

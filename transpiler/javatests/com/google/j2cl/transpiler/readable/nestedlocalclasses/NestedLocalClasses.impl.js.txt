@@ -84,8 +84,8 @@ class NestedLocalClasses extends Object {
    */
   static $getClass() {
     NestedLocalClasses.$clinit();
-    if (!NestedLocalClasses.$classNestedLocalClasses) {
-      NestedLocalClasses.$classNestedLocalClasses = Class.$createForClass(
+    if (!NestedLocalClasses.$classNestedLocalClasses_) {
+      NestedLocalClasses.$classNestedLocalClasses_ = Class.$createForClass(
           $Util.$generateId('NestedLocalClasses'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses'),
@@ -93,7 +93,7 @@ class NestedLocalClasses extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses'));
     }
-    return NestedLocalClasses.$classNestedLocalClasses;
+    return NestedLocalClasses.$classNestedLocalClasses_;
   }
 
   /**
@@ -108,6 +108,13 @@ class NestedLocalClasses extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+NestedLocalClasses.$classNestedLocalClasses_ = null;
 
 
 

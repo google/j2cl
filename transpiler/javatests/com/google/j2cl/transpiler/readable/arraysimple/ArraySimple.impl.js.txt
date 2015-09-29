@@ -90,8 +90,8 @@ class ArraySimple extends Object {
    */
   static $getClass() {
     ArraySimple.$clinit();
-    if (!ArraySimple.$classArraySimple) {
-      ArraySimple.$classArraySimple = Class.$createForClass(
+    if (!ArraySimple.$classArraySimple_) {
+      ArraySimple.$classArraySimple_ = Class.$createForClass(
           $Util.$generateId('ArraySimple'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.arraysimple.ArraySimple'),
@@ -99,7 +99,7 @@ class ArraySimple extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.arraysimple.ArraySimple'));
     }
-    return ArraySimple.$classArraySimple;
+    return ArraySimple.$classArraySimple_;
   }
 
   /**
@@ -114,6 +114,13 @@ class ArraySimple extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+ArraySimple.$classArraySimple_ = null;
 
 
 

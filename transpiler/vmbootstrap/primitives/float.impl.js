@@ -48,10 +48,10 @@ class $float {
    */
   static $getClass() {
     $float.$clinit();
-    if (!$float.$classFloat) {
-      $float.$classFloat = Class.$createForPrimitive('float');
+    if (!$float.$classFloat_) {
+      $float.$classFloat_ = Class.$createForPrimitive('float');
     }
-    return $float.$classFloat;
+    return $float.$classFloat_;
   }
 
   /**
@@ -63,6 +63,13 @@ class $float {
     Class = goog.module.get('gen.java.lang.Class$impl');
   }
 };
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+$float.$classFloat_ = null;
 
 
 /**

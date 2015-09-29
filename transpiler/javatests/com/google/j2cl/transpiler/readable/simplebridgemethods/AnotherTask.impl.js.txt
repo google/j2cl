@@ -103,8 +103,8 @@ class AnotherTask extends Object {
    */
   static $getClass() {
     AnotherTask.$clinit();
-    if (!AnotherTask.$classAnotherTask) {
-      AnotherTask.$classAnotherTask = Class.$createForClass(
+    if (!AnotherTask.$classAnotherTask_) {
+      AnotherTask.$classAnotherTask_ = Class.$createForClass(
           $Util.$generateId('AnotherTask'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask'),
@@ -112,7 +112,7 @@ class AnotherTask extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherTask'));
     }
-    return AnotherTask.$classAnotherTask;
+    return AnotherTask.$classAnotherTask_;
   }
 
   /**
@@ -129,6 +129,13 @@ class AnotherTask extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+AnotherTask.$classAnotherTask_ = null;
 
 
 Callable.$markImplementor(AnotherTask);

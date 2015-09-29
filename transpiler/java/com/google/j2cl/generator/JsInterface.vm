@@ -67,17 +67,24 @@ class $interfaceName {
    */
   static $getClass() {
     $interfaceName.$clinit();
-    if (!${interfaceName}.$class${interfaceName}) {
-      ${interfaceName}.$class${interfaceName} = $classAlias.$createForInterface(
+    if (!${interfaceName}.$class${interfaceName}_) {
+      ${interfaceName}.$class${interfaceName}_ = $classAlias.$createForInterface(
           $utilAlias.$generateId('$simpleName'),
           $utilAlias.$generateId('$binaryName'), null,
           $utilAlias.$generateId('$sourceName'));
     }
-    return ${interfaceName}.$class${interfaceName};
+    return ${interfaceName}.$class${interfaceName}_;
   }
 
 #parse( "com/google/j2cl/generator/JsClinit.vm")
 };
+
+
+/**
+ * The class literal field.
+ * @private {$classAlias}
+ */
+${interfaceName}.$class${interfaceName}_ = null;
 
 
 ## TODO: remove cast after b/20102666 is handled in Closure.

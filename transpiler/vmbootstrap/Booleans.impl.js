@@ -72,6 +72,7 @@ class Booleans {
    * @public
    */
   static m_compareTo__java_lang_Boolean__java_lang_Boolean(a, b) {
+    Booleans.$clinit();
     if (a != null) {
       if (b != null) {
         return Boolean.m_compareTo__boolean__boolean(a, b);
@@ -90,6 +91,7 @@ class Booleans {
    * @public
    */
   static m_compareTo__java_lang_Boolean__java_lang_Object(a, b) {
+    Booleans.$clinit();
     return Booleans.m_compareTo__java_lang_Boolean__java_lang_Boolean(
       a, /**@type {boolean} */ ($Casts.to(b, Boolean.$isInstance(b))));
   }

@@ -320,14 +320,14 @@ class Class extends Object {
    * @nocollapse
    */
   static $getClass() {
-    if (!Class.$classClass) {
-      Class.$classClass = Class.$createForClass(
+    if (!Class.$classClass_) {
+      Class.$classClass_ = Class.$createForClass(
           $Util.$generateId('Class'),
           $Util.$generateId('java.lang.Class'),
           Object.$getClass(),
           $Util.$generateId('java.lang.Class'));
     }
-    return Class.$classClass;
+    return Class.$classClass_;
   }
 
   /**
@@ -338,6 +338,13 @@ class Class extends Object {
    */
   static $clinit() { Object.$clinit(); }
 };
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Class.$classClass_ = null;
 
 
 /**

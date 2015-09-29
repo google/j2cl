@@ -97,8 +97,8 @@ class IfStatement extends Object {
    */
   static $getClass() {
     IfStatement.$clinit();
-    if (!IfStatement.$classIfStatement) {
-      IfStatement.$classIfStatement = Class.$createForClass(
+    if (!IfStatement.$classIfStatement_) {
+      IfStatement.$classIfStatement_ = Class.$createForClass(
           $Util.$generateId('IfStatement'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.ifstatement.IfStatement'),
@@ -106,7 +106,7 @@ class IfStatement extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.ifstatement.IfStatement'));
     }
-    return IfStatement.$classIfStatement;
+    return IfStatement.$classIfStatement_;
   }
 
   /**
@@ -122,6 +122,13 @@ class IfStatement extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+IfStatement.$classIfStatement_ = null;
 
 
 

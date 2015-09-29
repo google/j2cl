@@ -110,8 +110,8 @@ class B extends A {
    */
   static $getClass() {
     B.$clinit();
-    if (!B.$classB) {
-      B.$classB = Class.$createForClass(
+    if (!B.$classB_) {
+      B.$classB_ = Class.$createForClass(
           $Util.$generateId('B'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.bridgemethodsreturn.B'),
@@ -119,7 +119,7 @@ class B extends A {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.bridgemethodsreturn.B'));
     }
-    return B.$classB;
+    return B.$classB_;
   }
 
   /**
@@ -137,6 +137,13 @@ class B extends A {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+B.$classB_ = null;
 
 
 I.$markImplementor(B);

@@ -83,8 +83,9 @@ class LocalClassInheritance extends Object {
    */
   static $getClass() {
     LocalClassInheritance.$clinit();
-    if (!LocalClassInheritance.$classLocalClassInheritance) {
-      LocalClassInheritance.$classLocalClassInheritance = Class.$createForClass(
+    if (!LocalClassInheritance.$classLocalClassInheritance_) {
+      LocalClassInheritance
+          .$classLocalClassInheritance_ = Class.$createForClass(
           $Util.$generateId('LocalClassInheritance'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance'),
@@ -92,7 +93,7 @@ class LocalClassInheritance extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance'));
     }
-    return LocalClassInheritance.$classLocalClassInheritance;
+    return LocalClassInheritance.$classLocalClassInheritance_;
   }
 
   /**
@@ -107,6 +108,13 @@ class LocalClassInheritance extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+LocalClassInheritance.$classLocalClassInheritance_ = null;
 
 
 

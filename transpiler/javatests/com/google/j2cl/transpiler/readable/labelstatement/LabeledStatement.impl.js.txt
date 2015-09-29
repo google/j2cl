@@ -83,8 +83,8 @@ class LabeledStatement extends Object {
    */
   static $getClass() {
     LabeledStatement.$clinit();
-    if (!LabeledStatement.$classLabeledStatement) {
-      LabeledStatement.$classLabeledStatement = Class.$createForClass(
+    if (!LabeledStatement.$classLabeledStatement_) {
+      LabeledStatement.$classLabeledStatement_ = Class.$createForClass(
           $Util.$generateId('LabeledStatement'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.labelstatement.LabeledStatement'),
@@ -92,7 +92,7 @@ class LabeledStatement extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.labelstatement.LabeledStatement'));
     }
-    return LabeledStatement.$classLabeledStatement;
+    return LabeledStatement.$classLabeledStatement_;
   }
 
   /**
@@ -106,6 +106,13 @@ class LabeledStatement extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+LabeledStatement.$classLabeledStatement_ = null;
 
 
 

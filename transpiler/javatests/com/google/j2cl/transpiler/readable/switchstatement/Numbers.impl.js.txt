@@ -96,8 +96,8 @@ class Numbers extends Enum {
    */
   static $getClass() {
     Numbers.$clinit();
-    if (!Numbers.$classNumbers) {
-      Numbers.$classNumbers = Class.$createForEnum(
+    if (!Numbers.$classNumbers_) {
+      Numbers.$classNumbers_ = Class.$createForEnum(
           $Util.$generateId('Numbers'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.switchstatement.Numbers'),
@@ -107,7 +107,7 @@ class Numbers extends Enum {
           // TODO(rluble): emit here the enum values
           null);
     }
-    return Numbers.$classNumbers;
+    return Numbers.$classNumbers_;
   }
 
   /**
@@ -197,6 +197,13 @@ Numbers.$f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers =
  */
 Numbers.$f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers =
     null;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Numbers.$classNumbers_ = null;
 
 
 

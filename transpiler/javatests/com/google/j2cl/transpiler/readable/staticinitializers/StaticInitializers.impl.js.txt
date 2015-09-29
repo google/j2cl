@@ -77,8 +77,8 @@ class StaticInitializers extends Object {
    */
   static $getClass() {
     StaticInitializers.$clinit();
-    if (!StaticInitializers.$classStaticInitializers) {
-      StaticInitializers.$classStaticInitializers = Class.$createForClass(
+    if (!StaticInitializers.$classStaticInitializers_) {
+      StaticInitializers.$classStaticInitializers_ = Class.$createForClass(
           $Util.$generateId('StaticInitializers'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.staticinitializers.StaticInitializers'),
@@ -86,7 +86,7 @@ class StaticInitializers extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.staticinitializers.StaticInitializers'));
     }
-    return StaticInitializers.$classStaticInitializers;
+    return StaticInitializers.$classStaticInitializers_;
   }
 
   /**
@@ -183,6 +183,13 @@ StaticInitializers
 StaticInitializers
     .$f_b__com_google_j2cl_transpiler_readable_staticinitializers_StaticInitializers =
     0;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+StaticInitializers.$classStaticInitializers_ = null;
 
 
 

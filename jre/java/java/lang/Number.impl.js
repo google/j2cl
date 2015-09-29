@@ -123,14 +123,14 @@ class Number extends Object {
    */
   static $getClass() {
     Number.$clinit();
-    if (!Number.$classNumber) {
-      Number.$classNumber = Class.$createForClass(
+    if (!Number.$classNumber_) {
+      Number.$classNumber_ = Class.$createForClass(
           $Util.$generateId('Number'),
           $Util.$generateId('java.lang.Number'),
           Object.$getClass(),
           $Util.$generateId('java.lang.Number'));
     }
-    return Number.$classNumber;
+    return Number.$classNumber_;
   }
 
   /**
@@ -145,6 +145,13 @@ class Number extends Object {
     Object.$clinit();
   }
 };
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Number.$classNumber_ = null;
 
 
 /**

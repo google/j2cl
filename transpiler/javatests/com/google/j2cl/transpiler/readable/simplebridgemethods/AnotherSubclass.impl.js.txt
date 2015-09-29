@@ -78,8 +78,8 @@ class AnotherSubclass extends Superclass {
    */
   static $getClass() {
     AnotherSubclass.$clinit();
-    if (!AnotherSubclass.$classAnotherSubclass) {
-      AnotherSubclass.$classAnotherSubclass = Class.$createForClass(
+    if (!AnotherSubclass.$classAnotherSubclass_) {
+      AnotherSubclass.$classAnotherSubclass_ = Class.$createForClass(
           $Util.$generateId('AnotherSubclass'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherSubclass'),
@@ -87,7 +87,7 @@ class AnotherSubclass extends Superclass {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.simplebridgemethods.AnotherSubclass'));
     }
-    return AnotherSubclass.$classAnotherSubclass;
+    return AnotherSubclass.$classAnotherSubclass_;
   }
 
   /**
@@ -102,6 +102,13 @@ class AnotherSubclass extends Superclass {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+AnotherSubclass.$classAnotherSubclass_ = null;
 
 
 

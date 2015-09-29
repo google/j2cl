@@ -88,8 +88,8 @@ class InstanceofClass extends Object {
    */
   static $getClass() {
     InstanceofClass.$clinit();
-    if (!InstanceofClass.$classInstanceofClass) {
-      InstanceofClass.$classInstanceofClass = Class.$createForClass(
+    if (!InstanceofClass.$classInstanceofClass_) {
+      InstanceofClass.$classInstanceofClass_ = Class.$createForClass(
           $Util.$generateId('InstanceofClass'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass'),
@@ -97,7 +97,7 @@ class InstanceofClass extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass'));
     }
-    return InstanceofClass.$classInstanceofClass;
+    return InstanceofClass.$classInstanceofClass_;
   }
 
   /**
@@ -113,6 +113,13 @@ class InstanceofClass extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+InstanceofClass.$classInstanceofClass_ = null;
 
 
 

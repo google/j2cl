@@ -83,9 +83,9 @@ class FooCallsSuperObjectMethod extends Object {
    */
   static $getClass() {
     FooCallsSuperObjectMethod.$clinit();
-    if (!FooCallsSuperObjectMethod.$classFooCallsSuperObjectMethod) {
+    if (!FooCallsSuperObjectMethod.$classFooCallsSuperObjectMethod_) {
       FooCallsSuperObjectMethod
-          .$classFooCallsSuperObjectMethod = Class.$createForClass(
+          .$classFooCallsSuperObjectMethod_ = Class.$createForClass(
           $Util.$generateId('FooCallsSuperObjectMethod'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.FooCallsSuperObjectMethod'),
@@ -93,7 +93,7 @@ class FooCallsSuperObjectMethod extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.FooCallsSuperObjectMethod'));
     }
-    return FooCallsSuperObjectMethod.$classFooCallsSuperObjectMethod;
+    return FooCallsSuperObjectMethod.$classFooCallsSuperObjectMethod_;
   }
 
   /**
@@ -107,6 +107,13 @@ class FooCallsSuperObjectMethod extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+FooCallsSuperObjectMethod.$classFooCallsSuperObjectMethod_ = null;
 
 
 

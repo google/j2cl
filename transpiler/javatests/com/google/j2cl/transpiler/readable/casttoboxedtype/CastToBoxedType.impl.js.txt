@@ -102,8 +102,8 @@ class CastToBoxedType extends Object {
    */
   static $getClass() {
     CastToBoxedType.$clinit();
-    if (!CastToBoxedType.$classCastToBoxedType) {
-      CastToBoxedType.$classCastToBoxedType = Class.$createForClass(
+    if (!CastToBoxedType.$classCastToBoxedType_) {
+      CastToBoxedType.$classCastToBoxedType_ = Class.$createForClass(
           $Util.$generateId('CastToBoxedType'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.casttoboxedtype.CastToBoxedType'),
@@ -111,7 +111,7 @@ class CastToBoxedType extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.casttoboxedtype.CastToBoxedType'));
     }
-    return CastToBoxedType.$classCastToBoxedType;
+    return CastToBoxedType.$classCastToBoxedType_;
   }
 
   /**
@@ -135,6 +135,13 @@ class CastToBoxedType extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+CastToBoxedType.$classCastToBoxedType_ = null;
 
 
 

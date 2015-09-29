@@ -90,8 +90,8 @@ class ArrayLiteral extends Object {
    */
   static $getClass() {
     ArrayLiteral.$clinit();
-    if (!ArrayLiteral.$classArrayLiteral) {
-      ArrayLiteral.$classArrayLiteral = Class.$createForClass(
+    if (!ArrayLiteral.$classArrayLiteral_) {
+      ArrayLiteral.$classArrayLiteral_ = Class.$createForClass(
           $Util.$generateId('ArrayLiteral'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.arrayliteral.ArrayLiteral'),
@@ -99,7 +99,7 @@ class ArrayLiteral extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.arrayliteral.ArrayLiteral'));
     }
-    return ArrayLiteral.$classArrayLiteral;
+    return ArrayLiteral.$classArrayLiteral_;
   }
 
   /**
@@ -115,6 +115,13 @@ class ArrayLiteral extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+ArrayLiteral.$classArrayLiteral_ = null;
 
 
 

@@ -94,8 +94,8 @@ class NativeFunction extends Object {
    */
   static $getClass() {
     NativeFunction.$clinit();
-    if (!NativeFunction.$classNativeFunction) {
-      NativeFunction.$classNativeFunction = Class.$createForClass(
+    if (!NativeFunction.$classNativeFunction_) {
+      NativeFunction.$classNativeFunction_ = Class.$createForClass(
           $Util.$generateId('NativeFunction'),
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.nativefunction.NativeFunction'),
@@ -103,7 +103,7 @@ class NativeFunction extends Object {
           $Util.$generateId(
               'com.google.j2cl.transpiler.readable.nativefunction.NativeFunction'));
     }
-    return NativeFunction.$classNativeFunction;
+    return NativeFunction.$classNativeFunction_;
   }
 
   /**
@@ -117,6 +117,13 @@ class NativeFunction extends Object {
   }
 }
 ;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+NativeFunction.$classNativeFunction_ = null;
 
 
 
