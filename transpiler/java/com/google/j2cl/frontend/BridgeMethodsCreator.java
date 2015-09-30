@@ -270,9 +270,10 @@ public class BridgeMethodsCreator {
       parameters.add(parameter);
       Expression parameterReference = parameter.getReference();
 
-      // The type the argument should be casted to.
+      // The type the argument should be casted to. It should be casted to the concrete parameter
+      // type that is expected by the concrete parameterized method.
       TypeDescriptor castToParameterTypeDescriptor =
-          JdtUtils.createTypeDescriptor(bridgeMethod.getParameterTypes()[i].getErasure());
+          JdtUtils.createTypeDescriptor(bridgeMethod.getParameterTypes()[i]);
       // if the parameter type in bridge method is different from that in parameterized method,
       // add a cast.
       Expression argument =

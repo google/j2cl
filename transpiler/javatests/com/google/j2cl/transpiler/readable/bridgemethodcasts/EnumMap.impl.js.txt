@@ -1,0 +1,144 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.bridgemethodcasts.EnumMap.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.bridgemethodcasts.EnumMap$impl');
+
+
+let AbstractMap = goog.require('gen.com.google.j2cl.transpiler.readable.bridgemethodcasts.AbstractMap$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Enum = goog.forwardDeclare('gen.java.lang.Enum$impl');
+let Object = goog.forwardDeclare('gen.java.lang.Object$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+/**
+ * @template C_K, C_V
+ * @extends {AbstractMap<C_K, C_V>}
+ */
+class EnumMap extends AbstractMap {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_bridgemethodcasts_EnumMap() {}
+
+  /**
+   * @param {C_K} key
+   * @param {C_V} value
+   * @return {C_V}
+   * @public
+   */
+  m_put__java_lang_Enum__java_lang_Object(key, value) { return value; }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_K, C_V
+   * @return {!EnumMap<C_K, C_V>}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    EnumMap.$clinit();
+    let instance = new EnumMap;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_bridgemethodcasts_EnumMap();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgemethodcasts_EnumMap() {
+    this.$ctor__com_google_j2cl_transpiler_readable_bridgemethodcasts_AbstractMap();
+    this.$init__com_google_j2cl_transpiler_readable_bridgemethodcasts_EnumMap();
+  }
+
+  /**
+   * Synthetic method.
+   * @param {C_K} arg0
+   * @param {C_V} arg1
+   * @return {*}
+   * @public
+   */
+  m_put__java_lang_Object__java_lang_Object(arg0, arg1) {
+    return this.m_put__java_lang_Enum__java_lang_Object(
+        /**@type {C_K} */ ($Casts.to(arg0, Enum)),
+        /**@type {C_V} */ ($Casts.to(arg1, Object)));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof EnumMap; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, EnumMap);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    EnumMap.$clinit();
+    if (!EnumMap.$classEnumMap_) {
+      EnumMap.$classEnumMap_ = Class.$createForClass(
+          $Util.$generateId('EnumMap'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.bridgemethodcasts.EnumMap'),
+          AbstractMap.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.bridgemethodcasts.EnumMap'));
+    }
+    return EnumMap.$classEnumMap_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Enum = goog.module.get('gen.java.lang.Enum$impl');
+    Object = goog.module.get('gen.java.lang.Object$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    AbstractMap.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+EnumMap.$classEnumMap_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = EnumMap;

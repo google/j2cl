@@ -47,6 +47,7 @@ class CastToGenerics extends Object {
         CastToGenerics.$create());
     let cc = /**@type {CastToGenerics<Error, (Number|?number)>} */ (
         $Casts.to(c, CastToGenerics));
+    cc = /**@type {CastToGenerics} */ ($Casts.to(c, CastToGenerics));
   }
 
   /**
