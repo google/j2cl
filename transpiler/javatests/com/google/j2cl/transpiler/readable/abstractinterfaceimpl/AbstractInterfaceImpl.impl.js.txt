@@ -1,0 +1,123 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.abstractinterfaceimpl.AbstractInterfaceImpl.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.abstractinterfaceimpl.AbstractInterfaceImpl$impl');
+
+
+let MyInterface = goog.require('gen.com.google.j2cl.transpiler.readable.abstractinterfaceimpl.MyInterface$impl');
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+/**
+ * @implements {MyInterface}
+ */
+class AbstractInterfaceImpl extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_abstractinterfaceimpl_AbstractInterfaceImpl() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!AbstractInterfaceImpl}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    AbstractInterfaceImpl.$clinit();
+    let instance = new AbstractInterfaceImpl;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_abstractinterfaceimpl_AbstractInterfaceImpl();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_abstractinterfaceimpl_AbstractInterfaceImpl() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_abstractinterfaceimpl_AbstractInterfaceImpl();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof AbstractInterfaceImpl;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, AbstractInterfaceImpl);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    AbstractInterfaceImpl.$clinit();
+    if (!AbstractInterfaceImpl.$classAbstractInterfaceImpl_) {
+      AbstractInterfaceImpl
+          .$classAbstractInterfaceImpl_ = Class.$createForClass(
+          $Util.$generateId('AbstractInterfaceImpl'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.abstractinterfaceimpl.AbstractInterfaceImpl'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.abstractinterfaceimpl.AbstractInterfaceImpl'));
+    }
+    return AbstractInterfaceImpl.$classAbstractInterfaceImpl_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+AbstractInterfaceImpl.$classAbstractInterfaceImpl_ = null;
+
+
+MyInterface.$markImplementor(AbstractInterfaceImpl);
+
+
+
+/**
+ * Export class.
+ */
+exports = AbstractInterfaceImpl;

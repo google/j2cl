@@ -36,6 +36,8 @@ are copyright and licensed as follows:
 
 ## Tasks
 - Add a Closure pass to get back the 2% regression introduced in cl/104162467.
+- Fix "abstractinterfaceimpl" build.log, abstract class with unimplemented
+  interface functions produces warnings by JSCompiler.
 - Fix "simpleautoboxing" build.log, we're currently omitting Double->double and Boolean->boolean
     boxing operations and it's resulting in Closure seeing us try to collapse ?number->number and
     ?boolean->boolean.
