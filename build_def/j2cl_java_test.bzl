@@ -68,13 +68,8 @@ def j2cl_java_test(**kwargs):
   kwargs["plugins"] = (
       kwargs["plugins"] + ["//:junit_processor"])
 
-  # JavaScript file names that will be produced by our APT
-  js_names = []
-
   if not "srcs" in kwargs:
     fail("No srcs defined in rule")
-  for src in kwargs["srcs"]:
-    js_names += [src[:-len(".java")] + "_generated.js"]
 
   # path to the jar produced by the java_library rule defined in
   # j2cl_java_library
@@ -85,9 +80,9 @@ def j2cl_java_test(**kwargs):
   native.genrule(
       name=base_name + "_extract_js",
       srcs=[":" + base_name],
-      outs=js_names,
-      cmd="$(location //third_party/unzip:unzip) -q -d $(GENDIR)/"
-      + java_root + " " + out_jar + "",
+      outs= [base_name + "_extracted_js.js",],
+      cmd= ("$(location //third_party/unzip:unzip) -p "
+       + " " + out_jar + " j2cl_generated_test_suite.js > $@"),
       testonly=1,
       tools=[
           "lib" + base_name + ".jar",
