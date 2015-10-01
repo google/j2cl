@@ -124,11 +124,7 @@ public class ManglingNameUtils {
     if (methodDescriptor.getParameterTypeDescriptors().isEmpty()) {
       return "";
     }
-    MethodDescriptor erasureMethodDescriptor =
-        methodDescriptor.isParameterizedMethod()
-            ? methodDescriptor.getErasureMethodDescriptor()
-            : methodDescriptor;
-    return "__" + Joiner.on("__").join(getMangledParameterTypes(erasureMethodDescriptor));
+    return "__" + Joiner.on("__").join(getMangledParameterTypes(methodDescriptor));
   }
 
   /**

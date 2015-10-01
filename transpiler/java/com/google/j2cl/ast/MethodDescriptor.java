@@ -24,8 +24,6 @@ import com.google.j2cl.ast.processors.Visitable;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.annotation.Nullable;
-
 /**
  * A (by signature) reference to a method.
  */
@@ -49,8 +47,7 @@ public abstract class MethodDescriptor extends Node implements Member {
       boolean isNative,
       TypeDescriptor returnTypeDescriptor,
       Iterable<TypeDescriptor> parameterTypeDescriptors,
-      Iterable<TypeDescriptor> typeParameterDescriptors,
-      MethodDescriptor erasureMethodDescriptor) {
+      Iterable<TypeDescriptor> typeParameterDescriptors) {
     return getInterner()
         .intern(
             new AutoValue_MethodDescriptor(
@@ -63,8 +60,7 @@ public abstract class MethodDescriptor extends Node implements Member {
                 isNative,
                 ImmutableList.copyOf(parameterTypeDescriptors),
                 returnTypeDescriptor,
-                ImmutableList.copyOf(typeParameterDescriptors),
-                erasureMethodDescriptor));
+                ImmutableList.copyOf(typeParameterDescriptors)));
   }
 
   public static MethodDescriptor create(
@@ -76,8 +72,7 @@ public abstract class MethodDescriptor extends Node implements Member {
       boolean isNative,
       TypeDescriptor returnTypeDescriptor,
       Iterable<TypeDescriptor> parameterTypeDescriptors,
-      Iterable<TypeDescriptor> typeParameterDescriptors,
-      MethodDescriptor erasureMethodDescriptor) {
+      Iterable<TypeDescriptor> typeParameterDescriptors) {
     return create(
         isStatic,
         false,
@@ -88,8 +83,7 @@ public abstract class MethodDescriptor extends Node implements Member {
         isNative,
         returnTypeDescriptor,
         parameterTypeDescriptors,
-        typeParameterDescriptors,
-        erasureMethodDescriptor);
+        typeParameterDescriptors);
   }
 
   public static MethodDescriptor create(
@@ -111,8 +105,7 @@ public abstract class MethodDescriptor extends Node implements Member {
         isNative,
         returnTypeDescriptor,
         parameterTypeDescriptors,
-        ImmutableList.<TypeDescriptor>of(),
-        null);
+        ImmutableList.<TypeDescriptor>of());
   }
 
   public static MethodDescriptor create(
@@ -155,8 +148,7 @@ public abstract class MethodDescriptor extends Node implements Member {
         false,
         returnTypeDescriptor,
         parameterTypeDescriptors,
-        ImmutableList.<TypeDescriptor>of(),
-        null);
+        ImmutableList.<TypeDescriptor>of());
   }
 
   static Interner<MethodDescriptor> getInterner() {
@@ -195,20 +187,8 @@ public abstract class MethodDescriptor extends Node implements Member {
    */
   public abstract ImmutableList<TypeDescriptor> getTypeParameterDescriptors();
 
-  /**
-   * The erasure of a parameterized method is the method with erasure parameter types.
-   * For example, {@code a.m(List<Number>, Number)} or {@code m(List<T>, T)} =>
-   * {@code m(List, Object)}
-   */
-  @Nullable
-  public abstract MethodDescriptor getErasureMethodDescriptor();
-
   public boolean isInit() {
     return getMethodName().equals(INIT_METHOD_NAME);
-  }
-
-  public boolean isParameterizedMethod() {
-    return getErasureMethodDescriptor() != null && getErasureMethodDescriptor() != this;
   }
 
   @Override

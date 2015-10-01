@@ -29,36 +29,6 @@ public class MethodDescriptors {
    */
   public static MethodDescriptor createModifiedCopy(
       MethodDescriptor methodDescriptor, List<TypeDescriptor> addedParameters) {
-    MethodDescriptor erasureMethodDescriptor = methodDescriptor.getErasureMethodDescriptor();
-
-    // If the given method descriptor is parameterized then its erased version will need to be
-    // updated as well.
-    if (methodDescriptor.isParameterizedMethod()) {
-      // Add the raw versions of the provided parameters to the end of the erased method
-      // descriptor's existing parameters list.
-      List<TypeDescriptor> rawAddedParameters = new ArrayList<>();
-      for (TypeDescriptor addedParameter : addedParameters) {
-        rawAddedParameters.add(addedParameter.getRawTypeDescriptor());
-      }
-      List<TypeDescriptor> rawParameters =
-          new ArrayList<>(erasureMethodDescriptor.getParameterTypeDescriptors());
-      rawParameters.addAll(rawAddedParameters);
-
-      erasureMethodDescriptor =
-          MethodDescriptor.create(
-              erasureMethodDescriptor.isStatic(),
-              erasureMethodDescriptor.isRaw(),
-              erasureMethodDescriptor.getVisibility(),
-              erasureMethodDescriptor.getEnclosingClassTypeDescriptor(),
-              erasureMethodDescriptor.getMethodName(),
-              erasureMethodDescriptor.isConstructor(),
-              erasureMethodDescriptor.isNative(),
-              erasureMethodDescriptor.getReturnTypeDescriptor(),
-              rawParameters,
-              erasureMethodDescriptor.getTypeParameterDescriptors(),
-              null);
-    }
-
     // Add the provided parameters to the end of the existing parameters list.
     List<TypeDescriptor> parameters =
         new ArrayList<>(methodDescriptor.getParameterTypeDescriptors());
@@ -74,7 +44,6 @@ public class MethodDescriptors {
         methodDescriptor.isNative(),
         methodDescriptor.getReturnTypeDescriptor(),
         parameters,
-        methodDescriptor.getTypeParameterDescriptors(),
-        erasureMethodDescriptor);
+        methodDescriptor.getTypeParameterDescriptors());
   }
 }

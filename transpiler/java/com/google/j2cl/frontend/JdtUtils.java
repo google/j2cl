@@ -141,12 +141,14 @@ public class JdtUtils {
 
     // generate parameters type descriptors.
     Iterable<TypeDescriptor> parameterTypeDescriptors =
-        FluentIterable.from(Arrays.asList(methodBinding.getParameterTypes()))
+        FluentIterable.from(Arrays.asList(methodBinding.getMethodDeclaration().getParameterTypes()))
             .transform(
                 new Function<ITypeBinding, TypeDescriptor>() {
                   @Override
                   public TypeDescriptor apply(ITypeBinding typeBinding) {
-                    return createTypeDescriptor(typeBinding);
+                    // Whenever we create the parameter types of a method,
+                    // we use the rawTypeDescriptor.
+                    return createTypeDescriptor(typeBinding).getRawTypeDescriptor();
                   }
                 });
     // generate type parameters declared in the method.
@@ -160,33 +162,6 @@ public class JdtUtils {
                   }
                 });
 
-    // If it is a parameterized method, declaredMethodBinding is the binding of the generic method.
-    // For example, <T> void foo(T a); foo("a");
-    // methodBinding is void foo(String), and declaredMethodBinding is void foo(T)
-    IMethodBinding declaredMethodBinding = methodBinding.getMethodDeclaration();
-    // generate erasureMethodDescriptor using erasure of parameter types.
-    Iterable<TypeDescriptor> erasureParameterTypeDescriptors =
-        FluentIterable.from(Arrays.asList(declaredMethodBinding.getParameterTypes()))
-            .transform(
-                new Function<ITypeBinding, TypeDescriptor>() {
-                  @Override
-                  public TypeDescriptor apply(ITypeBinding typeBinding) {
-                    return createTypeDescriptor(typeBinding.getErasure());
-                  }
-                });
-    TypeDescriptor erasureReturnTypeDescriptor =
-        createTypeDescriptor(declaredMethodBinding.getReturnType().getErasure());
-    MethodDescriptor erasureMethodDescriptor =
-        MethodDescriptor.create(
-            isStatic,
-            visibility,
-            enclosingClassTypeDescriptor,
-            methodName,
-            isConstructor,
-            isNative,
-            erasureReturnTypeDescriptor,
-            erasureParameterTypeDescriptors);
-
     return MethodDescriptor.create(
         isStatic,
         visibility,
@@ -196,8 +171,7 @@ public class JdtUtils {
         isNative,
         returnTypeDescriptor,
         parameterTypeDescriptors,
-        typeParameterDescriptors,
-        erasureMethodDescriptor);
+        typeParameterDescriptors);
   }
 
   static Variable createVariable(IVariableBinding variableBinding) {

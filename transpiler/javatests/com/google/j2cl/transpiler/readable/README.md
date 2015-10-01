@@ -49,8 +49,6 @@ are copyright and licensed as follows:
     and each Comparable.$markImplementor(...) was not stripped, even though
     they are not called. See cl/103587701 for a repro case and a deeper
     investigation of the cause.
-- Fix "redefined variable" error with bridge method creation in
-  "bridgemethodsreturn".
 
 ## Tracking Closure warning issues
 - https://b.corp.google.com/hotlists/269212

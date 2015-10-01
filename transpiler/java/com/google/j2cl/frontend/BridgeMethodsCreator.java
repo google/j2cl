@@ -18,7 +18,6 @@ package com.google.j2cl.frontend;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.Block;
@@ -188,40 +187,17 @@ public class BridgeMethodsCreator {
   }
 
   /**
-   * Creates MethodDescriptor in current class that has the same erasure signature of
-   * {@code methodBinding}.
+   * Creates MethodDescriptor in current class that has the same signature of {@code methodBinding},
+   * with return type of {@code returnType}.
    */
-  private MethodDescriptor createMethodDescriptorInCurrentType(IMethodBinding methodBinding) {
+  private MethodDescriptor createMethodDescriptorInCurrentType(
+      IMethodBinding methodBinding, ITypeBinding returnType) {
     boolean isStatic = JdtUtils.isStatic(methodBinding.getModifiers());
     Visibility visibility = JdtUtils.getVisibility(methodBinding.getModifiers());
     TypeDescriptor enclosingClassTypeDescriptor = JdtUtils.createTypeDescriptor(typeBinding);
     String methodName = methodBinding.getName();
     boolean isConstructor = methodBinding.isConstructor();
     boolean isNative = false;
-
-    // create erasureMethodDescriptor by the original method declaration.
-    IMethodBinding declaredMethodBinding = methodBinding.getMethodDeclaration();
-    Iterable<TypeDescriptor> erasureParameterTypeDescriptors =
-        FluentIterable.from(Arrays.asList(declaredMethodBinding.getParameterTypes()))
-            .transform(
-                new Function<ITypeBinding, TypeDescriptor>() {
-                  @Override
-                  public TypeDescriptor apply(ITypeBinding typeBinding) {
-                    return JdtUtils.createTypeDescriptor(typeBinding.getErasure());
-                  }
-                });
-    TypeDescriptor erasureReturnTypeDescriptor =
-        JdtUtils.createTypeDescriptor(declaredMethodBinding.getReturnType().getErasure());
-    MethodDescriptor erasureMethodDescriptor =
-        MethodDescriptor.create(
-            isStatic,
-            visibility,
-            enclosingClassTypeDescriptor,
-            methodName,
-            isConstructor,
-            isNative,
-            erasureReturnTypeDescriptor,
-            erasureParameterTypeDescriptors);
 
     return MethodDescriptor.create(
         isStatic,
@@ -230,17 +206,17 @@ public class BridgeMethodsCreator {
         methodName,
         isConstructor,
         isNative,
-        JdtUtils.createTypeDescriptor(methodBinding.getReturnType().getErasure()), // return type
+        JdtUtils.createTypeDescriptor(returnType), // return type
         Iterables.transform(
-            Arrays.asList(methodBinding.getParameterTypes()),
+            Arrays.asList(methodBinding.getMethodDeclaration().getParameterTypes()),
             new Function<ITypeBinding, TypeDescriptor>() {
               @Override
               public TypeDescriptor apply(ITypeBinding typeBinding) {
-                return JdtUtils.createTypeDescriptor(typeBinding.getErasure()); // use erasure type.
+                // Whenever we create the parameter types of a method, we use the rawTypeDescriptor.
+                return JdtUtils.createTypeDescriptor(typeBinding).getRawTypeDescriptor();
               }
             }),
-        ImmutableList.<TypeDescriptor>of(),
-        erasureMethodDescriptor);
+        ImmutableList.<TypeDescriptor>of());
   }
 
   /**
@@ -253,10 +229,14 @@ public class BridgeMethodsCreator {
   private Method createBridgeMethod(IMethodBinding bridgeMethod, IMethodBinding targetMethod) {
     // The MethodDescriptor of the generated bridge method should have the same signature as the
     // original declared method.
-    MethodDescriptor bridgeMethodDescriptor = createMethodDescriptorInCurrentType(bridgeMethod);
+    // Its return type is the same as the delegated method.
+    // Using the return type of the delegated method also avoids generating redundant bridge methods
+    // for two methods that have the same parameter signature but different return types.
+    MethodDescriptor bridgeMethodDescriptor =
+        createMethodDescriptorInCurrentType(bridgeMethod, targetMethod.getReturnType());
     // The MethodDescriptor of the delegated method.
     MethodDescriptor targetMethodDescriptor =
-        createMethodDescriptorInCurrentType(targetMethod.getMethodDeclaration());
+        createMethodDescriptorInCurrentType(targetMethod, targetMethod.getReturnType());
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
 
@@ -277,7 +257,7 @@ public class BridgeMethodsCreator {
       // if the parameter type in bridge method is different from that in parameterized method,
       // add a cast.
       Expression argument =
-          bridgeMethodDescriptor.getErasureMethodDescriptor().getParameterTypeDescriptors().get(i)
+          bridgeMethodDescriptor.getParameterTypeDescriptors().get(i)
                   == castToParameterTypeDescriptor
               ? parameterReference
               : new CastExpression(parameterReference, castToParameterTypeDescriptor);

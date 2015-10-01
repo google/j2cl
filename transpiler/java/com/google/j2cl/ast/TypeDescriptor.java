@@ -104,20 +104,7 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
   public abstract boolean isRaw();
 
   public boolean isPrimitive() {
-    switch (getSourceName()) {
-      case BOOLEAN_TYPE_NAME:
-      case BYTE_TYPE_NAME:
-      case CHAR_TYPE_NAME:
-      case DOUBLE_TYPE_NAME:
-      case FLOAT_TYPE_NAME:
-      case INT_TYPE_NAME:
-      case LONG_TYPE_NAME:
-      case SHORT_TYPE_NAME:
-      case VOID_TYPE_NAME:
-        return true;
-      default:
-        return false;
-    }
+    return false;
   }
 
   public boolean isParameterizedType() {

@@ -80,6 +80,11 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  public boolean isPrimitive() {
+    return typeBinding != null && typeBinding.isPrimitive();
+  }
+
+  @Override
   public boolean isTypeVariable() {
     return typeBinding != null && typeBinding.isTypeVariable();
   }
@@ -135,6 +140,14 @@ public class RegularTypeDescriptor extends TypeDescriptor {
 
   @Override
   public String getSourceName() {
+    // For type variable, we use its binary name from JDT directly, which will ensure the uniqueness
+    // of each type variable. getBinaryName() computed by J2CL does not ensure the uniqueness in the
+    // case where two type variables with the same name are declared in two different methods that
+    // overload each other. Because J2cl only put the method name, not the full signature in the
+    // class components.
+    if (isTypeVariable()) {
+      return typeBinding.getBinaryName();
+    }
     return getBinaryName() + getTypeArgumentsName();
   }
 
