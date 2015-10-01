@@ -19,7 +19,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
-import com.google.j2cl.ast.ASTUtils;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.Expression;
@@ -111,7 +111,7 @@ public class JdtUtils {
 
   static FieldDescriptor createFieldDescriptor(IVariableBinding variableBinding) {
     if (isArrayLengthBinding(variableBinding)) {
-      return ASTUtils.ARRAY_LENGTH_FIELD_DESCRIPTION;
+      return AstUtils.ARRAY_LENGTH_FIELD_DESCRIPTION;
     }
 
     int modifiers = variableBinding.getModifiers();

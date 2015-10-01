@@ -1,8 +1,8 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.common.collect.ImmutableList;
-import com.google.j2cl.ast.ASTUtils;
 import com.google.j2cl.ast.AbstractRewriter;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
@@ -15,7 +15,6 @@ import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.VariableDeclarationFragment;
-import com.google.j2cl.generator.TranspilerUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +40,7 @@ public class InsertImplicitCastsVisitor extends AbstractRewriter {
 
   @Override
   public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
-    if (TranspilerUtils.isAssignment(binaryExpression.getOperator())) {
+    if (AstUtils.isAssignmentOperator(binaryExpression.getOperator())) {
       // =, +=, -=, etc
       return rewriteAssignmentBinaryExpression(binaryExpression);
     } else {
@@ -115,7 +114,7 @@ public class InsertImplicitCastsVisitor extends AbstractRewriter {
   }
 
   private Node rewriteLongAssignmentBinaryExpression(BinaryExpression binaryExpression) {
-    if (ASTUtils.isShiftOperator(binaryExpression.getOperator())) {
+    if (AstUtils.isShiftOperator(binaryExpression.getOperator())) {
       // promote long += int -> long += long
       return new BinaryExpression(
           binaryExpression.getTypeDescriptor(),
@@ -137,7 +136,7 @@ public class InsertImplicitCastsVisitor extends AbstractRewriter {
   }
 
   private Node rewriteLongNonAssignmentBinaryExpression(BinaryExpression binaryExpression) {
-    if (ASTUtils.isShiftOperator(binaryExpression.getOperator())) {
+    if (AstUtils.isShiftOperator(binaryExpression.getOperator())) {
       // promote long + int -> long + long
       return new BinaryExpression(
           binaryExpression.getTypeDescriptor(),
@@ -203,7 +202,7 @@ public class InsertImplicitCastsVisitor extends AbstractRewriter {
       // If the type didn't change there's no need for a cast.
       return expression;
     }
-    if (ASTUtils.canRemoveCast(expression.getTypeDescriptor(), toTypeDescriptor)) {
+    if (AstUtils.canRemoveCast(expression.getTypeDescriptor(), toTypeDescriptor)) {
       // If a cast would make no difference (because both types are both already encoded as JS
       // number primitives and have compatible sign and truncation conventions) then don't bother
       // emitting a cast.

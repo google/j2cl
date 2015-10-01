@@ -62,7 +62,7 @@ public class Field extends Node {
 
   public boolean isCapturedField() {
     return capturedVariable != null
-        || fieldDescriptor.getFieldName().equals(ASTUtils.ENCLOSING_INSTANCE_NAME);
+        || fieldDescriptor.getFieldName().equals(AstUtils.ENCLOSING_INSTANCE_NAME);
   }
 
   public Variable getCapturedVariable() {

@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.frontend;
 
-import com.google.j2cl.ast.ASTUtils;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 
@@ -40,7 +40,7 @@ public class PackagePrivateMethodsDispatcher {
     List<Method> dispatchMethods = new ArrayList<>();
     for (Map.Entry<MethodDescriptor, MethodDescriptor> entry :
         findExposedOverriddenMethods(typeBinding).entrySet()) {
-      dispatchMethods.add(ASTUtils.createForwardingMethod(entry.getValue(), entry.getKey()));
+      dispatchMethods.add(AstUtils.createForwardingMethod(entry.getValue(), entry.getKey()));
     }
     return dispatchMethods;
   }

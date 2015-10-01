@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.frontend;
 
-import com.google.j2cl.ast.ASTUtils;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.ThisReference;
@@ -153,7 +153,7 @@ public class MethodCallDevirtualizer {
       org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
     for (Devirtualizer devirtualizer : devirtualizers) {
       if (devirtualizer.shouldBeDevirtualized(methodCall, methodBinding, compilationUnit)) {
-        return ASTUtils.createDevirtualizedMethodCall(
+        return AstUtils.createDevirtualizedMethodCall(
             methodCall,
             devirtualizer.getEnclosingClassTypeDescriptor(),
             devirtualizer.getInstanceTypeDescriptor());

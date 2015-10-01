@@ -30,9 +30,9 @@ import com.google.j2cl.frontend.CompilationUnitBuilder;
 import com.google.j2cl.frontend.FrontendFlags;
 import com.google.j2cl.frontend.FrontendOptions;
 import com.google.j2cl.frontend.JdtParser;
+import com.google.j2cl.generator.GeneratorUtils;
 import com.google.j2cl.generator.JavaScriptHeaderGenerator;
 import com.google.j2cl.generator.JavaScriptImplGenerator;
-import com.google.j2cl.generator.TranspilerUtils;
 
 import org.apache.velocity.app.VelocityEngine;
 
@@ -131,20 +131,20 @@ public class J2clTranspiler {
         JavaScriptImplGenerator jsImplGenerator =
             new JavaScriptImplGenerator(errors, javaType, velocityEngine);
         Path absolutePathForImpl =
-            TranspilerUtils.getAbsolutePath(
+            GeneratorUtils.getAbsolutePath(
                 options.getOutputFileSystem(),
                 options.getOutput(),
-                TranspilerUtils.getRelativePath(javaType),
+                GeneratorUtils.getRelativePath(javaType),
                 jsImplGenerator.getSuffix());
         jsImplGenerator.writeToFile(absolutePathForImpl, charset);
 
         JavaScriptHeaderGenerator jsHeaderGenerator =
             new JavaScriptHeaderGenerator(errors, javaType, velocityEngine);
         Path absolutePathForHeader =
-            TranspilerUtils.getAbsolutePath(
+            GeneratorUtils.getAbsolutePath(
                 options.getOutputFileSystem(),
                 options.getOutput(),
-                TranspilerUtils.getRelativePath(javaType),
+                GeneratorUtils.getRelativePath(javaType),
                 jsHeaderGenerator.getSuffix());
         jsHeaderGenerator.writeToFile(absolutePathForHeader, charset);
       }

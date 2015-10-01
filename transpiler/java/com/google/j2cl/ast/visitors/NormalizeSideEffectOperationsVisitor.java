@@ -16,8 +16,8 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.common.base.Preconditions;
-import com.google.j2cl.ast.ASTUtils;
 import com.google.j2cl.ast.AbstractRewriter;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
@@ -36,7 +36,6 @@ import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Visibility;
-import com.google.j2cl.generator.TranspilerUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,7 +68,7 @@ public class NormalizeSideEffectOperationsVisitor extends AbstractRewriter {
     Expression qualifier = getQualifier(leftOperand);
 
     // The corresponding binary operator, e.g += => +, -= => -, etc.
-    BinaryOperator binaryOperator = TranspilerUtils.getBinaryOperator(operator);
+    BinaryOperator binaryOperator = AstUtils.compoundAssignmentToBinaryOperator(operator);
 
     if (qualifier == null) {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
@@ -105,7 +104,7 @@ public class NormalizeSideEffectOperationsVisitor extends AbstractRewriter {
     Expression qualifier = getQualifier(operand); // qualifier of the boxed instance
 
     // The corresponding binary operator, e.g ++ => +, -- => -
-    BinaryOperator binaryOperator = TranspilerUtils.getBinaryOperator(operator);
+    BinaryOperator binaryOperator = AstUtils.compoundAssignmentToBinaryOperator(operator);
 
     if (qualifier == null) {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
@@ -141,7 +140,7 @@ public class NormalizeSideEffectOperationsVisitor extends AbstractRewriter {
     Expression qualifier = getQualifier(operand);
 
     // The corresponding binary operator, e.g ++ => +, -- => -
-    BinaryOperator binaryOperator = TranspilerUtils.getBinaryOperator(operator);
+    BinaryOperator binaryOperator = AstUtils.compoundAssignmentToBinaryOperator(operator);
 
     if (qualifier == null) {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
@@ -325,7 +324,7 @@ public class NormalizeSideEffectOperationsVisitor extends AbstractRewriter {
     TypeDescriptor boxType = TypeDescriptors.getBoxTypeFromPrimitiveType(primitiveType);
 
     return new BinaryExpression(
-        boxType, boxedInstance, BinaryOperator.ASSIGN, ASTUtils.box(rightOperand));
+        boxType, boxedInstance, BinaryOperator.ASSIGN, AstUtils.box(rightOperand));
   }
 
   /**
@@ -362,13 +361,13 @@ public class NormalizeSideEffectOperationsVisitor extends AbstractRewriter {
 
   private static boolean shouldNormalize(BinaryExpression expression) {
     return expression.getOperator() != BinaryOperator.ASSIGN
-        && TranspilerUtils.isAssignment(expression.getOperator())
+        && AstUtils.isAssignmentOperator(expression.getOperator())
         && (TypeDescriptors.get().primitiveLong == expression.getLeftOperand().getTypeDescriptor()
             || isValueMethodCall(expression.getLeftOperand()));
   }
 
   private static boolean shouldNormalize(PrefixExpression expression) {
-    return TranspilerUtils.hasSideEffect(expression.getOperator())
+    return AstUtils.isAssignmentOperator(expression.getOperator())
         && (TypeDescriptors.get().primitiveLong == expression.getTypeDescriptor()
             || isValueMethodCall(expression.getOperand()));
   }

@@ -15,8 +15,8 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.j2cl.ast.ASTUtils;
 import com.google.j2cl.ast.AbstractVisitor;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
@@ -37,7 +37,7 @@ public class InsertInstanceInitCallsVisitor extends AbstractVisitor {
 
   @Override
   public boolean enterMethod(Method method) {
-    if (!method.isConstructor() || ASTUtils.hasThisCall(method)) {
+    if (!method.isConstructor() || AstUtils.hasThisCall(method)) {
       // A constructor with this() call does not need $init call.
       return false;
     }
@@ -51,14 +51,14 @@ public class InsertInstanceInitCallsVisitor extends AbstractVisitor {
 
   private void synthesizeInstanceInitCall(Method method) {
     MethodDescriptor initMethodDescriptor =
-        ASTUtils.createInitMethodDescriptor(
+        AstUtils.createInitMethodDescriptor(
             method.getDescriptor().getEnclosingClassTypeDescriptor());
 
     List<Expression> arguments = new ArrayList<>();
     MethodCall initCall = new MethodCall(null, initMethodDescriptor, arguments);
     // If the constructor has a super() call, insert $init call after it. Otherwise, insert
     // to the top of the method body.
-    int insertIndex = ASTUtils.hasSuperCall(method) ? 1 : 0;
+    int insertIndex = AstUtils.hasSuperCall(method) ? 1 : 0;
     method.getBody().getStatements().add(insertIndex, new ExpressionStatement(initCall));
   }
 }

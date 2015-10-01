@@ -22,11 +22,11 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import com.google.j2cl.ast.ASTUtils;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AssertStatement;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
@@ -250,14 +250,14 @@ public class CompilationUnitBuilder {
 
       for (Variable capturedVariable : capturesByTypeDescriptor.get(currentTypeDescriptor)) {
         FieldDescriptor fieldDescriptor =
-            ASTUtils.getFieldDescriptorForCapture(currentTypeDescriptor, capturedVariable);
+            AstUtils.getFieldDescriptorForCapture(currentTypeDescriptor, capturedVariable);
         type.addField(new Field(fieldDescriptor, null, capturedVariable)); // captured field.
       }
       if (!inStaticContext && JdtUtils.isInstanceNestedClass(typeBinding)) {
         // add field for enclosing instance.
         type.addField(
             new Field(
-                ASTUtils.getFieldDescriptorForEnclosingInstance(
+                AstUtils.getFieldDescriptorForEnclosingInstance(
                     currentTypeDescriptor, type.getEnclosingTypeDescriptor()),
                 null));
       }
@@ -279,7 +279,7 @@ public class CompilationUnitBuilder {
         JavaType outerclassType = typeStack.get(typeStack.size() - 2);
         for (Method innerclassConstructor : type.getConstructors()) {
           outerclassType.addMethod(
-              ASTUtils.createMethodForInnerClassCreation(
+              AstUtils.createMethodForInnerClassCreation(
                   outerclassType.getDescriptor(), innerclassConstructor));
         }
       }
@@ -312,7 +312,7 @@ public class CompilationUnitBuilder {
         Visibility visibility,
         TypeDescriptor... constructorImplicitParameterTypeDescriptors) {
       MethodDescriptor methodDescriptor =
-          ASTUtils.createConstructorDescriptor(
+          AstUtils.createConstructorDescriptor(
               typeDescriptor, visibility, constructorImplicitParameterTypeDescriptors);
       Block body = new Block();
       List<Variable> parameters = new ArrayList<>();
@@ -337,7 +337,7 @@ public class CompilationUnitBuilder {
         Collection<Variable> constructorImplicitParameters) {
       TypeDescriptor superTypeDescriptor = JdtUtils.createTypeDescriptor(superTypeBinding);
       MethodDescriptor superMethodDescriptor =
-          ASTUtils.createConstructorDescriptor(
+          AstUtils.createConstructorDescriptor(
               superTypeDescriptor,
               JdtUtils.getVisibility(superTypeBinding.getModifiers()),
               FluentIterable.from(constructorImplicitParameters)
@@ -539,7 +539,7 @@ public class CompilationUnitBuilder {
         newInstance =
             new MethodCall(
                 qualifier,
-                ASTUtils.createMethodDescriptorForInnerClassCreation(
+                AstUtils.createMethodDescriptorForInnerClassCreation(
                     outerclassTypeDescriptor, constructorMethodDescriptor),
                 arguments);
       } else if (newInstanceTypeBinding.isLocal() && !JdtUtils.isInStaticContext(expression)) {
@@ -681,10 +681,10 @@ public class CompilationUnitBuilder {
                   + currentSourceFile);
       }
       if (expression.resolveBoxing()) {
-        return ASTUtils.box(j2clExpression);
+        return AstUtils.box(j2clExpression);
       }
       if (expression.resolveUnboxing()) {
-        return ASTUtils.unbox(j2clExpression);
+        return AstUtils.unbox(j2clExpression);
       }
       return j2clExpression;
     }
@@ -872,7 +872,7 @@ public class CompilationUnitBuilder {
               indexVariable.getReference(),
               BinaryOperator.LESS,
               new FieldAccess(
-                  arrayVariable.getReference(), ASTUtils.ARRAY_LENGTH_FIELD_DESCRIPTION));
+                  arrayVariable.getReference(), AstUtils.ARRAY_LENGTH_FIELD_DESCRIPTION));
 
       VariableDeclarationStatement forVariableDeclarationStatement =
           new VariableDeclarationStatement(
@@ -1038,13 +1038,13 @@ public class CompilationUnitBuilder {
       // Add fields for captured local variables.
       for (Variable capturedVariable : capturesByTypeDescriptor.get(lambdaTypeDescriptor)) {
         FieldDescriptor fieldDescriptor =
-            ASTUtils.getFieldDescriptorForCapture(lambdaTypeDescriptor, capturedVariable);
+            AstUtils.getFieldDescriptorForCapture(lambdaTypeDescriptor, capturedVariable);
         lambdaType.addField(new Field(fieldDescriptor, null, capturedVariable)); // captured field.
       }
       // Add field for enclosing instance.
       lambdaType.addField(
           new Field(
-              ASTUtils.getFieldDescriptorForEnclosingInstance(
+              AstUtils.getFieldDescriptorForEnclosingInstance(
                   lambdaTypeDescriptor, lambdaType.getEnclosingTypeDescriptor()),
               null));
 
@@ -1473,7 +1473,7 @@ public class CompilationUnitBuilder {
         qualifier =
             new FieldAccess(
                 qualifier,
-                ASTUtils.getFieldDescriptorForEnclosingInstance(
+                AstUtils.getFieldDescriptorForEnclosingInstance(
                     currentType.getDescriptor(), currentType.getEnclosingTypeDescriptor()));
       }
       while (innerTypeBinding.getDeclaringClass() != null) {
@@ -1492,7 +1492,7 @@ public class CompilationUnitBuilder {
         qualifier =
             new FieldAccess(
                 qualifier,
-                ASTUtils.getFieldDescriptorForEnclosingInstance(
+                AstUtils.getFieldDescriptorForEnclosingInstance(
                     enclosingTypeDescriptor, fieldTypeDescriptor));
         innerTypeBinding = innerTypeBinding.getDeclaringClass();
       }
@@ -1514,7 +1514,7 @@ public class CompilationUnitBuilder {
       // reference to outer parameter, otherwise, translate to reference to corresponding
       // field created for the captured variable.
       FieldDescriptor fieldDescriptor =
-          ASTUtils.getFieldDescriptorForCapture(currentType.getDescriptor(), variable);
+          AstUtils.getFieldDescriptorForCapture(currentType.getDescriptor(), variable);
       return new FieldAccess(new ThisReference(currentType.getDescriptor()), fieldDescriptor);
     }
 

@@ -17,8 +17,8 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import com.google.j2cl.ast.ASTUtils;
 import com.google.j2cl.ast.AbstractRewriter;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CallBuilder;
@@ -74,14 +74,14 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
   @Override
   public Node rewriteMethod(Method method) {
     MethodBuilder methodBuilder = MethodBuilder.from(method);
-    if (!ASTUtils.isConstructorOfImmediateNestedClass(method, getCurrentJavaType())) {
+    if (!AstUtils.isConstructorOfImmediateNestedClass(method, getCurrentJavaType())) {
       return method;
     }
 
     // Maybe add capturing field initialization statements if the current constructor method does
     // not delegate to any other constructor method in the current class.
-    if (!ASTUtils.isDelegatedConstructorCall(
-        ASTUtils.getConstructorInvocation(method), getCurrentJavaType().getDescriptor())) {
+    if (!AstUtils.isDelegatedConstructorCall(
+        AstUtils.getConstructorInvocation(method), getCurrentJavaType().getDescriptor())) {
       addCapturingFieldInitializers(
           methodBuilder, method.getDescriptor().getEnclosingClassTypeDescriptor());
     }
@@ -122,7 +122,7 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
       return methodCall;
     }
 
-    if (ASTUtils.isDelegatedConstructorCall(methodCall, getCurrentJavaType().getDescriptor())) {
+    if (AstUtils.isDelegatedConstructorCall(methodCall, getCurrentJavaType().getDescriptor())) {
       // this() call
       addCapturedVariableArgumentsInConstructorCascade(methodCallBuilder);
     } else {
@@ -144,7 +144,7 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
   @Override
   public Node rewriteFieldAccess(FieldAccess fieldAccess) {
     // replace references to added field in the constructor with the reference to parameter.
-    if (ASTUtils.isConstructorOfImmediateNestedClass(getCurrentMethod(), getCurrentJavaType())
+    if (AstUtils.isConstructorOfImmediateNestedClass(getCurrentMethod(), getCurrentJavaType())
         && parameterByFieldForCaptures.containsKey(fieldAccess.getTarget())
         && fieldAccess.getTarget().getEnclosingClassTypeDescriptor()
             == getCurrentJavaType().getDescriptor()) {
@@ -232,7 +232,7 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
    */
   private void createParametersOfConstructor(JavaType type) {
     for (Field capturedField : getFieldsForCapturedVariables(type)) {
-      Variable parameter = ASTUtils.createOuterParamByField(capturedField);
+      Variable parameter = AstUtils.createOuterParamByField(capturedField);
       parameterByFieldForCaptures.put(capturedField.getDescriptor(), parameter);
     }
   }

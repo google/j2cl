@@ -25,7 +25,6 @@ import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.PostfixOperator;
 import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
@@ -35,9 +34,9 @@ import java.nio.file.Path;
 import java.util.List;
 
 /**
- * Utility functions to transpile the j2cl AST.
+ * Utility functions related to source generation in the J2CL AST.
  */
-public class TranspilerUtils {
+public class GeneratorUtils {
   public static String getSourceName(TypeDescriptor typeDescriptor) {
     return typeDescriptor.getRawTypeDescriptor().getSourceName().replace('$', '.');
   }
@@ -111,27 +110,7 @@ public class TranspilerUtils {
     return string.substring(0, 1).toUpperCase() + string.substring(1, string.length());
   }
 
-  private TranspilerUtils() {}
-
-  public static boolean isAssignment(BinaryOperator binaryOperator) {
-    switch (binaryOperator) {
-      case ASSIGN:
-      case PLUS_ASSIGN:
-      case MINUS_ASSIGN:
-      case TIMES_ASSIGN:
-      case DIVIDE_ASSIGN:
-      case BIT_AND_ASSIGN:
-      case BIT_OR_ASSIGN:
-      case BIT_XOR_ASSIGN:
-      case REMAINDER_ASSIGN:
-      case LEFT_SHIFT_ASSIGN:
-      case RIGHT_SHIFT_SIGNED_ASSIGN:
-      case RIGHT_SHIFT_UNSIGNED_ASSIGN:
-        return true;
-      default:
-        return false;
-    }
-  }
+  private GeneratorUtils() {}
 
   public static String getArrayAssignmentFunctionName(BinaryOperator binaryOperator) {
     switch (binaryOperator) {
@@ -164,11 +143,6 @@ public class TranspilerUtils {
             false, "Requested the Arrays function name for a non-assignment operator.");
         return null;
     }
-  }
-
-  public static boolean isValidForLongs(BinaryOperator binaryOperator) {
-    return binaryOperator != BinaryOperator.CONDITIONAL_AND
-        && binaryOperator != BinaryOperator.CONDITIONAL_OR;
   }
 
   public static boolean isValidForLongs(PrefixOperator prefixOperator) {
@@ -251,65 +225,6 @@ public class TranspilerUtils {
                 + ".");
         return null;
     }
-  }
-
-  public static BinaryOperator getBinaryOperator(BinaryOperator binaryOperator) {
-    switch (binaryOperator) {
-      case PLUS_ASSIGN:
-        return BinaryOperator.PLUS;
-      case MINUS_ASSIGN:
-        return BinaryOperator.MINUS;
-      case TIMES_ASSIGN:
-        return BinaryOperator.TIMES;
-      case DIVIDE_ASSIGN:
-        return BinaryOperator.DIVIDE;
-      case BIT_AND_ASSIGN:
-        return BinaryOperator.AND;
-      case BIT_OR_ASSIGN:
-        return BinaryOperator.OR;
-      case BIT_XOR_ASSIGN:
-        return BinaryOperator.XOR;
-      case REMAINDER_ASSIGN:
-        return BinaryOperator.REMAINDER;
-      case LEFT_SHIFT_ASSIGN:
-        return BinaryOperator.LEFT_SHIFT;
-      case RIGHT_SHIFT_SIGNED_ASSIGN:
-        return BinaryOperator.RIGHT_SHIFT_SIGNED;
-      case RIGHT_SHIFT_UNSIGNED_ASSIGN:
-        return BinaryOperator.RIGHT_SHIFT_UNSIGNED;
-      default:
-        return binaryOperator;
-    }
-  }
-
-  public static BinaryOperator getBinaryOperator(PrefixOperator prefixOperator) {
-    Preconditions.checkArgument(hasSideEffect(prefixOperator));
-    switch (prefixOperator) {
-      case DECREMENT:
-        return BinaryOperator.MINUS;
-      case INCREMENT:
-        return BinaryOperator.PLUS;
-      default:
-        Preconditions.checkArgument(
-            false,
-            "The prefix operator" + prefixOperator + "is not applicable for getBinaryOperator().");
-        return null;
-    }
-  }
-
-  public static BinaryOperator getBinaryOperator(PostfixOperator postfixOperator) {
-    switch (postfixOperator) {
-      case DECREMENT:
-        return BinaryOperator.MINUS;
-      case INCREMENT:
-        return BinaryOperator.PLUS;
-      default:
-        return null;
-    }
-  }
-
-  public static boolean hasSideEffect(PrefixOperator prefixOperator) {
-    return prefixOperator == PrefixOperator.INCREMENT || prefixOperator == PrefixOperator.DECREMENT;
   }
 
   /**

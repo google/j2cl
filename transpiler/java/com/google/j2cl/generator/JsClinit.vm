@@ -4,7 +4,7 @@
    * @nocollapse
    */
   static $clinit() {
-#if ($TranspilerUtils.needRewriteClinit($classType))
+#if ($GeneratorUtils.needRewriteClinit($classType))
     $className.$clinit = function() {};
 #end
 #foreach($lazyImport in ${lazyImports})

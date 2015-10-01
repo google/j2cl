@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Utility functions to manipulate J2CL AST.
  */
-public class ASTUtils {
+public class AstUtils {
   public static final String CAPTURES_PREFIX = "$c_";
   public static final String ENCLOSING_INSTANCE_NAME = "$outer_this";
   public static final String CREATE_PREFIX = "$create_";
@@ -97,7 +97,7 @@ public class ASTUtils {
    */
   public static Field getEnclosingInstanceField(JavaType type) {
     for (Field field : type.getFields()) {
-      if (field.getDescriptor().getFieldName().equals(ASTUtils.ENCLOSING_INSTANCE_NAME)) {
+      if (field.getDescriptor().getFieldName().equals(AstUtils.ENCLOSING_INSTANCE_NAME)) {
         return field;
       }
     }
@@ -461,5 +461,93 @@ public class ASTUtils {
         .getEnclosingClassTypeDescriptor()
         .getRawTypeDescriptor()
         .equals(targetTypeDescriptor.getRawTypeDescriptor());
+  }
+
+  public static boolean isAssignmentOperator(BinaryOperator binaryOperator) {
+    switch (binaryOperator) {
+      case ASSIGN:
+      case PLUS_ASSIGN:
+      case MINUS_ASSIGN:
+      case TIMES_ASSIGN:
+      case DIVIDE_ASSIGN:
+      case BIT_AND_ASSIGN:
+      case BIT_OR_ASSIGN:
+      case BIT_XOR_ASSIGN:
+      case REMAINDER_ASSIGN:
+      case LEFT_SHIFT_ASSIGN:
+      case RIGHT_SHIFT_SIGNED_ASSIGN:
+      case RIGHT_SHIFT_UNSIGNED_ASSIGN:
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  public static boolean isValidForLongs(BinaryOperator binaryOperator) {
+    return binaryOperator != BinaryOperator.CONDITIONAL_AND
+        && binaryOperator != BinaryOperator.CONDITIONAL_OR;
+  }
+
+  public static BinaryOperator compoundAssignmentToBinaryOperator(
+      BinaryOperator compoundAssignmentOperator) {
+    switch (compoundAssignmentOperator) {
+      case PLUS_ASSIGN:
+        return BinaryOperator.PLUS;
+      case MINUS_ASSIGN:
+        return BinaryOperator.MINUS;
+      case TIMES_ASSIGN:
+        return BinaryOperator.TIMES;
+      case DIVIDE_ASSIGN:
+        return BinaryOperator.DIVIDE;
+      case BIT_AND_ASSIGN:
+        return BinaryOperator.AND;
+      case BIT_OR_ASSIGN:
+        return BinaryOperator.OR;
+      case BIT_XOR_ASSIGN:
+        return BinaryOperator.XOR;
+      case REMAINDER_ASSIGN:
+        return BinaryOperator.REMAINDER;
+      case LEFT_SHIFT_ASSIGN:
+        return BinaryOperator.LEFT_SHIFT;
+      case RIGHT_SHIFT_SIGNED_ASSIGN:
+        return BinaryOperator.RIGHT_SHIFT_SIGNED;
+      case RIGHT_SHIFT_UNSIGNED_ASSIGN:
+        return BinaryOperator.RIGHT_SHIFT_UNSIGNED;
+      default:
+        return compoundAssignmentOperator;
+    }
+  }
+
+  public static boolean isAssignmentOperator(PrefixOperator prefixOperator) {
+    return prefixOperator == PrefixOperator.INCREMENT || prefixOperator == PrefixOperator.DECREMENT;
+  }
+
+  public static BinaryOperator compoundAssignmentToBinaryOperator(PrefixOperator prefixOperator) {
+    Preconditions.checkArgument(isAssignmentOperator(prefixOperator));
+    switch (prefixOperator) {
+      case DECREMENT:
+        return BinaryOperator.MINUS;
+      case INCREMENT:
+        return BinaryOperator.PLUS;
+      default:
+        return null;
+    }
+  }
+
+  public static boolean isAssignmentOperator(PostfixOperator postfixOperator) {
+    return postfixOperator == PostfixOperator.INCREMENT
+        || postfixOperator == PostfixOperator.DECREMENT;
+  }
+
+  public static BinaryOperator compoundAssignmentToBinaryOperator(PostfixOperator postfixOperator) {
+    Preconditions.checkArgument(isAssignmentOperator(postfixOperator));
+    switch (postfixOperator) {
+      case DECREMENT:
+        return BinaryOperator.MINUS;
+      case INCREMENT:
+        return BinaryOperator.PLUS;
+      default:
+        return null;
+    }
   }
 }

@@ -2,9 +2,9 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import com.google.j2cl.ast.ASTUtils;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
@@ -109,7 +109,7 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
     Expression expression = castExpression.getExpression();
     TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
     TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
-    if (ASTUtils.canRemoveCast(fromTypeDescriptor, toTypeDescriptor)) {
+    if (AstUtils.canRemoveCast(fromTypeDescriptor, toTypeDescriptor)) {
       return expression;
     }
     String castMethodName =

@@ -23,6 +23,7 @@ import com.google.j2cl.ast.AbstractTransformer;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.AssertStatement;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
@@ -146,7 +147,7 @@ public class StatementSourceGenerator {
         Expression leftOperand = expression.getLeftOperand();
         BinaryOperator operator = expression.getOperator();
 
-        if (TranspilerUtils.isAssignment(operator) && leftOperand instanceof ArrayAccess) {
+        if (AstUtils.isAssignmentOperator(operator) && leftOperand instanceof ArrayAccess) {
           return transformArrayAssignmentBinaryExpression(expression);
         } else if (TypeDescriptors.get().primitiveLong == leftOperand.getTypeDescriptor()
             && operator != BinaryOperator.ASSIGN) {
@@ -158,12 +159,12 @@ public class StatementSourceGenerator {
       }
 
       private String transformLongBinaryExpression(BinaryExpression expression) {
-        Preconditions.checkArgument(TranspilerUtils.isValidForLongs(expression.getOperator()));
+        Preconditions.checkArgument(AstUtils.isValidForLongs(expression.getOperator()));
         Preconditions.checkArgument(
-            !TranspilerUtils.isAssignment(expression.getOperator()),
+            !AstUtils.isAssignmentOperator(expression.getOperator()),
             "Normalization should have already rewritten all long assignment operations.");
         String longOperationFunctionName =
-            TranspilerUtils.getLongOperationFunctionName(expression.getOperator());
+            GeneratorUtils.getLongOperationFunctionName(expression.getOperator());
         Expression leftOperand = expression.getLeftOperand();
         Expression rightOperand = expression.getRightOperand();
 
@@ -198,7 +199,7 @@ public class StatementSourceGenerator {
 
       private String transformRegularBinaryExpression(BinaryExpression expression) {
         Preconditions.checkState(
-            !(TranspilerUtils.isAssignment(expression.getOperator())
+            !(AstUtils.isAssignmentOperator(expression.getOperator())
                 && expression.getLeftOperand() instanceof ArrayAccess));
 
         return String.format(
@@ -211,14 +212,14 @@ public class StatementSourceGenerator {
       // TODO: extend to handle long[].
       private String transformArrayAssignmentBinaryExpression(BinaryExpression expression) {
         Preconditions.checkState(
-            TranspilerUtils.isAssignment(expression.getOperator())
+            AstUtils.isAssignmentOperator(expression.getOperator())
                 && expression.getLeftOperand() instanceof ArrayAccess);
 
         ArrayAccess arrayAccess = (ArrayAccess) expression.getLeftOperand();
         return String.format(
             "%s.%s(%s, %s, %s)",
             arraysTypeAlias(),
-            TranspilerUtils.getArrayAssignmentFunctionName(expression.getOperator()),
+            GeneratorUtils.getArrayAssignmentFunctionName(expression.getOperator()),
             toSource(arrayAccess.getArrayExpression()),
             toSource(arrayAccess.getIndexExpression()),
             toSource(expression.getRightOperand()));
@@ -463,13 +464,13 @@ public class StatementSourceGenerator {
       }
 
       private String transformLongPrefixExpression(PrefixExpression expression) {
-        Preconditions.checkArgument(TranspilerUtils.isValidForLongs(expression.getOperator()));
+        Preconditions.checkArgument(GeneratorUtils.isValidForLongs(expression.getOperator()));
 
         String longOperationFunctionName =
-            TranspilerUtils.getLongOperationFunctionName(expression.getOperator());
+            GeneratorUtils.getLongOperationFunctionName(expression.getOperator());
         Expression operand = expression.getOperand();
 
-        Preconditions.checkArgument(!TranspilerUtils.hasSideEffect(expression.getOperator()));
+        Preconditions.checkArgument(!AstUtils.isAssignmentOperator(expression.getOperator()));
         return String.format(
             "%s.%s(%s)", longsTypeAlias(), longOperationFunctionName, toSource(operand));
       }

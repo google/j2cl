@@ -70,12 +70,12 @@ public class TypeProxyUtils {
         if (currentType.getDeclaringClass() != null) {
           // If it is a class-level type variable, use the simple name (with prefix "C_") as the
           // current name component.
-          simpleName = ASTUtils.TYPE_VARIABLE_IN_TYPE_PREFIX + currentType.getName();
+          simpleName = AstUtils.TYPE_VARIABLE_IN_TYPE_PREFIX + currentType.getName();
         } else {
           // If it is a method-level type variable, use the simple name (with prefix "M_") as the
           // current name component, and add declaringClass_declaringMethod as the next name
           // component, and set currentType to declaringClass for the next iteration.
-          classComponents.add(0, ASTUtils.TYPE_VARIABLE_IN_METHOD_PREFIX + currentType.getName());
+          classComponents.add(0, AstUtils.TYPE_VARIABLE_IN_METHOD_PREFIX + currentType.getName());
           simpleName =
               currentType.getDeclaringMethod().getDeclaringClass().getName()
                   + "_"

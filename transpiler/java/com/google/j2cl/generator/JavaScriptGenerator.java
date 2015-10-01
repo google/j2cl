@@ -82,7 +82,7 @@ public abstract class JavaScriptGenerator extends AbstractSourceGenerator {
     TypeDescriptor selfTypeDescriptor = javaType.getDescriptor().getRawTypeDescriptor();
     context.put("classType", javaType);
     context.put("selfImport", new Import(selfTypeDescriptor.getSimpleName(), selfTypeDescriptor));
-    context.put("TranspilerUtils", TranspilerUtils.class);
+    context.put("GeneratorUtils", GeneratorUtils.class);
     context.put("ManglingNameUtils", ManglingNameUtils.class);
     context.put(
         "eagerImports", ImportUtils.sortedList(importsByCategory.get(ImportCategory.EAGER)));

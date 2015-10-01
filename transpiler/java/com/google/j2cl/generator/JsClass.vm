@@ -12,9 +12,9 @@
 #set ($jsDocName = ${statementSourceGenerator.getJsDocName(${classType.Descriptor}, true)})
 #set ($mangledTypeName = ${ManglingNameUtils.getMangledName($classType.Descriptor)})
 #set ($simpleName = $classType.Descriptor.SimpleName)
-#set ($binaryName = ${TranspilerUtils.getBinaryName($classType.Descriptor)})
-#set ($sourceName = ${TranspilerUtils.getSourceName($classType.Descriptor)})
-#if (${TranspilerUtils.hasJsDoc($classType)})
+#set ($binaryName = ${GeneratorUtils.getBinaryName($classType.Descriptor)})
+#set ($sourceName = ${GeneratorUtils.getSourceName($classType.Descriptor)})
+#if (${GeneratorUtils.hasJsDoc($classType)})
 /**
 #if (${classType.Descriptor.isParameterizedType()})
  * @template ${statementSourceGenerator.getJsDocNames($classType.Descriptor.getTypeArgumentDescriptors())}
@@ -40,7 +40,7 @@ class $className $extendsClause {
 #set ($fieldVisibility = $field.Descriptor.Visibility)
 #set ($fieldType = ${statementSourceGenerator.getJsDocName($field.Descriptor.TypeDescriptor)})
 #set ($fieldName = ${ManglingNameUtils.getMangledName($field.Descriptor)})
-#set ($initialValue = ${TranspilerUtils.getInitialValue($field)})
+#set ($initialValue = ${GeneratorUtils.getInitialValue($field)})
     /**
      * @$fieldVisibility {$fieldType}
      */

@@ -3,8 +3,8 @@
 #set ($interfaceName = ${statementSourceGenerator.toSource($classType.Descriptor)})
 #set ($mangledName = ${ManglingNameUtils.getMangledName($classType.Descriptor)})
 #set ($simpleName = $classType.Descriptor.SimpleName)
-#set ($binaryName = ${TranspilerUtils.getBinaryName($classType.Descriptor)})
-#set ($sourceName = ${TranspilerUtils.getSourceName($classType.Descriptor)})
+#set ($binaryName = ${GeneratorUtils.getBinaryName($classType.Descriptor)})
+#set ($sourceName = ${GeneratorUtils.getSourceName($classType.Descriptor)})
 /**
  * @interface
 #if (${classType.Descriptor.isParameterizedType()})

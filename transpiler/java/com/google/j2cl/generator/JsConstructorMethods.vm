@@ -3,7 +3,7 @@
 #else
 #set ($ctorVisibility = $method.Descriptor.Visibility)
 #end
-#set ($parameterList = $TranspilerUtils.getParameterList($method, $statementSourceGenerator))
+#set ($parameterList = $GeneratorUtils.getParameterList($method, $statementSourceGenerator))
 #set ($mangledNameOfCreate = $ManglingNameUtils.getConstructorMangledName($method.Descriptor))
 #set ($mangledNameOfCtor = $ManglingNameUtils.getCtorMangledName($method.Descriptor))
 #set ($enclosingClassTypeDescriptor = ${method.Descriptor.getEnclosingClassTypeDescriptor()})
