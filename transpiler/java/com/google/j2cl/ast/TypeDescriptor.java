@@ -53,7 +53,7 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
     return getInterner().intern(new RegularTypeDescriptor(typeBinding));
   }
 
-  private static TypeDescriptor create(
+  public static TypeDescriptor create(
       Iterable<String> packageComponents,
       Iterable<String> classComponents,
       boolean isRaw,

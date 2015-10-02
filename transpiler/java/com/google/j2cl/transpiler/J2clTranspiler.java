@@ -16,6 +16,7 @@ package com.google.j2cl.transpiler;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.visitors.ControlStatementFormatter;
+import com.google.j2cl.ast.visitors.FixTypeVariableInMethodVisitors;
 import com.google.j2cl.ast.visitors.InsertImplicitCastsVisitor;
 import com.google.j2cl.ast.visitors.InsertInstanceInitCallsVisitor;
 import com.google.j2cl.ast.visitors.MakeExplicitEnumConstructionVisitor;
@@ -104,6 +105,8 @@ public class J2clTranspiler {
       ControlStatementFormatter.applyTo(j2clUnit);
       InsertImplicitCastsVisitor.applyTo(j2clUnit);
       NormalizeCastsVisitor.applyTo(j2clUnit);
+      // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
+      FixTypeVariableInMethodVisitors.applyTo(j2clUnit);
       NormalizeSideEffectOperationsVisitor.applyTo(j2clUnit);
       RemoveUnusedMultiExpressionReturnValues.applyTo(j2clUnit);
 

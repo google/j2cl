@@ -14,4 +14,13 @@ public class CastToGenerics<T, E extends Number> {
     CastToGenerics<Error, Number> cc = (CastToGenerics<Error, Number>) c;
     cc = (CastToGenerics) c;
   }
+
+  @SuppressWarnings({"unchecked", "unused", "cast"})
+  public <S, V extends Enum<V>> void castToTypeVariable() {
+    Object o = new Integer(1);
+    S s = (S) o; // cast to type variable declared by the method.
+    Object c = (CastToGenerics<S, Number>) o;
+    c = (S[]) o;
+    c = (V) o;
+  }
 }

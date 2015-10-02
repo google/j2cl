@@ -9,6 +9,7 @@ let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Enum = goog.forwardDeclare('gen.java.lang.Enum$impl');
 let Error = goog.forwardDeclare('gen.java.lang.Error$impl');
 let Integer = goog.forwardDeclare('gen.java.lang.Integer$impl');
 let Number = goog.forwardDeclare('gen.java.lang.Number$impl');
@@ -48,6 +49,20 @@ class CastToGenerics extends Object {
     let cc = /**@type {CastToGenerics<Error, (Number|?number)>} */ (
         $Casts.to(c, CastToGenerics));
     cc = /**@type {CastToGenerics} */ ($Casts.to(c, CastToGenerics));
+  }
+
+  /**
+   * @template M_S, M_V
+   * @return {void}
+   * @public
+   */
+  m_castToTypeVariable() {
+    let o = Integer.$create__int(1);
+    let s = /**@type {*} */ ($Casts.to(o, Object));
+    let c = /**@type {CastToGenerics<*, (Number|?number)>} */ (
+        $Casts.to(o, CastToGenerics));
+    c = /**@type {Array<*>} */ ($Arrays.$castTo(o, Object, 1));
+    c = /**@type {Enum} */ ($Casts.to(o, Enum));
   }
 
   /**
@@ -119,6 +134,7 @@ class CastToGenerics extends Object {
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
+    Enum = goog.module.get('gen.java.lang.Enum$impl');
     Error = goog.module.get('gen.java.lang.Error$impl');
     Integer = goog.module.get('gen.java.lang.Integer$impl');
     Number = goog.module.get('gen.java.lang.Number$impl');

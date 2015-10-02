@@ -197,6 +197,7 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   /**
    * Raw type of a parameterized type is the type without type parameters or type arguments.
    * Raw type of a type variable is its bound.
+   * Otherwise, raw type is the type itself.
    */
   @Override
   public TypeDescriptor getRawTypeDescriptor() {
