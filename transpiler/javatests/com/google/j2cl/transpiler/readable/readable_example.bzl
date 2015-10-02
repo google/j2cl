@@ -57,7 +57,7 @@ def readable_example(name, srcs):
   native.js_binary(
       name=name + "_binary",
       defs=CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
-          "--language_in=ECMASCRIPT6",
+          "--language_in=ECMASCRIPT6_STRICT",
           "--language_out=ECMASCRIPT5",
           "--remove_dead_code",
           "--remove_unused_vars",

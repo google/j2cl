@@ -33,7 +33,7 @@ load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_package")
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_root")
 
 J2CL_JAVA_TEST_CLOSURE_DEFS = [
-    "--language_in=ECMASCRIPT6",
+    "--language_in=ECMASCRIPT6_STRICT",
     "--language_out=ECMASCRIPT5",
     "--jscomp_off=nonStandardJsDocs",
     "--jscomp_off=checkTypes",

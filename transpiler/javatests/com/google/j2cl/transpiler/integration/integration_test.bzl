@@ -82,7 +82,7 @@ def integration_test(name, srcs, deps=[], defs=[]):
       name="optimized_js",
       srcs=["OptHarness.js"],
       defs=CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
-          "--language_in=ECMASCRIPT6",
+          "--language_in=ECMASCRIPT6_STRICT",
           "--language_out=ECMASCRIPT5",
           "--define=ASSERTIONS_ENABLED_=true",
           "--remove_dead_assignments",
@@ -102,7 +102,7 @@ def integration_test(name, srcs, deps=[], defs=[]):
       name="readable_optimized_js",
       srcs=["OptHarness.js"],
       defs=CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
-          "--language_in=ECMASCRIPT6",
+          "--language_in=ECMASCRIPT6_STRICT",
           "--language_out=ECMASCRIPT5",
           "--define=ASSERTIONS_ENABLED_=true",
           "--remove_dead_assignments",
@@ -124,7 +124,7 @@ def integration_test(name, srcs, deps=[], defs=[]):
       name="readable_unoptimized_js",
       srcs=["OptHarness.js"],
       defs=[
-          "--language_in=ECMASCRIPT6",
+          "--language_in=ECMASCRIPT6_STRICT",
           "--language_out=ECMASCRIPT5",
           "--define=ASSERTIONS_ENABLED_=true",
           "--pretty_print",
@@ -218,7 +218,7 @@ def integration_test(name, srcs, deps=[], defs=[]):
       defs=CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
           "--export_test_functions=true",
           "--jscomp_off=undefinedVars",
-          "--language_in=ECMASCRIPT6",
+          "--language_in=ECMASCRIPT6_STRICT",
           "--language_out=ECMASCRIPT5",
           "--define=ASSERTIONS_ENABLED_=true",
           "--property_renaming=OFF",
