@@ -37,7 +37,7 @@ class Boolean extends Object {
    * @public
    * @nocollapse
    */
-  static m_compareTo__boolean__boolean(x, y) {
+  static m_compare__boolean__boolean(x, y) {
     return (x === y) ? 0 : (x ? 1 : -1);
   }
 
