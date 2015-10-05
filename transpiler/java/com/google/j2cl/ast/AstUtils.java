@@ -433,7 +433,24 @@ public class AstUtils {
             false, // isNative,
             primitiveType // returnTypeDescriptor
             );
+
+    // We want "(a ? b : c).intValue()", not "a ? b : c.intValue()".
+    expression =
+        isValidMethodCallQualifier(expression)
+            ? expression
+            : new ParenthesizedExpression(expression);
+
     return new MethodCall(expression, valueMethodDescriptor, new ArrayList<Expression>());
+  }
+
+  /**
+   * Returns whether the given expression is a syntactically invalid qualifier for a MethodCall.
+   */
+  private static boolean isValidMethodCallQualifier(Expression expression) {
+    return !(expression instanceof TernaryExpression
+        || expression instanceof BinaryExpression
+        || expression instanceof PrefixExpression
+        || expression instanceof PostfixExpression);
   }
 
   public static boolean isConstructorOfImmediateNestedClass(Method method, JavaType targetType) {

@@ -70,6 +70,7 @@ are copyright and licensed as follows:
 - jsinteropclass
 - jsinteropdispatch
 - jsinteropinterface
+- localvariablejsdoc
 - methodreferences
 - nativefunction + provided Foo.native.js
 - objectmethods

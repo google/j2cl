@@ -19,6 +19,7 @@ package com.google.j2cl.transpiler.integration.ternaryexpression;
  * Test ternary expression.
  */
 public class Main {
+
   public static void main(String... args) {
     int count = true ? 1 : 2;
     assert count == 1;
@@ -31,5 +32,8 @@ public class Main {
 
     foo = foo < 5 && foo > 3 ? (foo == 4 ? 5 : 6) : (0);
     assert foo == 5;
+
+    foo = foo == 5 ? new Integer(15) : new Integer(30);
+    assert foo == 15;
   }
 }
