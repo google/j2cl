@@ -35,9 +35,7 @@ import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.Visibility;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -345,18 +343,7 @@ public class NormalizeSideEffectOperationsVisitor extends AbstractRewriter {
    * Returns number literal with value 1.
    */
   private static Expression getOne(TypeDescriptor typeDescriptor) {
-    return (TypeDescriptors.get().primitiveLong == typeDescriptor)
-        ? new MethodCall(
-            null,
-            MethodDescriptor.createRaw(
-                true,
-                Visibility.PUBLIC,
-                TypeDescriptors.NATIVE_LONGS_TYPE_DESCRIPTOR,
-                MethodDescriptor.GET_ONE_METHOD_NAME,
-                new ArrayList<TypeDescriptor>(),
-                TypeDescriptors.get().primitiveLong),
-            new ArrayList<Expression>()) // LongUtils.$getOne()
-        : new NumberLiteral(typeDescriptor, 1);
+    return new NumberLiteral(typeDescriptor, 1);
   }
 
   private static boolean shouldNormalize(BinaryExpression expression) {

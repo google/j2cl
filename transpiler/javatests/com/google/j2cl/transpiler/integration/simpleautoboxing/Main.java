@@ -215,6 +215,32 @@ public class Main {
     assert l == maybeNull;
   }
 
+  public void testAllNumericTypes() {
+    Byte b = 0;
+    Character c = (char) 0;
+    Short s = 0;
+    Integer i = 0;
+    Long l = 0L;
+    Float f = 0f;
+    Double d = 0d;
+
+    b++;
+    c++;
+    s++;
+    i++;
+    l++;
+    f++;
+    d++;
+
+    assert b == 1;
+    assert c == 1;
+    assert s == 1;
+    assert i == 1;
+    assert l == 1L;
+    assert f == 1f;
+    assert d == 1d;
+  }
+
   public static void main(String[] args) {
     Main m = new Main();
     m.testBoxByParameter();
@@ -223,5 +249,6 @@ public class Main {
     m.testUnboxByAssignment();
     m.testUnboxByOperator();
     m.testNull();
+    m.testAllNumericTypes();
   }
 }

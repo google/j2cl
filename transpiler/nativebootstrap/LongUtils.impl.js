@@ -257,12 +257,6 @@ class LongUtils {
    * @public
    */
   static $toString(valueLong) { return valueLong.toString(); }
-
-  /**
-   * @return {!Long}
-   * @public
-   */
-  static $getOne() { return Long.getOne(); }
 };
 
 

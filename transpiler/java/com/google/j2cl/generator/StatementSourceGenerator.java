@@ -418,19 +418,15 @@ public class StatementSourceGenerator {
       }
 
       private String transformLongNumberLiteral(NumberLiteral expression) {
-        Preconditions.checkArgument(expression.getValue() instanceof Long);
-
-        long longValue = (long) expression.getValue();
+        long longValue = expression.getValue().longValue();
 
         if (longValue < Integer.MAX_VALUE && longValue > Integer.MIN_VALUE) {
           // The long value is small enough to fit in an int. Emit the terse initialization.
-          return String.format(
-              "%s.$fromInt(%s)", longsTypeAlias(), Long.toString((long) expression.getValue()));
+          return String.format("%s.$fromInt(%s)", longsTypeAlias(), Long.toString(longValue));
         }
 
         // The long value is pretty large. Emit the verbose initialization.
-        return String.format(
-            "%s.$fromString('%s')", longsTypeAlias(), Long.toString((long) expression.getValue()));
+        return String.format("%s.$fromString('%s')", longsTypeAlias(), Long.toString(longValue));
       }
 
       @Override
