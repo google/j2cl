@@ -17,8 +17,10 @@ package com.google.j2cl.frontend;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
@@ -62,9 +64,11 @@ import org.eclipse.jdt.internal.compiler.env.INameEnvironment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Set;
 
 /**
  * Utility functions to manipulate JDT internal representations.
@@ -300,6 +304,71 @@ public class JdtUtils {
     return null;
   }
 
+  /**
+   * Returns the methods that are declared by interfaces of {@code typeBinding} and are not
+   * implemented by {@code typeBinding}.
+   */
+  static List<IMethodBinding> getUnimplementedMethodBindings(ITypeBinding typeBinding) {
+    List<IMethodBinding> unimplementedMethodBindings = new ArrayList<>();
+    // Only abstract class may have unimplemented methods.
+    if (!isAbstract(typeBinding.getModifiers())) {
+      return unimplementedMethodBindings;
+    }
+    for (ITypeBinding superInterface : getAllInterfaces(typeBinding)) {
+      unimplementedMethodBindings.addAll(
+          getUnimplementedMethodBindings(superInterface, typeBinding));
+    }
+    return unimplementedMethodBindings;
+  }
+
+  /**
+   * Returns the methods that are declared by {@code superTypeBinding} and are not implemented
+   * by {@code typeBinding}.
+   */
+  private static List<IMethodBinding> getUnimplementedMethodBindings(
+      ITypeBinding superTypeBinding, final ITypeBinding typeBinding) {
+    return Lists.newArrayList(
+        FluentIterable.from(superTypeBinding.getDeclaredMethods())
+            .filter(
+                new Predicate<IMethodBinding>() {
+                  @Override
+                  public boolean apply(IMethodBinding methodBinding) {
+                    return !isImplementedBy(methodBinding, typeBinding);
+                  }
+                }));
+  }
+
+  /**
+   * Returns true if {@code typeBinding} implements an overridden method of {@code methodBinding}.
+   */
+  private static boolean isImplementedBy(IMethodBinding methodBinding, ITypeBinding typeBinding) {
+    // implemented by typeBinding.
+    for (IMethodBinding declaredMethodBinding : typeBinding.getDeclaredMethods()) {
+      if (declaredMethodBinding.overrides(methodBinding)) {
+        return true;
+      }
+    }
+    ITypeBinding superclassTypeBinding = typeBinding.getSuperclass();
+    // implemented by its superclass.
+    return superclassTypeBinding != null && isImplementedBy(methodBinding, superclassTypeBinding);
+  }
+
+  /**
+   * Returns all the interfaces {@code typeBinding} implements.
+   */
+  static Set<ITypeBinding> getAllInterfaces(ITypeBinding typeBinding) {
+    Set<ITypeBinding> interfaces = new LinkedHashSet<>();
+    for (ITypeBinding superInterface : typeBinding.getInterfaces()) {
+      interfaces.add(superInterface);
+      interfaces.addAll(getAllInterfaces(superInterface));
+    }
+    ITypeBinding superclassTypeBinding = typeBinding.getSuperclass();
+    if (superclassTypeBinding != null) {
+      interfaces.addAll(getAllInterfaces(superclassTypeBinding));
+    }
+    return interfaces;
+  }
+
   public static PrefixOperator getPrefixOperator(PrefixExpression.Operator operator) {
     switch (operator.toString()) {
       case "++":
@@ -344,6 +413,10 @@ public class JdtUtils {
     return variableBinding.getName().equals("length")
         && variableBinding.isField()
         && variableBinding.getDeclaringClass() == null;
+  }
+
+  static boolean isAbstract(int modifier) {
+    return Modifier.isAbstract(modifier);
   }
 
   static boolean isFinal(int modifier) {
@@ -486,7 +559,7 @@ public class JdtUtils {
     // example to address the potential issue.
     Preconditions.checkArgument(typeBinding.isInterface());
     for (IMethodBinding method : typeBinding.getDeclaredMethods()) {
-      if (Modifier.isAbstract(method.getModifiers())) {
+      if (isAbstract(method.getModifiers())) {
         return method;
       }
     }
@@ -538,7 +611,13 @@ public class JdtUtils {
             ? new ExpressionStatement(callLambda)
             : new ReturnStatement(callLambda, samMethodDescriptor.getReturnTypeDescriptor());
     Method samMethod =
-        new Method(samMethodDescriptor, parameters, new Block(Arrays.asList(statement)), true);
+        new Method(
+            samMethodDescriptor,
+            parameters,
+            new Block(Arrays.asList(statement)),
+            false,
+            true,
+            false);
     return samMethod;
   }
 

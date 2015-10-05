@@ -16,6 +16,9 @@
 #set ($sourceName = ${GeneratorUtils.getSourceName($classType.Descriptor)})
 #if (${GeneratorUtils.hasJsDoc($classType)})
 /**
+#if (${classType.isAbstract()})
+ * Abstract class, do not instantiate.
+#end
 #if (${classType.Descriptor.isParameterizedType()})
  * @template ${statementSourceGenerator.getJsDocNames($classType.Descriptor.getTypeArgumentDescriptors())}
 #end

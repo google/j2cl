@@ -33,17 +33,8 @@ public class MethodDescriptors {
     List<TypeDescriptor> parameters =
         new ArrayList<>(methodDescriptor.getParameterTypeDescriptors());
     parameters.addAll(addedParameters);
-
-    return MethodDescriptor.create(
-        methodDescriptor.isStatic(),
-        methodDescriptor.isRaw(),
-        methodDescriptor.getVisibility(),
-        methodDescriptor.getEnclosingClassTypeDescriptor(),
-        methodDescriptor.getMethodName(),
-        methodDescriptor.isConstructor(),
-        methodDescriptor.isNative(),
-        methodDescriptor.getReturnTypeDescriptor(),
-        parameters,
-        methodDescriptor.getTypeParameterDescriptors());
+    return MethodDescriptorBuilder.from(methodDescriptor)
+        .parameterTypeDescriptors(parameters)
+        .build();
   }
 }

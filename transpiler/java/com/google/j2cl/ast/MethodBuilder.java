@@ -33,6 +33,7 @@ public class MethodBuilder {
   private List<Variable> addedParameterVariables = new ArrayList<>();
   private List<TypeDescriptor> addedParameterTypeDescriptors = new ArrayList<>();
   private List<Statement> statements = new ArrayList<>();
+  private boolean isAbstract;
   private boolean isOverride;
   private boolean isSynthetic;
 
@@ -41,6 +42,7 @@ public class MethodBuilder {
     builder.originalMethodDescriptor = method.getDescriptor();
     builder.originalParameterVariables = Lists.newArrayList(method.getParameters());
     builder.statements = Lists.newArrayList(method.getBody().getStatements());
+    builder.isAbstract = method.isAbstract();
     builder.isOverride = method.isOverride();
     builder.isSynthetic = method.isSynthetic();
     return builder;
@@ -73,6 +75,11 @@ public class MethodBuilder {
             originalMethodDescriptor, addedParameterTypeDescriptors);
 
     return new Method(
-        finalMethodDescriptor, finalParameters, new Block(statements), isOverride, isSynthetic);
+        finalMethodDescriptor,
+        finalParameters,
+        new Block(statements),
+        isAbstract,
+        isOverride,
+        isSynthetic);
   }
 }

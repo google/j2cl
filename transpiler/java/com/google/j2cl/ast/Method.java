@@ -31,6 +31,7 @@ public class Method extends Node {
   @Visitable MethodDescriptor methodDescriptor;
   @Visitable List<Variable> parameters = new ArrayList<>();
   @Visitable Block body;
+  private boolean isAbstract;
   private boolean isOverride;
   /**
    * Synthetic method is output with JsDoc comment 'Synthetic method.' for better readability.
@@ -50,18 +51,11 @@ public class Method extends Node {
       MethodDescriptor methodDescriptor,
       List<Variable> parameters,
       Block body,
-      boolean isOverride) {
-    this(methodDescriptor, parameters, body);
-    this.isOverride = isOverride;
-  }
-
-  public Method(
-      MethodDescriptor methodDescriptor,
-      List<Variable> parameters,
-      Block body,
+      boolean isAbstract,
       boolean isOverride,
       boolean isSynthetic) {
     this(methodDescriptor, parameters, body);
+    this.isAbstract = isAbstract;
     this.isOverride = isOverride;
     this.isSynthetic = isSynthetic;
   }
@@ -70,8 +64,9 @@ public class Method extends Node {
       MethodDescriptor methodDescriptor,
       List<Variable> parameters,
       Block body,
+      boolean isAbstract,
       boolean isOverride) {
-    return new Method(methodDescriptor, parameters, body, isOverride, true);
+    return new Method(methodDescriptor, parameters, body, isAbstract, isOverride, true);
   }
 
   public MethodDescriptor getDescriptor() {
@@ -100,6 +95,14 @@ public class Method extends Node {
 
   public void setBody(Block body) {
     this.body = body;
+  }
+
+  public boolean isAbstract() {
+    return this.isAbstract;
+  }
+
+  public void setAbstract(boolean isAbstract) {
+    this.isAbstract = isAbstract;
   }
 
   public boolean isOverride() {

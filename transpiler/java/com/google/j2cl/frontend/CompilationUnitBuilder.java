@@ -285,10 +285,13 @@ public class CompilationUnitBuilder {
       }
 
       // Add dispatch methods for package private methods.
-      currentType.addMethods(PackagePrivateMethodsDispatcher.createDispatchMethods(typeBinding));
+      currentType.addMethods(PackagePrivateMethodsDispatcher.create(typeBinding));
 
       // Add bridge methods.
-      currentType.addMethods(BridgeMethodsCreator.createBridgeMethods(typeBinding));
+      currentType.addMethods(BridgeMethodsCreator.create(typeBinding));
+
+      // Add unimplemented methods.
+      currentType.addMethods(UnimplementedMethodsCreator.create(typeBinding));
       popType();
       return type;
     }
@@ -448,7 +451,9 @@ public class CompilationUnitBuilder {
               JdtUtils.createMethodDescriptor(methodDeclaration.resolveBinding()),
               parameters,
               body,
-              JdtUtils.isOverride(methodDeclaration.resolveBinding()));
+              JdtUtils.isAbstract(methodDeclaration.getModifiers()),
+              JdtUtils.isOverride(methodDeclaration.resolveBinding()),
+              false);
       return method;
     }
 
@@ -1117,7 +1122,7 @@ public class CompilationUnitBuilder {
               methodName,
               parameterTypeDescriptors,
               returnTypeDescriptor);
-      return new Method(methodDescriptor, parameters, body, false);
+      return new Method(methodDescriptor, parameters, body);
     }
 
     private AssertStatement convert(org.eclipse.jdt.core.dom.AssertStatement statement) {
@@ -1710,6 +1715,7 @@ public class CompilationUnitBuilder {
       }
       type.setLocal(typeBinding.isLocal());
       type.setStatic(JdtUtils.isStatic(typeBinding.getModifiers()));
+      type.setAbstract(JdtUtils.isAbstract(typeBinding.getModifiers()));
       return type;
     }
   }

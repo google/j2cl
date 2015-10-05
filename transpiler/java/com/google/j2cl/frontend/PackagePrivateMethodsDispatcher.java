@@ -36,7 +36,7 @@ public class PackagePrivateMethodsDispatcher {
   /**
    * Returns generated dispatch methods.
    */
-  public static List<Method> createDispatchMethods(ITypeBinding typeBinding) {
+  public static List<Method> create(ITypeBinding typeBinding) {
     List<Method> dispatchMethods = new ArrayList<>();
     for (Map.Entry<MethodDescriptor, MethodDescriptor> entry :
         findExposedOverriddenMethods(typeBinding).entrySet()) {

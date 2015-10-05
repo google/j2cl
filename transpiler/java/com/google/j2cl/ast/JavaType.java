@@ -46,6 +46,7 @@ public class JavaType extends Node {
   private Visibility visibility;
   private boolean isStatic;
   private boolean isLocal;
+  private boolean isAbstract;
   @Visitable @Nullable TypeDescriptor enclosingTypeDescriptor;
   @Visitable @Nullable TypeDescriptor superTypeDescriptor;
   @Visitable List<TypeDescriptor> superInterfaceTypeDescriptors = new ArrayList<>();
@@ -83,6 +84,14 @@ public class JavaType extends Node {
 
   public void setStatic(boolean isStatic) {
     this.isStatic = isStatic;
+  }
+
+  public boolean isAbstract() {
+    return isAbstract;
+  }
+
+  public void setAbstract(boolean isAbstract) {
+    this.isAbstract = isAbstract;
   }
 
   public boolean isEnum() {

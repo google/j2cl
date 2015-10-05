@@ -33,11 +33,10 @@ are copyright and licensed as follows:
 ## Designs to be re-examined
 - Normalize compound assignment, increment and decrement operations for long and
   boxed objects. Refer to previous dicussion at cl/101709039 and cl/98361767.
+- Use annotation @abstract for abstract methods. (b/24539710).
 
 ## Tasks
 - Add a Closure pass to get back the 2% regression introduced in cl/104162467.
-- Fix "abstractinterfaceimpl" build.log, abstract class with unimplemented
-  interface functions produces warnings by JSCompiler.
 - Fix "simpleautoboxing" build.log, we're currently omitting Double->double and Boolean->boolean
     boxing operations and it's resulting in Closure seeing us try to collapse ?number->number and
     ?boolean->boolean.

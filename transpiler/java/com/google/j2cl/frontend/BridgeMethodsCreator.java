@@ -15,11 +15,8 @@
  */
 package com.google.j2cl.frontend;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.Expression;
@@ -27,12 +24,12 @@ import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
-import com.google.j2cl.ast.Visibility;
 
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
@@ -54,7 +51,7 @@ public class BridgeMethodsCreator {
   /**
    * Returns generated bridge methods.
    */
-  public static List<Method> createBridgeMethods(ITypeBinding typeBinding) {
+  public static List<Method> create(ITypeBinding typeBinding) {
     BridgeMethodsCreator bridgeMethodsCreator = new BridgeMethodsCreator(typeBinding);
     List<Method> generatedBridgeMethods = new ArrayList<>();
     Set<MethodDescriptor> generatedBridgeMethodDescriptors = new HashSet<>();
@@ -192,31 +189,14 @@ public class BridgeMethodsCreator {
    */
   private MethodDescriptor createMethodDescriptorInCurrentType(
       IMethodBinding methodBinding, ITypeBinding returnType) {
-    boolean isStatic = JdtUtils.isStatic(methodBinding.getModifiers());
-    Visibility visibility = JdtUtils.getVisibility(methodBinding.getModifiers());
     TypeDescriptor enclosingClassTypeDescriptor = JdtUtils.createTypeDescriptor(typeBinding);
-    String methodName = methodBinding.getName();
-    boolean isConstructor = methodBinding.isConstructor();
-    boolean isNative = false;
+    TypeDescriptor returnTypeDescriptor = JdtUtils.createTypeDescriptor(returnType);
+    MethodDescriptor originalMethodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
 
-    return MethodDescriptor.create(
-        isStatic,
-        visibility,
-        enclosingClassTypeDescriptor,
-        methodName,
-        isConstructor,
-        isNative,
-        JdtUtils.createTypeDescriptor(returnType), // return type
-        Iterables.transform(
-            Arrays.asList(methodBinding.getMethodDeclaration().getParameterTypes()),
-            new Function<ITypeBinding, TypeDescriptor>() {
-              @Override
-              public TypeDescriptor apply(ITypeBinding typeBinding) {
-                // Whenever we create the parameter types of a method, we use the rawTypeDescriptor.
-                return JdtUtils.createTypeDescriptor(typeBinding).getRawTypeDescriptor();
-              }
-            }),
-        ImmutableList.<TypeDescriptor>of());
+    return MethodDescriptorBuilder.from(originalMethodDescriptor)
+        .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+        .returnTypeDescriptor(returnTypeDescriptor)
+        .build();
   }
 
   /**
@@ -270,6 +250,6 @@ public class BridgeMethodsCreator {
             : new ReturnStatement(
                 dispatchMethodCall, bridgeMethodDescriptor.getReturnTypeDescriptor());
     return Method.createSynthetic(
-        bridgeMethodDescriptor, parameters, new Block(Arrays.asList(statement)), false);
+        bridgeMethodDescriptor, parameters, new Block(Arrays.asList(statement)), false, false);
   }
 }

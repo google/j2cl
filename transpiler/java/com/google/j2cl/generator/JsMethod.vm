@@ -8,6 +8,9 @@
 #if ($method.isSynthetic())
    * Synthetic method.
 #end
+#if ($method.isAbstract())
+   * Abstract method.
+#end
 #if ($method.isOverride())
    * @override
 #end

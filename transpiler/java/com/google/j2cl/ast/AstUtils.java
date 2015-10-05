@@ -306,7 +306,7 @@ public class AstUtils {
             innerclassConstructorDescriptor.getReturnTypeDescriptor())); // return new InnerClass();
     Block body = new Block(statements);
 
-    return new Method(methodDescriptor, innerclassConstructor.getParameters(), body, false);
+    return new Method(methodDescriptor, innerclassConstructor.getParameters(), body);
   }
 
   /**
@@ -317,16 +317,12 @@ public class AstUtils {
    */
   public static Method createForwardingMethod(
       MethodDescriptor exposedMethodDescriptor, MethodDescriptor forwardToMethodDescriptor) {
-    MethodDescriptor forwardinghMethodDescriptor =
-        MethodDescriptor.create(
-            exposedMethodDescriptor.isStatic(),
-            exposedMethodDescriptor.getVisibility(),
-            forwardToMethodDescriptor.getEnclosingClassTypeDescriptor(), // enclosing class
-            exposedMethodDescriptor.getMethodName(),
-            exposedMethodDescriptor.isConstructor(),
-            false, // is native
-            forwardToMethodDescriptor.getReturnTypeDescriptor(), // return type
-            exposedMethodDescriptor.getParameterTypeDescriptors());
+    MethodDescriptor forwardingMethodDescriptor =
+        MethodDescriptorBuilder.from(exposedMethodDescriptor)
+            .enclosingClassTypeDescriptor(
+                forwardToMethodDescriptor.getEnclosingClassTypeDescriptor())
+            .returnTypeDescriptor(forwardToMethodDescriptor.getReturnTypeDescriptor())
+            .build();
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
     for (int i = 0; i < exposedMethodDescriptor.getParameterTypeDescriptors().size(); i++) {
@@ -343,7 +339,7 @@ public class AstUtils {
             : new ReturnStatement(
                 forwardingMethodCall, exposedMethodDescriptor.getReturnTypeDescriptor());
     return Method.createSynthetic(
-        forwardinghMethodDescriptor, parameters, new Block(Arrays.asList(statement)), true);
+        forwardingMethodDescriptor, parameters, new Block(Arrays.asList(statement)), false, true);
   }
 
   /**
@@ -360,18 +356,14 @@ public class AstUtils {
     Preconditions.checkArgument(!targetMethodDescriptor.isStatic());
 
     MethodDescriptor methodDescriptor =
-        MethodDescriptor.create(
-            true, // Static method.
-            targetMethodDescriptor.getVisibility(),
-            enclosingClassTypeDescriptor, // enclosing class
-            targetMethodDescriptor.getMethodName(),
-            targetMethodDescriptor.isConstructor(),
-            targetMethodDescriptor.isNative(),
-            targetMethodDescriptor.getReturnTypeDescriptor(),
-            Iterables.concat(
-                Arrays.asList(instanceTypeDescriptor), // add the first parameter type.
-                targetMethodDescriptor.getParameterTypeDescriptors()));
-    @SuppressWarnings("unchecked")
+        MethodDescriptorBuilder.from(targetMethodDescriptor)
+            .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+            .parameterTypeDescriptors(
+                Iterables.concat(
+                    Arrays.asList(instanceTypeDescriptor), // add the first parameter type.
+                    targetMethodDescriptor.getParameterTypeDescriptors()))
+            .isStatic(true)
+            .build();
 
     List<Expression> arguments = methodCall.getArguments();
     // Turn the instance into now a first parameter to the devirtualized method.
