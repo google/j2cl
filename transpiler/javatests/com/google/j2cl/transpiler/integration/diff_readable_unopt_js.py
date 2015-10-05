@@ -5,6 +5,7 @@
 """Diffs readable unoptimized integration test JS with current CL changes."""
 
 
+import shutil
 import sys
 
 
@@ -44,20 +45,23 @@ def main():
   print ("  blaze building readable unopt JS for '%s' in the managed repo" %
          test_name)
   repo_util.build_readable_unoptimized_test(test_name, cwd=MANAGED_GOOGLE3_PATH)
-  process_util.run_cmd_get_output(
-      ["clang-format", "-i",
-       MANAGED_GOOGLE3_PATH + "/" + js_file_path])
+
+  print "    formatting JS"
+  managed_js_file = "/tmp/managed.%s.js" % test_name
+  shutil.copyfile(MANAGED_GOOGLE3_PATH + "/" + js_file_path, managed_js_file)
+  process_util.run_cmd_get_output(["clang-format", "-i", managed_js_file])
 
   print ("  blaze building readable unopt JS for '%s' in the live repo" %
          test_name)
   repo_util.build_readable_unoptimized_test(test_name)
-  process_util.run_cmd_get_output(["clang-format", "-i", js_file_path])
+
+  print "    formatting JS"
+  live_js_file = "/tmp/live.%s.js" % test_name
+  shutil.copyfile(js_file_path, live_js_file)
+  process_util.run_cmd_get_output(["clang-format", "-i", live_js_file])
 
   print "  starting meld"
-  process_util.run_cmd_get_output(
-      ["meld",
-       MANAGED_GOOGLE3_PATH + "/" + js_file_path,
-       js_file_path])
+  process_util.run_cmd_get_output(["meld", managed_js_file, live_js_file])
 
   print "  done"
 
