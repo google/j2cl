@@ -537,10 +537,33 @@ public class CompilationUnitBuilder {
 
       Expression newInstance = null;
       ITypeBinding newInstanceTypeBinding = constructorBinding.getDeclaringClass();
+      boolean hasQualifier =
+          JdtUtils.isInstanceMemberClass(newInstanceTypeBinding)
+              || (newInstanceTypeBinding.isLocal() && !JdtUtils.isInStaticContext(expression));
+      // Resolve the qualifier of NewInstance that creates an instance of a nested class.
+      // Implicit 'this' doesn't always refer to 'this', it may refer to any enclosing instances.
+      if (hasQualifier) {
+        qualifier =
+            qualifier == null
+                ? convertOuterClassReference(
+                    JdtUtils.findCurrentTypeBinding(expression),
+                    newInstanceTypeBinding.getDeclaringClass(),
+                    false) // find the enclosing instance in non-strict mode, which means
+                // for example,
+                // class A {
+                //   class B {}
+                //   class C extends class A{
+                //     // The qualifier of new B() should be C.this, not A.this.
+                //     public void test() { new B(); }
+                //   }
+                // }
+                : qualifier;
+      }
       if (JdtUtils.isInstanceMemberClass(newInstanceTypeBinding)) {
         // outerclass.new InnerClass() => outerClass.$create_InnerClass();
         TypeDescriptor outerclassTypeDescriptor =
-            JdtUtils.createTypeDescriptor(constructorBinding.getDeclaringClass());
+            JdtUtils.createTypeDescriptor(
+                constructorBinding.getDeclaringClass().getDeclaringClass());
         newInstance =
             new MethodCall(
                 qualifier,
@@ -548,16 +571,6 @@ public class CompilationUnitBuilder {
                     outerclassTypeDescriptor, constructorMethodDescriptor),
                 arguments);
       } else if (newInstanceTypeBinding.isLocal() && !JdtUtils.isInStaticContext(expression)) {
-        // resolve the qualifier of the NewInstance.
-        // In most of the case the qualifier should be 'this'. But it is not true inside a lambda.
-        // when it is inside a lambda, the qualifier should be the access to $outer field.
-        qualifier =
-            qualifier == null
-                ? convertOuterClassReference(
-                    JdtUtils.findCurrentTypeBinding(expression),
-                    newInstanceTypeBinding.getDeclaringClass(),
-                    true)
-                : qualifier;
         newInstance = new NewInstance(qualifier, constructorMethodDescriptor, arguments);
       } else {
         Preconditions.checkArgument(
