@@ -157,15 +157,16 @@ class Numbers {
    */
   static m_compareTo__java_lang_Number__java_lang_Double(a, b) {
     Numbers.$clinit();
-    if (a != null) {
-      if (b != null) {
-        return Double.m_compareTo__double__double(a, b);
-      } else {
-        return Double.m_compareTo__double__double(a, b.m_doubleValue());
-      }
-    } else {
-      return a.m_compareTo__java_lang_Double(b);
+
+    // Generate Null Pointer Exceptions for a and b if they are null
+    if (a == null) {
+      a.m_compareTo__java_lang_Double(b);
     }
+    if (b == null) {
+      b.m_compareTo__java_lang_Double(a);
+    }
+
+    return Double.m_compare__double__double(a, b);
   }
 
   /**

@@ -37,7 +37,7 @@ class Double extends Number {
    * @public
    * @nocollapse
    */
-  static m_compareTo__double__double(x, y) {
+  static m_compare__double__double(x, y) {
     if (x < y) {
       return -1;
     } else if (x > y) {
