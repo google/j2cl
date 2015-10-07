@@ -33,25 +33,6 @@ class ForEachStatement extends Object {
   }
 
   /**
-   * @param {Iterable<Throwable>} iterable
-   * @return {void}
-   * @public
-   */
-  m_test__java_lang_Iterable(iterable) {
-    for (let $iterator = iterable.m_iterator(); $iterator.m_hasNext();) {
-      let t = $iterator.m_next();
-      $Objects.m_toString__java_lang_Object(t);
-    }
-    for (let $array = /**@type {Array<Throwable>} */ (
-                 $Arrays.$create([10], Throwable)),
-             $index = 0;
-         $index < $array.length; $index++) {
-      let t = $array[$index];
-      $Objects.m_toString__java_lang_Object(t);
-    }
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!ForEachStatement}
    * @public
@@ -72,6 +53,25 @@ class ForEachStatement extends Object {
   $ctor__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement() {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement();
+  }
+
+  /**
+   * @param {Iterable<Throwable>} iterable
+   * @return {void}
+   * @public
+   */
+  m_test__java_lang_Iterable(iterable) {
+    for (let $iterator = iterable.m_iterator(); $iterator.m_hasNext();) {
+      let t = $iterator.m_next();
+      $Objects.m_toString__java_lang_Object(t);
+    }
+    for (let $array = /**@type {Array<Throwable>} */ (
+                 $Arrays.$create([10], Throwable)),
+             $index = 0;
+         $index < $array.length; $index++) {
+      let t = $array[$index];
+      $Objects.m_toString__java_lang_Object(t);
+    }
   }
 
   /**

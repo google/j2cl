@@ -25,27 +25,6 @@ class NativeFunction extends Object {
   $init__com_google_j2cl_transpiler_readable_nativefunction_NativeFunction() {}
 
   /**
-   * @return {void}
-   * @public
-   */
-  // native static m_doFoo()
-
-  /**
-   * @return {void}
-   * @public
-   */
-  // native m_doBar()
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_main() {
-    NativeFunction.m_doFoo();
-    this.m_doBar();
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!NativeFunction}
    * @public
@@ -66,6 +45,27 @@ class NativeFunction extends Object {
   $ctor__com_google_j2cl_transpiler_readable_nativefunction_NativeFunction() {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_nativefunction_NativeFunction();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  // native static m_doFoo()
+
+  /**
+   * @return {void}
+   * @public
+   */
+  // native m_doBar()
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    NativeFunction.m_doFoo();
+    this.m_doBar();
   }
 
   /**

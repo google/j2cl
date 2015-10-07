@@ -36,6 +36,29 @@ class PrimitiveArrays extends Object {
   }
 
   /**
+   * A particular Java constructor as a factory method.
+   * @return {!PrimitiveArrays}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    PrimitiveArrays.$clinit();
+    let instance = new PrimitiveArrays;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_primitivearrays_PrimitiveArrays();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_primitivearrays_PrimitiveArrays() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_primitivearrays_PrimitiveArrays();
+  }
+
+  /**
    * @return {void}
    * @public
    */
@@ -71,29 +94,6 @@ class PrimitiveArrays extends Object {
     $Arrays.$set(ints2d[0], 1, 20);
     $Arrays.$addSet(ints, 0, 1);
     $Arrays.$subSet(ints2d[0], 1, 1);
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!PrimitiveArrays}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    PrimitiveArrays.$clinit();
-    let instance = new PrimitiveArrays;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_primitivearrays_PrimitiveArrays();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_primitivearrays_PrimitiveArrays() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_primitivearrays_PrimitiveArrays();
   }
 
   /**

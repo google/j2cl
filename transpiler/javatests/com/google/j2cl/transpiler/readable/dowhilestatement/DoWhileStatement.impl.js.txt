@@ -27,17 +27,6 @@ class DoWhileStatement extends Object {
   }
 
   /**
-   * @return {void}
-   * @public
-   */
-  m_test() {
-    let count = 0;
-    do {
-      count++;
-    } while (count < 5);
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!DoWhileStatement}
    * @public
@@ -58,6 +47,17 @@ class DoWhileStatement extends Object {
   $ctor__com_google_j2cl_transpiler_readable_dowhilestatement_DoWhileStatement() {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_dowhilestatement_DoWhileStatement();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    let count = 0;
+    do {
+      count++;
+    } while (count < 5);
   }
 
   /**

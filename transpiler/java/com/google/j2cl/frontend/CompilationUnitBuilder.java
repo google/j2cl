@@ -265,6 +265,7 @@ public class CompilationUnitBuilder {
       // If the class has no default constructor, synthesize the default constructor.
       if (!typeBinding.isInterface() && !hasConstructor) {
         type.addMethod(
+            0,
             synthesizeDefaultConstructor(
                 typeBinding,
                 type.getDescriptor(),

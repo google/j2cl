@@ -36,16 +36,6 @@ class LocalClassInStaticContext extends Object {
   }
 
   /**
-   * @return {void}
-   * @public
-   */
-  static m_test() {
-    LocalClassInStaticContext.$clinit();
-    LocalClassInStaticContext$1A.$create();
-    let a = LocalClassInStaticContext$3.$create();
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!LocalClassInStaticContext}
    * @public
@@ -66,6 +56,16 @@ class LocalClassInStaticContext extends Object {
   $ctor__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext() {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static m_test() {
+    LocalClassInStaticContext.$clinit();
+    LocalClassInStaticContext$1A.$create();
+    let a = LocalClassInStaticContext$3.$create();
   }
 
   /**

@@ -26,15 +26,6 @@ class CastToArray extends Object {
   $init__com_google_j2cl_transpiler_readable_casttoarray_CastToArray() {}
 
   /**
-   * @return {void}
-   * @public
-   */
-  m_main() {
-    let foo = /**@type {Array<*>} */ ($Arrays.$castTo(null, Object, 1));
-    let bar = /**@type {Array<Array<*>>} */ ($Arrays.$castTo(null, Object, 2));
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!CastToArray}
    * @public
@@ -55,6 +46,15 @@ class CastToArray extends Object {
   $ctor__com_google_j2cl_transpiler_readable_casttoarray_CastToArray() {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_casttoarray_CastToArray();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    let foo = /**@type {Array<*>} */ ($Arrays.$castTo(null, Object, 1));
+    let bar = /**@type {Array<Array<*>>} */ ($Arrays.$castTo(null, Object, 2));
   }
 
   /**

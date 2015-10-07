@@ -26,29 +26,6 @@ class NestedTryCatch extends Object {
   $init__com_google_j2cl_transpiler_readable_nestedtrycatch_NestedTryCatch() {}
 
   /**
-   * @return {void}
-   * @public
-   */
-  m_main() {
-    try {
-      throw Exception.$create();
-    } catch (ae) {
-      if (Exception.$isInstance(ae)) {
-        try {
-          throw Exception.$create();
-        } catch (ie) {
-          if (Exception.$isInstance(ie)) {
-          } else {
-            throw ie;
-          }
-        }
-      } else {
-        throw ae;
-      }
-    }
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!NestedTryCatch}
    * @public
@@ -69,6 +46,29 @@ class NestedTryCatch extends Object {
   $ctor__com_google_j2cl_transpiler_readable_nestedtrycatch_NestedTryCatch() {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_nestedtrycatch_NestedTryCatch();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    try {
+      throw Exception.$create();
+    } catch (ae) {
+      if (Exception.$isInstance(ae)) {
+        try {
+          throw Exception.$create();
+        } catch (ie) {
+          if (Exception.$isInstance(ie)) {
+          } else {
+            throw ie;
+          }
+        }
+      } else {
+        throw ae;
+      }
+    }
   }
 
   /**

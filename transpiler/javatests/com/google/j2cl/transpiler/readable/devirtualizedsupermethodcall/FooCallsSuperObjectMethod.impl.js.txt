@@ -26,13 +26,6 @@ class FooCallsSuperObjectMethod extends Object {
   }
 
   /**
-   * @override
-   * @return {number}
-   * @public
-   */
-  m_hashCode() { return super.m_hashCode(); }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!FooCallsSuperObjectMethod}
    * @public
@@ -54,6 +47,13 @@ class FooCallsSuperObjectMethod extends Object {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_FooCallsSuperObjectMethod();
   }
+
+  /**
+   * @override
+   * @return {number}
+   * @public
+   */
+  m_hashCode() { return super.m_hashCode(); }
 
   /**
    * Returns whether the provided instance is an instance of this class.

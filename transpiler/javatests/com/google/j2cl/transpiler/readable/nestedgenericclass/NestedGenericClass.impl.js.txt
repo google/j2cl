@@ -46,6 +46,30 @@ class NestedGenericClass extends Object {
   }
 
   /**
+   * A particular Java constructor as a factory method.
+   * @template C_T
+   * @return {!NestedGenericClass<C_T>}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    NestedGenericClass.$clinit();
+    let instance = new NestedGenericClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass();
+  }
+
+  /**
    * @template C_A_T
    * @return {NestedGenericClass$A<C_A_T, C_T>}
    * @public
@@ -113,30 +137,6 @@ class NestedGenericClass extends Object {
         /**@type {NestedGenericClass$C<(Number|?number)>} */ (
             n.m_$create_NestedGenericClass$C())
             .m_$create_NestedGenericClass$C$D());
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @template C_T
-   * @return {!NestedGenericClass<C_T>}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    NestedGenericClass.$clinit();
-    let instance = new NestedGenericClass;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass();
   }
 
   /**

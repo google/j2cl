@@ -31,25 +31,6 @@ class MultipleCatch extends Object {
   $init__com_google_j2cl_transpiler_readable_multiplecatch_MultipleCatch() {}
 
   /**
-   * @return {void}
-   * @public
-   */
-  m_main() {
-    try {
-      throw ClassCastException.$create();
-    } catch (e) {
-      if (NullPointerException.$isInstance(e) ||
-          ClassCastException.$isInstance(e)) {
-      } else if (RuntimeException.$isInstance(e)) {
-        let r = e;
-        r = null;
-      } else {
-        throw e;
-      }
-    }
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!MultipleCatch}
    * @public
@@ -70,6 +51,25 @@ class MultipleCatch extends Object {
   $ctor__com_google_j2cl_transpiler_readable_multiplecatch_MultipleCatch() {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_multiplecatch_MultipleCatch();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    try {
+      throw ClassCastException.$create();
+    } catch (e) {
+      if (NullPointerException.$isInstance(e) ||
+          ClassCastException.$isInstance(e)) {
+      } else if (RuntimeException.$isInstance(e)) {
+        let r = e;
+        r = null;
+      } else {
+        throw e;
+      }
+    }
   }
 
   /**

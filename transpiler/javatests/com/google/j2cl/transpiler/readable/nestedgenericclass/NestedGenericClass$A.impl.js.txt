@@ -40,17 +40,6 @@ class NestedGenericClass$A extends Object {
   }
 
   /**
-   * @template C_A_B_T
-   * @return {NestedGenericClass$A$B<C_A_B_T, C_A_T, C_T>}
-   * @public
-   */
-  m_$create_NestedGenericClass$A$B() {
-    return NestedGenericClass$A$B
-        .$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$A(
-            this);
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @template C_A_T, C_T
    * @param {NestedGenericClass<C_T>} $outer_this
@@ -79,6 +68,17 @@ class NestedGenericClass$A extends Object {
         $outer_this;
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$A();
+  }
+
+  /**
+   * @template C_A_B_T
+   * @return {NestedGenericClass$A$B<C_A_B_T, C_A_T, C_T>}
+   * @public
+   */
+  m_$create_NestedGenericClass$A$B() {
+    return NestedGenericClass$A$B
+        .$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$A(
+            this);
   }
 
   /**

@@ -31,13 +31,6 @@ class SomeClass extends Object {
   $init__com_google_j2cl_transpiler_readable_interfaceuse_SomeClass() {}
 
   /**
-   * @override
-   * @return {number}
-   * @public
-   */
-  m_run() { return 0; }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!SomeClass}
    * @public
@@ -59,6 +52,13 @@ class SomeClass extends Object {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_interfaceuse_SomeClass();
   }
+
+  /**
+   * @override
+   * @return {number}
+   * @public
+   */
+  m_run() { return 0; }
 
   /**
    * Returns whether the provided instance is an instance of this class.

@@ -29,14 +29,6 @@ class SuperParent extends Object {
   }
 
   /**
-   * @param {C_T} t
-   * @param {C_S} s
-   * @return {void}
-   * @public
-   */
-  m_foo__java_lang_Object__java_lang_Object(t, s) {}
-
-  /**
    * A particular Java constructor as a factory method.
    * @template C_T, C_S
    * @return {!SuperParent<C_T, C_S>}
@@ -59,6 +51,14 @@ class SuperParent extends Object {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SuperParent();
   }
+
+  /**
+   * @param {C_T} t
+   * @param {C_S} s
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Object__java_lang_Object(t, s) {}
 
   /**
    * Returns whether the provided instance is an instance of this class.

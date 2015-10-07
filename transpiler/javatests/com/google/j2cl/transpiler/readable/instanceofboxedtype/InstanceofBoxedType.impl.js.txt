@@ -36,23 +36,6 @@ class InstanceofBoxedType extends Object {
   }
 
   /**
-   * @return {void}
-   * @public
-   */
-  m_test() {
-    let b = Integer.$create__int(1);
-    let a = Byte.$isInstance(b);
-    a = Double.$isInstance(b);
-    a = Float.$isInstance(b);
-    a = Integer.$isInstance(b);
-    a = Long.$isInstance(b);
-    a = Short.$isInstance(b);
-    a = Number.$isInstance(b);
-    a = Character.$isInstance(b);
-    a = Boolean.$isInstance(b);
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!InstanceofBoxedType}
    * @public
@@ -73,6 +56,23 @@ class InstanceofBoxedType extends Object {
   $ctor__com_google_j2cl_transpiler_readable_instanceofboxedtype_InstanceofBoxedType() {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_instanceofboxedtype_InstanceofBoxedType();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    let b = Integer.$create__int(1);
+    let a = Byte.$isInstance(b);
+    a = Double.$isInstance(b);
+    a = Float.$isInstance(b);
+    a = Integer.$isInstance(b);
+    a = Long.$isInstance(b);
+    a = Short.$isInstance(b);
+    a = Number.$isInstance(b);
+    a = Character.$isInstance(b);
+    a = Boolean.$isInstance(b);
   }
 
   /**

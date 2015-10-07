@@ -33,6 +33,30 @@ class GenericMethod extends Object {
   $init__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod() {}
 
   /**
+   * A particular Java constructor as a factory method.
+   * @template C_T
+   * @return {!GenericMethod<C_T>}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    GenericMethod.$clinit();
+    let instance = new GenericMethod;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod();
+  }
+
+  /**
    * @template M_T, M_S
    * @param {M_T} f
    * @param {M_S} s
@@ -94,30 +118,6 @@ class GenericMethod extends Object {
     g.m_fun__java_lang_Error(Error.$create());
     g.m_fun__arrayOf_java_lang_Object(
         /**@type {Array<?string>} */ ($Arrays.$init(["asdf"], String)));
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @template C_T
-   * @return {!GenericMethod<C_T>}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    GenericMethod.$clinit();
-    let instance = new GenericMethod;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod();
   }
 
   /**

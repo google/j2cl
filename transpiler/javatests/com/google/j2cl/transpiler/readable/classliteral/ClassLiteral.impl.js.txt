@@ -26,15 +26,6 @@ class ClassLiteral extends Object {
   $init__com_google_j2cl_transpiler_readable_classliteral_ClassLiteral() {}
 
   /**
-   * @return {void}
-   * @public
-   */
-  m_main() {
-    let o = ClassLiteral.$getClass();
-    o = ClassLiteral.$getClass().$forArray(2);
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!ClassLiteral}
    * @public
@@ -55,6 +46,15 @@ class ClassLiteral extends Object {
   $ctor__com_google_j2cl_transpiler_readable_classliteral_ClassLiteral() {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_classliteral_ClassLiteral();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    let o = ClassLiteral.$getClass();
+    o = ClassLiteral.$getClass().$forArray(2);
   }
 
   /**

@@ -41,6 +41,29 @@ class AutoBoxingSideEffect extends Object {
   }
 
   /**
+   * A particular Java constructor as a factory method.
+   * @return {!AutoBoxingSideEffect}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    AutoBoxingSideEffect.$clinit();
+    let instance = new AutoBoxingSideEffect;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect();
+  }
+
+  /**
    * @return {AutoBoxingSideEffect}
    * @public
    */
@@ -106,29 +129,6 @@ class AutoBoxingSideEffect extends Object {
                      .m_intValue() +
                  1),
          $Numbers.$v);
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!AutoBoxingSideEffect}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    AutoBoxingSideEffect.$clinit();
-    let instance = new AutoBoxingSideEffect;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect();
   }
 
   /**

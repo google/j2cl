@@ -33,6 +33,29 @@ class InterfaceDevirtualize extends Object {
   }
 
   /**
+   * A particular Java constructor as a factory method.
+   * @return {!InterfaceDevirtualize}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    InterfaceDevirtualize.$clinit();
+    let instance = new InterfaceDevirtualize;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_interfacedevirtualize_InterfaceDevirtualize();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_interfacedevirtualize_InterfaceDevirtualize() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_interfacedevirtualize_InterfaceDevirtualize();
+  }
+
+  /**
    * @template M_T
    * @param {(Comparable<M_T>|?number|?boolean|?string)} c
    * @param {M_T} t
@@ -116,29 +139,6 @@ class InterfaceDevirtualize extends Object {
    */
   m_compare3__java_lang_Integer__java_lang_Integer(d1, d2) {
     return d1.m_compareTo__java_lang_Integer(d2);
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!InterfaceDevirtualize}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    InterfaceDevirtualize.$clinit();
-    let instance = new InterfaceDevirtualize;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_interfacedevirtualize_InterfaceDevirtualize();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_interfacedevirtualize_InterfaceDevirtualize() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_interfacedevirtualize_InterfaceDevirtualize();
   }
 
   /**

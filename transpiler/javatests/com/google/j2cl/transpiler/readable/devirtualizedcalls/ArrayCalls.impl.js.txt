@@ -28,17 +28,6 @@ class ArrayCalls extends Object {
   $init__com_google_j2cl_transpiler_readable_devirtualizedcalls_ArrayCalls() {}
 
   /**
-   * @return {void}
-   * @public
-   */
-  m_main() {
-    let array2d =
-        /**@type {Array<Array<*>>} */ ($Arrays.$create([1, 1], Object));
-    let length1 = array2d[0].length;
-    let length2 = array2d.length;
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!ArrayCalls}
    * @public
@@ -59,6 +48,17 @@ class ArrayCalls extends Object {
   $ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_ArrayCalls() {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_devirtualizedcalls_ArrayCalls();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    let array2d =
+        /**@type {Array<Array<*>>} */ ($Arrays.$create([1, 1], Object));
+    let length1 = array2d[0].length;
+    let length2 = array2d.length;
   }
 
   /**

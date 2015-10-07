@@ -30,26 +30,6 @@ class OuterClass extends Object {
   }
 
   /**
-   * @return {OuterClass$InnerClass}
-   * @public
-   */
-  m_$create_OuterClass$InnerClass() {
-    return OuterClass$InnerClass
-        .$create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass(
-            this);
-  }
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_test() {
-    OuterClass.$create()
-        .m_$create_OuterClass$InnerClass()
-        .m_$create_OuterClass$InnerClass$InnerInnerClass();
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!OuterClass}
    * @public
@@ -70,6 +50,26 @@ class OuterClass extends Object {
   $ctor__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass() {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass();
+  }
+
+  /**
+   * @return {OuterClass$InnerClass}
+   * @public
+   */
+  m_$create_OuterClass$InnerClass() {
+    return OuterClass$InnerClass
+        .$create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass(
+            this);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    OuterClass.$create()
+        .m_$create_OuterClass$InnerClass()
+        .m_$create_OuterClass$InnerClass$InnerInnerClass();
   }
 
   /**

@@ -43,6 +43,36 @@ class ChildClass$InnerClass extends ParentInner {
   }
 
   /**
+   * A particular Java constructor as a factory method.
+   * @param {ChildClass} $outer_this
+   * @return {!ChildClass$InnerClass}
+   * @public
+   * @nocollapse
+   */
+  static $create__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass(
+      $outer_this) {
+    ChildClass$InnerClass.$clinit();
+    let instance = new ChildClass$InnerClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass(
+            $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {ChildClass} $outer_this
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass =
+        $outer_this;
+    this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentInner();
+    this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass();
+  }
+
+  /**
    * @return {void}
    * @public
    */
@@ -79,36 +109,6 @@ class ChildClass$InnerClass extends ParentInner {
     a = this.f_fieldInInner__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass;
     a = this.f_fieldInInner__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass;
     return a;
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @param {ChildClass} $outer_this
-   * @return {!ChildClass$InnerClass}
-   * @public
-   * @nocollapse
-   */
-  static $create__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass(
-      $outer_this) {
-    ChildClass$InnerClass.$clinit();
-    let instance = new ChildClass$InnerClass;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass(
-            $outer_this);
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @param {ChildClass} $outer_this
-   * @public
-   */
-  $ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass(
-      $outer_this) {
-    this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass =
-        $outer_this;
-    this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentInner();
-    this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass$InnerClass();
   }
 
   /**

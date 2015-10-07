@@ -30,6 +30,29 @@ class SubNumber extends Number {
   }
 
   /**
+   * A particular Java constructor as a factory method.
+   * @return {!SubNumber}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    SubNumber.$clinit();
+    let instance = new SubNumber;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_SubNumber();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_SubNumber() {
+    this.$ctor__java_lang_Number();
+    this.$init__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_SubNumber();
+  }
+
+  /**
    * @override
    * @return {number}
    * @public
@@ -56,29 +79,6 @@ class SubNumber extends Number {
    * @public
    */
   m_doubleValue() { return 0; }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!SubNumber}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    SubNumber.$clinit();
-    let instance = new SubNumber;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_SubNumber();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_SubNumber() {
-    this.$ctor__java_lang_Number();
-    this.$init__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_SubNumber();
-  }
 
   /**
    * Returns whether the provided instance is an instance of this class.

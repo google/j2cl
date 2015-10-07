@@ -29,18 +29,6 @@ class TernaryExpression extends Object {
   }
 
   /**
-   * @return {void}
-   * @public
-   */
-  m_test() {
-    let a = true;
-    let number = a ? 1 : 2;
-    let b = number == 1 ? number == 2 : number == 1;
-    let value =
-        (b ? Integer.$create__int(15) : Integer.$create__int(30)).m_intValue();
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!TernaryExpression}
    * @public
@@ -61,6 +49,18 @@ class TernaryExpression extends Object {
   $ctor__com_google_j2cl_transpiler_readable_ternaryexpression_TernaryExpression() {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_ternaryexpression_TernaryExpression();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    let a = true;
+    let number = a ? 1 : 2;
+    let b = number == 1 ? number == 2 : number == 1;
+    let value =
+        (b ? Integer.$create__int(15) : Integer.$create__int(30)).m_intValue();
   }
 
   /**

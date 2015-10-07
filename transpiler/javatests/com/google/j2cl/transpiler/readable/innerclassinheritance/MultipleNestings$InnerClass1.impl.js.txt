@@ -37,22 +37,6 @@ class MultipleNestings$InnerClass1 extends MultipleNestings$Parent {
   }
 
   /**
-   * @return {void}
-   * @public
-   */
-  m_funInI1() {}
-
-  /**
-   * @return {MultipleNestings$InnerClass1$InnerClass2}
-   * @public
-   */
-  m_$create_MultipleNestings$InnerClass1$InnerClass2() {
-    return MultipleNestings$InnerClass1$InnerClass2
-        .$create__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings$InnerClass1(
-            this);
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @param {MultipleNestings} $outer_this
    * @return {!MultipleNestings$InnerClass1}
@@ -81,6 +65,22 @@ class MultipleNestings$InnerClass1 extends MultipleNestings$Parent {
     this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings$Parent__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings(
         $outer_this);
     this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings$InnerClass1();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_funInI1() {}
+
+  /**
+   * @return {MultipleNestings$InnerClass1$InnerClass2}
+   * @public
+   */
+  m_$create_MultipleNestings$InnerClass1$InnerClass2() {
+    return MultipleNestings$InnerClass1$InnerClass2
+        .$create__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings$InnerClass1(
+            this);
   }
 
   /**

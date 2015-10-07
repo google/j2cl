@@ -27,6 +27,29 @@ class CharacterLiteral extends Object {
   }
 
   /**
+   * A particular Java constructor as a factory method.
+   * @return {!CharacterLiteral}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    CharacterLiteral.$clinit();
+    let instance = new CharacterLiteral;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_characterliteral_CharacterLiteral();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_characterliteral_CharacterLiteral() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_characterliteral_CharacterLiteral();
+  }
+
+  /**
    * @return {void}
    * @public
    */
@@ -151,29 +174,6 @@ class CharacterLiteral extends Object {
     a = 124 /* '|' */;
     a = 125 /* '}' */;
     a = 126 /* '~' */;
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!CharacterLiteral}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    CharacterLiteral.$clinit();
-    let instance = new CharacterLiteral;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_characterliteral_CharacterLiteral();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_characterliteral_CharacterLiteral() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_characterliteral_CharacterLiteral();
   }
 
   /**

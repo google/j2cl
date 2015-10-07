@@ -32,21 +32,6 @@ class Main extends Object {
   }
 
   /**
-   * @return {void}
-   * @public
-   */
-  m_main() {
-    let fooCallsSuperObjectMethods = FooCallsSuperObjectMethod.$create();
-    $Objects.m_hashCode__java_lang_Object(fooCallsSuperObjectMethods);
-    let sn = SubNumber.$create();
-    $Numbers.m_byteValue__java_lang_Number(sn);
-    sn.m_doubleValue();
-    sn.m_floatValue();
-    sn.m_intValue();
-    $Numbers.m_shortValue__java_lang_Number(sn);
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!Main}
    * @public
@@ -67,6 +52,21 @@ class Main extends Object {
   $ctor__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_Main() {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_devirtualizedsupermethodcall_Main();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    let fooCallsSuperObjectMethods = FooCallsSuperObjectMethod.$create();
+    $Objects.m_hashCode__java_lang_Object(fooCallsSuperObjectMethods);
+    let sn = SubNumber.$create();
+    $Numbers.m_byteValue__java_lang_Number(sn);
+    sn.m_doubleValue();
+    sn.m_floatValue();
+    sn.m_intValue();
+    $Numbers.m_shortValue__java_lang_Number(sn);
   }
 
   /**

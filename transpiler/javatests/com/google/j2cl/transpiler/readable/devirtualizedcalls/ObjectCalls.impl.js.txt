@@ -26,6 +26,29 @@ class ObjectCalls extends Object {
   $init__com_google_j2cl_transpiler_readable_devirtualizedcalls_ObjectCalls() {}
 
   /**
+   * A particular Java constructor as a factory method.
+   * @return {!ObjectCalls}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    ObjectCalls.$clinit();
+    let instance = new ObjectCalls;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_ObjectCalls();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_ObjectCalls() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_devirtualizedcalls_ObjectCalls();
+  }
+
+  /**
    * @return {void}
    * @public
    */
@@ -50,29 +73,6 @@ class ObjectCalls extends Object {
     this.m_hashCode();
     this.m_toString();
     this.m_getClass();
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!ObjectCalls}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    ObjectCalls.$clinit();
-    let instance = new ObjectCalls;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_ObjectCalls();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_ObjectCalls() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_devirtualizedcalls_ObjectCalls();
   }
 
   /**

@@ -32,6 +32,29 @@ class NewInnerClassWithSameOuter extends Object {
   }
 
   /**
+   * A particular Java constructor as a factory method.
+   * @return {!NewInnerClassWithSameOuter}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    NewInnerClassWithSameOuter.$clinit();
+    let instance = new NewInnerClassWithSameOuter;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter();
+  }
+
+  /**
    * @return {NewInnerClassWithSameOuter$A}
    * @public
    */
@@ -59,29 +82,6 @@ class NewInnerClassWithSameOuter extends Object {
     return NewInnerClassWithSameOuter$C
         .$create__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter(
             this);
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!NewInnerClassWithSameOuter}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    NewInnerClassWithSameOuter.$clinit();
-    let instance = new NewInnerClassWithSameOuter;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_newinnerclasswithsameouter_NewInnerClassWithSameOuter();
   }
 
   /**

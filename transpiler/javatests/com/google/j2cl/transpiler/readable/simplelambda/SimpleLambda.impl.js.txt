@@ -50,6 +50,29 @@ class SimpleLambda extends Object {
   }
 
   /**
+   * A particular Java constructor as a factory method.
+   * @return {!SimpleLambda}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    SimpleLambda.$clinit();
+    let instance = new SimpleLambda;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda();
+  }
+
+  /**
    * @return {void}
    * @public
    */
@@ -138,29 +161,6 @@ class SimpleLambda extends Object {
                 .$create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(
                     this),
             10);
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!SimpleLambda}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    SimpleLambda.$clinit();
-    let instance = new SimpleLambda;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda();
   }
 
   /**

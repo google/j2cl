@@ -46,6 +46,29 @@ class SimpleLongs extends Object {
   }
 
   /**
+   * A particular Java constructor as a factory method.
+   * @return {!SimpleLongs}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    SimpleLongs.$clinit();
+    let instance = new SimpleLongs;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs();
+  }
+
+  /**
    * @return {!$Long}
    * @public
    */
@@ -109,29 +132,6 @@ class SimpleLongs extends Object {
     let g =
         this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs;
     g = this.m_getBar();
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!SimpleLongs}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    SimpleLongs.$clinit();
-    let instance = new SimpleLongs;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs();
   }
 
   /**

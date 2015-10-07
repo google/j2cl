@@ -30,23 +30,6 @@ class SimpleTryCatchThrow extends Object {
   }
 
   /**
-   * @return {void}
-   * @public
-   */
-  m_main() {
-    try {
-      throw ClassCastException.$create();
-    } catch (e) {
-      if (NullPointerException.$isInstance(e) ||
-          ClassCastException.$isInstance(e)) {
-      } else {
-        throw e;
-      }
-    } finally {
-    }
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!SimpleTryCatchThrow}
    * @public
@@ -67,6 +50,23 @@ class SimpleTryCatchThrow extends Object {
   $ctor__com_google_j2cl_transpiler_readable_simpletrycatchthrow_SimpleTryCatchThrow() {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_simpletrycatchthrow_SimpleTryCatchThrow();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    try {
+      throw ClassCastException.$create();
+    } catch (e) {
+      if (NullPointerException.$isInstance(e) ||
+          ClassCastException.$isInstance(e)) {
+      } else {
+        throw e;
+      }
+    } finally {
+    }
   }
 
   /**

@@ -27,25 +27,6 @@ class Parent extends GrandParent {
   $init__com_google_j2cl_transpiler_readable_supermethodcall_Parent() {}
 
   /**
-   * @return {void}
-   * @public
-   */
-  m_parentSimplest() {}
-
-  /**
-   * @param {number} foo
-   * @return {void}
-   * @public
-   */
-  m_parentWithParams__int(foo) {}
-
-  /**
-   * @return {*}
-   * @public
-   */
-  m_parentWithChangingReturn() { return null; }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!Parent}
    * @public
@@ -67,6 +48,25 @@ class Parent extends GrandParent {
     this.$ctor__com_google_j2cl_transpiler_readable_supermethodcall_GrandParent();
     this.$init__com_google_j2cl_transpiler_readable_supermethodcall_Parent();
   }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_parentSimplest() {}
+
+  /**
+   * @param {number} foo
+   * @return {void}
+   * @public
+   */
+  m_parentWithParams__int(foo) {}
+
+  /**
+   * @return {*}
+   * @public
+   */
+  m_parentWithChangingReturn() { return null; }
 
   /**
    * Returns whether the provided instance is an instance of this class.

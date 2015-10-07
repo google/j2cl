@@ -95,6 +95,29 @@ class InnerClassInitOrder extends Object {
   }
 
   /**
+   * A particular Java constructor as a factory method.
+   * @return {!InnerClassInitOrder}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    InnerClassInitOrder.$clinit();
+    let instance = new InnerClassInitOrder;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder();
+  }
+
+  /**
    * @return {InnerClassInitOrder$OuterRefFromSuperCtorCall}
    * @public
    */
@@ -400,29 +423,6 @@ class InnerClassInitOrder extends Object {
     m.m_testSuperDispatch();
     m.m_testUnqualifiedAlloc();
     m.m_testUnqualifiedSuperCall();
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!InnerClassInitOrder}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    InnerClassInitOrder.$clinit();
-    let instance = new InnerClassInitOrder;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder();
   }
 
   /**

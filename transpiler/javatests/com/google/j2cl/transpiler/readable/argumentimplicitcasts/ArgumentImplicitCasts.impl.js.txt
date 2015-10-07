@@ -43,6 +43,29 @@ class ArgumentImplicitCasts extends Object {
   }
 
   /**
+   * A particular Java constructor as a factory method.
+   * @return {!ArgumentImplicitCasts}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    ArgumentImplicitCasts.$clinit();
+    let instance = new ArgumentImplicitCasts;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts();
+  }
+
+  /**
    * @param {number} value
    * @return {number}
    * @public
@@ -253,29 +276,6 @@ class ArgumentImplicitCasts extends Object {
             $Primitives.$castShortToLong(
                 ArgumentImplicitCasts
                     .f_SHORT_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts)));
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!ArgumentImplicitCasts}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    ArgumentImplicitCasts.$clinit();
-    let instance = new ArgumentImplicitCasts;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts();
   }
 
   /**

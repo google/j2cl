@@ -28,16 +28,6 @@ class AssertSimple extends Object {
   $init__com_google_j2cl_transpiler_readable_assertsimple_AssertSimple() {}
 
   /**
-   * @param {Array<?string>} args
-   * @return {void}
-   * @public
-   */
-  static m_main__arrayOf_java_lang_String(args) {
-    AssertSimple.$clinit();
-    $Asserts.$enabled() && $Asserts.$assert(1 + 2 == 3);
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!AssertSimple}
    * @public
@@ -58,6 +48,16 @@ class AssertSimple extends Object {
   $ctor__com_google_j2cl_transpiler_readable_assertsimple_AssertSimple() {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_assertsimple_AssertSimple();
+  }
+
+  /**
+   * @param {Array<?string>} args
+   * @return {void}
+   * @public
+   */
+  static m_main__arrayOf_java_lang_String(args) {
+    AssertSimple.$clinit();
+    $Asserts.$enabled() && $Asserts.$assert(1 + 2 == 3);
   }
 
   /**

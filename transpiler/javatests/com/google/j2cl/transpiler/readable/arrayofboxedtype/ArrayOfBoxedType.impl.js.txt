@@ -36,6 +36,29 @@ class ArrayOfBoxedType extends Object {
   }
 
   /**
+   * A particular Java constructor as a factory method.
+   * @return {!ArrayOfBoxedType}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    ArrayOfBoxedType.$clinit();
+    let instance = new ArrayOfBoxedType;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_arrayofboxedtype_ArrayOfBoxedType();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_arrayofboxedtype_ArrayOfBoxedType() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_arrayofboxedtype_ArrayOfBoxedType();
+  }
+
+  /**
    * @return {void}
    * @public
    */
@@ -73,29 +96,6 @@ class ArrayOfBoxedType extends Object {
     let boolArray =
         /**@type {Array<?boolean>} */ ($Arrays.$castTo(byteArray, Boolean, 1));
     $Arrays.$set(numberArray, 1, Integer.$create__int(1));
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!ArrayOfBoxedType}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    ArrayOfBoxedType.$clinit();
-    let instance = new ArrayOfBoxedType;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_arrayofboxedtype_ArrayOfBoxedType();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_arrayofboxedtype_ArrayOfBoxedType() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_arrayofboxedtype_ArrayOfBoxedType();
   }
 
   /**

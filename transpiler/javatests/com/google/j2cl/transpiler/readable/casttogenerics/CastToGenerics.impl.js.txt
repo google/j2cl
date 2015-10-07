@@ -35,6 +35,30 @@ class CastToGenerics extends Object {
   $init__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics() {}
 
   /**
+   * A particular Java constructor as a factory method.
+   * @template C_T, C_E
+   * @return {!CastToGenerics<C_T, C_E>}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    CastToGenerics.$clinit();
+    let instance = new CastToGenerics;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics();
+  }
+
+  /**
    * @return {void}
    * @public
    */
@@ -63,30 +87,6 @@ class CastToGenerics extends Object {
         $Casts.to(o, CastToGenerics));
     c = /**@type {Array<*>} */ ($Arrays.$castTo(o, Object, 1));
     c = /**@type {Enum} */ ($Casts.to(o, Enum));
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @template C_T, C_E
-   * @return {!CastToGenerics<C_T, C_E>}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    CastToGenerics.$clinit();
-    let instance = new CastToGenerics;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics();
   }
 
   /**

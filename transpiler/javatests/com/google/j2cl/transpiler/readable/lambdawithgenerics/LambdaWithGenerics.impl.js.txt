@@ -31,29 +31,6 @@ class LambdaWithGenerics extends Object {
   }
 
   /**
-   * @param {MyInterface<Error>} intf
-   * @param {Error} e
-   * @return {Error}
-   * @public
-   */
-  m_test__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Error(
-      intf, e) {
-    return intf.m_foo__java_lang_Object(e);
-  }
-
-  /**
-   * @return {void}
-   * @public
-   */
-  m_testLambdaNoCapture() {
-    this.m_test__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Error(
-        LambdaWithGenerics$lambda$0
-            .$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
-                this),
-        Error.$create());
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!LambdaWithGenerics}
    * @public
@@ -74,6 +51,29 @@ class LambdaWithGenerics extends Object {
   $ctor__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics() {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics();
+  }
+
+  /**
+   * @param {MyInterface<Error>} intf
+   * @param {Error} e
+   * @return {Error}
+   * @public
+   */
+  m_test__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Error(
+      intf, e) {
+    return intf.m_foo__java_lang_Object(e);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testLambdaNoCapture() {
+    this.m_test__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Error(
+        LambdaWithGenerics$lambda$0
+            .$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
+                this),
+        Error.$create());
   }
 
   /**

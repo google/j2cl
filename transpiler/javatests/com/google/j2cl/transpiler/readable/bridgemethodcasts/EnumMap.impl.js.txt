@@ -32,14 +32,6 @@ class EnumMap extends AbstractMap {
   $init__com_google_j2cl_transpiler_readable_bridgemethodcasts_EnumMap() {}
 
   /**
-   * @param {C_K} key
-   * @param {C_V} value
-   * @return {C_V}
-   * @public
-   */
-  m_put__java_lang_Enum__java_lang_Object(key, value) { return value; }
-
-  /**
    * A particular Java constructor as a factory method.
    * @template C_K, C_V
    * @return {!EnumMap<C_K, C_V>}
@@ -62,6 +54,14 @@ class EnumMap extends AbstractMap {
     this.$ctor__com_google_j2cl_transpiler_readable_bridgemethodcasts_AbstractMap();
     this.$init__com_google_j2cl_transpiler_readable_bridgemethodcasts_EnumMap();
   }
+
+  /**
+   * @param {C_K} key
+   * @param {C_V} value
+   * @return {C_V}
+   * @public
+   */
+  m_put__java_lang_Enum__java_lang_Object(key, value) { return value; }
 
   /**
    * Synthetic method.

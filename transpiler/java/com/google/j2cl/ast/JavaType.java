@@ -123,6 +123,11 @@ public class JavaType extends Node {
     methods.add(method);
   }
 
+  public void addMethod(int index, Method method) {
+    Preconditions.checkArgument(index >= 0 && index <= methods.size());
+    methods.add(index, method);
+  }
+
   public void addMethods(List<Method> methods) {
     this.methods.addAll(methods);
   }

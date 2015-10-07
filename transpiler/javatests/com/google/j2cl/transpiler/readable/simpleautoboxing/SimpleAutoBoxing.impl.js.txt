@@ -45,6 +45,29 @@ class SimpleAutoBoxing extends Object {
   }
 
   /**
+   * A particular Java constructor as a factory method.
+   * @return {!SimpleAutoBoxing}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    SimpleAutoBoxing.$clinit();
+    let instance = new SimpleAutoBoxing;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing();
+  }
+
+  /**
    * @param {boolean} b
    * @return {?boolean}
    * @public
@@ -246,29 +269,6 @@ class SimpleAutoBoxing extends Object {
     i = boxI.m_intValue();
     i = -boxI.m_intValue();
     i = ~boxI.m_intValue();
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!SimpleAutoBoxing}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    SimpleAutoBoxing.$clinit();
-    let instance = new SimpleAutoBoxing;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing();
   }
 
   /**

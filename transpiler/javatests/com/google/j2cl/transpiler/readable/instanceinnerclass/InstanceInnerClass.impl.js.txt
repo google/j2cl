@@ -36,6 +36,29 @@ class InstanceInnerClass extends Object {
   }
 
   /**
+   * A particular Java constructor as a factory method.
+   * @return {!InstanceInnerClass}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    InstanceInnerClass.$clinit();
+    let instance = new InstanceInnerClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass();
+  }
+
+  /**
    * @return {void}
    * @public
    */
@@ -57,29 +80,6 @@ class InstanceInnerClass extends Object {
    */
   m_test() {
     InstanceInnerClass.$create().m_$create_InstanceInnerClass$InnerClass();
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!InstanceInnerClass}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    InstanceInnerClass.$clinit();
-    let instance = new InstanceInnerClass;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_instanceinnerclass_InstanceInnerClass();
   }
 
   /**

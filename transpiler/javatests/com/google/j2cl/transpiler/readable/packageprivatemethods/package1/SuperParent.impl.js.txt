@@ -27,6 +27,29 @@ class SuperParent extends Object {
   }
 
   /**
+   * A particular Java constructor as a factory method.
+   * @return {!SuperParent}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    SuperParent.$clinit();
+    let instance = new SuperParent;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_SuperParent();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_SuperParent() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_SuperParent();
+  }
+
+  /**
    * @param {number} a
    * @return {number}
    * @public
@@ -57,29 +80,6 @@ class SuperParent extends Object {
   m_bar__int__int__int_$pp_com_google_j2cl_transpiler_readable_packageprivatemethods_package1(
       a, b, c) {
     return a + b + c;
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!SuperParent}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    SuperParent.$clinit();
-    let instance = new SuperParent;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_SuperParent();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_SuperParent() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_SuperParent();
   }
 
   /**

@@ -27,6 +27,29 @@ class TypeWildCards extends Object {
   $init__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards() {}
 
   /**
+   * A particular Java constructor as a factory method.
+   * @return {!TypeWildCards}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    TypeWildCards.$clinit();
+    let instance = new TypeWildCards;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards();
+  }
+
+  /**
    * @param {GenericType<?>} g
    * @return {void}
    * @public
@@ -61,29 +84,6 @@ class TypeWildCards extends Object {
         /**@type {GenericType<TypeWildCards>} */ (GenericType.$create()));
     this.m_lowerBound__com_google_j2cl_transpiler_readable_typewildcards_GenericType(
         /**@type {GenericType<TypeWildCards>} */ (GenericType.$create()));
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!TypeWildCards}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    TypeWildCards.$clinit();
-    let instance = new TypeWildCards;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards();
   }
 
   /**

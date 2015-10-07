@@ -34,6 +34,30 @@ class InnerClassInitOrder$ESWGOuter extends Object {
   }
 
   /**
+   * A particular Java constructor as a factory method.
+   * @template C_ESWGOuter_T
+   * @return {!InnerClassInitOrder$ESWGOuter<C_ESWGOuter_T>}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    InnerClassInitOrder$ESWGOuter.$clinit();
+    let instance = new InnerClassInitOrder$ESWGOuter;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter();
+  }
+
+  /**
    * @return {InnerClassInitOrder$ESWGOuter$ESWGInner<C_ESWGOuter_T>}
    * @public
    */
@@ -61,30 +85,6 @@ class InnerClassInitOrder$ESWGOuter extends Object {
   m_newESWGInner() {
     return /**@type {InnerClassInitOrder$ESWGOuter$ESWGInner<C_ESWGOuter_T>} */ (
         this.m_$create_InnerClassInitOrder$ESWGOuter$ESWGInner());
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @template C_ESWGOuter_T
-   * @return {!InnerClassInitOrder$ESWGOuter<C_ESWGOuter_T>}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    InnerClassInitOrder$ESWGOuter.$clinit();
-    let instance = new InnerClassInitOrder$ESWGOuter;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @public
-   */
-  $ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter();
   }
 
   /**

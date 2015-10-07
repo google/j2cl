@@ -30,6 +30,29 @@ class MultipleNestings extends Object {
   }
 
   /**
+   * A particular Java constructor as a factory method.
+   * @return {!MultipleNestings}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    MultipleNestings.$clinit();
+    let instance = new MultipleNestings;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings();
+  }
+
+  /**
    * @return {MultipleNestings$Parent}
    * @public
    */
@@ -53,29 +76,6 @@ class MultipleNestings extends Object {
     return MultipleNestings$InnerClass1
         .$create__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings(
             this);
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!MultipleNestings}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    MultipleNestings.$clinit();
-    let instance = new MultipleNestings;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings();
   }
 
   /**

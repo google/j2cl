@@ -28,16 +28,6 @@ class InstanceOfArray extends Object {
   }
 
   /**
-   * @return {void}
-   * @public
-   */
-  m_main() {
-    let object = Object.$create();
-    let a = $Arrays.$instanceIsOfType(object, Object, 1);
-    let b = $Arrays.$instanceIsOfType(object, Object, 2);
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!InstanceOfArray}
    * @public
@@ -58,6 +48,16 @@ class InstanceOfArray extends Object {
   $ctor__com_google_j2cl_transpiler_readable_instanceofarray_InstanceOfArray() {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_instanceofarray_InstanceOfArray();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    let object = Object.$create();
+    let a = $Arrays.$instanceIsOfType(object, Object, 1);
+    let b = $Arrays.$instanceIsOfType(object, Object, 2);
   }
 
   /**

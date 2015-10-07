@@ -27,14 +27,6 @@ class SubChild extends Child {
   }
 
   /**
-   * @override
-   * @param {number} a
-   * @return {number}
-   * @public
-   */
-  m_foo__int(a) { return a + 3; }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!SubChild}
    * @public
@@ -56,6 +48,14 @@ class SubChild extends Child {
     this.$ctor__com_google_j2cl_transpiler_readable_packageprivatemethods_package1_Child();
     this.$init__com_google_j2cl_transpiler_readable_packageprivatemethods_package2_SubChild();
   }
+
+  /**
+   * @override
+   * @param {number} a
+   * @return {number}
+   * @public
+   */
+  m_foo__int(a) { return a + 3; }
 
   /**
    * Returns whether the provided instance is an instance of this class.

@@ -38,6 +38,29 @@ class ChildClass extends ParentOuter {
   }
 
   /**
+   * A particular Java constructor as a factory method.
+   * @return {!ChildClass}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    ChildClass.$clinit();
+    let instance = new ChildClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass() {
+    this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentOuter();
+    this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass();
+  }
+
+  /**
    * @return {void}
    * @public
    */
@@ -62,29 +85,6 @@ class ChildClass extends ParentOuter {
         .$create__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass(
             this)
         .m_test();
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!ChildClass}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    ChildClass.$clinit();
-    let instance = new ChildClass;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass() {
-    this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentOuter();
-    this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass();
   }
 
   /**

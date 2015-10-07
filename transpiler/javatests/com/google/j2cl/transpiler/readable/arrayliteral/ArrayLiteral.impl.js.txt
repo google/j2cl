@@ -27,21 +27,6 @@ class ArrayLiteral extends Object {
   $init__com_google_j2cl_transpiler_readable_arrayliteral_ArrayLiteral() {}
 
   /**
-   * @return {void}
-   * @public
-   */
-  m_main() {
-    let object = Object.$create();
-    let ints = /**@type {Array<number>} */ ($Arrays.$init([0, 1, 2], $int));
-    let objects2d = /**@type {Array<Array<*>>} */ (
-        $Arrays.$init([[object, object], [object, object]], Object, 2));
-    let partial =
-        /**@type {Array<Array<number>>} */ ($Arrays.$init([], $int, 2));
-    let unbalanced = /**@type {Array<Array<*>>} */ (
-        $Arrays.$init([[object, object], null], Object, 2));
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!ArrayLiteral}
    * @public
@@ -62,6 +47,21 @@ class ArrayLiteral extends Object {
   $ctor__com_google_j2cl_transpiler_readable_arrayliteral_ArrayLiteral() {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_arrayliteral_ArrayLiteral();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    let object = Object.$create();
+    let ints = /**@type {Array<number>} */ ($Arrays.$init([0, 1, 2], $int));
+    let objects2d = /**@type {Array<Array<*>>} */ (
+        $Arrays.$init([[object, object], [object, object]], Object, 2));
+    let partial =
+        /**@type {Array<Array<number>>} */ ($Arrays.$init([], $int, 2));
+    let unbalanced = /**@type {Array<Array<*>>} */ (
+        $Arrays.$init([[object, object], null], Object, 2));
   }
 
   /**

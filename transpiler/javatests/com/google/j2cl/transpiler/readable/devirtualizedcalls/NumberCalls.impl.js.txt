@@ -38,6 +38,29 @@ class NumberCalls extends Object {
   $init__com_google_j2cl_transpiler_readable_devirtualizedcalls_NumberCalls() {}
 
   /**
+   * A particular Java constructor as a factory method.
+   * @return {!NumberCalls}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    NumberCalls.$clinit();
+    let instance = new NumberCalls;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_NumberCalls();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_NumberCalls() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_devirtualizedcalls_NumberCalls();
+  }
+
+  /**
    * @return {void}
    * @public
    */
@@ -130,29 +153,6 @@ class NumberCalls extends Object {
     c.m_charValue();
     let bool = Boolean.$create__boolean(true);
     $Booleans.m_booleanValue__java_lang_Boolean(bool);
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!NumberCalls}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    NumberCalls.$clinit();
-    let instance = new NumberCalls;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_NumberCalls();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_NumberCalls() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_devirtualizedcalls_NumberCalls();
   }
 
   /**

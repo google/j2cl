@@ -36,6 +36,29 @@ class CastToPrimitive extends Object {
   }
 
   /**
+   * A particular Java constructor as a factory method.
+   * @return {!CastToPrimitive}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    CastToPrimitive.$clinit();
+    let instance = new CastToPrimitive;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_casttoprimitive_CastToPrimitive();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_casttoprimitive_CastToPrimitive() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_casttoprimitive_CastToPrimitive();
+  }
+
+  /**
    * @return {void}
    * @public
    */
@@ -96,29 +119,6 @@ class CastToPrimitive extends Object {
     l = $Primitives.$castDoubleToLong(d);
     f = d;
     d = d;
-  }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!CastToPrimitive}
-   * @public
-   * @nocollapse
-   */
-  static $create() {
-    CastToPrimitive.$clinit();
-    let instance = new CastToPrimitive;
-    instance
-        .$ctor__com_google_j2cl_transpiler_readable_casttoprimitive_CastToPrimitive();
-    return instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @protected
-   */
-  $ctor__com_google_j2cl_transpiler_readable_casttoprimitive_CastToPrimitive() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_casttoprimitive_CastToPrimitive();
   }
 
   /**

@@ -28,18 +28,6 @@ class InstanceofClass extends Object {
   }
 
   /**
-   * @return {void}
-   * @public
-   */
-  m_test() {
-    let object = InstanceofClass.$create();
-    $Asserts.$enabled() &&
-        $Asserts.$assert(InstanceofClass.$isInstance(object));
-    $Asserts.$enabled() && $Asserts.$assert(Object.$isInstance(object));
-    $Asserts.$enabled() && $Asserts.$assert(!(String.$isInstance(object)));
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!InstanceofClass}
    * @public
@@ -60,6 +48,18 @@ class InstanceofClass extends Object {
   $ctor__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass() {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    let object = InstanceofClass.$create();
+    $Asserts.$enabled() &&
+        $Asserts.$assert(InstanceofClass.$isInstance(object));
+    $Asserts.$enabled() && $Asserts.$assert(Object.$isInstance(object));
+    $Asserts.$enabled() && $Asserts.$assert(!(String.$isInstance(object)));
   }
 
   /**

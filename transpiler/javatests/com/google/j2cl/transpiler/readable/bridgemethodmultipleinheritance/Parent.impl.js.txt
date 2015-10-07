@@ -33,30 +33,6 @@ class Parent extends SuperParent {
   }
 
   /**
-   * @param {C_T} t
-   * @param {(Number|?number)} s
-   * @return {void}
-   * @public
-   */
-  m_foo__java_lang_Error__java_lang_Number(t, s) {}
-
-  /**
-   * @template M_T
-   * @param {M_T} t
-   * @return {void}
-   * @public
-   */
-  m_bar__java_lang_Number(t) {}
-
-  /**
-   * @template M_T
-   * @param {M_T} t
-   * @return {void}
-   * @public
-   */
-  m_fun__java_lang_Object(t) {}
-
-  /**
    * A particular Java constructor as a factory method.
    * @template C_T
    * @return {!Parent<C_T>}
@@ -79,6 +55,30 @@ class Parent extends SuperParent {
     this.$ctor__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SuperParent();
     this.$init__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_Parent();
   }
+
+  /**
+   * @param {C_T} t
+   * @param {(Number|?number)} s
+   * @return {void}
+   * @public
+   */
+  m_foo__java_lang_Error__java_lang_Number(t, s) {}
+
+  /**
+   * @template M_T
+   * @param {M_T} t
+   * @return {void}
+   * @public
+   */
+  m_bar__java_lang_Number(t) {}
+
+  /**
+   * @template M_T
+   * @param {M_T} t
+   * @return {void}
+   * @public
+   */
+  m_fun__java_lang_Object(t) {}
 
   /**
    * Synthetic method.
