@@ -132,7 +132,7 @@ def j2cl_java_test(**kwargs):
   if not "deps" in kwargs:
     kwargs["deps"] = []
   kwargs["deps"] = kwargs[
-      "deps"] + ["//junit/java/com/google/j2cl/junit:junit_annotations"]
+      "deps"] + ["//junit/java/com/google/j2cl/junit:internal_junit_annotations"]
 
   kwargs["testonly"] = 1
 
