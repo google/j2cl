@@ -43,7 +43,7 @@ public class MethodDescriptorBuilder {
     builder.isNative = methodDescriptor.isNative();
     builder.parameterTypeDescriptors = methodDescriptor.getParameterTypeDescriptors();
     builder.returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
-    builder.typeParameterDescriptors = methodDescriptor.getTypeParameterDescriptors();
+    builder.typeParameterDescriptors = methodDescriptor.getTypeParameterTypeDescriptors();
     return builder;
   }
 

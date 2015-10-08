@@ -22,6 +22,13 @@ package com.google.j2cl.transpiler.integration.stringdevirtualcalls;
  */
 public class Main {
   public static void main(String... args) {
+    testJavaLangObjectMethods();
+    testComparableMethods();
+    testCharSequenceMethods();
+    testStringMethods();
+  }
+
+  private static void testJavaLangObjectMethods() {
     String string1 = "string1";
     String string2 = "string2";
 
@@ -43,5 +50,63 @@ public class Main {
     // GetClass
     assert string1.getClass() instanceof Class;
     assert string1.getClass() == string2.getClass();
+  }
+  
+  private static void testComparableMethods() {
+    String string1 = "string1";
+    String string2 = "string2";
+
+    assert string1.compareTo(string2) == -1;
+    assert string1.compareTo(string1) == 0;
+    assert string2.compareTo(string1) == 1;
+    assert string2.compareTo(string2) == 0;
+  }
+
+  private static void testCharSequenceMethods() {
+    String string1 = "string1";
+    String string2 = "";
+
+    assert string1.length() == 7;
+    assert string2.length() == 0;
+
+    assert string1.charAt(0) == 's';
+    assert string1.charAt(1) == 't';
+    assert string1.charAt(2) == 'r';
+    assert string1.charAt(3) == 'i';
+    assert string1.charAt(4) == 'n';
+    assert string1.charAt(5) == 'g';
+    assert string1.charAt(6) == '1';
+
+    assert string1.subSequence(0, 2).equals("st");
+    // TODO: Test for IndexOutOfBoundsException when implementation is compiled from Java
+    // assert string1.subSequence(4, 2).equals("");
+
+    // toString() already tested.
+  }
+
+  private static void testStringMethods() {
+    String string1 = "string1";
+
+    String whitespaceString = string1 + " ";
+    assert whitespaceString.trim().equals(string1);
+
+    whitespaceString = "  " + string1 + " ";
+    assert whitespaceString.trim().equals(string1);
+
+    // substring (start)
+    assert string1.substring(0).equals("string1");
+    assert string1.substring(1).equals("tring1");
+    assert string1.substring(2).equals("ring1");
+    assert string1.substring(3).equals("ing1");
+    assert string1.substring(4).equals("ng1");
+    assert string1.substring(5).equals("g1");
+    assert string1.substring(6).equals("1");
+    assert string1.substring(7).equals("");
+
+    // substring (start, end)
+    assert string1.substring(0, 2).equals("st");
+    assert string1.substring(1, 5).equals("trin");
+
+    // TODO: Test for IndexOutOfBoundsException when implementation is compiled from Java
   }
 }

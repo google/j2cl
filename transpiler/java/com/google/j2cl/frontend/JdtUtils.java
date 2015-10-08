@@ -552,6 +552,20 @@ public class JdtUtils {
     return isInstanceMethod(methodBinding)
         && methodBinding.getDeclaringClass().getBinaryName().equals("java.lang.Comparable");
   }
+  
+  static boolean isCharSequenceInstanceMethodBinding(IMethodBinding methodBinding) {
+    return isInstanceMethod(methodBinding)
+        && methodBinding.getDeclaringClass().getBinaryName().equals("java.lang.CharSequence");
+  }
+
+  /**
+   * @param methodBinding
+   * @return True if @methodBinding is a java.lang.String instance method.
+   */
+  static boolean isStringInstanceMethodBinding(IMethodBinding methodBinding) {
+    return isInstanceMethod(methodBinding)
+        && methodBinding.getDeclaringClass().getBinaryName().equals("java.lang.String");
+  }
 
   static IMethodBinding findSamMethodBinding(ITypeBinding typeBinding) {
     // TODO: there maybe an issue in which case it inherits a default method from an interface

@@ -12,8 +12,8 @@
 #if (${classType.Descriptor.isParameterizedType()})
    * @template ${statementSourceGenerator.getJsDocNames(${classType.Descriptor.getTypeArgumentDescriptors()})}
 #end
-#if (!${method.Descriptor.getTypeParameterDescriptors().isEmpty()})
-   * @template ${statementSourceGenerator.getJsDocNames(${method.Descriptor.getTypeParameterDescriptors()})}
+#if (!${method.Descriptor.getTypeParameterTypeDescriptors().isEmpty()})
+   * @template ${statementSourceGenerator.getJsDocNames(${method.Descriptor.getTypeParameterTypeDescriptors()})}
 #end
 #foreach($parameter in $method.Parameters)
 #set ($parameterTypeName = ${statementSourceGenerator.getJsDocName(${parameter.TypeDescriptor})})
@@ -32,8 +32,8 @@
 
   /**
    * Initializes instance fields for a particular Java constructor.
-#if (!${method.Descriptor.getTypeParameterDescriptors().isEmpty()})
-   * @template ${statementSourceGenerator.getJsDocNames(${method.Descriptor.getTypeParameterDescriptors()})}
+#if (!${method.Descriptor.getTypeParameterTypeDescriptors().isEmpty()})
+   * @template ${statementSourceGenerator.getJsDocNames(${method.Descriptor.getTypeParameterTypeDescriptors()})}
 #end
 #foreach($parameter in $method.Parameters)
 #set ($parameterTypeName = ${statementSourceGenerator.getJsDocName(${parameter.TypeDescriptor})})

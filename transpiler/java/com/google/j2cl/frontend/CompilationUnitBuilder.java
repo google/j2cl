@@ -1232,33 +1232,47 @@ public class CompilationUnitBuilder {
       }
       return binaryExpression;
     }
+    
+    /**
+     * Returns a qualifier for a method invocation that doesn't have one, specifically,
+     * instanceMethod() will return a resolved qualifier that may refer to "this" or to
+     * the enclosing instances. A staticMethod() will return null.
+     */
+    private Expression getExplicitQualifier(
+        org.eclipse.jdt.core.dom.MethodInvocation methodInvocation) {
 
-    private MethodCall convert(org.eclipse.jdt.core.dom.MethodInvocation expression) {
-      IMethodBinding methodBinding = expression.resolveMethodBinding();
+      if (methodInvocation.getExpression() == null) {
+        // No qualifier specified.
+        IMethodBinding methodBinding = methodInvocation.resolveMethodBinding();
+        if (JdtUtils.isStatic(methodBinding.getModifiers())) {
+          return null;
+        } else { // Not static so has to be a reference to 'this
+          return convertOuterClassReference(
+              JdtUtils.findCurrentTypeBinding(methodInvocation),
+              methodBinding.getDeclaringClass(),
+              false);
+        }
+      }
+      return convert(methodInvocation.getExpression());
+    }
 
-      Expression qualifier =
-          expression.getExpression() == null
-              // implicit this, resolve the qualifier by the declaring class of the called method
-              ? (JdtUtils.isStatic(methodBinding.getModifiers())
-                  ? null
-                  : convertOuterClassReference(
-                      JdtUtils.findCurrentTypeBinding(expression),
-                      methodBinding.getDeclaringClass(),
-                      false))
-              : convert(expression.getExpression());
+    private MethodCall convert(org.eclipse.jdt.core.dom.MethodInvocation methodInvocation) {
+
+      Expression qualifier = getExplicitQualifier(methodInvocation);
+
+      IMethodBinding methodBinding = methodInvocation.resolveMethodBinding();
       MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
       List<Expression> arguments =
           convertExpressions(
-              JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(expression.arguments()));
+              JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(
+                  methodInvocation.arguments()));
       maybePackageVarargs(
           methodBinding,
-          JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(expression.arguments()),
+          JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(methodInvocation.arguments()),
           arguments);
       MethodCall methodCall = new MethodCall(qualifier, methodDescriptor, arguments);
-      methodCall =
-          MethodCallDevirtualizer.doDevirtualization(methodCall, methodBinding, jdtCompilationUnit);
-
-      return methodCall;
+      return MethodCallDevirtualizer.doDevirtualization(
+          methodCall, methodBinding, jdtCompilationUnit);
     }
 
     private MethodCall convert(org.eclipse.jdt.core.dom.SuperMethodInvocation expression) {

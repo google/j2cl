@@ -12,6 +12,17 @@ let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 
 class String extends Object {
   /**
+   * @param {string} obj
+   * @return {string}
+   * @public
+   * @nocollapse
+   */
+  static $create__java_lang_String(obj) {
+    String.$clinit();
+    return obj;
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public

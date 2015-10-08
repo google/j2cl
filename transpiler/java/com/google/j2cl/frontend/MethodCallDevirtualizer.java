@@ -49,10 +49,7 @@ public class MethodCallDevirtualizer {
             MethodCall methodCall,
             IMethodBinding methodBinding,
             org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
-          // Do not devirtualize inside the same declaring class, because it does not need to go
-          // through the trampoline path in Objects functions.
-          return JdtUtils.isObjectInstanceMethodBinding(methodBinding, compilationUnit)
-              && dispatchesToSomeOtherClass(methodCall);
+          return JdtUtils.isObjectInstanceMethodBinding(methodBinding, compilationUnit);
         }
 
         @Override
@@ -73,10 +70,7 @@ public class MethodCallDevirtualizer {
             MethodCall methodCall,
             IMethodBinding methodBinding,
             org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
-          // Do not devirtualize inside the same declaring class, because it does not need to go
-          // through the trampoline path in Numbers functions.
-          return JdtUtils.isNumberInstanceMethodBinding(methodBinding, compilationUnit)
-              && dispatchesToSomeOtherClass(methodCall);
+          return JdtUtils.isNumberInstanceMethodBinding(methodBinding, compilationUnit);
         }
 
         @Override
@@ -97,10 +91,7 @@ public class MethodCallDevirtualizer {
             MethodCall methodCall,
             IMethodBinding methodBinding,
             org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
-          // Do not devirtualize inside the same declaring class, because it does not need to go
-          // throug the trampoline path in Booleans functions.
-          return JdtUtils.isBooleanInstanceMethodBinding(methodBinding, compilationUnit)
-              && dispatchesToSomeOtherClass(methodCall);
+          return JdtUtils.isBooleanInstanceMethodBinding(methodBinding, compilationUnit);
         }
 
         @Override
@@ -121,10 +112,7 @@ public class MethodCallDevirtualizer {
             MethodCall methodCall,
             IMethodBinding methodBinding,
             org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
-          // Do not devirtualize inside the same declaring class, because it does not need to go
-          // throug the trampoline path in Comparables functions.
-          return JdtUtils.isComparableInstanceMethodBinding(methodBinding)
-              && dispatchesToSomeOtherClass(methodCall);
+          return JdtUtils.isComparableInstanceMethodBinding(methodBinding);
         }
 
         @Override
@@ -138,19 +126,75 @@ public class MethodCallDevirtualizer {
         }
       };
 
-  private static boolean dispatchesToSomeOtherClass(MethodCall methodCall) {
-    Expression qualifier = methodCall.getQualifier();
-    return qualifier != null && !(qualifier instanceof ThisReference);
-  }
+  private static Devirtualizer charSequenceDevirtualizer =
+      new Devirtualizer() {
+        @Override
+        public boolean shouldBeDevirtualized(
+            MethodCall methodCall,
+            IMethodBinding methodBinding,
+            org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
+          return JdtUtils.isCharSequenceInstanceMethodBinding(methodBinding);
+        }
+
+        @Override
+        public TypeDescriptor getEnclosingClassTypeDescriptor() {
+          return TypeDescriptors.CHAR_SEQUENCES_TYPE_DESCRIPTOR;
+        }
+
+        @Override
+        public TypeDescriptor getInstanceTypeDescriptor() {
+          return TypeDescriptors.get().javaLangCharSequence;
+        }
+      };
+
+  private static Devirtualizer stringDevirtualizer =
+      new Devirtualizer() {
+        @Override
+        public boolean shouldBeDevirtualized(
+            MethodCall methodCall,
+            IMethodBinding methodBinding,
+            org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
+          return JdtUtils.isStringInstanceMethodBinding(methodBinding);
+        }
+
+        @Override
+        public TypeDescriptor getEnclosingClassTypeDescriptor() {
+          return TypeDescriptors.STRINGS_TYPE_DESCRIPTOR;
+        }
+
+        @Override
+        public TypeDescriptor getInstanceTypeDescriptor() {
+          return TypeDescriptors.get().javaLangString;
+        }
+      };
 
   private static List<Devirtualizer> devirtualizers =
       Arrays.<Devirtualizer>asList(
-          objectDevirtualizer, numberDevirtualizer, booleanDevirtualizer, comparableDevirtualizer);
+          objectDevirtualizer,
+          numberDevirtualizer,
+          booleanDevirtualizer,
+          comparableDevirtualizer,
+          charSequenceDevirtualizer,
+          stringDevirtualizer);
 
   public static MethodCall doDevirtualization(
       MethodCall methodCall,
       IMethodBinding methodBinding,
       org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
+
+    Expression qualifier = methodCall.getQualifier();
+    if (!JdtUtils.isInstanceMethod(methodBinding) || (qualifier instanceof ThisReference)) {
+      /**
+       * We don't want to devirtualize static method calls.
+       *
+       * We don't want to devirtualize calls to 'this' because we know 'this' is a subclass of
+       * Object, we don't need to go through the trampoline path in Object to determine that its
+       * not one of the devirtualized types. See Objects.impl.js. Since this is an optimization
+       * we might want to allow the js compiler to do this in the future.
+       */
+      return methodCall;
+    }
+
     for (Devirtualizer devirtualizer : devirtualizers) {
       if (devirtualizer.shouldBeDevirtualized(methodCall, methodBinding, compilationUnit)) {
         return AstUtils.createDevirtualizedMethodCall(

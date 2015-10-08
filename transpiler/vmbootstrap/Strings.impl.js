@@ -56,13 +56,27 @@ class Strings {
     return String.$getClass();
   }
 
+  //==================================
+  // Comparable Methods
+  //==================================
+
   /**
-   * @param {string} a
-   * @param {string} b
+   * @param {?string} a
+   * @param {?string} b
    * @return {number}
    * @public
    */
   static m_compareTo__java_lang_String__java_lang_String(a, b) {
+    Strings.$clinit();
+
+    // Generate Null Pointer Exceptions for a and b if they are null
+    if (a == null) {
+      a.m_compareTo__java_lang_String(b);
+    }
+    if (b == null) {
+      b.m_compareTo__java_lang_String(a);
+    }
+
     if (a == b) {
       return 0;
     }
@@ -70,7 +84,7 @@ class Strings {
   }
 
   /**
-   * @param {string} a
+   * @param {?string} a
    * @param {*} b
    * @return {number}
    * @public
@@ -80,6 +94,69 @@ class Strings {
     return Strings.m_compareTo__java_lang_String__java_lang_String(
       a, /**@type {string} */ ($Casts.to(b, String)));
   }
+
+  //==================================
+  // CharSequence Methods
+  //==================================
+
+  /**
+   * @param {string} obj
+   * @return {number}
+   * @public
+   */
+  static m_length__java_lang_String(obj) { return obj.length; }
+
+  /**
+   * @param {string} obj
+   * @param {number} index
+   * @return {number}
+   */
+  static m_charAt__java_lang_String__int(obj, index) {
+    return obj.charCodeAt(index);
+  }
+
+  /**
+   * @param {string} obj
+   * @param {number} start
+   * @param {number} end
+   * @return {string}
+   */
+  static m_subSequence__java_lang_String__int__int(obj, start, end) {
+    return obj.substring(start, end);
+  }
+
+  //==================================
+  // String Instance Methods
+  //==================================
+
+  /**
+   * @param {string} obj
+   * @param {number} start
+   * @param {number} endIndex
+   * @return {string}
+   * @public
+   */
+  static m_substring__java_lang_String__int__int(obj, start, endIndex) {
+    return obj.substring(start, endIndex);
+  }
+
+  /**
+   * @param {string} obj
+   * @param {number} start
+   * @return {string}
+   * @public
+   */
+  static m_substring__java_lang_String__int(obj, start) {
+    return obj.substring(start);
+  }
+
+  /**
+   *
+   * @param {string} obj
+   * @return {string}
+   * @public
+   */
+  static m_trim__java_lang_String(obj) { return obj.trim(); }
 
   /**
    * Runs inline static field initializers.

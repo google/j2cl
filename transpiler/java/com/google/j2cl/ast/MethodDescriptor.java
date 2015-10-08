@@ -36,6 +36,10 @@ public abstract class MethodDescriptor extends Node implements Member {
 
   private static Interner<MethodDescriptor> interner;
 
+  /**
+   * Creates an instance of an AutoValue generated MethodDescriptor which uses Interners
+   * to share identical instances of MethodDescriptors.
+   */
   public static MethodDescriptor create(
       boolean isStatic,
       boolean isRaw,
@@ -46,7 +50,7 @@ public abstract class MethodDescriptor extends Node implements Member {
       boolean isNative,
       TypeDescriptor returnTypeDescriptor,
       Iterable<TypeDescriptor> parameterTypeDescriptors,
-      Iterable<TypeDescriptor> typeParameterDescriptors) {
+      Iterable<TypeDescriptor> typeParameterTypeDescriptors) {
     return getInterner()
         .intern(
             new AutoValue_MethodDescriptor(
@@ -59,7 +63,7 @@ public abstract class MethodDescriptor extends Node implements Member {
                 isNative,
                 ImmutableList.copyOf(parameterTypeDescriptors),
                 returnTypeDescriptor,
-                ImmutableList.copyOf(typeParameterDescriptors)));
+                ImmutableList.copyOf(typeParameterTypeDescriptors)));
   }
 
   public static MethodDescriptor create(
@@ -71,7 +75,7 @@ public abstract class MethodDescriptor extends Node implements Member {
       boolean isNative,
       TypeDescriptor returnTypeDescriptor,
       Iterable<TypeDescriptor> parameterTypeDescriptors,
-      Iterable<TypeDescriptor> typeParameterDescriptors) {
+      Iterable<TypeDescriptor> typeParameterTypeDescriptors) {
     return create(
         isStatic,
         false,
@@ -82,7 +86,7 @@ public abstract class MethodDescriptor extends Node implements Member {
         isNative,
         returnTypeDescriptor,
         parameterTypeDescriptors,
-        typeParameterDescriptors);
+        typeParameterTypeDescriptors);
   }
 
   public static MethodDescriptor create(
@@ -184,7 +188,7 @@ public abstract class MethodDescriptor extends Node implements Member {
   /**
    * Type parameters declared in the method.
    */
-  public abstract ImmutableList<TypeDescriptor> getTypeParameterDescriptors();
+  public abstract ImmutableList<TypeDescriptor> getTypeParameterTypeDescriptors();
 
   public boolean isInit() {
     return getMethodName().equals(INIT_METHOD_NAME);

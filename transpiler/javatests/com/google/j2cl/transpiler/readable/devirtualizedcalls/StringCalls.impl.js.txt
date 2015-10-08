@@ -1,0 +1,130 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let String = goog.forwardDeclare('gen.java.lang.String$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+let Strings = goog.forwardDeclare('vmbootstrap.Strings$impl');
+
+
+class StringCalls extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_devirtualizedcalls_StringCalls() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!StringCalls}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    StringCalls.$clinit();
+    let instance = new StringCalls;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_StringCalls();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_StringCalls() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_devirtualizedcalls_StringCalls();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    let literal = "String";
+    let sub = Strings.m_substring__java_lang_String__int(literal, 1);
+    let sub2 = Strings.m_substring__java_lang_String__int__int(literal, 2, 3);
+    let trimmed = Strings.m_trim__java_lang_String(literal);
+    let newString = $Objects.m_toString__java_lang_Object(literal);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof StringCalls; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, StringCalls);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    StringCalls.$clinit();
+    if (!StringCalls.$classStringCalls_) {
+      StringCalls.$classStringCalls_ = Class.$createForClass(
+          $Util.$generateId('StringCalls'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls'));
+    }
+    return StringCalls.$classStringCalls_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    String = goog.module.get('gen.java.lang.String$impl');
+    $Objects = goog.module.get('vmbootstrap.Objects$impl');
+    Strings = goog.module.get('vmbootstrap.Strings$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+StringCalls.$classStringCalls_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = StringCalls;

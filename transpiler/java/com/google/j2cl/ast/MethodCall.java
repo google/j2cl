@@ -32,6 +32,10 @@ public class MethodCall extends Expression implements MemberReference, Call {
   @Visitable MethodDescriptor targetMethodDescriptor;
   @Visitable List<Expression> arguments = new ArrayList<>();
 
+  /**
+   * The default constructor that creates a method of the form:
+   * qualifier.targetMethodDescriptor(arguments)
+   */
   public MethodCall(
       Expression qualifier, MethodDescriptor targetMethodDescriptor, List<Expression> arguments) {
     Preconditions.checkNotNull(targetMethodDescriptor);

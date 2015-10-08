@@ -57,7 +57,7 @@ public class FixTypeVariableInMethodVisitors extends AbstractRewriter {
     // If it is a type variable that is declared by the method, replace with its bound.
     if (typeDescriptor.isTypeVariable()
         && method != null
-        && method.getDescriptor().getTypeParameterDescriptors().contains(typeDescriptor)) {
+        && method.getDescriptor().getTypeParameterTypeDescriptors().contains(typeDescriptor)) {
       TypeDescriptor boundTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
       return boundTypeDescriptor.isParameterizedType()
           ? boundTypeDescriptor.getRawTypeDescriptor()

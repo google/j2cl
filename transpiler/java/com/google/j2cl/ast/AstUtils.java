@@ -346,6 +346,8 @@ public class AstUtils {
    * Creates devirtualized method call of {@code methodCall} as method call to the static method
    * in {@code enclosingClassTypeDescriptor} with the {@code instanceTypeDescriptor} as the first
    * parameter type.
+   * 
+   * <p>instance.instanceMethod(a, b) => staticMethod(instance, a, b)
    */
   public static MethodCall createDevirtualizedMethodCall(
       MethodCall methodCall,

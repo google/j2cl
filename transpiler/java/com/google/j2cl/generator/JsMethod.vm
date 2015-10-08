@@ -14,8 +14,8 @@
 #if ($method.isOverride())
    * @override
 #end
-#if (!${method.Descriptor.getTypeParameterDescriptors().isEmpty()})
-   * @template ${statementSourceGenerator.getJsDocNames(${method.Descriptor.getTypeParameterDescriptors()})}
+#if (!${method.Descriptor.getTypeParameterTypeDescriptors().isEmpty()})
+   * @template ${statementSourceGenerator.getJsDocNames(${method.Descriptor.getTypeParameterTypeDescriptors()})}
 #end
 #foreach ($parameter in $method.Parameters)
 #set ($parameterTypeName = ${statementSourceGenerator.getJsDocName(${parameter.TypeDescriptor})})

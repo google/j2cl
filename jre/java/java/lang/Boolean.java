@@ -19,20 +19,7 @@ package java.lang;
  * official Java API doc</a> for details.
  */
 public class Boolean implements Comparable<Boolean> {
-
-  public static Boolean valueOf(boolean b) {
-    return null;
-  }
-
-  public Boolean(boolean value) {
-    // Super-source replaced.
-  }
-
-  public boolean booleanValue() {
-    // Super-source replaced.
-    throw new RuntimeException();
-  }
-
+  
   @Override
   public boolean equals(Object o) {
     // Super-source replaced.
@@ -47,6 +34,19 @@ public class Boolean implements Comparable<Boolean> {
 
   @Override
   public String toString() {
+    // Super-source replaced.
+    throw new RuntimeException();
+  }
+
+  public static Boolean valueOf(boolean b) {
+    return null;
+  }
+
+  public Boolean(boolean value) {
+    // Super-source replaced.
+  }
+
+  public boolean booleanValue() {
     // Super-source replaced.
     throw new RuntimeException();
   }

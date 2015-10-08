@@ -19,25 +19,71 @@ package java.lang;
  * official Java API doc</a> for details.
  * TODO: implements Comparable, CharSequence
  */
-public final class String {
+public final class String implements java.io.Serializable, Comparable<String>, CharSequence {
 
-  public static String valueOf(Object o) {
-    return null;
+  // Object overrides
+
+  @Override
+  public boolean equals(Object o) {
+    // Super-source replaced.
+    throw new RuntimeException();
   }
 
+  @Override
+  public int hashCode() {
+    // Super-source replaced.
+    throw new RuntimeException();
+  }
+
+  @Override
+  public String toString() {
+    // Super-source replaced.
+    throw new RuntimeException();
+  }
+
+  // Char Sequence Implementation
+
   public int length() {
-    return 0;
+    // Super-source replaced.
+    throw new RuntimeException();
   }
 
   public char charAt(int index) {
-    return 0;
+    // Super-source replaced.
+    throw new RuntimeException();
   }
 
-  public String substring(int start, int length) {
-    return null;
+  public CharSequence subSequence(int start, int end) {
+    // Super-source replaced.
+    throw new RuntimeException();
+  }
+
+  // Comparable Implementation
+
+  public int compareTo(String s) {
+    // Super-source replaced.
+    throw new RuntimeException();
+  }
+
+  // (Subset of) Public Methods Implementation
+
+  public static String valueOf(Object o) {
+    // Super-source replaced.
+    throw new RuntimeException();
+  }
+
+  public String substring(int start, int endIndex) {
+    // Super-source replaced.
+    throw new RuntimeException();
   }
 
   public String substring(int start) {
-    return null;
+    // Super-source replaced.
+    throw new RuntimeException();
+  }
+
+  public String trim() {
+    // Super-source replaced.
+    throw new RuntimeException();
   }
 }

@@ -65,7 +65,6 @@ are copyright and licensed as follows:
 - implicitconversions (String + operator)
 - implicitconversions (binary operations and field initializers)
 - interfacedefaultmethod
-- interfacedevirtualization (Comparable, CharSequence test on String).
 - jsinteropclass
 - jsinteropdispatch
 - jsinteropinterface
@@ -79,4 +78,6 @@ are copyright and licensed as follows:
 - qualifiedsupermethodcall
 - shorterfieldmangling (for fields in final classes, like enums)
 - simpleenum
-- stringunboxing
+- devirtualized classes should skip Object trampoline when possible:
+    string.toString()
+- string constructor needs to be implemented

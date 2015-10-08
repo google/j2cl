@@ -56,6 +56,7 @@ public class TypeDescriptors {
 
   public TypeDescriptor javaLangNumber;
   public TypeDescriptor javaLangComparable;
+  public TypeDescriptor javaLangCharSequence;
 
   /**
    * Primitive type descriptors and boxed type descriptors mapping.
@@ -98,6 +99,7 @@ public class TypeDescriptors {
 
     typeDescriptors.javaLangNumber = createJavaLangNumber(ast);
     typeDescriptors.javaLangComparable = createJavaLangComparable(ast);
+    typeDescriptors.javaLangCharSequence = createJavaLangCharSequence(ast);
 
     initBoxedPrimitiveTypeMapping(typeDescriptors);
 
@@ -156,6 +158,22 @@ public class TypeDescriptors {
     Preconditions.checkArgument(interfaces.length == 1);
     return TypeProxyUtils.createTypeDescriptor(interfaces[0].getErasure());
   }
+  
+  /**
+   * Create TypeDescriptor for java.lang.CharSequence, which is not a well known type by JDT.
+   */
+  private static TypeDescriptor createJavaLangCharSequence(AST ast) {
+    ITypeBinding javaLangString = ast.resolveWellKnownType("java.lang.String");
+    Preconditions.checkNotNull(javaLangString);
+    ITypeBinding[] interfaces = javaLangString.getInterfaces();
+    Preconditions.checkArgument(interfaces.length == 3);
+    for (ITypeBinding i : interfaces) {
+      if (i.getBinaryName().equals("java.lang.CharSequence")) {
+        return TypeProxyUtils.createTypeDescriptor(i);
+      }
+    }
+    return null;
+  }
 
   /**
    * Bootstrap types.
@@ -165,11 +183,15 @@ public class TypeDescriptors {
 
   public static final TypeDescriptor COMPARABLES_TYPE_DESCRIPTOR =
       TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Comparables");
+  public static final TypeDescriptor CHAR_SEQUENCES_TYPE_DESCRIPTOR =
+      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "CharSequences");
 
   public static final TypeDescriptor NUMBERS_TYPE_DESCRIPTOR =
       TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Numbers");
   public static final TypeDescriptor BOOLEANS_TYPE_DESCRIPTOR =
       TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Booleans");
+  public static final TypeDescriptor STRINGS_TYPE_DESCRIPTOR =
+      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Strings");
 
   public static final TypeDescriptor NATIVE_UTIL_TYPE_DESCRIPTOR =
       TypeDescriptor.createRaw(Arrays.asList("nativebootstrap"), "Util");
