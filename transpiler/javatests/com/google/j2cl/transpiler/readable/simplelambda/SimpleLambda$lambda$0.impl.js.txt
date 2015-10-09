@@ -40,21 +40,6 @@ class SimpleLambda$lambda$0 extends Object {
   }
 
   /**
-   * @param {number} i
-   * @return {number}
-   * @public
-   */
-  lambda$0(i) { return i + 1; }
-
-  /**
-   * @override
-   * @param {number} arg0
-   * @return {number}
-   * @public
-   */
-  m_foo__int(arg0) { return this.lambda$0(arg0); }
-
-  /**
    * A particular Java constructor as a factory method.
    * @param {SimpleLambda} $outer_this
    * @return {!SimpleLambda$lambda$0}
@@ -83,6 +68,21 @@ class SimpleLambda$lambda$0 extends Object {
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$0();
   }
+
+  /**
+   * @param {number} i
+   * @return {number}
+   * @public
+   */
+  lambda$0(i) { return i + 1; }
+
+  /**
+   * @override
+   * @param {number} arg0
+   * @return {number}
+   * @public
+   */
+  m_foo__int(arg0) { return this.lambda$0(arg0); }
 
   /**
    * Returns whether the provided instance is an instance of this class.

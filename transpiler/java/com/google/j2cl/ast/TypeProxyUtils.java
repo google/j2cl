@@ -111,6 +111,26 @@ public class TypeProxyUtils {
     return typeArgumentDescriptors;
   }
 
+  public static Visibility getVisibility(int modifiers) {
+    if (Modifier.isPublic(modifiers)) {
+      return Visibility.PUBLIC;
+    } else if (Modifier.isProtected(modifiers)) {
+      return Visibility.PROTECTED;
+    } else if (Modifier.isPrivate(modifiers)) {
+      return Visibility.PRIVATE;
+    } else {
+      return Visibility.PACKAGE_PRIVATE;
+    }
+  }
+
+  public static boolean isInstanceMemberClass(ITypeBinding typeBinding) {
+    return typeBinding.isMember() && !Modifier.isStatic(typeBinding.getModifiers());
+  }
+
+  public static boolean isInstanceNestedClass(ITypeBinding typeBinding) {
+    return typeBinding.isNested() && !Modifier.isStatic(typeBinding.getModifiers());
+  }
+
   private static List<TypeDescriptor> createTypeDescriptors(ITypeBinding[] typeBindings) {
     return Lists.transform(
         Arrays.asList(typeBindings),

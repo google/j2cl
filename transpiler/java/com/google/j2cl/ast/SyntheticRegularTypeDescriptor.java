@@ -65,6 +65,21 @@ public class SyntheticRegularTypeDescriptor extends RegularTypeDescriptor {
   }
 
   @Override
+  public Visibility getVisibility() {
+    return Visibility.PUBLIC;
+  }
+
+  @Override
+  public boolean isInstanceMemberClass() {
+    return false;
+  }
+
+  @Override
+  public boolean isInstanceNestedClass() {
+    return false;
+  }
+
+  @Override
   public boolean isRaw() {
     return isRaw;
   }

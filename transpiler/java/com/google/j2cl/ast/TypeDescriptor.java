@@ -164,6 +164,18 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
     return null;
   }
 
+  public Visibility getVisibility() {
+    return null;
+  }
+
+  public boolean isInstanceMemberClass() {
+    return false;
+  }
+
+  public boolean isInstanceNestedClass() {
+    return false;
+  }
+
   public List<TypeDescriptor> getTypeArgumentDescriptors() {
     return Collections.emptyList();
   }

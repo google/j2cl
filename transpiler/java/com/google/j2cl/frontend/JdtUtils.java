@@ -397,16 +397,8 @@ public class JdtUtils {
     return null;
   }
 
-  static Visibility getVisibility(int modifier) {
-    if (Modifier.isPublic(modifier)) {
-      return Visibility.PUBLIC;
-    } else if (Modifier.isProtected(modifier)) {
-      return Visibility.PROTECTED;
-    } else if (Modifier.isPrivate(modifier)) {
-      return Visibility.PRIVATE;
-    } else {
-      return Visibility.PACKAGE_PRIVATE;
-    }
+  static Visibility getVisibility(int modifiers) {
+    return TypeProxyUtils.getVisibility(modifiers);
   }
 
   static boolean isArrayLengthBinding(IVariableBinding variableBinding) {

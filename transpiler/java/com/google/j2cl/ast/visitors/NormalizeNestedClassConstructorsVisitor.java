@@ -15,9 +15,11 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
+import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
@@ -45,7 +47,13 @@ import java.util.Map;
 
 /**
  * Add outer parameters to constructors of nested class that has capture variables and/or enclosing
- * instances, and add initializers to the added fields in each constructor.
+ * instances, fix calls to the constructors, and add initializers to the added fields in each
+ * constructor.
+ *
+ * <p>Normalization of nested classes are done in two parts, one is in CompilationUnitBuilder, and
+ * the other one is here in NormalizeNestedClassConstructorsVisitor. CompilationUnitBuilder resolves
+ * all the qualifiers and arguments. NormalizeNestedClassConstructorsVisitor does all normalization
+ * and structural AST changes.
  */
 public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
   public static void applyTo(CompilationUnit compilationUnit) {
@@ -65,11 +73,70 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
         }
       }
     }
+
+    // Replace new InnerClass() with the wrapper function call OuterClass.m_$create__InnerClass();
+    new FixNewInstanceOfInnerClassesVisitor().applyTo(compilationUnit);
+
+    // Create wrapper functions in outer class. This pass should be executed after replacing
+    // inner class creation. Because the wrapper function calls new InnerClass() which should
+    // be kept as normal NewInstance and should not be replaced.
+    new InsertConstructorWrappersVisitor().applyTo(compilationUnit);
+
+    // Normalize nested class constructors.
     compilationUnit.accept(this);
   }
 
   private Map<FieldDescriptor, Variable> parameterByFieldForCaptures = new HashMap<>();
   private Map<TypeDescriptor, JavaType> javaTypeByDescriptor = new HashMap<>();
+
+  /**
+   * Visitor class that replaces NewInstance of an inner class with wrapper function calls.
+   */
+  private class FixNewInstanceOfInnerClassesVisitor extends AbstractRewriter {
+    public void applyTo(CompilationUnit compilationUnit) {
+      compilationUnit.accept(this);
+    }
+
+    @Override
+    public Node rewriteNewInstance(NewInstance newInstance) {
+      MethodDescriptor targetMethod = newInstance.getTarget();
+      TypeDescriptor targetTypeDescriptor = targetMethod.getEnclosingClassTypeDescriptor();
+      if (targetTypeDescriptor.isInstanceMemberClass()) {
+        // outerclass.new InnerClass() => outerClass.m_$create_InnerClass();
+        TypeDescriptor outerclassTypeDescriptor = targetTypeDescriptor.getEnclosingTypeDescriptor();
+        return new MethodCall(
+            newInstance.getQualifier(),
+            AstUtils.createMethodDescriptorForInnerClassCreation(
+                outerclassTypeDescriptor, targetMethod),
+            newInstance.getArguments());
+      }
+      return newInstance;
+    }
+  }
+
+  /**
+   * Visitor class that creates wrapper functions for inner class creation in outer class.
+   */
+  private class InsertConstructorWrappersVisitor extends AbstractVisitor {
+    public void applyTo(CompilationUnit compilationUnit) {
+      compilationUnit.accept(this);
+    }
+
+    @Override
+    public void exitJavaType(JavaType javaType) {
+      if (!javaType.getDescriptor().isInstanceMemberClass()) {
+        return;
+      }
+      JavaType enclosingClass =
+          javaTypeByDescriptor.get(javaType.getEnclosingTypeDescriptor().getRawTypeDescriptor());
+      Preconditions.checkNotNull(enclosingClass);
+      for (Method constructor : javaType.getConstructors()) {
+        enclosingClass.addMethod(
+            AstUtils.createMethodForInnerClassCreation(
+                enclosingClass.getDescriptor(), constructor));
+      }
+    }
+  }
 
   @Override
   public Node rewriteMethod(Method method) {

@@ -70,27 +70,6 @@ class NestedGenericClass extends Object {
   }
 
   /**
-   * @template C_A_T
-   * @return {NestedGenericClass$A<C_A_T, C_T>}
-   * @public
-   */
-  m_$create_NestedGenericClass$A() {
-    return NestedGenericClass$A
-        .$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
-            this);
-  }
-
-  /**
-   * @return {NestedGenericClass$C<C_T>}
-   * @public
-   */
-  m_$create_NestedGenericClass$C() {
-    return NestedGenericClass$C
-        .$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
-            this);
-  }
-
-  /**
    * @template M_S
    * @param {M_S} t
    * @return {void}
@@ -137,6 +116,27 @@ class NestedGenericClass extends Object {
         /**@type {NestedGenericClass$C<(Number|?number)>} */ (
             n.m_$create_NestedGenericClass$C())
             .m_$create_NestedGenericClass$C$D());
+  }
+
+  /**
+   * @template C_A_T
+   * @return {NestedGenericClass$A<C_A_T, C_T>}
+   * @public
+   */
+  m_$create_NestedGenericClass$A() {
+    return NestedGenericClass$A
+        .$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
+            this);
+  }
+
+  /**
+   * @return {NestedGenericClass$C<C_T>}
+   * @public
+   */
+  m_$create_NestedGenericClass$C() {
+    return NestedGenericClass$C
+        .$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
+            this);
   }
 
   /**

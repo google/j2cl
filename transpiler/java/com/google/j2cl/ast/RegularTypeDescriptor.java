@@ -224,6 +224,21 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  public Visibility getVisibility() {
+    return TypeProxyUtils.getVisibility(typeBinding.getModifiers());
+  }
+
+  @Override
+  public boolean isInstanceMemberClass() {
+    return TypeProxyUtils.isInstanceMemberClass(typeBinding);
+  }
+
+  @Override
+  public boolean isInstanceNestedClass() {
+    return TypeProxyUtils.isInstanceNestedClass(typeBinding);
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_RegularTypeDescriptor.visit(processor, this);
   }
