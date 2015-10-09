@@ -123,6 +123,14 @@ public class TypeDescriptors {
     return typeDescriptorsStorage.get();
   }
 
+  public static TypeDescriptor asPrimitiveType(TypeDescriptor typeDescriptor) {
+    Preconditions.checkArgument(TypeDescriptors.isBoxedOrPrimitiveType(typeDescriptor));
+    if (TypeDescriptors.isBoxedType(typeDescriptor)) {
+      return TypeDescriptors.getPrimitiveTypeFromBoxType(typeDescriptor);
+    }
+    return typeDescriptor;
+  }
+
   public static TypeDescriptor getBoxTypeFromPrimitiveType(TypeDescriptor primitiveType) {
     return TypeDescriptors.get().boxedTypeByPrimitiveType.get(primitiveType);
   }
@@ -133,6 +141,22 @@ public class TypeDescriptors {
 
   public static boolean isBoxedType(TypeDescriptor typeDescriptor) {
     return TypeDescriptors.get().boxedTypeByPrimitiveType.containsValue(typeDescriptor);
+  }
+
+  public static boolean isPrimitiveType(TypeDescriptor typeDescriptor) {
+    return TypeDescriptors.get().boxedTypeByPrimitiveType.containsKey(typeDescriptor);
+  }
+
+  public static boolean isBoxedBooleanOrDouble(TypeDescriptor typeDescriptor) {
+    return typeDescriptor == get().javaLangBoolean || typeDescriptor == get().javaLangDouble;
+  }
+
+  public static boolean isPrimitiveBooleanOrDouble(TypeDescriptor typeDescriptor) {
+    return typeDescriptor == get().primitiveBoolean || typeDescriptor == get().primitiveDouble;
+  }
+
+  public static boolean isBoxedOrPrimitiveType(TypeDescriptor typeDescriptor) {
+    return isBoxedType(typeDescriptor) || isPrimitiveType(typeDescriptor);
   }
 
   private static TypeDescriptor create(AST ast, String typeName) {

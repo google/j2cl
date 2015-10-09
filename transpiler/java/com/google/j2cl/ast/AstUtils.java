@@ -28,6 +28,7 @@ import java.util.List;
  * Utility functions to manipulate J2CL AST.
  */
 public class AstUtils {
+
   public static final String CAPTURES_PREFIX = "$c_";
   public static final String ENCLOSING_INSTANCE_NAME = "$outer_this";
   public static final String CREATE_PREFIX = "$create_";
@@ -97,7 +98,7 @@ public class AstUtils {
    */
   public static Field getEnclosingInstanceField(JavaType type) {
     for (Field field : type.getFields()) {
-      if (field.getDescriptor().getFieldName().equals(AstUtils.ENCLOSING_INSTANCE_NAME)) {
+      if (field.getDescriptor().getFieldName().equals(ENCLOSING_INSTANCE_NAME)) {
         return field;
       }
     }
@@ -382,14 +383,10 @@ public class AstUtils {
    */
   public static Expression box(Expression expression) {
     TypeDescriptor primitiveType = expression.getTypeDescriptor();
-    // skip double and boolean.
-    if (primitiveType.getSimpleName().equals(TypeDescriptor.DOUBLE_TYPE_NAME)
-        || primitiveType.getSimpleName().equals(TypeDescriptor.BOOLEAN_TYPE_NAME)) {
-      return expression;
-    }
-    Preconditions.checkArgument(primitiveType.isPrimitive());
+    Preconditions.checkArgument(TypeDescriptors.isPrimitiveType(primitiveType));
+    Preconditions.checkArgument(!TypeDescriptors.isPrimitiveBooleanOrDouble(primitiveType));
     TypeDescriptor boxType = TypeDescriptors.getBoxTypeFromPrimitiveType(primitiveType);
-    Preconditions.checkNotNull(boxType);
+
     MethodDescriptor valueOfMethodDescriptor =
         MethodDescriptor.create(
             true, // isStatic
@@ -410,13 +407,10 @@ public class AstUtils {
    */
   public static Expression unbox(Expression expression) {
     TypeDescriptor boxType = expression.getTypeDescriptor();
+    Preconditions.checkArgument(TypeDescriptors.isBoxedType(boxType));
+    Preconditions.checkArgument(!TypeDescriptors.isBoxedBooleanOrDouble(boxType));
     TypeDescriptor primitiveType = TypeDescriptors.getPrimitiveTypeFromBoxType(boxType);
-    Preconditions.checkNotNull(primitiveType);
-    // skip double and boolean.
-    if (primitiveType.getSimpleName().equals(TypeDescriptor.DOUBLE_TYPE_NAME)
-        || primitiveType.getSimpleName().equals(TypeDescriptor.BOOLEAN_TYPE_NAME)) {
-      return expression;
-    }
+
     MethodDescriptor valueMethodDescriptor =
         MethodDescriptor.create(
             false, // isStatic
@@ -438,7 +432,7 @@ public class AstUtils {
   }
 
   /**
-   * Returns whether the given expression is a syntactically invalid qualifier for a MethodCall.
+   * Returns whether the given expression is a syntactically valid qualifier for a MethodCall.
    */
   private static boolean isValidMethodCallQualifier(Expression expression) {
     return !(expression instanceof TernaryExpression
@@ -494,66 +488,104 @@ public class AstUtils {
         && binaryOperator != BinaryOperator.CONDITIONAL_OR;
   }
 
-  public static BinaryOperator compoundAssignmentToBinaryOperator(
-      BinaryOperator compoundAssignmentOperator) {
-    switch (compoundAssignmentOperator) {
-      case PLUS_ASSIGN:
-        return BinaryOperator.PLUS;
-      case MINUS_ASSIGN:
-        return BinaryOperator.MINUS;
-      case TIMES_ASSIGN:
-        return BinaryOperator.TIMES;
-      case DIVIDE_ASSIGN:
-        return BinaryOperator.DIVIDE;
-      case BIT_AND_ASSIGN:
-        return BinaryOperator.AND;
-      case BIT_OR_ASSIGN:
-        return BinaryOperator.OR;
-      case BIT_XOR_ASSIGN:
-        return BinaryOperator.XOR;
-      case REMAINDER_ASSIGN:
-        return BinaryOperator.REMAINDER;
-      case LEFT_SHIFT_ASSIGN:
-        return BinaryOperator.LEFT_SHIFT;
-      case RIGHT_SHIFT_SIGNED_ASSIGN:
-        return BinaryOperator.RIGHT_SHIFT_SIGNED;
-      case RIGHT_SHIFT_UNSIGNED_ASSIGN:
-        return BinaryOperator.RIGHT_SHIFT_UNSIGNED;
+  /**
+   * See JLS 5.2.
+   *
+   * <p>Would normally also verify that the right operand type is being changed, but we're leaving
+   * that check up to our conversion implementation(s)
+   */
+  public static boolean matchesAssignmentContext(BinaryOperator binaryOperator) {
+    return binaryOperator.doesAssignment();
+  }
+
+  /**
+   * See JLS 5.4.
+   */
+  public static boolean matchesStringContext(BinaryExpression binaryExpression) {
+    BinaryOperator operator = binaryExpression.getOperator();
+    TypeDescriptor leftTypeDescriptor = binaryExpression.getLeftOperand().getTypeDescriptor();
+    TypeDescriptor rightTypeDescriptor = binaryExpression.getLeftOperand().getTypeDescriptor();
+
+    if (operator == BinaryOperator.PLUS_ASSIGN
+        && leftTypeDescriptor == TypeDescriptors.get().javaLangString) {
+      return true;
+    }
+    if (operator == BinaryOperator.PLUS
+        && (leftTypeDescriptor == TypeDescriptors.get().javaLangString
+            || rightTypeDescriptor == TypeDescriptors.get().javaLangString)) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * See JLS 5.6.1.
+   */
+  public static boolean matchesUnaryNumericPromotionContext(PrefixExpression prefixExpression) {
+    PrefixOperator operator = prefixExpression.getOperator();
+    return TypeDescriptors.isBoxedOrPrimitiveType(prefixExpression.getTypeDescriptor())
+        && (operator == PrefixOperator.PLUS
+            || operator == PrefixOperator.MINUS
+            || operator == PrefixOperator.COMPLEMENT);
+  }
+
+  /**
+   * See JLS 5.6.1.
+   */
+  public static boolean matchesUnaryNumericPromotionContext(TypeDescriptor returnTypeDescriptor) {
+    return TypeDescriptors.isBoxedOrPrimitiveType(returnTypeDescriptor);
+  }
+
+  /**
+   * See JLS 5.6.1.
+   */
+  public static boolean matchesUnaryNumericPromotionContext(BinaryExpression binaryExpression) {
+    switch (binaryExpression.getOperator()) {
+      case LEFT_SHIFT:
+      case RIGHT_SHIFT_SIGNED:
+      case RIGHT_SHIFT_UNSIGNED:
+        return true;
       default:
-        return compoundAssignmentOperator;
+        return false;
     }
   }
 
-  public static boolean isAssignmentOperator(PrefixOperator prefixOperator) {
-    return prefixOperator == PrefixOperator.INCREMENT || prefixOperator == PrefixOperator.DECREMENT;
+  /**
+   * See JLS 5.6.2.
+   */
+  public static boolean matchesBinaryNumericPromotionContext(BinaryExpression binaryExpression) {
+    // Both operands must be boxed or primitive.
+    Expression leftOperand = binaryExpression.getLeftOperand();
+    Expression rightOperand = binaryExpression.getRightOperand();
+    BinaryOperator operator = binaryExpression.getOperator();
+
+    return matchesBinaryNumericPromotionContext(leftOperand, operator, rightOperand);
   }
 
-  public static BinaryOperator compoundAssignmentToBinaryOperator(PrefixOperator prefixOperator) {
-    Preconditions.checkArgument(isAssignmentOperator(prefixOperator));
-    switch (prefixOperator) {
-      case DECREMENT:
-        return BinaryOperator.MINUS;
-      case INCREMENT:
-        return BinaryOperator.PLUS;
-      default:
-        return null;
+  /**
+   * See JLS 5.6.2.
+   */
+  public static boolean matchesBinaryNumericPromotionContext(
+      Expression leftOperand, BinaryOperator operator, Expression rightOperand) {
+    if (!TypeDescriptors.isBoxedOrPrimitiveType(leftOperand.getTypeDescriptor())
+        || !TypeDescriptors.isBoxedOrPrimitiveType(rightOperand.getTypeDescriptor())) {
+      return false;
     }
-  }
 
-  public static boolean isAssignmentOperator(PostfixOperator postfixOperator) {
-    return postfixOperator == PostfixOperator.INCREMENT
-        || postfixOperator == PostfixOperator.DECREMENT;
-  }
-
-  public static BinaryOperator compoundAssignmentToBinaryOperator(PostfixOperator postfixOperator) {
-    Preconditions.checkArgument(isAssignmentOperator(postfixOperator));
-    switch (postfixOperator) {
-      case DECREMENT:
-        return BinaryOperator.MINUS;
-      case INCREMENT:
-        return BinaryOperator.PLUS;
+    switch (operator) {
+      case TIMES:
+      case DIVIDE:
+      case REMAINDER:
+      case PLUS:
+      case MINUS:
+      case EQUALS:
+      case NOT_EQUALS:
+      case XOR:
+      case AND:
+      case OR:
+        return true;
       default:
-        return null;
+        return false;
     }
   }
 }

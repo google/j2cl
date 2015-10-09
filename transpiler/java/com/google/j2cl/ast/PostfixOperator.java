@@ -21,6 +21,7 @@ package com.google.j2cl.ast;
 public enum PostfixOperator {
   INCREMENT("++"),
   DECREMENT("--");
+
   private String symbol;
 
   PostfixOperator(String symbol) {
@@ -34,5 +35,15 @@ public enum PostfixOperator {
   @Override
   public String toString() {
     return symbol;
+  }
+
+  public BinaryOperator withoutSideEffect() {
+    switch (this) {
+      case DECREMENT:
+        return BinaryOperator.MINUS;
+      default:
+      case INCREMENT:
+        return BinaryOperator.PLUS;
+    }
   }
 }

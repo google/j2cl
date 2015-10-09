@@ -173,10 +173,13 @@ public class Main {
     // non side effect binary operations
     Integer i1 = new Integer(100);
     Integer i2 = new Integer(200);
+    Integer i3 = new Integer(4);
     int sumI = i1 + i2;
     Integer boxSumI = i1 + i2;
     assert (sumI == 300);
     assert (boxSumI.intValue() == 300);
+    int shiftedI = i2 << i3;
+    assert shiftedI == 3200;
 
     Long l1 = new Long(1000L);
     Long l2 = new Long(2000L);
@@ -241,6 +244,121 @@ public class Main {
     assert d == 1d;
   }
 
+  public void testTernary() {
+    Integer boxedValue = new Integer(1);
+    int primitiveValue = 10;
+
+    Integer boxedResult;
+    int primitiveResult;
+
+    // Just to avoid JSCompiler being unhappy about "suspicious code" when seeing a ternary that
+    // always evaluates to true.
+    boolean alwaysTrue = foo == 0;
+
+    boxedResult = alwaysTrue ? boxedValue : boxedValue;
+    assert boxedResult == 1;
+
+    boxedResult = alwaysTrue ? boxedValue : primitiveValue;
+    assert boxedResult == 1;
+
+    boxedResult = alwaysTrue ? primitiveValue : boxedValue;
+    assert boxedResult == 10;
+
+    boxedResult = alwaysTrue ? primitiveValue : primitiveValue;
+    assert boxedResult == 10;
+
+    primitiveResult = alwaysTrue ? boxedValue : boxedValue;
+    assert primitiveResult == 1;
+
+    primitiveResult = alwaysTrue ? boxedValue : primitiveValue;
+    assert primitiveResult == 1;
+
+    primitiveResult = alwaysTrue ? primitiveValue : boxedValue;
+    assert primitiveResult == 10;
+
+    primitiveResult = alwaysTrue ? primitiveValue : primitiveValue;
+    assert primitiveResult == 10;
+  }
+
+  @SuppressWarnings("cast")
+  public void testCasts() {
+    Integer boxedInteger = (Integer) 100;
+    int primitiveInteger = (int) new Integer(100);
+
+    assert boxedInteger instanceof Integer;
+    assert primitiveInteger == 100;
+  }
+
+  @SuppressWarnings("cast")
+  public void testArrayExpressions() {
+    Integer boxedInteger1 = new Integer(100);
+    Integer boxedInteger2 = new Integer(50);
+
+    Object[] objects = new Object[boxedInteger1];
+    assert objects.length == 100;
+    objects[boxedInteger2] = this;
+    assert objects[50] == this;
+
+    Integer[] boxedIntegers = new Integer[] {1, 2, 3};
+    assert boxedIntegers[0] instanceof Integer;
+    int[] primitiveInts = new int[] {new Integer(1), new Integer(2), new Integer(3)};
+    assert primitiveInts[0] == 1;
+  }
+
+  /**
+   * Actually the boolean conditional unboxings don't get inserted and aren't needed because we have
+   * devirtualized Boolean.
+   */
+  @SuppressWarnings("unused")
+  public void testConditionals() {
+    Boolean boxedFalseBoolean = new Boolean(false);
+
+    if (boxedFalseBoolean) {
+      // If unboxing is missing we'll arrive here.
+      doFail();
+    }
+
+    while (boxedFalseBoolean) {
+      // If unboxing is missing we'll arrive here.
+      doFail();
+    }
+
+    int count = 0;
+    do {
+      if (count > 0) {
+        // If unboxing is missing we'll arrive here.
+        doFail();
+      }
+      count++;
+    } while (boxedFalseBoolean);
+
+    for (; boxedFalseBoolean; ) {
+      // If unboxing is missing we'll arrive here.
+      doFail();
+    }
+
+    Object blah = boxedFalseBoolean ? doFail() : doNothing();
+
+    // This one actually matters since we don't devirtualize Integer.
+    switch (new Integer(100)) {
+      case 100:
+        // fine
+        break;
+      default:
+        // If unboxing is missing we'll arrive here.
+        doFail();
+    }
+  }
+
+  public Object doFail() {
+    assert false;
+    return null;
+  }
+
+  public Object doNothing() {
+    return null;
+  }
+
   public static void main(String[] args) {
     Main m = new Main();
     m.testBoxByParameter();
@@ -250,5 +368,9 @@ public class Main {
     m.testUnboxByOperator();
     m.testNull();
     m.testAllNumericTypes();
+    m.testTernary();
+    m.testCasts();
+    m.testArrayExpressions();
+    m.testConditionals();
   }
 }

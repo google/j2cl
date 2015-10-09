@@ -99,9 +99,9 @@ class ImplicitParenthesis extends Object {
       primitiveInt = 5;
       boxedInt = Integer.$create__int(10);
       primitiveInt =
-          (($Numbers.$v = boxedInt,
-            boxedInt = Integer.m_valueOf__int(boxedInt.m_intValue() + 1),
-            $Numbers.$v))
+          ($Numbers.$v = boxedInt,
+           boxedInt = Integer.m_valueOf__int(boxedInt.m_intValue() + 1),
+           $Numbers.$v)
               .m_intValue();
       $Asserts.$enabled() && $Asserts.$assert(primitiveInt == 10);
     }

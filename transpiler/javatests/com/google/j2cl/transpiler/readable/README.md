@@ -57,6 +57,7 @@ are copyright and licensed as follows:
 ## TODOs
 - anonymousclassforfunctionalinterface (transpiled to function)
 - arithmetic exception for integers (e.g. divide by zero / mod by zero)
+- arithmetic underflow/overflow
 - catchjsexception
 - enum special functions (values, valueOf, etc).
 - enumoptimization

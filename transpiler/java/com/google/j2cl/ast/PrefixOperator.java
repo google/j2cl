@@ -35,8 +35,23 @@ public enum PrefixOperator {
     return symbol;
   }
 
+  public boolean hasSideEffect() {
+    return this.withoutSideEffect() != null;
+  }
+
   @Override
   public String toString() {
     return symbol;
+  }
+
+  public BinaryOperator withoutSideEffect() {
+    switch (this) {
+      case INCREMENT:
+        return BinaryOperator.PLUS;
+      case DECREMENT:
+        return BinaryOperator.MINUS;
+      default:
+        return null;
+    }
   }
 }

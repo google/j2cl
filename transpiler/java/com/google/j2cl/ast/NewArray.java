@@ -59,7 +59,7 @@ public class NewArray extends Expression {
   }
 
   @Override
-  public TypeDescriptor getTypeDescriptor() {
+  public ArrayTypeDescriptor getTypeDescriptor() {
     return typeDescriptor;
   }
 

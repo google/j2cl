@@ -466,7 +466,7 @@ public class StatementSourceGenerator {
             GeneratorUtils.getLongOperationFunctionName(expression.getOperator());
         Expression operand = expression.getOperand();
 
-        Preconditions.checkArgument(!AstUtils.isAssignmentOperator(expression.getOperator()));
+        Preconditions.checkArgument(!expression.getOperator().hasSideEffect());
         return String.format(
             "%s.%s(%s)", longsTypeAlias(), longOperationFunctionName, toSource(operand));
       }

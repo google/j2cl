@@ -377,7 +377,7 @@ public class CompilationUnitBuilder {
     @SuppressWarnings({"cast", "unchecked"})
     private ArrayLiteral convert(org.eclipse.jdt.core.dom.ArrayInitializer expression) {
       return new ArrayLiteral(
-          JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
+          (ArrayTypeDescriptor) JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
           convertExpressions((List<org.eclipse.jdt.core.dom.Expression>) expression.expressions()));
     }
 
@@ -567,12 +567,6 @@ public class CompilationUnitBuilder {
                   + expression.getClass().getName()
                   + " file triggering this: "
                   + currentSourceFile);
-      }
-      if (expression.resolveBoxing()) {
-        return AstUtils.box(j2clExpression);
-      }
-      if (expression.resolveUnboxing()) {
-        return AstUtils.unbox(j2clExpression);
       }
       return j2clExpression;
     }
@@ -1181,8 +1175,10 @@ public class CompilationUnitBuilder {
         IMethodBinding methodBinding, List<Expression> j2clArguments) {
       Preconditions.checkArgument(methodBinding.isVarargs());
       int parametersLength = methodBinding.getParameterTypes().length;
-      TypeDescriptor varargsTypeDescriptor =
-          JdtUtils.createTypeDescriptor(methodBinding.getParameterTypes()[parametersLength - 1]);
+      ArrayTypeDescriptor varargsTypeDescriptor =
+          (ArrayTypeDescriptor)
+              JdtUtils.createTypeDescriptor(
+                  methodBinding.getParameterTypes()[parametersLength - 1]);
       if (j2clArguments.size() < parametersLength) {
         // no argument for the varargs, add an empty array.
         return new ArrayLiteral(varargsTypeDescriptor, new ArrayList<Expression>());
