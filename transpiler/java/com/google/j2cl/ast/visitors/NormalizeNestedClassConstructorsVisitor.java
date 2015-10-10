@@ -63,15 +63,6 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
   private void normalizeNestedClassConstructors(CompilationUnit compilationUnit) {
     for (JavaType type : compilationUnit.getTypes()) {
       javaTypeByDescriptor.put(type.getDescriptor().getRawTypeDescriptor(), type);
-      if (type.getEnclosingTypeDescriptor() == null || type.isStatic()) {
-        continue;
-      }
-      // Creates parameters for instance nested classes' constructors.
-      for (Method method : type.getMethods()) {
-        if (method.isConstructor()) {
-          createParametersOfConstructor(type);
-        }
-      }
     }
 
     // Replace new InnerClass() with the wrapper function call OuterClass.m_$create__InnerClass();
@@ -82,12 +73,51 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
     // be kept as normal NewInstance and should not be replaced.
     new InsertConstructorWrappersVisitor().applyTo(compilationUnit);
 
-    // Normalize nested class constructors.
+    // Add parameters to constructors so they can receive captured values.
+    new AddConstructorParametersVisitor().applyTo(compilationUnit);
+
+    // Normalize method calls to constructors.
     compilationUnit.accept(this);
+
+    // Replace field accesses to capturing fields that hold references to the captured variables in
+    // constructors with references to corresponding captured variable passing parameters.
+    new FixFieldAccessInConstructorsVisitor().applyTo(compilationUnit);
+
+    // Add capturing field initialization statements in constructors. This should be executed after
+    // FixFieldAccessInConstructorsVisitor because these field accesses to the capturing fields
+    // should not be replaced.
+    new AddFieldInitializersVisitor().applyTo(compilationUnit);
   }
 
-  private Map<FieldDescriptor, Variable> parameterByFieldForCaptures = new HashMap<>();
   private Map<TypeDescriptor, JavaType> javaTypeByDescriptor = new HashMap<>();
+
+  /**
+   * Visitor class that adds parameters to constructors so they can receive captured values.
+   */
+  private class AddConstructorParametersVisitor extends AbstractRewriter {
+    public void applyTo(CompilationUnit compilationUnit) {
+      compilationUnit.accept(this);
+    }
+
+    @Override
+    public boolean shouldProcessJavaType(JavaType javaType) {
+      return !javaType.isStatic() && javaType.getEnclosingTypeDescriptor() != null;
+    }
+
+    @Override
+    public Node rewriteMethod(Method method) {
+      if (!method.isConstructor()) {
+        return method;
+      }
+      // Add parameters through which to pass captured variables for the current type.
+      MethodBuilder methodBuilder = MethodBuilder.from(getCurrentMethod());
+      for (Field capturedField : getFieldsForAllCaptures(getCurrentJavaType())) {
+        Variable parameter = AstUtils.createOuterParamByField(capturedField);
+        methodBuilder.parameter(parameter, parameter.getTypeDescriptor());
+      }
+      return methodBuilder.build();
+    }
+  }
 
   /**
    * Visitor class that replaces NewInstance of an inner class with wrapper function calls.
@@ -138,25 +168,89 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
     }
   }
 
-  @Override
-  public Node rewriteMethod(Method method) {
-    MethodBuilder methodBuilder = MethodBuilder.from(method);
-    if (!AstUtils.isConstructorOfImmediateNestedClass(method, getCurrentJavaType())) {
+  /**
+   * Visitor class that adds capturing field initialization statements in constructors.
+   */
+  private class AddFieldInitializersVisitor extends AbstractRewriter {
+    public void applyTo(CompilationUnit compilationUnit) {
+      compilationUnit.accept(this);
+    }
+
+    @Override
+    public boolean shouldProcessJavaType(JavaType javaType) {
+      return !javaType.isStatic() && javaType.getEnclosingTypeDescriptor() != null;
+    }
+
+    @Override
+    public Node rewriteMethod(Method method) {
+      if (!method.isConstructor()) {
+        return method;
+      }
+      // Maybe add capturing field initialization statements if the current constructor method does
+      // not delegate to any other constructor method in the current class.
+      if (!AstUtils.isDelegatedConstructorCall(
+          AstUtils.getConstructorInvocation(method), getCurrentJavaType().getDescriptor())) {
+        MethodBuilder methodBuilder = MethodBuilder.from(method);
+        int i = 0;
+        for (Field capturedField : getFieldsForAllCaptures(getCurrentJavaType())) {
+          Variable parameter = getParameterForCapturedField(capturedField.getDescriptor(), method);
+          BinaryExpression initializer =
+              new BinaryExpression(
+                  capturedField.getDescriptor().getTypeDescriptor(),
+                  new FieldAccess(
+                      new ThisReference(method.getDescriptor().getEnclosingClassTypeDescriptor()),
+                      capturedField.getDescriptor()),
+                  BinaryOperator.ASSIGN,
+                  parameter.getReference());
+          methodBuilder.statement(i++, new ExpressionStatement(initializer));
+        }
+        return methodBuilder.build();
+      }
       return method;
     }
+  }
 
-    // Maybe add capturing field initialization statements if the current constructor method does
-    // not delegate to any other constructor method in the current class.
-    if (!AstUtils.isDelegatedConstructorCall(
-        AstUtils.getConstructorInvocation(method), getCurrentJavaType().getDescriptor())) {
-      addCapturingFieldInitializers(
-          methodBuilder, method.getDescriptor().getEnclosingClassTypeDescriptor());
+  /**
+   * Visitor class that fixes field accesses to capturing fields in a constructor.
+   *
+   * <p>All field accesses to capturing fields in a constructor are replaced with references to the
+   * corresponding parameters. Otherwise, the arguments to cascaded constructor call are evaluated
+   * before the capturing fields are initialized, which may lead to wrong result.
+   *
+   * <p>For example,
+   * class A {
+   *   class B{
+   *     final int a = 10;
+   *     B (int f) {...}
+   *     B () {this(a);} // if translated to B($c_a) {this(this.$c_a);} this.$c_a is evaluated to 0
+   *                     // because field this.$c_a is not initialized yet.
+   *   }
+   * }
+   */
+  private class FixFieldAccessInConstructorsVisitor extends AbstractRewriter {
+    public void applyTo(CompilationUnit compilationUnit) {
+      compilationUnit.accept(this);
     }
 
-    // Add parameters through which to pass captured variables for the current type.
-    addCapturedValueParameters(methodBuilder);
+    @Override
+    public boolean shouldProcessJavaType(JavaType javaType) {
+      return !javaType.isStatic() && javaType.getEnclosingTypeDescriptor() != null;
+    }
 
-    return methodBuilder.build();
+    @Override
+    public Node rewriteFieldAccess(FieldAccess fieldAccess) {
+      Method currentMethod = getCurrentMethod();
+      // replace references to added field in the constructor with the reference to parameter.
+      if (currentMethod != null
+          && currentMethod.isConstructor()
+          && fieldAccess.getTarget().isFieldDescriptorForAllCaptures()) {
+        Variable parameter = getParameterForCapturedField(fieldAccess.getTarget(), currentMethod);
+        if (parameter != null) {
+          return parameter.getReference();
+        }
+      }
+      return fieldAccess;
+    }
   }
 
   @Override
@@ -190,8 +284,13 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
     }
 
     if (AstUtils.isDelegatedConstructorCall(methodCall, getCurrentJavaType().getDescriptor())) {
-      // this() call
-      addCapturedVariableArgumentsInConstructorCascade(methodCallBuilder);
+      // this() call, expands the given arguments list with references to the captured variable
+      // passing parameters in the constructor method.
+      for (Field capturedField : getFieldsForAllCaptures(getCurrentJavaType())) {
+        Variable parameter =
+            getParameterForCapturedField(capturedField.getDescriptor(), getCurrentMethod());
+        methodCallBuilder.argument(parameter.getReference(), parameter.getTypeDescriptor());
+      }
     } else {
       // super() call
       TypeDescriptor superTypeDescriptor = target.getEnclosingClassTypeDescriptor();
@@ -206,18 +305,6 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
     }
 
     return methodCallBuilder.build();
-  }
-
-  @Override
-  public Node rewriteFieldAccess(FieldAccess fieldAccess) {
-    // replace references to added field in the constructor with the reference to parameter.
-    if (AstUtils.isConstructorOfImmediateNestedClass(getCurrentMethod(), getCurrentJavaType())
-        && parameterByFieldForCaptures.containsKey(fieldAccess.getTarget())
-        && fieldAccess.getTarget().getEnclosingClassTypeDescriptor()
-            == getCurrentJavaType().getDescriptor()) {
-      return parameterByFieldForCaptures.get(fieldAccess.getTarget()).getReference();
-    }
-    return fieldAccess;
   }
 
   /**
@@ -251,69 +338,15 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
   }
 
   /**
-   * Runs in the context of a 'this()' call inside of a constructor and so expands the given
-   * arguments list with references to the captured variable passing parameters in the current
-   * constructor method.
+   * Returns all the added fields corresponding to captured variables or enclosing instance.
    */
-  private void addCapturedVariableArgumentsInConstructorCascade(
-      MethodCallBuilder methodCallBuilder) {
-    for (Field capturedField : getFieldsForCapturedVariables(getCurrentJavaType())) {
-      Variable parameter = parameterByFieldForCaptures.get(capturedField.getDescriptor());
-      methodCallBuilder.argument(parameter.getReference(), parameter.getTypeDescriptor());
-    }
-  }
-
-  /**
-   * Expands the given statements list with initializer statements for the capturing fields that
-   * hold references to the variables captured by the current type.
-   */
-  private void addCapturingFieldInitializers(
-      MethodBuilder methodBuilder, TypeDescriptor enclosingTypeDescriptor) {
-    int i = 0;
-    for (Field capturedField : getFieldsForCapturedVariables(getCurrentJavaType())) {
-      Variable parameter = parameterByFieldForCaptures.get(capturedField.getDescriptor());
-      BinaryExpression initializer =
-          new BinaryExpression(
-              capturedField.getDescriptor().getTypeDescriptor(),
-              new FieldAccess(
-                  new ThisReference(enclosingTypeDescriptor), capturedField.getDescriptor()),
-              BinaryOperator.ASSIGN,
-              parameter.getReference());
-      methodBuilder.statement(i++, new ExpressionStatement(initializer));
-    }
-  }
-
-  /**
-   * Expands the given parameters list with parameters through which to pass captured variables for
-   * the current type.
-   */
-  private void addCapturedValueParameters(MethodBuilder methodBuilder) {
-    for (Field capturedField : getFieldsForCapturedVariables(getCurrentJavaType())) {
-      Variable parameter = parameterByFieldForCaptures.get(capturedField.getDescriptor());
-      methodBuilder.parameter(parameter, parameter.getTypeDescriptor());
-    }
-  }
-
-  /**
-   * Creates parameters for captures and enclosing instance.
-   */
-  private void createParametersOfConstructor(JavaType type) {
-    for (Field capturedField : getFieldsForCapturedVariables(type)) {
-      Variable parameter = AstUtils.createOuterParamByField(capturedField);
-      parameterByFieldForCaptures.put(capturedField.getDescriptor(), parameter);
-    }
-  }
-
-  /**
-   * Returns all the added fields corresponding to captured variables.
-   */
-  private Iterable<Field> getFieldsForCapturedVariables(JavaType type) {
+  private Iterable<Field> getFieldsForAllCaptures(JavaType type) {
     return Iterables.filter(
         type.getInstanceFields(),
         new Predicate<Field>() {
           @Override
           public boolean apply(Field field) {
-            return field.isCapturedField();
+            return field.getDescriptor().isFieldDescriptorForAllCaptures();
           }
         });
   }
@@ -322,6 +355,24 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
     for (Field field : type.getFields()) {
       if (field.getCapturedVariable() == variable) {
         return field;
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Returns the added parameter in constructor {@code method} that corresponds to the capturing
+   * field {@code fieldDescriptor}.
+   */
+  private Variable getParameterForCapturedField(FieldDescriptor fieldDescriptor, Method method) {
+    Preconditions.checkArgument(method.isConstructor());
+    Preconditions.checkArgument(fieldDescriptor.isFieldDescriptorForAllCaptures());
+    for (Variable parameter : method.getParameters()) {
+      if (parameter.getName().equals(fieldDescriptor.getFieldName())
+          && parameter.getTypeDescriptor() == fieldDescriptor.getTypeDescriptor()
+          && method.getDescriptor().getEnclosingClassTypeDescriptor()
+              == fieldDescriptor.getEnclosingClassTypeDescriptor()) {
+        return parameter;
       }
     }
     return null;

@@ -64,6 +64,18 @@ public abstract class FieldDescriptor extends Node implements Member {
 
   public abstract TypeDescriptor getTypeDescriptor();
 
+  public boolean isFieldDescriptorForCapturedVariables() {
+    return getFieldName().startsWith(AstUtils.CAPTURES_PREFIX);
+  }
+
+  public boolean isFieldDescriptorForEnclosingInstance() {
+    return getFieldName().startsWith(AstUtils.ENCLOSING_INSTANCE_NAME);
+  }
+
+  public boolean isFieldDescriptorForAllCaptures() {
+    return isFieldDescriptorForCapturedVariables() || isFieldDescriptorForEnclosingInstance();
+  }
+
   @Override
   public Node accept(Processor processor) {
     return Visitor_FieldDescriptor.visit(processor, this);

@@ -60,11 +60,6 @@ public class Field extends Node {
     this.initializer = initializer;
   }
 
-  public boolean isCapturedField() {
-    return capturedVariable != null
-        || fieldDescriptor.getFieldName().equals(AstUtils.ENCLOSING_INSTANCE_NAME);
-  }
-
   public Variable getCapturedVariable() {
     return this.capturedVariable;
   }
