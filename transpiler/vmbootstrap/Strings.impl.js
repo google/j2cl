@@ -92,7 +92,7 @@ class Strings {
   static m_compareTo__java_lang_String__java_lang_Object(a, b) {
     Strings.$clinit();
     return Strings.m_compareTo__java_lang_String__java_lang_String(
-      a, /**@type {string} */ ($Casts.to(b, String)));
+        a, /**@type {string} */ ($Casts.to(b, String)));
   }
 
   //==================================

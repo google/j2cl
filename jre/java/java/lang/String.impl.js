@@ -8,6 +8,7 @@ let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
 class String extends Object {
@@ -20,6 +21,18 @@ class String extends Object {
   static $create__java_lang_String(obj) {
     String.$clinit();
     return obj;
+  }
+
+  /**
+   * @param {*} obj
+   * @return {!string}
+   * @public
+   */
+  static m_valueOf__java_lang_Object(obj) {
+    String.$clinit();
+    return obj == null ? 'null' :
+                         /** @type {!string} */ (
+                             $Objects.m_toString__java_lang_Object(obj));
   }
 
   /**
@@ -65,6 +78,7 @@ class String extends Object {
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
+    $Objects = goog.module.get('vmbootstrap.Objects$impl');
     Object.$clinit();
   }
 };

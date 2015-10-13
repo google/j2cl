@@ -500,7 +500,7 @@ public class AstUtils {
   public static boolean matchesStringContext(BinaryExpression binaryExpression) {
     BinaryOperator operator = binaryExpression.getOperator();
     TypeDescriptor leftTypeDescriptor = binaryExpression.getLeftOperand().getTypeDescriptor();
-    TypeDescriptor rightTypeDescriptor = binaryExpression.getLeftOperand().getTypeDescriptor();
+    TypeDescriptor rightTypeDescriptor = binaryExpression.getRightOperand().getTypeDescriptor();
 
     if (operator == BinaryOperator.PLUS_ASSIGN
         && leftTypeDescriptor == TypeDescriptors.get().javaLangString) {

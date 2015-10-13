@@ -24,6 +24,7 @@ import com.google.j2cl.ast.visitors.InsertBoxingConversionVisitor;
 import com.google.j2cl.ast.visitors.InsertExplicitSuperCallsVisitor;
 import com.google.j2cl.ast.visitors.InsertInstanceInitCallsVisitor;
 import com.google.j2cl.ast.visitors.InsertNarrowingPrimitiveConversionVisitor;
+import com.google.j2cl.ast.visitors.InsertStringConversionVisitor;
 import com.google.j2cl.ast.visitors.InsertUnboxingConversionVisitor;
 import com.google.j2cl.ast.visitors.InsertWideningPrimitiveConversionVisitor;
 import com.google.j2cl.ast.visitors.MakeExplicitEnumConstructionVisitor;
@@ -125,6 +126,7 @@ public class J2clTranspiler {
       InsertWideningPrimitiveConversionVisitor.applyTo(j2clUnit);
       // TODO: InsertWideningAndNarrowingPrimitiveConversionVisitor.applyTo(j2clUnit);
       InsertBoxingConversionVisitor.applyTo(j2clUnit);
+      InsertStringConversionVisitor.applyTo(j2clUnit);
       NormalizeCastsVisitor.applyTo(j2clUnit);
 
       // Dodge JSCompiler limitations.
