@@ -22,6 +22,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+import com.google.j2cl.ast.AnonymousJavaType;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
@@ -48,6 +49,7 @@ import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.JavaType.Kind;
 import com.google.j2cl.ast.LabeledStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
@@ -396,17 +398,12 @@ public class CompilationUnitBuilder {
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.ClassInstanceCreation expression) {
+      // constructor MethodDescriptor.
       IMethodBinding constructorBinding = expression.resolveConstructorBinding();
-
-      if (expression.getAnonymousClassDeclaration() != null) {
-        convertAnonymousClassDeclaration(
-            expression.getAnonymousClassDeclaration(), constructorBinding);
-      }
-
-      Expression qualifier =
-          expression.getExpression() == null ? null : convert(expression.getExpression());
       MethodDescriptor constructorMethodDescriptor =
           JdtUtils.createMethodDescriptor(constructorBinding);
+
+      // arguments.
       List<Expression> arguments = new ArrayList<>();
       for (Object argument : expression.arguments()) {
         arguments.add(convert((org.eclipse.jdt.core.dom.Expression) argument));
@@ -416,8 +413,86 @@ public class CompilationUnitBuilder {
           JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(expression.arguments()),
           arguments);
 
+      // anonymous creation.
+      if (expression.getAnonymousClassDeclaration() != null) {
+        return convertAnonymousClassCreation(expression, constructorMethodDescriptor, arguments);
+      } else {
+        return convertRegularClassCreation(expression, constructorMethodDescriptor, arguments);
+      }
+    }
+
+    private AnonymousJavaType convertAnonymousClassDeclaration(
+        AnonymousClassDeclaration typeDeclaration, IMethodBinding constructorBinding) {
+
+      // Anonymous classes might have default synthesized constructors take parameters.
+      // {@code constructorImplicitParameterTypeDescriptors} are the types for the aforementioned
+      // parameters.
+      TypeDescriptor[] constructorImplicitParameterTypeDescriptors =
+          FluentIterable.from(Arrays.asList(constructorBinding.getParameterTypes()))
+              .transform(
+                  new Function<ITypeBinding, TypeDescriptor>() {
+                    @Override
+                    public TypeDescriptor apply(ITypeBinding typeBinding) {
+                      return JdtUtils.createTypeDescriptor(typeBinding);
+                    }
+                  })
+              .toArray(TypeDescriptor.class);
+
+      AnonymousJavaType anonymousClass =
+          (AnonymousJavaType)
+              convertAndAddJavaType(
+                  JdtUtils.isInStaticContext(typeDeclaration),
+                  typeDeclaration.resolveBinding(),
+                  JdtUtils.<BodyDeclaration>asTypedList(typeDeclaration.bodyDeclarations()));
+      anonymousClass.addConstructorParameterTypeDescriptors(
+          Arrays.asList(constructorImplicitParameterTypeDescriptors));
+      return anonymousClass;
+    }
+
+    private Expression convertAnonymousClassCreation(
+        org.eclipse.jdt.core.dom.ClassInstanceCreation expression,
+        MethodDescriptor constructorMethodDescriptor,
+        List<Expression> arguments) {
+      IMethodBinding constructorBinding = expression.resolveConstructorBinding();
+      ITypeBinding newInstanceTypeBinding = constructorBinding.getDeclaringClass();
+
+      Preconditions.checkNotNull(expression.getAnonymousClassDeclaration());
+      AnonymousJavaType anonymousClass =
+          convertAnonymousClassDeclaration(
+              expression.getAnonymousClassDeclaration(), constructorBinding);
+
+      Expression superCallQualifier = null;
+      if (JdtUtils.isInstanceMemberClass(newInstanceTypeBinding.getSuperclass())) {
+        // super class is an instance member class, there should be a qualifier for super call.
+        superCallQualifier =
+            expression.getExpression() == null
+                ? convertOuterClassReference(
+                    JdtUtils.findCurrentTypeBinding(expression),
+                    newInstanceTypeBinding.getSuperclass().getDeclaringClass(),
+                    false)
+                : convert(expression.getExpression());
+        anonymousClass.setSuperCallQualifier(superCallQualifier);
+      }
+      // the qualifier for the NewInstance.
+      Expression newInstanceQualifier =
+          !JdtUtils.isInStaticContext(expression)
+              ? convertOuterClassReference(
+                  JdtUtils.findCurrentTypeBinding(expression),
+                  newInstanceTypeBinding.getDeclaringClass(),
+                  false)
+              : null;
+      return new NewInstance(newInstanceQualifier, constructorMethodDescriptor, arguments);
+    }
+
+    private Expression convertRegularClassCreation(
+        org.eclipse.jdt.core.dom.ClassInstanceCreation expression,
+        MethodDescriptor constructorMethodDescriptor,
+        List<Expression> arguments) {
+      IMethodBinding constructorBinding = expression.resolveConstructorBinding();
       Expression newInstance = null;
       ITypeBinding newInstanceTypeBinding = constructorBinding.getDeclaringClass();
+      Expression qualifier =
+          expression.getExpression() == null ? null : convert(expression.getExpression());
       boolean hasQualifier =
           JdtUtils.isInstanceMemberClass(newInstanceTypeBinding)
               || (newInstanceTypeBinding.isLocal() && !JdtUtils.isInStaticContext(expression));
@@ -445,38 +520,13 @@ public class CompilationUnitBuilder {
             qualifier == null, "NewInstance of non nested class should have no qualifier.");
         newInstance = new NewInstance(qualifier, constructorMethodDescriptor, arguments);
       }
+
       if (newInstance.getTypeDescriptor().isParameterizedType()) {
         // add type annotation to ClassInstanceCreation of generic type.
         return CastExpression.createRaw(newInstance, newInstance.getTypeDescriptor());
       } else {
         return newInstance;
       }
-    }
-
-    private void convertAnonymousClassDeclaration(
-        AnonymousClassDeclaration typeDeclaration, IMethodBinding constructorBinding) {
-
-      // Anonymous classes might have default synthesized constructors take parameters.
-      // {@code constructorImplicitParameterTypeDescriptors} are the types for the aforementioned
-      // parameters.
-      TypeDescriptor[] constructorImplicitParameterTypeDescriptors =
-          FluentIterable.from(Arrays.asList(constructorBinding.getParameterTypes()))
-              .transform(
-                  new Function<ITypeBinding, TypeDescriptor>() {
-                    @Override
-                    public TypeDescriptor apply(ITypeBinding typeBinding) {
-                      return JdtUtils.createTypeDescriptor(typeBinding);
-                    }
-                  })
-              .toArray(TypeDescriptor.class);
-
-      JavaType anonymousClass =
-          convertAndAddJavaType(
-              JdtUtils.isInStaticContext(typeDeclaration),
-              typeDeclaration.resolveBinding(),
-              JdtUtils.<BodyDeclaration>asTypedList(typeDeclaration.bodyDeclarations()));
-      anonymousClass.addConstructorParameterTypeDescriptors(
-          Arrays.asList(constructorImplicitParameterTypeDescriptors));
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.Expression expression) {
@@ -1583,11 +1633,13 @@ public class CompilationUnitBuilder {
         return null;
       }
       ITypeBinding superclassBinding = typeBinding.getSuperclass();
+      Kind kind = JdtUtils.getKindFromTypeBinding(typeBinding);
+      Visibility visibility = JdtUtils.getVisibility(typeBinding.getModifiers());
+      TypeDescriptor typeDescriptor = JdtUtils.createTypeDescriptor(typeBinding);
       JavaType type =
-          new JavaType(
-              JdtUtils.getKindFromTypeBinding(typeBinding),
-              JdtUtils.getVisibility(typeBinding.getModifiers()),
-              JdtUtils.createTypeDescriptor(typeBinding));
+          typeBinding.isAnonymous()
+              ? new AnonymousJavaType(kind, visibility, typeDescriptor)
+              : new JavaType(kind, visibility, typeDescriptor);
 
       type.setEnclosingTypeDescriptor(
           JdtUtils.createTypeDescriptor(typeBinding.getDeclaringClass()));

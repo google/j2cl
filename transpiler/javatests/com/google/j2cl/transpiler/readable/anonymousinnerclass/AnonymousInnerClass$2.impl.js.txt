@@ -1,0 +1,141 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass$2.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass$2$impl');
+
+
+let A$B = goog.require('gen.com.google.j2cl.transpiler.readable.anonymousinnerclass.A$B$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let A = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.anonymousinnerclass.A$impl');
+let AnonymousInnerClass = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+class AnonymousInnerClass$2 extends A$B {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {AnonymousInnerClass}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass$2 =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass$2() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {A} $super_outer_this
+   * @param {AnonymousInnerClass} $outer_this
+   * @return {!AnonymousInnerClass$2}
+   * @public
+   * @nocollapse
+   */
+  static $create__com_google_j2cl_transpiler_readable_anonymousinnerclass_A__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass(
+      $super_outer_this, $outer_this) {
+    AnonymousInnerClass$2.$clinit();
+    let instance = new AnonymousInnerClass$2;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass$2__com_google_j2cl_transpiler_readable_anonymousinnerclass_A__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass(
+            $super_outer_this, $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {A} $super_outer_this
+   * @param {AnonymousInnerClass} $outer_this
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass$2__com_google_j2cl_transpiler_readable_anonymousinnerclass_A__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass(
+      $super_outer_this, $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass$2 =
+        $outer_this;
+    this.$ctor__com_google_j2cl_transpiler_readable_anonymousinnerclass_A$B__com_google_j2cl_transpiler_readable_anonymousinnerclass_A(
+        $super_outer_this);
+    this.$init__com_google_j2cl_transpiler_readable_anonymousinnerclass_AnonymousInnerClass$2();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof AnonymousInnerClass$2;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, AnonymousInnerClass$2);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    AnonymousInnerClass$2.$clinit();
+    if (!AnonymousInnerClass$2.$classAnonymousInnerClass$2_) {
+      AnonymousInnerClass$2
+          .$classAnonymousInnerClass$2_ = Class.$createForClass(
+          $Util.$generateId('2'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass$2'),
+          A$B.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.2'));
+    }
+    return AnonymousInnerClass$2.$classAnonymousInnerClass$2_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    A = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.anonymousinnerclass.A$impl');
+    AnonymousInnerClass = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    A$B.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+AnonymousInnerClass$2.$classAnonymousInnerClass$2_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = AnonymousInnerClass$2;

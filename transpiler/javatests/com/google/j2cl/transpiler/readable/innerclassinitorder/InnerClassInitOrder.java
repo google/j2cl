@@ -293,12 +293,11 @@ public class InnerClassInitOrder {
   }
 
   // new an anonymous class of an inner class with a qualifier
-  // this is a bug now. will fix it in a separate cl.
-//  public void testOuterIsNotSuperAnon() {
-//    Outer.OuterIsNotSuper x = outerIsSuper.new OuterIsNotSuper() {
-//    };
-//    assert (2 == x.getValue());
-//  }
+  public void testOuterIsNotSuperAnon() {
+    Outer.OuterIsNotSuper x = outerIsSuper.new OuterIsNotSuper() {
+    };
+    assert (2 == x.getValue());
+  }
 
   public void testQualifiedSuperCall() {
     Outer.TestQualifiedSuperCall x = new Outer.TestQualifiedSuperCall();
@@ -325,13 +324,12 @@ public class InnerClassInitOrder {
     assert (2 == x.getValue());
   }
 
-  // same issue as testOuterIsNotSuperAnon()
   // new an anonymous class of an inner class with a qualifier.
-//  public void testUnqualifiedSuperCallAnon() {
-//    Outer.TestUnqualifiedSuperCall x = outerIsSuper.new TestUnqualifiedSuperCall() {
-//    };
-//    assert (2 == x.getValue());
-//  }
+  public void testUnqualifiedSuperCallAnon() {
+    Outer.TestUnqualifiedSuperCall x = outerIsSuper.new TestUnqualifiedSuperCall() {
+    };
+    assert (2 == x.getValue());
+  }
 
   public static void main(String... args) {
     InnerClassInitOrder m = new InnerClassInitOrder();
@@ -345,12 +343,12 @@ public class InnerClassInitOrder {
     m.testInnerClassLoop();
 
     m.testOuterIsNotSuper();
-    // m.testOuterIsNotSuperAnon();
+    m.testOuterIsNotSuperAnon();
     m.testQualifiedSuperCall();
     m.testQualifiedSuperCallAnon();
     m.testSuperDispatch();
     m.testUnqualifiedAlloc();
     m.testUnqualifiedSuperCall();
-    // m.testUnqualifiedSuperCallAnon();
+    m.testUnqualifiedSuperCallAnon();
   }
 }

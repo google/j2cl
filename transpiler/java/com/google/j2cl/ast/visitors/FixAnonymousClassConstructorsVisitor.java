@@ -16,18 +16,24 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
+import com.google.j2cl.ast.AnonymousJavaType;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodBuilder;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodCallBuilder;
+import com.google.j2cl.ast.NewInstance;
+import com.google.j2cl.ast.NewInstanceBuilder;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Fixes synthesized default constructor for anonymous classes.
@@ -47,20 +53,23 @@ public class FixAnonymousClassConstructorsVisitor extends AbstractRewriter {
 
   private void fixAnonymousClassConstructorsVisitor(CompilationUnit compilationUnit) {
     compilationUnit.accept(this);
+    new FixSuperCallQualifiersVisitor().applyTo(compilationUnit);
+    new FixAnonymousClassCreationsVisitor().applyTo(compilationUnit);
   }
 
   private List<Variable> constructorParameters = new ArrayList<>();
 
   @Override
   public boolean shouldProcessJavaType(JavaType javaType) {
-    if (javaType.getConstructorParameterTypeDescriptors().isEmpty()) {
+    if (!(javaType instanceof AnonymousJavaType)) {
       return false;
     }
+    AnonymousJavaType anonymousJavaType = (AnonymousJavaType) javaType;
     // Create and collect parameters for the default constructor of only the current JavaType.
     constructorParameters.clear();
     int i = 0;
     for (TypeDescriptor parameterTypeDescriptor :
-        getCurrentJavaType().getConstructorParameterTypeDescriptors()) {
+        anonymousJavaType.getConstructorParameterTypeDescriptors()) {
       Variable parameter = new Variable("$_" + i++, parameterTypeDescriptor, false, true);
       constructorParameters.add(parameter);
     }
@@ -77,7 +86,6 @@ public class FixAnonymousClassConstructorsVisitor extends AbstractRewriter {
     for (Variable parameter : constructorParameters) {
       methodBuilder.parameter(parameter, parameter.getTypeDescriptor());
     }
-
     return methodBuilder.build();
   }
 
@@ -98,5 +106,113 @@ public class FixAnonymousClassConstructorsVisitor extends AbstractRewriter {
     }
 
     return methodCallBuilder.build();
+  }
+
+  /**
+   * Visitor class that fixes super() call qualifiers in anonymous classes.
+   *
+   * <p>The qualifier of a NewInstance that creates an anonymous class is actually the qualifier
+   * of the super call and is a reference to what will be the enclosing instance for the anonymous
+   * class's super type. For example, q.new A(){}; A is an instance inner class, q is actually the
+   * qualifier that is used to create the super instance. This is translated as follows:
+   * class $1 extends A {
+   *   $1($sq) {$sq.super();}
+   * }
+   * q.new A(){} => this.new $1(q);
+   */
+  private class FixSuperCallQualifiersVisitor extends AbstractRewriter {
+    public void applyTo(CompilationUnit compilationUnit) {
+      compilationUnit.accept(this);
+    }
+
+    private Variable parameterForSuperCallQualifier;
+
+    @Override
+    public boolean shouldProcessJavaType(JavaType javaType) {
+      if (!(javaType instanceof AnonymousJavaType)) {
+        return false;
+      }
+      parameterForSuperCallQualifier = null;
+      // Create parameter that holds the qualifier of super call.
+      if (javaType.getSuperTypeDescriptor().isInstanceMemberClass()) {
+        parameterForSuperCallQualifier =
+            new Variable(
+                "$super_outer_this",
+                javaType.getSuperTypeDescriptor().getEnclosingTypeDescriptor(),
+                false,
+                true);
+      }
+      return true;
+    }
+
+    @Override
+    public Node rewriteMethod(Method method) {
+      // Add parameter to the constructor.
+      if (!method.isConstructor() || parameterForSuperCallQualifier == null) {
+        return method;
+      }
+      MethodBuilder methodBuilder = MethodBuilder.from(method);
+      methodBuilder.parameter(
+          parameterForSuperCallQualifier, parameterForSuperCallQualifier.getTypeDescriptor());
+      return methodBuilder.build();
+    }
+
+    @Override
+    public Node rewriteMethodCall(MethodCall methodCall) {
+      Method currentMethod = getCurrentMethod();
+      if (currentMethod == null
+          || !currentMethod.isConstructor()
+          || !methodCall.getTarget().isConstructor()) {
+        return methodCall;
+      }
+      // super() call, set the qualifier.
+      MethodCallBuilder methodCallBuilder = MethodCallBuilder.from(methodCall);
+      if (parameterForSuperCallQualifier != null) {
+        methodCallBuilder.qualifier(parameterForSuperCallQualifier.getReference());
+      }
+
+      return methodCallBuilder.build();
+    }
+  }
+
+  /**
+   * Visitor class that fixes the NewInstance call of an anonymous class.
+   *
+   * <p>If an anonymous class is created with a qualifier, pass the qualifier as an argument.
+   * For example, q.new A(){}; // A is an instance inner class, is translated to
+   * new $1(q);
+   */
+  private class FixAnonymousClassCreationsVisitor extends AbstractRewriter {
+    public void applyTo(CompilationUnit compilationUnit) {
+      collectSuperCallQualifiers(compilationUnit);
+      compilationUnit.accept(this);
+    }
+
+    private Map<TypeDescriptor, Expression> qualifierByTypeDescriptor = new HashMap<>();
+
+    private void collectSuperCallQualifiers(CompilationUnit compilationUnit) {
+      for (JavaType javaType : compilationUnit.getTypes()) {
+        if (javaType instanceof AnonymousJavaType) {
+          AnonymousJavaType anonymousJavaType = (AnonymousJavaType) javaType;
+          if (anonymousJavaType.getSuperTypeDescriptor().isInstanceMemberClass()) {
+            qualifierByTypeDescriptor.put(
+                javaType.getDescriptor(), anonymousJavaType.getSuperCallQualifier());
+          }
+        }
+      }
+    }
+
+    @Override
+    public Node rewriteNewInstance(NewInstance newInstance) {
+      TypeDescriptor typeDescriptor = newInstance.getTypeDescriptor();
+      if (!qualifierByTypeDescriptor.containsKey(typeDescriptor)) {
+        return newInstance;
+      }
+      NewInstanceBuilder newInstanceBuilder = NewInstanceBuilder.from(newInstance);
+      newInstanceBuilder.argument(
+          qualifierByTypeDescriptor.get(typeDescriptor),
+          typeDescriptor.getSuperTypeDescriptor().getEnclosingTypeDescriptor());
+      return newInstanceBuilder.build();
+    }
   }
 }

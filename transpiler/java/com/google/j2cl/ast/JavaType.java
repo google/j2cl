@@ -55,11 +55,6 @@ public class JavaType extends Node {
   @Visitable List<Method> methods = new ArrayList<>();
   @Visitable List<Block> instanceInitializerBlocks = new ArrayList<>();
   @Visitable List<Block> staticInitializerBlocks = new ArrayList<>();
-  /**
-   * Parameter types of default constructor. It is used to synthesize default constructor of
-   * anonymous class.
-   */
-  private List<TypeDescriptor> constructorParameterTypeDescriptors = new ArrayList<>();
 
   public JavaType(Kind kind, Visibility visibility, TypeDescriptor typeDescriptor) {
     this.kind = kind;
@@ -191,15 +186,6 @@ public class JavaType extends Node {
 
   public void setDescriptor(TypeDescriptor typeDescriptor) {
     this.typeDescriptor = typeDescriptor;
-  }
-
-  public List<TypeDescriptor> getConstructorParameterTypeDescriptors() {
-    return constructorParameterTypeDescriptors;
-  }
-
-  public void addConstructorParameterTypeDescriptors(
-      List<TypeDescriptor> constructorParameterTypeDescriptors) {
-    this.constructorParameterTypeDescriptors.addAll(constructorParameterTypeDescriptors);
   }
 
   public List<Field> getInstanceFields() {
