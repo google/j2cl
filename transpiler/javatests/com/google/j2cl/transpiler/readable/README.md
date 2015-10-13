@@ -59,6 +59,8 @@ are copyright and licensed as follows:
 - arithmetic exception for integers (e.g. divide by zero / mod by zero)
 - arithmetic underflow/overflow
 - catchjsexception
+- devirtualized classes should skip Object trampoline when possible:
+    string.toString()
 - enum special functions (values, valueOf, etc).
 - enumoptimization
 - finalfield (readable JsDoc and no static setter)
@@ -78,6 +80,5 @@ are copyright and licensed as follows:
 - qualifiedsupermethodcall
 - shorterfieldmangling (for fields in final classes, like enums)
 - simpleenum
-- devirtualized classes should skip Object trampoline when possible:
-    string.toString()
+- stringconversion(nullstringinstances)
 - string constructor needs to be implemented

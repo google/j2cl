@@ -38,5 +38,14 @@ public class Main {
     assert result.equals("true is not false");
     result = new Boolean(true) + " is not " + new Boolean(false);
     assert result.equals("true is not false");
+
+    // TODO: uncomment.
+    // Two Null String instances.
+//    String s1 = null;
+//    String s2 = null;
+//    String s3 = s1 + s2;
+//    assert (s3.equals("nullnull"));
+//    s2 += s2;
+//    assert (s2.equals("nullnull"));
   }
 }
