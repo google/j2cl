@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
-import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
@@ -18,7 +17,6 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Visibility;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -39,10 +37,12 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
       return expression;
     }
     TypeDescriptor castTypeDescriptor = expression.getCastTypeDescriptor();
+    Preconditions.checkArgument(
+        !castTypeDescriptor.isPrimitive(),
+        "Narrowing and Widening conversions should have already converted all primitive casts.");
+
     if (castTypeDescriptor.isArray()) {
       return rewriteArrayCastExpression(expression);
-    } else if (castTypeDescriptor.isPrimitive()) {
-      return rewritePrimitiveCastExpression(expression);
     }
     return rewriteRegularCastExpression(expression);
   }
@@ -101,40 +101,5 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
     MethodCall castMethodCall = new MethodCall(null, castToMethodDescriptor, arguments);
     // /**@type {}*/ ()
     return CastExpression.createRaw(castMethodCall, arrayCastTypeDescriptor);
-  }
-
-  private Node rewritePrimitiveCastExpression(CastExpression castExpression) {
-    Preconditions.checkArgument(castExpression.getCastTypeDescriptor().isPrimitive());
-
-    Expression expression = castExpression.getExpression();
-    TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
-    TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
-    if (AstUtils.canRemoveCast(fromTypeDescriptor, toTypeDescriptor)) {
-      return expression;
-    }
-    String castMethodName =
-        String.format(
-            "$cast%sTo%s",
-            toProperCase(fromTypeDescriptor.getSimpleName()),
-            toProperCase(toTypeDescriptor.getSimpleName()));
-    MethodDescriptor castToMethodDescriptor =
-        MethodDescriptor.createRaw(
-            true,
-            Visibility.PUBLIC,
-            TypeDescriptors.VM_PRIMITIVES_TYPE_DESCRIPTOR,
-            castMethodName,
-            Lists.newArrayList(fromTypeDescriptor),
-            toTypeDescriptor);
-    // Primitives.$castAToB(expr);
-    return new MethodCall(null, castToMethodDescriptor, Arrays.asList(expression));
-  }
-
-  private String toProperCase(String string) {
-    if (string.isEmpty()) {
-      return string;
-    } else if (string.length() == 1) {
-      return string.toUpperCase();
-    }
-    return string.substring(0, 1).toUpperCase() + string.substring(1, string.length());
   }
 }

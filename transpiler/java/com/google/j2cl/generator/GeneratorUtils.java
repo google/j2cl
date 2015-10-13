@@ -25,7 +25,6 @@ import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 
@@ -98,18 +97,6 @@ public class GeneratorUtils {
     return !type.getStaticInitializerBlocks().isEmpty();
   }
 
-  /**
-   * Return the String with first letter capitalized.
-   */
-  public static String toProperCase(String string) {
-    if (string.isEmpty()) {
-      return string;
-    } else if (string.length() == 1) {
-      return string.toUpperCase();
-    }
-    return string.substring(0, 1).toUpperCase() + string.substring(1, string.length());
-  }
-
   private GeneratorUtils() {}
 
   public static String getArrayAssignmentFunctionName(BinaryOperator binaryOperator) {
@@ -141,88 +128,6 @@ public class GeneratorUtils {
       default:
         Preconditions.checkState(
             false, "Requested the Arrays function name for a non-assignment operator.");
-        return null;
-    }
-  }
-
-  public static boolean isValidForLongs(PrefixOperator prefixOperator) {
-    return prefixOperator != PrefixOperator.NOT;
-  }
-
-  public static String getLongOperationFunctionName(PrefixOperator prefixOperator) {
-    switch (prefixOperator) {
-      case PLUS:
-        Preconditions.checkArgument(false, "The '+' prefix operator is a NOP for longs.");
-        return null;
-      case MINUS:
-        return "$negate"; // Multiply by -1;
-      case COMPLEMENT:
-        return "$not"; // Bitwise not
-      case NOT:
-        Preconditions.checkArgument(false, "The 'not' operator isn't applicable for longs.");
-        return null;
-      default:
-        Preconditions.checkArgument(
-            false,
-            "Requested the Longs function name for unrecognized prefix operator "
-                + prefixOperator
-                + ".");
-        return null;
-    }
-  }
-
-  public static String getLongOperationFunctionName(BinaryOperator binaryOperator) {
-    switch (binaryOperator) {
-      case TIMES:
-        return "$times";
-      case DIVIDE:
-        return "$divide";
-      case REMAINDER:
-        return "$remainder";
-      case PLUS:
-        return "$plus";
-      case MINUS:
-        return "$minus";
-      case LEFT_SHIFT:
-        return "$leftShift";
-      case RIGHT_SHIFT_SIGNED:
-        return "$rightShiftSigned";
-      case RIGHT_SHIFT_UNSIGNED:
-        return "$rightShiftUnsigned";
-      case LESS:
-        return "$less";
-      case GREATER:
-        return "$greater";
-      case LESS_EQUALS:
-        return "$lessEquals";
-      case GREATER_EQUALS:
-        return "$greaterEquals";
-      case EQUALS:
-        return "$equals";
-      case NOT_EQUALS:
-        return "$notEquals";
-      case XOR:
-        return "$xor";
-      case AND:
-        return "$and";
-      case OR:
-        return "$or";
-      case CONDITIONAL_AND:
-        Preconditions.checkArgument(false, "The '&&' operator isn't applicable for longs.");
-        return null;
-      case CONDITIONAL_OR:
-        Preconditions.checkArgument(false, "The '||' operator isn't applicable for longs.");
-        return null;
-      case ASSIGN:
-        Preconditions.checkArgument(
-            false, "The '=' operator doesn't require special handling for longs.");
-        return null;
-      default:
-        Preconditions.checkArgument(
-            false,
-            "Requested the Longs function name for unrecognized binary operator "
-                + binaryOperator
-                + ".");
         return null;
     }
   }

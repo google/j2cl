@@ -14,7 +14,7 @@ let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
  */
 class Primitives {
   /**
-   * Casts a number to a 8-bit signed number.
+   * Narrows a number to a 8-bit signed number.
    *
    * @param {number} instance
    * @return {number}
@@ -25,7 +25,7 @@ class Primitives {
   }
 
   /**
-   * Casts a number to a 16-bit number.
+   * Narrows a number to a 16-bit number.
    *
    * @param {number} instance
    * @return {number}
@@ -36,7 +36,7 @@ class Primitives {
   }
 
   /**
-   * Casts a number to a 16-bit signed number.
+   * Narrows a number to a 16-bit signed number.
    *
    * @param {number} instance
    * @return {number}
@@ -47,7 +47,7 @@ class Primitives {
   }
 
   /**
-   * Casts a number to a 32-bit signed number.
+   * Narrows a number to a 32-bit signed number.
    *
    * @param {number} instance
    * @return {number}
@@ -58,320 +58,292 @@ class Primitives {
   }
 
   /**
-   * Casts a byte to a char.
+   * Widens a byte to a char.
    *
    * @param {number} instance
    * @return {number}
    * @public
    */
-  static $castByteToChar(instance) {
-    return Primitives.$toChar(instance);
-  }
+  static $widenByteToChar(instance) { return Primitives.$toChar(instance); }
 
   /**
-   * Casts a char to a byte.
+   * Narrows a char to a byte.
    *
    * @param {number} instance
    * @return {number}
    * @public
    */
-  static $castCharToByte(instance) {
-    return Primitives.$toByte(instance);
-  }
+  static $narrowCharToByte(instance) { return Primitives.$toByte(instance); }
 
   /**
-   * Casts a char to a short.
+   * Narrows a char to a short.
    *
    * @param {number} instance
    * @return {number}
    * @public
    */
-  static $castCharToShort(instance) {
-    return Primitives.$toShort(instance);
-  }
+  static $narrowCharToShort(instance) { return Primitives.$toShort(instance); }
 
   /**
-   * Casts a short to a byte.
+   * Narrows a short to a byte.
    *
    * @param {number} instance
    * @return {number}
    * @public
    */
-  static $castShortToByte(instance) {
-    return Primitives.$toByte(instance);
-  }
+  static $narrowShortToByte(instance) { return Primitives.$toByte(instance); }
 
   /**
-   * Casts a short to a char.
+   * Narrows a short to a char.
    *
    * @param {number} instance
    * @return {number}
    * @public
    */
-  static $castShortToChar(instance) {
-    return Primitives.$toChar(instance);
-  }
+  static $narrowShortToChar(instance) { return Primitives.$toChar(instance); }
 
   /**
-   * Casts an int to a byte.
+   * Narrows an int to a byte.
    *
    * @param {number} instance
    * @return {number}
    * @public
    */
-  static $castIntToByte(instance) {
-    return Primitives.$toByte(instance);
-  }
+  static $narrowIntToByte(instance) { return Primitives.$toByte(instance); }
 
   /**
-   * Casts an int to a byte.
+   * Narrows an int to a byte.
    *
    * @param {number} instance
    * @return {number}
    * @public
    */
-  static $castIntToChar(instance) {
-    return Primitives.$toChar(instance);
-  }
+  static $narrowIntToChar(instance) { return Primitives.$toChar(instance); }
 
   /**
-   * Casts an int to a short.
+   * Narrows an int to a short.
    *
    * @param {number} instance
    * @return {number}
    * @public
    */
-  static $castIntToShort(instance) {
-    return Primitives.$toShort(instance);
-  }
+  static $narrowIntToShort(instance) { return Primitives.$toShort(instance); }
 
   /**
-   * Casts a byte to a Long.
+   * Widens a byte to a Long.
    *
    * @param {number} instance
    * @return {!$Long}
    * @public
    */
-  static $castByteToLong(instance) {
-    return $LongUtils.$fromInt(instance);
-  }
+  static $widenByteToLong(instance) { return $LongUtils.$fromInt(instance); }
 
   /**
-   * Casts a char to a Long.
+   * Widens a char to a Long.
    *
    * @param {number} instance
    * @return {!$Long}
    * @public
    */
-  static $castCharToLong(instance) {
-    return $LongUtils.$fromInt(instance);
-  }
+  static $widenCharToLong(instance) { return $LongUtils.$fromInt(instance); }
 
   /**
-   * Casts a short to a Long.
+   * Widens a short to a Long.
    *
    * @param {number} instance
    * @return {!$Long}
    * @public
    */
-  static $castShortToLong(instance) {
-    return $LongUtils.$fromInt(instance);
-  }
+  static $widenShortToLong(instance) { return $LongUtils.$fromInt(instance); }
 
   /**
-   * Casts an int to a Long.
+   * Widens an int to a Long.
    *
    * @param {number} instance
    * @return {!$Long}
    * @public
    */
-  static $castIntToLong(instance) {
-    return $LongUtils.$fromInt(instance);
-  }
+  static $widenIntToLong(instance) { return $LongUtils.$fromInt(instance); }
 
   /**
-   * Casts a float number to a Long.
+   * Narrows a float number to a Long.
    *
    * @param {number} instance
    * @return {!$Long}
    * @public
    */
-  static $castFloatToLong(instance) {
+  static $narrowFloatToLong(instance) {
     return $LongUtils.$fromNumber(instance);
   }
 
   /**
-   * Casts a double number to a Long.
+   * Narrows a double number to a Long.
    *
    * @param {number} instance
    * @return {!$Long}
    * @public
    */
-  static $castDoubleToLong(instance) {
+  static $narrowDoubleToLong(instance) {
     return $LongUtils.$fromNumber(instance);
   }
 
   /**
-   * Casts a Long to a 8-bit signed number.
+   * Narrows a Long to a 8-bit signed number.
    *
    * @param {$Long} instance
    * @return {number}
    * @public
    */
-  static $castLongToByte(instance) {
+  static $narrowLongToByte(instance) {
     let intValue = $LongUtils.$toInt(instance);
     return Primitives.$toByte(intValue);
   }
 
   /**
-   * Casts a Long to a 16-bit number.
+   * Narrows a Long to a 16-bit number.
    *
    * @param {$Long} instance
    * @return {number}
    * @public
    */
-  static $castLongToChar(instance) {
+  static $narrowLongToChar(instance) {
     let intValue = $LongUtils.$toInt(instance);
     return Primitives.$toChar(intValue);
   }
 
   /**
-   * Casts a Long to a 16-bit signed number.
+   * Narrows a Long to a 16-bit signed number.
    *
    * @param {$Long} instance
    * @return {number}
    * @public
    */
-  static $castLongToShort(instance) {
+  static $narrowLongToShort(instance) {
     let intValue = $LongUtils.$toInt(instance);
     return Primitives.$toShort(intValue);
   }
 
   /**
-   * Casts a Long to a 32-bit signed number.
+   * Narrows a Long to a 32-bit signed number.
    *
    * @param {$Long} instance
    * @return {number}
    * @public
    */
-  static $castLongToInt(instance) {
+  static $narrowLongToInt(instance) {
     let intValue = $LongUtils.$toInt(instance);
     return Primitives.$toInt(intValue);
   }
 
   /**
-   * Casts a Long to a float number.
+   * Widens a Long to a float number.
    *
    * @param {$Long} instance
    * @return {number}
    * @public
    */
-  static $castLongToFloat(instance) {
-    return $LongUtils.$toNumber(instance);
-  }
+  static $widenLongToFloat(instance) { return $LongUtils.$toNumber(instance); }
 
   /**
-   * Casts a Long to a double number.
+   * Widens a Long to a double number.
    *
    * @param {$Long} instance
    * @return {number}
    * @public
    */
-  static $castLongToDouble(instance) {
-    return $LongUtils.$toNumber(instance);
-  }
+  static $widenLongToDouble(instance) { return $LongUtils.$toNumber(instance); }
 
   /**
-   * Casts a float number to a 8-bit signed number.
+   * Narrows a float number to a 8-bit signed number.
    *
    * @param {number} instance
    * @return {number}
    * @public
    */
-  static $castFloatToByte(instance) {
+  static $narrowFloatToByte(instance) {
     let roundInt = Primitives.$roundToInt(instance);
     return Primitives.$toByte(roundInt);
   }
 
   /**
-   * Casts a double number to a 8-bit signed number.
+   * Narrows a double number to a 8-bit signed number.
    *
    * @param {number} instance
    * @return {number}
    * @public
    */
-  static $castDoubleToByte(instance) {
+  static $narrowDoubleToByte(instance) {
     let roundInt = Primitives.$roundToInt(instance);
     return Primitives.$toByte(roundInt);
   }
 
   /**
-   * Casts a float number to a 16-bit number.
+   * Narrows a float number to a 16-bit number.
    *
    * @param {number} instance
    * @return {number}
    * @public
    */
-  static $castFloatToChar(instance) {
+  static $narrowFloatToChar(instance) {
     let roundInt = Primitives.$roundToInt(instance);
     return Primitives.$toChar(roundInt);
   }
 
   /**
-   * Casts a double number to a 16-bit number.
+   * Narrows a double number to a 16-bit number.
    *
    * @param {number} instance
    * @return {number}
    * @public
    */
-  static $castDoubleToChar(instance) {
+  static $narrowDoubleToChar(instance) {
     let roundInt = Primitives.$roundToInt(instance);
     return Primitives.$toChar(roundInt);
   }
 
   /**
-   * Casts a float number to a 16-bit signed number.
+   * Narrows a float number to a 16-bit signed number.
    *
    * @param {number} instance
    * @return {number}
    * @public
    */
-  static $castFloatToShort(instance) {
+  static $narrowFloatToShort(instance) {
     let roundInt = Primitives.$roundToInt(instance);
     return Primitives.$toShort(roundInt);
   }
 
   /**
-   * Casts a double number to a 16-bit signed number.
+   * Narrows a double number to a 16-bit signed number.
    *
    * @param {number} instance
    * @return {number}
    * @public
    */
-  static $castDoubleToShort(instance) {
+  static $narrowDoubleToShort(instance) {
     let roundInt = Primitives.$roundToInt(instance);
     return Primitives.$toShort(roundInt);
   }
 
   /**
-   * Casts a float number to a 32-bit signed number.
+   * Narrows a float number to a 32-bit signed number.
    *
    * @param {number} instance
    * @return {number}
    * @public
    */
-  static $castFloatToInt(instance) {
+  static $narrowFloatToInt(instance) {
     return Primitives.$roundToInt(instance);
   }
 
   /**
-   * Casts a double number to a 32-bit signed number.
+   * Narrows a double number to a 32-bit signed number.
    *
    * @param {number} instance
    * @return {number}
    * @public
    */
-  static $castDoubleToInt(instance) {
+  static $narrowDoubleToInt(instance) {
     return Primitives.$roundToInt(instance);
   }
 

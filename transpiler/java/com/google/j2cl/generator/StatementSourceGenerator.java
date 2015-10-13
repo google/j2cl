@@ -149,31 +149,17 @@ public class StatementSourceGenerator {
 
         if (AstUtils.isAssignmentOperator(operator) && leftOperand instanceof ArrayAccess) {
           return transformArrayAssignmentBinaryExpression(expression);
-        } else if (TypeDescriptors.get().primitiveLong == leftOperand.getTypeDescriptor()
-            && operator != BinaryOperator.ASSIGN) {
-          // Skips assignment because it doesn't need special handling.
-          return transformLongBinaryExpression(expression);
         } else {
-          return transformRegularBinaryExpression(expression);
+          Preconditions.checkState(
+              !(AstUtils.isAssignmentOperator(expression.getOperator())
+                  && expression.getLeftOperand() instanceof ArrayAccess));
+
+          return String.format(
+              "%s %s %s",
+              toSource(expression.getLeftOperand()),
+              expression.getOperator().toString(),
+              toSource(expression.getRightOperand()));
         }
-      }
-
-      private String transformLongBinaryExpression(BinaryExpression expression) {
-        Preconditions.checkArgument(AstUtils.isValidForLongs(expression.getOperator()));
-        Preconditions.checkArgument(
-            !AstUtils.isAssignmentOperator(expression.getOperator()),
-            "Normalization should have already rewritten all long assignment operations.");
-        String longOperationFunctionName =
-            GeneratorUtils.getLongOperationFunctionName(expression.getOperator());
-        Expression leftOperand = expression.getLeftOperand();
-        Expression rightOperand = expression.getRightOperand();
-
-        return String.format(
-            "%s.%s(%s, %s)",
-            longsTypeAlias(),
-            longOperationFunctionName,
-            toSource(leftOperand),
-            toSource(rightOperand));
       }
 
       @Override
@@ -195,18 +181,6 @@ public class StatementSourceGenerator {
           return "continue;";
         }
         return String.format("continue %s;", statement.getLabelName());
-      }
-
-      private String transformRegularBinaryExpression(BinaryExpression expression) {
-        Preconditions.checkState(
-            !(AstUtils.isAssignmentOperator(expression.getOperator())
-                && expression.getLeftOperand() instanceof ArrayAccess));
-
-        return String.format(
-            "%s %s %s",
-            toSource(expression.getLeftOperand()),
-            expression.getOperator().toString(),
-            toSource(expression.getRightOperand()));
       }
 
       // TODO: extend to handle long[].
@@ -451,27 +425,6 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformPrefixExpression(PrefixExpression expression) {
-        if (TypeDescriptors.get().primitiveLong == expression.getTypeDescriptor()
-            && expression.getOperator() != PrefixOperator.PLUS) {
-          // Skips the + prefix because it is a NOP.
-          return transformLongPrefixExpression(expression);
-        }
-        return transformRegularPrefixExpression(expression);
-      }
-
-      private String transformLongPrefixExpression(PrefixExpression expression) {
-        Preconditions.checkArgument(GeneratorUtils.isValidForLongs(expression.getOperator()));
-
-        String longOperationFunctionName =
-            GeneratorUtils.getLongOperationFunctionName(expression.getOperator());
-        Expression operand = expression.getOperand();
-
-        Preconditions.checkArgument(!expression.getOperator().hasSideEffect());
-        return String.format(
-            "%s.%s(%s)", longsTypeAlias(), longOperationFunctionName, toSource(operand));
-      }
-
-      private String transformRegularPrefixExpression(PrefixExpression expression) {
         // The + prefix operator is a NOP.
         if (expression.getOperator() == PrefixOperator.PLUS) {
           return toSource(expression.getOperand());

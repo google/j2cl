@@ -22,11 +22,13 @@ import com.google.j2cl.ast.visitors.FixSuperCallQualifiersVisitor;
 import com.google.j2cl.ast.visitors.FixTypeVariableInMethodVisitors;
 import com.google.j2cl.ast.visitors.InsertBoxingConversionVisitor;
 import com.google.j2cl.ast.visitors.InsertExplicitSuperCallsVisitor;
-import com.google.j2cl.ast.visitors.InsertImplicitCastsVisitor;
 import com.google.j2cl.ast.visitors.InsertInstanceInitCallsVisitor;
+import com.google.j2cl.ast.visitors.InsertNarrowingPrimitiveConversionVisitor;
 import com.google.j2cl.ast.visitors.InsertUnboxingConversionVisitor;
+import com.google.j2cl.ast.visitors.InsertWideningPrimitiveConversionVisitor;
 import com.google.j2cl.ast.visitors.MakeExplicitEnumConstructionVisitor;
 import com.google.j2cl.ast.visitors.NormalizeCastsVisitor;
+import com.google.j2cl.ast.visitors.NormalizeLongsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeNestedClassConstructorsVisitor;
 import com.google.j2cl.ast.visitors.RemoveUnusedMultiExpressionReturnValues;
 import com.google.j2cl.ast.visitors.SplitCompoundLongAssignmentsVisitor;
@@ -117,11 +119,12 @@ public class J2clTranspiler {
       ControlStatementFormatter.applyTo(j2clUnit);
       SplitCompoundLongAssignmentsVisitor.applyTo(j2clUnit);
       InsertUnboxingConversionVisitor.applyTo(j2clUnit);
+      NormalizeLongsVisitor.applyTo(j2clUnit);
       // TODO: InsertUnderflowConversionVisitor.applyTo(j2clUnit);
-      // TODO: InsertNarrowingPrimitiveConversionVisitor.applyTo(j2clUnit);
+      InsertNarrowingPrimitiveConversionVisitor.applyTo(j2clUnit);
+      InsertWideningPrimitiveConversionVisitor.applyTo(j2clUnit);
       // TODO: InsertWideningAndNarrowingPrimitiveConversionVisitor.applyTo(j2clUnit);
       InsertBoxingConversionVisitor.applyTo(j2clUnit);
-      InsertImplicitCastsVisitor.applyTo(j2clUnit);
       NormalizeCastsVisitor.applyTo(j2clUnit);
 
       // Dodge JSCompiler limitations.

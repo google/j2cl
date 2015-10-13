@@ -70,7 +70,7 @@ class Numbers {
   static m_byteValue__java_lang_Number(obj) {
     Numbers.$clinit();
     if (typeof obj == 'number') {
-      return Primitives.$castDoubleToByte(obj);
+      return Primitives.$narrowDoubleToByte(obj);
     } else {
       return obj.m_byteValue();
     }
@@ -113,7 +113,7 @@ class Numbers {
   static m_intValue__java_lang_Number(obj) {
     Numbers.$clinit();
     if (typeof obj == 'number') {
-      return Primitives.$castDoubleToInt(obj);
+      return Primitives.$narrowDoubleToInt(obj);
     } else {
       return obj.m_intValue();
     }
@@ -128,7 +128,7 @@ class Numbers {
   static m_longValue__java_lang_Number(obj) {
     Numbers.$clinit();
     if (typeof obj == 'number') {
-      return Primitives.$castDoubleToLong(obj);
+      return Primitives.$narrowDoubleToLong(obj);
     } else {
       return obj.m_longValue();
     }
@@ -143,7 +143,7 @@ class Numbers {
   static m_shortValue__java_lang_Number(obj) {
     Numbers.$clinit();
     if (typeof obj == 'number') {
-      return Primitives.$castDoubleToShort(obj);
+      return Primitives.$narrowDoubleToShort(obj);
     } else {
       return obj.m_shortValue();
     }

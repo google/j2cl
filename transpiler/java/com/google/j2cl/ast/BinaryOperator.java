@@ -68,6 +68,20 @@ public enum BinaryOperator {
     return this != ASSIGN && doesAssignment();
   }
 
+  public boolean isShiftOperator() {
+    switch (this) {
+      case LEFT_SHIFT:
+      case RIGHT_SHIFT_SIGNED:
+      case RIGHT_SHIFT_UNSIGNED:
+      case LEFT_SHIFT_ASSIGN:
+      case RIGHT_SHIFT_SIGNED_ASSIGN:
+      case RIGHT_SHIFT_UNSIGNED_ASSIGN:
+        return true;
+      default:
+        return false;
+    }
+  }
+
   @Override
   public String toString() {
     return symbol;

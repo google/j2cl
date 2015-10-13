@@ -44,12 +44,14 @@ public class InsertUnboxingConversionVisitor extends ConversionContextVisitor {
           }
 
           @Override
-          public Expression rewriteBinaryNumericPromotionContext(Expression operandExpression) {
-            if (TypeDescriptors.isBoxedType(operandExpression.getTypeDescriptor())
-                && !TypeDescriptors.isBoxedBooleanOrDouble(operandExpression.getTypeDescriptor())) {
-              return AstUtils.unbox(operandExpression);
+          public Expression rewriteBinaryNumericPromotionContext(
+              Expression subjectOperandExpression, Expression otherOperandExpression) {
+            if (TypeDescriptors.isBoxedType(subjectOperandExpression.getTypeDescriptor())
+                && !TypeDescriptors.isBoxedBooleanOrDouble(
+                    subjectOperandExpression.getTypeDescriptor())) {
+              return AstUtils.unbox(subjectOperandExpression);
             }
-            return operandExpression;
+            return subjectOperandExpression;
           }
 
           @Override

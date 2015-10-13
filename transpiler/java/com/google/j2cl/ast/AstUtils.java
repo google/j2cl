@@ -39,6 +39,16 @@ public class AstUtils {
           false, TypeDescriptors.get().primitiveVoid, "length", TypeDescriptors.get().primitiveInt);
 
   /**
+   * Return the String with first letter capitalized.
+   */
+  public static String toProperCase(String string) {
+    if (string.isEmpty()) {
+      return string;
+    }
+    return string.substring(0, 1).toUpperCase() + string.substring(1, string.length());
+  }
+
+  /**
    * Create "$init" MethodDescriptor.
    */
   public static MethodDescriptor createInitMethodDescriptor(
@@ -180,20 +190,6 @@ public class AstUtils {
                 || fromTypeDescriptor == TypeDescriptors.get().primitiveShort))
         || (toTypeDescriptor == TypeDescriptors.get().primitiveShort
             && fromTypeDescriptor == TypeDescriptors.get().primitiveByte);
-  }
-
-  public static boolean isShiftOperator(BinaryOperator binaryOperator) {
-    switch (binaryOperator) {
-      case LEFT_SHIFT:
-      case RIGHT_SHIFT_SIGNED:
-      case RIGHT_SHIFT_UNSIGNED:
-      case LEFT_SHIFT_ASSIGN:
-      case RIGHT_SHIFT_SIGNED_ASSIGN:
-      case RIGHT_SHIFT_UNSIGNED_ASSIGN:
-        return false;
-      default:
-        return true;
-    }
   }
 
   /**
@@ -587,5 +583,33 @@ public class AstUtils {
       default:
         return false;
     }
+  }
+
+  /**
+   * See JLS 5.6.2.
+   *
+   * X and double -> double
+   * X and float -> float
+   * X and long -> long
+   * otherwise -> int
+   */
+  public static TypeDescriptor chooseWidenedTypeDescriptor(
+      TypeDescriptor leftTypeDescriptor, TypeDescriptor rightTypeDescriptor) {
+    Preconditions.checkArgument(leftTypeDescriptor.isPrimitive());
+    Preconditions.checkArgument(rightTypeDescriptor.isPrimitive());
+
+    // Pick the wider of the two provided type descriptors.
+    TypeDescriptor widenedTypeDescriptor =
+        TypeDescriptors.getWidth(leftTypeDescriptor) > TypeDescriptors.getWidth(rightTypeDescriptor)
+            ? leftTypeDescriptor
+            : rightTypeDescriptor;
+
+    // If it's smaller than int then use int.
+    if (TypeDescriptors.getWidth(widenedTypeDescriptor)
+        < TypeDescriptors.getWidth(TypeDescriptors.get().primitiveInt)) {
+      widenedTypeDescriptor = TypeDescriptors.get().primitiveInt;
+    }
+
+    return widenedTypeDescriptor;
   }
 }

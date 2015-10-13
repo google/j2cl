@@ -41,7 +41,7 @@ class LongImplicitCasts extends Object {
    */
   $init__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts() {
     this.f_fieldLong__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts =
-        $Primitives.$castIntToLong(100);
+        $Primitives.$widenIntToLong(100);
   }
 
   /**
@@ -71,7 +71,7 @@ class LongImplicitCasts extends Object {
    */
   $ctor__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts() {
     this.$ctor__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts__long(
-        $Primitives.$castIntToLong(100));
+        $Primitives.$widenIntToLong(100));
   }
 
   /**
@@ -110,41 +110,41 @@ class LongImplicitCasts extends Object {
     let fchar = 12;
     let fshort = 13;
     let fint = 14;
-    let flong = $Primitives.$castIntToLong(15);
+    let flong = $Primitives.$widenIntToLong(15);
     let ffloat = 16;
     let fdouble = 17;
-    let tlong = $Primitives.$castIntToLong(0);
+    let tlong = $Primitives.$widenIntToLong(0);
     {
-      tlong = $Primitives.$castByteToLong(fbyte);
+      tlong = $Primitives.$widenByteToLong(fbyte);
       tlong = flong;
     }
     {
-      tlong = $Primitives.$castIntToLong(fint);
-      tlong = $LongUtils.$plus(tlong, $Primitives.$castIntToLong(fint));
+      tlong = $Primitives.$widenIntToLong(fint);
+      tlong = $LongUtils.$plus(tlong, $Primitives.$widenIntToLong(fint));
       tlong = $LongUtils.$leftShift(tlong, fint);
     }
     {
-      tlong = $LongUtils.$plus(tlong, $Primitives.$castCharToLong(fchar));
+      tlong = $LongUtils.$plus(tlong, $Primitives.$widenCharToLong(fchar));
       tlong = $LongUtils.$plus(tlong, flong);
-      tlong = $LongUtils.$plus(tlong, $Primitives.$castFloatToLong(ffloat));
+      tlong = $LongUtils.$plus(tlong, $Primitives.$narrowFloatToLong(ffloat));
     }
     {
-      tlong = $LongUtils.$times(flong, $Primitives.$castIntToLong(fint));
+      tlong = $LongUtils.$times(flong, $Primitives.$widenIntToLong(fint));
       tlong = $LongUtils.$rightShiftSigned(flong, fint);
     }
     {
-      tlong = $LongUtils.$plus(flong, $Primitives.$castShortToLong(fshort));
+      tlong = $LongUtils.$plus(flong, $Primitives.$widenShortToLong(fshort));
       tlong = $LongUtils.$plus(flong, flong);
     }
     {
-      this.m_compareLong__long($Primitives.$castIntToLong(fint));
-      LongImplicitCasts.$create__long($Primitives.$castIntToLong(fint));
+      this.m_compareLong__long($Primitives.$widenIntToLong(fint));
+      LongImplicitCasts.$create__long($Primitives.$widenIntToLong(fint));
       this.m_compareLong__long(flong);
       LongImplicitCasts.$create__long(flong);
     }
     {
-      tlong = $LongUtils.$leftShift(flong, $Primitives.$castLongToInt(flong));
-      tlong = $LongUtils.$leftShift(tlong, $Primitives.$castLongToInt(flong));
+      tlong = $LongUtils.$leftShift(flong, $Primitives.$narrowLongToInt(flong));
+      tlong = $LongUtils.$leftShift(tlong, $Primitives.$narrowLongToInt(flong));
     }
   }
 

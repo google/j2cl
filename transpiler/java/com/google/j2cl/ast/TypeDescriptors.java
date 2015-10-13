@@ -159,6 +159,34 @@ public class TypeDescriptors {
     return isBoxedType(typeDescriptor) || isPrimitiveType(typeDescriptor);
   }
 
+  /**
+   * Returns an idea of the "width" of a numeric primitive type to help with deciding when a
+   * conversion would be a narrowing and when it would be a widening.
+   *
+   * <p>Even though the floating point types are only 4 and 8 bytes respectively they are considered
+   * very wide because of the magnitude of the maximum values they can encode.
+   */
+  public static int getWidth(TypeDescriptor typeDescriptor) {
+    Preconditions.checkArgument(typeDescriptor.isPrimitive());
+
+    TypeDescriptors typeDescriptors = TypeDescriptors.get();
+    if (typeDescriptor == typeDescriptors.primitiveByte) {
+      return 1;
+    } else if (typeDescriptor == typeDescriptors.primitiveShort) {
+      return 2;
+    } else if (typeDescriptor == typeDescriptors.primitiveChar) {
+      return 2;
+    } else if (typeDescriptor == typeDescriptors.primitiveInt) {
+      return 4;
+    } else if (typeDescriptor == typeDescriptors.primitiveLong) {
+      return 8;
+    } else if (typeDescriptor == typeDescriptors.primitiveFloat) {
+      return 4 + 100;
+    } else { // typeDescriptor == typeDescriptors.primitiveDouble
+      return 8 + 100;
+    }
+  }
+
   private static TypeDescriptor create(AST ast, String typeName) {
     return TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType(typeName));
   }
@@ -182,7 +210,7 @@ public class TypeDescriptors {
     Preconditions.checkArgument(interfaces.length == 1);
     return TypeProxyUtils.createTypeDescriptor(interfaces[0].getErasure());
   }
-  
+
   /**
    * Create TypeDescriptor for java.lang.CharSequence, which is not a well known type by JDT.
    */

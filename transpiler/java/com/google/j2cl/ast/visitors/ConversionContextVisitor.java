@@ -70,10 +70,12 @@ public class ConversionContextVisitor extends AbstractRewriter {
     }
 
     /**
-     * Expression is always going to primitive.
+     * Subject expression is interacting with other expression.
      */
-    public Expression rewriteBinaryNumericPromotionContext(Expression operandExpression) {
-      return operandExpression;
+    @SuppressWarnings("unused")
+    public Expression rewriteBinaryNumericPromotionContext(
+        Expression subjectOperandExpression, Expression otherOperandExpression) {
+      return subjectOperandExpression;
     }
 
     /**
@@ -156,10 +158,10 @@ public class ConversionContextVisitor extends AbstractRewriter {
           new BinaryExpression(
               binaryExpression.getTypeDescriptor(),
               contextRewriter.rewriteBinaryNumericPromotionContext(
-                  binaryExpression.getLeftOperand()),
+                  binaryExpression.getLeftOperand(), binaryExpression.getRightOperand()),
               binaryExpression.getOperator(),
               contextRewriter.rewriteBinaryNumericPromotionContext(
-                  binaryExpression.getRightOperand()));
+                  binaryExpression.getRightOperand(), binaryExpression.getLeftOperand()));
     }
 
     // assignment context
@@ -386,7 +388,8 @@ public class ConversionContextVisitor extends AbstractRewriter {
         binaryExpression.getRightOperand())) {
       return false;
     }
-    return contextRewriter.rewriteBinaryNumericPromotionContext(binaryExpression.getLeftOperand())
+    return contextRewriter.rewriteBinaryNumericPromotionContext(
+            binaryExpression.getLeftOperand(), binaryExpression.getRightOperand())
         != binaryExpression.getLeftOperand();
   }
 

@@ -64,7 +64,6 @@ are copyright and licensed as follows:
 - finalfield (readable JsDoc and no static setter)
 - identity equality (double equality / triple equality, null / undefined)
 - implicitconversions (String + operator)
-- implicitconversions (binary operations and field initializers)
 - interfacedefaultmethod
 - jsinteropclass
 - jsinteropdispatch

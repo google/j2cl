@@ -33,9 +33,7 @@ class Number extends Object {
    * @return {number}
    * @public
    */
-  m_byteValue() {
-    return $Primitives.$castIntToByte(this.m_intValue());
-  }
+  m_byteValue() { return $Primitives.$narrowIntToByte(this.m_intValue()); }
 
   /**
    * @return {number}
@@ -69,9 +67,7 @@ class Number extends Object {
    * @return {number}
    * @public
    */
-  m_shortValue() {
-    return $Primitives.$castIntToShort(this.m_intValue());
-  }
+  m_shortValue() { return $Primitives.$narrowIntToShort(this.m_intValue()); }
 
   /**
    * A particular Java constructor as a factory method.
