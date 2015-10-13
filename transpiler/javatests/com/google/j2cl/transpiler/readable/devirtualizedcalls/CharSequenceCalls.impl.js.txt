@@ -1,0 +1,137 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let CharSequence = goog.forwardDeclare('gen.java.lang.CharSequence$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let String = goog.forwardDeclare('gen.java.lang.String$impl');
+let CharSequences = goog.forwardDeclare('vmbootstrap.CharSequences$impl');
+
+
+class CharSequenceCalls extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_devirtualizedcalls_CharSequenceCalls() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!CharSequenceCalls}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    CharSequenceCalls.$clinit();
+    let instance = new CharSequenceCalls;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_CharSequenceCalls();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_devirtualizedcalls_CharSequenceCalls() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_devirtualizedcalls_CharSequenceCalls();
+  }
+
+  /**
+   * @param {(CharSequence|?string)} cs
+   * @return {void}
+   * @public
+   */
+  m_test__java_lang_CharSequence(cs) {
+    CharSequences.m_charAt__java_lang_CharSequence__int(cs, 0);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main() {
+    let s = "s";
+    this.m_test__java_lang_CharSequence(s);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof CharSequenceCalls; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, CharSequenceCalls);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    CharSequenceCalls.$clinit();
+    if (!CharSequenceCalls.$classCharSequenceCalls_) {
+      CharSequenceCalls.$classCharSequenceCalls_ = Class.$createForClass(
+          $Util.$generateId('CharSequenceCalls'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls'));
+    }
+    return CharSequenceCalls.$classCharSequenceCalls_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    CharSequence = goog.module.get('gen.java.lang.CharSequence$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    String = goog.module.get('gen.java.lang.String$impl');
+    CharSequences = goog.module.get('vmbootstrap.CharSequences$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+CharSequenceCalls.$classCharSequenceCalls_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = CharSequenceCalls;

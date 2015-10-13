@@ -87,6 +87,7 @@ public class JsDocNameUtils {
     TypeDescriptor javaLangDouble = TypeDescriptors.get().javaLangDouble;
     TypeDescriptor javaLangString = TypeDescriptors.get().javaLangString;
     TypeDescriptor javaLangNumber = TypeDescriptors.get().javaLangNumber;
+    TypeDescriptor javaLangCharSequence = TypeDescriptors.get().javaLangCharSequence;
 
     // Boolean implements Comparable
     unboxedTypeDescriptorsBySuperTypeDescriptor.put(rawJavaLangComparable, javaLangBoolean);
@@ -95,8 +96,9 @@ public class JsDocNameUtils {
     unboxedTypeDescriptorsBySuperTypeDescriptor.put(rawJavaLangComparable, javaLangDouble);
     unboxedTypeDescriptorsBySuperTypeDescriptor.put(javaLangNumber, javaLangDouble);
 
-    // TODO: register String implements CharSequence
+    // String implements Comparable, CharSequence
     unboxedTypeDescriptorsBySuperTypeDescriptor.put(rawJavaLangComparable, javaLangString);
+    unboxedTypeDescriptorsBySuperTypeDescriptor.put(javaLangCharSequence, javaLangString);
   }
 
   /**

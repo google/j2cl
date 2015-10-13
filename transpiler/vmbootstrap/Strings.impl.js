@@ -100,14 +100,14 @@ class Strings {
   //==================================
 
   /**
-   * @param {string} obj
+   * @param {?string} obj
    * @return {number}
    * @public
    */
   static m_length__java_lang_String(obj) { return obj.length; }
 
   /**
-   * @param {string} obj
+   * @param {?string} obj
    * @param {number} index
    * @return {number}
    */
@@ -116,7 +116,7 @@ class Strings {
   }
 
   /**
-   * @param {string} obj
+   * @param {?string} obj
    * @param {number} start
    * @param {number} end
    * @return {string}
@@ -130,7 +130,7 @@ class Strings {
   //==================================
 
   /**
-   * @param {string} obj
+   * @param {?string} obj
    * @param {number} start
    * @param {number} endIndex
    * @return {string}
@@ -141,7 +141,7 @@ class Strings {
   }
 
   /**
-   * @param {string} obj
+   * @param {?string} obj
    * @param {number} start
    * @return {string}
    * @public
@@ -152,7 +152,7 @@ class Strings {
 
   /**
    *
-   * @param {string} obj
+   * @param {?string} obj
    * @return {string}
    * @public
    */
