@@ -82,3 +82,4 @@ are copyright and licensed as follows:
 - simpleenum
 - stringconversion(nullstringinstances)
 - string constructor needs to be implemented
+- string conversion Objects<->String circularity in foreachstatement
