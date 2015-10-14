@@ -612,4 +612,40 @@ public class AstUtils {
 
     return widenedTypeDescriptor;
   }
+
+  public static MethodDescriptor createStringValueOfMethodDescriptor() {
+    return MethodDescriptor.create(
+        true, // static
+        Visibility.PUBLIC,
+        TypeDescriptors.get().javaLangString,
+        "valueOf",
+        false, // constructor
+        false, // native
+        TypeDescriptors.get().javaLangString,
+        Lists.newArrayList(TypeDescriptors.get().javaLangObject));
+  }
+
+  /**
+   * Returns true if {@code expression} is a string literal, or if it is String.valueOf() method
+   * call, or if it is a BinaryExpression that matches String conversion context and one of its
+   * operands is non null String.
+   */
+  public static boolean isNonNullString(Expression expression) {
+    if (expression instanceof StringLiteral) {
+      return true;
+    }
+    if (expression instanceof MethodCall) {
+      return ((MethodCall) expression).getTarget() == createStringValueOfMethodDescriptor();
+    }
+    if (!(expression instanceof BinaryExpression)) {
+      return false;
+    }
+    BinaryExpression binaryExpression = (BinaryExpression) expression;
+    if (!matchesStringContext(binaryExpression)) {
+      return false;
+    }
+    Expression leftOperand = binaryExpression.getLeftOperand();
+    Expression rightOperand = binaryExpression.getRightOperand();
+    return isNonNullString(leftOperand) || isNonNullString(rightOperand);
+  }
 }

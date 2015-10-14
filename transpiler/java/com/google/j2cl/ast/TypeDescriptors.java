@@ -123,8 +123,14 @@ public class TypeDescriptors {
     return typeDescriptorsStorage.get();
   }
 
-  public static TypeDescriptor asPrimitiveType(TypeDescriptor typeDescriptor) {
-    Preconditions.checkArgument(TypeDescriptors.isBoxedOrPrimitiveType(typeDescriptor));
+  /**
+   * Converts a type into the correct type that should result from an operation on this type.
+   * Returned values are always primitive or String.
+   */
+  public static TypeDescriptor asOperatorReturnType(TypeDescriptor typeDescriptor) {
+    Preconditions.checkArgument(
+        TypeDescriptors.isBoxedOrPrimitiveType(typeDescriptor)
+            || typeDescriptor == TypeDescriptors.get().javaLangString);
     if (TypeDescriptors.isBoxedType(typeDescriptor)) {
       return TypeDescriptors.getPrimitiveTypeFromBoxType(typeDescriptor);
     }

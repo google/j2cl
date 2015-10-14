@@ -39,13 +39,20 @@ public class Main {
     result = new Boolean(true) + " is not " + new Boolean(false);
     assert result.equals("true is not false");
 
-    // TODO: uncomment.
     // Two Null String instances.
-//    String s1 = null;
-//    String s2 = null;
-//    String s3 = s1 + s2;
-//    assert (s3.equals("nullnull"));
-//    s2 += s2;
-//    assert (s2.equals("nullnull"));
+    String s1 = null;
+    String s2 = null;
+    String s3 = s1 + s2; // two nullable string instances
+    assert (s3.equals("nullnull"));
+    s2 += s2; // nullable string compound assignment, plus a nullable string.
+    assert (s2.equals("nullnull"));
+    s1 += "a"; // nullable string compound assignment, plus a string literal.
+    assert (s1.equals("nulla"));
+
+    s1 = null;
+    s3 = s1 + s1 + s1 + null + "a";
+    assert (s3.equals("nullnullnullnulla"));
+    s3 = "a" + s1 + s1 + s1 + null;
+    assert (s3.equals("anullnullnullnull"));
   }
 }

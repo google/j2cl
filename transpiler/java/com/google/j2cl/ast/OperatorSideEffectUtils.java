@@ -193,7 +193,7 @@ public class OperatorSideEffectUtils {
   private static BinaryExpression expandExpressionNoQualifier(
       Expression leftOperand, BinaryOperator operator, Expression rightOperand) {
     TypeDescriptor numericTypeDescriptor =
-        TypeDescriptors.asPrimitiveType(leftOperand.getTypeDescriptor());
+        TypeDescriptors.asOperatorReturnType(leftOperand.getTypeDescriptor());
     BinaryExpression assignment =
         new BinaryExpression(
             leftOperand.getTypeDescriptor(),
@@ -212,7 +212,7 @@ public class OperatorSideEffectUtils {
   private static BinaryExpression expandExpressionWithQualifier(
       Expression leftOperand, BinaryOperator operator, Expression rightOperand) {
     TypeDescriptor numericTypeDescriptor =
-        TypeDescriptors.asPrimitiveType(leftOperand.getTypeDescriptor());
+        TypeDescriptors.asOperatorReturnType(leftOperand.getTypeDescriptor());
     BinaryExpression binaryExpression =
         new BinaryExpression(
             numericTypeDescriptor,

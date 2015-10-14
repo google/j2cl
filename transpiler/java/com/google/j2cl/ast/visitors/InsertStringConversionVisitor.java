@@ -16,13 +16,12 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.common.collect.Lists;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.Visibility;
 
 /**
  * Inserts a Strings.valueOf() operation when a non-string type is part of a "+" operation along
@@ -38,10 +37,14 @@ public class InsertStringConversionVisitor extends ConversionContextVisitor {
     super(
         new ContextRewriter() {
           @Override
-          public Expression rewriteStringContext(Expression operandExpression) {
+          public Expression rewriteStringContext(
+              Expression operandExpression, Expression otherOperandExpression) {
             TypeDescriptor typeDescriptor = operandExpression.getTypeDescriptor();
-            // If it's already a String, leave it alone.
-            if (typeDescriptor == TypeDescriptors.get().javaLangString) {
+            // If it's a String, and it is not null or the otherOperandExpression is not null,
+            // leave it alone.
+            if (typeDescriptor == TypeDescriptors.get().javaLangString
+                && (AstUtils.isNonNullString(operandExpression)
+                    || AstUtils.isNonNullString(otherOperandExpression))) {
               return operandExpression;
             }
             // Normally Java would box a primitive but we don't because JS already converts
@@ -50,22 +53,13 @@ public class InsertStringConversionVisitor extends ConversionContextVisitor {
               return operandExpression;
             }
 
-            // At this point we're guaranteed to have in hand a non-string reference type (or
+            // At this point we're guaranteed to have in hand a reference type (or
             // at least a boolean or double primitive that we can treat as a reference type).
             // So use a "String.valueOf()" method call on it.
-            MethodDescriptor toStringMethodDescriptor =
-                MethodDescriptor.create(
-                    true, // static
-                    Visibility.PUBLIC,
-                    TypeDescriptors.get().javaLangString,
-                    "valueOf",
-                    false, // constructor
-                    false, // native
-                    TypeDescriptors.get().javaLangString,
-                    Lists.newArrayList(TypeDescriptors.get().javaLangObject));
-
             return new MethodCall(
-                null, toStringMethodDescriptor, Lists.newArrayList(operandExpression));
+                null,
+                AstUtils.createStringValueOfMethodDescriptor(),
+                Lists.newArrayList(operandExpression));
           }
         });
   }

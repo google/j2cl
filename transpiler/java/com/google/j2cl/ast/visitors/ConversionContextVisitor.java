@@ -97,7 +97,9 @@ public class ConversionContextVisitor extends AbstractRewriter {
     /**
      * Expression is always going to String.
      */
-    public Expression rewriteStringContext(Expression operandExpression) {
+    @SuppressWarnings("unused")
+    public Expression rewriteStringContext(
+        Expression operandExpression, Expression otherOperandExpression) {
       return operandExpression;
     }
 
@@ -142,63 +144,13 @@ public class ConversionContextVisitor extends AbstractRewriter {
 
   @Override
   public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
-    if (splitEnablesBinaryPromotionConversion(binaryExpression)
-        || splitEnablesAssignmentConversion(binaryExpression)) {
+    if (splitEnablesMoreConversions(binaryExpression)) {
       Expression splitExpression = OperatorSideEffectUtils.splitBinaryExpression(binaryExpression);
       splitExpression.accept(this);
       return splitExpression;
     }
 
-    // TODO: find out if what we do here in letting multiple conversion contexts perform changes on
-    // the same binary expression, all in one pass, is the right thing or the wrong thing.
-
-    // binary numeric promotion context
-    if (AstUtils.matchesBinaryNumericPromotionContext(binaryExpression)) {
-      binaryExpression =
-          new BinaryExpression(
-              binaryExpression.getTypeDescriptor(),
-              contextRewriter.rewriteBinaryNumericPromotionContext(
-                  binaryExpression.getLeftOperand(), binaryExpression.getRightOperand()),
-              binaryExpression.getOperator(),
-              contextRewriter.rewriteBinaryNumericPromotionContext(
-                  binaryExpression.getRightOperand(), binaryExpression.getLeftOperand()));
-    }
-
-    // assignment context
-    if (AstUtils.matchesAssignmentContext(binaryExpression.getOperator())) {
-      binaryExpression =
-          new BinaryExpression(
-              binaryExpression.getTypeDescriptor(),
-              binaryExpression.getLeftOperand(),
-              binaryExpression.getOperator(),
-              contextRewriter.rewriteAssignmentContext(
-                  binaryExpression.getLeftOperand().getTypeDescriptor(),
-                  binaryExpression.getRightOperand()));
-    }
-
-    // string context
-    if (AstUtils.matchesStringContext(binaryExpression)) {
-      binaryExpression =
-          new BinaryExpression(
-              binaryExpression.getTypeDescriptor(),
-              contextRewriter.rewriteStringContext(binaryExpression.getLeftOperand()),
-              binaryExpression.getOperator(),
-              contextRewriter.rewriteStringContext(binaryExpression.getRightOperand()));
-    }
-
-    // unary numeric promotion context
-    if (AstUtils.matchesUnaryNumericPromotionContext(binaryExpression)) {
-      binaryExpression =
-          new BinaryExpression(
-              binaryExpression.getTypeDescriptor(),
-              contextRewriter.rewriteUnaryNumericPromotionContext(
-                  binaryExpression.getLeftOperand()),
-              binaryExpression.getOperator(),
-              contextRewriter.rewriteUnaryNumericPromotionContext(
-                  binaryExpression.getRightOperand()));
-    }
-
-    return binaryExpression;
+    return rewriteRegularBinaryExpression(binaryExpression);
   }
 
   @Override
@@ -346,6 +298,49 @@ public class ConversionContextVisitor extends AbstractRewriter {
             variableDeclaration.getInitializer()));
   }
 
+  private BinaryExpression rewriteRegularBinaryExpression(BinaryExpression binaryExpression) {
+    // TODO: find out if what we do here in letting multiple conversion contexts perform changes on
+    // the same binary expression, all in one pass, is the right thing or the wrong thing.
+
+    Expression leftOperand = binaryExpression.getLeftOperand();
+    Expression rightOperand = binaryExpression.getRightOperand();
+    // assignment context
+    if (AstUtils.matchesAssignmentContext(binaryExpression.getOperator())) {
+      rightOperand =
+          contextRewriter.rewriteAssignmentContext(leftOperand.getTypeDescriptor(), rightOperand);
+    }
+
+    // binary numeric promotion context
+    if (AstUtils.matchesBinaryNumericPromotionContext(binaryExpression)) {
+      leftOperand = contextRewriter.rewriteBinaryNumericPromotionContext(leftOperand, rightOperand);
+      rightOperand =
+          contextRewriter.rewriteBinaryNumericPromotionContext(rightOperand, leftOperand);
+    }
+
+    // string context
+    if (AstUtils.matchesStringContext(binaryExpression)) {
+      leftOperand = contextRewriter.rewriteStringContext(leftOperand, rightOperand);
+      rightOperand = contextRewriter.rewriteStringContext(rightOperand, leftOperand);
+    }
+
+    // unary numeric promotion context
+    if (AstUtils.matchesUnaryNumericPromotionContext(binaryExpression)) {
+      leftOperand = contextRewriter.rewriteUnaryNumericPromotionContext(leftOperand);
+      rightOperand = contextRewriter.rewriteUnaryNumericPromotionContext(rightOperand);
+    }
+
+    if (leftOperand != binaryExpression.getLeftOperand()
+        || rightOperand != binaryExpression.getRightOperand()) {
+      binaryExpression =
+          new BinaryExpression(
+              binaryExpression.getTypeDescriptor(),
+              leftOperand,
+              binaryExpression.getOperator(),
+              rightOperand);
+    }
+    return binaryExpression;
+  }
+
   private List<Expression> rewriteMethodInvocationContextArguments(Call call) {
     ImmutableList<TypeDescriptor> parameterTypeDescriptors =
         call.getTarget().getParameterTypeDescriptors();
@@ -363,7 +358,7 @@ public class ConversionContextVisitor extends AbstractRewriter {
     return newArgumentExpressions;
   }
 
-  private boolean splitEnablesAssignmentConversion(BinaryExpression binaryExpression) {
+  private boolean splitEnablesMoreConversions(BinaryExpression binaryExpression) {
     if (!binaryExpression.getOperator().isCompoundAssignment()) {
       return false;
     }
@@ -373,24 +368,7 @@ public class ConversionContextVisitor extends AbstractRewriter {
             binaryExpression.getLeftOperand(),
             binaryExpression.getOperator().withoutAssignment(),
             binaryExpression.getRightOperand());
-    return contextRewriter.rewriteAssignmentContext(
-            binaryExpression.getLeftOperand().getTypeDescriptor(), numericRightOperand)
-        != numericRightOperand;
-  }
-
-  private boolean splitEnablesBinaryPromotionConversion(BinaryExpression binaryExpression) {
-    if (!binaryExpression.getOperator().isCompoundAssignment()) {
-      return false;
-    }
-    if (!AstUtils.matchesBinaryNumericPromotionContext(
-        binaryExpression.getLeftOperand(),
-        binaryExpression.getOperator().withoutAssignment(),
-        binaryExpression.getRightOperand())) {
-      return false;
-    }
-    return contextRewriter.rewriteBinaryNumericPromotionContext(
-            binaryExpression.getLeftOperand(), binaryExpression.getRightOperand())
-        != binaryExpression.getLeftOperand();
+    return rewriteRegularBinaryExpression(numericRightOperand) != numericRightOperand;
   }
 
   private boolean splitEnablesUnaryPromotionConversion(PostfixExpression postfixExpression) {

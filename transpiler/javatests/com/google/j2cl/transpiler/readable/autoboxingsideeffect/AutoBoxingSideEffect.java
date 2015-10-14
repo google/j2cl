@@ -20,6 +20,7 @@ public class AutoBoxingSideEffect {
     c += i;
     foo += i;
     getWithSideEffect().foo += i;
+    foo <<= i;
 
     // Prefix expressions;
     Integer e = ++c;
