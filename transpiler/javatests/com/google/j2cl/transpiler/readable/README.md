@@ -65,7 +65,6 @@ are copyright and licensed as follows:
 - enumoptimization
 - finalfield (readable JsDoc and no static setter)
 - identity equality (double equality / triple equality, null / undefined)
-- implicitconversions (String + operator)
 - interfacedefaultmethod
 - jsinteropclass
 - jsinteropdispatch
@@ -80,6 +79,4 @@ are copyright and licensed as follows:
 - qualifiedsupermethodcall
 - shorterfieldmangling (for fields in final classes, like enums)
 - simpleenum
-- stringconversion(nullstringinstances)
 - string constructor needs to be implemented
-- string conversion Objects<->String circularity in foreachstatement

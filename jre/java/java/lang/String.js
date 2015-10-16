@@ -9,6 +9,7 @@ goog.module('gen.java.lang.String');
 let _Class = goog.require('gen.java.lang.Class');
 let _$Util = goog.require('nativebootstrap.Util');
 let _Object = goog.require('gen.java.lang.Object');
+let _$Objects = goog.require('vmbootstrap.Objects');
 
 
 // Re-exports the implementation.
