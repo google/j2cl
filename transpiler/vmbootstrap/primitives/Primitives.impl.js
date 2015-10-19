@@ -18,7 +18,7 @@ class Primitives {
    *
    * @param {number} instance
    * @return {number}
-   * @private
+   * @public
    */
   static $toByte(instance) {
     return instance << 24 >> 24;
@@ -29,7 +29,7 @@ class Primitives {
    *
    * @param {number} instance
    * @return {number}
-   * @private
+   * @public
    */
   static $toChar(instance) {
     return instance & 0xFFFF;
@@ -40,7 +40,7 @@ class Primitives {
    *
    * @param {number} instance
    * @return {number}
-   * @private
+   * @public
    */
   static $toShort(instance) {
     return instance << 16 >> 16;
@@ -51,7 +51,7 @@ class Primitives {
    *
    * @param {number} instance
    * @return {number}
-   * @private
+   * @public
    */
   static $toInt(instance) {
     return instance | 0;

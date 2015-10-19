@@ -124,7 +124,7 @@ public class TypeDescriptors {
   }
 
   /**
-   * Converts a type into the correct type that should result from an operation on this type.
+   * Converts a type into the correct type that should result from an operation on it.
    * Returned values are always primitive or String.
    */
   public static TypeDescriptor asOperatorReturnType(TypeDescriptor typeDescriptor) {
@@ -159,6 +159,12 @@ public class TypeDescriptors {
 
   public static boolean isPrimitiveBooleanOrDouble(TypeDescriptor typeDescriptor) {
     return typeDescriptor == get().primitiveBoolean || typeDescriptor == get().primitiveDouble;
+  }
+
+  public static boolean isNumericPrimitive(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.isPrimitive()
+        && typeDescriptor != get().primitiveBoolean
+        && typeDescriptor != get().primitiveVoid;
   }
 
   public static boolean isBoxedOrPrimitiveType(TypeDescriptor typeDescriptor) {

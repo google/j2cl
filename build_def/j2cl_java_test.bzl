@@ -45,6 +45,7 @@ J2CL_JAVA_TEST_CLOSURE_DEFS = [
     "--pretty_print",
     "--jscomp_off=lateProvide",
     "--jscomp_off=extraRequire",
+    "--jscomp_off=transitionalSuspiciousCodeWarnings",
     "--jscomp_off=uselessCode",
 ]
 

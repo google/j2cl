@@ -134,6 +134,14 @@ public class Main {
     assert (d * mi) == ((double) d * (double) mi);
     assert (d * ml) == ((double) d * (double) ml);
     assert (d * mf) == ((double) d * (double) mf);
+
+    // And with equality operators.
+    assert i == l - 1L;
+    assert i != l;
+    assert i < l;
+    assert !(i > l);
+    assert i <= l;
+    assert !(i >= l);
   }
 
   private static void testCast() {

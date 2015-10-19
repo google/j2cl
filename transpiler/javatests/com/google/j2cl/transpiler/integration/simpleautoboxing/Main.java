@@ -176,8 +176,13 @@ public class Main {
     Integer i3 = new Integer(4);
     int sumI = i1 + i2;
     Integer boxSumI = i1 + i2;
-    assert (sumI == 300);
-    assert (boxSumI.intValue() == 300);
+    assert sumI == 300;
+    assert boxSumI.intValue() == 300;
+    assert boxSumI != 0;
+    assert boxSumI < 400;
+    assert boxSumI > 200;
+    assert boxSumI <= 300;
+    assert boxSumI >= 300;
     int shiftedI = i2 << i3;
     assert shiftedI == 3200;
 

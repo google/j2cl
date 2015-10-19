@@ -22,6 +22,7 @@ import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
+import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Call;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
@@ -38,6 +39,7 @@ import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.SwitchStatement;
 import com.google.j2cl.ast.TernaryExpression;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 
 import java.util.ArrayList;
@@ -145,9 +147,7 @@ public class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
     if (splitEnablesMoreConversions(binaryExpression)) {
-      Expression splitExpression = OperatorSideEffectUtils.splitBinaryExpression(binaryExpression);
-      splitExpression.accept(this);
-      return splitExpression;
+      return OperatorSideEffectUtils.splitBinaryExpression(binaryExpression).accept(this);
     }
 
     return rewriteRegularBinaryExpression(binaryExpression);
@@ -208,13 +208,9 @@ public class ConversionContextVisitor extends AbstractRewriter {
   }
 
   @Override
-  // TODO: check assignment context as well for compound assignment operators?
   public Node rewritePostfixExpression(PostfixExpression postfixExpression) {
-    if (splitEnablesUnaryPromotionConversion(postfixExpression)) {
-      Expression splitExpression =
-          OperatorSideEffectUtils.splitPostfixExpression(postfixExpression);
-      splitExpression.accept(this);
-      return splitExpression;
+    if (splitEnablesMoreConversions(postfixExpression)) {
+      return OperatorSideEffectUtils.splitPostfixExpression(postfixExpression).accept(this);
     }
 
     // unary numeric promotion context
@@ -229,12 +225,9 @@ public class ConversionContextVisitor extends AbstractRewriter {
   }
 
   @Override
-  // TODO: check assignment context as well for compound assignment operators?
   public Node rewritePrefixExpression(PrefixExpression prefixExpression) {
-    if (splitEnablesUnaryPromotionConversion(prefixExpression)) {
-      Expression splitExpression = OperatorSideEffectUtils.splitPrefixExpression(prefixExpression);
-      splitExpression.accept(this);
-      return splitExpression;
+    if (splitEnablesMoreConversions(prefixExpression)) {
+      return OperatorSideEffectUtils.splitPrefixExpression(prefixExpression).accept(this);
     }
 
     // unary numeric promotion context
@@ -362,25 +355,56 @@ public class ConversionContextVisitor extends AbstractRewriter {
     if (!binaryExpression.getOperator().isCompoundAssignment()) {
       return false;
     }
-    BinaryExpression numericRightOperand =
+    BinaryExpression assignmentRightOperand =
         new BinaryExpression(
-            binaryExpression.getTypeDescriptor(),
+            binaryExpression.getTypeDescriptor(), binaryExpression.getLeftOperand(),
+            binaryExpression.getOperator().withoutAssignment(), binaryExpression.getRightOperand());
+    BinaryExpression assignmentExpression =
+        new BinaryExpression(
+            TypeDescriptors.asOperatorReturnType(binaryExpression.getTypeDescriptor()),
             binaryExpression.getLeftOperand(),
-            binaryExpression.getOperator().withoutAssignment(),
-            binaryExpression.getRightOperand());
-    return rewriteRegularBinaryExpression(numericRightOperand) != numericRightOperand;
+            BinaryOperator.ASSIGN,
+            assignmentRightOperand);
+    return rewriteRegularBinaryExpression(assignmentExpression) != assignmentExpression
+        || rewriteRegularBinaryExpression(assignmentRightOperand) != assignmentRightOperand;
   }
 
-  private boolean splitEnablesUnaryPromotionConversion(PostfixExpression postfixExpression) {
-    return AstUtils.matchesUnaryNumericPromotionContext(postfixExpression.getTypeDescriptor())
-        && contextRewriter.rewriteUnaryNumericPromotionContext(postfixExpression.getOperand())
-            != postfixExpression.getOperand();
+  private boolean splitEnablesMoreConversions(PostfixExpression postfixExpression) {
+    Expression operand = postfixExpression.getOperand();
+    BinaryExpression assignmentRightOperand =
+        new BinaryExpression(
+            postfixExpression.getTypeDescriptor(),
+            operand,
+            postfixExpression.getOperator().withoutSideEffect(),
+            OperatorSideEffectUtils.createLiteralOne(operand.getTypeDescriptor()));
+    BinaryExpression assignmentExpression =
+        new BinaryExpression(
+            TypeDescriptors.asOperatorReturnType(postfixExpression.getTypeDescriptor()),
+            operand,
+            BinaryOperator.ASSIGN,
+            assignmentRightOperand);
+    return rewriteRegularBinaryExpression(assignmentExpression) != assignmentExpression
+        || rewriteRegularBinaryExpression(assignmentRightOperand) != assignmentRightOperand;
   }
 
-  private boolean splitEnablesUnaryPromotionConversion(PrefixExpression prefixExpression) {
-    return prefixExpression.getOperator().hasSideEffect()
-        && AstUtils.matchesUnaryNumericPromotionContext(prefixExpression.getTypeDescriptor())
-        && contextRewriter.rewriteUnaryNumericPromotionContext(prefixExpression.getOperand())
-            != prefixExpression.getOperand();
+  private boolean splitEnablesMoreConversions(PrefixExpression prefixExpression) {
+    if (!prefixExpression.getOperator().hasSideEffect()) {
+      return false;
+    }
+    Expression operand = prefixExpression.getOperand();
+    BinaryExpression assignmentRightOperand =
+        new BinaryExpression(
+            prefixExpression.getTypeDescriptor(),
+            operand,
+            prefixExpression.getOperator().withoutSideEffect(),
+            OperatorSideEffectUtils.createLiteralOne(operand.getTypeDescriptor()));
+    BinaryExpression assignmentExpression =
+        new BinaryExpression(
+            TypeDescriptors.asOperatorReturnType(prefixExpression.getTypeDescriptor()),
+            operand,
+            BinaryOperator.ASSIGN,
+            assignmentRightOperand);
+    return rewriteRegularBinaryExpression(assignmentExpression) != assignmentExpression
+        || rewriteRegularBinaryExpression(assignmentRightOperand) != assignmentRightOperand;
   }
 }

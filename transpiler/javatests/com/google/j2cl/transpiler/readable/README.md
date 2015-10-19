@@ -48,6 +48,7 @@ are copyright and licensed as follows:
     and each Comparable.$markImplementor(...) was not stripped, even though
     they are not called. See cl/103587701 for a repro case and a deeper
     investigation of the cause.
+- Investigate the new 'implicitparenthesis' build log warning.
 
 ## Tracking Closure warning issues
 - https://b.corp.google.com/hotlists/269212
@@ -57,7 +58,6 @@ are copyright and licensed as follows:
 ## TODOs
 - anonymousclassforfunctionalinterface (transpiled to function)
 - arithmetic exception for integers (e.g. divide by zero / mod by zero)
-- arithmetic underflow/overflow
 - catchjsexception
 - devirtualized classes should skip Object trampoline when possible:
     string.toString()
@@ -74,7 +74,6 @@ are copyright and licensed as follows:
 - nativefunction + provided Foo.native.js
 - objectmethods
 - packageclasscollision
-- primitiveoverflow
 - private static clinit optimization
 - qualifiedsupermethodcall
 - shorterfieldmangling (for fields in final classes, like enums)

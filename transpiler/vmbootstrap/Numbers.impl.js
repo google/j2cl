@@ -207,7 +207,7 @@ Numbers.$q = null;
 
 /**
  * Used to store pre-modified value of a boxed object in a postfix expression.
- * @public {Number | Character | $Long}
+ * @public {number | Number | Character | $Long}
  */
 Numbers.$v = null;
 

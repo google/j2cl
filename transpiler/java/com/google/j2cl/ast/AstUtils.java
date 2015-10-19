@@ -574,6 +574,10 @@ public class AstUtils {
       case REMAINDER:
       case PLUS:
       case MINUS:
+      case LESS:
+      case GREATER:
+      case LESS_EQUALS:
+      case GREATER_EQUALS:
       case EQUALS:
       case NOT_EQUALS:
       case XOR:

@@ -123,7 +123,7 @@ public class InsertWideningPrimitiveConversionVisitor extends ConversionContextV
             "$widen%sTo%s",
             AstUtils.toProperCase(fromTypeDescriptor.getSimpleName()),
             AstUtils.toProperCase(toTypeDescriptor.getSimpleName()));
-    MethodDescriptor castToMethodDescriptor =
+    MethodDescriptor widenMethodDescriptor =
         MethodDescriptor.createRaw(
             true,
             Visibility.PUBLIC,
@@ -132,6 +132,6 @@ public class InsertWideningPrimitiveConversionVisitor extends ConversionContextV
             Lists.newArrayList(fromTypeDescriptor),
             toTypeDescriptor);
     // Primitives.$widenAToB(expr);
-    return new MethodCall(null, castToMethodDescriptor, Arrays.asList(subjectExpression));
+    return new MethodCall(null, widenMethodDescriptor, Arrays.asList(subjectExpression));
   }
 }

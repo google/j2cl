@@ -85,21 +85,21 @@ public class InsertNarrowingPrimitiveConversionVisitor extends ConversionContext
               return expression;
             }
 
-            String castMethodName =
+            String narrowMethodName =
                 String.format(
                     "$narrow%sTo%s",
                     AstUtils.toProperCase(fromTypeDescriptor.getSimpleName()),
                     AstUtils.toProperCase(toTypeDescriptor.getSimpleName()));
-            MethodDescriptor castToMethodDescriptor =
+            MethodDescriptor narrowMethodDescriptor =
                 MethodDescriptor.createRaw(
                     true,
                     Visibility.PUBLIC,
                     TypeDescriptors.VM_PRIMITIVES_TYPE_DESCRIPTOR,
-                    castMethodName,
+                    narrowMethodName,
                     Lists.newArrayList(fromTypeDescriptor),
                     toTypeDescriptor);
             // Primitives.$narrowAToB(expr);
-            return new MethodCall(null, castToMethodDescriptor, Arrays.asList(expression));
+            return new MethodCall(null, narrowMethodDescriptor, Arrays.asList(expression));
           }
         });
   }

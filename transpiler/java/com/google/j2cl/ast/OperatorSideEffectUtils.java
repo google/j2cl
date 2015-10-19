@@ -164,7 +164,7 @@ public class OperatorSideEffectUtils {
   /**
    * Returns number literal with value 1.
    */
-  private static NumberLiteral createLiteralOne(TypeDescriptor typeDescriptor) {
+  public static NumberLiteral createLiteralOne(TypeDescriptor typeDescriptor) {
     TypeDescriptor primitiveTypeDescriptor =
         TypeDescriptors.isBoxedType(typeDescriptor)
             ? TypeDescriptors.getPrimitiveTypeFromBoxType(typeDescriptor)
