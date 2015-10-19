@@ -41,8 +41,9 @@ CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
 ]
 
 
-def readable_example(name, srcs):
+def readable_example(name, srcs, native_sources_zips=[]):
   """Macro that confirms the JS compilability of some transpiled Java."""
+
   # Transpile the Java files.
   j2cl_java_library(
       name=name,
@@ -51,6 +52,7 @@ def readable_example(name, srcs):
         "-source 8",
         "-target 8"
       ],
+      native_sources_zips=native_sources_zips,
   )
 
   # Verify compilability of generated JS.

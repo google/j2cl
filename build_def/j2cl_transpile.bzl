@@ -27,12 +27,12 @@ j2cl_transpile directly.
 
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_root")
 
-
 def _impl(ctx):
   """Implementation for j2cl_transpile"""
   separator = ctx.configuration.host_path_separator
   java_files = ctx.files.srcs  # java files that need to be compiled
   super_java_files = ctx.files.super_srcs  # java files whose js to ignore
+  js_native_zip_files = ctx.files.native_sources_zips
   java_deps = ctx.files.java_deps
   java_deps_paths = []
   java_files_paths = []
@@ -63,12 +63,19 @@ def _impl(ctx):
   if len(super_java_files_paths) > 0:
     compiler_args += ["-superfiles", separator.join(super_java_files_paths)]
 
+  # Add the native zip file paths
+  js_native_zip_files_paths = [js_native_zip_file.path for js_native_zip_file
+                               in js_native_zip_files]
+  if js_native_zip_files_paths:
+    joined_paths = separator.join(js_native_zip_files_paths)
+    compiler_args += ["-nativesourcezip", joined_paths]
+
   # The transpiler expects each java file path as a separate argument.
   compiler_args += java_files_paths
 
   js_zip_artifact = ctx.new_file(js_zip_name)
   ctx.action(
-      inputs=java_files + java_deps,
+      inputs=java_files + java_deps + js_native_zip_files,
       outputs=[js_zip_artifact],
       executable=ctx.executable.compiler,
       arguments=compiler_args,
@@ -100,6 +107,9 @@ j2cl_transpile = rule(
         "super_srcs": attr.label_list(
             allow_files=FileType([".java"]),
         ),
+        "native_sources_zips": attr.label_list(
+            allow_files=FileType([".zip"]),
+        )
     },
     implementation=_impl,
 )

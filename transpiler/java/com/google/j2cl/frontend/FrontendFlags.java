@@ -57,6 +57,13 @@ public class FrontendFlags {
     usage = "Specify where to find input source files"
   )
   protected String sourcepath = "";
+  
+  @Option(
+    name = "-nativesourcezip",
+    metaVar = "<file>",
+    usage = "Specify where to find zip file containing js impl files for native methods."
+  )
+  protected String nativesourceszippath = "";
 
   /**
    * Option that allows users to swap out the location of the JRE library.

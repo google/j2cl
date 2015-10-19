@@ -98,17 +98,25 @@ def replace_transpiled_js(target_names):
     run_cmd_get_output(
         ["unzip", "-o", "-d", JAVA_DIR + "/", zip_file_path])
 
-  run_cmd_get_output(
-      ["find", EXAMPLES_DIR, "-name", "*.js", "-exec",
-       "clang-format", "-i", "{}", "+"])
+  # Ignore files under natives_sources/ since these are not generated.
+  find_command_js_sources = ["find", EXAMPLES_DIR, "-name", "*.js",
+                             "-not", "-path", "**/native_sources/*"]
 
-  run_cmd_get_output(
-      ["find", EXAMPLES_DIR, "-name", "*.js.txt", "-exec",
-       "rm", "{}", ";"])
+  find_command_js_test_sources = ["find", EXAMPLES_DIR, "-name", "*.js.txt",
+                                  "-not", "-path", "**/native_sources/*"]
 
+  # Format .js files
   run_cmd_get_output(
-      ["find", EXAMPLES_DIR, "-name", "*.js", "-exec",
-       "mv", "{}", "{}.txt", ";"])
+      find_command_js_sources +
+      ["-exec", "clang-format", "-i", "{}", "+"])
+
+  # Remove the old .js.txt files (results from the last run)
+  run_cmd_get_output(
+      find_command_js_test_sources + ["-exec", "rm", "{}", ";"])
+
+  # Move the newly unzipped .js => .js.txt
+  run_cmd_get_output(
+      find_command_js_sources + ["-exec", "mv", "{}", "{}.txt", ";"])
 
 
 def gather_closure_warnings():
@@ -117,6 +125,12 @@ def gather_closure_warnings():
   Deletes just part of Blaze's cache so that it is forced to rebuild just the
   js_binary targets. The resulting build logs are split and saved.
   """
+
+  # Delete the old build.log files before we regenerate them.
+  find_command_build_logs = ["find", EXAMPLES_DIR, "-name", "build.log"]
+  run_cmd_get_output(
+      find_command_build_logs + ["-exec", "rm", "{}", ";"])
+
   run_cmd_get_output(["rm", "-fr"] + get_js_binary_file_paths())
 
   build_logs = run_cmd_get_output(

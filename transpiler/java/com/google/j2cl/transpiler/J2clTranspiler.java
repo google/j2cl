@@ -14,7 +14,6 @@
 package com.google.j2cl.transpiler;
 
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.visitors.ControlStatementFormatter;
 import com.google.j2cl.ast.visitors.CreateDefaultConstructorsVisitor;
 import com.google.j2cl.ast.visitors.FixAnonymousClassConstructorsVisitor;
@@ -35,20 +34,14 @@ import com.google.j2cl.ast.visitors.NormalizeNestedClassConstructorsVisitor;
 import com.google.j2cl.ast.visitors.RemoveUnusedMultiExpressionReturnValues;
 import com.google.j2cl.ast.visitors.SplitCompoundLongAssignmentsVisitor;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCountsVisitor;
-import com.google.j2cl.common.VelocityUtil;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.frontend.CompilationUnitBuilder;
 import com.google.j2cl.frontend.FrontendFlags;
 import com.google.j2cl.frontend.FrontendOptions;
 import com.google.j2cl.frontend.JdtParser;
-import com.google.j2cl.generator.GeneratorUtils;
-import com.google.j2cl.generator.JavaScriptHeaderGenerator;
-import com.google.j2cl.generator.JavaScriptImplGenerator;
-
-import org.apache.velocity.app.VelocityEngine;
+import com.google.j2cl.generator.JavaScriptGeneratorStage;
 
 import java.nio.charset.Charset;
-import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -61,7 +54,6 @@ public class J2clTranspiler {
   private final String[] args;
   private final Errors errors = new Errors();
   private FrontendOptions options;
-  private final VelocityEngine velocityEngine = VelocityUtil.createEngine();
 
   private J2clTranspiler(String[] args) {
     this.args = args;
@@ -74,7 +66,7 @@ public class J2clTranspiler {
     loadOptions();
     List<CompilationUnit> j2clUnits = convertUnits(createJdtUnits());
     normalizeUnits(j2clUnits);
-    generateJsSources(j2clUnits);
+    generateJavaScriptSources(j2clUnits);
     generateSourceMaps(j2clUnits);
   }
 
@@ -143,42 +135,24 @@ public class J2clTranspiler {
     VerifyParamAndArgCountsVisitor.applyTo(j2clUnit);
   }
 
-  private void generateJsSources(List<CompilationUnit> j2clCompilationUnits) {
-    // The parameters may be changed after the previous passes are implemented.
+  private void generateJavaScriptSources(List<CompilationUnit> j2clCompilationUnits) {
     Charset charset = Charset.forName(options.getEncoding());
 
     Set<String> superSourceFiles = new HashSet<>();
     superSourceFiles.addAll(options.getSuperSourceFiles());
 
-    for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
-      if (superSourceFiles.contains(j2clCompilationUnit.getFilePath())) {
-        continue;
-      }
+    Set<String> nativeJavaScriptFileZipPaths = new HashSet<>();
+    nativeJavaScriptFileZipPaths.addAll(options.getNativeSourceZipEntries());
 
-      for (JavaType javaType : j2clCompilationUnit.getTypes()) {
-        JavaScriptImplGenerator jsImplGenerator =
-            new JavaScriptImplGenerator(errors, javaType, velocityEngine);
-        Path absolutePathForImpl =
-            GeneratorUtils.getAbsolutePath(
-                options.getOutputFileSystem(),
-                options.getOutput(),
-                GeneratorUtils.getRelativePath(javaType),
-                jsImplGenerator.getSuffix());
-        jsImplGenerator.writeToFile(absolutePathForImpl, charset);
-
-        JavaScriptHeaderGenerator jsHeaderGenerator =
-            new JavaScriptHeaderGenerator(errors, javaType, velocityEngine);
-        Path absolutePathForHeader =
-            GeneratorUtils.getAbsolutePath(
-                options.getOutputFileSystem(),
-                options.getOutput(),
-                GeneratorUtils.getRelativePath(javaType),
-                jsHeaderGenerator.getSuffix());
-        jsHeaderGenerator.writeToFile(absolutePathForHeader, charset);
-      }
-    }
-
-    options.maybeCloseFileSystem();
+    new JavaScriptGeneratorStage(
+            charset,
+            superSourceFiles,
+            nativeJavaScriptFileZipPaths,
+            options.getOutputFileSystem(),
+            options.getOutput(),
+            errors)
+        .generateJavaScriptSources(j2clCompilationUnits);
+    maybeExitGracefully();
   }
 
   private void generateSourceMaps(@SuppressWarnings("unused") List<CompilationUnit> j2clUnits) {

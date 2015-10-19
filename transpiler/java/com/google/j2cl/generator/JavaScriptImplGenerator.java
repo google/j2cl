@@ -15,15 +15,18 @@
  */
 package com.google.j2cl.generator;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.errors.Errors;
 
+import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
 /**
  * Generates JavaScript source impl files.
  */
 public class JavaScriptImplGenerator extends JavaScriptGenerator {
+  private String nativeSource;
 
   public JavaScriptImplGenerator(Errors errors, JavaType javaType, VelocityEngine velocityEngine) {
     super(errors, javaType, velocityEngine);
@@ -37,5 +40,17 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   @Override
   public String getSuffix() {
     return ".impl.js";
+  }
+
+  @Override
+  protected VelocityContext createContext() {
+    VelocityContext context = super.createContext();
+    context.put("nativeSource", this.nativeSource);
+    return context;
+  }
+
+  public void setNativeSource(String nativeSource) {
+    Preconditions.checkArgument(nativeSource != null);
+    this.nativeSource = nativeSource;
   }
 }

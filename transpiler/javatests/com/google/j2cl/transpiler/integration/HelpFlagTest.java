@@ -33,5 +33,6 @@ public class HelpFlagTest extends IntegrationTestCase {
     assertLogContainsSnippet(transpileResult.outputLines, "-h (-help)");
     assertLogContainsSnippet(transpileResult.outputLines, "-source <release>");
     assertLogContainsSnippet(transpileResult.outputLines, "-sourcepath <file>");
+    assertLogContainsSnippet(transpileResult.outputLines, "-nativesourcezip <file>");
   }
 }

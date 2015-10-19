@@ -86,22 +86,12 @@ public class JsniConverter {
   }
 
   public void convert(File[] javaFiles) {
-    Multimap<String, JsniMethod> jsniMethodsByTypes = collectJsniData(javaFiles);
-
-    new NativeJsFilesWriter(outputFile).write(jsniMethodsByTypes);
-  }
-
-  private Multimap<String, JsniMethod> collectJsniData(File[] javaFiles) {
     Multimap<String, JsniMethod> jsniMethodsByTypes = ArrayListMultimap.create();
-
     for (File file : javaFiles) {
       log("Converting %s", file);
-
       NativeMethodParser parser = new NativeMethodParser();
-
       jsniMethodsByTypes.putAll(parser.parse(file));
     }
-
-    return jsniMethodsByTypes;
+    new NativeJsFilesWriter(outputFile).write(jsniMethodsByTypes);
   }
 }

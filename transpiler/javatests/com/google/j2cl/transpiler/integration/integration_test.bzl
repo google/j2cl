@@ -49,7 +49,7 @@ CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
 ]
 
 
-def integration_test(name, srcs, deps=[], defs=[]):
+def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[]):
   """Macro that turns Java files into integration test targets."""
   # figure out the current location
   java_root_path = get_java_root(PACKAGE_NAME)
@@ -63,7 +63,8 @@ def integration_test(name, srcs, deps=[], defs=[]):
       javacopts=[
         "-source 8",
         "-target 8"
-      ]
+      ],
+      native_sources_zips=native_sources_zips
   )
 
   # blaze build :optimized_js

@@ -48,6 +48,13 @@ java_test(
 )
 
 java_test(
+    name = "NativeSourcesErrorTest",
+    srcs = ["NativeSourcesErrorTest.java"],
+    data = glob(["nativesourceserror/**/*"]) + ["//jre/java:libJavaJre.jar"],
+    deps = [":IntegrationTestCase"],
+)
+
+java_test(
     name = "OutputTest",
     srcs = ["OutputTest.java"],
     data = glob(["output/**/*"]) + ["//jre/java:libJavaJre.jar"],

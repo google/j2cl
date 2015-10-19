@@ -44,6 +44,7 @@ public class FrontendOptions {
   private List<String> classpathEntries;
   private List<String> sourcepathEntries;
   private List<String> bootclassPathEntries;
+  private List<String> nativesourcezipEntries;
   private String output;
   private String encoding;
   private String sourceVersion;
@@ -68,6 +69,7 @@ public class FrontendOptions {
     setClasspathEntries(flags.classpath);
     setSourcepathEntries(flags.sourcepath);
     setBootclassPathEntries(flags.bootclasspath);
+    setNativeSourceZipEntries(flags.nativesourceszippath);
     setOutput(flags.output);
     setSourceFiles(flags.files);
     setSuperSourceFiles(flags.superfiles);
@@ -79,20 +81,12 @@ public class FrontendOptions {
     return this.classpathEntries;
   }
 
-  public void setClasspathEntries(List<String> classpathEntries) {
-    this.classpathEntries = classpathEntries;
-  }
-
   public void setClasspathEntries(String classpath) {
     this.classpathEntries = getPathEntries(classpath);
   }
 
   public List<String> getSourcepathEntries() {
     return this.sourcepathEntries;
-  }
-
-  public void setSourcepathEntries(List<String> sourcepathEntries) {
-    this.sourcepathEntries = sourcepathEntries;
   }
 
   public void setSourcepathEntries(String sourcepath) {
@@ -103,12 +97,31 @@ public class FrontendOptions {
     return this.bootclassPathEntries;
   }
 
-  public void setBootclassPathEntries(List<String> bootclassPathEntries) {
-    this.bootclassPathEntries = bootclassPathEntries;
-  }
-
   public void setBootclassPathEntries(String bootclassPath) {
     this.bootclassPathEntries = getPathEntries(bootclassPath);
+  }
+
+  public List<String> getNativeSourceZipEntries() {
+    return this.nativesourcezipEntries;
+  }
+
+  public void setNativeSourceZipEntries(String zipFilePath) {
+    List<String> zipFilePaths =
+        Splitter.on(File.pathSeparator).omitEmptyStrings().splitToList(zipFilePath);
+    if (checkNativeSourceZipEntries(zipFilePaths)) {
+      this.nativesourcezipEntries = zipFilePaths;
+    }
+  }
+
+  private boolean checkNativeSourceZipEntries(List<String> zipFilePaths) {
+    for (String path : zipFilePaths) {
+      File file = new File(path);
+      if (!file.exists()) {
+        errors.error(Errors.Error.ERR_FILE_NOT_FOUND, path);
+        return false;
+      }
+    }
+    return true;
   }
 
   public String getOutput() {
@@ -184,25 +197,25 @@ public class FrontendOptions {
     return this.sourceFilePaths;
   }
 
-  public List<String> getSuperSourceFiles() {
-    return this.superSourceFilePaths;
-  }
-
   public void setSourceFiles(List<String> sourceFiles) {
-    if (checkSourceFiles(sourceFiles)) {
+    if (checkJavaSourceFiles(sourceFiles)) {
       this.sourceFilePaths = sourceFiles;
     }
+  }
+
+  public List<String> getSuperSourceFiles() {
+    return this.superSourceFilePaths;
   }
 
   public void setSuperSourceFiles(String superSourceFiles) {
     List<String> superSourceFilePaths =
         Splitter.on(File.pathSeparator).omitEmptyStrings().splitToList(superSourceFiles);
-    if (checkSourceFiles(superSourceFilePaths)) {
+    if (checkJavaSourceFiles(superSourceFilePaths)) {
       this.superSourceFilePaths = superSourceFilePaths;
     }
   }
 
-  private boolean checkSourceFiles(List<String> sourceFiles) {
+  private boolean checkJavaSourceFiles(List<String> sourceFiles) {
     for (String sourceFile : sourceFiles) {
       if (sourceFile.endsWith(".java")) {
         File file = new File(sourceFile);
@@ -249,15 +262,5 @@ public class FrontendOptions {
       }
     }
     return entries;
-  }
-
-  public void maybeCloseFileSystem() {
-    if (outputFileSystem instanceof com.sun.nio.zipfs.ZipFileSystem) {
-      try {
-        outputFileSystem.close();
-      } catch (IOException e) {
-        errors.error(Errors.Error.ERR_CANNOT_CLOSE_ZIP);
-      }
-    }
   }
 }

@@ -37,6 +37,8 @@ public class Errors {
     ERR_OUTPUT_LOCATION("-output location must be a directory or .zip file"),
     ERR_CANNOT_OPEN_ZIP("cannot open zip"),
     ERR_CANNOT_CLOSE_ZIP("cannot close zip"),
+    ERR_NATIVE_JAVA_SOURCE_NO_MATCH("cannot find matching native file"),
+    ERR_NATIVE_UNUSED_NATIVE_SOURCE("native JavaScript file not used"),
     ERR_ERROR("error"); // used for customized error message.
     private String errorMessage;
 

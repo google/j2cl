@@ -48,6 +48,7 @@ are copyright and licensed as follows:
     and each Comparable.$markImplementor(...) was not stripped, even though
     they are not called. See cl/103587701 for a repro case and a deeper
     investigation of the cause.
+- fix TODO in JavaScriptGeneratorStage.
 - Investigate the new 'implicitparenthesis' build log warning.
 
 ## Tracking Closure warning issues
@@ -71,7 +72,6 @@ are copyright and licensed as follows:
 - jsinteropinterface
 - localvariablejsdoc
 - methodreferences
-- nativefunction + provided Foo.native.js
 - objectmethods
 - packageclasscollision
 - private static clinit optimization

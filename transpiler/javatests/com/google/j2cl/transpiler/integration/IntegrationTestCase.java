@@ -13,7 +13,6 @@
  */
 package com.google.j2cl.transpiler.integration;
 
-import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -30,6 +29,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -159,7 +159,7 @@ public class IntegrationTestCase extends TestCase {
       public void run() {
         String line;
         try (BufferedReader reader =
-                new BufferedReader(new InputStreamReader(inputStream, Charsets.UTF_8));
+                new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
             PrintStream formattedOutput = new PrintStream(outputStream)) {
           while ((line = reader.readLine()) != null) {
             logLines.add(line);

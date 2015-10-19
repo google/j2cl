@@ -20,7 +20,7 @@ load("/third_party/java_src/j2cl/build_def/j2cl_transpile", "j2cl_transpile")
 load("/third_party/java_src/j2cl/build_def/js_import", "js_import")
 
 
-def j2cl_java_library(add_jre_dep=True, super_srcs=[], **kwargs):
+def j2cl_java_library(add_jre_dep=True, super_srcs=[], native_sources_zips=[], **kwargs):
   """A macro that emits j2cl_transpile, java_library and js_library rules.
 
   Most callers will implicitly depend on the JRE and so 'add_jre_dep' should
@@ -57,6 +57,7 @@ def j2cl_java_library(add_jre_dep=True, super_srcs=[], **kwargs):
       java_deps=java_deps,
       super_srcs=super_srcs,
       testonly=testonly,
+      native_sources_zips=native_sources_zips
   )
 
   js_library_deps = js_deps
@@ -66,13 +67,15 @@ def j2cl_java_library(add_jre_dep=True, super_srcs=[], **kwargs):
         "//transpiler:vmbootstrap",
     ]
   # Bring j2cl_transpile's zip output into the js_library tree via js_import
+  js_import_name = kwargs["name"] + "_js_import"
   js_import(
-      name=kwargs["name"] + "_js_import",
+      name=js_import_name,
       srczips=[":" + kwargs["name"] + "_j2cl_transpile"],
       testonly=testonly,
   )
+
   native.js_library(
       name=kwargs["name"] + "_js_library",
-      deps=js_library_deps + [":" + kwargs["name"] + "_js_import"],
+      deps=js_library_deps + [":" + js_import_name],
       testonly=testonly,
   )

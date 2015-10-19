@@ -82,6 +82,15 @@ public class JavaType extends Node {
     return isStatic;
   }
 
+  public boolean containsNativeMethods() {
+    for (Method method : methods) {
+      if (method.isNative()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public void setStatic(boolean isStatic) {
     this.isStatic = isStatic;
   }
