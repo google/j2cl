@@ -56,26 +56,31 @@ are copyright and licensed as follows:
 - b/20102666 WARNING - actual parameter of Foo.$markImplementor does not match
   formal parameter
 
-## TODOs
-- anonymousclassforfunctionalinterface (transpiled to function)
+## Feature Complete Java 7 TODOs
 - arithmetic exception for integers (e.g. divide by zero / mod by zero)
-- catchjsexception
-- devirtualized classes should skip Object trampoline when possible:
-    string.toString()
 - enum special functions (values, valueOf, etc).
-- enumoptimization
-- finalfield (readable JsDoc and no static setter)
 - identity equality (double equality / triple equality, null / undefined)
-- interfacedefaultmethod
+- integrate JRE
+- packageclasscollision
+- qualifiedsupermethodcall
+- stringconstructor
+
+## JsInterop TODOs
+- catchjsexception
 - jsinteropclass
 - jsinteropdispatch
 - jsinteropinterface
-- localvariablejsdoc
+
+## Feature Complete Java 8 TODOs
+- interfacedefaultmethod
 - methodreferences
-- objectmethods
-- packageclasscollision
+
+## Polish TODOs
+- anonymousclassforfunctionalinterface (transpiled to function)
+- devirtualized classes should skip Object trampoline when possible:
+    string.toString()
+- enumoptimization
+- finalfield (readable JsDoc and no static setter)
+- localvariablejsdoc
 - private static clinit optimization
-- qualifiedsupermethodcall
 - shorterfieldmangling (for fields in final classes, like enums)
-- simpleenum
-- string constructor needs to be implemented
