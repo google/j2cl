@@ -56,7 +56,7 @@ public class InsertStringConversionVisitor extends ConversionContextVisitor {
             // At this point we're guaranteed to have in hand a reference type (or
             // at least a boolean or double primitive that we can treat as a reference type).
             // So use a "String.valueOf()" method call on it.
-            return new MethodCall(
+            return MethodCall.createRegularMethodCall(
                 null,
                 AstUtils.createStringValueOfMethodDescriptor(),
                 Lists.newArrayList(operandExpression));

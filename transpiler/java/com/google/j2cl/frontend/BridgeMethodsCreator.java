@@ -243,7 +243,8 @@ public class BridgeMethodsCreator {
               : new CastExpression(parameterReference, castToParameterTypeDescriptor);
       arguments.add(argument);
     }
-    Expression dispatchMethodCall = new MethodCall(null, targetMethodDescriptor, arguments);
+    Expression dispatchMethodCall =
+        MethodCall.createRegularMethodCall(null, targetMethodDescriptor, arguments);
     Statement statement =
         bridgeMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.get().primitiveVoid
             ? new ExpressionStatement(dispatchMethodCall)

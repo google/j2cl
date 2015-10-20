@@ -62,7 +62,6 @@ are copyright and licensed as follows:
 - identity equality (double equality / triple equality, null / undefined)
 - integrate JRE
 - packageclasscollision
-- qualifiedsupermethodcall
 - stringconstructor
 
 ## JsInterop TODOs

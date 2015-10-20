@@ -88,59 +88,58 @@ public class Main {
     }
   }
 
-  // uncomment after qualified super method call is fixed.
-//  public class W extends X{
-//    @Override
-//    public int funInX(int a) {
-//      return a + 222;
-//    }
-//
-//    /**
-//     * Inner class has different super class as outer class.
-//     */
-//    public class W1 extends C {
-//      public int test(int a) {
-//        int result = W.super.funInX(a);
-//        result += W.this.funInX(a);
-//        return result;
-//      }
-//    }
-//
-//    /**
-//     * Inner class has the same super class as outer class.
-//     */
-//    public class W2 extends X {
-//      @Override
-//      public int funInX(int a) {
-//        return a + 333;
-//      }
-//
-//      public int test(int a) {
-//        int result = W.super.funInX(a); // X.funInX()
-//        result += W.this.funInX(a); // W.funInX()
-//        result += funInX(a); // W2.funInX()
-//        return result;
-//      }
-//    }
-//
-//    /**
-//     * Inner class has its outer class as its super class.
-//     */
-//    public class W3 extends W {
-//      @Override
-//      public int funInX(int a) {
-//        return a + 444;
-//      }
-//
-//      public int test(int a) {
-//        int result = W.super.funInX(a); // X.funInX
-//        result += W.this.funInX(a); // W.funInX
-//        result += funInX(a); // funInX
-//        result += super.funInX(a); // W.funInX
-//        return result;
-//      }
-//    }
-//  }
+  public class W extends X {
+    @Override
+    public int funInX(int a) {
+      return a + 222;
+    }
+
+    /**
+     * Inner class has different super class as outer class.
+     */
+    public class W1 extends C {
+      public int test(int a) {
+        int result = W.super.funInX(a);
+        result += W.this.funInX(a);
+        return result;
+      }
+    }
+
+    /**
+     * Inner class has the same super class as outer class.
+     */
+    public class W2 extends X {
+      @Override
+      public int funInX(int a) {
+        return a + 333;
+      }
+
+      public int test(int a) {
+        int result = W.super.funInX(a); // X.funInX()
+        result += W.this.funInX(a); // W.funInX()
+        result += funInX(a); // W2.funInX()
+        return result;
+      }
+    }
+
+    /**
+     * Inner class has its outer class as its super class.
+     */
+    public class W3 extends W {
+      @Override
+      public int funInX(int a) {
+        return a + 444;
+      }
+
+      public int test(int a) {
+        int result = W.super.funInX(a); // X.funInX
+        result += W.this.funInX(a); // W.funInX
+        result += funInX(a); // funInX
+        result += super.funInX(a); // W.funInX
+        return result;
+      }
+    }
+  }
 
   /**
    * Two level nested inner class, with calls to outer class's functions and inherited functions.
@@ -267,9 +266,8 @@ public class Main {
     assert m.new Y().new YY().test(8) == 132;
     assert m.new Z().new ZZ().test(8) == 244;
 
-    // uncomment after qualifier super method call is fixed.
-//    assert m.new W().new W1().test(8) == 262;
-//    assert m.new W().new W2().test(8) == 603;
-//    assert m.new W().new W3().test(8) == 944;
+    assert m.new W().new W1().test(8) == 262;
+    assert m.new W().new W2().test(8) == 603;
+    assert m.new W().new W3().test(8) == 944;
   }
 }

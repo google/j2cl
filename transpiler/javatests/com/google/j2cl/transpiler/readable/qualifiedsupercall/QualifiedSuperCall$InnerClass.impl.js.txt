@@ -1,0 +1,147 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall$InnerClass.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall$InnerClass$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Parent = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent$impl');
+let QualifiedSuperCall = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+class QualifiedSuperCall$InnerClass extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {QualifiedSuperCall}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall$InnerClass =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall$InnerClass() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {QualifiedSuperCall} $outer_this
+   * @return {!QualifiedSuperCall$InnerClass}
+   * @public
+   * @nocollapse
+   */
+  static $create__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall(
+      $outer_this) {
+    QualifiedSuperCall$InnerClass.$clinit();
+    let instance = new QualifiedSuperCall$InnerClass;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall$InnerClass__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall(
+            $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {QualifiedSuperCall} $outer_this
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall$InnerClass__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall$InnerClass =
+        $outer_this;
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall$InnerClass();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    Parent.prototype.m_fun.call(
+        this.f_$outer_this__com_google_j2cl_transpiler_readable_qualifiedsupercall_QualifiedSuperCall$InnerClass);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof QualifiedSuperCall$InnerClass;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, QualifiedSuperCall$InnerClass);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    QualifiedSuperCall$InnerClass.$clinit();
+    if (!QualifiedSuperCall$InnerClass.$classQualifiedSuperCall$InnerClass_) {
+      QualifiedSuperCall$InnerClass
+          .$classQualifiedSuperCall$InnerClass_ = Class.$createForClass(
+          $Util.$generateId('InnerClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall$InnerClass'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall.InnerClass'));
+    }
+    return QualifiedSuperCall$InnerClass.$classQualifiedSuperCall$InnerClass_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Parent = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent$impl');
+    QualifiedSuperCall = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+QualifiedSuperCall$InnerClass.$classQualifiedSuperCall$InnerClass_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = QualifiedSuperCall$InnerClass;

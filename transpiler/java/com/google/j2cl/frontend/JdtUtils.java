@@ -611,7 +611,8 @@ public class JdtUtils {
       parameters.add(parameter);
       arguments.add(parameter.getReference());
     }
-    Expression callLambda = new MethodCall(null, lambdaMethodDescriptor, arguments);
+    Expression callLambda =
+        MethodCall.createRegularMethodCall(null, lambdaMethodDescriptor, arguments);
     Statement statement =
         lambdaMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.get().primitiveVoid
             ? new ExpressionStatement(callLambda)

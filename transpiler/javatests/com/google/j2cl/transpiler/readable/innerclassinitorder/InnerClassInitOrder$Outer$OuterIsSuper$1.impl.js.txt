@@ -73,7 +73,10 @@ class InnerClassInitOrder$Outer$OuterIsSuper$1 extends
    * @return {number}
    * @public
    */
-  m_go() { return super.m_checkDispatch(); }
+  m_go() {
+    return InnerClassInitOrder$Outer.prototype.m_checkDispatch.call(
+        this.f_$outer_this__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer$OuterIsSuper$1);
+  }
 
   /**
    * Returns whether the provided instance is an instance of this class.

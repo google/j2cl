@@ -863,7 +863,7 @@ public class CompilationUnitBuilder {
       VariableDeclarationFragment iteratorDeclaration =
           new VariableDeclarationFragment(
               iteratorVariable,
-              new MethodCall(
+              MethodCall.createRegularMethodCall(
                   convert(statement.getExpression()),
                   JdtUtils.createMethodDescriptor(iteratorMethodBinding),
                   Collections.<Expression>emptyList()));
@@ -872,7 +872,7 @@ public class CompilationUnitBuilder {
       IMethodBinding hasNextMethodBinding =
           JdtUtils.getMethodBinding(iteratorMethodBinding.getReturnType(), "hasNext");
       Expression condition =
-          new MethodCall(
+          MethodCall.createRegularMethodCall(
               iteratorVariable.getReference(),
               JdtUtils.createMethodDescriptor(hasNextMethodBinding),
               Collections.<Expression>emptyList());
@@ -885,7 +885,7 @@ public class CompilationUnitBuilder {
               Collections.singletonList(
                   new VariableDeclarationFragment(
                       convert(statement.getParameter()),
-                      new MethodCall(
+                      MethodCall.createRegularMethodCall(
                           iteratorVariable.getReference(),
                           JdtUtils.createMethodDescriptor(nextMethodBinding),
                           Collections.<Expression>emptyList()))));
@@ -1087,7 +1087,8 @@ public class CompilationUnitBuilder {
           constructorBinding,
           JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(statement.arguments()),
           arguments);
-      return new ExpressionStatement(new MethodCall(null, methodDescriptor, arguments));
+      return new ExpressionStatement(
+          MethodCall.createRegularMethodCall(null, methodDescriptor, arguments));
     }
 
     private Statement convert(org.eclipse.jdt.core.dom.ExpressionStatement statement) {
@@ -1174,7 +1175,8 @@ public class CompilationUnitBuilder {
           methodBinding,
           JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(methodInvocation.arguments()),
           arguments);
-      MethodCall methodCall = new MethodCall(qualifier, methodDescriptor, arguments);
+      MethodCall methodCall =
+          MethodCall.createRegularMethodCall(qualifier, methodDescriptor, arguments);
       return MethodCallDevirtualizer.doDevirtualization(
           methodCall, methodBinding, jdtCompilationUnit);
     }
@@ -1196,8 +1198,20 @@ public class CompilationUnitBuilder {
           methodBinding,
           JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(expression.arguments()),
           arguments);
-      return new MethodCall(
-          new SuperReference(currentType.getSuperTypeDescriptor()), methodDescriptor, arguments);
+      if (expression.getQualifier() == null) {
+        return MethodCall.createRegularMethodCall(
+            new SuperReference(currentType.getSuperTypeDescriptor()), methodDescriptor, arguments);
+      } else {
+        // OuterClass.super.fun() is transpiled to
+        // SuperClassOfOuterClass.prototype.fun.call(OuterClass.this);
+        return MethodCall.createPrototypeCall(
+            convertOuterClassReference(
+                JdtUtils.findCurrentTypeBinding(expression),
+                expression.getQualifier().resolveTypeBinding(),
+                true),
+            methodDescriptor,
+            arguments);
+      }
     }
 
     /**
@@ -1508,7 +1522,8 @@ public class CompilationUnitBuilder {
                 superclassBinding.getDeclaringClass(),
                 true);
       }
-      MethodCall superCall = new MethodCall(qualifier, methodDescriptor, arguments);
+      MethodCall superCall =
+          MethodCall.createRegularMethodCall(qualifier, methodDescriptor, arguments);
       return new ExpressionStatement(superCall);
     }
 
@@ -1533,7 +1548,8 @@ public class CompilationUnitBuilder {
                 "$getClass",
                 new ArrayList<TypeDescriptor>(),
                 javaLangClassTypeDescriptor);
-        return new MethodCall(null, classMethodDescriptor, new ArrayList<Expression>());
+        return MethodCall.createRegularMethodCall(
+            null, classMethodDescriptor, new ArrayList<Expression>());
       }
 
       MethodDescriptor classMethodDescriptor =
@@ -1555,8 +1571,9 @@ public class CompilationUnitBuilder {
               javaLangClassTypeDescriptor);
 
       // <ClassLiteralClass>.$getClass().forArray(<dimensions>)
-      return new MethodCall(
-          new MethodCall(null, classMethodDescriptor, new ArrayList<Expression>()),
+      return MethodCall.createRegularMethodCall(
+          MethodCall.createRegularMethodCall(
+              null, classMethodDescriptor, new ArrayList<Expression>()),
           forArrayMethodDescriptor,
           ImmutableList.<Expression>of(
               new NumberLiteral(TypeDescriptors.get().primitiveInt, typeBinding.getDimensions())));

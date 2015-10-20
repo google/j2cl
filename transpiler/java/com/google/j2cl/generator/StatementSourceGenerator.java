@@ -18,6 +18,7 @@ package com.google.j2cl.generator;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractTransformer;
 import com.google.j2cl.ast.ArrayAccess;
@@ -78,6 +79,7 @@ import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.generator.visitors.Import;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -280,9 +282,20 @@ public class StatementSourceGenerator {
       public String transformMethodCall(MethodCall expression) {
         MethodDescriptor methodDescriptor = expression.getTarget();
         String qualifier = transformQualifier(expression);
-        String argumentList =
-            Joiner.on(", ").join(transformNodesToSource(expression.getArguments()));
-        return String.format("%s.%s(%s)", qualifier, toSource(methodDescriptor), argumentList);
+        List<String> argumentSources = transformNodesToSource(expression.getArguments());
+        if (expression.isPrototypeCall()) {
+          return String.format(
+              "%s.prototype.%s.call(%s)",
+              toSource(methodDescriptor.getEnclosingClassTypeDescriptor()),
+              toSource(methodDescriptor),
+              Joiner.on(", ").join(Iterables.concat(Arrays.asList(qualifier), argumentSources)));
+        } else {
+          return String.format(
+              "%s.%s(%s)",
+              qualifier,
+              toSource(methodDescriptor),
+              Joiner.on(", ").join(argumentSources));
+        }
       }
 
       @Override

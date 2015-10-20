@@ -74,7 +74,7 @@ public class NormalizeLongsVisitor extends AbstractRewriter {
             Lists.newArrayList(leftParameterTypeDescriptor, rightParameterTypeDescriptor),
             returnTypeDescriptor);
     // LongUtils.$someOperation(leftOperand, rightOperand);
-    return new MethodCall(
+    return MethodCall.createRegularMethodCall(
         null, longUtilsMethodDescriptor, Lists.newArrayList(leftArgument, rightArgument));
   }
 
@@ -103,7 +103,8 @@ public class NormalizeLongsVisitor extends AbstractRewriter {
             Lists.newArrayList(parameterTypeDescriptor),
             returnTypeDescriptor);
     // LongUtils.$someOperation(operand);
-    return new MethodCall(null, longUtilsMethodDescriptor, Lists.newArrayList(argument));
+    return MethodCall.createRegularMethodCall(
+        null, longUtilsMethodDescriptor, Lists.newArrayList(argument));
   }
 
   private static String getLongOperationFunctionName(PrefixOperator prefixOperator) {

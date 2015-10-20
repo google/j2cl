@@ -24,9 +24,12 @@ import java.util.List;
  * list in sync.
  */
 public class MethodCallBuilder extends CallBuilder<MethodCall> {
+  private boolean isPrototypeCall;
+
   public static MethodCallBuilder from(MethodCall methodCall) {
     MethodCallBuilder builder = new MethodCallBuilder();
     builder.initFrom(methodCall);
+    builder.isPrototypeCall = methodCall.isPrototypeCall();
     return builder;
   }
 
@@ -35,6 +38,8 @@ public class MethodCallBuilder extends CallBuilder<MethodCall> {
       Expression qualifierExpression,
       MethodDescriptor methodDescriptor,
       List<Expression> arguments) {
-    return new MethodCall(qualifierExpression, methodDescriptor, arguments);
+    return isPrototypeCall
+        ? MethodCall.createPrototypeCall(qualifierExpression, methodDescriptor, arguments)
+        : MethodCall.createRegularMethodCall(qualifierExpression, methodDescriptor, arguments);
   }
 }

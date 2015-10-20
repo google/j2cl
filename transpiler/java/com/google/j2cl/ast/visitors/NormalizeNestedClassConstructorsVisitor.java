@@ -134,7 +134,7 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
       if (targetTypeDescriptor.isInstanceMemberClass()) {
         // outerclass.new InnerClass() => outerClass.m_$create_InnerClass();
         TypeDescriptor outerclassTypeDescriptor = targetTypeDescriptor.getEnclosingTypeDescriptor();
-        return new MethodCall(
+        return MethodCall.createRegularMethodCall(
             newInstance.getQualifier(),
             AstUtils.createMethodDescriptorForInnerClassCreation(
                 outerclassTypeDescriptor, targetMethod),

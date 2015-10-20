@@ -329,7 +329,8 @@ public class AstUtils {
       parameters.add(parameter);
       arguments.add(parameter.getReference());
     }
-    Expression forwardingMethodCall = new MethodCall(null, forwardToMethodDescriptor, arguments);
+    Expression forwardingMethodCall =
+        MethodCall.createRegularMethodCall(null, forwardToMethodDescriptor, arguments);
     Statement statement =
         exposedMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.get().primitiveVoid
             ? new ExpressionStatement(forwardingMethodCall)
@@ -370,7 +371,7 @@ public class AstUtils {
     Preconditions.checkNotNull(instance);
     arguments.add(0, instance);
     // Call the method like Objects.foo(instance, ...)
-    return new MethodCall(null, methodDescriptor, arguments);
+    return MethodCall.createRegularMethodCall(null, methodDescriptor, arguments);
   }
 
   /**
@@ -394,7 +395,8 @@ public class AstUtils {
             boxType, // returnTypeDescriptor,
             primitiveType // parameterTypeDescriptor
             );
-    return new MethodCall(null, valueOfMethodDescriptor, Arrays.asList(expression));
+    return MethodCall.createRegularMethodCall(
+        null, valueOfMethodDescriptor, Arrays.asList(expression));
   }
 
   /**
@@ -424,7 +426,8 @@ public class AstUtils {
             ? expression
             : new ParenthesizedExpression(expression);
 
-    return new MethodCall(expression, valueMethodDescriptor, new ArrayList<Expression>());
+    return MethodCall.createRegularMethodCall(
+        expression, valueMethodDescriptor, new ArrayList<Expression>());
   }
 
   /**

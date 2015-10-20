@@ -68,7 +68,8 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
     arguments.add(castTypeDescriptor.getRawTypeDescriptor());
 
     // Casts.to(expr, TypeName);
-    MethodCall castMethodCall = new MethodCall(null, castToMethodDescriptor, arguments);
+    MethodCall castMethodCall =
+        MethodCall.createRegularMethodCall(null, castToMethodDescriptor, arguments);
     // /**@type {}*/ ()
     return CastExpression.createRaw(castMethodCall, castTypeDescriptor);
   }
@@ -98,7 +99,8 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
             TypeDescriptors.get().primitiveInt, arrayCastTypeDescriptor.getDimensions()));
 
     // Arrays.$castTo(expr, leafType, dimension);
-    MethodCall castMethodCall = new MethodCall(null, castToMethodDescriptor, arguments);
+    MethodCall castMethodCall =
+        MethodCall.createRegularMethodCall(null, castToMethodDescriptor, arguments);
     // /**@type {}*/ ()
     return CastExpression.createRaw(castMethodCall, arrayCastTypeDescriptor);
   }

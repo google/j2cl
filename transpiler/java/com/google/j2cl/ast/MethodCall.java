@@ -31,18 +31,43 @@ public class MethodCall extends Expression implements MemberReference, Call {
   @Visitable @Nullable Expression qualifier;
   @Visitable MethodDescriptor targetMethodDescriptor;
   @Visitable List<Expression> arguments = new ArrayList<>();
+  /**
+   * If the method call should be transpiled to TypeName.prototype.functionName.call(thisArg, ...);
+   */
+  private boolean isPrototypeCall;
 
   /**
-   * The default constructor that creates a method of the form:
-   * qualifier.targetMethodDescriptor(arguments)
+   * Default constructor.
    */
-  public MethodCall(
-      Expression qualifier, MethodDescriptor targetMethodDescriptor, List<Expression> arguments) {
+  private MethodCall(
+      Expression qualifier,
+      MethodDescriptor targetMethodDescriptor,
+      List<Expression> arguments,
+      boolean isPrototypeCall) {
     Preconditions.checkNotNull(targetMethodDescriptor);
     Preconditions.checkNotNull(arguments);
     this.qualifier = qualifier;
     this.targetMethodDescriptor = targetMethodDescriptor;
     this.arguments.addAll(arguments);
+    this.isPrototypeCall = isPrototypeCall;
+  }
+
+  /**
+   * Static method that creates a method call of the form:
+   * qualifier.targetMethodDescriptor(arguments)
+   */
+  public static MethodCall createRegularMethodCall(
+      Expression qualifier, MethodDescriptor targetMethodDescriptor, List<Expression> arguments) {
+    return new MethodCall(qualifier, targetMethodDescriptor, arguments, false);
+  }
+
+  /**
+   * Static method that creates a method call of the form:
+   * TypeName.prototype.targetMethodDescriptor.call(qualifier, arguments);
+   */
+  public static MethodCall createPrototypeCall(
+      Expression qualifier, MethodDescriptor targetMethodDescriptor, List<Expression> arguments) {
+    return new MethodCall(qualifier, targetMethodDescriptor, arguments, true);
   }
 
   @Override
@@ -64,12 +89,20 @@ public class MethodCall extends Expression implements MemberReference, Call {
     return this.arguments;
   }
 
+  public boolean isPrototypeCall() {
+    return isPrototypeCall;
+  }
+
   public void setQualifier(Expression qualifier) {
     this.qualifier = qualifier;
   }
 
   public void setTargetMethodDescriptor(MethodDescriptor targetMethodDescriptor) {
     this.targetMethodDescriptor = targetMethodDescriptor;
+  }
+
+  public void setPrototypeCall(boolean isPrototypeCall) {
+    this.isPrototypeCall = isPrototypeCall;
   }
 
   @Override
