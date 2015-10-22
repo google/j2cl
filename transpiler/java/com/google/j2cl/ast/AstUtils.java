@@ -236,6 +236,7 @@ public class AstUtils {
       final TypeDescriptor outerclassTypeDescriptor,
       MethodDescriptor innerclassConstructorDescriptor) {
     boolean isStatic = false;
+    boolean isRaw = false;
     String methodName = CREATE_PREFIX + innerclassConstructorDescriptor.getMethodName();
     boolean isConstructor = false;
     boolean isNative = false;
@@ -261,6 +262,7 @@ public class AstUtils {
     }
     return MethodDescriptor.create(
         isStatic,
+        isRaw,
         innerclassConstructorDescriptor.getVisibility(),
         outerclassTypeDescriptor,
         methodName,

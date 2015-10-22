@@ -8,43 +8,43 @@
 goog.require('goog.testing.jsunit');
 
 function testVoidNativeMethod() {
-    var instance = new ClassWithNativeMethod();
+  var instance = new ClassWithNativeMethod();
 
-    assertNotUndefined(instance.nativeMethod);
+  assertNotUndefined(instance.m_nativeMethod__java_lang_String);
 
-    instance.nativeMethod('foo');
-    assertEquals('foo', instance.field);
+  instance.m_nativeMethod__java_lang_String('foo');
+  assertEquals('foo', instance.field);
 }
 
 function testNativeMethodWithResult() {
-    var instance = new ClassWithNativeMethod();
+  var instance = new ClassWithNativeMethod();
 
-    assertNotUndefined(instance.nativeMethodWithResult);
+  assertNotUndefined(instance.m_nativeMethodWithResult);
 
-    var result = instance.nativeMethodWithResult();
-    assertEquals('nativeMethodWithResult', result);
+  var result = instance.m_nativeMethodWithResult();
+  assertEquals('nativeMethodWithResult', result);
 }
 
 function testNonNativeMethodNotConverted() {
-    var instance = new ClassWithNativeMethod();
-    assertUndefined(instance.nonNativeMethod);
+  var instance = new ClassWithNativeMethod();
+  assertUndefined(instance.nonNativeMethod);
 }
 
 function testVoidStaticNativeMethod() {
-    assertNotUndefined(ClassWithNativeMethod.staticNative);
+  assertNotUndefined(ClassWithNativeMethod.m_staticNative__java_lang_String);
 
-    ClassWithNativeMethod.staticNative('foo');
-    assertEquals('foo', ClassWithNativeMethod.staticField);
+  ClassWithNativeMethod.m_staticNative__java_lang_String('foo');
+  assertEquals('foo', ClassWithNativeMethod.staticField);
 }
 
 function testStaticNativeMethodWithResult() {
-    assertNotUndefined(ClassWithNativeMethod.staticNativeWithResult);
+  assertNotUndefined(ClassWithNativeMethod.m_staticNativeWithResult);
 
-    var result = ClassWithNativeMethod.staticNativeWithResult();
-    assertEquals('staticNativeWithResult', result);
+  var result = ClassWithNativeMethod.m_staticNativeWithResult();
+  assertEquals('staticNativeWithResult', result);
 }
 
 function testNonNativeStaticMethodNotConverted() {
-    // non native static method not converted
-    assertUndefined(ClassWithNativeMethod.staticNotNative);
+  // non native static method not converted
+  assertUndefined(ClassWithNativeMethod.staticNotNative);
 }

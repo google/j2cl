@@ -15,29 +15,28 @@
  */
 package com.google.j2cl.tools.integration.annotation;
 
-import com.google.j2cl.tools.jsni.JsMethod;
+import jsinterop.annotations.JsMethod;
 
 /**
  * Class using JsMethod annotations to rename the javascript method.
  */
 public class AnnotatedMethod {
-
-  @JsMethod("staticMethod")
+  @JsMethod(name = "staticMethod")
   public static native void annotatedStaticNativeMethod() /*-{
     return "annotatedStaticNativeMethod"
   }-*/;
 
-  @com.google.j2cl.tools.jsni.JsMethod("fqnStaticMethod")
+  @JsMethod(name = "fqnStaticMethod")
   public static native void fqnAnnotatedStaticNativeMethod() /*-{
       return "fqnAnnotatedStaticNativeMethod"
   }-*/;
 
-  @JsMethod("nativeMethod")
+  @JsMethod(name = "nativeMethod")
   public native String annotatedNativeMethod() /*-{
       return "annotatedNativeMethod";
   }-*/;
 
-  @com.google.j2cl.tools.jsni.JsMethod("fqnNativeMethod")
+  @JsMethod(name = "fqnNativeMethod")
   public native String fqnAnnotatedNativeMethod() /*-{
       return "fqnAnnotatedNativeMethod";
   }-*/;

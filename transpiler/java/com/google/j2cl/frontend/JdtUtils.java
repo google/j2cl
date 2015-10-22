@@ -49,6 +49,8 @@ import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
+import org.eclipse.jdt.core.dom.IAnnotationBinding;
+import org.eclipse.jdt.core.dom.IMemberValuePairBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
@@ -76,6 +78,8 @@ import java.util.Set;
 public class JdtUtils {
   // JdtUtil members are all package private. Code outside frontend should not be aware of the
   // dependency on JDT.
+
+  private static final String JS_METHOD_ANNOTATION_NAME = "jsinterop.annotations.JsMethod";
 
   static String getCompilationUnitPackageName(CompilationUnit compilationUnit) {
     return compilationUnit.getPackage() == null
@@ -129,7 +133,7 @@ public class JdtUtils {
         isStatic, visibility, enclosingClassTypeDescriptor, fieldName, thisTypeDescriptor);
   }
 
-  static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
+  public static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
     int modifiers = methodBinding.getModifiers();
     boolean isStatic = isStatic(modifiers);
     Visibility visibility = getVisibility(modifiers);
@@ -141,6 +145,20 @@ public class JdtUtils {
         isConstructor
             ? createTypeDescriptor(methodBinding.getDeclaringClass()).getClassName()
             : methodBinding.getName();
+    boolean isRaw = false;
+
+    // TODO: expand JsMethod checking up the method override chain.
+    IAnnotationBinding jsMethodAnnotationBinding = findJsMethodAnnotationBinding(methodBinding);
+    if (jsMethodAnnotationBinding != null) {
+      for (IMemberValuePairBinding member :
+          jsMethodAnnotationBinding.getDeclaredMemberValuePairs()) {
+        if ("name".equals(member.getName())) {
+          methodName = (String) member.getValue();
+        }
+      }
+      isRaw = true;
+    }
+
     TypeDescriptor returnTypeDescriptor = createTypeDescriptor(methodBinding.getReturnType());
 
     // generate parameters type descriptors.
@@ -168,6 +186,7 @@ public class JdtUtils {
 
     return MethodDescriptor.create(
         isStatic,
+        isRaw,
         visibility,
         enclosingClassTypeDescriptor,
         methodName,
@@ -176,6 +195,18 @@ public class JdtUtils {
         returnTypeDescriptor,
         parameterTypeDescriptors,
         typeParameterDescriptors);
+  }
+
+  private static IAnnotationBinding findJsMethodAnnotationBinding(IMethodBinding methodBinding) {
+    for (IAnnotationBinding annotationBinding : methodBinding.getAnnotations()) {
+      if (annotationBinding
+          .getAnnotationType()
+          .getQualifiedName()
+          .equals(JS_METHOD_ANNOTATION_NAME)) {
+        return annotationBinding;
+      }
+    }
+    return null;
   }
 
   static Variable createVariable(IVariableBinding variableBinding) {
@@ -544,7 +575,7 @@ public class JdtUtils {
     return isInstanceMethod(methodBinding)
         && methodBinding.getDeclaringClass().getBinaryName().equals("java.lang.Comparable");
   }
-  
+
   static boolean isCharSequenceInstanceMethodBinding(IMethodBinding methodBinding) {
     return isInstanceMethod(methodBinding)
         && methodBinding.getDeclaringClass().getBinaryName().equals("java.lang.CharSequence");

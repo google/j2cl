@@ -26,5 +26,5 @@ public class StaticMethodJsniReference {
 
   public native void bar(String s) /*-{
     @com.foo.StaticMethodJsniReference::staticFoo(Ljava/lang/String;)(s);
-  }-*/
+  }-*/;
 }

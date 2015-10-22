@@ -41,26 +41,47 @@ public class JdtParser {
   private final List<String> classpathEntries = new ArrayList<>();
   private final List<String> sourcepathEntries = new ArrayList<>();
   private final String encoding;
+  private boolean includeRunningVMBootclasspath;
 
+  /**
+   * Create and initialize a JdtParser based on an options object.
+   */
   public JdtParser(FrontendOptions options, Errors errors) {
+    this(
+        options.getSourceVersion(),
+        options.getClasspathEntries(),
+        options.getBootclassPathEntries(),
+        options.getSourcepathEntries(),
+        options.getEncoding(),
+        errors);
+  }
+
+  /**
+   * Create and initialize a JdtParser based on passed parameters.
+   */
+  public JdtParser(
+      String sourceVersion,
+      List<String> classpathEntries,
+      List<String> bootclassPathEntries,
+      List<String> sourcepathEntries,
+      String encoding,
+      Errors errors) {
+    compilerOptions.put(JavaCore.COMPILER_SOURCE, sourceVersion);
+    compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, sourceVersion);
+    compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, sourceVersion);
+
+    this.classpathEntries.addAll(classpathEntries);
+    this.classpathEntries.addAll(bootclassPathEntries);
+    this.sourcepathEntries.addAll(sourcepathEntries);
+    this.encoding = encoding;
     this.errors = errors;
-
-    String version = options.getSourceVersion();
-    compilerOptions.put(JavaCore.COMPILER_SOURCE, version);
-    compilerOptions.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, version);
-    compilerOptions.put(JavaCore.COMPILER_COMPLIANCE, version);
-
-    classpathEntries.addAll(options.getClasspathEntries());
-    classpathEntries.addAll(options.getBootclassPathEntries());
-    sourcepathEntries.addAll(options.getSourcepathEntries());
-    encoding = options.getEncoding();
   }
 
   /**
    * Returns a map from file paths to compilation units after JDT parsing.
    */
   public Map<String, CompilationUnit> parseFiles(List<String> filePaths) {
-    ASTParser parser = newASTParser(true, false);
+    ASTParser parser = newASTParser(true);
     final Map<String, CompilationUnit> compilationUnitsByFilePath = new HashMap<>();
     FileASTRequestor astRequestor =
         new FileASTRequestor() {
@@ -80,7 +101,11 @@ public class JdtParser {
     return compilationUnitsByFilePath;
   }
 
-  private ASTParser newASTParser(boolean resolveBinding, boolean includeRunningVMBootclasspath) {
+  public void setIncludeRunningVMBootclasspath(boolean includeRunningVMBootclasspath) {
+    this.includeRunningVMBootclasspath = includeRunningVMBootclasspath;
+  }
+
+  private ASTParser newASTParser(boolean resolveBinding) {
     ASTParser parser = ASTParser.newParser(AST.JLS8);
 
     parser.setCompilerOptions(compilerOptions);

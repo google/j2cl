@@ -22,8 +22,17 @@ import com.google.common.flags.Flag;
 import com.google.common.flags.FlagSpec;
 import com.google.common.flags.Flags;
 import com.google.common.flags.InvalidFlagValueException;
+import com.google.j2cl.errors.Errors;
+import com.google.j2cl.frontend.JdtParser;
+
+import org.eclipse.jdt.core.dom.CompilationUnit;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Main class for the converter. This class will parse the different flags passed as arguments and
@@ -32,17 +41,19 @@ import java.io.File;
 public class JsniConverter {
   @FlagSpec(name = "verbose", help = "Display debug messages")
   private static final Flag<Boolean> isVerboseFlag = Flag.value(false);
+
+  @FlagSpec(name = "class_path", help = "The file paths to dependency jars.")
+  private static final Flag<List<String>> classPathFlag = Flag.stringCollector();
+
   @FlagSpec(name = "output_file", help = "The path and base filename for the output zip file")
   private static final Flag<String> outputFileFlag = Flag.value("");
 
   public static void main(String[] args) throws InvalidFlagValueException {
     String[] fileNames = Flags.parseAndReturnLeftovers(args);
 
-    validateFlags();
+    validateFlags(fileNames);
 
-    File[] inputFiles = getInputFiles(fileNames);
-
-    new JsniConverter(outputFileFlag.get()).convert(inputFiles);
+    new JsniConverter(outputFileFlag.get()).convert(Arrays.asList(fileNames), classPathFlag.get());
   }
 
   static void log(String message, Object... args) {
@@ -51,32 +62,44 @@ public class JsniConverter {
     }
   }
 
-  private static File[] getInputFiles(String[] fileNames) throws InvalidFlagValueException {
-    if (fileNames.length == 0) {
-      throw new InvalidFlagValueException("Path to java file(s) to convert is(are) missing");
-    }
-
-    File[] inputFiles = new File[fileNames.length];
-
-    for (int i = 0; i < fileNames.length; i++) {
-      File file = new File(fileNames[i]);
-
-      if (!file.exists()) {
-        throw new InvalidFlagValueException(String.format("File %s doesn't exist", fileNames[i]));
-      }
-
-      inputFiles[i] = file;
-    }
-
-    return inputFiles;
-  }
-
-  private static void validateFlags() throws InvalidFlagValueException {
+  private static void validateFlags(String[] fileNames) throws InvalidFlagValueException {
     if (Strings.isNullOrEmpty(outputFileFlag.get())) {
       throw new InvalidFlagValueException(
           "Path to the output zip file is missing. Use --output_file flag to specify a path where "
               + "the result zip file will be written.");
     }
+
+    if (!classPathFlag.get().isEmpty()) {
+      for (String classPathEntry : classPathFlag.get()) {
+        if (!new File(classPathEntry).exists()) {
+          throw new InvalidFlagValueException(
+              String.format("File %s doesn't exist", classPathEntry));
+        }
+      }
+    }
+
+    if (fileNames.length == 0) {
+      throw new InvalidFlagValueException("Path to java file(s) to convert is(are) missing");
+    }
+
+    for (String fileName : fileNames) {
+      if (!new File(fileName).exists()) {
+        throw new InvalidFlagValueException(String.format("File %s doesn't exist", fileName));
+      }
+    }
+  }
+
+  private static Map<String, CompilationUnit> getCompilationUnitsByPath(
+      List<String> javaFileNames, List<String> classPathEntries) {
+    // Since this tool is currently for a one-time extraction of GWT's standard library JSNI there
+    // is no special care being taken to ensure that the classpath is being properly constructed.
+    // This may result in some JDT parse errors, but since we are not checking the resulting Error
+    // object they are effectively being ignored.
+    JdtParser jdtParser =
+        new JdtParser(
+            "1.8", classPathEntries, new ArrayList<>(), new ArrayList<>(), "UTF-8", new Errors());
+    jdtParser.setIncludeRunningVMBootclasspath(true);
+    return jdtParser.parseFiles(javaFileNames);
   }
 
   private final String outputFile;
@@ -85,13 +108,16 @@ public class JsniConverter {
     this.outputFile = outputFile;
   }
 
-  public void convert(File[] javaFiles) {
-    Multimap<String, JsniMethod> jsniMethodsByTypes = ArrayListMultimap.create();
-    for (File file : javaFiles) {
-      log("Converting %s", file);
-      NativeMethodParser parser = new NativeMethodParser();
-      jsniMethodsByTypes.putAll(parser.parse(file));
+  public void convert(List<String> javaFileNames, List<String> classPathEntries) {
+    Multimap<String, JsniMethod> jsniMethodsByType = ArrayListMultimap.create();
+
+    for (Entry<String, CompilationUnit> entry :
+        getCompilationUnitsByPath(javaFileNames, classPathEntries).entrySet()) {
+      log("Converting %s", entry.getKey());
+      jsniMethodsByType.putAll(
+          NativeMethodExtractor.getJsniMethodsByType(entry.getKey(), entry.getValue()));
     }
-    new NativeJsFilesWriter(outputFile).write(jsniMethodsByTypes);
+
+    new NativeJsFilesWriter(outputFile).write(jsniMethodsByType);
   }
 }

@@ -24,5 +24,5 @@ public class StaticFieldJsniReference {
 
   public native String bar(String s) /*-{
     @com.foo.StaticMethodJsniReference::foo = s;
-  }-*/
+  }-*/;
 }

@@ -18,24 +18,25 @@ package com.google.j2cl.tools.jsni;
 import com.google.devtools.build.runtime.Runfiles;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Contains utils method used by test classes.
+ * Contains util methods used by test classes.
  */
 public class ToolsTestUtils {
 
   private ToolsTestUtils() {
   }
 
-  public static File[] getDataFiles(String... dataFileNames) {
-    File[] files = new File[dataFileNames.length];
+  public static List<String> getDataFilePaths(String... dataFileNames) {
+    List<String> filePaths = new ArrayList<>();
 
-    int i = 0;
-    for (String fileName : dataFileNames) {
-      files[i++] = getDataFile(fileName);
+    for (String dataFileName : dataFileNames) {
+      filePaths.add(getDataFilePath(dataFileName));
     }
 
-    return files;
+    return filePaths;
   }
 
   public static File getDataFile(String dataFileName) {

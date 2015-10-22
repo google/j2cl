@@ -74,29 +74,6 @@ public abstract class MethodDescriptor extends Node implements Member {
       boolean isConstructor,
       boolean isNative,
       TypeDescriptor returnTypeDescriptor,
-      Iterable<TypeDescriptor> parameterTypeDescriptors,
-      Iterable<TypeDescriptor> typeParameterTypeDescriptors) {
-    return create(
-        isStatic,
-        false,
-        visibility,
-        enclosingClassTypeDescriptor,
-        methodName,
-        isConstructor,
-        isNative,
-        returnTypeDescriptor,
-        parameterTypeDescriptors,
-        typeParameterTypeDescriptors);
-  }
-
-  public static MethodDescriptor create(
-      boolean isStatic,
-      Visibility visibility,
-      TypeDescriptor enclosingClassTypeDescriptor,
-      String methodName,
-      boolean isConstructor,
-      boolean isNative,
-      TypeDescriptor returnTypeDescriptor,
       Iterable<TypeDescriptor> parameterTypeDescriptors) {
     return create(
         isStatic,

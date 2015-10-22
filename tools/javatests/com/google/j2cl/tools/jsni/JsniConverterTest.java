@@ -16,7 +16,7 @@
 package com.google.j2cl.tools.jsni;
 
 import static com.google.common.truth.Truth.assertThat;
-import static com.google.j2cl.tools.jsni.ToolsTestUtils.getDataFiles;
+import static com.google.j2cl.tools.jsni.ToolsTestUtils.getDataFilePaths;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +24,7 @@ import org.junit.runners.JUnit4;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.zip.ZipEntry;
@@ -48,7 +49,9 @@ public class JsniConverterTest extends BaseJsniConverterTest {
   @Test
   public void convert_severalJavaFile() throws IOException {
     new JsniConverter(getZipFilePath())
-        .convert(getDataFiles("SimpleClass.java", "Outer.java", "NoNativeMethod.java"));
+        .convert(
+            getDataFilePaths("SimpleClass.java", "Outer.java", "NoNativeMethod.java"),
+            new ArrayList<>());
 
     // Collect content of the zip file.
     ZipInputStream zis = new ZipInputStream(new FileInputStream(getZipFile()));
@@ -59,10 +62,11 @@ public class JsniConverterTest extends BaseJsniConverterTest {
     }
 
     assertThat(jsFiles).hasSize(3);
-    assertThat(jsFiles).containsExactly(
-        "com/foo/SimpleClass.native.js",
-        "com/foo/Outer$Inner.native.js",
-        "com/foo/Outer$Inner$InnerInner.native.js");
+    assertThat(jsFiles)
+        .containsExactly(
+            "com/foo/SimpleClass.native.js",
+            "com/foo/Outer$Inner.native.js",
+            "com/foo/Outer$Inner$InnerInner.native.js");
   }
 
   /**
@@ -71,7 +75,8 @@ public class JsniConverterTest extends BaseJsniConverterTest {
    */
   @Test
   public void convert_javaFileWithoutNativeMethod() throws IOException {
-    new JsniConverter(getZipFilePath()).convert(getDataFiles("NoNativeMethod.java"));
+    new JsniConverter(getZipFilePath())
+        .convert(getDataFilePaths("NoNativeMethod.java"), new ArrayList<>());
 
     // check the content of the zip file is empty
     ZipInputStream zis = new ZipInputStream(new FileInputStream(getZipFile()));
@@ -84,7 +89,8 @@ public class JsniConverterTest extends BaseJsniConverterTest {
    */
   @Test(expected = RuntimeException.class)
   public void convert_nativeMethodWithJsniReferenceToInstanceMethod() {
-    new JsniConverter(getZipFilePath()).convert(getDataFiles("MethodJsniReference.java"));
+    new JsniConverter(getZipFilePath())
+        .convert(getDataFilePaths("MethodJsniReference.java"), new ArrayList<>());
   }
 
   /**
@@ -93,7 +99,8 @@ public class JsniConverterTest extends BaseJsniConverterTest {
    */
   @Test(expected = RuntimeException.class)
   public void convert_nativeMethodWithJsniReferenceToStaticMethod() {
-    new JsniConverter(getZipFilePath()).convert(getDataFiles("StaticMethodJsniReference.java"));
+    new JsniConverter(getZipFilePath())
+        .convert(getDataFilePaths("StaticMethodJsniReference.java"), new ArrayList<>());
   }
 
   /**
@@ -102,7 +109,8 @@ public class JsniConverterTest extends BaseJsniConverterTest {
    */
   @Test(expected = RuntimeException.class)
   public void convert_nativeMethodWithJsniReferenceToInstanceField() {
-    new JsniConverter(getZipFilePath()).convert(getDataFiles("InstanceFieldJsniReference.java"));
+    new JsniConverter(getZipFilePath())
+        .convert(getDataFilePaths("InstanceFieldJsniReference.java"), new ArrayList<>());
   }
 
   /**
@@ -111,7 +119,8 @@ public class JsniConverterTest extends BaseJsniConverterTest {
    */
   @Test(expected = RuntimeException.class)
   public void convert_nativeMethodWithJsniReferenceToStaticField() {
-    new JsniConverter(getZipFilePath()).convert(getDataFiles("StaticFieldJsniReference.java"));
+    new JsniConverter(getZipFilePath())
+        .convert(getDataFilePaths("StaticFieldJsniReference.java"), new ArrayList<>());
   }
 
   /**
@@ -120,6 +129,7 @@ public class JsniConverterTest extends BaseJsniConverterTest {
    */
   @Test(expected = RuntimeException.class)
   public void convert_noWellFormedJsniBlock() {
-    new JsniConverter(getZipFilePath()).convert(getDataFiles("NotWellFormedNativeMethod.java"));
+    new JsniConverter(getZipFilePath())
+        .convert(getDataFilePaths("NotWellFormedNativeMethod.java"), new ArrayList<>());
   }
 }

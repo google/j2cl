@@ -68,7 +68,7 @@ public class NativeJsFilesWriter {
         // build js file name including directory.
         String directory = packageName.replaceAll("\\.", ZIP_PATH_SEPARATOR) + ZIP_PATH_SEPARATOR;
         String javascriptFilePath = directory + typeName + ".native.js";
-        System.out.println("content of " + javascriptFilePath + ":\n" + content);
+        JsniConverter.log("content of " + javascriptFilePath + ":\n" + content);
         addTozipFile(zipOutputStream, javascriptFilePath, content);
       }
 
