@@ -110,13 +110,20 @@ public class InsertUnderflowOverflowConversionVisitor extends ConversionContextV
 
     BinaryExpression binaryExpression = (BinaryExpression) expression;
 
-    // SPECIAL CASE FOR INT
+    // SPECIAL CASE FOR INT:
+    // Technically, we should be emitting underflow/overflow narrowing operations for int
+    // regardless of which binary operator is being used. If we did so our int operations would be
+    // spammed with underflow/overflow checks. As an optimization, we choose not to insert
+    // underflow/overflow checks for integer operations other than divide and mod because:
+    //  1) ints are used a lot and will therefore create a lot of underflow/overflow checks.
+    //  2) ints are larger than byte, char, and short and are therefore less likely to produce
+    //     overflow behavior.
+    //
+    // The narrowing operations also produce ArithmeticExceptions that result from division by 0
+    // and modulus by 0 so we also keep the check for modulus operations.
     if (fromTypeDescriptor == TypeDescriptors.get().primitiveInt
-        && binaryExpression.getOperator() != BinaryOperator.DIVIDE) {
-      // Technically we should be emitting underflow/overflow narrowing operations for
-      // int regardless of which binary operator is being used. But if we did so our int
-      // operations would be spammed over with underflow/overflow checks. Instead, for int,
-      // we do what GWT does which is to only emit the check when doing division.
+        && binaryExpression.getOperator() != BinaryOperator.DIVIDE
+        && binaryExpression.getOperator() != BinaryOperator.REMAINDER) {
       return expression;
     }
 

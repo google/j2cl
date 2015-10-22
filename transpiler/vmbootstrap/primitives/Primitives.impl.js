@@ -7,7 +7,8 @@ goog.module('vmbootstrap.primitives.Primitives$impl');
 let $Long = goog.require('nativebootstrap.Long$impl');
 let $LongUtils = goog.require('nativebootstrap.LongUtils$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
-
+let ArithmeticException =
+    goog.forwardDeclare('gen.java.lang.ArithmeticException$impl');
 
 /**
  * Static Primitive helper.
@@ -21,6 +22,7 @@ class Primitives {
    * @public
    */
   static $toByte(instance) {
+    Primitives.$checkArithmeticException(instance);
     return instance << 24 >> 24;
   }
 
@@ -32,6 +34,7 @@ class Primitives {
    * @public
    */
   static $toChar(instance) {
+    Primitives.$checkArithmeticException(instance);
     return instance & 0xFFFF;
   }
 
@@ -43,6 +46,7 @@ class Primitives {
    * @public
    */
   static $toShort(instance) {
+    Primitives.$checkArithmeticException(instance);
     return instance << 16 >> 16;
   }
 
@@ -54,6 +58,7 @@ class Primitives {
    * @public
    */
   static $toInt(instance) {
+    Primitives.$checkArithmeticException(instance);
     return instance | 0;
   }
 
@@ -359,11 +364,39 @@ class Primitives {
   }
 
   /**
+   * If result is Infinity, we assume a division by zero and throw an
+   * ArithmeticException.
+   *
+   * @param {number} result
+   * @return {void}
+   * @private
+   */
+  static $checkArithmeticException(result) {
+    if (!Number.isFinite(result)) {
+      Primitives.$throwArithmeticException();
+    }
+  }
+
+  /**
+   * Isolates the exception throw here so that calling functions that perform
+   * casts can still be optimized by V8.
+   *
+   * @private
+   */
+  static $throwArithmeticException() {
+    Primitives.$clinit();
+    throw ArithmeticException.$create();
+  }
+
+
+  /**
    * Runs inline static field initializers.
    * @protected
    */
   static $clinit() {
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    ArithmeticException =
+        goog.module.get('gen.java.lang.ArithmeticException$impl');
   }
 };
 

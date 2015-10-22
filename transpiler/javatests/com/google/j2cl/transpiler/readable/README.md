@@ -50,6 +50,9 @@ are copyright and licensed as follows:
     investigation of the cause.
 - fix TODO in JavaScriptGeneratorStage.
 - Investigate the new 'implicitparenthesis' build log warning.
+- Investigate the performance of divide by zero checks specifically on integers
+    in crypto libraries.  Add a @define if performance is significantly
+    affected to turn off checks.
 
 ## Tracking Closure warning issues
 - https://b.corp.google.com/hotlists/269212
@@ -57,7 +60,7 @@ are copyright and licensed as follows:
   formal parameter
 
 ## Feature Complete Java 7 TODOs
-- arithmetic exception for integers (e.g. divide by zero / mod by zero)
+- arithmetic exception for longs (e.g. divide by zero / mod by zero)
 - enum special functions (values, valueOf, etc).
 - identity equality (double equality / triple equality, null / undefined)
 - integrate JRE
