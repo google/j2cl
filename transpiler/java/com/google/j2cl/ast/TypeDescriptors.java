@@ -268,7 +268,7 @@ public class TypeDescriptors {
   public static final TypeDescriptor VM_PRIMITIVES_TYPE_DESCRIPTOR =
       TypeDescriptor.createRaw(Arrays.asList("vmbootstrap", "primitives"), "Primitives");
   public static final TypeDescriptor NATIVE_LONGS_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("nativebootstrap"), "LongUtils");
+      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "LongUtils");
   public static final TypeDescriptor NATIVE_LONG_TYPE_DESCRIPTOR =
       TypeDescriptor.createRaw(Arrays.asList("nativebootstrap"), "Long");
 

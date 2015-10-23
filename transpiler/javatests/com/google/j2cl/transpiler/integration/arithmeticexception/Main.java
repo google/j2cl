@@ -46,6 +46,16 @@ public class Main {
     } catch (ArithmeticException e) {
       // do nothing.
     }
+
+    try {
+      long a = 10;
+      long b = 0;
+      @SuppressWarnings("unused")
+      long c = (a / b);
+      assert false : "failed to throw ArithmeticException";
+    } catch (ArithmeticException e) {
+      // do nothing.
+    }
   }
 
   private static void testModByZero() {
@@ -84,6 +94,16 @@ public class Main {
       byte b = 0;
       @SuppressWarnings("unused")
       byte c = (byte) (a % b);
+      assert false : "failed to throw ArithmeticException";
+    } catch (ArithmeticException e) {
+      // do nothing.
+    }
+
+    try {
+      long a = 10;
+      long b = 0;
+      @SuppressWarnings("unused")
+      long c = (a % b);
       assert false : "failed to throw ArithmeticException";
     } catch (ArithmeticException e) {
       // do nothing.

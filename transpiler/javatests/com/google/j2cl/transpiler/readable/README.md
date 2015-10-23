@@ -60,7 +60,6 @@ are copyright and licensed as follows:
   formal parameter
 
 ## Feature Complete Java 7 TODOs
-- arithmetic exception for longs (e.g. divide by zero / mod by zero)
 - enum special functions (values, valueOf, etc).
 - identity equality (double equality / triple equality, null / undefined)
 - integrate JRE

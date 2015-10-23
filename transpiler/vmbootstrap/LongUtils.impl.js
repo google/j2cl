@@ -1,10 +1,11 @@
 /**
  * Impl hand rolled.
  */
-goog.module('nativebootstrap.LongUtils$impl');
+goog.module('vmbootstrap.LongUtils$impl');
 
 
 let Long = goog.require('nativebootstrap.Long$impl');
+let Primitives = goog.require('vmbootstrap.primitives.Primitives$impl');
 
 
 /**
@@ -29,9 +30,7 @@ class LongUtils {
    * @return {number} 0 if they are the same, 1 if the this is greater, and -1
    *     if the given one is greater.
    */
-  static $compare(a, b) {
-    return a.compare(b);
-  }
+  static $compare(a, b) { return a.compare(b); }
 
   /**
    * @param {string} longString A Long valueLong represented in readable string
@@ -93,7 +92,10 @@ class LongUtils {
    * @return {!Long} The division of left by right.
    * @public
    */
-  static $divide(leftLong, rightLong) { return leftLong.div(rightLong); }
+  static $divide(leftLong, rightLong) {
+    LongUtils.checkDivisorZero(rightLong);
+    return leftLong.div(rightLong);
+  }
 
   /**
    * @param {!Long} leftLong The left Long in the operation.
@@ -198,7 +200,10 @@ class LongUtils {
    * @return {!Long} The Long remainder of left divided by right.
    * @public
    */
-  static $remainder(leftLong, rightLong) { return leftLong.modulo(rightLong); }
+  static $remainder(leftLong, rightLong) {
+    LongUtils.checkDivisorZero(rightLong);
+    return leftLong.modulo(rightLong);
+  }
 
   /**
    * @param {!Long} valueLong The starting value to shift.
@@ -257,6 +262,17 @@ class LongUtils {
    * @public
    */
   static $toString(valueLong) { return valueLong.toString(); }
+
+  /**
+   * If the divisor is 0 we throw an arithmetic exception.
+   * @param {!Long} divisor
+   * @private
+   */
+  static checkDivisorZero(divisor) {
+    if (divisor.isZero()) {
+      Primitives.$throwArithmeticException();
+    }
+  }
 };
 
 

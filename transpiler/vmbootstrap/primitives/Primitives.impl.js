@@ -5,7 +5,7 @@ goog.module('vmbootstrap.primitives.Primitives$impl');
 
 
 let $Long = goog.require('nativebootstrap.Long$impl');
-let $LongUtils = goog.require('nativebootstrap.LongUtils$impl');
+let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 let ArithmeticException =
     goog.forwardDeclare('gen.java.lang.ArithmeticException$impl');
@@ -141,7 +141,10 @@ class Primitives {
    * @return {!$Long}
    * @public
    */
-  static $widenByteToLong(instance) { return $LongUtils.$fromInt(instance); }
+  static $widenByteToLong(instance) {
+    Primitives.$clinit();
+    return $LongUtils.$fromInt(instance);
+  }
 
   /**
    * Widens a char to a Long.
@@ -150,7 +153,10 @@ class Primitives {
    * @return {!$Long}
    * @public
    */
-  static $widenCharToLong(instance) { return $LongUtils.$fromInt(instance); }
+  static $widenCharToLong(instance) {
+    Primitives.$clinit();
+    return $LongUtils.$fromInt(instance);
+  }
 
   /**
    * Widens a short to a Long.
@@ -159,7 +165,10 @@ class Primitives {
    * @return {!$Long}
    * @public
    */
-  static $widenShortToLong(instance) { return $LongUtils.$fromInt(instance); }
+  static $widenShortToLong(instance) {
+    Primitives.$clinit();
+    return $LongUtils.$fromInt(instance);
+  }
 
   /**
    * Widens an int to a Long.
@@ -168,7 +177,10 @@ class Primitives {
    * @return {!$Long}
    * @public
    */
-  static $widenIntToLong(instance) { return $LongUtils.$fromInt(instance); }
+  static $widenIntToLong(instance) {
+    Primitives.$clinit();
+    return $LongUtils.$fromInt(instance);
+  }
 
   /**
    * Narrows a float number to a Long.
@@ -178,6 +190,7 @@ class Primitives {
    * @public
    */
   static $narrowFloatToLong(instance) {
+    Primitives.$clinit();
     return $LongUtils.$fromNumber(instance);
   }
 
@@ -189,6 +202,7 @@ class Primitives {
    * @public
    */
   static $narrowDoubleToLong(instance) {
+    Primitives.$clinit();
     return $LongUtils.$fromNumber(instance);
   }
 
@@ -200,6 +214,7 @@ class Primitives {
    * @public
    */
   static $narrowLongToByte(instance) {
+    Primitives.$clinit();
     let intValue = $LongUtils.$toInt(instance);
     return Primitives.$toByte(intValue);
   }
@@ -212,6 +227,7 @@ class Primitives {
    * @public
    */
   static $narrowLongToChar(instance) {
+    Primitives.$clinit();
     let intValue = $LongUtils.$toInt(instance);
     return Primitives.$toChar(intValue);
   }
@@ -224,6 +240,7 @@ class Primitives {
    * @public
    */
   static $narrowLongToShort(instance) {
+    Primitives.$clinit();
     let intValue = $LongUtils.$toInt(instance);
     return Primitives.$toShort(intValue);
   }
@@ -236,6 +253,7 @@ class Primitives {
    * @public
    */
   static $narrowLongToInt(instance) {
+    Primitives.$clinit();
     let intValue = $LongUtils.$toInt(instance);
     return Primitives.$toInt(intValue);
   }
@@ -247,7 +265,10 @@ class Primitives {
    * @return {number}
    * @public
    */
-  static $widenLongToFloat(instance) { return $LongUtils.$toNumber(instance); }
+  static $widenLongToFloat(instance) {
+    Primitives.$clinit();
+    return $LongUtils.$toNumber(instance);
+  }
 
   /**
    * Widens a Long to a double number.
@@ -256,7 +277,10 @@ class Primitives {
    * @return {number}
    * @public
    */
-  static $widenLongToDouble(instance) { return $LongUtils.$toNumber(instance); }
+  static $widenLongToDouble(instance) {
+    Primitives.$clinit();
+    return $LongUtils.$toNumber(instance);
+  }
 
   /**
    * Narrows a float number to a 8-bit signed number.
@@ -381,7 +405,7 @@ class Primitives {
    * Isolates the exception throw here so that calling functions that perform
    * casts can still be optimized by V8.
    *
-   * @private
+   * @public
    */
   static $throwArithmeticException() {
     Primitives.$clinit();
@@ -395,6 +419,7 @@ class Primitives {
    */
   static $clinit() {
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
     ArithmeticException =
         goog.module.get('gen.java.lang.ArithmeticException$impl');
   }
