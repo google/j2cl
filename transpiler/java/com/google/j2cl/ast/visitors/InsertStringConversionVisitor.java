@@ -17,9 +17,12 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AstUtils;
+import com.google.j2cl.ast.BinaryExpression;
+import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.MethodCall;
+import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 
@@ -40,12 +43,21 @@ public class InsertStringConversionVisitor extends ConversionContextVisitor {
           public Expression rewriteStringContext(
               Expression operandExpression, Expression otherOperandExpression) {
             TypeDescriptor typeDescriptor = operandExpression.getTypeDescriptor();
-            // If it's a String, and it is not null or the otherOperandExpression is not null,
-            // leave it alone.
-            if (typeDescriptor == TypeDescriptors.get().javaLangString
-                && (AstUtils.isNonNullString(operandExpression)
-                    || AstUtils.isNonNullString(otherOperandExpression))) {
-              return operandExpression;
+            if (typeDescriptor == TypeDescriptors.get().javaLangString) {
+              // If it's a string, and it is not null or the otherOperandExpression is not null,
+              // leave it alone.
+              if (AstUtils.isNonNullString(operandExpression)
+                  || AstUtils.isNonNullString(otherOperandExpression)) {
+                return operandExpression;
+              } else {
+                // Otherwise, add an empty string at the front to make sure JS sees it as a
+                // string operation.
+                return new BinaryExpression(
+                    TypeDescriptors.get().javaLangString,
+                    new StringLiteral("\"\""),
+                    BinaryOperator.PLUS,
+                    operandExpression);
+              }
             }
             // Normally Java would box a primitive but we don't because JS already converts
             // primitives to String in the presence of a + operator.

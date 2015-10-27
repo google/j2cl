@@ -56,11 +56,10 @@ class StringConversion extends Object {
   m_test() {
     let s1 = null;
     let s2 = null;
-    let s3 = String.m_valueOf__java_lang_Object(s1) + s2;
-    s2 = String.m_valueOf__java_lang_Object(s2) + s2;
+    let s3 = "" + s1 + s2;
+    s2 = "" + s2 + s2;
     s1 += "a";
-    s3 = String.m_valueOf__java_lang_Object(s1) + s1 + s2 +
-         String.m_valueOf__java_lang_Object(null) + "a";
+    s3 = "" + s1 + s1 + s2 + String.m_valueOf__java_lang_Object(null) + "a";
     s3 = "a" + s1 + s1 + s2 + String.m_valueOf__java_lang_Object(null);
   }
 
