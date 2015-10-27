@@ -60,12 +60,14 @@ class Main extends Object {
   static m_main__arrayOf_java_lang_String(args) {
     Main.$clinit();
     $Asserts.$enabled() &&
-        $Asserts.$assert($Objects.m_equals__java_lang_Object__java_lang_Object(
-            NativeClass.m_nativeStaticMethod(), "nativeSaticMethod"));
+        $Asserts.$assert(
+            $Objects.m_equals__java_lang_Object__java_lang_Object(
+                NativeClass.m_nativeStaticMethod(), "nativeSaticMethod"));
     let instance = NativeClass.$create();
     $Asserts.$enabled() &&
-        $Asserts.$assert($Objects.m_equals__java_lang_Object__java_lang_Object(
-            instance.m_nativeInstanceMethod(), "nativeInstanceMethod"));
+        $Asserts.$assert(
+            $Objects.m_equals__java_lang_Object__java_lang_Object(
+                instance.m_nativeInstanceMethod(), "nativeInstanceMethod"));
   }
 
   /**
