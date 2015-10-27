@@ -49,10 +49,15 @@ are copyright and licensed as follows:
     they are not called. See cl/103587701 for a repro case and a deeper
     investigation of the cause.
 - fix TODO in JavaScriptGeneratorStage.
-- Investigate the new 'implicitparenthesis' build log warning.
 - Investigate the performance of divide by zero checks specifically on integers
     in crypto libraries.  Add a @define if performance is significantly
     affected to turn off checks.
+- hashcode test in 'numberobjectcalls' fails for long
+- Bitwise on booleans ^ on boolean is not working correctly, it returns a
+  'number' not 'boolean', JSCompiler type error
+- Add automatic devirtualization translation of instance methods to static
+  methods, and delete the instance afterword.
+- Update JsniConverter to emit a $clinit() as the first line of static methods
 
 ## Tracking Closure warning issues
 - https://b.corp.google.com/hotlists/269212
