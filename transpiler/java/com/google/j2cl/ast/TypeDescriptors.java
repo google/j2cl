@@ -171,6 +171,10 @@ public class TypeDescriptors {
     return isBoxedType(typeDescriptor) || isPrimitiveType(typeDescriptor);
   }
 
+  public static boolean isBoxedTypeAsJsPrimitives(TypeDescriptor typeDescriptor) {
+    return isBoxedBooleanOrDouble(typeDescriptor) || typeDescriptor == get().javaLangString;
+  }
+
   /**
    * Returns an idea of the "width" of a numeric primitive type to help with deciding when a
    * conversion would be a narrowing and when it would be a widening.
@@ -252,10 +256,6 @@ public class TypeDescriptors {
 
   public static final TypeDescriptor NUMBERS_TYPE_DESCRIPTOR =
       TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Numbers");
-  public static final TypeDescriptor BOOLEANS_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Booleans");
-  public static final TypeDescriptor STRINGS_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Strings");
 
   public static final TypeDescriptor NATIVE_UTIL_TYPE_DESCRIPTOR =
       TypeDescriptor.createRaw(Arrays.asList("nativebootstrap"), "Util");
@@ -286,8 +286,7 @@ public class TypeDescriptors {
           NATIVE_LONG_TYPE_DESCRIPTOR,
           OBJECTS_TYPE_DESCRIPTOR,
           COMPARABLES_TYPE_DESCRIPTOR,
-          NUMBERS_TYPE_DESCRIPTOR,
-          BOOLEANS_TYPE_DESCRIPTOR);
+          NUMBERS_TYPE_DESCRIPTOR);
 
   // Not externally instantiable.
   private TypeDescriptors() {}

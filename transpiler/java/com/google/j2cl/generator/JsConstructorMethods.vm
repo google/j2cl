@@ -1,3 +1,8 @@
+#if ($isBoxedTypeAsPrimitive)
+  /**
+   * Constructor function implementation is provided separately.
+   */
+#else
 #if(${method.Descriptor.Visibility.isPublic()})
 #set ($ctorVisibility = "protected")
 #else
@@ -46,3 +51,4 @@
     $statementSourceGenerator.toSource($statementInBody)
 #end
   }
+#end

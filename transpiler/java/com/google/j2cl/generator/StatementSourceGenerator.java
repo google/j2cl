@@ -44,8 +44,6 @@ import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.LabeledStatement;
-import com.google.j2cl.ast.Member;
-import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MultiExpression;
@@ -243,11 +241,7 @@ public class StatementSourceGenerator {
       @Override
       public String transformFieldAccess(FieldAccess fieldAccess) {
         String fieldMangledName = toSource(fieldAccess.getTarget());
-
-        // make 'this.' reference and static reference explicit.
-        // TODO(rluble): We should probably make this explicit at the AST level, either by a
-        // normalization pass or by construction.
-        String qualifier = transformQualifier(fieldAccess);
+        String qualifier = toSource(fieldAccess.getQualifier());
         return String.format("%s.%s", qualifier, fieldMangledName);
       }
 
@@ -281,7 +275,7 @@ public class StatementSourceGenerator {
       @Override
       public String transformMethodCall(MethodCall expression) {
         MethodDescriptor methodDescriptor = expression.getTarget();
-        String qualifier = transformQualifier(expression);
+        String qualifier = toSource(expression.getQualifier());
         List<String> argumentSources = transformNodesToSource(expression.getArguments());
         if (expression.isPrototypeCall()) {
           return String.format(
@@ -712,15 +706,6 @@ public class StatementSourceGenerator {
         return aliasByVariable.containsKey(variable)
             ? aliasByVariable.get(variable)
             : variable.getName();
-      }
-
-      private String transformQualifier(MemberReference memberRef) {
-        Member member = memberRef.getTarget();
-        String qualifier =
-            memberRef.getQualifier() == null
-                ? (member.isStatic() ? getAlias(member.getEnclosingClassTypeDescriptor()) : "this")
-                : toSource(memberRef.getQualifier());
-        return qualifier;
       }
 
       public List<String> transformNodesToSource(List<? extends Node> nodes) {

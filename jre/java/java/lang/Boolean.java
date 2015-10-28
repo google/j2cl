@@ -13,6 +13,8 @@
  */
 package java.lang;
 
+import jsinterop.annotations.JsMethod;
+
 /**
  * See <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Boolean.html">the
@@ -22,20 +24,17 @@ public class Boolean implements Comparable<Boolean> {
   
   @Override
   public boolean equals(Object o) {
-    // Super-source replaced.
-    throw new RuntimeException();
+    return this == o;
   }
 
   @Override
   public int hashCode() {
-    // Super-source replaced.
-    throw new RuntimeException();
+    return this ? 1231 : 1237;
   }
 
   @Override
   public String toString() {
-    // Super-source replaced.
-    throw new RuntimeException();
+    return checkNotNull(this) ? "true" : "false";
   }
 
   public static Boolean valueOf(boolean b) {
@@ -47,18 +46,38 @@ public class Boolean implements Comparable<Boolean> {
   }
 
   public boolean booleanValue() {
-    // Super-source replaced.
-    throw new RuntimeException();
+    return checkNotNull(this);
   }
 
   public static int compare(boolean a, boolean b) {
-    // Super-source replaced.
-    throw new RuntimeException();
+    return (a == b) ? 0 : (a ? 1 : -1);
   }
 
   @Override
   public int compareTo(Boolean b) {
-    // Super-source replaced.
-    throw new RuntimeException();
+    return compare(booleanValue(), b.booleanValue());
   }
+
+  public static boolean checkNotNull(Boolean b) {
+    if (b == null) {
+      throw new NullPointerException();
+    }
+    return b;
+  }
+
+  @JsMethod(name = "$create__boolean")
+  public static boolean create(boolean b) {
+    return nativeCreate(b);
+  }
+
+  private static native boolean nativeCreate(boolean b) /*-{Boolean.$clinit(); return b}-*/;
+
+  @JsMethod(name = "$isInstance")
+  public static boolean isInstance(Object instance) {
+    return nativeIsInstance(instance);
+  }
+
+  private static native boolean nativeIsInstance(Object instance) /*-{
+    return typeof instance == 'boolean';
+  }-*/;
 }

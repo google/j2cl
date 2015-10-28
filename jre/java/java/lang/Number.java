@@ -13,6 +13,8 @@
  */
 package java.lang;
 
+import jsinterop.annotations.JsMethod;
+
 /**
  * See <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Number.html">the
@@ -34,4 +36,13 @@ public abstract class Number {
   public short shortValue() {
     return (short) intValue();
   }
+
+  @JsMethod(name = "$isInstance")
+  public static boolean isInstance(Object instance) {
+    return nativeIsInstance(instance);
+  }
+
+  private static native boolean nativeIsInstance(Object instance) /*-{
+    return typeof instance == 'number' || instance instanceof Number;
+  }-*/;
 }

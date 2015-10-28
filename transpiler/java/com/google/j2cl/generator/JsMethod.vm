@@ -26,6 +26,9 @@
    * @return {${statementSourceGenerator.getJsDocName($returnTypeDescriptor)}}
 #end
    * @${method.Descriptor.Visibility}
+#if (${method.Descriptor.isStatic()})
+   * @nocollapse
+#end
    */
 #if ($method.isNative())
   // native $staticModifier${ManglingNameUtils.getMangledName($method.Descriptor)}($parameterList)

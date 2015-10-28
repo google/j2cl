@@ -16,6 +16,8 @@ package com.google.j2cl.transpiler;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.visitors.ControlStatementFormatter;
 import com.google.j2cl.ast.visitors.CreateDefaultConstructorsVisitor;
+import com.google.j2cl.ast.visitors.CreateDevirtualizedStaticMethodsVisitor;
+import com.google.j2cl.ast.visitors.DevirtualizeMethodCallsVisitor;
 import com.google.j2cl.ast.visitors.FixAnonymousClassConstructorsVisitor;
 import com.google.j2cl.ast.visitors.FixSuperCallQualifiersVisitor;
 import com.google.j2cl.ast.visitors.FixTypeVariableInMethodVisitors;
@@ -102,6 +104,7 @@ public class J2clTranspiler {
       // Default constructors and explicit super calls should be synthesized first.
       CreateDefaultConstructorsVisitor.applyTo(j2clUnit);
       InsertExplicitSuperCallsVisitor.applyTo(j2clUnit);
+      CreateDevirtualizedStaticMethodsVisitor.applyTo(j2clUnit);
 
       FixAnonymousClassConstructorsVisitor.applyTo(j2clUnit);
       MakeExplicitEnumConstructionVisitor.applyTo(j2clUnit);
@@ -110,6 +113,7 @@ public class J2clTranspiler {
       NormalizeNestedClassConstructorsVisitor.applyTo(j2clUnit);
 
       // Statement/Expression normalizations
+      DevirtualizeMethodCallsVisitor.applyTo(j2clUnit);
       ControlStatementFormatter.applyTo(j2clUnit);
       SplitCompoundLongAssignmentsVisitor.applyTo(j2clUnit);
       InsertUnboxingConversionVisitor.applyTo(j2clUnit);

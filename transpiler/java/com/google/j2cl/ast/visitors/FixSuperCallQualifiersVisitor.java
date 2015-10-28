@@ -67,7 +67,7 @@ public class FixSuperCallQualifiersVisitor extends AbstractRewriter {
       return methodCall;
     }
     // super() call.
-    if (methodCall.getQualifier() != null) {
+    if (!AstUtils.hasThisReferenceAsQualifier(methodCall)) {
       // has an explicit qualifier.
       return methodCall;
     }

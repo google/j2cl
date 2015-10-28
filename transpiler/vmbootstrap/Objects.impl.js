@@ -4,11 +4,13 @@
 goog.module('vmbootstrap.Objects$impl');
 
 
+let Boolean = goog.forwardDeclare('gen.java.lang.Boolean$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Double = goog.forwardDeclare('gen.java.lang.Double$impl');
+let String = goog.forwardDeclare('gen.java.lang.String$impl');
 let Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let Booleans = goog.forwardDeclare('vmbootstrap.Booleans$impl');
-let Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
-let Strings = goog.forwardDeclare('vmbootstrap.Strings$impl');
+let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
+let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
 
 
 /**
@@ -25,11 +27,14 @@ class Objects {
     Objects.$clinit();
     let type = typeof obj;
     if (type == 'number') {
-      return Numbers.m_equals__java_lang_Object__java_lang_Object(obj, other);
+      return Double.m_equals__java_lang_Double__java_lang_Object(
+          /**@type {?number}*/ (obj), other);
     } else if (type == 'boolean') {
-      return Booleans.m_equals__java_lang_Object__java_lang_Object(obj, other);
+      return Boolean.m_equals__java_lang_Boolean__java_lang_Object(
+          /**@type {?boolean}*/ (obj), other);
     } else if (type == 'string') {
-      return Strings.m_equals__java_lang_Object__java_lang_Object(obj, other);
+      return String.m_equals__java_lang_String__java_lang_Object(
+          /**@type {?string}*/ (obj), other);
     } else if (obj instanceof Array) {
       return Arrays.m_equals__java_lang_Object__java_lang_Object(obj, other);
     } else {
@@ -46,11 +51,11 @@ class Objects {
     Objects.$clinit();
     let type = typeof obj;
     if (type == 'number') {
-      return Numbers.m_hashCode__java_lang_Object(obj);
+      return Double.m_hashCode__java_lang_Double(/**@type {?number}*/ (obj));
     } else if (type == 'boolean') {
-      return Booleans.m_hashCode__java_lang_Object(obj);
+      return Boolean.m_hashCode__java_lang_Boolean(/**@type {?boolean}*/ (obj));
     } else if (type == 'string') {
-      return Strings.m_hashCode__java_lang_Object(obj);
+      return String.m_hashCode__java_lang_String(/**@type {?string}*/ (obj));
     } else if (obj instanceof Array) {
       return Arrays.m_hashCode__java_lang_Object(obj);
     } else {
@@ -67,11 +72,11 @@ class Objects {
     Objects.$clinit();
     let type = typeof obj;
     if (type == 'number') {
-      return Numbers.m_toString__java_lang_Object(obj);
+      return obj.toString();
     } else if (type == 'boolean') {
-      return Booleans.m_toString__java_lang_Object(obj);
+      return obj.toString();
     } else if (type == 'string') {
-      return Strings.m_toString__java_lang_Object(obj);
+      return obj.toString();
     } else if (obj instanceof Array) {
       return Arrays.m_toString__java_lang_Object(obj);
     } else {
@@ -88,11 +93,11 @@ class Objects {
     Objects.$clinit();
     let type = typeof obj;
     if (type == 'number') {
-      return Numbers.m_getClass__java_lang_Object(obj);
+      return $double.$getClass();
     } else if (type == 'boolean') {
-      return Booleans.m_getClass__java_lang_Object(obj);
+      return $boolean.$getClass();
     } else if (type == 'string') {
-      return Strings.m_getClass__java_lang_Object(obj);
+      return String.$getClass();
     } else if (obj instanceof Array) {
       return Arrays.m_getClass__java_lang_Object(obj);
     } else {
@@ -105,11 +110,13 @@ class Objects {
    * @protected
    */
   static $clinit() {
+    Boolean = goog.module.get('gen.java.lang.Boolean$impl');
     Class = goog.module.get('gen.java.lang.Class$impl');
+    Double = goog.module.get('gen.java.lang.Double$impl');
+    String = goog.module.get('gen.java.lang.String$impl');
     Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    Booleans = goog.module.get('vmbootstrap.Booleans$impl');
-    Numbers = goog.module.get('vmbootstrap.Numbers$impl');
-    Strings = goog.module.get('vmbootstrap.Strings$impl');
+    $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
+    $double = goog.module.get('vmbootstrap.primitives.$double$impl');
   }
 };
 

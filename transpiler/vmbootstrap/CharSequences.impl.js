@@ -3,8 +3,9 @@
  */
 goog.module('vmbootstrap.CharSequences$impl');
 
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let CharSequence = goog.forwardDeclare('gen.java.lang.CharSequence$impl');
-let Strings = goog.forwardDeclare('vmbootstrap.Strings$impl');
+let String = goog.forwardDeclare('gen.java.lang.String$impl');
 
 
 /**
@@ -23,7 +24,7 @@ class CharSequences {
     var type = typeof obj;
     if (type == 'string') {
       obj = /**@type {string}*/ (obj);
-      return Strings.m_length__java_lang_String(obj);
+      return String.m_length__java_lang_String(obj);
     }
     return obj.m_length();
   }
@@ -40,7 +41,7 @@ class CharSequences {
     var type = typeof obj;
     if (type == 'string') {
       obj = /**@type {string}*/ (obj);
-      return Strings.m_charAt__java_lang_String__int(obj, index);
+      return String.m_charAt__java_lang_String__int(obj, index);
     }
     return obj.m_charAt__int(index);
   }
@@ -58,9 +59,67 @@ class CharSequences {
     var type = typeof obj;
     if (type == 'string') {
       obj = /**@type {string}*/ (obj);
-      return Strings.m_subSequence__java_lang_String__int__int(obj, start, end);
+      return String.m_subSequence__java_lang_String__int__int(obj, start, end);
     }
     return obj.m_subSequence__int__int(start, end);
+  }
+
+  /**
+   * @param {*} obj
+   * @param {*} other
+   * @return {boolean}
+   * @public
+   */
+  static m_equals__java_lang_CharSequence__java_lang_Object(obj, other) {
+    CharSequences.$clinit();
+    if (typeof obj == 'string') {
+      return String.m_equals__java_lang_String__java_lang_Object(
+          /**@type {?string}*/ (obj), other);
+    } else {
+      return obj.m_equals__java_lang_Object(other);
+    }
+  }
+
+  /**
+   * @param {*} obj
+   * @return {number}
+   * @public
+   */
+  static m_hashCode__java_lang_CharSequence(obj) {
+    CharSequences.$clinit();
+    if (typeof obj == 'string') {
+      return String.m_hashCode__java_lang_String(/**@type {?string}*/ (obj));
+    } else {
+      return obj.m_hashCode();
+    }
+  }
+
+  /**
+   * @param {*} obj
+   * @return {?string}
+   * @public
+   */
+  static m_toString__java_lang_CharSequence(obj) {
+    CharSequences.$clinit();
+    if (typeof obj == 'string') {
+      return obj.toString();
+    } else {
+      return obj.m_toString();
+    }
+  }
+
+  /**
+   * @param {*} obj
+   * @return {Class}
+   * @public
+   */
+  static m_getClass__java_lang_CharSequence(obj) {
+    CharSequences.$clinit();
+    if (typeof obj == 'string') {
+      return String.$getClass();
+    } else {
+      return obj.m_getClass();
+    }
   }
 
   /**
@@ -69,8 +128,9 @@ class CharSequences {
    * @nocollapse
    */
   static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
     CharSequence = goog.module.get('gen.java.lang.CharSequence$impl');
-    Strings = goog.module.get('vmbootstrap.Strings$impl');
+    String = goog.module.get('gen.java.lang.String$impl');
   }
 }
 ;

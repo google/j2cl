@@ -531,65 +531,6 @@ public class JdtUtils {
     return true;
   }
 
-  static boolean isInstanceMethod(IMethodBinding methodBinding) {
-    return !methodBinding.isConstructor() && !JdtUtils.isStatic(methodBinding.getModifiers());
-  }
-
-  static boolean isObjectInstanceMethodBinding(
-      IMethodBinding methodBinding, org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
-    if (!isInstanceMethod(methodBinding)) {
-      return false;
-    }
-    ITypeBinding javaLangObjectBinding =
-        compilationUnit.getAST().resolveWellKnownType("java.lang.Object");
-    for (IMethodBinding objectMethodBinding : javaLangObjectBinding.getDeclaredMethods()) {
-      if (methodBinding == objectMethodBinding || methodBinding.overrides(objectMethodBinding)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
-   * Returns true if {@code methodBinding} is an instance method declared by Double or Number.
-   */
-  static boolean isNumberInstanceMethodBinding(
-      IMethodBinding methodBinding, org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
-    ITypeBinding javaLangDoubleBinding =
-        compilationUnit.getAST().resolveWellKnownType("java.lang.Double");
-    ITypeBinding javaLangNumberBinding = javaLangDoubleBinding.getSuperclass();
-    return isInstanceMethod(methodBinding)
-        && (methodBinding.getDeclaringClass().isEqualTo(javaLangDoubleBinding)
-            || methodBinding.getDeclaringClass().isEqualTo(javaLangNumberBinding));
-  }
-
-  static boolean isBooleanInstanceMethodBinding(
-      IMethodBinding methodBinding, org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
-    ITypeBinding javaLangBooleanBinding =
-        compilationUnit.getAST().resolveWellKnownType("java.lang.Boolean");
-    return isInstanceMethod(methodBinding)
-        && methodBinding.getDeclaringClass().isEqualTo(javaLangBooleanBinding);
-  }
-
-  static boolean isComparableInstanceMethodBinding(IMethodBinding methodBinding) {
-    return isInstanceMethod(methodBinding)
-        && methodBinding.getDeclaringClass().getBinaryName().equals("java.lang.Comparable");
-  }
-
-  static boolean isCharSequenceInstanceMethodBinding(IMethodBinding methodBinding) {
-    return isInstanceMethod(methodBinding)
-        && methodBinding.getDeclaringClass().getBinaryName().equals("java.lang.CharSequence");
-  }
-
-  /**
-   * @param methodBinding
-   * @return True if @methodBinding is a java.lang.String instance method.
-   */
-  static boolean isStringInstanceMethodBinding(IMethodBinding methodBinding) {
-    return isInstanceMethod(methodBinding)
-        && methodBinding.getDeclaringClass().getBinaryName().equals("java.lang.String");
-  }
-
   static IMethodBinding findSamMethodBinding(ITypeBinding typeBinding) {
     // TODO: there maybe an issue in which case it inherits a default method from an interface
     // and inherits an abstract method with the same signature from another interface. Add an

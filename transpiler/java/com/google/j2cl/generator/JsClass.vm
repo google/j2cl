@@ -14,6 +14,8 @@
 #set ($simpleName = $classType.Descriptor.SimpleName)
 #set ($binaryName = ${GeneratorUtils.getBinaryName($classType.Descriptor)})
 #set ($sourceName = ${GeneratorUtils.getSourceName($classType.Descriptor)})
+#set ($isBoxedTypeAsPrimitive = ${GeneratorUtils.isBoxedTypeAsPrimitive($classType.Descriptor)})
+#set ($superBoxedTypeAsPrimitive = ${GeneratorUtils.superBoxedTypeAsPrimitive($classType.Descriptor)})
 #if (${GeneratorUtils.hasJsDoc($classType)})
 /**
 #if (${classType.isAbstract()})
@@ -79,6 +81,11 @@ class $className $extendsClause {
 #end
 #end
 
+#if ($superBoxedTypeAsPrimitive)
+  /**
+   * $isInstance() function implementation is provided separately.
+   */
+#else
   /**
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
@@ -86,6 +93,7 @@ class $className $extendsClause {
    * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof $className; }
+#end
 
   /**
    * Returns whether the provided class is or extends this class.

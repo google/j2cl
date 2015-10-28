@@ -55,8 +55,6 @@ are copyright and licensed as follows:
 - hashcode test in 'numberobjectcalls' fails for long
 - Bitwise on booleans ^ on boolean is not working correctly, it returns a
   'number' not 'boolean', JSCompiler type error
-- Add automatic devirtualization translation of instance methods to static
-  methods, and delete the instance afterword.
 - Update JsniConverter to emit a $clinit() as the first line of static methods
 
 ## Tracking Closure warning issues
@@ -83,8 +81,6 @@ are copyright and licensed as follows:
 
 ## Polish TODOs
 - anonymousclassforfunctionalinterface (transpiled to function)
-- devirtualized classes should skip Object trampoline when possible:
-    string.toString()
 - enumoptimization
 - finalfield (readable JsDoc and no static setter)
 - localvariablejsdoc

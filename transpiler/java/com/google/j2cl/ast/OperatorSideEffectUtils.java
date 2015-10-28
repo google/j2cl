@@ -47,7 +47,7 @@ public class OperatorSideEffectUtils {
 
     Expression qualifier = getQualifier(leftOperand);
 
-    if (qualifier == null) {
+    if (isSimpleCase(leftOperand)) {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
       // be taken to avoid double side-effects from dereferencing the qualifier twice.
       // a += x => a = a + x
@@ -76,7 +76,7 @@ public class OperatorSideEffectUtils {
 
     Expression qualifier = getQualifier(operand);
 
-    if (qualifier == null) {
+    if (isSimpleCase(operand)) {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
       // be taken to avoid double side-effects from dereferencing the qualifier twice.
       // a++; => (Numbers.$v = a, a = a + 1, Numbers.$v)
@@ -137,7 +137,7 @@ public class OperatorSideEffectUtils {
 
     Expression qualifier = getQualifier(operand); // qualifier of the boxed instance
 
-    if (qualifier == null) {
+    if (isSimpleCase(operand)) {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
       // be taken to avoid double side-effects from dereferencing the qualifier twice.
       // ++a => a = a + 1
@@ -238,6 +238,18 @@ public class OperatorSideEffectUtils {
       return null;
     }
     return ((FieldAccess) expression).getQualifier();
+  }
+
+  /**
+   * If the expression is a field access with a non-this qualifier, it needs to be split to avoid
+   * double side-effect. Otherwise, it is a simple case.
+   */
+  private static boolean isSimpleCase(Expression expression) {
+    if (!(expression instanceof FieldAccess)) {
+      return true;
+    }
+    FieldAccess fieldAccess = (FieldAccess) expression;
+    return AstUtils.hasThisReferenceAsQualifier(fieldAccess);
   }
 
   /**

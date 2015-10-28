@@ -10,57 +10,13 @@ let Character = goog.forwardDeclare('gen.java.lang.Character$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let Double = goog.forwardDeclare('gen.java.lang.Double$impl');
 let Number = goog.forwardDeclare('gen.java.lang.Number$impl');
-let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
-let Primitives = goog.forwardDeclare('vmbootstrap.primitives.Primitives$impl');
 
 
 /**
  * Provides devirtualized method implementations for Numbers.
  */
 class Numbers {
-  /**
-   * @param {*} obj
-   * @param {*} other
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  static m_equals__java_lang_Object__java_lang_Object(obj, other) {
-    return obj === other;
-  }
-
-  /**
-   * @param {*} obj
-   * @return {number}
-   * @public
-   * @nocollapse
-   */
-  static m_hashCode__java_lang_Object(obj) {
-    return /** @type {number} */ (obj);
-  }
-
-  /**
-   * @param {*} obj
-   * @return {?string}
-   * @public
-   * @nocollapse
-   */
-  static m_toString__java_lang_Object(obj) {
-    return  /** @type {Object} */ (obj).toString();
-  }
-
-  /**
-   * @param {*} obj
-   * @return {Class}
-   * @public
-   * @nocollapse
-   */
-  static m_getClass__java_lang_Object(obj) {
-    Numbers.$clinit();
-    return $double.$getClass();
-  }
-
   /**
    * @param {Number|number} obj
    * @return {number}
@@ -70,7 +26,7 @@ class Numbers {
   static m_byteValue__java_lang_Number(obj) {
     Numbers.$clinit();
     if (typeof obj == 'number') {
-      return Primitives.$narrowDoubleToByte(obj);
+      return Double.m_byteValue__java_lang_Double(/**@type {number}*/ (obj));
     } else {
       return obj.m_byteValue();
     }
@@ -83,8 +39,9 @@ class Numbers {
    * @nocollapse
    */
   static m_doubleValue__java_lang_Number(obj) {
+    Numbers.$clinit();
     if (typeof obj == 'number') {
-      return obj;
+      return Double.m_doubleValue__java_lang_Double(/**@type {number}*/ (obj));
     } else {
       return obj.m_doubleValue();
     }
@@ -97,8 +54,9 @@ class Numbers {
    * @nocollapse
    */
   static m_floatValue__java_lang_Number(obj) {
+    Numbers.$clinit();
     if (typeof obj == 'number') {
-      return obj;
+      return Double.m_floatValue__java_lang_Double(/**@type {number}*/ (obj));
     } else {
       return obj.m_floatValue();
     }
@@ -113,7 +71,7 @@ class Numbers {
   static m_intValue__java_lang_Number(obj) {
     Numbers.$clinit();
     if (typeof obj == 'number') {
-      return Primitives.$narrowDoubleToInt(obj);
+      return Double.m_intValue__java_lang_Double(/**@type {number}*/ (obj));
     } else {
       return obj.m_intValue();
     }
@@ -128,7 +86,7 @@ class Numbers {
   static m_longValue__java_lang_Number(obj) {
     Numbers.$clinit();
     if (typeof obj == 'number') {
-      return Primitives.$narrowDoubleToLong(obj);
+      return Double.m_longValue__java_lang_Double(/**@type {number}*/ (obj));
     } else {
       return obj.m_longValue();
     }
@@ -143,42 +101,72 @@ class Numbers {
   static m_shortValue__java_lang_Number(obj) {
     Numbers.$clinit();
     if (typeof obj == 'number') {
-      return Primitives.$narrowDoubleToShort(obj);
+      return Double.m_shortValue__java_lang_Double(/**@type {number}*/ (obj));
     } else {
       return obj.m_shortValue();
     }
   }
 
   /**
-   * @param {?number} a
-   * @param {?number} b
-   * @return {number}
+   * @param {*} obj
+   * @param {*} other
+   * @return {boolean}
    * @public
    */
-  static m_compareTo__java_lang_Number__java_lang_Double(a, b) {
+  static m_equals__java_lang_Comparable__java_lang_Object(obj, other) {
     Numbers.$clinit();
-
-    // Generate Null Pointer Exceptions for a and b if they are null
-    if (a == null) {
-      a.m_compareTo__java_lang_Double(b);
+    var type = typeof obj;
+    if (type == 'number') {
+      return Double.m_equals__java_lang_Double__java_lang_Object(
+          /**@type {?number}*/ (obj), other);
+    } else {
+      return obj.m_equals__java_lang_Object(other);
     }
-    if (b == null) {
-      b.m_compareTo__java_lang_Double(a);
-    }
-
-    return Double.m_compare__double__double(a, b);
   }
 
   /**
-   * @param {?number} a
-   * @param {*} b
+   * @param {*} obj
    * @return {number}
    * @public
    */
-  static m_compareTo__java_lang_Number__java_lang_Object(a, b) {
+  static m_hashCode__java_lang_Comparable(obj) {
     Numbers.$clinit();
-    return Numbers.m_compareTo__java_lang_Number__java_lang_Double(
-      a, /**@type {number} */ ($Casts.to(b, Double)));
+    var type = typeof obj;
+    if (type == 'number') {
+      return Double.m_hashCode__java_lang_Double(/**@type {?number}*/ (obj));
+    } else {
+      return obj.m_hashCode();
+    }
+  }
+
+  /**
+   * @param {*} obj
+   * @return {?string}
+   * @public
+   */
+  static m_toString__java_lang_Comparable(obj) {
+    Numbers.$clinit();
+    var type = typeof obj;
+    if (type == 'number') {
+      return obj.toString();
+    } else {
+      return obj.m_toString();
+    }
+  }
+
+  /**
+   * @param {*} obj
+   * @return {Class}
+   * @public
+   */
+  static m_getClass__java_lang_Number(obj) {
+    Numbers.$clinit();
+    var type = typeof obj;
+    if (type == 'number') {
+      return $double.$getClass();
+    } else {
+      return obj.m_getClass();
+    }
   }
 
   /**
@@ -191,9 +179,7 @@ class Numbers {
     Class = goog.module.get('gen.java.lang.Class$impl');
     Double = goog.module.get('gen.java.lang.Double$impl');
     Number = goog.module.get('gen.java.lang.Number$impl');
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $double = goog.module.get('vmbootstrap.primitives.$double$impl');
-    Primitives = goog.module.get('vmbootstrap.primitives.Primitives$impl');
   }
 };
 

@@ -95,8 +95,13 @@ def replace_transpiled_js(target_names):
                              for target_name in target_names])
 
   for (target_name, zip_file_path) in pairs:
+    # Special case for readable example java.lang.String
+    if "javalang" in target_name:
+      extractDir = EXAMPLES_DIR + target_name
+    else:
+      extractDir = JAVA_DIR + "/"
     run_cmd_get_output(
-        ["unzip", "-o", "-d", JAVA_DIR + "/", zip_file_path])
+        ["unzip", "-o", "-d", extractDir, zip_file_path])
 
   # Ignore files under natives_sources/ since these are not generated.
   find_command_js_sources = ["find", EXAMPLES_DIR, "-name", "*.js",

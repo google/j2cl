@@ -13,6 +13,8 @@
  */
 package java.lang;
 
+import jsinterop.annotations.JsMethod;
+
 /**
  * See <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Double.html">the
@@ -30,50 +32,42 @@ public class Double extends Number implements Comparable<Double> {
 
   @Override
   public byte byteValue() {
-    // Super-source replaced.
-    throw new RuntimeException();
+    return (byte) doubleValue();
   }
 
   @Override
   public double doubleValue() {
-    // Super-source replaced.
-    throw new RuntimeException();
+    return checkNotNull(this);
   }
 
   @Override
   public float floatValue() {
-    // Super-source replaced.
-    throw new RuntimeException();
+    return (float) doubleValue();
   }
 
   @Override
   public int intValue() {
-    // Super-source replaced.
-    throw new RuntimeException();
+    return (int) doubleValue();
   }
 
   @Override
   public long longValue() {
-    // Super-source replaced.
-    throw new RuntimeException();
+    return (long) doubleValue();
   }
 
   @Override
   public short shortValue() {
-    // Super-source replaced.
-    throw new RuntimeException();
+    return (short) doubleValue();
   }
 
   @Override
   public boolean equals(Object o) {
-    // Super-source replaced.
-    throw new RuntimeException();
+    return this == o;
   }
 
   @Override
   public int hashCode() {
-    // Super-source replaced.
-    throw new RuntimeException();
+    return (int) doubleValue();
   }
 
   @Override
@@ -82,14 +76,40 @@ public class Double extends Number implements Comparable<Double> {
     throw new RuntimeException();
   }
 
-  public static int compare(double a, double b) {
-    // Super-source replaced.
-    throw new RuntimeException();
+  public static int compare(double x, double y) {
+    if (x < y) {
+      return -1;
+    }
+    if (x > y) {
+      return 1;
+    }
+    return 0;
   }
 
   @Override
   public int compareTo(Double d) {
-    // Super-source replaced.
-    throw new RuntimeException();
+    return compare(doubleValue(), d.doubleValue());
   }
+
+  public static double checkNotNull(Double d) {
+    if (d == null) {
+      throw new NullPointerException();
+    }
+    return d;
+  }
+
+  @JsMethod(name = "$create__double")
+  public static double create(double d) {
+    return nativeCreate(d);
+  }
+
+  private static native double nativeCreate(double b) /*-{Double.$clinit(); return b;}-*/;
+
+  @JsMethod(name = "$isInstance")
+  public static boolean isInstance(Object instance) {
+    return nativeIsInstance(instance);
+  }
+
+  private static native boolean nativeIsInstance(
+      Object instance) /*-{return typeof instance == 'number';}-*/;
 }

@@ -9,6 +9,7 @@ let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
@@ -58,6 +59,13 @@ class ObjectCalls extends Object {
     $Objects.m_hashCode__java_lang_Object(object);
     $Objects.m_toString__java_lang_Object(object);
     $Objects.m_getClass__java_lang_Object(object);
+    let objectCalls =
+        /**@type {Array<ObjectCalls>} */ ($Arrays.$create([1], ObjectCalls));
+    $Objects.m_equals__java_lang_Object__java_lang_Object(
+        objectCalls, objectCalls);
+    $Objects.m_hashCode__java_lang_Object(objectCalls);
+    $Objects.m_toString__java_lang_Object(objectCalls);
+    $Objects.m_getClass__java_lang_Object(objectCalls);
   }
 
   /**
@@ -65,14 +73,16 @@ class ObjectCalls extends Object {
    * @public
    */
   m_test() {
-    this.m_equals__java_lang_Object(Object.$create());
-    this.m_hashCode();
-    this.m_toString();
-    this.m_getClass();
-    this.m_equals__java_lang_Object(Object.$create());
-    this.m_hashCode();
-    this.m_toString();
-    this.m_getClass();
+    $Objects.m_equals__java_lang_Object__java_lang_Object(
+        this, Object.$create());
+    $Objects.m_hashCode__java_lang_Object(this);
+    $Objects.m_toString__java_lang_Object(this);
+    $Objects.m_getClass__java_lang_Object(this);
+    $Objects.m_equals__java_lang_Object__java_lang_Object(
+        this, Object.$create());
+    $Objects.m_hashCode__java_lang_Object(this);
+    $Objects.m_toString__java_lang_Object(this);
+    $Objects.m_getClass__java_lang_Object(this);
   }
 
   /**
@@ -120,6 +130,7 @@ class ObjectCalls extends Object {
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
     Object.$clinit();
   }

@@ -297,7 +297,7 @@ public class NormalizeNestedClassConstructorsVisitor extends AbstractRewriter {
       addCapturedVariableArguments(methodCallBuilder, superTypeDescriptor);
 
       // a.super() => super(a)
-      if (methodCall.getQualifier() != null) {
+      if (!AstUtils.hasThisReferenceAsQualifier(methodCall)) {
         methodCallBuilder
             .argument(methodCall.getQualifier(), superTypeDescriptor.getEnclosingTypeDescriptor())
             .qualifier(null);

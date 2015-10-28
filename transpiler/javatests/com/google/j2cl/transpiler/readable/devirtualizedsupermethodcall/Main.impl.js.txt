@@ -14,7 +14,6 @@ let SubNumber = goog.forwardDeclare(
     'gen.com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
-let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
 class Main extends Object {
@@ -60,7 +59,7 @@ class Main extends Object {
    */
   m_main() {
     let fooCallsSuperObjectMethods = FooCallsSuperObjectMethod.$create();
-    $Objects.m_hashCode__java_lang_Object(fooCallsSuperObjectMethods);
+    fooCallsSuperObjectMethods.m_hashCode();
     let sn = SubNumber.$create();
     $Numbers.m_byteValue__java_lang_Number(sn);
     sn.m_doubleValue();
@@ -119,7 +118,6 @@ class Main extends Object {
         'gen.com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber$impl');
     Class = goog.module.get('gen.java.lang.Class$impl');
     $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
-    $Objects = goog.module.get('vmbootstrap.Objects$impl');
     Object.$clinit();
   }
 }

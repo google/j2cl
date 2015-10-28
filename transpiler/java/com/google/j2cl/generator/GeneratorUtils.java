@@ -26,6 +26,7 @@ import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 
 import java.nio.file.FileSystem;
@@ -154,5 +155,24 @@ public class GeneratorUtils {
         || type.getDescriptor().isParameterizedType()
         || (type.getSuperTypeDescriptor() != null
             && type.getSuperTypeDescriptor().isParameterizedType());
+  }
+
+  // Returns if it is java type that is unboxed as Javascript primitive types.
+  // java.lang.Boolean, java.lang.Double and java.lang.String are unboxed as JS primitives.
+  public static boolean isBoxedTypeAsPrimitive(TypeDescriptor typeDescriptor) {
+    return TypeDescriptors.isBoxedTypeAsJsPrimitives(typeDescriptor);
+  }
+
+  // Returns true if typeDescriptor is unboxed as JS primitive types or it is super class or super
+  // interfaces of these types.
+  public static boolean superBoxedTypeAsPrimitive(TypeDescriptor typeDescriptor) {
+    // TODO: add
+    // ... || typeDescriptor.getRawTypeDescriptor()
+    //        == TypeDescriptors.get().javaLangComparable.getRawTypeDescriptor()
+    // || typeDescriptor == TypeDescriptors.get().javaLangCharSequence
+    // We are not having tests for 'DoubleInstance instanceof Comparable', currently just emit
+    // regular $isInstance methods for Comparable and CharSequence.
+    return isBoxedTypeAsPrimitive(typeDescriptor)
+        || typeDescriptor == TypeDescriptors.get().javaLangNumber;
   }
 }

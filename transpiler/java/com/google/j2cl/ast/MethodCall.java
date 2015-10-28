@@ -21,14 +21,12 @@ import com.google.j2cl.ast.processors.Visitable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nullable;
-
 /**
  * Class for method call expression.
  */
 @Visitable
 public class MethodCall extends Expression implements MemberReference, Call {
-  @Visitable @Nullable Expression qualifier;
+  @Visitable Expression qualifier;
   @Visitable MethodDescriptor targetMethodDescriptor;
   @Visitable List<Expression> arguments = new ArrayList<>();
   /**
@@ -44,6 +42,7 @@ public class MethodCall extends Expression implements MemberReference, Call {
       MethodDescriptor targetMethodDescriptor,
       List<Expression> arguments,
       boolean isPrototypeCall) {
+    Preconditions.checkNotNull(qualifier);
     Preconditions.checkNotNull(targetMethodDescriptor);
     Preconditions.checkNotNull(arguments);
     this.qualifier = qualifier;
@@ -58,7 +57,11 @@ public class MethodCall extends Expression implements MemberReference, Call {
    */
   public static MethodCall createRegularMethodCall(
       Expression qualifier, MethodDescriptor targetMethodDescriptor, List<Expression> arguments) {
-    return new MethodCall(qualifier, targetMethodDescriptor, arguments, false);
+    return new MethodCall(
+        AstUtils.getExplicitQualifier(qualifier, targetMethodDescriptor),
+        targetMethodDescriptor,
+        arguments,
+        false);
   }
 
   /**
@@ -67,7 +70,11 @@ public class MethodCall extends Expression implements MemberReference, Call {
    */
   public static MethodCall createPrototypeCall(
       Expression qualifier, MethodDescriptor targetMethodDescriptor, List<Expression> arguments) {
-    return new MethodCall(qualifier, targetMethodDescriptor, arguments, true);
+    return new MethodCall(
+        AstUtils.getExplicitQualifier(qualifier, targetMethodDescriptor),
+        targetMethodDescriptor,
+        arguments,
+        true);
   }
 
   @Override
@@ -91,10 +98,6 @@ public class MethodCall extends Expression implements MemberReference, Call {
 
   public boolean isPrototypeCall() {
     return isPrototypeCall;
-  }
-
-  public void setQualifier(Expression qualifier) {
-    this.qualifier = qualifier;
   }
 
   public void setTargetMethodDescriptor(MethodDescriptor targetMethodDescriptor) {

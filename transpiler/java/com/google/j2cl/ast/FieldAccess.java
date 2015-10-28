@@ -18,19 +18,17 @@ package com.google.j2cl.ast;
 import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
-import javax.annotation.Nullable;
-
 /**
  * Class for field access.
  */
 @Visitable
 public class FieldAccess extends Expression implements MemberReference {
-  @Visitable @Nullable Expression qualifier;
+  @Visitable Expression qualifier;
   @Visitable FieldDescriptor targetFieldDescriptor;
 
   public FieldAccess(Expression qualifier, FieldDescriptor targetFieldDescriptor) {
     Preconditions.checkNotNull(targetFieldDescriptor);
-    this.qualifier = qualifier;
+    this.qualifier = AstUtils.getExplicitQualifier(qualifier, targetFieldDescriptor);
     this.targetFieldDescriptor = targetFieldDescriptor;
   }
 
@@ -46,10 +44,6 @@ public class FieldAccess extends Expression implements MemberReference {
   @Override
   public FieldDescriptor getTarget() {
     return targetFieldDescriptor;
-  }
-
-  public void setQualifier(Expression qualifier) {
-    this.qualifier = qualifier;
   }
 
   public void setTargetFieldDescriptor(FieldDescriptor targetFieldDescriptor) {

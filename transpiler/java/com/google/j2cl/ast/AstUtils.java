@@ -657,4 +657,30 @@ public class AstUtils {
     Expression rightOperand = binaryExpression.getRightOperand();
     return isNonNullString(leftOperand) || isNonNullString(rightOperand);
   }
+
+  /**
+   * Returns explicit qualifier for member reference (field access or method call).
+   *
+   * <p>If {@code qualifier} is null, returns EnclosingClassTypeDescriptor as the qualifier for
+   * static method/field and 'this' reference as the qualifier for instance method/field.
+   */
+  public static Expression getExplicitQualifier(Expression qualifier, Member member) {
+    if (qualifier != null) {
+      return qualifier;
+    }
+    TypeDescriptor enclosingClassTypeDescriptor = member.getEnclosingClassTypeDescriptor();
+    return member.isStatic()
+        ? enclosingClassTypeDescriptor
+        : new ThisReference(enclosingClassTypeDescriptor);
+  }
+
+  /**
+   * Returns true if the qualifier of the given member reference is 'this' reference.
+   */
+  public static boolean hasThisReferenceAsQualifier(MemberReference memberReference) {
+    Expression qualifier = memberReference.getQualifier();
+    return qualifier instanceof ThisReference
+        && qualifier.getTypeDescriptor()
+            == memberReference.getTarget().getEnclosingClassTypeDescriptor();
+  }
 }

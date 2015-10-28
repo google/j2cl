@@ -33,7 +33,8 @@ def _impl(ctx):
   java_files = ctx.files.srcs  # java files that need to be compiled
   super_java_files = ctx.files.super_srcs  # java files whose js to ignore
   js_native_zip_files = ctx.files.native_sources_zips
-  java_deps = ctx.files.java_deps
+  java_deps = ctx.attr.java_deps
+  java_dep_files = set()
   java_deps_paths = []
   java_files_paths = []
   super_java_files_paths = []
@@ -42,8 +43,13 @@ def _impl(ctx):
   # base package for the build
   package_name = ctx.label.package
 
+  # gather transitive files and exported files in deps
   for java_dep in java_deps:
-    java_deps_paths += [java_dep.path]
+    java_dep_files += java_dep.files
+    java_dep_files += java_dep.default_runfiles.files # for exported libraries
+  # convert files to paths
+  for java_dep_file in java_dep_files:
+    java_deps_paths += [java_dep_file.path]
 
   for java_file in java_files:
     if java_file in super_java_files:
@@ -75,7 +81,7 @@ def _impl(ctx):
 
   js_zip_artifact = ctx.new_file(js_zip_name)
   ctx.action(
-      inputs=java_files + java_deps + js_native_zip_files,
+      inputs=java_files + list(java_dep_files) + js_native_zip_files,
       outputs=[js_zip_artifact],
       executable=ctx.executable.compiler,
       arguments=compiler_args,

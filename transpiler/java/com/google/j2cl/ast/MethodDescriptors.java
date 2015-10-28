@@ -24,8 +24,8 @@ import java.util.List;
 public class MethodDescriptors {
   /**
    * Creates a copy of the given method descriptor by adding the provided parameters to its end.
-   * <p>
-   * Takes care to correctly mirror the update to any contained erased method descriptor version.
+   * 
+   * <p>Takes care to correctly mirror the update to any contained erased method descriptor version.
    */
   public static MethodDescriptor createModifiedCopy(
       MethodDescriptor methodDescriptor, List<TypeDescriptor> addedParameters) {
@@ -35,6 +35,25 @@ public class MethodDescriptors {
     parameters.addAll(addedParameters);
     return MethodDescriptorBuilder.from(methodDescriptor)
         .parameterTypeDescriptors(parameters)
+        .build();
+  }
+
+  /**
+   * Creates a static MethodDescriptor from an instance MethodDescriptor.
+   *
+   * <p>The static MethodDescriptor has an extra parameter as its first parameter whose type is
+   * the enclosing class of {@code methodDescriptor}.
+   */
+  public static MethodDescriptor makeStaticMethodDescriptor(MethodDescriptor methodDescriptor) {
+    if (methodDescriptor.isStatic() || methodDescriptor.isConstructor()) {
+      return methodDescriptor;
+    }
+    List<TypeDescriptor> parameterTypeDescriptors = new ArrayList<>();
+    parameterTypeDescriptors.add(methodDescriptor.getEnclosingClassTypeDescriptor());
+    parameterTypeDescriptors.addAll(methodDescriptor.getParameterTypeDescriptors());
+    return MethodDescriptorBuilder.from(methodDescriptor)
+        .parameterTypeDescriptors(parameterTypeDescriptors)
+        .isStatic(true)
         .build();
   }
 }

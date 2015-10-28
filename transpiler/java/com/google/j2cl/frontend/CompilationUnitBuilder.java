@@ -123,7 +123,6 @@ public class CompilationUnitBuilder {
 
     private String currentSourceFile;
     private CompilationUnit j2clCompilationUnit;
-    private org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit;
 
     private void pushType(JavaType type) {
       Preconditions.checkArgument(type.getDescriptor() instanceof RegularTypeDescriptor);
@@ -139,7 +138,6 @@ public class CompilationUnitBuilder {
     private CompilationUnit convert(
         String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
       TypeDescriptors.init(jdtCompilationUnit.getAST());
-      this.jdtCompilationUnit = jdtCompilationUnit;
       currentSourceFile = sourceFilePath;
       String packageName = JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit);
       j2clCompilationUnit = new CompilationUnit(sourceFilePath, packageName);
@@ -1175,20 +1173,11 @@ public class CompilationUnitBuilder {
           methodBinding,
           JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(methodInvocation.arguments()),
           arguments);
-      MethodCall methodCall =
-          MethodCall.createRegularMethodCall(qualifier, methodDescriptor, arguments);
-      return MethodCallDevirtualizer.doDevirtualization(
-          methodCall, methodBinding, jdtCompilationUnit);
+      return MethodCall.createRegularMethodCall(qualifier, methodDescriptor, arguments);
     }
 
     private MethodCall convert(org.eclipse.jdt.core.dom.SuperMethodInvocation expression) {
       IMethodBinding methodBinding = expression.resolveMethodBinding();
-
-      // Do *not* perform Object method devirtualization. The point with super method calls is to
-      // *not* call the default version of the method on the prototype and instead call the specific
-      // version of the method in the super class. If we were to perform Object method
-      // devirtualization then the resulting routing through Objects.doFoo() would end up calling
-      // back onto the version of the method on the prototype (aka the wrong one).
 
       MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
       List<Expression> arguments =

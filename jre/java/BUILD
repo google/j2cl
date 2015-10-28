@@ -9,22 +9,7 @@ package(default_visibility = ["//:__subpackages__"])
 licenses(["unencumbered"])
 
 load("/third_party/java_src/j2cl/build_def/j2cl_java_library", "j2cl_java_library")
-
-# Transpiles the parts of the jre that are implemented as Java.
-j2cl_java_library(
-    name = "JavaJre",
-    srcs = glob(["**/*.java"]),
-    add_jre_dep = False,
-    super_srcs = [
-        "java/lang/Boolean.java",
-        "java/lang/Class.java",
-        "java/lang/Double.java",
-        "java/lang/Number.java",
-        "java/lang/Object.java",
-        "java/lang/String.java",
-        "javaemul/internal/JsDate.java",
-    ] + glob(["java/lang/annotation/*.java"]),
-)
+load("/third_party/java_src/j2cl/build_def/j2cl_tool", "jsni_to_j2cl_converter")
 
 # Bundles together both hand-rolled JS versions of Java classes with transpiled
 # versions of Java classes into a complete JRE.
@@ -57,7 +42,6 @@ j2cl_source_copy(
         "java/lang/Class.java",
         "java/lang/Enum.java",
         "java/lang/Object.java",
-        "java/lang/String.java",
         # TODO(dankurka): once JsInterop lands in GWT this class can be changed
         # to work with both GWT and j2cl
         "java/util/InternalJsMapFactory.java",
@@ -83,7 +67,17 @@ java_library(
     srcs = JRE_SRC,
 )
 
-load("/third_party/java_src/j2cl/build_def/j2cl_tool", "jsni_to_j2cl_converter")
+jsni_to_j2cl_converter(
+    name = "convert_jsni_emul_j2cl",
+    srcs = [
+        "java/lang/Boolean.java",
+        "java/lang/Double.java",
+        "java/lang/Number.java",
+        "java/lang/String.java",
+        "java/util/InternalJsMapFactory.java",
+    ],
+    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
+)
 
 jsni_to_j2cl_converter(
     name = "convert_jsni_emul",
@@ -101,14 +95,18 @@ jsni_to_j2cl_converter(
     ],
 )
 
-load("/third_party/java_src/j2cl/build_def/j2cl_create_zip", "j2cl_create_zip")
-
-j2cl_create_zip(
-    name = "native_js",
-    js = [
-        "java/lang/Throwable.native.js",
-        "javaemul/internal/ArrayStamper.native.js",
-        "javaemul/internal/HashCodes.native.js",
-        "javaemul/internal/LongCompareHolder.native.js",
+# Transpiles the parts of the jre that are implemented as Java.
+j2cl_java_library(
+    name = "JavaJre",
+    srcs = glob(["**/*.java"]),
+    add_jre_dep = False,
+    native_sources_zips = [
+        ":convert_jsni_emul_j2cl",
     ],
+    super_srcs = [
+        "java/lang/Class.java",
+        "java/lang/Object.java",
+        "javaemul/internal/JsDate.java",
+    ] + glob(["java/lang/annotation/*.java"]),
+    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
 )

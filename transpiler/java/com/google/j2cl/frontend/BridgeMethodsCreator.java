@@ -27,6 +27,7 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
+import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
@@ -244,7 +245,10 @@ public class BridgeMethodsCreator {
       arguments.add(argument);
     }
     Expression dispatchMethodCall =
-        MethodCall.createRegularMethodCall(null, targetMethodDescriptor, arguments);
+        MethodCall.createRegularMethodCall(
+            new ThisReference(targetMethodDescriptor.getEnclosingClassTypeDescriptor()),
+            targetMethodDescriptor,
+            arguments);
     Statement statement =
         bridgeMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.get().primitiveVoid
             ? new ExpressionStatement(dispatchMethodCall)
