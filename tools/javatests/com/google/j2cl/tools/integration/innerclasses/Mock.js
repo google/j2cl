@@ -7,4 +7,6 @@
  * add functions to these prototype afterwards.
  */
 var Outer$Inner = function() {};
+Outer$Inner.$clinit = function() {};
 var Outer$Inner$InnerInner = function() {};
+Outer$Inner$InnerInner.$clinit = function() {};

@@ -41,7 +41,8 @@ import java.util.zip.ZipOutputStream;
  * <code>com/foo</code> directory.
  */
 public class NativeJsFilesWriter {
-  private static final String STATIC_JS_METHOD = "{0}.{1} = function({2}) '{'{3}\n'}'\n\n";
+  private static final String STATIC_JS_METHOD =
+      "/** @nocollapse */\n{0}.{1} = function({2}) '{'\n    {0}.$clinit();{3}\n'}'\n\n";
   private static final String JS_METHOD = "{0}.prototype.{1} = function({2}) '{'{3}\n'}'\n\n";
   private static final String ZIP_PATH_SEPARATOR = "/";
 

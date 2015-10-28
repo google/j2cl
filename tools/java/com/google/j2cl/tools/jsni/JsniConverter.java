@@ -30,9 +30,11 @@ import org.eclipse.jdt.core.dom.CompilationUnit;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * Main class for the converter. This class will parse the different flags passed as arguments and
@@ -48,12 +50,17 @@ public class JsniConverter {
   @FlagSpec(name = "output_file", help = "The path and base filename for the output zip file")
   private static final Flag<String> outputFileFlag = Flag.value("");
 
+  @FlagSpec(name = "excludes", help = "The paths of files whose JSNI to exclude.")
+  private static final Flag<List<String>> excludesFlag = Flag.stringCollector();
+
   public static void main(String[] args) throws InvalidFlagValueException {
     String[] fileNames = Flags.parseAndReturnLeftovers(args);
 
     validateFlags(fileNames);
 
-    new JsniConverter(outputFileFlag.get()).convert(Arrays.asList(fileNames), classPathFlag.get());
+    new JsniConverter(outputFileFlag.get())
+        .convert(
+            Arrays.asList(fileNames), classPathFlag.get(), new HashSet<String>(excludesFlag.get()));
   }
 
   static void log(String message, Object... args) {
@@ -95,11 +102,14 @@ public class JsniConverter {
     // is no special care being taken to ensure that the classpath is being properly constructed.
     // This may result in some JDT parse errors, but since we are not checking the resulting Error
     // object they are effectively being ignored.
+    Errors errors = new Errors();
     JdtParser jdtParser =
         new JdtParser(
-            "1.8", classPathEntries, new ArrayList<>(), new ArrayList<>(), "UTF-8", new Errors());
+            "1.8", classPathEntries, new ArrayList<>(), new ArrayList<>(), "UTF-8", errors);
     jdtParser.setIncludeRunningVMBootclasspath(true);
-    return jdtParser.parseFiles(javaFileNames);
+    Map<String, CompilationUnit> compilationUnitsByPath = jdtParser.parseFiles(javaFileNames);
+    errors.maybeReportAndExit();
+    return compilationUnitsByPath;
   }
 
   private final String outputFile;
@@ -108,11 +118,16 @@ public class JsniConverter {
     this.outputFile = outputFile;
   }
 
-  public void convert(List<String> javaFileNames, List<String> classPathEntries) {
+  public void convert(
+      List<String> javaFileNames, List<String> classPathEntries, Set<String> excludeFileNames) {
     Multimap<String, JsniMethod> jsniMethodsByType = ArrayListMultimap.create();
 
     for (Entry<String, CompilationUnit> entry :
         getCompilationUnitsByPath(javaFileNames, classPathEntries).entrySet()) {
+      if (excludeFileNames.contains(entry.getKey())) {
+        continue;
+      }
+
       log("Converting %s", entry.getKey());
       jsniMethodsByType.putAll(
           NativeMethodExtractor.getJsniMethodsByType(entry.getKey(), entry.getValue()));

@@ -23,12 +23,12 @@ import jsinterop.annotations.JsMethod;
 public class AnnotatedMethod {
   @JsMethod(name = "staticMethod")
   public static native void annotatedStaticNativeMethod() /*-{
-    return "annotatedStaticNativeMethod"
+    return "annotatedStaticNativeMethod";
   }-*/;
 
   @JsMethod(name = "fqnStaticMethod")
   public static native void fqnAnnotatedStaticNativeMethod() /*-{
-      return "fqnAnnotatedStaticNativeMethod"
+      return "fqnAnnotatedStaticNativeMethod";
   }-*/;
 
   @JsMethod(name = "nativeMethod")

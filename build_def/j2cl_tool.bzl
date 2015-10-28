@@ -12,14 +12,16 @@ jsni_to_j2cl_converter(
 
 """
 
-def _should_be_included(java_file, excludes):
+def _should_be_excluded(java_file, excludes):
   for exclude in excludes:
     if java_file.path.endswith(exclude):
-      return False
-  return True;
+      return True
+  return False;
 
 def _impl(ctx):
-  java_files = [f for f in ctx.files.srcs if _should_be_included(f, ctx.attr.excludes)]
+  java_files = ctx.files.srcs
+  exclude_files = [f for f in ctx.files.srcs
+                   if _should_be_excluded(f, ctx.attr.excludes)]
   dep_targets = ctx.attr.deps
   zip_file = ctx.new_file(ctx.label.name + "_native_js.zip") # output zip file
 
@@ -31,6 +33,8 @@ def _impl(ctx):
   converter_args = ["--output_file", zip_file.path]
   if ctx.attr.debug:
     converter_args += ["--verbose"]
+  for exclude_file in exclude_files:
+    converter_args += ["--excludes", exclude_file.path]
   dep_files = set()
   for dep_target in dep_targets:
     dep_files += dep_target.files

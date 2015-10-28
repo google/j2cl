@@ -6,3 +6,4 @@
  * add functions to this prototype afterwards.
  */
 var AnnotatedMethod = function() {};
+AnnotatedMethod.$clinit = function() {};

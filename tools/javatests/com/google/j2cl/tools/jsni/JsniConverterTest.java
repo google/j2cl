@@ -51,7 +51,8 @@ public class JsniConverterTest extends BaseJsniConverterTest {
     new JsniConverter(getZipFilePath())
         .convert(
             getDataFilePaths("SimpleClass.java", "Outer.java", "NoNativeMethod.java"),
-            new ArrayList<>());
+            new ArrayList<>(),
+            new HashSet<>());
 
     // Collect content of the zip file.
     ZipInputStream zis = new ZipInputStream(new FileInputStream(getZipFile()));
@@ -76,7 +77,7 @@ public class JsniConverterTest extends BaseJsniConverterTest {
   @Test
   public void convert_javaFileWithoutNativeMethod() throws IOException {
     new JsniConverter(getZipFilePath())
-        .convert(getDataFilePaths("NoNativeMethod.java"), new ArrayList<>());
+        .convert(getDataFilePaths("NoNativeMethod.java"), new ArrayList<>(), new HashSet<>());
 
     // check the content of the zip file is empty
     ZipInputStream zis = new ZipInputStream(new FileInputStream(getZipFile()));
@@ -90,7 +91,7 @@ public class JsniConverterTest extends BaseJsniConverterTest {
   @Test(expected = RuntimeException.class)
   public void convert_nativeMethodWithJsniReferenceToInstanceMethod() {
     new JsniConverter(getZipFilePath())
-        .convert(getDataFilePaths("MethodJsniReference.java"), new ArrayList<>());
+        .convert(getDataFilePaths("MethodJsniReference.java"), new ArrayList<>(), new HashSet<>());
   }
 
   /**
@@ -100,7 +101,8 @@ public class JsniConverterTest extends BaseJsniConverterTest {
   @Test(expected = RuntimeException.class)
   public void convert_nativeMethodWithJsniReferenceToStaticMethod() {
     new JsniConverter(getZipFilePath())
-        .convert(getDataFilePaths("StaticMethodJsniReference.java"), new ArrayList<>());
+        .convert(
+            getDataFilePaths("StaticMethodJsniReference.java"), new ArrayList<>(), new HashSet<>());
   }
 
   /**
@@ -110,7 +112,10 @@ public class JsniConverterTest extends BaseJsniConverterTest {
   @Test(expected = RuntimeException.class)
   public void convert_nativeMethodWithJsniReferenceToInstanceField() {
     new JsniConverter(getZipFilePath())
-        .convert(getDataFilePaths("InstanceFieldJsniReference.java"), new ArrayList<>());
+        .convert(
+            getDataFilePaths("InstanceFieldJsniReference.java"),
+            new ArrayList<>(),
+            new HashSet<>());
   }
 
   /**
@@ -120,7 +125,8 @@ public class JsniConverterTest extends BaseJsniConverterTest {
   @Test(expected = RuntimeException.class)
   public void convert_nativeMethodWithJsniReferenceToStaticField() {
     new JsniConverter(getZipFilePath())
-        .convert(getDataFilePaths("StaticFieldJsniReference.java"), new ArrayList<>());
+        .convert(
+            getDataFilePaths("StaticFieldJsniReference.java"), new ArrayList<>(), new HashSet<>());
   }
 
   /**
@@ -130,6 +136,7 @@ public class JsniConverterTest extends BaseJsniConverterTest {
   @Test(expected = RuntimeException.class)
   public void convert_noWellFormedJsniBlock() {
     new JsniConverter(getZipFilePath())
-        .convert(getDataFilePaths("NotWellFormedNativeMethod.java"), new ArrayList<>());
+        .convert(
+            getDataFilePaths("NotWellFormedNativeMethod.java"), new ArrayList<>(), new HashSet<>());
   }
 }
