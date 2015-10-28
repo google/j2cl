@@ -19,6 +19,7 @@ import com.google.j2cl.ast.visitors.CreateDefaultConstructorsVisitor;
 import com.google.j2cl.ast.visitors.CreateDevirtualizedStaticMethodsVisitor;
 import com.google.j2cl.ast.visitors.DevirtualizeMethodCallsVisitor;
 import com.google.j2cl.ast.visitors.FixAnonymousClassConstructorsVisitor;
+import com.google.j2cl.ast.visitors.FixBooleanOperatorsPass;
 import com.google.j2cl.ast.visitors.FixSuperCallQualifiersVisitor;
 import com.google.j2cl.ast.visitors.FixTypeVariableInMethodVisitors;
 import com.google.j2cl.ast.visitors.InsertBoxingConversionVisitor;
@@ -122,6 +123,7 @@ public class J2clTranspiler {
       InsertWideningPrimitiveConversionVisitor.applyTo(j2clUnit);
       // TODO: InsertWideningAndNarrowingPrimitiveConversionVisitor.applyTo(j2clUnit);
       InsertUnderflowOverflowConversionVisitor.applyTo(j2clUnit);
+      FixBooleanOperatorsPass.applyTo(j2clUnit);
       InsertBoxingConversionVisitor.applyTo(j2clUnit);
       InsertStringConversionVisitor.applyTo(j2clUnit);
       NormalizeCastsVisitor.applyTo(j2clUnit);

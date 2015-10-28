@@ -53,8 +53,6 @@ are copyright and licensed as follows:
     in crypto libraries.  Add a @define if performance is significantly
     affected to turn off checks.
 - hashcode test in 'numberobjectcalls' fails for long
-- Bitwise on booleans ^ on boolean is not working correctly, it returns a
-  'number' not 'boolean', JSCompiler type error
 - Update JsniConverter to emit a $clinit() as the first line of static methods
 
 ## Tracking Closure warning issues
