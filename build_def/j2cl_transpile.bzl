@@ -27,11 +27,17 @@ j2cl_transpile directly.
 
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_root")
 
+def _is_in_super(java_file, super_srcs):
+  for super_src in super_srcs:
+    if java_file.path.endswith(super_src):
+      return True
+  return False;
+
 def _impl(ctx):
   """Implementation for j2cl_transpile"""
   separator = ctx.configuration.host_path_separator
   java_files = ctx.files.srcs  # java files that need to be compiled
-  super_java_files = ctx.files.super_srcs  # java files whose js to ignore
+  super_java_files = ctx.attr.super_srcs  # java files whose js to ignore
   js_native_zip_files = ctx.files.native_sources_zips
   java_deps = ctx.attr.java_deps
   java_dep_files = set()
@@ -47,12 +53,13 @@ def _impl(ctx):
   for java_dep in java_deps:
     java_dep_files += java_dep.files
     java_dep_files += java_dep.default_runfiles.files # for exported libraries
+
   # convert files to paths
   for java_dep_file in java_dep_files:
     java_deps_paths += [java_dep_file.path]
 
   for java_file in java_files:
-    if java_file in super_java_files:
+    if _is_in_super(java_file, super_java_files):
       super_java_files_paths += [java_file.path]
     java_files_paths += [java_file.path]
 
@@ -110,9 +117,7 @@ j2cl_transpile = rule(
             mandatory=True,
             allow_files=FileType([".java"]),
         ),
-        "super_srcs": attr.label_list(
-            allow_files=FileType([".java"]),
-        ),
+        "super_srcs": attr.string_list(default=[]),
         "native_sources_zips": attr.label_list(
             allow_files=FileType([".zip"]),
         )

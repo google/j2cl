@@ -13,15 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package java.lang.annotation;
+package java.util;
 
-/**
- * Annotation which indicates an annotation type is automatically inherited <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Inherited.html">[Sun
- * docs]</a>.
- */
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.ANNOTATION_TYPE)
-public @interface Inherited {
+class InternalJsIteratorEntry<V> {
+  protected InternalJsIteratorEntry() { }
+  public final boolean done() {return false;} /*-{ return this.done; }-*/;
+  public final String getKey() {return null;}/*-{ return this.value[0]; }-*/;
+  public final V getValue() {return null;}/*-{ return this.value[1]; }-*/;
 }

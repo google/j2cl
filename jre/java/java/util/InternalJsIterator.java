@@ -13,20 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package java.lang;
+package java.util;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
-/**
- * A program element annotated &#64;Deprecated is one that programmers are
- * discouraged from using, typically because it is dangerous, or because a
- * better alternative exists. <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Deprecated.html">[Sun
- * docs]</a>
- */
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-public @interface Deprecated {
+class InternalJsIterator<V> {
+  protected InternalJsIterator() { }
+  public final InternalJsIteratorEntry<V> next() { return null;}/*-{ return this.next(); }-*/;
 }

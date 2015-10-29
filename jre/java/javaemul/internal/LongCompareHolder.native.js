@@ -14,7 +14,7 @@
  * the License.
  */
 let Long = goog.require('nativebootstrap.Long$impl');
-let LongUtils = goog.require('nativebootstrap.LongUtils$impl');
+let LongUtils = goog.require('vmbootstrap.LongUtils$impl');
 
 /**
  * Returns a function that can be used to compare longs.

@@ -48,7 +48,7 @@ public abstract class Enum<E extends Enum<E>> implements Comparable<E>, Serializ
     return this.ordinal - ((Enum) other).ordinal;
   }
 
-  public static <T extends Enum<T>> T valueOf(Class<T> enumType, String name) {
+  public static native <T extends Enum<T>> T valueOf(Class<T> enumType, String name) /*-{
     return null;
-  }
+  }-*/;
 }

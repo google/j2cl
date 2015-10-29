@@ -49,6 +49,7 @@ are copyright and licensed as follows:
     in crypto libraries.  Add a @define if performance is significantly
     affected to turn off checks.
 - hashcode test in 'numberobjectcalls' fails for long
+- Investigate if Object.java, Enum.java and Class.java can be shared with GWT
 
 ## Tracking Closure warning issues
 - https://b.corp.google.com/hotlists/269212

@@ -25,7 +25,8 @@ public class Object {
     return false;
   }
 
-  public final Class<?> getClass() {
+  //TODO(dankurka): this method should actually be final, but because of GWT's String class it can not
+  public Class<?> getClass() {
     // Super-source replaced.
     return null;
   }

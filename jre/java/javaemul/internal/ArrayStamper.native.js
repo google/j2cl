@@ -13,7 +13,8 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-let $Arrays = goog.require('vmbootstrap.Arrays$impl');
+
+// Trust that Arrays.impl.js has already been imported.
 
 /**
  * @template M_T
@@ -24,6 +25,7 @@ let $Arrays = goog.require('vmbootstrap.Arrays$impl');
  */
 ArrayStamper.m_stampJavaTypeInfo__java_lang_Object__arrayOf_java_lang_Object =
     function(array, referenceType) {
-  $Arrays.$stampType(array, referenceType);
-  return array;
+  var cast_array = /** @type {Array<*>} */ (array);
+  $Arrays.$stampType(cast_array, referenceType);
+  return cast_array;
 };

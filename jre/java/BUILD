@@ -8,24 +8,10 @@ package(default_visibility = ["//:__subpackages__"])
 # Google owns the copyright
 licenses(["unencumbered"])
 
+load("/third_party/java_src/j2cl/build_def/j2cl_create_zip", "j2cl_create_zip")
 load("/third_party/java_src/j2cl/build_def/j2cl_java_library", "j2cl_java_library")
-load("/third_party/java_src/j2cl/build_def/j2cl_tool", "jsni_to_j2cl_converter")
-
-# Bundles together both hand-rolled JS versions of Java classes with transpiled
-# versions of Java classes into a complete JRE.
-js_library(
-    name = "jre",
-    srcs = glob(
-        ["**/*.js"],
-        exclude = ["**/*.native.js"],
-    ),
-    deps = [
-        "//transpiler:nativebootstrap",
-        ":JavaJre_js_library",
-    ],
-)
-
 load("/third_party/java_src/j2cl/build_def/j2cl_source_copy", "j2cl_source_copy")
+load("/third_party/java_src/j2cl/build_def/j2cl_tool", "jsni_to_j2cl_converter")
 
 j2cl_source_copy(
     name = "emul_dev",
@@ -44,6 +30,9 @@ j2cl_source_copy(
         "java/lang/Object.java",
         # TODO(dankurka): once JsInterop lands in GWT this class can be changed
         # to work with both GWT and j2cl
+        "java/util/InternalJsIterator.java",
+        "java/util/InternalJsIteratorEntry.java",
+        "java/util/InternalJsMap.java",
         "java/util/InternalJsMapFactory.java",
     ],
 )
@@ -82,6 +71,13 @@ jsni_to_j2cl_converter(
 jsni_to_j2cl_converter(
     name = "convert_jsni_emul",
     srcs = [
+        "java/lang/Enum.java",
+        "java/lang/Object.java",
+        "java/util/InternalJsIterator.java",
+        "java/util/InternalJsIteratorEntry.java",
+        "java/util/InternalJsMap.java",
+        "java/util/InternalJsMapFactory.java",
+        "javaemul/internal/JsDate.java",
         ":emul_dev",
         ":emul_user",
     ],
@@ -92,21 +88,64 @@ jsni_to_j2cl_converter(
         "javaemul/internal/HashCodes.java",
         "javaemul/internal/LongCompareHolder.java",
         "java/lang/Throwable.java",
+        "javaemul/internal/JsDate.java",
+    ],
+    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
+)
+
+# TODO(dankurka): replace with genzip
+j2cl_create_zip(
+    name = "native_js",
+    js = [
+        "java/lang/Throwable.native.js",
+        "javaemul/internal/ArrayStamper.native.js",
+        "javaemul/internal/HashCodes.native.js",
+        "javaemul/internal/LongCompareHolder.native.js",
     ],
 )
 
 # Transpiles the parts of the jre that are implemented as Java.
 j2cl_java_library(
     name = "JavaJre",
-    srcs = glob(["**/*.java"]),
+    srcs = [
+        # TODO(dankurka): investigate all classes here
+        "java/lang/Class.java",
+        "java/lang/Enum.java",
+        "java/lang/Object.java",
+        "java/lang/invoke/MethodHandles.java",
+        "java/nio/charset/CharsetDecoder.java",
+        "java/nio/charset/CharsetEncoder.java",
+        "java/util/InternalJsIterator.java",
+        "java/util/InternalJsIteratorEntry.java",
+        "java/util/InternalJsMap.java",
+        "java/util/InternalJsMapFactory.java",
+        "javaemul/internal/JsDate.java",
+        ":emul_dev",
+        ":emul_user",
+    ],
     add_jre_dep = False,
     native_sources_zips = [
-        ":convert_jsni_emul_j2cl",
+        ":convert_jsni_emul",
+        ":native_js",
     ],
     super_srcs = [
         "java/lang/Class.java",
         "java/lang/Object.java",
         "javaemul/internal/JsDate.java",
-    ] + glob(["java/lang/annotation/*.java"]),
+    ],
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
+)
+
+# Bundles together both hand-rolled JS versions of Java classes with transpiled
+# versions of Java classes into a complete JRE.
+js_library(
+    name = "jre",
+    srcs = glob(
+        ["**/*.js"],
+        exclude = ["**/*.native.js"],
+    ),
+    deps = [
+        "//transpiler:nativebootstrap",
+        ":JavaJre_js_library",
+    ],
 )

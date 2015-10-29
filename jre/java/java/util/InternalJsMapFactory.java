@@ -24,42 +24,8 @@ package java.util;
 // with j2cl.
 class InternalJsMapFactory {
 
-  public static native <V> InternalJsMap<V> newJsMap() /*-{
+  public static  <V> InternalJsMap<V> newJsMap() {return null;}/*-{
+    return null;
   }-*/;
-
-  static class InternalJsIterator<V> {
-    protected InternalJsIterator() { }
-    public final native InternalJsIteratorEntry<V> next() /*-{ }-*/;
-  }
-
-  static class InternalJsIteratorEntry<V> {
-    protected InternalJsIteratorEntry() { }
-    public final native boolean done() /*-{  }-*/;
-
-    public final native String getKey() /*-{ }-*/;
-
-    public final native V getValue() /*-{ }-*/;
-  }
-
-  static class InternalJsMap<V> {
-    protected InternalJsMap() { }
-    public final native V get(int key) /*-{ }-*/;
-
-    public final native V get(String key) /*-{ }-*/;
-
-    public final native void set(int key, V value) /*-{ }-*/;
-
-    public final native void set(String key, V value) /*-{ }-*/;
-    // Calls delete via brackets to be workable with polyfills
-    public final native void delete(int key) /*-{ }-*/;
-
-    public final native void delete(String key) /*-{ }-*/;
-
-    public final native InternalJsIterator<V> entries() /*-{ }-*/;
-  }
-
-  private InternalJsMapFactory() {
-    // Hides the constructor.
-  }
 }
 
