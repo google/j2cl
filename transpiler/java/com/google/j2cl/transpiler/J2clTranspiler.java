@@ -35,6 +35,7 @@ import com.google.j2cl.ast.visitors.NormalizeCastsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeLongsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeNestedClassConstructorsVisitor;
 import com.google.j2cl.ast.visitors.RemoveUnusedMultiExpressionReturnValues;
+import com.google.j2cl.ast.visitors.RewriteSystemGetPropertyVisitor;
 import com.google.j2cl.ast.visitors.SplitCompoundLongAssignmentsVisitor;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCountsVisitor;
 import com.google.j2cl.errors.Errors;
@@ -114,6 +115,7 @@ public class J2clTranspiler {
       NormalizeNestedClassConstructorsVisitor.applyTo(j2clUnit);
 
       // Statement/Expression normalizations
+      RewriteSystemGetPropertyVisitor.applyTo(j2clUnit);
       DevirtualizeMethodCallsVisitor.applyTo(j2clUnit);
       ControlStatementFormatter.applyTo(j2clUnit);
       SplitCompoundLongAssignmentsVisitor.applyTo(j2clUnit);

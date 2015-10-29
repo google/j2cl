@@ -20,4 +20,12 @@ package java.lang;
  */
 public class System {
   public static PrintStream out;
+
+  public static String getProperty(String s) {
+    return "";
+  }
+
+  public static String getProperty(String s, String defaultValue) {
+    return defaultValue;
+  }
 }

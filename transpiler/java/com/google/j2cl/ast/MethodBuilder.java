@@ -65,6 +65,11 @@ public class MethodBuilder {
     return this;
   }
 
+  public MethodBuilder clearStatements() {
+    statements.clear();
+    return this;
+  }
+
   public Method build() {
     List<Variable> finalParameters = new ArrayList<>();
     finalParameters.addAll(originalParameterVariables);
