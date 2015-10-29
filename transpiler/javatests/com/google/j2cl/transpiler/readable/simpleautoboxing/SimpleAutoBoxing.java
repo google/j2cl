@@ -243,4 +243,12 @@ public class SimpleAutoBoxing {
     assert i != i;
     assert i != boxI;
   }
+
+  public void testAssertStatement() {
+    Boolean boxB = new Boolean(true);
+    boolean b = true;
+
+    assert boxB;
+    assert b;
+  }
 }

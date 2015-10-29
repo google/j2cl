@@ -20,6 +20,7 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
+import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
@@ -143,6 +144,14 @@ public class ConversionContextVisitor extends AbstractRewriter {
               typeDescriptor.getComponentTypeDescriptor(), valueExpression));
     }
     return new ArrayLiteral(typeDescriptor, valueExpressions);
+  }
+
+  @Override
+  public Node rewriteAssertStatement(AssertStatement assertStatement) {
+    // unary numeric promotion context
+    return new AssertStatement(
+        contextRewriter.rewriteUnaryNumericPromotionContext(assertStatement.getExpression()),
+        assertStatement.getMessage());
   }
 
   @Override

@@ -392,6 +392,18 @@ class SimpleAutoBoxing extends Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  m_testAssertStatement() {
+    let boxB = Boolean.$create__boolean(true);
+    let b = true;
+    $Asserts.$enabled() &&
+        $Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxB));
+    $Asserts.$enabled() && $Asserts.$assert(b);
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
