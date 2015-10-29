@@ -37,7 +37,6 @@ are copyright and licensed as follows:
 
 ## Tasks
 - Add a Closure pass to get back the 2% regression introduced in cl/104162467.
-- Fix "inconsistent return type" error with checktypes in "LambdaNestingInAnonymousClasses"
 - Investigate if label names (from LabeledStatements) are allowed to collide with other identifiers.
 - Investigate if the size regression by cl/103334620 can be fixed.
     The direct cause of the size regression is that making
@@ -50,7 +49,6 @@ are copyright and licensed as follows:
     in crypto libraries.  Add a @define if performance is significantly
     affected to turn off checks.
 - hashcode test in 'numberobjectcalls' fails for long
-- Update JsniConverter to emit a $clinit() as the first line of static methods
 
 ## Tracking Closure warning issues
 - https://b.corp.google.com/hotlists/269212
