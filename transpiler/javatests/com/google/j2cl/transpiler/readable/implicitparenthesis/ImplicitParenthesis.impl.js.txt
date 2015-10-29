@@ -137,7 +137,9 @@ class ImplicitParenthesis extends Object {
       boxedInt = Integer.$create__int(10);
       boxedBoolean = true;
       boxedBoolean = boxedInt.m_intValue() == primitiveInt;
-      $Asserts.$enabled() && $Asserts.$assert(boxedBoolean == false);
+      $Asserts.$enabled() &&
+          $Asserts.$assert(
+              Boolean.m_booleanValue__java_lang_Boolean(boxedBoolean) == false);
     }
   }
 

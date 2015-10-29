@@ -128,14 +128,18 @@ class SimpleAutoBoxing extends Object {
    * @return {boolean}
    * @public
    */
-  m_unbox__java_lang_Boolean(b) { return b; }
+  m_unbox__java_lang_Boolean(b) {
+    return Boolean.m_booleanValue__java_lang_Boolean(b);
+  }
 
   /**
    * @param {?number} d
    * @return {number}
    * @public
    */
-  m_unbox__java_lang_Double(d) { return d; }
+  m_unbox__java_lang_Double(d) {
+    return Double.m_doubleValue__java_lang_Double(d);
+  }
 
   /**
    * @param {Byte} b
@@ -220,7 +224,8 @@ class SimpleAutoBoxing extends Object {
     s = this.m_unbox__java_lang_Short(Short.m_valueOf__short(s));
     c = this.m_unbox__java_lang_Character(Character.m_valueOf__char(c));
     boxBool = boxBool && boxBool;
-    boxD = boxD + boxD;
+    boxD = Double.m_doubleValue__java_lang_Double(boxD) +
+           Double.m_doubleValue__java_lang_Double(boxD);
     boxF = Float.m_valueOf__float(boxF.m_floatValue() - boxF.m_floatValue());
     boxI = Integer.m_valueOf__int(boxI.m_intValue() * boxI.m_intValue());
     boxL = Long.m_valueOf__long(
@@ -244,16 +249,17 @@ class SimpleAutoBoxing extends Object {
     let boxL = Long.$create__long($LongUtils.$fromInt(1111));
     let boxS = Short.$create__short($Primitives.$narrowIntToShort(100));
     let boxC = Character.$create__char(97 /* 'a' */);
-    let bool = boxBool;
-    let d = boxD;
+    let bool = Boolean.m_booleanValue__java_lang_Boolean(boxBool);
+    let d = Double.m_doubleValue__java_lang_Double(boxD);
     let b = boxB.m_byteValue();
     let f = boxF.m_floatValue();
     let i = boxI.m_intValue();
     let l = boxL.m_longValue();
     let s = boxS.m_shortValue();
     let c = boxC.m_charValue();
-    boxBool = this.m_box__boolean(boxBool);
-    boxD = this.m_box__double(boxD);
+    boxBool =
+        this.m_box__boolean(Boolean.m_booleanValue__java_lang_Boolean(boxBool));
+    boxD = this.m_box__double(Double.m_doubleValue__java_lang_Double(boxD));
     boxB = this.m_box__byte(boxB.m_byteValue());
     boxF = this.m_box__float(boxF.m_floatValue());
     boxI = this.m_box__int(boxI.m_intValue());
@@ -261,7 +267,8 @@ class SimpleAutoBoxing extends Object {
     boxS = this.m_box__short(boxS.m_shortValue());
     boxC = this.m_box__char(boxC.m_charValue());
     bool = boxBool && boxBool;
-    d = boxD + boxD;
+    d = Double.m_doubleValue__java_lang_Double(boxD) +
+        Double.m_doubleValue__java_lang_Double(boxD);
     f = boxF.m_floatValue() - boxF.m_floatValue();
     i = boxI.m_intValue() * boxI.m_intValue();
     l = $LongUtils.$divide(boxL.m_longValue(), boxL.m_longValue());

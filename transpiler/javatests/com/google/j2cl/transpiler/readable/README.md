@@ -37,9 +37,6 @@ are copyright and licensed as follows:
 
 ## Tasks
 - Add a Closure pass to get back the 2% regression introduced in cl/104162467.
-- Fix "simpleautoboxing" build.log, we're currently omitting Double->double and Boolean->boolean
-    boxing operations and it's resulting in Closure seeing us try to collapse ?number->number and
-    ?boolean->boolean.
 - Fix "inconsistent return type" error with checktypes in "LambdaNestingInAnonymousClasses"
 - Investigate if label names (from LabeledStatements) are allowed to collide with other identifiers.
 - Investigate if the size regression by cl/103334620 can be fixed.

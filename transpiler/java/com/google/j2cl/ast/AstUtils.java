@@ -408,7 +408,6 @@ public class AstUtils {
   public static Expression unbox(Expression expression) {
     TypeDescriptor boxType = expression.getTypeDescriptor();
     Preconditions.checkArgument(TypeDescriptors.isBoxedType(boxType));
-    Preconditions.checkArgument(!TypeDescriptors.isBoxedBooleanOrDouble(boxType));
     TypeDescriptor primitiveType = TypeDescriptors.getPrimitiveTypeFromBoxType(boxType);
 
     MethodDescriptor valueMethodDescriptor =
@@ -428,8 +427,13 @@ public class AstUtils {
             ? expression
             : new ParenthesizedExpression(expression);
 
-    return MethodCall.createRegularMethodCall(
-        expression, valueMethodDescriptor, new ArrayList<Expression>());
+    MethodCall methodCall =
+        MethodCall.createRegularMethodCall(
+            expression, valueMethodDescriptor, new ArrayList<Expression>());
+    if (TypeDescriptors.isBoxedBooleanOrDouble(boxType)) {
+      methodCall = createDevirtualizedMethodCall(methodCall, boxType, boxType);
+    }
+    return methodCall;
   }
 
   /**

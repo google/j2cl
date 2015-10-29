@@ -46,9 +46,7 @@ public class InsertUnboxingConversionVisitor extends ConversionContextVisitor {
           @Override
           public Expression rewriteBinaryNumericPromotionContext(
               Expression subjectOperandExpression, Expression otherOperandExpression) {
-            if (TypeDescriptors.isBoxedType(subjectOperandExpression.getTypeDescriptor())
-                && !TypeDescriptors.isBoxedBooleanOrDouble(
-                    subjectOperandExpression.getTypeDescriptor())) {
+            if (TypeDescriptors.isBoxedType(subjectOperandExpression.getTypeDescriptor())) {
               return AstUtils.unbox(subjectOperandExpression);
             }
             return subjectOperandExpression;
@@ -57,8 +55,7 @@ public class InsertUnboxingConversionVisitor extends ConversionContextVisitor {
           @Override
           public Expression rewriteCastContext(CastExpression castExpression) {
             if (TypeDescriptors.isPrimitiveType(castExpression.getCastTypeDescriptor())
-                && TypeDescriptors.isBoxedType(castExpression.getExpression().getTypeDescriptor())
-                && !TypeDescriptors.isBoxedBooleanOrDouble(
+                && TypeDescriptors.isBoxedType(
                     castExpression.getExpression().getTypeDescriptor())) {
               // Actually remove the cast and replace it with the unboxing.
               return AstUtils.unbox(castExpression.getExpression());
@@ -74,8 +71,7 @@ public class InsertUnboxingConversionVisitor extends ConversionContextVisitor {
 
           @Override
           public Expression rewriteUnaryNumericPromotionContext(Expression operandExpression) {
-            if (TypeDescriptors.isBoxedType(operandExpression.getTypeDescriptor())
-                && !TypeDescriptors.isBoxedBooleanOrDouble(operandExpression.getTypeDescriptor())) {
+            if (TypeDescriptors.isBoxedType(operandExpression.getTypeDescriptor())) {
               return AstUtils.unbox(operandExpression);
             }
             return operandExpression;
@@ -85,8 +81,7 @@ public class InsertUnboxingConversionVisitor extends ConversionContextVisitor {
 
   private static Expression maybeUnbox(TypeDescriptor toTypeDescriptor, Expression expression) {
     if (TypeDescriptors.isPrimitiveType(toTypeDescriptor)
-        && TypeDescriptors.isBoxedType(expression.getTypeDescriptor())
-        && !TypeDescriptors.isBoxedBooleanOrDouble(expression.getTypeDescriptor())) {
+        && TypeDescriptors.isBoxedType(expression.getTypeDescriptor())) {
       return AstUtils.unbox(expression);
     }
     return expression;

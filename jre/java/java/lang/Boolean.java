@@ -34,7 +34,7 @@ public class Boolean implements Comparable<Boolean> {
 
   @Override
   public String toString() {
-    return checkNotNull(this) ? "true" : "false";
+    return unsafeCast(checkNotNull(this)) ? "true" : "false";
   }
 
   public static Boolean valueOf(boolean b) {
@@ -46,7 +46,7 @@ public class Boolean implements Comparable<Boolean> {
   }
 
   public boolean booleanValue() {
-    return checkNotNull(this);
+    return unsafeCast(checkNotNull(this));
   }
 
   public static int compare(boolean a, boolean b) {
@@ -58,7 +58,11 @@ public class Boolean implements Comparable<Boolean> {
     return compare(booleanValue(), b.booleanValue());
   }
 
-  public static boolean checkNotNull(Boolean b) {
+  private static native boolean unsafeCast(Object instance) /*-{
+    return instance;
+  }-*/;
+
+  private static Boolean checkNotNull(Boolean b) {
     if (b == null) {
       throw new NullPointerException();
     }

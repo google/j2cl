@@ -37,7 +37,7 @@ public class Double extends Number implements Comparable<Double> {
 
   @Override
   public double doubleValue() {
-    return checkNotNull(this);
+    return unsafeCast(checkNotNull(this));
   }
 
   @Override
@@ -91,7 +91,11 @@ public class Double extends Number implements Comparable<Double> {
     return compare(doubleValue(), d.doubleValue());
   }
 
-  public static double checkNotNull(Double d) {
+  private static native double unsafeCast(Object instance) /*-{
+    return instance;
+  }-*/;
+
+  private static Double checkNotNull(Double d) {
     if (d == null) {
       throw new NullPointerException();
     }
