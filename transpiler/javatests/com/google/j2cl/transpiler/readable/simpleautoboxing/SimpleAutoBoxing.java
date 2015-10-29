@@ -158,4 +158,89 @@ public class SimpleAutoBoxing {
     i = -boxI;
     i = ~boxI;
   }
+
+  @SuppressWarnings("unused")
+  public void testUnboxingBoolean() {
+    Boolean boxB1 = new Boolean(true);
+    Boolean boxB2 = new Boolean(false);
+
+    boolean br;
+    boolean boxr;
+
+    boxr = boxB1 == boxB2;
+    br = boxB1 == boxB2;
+    assert boxr;
+    assert br;
+
+    boxr = boxB1 != boxB2;
+    br = boxB1 != boxB2;
+    assert boxr;
+    assert br;
+
+    boxr = boxB1 ^ boxB2;
+    br = boxB1 ^ boxB2;
+    assert boxr;
+    assert br;
+
+    boxr = boxB1 & boxB2;
+    br = boxB1 & boxB2;
+    assert boxr;
+    assert br;
+
+    boxr = boxB1 | boxB2;
+    br = boxB1 | boxB2;
+    assert boxr;
+    assert br;
+
+    boxr = boxB1 && boxB2;
+    br = boxB1 && boxB2;
+    assert boxr;
+    assert br;
+
+    boxr = boxB1 || boxB2;
+    br = boxB1 || boxB2;
+    assert boxr;
+    assert br;
+
+    boxr = boxB1 = boxB2;
+    br = boxB1 = boxB2;
+    assert boxr;
+    assert br;
+
+    boxr = boxB1 &= boxB2;
+    br = boxB1 &= boxB2;
+    assert boxr;
+    assert br;
+
+    boxr = boxB1 |= boxB2;
+    br = boxB1 |= boxB2;
+    assert boxr;
+    assert br;
+
+    boxr = boxB1 ^= boxB2;
+    br = boxB1 ^= boxB2;
+    assert boxr;
+    assert br;
+  }
+
+  @SuppressWarnings("unused")
+  public void testUnboxingEquality() {
+    Boolean boxB = new Boolean(true);
+    boolean b = false;
+
+    assert boxB == boxB;
+    assert boxB == b;
+
+    assert b != b;
+    assert b != boxB;
+
+    Integer boxI = new Integer(100);
+    int i = 101;
+
+    assert boxI == boxI;
+    assert boxI == i;
+
+    assert i != i;
+    assert i != boxI;
+  }
 }

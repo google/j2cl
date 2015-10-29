@@ -577,6 +577,9 @@ public class AstUtils {
       return false;
     }
 
+    boolean leftIsPrimitive = leftOperand.getTypeDescriptor().isPrimitive();
+    boolean rightIsPrimitive = rightOperand.getTypeDescriptor().isPrimitive();
+
     switch (operator) {
       case TIMES:
       case DIVIDE:
@@ -587,12 +590,16 @@ public class AstUtils {
       case GREATER:
       case LESS_EQUALS:
       case GREATER_EQUALS:
-      case EQUALS:
-      case NOT_EQUALS:
       case XOR:
       case AND:
       case OR:
-        return true;
+        return true; // Both numerics and booleans get these operators.
+      case CONDITIONAL_AND:
+      case CONDITIONAL_OR:
+        return true; // Only booleans get these operators (though not mentioned in the JLS).
+      case EQUALS:
+      case NOT_EQUALS:
+        return leftIsPrimitive || rightIsPrimitive; // Equality is sometimes instance comparison.
       default:
         return false;
     }

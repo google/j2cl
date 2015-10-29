@@ -61,6 +61,7 @@ are copyright and licensed as follows:
 - integrate JRE
 - packageclasscollision
 - stringconstructor
+- parameter to assert keyword should be treated as method invocation context
 
 ## JsInterop TODOs
 - catchjsexception

@@ -103,7 +103,7 @@ public class Double extends Number implements Comparable<Double> {
   }
 
   @JsMethod(name = "$create__double")
-  public static double create(double d) {
+  public static Double create(double d) {
     return nativeCreate(d);
   }
 

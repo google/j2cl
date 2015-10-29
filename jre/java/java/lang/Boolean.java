@@ -70,7 +70,7 @@ public class Boolean implements Comparable<Boolean> {
   }
 
   @JsMethod(name = "$create__boolean")
-  public static boolean create(boolean b) {
+  public static Boolean create(boolean b) {
     return nativeCreate(b);
   }
 
