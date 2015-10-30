@@ -24,6 +24,7 @@ import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -66,7 +67,7 @@ public class DevirtualizeMethodCallsVisitor extends AbstractRewriter {
 
   {
     devirtualizationTypeDescriptorsMapping.put(
-        TypeDescriptors.get().javaLangObject, TypeDescriptors.OBJECTS_TYPE_DESCRIPTOR);
+        TypeDescriptors.get().javaLangObject, BootstrapType.OBJECTS.getDescriptor());
     devirtualizationTypeDescriptorsMapping.put(
         TypeDescriptors.get().javaLangBoolean, TypeDescriptors.get().javaLangBoolean);
     devirtualizationTypeDescriptorsMapping.put(
@@ -74,12 +75,12 @@ public class DevirtualizeMethodCallsVisitor extends AbstractRewriter {
     devirtualizationTypeDescriptorsMapping.put(
         TypeDescriptors.get().javaLangString, TypeDescriptors.get().javaLangString);
     devirtualizationTypeDescriptorsMapping.put(
-        TypeDescriptors.get().javaLangNumber, TypeDescriptors.NUMBERS_TYPE_DESCRIPTOR);
+        TypeDescriptors.get().javaLangNumber, BootstrapType.NUMBERS.getDescriptor());
     devirtualizationTypeDescriptorsMapping.put(
         TypeDescriptors.get().javaLangComparable.getRawTypeDescriptor(),
-        TypeDescriptors.COMPARABLES_TYPE_DESCRIPTOR);
+        BootstrapType.COMPARABLES.getDescriptor());
     devirtualizationTypeDescriptorsMapping.put(
-        TypeDescriptors.get().javaLangCharSequence, TypeDescriptors.CHAR_SEQUENCES_TYPE_DESCRIPTOR);
+        TypeDescriptors.get().javaLangCharSequence, BootstrapType.CHAR_SEQUENCES.getDescriptor());
   }
 
   private MethodCall doDevirtualization(MethodCall methodCall) {

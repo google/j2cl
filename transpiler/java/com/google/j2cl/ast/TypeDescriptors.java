@@ -25,6 +25,7 @@ import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -244,49 +245,41 @@ public class TypeDescriptors {
   }
 
   /**
-   * Bootstrap types.
+   * Holds the bootstrap types.
    */
-  public static final TypeDescriptor OBJECTS_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Objects");
+  public enum BootstrapType {
+    OBJECTS(Arrays.asList("vmbootstrap"), "Objects"),
+    COMPARABLES(Arrays.asList("vmbootstrap"), "Comparables"),
+    CHAR_SEQUENCES(Arrays.asList("vmbootstrap"), "CharSequences"),
+    NUMBERS(Arrays.asList("vmbootstrap"), "Numbers"),
+    ASSERTS(Arrays.asList("vmbootstrap"), "Asserts"),
+    ARRAYS(Arrays.asList("vmbootstrap"), "Arrays"),
+    CASTS(Arrays.asList("vmbootstrap"), "Casts"),
+    PRIMITIVES(Arrays.asList("vmbootstrap", "primitives"), "Primitives"),
+    LONGS(Arrays.asList("vmbootstrap"), "LongUtils"),
+    NATIVE_UTIL(Arrays.asList("nativebootstrap"), "Util"),
+    NATIVE_LONG(Arrays.asList("nativebootstrap"), "Long");
 
-  public static final TypeDescriptor COMPARABLES_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Comparables");
-  public static final TypeDescriptor CHAR_SEQUENCES_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "CharSequences");
+    private TypeDescriptor typeDescriptor;
 
-  public static final TypeDescriptor NUMBERS_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Numbers");
+    private BootstrapType(List<String> pathComponents, String name) {
+      this.typeDescriptor = TypeDescriptor.createRaw(pathComponents, name);
+    }
 
-  public static final TypeDescriptor NATIVE_UTIL_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("nativebootstrap"), "Util");
-  public static final TypeDescriptor VM_ASSERTS_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Asserts");
-  public static final TypeDescriptor VM_ARRAYS_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Arrays");
-  public static final TypeDescriptor VM_CASTS_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "Casts");
-  public static final TypeDescriptor VM_PRIMITIVES_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap", "primitives"), "Primitives");
-  public static final TypeDescriptor NATIVE_LONGS_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("vmbootstrap"), "LongUtils");
-  public static final TypeDescriptor NATIVE_LONG_TYPE_DESCRIPTOR =
-      TypeDescriptor.createRaw(Arrays.asList("nativebootstrap"), "Long");
+    public TypeDescriptor getDescriptor() {
+      return typeDescriptor;
+    }
 
-  /**
-   * Bootstrap type set.
-   */
-  public static final Set<TypeDescriptor> bootstrapTypeDescriptors =
-      ImmutableSet.of(
-          NATIVE_UTIL_TYPE_DESCRIPTOR,
-          VM_ASSERTS_TYPE_DESCRIPTOR,
-          VM_ARRAYS_TYPE_DESCRIPTOR,
-          VM_CASTS_TYPE_DESCRIPTOR,
-          VM_PRIMITIVES_TYPE_DESCRIPTOR,
-          NATIVE_LONGS_TYPE_DESCRIPTOR,
-          NATIVE_LONG_TYPE_DESCRIPTOR,
-          OBJECTS_TYPE_DESCRIPTOR,
-          COMPARABLES_TYPE_DESCRIPTOR,
-          NUMBERS_TYPE_DESCRIPTOR);
+    public static final Set<TypeDescriptor> typeDescriptors;
+
+    static {
+      ImmutableSet.Builder<TypeDescriptor> setBuilder = new ImmutableSet.Builder<>();
+      for (BootstrapType value : BootstrapType.values()) {
+        setBuilder.add(value.getDescriptor());
+      }
+      typeDescriptors = setBuilder.build();
+    }
+  }
 
   // Not externally instantiable.
   private TypeDescriptors() {}

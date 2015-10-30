@@ -16,6 +16,7 @@
 package com.google.j2cl.ast;
 
 import com.google.common.base.Preconditions;
+import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 
 import java.util.Arrays;
 
@@ -182,7 +183,7 @@ public class OperatorSideEffectUtils {
         null,
         FieldDescriptor.createRaw(
             true, // isStatic
-            TypeDescriptors.NUMBERS_TYPE_DESCRIPTOR,
+            BootstrapType.NUMBERS.getDescriptor(),
             fieldName,
             typeDescriptor));
   }

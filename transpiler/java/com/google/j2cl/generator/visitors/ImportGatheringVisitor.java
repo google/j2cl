@@ -30,6 +30,7 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.UnionTypeDescriptor;
 
 import java.util.LinkedHashMap;
@@ -78,7 +79,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   @Override
   public void exitAssertStatement(AssertStatement assertStatement) {
-    addTypeDescriptor(TypeDescriptors.VM_ASSERTS_TYPE_DESCRIPTOR, ImportCategory.LAZY);
+    addTypeDescriptor(BootstrapType.ASSERTS.getDescriptor(), ImportCategory.LAZY);
   }
 
   @Override
@@ -138,7 +139,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   private Map<ImportCategory, Set<Import>> doGatherImports(JavaType javaType) {
     addTypeDescriptor(TypeDescriptors.get().javaLangClass, ImportCategory.LAZY);
-    addTypeDescriptor(TypeDescriptors.NATIVE_UTIL_TYPE_DESCRIPTOR, ImportCategory.EAGER);
+    addTypeDescriptor(BootstrapType.NATIVE_UTIL.getDescriptor(), ImportCategory.EAGER);
 
     // Collect type references.
     javaType.accept(this);
@@ -196,7 +197,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     if (TypeDescriptors.get().primitiveLong == typeDescriptor) {
       typeDescriptorsByCategory
           .get(ImportCategory.EAGER)
-          .add((RegularTypeDescriptor) TypeDescriptors.NATIVE_LONG_TYPE_DESCRIPTOR);
+          .add((RegularTypeDescriptor) BootstrapType.NATIVE_LONG.getDescriptor());
       typeDescriptorsByCategory
           .get(importCategory)
           .add((RegularTypeDescriptor) TypeDescriptors.get().primitiveLong);
@@ -214,7 +215,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
     // Unroll the leaf type in an array type and special case add the native Array utilities.
     if (typeDescriptor instanceof ArrayTypeDescriptor) {
-      addTypeDescriptor(TypeDescriptors.VM_ARRAYS_TYPE_DESCRIPTOR, ImportCategory.LAZY);
+      addTypeDescriptor(BootstrapType.ARRAYS.getDescriptor(), ImportCategory.LAZY);
 
       ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
       addTypeDescriptor(arrayTypeDescriptor.getLeafTypeDescriptor(), importCategory);
@@ -241,7 +242,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     // library should not have extended dependencies) but also because the initialization of
     // compile time constant values occurs during the declaration phase and this initialization
     // might use the Longs library $fromString/$fromInt etc.
-    addTypeDescriptor(TypeDescriptors.NATIVE_LONGS_TYPE_DESCRIPTOR, ImportCategory.EAGER);
+    addTypeDescriptor(BootstrapType.LONGS.getDescriptor(), ImportCategory.EAGER);
   }
 
   private static String computeLongAliasName(TypeDescriptor typeDescriptor) {
@@ -249,7 +250,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   }
 
   private static String getShortAliasName(TypeDescriptor typeDescriptor) {
-    return TypeDescriptors.bootstrapTypeDescriptors.contains(typeDescriptor)
+    return BootstrapType.typeDescriptors.contains(typeDescriptor)
         ? "$" + typeDescriptor.getClassName()
         : typeDescriptor.getClassName();
   }

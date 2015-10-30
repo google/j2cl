@@ -25,6 +25,7 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Visibility;
 
 import java.util.Arrays;
@@ -94,7 +95,7 @@ public class InsertNarrowingPrimitiveConversionVisitor extends ConversionContext
                 MethodDescriptor.createRaw(
                     true,
                     Visibility.PUBLIC,
-                    TypeDescriptors.VM_PRIMITIVES_TYPE_DESCRIPTOR,
+                    BootstrapType.PRIMITIVES.getDescriptor(),
                     narrowMethodName,
                     Lists.newArrayList(fromTypeDescriptor),
                     toTypeDescriptor);

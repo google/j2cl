@@ -15,6 +15,7 @@ import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Visibility;
 
 /**
@@ -69,7 +70,7 @@ public class NormalizeLongsVisitor extends AbstractRewriter {
         MethodDescriptor.createRaw(
             true, // static
             Visibility.PUBLIC,
-            TypeDescriptors.NATIVE_LONGS_TYPE_DESCRIPTOR,
+            BootstrapType.LONGS.getDescriptor(),
             getLongOperationFunctionName(operator),
             Lists.newArrayList(leftParameterTypeDescriptor, rightParameterTypeDescriptor),
             returnTypeDescriptor);
@@ -98,7 +99,7 @@ public class NormalizeLongsVisitor extends AbstractRewriter {
         MethodDescriptor.createRaw(
             true, // static
             Visibility.PUBLIC,
-            TypeDescriptors.NATIVE_LONGS_TYPE_DESCRIPTOR,
+            BootstrapType.LONGS.getDescriptor(),
             getLongOperationFunctionName(operator),
             Lists.newArrayList(parameterTypeDescriptor),
             returnTypeDescriptor);

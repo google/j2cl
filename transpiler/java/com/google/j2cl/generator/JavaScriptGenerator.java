@@ -18,6 +18,7 @@ package com.google.j2cl.generator;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;
@@ -90,7 +91,7 @@ public abstract class JavaScriptGenerator extends AbstractSourceGenerator {
     context.put("statementSourceGenerator", statementSourceGenerator);
     context.put(
         "javaLangClassTypeDecriptor", TypeDescriptors.get().javaLangClass.getRawTypeDescriptor());
-    context.put("nativeUtilTypeDecriptor", TypeDescriptors.NATIVE_UTIL_TYPE_DESCRIPTOR);
+    context.put("nativeUtilTypeDecriptor", BootstrapType.NATIVE_UTIL.getDescriptor());
 
     return context;
   }

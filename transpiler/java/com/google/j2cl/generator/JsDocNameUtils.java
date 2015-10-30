@@ -24,6 +24,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -170,7 +171,7 @@ public class JsDocNameUtils {
       case TypeDescriptor.CHAR_TYPE_NAME:
         return JS_NUMBER_TYPE_NAME;
       case TypeDescriptor.LONG_TYPE_NAME:
-        return "!" + statementSourceGenerator.toSource(TypeDescriptors.NATIVE_LONG_TYPE_DESCRIPTOR);
+        return "!" + statementSourceGenerator.toSource(BootstrapType.NATIVE_LONG.getDescriptor());
       case "java.lang.Object":
         if (!shouldUseClassName) {
           return "*";

@@ -24,6 +24,7 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Visibility;
 
 import java.util.Arrays;
@@ -127,7 +128,7 @@ public class InsertWideningPrimitiveConversionVisitor extends ConversionContextV
         MethodDescriptor.createRaw(
             true,
             Visibility.PUBLIC,
-            TypeDescriptors.VM_PRIMITIVES_TYPE_DESCRIPTOR,
+            BootstrapType.PRIMITIVES.getDescriptor(),
             widenMethodName,
             Lists.newArrayList(fromTypeDescriptor),
             toTypeDescriptor);

@@ -14,6 +14,7 @@ import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Visibility;
 
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
         MethodDescriptor.createRaw(
             true,
             Visibility.PUBLIC,
-            TypeDescriptors.VM_CASTS_TYPE_DESCRIPTOR,
+            BootstrapType.CASTS.getDescriptor(),
             "to",
             Lists.newArrayList(
                 TypeDescriptors.get().javaLangObject, TypeDescriptors.get().primitiveBoolean),
@@ -84,7 +85,7 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
         MethodDescriptor.createRaw(
             true,
             Visibility.PUBLIC,
-            TypeDescriptors.VM_ARRAYS_TYPE_DESCRIPTOR,
+            BootstrapType.ARRAYS.getDescriptor(),
             "$castTo",
             Lists.newArrayList(
                 TypeDescriptors.get().javaLangObject,

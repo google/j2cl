@@ -67,6 +67,7 @@ import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
@@ -725,15 +726,15 @@ public class StatementSourceGenerator {
       }
 
       private String arraysTypeAlias() {
-        return toSource(TypeDescriptors.VM_ARRAYS_TYPE_DESCRIPTOR);
+        return toSource(BootstrapType.ARRAYS.getDescriptor());
       }
 
       private String assertsTypeAlias() {
-        return toSource(TypeDescriptors.VM_ASSERTS_TYPE_DESCRIPTOR);
+        return toSource(BootstrapType.ASSERTS.getDescriptor());
       }
 
       private String longsTypeAlias() {
-        return toSource(TypeDescriptors.NATIVE_LONGS_TYPE_DESCRIPTOR);
+        return toSource(BootstrapType.LONGS.getDescriptor());
       }
 
       private boolean isInClinit(TypeDescriptor typeDescriptor) {
