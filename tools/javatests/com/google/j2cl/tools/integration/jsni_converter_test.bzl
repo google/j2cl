@@ -30,7 +30,7 @@ jsni_converter_test(
 # java files with native method as test input, run it through the shared rules with JRE transpile
 # and run the tests that are actually written in java instead of javascript.
 
-load("/third_party/java_src/j2cl/build_def/j2cl_tool", "jsni_to_j2cl_converter")
+load("/third_party/java_src/j2cl/build_def/jsni_to_j2cl_converter", "jsni_to_j2cl_converter")
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_root")
 
 def jsni_converter_test(

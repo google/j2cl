@@ -10,7 +10,7 @@ licenses(["unencumbered"])
 
 load("/third_party/java_src/j2cl/build_def/j2cl_java_library", "j2cl_java_library")
 load("/third_party/java_src/j2cl/build_def/j2cl_source_copy", "j2cl_source_copy")
-load("/third_party/java_src/j2cl/build_def/j2cl_tool", "jsni_to_j2cl_converter")
+load("/third_party/java_src/j2cl/build_def/jsni_to_j2cl_converter", "jsni_to_j2cl_converter")
 
 j2cl_source_copy(
     name = "emul_dev",
