@@ -8,7 +8,6 @@ package(default_visibility = ["//:__subpackages__"])
 # Google owns the copyright
 licenses(["unencumbered"])
 
-load("/third_party/java_src/j2cl/build_def/j2cl_create_zip", "j2cl_create_zip")
 load("/third_party/java_src/j2cl/build_def/j2cl_java_library", "j2cl_java_library")
 load("/third_party/java_src/j2cl/build_def/j2cl_source_copy", "j2cl_source_copy")
 load("/third_party/java_src/j2cl/build_def/j2cl_tool", "jsni_to_j2cl_converter")
@@ -93,15 +92,20 @@ jsni_to_j2cl_converter(
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
 )
 
-# TODO(dankurka): replace with genzip
-j2cl_create_zip(
-    name = "native_js",
-    js = [
+genzip(
+    name = "native_js.zip",
+    deps = [":native_js_pkg_library"],
+)
+
+pkg_library(
+    name = "native_js_pkg_library",
+    srcs = [
         "java/lang/Throwable.native.js",
         "javaemul/internal/ArrayStamper.native.js",
         "javaemul/internal/HashCodes.native.js",
         "javaemul/internal/LongCompareHolder.native.js",
     ],
+    flatten = 0,
 )
 
 # Transpiles the parts of the jre that are implemented as Java.
@@ -126,7 +130,7 @@ j2cl_java_library(
     add_jre_dep = False,
     native_sources_zips = [
         ":convert_jsni_emul",
-        ":native_js",
+        ":native_js.zip",
     ],
     super_srcs = [
         "java/lang/Class.java",
