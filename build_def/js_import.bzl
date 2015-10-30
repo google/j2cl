@@ -7,7 +7,7 @@ Here is an example use of js_import:
 
 js_import(
     name = "my_name",
-    srczips = glob(["*.pintozip"]),
+    srczips = glob(["*.js.zip"]),
 )
 
 """
@@ -30,6 +30,6 @@ js_import = rule(
             allow_files=False,
             providers=["js"]),
         "srczips": attr.label_list(
-            allow_files=FileType([".pintozip"])),
+            allow_files=FileType([".js.zip"])),
     },
 )

@@ -63,8 +63,7 @@ def _impl(ctx):
       super_java_files_paths += [java_file.path]
     java_files_paths += [java_file.path]
 
-  # TODO: use .js.zip extension when Blaze allows it.
-  js_zip_name = ctx.label.name + ".pintozip"
+  js_zip_name = ctx.label.name + ".js.zip"
   compiler_args = [
       "-d",
       ctx.configuration.bin_dir.path + "/" + ctx.label.package + "/" +

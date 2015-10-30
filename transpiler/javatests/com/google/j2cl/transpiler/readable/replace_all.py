@@ -90,7 +90,7 @@ def blaze_build(target_names):
 
 def replace_transpiled_js(target_names):
   """Copy and reformat and replace with Blaze built JS."""
-  pairs = zip(target_names, ["blaze-bin/%s/%s/%s_j2cl_transpile.pintozip" %
+  pairs = zip(target_names, ["blaze-bin/%s/%s/%s_j2cl_transpile.js.zip" %
                              (EXAMPLES_DIR, target_name, target_name)
                              for target_name in target_names])
 
