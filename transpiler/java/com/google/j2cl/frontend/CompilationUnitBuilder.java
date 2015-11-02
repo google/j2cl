@@ -1552,7 +1552,7 @@ public class CompilationUnitBuilder {
 
       MethodDescriptor forArrayMethodDescriptor =
           MethodDescriptor.createRaw(
-              true,
+              false,
               Visibility.PUBLIC,
               javaLangClassTypeDescriptor,
               "$forArray",
