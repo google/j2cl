@@ -34,6 +34,8 @@ are copyright and licensed as follows:
 - Normalize compound assignment, increment and decrement operations for long and
   boxed objects. Refer to previous dicussion at cl/101709039 and cl/98361767.
 - Use annotation @abstract for abstract methods. (b/24539710).
+- Namespace on @JsMethod can only be defined on native static methods. Refer to
+  previous discussion at cl/106852320.
 
 ## Tasks
 - Add a Closure pass to get back the 2% regression introduced in cl/104162467.

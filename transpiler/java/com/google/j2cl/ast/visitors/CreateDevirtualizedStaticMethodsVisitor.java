@@ -42,11 +42,13 @@ public class CreateDevirtualizedStaticMethodsVisitor extends AbstractRewriter {
     compilationUnit.accept(this);
   }
 
+  @Override
   public boolean shouldProcessJavaType(JavaType type) {
     // Creates devirtualized static methods for the unboxed types (Boolean, Double, String).
     return TypeDescriptors.isBoxedTypeAsJsPrimitives(type.getDescriptor());
   }
 
+  @Override
   public Node rewriteMethod(Method method) {
     if (method.getDescriptor().isStatic() || method.isConstructor()) {
       return method;

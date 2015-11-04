@@ -43,6 +43,7 @@ public class DevirtualizeMethodCallsVisitor extends AbstractRewriter {
     compilationUnit.accept(this);
   }
 
+  @Override
   public Node rewriteMethodCall(MethodCall methodCall) {
     MethodDescriptor targetMethodDescriptor = methodCall.getTarget();
     if (targetMethodDescriptor.isStatic()

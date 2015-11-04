@@ -48,7 +48,9 @@ public class ManglingNameUtils {
    */
   public static String getMangledName(MethodDescriptor methodDescriptor) {
     if (methodDescriptor.isRaw()) {
-      return methodDescriptor.getMethodName();
+      return methodDescriptor.getJsMethodName() == null
+          ? methodDescriptor.getMethodName()
+          : methodDescriptor.getJsMethodName();
     }
     String suffix;
     switch (methodDescriptor.getVisibility()) {

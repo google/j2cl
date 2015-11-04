@@ -270,7 +270,9 @@ public class AstUtils {
         isNative,
         returnTypeDescriptor,
         innerclassConstructorDescriptor.getParameterTypeDescriptors(),
-        typeParameterDescriptors);
+        typeParameterDescriptors,
+        null,
+        null);
   }
 
   /**

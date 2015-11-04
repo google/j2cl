@@ -42,6 +42,7 @@ public class FixTypeVariableInMethodVisitors extends AbstractRewriter {
     compilationUnit.accept(this);
   }
 
+  @Override
   public Node rewriteCastExpression(CastExpression castExpression) {
     Preconditions.checkArgument(
         castExpression.isRaw(),

@@ -1037,7 +1037,9 @@ public class CompilationUnitBuilder {
               enclosingClassTypeDescriptor,
               methodName,
               parameterTypeDescriptors,
-              returnTypeDescriptor);
+              returnTypeDescriptor,
+              null,
+              null);
       return new Method(methodDescriptor, parameters, body);
     }
 
@@ -1536,7 +1538,9 @@ public class CompilationUnitBuilder {
                 literalTypeDescriptor,
                 "$getClass",
                 new ArrayList<TypeDescriptor>(),
-                javaLangClassTypeDescriptor);
+                javaLangClassTypeDescriptor,
+                null,
+                null);
         return MethodCall.createRegularMethodCall(
             null, classMethodDescriptor, new ArrayList<Expression>());
       }
@@ -1548,7 +1552,9 @@ public class CompilationUnitBuilder {
               literalTypeDescriptor.getLeafTypeDescriptor(),
               "$getClass",
               new ArrayList<TypeDescriptor>(),
-              javaLangClassTypeDescriptor);
+              javaLangClassTypeDescriptor,
+              null,
+              null);
 
       MethodDescriptor forArrayMethodDescriptor =
           MethodDescriptor.createRaw(
@@ -1557,7 +1563,9 @@ public class CompilationUnitBuilder {
               javaLangClassTypeDescriptor,
               "$forArray",
               Lists.newArrayList(TypeDescriptors.get().primitiveInt),
-              javaLangClassTypeDescriptor);
+              javaLangClassTypeDescriptor,
+              null,
+              null);
 
       // <ClassLiteralClass>.$getClass().forArray(<dimensions>)
       return MethodCall.createRegularMethodCall(

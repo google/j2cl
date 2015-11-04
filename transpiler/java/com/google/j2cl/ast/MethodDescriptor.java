@@ -24,6 +24,8 @@ import com.google.j2cl.ast.processors.Visitable;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 /**
  * A (by signature) reference to a method.
  */
@@ -50,7 +52,9 @@ public abstract class MethodDescriptor extends Node implements Member {
       boolean isNative,
       TypeDescriptor returnTypeDescriptor,
       Iterable<TypeDescriptor> parameterTypeDescriptors,
-      Iterable<TypeDescriptor> typeParameterTypeDescriptors) {
+      Iterable<TypeDescriptor> typeParameterTypeDescriptors,
+      String jsMethodNamespace,
+      String jsMethodName) {
     return getInterner()
         .intern(
             new AutoValue_MethodDescriptor(
@@ -63,7 +67,9 @@ public abstract class MethodDescriptor extends Node implements Member {
                 isNative,
                 ImmutableList.copyOf(parameterTypeDescriptors),
                 returnTypeDescriptor,
-                ImmutableList.copyOf(typeParameterTypeDescriptors)));
+                ImmutableList.copyOf(typeParameterTypeDescriptors),
+                jsMethodNamespace,
+                jsMethodName));
   }
 
   public static MethodDescriptor create(
@@ -85,7 +91,9 @@ public abstract class MethodDescriptor extends Node implements Member {
         isNative,
         returnTypeDescriptor,
         parameterTypeDescriptors,
-        ImmutableList.<TypeDescriptor>of());
+        ImmutableList.<TypeDescriptor>of(),
+        null, // non-raw method has no jsmethod namespace nor jsmethod name.
+        null);
   }
 
   public static MethodDescriptor create(
@@ -117,7 +125,9 @@ public abstract class MethodDescriptor extends Node implements Member {
       TypeDescriptor enclosingClassTypeDescriptor,
       String methodName,
       List<TypeDescriptor> parameterTypeDescriptors,
-      TypeDescriptor returnTypeDescriptor) {
+      TypeDescriptor returnTypeDescriptor,
+      String jsMethodNamespace,
+      String jsMethodName) {
     return create(
         isStatic,
         true,
@@ -128,7 +138,9 @@ public abstract class MethodDescriptor extends Node implements Member {
         false,
         returnTypeDescriptor,
         parameterTypeDescriptors,
-        ImmutableList.<TypeDescriptor>of());
+        ImmutableList.<TypeDescriptor>of(),
+        jsMethodNamespace,
+        jsMethodName);
   }
 
   static Interner<MethodDescriptor> getInterner() {
@@ -166,6 +178,12 @@ public abstract class MethodDescriptor extends Node implements Member {
    * Type parameters declared in the method.
    */
   public abstract ImmutableList<TypeDescriptor> getTypeParameterTypeDescriptors();
+
+  @Nullable
+  public abstract String getJsMethodNamespace();
+
+  @Nullable
+  public abstract String getJsMethodName();
 
   public boolean isInit() {
     return getMethodName().equals(INIT_METHOD_NAME);

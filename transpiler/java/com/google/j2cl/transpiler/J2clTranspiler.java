@@ -99,7 +99,7 @@ public class J2clTranspiler {
     return jdtUnitsByFilePath;
   }
 
-  private void normalizeUnits(@SuppressWarnings("unused") List<CompilationUnit> j2clUnits) {
+  private void normalizeUnits(List<CompilationUnit> j2clUnits) {
     for (CompilationUnit j2clUnit : j2clUnits) {
       verifyUnit(j2clUnit);
 

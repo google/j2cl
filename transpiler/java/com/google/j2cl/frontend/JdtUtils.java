@@ -50,7 +50,6 @@ import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
-import org.eclipse.jdt.core.dom.IMemberValuePairBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
@@ -149,15 +148,16 @@ public class JdtUtils {
 
     // TODO: expand JsMethod checking up the method override chain.
     IAnnotationBinding jsMethodAnnotationBinding = findJsMethodAnnotationBinding(methodBinding);
-    if (jsMethodAnnotationBinding != null) {
-      for (IMemberValuePairBinding member :
-          jsMethodAnnotationBinding.getDeclaredMemberValuePairs()) {
-        if ("name".equals(member.getName())) {
-          methodName = (String) member.getValue();
-        }
-      }
-      isRaw = true;
-    }
+    String jsMethodName =
+        JdtAnnotationUtils.getAnnotationParameterString(jsMethodAnnotationBinding, "name");
+    String jsMethodNamespace =
+        JdtAnnotationUtils.getAnnotationParameterString(jsMethodAnnotationBinding, "namespace");
+    isRaw = jsMethodAnnotationBinding != null;
+
+    // namespace on a JsMethod can only be used on a *static native* method.
+    // TODO: replace it with JsInterop restrictions check, or maybe we want to relax this
+    // restriction later.
+    jsMethodNamespace = isNative && isStatic ? jsMethodNamespace : null;
 
     TypeDescriptor returnTypeDescriptor = createTypeDescriptor(methodBinding.getReturnType());
 
@@ -194,19 +194,14 @@ public class JdtUtils {
         isNative,
         returnTypeDescriptor,
         parameterTypeDescriptors,
-        typeParameterDescriptors);
+        typeParameterDescriptors,
+        jsMethodNamespace,
+        jsMethodName);
   }
 
   private static IAnnotationBinding findJsMethodAnnotationBinding(IMethodBinding methodBinding) {
-    for (IAnnotationBinding annotationBinding : methodBinding.getAnnotations()) {
-      if (annotationBinding
-          .getAnnotationType()
-          .getQualifiedName()
-          .equals(JS_METHOD_ANNOTATION_NAME)) {
-        return annotationBinding;
-      }
-    }
-    return null;
+    return JdtAnnotationUtils.findAnnotationBindingByName(
+        methodBinding.getAnnotations(), JS_METHOD_ANNOTATION_NAME);
   }
 
   static Variable createVariable(IVariableBinding variableBinding) {

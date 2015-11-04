@@ -98,7 +98,9 @@ public class InsertNarrowingPrimitiveConversionVisitor extends ConversionContext
                     BootstrapType.PRIMITIVES.getDescriptor(),
                     narrowMethodName,
                     Lists.newArrayList(fromTypeDescriptor),
-                    toTypeDescriptor);
+                    toTypeDescriptor,
+                    null,
+                    null);
             // Primitives.$narrowAToB(expr);
             return MethodCall.createRegularMethodCall(
                 null, narrowMethodDescriptor, Arrays.asList(expression));

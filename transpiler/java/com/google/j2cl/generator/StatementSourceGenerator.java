@@ -276,7 +276,10 @@ public class StatementSourceGenerator {
       @Override
       public String transformMethodCall(MethodCall expression) {
         MethodDescriptor methodDescriptor = expression.getTarget();
-        String qualifier = toSource(expression.getQualifier());
+        String qualifier =
+            methodDescriptor.getJsMethodNamespace() != null
+                ? methodDescriptor.getJsMethodNamespace()
+                : toSource(expression.getQualifier());
         List<String> argumentSources = transformNodesToSource(expression.getArguments());
         if (expression.isPrototypeCall()) {
           return String.format(

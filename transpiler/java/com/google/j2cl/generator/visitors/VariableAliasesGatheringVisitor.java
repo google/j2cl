@@ -44,11 +44,13 @@ public class VariableAliasesGatheringVisitor extends AbstractVisitor {
    * Visitor class that is used to collect all variable names in each method.
    */
   private class VariableNamesCollector extends AbstractVisitor {
+    @Override
     public void exitVariable(Variable variable) {
       variableNamesByMethod.put(getCurrentMethod(), variable.getName());
     }
   }
 
+  @Override
   public void exitVariable(Variable variable) {
     if (aliasByVariable.containsKey(variable)) {
       return;
