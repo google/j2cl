@@ -20,16 +20,24 @@ package com.google.j2cl.transpiler.integration.stringescapecodes;
  */
 public class Main {
   public static void main(String... args) {
-    // TODO: implement String method devirtualization.
-    // assert "".length() == 0;
-    // assert "\b".length() == 1;
-    // assert "\f".length() == 1;
-    // assert "\n".length() == 1;
-    // assert "\r".length() == 1;
-    // assert "\t".length() == 1;
-    // assert "\u0000".length() == 1;
-    // assert "\\".length() == 1;
-    // assert "\"".length() == 1;
-    // assert "\'".length() == 1;
+    testGeneralEscapes();
+    testUnicodeEscapes();
+  }
+
+  private static void testUnicodeEscapes() {
+    assert "\uD800\uDF46".equals("𐍆");
+    assert "\u0000".length() == 1;
+  }
+
+  private static void testGeneralEscapes() {
+    assert "".length() == 0;
+    assert "\b".length() == 1;
+    assert "\f".length() == 1;
+    assert "\n".length() == 1;
+    assert "\r".length() == 1;
+    assert "\t".length() == 1;
+    assert "\\".length() == 1;
+    assert "\"".length() == 1;
+    assert "\'".length() == 1;
   }
 }
