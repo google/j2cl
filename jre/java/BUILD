@@ -49,22 +49,11 @@ JRE_SRC = [
     ":emul_user",
 ]
 
-# TODO(dankurka): this target should be the java_lib target we hand to JDT for resolving compilation
+# TODO(dankurka): this target should be the java_lib target we hand to JDT for
+# resolving compilation
 java_library(
     name = "emul",
     srcs = JRE_SRC,
-)
-
-jsni_to_j2cl_converter(
-    name = "convert_jsni_emul_j2cl",
-    srcs = [
-        "java/lang/Boolean.java",
-        "java/lang/Double.java",
-        "java/lang/Number.java",
-        "java/lang/String.java",
-        "java/util/InternalJsMapFactory.java",
-    ],
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
 )
 
 jsni_to_j2cl_converter(
@@ -127,15 +116,15 @@ j2cl_java_library(
         ":emul_dev",
         ":emul_user",
     ],
-    add_jre_dep = False,
-    native_sources_zips = [
-        ":convert_jsni_emul",
-        ":native_js.zip",
-    ],
-    super_srcs = [
+    _add_standard_library_dep = False,
+    _omit_srcs = [
         "java/lang/Class.java",
         "java/lang/Object.java",
         "javaemul/internal/JsDate.java",
+    ],
+    native_sources_zips = [
+        ":convert_jsni_emul",
+        ":native_js.zip",
     ],
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
 )

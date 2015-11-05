@@ -1,9 +1,9 @@
-"""j2cl_source_copy build rule.
+"""j2cl_source_copy build rule
 
-This build extension defines a new rule j2cl_source_copy, that copies
-java source code from one place in the repo to another.
+Copies Java source from one place in the repo to another.
 
-Here is an example use of j2cl_source_copy:
+
+Example use:
 
 j2cl_source_copy(
    name = "my_copy",
@@ -16,7 +16,6 @@ j2cl_source_copy(
 
 
 def _impl(ctx):
-  """Implementation for j2cl_source_copy"""
   java_files = ctx.files.srcs
   excludes = ctx.attr.excludes
 
@@ -31,7 +30,8 @@ def _impl(ctx):
     arguments = [
         java_file.path,
         ctx.configuration.bin_dir.path + "/" + ctx.attr.base_add_path + "/" +
-        out_file_name,]
+        out_file_name,
+    ]
 
     ctx.action(
         inputs=[java_file],
@@ -45,7 +45,7 @@ def _impl(ctx):
       files=set(java_out_files),
   )
 
-# expose rule
+
 _j2cl_source_copy = rule(
     attrs={
         "srcs": attr.label_list(

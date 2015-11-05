@@ -1,0 +1,14 @@
+package(default_visibility = ["//:__subpackages__"])
+
+# Google owns the copyright
+licenses(["unencumbered"])
+
+java_library(
+    name = "forwarder_lib",
+    exports = ["//transpiler/javatests/com/google/j2cl/transpiler/integration/depsforwarding/foo:foo_lib"],
+)
+
+js_library(
+    name = "forwarder_lib_js_library",
+    deps = ["//transpiler/javatests/com/google/j2cl/transpiler/integration/depsforwarding/foo:foo_lib_js_library"],
+)

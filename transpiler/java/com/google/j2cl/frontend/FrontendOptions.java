@@ -49,7 +49,7 @@ public class FrontendOptions {
   private String encoding;
   private String sourceVersion;
   private List<String> sourceFilePaths;
-  private List<String> superSourceFilePaths;
+  private List<String> omitSourceFilePaths;
   private FileSystem outputFileSystem;
 
   private static final Set<String> VALID_JAVA_VERSIONS =
@@ -72,7 +72,7 @@ public class FrontendOptions {
     setNativeSourceZipEntries(flags.nativesourceszippath);
     setOutput(flags.output);
     setSourceFiles(flags.files);
-    setSuperSourceFiles(flags.superfiles);
+    setOmitSourceFiles(flags.omitfiles);
     setSourceVersion(flags.source);
     setEncoding(flags.encoding);
   }
@@ -203,15 +203,15 @@ public class FrontendOptions {
     }
   }
 
-  public List<String> getSuperSourceFiles() {
-    return this.superSourceFilePaths;
+  public List<String> getOmitSourceFiles() {
+    return this.omitSourceFilePaths;
   }
 
-  public void setSuperSourceFiles(String superSourceFiles) {
-    List<String> superSourceFilePaths =
-        Splitter.on(File.pathSeparator).omitEmptyStrings().splitToList(superSourceFiles);
-    if (checkJavaSourceFiles(superSourceFilePaths)) {
-      this.superSourceFilePaths = superSourceFilePaths;
+  public void setOmitSourceFiles(String omitSourceFiles) {
+    List<String> omitSourceFilePaths =
+        Splitter.on(File.pathSeparator).omitEmptyStrings().splitToList(omitSourceFiles);
+    if (checkJavaSourceFiles(omitSourceFilePaths)) {
+      this.omitSourceFilePaths = omitSourceFilePaths;
     }
   }
 

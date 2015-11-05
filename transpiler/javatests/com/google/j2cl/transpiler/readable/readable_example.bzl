@@ -1,44 +1,24 @@
-"""readable_example build macro.
+"""readable_example build macro
 
-A build macro that confirms the JS compilability of some transpiled Java.
+Confirms the JS compilability of some transpiled Java.
 
 
 Example usage:
 
 # Creates verification target
-# blaze build :foobar_binary
 readable_example(
     name = "foobar",
     srcs = glob(["*.java"]),
 )
+
 """
 
+
+load("/javascript/closure/builddefs", "CLOSURE_COMPILER_FLAGS_FULL_TYPED")
 load(
     "/third_party/java_src/j2cl/build_def/j2cl_java_library",
     "j2cl_java_library",
 )
-
-# TODO: source these flags from the authoritative location once they're
-#       accessible from .bzl
-CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
-    "--check_global_names_level=ERROR",
-    "--check_provides=WARNING",
-    "--closure_pass",
-    "--collapse_properties",
-    "--compute_function_side_effects=true",
-    "--devirtualize_prototype_methods",
-    "--inline_variables",
-    "--jscomp_warning=deprecated",
-    "--jscomp_warning=missingProperties",
-    "--jscomp_warning=visibility",
-    "--property_renaming=ALL_UNQUOTED",
-    "--remove_unused_prototype_props",
-    "--remove_unused_prototype_props_in_externs",
-    "--smart_name_removal",
-    "--variable_renaming=ALL",
-    "--ambiguate_properties",
-    "--disambiguate_properties",
-]
 
 
 def readable_example(name, srcs, native_sources_zips=[], deps=[]):
@@ -49,8 +29,8 @@ def readable_example(name, srcs, native_sources_zips=[], deps=[]):
       name=name,
       srcs=srcs,
       javacopts=[
-        "-source 8",
-        "-target 8"
+          "-source 8",
+          "-target 8"
       ],
       native_sources_zips=native_sources_zips,
       deps=deps,

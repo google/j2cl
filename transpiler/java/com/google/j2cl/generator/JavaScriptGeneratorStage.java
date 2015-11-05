@@ -19,12 +19,12 @@ import java.util.Set;
 
 /**
  * The JavaScriptGeneratorStage contains all necessary information for generating the JavaScript
- * output for the transpiler.  It is responsible for pulling in native sources and super sources
+ * output for the transpiler.  It is responsible for pulling in native sources and omitted sources
  * and then generating header and implementation files for each Java Type.
  */
 public class JavaScriptGeneratorStage {
   private Charset charset;
-  private Set<String> superSourceFiles;
+  private Set<String> omitSourceFiles;
   private Set<String> nativeJavaScriptFileZipPaths;
   private Errors errors;
   private FileSystem outputFileSystem;
@@ -34,13 +34,13 @@ public class JavaScriptGeneratorStage {
 
   public JavaScriptGeneratorStage(
       Charset charset,
-      Set<String> superSourceFiles,
+      Set<String> omitSourceFiles,
       Set<String> nativeJavaScriptFileZipPaths,
       FileSystem outputFileSystem,
       String outputLocationPath,
       Errors errors) {
     this.charset = charset;
-    this.superSourceFiles = superSourceFiles;
+    this.omitSourceFiles = omitSourceFiles;
     this.nativeJavaScriptFileZipPaths = nativeJavaScriptFileZipPaths;
     this.outputFileSystem = outputFileSystem;
     this.outputLocationPath = outputLocationPath;
@@ -56,7 +56,7 @@ public class JavaScriptGeneratorStage {
     }
 
     for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
-      if (superSourceFiles.contains(j2clCompilationUnit.getFilePath())) {
+      if (omitSourceFiles.contains(j2clCompilationUnit.getFilePath())) {
         continue;
       }
 

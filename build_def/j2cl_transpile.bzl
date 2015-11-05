@@ -1,23 +1,15 @@
-"""j2cl_transpile build rule.
+"""j2cl_transpile build rule
 
-This build extension defines a new rule j2cl_transpile, that takes a
-java_library as input and emits a bundle zip of JavaScript transpiled from
-the Java files in the java_library. Since skylark does not allow access to
-native providers yet, one still has to list srcs and dependencies manually.
+Takes Java source and translates it into Closure style JS in a zip bundle. Java
+library deps might be needed for reference resolution.
 
-Here is an example use of j2cl_transpile:
 
-java_library(
-   name = "my_java_library",
-   srcs = ["MyJavaFile.java"],
-   deps = [":my_deps"],
-)
+Example use:
 
 j2cl_transpile(
     name = "my_transpile",
     srcs = ["MyJavaFile.java"],
-    java_library = ":my_java_library",
-    java_deps = [":my_deps"],
+    deps = [":some_dep"],
 )
 
 Note: in general you want to be using j2cl_java_library instead of using
@@ -25,55 +17,55 @@ j2cl_transpile directly.
 
 """
 
-load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_root")
 
-def _is_in_super(java_file, super_srcs):
-  for super_src in super_srcs:
-    if java_file.path.endswith(super_src):
+def _should_omit(java_file, omit_srcs):
+  for _omit_src in omit_srcs:
+    if java_file.path.endswith(_omit_src):
       return True
-  return False;
+  return False
+
 
 def _impl(ctx):
-  """Implementation for j2cl_transpile"""
   separator = ctx.configuration.host_path_separator
   java_files = ctx.files.srcs  # java files that need to be compiled
-  super_java_files = ctx.attr.super_srcs  # java files whose js to ignore
+  omit_java_files = ctx.attr.omit_srcs  # java files whose js to ignore
   js_native_zip_files = ctx.files.native_sources_zips
-  java_deps = ctx.attr.java_deps
-  java_dep_files = set()
-  java_deps_paths = []
+  deps = ctx.attr.deps
+  dep_files = set()
+  deps_paths = []
   java_files_paths = []
-  super_java_files_paths = []
+  omit_java_files_paths = []
   js_files = []
 
   # base package for the build
   package_name = ctx.label.package
 
   # gather transitive files and exported files in deps
-  for java_dep in java_deps:
-    java_dep_files += java_dep.files
-    java_dep_files += java_dep.default_runfiles.files # for exported libraries
+  for dep in deps:
+    dep_files += dep.files
+    dep_files += dep.default_runfiles.files  # for exported libraries
 
   # convert files to paths
-  for java_dep_file in java_dep_files:
-    java_deps_paths += [java_dep_file.path]
+  for dep_file in dep_files:
+    deps_paths += [dep_file.path]
 
   for java_file in java_files:
-    if _is_in_super(java_file, super_java_files):
-      super_java_files_paths += [java_file.path]
+    if _should_omit(java_file, omit_java_files):
+      omit_java_files_paths += [java_file.path]
     java_files_paths += [java_file.path]
 
   js_zip_name = ctx.label.name + ".js.zip"
   compiler_args = [
       "-d",
       ctx.configuration.bin_dir.path + "/" + ctx.label.package + "/" +
-      js_zip_name,]
+      js_zip_name
+  ]
 
-  if len(java_deps_paths) > 0:
-    compiler_args += ["-cp", separator.join(java_deps_paths)]
+  if len(deps_paths) > 0:
+    compiler_args += ["-cp", separator.join(deps_paths)]
 
-  if len(super_java_files_paths) > 0:
-    compiler_args += ["-superfiles", separator.join(super_java_files_paths)]
+  if len(omit_java_files_paths) > 0:
+    compiler_args += ["-omitfiles", separator.join(omit_java_files_paths)]
 
   # Add the native zip file paths
   js_native_zip_files_paths = [js_native_zip_file.path for js_native_zip_file
@@ -87,9 +79,9 @@ def _impl(ctx):
 
   js_zip_artifact = ctx.new_file(js_zip_name)
   ctx.action(
-      inputs=java_files + list(java_dep_files) + js_native_zip_files,
+      inputs=java_files + list(dep_files) + js_native_zip_files,
       outputs=[js_zip_artifact],
-      executable=ctx.executable.compiler,
+      executable=ctx.executable.transpiler,
       arguments=compiler_args,
   )
 
@@ -97,29 +89,36 @@ def _impl(ctx):
       files=set([js_zip_artifact]),
   )
 
-# expose rule
+
+"""j2cl_transpile: A J2CL transpile rule.
+
+Args:
+  srcs: Java source files to compile.
+  deps: Java jar files for reference resolution.
+  native_sources_zips: JS zip files providing Foo.native.js implementations.
+"""
+# Private Args:
+#   omit_srcs: Names of files to omit from the generated output. The files
+#       will be included in the compile for reference resolution purposes but no
+#       output JS for them will be kept.
+#   transpiler: J2CL compiler jar to use.
 j2cl_transpile = rule(
     attrs={
-        "java_library": attr.label(mandatory=True),
-        "java_deps": attr.label_list(
-            allow_files=FileType([".jar"]),
+        "deps": attr.label_list(allow_files=FileType([".jar"])),
+        "srcs": attr.label_list(
+            mandatory=True,
+            allow_files=FileType([".java"]),
         ),
-        "compiler": attr.label(
+        "native_sources_zips": attr.label_list(
+            allow_files=FileType([".zip"]),
+        ),
+        "omit_srcs": attr.string_list(default=[]),
+        "transpiler": attr.label(
             cfg=HOST_CFG,
             executable=True,
             allow_files=True,
             default=Label("//:j2cl"),
         ),
-        # these need to go once we know how to read the inputs of
-        # a java_library rule
-        "srcs": attr.label_list(
-            mandatory=True,
-            allow_files=FileType([".java"]),
-        ),
-        "super_srcs": attr.string_list(default=[]),
-        "native_sources_zips": attr.label_list(
-            allow_files=FileType([".zip"]),
-        )
     },
     implementation=_impl,
 )

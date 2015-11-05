@@ -32,13 +32,13 @@ import java.util.List;
 public class FrontendFlags {
 
   @Option(
-    name = "-superfiles",
+    name = "-omitfiles",
     metaVar = "<paths>",
     usage =
         "List of files that should be included in the compile but whose "
             + "output JS should not be kept because the user expects to provide a replacement."
   )
-  protected String superfiles = "";
+  protected String omitfiles = "";
 
   @Argument(metaVar = "<source files>", usage = "source files")
   protected List<String> files = new ArrayList<>();

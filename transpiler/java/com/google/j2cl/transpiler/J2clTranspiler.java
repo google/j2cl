@@ -148,15 +148,15 @@ public class J2clTranspiler {
   private void generateJavaScriptSources(List<CompilationUnit> j2clCompilationUnits) {
     Charset charset = Charset.forName(options.getEncoding());
 
-    Set<String> superSourceFiles = new HashSet<>();
-    superSourceFiles.addAll(options.getSuperSourceFiles());
+    Set<String> omitSourceFiles = new HashSet<>();
+    omitSourceFiles.addAll(options.getOmitSourceFiles());
 
     Set<String> nativeJavaScriptFileZipPaths = new HashSet<>();
     nativeJavaScriptFileZipPaths.addAll(options.getNativeSourceZipEntries());
 
     new JavaScriptGeneratorStage(
             charset,
-            superSourceFiles,
+            omitSourceFiles,
             nativeJavaScriptFileZipPaths,
             options.getOutputFileSystem(),
             options.getOutput(),

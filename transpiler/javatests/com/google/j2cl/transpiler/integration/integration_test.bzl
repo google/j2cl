@@ -1,4 +1,4 @@
-"""integration_test build macro.
+"""integration_test build macro
 
 A build macro that turns Java files into an optimized JS target and a JS
 test target.
@@ -16,43 +16,28 @@ integration_test(
     name = "foobar",
     srcs = glob(["*.java"]),
 )
+
 """
 
+
+load("/javascript/closure/builddefs", "CLOSURE_COMPILER_FLAGS_FULL_TYPED")
 load(
     "/third_party/java_src/j2cl/build_def/j2cl_java_library",
     "j2cl_java_library",
 )
-load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_root")
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_package")
 
-# TODO: source these flags from the authoritative location once they're
-#       accessible from .bzl
-CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
-    "--check_global_names_level=ERROR",
-    "--check_provides=WARNING",
-    "--closure_pass",
-    "--collapse_properties",
-    "--compute_function_side_effects=true",
-    "--devirtualize_prototype_methods",
-    "--inline_variables",
-    "--jscomp_warning=deprecated",
-    "--jscomp_warning=missingProperties",
-    "--jscomp_warning=visibility",
-    "--property_renaming=ALL_UNQUOTED",
-    "--remove_unused_prototype_props",
-    "--remove_unused_prototype_props_in_externs",
-    "--smart_name_removal",
-    "--ambiguate_properties",
-    "--disambiguate_properties",
-    "--remove_unused_constructor_properties=ON",
-    "--jscomp_off=uselessCode",
-]
+
+# Copy the Closure flags but remove --variable_renaming=ALL since it interferes
+# with tests and can't be turned off.
+_CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
+    flag for flag in CLOSURE_COMPILER_FLAGS_FULL_TYPED
+    if flag != "--variable_renaming=ALL"]
 
 
 def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[]):
   """Macro that turns Java files into integration test targets."""
   # figure out the current location
-  java_root_path = get_java_root(PACKAGE_NAME)
   java_package = get_java_package(PACKAGE_NAME)
 
   # translate Java to JS
@@ -61,8 +46,8 @@ def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[]):
       srcs=srcs,
       deps=deps,
       javacopts=[
-        "-source 8",
-        "-target 8"
+          "-source 8",
+          "-target 8"
       ],
       native_sources_zips=native_sources_zips
   )
@@ -82,7 +67,7 @@ def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[]):
   native.js_binary(
       name="optimized_js",
       srcs=["OptHarness.js"],
-      defs=CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
+      defs=_CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
           "--language_in=ECMASCRIPT6_STRICT",
           "--language_out=ECMASCRIPT5",
           "--define=ASSERTIONS_ENABLED_=true",
@@ -91,6 +76,8 @@ def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[]):
           "--remove_unused_local_vars=ON",
           "--remove_unused_vars",
           "--variable_renaming=ALL",
+          "--remove_unused_constructor_properties=ON",
+          "--jscomp_off=uselessCode",
           "--jscomp_off=lateProvide",
           "--jscomp_off=extraRequire",
           "--jscomp_off=transitionalSuspiciousCodeWarnings",
@@ -103,7 +90,7 @@ def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[]):
   native.js_binary(
       name="readable_optimized_js",
       srcs=["OptHarness.js"],
-      defs=CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
+      defs=_CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
           "--language_in=ECMASCRIPT6_STRICT",
           "--language_out=ECMASCRIPT5",
           "--define=ASSERTIONS_ENABLED_=true",
@@ -114,6 +101,8 @@ def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[]):
           "--pretty_print",
           "--property_renaming=OFF",
           "--variable_renaming=OFF",
+          "--remove_unused_constructor_properties=ON",
+          "--jscomp_off=uselessCode",
           "--jscomp_off=lateProvide",
           "--jscomp_off=extraRequire",
           "--jscomp_off=transitionalSuspiciousCodeWarnings",
@@ -163,8 +152,8 @@ def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[]):
       deps=deps,
       entry_points=[java_package + ".MainEntryPoint"],
       javacopts=[
-        "-source 8",
-        "-target 8"
+          "-source 8",
+          "-target 8"
       ]
   )
   native.gwt_application(
@@ -211,7 +200,7 @@ def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[]):
       deps_mgmt="closure",
       externs_list=["//javascript/externs:common"],
       jvm_flags=["-Dcom.google.testing.selenium.browser=CHROME_LINUX"],
-      data=["//testing/matrix/nativebrowsers/chrome:stable_data",],
+      data=["//testing/matrix/nativebrowsers/chrome:stable_data"],
   )
 
   native.jsunit_test(
@@ -219,7 +208,7 @@ def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[]):
       srcs=["TestHarness.js"],
       compile=1,
       compiler="//javascript/tools/jscompiler:head",
-      defs=CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
+      defs=_CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
           "--export_test_functions=true",
           "--jscomp_off=undefinedVars",
           "--language_in=ECMASCRIPT6_STRICT",
@@ -229,6 +218,8 @@ def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[]):
           "--pretty_print",
           "--strict",
           "--variable_renaming=OFF",
+          "--remove_unused_constructor_properties=ON",
+          "--jscomp_off=uselessCode",
           "--jscomp_off=lateProvide",
           "--jscomp_off=extraRequire",
           "--jscomp_off=transitionalSuspiciousCodeWarnings",
@@ -240,5 +231,5 @@ def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[]):
       deps_mgmt="closure",
       externs_list=["//javascript/externs:common"],
       jvm_flags=["-Dcom.google.testing.selenium.browser=CHROME_LINUX"],
-      data=["//testing/matrix/nativebrowsers/chrome:stable_data",],
+      data=["//testing/matrix/nativebrowsers/chrome:stable_data"],
   )
