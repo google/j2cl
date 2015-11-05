@@ -29,7 +29,13 @@ class Casts {
    * @nocollapse
    */
   static to(instance, castType) {
-    if (CAST_CHECKS_ENABLED_ && !castType.$isInstance(instance)) {
+    if (!CAST_CHECKS_ENABLED_) {
+      return instance;
+    }
+    if (instance == null) {
+      return instance;
+    }
+    if (!castType.$isInstance(instance)) {
       Casts.throwCastException();
     }
     return instance;
