@@ -168,6 +168,25 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
     return null;
   }
 
+  public boolean isNative() {
+    return false;
+  }
+
+  public String getJsTypeNamespace() {
+    return null;
+  }
+
+  public String getJsTypeName() {
+    return null;
+  }
+
+  /**
+   * Returns true if the type is a native js type with a global namespace ("").
+   */
+  public boolean isGlobalNative() {
+    return isNative() && "".equals(getJsTypeNamespace());
+  }
+
   public boolean isInstanceMemberClass() {
     return false;
   }

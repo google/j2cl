@@ -21,7 +21,7 @@ load(
 )
 
 
-def readable_example(name, srcs, native_sources_zips=[], deps=[]):
+def readable_example(name, srcs, native_sources_zips=[], deps=[], js_deps=[]):
   """Macro that confirms the JS compilability of some transpiled Java."""
 
   # Transpile the Java files.
@@ -53,5 +53,5 @@ def readable_example(name, srcs, native_sources_zips=[], deps=[]):
       ],
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
-      deps=[":" + name + "_js_library"],
+      deps=js_deps + [":" + name + "_js_library"],
   )

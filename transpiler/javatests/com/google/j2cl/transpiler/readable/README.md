@@ -52,6 +52,7 @@ are copyright and licensed as follows:
     affected to turn off checks.
 - hashcode test in 'numberobjectcalls' fails for long
 - Investigate if Object.java, Enum.java and Class.java can be shared with GWT
+- Import global native js types when JSCompiler supports goog.require() externs.
 
 ## Tracking Closure warning issues
 - https://b.corp.google.com/hotlists/269212

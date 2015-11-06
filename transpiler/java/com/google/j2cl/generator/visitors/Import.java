@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.generator.visitors;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.TypeDescriptor;
 
 /**
@@ -32,7 +33,7 @@ public class Import implements Comparable<Import> {
     String baseFileName = computeBaseFileName(typeDescriptor);
 
     this.headerFileName = baseFileName;
-    this.implFileName = baseFileName + "$impl";
+    this.implFileName = typeDescriptor.isNative() ? baseFileName : baseFileName + "$impl";
     this.alias = alias;
     this.typeDescriptor = typeDescriptor;
   }
@@ -80,6 +81,22 @@ public class Import implements Comparable<Import> {
     if (typeDescriptor.isRaw()) {
       return typeDescriptor.getBinaryName();
     }
+    if (typeDescriptor.isNative()) {
+      return computeBaseFileNameForNativeJsTypes(typeDescriptor);
+    }
     return "gen." + typeDescriptor.getBinaryName();
+  }
+
+  private static String computeBaseFileNameForNativeJsTypes(TypeDescriptor typeDescriptor) {
+    Preconditions.checkArgument(typeDescriptor.isNative());
+    String namespace =
+        typeDescriptor.getJsTypeNamespace() != null
+            ? typeDescriptor.getJsTypeNamespace()
+            : typeDescriptor.getPackageName();
+    String simpleName =
+        typeDescriptor.getJsTypeName() != null
+            ? typeDescriptor.getJsTypeName()
+            : typeDescriptor.getSimpleName();
+    return typeDescriptor.isGlobalNative() ? simpleName : namespace + "." + simpleName;
   }
 }

@@ -23,6 +23,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.processors.Visitable;
 
+import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 
 import java.util.ArrayList;
@@ -41,8 +42,26 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   protected boolean isRaw;
   protected ImmutableList<TypeDescriptor> typeArgumentDescriptors;
 
+  // JsInterop properties
+  protected boolean isNative;
+  protected String jsTypeNamespace;
+  protected String jsTypeName;
+
   RegularTypeDescriptor(ITypeBinding typeBinding) {
     this.typeBinding = typeBinding;
+    if (typeBinding != null) {
+      setJsInteropProperties();
+    }
+  }
+
+  private void setJsInteropProperties() {
+    IAnnotationBinding jsTypeAnnotation = JsInteropUtils.getJsTypeAnnotation(typeBinding);
+    if (jsTypeAnnotation == null) {
+      return;
+    }
+    isNative = JsInteropUtils.isNative(jsTypeAnnotation);
+    jsTypeNamespace = JsInteropUtils.getJsNamespace(jsTypeAnnotation);
+    jsTypeName = JsInteropUtils.getJsName(jsTypeAnnotation);
   }
 
   public ImmutableList<String> getPackageComponents() {
@@ -241,5 +260,20 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   @Override
   public Node accept(Processor processor) {
     return Visitor_RegularTypeDescriptor.visit(processor, this);
+  }
+
+  @Override
+  public boolean isNative() {
+    return isNative;
+  }
+
+  @Override
+  public String getJsTypeNamespace() {
+    return jsTypeNamespace;
+  }
+
+  @Override
+  public String getJsTypeName() {
+    return jsTypeName;
   }
 }

@@ -61,6 +61,11 @@ public class JavaScriptGeneratorStage {
       }
 
       for (JavaType javaType : j2clCompilationUnit.getTypes()) {
+        if (javaType.getDescriptor().isNative()) {
+          // Don't generate JS for native JsType.
+          continue;
+        }
+
         JavaScriptImplGenerator jsImplGenerator =
             new JavaScriptImplGenerator(errors, javaType, velocityEngine);
 

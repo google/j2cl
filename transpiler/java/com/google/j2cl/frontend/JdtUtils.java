@@ -29,6 +29,7 @@ import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
+import com.google.j2cl.ast.JsInteropUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -78,8 +79,6 @@ public class JdtUtils {
   // JdtUtil members are all package private. Code outside frontend should not be aware of the
   // dependency on JDT.
 
-  private static final String JS_METHOD_ANNOTATION_NAME = "jsinterop.annotations.JsMethod";
-
   static String getCompilationUnitPackageName(CompilationUnit compilationUnit) {
     return compilationUnit.getPackage() == null
         ? ""
@@ -128,8 +127,12 @@ public class JdtUtils {
         createTypeDescriptor(variableBinding.getDeclaringClass());
     String fieldName = variableBinding.getName();
     TypeDescriptor thisTypeDescriptor = createTypeDescriptor(variableBinding.getType());
-    return FieldDescriptor.create(
-        isStatic, visibility, enclosingClassTypeDescriptor, fieldName, thisTypeDescriptor);
+    boolean isRaw = JsInteropUtils.isJsProperty(variableBinding);
+    return isRaw
+        ? FieldDescriptor.createRaw(
+            isStatic, enclosingClassTypeDescriptor, fieldName, thisTypeDescriptor)
+        : FieldDescriptor.create(
+            isStatic, visibility, enclosingClassTypeDescriptor, fieldName, thisTypeDescriptor);
   }
 
   public static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
@@ -147,12 +150,10 @@ public class JdtUtils {
     boolean isRaw = false;
 
     // TODO: expand JsMethod checking up the method override chain.
-    IAnnotationBinding jsMethodAnnotationBinding = findJsMethodAnnotationBinding(methodBinding);
-    String jsMethodName =
-        JdtAnnotationUtils.getAnnotationParameterString(jsMethodAnnotationBinding, "name");
-    String jsMethodNamespace =
-        JdtAnnotationUtils.getAnnotationParameterString(jsMethodAnnotationBinding, "namespace");
-    isRaw = jsMethodAnnotationBinding != null;
+    IAnnotationBinding jsMethodAnnotation = JsInteropUtils.getJsMethodAnnotation(methodBinding);
+    String jsMethodName = JsInteropUtils.getJsName(jsMethodAnnotation);
+    String jsMethodNamespace = JsInteropUtils.getJsNamespace(jsMethodAnnotation);
+    isRaw = JsInteropUtils.isJsMethod(methodBinding);
 
     // namespace on a JsMethod can only be used on a *static native* method.
     // TODO: replace it with JsInterop restrictions check, or maybe we want to relax this
@@ -197,11 +198,6 @@ public class JdtUtils {
         typeParameterDescriptors,
         jsMethodNamespace,
         jsMethodName);
-  }
-
-  private static IAnnotationBinding findJsMethodAnnotationBinding(IMethodBinding methodBinding) {
-    return JdtAnnotationUtils.findAnnotationBindingByName(
-        methodBinding.getAnnotations(), JS_METHOD_ANNOTATION_NAME);
   }
 
   static Variable createVariable(IVariableBinding variableBinding) {

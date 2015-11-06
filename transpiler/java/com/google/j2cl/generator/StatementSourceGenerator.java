@@ -381,11 +381,29 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformNewInstance(NewInstance expression) {
+        TypeDescriptor targetTypeDescriptor =
+            expression.getTarget().getEnclosingClassTypeDescriptor();
+        if (targetTypeDescriptor.isNative()) {
+          return transformNativeNewInstance(expression);
+        } else {
+          return transformRegularNewInstance(expression);
+        }
+      }
+
+      private String transformNativeNewInstance(NewInstance expression) {
+        TypeDescriptor targetTypeDescriptor =
+            expression.getTarget().getEnclosingClassTypeDescriptor();
+        String argumentsList =
+            Joiner.on(", ").join(transformNodesToSource(expression.getArguments()));
+        return String.format("new %s(%s)", toSource(targetTypeDescriptor), argumentsList);
+      }
+
+      private String transformRegularNewInstance(NewInstance expression) {
+        String argumentsList =
+            Joiner.on(", ").join(transformNodesToSource(expression.getArguments()));
         String className = getAlias(expression.getTarget().getEnclosingClassTypeDescriptor());
         String constructorMangledName =
             ManglingNameUtils.getConstructorMangledName(expression.getTarget());
-        String argumentsList =
-            Joiner.on(", ").join(transformNodesToSource(expression.getArguments()));
         return String.format("%s.%s(%s)", className, constructorMangledName, argumentsList);
       }
 

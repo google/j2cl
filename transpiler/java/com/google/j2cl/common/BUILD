@@ -8,6 +8,7 @@ java_library(
     srcs = glob(["*.java"]),
     deps = [
         "//java/com/google/common/collect",
+        "//third_party/java/eclipse:eclipse-jdt-core-4.4",
         "//third_party/java/jakarta_velocity",
     ],
 )

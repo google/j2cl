@@ -13,20 +13,13 @@ load(
 # blaze test :compiled_test
 # blaze test :uncompiled_test
 integration_test(
-    name = "staticjsmethods",
+    name = "nativejstypes",
     srcs = glob(["*.java"]),
-    native_sources_zips = [":native_files.zip"],
+    js_deps = [":native_types"],
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
 )
 
-genzip(
-    name = "native_files.zip",
-    deps = [":native_files_pkg_library"],
-)
-
-pkg_library(
-    name = "native_files_pkg_library",
-    srcs = glob(["native_sources/**/*.js"]),
-    flatten = 1,
-    package_dir = "com/google/j2cl/transpiler/integration/staticjsmethods",
+js_library(
+    name = "native_types",
+    srcs = glob(["*.js"]),
 )

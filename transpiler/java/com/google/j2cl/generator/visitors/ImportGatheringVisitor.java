@@ -188,7 +188,10 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   private void addTypeDescriptor(TypeDescriptor typeDescriptor, ImportCategory importCategory) {
     // Type variables can't be depended upon.
-    if (typeDescriptor.isTypeVariable() || typeDescriptor.isWildCard()) {
+    // Do not import global native js types. (window, Math, etc)
+    if (typeDescriptor.isTypeVariable()
+        || typeDescriptor.isWildCard()
+        || typeDescriptor.isGlobalNative()) {
       return;
     }
 

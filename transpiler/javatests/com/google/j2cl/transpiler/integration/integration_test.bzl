@@ -35,7 +35,7 @@ _CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
     if flag != "--variable_renaming=ALL"]
 
 
-def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[]):
+def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[], js_deps=[]):
   """Macro that turns Java files into integration test targets."""
   # figure out the current location
   java_package = get_java_package(PACKAGE_NAME)
@@ -84,7 +84,7 @@ def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[]):
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
-      deps=[":" + name + "_js_library"],
+      deps=js_deps + [":" + name + "_js_library"],
   )
   # For constructing readable optimized diffs.
   native.js_binary(
@@ -109,7 +109,7 @@ def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[]):
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
-      deps=[":" + name + "_js_library"],
+      deps=js_deps + [":" + name + "_js_library"],
   )
   # For constructing readable unoptimized diffs.
   native.js_binary(
@@ -126,7 +126,7 @@ def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[]):
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
-      deps=[":" + name + "_js_library"],
+      deps=js_deps + [":" + name + "_js_library"],
   )
 
   # For constructing GWT transpiled output.
@@ -193,7 +193,7 @@ def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[]):
       name="uncompiled_test",
       srcs=["TestHarness.js"],
       compile=0,
-      deps=[
+      deps=js_deps + [
           ":" + name + "_js_library",
           "//javascript/closure/testing:testsuite",
       ],
@@ -224,7 +224,7 @@ def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[]):
           "--jscomp_off=extraRequire",
           "--jscomp_off=transitionalSuspiciousCodeWarnings",
       ] + defs,
-      deps=[
+      deps=js_deps + [
           ":" + name + "_js_library",
           "//javascript/closure/testing:testsuite",
       ],

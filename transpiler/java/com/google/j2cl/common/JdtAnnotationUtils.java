@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.frontend;
+package com.google.j2cl.common;
 
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IMemberValuePairBinding;
@@ -46,5 +46,18 @@ public class JdtAnnotationUtils {
       }
     }
     return null;
+  }
+
+  public static boolean getAnnotationParameterBoolean(
+      IAnnotationBinding annotationBinding, String paramName, boolean defaultValue) {
+    if (annotationBinding == null) {
+      return defaultValue;
+    }
+    for (IMemberValuePairBinding member : annotationBinding.getDeclaredMemberValuePairs()) {
+      if (paramName.equals(member.getName())) {
+        return (Boolean) member.getValue();
+      }
+    }
+    return defaultValue;
   }
 }
