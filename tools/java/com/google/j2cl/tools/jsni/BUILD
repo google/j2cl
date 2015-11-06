@@ -18,6 +18,7 @@ java_library(
         "//java/com/google/common/flags",
         "//java/com/google/common/io",
         "//third_party/java/eclipse:eclipse-jdt-core-4.4",
+        "//transpiler/java/com/google/j2cl/ast",
         "//transpiler/java/com/google/j2cl/errors",
         "//transpiler/java/com/google/j2cl/frontend",
         "//transpiler/java/com/google/j2cl/generator",

@@ -17,6 +17,9 @@ package com.google.j2cl.tools.jsni;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptors;
+import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.frontend.JdtUtils;
 import com.google.j2cl.generator.ManglingNameUtils;
 
@@ -50,9 +53,14 @@ public class JsniMethodVisitor extends ASTVisitor {
   @Override
   public void endVisit(MethodDeclaration method) {
     if (Modifier.isNative(method.getModifiers())) {
-      String methodMangledName =
-          ManglingNameUtils.getMangledName(
-              JdtUtils.createMethodDescriptor(method.resolveBinding()));
+      MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(method.resolveBinding());
+      List<String> parameterNames = extractParameterNames(method);
+      if (TypeDescriptors.isBoxedTypeAsJsPrimitives(
+          methodDescriptor.getEnclosingClassTypeDescriptor()) && !methodDescriptor.isStatic()) {
+        parameterNames.add(0, "$thisArg");
+        methodDescriptor = MethodDescriptors.makeStaticMethodDescriptor(methodDescriptor);
+      }
+      String methodMangledName = ManglingNameUtils.getMangledName(methodDescriptor);
       String javascriptBlock = extractJavascriptBlock(method);
 
       // no jsni references ?
@@ -62,9 +70,9 @@ public class JsniMethodVisitor extends ASTVisitor {
           computeTypeFqn(method),
           new JsniMethod(
               methodMangledName,
-              extractParameterNames(method),
+              parameterNames,
               javascriptBlock,
-              Modifier.isStatic(method.getModifiers())));
+              methodDescriptor.isStatic()));
     }
   }
 
