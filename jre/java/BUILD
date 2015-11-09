@@ -3,14 +3,31 @@
 #
 # Can depend on the native bootstrap JS but not on the VM opcode JS.
 
-package(default_visibility = ["//:__subpackages__"])
+package(default_visibility = [
+    "//:__subpackages__",
+    "//third_party/java/j2cl:__pkg__",
+])
 
 # Google owns the copyright
 licenses(["unencumbered"])
 
-load("/third_party/java_src/j2cl/build_def/j2cl_java_library", "j2cl_java_library")
 load("/third_party/java_src/j2cl/build_def/j2cl_source_copy", "j2cl_source_copy")
 load("/third_party/java_src/j2cl/build_def/jsni_to_j2cl_converter", "jsni_to_j2cl_converter")
+
+# TODO: implement something like j2cl_library("foo", exports="//other:foo")
+# Forwards the gwt-jsinterop-annotations target with the Java suffix that
+# j2cl_library() expects.
+java_library(
+    name = "gwt-jsinterop-annotations_java_library",
+    constraints = ["android"],
+    exports = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
+)
+
+# Services the gwt-jsinterop-annotations target with the JS suffix that
+# j2cl_library() expects.
+js_library(
+    name = "gwt-jsinterop-annotations_js_library",
+)
 
 j2cl_source_copy(
     name = "emul_dev",
@@ -81,58 +98,10 @@ jsni_to_j2cl_converter(
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
 )
 
-genzip(
-    name = "native_js.zip",
-    deps = [":native_js_pkg_library"],
-)
-
-pkg_library(
-    name = "native_js_pkg_library",
-    srcs = [
-        "java/lang/Throwable.native.js",
-        "javaemul/internal/ArrayStamper.native.js",
-        "javaemul/internal/HashCodes.native.js",
-        "javaemul/internal/LongCompareHolder.native.js",
-    ],
-    flatten = 0,
-)
-
-# Transpiles the parts of the jre that are implemented as Java.
-j2cl_java_library(
-    name = "JavaJre",
-    srcs = [
-        # TODO(dankurka): investigate all classes here
-        "java/lang/Class.java",
-        "java/lang/Enum.java",
-        "java/lang/Object.java",
-        "java/lang/invoke/MethodHandles.java",
-        "java/nio/charset/CharsetDecoder.java",
-        "java/nio/charset/CharsetEncoder.java",
-        "java/util/InternalJsIterator.java",
-        "java/util/InternalJsIteratorEntry.java",
-        "java/util/InternalJsMap.java",
-        "java/util/InternalJsMapFactory.java",
-        "javaemul/internal/JsDate.java",
-        ":emul_dev",
-        ":emul_user",
-    ],
-    _add_standard_library_dep = False,
-    _omit_srcs = [
-        "java/lang/Class.java",
-        "java/lang/Object.java",
-        "javaemul/internal/JsDate.java",
-    ],
-    native_sources_zips = [
-        ":convert_jsni_emul",
-        ":native_js.zip",
-    ],
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
-)
-
 # Bundles together both hand-rolled JS versions of Java classes with transpiled
 # versions of Java classes into a complete JRE.
 js_library(
-    name = "jre",
+    name = "jre_js_library",
     srcs = glob(
         ["**/*.js"],
         exclude = ["**/*.native.js"],

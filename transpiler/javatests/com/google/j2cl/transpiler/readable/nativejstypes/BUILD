@@ -13,7 +13,7 @@ readable_example(
     name = "nativejstypes",
     srcs = glob(["*.java"]),
     js_deps = [":native_types"],
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
+    deps = ["//jre/java:gwt-jsinterop-annotations"],
 )
 
 js_library(

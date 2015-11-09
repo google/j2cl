@@ -4,7 +4,7 @@
 # The IntegrationTestCase base class makes it extremely easy to define and
 # verify integration tests that need to assert about output std or err logs.
 # Other integration tests will want to run transpiled output as JS and
-# should make use of j2cl_java_library macro.
+# should make use of j2cl_library macro.
 
 package(default_visibility = ["//:__subpackages__"])
 
@@ -50,14 +50,14 @@ java_test(
 java_test(
     name = "NativeSourcesErrorTest",
     srcs = ["NativeSourcesErrorTest.java"],
-    data = glob(["nativesourceserror/**/*"]) + ["//jre/java:libJavaJre.jar"],
+    data = glob(["nativesourceserror/**/*"]) + ["//jre/java:libJavaJre_java_library.jar"],
     deps = [":IntegrationTestCase"],
 )
 
 java_test(
     name = "OutputTest",
     srcs = ["OutputTest.java"],
-    data = glob(["output/**/*"]) + ["//jre/java:libJavaJre.jar"],
+    data = glob(["output/**/*"]) + ["//jre/java:libJavaJre_java_library.jar"],
     deps = [":IntegrationTestCase"],
 )
 

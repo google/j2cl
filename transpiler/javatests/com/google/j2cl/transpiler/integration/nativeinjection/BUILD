@@ -15,17 +15,6 @@ load(
 integration_test(
     name = "nativeinjection",
     srcs = glob(["*.java"]),
-    native_sources_zips = [":native_files.zip"],
-)
-
-genzip(
-    name = "native_files.zip",
-    deps = [":native_files_pkg_library"],
-)
-
-pkg_library(
-    name = "native_files_pkg_library",
-    srcs = glob(["native_sources/**/*.js"]),
-    flatten = 0,
-    strip_prefix = PACKAGE_NAME + "/native_sources",
+    native_srcs = ["NativeClass.native.js"],
+    native_srcs_pkg = "com/google/j2cl/transpiler/integration/nativeinjection",
 )

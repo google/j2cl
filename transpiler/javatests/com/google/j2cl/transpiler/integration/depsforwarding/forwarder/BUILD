@@ -4,8 +4,8 @@ package(default_visibility = ["//:__subpackages__"])
 licenses(["unencumbered"])
 
 java_library(
-    name = "forwarder_lib",
-    exports = ["//transpiler/javatests/com/google/j2cl/transpiler/integration/depsforwarding/foo:foo_lib"],
+    name = "forwarder_lib_java_library",
+    exports = ["//transpiler/javatests/com/google/j2cl/transpiler/integration/depsforwarding/foo:foo_lib_java_library"],
 )
 
 js_library(

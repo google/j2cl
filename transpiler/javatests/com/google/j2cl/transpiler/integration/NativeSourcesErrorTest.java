@@ -39,7 +39,7 @@ public class NativeSourcesErrorTest extends IntegrationTestCase {
             "-encoding",
             "UTF-8",
             "-cp",
-            "third_party/java_src/j2cl/jre/java/libJavaJre.jar",
+            "third_party/java_src/j2cl/jre/java/libJavaJre_java_library.jar",
             "-nativesourcezip",
             NATIVE_SOURCES_ERROR_PATH + "nonexistent.zip");
     assertLogContainsSnippet(
@@ -63,7 +63,7 @@ public class NativeSourcesErrorTest extends IntegrationTestCase {
             "-encoding",
             "UTF-8",
             "-cp",
-            "third_party/java_src/j2cl/jre/java/libJavaJre.jar",
+            "third_party/java_src/j2cl/jre/java/libJavaJre_java_library.jar",
             "-nativesourcezip",
             NATIVE_SOURCES_ERROR_PATH + "bad_name_native_sources.zip");
     assertLogContainsSnippet(
@@ -89,7 +89,7 @@ public class NativeSourcesErrorTest extends IntegrationTestCase {
             "-encoding",
             "UTF-8",
             "-cp",
-            "third_party/java_src/j2cl/jre/java/libJavaJre.jar",
+            "third_party/java_src/j2cl/jre/java/libJavaJre_java_library.jar",
             "-nativesourcezip",
             NATIVE_SOURCES_ERROR_PATH + "too_many_native_sources.zip");
     assertLogContainsSnippet(

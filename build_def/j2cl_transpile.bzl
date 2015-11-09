@@ -12,7 +12,7 @@ j2cl_transpile(
     deps = [":some_dep"],
 )
 
-Note: in general you want to be using j2cl_java_library instead of using
+Note: in general you want to be using j2cl_library instead of using
 j2cl_transpile directly.
 
 """
@@ -29,7 +29,7 @@ def _impl(ctx):
   separator = ctx.configuration.host_path_separator
   java_files = ctx.files.srcs  # java files that need to be compiled
   omit_java_files = ctx.attr.omit_srcs  # java files whose js to ignore
-  js_native_zip_files = ctx.files.native_sources_zips
+  js_native_zip_files = ctx.files.native_srcs_zips
   deps = ctx.attr.deps
   dep_files = set()
   deps_paths = []
@@ -96,7 +96,7 @@ def _impl(ctx):
 Args:
   srcs: Java source files to compile.
   deps: Java jar files for reference resolution.
-  native_sources_zips: JS zip files providing Foo.native.js implementations.
+  native_srcs_zips: JS zip files providing Foo.native.js implementations.
 """
 # Private Args:
 #   omit_srcs: Names of files to omit from the generated output. The files
@@ -110,7 +110,7 @@ j2cl_transpile = rule(
             mandatory=True,
             allow_files=FileType([".java"]),
         ),
-        "native_sources_zips": attr.label_list(
+        "native_srcs_zips": attr.label_list(
             allow_files=FileType([".zip"]),
         ),
         "omit_srcs": attr.string_list(default=[]),
@@ -118,7 +118,7 @@ j2cl_transpile = rule(
             cfg=HOST_CFG,
             executable=True,
             allow_files=True,
-            default=Label("//:j2cl"),
+            default=Label("//third_party/java/j2cl"),
         ),
     },
     implementation=_impl,

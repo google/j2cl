@@ -12,5 +12,5 @@ load(
 readable_example(
     name = "staticjsmethods",
     srcs = glob(["*.java"]),
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
+    deps = ["//jre/java:gwt-jsinterop-annotations"],
 )

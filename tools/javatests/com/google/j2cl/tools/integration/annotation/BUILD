@@ -11,5 +11,5 @@ jsni_converter_test(
     generated_js_files = ["AnnotatedMethod.native.js"],
     java_files = ["AnnotatedMethod.java"],
     js_test_files = ["annotation_test.js"],
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
+    deps = ["//jre/java:gwt-jsinterop-annotations_java_library"],
 )

@@ -21,7 +21,7 @@
 java_dir="third_party/java_src/j2cl/transpiler/javatests"
 examples_dir="$java_dir/com/google/j2cl/transpiler/readable/"
 transpiler_bin="blaze-bin/third_party/java_src/j2cl/j2cl"
-jre_jar="blaze-bin/third_party/java_src/j2cl/jre/java/libJavaJre.jar"
+jre_jar="blaze-bin/third_party/java_src/j2cl/jre/java/libJavaJre_java_library.jar"
 jsinterop_jar="blaze-bin/third_party/java_src/gwt/svn/trunk/user/libgwt-jsinterop-annotations.jar"
 example_name=$1
 
@@ -32,7 +32,7 @@ set -x
 set -e
 
 # Build  JRE
-blaze build third_party/java_src/j2cl/jre/java:JavaJre &> /dev/null
+blaze build third_party/java_src/j2cl/jre/java:JavaJre_java_library &> /dev/null
 
 # Build the transpiler
 blaze build third_party/java_src/j2cl:j2cl

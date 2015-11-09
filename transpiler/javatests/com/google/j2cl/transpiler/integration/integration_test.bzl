@@ -21,10 +21,7 @@ integration_test(
 
 
 load("/javascript/closure/builddefs", "CLOSURE_COMPILER_FLAGS_FULL_TYPED")
-load(
-    "/third_party/java_src/j2cl/build_def/j2cl_java_library",
-    "j2cl_java_library",
-)
+load("/third_party/java/j2cl/j2cl_library", "j2cl_library")
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_package")
 
 
@@ -35,13 +32,19 @@ _CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
     if flag != "--variable_renaming=ALL"]
 
 
-def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[], js_deps=[]):
-  """Macro that turns Java files into integration test targets."""
+def integration_test(
+    name, srcs, deps=[], defs=[], native_srcs=[], native_srcs_pkg=None,
+    js_deps=[]):
+  """Macro that turns Java files into integration test targets.
+
+  deps are Labels of j2cl_library() rules. NOT labels of
+  java_library() rules.
+  """
   # figure out the current location
   java_package = get_java_package(PACKAGE_NAME)
 
   # translate Java to JS
-  j2cl_java_library(
+  j2cl_library(
       name=name,
       srcs=srcs,
       deps=deps,
@@ -49,7 +52,8 @@ def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[], js_de
           "-source 8",
           "-target 8"
       ],
-      native_sources_zips=native_sources_zips
+      native_srcs=native_srcs,
+      native_srcs_pkg=native_srcs_pkg,
   )
 
   # blaze build :optimized_js
@@ -146,10 +150,11 @@ def integration_test(name, srcs, deps=[], defs=[], native_sources_zips=[], js_de
       cmd="echo \"%s\" > $@" % gwt_harness,
       executable=1,
   )
+  java_library_deps = [dep + "_java_library" for dep in deps]
   native.gwt_module(
       name="gwt_module",
       srcs=srcs + ["MainEntryPoint.java"],
-      deps=deps,
+      deps=java_library_deps,
       entry_points=[java_package + ".MainEntryPoint"],
       javacopts=[
           "-source 8",

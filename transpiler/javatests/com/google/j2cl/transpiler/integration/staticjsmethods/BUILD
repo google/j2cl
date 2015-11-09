@@ -15,18 +15,7 @@ load(
 integration_test(
     name = "staticjsmethods",
     srcs = glob(["*.java"]),
-    native_sources_zips = [":native_files.zip"],
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
-)
-
-genzip(
-    name = "native_files.zip",
-    deps = [":native_files_pkg_library"],
-)
-
-pkg_library(
-    name = "native_files_pkg_library",
-    srcs = glob(["native_sources/**/*.js"]),
-    flatten = 1,
-    package_dir = "com/google/j2cl/transpiler/integration/staticjsmethods",
+    native_srcs = ["Main.native.js"],
+    native_srcs_pkg = "com/google/j2cl/transpiler/integration/staticjsmethods",
+    deps = ["//jre/java:gwt-jsinterop-annotations"],
 )
