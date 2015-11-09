@@ -1,0 +1,134 @@
+/**
+ * Impl transpiled from com.google.j2cl.transpiler.readable.equality.Equality.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.equality.Equality$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
+
+
+class Equality extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_equality_Equality() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Equality}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    Equality.$clinit();
+    let instance = new Equality;
+    instance.$ctor__com_google_j2cl_transpiler_readable_equality_Equality();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_equality_Equality() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_equality_Equality();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    {
+      $Asserts.$enabled() && $Asserts.$assert(false == false);
+      $Asserts.$enabled() && $Asserts.$assert(0 != 1);
+    }
+    {
+      $Asserts.$enabled() &&
+          $Asserts.$assert(
+              $Equality.$notSame(Object.$create(), Object.$create()));
+    }
+    {
+      $Asserts.$enabled() && $Asserts.$assert(null != Object.$create());
+      $Asserts.$enabled() && $Asserts.$assert(Object.$create() != null);
+    }
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof Equality; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Equality);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    Equality.$clinit();
+    if (!Equality.$classEquality_) {
+      Equality.$classEquality_ = Class.$createForClass(
+          $Util.$generateId('Equality'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.equality.Equality'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.equality.Equality'));
+    }
+    return Equality.$classEquality_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
+    $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Equality.$classEquality_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = Equality;

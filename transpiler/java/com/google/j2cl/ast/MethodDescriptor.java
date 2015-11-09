@@ -35,6 +35,8 @@ public abstract class MethodDescriptor extends Node implements Member {
   public static final String INIT_METHOD_NAME = "$init";
   public static final String VALUE_OF_METHOD_NAME = "valueOf"; // Boxed type valueOf() method.
   public static final String VALUE_METHOD_SUFFIX = "Value"; // Boxed type **Value() method.
+  public static final String SAME_METHOD_NAME = "$same";
+  public static final String NOT_SAME_METHOD_NAME = "$notSame";
 
   private static Interner<MethodDescriptor> interner;
 

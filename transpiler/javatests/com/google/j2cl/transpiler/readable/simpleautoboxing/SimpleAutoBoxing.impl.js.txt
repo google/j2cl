@@ -19,6 +19,7 @@ let Float = goog.forwardDeclare('gen.java.lang.Float$impl');
 let Integer = goog.forwardDeclare('gen.java.lang.Integer$impl');
 let Long = goog.forwardDeclare('gen.java.lang.Long$impl');
 let Short = goog.forwardDeclare('gen.java.lang.Short$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 let $byte = goog.forwardDeclare('vmbootstrap.primitives.$byte$impl');
@@ -290,12 +291,12 @@ class SimpleAutoBoxing extends Object {
     let boxB2 = Boolean.$create__boolean(false);
     let br;
     let boxr;
-    boxr = boxB1 == boxB2;
-    br = boxB1 == boxB2;
+    boxr = $Equality.$same(boxB1, boxB2);
+    br = $Equality.$same(boxB1, boxB2);
     $Asserts.$enabled() && $Asserts.$assert(boxr);
     $Asserts.$enabled() && $Asserts.$assert(br);
-    boxr = boxB1 != boxB2;
-    br = boxB1 != boxB2;
+    boxr = $Equality.$notSame(boxB1, boxB2);
+    br = $Equality.$notSame(boxB1, boxB2);
     $Asserts.$enabled() && $Asserts.$assert(boxr);
     $Asserts.$enabled() && $Asserts.$assert(br);
     boxr =
@@ -377,7 +378,7 @@ class SimpleAutoBoxing extends Object {
   m_testUnboxingEquality() {
     let boxB = Boolean.$create__boolean(true);
     let b = false;
-    $Asserts.$enabled() && $Asserts.$assert(boxB == boxB);
+    $Asserts.$enabled() && $Asserts.$assert($Equality.$same(boxB, boxB));
     $Asserts.$enabled() &&
         $Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxB) == b);
     $Asserts.$enabled() && $Asserts.$assert(b != b);
@@ -385,7 +386,7 @@ class SimpleAutoBoxing extends Object {
         $Asserts.$assert(b != Boolean.m_booleanValue__java_lang_Boolean(boxB));
     let boxI = Integer.$create__int(100);
     let i = 101;
-    $Asserts.$enabled() && $Asserts.$assert(boxI == boxI);
+    $Asserts.$enabled() && $Asserts.$assert($Equality.$same(boxI, boxI));
     $Asserts.$enabled() && $Asserts.$assert(boxI.m_intValue() == i);
     $Asserts.$enabled() && $Asserts.$assert(i != i);
     $Asserts.$enabled() && $Asserts.$assert(i != boxI.m_intValue());
@@ -456,6 +457,7 @@ class SimpleAutoBoxing extends Object {
     Integer = goog.module.get('gen.java.lang.Integer$impl');
     Long = goog.module.get('gen.java.lang.Long$impl');
     Short = goog.module.get('gen.java.lang.Short$impl');
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
     $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
     $byte = goog.module.get('vmbootstrap.primitives.$byte$impl');

@@ -11,6 +11,7 @@ let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
@@ -228,7 +229,7 @@ class String extends Object {
    */
   static m_equals__java_lang_String__java_lang_Object($thisArg, o) {
     String.$clinit();
-    return $thisArg == o;
+    return $Equality.$same($thisArg, o);
   }
 
   /**
@@ -394,6 +395,7 @@ class String extends Object {
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');

@@ -51,6 +51,7 @@ def readable_example(
           "--remove_dead_assignments",
           "--jscomp_off=lateProvide",
           "--jscomp_off=extraRequire",
+          "--jscomp_off=suspiciousCode",
           "--jscomp_off=transitionalSuspiciousCodeWarnings",
           "--jscomp_off=uselessCode",
       ],

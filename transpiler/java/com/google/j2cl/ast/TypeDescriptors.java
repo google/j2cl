@@ -257,6 +257,7 @@ public class TypeDescriptors {
     CASTS(Arrays.asList("vmbootstrap"), "Casts"),
     PRIMITIVES(Arrays.asList("vmbootstrap", "primitives"), "Primitives"),
     LONGS(Arrays.asList("vmbootstrap"), "LongUtils"),
+    NATIVE_EQUALITY(Arrays.asList("nativebootstrap"), "Equality"),
     NATIVE_UTIL(Arrays.asList("nativebootstrap"), "Util"),
     NATIVE_LONG(Arrays.asList("nativebootstrap"), "Long");
 

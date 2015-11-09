@@ -19,6 +19,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,6 +62,48 @@ public class AstUtils {
         false,
         false,
         TypeDescriptors.get().primitiveVoid);
+  }
+
+  /**
+   * Create "Equality.$same()" MethodDescriptor.
+   */
+  public static MethodDescriptor createUtilSameMethodDescriptor() {
+    return MethodDescriptor.create(
+        true, // isStatic
+        true, // isRaw
+        Visibility.PUBLIC,
+        BootstrapType.NATIVE_EQUALITY.getDescriptor(), // enclosingClassTypeDescriptor
+        MethodDescriptor.SAME_METHOD_NAME,
+        false, // isConstructor
+        false, // isNative
+        TypeDescriptors.get().primitiveBoolean, // returnTypeDescriptor
+        Lists.newArrayList(
+            TypeDescriptors.get().javaLangObject,
+            TypeDescriptors.get().javaLangObject), // parameterTypeDescriptors
+        new ArrayList<>(),
+        null,
+        null);
+  }
+
+  /**
+   * Create "Equality.$notSame()" MethodDescriptor.
+   */
+  public static MethodDescriptor createUtilNotSameMethodDescriptor() {
+    return MethodDescriptor.create(
+        true, // isStatic
+        true, // isRaw
+        Visibility.PUBLIC,
+        BootstrapType.NATIVE_EQUALITY.getDescriptor(), // enclosingClassTypeDescriptor
+        MethodDescriptor.NOT_SAME_METHOD_NAME,
+        false, // isConstructor
+        false, // isNative
+        TypeDescriptors.get().primitiveBoolean, // returnTypeDescriptor
+        Lists.newArrayList(
+            TypeDescriptors.get().javaLangObject,
+            TypeDescriptors.get().javaLangObject), // parameterTypeDescriptors
+        new ArrayList<>(),
+        null,
+        null);
   }
 
   /**
