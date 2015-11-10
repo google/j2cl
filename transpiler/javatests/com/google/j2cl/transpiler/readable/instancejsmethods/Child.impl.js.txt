@@ -1,0 +1,161 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.instancejsmethods.Child.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.instancejsmethods.Child$impl');
+
+
+let MyInterface = goog.require('gen.com.google.j2cl.transpiler.readable.instancejsmethods.MyInterface$impl');
+let Parent = goog.require('gen.com.google.j2cl.transpiler.readable.instancejsmethods.Parent$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+/**
+ * @implements {MyInterface}
+ */
+class Child extends Parent {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_instancejsmethods_Child() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Child}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    Child.$clinit();
+    let instance = new Child;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Child();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Child() {
+    this.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Parent();
+    this.$init__com_google_j2cl_transpiler_readable_instancejsmethods_Child();
+  }
+
+  /**
+   * @override
+   * @param {number} a
+   * @param {number} b
+   * @return {number}
+   * @public
+   */
+  sum(a, b) { return a + b + 1; }
+
+  /**
+   * @override
+   * @param {number} a
+   * @param {number} b
+   * @return {number}
+   * @public
+   */
+  bar(a, b) { return a * b + 1; }
+
+  /**
+   * @override
+   * @param {number} a
+   * @return {number}
+   * @public
+   */
+  myFoo(a) { return a; }
+
+  /**
+   * @return {number}
+   * @public
+   */
+  intfFoo() { return 1; }
+
+  /**
+   * Synthetic method.
+   * @override
+   * @return {number}
+   * @public
+   */
+  m_intfFoo() { return this.intfFoo(); }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof Child; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Child);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    Child.$clinit();
+    if (!Child.$classChild_) {
+      Child.$classChild_ = Class.$createForClass(
+          $Util.$generateId('Child'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.instancejsmethods.Child'),
+          Parent.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.instancejsmethods.Child'));
+    }
+    return Child.$classChild_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Parent.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Child.$classChild_ = null;
+
+
+MyInterface.$markImplementor(Child);
+
+
+
+/**
+ * Export class.
+ */
+exports = Child;

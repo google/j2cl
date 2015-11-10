@@ -73,6 +73,21 @@ public class MethodDescriptorBuilder {
     return this;
   }
 
+  public MethodDescriptorBuilder isRaw(boolean isRaw) {
+    this.isRaw = isRaw;
+    return this;
+  }
+
+  public MethodDescriptorBuilder jsMethodName(String jsMethodName) {
+    this.jsMethodName = jsMethodName;
+    return this;
+  }
+
+  public MethodDescriptorBuilder jsMethodNamespace(String jsMethodNamespace) {
+    this.jsMethodNamespace = jsMethodNamespace;
+    return this;
+  }
+
   public MethodDescriptor build() {
     return MethodDescriptor.create(
         isStatic,

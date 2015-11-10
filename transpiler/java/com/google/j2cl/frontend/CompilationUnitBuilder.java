@@ -262,6 +262,9 @@ public class CompilationUnitBuilder {
 
       // Add unimplemented methods.
       currentType.addMethods(UnimplementedMethodsCreator.create(typeBinding));
+
+      // Add bridge methods for JsMethods
+      currentType.addMethods(JsBridgeMethodsCreator.create(typeBinding));
       popType();
       return type;
     }
@@ -344,7 +347,7 @@ public class CompilationUnitBuilder {
               parameters,
               body,
               JdtUtils.isAbstract(methodDeclaration.getModifiers()),
-              JdtUtils.isOverride(methodDeclaration.resolveBinding()),
+              JdtUtils.isJsOverride(methodDeclaration.resolveBinding()),
               false);
       return method;
     }

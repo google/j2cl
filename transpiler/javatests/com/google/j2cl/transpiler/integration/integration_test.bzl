@@ -170,6 +170,7 @@ def integration_test(
           "-optimize 0",
           "-style PRETTY",
           "-setProperty user.agent=safari",
+          "-XjsInteropMode JS_RC",
           "-ea",
       ],
       module_target=":gwt_module",

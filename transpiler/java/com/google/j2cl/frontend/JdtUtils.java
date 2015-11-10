@@ -21,6 +21,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
@@ -66,6 +67,7 @@ import org.eclipse.jdt.internal.compiler.env.INameEnvironment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -149,11 +151,11 @@ public class JdtUtils {
             : methodBinding.getName();
     boolean isRaw = false;
 
-    // TODO: expand JsMethod checking up the method override chain.
     IAnnotationBinding jsMethodAnnotation = JsInteropUtils.getJsMethodAnnotation(methodBinding);
-    String jsMethodName = JsInteropUtils.getJsName(jsMethodAnnotation);
     String jsMethodNamespace = JsInteropUtils.getJsNamespace(jsMethodAnnotation);
-    isRaw = JsInteropUtils.isJsMethod(methodBinding);
+    // direct JsMethod and its overriding methods are emit with non-mangled name.
+    String jsMethodName = getJsMethodName(methodBinding);
+    isRaw = isOrOverridesJsMethod(methodBinding);
 
     // namespace on a JsMethod can only be used on a *static native* method.
     // TODO: replace it with JsInterop restrictions check, or maybe we want to relax this
@@ -453,6 +455,20 @@ public class JdtUtils {
     return typeBinding.isMember() && !isStatic(typeBinding.getModifiers());
   }
 
+  static boolean isJsOverride(IMethodBinding methodBinding) {
+    // If the JsMethod is the first in the override chain, it does not override any methods.
+    return isOverride(methodBinding) && !isFirstJsMethod(methodBinding);
+  }
+
+  /**
+   * Returns true if the method is the first JsMethod in the override chain (does not override any
+   * other JsMethods).
+   */
+  static boolean isFirstJsMethod(IMethodBinding methodBinding) {
+    return JsInteropUtils.isJsMethod(methodBinding)
+        && getOverriddenJsMethods(methodBinding).isEmpty();
+  }
+
   static boolean isOverride(IMethodBinding overridingMethod) {
     ITypeBinding type = overridingMethod.getDeclaringClass();
 
@@ -612,6 +628,57 @@ public class JdtUtils {
     return typeBinding.getErasure().isEqualTo(otherTypeBinding.getErasure());
   }
 
+  static boolean isOrOverridesJsMethod(IMethodBinding methodBinding) {
+    return JsInteropUtils.isJsMethod(methodBinding)
+        || !getOverriddenJsMethods(methodBinding).isEmpty();
+  }
+
+  static String getJsMethodName(IMethodBinding methodBinding) {
+    // Assume all the js methods in one overriding chain has the same js method name.
+    // TODO: add JsInterop Restriction check for the assumption.
+    if (JsInteropUtils.isJsMethod(methodBinding)) {
+      return JsInteropUtils.getJsName(JsInteropUtils.getJsMethodAnnotation(methodBinding));
+    }
+    Set<IMethodBinding> overriddenJsMethods = getOverriddenJsMethods(methodBinding);
+    return overriddenJsMethods.isEmpty()
+        ? null
+        : getJsMethodName(overriddenJsMethods.iterator().next());
+  }
+
+  static Set<IMethodBinding> getOverriddenJsMethods(IMethodBinding methodBinding) {
+    return Sets.filter(
+        getOverriddenMethods(methodBinding),
+        new Predicate<IMethodBinding>() {
+          @Override
+          public boolean apply(IMethodBinding overriddenMethod) {
+            return JsInteropUtils.isJsMethod(overriddenMethod);
+          }
+        });
+  }
+
+  static Set<IMethodBinding> getOverriddenMethods(IMethodBinding methodBinding) {
+    Set<IMethodBinding> overriddenMethods = new HashSet<>();
+    ITypeBinding enclosingClass = methodBinding.getDeclaringClass();
+    ITypeBinding superClass = enclosingClass.getSuperclass();
+    if (superClass != null) {
+      overriddenMethods.addAll(getOverriddenMethodsInType(methodBinding, superClass));
+    }
+    for (ITypeBinding superInterface : enclosingClass.getInterfaces()) {
+      overriddenMethods.addAll(getOverriddenMethodsInType(methodBinding, superInterface));
+    }
+    return overriddenMethods;
+  }
+
+  static Set<IMethodBinding> getOverriddenMethodsInType(
+      IMethodBinding methodBinding, ITypeBinding typeBinding) {
+    Set<IMethodBinding> overriddenMethods = new HashSet<>();
+    for (IMethodBinding declaredMethod : typeBinding.getDeclaredMethods()) {
+      if (methodBinding.overrides(declaredMethod)) {
+        overriddenMethods.add(declaredMethod);
+      }
+    }
+    return overriddenMethods;
+  }
   /**
    * Helper method to work around JDT habit of returning raw collections.
    */
