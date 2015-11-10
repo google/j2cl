@@ -81,9 +81,7 @@ class Object {
    * @nocollapse
    */
   static $isInstance(instance) {
-    // Accepts all Java and JS Objects, including native arrays.
-    // TODO: decide how to handle Strings.
-    return typeof(instance) == 'object';
+    return true;
   }
 
   /**
