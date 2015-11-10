@@ -12,6 +12,10 @@ j2cl_source_copy(
     name = "emul_test_copy",
     srcs = ["//third_party/java_src/gwt/svn/trunk/user:emul_test"],
     base_strip_path = "third_party/java_src/gwt/svn/trunk/user/test/",
+    excludes = [
+        "com/google/gwt/emultest/java8/util/OptionalTest.java",
+        "com/google/gwt/emultest/EmulJava8Suite.java",
+    ],
 )
 
 j2cl_source_copy(
