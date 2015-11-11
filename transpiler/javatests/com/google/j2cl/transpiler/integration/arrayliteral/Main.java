@@ -7,6 +7,7 @@ public class Main {
     testTwoD();
     testPartial2D();
     testUnbalanced2D();
+    testTerseLiteral();
   }
 
   private static void testEmptyArrayLiteral() {
@@ -117,5 +118,12 @@ public class Main {
     assert unbalanced2D[0].length == 2;
     // The second branch less so.
     assert unbalanced2D[1] == null;
+  }
+
+  @SuppressWarnings("cast")
+  private static void testTerseLiteral() {
+    int[] terseLiteral = {0, 1, 2};
+    assert terseLiteral.length == 3;
+    assert terseLiteral instanceof int[];
   }
 }

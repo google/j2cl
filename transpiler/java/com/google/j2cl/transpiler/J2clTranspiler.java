@@ -32,6 +32,7 @@ import com.google.j2cl.ast.visitors.InsertUnboxingConversionVisitor;
 import com.google.j2cl.ast.visitors.InsertUnderflowOverflowConversionVisitor;
 import com.google.j2cl.ast.visitors.InsertWideningPrimitiveConversionVisitor;
 import com.google.j2cl.ast.visitors.MakeExplicitEnumConstructionVisitor;
+import com.google.j2cl.ast.visitors.NormalizeArrayLiteralsPass;
 import com.google.j2cl.ast.visitors.NormalizeCastsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeEqualityVisitor;
 import com.google.j2cl.ast.visitors.NormalizeLongsVisitor;
@@ -119,6 +120,7 @@ public class J2clTranspiler {
 
       // Statement/Expression normalizations
       RewriteSystemGetPropertyVisitor.applyTo(j2clUnit);
+      NormalizeArrayLiteralsPass.applyTo(j2clUnit);
       NormalizeStaticMemberQualifiersPass.applyTo(j2clUnit);
       DevirtualizeMethodCallsVisitor.applyTo(j2clUnit);
       ControlStatementFormatter.applyTo(j2clUnit);

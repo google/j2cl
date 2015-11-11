@@ -8,6 +8,8 @@ let Varargs = goog.require('gen.com.google.j2cl.transpiler.readable.varargs.Vara
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class Child extends Varargs {
@@ -42,7 +44,7 @@ class Child extends Varargs {
    */
   $ctor__com_google_j2cl_transpiler_readable_varargs_Child() {
     this.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(
-        [1]);
+        /**@type {Array<number>} */ ($Arrays.$init([1], $int)));
     this.$init__com_google_j2cl_transpiler_readable_varargs_Child();
   }
 
@@ -91,6 +93,8 @@ class Child extends Varargs {
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Varargs.$clinit();
   }
 }
