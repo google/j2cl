@@ -12,6 +12,9 @@ public class StaticJsMethods {
   @JsMethod(namespace = "Math", name = "floor")
   public static native void f3(double a);
 
+  @JsMethod(namespace = "", name = "isFinite")
+  public static native boolean f4(double a);
+
   public void test() {
     StaticJsMethods.f1(1);
     f1(1);
@@ -19,5 +22,7 @@ public class StaticJsMethods {
     f2(1);
     StaticJsMethods.f3(1.1);
     f3(1.1);
+    StaticJsMethods.f4(1.1);
+    f4(1.1);
   }
 }

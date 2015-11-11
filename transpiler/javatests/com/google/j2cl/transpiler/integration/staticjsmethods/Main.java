@@ -31,6 +31,7 @@ public class Main {
   public static void testNativeJsMethod() {
     assert floor(1.5) == 1;
     assert f3(-1) == 1;
+    assert isFinite(1.0);
   }
 
   public static void main(String... args) {
@@ -49,4 +50,7 @@ public class Main {
 
   @JsMethod(namespace = "Math", name = "abs")
   public static native int f3(int d);
+
+  @JsMethod(namespace = "", name = "isFinite")
+  public static native boolean isFinite(double d);
 }
