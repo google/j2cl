@@ -368,7 +368,7 @@ public class JdtUtils {
   private static boolean isImplementedBy(IMethodBinding methodBinding, ITypeBinding typeBinding) {
     // implemented by typeBinding.
     for (IMethodBinding declaredMethodBinding : typeBinding.getDeclaredMethods()) {
-      if (declaredMethodBinding.overrides(methodBinding)) {
+      if (areParameterErasureEqual(declaredMethodBinding, methodBinding)) {
         return true;
       }
     }
@@ -523,15 +523,17 @@ public class JdtUtils {
    * Parameter erasure equal means that they are overriding signature equal, which means that they
    * are real overriding/overridden or accidental overriding/overridden.
    */
-  static boolean areParameterErasureEqual(IMethodBinding oneMethod, IMethodBinding otherMethod) {
-    if (!oneMethod.getName().equals(otherMethod.getName())
-        || oneMethod.getParameterTypes().length != otherMethod.getParameterTypes().length) {
+  static boolean areParameterErasureEqual(IMethodBinding leftMethod, IMethodBinding rightMethod) {
+    ITypeBinding[] leftParameterTypes = leftMethod.getParameterTypes();
+    ITypeBinding[] rightParameterTypes = rightMethod.getParameterTypes();
+    if (!leftMethod.getName().equals(rightMethod.getName())
+        || leftParameterTypes.length != rightParameterTypes.length) {
       return false;
     }
-    for (int i = 0; i < oneMethod.getParameterTypes().length; i++) {
-      if (!oneMethod.getParameterTypes()[i]
-          .getErasure()
-          .isEqualTo(otherMethod.getParameterTypes()[i].getErasure())) {
+    for (int i = 0; i < leftParameterTypes.length; i++) {
+      ITypeBinding leftParameterType = leftParameterTypes[i].getErasure();
+      ITypeBinding rightParameterType = rightParameterTypes[i].getErasure();
+      if (!leftParameterType.isEqualTo(rightParameterType)) {
         return false;
       }
     }

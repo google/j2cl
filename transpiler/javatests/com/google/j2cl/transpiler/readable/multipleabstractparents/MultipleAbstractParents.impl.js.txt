@@ -1,0 +1,157 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let MultipleAbstractParents$AbstractCollection = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractCollection$impl');
+let MultipleAbstractParents$ArrayList = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$ArrayList$impl');
+let MultipleAbstractParents$StringList = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$StringList$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let String = goog.forwardDeclare('gen.java.lang.String$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
+
+
+class MultipleAbstractParents extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!MultipleAbstractParents}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    MultipleAbstractParents.$clinit();
+    let instance = new MultipleAbstractParents;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents();
+  }
+
+  /**
+   * @param {Array<?string>} args
+   * @return {void}
+   * @public
+   * @nocollapse
+   */
+  static m_main__arrayOf_java_lang_String(args) {
+    MultipleAbstractParents.$clinit();
+    $Asserts.$enabled() &&
+        $Asserts.$assert(
+            String.m_equals__java_lang_String__java_lang_Object(
+                /**@type {MultipleAbstractParents$ArrayList<?string>} */ (
+                    MultipleAbstractParents$ArrayList.$create())
+                    .m_getFoo__java_lang_Object(null),
+                "AbstractCollection"));
+    $Asserts.$enabled() &&
+        $Asserts.$assert(
+            String.m_equals__java_lang_String__java_lang_Object(
+                MultipleAbstractParents$StringList.$create()
+                    .m_getFoo__java_lang_Object(null),
+                "AbstractCollection"));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof MultipleAbstractParents;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, MultipleAbstractParents);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    MultipleAbstractParents.$clinit();
+    if (!MultipleAbstractParents.$classMultipleAbstractParents_) {
+      MultipleAbstractParents
+          .$classMultipleAbstractParents_ = Class.$createForClass(
+          $Util.$generateId('MultipleAbstractParents'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents'));
+    }
+    return MultipleAbstractParents.$classMultipleAbstractParents_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    MultipleAbstractParents$AbstractCollection = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractCollection$impl');
+    MultipleAbstractParents$ArrayList = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$ArrayList$impl');
+    MultipleAbstractParents$StringList = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$StringList$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    String = goog.module.get('gen.java.lang.String$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+MultipleAbstractParents.$classMultipleAbstractParents_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = MultipleAbstractParents;
