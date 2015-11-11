@@ -52,7 +52,7 @@ class Casts {
 
   /**
    * Runs inline static field initializers.
-   * @protected
+   * @public
    * @nocollapse
    */
   static $clinit() {

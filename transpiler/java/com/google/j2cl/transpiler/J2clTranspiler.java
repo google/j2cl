@@ -14,6 +14,7 @@
 package com.google.j2cl.transpiler;
 
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.visitors.AddClassInitAtCallSite;
 import com.google.j2cl.ast.visitors.ControlStatementFormatter;
 import com.google.j2cl.ast.visitors.CreateDefaultConstructorsVisitor;
 import com.google.j2cl.ast.visitors.CreateDevirtualizedStaticMethodsVisitor;
@@ -138,6 +139,8 @@ public class J2clTranspiler {
       // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
       FixTypeVariableInMethodVisitors.applyTo(j2clUnit);
       RemoveUnusedMultiExpressionReturnValues.applyTo(j2clUnit);
+      // TODO: remove this pass when b/25512693 is resolved.
+      AddClassInitAtCallSite.applyTo(j2clUnit);
 
       verifyUnit(j2clUnit);
     }

@@ -72,6 +72,7 @@ class SimpleEnum2 extends Enum {
    */
   $ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__int__java_lang_String__int(
       foo, $name, $ordinal) {
+    SimpleEnum.$clinit();
     this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);
     this.$init__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2();
     this.f_foo__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
@@ -106,6 +107,7 @@ class SimpleEnum2 extends Enum {
    */
   $ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum__java_lang_String__int(
       foo, $name, $ordinal) {
+    SimpleEnum.$clinit();
     this.$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__int__java_lang_String__int(
         foo.m_ordinal(), $name, $ordinal);
   }
@@ -162,89 +164,8 @@ class SimpleEnum2 extends Enum {
   }
 
   /**
-   * A static field getter.
-   * @return {SimpleEnum2}
-   * @public
-   */
-  static get
-  f_VALUE1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2() {
-    SimpleEnum2.$clinit();
-    return SimpleEnum2
-        .$f_VALUE1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2;
-  }
-
-  /**
-   * A static field setter.
-   * @param {SimpleEnum2} value
-   * @return {void}
-   * @public
-   */
-  static set
-      f_VALUE1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2(
-          value) {
-    SimpleEnum2.$clinit();
-    SimpleEnum2
-        .$f_VALUE1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
-        value;
-  }
-
-  /**
-   * A static field getter.
-   * @return {SimpleEnum2}
-   * @public
-   */
-  static get
-  f_VALUE2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2() {
-    SimpleEnum2.$clinit();
-    return SimpleEnum2
-        .$f_VALUE2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2;
-  }
-
-  /**
-   * A static field setter.
-   * @param {SimpleEnum2} value
-   * @return {void}
-   * @public
-   */
-  static set
-      f_VALUE2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2(
-          value) {
-    SimpleEnum2.$clinit();
-    SimpleEnum2
-        .$f_VALUE2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
-        value;
-  }
-
-  /**
-   * A static field getter.
-   * @return {SimpleEnum2}
-   * @public
-   */
-  static get
-  f_VALUE3__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2() {
-    SimpleEnum2.$clinit();
-    return SimpleEnum2
-        .$f_VALUE3__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2;
-  }
-
-  /**
-   * A static field setter.
-   * @param {SimpleEnum2} value
-   * @return {void}
-   * @public
-   */
-  static set
-      f_VALUE3__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2(
-          value) {
-    SimpleEnum2.$clinit();
-    SimpleEnum2
-        .$f_VALUE3__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
-        value;
-  }
-
-  /**
    * Runs inline static field initializers.
-   * @protected
+   * @public
    * @nocollapse
    */
   static $clinit() {
@@ -258,18 +179,19 @@ class SimpleEnum2 extends Enum {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Enum.$clinit();
+    SimpleEnum.$clinit();
     SimpleEnum2
-        .$f_VALUE1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
+        .f_VALUE1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
         SimpleEnum2.$create__int__java_lang_String__int(2, "VALUE1", 0);
     SimpleEnum2
-        .$f_VALUE2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
+        .f_VALUE2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
         SimpleEnum2
             .$create__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum__java_lang_String__int(
                 SimpleEnum
                     .f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum,
                 "VALUE2", 1);
     SimpleEnum2
-        .$f_VALUE3__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
+        .f_VALUE3__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
         SimpleEnum2$1.$create__int__java_lang_String__int(5, "VALUE3", 2);
   }
 }
@@ -277,26 +199,26 @@ class SimpleEnum2 extends Enum {
 
 
 /**
- * @private {SimpleEnum2}
+ * @public {SimpleEnum2}
  */
 SimpleEnum2
-    .$f_VALUE1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
+    .f_VALUE1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
     null;
 
 
 /**
- * @private {SimpleEnum2}
+ * @public {SimpleEnum2}
  */
 SimpleEnum2
-    .$f_VALUE2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
+    .f_VALUE2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
     null;
 
 
 /**
- * @private {SimpleEnum2}
+ * @public {SimpleEnum2}
  */
 SimpleEnum2
-    .$f_VALUE3__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
+    .f_VALUE3__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
     null;
 
 

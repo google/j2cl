@@ -1,0 +1,127 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.callsiteclinit.Main$Yo.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.callsiteclinit.Main$Yo$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.callsiteclinit.Main$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let String = goog.forwardDeclare('gen.java.lang.String$impl');
+
+
+class Main$Yo extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_callsiteclinit_Main$Yo() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Main$Yo}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    Main$Yo.$clinit();
+    let instance = new Main$Yo;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_callsiteclinit_Main$Yo();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_callsiteclinit_Main$Yo() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_callsiteclinit_Main$Yo();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof Main$Yo; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Main$Yo);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    Main$Yo.$clinit();
+    if (!Main$Yo.$classMain$Yo_) {
+      Main$Yo.$classMain$Yo_ = Class.$createForClass(
+          $Util.$generateId('Yo'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.callsiteclinit.Main$Yo'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.callsiteclinit.Main.Yo'));
+    }
+    return Main$Yo.$classMain$Yo_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   * @nocollapse
+   */
+  static $clinit() {
+    Main$Yo.$clinit = function() {};
+    Main = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.callsiteclinit.Main$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    String = goog.module.get('gen.java.lang.String$impl');
+    Object.$clinit();
+    Main$Yo.f_a__com_google_j2cl_transpiler_readable_callsiteclinit_Main$Yo =
+        "asdf";
+  }
+}
+;
+
+
+/**
+ * @public {?string}
+ */
+Main$Yo.f_a__com_google_j2cl_transpiler_readable_callsiteclinit_Main$Yo = null;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Main$Yo.$classMain$Yo_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = Main$Yo;

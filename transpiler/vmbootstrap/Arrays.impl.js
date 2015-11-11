@@ -440,7 +440,7 @@ class Arrays {
 
   /**
    * Runs inline static field initializers.
-   * @protected
+   * @public
    */
   static $clinit() {
     ArrayIndexOutOfBoundsException =

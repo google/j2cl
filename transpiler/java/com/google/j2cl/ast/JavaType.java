@@ -24,6 +24,8 @@ import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.annotation.Nullable;
 
@@ -56,10 +58,19 @@ public class JavaType extends Node {
   @Visitable List<Block> instanceInitializerBlocks = new ArrayList<>();
   @Visitable List<Block> staticInitializerBlocks = new ArrayList<>();
 
+  // Used to store Types that need to call clinit within this types clinit as a temporary hack.
+  // We use a sorted set so that the order is deterministic.
+  private SortedSet<TypeDescriptor> staticFieldClinits = new TreeSet<>();
+
   public JavaType(Kind kind, Visibility visibility, TypeDescriptor typeDescriptor) {
     this.kind = kind;
     this.visibility = visibility;
     this.typeDescriptor = typeDescriptor;
+  }
+
+
+  public final SortedSet<TypeDescriptor> getStaticFieldClinits() {
+    return staticFieldClinits;
   }
 
   public Kind getKind() {

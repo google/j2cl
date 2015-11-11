@@ -107,7 +107,7 @@ class Objects {
 
   /**
    * Runs inline static field initializers.
-   * @protected
+   * @public
    */
   static $clinit() {
     Boolean = goog.module.get('gen.java.lang.Boolean$impl');

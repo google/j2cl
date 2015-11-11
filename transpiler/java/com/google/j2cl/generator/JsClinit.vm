@@ -1,6 +1,6 @@
   /**
    * Runs inline static field initializers.
-   * @protected
+   * @public
    * @nocollapse
    */
   static $clinit() {
@@ -14,12 +14,14 @@
 #if ($superTypeName)
     $superTypeName.$clinit();
 #end
+#foreach ($typeName in $classType.StaticFieldClinits)
+    ${statementSourceGenerator.toSource($typeName)}.$clinit();
+#end
 #foreach ($staticField in $classType.getStaticFields())
 #if ($staticField.hasInitializer())
 #if (!$staticField.isCompileTimeConstant())
 #set ($staticFieldName = ${ManglingNameUtils.getMangledName($staticField.Descriptor)})
-#set ($directStaticFieldAccess = "$" + ${staticFieldName})
-    $className.$directStaticFieldAccess = ${statementSourceGenerator.toSource(${staticField.Initializer}, $classType.Descriptor)};
+    ${className}.${staticFieldName} = ${statementSourceGenerator.toSource(${staticField.Initializer}, $classType.Descriptor)};
 #end
 #end
 #end

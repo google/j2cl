@@ -55,6 +55,7 @@ class SwitchStatement extends Object {
    * @public
    */
   m_main() {
+    Numbers.$clinit();
     switch ("one") {
       case "one":
       case "two":
@@ -129,7 +130,7 @@ class SwitchStatement extends Object {
 
   /**
    * Runs inline static field initializers.
-   * @protected
+   * @public
    * @nocollapse
    */
   static $clinit() {

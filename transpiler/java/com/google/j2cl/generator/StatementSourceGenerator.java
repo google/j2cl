@@ -236,8 +236,7 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformFieldDescriptor(FieldDescriptor fieldDescriptor) {
-        return ManglingNameUtils.getMangledName(
-            fieldDescriptor, isInClinit(fieldDescriptor.getEnclosingClassTypeDescriptor()));
+        return ManglingNameUtils.getMangledName(fieldDescriptor);
       }
 
       @Override

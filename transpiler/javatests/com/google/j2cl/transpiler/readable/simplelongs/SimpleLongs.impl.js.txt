@@ -88,6 +88,7 @@ class SimpleLongs extends Object {
    * @public
    */
   m_main() {
+    $Numbers.$clinit();
     let a = $LongUtils.$fromInt(0);
     a = $LongUtils.$negate($LongUtils.$fromInt(100000));
     a = $LongUtils.$fromInt(100000);
@@ -178,7 +179,7 @@ class SimpleLongs extends Object {
 
   /**
    * Runs inline static field initializers.
-   * @protected
+   * @public
    * @nocollapse
    */
   static $clinit() {
