@@ -4,6 +4,7 @@
 goog.module('vmbootstrap.primitives.$long$impl');
 
 
+let Long = goog.require('nativebootstrap.Long$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 
 
@@ -27,7 +28,7 @@ class $long {
    * @public
    * @nocollapse
    */
-  static $isInstance(instance) { return typeof instance === 'number'; }
+  static $isInstance(instance) { return instance instanceof Long; }
 
   /**
    * Returns whether the provided class is or extends this class.
@@ -73,10 +74,10 @@ $long.$classLong_ = null;
 
 
 /**
- * @public {number}
+ * @public {Long}
  * @nocollapse
  */
-$long.$initialArrayValue = 0;
+$long.$initialArrayValue = Long.fromInt(0);
 
 
 /**

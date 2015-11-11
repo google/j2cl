@@ -4,7 +4,23 @@ public class Main {
   public static void main(String... args) {
     testObjects();
     testInts();
+    testLongs();
     testMains();
+  }
+
+  private static void testLongs() {
+    long[] longs = new long[100];
+
+    // Initial value.
+    assert longs[0] == 0;
+
+    // Assignment.
+    longs[0] = 10;
+    assert longs[0] == 10;
+
+    // Compound assignment.
+    longs[0] += 100;
+    assert longs[0] == 110;
   }
 
   private static void testInts() {
