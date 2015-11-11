@@ -146,15 +146,17 @@ class Arrays {
    */
   static $set(array, index, value) {
     Arrays.$clinit();
-    if (ARRAY_CHECKS_ENABLED_) {
-      if (array == null) {
-        // Array can not be null.
-        Arrays.$throwNullPointerException();
-      }
+    if (array == null) {
+      // Array can not be null.
+      Arrays.$throwNullPointerException();
+    }
+    if (ARRAY_CHECK_BOUNDS_) {
       if (index >= array.length || index < 0) {
         // Index must be within bounds.
         Arrays.$throwArrayIndexOutOfBoundsException();
       }
+    }
+    if (ARRAY_CHECK_TYPES_) {
       // Only check when the array has a known leaf type. JS native arrays won't
       // have it.
       if (array.leafType != null) {
@@ -458,10 +460,20 @@ class Arrays {
 
 
 /**
- * @define {boolean} Whether or not to check type and bounds on insertion.
+ * Is off by default to match default GWT behavior. Can be turned back on once
+ * the standard library is fixed to no longer violate this constraint.
+ *
+ * @define {boolean} Whether or not to check bounds on insertion.
  * @private
  */
-goog.define('ARRAY_CHECKS_ENABLED_', true);
+goog.define('ARRAY_CHECK_BOUNDS_', false);
+
+
+/**
+ * @define {boolean} Whether or not to check type on insertion.
+ * @private
+ */
+goog.define('ARRAY_CHECK_TYPES_', true);
 
 
 /**

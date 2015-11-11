@@ -34,7 +34,7 @@ _CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
 
 def integration_test(
     name, srcs, deps=[], defs=[], native_srcs=[], native_srcs_pkg=None,
-    js_deps=[]):
+    js_deps=[], closure_defines=dict()):
   """Macro that turns Java files into integration test targets.
 
   deps are Labels of j2cl_library() rules. NOT labels of
@@ -42,6 +42,15 @@ def integration_test(
   """
   # figure out the current location
   java_package = get_java_package(PACKAGE_NAME)
+
+  define_flags = []
+  if not "ASSERTIONS_ENABLED_" in closure_defines:
+    closure_defines["ASSERTIONS_ENABLED_"] = "true"
+  if not "ARRAY_CHECK_BOUNDS_" in closure_defines:
+    closure_defines["ARRAY_CHECK_BOUNDS_"] = "true"
+  for def_name, value in closure_defines.items():
+    define_flags.append("--define={0}={1}".format(def_name, value))
+  defs = defs + define_flags
 
   # translate Java to JS
   j2cl_library(
@@ -74,7 +83,6 @@ def integration_test(
       defs=_CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
           "--language_in=ECMASCRIPT6_STRICT",
           "--language_out=ECMASCRIPT5",
-          "--define=ASSERTIONS_ENABLED_=true",
           "--remove_dead_assignments",
           "--remove_dead_code",
           "--remove_unused_local_vars=ON",
@@ -98,7 +106,6 @@ def integration_test(
       defs=_CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
           "--language_in=ECMASCRIPT6_STRICT",
           "--language_out=ECMASCRIPT5",
-          "--define=ASSERTIONS_ENABLED_=true",
           "--remove_dead_assignments",
           "--remove_dead_code",
           "--remove_unused_local_vars=ON",
@@ -124,7 +131,6 @@ def integration_test(
       defs=[
           "--language_in=ECMASCRIPT6_STRICT",
           "--language_out=ECMASCRIPT5",
-          "--define=ASSERTIONS_ENABLED_=true",
           "--pretty_print",
           "--jscomp_off=lateProvide",
           "--jscomp_off=extraRequire",
@@ -177,13 +183,19 @@ def integration_test(
       tags=["manual"],
   )
 
+  test_harness_defines = ""
+  for def_name, value in closure_defines.items():
+    test_harness_defines += "window.{0} = {1};\n".format(def_name, value)
+
   # blaze test :uncompiled_test
   # blaze test :compiled_test
   test_harness = """
       goog.module('gen.test.Harness');
       goog.setTestOnly();
-      // Enable assertions in uncompiled test mode.
-      window.ASSERTIONS_ENABLED_ = true;
+
+      // Closure defines.
+      %s
+
       var testSuite = goog.require('goog.testing.testSuite');
       var Main = goog.require('gen.%s.Main');
       testSuite({
@@ -191,7 +203,7 @@ def integration_test(
           Main.m_main__arrayOf_java_lang_String([]);
         }
       });
-  """ % java_package
+  """ % (test_harness_defines, java_package)
   native.genrule(
       name="test_harness_generator",
       outs=["TestHarness.js"],
@@ -222,7 +234,6 @@ def integration_test(
           "--jscomp_off=undefinedVars",
           "--language_in=ECMASCRIPT6_STRICT",
           "--language_out=ECMASCRIPT5",
-          "--define=ASSERTIONS_ENABLED_=true",
           "--property_renaming=OFF",
           "--pretty_print",
           "--strict",
