@@ -55,8 +55,6 @@ are copyright and licensed as follows:
 - Import global native js types when JSCompiler supports goog.require() externs.
 - Maybe further specialize Object equality() to avoid the Equality.$same() call
     if neither side could ever cast to String/Double/Boolean.
-- Stop outputting a native method signature example for JsInterop native
-  methods.
 
 ## Tracking Closure warning issues
 - https://b.corp.google.com/hotlists/269212

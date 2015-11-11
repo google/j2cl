@@ -191,6 +191,10 @@ public abstract class MethodDescriptor extends Node implements Member {
     return getMethodName().equals(INIT_METHOD_NAME);
   }
 
+  public boolean hasJsMethodNamespace() {
+    return getJsMethodNamespace() != null;
+  }
+
   @Override
   public Node accept(Processor processor) {
     return Visitor_MethodDescriptor.visit(processor, this);
