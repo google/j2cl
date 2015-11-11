@@ -40,7 +40,7 @@ public class JsBridgeMethodsCreator {
   public static List<Method> create(ITypeBinding typeBinding) {
     List<Method> generatedBridgeMethods = new ArrayList<>();
     for (IMethodBinding methodBinding : typeBinding.getDeclaredMethods()) {
-      if (JdtUtils.isStatic(methodBinding.getModifiers()) || !exposesNonJsMethod(methodBinding)) {
+      if (!exposesNonJsMethod(methodBinding)) {
         continue;
       }
       generatedBridgeMethods.add(createBridgeMethod(methodBinding));
@@ -53,7 +53,9 @@ public class JsBridgeMethodsCreator {
    * an existing non-JsMethod inside a class.
    */
   private static boolean exposesNonJsMethod(IMethodBinding methodBinding) {
-    if (!JsInteropUtils.isJsMethod(methodBinding)) {
+    if (!JsInteropUtils.isJsMethod(methodBinding)
+        || JdtUtils.isStatic(methodBinding.getModifiers())
+        || methodBinding.isConstructor()) {
       return false;
     }
     // native js type is not generated, thus it does not expose any non-js methods.

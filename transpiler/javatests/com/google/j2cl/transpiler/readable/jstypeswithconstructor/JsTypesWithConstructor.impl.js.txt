@@ -1,0 +1,116 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jstypeswithconstructor.JsTypesWithConstructor.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.jstypeswithconstructor.JsTypesWithConstructor$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+class JsTypesWithConstructor extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jstypeswithconstructor_JsTypesWithConstructor() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!JsTypesWithConstructor}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    JsTypesWithConstructor.$clinit();
+    let instance = new JsTypesWithConstructor;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_jstypeswithconstructor_JsTypesWithConstructor();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jstypeswithconstructor_JsTypesWithConstructor() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_jstypeswithconstructor_JsTypesWithConstructor();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance instanceof JsTypesWithConstructor;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, JsTypesWithConstructor);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    JsTypesWithConstructor.$clinit();
+    if (!JsTypesWithConstructor.$classJsTypesWithConstructor_) {
+      JsTypesWithConstructor
+          .$classJsTypesWithConstructor_ = Class.$createForClass(
+          $Util.$generateId('JsTypesWithConstructor'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jstypeswithconstructor.JsTypesWithConstructor'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jstypeswithconstructor.JsTypesWithConstructor'));
+    }
+    return JsTypesWithConstructor.$classJsTypesWithConstructor_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+JsTypesWithConstructor.$classJsTypesWithConstructor_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = JsTypesWithConstructor;
