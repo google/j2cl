@@ -25,20 +25,25 @@ import javax.annotation.Nullable;
 
 /**
  * Class for try statement.
- * TODO: add resources field.
  */
 @Visitable
 public class TryStatement extends Statement {
   @Visitable Block body;
   @Visitable List<CatchClause> catchClauses = new ArrayList<>();
   @Visitable @Nullable Block finallyBlock;
+  private List<VariableDeclarationExpression> resourceDeclarations = new ArrayList<>();
 
-  public TryStatement(Block body, List<CatchClause> catchClauses, Block finallyBlock) {
+  public TryStatement(
+      List<VariableDeclarationExpression> resourceDeclarations,
+      Block body,
+      List<CatchClause> catchClauses,
+      Block finallyBlock) {
     Preconditions.checkNotNull(body);
     Preconditions.checkNotNull(catchClauses);
     this.body = body;
     this.catchClauses.addAll(catchClauses);
     this.finallyBlock = finallyBlock;
+    this.resourceDeclarations.addAll(resourceDeclarations);
   }
 
   public Block getBody() {
@@ -53,12 +58,8 @@ public class TryStatement extends Statement {
     return finallyBlock;
   }
 
-  public void setBody(Block body) {
-    this.body = body;
-  }
-
-  public void setFinallyBlock(Block finallyBlock) {
-    this.finallyBlock = finallyBlock;
+  public List<VariableDeclarationExpression> getResourceDeclarations() {
+    return resourceDeclarations;
   }
 
   @Override

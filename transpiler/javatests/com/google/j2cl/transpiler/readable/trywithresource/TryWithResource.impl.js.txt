@@ -1,0 +1,198 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.trywithresource.TryWithResource$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let TryWithResource$ClosableThing = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.trywithresource.TryWithResource$ClosableThing$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Exception = goog.forwardDeclare('gen.java.lang.Exception$impl');
+let String = goog.forwardDeclare('gen.java.lang.String$impl');
+let Throwable = goog.forwardDeclare('gen.java.lang.Throwable$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class TryWithResource extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_trywithresource_TryWithResource() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!TryWithResource}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    TryWithResource.$clinit();
+    let instance = new TryWithResource;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_trywithresource_TryWithResource();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_trywithresource_TryWithResource() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_trywithresource_TryWithResource();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   * @nocollapse
+   */
+  static m_tryWithResource() {
+    TryWithResource.$clinit();
+    {
+      let $primaryExc = null;
+      let thing = null;
+      try {
+        thing = TryWithResource$ClosableThing.$create();
+        let i = 0;
+      } catch ($exceptionFromTry) {
+        if (Throwable.$isInstance($exceptionFromTry)) {
+          $primaryExc = $exceptionFromTry;
+          throw $exceptionFromTry;
+        } else {
+          throw $exceptionFromTry;
+        }
+      } finally {
+        $primaryExc = $Exceptions.safeClose(thing, $primaryExc);
+        if ($primaryExc != null) {
+          throw $primaryExc;
+        }
+      }
+    }
+  }
+
+  /**
+   * @param {Array<?string>} args
+   * @return {void}
+   * @public
+   * @nocollapse
+   */
+  static m_tryWithResourceMultipleResources__arrayOf_java_lang_String(args) {
+    TryWithResource.$clinit();
+    try {
+      let $primaryExc = null;
+      let thing = null;
+      let thing2 = null;
+      try {
+        thing = TryWithResource$ClosableThing.$create();
+        thing2 = TryWithResource$ClosableThing.$create();
+        let i = 0;
+        throw Exception.$create();
+      } catch ($exceptionFromTry) {
+        if (Throwable.$isInstance($exceptionFromTry)) {
+          $primaryExc = $exceptionFromTry;
+          throw $exceptionFromTry;
+        } else {
+          throw $exceptionFromTry;
+        }
+      } finally {
+        $primaryExc = $Exceptions.safeClose(thing2, $primaryExc);
+        $primaryExc = $Exceptions.safeClose(thing, $primaryExc);
+        if ($primaryExc != null) {
+          throw $primaryExc;
+        }
+      }
+    } catch (e) {
+      if (Exception.$isInstance(e)) {
+        let b = 10;
+      } else {
+        throw e;
+      }
+    }
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof TryWithResource; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, TryWithResource);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    TryWithResource.$clinit();
+    if (!TryWithResource.$classTryWithResource_) {
+      TryWithResource.$classTryWithResource_ = Class.$createForClass(
+          $Util.$generateId('TryWithResource'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.trywithresource.TryWithResource'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.trywithresource.TryWithResource'));
+    }
+    return TryWithResource.$classTryWithResource_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @protected
+   * @nocollapse
+   */
+  static $clinit() {
+    TryWithResource$ClosableThing = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.trywithresource.TryWithResource$ClosableThing$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Exception = goog.module.get('gen.java.lang.Exception$impl');
+    String = goog.module.get('gen.java.lang.String$impl');
+    Throwable = goog.module.get('gen.java.lang.Throwable$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+TryWithResource.$classTryWithResource_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = TryWithResource;

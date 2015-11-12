@@ -381,7 +381,7 @@ public class CompilationUnitBuilder {
     private ArrayLiteral convert(org.eclipse.jdt.core.dom.ArrayInitializer expression) {
       return new ArrayLiteral(
           (ArrayTypeDescriptor) JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
-          convertExpressions((List<org.eclipse.jdt.core.dom.Expression>) expression.expressions()));
+          convertExpressions(expression.expressions()));
     }
 
     private BooleanLiteral convert(org.eclipse.jdt.core.dom.BooleanLiteral literal) {
@@ -1140,7 +1140,7 @@ public class CompilationUnitBuilder {
       }
       return binaryExpression;
     }
-    
+
     /**
      * Returns a qualifier for a method invocation that doesn't have one, specifically,
      * instanceMethod() will return a resolved qualifier that may refer to "this" or to
@@ -1584,13 +1584,17 @@ public class CompilationUnitBuilder {
     }
 
     private TryStatement convert(org.eclipse.jdt.core.dom.TryStatement statement) {
+      List<VariableDeclarationExpression> resources = new ArrayList<>();
+      for (Object expression : statement.resources()) {
+        resources.add(convert((org.eclipse.jdt.core.dom.VariableDeclarationExpression) expression));
+      }
       Block body = convert(statement.getBody());
       List<CatchClause> catchClauses = new ArrayList<>();
       for (Object catchClause : statement.catchClauses()) {
         catchClauses.add(convert((org.eclipse.jdt.core.dom.CatchClause) catchClause));
       }
       Block finallyBlock = statement.getFinally() == null ? null : convert(statement.getFinally());
-      return new TryStatement(body, catchClauses, finallyBlock);
+      return new TryStatement(resources, body, catchClauses, finallyBlock);
     }
 
     private UnionTypeDescriptor convert(org.eclipse.jdt.core.dom.UnionType unionType) {

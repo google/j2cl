@@ -54,6 +54,7 @@ public class TypeDescriptors {
 
   public TypeDescriptor javaLangClass;
   public TypeDescriptor javaLangObject;
+  public TypeDescriptor javaLangThrowable;
 
   public TypeDescriptor javaLangNumber;
   public TypeDescriptor javaLangComparable;
@@ -97,6 +98,7 @@ public class TypeDescriptors {
 
     typeDescriptors.javaLangClass = create(ast, "java.lang.Class");
     typeDescriptors.javaLangObject = create(ast, "java.lang.Object");
+    typeDescriptors.javaLangThrowable = create(ast, "java.lang.Throwable");
 
     typeDescriptors.javaLangNumber = createJavaLangNumber(ast);
     typeDescriptors.javaLangComparable = createJavaLangComparable(ast);
@@ -259,7 +261,8 @@ public class TypeDescriptors {
     LONGS(Arrays.asList("vmbootstrap"), "LongUtils"),
     NATIVE_EQUALITY(Arrays.asList("nativebootstrap"), "Equality"),
     NATIVE_UTIL(Arrays.asList("nativebootstrap"), "Util"),
-    NATIVE_LONG(Arrays.asList("nativebootstrap"), "Long");
+    NATIVE_LONG(Arrays.asList("nativebootstrap"), "Long"),
+    EXCEPTIONS(Arrays.asList("vmbootstrap"), "Exceptions");
 
     private TypeDescriptor typeDescriptor;
 

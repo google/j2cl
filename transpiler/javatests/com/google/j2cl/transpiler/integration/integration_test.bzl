@@ -24,7 +24,6 @@ load("/javascript/closure/builddefs", "CLOSURE_COMPILER_FLAGS_FULL_TYPED")
 load("/third_party/java/j2cl/j2cl_library", "j2cl_library")
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_package")
 
-
 # Copy the Closure flags but remove --variable_renaming=ALL since it interferes
 # with tests and can't be turned off.
 _CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
@@ -43,11 +42,12 @@ def integration_test(
   # figure out the current location
   java_package = get_java_package(PACKAGE_NAME)
 
-  define_flags = []
   if not "ASSERTIONS_ENABLED_" in closure_defines:
     closure_defines["ASSERTIONS_ENABLED_"] = "true"
   if not "ARRAY_CHECK_BOUNDS_" in closure_defines:
     closure_defines["ARRAY_CHECK_BOUNDS_"] = "true"
+
+  define_flags = []
   for def_name, value in closure_defines.items():
     define_flags.append("--define={0}={1}".format(def_name, value))
   defs = defs + define_flags

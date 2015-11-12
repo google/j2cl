@@ -38,6 +38,7 @@ import com.google.j2cl.ast.visitors.NormalizeEqualityVisitor;
 import com.google.j2cl.ast.visitors.NormalizeLongsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeNestedClassConstructorsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeStaticMemberQualifiersPass;
+import com.google.j2cl.ast.visitors.NormalizeTryWithResourceVisitor;
 import com.google.j2cl.ast.visitors.RemoveUnusedMultiExpressionReturnValues;
 import com.google.j2cl.ast.visitors.RewriteSystemGetPropertyVisitor;
 import com.google.j2cl.ast.visitors.SplitCompoundLongAssignmentsVisitor;
@@ -112,6 +113,7 @@ public class J2clTranspiler {
       InsertExplicitSuperCallsVisitor.applyTo(j2clUnit);
       CreateDevirtualizedStaticMethodsVisitor.applyTo(j2clUnit);
 
+      NormalizeTryWithResourceVisitor.applyTo(j2clUnit);
       FixAnonymousClassConstructorsVisitor.applyTo(j2clUnit);
       MakeExplicitEnumConstructionVisitor.applyTo(j2clUnit);
       FixSuperCallQualifiersVisitor.applyTo(j2clUnit);
