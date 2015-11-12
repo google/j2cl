@@ -1,0 +1,137 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.interfacewithfields.Main$1.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.interfacewithfields.Main$1$impl');
+
+
+let MyInterface = goog.require('gen.com.google.j2cl.transpiler.readable.interfacewithfields.MyInterface$impl');
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.interfacewithfields.Main$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+/**
+ * @implements {MyInterface}
+ */
+class Main$1 extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {Main}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_interfacewithfields_Main$1 =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_interfacewithfields_Main$1() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {Main} $outer_this
+   * @return {!Main$1}
+   * @public
+   * @nocollapse
+   */
+  static $create__com_google_j2cl_transpiler_readable_interfacewithfields_Main(
+      $outer_this) {
+    Main$1.$clinit();
+    let instance = new Main$1;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_interfacewithfields_Main$1__com_google_j2cl_transpiler_readable_interfacewithfields_Main(
+            $outer_this);
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {Main} $outer_this
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_interfacewithfields_Main$1__com_google_j2cl_transpiler_readable_interfacewithfields_Main(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_interfacewithfields_Main$1 =
+        $outer_this;
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_interfacewithfields_Main$1();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof Main$1; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Main$1);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    Main$1.$clinit();
+    if (!Main$1.$classMain$1_) {
+      Main$1.$classMain$1_ = Class.$createForClass(
+          $Util.$generateId('1'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.interfacewithfields.Main$1'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.interfacewithfields.Main.1'));
+    }
+    return Main$1.$classMain$1_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   * @nocollapse
+   */
+  static $clinit() {
+    Main = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.interfacewithfields.Main$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Main$1.$classMain$1_ = null;
+
+
+MyInterface.$markImplementor(Main$1);
+
+
+
+/**
+ * Export class.
+ */
+exports = Main$1;

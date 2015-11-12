@@ -1,7 +1,7 @@
 #set ($utilAlias = ${statementSourceGenerator.toSource($nativeUtilTypeDecriptor)} )
 #set ($classAlias = ${statementSourceGenerator.toSource($javaLangClassTypeDecriptor)} )
-#set ($interfaceName = ${statementSourceGenerator.toSource($classType.Descriptor)})
-#set ($mangledName = ${ManglingNameUtils.getMangledName($classType.Descriptor)})
+#set ($className = ${statementSourceGenerator.toSource($classType.Descriptor)})
+#set ($mangledTypeName = ${ManglingNameUtils.getMangledName($classType.Descriptor)})
 #set ($simpleName = $classType.Descriptor.SimpleName)
 #set ($binaryName = ${GeneratorUtils.getBinaryName($classType.Descriptor)})
 #set ($sourceName = ${GeneratorUtils.getSourceName($classType.Descriptor)})
@@ -14,7 +14,7 @@
  * @extends {${statementSourceGenerator.getJsDocName($superInterfaceTypeDescriptor, true)}}
 #end
  */
-class $interfaceName {
+class $className {
 #foreach($method in $classType.Methods)
 #parse( "com/google/j2cl/generator/JsMethod.vm" )
 
@@ -32,7 +32,7 @@ class $interfaceName {
      * @public {boolean}
      */
     classConstructor.prototype
-        .$implements__$mangledName = true;
+        .$implements__$mangledTypeName = true;
   }
 
   /**
@@ -44,7 +44,7 @@ class $interfaceName {
    */
   static $isInstance(instance) {
     return instance != null &&
-           instance.$implements__$mangledName;
+           instance.$implements__$mangledTypeName;
   }
 
   /**
@@ -57,7 +57,7 @@ class $interfaceName {
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
            classConstructor.prototype
-               .$implements__$mangledName;
+               .$implements__$mangledTypeName;
   }
 
   /**
@@ -66,26 +66,29 @@ class $interfaceName {
    * @nocollapse
    */
   static $getClass() {
-    $interfaceName.$clinit();
-    if (!${interfaceName}.$class${interfaceName}_) {
-      ${interfaceName}.$class${interfaceName}_ = $classAlias.$createForInterface(
+    $className.$clinit();
+    if (!${className}.$class${className}_) {
+      ${className}.$class${className}_ = $classAlias.$createForInterface(
           $utilAlias.$generateId('$simpleName'),
           $utilAlias.$generateId('$binaryName'), null,
           $utilAlias.$generateId('$sourceName'));
     }
-    return ${interfaceName}.$class${interfaceName}_;
+    return ${className}.$class${className}_;
   }
 
 #parse( "com/google/j2cl/generator/JsClinit.vm")
 };
+#foreach ($staticField in $classType.getStaticFields())
+#parse( "com/google/j2cl/generator/JsStaticField.vm" )
+#end
 
 
 /**
  * The class literal field.
  * @private {$classAlias}
  */
-${interfaceName}.$class${interfaceName}_ = null;
+${className}.$class${className}_ = null;
 
 
 ## TODO: remove cast after b/20102666 is handled in Closure.
-$interfaceName.$markImplementor(/** @type {Function} */($interfaceName));
+$className.$markImplementor(/** @type {Function} */($className));

@@ -101,11 +101,15 @@ class Numbers extends Enum {
    */
   static m_values() {
     Numbers.$clinit();
-    return [
-      Numbers
-          .f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers,
-      Numbers.f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers
-    ];
+    return /**@type {Array<Numbers>} */ (
+        $Arrays.$init(
+            [
+              Numbers
+                  .f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers,
+              Numbers
+                  .f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers
+            ],
+            Numbers));
   }
 
   /**

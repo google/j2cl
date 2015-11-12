@@ -101,11 +101,15 @@ class SimpleEnum extends Enum {
    */
   static m_values() {
     SimpleEnum.$clinit();
-    return [
-      SimpleEnum
-          .f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum,
-      SimpleEnum.f_V2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum
-    ];
+    return /**@type {Array<SimpleEnum>} */ (
+        $Arrays.$init(
+            [
+              SimpleEnum
+                  .f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum,
+              SimpleEnum
+                  .f_V2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum
+            ],
+            SimpleEnum));
   }
 
   /**
