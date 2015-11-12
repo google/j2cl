@@ -92,11 +92,7 @@ class Object {
    * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
-    // Special case for Array.
-    if (classConstructor == Array) {
-      return true;
-    }
-    return $Util.$canCastClass(classConstructor, Object);
+    return true;
   }
 
   /**

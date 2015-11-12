@@ -89,7 +89,7 @@ class Arrays {
    * applied to brand new array literals.
    *
    * @param {Array<*>} array
-   * @param {Function} leafType
+   * @param {*} leafType
    * @param {number} opt_dimensionCount
    * @return {Array<*>}
    * @public
@@ -105,7 +105,7 @@ class Arrays {
    * dimensions and leafType.
    *
    * @param {Array<*>} array
-   * @param {Function} leafType
+   * @param {*} leafType
    * @param {number} dimensionCount
    * @private
    */
@@ -199,7 +199,7 @@ class Arrays {
    * leaf type.
    *
    * @param {*} instance
-   * @param {Function} requiredLeafType
+   * @param {*} requiredLeafType
    * @param {number} requiredDimensionCount
    * @return {boolean}
    * @public
@@ -229,7 +229,7 @@ class Arrays {
    * provided instance is returned.
    *
    * @param {*} instance
-   * @param {Function} requiredLeafType
+   * @param {*} requiredLeafType
    * @param {number} requiredDimensionCount
    * @return {*}
    * @public
