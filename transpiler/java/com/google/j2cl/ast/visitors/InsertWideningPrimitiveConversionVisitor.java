@@ -27,8 +27,6 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Visibility;
 
-import java.util.Arrays;
-
 /**
  * Inserts a widening operation when a smaller primitive type is being put into a large primitive
  * type slot in assignment, binary numeric promotion, cast and method invocation conversion
@@ -135,7 +133,6 @@ public class InsertWideningPrimitiveConversionVisitor extends ConversionContextV
             null,
             null);
     // Primitives.$widenAToB(expr);
-    return MethodCall.createRegularMethodCall(
-        null, widenMethodDescriptor, Arrays.asList(subjectExpression));
+    return MethodCall.createRegularMethodCall(null, widenMethodDescriptor, subjectExpression);
   }
 }

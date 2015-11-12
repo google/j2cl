@@ -30,18 +30,24 @@ public class Field extends Node {
   @Visitable FieldDescriptor fieldDescriptor;
   @Visitable @Nullable Expression initializer;
   private boolean compileTimeConstant;
-
+  private boolean isEnumField;
   private Variable capturedVariable;
 
   public Field(FieldDescriptor fieldDescriptor, Expression initializer) {
     Preconditions.checkNotNull(fieldDescriptor);
     this.fieldDescriptor = fieldDescriptor;
     this.initializer = initializer;
+    this.isEnumField = false;
   }
 
   public Field(FieldDescriptor fieldDescriptor, Expression initializer, Variable capturedVariable) {
     this(fieldDescriptor, initializer);
     this.capturedVariable = capturedVariable;
+  }
+
+  public Field(FieldDescriptor fieldDescriptor, Expression initializer, boolean isEnumField) {
+    this(fieldDescriptor, initializer);
+    this.isEnumField = isEnumField;
   }
 
   public FieldDescriptor getDescriptor() {
@@ -78,6 +84,10 @@ public class Field extends Node {
 
   public void setCompileTimeConstant(boolean compileTimeConstant) {
     this.compileTimeConstant = compileTimeConstant;
+  }
+
+  public boolean isEnumField() {
+    return isEnumField;
   }
 
   @Override

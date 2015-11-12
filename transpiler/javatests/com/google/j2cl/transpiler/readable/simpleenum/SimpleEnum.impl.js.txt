@@ -9,8 +9,11 @@ let Enum = goog.require('gen.java.lang.Enum$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Object = goog.forwardDeclare('gen.java.lang.Object$impl');
 let String = goog.forwardDeclare('gen.java.lang.String$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -71,6 +74,41 @@ class SimpleEnum extends Enum {
   }
 
   /**
+   * @param {?string} name
+   * @return {SimpleEnum}
+   * @public
+   * @nocollapse
+   */
+  static m_valueOf__java_lang_String(name) {
+    SimpleEnum.$clinit();
+    if (SimpleEnum
+            .f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum_ ==
+        null) {
+      SimpleEnum
+          .f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum_ =
+          $Enums.createMapFromValues(SimpleEnum.m_values());
+    }
+    return $Enums.getValueFromNameAndMap(
+        name,
+        SimpleEnum
+            .f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum_);
+  }
+
+  /**
+   * @return {Array<SimpleEnum>}
+   * @public
+   * @nocollapse
+   */
+  static m_values() {
+    SimpleEnum.$clinit();
+    return [
+      SimpleEnum
+          .f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum,
+      SimpleEnum.f_V2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum
+    ];
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
@@ -118,14 +156,20 @@ class SimpleEnum extends Enum {
   static $clinit() {
     SimpleEnum.$clinit = function() {};
     Class = goog.module.get('gen.java.lang.Class$impl');
+    Object = goog.module.get('gen.java.lang.Object$impl');
     String = goog.module.get('gen.java.lang.String$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $Enums = goog.module.get('vmbootstrap.Enums$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Enum.$clinit();
     SimpleEnum.f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum =
         SimpleEnum.$create__java_lang_String__int("V1", 0);
     SimpleEnum.f_V2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum =
         SimpleEnum.$create__java_lang_String__int("V2", 1);
+    SimpleEnum
+        .f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum_ =
+        null;
   }
 }
 ;
@@ -142,6 +186,14 @@ SimpleEnum.f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum =
  * @public {SimpleEnum}
  */
 SimpleEnum.f_V2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum =
+    null;
+
+
+/**
+ * @public {*}
+ */
+SimpleEnum
+    .f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum_ =
     null;
 
 

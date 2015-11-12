@@ -19,6 +19,7 @@ import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -61,6 +62,19 @@ public class MethodCall extends Expression implements MemberReference, Call {
         AstUtils.getExplicitQualifier(qualifier, targetMethodDescriptor),
         targetMethodDescriptor,
         arguments,
+        false);
+  }
+
+  /**
+   * Static method that creates a method call of the form:
+   * qualifier.targetMethodDescriptor(arguments)
+   */
+  public static MethodCall createRegularMethodCall(
+      Expression qualifier, MethodDescriptor targetMethodDescriptor, Expression... arguments) {
+    return new MethodCall(
+        AstUtils.getExplicitQualifier(qualifier, targetMethodDescriptor),
+        targetMethodDescriptor,
+        Arrays.asList(arguments),
         false);
   }
 

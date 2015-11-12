@@ -52,6 +52,7 @@ are copyright and licensed as follows:
     affected to turn off checks.
 - hashcode test in 'numberobjectcalls' fails for long
 - Investigate if Object.java, Enum.java and Class.java can be shared with GWT
+- Private static fields should have private getters and setters.
 - Import global native js types when JSCompiler supports goog.require() externs.
 - Maybe further specialize Object equality() to avoid the Equality.$same() call
     if neither side could ever cast to String/Double/Boolean.
@@ -63,11 +64,11 @@ are copyright and licensed as follows:
   formal parameter
 
 ## Feature Complete Java 7 TODOs
-- enum special functions (values, valueOf, etc).
 - identity equality (double equality / triple equality, null / undefined)
 - integrate JRE
 - packageclasscollision
 - stringconstructor
+- Enum.valueOf(Class<>, String)
 
 ## JsInterop TODOs
 - catchjsexception

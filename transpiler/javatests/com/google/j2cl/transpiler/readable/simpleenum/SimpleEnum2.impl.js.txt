@@ -13,8 +13,11 @@ let SimpleEnum = goog.forwardDeclare(
 let SimpleEnum2$1 = goog.forwardDeclare(
     'gen.com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2$1$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Object = goog.forwardDeclare('gen.java.lang.Object$impl');
 let String = goog.forwardDeclare('gen.java.lang.String$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -124,6 +127,44 @@ class SimpleEnum2 extends Enum {
   }
 
   /**
+   * @param {?string} name
+   * @return {SimpleEnum2}
+   * @public
+   * @nocollapse
+   */
+  static m_valueOf__java_lang_String(name) {
+    SimpleEnum2.$clinit();
+    if (SimpleEnum2
+            .f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2_ ==
+        null) {
+      SimpleEnum2
+          .f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2_ =
+          $Enums.createMapFromValues(SimpleEnum2.m_values());
+    }
+    return $Enums.getValueFromNameAndMap(
+        name,
+        SimpleEnum2
+            .f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2_);
+  }
+
+  /**
+   * @return {Array<SimpleEnum2>}
+   * @public
+   * @nocollapse
+   */
+  static m_values() {
+    SimpleEnum2.$clinit();
+    return [
+      SimpleEnum2
+          .f_VALUE1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2,
+      SimpleEnum2
+          .f_VALUE2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2,
+      SimpleEnum2
+          .f_VALUE3__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2
+    ];
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
@@ -175,8 +216,11 @@ class SimpleEnum2 extends Enum {
     SimpleEnum2$1 = goog.module.get(
         'gen.com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2$1$impl');
     Class = goog.module.get('gen.java.lang.Class$impl');
+    Object = goog.module.get('gen.java.lang.Object$impl');
     String = goog.module.get('gen.java.lang.String$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $Enums = goog.module.get('vmbootstrap.Enums$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Enum.$clinit();
     SimpleEnum.$clinit();
@@ -193,6 +237,9 @@ class SimpleEnum2 extends Enum {
     SimpleEnum2
         .f_VALUE3__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
         SimpleEnum2$1.$create__int__java_lang_String__int(5, "VALUE3", 2);
+    SimpleEnum2
+        .f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2_ =
+        null;
   }
 }
 ;
@@ -219,6 +266,14 @@ SimpleEnum2
  */
 SimpleEnum2
     .f_VALUE3__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 =
+    null;
+
+
+/**
+ * @public {*}
+ */
+SimpleEnum2
+    .f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2_ =
     null;
 
 

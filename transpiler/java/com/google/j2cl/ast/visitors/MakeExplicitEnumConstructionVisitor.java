@@ -130,6 +130,7 @@ public class MakeExplicitEnumConstructionVisitor extends AbstractRewriter {
     compilationUnit.accept(this);
   }
 
+  @SuppressWarnings("unused") // Used by the template
   private boolean isEnumOrSubclass(JavaType type) {
     if (type.isEnum()) {
       return true;

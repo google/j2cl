@@ -135,6 +135,24 @@ public class JavaType extends Node {
     this.fields.addAll(fields);
   }
 
+  /**
+   * Since enum fields are just tracked as static final fields in JavaType we want to be able to
+   * distinguish enum fields from static fields created in the enum body.
+   */
+  public List<Field> getEnumFields() {
+    Preconditions.checkArgument(this.kind == Kind.ENUM);
+    Iterable<Field> enumFields =
+        Iterables.filter(
+            fields,
+            new Predicate<Field>() {
+              @Override
+              public boolean apply(Field field) {
+                return field.isEnumField();
+              }
+            });
+    return Lists.newArrayList(enumFields);
+  }
+
   public List<Method> getMethods() {
     return methods;
   }

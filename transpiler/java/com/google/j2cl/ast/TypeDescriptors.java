@@ -258,6 +258,7 @@ public class TypeDescriptors {
     ARRAYS(Arrays.asList("vmbootstrap"), "Arrays"),
     CASTS(Arrays.asList("vmbootstrap"), "Casts"),
     PRIMITIVES(Arrays.asList("vmbootstrap", "primitives"), "Primitives"),
+    ENUMS(Arrays.asList("vmbootstrap"), "Enums"),
     LONGS(Arrays.asList("vmbootstrap"), "LongUtils"),
     NATIVE_EQUALITY(Arrays.asList("nativebootstrap"), "Equality"),
     NATIVE_UTIL(Arrays.asList("nativebootstrap"), "Util"),

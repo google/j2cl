@@ -28,7 +28,6 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Visibility;
 
-import java.util.Arrays;
 import java.util.Set;
 
 /**
@@ -102,8 +101,7 @@ public class InsertNarrowingPrimitiveConversionVisitor extends ConversionContext
                     null,
                     null);
             // Primitives.$narrowAToB(expr);
-            return MethodCall.createRegularMethodCall(
-                null, narrowMethodDescriptor, Arrays.asList(expression));
+            return MethodCall.createRegularMethodCall(null, narrowMethodDescriptor, expression);
           }
         });
   }

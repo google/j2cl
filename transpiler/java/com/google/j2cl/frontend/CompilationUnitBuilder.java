@@ -200,6 +200,7 @@ public class CompilationUnitBuilder {
                     }
                   })
               .toList());
+      EnumMethodsCreator.applyTo(enumType);
     }
 
     private JavaType convertAndAddJavaType(
@@ -278,7 +279,9 @@ public class CompilationUnitBuilder {
                   JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(
                       enumConstantDeclaration.arguments())));
       return new Field(
-          JdtUtils.createFieldDescriptor(enumConstantDeclaration.resolveVariable()), initializer);
+          JdtUtils.createFieldDescriptor(enumConstantDeclaration.resolveVariable()),
+          initializer,
+          true);
     }
 
     private List<Field> convert(FieldDeclaration fieldDeclaration) {
@@ -866,8 +869,7 @@ public class CompilationUnitBuilder {
               iteratorVariable,
               MethodCall.createRegularMethodCall(
                   convert(statement.getExpression()),
-                  JdtUtils.createMethodDescriptor(iteratorMethodBinding),
-                  Collections.<Expression>emptyList()));
+                  JdtUtils.createMethodDescriptor(iteratorMethodBinding)));
 
       // $iterator.hasNext();
       IMethodBinding hasNextMethodBinding =
@@ -1544,8 +1546,7 @@ public class CompilationUnitBuilder {
                 javaLangClassTypeDescriptor,
                 null,
                 null);
-        return MethodCall.createRegularMethodCall(
-            null, classMethodDescriptor, new ArrayList<Expression>());
+        return MethodCall.createRegularMethodCall(null, classMethodDescriptor);
       }
 
       MethodDescriptor classMethodDescriptor =

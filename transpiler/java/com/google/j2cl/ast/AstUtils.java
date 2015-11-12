@@ -442,8 +442,7 @@ public class AstUtils {
             boxType, // returnTypeDescriptor,
             primitiveType // parameterTypeDescriptor
             );
-    return MethodCall.createRegularMethodCall(
-        null, valueOfMethodDescriptor, Arrays.asList(expression));
+    return MethodCall.createRegularMethodCall(null, valueOfMethodDescriptor, expression);
   }
 
   /**
@@ -472,9 +471,7 @@ public class AstUtils {
             ? expression
             : new ParenthesizedExpression(expression);
 
-    MethodCall methodCall =
-        MethodCall.createRegularMethodCall(
-            expression, valueMethodDescriptor, new ArrayList<Expression>());
+    MethodCall methodCall = MethodCall.createRegularMethodCall(expression, valueMethodDescriptor);
     if (TypeDescriptors.isBoxedBooleanOrDouble(boxType)) {
       methodCall = createDevirtualizedMethodCall(methodCall, boxType, boxType);
     }

@@ -28,8 +28,6 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Visibility;
 
-import java.util.Arrays;
-
 /**
  * Inserts underflow/overflow checking conversion.
  *
@@ -156,7 +154,6 @@ public class InsertUnderflowOverflowConversionVisitor extends ConversionContextV
             null,
             null);
     // Primitives.$toA(expr);
-    return MethodCall.createRegularMethodCall(
-        null, overflowMethodDescriptor, Arrays.asList(expression));
+    return MethodCall.createRegularMethodCall(null, overflowMethodDescriptor, expression);
   }
 }

@@ -108,8 +108,7 @@ public class NormalizeLongsVisitor extends AbstractRewriter {
             null,
             null);
     // LongUtils.$someOperation(operand);
-    return MethodCall.createRegularMethodCall(
-        null, longUtilsMethodDescriptor, Lists.newArrayList(argument));
+    return MethodCall.createRegularMethodCall(null, longUtilsMethodDescriptor, argument);
   }
 
   private static String getLongOperationFunctionName(PrefixOperator prefixOperator) {

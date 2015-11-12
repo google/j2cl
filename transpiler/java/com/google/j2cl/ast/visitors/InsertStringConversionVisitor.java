@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
@@ -69,9 +68,7 @@ public class InsertStringConversionVisitor extends ConversionContextVisitor {
             // at least a boolean or double primitive that we can treat as a reference type).
             // So use a "String.valueOf()" method call on it.
             return MethodCall.createRegularMethodCall(
-                null,
-                AstUtils.createStringValueOfMethodDescriptor(),
-                Lists.newArrayList(operandExpression));
+                null, AstUtils.createStringValueOfMethodDescriptor(), operandExpression);
           }
         });
   }

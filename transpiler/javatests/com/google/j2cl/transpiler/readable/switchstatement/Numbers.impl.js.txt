@@ -9,8 +9,11 @@ let Enum = goog.require('gen.java.lang.Enum$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Object = goog.forwardDeclare('gen.java.lang.Object$impl');
 let String = goog.forwardDeclare('gen.java.lang.String$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -71,6 +74,41 @@ class Numbers extends Enum {
   }
 
   /**
+   * @param {?string} name
+   * @return {Numbers}
+   * @public
+   * @nocollapse
+   */
+  static m_valueOf__java_lang_String(name) {
+    Numbers.$clinit();
+    if (Numbers
+            .f_namesToValuesMap__com_google_j2cl_transpiler_readable_switchstatement_Numbers_ ==
+        null) {
+      Numbers
+          .f_namesToValuesMap__com_google_j2cl_transpiler_readable_switchstatement_Numbers_ =
+          $Enums.createMapFromValues(Numbers.m_values());
+    }
+    return $Enums.getValueFromNameAndMap(
+        name,
+        Numbers
+            .f_namesToValuesMap__com_google_j2cl_transpiler_readable_switchstatement_Numbers_);
+  }
+
+  /**
+   * @return {Array<Numbers>}
+   * @public
+   * @nocollapse
+   */
+  static m_values() {
+    Numbers.$clinit();
+    return [
+      Numbers
+          .f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers,
+      Numbers.f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers
+    ];
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
@@ -118,14 +156,20 @@ class Numbers extends Enum {
   static $clinit() {
     Numbers.$clinit = function() {};
     Class = goog.module.get('gen.java.lang.Class$impl');
+    Object = goog.module.get('gen.java.lang.Object$impl');
     String = goog.module.get('gen.java.lang.String$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $Enums = goog.module.get('vmbootstrap.Enums$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Enum.$clinit();
     Numbers.f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers =
         Numbers.$create__java_lang_String__int("ONE", 0);
     Numbers.f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers =
         Numbers.$create__java_lang_String__int("TWO", 1);
+    Numbers
+        .f_namesToValuesMap__com_google_j2cl_transpiler_readable_switchstatement_Numbers_ =
+        null;
   }
 }
 ;
@@ -142,6 +186,14 @@ Numbers.f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers =
  * @public {Numbers}
  */
 Numbers.f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers =
+    null;
+
+
+/**
+ * @public {*}
+ */
+Numbers
+    .f_namesToValuesMap__com_google_j2cl_transpiler_readable_switchstatement_Numbers_ =
     null;
 
 
