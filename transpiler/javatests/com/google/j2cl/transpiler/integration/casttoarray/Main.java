@@ -8,6 +8,23 @@ public class Main {
   public static void main(String... args) {
     testDimensionCasts();
     testTypeCasts();
+    testBasics();
+  }
+
+  private static void testBasics() {
+    // Cast null to Object[]
+    Object o = (Object[]) null;
+
+    // Cast null to Object[][]
+    o = (Object[][]) null;
+
+    // Cast JS "[]" to Object[]
+    o = new Object[] {}; // Actually emits as the JS array literal "[]".
+    o = (Object[]) o;
+
+    // Cast JS "$Arrays.$init([], Object, 2))" to Object[][]
+    o = new Object[][] {};
+    o = (Object[][]) o;
   }
 
   private static void testTypeCasts() {

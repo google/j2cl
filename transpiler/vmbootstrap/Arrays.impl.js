@@ -9,14 +9,14 @@ goog.module('vmbootstrap.Arrays$impl');
 let Hashing = goog.require('nativebootstrap.Hashing$impl');
 
 let ArrayIndexOutOfBoundsException =
-  goog.forwardDeclare('gen.java.lang.ArrayIndexOutOfBoundsException$impl');
+    goog.forwardDeclare('gen.java.lang.ArrayIndexOutOfBoundsException$impl');
 let ArrayStoreException =
-  goog.forwardDeclare('gen.java.lang.ArrayStoreException$impl');
+    goog.forwardDeclare('gen.java.lang.ArrayStoreException$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class');
 let Object = goog.forwardDeclare('gen.java.lang.Object');
 let Integer = goog.forwardDeclare('gen.java.lang.Integer$impl');
 let NullPointerException =
-  goog.forwardDeclare('gen.java.lang.NullPointerException$impl');
+    goog.forwardDeclare('gen.java.lang.NullPointerException$impl');
 let Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
@@ -128,7 +128,8 @@ class Arrays {
         if (nestedArray == null) {
           continue;
         }
-        Arrays.$initRecursive(/** @type {Array<*>} */ (nestedArray), leafType,
+        Arrays.$initRecursive(
+            /** @type {Array<*>} */ (nestedArray), leafType,
             dimensionCount - 1);
       }
     }
@@ -161,8 +162,8 @@ class Arrays {
       // have it.
       if (array.leafType != null) {
         if (array.dimensionCount > 1) {
-          if (!Arrays.$instanceIsOfType(value, array.leafType,
-                                        array.dimensionCount - 1)) {
+          if (!Arrays.$instanceIsOfType(
+                  value, array.leafType, array.dimensionCount - 1)) {
             // The inserted array must fit dimensions and the array leaf
             // type.
             Arrays.$throwArrayStoreException();
@@ -187,11 +188,11 @@ class Arrays {
    * @param {Array<*>} otherArray
    * @public
    */
-   static $stampType(array, otherArray) {
-     array.leafType = otherArray.leafType;
-     array.dimensionCount = otherArray.dimensionCount;
-     array.$getClass = otherArray.$getClass;
-   }
+  static $stampType(array, otherArray) {
+    array.leafType = otherArray.leafType;
+    array.dimensionCount = otherArray.dimensionCount;
+    array.$getClass = otherArray.$getClass;
+  }
 
   /**
    * Returns whether the given instance is an array, whether it has the given
@@ -211,11 +212,16 @@ class Arrays {
       // Null or not an Array can't cast.
       return false;
     }
-    if (instance.dimensionCount == requiredDimensionCount) {
+
+    // One dimensional Object arrays are emitted as a raw JS [] array literal
+    // and will be missing the dimensionCount field.
+    var effectiveInstanceDimensionCount = (instance.dimensionCount || 1);
+
+    if (effectiveInstanceDimensionCount == requiredDimensionCount) {
       // If dimensions are equal then the leaftypes must be castable.
       return requiredLeafType.$isAssignableFrom(instance.leafType);
     }
-    if (instance.dimensionCount > requiredDimensionCount) {
+    if (effectiveInstanceDimensionCount > requiredDimensionCount) {
       // If shrinking the dimensions then the new leaf type must *be* Object.
       return Object == requiredLeafType;
     }
@@ -236,9 +242,12 @@ class Arrays {
    */
   static $castTo(instance, requiredLeafType, requiredDimensionCount) {
     Arrays.$clinit();
-    return Casts.check(instance,
-                    Arrays.$instanceIsOfType(instance, requiredLeafType,
-                                             requiredDimensionCount));
+    if (instance == null) {
+      return instance;
+    }
+    return Casts.check(
+        instance, Arrays.$instanceIsOfType(
+                      instance, requiredLeafType, requiredDimensionCount));
   }
 
   /**
