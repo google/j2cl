@@ -17,8 +17,8 @@ public class Main {
   public static class ArrayList<T> extends AbstractList<T> {}
 
   public interface IStringList extends List<String> {
-    // @Override
-    // public String getFoo(String string);
+    @Override
+    public String getFoo(String string);
   }
 
   public abstract static class AbstractStringList extends AbstractList<String>
@@ -29,9 +29,6 @@ public class Main {
   public static void main(String... args) {
     assert new ArrayList<String>().getFoo(null).equals("AbstractCollection");
     assert new StringList().getFoo(null).equals("AbstractCollection");
-
-    // TODO: restore when the missing "m_getFoo__java_lang_String()" bridge in "AbstractStringList"
-    // is fixed.
-    // assert ((IStringList) new StringList()).getFoo(null).equals("AbstractCollection");
+    assert ((IStringList) new StringList()).getFoo(null).equals("AbstractCollection");
   }
 }

@@ -29,9 +29,6 @@ public class MultipleAbstractParents {
   public static void main(String... args) {
     assert new ArrayList<String>().getFoo(null).equals("AbstractCollection");
     assert new StringList().getFoo(null).equals("AbstractCollection");
-
-    // TODO: restore when the missing "m_getFoo__java_lang_String()" bridge in "AbstractStringList"
-    // is fixed.
-    // assert ((IStringList) new StringList()).getFoo(null).equals("AbstractCollection");
+    assert ((IStringList) new StringList()).getFoo(null).equals("AbstractCollection");
   }
 }

@@ -1,0 +1,109 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.backwardbridgemethod.I.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.backwardbridgemethod.I$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let String = goog.forwardDeclare('gen.java.lang.String$impl');
+
+
+/**
+ * @interface
+ */
+class I {
+  /**
+   * @param {?string} s
+   * @return {?string}
+   * @public
+   */
+  m_get__java_lang_String(s) {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_backwardbridgemethod_I =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+           instance
+               .$implements__com_google_j2cl_transpiler_readable_backwardbridgemethod_I;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+           classConstructor.prototype
+               .$implements__com_google_j2cl_transpiler_readable_backwardbridgemethod_I;
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    I.$clinit();
+    if (!I.$classI_) {
+      I.$classI_ = Class.$createForInterface(
+          $Util.$generateId('I'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.backwardbridgemethod.I'),
+          null,
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.backwardbridgemethod.I'));
+    }
+    return I.$classI_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    String = goog.module.get('gen.java.lang.String$impl');
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+I.$classI_ = null;
+
+
+I.$markImplementor(/** @type {Function} */ (I));
+
+/**
+ * Export class.
+ */
+exports = I;

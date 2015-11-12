@@ -12,12 +12,15 @@ let MultipleAbstractParents$AbstractCollection = goog.forwardDeclare(
     'gen.com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractCollection$impl');
 let MultipleAbstractParents$ArrayList = goog.forwardDeclare(
     'gen.com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$ArrayList$impl');
+let MultipleAbstractParents$IStringList = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$IStringList$impl');
 let MultipleAbstractParents$StringList = goog.forwardDeclare(
     'gen.com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$StringList$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let String = goog.forwardDeclare('gen.java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 class MultipleAbstractParents extends Object {
@@ -78,6 +81,15 @@ class MultipleAbstractParents extends Object {
                 MultipleAbstractParents$StringList.$create()
                     .m_getFoo__java_lang_Object(null),
                 "AbstractCollection"));
+    $Asserts.$enabled() &&
+        $Asserts.$assert(
+            String.m_equals__java_lang_String__java_lang_Object(
+                (/**@type {MultipleAbstractParents$IStringList} */ (
+                     $Casts.to(
+                         MultipleAbstractParents$StringList.$create(),
+                         MultipleAbstractParents$IStringList)))
+                    .m_getFoo__java_lang_String(null),
+                "AbstractCollection"));
   }
 
   /**
@@ -131,12 +143,15 @@ class MultipleAbstractParents extends Object {
         'gen.com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractCollection$impl');
     MultipleAbstractParents$ArrayList = goog.module.get(
         'gen.com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$ArrayList$impl');
+    MultipleAbstractParents$IStringList = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$IStringList$impl');
     MultipleAbstractParents$StringList = goog.module.get(
         'gen.com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$StringList$impl');
     Class = goog.module.get('gen.java.lang.Class$impl');
     String = goog.module.get('gen.java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
     Object.$clinit();
   }
 }

@@ -82,11 +82,17 @@ public class BridgeMethodsCreator {
   public Map<IMethodBinding, IMethodBinding> findBridgeMethods() {
     Map<IMethodBinding, IMethodBinding> bridgeMethodByDelegateMethod = new LinkedHashMap<>();
     for (IMethodBinding bridgeMethod : getPotentialBridgeMethods(typeBinding)) {
-      IMethodBinding delegateMethod = findDelegatedMethod(bridgeMethod, typeBinding);
-      // If no delegated method is found, it means that no overriding method exists, then no bridge
-      // method is needed.
+      IMethodBinding delegateMethod = findForwardingMethod(bridgeMethod, typeBinding);
       if (delegateMethod != null) {
         bridgeMethodByDelegateMethod.put(bridgeMethod, delegateMethod);
+      } else {
+        // If no delegated method is found, it means that no overriding method exists, normally no
+        // bridge method is needed, except in the case when it overrides an interface method with
+        // more specific types, and in this case a bridge method for the interface method is needed.
+        IMethodBinding backwardingMethod = findBackwardingMethod(bridgeMethod, typeBinding);
+        if (backwardingMethod != null) {
+          bridgeMethodByDelegateMethod.put(backwardingMethod, bridgeMethod.getMethodDeclaration());
+        }
       }
     }
     return bridgeMethodByDelegateMethod;
@@ -95,10 +101,10 @@ public class BridgeMethodsCreator {
   /**
    * Returns all the potential methods in the super classes and super interfaces that may need a
    * bridge method generating in {@code type}.
-   * <p>
-   * A bridge method is needed in a type when the type extends or implements a parameterized class
-   * or interface and type erasure changes the signature of any inherited method. This inherited
-   * method is a potential method that may need a bridge method.
+   *
+   * <p>A bridge method is needed in a type when the type extends or implements a parameterized
+   * class or interface and type erasure changes the signature of any inherited method. This
+   * inherited method is a potential method that may need a bridge method.
    */
   private static List<IMethodBinding> getPotentialBridgeMethods(ITypeBinding type) {
     List<IMethodBinding> potentialBridgeMethods = new ArrayList<>();
@@ -127,7 +133,7 @@ public class BridgeMethodsCreator {
         new Predicate<IMethodBinding>() {
           @Override
           /**
-           * If {@code method}, the concrete method with specialized type arguments, has different
+           * If {@code method}, the method with more specific type arguments, has different
            * method signature with {@code method.getMethodDeclaration()}, the original generic
            * method, it means this method is a potential method that may need a bridge method.
            */
@@ -145,13 +151,13 @@ public class BridgeMethodsCreator {
   /**
    * Returns the delegated method (implemented or inherited) by {@code type} that
    * {@code bridgeMethod} should be delegated to.
-   * <p>
-   * If a method (a concrete method with specialized type arguments) in {@code type} or in its super
-   * types has the same erasured signature with {@code bridgeMethod}, it is an overriding
+   *
+   * <p>If a method (a method with more specific type arguments) in {@code type} or in its
+   * super types has the same erasured signature with {@code bridgeMethod}, it is an overriding
    * method for {@code bridgeMethod}. And if their original method declarations are different then
    * a bridge method is needed to make overriding work.
    */
-  private static IMethodBinding findDelegatedMethod(
+  private static IMethodBinding findForwardingMethod(
       IMethodBinding bridgeMethod, ITypeBinding type) {
     for (IMethodBinding method : type.getDeclaredMethods()) {
       if (!method.isEqualTo(bridgeMethod) // should not delegate to itself
@@ -169,16 +175,41 @@ public class BridgeMethodsCreator {
     // recurse to super class.
     if (type.getSuperclass() != null) {
       IMethodBinding delegateMethodInParent =
-          findDelegatedMethod(bridgeMethod, type.getSuperclass());
+          findForwardingMethod(bridgeMethod, type.getSuperclass());
       if (delegateMethodInParent != null) {
         return delegateMethodInParent;
       }
     }
     // recurse to super interfaces.
     for (ITypeBinding superInterface : type.getInterfaces()) {
-      IMethodBinding delegateMethodInInterface = findDelegatedMethod(bridgeMethod, superInterface);
+      IMethodBinding delegateMethodInInterface = findForwardingMethod(bridgeMethod, superInterface);
       if (delegateMethodInInterface != null) {
         return delegateMethodInInterface;
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Returns the method in its super interface that needs a bridge method delegating to
+   * {@code bridgeMethod}.
+   *
+   * <p>If a method in the super interfaces of {@code type} is a method with more specific type
+   * arguments, and it is overridden by a generic method, it needs a bridge method that delegates to
+   * the generic method.
+   */
+  private static IMethodBinding findBackwardingMethod(
+      IMethodBinding bridgeMethod, ITypeBinding type) {
+    for (ITypeBinding superInterface : JdtUtils.getAllInterfaces(type)) {
+      for (IMethodBinding methodBinding : superInterface.getDeclaredMethods()) {
+        if (methodBinding == methodBinding.getMethodDeclaration() // non-generic method,
+            // generic method has been investigated by findForwardingMethod.
+            && JdtUtils.areParameterErasureEqual(methodBinding, bridgeMethod)
+            // is overridden by a generic method with different erasure parameter types.
+            && !JdtUtils.areParameterErasureEqual(
+                methodBinding, bridgeMethod.getMethodDeclaration())) {
+          return methodBinding;
+        }
       }
     }
     return null;
@@ -202,19 +233,22 @@ public class BridgeMethodsCreator {
 
   /**
    * Returns bridge method that calls the delegated method in its body.
-   * <p>
-   * bridgeMethod: concrete parameterized method with the concrete type arguments.
+   *
+   * <p>bridgeMethod: parameterized method with more specific type arguments.
    * bridgeMethod.getMethodDeclaration(): original declaration method.
    * targetMethod: concrete implementation that should be delegated to.
    */
   private Method createBridgeMethod(IMethodBinding bridgeMethod, IMethodBinding targetMethod) {
     // The MethodDescriptor of the generated bridge method should have the same signature as the
     // original declared method.
-    // Its return type is the same as the delegated method.
     // Using the return type of the delegated method also avoids generating redundant bridge methods
     // for two methods that have the same parameter signature but different return types.
+    ITypeBinding returnType =
+        bridgeMethod == bridgeMethod.getMethodDeclaration()
+            ? bridgeMethod.getReturnType() // use its own return type if it is a concrete method
+            : targetMethod.getReturnType(); // otherwise use the return type of the target method.
     MethodDescriptor bridgeMethodDescriptor =
-        createMethodDescriptorInCurrentType(bridgeMethod, targetMethod.getReturnType());
+        createMethodDescriptorInCurrentType(bridgeMethod, returnType);
     // The MethodDescriptor of the delegated method.
     MethodDescriptor targetMethodDescriptor =
         createMethodDescriptorInCurrentType(targetMethod, targetMethod.getReturnType());
@@ -231,7 +265,7 @@ public class BridgeMethodsCreator {
       parameters.add(parameter);
       Expression parameterReference = parameter.getReference();
 
-      // The type the argument should be casted to. It should be casted to the concrete parameter
+      // The type the argument should be casted to. It should be casted to the specific parameter
       // type that is expected by the concrete parameterized method.
       TypeDescriptor castToParameterTypeDescriptor =
           JdtUtils.createTypeDescriptor(bridgeMethod.getParameterTypes()[i]);

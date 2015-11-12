@@ -1,0 +1,123 @@
+/**
+ * Impl transpiled from
+ * com.google.j2cl.transpiler.readable.backwardbridgemethod.C.
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.backwardbridgemethod.C$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+/**
+ * @template C_T
+ */
+class C extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_backwardbridgemethod_C() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_T
+   * @return {!C<C_T>}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    C.$clinit();
+    let instance = new C;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_backwardbridgemethod_C();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_backwardbridgemethod_C() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_backwardbridgemethod_C();
+  }
+
+  /**
+   * @param {C_T} t
+   * @return {C_T}
+   * @public
+   */
+  m_get__java_lang_Object(t) { return null; }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof C; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, C);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    C.$clinit();
+    if (!C.$classC_) {
+      C.$classC_ = Class.$createForClass(
+          $Util.$generateId('C'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.backwardbridgemethod.C'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.backwardbridgemethod.C'));
+    }
+    return C.$classC_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+C.$classC_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = C;
