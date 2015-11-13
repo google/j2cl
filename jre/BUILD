@@ -11,6 +11,6 @@ licenses(["unencumbered"])
 
 # Re-expose the JRE library at the top level.
 js_library(
-    name = "jre_js_library",
-    deps = ["//jre/java:jre_js_library"],
+    name = "jre",
+    deps = ["//jre/java:jre"],
 )

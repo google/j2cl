@@ -44,7 +44,7 @@ def jsni_converter_test(
   rule_name = kwargs["name"]
   converter_rule_name = rule_name + "_converter"
   unzipper_rule_name = rule_name + "_unzipper"
-  js_library_rule_name = rule_name + "_js_library"
+  js_library_rule_name = rule_name + "_private_lib"
 
   jsni_to_j2cl_converter(
       name=converter_rule_name,

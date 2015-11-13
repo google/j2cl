@@ -57,5 +57,5 @@ def readable_example(
       ],
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
-      deps=js_deps + [":" + name + "_js_library"],
+      deps=js_deps + [":" + name],
   )

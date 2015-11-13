@@ -9,6 +9,6 @@ java_library(
 )
 
 js_library(
-    name = "forwarder_lib_js_library",
-    deps = ["//transpiler/javatests/com/google/j2cl/transpiler/integration/depsforwarding/foo:foo_lib_js_library"],
+    name = "forwarder_lib",
+    deps = ["//transpiler/javatests/com/google/j2cl/transpiler/integration/depsforwarding/foo:foo_lib"],
 )

@@ -97,7 +97,7 @@ def integration_test(
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
-      deps=js_deps + [":" + name + "_js_library"],
+      deps=js_deps + [":" + name],
   )
   # For constructing readable optimized diffs.
   native.js_binary(
@@ -122,7 +122,7 @@ def integration_test(
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
-      deps=js_deps + [":" + name + "_js_library"],
+      deps=js_deps + [":" + name],
   )
   # For constructing readable unoptimized diffs.
   native.js_binary(
@@ -139,7 +139,7 @@ def integration_test(
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
-      deps=js_deps + [":" + name + "_js_library"],
+      deps=js_deps + [":" + name],
   )
 
   # For constructing GWT transpiled output.
@@ -215,7 +215,7 @@ def integration_test(
       srcs=["TestHarness.js"],
       compile=0,
       deps=js_deps + [
-          ":" + name + "_js_library",
+          ":" + name,
           "//javascript/closure/testing:testsuite",
       ],
       deps_mgmt="closure",
@@ -246,7 +246,7 @@ def integration_test(
           "--jscomp_off=transitionalSuspiciousCodeWarnings",
       ] + defs,
       deps=js_deps + [
-          ":" + name + "_js_library",
+          ":" + name,
           "//javascript/closure/testing:testsuite",
       ],
       deps_mgmt="closure",

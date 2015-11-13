@@ -26,7 +26,7 @@ java_library(
 # Services the gwt-jsinterop-annotations target with the JS suffix that
 # j2cl_library() expects.
 js_library(
-    name = "gwt-jsinterop-annotations_js_library",
+    name = "gwt-jsinterop-annotations",
 )
 
 j2cl_source_copy(
@@ -101,13 +101,13 @@ jsni_to_j2cl_converter(
 # Bundles together both hand-rolled JS versions of Java classes with transpiled
 # versions of Java classes into a complete JRE.
 js_library(
-    name = "jre_js_library",
+    name = "jre",
     srcs = glob(
         ["**/*.js"],
         exclude = ["**/*.native.js"],
     ),
     deps = [
         "//transpiler:nativebootstrap",
-        ":JavaJre_js_library",
+        ":JavaJre",
     ],
 )
