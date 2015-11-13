@@ -40,7 +40,7 @@ public class FrontendFlags {
   )
   protected String omitfiles = "";
 
-  @Argument(metaVar = "<source files>", usage = "source files")
+  @Argument(metaVar = "<source files .java|.srcjar>", usage = "source files")
   protected List<String> files = new ArrayList<>();
 
   @Option(

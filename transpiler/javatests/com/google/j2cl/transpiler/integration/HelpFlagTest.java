@@ -25,7 +25,7 @@ public class HelpFlagTest extends IntegrationTestCase {
     String[] args = new String[] {IntegrationTestCase.TRANSPILER_BINARY, "-help"};
     TranspileResult transpileResult = transpile(args);
     assertEquals(0, transpileResult.exitCode);
-    assertLogContainsSnippet(transpileResult.outputLines, "<source files>");
+    assertLogContainsSnippet(transpileResult.outputLines, "<source files .java|.srcjar>");
     assertLogContainsSnippet(transpileResult.outputLines, "-bootclasspath <path>");
     assertLogContainsSnippet(transpileResult.outputLines, "-classpath (-cp) <path>");
     assertLogContainsSnippet(transpileResult.outputLines, "-d <file>");

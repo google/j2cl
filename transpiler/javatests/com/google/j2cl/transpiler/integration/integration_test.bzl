@@ -143,45 +143,49 @@ def integration_test(
   )
 
   # For constructing GWT transpiled output.
-  gwt_harness = """
-      package %s;
-      import com.google.gwt.core.client.EntryPoint;
-      public class MainEntryPoint implements EntryPoint {
-        @Override
-        public void onModuleLoad() {
-          Main.main(new String[] {});
+  srcjars = [src for src in srcs if ".srcjar" in src]
+  if not srcjars:
+    # Only provide a GWT target if there are no srcjars since gwt_module can't
+    # handle them directly.
+    gwt_harness = """
+        package %s;
+        import com.google.gwt.core.client.EntryPoint;
+        public class MainEntryPoint implements EntryPoint {
+          @Override
+          public void onModuleLoad() {
+            Main.main(new String[] {});
+          }
         }
-      }
-  """ % java_package
-  native.genrule(
-      name="gwt_harness_generator",
-      outs=["MainEntryPoint.java"],
-      cmd="echo \"%s\" > $@" % gwt_harness,
-      executable=1,
-  )
-  java_library_deps = [dep + "_java_library" for dep in deps]
-  native.gwt_module(
-      name="gwt_module",
-      srcs=srcs + ["MainEntryPoint.java"],
-      deps=java_library_deps,
-      entry_points=[java_package + ".MainEntryPoint"],
-      javacopts=[
-          "-source 8",
-          "-target 8"
-      ]
-  )
-  native.gwt_application(
-      name="readable_gwt_application",
-      compiler_opts=[
-          "-optimize 0",
-          "-style PRETTY",
-          "-setProperty user.agent=safari",
-          "-XjsInteropMode JS_RC",
-          "-ea",
-      ],
-      module_target=":gwt_module",
-      tags=["manual"],
-  )
+    """ % java_package
+    native.genrule(
+        name="gwt_harness_generator",
+        outs=["MainEntryPoint.java"],
+        cmd="echo \"%s\" > $@" % gwt_harness,
+        executable=1,
+    )
+    java_library_deps = [dep + "_java_library" for dep in deps]
+    native.gwt_module(
+        name="gwt_module",
+        srcs=srcs + ["MainEntryPoint.java"],
+        deps=java_library_deps,
+        entry_points=[java_package + ".MainEntryPoint"],
+        javacopts=[
+            "-source 8",
+            "-target 8"
+        ]
+    )
+    native.gwt_application(
+        name="readable_gwt_application",
+        compiler_opts=[
+            "-optimize 0",
+            "-style PRETTY",
+            "-setProperty user.agent=safari",
+            "-XjsInteropMode JS_RC",
+            "-ea",
+        ],
+        module_target=":gwt_module",
+        tags=["manual"],
+    )
 
   test_harness_defines = ""
   for def_name, value in closure_defines.items():

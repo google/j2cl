@@ -94,7 +94,7 @@ def _impl(ctx):
 """j2cl_transpile: A J2CL transpile rule.
 
 Args:
-  srcs: Java source files to compile.
+  srcs: Source files (.java or .srcjar) to compile.
   deps: Java jar files for reference resolution.
   native_srcs_zips: JS zip files providing Foo.native.js implementations.
 """
@@ -108,7 +108,7 @@ j2cl_transpile = rule(
         "deps": attr.label_list(allow_files=FileType([".jar"])),
         "srcs": attr.label_list(
             mandatory=True,
-            allow_files=FileType([".java"]),
+            allow_files=FileType([".java", ".srcjar"]),
         ),
         "native_srcs_zips": attr.label_list(
             allow_files=FileType([".zip"]),

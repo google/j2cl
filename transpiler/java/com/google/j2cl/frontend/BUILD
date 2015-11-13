@@ -10,6 +10,7 @@ java_library(
         "//java/com/google/common/annotations",
         "//java/com/google/common/base",
         "//java/com/google/common/collect",
+        "//java/com/google/common/io",
         "//third_party/java/apache_commons_lang3",
         "//third_party/java/args4j",
         "//third_party/java/eclipse:eclipse-jdt-core-4.4",

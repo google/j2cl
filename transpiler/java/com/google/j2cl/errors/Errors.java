@@ -35,6 +35,7 @@ public class Errors {
     ERR_CANNOT_GENERATE_OUTPUT("cannot generate output, please see Velocity runtime log"),
     ERR_CANNOT_FIND_UNIT("cannot find CompilationUnit for type "),
     ERR_OUTPUT_LOCATION("-output location must be a directory or .zip file"),
+    ERR_CANNOT_EXTRACT_ZIP("cannot extract zip"),
     ERR_CANNOT_OPEN_ZIP("cannot open zip"),
     ERR_CANNOT_CLOSE_ZIP("cannot close zip"),
     ERR_NATIVE_JAVA_SOURCE_NO_MATCH("cannot find matching native file"),

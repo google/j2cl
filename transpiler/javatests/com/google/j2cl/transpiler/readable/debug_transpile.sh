@@ -42,7 +42,7 @@ example_dir=$examples_dir$example_name
 
 # Accumulate java files in this example and subdirs
 example_files=""
-for java_file in $(find $example_dir -name '*.java') ; do
+for java_file in $(find $example_dir -name '*.java' -or -name "*.srcjar") ; do
   example_files="$example_files$java_file "
 done
 

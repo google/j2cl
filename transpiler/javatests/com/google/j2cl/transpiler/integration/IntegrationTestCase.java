@@ -90,8 +90,8 @@ public class IntegrationTestCase extends TestCase {
     argList.add(outputLocation.getAbsolutePath());
 
     // Input source
-    for (File javaFile : listJavaFilesInDir(testClass, inputDirectoryName)) {
-      argList.add(javaFile.getAbsolutePath());
+    for (File sourceFile : listSourceFilesInDir(testClass, inputDirectoryName)) {
+      argList.add(sourceFile.getAbsolutePath());
     }
 
     Collections.addAll(argList, extraArgs);
@@ -118,8 +118,11 @@ public class IntegrationTestCase extends TestCase {
             .listFiles());
   }
 
-  private static List<File> listJavaFilesInDir(Class<?> clazz, String directoryName) {
-    return listExtensionFilesInDir(".java", clazz, directoryName);
+  private static List<File> listSourceFilesInDir(Class<?> clazz, String directoryName) {
+    List<File> sourceFiles = new ArrayList<>();
+    sourceFiles.addAll(listExtensionFilesInDir(".java", clazz, directoryName));
+    sourceFiles.addAll(listExtensionFilesInDir(".srcjar", clazz, directoryName));
+    return sourceFiles;
   }
 
   protected TranspileResult transpileDirectory(

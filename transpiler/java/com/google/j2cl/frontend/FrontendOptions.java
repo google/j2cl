@@ -17,6 +17,7 @@ package com.google.j2cl.frontend;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.io.ZipFiles;
 import com.google.j2cl.errors.Errors;
 
 import java.io.File;
@@ -26,11 +27,15 @@ import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -55,7 +60,9 @@ public class FrontendOptions {
   private static final Set<String> VALID_JAVA_VERSIONS =
       ImmutableSet.of("1.8", "1.7", "1.6", "1.5");
 
-  private static final String ZIP_EXTENSION = "zip";
+  private static final String JAVA_EXTENSION = ".java";
+  private static final String SRCJAR_EXTENSION = ".srcjar";
+  private static final String ZIP_EXTENSION = ".zip";
 
   public FrontendOptions(Errors errors, FrontendFlags flags) {
     this.errors = errors;
@@ -198,8 +205,47 @@ public class FrontendOptions {
   }
 
   public void setSourceFiles(List<String> sourceFiles) {
-    if (checkJavaSourceFiles(sourceFiles)) {
-      this.sourceFilePaths = sourceFiles;
+    if (checkSourceFiles(sourceFiles)) {
+      this.sourceFilePaths = new ArrayList<>(sourceFiles);
+      accumulateSourceJarContents();
+    }
+  }
+
+  private void accumulateSourceJarContents() {
+    // Remove and isolate sourceJarPaths from sourceFilePaths.
+    List<String> sourceJarPaths = new ArrayList<>();
+    Iterator<String> sourceFilePathsIterator = sourceFilePaths.iterator();
+    while (sourceFilePathsIterator.hasNext()) {
+      String sourceFilePath = sourceFilePathsIterator.next();
+      if (sourceFilePath.endsWith(SRCJAR_EXTENSION)) {
+        sourceJarPaths.add(sourceFilePath);
+        sourceFilePathsIterator.remove();
+      }
+    }
+
+    // Extract sourceJars and accumulate their contained .java files back into sourceFilePaths.
+    for (String sourceJarPath : sourceJarPaths) {
+      try {
+        // Extract the sourceJar.
+        Path srcjarContentDir = Files.createTempDirectory(SRCJAR_EXTENSION);
+        ZipFiles.unzipFile(new File(sourceJarPath), srcjarContentDir.toFile());
+
+        // Accumulate the contained .java files back into sourceFilePaths.
+        Files.walkFileTree(
+            srcjarContentDir,
+            new SimpleFileVisitor<Path>() {
+              @Override
+              public FileVisitResult visitFile(Path path, BasicFileAttributes attrs)
+                  throws IOException {
+                if (path.toString().endsWith(JAVA_EXTENSION)) {
+                  sourceFilePaths.add(path.toAbsolutePath().toString());
+                }
+                return FileVisitResult.CONTINUE;
+              }
+            });
+      } catch (IOException e) {
+        errors.error(Errors.Error.ERR_CANNOT_EXTRACT_ZIP, sourceJarPath);
+      }
     }
   }
 
@@ -210,14 +256,14 @@ public class FrontendOptions {
   public void setOmitSourceFiles(String omitSourceFiles) {
     List<String> omitSourceFilePaths =
         Splitter.on(File.pathSeparator).omitEmptyStrings().splitToList(omitSourceFiles);
-    if (checkJavaSourceFiles(omitSourceFilePaths)) {
+    if (checkSourceFiles(omitSourceFilePaths)) {
       this.omitSourceFilePaths = omitSourceFilePaths;
     }
   }
 
-  private boolean checkJavaSourceFiles(List<String> sourceFiles) {
+  private boolean checkSourceFiles(List<String> sourceFiles) {
     for (String sourceFile : sourceFiles) {
-      if (sourceFile.endsWith(".java")) {
+      if (sourceFile.endsWith(JAVA_EXTENSION) || sourceFile.endsWith(SRCJAR_EXTENSION)) {
         File file = new File(sourceFile);
         if (!file.exists()) {
           errors.error(Errors.Error.ERR_FILE_NOT_FOUND, sourceFile);
