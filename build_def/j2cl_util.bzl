@@ -33,3 +33,10 @@ def get_java_root(pkg_name):
 def get_java_package(pkg_name):
   """Extract the java package from the build package"""
   return pkg_name[len(get_java_root(pkg_name)):].replace("/", ".")
+
+
+def get_or_default(key, map, default):
+  """Returns the value for the provided key if present otherwise default"""
+  if key in map:
+    return map[key]
+  return default

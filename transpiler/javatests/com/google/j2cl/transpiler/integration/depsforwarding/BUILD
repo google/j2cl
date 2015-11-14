@@ -15,5 +15,5 @@ load(
 integration_test(
     name = "depsforwarding",
     srcs = ["Main.java"],
-    deps = ["//transpiler/javatests/com/google/j2cl/transpiler/integration/depsforwarding/forwarder:forwarder_lib"],
+    deps = ["//transpiler/javatests/com/google/j2cl/transpiler/integration/depsforwarding/forwarder"],
 )
