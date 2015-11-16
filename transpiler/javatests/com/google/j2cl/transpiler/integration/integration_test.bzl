@@ -33,7 +33,7 @@ _CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
 
 
 def integration_test(
-    name, srcs, deps=[], defs=[], native_srcs=[], native_srcs_pkg=None,
+    name, srcs=[], deps=[], defs=[], native_srcs=[], native_srcs_pkg=None,
     js_deps=[], closure_defines=dict()):
   """Macro that turns Java files into integration test targets.
 
@@ -55,17 +55,20 @@ def integration_test(
     define_flags.append("--define={0}={1}".format(def_name, value))
   defs = defs + define_flags
 
-  # translate Java to JS
-  j2cl_library(
-      name=name,
-      srcs=srcs,
-      deps=deps,
-      javacopts=[
-          "-source 8",
-          "-target 8"
-      ],
-      native_srcs=native_srcs,
-      native_srcs_pkg=native_srcs_pkg,
+  srcs_lib_dep = []
+  if srcs:
+    srcs_lib_dep = [":" + name]
+    # translate Java to JS
+    j2cl_library(
+        name=name,
+        srcs=srcs,
+        deps=deps,
+        javacopts=[
+            "-source 8",
+            "-target 8"
+        ],
+        native_srcs=native_srcs,
+        native_srcs_pkg=native_srcs_pkg,
   )
 
   # blaze build :optimized_js
@@ -101,7 +104,7 @@ def integration_test(
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
-      deps=js_deps + [":" + name],
+      deps=js_deps + srcs_lib_dep,
   )
   # For constructing readable optimized diffs.
   native.js_binary(
@@ -127,7 +130,7 @@ def integration_test(
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
-      deps=js_deps + [":" + name],
+      deps=js_deps + srcs_lib_dep,
   )
   # For constructing readable unoptimized diffs.
   native.js_binary(
@@ -145,12 +148,12 @@ def integration_test(
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
-      deps=js_deps + [":" + name],
+      deps=js_deps + srcs_lib_dep,
   )
 
   # For constructing GWT transpiled output.
   srcjars = [src for src in srcs if ".srcjar" in src]
-  if not srcjars:
+  if srcs and not srcjars:
     # Only provide a GWT target if there are no srcjars since gwt_module can't
     # handle them directly.
     gwt_harness = """

@@ -14,21 +14,6 @@ licenses(["unencumbered"])
 load("/third_party/java_src/j2cl/build_def/j2cl_source_copy", "j2cl_source_copy")
 load("/third_party/java_src/j2cl/build_def/jsni_to_j2cl_converter", "jsni_to_j2cl_converter")
 
-# TODO: implement something like j2cl_library("foo", exports="//other:foo")
-# Forwards the gwt-jsinterop-annotations target with the Java suffix that
-# j2cl_library() expects.
-java_library(
-    name = "gwt-jsinterop-annotations_java_library",
-    constraints = ["android"],
-    exports = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
-)
-
-# Services the gwt-jsinterop-annotations target with the JS suffix that
-# j2cl_library() expects.
-js_library(
-    name = "gwt-jsinterop-annotations",
-)
-
 j2cl_source_copy(
     name = "emul_dev",
     srcs = ["//third_party/java_src/gwt/svn/trunk/dev:emul"],
