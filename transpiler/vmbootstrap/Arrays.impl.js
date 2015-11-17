@@ -36,6 +36,24 @@ class Arrays {
    * @public
    */
   static $create(dimensionLengths, leafType) {
+    return Arrays.$createInternal(
+        dimensionLengths, leafType, leafType.$isInstance,
+        leafType.$isAssignableFrom, leafType.$getClass,
+        leafType.$initialArrayValue);
+  }
+
+  /**
+   * @param {Array<number>} dimensionLengths
+   * @param {*} leafType
+   * @param {Function} leafTypeIsInstance
+   * @param {Function} leafTypeIsAssignableFrom
+   * @param {Function} leafTypeGetClass
+   * @return {Array<*>}
+   * @private
+   */
+  static $createInternal(
+      dimensionLengths, leafType, leafTypeIsInstance, leafTypeIsAssignableFrom,
+      leafTypeGetClass, leafTypeInitialValue) {
     let length = dimensionLengths[0];
     if (length == null) {
       return null;
@@ -43,29 +61,26 @@ class Arrays {
 
     let array = new Array;
     array.leafType = leafType;
+    array.leafTypeIsInstance = leafTypeIsInstance;
+    array.leafTypeIsAssignableFrom = leafTypeIsAssignableFrom;
+    array.leafTypeGetClass = leafTypeGetClass;
     array.dimensionCount = dimensionLengths.length;
-
-    array.$getClass = function() {
-      if (!array.$class) {
-        array.$class = leafType.$getClass().$forArray(array.dimensionCount);
-      }
-      return array.$class;
-    };
-
     array.length = length;
+
     if (array.dimensionCount > 1) {
       // Contains sub arrays.
       let subDimensionLengths = dimensionLengths.slice(1);
       for (let i = 0; i < length; i++) {
-        array[i] = Arrays.$create(subDimensionLengths, leafType);
+        array[i] = Arrays.$createInternal(
+            subDimensionLengths, leafType, leafTypeIsInstance,
+            leafTypeIsAssignableFrom, leafTypeGetClass, leafTypeInitialValue);
       }
     } else {
       // Contains leaf type values.
-      if (leafType.$initialArrayValue !== undefined) {
+      if (leafTypeInitialValue !== undefined) {
         // Replace with Array.fill() when there is broad browser support.
-        let initialValue = leafType.$initialArrayValue;
         for (let index = 0; index < length; index++) {
-          array[index] = initialValue;
+          array[index] = leafTypeInitialValue;
         }
       } else {
         // Object leaf types don't need a defined initial value because the
@@ -95,30 +110,29 @@ class Arrays {
    * @public
    */
   static $init(array, leafType, opt_dimensionCount) {
-    opt_dimensionCount = opt_dimensionCount || 1;
-    Arrays.$initRecursive(array, leafType, opt_dimensionCount);
-    return array;
+    return Arrays.$initRecursiveInternal(
+        array, leafType, leafType.$getClass, leafType.$isInstance,
+        leafType.$isAssignableFrom, opt_dimensionCount || 1);
   }
 
   /**
-   * Recursively marks the given array and any contained arrays with known
-   * dimensions and leafType.
-   *
    * @param {Array<*>} array
    * @param {*} leafType
+   * @param {Function} leafTypeGetClass
+   * @param {Function} leafTypeIsInstance
+   * @param {Function} leafTypeIsAssignableFrom
    * @param {number} dimensionCount
+   * @return {Array<*>}
    * @private
    */
-  static $initRecursive(array, leafType, dimensionCount) {
+  static $initRecursiveInternal(
+      array, leafType, leafTypeGetClass, leafTypeIsInstance,
+      leafTypeIsAssignableFrom, dimensionCount) {
     array.leafType = leafType;
+    array.leafTypeIsInstance = leafTypeIsInstance;
+    array.leafTypeIsAssignableFrom = leafTypeIsAssignableFrom;
+    array.leafTypeGetClass = leafTypeGetClass;
     array.dimensionCount = dimensionCount;
-
-    array.$getClass = function() {
-      if (!array.$class) {
-        array.$class = leafType.$getClass().$forArray(array.dimensionCount);
-      }
-      return array.$class;
-    };
 
     // Length is not set since the provided array already contain values and
     // knows its own length.
@@ -128,11 +142,13 @@ class Arrays {
         if (nestedArray == null) {
           continue;
         }
-        Arrays.$initRecursive(
-            /** @type {Array<*>} */ (nestedArray), leafType,
-            dimensionCount - 1);
+        Arrays.$initRecursiveInternal(
+            /** @type {Array<*>} */ (nestedArray), leafType, leafTypeGetClass,
+            leafTypeIsInstance, leafTypeIsAssignableFrom, dimensionCount - 1);
       }
     }
+
+    return array;
   }
 
   /**
@@ -160,15 +176,16 @@ class Arrays {
     if (ARRAY_CHECK_TYPES_) {
       // Only check when the array has a known leaf type. JS native arrays won't
       // have it.
-      if (array.leafType != null) {
+      if (array.leafTypeIsInstance != null) {
         if (array.dimensionCount > 1) {
-          if (!Arrays.$instanceIsOfType(
-                  value, array.leafType, array.dimensionCount - 1)) {
+          if (!Arrays.$instanceIsOfTypeInternal(
+                  value, array.leafType, array.leafTypeIsAssignableFrom,
+                  array.dimensionCount - 1)) {
             // The inserted array must fit dimensions and the array leaf
             // type.
             Arrays.$throwArrayStoreException();
           }
-        } else if (value != null && !array.leafType.$isInstance(value)) {
+        } else if (value != null && !array.leafTypeIsInstance(value)) {
           // The inserted value must fit the array leaf type.
           // If leafType is not a primitive type, a 'null' should always be a
           // legal value. If leafType is a primitive type, value cannot be null
@@ -190,8 +207,10 @@ class Arrays {
    */
   static $stampType(array, otherArray) {
     array.leafType = otherArray.leafType;
+    array.leafTypeIsInstance = otherArray.leafTypeIsInstance;
+    array.leafTypeIsAssignableFrom = otherArray.leafTypeIsAssignableFrom;
+    array.leafTypeGetClass = otherArray.leafTypeGetClass;
     array.dimensionCount = otherArray.dimensionCount;
-    array.$getClass = otherArray.$getClass;
   }
 
   /**
@@ -207,6 +226,22 @@ class Arrays {
    * @nocollapse
    */
   static $instanceIsOfType(instance, requiredLeafType, requiredDimensionCount) {
+    return Arrays.$instanceIsOfTypeInternal(
+        instance, requiredLeafType, requiredLeafType.$isAssignableFrom,
+        requiredDimensionCount);
+  }
+
+  /**
+   * @param {*} instance
+   * @param {*} requiredLeafType
+   * @param {Function} requiredLeafTypeIsAssignableFrom
+   * @param {number} requiredDimensionCount
+   * @return {boolean}
+   * @private
+   */
+  static $instanceIsOfTypeInternal(
+      instance, requiredLeafType, requiredLeafTypeIsAssignableFrom,
+      requiredDimensionCount) {
     Arrays.$clinit();
     if (instance == null || !Array.isArray(instance)) {
       // Null or not an Array can't cast.
@@ -219,7 +254,7 @@ class Arrays {
 
     if (effectiveInstanceDimensionCount == requiredDimensionCount) {
       // If dimensions are equal then the leaftypes must be castable.
-      return requiredLeafType.$isAssignableFrom(instance.leafType);
+      return requiredLeafTypeIsAssignableFrom(instance.leafType);
     }
     if (effectiveInstanceDimensionCount > requiredDimensionCount) {
       // If shrinking the dimensions then the new leaf type must *be* Object.
@@ -241,13 +276,30 @@ class Arrays {
    * @public
    */
   static $castTo(instance, requiredLeafType, requiredDimensionCount) {
+    return Arrays.$castToInternal(
+        instance, requiredLeafType, requiredLeafType.$isAssignableFrom,
+        requiredDimensionCount);
+  }
+
+  /**
+   * @param {*} instance
+   * @param {*} requiredLeafType
+   * @param {number} requiredDimensionCount
+   * @return {*}
+   * @public
+   */
+  static $castToInternal(
+      instance, requiredLeafType, requiredLeafTypeIsAssignableFrom,
+      requiredDimensionCount) {
     Arrays.$clinit();
     if (instance == null) {
       return instance;
     }
     return Casts.check(
-        instance, Arrays.$instanceIsOfType(
-                      instance, requiredLeafType, requiredDimensionCount));
+        instance,
+        Arrays.$instanceIsOfTypeInternal(
+            instance, requiredLeafType, requiredLeafTypeIsAssignableFrom,
+            requiredDimensionCount));
   }
 
   /**
@@ -287,10 +339,10 @@ class Arrays {
    */
   static m_getClass__java_lang_Object(obj) {
     Arrays.$clinit();
-    if (obj.$getClass) {
-      return obj.$getClass();
+    if (obj.leafTypeGetClass) {
+      return obj.leafTypeGetClass().$forArray(obj.dimensionCount || 1);
     }
-    // Uninitialized arrays lack a .$getClass() method but are implicitly
+    // Uninitialized arrays lack a 'leafTypeGetClass' method but are implicitly
     // Object[].
     return Object.$getClass().$forArray(1);
   }
