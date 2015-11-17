@@ -29,7 +29,6 @@ class Enums {
     Enums.$clinit();
     if (name == null) {
       throw IllegalArgumentException.$create();
-      return null;
     }
     let enumValue = map[name];
     if (enumValue == undefined) {
