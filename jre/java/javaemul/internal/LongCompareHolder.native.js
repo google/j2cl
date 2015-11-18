@@ -23,5 +23,6 @@ let LongUtils = goog.require('vmbootstrap.LongUtils$impl');
  * @public
  */
 LongCompareHolder.m_getLongComparator = function() {
+  LongCompareHolder.$clinit();
   return LongUtils.$compare;
 };

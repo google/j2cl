@@ -25,6 +25,7 @@
  */
 ArrayStamper.m_stampJavaTypeInfo__java_lang_Object__arrayOf_java_lang_Object =
     function(array, referenceType) {
+  ArrayStamper.$clinit();
   var cast_array = /** @type {Array<*>} */ (array);
   $Arrays.$stampType(cast_array, referenceType);
   return cast_array;

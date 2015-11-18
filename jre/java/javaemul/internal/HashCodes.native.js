@@ -21,5 +21,6 @@ let Hashing = goog.require('nativebootstrap.Hashing$impl');
    * @public
    */
 HashCodes.m_getObjectIdentityHashCode__java_lang_Object = function(o) {
+  HashCodes.$clinit();
   return Hashing.$getHashCode(o);
 };
