@@ -48,6 +48,7 @@ public class DevirtualizeMethodCallsVisitor extends AbstractRewriter {
     MethodDescriptor targetMethodDescriptor = methodCall.getTarget();
     if (targetMethodDescriptor.isStatic()
         || targetMethodDescriptor.isConstructor()
+        || targetMethodDescriptor.isJsProperty() // never devirtualize JsProperty method.
         || targetMethodDescriptor.isInit()) { // do not devirtualize the synthesized $init method.
       return methodCall;
     }

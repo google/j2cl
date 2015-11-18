@@ -152,7 +152,8 @@ public class InsertUnderflowOverflowConversionVisitor extends ConversionContextV
             Lists.newArrayList(fromTypeDescriptor),
             toTypeDescriptor,
             null,
-            null);
+            null,
+            false);
     // Primitives.$toA(expr);
     return MethodCall.createRegularMethodCall(null, overflowMethodDescriptor, expression);
   }

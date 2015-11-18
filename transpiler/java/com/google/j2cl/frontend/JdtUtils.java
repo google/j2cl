@@ -51,7 +51,6 @@ import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
-import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
@@ -151,8 +150,8 @@ public class JdtUtils {
             : methodBinding.getName();
     boolean isRaw = false;
 
-    IAnnotationBinding jsMethodAnnotation = JsInteropUtils.getJsMethodAnnotation(methodBinding);
-    String jsMethodNamespace = JsInteropUtils.getJsNamespace(jsMethodAnnotation);
+    boolean isJsProperty = JsInteropUtils.isJsProperty(methodBinding);
+    String jsMethodNamespace = getJsMethodNamespace(methodBinding);
     // direct JsMethod and its overriding methods are emit with non-mangled name.
     String jsMethodName = getJsMethodName(methodBinding);
     isRaw = isOrOverridesJsMethod(methodBinding);
@@ -199,7 +198,8 @@ public class JdtUtils {
         parameterTypeDescriptors,
         typeParameterDescriptors,
         jsMethodNamespace,
-        jsMethodName);
+        jsMethodName,
+        isJsProperty);
   }
 
   static Variable createVariable(IVariableBinding variableBinding) {
@@ -641,10 +641,23 @@ public class JdtUtils {
     if (JsInteropUtils.isJsMethod(methodBinding)) {
       return JsInteropUtils.getJsName(JsInteropUtils.getJsMethodAnnotation(methodBinding));
     }
+    if (JsInteropUtils.isJsProperty(methodBinding)) {
+      return JsInteropUtils.getJsName(JsInteropUtils.getJsPropertyAnnotation(methodBinding));
+    }
     Set<IMethodBinding> overriddenJsMethods = getOverriddenJsMethods(methodBinding);
     return overriddenJsMethods.isEmpty()
         ? null
         : getJsMethodName(overriddenJsMethods.iterator().next());
+  }
+
+  static String getJsMethodNamespace(IMethodBinding methodBinding) {
+    if (JsInteropUtils.isJsMethod(methodBinding)) {
+      return JsInteropUtils.getJsNamespace(JsInteropUtils.getJsMethodAnnotation(methodBinding));
+    }
+    if (JsInteropUtils.isJsProperty(methodBinding)) {
+      return JsInteropUtils.getJsNamespace(JsInteropUtils.getJsPropertyAnnotation(methodBinding));
+    }
+    return null;
   }
 
   static Set<IMethodBinding> getOverriddenJsMethods(IMethodBinding methodBinding) {

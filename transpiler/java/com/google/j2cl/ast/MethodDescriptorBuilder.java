@@ -33,6 +33,7 @@ public class MethodDescriptorBuilder {
   private ImmutableList<TypeDescriptor> typeParameterDescriptors;
   private String jsMethodName;
   private String jsMethodNamespace;
+  private boolean isJsProperty;
 
   public static MethodDescriptorBuilder from(MethodDescriptor methodDescriptor) {
     MethodDescriptorBuilder builder = new MethodDescriptorBuilder();
@@ -48,6 +49,7 @@ public class MethodDescriptorBuilder {
     builder.typeParameterDescriptors = methodDescriptor.getTypeParameterTypeDescriptors();
     builder.jsMethodName = methodDescriptor.getJsMethodName();
     builder.jsMethodNamespace = methodDescriptor.getJsMethodNamespace();
+    builder.isJsProperty = methodDescriptor.isJsProperty();
     return builder;
   }
 
@@ -101,6 +103,7 @@ public class MethodDescriptorBuilder {
         parameterTypeDescriptors,
         typeParameterDescriptors,
         jsMethodNamespace,
-        jsMethodName);
+        jsMethodName,
+        isJsProperty);
   }
 }

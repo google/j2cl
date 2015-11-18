@@ -1,11 +1,6 @@
-#if ($method.isNative() && ${method.getDescriptor().hasJsMethodNamespace()})
+#if (${GeneratorUtils.shouldNotEmitCode($method)})
 #else
-#if(${method.Descriptor.isStatic()})
-#set ($staticModifier = "static ")
-#else
-#set ($staticModifier = "")
-#end
-#set ($parameterList = $GeneratorUtils.getParameterList($method, $statementSourceGenerator))
+#set ($methodHeader = $GeneratorUtils.getMethodHeader($method, $statementSourceGenerator))
   /**
 #if ($method.isSynthetic())
    * Synthetic method.
@@ -33,9 +28,9 @@
 #end
    */
 #if ($method.isNative())
-  // native $staticModifier${ManglingNameUtils.getMangledName($method.Descriptor)}($parameterList)
+  // native $methodHeader
 #else
-  $staticModifier${ManglingNameUtils.getMangledName($method.Descriptor)}($parameterList)
+  $methodHeader
   ${statementSourceGenerator.toSource($method.Body)}
 #end
 #end

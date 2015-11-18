@@ -50,7 +50,9 @@ public class CreateDevirtualizedStaticMethodsVisitor extends AbstractRewriter {
 
   @Override
   public Node rewriteMethod(Method method) {
-    if (method.getDescriptor().isStatic() || method.isConstructor()) {
+    if (method.getDescriptor().isStatic()
+        || method.isConstructor()
+        || method.getDescriptor().isJsProperty()) { // never devirtualize JsProperty method.
       return method;
     }
     Variable thisArg = new Variable("$thisArg", getCurrentJavaType().getDescriptor(), false, true);

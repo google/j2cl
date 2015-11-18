@@ -82,7 +82,8 @@ public class AstUtils {
             TypeDescriptors.get().javaLangObject), // parameterTypeDescriptors
         new ArrayList<>(),
         null,
-        null);
+        null,
+        false);
   }
 
   /**
@@ -103,7 +104,8 @@ public class AstUtils {
             TypeDescriptors.get().javaLangObject), // parameterTypeDescriptors
         new ArrayList<>(),
         null,
-        null);
+        null,
+        false);
   }
 
   /**
@@ -315,7 +317,8 @@ public class AstUtils {
         innerclassConstructorDescriptor.getParameterTypeDescriptors(),
         typeParameterDescriptors,
         null,
-        null);
+        null,
+        false);
   }
 
   /**

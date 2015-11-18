@@ -99,7 +99,8 @@ public class InsertNarrowingPrimitiveConversionVisitor extends ConversionContext
                     Lists.newArrayList(fromTypeDescriptor),
                     toTypeDescriptor,
                     null,
-                    null);
+                    null,
+                    false);
             // Primitives.$narrowAToB(expr);
             return MethodCall.createRegularMethodCall(null, narrowMethodDescriptor, expression);
           }

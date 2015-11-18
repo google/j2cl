@@ -25,6 +25,7 @@ import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.Method;
+import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
@@ -66,6 +67,24 @@ public class GeneratorUtils {
     return outputLocationPath != null
         ? outputFileSystem.getPath(outputLocationPath, relativeFilePath + suffix)
         : outputFileSystem.getPath(relativeFilePath + suffix);
+  }
+
+  /**
+   * Returns the method header including (static) (getter/setter) methodName(parametersList).
+   */
+  public static String getMethodHeader(
+      Method method, StatementSourceGenerator statementSourceGenerator) {
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+    String staticQualifier = methodDescriptor.isStatic() ? "static" : null;
+    String getterSetterPrefix =
+        methodDescriptor.isJsPropertyGetter()
+            ? "get"
+            : methodDescriptor.isJsPropertySetter() ? "set" : null;
+    String methodName = ManglingNameUtils.getMangledName(methodDescriptor);
+    String parameterList = getParameterList(method, statementSourceGenerator);
+    return Joiner.on(" ")
+        .skipNulls()
+        .join(staticQualifier, getterSetterPrefix, methodName + "(" + parameterList + ")");
   }
 
   public static String getParameterList(
@@ -155,6 +174,15 @@ public class GeneratorUtils {
         || type.getDescriptor().isParameterizedType()
         || (type.getSuperTypeDescriptor() != null
             && type.getSuperTypeDescriptor().isParameterizedType());
+  }
+
+  /**
+   * If the method is a native method with a different namespace than the current class, or it is a
+   * native JsProperty method, no need to output any code for it.
+   */
+  public static boolean shouldNotEmitCode(Method method) {
+    return method.isNative()
+        && (method.getDescriptor().isJsProperty() || method.getDescriptor().hasJsMethodNamespace());
   }
 
   // Returns if it is java type that is unboxed as Javascript primitive types.

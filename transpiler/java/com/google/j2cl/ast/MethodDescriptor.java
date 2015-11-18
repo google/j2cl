@@ -56,7 +56,8 @@ public abstract class MethodDescriptor extends Node implements Member {
       Iterable<TypeDescriptor> parameterTypeDescriptors,
       Iterable<TypeDescriptor> typeParameterTypeDescriptors,
       String jsMethodNamespace,
-      String jsMethodName) {
+      String jsMethodName,
+      boolean isJsProperty) {
     return getInterner()
         .intern(
             new AutoValue_MethodDescriptor(
@@ -71,7 +72,8 @@ public abstract class MethodDescriptor extends Node implements Member {
                 returnTypeDescriptor,
                 ImmutableList.copyOf(typeParameterTypeDescriptors),
                 jsMethodNamespace,
-                jsMethodName));
+                jsMethodName,
+                isJsProperty));
   }
 
   public static MethodDescriptor create(
@@ -95,7 +97,8 @@ public abstract class MethodDescriptor extends Node implements Member {
         parameterTypeDescriptors,
         ImmutableList.<TypeDescriptor>of(),
         null, // non-raw method has no jsmethod namespace nor jsmethod name.
-        null);
+        null,
+        false);
   }
 
   public static MethodDescriptor create(
@@ -129,7 +132,8 @@ public abstract class MethodDescriptor extends Node implements Member {
       List<TypeDescriptor> parameterTypeDescriptors,
       TypeDescriptor returnTypeDescriptor,
       String jsMethodNamespace,
-      String jsMethodName) {
+      String jsMethodName,
+      boolean isJsProperty) {
     return create(
         isStatic,
         true,
@@ -142,7 +146,8 @@ public abstract class MethodDescriptor extends Node implements Member {
         parameterTypeDescriptors,
         ImmutableList.<TypeDescriptor>of(),
         jsMethodNamespace,
-        jsMethodName);
+        jsMethodName,
+        isJsProperty);
   }
 
   static Interner<MethodDescriptor> getInterner() {
@@ -187,12 +192,22 @@ public abstract class MethodDescriptor extends Node implements Member {
   @Nullable
   public abstract String getJsMethodName();
 
+  public abstract boolean isJsProperty();
+
   public boolean isInit() {
     return getMethodName().equals(INIT_METHOD_NAME);
   }
 
   public boolean hasJsMethodNamespace() {
     return getJsMethodNamespace() != null;
+  }
+
+  public boolean isJsPropertyGetter() {
+    return isJsProperty() && getParameterTypeDescriptors().isEmpty();
+  }
+
+  public boolean isJsPropertySetter() {
+    return isJsProperty() && getParameterTypeDescriptors().size() == 1;
   }
 
   @Override

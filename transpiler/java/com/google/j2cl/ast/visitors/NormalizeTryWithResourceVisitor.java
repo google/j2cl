@@ -121,7 +121,8 @@ public class NormalizeTryWithResourceVisitor extends AbstractRewriter {
                 TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangThrowable),
             TypeDescriptors.get().javaLangThrowable,
             null,
-            null);
+            null,
+            false);
     List<Statement> outputStatements = new ArrayList<>();
 
     Variable primaryException =

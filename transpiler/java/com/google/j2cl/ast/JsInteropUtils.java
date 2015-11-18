@@ -29,6 +29,7 @@ import org.eclipse.jdt.core.dom.Modifier;
  */
 public class JsInteropUtils {
   private static final String JS_METHOD_ANNOTATION_NAME = "jsinterop.annotations.JsMethod";
+  private static final String JS_PROPERTY_ANNOTATION_NAME = "jsinterop.annotations.JsProperty";
   private static final String JS_TYPE_ANNOTATION_NAME = "jsinterop.annotations.JsType";
 
   public static IAnnotationBinding getJsTypeAnnotation(ITypeBinding typeBinding) {
@@ -39,6 +40,11 @@ public class JsInteropUtils {
   public static IAnnotationBinding getJsMethodAnnotation(IMethodBinding methodBinding) {
     return JdtAnnotationUtils.findAnnotationBindingByName(
         methodBinding.getAnnotations(), JS_METHOD_ANNOTATION_NAME);
+  }
+
+  public static IAnnotationBinding getJsPropertyAnnotation(IMethodBinding methodBinding) {
+    return JdtAnnotationUtils.findAnnotationBindingByName(
+        methodBinding.getAnnotations(), JS_PROPERTY_ANNOTATION_NAME);
   }
 
   public static boolean isNative(IAnnotationBinding annotationBinding) {
@@ -61,6 +67,10 @@ public class JsInteropUtils {
     // public methods in JsType annotated class are JsMethod.
     IAnnotationBinding jsTypeAnnotation = getJsTypeAnnotation(methodBinding.getDeclaringClass());
     return jsTypeAnnotation != null && Modifier.isPublic(methodBinding.getModifiers());
+  }
+
+  public static boolean isJsProperty(IMethodBinding methodBinding) {
+    return getJsPropertyAnnotation(methodBinding) != null;
   }
 
   public static boolean isJsProperty(IVariableBinding variableBinding) {

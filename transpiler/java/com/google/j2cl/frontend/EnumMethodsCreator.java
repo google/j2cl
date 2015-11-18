@@ -112,7 +112,8 @@ public class EnumMethodsCreator {
             Arrays.asList(enumType.getDescriptor()),
             namesToValuesMapFieldDescriptor.getTypeDescriptor(),
             null,
-            null);
+            null,
+            false);
     MethodDescriptor getMethodDescriptor =
         MethodDescriptor.createRaw(
             true,
@@ -124,7 +125,8 @@ public class EnumMethodsCreator {
                 namesToValuesMapFieldDescriptor.getTypeDescriptor()),
             enumType.getDescriptor(),
             null,
-            null);
+            null,
+            false);
 
     Expression nameParameterAccess = nameParameter.getReference();
     Expression namesToValuesMapFieldAccess =

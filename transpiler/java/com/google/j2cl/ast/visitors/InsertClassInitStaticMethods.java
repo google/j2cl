@@ -51,7 +51,8 @@ public class InsertClassInitStaticMethods {
                 new ArrayList<TypeDescriptor>(),
                 TypeDescriptors.get().primitiveVoid,
                 null,
-                null);
+                null,
+                false);
         MethodCall call =
             MethodCall.createRegularMethodCall(null, clinitDescriptor, new ArrayList<Expression>());
         return MethodBuilder.from(node).statement(0, new ExpressionStatement(call)).build();

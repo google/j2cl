@@ -277,6 +277,8 @@ public class StatementSourceGenerator {
       public String transformMethodCall(MethodCall expression) {
         if (expression.isPrototypeCall()) {
           return transformPrototypeCall(expression);
+        } else if (expression.getTarget().isJsProperty()) {
+          return transformJsPropertyCall(expression);
         } else {
           return transformRegularMethodCall(expression);
         }
@@ -293,6 +295,44 @@ public class StatementSourceGenerator {
                 .join(
                     Iterables.concat(
                         Arrays.asList(toSource(expression.getQualifier())), argumentSources)));
+      }
+
+      private String transformJsPropertyCall(MethodCall expression) {
+        if (expression.getTarget().isJsPropertyGetter()) {
+          return transformJsPropertyGetter(expression);
+        } else {
+          return transformJsPropertySetter(expression);
+        }
+      }
+
+      /**
+       * JsProperty getter is emitted as property access: qualifier.property.
+       */
+      private String transformJsPropertyGetter(MethodCall expression) {
+        MethodDescriptor methodDescriptor = expression.getTarget();
+        String qualifier =
+            methodDescriptor.getJsMethodNamespace() != null
+                ? methodDescriptor.getJsMethodNamespace()
+                : toSource(expression.getQualifier());
+        String propertyName = ManglingNameUtils.getJsPropertyName(methodDescriptor);
+        return Joiner.on(".").skipNulls().join(Strings.emptyToNull(qualifier), propertyName);
+      }
+
+      /**
+       * JsProperty setter is emitted as property set: qualifier.property = argument.
+       */
+      private String transformJsPropertySetter(MethodCall expression) {
+        MethodDescriptor methodDescriptor = expression.getTarget();
+        String qualifier =
+            methodDescriptor.getJsMethodNamespace() != null
+                ? methodDescriptor.getJsMethodNamespace()
+                : toSource(expression.getQualifier());
+        String propertyName = ManglingNameUtils.getJsPropertyName(methodDescriptor);
+        Preconditions.checkArgument(expression.getArguments().size() == 1);
+        return String.format(
+            "%s = %s",
+            Joiner.on(".").skipNulls().join(Strings.emptyToNull(qualifier), propertyName),
+            toSource(expression.getArguments().get(0)));
       }
 
       private String transformRegularMethodCall(MethodCall expression) {
@@ -769,10 +809,6 @@ public class StatementSourceGenerator {
 
       private String longsTypeAlias() {
         return toSource(BootstrapType.LONGS.getDescriptor());
-      }
-
-      private boolean isInClinit(TypeDescriptor typeDescriptor) {
-        return typeDescriptor.equals(inClinitForTypeDescriptor);
       }
     }
     return new ToSourceTransformer().process(node);

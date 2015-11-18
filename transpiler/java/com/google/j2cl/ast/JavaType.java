@@ -95,7 +95,8 @@ public class JavaType extends Node {
 
   public boolean containsNativeMethods() {
     for (Method method : methods) {
-      if (method.isNative()) {
+      // Do not ask for *.native.js files for native JsProperty method.
+      if (method.isNative() && !method.getDescriptor().isJsProperty()) {
         return true;
       }
     }

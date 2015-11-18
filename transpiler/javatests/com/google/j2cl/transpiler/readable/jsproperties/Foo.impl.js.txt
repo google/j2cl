@@ -1,0 +1,163 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsproperties.Foo.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.jsproperties.Foo$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class Foo extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsproperties_Foo() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Foo}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    Foo.$clinit();
+    let instance = new Foo;
+    instance.$ctor__com_google_j2cl_transpiler_readable_jsproperties_Foo();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsproperties_Foo() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_jsproperties_Foo();
+  }
+
+  /**
+   * @return {number}
+   * @public
+   * @nocollapse
+   */
+  static get a() {
+    Foo.$clinit();
+    return Foo.f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ + 1;
+  }
+
+  /**
+   * @param {number} x
+   * @return {void}
+   * @public
+   * @nocollapse
+   */
+  static set a(x) {
+    Foo.$clinit();
+    Foo.f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = x + 2;
+  }
+
+  /**
+   * @return {number}
+   * @public
+   * @nocollapse
+   */
+  static get abc() {
+    Foo.$clinit();
+    return Foo.f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ + 3;
+  }
+
+  /**
+   * @param {number} x
+   * @return {void}
+   * @public
+   * @nocollapse
+   */
+  static set abc(x) {
+    Foo.$clinit();
+    Foo.f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = x + 4;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof Foo; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Foo);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    Foo.$clinit();
+    if (!Foo.$classFoo_) {
+      Foo.$classFoo_ = Class.$createForClass(
+          $Util.$generateId('Foo'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsproperties.Foo'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsproperties.Foo'));
+    }
+    return Foo.$classFoo_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * @public {number}
+ */
+Foo.f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = 0;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Foo.$classFoo_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = Foo;

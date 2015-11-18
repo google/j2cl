@@ -181,7 +181,8 @@ public class AddClassInitAtCallSite {
             new ArrayList<TypeDescriptor>(),
             TypeDescriptors.get().primitiveVoid,
             null,
-            null);
+            null,
+            false);
     MethodCall clinitCall =
         MethodCall.createRegularMethodCall(
             null, clinitMethodDescriptor, new ArrayList<Expression>());

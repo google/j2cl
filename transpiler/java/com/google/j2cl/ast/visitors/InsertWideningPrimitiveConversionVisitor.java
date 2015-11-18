@@ -131,7 +131,8 @@ public class InsertWideningPrimitiveConversionVisitor extends ConversionContextV
             Lists.newArrayList(fromTypeDescriptor),
             toTypeDescriptor,
             null,
-            null);
+            null,
+            false);
     // Primitives.$widenAToB(expr);
     return MethodCall.createRegularMethodCall(null, widenMethodDescriptor, subjectExpression);
   }

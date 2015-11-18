@@ -80,7 +80,8 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
                 TypeDescriptors.get().javaLangObject, TypeDescriptors.get().primitiveBoolean),
             castTypeDescriptor,
             null,
-            null);
+            null,
+            false);
     List<Expression> arguments = new ArrayList<>();
     arguments.add(expression);
     arguments.add(castTypeDescriptor.getRawTypeDescriptor());
@@ -110,7 +111,8 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
                 TypeDescriptors.get().primitiveInt),
             arrayCastTypeDescriptor,
             null,
-            null);
+            null,
+            false);
     List<Expression> arguments = new ArrayList<>();
     arguments.add(castExpression.getExpression());
     arguments.add(arrayCastTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor());
