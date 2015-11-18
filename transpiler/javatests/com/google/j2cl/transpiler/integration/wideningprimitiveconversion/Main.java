@@ -211,7 +211,8 @@ public class Main {
 
     assert (((double) f - 2.7) < 1e-7);
 
-    assert ((double) mf == 3.4028235e+38); // we don't honor float-double precision differences
+    // we don't honor float-double precision differences
+    assert ((double) mf == 3.4028234663852886e+38d);
   }
 
   private static void testCompoundAssignment() {
@@ -331,7 +332,8 @@ public class Main {
 
     assert ((rd = f - 2.7) < 1e-7f);
 
-    assert ((rd = mf) == 3.4028235e+38); // we don't honor float-double precision differences
+    // we don't honor float-double precision differences
+    assert ((rd = mf) == 3.4028234663852886e+38d);
   }
 
   private static void testTernaryAssignment() {

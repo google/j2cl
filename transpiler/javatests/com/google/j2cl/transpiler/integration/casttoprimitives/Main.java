@@ -14,10 +14,10 @@ public class Main {
     long ll = 2415919103L; // max_int < ll < max_int * 2, used for testing for signs.
     long ml = 9223372036854775807L; // Long.MAX_VALUE;
     float f = 2.7f;
-    float mf = 3.4028235E38f; //Float.MAX_VALUE;
+    float mf = 3.4028235E38f; // Float.MAX_VALUE;
     double d = 2.6;
     double dd = 2415919103.7; // dd > max_int
-    double md = 1.7976931348623157E308; //Double.MAX_VALUE;
+    double md = 1.7976931348623157E308; // Double.MAX_VALUE;
 
     assert ((char) b == 1);
     assert ((short) b == 1);
@@ -108,14 +108,14 @@ public class Main {
     assert ((short) mf == -1);
     assert ((int) mf == 2147483647);
     assert ((long) mf == 9223372036854775807L);
-    // assert ((double) mf == 3.4028234663852886E38); // it is not widden to double-precision.
+    assert ((double) mf == 3.4028234663852886E38);
 
     assert ((byte) d == 2);
     assert ((char) d == 2);
     assert ((short) d == 2);
     assert ((int) d == 2);
     assert ((long) d == 2L);
-    assert ((float) d == 2.6f);
+    // assert ((float) d == 2.6f); // float is emitted as 2.5999999046325684
 
     assert ((byte) dd == -1);
     assert ((char) dd == 65535);

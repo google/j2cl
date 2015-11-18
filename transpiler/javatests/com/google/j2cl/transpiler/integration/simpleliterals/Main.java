@@ -9,6 +9,9 @@ public class Main {
     char b = 'a';
     assert b == 97;
 
+    // Verify compile time float literal expansion to double.
+    assert 0.7308782f == (float) 0.7308781743049622d;
+
     // Avoiding a "condition always evaluates to true" error in JSComp type checking.
     Object maybeNull = b == 97 ? null : new Object();
     Object c = null;

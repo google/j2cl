@@ -1273,9 +1273,12 @@ public class CompilationUnitBuilder {
     }
 
     private NumberLiteral convert(org.eclipse.jdt.core.dom.NumberLiteral literal) {
+      Number constantValue = (Number) literal.resolveConstantExpressionValue();
+      if (constantValue instanceof Float) {
+        constantValue = constantValue.doubleValue();
+      }
       return new NumberLiteral(
-          JdtUtils.createTypeDescriptor(literal.resolveTypeBinding()),
-          (Number) literal.resolveConstantExpressionValue());
+          JdtUtils.createTypeDescriptor(literal.resolveTypeBinding()), constantValue);
     }
 
     private ParenthesizedExpression convert(
