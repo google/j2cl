@@ -17,12 +17,14 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodBuilder;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.VariableReference;
 
 /**
  * Rewrites System.getProperty to hook into goog.define.
@@ -41,10 +43,15 @@ public class RewriteSystemGetPropertyVisitor extends AbstractRewriter {
       return method;
     }
 
+    Expression returnValueExpression = NullLiteral.NULL;
+    if (method.getParameters().size() == 2) {
+      returnValueExpression = new VariableReference(method.getParameters().get(1));
+    }
+
     MethodBuilder methodBuilder = MethodBuilder.from(method);
     methodBuilder.clearStatements();
     ReturnStatement returnStatement =
-        new ReturnStatement(NullLiteral.NULL, TypeDescriptors.get().javaLangString);
+        new ReturnStatement(returnValueExpression, TypeDescriptors.get().javaLangString);
     methodBuilder.statement(returnStatement);
     // TODO: integrate closures goog.define here.
     return methodBuilder.build();

@@ -25,7 +25,7 @@ import com.google.j2cl.ast.processors.Visitable;
 public class VariableReference extends Expression {
   @Visitable Variable target;
 
-  VariableReference(Variable target) {
+  public VariableReference(Variable target) {
     Preconditions.checkNotNull(target);
     this.target = target;
   }

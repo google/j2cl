@@ -4,6 +4,6 @@ public class Main {
 
   public static void main(String[] args) {
     assert System.getProperty("foo") == null;
-    assert System.getProperty("foo", "bar") == null;
+    assert System.getProperty("foo", "bar").equals("bar");
   }
 }
