@@ -130,13 +130,17 @@ public class JsniConverterTest extends BaseJsniConverterTest {
   }
 
   /**
-   * If the body of native method doesn't use the jsni block comment pattern, the converter throws
-   * a RuntimeException.
+   * If the body of native method doesn't use the jsni block comment pattern, the converter will
+   * skip it.
    */
-  @Test(expected = RuntimeException.class)
-  public void convert_noWellFormedJsniBlock() {
+  @Test
+  public void convert_noWellFormedJsniBlock() throws IOException {
     new JsniConverter(getZipFilePath())
         .convert(
             getDataFilePaths("NotWellFormedNativeMethod.java"), new ArrayList<>(), new HashSet<>());
+
+    // check the content of the zip file is empty
+    ZipInputStream zis = new ZipInputStream(new FileInputStream(getZipFile()));
+    assertThat(zis.getNextEntry()).isNull();
   }
 }

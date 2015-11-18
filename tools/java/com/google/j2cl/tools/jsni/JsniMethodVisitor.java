@@ -63,6 +63,11 @@ public class JsniMethodVisitor extends ASTVisitor {
       String methodMangledName = ManglingNameUtils.getMangledName(methodDescriptor);
       String javascriptBlock = extractJavascriptBlock(method);
 
+      if (javascriptBlock == null) {
+        // Looks like this is a native JsMethod.
+        return;
+      }
+
       // no jsni references ?
       checkJsConvertibility(javascriptBlock, method);
 
@@ -117,12 +122,7 @@ public class JsniMethodVisitor extends ASTVisitor {
     int startPos = methodCode.indexOf("/*-{");
     int endPos = methodCode.lastIndexOf("}-*/");
     if (startPos < 0 || endPos < 0) {
-      throw new RuntimeException(
-          String.format(
-              "Native methods require a JavaScript implementation enclosed with /*-{ and }-*/ "
-                  + "Method [%s] on class [%s]",
-              method,
-              computeTypeFqn(method)));
+      return null;
     }
 
     startPos += 4; // move up after the open brace
