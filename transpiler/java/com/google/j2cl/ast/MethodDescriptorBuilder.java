@@ -100,7 +100,7 @@ public class MethodDescriptorBuilder {
         returnTypeDescriptor,
         parameterTypeDescriptors,
         typeParameterDescriptors,
-        jsMethodName,
-        jsMethodNamespace);
+        jsMethodNamespace,
+        jsMethodName);
   }
 }

@@ -24,6 +24,7 @@ import com.google.j2cl.ast.visitors.FixBooleanOperatorsPass;
 import com.google.j2cl.ast.visitors.FixSuperCallQualifiersVisitor;
 import com.google.j2cl.ast.visitors.FixTypeVariableInMethodVisitors;
 import com.google.j2cl.ast.visitors.InsertBoxingConversionVisitor;
+import com.google.j2cl.ast.visitors.InsertClassInitStaticMethods;
 import com.google.j2cl.ast.visitors.InsertExplicitSuperCallsVisitor;
 import com.google.j2cl.ast.visitors.InsertInstanceInitCallsVisitor;
 import com.google.j2cl.ast.visitors.InsertNarrowingPrimitiveConversionVisitor;
@@ -145,6 +146,8 @@ public class J2clTranspiler {
       RemoveUnusedMultiExpressionReturnValues.applyTo(j2clUnit);
       // TODO: remove this pass when b/25512693 is resolved.
       AddClassInitAtCallSite.applyTo(j2clUnit);
+      // has to be done after AddClassInitAtCallSite
+      InsertClassInitStaticMethods.applyTo(j2clUnit);
 
       verifyUnit(j2clUnit);
     }

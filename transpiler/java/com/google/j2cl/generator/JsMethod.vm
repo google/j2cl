@@ -35,13 +35,7 @@
 #if ($method.isNative())
   // native $staticModifier${ManglingNameUtils.getMangledName($method.Descriptor)}($parameterList)
 #else
-  $staticModifier${ManglingNameUtils.getMangledName($method.Descriptor)}($parameterList) {
-#if (${method.Descriptor.isStatic()})
-    $className.$clinit();
-#end
-#foreach ($statementInBody in $method.Body.Statements)
-    $statementSourceGenerator.toSource($statementInBody)
-#end
-  }
+  $staticModifier${ManglingNameUtils.getMangledName($method.Descriptor)}($parameterList)
+  ${statementSourceGenerator.toSource($method.Body)}
 #end
 #end
