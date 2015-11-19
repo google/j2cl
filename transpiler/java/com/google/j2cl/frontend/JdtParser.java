@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.frontend;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.errors.Errors;
 
@@ -81,19 +82,33 @@ public class JdtParser {
    * Returns a map from file paths to compilation units after JDT parsing.
    */
   public Map<String, CompilationUnit> parseFiles(List<String> filePaths) {
+    // Preprocess every file and writes the preprocessed content to a temporary file.
+    JavaPreprocessor preprocessor = new JavaPreprocessor();
+    final Map<String, String> preprocessedFilesByOriginal =
+        preprocessor.preprocessFiles(filePaths, encoding, errors);
+    if (preprocessedFilesByOriginal == null) {
+      Preconditions.checkState(
+          errors.errorCount() > 0, "Didn't get processed files map, but no errors generated.");
+      return null;
+    }
+
+    // Parse and create a compilation unit for every file.
     ASTParser parser = newASTParser(true);
     final Map<String, CompilationUnit> compilationUnitsByFilePath = new HashMap<>();
     FileASTRequestor astRequestor =
         new FileASTRequestor() {
           @Override
           public void acceptAST(String filePath, CompilationUnit compilationUnit) {
-            if (checkCompilationErrors(filePath, compilationUnit)) {
-              compilationUnitsByFilePath.put(filePath, compilationUnit);
+            String originalFilePath = preprocessedFilesByOriginal.get(filePath);
+            Preconditions.checkState(
+                originalFilePath != null, "Can't find original path for file %s", filePath);
+            if (checkCompilationErrors(originalFilePath, compilationUnit)) {
+              compilationUnitsByFilePath.put(originalFilePath, compilationUnit);
             }
           }
         };
     parser.createASTs(
-        Iterables.toArray(filePaths, String.class),
+        Iterables.toArray(preprocessedFilesByOriginal.keySet(), String.class),
         getEncodings(filePaths.size()),
         new String[] {},
         astRequestor,
