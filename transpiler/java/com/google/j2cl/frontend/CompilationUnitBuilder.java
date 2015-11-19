@@ -69,6 +69,7 @@ import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.SwitchCase;
 import com.google.j2cl.ast.SwitchStatement;
+import com.google.j2cl.ast.SynchronizedStatement;
 import com.google.j2cl.ast.TernaryExpression;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.ThrowStatement;
@@ -710,6 +711,8 @@ public class CompilationUnitBuilder {
           return convert((org.eclipse.jdt.core.dom.SwitchCase) statement);
         case ASTNode.SWITCH_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.SwitchStatement) statement);
+        case ASTNode.SYNCHRONIZED_STATEMENT:
+          return convert((org.eclipse.jdt.core.dom.SynchronizedStatement) statement);
         case ASTNode.THROW_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.ThrowStatement) statement);
         case ASTNode.TRY_STATEMENT:
@@ -1498,6 +1501,12 @@ public class CompilationUnitBuilder {
           convert(statement.getExpression()),
           convertStatements(
               JdtUtils.<org.eclipse.jdt.core.dom.Statement>asTypedList(statement.statements())));
+    }
+
+    private SynchronizedStatement convert(
+        org.eclipse.jdt.core.dom.SynchronizedStatement statement) {
+      return new SynchronizedStatement(
+          convert(statement.getExpression()), convert(statement.getBody()));
     }
 
     private ExpressionStatement convert(

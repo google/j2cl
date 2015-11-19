@@ -62,6 +62,7 @@ import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.SwitchCase;
 import com.google.j2cl.ast.SwitchStatement;
+import com.google.j2cl.ast.SynchronizedStatement;
 import com.google.j2cl.ast.TernaryExpression;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.ThrowStatement;
@@ -547,6 +548,13 @@ public class StatementSourceGenerator {
             "switch (%s) { %s }",
             toSource(switchStatement.getMatchExpression()),
             switchCasesAsString);
+      }
+
+      @Override
+      public String transformSynchronizedStatement(SynchronizedStatement synchronizedStatement) {
+        return toSource(synchronizedStatement.getExpression())
+            + ";"
+            + toSource(synchronizedStatement.getBody());
       }
 
       @Override
