@@ -24,13 +24,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.util.HashMap;
+
 /**
  * Tests for {@link JavaPreprocessor}.
  * TODO(stalcup): Consider moving this test to an integration test.
  */
 @RunWith(JUnit4.class)
 public class JavaPreprocessorTest {
-  private JavaPreprocessor javaPreprocessor = new JavaPreprocessor();
+  private JavaPreprocessor javaPreprocessor = new JavaPreprocessor(new HashMap<>());
 
   @Test
   public void testNoProcess() {
@@ -172,6 +174,27 @@ public class JavaPreprocessorTest {
                 "  public void m() {}",
                 "  /*@GwtIncompatible",
                 "  public void n() {foo(x /* the value of x **);}*/",
+                "}");
+    assertEquals(after, javaPreprocessor.preprocessFile(before));
+  }
+
+  @Test
+  public void testUnusedImports() {
+    String before =
+        Joiner.on("\n")
+            .join(
+                "import a.b.X;",
+                "public class Foo {",
+                "  /** {@see X}. */",
+                "  public void m() {}",
+                "}");
+    String after =
+        Joiner.on("\n")
+            .join(
+                "/*import a.b.X;*/",
+                "public class Foo {",
+                "  /** {@see X}. */",
+                "  public void m() {}",
                 "}");
     assertEquals(after, javaPreprocessor.preprocessFile(before));
   }

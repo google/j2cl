@@ -83,7 +83,7 @@ public class JdtParser {
    */
   public Map<String, CompilationUnit> parseFiles(List<String> filePaths) {
     // Preprocess every file and writes the preprocessed content to a temporary file.
-    JavaPreprocessor preprocessor = new JavaPreprocessor();
+    JavaPreprocessor preprocessor = new JavaPreprocessor(compilerOptions);
     final Map<String, String> preprocessedFilesByOriginal =
         preprocessor.preprocessFiles(filePaths, encoding, errors);
     if (preprocessedFilesByOriginal == null) {

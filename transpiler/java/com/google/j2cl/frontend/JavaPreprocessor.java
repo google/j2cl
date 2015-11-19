@@ -42,9 +42,14 @@ import javax.annotation.Nullable;
  *
  * TODO(stalcup): The preprocessing won't happen for files not included in the current files to
  * compile, but are just referenced. Those files will be pulled in when resolving bindings and
- * so won't go thorugh this preprocessor.
+ * so won't go thorough this preprocessor.
  */
 public class JavaPreprocessor {
+  private Map<String, String> compilerOptions;
+
+  public JavaPreprocessor(Map<String, String> compilerOptions) {
+    this.compilerOptions = Preconditions.checkNotNull(compilerOptions);
+  }
 
   /**
    * Preprocess every file and returns a map between the preprocessed file paths and the old file
@@ -97,12 +102,9 @@ public class JavaPreprocessor {
 
   @VisibleForTesting
   String preprocessFile(String fileContent) {
-    if (!fileContent.contains("GwtIncompatible")) {
-      // If the file doesn't contain "GwtIncompatible", stop here to avoid useless parsing.
-      return null;
-    }
     // Parse the file.
     ASTParser parser = ASTParser.newParser(AST.JLS8);
+    parser.setCompilerOptions(compilerOptions);
     parser.setResolveBindings(false);
     parser.setSource(fileContent.toCharArray());
     CompilationUnit compilationUnit = (CompilationUnit) parser.createAST(null);
@@ -111,24 +113,29 @@ public class JavaPreprocessor {
     GwtIncompatibleNodeCollector gwtIncomaptibleVisitor = new GwtIncompatibleNodeCollector();
     compilationUnit.accept(gwtIncomaptibleVisitor);
     List<ASTNode> gwtIncompatibleNodes = gwtIncomaptibleVisitor.getNodes();
-    if (gwtIncompatibleNodes.isEmpty()) {
-      return null;
-    }
 
-    // Delete the gwtIncompatible nodes and gets all the imports that are no longer needed.
+    // Delete the gwtIncompatible nodes.
     for (ASTNode gwtIncompatibleNode : gwtIncompatibleNodes) {
       gwtIncompatibleNode.delete();
     }
+
+    // Gets all the imports that are no longer needed. Note that we need to run this even if the
+    // class doesn't have anything that is {@code GwtIncompatible}, since there might be imports
+    // needed only for JavaDoc.
     UnusedImportsNodeCollector unusedImportsNodeCollector = new UnusedImportsNodeCollector();
     compilationUnit.accept(unusedImportsNodeCollector);
     List<ImportDeclaration> unusedImportsNodes = unusedImportsNodeCollector.getUnusedImports();
 
     // Wrap all the not needed nodes inside comments in the original source
     // (so we can preserve line numbers and have accurate source maps).
-    // Precondition: Node ranges must not overlap and they must be sorted by position.
-    StringBuilder newFileContent = new StringBuilder();
     List<ASTNode> nodesToWrap = Lists.<ASTNode>newArrayList(unusedImportsNodes);
     nodesToWrap.addAll(gwtIncompatibleNodes);
+    if (nodesToWrap.isEmpty()) {
+      // Nothing was changed.
+      return null;
+    }
+    // Precondition: Node ranges must not overlap and they must be sorted by position.
+    StringBuilder newFileContent = new StringBuilder();
     int currentPosition = 0;
     for (ASTNode nodeToWrap : nodesToWrap) {
       int startPosition = nodeToWrap.getStartPosition();
