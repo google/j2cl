@@ -54,5 +54,10 @@ public class Main {
     assert (s3.equals("nullnullnullnulla"));
     s3 = "a" + s1 + s1 + s1 + null;
     assert (s3.equals("anullnullnullnull"));
+
+    // Char + String
+    char c1 = 'F';
+    char c2 = 'o';
+    assert (c1 + c2 + "o").equals("Foo");
   }
 }

@@ -12,5 +12,11 @@ public class StringConversion {
     s3 = s1 + s1 + s2 + null + "a";
     // a string literal plus multiple nullable string instances.
     s3 = "a" + s1 + s1 + s2 + null;
+
+    // Char + String
+    String s4;
+    char c1 = 'F';
+    char c2 = 'o';
+    s4 = c1 + c2 + "o";
   }
 }

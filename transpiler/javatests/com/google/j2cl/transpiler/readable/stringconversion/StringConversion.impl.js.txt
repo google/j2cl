@@ -10,8 +10,10 @@ goog.module('gen.com.google.j2cl.transpiler.readable.stringconversion.StringConv
 let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Character = goog.forwardDeclare('gen.java.lang.Character$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let String = goog.forwardDeclare('gen.java.lang.String$impl');
+let $char = goog.forwardDeclare('vmbootstrap.primitives.$char$impl');
 
 
 class StringConversion extends Object {
@@ -63,6 +65,12 @@ class StringConversion extends Object {
     s1 += "a";
     s3 = "" + s1 + s1 + s2 + String.m_valueOf__java_lang_Object(null) + "a";
     s3 = "a" + s1 + s1 + s2 + String.m_valueOf__java_lang_Object(null);
+    let s4;
+    let c1 = 70 /* 'F' */;
+    let c2 = 111 /* 'o' */;
+    s4 = String.m_valueOf__java_lang_Object(Character.m_valueOf__char(c1)) +
+         String.m_valueOf__java_lang_Object(Character.m_valueOf__char(c2)) +
+         "o";
   }
 
   /**
@@ -109,8 +117,10 @@ class StringConversion extends Object {
    * @nocollapse
    */
   static $clinit() {
+    Character = goog.module.get('gen.java.lang.Character$impl');
     Class = goog.module.get('gen.java.lang.Class$impl');
     String = goog.module.get('gen.java.lang.String$impl');
+    $char = goog.module.get('vmbootstrap.primitives.$char$impl');
     Object.$clinit();
   }
 }

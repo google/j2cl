@@ -59,9 +59,18 @@ public class InsertStringConversionVisitor extends ConversionContextVisitor {
               }
             }
             // Normally Java would box a primitive but we don't because JS already converts
-            // primitives to String in the presence of a + operator.
-            if (TypeDescriptors.isPrimitiveType(typeDescriptor)) {
+            // primitives to String in the presence of a + operator. We make an exception for 'char'
+            // since Java converts char to the matching String glyph and JS converts it into a
+            // number String.
+            if (TypeDescriptors.isPrimitiveType(typeDescriptor)
+                && typeDescriptor != TypeDescriptors.get().primitiveChar) {
               return operandExpression;
+            }
+
+            // Convert char to Character so that Character.toString() will be called and thus Java's
+            // semantic around char String conversion will be honored.
+            if (typeDescriptor == TypeDescriptors.get().primitiveChar) {
+              operandExpression = AstUtils.box(operandExpression);
             }
 
             // At this point we're guaranteed to have in hand a reference type (or

@@ -553,19 +553,8 @@ public class AstUtils {
    */
   public static boolean matchesStringContext(BinaryExpression binaryExpression) {
     BinaryOperator operator = binaryExpression.getOperator();
-    TypeDescriptor leftTypeDescriptor = binaryExpression.getLeftOperand().getTypeDescriptor();
-    TypeDescriptor rightTypeDescriptor = binaryExpression.getRightOperand().getTypeDescriptor();
-
-    if (operator == BinaryOperator.PLUS_ASSIGN
-        && leftTypeDescriptor == TypeDescriptors.get().javaLangString) {
-      return true;
-    }
-    if (operator == BinaryOperator.PLUS
-        && (leftTypeDescriptor == TypeDescriptors.get().javaLangString
-            || rightTypeDescriptor == TypeDescriptors.get().javaLangString)) {
-      return true;
-    }
-    return false;
+    return (operator == BinaryOperator.PLUS_ASSIGN || operator == BinaryOperator.PLUS)
+        && binaryExpression.getTypeDescriptor() == TypeDescriptors.get().javaLangString;
   }
 
   /**
