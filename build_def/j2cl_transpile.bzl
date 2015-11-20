@@ -24,6 +24,19 @@ def _should_omit(java_file, omit_srcs):
       return True
   return False
 
+def _get_message(ctx):
+  _MESSAGES = [
+    "Re" + "ti" + "cu" + "la" + "ti" + "ng" + "Sp" + "li" + "ne" + "s",
+    3 * ("\\" + "0" + "/ "),
+    "Co" + "mp" + "ut" + "in" + "g " + "PI",
+    "So" + " m" + "uch" + " Ja" + "va",
+    "Ma" + "ki" + "ng"  + " c" + "of" + "fee",
+    "So" + "lv" + "in" + "g " + "ha" + "lt" + "ing" + " p" + "ro" + "bl" + "em",
+    "Ex" + "ec" + "ut" + "in" + "g " + "bu" + "sy" + " l" + "oo" + "p",
+    "En" + "te" + "ri" + "ng" + " w" + "ar" + "p " + "sp" + "ee" + "d"
+  ]
+  index = len(ctx.attr.srcs) + len(ctx.configuration.bin_dir.path)
+  return _MESSAGES[index % len(_MESSAGES)] + " %s" % ctx
 
 def _impl(ctx):
   separator = ctx.configuration.host_path_separator
@@ -79,6 +92,7 @@ def _impl(ctx):
 
   js_zip_artifact = ctx.new_file(js_zip_name)
   ctx.action(
+      progress_message = _get_message(ctx),
       inputs=java_files + list(dep_files) + js_native_zip_files,
       outputs=[js_zip_artifact],
       executable=ctx.executable.transpiler,
