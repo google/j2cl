@@ -111,6 +111,13 @@ class Subclass extends Superclass {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return Subclass.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

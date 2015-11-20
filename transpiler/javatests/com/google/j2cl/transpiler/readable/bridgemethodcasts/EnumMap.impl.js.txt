@@ -117,6 +117,13 @@ class EnumMap extends AbstractMap {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return EnumMap.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

@@ -110,6 +110,13 @@ class InstanceFieldInitializer extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return InstanceFieldInitializer.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

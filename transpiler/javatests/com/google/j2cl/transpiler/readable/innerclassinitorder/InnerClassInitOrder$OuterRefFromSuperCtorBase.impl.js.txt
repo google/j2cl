@@ -103,6 +103,15 @@ class InnerClassInitOrder$OuterRefFromSuperCtorBase extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() {
+    return InnerClassInitOrder$OuterRefFromSuperCtorBase.$getClass();
+  }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

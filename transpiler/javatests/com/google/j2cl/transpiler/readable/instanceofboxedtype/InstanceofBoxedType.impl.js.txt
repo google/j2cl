@@ -118,6 +118,13 @@ class InstanceofBoxedType extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return InstanceofBoxedType.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

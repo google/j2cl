@@ -103,6 +103,13 @@ class InstanceofClass extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return InstanceofClass.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

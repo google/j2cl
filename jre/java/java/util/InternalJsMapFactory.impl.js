@@ -97,6 +97,13 @@ class InternalJsMapFactory extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return InternalJsMapFactory.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

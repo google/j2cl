@@ -90,6 +90,13 @@ class Child extends Varargs {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return Child.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

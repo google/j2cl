@@ -104,6 +104,13 @@ class LambdaInSubClass extends Parent {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return LambdaInSubClass.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

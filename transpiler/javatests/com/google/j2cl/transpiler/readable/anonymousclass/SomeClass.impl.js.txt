@@ -100,6 +100,13 @@ class SomeClass extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return SomeClass.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

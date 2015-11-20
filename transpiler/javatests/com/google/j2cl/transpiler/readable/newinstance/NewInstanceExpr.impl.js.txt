@@ -101,6 +101,13 @@ class NewInstanceExpr extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return NewInstanceExpr.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

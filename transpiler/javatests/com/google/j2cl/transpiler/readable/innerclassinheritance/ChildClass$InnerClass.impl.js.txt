@@ -155,6 +155,13 @@ class ChildClass$InnerClass extends ParentInner {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return ChildClass$InnerClass.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

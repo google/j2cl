@@ -143,6 +143,13 @@ class MultipleNestings$InnerClass1$InnerClass2 extends MultipleNestings$Parent {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return MultipleNestings$InnerClass1$InnerClass2.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

@@ -126,6 +126,13 @@ class ObjectCalls extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return ObjectCalls.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

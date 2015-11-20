@@ -217,6 +217,13 @@ class CharacterLiteral extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return CharacterLiteral.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

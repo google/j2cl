@@ -162,6 +162,13 @@ class CastToPrimitive extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return CastToPrimitive.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

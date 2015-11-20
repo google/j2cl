@@ -445,6 +445,13 @@ class SimpleAutoBoxing extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return SimpleAutoBoxing.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

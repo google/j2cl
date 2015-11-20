@@ -92,6 +92,13 @@ class StaticBlockLocalVar extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return StaticBlockLocalVar.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

@@ -157,6 +157,13 @@ class BridgeMethod extends Parent {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return BridgeMethod.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

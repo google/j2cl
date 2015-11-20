@@ -130,6 +130,13 @@ class CastToGenerics extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return CastToGenerics.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

@@ -210,6 +210,13 @@ class SimpleEnum2 extends Enum {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return SimpleEnum2.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

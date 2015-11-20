@@ -331,6 +331,13 @@ class JsDate extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return JsDate.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @protected
    * @nocollapse

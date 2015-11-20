@@ -94,6 +94,13 @@ class SubclassGenericClass extends GenericClass {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return SubclassGenericClass.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

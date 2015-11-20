@@ -116,6 +116,13 @@ class InternalJsIteratorEntry extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return InternalJsIteratorEntry.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

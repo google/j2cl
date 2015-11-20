@@ -119,6 +119,13 @@ class LambdaWithGenerics extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return LambdaWithGenerics.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

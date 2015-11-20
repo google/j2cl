@@ -141,6 +141,13 @@ class CascadingConstructor extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return CascadingConstructor.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

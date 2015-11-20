@@ -122,6 +122,13 @@ class InnerClassInitOrder$Outer$OuterIsNotSuper extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return InnerClassInitOrder$Outer$OuterIsNotSuper.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

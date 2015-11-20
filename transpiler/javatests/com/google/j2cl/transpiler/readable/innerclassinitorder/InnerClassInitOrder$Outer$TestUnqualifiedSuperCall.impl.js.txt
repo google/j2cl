@@ -114,6 +114,15 @@ class InnerClassInitOrder$Outer$TestUnqualifiedSuperCall extends
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() {
+    return InnerClassInitOrder$Outer$TestUnqualifiedSuperCall.$getClass();
+  }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

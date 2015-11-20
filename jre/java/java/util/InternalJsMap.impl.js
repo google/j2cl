@@ -157,6 +157,13 @@ class InternalJsMap extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return InternalJsMap.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

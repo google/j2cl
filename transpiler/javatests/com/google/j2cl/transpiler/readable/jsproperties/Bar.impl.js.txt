@@ -128,6 +128,13 @@ class Bar extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return Bar.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

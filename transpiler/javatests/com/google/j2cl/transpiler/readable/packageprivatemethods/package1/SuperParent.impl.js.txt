@@ -123,6 +123,13 @@ class SuperParent extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return SuperParent.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

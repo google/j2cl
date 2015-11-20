@@ -204,6 +204,13 @@ class SimpleLambda extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return SimpleLambda.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

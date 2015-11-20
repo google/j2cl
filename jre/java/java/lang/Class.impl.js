@@ -331,6 +331,13 @@ class Class extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return Class.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    *
    * @protected

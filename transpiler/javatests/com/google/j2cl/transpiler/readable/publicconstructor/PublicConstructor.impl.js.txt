@@ -89,6 +89,13 @@ class PublicConstructor extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return PublicConstructor.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

@@ -101,6 +101,13 @@ class InstanceOfArray extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return InstanceOfArray.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

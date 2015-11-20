@@ -108,6 +108,13 @@ class NewInnerClassWithSameOuter$C extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return NewInnerClassWithSameOuter$C.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

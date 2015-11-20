@@ -102,6 +102,13 @@ class Task extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return Task.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

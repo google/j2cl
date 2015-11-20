@@ -99,6 +99,13 @@ class Parent extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return Parent.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

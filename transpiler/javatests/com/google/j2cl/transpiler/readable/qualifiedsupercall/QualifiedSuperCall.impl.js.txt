@@ -103,6 +103,13 @@ class QualifiedSuperCall extends Parent {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return QualifiedSuperCall.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

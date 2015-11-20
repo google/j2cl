@@ -91,6 +91,13 @@ class MultipleTopClasses extends AnotherClass {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return MultipleTopClasses.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

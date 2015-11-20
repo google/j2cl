@@ -117,6 +117,13 @@ class LocalClassInStaticContext$C extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return LocalClassInStaticContext$C.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

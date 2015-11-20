@@ -96,6 +96,13 @@ class GenericInterfaceImpl extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return GenericInterfaceImpl.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

@@ -46,8 +46,7 @@ class Object {
    * @return {Class}
    * @public
    */
-
-  m_getClass() { return this.constructor.$getClass(); }
+  m_getClass() { return Object.$getClass(); }
 
   /**
    * @return {number}
@@ -70,7 +69,7 @@ class Object {
     // TODO: fix this implementation. The hash code should be returned in hex
     // but can't currently depend on Integer to get access to that static
     // function because Closure doesn't yet support module circular references.
-    return this.constructor.$getClass().m_getName() + '@' + this.m_hashCode();
+    return this.m_getClass().m_getName() + '@' + this.m_hashCode();
   }
 
   /**

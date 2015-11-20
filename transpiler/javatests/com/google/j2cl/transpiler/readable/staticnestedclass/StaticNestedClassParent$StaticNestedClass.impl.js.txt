@@ -97,6 +97,13 @@ class StaticNestedClassParent$StaticNestedClass extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return StaticNestedClassParent$StaticNestedClass.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

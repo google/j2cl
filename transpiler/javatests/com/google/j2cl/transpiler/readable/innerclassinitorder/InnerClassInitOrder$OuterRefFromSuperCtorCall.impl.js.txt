@@ -117,6 +117,15 @@ class InnerClassInitOrder$OuterRefFromSuperCtorCall extends
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() {
+    return InnerClassInitOrder$OuterRefFromSuperCtorCall.$getClass();
+  }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

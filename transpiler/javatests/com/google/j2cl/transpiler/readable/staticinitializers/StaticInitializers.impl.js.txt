@@ -92,6 +92,13 @@ class StaticInitializers extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return StaticInitializers.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

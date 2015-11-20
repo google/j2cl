@@ -114,6 +114,13 @@ class B extends A {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return B.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

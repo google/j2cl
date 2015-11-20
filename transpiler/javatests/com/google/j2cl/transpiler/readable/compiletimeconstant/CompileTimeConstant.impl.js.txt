@@ -145,6 +145,13 @@ class CompileTimeConstant extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return CompileTimeConstant.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

@@ -117,6 +117,13 @@ class SynchronizedStatement extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return SynchronizedStatement.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

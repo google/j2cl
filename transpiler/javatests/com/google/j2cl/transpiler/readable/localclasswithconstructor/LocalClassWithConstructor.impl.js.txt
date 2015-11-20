@@ -107,6 +107,13 @@ class LocalClassWithConstructor extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return LocalClassWithConstructor.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

@@ -92,6 +92,13 @@ class JsTypesWithConstructor extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return JsTypesWithConstructor.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

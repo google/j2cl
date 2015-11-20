@@ -177,6 +177,13 @@ class MultipleConstructors extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return MultipleConstructors.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

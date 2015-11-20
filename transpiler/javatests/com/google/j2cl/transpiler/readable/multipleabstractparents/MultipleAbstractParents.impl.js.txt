@@ -136,6 +136,13 @@ class MultipleAbstractParents extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return MultipleAbstractParents.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

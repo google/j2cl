@@ -99,6 +99,13 @@ class LocalClassInheritance extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return LocalClassInheritance.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

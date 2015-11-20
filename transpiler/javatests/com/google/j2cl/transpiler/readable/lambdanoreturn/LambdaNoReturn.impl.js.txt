@@ -103,6 +103,13 @@ class LambdaNoReturn extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return LambdaNoReturn.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

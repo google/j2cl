@@ -119,6 +119,13 @@ class BackwardBridgeMethod extends C {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return BackwardBridgeMethod.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

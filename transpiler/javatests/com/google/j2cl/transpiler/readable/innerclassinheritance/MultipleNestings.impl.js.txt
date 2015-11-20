@@ -119,6 +119,13 @@ class MultipleNestings extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return MultipleNestings.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

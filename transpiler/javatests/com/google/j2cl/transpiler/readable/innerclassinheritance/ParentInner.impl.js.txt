@@ -103,6 +103,13 @@ class ParentInner extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return ParentInner.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

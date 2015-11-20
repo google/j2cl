@@ -139,6 +139,13 @@ class $className $extendsClause {
   }
 #end
 
+  /**
+   * @override
+   * @return {${classAlias}}
+   * @public
+   */
+  m_getClass() { return ${className}.$getClass(); }
+
 #parse( "com/google/j2cl/generator/JsClinit.vm")
 };
 #foreach ($staticField in $classType.getStaticFields())

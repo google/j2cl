@@ -98,6 +98,13 @@ class LabeledStatement extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return LabeledStatement.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

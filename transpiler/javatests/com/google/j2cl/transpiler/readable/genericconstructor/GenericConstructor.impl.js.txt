@@ -147,6 +147,13 @@ class GenericConstructor extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return GenericConstructor.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

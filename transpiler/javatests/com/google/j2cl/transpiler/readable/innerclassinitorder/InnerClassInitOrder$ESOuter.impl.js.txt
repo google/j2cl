@@ -126,6 +126,13 @@ class InnerClassInitOrder$ESOuter extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return InnerClassInitOrder$ESOuter.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

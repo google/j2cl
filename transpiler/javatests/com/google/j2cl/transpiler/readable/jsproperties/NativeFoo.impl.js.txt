@@ -90,6 +90,13 @@ class NativeFoo extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return NativeFoo.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse

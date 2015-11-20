@@ -89,6 +89,13 @@ class SuperCallDefault extends Object {
   }
 
   /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return SuperCallDefault.$getClass(); }
+
+  /**
    * Runs inline static field initializers.
    * @public
    * @nocollapse
