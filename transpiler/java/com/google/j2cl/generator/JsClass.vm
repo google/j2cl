@@ -73,7 +73,6 @@ class $className $extendsClause {
 #end
   }
 #foreach($method in $classType.Methods)
-
 #if($method.isConstructor())
 #parse( "com/google/j2cl/generator/JsConstructorMethods.vm" )
 #else
