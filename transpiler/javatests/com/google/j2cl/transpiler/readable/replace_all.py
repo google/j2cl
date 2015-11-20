@@ -31,6 +31,11 @@ def extract_pattern(pattern_string, from_value):
   return re.compile(pattern_string).search(from_value).group(1)
 
 
+def replace_pattern(pattern_string, replacement, in_value):
+  """Returns the regex replaced value."""
+  return re.compile(pattern_string).sub(replacement, in_value)
+
+
 def run_cmd_get_output(cmd_args, include_stderr=False, cwd=None):
   """Runs a cmd command and returns output as a string."""
   global SUCCESS_CODE
@@ -155,6 +160,8 @@ def gather_closure_warnings():
     build_log = build_log.replace(
         "blaze-out/gcc-4.X.Y-crosstool-v18-hybrid-grtev4-k8-fastbuild/bin/",
         "")
+    # Remove stable (but occasionally changing) line number details.
+    build_log = replace_pattern(r"\:([0-9]*)\:", "", build_log)
     # Filter out the unstable ", ##% typed" message
     percent_typed_msg = (
         extract_pattern(r"g\(s\)(, .*? typed)", build_log))
