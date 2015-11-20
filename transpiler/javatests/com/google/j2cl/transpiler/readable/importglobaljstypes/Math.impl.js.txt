@@ -1,0 +1,145 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.importglobaljstypes.Math.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.importglobaljstypes.Math$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Math$NativeMath = goog.require('global.Math');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
+
+
+class Math extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_importglobaljstypes_Math() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Math}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    Math.$clinit();
+    let instance = new Math;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_importglobaljstypes_Math();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_importglobaljstypes_Math() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_importglobaljstypes_Math();
+  }
+
+  /**
+   * @param {number} x
+   * @return {number}
+   * @public
+   * @nocollapse
+   */
+  static m_abs__double(x) {
+    Math.$clinit();
+    return $Math$NativeMath.abs(x);
+  }
+
+  /**
+   * @param {$Math$NativeMath} m
+   * @return {$Math$NativeMath}
+   * @public
+   */
+  m_copy__com_google_j2cl_transpiler_readable_importglobaljstypes_Math$NativeMath(
+      m) {
+    return m;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof Math; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Math);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    Math.$clinit();
+    if (!Math.$classMath_) {
+      Math.$classMath_ = Class.$createForClass(
+          $Util.$generateId('Math'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.importglobaljstypes.Math'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.importglobaljstypes.Math'));
+    }
+    return Math.$classMath_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return Math.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $double = goog.module.get('vmbootstrap.primitives.$double$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Math.$classMath_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = Math;

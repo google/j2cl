@@ -15,8 +15,11 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Splitter;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
@@ -76,6 +79,16 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
   public static TypeDescriptor createRaw(Iterable<String> nameSpaceComponents, String className) {
     return create(
         nameSpaceComponents, Arrays.asList(className), true, ImmutableList.<TypeDescriptor>of());
+  }
+
+  /**
+   * Creates a raw TypeDescriptor from a qualified name.
+   */
+  public static TypeDescriptor createRaw(String qualifiedName) {
+    List<String> nameComponents = Splitter.on("\\.").splitToList(qualifiedName);
+    int size = nameComponents.size();
+    return TypeDescriptor.createRaw(
+        nameComponents.subList(0, size - 1), nameComponents.get(size - 1));
   }
 
   static Interner<TypeDescriptor> getInterner() {
@@ -181,10 +194,20 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
   }
 
   /**
-   * Returns true if the type is a native js type with a global namespace ("").
+   * TODO: Currently we depends on the namespace to tell if a type is an extern type. Returns true
+   * if the namespace is an empty string. It is true for most common cases, but not always true. We
+   * may need to introduce a new annotation to tell if it is extern when we hit the problem.
    */
-  public boolean isGlobalNative() {
-    return isNative() && "".equals(getJsTypeNamespace());
+  public boolean isExtern() {
+    boolean isSynthesizedGlobalType = isRaw() && "".equals(getPackageName());
+    boolean isNativeJsType = isNative() && "".equals(getJsTypeNamespace());
+    return isSynthesizedGlobalType || isNativeJsType;
+  }
+
+  public String getQualifiedName() {
+    String namespace = getJsTypeNamespace() != null ? getJsTypeNamespace() : getPackageName();
+    String className = getJsTypeName() != null ? getJsTypeName() : getClassName();
+    return Joiner.on(".").skipNulls().join(Strings.emptyToNull(namespace), className);
   }
 
   public boolean isInstanceMemberClass() {

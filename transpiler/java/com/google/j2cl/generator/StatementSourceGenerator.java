@@ -311,10 +311,7 @@ public class StatementSourceGenerator {
        */
       private String transformJsPropertyGetter(MethodCall expression) {
         MethodDescriptor methodDescriptor = expression.getTarget();
-        String qualifier =
-            methodDescriptor.getJsMethodNamespace() != null
-                ? methodDescriptor.getJsMethodNamespace()
-                : toSource(expression.getQualifier());
+        String qualifier = toSource(expression.getQualifier());
         String propertyName = ManglingNameUtils.getJsPropertyName(methodDescriptor);
         return Joiner.on(".").skipNulls().join(Strings.emptyToNull(qualifier), propertyName);
       }
@@ -324,10 +321,7 @@ public class StatementSourceGenerator {
        */
       private String transformJsPropertySetter(MethodCall expression) {
         MethodDescriptor methodDescriptor = expression.getTarget();
-        String qualifier =
-            methodDescriptor.getJsMethodNamespace() != null
-                ? methodDescriptor.getJsMethodNamespace()
-                : toSource(expression.getQualifier());
+        String qualifier = toSource(expression.getQualifier());
         String propertyName = ManglingNameUtils.getJsPropertyName(methodDescriptor);
         Preconditions.checkArgument(expression.getArguments().size() == 1);
         return String.format(
@@ -338,10 +332,7 @@ public class StatementSourceGenerator {
 
       private String transformRegularMethodCall(MethodCall expression) {
         MethodDescriptor methodDescriptor = expression.getTarget();
-        String qualifier =
-            methodDescriptor.getJsMethodNamespace() != null
-                ? methodDescriptor.getJsMethodNamespace()
-                : toSource(expression.getQualifier());
+        String qualifier = toSource(expression.getQualifier());
         String methodName = toSource(methodDescriptor);
         List<String> argumentSources = transformNodesToSource(expression.getArguments());
         return String.format(

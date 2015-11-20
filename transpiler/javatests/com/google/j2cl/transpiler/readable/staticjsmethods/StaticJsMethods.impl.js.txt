@@ -8,6 +8,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.staticjsmethods.StaticJsMet
 
 
 let Object = goog.require('gen.java.lang.Object$impl');
+let $Math = goog.require('global.Math');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
@@ -77,8 +78,8 @@ class StaticJsMethods extends Object {
     StaticJsMethods.fun(1);
     StaticJsMethods.f2(1);
     StaticJsMethods.f2(1);
-    Math.floor(1.1);
-    Math.floor(1.1);
+    $Math.floor(1.1);
+    $Math.floor(1.1);
     isFinite(1.1);
     isFinite(1.1);
   }

@@ -8,6 +8,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.jsproperties.Main$impl');
 
 
 let Object = goog.require('gen.java.lang.Object$impl');
+let $Math = goog.require('global.Math');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Bar = goog.forwardDeclare(
@@ -60,7 +61,7 @@ class Main extends Object {
    */
   m_testNativeJsProperty() {
     NativeFoo.$create().hasOwnProperty;
-    Math.PI;
+    $Math.PI;
   }
 
   /**

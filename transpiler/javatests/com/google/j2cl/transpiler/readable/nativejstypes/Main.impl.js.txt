@@ -8,6 +8,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.nativejstypes.Main$impl');
 
 
 let Object = goog.require('gen.java.lang.Object$impl');
+let $Headers = goog.require('global.Headers');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Foo = goog.forwardDeclare('com.acme.MyFoo');
@@ -85,7 +86,7 @@ class Main extends Object {
    */
   static m_testGlobalNativeJsType() {
     Main.$clinit();
-    let header = new Headers();
+    let header = new $Headers();
     header.append("Content-Type", "text/xml");
   }
 

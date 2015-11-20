@@ -36,6 +36,8 @@ are copyright and licensed as follows:
 - Use annotation @abstract for abstract methods. (b/24539710).
 - Namespace on @JsMethod can only be defined on native static methods. Refer to
   previous discussion at cl/106852320.
+- Use one file to export stubs for JS externs, or use separate files for each.
+  (see previous discussion at cl/108187399)
 
 ## Tasks
 - Add a Closure pass to get back the 2% regression introduced in cl/104162467.

@@ -28,6 +28,7 @@ import java.util.Set;
  * Utility functions for Import.
  */
 public class ImportUtils {
+  @SuppressWarnings("unchecked")
   public static List<Import> getSortedImports(Map<ImportCategory, Set<Import>> importsByCategory) {
     return sortedList(
         union(
@@ -41,10 +42,12 @@ public class ImportUtils {
     return sortedList;
   }
 
-  public static <T> Set<T> union(Set<T> left, Set<T> right) {
+  @SuppressWarnings("unchecked")
+  public static <T> Set<T> union(Set<T>... elements) {
     HashSet<T> union = new HashSet<>();
-    union.addAll(left);
-    union.addAll(right);
+    for (Set<T> element : elements) {
+      union.addAll(element);
+    }
     return union;
   }
 }

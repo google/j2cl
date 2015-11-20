@@ -171,7 +171,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     Set<Import> imports = new LinkedHashSet<>();
     for (TypeDescriptor typeDescriptor : typeDescriptors) {
       Preconditions.checkState(!typeDescriptor.isTypeVariable());
-      Preconditions.checkState(!typeDescriptor.isParameterizedType());
+      Preconditions.checkState(typeDescriptor.isNative() || !typeDescriptor.isParameterizedType());
       String shortAliasName = getShortAliasName(typeDescriptor);
       int usageCount = localNameUses.count(shortAliasName);
       String aliasName = usageCount == 1 ? shortAliasName : computeLongAliasName(typeDescriptor);
@@ -188,10 +188,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   private void addTypeDescriptor(TypeDescriptor typeDescriptor, ImportCategory importCategory) {
     // Type variables can't be depended upon.
-    // Do not import global native js types. (window, Math, etc)
-    if (typeDescriptor.isTypeVariable()
-        || typeDescriptor.isWildCard()
-        || typeDescriptor.isGlobalNative()) {
+    if (typeDescriptor.isTypeVariable() || typeDescriptor.isWildCard()) {
       return;
     }
 
@@ -235,6 +232,21 @@ public class ImportGatheringVisitor extends AbstractVisitor {
       }
     }
 
+    // The synthesized raw TypeDescriptor from qualified name "" (global namespace) results in
+    // empty binaryName, which should not be imported.
+    if ("".equals(typeDescriptor.getQualifiedName())) {
+      return;
+    }
+
+    // It is safe to always import externs eagerly. And import the original type not the raw type
+    // otherwise it loses the information whether it is a native type.
+    if (typeDescriptor.isExtern()) {
+      typeDescriptorsByCategory
+          .get(ImportCategory.EAGER)
+          .add((RegularTypeDescriptor) typeDescriptor);
+      return;
+    }
+
     typeDescriptorsByCategory
         .get(importCategory)
         .add((RegularTypeDescriptor) typeDescriptor.getRawTypeDescriptor());
@@ -253,7 +265,8 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   }
 
   private static String getShortAliasName(TypeDescriptor typeDescriptor) {
-    return BootstrapType.typeDescriptors.contains(typeDescriptor)
+    // Add "$" prefix for bootstrap types and extern types.
+    return BootstrapType.typeDescriptors.contains(typeDescriptor) || typeDescriptor.isExtern()
         ? "$" + typeDescriptor.getClassName()
         : typeDescriptor.getClassName();
   }

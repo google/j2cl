@@ -1,0 +1,149 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.importglobaljstypes.Number.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.importglobaljstypes.Number$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Number = goog.require('global.Number');
+let $String = goog.require('global.String');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let String = goog.forwardDeclare('gen.java.lang.String$impl');
+let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
+
+
+class Number extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_importglobaljstypes_Number() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Number}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    Number.$clinit();
+    let instance = new Number;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_importglobaljstypes_Number();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_importglobaljstypes_Number() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_importglobaljstypes_Number();
+  }
+
+  /**
+   * @param {number} x
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static m_test__double(x) {
+    Number.$clinit();
+    return $Number.isInteger(x);
+  }
+
+  /**
+   * @param {*} array
+   * @return {?string}
+   * @public
+   * @nocollapse
+   */
+  static m_fromCharCode__java_lang_Object(array) {
+    Number.$clinit();
+    return $String.fromCharCode.apply(null, array);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof Number; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Number);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    Number.$clinit();
+    if (!Number.$classNumber_) {
+      Number.$classNumber_ = Class.$createForClass(
+          $Util.$generateId('Number'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.importglobaljstypes.Number'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.importglobaljstypes.Number'));
+    }
+    return Number.$classNumber_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return Number.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    String = goog.module.get('gen.java.lang.String$impl');
+    $double = goog.module.get('vmbootstrap.primitives.$double$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Number.$classNumber_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = Number;
