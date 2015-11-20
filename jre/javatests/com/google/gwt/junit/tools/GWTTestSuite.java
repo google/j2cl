@@ -15,6 +15,7 @@
  */
 package com.google.gwt.junit.tools;
 
+import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
@@ -28,5 +29,8 @@ public class GWTTestSuite extends TestSuite {
 
   public GWTTestSuite(String name) {
     super(name);
+  }
+
+  public void addTestSuite(Class<? extends TestCase> testClass) {
   }
 }
