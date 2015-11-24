@@ -1,0 +1,111 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+/**
+ * @interface
+ */
+class OtherInterface {
+  /**
+   * @param {number} a
+   * @return {number}
+   * @public
+   */
+  m_fun__int(a) {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_OtherInterface =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+           instance
+               .$implements__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_OtherInterface;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+           classConstructor.prototype
+               .$implements__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_OtherInterface;
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    OtherInterface.$clinit();
+    if (!OtherInterface.$classOtherInterface_) {
+      OtherInterface.$classOtherInterface_ = Class.$createForInterface(
+          $Util.$generateId('OtherInterface'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface'),
+          null,
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface'));
+    }
+    return OtherInterface.$classOtherInterface_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+OtherInterface.$classOtherInterface_ = null;
+
+
+OtherInterface.$markImplementor(/** @type {Function} */ (OtherInterface));
+
+/**
+ * Export class.
+ */
+exports = OtherInterface;

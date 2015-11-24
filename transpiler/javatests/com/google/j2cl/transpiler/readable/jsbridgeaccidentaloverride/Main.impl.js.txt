@@ -1,0 +1,158 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let MyInterface = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyInterface$impl');
+let MyJsType = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType$impl');
+let OtherInterface = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface$impl');
+let SubJsType = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+class Main extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_Main() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Main}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    Main.$clinit();
+    let instance = new Main;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_Main();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_Main() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_Main();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() {
+    let a = MyJsType.$create();
+    let b = SubJsType.$create();
+    let c = SubJsType.$create();
+    let d = SubJsType.$create();
+    a.foo(1);
+    b.foo(1);
+    c.m_foo__int(1);
+    a.bar(1);
+    b.bar(1);
+    c.m_bar__int(1);
+    a.fun(1);
+    b.fun(1);
+    d.m_fun__int(1);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof Main; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Main);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    Main.$clinit();
+    if (!Main.$classMain_) {
+      Main.$classMain_ = Class.$createForClass(
+          $Util.$generateId('Main'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main'));
+    }
+    return Main.$classMain_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return Main.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   * @nocollapse
+   */
+  static $clinit() {
+    MyInterface = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyInterface$impl');
+    MyJsType = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType$impl');
+    OtherInterface = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface$impl');
+    SubJsType = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Main.$classMain_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = Main;

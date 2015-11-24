@@ -1,0 +1,157 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType$impl');
+
+
+let MyInterface = goog.require('gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyInterface$impl');
+let MyJsType = goog.require('gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+/**
+ * @implements {MyInterface}
+ */
+class SubJsType extends MyJsType {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!SubJsType}
+   * @public
+   * @nocollapse
+   */
+  static $create() {
+    SubJsType.$clinit();
+    let instance = new SubJsType;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType() {
+    this.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyJsType();
+    this.$init__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_SubJsType();
+  }
+
+  /**
+   * @override
+   * @param {number} a
+   * @return {number}
+   * @public
+   */
+  bar(a) { return a + 2; }
+
+  /**
+   * Synthetic method.
+   * @override
+   * @param {number} arg0
+   * @return {number}
+   * @public
+   */
+  m_bar__int(arg0) { return this.bar(arg0); }
+
+  /**
+   * Synthetic method.
+   * @override
+   * @param {number} arg0
+   * @return {number}
+   * @public
+   */
+  m_foo__int(arg0) { return this.foo(arg0); }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isInstance(instance) { return instance instanceof SubJsType; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   * @nocollapse
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SubJsType);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   * @nocollapse
+   */
+  static $getClass() {
+    SubJsType.$clinit();
+    if (!SubJsType.$classSubJsType_) {
+      SubJsType.$classSubJsType_ = Class.$createForClass(
+          $Util.$generateId('SubJsType'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType'),
+          MyJsType.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType'));
+    }
+    return SubJsType.$classSubJsType_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return SubJsType.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   * @nocollapse
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    MyJsType.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+SubJsType.$classSubJsType_ = null;
+
+
+MyInterface.$markImplementor(SubJsType);
+
+
+
+/**
+ * Export class.
+ */
+exports = SubJsType;

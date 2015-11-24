@@ -351,26 +351,22 @@ public class JdtUtils {
    */
   private static List<IMethodBinding> getUnimplementedMethodBindings(
       ITypeBinding superTypeBinding, final ITypeBinding typeBinding) {
-    return Lists.newArrayList(
-        FluentIterable.from(superTypeBinding.getDeclaredMethods())
-            .filter(
-                new Predicate<IMethodBinding>() {
-                  @Override
-                  public boolean apply(IMethodBinding methodBinding) {
-                    return !isImplementedBy(methodBinding, typeBinding);
-                  }
-                }));
+    return filterMethodBindings(
+        superTypeBinding.getDeclaredMethods(),
+        new Predicate<IMethodBinding>() {
+          @Override
+          public boolean apply(IMethodBinding methodBinding) {
+            return !isImplementedBy(methodBinding, typeBinding);
+          }
+        });
   }
 
   /**
    * Returns true if {@code typeBinding} implements an overridden method of {@code methodBinding}.
    */
   private static boolean isImplementedBy(IMethodBinding methodBinding, ITypeBinding typeBinding) {
-    // implemented by typeBinding.
-    for (IMethodBinding declaredMethodBinding : typeBinding.getDeclaredMethods()) {
-      if (areParameterErasureEqual(declaredMethodBinding, methodBinding)) {
-        return true;
-      }
+    if (isDeclaredBy(methodBinding, typeBinding)) {
+      return true;
     }
     ITypeBinding superclassTypeBinding = typeBinding.getSuperclass();
     // implemented by its superclass.
@@ -378,10 +374,64 @@ public class JdtUtils {
   }
 
   /**
+   * Returns the methods in {@code typeBinding}'s interfaces that are accidentally overridden.
+   *
+   * <p>'Accidentally overridden' means the type itself does not have its own declared overriding
+   * method, and the method it inherits does not really override, but just has the same signature of
+   * the overridden method.
+   */
+  static List<IMethodBinding> getAccidentalOverriddenMethodBindings(ITypeBinding typeBinding) {
+    List<IMethodBinding> accidentalOverriddenMethods = new ArrayList<>();
+    for (ITypeBinding superInterface :
+        Sets.difference(
+            getAllInterfaces(typeBinding), getAllInterfaces(typeBinding.getSuperclass()))) {
+      accidentalOverriddenMethods.addAll(getUndeclaredMethodBindings(superInterface, typeBinding));
+    }
+    return accidentalOverriddenMethods;
+  }
+
+  /**
+   * Returns the methods that are declared by {@code superTypeBinding} but are not declared
+   * by {@code typeBinding}.
+   */
+  private static List<IMethodBinding> getUndeclaredMethodBindings(
+      ITypeBinding superTypeBinding, final ITypeBinding typeBinding) {
+    return filterMethodBindings(
+        superTypeBinding.getDeclaredMethods(),
+        new Predicate<IMethodBinding>() {
+          @Override
+          public boolean apply(IMethodBinding methodBinding) {
+            return !isDeclaredBy(methodBinding, typeBinding);
+          }
+        });
+  }
+
+  /**
+   * Returns true if {@code typeBinding} declares a method with the same signature of
+   * {@code methodBinding} in its body.
+   */
+  private static boolean isDeclaredBy(IMethodBinding methodBinding, ITypeBinding typeBinding) {
+    for (IMethodBinding declaredMethodBinding : typeBinding.getDeclaredMethods()) {
+      if (areParameterErasureEqual(declaredMethodBinding, methodBinding)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private static List<IMethodBinding> filterMethodBindings(
+      IMethodBinding[] methodBindings, Predicate<IMethodBinding> predicate) {
+    return Lists.newArrayList(FluentIterable.from(methodBindings).filter(predicate));
+  }
+
+  /**
    * Returns all the interfaces {@code typeBinding} implements.
    */
   static Set<ITypeBinding> getAllInterfaces(ITypeBinding typeBinding) {
     Set<ITypeBinding> interfaces = new LinkedHashSet<>();
+    if (typeBinding == null) {
+      return interfaces;
+    }
     for (ITypeBinding superInterface : typeBinding.getInterfaces()) {
       interfaces.add(superInterface);
       interfaces.addAll(getAllInterfaces(superInterface));
@@ -391,6 +441,25 @@ public class JdtUtils {
       interfaces.addAll(getAllInterfaces(superclassTypeBinding));
     }
     return interfaces;
+  }
+
+  /**
+   * Returns the nearest method in the super classes of {code typeBinding} that overrides (regularly
+   * or accidentally) {@code methodBinding}.
+   */
+  static IMethodBinding getOverridingMethodInSuperclasses(
+      IMethodBinding methodBinding, ITypeBinding typeBinding) {
+    ITypeBinding superclass = typeBinding.getSuperclass();
+    while (superclass != null) {
+      for (IMethodBinding methodInSuperclass : superclass.getDeclaredMethods()) {
+        // TODO: excludes package private method, and add a test for it.
+        if (JdtUtils.areParameterErasureEqual(methodInSuperclass, methodBinding)) {
+          return methodInSuperclass;
+        }
+      }
+      superclass = superclass.getSuperclass();
+    }
+    return null;
   }
 
   public static PrefixOperator getPrefixOperator(PrefixExpression.Operator operator) {
@@ -693,6 +762,14 @@ public class JdtUtils {
       if (methodBinding.overrides(declaredMethod)) {
         overriddenMethods.add(declaredMethod);
       }
+    }
+    // Recurse into immediate super class and interfaces for overridden method.
+    if (typeBinding.getSuperclass() != null) {
+      overriddenMethods.addAll(
+          getOverriddenMethodsInType(methodBinding, typeBinding.getSuperclass()));
+    }
+    for (ITypeBinding interfaceBinding : typeBinding.getInterfaces()) {
+      overriddenMethods.addAll(getOverriddenMethodsInType(methodBinding, interfaceBinding));
     }
     return overriddenMethods;
   }
