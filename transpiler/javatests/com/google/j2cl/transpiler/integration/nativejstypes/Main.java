@@ -15,6 +15,8 @@ public class Main {
     bar.x = 50;
     bar.y = 5;
     assert bar.product() == 250;
+    Bar.f = 10;
+    assert Bar.f == 10;
   }
 
   public static void testGlobalNativeJsType() {

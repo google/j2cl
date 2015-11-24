@@ -9,6 +9,7 @@ import jsinterop.annotations.JsType;
 public class Bar {
   public int x;
   public int y;
+  public static int f;
 
   public Bar(int x, int y) {};
 

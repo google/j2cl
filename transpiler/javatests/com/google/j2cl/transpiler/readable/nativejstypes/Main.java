@@ -12,6 +12,7 @@ public class Main {
     Bar bar = new Bar(6, 7);
     bar.x = 50;
     bar.y = 5;
+    Bar.f = 10;
     return bar.product();
   }
 

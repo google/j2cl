@@ -9,4 +9,9 @@ class Bar {
   product() { return this.x * this.y; }
 };
 
+/**
+ * @public {number}
+ */
+Bar.f = 10;
+
 exports = Bar;

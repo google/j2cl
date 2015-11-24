@@ -89,6 +89,10 @@ public class AddClassInitAtCallSite {
         // The class already calls its own clinit so don't do anything.
         return true;
       }
+      if (fieldAccess.getTarget().getEnclosingClassTypeDescriptor().isNative()) {
+        // Do not call clinit on native js types.
+        return true;
+      }
       Method currentmethod = getCurrentMethod();
       if (currentmethod != null) {
         addTypeToMapForMethod(
