@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.nativeinjection;
 
+import jsinterop.annotations.JsMethod;
+
 /**
  * Integration tests for native methods.
  */
@@ -24,4 +26,10 @@ public class Main {
     NativeClass instance = new NativeClass();
     assert instance.nativeInstanceMethod().equals("nativeInstanceMethod");
   }
+
+  /**
+   * Tests for not requiring .native.js for native JsMethod.
+   */
+  @JsMethod
+  public native void test();
 }

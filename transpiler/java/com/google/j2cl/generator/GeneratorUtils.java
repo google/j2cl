@@ -182,7 +182,7 @@ public class GeneratorUtils {
    */
   public static boolean shouldNotEmitCode(Method method) {
     return method.isNative()
-        && (method.getDescriptor().isJsProperty() || method.getDescriptor().hasJsMethodNamespace());
+        && (method.getDescriptor().isJsProperty() || method.getDescriptor().isJsMethod());
   }
 
   // Returns if it is java type that is unboxed as Javascript primitive types.

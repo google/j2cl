@@ -639,7 +639,9 @@ public class JdtUtils {
     // Assume all the js methods in one overriding chain has the same js method name.
     // TODO: add JsInterop Restriction check for the assumption.
     if (JsInteropUtils.isJsMethod(methodBinding)) {
-      return JsInteropUtils.getJsName(JsInteropUtils.getJsMethodAnnotation(methodBinding));
+      String jsMethodName =
+          JsInteropUtils.getJsName(JsInteropUtils.getJsMethodAnnotation(methodBinding));
+      return jsMethodName == null ? methodBinding.getName() : jsMethodName;
     }
     if (JsInteropUtils.isJsProperty(methodBinding)) {
       return JsInteropUtils.getJsName(JsInteropUtils.getJsPropertyAnnotation(methodBinding));

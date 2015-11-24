@@ -69,18 +69,20 @@ public class JavaScriptGeneratorStage {
         JavaScriptImplGenerator jsImplGenerator =
             new JavaScriptImplGenerator(errors, javaType, velocityEngine);
 
-        // TODO: This is a temporary fix to stop the transpiler from trying to find native sources
-        // when we compile the JRE. The '!nativeJavaScriptFileZipPaths.isEmpty() &&' check should
-        // be removed when the JRE is ready to go.
-        if (!nativeJavaScriptFileZipPaths.isEmpty() && javaType.containsNativeMethods()) {
+        if (javaType.containsNativeMethods()) {
+          // If the java type contains any native methods, searching for matching native file.
           String javaTypePath = GeneratorUtils.getRelativePath(javaType);
           NativeJavaScriptFile matchingNativeFile = nativeFiles.get(javaTypePath);
-          if (matchingNativeFile == null) {
+          if (matchingNativeFile != null) {
+            jsImplGenerator.setNativeSource(matchingNativeFile.getContent());
+            matchingNativeFile.setUsed();
+          }
+          // If not matching native file is found, and the java type contains non-JsMethod native
+          // method, reports an error.
+          if (matchingNativeFile == null && javaType.containsNonJsNativeMethods()) {
             errors.error(Errors.Error.ERR_NATIVE_JAVA_SOURCE_NO_MATCH, javaTypePath);
             return;
           }
-          jsImplGenerator.setNativeSource(matchingNativeFile.getContent());
-          matchingNativeFile.setUsed();
         }
 
         Path absolutePathForImpl =

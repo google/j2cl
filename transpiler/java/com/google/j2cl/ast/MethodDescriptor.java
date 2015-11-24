@@ -210,6 +210,13 @@ public abstract class MethodDescriptor extends Node implements Member {
     return isJsProperty() && getParameterTypeDescriptors().size() == 1;
   }
 
+  /**
+   * If the method is JsMethod, its jsMethodName should have been set an non-null String.
+   */
+  public boolean isJsMethod() {
+    return getJsMethodName() != null;
+  }
+
   @Override
   public Node accept(Processor processor) {
     return Visitor_MethodDescriptor.visit(processor, this);

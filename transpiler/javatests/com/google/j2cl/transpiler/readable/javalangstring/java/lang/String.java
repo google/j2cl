@@ -1,5 +1,7 @@
 package java.lang;
 
+import jsinterop.annotations.JsMethod;
+
 /**
  * See <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html">the
@@ -63,9 +65,11 @@ public final class String implements java.io.Serializable, Comparable<String>, C
     return $trim(this);
   }
 
+  @JsMethod
   private static native boolean nativeIsInstance(
       Object instance) /*-{return typeof instance == 'string';}-*/;
 
+  @JsMethod
   private static native int $hashCode(String obj) /*-{
     let hashCode = 0;
     let len = obj.length;
@@ -75,26 +79,33 @@ public final class String implements java.io.Serializable, Comparable<String>, C
     return hashCode;
   }-*/;
 
+  @JsMethod
   private static native int $length(String obj) /*-{ return obj.length; }-*/;
 
+  @JsMethod
   private static native char $charAt(String obj, int index) /*-{
     return obj.charCodeAt(index);
   }-*/;
 
+  @JsMethod
   private static native String $subSequence(String obj, int start, int end) /*-{
     return obj.substring(start, end);
   }-*/;
 
+  @JsMethod
   private static native String $substring(String obj, int start, int endIndex) /*-{
     return obj.substring(start, endIndex);
   }-*/;
 
+  @JsMethod
   private static native String $substring(String obj, int start) /*-{
     return obj.substring(start);
   }-*/;
 
+  @JsMethod
   private static native String $trim(String obj) /*-{ return obj.trim(); }-*/;
 
+  @JsMethod
   private static native int $compareTo(String one, String other) /*-{
     if (one == other) {
       return 0;

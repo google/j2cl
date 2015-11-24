@@ -17,4 +17,5 @@ integration_test(
     srcs = glob(["*.java"]),
     native_srcs = ["NativeClass.native.js"],
     native_srcs_pkg = "com/google/j2cl/transpiler/integration/nativeinjection",
+    deps = ["//jre/java:gwt-jsinterop-annotations"],
 )

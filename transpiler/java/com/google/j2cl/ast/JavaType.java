@@ -93,10 +93,20 @@ public class JavaType extends Node {
     return isStatic;
   }
 
+  public boolean containsNonJsNativeMethods() {
+    for (Method method : methods) {
+      if (method.isNative()
+          && !method.getDescriptor().isJsProperty()
+          && !method.getDescriptor().isJsMethod()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public boolean containsNativeMethods() {
     for (Method method : methods) {
-      // Do not ask for *.native.js files for native JsProperty method.
-      if (method.isNative() && !method.getDescriptor().isJsProperty()) {
+      if (method.isNative()) {
         return true;
       }
     }

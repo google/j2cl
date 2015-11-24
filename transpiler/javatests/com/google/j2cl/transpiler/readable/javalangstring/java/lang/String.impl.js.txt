@@ -127,94 +127,6 @@ class String extends Object {
   m_trim() {}
 
   /**
-   * @param {*} instance
-   * @return {boolean}
-   * @public
-   * @nocollapse
-   */
-  // native static
-  // m_nativeIsInstance__java_lang_Object_$p_java_lang_String(instance)
-
-  /**
-   * @param {?string} obj
-   * @return {number}
-   * @public
-   * @nocollapse
-   */
-  // native static m_$hashCode__java_lang_String_$p_java_lang_String(obj)
-
-  /**
-   * @param {?string} obj
-   * @return {number}
-   * @public
-   * @nocollapse
-   */
-  // native static m_$length__java_lang_String_$p_java_lang_String(obj)
-
-  /**
-   * @param {?string} obj
-   * @param {number} index
-   * @return {number}
-   * @public
-   * @nocollapse
-   */
-  // native static m_$charAt__java_lang_String__int_$p_java_lang_String(obj,
-  // index)
-
-  /**
-   * @param {?string} obj
-   * @param {number} start
-   * @param {number} end
-   * @return {?string}
-   * @public
-   * @nocollapse
-   */
-  // native static
-  // m_$subSequence__java_lang_String__int__int_$p_java_lang_String(obj, start,
-  // end)
-
-  /**
-   * @param {?string} obj
-   * @param {number} start
-   * @param {number} endIndex
-   * @return {?string}
-   * @public
-   * @nocollapse
-   */
-  // native static
-  // m_$substring__java_lang_String__int__int_$p_java_lang_String(obj, start,
-  // endIndex)
-
-  /**
-   * @param {?string} obj
-   * @param {number} start
-   * @return {?string}
-   * @public
-   * @nocollapse
-   */
-  // native static m_$substring__java_lang_String__int_$p_java_lang_String(obj,
-  // start)
-
-  /**
-   * @param {?string} obj
-   * @return {?string}
-   * @public
-   * @nocollapse
-   */
-  // native static m_$trim__java_lang_String_$p_java_lang_String(obj)
-
-  /**
-   * @param {?string} one
-   * @param {?string} other
-   * @return {number}
-   * @public
-   * @nocollapse
-   */
-  // native static
-  // m_$compareTo__java_lang_String__java_lang_String_$p_java_lang_String(one,
-  // other)
-
-  /**
    * Synthetic method.
    * @param {?string} arg0
    * @return {number}
@@ -242,7 +154,7 @@ class String extends Object {
    */
   static m_hashCode__java_lang_String($thisArg) {
     String.$clinit();
-    return String.m_$hashCode__java_lang_String_$p_java_lang_String($thisArg);
+    return String.$hashCode($thisArg);
   }
 
   /**
@@ -264,7 +176,7 @@ class String extends Object {
    */
   static m_length__java_lang_String($thisArg) {
     String.$clinit();
-    return String.m_$length__java_lang_String_$p_java_lang_String($thisArg);
+    return String.$length($thisArg);
   }
 
   /**
@@ -276,8 +188,7 @@ class String extends Object {
    */
   static m_charAt__java_lang_String__int($thisArg, index) {
     String.$clinit();
-    return String.m_$charAt__java_lang_String__int_$p_java_lang_String(
-        $thisArg, index);
+    return String.$charAt($thisArg, index);
   }
 
   /**
@@ -290,9 +201,7 @@ class String extends Object {
    */
   static m_subSequence__java_lang_String__int__int($thisArg, start, end) {
     String.$clinit();
-    return String
-        .m_$subSequence__java_lang_String__int__int_$p_java_lang_String(
-            $thisArg, start, end);
+    return String.$subSequence($thisArg, start, end);
   }
 
   /**
@@ -304,9 +213,7 @@ class String extends Object {
    */
   static m_compareTo__java_lang_String__java_lang_String($thisArg, s) {
     String.$clinit();
-    return String
-        .m_$compareTo__java_lang_String__java_lang_String_$p_java_lang_String(
-            $thisArg, s);
+    return String.$compareTo($thisArg, s);
   }
 
   /**
@@ -319,8 +226,7 @@ class String extends Object {
    */
   static m_substring__java_lang_String__int__int($thisArg, start, endIndex) {
     String.$clinit();
-    return String.m_$substring__java_lang_String__int__int_$p_java_lang_String(
-        $thisArg, start, endIndex);
+    return String.$substring($thisArg, start, endIndex);
   }
 
   /**
@@ -332,8 +238,7 @@ class String extends Object {
    */
   static m_substring__java_lang_String__int($thisArg, start) {
     String.$clinit();
-    return String.m_$substring__java_lang_String__int_$p_java_lang_String(
-        $thisArg, start);
+    return String.$substring($thisArg, start);
   }
 
   /**
@@ -344,7 +249,7 @@ class String extends Object {
    */
   static m_trim__java_lang_String($thisArg) {
     String.$clinit();
-    return String.m_$trim__java_lang_String_$p_java_lang_String($thisArg);
+    return String.$trim($thisArg);
   }
 
   /**
