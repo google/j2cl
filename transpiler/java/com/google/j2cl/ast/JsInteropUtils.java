@@ -75,8 +75,12 @@ public class JsInteropUtils {
 
   public static boolean isJsProperty(IVariableBinding variableBinding) {
     Preconditions.checkArgument(variableBinding.isField());
-    // TODO: add @JsProperty check.
-    // public fields in JsType annotated class are JsProperty.
+    IAnnotationBinding jsPropertyAnnotation =
+        JdtAnnotationUtils.findAnnotationBindingByName(
+            variableBinding.getAnnotations(), JS_PROPERTY_ANNOTATION_NAME);
+    if (jsPropertyAnnotation != null) {
+      return true;
+    }
     IAnnotationBinding jsTypeAnnotation = getJsTypeAnnotation(variableBinding.getDeclaringClass());
     return jsTypeAnnotation != null && Modifier.isPublic(variableBinding.getModifiers());
   }

@@ -150,6 +150,7 @@ public class JdtUtils {
             : methodBinding.getName();
     boolean isRaw = false;
 
+    // TODO: go over the overriding chain to check if the method is a JsProperty.
     boolean isJsProperty = JsInteropUtils.isJsProperty(methodBinding);
     String jsMethodNamespace = getJsMethodNamespace(methodBinding);
     // direct JsMethod and its overriding methods are emit with non-mangled name.
@@ -707,13 +708,17 @@ public class JdtUtils {
   static String getJsMethodName(IMethodBinding methodBinding) {
     // Assume all the js methods in one overriding chain has the same js method name.
     // TODO: add JsInterop Restriction check for the assumption.
+    // TODO: refactoring. Currently we rely on checking if jsMethodName is null to decide if it is
+    // a JsMethod, while jsMethodName can be set by @JsMethod, @JsProperty annotation and by the
+    // original method name. And the order checking these annotations really matter. This is buggy.
+    // Doing similar abstraction as GWT does will be helpful.
+    if (JsInteropUtils.isJsProperty(methodBinding)) {
+      return JsInteropUtils.getJsName(JsInteropUtils.getJsPropertyAnnotation(methodBinding));
+    }
     if (JsInteropUtils.isJsMethod(methodBinding)) {
       String jsMethodName =
           JsInteropUtils.getJsName(JsInteropUtils.getJsMethodAnnotation(methodBinding));
       return jsMethodName == null ? methodBinding.getName() : jsMethodName;
-    }
-    if (JsInteropUtils.isJsProperty(methodBinding)) {
-      return JsInteropUtils.getJsName(JsInteropUtils.getJsPropertyAnnotation(methodBinding));
     }
     Set<IMethodBinding> overriddenJsMethods = getOverriddenJsMethods(methodBinding);
     return overriddenJsMethods.isEmpty()
