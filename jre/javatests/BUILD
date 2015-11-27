@@ -92,6 +92,7 @@ java_test(
 j2cl_multi_test(
     name = "BigDecimal",
     srcs = ["com/google/gwt/emultest/BigDecimalTests.java"],
+    test_class = "com.google.gwt.emultest.BigDecimalTests",
     deps = [
         ":emul_tests_lib_j2cl",
         "//third_party/java/junit",
@@ -101,6 +102,7 @@ j2cl_multi_test(
 j2cl_multi_test(
     name = "BigInteger",
     srcs = ["com/google/gwt/emultest/BigIntegerTests.java"],
+    test_class = "com.google.gwt.emultest.BigIntegerTests",
     deps = [
         ":emul_tests_lib_j2cl",
         "//third_party/java/junit",
@@ -110,6 +112,7 @@ j2cl_multi_test(
 j2cl_multi_test(
     name = "Collections",
     srcs = ["com/google/gwt/emultest/CollectionsTests.java"],
+    test_class = "com.google.gwt.emultest.CollectionsTests",
     deps = [
         ":emul_tests_lib_j2cl",
         "//third_party/java/junit",
@@ -119,6 +122,7 @@ j2cl_multi_test(
 j2cl_multi_test(
     name = "Emul",
     srcs = ["com/google/gwt/emultest/EmulTests.java"],
+    test_class = "com.google.gwt.emultest.EmulTests",
     deps = [
         ":emul_tests_lib_j2cl",
         "//third_party/java/junit",

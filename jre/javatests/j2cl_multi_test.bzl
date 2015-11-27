@@ -15,6 +15,6 @@ j2cl_multi_test(
 
 load("/third_party/java/j2cl/j2cl_test", "j2cl_test")
 
-def j2cl_multi_test(name, **kwargs):
-  j2cl_test(name = name + "_compiled", compile = 1, **kwargs)
-  j2cl_test(name = name + "_uncompiled", compile = 0, **kwargs)
+def j2cl_multi_test(name, test_class, **kwargs):
+  j2cl_test(name = name + "_compiled", test_class = test_class, compile = 1, **kwargs)
+  j2cl_test(name = name + "_uncompiled", test_class = test_class, compile = 0, **kwargs)
