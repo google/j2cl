@@ -312,7 +312,7 @@ public class StatementSourceGenerator {
       private String transformJsPropertyGetter(MethodCall expression) {
         MethodDescriptor methodDescriptor = expression.getTarget();
         String qualifier = toSource(expression.getQualifier());
-        String propertyName = ManglingNameUtils.getJsPropertyName(methodDescriptor);
+        String propertyName = methodDescriptor.getJsPropertyName();
         return Joiner.on(".").skipNulls().join(Strings.emptyToNull(qualifier), propertyName);
       }
 
@@ -322,7 +322,7 @@ public class StatementSourceGenerator {
       private String transformJsPropertySetter(MethodCall expression) {
         MethodDescriptor methodDescriptor = expression.getTarget();
         String qualifier = toSource(expression.getQualifier());
-        String propertyName = ManglingNameUtils.getJsPropertyName(methodDescriptor);
+        String propertyName = methodDescriptor.getJsPropertyName();
         Preconditions.checkArgument(expression.getArguments().size() == 1);
         return String.format(
             "%s = %s",

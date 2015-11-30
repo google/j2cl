@@ -21,6 +21,7 @@ import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -151,9 +152,7 @@ public class InsertUnderflowOverflowConversionVisitor extends ConversionContextV
             overflowMethodName,
             Lists.newArrayList(fromTypeDescriptor),
             toTypeDescriptor,
-            null,
-            null,
-            false);
+            JsInfo.NONE);
     // Primitives.$toA(expr);
     return MethodCall.createRegularMethodCall(null, overflowMethodDescriptor, expression);
   }

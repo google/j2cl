@@ -19,6 +19,7 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodBuilder;
 import com.google.j2cl.ast.MethodCall;
@@ -50,9 +51,7 @@ public class InsertClassInitStaticMethods {
                 "$clinit",
                 new ArrayList<TypeDescriptor>(),
                 TypeDescriptors.get().primitiveVoid,
-                null,
-                null,
-                false);
+                JsInfo.NONE);
         MethodCall call =
             MethodCall.createRegularMethodCall(null, clinitDescriptor, new ArrayList<Expression>());
         return MethodBuilder.from(node).statement(0, new ExpressionStatement(call)).build();

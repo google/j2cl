@@ -25,6 +25,7 @@ import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -184,9 +185,7 @@ public class AddClassInitAtCallSite {
             "$clinit",
             new ArrayList<TypeDescriptor>(),
             TypeDescriptors.get().primitiveVoid,
-            null,
-            null,
-            false);
+            JsInfo.NONE);
     MethodCall clinitCall =
         MethodCall.createRegularMethodCall(
             null, clinitMethodDescriptor, new ArrayList<Expression>());

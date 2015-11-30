@@ -20,6 +20,7 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -130,9 +131,7 @@ public class InsertWideningPrimitiveConversionVisitor extends ConversionContextV
             widenMethodName,
             Lists.newArrayList(fromTypeDescriptor),
             toTypeDescriptor,
-            null,
-            null,
-            false);
+            JsInfo.NONE);
     // Primitives.$widenAToB(expr);
     return MethodCall.createRegularMethodCall(null, widenMethodDescriptor, subjectExpression);
   }

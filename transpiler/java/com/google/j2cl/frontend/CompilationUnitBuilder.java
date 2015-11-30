@@ -50,6 +50,7 @@ import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.LabeledStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
@@ -1046,9 +1047,7 @@ public class CompilationUnitBuilder {
               methodName,
               parameterTypeDescriptors,
               returnTypeDescriptor,
-              null,
-              null,
-              false);
+              JsInfo.NONE);
       return new Method(methodDescriptor, parameters, body);
     }
 
@@ -1557,9 +1556,7 @@ public class CompilationUnitBuilder {
                 "$getClass",
                 new ArrayList<TypeDescriptor>(),
                 javaLangClassTypeDescriptor,
-                null,
-                null,
-                false);
+                JsInfo.NONE);
         return MethodCall.createRegularMethodCall(null, classMethodDescriptor);
       }
 
@@ -1571,9 +1568,7 @@ public class CompilationUnitBuilder {
               "$getClass",
               new ArrayList<TypeDescriptor>(),
               javaLangClassTypeDescriptor,
-              null,
-              null,
-              false);
+              JsInfo.NONE);
 
       MethodDescriptor forArrayMethodDescriptor =
           MethodDescriptor.createRaw(
@@ -1583,9 +1578,7 @@ public class CompilationUnitBuilder {
               "$forArray",
               Lists.newArrayList(TypeDescriptors.get().primitiveInt),
               javaLangClassTypeDescriptor,
-              null,
-              null,
-              false);
+              JsInfo.NONE);
 
       // <ClassLiteralClass>.$getClass().forArray(<dimensions>)
       return MethodCall.createRegularMethodCall(

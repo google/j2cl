@@ -24,7 +24,6 @@ import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 
-import java.beans.Introspector;
 import java.util.List;
 
 /**
@@ -50,12 +49,12 @@ public class ManglingNameUtils {
   public static String getMangledName(MethodDescriptor methodDescriptor) {
     if (methodDescriptor.isJsProperty()) {
       // return the property name.
-      return getJsPropertyName(methodDescriptor);
+      return methodDescriptor.getJsPropertyName();
     }
     if (methodDescriptor.isRaw()) {
-      return methodDescriptor.getJsMethodName() == null
+      return methodDescriptor.getJsName() == null
           ? methodDescriptor.getMethodName()
-          : methodDescriptor.getJsMethodName();
+          : methodDescriptor.getJsName();
     }
     String suffix;
     switch (methodDescriptor.getVisibility()) {
@@ -117,29 +116,6 @@ public class ManglingNameUtils {
     String typeMangledName = getMangledName(fieldDescriptor.getEnclosingClassTypeDescriptor());
     String privateSuffix = fieldDescriptor.getVisibility().isPrivate() ? "_" : "";
     return String.format("f_%s__%s%s", name, typeMangledName, privateSuffix);
-  }
-
-  public static String getJsPropertyName(MethodDescriptor methodDescriptor) {
-    if (methodDescriptor.isJsProperty() && methodDescriptor.getJsMethodName() != null) {
-      return methodDescriptor.getJsMethodName();
-    }
-    String methodName = methodDescriptor.getMethodName();
-    if (startsWithCamelCase(methodName, "get")) {
-      return Introspector.decapitalize(methodName.substring(3));
-    }
-    if (startsWithCamelCase(methodName, "set")) {
-      return Introspector.decapitalize(methodName.substring(3));
-    }
-    if (startsWithCamelCase(methodName, "is")) {
-      return Introspector.decapitalize(methodName.substring(2));
-    }
-    return null;
-  }
-
-  private static boolean startsWithCamelCase(String string, String prefix) {
-    return string.length() > prefix.length()
-        && string.startsWith(prefix)
-        && Character.isUpperCase(string.charAt(prefix.length()));
   }
 
   private static String getMangledParameterSignature(MethodDescriptor methodDescriptor) {

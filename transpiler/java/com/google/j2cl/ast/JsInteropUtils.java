@@ -59,6 +59,47 @@ public class JsInteropUtils {
     return JdtAnnotationUtils.getAnnotationParameterString(annotationBinding, "name");
   }
 
+  /**
+   * Simply resolve the JsInfo from annotations. Do not do any extra computations. For example, if
+   * there is no "name" is specified in the annotation, just returns null for JsName.
+   */
+  public static JsInfo getJsInfo(IMethodBinding methodBinding) {
+    // check @JsProperty annotation
+    IAnnotationBinding jsPropertyAnnotation = getJsPropertyAnnotation(methodBinding);
+    if (jsPropertyAnnotation != null) {
+      String jsPropertyName = getJsName(jsPropertyAnnotation);
+      String jsPropertyNamespace = getJsNamespace(jsPropertyAnnotation);
+      if (jsPropertyName != null) {
+        // A JsProperty name is specified, it is a {@code PROPERTY} type.
+        return JsInfo.create(JsMemberType.PROPERTY, jsPropertyName, jsPropertyNamespace);
+      } else {
+        // Otherwise, it is a JsProperty getter or setter.
+        return JsInfo.create(
+            methodBinding.getParameterTypes().length == 0
+                ? JsMemberType.GETTER
+                : JsMemberType.SETTER,
+            jsPropertyName,
+            jsPropertyNamespace);
+      }
+    }
+    // check @JsMethod annotation
+    IAnnotationBinding jsMethodAnnotation = getJsMethodAnnotation(methodBinding);
+    if (jsMethodAnnotation != null) {
+      String jsMethodName = getJsName(jsMethodAnnotation);
+      String jsMethodNamespace = getJsNamespace(jsMethodAnnotation);
+      return JsInfo.create(JsMemberType.METHOD, jsMethodName, jsMethodNamespace);
+    }
+    // check @JsType annotation
+    IAnnotationBinding jsTypeAnnotation = getJsTypeAnnotation(methodBinding.getDeclaringClass());
+    if (jsTypeAnnotation != null && Modifier.isPublic(methodBinding.getModifiers())) {
+      return JsInfo.create(JsMemberType.METHOD, null, null);
+    }
+    return JsInfo.NONE;
+  }
+
+  /**
+   * Returns true if the method is a directly annotated JsMethod.
+   */
   public static boolean isJsMethod(IMethodBinding methodBinding) {
     IAnnotationBinding jsMethodAnnotation = getJsMethodAnnotation(methodBinding);
     if (jsMethodAnnotation != null) {
@@ -67,10 +108,6 @@ public class JsInteropUtils {
     // public methods in JsType annotated class are JsMethod.
     IAnnotationBinding jsTypeAnnotation = getJsTypeAnnotation(methodBinding.getDeclaringClass());
     return jsTypeAnnotation != null && Modifier.isPublic(methodBinding.getModifiers());
-  }
-
-  public static boolean isJsProperty(IMethodBinding methodBinding) {
-    return getJsPropertyAnnotation(methodBinding) != null;
   }
 
   public static boolean isJsProperty(IVariableBinding variableBinding) {

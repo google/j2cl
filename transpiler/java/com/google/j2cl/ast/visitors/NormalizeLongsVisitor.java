@@ -23,6 +23,7 @@ import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
@@ -89,9 +90,7 @@ public class NormalizeLongsVisitor extends AbstractRewriter {
             getLongOperationFunctionName(operator),
             Lists.newArrayList(leftParameterTypeDescriptor, rightParameterTypeDescriptor),
             returnTypeDescriptor,
-            null,
-            null,
-            false);
+            JsInfo.NONE);
     // LongUtils.$someOperation(leftOperand, rightOperand);
     return MethodCall.createRegularMethodCall(
         null, longUtilsMethodDescriptor, Lists.newArrayList(leftArgument, rightArgument));
@@ -121,9 +120,7 @@ public class NormalizeLongsVisitor extends AbstractRewriter {
             getLongOperationFunctionName(operator),
             Lists.newArrayList(parameterTypeDescriptor),
             returnTypeDescriptor,
-            null,
-            null,
-            false);
+            JsInfo.NONE);
     // LongUtils.$someOperation(operand);
     return MethodCall.createRegularMethodCall(null, longUtilsMethodDescriptor, argument);
   }

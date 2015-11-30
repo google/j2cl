@@ -25,6 +25,7 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.IfStatement;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NullLiteral;
@@ -120,9 +121,7 @@ public class NormalizeTryWithResourceVisitor extends AbstractRewriter {
             Arrays.asList(
                 TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangThrowable),
             TypeDescriptors.get().javaLangThrowable,
-            null,
-            null,
-            false);
+            JsInfo.NONE);
     List<Statement> outputStatements = new ArrayList<>();
 
     Variable primaryException =

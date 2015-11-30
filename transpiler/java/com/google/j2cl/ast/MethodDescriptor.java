@@ -24,8 +24,6 @@ import com.google.j2cl.ast.processors.Visitable;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.annotation.Nullable;
-
 /**
  * A (by signature) reference to a method.
  */
@@ -55,9 +53,7 @@ public abstract class MethodDescriptor extends Node implements Member {
       TypeDescriptor returnTypeDescriptor,
       Iterable<TypeDescriptor> parameterTypeDescriptors,
       Iterable<TypeDescriptor> typeParameterTypeDescriptors,
-      String jsMethodNamespace,
-      String jsMethodName,
-      boolean isJsProperty) {
+      JsInfo jsInfo) {
     return getInterner()
         .intern(
             new AutoValue_MethodDescriptor(
@@ -71,9 +67,7 @@ public abstract class MethodDescriptor extends Node implements Member {
                 ImmutableList.copyOf(parameterTypeDescriptors),
                 returnTypeDescriptor,
                 ImmutableList.copyOf(typeParameterTypeDescriptors),
-                jsMethodNamespace,
-                jsMethodName,
-                isJsProperty));
+                jsInfo));
   }
 
   public static MethodDescriptor create(
@@ -96,9 +90,7 @@ public abstract class MethodDescriptor extends Node implements Member {
         returnTypeDescriptor,
         parameterTypeDescriptors,
         ImmutableList.<TypeDescriptor>of(),
-        null, // non-raw method has no jsmethod namespace nor jsmethod name.
-        null,
-        false);
+        JsInfo.NONE);
   }
 
   public static MethodDescriptor create(
@@ -131,9 +123,7 @@ public abstract class MethodDescriptor extends Node implements Member {
       String methodName,
       List<TypeDescriptor> parameterTypeDescriptors,
       TypeDescriptor returnTypeDescriptor,
-      String jsMethodNamespace,
-      String jsMethodName,
-      boolean isJsProperty) {
+      JsInfo jsInfo) {
     return create(
         isStatic,
         true,
@@ -145,9 +135,7 @@ public abstract class MethodDescriptor extends Node implements Member {
         returnTypeDescriptor,
         parameterTypeDescriptors,
         ImmutableList.<TypeDescriptor>of(),
-        jsMethodNamespace,
-        jsMethodName,
-        isJsProperty);
+        jsInfo);
   }
 
   static Interner<MethodDescriptor> getInterner() {
@@ -186,35 +174,47 @@ public abstract class MethodDescriptor extends Node implements Member {
    */
   public abstract ImmutableList<TypeDescriptor> getTypeParameterTypeDescriptors();
 
-  @Nullable
-  public abstract String getJsMethodNamespace();
-
-  @Nullable
-  public abstract String getJsMethodName();
-
-  public abstract boolean isJsProperty();
+  public abstract JsInfo getJsInfo();
 
   public boolean isInit() {
     return getMethodName().equals(INIT_METHOD_NAME);
   }
 
-  public boolean hasJsMethodNamespace() {
-    return getJsMethodNamespace() != null;
+  public String getJsName() {
+    return getJsInfo().getJsName();
+  }
+
+  public String getJsNamespace() {
+    return getJsInfo().getJsNamespace();
+  }
+
+  public boolean hasJsNamespace() {
+    return getJsInfo().getJsNamespace() != null;
   }
 
   public boolean isJsPropertyGetter() {
-    return isJsProperty() && getParameterTypeDescriptors().isEmpty();
+    return getJsInfo().getJsMemberType().isJsPropertyAccessor()
+        && getParameterTypeDescriptors().isEmpty();
   }
 
   public boolean isJsPropertySetter() {
-    return isJsProperty() && getParameterTypeDescriptors().size() == 1;
+    return getJsInfo().getJsMemberType().isJsPropertyAccessor()
+        && getParameterTypeDescriptors().size() == 1;
   }
 
-  /**
-   * If the method is JsMethod, its jsMethodName should have been set an non-null String.
-   */
   public boolean isJsMethod() {
-    return getJsMethodName() != null;
+    return getJsInfo().getJsMemberType() == JsMemberType.METHOD;
+  }
+
+  public boolean isJsProperty() {
+    return getJsInfo().getJsMemberType().isJsPropertyAccessor();
+  }
+
+  public String getJsPropertyName() {
+    if (!isJsProperty()) {
+      return null;
+    }
+    return getJsInfo().getJsMemberType().computeJsName(this);
   }
 
   @Override

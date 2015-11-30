@@ -13,6 +13,7 @@ import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -111,9 +112,7 @@ public class EnumMethodsCreator {
             CREATE_MAP_METHOD_NAME,
             Arrays.asList(enumType.getDescriptor()),
             namesToValuesMapFieldDescriptor.getTypeDescriptor(),
-            null,
-            null,
-            false);
+            JsInfo.NONE);
     MethodDescriptor getMethodDescriptor =
         MethodDescriptor.createRaw(
             true,
@@ -124,9 +123,7 @@ public class EnumMethodsCreator {
                 nameParameter.getTypeDescriptor(),
                 namesToValuesMapFieldDescriptor.getTypeDescriptor()),
             enumType.getDescriptor(),
-            null,
-            null,
-            false);
+            JsInfo.NONE);
 
     Expression nameParameterAccess = nameParameter.getReference();
     Expression namesToValuesMapFieldAccess =
