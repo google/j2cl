@@ -14,4 +14,5 @@ load(
 integration_test(
     name = "arrayofboxedtype",
     srcs = glob(["*.java"]),
+    closure_defines = {"ARRAY_CHECK_TYPES_": "true"},
 )

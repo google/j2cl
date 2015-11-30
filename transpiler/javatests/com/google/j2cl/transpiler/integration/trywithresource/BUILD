@@ -12,11 +12,7 @@ load(
 # blaze build :optimized_js
 # blaze test :compiled_test
 # blaze test :uncompiled_test
-# TODO: Remove ARRAY_CHECKS_ENABLED_ false when ArrayList works.
 integration_test(
     name = "trywithresource",
     srcs = glob(["*.java"]),
-    closure_defines = {
-        "ARRAY_CHECK_BOUNDS_": "false",
-    },
 )

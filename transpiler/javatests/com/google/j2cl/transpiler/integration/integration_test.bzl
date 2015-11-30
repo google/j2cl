@@ -45,10 +45,18 @@ def integration_test(
 
   deps = [absolute_label(dep) for dep in deps]
 
+  # Turn on assertions since the integration tests rely on them.
   if not "ASSERTIONS_ENABLED_" in closure_defines:
     closure_defines["ASSERTIONS_ENABLED_"] = "true"
+  # Since integration tests are used for optimized size tracking, set array
+  # behavior to the mode with the smallest output size which is what we expect
+  # will also be used for customer application production releases. If some
+  # particular test needs one of these on they can override with
+  # closure_defines.
   if not "ARRAY_CHECK_BOUNDS_" in closure_defines:
-    closure_defines["ARRAY_CHECK_BOUNDS_"] = "true"
+    closure_defines["ARRAY_CHECK_BOUNDS_"] = "false"
+  if not "ARRAY_CHECK_TYPES_" in closure_defines:
+    closure_defines["ARRAY_CHECK_TYPES_"] = "false"
 
   define_flags = []
   for def_name, value in closure_defines.items():

@@ -14,9 +14,4 @@ load(
 integration_test(
     name = "arrayboundsgwtstyle",
     srcs = glob(["*.java"]),
-    # For now ARRAY_CHECK_BOUNDS_ defaults to off to be GWT compatible, but the
-    # integration_test() macro turns it on. This test in particular wants to
-    # verify that you can cheat when ARRAY_CHECK_BOUNDS_ is false, thus this
-    # provided setting.
-    closure_defines = {"ARRAY_CHECK_BOUNDS_": "false"},
 )

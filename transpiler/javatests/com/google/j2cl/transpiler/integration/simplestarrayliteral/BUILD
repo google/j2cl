@@ -14,4 +14,5 @@ load(
 integration_test(
     name = "simplestarrayliteral",
     srcs = glob(["*.java"]),
+    closure_defines = {"ARRAY_CHECK_BOUNDS_": "true"},
 )
