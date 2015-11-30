@@ -73,9 +73,16 @@ are copyright and licensed as follows:
 
 ## JsInterop TODOs
 - catchjsexception
-- jsinteropclass
-- jsinteropdispatch
-- jsinteropinterface
+- casttojstype
+- instanceofjstype
+- jsconstructor
+- jsfunction
+- jspackageinfo
+- jspropertyinheritance
+- jspropertybridge
+- jsoverlaymethod
+- objectmethodsofnativetype
+- subclassjsnativetype (with constructor)
 
 ## Feature Complete Java 8 TODOs
 - interfacedefaultmethod
