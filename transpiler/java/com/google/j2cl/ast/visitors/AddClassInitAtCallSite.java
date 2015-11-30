@@ -25,15 +25,13 @@ import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.JavaType;
-import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.Visibility;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -178,14 +176,12 @@ public class AddClassInitAtCallSite {
 
   private static Statement clinitCall(TypeDescriptor type) {
     MethodDescriptor clinitMethodDescriptor =
-        MethodDescriptor.createRaw(
-            true,
-            Visibility.PUBLIC,
-            type,
-            "$clinit",
-            new ArrayList<TypeDescriptor>(),
-            TypeDescriptors.get().primitiveVoid,
-            JsInfo.NONE);
+        MethodDescriptorBuilder.fromDefault()
+            .isRaw(true)
+            .isStatic(true)
+            .enclosingClassTypeDescriptor(type)
+            .methodName("$clinit")
+            .build();
     MethodCall clinitCall =
         MethodCall.createRegularMethodCall(
             null, clinitMethodDescriptor, new ArrayList<Expression>());

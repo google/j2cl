@@ -50,11 +50,11 @@ import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
-import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.LabeledStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.NullLiteral;
@@ -1040,14 +1040,14 @@ public class CompilationUnitBuilder {
               });
 
       MethodDescriptor methodDescriptor =
-          MethodDescriptor.createRaw(
-              false, // isStatic
-              Visibility.PRIVATE,
-              enclosingClassTypeDescriptor,
-              methodName,
-              parameterTypeDescriptors,
-              returnTypeDescriptor,
-              JsInfo.NONE);
+          MethodDescriptorBuilder.fromDefault()
+              .isRaw(true)
+              .visibility(Visibility.PRIVATE)
+              .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+              .methodName(methodName)
+              .parameterTypeDescriptors(parameterTypeDescriptors)
+              .returnTypeDescriptor(returnTypeDescriptor)
+              .build();
       return new Method(methodDescriptor, parameters, body);
     }
 
@@ -1549,36 +1549,33 @@ public class CompilationUnitBuilder {
       if (typeBinding.getDimensions() == 0) {
         // <ClassLiteralClass>.$getClass()
         MethodDescriptor classMethodDescriptor =
-            MethodDescriptor.createRaw(
-                true,
-                Visibility.PUBLIC,
-                literalTypeDescriptor,
-                "$getClass",
-                new ArrayList<TypeDescriptor>(),
-                javaLangClassTypeDescriptor,
-                JsInfo.NONE);
+            MethodDescriptorBuilder.fromDefault()
+                .isRaw(true)
+                .isStatic(true)
+                .enclosingClassTypeDescriptor(literalTypeDescriptor)
+                .methodName("$getClass")
+                .returnTypeDescriptor(javaLangClassTypeDescriptor)
+                .build();
         return MethodCall.createRegularMethodCall(null, classMethodDescriptor);
       }
 
       MethodDescriptor classMethodDescriptor =
-          MethodDescriptor.createRaw(
-              true,
-              Visibility.PUBLIC,
-              literalTypeDescriptor.getLeafTypeDescriptor(),
-              "$getClass",
-              new ArrayList<TypeDescriptor>(),
-              javaLangClassTypeDescriptor,
-              JsInfo.NONE);
+          MethodDescriptorBuilder.fromDefault()
+              .isRaw(true)
+              .isStatic(true)
+              .enclosingClassTypeDescriptor(literalTypeDescriptor.getLeafTypeDescriptor())
+              .methodName("$getClass")
+              .returnTypeDescriptor(javaLangClassTypeDescriptor)
+              .build();
 
       MethodDescriptor forArrayMethodDescriptor =
-          MethodDescriptor.createRaw(
-              false,
-              Visibility.PUBLIC,
-              javaLangClassTypeDescriptor,
-              "$forArray",
-              Lists.newArrayList(TypeDescriptors.get().primitiveInt),
-              javaLangClassTypeDescriptor,
-              JsInfo.NONE);
+          MethodDescriptorBuilder.fromDefault()
+              .isRaw(true)
+              .enclosingClassTypeDescriptor(javaLangClassTypeDescriptor)
+              .methodName("$forArray")
+              .parameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().primitiveInt))
+              .returnTypeDescriptor(javaLangClassTypeDescriptor)
+              .build();
 
       // <ClassLiteralClass>.$getClass().forArray(<dimensions>)
       return MethodCall.createRegularMethodCall(

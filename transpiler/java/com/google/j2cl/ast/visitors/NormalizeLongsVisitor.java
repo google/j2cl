@@ -23,16 +23,15 @@ import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
-import com.google.j2cl.ast.Visibility;
 
 /**
  * Replaces long operations with corresponding long utils method calls.
@@ -83,14 +82,15 @@ public class NormalizeLongsVisitor extends AbstractRewriter {
     }
 
     MethodDescriptor longUtilsMethodDescriptor =
-        MethodDescriptor.createRaw(
-            true, // static
-            Visibility.PUBLIC,
-            BootstrapType.LONGS.getDescriptor(),
-            getLongOperationFunctionName(operator),
-            Lists.newArrayList(leftParameterTypeDescriptor, rightParameterTypeDescriptor),
-            returnTypeDescriptor,
-            JsInfo.NONE);
+        MethodDescriptorBuilder.fromDefault()
+            .isRaw(true)
+            .isStatic(true)
+            .enclosingClassTypeDescriptor(BootstrapType.LONGS.getDescriptor())
+            .methodName(getLongOperationFunctionName(operator))
+            .parameterTypeDescriptors(
+                Lists.newArrayList(leftParameterTypeDescriptor, rightParameterTypeDescriptor))
+            .returnTypeDescriptor(returnTypeDescriptor)
+            .build();
     // LongUtils.$someOperation(leftOperand, rightOperand);
     return MethodCall.createRegularMethodCall(
         null, longUtilsMethodDescriptor, Lists.newArrayList(leftArgument, rightArgument));
@@ -113,14 +113,14 @@ public class NormalizeLongsVisitor extends AbstractRewriter {
     TypeDescriptor returnTypeDescriptor = TypeDescriptors.get().primitiveLong;
 
     MethodDescriptor longUtilsMethodDescriptor =
-        MethodDescriptor.createRaw(
-            true, // static
-            Visibility.PUBLIC,
-            BootstrapType.LONGS.getDescriptor(),
-            getLongOperationFunctionName(operator),
-            Lists.newArrayList(parameterTypeDescriptor),
-            returnTypeDescriptor,
-            JsInfo.NONE);
+        MethodDescriptorBuilder.fromDefault()
+            .isRaw(true)
+            .isStatic(true)
+            .enclosingClassTypeDescriptor(BootstrapType.LONGS.getDescriptor())
+            .methodName(getLongOperationFunctionName(operator))
+            .parameterTypeDescriptors(Lists.newArrayList(parameterTypeDescriptor))
+            .returnTypeDescriptor(returnTypeDescriptor)
+            .build();
     // LongUtils.$someOperation(operand);
     return MethodCall.createRegularMethodCall(null, longUtilsMethodDescriptor, argument);
   }

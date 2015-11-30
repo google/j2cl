@@ -22,16 +22,15 @@ import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
-import com.google.j2cl.ast.Visibility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,15 +71,16 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
     Expression expression = castExpression.getExpression();
 
     MethodDescriptor castToMethodDescriptor =
-        MethodDescriptor.createRaw(
-            true,
-            Visibility.PUBLIC,
-            BootstrapType.CASTS.getDescriptor(),
-            "to",
-            Lists.newArrayList(
-                TypeDescriptors.get().javaLangObject, TypeDescriptors.get().primitiveBoolean),
-            castTypeDescriptor,
-            JsInfo.NONE);
+        MethodDescriptorBuilder.fromDefault()
+            .isRaw(true)
+            .isStatic(true)
+            .enclosingClassTypeDescriptor(BootstrapType.CASTS.getDescriptor())
+            .methodName("to")
+            .parameterTypeDescriptors(
+                Lists.newArrayList(
+                    TypeDescriptors.get().javaLangObject, TypeDescriptors.get().primitiveBoolean))
+            .returnTypeDescriptor(castTypeDescriptor)
+            .build();
     List<Expression> arguments = new ArrayList<>();
     arguments.add(expression);
     arguments.add(castTypeDescriptor.getRawTypeDescriptor());
@@ -99,17 +99,18 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
         (ArrayTypeDescriptor) castExpression.getCastTypeDescriptor();
 
     MethodDescriptor castToMethodDescriptor =
-        MethodDescriptor.createRaw(
-            true,
-            Visibility.PUBLIC,
-            BootstrapType.ARRAYS.getDescriptor(),
-            "$castTo",
-            Lists.newArrayList(
-                TypeDescriptors.get().javaLangObject,
-                TypeDescriptors.get().javaLangObject,
-                TypeDescriptors.get().primitiveInt),
-            arrayCastTypeDescriptor,
-            JsInfo.NONE);
+        MethodDescriptorBuilder.fromDefault()
+            .isRaw(true)
+            .isStatic(true)
+            .enclosingClassTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
+            .methodName("$castTo")
+            .parameterTypeDescriptors(
+                Lists.newArrayList(
+                    TypeDescriptors.get().javaLangObject,
+                    TypeDescriptors.get().javaLangObject,
+                    TypeDescriptors.get().primitiveInt))
+            .returnTypeDescriptor(arrayCastTypeDescriptor)
+            .build();
     List<Expression> arguments = new ArrayList<>();
     arguments.add(castExpression.getExpression());
     arguments.add(arrayCastTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor());

@@ -13,10 +13,10 @@ import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.JavaType;
-import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
@@ -63,25 +63,21 @@ public class EnumMethodsCreator {
             NAMES_TO_VALUES_MAP_FIELD_NAME,
             TypeDescriptors.get().javaLangObject);
     this.valuesMethodDescriptor =
-        MethodDescriptor.create(
-            true,
-            Visibility.PUBLIC,
-            enumType.getDescriptor(),
-            VALUES_METHOD_NAME,
-            false,
-            false,
-            enumType.getDescriptor().getForArray(1),
-            Arrays.asList(new TypeDescriptor[0]));
+        MethodDescriptorBuilder.fromDefault()
+            .isStatic(true)
+            .enclosingClassTypeDescriptor(enumType.getDescriptor())
+            .methodName(VALUES_METHOD_NAME)
+            .returnTypeDescriptor(enumType.getDescriptor().getForArray(1))
+            .parameterTypeDescriptors(Arrays.asList(new TypeDescriptor[0]))
+            .build();
     this.valueOfMethodDescriptor =
-        MethodDescriptor.create(
-            true,
-            Visibility.PUBLIC,
-            enumType.getDescriptor(),
-            VALUE_OF_METHOD_NAME,
-            false,
-            false,
-            enumType.getDescriptor(),
-            Arrays.asList(TypeDescriptors.get().javaLangString));
+        MethodDescriptorBuilder.fromDefault()
+            .isStatic(true)
+            .enclosingClassTypeDescriptor(enumType.getDescriptor())
+            .methodName(VALUE_OF_METHOD_NAME)
+            .returnTypeDescriptor(enumType.getDescriptor())
+            .parameterTypeDescriptors(Arrays.asList(TypeDescriptors.get().javaLangString))
+            .build();
   }
 
   private void run() {
@@ -105,25 +101,26 @@ public class EnumMethodsCreator {
     Variable nameParameter =
         new Variable("name", TypeDescriptors.get().javaLangString, false, true);
     MethodDescriptor createMapMethodDescriptor =
-        MethodDescriptor.createRaw(
-            true,
-            Visibility.PUBLIC,
-            BootstrapType.ENUMS.getDescriptor(),
-            CREATE_MAP_METHOD_NAME,
-            Arrays.asList(enumType.getDescriptor()),
-            namesToValuesMapFieldDescriptor.getTypeDescriptor(),
-            JsInfo.NONE);
+        MethodDescriptorBuilder.fromDefault()
+            .isRaw(true)
+            .isStatic(true)
+            .enclosingClassTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
+            .methodName(CREATE_MAP_METHOD_NAME)
+            .returnTypeDescriptor(namesToValuesMapFieldDescriptor.getTypeDescriptor())
+            .parameterTypeDescriptors(Arrays.asList(enumType.getDescriptor()))
+            .build();
     MethodDescriptor getMethodDescriptor =
-        MethodDescriptor.createRaw(
-            true,
-            Visibility.PUBLIC,
-            BootstrapType.ENUMS.getDescriptor(),
-            GET_VALUE_METHOD_NAME,
-            Arrays.asList(
-                nameParameter.getTypeDescriptor(),
-                namesToValuesMapFieldDescriptor.getTypeDescriptor()),
-            enumType.getDescriptor(),
-            JsInfo.NONE);
+        MethodDescriptorBuilder.fromDefault()
+            .isRaw(true)
+            .isStatic(true)
+            .enclosingClassTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
+            .methodName(GET_VALUE_METHOD_NAME)
+            .returnTypeDescriptor(enumType.getDescriptor())
+            .parameterTypeDescriptors(
+                Arrays.asList(
+                    nameParameter.getTypeDescriptor(),
+                    namesToValuesMapFieldDescriptor.getTypeDescriptor()))
+            .build();
 
     Expression nameParameterAccess = nameParameter.getReference();
     Expression namesToValuesMapFieldAccess =

@@ -20,13 +20,12 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
-import com.google.j2cl.ast.Visibility;
 
 /**
  * Inserts a widening operation when a smaller primitive type is being put into a large primitive
@@ -124,14 +123,14 @@ public class InsertWideningPrimitiveConversionVisitor extends ConversionContextV
             AstUtils.toProperCase(fromTypeDescriptor.getSimpleName()),
             AstUtils.toProperCase(toTypeDescriptor.getSimpleName()));
     MethodDescriptor widenMethodDescriptor =
-        MethodDescriptor.createRaw(
-            true,
-            Visibility.PUBLIC,
-            BootstrapType.PRIMITIVES.getDescriptor(),
-            widenMethodName,
-            Lists.newArrayList(fromTypeDescriptor),
-            toTypeDescriptor,
-            JsInfo.NONE);
+        MethodDescriptorBuilder.fromDefault()
+            .isRaw(true)
+            .isStatic(true)
+            .enclosingClassTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
+            .methodName(widenMethodName)
+            .parameterTypeDescriptors(Lists.newArrayList(fromTypeDescriptor))
+            .returnTypeDescriptor(toTypeDescriptor)
+            .build();
     // Primitives.$widenAToB(expr);
     return MethodCall.createRegularMethodCall(null, widenMethodDescriptor, subjectExpression);
   }

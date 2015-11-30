@@ -33,6 +33,19 @@ public class MethodDescriptorBuilder {
   private ImmutableList<TypeDescriptor> typeParameterDescriptors;
   private JsInfo jsInfo;
 
+  public static MethodDescriptorBuilder fromDefault() {
+    MethodDescriptorBuilder builder = new MethodDescriptorBuilder();
+    builder.visibility = Visibility.PUBLIC;
+    builder.enclosingClassTypeDescriptor =
+        TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor();
+    builder.methodName = "";
+    builder.parameterTypeDescriptors = ImmutableList.<TypeDescriptor>of();
+    builder.returnTypeDescriptor = TypeDescriptors.get().primitiveVoid;
+    builder.typeParameterDescriptors = ImmutableList.<TypeDescriptor>of();
+    builder.jsInfo = JsInfo.NONE;
+    return builder;
+  }
+
   public static MethodDescriptorBuilder from(MethodDescriptor methodDescriptor) {
     MethodDescriptorBuilder builder = new MethodDescriptorBuilder();
     builder.isStatic = methodDescriptor.isStatic();
@@ -55,6 +68,11 @@ public class MethodDescriptorBuilder {
     return this;
   }
 
+  public MethodDescriptorBuilder methodName(String methodName) {
+    this.methodName = methodName;
+    return this;
+  }
+
   public MethodDescriptorBuilder returnTypeDescriptor(TypeDescriptor returnTypeDescriptor) {
     this.returnTypeDescriptor = returnTypeDescriptor;
     return this;
@@ -66,6 +84,11 @@ public class MethodDescriptorBuilder {
     return this;
   }
 
+  public MethodDescriptorBuilder isConstructor(boolean isConstructor) {
+    this.isConstructor = isConstructor;
+    return this;
+  }
+
   public MethodDescriptorBuilder isStatic(boolean isStatic) {
     this.isStatic = isStatic;
     return this;
@@ -73,6 +96,17 @@ public class MethodDescriptorBuilder {
 
   public MethodDescriptorBuilder isRaw(boolean isRaw) {
     this.isRaw = isRaw;
+    return this;
+  }
+
+  public MethodDescriptorBuilder typeParameterDescriptors(
+      Iterable<TypeDescriptor> typeParameterDescriptors) {
+    this.typeParameterDescriptors = ImmutableList.copyOf(typeParameterDescriptors);
+    return this;
+  }
+
+  public MethodDescriptorBuilder visibility(Visibility visibility) {
+    this.visibility = visibility;
     return this;
   }
 

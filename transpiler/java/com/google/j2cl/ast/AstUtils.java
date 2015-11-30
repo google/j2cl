@@ -54,54 +54,43 @@ public class AstUtils {
    */
   public static MethodDescriptor createInitMethodDescriptor(
       TypeDescriptor enclosingClassTypeDescriptor) {
-    return MethodDescriptor.create(
-        false,
-        Visibility.PRIVATE,
-        enclosingClassTypeDescriptor,
-        MethodDescriptor.INIT_METHOD_NAME,
-        false,
-        false,
-        TypeDescriptors.get().primitiveVoid);
+    return MethodDescriptorBuilder.fromDefault()
+        .visibility(Visibility.PRIVATE)
+        .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+        .methodName(MethodDescriptor.INIT_METHOD_NAME)
+        .build();
   }
 
   /**
    * Create "Equality.$same()" MethodDescriptor.
    */
   public static MethodDescriptor createUtilSameMethodDescriptor() {
-    return MethodDescriptor.create(
-        true, // isStatic
-        true, // isRaw
-        Visibility.PUBLIC,
-        BootstrapType.NATIVE_EQUALITY.getDescriptor(), // enclosingClassTypeDescriptor
-        MethodDescriptor.SAME_METHOD_NAME,
-        false, // isConstructor
-        false, // isNative
-        TypeDescriptors.get().primitiveBoolean, // returnTypeDescriptor
-        Lists.newArrayList(
-            TypeDescriptors.get().javaLangObject,
-            TypeDescriptors.get().javaLangObject), // parameterTypeDescriptors
-        new ArrayList<>(),
-        JsInfo.NONE);
+    return MethodDescriptorBuilder.fromDefault()
+        .isStatic(true)
+        .isRaw(true)
+        .enclosingClassTypeDescriptor(BootstrapType.NATIVE_EQUALITY.getDescriptor())
+        .methodName(MethodDescriptor.SAME_METHOD_NAME)
+        .returnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
+        .parameterTypeDescriptors(
+            Lists.newArrayList(
+                TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangObject))
+        .build();
   }
 
   /**
    * Create "Equality.$notSame()" MethodDescriptor.
    */
   public static MethodDescriptor createUtilNotSameMethodDescriptor() {
-    return MethodDescriptor.create(
-        true, // isStatic
-        true, // isRaw
-        Visibility.PUBLIC,
-        BootstrapType.NATIVE_EQUALITY.getDescriptor(), // enclosingClassTypeDescriptor
-        MethodDescriptor.NOT_SAME_METHOD_NAME,
-        false, // isConstructor
-        false, // isNative
-        TypeDescriptors.get().primitiveBoolean, // returnTypeDescriptor
-        Lists.newArrayList(
-            TypeDescriptors.get().javaLangObject,
-            TypeDescriptors.get().javaLangObject), // parameterTypeDescriptors
-        new ArrayList<>(),
-        JsInfo.NONE);
+    return MethodDescriptorBuilder.fromDefault()
+        .isStatic(true)
+        .isRaw(true)
+        .enclosingClassTypeDescriptor(BootstrapType.NATIVE_EQUALITY.getDescriptor())
+        .methodName(MethodDescriptor.NOT_SAME_METHOD_NAME)
+        .returnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
+        .parameterTypeDescriptors(
+            Lists.newArrayList(
+                TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangObject))
+        .build();
   }
 
   /**
@@ -111,15 +100,13 @@ public class AstUtils {
       TypeDescriptor typeDescriptor,
       Visibility visibility,
       TypeDescriptor... parameterTypeDescriptors) {
-    return MethodDescriptor.create(
-        false,
-        visibility,
-        typeDescriptor,
-        typeDescriptor.getClassName(),
-        true,
-        false,
-        TypeDescriptors.get().primitiveVoid,
-        parameterTypeDescriptors);
+    return MethodDescriptorBuilder.fromDefault()
+        .visibility(visibility)
+        .enclosingClassTypeDescriptor(typeDescriptor)
+        .methodName(typeDescriptor.getClassName())
+        .isConstructor(true)
+        .parameterTypeDescriptors(Arrays.asList(parameterTypeDescriptors))
+        .build();
   }
 
   /**
@@ -276,11 +263,7 @@ public class AstUtils {
   public static MethodDescriptor createMethodDescriptorForInnerClassCreation(
       final TypeDescriptor outerclassTypeDescriptor,
       MethodDescriptor innerclassConstructorDescriptor) {
-    boolean isStatic = false;
-    boolean isRaw = false;
     String methodName = CREATE_PREFIX + innerclassConstructorDescriptor.getMethodName();
-    boolean isConstructor = false;
-    boolean isNative = false;
     TypeDescriptor returnTypeDescriptor =
         innerclassConstructorDescriptor.getEnclosingClassTypeDescriptor();
     // if the inner class is a generic type, add its type parameters to the wrapper method.
@@ -301,18 +284,14 @@ public class AstUtils {
                     }
                   })));
     }
-    return MethodDescriptor.create(
-        isStatic,
-        isRaw,
-        innerclassConstructorDescriptor.getVisibility(),
-        outerclassTypeDescriptor,
-        methodName,
-        isConstructor,
-        isNative,
-        returnTypeDescriptor,
-        innerclassConstructorDescriptor.getParameterTypeDescriptors(),
-        typeParameterDescriptors,
-        JsInfo.NONE);
+    return MethodDescriptorBuilder.fromDefault()
+        .visibility(innerclassConstructorDescriptor.getVisibility())
+        .enclosingClassTypeDescriptor(outerclassTypeDescriptor)
+        .methodName(methodName)
+        .returnTypeDescriptor(returnTypeDescriptor)
+        .parameterTypeDescriptors(innerclassConstructorDescriptor.getParameterTypeDescriptors())
+        .typeParameterDescriptors(typeParameterDescriptors)
+        .build();
   }
 
   /**
@@ -429,16 +408,13 @@ public class AstUtils {
     TypeDescriptor boxType = TypeDescriptors.getBoxTypeFromPrimitiveType(primitiveType);
 
     MethodDescriptor valueOfMethodDescriptor =
-        MethodDescriptor.create(
-            true, // isStatic
-            Visibility.PUBLIC,
-            boxType, // enclosingClass
-            MethodDescriptor.VALUE_OF_METHOD_NAME,
-            false, // isConstructor,
-            false, // isNative,
-            boxType, // returnTypeDescriptor,
-            primitiveType // parameterTypeDescriptor
-            );
+        MethodDescriptorBuilder.fromDefault()
+            .isStatic(true)
+            .enclosingClassTypeDescriptor(boxType)
+            .methodName(MethodDescriptor.VALUE_OF_METHOD_NAME)
+            .returnTypeDescriptor(boxType)
+            .parameterTypeDescriptors(Arrays.asList(primitiveType))
+            .build();
     return MethodCall.createRegularMethodCall(null, valueOfMethodDescriptor, expression);
   }
 
@@ -452,15 +428,11 @@ public class AstUtils {
     TypeDescriptor primitiveType = TypeDescriptors.getPrimitiveTypeFromBoxType(boxType);
 
     MethodDescriptor valueMethodDescriptor =
-        MethodDescriptor.create(
-            false, // isStatic
-            Visibility.PUBLIC,
-            boxType, // enclosingClass
-            primitiveType.getSimpleName() + MethodDescriptor.VALUE_METHOD_SUFFIX,
-            false, // isConstructor,
-            false, // isNative,
-            primitiveType // returnTypeDescriptor
-            );
+        MethodDescriptorBuilder.fromDefault()
+            .enclosingClassTypeDescriptor(boxType)
+            .methodName(primitiveType.getSimpleName() + MethodDescriptor.VALUE_METHOD_SUFFIX)
+            .returnTypeDescriptor(primitiveType)
+            .build();
 
     // We want "(a ? b : c).intValue()", not "a ? b : c.intValue()".
     expression =
@@ -662,15 +634,13 @@ public class AstUtils {
   }
 
   public static MethodDescriptor createStringValueOfMethodDescriptor() {
-    return MethodDescriptor.create(
-        true, // static
-        Visibility.PUBLIC,
-        TypeDescriptors.get().javaLangString,
-        "valueOf",
-        false, // constructor
-        false, // native
-        TypeDescriptors.get().javaLangString,
-        Lists.newArrayList(TypeDescriptors.get().javaLangObject));
+    return MethodDescriptorBuilder.fromDefault()
+        .isStatic(true)
+        .enclosingClassTypeDescriptor(TypeDescriptors.get().javaLangString)
+        .methodName("valueOf")
+        .returnTypeDescriptor(TypeDescriptors.get().javaLangString)
+        .parameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))
+        .build();
   }
 
   /**

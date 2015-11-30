@@ -25,9 +25,9 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.IfStatement;
-import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.ThrowStatement;
@@ -38,7 +38,6 @@ import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableDeclarationStatement;
-import com.google.j2cl.ast.Visibility;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -113,15 +112,16 @@ public class NormalizeTryWithResourceVisitor extends AbstractRewriter {
    */
   private List<Statement> removeResourceDeclarations(TryStatement tryStatement) {
     MethodDescriptor safeClose =
-        MethodDescriptor.createRaw(
-            true,
-            Visibility.PUBLIC,
-            BootstrapType.EXCEPTIONS.getDescriptor(),
-            "safeClose",
-            Arrays.asList(
-                TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangThrowable),
-            TypeDescriptors.get().javaLangThrowable,
-            JsInfo.NONE);
+        MethodDescriptorBuilder.fromDefault()
+            .isRaw(true)
+            .isStatic(true)
+            .enclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
+            .methodName("safeClose")
+            .parameterTypeDescriptors(
+                Arrays.asList(
+                    TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangThrowable))
+            .returnTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
+            .build();
     List<Statement> outputStatements = new ArrayList<>();
 
     Variable primaryException =

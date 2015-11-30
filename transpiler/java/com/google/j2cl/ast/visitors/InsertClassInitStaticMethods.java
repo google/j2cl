@@ -19,15 +19,12 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
-import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodBuilder;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.Visibility;
 
 import java.util.ArrayList;
 
@@ -44,14 +41,13 @@ public class InsertClassInitStaticMethods {
     public Node rewriteMethod(Method node) {
       if (node.getDescriptor().isStatic()) {
         MethodDescriptor clinitDescriptor =
-            MethodDescriptor.createRaw(
-                true,
-                Visibility.PUBLIC,
-                node.getDescriptor().getEnclosingClassTypeDescriptor(),
-                "$clinit",
-                new ArrayList<TypeDescriptor>(),
-                TypeDescriptors.get().primitiveVoid,
-                JsInfo.NONE);
+            MethodDescriptorBuilder.fromDefault()
+                .isRaw(true)
+                .isStatic(true)
+                .enclosingClassTypeDescriptor(
+                    node.getDescriptor().getEnclosingClassTypeDescriptor())
+                .methodName("$clinit")
+                .build();
         MethodCall call =
             MethodCall.createRegularMethodCall(null, clinitDescriptor, new ArrayList<Expression>());
         return MethodBuilder.from(node).statement(0, new ExpressionStatement(call)).build();

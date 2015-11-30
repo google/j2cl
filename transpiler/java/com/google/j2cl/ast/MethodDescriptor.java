@@ -21,9 +21,6 @@ import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
 import com.google.j2cl.ast.processors.Visitable;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * A (by signature) reference to a method.
  */
@@ -68,74 +65,6 @@ public abstract class MethodDescriptor extends Node implements Member {
                 returnTypeDescriptor,
                 ImmutableList.copyOf(typeParameterTypeDescriptors),
                 jsInfo));
-  }
-
-  public static MethodDescriptor create(
-      boolean isStatic,
-      Visibility visibility,
-      TypeDescriptor enclosingClassTypeDescriptor,
-      String methodName,
-      boolean isConstructor,
-      boolean isNative,
-      TypeDescriptor returnTypeDescriptor,
-      Iterable<TypeDescriptor> parameterTypeDescriptors) {
-    return create(
-        isStatic,
-        false,
-        visibility,
-        enclosingClassTypeDescriptor,
-        methodName,
-        isConstructor,
-        isNative,
-        returnTypeDescriptor,
-        parameterTypeDescriptors,
-        ImmutableList.<TypeDescriptor>of(),
-        JsInfo.NONE);
-  }
-
-  public static MethodDescriptor create(
-      boolean isStatic,
-      Visibility visibility,
-      TypeDescriptor enclosingClassDescriptor,
-      String methodName,
-      boolean isConstructor,
-      boolean isNative,
-      TypeDescriptor returnTypeDescriptor,
-      TypeDescriptor... parameterTypeDescriptors) {
-    return create(
-        isStatic,
-        visibility,
-        enclosingClassDescriptor,
-        methodName,
-        isConstructor,
-        isNative,
-        returnTypeDescriptor,
-        Arrays.asList(parameterTypeDescriptors));
-  }
-
-  /**
-   * Creates a raw method reference.
-   */
-  public static MethodDescriptor createRaw(
-      boolean isStatic,
-      Visibility visibility,
-      TypeDescriptor enclosingClassTypeDescriptor,
-      String methodName,
-      List<TypeDescriptor> parameterTypeDescriptors,
-      TypeDescriptor returnTypeDescriptor,
-      JsInfo jsInfo) {
-    return create(
-        isStatic,
-        true,
-        visibility,
-        enclosingClassTypeDescriptor,
-        methodName,
-        false,
-        false,
-        returnTypeDescriptor,
-        parameterTypeDescriptors,
-        ImmutableList.<TypeDescriptor>of(),
-        jsInfo);
   }
 
   static Interner<MethodDescriptor> getInterner() {
