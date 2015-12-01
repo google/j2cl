@@ -23,7 +23,7 @@ public class Main {
   public static void runJsPropertyTest() {
     JsPropertyTest test = new JsPropertyTest();
     test.testConcreteJsType();
-    //    test.testJavaClassImplementingMyJsTypeInterfaceWithProperty();
+    test.testJavaClassImplementingMyJsTypeInterfaceWithProperty();
     //    test.testJsPropertyAccidentalOverrideSuperCall();
     //    test.testJsPropertyBridges();
     //    test.testJsPropertyBridgesSubclass();
@@ -31,9 +31,10 @@ public class Main {
     test.testJsPropertyIsX();
     //    test.testJsPropertyRemovedAccidentalOverrideSuperCall();
     test.testNativeJsType();
-    //    test.testNativeJsTypeSubclass();
+    test.testNativeJsTypeSubclass();
+    test.testNativeJsTypeSubclassNoOverride();
     test.testNativeJsTypeWithConstructor();
-    //    test.testNativeJsTypeWithConstructorSubclass();
+    // test.testNativeJsTypeWithConstructorSubclass();
     test.testProtectedNames();
   }
 }

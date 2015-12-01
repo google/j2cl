@@ -705,11 +705,13 @@ public class JdtUtils {
       return jsInfo;
     }
     // Checks overriding chain.
-    // TODO: add handling for JsProperty method.
-    Set<IMethodBinding> overriddenJsMethods = getOverriddenJsMethods(methodBinding);
-    return overriddenJsMethods.isEmpty()
-        ? JsInfo.NONE
-        : computeJsInfo(overriddenJsMethods.iterator().next());
+    for (IMethodBinding overriddenMethod : getOverriddenMethods(methodBinding)) {
+      JsInfo inheritedJsInfo = JsInteropUtils.getJsInfo(overriddenMethod);
+      if (inheritedJsInfo.getJsMemberType().isJsMember()) {
+        return inheritedJsInfo;
+      }
+    }
+    return JsInfo.NONE;
   }
 
   static Set<IMethodBinding> getOverriddenJsMethods(IMethodBinding methodBinding) {

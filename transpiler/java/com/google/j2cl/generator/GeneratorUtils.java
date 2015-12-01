@@ -106,6 +106,13 @@ public class GeneratorUtils {
   }
 
   /**
+   * Returns true if the type has a superclass that is not a native js type.
+   */
+  public static boolean needCallSuperClinit(JavaType type) {
+    return type.getSuperTypeDescriptor() != null && !type.getSuperTypeDescriptor().isNative();
+  }
+
+  /**
    * Returns whether the $clinit function should be rewritten as NOP.
    */
   public static boolean needRewriteClinit(JavaType type) {

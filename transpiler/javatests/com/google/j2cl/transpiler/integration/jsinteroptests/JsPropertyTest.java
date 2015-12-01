@@ -1,7 +1,5 @@
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
-import static jsinterop.annotations.JsPackage.GLOBAL;
-
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -15,62 +13,60 @@ public class JsPropertyTest extends MyTestCase {
   private static final int GET_X = 100;
   private static final int SET_X = 50;
 
-  // uncomment once JsProperty inheritance is supported.
-  //  @JsType
-  //  interface MyJsTypeInterfaceWithProperty {
-  //    @JsProperty
-  //    int getX();
-  //
-  //    @JsProperty
-  //    void setX(int x);
-  //  }
-  //
-  //  static class MyJavaTypeImplementingMyJsTypeInterfaceWithProperty
-  //      implements MyJsTypeInterfaceWithProperty {
-  //    private int x;
-  //
-  //    public int getX() {
-  //      return x + GET_X;
-  //    }
-  //
-  //    public void setX(int x) {
-  //      this.x = x + SET_X;
-  //    }
-  //  }
-  //
-  //  public void testJavaClassImplementingMyJsTypeInterfaceWithProperty() {
-  //    MyJavaTypeImplementingMyJsTypeInterfaceWithProperty obj =
-  //        new MyJavaTypeImplementingMyJsTypeInterfaceWithProperty();
-  //    assertEquals(0 + GET_X, getProperty(obj, "x"));
-  //    assertEquals(0 + GET_X, obj.getX());
-  //    assertEquals(0, obj.x);
-  //
-  //    setProperty(obj, "x", 10);
-  //    assertEquals(10 + GET_X + SET_X, getProperty(obj, "x"));
-  //    assertEquals(10 + GET_X + SET_X, obj.getX());
-  //    assertEquals(10 + SET_X, obj.x);
-  //
-  //    obj.setX(12);
-  //    assertEquals(12 + GET_X + SET_X, getProperty(obj, "x"));
-  //    assertEquals(12 + GET_X + SET_X, obj.getX());
-  //    assertEquals(12 + SET_X, obj.x);
-  //
-  //    MyJsTypeInterfaceWithProperty intf =
-  //        new MyJavaTypeImplementingMyJsTypeInterfaceWithProperty();
-  //    assertEquals(0 + GET_X, getProperty(intf, "x"));
-  //    assertEquals(0 + GET_X, intf.getX());
-  //    assertEquals(0, ((MyJavaTypeImplementingMyJsTypeInterfaceWithProperty) intf).x);
-  //
-  //    setProperty(intf, "x", 10);
-  //    assertEquals(10 + GET_X + SET_X, getProperty(intf, "x"));
-  //    assertEquals(10 + GET_X + SET_X, intf.getX());
-  //    assertEquals(10 + SET_X, ((MyJavaTypeImplementingMyJsTypeInterfaceWithProperty) intf).x);
-  //
-  //    intf.setX(12);
-  //    assertEquals(12 + GET_X + SET_X, getProperty(intf, "x"));
-  //    assertEquals(12 + GET_X + SET_X, intf.getX());
-  //    assertEquals(12 + SET_X, ((MyJavaTypeImplementingMyJsTypeInterfaceWithProperty) intf).x);
-  //  }
+  @JsType
+  interface MyJsTypeInterfaceWithProperty {
+    @JsProperty
+    int getX();
+
+    @JsProperty
+    void setX(int x);
+  }
+
+  static class MyJavaTypeImplementingMyJsTypeInterfaceWithProperty
+      implements MyJsTypeInterfaceWithProperty {
+    private int x;
+
+    public int getX() {
+      return x + GET_X;
+    }
+
+    public void setX(int x) {
+      this.x = x + SET_X;
+    }
+  }
+
+  public void testJavaClassImplementingMyJsTypeInterfaceWithProperty() {
+    MyJavaTypeImplementingMyJsTypeInterfaceWithProperty obj =
+        new MyJavaTypeImplementingMyJsTypeInterfaceWithProperty();
+    assertEquals(0 + GET_X, getProperty(obj, "x"));
+    assertEquals(0 + GET_X, obj.getX());
+    assertEquals(0, obj.x);
+
+    setProperty(obj, "x", 10);
+    assertEquals(10 + GET_X + SET_X, getProperty(obj, "x"));
+    assertEquals(10 + GET_X + SET_X, obj.getX());
+    assertEquals(10 + SET_X, obj.x);
+
+    obj.setX(12);
+    assertEquals(12 + GET_X + SET_X, getProperty(obj, "x"));
+    assertEquals(12 + GET_X + SET_X, obj.getX());
+    assertEquals(12 + SET_X, obj.x);
+
+    MyJsTypeInterfaceWithProperty intf = new MyJavaTypeImplementingMyJsTypeInterfaceWithProperty();
+    assertEquals(0 + GET_X, getProperty(intf, "x"));
+    assertEquals(0 + GET_X, intf.getX());
+    assertEquals(0, ((MyJavaTypeImplementingMyJsTypeInterfaceWithProperty) intf).x);
+
+    setProperty(intf, "x", 10);
+    assertEquals(10 + GET_X + SET_X, getProperty(intf, "x"));
+    assertEquals(10 + GET_X + SET_X, intf.getX());
+    assertEquals(10 + SET_X, ((MyJavaTypeImplementingMyJsTypeInterfaceWithProperty) intf).x);
+
+    intf.setX(12);
+    assertEquals(12 + GET_X + SET_X, getProperty(intf, "x"));
+    assertEquals(12 + GET_X + SET_X, intf.getX());
+    assertEquals(12 + SET_X, ((MyJavaTypeImplementingMyJsTypeInterfaceWithProperty) intf).x);
+  }
 
   @JsType
   static class MyConcreteJsType {
@@ -104,7 +100,7 @@ public class JsPropertyTest extends MyTestCase {
     assertEquals(12 + SET_X, obj.x);
   }
 
-  @JsType(isNative = true, namespace = GLOBAL, name = "JsPropertyTest_MyNativeJsType")
+  @JsType(isNative = true, namespace = "test.foo", name = "JsPropertyTest_MyNativeJsType")
   static class MyNativeJsType {
 
     public static int staticX;
@@ -136,45 +132,44 @@ public class JsPropertyTest extends MyTestCase {
     assertEquals(72, obj.x);
     assertEquals(74, obj.sum(2));
 
-    assertTrue(isUndefined(obj.getY()));
+    assertEquals(0, obj.getY());
     obj.setY(91);
     assertEquals(91, obj.getY());
   }
-  //
-  //  static class MyNativeJsTypeSubclass extends MyNativeJsType {
-  //
-  //    MyNativeJsTypeSubclass() {
-  //      this.x = 42;
-  //      setY(52);
-  //    }
-  //
-  //    @Override
-  //    public int sum(int bias) {
-  //      return super.sum(bias) + GET_X;
-  //    }
-  //  }
-  //
-  //  public void testNativeJsTypeSubclass() {
-  //    MyNativeJsTypeSubclass mc = new MyNativeJsTypeSubclass();
-  //    assertTrue(mc.ctorExecuted);
-  //    assertEquals(143, mc.sum(1));
-  //
-  //    mc.x = -mc.x;
-  //    assertEquals(58, mc.sum(0));
-  //
-  //    assertEquals(52, mc.getY());
-  //  }
-  //
-  //  static class MyNativeJsTypeSubclassNoOverride extends MyNativeJsType { }
-  //
-  //  // TODO(rluble): enable when the subclass is setup correctly.
-  //  public void _disabled_testNativeJsTypeSubclassNoOverride() {
-  //    MyNativeJsTypeSubclassNoOverride myNativeJsType = new MyNativeJsTypeSubclassNoOverride();
-  //    myNativeJsType.x = 12;
-  //    assertEquals(42, myNativeJsType.sum(30));
-  //  }
-  //
-  @JsType(isNative = true, namespace = GLOBAL, name = "JsPropertyTest_MyNativeJsType")
+  
+  static class MyNativeJsTypeSubclass extends MyNativeJsType {
+
+    MyNativeJsTypeSubclass() {
+      this.x = 42;
+      setY(52);
+    }
+
+    @Override
+    public int sum(int bias) {
+      return super.sum(bias) + GET_X;
+    }
+  }
+
+  public void testNativeJsTypeSubclass() {
+    MyNativeJsTypeSubclass mc = new MyNativeJsTypeSubclass();
+    assertTrue(mc.ctorExecuted);
+    assertEquals(143, mc.sum(1));
+
+    mc.x = -mc.x;
+    assertEquals(58, mc.sum(0));
+
+    assertEquals(52, mc.getY());
+  }
+
+  static class MyNativeJsTypeSubclassNoOverride extends MyNativeJsType {}
+
+  public void testNativeJsTypeSubclassNoOverride() {
+    MyNativeJsTypeSubclassNoOverride myNativeJsType = new MyNativeJsTypeSubclassNoOverride();
+    myNativeJsType.x = 12;
+    assertEquals(42, myNativeJsType.sum(30));
+  }
+
+  @JsType(isNative = true, namespace = "test.foo", name = "JsPropertyTest_MyNativeJsType")
   static class MyNativeJsTypeWithConstructor {
     public MyNativeJsTypeWithConstructor(int x) {}
 

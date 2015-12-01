@@ -10,7 +10,7 @@
 #set ($alias = ${lazyImport.Alias})
     $alias = goog.module.get('${lazyImport.getImplFileName()}');
 #end
-#if ($superTypeName)
+#if (${GeneratorUtils.needCallSuperClinit($classType)})
     ${superTypeName}.$clinit();
 #end
 #foreach ($typeName in $classType.StaticFieldClinits)

@@ -15,6 +15,8 @@ load(
 integration_test(
     name = "jsinteroptests",
     srcs = glob(["*.java"]),
+    # TODO: fix the hidden JS output bug and remove this suppression.
+    defs = ["--jscomp_warning=checkTypes"],
     js_deps = [":native_types"],
     native_srcs = [
         "JsPropertyTest.native.js",

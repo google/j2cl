@@ -58,6 +58,9 @@ are copyright and licensed as follows:
 - Import global native js types when JSCompiler supports goog.require() externs.
 - Maybe further specialize Object equality() to avoid the Equality.$same() call
     if neither side could ever cast to String/Double/Boolean.
+- Fix two errors with checktypes in "jsinteroptests".
+  1. property m_getClass not defined on a native js types.
+  2. constructors for subclasses of native js types.
 
 ## Tracking Closure warning issues
 - https://b.corp.google.com/hotlists/269212
@@ -78,7 +81,6 @@ are copyright and licensed as follows:
 - jsconstructor
 - jsfunction
 - jspackageinfo
-- jspropertyinheritance
 - jspropertybridge
 - jsoverlaymethod
 - objectmethodsofnativetype

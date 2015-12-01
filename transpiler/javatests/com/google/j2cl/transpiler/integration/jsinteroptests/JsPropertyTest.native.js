@@ -3,7 +3,7 @@
  * @public
  */
 JsPropertyTest.createMyNativeJsType = function() {
-  return new $JsPropertyTest$MyNativeJsType(0);
+  return new JsPropertyTest$MyNativeJsType(0);
 };
 
 /**

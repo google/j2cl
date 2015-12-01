@@ -1,9 +1,9 @@
-goog.module('global.JsPropertyTest_MyNativeJsType');
+goog.module('test.foo.JsPropertyTest_MyNativeJsType');
 
 class JsPropertyTest_MyNativeJsType {
   constructor(x) {
     this.x = x;
-    this.y = undefined;
+    this.y = 0;
     this.ctorExecuted = true;
   }
 
