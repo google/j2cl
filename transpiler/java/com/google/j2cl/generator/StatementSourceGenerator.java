@@ -474,7 +474,14 @@ public class StatementSourceGenerator {
         }
 
         // The long value is pretty large. Emit the verbose initialization.
-        return String.format("%s.$fromString('%s')", longsTypeAlias(), Long.toString(longValue));
+        long lowOrderBits = longValue << 32 >> 32;
+        long highOrderBits = longValue >> 32;
+        return String.format(
+            "%s.$fromBits(%s, %s) /* %s */",
+            longsTypeAlias(),
+            Long.toString(lowOrderBits),
+            Long.toString(highOrderBits),
+            Long.toString(longValue));
       }
 
       @Override

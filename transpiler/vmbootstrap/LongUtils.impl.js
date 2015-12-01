@@ -33,14 +33,13 @@ class LongUtils {
   static $compare(a, b) { return a.compare(b); }
 
   /**
-   * @param {string} longString A Long valueLong represented in readable string
-   *          format.
-   * @param {number=} opt_radix The radix in which the text is written.
-   * @return {!Long} A Long corresponding to the given string.
+   * @param {number} lowBits The low 32-bits.
+   * @param {number} highBits The high 32-bits.
+   * @return {!Long} A Long of the given bits.
    * @public
    */
-  static $fromString(longString, opt_radix) {
-    return Long.fromString(longString, opt_radix);
+  static $fromBits(lowBits, highBits) {
+    return Long.fromBits(lowBits, highBits);
   }
 
   /**

@@ -93,10 +93,11 @@ class SimpleLongs extends Object {
     let a = $LongUtils.$fromInt(0);
     a = $LongUtils.$negate($LongUtils.$fromInt(100000));
     a = $LongUtils.$fromInt(100000);
-    let b = $LongUtils.$negate($LongUtils.$fromString('2147483648'));
-    b = $LongUtils.$fromString('2147483648');
-    b = $LongUtils.$fromString('-9223372036854775808');
-    b = $LongUtils.$fromString('9223372036854775807');
+    let b = $LongUtils.$negate(
+        $LongUtils.$fromBits(-2147483648, 0) /* 2147483648 */);
+    b = $LongUtils.$fromBits(-2147483648, 0) /* 2147483648 */;
+    b = $LongUtils.$fromBits(0, -2147483648) /* -9223372036854775808 */;
+    b = $LongUtils.$fromBits(-1, 2147483647) /* 9223372036854775807 */;
     let c = $LongUtils.$plus(a, b);
     c = $LongUtils.$divide(a, b);
     let e = a = $LongUtils.$plus(a, $LongUtils.$fromInt(1));

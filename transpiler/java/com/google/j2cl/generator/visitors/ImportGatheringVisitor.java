@@ -256,7 +256,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     // In particular this import is being done eagerly both because it is safe to do so (the Longs
     // library should not have extended dependencies) but also because the initialization of
     // compile time constant values occurs during the declaration phase and this initialization
-    // might use the Longs library $fromString/$fromInt etc.
+    // might use the Longs library $fromBits/$fromInt etc.
     addTypeDescriptor(BootstrapType.LONGS.getDescriptor(), ImportCategory.EAGER);
   }
 
