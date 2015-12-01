@@ -36,7 +36,6 @@ class GenericInterface {
    * interface.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     return instance != null &&
@@ -49,7 +48,6 @@ class GenericInterface {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
@@ -60,7 +58,6 @@ class GenericInterface {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     GenericInterface.$clinit();
@@ -79,7 +76,6 @@ class GenericInterface {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
 }

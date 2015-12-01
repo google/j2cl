@@ -41,7 +41,6 @@ class InnerClassWithConstructor extends Object {
    * A particular Java constructor as a factory method.
    * @return {!InnerClassWithConstructor}
    * @public
-   * @nocollapse
    */
   static $create() {
     InnerClassWithConstructor.$clinit();
@@ -85,7 +84,6 @@ class InnerClassWithConstructor extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof InnerClassWithConstructor;
@@ -96,7 +94,6 @@ class InnerClassWithConstructor extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InnerClassWithConstructor);
@@ -105,7 +102,6 @@ class InnerClassWithConstructor extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     InnerClassWithConstructor.$clinit();
@@ -132,7 +128,6 @@ class InnerClassWithConstructor extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     InnerClassWithConstructor$InnerClass = goog.module.get(

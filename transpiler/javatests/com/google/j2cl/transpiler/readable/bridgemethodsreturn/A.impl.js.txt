@@ -34,7 +34,6 @@ class A extends Object {
    * @template C_T, C_S
    * @return {!A<C_T, C_S>}
    * @public
-   * @nocollapse
    */
   static $create() {
     A.$clinit();
@@ -63,7 +62,6 @@ class A extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof A; }
 
@@ -72,7 +70,6 @@ class A extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, A);
@@ -81,7 +78,6 @@ class A extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     A.$clinit();
@@ -107,7 +103,6 @@ class A extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

@@ -39,7 +39,6 @@ class BridgeMethod extends Parent {
    * A particular Java constructor as a factory method.
    * @return {!BridgeMethod}
    * @public
-   * @nocollapse
    */
   static $create() {
     BridgeMethod.$clinit();
@@ -122,7 +121,6 @@ class BridgeMethod extends Parent {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof BridgeMethod; }
 
@@ -131,7 +129,6 @@ class BridgeMethod extends Parent {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, BridgeMethod);
@@ -140,7 +137,6 @@ class BridgeMethod extends Parent {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     BridgeMethod.$clinit();
@@ -166,7 +162,6 @@ class BridgeMethod extends Parent {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     AssertionError = goog.module.get('gen.java.lang.AssertionError$impl');

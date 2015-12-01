@@ -25,7 +25,6 @@ class $float {
    *
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return typeof instance === 'number'; }
 
@@ -35,7 +34,6 @@ class $float {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $float;
@@ -44,7 +42,6 @@ class $float {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     $float.$clinit();
@@ -57,7 +54,6 @@ class $float {
   /**
    * Runs inline static field initializers.
    * @protected
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
@@ -74,7 +70,6 @@ $float.$classFloat_ = null;
 
 /**
  * @public {number}
- * @nocollapse
  */
 $float.$initialArrayValue = 0;
 

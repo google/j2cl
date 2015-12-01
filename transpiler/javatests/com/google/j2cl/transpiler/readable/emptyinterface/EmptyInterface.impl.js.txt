@@ -35,7 +35,6 @@ class EmptyInterface {
    * interface.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     return instance != null &&
@@ -48,7 +47,6 @@ class EmptyInterface {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
@@ -59,7 +57,6 @@ class EmptyInterface {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     EmptyInterface.$clinit();
@@ -78,7 +75,6 @@ class EmptyInterface {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
 }

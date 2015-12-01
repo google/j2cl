@@ -43,6 +43,7 @@ def readable_example(
   native.js_binary(
       name=name + "_binary",
       defs=CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
+          "--j2cl_pass",
           "--language_in=ECMASCRIPT6_STRICT",
           "--language_out=ECMASCRIPT5",
           "--remove_dead_code",

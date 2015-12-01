@@ -35,7 +35,6 @@ class MultipleNestings extends Object {
    * A particular Java constructor as a factory method.
    * @return {!MultipleNestings}
    * @public
-   * @nocollapse
    */
   static $create() {
     MultipleNestings.$clinit();
@@ -84,7 +83,6 @@ class MultipleNestings extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof MultipleNestings; }
 
@@ -93,7 +91,6 @@ class MultipleNestings extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, MultipleNestings);
@@ -102,7 +99,6 @@ class MultipleNestings extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     MultipleNestings.$clinit();
@@ -128,7 +124,6 @@ class MultipleNestings extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     MultipleNestings$InnerClass1 = goog.module.get(

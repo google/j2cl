@@ -34,7 +34,6 @@ class CharSequenceCalls extends Object {
    * A particular Java constructor as a factory method.
    * @return {!CharSequenceCalls}
    * @public
-   * @nocollapse
    */
   static $create() {
     CharSequenceCalls.$clinit();
@@ -75,7 +74,6 @@ class CharSequenceCalls extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof CharSequenceCalls; }
 
@@ -84,7 +82,6 @@ class CharSequenceCalls extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, CharSequenceCalls);
@@ -93,7 +90,6 @@ class CharSequenceCalls extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     CharSequenceCalls.$clinit();
@@ -119,7 +115,6 @@ class CharSequenceCalls extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     CharSequence = goog.module.get('gen.java.lang.CharSequence$impl');

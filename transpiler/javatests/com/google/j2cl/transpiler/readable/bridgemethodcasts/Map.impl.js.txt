@@ -44,7 +44,6 @@ class Map {
    * interface.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     return instance != null &&
@@ -57,7 +56,6 @@ class Map {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
@@ -68,7 +66,6 @@ class Map {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     Map.$clinit();
@@ -87,7 +84,6 @@ class Map {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
 }

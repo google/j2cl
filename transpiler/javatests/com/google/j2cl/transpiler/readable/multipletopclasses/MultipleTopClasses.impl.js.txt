@@ -31,7 +31,6 @@ class MultipleTopClasses extends AnotherClass {
    * A particular Java constructor as a factory method.
    * @return {!MultipleTopClasses}
    * @public
-   * @nocollapse
    */
   static $create() {
     MultipleTopClasses.$clinit();
@@ -54,7 +53,6 @@ class MultipleTopClasses extends AnotherClass {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof MultipleTopClasses;
@@ -65,7 +63,6 @@ class MultipleTopClasses extends AnotherClass {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, MultipleTopClasses);
@@ -74,7 +71,6 @@ class MultipleTopClasses extends AnotherClass {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     MultipleTopClasses.$clinit();
@@ -100,7 +96,6 @@ class MultipleTopClasses extends AnotherClass {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

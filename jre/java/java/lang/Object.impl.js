@@ -27,7 +27,6 @@ class Object {
    * A particular Java constructor as a factory method.
    * @return {!Object}
    * @public
-   * @nocollapse
    */
   static $create() {
     Object.$clinit();
@@ -77,7 +76,6 @@ class Object {
    * @param {*} instance
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     return true;
@@ -88,7 +86,6 @@ class Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return true;
@@ -97,7 +94,6 @@ class Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     Object.$clinit();
@@ -114,7 +110,6 @@ class Object {
   /**
    * Runs inline static field initializers.
    * @protected
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

@@ -35,7 +35,6 @@ class LambdaInSubClass extends Parent {
    * A particular Java constructor as a factory method.
    * @return {!LambdaInSubClass}
    * @public
-   * @nocollapse
    */
   static $create() {
     LambdaInSubClass.$clinit();
@@ -69,7 +68,6 @@ class LambdaInSubClass extends Parent {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof LambdaInSubClass; }
 
@@ -78,7 +76,6 @@ class LambdaInSubClass extends Parent {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, LambdaInSubClass);
@@ -87,7 +84,6 @@ class LambdaInSubClass extends Parent {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     LambdaInSubClass.$clinit();
@@ -113,7 +109,6 @@ class LambdaInSubClass extends Parent {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     LambdaInSubClass$lambda$0 = goog.module.get(

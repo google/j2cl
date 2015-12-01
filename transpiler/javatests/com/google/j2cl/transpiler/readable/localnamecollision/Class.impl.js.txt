@@ -31,7 +31,6 @@ class Class extends Object {
    * A particular Java constructor as a factory method.
    * @return {!Class}
    * @public
-   * @nocollapse
    */
   static $create() {
     Class.$clinit();
@@ -60,7 +59,6 @@ class Class extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof Class; }
 
@@ -69,7 +67,6 @@ class Class extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Class);
@@ -78,7 +75,6 @@ class Class extends Object {
   /**
    * @return {java_lang_Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     Class.$clinit();
@@ -104,7 +100,6 @@ class Class extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     java_lang_Class = goog.module.get('gen.java.lang.Class$impl');

@@ -36,7 +36,6 @@ class MyInterface {
    * interface.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     return instance != null &&
@@ -49,7 +48,6 @@ class MyInterface {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
@@ -60,7 +58,6 @@ class MyInterface {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     MyInterface.$clinit();
@@ -79,7 +76,6 @@ class MyInterface {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     MyInterface.$clinit = function() {};

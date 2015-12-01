@@ -36,7 +36,6 @@ class Task extends Object {
    * @template C_T
    * @return {!Task<C_T>}
    * @public
-   * @nocollapse
    */
   static $create() {
     Task.$clinit();
@@ -67,7 +66,6 @@ class Task extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof Task; }
 
@@ -76,7 +74,6 @@ class Task extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Task);
@@ -85,7 +82,6 @@ class Task extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     Task.$clinit();
@@ -111,7 +107,6 @@ class Task extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

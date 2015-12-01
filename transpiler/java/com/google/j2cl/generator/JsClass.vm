@@ -89,7 +89,6 @@ class $className $extendsClause {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof $className; }
 #end
@@ -99,7 +98,6 @@ class $className $extendsClause {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return ${utilAlias}.$canCastClass(classConstructor, $className);
@@ -108,7 +106,6 @@ class $className $extendsClause {
   /**
    * @return {${classAlias}}
    * @public
-   * @nocollapse
    */
 #if (${classType.isEnum()})
   static $getClass() {

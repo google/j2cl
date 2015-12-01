@@ -52,7 +52,6 @@ class NestedGenericClass extends Object {
    * @template C_T
    * @return {!NestedGenericClass<C_T>}
    * @public
-   * @nocollapse
    */
   static $create() {
     NestedGenericClass.$clinit();
@@ -145,7 +144,6 @@ class NestedGenericClass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof NestedGenericClass;
@@ -156,7 +154,6 @@ class NestedGenericClass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, NestedGenericClass);
@@ -165,7 +162,6 @@ class NestedGenericClass extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     NestedGenericClass.$clinit();
@@ -191,7 +187,6 @@ class NestedGenericClass extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     NestedGenericClass$1E = goog.module.get(

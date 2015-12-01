@@ -55,7 +55,6 @@ class InstanceFieldAccessLevels extends Object {
    * A particular Java constructor as a factory method.
    * @return {!InstanceFieldAccessLevels}
    * @public
-   * @nocollapse
    */
   static $create() {
     InstanceFieldAccessLevels.$clinit();
@@ -78,7 +77,6 @@ class InstanceFieldAccessLevels extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof InstanceFieldAccessLevels;
@@ -89,7 +87,6 @@ class InstanceFieldAccessLevels extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InstanceFieldAccessLevels);
@@ -98,7 +95,6 @@ class InstanceFieldAccessLevels extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     InstanceFieldAccessLevels.$clinit();
@@ -125,7 +121,6 @@ class InstanceFieldAccessLevels extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

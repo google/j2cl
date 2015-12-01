@@ -34,7 +34,6 @@ class StaticJsMethods extends Object {
    * A particular Java constructor as a factory method.
    * @return {!StaticJsMethods}
    * @public
-   * @nocollapse
    */
   static $create() {
     StaticJsMethods.$clinit();
@@ -57,7 +56,6 @@ class StaticJsMethods extends Object {
    * @param {number} a
    * @return {void}
    * @public
-   * @nocollapse
    */
   static fun(a) { StaticJsMethods.$clinit(); }
 
@@ -65,7 +63,6 @@ class StaticJsMethods extends Object {
    * @param {number} a
    * @return {void}
    * @public
-   * @nocollapse
    */
   static f2(a) { StaticJsMethods.$clinit(); }
 
@@ -88,7 +85,6 @@ class StaticJsMethods extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof StaticJsMethods; }
 
@@ -97,7 +93,6 @@ class StaticJsMethods extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, StaticJsMethods);
@@ -106,7 +101,6 @@ class StaticJsMethods extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     StaticJsMethods.$clinit();
@@ -132,7 +126,6 @@ class StaticJsMethods extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

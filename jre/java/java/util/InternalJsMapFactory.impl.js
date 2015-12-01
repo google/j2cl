@@ -31,7 +31,6 @@ class InternalJsMapFactory extends Object {
    * A particular Java constructor as a factory method.
    * @return {!InternalJsMapFactory}
    * @public
-   * @nocollapse
    */
   static $create() {
     InternalJsMapFactory.$clinit();
@@ -53,7 +52,6 @@ class InternalJsMapFactory extends Object {
    * @template M_V
    * @return {InternalJsMap<M_V>}
    * @public
-   * @nocollapse
    */
   static m_newJsMap() {
     InternalJsMapFactory.$clinit();
@@ -64,7 +62,6 @@ class InternalJsMapFactory extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof InternalJsMapFactory; }
 
@@ -73,7 +70,6 @@ class InternalJsMapFactory extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InternalJsMapFactory);
@@ -82,7 +78,6 @@ class InternalJsMapFactory extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     InternalJsMapFactory.$clinit();
@@ -106,7 +101,6 @@ class InternalJsMapFactory extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

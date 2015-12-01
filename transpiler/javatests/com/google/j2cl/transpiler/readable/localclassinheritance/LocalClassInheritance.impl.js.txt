@@ -32,7 +32,6 @@ class LocalClassInheritance extends Object {
    * A particular Java constructor as a factory method.
    * @return {!LocalClassInheritance}
    * @public
-   * @nocollapse
    */
   static $create() {
     LocalClassInheritance.$clinit();
@@ -61,7 +60,6 @@ class LocalClassInheritance extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof LocalClassInheritance;
@@ -72,7 +70,6 @@ class LocalClassInheritance extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, LocalClassInheritance);
@@ -81,7 +78,6 @@ class LocalClassInheritance extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     LocalClassInheritance.$clinit();
@@ -108,7 +104,6 @@ class LocalClassInheritance extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

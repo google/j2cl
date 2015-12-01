@@ -31,7 +31,6 @@ class JsTypesWithConstructor extends Object {
    * A particular Java constructor as a factory method.
    * @return {!JsTypesWithConstructor}
    * @public
-   * @nocollapse
    */
   static $create() {
     JsTypesWithConstructor.$clinit();
@@ -54,7 +53,6 @@ class JsTypesWithConstructor extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof JsTypesWithConstructor;
@@ -65,7 +63,6 @@ class JsTypesWithConstructor extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, JsTypesWithConstructor);
@@ -74,7 +71,6 @@ class JsTypesWithConstructor extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     JsTypesWithConstructor.$clinit();
@@ -101,7 +97,6 @@ class JsTypesWithConstructor extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

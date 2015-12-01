@@ -25,7 +25,6 @@ class $short {
    *
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return typeof instance === 'number'; }
 
@@ -35,7 +34,6 @@ class $short {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $short;
@@ -44,7 +42,6 @@ class $short {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     $short.$clinit();
@@ -57,7 +54,6 @@ class $short {
   /**
    * Runs inline static field initializers.
    * @protected
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
@@ -74,7 +70,6 @@ $short.$classShort_ = null;
 
 /**
  * @public {number}
- * @nocollapse
  */
 $short.$initialArrayValue = 0;
 

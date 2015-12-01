@@ -39,7 +39,6 @@ class GenericMethod extends Object {
    * @template C_T
    * @return {!GenericMethod<C_T>}
    * @public
-   * @nocollapse
    */
   static $create() {
     GenericMethod.$clinit();
@@ -126,7 +125,6 @@ class GenericMethod extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof GenericMethod; }
 
@@ -135,7 +133,6 @@ class GenericMethod extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, GenericMethod);
@@ -144,7 +141,6 @@ class GenericMethod extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     GenericMethod.$clinit();
@@ -170,7 +166,6 @@ class GenericMethod extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

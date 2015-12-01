@@ -42,7 +42,6 @@ class NumberCalls extends Object {
    * A particular Java constructor as a factory method.
    * @return {!NumberCalls}
    * @public
-   * @nocollapse
    */
   static $create() {
     NumberCalls.$clinit();
@@ -160,7 +159,6 @@ class NumberCalls extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof NumberCalls; }
 
@@ -169,7 +167,6 @@ class NumberCalls extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, NumberCalls);
@@ -178,7 +175,6 @@ class NumberCalls extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     NumberCalls.$clinit();
@@ -204,7 +200,6 @@ class NumberCalls extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Boolean = goog.module.get('gen.java.lang.Boolean$impl');

@@ -103,7 +103,6 @@ class JsDate extends Object {
    * A particular Java constructor as a factory method.
    * @return {!JsDate}
    * @public
-   * @nocollapse
    */
   static $create() {
     JsDate.$clinit();
@@ -299,7 +298,6 @@ class JsDate extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof JsDate; }
 
@@ -308,7 +306,6 @@ class JsDate extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, JsDate);
@@ -317,7 +314,6 @@ class JsDate extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     JsDate.$clinit();
@@ -340,7 +336,6 @@ class JsDate extends Object {
   /**
    * Runs inline static field initializers.
    * @protected
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

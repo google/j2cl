@@ -49,7 +49,6 @@ class InstanceFieldInitializer extends Object {
    * A particular Java constructor as a factory method.
    * @return {!InstanceFieldInitializer}
    * @public
-   * @nocollapse
    */
   static $create() {
     InstanceFieldInitializer.$clinit();
@@ -72,7 +71,6 @@ class InstanceFieldInitializer extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof InstanceFieldInitializer;
@@ -83,7 +81,6 @@ class InstanceFieldInitializer extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InstanceFieldInitializer);
@@ -92,7 +89,6 @@ class InstanceFieldInitializer extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     InstanceFieldInitializer.$clinit();
@@ -119,7 +115,6 @@ class InstanceFieldInitializer extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

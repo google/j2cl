@@ -31,7 +31,6 @@ class BlockScoping extends Object {
    * A particular Java constructor as a factory method.
    * @return {!BlockScoping}
    * @public
-   * @nocollapse
    */
   static $create() {
     BlockScoping.$clinit();
@@ -63,7 +62,6 @@ class BlockScoping extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof BlockScoping; }
 
@@ -72,7 +70,6 @@ class BlockScoping extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, BlockScoping);
@@ -81,7 +78,6 @@ class BlockScoping extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     BlockScoping.$clinit();
@@ -107,7 +103,6 @@ class BlockScoping extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

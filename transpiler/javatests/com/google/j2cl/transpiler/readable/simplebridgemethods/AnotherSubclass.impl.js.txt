@@ -35,7 +35,6 @@ class AnotherSubclass extends Superclass {
    * A particular Java constructor as a factory method.
    * @return {!AnotherSubclass}
    * @public
-   * @nocollapse
    */
   static $create() {
     AnotherSubclass.$clinit();
@@ -58,7 +57,6 @@ class AnotherSubclass extends Superclass {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof AnotherSubclass; }
 
@@ -67,7 +65,6 @@ class AnotherSubclass extends Superclass {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, AnotherSubclass);
@@ -76,7 +73,6 @@ class AnotherSubclass extends Superclass {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     AnotherSubclass.$clinit();
@@ -102,7 +98,6 @@ class AnotherSubclass extends Superclass {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     AssertionError = goog.module.get('gen.java.lang.AssertionError$impl');

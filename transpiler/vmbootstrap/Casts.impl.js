@@ -13,7 +13,6 @@ class Casts {
    * @param {*} instance
    * @param {boolean} condition
    * @return {*}
-   * @nocollapse
    */
   static check(instance, condition) {
     if (CAST_CHECKS_ENABLED_ && !condition) {
@@ -26,16 +25,25 @@ class Casts {
    * @param {*} instance
    * @param {*} castType
    * @return {*}
-   * @nocollapse
    */
   static to(instance, castType) {
+    return Casts.toInternal(
+        instance, /** @type {Function} */ (castType.$isInstance));
+  }
+
+  /**
+   * @param {*} instance
+   * @param {Function} castTypeIsInstance
+   * @return {*}
+   */
+  static toInternal(instance, castTypeIsInstance) {
     if (!CAST_CHECKS_ENABLED_) {
       return instance;
     }
     if (instance == null) {
       return instance;
     }
-    if (!castType.$isInstance(instance)) {
+    if (!castTypeIsInstance(instance)) {
       Casts.throwCastException();
     }
     return instance;
@@ -53,7 +61,6 @@ class Casts {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     ClassCastException =

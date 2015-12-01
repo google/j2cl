@@ -38,7 +38,6 @@ class InternalJsMap extends Object {
    * @template C_V
    * @return {!InternalJsMap<C_V>}
    * @public
-   * @nocollapse
    */
   static $create() {
     InternalJsMap.$clinit();
@@ -124,7 +123,6 @@ class InternalJsMap extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof InternalJsMap; }
 
@@ -133,7 +131,6 @@ class InternalJsMap extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InternalJsMap);
@@ -142,7 +139,6 @@ class InternalJsMap extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     InternalJsMap.$clinit();
@@ -166,7 +162,6 @@ class InternalJsMap extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

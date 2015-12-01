@@ -64,7 +64,6 @@ class CharSequence {
    * interface.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     if ((typeof instance) == 'string') {
@@ -79,7 +78,6 @@ class CharSequence {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
@@ -90,7 +88,6 @@ class CharSequence {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     CharSequence.$clinit();
@@ -106,7 +103,6 @@ class CharSequence {
   /**
    * Runs inline static field initializers.
    * @protected
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

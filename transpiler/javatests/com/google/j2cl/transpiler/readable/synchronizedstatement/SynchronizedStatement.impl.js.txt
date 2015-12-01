@@ -44,7 +44,6 @@ class SynchronizedStatement extends Object {
    * A particular Java constructor as a factory method.
    * @return {!SynchronizedStatement}
    * @public
-   * @nocollapse
    */
   static $create() {
     SynchronizedStatement.$clinit();
@@ -79,7 +78,6 @@ class SynchronizedStatement extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof SynchronizedStatement;
@@ -90,7 +88,6 @@ class SynchronizedStatement extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SynchronizedStatement);
@@ -99,7 +96,6 @@ class SynchronizedStatement extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     SynchronizedStatement.$clinit();
@@ -126,7 +122,6 @@ class SynchronizedStatement extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

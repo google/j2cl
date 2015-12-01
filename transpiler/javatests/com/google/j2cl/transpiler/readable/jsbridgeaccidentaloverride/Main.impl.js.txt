@@ -39,7 +39,6 @@ class Main extends Object {
    * A particular Java constructor as a factory method.
    * @return {!Main}
    * @public
-   * @nocollapse
    */
   static $create() {
     Main.$clinit();
@@ -82,7 +81,6 @@ class Main extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof Main; }
 
@@ -91,7 +89,6 @@ class Main extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Main);
@@ -100,7 +97,6 @@ class Main extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     Main.$clinit();
@@ -126,7 +122,6 @@ class Main extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     MyInterface = goog.module.get(

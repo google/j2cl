@@ -33,7 +33,6 @@ class SwitchStatement extends Object {
    * A particular Java constructor as a factory method.
    * @return {!SwitchStatement}
    * @public
-   * @nocollapse
    */
   static $create() {
     SwitchStatement.$clinit();
@@ -96,7 +95,6 @@ class SwitchStatement extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof SwitchStatement; }
 
@@ -105,7 +103,6 @@ class SwitchStatement extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SwitchStatement);
@@ -114,7 +111,6 @@ class SwitchStatement extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     SwitchStatement.$clinit();
@@ -140,7 +136,6 @@ class SwitchStatement extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Numbers = goog.module.get(

@@ -36,7 +36,6 @@ class SubJsType extends MyJsType {
    * A particular Java constructor as a factory method.
    * @return {!SubJsType}
    * @public
-   * @nocollapse
    */
   static $create() {
     SubJsType.$clinit();
@@ -85,7 +84,6 @@ class SubJsType extends MyJsType {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof SubJsType; }
 
@@ -94,7 +92,6 @@ class SubJsType extends MyJsType {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SubJsType);
@@ -103,7 +100,6 @@ class SubJsType extends MyJsType {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     SubJsType.$clinit();
@@ -129,7 +125,6 @@ class SubJsType extends MyJsType {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

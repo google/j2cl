@@ -122,7 +122,6 @@ class Comparables {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Boolean = goog.module.get('gen.java.lang.Boolean$impl');

@@ -25,7 +25,6 @@ class $void {
    *
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return false; }
 
@@ -35,7 +34,6 @@ class $void {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $void;
@@ -44,7 +42,6 @@ class $void {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     $void.$clinit();
@@ -57,7 +54,6 @@ class $void {
   /**
    * Runs inline static field initializers.
    * @protected
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
@@ -74,7 +70,6 @@ $void.$classVoid_ = null;
 
 /**
  * @public {boolean}
- * @nocollapse
  */
 $void.$initialArrayValue = false;
 

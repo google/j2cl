@@ -34,7 +34,6 @@ class SubclassGenericClass extends GenericClass {
    * A particular Java constructor as a factory method.
    * @return {!SubclassGenericClass}
    * @public
-   * @nocollapse
    */
   static $create() {
     SubclassGenericClass.$clinit();
@@ -57,7 +56,6 @@ class SubclassGenericClass extends GenericClass {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof SubclassGenericClass;
@@ -68,7 +66,6 @@ class SubclassGenericClass extends GenericClass {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SubclassGenericClass);
@@ -77,7 +74,6 @@ class SubclassGenericClass extends GenericClass {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     SubclassGenericClass.$clinit();
@@ -103,7 +99,6 @@ class SubclassGenericClass extends GenericClass {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

@@ -36,7 +36,6 @@ class InternalJsIteratorEntry extends Object {
    * @template C_V
    * @return {!InternalJsIteratorEntry<C_V>}
    * @public
-   * @nocollapse
    */
   static $create(entry) {
     InternalJsIteratorEntry.$clinit();
@@ -83,7 +82,6 @@ class InternalJsIteratorEntry extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof InternalJsIteratorEntry; }
 
@@ -92,7 +90,6 @@ class InternalJsIteratorEntry extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InternalJsIteratorEntry);
@@ -101,7 +98,6 @@ class InternalJsIteratorEntry extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     InternalJsIteratorEntry.$clinit();
@@ -125,7 +121,6 @@ class InternalJsIteratorEntry extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

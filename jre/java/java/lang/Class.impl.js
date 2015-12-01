@@ -296,7 +296,6 @@ class Class extends Object {
    * @param {Object} instance
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof Class;
@@ -308,7 +307,6 @@ class Class extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Class);
@@ -317,7 +315,6 @@ class Class extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     if (!Class.$classClass_) {
@@ -341,7 +338,6 @@ class Class extends Object {
    * Runs inline static field initializers.
    *
    * @protected
-   * @nocollapse
    */
   static $clinit() { Object.$clinit(); }
 };

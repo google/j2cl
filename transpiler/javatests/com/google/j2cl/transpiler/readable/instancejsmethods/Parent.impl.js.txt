@@ -31,7 +31,6 @@ class Parent extends SuperParent {
    * A particular Java constructor as a factory method.
    * @return {!Parent}
    * @public
-   * @nocollapse
    */
   static $create() {
     Parent.$clinit();
@@ -97,7 +96,6 @@ class Parent extends SuperParent {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof Parent; }
 
@@ -106,7 +104,6 @@ class Parent extends SuperParent {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Parent);
@@ -115,7 +112,6 @@ class Parent extends SuperParent {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     Parent.$clinit();
@@ -141,7 +137,6 @@ class Parent extends SuperParent {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

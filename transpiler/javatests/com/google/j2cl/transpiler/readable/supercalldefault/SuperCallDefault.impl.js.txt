@@ -31,7 +31,6 @@ class SuperCallDefault extends Object {
    * A particular Java constructor as a factory method.
    * @return {!SuperCallDefault}
    * @public
-   * @nocollapse
    */
   static $create() {
     SuperCallDefault.$clinit();
@@ -54,7 +53,6 @@ class SuperCallDefault extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof SuperCallDefault; }
 
@@ -63,7 +61,6 @@ class SuperCallDefault extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SuperCallDefault);
@@ -72,7 +69,6 @@ class SuperCallDefault extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     SuperCallDefault.$clinit();
@@ -98,7 +94,6 @@ class SuperCallDefault extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

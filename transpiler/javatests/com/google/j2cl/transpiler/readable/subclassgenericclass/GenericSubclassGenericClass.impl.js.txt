@@ -36,7 +36,6 @@ class GenericSubclassGenericClass extends GenericClass {
    * @template C_T
    * @return {!GenericSubclassGenericClass<C_T>}
    * @public
-   * @nocollapse
    */
   static $create() {
     GenericSubclassGenericClass.$clinit();
@@ -59,7 +58,6 @@ class GenericSubclassGenericClass extends GenericClass {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof GenericSubclassGenericClass;
@@ -70,7 +68,6 @@ class GenericSubclassGenericClass extends GenericClass {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, GenericSubclassGenericClass);
@@ -79,7 +76,6 @@ class GenericSubclassGenericClass extends GenericClass {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     GenericSubclassGenericClass.$clinit();
@@ -106,7 +102,6 @@ class GenericSubclassGenericClass extends GenericClass {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

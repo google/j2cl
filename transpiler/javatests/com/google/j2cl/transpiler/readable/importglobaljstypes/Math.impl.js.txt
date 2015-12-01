@@ -32,7 +32,6 @@ class Math extends Object {
    * A particular Java constructor as a factory method.
    * @return {!Math}
    * @public
-   * @nocollapse
    */
   static $create() {
     Math.$clinit();
@@ -55,7 +54,6 @@ class Math extends Object {
    * @param {number} x
    * @return {number}
    * @public
-   * @nocollapse
    */
   static m_abs__double(x) {
     Math.$clinit();
@@ -76,7 +74,6 @@ class Math extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof Math; }
 
@@ -85,7 +82,6 @@ class Math extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Math);
@@ -94,7 +90,6 @@ class Math extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     Math.$clinit();
@@ -120,7 +115,6 @@ class Math extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

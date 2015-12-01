@@ -36,7 +36,6 @@ class MultipleCatch extends Object {
    * A particular Java constructor as a factory method.
    * @return {!MultipleCatch}
    * @public
-   * @nocollapse
    */
   static $create() {
     MultipleCatch.$clinit();
@@ -78,7 +77,6 @@ class MultipleCatch extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof MultipleCatch; }
 
@@ -87,7 +85,6 @@ class MultipleCatch extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, MultipleCatch);
@@ -96,7 +93,6 @@ class MultipleCatch extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     MultipleCatch.$clinit();
@@ -122,7 +118,6 @@ class MultipleCatch extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

@@ -223,7 +223,6 @@ class Arrays {
    * @param {number} requiredDimensionCount
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $instanceIsOfType(instance, requiredLeafType, requiredDimensionCount) {
     return Arrays.$instanceIsOfTypeInternal(

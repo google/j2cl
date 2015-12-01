@@ -32,7 +32,6 @@ class SubChild extends Child {
    * A particular Java constructor as a factory method.
    * @return {!SubChild}
    * @public
-   * @nocollapse
    */
   static $create() {
     SubChild.$clinit();
@@ -63,7 +62,6 @@ class SubChild extends Child {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof SubChild; }
 
@@ -72,7 +70,6 @@ class SubChild extends Child {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SubChild);
@@ -81,7 +78,6 @@ class SubChild extends Child {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     SubChild.$clinit();
@@ -107,7 +103,6 @@ class SubChild extends Child {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

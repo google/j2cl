@@ -35,7 +35,6 @@ class InterfaceImpl extends A {
    * A particular Java constructor as a factory method.
    * @return {!InterfaceImpl}
    * @public
-   * @nocollapse
    */
   static $create() {
     InterfaceImpl.$clinit();
@@ -67,7 +66,6 @@ class InterfaceImpl extends A {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof InterfaceImpl; }
 
@@ -76,7 +74,6 @@ class InterfaceImpl extends A {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, InterfaceImpl);
@@ -85,7 +82,6 @@ class InterfaceImpl extends A {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     InterfaceImpl.$clinit();
@@ -111,7 +107,6 @@ class InterfaceImpl extends A {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

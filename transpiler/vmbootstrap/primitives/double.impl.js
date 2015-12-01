@@ -25,7 +25,6 @@ class $double {
    *
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return typeof instance === 'number'; }
 
@@ -35,7 +34,6 @@ class $double {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $double;
@@ -44,7 +42,6 @@ class $double {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     $double.$clinit();
@@ -57,7 +54,6 @@ class $double {
   /**
    * Runs inline static field initializers.
    * @protected
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
@@ -74,7 +70,6 @@ $double.$classDouble_ = null;
 
 /**
  * @public {number}
- * @nocollapse
  */
 $double.$initialArrayValue = 0;
 

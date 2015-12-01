@@ -85,7 +85,6 @@ class CompileTimeConstant extends Object {
    * A particular Java constructor as a factory method.
    * @return {!CompileTimeConstant}
    * @public
-   * @nocollapse
    */
   static $create() {
     CompileTimeConstant.$clinit();
@@ -108,7 +107,6 @@ class CompileTimeConstant extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof CompileTimeConstant;
@@ -119,7 +117,6 @@ class CompileTimeConstant extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, CompileTimeConstant);
@@ -128,7 +125,6 @@ class CompileTimeConstant extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     CompileTimeConstant.$clinit();
@@ -154,7 +150,6 @@ class CompileTimeConstant extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     CompileTimeConstant.$clinit = function() {};

@@ -39,7 +39,6 @@ class Parent extends Object {
    * @param {number} f
    * @return {!Parent}
    * @public
-   * @nocollapse
    */
   static $create__int(f) {
     Parent.$clinit();
@@ -67,7 +66,6 @@ class Parent extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof Parent; }
 
@@ -76,7 +74,6 @@ class Parent extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Parent);
@@ -85,7 +82,6 @@ class Parent extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     Parent.$clinit();
@@ -111,7 +107,6 @@ class Parent extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

@@ -25,7 +25,6 @@ class $boolean {
    *
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return typeof instance === 'boolean'; }
 
@@ -35,7 +34,6 @@ class $boolean {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $boolean;
@@ -44,7 +42,6 @@ class $boolean {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     $boolean.$clinit();
@@ -57,7 +54,6 @@ class $boolean {
   /**
    * Runs inline static field initializers.
    * @protected
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
@@ -74,7 +70,6 @@ $boolean.$classBoolean_ = null;
 
 /**
  * @public {boolean}
- * @nocollapse
  */
 $boolean.$initialArrayValue = false;
 

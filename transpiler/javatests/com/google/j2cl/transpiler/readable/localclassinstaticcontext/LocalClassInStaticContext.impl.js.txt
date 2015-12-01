@@ -41,7 +41,6 @@ class LocalClassInStaticContext extends Object {
    * A particular Java constructor as a factory method.
    * @return {!LocalClassInStaticContext}
    * @public
-   * @nocollapse
    */
   static $create() {
     LocalClassInStaticContext.$clinit();
@@ -63,7 +62,6 @@ class LocalClassInStaticContext extends Object {
   /**
    * @return {void}
    * @public
-   * @nocollapse
    */
   static m_test() {
     LocalClassInStaticContext.$clinit();
@@ -75,7 +73,6 @@ class LocalClassInStaticContext extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof LocalClassInStaticContext;
@@ -86,7 +83,6 @@ class LocalClassInStaticContext extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, LocalClassInStaticContext);
@@ -95,7 +91,6 @@ class LocalClassInStaticContext extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     LocalClassInStaticContext.$clinit();
@@ -122,7 +117,6 @@ class LocalClassInStaticContext extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     LocalClassInStaticContext.$clinit = function() {};

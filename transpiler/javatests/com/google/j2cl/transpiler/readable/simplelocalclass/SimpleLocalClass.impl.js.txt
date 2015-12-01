@@ -36,7 +36,6 @@ class SimpleLocalClass extends Object {
    * A particular Java constructor as a factory method.
    * @return {!SimpleLocalClass}
    * @public
-   * @nocollapse
    */
   static $create() {
     SimpleLocalClass.$clinit();
@@ -81,7 +80,6 @@ class SimpleLocalClass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof SimpleLocalClass; }
 
@@ -90,7 +88,6 @@ class SimpleLocalClass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SimpleLocalClass);
@@ -99,7 +96,6 @@ class SimpleLocalClass extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     SimpleLocalClass.$clinit();
@@ -125,7 +121,6 @@ class SimpleLocalClass extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     SimpleLocalClass$1InnerClass = goog.module.get(

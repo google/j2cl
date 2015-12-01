@@ -26,7 +26,6 @@ class $long {
    *
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof Long; }
 
@@ -36,7 +35,6 @@ class $long {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $long;
@@ -45,7 +43,6 @@ class $long {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     $long.$clinit();
@@ -58,7 +55,6 @@ class $long {
   /**
    * Runs inline static field initializers.
    * @protected
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
@@ -75,7 +71,6 @@ $long.$classLong_ = null;
 
 /**
  * @public {Long}
- * @nocollapse
  */
 $long.$initialArrayValue = Long.fromInt(0);
 

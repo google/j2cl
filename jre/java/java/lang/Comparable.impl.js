@@ -40,7 +40,6 @@ class Comparable {
    * interface.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     let type = typeof instance;
@@ -56,7 +55,6 @@ class Comparable {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
@@ -67,7 +65,6 @@ class Comparable {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     Comparable.$clinit();
@@ -83,7 +80,6 @@ class Comparable {
   /**
    * Runs inline static field initializers.
    * @protected
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

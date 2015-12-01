@@ -36,7 +36,6 @@ class LambdaWithGenerics extends Object {
    * A particular Java constructor as a factory method.
    * @return {!LambdaWithGenerics}
    * @public
-   * @nocollapse
    */
   static $create() {
     LambdaWithGenerics.$clinit();
@@ -82,7 +81,6 @@ class LambdaWithGenerics extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     return instance instanceof LambdaWithGenerics;
@@ -93,7 +91,6 @@ class LambdaWithGenerics extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, LambdaWithGenerics);
@@ -102,7 +99,6 @@ class LambdaWithGenerics extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     LambdaWithGenerics.$clinit();
@@ -128,7 +124,6 @@ class LambdaWithGenerics extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     LambdaWithGenerics$lambda$0 = goog.module.get(

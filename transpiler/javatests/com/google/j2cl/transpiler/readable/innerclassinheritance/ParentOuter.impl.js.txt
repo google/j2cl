@@ -39,7 +39,6 @@ class ParentOuter extends Object {
    * A particular Java constructor as a factory method.
    * @return {!ParentOuter}
    * @public
-   * @nocollapse
    */
   static $create() {
     ParentOuter.$clinit();
@@ -68,7 +67,6 @@ class ParentOuter extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof ParentOuter; }
 
@@ -77,7 +75,6 @@ class ParentOuter extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, ParentOuter);
@@ -86,7 +83,6 @@ class ParentOuter extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     ParentOuter.$clinit();
@@ -112,7 +108,6 @@ class ParentOuter extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

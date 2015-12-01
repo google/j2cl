@@ -1,7 +1,6 @@
 /**
  * @return {number}
- * @nocollapse
- * */
+ */
 Main.getFooA = function() {
   Main.$clinit();
   return Foo.a;
@@ -9,8 +8,7 @@ Main.getFooA = function() {
 
 /**
  * @return {number}
- * @nocollapse
- * */
+ */
 Main.getFooB = function() {
   Main.$clinit();
   return Foo.abc;
@@ -19,8 +17,7 @@ Main.getFooB = function() {
 /**
  * @param {*} bar
  * @return {number}
- * @nocollapse
- * */
+ */
 Main.getBarA = function(bar) {
   Main.$clinit();
   return bar.a;
@@ -29,8 +26,7 @@ Main.getBarA = function(bar) {
 /**
  * @param {*} bar
  * @return {number}
- * @nocollapse
- * */
+ */
 Main.getBarB = function(bar) {
   Main.$clinit();
   return bar.abc;
@@ -38,8 +34,7 @@ Main.getBarB = function(bar) {
 
 /**
  * @param {number} x
- * @nocollapse
- * */
+ */
 Main.setFooA = function(x) {
   Main.$clinit();
   Foo.a = x;
@@ -47,8 +42,7 @@ Main.setFooA = function(x) {
 
 /**
  * @param {number} x
- * @nocollapse
- * */
+ */
 Main.setFooB = function(x) {
   Main.$clinit();
   Foo.abc = x;
@@ -57,8 +51,7 @@ Main.setFooB = function(x) {
 /**
  * @param {*} bar
  * @param {number} x
- * @nocollapse
- * */
+ */
 Main.setBarA = function(bar, x) {
   Main.$clinit();
   bar.a = x;
@@ -67,8 +60,7 @@ Main.setBarA = function(bar, x) {
 /**
  * @param {*} bar
  * @param {number} x
- * @nocollapse
- * */
+ */
 Main.setBarB = function(bar, x) {
   Main.$clinit();
   bar.abc = x;

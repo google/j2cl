@@ -32,7 +32,6 @@ class ArrayLiteral extends Object {
    * A particular Java constructor as a factory method.
    * @return {!ArrayLiteral}
    * @public
-   * @nocollapse
    */
   static $create() {
     ArrayLiteral.$clinit();
@@ -70,7 +69,6 @@ class ArrayLiteral extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof ArrayLiteral; }
 
@@ -79,7 +77,6 @@ class ArrayLiteral extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, ArrayLiteral);
@@ -88,7 +85,6 @@ class ArrayLiteral extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     ArrayLiteral.$clinit();
@@ -114,7 +110,6 @@ class ArrayLiteral extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

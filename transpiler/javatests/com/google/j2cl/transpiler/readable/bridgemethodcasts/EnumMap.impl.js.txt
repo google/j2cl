@@ -38,7 +38,6 @@ class EnumMap extends AbstractMap {
    * @template C_K, C_V
    * @return {!EnumMap<C_K, C_V>}
    * @public
-   * @nocollapse
    */
   static $create() {
     EnumMap.$clinit();
@@ -82,7 +81,6 @@ class EnumMap extends AbstractMap {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof EnumMap; }
 
@@ -91,7 +89,6 @@ class EnumMap extends AbstractMap {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, EnumMap);
@@ -100,7 +97,6 @@ class EnumMap extends AbstractMap {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     EnumMap.$clinit();
@@ -126,7 +122,6 @@ class EnumMap extends AbstractMap {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

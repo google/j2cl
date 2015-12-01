@@ -3,7 +3,6 @@
  * @param {number} a
  * @param {number} b
  * @return {number}
- * @nocollapse
  */
 Main.callParentFun = function(p, a, b) {
   Main.$clinit();
@@ -15,7 +14,6 @@ Main.callParentFun = function(p, a, b) {
  * @param {number} a
  * @param {number} b
  * @return {number}
- * @nocollapse
  */
 Main.callParentBar = function(p, a, b) {
   Main.$clinit();
@@ -26,7 +24,6 @@ Main.callParentBar = function(p, a, b) {
  * @param {*} p
  * @param {number} a
  * @return {number}
- * @nocollapse
  */
 Main.callParentFoo = function(p, a) {
   Main.$clinit();
@@ -38,7 +35,6 @@ Main.callParentFoo = function(p, a) {
  * @param {number} a
  * @param {number} b
  * @return {number}
- * @nocollapse
  */
 Main.callChildFun = function(c, a, b) {
   Main.$clinit();
@@ -50,7 +46,6 @@ Main.callChildFun = function(c, a, b) {
  * @param {number} a
  * @param {number} b
  * @return {number}
- * @nocollapse
  */
 Main.callChildBar = function(c, a, b) {
   Main.$clinit();
@@ -61,7 +56,6 @@ Main.callChildBar = function(c, a, b) {
  * @param {*} c
  * @param {number} a
  * @return {number}
- * @nocollapse
  */
 Main.callChildFoo = function(c, a) {
   Main.$clinit();
@@ -72,7 +66,6 @@ Main.callChildFoo = function(c, a) {
  * @param {*} c
  * @param {number} a
  * @return {number}
- * @nocollapse
  */
 Main.callChildIntfFoo = function(c, a) {
   Main.$clinit();

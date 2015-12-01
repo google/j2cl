@@ -44,7 +44,6 @@ class LambdaNestedScope$Runner {
    * interface.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) {
     return instance != null &&
@@ -57,7 +56,6 @@ class LambdaNestedScope$Runner {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
@@ -68,7 +66,6 @@ class LambdaNestedScope$Runner {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     LambdaNestedScope$Runner.$clinit();
@@ -88,7 +85,6 @@ class LambdaNestedScope$Runner {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     LambdaNestedScope = goog.module.get(

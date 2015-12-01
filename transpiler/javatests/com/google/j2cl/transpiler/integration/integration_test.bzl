@@ -95,6 +95,7 @@ def integration_test(
       name="optimized_js",
       srcs=["OptHarness.js"],
       defs=_CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
+          "--j2cl_pass",
           "--language_in=ECMASCRIPT6_STRICT",
           "--language_out=ECMASCRIPT5",
           "--remove_dead_assignments",
@@ -116,6 +117,7 @@ def integration_test(
       name="readable_optimized_js",
       srcs=["OptHarness.js"],
       defs=_CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
+          "--j2cl_pass",
           "--language_in=ECMASCRIPT6_STRICT",
           "--language_out=ECMASCRIPT5",
           "--remove_dead_assignments",
@@ -139,6 +141,7 @@ def integration_test(
       name="readable_unoptimized_js",
       srcs=["OptHarness.js"],
       defs=[
+          "--j2cl_pass",
           "--language_in=ECMASCRIPT6_STRICT",
           "--language_out=ECMASCRIPT5",
           "--pretty_print",
@@ -243,6 +246,7 @@ def integration_test(
       compile=1,
       compiler="//javascript/tools/jscompiler:head",
       defs=_CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
+          "--j2cl_pass",
           "--export_test_functions=true",
           "--language_in=ECMASCRIPT6_STRICT",
           "--language_out=ECMASCRIPT5",

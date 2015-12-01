@@ -21,7 +21,6 @@ class Numbers {
    * @param {Number|number} obj
    * @return {number}
    * @public
-   * @nocollapse
    */
   static m_byteValue__java_lang_Number(obj) {
     Numbers.$clinit();
@@ -36,7 +35,6 @@ class Numbers {
    * @param {Number|number} obj
    * @return {number}
    * @public
-   * @nocollapse
    */
   static m_doubleValue__java_lang_Number(obj) {
     Numbers.$clinit();
@@ -51,7 +49,6 @@ class Numbers {
    * @param {Number|number} obj
    * @return {number}
    * @public
-   * @nocollapse
    */
   static m_floatValue__java_lang_Number(obj) {
     Numbers.$clinit();
@@ -66,7 +63,6 @@ class Numbers {
    * @param {Number|number} obj
    * @return {number}
    * @public
-   * @nocollapse
    */
   static m_intValue__java_lang_Number(obj) {
     Numbers.$clinit();
@@ -81,7 +77,6 @@ class Numbers {
    * @param {Number|number} obj
    * @return {!$Long}
    * @public
-   * @nocollapse
    */
   static m_longValue__java_lang_Number(obj) {
     Numbers.$clinit();
@@ -96,7 +91,6 @@ class Numbers {
    * @param {Number|number} obj
    * @return {number}
    * @public
-   * @nocollapse
    */
   static m_shortValue__java_lang_Number(obj) {
     Numbers.$clinit();
@@ -172,7 +166,6 @@ class Numbers {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Character = goog.module.get('gen.java.lang.Character$impl');

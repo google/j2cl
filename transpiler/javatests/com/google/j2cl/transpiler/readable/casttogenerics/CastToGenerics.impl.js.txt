@@ -41,7 +41,6 @@ class CastToGenerics extends Object {
    * @template C_T, C_E
    * @return {!CastToGenerics<C_T, C_E>}
    * @public
-   * @nocollapse
    */
   static $create() {
     CastToGenerics.$clinit();
@@ -95,7 +94,6 @@ class CastToGenerics extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof CastToGenerics; }
 
@@ -104,7 +102,6 @@ class CastToGenerics extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, CastToGenerics);
@@ -113,7 +110,6 @@ class CastToGenerics extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     CastToGenerics.$clinit();
@@ -139,7 +135,6 @@ class CastToGenerics extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

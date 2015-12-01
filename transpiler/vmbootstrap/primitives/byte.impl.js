@@ -25,7 +25,6 @@ class $byte {
    *
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return typeof instance === 'number'; }
 
@@ -35,7 +34,6 @@ class $byte {
    * @param {Function} classConstructor
    * @return {boolean}
    * @private
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $byte;
@@ -44,7 +42,6 @@ class $byte {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     $byte.$clinit();
@@ -57,7 +54,6 @@ class $byte {
   /**
    * Runs inline static field initializers.
    * @protected
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
@@ -74,7 +70,6 @@ $byte.$classByte_ = null;
 
 /**
  * @public {number}
- * @nocollapse
  */
 $byte.$initialArrayValue = 0;
 

@@ -32,7 +32,6 @@ class EmptyMethod extends Object {
    * A particular Java constructor as a factory method.
    * @return {!EmptyMethod}
    * @public
-   * @nocollapse
    */
   static $create() {
     EmptyMethod.$clinit();
@@ -55,7 +54,6 @@ class EmptyMethod extends Object {
    * @param {Array<?string>} args
    * @return {void}
    * @public
-   * @nocollapse
    */
   static m_main__arrayOf_java_lang_String(args) { EmptyMethod.$clinit(); }
 
@@ -63,7 +61,6 @@ class EmptyMethod extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof EmptyMethod; }
 
@@ -72,7 +69,6 @@ class EmptyMethod extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, EmptyMethod);
@@ -81,7 +77,6 @@ class EmptyMethod extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     EmptyMethod.$clinit();
@@ -107,7 +102,6 @@ class EmptyMethod extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

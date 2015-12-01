@@ -50,7 +50,6 @@ class SimpleGenericType extends Object {
    * @param {C_S} s
    * @return {!SimpleGenericType<C_T, C_S>}
    * @public
-   * @nocollapse
    */
   static $create__java_lang_Object__java_lang_Object(t, s) {
     SimpleGenericType.$clinit();
@@ -91,7 +90,6 @@ class SimpleGenericType extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof SimpleGenericType; }
 
@@ -100,7 +98,6 @@ class SimpleGenericType extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, SimpleGenericType);
@@ -109,7 +106,6 @@ class SimpleGenericType extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     SimpleGenericType.$clinit();
@@ -135,7 +131,6 @@ class SimpleGenericType extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

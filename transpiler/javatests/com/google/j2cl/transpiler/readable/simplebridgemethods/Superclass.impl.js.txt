@@ -34,7 +34,6 @@ class Superclass extends Object {
    * @template C_T
    * @return {!Superclass<C_T>}
    * @public
-   * @nocollapse
    */
   static $create() {
     Superclass.$clinit();
@@ -64,7 +63,6 @@ class Superclass extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof Superclass; }
 
@@ -73,7 +71,6 @@ class Superclass extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Superclass);
@@ -82,7 +79,6 @@ class Superclass extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     Superclass.$clinit();
@@ -108,7 +104,6 @@ class Superclass extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');

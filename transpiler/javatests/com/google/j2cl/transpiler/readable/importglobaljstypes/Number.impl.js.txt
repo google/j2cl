@@ -34,7 +34,6 @@ class Number extends Object {
    * A particular Java constructor as a factory method.
    * @return {!Number}
    * @public
-   * @nocollapse
    */
   static $create() {
     Number.$clinit();
@@ -57,7 +56,6 @@ class Number extends Object {
    * @param {number} x
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static m_test__double(x) {
     Number.$clinit();
@@ -68,7 +66,6 @@ class Number extends Object {
    * @param {*} array
    * @return {?string}
    * @public
-   * @nocollapse
    */
   static m_fromCharCode__java_lang_Object(array) {
     Number.$clinit();
@@ -79,7 +76,6 @@ class Number extends Object {
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isInstance(instance) { return instance instanceof Number; }
 
@@ -88,7 +84,6 @@ class Number extends Object {
    * @param {Function} classConstructor
    * @return {boolean}
    * @public
-   * @nocollapse
    */
   static $isAssignableFrom(classConstructor) {
     return $Util.$canCastClass(classConstructor, Number);
@@ -97,7 +92,6 @@ class Number extends Object {
   /**
    * @return {Class}
    * @public
-   * @nocollapse
    */
   static $getClass() {
     Number.$clinit();
@@ -123,7 +117,6 @@ class Number extends Object {
   /**
    * Runs inline static field initializers.
    * @public
-   * @nocollapse
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
