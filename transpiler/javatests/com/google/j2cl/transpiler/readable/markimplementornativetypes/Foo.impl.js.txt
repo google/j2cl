@@ -1,0 +1,125 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.markimplementornativetypes.Foo.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.markimplementornativetypes.Foo$impl');
+
+
+let RegularInterface = goog.require('gen.com.google.j2cl.transpiler.readable.markimplementornativetypes.RegularInterface$impl');
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+let MyNativeInterface = goog.require('test.foo.MyNativeInterface');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+/**
+ * @implements {MyNativeInterface}
+ * @implements {RegularInterface}
+ */
+class Foo extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_markimplementornativetypes_Foo() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Foo}
+   * @public
+   */
+  static $create() {
+    Foo.$clinit();
+    let instance = new Foo;
+    instance
+        .$ctor__com_google_j2cl_transpiler_readable_markimplementornativetypes_Foo();
+    return instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_markimplementornativetypes_Foo() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_markimplementornativetypes_Foo();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Foo; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Foo);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    Foo.$clinit();
+    if (!Foo.$classFoo_) {
+      Foo.$classFoo_ = Class.$createForClass(
+          $Util.$generateId('Foo'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.markimplementornativetypes.Foo'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.markimplementornativetypes.Foo'));
+    }
+    return Foo.$classFoo_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return Foo.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Foo.$classFoo_ = null;
+
+
+RegularInterface.$markImplementor(Foo);
+
+
+
+/**
+ * Export class.
+ */
+exports = Foo;

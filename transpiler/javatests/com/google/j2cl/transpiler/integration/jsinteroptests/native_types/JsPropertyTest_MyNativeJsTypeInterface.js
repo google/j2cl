@@ -1,4 +1,4 @@
-goog.module('global.JsPropertyTest_MyNativeJsTypeInterface');
+goog.module('test.foo.JsPropertyTest_MyNativeJsTypeInterface');
 
 class JsPropertyTest_MyNativeJsTypeInterface {};
 

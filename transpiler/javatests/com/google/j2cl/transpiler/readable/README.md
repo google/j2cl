@@ -81,7 +81,6 @@ are copyright and licensed as follows:
 - jsconstructor
 - jsfunction
 - jspackageinfo
-- jspropertybridge
 - jsoverlaymethod
 - objectmethodsofnativetype
 - subclassjsnativetype (with constructor)

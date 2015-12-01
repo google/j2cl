@@ -18,7 +18,8 @@ package com.google.j2cl.ast;
 import java.beans.Introspector;
 
 /**
- * Indicates type of a JS member.
+ * Indicates type of a JS member. A method is some flavor of JsMember if it is a JsProperty, or a
+ * regular JsMethod.
  */
 public enum JsMemberType {
   /**

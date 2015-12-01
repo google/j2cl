@@ -157,7 +157,9 @@ ${className}.$class${className}_ = null;
 
 
 #foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
+#if (!${superInterfaceTypeDescriptor.isNative()})
 ${statementSourceGenerator.toSource($superInterfaceTypeDescriptor)}.$markImplementor($className);
 
 
+#end
 #end

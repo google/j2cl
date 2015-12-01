@@ -26,7 +26,9 @@ class $className {
    */
   static $markImplementor(classConstructor) {
 #foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
+#if (!${superInterfaceTypeDescriptor.isNative()})
     ${statementSourceGenerator.toSource($superInterfaceTypeDescriptor)}.$markImplementor(classConstructor);
+#end
 #end
     /**
      * @public {boolean}

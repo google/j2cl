@@ -24,12 +24,12 @@ public class Main {
     JsPropertyTest test = new JsPropertyTest();
     test.testConcreteJsType();
     test.testJavaClassImplementingMyJsTypeInterfaceWithProperty();
-    //    test.testJsPropertyAccidentalOverrideSuperCall();
-    //    test.testJsPropertyBridges();
-    //    test.testJsPropertyBridgesSubclass();
+    test.testJsPropertyAccidentalOverrideSuperCall();
+    test.testJsPropertyBridges();
+    test.testJsPropertyBridgesSubclass();
     test.testJsPropertyGetX();
     test.testJsPropertyIsX();
-    //    test.testJsPropertyRemovedAccidentalOverrideSuperCall();
+    test.testJsPropertyRemovedAccidentalOverrideSuperCall();
     test.testNativeJsType();
     test.testNativeJsTypeSubclass();
     test.testNativeJsTypeSubclassNoOverride();

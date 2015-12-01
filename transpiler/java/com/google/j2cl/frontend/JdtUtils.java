@@ -152,7 +152,7 @@ public class JdtUtils {
     boolean isRaw = false;
 
     JsInfo jsInfo = computeJsInfo(methodBinding);
-    isRaw = isOrOverridesJsMethod(methodBinding);
+    isRaw = isOrOverridesJsMember(methodBinding);
 
     TypeDescriptor returnTypeDescriptor = createTypeDescriptor(methodBinding.getReturnType());
 
@@ -517,16 +517,16 @@ public class JdtUtils {
 
   static boolean isJsOverride(IMethodBinding methodBinding) {
     // If the JsMethod is the first in the override chain, it does not override any methods.
-    return isOverride(methodBinding) && !isFirstJsMethod(methodBinding);
+    return isOverride(methodBinding) && !isFirstJsMember(methodBinding);
   }
 
   /**
-   * Returns true if the method is the first JsMethod in the override chain (does not override any
-   * other JsMethods).
+   * Returns true if the method is the first JsMember in the override chain (does not override any
+   * other JsMembers).
    */
-  static boolean isFirstJsMethod(IMethodBinding methodBinding) {
-    return JsInteropUtils.isJsMethod(methodBinding)
-        && getOverriddenJsMethods(methodBinding).isEmpty();
+  static boolean isFirstJsMember(IMethodBinding methodBinding) {
+    return JsInteropUtils.isJsMember(methodBinding)
+        && getOverriddenJsMembers(methodBinding).isEmpty();
   }
 
   static boolean isOverride(IMethodBinding overridingMethod) {
@@ -690,9 +690,9 @@ public class JdtUtils {
     return typeBinding.getErasure().isEqualTo(otherTypeBinding.getErasure());
   }
 
-  static boolean isOrOverridesJsMethod(IMethodBinding methodBinding) {
-    return JsInteropUtils.isJsMethod(methodBinding)
-        || !getOverriddenJsMethods(methodBinding).isEmpty();
+  static boolean isOrOverridesJsMember(IMethodBinding methodBinding) {
+    return JsInteropUtils.isJsMember(methodBinding)
+        || !getOverriddenJsMembers(methodBinding).isEmpty();
   }
 
   /**
@@ -714,13 +714,13 @@ public class JdtUtils {
     return JsInfo.NONE;
   }
 
-  static Set<IMethodBinding> getOverriddenJsMethods(IMethodBinding methodBinding) {
+  static Set<IMethodBinding> getOverriddenJsMembers(IMethodBinding methodBinding) {
     return Sets.filter(
         getOverriddenMethods(methodBinding),
         new Predicate<IMethodBinding>() {
           @Override
           public boolean apply(IMethodBinding overriddenMethod) {
-            return JsInteropUtils.isJsMethod(overriddenMethod);
+            return JsInteropUtils.isJsMember(overriddenMethod);
           }
         });
   }

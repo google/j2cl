@@ -98,14 +98,20 @@ public class JsInteropUtils {
   }
 
   /**
-   * Returns true if the method is a directly annotated JsMethod.
+   * Returns true if the method is a directly annotated as some flavor of JsMember.
    */
-  public static boolean isJsMethod(IMethodBinding methodBinding) {
+  public static boolean isJsMember(IMethodBinding methodBinding) {
+    // check @JsProperty annotation
+    IAnnotationBinding jsPropertyAnnotation = getJsPropertyAnnotation(methodBinding);
+    if (jsPropertyAnnotation != null) {
+      return true;
+    }
+    // check @JsMethod annotation
     IAnnotationBinding jsMethodAnnotation = getJsMethodAnnotation(methodBinding);
     if (jsMethodAnnotation != null) {
       return true;
     }
-    // public methods in JsType annotated class are JsMethod.
+    // check @JsType annotation.
     IAnnotationBinding jsTypeAnnotation = getJsTypeAnnotation(methodBinding.getDeclaringClass());
     return jsTypeAnnotation != null && Modifier.isPublic(methodBinding.getModifiers());
   }

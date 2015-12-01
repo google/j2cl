@@ -33,7 +33,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- * Creates bridge methods for instance JsMethods.
+ * Creates bridge methods for instance JsMembers.
  */
 public class JsBridgeMethodsCreator {
   /**
@@ -52,17 +52,17 @@ public class JsBridgeMethodsCreator {
   /**
    * Bridge method should be generated in current type in the following two cases:
    *
-   * <p>1. A method in current type is or overrides a JsMethod, and exposes a non-JsMethod. The
-   * bridge method has the un-mangled name and delegates to the non-JsMethod.
+   * <p>1. A method in current type is or overrides a JsMember, and exposes a non-JsMember. The
+   * bridge method has the un-mangled name and delegates to the non-JsMember.
    *
    * <p>2. Current type does not declare an overriding method for its interfaces' method but it is
    * accidentally overridden by its super classes. In this case:
    *
-   * <p>2(a). If interface method is a JsMethod, and accidental overriding method is a non-JsMethod,
-   * a bridge method is needed from JsMethod delegating to non-JsMethod.
+   * <p>2(a). If interface method is a JsMember, and accidental overriding method is a non-JsMember,
+   * a bridge method is needed from JsMember delegating to non-JsMember.
    *
-   * <p>2(b). If interface method is a non-JsMethod, and accidental overridding method is JsMehtod,
-   * a bridge method is needed from non-JsMethod delegating to JsMethod.
+   * <p>2(b). If interface method is a non-JsMember, and accidental overridding method is JsMember,
+   * a bridge method is needed from non-JsMember delegating to JsMember.
    */
   private List<Method> createBridgeMethods() {
     List<Method> generatedBridgeMethods = new ArrayList<>();
@@ -85,11 +85,11 @@ public class JsBridgeMethodsCreator {
   private Map<IMethodBinding, IMethodBinding> getBridgeDelegateMethodsMapping() {
     Map<IMethodBinding, IMethodBinding> delegateByBridgeMethods = new LinkedHashMap<>();
 
-    // case 1. exposed non-JsMethod to the exposing JsMethod.
+    // case 1. exposed non-JsMember to the exposing JsMethod.
     for (IMethodBinding declaredMethod : typeBinding.getDeclaredMethods()) {
-      IMethodBinding exposedNonJsMethod = getExposedNonJsMethod(declaredMethod);
-      if (exposedNonJsMethod != null) {
-        delegateByBridgeMethods.put(exposedNonJsMethod, declaredMethod);
+      IMethodBinding exposedNonJsMember = getExposedNonJsMember(declaredMethod);
+      if (exposedNonJsMember != null) {
+        delegateByBridgeMethods.put(exposedNonJsMember, declaredMethod);
       }
     }
 
@@ -101,11 +101,11 @@ public class JsBridgeMethodsCreator {
       if (overridingMethod == null) {
         continue;
       }
-      // if for the overridden and overriding methods, one is JsMethod, and the other is not,
+      // if for the overridden and overriding methods, one is JsMember, and the other is not,
       // generate a bridge method from the overridden method to the overriding method.
-      boolean isJsMethodOne = JdtUtils.isOrOverridesJsMethod(overridingMethod);
-      boolean isJsMethodOther = JdtUtils.isOrOverridesJsMethod(accidentalOverriddenMethod);
-      if (isJsMethodOne != isJsMethodOther) {
+      boolean isJsMemberOne = JdtUtils.isOrOverridesJsMember(overridingMethod);
+      boolean isJsMemberOther = JdtUtils.isOrOverridesJsMember(accidentalOverriddenMethod);
+      if (isJsMemberOne != isJsMemberOther) {
         delegateByBridgeMethods.put(accidentalOverriddenMethod, overridingMethod);
       }
     }
@@ -114,11 +114,11 @@ public class JsBridgeMethodsCreator {
   }
 
   /**
-   * If this method is the first JsMethod in the method hierarchy that exposes an existing
-   * non-JsMethod, returns the non-JsMethod it exposes, otherwise, returns null.
+   * If this method is the first JsMember in the method hierarchy that exposes an existing
+   * non-JsMember, returns the non-JsMember it exposes, otherwise, returns null.
    */
-  private static IMethodBinding getExposedNonJsMethod(IMethodBinding methodBinding) {
-    if (!JdtUtils.isOrOverridesJsMethod(methodBinding)
+  private static IMethodBinding getExposedNonJsMember(IMethodBinding methodBinding) {
+    if (!JdtUtils.isOrOverridesJsMember(methodBinding)
         || methodBinding.getDeclaringClass().isInterface()
         || JdtUtils.isStatic(methodBinding.getModifiers())
         || methodBinding.isConstructor()) {
@@ -129,16 +129,16 @@ public class JsBridgeMethodsCreator {
         JsInteropUtils.getJsTypeAnnotation(methodBinding.getDeclaringClass()))) {
       return null;
     }
-    IMethodBinding overriddenNonJsMethod = null;
+    IMethodBinding overriddenNonJsMember = null;
     for (IMethodBinding overriddenMethod : JdtUtils.getOverriddenMethods(methodBinding)) {
-      if (!JdtUtils.isOrOverridesJsMethod(overriddenMethod)) {
-        overriddenNonJsMethod = overriddenMethod;
+      if (!JdtUtils.isOrOverridesJsMember(overriddenMethod)) {
+        overriddenNonJsMember = overriddenMethod;
       }
-      if (getExposedNonJsMethod(overriddenMethod) != null) {
+      if (getExposedNonJsMember(overriddenMethod) != null) {
         return null; // the overridden method has already exposed the method.
       }
     }
-    return overriddenNonJsMethod;
+    return overriddenNonJsMember;
   }
 
   private Method createBridgeMethod(
