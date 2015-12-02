@@ -116,6 +116,7 @@ import java.util.Map.Entry;
  */
 public class CompilationUnitBuilder {
   private class ASTConverter {
+    private Map<String, String> lambdaBinaryNameByKey = new HashMap<>();
     private Map<IVariableBinding, Variable> variableByJdtBinding = new HashMap<>();
     private Map<Variable, JavaType> enclosingTypeByVariable = new HashMap<>();
     private Multimap<TypeDescriptor, Variable> capturesByTypeDescriptor =
@@ -957,16 +958,26 @@ public class CompilationUnitBuilder {
        */
       // Construct a class for the lambda expression.
       ITypeBinding enclosingClassTypeBinding = JdtUtils.findCurrentTypeBinding(expression);
+
+      IMethodBinding lambdaMethodBinding = expression.resolveMethodBinding();
+      String lambdaBinaryName =
+          getLambdaBinaryName(
+              enclosingClassTypeBinding.getBinaryName(),
+              lambdaMethodBinding.getName(),
+              lambdaMethodBinding.getKey());
+
       JavaType lambdaType =
           JdtUtils.createLambdaJavaType(
+              lambdaBinaryName,
               expression.resolveTypeBinding(),
-              expression.resolveMethodBinding(),
               (RegularTypeDescriptor) JdtUtils.createTypeDescriptor(enclosingClassTypeBinding));
       pushType(lambdaType);
       TypeDescriptor lambdaTypeDescriptor = lambdaType.getDescriptor();
 
       // Construct lambda method and add it to lambda inner class.
-      Method lambdaMethod = createLambdaMethod(expression, lambdaType.getDescriptor());
+      String lambdaMethodBinaryName = "lambda" + lambdaBinaryName;
+      Method lambdaMethod =
+          createLambdaMethod(lambdaMethodBinaryName, expression, lambdaType.getDescriptor());
       lambdaType.addMethod(lambdaMethod);
 
       // Construct and add SAM method that delegates to the lambda method.
@@ -1001,6 +1012,7 @@ public class CompilationUnitBuilder {
     }
 
     private Method createLambdaMethod(
+        String methodName,
         org.eclipse.jdt.core.dom.LambdaExpression expression,
         TypeDescriptor enclosingClassTypeDescriptor) {
       List<Variable> parameters = new ArrayList<>();
@@ -1009,7 +1021,6 @@ public class CompilationUnitBuilder {
       }
 
       IMethodBinding methodBinding = expression.resolveMethodBinding();
-      String methodName = methodBinding.getName();
       TypeDescriptor returnTypeDescriptor =
           JdtUtils.createTypeDescriptor(methodBinding.getReturnType());
 
@@ -1654,6 +1665,22 @@ public class CompilationUnitBuilder {
         variableDeclarations.add(convert(fragment));
       }
       return new VariableDeclarationStatement(variableDeclarations);
+    }
+
+    /**
+     * Calculates or returns a consistent binary name for the given lambda method source name +
+     * unique key.
+     */
+    private String getLambdaBinaryName(
+        String enclosingTypeName, String lambdaSourceName, String lambdaKey) {
+      String fullyQualifiedUniqueKey = enclosingTypeName + lambdaKey;
+      if (!lambdaBinaryNameByKey.containsKey(fullyQualifiedUniqueKey)) {
+        // Construct the binary name as the unique index number + the source name, so that it is
+        // both unique and somewhat readable.
+        String lambdaBinaryName = lambdaBinaryNameByKey.size() + lambdaSourceName;
+        lambdaBinaryNameByKey.put(fullyQualifiedUniqueKey, lambdaBinaryName);
+      }
+      return lambdaBinaryNameByKey.get(fullyQualifiedUniqueKey);
     }
 
     private JavaType createJavaType(ITypeBinding typeBinding) {

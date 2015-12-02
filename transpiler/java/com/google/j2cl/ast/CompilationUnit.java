@@ -22,7 +22,6 @@ import com.google.j2cl.ast.processors.Visitable;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -51,11 +50,6 @@ public class CompilationUnit extends Node {
 
   public String getPackageName() {
     return packageName;
-  }
-
-  public void addTypes(Collection<JavaType> types) {
-    Preconditions.checkNotNull(types);
-    this.types.addAll(types);
   }
 
   public void addType(JavaType type) {

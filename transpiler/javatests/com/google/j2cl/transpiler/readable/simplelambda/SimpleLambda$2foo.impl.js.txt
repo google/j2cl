@@ -1,10 +1,10 @@
 /**
  * @fileoverview Impl transpiled from
- * com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$lambda$4.
+ * com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$2foo.
  *
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode}
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$lambda$4$impl');
+goog.module('gen.com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$2foo$impl');
 
 
 let MyInterface = goog.require('gen.com.google.j2cl.transpiler.readable.simplelambda.MyInterface$impl');
@@ -20,7 +20,7 @@ let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 /**
  * @implements {MyInterface}
  */
-class SimpleLambda$lambda$4 extends Object {
+class SimpleLambda$2foo extends Object {
   /**
    * Defines instance fields.
    * @private
@@ -28,13 +28,9 @@ class SimpleLambda$lambda$4 extends Object {
   constructor() {
     super();
     /**
-     * @public {number}
-     */
-    this.$c_x = 0;
-    /**
      * @public {SimpleLambda}
      */
-    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$4 =
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$2foo =
         null;
   }
 
@@ -42,39 +38,35 @@ class SimpleLambda$lambda$4 extends Object {
    * Runs instance field and block initializers.
    * @private
    */
-  $init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$4() {
-  }
+  $init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$2foo() {}
 
   /**
    * A particular Java constructor as a factory method.
-   * @param {number} $c_x
    * @param {SimpleLambda} $outer_this
-   * @return {!SimpleLambda$lambda$4}
+   * @return {!SimpleLambda$2foo}
    * @public
    */
-  static $create__int__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(
-      $c_x, $outer_this) {
-    SimpleLambda$lambda$4.$clinit();
-    let instance = new SimpleLambda$lambda$4;
+  static $create__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(
+      $outer_this) {
+    SimpleLambda$2foo.$clinit();
+    let instance = new SimpleLambda$2foo;
     instance
-        .$ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$4__int__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(
-            $c_x, $outer_this);
+        .$ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$2foo__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(
+            $outer_this);
     return instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {number} $c_x
    * @param {SimpleLambda} $outer_this
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$4__int__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(
-      $c_x, $outer_this) {
-    this.$c_x = $c_x;
-    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$4 =
+  $ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$2foo__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$2foo =
         $outer_this;
     this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$4();
+    this.$init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$2foo();
   }
 
   /**
@@ -82,10 +74,8 @@ class SimpleLambda$lambda$4 extends Object {
    * @return {number}
    * @public
    */
-  lambda$4(i) {
-    let y = 1;
-    return this.$c_x + y +
-           this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$lambda$4
+  lambda2foo(i) {
+    return this.f_$outer_this__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$2foo
                .f_field__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda +
            i + 1;
   }
@@ -96,16 +86,14 @@ class SimpleLambda$lambda$4 extends Object {
    * @return {number}
    * @public
    */
-  m_foo__int(arg0) { return this.lambda$4(arg0); }
+  m_foo__int(arg0) { return this.lambda2foo(arg0); }
 
   /**
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) {
-    return instance instanceof SimpleLambda$lambda$4;
-  }
+  static $isInstance(instance) { return instance instanceof SimpleLambda$2foo; }
 
   /**
    * Returns whether the provided class is or extends this class.
@@ -114,7 +102,7 @@ class SimpleLambda$lambda$4 extends Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, SimpleLambda$lambda$4);
+    return $Util.$canCastClass(classConstructor, SimpleLambda$2foo);
   }
 
   /**
@@ -122,18 +110,17 @@ class SimpleLambda$lambda$4 extends Object {
    * @public
    */
   static $getClass() {
-    SimpleLambda$lambda$4.$clinit();
-    if (!SimpleLambda$lambda$4.$classSimpleLambda$lambda$4_) {
-      SimpleLambda$lambda$4
-          .$classSimpleLambda$lambda$4_ = Class.$createForClass(
-          $Util.$generateId('lambda$4'),
+    SimpleLambda$2foo.$clinit();
+    if (!SimpleLambda$2foo.$classSimpleLambda$2foo_) {
+      SimpleLambda$2foo.$classSimpleLambda$2foo_ = Class.$createForClass(
+          $Util.$generateId('2foo'),
           $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$lambda$4'),
+              'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$2foo'),
           Object.$getClass(),
           $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.lambda.4'));
+              'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.2foo'));
     }
-    return SimpleLambda$lambda$4.$classSimpleLambda$lambda$4_;
+    return SimpleLambda$2foo.$classSimpleLambda$2foo_;
   }
 
   /**
@@ -141,7 +128,7 @@ class SimpleLambda$lambda$4 extends Object {
    * @return {Class}
    * @public
    */
-  m_getClass() { return SimpleLambda$lambda$4.$getClass(); }
+  m_getClass() { return SimpleLambda$2foo.$getClass(); }
 
   /**
    * Runs inline static field initializers.
@@ -162,14 +149,14 @@ class SimpleLambda$lambda$4 extends Object {
  * The class literal field.
  * @private {Class}
  */
-SimpleLambda$lambda$4.$classSimpleLambda$lambda$4_ = null;
+SimpleLambda$2foo.$classSimpleLambda$2foo_ = null;
 
 
-MyInterface.$markImplementor(SimpleLambda$lambda$4);
+MyInterface.$markImplementor(SimpleLambda$2foo);
 
 
 
 /**
  * Export class.
  */
-exports = SimpleLambda$lambda$4;
+exports = SimpleLambda$2foo;

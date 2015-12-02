@@ -40,7 +40,7 @@ public abstract class AbstractSourceGenerator {
       Files.createDirectories(outputPath.getParent());
       Files.write(outputPath, toSource().getBytes(charset));
     } catch (IOException e) {
-      errors.error(Errors.Error.ERR_ERROR, e.getMessage());
+      errors.error(Errors.Error.ERR_ERROR, e.getClass().getSimpleName() + ": " + e.getMessage());
       errors.maybeReportAndExit();
     }
   }
