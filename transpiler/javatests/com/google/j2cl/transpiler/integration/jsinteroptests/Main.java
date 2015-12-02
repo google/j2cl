@@ -2,22 +2,75 @@ package com.google.j2cl.transpiler.integration.jsinteroptests;
 
 public class Main {
   public static void main(String... args) {
+    // runJsExportTest();
+    // runJsFunctionTest();
     runJsMethodTest();
     runJsPropertyTest();
+    // runJsTypeArrayTest();
     runJsTypeBridgeTest();
+    // runJsTypeTest();
+    // runNativeJsTypeTest();
+  }
+
+  public static void runJsExportTest() {
+    // JsExportTest test = new JsExportTest();
+    // test.testClinit_staticField();
+    // test.testClinit_staticMethod();
+    // test.testClinit_virtualMethod();
+    // test.testClinit();
+    // test.testEnum_enumerations();
+    // test.testEnum_exportedFields();
+    // test.testEnum_exportedMethods();
+    // test.testEnum_notExported();
+    // test.testEnum_subclassEnumerations();
+    // test.testEnum_subclassMethodCallFromExportedEnumerations();
+    // test.testExportClass_correctNamespace();
+    // test.testExportClass_implicitConstructor();
+    // test.testExportConstructors();
+    // test.testExportedField();
+    // test.testExportedFieldRefInExportedMethod();
+    // test.testExportedMethod();
+    // test.testInheritPackageNamespace_nestedClass();
+    // test.testInheritPackageNamespace_nestedEnum();
+    // test.testInheritPackageNamespace_subpackage();
+    // test.testInheritPackageNamespace();
+    // test.testMethodExport_notReferencedFromJava();
+    // test.testMethodExport_noTypeTightenParams();
+    // test.testMethodExport();
+    // test.testMethodExportWithLong();
+    // test.testNoExport();
+    // test.testSameParameterValueOptimization();
+  }
+
+  public static void runJsFunctionTest() {
+    // JsFunctionTest test = new JsFunctionTest();
+    // test.testCast_crossCastJavaInstance();
+    // test.testCast_fromJsFunction();
+    // test.testCast_fromJsObject();
+    // test.testCast_inJava();
+    // test.testInstanceOf_javaInstance();
+    // test.testInstanceOf_jsFunction();
+    // test.testInstanceOf_jsObject();
+    // test.testJsFunctionAccess();
+    // test.testJsFunctionBasic_java();
+    // test.testJsFunctionBasic_javaAndJs();
+    // test.testJsFunctionBasic_js();
+    // test.testJsFunctionCallbackPattern();
+    // test.testJsFunctionCallFromAMember();
+    // test.testJsFunctionIdentity_java();
+    // test.testJsFunctionIdentity_js();
+    // test.testJsFunctionJs2Java();
+    // test.testJsFunctionReferentialIntegrity();
+    // test.testJsFunctionSuccessiveCalls();
+    // test.testJsFunctionViaFunctionMethods();
   }
 
   public static void runJsMethodTest() {
     JsMethodTest test = new JsMethodTest();
-//    test.testNativeJsMethod();
-//    test.testStaticNativeJsMethod();
-//    test.testStaticNativeJsPropertyGetter();
-//    test.testStaticNativeJsPropertySetter();
-  }
-
-  public static void runJsTypeBridgeTest() {
-    JsTypeBridgeTest test = new JsTypeBridgeTest();
-    test.testBridges();
+    // test.testNativeJsMethod();
+    // test.testStaticNativeJsMethod();
+    // test.testStaticNativeJsPropertyGetter();
+    // test.testStaticNativeJsPropertySetter();
   }
 
   public static void runJsPropertyTest() {
@@ -36,5 +89,57 @@ public class Main {
     test.testNativeJsTypeWithConstructor();
     // test.testNativeJsTypeWithConstructorSubclass();
     test.testProtectedNames();
+  }
+
+  public static void runJsTypeArrayTest() {
+    // JsTypeArrayTest test = new JsTypeArrayTest();
+    // test.testJsType3DimArray_castFromNativeWithACall();
+    // test.testJsTypeArray_asAField();
+    // test.testJsTypeArray_asAParam();
+    // test.testJsTypeArray_instanceOf();
+    // test.testJsTypeArray_objectArrayInterchangeability();
+    // test.testJsTypeArray_returnFromNative();
+    // test.testJsTypeArray_returnFromNativeWithACall();
+    // test.testObjectArray_castFromNative();
+    // test.testObjectArray_instanceOf();
+  }
+
+  public static void runJsTypeBridgeTest() {
+    JsTypeBridgeTest test = new JsTypeBridgeTest();
+    test.testBridges();
+  }
+
+  public static void runJsTypeTest() {
+    // JsTypeTest test = new JsTypeTest();
+    // test.testAbstractJsTypeAccess();
+    // test.testCasts();
+    // test.testConcreteJsTypeAccess();
+    // test.testConcreteJsTypeNoTypeTightenField();
+    // test.testConcreteJsTypeSubclassAccess();
+    // test.testEnumeration();
+    // test.testEnumJsTypeAccess();
+    // test.testEnumSubclassEnumeration();
+    // test.testInstanceOf_concreteJsType();
+    // test.testInstanceOf_extendsJsTypeWithProto();
+    // test.testInstanceOf_implementsJsType();
+    // test.testInstanceOf_implementsJsTypeWithPrototype();
+    // test.testInstanceOf_jsoWithNativeButtonProto();
+    // test.testInstanceOf_jsoWithoutProto();
+    // test.testInstanceOf_jsoWithProto();
+    // test.testInstanceOf_withNameSpace();
+    // test.testJsMethodWithDifferentVisiblities();
+    // test.testJsTypeField();
+    // test.testNamedBridge();
+    // test.testNativeJsTypeWithOverlay();
+    // test.testNativeMethodOverrideNoTypeTightenParam();
+    // test.testRevealedOverrideJsType();
+    // test.testSingleJavaConcreteInterface();
+    // test.testSingleJavaConcreteJsFunction();
+  }
+
+  public static void runNativeJsTypeTest() {
+    // NativeJsTypeTest test = new NativeJsTypeTest();
+    // test.testClassLiterals();
+    // test.testToString();
   }
 }
