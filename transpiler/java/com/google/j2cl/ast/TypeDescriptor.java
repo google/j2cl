@@ -199,13 +199,14 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
    * may need to introduce a new annotation to tell if it is extern when we hit the problem.
    */
   public boolean isExtern() {
-    boolean isSynthesizedGlobalType = isRaw() && "".equals(getPackageName());
-    boolean isNativeJsType = isNative() && "".equals(getJsTypeNamespace());
+    boolean isSynthesizedGlobalType = isRaw() && JsInteropUtils.isGlobal(getPackageName());
+    boolean isNativeJsType = isNative() && JsInteropUtils.isGlobal(getJsTypeNamespace());
     return isSynthesizedGlobalType || isNativeJsType;
   }
 
   public String getQualifiedName() {
     String namespace = getJsTypeNamespace() != null ? getJsTypeNamespace() : getPackageName();
+    namespace = JsInteropUtils.isGlobal(namespace) ? "" : namespace;
     String className = getJsTypeName() != null ? getJsTypeName() : getClassName();
     return Joiner.on(".").skipNulls().join(Strings.emptyToNull(namespace), className);
   }

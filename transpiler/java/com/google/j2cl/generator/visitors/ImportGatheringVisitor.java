@@ -25,6 +25,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.JsInteropUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.RegularTypeDescriptor;
@@ -232,9 +233,8 @@ public class ImportGatheringVisitor extends AbstractVisitor {
       }
     }
 
-    // The synthesized raw TypeDescriptor from qualified name "" (global namespace) results in
-    // empty binaryName, which should not be imported.
-    if ("".equals(typeDescriptor.getQualifiedName())) {
+    // Do not import <global>.
+    if (JsInteropUtils.isGlobal(typeDescriptor.getQualifiedName())) {
       return;
     }
 

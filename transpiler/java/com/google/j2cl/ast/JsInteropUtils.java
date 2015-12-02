@@ -32,6 +32,12 @@ public class JsInteropUtils {
   private static final String JS_PROPERTY_ANNOTATION_NAME = "jsinterop.annotations.JsProperty";
   private static final String JS_TYPE_ANNOTATION_NAME = "jsinterop.annotations.JsType";
 
+  public static boolean isGlobal(String jsNamespace) {
+    // TODO: a quick fix for the change in jsinterop/annotations/JsPackage.java.
+    // Do a follow up cleanup to remove the check for empty string.
+    return "<global>".equals(jsNamespace) || "".equals(jsNamespace);
+  }
+
   public static IAnnotationBinding getJsTypeAnnotation(ITypeBinding typeBinding) {
     return JdtAnnotationUtils.findAnnotationBindingByName(
         typeBinding.getAnnotations(), JS_TYPE_ANNOTATION_NAME);

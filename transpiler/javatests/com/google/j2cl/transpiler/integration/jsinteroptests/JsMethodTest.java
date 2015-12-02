@@ -15,61 +15,61 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
-import static jsinterop.annotations.JsPackage.GLOBAL;
-
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsProperty;
+//import static jsinterop.annotations.JsPackage.GLOBAL;
+//
+//import jsinterop.annotations.JsMethod;
+//import jsinterop.annotations.JsProperty;
 
 /**
  * Tests JsMethod functionality.
  */
 public class JsMethodTest extends MyTestCase {
-  class MyObject {
-    @JsProperty public int mine;
-
-    @JsMethod
-    public native boolean hasOwnProperty(String name);
-  }
-
-  public void testNativeJsMethod() {
-    MyObject obj = new MyObject();
-    obj.mine = 0;
-    assertTrue(obj.hasOwnProperty("mine"));
-    assertFalse(obj.hasOwnProperty("toString"));
-  }
-
-  @JsMethod(namespace = GLOBAL)
-  private static native boolean isFinite(double d);
-
-  public void testStaticNativeJsMethod() {
-    assertFalse(isFinite(Double.POSITIVE_INFINITY));
-    assertFalse(isFinite(Double.NEGATIVE_INFINITY));
-    assertFalse(isFinite(Double.NaN));
-    assertTrue(isFinite(0));
-    assertTrue(isFinite(1));
-  }
-
-  @JsProperty(namespace = GLOBAL, name = "NaN")
-  private static native double getNaN();
-
-  @JsProperty(namespace = GLOBAL, name = "Infinity")
-  private static native double infinity();
-
-  public void testStaticNativeJsPropertyGetter() {
-    assertTrue(getNaN() != getNaN());
-    assertTrue(Double.isInfinite(infinity()));
-    assertTrue(Double.isInfinite(-infinity()));
-  }
-
-  @JsProperty(namespace = GLOBAL)
-  private static native void setJsInteropSecret(String magic);
-
-  @JsProperty(namespace = GLOBAL)
-  private static native String getJsInteropSecret();
-
-  public void testStaticNativeJsPropertySetter() {
-    // Try to add a property to global namespace. Re-examine if we should support this and how.
-    // setJsInteropSecret("very secret!");
-    // assertEquals("very secret!", getJsInteropSecret());
-  }
+//  class MyObject {
+//    @JsProperty public int mine;
+//
+//    @JsMethod
+//    public native boolean hasOwnProperty(String name);
+//  }
+//
+//  public void testNativeJsMethod() {
+//    MyObject obj = new MyObject();
+//    obj.mine = 0;
+//    assertTrue(obj.hasOwnProperty("mine"));
+//    assertFalse(obj.hasOwnProperty("toString"));
+//  }
+//
+//  @JsMethod(namespace = GLOBAL)
+//  private static native boolean isFinite(double d);
+//
+//  public void testStaticNativeJsMethod() {
+//    assertFalse(isFinite(Double.POSITIVE_INFINITY));
+//    assertFalse(isFinite(Double.NEGATIVE_INFINITY));
+//    assertFalse(isFinite(Double.NaN));
+//    assertTrue(isFinite(0));
+//    assertTrue(isFinite(1));
+//  }
+//
+//  @JsProperty(namespace = GLOBAL, name = "NaN")
+//  private static native double getNaN();
+//
+//  @JsProperty(namespace = GLOBAL, name = "Infinity")
+//  private static native double infinity();
+//
+//  public void testStaticNativeJsPropertyGetter() {
+//    assertTrue(getNaN() != getNaN());
+//    assertTrue(Double.isInfinite(infinity()));
+//    assertTrue(Double.isInfinite(-infinity()));
+//  }
+//
+//  @JsProperty(namespace = GLOBAL)
+//  private static native void setJsInteropSecret(String magic);
+//
+//  @JsProperty(namespace = GLOBAL)
+//  private static native String getJsInteropSecret();
+//
+//  public void testStaticNativeJsPropertySetter() {
+//    // Try to add a property to global namespace. Re-examine if we should support this and how.
+//    // setJsInteropSecret("very secret!");
+//    // assertEquals("very secret!", getJsInteropSecret());
+//  }
 }
