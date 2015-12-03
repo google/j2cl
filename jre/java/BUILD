@@ -49,8 +49,6 @@ JRE_SRC = [
     "java/lang/Object.java",
     "java/lang/String.java",
     "java/util/InternalJsMapFactory.java",
-    "java/nio/charset/CharsetEncoder.java",
-    "java/nio/charset/CharsetDecoder.java",
     "javaemul/internal/JsDate.java",
     "java/lang/invoke/MethodHandles.java",
     ":emul_dev",
