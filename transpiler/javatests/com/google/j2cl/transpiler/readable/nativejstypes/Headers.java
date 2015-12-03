@@ -1,8 +1,10 @@
 package com.google.j2cl.transpiler.readable.nativejstypes;
 
+import static jsinterop.annotations.JsPackage.GLOBAL;
+
 import jsinterop.annotations.JsType;
 
-@JsType(namespace = "", isNative = true)
+@JsType(namespace = GLOBAL, isNative = true)
 public class Headers {
   public native void append(String name, String value);
 

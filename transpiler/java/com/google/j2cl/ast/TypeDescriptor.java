@@ -85,10 +85,15 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
    * Creates a raw TypeDescriptor from a qualified name.
    */
   public static TypeDescriptor createRaw(String qualifiedName) {
+    if (JsInteropUtils.isGlobal(qualifiedName)) {
+      return TypeDescriptor.createRaw(Arrays.asList(JsInteropUtils.JS_GLOBAL), "");
+    }
     List<String> nameComponents = Splitter.on("\\.").splitToList(qualifiedName);
     int size = nameComponents.size();
-    return TypeDescriptor.createRaw(
-        nameComponents.subList(0, size - 1), nameComponents.get(size - 1));
+    // Fill in JS_GLOBAL as the namespace if the namespace is empty.
+    List<String> namespaceComponents =
+        size == 1 ? Arrays.asList(JsInteropUtils.JS_GLOBAL) : nameComponents.subList(0, size - 1);
+    return TypeDescriptor.createRaw(namespaceComponents, nameComponents.get(size - 1));
   }
 
   static Interner<TypeDescriptor> getInterner() {
@@ -208,7 +213,9 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
     String namespace = getJsTypeNamespace() != null ? getJsTypeNamespace() : getPackageName();
     namespace = JsInteropUtils.isGlobal(namespace) ? "" : namespace;
     String className = getJsTypeName() != null ? getJsTypeName() : getClassName();
-    return Joiner.on(".").skipNulls().join(Strings.emptyToNull(namespace), className);
+    return Joiner.on(".")
+        .skipNulls()
+        .join(Strings.emptyToNull(namespace), Strings.emptyToNull(className));
   }
 
   public boolean isInstanceMemberClass() {

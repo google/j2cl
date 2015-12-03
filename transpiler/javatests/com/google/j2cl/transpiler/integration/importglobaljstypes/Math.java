@@ -1,5 +1,7 @@
 package com.google.j2cl.transpiler.integration.importglobaljstypes;
 
+import static jsinterop.annotations.JsPackage.GLOBAL;
+
 import jsinterop.annotations.JsType;
 
 /**
@@ -12,7 +14,7 @@ public class Math {
     return NativeMath.abs(x);
   }
 
-  @JsType(isNative = true, name = "Math", namespace = "")
+  @JsType(isNative = true, name = "Math", namespace = GLOBAL)
   public static class NativeMath {
     public static native int abs(int d);
   }

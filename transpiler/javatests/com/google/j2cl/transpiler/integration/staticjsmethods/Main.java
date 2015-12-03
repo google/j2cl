@@ -1,5 +1,7 @@
 package com.google.j2cl.transpiler.integration.staticjsmethods;
 
+import static jsinterop.annotations.JsPackage.GLOBAL;
+
 import jsinterop.annotations.JsMethod;
 
 public class Main {
@@ -51,6 +53,6 @@ public class Main {
   @JsMethod(namespace = "Math", name = "abs")
   public static native int f3(int d);
 
-  @JsMethod(namespace = "", name = "isFinite")
+  @JsMethod(namespace = GLOBAL, name = "isFinite")
   public static native boolean isFinite(double d);
 }

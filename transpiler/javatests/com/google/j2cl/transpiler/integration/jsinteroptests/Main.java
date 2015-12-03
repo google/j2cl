@@ -67,10 +67,10 @@ public class Main {
 
   public static void runJsMethodTest() {
     JsMethodTest test = new JsMethodTest();
-    // test.testNativeJsMethod();
-    // test.testStaticNativeJsMethod();
-    // test.testStaticNativeJsPropertyGetter();
-    // test.testStaticNativeJsPropertySetter();
+    test.testNativeJsMethod();
+    test.testStaticNativeJsMethod();
+    test.testStaticNativeJsPropertyGetter();
+    test.testStaticNativeJsPropertySetter();
   }
 
   public static void runJsPropertyTest() {

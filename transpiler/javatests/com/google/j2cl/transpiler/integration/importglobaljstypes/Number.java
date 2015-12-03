@@ -1,5 +1,7 @@
 package com.google.j2cl.transpiler.integration.importglobaljstypes;
 
+import static jsinterop.annotations.JsPackage.GLOBAL;
+
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -19,7 +21,7 @@ public class Number {
   /**
    * Tests for generic native type.
    */
-  @JsType(isNative = true, namespace = "", name = "")
+  @JsType(isNative = true, namespace = GLOBAL, name = "")
   private interface NativeFunction<T> {
     T apply(Object thisContext, Object argsArray);
   }
