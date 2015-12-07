@@ -21,8 +21,7 @@ class InternalJsMap<V> {
   public final  V get(String key) {return null;}/*-{ return this.get(key); }-*/;
   public final  void set(int key, V value) {}/*-{ this.set(key, value); }-*/;
   public final  void set(String key, V value) {}/*-{ this.set(key, value); }-*/;
-  // Calls delete via brackets to be workable with polyfills
-  public final  void delete(int key) {}/*-{ this['delete'](key); }-*/;
-  public final  void delete(String key) {}/*-{ this['delete'](key); }-*/;
+  public final  void delete(int key) {}/*-{ this.delete(key); }-*/;
+  public final  void delete(String key) {}/*-{ this.delete(key); }-*/;
   public final  InternalJsIterator<V> entries() {return null;}/*-{ return this.entries(); }-*/;
 }

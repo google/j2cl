@@ -99,7 +99,7 @@ class InternalJsMap extends Object {
    * @public
    */
   m_delete__int(key) {
-    this._map['delete'](key);
+    this._map.delete(key);
   }
 
   /**
@@ -108,7 +108,7 @@ class InternalJsMap extends Object {
    * @public
    */
   m_delete__java_lang_String(key) {
-    this._map['delete'](key);
+    this._map.delete(key);
   }
 
   /**
