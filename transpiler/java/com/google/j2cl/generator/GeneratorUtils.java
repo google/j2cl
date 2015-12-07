@@ -183,6 +183,10 @@ public class GeneratorUtils {
             && type.getSuperTypeDescriptor().isParameterizedType());
   }
 
+  public static boolean isJsOverlayMethodsImpl(JavaType javaType) {
+    return javaType.containsJsOverlay();
+  }
+
   /**
    * If the method is a native method with a different namespace than the current class, or it is a
    * native JsProperty method, no need to output any code for it.

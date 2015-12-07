@@ -18,6 +18,7 @@ import com.google.j2cl.ast.visitors.AddClassInitAtCallSite;
 import com.google.j2cl.ast.visitors.ControlStatementFormatter;
 import com.google.j2cl.ast.visitors.CreateDefaultConstructorsVisitor;
 import com.google.j2cl.ast.visitors.CreateDevirtualizedStaticMethodsVisitor;
+import com.google.j2cl.ast.visitors.CreateNativeTypeImplVisitor;
 import com.google.j2cl.ast.visitors.DevirtualizeMethodCallsVisitor;
 import com.google.j2cl.ast.visitors.FixAnonymousClassConstructorsVisitor;
 import com.google.j2cl.ast.visitors.FixBooleanOperatorsPass;
@@ -121,6 +122,9 @@ public class J2clTranspiler {
       FixSuperCallQualifiersVisitor.applyTo(j2clUnit);
       InsertInstanceInitCallsVisitor.applyTo(j2clUnit);
       NormalizeNestedClassConstructorsVisitor.applyTo(j2clUnit);
+      // Runs at the very end of 'Class structure normalizations' section since we do not need to
+      // apply other normalizations on the synthesized native JS types.
+      CreateNativeTypeImplVisitor.applyTo(j2clUnit);
 
       // Statement/Expression normalizations
       RewriteSystemGetPropertyVisitor.applyTo(j2clUnit);

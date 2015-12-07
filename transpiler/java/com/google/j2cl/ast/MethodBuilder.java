@@ -70,6 +70,14 @@ public class MethodBuilder {
     return this;
   }
 
+  public MethodBuilder enclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
+    this.originalMethodDescriptor =
+        MethodDescriptorBuilder.from(originalMethodDescriptor)
+            .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+            .build();
+    return this;
+  }
+
   public Method build() {
     List<Variable> finalParameters = new ArrayList<>();
     finalParameters.addAll(originalParameterVariables);

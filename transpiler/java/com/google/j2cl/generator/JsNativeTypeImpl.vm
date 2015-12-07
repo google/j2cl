@@ -1,0 +1,25 @@
+#set ($className = ${statementSourceGenerator.toSource($classType.Descriptor)})
+
+class $className {
+#foreach($method in $classType.Methods)
+#if (${method.Descriptor.isJsOverlay()} && ${method.Descriptor.isStatic()})
+#parse( "com/google/j2cl/generator/JsMethod.vm" )
+#end
+#end
+
+  /**
+   * Initialize lazily imported modules.
+   * @public
+   */
+static $clinit() {
+#foreach($lazyImport in ${lazyImports})
+#set ($alias = ${lazyImport.Alias})
+    $alias = goog.module.get('${lazyImport.getImplFileName()}');
+#end
+  }
+}
+
+/**
+ * Export class.
+ */
+exports = $className;

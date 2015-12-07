@@ -34,10 +34,12 @@ public abstract class JsInfo {
   @Nullable
   public abstract String getJsNamespace();
 
+  public abstract boolean isJsOverlay();
+
   /**
    * Not a JS member.
    */
-  public static final JsInfo NONE = create(JsMemberType.NONE, null, null);
+  public static final JsInfo NONE = create(JsMemberType.NONE, null, null, false);
 
   private static Interner<JsInfo> interner;
 
@@ -45,8 +47,10 @@ public abstract class JsInfo {
    * Creates an instance of an AutoValue generated JsInfo which uses Interners
    * to share identical instances of JsInfos.
    */
-  public static JsInfo create(JsMemberType jsMemberType, String jsName, String jsNamespace) {
-    return getInterner().intern(new AutoValue_JsInfo(jsMemberType, jsName, jsNamespace));
+  public static JsInfo create(
+      JsMemberType jsMemberType, String jsName, String jsNamespace, boolean isJsOverlay) {
+    return getInterner()
+        .intern(new AutoValue_JsInfo(jsMemberType, jsName, jsNamespace, isJsOverlay));
   }
 
   private static Interner<JsInfo> getInterner() {

@@ -139,6 +139,10 @@ public abstract class MethodDescriptor extends Node implements Member {
     return getJsInfo().getJsMemberType().isJsPropertyAccessor();
   }
 
+  public boolean isJsOverlay() {
+    return getJsInfo().isJsOverlay();
+  }
+
   public String getJsPropertyName() {
     if (!isJsProperty()) {
       return null;

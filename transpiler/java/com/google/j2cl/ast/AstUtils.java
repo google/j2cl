@@ -30,6 +30,7 @@ import java.util.List;
  */
 public class AstUtils {
 
+  public static final String JS_OVERLAY_METHODS_IMPL_SUFFIX = "Overlay";
   public static final String CAPTURES_PREFIX = "$c_";
   public static final String ENCLOSING_INSTANCE_NAME = "$outer_this";
   public static final String CREATE_PREFIX = "$create_";
@@ -691,5 +692,15 @@ public class AstUtils {
     return qualifier instanceof ThisReference
         && qualifier.getTypeDescriptor()
             == memberReference.getTarget().getEnclosingClassTypeDescriptor();
+  }
+
+  /**
+   * Returns TypeDescriptor that contains the devirtualized JsOverlay methods of a native type.
+   */
+  public static TypeDescriptor createJsOverlayMethodsImpl(RegularTypeDescriptor typeDescriptor) {
+    return TypeDescriptor.createSynthetic(
+        typeDescriptor.getPackageComponents(),
+        Iterables.concat(
+            typeDescriptor.getClassComponents(), Arrays.asList(JS_OVERLAY_METHODS_IMPL_SUFFIX)));
   }
 }

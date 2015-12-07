@@ -21,6 +21,7 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
+import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -85,7 +86,7 @@ public class DevirtualizeMethodCallsVisitor extends AbstractRewriter {
         TypeDescriptors.get().javaLangCharSequence, BootstrapType.CHAR_SEQUENCES.getDescriptor());
   }
 
-  private MethodCall doDevirtualization(MethodCall methodCall) {
+  private MethodCall devirtualizeRegularMethodCall(MethodCall methodCall) {
     // Do *not* perform Object method devirtualization. The point with super method calls is to
     // *not* call the default version of the method on the prototype and instead call the specific
     // version of the method in the super class. If we were to perform Object method
@@ -103,5 +104,22 @@ public class DevirtualizeMethodCallsVisitor extends AbstractRewriter {
       }
     }
     return methodCall;
+  }
+
+  private MethodCall devirtualizeJsOverlayMethodCall(MethodCall methodCall) {
+    RegularTypeDescriptor originalTypeDescriptor =
+        (RegularTypeDescriptor) methodCall.getTarget().getEnclosingClassTypeDescriptor();
+    return AstUtils.createDevirtualizedMethodCall(
+        methodCall,
+        AstUtils.createJsOverlayMethodsImpl(originalTypeDescriptor),
+        originalTypeDescriptor);
+  }
+
+  private MethodCall doDevirtualization(MethodCall methodCall) {
+    if (methodCall.getTarget().isJsOverlay()) {
+      return devirtualizeJsOverlayMethodCall(methodCall);
+    } else {
+      return devirtualizeRegularMethodCall(methodCall);
+    }
   }
 }

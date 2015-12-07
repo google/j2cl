@@ -44,8 +44,10 @@ public class CreateDevirtualizedStaticMethodsVisitor extends AbstractRewriter {
 
   @Override
   public boolean shouldProcessJavaType(JavaType type) {
-    // Creates devirtualized static methods for the unboxed types (Boolean, Double, String).
-    return TypeDescriptors.isBoxedTypeAsJsPrimitives(type.getDescriptor());
+    // Creates devirtualized static methods for the unboxed types (Boolean, Double, String), and
+    // for JsOverlay methods in native JS types.
+    return TypeDescriptors.isBoxedTypeAsJsPrimitives(type.getDescriptor())
+        || type.getDescriptor().isNative();
   }
 
   @Override
@@ -53,6 +55,11 @@ public class CreateDevirtualizedStaticMethodsVisitor extends AbstractRewriter {
     if (method.getDescriptor().isStatic()
         || method.isConstructor()
         || method.getDescriptor().isJsProperty()) { // never devirtualize JsProperty method.
+      return method;
+    }
+    if (method.getDescriptor().getEnclosingClassTypeDescriptor().isNative()
+        && !method.getDescriptor().isJsOverlay()) {
+      // do not devirtualize non-JsOverlay method in native JS type.
       return method;
     }
     Variable thisArg = new Variable("$thisArg", getCurrentJavaType().getDescriptor(), false, true);

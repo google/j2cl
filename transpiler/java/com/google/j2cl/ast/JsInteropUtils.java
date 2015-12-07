@@ -29,6 +29,7 @@ import org.eclipse.jdt.core.dom.Modifier;
  */
 public class JsInteropUtils {
   private static final String JS_METHOD_ANNOTATION_NAME = "jsinterop.annotations.JsMethod";
+  private static final String JS_OVERLAY_ANNOTATION_NAME = "jsinterop.annotations.JsOverlay";
   private static final String JS_PROPERTY_ANNOTATION_NAME = "jsinterop.annotations.JsProperty";
   private static final String JS_TYPE_ANNOTATION_NAME = "jsinterop.annotations.JsType";
   public static final String JS_GLOBAL = "<global>";
@@ -69,6 +70,7 @@ public class JsInteropUtils {
    * there is no "name" is specified in the annotation, just returns null for JsName.
    */
   public static JsInfo getJsInfo(IMethodBinding methodBinding) {
+    boolean isJsOverlay = isJsOverlay(methodBinding);
     // check @JsProperty annotation
     IAnnotationBinding jsPropertyAnnotation = getJsPropertyAnnotation(methodBinding);
     if (jsPropertyAnnotation != null) {
@@ -76,7 +78,8 @@ public class JsInteropUtils {
       String jsPropertyNamespace = getJsNamespace(jsPropertyAnnotation);
       if (jsPropertyName != null) {
         // A JsProperty name is specified, it is a {@code PROPERTY} type.
-        return JsInfo.create(JsMemberType.PROPERTY, jsPropertyName, jsPropertyNamespace);
+        return JsInfo.create(
+            JsMemberType.PROPERTY, jsPropertyName, jsPropertyNamespace, isJsOverlay);
       } else {
         // Otherwise, it is a JsProperty getter or setter.
         return JsInfo.create(
@@ -84,7 +87,8 @@ public class JsInteropUtils {
                 ? JsMemberType.GETTER
                 : JsMemberType.SETTER,
             jsPropertyName,
-            jsPropertyNamespace);
+            jsPropertyNamespace,
+            isJsOverlay);
       }
     }
     // check @JsMethod annotation
@@ -92,12 +96,12 @@ public class JsInteropUtils {
     if (jsMethodAnnotation != null) {
       String jsMethodName = getJsName(jsMethodAnnotation);
       String jsMethodNamespace = getJsNamespace(jsMethodAnnotation);
-      return JsInfo.create(JsMemberType.METHOD, jsMethodName, jsMethodNamespace);
+      return JsInfo.create(JsMemberType.METHOD, jsMethodName, jsMethodNamespace, isJsOverlay);
     }
     // check @JsType annotation
     IAnnotationBinding jsTypeAnnotation = getJsTypeAnnotation(methodBinding.getDeclaringClass());
     if (jsTypeAnnotation != null && Modifier.isPublic(methodBinding.getModifiers())) {
-      return JsInfo.create(JsMemberType.METHOD, null, null);
+      return JsInfo.create(JsMemberType.METHOD, null, null, isJsOverlay);
     }
     return JsInfo.NONE;
   }
@@ -131,5 +135,11 @@ public class JsInteropUtils {
     }
     IAnnotationBinding jsTypeAnnotation = getJsTypeAnnotation(variableBinding.getDeclaringClass());
     return jsTypeAnnotation != null && Modifier.isPublic(variableBinding.getModifiers());
+  }
+
+  public static boolean isJsOverlay(IMethodBinding methodBinding) {
+    return JdtAnnotationUtils.findAnnotationBindingByName(
+            methodBinding.getAnnotations(), JS_OVERLAY_ANNOTATION_NAME)
+        != null;
   }
 }
