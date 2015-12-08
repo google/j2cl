@@ -3,8 +3,9 @@
  */
 goog.module('vmbootstrap.Exceptions$impl');
 
-let Throwable = goog.require('gen.java.lang.Throwable$impl');
 let AutoClosable = goog.require('gen.java.lang.AutoCloseable$impl');
+let JsException = goog.require('gen.java.lang.JsException$impl');
+let Throwable = goog.require('gen.java.lang.Throwable$impl');
 
 /**
  * Provides helper methods.
@@ -33,6 +34,23 @@ class Exceptions {
     }
     return currentException;
   }
+
+  /**
+   * @param {*} e
+   * @return {Throwable}
+   */
+  static wrap(e) {
+    return (e && e['__java$exception']) ||
+        JsException.$create__java_lang_Object(e);
+  }
+
+  /**
+   * @param {Throwable} t
+   */
+  static unwrap(t) {
+    return t.backingJsObject;
+  }
+
 };
 
 
