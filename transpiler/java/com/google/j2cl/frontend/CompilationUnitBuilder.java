@@ -44,6 +44,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
+import com.google.j2cl.ast.FieldBuilder;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.IfStatement;
@@ -247,15 +248,15 @@ public class CompilationUnitBuilder {
       for (Variable capturedVariable : capturesByTypeDescriptor.get(currentTypeDescriptor)) {
         FieldDescriptor fieldDescriptor =
             AstUtils.getFieldDescriptorForCapture(currentTypeDescriptor, capturedVariable);
-        type.addField(new Field(fieldDescriptor, null, capturedVariable)); // captured field.
+        type.addField(
+            FieldBuilder.fromDefault(fieldDescriptor).capturedVariable(capturedVariable).build());
       }
       if (!inStaticContext && JdtUtils.isInstanceNestedClass(typeBinding)) {
         // add field for enclosing instance.
         type.addField(
             new Field(
                 AstUtils.getFieldDescriptorForEnclosingInstance(
-                    currentTypeDescriptor, type.getEnclosingTypeDescriptor()),
-                null));
+                    currentTypeDescriptor, type.getEnclosingTypeDescriptor())));
       }
 
       // Add dispatch methods for package private methods.
@@ -281,10 +282,11 @@ public class CompilationUnitBuilder {
               convertExpressions(
                   JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(
                       enumConstantDeclaration.arguments())));
-      return new Field(
-          JdtUtils.createFieldDescriptor(enumConstantDeclaration.resolveVariable()),
-          initializer,
-          true);
+      return FieldBuilder.fromDefault(
+              JdtUtils.createFieldDescriptor(enumConstantDeclaration.resolveVariable()))
+          .initializer(initializer)
+          .isEnumField(true)
+          .build();
     }
 
     private List<Field> convert(FieldDeclaration fieldDeclaration) {
@@ -300,8 +302,11 @@ public class CompilationUnitBuilder {
         } else {
           initializer = convertConstantToLiteral(variableBinding);
         }
-        Field field = new Field(JdtUtils.createFieldDescriptor(variableBinding), initializer);
-        field.setCompileTimeConstant(variableBinding.getConstantValue() != null);
+        Field field =
+            FieldBuilder.fromDefault(JdtUtils.createFieldDescriptor(variableBinding))
+                .initializer(initializer)
+                .compileTimeConstant(variableBinding.getConstantValue() != null)
+                .build();
         fields.add(field);
       }
       return fields;
@@ -989,14 +994,14 @@ public class CompilationUnitBuilder {
       for (Variable capturedVariable : capturesByTypeDescriptor.get(lambdaTypeDescriptor)) {
         FieldDescriptor fieldDescriptor =
             AstUtils.getFieldDescriptorForCapture(lambdaTypeDescriptor, capturedVariable);
-        lambdaType.addField(new Field(fieldDescriptor, null, capturedVariable)); // captured field.
+        lambdaType.addField(
+            FieldBuilder.fromDefault(fieldDescriptor).capturedVariable(capturedVariable).build());
       }
       // Add field for enclosing instance.
       lambdaType.addField(
           new Field(
               AstUtils.getFieldDescriptorForEnclosingInstance(
-                  lambdaTypeDescriptor, lambdaType.getEnclosingTypeDescriptor()),
-              null));
+                  lambdaTypeDescriptor, lambdaType.getEnclosingTypeDescriptor())));
 
       // Add lambda class to compilation unit.
       j2clCompilationUnit.addType(lambdaType);

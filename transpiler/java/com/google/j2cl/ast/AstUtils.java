@@ -239,6 +239,7 @@ public class AstUtils {
       TypeDescriptor enclosingClassDescriptor, TypeDescriptor fieldTypeDescriptor) {
     return FieldDescriptor.create(
         false, // not static
+        false,
         Visibility.PUBLIC,
         enclosingClassDescriptor,
         ENCLOSING_INSTANCE_NAME,

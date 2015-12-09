@@ -26,12 +26,13 @@ import com.google.j2cl.ast.processors.Visitable;
 public abstract class FieldDescriptor extends Node implements Member {
   public static FieldDescriptor create(
       boolean isStatic,
+      boolean isRaw,
       Visibility visibility,
       TypeDescriptor enclosingClassTypeDescriptor,
       String fieldName,
       TypeDescriptor typeDescriptor) {
     return new AutoValue_FieldDescriptor(
-        isStatic, false, visibility, enclosingClassTypeDescriptor, fieldName, typeDescriptor);
+        isStatic, isRaw, visibility, enclosingClassTypeDescriptor, fieldName, typeDescriptor);
   }
 
   /**

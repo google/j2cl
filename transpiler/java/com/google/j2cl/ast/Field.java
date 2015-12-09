@@ -33,37 +33,30 @@ public class Field extends Node {
   private boolean isEnumField;
   private Variable capturedVariable;
 
-  public Field(FieldDescriptor fieldDescriptor, Expression initializer) {
-    Preconditions.checkNotNull(fieldDescriptor);
-    this.fieldDescriptor = fieldDescriptor;
+  public Field(
+      FieldDescriptor fieldDescriptor,
+      Expression initializer,
+      boolean compileTimeConstant,
+      boolean isEnumField,
+      Variable capturedVariable) {
+    this(fieldDescriptor);
     this.initializer = initializer;
-    this.isEnumField = false;
-  }
-
-  public Field(FieldDescriptor fieldDescriptor, Expression initializer, Variable capturedVariable) {
-    this(fieldDescriptor, initializer);
+    this.compileTimeConstant = compileTimeConstant;
+    this.isEnumField = isEnumField;
     this.capturedVariable = capturedVariable;
   }
 
-  public Field(FieldDescriptor fieldDescriptor, Expression initializer, boolean isEnumField) {
-    this(fieldDescriptor, initializer);
-    this.isEnumField = isEnumField;
+  public Field(FieldDescriptor fieldDescriptor) {
+    Preconditions.checkNotNull(fieldDescriptor);
+    this.fieldDescriptor = fieldDescriptor;
   }
 
   public FieldDescriptor getDescriptor() {
     return fieldDescriptor;
   }
 
-  public void setDescriptor(FieldDescriptor fieldDescriptor) {
-    this.fieldDescriptor = fieldDescriptor;
-  }
-
   public Expression getInitializer() {
     return initializer;
-  }
-
-  public void setInitializer(Expression initializer) {
-    this.initializer = initializer;
   }
 
   public Variable getCapturedVariable() {
@@ -76,14 +69,6 @@ public class Field extends Node {
 
   public boolean isCompileTimeConstant() {
     return compileTimeConstant;
-  }
-
-  public void setCapturedVariable(Variable capturedVariable) {
-    this.capturedVariable = capturedVariable;
-  }
-
-  public void setCompileTimeConstant(boolean compileTimeConstant) {
-    this.compileTimeConstant = compileTimeConstant;
   }
 
   public boolean isEnumField() {

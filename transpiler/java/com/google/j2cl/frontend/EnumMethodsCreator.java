@@ -10,6 +10,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
+import com.google.j2cl.ast.FieldBuilder;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.JavaType;
@@ -58,6 +59,7 @@ public class EnumMethodsCreator {
     this.namesToValuesMapFieldDescriptor =
         FieldDescriptor.create(
             true,
+            false,
             Visibility.PRIVATE,
             enumType.getDescriptor(),
             NAMES_TO_VALUES_MAP_FIELD_NAME,
@@ -81,7 +83,10 @@ public class EnumMethodsCreator {
   }
 
   private void run() {
-    enumType.addField(new Field(this.namesToValuesMapFieldDescriptor, NullLiteral.NULL));
+    enumType.addField(
+        FieldBuilder.fromDefault(this.namesToValuesMapFieldDescriptor)
+            .initializer(NullLiteral.NULL)
+            .build());
     enumType.addMethod(createValueOfMethod());
     enumType.addMethod(createValuesMethod());
   }

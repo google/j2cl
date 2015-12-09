@@ -129,11 +129,8 @@ public class JdtUtils {
     String fieldName = variableBinding.getName();
     TypeDescriptor thisTypeDescriptor = createTypeDescriptor(variableBinding.getType());
     boolean isRaw = JsInteropUtils.isJsProperty(variableBinding);
-    return isRaw
-        ? FieldDescriptor.createRaw(
-            isStatic, enclosingClassTypeDescriptor, fieldName, thisTypeDescriptor)
-        : FieldDescriptor.create(
-            isStatic, visibility, enclosingClassTypeDescriptor, fieldName, thisTypeDescriptor);
+    return FieldDescriptor.create(
+        isStatic, isRaw, visibility, enclosingClassTypeDescriptor, fieldName, thisTypeDescriptor);
   }
 
   public static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
