@@ -23,24 +23,33 @@ import java.beans.Introspector;
  */
 public enum JsMemberType {
   /**
-   * Not a js member.
+   * A regular method.
    */
-  NONE {
-    @Override
-    public boolean isJsMember() {
-      return false;
-    }
-  },
+  NONE,
+  /**
+   * A JsFunction method.
+   */
+  JS_FUNCTION,
   /**
    * A regular Js method. (not a JsProperty method).
    */
-  METHOD,
+  METHOD {
+    @Override
+    public boolean isJsMember() {
+      return true;
+    }
+  },
   /**
    * A JsProperty.
    */
   PROPERTY {
     @Override
     public boolean isJsPropertyAccessor() {
+      return true;
+    }
+
+    @Override
+    public boolean isJsMember() {
       return true;
     }
   },
@@ -67,6 +76,11 @@ public enum JsMemberType {
     public boolean isJsPropertyAccessor() {
       return true;
     }
+
+    @Override
+    public boolean isJsMember() {
+      return true;
+    }
   },
   /**
    * A JsProperty setter method. Usually in the form of setX(x).
@@ -88,6 +102,11 @@ public enum JsMemberType {
     public boolean isJsPropertyAccessor() {
       return true;
     }
+
+    @Override
+    public boolean isJsMember() {
+      return true;
+    }
   };
 
   /**
@@ -98,10 +117,11 @@ public enum JsMemberType {
   }
 
   /**
-   * Default is true. Returns false for {@code NONE}.
+   * Default is false. Returns true for {@code METHOD}, {@code PROPERTY}, {@code GETTER} and
+   * {@code SETTER}.
    */
   public boolean isJsMember() {
-    return true;
+    return false;
   }
 
   public String computeJsName(MethodDescriptor methodDescriptor) {

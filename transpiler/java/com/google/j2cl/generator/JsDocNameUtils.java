@@ -195,6 +195,13 @@ public class JsDocNameUtils {
     if (typeDescriptor.isPrimitive()) {
       return typeDescriptor.getSimpleName();
     }
+
+    // JsFunction interface and implementor is a real JS function.
+    if (!shouldUseClassName
+        && (typeDescriptor.isJsFunctionInterface()
+            || typeDescriptor.isJsFunctionImplementation())) {
+      return String.format("(%s|Function)", statementSourceGenerator.toSource(typeDescriptor));
+    }
     return statementSourceGenerator.toSource(typeDescriptor);
   }
 

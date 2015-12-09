@@ -3,7 +3,7 @@ package com.google.j2cl.transpiler.integration.jsinteroptests;
 public class Main {
   public static void main(String... args) {
     // runJsExportTest();
-    // runJsFunctionTest();
+    runJsFunctionTest();
     runJsMethodTest();
     runJsPropertyTest();
     // runJsTypeArrayTest();
@@ -43,7 +43,7 @@ public class Main {
   }
 
   public static void runJsFunctionTest() {
-    // JsFunctionTest test = new JsFunctionTest();
+    JsFunctionTest test = new JsFunctionTest();
     // test.testCast_crossCastJavaInstance();
     // test.testCast_fromJsFunction();
     // test.testCast_fromJsObject();
@@ -51,18 +51,18 @@ public class Main {
     // test.testInstanceOf_javaInstance();
     // test.testInstanceOf_jsFunction();
     // test.testInstanceOf_jsObject();
-    // test.testJsFunctionAccess();
-    // test.testJsFunctionBasic_java();
-    // test.testJsFunctionBasic_javaAndJs();
-    // test.testJsFunctionBasic_js();
-    // test.testJsFunctionCallbackPattern();
-    // test.testJsFunctionCallFromAMember();
-    // test.testJsFunctionIdentity_java();
-    // test.testJsFunctionIdentity_js();
-    // test.testJsFunctionJs2Java();
-    // test.testJsFunctionReferentialIntegrity();
-    // test.testJsFunctionSuccessiveCalls();
-    // test.testJsFunctionViaFunctionMethods();
+    test.testJsFunctionAccess();
+    test.testJsFunctionBasic_java();
+    test.testJsFunctionBasic_javaAndJs();
+    test.testJsFunctionBasic_js();
+    test.testJsFunctionCallbackPattern();
+    test.testJsFunctionCallFromAMember();
+    test.testJsFunctionIdentity_java();
+    test.testJsFunctionIdentity_js();
+    test.testJsFunctionJs2Java();
+    test.testJsFunctionReferentialIntegrity();
+    test.testJsFunctionSuccessiveCalls();
+    test.testJsFunctionViaFunctionMethods();
   }
 
   public static void runJsMethodTest() {

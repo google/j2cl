@@ -16,6 +16,7 @@
 package com.google.j2cl.frontend;
 
 import com.google.j2cl.ast.AstUtils;
+import com.google.j2cl.ast.JdtMethodUtils;
 import com.google.j2cl.ast.JsInteropUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -103,8 +104,8 @@ public class JsBridgeMethodsCreator {
       }
       // if for the overridden and overriding methods, one is JsMember, and the other is not,
       // generate a bridge method from the overridden method to the overriding method.
-      boolean isJsMemberOne = JdtUtils.isOrOverridesJsMember(overridingMethod);
-      boolean isJsMemberOther = JdtUtils.isOrOverridesJsMember(accidentalOverriddenMethod);
+      boolean isJsMemberOne = JdtMethodUtils.isOrOverridesJsMember(overridingMethod);
+      boolean isJsMemberOther = JdtMethodUtils.isOrOverridesJsMember(accidentalOverriddenMethod);
       if (isJsMemberOne != isJsMemberOther) {
         delegateByBridgeMethods.put(accidentalOverriddenMethod, overridingMethod);
       }
@@ -118,7 +119,7 @@ public class JsBridgeMethodsCreator {
    * non-JsMember, returns the non-JsMember it exposes, otherwise, returns null.
    */
   private static IMethodBinding getExposedNonJsMember(IMethodBinding methodBinding) {
-    if (!JdtUtils.isOrOverridesJsMember(methodBinding)
+    if (!JdtMethodUtils.isOrOverridesJsMember(methodBinding)
         || methodBinding.getDeclaringClass().isInterface()
         || JdtUtils.isStatic(methodBinding.getModifiers())
         || methodBinding.isConstructor()) {
@@ -130,8 +131,8 @@ public class JsBridgeMethodsCreator {
       return null;
     }
     IMethodBinding overriddenNonJsMember = null;
-    for (IMethodBinding overriddenMethod : JdtUtils.getOverriddenMethods(methodBinding)) {
-      if (!JdtUtils.isOrOverridesJsMember(overriddenMethod)) {
+    for (IMethodBinding overriddenMethod : JdtMethodUtils.getOverriddenMethods(methodBinding)) {
+      if (!JdtMethodUtils.isOrOverridesJsMember(overriddenMethod)) {
         overriddenNonJsMember = overriddenMethod;
       }
       if (getExposedNonJsMember(overriddenMethod) != null) {

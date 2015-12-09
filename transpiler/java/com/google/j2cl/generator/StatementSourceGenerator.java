@@ -280,6 +280,8 @@ public class StatementSourceGenerator {
           return transformPrototypeCall(expression);
         } else if (expression.getTarget().isJsProperty()) {
           return transformJsPropertyCall(expression);
+        } else if (expression.getTarget().isJsFunction()) {
+          return transformJsFunctionCall(expression);
         } else {
           return transformRegularMethodCall(expression);
         }
@@ -328,6 +330,17 @@ public class StatementSourceGenerator {
             "%s = %s",
             Joiner.on(".").skipNulls().join(Strings.emptyToNull(qualifier), propertyName),
             toSource(expression.getArguments().get(0)));
+      }
+
+      /**
+       * Call to a JsFunction method is emitted as the call on the qualifier itself:
+       * a.fun(); => a();
+       */
+      private String transformJsFunctionCall(MethodCall expression) {
+        return String.format(
+            "(/** @type {Function} */(%s))(%s)",
+            toSource(expression.getQualifier()),
+            Joiner.on(", ").join(transformNodesToSource(expression.getArguments())));
       }
 
       private String transformRegularMethodCall(MethodCall expression) {
@@ -380,6 +393,8 @@ public class StatementSourceGenerator {
             expression.getTarget().getEnclosingClassTypeDescriptor();
         if (targetTypeDescriptor.isNative()) {
           return transformNativeNewInstance(expression);
+        } else if (targetTypeDescriptor.isJsFunctionImplementation()) {
+          return transfromJsFunctionNewInstance(expression);
         } else {
           return transformRegularNewInstance(expression);
         }
@@ -391,6 +406,31 @@ public class StatementSourceGenerator {
         String argumentsList =
             Joiner.on(", ").join(transformNodesToSource(expression.getArguments()));
         return String.format("new %s(%s)", toSource(targetTypeDescriptor), argumentsList);
+      }
+
+      /**
+       * We transform:
+       *
+       * new A() // A implements a JsFunction interface.
+       *
+       * to:
+       *
+       * Util.$makeLambdaFunction(A.prototype.fun, new A(), A.$copy).
+       *
+       * TODO: translate anonymous class and lambda to light function. (Real JS function, without
+       * generating any class literals).
+       */
+      private String transfromJsFunctionNewInstance(NewInstance expression) {
+        TypeDescriptor targetTypeDescriptor =
+            expression.getTarget().getEnclosingClassTypeDescriptor();
+        String enclosingClassName = toSource(targetTypeDescriptor);
+        return String.format(
+            "%s.$makeLambdaFunction(%s.prototype.%s, %s, %s.prototype.$copy)",
+            toSource(TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor()),
+            enclosingClassName,
+            ManglingNameUtils.getMangledName(targetTypeDescriptor.getJsFunctionMethodDescriptor()),
+            transformRegularNewInstance(expression),
+            enclosingClassName);
       }
 
       private String transformRegularNewInstance(NewInstance expression) {

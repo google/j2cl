@@ -43,6 +43,7 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   protected ImmutableList<TypeDescriptor> typeArgumentDescriptors;
 
   // JsInterop properties
+  protected boolean isJsFunction;
   protected boolean isNative;
   protected String jsTypeNamespace;
   protected String jsTypeName;
@@ -56,12 +57,13 @@ public class RegularTypeDescriptor extends TypeDescriptor {
 
   private void setJsInteropProperties() {
     IAnnotationBinding jsTypeAnnotation = JsInteropUtils.getJsTypeAnnotation(typeBinding);
-    if (jsTypeAnnotation == null) {
+    if (jsTypeAnnotation != null) {
+      isNative = JsInteropUtils.isNative(jsTypeAnnotation);
+      jsTypeNamespace = JsInteropUtils.getJsNamespace(jsTypeAnnotation);
+      jsTypeName = JsInteropUtils.getJsName(jsTypeAnnotation);
       return;
     }
-    isNative = JsInteropUtils.isNative(jsTypeAnnotation);
-    jsTypeNamespace = JsInteropUtils.getJsNamespace(jsTypeAnnotation);
-    jsTypeName = JsInteropUtils.getJsName(jsTypeAnnotation);
+    isJsFunction = JsInteropUtils.isJsFunction(typeBinding);
   }
 
   public ImmutableList<String> getPackageComponents() {
@@ -260,6 +262,21 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   @Override
   public Node accept(Processor processor) {
     return Visitor_RegularTypeDescriptor.visit(processor, this);
+  }
+
+  @Override
+  public boolean isJsFunctionInterface() {
+    return isJsFunction;
+  }
+
+  @Override
+  public boolean isJsFunctionImplementation() {
+    return TypeProxyUtils.isJsFunctionImplementation(typeBinding);
+  }
+
+  @Override
+  public MethodDescriptor getJsFunctionMethodDescriptor() {
+    return TypeProxyUtils.getJsFunctionMethodDescriptor(typeBinding);
   }
 
   @Override

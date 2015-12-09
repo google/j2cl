@@ -106,6 +106,17 @@ public class DevirtualizeMethodCallsVisitor extends AbstractRewriter {
     return methodCall;
   }
 
+  private MethodCall devirtualizeJsFunctionImplMethodCalls(MethodCall methodCall) {
+    TypeDescriptor enclosingClassTypeDescriptor =
+        methodCall.getTarget().getEnclosingClassTypeDescriptor();
+    if (methodCall.getTarget().isJsFunction()) {
+      // Do not devirtualize the JsFunction method.
+      return methodCall;
+    }
+    return AstUtils.createDevirtualizedMethodCall(
+        methodCall, enclosingClassTypeDescriptor, enclosingClassTypeDescriptor);
+  }
+
   private MethodCall devirtualizeJsOverlayMethodCall(MethodCall methodCall) {
     RegularTypeDescriptor originalTypeDescriptor =
         (RegularTypeDescriptor) methodCall.getTarget().getEnclosingClassTypeDescriptor();
@@ -118,6 +129,11 @@ public class DevirtualizeMethodCallsVisitor extends AbstractRewriter {
   private MethodCall doDevirtualization(MethodCall methodCall) {
     if (methodCall.getTarget().isJsOverlay()) {
       return devirtualizeJsOverlayMethodCall(methodCall);
+    } else if (methodCall
+        .getTarget()
+        .getEnclosingClassTypeDescriptor()
+        .isJsFunctionImplementation()) {
+      return devirtualizeJsFunctionImplMethodCalls(methodCall);
     } else {
       return devirtualizeRegularMethodCall(methodCall);
     }

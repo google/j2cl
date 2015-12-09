@@ -16,8 +16,10 @@
 package com.google.j2cl.ast;
 
 import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 
+import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.Modifier;
 
@@ -129,6 +131,46 @@ public class TypeProxyUtils {
 
   public static boolean isInstanceNestedClass(ITypeBinding typeBinding) {
     return typeBinding.isNested() && !Modifier.isStatic(typeBinding.getModifiers());
+  }
+
+  /**
+   * Returns true if {@code typeBinding} is a class that implements a JsFunction interface.
+   */
+  public static boolean isJsFunctionImplementation(ITypeBinding typeBinding) {
+    if (typeBinding == null || !typeBinding.isClass()) {
+      return false;
+    }
+    for (ITypeBinding superInterface : typeBinding.getInterfaces()) {
+      if (JsInteropUtils.isJsFunction(superInterface)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Returns the MethodDescriptor for the SAM method of {@code typeBinding}.
+   */
+  public static MethodDescriptor getJsFunctionMethodDescriptor(ITypeBinding typeBinding) {
+    if (!isJsFunctionImplementation(typeBinding)) {
+      return null;
+    }
+    Preconditions.checkArgument(
+        typeBinding.getInterfaces().length == 1,
+        "Type %s should implement one and only one super interface.",
+        typeBinding.getName());
+    ITypeBinding jsFunctionInterface = typeBinding.getInterfaces()[0];
+    Preconditions.checkArgument(
+        jsFunctionInterface.getDeclaredMethods().length == 1,
+        "Type %s should have one and only one method.",
+        jsFunctionInterface.getName());
+    IMethodBinding interfaceSAM = jsFunctionInterface.getDeclaredMethods()[0];
+    for (IMethodBinding method : typeBinding.getDeclaredMethods()) {
+      if (method.overrides(interfaceSAM)) {
+        return JdtMethodUtils.createMethodDescriptor(method);
+      }
+    }
+    return null;
   }
 
   private static List<TypeDescriptor> createTypeDescriptors(ITypeBinding[] typeBindings) {

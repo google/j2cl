@@ -28,6 +28,7 @@ import org.eclipse.jdt.core.dom.Modifier;
  * Utility functions for JsInterop properties.
  */
 public class JsInteropUtils {
+  private static final String JS_FUNCTION_ANNOTATION_NAME = "jsinterop.annotations.JsFunction";
   private static final String JS_METHOD_ANNOTATION_NAME = "jsinterop.annotations.JsMethod";
   private static final String JS_OVERLAY_ANNOTATION_NAME = "jsinterop.annotations.JsOverlay";
   private static final String JS_PROPERTY_ANNOTATION_NAME = "jsinterop.annotations.JsProperty";
@@ -36,6 +37,11 @@ public class JsInteropUtils {
 
   public static boolean isGlobal(String jsNamespace) {
     return JS_GLOBAL.equals(jsNamespace);
+  }
+
+  public static IAnnotationBinding getJsFunctionAnnotation(ITypeBinding typeBinding) {
+    return JdtAnnotationUtils.findAnnotationBindingByName(
+        typeBinding.getAnnotations(), JS_FUNCTION_ANNOTATION_NAME);
   }
 
   public static IAnnotationBinding getJsTypeAnnotation(ITypeBinding typeBinding) {
@@ -51,6 +57,10 @@ public class JsInteropUtils {
   public static IAnnotationBinding getJsPropertyAnnotation(IMethodBinding methodBinding) {
     return JdtAnnotationUtils.findAnnotationBindingByName(
         methodBinding.getAnnotations(), JS_PROPERTY_ANNOTATION_NAME);
+  }
+
+  public static boolean isJsFunction(ITypeBinding typeBinding) {
+    return getJsFunctionAnnotation(typeBinding) != null;
   }
 
   public static boolean isNative(IAnnotationBinding annotationBinding) {
@@ -102,6 +112,12 @@ public class JsInteropUtils {
     IAnnotationBinding jsTypeAnnotation = getJsTypeAnnotation(methodBinding.getDeclaringClass());
     if (jsTypeAnnotation != null && Modifier.isPublic(methodBinding.getModifiers())) {
       return JsInfo.create(JsMemberType.METHOD, null, null, isJsOverlay);
+    }
+    // check @JsFunction annotation
+    IAnnotationBinding jsFunctionAnnotation =
+        getJsFunctionAnnotation(methodBinding.getDeclaringClass());
+    if (jsFunctionAnnotation != null) {
+      return JsInfo.create(JsMemberType.JS_FUNCTION, null, null, isJsOverlay);
     }
     return JsInfo.NONE;
   }

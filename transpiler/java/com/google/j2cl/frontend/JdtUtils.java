@@ -30,7 +30,7 @@ import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
-import com.google.j2cl.ast.JsInfo;
+import com.google.j2cl.ast.JdtMethodUtils;
 import com.google.j2cl.ast.JsInteropUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
@@ -67,7 +67,6 @@ import org.eclipse.jdt.internal.compiler.env.INameEnvironment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -138,59 +137,7 @@ public class JdtUtils {
   }
 
   public static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
-    int modifiers = methodBinding.getModifiers();
-    boolean isStatic = isStatic(modifiers);
-    Visibility visibility = getVisibility(modifiers);
-    boolean isNative = isNative(modifiers);
-    TypeDescriptor enclosingClassTypeDescriptor =
-        createTypeDescriptor(methodBinding.getDeclaringClass());
-    boolean isConstructor = methodBinding.isConstructor();
-    String methodName =
-        isConstructor
-            ? createTypeDescriptor(methodBinding.getDeclaringClass()).getClassName()
-            : methodBinding.getName();
-    boolean isRaw = false;
-
-    JsInfo jsInfo = computeJsInfo(methodBinding);
-    isRaw = isOrOverridesJsMember(methodBinding);
-
-    TypeDescriptor returnTypeDescriptor = createTypeDescriptor(methodBinding.getReturnType());
-
-    // generate parameters type descriptors.
-    Iterable<TypeDescriptor> parameterTypeDescriptors =
-        FluentIterable.from(Arrays.asList(methodBinding.getMethodDeclaration().getParameterTypes()))
-            .transform(
-                new Function<ITypeBinding, TypeDescriptor>() {
-                  @Override
-                  public TypeDescriptor apply(ITypeBinding typeBinding) {
-                    // Whenever we create the parameter types of a method,
-                    // we use the rawTypeDescriptor.
-                    return createTypeDescriptor(typeBinding).getRawTypeDescriptor();
-                  }
-                });
-    // generate type parameters declared in the method.
-    Iterable<TypeDescriptor> typeParameterDescriptors =
-        FluentIterable.from(Arrays.asList(methodBinding.getTypeParameters()))
-            .transform(
-                new Function<ITypeBinding, TypeDescriptor>() {
-                  @Override
-                  public TypeDescriptor apply(ITypeBinding typeBinding) {
-                    return createTypeDescriptor(typeBinding);
-                  }
-                });
-
-    return MethodDescriptor.create(
-        isStatic,
-        isRaw,
-        visibility,
-        enclosingClassTypeDescriptor,
-        methodName,
-        isConstructor,
-        isNative,
-        returnTypeDescriptor,
-        parameterTypeDescriptors,
-        typeParameterDescriptors,
-        jsInfo);
+    return JdtMethodUtils.createMethodDescriptor(methodBinding);
   }
 
   static Variable createVariable(IVariableBinding variableBinding) {
@@ -526,7 +473,7 @@ public class JdtUtils {
    */
   static boolean isFirstJsMember(IMethodBinding methodBinding) {
     return JsInteropUtils.isJsMember(methodBinding)
-        && getOverriddenJsMembers(methodBinding).isEmpty();
+        && JdtMethodUtils.getOverriddenJsMembers(methodBinding).isEmpty();
   }
 
   static boolean isOverride(IMethodBinding overridingMethod) {
@@ -690,72 +637,6 @@ public class JdtUtils {
     return typeBinding.getErasure().isEqualTo(otherTypeBinding.getErasure());
   }
 
-  static boolean isOrOverridesJsMember(IMethodBinding methodBinding) {
-    return JsInteropUtils.isJsMember(methodBinding)
-        || !getOverriddenJsMembers(methodBinding).isEmpty();
-  }
-
-  /**
-   * Checks overriding chain to compute JsInfo.
-   */
-  static JsInfo computeJsInfo(IMethodBinding methodBinding) {
-    // The direct JsInfo.
-    JsInfo jsInfo = JsInteropUtils.getJsInfo(methodBinding);
-    if (jsInfo.getJsMemberType().isJsMember()) {
-      return jsInfo;
-    }
-    // Checks overriding chain.
-    for (IMethodBinding overriddenMethod : getOverriddenMethods(methodBinding)) {
-      JsInfo inheritedJsInfo = JsInteropUtils.getJsInfo(overriddenMethod);
-      if (inheritedJsInfo.getJsMemberType().isJsMember()) {
-        return inheritedJsInfo;
-      }
-    }
-    return JsInfo.NONE;
-  }
-
-  static Set<IMethodBinding> getOverriddenJsMembers(IMethodBinding methodBinding) {
-    return Sets.filter(
-        getOverriddenMethods(methodBinding),
-        new Predicate<IMethodBinding>() {
-          @Override
-          public boolean apply(IMethodBinding overriddenMethod) {
-            return JsInteropUtils.isJsMember(overriddenMethod);
-          }
-        });
-  }
-
-  static Set<IMethodBinding> getOverriddenMethods(IMethodBinding methodBinding) {
-    Set<IMethodBinding> overriddenMethods = new HashSet<>();
-    ITypeBinding enclosingClass = methodBinding.getDeclaringClass();
-    ITypeBinding superClass = enclosingClass.getSuperclass();
-    if (superClass != null) {
-      overriddenMethods.addAll(getOverriddenMethodsInType(methodBinding, superClass));
-    }
-    for (ITypeBinding superInterface : enclosingClass.getInterfaces()) {
-      overriddenMethods.addAll(getOverriddenMethodsInType(methodBinding, superInterface));
-    }
-    return overriddenMethods;
-  }
-
-  static Set<IMethodBinding> getOverriddenMethodsInType(
-      IMethodBinding methodBinding, ITypeBinding typeBinding) {
-    Set<IMethodBinding> overriddenMethods = new HashSet<>();
-    for (IMethodBinding declaredMethod : typeBinding.getDeclaredMethods()) {
-      if (methodBinding.overrides(declaredMethod)) {
-        overriddenMethods.add(declaredMethod);
-      }
-    }
-    // Recurse into immediate super class and interfaces for overridden method.
-    if (typeBinding.getSuperclass() != null) {
-      overriddenMethods.addAll(
-          getOverriddenMethodsInType(methodBinding, typeBinding.getSuperclass()));
-    }
-    for (ITypeBinding interfaceBinding : typeBinding.getInterfaces()) {
-      overriddenMethods.addAll(getOverriddenMethodsInType(methodBinding, interfaceBinding));
-    }
-    return overriddenMethods;
-  }
   /**
    * Helper method to work around JDT habit of returning raw collections.
    */

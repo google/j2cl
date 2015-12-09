@@ -31,6 +31,25 @@ class Util {
     return (fromClass != null &&
             (fromClass == toClass || fromClass.prototype instanceof toClass));
   }
+
+  /**
+   * Create a function that applies the specified jsFunctionMethod on itself,
+   * and copies {@code instance}' properties to itself.
+   *
+   * @param {Function} jsFunctionMethod
+   * @param {T} instance
+   * @param {Function} copyMethod
+   * @return {Function | T}
+   * @template T
+   * @public
+   */
+  static $makeLambdaFunction(jsFunctionMethod, instance, copyMethod) {
+    var lambda = function() {
+      return jsFunctionMethod.apply(lambda, arguments);
+    };
+    copyMethod.call(lambda, instance);
+    return lambda;
+  }
 };
 
 

@@ -1,0 +1,188 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl$impl');
+
+
+let MyJsFunctionInterface = goog.require('gen.com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionInterface$impl');
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+/**
+ * @implements {MyJsFunctionInterface}
+ */
+class MyJsFunctionImpl extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {number}
+     */
+    this.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl =
+        0;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!MyJsFunctionImpl}
+   * @public
+   */
+  static $create() {
+    MyJsFunctionImpl.$clinit();
+    let $instance = new MyJsFunctionImpl;
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl();
+  }
+
+  /**
+   * @return {number}
+   * @public
+   */
+  m_bar() {}
+
+  /**
+   * @return {number}
+   * @public
+   */
+  m_fun() {}
+
+  /**
+   * @override
+   * @param {number} a
+   * @return {number}
+   * @public
+   */
+  m_foo__int(a) { return a; }
+
+  /**
+   * @param {(MyJsFunctionImpl|Function)} $thisArg
+   * @return {number}
+   * @public
+   */
+  static m_bar__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl(
+      $thisArg) {
+    MyJsFunctionImpl.$clinit();
+    return 0;
+  }
+
+  /**
+   * @param {(MyJsFunctionImpl|Function)} $thisArg
+   * @return {number}
+   * @public
+   */
+  static m_fun__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl(
+      $thisArg) {
+    MyJsFunctionImpl.$clinit();
+    return MyJsFunctionImpl
+               .m_bar__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl(
+                   $thisArg) +
+           (/** @type {Function} */ ($thisArg))(1);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof MyJsFunctionImpl; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, MyJsFunctionImpl);
+  }
+
+  /**
+   * Copies the fields from {code from}.
+   * @param {MyJsFunctionImpl} from
+   * @public
+   */
+  $copy(from) {
+    this.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl =
+        from.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl;
+    // TODO: may copy Objects methods (equals, hashCode, etc. ) as well.
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    MyJsFunctionImpl.$clinit();
+    if (!MyJsFunctionImpl.$classMyJsFunctionImpl_) {
+      MyJsFunctionImpl.$classMyJsFunctionImpl_ = Class.$createForClass(
+          $Util.$generateId('MyJsFunctionImpl'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl'),
+          Object.$getClass(),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl'));
+    }
+    return MyJsFunctionImpl.$classMyJsFunctionImpl_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return MyJsFunctionImpl.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+MyJsFunctionImpl.$classMyJsFunctionImpl_ = null;
+
+
+MyJsFunctionInterface.$markImplementor(MyJsFunctionImpl);
+
+
+
+/**
+ * Export class.
+ */
+exports = MyJsFunctionImpl;

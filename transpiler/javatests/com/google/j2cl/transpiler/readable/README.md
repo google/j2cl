@@ -93,6 +93,7 @@ are copyright and licensed as follows:
 - anonymousclassforfunctionalinterface (transpiled to function)
 - enumoptimization
 - finalfield (readable JsDoc and no static setter)
+- lightjsfunction (transpile lambda and anonymousclass to function)
 - localvariablejsdoc
 - private static clinit optimization
 - shorterfieldmangling (for fields in final classes, like enums)

@@ -150,6 +150,10 @@ public abstract class MethodDescriptor extends Node implements Member {
     return getJsInfo().getJsMemberType().computeJsName(this);
   }
 
+  public boolean isJsFunction() {
+    return getJsInfo().getJsMemberType() == JsMemberType.JS_FUNCTION;
+  }
+
   @Override
   public Node accept(Processor processor) {
     return Visitor_MethodDescriptor.visit(processor, this);
