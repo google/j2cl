@@ -52,6 +52,14 @@ public abstract class CallBuilder<C extends Call> {
     return this;
   }
 
+  public CallBuilder<C> enclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
+    this.originalMethodDescriptor =
+        MethodDescriptorBuilder.from(originalMethodDescriptor)
+            .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+            .build();
+    return this;
+  }
+
   public C build() {
     List<Expression> finalArguments = new ArrayList<>();
     finalArguments.addAll(originalArguments);

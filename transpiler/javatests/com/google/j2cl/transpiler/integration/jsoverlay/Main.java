@@ -12,11 +12,17 @@ public class Main {
     public final int callM() {
       return m();
     }
+
+    @JsOverlay
+    public static final int fun(int a, int b) {
+      return a > b ? a + b : a * b;
+    }
   }
 
   public static void testNativeJsWithOverlay() {
     NativeJsTypeWithOverlay object = new NativeJsTypeWithOverlay();
     assert 6 == object.callM();
+    assert 20 == NativeJsTypeWithOverlay.fun(4, 5);
   }
 
   public static void main(String... args) {

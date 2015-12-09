@@ -12,10 +12,16 @@ public class Main {
     public final int callM() {
       return m();
     }
+
+    @JsOverlay
+    public static final int fun() {
+      return 1;
+    }
   }
 
   public void test() {
     NativeJsTypeWithOverlay n = new NativeJsTypeWithOverlay();
     n.callM();
+    NativeJsTypeWithOverlay.fun();
   }
 }
