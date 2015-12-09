@@ -77,8 +77,8 @@ public abstract class JavaScriptGenerator extends AbstractSourceGenerator {
     Map<Variable, String> aliasByVariable =
         VariableAliasesGatheringVisitor.gatherVariableAliases(sortedImports, javaType);
 
-    StatementSourceGenerator statementSourceGenerator =
-        new StatementSourceGenerator(sortedImports, aliasByVariable);
+    GenerationEnvironment environment = new GenerationEnvironment(sortedImports, aliasByVariable);
+    SourceGenerator sourceGenerator = new SourceGenerator(environment);
 
     TypeDescriptor selfTypeDescriptor = javaType.getDescriptor().getRawTypeDescriptor();
     context.put("classType", javaType);
@@ -88,7 +88,7 @@ public abstract class JavaScriptGenerator extends AbstractSourceGenerator {
     context.put(
         "eagerImports", ImportUtils.sortedList(importsByCategory.get(ImportCategory.EAGER)));
     context.put("lazyImports", ImportUtils.sortedList(importsByCategory.get(ImportCategory.LAZY)));
-    context.put("statementSourceGenerator", statementSourceGenerator);
+    context.put("statementSourceGenerator", sourceGenerator);
     context.put(
         "javaLangClassTypeDecriptor", TypeDescriptors.get().javaLangClass.getRawTypeDescriptor());
     context.put("nativeUtilTypeDecriptor", BootstrapType.NATIVE_UTIL.getDescriptor());

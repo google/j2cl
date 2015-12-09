@@ -26,7 +26,7 @@ import javax.annotation.Nullable;
  * <p>From the statement int i = 0; the fragment would represent i = 0;
  */
 @Visitable
-public class VariableDeclarationFragment extends Node {
+public class VariableDeclarationFragment extends Expression {
   @Visitable Variable variable;
   @Visitable @Nullable Expression initializer;
 
@@ -51,5 +51,10 @@ public class VariableDeclarationFragment extends Node {
   @Override
   public Node accept(Processor processor) {
     return Visitor_VariableDeclarationFragment.visit(processor, this);
+  }
+
+  @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return TypeDescriptors.get().primitiveVoid;
   }
 }

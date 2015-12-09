@@ -72,8 +72,7 @@ public class GeneratorUtils {
   /**
    * Returns the method header including (static) (getter/setter) methodName(parametersList).
    */
-  public static String getMethodHeader(
-      Method method, StatementSourceGenerator statementSourceGenerator) {
+  public static String getMethodHeader(Method method, SourceGenerator sourceGenerator) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
     String staticQualifier = methodDescriptor.isStatic() ? "static" : null;
     String getterSetterPrefix =
@@ -81,21 +80,20 @@ public class GeneratorUtils {
             ? "get"
             : methodDescriptor.isJsPropertySetter() ? "set" : null;
     String methodName = ManglingNameUtils.getMangledName(methodDescriptor);
-    String parameterList = getParameterList(method, statementSourceGenerator);
+    String parameterList = getParameterList(method, sourceGenerator);
     return Joiner.on(" ")
         .skipNulls()
         .join(staticQualifier, getterSetterPrefix, methodName + "(" + parameterList + ")");
   }
 
-  public static String getParameterList(
-      Method method, final StatementSourceGenerator statementSourceGenerator) {
+  public static String getParameterList(Method method, final SourceGenerator sourceGenerator) {
     List<String> parameterNameList =
         Lists.transform(
             method.getParameters(),
             new Function<Variable, String>() {
               @Override
               public String apply(Variable variable) {
-                return statementSourceGenerator.toSource(variable);
+                return sourceGenerator.toSource(variable);
               }
             });
     return Joiner.on(", ").join(parameterNameList);

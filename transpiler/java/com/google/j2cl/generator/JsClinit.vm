@@ -20,13 +20,11 @@
 #if ($staticField.hasInitializer())
 #if (!$staticField.isCompileTimeConstant())
 #set ($staticFieldName = ${ManglingNameUtils.getMangledName($staticField.Descriptor)})
-    ${className}.${staticFieldName} = ${statementSourceGenerator.toSource(${staticField.Initializer}, $classType.Descriptor)};
+    ${className}.${staticFieldName} = ${statementSourceGenerator.toSource(${staticField.Initializer})};
 #end
 #end
 #end
 #foreach ($staticInitializerBlock in $classType.StaticInitializerBlocks)
-#foreach ($statementInInitializer in $staticInitializerBlock.Statements)
-    $statementSourceGenerator.toSource($statementInInitializer, $classType.Descriptor)
-#end
+#foreach ($statementInInitializer in $staticInitializerBlock.Statements) $statementSourceGenerator.toSource($statementInInitializer) #end
 #end
   }

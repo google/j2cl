@@ -37,6 +37,7 @@ import com.google.j2cl.ast.visitors.MakeExplicitEnumConstructionVisitor;
 import com.google.j2cl.ast.visitors.NormalizeArrayCreationsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeArrayLiteralsPass;
 import com.google.j2cl.ast.visitors.NormalizeCastsVisitor;
+import com.google.j2cl.ast.visitors.NormalizeCatchClausesVisitor;
 import com.google.j2cl.ast.visitors.NormalizeEqualityVisitor;
 import com.google.j2cl.ast.visitors.NormalizeLongsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeNativeMethodCalls;
@@ -118,6 +119,7 @@ public class J2clTranspiler {
       CreateDevirtualizedStaticMethodsVisitor.applyTo(j2clUnit);
 
       NormalizeTryWithResourceVisitor.applyTo(j2clUnit);
+      NormalizeCatchClausesVisitor.applyTo(j2clUnit);
       FixAnonymousClassConstructorsVisitor.applyTo(j2clUnit);
       MakeExplicitEnumConstructionVisitor.applyTo(j2clUnit);
       FixSuperCallQualifiersVisitor.applyTo(j2clUnit);

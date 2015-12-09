@@ -29,7 +29,6 @@ import java.util.List;
  * Utility functions to manipulate J2CL AST.
  */
 public class AstUtils {
-
   public static final String JS_OVERLAY_METHODS_IMPL_SUFFIX = "Overlay";
   public static final String CAPTURES_PREFIX = "$c_";
   public static final String ENCLOSING_INSTANCE_NAME = "$outer_this";
@@ -274,7 +273,8 @@ public class AstUtils {
     if (innerclassTypeDescriptor.isParameterizedType()) {
       typeParameterDescriptors.addAll(
           Lists.newArrayList(
-              Iterables.filter( // filters out the type parameters declared in the outer class.
+              Iterables.filter(
+                  // filters out the type parameters declared in the outer class.
                   innerclassTypeDescriptor.getTypeArgumentDescriptors(),
                   new Predicate<TypeDescriptor>() {
                     @Override
@@ -323,8 +323,8 @@ public class AstUtils {
     List<Statement> statements = new ArrayList<>();
     statements.add(
         new ReturnStatement(
-            newInnerClass,
-            innerclassConstructorDescriptor.getReturnTypeDescriptor())); // return new InnerClass();
+            newInnerClass, innerclassConstructorDescriptor.getReturnTypeDescriptor()));
+    // return new InnerClass();
     Block body = new Block(statements);
 
     return new Method(methodDescriptor, innerclassConstructor.getParameters(), body);
@@ -692,6 +692,20 @@ public class AstUtils {
     return qualifier instanceof ThisReference
         && qualifier.getTypeDescriptor()
             == memberReference.getTarget().getEnclosingClassTypeDescriptor();
+  }
+
+  public static Expression joinExpressionsWithBinaryOperator(
+      TypeDescriptor outputType, BinaryOperator operator, List<Expression> expressions) {
+    if (expressions.isEmpty()) {
+      return null;
+    }
+    if (expressions.size() == 1) {
+      return expressions.get(0);
+    }
+    Expression joinedExpressions =
+        joinExpressionsWithBinaryOperator(
+            outputType, operator, expressions.subList(1, expressions.size()));
+    return new BinaryExpression(outputType, expressions.get(0), operator, joinedExpressions);
   }
 
   /**

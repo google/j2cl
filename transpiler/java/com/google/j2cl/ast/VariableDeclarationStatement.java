@@ -33,6 +33,11 @@ public class VariableDeclarationStatement extends Statement {
     this.fragments.addAll(fragments);
   }
 
+  public VariableDeclarationStatement(VariableDeclarationFragment fragment) {
+    Preconditions.checkNotNull(fragment);
+    this.fragments.add(fragment);
+  }
+
   public List<VariableDeclarationFragment> getFragments() {
     return fragments;
   }

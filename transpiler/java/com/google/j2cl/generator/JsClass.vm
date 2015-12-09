@@ -72,6 +72,7 @@ class $className $extendsClause {
 #end
 #end
   }
+
 #foreach($method in $classType.Methods)
 #if($method.isConstructor())
 #parse( "com/google/j2cl/generator/JsConstructorMethods.vm" )
@@ -79,7 +80,6 @@ class $className $extendsClause {
 #parse( "com/google/j2cl/generator/JsMethod.vm" )
 #end
 #end
-
 #if ($superBoxedTypeAsPrimitive)
   /**
    * $isInstance() function implementation is provided separately.

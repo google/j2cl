@@ -105,24 +105,22 @@ public class JsDocNameUtils {
   /**
    * Returns the JsDoc type name.
    */
-  static String getJsDocName(
-      TypeDescriptor typeDescriptor, StatementSourceGenerator statementSourceGenerator) {
-    return getJsDocName(typeDescriptor, false, statementSourceGenerator);
+  static String getJsDocName(TypeDescriptor typeDescriptor, GenerationEnvironment environment) {
+    return getJsDocName(typeDescriptor, false, environment);
   }
 
   /**
    * Returns the list of JsDoc names of a list of type descriptors separated by comma.
    */
   static String getJsDocNames(
-      Iterable<TypeDescriptor> typeDescriptors,
-      final StatementSourceGenerator statementSourceGenerator) {
+      Iterable<TypeDescriptor> typeDescriptors, final GenerationEnvironment environment) {
     Iterable<String> typeParameterDescriptors =
         Iterables.transform(
             typeDescriptors,
             new Function<TypeDescriptor, String>() {
               @Override
               public String apply(TypeDescriptor typeDescriptor) {
-                return getJsDocName(typeDescriptor, statementSourceGenerator);
+                return getJsDocName(typeDescriptor, environment);
               }
             });
     return Joiner.on(", ").join(typeParameterDescriptors);
@@ -136,12 +134,12 @@ public class JsDocNameUtils {
   static String getJsDocName(
       TypeDescriptor typeDescriptor,
       boolean shouldUseClassName,
-      StatementSourceGenerator statementSourceGenerator) {
+      GenerationEnvironment environment) {
     if (typeDescriptor.isArray()) {
       return String.format(
           "%s%s%s",
           Strings.repeat("Array<", typeDescriptor.getDimensions()),
-          getJsDocName(typeDescriptor.getLeafTypeDescriptor(), statementSourceGenerator),
+          getJsDocName(typeDescriptor.getLeafTypeDescriptor(), environment),
           Strings.repeat(">", typeDescriptor.getDimensions()));
     }
 
@@ -150,8 +148,8 @@ public class JsDocNameUtils {
       String jsDocName =
           String.format(
               "%s<%s>",
-              statementSourceGenerator.toSource(rawTypeDescriptor),
-              getJsDocNames(typeDescriptor.getTypeArgumentDescriptors(), statementSourceGenerator));
+              ExpressionTransformer.transform(rawTypeDescriptor, environment),
+              getJsDocNames(typeDescriptor.getTypeArgumentDescriptors(), environment));
       if (!shouldUseClassName
           && unboxedTypeDescriptorsBySuperTypeDescriptor.containsKey(rawTypeDescriptor)) {
         // types that are extended or implemented by unboxed types
@@ -171,7 +169,9 @@ public class JsDocNameUtils {
       case TypeDescriptor.CHAR_TYPE_NAME:
         return JS_NUMBER_TYPE_NAME;
       case TypeDescriptor.LONG_TYPE_NAME:
-        return "!" + statementSourceGenerator.toSource(BootstrapType.NATIVE_LONG.getDescriptor());
+        return "!"
+            + ExpressionTransformer.transform(
+                BootstrapType.NATIVE_LONG.getDescriptor(), environment);
       case "java.lang.Object":
         if (!shouldUseClassName) {
           return "*";
@@ -189,7 +189,7 @@ public class JsDocNameUtils {
         && unboxedTypeDescriptorsBySuperTypeDescriptor.containsKey(typeDescriptor)) {
       return String.format(
           "(%s|%s)",
-          statementSourceGenerator.toSource(typeDescriptor),
+          ExpressionTransformer.transform(typeDescriptor, environment),
           getJsDocNameOfUnionType(typeDescriptor));
     }
     if (typeDescriptor.isPrimitive()) {
@@ -200,9 +200,11 @@ public class JsDocNameUtils {
     if (!shouldUseClassName
         && (typeDescriptor.isJsFunctionInterface()
             || typeDescriptor.isJsFunctionImplementation())) {
-      return String.format("(%s|Function)", statementSourceGenerator.toSource(typeDescriptor));
+      return String.format(
+          "(%s|Function)", ExpressionTransformer.transform(typeDescriptor, environment));
+
     }
-    return statementSourceGenerator.toSource(typeDescriptor);
+    return ExpressionTransformer.transform(typeDescriptor, environment);
   }
 
   /**

@@ -1,8 +1,8 @@
-
 #if ($isBoxedTypeAsPrimitive)
   /**
    * Constructor function implementation is provided separately.
    */
+
 #else
 #if(${method.Descriptor.Visibility.isPublic()})
 #set ($ctorVisibility = "protected")
@@ -28,7 +28,7 @@
    * @return {!$jsDocName}
    * @${method.Descriptor.Visibility}
    */
-  static ${mangledNameOfCreate}($parameterList) {
+  static ${mangledNameOfCreate}(${parameterList}) {
     $className.$clinit();
     let $instance = new $className;
     $instance.$mangledNameOfCtor($parameterList);
@@ -46,9 +46,6 @@
 #end
    * @$ctorVisibility
    */
-  $mangledNameOfCtor($parameterList) {
-#foreach ($statementInBody in $method.Body.Statements)
-    $statementSourceGenerator.toSource($statementInBody)
-#end
-  }
+  ${mangledNameOfCtor}(${parameterList})
+  $statementSourceGenerator.toSource($method.Body)
 #end
