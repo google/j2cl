@@ -106,7 +106,7 @@ public abstract class MethodDescriptor extends Node implements Member {
   public abstract JsInfo getJsInfo();
 
   public boolean isInit() {
-    return getMethodName().equals(INIT_METHOD_NAME);
+    return getMethodName().equals(INIT_METHOD_NAME) && !isStatic();
   }
 
   public String getJsName() {

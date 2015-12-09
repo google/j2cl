@@ -34,6 +34,7 @@ import com.google.j2cl.ast.visitors.InsertUnboxingConversionVisitor;
 import com.google.j2cl.ast.visitors.InsertUnderflowOverflowConversionVisitor;
 import com.google.j2cl.ast.visitors.InsertWideningPrimitiveConversionVisitor;
 import com.google.j2cl.ast.visitors.MakeExplicitEnumConstructionVisitor;
+import com.google.j2cl.ast.visitors.NormalizeArrayCreationsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeArrayLiteralsPass;
 import com.google.j2cl.ast.visitors.NormalizeCastsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeEqualityVisitor;
@@ -145,6 +146,7 @@ public class J2clTranspiler {
       NormalizeCastsVisitor.applyTo(j2clUnit);
       NormalizeEqualityVisitor.applyTo(j2clUnit);
       NormalizeNativeMethodCalls.applyTo(j2clUnit);
+      NormalizeArrayCreationsVisitor.applyTo(j2clUnit);
 
       // Dodge JSCompiler limitations.
       // TODO: remove the temporary fix once switch to JSCompiler's new type checker.

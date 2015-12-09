@@ -370,58 +370,8 @@ public class StatementSourceGenerator {
 
       @Override
       public String transformNewArray(NewArray newArrayExpression) {
-        if (newArrayExpression.getArrayLiteral() != null) {
-          return transformArrayInit(newArrayExpression);
-        }
-        return transformArrayCreate(newArrayExpression);
-      }
-
-      private String transformArrayCreate(NewArray newArrayExpression) {
-        Preconditions.checkArgument(newArrayExpression.getArrayLiteral() == null);
-
-        String dimensionsList =
-            Joiner.on(", ")
-                .join(transformNodesToSource(newArrayExpression.getDimensionExpressions()));
-        return annotateWithJsDoc(
-            newArrayExpression.getTypeDescriptor(),
-            String.format(
-                "%s.$create([%s], %s)",
-                arraysTypeAlias(),
-                dimensionsList,
-                getAlias(newArrayExpression.getLeafTypeDescriptor())));
-      }
-
-      private String transformArrayInit(NewArray newArrayExpression) {
-
-        Preconditions.checkArgument(newArrayExpression.getArrayLiteral() != null);
-
-        String leafTypeName = getAlias(newArrayExpression.getLeafTypeDescriptor());
-        int dimensionCount = newArrayExpression.getDimensionExpressions().size();
-        String arrayLiteralAsString = toSource(newArrayExpression.getArrayLiteral());
-
-        if (dimensionCount == 1) {
-          // It's 1 dimensional.
-          if (TypeDescriptors.get().javaLangObject == newArrayExpression.getLeafTypeDescriptor()) {
-            // And the leaf type is Object. All arrays are implicitly Array<Object> so leave out the
-            // init.
-            return arrayLiteralAsString;
-          }
-          // Number of dimensions defaults to 1 so we can leave that parameter out.
-          return annotateWithJsDoc(
-              newArrayExpression.getTypeDescriptor(),
-              String.format(
-                  "%s.$init(%s, %s)", arraysTypeAlias(), arrayLiteralAsString, leafTypeName));
-        } else {
-          // It's multidimensional, make dimensions explicit.
-          return annotateWithJsDoc(
-              newArrayExpression.getTypeDescriptor(),
-              String.format(
-                  "%s.$init(%s, %s, %s)",
-                  arraysTypeAlias(),
-                  arrayLiteralAsString,
-                  leafTypeName,
-                  dimensionCount));
-        }
+        Preconditions.checkArgument(false, "NewArray should have been normalized.");
+        return "";
       }
 
       @Override
