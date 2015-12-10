@@ -1,4 +1,4 @@
-#set ($staticFieldType = ${statementSourceGenerator.getJsDocName(${staticField.Descriptor.TypeDescriptor})})
+#set ($staticFieldType = ${sourceGenerator.getJsDocName(${staticField.Descriptor.TypeDescriptor})})
 #set ($staticFieldAccess = ${ManglingNameUtils.getMangledName($staticField.Descriptor)})
 #set ($initialValue = ${GeneratorUtils.getInitialValue($staticField)})
 
@@ -6,4 +6,4 @@
 /**
  * @public {$staticFieldType}
  */
-${className}.${staticFieldAccess} = ${statementSourceGenerator.toSource($initialValue)};
+${className}.${staticFieldAccess} = ${sourceGenerator.toSource($initialValue)};

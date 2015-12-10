@@ -9,21 +9,21 @@
 #else
 #set ($ctorVisibility = $method.Descriptor.Visibility)
 #end
-#set ($parameterList = $GeneratorUtils.getParameterList($method, $statementSourceGenerator))
+#set ($parameterList = $GeneratorUtils.getParameterList($method, $sourceGenerator))
 #set ($mangledNameOfCreate = $ManglingNameUtils.getConstructorMangledName($method.Descriptor))
 #set ($mangledNameOfCtor = $ManglingNameUtils.getCtorMangledName($method.Descriptor))
 #set ($enclosingClassTypeDescriptor = ${method.Descriptor.getEnclosingClassTypeDescriptor()})
   /**
    * A particular Java constructor as a factory method.
 #if (${classType.Descriptor.isParameterizedType()})
-   * @template ${statementSourceGenerator.getJsDocNames(${classType.Descriptor.getTypeArgumentDescriptors()})}
+   * @template ${sourceGenerator.getJsDocNames(${classType.Descriptor.getTypeArgumentDescriptors()})}
 #end
 #if (!${method.Descriptor.getTypeParameterTypeDescriptors().isEmpty()})
-   * @template ${statementSourceGenerator.getJsDocNames(${method.Descriptor.getTypeParameterTypeDescriptors()})}
+   * @template ${sourceGenerator.getJsDocNames(${method.Descriptor.getTypeParameterTypeDescriptors()})}
 #end
 #foreach($parameter in $method.Parameters)
-#set ($parameterTypeName = ${statementSourceGenerator.getJsDocName(${parameter.TypeDescriptor})})
-   * @param {$parameterTypeName} ${statementSourceGenerator.toSource($parameter)}
+#set ($parameterTypeName = ${sourceGenerator.getJsDocName(${parameter.TypeDescriptor})})
+   * @param {$parameterTypeName} ${sourceGenerator.toSource($parameter)}
 #end
    * @return {!$jsDocName}
    * @${method.Descriptor.Visibility}
@@ -38,14 +38,14 @@
   /**
    * Initializes instance fields for a particular Java constructor.
 #if (!${method.Descriptor.getTypeParameterTypeDescriptors().isEmpty()})
-   * @template ${statementSourceGenerator.getJsDocNames(${method.Descriptor.getTypeParameterTypeDescriptors()})}
+   * @template ${sourceGenerator.getJsDocNames(${method.Descriptor.getTypeParameterTypeDescriptors()})}
 #end
 #foreach($parameter in $method.Parameters)
-#set ($parameterTypeName = ${statementSourceGenerator.getJsDocName(${parameter.TypeDescriptor})})
-   * @param {$parameterTypeName} ${statementSourceGenerator.toSource($parameter)}
+#set ($parameterTypeName = ${sourceGenerator.getJsDocName(${parameter.TypeDescriptor})})
+   * @param {$parameterTypeName} ${sourceGenerator.toSource($parameter)}
 #end
    * @$ctorVisibility
    */
   ${mangledNameOfCtor}(${parameterList})
-  $statementSourceGenerator.toSource($method.Body)
+  $sourceGenerator.toSource($method.Body)
 #end

@@ -1,15 +1,15 @@
-#set ($utilAlias = ${statementSourceGenerator.toSource($nativeUtilTypeDecriptor)} )
-#set ($classAlias = ${statementSourceGenerator.toSource($javaLangClassTypeDecriptor)} )
+#set ($utilAlias = ${sourceGenerator.toSource($nativeUtilTypeDecriptor)} )
+#set ($classAlias = ${sourceGenerator.toSource($javaLangClassTypeDecriptor)} )
 #set ($superTypeDescriptor = $classType.SuperTypeDescriptor)
 #if ($superTypeDescriptor)
-#set ($superTypeName = ${statementSourceGenerator.toSource($superTypeDescriptor)})
+#set ($superTypeName = ${sourceGenerator.toSource($superTypeDescriptor)})
 #set ($superTypeMangledName = ${ManglingNameUtils.getMangledName($superTypeDescriptor)})
 #set ($extendsClause = "extends " + $superTypeName)
 #else
 #set ($extendsClause = "")
 #end
-#set ($className = ${statementSourceGenerator.toSource($classType.Descriptor)})
-#set ($jsDocName = ${statementSourceGenerator.getJsDocName(${classType.Descriptor}, true)})
+#set ($className = ${sourceGenerator.toSource($classType.Descriptor)})
+#set ($jsDocName = ${sourceGenerator.getJsDocName(${classType.Descriptor}, true)})
 #set ($mangledTypeName = ${ManglingNameUtils.getMangledName($classType.Descriptor)})
 #set ($simpleName = $classType.Descriptor.SimpleName)
 #set ($binaryName = ${GeneratorUtils.getBinaryName($classType.Descriptor)})
@@ -22,13 +22,13 @@
  * Abstract class, do not instantiate.
 #end
 #if (${classType.Descriptor.isParameterizedType()})
- * @template ${statementSourceGenerator.getJsDocNames($classType.Descriptor.getTypeArgumentDescriptors())}
+ * @template ${sourceGenerator.getJsDocNames($classType.Descriptor.getTypeArgumentDescriptors())}
 #end
 #if (${classType.SuperTypeDescriptor.isParameterizedType()})
- * @extends {${statementSourceGenerator.getJsDocName($classType.SuperTypeDescriptor, true)}}
+ * @extends {${sourceGenerator.getJsDocName($classType.SuperTypeDescriptor, true)}}
 #end
 #foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
- * @implements {${statementSourceGenerator.getJsDocName($superInterfaceTypeDescriptor, true)}}
+ * @implements {${sourceGenerator.getJsDocName($superInterfaceTypeDescriptor, true)}}
 #end
  */
 #end
@@ -43,13 +43,13 @@ class $className $extendsClause {
 #end
 #foreach ($field in $classType.getInstanceFields())
 #set ($fieldVisibility = $field.Descriptor.Visibility)
-#set ($fieldType = ${statementSourceGenerator.getJsDocName($field.Descriptor.TypeDescriptor)})
+#set ($fieldType = ${sourceGenerator.getJsDocName($field.Descriptor.TypeDescriptor)})
 #set ($fieldName = ${ManglingNameUtils.getMangledName($field.Descriptor)})
 #set ($initialValue = ${GeneratorUtils.getInitialValue($field)})
     /**
      * @$fieldVisibility {$fieldType}
      */
-    this.$fieldName = ${statementSourceGenerator.toSource($initialValue)};
+    this.$fieldName = ${sourceGenerator.toSource($initialValue)};
 #end
   }
 
@@ -61,14 +61,14 @@ class $className $extendsClause {
 #foreach ($field in $classType.getInstanceFields())
 #if ($field.hasInitializer())
 #if (!$field.isCompileTimeConstant())
-#set ($fieldInitializer = $statementSourceGenerator.toSource($field.Initializer))
+#set ($fieldInitializer = $sourceGenerator.toSource($field.Initializer))
     this.${ManglingNameUtils.getMangledName($field.Descriptor)} = $fieldInitializer;
 #end
 #end
 #end
 #foreach ($instanceInitializerBlock in $classType.InstanceInitializerBlocks)
 #foreach ($statementInInitializer in $instanceInitializerBlock.Statements)
-    $statementSourceGenerator.toSource($statementInInitializer)
+    $sourceGenerator.toSource($statementInInitializer)
 #end
 #end
   }
@@ -173,7 +173,7 @@ ${className}.$class${className}_ = null;
 
 #foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
 #if (!${superInterfaceTypeDescriptor.isNative()})
-${statementSourceGenerator.toSource($superInterfaceTypeDescriptor)}.$markImplementor($className);
+${sourceGenerator.toSource($superInterfaceTypeDescriptor)}.$markImplementor($className);
 
 
 #end

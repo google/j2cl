@@ -1,5 +1,5 @@
 #set ($staticFieldVisibility = $staticField.Descriptor.Visibility)
-#set ($staticFieldType = ${statementSourceGenerator.getJsDocName(${staticField.Descriptor.TypeDescriptor})})
+#set ($staticFieldType = ${sourceGenerator.getJsDocName(${staticField.Descriptor.TypeDescriptor})})
 #set ($indirectStaticFieldName = ${ManglingNameUtils.getMangledName($staticField.Descriptor)})
 #set ($directStaticFieldAccess = ${ManglingNameUtils.getMangledName($staticField.Descriptor, true)})
   /**

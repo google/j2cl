@@ -1,6 +1,6 @@
 #if (${GeneratorUtils.shouldNotEmitCode($method)})
 #else
-#set ($methodHeader = $GeneratorUtils.getMethodHeader($method, $statementSourceGenerator))
+#set ($methodHeader = $GeneratorUtils.getMethodHeader($method, $sourceGenerator))
   /**
 #if ($method.isSynthetic())
    * Synthetic method.
@@ -12,15 +12,15 @@
    * @override
 #end
 #if (!${method.Descriptor.getTypeParameterTypeDescriptors().isEmpty()})
-   * @template ${statementSourceGenerator.getJsDocNames(${method.Descriptor.getTypeParameterTypeDescriptors()})}
+   * @template ${sourceGenerator.getJsDocNames(${method.Descriptor.getTypeParameterTypeDescriptors()})}
 #end
 #foreach ($parameter in $method.Parameters)
-#set ($parameterTypeName = ${statementSourceGenerator.getJsDocName(${parameter.TypeDescriptor})})
-   * @param {$parameterTypeName} $statementSourceGenerator.toSource($parameter)
+#set ($parameterTypeName = ${sourceGenerator.getJsDocName(${parameter.TypeDescriptor})})
+   * @param {$parameterTypeName} $sourceGenerator.toSource($parameter)
 #end
 #set ($returnTypeDescriptor = ${method.Descriptor.getReturnTypeDescriptor()})
 #if (!$GeneratorUtils.isVoid($returnTypeDescriptor))
-   * @return {${statementSourceGenerator.getJsDocName($returnTypeDescriptor)}}
+   * @return {${sourceGenerator.getJsDocName($returnTypeDescriptor)}}
 #end
    * @${method.Descriptor.Visibility}
    */
@@ -29,6 +29,6 @@
 
 #else
   $methodHeader
-  ${statementSourceGenerator.toSource($method.Body)}
+  ${sourceGenerator.toSource($method.Body)}
 #end
 #end

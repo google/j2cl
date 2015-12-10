@@ -14,17 +14,17 @@
     ${superTypeName}.$clinit();
 #end
 #foreach ($typeName in $classType.StaticFieldClinits)
-    ${statementSourceGenerator.toSource($typeName)}.$clinit();
+    ${sourceGenerator.toSource($typeName)}.$clinit();
 #end
 #foreach ($staticField in $classType.getStaticFields())
 #if ($staticField.hasInitializer())
 #if (!$staticField.isCompileTimeConstant())
 #set ($staticFieldName = ${ManglingNameUtils.getMangledName($staticField.Descriptor)})
-    ${className}.${staticFieldName} = ${statementSourceGenerator.toSource(${staticField.Initializer})};
+    ${className}.${staticFieldName} = ${sourceGenerator.toSource(${staticField.Initializer})};
 #end
 #end
 #end
 #foreach ($staticInitializerBlock in $classType.StaticInitializerBlocks)
-#foreach ($statementInInitializer in $staticInitializerBlock.Statements) $statementSourceGenerator.toSource($statementInInitializer) #end
+#foreach ($statementInInitializer in $staticInitializerBlock.Statements) $sourceGenerator.toSource($statementInInitializer) #end
 #end
   }

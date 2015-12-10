@@ -1,6 +1,6 @@
-#set ($utilAlias = ${statementSourceGenerator.toSource($nativeUtilTypeDecriptor)} )
-#set ($classAlias = ${statementSourceGenerator.toSource($javaLangClassTypeDecriptor)} )
-#set ($className = ${statementSourceGenerator.toSource($classType.Descriptor)})
+#set ($utilAlias = ${sourceGenerator.toSource($nativeUtilTypeDecriptor)} )
+#set ($classAlias = ${sourceGenerator.toSource($javaLangClassTypeDecriptor)} )
+#set ($className = ${sourceGenerator.toSource($classType.Descriptor)})
 #set ($mangledTypeName = ${ManglingNameUtils.getMangledName($classType.Descriptor)})
 #set ($simpleName = $classType.Descriptor.SimpleName)
 #set ($binaryName = ${GeneratorUtils.getBinaryName($classType.Descriptor)})
@@ -8,10 +8,10 @@
 /**
  * @interface
 #if (${classType.Descriptor.isParameterizedType()})
- * @template ${statementSourceGenerator.getJsDocNames($classType.Descriptor.getTypeArgumentDescriptors())}
+ * @template ${sourceGenerator.getJsDocNames($classType.Descriptor.getTypeArgumentDescriptors())}
 #end
 #foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
- * @extends {${statementSourceGenerator.getJsDocName($superInterfaceTypeDescriptor, true)}}
+ * @extends {${sourceGenerator.getJsDocName($superInterfaceTypeDescriptor, true)}}
 #end
  */
 class $className {
@@ -26,7 +26,7 @@ class $className {
   static $markImplementor(classConstructor) {
 #foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
 #if (!${superInterfaceTypeDescriptor.isNative()})
-    ${statementSourceGenerator.toSource($superInterfaceTypeDescriptor)}.$markImplementor(classConstructor);
+    ${sourceGenerator.toSource($superInterfaceTypeDescriptor)}.$markImplementor(classConstructor);
 #end
 #end
     /**

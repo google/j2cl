@@ -25,7 +25,7 @@ let $alias = goog.forwardDeclare('${lazyImport.getImplFileName()}');
 #else
 #parse( "com/google/j2cl/generator/JsClass.vm" )
 #end
-#set ($className = ${statementSourceGenerator.toSource($classType.Descriptor)})
+#set ($className = ${sourceGenerator.toSource($classType.Descriptor)})
 #if (${nativeSource})
 
 /**

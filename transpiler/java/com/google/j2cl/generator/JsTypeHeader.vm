@@ -17,7 +17,7 @@ let _$alias = goog.require('${lazyImport.getHeaderFileName()}');
 
 
 // Re-exports the implementation.
-#set ($className = ${statementSourceGenerator.toSource($classType.Descriptor)})
+#set ($className = ${sourceGenerator.toSource($classType.Descriptor)})
 var $className = goog.require('${selfImport.getImplFileName()}');
-#set ($className = ${statementSourceGenerator.toSource($classType.Descriptor)})
+#set ($className = ${sourceGenerator.toSource($classType.Descriptor)})
 exports = $className;

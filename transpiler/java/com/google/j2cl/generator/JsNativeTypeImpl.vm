@@ -1,4 +1,4 @@
-#set ($className = ${statementSourceGenerator.toSource($classType.Descriptor)})
+#set ($className = ${sourceGenerator.toSource($classType.Descriptor)})
 
 class $className {
 #foreach($method in $classType.Methods)
