@@ -30,9 +30,16 @@ public abstract class FieldDescriptor extends Node implements Member {
       Visibility visibility,
       TypeDescriptor enclosingClassTypeDescriptor,
       String fieldName,
-      TypeDescriptor typeDescriptor) {
+      TypeDescriptor typeDescriptor,
+      boolean isJsOverlay) {
     return new AutoValue_FieldDescriptor(
-        isStatic, isRaw, visibility, enclosingClassTypeDescriptor, fieldName, typeDescriptor);
+        isStatic,
+        isRaw,
+        visibility,
+        enclosingClassTypeDescriptor,
+        fieldName,
+        typeDescriptor,
+        isJsOverlay);
   }
 
   /**
@@ -44,7 +51,13 @@ public abstract class FieldDescriptor extends Node implements Member {
       String fieldName,
       TypeDescriptor typeDescriptor) {
     return new AutoValue_FieldDescriptor(
-        isStatic, true, Visibility.PUBLIC, enclosingClassTypeDescriptor, fieldName, typeDescriptor);
+        isStatic,
+        true,
+        Visibility.PUBLIC,
+        enclosingClassTypeDescriptor,
+        fieldName,
+        typeDescriptor,
+        false);
   }
 
   @Override
@@ -64,6 +77,8 @@ public abstract class FieldDescriptor extends Node implements Member {
   public abstract String getFieldName();
 
   public abstract TypeDescriptor getTypeDescriptor();
+
+  public abstract boolean isJsOverlay();
 
   public boolean isFieldDescriptorForCapturedVariables() {
     return getFieldName().startsWith(AstUtils.CAPTURES_PREFIX);

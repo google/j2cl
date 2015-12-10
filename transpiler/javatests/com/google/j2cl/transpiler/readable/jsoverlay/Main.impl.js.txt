@@ -15,6 +15,7 @@ let Main$NativeJsTypeWithOverlay$Overlay = goog.forwardDeclare(
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let Main$NativeJsTypeWithOverlay =
     goog.forwardDeclare('test.foo.Main$NativeJsTypeWithOverlay');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class Main extends Object {
@@ -56,9 +57,14 @@ class Main extends Object {
    * @public
    */
   m_test() {
+    Main$NativeJsTypeWithOverlay$Overlay.$clinit();
     let n = new Main$NativeJsTypeWithOverlay();
     Main$NativeJsTypeWithOverlay$Overlay.callM(n);
     Main$NativeJsTypeWithOverlay$Overlay.fun();
+    Main$NativeJsTypeWithOverlay.n();
+    let a = Main$NativeJsTypeWithOverlay$Overlay.COMPILE_TIME_CONSTANT +
+            Main$NativeJsTypeWithOverlay.nonJsOverlayField;
+    Main$NativeJsTypeWithOverlay$Overlay.staticField = null;
   }
 
   /**
@@ -113,6 +119,7 @@ class Main extends Object {
     Class = goog.module.get('gen.java.lang.Class$impl');
     Main$NativeJsTypeWithOverlay =
         goog.module.get('test.foo.Main$NativeJsTypeWithOverlay');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Object.$clinit();
   }
 }

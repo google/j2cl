@@ -61,6 +61,14 @@ public class FieldBuilder {
     return this;
   }
 
+  public FieldBuilder enclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
+    this.fieldDescriptor =
+        FieldDescriptorBuilder.from(fieldDescriptor)
+            .enclosingClass(enclosingClassTypeDescriptor)
+            .build();
+    return this;
+  }
+
   public Field build() {
     return new Field(
         fieldDescriptor, initializer, compileTimeConstant, isEnumField, capturedVariable);

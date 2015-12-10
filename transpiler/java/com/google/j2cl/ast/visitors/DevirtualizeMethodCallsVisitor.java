@@ -15,15 +15,12 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodCallBuilder;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -49,9 +46,6 @@ public class DevirtualizeMethodCallsVisitor extends AbstractRewriter {
   @Override
   public Node rewriteMethodCall(MethodCall methodCall) {
     MethodDescriptor targetMethodDescriptor = methodCall.getTarget();
-    if (targetMethodDescriptor.isJsOverlay()) {
-      return devirtualizeJsOverlayMethodCall(methodCall);
-    }
     if (targetMethodDescriptor.isStatic()
         || targetMethodDescriptor.isConstructor()
         || targetMethodDescriptor.isJsProperty() // never devirtualize JsProperty method.
@@ -120,25 +114,6 @@ public class DevirtualizeMethodCallsVisitor extends AbstractRewriter {
     }
     return AstUtils.createDevirtualizedMethodCall(
         methodCall, enclosingClassTypeDescriptor, enclosingClassTypeDescriptor);
-  }
-
-  private MethodCall devirtualizeJsOverlayMethodCall(MethodCall methodCall) {
-    Preconditions.checkArgument(methodCall.getTarget().isJsOverlay());
-    RegularTypeDescriptor originalTypeDescriptor =
-        (RegularTypeDescriptor) methodCall.getTarget().getEnclosingClassTypeDescriptor();
-    TypeDescriptor overlayTypeDescriptor =
-        AstUtils.createJsOverlayMethodsImpl(originalTypeDescriptor);
-    if (methodCall.getTarget().isStatic()) {
-      // Devirtualize *static* JsOverlay method.
-      return MethodCallBuilder.from(methodCall)
-          .enclosingClass(overlayTypeDescriptor)
-          .qualifier(overlayTypeDescriptor)
-          .build();
-    } else {
-      // Devirtualize *instance* JsOverlay method.
-      return AstUtils.createDevirtualizedMethodCall(
-          methodCall, overlayTypeDescriptor, originalTypeDescriptor);
-    }
   }
 
   private MethodCall doDevirtualization(MethodCall methodCall) {

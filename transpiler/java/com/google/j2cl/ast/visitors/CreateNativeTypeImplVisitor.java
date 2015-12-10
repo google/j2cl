@@ -18,6 +18,8 @@ package com.google.j2cl.ast.visitors;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.Field;
+import com.google.j2cl.ast.FieldBuilder;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodBuilder;
@@ -37,25 +39,35 @@ public class CreateNativeTypeImplVisitor extends AbstractRewriter {
     compilationUnit.accept(this);
   }
 
-  private TypeDescriptor jsOverlayMethodsImplTypeDescriptor;
+  private TypeDescriptor jsOverlayImplTypeDescriptor;
 
   @Override
   public boolean shouldProcessJavaType(JavaType javaType) {
     if (!javaType.getDescriptor().isNative() || !javaType.containsJsOverlay()) {
       return false;
     }
-    jsOverlayMethodsImplTypeDescriptor =
-        AstUtils.createJsOverlayMethodsImpl((RegularTypeDescriptor) javaType.getDescriptor());
+    jsOverlayImplTypeDescriptor =
+        AstUtils.createJsOverlayImplTypeDescriptor(
+            (RegularTypeDescriptor) javaType.getDescriptor());
     return true;
   }
 
   @Override
+  public Node rewriteField(Field field) {
+    if (!(field.getDescriptor().isStatic() && field.getDescriptor().isJsOverlay())) {
+      return field;
+    }
+    // Replace the enclosingClassTypeDescriptor.
+    return FieldBuilder.from(field).enclosingClass(jsOverlayImplTypeDescriptor).build();
+  }
+
+  @Override
   public Node rewriteMethod(Method method) {
-    if (!method.getDescriptor().isStatic()) {
+    if (!(method.getDescriptor().isStatic() && method.getDescriptor().isJsOverlay())) {
       return method;
     }
     // Replace the enclosingClassTypeDescriptor.
-    return MethodBuilder.from(method).enclosingClass(jsOverlayMethodsImplTypeDescriptor).build();
+    return MethodBuilder.from(method).enclosingClass(jsOverlayImplTypeDescriptor).build();
   }
 
   @Override
@@ -64,11 +76,19 @@ public class CreateNativeTypeImplVisitor extends AbstractRewriter {
         new JavaType(
             JavaType.Kind.CLASS,
             javaType.getVisibility(),
-            AstUtils.createJsOverlayMethodsImpl((RegularTypeDescriptor) javaType.getDescriptor()));
-    // Copy the devirtualized JsOverlay methods.
+            AstUtils.createJsOverlayImplTypeDescriptor(
+                (RegularTypeDescriptor) javaType.getDescriptor()));
+    // Copy static JsOverlay methods. Even instance methods should already be devirtualized to
+    // static.
     for (Method method : javaType.getMethods()) {
-      if (method.getDescriptor().isJsOverlay() && method.getDescriptor().isStatic()) {
+      if (method.getDescriptor().isStatic() && method.getDescriptor().isJsOverlay()) {
         overlayJavaType.addMethod(method);
+      }
+    }
+    // Copy static JsOverlay fields.
+    for (Field field : javaType.getFields()) {
+      if (field.getDescriptor().isStatic() && field.getDescriptor().isJsOverlay()) {
+        overlayJavaType.addField(field);
       }
     }
     return overlayJavaType;

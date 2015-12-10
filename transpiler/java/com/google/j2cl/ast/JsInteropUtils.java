@@ -19,6 +19,7 @@ import com.google.common.base.Preconditions;
 import com.google.j2cl.common.JdtAnnotationUtils;
 
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
+import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
@@ -153,7 +154,7 @@ public class JsInteropUtils {
     return jsTypeAnnotation != null && Modifier.isPublic(variableBinding.getModifiers());
   }
 
-  public static boolean isJsOverlay(IMethodBinding methodBinding) {
+  public static boolean isJsOverlay(IBinding methodBinding) {
     return JdtAnnotationUtils.findAnnotationBindingByName(
             methodBinding.getAnnotations(), JS_OVERLAY_ANNOTATION_NAME)
         != null;

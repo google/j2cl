@@ -10,8 +10,10 @@ goog.module('gen.com.google.j2cl.transpiler.readable.jsoverlay.Main$NativeJsType
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Object = goog.forwardDeclare('gen.java.lang.Object$impl');
 let Main$NativeJsTypeWithOverlay =
     goog.forwardDeclare('test.foo.Main$NativeJsTypeWithOverlay');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 
@@ -36,15 +38,33 @@ class Main$NativeJsTypeWithOverlay$Overlay {
   }
 
   /**
-   * Initialize lazily imported modules.
+   * Runs inline static field initializers.
    * @public
    */
   static $clinit() {
+    Main$NativeJsTypeWithOverlay$Overlay.$clinit = function() {};
     Class = goog.module.get('gen.java.lang.Class$impl');
+    Object = goog.module.get('gen.java.lang.Object$impl');
     Main$NativeJsTypeWithOverlay =
         goog.module.get('test.foo.Main$NativeJsTypeWithOverlay');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Main$NativeJsTypeWithOverlay$Overlay.staticField = Object.$create();
   }
 }
+;
+
+
+/**
+ * @public {number}
+ */
+Main$NativeJsTypeWithOverlay$Overlay.COMPILE_TIME_CONSTANT = 10;
+
+
+/**
+ * @public {*}
+ */
+Main$NativeJsTypeWithOverlay$Overlay.staticField = null;
+
 
 /**
  * Export class.

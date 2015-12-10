@@ -19,6 +19,7 @@ import com.google.j2cl.ast.visitors.ControlStatementFormatter;
 import com.google.j2cl.ast.visitors.CreateDefaultConstructorsVisitor;
 import com.google.j2cl.ast.visitors.CreateDevirtualizedStaticMethodsVisitor;
 import com.google.j2cl.ast.visitors.CreateNativeTypeImplVisitor;
+import com.google.j2cl.ast.visitors.DevirtualizeJsOverlayMemberReferencesVisitor;
 import com.google.j2cl.ast.visitors.DevirtualizeMethodCallsVisitor;
 import com.google.j2cl.ast.visitors.FixAnonymousClassConstructorsVisitor;
 import com.google.j2cl.ast.visitors.FixBooleanOperatorsPass;
@@ -133,6 +134,8 @@ public class J2clTranspiler {
       RewriteSystemGetPropertyVisitor.applyTo(j2clUnit);
       NormalizeArrayLiteralsPass.applyTo(j2clUnit);
       NormalizeStaticMemberQualifiersPass.applyTo(j2clUnit);
+      // Runs after NormalizeStaticMemberQualifiersPass.
+      DevirtualizeJsOverlayMemberReferencesVisitor.applyTo(j2clUnit);
       DevirtualizeMethodCallsVisitor.applyTo(j2clUnit);
       ControlStatementFormatter.applyTo(j2clUnit);
       SplitCompoundLongAssignmentsVisitor.applyTo(j2clUnit);

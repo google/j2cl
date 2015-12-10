@@ -6,17 +6,12 @@ class $className {
 #parse( "com/google/j2cl/generator/JsMethod.vm" )
 #end
 #end
-  /**
-   * Initialize lazily imported modules.
-   * @public
-   */
-static $clinit() {
-#foreach($lazyImport in ${lazyImports})
-#set ($alias = ${lazyImport.Alias})
-    $alias = goog.module.get('${lazyImport.getImplFileName()}');
+#parse( "com/google/j2cl/generator/JsClinit.vm")
+};
+#foreach ($staticField in $classType.getStaticFields())
+#parse( "com/google/j2cl/generator/JsStaticField.vm" )
 #end
-  }
-}
+
 
 /**
  * Export class.

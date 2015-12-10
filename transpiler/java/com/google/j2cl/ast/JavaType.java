@@ -113,10 +113,14 @@ public class JavaType extends Node {
     return false;
   }
 
-  // TODO: support JsOverlay fields.
   public boolean containsJsOverlay() {
     for (Method method : methods) {
       if (method.getDescriptor().isJsOverlay()) {
+        return true;
+      }
+    }
+    for (Field field : fields) {
+      if (field.getDescriptor().isJsOverlay()) {
         return true;
       }
     }

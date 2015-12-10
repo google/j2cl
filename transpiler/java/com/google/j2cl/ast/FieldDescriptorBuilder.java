@@ -25,8 +25,9 @@ public class FieldDescriptorBuilder {
   private TypeDescriptor enclosingClassTypeDescriptor;
   private String fieldName;
   private TypeDescriptor typeDescriptor;
+  private boolean isJsOverlay;
 
-  public FieldDescriptorBuilder from(FieldDescriptor fieldDescriptor) {
+  public static FieldDescriptorBuilder from(FieldDescriptor fieldDescriptor) {
     FieldDescriptorBuilder builder = new FieldDescriptorBuilder();
     builder.isStatic = fieldDescriptor.isStatic();
     builder.isRaw = fieldDescriptor.isRaw();
@@ -34,6 +35,19 @@ public class FieldDescriptorBuilder {
     builder.enclosingClassTypeDescriptor = fieldDescriptor.getEnclosingClassTypeDescriptor();
     builder.fieldName = fieldDescriptor.getFieldName();
     builder.typeDescriptor = fieldDescriptor.getTypeDescriptor();
+    builder.isJsOverlay = fieldDescriptor.isJsOverlay();
+    return builder;
+  }
+
+  public static FieldDescriptorBuilder fromDefault(
+      TypeDescriptor enclosingClassTypeDescriptor,
+      String fieldName,
+      TypeDescriptor typeDescriptor) {
+    FieldDescriptorBuilder builder = new FieldDescriptorBuilder();
+    builder.visibility = Visibility.PUBLIC;
+    builder.enclosingClassTypeDescriptor = enclosingClassTypeDescriptor;
+    builder.fieldName = fieldName;
+    builder.typeDescriptor = typeDescriptor;
     return builder;
   }
 
@@ -42,8 +56,24 @@ public class FieldDescriptorBuilder {
     return this;
   }
 
+  public FieldDescriptorBuilder isStatic(boolean isStatic) {
+    this.isStatic = isStatic;
+    return this;
+  }
+
+  public FieldDescriptorBuilder visibility(Visibility visibility) {
+    this.visibility = visibility;
+    return this;
+  }
+
   public FieldDescriptor build() {
     return FieldDescriptor.create(
-        isStatic, isRaw, visibility, enclosingClassTypeDescriptor, fieldName, typeDescriptor);
+        isStatic,
+        isRaw,
+        visibility,
+        enclosingClassTypeDescriptor,
+        fieldName,
+        typeDescriptor,
+        isJsOverlay);
   }
 }

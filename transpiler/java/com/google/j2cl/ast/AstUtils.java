@@ -237,13 +237,9 @@ public class AstUtils {
    */
   public static FieldDescriptor getFieldDescriptorForEnclosingInstance(
       TypeDescriptor enclosingClassDescriptor, TypeDescriptor fieldTypeDescriptor) {
-    return FieldDescriptor.create(
-        false, // not static
-        false,
-        Visibility.PUBLIC,
-        enclosingClassDescriptor,
-        ENCLOSING_INSTANCE_NAME,
-        fieldTypeDescriptor);
+    return FieldDescriptorBuilder.fromDefault(
+            enclosingClassDescriptor, ENCLOSING_INSTANCE_NAME, fieldTypeDescriptor)
+        .build();
   }
 
   /**
@@ -712,7 +708,8 @@ public class AstUtils {
   /**
    * Returns TypeDescriptor that contains the devirtualized JsOverlay methods of a native type.
    */
-  public static TypeDescriptor createJsOverlayMethodsImpl(RegularTypeDescriptor typeDescriptor) {
+  public static TypeDescriptor createJsOverlayImplTypeDescriptor(
+      RegularTypeDescriptor typeDescriptor) {
     return TypeDescriptor.createSynthetic(
         typeDescriptor.getPackageComponents(),
         Iterables.concat(

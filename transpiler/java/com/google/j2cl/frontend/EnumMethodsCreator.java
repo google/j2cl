@@ -12,6 +12,7 @@ import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldBuilder;
 import com.google.j2cl.ast.FieldDescriptor;
+import com.google.j2cl.ast.FieldDescriptorBuilder;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
@@ -57,13 +58,13 @@ public class EnumMethodsCreator {
   private EnumMethodsCreator(JavaType enumType) {
     this.enumType = enumType;
     this.namesToValuesMapFieldDescriptor =
-        FieldDescriptor.create(
-            true,
-            false,
-            Visibility.PRIVATE,
-            enumType.getDescriptor(),
-            NAMES_TO_VALUES_MAP_FIELD_NAME,
-            TypeDescriptors.get().javaLangObject);
+        FieldDescriptorBuilder.fromDefault(
+                enumType.getDescriptor(),
+                NAMES_TO_VALUES_MAP_FIELD_NAME,
+                TypeDescriptors.get().javaLangObject)
+            .isStatic(true)
+            .visibility(Visibility.PRIVATE)
+            .build();
     this.valuesMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
             .isStatic(true)

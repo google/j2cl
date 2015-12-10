@@ -79,9 +79,7 @@ are copyright and licensed as follows:
 - casttojstype
 - instanceofjstype
 - jsconstructor
-- jsfunction
 - jspackageinfo
-- jsoverlaymethod
 - objectmethodsofnativetype
 - subclassjsnativetype (with constructor)
 
