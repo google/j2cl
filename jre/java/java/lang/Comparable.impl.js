@@ -71,7 +71,7 @@ class Comparable {
     if (!Comparable.$classComparable_) {
       Comparable.$classComparable_ = Class.$createForInterface(
           $Util.$generateId('Comparable'),
-          $Util.$generateId('java.lang.Comparable'), null,
+          $Util.$generateId('java.lang.Comparable'),
           $Util.$generateId('java.lang.Comparable'));
     }
     return Comparable.$classComparable_;

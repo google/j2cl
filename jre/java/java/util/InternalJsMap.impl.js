@@ -146,7 +146,6 @@ class InternalJsMap extends Object {
       InternalJsMap.$classInternalJsMap_ = Class.$createForClass(
           $Util.$generateId('InternalJsMap'),
           $Util.$generateId('java.util.InternalJsMap'),
-          Object.$getClass(),
           $Util.$generateId('java.util.InternalJsMap'));
     }
     return InternalJsMap.$classInternalJsMap_;

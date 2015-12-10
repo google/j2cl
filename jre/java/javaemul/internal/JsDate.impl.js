@@ -320,7 +320,7 @@ class JsDate extends Object {
     if (!JsDate.$classJsDate_) {
       JsDate.$classJsDate_ = Class.$createForClass(
           $Util.$generateId('JsDate'),
-          $Util.$generateId('javaemul.internal.JsDate'), Object.$getClass(),
+          $Util.$generateId('javaemul.internal.JsDate'),
           $Util.$generateId('javaemul.internal.JsDate'));
     }
     return JsDate.$classJsDate_;

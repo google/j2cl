@@ -129,7 +129,6 @@ class $className $extendsClause {
       ${className}.$class${className}_ = $classAlias.$createForEnum(
           $utilAlias.$generateId('$simpleName'),
           $utilAlias.$generateId('$binaryName'),
-          $superTypeName.$getClass(),
           $utilAlias.$generateId('$sourceName'),
           // TODO(rluble): emit here the enum values
           null);
@@ -143,7 +142,6 @@ class $className $extendsClause {
       ${className}.$class${className}_ = $classAlias.$createForClass(
           $utilAlias.$generateId('$simpleName'),
           $utilAlias.$generateId('$binaryName'),
-          $superTypeName.$getClass(),
           $utilAlias.$generateId('$sourceName'));
     }
     return ${className}.$class${className}_;

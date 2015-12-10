@@ -94,7 +94,7 @@ class CharSequence {
     if (!CharSequence.$classCharSequence_) {
       CharSequence.$classCharSequence_ = Class.$createForInterface(
           $Util.$generateId('CharSequence'),
-          $Util.$generateId('java.lang.CharSequence'), null,
+          $Util.$generateId('java.lang.CharSequence'),
           $Util.$generateId('java.lang.CharSequence'));
     }
     return CharSequence.$classCharSequence_;

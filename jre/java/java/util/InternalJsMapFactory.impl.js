@@ -85,7 +85,6 @@ class InternalJsMapFactory extends Object {
       InternalJsMapFactory.$classInternalJsMapFactory_ = Class.$createForClass(
           $Util.$generateId('InternalJsMapFactory'),
           $Util.$generateId('java.util.InternalJsMapFactory'),
-          Object.$getClass(),
           $Util.$generateId('java.util.InternalJsMapFactory'));
     }
     return InternalJsMapFactory.$classInternalJsMapFactory_;

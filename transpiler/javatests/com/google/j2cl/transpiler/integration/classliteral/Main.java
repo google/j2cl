@@ -52,7 +52,6 @@ public class Main {
   public static void testArray() {
     Object o = new Foo[3];
     assertSame(Foo[].class, o.getClass());
-    assertSame(Object.class, o.getClass().getSuperclass());
     assertSame(Foo.class, o.getClass().getComponentType());
     assertSame(Foo[].class, Foo[][].class.getComponentType());
 
@@ -72,7 +71,6 @@ public class Main {
   }
 
   public static void testInterface() {
-    assertSame(null, IFoo.class.getSuperclass());
     assertEquals("com.google.j2cl.transpiler.integration.classliteral.IFoo", IFoo.class.getName());
     assertEquals(
         "com.google.j2cl.transpiler.integration.classliteral.IFoo", IFoo.class.getCanonicalName());
@@ -90,8 +88,6 @@ public class Main {
   public static void testClass() {
     Object o = new Main();
     assertEquals(Main.class, o.getClass());
-
-    assertEquals(Object.class, o.getClass().getSuperclass());
 
     assertEquals("com.google.j2cl.transpiler.integration.classliteral.Main", Main.class.getName());
     assertEquals(
@@ -119,8 +115,6 @@ public class Main {
   }
 
   public static void testPrimitive() {
-    assert null == int.class.getSuperclass();
-
     assertEquals("int", int.class.getName());
     assertEquals("int", int.class.getCanonicalName());
     assertEquals("int", int.class.getSimpleName());

@@ -23,15 +23,14 @@ class Class extends Object {
    * @param {?string} simpleName
    * @param {?string} name
    * @param {Class.Type_} type
-   * @param {Class} superClassLiteral
    * @param {?string} canonicalName
    * @param {Array<Object>} enumConstants
    * @param {Class} arrayElementClassLiteral
    * @param {number} dimensionCount
    * @private
    */
-  constructor(simpleName, name, type, superClassLiteral, canonicalName,
-      enumConstants, arrayElementClassLiteral, dimensionCount) {
+  constructor(simpleName, name, type, canonicalName, enumConstants,
+      arrayElementClassLiteral, dimensionCount) {
     super();
 
     /**
@@ -48,11 +47,6 @@ class Class extends Object {
      * @private {Class.Type_}
      */
     this.$type_ = type;
-
-    /**
-     * @private {Class}
-     */
-    this.$superClassLiteral_ = superClassLiteral;
 
     /**
      * @private {?string}
@@ -170,12 +164,6 @@ class Class extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  m_getSuperclass() { return this.$superClassLiteral_; }
-
-  /**
    * @return {boolean}
    * @public
    */
@@ -222,7 +210,7 @@ class Class extends Object {
     }
 
     arrayClassLiteral = new Class(
-        null, null, Class.Type_.ARRAY, Object.$getClass(),
+        null, null, Class.Type_.ARRAY,
         null, null, this, dimensionCount);
     this.$arrayClassLiteralsByDimensions_[dimensionCount] = arrayClassLiteral;
     return arrayClassLiteral;
@@ -233,15 +221,13 @@ class Class extends Object {
    *
    * @param {string} simpleName
    * @param {string} name
-   * @param {Class} superClassLiteral
    * @param {string=} opt_canonicalName
    * @return {Class}
    * @public
    */
-  static $createForClass(simpleName, name, superClassLiteral,
-      opt_canonicalName) {
+  static $createForClass(simpleName, name, opt_canonicalName) {
     Class.$clinit();
-    return new Class(simpleName, name, Class.Type_.PLAIN, superClassLiteral,
+    return new Class(simpleName, name, Class.Type_.PLAIN,
         opt_canonicalName || null, null, null, 0);
   }
 
@@ -250,16 +236,15 @@ class Class extends Object {
    *
    * @param {string} simpleName
    * @param {string} name
-   * @param {Class} superClassLiteral
    * @param {string} canonicalName
    * @param {Array<Object>} enumConstants
    * @return {Class}
    * @public
    */
-  static $createForEnum(simpleName, name, superClassLiteral, canonicalName,
+  static $createForEnum(simpleName, name, canonicalName,
       enumConstants) {
     Class.$clinit();
-    return new Class(simpleName, name, Class.Type_.ENUM, superClassLiteral,
+    return new Class(simpleName, name, Class.Type_.ENUM,
         canonicalName, enumConstants, null, 0);
   }
 
@@ -268,14 +253,13 @@ class Class extends Object {
    *
    * @param {string} simpleName
    * @param {string} name
-   * @param {Class} superClassLiteral
    * @return {Class}
    * @public
    */
-  static $createForInterface(simpleName, name, superClassLiteral,
+  static $createForInterface(simpleName, name,
       opt_canonicalName) {
     Class.$clinit();
-    return new Class(simpleName, name, Class.Type_.INTERFACE, superClassLiteral,
+    return new Class(simpleName, name, Class.Type_.INTERFACE,
         opt_canonicalName || null, null, null, 0);
   }
 
@@ -286,7 +270,7 @@ class Class extends Object {
    */
   static $createForPrimitive(simpleName) {
     Class.$clinit();
-    return new Class(simpleName, simpleName, Class.Type_.PRIMITIVE, null,
+    return new Class(simpleName, simpleName, Class.Type_.PRIMITIVE,
         simpleName, null, null, 0);
   }
 
@@ -321,7 +305,6 @@ class Class extends Object {
       Class.$classClass_ = Class.$createForClass(
           $Util.$generateId('Class'),
           $Util.$generateId('java.lang.Class'),
-          Object.$getClass(),
           $Util.$generateId('java.lang.Class'));
     }
     return Class.$classClass_;

@@ -105,7 +105,6 @@ class InternalJsIteratorEntry extends Object {
       InternalJsIteratorEntry.$classInternalJsIteratorEntry_ = Class.$createForClass(
           $Util.$generateId('InternalJsIteratorEntry'),
           $Util.$generateId('java.util.InternalJsIteratorEntry'),
-          Object.$getClass(),
           $Util.$generateId('java.util.InternalJsIteratorEntry'));
     }
     return InternalJsIteratorEntry.$classInternalJsIteratorEntry_;

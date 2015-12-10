@@ -101,7 +101,6 @@ class Object {
       Object.$classObject_ = Class.$createForClass(
         $Util.$generateId('Object'),
         $Util.$generateId('java.lang.Object'),
-        null,
         $Util.$generateId('java.lang.Object'));
     }
     return Object.$classObject_;
