@@ -55,13 +55,6 @@ JRE_SRC = [
     ":emul_user",
 ]
 
-# TODO(dankurka): this target should be the java_lib target we hand to JDT for
-# resolving compilation
-java_library(
-    name = "emul",
-    srcs = JRE_SRC,
-)
-
 jsni_to_j2cl_converter(
     name = "convert_jsni_emul",
     srcs = [
