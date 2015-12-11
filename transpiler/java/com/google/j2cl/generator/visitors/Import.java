@@ -81,7 +81,7 @@ public class Import implements Comparable<Import> {
       return "vmbootstrap.primitives.$" + typeDescriptor.getBinaryName();
     }
     if (typeDescriptor.isExtern()) {
-      return "global." + typeDescriptor.getQualifiedName();
+      return "extern." + typeDescriptor.getQualifiedName();
     }
     if (typeDescriptor.isRaw()) {
       return typeDescriptor.getBinaryName();

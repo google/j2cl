@@ -1,7 +1,7 @@
 /**
  * Stub for window.Number.
  */
-goog.module('global.Number');
+goog.module('extern.Number');
 
 
 let Number = window.Number;

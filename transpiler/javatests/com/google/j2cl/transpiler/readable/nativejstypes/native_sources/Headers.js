@@ -1,4 +1,4 @@
-goog.module('global.Headers');
+goog.module('extern.Headers');
 
 let Headers = window.Headers;
 

@@ -1,7 +1,7 @@
 /**
  * Stub for window.String.
  */
-goog.module('global.String');
+goog.module('extern.String');
 
 
 let String = window.String;

@@ -1,7 +1,7 @@
 /**
  * Stub for window.RegExp.
  */
-goog.module('global.RegExp');
+goog.module('extern.RegExp');
 
 
 let RegExp = window.RegExp;

@@ -1,7 +1,7 @@
 /**
  * Stub for window.Array.
  */
-goog.module('global.Array');
+goog.module('extern.Array');
 
 
 let Array = window.Array;
