@@ -5,14 +5,17 @@
 """Regenerates readable JS and build logs."""
 
 
+import os
 import re
 from subprocess import PIPE
 from subprocess import Popen
 
 
 # pylint: disable=global-variable-not-assigned
-TEST_TARGET_PATTERN = ("third_party/java_src/j2cl/transpiler/javatests/"
-                       "com/google/j2cl/transpiler/readable/...:all")
+READABLE_TARGET_PATTERN = ("third_party/java_src/j2cl/transpiler/javatests/"
+                           "com/google/j2cl/transpiler/readable/...:all")
+INTEGRATION_TARGET_PATTERN = ("third_party/java_src/j2cl/transpiler/javatests/"
+                              "com/google/j2cl/transpiler/integration/...:all")
 JAVA_DIR = "third_party/java_src/j2cl/transpiler/javatests"
 EXAMPLES_DIR = JAVA_DIR + "/com/google/j2cl/transpiler/readable/"
 READABLE_TARGET_PATTERN = ("third_party/java_src/j2cl/transpiler/javatests/"
@@ -36,11 +39,14 @@ def replace_pattern(pattern_string, replacement, in_value):
   return re.compile(pattern_string).sub(replacement, in_value)
 
 
-def run_cmd_get_output(cmd_args, include_stderr=False, cwd=None):
+def run_cmd_get_output(cmd_args, include_stderr=False, cwd=None, shell=False):
   """Runs a cmd command and returns output as a string."""
   global SUCCESS_CODE
 
-  process = Popen(cmd_args, stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=cwd)
+  process = (
+      Popen(
+          cmd_args, shell=shell, stdin=PIPE, stdout=PIPE, stderr=PIPE,
+          cwd=cwd))
   results = process.communicate()
   output = results[0]
   if include_stderr:
@@ -69,13 +75,13 @@ def get_js_binary_file_paths():
 
 def get_readable_target_names():
   """Finds and returns the names of readable targets."""
-  global TEST_TARGET_PATTERN
+  global READABLE_TARGET_PATTERN
 
   test_targets = (
       run_cmd_get_output(
           ["blaze", "query",
            "filter('.*:.*_j2cl_transpile', kind(%s, %s))" %
-           ("j2cl_transpile", TEST_TARGET_PATTERN)]).split("\n"))
+           ("j2cl_transpile", READABLE_TARGET_PATTERN)]).split("\n"))
   test_targets = filter(bool, test_targets)
 
   return [
@@ -95,11 +101,17 @@ def blaze_build(target_names):
 
 def replace_transpiled_js(target_names):
   """Copy and reformat and replace with Blaze built JS."""
-  pairs = zip(target_names, ["blaze-bin/%s/%s/%s_j2cl_transpile.js.zip" %
-                             (EXAMPLES_DIR, target_name, target_name)
-                             for target_name in target_names])
 
-  for (target_name, zip_file_path) in pairs:
+  # Copy all the zips in one COPY command so that some of the
+  # network communication is parallelized.
+  if not os.path.isdir("/tmp/js.zip"):
+    os.mkdir("/tmp/js.zip")
+  run_cmd_get_output(
+      ["cp -f blaze-bin/%s**/*.js.zip /tmp/js.zip" % EXAMPLES_DIR],
+      shell=True)
+
+  for target_name in target_names:
+    zip_file_path = "/tmp/js.zip/%s_j2cl_transpile.js.zip" % target_name
     # Special case for readable example java.lang.String
     if "javalang" in target_name:
       extractDir = EXAMPLES_DIR + target_name
@@ -135,6 +147,7 @@ def gather_closure_warnings():
   Deletes just part of Blaze's cache so that it is forced to rebuild just the
   js_binary targets. The resulting build logs are split and saved.
   """
+  global READABLE_TARGET_PATTERN
 
   # Delete the old build.log files before we regenerate them.
   find_command_build_logs = ["find", EXAMPLES_DIR, "-name", "build.log"]
@@ -143,9 +156,11 @@ def gather_closure_warnings():
 
   run_cmd_get_output(["rm", "-fr"] + get_js_binary_file_paths())
 
+  # Build both all readable and integrtion targets in one build command so that
+  # Blaze build parallelize all the work. Saves a lot of time.
   build_logs = run_cmd_get_output(
-      ["blaze", "build", EXAMPLES_DIR + "...", JAVA8_BOOT_CLASS_PATH],
-      include_stderr=True)
+      ["blaze", "build", READABLE_TARGET_PATTERN, INTEGRATION_TARGET_PATTERN,
+       JAVA8_BOOT_CLASS_PATH], include_stderr=True)
   build_logs = build_logs.split("____From Compiling JavaScript ")[1:]
   build_logs = filter(None, build_logs)
   for build_log in build_logs:
@@ -154,7 +169,8 @@ def gather_closure_warnings():
         line for line in build_log.splitlines()
         if not line.startswith("_") and
         "  Compiling" not in line and
-        "Running" not in line])
+        "Running" not in line and
+        "Building" not in line])
 
     # Remove folder path spam.
     build_log = build_log.replace(
@@ -168,6 +184,9 @@ def gather_closure_warnings():
     build_log = build_log.replace(percent_typed_msg, "")
 
     build_log_path = extract_pattern("//(.*?):", build_log) + "/build.log"
+    # Don't write build.log files for integration tests.
+    if "readable/" not in build_log_path:
+      continue
     with open(build_log_path, "w") as build_log_file:
       build_log_file.write(build_log)
 
