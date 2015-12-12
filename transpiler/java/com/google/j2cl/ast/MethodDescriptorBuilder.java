@@ -78,6 +78,11 @@ public class MethodDescriptorBuilder {
     return this;
   }
 
+  public MethodDescriptorBuilder parameterTypeDescriptors(TypeDescriptor... typeDescriptors) {
+    this.parameterTypeDescriptors = ImmutableList.copyOf(typeDescriptors);
+    return this;
+  }
+
   public MethodDescriptorBuilder parameterTypeDescriptors(
       Iterable<TypeDescriptor> parameterTypeDescriptors) {
     this.parameterTypeDescriptors = ImmutableList.copyOf(parameterTypeDescriptors);

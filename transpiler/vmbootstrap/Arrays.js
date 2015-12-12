@@ -16,6 +16,8 @@ let _Integer = goog.require('gen.java.lang.Integer');
 let _NullPointerException = goog.require('gen.java.lang.NullPointerException');
 let _Hashing = goog.require('nativebootstrap.Hashing');
 let _Casts = goog.require('vmbootstrap.Casts');
+let _Exceptions = goog.require('vmbootstrap.Exceptions');
+
 
 
 // Re-exports the implementation.

@@ -18,6 +18,7 @@ let Integer = goog.forwardDeclare('gen.java.lang.Integer$impl');
 let NullPointerException =
     goog.forwardDeclare('gen.java.lang.NullPointerException$impl');
 let Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 
 /**
@@ -354,7 +355,7 @@ class Arrays {
    */
   static $throwArrayIndexOutOfBoundsException() {
     Arrays.$clinit();
-    throw ArrayIndexOutOfBoundsException.$create();
+    throw Exceptions.unwrap(ArrayIndexOutOfBoundsException.$create());
   }
 
   /**
@@ -365,7 +366,7 @@ class Arrays {
    */
   static $throwArrayStoreException() {
     Arrays.$clinit();
-    throw ArrayStoreException.$create();
+    throw Exceptions.unwrap(ArrayStoreException.$create());
   }
 
   /**
@@ -376,7 +377,7 @@ class Arrays {
    */
   static $throwNullPointerException() {
     Arrays.$clinit();
-    throw NullPointerException.$create();
+    throw Exceptions.unwrap(NullPointerException.$create());
   }
 
   /**
@@ -515,6 +516,7 @@ class Arrays {
     NullPointerException =
         goog.module.get('gen.java.lang.NullPointerException$impl');
     Casts = goog.module.get('vmbootstrap.Casts$impl');
+    Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
   }
 };
 

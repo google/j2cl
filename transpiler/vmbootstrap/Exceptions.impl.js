@@ -27,6 +27,7 @@ class Exceptions {
     try {
       resource.m_close();
     } catch (e) {
+      e = Exceptions.wrap(e);
       if (currentException == null) {
         return e;
       }

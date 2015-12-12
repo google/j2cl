@@ -15,6 +15,8 @@ let ClassCastException =
     goog.forwardDeclare('gen.java.lang.ClassCastException$impl');
 let NullPointerException =
     goog.forwardDeclare('gen.java.lang.NullPointerException$impl');
+let Throwable = goog.forwardDeclare('gen.java.lang.Throwable$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 
 class SimpleTryCatchThrow extends Object {
@@ -59,12 +61,13 @@ class SimpleTryCatchThrow extends Object {
    */
   m_main() {
     try {
-      throw ClassCastException.$create();
+      throw $Exceptions.unwrap(ClassCastException.$create());
     } catch (e) {
+      e = $Exceptions.wrap(e);
       if (NullPointerException.$isInstance(e) ||
           ClassCastException.$isInstance(e)) {
       } else {
-        throw e;
+        throw $Exceptions.unwrap(e);
       }
     } finally {
     }
@@ -123,6 +126,8 @@ class SimpleTryCatchThrow extends Object {
         goog.module.get('gen.java.lang.ClassCastException$impl');
     NullPointerException =
         goog.module.get('gen.java.lang.NullPointerException$impl');
+    Throwable = goog.module.get('gen.java.lang.Throwable$impl');
+    $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
     Object.$clinit();
   }
 }

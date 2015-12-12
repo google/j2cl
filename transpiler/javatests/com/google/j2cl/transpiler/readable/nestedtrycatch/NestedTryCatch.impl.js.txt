@@ -12,6 +12,8 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let Exception = goog.forwardDeclare('gen.java.lang.Exception$impl');
+let Throwable = goog.forwardDeclare('gen.java.lang.Throwable$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 
 class NestedTryCatch extends Object {
@@ -55,19 +57,21 @@ class NestedTryCatch extends Object {
    */
   m_main() {
     try {
-      throw Exception.$create();
+      throw $Exceptions.unwrap(Exception.$create());
     } catch (ae) {
+      ae = $Exceptions.wrap(ae);
       if (Exception.$isInstance(ae)) {
         try {
-          throw Exception.$create();
+          throw $Exceptions.unwrap(Exception.$create());
         } catch (ie) {
+          ie = $Exceptions.wrap(ie);
           if (Exception.$isInstance(ie)) {
           } else {
-            throw ie;
+            throw $Exceptions.unwrap(ie);
           }
         }
       } else {
-        throw ae;
+        throw $Exceptions.unwrap(ae);
       }
     }
   }
@@ -120,6 +124,8 @@ class NestedTryCatch extends Object {
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
     Exception = goog.module.get('gen.java.lang.Exception$impl');
+    Throwable = goog.module.get('gen.java.lang.Throwable$impl');
+    $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
     Object.$clinit();
   }
 }

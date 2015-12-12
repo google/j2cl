@@ -4,8 +4,9 @@
 goog.module('vmbootstrap.Asserts$impl');
 
 
-// let AssertionError =
-//     goog.forwardDeclare('gen.java.lang.AssertionError$impl');
+let AssertionError =
+     goog.forwardDeclare('gen.java.lang.AssertionError$impl');
+let Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 
 class Asserts {
@@ -13,12 +14,10 @@ class Asserts {
    * @param {boolean} condition
    */
   static $assert(condition) {
-    // Asserts.$clinit();
+    Asserts.$clinit();
     if (!condition) {
-      // TODO(rluble): replace this with AssertionError. We are throwing Error
-      // here to make debugging possible. Current tooling does not recover a
-      // stack trace if a custom object is thrown.
-      throw Error('Assertion failed.');
+      throw Exceptions.unwrap(AssertionError.
+          $create__java_lang_String('Assertion failed.'));
     }
   }
 
@@ -27,11 +26,10 @@ class Asserts {
    * @param {?string} message
    */
   static $assertWithMessage(condition, message) {
-    // Asserts.$clinit();
+    Asserts.$clinit();
     if (!condition) {
-      // TODO(rluble): replace this with
-      //    throw AssertionError.$create__java_lang_String(message);
-      throw Error(message);
+      throw Exceptions.unwrap(AssertionError.
+          $create__java_lang_String(message));
     }
   }
 
@@ -41,14 +39,15 @@ class Asserts {
   static $enabled() {
     return ASSERTIONS_ENABLED_;
   }
-//
-//  /**
-//   * Runs inline static field initializers.
-//   * @protected
-//   */
-//  static $clinit() {
-//    AssertionError = goog.module.get('gen.java.lang.AssertionError$impl');
-//  }
+
+  /**
+  * Runs inline static field initializers.
+  * @protected
+  */
+  static $clinit() {
+    AssertionError = goog.module.get('gen.java.lang.AssertionError$impl');
+    Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+  }
 };
 
 

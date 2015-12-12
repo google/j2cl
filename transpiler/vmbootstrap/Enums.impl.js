@@ -5,6 +5,7 @@ goog.module('vmbootstrap.Enums$impl');
 
 let IllegalArgumentException =
     goog.forwardDeclare('gen.java.lang.IllegalArgumentException$impl');
+let Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 class Enums {
   /**
@@ -28,11 +29,11 @@ class Enums {
   static getValueFromNameAndMap(name, map) {
     Enums.$clinit();
     if (name == null) {
-      throw IllegalArgumentException.$create();
+      throw Exceptions.unwrap(IllegalArgumentException.$create());
     }
     let enumValue = map[name];
     if (enumValue == undefined) {
-      throw IllegalArgumentException.$create();
+      throw Exceptions.unwrap(IllegalArgumentException.$create());
     }
     return enumValue;
   }
@@ -44,6 +45,7 @@ class Enums {
   static $clinit() {
     IllegalArgumentException =
         goog.module.get('gen.java.lang.IllegalArgumentException$impl');
+    Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
   }
 };
 

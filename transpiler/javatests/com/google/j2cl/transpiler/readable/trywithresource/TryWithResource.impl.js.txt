@@ -70,16 +70,17 @@ class TryWithResource extends Object {
         thing = TryWithResource$ClosableThing.$create();
         let i = 0;
       } catch ($exceptionFromTry) {
+        $exceptionFromTry = $Exceptions.wrap($exceptionFromTry);
         if (Throwable.$isInstance($exceptionFromTry)) {
           $primaryExc = $exceptionFromTry;
-          throw $exceptionFromTry;
+          throw $Exceptions.unwrap($exceptionFromTry);
         } else {
-          throw $exceptionFromTry;
+          throw $Exceptions.unwrap($exceptionFromTry);
         }
       } finally {
         $primaryExc = $Exceptions.safeClose(thing, $primaryExc);
         if ($primaryExc != null) {
-          throw $primaryExc;
+          throw $Exceptions.unwrap($primaryExc);
         }
       }
     }
@@ -100,26 +101,28 @@ class TryWithResource extends Object {
         thing = TryWithResource$ClosableThing.$create();
         thing2 = TryWithResource$ClosableThing.$create();
         let i = 0;
-        throw Exception.$create();
+        throw $Exceptions.unwrap(Exception.$create());
       } catch ($exceptionFromTry) {
+        $exceptionFromTry = $Exceptions.wrap($exceptionFromTry);
         if (Throwable.$isInstance($exceptionFromTry)) {
           $primaryExc = $exceptionFromTry;
-          throw $exceptionFromTry;
+          throw $Exceptions.unwrap($exceptionFromTry);
         } else {
-          throw $exceptionFromTry;
+          throw $Exceptions.unwrap($exceptionFromTry);
         }
       } finally {
         $primaryExc = $Exceptions.safeClose(thing2, $primaryExc);
         $primaryExc = $Exceptions.safeClose(thing, $primaryExc);
         if ($primaryExc != null) {
-          throw $primaryExc;
+          throw $Exceptions.unwrap($primaryExc);
         }
       }
     } catch (e) {
+      e = $Exceptions.wrap(e);
       if (Exception.$isInstance(e)) {
         let b = 10;
       } else {
-        throw e;
+        throw $Exceptions.unwrap(e);
       }
     }
   }

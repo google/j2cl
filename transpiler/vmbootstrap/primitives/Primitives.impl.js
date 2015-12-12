@@ -9,6 +9,7 @@ let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 let ArithmeticException =
     goog.forwardDeclare('gen.java.lang.ArithmeticException$impl');
+let Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 /**
  * Static Primitive helper.
@@ -409,7 +410,7 @@ class Primitives {
    */
   static $throwArithmeticException() {
     Primitives.$clinit();
-    throw ArithmeticException.$create();
+    throw Exceptions.unwrap(ArithmeticException.$create());
   }
 
 
@@ -422,6 +423,7 @@ class Primitives {
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
     ArithmeticException =
         goog.module.get('gen.java.lang.ArithmeticException$impl');
+    Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
   }
 };
 

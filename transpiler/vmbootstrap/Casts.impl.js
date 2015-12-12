@@ -6,6 +6,7 @@ goog.module('vmbootstrap.Casts$impl');
 
 let ClassCastException =
     goog.forwardDeclare('gen.java.lang.ClassCastException$impl');
+let Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 
 class Casts {
@@ -55,7 +56,7 @@ class Casts {
    */
   static throwCastException() {
     Casts.$clinit();
-    throw ClassCastException.$create();
+    throw Exceptions.unwrap(ClassCastException.$create());
   }
 
   /**
@@ -65,6 +66,7 @@ class Casts {
   static $clinit() {
     ClassCastException =
         goog.module.get('gen.java.lang.ClassCastException$impl');
+    Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
   }
 };
 

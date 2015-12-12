@@ -17,6 +17,8 @@ let NullPointerException =
     goog.forwardDeclare('gen.java.lang.NullPointerException$impl');
 let RuntimeException =
     goog.forwardDeclare('gen.java.lang.RuntimeException$impl');
+let Throwable = goog.forwardDeclare('gen.java.lang.Throwable$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 
 class MultipleCatch extends Object {
@@ -60,15 +62,16 @@ class MultipleCatch extends Object {
    */
   m_main() {
     try {
-      throw ClassCastException.$create();
+      throw $Exceptions.unwrap(ClassCastException.$create());
     } catch (e) {
+      e = $Exceptions.wrap(e);
       if (NullPointerException.$isInstance(e) ||
           ClassCastException.$isInstance(e)) {
       } else if (RuntimeException.$isInstance(e)) {
         let r = e;
         r = null;
       } else {
-        throw e;
+        throw $Exceptions.unwrap(e);
       }
     }
   }
@@ -125,6 +128,8 @@ class MultipleCatch extends Object {
     NullPointerException =
         goog.module.get('gen.java.lang.NullPointerException$impl');
     RuntimeException = goog.module.get('gen.java.lang.RuntimeException$impl');
+    Throwable = goog.module.get('gen.java.lang.Throwable$impl');
+    $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
     Object.$clinit();
   }
 }

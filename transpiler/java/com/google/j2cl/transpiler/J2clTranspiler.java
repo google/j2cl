@@ -27,6 +27,7 @@ import com.google.j2cl.ast.visitors.FixSuperCallQualifiersVisitor;
 import com.google.j2cl.ast.visitors.FixTypeVariableInMethodVisitors;
 import com.google.j2cl.ast.visitors.InsertBoxingConversionVisitor;
 import com.google.j2cl.ast.visitors.InsertClassInitStaticMethods;
+import com.google.j2cl.ast.visitors.InsertExceptionConversionVisitor;
 import com.google.j2cl.ast.visitors.InsertExplicitSuperCallsVisitor;
 import com.google.j2cl.ast.visitors.InsertInstanceInitCallsVisitor;
 import com.google.j2cl.ast.visitors.InsertNarrowingPrimitiveConversionVisitor;
@@ -152,6 +153,7 @@ public class J2clTranspiler {
       NormalizeEqualityVisitor.applyTo(j2clUnit);
       NormalizeNativeMethodCalls.applyTo(j2clUnit);
       NormalizeArrayCreationsVisitor.applyTo(j2clUnit);
+      InsertExceptionConversionVisitor.applyTo(j2clUnit);
 
       // Dodge JSCompiler limitations.
       // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
