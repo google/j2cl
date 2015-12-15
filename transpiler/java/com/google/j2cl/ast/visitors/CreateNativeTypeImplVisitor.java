@@ -24,7 +24,6 @@ import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodBuilder;
 import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 
 /**
@@ -43,12 +42,11 @@ public class CreateNativeTypeImplVisitor extends AbstractRewriter {
 
   @Override
   public boolean shouldProcessJavaType(JavaType javaType) {
-    if (!javaType.getDescriptor().isNative() || !javaType.containsJsOverlay()) {
+    if (!javaType.getDescriptor().isNative() || javaType.getDescriptor().isGlobal()) {
       return false;
     }
     jsOverlayImplTypeDescriptor =
-        AstUtils.createJsOverlayImplTypeDescriptor(
-            (RegularTypeDescriptor) javaType.getDescriptor());
+        AstUtils.createJsOverlayImplTypeDescriptor(javaType.getDescriptor());
     return true;
   }
 
@@ -74,10 +72,10 @@ public class CreateNativeTypeImplVisitor extends AbstractRewriter {
   public Node rewriteJavaType(JavaType javaType) {
     JavaType overlayJavaType =
         new JavaType(
-            JavaType.Kind.CLASS,
+            javaType.getKind(),
             javaType.getVisibility(),
-            AstUtils.createJsOverlayImplTypeDescriptor(
-                (RegularTypeDescriptor) javaType.getDescriptor()));
+            AstUtils.createJsOverlayImplTypeDescriptor(javaType.getDescriptor()));
+    overlayJavaType.setNativeTypeDescriptor(javaType.getDescriptor());
     // Copy static JsOverlay methods. Even instance methods should already be devirtualized to
     // static.
     for (Method method : javaType.getMethods()) {

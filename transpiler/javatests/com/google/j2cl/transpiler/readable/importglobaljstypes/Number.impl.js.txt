@@ -7,11 +7,11 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.importglobaljstypes.Number$impl');
 
 
-let $Number = goog.require('extern.Number');
-let $String = goog.require('extern.String');
 let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let $Number = goog.forwardDeclare('extern.Number');
+let $String = goog.forwardDeclare('extern.String');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let String = goog.forwardDeclare('gen.java.lang.String$impl');
 let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
@@ -118,6 +118,8 @@ class Number extends Object {
    * @public
    */
   static $clinit() {
+    $Number = goog.module.get('extern.Number');
+    $String = goog.module.get('extern.String');
     Class = goog.module.get('gen.java.lang.Class$impl');
     String = goog.module.get('gen.java.lang.String$impl');
     $double = goog.module.get('vmbootstrap.primitives.$double$impl');

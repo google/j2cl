@@ -19,6 +19,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
@@ -83,7 +84,10 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
             .build();
     List<Expression> arguments = new ArrayList<>();
     arguments.add(expression);
-    arguments.add(castTypeDescriptor.getRawTypeDescriptor());
+    arguments.add(
+        castTypeDescriptor.isNative()
+            ? AstUtils.createJsOverlayImplTypeDescriptor(castTypeDescriptor)
+            : castTypeDescriptor.getRawTypeDescriptor());
 
     // Casts.to(expr, TypeName);
     MethodCall castMethodCall =

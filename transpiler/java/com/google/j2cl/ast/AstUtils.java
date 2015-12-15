@@ -708,11 +708,14 @@ public class AstUtils {
   /**
    * Returns TypeDescriptor that contains the devirtualized JsOverlay methods of a native type.
    */
-  public static TypeDescriptor createJsOverlayImplTypeDescriptor(
-      RegularTypeDescriptor typeDescriptor) {
+  public static TypeDescriptor createJsOverlayImplTypeDescriptor(TypeDescriptor typeDescriptor) {
+    Preconditions.checkArgument(typeDescriptor.isNative());
+    Preconditions.checkArgument(typeDescriptor instanceof RegularTypeDescriptor);
+    RegularTypeDescriptor nativeTypeDescriptor = (RegularTypeDescriptor) typeDescriptor;
     return TypeDescriptor.createSynthetic(
-        typeDescriptor.getPackageComponents(),
+        nativeTypeDescriptor.getPackageComponents(),
         Iterables.concat(
-            typeDescriptor.getClassComponents(), Arrays.asList(JS_OVERLAY_METHODS_IMPL_SUFFIX)));
+            nativeTypeDescriptor.getClassComponents(),
+            Arrays.asList(JS_OVERLAY_METHODS_IMPL_SUFFIX)));
   }
 }

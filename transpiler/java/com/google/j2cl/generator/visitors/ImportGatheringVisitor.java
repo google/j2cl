@@ -138,8 +138,17 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   private Multiset<String> localNameUses = HashMultiset.create();
 
   private Map<ImportCategory, Set<Import>> doGatherImports(JavaType javaType) {
-    addTypeDescriptor(TypeDescriptors.get().javaLangClass, ImportCategory.LAZY);
-    addTypeDescriptor(BootstrapType.NATIVE_UTIL.getDescriptor(), ImportCategory.EAGER);
+    if (javaType.isJsOverlayImpl()) {
+      // The synthesized JsOverlayImpl type should import the native type eagerly.
+      addTypeDescriptor(javaType.getNativeTypeDescriptor(), ImportCategory.EAGER);
+    } else {
+      // The synthesized JsOverlayImpl type does not need the class literal stuff, thus does not
+      // need the Util and Class native_boostrap types.
+      // TODO: remove this special casing when it becomes unnecessary after the $clinit() method is
+      // synthesized in the AST instead of in the template.
+      addTypeDescriptor(TypeDescriptors.get().javaLangClass, ImportCategory.LAZY);
+      addTypeDescriptor(BootstrapType.NATIVE_UTIL.getDescriptor(), ImportCategory.EAGER);
+    }
 
     // Collect type references.
     javaType.accept(this);
@@ -233,16 +242,15 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     }
 
     // Do not import <global>, which has an empty qualified name.
-    if ("".equals(typeDescriptor.getQualifiedName())) {
+    // TODO: do not import "literal" native type, i.e. a native JS interface with global namespace.
+    if (typeDescriptor.isGlobal()) {
       return;
     }
 
-    // It is safe to always import externs eagerly. And import the original type not the raw type
-    // otherwise it loses the information whether it is a native type.
+    // Import the original native type, not the raw type, otherwise it loses the information that
+    // whether it is a native type.
     if (typeDescriptor.isExtern()) {
-      typeDescriptorsByCategory
-          .get(ImportCategory.EAGER)
-          .add((RegularTypeDescriptor) typeDescriptor);
+      typeDescriptorsByCategory.get(importCategory).add((RegularTypeDescriptor) typeDescriptor);
       return;
     }
 

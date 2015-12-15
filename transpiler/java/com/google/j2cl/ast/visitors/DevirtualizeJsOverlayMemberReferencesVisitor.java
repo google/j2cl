@@ -24,7 +24,6 @@ import com.google.j2cl.ast.FieldDescriptorBuilder;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodCallBuilder;
 import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 
 /**
@@ -46,8 +45,7 @@ public class DevirtualizeJsOverlayMemberReferencesVisitor extends AbstractRewrit
     FieldDescriptor target = fieldAccess.getTarget();
     if (target.isStatic() && target.isJsOverlay()) {
       TypeDescriptor overlayTypeDescriptor =
-          AstUtils.createJsOverlayImplTypeDescriptor(
-              (RegularTypeDescriptor) target.getEnclosingClassTypeDescriptor());
+          AstUtils.createJsOverlayImplTypeDescriptor(target.getEnclosingClassTypeDescriptor());
       return new FieldAccess(
           null, FieldDescriptorBuilder.from(target).enclosingClass(overlayTypeDescriptor).build());
     }
@@ -59,8 +57,8 @@ public class DevirtualizeJsOverlayMemberReferencesVisitor extends AbstractRewrit
     if (!methodCall.getTarget().isJsOverlay()) {
       return methodCall;
     }
-    RegularTypeDescriptor originalTypeDescriptor =
-        (RegularTypeDescriptor) methodCall.getTarget().getEnclosingClassTypeDescriptor();
+    TypeDescriptor originalTypeDescriptor =
+        methodCall.getTarget().getEnclosingClassTypeDescriptor();
     TypeDescriptor overlayTypeDescriptor =
         AstUtils.createJsOverlayImplTypeDescriptor(originalTypeDescriptor);
     if (methodCall.getTarget().isStatic()) {

@@ -17,7 +17,7 @@ let $alias = goog.forwardDeclare('${lazyImport.getImplFileName()}');
 #end
 
 
-#if (${GeneratorUtils.isJsOverlayMethodsImpl($classType)})
+#if (${classType.isJsOverlayImpl()})
 #parse( "com/google/j2cl/generator/JsNativeTypeImpl.vm" )
 #else
 #if (${classType.isInterface()})

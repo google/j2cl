@@ -7,12 +7,9 @@
 goog.module('gen.com.google.j2cl.transpiler.readable.jsoverlay.Main$NativeJsTypeWithOverlay$Overlay$impl');
 
 
-let $Util = goog.require('nativebootstrap.Util$impl');
+let Main$NativeJsTypeWithOverlay = goog.require('test.foo.Main$NativeJsTypeWithOverlay');
 
-let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let Object = goog.forwardDeclare('gen.java.lang.Object$impl');
-let Main$NativeJsTypeWithOverlay =
-    goog.forwardDeclare('test.foo.Main$NativeJsTypeWithOverlay');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -38,15 +35,22 @@ class Main$NativeJsTypeWithOverlay$Overlay {
   }
 
   /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Main$NativeJsTypeWithOverlay;
+  }
+
+
+  /**
    * Runs inline static field initializers.
    * @public
    */
   static $clinit() {
     Main$NativeJsTypeWithOverlay$Overlay.$clinit = function() {};
-    Class = goog.module.get('gen.java.lang.Class$impl');
     Object = goog.module.get('gen.java.lang.Object$impl');
-    Main$NativeJsTypeWithOverlay =
-        goog.module.get('test.foo.Main$NativeJsTypeWithOverlay');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Main$NativeJsTypeWithOverlay$Overlay.staticField = Object.$create();
   }

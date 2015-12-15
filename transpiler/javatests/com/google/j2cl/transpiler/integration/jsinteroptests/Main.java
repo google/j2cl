@@ -8,7 +8,7 @@ public class Main {
     runJsPropertyTest();
     // runJsTypeArrayTest();
     runJsTypeBridgeTest();
-    // runJsTypeTest();
+    runJsTypeTest();
     // runNativeJsTypeTest();
   }
 
@@ -110,23 +110,23 @@ public class Main {
   }
 
   public static void runJsTypeTest() {
-    // JsTypeTest test = new JsTypeTest();
+    JsTypeTest test = new JsTypeTest();
     // test.testAbstractJsTypeAccess();
-    // test.testCasts();
+    test.testCasts();
     // test.testConcreteJsTypeAccess();
     // test.testConcreteJsTypeNoTypeTightenField();
     // test.testConcreteJsTypeSubclassAccess();
     // test.testEnumeration();
     // test.testEnumJsTypeAccess();
     // test.testEnumSubclassEnumeration();
-    // test.testInstanceOf_concreteJsType();
-    // test.testInstanceOf_extendsJsTypeWithProto();
-    // test.testInstanceOf_implementsJsType();
-    // test.testInstanceOf_implementsJsTypeWithPrototype();
-    // test.testInstanceOf_jsoWithNativeButtonProto();
-    // test.testInstanceOf_jsoWithoutProto();
-    // test.testInstanceOf_jsoWithProto();
-    // test.testInstanceOf_withNameSpace();
+    test.testInstanceOf_concreteJsType();
+    test.testInstanceOf_extendsJsTypeWithProto();
+    test.testInstanceOf_implementsJsType();
+    test.testInstanceOf_implementsJsTypeWithPrototype();
+    test.testInstanceOf_jsoWithNativeButtonProto();
+    test.testInstanceOf_jsoWithoutProto();
+    test.testInstanceOf_jsoWithProto();
+    test.testInstanceOf_withNameSpace();
     // test.testJsMethodWithDifferentVisiblities();
     // test.testJsTypeField();
     // test.testNamedBridge();

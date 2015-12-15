@@ -161,21 +161,6 @@ public class ExpressionTransformer {
         }
       }
 
-      private String transformArrayInstanceOfExpression(
-          InstanceOfExpression arrayInstanceOfExpression) {
-        TypeDescriptor checkTypeDescriptor = arrayInstanceOfExpression.getTestTypeDescriptor();
-        Preconditions.checkArgument(checkTypeDescriptor.isArray());
-
-        String leafTypeName = environment.aliasForType(checkTypeDescriptor.getLeafTypeDescriptor());
-        String expressionStr = transform(arrayInstanceOfExpression.getExpression(), environment);
-        return String.format(
-            "%s.$instanceIsOfType(%s, %s, %s)",
-            arraysTypeAlias(),
-            expressionStr,
-            leafTypeName,
-            checkTypeDescriptor.getDimensions());
-      }
-
       @Override
       public String transformArrayLiteral(ArrayLiteral arrayLiteral) {
         String valuesAsString =
@@ -233,14 +218,8 @@ public class ExpressionTransformer {
 
       @Override
       public String transformInstanceOfExpression(InstanceOfExpression expression) {
-        TypeDescriptor checkTypeDescriptor = expression.getTestTypeDescriptor();
-        if (checkTypeDescriptor.isArray()) {
-          return transformArrayInstanceOfExpression(expression);
-        }
-        return String.format(
-            "%s.$isInstance(%s)",
-            environment.aliasForType(checkTypeDescriptor),
-            transform(expression.getExpression(), environment));
+        Preconditions.checkArgument(false, "InstanceOf expression should have been normalized.");
+        return "";
       }
 
       /**

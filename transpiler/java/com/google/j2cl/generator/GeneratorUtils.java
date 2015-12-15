@@ -29,6 +29,7 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
+import com.google.j2cl.generator.visitors.Import;
 
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
@@ -122,6 +123,17 @@ public class GeneratorUtils {
     return !type.getStaticInitializerBlocks().isEmpty();
   }
 
+  /**
+   * JsOverlayImpl type does not need $clinit function if it does not have any lazy imports and it
+   * does not have any JsOverlay members.
+   */
+  public static boolean needClinit(JavaType type, List<Import> lazyImports) {
+    if (!type.isJsOverlayImpl()) {
+      return true;
+    }
+    return !lazyImports.isEmpty() || type.containsJsOverlay();
+  }
+
   private GeneratorUtils() {}
 
   public static String getArrayAssignmentFunctionName(BinaryOperator binaryOperator) {
@@ -179,10 +191,6 @@ public class GeneratorUtils {
         || type.getDescriptor().isParameterizedType()
         || (type.getSuperTypeDescriptor() != null
             && type.getSuperTypeDescriptor().isParameterizedType());
-  }
-
-  public static boolean isJsOverlayMethodsImpl(JavaType javaType) {
-    return javaType.containsJsOverlay();
   }
 
   /**

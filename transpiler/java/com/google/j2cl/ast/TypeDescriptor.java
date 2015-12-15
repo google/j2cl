@@ -230,6 +230,10 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
         .join(Strings.emptyToNull(namespace), Strings.emptyToNull(className));
   }
 
+  public boolean isGlobal() {
+    return "".equals(getQualifiedName());
+  }
+
   public boolean isInstanceMemberClass() {
     return false;
   }

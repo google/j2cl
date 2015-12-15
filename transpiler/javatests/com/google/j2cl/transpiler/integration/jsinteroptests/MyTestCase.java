@@ -24,4 +24,8 @@ public class MyTestCase {
   public void assertFalse(String message, boolean condition) {
     assert !condition : message;
   }
+
+  public void assertNotNull(Object object) {
+    assert object != null;
+  }
 }

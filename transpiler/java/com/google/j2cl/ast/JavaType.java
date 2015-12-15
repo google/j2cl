@@ -62,6 +62,9 @@ public class JavaType extends Node {
   // We use a sorted set so that the order is deterministic.
   private SortedSet<TypeDescriptor> staticFieldClinits = new TreeSet<>();
 
+  // Used to store the original native type for a synthesized JsOverlyImpl type.
+  private TypeDescriptor nativeTypeDescriptor;
+
   public JavaType(Kind kind, Visibility visibility, TypeDescriptor typeDescriptor) {
     this.kind = kind;
     this.visibility = visibility;
@@ -147,6 +150,24 @@ public class JavaType extends Node {
     return this.kind == Kind.INTERFACE;
   }
 
+  public TypeDescriptor getNativeTypeDescriptor() {
+    Preconditions.checkArgument(
+        !(nativeTypeDescriptor != null && superTypeDescriptor != null),
+        "A JsInterop Overlay type should not have super class.");
+    return this.nativeTypeDescriptor;
+  }
+
+  public void setNativeTypeDescriptor(TypeDescriptor nativeTypeDescriptor) {
+    Preconditions.checkArgument(
+        !(nativeTypeDescriptor != null && superTypeDescriptor != null),
+        "A JsInterop Overlay type should not have super class.");
+    this.nativeTypeDescriptor = nativeTypeDescriptor;
+  }
+
+  public boolean isJsOverlayImpl() {
+    return getNativeTypeDescriptor() != null;
+  }
+
   public List<Field> getFields() {
     return fields;
   }
@@ -228,10 +249,16 @@ public class JavaType extends Node {
   }
 
   public TypeDescriptor getSuperTypeDescriptor() {
+    Preconditions.checkArgument(
+        !(nativeTypeDescriptor != null && superTypeDescriptor != null),
+        "A Java type with a SuperClass can't also be a JsInterop Overlay.");
     return superTypeDescriptor;
   }
 
   public void setSuperTypeDescriptor(TypeDescriptor superTypeDescriptor) {
+    Preconditions.checkArgument(
+        !(nativeTypeDescriptor != null && superTypeDescriptor != null),
+        "A Java type with a SuperClass can't also be a JsInterop Overlay.");
     this.superTypeDescriptor = superTypeDescriptor;
   }
 
