@@ -10,10 +10,10 @@ goog.module('gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.
 let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let MyJsType = goog.forwardDeclare(
+    'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType$impl');
 let MyInterface = goog.forwardDeclare(
     'gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyInterface$impl');
-let MyJsType = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType$impl');
 let OtherInterface = goog.forwardDeclare(
     'gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface$impl');
 let SubJsType = goog.forwardDeclare(
@@ -123,10 +123,10 @@ class Main extends Object {
    * @public
    */
   static $clinit() {
+    MyJsType = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType$impl');
     MyInterface = goog.module.get(
         'gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyInterface$impl');
-    MyJsType = goog.module.get(
-        'gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType$impl');
     OtherInterface = goog.module.get(
         'gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface$impl');
     SubJsType = goog.module.get(

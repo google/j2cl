@@ -44,6 +44,7 @@ public class RegularTypeDescriptor extends TypeDescriptor {
 
   // JsInterop properties
   protected boolean isJsFunction;
+  protected boolean isJsType;
   protected boolean isNative;
   protected String jsTypeNamespace;
   protected String jsTypeName;
@@ -58,6 +59,7 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   private void setJsInteropProperties() {
     IAnnotationBinding jsTypeAnnotation = JsInteropUtils.getJsTypeAnnotation(typeBinding);
     if (jsTypeAnnotation != null) {
+      isJsType = true;
       isNative = JsInteropUtils.isNative(jsTypeAnnotation);
       jsTypeNamespace = JsInteropUtils.getJsNamespace(jsTypeAnnotation);
       jsTypeName = JsInteropUtils.getJsName(jsTypeAnnotation);
@@ -262,6 +264,11 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   @Override
   public Node accept(Processor processor) {
     return Visitor_RegularTypeDescriptor.visit(processor, this);
+  }
+
+  @Override
+  public boolean isJsType() {
+    return isJsType;
   }
 
   @Override

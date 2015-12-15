@@ -3,17 +3,17 @@
  *
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode}
  */
-goog.module('${selfImport.getImplFileName()}');
+goog.module('${selfImport.getImplModulePath()}');
 
 
 #foreach($eagerImport in ${eagerImports})
 #set ($alias = ${eagerImport.Alias})
-let $alias = goog.require('${eagerImport.getImplFileName()}');
+let $alias = goog.require('${eagerImport.getImplModulePath()}');
 #end
 
 #foreach($lazyImport in ${lazyImports})
 #set ($alias = ${lazyImport.Alias})
-let $alias = goog.forwardDeclare('${lazyImport.getImplFileName()}');
+let $alias = goog.forwardDeclare('${lazyImport.getImplModulePath()}');
 #end
 
 

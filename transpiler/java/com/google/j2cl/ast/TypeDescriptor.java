@@ -186,6 +186,10 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
     return null;
   }
 
+  public boolean isJsType() {
+    return false;
+  }
+
   public boolean isJsFunctionInterface() {
     return false;
   }

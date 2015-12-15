@@ -1,10 +1,10 @@
 /**
  * @fileoverview Impl transpiled from
- * com.google.j2cl.transpiler.readable.jstypeswithconstructor.JsTypesWithConstructor.
+ * com.google.j2cl.transpiler.readable.jstypewithnamespace.JsTypeWithNamespace.
  *
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode}
  */
-goog.module('com.google.j2cl.transpiler.readable.jstypeswithconstructor.JsTypesWithConstructor$impl');
+goog.module('bar.JsTypeWithNamespace$impl');
 
 
 let Object = goog.require('gen.java.lang.Object$impl');
@@ -13,7 +13,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 
 
-class JsTypesWithConstructor extends Object {
+class JsTypeWithNamespace extends Object {
   /**
    * Defines instance fields.
    * @private
@@ -24,19 +24,19 @@ class JsTypesWithConstructor extends Object {
    * Runs instance field and block initializers.
    * @private
    */
-  $init__com_google_j2cl_transpiler_readable_jstypeswithconstructor_JsTypesWithConstructor() {
+  $init__com_google_j2cl_transpiler_readable_jstypewithnamespace_JsTypeWithNamespace() {
   }
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!JsTypesWithConstructor}
+   * @return {!JsTypeWithNamespace}
    * @public
    */
   static $create() {
-    JsTypesWithConstructor.$clinit();
-    let $instance = new JsTypesWithConstructor;
+    JsTypeWithNamespace.$clinit();
+    let $instance = new JsTypeWithNamespace;
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_jstypeswithconstructor_JsTypesWithConstructor();
+        .$ctor__com_google_j2cl_transpiler_readable_jstypewithnamespace_JsTypeWithNamespace();
     return $instance;
   }
 
@@ -44,9 +44,9 @@ class JsTypesWithConstructor extends Object {
    * Initializes instance fields for a particular Java constructor.
    * @protected
    */
-  $ctor__com_google_j2cl_transpiler_readable_jstypeswithconstructor_JsTypesWithConstructor() {
+  $ctor__com_google_j2cl_transpiler_readable_jstypewithnamespace_JsTypeWithNamespace() {
     this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_jstypeswithconstructor_JsTypesWithConstructor();
+    this.$init__com_google_j2cl_transpiler_readable_jstypewithnamespace_JsTypeWithNamespace();
   }
 
   /**
@@ -55,7 +55,7 @@ class JsTypesWithConstructor extends Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof JsTypesWithConstructor;
+    return instance instanceof JsTypeWithNamespace;
   }
 
   /**
@@ -65,7 +65,7 @@ class JsTypesWithConstructor extends Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, JsTypesWithConstructor);
+    return $Util.$canCastClass(classConstructor, JsTypeWithNamespace);
   }
 
   /**
@@ -73,17 +73,16 @@ class JsTypesWithConstructor extends Object {
    * @public
    */
   static $getClass() {
-    JsTypesWithConstructor.$clinit();
-    if (!JsTypesWithConstructor.$classJsTypesWithConstructor_) {
-      JsTypesWithConstructor
-          .$classJsTypesWithConstructor_ = Class.$createForClass(
-          $Util.$generateId('JsTypesWithConstructor'),
+    JsTypeWithNamespace.$clinit();
+    if (!JsTypeWithNamespace.$classJsTypeWithNamespace_) {
+      JsTypeWithNamespace.$classJsTypeWithNamespace_ = Class.$createForClass(
+          $Util.$generateId('JsTypeWithNamespace'),
           $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jstypeswithconstructor.JsTypesWithConstructor'),
+              'com.google.j2cl.transpiler.readable.jstypewithnamespace.JsTypeWithNamespace'),
           $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jstypeswithconstructor.JsTypesWithConstructor'));
+              'com.google.j2cl.transpiler.readable.jstypewithnamespace.JsTypeWithNamespace'));
     }
-    return JsTypesWithConstructor.$classJsTypesWithConstructor_;
+    return JsTypeWithNamespace.$classJsTypeWithNamespace_;
   }
 
   /**
@@ -91,7 +90,7 @@ class JsTypesWithConstructor extends Object {
    * @return {Class}
    * @public
    */
-  m_getClass() { return JsTypesWithConstructor.$getClass(); }
+  m_getClass() { return JsTypeWithNamespace.$getClass(); }
 
   /**
    * Runs inline static field initializers.
@@ -109,11 +108,11 @@ class JsTypesWithConstructor extends Object {
  * The class literal field.
  * @private {Class}
  */
-JsTypesWithConstructor.$classJsTypesWithConstructor_ = null;
+JsTypeWithNamespace.$classJsTypeWithNamespace_ = null;
 
 
 
 /**
  * Export class.
  */
-exports = JsTypesWithConstructor;
+exports = JsTypeWithNamespace;

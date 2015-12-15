@@ -23,19 +23,19 @@ import com.google.j2cl.ast.TypeDescriptor;
  */
 public class Import implements Comparable<Import> {
 
-  private String implFileName;
-  private String headerFileName;
+  private String implModulePath;
+  private String headerModulePath;
   private String alias;
   private TypeDescriptor typeDescriptor;
 
   public Import(String alias, TypeDescriptor typeDescriptor) {
-    String baseFileName = computeBaseFileName(typeDescriptor);
+    String baseModulePath = computeModulePath(typeDescriptor);
 
-    this.headerFileName = baseFileName;
-    this.implFileName =
+    this.headerModulePath = baseModulePath;
+    this.implModulePath =
         typeDescriptor.isNative() || typeDescriptor.isExtern()
-            ? baseFileName
-            : baseFileName + "$impl";
+            ? baseModulePath
+            : baseModulePath + "$impl";
     this.alias = alias;
     this.typeDescriptor = typeDescriptor;
   }
@@ -48,17 +48,19 @@ public class Import implements Comparable<Import> {
   }
 
   /**
-   * Returns the class file name.
+   * Returns the importable module path for the class impl this may be different from the file path
+   * in the case of JsTypes with a customized namespace.
    */
-  public String getImplFileName() {
-    return implFileName;
+  public String getImplModulePath() {
+    return implModulePath;
   }
 
   /**
-   * Returns the header file name.
+   * Returns the importable module path for the class header this may be different from the file
+   * path in the case of JsTypes with a customized namespace.
    */
-  public String getHeaderFileName() {
-    return headerFileName;
+  public String getHeaderModulePath() {
+    return headerModulePath;
   }
 
   /**
@@ -73,10 +75,10 @@ public class Import implements Comparable<Import> {
    */
   @Override
   public int compareTo(Import that) {
-    return this.implFileName.compareTo(that.implFileName);
+    return this.implModulePath.compareTo(that.implModulePath);
   }
 
-  private static String computeBaseFileName(TypeDescriptor typeDescriptor) {
+  private static String computeModulePath(TypeDescriptor typeDescriptor) {
     if (typeDescriptor.isPrimitive()) {
       return "vmbootstrap.primitives.$" + typeDescriptor.getBinaryName();
     }
@@ -86,7 +88,7 @@ public class Import implements Comparable<Import> {
     if (typeDescriptor.isRaw()) {
       return typeDescriptor.getBinaryName();
     }
-    if (typeDescriptor.isNative()) {
+    if (typeDescriptor.isJsType()) {
       return typeDescriptor.getQualifiedName();
     }
     return "gen." + typeDescriptor.getBinaryName();

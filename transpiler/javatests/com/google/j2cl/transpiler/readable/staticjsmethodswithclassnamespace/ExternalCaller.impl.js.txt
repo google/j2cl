@@ -1,0 +1,126 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.ExternalCaller.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.ExternalCaller$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let StaticJsMethodsWithClassNamespace =
+    goog.forwardDeclare('woo.StaticJsMethodsWithClassNamespace$impl');
+
+
+class ExternalCaller extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_staticjsmethodswithclassnamespace_ExternalCaller() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!ExternalCaller}
+   * @public
+   */
+  static $create() {
+    ExternalCaller.$clinit();
+    let $instance = new ExternalCaller;
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_staticjsmethodswithclassnamespace_ExternalCaller();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_staticjsmethodswithclassnamespace_ExternalCaller() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_staticjsmethodswithclassnamespace_ExternalCaller();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_test() { StaticJsMethodsWithClassNamespace.replacedName(); }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof ExternalCaller; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, ExternalCaller);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    ExternalCaller.$clinit();
+    if (!ExternalCaller.$classExternalCaller_) {
+      ExternalCaller.$classExternalCaller_ = Class.$createForClass(
+          $Util.$generateId('ExternalCaller'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.ExternalCaller'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.ExternalCaller'));
+    }
+    return ExternalCaller.$classExternalCaller_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return ExternalCaller.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    StaticJsMethodsWithClassNamespace =
+        goog.module.get('woo.StaticJsMethodsWithClassNamespace$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+ExternalCaller.$classExternalCaller_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = ExternalCaller;

@@ -8,7 +8,7 @@
 #end
 #foreach($lazyImport in ${lazyImports})
 #set ($alias = ${lazyImport.Alias})
-    $alias = goog.module.get('${lazyImport.getImplFileName()}');
+    $alias = goog.module.get('${lazyImport.getImplModulePath()}');
 #end
 #if (${GeneratorUtils.needCallSuperClinit($classType)})
     ${superTypeName}.$clinit();
