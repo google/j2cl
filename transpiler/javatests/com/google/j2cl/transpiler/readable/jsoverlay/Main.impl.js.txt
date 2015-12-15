@@ -59,8 +59,10 @@ class Main extends Object {
   m_test() {
     Main$NativeJsTypeWithOverlay$Overlay.$clinit();
     let n = new Main$NativeJsTypeWithOverlay();
-    Main$NativeJsTypeWithOverlay$Overlay.callM(n);
-    Main$NativeJsTypeWithOverlay$Overlay.fun();
+    Main$NativeJsTypeWithOverlay$Overlay
+        .m_callM__com_google_j2cl_transpiler_readable_jsoverlay_Main$NativeJsTypeWithOverlay(
+            n);
+    Main$NativeJsTypeWithOverlay$Overlay.m_fun();
     Main$NativeJsTypeWithOverlay.n();
     let a = Main$NativeJsTypeWithOverlay$Overlay.COMPILE_TIME_CONSTANT +
             Main$NativeJsTypeWithOverlay.nonJsOverlayField;

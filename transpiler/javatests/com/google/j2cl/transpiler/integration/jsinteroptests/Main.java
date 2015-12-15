@@ -9,7 +9,7 @@ public class Main {
     // runJsTypeArrayTest();
     runJsTypeBridgeTest();
     runJsTypeTest();
-    // runNativeJsTypeTest();
+    runNativeJsTypeTest();
   }
 
   public static void runJsExportTest() {
@@ -130,7 +130,6 @@ public class Main {
     // test.testJsMethodWithDifferentVisiblities();
     // test.testJsTypeField();
     // test.testNamedBridge();
-    // test.testNativeJsTypeWithOverlay();
     // test.testNativeMethodOverrideNoTypeTightenParam();
     // test.testRevealedOverrideJsType();
     // test.testSingleJavaConcreteInterface();
@@ -138,8 +137,10 @@ public class Main {
   }
 
   public static void runNativeJsTypeTest() {
-    // NativeJsTypeTest test = new NativeJsTypeTest();
+    NativeJsTypeTest test = new NativeJsTypeTest();
     // test.testClassLiterals();
     // test.testToString();
+    test.testNativeJsTypeWithOverlay();
+    test.testNativeJsTypeWithStaticIntializer();
   }
 }
