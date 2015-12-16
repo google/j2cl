@@ -28,4 +28,8 @@ public class MyTestCase {
   public void assertNotNull(Object object) {
     assert object != null;
   }
+
+  public void assertSame(Object expected, Object actual) {
+    assert expected == actual;
+  }
 }

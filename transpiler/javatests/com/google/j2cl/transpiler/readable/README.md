@@ -80,6 +80,7 @@ are copyright and licensed as follows:
 - jsfunctioncast
 - jsfunctioninstanceof
 - jspackageinfo
+- jstypeenum
 - objectmethodsofnativetype
 - subclassjsnativetype (with constructor)
 

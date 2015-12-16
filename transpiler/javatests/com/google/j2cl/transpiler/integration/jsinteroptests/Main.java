@@ -111,11 +111,11 @@ public class Main {
 
   public static void runJsTypeTest() {
     JsTypeTest test = new JsTypeTest();
-    // test.testAbstractJsTypeAccess();
+    test.testAbstractJsTypeAccess();
     test.testCasts();
-    // test.testConcreteJsTypeAccess();
-    // test.testConcreteJsTypeNoTypeTightenField();
-    // test.testConcreteJsTypeSubclassAccess();
+    test.testConcreteJsTypeAccess();
+    test.testConcreteJsTypeNoTypeTightenField();
+    test.testConcreteJsTypeSubclassAccess();
     // test.testEnumeration();
     // test.testEnumJsTypeAccess();
     // test.testEnumSubclassEnumeration();
@@ -127,12 +127,12 @@ public class Main {
     test.testInstanceOf_jsoWithoutProto();
     test.testInstanceOf_jsoWithProto();
     test.testInstanceOf_withNameSpace();
-    // test.testJsMethodWithDifferentVisiblities();
-    // test.testJsTypeField();
-    // test.testNamedBridge();
-    // test.testNativeMethodOverrideNoTypeTightenParam();
-    // test.testRevealedOverrideJsType();
-    // test.testSingleJavaConcreteInterface();
+    test.testJsMethodWithDifferentVisiblities();
+    test.testJsTypeField();
+    test.testNamedBridge();
+    test.testNativeMethodOverrideNoTypeTightenParam();
+    test.testRevealedOverrideJsType();
+    test.testSingleJavaConcreteInterface();
     // test.testSingleJavaConcreteJsFunction();
   }
 
