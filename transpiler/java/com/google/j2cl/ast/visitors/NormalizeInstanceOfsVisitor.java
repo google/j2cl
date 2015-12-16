@@ -80,6 +80,14 @@ public class NormalizeInstanceOfsVisitor extends AbstractRewriter {
     TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
     Preconditions.checkArgument(checkTypeDescriptor.isArray());
 
+    if (checkTypeDescriptor.getLeafTypeDescriptor().isNative()) {
+      return rewriteNativeJsArrayInstanceOfExpression(instanceOfExpression);
+    }
+    return rewriteJavaArrayInstanceOfExpression(instanceOfExpression);
+  }
+
+  private Node rewriteJavaArrayInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
+    TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
     MethodDescriptor isInstanceMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
             .isRaw(true)
@@ -99,6 +107,30 @@ public class NormalizeInstanceOfsVisitor extends AbstractRewriter {
     arguments.add(
         new NumberLiteral(TypeDescriptors.get().primitiveInt, checkTypeDescriptor.getDimensions()));
     // Arrays.$instanceIsOfType(expr, leafType, dimensions);
+    return MethodCall.createRegularMethodCall(null, isInstanceMethodDescriptor, arguments);
+  }
+
+  /**
+   * Instanceof check on array with leaf type that is a native JsType is equivalent to check if the
+   * instance is a raw JS array (i.e. Array.isArray(instance)).
+   */
+  private Node rewriteNativeJsArrayInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
+    TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
+    Preconditions.checkArgument(checkTypeDescriptor.isArray());
+    Preconditions.checkArgument(checkTypeDescriptor.getLeafTypeDescriptor().isNative());
+
+    MethodDescriptor isInstanceMethodDescriptor =
+        MethodDescriptorBuilder.fromDefault()
+            .isRaw(true)
+            .isStatic(true)
+            .enclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
+            .methodName("$instanceIsOfNative")
+            .parameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))
+            .returnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
+            .build();
+    List<Expression> arguments = new ArrayList<>();
+    arguments.add(instanceOfExpression.getExpression());
+    // Arrays.$isArray(expr);
     return MethodCall.createRegularMethodCall(null, isInstanceMethodDescriptor, arguments);
   }
 }

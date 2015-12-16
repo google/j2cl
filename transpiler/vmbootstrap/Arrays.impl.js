@@ -264,6 +264,15 @@ class Arrays {
   }
 
   /**
+   * Returns whether the given instance is a raw JS array.
+   *
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $instanceIsOfNative(instance) { return Array.isArray(instance); }
+
+  /**
    * Casts the provided instance to the provided array type.
    * <p>
    * If the cast is invalid then an exception will be thrown otherwise the
@@ -300,6 +309,25 @@ class Arrays {
         Arrays.$instanceIsOfTypeInternal(
             instance, requiredLeafType, requiredLeafTypeIsAssignableFrom,
             requiredDimensionCount));
+  }
+
+  /**
+   * Casts the provided instance to a raw JS array type. It is valid if the
+   * instance is a JS array.
+   * <p>
+   * If the cast is invalid then an exception will be thrown otherwise the
+   * provided instance is returned.
+   *
+   * @param {*} instance
+   * @return {*}
+   * @public
+   */
+  static $castToNative(instance) {
+    Arrays.$clinit();
+    if (instance == null) {
+      return instance;
+    }
+    return Casts.check(instance, Array.isArray(instance));
   }
 
   /**

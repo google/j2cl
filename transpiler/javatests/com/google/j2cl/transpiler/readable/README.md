@@ -76,9 +76,9 @@ are copyright and licensed as follows:
 
 ## JsInterop TODOs
 - catchjsexception
-- casttojstypearray
-- instanceofjstypearray
 - jsconstructor
+- jsfunctioncast
+- jsfunctioninstanceof
 - jspackageinfo
 - objectmethodsofnativetype
 - subclassjsnativetype (with constructor)

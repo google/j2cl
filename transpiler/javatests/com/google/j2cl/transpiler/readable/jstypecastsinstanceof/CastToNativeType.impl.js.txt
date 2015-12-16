@@ -15,6 +15,7 @@ let CastToNativeType$NativeJsType$Overlay = goog.forwardDeclare(
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let CastToNativeType$NativeJsType =
     goog.forwardDeclare('test.foo.CastToNativeType$NativeJsType');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 
@@ -64,6 +65,9 @@ class CastToNativeType extends Object {
     let b = /**@type {CastToNativeType$NativeJsType} */ (
         $Casts.to(a, CastToNativeType$NativeJsType$Overlay));
     let c = CastToNativeType$NativeJsType$Overlay.$isInstance(a);
+    let d = /**@type {Array<CastToNativeType$NativeJsType>} */ (
+        $Arrays.$castToNative(a));
+    c = $Arrays.$instanceIsOfNative(a);
   }
 
   /**
@@ -117,6 +121,7 @@ class CastToNativeType extends Object {
     Class = goog.module.get('gen.java.lang.Class$impl');
     CastToNativeType$NativeJsType =
         goog.module.get('test.foo.CastToNativeType$NativeJsType');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
     Object.$clinit();

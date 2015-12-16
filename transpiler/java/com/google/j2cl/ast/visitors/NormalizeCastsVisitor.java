@@ -101,7 +101,14 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
         castExpression.getCastTypeDescriptor() instanceof ArrayTypeDescriptor);
     ArrayTypeDescriptor arrayCastTypeDescriptor =
         (ArrayTypeDescriptor) castExpression.getCastTypeDescriptor();
+    if (arrayCastTypeDescriptor.getLeafTypeDescriptor().isNative()) {
+      return rewriteNativeJsArrayCastExpression(castExpression);
+    }
+    return rewriteJavaArrayCastExpression(castExpression);
+  }
 
+  private Node rewriteJavaArrayCastExpression(CastExpression castExpression) {
+    TypeDescriptor arrayCastTypeDescriptor = castExpression.getCastTypeDescriptor();
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
             .isRaw(true)
@@ -127,5 +134,28 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
         MethodCall.createRegularMethodCall(null, castToMethodDescriptor, arguments);
     // /**@type {}*/ ()
     return CastExpression.createRaw(castMethodCall, arrayCastTypeDescriptor);
+  }
+
+  private Node rewriteNativeJsArrayCastExpression(CastExpression castExpression) {
+    TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
+    Preconditions.checkArgument(castTypeDescriptor.isArray());
+    Preconditions.checkArgument(castTypeDescriptor.getLeafTypeDescriptor().isNative());
+    MethodDescriptor castToMethodDescriptor =
+        MethodDescriptorBuilder.fromDefault()
+            .isRaw(true)
+            .isStatic(true)
+            .enclosingClassTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
+            .methodName("$castToNative")
+            .parameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))
+            .returnTypeDescriptor(TypeDescriptors.get().javaLangObject)
+            .build();
+    List<Expression> arguments = new ArrayList<>();
+    arguments.add(castExpression.getExpression());
+
+    // Arrays.$castToNative(expr);
+    MethodCall castMethodCall =
+        MethodCall.createRegularMethodCall(null, castToMethodDescriptor, arguments);
+    // /**@type {}*/ ()
+    return CastExpression.createRaw(castMethodCall, castTypeDescriptor);
   }
 }

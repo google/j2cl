@@ -10,5 +10,7 @@ public class CastToNativeType {
     Object a = new NativeJsType();
     NativeJsType b = (NativeJsType) a;
     boolean c = a instanceof NativeJsType;
+    NativeJsType d[] = (NativeJsType[]) a;
+    c = a instanceof NativeJsType[];
   }
 }

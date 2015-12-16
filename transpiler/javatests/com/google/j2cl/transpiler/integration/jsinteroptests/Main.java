@@ -6,7 +6,7 @@ public class Main {
     runJsFunctionTest();
     runJsMethodTest();
     runJsPropertyTest();
-    // runJsTypeArrayTest();
+    runJsTypeArrayTest();
     runJsTypeBridgeTest();
     runJsTypeTest();
     runNativeJsTypeTest();
@@ -92,16 +92,16 @@ public class Main {
   }
 
   public static void runJsTypeArrayTest() {
-    // JsTypeArrayTest test = new JsTypeArrayTest();
-    // test.testJsType3DimArray_castFromNativeWithACall();
-    // test.testJsTypeArray_asAField();
-    // test.testJsTypeArray_asAParam();
-    // test.testJsTypeArray_instanceOf();
-    // test.testJsTypeArray_objectArrayInterchangeability();
-    // test.testJsTypeArray_returnFromNative();
-    // test.testJsTypeArray_returnFromNativeWithACall();
-    // test.testObjectArray_castFromNative();
-    // test.testObjectArray_instanceOf();
+    JsTypeArrayTest test = new JsTypeArrayTest();
+    test.testJsType3DimArray_castFromNativeWithACall();
+    test.testJsTypeArray_asAField();
+    test.testJsTypeArray_asAParam();
+    test.testJsTypeArray_instanceOf();
+    test.testJsTypeArray_objectArrayInterchangeability();
+    test.testJsTypeArray_returnFromNative();
+    test.testJsTypeArray_returnFromNativeWithACall();
+    test.testObjectArray_castFromNative();
+    test.testObjectArray_instanceOf();
   }
 
   public static void runJsTypeBridgeTest() {
