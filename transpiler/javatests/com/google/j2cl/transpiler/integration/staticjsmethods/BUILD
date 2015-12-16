@@ -8,6 +8,11 @@ load(
     "integration_test",
 )
 
+js_library(
+    name = "Bar",
+    srcs = ["foo.Bar.js"],
+)
+
 # Creates targets
 # blaze build :optimized_js
 # blaze test :compiled_test
@@ -15,6 +20,7 @@ load(
 integration_test(
     name = "staticjsmethods",
     srcs = glob(["*.java"]),
+    js_deps = [":Bar"],
     native_srcs = ["Main.native.js"],
     native_srcs_pkg = "com/google/j2cl/transpiler/integration/staticjsmethods",
     deps = ["//jre/java:gwt-jsinterop-annotations"],

@@ -12,5 +12,11 @@ load(
 readable_example(
     name = "staticjsmethods",
     srcs = glob(["*.java"]),
+    js_deps = [":native_sources"],
     deps = ["//jre/java:gwt-jsinterop-annotations"],
+)
+
+js_library(
+    name = "native_sources",
+    srcs = glob(["native_sources/*.js"]),
 )

@@ -29,11 +29,13 @@ public class SyntheticRegularTypeDescriptor extends RegularTypeDescriptor {
       Iterable<String> packageComponents,
       Iterable<String> classComponents,
       boolean isRaw,
+      boolean isNative,
       Iterable<TypeDescriptor> typeArgumentDescriptors) {
     super(null);
     this.packageComponents = ImmutableList.copyOf(packageComponents);
     this.classComponents = ImmutableList.copyOf(classComponents);
     this.isRaw = isRaw;
+    this.isNative = isNative;
     this.typeArgumentDescriptors = ImmutableList.copyOf(typeArgumentDescriptors);
   }
 

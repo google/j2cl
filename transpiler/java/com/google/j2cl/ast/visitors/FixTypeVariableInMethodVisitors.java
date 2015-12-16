@@ -69,7 +69,8 @@ public class FixTypeVariableInMethodVisitors extends AbstractRewriter {
       return TypeDescriptor.create(
           regularTypeDescriptor.getPackageComponents(),
           regularTypeDescriptor.getClassComponents(),
-          false,
+          regularTypeDescriptor.isRaw(),
+          regularTypeDescriptor.isNative(),
           Lists.transform(
               regularTypeDescriptor.getTypeArgumentDescriptors(),
               new Function<TypeDescriptor, TypeDescriptor>() {

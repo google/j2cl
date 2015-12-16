@@ -60,6 +60,7 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
       Iterable<String> packageComponents,
       Iterable<String> classComponents,
       boolean isRaw,
+      boolean isNative,
       Iterable<TypeDescriptor> typeArgumentDescriptors) {
     Preconditions.checkArgument(!Iterables.getLast(classComponents).contains("<"));
     return getInterner()
@@ -68,32 +69,40 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
                 ImmutableList.copyOf(packageComponents),
                 ImmutableList.copyOf(classComponents),
                 isRaw,
+                isNative,
                 ImmutableList.copyOf(typeArgumentDescriptors)));
   }
 
   public static TypeDescriptor createSynthetic(
       Iterable<String> packageComponents, Iterable<String> classComponents) {
-    return create(packageComponents, classComponents, false, ImmutableList.<TypeDescriptor>of());
+    return create(
+        packageComponents, classComponents, false, false, ImmutableList.<TypeDescriptor>of());
   }
 
-  public static TypeDescriptor createRaw(Iterable<String> nameSpaceComponents, String className) {
+  public static TypeDescriptor createRaw(
+      Iterable<String> nameSpaceComponents, String className, boolean isNative) {
     return create(
-        nameSpaceComponents, Arrays.asList(className), true, ImmutableList.<TypeDescriptor>of());
+        nameSpaceComponents,
+        Arrays.asList(className),
+        true,
+        isNative,
+        ImmutableList.<TypeDescriptor>of());
   }
 
   /**
-   * Creates a raw TypeDescriptor from a qualified name.
+   * Creates a native TypeDescriptor from a qualified name.
    */
-  public static TypeDescriptor createRaw(String qualifiedName) {
+  public static TypeDescriptor createNative(String qualifiedName) {
+    boolean isNative = true;
     if (JsInteropUtils.isGlobal(qualifiedName)) {
-      return TypeDescriptor.createRaw(Arrays.asList(JsInteropUtils.JS_GLOBAL), "");
+      return TypeDescriptor.createRaw(Arrays.asList(JsInteropUtils.JS_GLOBAL), "", isNative);
     }
-    List<String> nameComponents = Splitter.on("\\.").splitToList(qualifiedName);
+    List<String> nameComponents = Splitter.on('.').splitToList(qualifiedName);
     int size = nameComponents.size();
     // Fill in JS_GLOBAL as the namespace if the namespace is empty.
     List<String> namespaceComponents =
         size == 1 ? Arrays.asList(JsInteropUtils.JS_GLOBAL) : nameComponents.subList(0, size - 1);
-    return TypeDescriptor.createRaw(namespaceComponents, nameComponents.get(size - 1));
+    return TypeDescriptor.createRaw(namespaceComponents, nameComponents.get(size - 1), isNative);
   }
 
   static Interner<TypeDescriptor> getInterner() {

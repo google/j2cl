@@ -58,7 +58,7 @@ public class NormalizeNativeMethodCalls extends AbstractRewriter {
     MethodDescriptor newMethodDescriptor =
         MethodDescriptorBuilder.from(methodDescriptor)
             .enclosingClassTypeDescriptor(
-                TypeDescriptor.createRaw(methodDescriptor.getJsNamespace()))
+                TypeDescriptor.createNative(methodDescriptor.getJsNamespace()))
             .build();
     Expression qualifier =
         methodCall.getQualifier() instanceof TypeDescriptor ? null : methodCall.getQualifier();

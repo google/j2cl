@@ -268,7 +268,8 @@ public class TypeDescriptors {
     private TypeDescriptor typeDescriptor;
 
     private BootstrapType(List<String> pathComponents, String name) {
-      this.typeDescriptor = TypeDescriptor.createRaw(pathComponents, name);
+      boolean isNative = false;
+      this.typeDescriptor = TypeDescriptor.createRaw(pathComponents, name, isNative);
     }
 
     public TypeDescriptor getDescriptor() {

@@ -17,6 +17,9 @@ public class StaticJsMethods {
   @JsMethod(namespace = GLOBAL, name = "isFinite")
   public static native boolean f4(double a);
 
+  @JsMethod(namespace = "foo.Bar", name = "baz")
+  public static native boolean f5();
+
   public void test() {
     StaticJsMethods.f1(1);
     f1(1);
@@ -26,5 +29,7 @@ public class StaticJsMethods {
     f3(1.1);
     StaticJsMethods.f4(1.1);
     f4(1.1);
+    StaticJsMethods.f5();
+    f5();
   }
 }

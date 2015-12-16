@@ -11,6 +11,7 @@ let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Math = goog.forwardDeclare('extern.Math');
+let Bar = goog.forwardDeclare('foo.Bar');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
@@ -79,6 +80,8 @@ class StaticJsMethods extends Object {
     $Math.floor(1.1);
     isFinite(1.1);
     isFinite(1.1);
+    Bar.baz();
+    Bar.baz();
   }
 
   /**
@@ -128,6 +131,7 @@ class StaticJsMethods extends Object {
    */
   static $clinit() {
     $Math = goog.module.get('extern.Math');
+    Bar = goog.module.get('foo.Bar');
     Class = goog.module.get('gen.java.lang.Class$impl');
     $double = goog.module.get('vmbootstrap.primitives.$double$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');

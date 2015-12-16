@@ -36,11 +36,16 @@ public class Main {
     assert isFinite(1.0);
   }
 
+  public static void testDeepNamespaceNativeJsMethod() {
+    assert fooBarAbs(-1) == 1;
+  }
+
   public static void main(String... args) {
     testJsMethodsCalledByJava();
     testJsMethodsCalledByJS();
     testJsMethodsCalledByOtherClass();
     testNativeJsMethod();
+    testDeepNamespaceNativeJsMethod();
   }
 
   public static native int callF1(int a);
@@ -55,4 +60,7 @@ public class Main {
 
   @JsMethod(namespace = GLOBAL, name = "isFinite")
   public static native boolean isFinite(double d);
+
+  @JsMethod(namespace = "foo.Bar", name = "abs")
+  public static native double fooBarAbs(double d);
 }
