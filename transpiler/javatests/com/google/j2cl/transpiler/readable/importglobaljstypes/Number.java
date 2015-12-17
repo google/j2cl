@@ -32,4 +32,11 @@ public class Number {
   public static String fromCharCode(Object array) {
     return getFromCharCodeFunction().apply(null, array);
   }
+
+  @JsType(isNative = true, namespace = GLOBAL)
+  public static interface MyLiteralType {}
+
+  public MyLiteralType testJsDocForLiteralType(MyLiteralType a) {
+    return a;
+  }
 }

@@ -204,6 +204,12 @@ public class JsDocNameUtils {
           "(%s|Function)", ExpressionTransformer.transform(typeDescriptor, environment));
 
     }
+
+    // Literal native js types do not refer to any concrete types.
+    if (typeDescriptor.isGloballNativeInterface()) {
+      return "*";
+    }
+
     return ExpressionTransformer.transform(typeDescriptor, environment);
   }
 

@@ -262,6 +262,11 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  public boolean isInterface() {
+    return typeBinding != null && typeBinding.isInterface();
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_RegularTypeDescriptor.visit(processor, this);
   }

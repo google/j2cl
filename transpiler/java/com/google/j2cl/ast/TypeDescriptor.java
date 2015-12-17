@@ -234,6 +234,16 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
     return isSynthesizedGlobalType || isNativeJsType;
   }
 
+  /**
+   * Returns true if it is a native JsType interface with namespace GLOBAL.
+   *
+   *<p>This is used for the workaround that not generating goog.require for "literal" native types
+   * so that users do not need to provide goog.module for it.
+   */
+  public boolean isGloballNativeInterface() {
+    return isNative() && isInterface() && JsInteropUtils.isGlobal(getJsTypeNamespace());
+  }
+
   public String getQualifiedName() {
     String namespace = getJsTypeNamespace() != null ? getJsTypeNamespace() : getPackageName();
     namespace = JsInteropUtils.isGlobal(namespace) ? "" : namespace;
@@ -252,6 +262,10 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
   }
 
   public boolean isInstanceNestedClass() {
+    return false;
+  }
+
+  public boolean isInterface() {
     return false;
   }
 
