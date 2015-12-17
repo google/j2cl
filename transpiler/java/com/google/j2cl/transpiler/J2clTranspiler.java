@@ -49,6 +49,7 @@ import com.google.j2cl.ast.visitors.NormalizeStaticMemberQualifiersPass;
 import com.google.j2cl.ast.visitors.NormalizeTryWithResourceVisitor;
 import com.google.j2cl.ast.visitors.RemoveUnusedMultiExpressionReturnValues;
 import com.google.j2cl.ast.visitors.RewriteSystemGetPropertyVisitor;
+import com.google.j2cl.ast.visitors.SourceInfoPrinter;
 import com.google.j2cl.ast.visitors.SplitCompoundLongAssignmentsVisitor;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCountsVisitor;
 import com.google.j2cl.errors.Errors;
@@ -114,6 +115,10 @@ public class J2clTranspiler {
   private void normalizeUnits(List<CompilationUnit> j2clUnits) {
     for (CompilationUnit j2clUnit : j2clUnits) {
       verifyUnit(j2clUnit);
+
+      if (options.getShouldOutputSouceInfo()) {
+        SourceInfoPrinter.applyTo(j2clUnit);
+      }
 
       // Class structure normalizations.
       // Default constructors and explicit super calls should be synthesized first.

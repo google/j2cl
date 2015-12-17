@@ -85,6 +85,8 @@ import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableDeclarationStatement;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.WhileStatement;
+import com.google.j2cl.sourcemaps.FilePositionUtils;
+import com.google.j2cl.sourcemaps.SourceInfo;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.eclipse.jdt.core.dom.ASTNode;
@@ -127,6 +129,7 @@ public class CompilationUnitBuilder {
 
     private String currentSourceFile;
     private CompilationUnit j2clCompilationUnit;
+    private FilePositionUtils filePositionReader;
 
     private void pushType(JavaType type) {
       Preconditions.checkArgument(type.getDescriptor() instanceof RegularTypeDescriptor);
@@ -145,6 +148,7 @@ public class CompilationUnitBuilder {
       currentSourceFile = sourceFilePath;
       String packageName = JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit);
       j2clCompilationUnit = new CompilationUnit(sourceFilePath, packageName);
+      filePositionReader = new FilePositionUtils(jdtCompilationUnit);
       for (Object object : jdtCompilationUnit.types()) {
         AbstractTypeDeclaration abstractTypeDeclaration = (AbstractTypeDeclaration) object;
         convert(abstractTypeDeclaration);
@@ -684,7 +688,7 @@ public class CompilationUnitBuilder {
           falseExpression);
     }
 
-    private Statement convert(org.eclipse.jdt.core.dom.Statement statement) {
+    private Statement convertStatement(org.eclipse.jdt.core.dom.Statement statement) {
       switch (statement.getNodeType()) {
         case ASTNode.ASSERT_STATEMENT:
           return convert((org.eclipse.jdt.core.dom.AssertStatement) statement);
@@ -737,6 +741,15 @@ public class CompilationUnitBuilder {
                   + " file triggering this: "
                   + currentSourceFile);
       }
+    }
+
+    private Statement convert(org.eclipse.jdt.core.dom.Statement statement) {
+      SourceInfo position = filePositionReader.filePositionForNode(statement);
+      Statement j2clStatement = convertStatement(statement);
+      if (j2clStatement != null) {
+        j2clStatement.setSourceInfo(position);
+      }
+      return j2clStatement;
     }
 
     private LabeledStatement convert(org.eclipse.jdt.core.dom.LabeledStatement statement) {

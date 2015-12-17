@@ -16,12 +16,27 @@
 package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.processors.Visitable;
+import com.google.j2cl.sourcemaps.SourceInfo;
+import com.google.j2cl.sourcemaps.TracksSourceInfo;
 
 /**
  * A base class for Statement.
  */
 @Visitable
-public abstract class Statement extends Node {
+public abstract class Statement extends Node implements TracksSourceInfo {
+  // unknown by default.
+  private SourceInfo javaSourceInfo = SourceInfo.UNKNOWN_SOURCE_INFO;
+
+  @Override
+  public SourceInfo getSourceInfo() {
+    return javaSourceInfo;
+  }
+
+  @Override
+  public void setSourceInfo(SourceInfo sourceInfo) {
+    javaSourceInfo = sourceInfo;
+  }
+
   @Override
   public Node accept(Processor processor) {
     return Visitor_Statement.visit(processor, this);

@@ -57,7 +57,7 @@ public class FrontendFlags {
     usage = "Specify where to find input source files"
   )
   protected String sourcepath = "";
-  
+
   @Option(
     name = "-nativesourcezip",
     metaVar = "<file>",
@@ -99,6 +99,13 @@ public class FrontendFlags {
 
   @Option(name = "-h", aliases = "-help", usage = "print this message")
   protected boolean help = false;
+
+  @Option(
+    name = "-outputSourceInfo",
+    usage =
+        "Specify that the transpiler should output the source location for ast nodes. (for testing)"
+  )
+  protected boolean shouldOutputSourceInfo = false;
 
   private final Errors errors;
 

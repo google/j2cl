@@ -56,6 +56,7 @@ public class FrontendOptions {
   private List<String> sourceFilePaths;
   private List<String> omitSourceFilePaths;
   private FileSystem outputFileSystem;
+  private boolean shouldOutputSourceInfo;
 
   private static final Set<String> VALID_JAVA_VERSIONS =
       ImmutableSet.of("1.8", "1.7", "1.6", "1.5");
@@ -82,6 +83,7 @@ public class FrontendOptions {
     setOmitSourceFiles(flags.omitfiles);
     setSourceVersion(flags.source);
     setEncoding(flags.encoding);
+    setShouldOutputSouceInfo(flags.shouldOutputSourceInfo);
   }
 
   public List<String> getClasspathEntries() {
@@ -259,6 +261,14 @@ public class FrontendOptions {
     if (checkSourceFiles(omitSourceFilePaths)) {
       this.omitSourceFilePaths = omitSourceFilePaths;
     }
+  }
+
+  public boolean getShouldOutputSouceInfo() {
+    return shouldOutputSourceInfo;
+  }
+
+  public void setShouldOutputSouceInfo(boolean shouldOutputSourceInfo) {
+    this.shouldOutputSourceInfo = shouldOutputSourceInfo;
   }
 
   private boolean checkSourceFiles(List<String> sourceFiles) {
