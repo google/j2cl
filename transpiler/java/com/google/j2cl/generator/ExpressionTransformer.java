@@ -500,7 +500,7 @@ public class ExpressionTransformer {
             expression.getTarget().getEnclosingClassTypeDescriptor();
         String enclosingClassName = transform(targetTypeDescriptor, environment);
         return String.format(
-            "%s.$makeLambdaFunction(%s.prototype.%s, %s, %s.prototype.$copy)",
+            "%s.$makeLambdaFunction(%s.prototype.%s, %s, %s.$copy)",
             transform(TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor(), environment),
             enclosingClassName,
             ManglingNameUtils.getMangledName(targetTypeDescriptor.getJsFunctionMethodDescriptor()),

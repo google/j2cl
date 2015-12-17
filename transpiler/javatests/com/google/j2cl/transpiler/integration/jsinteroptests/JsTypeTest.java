@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.integration.jsinteroptests;
 
 import static jsinterop.annotations.JsPackage.GLOBAL;
 
+import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -25,12 +26,6 @@ import jsinterop.annotations.JsType;
 import java.util.Iterator;
 
 public class JsTypeTest extends MyTestCase {
-  @JsType(isNative = true, namespace = "test.foo")
-  static interface ElementLikeNativeInterface {
-    @JsProperty
-    String getTagName();
-  }
-
   @JsType(isNative = true, namespace = "test.foo")
   static interface MyNativeJsTypeInterface {}
 
@@ -554,27 +549,27 @@ public class JsTypeTest extends MyTestCase {
     assertSame(3, ((InterfaceWithSingleJavaConcrete) nativeObjectImplementingM()).m());
   }
 
-  //  @JsFunction
-  //  interface JsFunctionInterface {
-  //    int m();
-  //  }
-  //
-  //  static class JavaConcreteJsFunction implements JsFunctionInterface {
-  //    public int m() {
-  //      return 5;
-  //    }
-  //  }
-  //
-  //  @JsMethod
-  //  private static native Object nativeJsFunction();
-  //
-  //  public void testSingleJavaConcreteJsFunction() {
-  //    // Create a couple of instances and use the objects in some way to avoid complete pruning
-  //    // of JavaConcrete
-  //    assertTrue(new JavaConcreteJsFunction() != new JavaConcreteJsFunction());
-  //    assertSame(5, new JavaConcreteJsFunction().m());
-  //    assertSame(3, ((JsFunctionInterface) nativeJsFunction()).m());
-  //  }
+  @JsFunction
+  interface JsFunctionInterface {
+    int m();
+  }
+
+  static class JavaConcreteJsFunction implements JsFunctionInterface {
+    public int m() {
+      return 5;
+    }
+  }
+
+  @JsMethod
+  private static native Object nativeJsFunction();
+
+  public void testSingleJavaConcreteJsFunction() {
+    // Create a couple of instances and use the objects in some way to avoid complete pruning
+    // of JavaConcrete
+    assertTrue(new JavaConcreteJsFunction() != new JavaConcreteJsFunction());
+    assertSame(5, new JavaConcreteJsFunction().m());
+    assertSame(3, ((JsFunctionInterface) nativeJsFunction()).m());
+  }
 
   @JsType
   abstract static class SomeAbstractClass {

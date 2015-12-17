@@ -36,4 +36,8 @@ public class MyTestCase {
   public static void assertSame(Object expected, Object actual) {
     assert expected == actual;
   }
+
+  public static void fail(String message) {
+    assert false : message;
+  }
 }

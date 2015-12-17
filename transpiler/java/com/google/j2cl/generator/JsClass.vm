@@ -90,7 +90,14 @@ class $className $extendsClause {
    * @return {boolean}
    * @public
    */
+#if (${classType.Descriptor.isJsFunctionImplementation()})
+  static $isInstance(instance) {
+    return instance != null &&
+           instance.$is__$mangledTypeName;
+  }
+#else
   static $isInstance(instance) { return instance instanceof $className; }
+#end
 #end
 
   /**
@@ -105,15 +112,18 @@ class $className $extendsClause {
 #if (${classType.Descriptor.isJsFunctionImplementation()})
 
   /**
-   * Copies the fields from {code from}.
+   * Copies the fields from {@code from} to {@code to}.
    * @param {${className}} from
+   * @param {*} to
    * @public
    */
-  $copy(from) {
+  static $copy(from, to) {
 #foreach ($field in $classType.getInstanceFields())
 #set ($fieldName = ${ManglingNameUtils.getMangledName($field.Descriptor)})
-    this.$fieldName = from.$fieldName;
+    to.$fieldName = from.$fieldName;
 #end
+    // Marks the object is an instance of this class.
+    to.$is__$mangledTypeName = true;
     // TODO: may copy Objects methods (equals, hashCode, etc. ) as well.
   }
 #end

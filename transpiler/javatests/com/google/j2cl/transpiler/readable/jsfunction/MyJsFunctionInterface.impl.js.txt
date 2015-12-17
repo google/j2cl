@@ -46,8 +46,9 @@ class MyJsFunctionInterface {
    */
   static $isInstance(instance) {
     return instance != null &&
-           instance
-               .$implements__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionInterface;
+           (typeof instance == "function" ||
+            instance
+                .$implements__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionInterface);
   }
 
   /**

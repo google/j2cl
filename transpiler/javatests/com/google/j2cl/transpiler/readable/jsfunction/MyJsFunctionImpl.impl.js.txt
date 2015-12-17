@@ -110,7 +110,11 @@ class MyJsFunctionImpl extends Object {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof MyJsFunctionImpl; }
+  static $isInstance(instance) {
+    return instance != null &&
+           instance
+               .$is__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl;
+  }
 
   /**
    * Returns whether the provided class is or extends this class.
@@ -123,13 +127,17 @@ class MyJsFunctionImpl extends Object {
   }
 
   /**
-   * Copies the fields from {code from}.
+   * Copies the fields from {@code from} to {@code to}.
    * @param {MyJsFunctionImpl} from
+   * @param {*} to
    * @public
    */
-  $copy(from) {
-    this.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl =
+  static $copy(from, to) {
+    to.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl =
         from.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl;
+    // Marks the object is an instance of this class.
+    to.$is__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl =
+        true;
     // TODO: may copy Objects methods (equals, hashCode, etc. ) as well.
   }
 

@@ -46,13 +46,13 @@ public class Main {
 
   public static void runJsFunctionTest() {
     JsFunctionTest test = new JsFunctionTest();
-    // test.testCast_crossCastJavaInstance();
-    // test.testCast_fromJsFunction();
-    // test.testCast_fromJsObject();
-    // test.testCast_inJava();
-    // test.testInstanceOf_javaInstance();
-    // test.testInstanceOf_jsFunction();
-    // test.testInstanceOf_jsObject();
+    test.testCast_crossCastJavaInstance();
+    test.testCast_fromJsFunction();
+    test.testCast_fromJsObject();
+    test.testCast_inJava();
+    test.testInstanceOf_javaInstance();
+    test.testInstanceOf_jsFunction();
+    test.testInstanceOf_jsObject();
     test.testJsFunctionAccess();
     test.testJsFunctionBasic_java();
     test.testJsFunctionBasic_javaAndJs();
@@ -135,7 +135,7 @@ public class Main {
     test.testNativeMethodOverrideNoTypeTightenParam();
     test.testRevealedOverrideJsType();
     test.testSingleJavaConcreteInterface();
-    // test.testSingleJavaConcreteJsFunction();
+    test.testSingleJavaConcreteJsFunction();
   }
 
   public static void runNativeJsTypeTest() {

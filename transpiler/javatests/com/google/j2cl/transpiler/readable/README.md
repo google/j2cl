@@ -77,8 +77,6 @@ are copyright and licensed as follows:
 ## JsInterop TODOs
 - catchjsexception
 - jsconstructor
-- jsfunctioncast
-- jsfunctioninstanceof
 - jsignore
 - jspackageinfo
 - jstype (with deep namespace)

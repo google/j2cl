@@ -47,7 +47,7 @@ class Util {
     var lambda = function() {
       return jsFunctionMethod.apply(lambda, arguments);
     };
-    copyMethod.call(lambda, instance);
+    copyMethod(instance, lambda);
     return lambda;
   }
 };

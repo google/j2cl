@@ -43,8 +43,14 @@ class $className {
    * @public
    */
   static $isInstance(instance) {
+#if (${classType.Descriptor.isJsFunctionInterface()})
+    return instance != null &&
+           (typeof instance == "function" ||
+               instance.$implements__$mangledTypeName);
+#else
     return instance != null &&
            instance.$implements__$mangledTypeName;
+#end
   }
 
   /**
