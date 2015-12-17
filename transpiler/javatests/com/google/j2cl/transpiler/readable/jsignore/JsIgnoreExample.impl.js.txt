@@ -1,0 +1,148 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class JsIgnoreExample extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!JsIgnoreExample}
+   * @public
+   */
+  static $create() {
+    JsIgnoreExample.$clinit();
+    let $instance = new JsIgnoreExample;
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static exportedFunction() { JsIgnoreExample.$clinit(); }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static m_notExportedFunction() { JsIgnoreExample.$clinit(); }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof JsIgnoreExample; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, JsIgnoreExample);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    JsIgnoreExample.$clinit();
+    if (!JsIgnoreExample.$classJsIgnoreExample_) {
+      JsIgnoreExample.$classJsIgnoreExample_ = Class.$createForClass(
+          $Util.$generateId('JsIgnoreExample'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample'));
+    }
+    return JsIgnoreExample.$classJsIgnoreExample_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return JsIgnoreExample.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    JsIgnoreExample.$clinit = function() {};
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+    JsIgnoreExample.exportedField = 10;
+    JsIgnoreExample
+        .f_notExportedField__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample =
+        20;
+  }
+}
+;
+
+
+/**
+ * @public {number}
+ */
+JsIgnoreExample.exportedField = 0;
+
+
+/**
+ * @public {number}
+ */
+JsIgnoreExample
+    .f_notExportedField__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample =
+    0;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+JsIgnoreExample.$classJsIgnoreExample_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = JsIgnoreExample;

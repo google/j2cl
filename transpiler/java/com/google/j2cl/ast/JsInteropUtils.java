@@ -30,6 +30,7 @@ import org.eclipse.jdt.core.dom.Modifier;
  */
 public class JsInteropUtils {
   private static final String JS_FUNCTION_ANNOTATION_NAME = "jsinterop.annotations.JsFunction";
+  private static final String JS_IGNORE_ANNOTATION_NAME = "jsinterop.annotations.JsIgnore";
   private static final String JS_METHOD_ANNOTATION_NAME = "jsinterop.annotations.JsMethod";
   private static final String JS_OVERLAY_ANNOTATION_NAME = "jsinterop.annotations.JsOverlay";
   private static final String JS_PROPERTY_ANNOTATION_NAME = "jsinterop.annotations.JsProperty";
@@ -45,6 +46,11 @@ public class JsInteropUtils {
         typeBinding.getAnnotations(), JS_FUNCTION_ANNOTATION_NAME);
   }
 
+  public static IAnnotationBinding getJsIgnoreAnnotation(IBinding methodBinding) {
+    return JdtAnnotationUtils.findAnnotationBindingByName(
+        methodBinding.getAnnotations(), JS_IGNORE_ANNOTATION_NAME);
+  }
+
   public static IAnnotationBinding getJsTypeAnnotation(ITypeBinding typeBinding) {
     return JdtAnnotationUtils.findAnnotationBindingByName(
         typeBinding.getAnnotations(), JS_TYPE_ANNOTATION_NAME);
@@ -55,7 +61,7 @@ public class JsInteropUtils {
         methodBinding.getAnnotations(), JS_METHOD_ANNOTATION_NAME);
   }
 
-  public static IAnnotationBinding getJsPropertyAnnotation(IMethodBinding methodBinding) {
+  public static IAnnotationBinding getJsPropertyAnnotation(IBinding methodBinding) {
     return JdtAnnotationUtils.findAnnotationBindingByName(
         methodBinding.getAnnotations(), JS_PROPERTY_ANNOTATION_NAME);
   }
@@ -81,6 +87,11 @@ public class JsInteropUtils {
    * there is no "name" is specified in the annotation, just returns null for JsName.
    */
   public static JsInfo getJsInfo(IMethodBinding methodBinding) {
+    // check @JsIgnore annotation
+    IAnnotationBinding jsIgnoreAnnotation = getJsIgnoreAnnotation(methodBinding);
+    if (jsIgnoreAnnotation != null) {
+      return JsInfo.NONE;
+    }
     boolean isJsOverlay = isJsOverlay(methodBinding);
     // check @JsProperty annotation
     IAnnotationBinding jsPropertyAnnotation = getJsPropertyAnnotation(methodBinding);
@@ -124,9 +135,15 @@ public class JsInteropUtils {
   }
 
   /**
-   * Returns true if the method is a directly annotated as some flavor of JsMember.
+   * Returns true if the method is a a JsMember because of immediate conditions (either it is
+   * directly annotated or it's enclosing class is annotated).
    */
   public static boolean isJsMember(IMethodBinding methodBinding) {
+    // check @JsIgnore annotation
+    IAnnotationBinding jsIgnoreAnnotation = getJsIgnoreAnnotation(methodBinding);
+    if (jsIgnoreAnnotation != null) {
+      return false;
+    }
     // check @JsProperty annotation
     IAnnotationBinding jsPropertyAnnotation = getJsPropertyAnnotation(methodBinding);
     if (jsPropertyAnnotation != null) {
@@ -144,12 +161,17 @@ public class JsInteropUtils {
 
   public static boolean isJsProperty(IVariableBinding variableBinding) {
     Preconditions.checkArgument(variableBinding.isField());
-    IAnnotationBinding jsPropertyAnnotation =
-        JdtAnnotationUtils.findAnnotationBindingByName(
-            variableBinding.getAnnotations(), JS_PROPERTY_ANNOTATION_NAME);
+    // check @JsIgnore annotation
+    IAnnotationBinding jsIgnoreAnnotation = getJsIgnoreAnnotation(variableBinding);
+    if (jsIgnoreAnnotation != null) {
+      return false;
+    }
+    // check @JsProperty annotation
+    IAnnotationBinding jsPropertyAnnotation = getJsPropertyAnnotation(variableBinding);
     if (jsPropertyAnnotation != null) {
       return true;
     }
+    // check @JsType annotation.
     IAnnotationBinding jsTypeAnnotation = getJsTypeAnnotation(variableBinding.getDeclaringClass());
     return jsTypeAnnotation != null && Modifier.isPublic(variableBinding.getModifiers());
   }
