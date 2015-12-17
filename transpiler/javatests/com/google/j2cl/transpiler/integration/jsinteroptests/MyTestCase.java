@@ -1,35 +1,39 @@
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
 public class MyTestCase {
-  public void assertEquals(Object expected, Object actual) {
+  public static void assertEquals(Object expected, Object actual) {
     assert (expected.equals(actual));
   }
 
-  public void assertEquals(int expected, int actual) {
+  public static void assertEquals(int expected, int actual) {
     assert (expected == actual);
   }
 
-  public void assertTrue(boolean condition) {
+  public static void assertTrue(boolean condition) {
     assert condition;
   }
 
-  public void assertFalse(boolean condition) {
+  public static void assertFalse(boolean condition) {
     assert !condition;
   }
 
-  public void assertTrue(String message, boolean condition) {
+  public static void assertTrue(String message, boolean condition) {
     assert condition : message;
   }
 
-  public void assertFalse(String message, boolean condition) {
+  public static void assertFalse(String message, boolean condition) {
     assert !condition : message;
   }
 
-  public void assertNotNull(Object object) {
+  public static void assertNotNull(Object object) {
     assert object != null;
   }
 
-  public void assertSame(Object expected, Object actual) {
+  public static void assertNull(Object object) {
+    assert object == null;
+  }
+
+  public static void assertSame(Object expected, Object actual) {
     assert expected == actual;
   }
 }

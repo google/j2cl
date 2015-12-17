@@ -79,10 +79,15 @@ are copyright and licensed as follows:
 - jsconstructor
 - jsfunctioncast
 - jsfunctioninstanceof
+- jsignore
 - jspackageinfo
+- jstype (with deep namespace)
+- jstype (cascade to inner classes)
 - jstypeenum
 - objectmethodsofnativetype
 - subclassjsnativetype (with constructor)
+- AddClassInitAtCallSite support
+- importing shallow namespaces that aren't externs
 
 ## Feature Complete Java 8 TODOs
 - interfacedefaultmethod

@@ -2,7 +2,7 @@ package com.google.j2cl.transpiler.integration.jsinteroptests;
 
 public class Main {
   public static void main(String... args) {
-    // runJsExportTest();
+    runJsExportTest();
     runJsFunctionTest();
     runJsMethodTest();
     runJsPropertyTest();
@@ -13,9 +13,9 @@ public class Main {
   }
 
   public static void runJsExportTest() {
-    // JsExportTest test = new JsExportTest();
+    JsExportTest test = new JsExportTest();
     // test.testClinit_staticField();
-    // test.testClinit_staticMethod();
+    test.testClinit_staticMethod();
     // test.testClinit_virtualMethod();
     // test.testClinit();
     // test.testEnum_enumerations();
@@ -25,21 +25,23 @@ public class Main {
     // test.testEnum_subclassEnumerations();
     // test.testEnum_subclassMethodCallFromExportedEnumerations();
     // test.testExportClass_correctNamespace();
-    // test.testExportClass_implicitConstructor();
+    test.testExportClass_implicitConstructor();
     // test.testExportConstructors();
     // test.testExportedField();
     // test.testExportedFieldRefInExportedMethod();
     // test.testExportedMethod();
+    // test.testInheritClassNamespace();
+    // test.testInheritClassNamespace_nested();
+    // test.testInheritClassNamespace_nestedNoExport();
+    test.testInheritClassNamespace_noExport();
     // test.testInheritPackageNamespace_nestedClass();
     // test.testInheritPackageNamespace_nestedEnum();
     // test.testInheritPackageNamespace_subpackage();
-    // test.testInheritPackageNamespace();
-    // test.testMethodExport_notReferencedFromJava();
-    // test.testMethodExport_noTypeTightenParams();
-    // test.testMethodExport();
-    // test.testMethodExportWithLong();
+    test.testInheritPackageNamespace();
+    test.testMethodExport_notReferencedFromJava();
+    test.testMethodExport();
+    test.testMethodExportWithLong();
     // test.testNoExport();
-    // test.testSameParameterValueOptimization();
   }
 
   public static void runJsFunctionTest() {
