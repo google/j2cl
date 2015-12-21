@@ -1,0 +1,19 @@
+/**
+ * @fileoverview Impl transpiled from $classType.Descriptor.RawTypeDescriptor.SourceName.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode}
+ */
+goog.module('${selfImport.getImplModulePath()}');
+
+
+#foreach($eagerImport in ${eagerImports})
+#set ($alias = ${eagerImport.Alias})
+let $alias = goog.require('${eagerImport.getImplModulePath()}');
+#end
+
+#foreach($lazyImport in ${lazyImports})
+#set ($alias = ${lazyImport.Alias})
+let $alias = goog.forwardDeclare('${lazyImport.getImplModulePath()}');
+#end
+
+

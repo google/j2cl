@@ -26,14 +26,16 @@ import java.util.List;
  * This class is injected into the template to allow source generation on ast nodes.
  */
 public class SourceGenerator {
-  GenerationEnvironment environment;
+  private GenerationEnvironment environment;
 
   public SourceGenerator(GenerationEnvironment envioronment) {
     this.environment = envioronment;
   }
 
   public String toSource(Statement statement) {
-    return StatementTransformer.transform(statement, environment);
+    SourceBuilder tempBuilder = new SourceBuilder();
+    StatementTransformer.transform(statement, environment, tempBuilder);
+    return tempBuilder.build();
   }
 
   public String toSource(Expression expression) {

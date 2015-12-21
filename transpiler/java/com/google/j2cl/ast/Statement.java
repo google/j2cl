@@ -26,15 +26,26 @@ import com.google.j2cl.sourcemaps.TracksSourceInfo;
 public abstract class Statement extends Node implements TracksSourceInfo {
   // unknown by default.
   private SourceInfo javaSourceInfo = SourceInfo.UNKNOWN_SOURCE_INFO;
+  private SourceInfo javaScriptSourceInfo = SourceInfo.UNKNOWN_SOURCE_INFO;
 
   @Override
-  public SourceInfo getSourceInfo() {
+  public SourceInfo getInputSourceInfo() {
     return javaSourceInfo;
   }
 
   @Override
-  public void setSourceInfo(SourceInfo sourceInfo) {
+  public void setInputSourceInfo(SourceInfo sourceInfo) {
     javaSourceInfo = sourceInfo;
+  }
+
+  @Override
+  public SourceInfo getOutputSourceInfo() {
+    return javaScriptSourceInfo;
+  }
+
+  @Override
+  public void setOutputSourceInfo(SourceInfo sourceInfo) {
+    this.javaScriptSourceInfo = sourceInfo;
   }
 
   @Override

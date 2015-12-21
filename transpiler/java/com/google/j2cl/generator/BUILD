@@ -18,5 +18,6 @@ java_library(
         "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/errors",
         "//transpiler/java/com/google/j2cl/generator/visitors",
+        "//transpiler/java/com/google/j2cl/sourcemaps:sourcemapsinterface",
     ],
 )

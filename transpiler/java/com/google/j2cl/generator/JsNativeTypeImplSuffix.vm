@@ -1,0 +1,22 @@
+#set ($className = ${sourceGenerator.toSource($classType.Descriptor)})
+#set ($nativeClassName = ${sourceGenerator.toSource(${classType.getNativeTypeDescriptor()})})
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+#if (${classType.isInterface()})
+  static $isInstance(instance) { return true; }
+#else
+  static $isInstance(instance) { return instance instanceof $nativeClassName; }
+#end
+
+
+#if (${GeneratorUtils.needClinit($classType, $lazyImports)})
+#parse( "com/google/j2cl/generator/JsClinit.vm")
+#end
+};
+#foreach ($staticField in $classType.getStaticFields())
+#parse( "com/google/j2cl/generator/JsStaticField.vm" )
+#end
+

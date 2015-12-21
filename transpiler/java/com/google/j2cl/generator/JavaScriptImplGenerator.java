@@ -17,19 +17,25 @@ package com.google.j2cl.generator;
 
 import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.Method;
 import com.google.j2cl.errors.Errors;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+
 /**
  * Generates JavaScript source impl files.
  */
 public class JavaScriptImplGenerator extends JavaScriptGenerator {
+  private VelocityContext velocityContext;
   private String nativeSource;
 
   public JavaScriptImplGenerator(Errors errors, JavaType javaType, VelocityEngine velocityEngine) {
     super(errors, javaType, velocityEngine);
+    velocityContext = createContext();
   }
 
   @Override
@@ -42,15 +48,95 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     return ".impl.js";
   }
 
-  @Override
-  protected VelocityContext createContext() {
-    VelocityContext context = super.createContext();
-    context.put("nativeSource", this.nativeSource);
-    return context;
-  }
-
   public void setNativeSource(String nativeSource) {
     Preconditions.checkArgument(nativeSource != null);
     this.nativeSource = nativeSource;
+  }
+
+  private String renderTemplate(String templatePath) {
+    StringWriter outputBuffer = new StringWriter();
+    boolean success =
+        velocityEngine.mergeTemplate(
+            templatePath, StandardCharsets.UTF_8.name(), velocityContext, outputBuffer);
+    if (!success) {
+      errors.error(Errors.Error.ERR_CANNOT_GENERATE_OUTPUT);
+      return "";
+    }
+    return outputBuffer.toString();
+  }
+
+  @Override
+  public String toSource() {
+    SourceBuilder sourceBuilder = new SourceBuilder();
+    sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsImports.vm"));
+    if (javaType.isJsOverlayImpl()) {
+      renderJsNativeTypeSource(sourceBuilder);
+    } else if (javaType.isInterface()) {
+      renderInterfaceSource(sourceBuilder);
+    } else { // Not an interface so it is a Class.
+      renderClassSource(sourceBuilder);
+    }
+    renderNativeSource(sourceBuilder);
+    renderExports(sourceBuilder);
+    return sourceBuilder.build();
+  }
+
+  private void renderJavaTypeMethods(SourceBuilder sourceBuilder) {
+    for (Method method : javaType.getMethods()) {
+      velocityContext.put("method", method);
+      if (method.isConstructor()) {
+        sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsConstructorMethods.vm"));
+      } else {
+        sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsMethodHeader.vm"));
+        if (!method.isNative()) {
+          StatementTransformer.transform(method.getBody(), environment, sourceBuilder);
+          sourceBuilder.append("\n");
+        }
+      }
+    }
+  }
+
+  public void renderInterfaceSource(SourceBuilder sourceBuilder) {
+    sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsInterface.vm"));
+    renderJavaTypeMethods(sourceBuilder);
+    sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsInterfaceSuffix.vm"));
+  }
+
+  public void renderClassSource(SourceBuilder sourceBuilder) {
+    sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsClass.vm"));
+    renderJavaTypeMethods(sourceBuilder);
+    sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsClassSuffix.vm"));
+  }
+
+  private void renderJsNativeTypeSource(SourceBuilder sourceBuilder) {
+    String className = sourceGenerator.toSource(javaType.getDescriptor());
+    sourceBuilder.appendln(String.format("class %s {", className));
+    for (Method method : javaType.getMethods()) {
+      if (method.getDescriptor().isJsOverlay() && method.getDescriptor().isStatic()) {
+        velocityContext.put("method", method);
+        sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsMethodHeader.vm"));
+        sourceBuilder.appendln(sourceGenerator.toSource(method.getBody()));
+      }
+    }
+    sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsNativeTypeImplSuffix.vm"));
+  }
+
+  private void renderNativeSource(SourceBuilder sourceBuilder) {
+    if (nativeSource != null) {
+      sourceBuilder.appendln(""); // New line before
+      sourceBuilder.appendln("/**");
+      sourceBuilder.appendln(" * Native Method Injection");
+      sourceBuilder.appendln(" */");
+      sourceBuilder.appendln(nativeSource);
+    }
+  }
+
+  private void renderExports(SourceBuilder sourceBuilder) {
+    sourceBuilder.appendln(""); // New line before
+    sourceBuilder.appendln("/**");
+    sourceBuilder.appendln(" * Export class.");
+    sourceBuilder.appendln(" */");
+    String className = sourceGenerator.toSource(javaType.getDescriptor());
+    sourceBuilder.appendln(String.format("exports = %s;", className));
   }
 }

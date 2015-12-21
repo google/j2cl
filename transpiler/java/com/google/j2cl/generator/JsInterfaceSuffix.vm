@@ -1,0 +1,76 @@
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+#foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
+#if (!${superInterfaceTypeDescriptor.isNative()})
+    ${sourceGenerator.toSource($superInterfaceTypeDescriptor)}.$markImplementor(classConstructor);
+#end
+#end
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__$mangledTypeName = true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    #if (${classType.Descriptor.isJsFunctionInterface()})
+    return instance != null && typeof instance == "function";
+#else
+    return instance != null &&
+           instance.$implements__$mangledTypeName;
+#end
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+           classConstructor.prototype
+               .$implements__$mangledTypeName;
+  }
+
+  /**
+   * @return {${classAlias}}
+   * @public
+   */
+  static $getClass() {
+    $className.$clinit();
+    if (!${className}.$class${className}_) {
+      ${className}.$class${className}_ = $classAlias.$createForInterface(
+          $utilAlias.$generateId('$simpleName'),
+          $utilAlias.$generateId('$binaryName'),
+          $utilAlias.$generateId('$sourceName'));
+    }
+    return ${className}.$class${className}_;
+  }
+
+#parse( "com/google/j2cl/generator/JsClinit.vm")
+};
+#foreach ($staticField in $classType.getStaticFields())
+#parse( "com/google/j2cl/generator/JsStaticField.vm" )
+#end
+
+
+/**
+ * The class literal field.
+ * @private {$classAlias}
+ */
+${className}.$class${className}_ = null;
+
+
+## TODO: remove cast after b/20102666 is handled in Closure.
+$className.$markImplementor(/** @type {Function} */($className));

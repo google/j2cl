@@ -30,7 +30,6 @@ import java.util.List;
  * The set of supported flags.
  */
 public class FrontendFlags {
-
   @Option(
     name = "-omitfiles",
     metaVar = "<paths>",
@@ -101,11 +100,20 @@ public class FrontendFlags {
   protected boolean help = false;
 
   @Option(
-    name = "-outputSourceInfo",
+    name = "-printInputSourceInfo",
     usage =
-        "Specify that the transpiler should output the source location for ast nodes. (for testing)"
+        "Specify that the transpiler should output the Java source location for ast nodes."
+            + " (for testing)"
   )
-  protected boolean shouldOutputSourceInfo = false;
+  protected boolean shouldPrintInputSourceInfo = false;
+
+  @Option(
+    name = "-printOutputSourceInfo",
+    usage =
+        "Specify that the transpiler should print the JavaScript source location for ast nodes."
+            + " (for testing)"
+  )
+  protected boolean shouldPrintOutputSourceInfo = false;
 
   private final Errors errors;
 

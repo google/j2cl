@@ -40,6 +40,7 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableDeclarationStatement;
 import com.google.j2cl.ast.WhileStatement;
+import com.google.j2cl.sourcemaps.SourceInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,31 +49,36 @@ import java.util.List;
  * Transforms Statements to JavaScript source strings.
  */
 public class StatementTransformer {
-  public static String transform(Statement node, final GenerationEnvironment environment) {
+  public static void transform(
+      Statement node, final GenerationEnvironment environment, final SourceBuilder builder) {
     class SourceTransformer extends AbstractVisitor {
-      SourceBuilder builder = new SourceBuilder();
+      @Override
+      public boolean enterStatement(Statement statement) {
+        return true;
+      }
 
       @Override
       public boolean enterAssertStatement(AssertStatement assertStatement) {
         String assertAlias = toSourceExpression(BootstrapType.ASSERTS.getDescriptor());
+        String line;
         if (assertStatement.getMessage() == null) {
-          String line =
+          line =
               String.format(
                   "%s.$enabled() && %s.$assert(%s);",
                   assertAlias,
                   assertAlias,
                   toSourceExpression(assertStatement.getExpression()));
-          builder.appendln(line);
         } else {
-          String line =
+          line =
               String.format(
                   "%s.$enabled() && %s.$assertWithMessage(%s, %s);",
                   assertAlias,
                   assertAlias,
                   toSourceExpression(assertStatement.getExpression()),
                   toSourceExpression(assertStatement.getMessage()));
-          builder.appendln(line);
         }
+        SourceInfo location = builder.appendln(line);
+        assertStatement.setOutputSourceInfo(location);
         return false;
       }
 
@@ -84,11 +90,13 @@ public class StatementTransformer {
 
       @Override
       public boolean enterBreakStatement(BreakStatement breakStatement) {
+        SourceInfo location;
         if (breakStatement.getLabelName() == null) {
-          builder.appendln("break;");
+          location = builder.appendln("break;");
         } else {
-          builder.appendln(String.format("break %s;", breakStatement.getLabelName()));
+          location = builder.appendln(String.format("break %s;", breakStatement.getLabelName()));
         }
+        breakStatement.setOutputSourceInfo(location);
         return false;
       }
 
@@ -100,26 +108,32 @@ public class StatementTransformer {
 
       @Override
       public boolean enterContinueStatement(ContinueStatement continueStatement) {
+        SourceInfo location;
         if (continueStatement.getLabelName() == null) {
-          builder.appendln("continue;");
+          location = builder.appendln("continue;");
         } else {
-          builder.appendln(String.format("continue %s;", continueStatement.getLabelName()));
+          location =
+              builder.appendln(String.format("continue %s;", continueStatement.getLabelName()));
         }
+        continueStatement.setOutputSourceInfo(location);
         return false;
       }
 
       @Override
       public boolean enterDoWhileStatement(DoWhileStatement doWhileStatement) {
-        builder.append("do ");
+        SourceInfo location = builder.append("do ");
         doWhileStatement.getBody().accept(this);
         String conditionAsString = toSourceExpression(doWhileStatement.getConditionExpression());
         builder.appendln(String.format(" while(%s);", conditionAsString));
+        doWhileStatement.setOutputSourceInfo(location);
         return false;
       }
 
       @Override
       public boolean enterExpressionStatement(ExpressionStatement expressionStatement) {
-        builder.appendln(toSourceExpression(expressionStatement.getExpression()) + ";");
+        SourceInfo location =
+            builder.appendln(toSourceExpression(expressionStatement.getExpression()) + ";");
+        expressionStatement.setOutputSourceInfo(location);
         return false;
       }
 
@@ -141,20 +155,24 @@ public class StatementTransformer {
           updaters.add(toSourceExpression(e));
         }
         String updatersAsString = Joiner.on(",").join(updaters);
-        builder.appendln(
-            String.format(
-                "for (%s; %s; %s)",
-                initializerAsString,
-                conditionExpressionAsString,
-                updatersAsString));
+        SourceInfo location =
+            builder.appendln(
+                String.format(
+                    "for (%s; %s; %s)",
+                    initializerAsString,
+                    conditionExpressionAsString,
+                    updatersAsString));
+        forStatement.setOutputSourceInfo(location);
         forStatement.getBody().accept(this);
         return false;
       }
 
       @Override
       public boolean enterIfStatement(IfStatement ifStatement) {
-        builder.append(
-            String.format("if (%s)", toSourceExpression(ifStatement.getConditionExpression())));
+        SourceInfo location =
+            builder.append(
+                String.format("if (%s)", toSourceExpression(ifStatement.getConditionExpression())));
+        ifStatement.setOutputSourceInfo(location);
         ifStatement.getThenStatement().accept(this);
         if (ifStatement.getElseStatement() != null) {
           builder.append(" else ");
@@ -165,14 +183,16 @@ public class StatementTransformer {
 
       @Override
       public boolean enterLabeledStatement(LabeledStatement labelStatement) {
-        builder.append(String.format("%s: ", labelStatement.getLabelName()));
+        SourceInfo location = builder.append(String.format("%s: ", labelStatement.getLabelName()));
+        labelStatement.setOutputSourceInfo(location);
         labelStatement.getBody().accept(this);
         return false;
       }
 
       @Override
       public boolean enterReturnStatement(ReturnStatement returnStatement) {
-        builder.append("return");
+        SourceInfo location = builder.append("return");
+        returnStatement.setOutputSourceInfo(location);
         Expression expression = returnStatement.getExpression();
         if (expression != null) {
           builder.append(" " + toSourceExpression(expression));
@@ -183,19 +203,24 @@ public class StatementTransformer {
 
       @Override
       public boolean enterSwitchCase(SwitchCase switchCase) {
+        SourceInfo location;
         if (switchCase.isDefault()) {
-          builder.appendln("default:");
+          location = builder.appendln("default:");
         } else {
-          builder.appendln("case " + toSourceExpression(switchCase.getMatchExpression()) + ":");
+          location =
+              builder.appendln("case " + toSourceExpression(switchCase.getMatchExpression()) + ":");
         }
+        switchCase.setOutputSourceInfo(location);
         return false;
       }
 
       @Override
       public boolean enterSwitchStatement(SwitchStatement switchStatement) {
-        builder.appendln(
-            String.format(
-                "switch (%s) {", toSourceExpression(switchStatement.getMatchExpression())));
+        SourceInfo location =
+            builder.appendln(
+                String.format(
+                    "switch (%s) {", toSourceExpression(switchStatement.getMatchExpression())));
+        switchStatement.setOutputSourceInfo(location);
         return true; // Allow the visitor to enter the switch cases.
       }
 
@@ -208,13 +233,16 @@ public class StatementTransformer {
 
       @Override
       public boolean enterThrowStatement(ThrowStatement throwStatement) {
-        builder.appendln("throw " + toSourceExpression(throwStatement.getExpression()) + ";");
+        SourceInfo location =
+            builder.appendln("throw " + toSourceExpression(throwStatement.getExpression()) + ";");
+        throwStatement.setOutputSourceInfo(location);
         return false;
       }
 
       @Override
       public boolean enterTryStatement(TryStatement tryStatement) {
-        builder.append("try");
+        SourceInfo location = builder.append("try");
+        tryStatement.setOutputSourceInfo(location);
         tryStatement.getBody().accept(this);
         // Generate catch clause.
         Preconditions.checkArgument(tryStatement.getCatchClauses().size() < 2);
@@ -240,14 +268,17 @@ public class StatementTransformer {
         for (VariableDeclarationFragment fragment : variableDeclarationStatement.getFragments()) {
           fragmentsAsString.add(toSourceExpression(fragment));
         }
-        builder.appendln("let " + Joiner.on(", ").join(fragmentsAsString) + ";");
+        SourceInfo location =
+            builder.appendln("let " + Joiner.on(", ").join(fragmentsAsString) + ";");
+        variableDeclarationStatement.setOutputSourceInfo(location);
         return false;
       }
 
       @Override
       public boolean enterWhileStatement(WhileStatement whileStatement) {
         String conditionAsString = toSourceExpression(whileStatement.getConditionExpression());
-        builder.append(String.format("while (%s)", conditionAsString));
+        SourceInfo location = builder.append(String.format("while (%s)", conditionAsString));
+        whileStatement.setOutputSourceInfo(location);
         return true; // Allow this to enter block.
       }
 
@@ -272,6 +303,5 @@ public class StatementTransformer {
     }
     SourceTransformer transformer = new SourceTransformer();
     node.accept(transformer);
-    return transformer.toString();
   }
 }

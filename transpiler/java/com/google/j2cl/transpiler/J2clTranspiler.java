@@ -50,6 +50,7 @@ import com.google.j2cl.ast.visitors.NormalizeTryWithResourceVisitor;
 import com.google.j2cl.ast.visitors.RemoveUnusedMultiExpressionReturnValues;
 import com.google.j2cl.ast.visitors.RewriteSystemGetPropertyVisitor;
 import com.google.j2cl.ast.visitors.SourceInfoPrinter;
+import com.google.j2cl.ast.visitors.SourceInfoPrinter.Type;
 import com.google.j2cl.ast.visitors.SplitCompoundLongAssignmentsVisitor;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCountsVisitor;
 import com.google.j2cl.errors.Errors;
@@ -116,8 +117,8 @@ public class J2clTranspiler {
     for (CompilationUnit j2clUnit : j2clUnits) {
       verifyUnit(j2clUnit);
 
-      if (options.getShouldOutputSouceInfo()) {
-        SourceInfoPrinter.applyTo(j2clUnit);
+      if (options.getShouldPrintInputSourceInfo()) {
+        SourceInfoPrinter.applyTo(j2clUnit, Type.INPUT);
       }
 
       // Class structure normalizations.
@@ -199,8 +200,12 @@ public class J2clTranspiler {
     maybeExitGracefully();
   }
 
-  private void generateSourceMaps(@SuppressWarnings("unused") List<CompilationUnit> j2clUnits) {
-    // TODO: implement.
+  private void generateSourceMaps(List<CompilationUnit> j2clUnits) {
+    if (options.getShouldPrintOutputSourceInfo()) {
+      for (CompilationUnit j2clUnit : j2clUnits) {
+        SourceInfoPrinter.applyTo(j2clUnit, Type.OUTPUT);
+      }
+    }
   }
 
   private void maybeExitGracefully() {

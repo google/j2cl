@@ -37,7 +37,7 @@ public class SourceMapTest extends IntegrationTestCase {
             "UTF-8",
             "-cp",
             "third_party/java_src/j2cl/jre/java/libJavaJre_java_library.jar",
-            "-outputSourceInfo");
+            "-printInputSourceInfo");
     assertLogContainsSnippet(
         transpileResult.outputLines,
         "com.google.j2cl.ast.VariableDeclarationStatement line:18 col:4 length:10");
@@ -48,5 +48,41 @@ public class SourceMapTest extends IntegrationTestCase {
     assertLogContainsSnippet(
         transpileResult.outputLines,
         "com.google.j2cl.ast.ExpressionStatement line:20 col:6 length:4");
+  }
+
+  /**
+   * Transpiles to:
+   *
+   *  58   m_method()
+   *  59 {
+   *  60 let i = 1;
+   *  61 if (i < 2){
+   *  62 i++;
+   *  63 }
+   *  64 }
+   */
+  public void testOutputLocation() throws IOException, InterruptedException {
+    TranspileResult transpileResult =
+        transpileDirectory(
+            "sourcemap",
+            OutputType.DIR,
+            "-source",
+            "1.8",
+            "-encoding",
+            "UTF-8",
+            "-cp",
+            "third_party/java_src/j2cl/jre/java/libJavaJre_java_library.jar",
+            "-printOutputSourceInfo");
+    assertLogContainsSnippet(
+        transpileResult.outputLines,
+        "com.google.j2cl.ast.VariableDeclarationStatement line:60 col:0 length:11");
+    assertLogContainsSnippet(
+        transpileResult.outputLines, "com.google.j2cl.ast.IfStatement line:61 col:0 length:10");
+    // Blocks don't have their output set.
+    assertLogContainsSnippet(
+        transpileResult.outputLines, "com.google.j2cl.ast.Block line:-1 col:-1 length:0");
+    assertLogContainsSnippet(
+        transpileResult.outputLines,
+        "com.google.j2cl.ast.ExpressionStatement line:62 col:0 length:5");
   }
 }

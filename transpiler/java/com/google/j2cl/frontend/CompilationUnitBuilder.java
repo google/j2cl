@@ -747,7 +747,7 @@ public class CompilationUnitBuilder {
       SourceInfo position = filePositionReader.filePositionForNode(statement);
       Statement j2clStatement = convertStatement(statement);
       if (j2clStatement != null) {
-        j2clStatement.setSourceInfo(position);
+        j2clStatement.setInputSourceInfo(position);
       }
       return j2clStatement;
     }

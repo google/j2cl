@@ -41,8 +41,10 @@ import java.util.Set;
  * for Header and Impl generation.
  */
 public abstract class JavaScriptGenerator extends AbstractSourceGenerator {
-  private final JavaType javaType;
+  protected final JavaType javaType;
   protected final VelocityEngine velocityEngine;
+  protected SourceGenerator sourceGenerator;
+  protected GenerationEnvironment environment;
 
   public JavaScriptGenerator(Errors errors, JavaType javaType, VelocityEngine velocityEngine) {
     super(errors);
@@ -77,8 +79,8 @@ public abstract class JavaScriptGenerator extends AbstractSourceGenerator {
     Map<Variable, String> aliasByVariable =
         VariableAliasesGatheringVisitor.gatherVariableAliases(sortedImports, javaType);
 
-    GenerationEnvironment environment = new GenerationEnvironment(sortedImports, aliasByVariable);
-    SourceGenerator sourceGenerator = new SourceGenerator(environment);
+    environment = new GenerationEnvironment(sortedImports, aliasByVariable);
+    sourceGenerator = new SourceGenerator(environment);
 
     TypeDescriptor selfTypeDescriptor = javaType.getDescriptor().getRawTypeDescriptor();
     context.put("classType", javaType);
@@ -92,7 +94,6 @@ public abstract class JavaScriptGenerator extends AbstractSourceGenerator {
     context.put(
         "javaLangClassTypeDecriptor", TypeDescriptors.get().javaLangClass.getRawTypeDescriptor());
     context.put("nativeUtilTypeDecriptor", BootstrapType.NATIVE_UTIL.getDescriptor());
-
     return context;
   }
 }

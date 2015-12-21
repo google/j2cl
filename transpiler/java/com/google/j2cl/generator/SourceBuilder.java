@@ -15,23 +15,35 @@
  */
 package com.google.j2cl.generator;
 
+import com.google.j2cl.sourcemaps.SourceInfo;
+
+import org.apache.commons.lang.StringUtils;
+
 /**
  * Builds source and tracks line numbers using a StringBuilder.
  */
 class SourceBuilder {
   private StringBuilder sb = new StringBuilder();
+  private int lineNumber = 1; // lines start at 1
 
-  SourceBuilder() {}
+  public SourceBuilder() {}
 
-  public SourceBuilder append(String source) {
+  /**
+   * Returns the location of the string in the output source code.
+   */
+  public SourceInfo append(String source) {
     sb.append(source);
-    return this;
+    SourceInfo outputLocation = new SourceInfo(lineNumber, 0, source.length());
+    int numNewLines = StringUtils.countMatches(source, System.lineSeparator());
+    lineNumber += numNewLines;
+    return outputLocation;
   }
 
-  public SourceBuilder appendln(String sourceLine) {
-    sb.append(sourceLine);
-    sb.append("\n");
-    return this;
+  /**
+   * Returns the location of the string in the output source code.
+   */
+  public SourceInfo appendln(String sourceLine) {
+    return append(sourceLine + "\n");
   }
 
   public String build() {

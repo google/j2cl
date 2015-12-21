@@ -24,15 +24,30 @@ import com.google.j2cl.sourcemaps.SourceInfo;
  * Used for testing.
  */
 public class SourceInfoPrinter {
-  public static void applyTo(CompilationUnit compilationUnit) {
-    StaticFieldAccessGatherer gatherer = new StaticFieldAccessGatherer();
+  /**
+   * The source location of the ast node to print, input or output.
+   */
+  public enum Type {
+    INPUT,
+    OUTPUT
+  }
+
+  public static void applyTo(CompilationUnit compilationUnit, Type type) {
+    StaticFieldAccessGatherer gatherer = new StaticFieldAccessGatherer(type);
     compilationUnit.accept(gatherer);
   }
 
   private static class StaticFieldAccessGatherer extends AbstractVisitor {
+    private Type type;
+
+    private StaticFieldAccessGatherer(Type type) {
+      this.type = type;
+    }
+
     @Override
     public boolean enterStatement(Statement statement) {
-      SourceInfo position = statement.getSourceInfo();
+      SourceInfo position =
+          type == Type.INPUT ? statement.getInputSourceInfo() : statement.getOutputSourceInfo();
       System.out.printf(
           String.format(
               "%s line:%d col:%d length:%d%n",

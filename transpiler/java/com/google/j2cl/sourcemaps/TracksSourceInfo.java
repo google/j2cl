@@ -19,7 +19,13 @@ package com.google.j2cl.sourcemaps;
  * Forces a node to keep track of its location within the original Java Source.
  */
 public interface TracksSourceInfo {
-  public SourceInfo getSourceInfo();
+  // The location in the original Java source file.
+  public SourceInfo getInputSourceInfo();
 
-  public void setSourceInfo(SourceInfo filePosition);
+  public void setInputSourceInfo(SourceInfo filePosition);
+
+  // The location in the generate Javascript file.
+  public SourceInfo getOutputSourceInfo();
+
+  public void setOutputSourceInfo(SourceInfo filePosition);
 }
