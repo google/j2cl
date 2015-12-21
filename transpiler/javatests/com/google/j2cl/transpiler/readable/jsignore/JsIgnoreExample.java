@@ -15,4 +15,6 @@ public class JsIgnoreExample {
 
   @JsIgnore
   public static int notExportedField = 20;
+
+  public static final Object CONSTNAME = new Object();
 }

@@ -2,7 +2,8 @@
  * @fileoverview Impl transpiled from
  * com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing.
  *
- * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode}
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const}
  */
 goog.module('gen.com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxing$impl');
 
@@ -227,9 +228,9 @@ class SimpleAutoBoxing extends Object {
     s = this.m_unbox__java_lang_Short(Short.m_valueOf__short(s));
     c = this.m_unbox__java_lang_Character(Character.m_valueOf__char(c));
     boxBool = Boolean.m_booleanValue__java_lang_Boolean(boxBool) &&
-              Boolean.m_booleanValue__java_lang_Boolean(boxBool);
+        Boolean.m_booleanValue__java_lang_Boolean(boxBool);
     boxD = Double.m_doubleValue__java_lang_Double(boxD) +
-           Double.m_doubleValue__java_lang_Double(boxD);
+        Double.m_doubleValue__java_lang_Double(boxD);
     boxF = Float.m_valueOf__float(boxF.m_floatValue() - boxF.m_floatValue());
     boxI = Integer.m_valueOf__int(boxI.m_intValue() * boxI.m_intValue());
     boxL = Long.m_valueOf__long(
@@ -271,7 +272,7 @@ class SimpleAutoBoxing extends Object {
     boxS = this.m_box__short(boxS.m_shortValue());
     boxC = this.m_box__char(boxC.m_charValue());
     bool = Boolean.m_booleanValue__java_lang_Boolean(boxBool) &&
-           Boolean.m_booleanValue__java_lang_Boolean(boxBool);
+        Boolean.m_booleanValue__java_lang_Boolean(boxBool);
     d = Double.m_doubleValue__java_lang_Double(boxD) +
         Double.m_doubleValue__java_lang_Double(boxD);
     f = boxF.m_floatValue() - boxF.m_floatValue();
@@ -325,15 +326,15 @@ class SimpleAutoBoxing extends Object {
     $Asserts.$enabled() && $Asserts.$assert(boxr);
     $Asserts.$enabled() && $Asserts.$assert(br);
     boxr = Boolean.m_booleanValue__java_lang_Boolean(boxB1) &&
-           Boolean.m_booleanValue__java_lang_Boolean(boxB2);
+        Boolean.m_booleanValue__java_lang_Boolean(boxB2);
     br = Boolean.m_booleanValue__java_lang_Boolean(boxB1) &&
-         Boolean.m_booleanValue__java_lang_Boolean(boxB2);
+        Boolean.m_booleanValue__java_lang_Boolean(boxB2);
     $Asserts.$enabled() && $Asserts.$assert(boxr);
     $Asserts.$enabled() && $Asserts.$assert(br);
     boxr = Boolean.m_booleanValue__java_lang_Boolean(boxB1) ||
-           Boolean.m_booleanValue__java_lang_Boolean(boxB2);
+        Boolean.m_booleanValue__java_lang_Boolean(boxB2);
     br = Boolean.m_booleanValue__java_lang_Boolean(boxB1) ||
-         Boolean.m_booleanValue__java_lang_Boolean(boxB2);
+        Boolean.m_booleanValue__java_lang_Boolean(boxB2);
     $Asserts.$enabled() && $Asserts.$assert(boxr);
     $Asserts.$enabled() && $Asserts.$assert(br);
     boxr = Boolean.m_booleanValue__java_lang_Boolean((boxB1 = boxB2));

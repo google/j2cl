@@ -93,3 +93,19 @@ JsTypeTest.nativeJsFunction = function() {
 JsTypeTest.hasFieldRun = function(obj) {
   return obj.run != undefined;
 };
+
+/**
+ * @param {*} enumeration
+ * @return {number}
+ */
+JsTypeTest.callPublicMethodFromEnumeration = function(enumeration) {
+  return enumeration.idxAddOne();
+};
+
+/**
+ * @param {*} enumeration
+ * @return {number}
+ */
+JsTypeTest.callPublicMethodFromEnumerationSubclass = function(enumeration) {
+  return enumeration.foo();
+};

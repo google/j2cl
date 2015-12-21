@@ -118,9 +118,9 @@ public class Main {
     test.testConcreteJsTypeAccess();
     test.testConcreteJsTypeNoTypeTightenField();
     test.testConcreteJsTypeSubclassAccess();
-    // test.testEnumeration();
-    // test.testEnumJsTypeAccess();
-    // test.testEnumSubclassEnumeration();
+    test.testEnumeration();
+    test.testEnumJsTypeAccess();
+    test.testEnumSubclassEnumeration();
     test.testInstanceOf_concreteJsType();
     test.testInstanceOf_extendsJsTypeWithProto();
     test.testInstanceOf_implementsJsType();

@@ -16,7 +16,9 @@ integration_test(
     name = "jsinteroptests",
     srcs = glob(["*.java"]),
     # TODO: fix the hidden JS output bug and remove this suppression.
-    defs = ["--jscomp_warning=checkTypes"],
+    defs = [
+        "--jscomp_warning=checkTypes",
+    ],
     js_deps = [":native_types"],
     native_srcs = glob(["*.native.js"]),
     native_srcs_pkg = "com/google/j2cl/transpiler/integration/jsinteroptests",

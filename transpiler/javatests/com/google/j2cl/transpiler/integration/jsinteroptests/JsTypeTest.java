@@ -126,72 +126,70 @@ public class JsTypeTest extends MyTestCase {
     int publicMethodAlsoExposedAsNonJsMethod();
   }
 
-  //  /**
-  //   * This enum is annotated as a @JsType.
-  //   */
-  //  @JsType
-  //  public static enum MyEnumWithJsType {
-  //    TEST1(1), TEST2(2);
-  //
-  //    public int idx;
-  //    MyEnumWithJsType(int a) {
-  //      this.idx = a;
-  //    }
-  //
-  //    public int idxAddOne() {
-  //      return idx + 1;
-  //    }
-  //
-  //    public int publicMethod() {
-  //      return 10;
-  //    }
-  //
-  //    public static void publicStaticMethod() {
-  //    }
-  //
-  //    private void privateMethod() {
-  //    }
-  //
-  //    protected void protectedMethod() {
-  //    }
-  //
-  //    void packageMethod() {
-  //    }
-  //
-  //    public int publicField = 10;
-  //
-  //    public static int publicStaticField = 10;
-  //
-  //    private int privateField = 10;
-  //
-  //    protected int protectedField = 10;
-  //
-  //    int packageField = 10;
-  //  }
-  //
-  //  /**
-  //   * This enum is annotated exported and has enumerations which cause subclass generation.
-  //   */
-  //  @JsType
-  //  public static enum MyEnumWithSubclassGen {
-  //    A {
-  //      @Override
-  //      public int foo() {
-  //        return 100;
-  //      }
-  //    },
-  //    B {
-  //      @Override
-  //      public int foo() {
-  //        return 200;
-  //      }
-  //    },
-  //    C;
-  //
-  //    public int foo() {
-  //      return 1;
-  //    }
-  //  }
+  /**
+   * This enum is annotated as a @JsType.
+   */
+  @JsType
+  public static enum MyEnumWithJsType {
+    TEST1(1),
+    TEST2(2);
+
+    public int idx;
+
+    MyEnumWithJsType(int a) {
+      this.idx = a;
+    }
+
+    public int idxAddOne() {
+      return idx + 1;
+    }
+
+    public int publicMethod() {
+      return 10;
+    }
+
+    public static void publicStaticMethod() {}
+
+    private void privateMethod() {}
+
+    protected void protectedMethod() {}
+
+    void packageMethod() {}
+
+    public int publicField = 10;
+
+    public static int publicStaticField = 10;
+
+    private int privateField = 10;
+
+    protected int protectedField = 10;
+
+    int packageField = 10;
+  }
+
+  /**
+   * This enum is annotated exported and has enumerations which cause subclass generation.
+   */
+  @JsType
+  public static enum MyEnumWithSubclassGen {
+    A {
+      @Override
+      public int foo() {
+        return 100;
+      }
+    },
+    B {
+      @Override
+      public int foo() {
+        return 200;
+      }
+    },
+    C;
+
+    public int foo() {
+      return 1;
+    }
+  }
 
   public void testCasts() {
     Object myClass;
@@ -471,23 +469,30 @@ public class JsTypeTest extends MyTestCase {
   @JsMethod
   private static native boolean hasFieldRun(Object obj);
 
-  //  public void testEnumeration() {
-  //    assertEquals(2, callPublicMethodFromEnumeration(MyEnumWithJsType.TEST1));
-  //    assertEquals(3, callPublicMethodFromEnumeration(MyEnumWithJsType.TEST2));
-  //  }
-  //
-  //  public void testEnumJsTypeAccess() {
-  //    assertJsTypeHasFields(MyEnumWithJsType.TEST2, "publicMethod", "publicField");
-  //    assertJsTypeDoesntHaveFields(MyEnumWithJsType.TEST2, "publicStaticMethod", "privateMethod",
-  //        "protectedMethod", "packageMethod", "publicStaticField", "privateField",
-  //        "protectedField", "packageField");
-  //  }
-  //
-  //  public void testEnumSubclassEnumeration() {
-  //    assertEquals(100, callPublicMethodFromEnumerationSubclass(MyEnumWithSubclassGen.A));
-  //    assertEquals(200, callPublicMethodFromEnumerationSubclass(MyEnumWithSubclassGen.B));
-  //    assertEquals(1, callPublicMethodFromEnumerationSubclass(MyEnumWithSubclassGen.C));
-  //  }
+  public void testEnumeration() {
+    assertEquals(2, callPublicMethodFromEnumeration(MyEnumWithJsType.TEST1));
+    assertEquals(3, callPublicMethodFromEnumeration(MyEnumWithJsType.TEST2));
+  }
+
+  public void testEnumJsTypeAccess() {
+    assertTrue(ConcreteJsType.hasPublicField(MyEnumWithJsType.TEST2));
+    assertTrue(ConcreteJsType.hasPublicMethod(MyEnumWithJsType.TEST2));
+
+    assertFalse(ConcreteJsType.hasPublicStaticMethod(MyEnumWithJsType.TEST2));
+    assertFalse(ConcreteJsType.hasPrivateMethod(MyEnumWithJsType.TEST2));
+    assertFalse(ConcreteJsType.hasProtectedMethod(MyEnumWithJsType.TEST2));
+    assertFalse(ConcreteJsType.hasPackageMethod(MyEnumWithJsType.TEST2));
+    assertFalse(ConcreteJsType.hasPublicStaticField(MyEnumWithJsType.TEST2));
+    assertFalse(ConcreteJsType.hasPrivateField(MyEnumWithJsType.TEST2));
+    assertFalse(ConcreteJsType.hasProtectedField(MyEnumWithJsType.TEST2));
+    assertFalse(ConcreteJsType.hasPackageField(MyEnumWithJsType.TEST2));
+  }
+
+  public void testEnumSubclassEnumeration() {
+    assertEquals(100, callPublicMethodFromEnumerationSubclass(MyEnumWithSubclassGen.A));
+    assertEquals(200, callPublicMethodFromEnumerationSubclass(MyEnumWithSubclassGen.B));
+    assertEquals(1, callPublicMethodFromEnumerationSubclass(MyEnumWithSubclassGen.C));
+  }
 
   @JsMethod
   private static native int callPublicMethod(Object object);
@@ -498,14 +503,11 @@ public class JsTypeTest extends MyTestCase {
   @JsMethod
   private static native void setTheField(ConcreteJsType obj, ConcreteJsType.A value);
 
-  //  private static native int callPublicMethodFromEnumeration(MyEnumWithJsType enumeration) /*-{
-  //    return enumeration.idxAddOne();
-  //  }-*/;
-  //
-  //  private static native int callPublicMethodFromEnumerationSubclass(
-  //      MyEnumWithSubclassGen enumeration) /*-{
-  //    return enumeration.foo();
-  //  }-*/;
+  @JsMethod
+  private static native int callPublicMethodFromEnumeration(MyEnumWithJsType enumeration);
+
+  @JsMethod
+  private static native int callPublicMethodFromEnumerationSubclass(MyEnumWithSubclassGen e);
 
   @JsType
   interface SimpleJsTypeFieldInterface {}

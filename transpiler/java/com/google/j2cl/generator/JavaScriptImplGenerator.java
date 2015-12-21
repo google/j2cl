@@ -40,7 +40,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   @Override
   public String getTemplateFilePath() {
-    return "com/google/j2cl/generator/JsTypeImpl.vm";
+    throw new UnsupportedOperationException();
   }
 
   @Override
