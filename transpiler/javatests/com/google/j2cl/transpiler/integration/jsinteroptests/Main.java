@@ -20,16 +20,16 @@ public class Main {
     // test.testClinit();
     // test.testEnum_enumerations();
     // test.testEnum_exportedFields();
-    // test.testEnum_exportedMethods();
-    // test.testEnum_notExported();
+    test.testEnum_exportedMethods();
+    test.testEnum_notExported();
     // test.testEnum_subclassEnumerations();
     // test.testEnum_subclassMethodCallFromExportedEnumerations();
     // test.testExportClass_correctNamespace();
     test.testExportClass_implicitConstructor();
     // test.testExportConstructors();
     // test.testExportedField();
-    // test.testExportedFieldRefInExportedMethod();
-    // test.testExportedMethod();
+    test.testExportedFieldRefInExportedMethod();
+    test.testExportedMethod();
     // test.testInheritClassNamespace();
     // test.testInheritClassNamespace_nested();
     // test.testInheritClassNamespace_nestedNoExport();
@@ -41,7 +41,7 @@ public class Main {
     test.testMethodExport_notReferencedFromJava();
     test.testMethodExport();
     test.testMethodExportWithLong();
-    // test.testNoExport();
+    test.testNoExport();
   }
 
   public static void runJsFunctionTest() {

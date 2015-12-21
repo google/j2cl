@@ -15,6 +15,8 @@ import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.FieldDescriptorBuilder;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.JsInfo;
+import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -56,6 +58,8 @@ public class EnumMethodsCreator {
   }
 
   private EnumMethodsCreator(JavaType enumType) {
+    boolean jsType = enumType.getDescriptor().isJsType();
+
     this.enumType = enumType;
     this.namesToValuesMapFieldDescriptor =
         FieldDescriptorBuilder.fromDefault(
@@ -67,19 +71,23 @@ public class EnumMethodsCreator {
             .build();
     this.valuesMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
+            .isRaw(jsType)
             .isStatic(true)
             .enclosingClassTypeDescriptor(enumType.getDescriptor())
             .methodName(VALUES_METHOD_NAME)
             .returnTypeDescriptor(enumType.getDescriptor().getForArray(1))
             .parameterTypeDescriptors(Arrays.asList(new TypeDescriptor[0]))
+            .jsInfo(jsType ? JsInfo.create(JsMemberType.METHOD, null, null, false) : JsInfo.NONE)
             .build();
     this.valueOfMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
+            .isRaw(jsType)
             .isStatic(true)
             .enclosingClassTypeDescriptor(enumType.getDescriptor())
             .methodName(VALUE_OF_METHOD_NAME)
             .returnTypeDescriptor(enumType.getDescriptor())
             .parameterTypeDescriptors(Arrays.asList(TypeDescriptors.get().javaLangString))
+            .jsInfo(jsType ? JsInfo.create(JsMemberType.METHOD, null, null, false) : JsInfo.NONE)
             .build();
   }
 

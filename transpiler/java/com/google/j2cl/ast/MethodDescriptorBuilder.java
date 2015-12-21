@@ -115,6 +115,11 @@ public class MethodDescriptorBuilder {
     return this;
   }
 
+  public MethodDescriptorBuilder jsInfo(JsInfo jsInfo) {
+    this.jsInfo = jsInfo;
+    return this;
+  }
+
   public MethodDescriptor build() {
     return MethodDescriptor.create(
         isStatic,

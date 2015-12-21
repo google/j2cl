@@ -1,0 +1,213 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jstypeenum.Color.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jstypeenum.Color$impl');
+
+
+let Enum = goog.require('gen.java.lang.Enum$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Object = goog.forwardDeclare('gen.java.lang.Object$impl');
+let String = goog.forwardDeclare('gen.java.lang.String$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+/**
+ * @extends {Enum<Color>}
+ */
+class Color extends Enum {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jstypeenum_Color() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @return {!Color}
+   * @public
+   */
+  static $create__java_lang_String__int($name, $ordinal) {
+    Color.$clinit();
+    let $instance = new Color;
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jstypeenum_Color__java_lang_String__int(
+            $name, $ordinal);
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {?string} $name
+   * @param {number} $ordinal
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jstypeenum_Color__java_lang_String__int(
+      $name, $ordinal) {
+    this.$ctor__java_lang_Enum__java_lang_String__int($name, $ordinal);
+    this.$init__com_google_j2cl_transpiler_readable_jstypeenum_Color();
+  }
+
+  /**
+   * Synthetic method.
+   * @param {Color} arg0
+   * @return {number}
+   * @public
+   */
+  m_compareTo__java_lang_Object(arg0) {
+    return this.m_compareTo__java_lang_Enum(
+        /**@type {Color} */ ($Casts.to(arg0, Color)));
+  }
+
+  /**
+   * @param {?string} name
+   * @return {Color}
+   * @public
+   */
+  static valueOf(name) {
+    Color.$clinit();
+    if (Color
+            .f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ ==
+        null) {
+      Color
+          .f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
+          $Enums.createMapFromValues(Color.values());
+    }
+    return $Enums.getValueFromNameAndMap(
+        name,
+        Color
+            .f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_);
+  }
+
+  /**
+   * @return {Array<Color>}
+   * @public
+   */
+  static values() {
+    Color.$clinit();
+    return /**@type {Array<Color>} */ (
+        $Arrays.$init([Color.RED, Color.GREEN, Color.BLUE], Color));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Color; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Color);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    Color.$clinit();
+    if (!Color.$classColor_) {
+      Color.$classColor_ = Class.$createForEnum(
+          $Util.$generateId('Color'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jstypeenum.Color'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jstypeenum.Color'),
+          // TODO(rluble): emit here the enum values
+          null);
+    }
+    return Color.$classColor_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return Color.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Color.$clinit = function() {};
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object = goog.module.get('gen.java.lang.Object$impl');
+    String = goog.module.get('gen.java.lang.String$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $Enums = goog.module.get('vmbootstrap.Enums$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Enum.$clinit();
+    Color.RED = Color.$create__java_lang_String__int("RED", 0);
+    Color.GREEN = Color.$create__java_lang_String__int("GREEN", 1);
+    Color.BLUE = Color.$create__java_lang_String__int("BLUE", 2);
+    Color
+        .f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
+        null;
+  }
+}
+;
+
+
+/**
+ * @public {Color}
+ */
+Color.RED = null;
+
+
+/**
+ * @public {Color}
+ */
+Color.GREEN = null;
+
+
+/**
+ * @public {Color}
+ */
+Color.BLUE = null;
+
+
+/**
+ * @public {*}
+ */
+Color
+    .f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
+    null;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Color.$classColor_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = Color;

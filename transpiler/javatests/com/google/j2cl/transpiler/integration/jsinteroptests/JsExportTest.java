@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
+import com.google.j2cl.transpiler.integration.jsinteroptests.MyExportedClass.InnerClass;
+
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -125,7 +127,10 @@ public class JsExportTest extends MyTestCase {
   private static native int getStaticInitializerStaticMethod();
 
 //  public void testClinit_virtualMethod() {
-//    assertNotNull(new NativeStaticInitializerVirtualMethod().getInstance());
+//    NativeStaticInitializerVirtualMethod instance1 = new NativeStaticInitializerVirtualMethod();
+//    assertNotNull(instance1);
+//    NativeStaticInitializerVirtualMethod instance2 = instance1.getInstance();
+//    assertNotNull(instance2);
 //  }
 //
 //  /**
@@ -134,7 +139,7 @@ public class JsExportTest extends MyTestCase {
 //   */
 //  @JsType(isNative = true, namespace = "woo", name = "StaticInitializerVirtualMethod")
 //  private static class NativeStaticInitializerVirtualMethod {
-//    public native Object getInstance();
+//    public native NativeStaticInitializerVirtualMethod getInstance();
 //  }
 //
 //  @JsType(namespace = "bar.foo.baz")
@@ -205,81 +210,84 @@ public class JsExportTest extends MyTestCase {
 //
 //  @JsProperty(namespace = "woo.MyExportedClass", name = "EXPORTED_1")
 //  private static native void setExportedField(int value);
-//
-//  public void testExportedMethod() {
-//    assertEquals(200, MyExportedClass.foo());
-//    assertEquals(200, callExportedMethod());
-//    setExportedMethod(getReplacementExportedMethod());
-//    assertEquals(200, MyExportedClass.foo());
-//    assertEquals(1000, callExportedMethod());
-//  }
-//
-//  @JsMethod(
-//      namespace = "woo.MyExportedClass", name = "foo")
-//  private static native int callExportedMethod();
-//
-//  @JsProperty(
-//      namespace = "woo.MyExportedClass", name = "foo")
-//  private static native void setExportedMethod(Object object);
-//
-//  @JsProperty(
-//      namespace = "woo.MyExportedClass", name = "replacementFoo")
-//  private static native Object getReplacementExportedMethod();
-//
-//  public void testExportedFieldRefInExportedMethod() {
-//    assertEquals(5, MyExportedClass.bar(0, 0));
-//    assertEquals(5, callExportedFieldByExportedMethod(0, 0));
-//    setExportedField2(myExportedClassNewInnerClass(10));
-//
-//    assertEquals(10, getExportedField2());
-//    assertEquals(7, MyExportedClass.bar(1, 1));
-//    assertEquals(7, callExportedFieldByExportedMethod(1, 1));
-//  }
-//
-//  @JsMethod(namespace = "woo.MyExportedClass", name = "bar")
-//  private static native int callExportedFieldByExportedMethod(int a, int b);
-//
-//  @JsProperty(namespace = "woo.MyExportedClass", name = "EXPORTED_2")
-//  private static native void setExportedField2(InnerClass a);
-//
-//  @JsMethod(namespace = "woo.MyExportedClass", name = "newInnerClass")
-//  private static native InnerClass myExportedClassNewInnerClass(int a);
-//
-//  @JsProperty(namespace = "woo.MyExportedClass.EXPORTED_2", name = "field")
-//  private static native int getExportedField2();
-//
-//  public void testNoExport() {
-//    assertNull(getNotExportedMethod1());
-//    assertNull(getNotExportedMethod2());
-//
-//    assertNull(getNotExported1());
-//    assertNull(getNotExported2());
-//    assertNull(getNotExported3());
-//    assertNull(getNotExported4());
-//    assertNull(getNotExported5());
-//  }
-//
-//  @JsProperty(namespace = "woo.StaticInitializerStaticMethod", name = "notExported_1")
-//  private static native Object getNotExportedMethod1();
-//
-//  @JsProperty(namespace = "woo.StaticInitializerStaticMethod", name = "notExported_2")
-//  private static native Object getNotExportedMethod2();
-//
-//  @JsProperty(namespace = "woo.StaticInitializerStaticField", name = "NOT_EXPORTED_1")
-//  private static native Object getNotExported1();
-//
-//  @JsProperty(namespace = "woo.StaticInitializerStaticField", name = "NOT_EXPORTED_2")
-//  private static native Object getNotExported2();
-//
-//  @JsProperty(namespace = "woo.StaticInitializerStaticField", name = "NOT_EXPORTED_3")
-//  private static native Object getNotExported3();
-//
-//  @JsProperty(namespace = "woo.StaticInitializerStaticField", name = "NOT_EXPORTED_4")
-//  private static native Object getNotExported4();
-//
-//  @JsProperty(namespace = "woo.StaticInitializerStaticField", name = "NOT_EXPORTED_5")
-//  private static native Object getNotExported5();
-//
+
+  public void testExportedMethod() {
+    assertEquals(200, MyExportedClass.foo());
+    assertEquals(200, callExportedMethod());
+
+    // Different than GWT, exported fields and methods are not an immutable copy.
+    setExportedMethod(getReplacementExportedMethod());
+    assertEquals(1000, MyExportedClass.foo());
+    assertEquals(1000, callExportedMethod());
+  }
+
+  @JsMethod(
+      namespace = "woo.MyExportedClass", name = "foo")
+  private static native int callExportedMethod();
+
+  @JsProperty(
+      namespace = "woo.MyExportedClass", name = "foo")
+  private static native void setExportedMethod(Object object);
+
+  @JsProperty(
+      namespace = "woo.MyExportedClass", name = "replacementFoo")
+  private static native Object getReplacementExportedMethod();
+
+  public void testExportedFieldRefInExportedMethod() {
+    assertEquals(5, MyExportedClass.bar(0, 0));
+    assertEquals(5, callExportedFieldByExportedMethod(0, 0));
+    setExportedField2(myExportedClassNewInnerClass(10));
+
+    // Different than GWT, exported fields and methods are not an immutable copy.
+    assertEquals(10, getExportedField2());
+    assertEquals(12, MyExportedClass.bar(1, 1));
+    assertEquals(12, callExportedFieldByExportedMethod(1, 1));
+  }
+
+  @JsMethod(namespace = "woo.MyExportedClass", name = "bar")
+  private static native int callExportedFieldByExportedMethod(int a, int b);
+
+  @JsProperty(namespace = "woo.MyExportedClass", name = "EXPORTED_2")
+  private static native void setExportedField2(InnerClass a);
+
+  @JsMethod(namespace = "woo.MyExportedClass", name = "newInnerClass")
+  private static native InnerClass myExportedClassNewInnerClass(int a);
+
+  @JsProperty(namespace = "woo.MyExportedClass", name = "EXPORTED_2.field")
+  private static native int getExportedField2();
+
+  public void testNoExport() {
+    assertNull(getNotExportedMethod1());
+    assertNull(getNotExportedMethod2());
+
+    assertNull(getNotExported1());
+    assertNull(getNotExported2());
+    assertNull(getNotExported3());
+    assertNull(getNotExported4());
+    assertNull(getNotExported5());
+  }
+
+  @JsProperty(namespace = "woo.StaticInitializerStaticMethod", name = "notExported_1")
+  private static native Object getNotExportedMethod1();
+
+  @JsProperty(namespace = "woo.StaticInitializerStaticMethod", name = "notExported_2")
+  private static native Object getNotExportedMethod2();
+
+  @JsProperty(namespace = "woo.StaticInitializerStaticField", name = "NOT_EXPORTED_1")
+  private static native Object getNotExported1();
+
+  @JsProperty(namespace = "woo.StaticInitializerStaticField", name = "NOT_EXPORTED_2")
+  private static native Object getNotExported2();
+
+  @JsProperty(namespace = "woo.StaticInitializerStaticField", name = "NOT_EXPORTED_3")
+  private static native Object getNotExported3();
+
+  @JsProperty(namespace = "woo.StaticInitializerStaticField", name = "NOT_EXPORTED_4")
+  private static native Object getNotExported4();
+
+  @JsProperty(namespace = "woo.StaticInitializerStaticField", name = "NOT_EXPORTED_5")
+  private static native Object getNotExported5();
+
 //  public void testInheritClassNamespace() {
 //    assertEquals(42, getBAR());
 //  }
@@ -383,20 +391,20 @@ public class JsExportTest extends MyTestCase {
 //  @JsProperty(namespace = "woo.MyExportedEnum", name = "TEST2")
 //  private static native Object getEnumerationTEST2();
 //
-//  public void testEnum_exportedMethods() {
-//    assertNotNull(getPublicStaticMethodInEnum());
-//    assertNotNull(getValuesMethodInEnum());
-//    assertNotNull(getValueOfMethodInEnum());
-//  }
-//
-//  @JsProperty(namespace = "woo.MyExportedEnum", name = "publicStaticMethod")
-//  private static native Object getPublicStaticMethodInEnum();
-//
-//  @JsProperty(namespace = "woo.MyExportedEnum", name = "values")
-//  private static native Object getValuesMethodInEnum();
-//
-//  @JsProperty(namespace = "woo.MyExportedEnum", name = "valueOf")
-//  private static native Object getValueOfMethodInEnum();
+  public void testEnum_exportedMethods() {
+    assertNotNull(getPublicStaticMethodInEnum());
+    assertNotNull(getValuesMethodInEnum());
+    assertNotNull(getValueOfMethodInEnum());
+  }
+
+  @JsProperty(namespace = "woo.MyExportedEnum", name = "publicStaticMethod")
+  private static native Object getPublicStaticMethodInEnum();
+
+  @JsProperty(namespace = "woo.MyExportedEnum", name = "values")
+  private static native Object getValuesMethodInEnum();
+
+  @JsProperty(namespace = "woo.MyExportedEnum", name = "valueOf")
+  private static native Object getValueOfMethodInEnum();
 //
 //  public void testEnum_exportedFields() {
 //    assertEquals(1, getPublicStaticFinalFieldInEnum());
@@ -411,43 +419,43 @@ public class JsExportTest extends MyTestCase {
 //
 //  @JsProperty(namespace = "woo.MyExportedEnum", name = "publicStaticField")
 //  private static native int getPublicStaticFieldInEnum();
-//
-//  public void testEnum_notExported() {
-//    assertNull(myExportedEnumPublicFinalField());
-//    assertNull(myExportedEnumPrivateStaticFinalField());
-//    assertNull(myExportedEnumProtectedStaticFinalField());
-//    assertNull(myExportedEnumDefaultStaticFinalField());
-//
-//    assertNull(myExportedEnumPublicMethod());
-//    assertNull(myExportedEnumProtectedStaticMethod());
-//    assertNull(myExportedEnumPrivateStaticMethod());
-//    assertNull(myExportedEnumDefaultStaticMethod());
-//  }
-//
-//  @JsProperty(namespace = "woo.MyExportedEnum", name = "publicFinalField")
-//  private static native Object myExportedEnumPublicFinalField();
-//
-//  @JsProperty(namespace = "woo.MyExportedEnum", name = "privateStaticFinalField")
-//  private static native Object myExportedEnumPrivateStaticFinalField();
-//
-//  @JsProperty(namespace = "woo.MyExportedEnum", name = "protectedStaticFinalField")
-//  private static native Object myExportedEnumProtectedStaticFinalField();
-//
-//  @JsProperty(namespace = "woo.MyExportedEnum", name = "defaultStaticFinalField")
-//  private static native Object myExportedEnumDefaultStaticFinalField();
-//
-//  @JsProperty(namespace = "woo.MyExportedEnum", name = "publicMethod")
-//  private static native Object myExportedEnumPublicMethod();
-//
-//  @JsProperty(namespace = "woo.MyExportedEnum", name = "protectedStaticMethod")
-//  private static native Object myExportedEnumProtectedStaticMethod();
-//
-//  @JsProperty(namespace = "woo.MyExportedEnum", name = "privateStaticMethod")
-//  private static native Object myExportedEnumPrivateStaticMethod();
-//
-//  @JsProperty(namespace = "woo.MyExportedEnum", name = "defaultStaticMethod")
-//  private static native Object myExportedEnumDefaultStaticMethod();
-//
+
+  public void testEnum_notExported() {
+    assertNull(myExportedEnumPublicFinalField());
+    assertNull(myExportedEnumPrivateStaticFinalField());
+    assertNull(myExportedEnumProtectedStaticFinalField());
+    assertNull(myExportedEnumDefaultStaticFinalField());
+
+    assertNull(myExportedEnumPublicMethod());
+    assertNull(myExportedEnumProtectedStaticMethod());
+    assertNull(myExportedEnumPrivateStaticMethod());
+    assertNull(myExportedEnumDefaultStaticMethod());
+  }
+
+  @JsProperty(namespace = "woo.MyExportedEnum", name = "publicFinalField")
+  private static native Object myExportedEnumPublicFinalField();
+
+  @JsProperty(namespace = "woo.MyExportedEnum", name = "privateStaticFinalField")
+  private static native Object myExportedEnumPrivateStaticFinalField();
+
+  @JsProperty(namespace = "woo.MyExportedEnum", name = "protectedStaticFinalField")
+  private static native Object myExportedEnumProtectedStaticFinalField();
+
+  @JsProperty(namespace = "woo.MyExportedEnum", name = "defaultStaticFinalField")
+  private static native Object myExportedEnumDefaultStaticFinalField();
+
+  @JsProperty(namespace = "woo.MyExportedEnum", name = "publicMethod")
+  private static native Object myExportedEnumPublicMethod();
+
+  @JsProperty(namespace = "woo.MyExportedEnum", name = "protectedStaticMethod")
+  private static native Object myExportedEnumProtectedStaticMethod();
+
+  @JsProperty(namespace = "woo.MyExportedEnum", name = "privateStaticMethod")
+  private static native Object myExportedEnumPrivateStaticMethod();
+
+  @JsProperty(namespace = "woo.MyExportedEnum", name = "defaultStaticMethod")
+  private static native Object myExportedEnumDefaultStaticMethod();
+
 //  public void testEnum_subclassEnumerations() {
 //    assertNotNull(getEnumerationA());
 //    assertNotNull(getEnumerationB());
