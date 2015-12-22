@@ -1,4 +1,4 @@
-goog.module('test.foo.Main$NativeJsTypeWithOverlay');
+goog.module('test.foo.NativeJsTypeWithOverlay');
 
 
 class Main$NativeJsTypeWithOverlay {

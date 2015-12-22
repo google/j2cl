@@ -245,9 +245,28 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
   }
 
   public String getQualifiedName() {
-    String namespace = getJsTypeNamespace() != null ? getJsTypeNamespace() : getPackageName();
-    namespace = JsInteropUtils.isGlobal(namespace) ? "" : namespace;
-    String className = getJsTypeName() != null ? getJsTypeName() : getClassName();
+    String namespace = getPackageName();
+    String className = getClassName();
+
+    // If a custom js namespace was specified.
+    if (getJsTypeNamespace() != null) {
+      // The effect is to replace both the package and the class's enclosing class prefixes.
+      namespace = getJsTypeNamespace();
+      className = getSimpleName();
+    }
+
+    // If the JS namespace the user specified was JsPackage.GLOBAL then consider that to be top
+    // level.
+    if (JsInteropUtils.isGlobal(namespace)) {
+      namespace = "";
+    }
+
+    // If a custom JS name was specified.
+    if (getJsTypeName() != null) {
+      // Then use it instead of the (potentially enclosing class qualified) class name.
+      className = getJsTypeName();
+    }
+
     return Joiner.on(".")
         .skipNulls()
         .join(Strings.emptyToNull(namespace), Strings.emptyToNull(className));

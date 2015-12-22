@@ -1,4 +1,4 @@
-goog.module('test.foo.JsTypeTest$MyNativeJsTypeInterface');
+goog.module('test.foo.MyNativeJsTypeInterface');
 
 /**
  * @interface

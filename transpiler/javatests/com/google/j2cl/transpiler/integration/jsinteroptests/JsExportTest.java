@@ -142,23 +142,21 @@ public class JsExportTest extends MyTestCase {
 //  private static class NativeStaticInitializerVirtualMethod {
 //    public native NativeStaticInitializerVirtualMethod getInstance();
 //  }
-//
-//  @JsType(namespace = "bar.foo.baz")
-//  class MyExportedClassCorrectNamespace {
-//    public MyExportedClassCorrectNamespace() { }
-//  }
-//
-//  public void testExportClass_correctNamespace() {
-//    // Check is deprecated in J2CL because these result in an attempt to import a module that
-//    // does not exist and this attempt is a compile error in JSCompiler.
-//    // assertNull(getBarMyExportedClassCorrectNamespace());
-//    // assertNull(getBarFooMyExportedClassCorrectNamespace());
-//
-//    assertTrue(getBarFooBazMyExportedClassCorrectNamespace() instanceof NativeFunction);
-//    Object o = new NativeMyExportedClassCorrectNamespace();
-//    assertNotNull(o);
-//    assertTrue(o instanceof MyExportedClassCorrectNamespace);
-//  }
+
+  @JsType(namespace = "bar.foo.baz")
+  class MyExportedClassCorrectNamespace {
+    public MyExportedClassCorrectNamespace() { }
+  }
+
+  public void testExportClass_correctNamespace() {
+    // Check is deprecated in J2CL because these result in an attempt to import a module that
+    // does not exist and this attempt is a compile error in JSCompiler.
+    // assertNull(getBarMyExportedClassCorrectNamespace());
+    // assertNull(getBarFooMyExportedClassCorrectNamespace());
+
+    Object o = new NativeMyExportedClassCorrectNamespace();
+    assertTrue(o instanceof MyExportedClassCorrectNamespace);
+  }
 
   // Check is deprecated in J2CL because these result in an attempt to import a module that does not
   // exist and this attempt is a compile error in JSCompiler.
@@ -168,14 +166,8 @@ public class JsExportTest extends MyTestCase {
   // @JsProperty(namespace = "bar.foo", name = "MyExportedClassCorrectNamespace")
   // private static native Object getBarFooMyExportedClassCorrectNamespace();
 
-//  @JsProperty(namespace = "bar.foo.baz", name = "MyExportedClassCorrectNamespace")
-//  private static native Object getBarFooBazMyExportedClassCorrectNamespace();
-//
-//  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Function")
-//  private static class NativeFunction { }
-//
-//  @JsType(isNative = true, namespace = "bar.foo.baz", name = "MyExportedClassCorrectNamespace")
-//  private static class NativeMyExportedClassCorrectNamespace { }
+  @JsType(isNative = true, namespace = "bar.foo.baz", name = "MyExportedClassCorrectNamespace")
+  private static class NativeMyExportedClassCorrectNamespace { }
 
   public void testExportClass_implicitConstructor() {
     Object o = new NativeMyExportedClassWithImplicitConstructor();

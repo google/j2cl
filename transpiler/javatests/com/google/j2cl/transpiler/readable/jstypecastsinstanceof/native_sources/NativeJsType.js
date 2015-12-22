@@ -1,4 +1,4 @@
-goog.module('test.foo.CastToNativeType$NativeJsType');
+goog.module('test.foo.NativeJsType');
 
 
 class CastToNativeType$NativeJsType {}

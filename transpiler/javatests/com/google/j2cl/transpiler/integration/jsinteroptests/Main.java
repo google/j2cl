@@ -24,7 +24,7 @@ public class Main {
     test.testEnum_notExported();
     test.testEnum_subclassEnumerations();
     test.testEnum_subclassMethodCallFromExportedEnumerations();
-    // test.testExportClass_correctNamespace();
+    test.testExportClass_correctNamespace();
     test.testExportClass_implicitConstructor();
     // test.testExportConstructors();
     // test.testExportedField();

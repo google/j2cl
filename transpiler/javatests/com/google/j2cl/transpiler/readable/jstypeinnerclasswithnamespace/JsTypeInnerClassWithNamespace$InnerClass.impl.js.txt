@@ -1,0 +1,142 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace$InnerClass.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const}
+ */
+goog.module('bar.foo.baz.InnerClass$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let JsTypeInnerClassWithNamespace = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+class JsTypeInnerClassWithNamespace$InnerClass extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {JsTypeInnerClassWithNamespace}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace$InnerClass =
+        null;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace$InnerClass() {
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {JsTypeInnerClassWithNamespace} $outer_this
+   * @return {!JsTypeInnerClassWithNamespace$InnerClass}
+   * @public
+   */
+  static $create__com_google_j2cl_transpiler_readable_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace(
+      $outer_this) {
+    JsTypeInnerClassWithNamespace$InnerClass.$clinit();
+    let $instance = new JsTypeInnerClassWithNamespace$InnerClass;
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace$InnerClass__com_google_j2cl_transpiler_readable_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace(
+            $outer_this);
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {JsTypeInnerClassWithNamespace} $outer_this
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace$InnerClass__com_google_j2cl_transpiler_readable_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace$InnerClass =
+        $outer_this;
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace$InnerClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof JsTypeInnerClassWithNamespace$InnerClass;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(
+        classConstructor, JsTypeInnerClassWithNamespace$InnerClass);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    JsTypeInnerClassWithNamespace$InnerClass.$clinit();
+    if (!JsTypeInnerClassWithNamespace$InnerClass
+             .$classJsTypeInnerClassWithNamespace$InnerClass_) {
+      JsTypeInnerClassWithNamespace$InnerClass
+          .$classJsTypeInnerClassWithNamespace$InnerClass_ = Class.$createForClass(
+          $Util.$generateId('InnerClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace$InnerClass'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass'));
+    }
+    return JsTypeInnerClassWithNamespace$InnerClass
+        .$classJsTypeInnerClassWithNamespace$InnerClass_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return JsTypeInnerClassWithNamespace$InnerClass.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    JsTypeInnerClassWithNamespace = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+JsTypeInnerClassWithNamespace$InnerClass
+    .$classJsTypeInnerClassWithNamespace$InnerClass_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = JsTypeInnerClassWithNamespace$InnerClass;
