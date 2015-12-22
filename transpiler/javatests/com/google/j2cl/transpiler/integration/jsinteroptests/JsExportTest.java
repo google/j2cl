@@ -104,6 +104,7 @@ public class JsExportTest extends MyTestCase {
 //  @JsType(isNative = true, namespace = "woo", name = "MyClassExportsMethodWithClinit")
 //  private static class NativeMyClassExportsMethodWithClinit { }
 //
+//  // Requires b/25512693 fixed and cl/107609415 rolled back
 //  public void testClinit_staticField() {
 //    assertNotNull(getStaticInitializerStaticFieldExported1());
 //    assertNotNull(getStaticInitializerStaticFieldExported2());
@@ -295,7 +296,7 @@ public class JsExportTest extends MyTestCase {
 //  @JsProperty(namespace = "foo.MyExportedClassWithNamespace", name = "BAR")
 //  private static native int getBAR();
 //
-//  public static void testInheritClassNamespace_empty() {
+//  public void testInheritClassNamespace_empty() {
 //    assertEquals(82, getDAN());
 //    assertNotNull(new NativeMyClassWithEmptyNamespace());
 //  }
@@ -303,10 +304,14 @@ public class JsExportTest extends MyTestCase {
 //  @JsProperty(namespace = "MyClassWithEmptyNamespace", name = "DAN")
 //  private static native int getDAN();
 //
-//  @JsType(isNative = true, name = "MyClassWithEmptyNamespace")
+//  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "MyClassWithEmptyNamespace")
 //  private static class NativeMyClassWithEmptyNamespace { }
 
-  public static void testInheritClassNamespace_withName() {
+  public void testInheritClassNamespace_withName() {
+    // TODO: remove when b/25512693 is resolved and cl/107609415 is rolled back
+    @SuppressWarnings("unused")
+    Object o = MyExportedClassWithNamespaceAndName.BAR; // trigger clinit.
+
     assertEquals(42, getBooBAR());
   }
 
@@ -325,7 +330,7 @@ public class JsExportTest extends MyTestCase {
 //    assertNotNull(new BlooInner());
 //  }
 //
-//  @JsProperty(namespace = "woo.Bloo.Inner", name = "LOO")
+//  @JsProperty(namespace = "woo.Bloo", name = "Inner.LOO")
 //  private static native int getLOO();
 //
 //  @JsType(isNative = true, namespace = "woo.Bloo", name = "Inner")
@@ -364,33 +369,41 @@ public class JsExportTest extends MyTestCase {
 //    assertNotNull(getNestedEnum());
 //  }
 //
-//  @JsProperty(namespace = "woo.MyClassWithNestedExportedClass.InnerEnum", name = "AA")
+//  @JsProperty(namespace = "woo.MyClassWithNestedExportedClass", name = "InnerEnum.AA")
 //  private static native Object getNestedEnum();
-//
-//  public void testInheritPackageNamespace_subpackage() {
-//    assertNull(getNestedSubpackage());
-//    assertNotNull(getNestedSubpackageCorrect());
-//  }
-//
+
+  public void testInheritPackageNamespace_subpackage() {
+    // This is different than GWT. Sub packages can't be imported or referenced in a goog.module()
+    // world. To attempt it is a compile error.
+    // assertNull(getNestedSubpackage());
+
+    assertNotNull(new NativeMyNestedExportedClassSansPackageNamespace());
+  }
+
 //  @JsProperty(namespace = "woo", name = "subpackage")
 //  private static native Object getNestedSubpackage();
-//
-//  @JsProperty(
-//      namespace = "com.google.gwt.core.interop.subpackage",
-//      name = "MyNestedExportedClassSansPackageNamespace")
-//  private static native Object getNestedSubpackageCorrect();
-//
-//  public void testEnum_enumerations() {
-//    assertNotNull(getEnumerationTEST1());
-//    assertNotNull(getEnumerationTEST2());
-//  }
-//
-//  @JsProperty(namespace = "woo.MyExportedEnum", name = "TEST1")
-//  private static native Object getEnumerationTEST1();
-//
-//  @JsProperty(namespace = "woo.MyExportedEnum", name = "TEST2")
-//  private static native Object getEnumerationTEST2();
-//
+
+  @JsType(
+      isNative = true,
+      namespace = "com.google.j2cl.transpiler.integration.jsinteroptests.subpackage",
+      name = "MyNestedExportedClassSansPackageNamespace")
+  private static class NativeMyNestedExportedClassSansPackageNamespace {}
+
+  public void testEnum_enumerations() {
+    // TODO: remove when b/25512693 is resolved and cl/107609415 is rolled back
+    @SuppressWarnings("unused")
+    Object o = MyExportedEnum.TEST1; // trigger clinit.
+
+    assertNotNull(getEnumerationTEST1());
+    assertNotNull(getEnumerationTEST2());
+  }
+
+  @JsProperty(namespace = "woo.MyExportedEnum", name = "TEST1")
+  private static native Object getEnumerationTEST1();
+
+  @JsProperty(namespace = "woo.MyExportedEnum", name = "TEST2")
+  private static native Object getEnumerationTEST2();
+
   public void testEnum_exportedMethods() {
     assertNotNull(getPublicStaticMethodInEnum());
     assertNotNull(getValuesMethodInEnum());
@@ -405,20 +418,24 @@ public class JsExportTest extends MyTestCase {
 
   @JsProperty(namespace = "woo.MyExportedEnum", name = "valueOf")
   private static native Object getValueOfMethodInEnum();
-//
-//  public void testEnum_exportedFields() {
-//    assertEquals(1, getPublicStaticFinalFieldInEnum());
-//
-//    // explicitly marked @JsType() fields must be final
-//    // but ones that are in a @JsType()ed class don't need to be final
-//    assertEquals(2, getPublicStaticFieldInEnum());
-//  }
-//
-//  @JsProperty(namespace = "woo.MyExportedEnum", name = "publicStaticFinalField")
-//  private static native int getPublicStaticFinalFieldInEnum();
-//
-//  @JsProperty(namespace = "woo.MyExportedEnum", name = "publicStaticField")
-//  private static native int getPublicStaticFieldInEnum();
+
+  public void testEnum_exportedFields() {
+    // TODO: remove when b/25512693 is resolved and cl/107609415 is rolled back
+    @SuppressWarnings("unused")
+    Object o = MyExportedEnum.TEST1; // trigger clinit.
+
+    assertEquals(1, getPublicStaticFinalFieldInEnum());
+
+    // explicitly marked @JsType() fields must be final
+    // but ones that are in a @JsType()ed class don't need to be final
+    assertEquals(2, getPublicStaticFieldInEnum());
+  }
+
+  @JsProperty(namespace = "woo.MyExportedEnum", name = "publicStaticFinalField")
+  private static native int getPublicStaticFinalFieldInEnum();
+
+  @JsProperty(namespace = "woo.MyExportedEnum", name = "publicStaticField")
+  private static native int getPublicStaticFieldInEnum();
 
   public void testEnum_notExported() {
     assertNull(myExportedEnumPublicFinalField());
@@ -456,33 +473,41 @@ public class JsExportTest extends MyTestCase {
   @JsProperty(namespace = "woo.MyExportedEnum", name = "defaultStaticMethod")
   private static native Object myExportedEnumDefaultStaticMethod();
 
-//  public void testEnum_subclassEnumerations() {
-//    assertNotNull(getEnumerationA());
-//    assertNotNull(getEnumerationB());
-//    assertNotNull(getEnumerationC());
-//  }
-//
-//  @JsProperty(namespace = "woo.MyEnumWithSubclassGen", name = "A")
-//  private static native Object getEnumerationA();
-//
-//  @JsProperty(namespace = "woo.MyEnumWithSubclassGen", name = "B")
-//  private static native Object getEnumerationB();
-//
-//  @JsProperty(namespace = "woo.MyEnumWithSubclassGen", name = "C")
-//  private static native Object getEnumerationC();
-//
-//  public void testEnum_subclassMethodCallFromExportedEnumerations() {
-//    assertEquals(100, callPublicMethodFromEnumerationA());
-//    assertEquals(200, callPublicMethodFromEnumerationB());
-//    assertEquals(1, callPublicMethodFromEnumerationC());
-//  }
-//
-//  @JsMethod(namespace = "woo.MyEnumWithSubclassGen.A", name = "foo")
-//  private static native int callPublicMethodFromEnumerationA();
-//
-//  @JsMethod(namespace = "woo.MyEnumWithSubclassGen.B", name = "foo")
-//  private static native int callPublicMethodFromEnumerationB();
-//
-//  @JsMethod(namespace = "woo.MyEnumWithSubclassGen.C", name = "foo")
-//  private static native int callPublicMethodFromEnumerationC();
+  public void testEnum_subclassEnumerations() {
+    // TODO: remove when b/25512693 is resolved and cl/107609415 is rolled back
+    @SuppressWarnings("unused")
+    Object o = MyEnumWithSubclassGen.A; // trigger clinit.
+
+    assertNotNull(getEnumerationA());
+    assertNotNull(getEnumerationB());
+    assertNotNull(getEnumerationC());
+  }
+
+  @JsProperty(namespace = "woo.MyEnumWithSubclassGen", name = "A")
+  private static native Object getEnumerationA();
+
+  @JsProperty(namespace = "woo.MyEnumWithSubclassGen", name = "B")
+  private static native Object getEnumerationB();
+
+  @JsProperty(namespace = "woo.MyEnumWithSubclassGen", name = "C")
+  private static native Object getEnumerationC();
+
+  public void testEnum_subclassMethodCallFromExportedEnumerations() {
+    // TODO: remove when b/25512693 is resolved and cl/107609415 is rolled back
+    @SuppressWarnings("unused")
+    Object o = MyEnumWithSubclassGen.A; // trigger clinit.
+
+    assertEquals(100, callPublicMethodFromEnumerationA());
+    assertEquals(200, callPublicMethodFromEnumerationB());
+    assertEquals(1, callPublicMethodFromEnumerationC());
+  }
+
+  @JsMethod(namespace = "woo.MyEnumWithSubclassGen", name = "A.foo")
+  private static native int callPublicMethodFromEnumerationA();
+
+  @JsMethod(namespace = "woo.MyEnumWithSubclassGen", name = "B.foo")
+  private static native int callPublicMethodFromEnumerationB();
+
+  @JsMethod(namespace = "woo.MyEnumWithSubclassGen", name = "C.foo")
+  private static native int callPublicMethodFromEnumerationC();
 }
