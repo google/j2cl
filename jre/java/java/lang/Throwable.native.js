@@ -28,9 +28,17 @@ Throwable.prototype.m_constructJavaStackTrace_$p_java_lang_Throwable =
  * @return {Error}
  * @public
  */
-Throwable.m_createError__java_lang_String_$p_java_lang_Throwable =
+Throwable.prototype.m_createError__java_lang_String_$pp_java_lang =
     function(msg) {
-  var e = new Error(msg);
+  return new Error(msg);
+};
+
+/**
+ * @param {Error} e
+ * @return {Error}
+ * @public
+ */
+Throwable.m_fixIE__java_lang_Object_$p_java_lang_Throwable = function(e) {
   if (!('stack' in e)) {
     try { throw e; } catch (ignored) {}
   }

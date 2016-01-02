@@ -52,7 +52,6 @@ jsni_to_j2cl_converter(
         ":emul_tests_lib",
         "//jre/java:JavaJre_java_library",
         "//junit/opensource/java:junit_emul_java_library",
-        "//third_party/java/gwt:gwt-jsinterop-annotations",
     ],
 )
 
@@ -73,6 +72,7 @@ java_library(
     srcs = TEST_SRCS,
     deps = [
         ":javaemul_interal_java_library",
+        "//third_party/java/gwt:gwt-jsinterop-annotations",
         "//third_party/java/junit",
     ],
 )
