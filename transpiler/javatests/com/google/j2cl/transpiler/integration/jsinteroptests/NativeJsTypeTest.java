@@ -10,20 +10,21 @@ import jsinterop.annotations.JsType;
  * Tests native JsType functionality.
  */
 public class NativeJsTypeTest extends MyTestCase {
-//  @JsType(isNative = true)
-//  static class MyNativeJsType {
-//    // TODO(rluble): these methods should be synthesized by the compiler.
-//    @Override
-//    public native String toString();
-//    @Override
-//    public native boolean equals(Object o);
-//    @Override
-//    public native int hashCode();
-//  }
-//
-//  @JsType(isNative = true)
-//  interface MyNativeJsTypeInterface {
-//  }
+  @JsType(isNative = true)
+  static class MyNativeJsType {
+    // TODO(rluble): these methods should be synthesized by the compiler.
+    @Override
+    public native String toString();
+
+    @Override
+    public native boolean equals(Object o);
+
+    @Override
+    public native int hashCode();
+  }
+
+  @JsType(isNative = true)
+  interface MyNativeJsTypeInterface {}
 
 //  public void testClassLiterals() {
 //    assertEquals(JavaScriptObject.class, MyNativeJsType.class);
@@ -37,29 +38,38 @@ public class NativeJsTypeTest extends MyTestCase {
 //    assertEquals(JavaScriptObject.class, nativeObject.getClass());
 //    assertEquals(JavaScriptObject.class, ((MyNativeJsTypeInterface) nativeObject).getClass());
 //  }
-//
-//  public void testToString() {
-//    Object nativeObjectWithToString = createNativeObjectWithToString();
-//    assertEquals("Native type", nativeObjectWithToString.toString());
-//
-//    Object nativeObjectWithoutToString = createNativeObjectWithoutToString();
-//    assertEquals("[object Object]", nativeObjectWithoutToString.toString());
-//
-//    Object nativeArray = createNativeArray();
-//    assertEquals("", nativeArray.toString());
-//  }
 
-//  private static native MyNativeJsType createNativeObjectWithToString() /*-{
-//    return {toString: function() { return "Native type"; } };
-//  }-*/;
-//
-//  private static native MyNativeJsType createNativeObjectWithoutToString() /*-{
-//    return {};
-//  }-*/;
-//
-//  private static native Object createNativeArray() /*-{
-//    return [];
-//  }-*/;
+  public void testToString() {
+    Object nativeObjectWithToString = createNativeObjectWithToString();
+    assertEquals("Native type", nativeObjectWithToString.toString());
+
+    Object nativeObjectWithoutToString = createNativeObjectWithoutToString();
+    assertEquals("[object Object]", nativeObjectWithoutToString.toString());
+
+    // Object nativeArray = createNativeArray();
+    // assertEquals("", nativeArray.toString());
+  }
+
+  public void testEquals() {
+    Object obj1 = createNativeObjectWithoutToString();
+    Object obj2 = createNativeObjectWithoutToString();
+    assert obj1.equals(obj1);
+    assert !obj1.equals(obj2);
+
+    Object nativeArray1 = createNativeArray();
+    Object nativeArray2 = createNativeArray();
+    assert nativeArray1.equals(nativeArray1);
+    assert !nativeArray1.equals(nativeArray2);
+  }
+
+  @JsMethod
+  private static native MyNativeJsType createNativeObjectWithToString();
+
+  @JsMethod
+  private static native MyNativeJsType createNativeObjectWithoutToString();
+
+  @JsMethod
+  private static native Object createNativeArray();
 
   @JsType(isNative = true, namespace = GLOBAL, name = "Object")
   static class NativeJsTypeWithOverlay {

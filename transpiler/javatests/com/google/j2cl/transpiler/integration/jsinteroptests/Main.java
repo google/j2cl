@@ -143,7 +143,8 @@ public class Main {
   public static void runNativeJsTypeTest() {
     NativeJsTypeTest test = new NativeJsTypeTest();
     // test.testClassLiterals();
-    // test.testToString();
+    test.testToString();
+    test.testEquals();
     test.testNativeJsTypeWithOverlay();
     test.testNativeJsTypeWithStaticIntializer();
   }

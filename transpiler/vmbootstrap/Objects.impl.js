@@ -25,20 +25,10 @@ class Objects {
    */
   static m_equals__java_lang_Object__java_lang_Object(obj, other) {
     Objects.$clinit();
-    let type = typeof obj;
-    if (type == 'number') {
-      return Double.m_equals__java_lang_Double__java_lang_Object(
-          /**@type {?number}*/ (obj), other);
-    } else if (type == 'boolean') {
-      return Boolean.m_equals__java_lang_Boolean__java_lang_Object(
-          /**@type {?boolean}*/ (obj), other);
-    } else if (type == 'string') {
-      return String.m_equals__java_lang_String__java_lang_Object(
-          /**@type {?string}*/ (obj), other);
-    } else if (obj instanceof Array) {
-      return Arrays.m_equals__java_lang_Object__java_lang_Object(obj, other);
-    } else {
+    if (obj.m_equals__java_lang_Object) {
       return obj.m_equals__java_lang_Object(other);
+    } else {
+      return obj === other;
     }
   }
 
@@ -70,17 +60,12 @@ class Objects {
    */
   static m_toString__java_lang_Object(obj) {
     Objects.$clinit();
-    let type = typeof obj;
-    if (type == 'number') {
-      return obj.toString();
-    } else if (type == 'boolean') {
-      return obj.toString();
-    } else if (type == 'string') {
-      return obj.toString();
+    if (obj.m_toString) {
+      return obj.m_toString();
     } else if (obj instanceof Array) {
       return Arrays.m_toString__java_lang_Object(obj);
     } else {
-      return obj.m_toString();
+      return obj.toString();
     }
   }
 
