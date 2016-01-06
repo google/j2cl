@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.integration.jsinteroptests;
 import com.google.j2cl.transpiler.integration.jsinteroptests.MyExportedClass.InnerClass;
 
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
@@ -288,16 +289,16 @@ public class JsExportTest extends MyTestCase {
   @JsProperty(namespace = "foo.MyExportedClassWithNamespace", name = "BAR")
   private static native int getBAR();
 
-//  public void testInheritClassNamespace_empty() {
-//    assertEquals(82, getDAN());
-//    assertNotNull(new NativeMyClassWithEmptyNamespace());
-//  }
-//
-//  @JsProperty(namespace = "MyClassWithEmptyNamespace", name = "DAN")
-//  private static native int getDAN();
-//
-//  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "MyClassWithEmptyNamespace")
-//  private static class NativeMyClassWithEmptyNamespace { }
+  public void testInheritClassNamespace_empty() {
+    assertEquals(82, getDAN());
+    assertNotNull(new NativeMyClassWithEmptyNamespace());
+  }
+
+  @JsProperty(namespace = "MyClassWithEmptyNamespace", name = "DAN")
+  private static native int getDAN();
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "MyClassWithEmptyNamespace")
+  private static class NativeMyClassWithEmptyNamespace { }
 
   public void testInheritClassNamespace_withName() {
     // TODO: remove when b/25512693 is resolved and cl/107609415 is rolled back
