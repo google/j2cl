@@ -281,13 +281,13 @@ public class JsExportTest extends MyTestCase {
   @JsProperty(namespace = "woo.StaticInitializerStaticField", name = "NOT_EXPORTED_5")
   private static native Object getNotExported5();
 
-//  public void testInheritClassNamespace() {
-//    assertEquals(42, getBAR());
-//  }
-//
-//  @JsProperty(namespace = "foo.MyExportedClassWithNamespace", name = "BAR")
-//  private static native int getBAR();
-//
+  public void testInheritClassNamespace() {
+    assertEquals(42, getBAR());
+  }
+
+  @JsProperty(namespace = "foo.MyExportedClassWithNamespace", name = "BAR")
+  private static native int getBAR();
+
 //  public void testInheritClassNamespace_empty() {
 //    assertEquals(82, getDAN());
 //    assertNotNull(new NativeMyClassWithEmptyNamespace());
@@ -327,17 +327,17 @@ public class JsExportTest extends MyTestCase {
 //
 //  @JsType(isNative = true, namespace = "woo.Bloo", name = "Inner")
 //  private static class BlooInner { }
-//
-//  public void testInheritClassNamespace_nestedNoExport() {
-//    assertEquals(999, getWOOZ());
-//    assertNotNull(new NativeInnerWithNamespace());
-//  }
-//
-//  @JsProperty(namespace = "zoo.InnerWithNamespace", name = "WOOZ")
-//  private static native int getWOOZ();
-//
-//  @JsType(isNative = true, namespace = "zoo", name = "InnerWithNamespace")
-//  private static class NativeInnerWithNamespace { }
+
+  public void testInheritClassNamespace_nestedNoExport() {
+    assertEquals(999, getWOOZ());
+    assertNotNull(new NativeInnerWithNamespace());
+  }
+
+  @JsProperty(namespace = "zoo.InnerWithNamespace", name = "WOOZ")
+  private static native int getWOOZ();
+
+  @JsType(isNative = true, namespace = "zoo", name = "InnerWithNamespace")
+  private static class NativeInnerWithNamespace { }
 
   public void testInheritPackageNamespace() {
     assertEquals(1001, getWOO());
