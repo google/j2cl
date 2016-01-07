@@ -44,6 +44,7 @@ jsni_to_j2cl_converter(
     ],
     excludes = [
         "com/google/gwt/testing/TestUtils.java",
+        "java/lang/JsExceptionViolator.java",
         "java/math/BigIntegerViolator.java",
         "java/util/TreeMapViolator.java",
         "java/util/TreeMapViolator.java",

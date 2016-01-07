@@ -60,7 +60,7 @@ class Arrays {
       return null;
     }
 
-    let array = new Array;
+    let array = [];
     array.leafType = leafType;
     array.leafTypeIsInstance = leafTypeIsInstance;
     array.leafTypeIsAssignableFrom = leafTypeIsAssignableFrom;
