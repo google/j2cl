@@ -15,7 +15,7 @@ NativeJsTypeTest.createNativeObjectWithToString = function() {
 /**
  * @return {*}
  */
-NativeJsTypeTest.createNativeObjectWithoutToString = function() {
+NativeJsTypeTest.createEmptyNativeObject = function() {
   return {};
 };
 
@@ -24,4 +24,18 @@ NativeJsTypeTest.createNativeObjectWithoutToString = function() {
  */
 NativeJsTypeTest.createNativeArray = function() {
   return [];
+};
+
+/**
+ * @return {*}
+ */
+NativeJsTypeTest.createNativeObjectWithEquals = function(x) {
+  return {field: x, equals: function(other) { return other.field == 10; }};
+};
+
+/**
+ * @return {*}
+ */
+NativeJsTypeTest.createNativeObjectWithHashCode = function() {
+  return {hashCode: function() { return 100; }};
 };

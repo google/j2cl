@@ -260,6 +260,7 @@ public class TypeDescriptors {
     PRIMITIVES(Arrays.asList("vmbootstrap", "primitives"), "Primitives"),
     ENUMS(Arrays.asList("vmbootstrap"), "Enums"),
     LONGS(Arrays.asList("vmbootstrap"), "LongUtils"),
+    JAVA_SCRIPT_OBJECT(Arrays.asList("vmbootstrap"), "JavaScriptObject"),
     NATIVE_EQUALITY(Arrays.asList("nativebootstrap"), "Equality"),
     NATIVE_UTIL(Arrays.asList("nativebootstrap"), "Util"),
     NATIVE_LONG(Arrays.asList("nativebootstrap"), "Long"),

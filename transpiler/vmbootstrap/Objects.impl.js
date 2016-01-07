@@ -9,6 +9,7 @@ let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let Double = goog.forwardDeclare('gen.java.lang.Double$impl');
 let String = goog.forwardDeclare('gen.java.lang.String$impl');
 let Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let JavaScriptObject = goog.forwardDeclare('vmbootstrap.JavaScriptObject$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
 
@@ -27,8 +28,10 @@ class Objects {
     Objects.$clinit();
     if (obj.m_equals__java_lang_Object) {
       return obj.m_equals__java_lang_Object(other);
+    } else if (obj.equals) {
+      return obj.equals(other);
     } else {
-      return obj === other;
+      return JavaScriptObject.m_equals__Object__Object(obj, other);
     }
   }
 
@@ -48,8 +51,12 @@ class Objects {
       return String.m_hashCode__java_lang_String(/**@type {?string}*/ (obj));
     } else if (obj instanceof Array) {
       return Arrays.m_hashCode__java_lang_Object(obj);
-    } else {
+    } else if (obj.m_hashCode) {
       return obj.m_hashCode();
+    } else if (obj.hashCode) {
+      return obj.hashCode();
+    } else {
+      return JavaScriptObject.m_hashCode__Object(obj);
     }
   }
 
@@ -85,8 +92,12 @@ class Objects {
       return String.$getClass();
     } else if (obj instanceof Array) {
       return Arrays.m_getClass__java_lang_Object(obj);
-    } else {
+    } else if (obj.m_getClass) {
       return obj.m_getClass();
+      // Do not need to check 'getClass' because java.lang.Object
+      // getClass() is final.
+    } else {
+      return JavaScriptObject.m_getClass__Object(obj);
     }
   }
 
@@ -100,6 +111,7 @@ class Objects {
     Double = goog.module.get('gen.java.lang.Double$impl');
     String = goog.module.get('gen.java.lang.String$impl');
     Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    JavaScriptObject = goog.module.get('vmbootstrap.JavaScriptObject$impl');
     $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
     $double = goog.module.get('vmbootstrap.primitives.$double$impl');
   }

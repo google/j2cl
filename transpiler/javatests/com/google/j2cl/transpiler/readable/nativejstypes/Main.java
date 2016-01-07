@@ -20,4 +20,17 @@ public class Main {
     Headers header = new Headers();
     header.append("Content-Type", "text/xml");
   }
+
+  @SuppressWarnings("unused")
+  public static void testNativeTypeClassLiteral() {
+    Object o1 = Bar.class;
+    o1 = Bar[][].class;
+  }
+
+  public static void testNativeTypeObjectMethods() {
+    Bar bar = new Bar(6, 7);
+    bar.toString();
+    bar.hashCode();
+    bar.equals(new Object());
+  }
 }

@@ -1,0 +1,142 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Main$NativeJsTypeWithToString =
+    goog.forwardDeclare('test.foo.NativeJsTypeWithToString');
+let Main$NativeJsTypeWithoutToString =
+    goog.forwardDeclare('test.foo.NativeJsTypeWithoutToString');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+
+class Main extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_nativejstypeobjectmethods_Main() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Main}
+   * @public
+   */
+  static $create() {
+    Main.$clinit();
+    let $instance = new Main;
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_nativejstypeobjectmethods_Main();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_nativejstypeobjectmethods_Main() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_nativejstypeobjectmethods_Main();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static m_test() {
+    Main.$clinit();
+    let n1 = new Main$NativeJsTypeWithToString();
+    n1.toString();
+    let n2 = new Main$NativeJsTypeWithToString();
+    $Objects.m_toString__java_lang_Object(n2);
+    let n3 = new Main$NativeJsTypeWithoutToString();
+    $Objects.m_toString__java_lang_Object(n3);
+    let n4 = new Main$NativeJsTypeWithoutToString();
+    $Objects.m_toString__java_lang_Object(n4);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Main; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Main);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    Main.$clinit();
+    if (!Main.$classMain_) {
+      Main.$classMain_ = Class.$createForClass(
+          $Util.$generateId('Main'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main'));
+    }
+    return Main.$classMain_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return Main.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Main$NativeJsTypeWithToString =
+        goog.module.get('test.foo.NativeJsTypeWithToString');
+    Main$NativeJsTypeWithoutToString =
+        goog.module.get('test.foo.NativeJsTypeWithoutToString');
+    $Objects = goog.module.get('vmbootstrap.Objects$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Main.$classMain_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = Main;

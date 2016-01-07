@@ -55,7 +55,7 @@ class Object {
 
   /**
    * @param {*} other
-   * @return {boolean}   q
+   * @return {boolean}
    * @public
    */
   m_equals__java_lang_Object(other) { return this === other; }

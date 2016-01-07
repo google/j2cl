@@ -1575,19 +1575,40 @@ public class CompilationUnitBuilder {
       TypeDescriptor literalTypeDescriptor = JdtUtils.createTypeDescriptor(typeBinding);
       TypeDescriptor javaLangClassTypeDescriptor =
           JdtUtils.createTypeDescriptor(literal.resolveTypeBinding());
-      if (typeBinding.getDimensions() == 0) {
-        // <ClassLiteralClass>.$getClass()
-        MethodDescriptor classMethodDescriptor =
-            MethodDescriptorBuilder.fromDefault()
-                .isRaw(true)
-                .isStatic(true)
-                .enclosingClassTypeDescriptor(literalTypeDescriptor)
-                .methodName("$getClass")
-                .returnTypeDescriptor(javaLangClassTypeDescriptor)
-                .build();
-        return MethodCall.createRegularMethodCall(null, classMethodDescriptor);
+      if (literalTypeDescriptor.isNative()) {
+        // class literal of native js type returns JavaScriptObject.class
+        return convertRegularTypeLiteral(
+            TypeDescriptors.BootstrapType.JAVA_SCRIPT_OBJECT.getDescriptor(),
+            javaLangClassTypeDescriptor);
       }
+      if (literalTypeDescriptor.isArray()
+          && literalTypeDescriptor.getLeafTypeDescriptor().isNative()) {
+        // class literal of native js type array returns Object[].class
+        return convertArrayTypeLiteral(
+            TypeDescriptors.get().javaLangObject.getForArray(1), javaLangClassTypeDescriptor);
+      }
+      if (typeBinding.getDimensions() == 0) {
+        return convertRegularTypeLiteral(literalTypeDescriptor, javaLangClassTypeDescriptor);
+      }
+      return convertArrayTypeLiteral(literalTypeDescriptor, javaLangClassTypeDescriptor);
+    }
 
+    private Expression convertRegularTypeLiteral(
+        TypeDescriptor literalTypeDescriptor, TypeDescriptor javaLangClassTypeDescriptor) {
+      // <ClassLiteralClass>.$getClass()
+      MethodDescriptor classMethodDescriptor =
+          MethodDescriptorBuilder.fromDefault()
+              .isRaw(true)
+              .isStatic(true)
+              .enclosingClassTypeDescriptor(literalTypeDescriptor)
+              .methodName("$getClass")
+              .returnTypeDescriptor(javaLangClassTypeDescriptor)
+              .build();
+      return MethodCall.createRegularMethodCall(null, classMethodDescriptor);
+    }
+
+    private Expression convertArrayTypeLiteral(
+        TypeDescriptor literalTypeDescriptor, TypeDescriptor javaLangClassTypeDescriptor) {
       MethodDescriptor classMethodDescriptor =
           MethodDescriptorBuilder.fromDefault()
               .isRaw(true)
@@ -1612,7 +1633,8 @@ public class CompilationUnitBuilder {
               null, classMethodDescriptor, new ArrayList<Expression>()),
           forArrayMethodDescriptor,
           ImmutableList.<Expression>of(
-              new NumberLiteral(TypeDescriptors.get().primitiveInt, typeBinding.getDimensions())));
+              new NumberLiteral(
+                  TypeDescriptors.get().primitiveInt, literalTypeDescriptor.getDimensions())));
     }
 
     private ThrowStatement convert(org.eclipse.jdt.core.dom.ThrowStatement statement) {

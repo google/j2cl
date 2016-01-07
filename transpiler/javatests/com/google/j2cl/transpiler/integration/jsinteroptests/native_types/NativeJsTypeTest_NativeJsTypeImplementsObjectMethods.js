@@ -1,0 +1,7 @@
+goog.module('com.google.j2cl.transpiler.integration.jsinteroptests.NativeJsTypeTest$NativeJsTypeImplementsObjectMethods');
+
+class NativeJsTypeImplementsObjectMethods {
+  constructor() {}
+}
+
+exports = NativeJsTypeImplementsObjectMethods;

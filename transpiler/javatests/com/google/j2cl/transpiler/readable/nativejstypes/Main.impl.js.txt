@@ -16,6 +16,10 @@ let Bar = goog.forwardDeclare(
     'com.google.j2cl.transpiler.readable.nativejstypes.Bar');
 let $Headers = goog.forwardDeclare('extern.Headers');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $JavaScriptObject =
+    goog.forwardDeclare('vmbootstrap.JavaScriptObject$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -89,6 +93,29 @@ class Main extends Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static m_testNativeTypeClassLiteral() {
+    Main.$clinit();
+    let o1 = $JavaScriptObject.$getClass();
+    o1 = Object.$getClass().$forArray(1);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static m_testNativeTypeObjectMethods() {
+    Main.$clinit();
+    let bar = new Bar(6, 7);
+    $Objects.m_toString__java_lang_Object(bar);
+    $Objects.m_hashCode__java_lang_Object(bar);
+    $Objects.m_equals__java_lang_Object__java_lang_Object(
+        bar, Object.$create());
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
@@ -139,6 +166,9 @@ class Main extends Object {
         'com.google.j2cl.transpiler.readable.nativejstypes.Bar');
     $Headers = goog.module.get('extern.Headers');
     Class = goog.module.get('gen.java.lang.Class$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $JavaScriptObject = goog.module.get('vmbootstrap.JavaScriptObject$impl');
+    $Objects = goog.module.get('vmbootstrap.Objects$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Object.$clinit();
   }
