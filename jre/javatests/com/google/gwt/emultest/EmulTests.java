@@ -29,13 +29,16 @@ import com.google.gwt.emultest.java.lang.CompilerConstantStringTest;
 import com.google.gwt.emultest.java.lang.DoubleTest;
 import com.google.gwt.emultest.java.lang.FloatTest;
 import com.google.gwt.emultest.java.lang.IntegerTest;
+import com.google.gwt.emultest.java.lang.JsExceptionTest;
 import com.google.gwt.emultest.java.lang.LongTest;
 import com.google.gwt.emultest.java.lang.MathTest;
+import com.google.gwt.emultest.java.lang.NullPointerExceptionTest;
 import com.google.gwt.emultest.java.lang.ObjectTest;
 import com.google.gwt.emultest.java.lang.ShortTest;
 import com.google.gwt.emultest.java.lang.StringBufferTest;
 import com.google.gwt.emultest.java.lang.StringTest;
 import com.google.gwt.emultest.java.lang.SystemTest;
+import com.google.gwt.emultest.java.lang.ThrowableTest;
 import com.google.gwt.emultest.java.math.MathContextTest;
 import com.google.gwt.emultest.java.math.MathContextWithObfuscatedEnumsTest;
 import com.google.gwt.emultest.java.math.RoundingModeTest;
@@ -72,17 +75,17 @@ import org.junit.runners.Suite.SuiteClasses;
   CompilerConstantStringTest.class,
   DoubleTest.class,
   FloatTest.class,
+  IntegerTest.class,
+  JsExceptionTest.class,
   LongTest.class,
   MathTest.class,
-  IntegerTest.class,
+  NullPointerExceptionTest.class,
   ObjectTest.class,
   ShortTest.class,
   StringBufferTest.class,
   StringTest.class,
   SystemTest.class,
-  // TODO(dankurka): The current throwable tests do not make sense for J2cl
-  // This is depending on how we do stack traces and needs to be decided first.
-  // ThrowableTest.class,
+  ThrowableTest.class,
 
   //-- java.math
   // BigDecimal is tested in {@link BigDecimalSuite}
