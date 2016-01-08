@@ -15,7 +15,7 @@
    * @template ${sourceGenerator.getJsDocNames(${method.Descriptor.getTypeParameterTypeDescriptors()})}
 #end
 #foreach ($parameter in $method.Parameters)
-#set ($parameterTypeName = ${sourceGenerator.getJsDocName(${parameter.TypeDescriptor})})
+#set ($parameterTypeName = ${GeneratorUtils.getParameterTypeJsDoc($method, $foreach.index, $sourceGenerator)})
    * @param {$parameterTypeName} $sourceGenerator.toSource($parameter)
 #end
 #set ($returnTypeDescriptor = ${method.Descriptor.getReturnTypeDescriptor()})

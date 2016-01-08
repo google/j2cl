@@ -175,15 +175,94 @@ public class ExpressionTransformer {
         return "";
       }
 
-      /**
-       * Call to a JsFunction method is emitted as the call on the qualifier itself:
-       * a.fun(); => a();
-       */
-      private String transformJsFunctionCall(MethodCall expression) {
+      private String transformLongNumberLiteral(NumberLiteral expression) {
+        long longValue = expression.getValue().longValue();
+
+        if (longValue < Integer.MAX_VALUE && longValue > Integer.MIN_VALUE) {
+          // The long value is small enough to fit in an int. Emit the terse initialization.
+          return String.format("%s.$fromInt(%s)", longsTypeAlias(), Long.toString(longValue));
+        }
+
+        // The long value is pretty large. Emit the verbose initialization.
+        long lowOrderBits = longValue << 32 >> 32;
+        long highOrderBits = longValue >> 32;
         return String.format(
-            "(/** @type {Function} */(%s))(%s)",
-            transform(expression.getQualifier(), environment),
-            Joiner.on(", ").join(transformNodesToSource(expression.getArguments())));
+            "%s.$fromBits(%s, %s) /* %s */",
+            longsTypeAlias(),
+            Long.toString(lowOrderBits),
+            Long.toString(highOrderBits),
+            Long.toString(longValue));
+      }
+
+      @Override
+      public String transformMethodCall(MethodCall expression) {
+        switch (expression.getCallStyle()) {
+          case APPLY:
+            return transformApplyMethodCall(expression);
+          case CALL:
+            return transformCallMethodCall(expression);
+          default:
+            return transformDirectMethodCall(expression);
+        }
+      }
+
+      private String transformApplyMethodCall(MethodCall expression) {
+        Preconditions.checkArgument(expression.getCallStyle() == MethodCall.CallStyle.APPLY);
+        String lastArgument = transform(Iterables.getLast(expression.getArguments()), environment);
+        String methodCallHeader = transformMethodCallHeader(expression);
+        String thisArg =
+            expression.getTarget().isStatic() || expression.getTarget().isJsFunction()
+                ? "null"
+                : expression.getQualifier() instanceof SuperReference
+                    ? "this"
+                    : transform(expression.getQualifier(), environment);
+
+        if (expression.getArguments().size() == 1) {
+          // fn.apply(thisArg, varargsArray);
+          return String.format("%s.apply(%s, %s)", methodCallHeader, thisArg, lastArgument);
+        } else {
+          // fn.apply(thisArg, [a1, a2, ...].concat(varargsArray));
+          return String.format(
+              "%s.apply(%s, [%s].concat(%s))",
+              methodCallHeader,
+              thisArg,
+              Joiner.on(", ")
+                  .join(
+                      transformNodesToSource(
+                          expression
+                              .getArguments()
+                              .subList(0, expression.getArguments().size() - 1))),
+              lastArgument);
+        }
+      }
+
+      private String transformCallMethodCall(MethodCall expression) {
+        MethodDescriptor methodDescriptor = expression.getTarget();
+        List<String> argumentSources = transformNodesToSource(expression.getArguments());
+        String typeName =
+            transform(methodDescriptor.getEnclosingClassTypeDescriptor(), environment);
+        String qualifier = methodDescriptor.isStatic() ? typeName : typeName + ".prototype";
+        return String.format(
+            "%s.%s.call(%s)",
+            qualifier,
+            ExpressionTransformer.stringForMethodDescriptor(methodDescriptor),
+            Joiner.on(", ")
+                .join(
+                    Iterables.concat(
+                        Arrays.asList(transform(expression.getQualifier(), environment)),
+                        argumentSources)));
+      }
+
+      private String transformDirectMethodCall(MethodCall expression) {
+        if (expression.getTarget().isJsProperty()) {
+          return transformJsPropertyCall(expression);
+        } else {
+          List<String> argumentSources = transformNodesToSource(expression.getArguments());
+          return String.format(
+              "%s(%s)",
+              transformMethodCallHeader(expression),
+              Joiner.on(", ").join(argumentSources));
+        }
       }
 
       private String transformJsPropertyCall(MethodCall expression) {
@@ -218,35 +297,19 @@ public class ExpressionTransformer {
             transform(expression.getArguments().get(0), environment));
       }
 
-      private String transformLongNumberLiteral(NumberLiteral expression) {
-        long longValue = expression.getValue().longValue();
-
-        if (longValue < Integer.MAX_VALUE && longValue > Integer.MIN_VALUE) {
-          // The long value is small enough to fit in an int. Emit the terse initialization.
-          return String.format("%s.$fromInt(%s)", longsTypeAlias(), Long.toString(longValue));
-        }
-
-        // The long value is pretty large. Emit the verbose initialization.
-        long lowOrderBits = longValue << 32 >> 32;
-        long highOrderBits = longValue >> 32;
-        return String.format(
-            "%s.$fromBits(%s, %s) /* %s */",
-            longsTypeAlias(),
-            Long.toString(lowOrderBits),
-            Long.toString(highOrderBits),
-            Long.toString(longValue));
-      }
-
-      @Override
-      public String transformMethodCall(MethodCall expression) {
-        if (expression.isPrototypeCall()) {
-          return transformPrototypeCall(expression);
-        } else if (expression.getTarget().isJsProperty()) {
-          return transformJsPropertyCall(expression);
-        } else if (expression.getTarget().isJsFunction()) {
-          return transformJsFunctionCall(expression);
+      private String transformMethodCallHeader(MethodCall expression) {
+        MethodDescriptor target = expression.getTarget();
+        String qualifier = transform(expression.getQualifier(), environment);
+        if (target.isJsFunction()) {
+          // Call to a JsFunction method is emitted as the call on the qualifier itself:
+          return String.format("(/** @type {Function} */(%s))", qualifier);
+        } else if (expression.isStaticDispatch()) {
+          String typeName = transform(target.getEnclosingClassTypeDescriptor(), environment);
+          String methodName = ExpressionTransformer.stringForMethodDescriptor(target);
+          return typeName + ".prototype." + methodName;
         } else {
-          return transformRegularMethodCall(expression);
+          String methodName = ExpressionTransformer.stringForMethodDescriptor(target);
+          return Joiner.on(".").skipNulls().join(Strings.emptyToNull(qualifier), methodName);
         }
       }
 
@@ -335,31 +398,6 @@ public class ExpressionTransformer {
             "%s%s",
             expression.getOperator().toString(),
             transform(expression.getOperand(), environment));
-      }
-
-      private String transformPrototypeCall(MethodCall expression) {
-        MethodDescriptor methodDescriptor = expression.getTarget();
-        List<String> argumentSources = transformNodesToSource(expression.getArguments());
-        return String.format(
-            "%s.prototype.%s.call(%s)",
-            transform(methodDescriptor.getEnclosingClassTypeDescriptor(), environment),
-            ExpressionTransformer.stringForMethodDescriptor(methodDescriptor),
-            Joiner.on(", ")
-                .join(
-                    Iterables.concat(
-                        Arrays.asList(transform(expression.getQualifier(), environment)),
-                        argumentSources)));
-      }
-
-      private String transformRegularMethodCall(MethodCall expression) {
-        MethodDescriptor methodDescriptor = expression.getTarget();
-        String qualifier = transform(expression.getQualifier(), environment);
-        String methodName = ExpressionTransformer.stringForMethodDescriptor(methodDescriptor);
-        List<String> argumentSources = transformNodesToSource(expression.getArguments());
-        return String.format(
-            "%s(%s)",
-            Joiner.on(".").skipNulls().join(Strings.emptyToNull(qualifier), methodName),
-            Joiner.on(", ").join(argumentSources));
       }
 
       private String transformRegularNewInstance(NewInstance expression) {

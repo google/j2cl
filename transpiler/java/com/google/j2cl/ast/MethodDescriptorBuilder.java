@@ -28,6 +28,7 @@ public class MethodDescriptorBuilder {
   private String methodName;
   private boolean isConstructor;
   private boolean isNative;
+  private boolean isVarargs;
   private ImmutableList<TypeDescriptor> parameterTypeDescriptors;
   private TypeDescriptor returnTypeDescriptor;
   private ImmutableList<TypeDescriptor> typeParameterDescriptors;
@@ -55,6 +56,7 @@ public class MethodDescriptorBuilder {
     builder.methodName = methodDescriptor.getMethodName();
     builder.isConstructor = methodDescriptor.isConstructor();
     builder.isNative = methodDescriptor.isNative();
+    builder.isVarargs = methodDescriptor.isVarargs();
     builder.parameterTypeDescriptors = methodDescriptor.getParameterTypeDescriptors();
     builder.returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
     builder.typeParameterDescriptors = methodDescriptor.getTypeParameterTypeDescriptors();
@@ -129,6 +131,7 @@ public class MethodDescriptorBuilder {
         methodName,
         isConstructor,
         isNative,
+        isVarargs,
         returnTypeDescriptor,
         parameterTypeDescriptors,
         typeParameterDescriptors,

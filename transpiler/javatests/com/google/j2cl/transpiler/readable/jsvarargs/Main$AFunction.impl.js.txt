@@ -1,0 +1,164 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsvarargs.Main$AFunction.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.jsvarargs.Main$AFunction$impl');
+
+
+let Main$Function = goog.require('gen.com.google.j2cl.transpiler.readable.jsvarargs.Main$Function$impl');
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.jsvarargs.Main$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
+
+
+/**
+ * @implements {Main$Function}
+ */
+class Main$AFunction extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsvarargs_Main$AFunction() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Main$AFunction}
+   * @public
+   */
+  static $create() {
+    Main$AFunction.$clinit();
+    let $instance = new Main$AFunction;
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main$AFunction();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main$AFunction() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_jsvarargs_Main$AFunction();
+  }
+
+  /**
+   * @override
+   * @param {number} i
+   * @param {...*} args
+   * @return {*}
+   * @public
+   */
+  m_f1__int__arrayOf_java_lang_Object(i, args) {
+    let $var_args_copy = /**@type {Array<*>} */ (
+        $Arrays.$create([arguments.length - 1], Object));
+    for (let $i = 0; $i < arguments.length - 1; $i++)
+      $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
+    return $var_args_copy[i];
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        instance
+            .$is__com_google_j2cl_transpiler_readable_jsvarargs_Main$AFunction;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Main$AFunction);
+  }
+
+  /**
+   * Copies the fields from {@code from} to {@code to}.
+   * @param {Main$AFunction} from
+   * @param {*} to
+   * @public
+   */
+  static $copy(from, to) {
+    // Marks the object is an instance of this class.
+    to.$is__com_google_j2cl_transpiler_readable_jsvarargs_Main$AFunction = true;
+    // TODO: may copy Objects methods (equals, hashCode, etc. ) as well.
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    Main$AFunction.$clinit();
+    if (!Main$AFunction.$classMain$AFunction_) {
+      Main$AFunction.$classMain$AFunction_ = Class.$createForClass(
+          $Util.$generateId('AFunction'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsvarargs.Main$AFunction'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsvarargs.Main.AFunction'));
+    }
+    return Main$AFunction.$classMain$AFunction_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return Main$AFunction.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Main = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.jsvarargs.Main$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Main$AFunction.$classMain$AFunction_ = null;
+
+
+Main$Function.$markImplementor(Main$AFunction);
+
+
+
+/**
+ * Export class.
+ */
+exports = Main$AFunction;

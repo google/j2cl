@@ -27,14 +27,25 @@ public class Variable extends Node {
   @Visitable TypeDescriptor typeDescriptor;
   private boolean isFinal;
   private boolean isParameter;
+  private boolean isRaw;
 
   public Variable(
-      String name, TypeDescriptor typeDescriptor, boolean isFinal, boolean isParameter) {
+      String name,
+      TypeDescriptor typeDescriptor,
+      boolean isFinal,
+      boolean isParameter,
+      boolean isRaw) {
     Preconditions.checkNotNull(typeDescriptor);
     this.name = name;
     this.typeDescriptor = typeDescriptor;
     this.isFinal = isFinal;
     this.isParameter = isParameter;
+    this.isRaw = isRaw;
+  }
+
+  public Variable(
+      String name, TypeDescriptor typeDescriptor, boolean isFinal, boolean isParameter) {
+    this(name, typeDescriptor, isFinal, isParameter, false);
   }
 
   public String getName() {
@@ -51,6 +62,14 @@ public class Variable extends Node {
 
   public boolean isParameter() {
     return isParameter;
+  }
+
+  /**
+   * Returns whether this is a Raw variable. Raw variables are not aliased in the output and
+   * thus can be used to represent JS native variables, for example, 'arguments'.
+   */
+  public boolean isRaw() {
+    return isRaw;
   }
 
   public void setName(String name) {

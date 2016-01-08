@@ -48,6 +48,7 @@ public abstract class MethodDescriptor extends Node implements Member {
       String methodName,
       boolean isConstructor,
       boolean isNative,
+      boolean isVarargs,
       TypeDescriptor returnTypeDescriptor,
       Iterable<TypeDescriptor> parameterTypeDescriptors,
       Iterable<TypeDescriptor> typeParameterTypeDescriptors,
@@ -62,6 +63,7 @@ public abstract class MethodDescriptor extends Node implements Member {
                 methodName,
                 isConstructor,
                 isNative,
+                isVarargs,
                 ImmutableList.copyOf(parameterTypeDescriptors),
                 returnTypeDescriptor,
                 ImmutableList.copyOf(typeParameterTypeDescriptors),
@@ -94,6 +96,8 @@ public abstract class MethodDescriptor extends Node implements Member {
   public abstract boolean isConstructor();
 
   public abstract boolean isNative();
+
+  public abstract boolean isVarargs();
 
   public abstract ImmutableList<TypeDescriptor> getParameterTypeDescriptors();
 
@@ -153,6 +157,10 @@ public abstract class MethodDescriptor extends Node implements Member {
 
   public boolean isJsFunction() {
     return getJsInfo().getJsMemberType() == JsMemberType.JS_FUNCTION;
+  }
+
+  public boolean isJsMethodVarargs() {
+    return isVarargs() && (isJsMethod() || isJsFunction());
   }
 
   @Override

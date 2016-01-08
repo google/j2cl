@@ -87,6 +87,23 @@ public class GeneratorUtils {
         .join(staticQualifier, getterSetterPrefix, methodName + "(" + parameterList + ")");
   }
 
+  /**
+   * Returns the parameter's JsDoc name in the method. If the parameter is a variable parameter,
+   * emits as '...TypeName'.
+   */
+  public static String getParameterTypeJsDoc(
+      Method method, int index, SourceGenerator sourceGenerator) {
+    Preconditions.checkArgument(index >= 0 && index < method.getParameters().size());
+    TypeDescriptor parameterTypeDescriptor = method.getParameters().get(index).getTypeDescriptor();
+    if (method.getDescriptor().isJsMethodVarargs() && index == method.getParameters().size() - 1) {
+      Preconditions.checkArgument(parameterTypeDescriptor.isArray());
+      return "..."
+          + sourceGenerator.getJsDocName(parameterTypeDescriptor.getComponentTypeDescriptor());
+    } else {
+      return sourceGenerator.getJsDocName(parameterTypeDescriptor);
+    }
+  }
+
   public static String getParameterList(Method method, final SourceGenerator sourceGenerator) {
     List<String> parameterNameList =
         Lists.transform(

@@ -27,68 +27,68 @@ import java.util.List;
  */
 @Visitable
 public class MethodCall extends Expression implements MemberReference, Call {
+  /**
+   * Represents the call styles: direct method call, or function.call(thisArg, ...), or
+   * function.apply(thisArg, [...]).
+   */
+  public enum CallStyle {
+    DIRECT,
+    CALL,
+    APPLY
+  }
+
   @Visitable Expression qualifier;
   @Visitable MethodDescriptor targetMethodDescriptor;
   @Visitable List<Expression> arguments = new ArrayList<>();
+  private CallStyle callStyle;
   /**
-   * If the method call should be transpiled to TypeName.prototype.functionName.call(thisArg, ...);
+   * If an instance call should be dispatched statically, e.g. A.super.method() invocation.
    */
-  private boolean isPrototypeCall;
+  private boolean isStaticDispatch;
 
-  /**
-   * Default constructor.
-   */
-  private MethodCall(
+  public MethodCall(
       Expression qualifier,
       MethodDescriptor targetMethodDescriptor,
       List<Expression> arguments,
-      boolean isPrototypeCall) {
-    Preconditions.checkNotNull(qualifier);
+      CallStyle callStyle,
+      boolean isStaticDispatch) {
     Preconditions.checkNotNull(targetMethodDescriptor);
     Preconditions.checkNotNull(arguments);
-    this.qualifier = qualifier;
+    this.qualifier = AstUtils.getExplicitQualifier(qualifier, targetMethodDescriptor);
     this.targetMethodDescriptor = targetMethodDescriptor;
     this.arguments.addAll(arguments);
-    this.isPrototypeCall = isPrototypeCall;
+    this.callStyle = callStyle;
+    this.isStaticDispatch = isStaticDispatch;
   }
 
-  /**
-   * Static method that creates a method call of the form:
-   * qualifier.targetMethodDescriptor(arguments)
-   */
   public static MethodCall createRegularMethodCall(
       Expression qualifier, MethodDescriptor targetMethodDescriptor, List<Expression> arguments) {
     return new MethodCall(
         AstUtils.getExplicitQualifier(qualifier, targetMethodDescriptor),
         targetMethodDescriptor,
         arguments,
+        CallStyle.DIRECT,
         false);
   }
 
-  /**
-   * Static method that creates a method call of the form:
-   * qualifier.targetMethodDescriptor(arguments)
-   */
   public static MethodCall createRegularMethodCall(
       Expression qualifier, MethodDescriptor targetMethodDescriptor, Expression... arguments) {
     return new MethodCall(
         AstUtils.getExplicitQualifier(qualifier, targetMethodDescriptor),
         targetMethodDescriptor,
         Arrays.asList(arguments),
+        CallStyle.DIRECT,
         false);
   }
 
-  /**
-   * Static method that creates a method call of the form:
-   * TypeName.prototype.targetMethodDescriptor.call(qualifier, arguments);
-   */
-  public static MethodCall createPrototypeCall(
+  public static MethodCall createCallMethodCall(
       Expression qualifier, MethodDescriptor targetMethodDescriptor, List<Expression> arguments) {
     return new MethodCall(
         AstUtils.getExplicitQualifier(qualifier, targetMethodDescriptor),
         targetMethodDescriptor,
         arguments,
-        true);
+        CallStyle.CALL,
+        true); // 'call' style is always static dispatch.
   }
 
   @Override
@@ -110,16 +110,24 @@ public class MethodCall extends Expression implements MemberReference, Call {
     return this.arguments;
   }
 
-  public boolean isPrototypeCall() {
-    return isPrototypeCall;
+  public CallStyle getCallStyle() {
+    return callStyle;
+  }
+
+  public boolean isStaticDispatch() {
+    return isStaticDispatch;
   }
 
   public void setTargetMethodDescriptor(MethodDescriptor targetMethodDescriptor) {
     this.targetMethodDescriptor = targetMethodDescriptor;
   }
 
-  public void setPrototypeCall(boolean isPrototypeCall) {
-    this.isPrototypeCall = isPrototypeCall;
+  public void setCallStyle(CallStyle callStyle) {
+    this.callStyle = callStyle;
+  }
+
+  public void setStaticDispatch(boolean isStaticDispatch) {
+    this.isStaticDispatch = isStaticDispatch;
   }
 
   @Override

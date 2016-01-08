@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
@@ -43,7 +44,25 @@ public abstract class CallBuilder<C extends Call> {
   public CallBuilder<C> argument(
       Expression argumentExpression, TypeDescriptor parameterTypeDescriptor) {
     addedArgumentExpressions.add(argumentExpression);
-    addedParameterTypeDescriptors.add(parameterTypeDescriptor);
+    if (parameterTypeDescriptor == null) {
+      // We allow adding an argument to a method call without adding a corresponding parameter in
+      // the MethodDescriptor if the method is a JsMethod vararg method, because the method call
+      // will accept multiple individual arguments as the varargs, rather than a wrapped array.
+      Preconditions.checkArgument(
+          originalMethodDescriptor.isJsMethodVarargs(),
+          "Parameter TypeDescriptor must be provided when adding argument to a MethodCall that is"
+              + "not a vararg JS method call.");
+    } else {
+      addedParameterTypeDescriptors.add(parameterTypeDescriptor);
+    }
+    return this;
+  }
+
+  public CallBuilder<C> removeLastArgument() {
+    Preconditions.checkArgument(
+        originalMethodDescriptor.isJsMethodVarargs(),
+        "Unsupported operation for methods that are not varargs JS methods.");
+    originalArguments.remove(originalArguments.size() - 1);
     return this;
   }
 

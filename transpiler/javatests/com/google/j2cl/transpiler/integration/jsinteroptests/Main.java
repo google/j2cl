@@ -10,6 +10,7 @@ public class Main {
     runJsTypeBridgeTest();
     runJsTypeTest();
     runNativeJsTypeTest();
+    runJsTypeVarargsTest();
   }
 
   public static void runJsExportTest() {
@@ -148,5 +149,15 @@ public class Main {
     test.testHashCode();
     test.testNativeJsTypeWithOverlay();
     test.testNativeJsTypeWithStaticIntializer();
+  }
+
+  public static void runJsTypeVarargsTest() {
+    JsTypeVarargsTest test = new JsTypeVarargsTest();
+    // test.testVarargsCall_constructors();
+    test.testVarargsCall_fromJavaScript();
+    test.testVarargsCall_jsFunction();
+    test.testVarargsCall_regularMethods();
+    // test.testVarargsCall_superCalls();
+    // test.testVarargsCall_sideEffectingInstance();
   }
 }

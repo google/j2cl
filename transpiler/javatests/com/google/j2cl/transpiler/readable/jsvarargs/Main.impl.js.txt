@@ -1,0 +1,285 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsvarargs.Main.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.jsvarargs.Main$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main$AFunction = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.jsvarargs.Main$AFunction$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
+
+
+class Main extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {number}
+     */
+    this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main = 0;
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsvarargs_Main() {}
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {number} f
+   * @return {!Main}
+   * @public
+   */
+  static $create__int(f) {
+    Main.$clinit();
+    let $instance = new Main;
+    $instance.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main__int(f);
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {number} f
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main__int(f) {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_jsvarargs_Main();
+    this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main = f;
+  }
+
+  /**
+   * @param {number} multiplier
+   * @param {...number} numbers
+   * @return {number}
+   * @public
+   */
+  static f1(multiplier, numbers) {
+    Main.$clinit();
+    let $var_args_copy = /**@type {Array<number>} */ (
+        $Arrays.$create([arguments.length - 1], $int));
+    for (let $i = 0; $i < arguments.length - 1; $i++)
+      $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
+    return $var_args_copy.length + $var_args_copy[0] + multiplier;
+  }
+
+  /**
+   * @param {...number} numbers
+   * @return {number}
+   * @public
+   */
+  static f2(numbers) {
+    Main.$clinit();
+    let $var_args_copy =
+        /**@type {Array<number>} */ ($Arrays.$create([arguments.length], $int));
+    for (let $i = 0; $i < arguments.length; $i++)
+      $Arrays.$set($var_args_copy, $i, arguments[$i]);
+    return $var_args_copy.length + $var_args_copy[0];
+  }
+
+  /**
+   * @param {number} m
+   * @param {...number} numbers
+   * @return {number}
+   * @public
+   */
+  f3(m, numbers) {
+    let $var_args_copy = /**@type {Array<number>} */ (
+        $Arrays.$create([arguments.length - 1], $int));
+    for (let $i = 0; $i < arguments.length - 1; $i++)
+      $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
+    return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main +
+        m + $var_args_copy[1];
+  }
+
+  /**
+   * @param {...number} numbers
+   * @return {number}
+   * @public
+   */
+  f4(numbers) {
+    let $var_args_copy =
+        /**@type {Array<number>} */ ($Arrays.$create([arguments.length], $int));
+    for (let $i = 0; $i < arguments.length; $i++)
+      $Arrays.$set($var_args_copy, $i, arguments[$i]);
+    return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main +
+        $var_args_copy[1];
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testStaticMethodNotFirst() {
+    Main.f1(1, 1, 2);
+    Main.f1(1, 1, 2);
+    Main.f1(1);
+    Main.f1(1);
+    Main.f1(1, 1, 2);
+    Main.f1(1, 1, 2);
+    Main.f1(1);
+    Main.f1(1);
+    let ints = /**@type {Array<number>} */ ($Arrays.$init([1, 2], $int));
+    Main.f1.apply(null, [1].concat(ints));
+    Main.f1.apply(null, [1].concat(ints));
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testStaticMethodFirst() {
+    Main.f2(1, 2);
+    Main.f2(1, 2);
+    Main.f2();
+    Main.f2();
+    Main.f2(1, 2);
+    Main.f2(1, 2);
+    Main.f2();
+    Main.f2();
+    let ints = /**@type {Array<number>} */ ($Arrays.$init([1, 2], $int));
+    Main.f2.apply(null, ints);
+    Main.f2.apply(null, ints);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testInstanceMethodNotFirst() {
+    let m = Main.$create__int(1);
+    m.f3(1, 1, 2);
+    m.f3(1);
+    m.f3(1, 1, 2);
+    m.f3(1);
+    let ints = /**@type {Array<number>} */ ($Arrays.$init([1, 2], $int));
+    m.f3.apply(m, [1].concat(ints));
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testInstanceMethodFirst() {
+    let m = Main.$create__int(1);
+    m.f4(1, 2);
+    m.f4();
+    m.f4(1, 2);
+    m.f4();
+    let ints = /**@type {Array<number>} */ ($Arrays.$init([1, 2], $int));
+    m.f4.apply(m, ints);
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testJsFunction() {
+    let a = $Util.$makeLambdaFunction(
+        Main$AFunction.prototype.m_f1__int__arrayOf_java_lang_Object,
+        Main$AFunction.$create(), Main$AFunction.$copy);
+    let o1 = Object.$create();
+    let o2 = Object.$create();
+    (/** @type {Function} */ (a))(0, o1, o2);
+    (/** @type {Function} */ (a))(0);
+    (/** @type {Function} */ (a))(0, o1, o2);
+    (/** @type {Function} */ (a))(0);
+    let os = [o1, o2];
+    (/** @type {Function} */ (a)).apply(null, [0].concat(os));
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_testSideEffect() {
+    $Util.$clinit();
+    let ints = /**@type {Array<number>} */ ($Arrays.$init([1, 2], $int));
+    ($Util.$q = Main.$create__int(1),
+     $Util.$q.f3.apply($Util.$q, [1].concat(ints)));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Main; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Main);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    Main.$clinit();
+    if (!Main.$classMain_) {
+      Main.$classMain_ = Class.$createForClass(
+          $Util.$generateId('Main'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsvarargs.Main'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsvarargs.Main'));
+    }
+    return Main.$classMain_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return Main.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Main$AFunction = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.jsvarargs.Main$AFunction$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
+    Object.$clinit();
+  }
+}
+;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Main.$classMain_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = Main;

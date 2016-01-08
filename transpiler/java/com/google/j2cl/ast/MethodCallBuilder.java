@@ -24,13 +24,25 @@ import java.util.List;
  * list in sync.
  */
 public class MethodCallBuilder extends CallBuilder<MethodCall> {
-  private boolean isPrototypeCall;
+  private MethodCall.CallStyle callStyle;
+  private boolean isStaticDispatch;
 
   public static MethodCallBuilder from(MethodCall methodCall) {
     MethodCallBuilder builder = new MethodCallBuilder();
     builder.initFrom(methodCall);
-    builder.isPrototypeCall = methodCall.isPrototypeCall();
+    builder.callStyle = methodCall.getCallStyle();
+    builder.isStaticDispatch = methodCall.isStaticDispatch();
     return builder;
+  }
+
+  public MethodCallBuilder callStyle(MethodCall.CallStyle callStyle) {
+    this.callStyle = callStyle;
+    return this;
+  }
+
+  public MethodCallBuilder staticDispatch(boolean isStaticDispatch) {
+    this.isStaticDispatch = isStaticDispatch;
+    return this;
   }
 
   @Override
@@ -38,8 +50,7 @@ public class MethodCallBuilder extends CallBuilder<MethodCall> {
       Expression qualifierExpression,
       MethodDescriptor methodDescriptor,
       List<Expression> arguments) {
-    return isPrototypeCall
-        ? MethodCall.createPrototypeCall(qualifierExpression, methodDescriptor, arguments)
-        : MethodCall.createRegularMethodCall(qualifierExpression, methodDescriptor, arguments);
+    return new MethodCall(
+        qualifierExpression, methodDescriptor, arguments, callStyle, isStaticDispatch);
   }
 }

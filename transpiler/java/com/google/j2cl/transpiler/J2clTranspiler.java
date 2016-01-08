@@ -42,6 +42,7 @@ import com.google.j2cl.ast.visitors.NormalizeCastsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeCatchClausesVisitor;
 import com.google.j2cl.ast.visitors.NormalizeEqualityVisitor;
 import com.google.j2cl.ast.visitors.NormalizeInstanceOfsVisitor;
+import com.google.j2cl.ast.visitors.NormalizeJsVarargsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeLongsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeNativeMethodCalls;
 import com.google.j2cl.ast.visitors.NormalizeNestedClassConstructorsVisitor;
@@ -160,6 +161,7 @@ public class J2clTranspiler {
       NormalizeInstanceOfsVisitor.applyTo(j2clUnit);
       NormalizeEqualityVisitor.applyTo(j2clUnit);
       NormalizeNativeMethodCalls.applyTo(j2clUnit);
+      NormalizeJsVarargsVisitor.applyTo(j2clUnit);
       NormalizeArrayCreationsVisitor.applyTo(j2clUnit);
       InsertExceptionConversionVisitor.applyTo(j2clUnit);
 

@@ -50,7 +50,20 @@ class Util {
     copyMethod(instance, lambda);
     return lambda;
   }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {}
 };
+
+
+/**
+ * Used to store qualifier that is potentially side effecting.
+ * @public {*}
+ */
+Util.$q = null;
 
 
 /**

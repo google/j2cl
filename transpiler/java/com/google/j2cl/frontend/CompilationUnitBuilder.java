@@ -1232,7 +1232,7 @@ public class CompilationUnitBuilder {
       } else {
         // OuterClass.super.fun() is transpiled to
         // SuperClassOfOuterClass.prototype.fun.call(OuterClass.this);
-        return MethodCall.createPrototypeCall(
+        return MethodCall.createCallMethodCall(
             convertOuterClassReference(
                 JdtUtils.findCurrentTypeBinding(expression),
                 expression.getQualifier().resolveTypeBinding(),

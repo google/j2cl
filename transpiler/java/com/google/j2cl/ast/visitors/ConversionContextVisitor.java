@@ -193,9 +193,12 @@ public class ConversionContextVisitor extends AbstractRewriter {
     Expression qualifier = methodCall.getQualifier();
     MethodDescriptor targetMethodDescriptor = methodCall.getTarget();
     List<Expression> arguments = rewriteMethodInvocationContextArguments(methodCall);
-    return methodCall.isPrototypeCall()
-        ? MethodCall.createPrototypeCall(qualifier, targetMethodDescriptor, arguments)
-        : MethodCall.createRegularMethodCall(qualifier, targetMethodDescriptor, arguments);
+    return new MethodCall(
+        qualifier,
+        targetMethodDescriptor,
+        arguments,
+        methodCall.getCallStyle(),
+        methodCall.isStaticDispatch());
   }
 
   @Override

@@ -1,0 +1,23 @@
+package(default_visibility = ["//:__subpackages__"])
+
+# Google owns the copyright
+licenses(["unencumbered"])
+
+load(
+    "/third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/integration/integration_test",
+    "integration_test",
+)
+
+# Creates targets
+# blaze build :optimized_js
+# blaze test :compiled_test
+# blaze test :uncompiled_test
+integration_test(
+    name = "jstypevarargs",
+    srcs = glob(["*.java"]),
+    native_srcs = [
+        "Main.native.js",
+    ],
+    native_srcs_pkg = "com/google/j2cl/transpiler/integration/jstypevarargs",
+    deps = ["//jre/java:gwt-jsinterop-annotations"],
+)

@@ -83,6 +83,7 @@ public class JdtMethodUtils {
         methodName,
         isConstructor,
         isNative,
+        methodBinding.isVarargs(),
         returnTypeDescriptor,
         parameterTypeDescriptors,
         typeParameterDescriptors,

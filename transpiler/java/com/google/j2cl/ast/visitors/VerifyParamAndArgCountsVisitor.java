@@ -44,14 +44,25 @@ public class VerifyParamAndArgCountsVisitor extends AbstractVisitor {
       List<Expression> passedArguments, MethodDescriptor methodDescriptor) {
     ImmutableList<TypeDescriptor> declaredParameterTypes =
         methodDescriptor.getParameterTypeDescriptors();
-    Preconditions.checkState(
-        passedArguments.size() == declaredParameterTypes.size(),
-        "Invalid method call argument count. Expected %s arguments but received "
-            + "%s in call to method '%s() from compilation unit %s",
-        declaredParameterTypes.size(),
-        passedArguments.size(),
-        methodDescriptor.getMethodName(),
-        compilationUnit.getName());
+    if (methodDescriptor.isJsMethodVarargs()) {
+      Preconditions.checkState(
+          passedArguments.size() >= declaredParameterTypes.size() - 1,
+          "Invalid method call argument count. Expected at lease %s arguments but received "
+              + "%s in call to method '%s() from compilation unit %s",
+          declaredParameterTypes.size(),
+          passedArguments.size(),
+          methodDescriptor.getMethodName(),
+          compilationUnit.getName());
+    } else {
+      Preconditions.checkState(
+          passedArguments.size() == declaredParameterTypes.size(),
+          "Invalid method call argument count. Expected %s arguments but received "
+              + "%s in call to method '%s() from compilation unit %s",
+          declaredParameterTypes.size(),
+          passedArguments.size(),
+          methodDescriptor.getMethodName(),
+          compilationUnit.getName());
+    }
   }
 
   private void verifyParamAndArgCountsVisitor(CompilationUnit compilationUnit) {
