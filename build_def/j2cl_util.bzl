@@ -36,7 +36,7 @@ def get_java_package(pkg_name):
 
 
 def get_or_default(key, map, default):
-  """Returns the value for the provided key if present otherwise default"""
-  if key in map:
+  """Returns the value for the provided key if present and not None, otherwise default"""
+  if key in map and map[key]:
     return map[key]
   return default
