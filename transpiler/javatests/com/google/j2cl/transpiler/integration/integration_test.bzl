@@ -77,7 +77,7 @@ def integration_test(
         ],
         native_srcs=native_srcs,
         native_srcs_pkg=native_srcs_pkg,
-  )
+    )
 
   # blaze build :optimized_js
   opt_harness = """

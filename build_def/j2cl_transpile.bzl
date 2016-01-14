@@ -68,6 +68,8 @@ def _impl(ctx):
     java_files_paths += [java_file.path]
 
   js_zip_name = ctx.label.name + ".js.zip"
+  js_zip_artifact = ctx.new_file(js_zip_name)
+
   compiler_args = [
       "-d",
       ctx.configuration.bin_dir.path + "/" + ctx.label.package + "/" +
@@ -90,7 +92,6 @@ def _impl(ctx):
   # The transpiler expects each java file path as a separate argument.
   compiler_args += java_files_paths
 
-  js_zip_artifact = ctx.new_file(js_zip_name)
   ctx.action(
       progress_message = _get_message(ctx),
       inputs=java_files + list(dep_files) + js_native_zip_files,

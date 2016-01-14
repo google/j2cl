@@ -4,11 +4,12 @@ package(default_visibility = ["//:__subpackages__"])
 licenses(["unencumbered"])
 
 java_library(
-    name = "sourcemapsinterface",
-    srcs =
-        glob(["*.java"]),
+    name = "tracking_interface",
+    srcs = [
+        "SourceInfo.java",
+        "TracksSourceInfo.java",
+    ],
     deps = [
-        "//java/com/google/common/base",
-        "//third_party/java/eclipse:eclipse-jdt-core",
+        "//third_party/java_src/jscomp/java/com/google/debugging/sourcemap:shared",
     ],
 )

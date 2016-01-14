@@ -20,4 +20,14 @@ class SimpleClass {
       i++;
     }
   }
+  
+  public void asserts() {
+    long a = 0;
+
+    a += 1L;
+    assert a == 1L;
+
+    a -= 2L;
+    assert a == -1L;
+  }
 }

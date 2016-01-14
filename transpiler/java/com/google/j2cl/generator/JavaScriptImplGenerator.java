@@ -32,6 +32,7 @@ import java.nio.charset.StandardCharsets;
 public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private VelocityContext velocityContext;
   private String nativeSource;
+  private String relativeSourceMapLocation;
 
   public JavaScriptImplGenerator(Errors errors, JavaType javaType, VelocityEngine velocityEngine) {
     super(errors, javaType, velocityEngine);
@@ -46,6 +47,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   @Override
   public String getSuffix() {
     return ".impl.js";
+  }
+
+  public void setRelativeSourceMapLocation(String relativeSourceMapLocation) {
+    Preconditions.checkArgument(relativeSourceMapLocation != null);
+    this.relativeSourceMapLocation = relativeSourceMapLocation;
   }
 
   public void setNativeSource(String nativeSource) {
@@ -78,7 +84,14 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     renderNativeSource(sourceBuilder);
     renderExports(sourceBuilder);
+    renderSourceMapLocation(sourceBuilder);
     return sourceBuilder.build();
+  }
+
+  private void renderSourceMapLocation(SourceBuilder sourceBuilder) {
+    if (relativeSourceMapLocation != null) {
+      sourceBuilder.append(String.format("//# sourceMappingURL=%s", relativeSourceMapLocation));
+    }
   }
 
   private void renderJavaTypeMethods(SourceBuilder sourceBuilder) {

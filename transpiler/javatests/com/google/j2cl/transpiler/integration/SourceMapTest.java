@@ -40,14 +40,15 @@ public class SourceMapTest extends IntegrationTestCase {
             "-printInputSourceInfo");
     assertLogContainsSnippet(
         transpileResult.outputLines,
-        "com.google.j2cl.ast.VariableDeclarationStatement line:18 col:4 length:10");
-    assertLogContainsSnippet(
-        transpileResult.outputLines, "com.google.j2cl.ast.IfStatement line:19 col:4 length:29");
-    assertLogContainsSnippet(
-        transpileResult.outputLines, "com.google.j2cl.ast.Block line:19 col:15 length:18");
+        "com.google.j2cl.ast.VariableDeclarationStatement line:17 col:4 -> line:17 col:14");
     assertLogContainsSnippet(
         transpileResult.outputLines,
-        "com.google.j2cl.ast.ExpressionStatement line:20 col:6 length:4");
+        "com.google.j2cl.ast.IfStatement line:18 col:4 -> line:20 col:5");
+    assertLogContainsSnippet(
+        transpileResult.outputLines, "com.google.j2cl.ast.Block line:18 col:15 -> line:20 col:5");
+    assertLogContainsSnippet(
+        transpileResult.outputLines,
+        "com.google.j2cl.ast.ExpressionStatement line:19 col:6 -> line:19 col:10");
   }
 
   /**
@@ -75,14 +76,12 @@ public class SourceMapTest extends IntegrationTestCase {
             "-printOutputSourceInfo");
     assertLogContainsSnippet(
         transpileResult.outputLines,
-        "com.google.j2cl.ast.VariableDeclarationStatement line:60 col:0 length:11");
-    assertLogContainsSnippet(
-        transpileResult.outputLines, "com.google.j2cl.ast.IfStatement line:61 col:0 length:10");
-    // Blocks don't have their output set.
-    assertLogContainsSnippet(
-        transpileResult.outputLines, "com.google.j2cl.ast.Block line:-1 col:-1 length:0");
+        "com.google.j2cl.ast.VariableDeclarationStatement line:64 col:0 -> line:64 col:1");
     assertLogContainsSnippet(
         transpileResult.outputLines,
-        "com.google.j2cl.ast.ExpressionStatement line:62 col:0 length:5");
+        "com.google.j2cl.ast.IfStatement line:65 col:0 -> line:65 col:10");
+    assertLogContainsSnippet(
+        transpileResult.outputLines,
+        "com.google.j2cl.ast.ExpressionStatement line:66 col:0 -> line:66 col:4");
   }
 }

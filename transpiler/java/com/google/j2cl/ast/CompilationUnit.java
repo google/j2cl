@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
+import com.google.j2cl.ast.processors.Context;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.io.File;
@@ -28,6 +29,7 @@ import java.util.List;
  * A model class that represents a Java Compilation Unit.
  */
 @Visitable
+@Context
 public class CompilationUnit extends Node {
   private String filePath;
   private String packageName;
@@ -46,6 +48,12 @@ public class CompilationUnit extends Node {
 
   public void setFilePath(String filePath) {
     this.filePath = filePath;
+  }
+
+  public String getFileName() {
+    Preconditions.checkNotNull(filePath);
+    String[] pathComponents = filePath.split("/");
+    return pathComponents[pathComponents.length - 1];
   }
 
   public String getPackageName() {

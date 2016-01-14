@@ -15,30 +15,36 @@
  */
 package com.google.j2cl.sourcemaps;
 
+import com.google.debugging.sourcemap.FilePosition;
+
 /**
  * Describes the location of a node in the original source.
  */
-public class SourceInfo {
-  public static final SourceInfo UNKNOWN_SOURCE_INFO = new SourceInfo(-1, -1, 0);
-  private int columnNumber;
-  private int lineNumber;
-  private int characterLength;
+public class SourceInfo implements Comparable<SourceInfo> {
+  public static final SourceInfo UNKNOWN_SOURCE_INFO = new SourceInfo(-1, -1, -1, -1);
 
-  public SourceInfo(int lineNumber, int columnNumber, int characterLength) {
-    this.columnNumber = columnNumber;
-    this.lineNumber = lineNumber;
-    this.characterLength = characterLength;
+  private FilePosition startPosition;
+  private FilePosition endPosition;
+
+  public SourceInfo(
+      int startLineNumber, int startColumnNumber, int endLineNumber, int endColumnNumber) {
+    startPosition = new FilePosition(startLineNumber, startColumnNumber);
+    endPosition = new FilePosition(endLineNumber, endColumnNumber);
   }
 
-  public int getColumn() {
-    return columnNumber;
+  public FilePosition getStartFilePosition() {
+    return startPosition;
   }
 
-  public int getLine() {
-    return lineNumber;
+  public FilePosition getEndFilePosition() {
+    return endPosition;
   }
 
-  public int getLength() {
-    return characterLength;
+  @Override
+  public int compareTo(SourceInfo o) {
+    if (startPosition.getLine() == o.startPosition.getLine()) {
+      return startPosition.getColumn() - o.startPosition.getColumn();
+    }
+    return startPosition.getLine() - o.startPosition.getLine();
   }
 }

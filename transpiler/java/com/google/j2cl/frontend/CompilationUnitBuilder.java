@@ -85,7 +85,6 @@ import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableDeclarationStatement;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.WhileStatement;
-import com.google.j2cl.sourcemaps.FilePositionUtils;
 import com.google.j2cl.sourcemaps.SourceInfo;
 
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -128,8 +127,8 @@ public class CompilationUnitBuilder {
     private JavaType currentType = null;
 
     private String currentSourceFile;
+    private org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit;
     private CompilationUnit j2clCompilationUnit;
-    private FilePositionUtils filePositionReader;
 
     private void pushType(JavaType type) {
       Preconditions.checkArgument(type.getDescriptor() instanceof RegularTypeDescriptor);
@@ -148,11 +147,12 @@ public class CompilationUnitBuilder {
       currentSourceFile = sourceFilePath;
       String packageName = JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit);
       j2clCompilationUnit = new CompilationUnit(sourceFilePath, packageName);
-      filePositionReader = new FilePositionUtils(jdtCompilationUnit);
+      this.jdtCompilationUnit = jdtCompilationUnit;
       for (Object object : jdtCompilationUnit.types()) {
         AbstractTypeDeclaration abstractTypeDeclaration = (AbstractTypeDeclaration) object;
         convert(abstractTypeDeclaration);
       }
+
       return j2clCompilationUnit;
     }
 
@@ -743,8 +743,17 @@ public class CompilationUnitBuilder {
       }
     }
 
+    public SourceInfo sourceInfoForNode(ASTNode node) {
+      int startLineNumber = jdtCompilationUnit.getLineNumber(node.getStartPosition()) - 1;
+      int startColumnNumber = jdtCompilationUnit.getColumnNumber(node.getStartPosition());
+      int endPositionCharacterIndex = node.getStartPosition() + node.getLength();
+      int endLineNumber = jdtCompilationUnit.getLineNumber(endPositionCharacterIndex) - 1;
+      int endColumnNumber = jdtCompilationUnit.getColumnNumber(endPositionCharacterIndex);
+      return new SourceInfo(startLineNumber, startColumnNumber, endLineNumber, endColumnNumber);
+    }
+
     private Statement convert(org.eclipse.jdt.core.dom.Statement statement) {
-      SourceInfo position = filePositionReader.filePositionForNode(statement);
+      SourceInfo position = sourceInfoForNode(statement);
       Statement j2clStatement = convertStatement(statement);
       if (j2clStatement != null) {
         j2clStatement.setInputSourceInfo(position);

@@ -50,11 +50,12 @@ public class SourceInfoPrinter {
           type == Type.INPUT ? statement.getInputSourceInfo() : statement.getOutputSourceInfo();
       System.out.printf(
           String.format(
-              "%s line:%d col:%d length:%d%n",
+              "%s line:%d col:%d -> line:%d col:%d%n",
               statement.getClass().getName(),
-              position.getLine(),
-              position.getColumn(),
-              position.getLength()));
+              position.getStartFilePosition().getLine(),
+              position.getStartFilePosition().getColumn(),
+              position.getEndFilePosition().getLine(),
+              position.getEndFilePosition().getColumn()));
       return true;
     }
   }

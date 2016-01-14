@@ -1,3 +1,18 @@
+/*
+ * Copyright 2015 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
 package com.google.j2cl.generator;
 
 import com.google.j2cl.ast.CompilationUnit;
@@ -7,7 +22,6 @@ import com.google.j2cl.errors.Errors;
 
 import org.apache.velocity.app.VelocityEngine;
 
-import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
@@ -85,6 +99,10 @@ public class JavaScriptGeneratorStage {
           }
         }
 
+        // Set the relative source map location if source maps are enabled.
+        jsImplGenerator.setRelativeSourceMapLocation(
+            javaType.getDescriptor().getClassName() + SourceMapGeneratorStage.SOURCE_MAP_SUFFIX);
+
         Path absolutePathForImpl =
             GeneratorUtils.getAbsolutePath(
                 outputFileSystem,
@@ -111,18 +129,6 @@ public class JavaScriptGeneratorStage {
         errors.error(
             Errors.Error.ERR_NATIVE_UNUSED_NATIVE_SOURCE,
             fileEntry.getValue().getZipPath() + "!/" + fileEntry.getKey());
-      }
-    }
-
-    maybeCloseFileSystem();
-  }
-
-  private void maybeCloseFileSystem() {
-    if (outputFileSystem instanceof com.sun.nio.zipfs.ZipFileSystem) {
-      try {
-        outputFileSystem.close();
-      } catch (IOException e) {
-        errors.error(Errors.Error.ERR_CANNOT_CLOSE_ZIP);
       }
     }
   }

@@ -18,6 +18,9 @@ java_library(
         "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/errors",
         "//transpiler/java/com/google/j2cl/generator/visitors",
-        "//transpiler/java/com/google/j2cl/sourcemaps:sourcemapsinterface",
+        "//transpiler/java/com/google/j2cl/sourcemaps:tracking_interface",
+        "//third_party/java_src/jscomp/java/com/google/debugging/sourcemap:common",
+        "//third_party/java_src/jscomp/java/com/google/debugging/sourcemap:generation",
+        "//third_party/java_src/jscomp/java/com/google/debugging/sourcemap:shared",
     ],
 )

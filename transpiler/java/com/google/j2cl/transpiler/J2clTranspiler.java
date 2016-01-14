@@ -59,9 +59,17 @@ import com.google.j2cl.frontend.CompilationUnitBuilder;
 import com.google.j2cl.frontend.FrontendFlags;
 import com.google.j2cl.frontend.FrontendOptions;
 import com.google.j2cl.frontend.JdtParser;
+import com.google.j2cl.generator.GeneratorUtils;
 import com.google.j2cl.generator.JavaScriptGeneratorStage;
+import com.google.j2cl.generator.SourceMapGeneratorStage;
 
+import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -88,6 +96,7 @@ public class J2clTranspiler {
     normalizeUnits(j2clUnits);
     generateJavaScriptSources(j2clUnits);
     generateSourceMaps(j2clUnits);
+    maybeCloseFileSystem();
   }
 
   private void loadOptions() {
@@ -203,9 +212,44 @@ public class J2clTranspiler {
   }
 
   private void generateSourceMaps(List<CompilationUnit> j2clUnits) {
+    Charset charset = Charset.forName(options.getEncoding());
+    // For unit tests.
     if (options.getShouldPrintOutputSourceInfo()) {
       for (CompilationUnit j2clUnit : j2clUnits) {
         SourceInfoPrinter.applyTo(j2clUnit, Type.OUTPUT);
+      }
+    }
+
+    // Generate sourcemap files.
+    new SourceMapGeneratorStage(charset, options.getOutputFileSystem(), options.getOutput(), errors)
+        .generateSourceMaps(j2clUnits);
+
+    // Copy .java files.
+    for (CompilationUnit j2clUnit : j2clUnits) {
+      String relativePath = j2clUnit.getPackageName().replace('.', '/') + "/" + j2clUnit.getName();
+      Path outputPath =
+          GeneratorUtils.getAbsolutePath(
+              options.getOutputFileSystem(), options.getOutput(), relativePath, ".java");
+      try {
+        CopyOption[] options =
+            new CopyOption[] {
+              StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES
+            };
+        Files.copy(Paths.get(j2clUnit.getFilePath()), outputPath, options);
+      } catch (IOException e) {
+        // TODO(tdeegan): This blows up during the JRE compile
+        // errors.error(Error.ERR_ERROR, "Could not copy java file: " + outputPath + e);
+      }
+    }
+    maybeExitGracefully();
+  }
+
+  private void maybeCloseFileSystem() {
+    if (options.getOutputFileSystem() instanceof com.sun.nio.zipfs.ZipFileSystem) {
+      try {
+        options.getOutputFileSystem().close();
+      } catch (IOException e) {
+        errors.error(Errors.Error.ERR_CANNOT_CLOSE_ZIP);
       }
     }
   }

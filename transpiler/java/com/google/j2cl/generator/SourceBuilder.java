@@ -24,26 +24,32 @@ import org.apache.commons.lang.StringUtils;
  */
 class SourceBuilder {
   private StringBuilder sb = new StringBuilder();
-  private int lineNumber = 1; // lines start at 1
-
-  public SourceBuilder() {}
+  private int lineNumber = 0;
 
   /**
-   * Returns the location of the string in the output source code.
+   * Appends some source and returns its resulting location.
    */
   public SourceInfo append(String source) {
     sb.append(source);
-    SourceInfo outputLocation = new SourceInfo(lineNumber, 0, source.length());
     int numNewLines = StringUtils.countMatches(source, System.lineSeparator());
+    int lastNewLineIndex = 0;
+    if (numNewLines > 0) {
+      lastNewLineIndex = source.lastIndexOf(System.lineSeparator());
+    }
+    SourceInfo outputLocation =
+        new SourceInfo(lineNumber, 0, lineNumber + numNewLines, source.length() - lastNewLineIndex);
     lineNumber += numNewLines;
     return outputLocation;
   }
 
   /**
-   * Returns the location of the string in the output source code.
+   * Appends the given string to the output source and then appends a new line character.
+   * Returns the location of the string in the output source code without the new line.
    */
   public SourceInfo appendln(String sourceLine) {
-    return append(sourceLine + "\n");
+    SourceInfo outputLocation = append(sourceLine);
+    append("\n");
+    return outputLocation;
   }
 
   public String build() {
