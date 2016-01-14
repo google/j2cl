@@ -56,7 +56,7 @@ class Casts {
    */
   static throwCastException() {
     Casts.$clinit();
-    throw Exceptions.unwrap(ClassCastException.$create());
+    throw Exceptions.toJs(ClassCastException.$create());
   }
 
   /**

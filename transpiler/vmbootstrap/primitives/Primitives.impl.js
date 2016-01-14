@@ -410,7 +410,7 @@ class Primitives {
    */
   static $throwArithmeticException() {
     Primitives.$clinit();
-    throw Exceptions.unwrap(ArithmeticException.$create());
+    throw Exceptions.toJs(ArithmeticException.$create());
   }
 
 

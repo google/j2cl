@@ -383,7 +383,7 @@ class Arrays {
    */
   static $throwArrayIndexOutOfBoundsException() {
     Arrays.$clinit();
-    throw Exceptions.unwrap(ArrayIndexOutOfBoundsException.$create());
+    throw Exceptions.toJs(ArrayIndexOutOfBoundsException.$create());
   }
 
   /**
@@ -394,7 +394,7 @@ class Arrays {
    */
   static $throwArrayStoreException() {
     Arrays.$clinit();
-    throw Exceptions.unwrap(ArrayStoreException.$create());
+    throw Exceptions.toJs(ArrayStoreException.$create());
   }
 
   /**
@@ -405,7 +405,7 @@ class Arrays {
    */
   static $throwNullPointerException() {
     Arrays.$clinit();
-    throw Exceptions.unwrap(NullPointerException.$create());
+    throw Exceptions.toJs(NullPointerException.$create());
   }
 
   /**

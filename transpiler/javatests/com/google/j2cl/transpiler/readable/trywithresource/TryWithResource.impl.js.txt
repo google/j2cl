@@ -71,17 +71,17 @@ class TryWithResource extends Object {
         thing = TryWithResource$ClosableThing.$create();
         let i = 0;
       } catch ($exceptionFromTry) {
-        $exceptionFromTry = $Exceptions.wrap($exceptionFromTry);
+        $exceptionFromTry = $Exceptions.toJava($exceptionFromTry);
         if (Throwable.$isInstance($exceptionFromTry)) {
           $primaryExc = $exceptionFromTry;
-          throw $Exceptions.unwrap($exceptionFromTry);
+          throw $Exceptions.toJs($exceptionFromTry);
         } else {
-          throw $Exceptions.unwrap($exceptionFromTry);
+          throw $Exceptions.toJs($exceptionFromTry);
         }
       } finally {
         $primaryExc = $Exceptions.safeClose(thing, $primaryExc);
         if ($primaryExc != null) {
-          throw $Exceptions.unwrap($primaryExc);
+          throw $Exceptions.toJs($primaryExc);
         }
       }
     }
@@ -102,28 +102,28 @@ class TryWithResource extends Object {
         thing = TryWithResource$ClosableThing.$create();
         thing2 = TryWithResource$ClosableThing.$create();
         let i = 0;
-        throw $Exceptions.unwrap(Exception.$create());
+        throw $Exceptions.toJs(Exception.$create());
       } catch ($exceptionFromTry) {
-        $exceptionFromTry = $Exceptions.wrap($exceptionFromTry);
+        $exceptionFromTry = $Exceptions.toJava($exceptionFromTry);
         if (Throwable.$isInstance($exceptionFromTry)) {
           $primaryExc = $exceptionFromTry;
-          throw $Exceptions.unwrap($exceptionFromTry);
+          throw $Exceptions.toJs($exceptionFromTry);
         } else {
-          throw $Exceptions.unwrap($exceptionFromTry);
+          throw $Exceptions.toJs($exceptionFromTry);
         }
       } finally {
         $primaryExc = $Exceptions.safeClose(thing2, $primaryExc);
         $primaryExc = $Exceptions.safeClose(thing, $primaryExc);
         if ($primaryExc != null) {
-          throw $Exceptions.unwrap($primaryExc);
+          throw $Exceptions.toJs($primaryExc);
         }
       }
     } catch (e) {
-      e = $Exceptions.wrap(e);
+      e = $Exceptions.toJava(e);
       if (Exception.$isInstance(e)) {
         let b = 10;
       } else {
-        throw $Exceptions.unwrap(e);
+        throw $Exceptions.toJs(e);
       }
     }
   }

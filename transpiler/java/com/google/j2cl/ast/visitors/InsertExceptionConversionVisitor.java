@@ -72,7 +72,7 @@ public class InsertExceptionConversionVisitor extends AbstractRewriter {
             .isRaw(true)
             .isStatic(true)
             .enclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
-            .methodName("wrap") // TODO(goktug): rename to toJava
+            .methodName("toJava")
             .parameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
             .returnTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
             .build();
@@ -99,7 +99,7 @@ public class InsertExceptionConversionVisitor extends AbstractRewriter {
             .isRaw(true)
             .isStatic(true)
             .enclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
-            .methodName("unwrap") // TODO(goktug): rename to toJs
+            .methodName("toJs")
             .parameterTypeDescriptors(TypeDescriptors.get().javaLangThrowable)
             .returnTypeDescriptor(TypeDescriptors.get().javaLangObject)
             .build();

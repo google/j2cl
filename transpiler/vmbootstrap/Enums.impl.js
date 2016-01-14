@@ -29,11 +29,11 @@ class Enums {
   static getValueFromNameAndMap(name, map) {
     Enums.$clinit();
     if (name == null) {
-      throw Exceptions.unwrap(IllegalArgumentException.$create());
+      throw Exceptions.toJs(IllegalArgumentException.$create());
     }
     let enumValue = map[name];
     if (enumValue == undefined) {
-      throw Exceptions.unwrap(IllegalArgumentException.$create());
+      throw Exceptions.toJs(IllegalArgumentException.$create());
     }
     return enumValue;
   }

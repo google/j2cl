@@ -16,7 +16,7 @@ class Asserts {
   static $assert(condition) {
     Asserts.$clinit();
     if (!condition) {
-      throw Exceptions.unwrap(AssertionError.
+      throw Exceptions.toJs(AssertionError.
           $create__java_lang_String('Assertion failed.'));
     }
   }
@@ -28,7 +28,7 @@ class Asserts {
   static $assertWithMessage(condition, message) {
     Asserts.$clinit();
     if (!condition) {
-      throw Exceptions.unwrap(AssertionError.
+      throw Exceptions.toJs(AssertionError.
           $create__java_lang_String(message));
     }
   }

@@ -27,7 +27,7 @@ class Exceptions {
     try {
       resource.m_close();
     } catch (e) {
-      e = Exceptions.wrap(e);
+      e = Exceptions.toJava(e);
       if (currentException == null) {
         return e;
       }
@@ -40,7 +40,7 @@ class Exceptions {
    * @param {*} e
    * @return {Throwable}
    */
-  static wrap(e) {
+  static toJava(e) {
     return (e && e['__java$exception']) ||
         JsException.$create__java_lang_Object(e);
   }
@@ -48,7 +48,7 @@ class Exceptions {
   /**
    * @param {Throwable} t
    */
-  static unwrap(t) {
+  static toJs(t) {
     return t.backingJsObject;
   }
 
