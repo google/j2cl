@@ -30,13 +30,19 @@ public class SourceMapGeneratorStage {
   private Errors errors;
   private FileSystem outputFileSystem;
   private String outputLocationPath;
+  private boolean generateReadableSourceMaps;
 
   public SourceMapGeneratorStage(
-      Charset charset, FileSystem outputFileSystem, String outputLocationPath, Errors errors) {
+      Charset charset,
+      FileSystem outputFileSystem,
+      String outputLocationPath,
+      Errors errors,
+      boolean generateReadableSourceMaps) {
     this.charset = charset;
     this.outputFileSystem = outputFileSystem;
     this.outputLocationPath = outputLocationPath;
     this.errors = errors;
+    this.generateReadableSourceMaps = generateReadableSourceMaps;
   }
 
   public void generateSourceMaps(List<CompilationUnit> j2clCompilationUnits) {
@@ -81,13 +87,14 @@ public class SourceMapGeneratorStage {
           String typeName = javaType.getDescriptor().getClassName();
           sourceMapGenerator.appendTo(builder, typeName + ".impl.js");
           String output = builder.toString();
+          String readableMap = ReadableSourceMapGenerator.generateForJavaType(javaType);
           Path absolutePathForSourceMap =
               GeneratorUtils.getAbsolutePath(
                   outputFileSystem,
                   outputLocationPath,
                   GeneratorUtils.getRelativePath(javaType),
                   SOURCE_MAP_SUFFIX);
-          writeToFile(absolutePathForSourceMap, output);
+          writeToFile(absolutePathForSourceMap, generateReadableSourceMaps ? readableMap : output);
         } catch (IOException e) {
           e.printStackTrace();
         }

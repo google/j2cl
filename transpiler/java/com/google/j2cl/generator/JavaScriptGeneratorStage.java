@@ -99,7 +99,6 @@ public class JavaScriptGeneratorStage {
           }
         }
 
-        // Set the relative source map location if source maps are enabled.
         jsImplGenerator.setRelativeSourceMapLocation(
             javaType.getDescriptor().getClassName() + SourceMapGeneratorStage.SOURCE_MAP_SUFFIX);
 

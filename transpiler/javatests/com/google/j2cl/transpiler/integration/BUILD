@@ -78,13 +78,6 @@ java_test(
     deps = [":IntegrationTestCase"],
 )
 
-java_test(
-    name = "SourceMapTest",
-    srcs = ["SourceMapTest.java"],
-    data = glob(["sourcemap/*"]) + ["//jre/java:libJavaJre_java_library.jar"],
-    deps = [":IntegrationTestCase"],
-)
-
 java_library(
     name = "IntegrationTestCase",
     testonly = 1,

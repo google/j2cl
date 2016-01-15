@@ -89,6 +89,10 @@ def _impl(ctx):
     joined_paths = separator.join(js_native_zip_files_paths)
     compiler_args += ["-nativesourcezip", joined_paths]
 
+  # generate readable_maps
+  if ctx.attr.readable_source_maps:
+    compiler_args += ["-readableSourceMaps"]
+
   # The transpiler expects each java file path as a separate argument.
   compiler_args += java_files_paths
 
@@ -129,6 +133,7 @@ j2cl_transpile = rule(
             allow_files=FileType([".zip"]),
         ),
         "omit_srcs": attr.string_list(default=[]),
+        "readable_source_maps": attr.bool(default=False),
         "transpiler": attr.label(
             cfg=HOST_CFG,
             executable=True,

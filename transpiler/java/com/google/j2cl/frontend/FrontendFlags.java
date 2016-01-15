@@ -100,20 +100,11 @@ public class FrontendFlags {
   protected boolean help = false;
 
   @Option(
-    name = "-printInputSourceInfo",
-    usage =
-        "Specify that the transpiler should output the Java source location for ast nodes."
-            + " (for testing)"
+    name = "-readableSourceMaps",
+    usage = "Output human readable representation of source maps.",
+    hidden = true
   )
-  protected boolean shouldPrintInputSourceInfo = false;
-
-  @Option(
-    name = "-printOutputSourceInfo",
-    usage =
-        "Specify that the transpiler should print the JavaScript source location for ast nodes."
-            + " (for testing)"
-  )
-  protected boolean shouldPrintOutputSourceInfo = false;
+  protected boolean readableSourceMaps = false;
 
   private final Errors errors;
 

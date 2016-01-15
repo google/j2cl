@@ -56,8 +56,7 @@ public class FrontendOptions {
   private List<String> sourceFilePaths;
   private List<String> omitSourceFilePaths;
   private FileSystem outputFileSystem;
-  private boolean shouldPrintInputSourceInfo;
-  private boolean shouldPrintOutputSourceInfo;
+  private boolean shouldPrintReadableMap;
 
   private static final Set<String> VALID_JAVA_VERSIONS =
       ImmutableSet.of("1.8", "1.7", "1.6", "1.5");
@@ -84,8 +83,7 @@ public class FrontendOptions {
     setOmitSourceFiles(flags.omitfiles);
     setSourceVersion(flags.source);
     setEncoding(flags.encoding);
-    setShouldPrintInputSourceInfo(flags.shouldPrintInputSourceInfo);
-    setShouldPrintOutputSourceInfo(flags.shouldPrintOutputSourceInfo);
+    setShouldPrintReadableSourceMap(flags.readableSourceMaps);
   }
 
   public List<String> getClasspathEntries() {
@@ -265,20 +263,12 @@ public class FrontendOptions {
     }
   }
 
-  public boolean getShouldPrintInputSourceInfo() {
-    return shouldPrintInputSourceInfo;
+  public boolean getShouldPrintReadableSourceMap() {
+    return shouldPrintReadableMap;
   }
 
-  public void setShouldPrintInputSourceInfo(boolean shouldPrintInputSourceInfo) {
-    this.shouldPrintInputSourceInfo = shouldPrintInputSourceInfo;
-  }
-
-  public boolean getShouldPrintOutputSourceInfo() {
-    return shouldPrintOutputSourceInfo;
-  }
-
-  public void setShouldPrintOutputSourceInfo(boolean shouldPrintOutputSourceInfo) {
-    this.shouldPrintOutputSourceInfo = shouldPrintOutputSourceInfo;
+  public void setShouldPrintReadableSourceMap(boolean shouldPrintReadableMap) {
+    this.shouldPrintReadableMap = shouldPrintReadableMap;
   }
 
   private boolean checkSourceFiles(List<String> sourceFiles) {

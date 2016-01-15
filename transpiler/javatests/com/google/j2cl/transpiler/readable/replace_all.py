@@ -127,12 +127,6 @@ def replace_transpiled_js(target_names):
   find_command_js_test_sources = ["find", EXAMPLES_DIR, "-name", "*.js.txt",
                                   "-not", "-path", "**/native_sources/*"]
 
-  # Temporarily we will remove the maps until we have readable ones.
-  find_command_map_sources = ["find", EXAMPLES_DIR, "-name", "*.js.map",
-                              "-not", "-path", "**/native_sources/*"]
-  run_cmd_get_output(
-      find_command_map_sources + ["-exec", "rm", "{}", ";"])
-
   # Format .js files
   run_cmd_get_output(
       find_command_js_sources +

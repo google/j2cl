@@ -37,6 +37,7 @@ def readable_example(
       native_srcs=native_srcs,
       native_srcs_pkg=native_srcs_pkg,
       deps=deps,
+      _readable_source_maps=True,
   )
 
   # Verify compilability of generated JS.
