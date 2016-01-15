@@ -83,6 +83,9 @@
    */
   m_getClass() { return ${className}.$getClass(); }
 
+#foreach ($staticField in $classType.getStaticFields())
+#parse( "com/google/j2cl/generator/JsStaticFieldGetterSetter.vm" )
+#end
 #parse( "com/google/j2cl/generator/JsClinit.vm")
 };
 #foreach ($staticField in $classType.getStaticFields())

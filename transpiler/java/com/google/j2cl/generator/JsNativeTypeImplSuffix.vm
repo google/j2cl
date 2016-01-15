@@ -12,6 +12,9 @@
 #end
 
 
+#foreach ($staticField in $classType.getStaticFields())
+#parse( "com/google/j2cl/generator/JsStaticFieldGetterSetter.vm" )
+#end
 #if (${GeneratorUtils.needClinit($classType, $lazyImports)})
 #parse( "com/google/j2cl/generator/JsClinit.vm")
 #end

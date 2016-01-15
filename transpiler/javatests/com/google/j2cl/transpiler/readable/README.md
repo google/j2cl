@@ -41,7 +41,8 @@ are copyright and licensed as follows:
 
 ## Tasks
 - Add a Closure pass to get back the 2% regression introduced in cl/104162467.
-- Investigate if label names (from LabeledStatements) are allowed to collide with other identifiers.
+- Investigate if label names (from LabeledStatements) are allowed to collide
+    with other identifiers.
 - Investigate if the size regression by cl/103334620 can be fixed.
     The direct cause of the size regression is that making
     Byte/Character/Float/Integer/Long/Short implement Comparable,
@@ -61,6 +62,10 @@ are copyright and licensed as follows:
 - Fix two errors with checktypes in "jsinteroptests".
   1. property m_getClass not defined on a native js types.
   2. constructors for subclasses of native js types.
+- Investigate 45% leakage that was recovered in cl/107609415 and regressed in
+    cl/111866974. A bunch of examples start leaking about 10kb of collections
+    classes (TreeMap related) for unknown reasons. Need to know why JSCompiler
+    thinks these things are live.
 
 ## Tracking Closure warning issues
 - https://b.corp.google.com/hotlists/269212
@@ -68,8 +73,6 @@ are copyright and licensed as follows:
   formal parameter
 
 ## Feature Complete Java 7 TODOs
-- identity equality (double equality / triple equality, null / undefined)
-- integrate JRE
 - packageclasscollision
 - stringconstructor
 - Enum.valueOf(Class<>, String)
@@ -77,15 +80,12 @@ are copyright and licensed as follows:
 ## JsInterop TODOs
 - catchjsexception
 - jsconstructor
-- jsignore
 - jspackageinfo
 - jstype (with deep namespace)
 - jstype (cascade to inner classes)
 - jstypeenum
 - objectmethodsofnativetype
 - subclassjsnativetype (with constructor)
-- AddClassInitAtCallSite support
-- importing shallow namespaces that aren't externs
 
 ## Feature Complete Java 8 TODOs
 - interfacedefaultmethod

@@ -15,7 +15,7 @@ public class Main {
 
   public static void runJsExportTest() {
     JsExportTest test = new JsExportTest();
-    // test.testClinit_staticField();
+    test.testClinit_staticField();
     test.testClinit_staticMethod();
     // test.testClinit_virtualMethod();
     // test.testClinit();
@@ -28,7 +28,7 @@ public class Main {
     test.testExportClass_correctNamespace();
     test.testExportClass_implicitConstructor();
     // test.testExportConstructors();
-    // test.testExportedField();
+    test.testExportedField();
     test.testExportedFieldRefInExportedMethod();
     test.testExportedMethod();
     test.testInheritClassNamespace();

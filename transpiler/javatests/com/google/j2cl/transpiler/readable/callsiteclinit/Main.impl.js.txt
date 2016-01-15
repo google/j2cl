@@ -69,8 +69,6 @@ class Main extends Object {
    * @protected
    */
   $ctor__com_google_j2cl_transpiler_readable_callsiteclinit_Main() {
-    Main$Yar.$clinit();
-    Main$Yo.$clinit();
     this.$ctor__java_lang_Object();
     this.$init__com_google_j2cl_transpiler_readable_callsiteclinit_Main();
   }
@@ -80,7 +78,6 @@ class Main extends Object {
    * @public
    */
   m_asdf() {
-    Main$Yo.$clinit();
     let insideMethod =
         Main$Yo.f_a__com_google_j2cl_transpiler_readable_callsiteclinit_Main$Yo;
   }
@@ -127,6 +124,58 @@ class Main extends Object {
   m_getClass() { return Main.$getClass(); }
 
   /**
+   * A static field getter.
+   * @return {?string}
+   * @public
+   */
+  static get
+  f_staticField__com_google_j2cl_transpiler_readable_callsiteclinit_Main_() {
+    Main.$clinit();
+    return Main
+        .$f_staticField__com_google_j2cl_transpiler_readable_callsiteclinit_Main_;
+  }
+
+  /**
+   * A static field setter.
+   * @param {?string} value
+   * @return {void}
+   * @public
+   */
+  static set
+      f_staticField__com_google_j2cl_transpiler_readable_callsiteclinit_Main_(
+          value) {
+    Main.$clinit();
+    Main.$f_staticField__com_google_j2cl_transpiler_readable_callsiteclinit_Main_ =
+        value;
+  }
+
+  /**
+   * A static field getter.
+   * @return {?string}
+   * @public
+   */
+  static get
+  f_staticWithBlock__com_google_j2cl_transpiler_readable_callsiteclinit_Main_() {
+    Main.$clinit();
+    return Main
+        .$f_staticWithBlock__com_google_j2cl_transpiler_readable_callsiteclinit_Main_;
+  }
+
+  /**
+   * A static field setter.
+   * @param {?string} value
+   * @return {void}
+   * @public
+   */
+  static set
+      f_staticWithBlock__com_google_j2cl_transpiler_readable_callsiteclinit_Main_(
+          value) {
+    Main.$clinit();
+    Main.$f_staticWithBlock__com_google_j2cl_transpiler_readable_callsiteclinit_Main_ =
+        value;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -141,16 +190,13 @@ class Main extends Object {
     Class = goog.module.get('gen.java.lang.Class$impl');
     String = goog.module.get('gen.java.lang.String$impl');
     Object.$clinit();
-    Main$Yar.$clinit();
-    Main$Yas.$clinit();
-    Main$Yo.$clinit();
-    Main.f_staticField__com_google_j2cl_transpiler_readable_callsiteclinit_Main_ =
+    Main.$f_staticField__com_google_j2cl_transpiler_readable_callsiteclinit_Main_ =
         Main$Yo.f_a__com_google_j2cl_transpiler_readable_callsiteclinit_Main$Yo;
     let temp =
         Main$Yas
             .f_c__com_google_j2cl_transpiler_readable_callsiteclinit_Main$Yas;
     {
-      Main.f_staticWithBlock__com_google_j2cl_transpiler_readable_callsiteclinit_Main_ =
+      Main.$f_staticWithBlock__com_google_j2cl_transpiler_readable_callsiteclinit_Main_ =
           Main$Yar
               .f_b__com_google_j2cl_transpiler_readable_callsiteclinit_Main$Yar;
     }
@@ -159,16 +205,16 @@ class Main extends Object {
 
 
 /**
- * @public {?string}
+ * @private {?string}
  */
-Main.f_staticField__com_google_j2cl_transpiler_readable_callsiteclinit_Main_ =
+Main.$f_staticField__com_google_j2cl_transpiler_readable_callsiteclinit_Main_ =
     null;
 
 
 /**
- * @public {?string}
+ * @private {?string}
  */
-Main.f_staticWithBlock__com_google_j2cl_transpiler_readable_callsiteclinit_Main_ =
+Main.$f_staticWithBlock__com_google_j2cl_transpiler_readable_callsiteclinit_Main_ =
     null;
 
 

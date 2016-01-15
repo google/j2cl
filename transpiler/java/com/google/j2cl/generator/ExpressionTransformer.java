@@ -164,7 +164,13 @@ public class ExpressionTransformer {
 
       @Override
       public String transformFieldAccess(FieldAccess fieldAccess) {
-        String fieldMangledName = ManglingNameUtils.getMangledName(fieldAccess.getTarget());
+        // Populated by template system when inside of $clinits.
+        boolean accessStaticFieldDirectly =
+            fieldAccess.getTarget().getEnclosingClassTypeDescriptor().equals(
+                environment.getClinitEnclosingTypeDescriptor());
+
+        String fieldMangledName =
+            ManglingNameUtils.getMangledName(fieldAccess.getTarget(), accessStaticFieldDirectly);
         String qualifier = transform(fieldAccess.getQualifier(), environment);
         return String.format("%s.%s", qualifier, fieldMangledName);
       }

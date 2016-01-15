@@ -19,7 +19,6 @@ import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,10 +27,6 @@ import java.util.List;
 @Visitable
 public class Block extends Statement {
   @Visitable List<Statement> statements = new ArrayList<>();
-
-  public Block(Statement... statements) {
-    this.statements.addAll(Arrays.asList(statements));
-  }
 
   public Block(List<Statement> statements) {
     Preconditions.checkNotNull(statements);

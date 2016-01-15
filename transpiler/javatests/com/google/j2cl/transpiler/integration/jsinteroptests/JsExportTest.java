@@ -104,22 +104,21 @@ public class JsExportTest extends MyTestCase {
 //   */
 //  @JsType(isNative = true, namespace = "woo", name = "MyClassExportsMethodWithClinit")
 //  private static class NativeMyClassExportsMethodWithClinit { }
-//
-//  // Requires b/25512693 fixed and cl/107609415 rolled back
-//  public void testClinit_staticField() {
-//    assertNotNull(getStaticInitializerStaticFieldExported1());
-//    assertNotNull(getStaticInitializerStaticFieldExported2());
-//    assertNotNull(getStaticInitializerStaticFieldInterfaceStatic());
-//  }
-//
-//  @JsProperty(namespace = "woo.StaticInitializerStaticField", name = "EXPORTED_1")
-//  private static native Object getStaticInitializerStaticFieldExported1();
-//
-//  @JsProperty(namespace = "woo.StaticInitializerStaticField", name = "EXPORTED_2")
-//  private static native Object getStaticInitializerStaticFieldExported2();
-//
-//  @JsProperty(namespace = "woo.StaticInitializerStaticField.InterfaceWithField", name = "STATIC")
-//  private static native Object getStaticInitializerStaticFieldInterfaceStatic();
+
+  public void testClinit_staticField() {
+    assertNotNull(getStaticInitializerStaticFieldExported1());
+    assertNotNull(getStaticInitializerStaticFieldExported2());
+    assertNotNull(getStaticInitializerStaticFieldInterfaceStatic());
+  }
+
+  @JsProperty(namespace = "woo.StaticInitializerStaticField", name = "EXPORTED_1")
+  private static native Object getStaticInitializerStaticFieldExported1();
+
+  @JsProperty(namespace = "woo.StaticInitializerStaticField", name = "EXPORTED_2")
+  private static native Object getStaticInitializerStaticFieldExported2();
+
+  @JsProperty(namespace = "woo.InterfaceWithField", name = "STATIC")
+  private static native Object getStaticInitializerStaticFieldInterfaceStatic();
 
   public void testClinit_staticMethod() {
     assertNotNull(getStaticInitializerStaticMethod());
@@ -190,20 +189,22 @@ public class JsExportTest extends MyTestCase {
 //  private static class NativeMyClassExportsConstructor {
 //    public NativeMyClassExportsConstructor(@SuppressWarnings("unused") int a) { }
 //  }
-//
-//  public void testExportedField() {
-//    assertEquals(100, MyExportedClass.EXPORTED_1);
-//    assertEquals(100, getExportedField());
-//    setExportedField(1000);
-//    assertEquals(100, MyExportedClass.EXPORTED_1);
-//    assertEquals(1000, getExportedField());
-//  }
-//
-//  @JsProperty(namespace = "woo.MyExportedClass", name = "EXPORTED_1")
-//  private static native int getExportedField();
-//
-//  @JsProperty(namespace = "woo.MyExportedClass", name = "EXPORTED_1")
-//  private static native void setExportedField(int value);
+
+  public void testExportedField() {
+    assertEquals(100, MyExportedClass.EXPORTED_1);
+    assertEquals(100, getExportedField());
+
+    // Different than GWT, exported fields and methods are not an immutable copy.
+    setExportedField(1000);
+    assertEquals(1000, MyExportedClass.EXPORTED_1);
+    assertEquals(1000, getExportedField());
+  }
+
+  @JsProperty(namespace = "woo.MyExportedClass", name = "EXPORTED_1")
+  private static native int getExportedField();
+
+  @JsProperty(namespace = "woo.MyExportedClass", name = "EXPORTED_1")
+  private static native void setExportedField(int value);
 
   public void testExportedMethod() {
     assertEquals(200, MyExportedClass.foo());
@@ -301,10 +302,6 @@ public class JsExportTest extends MyTestCase {
   private static class NativeMyClassWithEmptyNamespace { }
 
   public void testInheritClassNamespace_withName() {
-    // TODO: remove when b/25512693 is resolved and cl/107609415 is rolled back
-    @SuppressWarnings("unused")
-    Object o = MyExportedClassWithNamespaceAndName.BAR; // trigger clinit.
-
     assertEquals(42, getBooBAR());
   }
 
@@ -383,10 +380,6 @@ public class JsExportTest extends MyTestCase {
   private static class NativeMyNestedExportedClassSansPackageNamespace {}
 
   public void testEnum_enumerations() {
-    // TODO: remove when b/25512693 is resolved and cl/107609415 is rolled back
-    @SuppressWarnings("unused")
-    Object o = MyExportedEnum.TEST1; // trigger clinit.
-
     assertNotNull(getEnumerationTEST1());
     assertNotNull(getEnumerationTEST2());
   }
@@ -413,10 +406,6 @@ public class JsExportTest extends MyTestCase {
   private static native Object getValueOfMethodInEnum();
 
   public void testEnum_exportedFields() {
-    // TODO: remove when b/25512693 is resolved and cl/107609415 is rolled back
-    @SuppressWarnings("unused")
-    Object o = MyExportedEnum.TEST1; // trigger clinit.
-
     assertEquals(1, getPublicStaticFinalFieldInEnum());
 
     // explicitly marked @JsType() fields must be final
@@ -467,10 +456,6 @@ public class JsExportTest extends MyTestCase {
   private static native Object myExportedEnumDefaultStaticMethod();
 
   public void testEnum_subclassEnumerations() {
-    // TODO: remove when b/25512693 is resolved and cl/107609415 is rolled back
-    @SuppressWarnings("unused")
-    Object o = MyEnumWithSubclassGen.A; // trigger clinit.
-
     assertNotNull(getEnumerationA());
     assertNotNull(getEnumerationB());
     assertNotNull(getEnumerationC());
@@ -486,10 +471,6 @@ public class JsExportTest extends MyTestCase {
   private static native Object getEnumerationC();
 
   public void testEnum_subclassMethodCallFromExportedEnumerations() {
-    // TODO: remove when b/25512693 is resolved and cl/107609415 is rolled back
-    @SuppressWarnings("unused")
-    Object o = MyEnumWithSubclassGen.A; // trigger clinit.
-
     assertEquals(100, callPublicMethodFromEnumerationA());
     assertEquals(200, callPublicMethodFromEnumerationB());
     assertEquals(1, callPublicMethodFromEnumerationC());

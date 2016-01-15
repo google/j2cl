@@ -129,6 +129,27 @@ class Foo extends Object {
   m_getClass() { return Foo.$getClass(); }
 
   /**
+   * A static field getter.
+   * @return {number}
+   * @public
+   */
+  static get f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_() {
+    Foo.$clinit();
+    return Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_;
+  }
+
+  /**
+   * A static field setter.
+   * @param {number} value
+   * @return {void}
+   * @public
+   */
+  static set f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_(value) {
+    Foo.$clinit();
+    Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = value;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -141,9 +162,9 @@ class Foo extends Object {
 
 
 /**
- * @public {number}
+ * @private {number}
  */
-Foo.f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = 0;
+Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = 0;
 
 
 /**

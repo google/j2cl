@@ -104,6 +104,75 @@ class JsIgnoreExample extends Object {
   m_getClass() { return JsIgnoreExample.$getClass(); }
 
   /**
+   * A static field getter.
+   * @return {number}
+   * @public
+   */
+  static get exportedField() {
+    JsIgnoreExample.$clinit();
+    return JsIgnoreExample.$exportedField;
+  }
+
+  /**
+   * A static field setter.
+   * @param {number} value
+   * @return {void}
+   * @public
+   */
+  static set exportedField(value) {
+    JsIgnoreExample.$clinit();
+    JsIgnoreExample.$exportedField = value;
+  }
+
+  /**
+   * A static field getter.
+   * @return {number}
+   * @public
+   */
+  static get
+  f_notExportedField__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample() {
+    JsIgnoreExample.$clinit();
+    return JsIgnoreExample
+        .$f_notExportedField__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample;
+  }
+
+  /**
+   * A static field setter.
+   * @param {number} value
+   * @return {void}
+   * @public
+   */
+  static set
+      f_notExportedField__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample(
+          value) {
+    JsIgnoreExample.$clinit();
+    JsIgnoreExample
+        .$f_notExportedField__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample =
+        value;
+  }
+
+  /**
+   * A static field getter.
+   * @return {*}
+   * @public
+   */
+  static get CONSTNAME() {
+    JsIgnoreExample.$clinit();
+    return JsIgnoreExample.$CONSTNAME;
+  }
+
+  /**
+   * A static field setter.
+   * @param {*} value
+   * @return {void}
+   * @public
+   */
+  static set CONSTNAME(value) {
+    JsIgnoreExample.$clinit();
+    JsIgnoreExample.$CONSTNAME = value;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -112,33 +181,33 @@ class JsIgnoreExample extends Object {
     Class = goog.module.get('gen.java.lang.Class$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Object.$clinit();
-    JsIgnoreExample.exportedField = 10;
+    JsIgnoreExample.$exportedField = 10;
     JsIgnoreExample
-        .f_notExportedField__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample =
+        .$f_notExportedField__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample =
         20;
-    JsIgnoreExample.CONSTNAME = Object.$create();
+    JsIgnoreExample.$CONSTNAME = Object.$create();
   }
 };
 
 
 /**
- * @public {number}
+ * @private {number}
  */
-JsIgnoreExample.exportedField = 0;
+JsIgnoreExample.$exportedField = 0;
 
 
 /**
- * @public {number}
+ * @private {number}
  */
 JsIgnoreExample
-    .f_notExportedField__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample =
+    .$f_notExportedField__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample =
     0;
 
 
 /**
- * @public {*}
+ * @private {*}
  */
-JsIgnoreExample.CONSTNAME = null;
+JsIgnoreExample.$CONSTNAME = null;
 
 
 /**

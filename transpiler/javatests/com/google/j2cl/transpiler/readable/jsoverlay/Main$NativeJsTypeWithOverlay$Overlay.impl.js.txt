@@ -46,6 +46,48 @@ class Main$NativeJsTypeWithOverlay$Overlay {
 
 
   /**
+   * A static field getter.
+   * @return {number}
+   * @public
+   */
+  static get COMPILE_TIME_CONSTANT() {
+    Main$NativeJsTypeWithOverlay$Overlay.$clinit();
+    return Main$NativeJsTypeWithOverlay$Overlay.$COMPILE_TIME_CONSTANT;
+  }
+
+  /**
+   * A static field setter.
+   * @param {number} value
+   * @return {void}
+   * @public
+   */
+  static set COMPILE_TIME_CONSTANT(value) {
+    Main$NativeJsTypeWithOverlay$Overlay.$clinit();
+    Main$NativeJsTypeWithOverlay$Overlay.$COMPILE_TIME_CONSTANT = value;
+  }
+
+  /**
+   * A static field getter.
+   * @return {*}
+   * @public
+   */
+  static get staticField() {
+    Main$NativeJsTypeWithOverlay$Overlay.$clinit();
+    return Main$NativeJsTypeWithOverlay$Overlay.$staticField;
+  }
+
+  /**
+   * A static field setter.
+   * @param {*} value
+   * @return {void}
+   * @public
+   */
+  static set staticField(value) {
+    Main$NativeJsTypeWithOverlay$Overlay.$clinit();
+    Main$NativeJsTypeWithOverlay$Overlay.$staticField = value;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -53,21 +95,21 @@ class Main$NativeJsTypeWithOverlay$Overlay {
     Main$NativeJsTypeWithOverlay$Overlay.$clinit = function() {};
     Object = goog.module.get('gen.java.lang.Object$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    Main$NativeJsTypeWithOverlay$Overlay.staticField = Object.$create();
+    Main$NativeJsTypeWithOverlay$Overlay.$staticField = Object.$create();
   }
 };
 
 
 /**
- * @public {number}
+ * @private {number}
  */
-Main$NativeJsTypeWithOverlay$Overlay.COMPILE_TIME_CONSTANT = 10;
+Main$NativeJsTypeWithOverlay$Overlay.$COMPILE_TIME_CONSTANT = 10;
 
 
 /**
- * @public {*}
+ * @private {*}
  */
-Main$NativeJsTypeWithOverlay$Overlay.staticField = null;
+Main$NativeJsTypeWithOverlay$Overlay.$staticField = null;
 
 
 /**

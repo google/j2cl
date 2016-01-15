@@ -149,6 +149,96 @@ class Color extends Enum {
   m_getClass() { return Color.$getClass(); }
 
   /**
+   * A static field getter.
+   * @return {Color}
+   * @public
+   */
+  static get RED() {
+    Color.$clinit();
+    return Color.$RED;
+  }
+
+  /**
+   * A static field setter.
+   * @param {Color} value
+   * @return {void}
+   * @public
+   */
+  static set RED(value) {
+    Color.$clinit();
+    Color.$RED = value;
+  }
+
+  /**
+   * A static field getter.
+   * @return {Color}
+   * @public
+   */
+  static get GREEN() {
+    Color.$clinit();
+    return Color.$GREEN;
+  }
+
+  /**
+   * A static field setter.
+   * @param {Color} value
+   * @return {void}
+   * @public
+   */
+  static set GREEN(value) {
+    Color.$clinit();
+    Color.$GREEN = value;
+  }
+
+  /**
+   * A static field getter.
+   * @return {Color}
+   * @public
+   */
+  static get BLUE() {
+    Color.$clinit();
+    return Color.$BLUE;
+  }
+
+  /**
+   * A static field setter.
+   * @param {Color} value
+   * @return {void}
+   * @public
+   */
+  static set BLUE(value) {
+    Color.$clinit();
+    Color.$BLUE = value;
+  }
+
+  /**
+   * A static field getter.
+   * @return {*}
+   * @public
+   */
+  static get
+  f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_() {
+    Color.$clinit();
+    return Color
+        .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_;
+  }
+
+  /**
+   * A static field setter.
+   * @param {*} value
+   * @return {void}
+   * @public
+   */
+  static set
+      f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_(
+          value) {
+    Color.$clinit();
+    Color
+        .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
+        value;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -162,39 +252,39 @@ class Color extends Enum {
     $Enums = goog.module.get('vmbootstrap.Enums$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Enum.$clinit();
-    Color.RED = Color.$create__java_lang_String__int("RED", 0);
-    Color.GREEN = Color.$create__java_lang_String__int("GREEN", 1);
-    Color.BLUE = Color.$create__java_lang_String__int("BLUE", 2);
+    Color.$RED = Color.$create__java_lang_String__int("RED", 0);
+    Color.$GREEN = Color.$create__java_lang_String__int("GREEN", 1);
+    Color.$BLUE = Color.$create__java_lang_String__int("BLUE", 2);
     Color
-        .f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
+        .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
         null;
   }
 };
 
 
 /**
- * @public {Color}
+ * @private {Color}
  */
-Color.RED = null;
+Color.$RED = null;
 
 
 /**
- * @public {Color}
+ * @private {Color}
  */
-Color.GREEN = null;
+Color.$GREEN = null;
 
 
 /**
- * @public {Color}
+ * @private {Color}
  */
-Color.BLUE = null;
+Color.$BLUE = null;
 
 
 /**
- * @public {*}
+ * @private {*}
  */
 Color
-    .f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
+    .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
     null;
 
 

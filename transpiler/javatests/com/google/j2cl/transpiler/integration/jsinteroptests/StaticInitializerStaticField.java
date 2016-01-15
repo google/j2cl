@@ -45,7 +45,7 @@ public class StaticInitializerStaticField {
   /**
    * Test interface that export a static field.
    */
-  @JsType
+  @JsType(namespace = "woo")  // Remove when package-info files are supported.
   public interface InterfaceWithField {
     Object STATIC = new Object();
   }

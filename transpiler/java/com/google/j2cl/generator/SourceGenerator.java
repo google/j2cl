@@ -28,8 +28,8 @@ import java.util.List;
 public class SourceGenerator {
   private GenerationEnvironment environment;
 
-  public SourceGenerator(GenerationEnvironment envioronment) {
-    this.environment = envioronment;
+  public SourceGenerator(GenerationEnvironment environment) {
+    this.environment = environment;
   }
 
   public String toSource(Statement statement) {
@@ -56,5 +56,13 @@ public class SourceGenerator {
 
   public String getJsDocNames(List<TypeDescriptor> typeDescriptors) {
     return JsDocNameUtils.getJsDocNames(typeDescriptors, environment);
+  }
+
+  public TypeDescriptor getClinitEnclosingTypeDescriptor() {
+    return environment.getClinitEnclosingTypeDescriptor();
+  }
+
+  public void setClinitEnclosingTypeDescriptor(TypeDescriptor clinitEnclosingTypeDescriptor) {
+    environment.setClinitEnclosingTypeDescriptor(clinitEnclosingTypeDescriptor);
   }
 }

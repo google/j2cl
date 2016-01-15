@@ -2,7 +2,7 @@
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {
+  static $clinit() {${sourceGenerator.setClinitEnclosingTypeDescriptor($classType.Descriptor)}
 #if ($GeneratorUtils.needRewriteClinit($classType))
     $className.$clinit = function() {};
 #end
@@ -13,18 +13,16 @@
 #if (${GeneratorUtils.needCallSuperClinit($classType)})
     ${superTypeName}.$clinit();
 #end
-#foreach ($typeName in $classType.StaticFieldClinits)
-    ${sourceGenerator.toSource($typeName)}.$clinit();
-#end
 #foreach ($staticField in $classType.getStaticFields())
 #if ($staticField.hasInitializer())
 #if (!$staticField.isCompileTimeConstant())
 #set ($staticFieldName = ${ManglingNameUtils.getMangledName($staticField.Descriptor)})
-    ${className}.${staticFieldName} = ${sourceGenerator.toSource(${staticField.Initializer})};
+#set ($directStaticFieldAccess = "$" + ${staticFieldName})
+    ${className}.${directStaticFieldAccess} = ${sourceGenerator.toSource(${staticField.Initializer})};
 #end
 #end
 #end
 #foreach ($staticInitializerBlock in $classType.StaticInitializerBlocks)
 #foreach ($statementInInitializer in $staticInitializerBlock.Statements) $sourceGenerator.toSource($statementInInitializer) #end
 #end
-  }
+  }${sourceGenerator.setClinitEnclosingTypeDescriptor(null)}

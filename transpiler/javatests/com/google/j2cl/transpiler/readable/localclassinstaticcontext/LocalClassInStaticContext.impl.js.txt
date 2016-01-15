@@ -115,6 +115,33 @@ class LocalClassInStaticContext extends Object {
   m_getClass() { return LocalClassInStaticContext.$getClass(); }
 
   /**
+   * A static field getter.
+   * @return {*}
+   * @public
+   */
+  static get
+  f_f__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext() {
+    LocalClassInStaticContext.$clinit();
+    return LocalClassInStaticContext
+        .$f_f__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext;
+  }
+
+  /**
+   * A static field setter.
+   * @param {*} value
+   * @return {void}
+   * @public
+   */
+  static set
+      f_f__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext(
+          value) {
+    LocalClassInStaticContext.$clinit();
+    LocalClassInStaticContext
+        .$f_f__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext =
+        value;
+  }
+
+  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -133,7 +160,7 @@ class LocalClassInStaticContext extends Object {
     Class = goog.module.get('gen.java.lang.Class$impl');
     Object.$clinit();
     LocalClassInStaticContext
-        .f_f__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext =
+        .$f_f__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext =
         LocalClassInStaticContext$1.$create();
     LocalClassInStaticContext$1B.$create();
     let b = LocalClassInStaticContext$2.$create();
@@ -142,10 +169,10 @@ class LocalClassInStaticContext extends Object {
 
 
 /**
- * @public {*}
+ * @private {*}
  */
 LocalClassInStaticContext
-    .f_f__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext =
+    .$f_f__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext =
     null;
 
 

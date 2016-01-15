@@ -107,15 +107,24 @@ public class ManglingNameUtils {
    * Returns the mangled name of a field.
    */
   public static String getMangledName(FieldDescriptor fieldDescriptor) {
+    return getMangledName(fieldDescriptor, false);
+  }
+
+  /**
+   * Returns the mangled name of a field.
+   */
+  public static String getMangledName(
+      FieldDescriptor fieldDescriptor, boolean accessStaticsDirectly) {
+    String prefix = accessStaticsDirectly ? "$" : "";
     if (fieldDescriptor.isRaw()) {
-      return fieldDescriptor.getFieldName();
+      return prefix + fieldDescriptor.getFieldName();
     }
 
     Preconditions.checkArgument(!fieldDescriptor.getEnclosingClassTypeDescriptor().isArray());
     String name = fieldDescriptor.getFieldName();
     String typeMangledName = getMangledName(fieldDescriptor.getEnclosingClassTypeDescriptor());
     String privateSuffix = fieldDescriptor.getVisibility().isPrivate() ? "_" : "";
-    return String.format("f_%s__%s%s", name, typeMangledName, privateSuffix);
+    return String.format("%sf_%s__%s%s", prefix, name, typeMangledName, privateSuffix);
   }
 
   private static String getMangledParameterSignature(MethodDescriptor methodDescriptor) {
