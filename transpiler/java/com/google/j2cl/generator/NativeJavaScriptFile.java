@@ -24,7 +24,7 @@ public class NativeJavaScriptFile {
   private boolean used = false;
   private String zipPath;
 
-  private static final String NATIVE_EXTENSION = ".native.js";
+  public static final String NATIVE_EXTENSION = ".native.js";
 
   public NativeJavaScriptFile(String path, String content, String zipPath) {
     this.path = path;

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration;
 
+import com.google.j2cl.generator.NativeJavaScriptFile;
+
 import java.io.IOException;
 
 /**
@@ -68,7 +70,9 @@ public class NativeSourcesErrorTest extends IntegrationTestCase {
             NATIVE_SOURCES_ERROR_PATH + "bad_name_native_sources.zip");
     assertLogContainsSnippet(
         transpileResult.errorLines,
-        "cannot find matching native file: " + PACKAGE_NAME + "NativeClass");
+        "cannot find matching native file: "
+            + PACKAGE_NAME + "NativeClass"
+            + NativeJavaScriptFile.NATIVE_EXTENSION);
   }
 
   /**

@@ -94,7 +94,9 @@ public class JavaScriptGeneratorStage {
           // If not matching native file is found, and the java type contains non-JsMethod native
           // method, reports an error.
           if (matchingNativeFile == null && javaType.containsNonJsNativeMethods()) {
-            errors.error(Errors.Error.ERR_NATIVE_JAVA_SOURCE_NO_MATCH, javaTypePath);
+            errors.error(
+                Errors.Error.ERR_NATIVE_JAVA_SOURCE_NO_MATCH,
+                javaTypePath + NativeJavaScriptFile.NATIVE_EXTENSION);
             return;
           }
         }

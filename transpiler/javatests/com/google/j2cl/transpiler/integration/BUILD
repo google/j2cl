@@ -61,7 +61,10 @@ java_test(
     name = "NativeSourcesErrorTest",
     srcs = ["NativeSourcesErrorTest.java"],
     data = glob(["nativesourceserror/**/*"]) + ["//jre/java:libJavaJre_java_library.jar"],
-    deps = [":IntegrationTestCase"],
+    deps = [
+        ":IntegrationTestCase",
+        "//transpiler/java/com/google/j2cl/generator",
+    ],
 )
 
 java_test(
