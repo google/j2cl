@@ -33,6 +33,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private VelocityContext velocityContext;
   private String nativeSource;
   private String relativeSourceMapLocation;
+  private SourceBuilder sourceBuilder;
 
   public JavaScriptImplGenerator(Errors errors, JavaType javaType, VelocityEngine velocityEngine) {
     super(errors, javaType, velocityEngine);
@@ -73,28 +74,22 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   @Override
   public String toSource() {
-    SourceBuilder sourceBuilder = new SourceBuilder();
+    sourceBuilder = new SourceBuilder();
     sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsImports.vm"));
-    if (javaType.isJsOverlayImpl()) {
-      renderJsNativeTypeSource(sourceBuilder);
-    } else if (javaType.isInterface()) {
-      renderInterfaceSource(sourceBuilder);
-    } else { // Not an interface so it is a Class.
-      renderClassSource(sourceBuilder);
-    }
-    renderNativeSource(sourceBuilder);
-    renderExports(sourceBuilder);
-    renderSourceMapLocation(sourceBuilder);
+    renderTypeBody();
+    renderNativeSource();
+    renderExports();
+    renderSourceMapLocation();
     return sourceBuilder.build();
   }
 
-  private void renderSourceMapLocation(SourceBuilder sourceBuilder) {
+  private void renderSourceMapLocation() {
     if (relativeSourceMapLocation != null) {
       sourceBuilder.append(String.format("//# sourceMappingURL=%s", relativeSourceMapLocation));
     }
   }
 
-  private void renderJavaTypeMethods(SourceBuilder sourceBuilder) {
+  private void renderJavaTypeMethods() {
     for (Method method : javaType.getMethods()) {
       velocityContext.put("method", method);
       if (method.isConstructor()) {
@@ -109,19 +104,21 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
   }
 
-  public void renderInterfaceSource(SourceBuilder sourceBuilder) {
-    sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsInterface.vm"));
-    renderJavaTypeMethods(sourceBuilder);
-    sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsInterfaceSuffix.vm"));
+  private void renderTypeBody() {
+    if (javaType.isJsOverlayImpl()) {
+      renderJsNativeTypeSource();
+    } else if (javaType.isInterface()) {
+      sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsInterface.vm"));
+      renderJavaTypeMethods();
+      sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsInterfaceSuffix.vm"));
+    } else { // Not an interface so it is a Class.
+      sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsClass.vm"));
+      renderJavaTypeMethods();
+      sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsClassSuffix.vm"));
+    }
   }
 
-  public void renderClassSource(SourceBuilder sourceBuilder) {
-    sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsClass.vm"));
-    renderJavaTypeMethods(sourceBuilder);
-    sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsClassSuffix.vm"));
-  }
-
-  private void renderJsNativeTypeSource(SourceBuilder sourceBuilder) {
+  private void renderJsNativeTypeSource() {
     String className = sourceGenerator.toSource(javaType.getDescriptor());
     sourceBuilder.appendln(String.format("class %s {", className));
     for (Method method : javaType.getMethods()) {
@@ -134,7 +131,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsNativeTypeImplSuffix.vm"));
   }
 
-  private void renderNativeSource(SourceBuilder sourceBuilder) {
+  private void renderNativeSource() {
     if (nativeSource != null) {
       sourceBuilder.appendln(""); // New line before
       sourceBuilder.appendln("/**");
@@ -144,7 +141,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
   }
 
-  private void renderExports(SourceBuilder sourceBuilder) {
+  private void renderExports() {
     sourceBuilder.appendln(""); // New line before
     sourceBuilder.appendln("/**");
     sourceBuilder.appendln(" * Export class.");
