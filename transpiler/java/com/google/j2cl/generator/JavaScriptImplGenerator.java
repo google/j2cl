@@ -18,7 +18,11 @@ package com.google.j2cl.generator;
 import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
+import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.errors.Errors;
+import com.google.j2cl.generator.visitors.Import;
+import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
+import com.google.j2cl.generator.visitors.ImportUtils;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -33,7 +37,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private VelocityContext velocityContext;
   private String nativeSource;
   private String relativeSourceMapLocation;
-  private SourceBuilder sourceBuilder;
+  private SourceBuilder sb;
 
   public JavaScriptImplGenerator(Errors errors, JavaType javaType, VelocityEngine velocityEngine) {
     super(errors, javaType, velocityEngine);
@@ -74,32 +78,99 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   @Override
   public String toSource() {
-    sourceBuilder = new SourceBuilder();
-    sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsImports.vm"));
+    sb = new SourceBuilder();
+    renderFileOverview();
+    renderImports();
     renderTypeBody();
     renderNativeSource();
     renderExports();
     renderSourceMapLocation();
-    return sourceBuilder.build();
+    return sb.build();
   }
 
-  private void renderSourceMapLocation() {
-    if (relativeSourceMapLocation != null) {
-      sourceBuilder.append(String.format("//# sourceMappingURL=%s", relativeSourceMapLocation));
+  private void renderFileOverview() {
+    String transpiledFrom = javaType.getDescriptor().getRawTypeDescriptor().getSourceName();
+    sb.appendln("/**");
+    sb.appendln(" * @fileoverview Impl transpiled from " + transpiledFrom + ".");
+    sb.appendln(" *");
+    sb.appendln(
+        " * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode, const}");
+    sb.appendln(" */");
+  }
+
+  private void renderImports() {
+    TypeDescriptor selfTypeDescriptor = javaType.getDescriptor().getRawTypeDescriptor();
+    Import selfImport = new Import(selfTypeDescriptor.getSimpleName(), selfTypeDescriptor);
+
+    // goog.module(...) declaration.
+    sb.appendln("goog.module('%s');", selfImport.getImplModulePath());
+    sb.newLine();
+    sb.newLine();
+
+    // goog.require(...) for eager imports.
+    for (Import eagerImport : ImportUtils.sortedList(importsByCategory.get(ImportCategory.EAGER))) {
+      String alias = eagerImport.getAlias();
+      String path = eagerImport.getImplModulePath();
+      sb.appendln("let %s = goog.require('%s');", alias, path);
     }
+    sb.newLine();
+
+    // goog.forwardDeclare(...) for lazy imports.
+    for (Import lazyImport : ImportUtils.sortedList(importsByCategory.get(ImportCategory.LAZY))) {
+      String alias = lazyImport.getAlias();
+      String path = lazyImport.getImplModulePath();
+      sb.appendln("let %s = goog.forwardDeclare('%s');", alias, path);
+    }
+    sb.newLine();
+    sb.newLine();
   }
 
   private void renderJavaTypeMethods() {
     for (Method method : javaType.getMethods()) {
       velocityContext.put("method", method);
       if (method.isConstructor()) {
-        sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsConstructorMethods.vm"));
+        sb.append(renderTemplate("com/google/j2cl/generator/JsConstructorMethods.vm"));
       } else {
-        sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsMethodHeader.vm"));
-        if (!method.isNative()) {
-          StatementTransformer.transform(method.getBody(), environment, sourceBuilder);
-          sourceBuilder.append("\n");
+        if (GeneratorUtils.shouldNotEmitCode(method)) {
+          continue;
         }
+        if (method.getDescriptor().isJsOverlay() && !method.getDescriptor().isStatic()) {
+          continue;
+        }
+        sb.appendln("/**");
+        if (method.isSynthetic()) {
+          sb.appendln(" * Synthetic method.");
+        }
+        if (method.isAbstract()) {
+          sb.appendln(" * Abstract method.");
+        }
+        if (method.isOverride()) {
+          sb.appendln(" * @override");
+        }
+        if (!method.getDescriptor().getTypeParameterTypeDescriptors().isEmpty()) {
+          String templateParamNames =
+              sourceGenerator.getJsDocNames(
+                  method.getDescriptor().getTypeParameterTypeDescriptors());
+          sb.appendln(" * @template %s", templateParamNames);
+        }
+        for (String paramTypeName :
+            GeneratorUtils.getParameterAnnotationsJsDoc(method, sourceGenerator)) {
+          sb.appendln(" * @param %s", paramTypeName);
+        }
+        if (!GeneratorUtils.isVoid(method.getDescriptor().getReturnTypeDescriptor())) {
+          String returnTypeName =
+              sourceGenerator.getJsDocName(method.getDescriptor().getReturnTypeDescriptor());
+          sb.appendln(" * @return {%s}", returnTypeName);
+        }
+        sb.appendln(" * @%s", method.getDescriptor().getVisibility().jsText);
+        sb.appendln(" */");
+        if (!method.isNative()) {
+          sb.appendln(GeneratorUtils.getMethodHeader(method, sourceGenerator));
+          StatementTransformer.transform(method.getBody(), environment, sb);
+        } else {
+          sb.appendln("  // native " + GeneratorUtils.getMethodHeader(method, sourceGenerator));
+        }
+        sb.newLine();
       }
     }
   }
@@ -108,45 +179,45 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (javaType.isJsOverlayImpl()) {
       renderJsNativeTypeSource();
     } else if (javaType.isInterface()) {
-      sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsInterface.vm"));
+      sb.append(renderTemplate("com/google/j2cl/generator/JsInterface.vm"));
       renderJavaTypeMethods();
-      sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsInterfaceSuffix.vm"));
+      sb.append(renderTemplate("com/google/j2cl/generator/JsInterfaceSuffix.vm"));
     } else { // Not an interface so it is a Class.
-      sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsClass.vm"));
+      sb.append(renderTemplate("com/google/j2cl/generator/JsClass.vm"));
       renderJavaTypeMethods();
-      sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsClassSuffix.vm"));
+      sb.append(renderTemplate("com/google/j2cl/generator/JsClassSuffix.vm"));
     }
   }
 
   private void renderJsNativeTypeSource() {
     String className = sourceGenerator.toSource(javaType.getDescriptor());
-    sourceBuilder.appendln(String.format("class %s {", className));
-    for (Method method : javaType.getMethods()) {
-      if (method.getDescriptor().isJsOverlay() && method.getDescriptor().isStatic()) {
-        velocityContext.put("method", method);
-        sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsMethodHeader.vm"));
-        sourceBuilder.appendln(sourceGenerator.toSource(method.getBody()));
-      }
-    }
-    sourceBuilder.append(renderTemplate("com/google/j2cl/generator/JsNativeTypeImplSuffix.vm"));
+    sb.appendln("class %s {", className);
+    renderJavaTypeMethods();
+    sb.append(renderTemplate("com/google/j2cl/generator/JsNativeTypeImplSuffix.vm"));
   }
 
   private void renderNativeSource() {
     if (nativeSource != null) {
-      sourceBuilder.appendln(""); // New line before
-      sourceBuilder.appendln("/**");
-      sourceBuilder.appendln(" * Native Method Injection");
-      sourceBuilder.appendln(" */");
-      sourceBuilder.appendln(nativeSource);
+      sb.newLine();
+      sb.appendln("/**");
+      sb.appendln(" * Native Method Injection");
+      sb.appendln(" */");
+      sb.appendln(nativeSource);
     }
   }
 
   private void renderExports() {
-    sourceBuilder.appendln(""); // New line before
-    sourceBuilder.appendln("/**");
-    sourceBuilder.appendln(" * Export class.");
-    sourceBuilder.appendln(" */");
+    sb.newLine();
+    sb.appendln("/**");
+    sb.appendln(" * Export class.");
+    sb.appendln(" */");
     String className = sourceGenerator.toSource(javaType.getDescriptor());
-    sourceBuilder.appendln(String.format("exports = %s;", className));
+    sb.appendln("exports = %s;", className);
+  }
+
+  private void renderSourceMapLocation() {
+    if (relativeSourceMapLocation != null) {
+      sb.append(String.format("//# sourceMappingURL=%s", relativeSourceMapLocation));
+    }
   }
 }

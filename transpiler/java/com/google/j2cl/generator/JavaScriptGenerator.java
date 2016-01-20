@@ -45,6 +45,7 @@ public abstract class JavaScriptGenerator extends AbstractSourceGenerator {
   protected final VelocityEngine velocityEngine;
   protected SourceGenerator sourceGenerator;
   protected GenerationEnvironment environment;
+  protected Map<ImportCategory, Set<Import>> importsByCategory;
 
   public JavaScriptGenerator(Errors errors, JavaType javaType, VelocityEngine velocityEngine) {
     super(errors);
@@ -71,8 +72,7 @@ public abstract class JavaScriptGenerator extends AbstractSourceGenerator {
   protected VelocityContext createContext() {
     VelocityContext context = new VelocityContext();
 
-    Map<ImportCategory, Set<Import>> importsByCategory =
-        ImportGatheringVisitor.gatherImports(javaType);
+    importsByCategory = ImportGatheringVisitor.gatherImports(javaType);
 
     List<Import> sortedImports = ImportUtils.getSortedImports(importsByCategory);
 

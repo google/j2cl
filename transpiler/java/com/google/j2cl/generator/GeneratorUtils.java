@@ -88,20 +88,33 @@ public class GeneratorUtils {
   }
 
   /**
-   * Returns the parameter's JsDoc name in the method. If the parameter is a variable parameter,
-   * emits as '...TypeName'.
+   * Returns the list of js doc annotations for the parameters in method.
+   * They are of the form: {parameterType} parameterName
    */
-  public static String getParameterTypeJsDoc(
-      Method method, int index, SourceGenerator sourceGenerator) {
-    Preconditions.checkArgument(index >= 0 && index < method.getParameters().size());
-    TypeDescriptor parameterTypeDescriptor = method.getParameters().get(index).getTypeDescriptor();
-    if (method.getDescriptor().isJsMethodVarargs() && index == method.getParameters().size() - 1) {
-      Preconditions.checkArgument(parameterTypeDescriptor.isArray());
-      return "..."
-          + sourceGenerator.getJsDocName(parameterTypeDescriptor.getComponentTypeDescriptor());
-    } else {
-      return sourceGenerator.getJsDocName(parameterTypeDescriptor);
-    }
+  public static List<String> getParameterAnnotationsJsDoc(
+      final Method method, final SourceGenerator sourceGenerator) {
+    final List<Variable> variables = method.getParameters();
+    return Lists.transform(
+        variables,
+        new Function<Variable, String>() {
+          @Override
+          public String apply(Variable variable) {
+            boolean isLast = variable == variables.get(variables.size() - 1);
+            TypeDescriptor parameterTypeDescriptor = variable.getTypeDescriptor();
+            String name = sourceGenerator.toSource(variable);
+            if (method.getDescriptor().isJsMethodVarargs() && isLast) {
+              // The parameter is a js var arg so we convert the type to an array
+              Preconditions.checkArgument(parameterTypeDescriptor.isArray());
+              String typeName =
+                  sourceGenerator.getJsDocName(
+                      parameterTypeDescriptor.getComponentTypeDescriptor());
+              return String.format("{...%s} %s", typeName, name);
+            } else {
+              String typeName = sourceGenerator.getJsDocName(parameterTypeDescriptor);
+              return String.format("{%s} %s", typeName, name);
+            }
+          }
+        });
   }
 
   public static String getParameterList(Method method, final SourceGenerator sourceGenerator) {

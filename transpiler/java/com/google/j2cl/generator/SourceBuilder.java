@@ -52,6 +52,14 @@ class SourceBuilder {
     return outputLocation;
   }
 
+  public SourceInfo appendln(String template, Object... parameters) {
+    return appendln(String.format(template, parameters));
+  }
+
+  public void newLine() {
+    appendln("");
+  }
+
   public String build() {
     return sb.toString();
   }
