@@ -18,7 +18,7 @@ package com.google.j2cl.generator;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Statement;
-import com.google.j2cl.sourcemaps.SourceInfo;
+import com.google.j2cl.ast.sourcemap.SourceInfo;
 
 import java.io.StringWriter;
 

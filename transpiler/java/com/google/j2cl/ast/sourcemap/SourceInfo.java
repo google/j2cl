@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.sourcemaps;
+package com.google.j2cl.ast.sourcemap;
 
 import com.google.debugging.sourcemap.FilePosition;
 

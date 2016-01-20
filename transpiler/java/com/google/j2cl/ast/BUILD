@@ -13,7 +13,7 @@ java_library(
         "//third_party/java/eclipse:eclipse-jdt-core",
         "//third_party/java/jsr305_annotations",
         "//transpiler/java/com/google/j2cl/ast/processors:visitor-codegen",
+        "//transpiler/java/com/google/j2cl/ast/sourcemap",
         "//transpiler/java/com/google/j2cl/common",
-        "//transpiler/java/com/google/j2cl/sourcemaps:tracking_interface",
     ],
 )

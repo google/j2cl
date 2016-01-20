@@ -10,6 +10,5 @@ java_library(
         "//java/com/google/common/base",
         "//java/com/google/common/collect",
         "//transpiler/java/com/google/j2cl/ast",
-        "//transpiler/java/com/google/j2cl/sourcemaps:tracking_interface",
     ],
 )

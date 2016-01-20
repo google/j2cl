@@ -7,8 +7,8 @@ import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Statement;
+import com.google.j2cl.ast.sourcemap.SourceInfo;
 import com.google.j2cl.errors.Errors;
-import com.google.j2cl.sourcemaps.SourceInfo;
 
 import java.io.IOException;
 import java.nio.charset.Charset;

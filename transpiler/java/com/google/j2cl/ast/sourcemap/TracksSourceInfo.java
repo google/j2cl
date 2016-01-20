@@ -13,19 +13,21 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.sourcemaps;
+package com.google.j2cl.ast.sourcemap;
+
+import com.google.j2cl.ast.processors.HasMetadata;
 
 /**
  * Forces a node to keep track of its location within the original Java Source.
  */
-public interface TracksSourceInfo {
+public interface TracksSourceInfo extends HasMetadata {
   // The location in the original Java source file.
   public SourceInfo getInputSourceInfo();
 
-  public void setInputSourceInfo(SourceInfo filePosition);
+  public void setInputSourceInfo(SourceInfo sourceInfo);
 
   // The location in the generate Javascript file.
   public SourceInfo getOutputSourceInfo();
 
-  public void setOutputSourceInfo(SourceInfo filePosition);
+  public void setOutputSourceInfo(SourceInfo sourceInfo);
 }

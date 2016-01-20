@@ -11,6 +11,5 @@ java_library(
         "//java/com/google/common/collect",
         "//third_party/java/jsr305_annotations",
         "//transpiler/java/com/google/j2cl/ast",
-        "//transpiler/java/com/google/j2cl/sourcemaps:tracking_interface",
     ],
 )

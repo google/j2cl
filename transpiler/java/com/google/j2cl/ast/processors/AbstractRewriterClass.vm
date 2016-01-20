@@ -1,5 +1,7 @@
 package ${packageName};
 
+import com.google.j2cl.ast.processors.HasMetadata;
+
 public abstract class AbstractRewriter extends ProcessorPrivate implements Rewriter {
 #foreach($clazz in $classes)
 #if(${clazz.isContext()})
@@ -34,7 +36,11 @@ public abstract class AbstractRewriter extends ProcessorPrivate implements Rewri
 #foreach($clazz in $classes)
   @Override
   final Node postProcess${clazz.SimpleName}(${clazz.SimpleName} node) {
-    return rewrite${clazz.SimpleName}(node);
+    Node newNode = rewrite${clazz.SimpleName}(node);
+    if (node instanceof HasMetadata) {
+      ((HasMetadata)newNode).copyMetadataFrom((HasMetadata)node);
+    }
+    return newNode;
   }
 
 #end

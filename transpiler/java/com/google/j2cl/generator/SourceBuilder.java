@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.generator;
 
-import com.google.j2cl.sourcemaps.SourceInfo;
+import com.google.j2cl.ast.sourcemap.SourceInfo;
 
 import org.apache.commons.lang.StringUtils;
 

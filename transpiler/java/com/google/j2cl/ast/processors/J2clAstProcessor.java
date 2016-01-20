@@ -63,7 +63,7 @@ import javax.tools.Diagnostic.Kind;
 import javax.tools.JavaFileObject;
 
 /**
- * The J2clAstProcessor emits a single AbstractVisitor class and a Visitor herlper class for each
+ * The J2clAstProcessor emits a single AbstractVisitor class and a Visitor helper class for each
  * {@code @Visitable} type.
  */
 @SupportedSourceVersion(SourceVersion.RELEASE_7)

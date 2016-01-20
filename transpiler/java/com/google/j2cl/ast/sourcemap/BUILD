@@ -4,12 +4,10 @@ package(default_visibility = ["//:__subpackages__"])
 licenses(["unencumbered"])
 
 java_library(
-    name = "tracking_interface",
-    srcs = [
-        "SourceInfo.java",
-        "TracksSourceInfo.java",
-    ],
+    name = "sourcemap",
+    srcs = glob(["*.java"]),
     deps = [
+        "//transpiler/java/com/google/j2cl/ast/processors:visitor-codegen",
         "//third_party/java_src/jscomp/java/com/google/debugging/sourcemap:shared",
     ],
 )

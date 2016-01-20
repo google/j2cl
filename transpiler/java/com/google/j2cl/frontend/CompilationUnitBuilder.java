@@ -85,7 +85,7 @@ import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableDeclarationStatement;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.WhileStatement;
-import com.google.j2cl.sourcemaps.SourceInfo;
+import com.google.j2cl.ast.sourcemap.SourceInfo;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.eclipse.jdt.core.dom.ASTNode;

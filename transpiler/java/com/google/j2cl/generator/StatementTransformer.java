@@ -40,7 +40,7 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableDeclarationStatement;
 import com.google.j2cl.ast.WhileStatement;
-import com.google.j2cl.sourcemaps.SourceInfo;
+import com.google.j2cl.ast.sourcemap.SourceInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -284,7 +284,8 @@ public class StatementTransformer {
 
       @Override
       public void exitBlock(Block blockStatement) {
-        builder.appendln("}");
+        SourceInfo location = builder.appendln("}");
+        blockStatement.setOutputSourceInfo(location);
       }
 
       @Override
