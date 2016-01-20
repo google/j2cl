@@ -19,7 +19,6 @@ integration_test(
     srcs = ["Main.java"],
     js_deps = [":native_types"],
     native_srcs = ["Main.native.js"],
-    native_srcs_pkg = "com/google/j2cl/transpiler/integration/renamejsmethodsinnativejstype",
     deps = [
         ":Foo",
         "//jre/java:gwt-jsinterop-annotations",

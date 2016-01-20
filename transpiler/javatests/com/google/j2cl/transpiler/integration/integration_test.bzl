@@ -33,7 +33,7 @@ _CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
 
 
 def integration_test(
-    name, srcs=[], deps=[], defs=[], native_srcs=[], native_srcs_pkg=None,
+    name, srcs=[], deps=[], defs=[], native_srcs=[], native_srcs_pkg="ABSOLUTE",
     js_deps=[], closure_defines=dict()):
   """Macro that turns Java files into integration test targets.
 

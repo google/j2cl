@@ -20,6 +20,7 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.BinaryOperator;
+import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
@@ -31,6 +32,7 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.generator.visitors.Import;
 
+import java.io.File;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
 import java.util.List;
@@ -54,7 +56,16 @@ public class GeneratorUtils {
     TypeDescriptor descriptor = javaType.getDescriptor();
     String typeName = descriptor.getClassName();
     String packageName = descriptor.getPackageName();
-    return packageName.replace('.', '/') + "/" + typeName;
+    return packageName.replace(".", File.separator) + File.separator + typeName;
+  }
+
+  /**
+   * Returns the absolute binary path for a given type.
+   */
+  public static String getAbsolutePath(CompilationUnit compilationUnit, JavaType javaType) {
+    TypeDescriptor descriptor = javaType.getDescriptor();
+    String typeName = descriptor.getClassName();
+    return compilationUnit.getDirectoryPath() + File.separator + typeName;
   }
 
   /**

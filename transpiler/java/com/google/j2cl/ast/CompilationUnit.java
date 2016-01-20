@@ -50,9 +50,17 @@ public class CompilationUnit extends Node {
     this.filePath = filePath;
   }
 
+  public String getDirectoryPath() {
+    Preconditions.checkNotNull(filePath);
+    if (!filePath.contains(File.separator)) {
+      return "";
+    }
+    return filePath.substring(0, filePath.lastIndexOf(File.separator));
+  }
+
   public String getFileName() {
     Preconditions.checkNotNull(filePath);
-    String[] pathComponents = filePath.split("/");
+    String[] pathComponents = filePath.split(File.separator);
     return pathComponents[pathComponents.length - 1];
   }
 

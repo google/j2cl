@@ -19,7 +19,6 @@ integration_test(
     defs = ["--jscomp_warning=checkTypes"],
     js_deps = [":native_types"],
     native_srcs = glob(["*.native.js"]),
-    native_srcs_pkg = "com/google/j2cl/transpiler/integration/jsinteroptests",
     deps = ["//jre/java:gwt-jsinterop-annotations"],
 )
 

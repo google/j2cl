@@ -62,9 +62,9 @@ public class JavaScriptGeneratorStage {
   }
 
   public void generateJavaScriptSources(List<CompilationUnit> j2clCompilationUnits) {
-    Map<String, NativeJavaScriptFile> nativeFiles = new HashMap<>();
+    Map<String, NativeJavaScriptFile> nativeFilesByPath = new HashMap<>();
     for (String nativeJavascriptFileZipPath : nativeJavaScriptFileZipPaths) {
-      nativeFiles.putAll(
+      nativeFilesByPath.putAll(
           NativeJavaScriptFile.getFilesByPathFromZip(
               nativeJavascriptFileZipPath, charset.name(), errors));
     }
@@ -83,20 +83,30 @@ public class JavaScriptGeneratorStage {
         JavaScriptImplGenerator jsImplGenerator =
             new JavaScriptImplGenerator(errors, javaType, velocityEngine);
 
+        // If the java type contains any native methods, search for matching native file.
         if (javaType.containsNativeMethods()) {
-          // If the java type contains any native methods, searching for matching native file.
-          String javaTypePath = GeneratorUtils.getRelativePath(javaType);
-          NativeJavaScriptFile matchingNativeFile = nativeFiles.get(javaTypePath);
+          String typeRelativePath = GeneratorUtils.getRelativePath(javaType);
+          String typeAbsolutePath = GeneratorUtils.getAbsolutePath(j2clCompilationUnit, javaType);
+
+          // Locate matching native files that either have the same relative package as their Java
+          // class (useful when Java and native.js files started in different directories on disk).
+          NativeJavaScriptFile matchingNativeFile = nativeFilesByPath.get(typeRelativePath);
+          // or that are in the same absolute path folder on disk as their Java class.
+          if (matchingNativeFile == null) {
+            matchingNativeFile = nativeFilesByPath.get(typeAbsolutePath);
+          }
+
           if (matchingNativeFile != null) {
             jsImplGenerator.setNativeSource(matchingNativeFile.getContent());
             matchingNativeFile.setUsed();
           }
+
           // If not matching native file is found, and the java type contains non-JsMethod native
           // method, reports an error.
           if (matchingNativeFile == null && javaType.containsNonJsNativeMethods()) {
             errors.error(
                 Errors.Error.ERR_NATIVE_JAVA_SOURCE_NO_MATCH,
-                javaTypePath + NativeJavaScriptFile.NATIVE_EXTENSION);
+                typeRelativePath + NativeJavaScriptFile.NATIVE_EXTENSION);
             return;
           }
         }
@@ -125,7 +135,7 @@ public class JavaScriptGeneratorStage {
     }
 
     // Error if any of the native implementation files were not used.
-    for (Entry<String, NativeJavaScriptFile> fileEntry : nativeFiles.entrySet()) {
+    for (Entry<String, NativeJavaScriptFile> fileEntry : nativeFilesByPath.entrySet()) {
       if (!fileEntry.getValue().wasUsed()) {
         errors.error(
             Errors.Error.ERR_NATIVE_UNUSED_NATIVE_SOURCE,

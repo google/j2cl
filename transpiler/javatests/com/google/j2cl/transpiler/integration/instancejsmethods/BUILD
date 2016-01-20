@@ -16,7 +16,6 @@ integration_test(
     name = "instancejsmethods",
     srcs = ["Main.java"],
     native_srcs = ["Main.native.js"],
-    native_srcs_pkg = "com/google/j2cl/transpiler/integration/instancejsmethods",
     deps = [
         ":Child",
         ":MyInterface",

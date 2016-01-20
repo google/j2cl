@@ -15,9 +15,6 @@ load(
 integration_test(
     name = "jstypevarargs",
     srcs = glob(["*.java"]),
-    native_srcs = [
-        "Main.native.js",
-    ],
-    native_srcs_pkg = "com/google/j2cl/transpiler/integration/jstypevarargs",
+    native_srcs = ["Main.native.js"],
     deps = ["//jre/java:gwt-jsinterop-annotations"],
 )

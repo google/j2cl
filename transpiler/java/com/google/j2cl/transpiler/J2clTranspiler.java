@@ -60,6 +60,7 @@ import com.google.j2cl.generator.GeneratorUtils;
 import com.google.j2cl.generator.JavaScriptGeneratorStage;
 import com.google.j2cl.generator.SourceMapGeneratorStage;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.CopyOption;
@@ -216,7 +217,10 @@ public class J2clTranspiler {
 
     // Copy .java files.
     for (CompilationUnit j2clUnit : j2clUnits) {
-      String relativePath = j2clUnit.getPackageName().replace('.', '/') + "/" + j2clUnit.getName();
+      String relativePath =
+          j2clUnit.getPackageName().replace(".", File.separator)
+              + File.separator
+              + j2clUnit.getName();
       Path outputPath =
           GeneratorUtils.getAbsolutePath(
               options.getOutputFileSystem(), options.getOutput(), relativePath, ".java");
