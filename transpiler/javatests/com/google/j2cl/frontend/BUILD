@@ -5,7 +5,7 @@ package(
     default_testonly = 1,
 )
 
-load("/java/com/google/testing/builddefs/GenTestRules", "GenTestRules")
+load("//java/com/google/testing/builddefs:GenTestRules.bzl", "GenTestRules")
 
 java_library(
     name = "frontend",
