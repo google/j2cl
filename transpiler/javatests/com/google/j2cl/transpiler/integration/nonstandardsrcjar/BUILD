@@ -4,7 +4,7 @@ package(default_visibility = ["//:__subpackages__"])
 licenses(["unencumbered"])
 
 load(
-    "/third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/integration/integration_test",
+    "//transpiler/javatests/com/google/j2cl/transpiler/integration:integration_test.bzl",
     "integration_test",
 )
 
