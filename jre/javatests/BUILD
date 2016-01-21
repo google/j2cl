@@ -6,9 +6,9 @@ package(default_visibility = ["//:__subpackages__"])
 # Google owns the copyright
 licenses(["unencumbered"])
 
-load("/third_party/java_src/j2cl/build_def/j2cl_source_copy", "j2cl_source_copy")
-load("/third_party/java_src/j2cl/jre/javatests/j2cl_multi_test", "j2cl_multi_test")
-load("/third_party/java_src/j2cl/build_def/jsni_to_j2cl_converter", "jsni_to_j2cl_converter")
+load("//build_def:j2cl_source_copy.bzl", "j2cl_source_copy")
+load("//jre/javatests:j2cl_multi_test.bzl", "j2cl_multi_test")
+load("//build_def:jsni_to_j2cl_converter.bzl", "jsni_to_j2cl_converter")
 
 j2cl_source_copy(
     name = "emul_test_copy",

@@ -2,7 +2,7 @@
 licenses(["unencumbered"])
 
 load(
-    "/third_party/java_src/j2cl/tools/javatests/com/google/j2cl/tools/integration/jsni_converter_test",
+    "//tools:javatests/com/google/j2cl/tools/integration/jsni_converter_test.bzl",
     "jsni_converter_test",
 )
 
