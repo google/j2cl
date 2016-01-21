@@ -102,6 +102,12 @@ def blaze_build(target_names):
 def replace_transpiled_js(target_names):
   """Copy and reformat and replace with Blaze built JS."""
 
+  find_command_js_map_sources = ["find", EXAMPLES_DIR, "-name", "*.js.map"]
+
+  # Remove old map files before unzipping the new ones
+  run_cmd_get_output(
+      find_command_js_map_sources + ["-exec", "rm", "{}", ";"])
+
   # Copy all the zips in one COPY command so that some of the
   # network communication is parallelized.
   if not os.path.isdir("/tmp/js.zip"):
