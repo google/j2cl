@@ -66,6 +66,8 @@ are copyright and licensed as follows:
     cl/111866974. A bunch of examples start leaking about 10kb of collections
     classes (TreeMap related) for unknown reasons. Need to know why JSCompiler
     thinks these things are live.
+- Fix and double check equals/hashcode methods on all TypeDescriptor flavors.
+  see cl/112695016 for more information.
 
 ## Tracking Closure warning issues
 - https://b.corp.google.com/hotlists/269212

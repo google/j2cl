@@ -79,6 +79,28 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
         packageComponents, classComponents, false, isNative, ImmutableList.<TypeDescriptor>of());
   }
 
+  public static TypeDescriptor createSynthetic(
+      Iterable<String> packageComponents,
+      Iterable<String> classComponents,
+      boolean isJsFunction,
+      boolean isJsType,
+      boolean isNative,
+      String jsTypeNamespace,
+      String jsTypeName) {
+    return getInterner()
+        .intern(
+            new SyntheticRegularTypeDescriptor(
+                ImmutableList.copyOf(packageComponents),
+                ImmutableList.copyOf(classComponents),
+                false,
+                ImmutableList.<TypeDescriptor>of(),
+                isJsFunction,
+                isJsType,
+                isNative,
+                jsTypeNamespace,
+                jsTypeName));
+  }
+
   public static TypeDescriptor createRaw(
       Iterable<String> nameSpaceComponents, String className, boolean isNative) {
     return create(

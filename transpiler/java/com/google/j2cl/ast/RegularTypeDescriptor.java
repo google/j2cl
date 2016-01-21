@@ -226,7 +226,13 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   public TypeDescriptor getRawTypeDescriptor() {
     if (isParameterizedType()) {
       return TypeDescriptor.createSynthetic(
-          getPackageComponents(), getClassComponents(), isNative());
+          getPackageComponents(),
+          getClassComponents(),
+          isJsFunction,
+          isJsType,
+          isNative,
+          jsTypeNamespace,
+          jsTypeName);
     }
     if (isTypeVariable()) {
       Preconditions.checkNotNull(typeBinding);

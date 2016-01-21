@@ -1,0 +1,51 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.nativetype.MyTypedArray$Overlay.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.nativetype.MyTypedArray$Overlay$impl');
+
+
+let $MyTypedArray = goog.require('extern.Array');
+
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class MyTypedArray$Overlay {
+  /**
+   * @param {$MyTypedArray<C_T>} $thisArg
+   * @return {number}
+   * @public
+   */
+  static m_size__com_google_j2cl_transpiler_readable_nativetype_MyTypedArray(
+      $thisArg) {
+    MyTypedArray$Overlay.$clinit();
+    return $thisArg
+        .f_length__com_google_j2cl_transpiler_readable_nativetype_MyTypedArray_;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof $MyTypedArray; }
+
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+  }
+};
+
+
+/**
+ * Export class.
+ */
+exports = MyTypedArray$Overlay;
+//# sourceMappingURL=MyTypedArray$Overlay.js.map

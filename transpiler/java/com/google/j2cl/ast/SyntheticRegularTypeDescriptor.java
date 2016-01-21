@@ -39,6 +39,23 @@ public class SyntheticRegularTypeDescriptor extends RegularTypeDescriptor {
     this.typeArgumentDescriptors = ImmutableList.copyOf(typeArgumentDescriptors);
   }
 
+  SyntheticRegularTypeDescriptor(
+      Iterable<String> packageComponents,
+      Iterable<String> classComponents,
+      boolean isRaw,
+      Iterable<TypeDescriptor> typeArgumentDescriptors,
+      boolean isJsFunction,
+      boolean isJsType,
+      boolean isNative,
+      String jsTypeNamespace,
+      String jsTypeName) {
+    this(packageComponents, classComponents, isRaw, isNative, typeArgumentDescriptors);
+    this.isJsFunction = isJsFunction;
+    this.isJsType = isJsType;
+    this.jsTypeNamespace = jsTypeNamespace;
+    this.jsTypeName = jsTypeName;
+  }
+
   @Override
   public ImmutableList<String> getPackageComponents() {
     return packageComponents;
