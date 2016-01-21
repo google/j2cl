@@ -578,8 +578,8 @@ public class JdtUtils {
         TypeDescriptor.createSynthetic(
             enclosingClassTypeDescriptor.getPackageComponents(),
             Iterables.concat(
-                enclosingClassTypeDescriptor.getClassComponents(),
-                Arrays.asList(lambdaBinaryName)));
+                enclosingClassTypeDescriptor.getClassComponents(), Arrays.asList(lambdaBinaryName)),
+            enclosingClassTypeDescriptor.isNative());
     JavaType lambdaType = new JavaType(Kind.CLASS, Visibility.PRIVATE, lambdaClassTypeDescriptor);
 
     lambdaType.setEnclosingTypeDescriptor(enclosingClassTypeDescriptor);

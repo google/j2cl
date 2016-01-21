@@ -225,7 +225,8 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   @Override
   public TypeDescriptor getRawTypeDescriptor() {
     if (isParameterizedType()) {
-      return TypeDescriptor.createSynthetic(getPackageComponents(), getClassComponents());
+      return TypeDescriptor.createSynthetic(
+          getPackageComponents(), getClassComponents(), isNative());
     }
     if (isTypeVariable()) {
       Preconditions.checkNotNull(typeBinding);

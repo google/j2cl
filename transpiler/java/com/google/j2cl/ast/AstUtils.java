@@ -716,6 +716,7 @@ public class AstUtils {
         nativeTypeDescriptor.getPackageComponents(),
         Iterables.concat(
             nativeTypeDescriptor.getClassComponents(),
-            Arrays.asList(JS_OVERLAY_METHODS_IMPL_SUFFIX)));
+            Arrays.asList(JS_OVERLAY_METHODS_IMPL_SUFFIX)),
+        false);
   }
 }

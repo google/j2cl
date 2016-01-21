@@ -74,9 +74,9 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
   }
 
   public static TypeDescriptor createSynthetic(
-      Iterable<String> packageComponents, Iterable<String> classComponents) {
+      Iterable<String> packageComponents, Iterable<String> classComponents, boolean isNative) {
     return create(
-        packageComponents, classComponents, false, false, ImmutableList.<TypeDescriptor>of());
+        packageComponents, classComponents, false, isNative, ImmutableList.<TypeDescriptor>of());
   }
 
   public static TypeDescriptor createRaw(

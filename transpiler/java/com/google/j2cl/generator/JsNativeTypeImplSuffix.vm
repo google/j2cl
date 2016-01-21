@@ -1,5 +1,5 @@
 #set ($className = ${sourceGenerator.toSource($classType.Descriptor)})
-#set ($nativeClassName = ${sourceGenerator.toSource(${classType.getNativeTypeDescriptor()})})
+#set ($nativeClassName = ${sourceGenerator.toSource(${classType.getNativeTypeDescriptor().getRawTypeDescriptor()})})
   /**
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}

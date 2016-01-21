@@ -328,7 +328,7 @@ public class ExpressionTransformer {
 
       private String transformNativeNewInstance(NewInstance expression) {
         TypeDescriptor targetTypeDescriptor =
-            expression.getTarget().getEnclosingClassTypeDescriptor();
+            expression.getTarget().getEnclosingClassTypeDescriptor().getRawTypeDescriptor();
         String argumentsList =
             Joiner.on(", ").join(transformNodesToSource(expression.getArguments()));
         return String.format(

@@ -247,13 +247,6 @@ public class ImportGatheringVisitor extends AbstractVisitor {
       return;
     }
 
-    // Import the original native type, not the raw type, otherwise it loses the information that
-    // whether it is a native type.
-    if (typeDescriptor.isExtern()) {
-      typeDescriptorsByCategory.get(importCategory).add((RegularTypeDescriptor) typeDescriptor);
-      return;
-    }
-
     typeDescriptorsByCategory
         .get(importCategory)
         .add((RegularTypeDescriptor) typeDescriptor.getRawTypeDescriptor());
