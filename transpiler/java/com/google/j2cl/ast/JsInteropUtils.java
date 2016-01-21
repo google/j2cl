@@ -131,7 +131,7 @@ public class JsInteropUtils {
     if (jsFunctionAnnotation != null) {
       return JsInfo.create(JsMemberType.JS_FUNCTION, null, null, isJsOverlay);
     }
-    return JsInfo.NONE;
+    return JsInfo.create(JsMemberType.NONE, null, null, isJsOverlay);
   }
 
   /**

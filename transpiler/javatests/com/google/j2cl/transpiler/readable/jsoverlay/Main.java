@@ -26,6 +26,16 @@ public class Main {
     public static final int fun() {
       return 1;
     }
+
+    @JsOverlay
+    private static final int bar() {
+      return 1;
+    }
+
+    @JsOverlay
+    private final int foo() {
+      return 1;
+    }
   }
 
   public void test() {
@@ -33,6 +43,8 @@ public class Main {
     n.callM();
     NativeJsTypeWithOverlay.fun();
     NativeJsTypeWithOverlay.n();
+    NativeJsTypeWithOverlay.bar();
+    n.foo();
     int a =
         NativeJsTypeWithOverlay.COMPILE_TIME_CONSTANT + NativeJsTypeWithOverlay.nonJsOverlayField;
     NativeJsTypeWithOverlay.staticField = null;

@@ -19,6 +19,16 @@ public class Main {
     public static final int fun(int a, int b) {
       return a > b ? a + b : a * b;
     }
+
+    @JsOverlay
+    private static final int bar() {
+      return 10;
+    }
+
+    @JsOverlay
+    private final int foo() {
+      return 20;
+    }
   }
 
   public static void testNativeJsWithOverlay() {
@@ -29,6 +39,8 @@ public class Main {
     assert NativeJsTypeWithOverlay.staticField != null;
     NativeJsTypeWithOverlay.staticField = null;
     assert NativeJsTypeWithOverlay.staticField == null;
+    assert 10 == NativeJsTypeWithOverlay.bar();
+    assert 20 == object.foo();
   }
 
   public static void main(String... args) {
