@@ -23,13 +23,13 @@ public class Number {
    */
   @JsType(isNative = true, namespace = GLOBAL, name = "")
   private interface NativeFunction<T> {
-    T apply(Object thisContext, Object argsArray);
+    T apply(Object thisContext, int[] argsArray);
   }
 
   @JsProperty(name = "fromCharCode", namespace = "String")
   private static native NativeFunction<String> getFromCharCodeFunction();
 
-  public static String fromCharCode(Object array) {
+  public static String fromCharCode(int[] array) {
     return getFromCharCodeFunction().apply(null, array);
   }
 }
