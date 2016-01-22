@@ -21,6 +21,8 @@ def _impl(ctx):
 
   java_out_files = []
   for java_file in java_files:
+    if not java_file.path.startswith(ctx.attr.base_strip_path):
+      fail("Incorrect base strip path for file:" + java_file.path)
     out_file_name = java_file.path[len(ctx.attr.base_strip_path):]
     if out_file_name in excludes:
       continue

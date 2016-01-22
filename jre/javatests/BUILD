@@ -23,10 +23,11 @@ j2cl_source_copy(
 j2cl_source_copy(
     name = "emul_test_javaemul_copy",
     srcs = ["//third_party/java_src/gwt/svn/trunk/dev:emul"],
-    base_strip_path = "third_party/java_src/gwt/svn/trunk/user/dev/core/super/",
+    base_strip_path = "third_party/java_src/gwt/svn/trunk/dev/core/super/",
+    excludes = ["javaemul/internal/EmulatedCharset.java"],
 )
 
-# Since the tests refer to java.emul.internal
+# Since the tests refer to javaemul.internal
 # we need these Java references to be valid, this is why we
 # are exposing the extra java_library.
 # The actual transpiled JavaScript code is coming from the
