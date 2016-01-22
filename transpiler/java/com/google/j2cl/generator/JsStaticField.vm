@@ -1,9 +1,0 @@
-#set ($staticFieldType = ${sourceGenerator.getJsDocName(${staticField.Descriptor.TypeDescriptor})})
-#set ($directStaticFieldAccess = ${ManglingNameUtils.getMangledName($staticField.Descriptor, true)})
-#set ($initialValue = ${GeneratorUtils.getInitialValue($staticField)})
-
-
-/**
- * @private {$staticFieldType}
- */
-${className}.${directStaticFieldAccess} = ${sourceGenerator.toSource($initialValue)};

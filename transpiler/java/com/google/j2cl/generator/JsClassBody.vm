@@ -8,7 +8,7 @@
    * @return {boolean}
    * @public
    */
-  #if (${classType.Descriptor.isJsFunctionImplementation()})
+#if (${classType.Descriptor.isJsFunctionImplementation()})
   static $isInstance(instance) {
     return instance != null &&
            instance.$is__$mangledTypeName;
@@ -108,23 +108,3 @@
 #end
 #end
   }
-};
-#foreach ($staticField in $classType.getStaticFields())
-#parse( "com/google/j2cl/generator/JsStaticField.vm" )
-#end
-
-
-/**
- * The class literal field.
- * @private {$classAlias}
- */
-${className}.$class${className}_ = null;
-
-
-#foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
-#if (!${superInterfaceTypeDescriptor.isNative()})
-${sourceGenerator.toSource($superInterfaceTypeDescriptor)}.$markImplementor($className);
-
-
-#end
-#end

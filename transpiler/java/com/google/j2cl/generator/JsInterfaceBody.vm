@@ -62,18 +62,3 @@
 #parse( "com/google/j2cl/generator/JsStaticFieldGetterSetter.vm" )
 #end
 #parse( "com/google/j2cl/generator/JsClinit.vm")
-};
-#foreach ($staticField in $classType.getStaticFields())
-#parse( "com/google/j2cl/generator/JsStaticField.vm" )
-#end
-
-
-/**
- * The class literal field.
- * @private {$classAlias}
- */
-${className}.$class${className}_ = null;
-
-
-## TODO: remove cast after b/20102666 is handled in Closure.
-$className.$markImplementor(/** @type {Function} */($className));

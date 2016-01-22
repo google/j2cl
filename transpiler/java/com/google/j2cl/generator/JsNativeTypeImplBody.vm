@@ -18,8 +18,3 @@
 #if (${GeneratorUtils.needClinit($classType, $lazyImports)})
 #parse( "com/google/j2cl/generator/JsClinit.vm")
 #end
-};
-#foreach ($staticField in $classType.getStaticFields())
-#parse( "com/google/j2cl/generator/JsStaticField.vm" )
-#end
-

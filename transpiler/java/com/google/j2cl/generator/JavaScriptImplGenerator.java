@@ -16,9 +16,11 @@
 package com.google.j2cl.generator;
 
 import com.google.common.base.Preconditions;
+import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
@@ -83,6 +85,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     renderImports();
     renderTypeAnnotation();
     renderTypeBody();
+    renderStaticFieldDeclarations();
+    renderClassLiteralFieldDeclaration();
+    renderMarkImplementorCalls();
     renderNativeSource();
     renderExports();
     renderSourceMapLocation();
@@ -201,20 +206,80 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     } else { // Not an interface so it is a Class.
       sb.append(renderTemplate("com/google/j2cl/generator/JsClassBody.vm"));
     }
+    sb.appendln("};");
+    sb.newLine();
+    sb.newLine();
+  }
+
+  private void renderStaticFieldDeclarations() {
+    String className = sourceGenerator.toSource(javaType.getDescriptor());
+    for (Field staticField : javaType.getStaticFields()) {
+      String jsDocType =
+          sourceGenerator.getJsDocName(staticField.getDescriptor().getTypeDescriptor());
+      String directFieldAccess =
+          ManglingNameUtils.getMangledName(staticField.getDescriptor(), true);
+      String initialValue = sourceGenerator.toSource(GeneratorUtils.getInitialValue(staticField));
+      sb.appendln("/**");
+      sb.appendln(" * @private {%s}", jsDocType);
+      sb.appendln(" */");
+      sb.appendln("%s.%s = %s;", className, directFieldAccess, initialValue);
+      sb.newLine();
+      sb.newLine();
+    }
+  }
+
+  private void renderClassLiteralFieldDeclaration() {
+    String className = sourceGenerator.toSource(javaType.getDescriptor());
+    String classAlias =
+        sourceGenerator.toSource(TypeDescriptors.get().javaLangClass.getRawTypeDescriptor());
+    if (javaType.isJsOverlayImpl()) {
+      return;
+    }
+    sb.appendln("/**");
+    sb.appendln(" * The class literal field.");
+    sb.appendln(" * @private {%s}", classAlias);
+    sb.appendln(" */");
+    sb.appendln("%s.$class%s_ = null;", className, className);
+    sb.newLine();
+    sb.newLine();
+  }
+
+  /**
+   * Here we call markImplementor on all interfaces such that the class can be queried at run time
+   * to determine if it implements an interface.
+   */
+  private void renderMarkImplementorCalls() {
+    String className = sourceGenerator.toSource(javaType.getDescriptor());
+    if (javaType.isJsOverlayImpl()) {
+      return; // Do nothing
+    }
+    if (javaType.isInterface()) {
+      // TODO: remove cast after b/20102666 is handled in Closure.
+      sb.appendln("%s.$markImplementor(/** @type {Function} */ (%s));", className, className);
+    } else { // Not an interface so it is a Class.
+      for (TypeDescriptor interfaceTypeDescriptor : javaType.getSuperInterfaceTypeDescriptors()) {
+        if (interfaceTypeDescriptor.isNative()) {
+          continue;
+        }
+        String interfaceName = sourceGenerator.toSource(interfaceTypeDescriptor);
+        sb.appendln("%s.$markImplementor(%s);", interfaceName, className);
+      }
+    }
+    sb.newLine();
+    sb.newLine();
   }
 
   private void renderNativeSource() {
     if (nativeSource != null) {
-      sb.newLine();
       sb.appendln("/**");
       sb.appendln(" * Native Method Injection");
       sb.appendln(" */");
       sb.appendln(nativeSource);
+      sb.newLine();
     }
   }
 
   private void renderExports() {
-    sb.newLine();
     sb.appendln("/**");
     sb.appendln(" * Export class.");
     sb.appendln(" */");
