@@ -22,8 +22,23 @@ class MyTypedArray$Overlay {
   static m_size__com_google_j2cl_transpiler_readable_nativetype_MyTypedArray(
       $thisArg) {
     MyTypedArray$Overlay.$clinit();
-    return $thisArg
-        .f_length__com_google_j2cl_transpiler_readable_nativetype_MyTypedArray_;
+    return $thisArg.length;
+  }
+
+  /**
+   * @param {$MyTypedArray<C_T>} $thisArg
+   * @return {void}
+   * @public
+   */
+  static m_useFieldsAndMethods__com_google_j2cl_transpiler_readable_nativetype_MyTypedArray(
+      $thisArg) {
+    MyTypedArray$Overlay.$clinit();
+    let value = $thisArg.publicField + $thisArg.privateField +
+        $thisArg.packageField + $thisArg.protectedField;
+    $thisArg.publicMethod();
+    $thisArg.privateMethod();
+    $thisArg.packageMethod();
+    $thisArg.protectedMethod();
   }
 
   /**

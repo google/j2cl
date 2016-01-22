@@ -122,7 +122,9 @@ public class JsInteropUtils {
     }
     // check @JsType annotation
     IAnnotationBinding jsTypeAnnotation = getJsTypeAnnotation(methodBinding.getDeclaringClass());
-    if (jsTypeAnnotation != null && Modifier.isPublic(methodBinding.getModifiers())) {
+    if (jsTypeAnnotation != null
+        && (Modifier.isPublic(methodBinding.getModifiers())
+            || JsInteropUtils.isNative(jsTypeAnnotation))) {
       return JsInfo.create(JsMemberType.METHOD, null, null, isJsOverlay);
     }
     // check @JsFunction annotation
@@ -156,7 +158,9 @@ public class JsInteropUtils {
     }
     // check @JsType annotation.
     IAnnotationBinding jsTypeAnnotation = getJsTypeAnnotation(methodBinding.getDeclaringClass());
-    return jsTypeAnnotation != null && Modifier.isPublic(methodBinding.getModifiers());
+    return jsTypeAnnotation != null
+        && (Modifier.isPublic(methodBinding.getModifiers())
+            || JsInteropUtils.isNative(jsTypeAnnotation));
   }
 
   public static boolean isJsProperty(IVariableBinding variableBinding) {
@@ -173,7 +177,9 @@ public class JsInteropUtils {
     }
     // check @JsType annotation.
     IAnnotationBinding jsTypeAnnotation = getJsTypeAnnotation(variableBinding.getDeclaringClass());
-    return jsTypeAnnotation != null && Modifier.isPublic(variableBinding.getModifiers());
+    return jsTypeAnnotation != null
+        && (Modifier.isPublic(variableBinding.getModifiers())
+            || JsInteropUtils.isNative(jsTypeAnnotation));
   }
 
   public static boolean isJsOverlay(IBinding methodBinding) {
