@@ -136,7 +136,7 @@ def replace_transpiled_js(target_names):
   # Format .js files
   run_cmd_get_output(
       find_command_js_sources +
-      ["-exec", "clang-format", "-i", "{}", "+"])
+      ["-exec", "/usr/bin/clang-format", "-i", "{}", "+"])
 
   # Remove the old .js.txt files (results from the last run)
   run_cmd_get_output(
