@@ -42,13 +42,6 @@ class NestedGenericClass extends Object {
   constructor() { super(); }
 
   /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass() {
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @template C_T
    * @return {!NestedGenericClass<C_T>}
@@ -208,6 +201,13 @@ class NestedGenericClass extends Object {
     Exception = goog.module.get('gen.java.lang.Exception$impl');
     Number = goog.module.get('gen.java.lang.Number$impl');
     Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass() {
   }
 };
 

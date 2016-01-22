@@ -26,12 +26,6 @@ class Child extends Parent {
   constructor() { super(); }
 
   /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_supermethodcall_Child() {}
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!Child}
    * @public
@@ -156,6 +150,12 @@ class Child extends Parent {
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Parent.$clinit();
   }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_supermethodcall_Child() {}
 };
 
 

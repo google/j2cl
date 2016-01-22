@@ -27,13 +27,6 @@ class InnerClassInitOrder$Outer$TestQualifiedSuperCall extends
   constructor() { super(); }
 
   /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer$TestQualifiedSuperCall() {
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!InnerClassInitOrder$Outer$TestQualifiedSuperCall}
    * @public
@@ -117,6 +110,13 @@ class InnerClassInitOrder$Outer$TestQualifiedSuperCall extends
         'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$impl');
     Class = goog.module.get('gen.java.lang.Class$impl');
     InnerClassInitOrder$Outer$OuterIsNotSuper.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer$TestQualifiedSuperCall() {
   }
 };
 

@@ -26,13 +26,6 @@ class LambdaInSubClass extends Parent {
   constructor() { super(); }
 
   /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_lambdainsubclass_LambdaInSubClass() {
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!LambdaInSubClass}
    * @public
@@ -117,6 +110,13 @@ class LambdaInSubClass extends Parent {
         'gen.com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInterface$impl');
     Class = goog.module.get('gen.java.lang.Class$impl');
     Parent.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_lambdainsubclass_LambdaInSubClass() {
   }
 };
 

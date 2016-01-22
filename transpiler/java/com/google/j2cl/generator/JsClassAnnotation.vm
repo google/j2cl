@@ -1,17 +1,27 @@
 #set ($utilAlias = ${sourceGenerator.toSource($nativeUtilTypeDecriptor)} )
 #set ($classAlias = ${sourceGenerator.toSource($javaLangClassTypeDecriptor)} )
+#set ($superTypeDescriptor = $classType.SuperTypeDescriptor)
 #set ($className = ${sourceGenerator.toSource($classType.Descriptor)})
+#set ($jsDocName = ${sourceGenerator.getJsDocName(${classType.Descriptor}, true)})
 #set ($mangledTypeName = ${ManglingNameUtils.getMangledName($classType.Descriptor)})
 #set ($simpleName = $classType.Descriptor.SimpleName)
 #set ($binaryName = ${GeneratorUtils.getBinaryName($classType.Descriptor)})
 #set ($sourceName = ${GeneratorUtils.getSourceName($classType.Descriptor)})
+#set ($isBoxedTypeAsPrimitive = ${GeneratorUtils.isBoxedTypeAsPrimitive($classType.Descriptor)})
+#set ($superBoxedTypeAsPrimitive = ${GeneratorUtils.superBoxedTypeAsPrimitive($classType.Descriptor)})
+#if (${GeneratorUtils.hasJsDoc($classType)})
 /**
- * @interface
+#if (${classType.isAbstract()})
+ * Abstract class, do not instantiate.
+#end
 #if (${classType.Descriptor.isParameterizedType()})
  * @template ${sourceGenerator.getJsDocNames($classType.Descriptor.getTypeArgumentDescriptors())}
 #end
+#if (${classType.SuperTypeDescriptor.isParameterizedType()})
+ * @extends {${sourceGenerator.getJsDocName($classType.SuperTypeDescriptor, true)}}
+#end
 #foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
- * @extends {${sourceGenerator.getJsDocName($superInterfaceTypeDescriptor, true)}}
+ * @implements {${sourceGenerator.getJsDocName($superInterfaceTypeDescriptor, true)}}
 #end
  */
-class $className {
+#end

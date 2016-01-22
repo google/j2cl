@@ -30,12 +30,6 @@ class GenericMethod extends Object {
   constructor() { super(); }
 
   /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod() {}
-
-  /**
    * A particular Java constructor as a factory method.
    * @template C_T
    * @return {!GenericMethod<C_T>}
@@ -176,6 +170,12 @@ class GenericMethod extends Object {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     Object.$clinit();
   }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod() {}
 };
 
 

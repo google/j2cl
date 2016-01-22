@@ -40,19 +40,6 @@ class StringLiteral extends Object {
   }
 
   /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral() {
-    this.f_someString__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
-        "This is a string literal";
-    this.f_escapeCodes__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
-        "\b\f\n\r\t\"\'\\\u0000";
-    this.f_nonBmpChar__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
-        "𐍆";
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!StringLiteral}
    * @public
@@ -123,6 +110,19 @@ class StringLiteral extends Object {
     Class = goog.module.get('gen.java.lang.Class$impl');
     String = goog.module.get('gen.java.lang.String$impl');
     Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral() {
+    this.f_someString__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
+        "This is a string literal";
+    this.f_escapeCodes__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
+        "\b\f\n\r\t\"\'\\\u0000";
+    this.f_nonBmpChar__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
+        "𐍆";
   }
 };
 

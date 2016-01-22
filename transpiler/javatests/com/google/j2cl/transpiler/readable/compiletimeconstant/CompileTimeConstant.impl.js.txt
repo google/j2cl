@@ -76,13 +76,6 @@ class CompileTimeConstant extends Object {
   }
 
   /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant() {
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!CompileTimeConstant}
    * @public
@@ -403,6 +396,13 @@ class CompileTimeConstant extends Object {
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     $long = goog.module.get('vmbootstrap.primitives.$long$impl');
     Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant() {
   }
 };
 

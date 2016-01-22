@@ -28,13 +28,6 @@ class InnerClassInitOrder$ESInnerSubclass extends
   constructor() { super(); }
 
   /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESInnerSubclass() {
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @param {InnerClassInitOrder$ESOuter} outer
    * @return {!InnerClassInitOrder$ESInnerSubclass}
@@ -151,6 +144,13 @@ class InnerClassInitOrder$ESInnerSubclass extends
     Class = goog.module.get('gen.java.lang.Class$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     InnerClassInitOrder$ESOuter$ESInner.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESInnerSubclass() {
   }
 };
 

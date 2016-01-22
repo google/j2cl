@@ -31,12 +31,6 @@ class B extends A {
   constructor() { super(); }
 
   /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_bridgemethodsreturn_B() {}
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!B}
    * @public
@@ -129,6 +123,12 @@ class B extends A {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     A.$clinit();
   }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_bridgemethodsreturn_B() {}
 };
 
 

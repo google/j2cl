@@ -32,12 +32,6 @@ class CastToGenerics extends Object {
   constructor() { super(); }
 
   /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics() {}
-
-  /**
    * A particular Java constructor as a factory method.
    * @template C_T, C_E
    * @return {!CastToGenerics<C_T, C_E>}
@@ -147,6 +141,12 @@ class CastToGenerics extends Object {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     Object.$clinit();
   }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics() {}
 };
 
 

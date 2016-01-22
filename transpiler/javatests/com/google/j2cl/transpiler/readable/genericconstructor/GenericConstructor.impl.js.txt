@@ -27,13 +27,6 @@ class GenericConstructor extends Object {
   constructor() { super(); }
 
   /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor() {
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @template C_T
    * @template M_S
@@ -157,6 +150,13 @@ class GenericConstructor extends Object {
     Error = goog.module.get('gen.java.lang.Error$impl');
     Exception = goog.module.get('gen.java.lang.Exception$impl');
     Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_genericconstructor_GenericConstructor() {
   }
 };
 

@@ -25,13 +25,6 @@ class SuperParent extends Object {
   constructor() { super(); }
 
   /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SuperParent() {
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @template C_T, C_S
    * @return {!SuperParent<C_T, C_S>}
@@ -110,6 +103,13 @@ class SuperParent extends Object {
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
     Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_bridgemethodmultipleinheritance_SuperParent() {
   }
 };
 

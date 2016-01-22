@@ -261,4 +261,13 @@ public class GeneratorUtils {
     return isBoxedTypeAsPrimitive(typeDescriptor)
         || typeDescriptor == TypeDescriptors.get().javaLangNumber;
   }
+
+  public static String getExtendsClause(JavaType javaType, SourceGenerator sourceGenerator) {
+    TypeDescriptor superTypeDescriptor = javaType.getSuperTypeDescriptor();
+    if (superTypeDescriptor == null) {
+      return "";
+    }
+    String superTypeName = sourceGenerator.toSource(superTypeDescriptor);
+    return String.format("extends %s ", superTypeName);
+  }
 }

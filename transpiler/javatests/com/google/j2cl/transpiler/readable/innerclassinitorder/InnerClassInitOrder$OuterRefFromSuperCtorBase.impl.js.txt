@@ -25,13 +25,6 @@ class InnerClassInitOrder$OuterRefFromSuperCtorBase extends Object {
   constructor() { super(); }
 
   /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$OuterRefFromSuperCtorBase() {
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @param {*} o
    * @return {!InnerClassInitOrder$OuterRefFromSuperCtorBase}
@@ -117,6 +110,13 @@ class InnerClassInitOrder$OuterRefFromSuperCtorBase extends Object {
     Class = goog.module.get('gen.java.lang.Class$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
     Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$OuterRefFromSuperCtorBase() {
   }
 };
 

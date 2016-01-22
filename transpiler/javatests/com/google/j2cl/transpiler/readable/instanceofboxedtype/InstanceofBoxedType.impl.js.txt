@@ -32,13 +32,6 @@ class InstanceofBoxedType extends Object {
   constructor() { super(); }
 
   /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_instanceofboxedtype_InstanceofBoxedType() {
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!InstanceofBoxedType}
    * @public
@@ -137,6 +130,13 @@ class InstanceofBoxedType extends Object {
     Short = goog.module.get('gen.java.lang.Short$impl');
     $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
     Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_instanceofboxedtype_InstanceofBoxedType() {
   }
 };
 

@@ -23,12 +23,6 @@ class ClassLiteral extends Object {
   constructor() { super(); }
 
   /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_classliteral_ClassLiteral() {}
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!ClassLiteral}
    * @public
@@ -109,6 +103,12 @@ class ClassLiteral extends Object {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     Object.$clinit();
   }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_classliteral_ClassLiteral() {}
 };
 
 

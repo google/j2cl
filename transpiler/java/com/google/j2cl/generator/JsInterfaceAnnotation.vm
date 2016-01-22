@@ -1,0 +1,16 @@
+#set ($utilAlias = ${sourceGenerator.toSource($nativeUtilTypeDecriptor)} )
+#set ($classAlias = ${sourceGenerator.toSource($javaLangClassTypeDecriptor)} )
+#set ($className = ${sourceGenerator.toSource($classType.Descriptor)})
+#set ($mangledTypeName = ${ManglingNameUtils.getMangledName($classType.Descriptor)})
+#set ($simpleName = $classType.Descriptor.SimpleName)
+#set ($binaryName = ${GeneratorUtils.getBinaryName($classType.Descriptor)})
+#set ($sourceName = ${GeneratorUtils.getSourceName($classType.Descriptor)})
+/**
+ * @interface
+#if (${classType.Descriptor.isParameterizedType()})
+ * @template ${sourceGenerator.getJsDocNames($classType.Descriptor.getTypeArgumentDescriptors())}
+#end
+#foreach ($superInterfaceTypeDescriptor in $classType.SuperInterfaceTypeDescriptors)
+ * @extends {${sourceGenerator.getJsDocName($superInterfaceTypeDescriptor, true)}}
+#end
+ */

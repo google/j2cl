@@ -81,6 +81,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sb = new SourceBuilder();
     renderFileOverview();
     renderImports();
+    renderTypeAnnotation();
     renderTypeBody();
     renderNativeSource();
     renderExports();
@@ -129,7 +130,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     for (Method method : javaType.getMethods()) {
       velocityContext.put("method", method);
       if (method.isConstructor()) {
-        sb.append(renderTemplate("com/google/j2cl/generator/JsConstructorMethods.vm"));
+        sb.append(renderTemplate("com/google/j2cl/generator/JsConstructorFactoryMethods.vm"));
       } else {
         if (GeneratorUtils.shouldNotEmitCode(method)) {
           continue;
@@ -175,25 +176,31 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
   }
 
-  private void renderTypeBody() {
+  private void renderTypeAnnotation() {
     if (javaType.isJsOverlayImpl()) {
-      renderJsNativeTypeSource();
+      // Do nothing.
     } else if (javaType.isInterface()) {
-      sb.append(renderTemplate("com/google/j2cl/generator/JsInterface.vm"));
-      renderJavaTypeMethods();
-      sb.append(renderTemplate("com/google/j2cl/generator/JsInterfaceSuffix.vm"));
+      sb.append(renderTemplate("com/google/j2cl/generator/JsInterfaceAnnotation.vm"));
     } else { // Not an interface so it is a Class.
-      sb.append(renderTemplate("com/google/j2cl/generator/JsClass.vm"));
-      renderJavaTypeMethods();
-      sb.append(renderTemplate("com/google/j2cl/generator/JsClassSuffix.vm"));
+      sb.append(renderTemplate("com/google/j2cl/generator/JsClassAnnotation.vm"));
     }
   }
 
-  private void renderJsNativeTypeSource() {
+  private void renderTypeBody() {
     String className = sourceGenerator.toSource(javaType.getDescriptor());
-    sb.appendln("class %s {", className);
+    String extendsClause = GeneratorUtils.getExtendsClause(javaType, sourceGenerator);
+    sb.appendln("class %s %s{", className, extendsClause);
+    if (!javaType.isJsOverlayImpl() && !javaType.isInterface()) {
+      sb.append(renderTemplate("com/google/j2cl/generator/JsConstructor.vm"));
+    }
     renderJavaTypeMethods();
-    sb.append(renderTemplate("com/google/j2cl/generator/JsNativeTypeImplSuffix.vm"));
+    if (javaType.isJsOverlayImpl()) {
+      sb.append(renderTemplate("com/google/j2cl/generator/JsNativeTypeImplBody.vm"));
+    } else if (javaType.isInterface()) {
+      sb.append(renderTemplate("com/google/j2cl/generator/JsInterfaceBody.vm"));
+    } else { // Not an interface so it is a Class.
+      sb.append(renderTemplate("com/google/j2cl/generator/JsClassBody.vm"));
+    }
   }
 
   private void renderNativeSource() {

@@ -26,13 +26,6 @@ class GenericSubclassGenericClass extends GenericClass {
   constructor() { super(); }
 
   /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericSubclassGenericClass() {
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @template C_T
    * @return {!GenericSubclassGenericClass<C_T>}
@@ -106,6 +99,13 @@ class GenericSubclassGenericClass extends GenericClass {
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
     GenericClass.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_subclassgenericclass_GenericSubclassGenericClass() {
   }
 };
 

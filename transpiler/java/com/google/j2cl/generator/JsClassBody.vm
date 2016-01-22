@@ -87,6 +87,27 @@
 #parse( "com/google/j2cl/generator/JsStaticFieldGetterSetter.vm" )
 #end
 #parse( "com/google/j2cl/generator/JsClinit.vm")
+
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__$mangledTypeName() {
+#foreach ($field in $classType.getInstanceFields())
+#if ($field.hasInitializer())
+#if (!$field.isCompileTimeConstant())
+#set ($fieldInitializer = $sourceGenerator.toSource($field.Initializer))
+    this.${ManglingNameUtils.getMangledName($field.Descriptor)} = $fieldInitializer;
+#end
+#end
+#end
+#foreach ($instanceInitializerBlock in $classType.InstanceInitializerBlocks)
+#foreach ($statementInInitializer in $instanceInitializerBlock.Statements)
+    $sourceGenerator.toSource($statementInInitializer)
+#end
+#end
+  }
 };
 #foreach ($staticField in $classType.getStaticFields())
 #parse( "com/google/j2cl/generator/JsStaticField.vm" )

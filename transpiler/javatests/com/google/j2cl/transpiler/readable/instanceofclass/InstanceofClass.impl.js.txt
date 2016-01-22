@@ -24,13 +24,6 @@ class InstanceofClass extends Object {
   constructor() { super(); }
 
   /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass() {
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!InstanceofClass}
    * @public
@@ -114,6 +107,13 @@ class InstanceofClass extends Object {
     String = goog.module.get('gen.java.lang.String$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
     Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass() {
   }
 };
 

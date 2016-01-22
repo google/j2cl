@@ -88,20 +88,6 @@ class InnerClassInitOrder extends Object {
   }
 
   /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder() {
-    this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder =
-        0;
-    this.f_outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ =
-        InnerClassInitOrder$Outer.$create__int(1);
-    this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ =
-        this.f_outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_
-            .m_$create_InnerClassInitOrder$Outer$OuterIsSuper__int(2);
-  }
-
-  /**
    * A particular Java constructor as a factory method.
    * @return {!InnerClassInitOrder}
    * @public
@@ -558,6 +544,20 @@ class InnerClassInitOrder extends Object {
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     $void = goog.module.get('vmbootstrap.primitives.$void$impl');
     Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder() {
+    this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder =
+        0;
+    this.f_outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ =
+        InnerClassInitOrder$Outer.$create__int(1);
+    this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ =
+        this.f_outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_
+            .m_$create_InnerClassInitOrder$Outer$OuterIsSuper__int(2);
   }
 };
 

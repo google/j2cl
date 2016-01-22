@@ -33,12 +33,6 @@ class String extends Object {
   constructor() { super(); }
 
   /**
-   * Runs instance field and block initializers.
-   * @private
-   */
-  $init__java_lang_String() {}
-
-  /**
    * Constructor function implementation is provided separately.
    */
 
@@ -301,6 +295,12 @@ class String extends Object {
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Object.$clinit();
   }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__java_lang_String() {}
 };
 
 
