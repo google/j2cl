@@ -116,6 +116,11 @@ public class Main {
     return result *= 100;
   }
 
+  @JsMethod
+  public static <T> T generics(T... elements) {
+    return elements[0];
+  }
+
   public static void testUnboxedType() {
     // multiple arguments.
     assert sumAndMultiply(10.0, 1.0, 2.0) == 30.0;
@@ -177,6 +182,8 @@ public class Main {
     assert Main.f2(ints) == 300;
     // call by JS.
     assert callF2() == 300;
+    assert 1 == Main.generics(1, 2);
+    assert "abc".equals(Main.generics("abc", "def"));
   }
 
   public static void testInstanceMethodNotFirst() {

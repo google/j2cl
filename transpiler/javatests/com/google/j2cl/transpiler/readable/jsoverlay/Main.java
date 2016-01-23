@@ -36,6 +36,11 @@ public class Main {
     private final int foo() {
       return 1;
     }
+
+    @JsOverlay
+    public static int varargs(int... a) {
+      return a[0];
+    }
   }
 
   public void test() {
@@ -48,5 +53,6 @@ public class Main {
     int a =
         NativeJsTypeWithOverlay.COMPILE_TIME_CONSTANT + NativeJsTypeWithOverlay.nonJsOverlayField;
     NativeJsTypeWithOverlay.staticField = null;
+    NativeJsTypeWithOverlay.varargs(1, 2, 3);
   }
 }

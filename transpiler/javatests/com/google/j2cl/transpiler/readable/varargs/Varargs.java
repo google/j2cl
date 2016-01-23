@@ -9,6 +9,12 @@ public class Varargs {
 
   public void test(int a, Object... args) {}
 
+  public static <T> void fun(T... elements) {}
+
+  public static <E> void bar(E a, E b) {
+    fun(a, b);
+  }
+
   public void main() {
     Varargs v = new Varargs();
     v.test(1);

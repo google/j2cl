@@ -11,6 +11,7 @@ goog.module('gen.com.google.j2cl.transpiler.readable.jsoverlay.Main$NativeJsType
 let Main$NativeJsTypeWithOverlay = goog.require('test.foo.NativeJsTypeWithOverlay');
 
 let Object = goog.forwardDeclare('gen.java.lang.Object$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -31,6 +32,16 @@ class Main$NativeJsTypeWithOverlay$Overlay {
   static m_bar_$p_com_google_j2cl_transpiler_readable_jsoverlay_Main$NativeJsTypeWithOverlay$Overlay() {
     Main$NativeJsTypeWithOverlay$Overlay.$clinit();
     return 1;
+  }
+
+  /**
+   * @param {Array<number>} a
+   * @return {number}
+   * @public
+   */
+  static m_varargs__arrayOf_int(a) {
+    Main$NativeJsTypeWithOverlay$Overlay.$clinit();
+    return a[0];
   }
 
   /**
@@ -114,6 +125,7 @@ class Main$NativeJsTypeWithOverlay$Overlay {
   static $clinit() {
     Main$NativeJsTypeWithOverlay$Overlay.$clinit = function() {};
     Object = goog.module.get('gen.java.lang.Object$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Main$NativeJsTypeWithOverlay$Overlay.$staticField = Object.$create();
   }

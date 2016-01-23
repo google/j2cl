@@ -159,8 +159,15 @@ public abstract class MethodDescriptor extends Node implements Member {
     return getJsInfo().getJsMemberType() == JsMemberType.JS_FUNCTION;
   }
 
+  /**
+   * Returns true if it is a vararg method that can be referenced by JavaScript side. A
+   * non-JsOverlay JsMethod, and a JsFunction can be referenced by JavaScript side.
+   *
+   * TODO: In our AST model, isJsMethod() and isJsOverlay() is NOT mutually-exclusive. We may want
+   * to re-examine it after we import JsInteropRestrictionChecker and do refactoring on the AST.
+   */
   public boolean isJsMethodVarargs() {
-    return isVarargs() && (isJsMethod() || isJsFunction());
+    return isVarargs() && ((isJsMethod() && !isJsOverlay()) || isJsFunction());
   }
 
   @Override

@@ -28,6 +28,10 @@ class Parent {
     }
     return sum;
   }
+
+  public static <T> T generics(T... elements) {
+    return elements[0];
+  }
 }
 
 class Child extends Parent {
@@ -94,5 +98,8 @@ public class Main {
 
     // method call with varargs is invoked by super() method call.
     assert (new Child().sum(1, 2, 3, 4) == new Parent().sum(1, 2, 3, 4));
+    
+    assert (Parent.generics(1, 2) == 1);
+    assert (Parent.generics("abc", "def").equals("abc"));
   }
 }

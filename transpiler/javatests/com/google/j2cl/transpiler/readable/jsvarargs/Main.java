@@ -3,6 +3,8 @@ package com.google.j2cl.transpiler.readable.jsvarargs;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 
+import java.util.List;
+
 public class Main {
   @JsFunction
   static interface Function {
@@ -69,6 +71,16 @@ public class Main {
     return this.field + numbers[1];
   }
 
+  @JsMethod
+  public static <T> T generics(T... elements) {
+    return elements[0];
+  }
+
+  @JsMethod
+  public static Main parameterizedType(List<Main>... elements) {
+    return elements[0].get(0);
+  }
+
   public void testStaticMethodNotFirst() {
     // multiple arguments.
     f1(1, 1, 2);
@@ -91,20 +103,30 @@ public class Main {
   public void testStaticMethodFirst() {
     // multiple arguments.
     f2(1, 2);
+    generics(1, 2);
     Main.f2(1, 2);
+    Main.generics(1, 2);
     // no argument for varargs.
     f2();
+    generics();
     Main.f2();
+    Main.generics();
+    Main.<Integer>generics();
     // array literal for varargs.
     f2(new int[] {1, 2});
     Main.f2(new int[] {1, 2});
+    Main.generics(new int[] {1, 2});
+    Main.<Integer>generics(new Integer[] {1, 2});
     // empty array literal for varargs.
     f2(new int[] {});
     Main.f2(new int[] {});
+    Main.generics(new int[] {});
     // array object for varargs.
     int[] ints = new int[] {1, 2};
+    Integer[] integers = new Integer[] {1, 2};
     f2(ints);
     Main.f2(ints);
+    Main.<Integer>generics(integers);
   }
 
   public void testInstanceMethodNotFirst() {

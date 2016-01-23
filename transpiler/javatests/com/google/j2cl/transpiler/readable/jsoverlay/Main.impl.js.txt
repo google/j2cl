@@ -16,6 +16,7 @@ let Main$NativeJsTypeWithOverlay$Overlay = goog.forwardDeclare(
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let Main$NativeJsTypeWithOverlay =
     goog.forwardDeclare('test.foo.NativeJsTypeWithOverlay');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -66,6 +67,8 @@ class Main extends Object {
     let a = Main$NativeJsTypeWithOverlay$Overlay.COMPILE_TIME_CONSTANT +
         Main$NativeJsTypeWithOverlay.nonJsOverlayField;
     Main$NativeJsTypeWithOverlay$Overlay.staticField = null;
+    Main$NativeJsTypeWithOverlay$Overlay.m_varargs__arrayOf_int(
+        /**@type {Array<number>} */ ($Arrays.$init([1, 2, 3], $int)));
   }
 
   /**
@@ -119,6 +122,7 @@ class Main extends Object {
     Class = goog.module.get('gen.java.lang.Class$impl');
     Main$NativeJsTypeWithOverlay =
         goog.module.get('test.foo.NativeJsTypeWithOverlay');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Object.$clinit();
   }

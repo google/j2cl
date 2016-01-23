@@ -77,7 +77,9 @@ public class NormalizeArrayCreationsVisitor extends AbstractRewriter {
         new ArrayLiteral(
             (ArrayTypeDescriptor) TypeDescriptors.get().primitiveInt.getForArray(1),
             newArrayExpression.getDimensionExpressions()));
-    arguments.add(newArrayExpression.getLeafTypeDescriptor());
+    // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
+    // parameter type instead of the type parameter itself.
+    arguments.add(newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor());
     MethodCall arrayCreateMethodCall =
         MethodCall.createRegularMethodCall(null, arrayCreateMethodDescriptor, arguments);
 
@@ -113,7 +115,9 @@ public class NormalizeArrayCreationsVisitor extends AbstractRewriter {
 
       List<Expression> arguments = new ArrayList<>();
       arguments.add(newArrayExpression.getArrayLiteral());
-      arguments.add(newArrayExpression.getLeafTypeDescriptor());
+      // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
+      // parameter type instead of the type parameter itself.
+      arguments.add(newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor());
       MethodCall arrayInitMethodCall =
           MethodCall.createRegularMethodCall(null, arrayInitMethodDescriptor, arguments);
 
@@ -129,7 +133,9 @@ public class NormalizeArrayCreationsVisitor extends AbstractRewriter {
               .build();
       List<Expression> arguments = new ArrayList<>();
       arguments.add(newArrayExpression.getArrayLiteral());
-      arguments.add(newArrayExpression.getLeafTypeDescriptor());
+      // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
+      // parameter type instead of the type parameter itself.
+      arguments.add(newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor());
       arguments.add(new NumberLiteral(TypeDescriptors.get().primitiveInt, dimensionCount));
       MethodCall arrayInitMethodCall =
           MethodCall.createRegularMethodCall(null, arrayInitMethodDescriptor, arguments);

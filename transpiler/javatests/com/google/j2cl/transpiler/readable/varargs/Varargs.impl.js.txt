@@ -79,6 +79,27 @@ class Varargs extends Object {
   m_test__int__arrayOf_java_lang_Object(a, args) {}
 
   /**
+   * @template M_T
+   * @param {Array<M_T>} elements
+   * @return {void}
+   * @public
+   */
+  static m_fun__arrayOf_java_lang_Object(elements) { Varargs.$clinit(); }
+
+  /**
+   * @template M_E
+   * @param {M_E} a
+   * @param {M_E} b
+   * @return {void}
+   * @public
+   */
+  static m_bar__java_lang_Object__java_lang_Object(a, b) {
+    Varargs.$clinit();
+    Varargs.m_fun__arrayOf_java_lang_Object(
+        /**@type {Array<*>} */ ($Arrays.$init([a, b], Object)));
+  }
+
+  /**
    * @return {void}
    * @public
    */
