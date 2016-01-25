@@ -16,11 +16,14 @@
 package com.google.j2cl.generator;
 
 import com.google.common.base.Preconditions;
+import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
+import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
@@ -31,6 +34,7 @@ import org.apache.velocity.app.VelocityEngine;
 
 import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 /**
  * Generates JavaScript source impl files.
@@ -170,11 +174,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         }
         sb.appendln(" * @%s", method.getDescriptor().getVisibility().jsText);
         sb.appendln(" */");
-        if (!method.isNative()) {
+        if (method.isNative()) {
+          sb.appendln("  // native " + GeneratorUtils.getMethodHeader(method, sourceGenerator));
+        } else {
           sb.appendln(GeneratorUtils.getMethodHeader(method, sourceGenerator));
           StatementTransformer.transform(method.getBody(), environment, sb);
-        } else {
-          sb.appendln("  // native " + GeneratorUtils.getMethodHeader(method, sourceGenerator));
         }
         sb.newLine();
       }
@@ -206,9 +210,121 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     } else { // Not an interface so it is a Class.
       sb.append(renderTemplate("com/google/j2cl/generator/JsClassBody.vm"));
     }
+    renderStaticFieldGettersSetters();
+    renderClinit();
+    renderInit();
     sb.appendln("};");
     sb.newLine();
     sb.newLine();
+  }
+
+  private void renderStaticFieldGettersSetters() {
+    String className = sourceGenerator.toSource(javaType.getDescriptor());
+    for (Field staticField : javaType.getStaticFields()) {
+      Visibility staticFieldVisibility = staticField.getDescriptor().getVisibility();
+      String staticFieldType =
+          sourceGenerator.getJsDocName(staticField.getDescriptor().getTypeDescriptor());
+      String indirectStaticFieldName =
+          ManglingNameUtils.getMangledName(staticField.getDescriptor());
+      String directStaticFieldAccess =
+          ManglingNameUtils.getMangledName(staticField.getDescriptor(), true);
+
+      sb.appendln("/**");
+      sb.appendln(" * A static field getter.");
+      sb.appendln(" * @return {%s}", staticFieldType);
+      sb.appendln(" * @%s", staticFieldVisibility.jsText);
+      sb.appendln(" */");
+      sb.appendln("static get %s() {", indirectStaticFieldName);
+      sb.appendln("%s.$clinit();", className);
+      sb.appendln("return %s.%s;", className, directStaticFieldAccess);
+      sb.appendln("}");
+      sb.newLine();
+
+      sb.appendln("/**");
+      sb.appendln(" * A static field setter.");
+      sb.appendln(" * @param {%s} value", staticFieldType);
+      sb.appendln(" * @return {void}", staticFieldType);
+      sb.appendln(" * @%s", staticFieldVisibility.jsText);
+      sb.appendln(" */");
+      sb.appendln("static set %s(value) {", indirectStaticFieldName);
+      sb.appendln("%s.$clinit();", className);
+      sb.appendln("%s.%s = value;", className, directStaticFieldAccess);
+      sb.appendln("}");
+      sb.newLine();
+    }
+  }
+
+  // TODO: Move this to the ast in a normalization pass.
+  private void renderClinit() {
+    List<Import> lazyImports = ImportUtils.sortedList(importsByCategory.get(ImportCategory.LAZY));
+    if (!GeneratorUtils.needClinit(javaType, lazyImports)) {
+      return;
+    }
+    String className = sourceGenerator.toSource(javaType.getDescriptor());
+    sb.appendln("/**");
+    sb.appendln(" * Runs inline static field initializers.");
+    sb.appendln(" * @public");
+    sb.appendln(" */");
+    sourceGenerator.setClinitEnclosingTypeDescriptor(javaType.getDescriptor());
+    sb.appendln("static $clinit() {");
+    if (GeneratorUtils.needRewriteClinit(javaType)) {
+      // Set this method to reference an empty function so that it cannot be called again.
+      sb.appendln("%s.$clinit = function() {};", className);
+    }
+    // goog.module.get(...) for lazy imports.
+    for (Import lazyImport : ImportUtils.sortedList(importsByCategory.get(ImportCategory.LAZY))) {
+      String alias = lazyImport.getAlias();
+      String path = lazyImport.getImplModulePath();
+      sb.appendln("%s = goog.module.get('%s');", alias, path);
+    }
+    if (GeneratorUtils.needCallSuperClinit(javaType)) {
+      // call the super class $clinit.
+      TypeDescriptor superTypeDescriptor = javaType.getSuperTypeDescriptor();
+      String superTypeName = sourceGenerator.toSource(superTypeDescriptor);
+      sb.appendln("%s.$clinit();", superTypeName);
+    }
+    for (Field field : javaType.getStaticFields()) {
+      if (field.hasInitializer() && !field.isCompileTimeConstant()) {
+        String fieldInitializer = sourceGenerator.toSource(field.getInitializer());
+        String fieldName = ManglingNameUtils.getMangledName(field.getDescriptor());
+        sb.appendln("%s.$%s = %s;", className, fieldName, fieldInitializer);
+      }
+    }
+    for (Block block : javaType.getStaticInitializerBlocks()) {
+      for (Statement initializer : block.getStatements()) {
+        StatementTransformer.transform(initializer, environment, sb);
+      }
+    }
+    sb.appendln("}");
+    sb.newLine();
+    sourceGenerator.setClinitEnclosingTypeDescriptor(null);
+  }
+
+  //TODO: Move this to the ast in a normalization pass.
+  private void renderInit() {
+    if (javaType.isJsOverlayImpl() || javaType.isInterface()) {
+      return;
+    }
+    sb.appendln("/**");
+    sb.appendln(" * Runs instance field and block initializers.");
+    sb.appendln(" * @private");
+    sb.appendln(" */");
+    String mangledTypeName = ManglingNameUtils.getMangledName(javaType.getDescriptor());
+    String methodName = String.format("$init__%s", mangledTypeName);
+    sb.appendln("%s() {", methodName);
+    for (Field field : javaType.getInstanceFields()) {
+      if (field.hasInitializer() && !field.isCompileTimeConstant()) {
+        String fieldInitializer = sourceGenerator.toSource(field.getInitializer());
+        String fieldName = ManglingNameUtils.getMangledName(field.getDescriptor());
+        sb.appendln("this.%s = %s;", fieldName, fieldInitializer);
+      }
+    }
+    for (Block block : javaType.getInstanceInitializerBlocks()) {
+      for (Statement initializer : block.getStatements()) {
+        StatementTransformer.transform(initializer, environment, sb);
+      }
+    }
+    sb.appendln("}");
   }
 
   private void renderStaticFieldDeclarations() {
