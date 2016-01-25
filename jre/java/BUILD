@@ -49,7 +49,6 @@ JRE_SRC = [
     "java/lang/Object.java",
     "java/lang/String.java",
     "java/util/InternalJsMapFactory.java",
-    "javaemul/internal/JsDate.java",
     "java/lang/invoke/MethodHandles.java",
     ":emul_dev",
     ":emul_user",
@@ -67,7 +66,6 @@ jsni_to_j2cl_converter(
         "java/util/InternalJsIteratorEntry.java",
         "java/util/InternalJsMap.java",
         "java/util/InternalJsMapFactory.java",
-        "javaemul/internal/JsDate.java",
         ":emul_dev",
         ":emul_user",
     ],
@@ -78,7 +76,6 @@ jsni_to_j2cl_converter(
         "javaemul/internal/HashCodes.java",
         "javaemul/internal/LongCompareHolder.java",
         "java/lang/Throwable.java",
-        "javaemul/internal/JsDate.java",
     ],
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
 )
