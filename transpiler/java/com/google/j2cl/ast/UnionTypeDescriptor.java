@@ -71,6 +71,20 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  public String getUniqueId() {
+    return Joiner.on(" | ")
+        .join(
+            Lists.transform(
+                getTypes(),
+                new Function<TypeDescriptor, String>() {
+                  @Override
+                  public String apply(TypeDescriptor typeDescriptor) {
+                    return typeDescriptor.getUniqueId();
+                  }
+                }));
+  }
+
+  @Override
   public boolean isArray() {
     return false;
   }

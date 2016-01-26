@@ -6,7 +6,7 @@
 #set ($mangledTypeName = ${ManglingNameUtils.getMangledName($classType.Descriptor)})
 #set ($simpleName = $classType.Descriptor.SimpleName)
 #set ($binaryName = ${GeneratorUtils.getBinaryName($classType.Descriptor)})
-#set ($sourceName = ${GeneratorUtils.getSourceName($classType.Descriptor)})
+#set ($sourceName = ${classType.Descriptor.getSourceName()})
 #set ($isBoxedTypeAsPrimitive = ${GeneratorUtils.isBoxedTypeAsPrimitive($classType.Descriptor)})
 #set ($superBoxedTypeAsPrimitive = ${GeneratorUtils.superBoxedTypeAsPrimitive($classType.Descriptor)})
 #if (${GeneratorUtils.hasJsDoc($classType)})

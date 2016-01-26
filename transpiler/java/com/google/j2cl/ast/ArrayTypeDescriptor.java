@@ -63,6 +63,11 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  public String getUniqueId() {
+    return getLeafTypeDescriptor().getUniqueId() + getSuffix();
+  }
+
+  @Override
   public boolean isArray() {
     return true;
   }

@@ -321,22 +321,24 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
     return getInterner().intern(new AutoValue_ArrayTypeDescriptor(dimensions, this));
   }
 
+  public abstract String getUniqueId();
+
   @Override
   public int compareTo(TypeDescriptor that) {
-    return getSourceName().compareTo(that.getSourceName());
+    return getUniqueId().compareTo(that.getUniqueId());
   }
 
   @Override
   public boolean equals(Object o) {
     if (o instanceof TypeDescriptor) {
-      return getSourceName().equals(((TypeDescriptor) o).getSourceName());
+      return getUniqueId().equals(((TypeDescriptor) o).getUniqueId());
     }
     return false;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hashCode(getSourceName());
+    return Objects.hashCode(getUniqueId());
   }
 
   @Override

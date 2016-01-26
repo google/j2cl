@@ -1,0 +1,149 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let HashFunction = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction$impl');
+let HashFunctions$1 = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions$1$impl');
+let HashFunctions$2 = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions$2$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+class HashFunctions extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!HashFunctions}
+   * @public
+   */
+  static $create() {
+    HashFunctions.$clinit();
+    let $instance = new HashFunctions;
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunctions();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunctions() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunctions();
+  }
+
+  /**
+   * @template M_T
+   * @return {HashFunction<M_T>}
+   * @public
+   */
+  static m_hashFunction() {
+    HashFunctions.$clinit();
+    return HashFunctions$1.$create();
+  }
+
+  /**
+   * @template M_T
+   * @return {HashFunction<M_T>}
+   * @public
+   */
+  static m_enumHashFunction() {
+    HashFunctions.$clinit();
+    return HashFunctions$2.$create();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof HashFunctions; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, HashFunctions);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    HashFunctions.$clinit();
+    if (!HashFunctions.$classHashFunctions_) {
+      HashFunctions.$classHashFunctions_ = Class.$createForClass(
+          $Util.$generateId('HashFunctions'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions'));
+    }
+    return HashFunctions.$classHashFunctions_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return HashFunctions.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    HashFunction = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction$impl');
+    HashFunctions$1 = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions$1$impl');
+    HashFunctions$2 = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions$2$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunctions() {
+  }
+};
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+HashFunctions.$classHashFunctions_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = HashFunctions;
+//# sourceMappingURL=HashFunctions.js.map

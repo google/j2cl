@@ -163,18 +163,25 @@ public class RegularTypeDescriptor extends TypeDescriptor {
 
   @Override
   public String getSourceName() {
-    // For type variable, we use its binary name from JDT directly, which will ensure the uniqueness
-    // of each type variable. getBinaryName() computed by J2CL does not ensure the uniqueness in the
-    // case where two type variables with the same name are declared in two different methods that
-    // overload each other. Because J2cl only put the method name, not the full signature in the
-    // class components.
-    if (isTypeVariable()) {
-      return typeBinding.getBinaryName();
-    }
-    return getBinaryName() + getTypeArgumentsName();
+    return Joiner.on(".").join(Iterables.concat(getPackageComponents(), getClassComponents()));
   }
 
-  private String getTypeArgumentsName() {
+  @Override
+  public String getUniqueId() {
+    // For type variable, we use its JDT binary name plus its erasure's binary name, which will
+    // ensure the uniqueness of the type variable. Since in j2cl we only care about the left bound
+    // of the type variable (which is returned by getErasure()), it should be enough for uniqueness.
+    if (isTypeVariable()) {
+      // Binary name of a type variable is in the form of
+      // EnclosingTypeBinaryName$DeclaringMethodDescriptor$SimpleName.
+      // For example 'public static final <T> Foo<T> hashFunction()' in class 'test.Bar'
+      // binary name of T is "test.Bar$()LFoo;$T"
+      return typeBinding.getBinaryName() + ":" + typeBinding.getErasure().getBinaryName();
+    }
+    return getBinaryName() + getTypeArgumentsUniqueId();
+  }
+
+  private String getTypeArgumentsUniqueId() {
     if (isParameterizedType()) {
       return String.format(
           "<%s>",
@@ -185,7 +192,7 @@ public class RegularTypeDescriptor extends TypeDescriptor {
                       new Function<TypeDescriptor, String>() {
                         @Override
                         public String apply(TypeDescriptor typeDescriptor) {
-                          return typeDescriptor.getSourceName();
+                          return typeDescriptor.getUniqueId();
                         }
                       })));
     }

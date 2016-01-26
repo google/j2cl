@@ -4,7 +4,7 @@
 #set ($mangledTypeName = ${ManglingNameUtils.getMangledName($classType.Descriptor)})
 #set ($simpleName = $classType.Descriptor.SimpleName)
 #set ($binaryName = ${GeneratorUtils.getBinaryName($classType.Descriptor)})
-#set ($sourceName = ${GeneratorUtils.getSourceName($classType.Descriptor)})
+#set ($sourceName = ${classType.Descriptor.getSourceName()})
 /**
  * @interface
 #if (${classType.Descriptor.isParameterizedType()})

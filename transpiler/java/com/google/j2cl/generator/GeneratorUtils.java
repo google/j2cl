@@ -41,10 +41,6 @@ import java.util.List;
  * Utility functions related to source generation in the J2CL AST.
  */
 public class GeneratorUtils {
-  public static String getSourceName(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.getRawTypeDescriptor().getSourceName().replace('$', '.');
-  }
-
   public static String getBinaryName(TypeDescriptor typeDescriptor) {
     return typeDescriptor.getBinaryName();
   }

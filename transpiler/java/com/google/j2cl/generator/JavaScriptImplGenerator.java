@@ -99,7 +99,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderFileOverview() {
-    String transpiledFrom = javaType.getDescriptor().getRawTypeDescriptor().getSourceName();
+    String transpiledFrom = javaType.getDescriptor().getRawTypeDescriptor().getBinaryName();
     sb.appendln("/**");
     sb.appendln(" * @fileoverview Impl transpiled from " + transpiledFrom + ".");
     sb.appendln(" *");
