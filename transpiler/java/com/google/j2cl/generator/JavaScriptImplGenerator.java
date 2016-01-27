@@ -24,6 +24,7 @@ import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;
@@ -138,6 +139,37 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sb.newLine();
   }
 
+  private void renderTypeAnnotation() {
+    if (javaType.isJsOverlayImpl()) {
+      // Do nothing.
+    } else if (javaType.isInterface()) {
+      sb.append(renderTemplate("com/google/j2cl/generator/JsInterfaceAnnotation.vm"));
+    } else { // Not an interface so it is a Class.
+      sb.append(renderTemplate("com/google/j2cl/generator/JsClassAnnotation.vm"));
+    }
+  }
+
+  private void renderTypeBody() {
+    String className = sourceGenerator.toSource(javaType.getDescriptor());
+    String extendsClause = GeneratorUtils.getExtendsClause(javaType, sourceGenerator);
+    sb.appendln("class %s %s{", className, extendsClause);
+    if (!javaType.isJsOverlayImpl() && !javaType.isInterface()) {
+      renderConstructor();
+    }
+    renderJavaTypeMethods();
+    renderMarkImplementorMethod();
+    renderIsInstanceMethod();
+    renderIsAssignableFromMethod();
+    renderCopyMethod();
+    renderGetClassMethod();
+    renderStaticFieldGettersSetters();
+    renderClinit();
+    renderInit();
+    sb.appendln("};");
+    sb.newLine();
+    sb.newLine();
+  }
+
   private void renderJavaTypeMethods() {
     for (Method method : javaType.getMethods()) {
       velocityContext.put("method", method);
@@ -188,6 +220,33 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
   }
 
+  private void renderMarkImplementorMethod() {
+    if (!javaType.isInterface() || javaType.isJsOverlayImpl()) {
+      return; // Only render markImplementor code for interfaces.
+    }
+    String mangledTypeName = ManglingNameUtils.getMangledName(javaType.getDescriptor());
+
+    sb.appendln("/**");
+    sb.appendln(" * Marks the provided class as implementing this interface.");
+    sb.appendln(" * @param {Function} classConstructor");
+    sb.appendln(" * @public");
+    sb.appendln(" */");
+    sb.appendln("static $markImplementor(classConstructor) {");
+    for (TypeDescriptor superInterface : javaType.getSuperInterfaceTypeDescriptors()) {
+      if (superInterface.isNative()) {
+        continue;
+      }
+      String superInterfaceName = sourceGenerator.toSource(superInterface);
+      sb.appendln("%s.$markImplementor(classConstructor);", superInterfaceName);
+    }
+    sb.appendln("/**");
+    sb.appendln(" * @public {boolean}");
+    sb.appendln(" */");
+    sb.appendln("classConstructor.prototype.$implements__%s = true;", mangledTypeName);
+    sb.appendln("}");
+    sb.newLine();
+  }
+
   private void renderConstructorFactoryMethod(Method method) {
     if (subclassesJsConstructorClass) {
       velocityContext.put("isPrimaryConstructor", !AstUtils.hasThisCall(method));
@@ -197,37 +256,176 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
   }
 
-  private void renderTypeAnnotation() {
+
+  //TODO: Move this to the ast in a normalization pass.
+  private void renderIsInstanceMethod() {
     if (javaType.isJsOverlayImpl()) {
-      // Do nothing.
+      renderIsInstanceForJsOverlayType();
     } else if (javaType.isInterface()) {
-      sb.append(renderTemplate("com/google/j2cl/generator/JsInterfaceAnnotation.vm"));
+      renderIsInstanceForInterfaceType();
     } else { // Not an interface so it is a Class.
-      sb.append(renderTemplate("com/google/j2cl/generator/JsClassAnnotation.vm"));
+      renderIsInstanceForClassType();
+    }
+    sb.newLine();
+  }
+
+
+  private void renderIsInstanceForClassType() {
+    String mangledTypeName = ManglingNameUtils.getMangledName(javaType.getDescriptor());
+    if (GeneratorUtils.superBoxedTypeAsPrimitive(javaType.getDescriptor())) {
+      sb.appendln("/**");
+      sb.appendln(" * $isInstance() function implementation is provided separately.");
+      sb.appendln(" */");
+      return;
+    }
+    sb.appendln("/**");
+    sb.appendln(" * Returns whether the provided instance is an instance of this class.");
+    sb.appendln(" * @return {boolean}");
+    sb.appendln(" * @public");
+    sb.appendln(" */");
+    sb.appendln("static $isInstance(instance) {");
+    if (javaType.getDescriptor().isJsFunctionImplementation()) {
+      sb.appendln("return instance != null && instance.$is__%s;", mangledTypeName);
+    } else {
+      String className = sourceGenerator.toSource(javaType.getDescriptor());
+      sb.appendln("return instance instanceof %s;", className);
+    }
+    sb.appendln("}");
+  }
+
+  private void renderIsInstanceForInterfaceType() {
+    sb.appendln("/**");
+    sb.appendln(" * Returns whether the provided instance is of a class that implements this");
+    sb.appendln(" * interface.");
+    sb.appendln(" * @return {boolean}");
+    sb.appendln(" * @public");
+    sb.appendln(" */");
+    sb.appendln("static $isInstance(instance) {");
+    if (javaType.getDescriptor().isJsFunctionInterface()) {
+      sb.appendln("return instance != null && typeof instance == \"function\";");
+    } else {
+      String mangledTypeName = ManglingNameUtils.getMangledName(javaType.getDescriptor());
+      sb.appendln("return instance != null && instance.$implements__%s;", mangledTypeName);
+    }
+    sb.appendln("}");
+  }
+
+  private void renderIsInstanceForJsOverlayType() {
+    sb.appendln("/**");
+    sb.appendln(" * Returns whether the provided instance is an instance of this class.");
+    sb.appendln(" * @return {boolean}");
+    sb.appendln(" * @public");
+    sb.appendln(" */");
+    if (javaType.isInterface()) {
+      sb.appendln("static $isInstance(instance) { return true; }");
+    } else {
+      String nativeClassName =
+          sourceGenerator.toSource(javaType.getNativeTypeDescriptor().getRawTypeDescriptor());
+      sb.appendln(
+          "static $isInstance(instance) { return instance instanceof %s; }", nativeClassName);
     }
   }
 
-  private void renderTypeBody() {
+  //TODO: Move this to the ast in a normalization pass.
+  private void renderIsAssignableFromMethod() {
+    String mangledTypeName = ManglingNameUtils.getMangledName(javaType.getDescriptor());
     String className = sourceGenerator.toSource(javaType.getDescriptor());
-    String extendsClause = GeneratorUtils.getExtendsClause(javaType, sourceGenerator);
-    sb.appendln("class %s %s{", className, extendsClause);
-    if (!javaType.isJsOverlayImpl() && !javaType.isInterface()) {
-      renderConstructor();
-    }
-    renderJavaTypeMethods();
     if (javaType.isJsOverlayImpl()) {
-      sb.append(renderTemplate("com/google/j2cl/generator/JsNativeTypeImplBody.vm"));
-    } else if (javaType.isInterface()) {
-      sb.append(renderTemplate("com/google/j2cl/generator/JsInterfaceBody.vm"));
-    } else { // Not an interface so it is a Class.
-      sb.append(renderTemplate("com/google/j2cl/generator/JsClassBody.vm"));
+      return; // Don't render for overlay types.
     }
-    renderStaticFieldGettersSetters();
-    renderClinit();
-    renderInit();
-    sb.appendln("};");
+    sb.appendln("/**");
+    sb.appendln(" * Returns whether the provided class is or extends this class.");
+    sb.appendln(" * @param {Function} classConstructor");
+    sb.appendln(" * @return {boolean}");
+    sb.appendln(" * @public");
+    sb.appendln(" */");
+    sb.appendln("static $isAssignableFrom(classConstructor) {");
+    if (javaType.isInterface()) { // For interfaces
+      sb.appendln(
+          "return classConstructor != null && classConstructor.prototype.$implements__%s;",
+          mangledTypeName);
+    } else { // For classes
+      BootstrapType.NATIVE_UTIL.getDescriptor();
+      String utilAlias = sourceGenerator.toSource(BootstrapType.NATIVE_UTIL.getDescriptor());
+      sb.appendln("return %s.$canCastClass(classConstructor, %s);", utilAlias, className);
+    }
+    sb.appendln("}");
     sb.newLine();
+  }
+
+  //TODO: Move this to the ast in a normalization pass.
+  //TODO: may copy Objects methods (equals, hashCode, etc. ) as well.
+  private void renderCopyMethod() {
+    String className = sourceGenerator.toSource(javaType.getDescriptor());
+    String mangledTypeName = ManglingNameUtils.getMangledName(javaType.getDescriptor());
+    if (!javaType.getDescriptor().isJsFunctionImplementation()) {
+      return; // Only render the $copy method for jsfunctions
+    }
+    sb.appendln("/**");
+    sb.appendln(" * Copies the fields from {@code from} to {@code to}.");
+    sb.appendln(" * @param {%s} from", className);
+    sb.appendln(" * @param {*} to");
+    sb.appendln(" * @public");
+    sb.appendln(" */");
+    sb.appendln("static $copy(from, to) {");
+    for (Field field : javaType.getInstanceFields()) {
+      String fieldName = ManglingNameUtils.getMangledName(field.getDescriptor());
+      sb.appendln("to.%s = from.%s;", fieldName, fieldName);
+    }
+    sb.appendln("// Marks the object is an instance of this class.");
+    sb.appendln("to.$is__%s = true;", mangledTypeName);
+    sb.appendln("}");
     sb.newLine();
+  }
+
+  //TODO: Move this to the ast in a normalization pass.
+  private void renderGetClassMethod() {
+    if (javaType.isJsOverlayImpl()) {
+      return; // Don't render $getClass for overlay types.
+    }
+    String classAlias =
+        sourceGenerator.toSource(TypeDescriptors.get().javaLangClass.getRawTypeDescriptor());
+    String className = sourceGenerator.toSource(javaType.getDescriptor());
+    String utilAlias = sourceGenerator.toSource(BootstrapType.NATIVE_UTIL.getDescriptor());
+    sb.appendln("/**");
+    sb.appendln(" * @return {%s}", classAlias);
+    sb.appendln(" * @public", classAlias);
+    sb.appendln(" */");
+    sb.appendln("static $getClass() {");
+    sb.appendln(className + ".$clinit();");
+    sb.appendln("if (!%s.$class%s_) {", className, className);
+    if (javaType.isInterface()) {
+      sb.appendln("%s.$class%s_ = %s.$createForInterface(", className, className, classAlias);
+    } else if (javaType.isEnum()) {
+      sb.appendln("%s.$class%s_ = %s.$createForEnum(", className, className, classAlias);
+    } else {
+      sb.appendln("%s.$class%s_ = %s.$createForClass(", className, className, classAlias);
+    }
+    sb.appendln("%s.$generateId('%s'),", utilAlias, javaType.getDescriptor().getSimpleName());
+    sb.appendln("%s.$generateId('%s'),", utilAlias, javaType.getDescriptor().getBinaryName());
+    sb.append(String.format(
+        "%s.$generateId('%s')", utilAlias, javaType.getDescriptor().getSourceName()));
+    if (javaType.isEnum()) {
+      sb.appendln(",null);");
+    } else {
+      sb.appendln(");");
+    }
+    sb.appendln("}");
+    sb.appendln("return %s.$class%s_;", className, className);
+    sb.appendln("}");
+    sb.newLine();
+
+    if (!javaType.isJsOverlayImpl() && !javaType.isInterface()) {
+      sb.appendln("/**");
+      if (!javaType.getSuperTypeDescriptor().isNative()) {
+        sb.appendln(" * @override");
+      }
+      sb.appendln(" * @return {%s}", classAlias);
+      sb.appendln(" * @public");
+      sb.appendln(" */");
+      sb.appendln("m_getClass() { return %s.$getClass(); }", className);
+      sb.newLine();
+    }
   }
 
   private void renderConstructor() {
