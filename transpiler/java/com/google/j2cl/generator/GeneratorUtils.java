@@ -19,14 +19,19 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryOperator;
+import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.Method;
+import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.Node;
+import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
@@ -125,16 +130,21 @@ public class GeneratorUtils {
   }
 
   public static String getParameterList(Method method, final SourceGenerator sourceGenerator) {
-    List<String> parameterNameList =
+    return getSourceList(method.getParameters(), sourceGenerator);
+  }
+
+  public static <T extends Node> String getSourceList(
+      List<T> nodes, final SourceGenerator sourceGenerator) {
+    List<String> sourceList =
         Lists.transform(
-            method.getParameters(),
-            new Function<Variable, String>() {
+            nodes,
+            new Function<T, String>() {
               @Override
-              public String apply(Variable variable) {
-                return sourceGenerator.toSource(variable);
+              public String apply(T node) {
+                return sourceGenerator.toSource(node);
               }
             });
-    return Joiner.on(", ").join(parameterNameList);
+    return Joiner.on(", ").join(sourceList);
   }
 
   public static boolean isVoid(TypeDescriptor typeDescriptor) {
@@ -265,5 +275,75 @@ public class GeneratorUtils {
     }
     String superTypeName = sourceGenerator.toSource(superTypeDescriptor);
     return String.format("extends %s ", superTypeName);
+  }
+
+  /**
+   * For a constructor of a JsConstructor class or a subclass of a JsConstructor class, as the
+   * primary constructor in the class is output as the real ES6 constructor, the first statement
+   * (which must either be a super() call or a this() call), has been invoked in ES6 constructor
+   * and thus should be removed from the $ctor method. It follows the following rules:
+   *
+   * <p>If the super class has a primary constructor, which should have been output as ES6
+   * constructor, the super() call should have been invoked in constructor and should be removed in
+   * $ctor.
+   *
+   * <p>If the current class has a primary constructor, which should have been output as ES6
+   * constructor, the this() call should have been invoked in constructor and should be removed in
+   * $ctor.
+   */
+  public static Block getCtorBody(Method method) {
+    TypeDescriptor currentTypeDescriptor = method.getDescriptor().getEnclosingClassTypeDescriptor();
+    TypeDescriptor superclassTypeDescriptor = currentTypeDescriptor.getSuperTypeDescriptor();
+    boolean removeFirstStatement =
+        AstUtils.hasThisCall(method)
+            ? currentTypeDescriptor.subclassesJsConstructorClass()
+            : superclassTypeDescriptor.subclassesJsConstructorClass();
+    if (removeFirstStatement) {
+      List<Statement> statements = method.getBody().getStatements();
+      return new Block(statements.subList(1, statements.size()));
+    }
+    return method.getBody();
+  }
+
+  /**
+   * Returns the arguments for 'new A' statement in constructor factory method $create.
+   *
+   * <p>If the given constructor delegates to the primary constructor, the delegating this() call
+   * should be invoked by the 'new A' statement in the $create factory method, thus passing the
+   * arguments here.
+   */
+  public static String getNewInstanceArguments(Method method, SourceGenerator sourceGenerator) {
+    TypeDescriptor typeDescriptor = method.getDescriptor().getEnclosingClassTypeDescriptor();
+    if (!typeDescriptor.subclassesJsConstructorClass()) {
+      return "";
+    }
+    MethodCall constructorInvocation = AstUtils.getConstructorInvocation(method);
+    Preconditions.checkNotNull(
+        constructorInvocation,
+        "constructor %s should delegate to the delegated constructor",
+        ManglingNameUtils.getConstructorMangledName(method.getDescriptor()));
+    return getSourceList(constructorInvocation.getArguments(), sourceGenerator);
+  }
+
+  /**
+   * Returns the arguments for 'super()' call in ES6 constructor.
+   *
+   * <p>If the given constructor invokes the primary constructor in its super class, pass in the
+   * arguments to the super call here.
+   */
+  public static String getSuperArguments(
+      Method primaryConstructor, SourceGenerator sourceGenerator) {
+    MethodCall constructorInvocation = AstUtils.getConstructorInvocation(primaryConstructor);
+    if (constructorInvocation == null) {
+      // This case happens when the super class is a native type, and we do not synthesize the
+      // default super() call for the default constructor.
+      return "";
+    }
+    return constructorInvocation
+            .getTarget()
+            .getEnclosingClassTypeDescriptor()
+            .subclassesJsConstructorClass()
+        ? GeneratorUtils.getSourceList(constructorInvocation.getArguments(), sourceGenerator)
+        : "";
   }
 }

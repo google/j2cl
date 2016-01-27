@@ -178,17 +178,17 @@ public class JsExportTest extends MyTestCase {
   @JsType(isNative = true, namespace = "woo", name = "MyExportedClassWithImplicitConstructor")
   private static class NativeMyExportedClassWithImplicitConstructor { }
 
-//  public void testExportConstructors() {
-//    MyClassExportsConstructor nativeMyClassExportsConstructor =
-//        (MyClassExportsConstructor) (Object) new NativeMyClassExportsConstructor(2);
-//    assertEquals(4, nativeMyClassExportsConstructor.foo());
-//    assertEquals(2, new MyClassExportsConstructor().foo());
-//  }
-//
-//  @JsType(isNative = true, namespace = "woo", name = "MyClassExportsConstructor")
-//  private static class NativeMyClassExportsConstructor {
-//    public NativeMyClassExportsConstructor(@SuppressWarnings("unused") int a) { }
-//  }
+  public void testExportConstructors() {
+    MyClassExportsConstructor nativeMyClassExportsConstructor =
+        (MyClassExportsConstructor) (Object) new NativeMyClassExportsConstructor(2);
+    assertEquals(4, nativeMyClassExportsConstructor.foo());
+    assertEquals(2, new MyClassExportsConstructor().foo());
+  }
+
+  @JsType(isNative = true, namespace = "woo", name = "MyClassExportsConstructor")
+  private static class NativeMyClassExportsConstructor {
+    public NativeMyClassExportsConstructor(@SuppressWarnings("unused") int a) {}
+  }
 
   public void testExportedField() {
     assertEquals(100, MyExportedClass.EXPORTED_1);

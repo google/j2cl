@@ -1,0 +1,187 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B$impl');
+
+
+let JsConstructorClass$A = goog.require('gen.com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$A$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let JsConstructorClass = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class JsConstructorClass$B extends JsConstructorClass$A {
+  /**
+   * Real constructor.
+   * @public
+   */
+  constructor(x) {
+    JsConstructorClass$B.$clinit();
+    super();
+    /**
+     * @public {number}
+     */
+    this.f_fB__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$B =
+        0;
+    this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$B__int(
+        x);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {number} x
+   * @return {!JsConstructorClass$B}
+   * @public
+   */
+  static $create__int(x) { return new JsConstructorClass$B(x); }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {number} x
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$B__int(
+      x) {
+    this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$A__int(
+        x + 1);
+    this.$init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$B();
+    this.f_fB__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$B =
+        3;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!JsConstructorClass$B}
+   * @public
+   */
+  static $create() {
+    JsConstructorClass$B.$clinit();
+    let $instance = new JsConstructorClass$B(10);
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$B();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$B() {
+    this.f_fB__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$B =
+        4;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {number} x
+   * @param {number} y
+   * @return {!JsConstructorClass$B}
+   * @public
+   */
+  static $create__int__int(x, y) {
+    JsConstructorClass$B.$clinit();
+    let $instance = new JsConstructorClass$B(x + y);
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$B__int__int(
+            x, y);
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {number} x
+   * @param {number} y
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$B__int__int(
+      x, y) {
+    this.f_fB__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$B =
+        x * y;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof JsConstructorClass$B;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, JsConstructorClass$B);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    JsConstructorClass$B.$clinit();
+    if (!JsConstructorClass$B.$classJsConstructorClass$B_) {
+      JsConstructorClass$B.$classJsConstructorClass$B_ = Class.$createForClass(
+          $Util.$generateId('B'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$B'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.B'));
+    }
+    return JsConstructorClass$B.$classJsConstructorClass$B_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return JsConstructorClass$B.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    JsConstructorClass = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    JsConstructorClass$A.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$B() {
+    this.f_fB__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$B =
+        2;
+  }
+};
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+JsConstructorClass$B.$classJsConstructorClass$B_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = JsConstructorClass$B;
+//# sourceMappingURL=JsConstructorClass$B.js.map

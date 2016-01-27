@@ -1,0 +1,23 @@
+#set ($parameterList = ${GeneratorUtils.getParameterList($primaryConstructor, $sourceGenerator)})
+#set ($superCallArguments = ${GeneratorUtils.getSuperArguments($primaryConstructor, $sourceGenerator)})
+#set ($mangledNameOfCtor = ${ManglingNameUtils.getCtorMangledName($primaryConstructor.getDescriptor())})
+  /**
+   * Real constructor.
+   * @public
+   */
+  constructor($parameterList) {
+    $className.$clinit();
+    super($superCallArguments);
+#foreach ($field in $classType.getInstanceFields())
+#set ($fieldVisibility = $field.Descriptor.Visibility)
+#set ($fieldType = ${sourceGenerator.getJsDocName($field.Descriptor.TypeDescriptor)})
+#set ($fieldName = ${ManglingNameUtils.getMangledName($field.Descriptor)})
+#set ($initialValue = ${GeneratorUtils.getInitialValue($field)})
+    /**
+     * @$fieldVisibility {$fieldType}
+     */
+    this.$fieldName = ${sourceGenerator.toSource($initialValue)};
+#end
+    this.$mangledNameOfCtor($parameterList);
+  }
+

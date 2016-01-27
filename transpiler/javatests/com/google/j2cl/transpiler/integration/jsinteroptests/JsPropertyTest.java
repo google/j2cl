@@ -183,18 +183,18 @@ public class JsPropertyTest extends MyTestCase {
     assertEquals(12, obj.x);
   }
 
-  //  static class MyNativeJsTypeWithConstructorSubclass extends MyNativeJsTypeWithConstructor {
-  //    public MyNativeJsTypeWithConstructorSubclass(int x) {
-  //      super(x);
-  //    }
-  //  }
-  //
-  //  public void testNativeJsTypeWithConstructorSubclass() {
-  //    MyNativeJsTypeWithConstructorSubclass obj = new MyNativeJsTypeWithConstructorSubclass(12);
-  //    assertTrue(obj.ctorExecuted);
-  //    assertEquals(12, obj.x);
-  //  }
-  //
+  static class MyNativeJsTypeWithConstructorSubclass extends MyNativeJsTypeWithConstructor {
+    public MyNativeJsTypeWithConstructorSubclass(int x) {
+      super(x);
+    }
+  }
+
+  public void testNativeJsTypeWithConstructorSubclass() {
+    MyNativeJsTypeWithConstructorSubclass obj = new MyNativeJsTypeWithConstructorSubclass(12);
+    assertTrue(obj.ctorExecuted);
+    assertEquals(12, obj.x);
+  }
+
   @JsType(isNative = true, namespace = "test.foo", name = "JsPropertyTest_MyNativeJsTypeInterface")
   interface MyNativeJsTypeInterface {
     @JsProperty

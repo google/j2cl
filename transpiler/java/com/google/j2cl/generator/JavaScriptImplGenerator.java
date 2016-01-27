@@ -16,6 +16,7 @@
 package com.google.j2cl.generator;
 
 import com.google.common.base.Preconditions;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
@@ -44,10 +45,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private String nativeSource;
   private String relativeSourceMapLocation;
   private SourceBuilder sb;
+  private boolean subclassesJsConstructorClass;
 
   public JavaScriptImplGenerator(Errors errors, JavaType javaType, VelocityEngine velocityEngine) {
     super(errors, javaType, velocityEngine);
     velocityContext = createContext();
+    this.subclassesJsConstructorClass = javaType.getDescriptor().subclassesJsConstructorClass();
   }
 
   @Override
@@ -139,7 +142,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     for (Method method : javaType.getMethods()) {
       velocityContext.put("method", method);
       if (method.isConstructor()) {
-        sb.append(renderTemplate("com/google/j2cl/generator/JsConstructorFactoryMethods.vm"));
+        renderConstructorFactoryMethod(method);
       } else {
         if (GeneratorUtils.shouldNotEmitCode(method)) {
           continue;
@@ -185,6 +188,15 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
   }
 
+  private void renderConstructorFactoryMethod(Method method) {
+    if (subclassesJsConstructorClass) {
+      velocityContext.put("isPrimaryConstructor", !AstUtils.hasThisCall(method));
+      sb.append(renderTemplate("com/google/j2cl/generator/JsPrimaryConstructorFactoryMethods.vm"));
+    } else {
+      sb.append(renderTemplate("com/google/j2cl/generator/JsConstructorFactoryMethods.vm"));
+    }
+  }
+
   private void renderTypeAnnotation() {
     if (javaType.isJsOverlayImpl()) {
       // Do nothing.
@@ -200,7 +212,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     String extendsClause = GeneratorUtils.getExtendsClause(javaType, sourceGenerator);
     sb.appendln("class %s %s{", className, extendsClause);
     if (!javaType.isJsOverlayImpl() && !javaType.isInterface()) {
-      sb.append(renderTemplate("com/google/j2cl/generator/JsConstructor.vm"));
+      renderConstructor();
     }
     renderJavaTypeMethods();
     if (javaType.isJsOverlayImpl()) {
@@ -216,6 +228,15 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sb.appendln("};");
     sb.newLine();
     sb.newLine();
+  }
+
+  private void renderConstructor() {
+    if (!subclassesJsConstructorClass) {
+      sb.append(renderTemplate("com/google/j2cl/generator/JsConstructor.vm"));
+    } else {
+      velocityContext.put("primaryConstructor", AstUtils.getPrimaryConstructor(javaType));
+      sb.append(renderTemplate("com/google/j2cl/generator/JsPrimaryConstructor.vm"));
+    }
   }
 
   private void renderStaticFieldGettersSetters() {

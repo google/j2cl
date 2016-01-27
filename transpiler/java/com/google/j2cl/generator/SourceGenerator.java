@@ -15,7 +15,9 @@
  */
 package com.google.j2cl.generator;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
@@ -30,6 +32,19 @@ public class SourceGenerator {
 
   public SourceGenerator(GenerationEnvironment environment) {
     this.environment = environment;
+  }
+
+  public String toSource(Node node) {
+    if (node instanceof Statement) {
+      return toSource((Statement) node);
+    } else if (node instanceof Expression) {
+      return toSource((Expression) node);
+    } else if (node instanceof Variable) {
+      return toSource((Variable) node);
+    }
+    Preconditions.checkArgument(
+        false, "Unsupported operation 'toSource' on %s type.", node.getClass().getName());
+    return null;
   }
 
   public String toSource(Statement statement) {

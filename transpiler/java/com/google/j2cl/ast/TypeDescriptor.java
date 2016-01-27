@@ -310,6 +310,10 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
     return false;
   }
 
+  public boolean subclassesJsConstructorClass() {
+    return false;
+  }
+
   public List<TypeDescriptor> getTypeArgumentDescriptors() {
     return Collections.emptyList();
   }

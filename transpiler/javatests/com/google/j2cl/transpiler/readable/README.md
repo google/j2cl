@@ -34,8 +34,6 @@ are copyright and licensed as follows:
 - Normalize compound assignment, increment and decrement operations for long and
   boxed objects. Refer to previous dicussion at cl/101709039 and cl/98361767.
 - Use annotation @abstract for abstract methods. (b/24539710).
-- Namespace on @JsMethod can only be defined on native static methods. Refer to
-  previous discussion at cl/106852320.
 - Use one file to export stubs for JS externs, or use separate files for each.
   (see previous discussion at cl/108187399)
 
@@ -68,6 +66,15 @@ are copyright and licensed as follows:
     thinks these things are live.
 - Fix and double check equals/hashcode methods on all TypeDescriptor flavors.
   see cl/112695016 for more information.
+
+##JsInterop Restrictions to check
+- JsConstructor:
+  1). A class can have at most one JsConstructor.
+  2). Other constructors must delegate to the JsConstructor.
+  3). The JsConstructor must call super() to invoke 'JsConstructor' in Parent.
+  4). 1) - 3) also apply on successors of JsConstructor class.
+- JsMethod:
+  1). namespace can only be defined on native static methods. (cl/106852320)
 
 ## Tracking Closure warning issues
 - https://b.corp.google.com/hotlists/269212

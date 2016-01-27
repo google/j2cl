@@ -306,6 +306,11 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  public boolean subclassesJsConstructorClass() {
+    return TypeProxyUtils.subclassesJsConstructorClass(typeBinding);
+  }
+
+  @Override
   public boolean isNative() {
     return isNative;
   }

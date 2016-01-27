@@ -20,10 +20,11 @@ let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
  */
 class SomeJsType extends Object {
   /**
-   * Defines instance fields.
-   * @private
+   * Real constructor.
+   * @public
    */
   constructor() {
+    SomeJsType.$clinit();
     super();
     /**
      * @public {number}
@@ -44,6 +45,7 @@ class SomeJsType extends Object {
      */
     this.f_protectedField__com_google_j2cl_transpiler_readable_jstype_SomeJsType =
         0;
+    this.$ctor__com_google_j2cl_transpiler_readable_jstype_SomeJsType();
   }
 
   /**
@@ -52,12 +54,7 @@ class SomeJsType extends Object {
    * @return {!SomeJsType<C_T>}
    * @public
    */
-  static $create() {
-    SomeJsType.$clinit();
-    let $instance = new SomeJsType;
-    $instance.$ctor__com_google_j2cl_transpiler_readable_jstype_SomeJsType();
-    return $instance;
-  }
+  static $create() { return new SomeJsType(); }
 
   /**
    * Initializes instance fields for a particular Java constructor.

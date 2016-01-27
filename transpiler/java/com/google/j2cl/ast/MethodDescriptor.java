@@ -170,6 +170,10 @@ public abstract class MethodDescriptor extends Node implements Member {
     return isVarargs() && ((isJsMethod() && !isJsOverlay()) || isJsFunction());
   }
 
+  public boolean isJsConstructor() {
+    return getJsInfo().getJsMemberType() == JsMemberType.CONSTRUCTOR;
+  }
+
   @Override
   public Node accept(Processor processor) {
     return Visitor_MethodDescriptor.visit(processor, this);

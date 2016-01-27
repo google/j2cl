@@ -29,6 +29,8 @@ import org.eclipse.jdt.core.dom.Modifier;
  * Utility functions for JsInterop properties.
  */
 public class JsInteropUtils {
+  private static final String JS_CONSTRUCTOR_ANNOTATION_NAME =
+      "jsinterop.annotations.JsConstructor";
   private static final String JS_FUNCTION_ANNOTATION_NAME = "jsinterop.annotations.JsFunction";
   private static final String JS_IGNORE_ANNOTATION_NAME = "jsinterop.annotations.JsIgnore";
   private static final String JS_METHOD_ANNOTATION_NAME = "jsinterop.annotations.JsMethod";
@@ -39,6 +41,11 @@ public class JsInteropUtils {
 
   public static boolean isGlobal(String jsNamespace) {
     return JS_GLOBAL.equals(jsNamespace);
+  }
+
+  public static IAnnotationBinding getJsConstructorAnnotation(IMethodBinding methodBinding) {
+    return JdtAnnotationUtils.findAnnotationBindingByName(
+        methodBinding.getAnnotations(), JS_CONSTRUCTOR_ANNOTATION_NAME);
   }
 
   public static IAnnotationBinding getJsFunctionAnnotation(ITypeBinding typeBinding) {
@@ -120,12 +127,24 @@ public class JsInteropUtils {
       String jsMethodNamespace = getJsNamespace(jsMethodAnnotation);
       return JsInfo.create(JsMemberType.METHOD, jsMethodName, jsMethodNamespace, isJsOverlay);
     }
+    // check @JsConstructor annotation
+    IAnnotationBinding jsConstructorAnnotation = getJsConstructorAnnotation(methodBinding);
+    if (jsConstructorAnnotation != null) {
+      String jsName = getJsName(jsConstructorAnnotation);
+      String jsNamespace = getJsNamespace(jsConstructorAnnotation);
+      return JsInfo.create(JsMemberType.CONSTRUCTOR, jsName, jsNamespace, isJsOverlay);
+    }
     // check @JsType annotation
     IAnnotationBinding jsTypeAnnotation = getJsTypeAnnotation(methodBinding.getDeclaringClass());
+    // In native @JsType all members (regardless of visibility) is implicit JsProperty/JsMethod.
     if (jsTypeAnnotation != null
         && (Modifier.isPublic(methodBinding.getModifiers())
             || JsInteropUtils.isNative(jsTypeAnnotation))) {
-      return JsInfo.create(JsMemberType.METHOD, null, null, isJsOverlay);
+      return JsInfo.create(
+          methodBinding.isConstructor() ? JsMemberType.CONSTRUCTOR : JsMemberType.METHOD,
+          null,
+          null,
+          isJsOverlay);
     }
     // check @JsFunction annotation
     IAnnotationBinding jsFunctionAnnotation =
@@ -157,6 +176,7 @@ public class JsInteropUtils {
       return true;
     }
     // check @JsType annotation.
+    // In native @JsType all members (regardless of visibility) is implicit JsProperty/JsMethod.
     IAnnotationBinding jsTypeAnnotation = getJsTypeAnnotation(methodBinding.getDeclaringClass());
     return jsTypeAnnotation != null
         && (Modifier.isPublic(methodBinding.getModifiers())
@@ -177,6 +197,7 @@ public class JsInteropUtils {
     }
     // check @JsType annotation.
     IAnnotationBinding jsTypeAnnotation = getJsTypeAnnotation(variableBinding.getDeclaringClass());
+    // In native @JsType all members (regardless of visibility) is implicit JsProperty/JsMethod.
     return jsTypeAnnotation != null
         && (Modifier.isPublic(variableBinding.getModifiers())
             || JsInteropUtils.isNative(jsTypeAnnotation));
@@ -186,5 +207,29 @@ public class JsInteropUtils {
     return JdtAnnotationUtils.findAnnotationBindingByName(
             methodBinding.getAnnotations(), JS_OVERLAY_ANNOTATION_NAME)
         != null;
+  }
+
+  public static boolean isJsConstructor(IMethodBinding methodBinding) {
+    // check @JsIgnore annotation
+    IAnnotationBinding jsIgnoreAnnotation = getJsIgnoreAnnotation(methodBinding);
+    if (jsIgnoreAnnotation != null) {
+      return false;
+    }
+    // check @JsConstructor annotation
+    IAnnotationBinding jsConstructorAnnotation = getJsConstructorAnnotation(methodBinding);
+    if (jsConstructorAnnotation != null) {
+      return true;
+    }
+    // check @JsType annotation.
+    IAnnotationBinding jsTypeAnnotation = getJsTypeAnnotation(methodBinding.getDeclaringClass());
+    // In native @JsType all constructors (regardless of visibility) is implicit JsConstructor.
+    return jsTypeAnnotation != null
+        && methodBinding.isConstructor()
+        && (Modifier.isPublic(methodBinding.getModifiers())
+            || JsInteropUtils.isNative(jsTypeAnnotation));
+  }
+
+  public static boolean isJsType(ITypeBinding typeBinding) {
+    return getJsTypeAnnotation(typeBinding) != null;
   }
 }

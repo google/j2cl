@@ -17,23 +17,21 @@ let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class JsIgnoreExample extends Object {
   /**
-   * Defines instance fields.
-   * @private
+   * Real constructor.
+   * @public
    */
-  constructor() { super(); }
+  constructor() {
+    JsIgnoreExample.$clinit();
+    super();
+    this.$ctor__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample();
+  }
 
   /**
    * A particular Java constructor as a factory method.
    * @return {!JsIgnoreExample}
    * @public
    */
-  static $create() {
-    JsIgnoreExample.$clinit();
-    let $instance = new JsIgnoreExample;
-    $instance
-        .$ctor__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample();
-    return $instance;
-  }
+  static $create() { return new JsIgnoreExample(); }
 
   /**
    * Initializes instance fields for a particular Java constructor.

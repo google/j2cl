@@ -27,7 +27,7 @@ public class Main {
     test.testEnum_subclassMethodCallFromExportedEnumerations();
     test.testExportClass_correctNamespace();
     test.testExportClass_implicitConstructor();
-    // test.testExportConstructors();
+    test.testExportConstructors();
     test.testExportedField();
     test.testExportedFieldRefInExportedMethod();
     test.testExportedMethod();
@@ -92,7 +92,7 @@ public class Main {
     test.testNativeJsTypeSubclass();
     test.testNativeJsTypeSubclassNoOverride();
     test.testNativeJsTypeWithConstructor();
-    // test.testNativeJsTypeWithConstructorSubclass();
+    test.testNativeJsTypeWithConstructorSubclass();
     test.testProtectedNames();
   }
 

@@ -94,18 +94,23 @@ public class AstUtils {
   }
 
   /**
-   * Create constructor MethodDescriptor.
+   * Create default constructor MethodDescriptor.
    */
-  public static MethodDescriptor createConstructorDescriptor(
+  public static MethodDescriptor createDefaultConstructorDescriptor(
       TypeDescriptor typeDescriptor,
       Visibility visibility,
       TypeDescriptor... parameterTypeDescriptors) {
+    JsInfo jsInfo =
+        typeDescriptor.isJsType()
+            ? JsInfo.create(JsMemberType.CONSTRUCTOR, null, null, false)
+            : JsInfo.NONE;
     return MethodDescriptorBuilder.fromDefault()
         .visibility(visibility)
         .enclosingClassTypeDescriptor(typeDescriptor)
         .methodName(typeDescriptor.getClassName())
         .isConstructor(true)
         .parameterTypeDescriptors(Arrays.asList(parameterTypeDescriptors))
+        .jsInfo(jsInfo)
         .build();
   }
 
@@ -718,5 +723,22 @@ public class AstUtils {
             nativeTypeDescriptor.getClassComponents(),
             Arrays.asList(JS_OVERLAY_METHODS_IMPL_SUFFIX)),
         false);
+  }
+
+  /**
+   * Returns the constructor that is being delegated to (the primary constructor) in a JsConstructor
+   * class or in a child class of a JsConstructor class. This constructor will be generated as the
+   * real ES6 constructor.
+   */
+  public static Method getPrimaryConstructor(JavaType javaType) {
+    if (!javaType.getDescriptor().subclassesJsConstructorClass()) {
+      return null;
+    }
+    for (Method method : javaType.getMethods()) {
+      if (method.isConstructor() && !AstUtils.hasThisCall(method)) {
+        return method;
+      }
+    }
+    return null;
   }
 }

@@ -27,6 +27,11 @@ public enum JsMemberType {
    */
   NONE,
   /**
+   * A directly annotated JsConstructor, (either by JsConstructor annotation on the method, or
+   * JsType annotation on the enclosing class).
+   */
+  CONSTRUCTOR,
+  /**
    * A JsFunction method.
    */
   JS_FUNCTION,

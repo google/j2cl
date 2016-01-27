@@ -74,7 +74,7 @@ public class InsertExplicitSuperCallsVisitor extends AbstractVisitor {
 
   private void synthesizeSuperCall(Method method, TypeDescriptor superTypeDescriptor) {
     MethodDescriptor methodDescriptor =
-        AstUtils.createConstructorDescriptor(
+        AstUtils.createDefaultConstructorDescriptor(
             superTypeDescriptor, superTypeDescriptor.getVisibility());
     List<Expression> arguments = new ArrayList<>();
     MethodCall superCall = MethodCall.createRegularMethodCall(null, methodDescriptor, arguments);

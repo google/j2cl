@@ -1,0 +1,138 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.subnativejstype.SubNativeJsType.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.subnativejstype.SubNativeJsType$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+let MyNativeJsType = goog.require('test.foo.MyNativeJsType');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class SubNativeJsType extends MyNativeJsType {
+  /**
+   * Real constructor.
+   * @public
+   */
+  constructor(x) {
+    SubNativeJsType.$clinit();
+    super(x + 1);
+    this.$ctor__com_google_j2cl_transpiler_readable_subnativejstype_SubNativeJsType__int(
+        x);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {number} x
+   * @return {!SubNativeJsType}
+   * @public
+   */
+  static $create__int(x) { return new SubNativeJsType(x); }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {number} x
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_subnativejstype_SubNativeJsType__int(
+      x) {
+    this.$init__com_google_j2cl_transpiler_readable_subnativejstype_SubNativeJsType();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!SubNativeJsType}
+   * @public
+   */
+  static $create() {
+    SubNativeJsType.$clinit();
+    let $instance = new SubNativeJsType(10);
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_subnativejstype_SubNativeJsType();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_subnativejstype_SubNativeJsType() {
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof SubNativeJsType; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, SubNativeJsType);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    SubNativeJsType.$clinit();
+    if (!SubNativeJsType.$classSubNativeJsType_) {
+      SubNativeJsType.$classSubNativeJsType_ = Class.$createForClass(
+          $Util.$generateId('SubNativeJsType'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.subnativejstype.SubNativeJsType'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.subnativejstype.SubNativeJsType'));
+    }
+    return SubNativeJsType.$classSubNativeJsType_;
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return SubNativeJsType.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_subnativejstype_SubNativeJsType() {
+  }
+};
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+SubNativeJsType.$classSubNativeJsType_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = SubNativeJsType;
+//# sourceMappingURL=SubNativeJsType.js.map

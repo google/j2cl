@@ -21,23 +21,21 @@ let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
  */
 class MyJsType extends Object {
   /**
-   * Defines instance fields.
-   * @private
+   * Real constructor.
+   * @public
    */
-  constructor() { super(); }
+  constructor() {
+    MyJsType.$clinit();
+    super();
+    this.$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyJsType();
+  }
 
   /**
    * A particular Java constructor as a factory method.
    * @return {!MyJsType}
    * @public
    */
-  static $create() {
-    MyJsType.$clinit();
-    let $instance = new MyJsType;
-    $instance
-        .$ctor__com_google_j2cl_transpiler_readable_jsbridgeaccidentaloverride_MyJsType();
-    return $instance;
-  }
+  static $create() { return new MyJsType(); }
 
   /**
    * Initializes instance fields for a particular Java constructor.

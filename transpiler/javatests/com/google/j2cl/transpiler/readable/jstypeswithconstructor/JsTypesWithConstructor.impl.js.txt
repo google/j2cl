@@ -16,23 +16,21 @@ let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 
 class JsTypesWithConstructor extends Object {
   /**
-   * Defines instance fields.
-   * @private
+   * Real constructor.
+   * @public
    */
-  constructor() { super(); }
+  constructor() {
+    JsTypesWithConstructor.$clinit();
+    super();
+    this.$ctor__com_google_j2cl_transpiler_readable_jstypeswithconstructor_JsTypesWithConstructor();
+  }
 
   /**
    * A particular Java constructor as a factory method.
    * @return {!JsTypesWithConstructor}
    * @public
    */
-  static $create() {
-    JsTypesWithConstructor.$clinit();
-    let $instance = new JsTypesWithConstructor;
-    $instance
-        .$ctor__com_google_j2cl_transpiler_readable_jstypeswithconstructor_JsTypesWithConstructor();
-    return $instance;
-  }
+  static $create() { return new JsTypesWithConstructor(); }
 
   /**
    * Initializes instance fields for a particular Java constructor.

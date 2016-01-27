@@ -17,6 +17,8 @@ package com.google.j2cl.ast;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 
 import org.eclipse.jdt.core.dom.IMethodBinding;
@@ -25,6 +27,7 @@ import org.eclipse.jdt.core.dom.Modifier;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -146,6 +149,49 @@ public class TypeProxyUtils {
       }
     }
     return false;
+  }
+
+  /**
+   * Returns true if the given type has a JsConstructor.
+   */
+  public static boolean isJsConstructorClass(ITypeBinding typeBinding) {
+    if (typeBinding == null || !typeBinding.isClass()) {
+      return false;
+    }
+    Collection<IMethodBinding> constructors =
+        Collections2.filter(
+            Arrays.asList(typeBinding.getDeclaredMethods()),
+            new Predicate<IMethodBinding>() {
+              @Override
+              public boolean apply(IMethodBinding method) {
+                return method.isConstructor();
+              }
+            });
+    if (constructors.isEmpty()) {
+      // A JsType with default constructor is a JsConstructor class.
+      return JsInteropUtils.isJsType(typeBinding);
+    }
+    return !Collections2.filter(
+            constructors,
+            new Predicate<IMethodBinding>() {
+              @Override
+              public boolean apply(IMethodBinding constructor) {
+                return JsInteropUtils.isJsConstructor(constructor);
+              }
+            })
+        .isEmpty();
+  }
+
+  /**
+   * Returns true if the given type has a JsConstructor, or it is a successor of a class that has a
+   * JsConstructor.
+   */
+  public static boolean subclassesJsConstructorClass(ITypeBinding typeBinding) {
+    if (typeBinding == null) {
+      return false;
+    }
+    return isJsConstructorClass(typeBinding)
+        || subclassesJsConstructorClass(typeBinding.getSuperclass());
   }
 
   /**

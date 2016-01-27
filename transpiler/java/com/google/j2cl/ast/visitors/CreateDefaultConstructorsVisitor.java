@@ -62,7 +62,7 @@ public class CreateDefaultConstructorsVisitor extends AbstractVisitor {
 
   private void synthesizeDefaultConstructor(JavaType type) {
     MethodDescriptor methodDescriptor =
-        AstUtils.createConstructorDescriptor(type.getDescriptor(), type.getVisibility());
+        AstUtils.createDefaultConstructorDescriptor(type.getDescriptor(), type.getVisibility());
     Block body = new Block(new ArrayList<Statement>());
     List<Variable> parameters = new ArrayList<>();
     Method defaultConstructor = new Method(methodDescriptor, parameters, body);
