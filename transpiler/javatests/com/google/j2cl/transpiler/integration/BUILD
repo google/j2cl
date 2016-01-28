@@ -81,6 +81,16 @@ java_test(
     deps = [":IntegrationTestCase"],
 )
 
+java_test(
+    name = "JsInteropRestrictionsCheckerTest",
+    srcs = ["JsInteropRestrictionsCheckerTest.java"],
+    data = glob(["jsinteroprestrictionschecker/**/*"]) + [
+        "//jre/java:libJavaJre_java_library.jar",
+        "//third_party/java/gwt:gwt-jsinterop-annotations",
+    ],
+    deps = [":IntegrationTestCase"],
+)
+
 java_library(
     name = "IntegrationTestCase",
     testonly = 1,
