@@ -26,12 +26,9 @@ j2cl_source_copy(
     base_strip_path = "third_party/java_src/gwt/svn/trunk/user/super/com/google/gwt/emul/",
     # Java classes that are different in j2cl and thus should not be copied from GWT
     excludes = [
-        "java/lang/Character.java",
         "java/lang/Class.java",
         "java/lang/Enum.java",
-        "java/lang/Math.java",
         "java/lang/Object.java",
-        "java/lang/String.java",
         # TODO(dankurka): once JsInterop lands in GWT this class can be changed
         # to work with both GWT and j2cl
         "java/util/InternalJsIterator.java",
@@ -42,12 +39,9 @@ j2cl_source_copy(
 )
 
 JRE_SRC = [
-    "java/lang/Character.java",
     "java/lang/Class.java",
     "java/lang/Enum.java",
-    "java/lang/Math.java",
     "java/lang/Object.java",
-    "java/lang/String.java",
     "java/util/InternalJsMapFactory.java",
     "java/lang/invoke/MethodHandles.java",
     ":emul_dev",
@@ -57,11 +51,8 @@ JRE_SRC = [
 jsni_to_j2cl_converter(
     name = "convert_jsni_emul",
     srcs = [
-        "java/lang/Character.java",
         "java/lang/Enum.java",
-        "java/lang/Math.java",
         "java/lang/Object.java",
-        "java/lang/String.java",
         "java/util/InternalJsIterator.java",
         "java/util/InternalJsIteratorEntry.java",
         "java/util/InternalJsMap.java",
