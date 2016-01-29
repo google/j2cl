@@ -37,6 +37,7 @@ public class Method extends Node {
    * Synthetic method is output with JsDoc comment 'Synthetic method.' for better readability.
    */
   private boolean isSynthetic;
+  private boolean isFinal;
 
   public Method(MethodDescriptor methodDescriptor, List<Variable> parameters, Block body) {
     Preconditions.checkNotNull(methodDescriptor);
@@ -53,11 +54,13 @@ public class Method extends Node {
       Block body,
       boolean isAbstract,
       boolean isOverride,
-      boolean isSynthetic) {
+      boolean isSynthetic,
+      boolean isFinal) {
     this(methodDescriptor, parameters, body);
     this.isAbstract = isAbstract;
     this.isOverride = isOverride;
     this.isSynthetic = isSynthetic;
+    this.isFinal = isFinal;
   }
 
   public static Method createSynthetic(
@@ -65,8 +68,9 @@ public class Method extends Node {
       List<Variable> parameters,
       Block body,
       boolean isAbstract,
-      boolean isOverride) {
-    return new Method(methodDescriptor, parameters, body, isAbstract, isOverride, true);
+      boolean isOverride,
+      boolean isFinal) {
+    return new Method(methodDescriptor, parameters, body, isAbstract, isOverride, true, isFinal);
   }
 
   public MethodDescriptor getDescriptor() {
@@ -111,6 +115,14 @@ public class Method extends Node {
 
   public void setOverride(boolean isOverride) {
     this.isOverride = isOverride;
+  }
+
+  public boolean isFinal() {
+    return this.isFinal;
+  }
+
+  public void setFinal(boolean isFinal) {
+    this.isFinal = isFinal;
   }
 
   @Override

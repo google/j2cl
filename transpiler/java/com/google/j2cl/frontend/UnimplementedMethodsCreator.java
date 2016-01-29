@@ -88,6 +88,13 @@ public class UnimplementedMethodsCreator {
       parameters.add(parameter);
     }
     Block body = new Block();
-    return new Method(methodDescriptor, parameters, body, true, false, false);
+    return new Method(
+        methodDescriptor,
+        parameters,
+        body,
+        true,
+        false,
+        false,
+        JdtUtils.isFinal(methodBinding.getModifiers()));
   }
 }

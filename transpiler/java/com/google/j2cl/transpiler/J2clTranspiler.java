@@ -14,6 +14,7 @@
 package com.google.j2cl.transpiler;
 
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.JsInteropRestrictionsChecker;
 import com.google.j2cl.ast.visitors.ControlStatementFormatter;
 import com.google.j2cl.ast.visitors.CreateDefaultConstructorsVisitor;
 import com.google.j2cl.ast.visitors.CreateDevirtualizedStaticMethodsVisitor;
@@ -91,6 +92,7 @@ public class J2clTranspiler {
   private void run() {
     loadOptions();
     List<CompilationUnit> j2clUnits = convertUnits(createJdtUnits());
+    checkUnits(j2clUnits);
     normalizeUnits(j2clUnits);
     generateJavaScriptSources(j2clUnits);
     generateSourceMaps(j2clUnits);
@@ -119,6 +121,13 @@ public class J2clTranspiler {
         parser.parseFiles(options.getSourceFiles());
     maybeExitGracefully();
     return jdtUnitsByFilePath;
+  }
+
+  private void checkUnits(List<CompilationUnit> j2clUnits) {
+    for (CompilationUnit compilationUnit : j2clUnits) {
+      JsInteropRestrictionsChecker.check(compilationUnit, errors);
+    }
+    maybeExitGracefully();
   }
 
   private void normalizeUnits(List<CompilationUnit> j2clUnits) {

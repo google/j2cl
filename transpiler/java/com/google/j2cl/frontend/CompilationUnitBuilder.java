@@ -363,7 +363,8 @@ public class CompilationUnitBuilder {
               body,
               JdtUtils.isAbstract(methodDeclaration.getModifiers()),
               JdtUtils.isJsOverride(methodDeclaration.resolveBinding()),
-              false);
+              false,
+              JdtUtils.isFinal(methodDeclaration.getModifiers()));
       return method;
     }
 

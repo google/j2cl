@@ -536,7 +536,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //            + "cannot both use the same JavaScript name 'foo'.");
   //  }
   //
-  //  public void testCollidingSubclassMethodToMethodTwoLayerInterfaceJsTypeFails() 
+  //  public void testCollidingSubclassMethodToMethodTwoLayerInterfaceJsTypeFails()
   //        throws Exception {
   //    addSnippetImport("jsinterop.annotations.JsType");
   //    addSnippetClassDecl(
@@ -1454,150 +1454,130 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //            + " method 'void EntryPoint.Interface.someOtherMethod()'.");
   //  }
   //
-  //  public void testJsOverlayOnNativeJsTypeInterfaceSucceds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsOverlay");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) public interface Buggy {",
-  //        "  @JsOverlay Object obj = new Object();",
-  //        "  @JsOverlay default void someOverlayMethod(){}",
-  //        "}");
+  public void testJsOverlayOnNativeJsTypeInterfaceSucceds() throws Exception {
+    TranspileResult transpileResult =
+        transpileDirectory(
+            "jsinteroprestrictionschecker/jsoverlayonnativejstypeinterface",
+            OutputType.DIR,
+            extraArgs);
+    assertBuggySucceeds(transpileResult.errorLines);
+  }
+
+  public void testJsOverlayOnNativeJsTypeMemberSucceeds() throws Exception {
+    TranspileResult transpileResult =
+        transpileDirectory(
+            "jsinteroprestrictionschecker/jsoverlayonnativejstypemember",
+            OutputType.DIR,
+            extraArgs);
+    assertBuggySucceeds(transpileResult.errorLines);
+  }
+
+  public void testJsOverlayImplementingInterfaceMethodFails() throws Exception {
+    TranspileResult transpileResult =
+        transpileDirectory(
+            "jsinteroprestrictionschecker/jsoverlayimplementinginterfacemethod",
+            OutputType.DIR,
+            extraArgs);
+    assertBuggyFails(
+        transpileResult.errorLines,
+        "JsInterop restrictions error: JsOverlay method '$void Buggy.m()' cannot override a "
+            + "supertype method.",
+        "1 error(s)");
+  }
+
+  public void testJsOverlayOverridingSuperclassMethodFails() throws Exception {
+    TranspileResult transpileResult =
+        transpileDirectory(
+            "jsinteroprestrictionschecker/jsoverlayoverridingsuperclassmethod",
+            OutputType.DIR,
+            extraArgs);
+    assertBuggyFails(
+        transpileResult.errorLines,
+        "JsInterop restrictions error: JsOverlay method '$void Buggy.m()' cannot override a "
+            + "supertype method.",
+        "1 error(s)");
+  }
+
+  public void testJsOverlayOnNonFinalMethodAndInstanceFieldFails() throws Exception {
+    TranspileResult transpileResult =
+        transpileDirectory(
+            "jsinteroprestrictionschecker/jsoverlayonnonfinalmethodandinstancefield",
+            OutputType.DIR,
+            extraArgs);
+    assertBuggyFails(
+        transpileResult.errorLines,
+        // TODO: one more error about "Native JsType cannot have initializer." after check on
+        // native js type is implemented.
+        "JsInterop restrictions error: JsOverlay field '$int Buggy.f2' can only be static.",
+        "JsInterop restrictions error: JsOverlay method '$void Buggy.m()' cannot be non-final nor "
+            + "native.",
+        "2 error(s).");
+  }
+
+  public void testJsOverlayWithStaticInitializerSucceeds() throws Exception {
+    TranspileResult transpileResult =
+        transpileDirectory(
+            "jsinteroprestrictionschecker/jsoverlaywithstaticinitializer",
+            OutputType.DIR,
+            extraArgs);
+
+    assertBuggySucceeds(transpileResult.errorLines);
+  }
+
+  public void testJsOverlayOnNativeMethodFails() throws Exception {
+    TranspileResult transpileResult =
+        transpileDirectory(
+            "jsinteroprestrictionschecker/jsoverlayonnativemethod", OutputType.DIR, extraArgs);
+
+    assertBuggyFails(
+        transpileResult.errorLines,
+        "JsInterop restrictions error: JsOverlay method '$void Buggy.m1()' cannot be non-final nor "
+            + "native.",
+        "JsInterop restrictions error: JsOverlay method '$void Buggy.m2()' cannot be non-final nor "
+            + "native.",
+        "2 error(s).");
+  }
+
+  //      // Not applicable to J2cl
+  //      public void testJsOverlayOnJsoMethodSucceeds() throws Exception {
+  //        addSnippetImport("com.google.gwt.core.client.JavaScriptObject");
+  //        addSnippetImport("jsinterop.annotations.JsOverlay");
+  //        addSnippetClassDecl(
+  //            "public static class Buggy extends JavaScriptObject {",
+  //            "  protected Buggy() { }",
+  //            "  @JsOverlay public final void m() { }",
+  //            "}");
   //
-  //    assertBuggySucceeds();
-  //  }
+  //        assertBuggySucceeds();
+  //      }
   //
-  //  public void testJsOverlayOnNativeJsTypeMemberSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsOverlay");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) public static class Buggy {",
-  //        "  @JsOverlay public static Object object = new Object();",
-  //        "  @JsOverlay public static void m() { }",
-  //        "  @JsOverlay public static void m(int x) { }",
-  //        "  @JsOverlay private static void m(boolean x) { }",
-  //        "  @JsOverlay public final void n() { }",
-  //        "  @JsOverlay public final void n(int x) { }",
-  //        "  @JsOverlay private final void n(boolean x) { }",
-  //        "  @JsOverlay final void o() { }",
-  //        "  @JsOverlay protected final void p() { }",
-  //        "}");
+  //      // Not applicable to J2cl
+  //      public void testImplicitJsOverlayOnJsoMethodSucceeds() throws Exception {
+  //        addSnippetImport("com.google.gwt.core.client.JavaScriptObject");
+  //        addSnippetImport("jsinterop.annotations.JsOverlay");
+  //        addSnippetClassDecl(
+  //            "public static class Buggy extends JavaScriptObject {",
+  //            "  protected Buggy() { }",
+  //            "  public final void m() { }",
+  //            "}");
   //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testJsOverlayImplementingInterfaceMethodFails() {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsOverlay");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) public interface IBuggy {",
-  //        "  void m();",
-  //        "}",
-  //        "@JsType(isNative=true) public static class Buggy implements IBuggy {",
-  //        "  @JsOverlay public void m() { }",
-  //        "}");
-  //
-  //    assertBuggyFails("Line 9: JsOverlay method 'void EntryPoint.Buggy.m()' cannot override a "
-  //        + "supertype method.");
-  //  }
-  //
-  //  public void testJsOverlayOverridingSuperclassMethodFails() {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsOverlay");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) public static class Super {",
-  //        "  public native void m();",
-  //        "}",
-  //        "@JsType(isNative=true) public static class Buggy extends Super {",
-  //        "  @JsOverlay public void m() { }",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //    "Line 9: JsOverlay method 'void EntryPoint.Buggy.m()' cannot override a supertype method.");
-  //  }
-  //
-  //  public void testJsOverlayOnNonFinalMethodAndInstanceFieldFails() {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsOverlay");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) public static class Buggy {",
-  //        "  @JsOverlay public final int f2 = 2;",
-  //        "  @JsOverlay public void m() { }",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //        "Line 5: Native JsType 'EntryPoint.Buggy' cannot have initializer.",
-  //        "Line 6: JsOverlay field 'int EntryPoint.Buggy.f2' can only be static.",
-  //        "Line 7: JsOverlay method 'void EntryPoint.Buggy.m()' cannot be non-final nor native.");
-  //  }
-  //
-  //  public void testJsOverlayWithStaticInitializerSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsOverlay");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) public static class Buggy {",
-  //        "  @JsOverlay public final static Object f1 = new Object();",
-  //        "  @JsOverlay public static int f2 = 2;",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testJsOverlayOnNativeMethodFails() {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsOverlay");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) public static class Buggy {",
-  //        "  @JsOverlay public static final native void m1();",
-  //        "  @JsOverlay public static final native void m2()/*-{}-*/;",
-  //        "  @JsOverlay public final native void m3();",
-  //        "  @JsOverlay public final native void m4()/*-{}-*/;",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //        "Line 6: JsOverlay method 'void EntryPoint.Buggy.m1()' cannot be non-final nor native.",
-  //        "Line 7: JSNI method 'void EntryPoint.Buggy.m2()' is not allowed in a native JsType.",
-  //        "Line 8: JsOverlay method 'void EntryPoint.Buggy.m3()' cannot be non-final nor native.",
-  //        "Line 9: JSNI method 'void EntryPoint.Buggy.m4()' is not allowed in a native JsType.");
-  //  }
-  //
-  //  public void testJsOverlayOnJsoMethodSucceeds() throws Exception {
-  //    addSnippetImport("com.google.gwt.core.client.JavaScriptObject");
-  //    addSnippetImport("jsinterop.annotations.JsOverlay");
-  //    addSnippetClassDecl(
-  //        "public static class Buggy extends JavaScriptObject {",
-  //        "  protected Buggy() { }",
-  //        "  @JsOverlay public final void m() { }",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testImplicitJsOverlayOnJsoMethodSucceeds() throws Exception {
-  //    addSnippetImport("com.google.gwt.core.client.JavaScriptObject");
-  //    addSnippetImport("jsinterop.annotations.JsOverlay");
-  //    addSnippetClassDecl(
-  //        "public static class Buggy extends JavaScriptObject {",
-  //        "  protected Buggy() { }",
-  //        "  public final void m() { }",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testJsOverlayOnNonNativeJsTypeFails() {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsOverlay");
-  //    addSnippetClassDecl(
-  //        "@JsType public static class Buggy {",
-  //        "  @JsOverlay public static final int f = 2;",
-  //        "  @JsOverlay public final void m() { };",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //        "Line 6: JsOverlay 'int EntryPoint.Buggy.f' can only be declared in a native type.",
-  //        "Line 7: JsOverlay 'void EntryPoint.Buggy.m()' can only be declared in a native type.");
-  //  }
-  //
+  //        assertBuggySucceeds();
+  //      }
+
+  public void testJsOverlayOnNonNativeJsTypeFails() throws Exception {
+    TranspileResult transpileResult =
+        transpileDirectory(
+            "jsinteroprestrictionschecker/jsoverlayonnonnativejstype", OutputType.DIR, extraArgs);
+
+    assertBuggyFails(
+        transpileResult.errorLines,
+        "JsInterop restrictions error: JsOverlay '$int Buggy.F' can only be declared in a native "
+            + "type.",
+        "JsInterop restrictions error: JsOverlay '$void Buggy.m()' can only be declared in a native"
+            + " type.",
+        "2 error(s).");
+  }
+
   //  public void testJsTypeExtendsNativeJsTypeSucceeds() throws Exception {
   //    addSnippetImport("jsinterop.annotations.JsType");
   //    addSnippetClassDecl(

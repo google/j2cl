@@ -363,7 +363,12 @@ public class AstUtils {
             : new ReturnStatement(
                 forwardingMethodCall, exposedMethodDescriptor.getReturnTypeDescriptor());
     return Method.createSynthetic(
-        forwardingMethodDescriptor, parameters, new Block(Arrays.asList(statement)), false, true);
+        forwardingMethodDescriptor,
+        parameters,
+        new Block(Arrays.asList(statement)),
+        false,
+        true,
+        false); // is overridden, thus not final.
   }
 
   /**

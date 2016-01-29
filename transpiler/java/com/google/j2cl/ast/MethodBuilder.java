@@ -36,6 +36,7 @@ public class MethodBuilder {
   private boolean isAbstract;
   private boolean isOverride;
   private boolean isSynthetic;
+  private boolean isFinal;
 
   public static MethodBuilder from(Method method) {
     MethodBuilder builder = new MethodBuilder();
@@ -45,6 +46,7 @@ public class MethodBuilder {
     builder.isAbstract = method.isAbstract();
     builder.isOverride = method.isOverride();
     builder.isSynthetic = method.isSynthetic();
+    builder.isFinal = method.isFinal();
     return builder;
   }
 
@@ -93,6 +95,7 @@ public class MethodBuilder {
         new Block(statements),
         isAbstract,
         isOverride,
-        isSynthetic);
+        isSynthetic,
+        isFinal);
   }
 }

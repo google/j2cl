@@ -42,7 +42,9 @@ public class Errors {
     ERR_NATIVE_UNUSED_NATIVE_SOURCE("native JavaScript file not used"),
     ERR_CANNOT_CREATE_TEMP_DIR("cannot create temporary directory"),
     ERR_CANNOT_OPEN_FILE("cannot open file"),
-    ERR_ERROR("error"); // used for customized error message.
+    ERR_JSINTEROP_RESTRICTIONS_ERROR("JsInterop restrictions error"),
+    ERR_ERROR("error"),
+    ; // used for customized error message.
     private String errorMessage;
 
     Error(String errorMessage) {
@@ -84,9 +86,9 @@ public class Errors {
     errorMessages.add(error.getErrorMessage());
   }
 
-  public void error(Error error, String detailMessage) {
+  public void error(Error error, String detailMessage, Object... args) {
     errorCount++;
-    errorMessages.add(error.getErrorMessage() + ": " + detailMessage);
+    errorMessages.add(error.getErrorMessage() + ": " + String.format(detailMessage, args));
   }
 
   /**
