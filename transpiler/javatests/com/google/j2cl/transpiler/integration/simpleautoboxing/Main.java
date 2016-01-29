@@ -247,6 +247,11 @@ public class Main {
     assert l == 1L;
     assert f == 1f;
     assert d == 1d;
+
+    for (int j = 0; j < 200; j++) {
+      b++;
+    }
+    assert b == -55;
   }
 
   public void testTernary() {

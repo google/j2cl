@@ -31,6 +31,11 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
  * Inserts a widening operation when a smaller primitive type is being put into a large primitive
  * type slot in assignment, binary numeric promotion, cast and method invocation conversion
  * contexts.
+ *
+ * TODO: this pass removes NOOP casts (e.g. int -> float), which may cause wrong side effect if the
+ * later passes depend on the cast type. Currently we carefully order these passes in J2clTranspiler
+ * to ensure all conversion contexts are correctly caught. But if it turns out the side effect does
+ * lead to wrong result, we should remove the NOOP casts in a separate pass.
  */
 public class InsertWideningPrimitiveConversionVisitor extends ConversionContextVisitor {
 

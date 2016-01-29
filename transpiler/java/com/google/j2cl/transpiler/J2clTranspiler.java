@@ -153,12 +153,12 @@ public class J2clTranspiler {
       SplitCompoundLongAssignmentsVisitor.applyTo(j2clUnit);
       InsertUnboxingConversionVisitor.applyTo(j2clUnit);
       NormalizeLongsVisitor.applyTo(j2clUnit);
+      InsertBoxingConversionVisitor.applyTo(j2clUnit);
       InsertNarrowingPrimitiveConversionVisitor.applyTo(j2clUnit);
       InsertWideningPrimitiveConversionVisitor.applyTo(j2clUnit);
       // TODO: InsertWideningAndNarrowingPrimitiveConversionVisitor.applyTo(j2clUnit);
       InsertUnderflowOverflowConversionVisitor.applyTo(j2clUnit);
       FixBooleanOperatorsPass.applyTo(j2clUnit);
-      InsertBoxingConversionVisitor.applyTo(j2clUnit);
       InsertStringConversionVisitor.applyTo(j2clUnit);
       NormalizeCastsVisitor.applyTo(j2clUnit);
       NormalizeInstanceOfsVisitor.applyTo(j2clUnit);

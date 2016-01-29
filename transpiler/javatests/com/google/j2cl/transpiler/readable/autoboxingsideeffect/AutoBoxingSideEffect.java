@@ -31,5 +31,8 @@ public class AutoBoxingSideEffect {
     Integer f = i++;
     f = foo++;
     f = getWithSideEffect().foo++;
+
+    Byte b = 0;
+    b++;
   }
 }

@@ -11,10 +11,12 @@ goog.module('gen.com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBo
 let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Byte = goog.forwardDeclare('gen.java.lang.Byte$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let Integer = goog.forwardDeclare('gen.java.lang.Integer$impl');
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.primitives.Primitives$impl');
 
 
 class AutoBoxingSideEffect extends Object {
@@ -133,6 +135,9 @@ class AutoBoxingSideEffect extends Object {
                      .m_intValue() +
                  1),
          $Numbers.$v);
+    let b = Integer.m_valueOf__int(0);
+    ($Numbers.$v = b,
+     b = Byte.m_valueOf__byte($Primitives.$toByte(b.m_byteValue() + 1)));
   }
 
   /**
@@ -183,10 +188,12 @@ class AutoBoxingSideEffect extends Object {
    * @public
    */
   static $clinit() {
+    Byte = goog.module.get('gen.java.lang.Byte$impl');
     Class = goog.module.get('gen.java.lang.Class$impl');
     Integer = goog.module.get('gen.java.lang.Integer$impl');
     $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $Primitives = goog.module.get('vmbootstrap.primitives.Primitives$impl');
     Object.$clinit();
   }
 
