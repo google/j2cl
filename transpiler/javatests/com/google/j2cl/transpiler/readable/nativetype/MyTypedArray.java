@@ -9,8 +9,13 @@ public class MyTypedArray<T> {
   private int length;
 
   @JsOverlay
-  public int size() {
+  public final int size() {
     return length;
+  }
+
+  @JsOverlay
+  public final T get(int index) {
+    return null;
   }
 
   public int publicField;
@@ -27,7 +32,7 @@ public class MyTypedArray<T> {
   protected native void protectedMethod();
 
   @JsOverlay
-  public void useFieldsAndMethods() {
+  public final void useFieldsAndMethods() {
     @SuppressWarnings("unused")
     int value = publicField + privateField + packageField + protectedField;
     publicMethod();

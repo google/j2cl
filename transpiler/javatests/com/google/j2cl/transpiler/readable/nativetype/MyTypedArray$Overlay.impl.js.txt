@@ -15,6 +15,7 @@ let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class MyTypedArray$Overlay {
   /**
+   * @template C_T
    * @param {$MyTypedArray<C_T>} $thisArg
    * @return {number}
    * @public
@@ -26,6 +27,20 @@ class MyTypedArray$Overlay {
   }
 
   /**
+   * @template C_T
+   * @param {$MyTypedArray<C_T>} $thisArg
+   * @param {number} index
+   * @return {C_T}
+   * @public
+   */
+  static m_get__com_google_j2cl_transpiler_readable_nativetype_MyTypedArray__int(
+      $thisArg, index) {
+    MyTypedArray$Overlay.$clinit();
+    return null;
+  }
+
+  /**
+   * @template C_T
    * @param {$MyTypedArray<C_T>} $thisArg
    * @return {void}
    * @public
