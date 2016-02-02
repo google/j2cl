@@ -195,6 +195,7 @@ def integration_test(
             "-generateJsInteropExports",
             "-ea",
         ],
+        shard_count=1,
         module_target=":gwt_module",
         tags=["manual"],
     )

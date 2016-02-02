@@ -18,18 +18,21 @@ package com.google.j2cl.frontend;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.ImportDeclaration;
+import org.eclipse.jdt.core.dom.Name;
 import org.eclipse.jdt.core.dom.QualifiedName;
 import org.eclipse.jdt.core.dom.SimpleName;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Collects unused imports, so they can be commented out, {@see JavaPreprocessor}.
  */
 public class UnusedImportsNodeCollector extends ASTVisitor {
   private List<ImportDeclaration> unusedImports = new ArrayList<>();
-  private List<String> referencedNames = new ArrayList<>();
+  private Set<String> referencedNames = new HashSet<>();
 
   @Override
   public boolean visit(ImportDeclaration importDeclaration) {
@@ -39,7 +42,13 @@ public class UnusedImportsNodeCollector extends ASTVisitor {
 
   @Override
   public boolean visit(QualifiedName qualifiedName) {
-    referencedNames.add(qualifiedName.getQualifier().getFullyQualifiedName());
+    // We need the first component of the qualified name for example for Foo.Bar.baz
+    // we are looking for the import of Foo.
+    Name qualifier = qualifiedName.getQualifier();
+    while (!qualifier.isSimpleName()) {
+      qualifier = ((QualifiedName) qualifier).getQualifier();
+    }
+    referencedNames.add(qualifier.getFullyQualifiedName());
     return false;
   }
 
