@@ -33,19 +33,11 @@ public class Method extends Node {
   @Visitable Block body;
   private boolean isAbstract;
   private boolean isOverride;
-  /**
-   * Synthetic method is output with JsDoc comment 'Synthetic method.' for better readability.
-   */
-  private boolean isSynthetic;
+  private String jsDocDescription;
   private boolean isFinal;
 
   public Method(MethodDescriptor methodDescriptor, List<Variable> parameters, Block body) {
-    Preconditions.checkNotNull(methodDescriptor);
-    Preconditions.checkNotNull(parameters);
-    Preconditions.checkNotNull(body);
-    this.methodDescriptor = methodDescriptor;
-    this.parameters.addAll(parameters);
-    this.body = body;
+    this(methodDescriptor, parameters, body, false, false, false, null);
   }
 
   public Method(
@@ -54,23 +46,21 @@ public class Method extends Node {
       Block body,
       boolean isAbstract,
       boolean isOverride,
-      boolean isSynthetic,
-      boolean isFinal) {
-    this(methodDescriptor, parameters, body);
+      boolean isFinal,
+      String jsDocDescription) {
+    Preconditions.checkNotNull(methodDescriptor);
+    Preconditions.checkNotNull(parameters);
+    Preconditions.checkNotNull(body);
+    this.methodDescriptor = methodDescriptor;
+    this.parameters.addAll(parameters);
+    this.body = body;
     this.isAbstract = isAbstract;
     this.isOverride = isOverride;
-    this.isSynthetic = isSynthetic;
     this.isFinal = isFinal;
-  }
-
-  public static Method createSynthetic(
-      MethodDescriptor methodDescriptor,
-      List<Variable> parameters,
-      Block body,
-      boolean isAbstract,
-      boolean isOverride,
-      boolean isFinal) {
-    return new Method(methodDescriptor, parameters, body, isAbstract, isOverride, true, isFinal);
+    this.jsDocDescription = jsDocDescription;
+    if (jsDocDescription == null && isConstructor()) {
+      this.jsDocDescription = "Initializes instance fields for a particular Java constructor.";
+    }
   }
 
   public MethodDescriptor getDescriptor() {
@@ -91,10 +81,6 @@ public class Method extends Node {
 
   public boolean isNative() {
     return methodDescriptor.isNative();
-  }
-
-  public boolean isSynthetic() {
-    return isSynthetic;
   }
 
   public void setBody(Block body) {
@@ -123,6 +109,10 @@ public class Method extends Node {
 
   public void setFinal(boolean isFinal) {
     this.isFinal = isFinal;
+  }
+
+  public String getJsDocDescription() {
+    return jsDocDescription;
   }
 
   @Override

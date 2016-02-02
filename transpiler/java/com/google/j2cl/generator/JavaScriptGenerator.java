@@ -15,10 +15,8 @@
  */
 package com.google.j2cl.generator;
 
+import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JavaType;
-import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;
@@ -27,11 +25,6 @@ import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
 import com.google.j2cl.generator.visitors.ImportUtils;
 import com.google.j2cl.generator.visitors.VariableAliasesGatheringVisitor;
 
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
-
-import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -42,58 +35,24 @@ import java.util.Set;
  */
 public abstract class JavaScriptGenerator extends AbstractSourceGenerator {
   protected final JavaType javaType;
-  protected final VelocityEngine velocityEngine;
-  protected SourceGenerator sourceGenerator;
   protected GenerationEnvironment environment;
   protected Map<ImportCategory, Set<Import>> importsByCategory;
+  protected SourceBuilder sb;
 
-  public JavaScriptGenerator(Errors errors, JavaType javaType, VelocityEngine velocityEngine) {
+  public JavaScriptGenerator(Errors errors, JavaType javaType) {
     super(errors);
     this.javaType = javaType;
-    this.velocityEngine = velocityEngine;
-  }
-
-  @Override
-  public String toSource() {
-    VelocityContext velocityContext = createContext();
-    StringWriter outputBuffer = new StringWriter();
-
-    boolean success =
-        velocityEngine.mergeTemplate(
-            getTemplateFilePath(), StandardCharsets.UTF_8.name(), velocityContext, outputBuffer);
-
-    if (!success) {
-      errors.error(Errors.Error.ERR_CANNOT_GENERATE_OUTPUT);
-      return "";
-    }
-    return outputBuffer.toString();
-  }
-
-  protected VelocityContext createContext() {
-    VelocityContext context = new VelocityContext();
-
+    sb = new SourceBuilder();
     importsByCategory = ImportGatheringVisitor.gatherImports(javaType);
-
     List<Import> sortedImports = ImportUtils.getSortedImports(importsByCategory);
-
     Map<Variable, String> aliasByVariable =
         VariableAliasesGatheringVisitor.gatherVariableAliases(sortedImports, javaType);
-
     environment = new GenerationEnvironment(sortedImports, aliasByVariable);
-    sourceGenerator = new SourceGenerator(environment);
+  }
 
-    TypeDescriptor selfTypeDescriptor = javaType.getDescriptor().getRawTypeDescriptor();
-    context.put("classType", javaType);
-    context.put("selfImport", new Import(selfTypeDescriptor.getSimpleName(), selfTypeDescriptor));
-    context.put("GeneratorUtils", GeneratorUtils.class);
-    context.put("ManglingNameUtils", ManglingNameUtils.class);
-    context.put(
-        "eagerImports", ImportUtils.sortedList(importsByCategory.get(ImportCategory.EAGER)));
-    context.put("lazyImports", ImportUtils.sortedList(importsByCategory.get(ImportCategory.LAZY)));
-    context.put("sourceGenerator", sourceGenerator);
-    context.put(
-        "javaLangClassTypeDecriptor", TypeDescriptors.get().javaLangClass.getRawTypeDescriptor());
-    context.put("nativeUtilTypeDecriptor", BootstrapType.NATIVE_UTIL.getDescriptor());
-    return context;
+  // TODO: This is almost exclusively used to transform type descriptors, once we move field
+  // initialization to the ast we can change this to getDescriptorName(TypeDescriptor descriptor)
+  public String expressionToString(Expression expression) {
+    return ExpressionTransformer.transform(expression, environment);
   }
 }

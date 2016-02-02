@@ -48,6 +48,4 @@ public abstract class AbstractSourceGenerator {
   public abstract String toSource();
 
   public abstract String getSuffix();
-
-  public abstract String getTemplateFilePath();
 }

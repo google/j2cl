@@ -17,10 +17,7 @@ package com.google.j2cl.generator;
 
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JavaType;
-import com.google.j2cl.common.VelocityUtil;
 import com.google.j2cl.errors.Errors;
-
-import org.apache.velocity.app.VelocityEngine;
 
 import java.nio.charset.Charset;
 import java.nio.file.FileSystem;
@@ -43,8 +40,6 @@ public class JavaScriptGeneratorStage {
   private Errors errors;
   private FileSystem outputFileSystem;
   private String outputLocationPath;
-
-  private final VelocityEngine velocityEngine = VelocityUtil.createEngine();
 
   public JavaScriptGeneratorStage(
       Charset charset,
@@ -80,8 +75,7 @@ public class JavaScriptGeneratorStage {
           continue;
         }
 
-        JavaScriptImplGenerator jsImplGenerator =
-            new JavaScriptImplGenerator(errors, javaType, velocityEngine);
+        JavaScriptImplGenerator jsImplGenerator = new JavaScriptImplGenerator(errors, javaType);
 
         // If the java type contains any native methods, search for matching native file.
         if (javaType.containsNativeMethods()) {
@@ -123,7 +117,7 @@ public class JavaScriptGeneratorStage {
         jsImplGenerator.writeToFile(absolutePathForImpl, charset);
 
         JavaScriptHeaderGenerator jsHeaderGenerator =
-            new JavaScriptHeaderGenerator(errors, javaType, velocityEngine);
+            new JavaScriptHeaderGenerator(errors, javaType);
         Path absolutePathForHeader =
             GeneratorUtils.getAbsolutePath(
                 outputFileSystem,

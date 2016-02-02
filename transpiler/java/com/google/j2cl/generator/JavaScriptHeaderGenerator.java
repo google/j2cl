@@ -16,23 +16,57 @@
 package com.google.j2cl.generator;
 
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.errors.Errors;
-
-import org.apache.velocity.app.VelocityEngine;
+import com.google.j2cl.generator.visitors.Import;
+import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
+import com.google.j2cl.generator.visitors.ImportUtils;
 
 /**
  * Generates JavaScript source header files.
  */
 public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
 
-  public JavaScriptHeaderGenerator(
-      Errors errors, JavaType javaType, VelocityEngine velocityEngine) {
-    super(errors, javaType, velocityEngine);
+  public JavaScriptHeaderGenerator(Errors errors, JavaType javaType) {
+    super(errors, javaType);
   }
 
   @Override
-  public String getTemplateFilePath() {
-    return "com/google/j2cl/generator/JsTypeHeader.vm";
+  public String toSource() {
+    TypeDescriptor selfTypeDescriptor = javaType.getDescriptor().getRawTypeDescriptor();
+    Import selfImport = new Import(selfTypeDescriptor.getSimpleName(), selfTypeDescriptor);
+    String binaryName = javaType.getDescriptor().getRawTypeDescriptor().getBinaryName();
+    sb = new SourceBuilder();
+    sb.appendln("/**");
+    sb.appendln(" * Header transpiled from %s.", binaryName);
+    sb.appendln(" */");
+    sb.appendln("goog.module('%s');", selfImport.getHeaderModulePath());
+    sb.newLine();
+    sb.newLine();
+    sb.appendln("// Imports headers for both eager and lazy dependencies to ensure that");
+    sb.appendln("// all files are included in the dependency tree.");
+
+    // goog.require(...) for eager imports.
+    for (Import eagerImport : ImportUtils.sortedList(importsByCategory.get(ImportCategory.EAGER))) {
+      String alias = eagerImport.getAlias();
+      String path = eagerImport.getHeaderModulePath();
+      sb.appendln("let _%s = goog.require('%s');", alias, path);
+    }
+    // goog.require(...) for lazy imports.
+    for (Import eagerImport : ImportUtils.sortedList(importsByCategory.get(ImportCategory.LAZY))) {
+      String alias = eagerImport.getAlias();
+      String path = eagerImport.getHeaderModulePath();
+      sb.appendln("let _%s = goog.require('%s');", alias, path);
+    }
+    sb.newLine();
+    sb.newLine();
+
+    String className = expressionToString(javaType.getDescriptor());
+    String implementationPath = selfImport.getImplModulePath();
+    sb.appendln("// Re-exports the implementation.");
+    sb.appendln("var %s = goog.require('%s');", className, implementationPath);
+    sb.appendln("exports = %s;", className);
+    return sb.build();
   }
 
   @Override

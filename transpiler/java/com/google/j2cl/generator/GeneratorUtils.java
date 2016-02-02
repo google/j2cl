@@ -21,20 +21,19 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryOperator;
-import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.Method;
+import com.google.j2cl.ast.MethodBuilder;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
+import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.generator.visitors.Import;
 
 import java.io.File;
@@ -85,7 +84,7 @@ public class GeneratorUtils {
   /**
    * Returns the method header including (static) (getter/setter) methodName(parametersList).
    */
-  public static String getMethodHeader(Method method, SourceGenerator sourceGenerator) {
+  public static String getMethodHeader(Method method, GenerationEnvironment environment) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
     String staticQualifier = methodDescriptor.isStatic() ? "static" : null;
     String getterSetterPrefix =
@@ -93,7 +92,7 @@ public class GeneratorUtils {
             ? "get"
             : methodDescriptor.isJsPropertySetter() ? "set" : null;
     String methodName = ManglingNameUtils.getMangledName(methodDescriptor);
-    String parameterList = getParameterList(method, sourceGenerator);
+    String parameterList = getParameterList(method, environment);
     return Joiner.on(" ")
         .skipNulls()
         .join(staticQualifier, getterSetterPrefix, methodName + "(" + parameterList + ")");
@@ -104,7 +103,7 @@ public class GeneratorUtils {
    * They are of the form: {parameterType} parameterName
    */
   public static List<String> getParameterAnnotationsJsDoc(
-      final Method method, final SourceGenerator sourceGenerator) {
+      final Method method, final GenerationEnvironment environment) {
     final List<Variable> variables = method.getParameters();
     return Lists.transform(
         variables,
@@ -113,42 +112,51 @@ public class GeneratorUtils {
           public String apply(Variable variable) {
             boolean isLast = variable == variables.get(variables.size() - 1);
             TypeDescriptor parameterTypeDescriptor = variable.getTypeDescriptor();
-            String name = sourceGenerator.toSource(variable);
+            String name = environment.aliasForVariable(variable);
             if (method.getDescriptor().isJsMethodVarargs() && isLast) {
               // The parameter is a js var arg so we convert the type to an array
               Preconditions.checkArgument(parameterTypeDescriptor.isArray());
               String typeName =
-                  sourceGenerator.getJsDocName(
-                      parameterTypeDescriptor.getComponentTypeDescriptor());
+                  JsDocNameUtils.getJsDocName(
+                      parameterTypeDescriptor.getComponentTypeDescriptor(), environment);
               return String.format("{...%s} %s", typeName, name);
             } else {
-              String typeName = sourceGenerator.getJsDocName(parameterTypeDescriptor);
+              String typeName = JsDocNameUtils.getJsDocName(parameterTypeDescriptor, environment);
               return String.format("{%s} %s", typeName, name);
             }
           }
         });
   }
 
-  public static String getParameterList(Method method, final SourceGenerator sourceGenerator) {
-    return getSourceList(method.getParameters(), sourceGenerator);
-  }
-
-  public static <T extends Node> String getSourceList(
-      List<T> nodes, final SourceGenerator sourceGenerator) {
-    List<String> sourceList =
+  public static String getParameterList(Method method, final GenerationEnvironment environment) {
+    List<String> parameterNameList =
         Lists.transform(
-            nodes,
-            new Function<T, String>() {
+            method.getParameters(),
+            new Function<Variable, String>() {
               @Override
-              public String apply(T node) {
-                return sourceGenerator.toSource(node);
+              public String apply(Variable variable) {
+                return environment.aliasForVariable(variable);
               }
             });
-    return Joiner.on(", ").join(sourceList);
+    return Joiner.on(", ").join(parameterNameList);
+  }
+
+  public static String getArgumentList(
+      List<Expression> arguments, final GenerationEnvironment environment) {
+    List<String> parameterNameList =
+        Lists.transform(
+            arguments,
+            new Function<Expression, String>() {
+              @Override
+              public String apply(Expression expression) {
+                return ExpressionTransformer.transform(expression, environment);
+              }
+            });
+    return Joiner.on(", ").join(parameterNameList);
   }
 
   public static boolean isVoid(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.getClassName().equals("void");
+    return typeDescriptor == TypeDescriptors.get().primitiveVoid;
   }
 
   /**
@@ -268,12 +276,12 @@ public class GeneratorUtils {
         || typeDescriptor == TypeDescriptors.get().javaLangNumber;
   }
 
-  public static String getExtendsClause(JavaType javaType, SourceGenerator sourceGenerator) {
+  public static String getExtendsClause(JavaType javaType, GenerationEnvironment environment) {
     TypeDescriptor superTypeDescriptor = javaType.getSuperTypeDescriptor();
     if (superTypeDescriptor == null) {
       return "";
     }
-    String superTypeName = sourceGenerator.toSource(superTypeDescriptor);
+    String superTypeName = ExpressionTransformer.transform(superTypeDescriptor, environment);
     return String.format("extends %s ", superTypeName);
   }
 
@@ -291,18 +299,17 @@ public class GeneratorUtils {
    * constructor, the this() call should have been invoked in constructor and should be removed in
    * $ctor.
    */
-  public static Block getCtorBody(Method method) {
-    TypeDescriptor currentTypeDescriptor = method.getDescriptor().getEnclosingClassTypeDescriptor();
+  public static Method createNonPrimaryCtor(Method ctor) {
+    TypeDescriptor currentTypeDescriptor = ctor.getDescriptor().getEnclosingClassTypeDescriptor();
     TypeDescriptor superclassTypeDescriptor = currentTypeDescriptor.getSuperTypeDescriptor();
     boolean removeFirstStatement =
-        AstUtils.hasThisCall(method)
+        AstUtils.hasThisCall(ctor)
             ? currentTypeDescriptor.subclassesJsConstructorClass()
             : superclassTypeDescriptor.subclassesJsConstructorClass();
     if (removeFirstStatement) {
-      List<Statement> statements = method.getBody().getStatements();
-      return new Block(statements.subList(1, statements.size()));
+      return MethodBuilder.from(ctor).removeStatement(0).build();
     }
-    return method.getBody();
+    return ctor;
   }
 
   /**
@@ -312,7 +319,7 @@ public class GeneratorUtils {
    * should be invoked by the 'new A' statement in the $create factory method, thus passing the
    * arguments here.
    */
-  public static String getNewInstanceArguments(Method method, SourceGenerator sourceGenerator) {
+  public static String getNewInstanceArguments(Method method, GenerationEnvironment environment) {
     TypeDescriptor typeDescriptor = method.getDescriptor().getEnclosingClassTypeDescriptor();
     if (!typeDescriptor.subclassesJsConstructorClass()) {
       return "";
@@ -320,9 +327,9 @@ public class GeneratorUtils {
     MethodCall constructorInvocation = AstUtils.getConstructorInvocation(method);
     Preconditions.checkNotNull(
         constructorInvocation,
-        "constructor %s should delegate to the delegated constructor",
+        "constructor %s must delegate to the primary constructor",
         ManglingNameUtils.getConstructorMangledName(method.getDescriptor()));
-    return getSourceList(constructorInvocation.getArguments(), sourceGenerator);
+    return getArgumentList(constructorInvocation.getArguments(), environment);
   }
 
   /**
@@ -332,7 +339,7 @@ public class GeneratorUtils {
    * arguments to the super call here.
    */
   public static String getSuperArguments(
-      Method primaryConstructor, SourceGenerator sourceGenerator) {
+      Method primaryConstructor, GenerationEnvironment environment) {
     MethodCall constructorInvocation = AstUtils.getConstructorInvocation(primaryConstructor);
     if (constructorInvocation == null) {
       // This case happens when the super class is a native type, and we do not synthesize the
@@ -343,7 +350,18 @@ public class GeneratorUtils {
             .getTarget()
             .getEnclosingClassTypeDescriptor()
             .subclassesJsConstructorClass()
-        ? GeneratorUtils.getSourceList(constructorInvocation.getArguments(), sourceGenerator)
+        ? getArgumentList(constructorInvocation.getArguments(), environment)
         : "";
+  }
+
+  /**
+   * The ctor visibility should never be public since it is not intended to be called externally
+   * unless a super class calls it as part of the ctor chain.
+   */
+  public static String visibilityForMethod(Method method) {
+    if (method.isConstructor() && method.getDescriptor().getVisibility() == Visibility.PUBLIC) {
+      return "protected";
+    }
+    return method.getDescriptor().getVisibility().jsText;
   }
 }

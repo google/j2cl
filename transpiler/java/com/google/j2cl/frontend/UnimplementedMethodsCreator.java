@@ -94,7 +94,7 @@ public class UnimplementedMethodsCreator {
         body,
         true,
         false,
-        false,
-        JdtUtils.isFinal(methodBinding.getModifiers()));
+        JdtUtils.isFinal(methodBinding.getModifiers()),
+        null);
   }
 }

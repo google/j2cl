@@ -35,7 +35,7 @@ public class MethodBuilder {
   private List<Statement> statements = new ArrayList<>();
   private boolean isAbstract;
   private boolean isOverride;
-  private boolean isSynthetic;
+  private String jsDocDescription;
   private boolean isFinal;
 
   public static MethodBuilder from(Method method) {
@@ -45,7 +45,7 @@ public class MethodBuilder {
     builder.statements = Lists.newArrayList(method.getBody().getStatements());
     builder.isAbstract = method.isAbstract();
     builder.isOverride = method.isOverride();
-    builder.isSynthetic = method.isSynthetic();
+    builder.jsDocDescription = method.getJsDocDescription();
     builder.isFinal = method.isFinal();
     return builder;
   }
@@ -72,11 +72,26 @@ public class MethodBuilder {
     return this;
   }
 
+  public MethodBuilder removeStatement(int index) {
+    statements.remove(index);
+    return this;
+  }
+
   public MethodBuilder enclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
     this.originalMethodDescriptor =
         MethodDescriptorBuilder.from(originalMethodDescriptor)
             .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
             .build();
+    return this;
+  }
+
+  public MethodBuilder isOverride(boolean isOverride) {
+    this.isOverride = isOverride;
+    return this;
+  }
+
+  public MethodBuilder jsDocDescription(String jsDocDescription) {
+    this.jsDocDescription = jsDocDescription;
     return this;
   }
 
@@ -95,7 +110,7 @@ public class MethodBuilder {
         new Block(statements),
         isAbstract,
         isOverride,
-        isSynthetic,
-        isFinal);
+        isFinal,
+        jsDocDescription);
   }
 }

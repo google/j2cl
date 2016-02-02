@@ -616,8 +616,8 @@ public class JdtUtils {
             new Block(Arrays.asList(statement)),
             false,
             true,
-            false,
-            true); // cannot be overridden, thus is final.
+            true, // cannot be overridden, thus is final.
+            null);
     return samMethod;
   }
 

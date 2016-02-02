@@ -49,8 +49,15 @@ import java.util.List;
  * Transforms Statements to JavaScript source strings.
  */
 public class StatementTransformer {
-  public static void transform(
-      Statement node, final GenerationEnvironment environment, final SourceBuilder builder) {
+  SourceBuilder builder;
+  GenerationEnvironment environment;
+
+  public StatementTransformer(SourceBuilder builder, GenerationEnvironment environment) {
+    this.builder = builder;
+    this.environment = environment;
+  }
+
+  public void renderStatement(Statement node) {
     class SourceTransformer extends AbstractVisitor {
       @Override
       public boolean enterStatement(Statement statement) {

@@ -47,6 +47,9 @@ public class ManglingNameUtils {
    * Returns the mangled name of a method.
    */
   public static String getMangledName(MethodDescriptor methodDescriptor) {
+    if (methodDescriptor.isConstructor()) {
+      return getCtorMangledName(methodDescriptor);
+    }
     if (methodDescriptor.isJsProperty()) {
       // return the property name.
       return methodDescriptor.getJsPropertyName();

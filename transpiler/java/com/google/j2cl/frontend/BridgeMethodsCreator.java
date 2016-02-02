@@ -288,12 +288,13 @@ public class BridgeMethodsCreator {
             ? new ExpressionStatement(dispatchMethodCall)
             : new ReturnStatement(
                 dispatchMethodCall, bridgeMethodDescriptor.getReturnTypeDescriptor());
-    return Method.createSynthetic(
+    return new Method(
         bridgeMethodDescriptor,
         parameters,
         new Block(Arrays.asList(statement)),
         false,
         false,
-        false);
+        false,
+        "Synthetic method.");
   }
 }
