@@ -23,6 +23,7 @@ class $double {
   /**
    * Returns whether the provided instance is an instance of this class.
    *
+   * @param {*} instance
    * @return {boolean}
    * @public
    */
