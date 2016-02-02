@@ -17,27 +17,4 @@ public class MyTypedArray<T> {
   public final T get(int index) {
     return null;
   }
-
-  public int publicField;
-  private int privateField;
-  int packageField;
-  protected int protectedField;
-
-  public native void publicMethod();
-
-  private native void privateMethod();
-
-  native void packageMethod();
-
-  protected native void protectedMethod();
-
-  @JsOverlay
-  public final void useFieldsAndMethods() {
-    @SuppressWarnings("unused")
-    int value = publicField + privateField + packageField + protectedField;
-    publicMethod();
-    privateMethod();
-    packageMethod();
-    protectedMethod();
-  }
 }
