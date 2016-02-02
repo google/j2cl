@@ -129,5 +129,147 @@ public class Main {
     assert ((short) md == -1);
     assert ((int) md == 2147483647);
     assert ((long) md == 9223372036854775807L);
+    
+    testReferenceToPrimitive();
+    testBoxedToPrimitive();
+  }
+
+  @SuppressWarnings("unused")
+  public static void testReferenceToPrimitive() {
+    Object o = new Object();
+    try {
+      boolean bool = (boolean) o;
+      assert false : "An expected failure did not occur.";
+    } catch (ClassCastException e) {
+      // expected.
+    }
+    try {
+      byte b = (byte) o;
+      assert false : "An expected failure did not occur.";
+    } catch (ClassCastException e) {
+      // expected.
+    }
+    try {
+      char c = (char) o;
+      assert false : "An expected failure did not occur.";
+    } catch (ClassCastException e) {
+      // expected.
+    }
+    try {
+      short s = (short) o;
+      assert false : "An expected failure did not occur.";
+    } catch (ClassCastException e) {
+      // expected.
+    }
+    try {
+      int i = (int) o;
+      assert false : "An expected failure did not occur.";
+    } catch (ClassCastException e) {
+      // expected.
+    }
+    try {
+      long l = (long) o;
+      assert false : "An expected failure did not occur.";
+    } catch (ClassCastException e) {
+      // expected.
+    }
+    try {
+      float f = (float) o;
+      assert false : "An expected failure did not occur.";
+    } catch (ClassCastException e) {
+      // expected.
+    }
+    try {
+      double d = (double) o;
+      assert false : "An expected failure did not occur.";
+    } catch (ClassCastException e) {
+      // expected.
+    }
+
+    o = Boolean.FALSE;
+    boolean bool = (boolean) o;
+    assert !bool;
+
+    o = Byte.MAX_VALUE;
+    byte b = (byte) o;
+    assert b == 127;
+
+    o = new Character('a');
+    char c = (char) o;
+    assert c == 'a';
+
+    o = Short.MAX_VALUE;
+    short s = (short) o;
+    assert s == 32767;
+
+    o = new Integer(1);
+    int i = (int) o;
+    assert i == 1;
+
+    o = new Long(1L);
+    long l = (long) o;
+    assert l == 1L;
+
+    o = new Float(1.1f);
+    float f = (float) o;
+    assert f == 1.1f;
+
+    o = new Double(1.2);
+    double d = (double) o;
+    assert d == 1.2;
+  }
+
+  @SuppressWarnings("unused")
+  public static void testBoxedToPrimitive() {
+    Byte b = new Byte((byte) 1);
+    Character c = new Character('a');
+    Short s = new Short((short) 1);
+    Integer i = new Integer(1);
+    Long l = new Long(1L);
+    Float f = new Float(1.1f);
+    Double d = new Double(1.1);
+
+    short ss = b;
+    assert ss == 1;
+
+    int ii = b;
+    assert ii == 1;
+    ii = c;
+    assert ii == 97;
+    ii = s;
+    assert ii == 1;
+
+    long ll = b;
+    assert ll == 1L;
+    ll = s;
+    assert ll == 1L;
+    ll = c;
+    assert ll == 97L;
+    ll = i;
+    assert ll == 1L;
+
+    float ff = b;
+    assert ff == 1;
+    ff = s;
+    assert ff == 1;
+    ff = c;
+    assert ff == 97;
+    ff = i;
+    assert ff == 1;
+    ff = l;
+    assert ff == 1;
+
+    double dd = b;
+    assert dd == 1;
+    dd = s;
+    assert dd == 1;
+    dd = c;
+    assert dd == 97;
+    dd = i;
+    assert dd == 1;
+    dd = l;
+    assert dd == 1;
+    dd = f;
+    assert dd - 1.1 < 1e-7;
   }
 }

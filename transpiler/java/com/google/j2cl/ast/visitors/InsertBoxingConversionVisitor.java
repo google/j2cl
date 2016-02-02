@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
@@ -40,20 +39,27 @@ public class InsertBoxingConversionVisitor extends ConversionContextVisitor {
           @Override
           public Expression rewriteAssignmentContext(
               TypeDescriptor toTypeDescriptor, Expression expression) {
+            // There should be a following 'widening reference conversion' if the targeting type is
+            // not the boxed type, but as widening reference conversion is always NOOP, and it is
+            // mostly impossible to be optimized by JSCompiler, just avoid the insertion of the
+            // NOOP cast here.
             return maybeBox(toTypeDescriptor, expression);
           }
 
           @Override
           public Expression rewriteCastContext(CastExpression castExpression) {
-            if (!TypeDescriptors.isPrimitiveType(castExpression.getCastTypeDescriptor())
-                && TypeDescriptors.isPrimitiveType(
-                    castExpression.getExpression().getTypeDescriptor())
-                && !TypeDescriptors.isPrimitiveBooleanOrDouble(
-                    castExpression.getExpression().getTypeDescriptor())) {
+            TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
+            TypeDescriptor fromTypeDescriptor = castExpression.getExpression().getTypeDescriptor();
+            if (!TypeDescriptors.isNonVoidPrimitiveType(toTypeDescriptor)
+                && TypeDescriptors.isNonVoidPrimitiveType(fromTypeDescriptor)
+                && !TypeDescriptors.isPrimitiveBooleanOrDouble(fromTypeDescriptor)) {
               // Actually remove the cast and replace it with the boxing.
               Expression boxedExpression = AstUtils.box(castExpression.getExpression());
-              Preconditions.checkArgument(
-                  boxedExpression.getTypeDescriptor() == castExpression.getCastTypeDescriptor());
+              // It's possible that casting a primitive type to a non-boxed reference type.
+              // e.g. (Object) i; in this case, just keep the NOOP casting after boxing.
+              if (boxedExpression.getTypeDescriptor() != toTypeDescriptor) {
+                return new CastExpression(boxedExpression, toTypeDescriptor);
+              }
               return boxedExpression;
             }
             return castExpression;
@@ -68,8 +74,8 @@ public class InsertBoxingConversionVisitor extends ConversionContextVisitor {
   }
 
   private static Expression maybeBox(TypeDescriptor toTypeDescriptor, Expression expression) {
-    if (!TypeDescriptors.isPrimitiveType(toTypeDescriptor)
-        && TypeDescriptors.isPrimitiveType(expression.getTypeDescriptor())
+    if (!TypeDescriptors.isNonVoidPrimitiveType(toTypeDescriptor)
+        && TypeDescriptors.isNonVoidPrimitiveType(expression.getTypeDescriptor())
         && !TypeDescriptors.isPrimitiveBooleanOrDouble(expression.getTypeDescriptor())) {
       return AstUtils.box(expression);
     }

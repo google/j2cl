@@ -152,7 +152,7 @@ public class TypeDescriptors {
     return TypeDescriptors.get().boxedTypeByPrimitiveType.containsValue(typeDescriptor);
   }
 
-  public static boolean isPrimitiveType(TypeDescriptor typeDescriptor) {
+  public static boolean isNonVoidPrimitiveType(TypeDescriptor typeDescriptor) {
     return TypeDescriptors.get().boxedTypeByPrimitiveType.containsKey(typeDescriptor);
   }
 
@@ -171,11 +171,15 @@ public class TypeDescriptors {
   }
 
   public static boolean isBoxedOrPrimitiveType(TypeDescriptor typeDescriptor) {
-    return isBoxedType(typeDescriptor) || isPrimitiveType(typeDescriptor);
+    return isBoxedType(typeDescriptor) || isNonVoidPrimitiveType(typeDescriptor);
   }
 
   public static boolean isBoxedTypeAsJsPrimitives(TypeDescriptor typeDescriptor) {
     return isBoxedBooleanOrDouble(typeDescriptor) || typeDescriptor == get().javaLangString;
+  }
+
+  public static boolean isNonBoxedReferenceType(TypeDescriptor typeDescriptor) {
+    return !typeDescriptor.isPrimitive() && !isBoxedType(typeDescriptor);
   }
 
   /**

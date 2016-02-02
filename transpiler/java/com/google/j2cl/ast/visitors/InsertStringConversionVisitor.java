@@ -62,7 +62,7 @@ public class InsertStringConversionVisitor extends ConversionContextVisitor {
             // primitives to String in the presence of a + operator. We make an exception for 'char'
             // since Java converts char to the matching String glyph and JS converts it into a
             // number String.
-            if (TypeDescriptors.isPrimitiveType(typeDescriptor)
+            if (TypeDescriptors.isNonVoidPrimitiveType(typeDescriptor)
                 && typeDescriptor != TypeDescriptors.get().primitiveChar) {
               return operandExpression;
             }

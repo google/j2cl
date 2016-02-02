@@ -31,6 +31,7 @@ import com.google.j2cl.ast.visitors.InsertExceptionConversionVisitor;
 import com.google.j2cl.ast.visitors.InsertExplicitSuperCallsVisitor;
 import com.google.j2cl.ast.visitors.InsertInstanceInitCallsVisitor;
 import com.google.j2cl.ast.visitors.InsertNarrowingPrimitiveConversionVisitor;
+import com.google.j2cl.ast.visitors.InsertNarrowingReferenceConversionVisitor;
 import com.google.j2cl.ast.visitors.InsertStringConversionVisitor;
 import com.google.j2cl.ast.visitors.InsertUnboxingConversionVisitor;
 import com.google.j2cl.ast.visitors.InsertUnderflowOverflowConversionVisitor;
@@ -160,6 +161,8 @@ public class J2clTranspiler {
       DevirtualizeMethodCallsVisitor.applyTo(j2clUnit);
       ControlStatementFormatter.applyTo(j2clUnit);
       SplitCompoundLongAssignmentsVisitor.applyTo(j2clUnit);
+      // Runs before unboxing conversion.
+      InsertNarrowingReferenceConversionVisitor.applyTo(j2clUnit);
       InsertUnboxingConversionVisitor.applyTo(j2clUnit);
       NormalizeLongsVisitor.applyTo(j2clUnit);
       InsertBoxingConversionVisitor.applyTo(j2clUnit);

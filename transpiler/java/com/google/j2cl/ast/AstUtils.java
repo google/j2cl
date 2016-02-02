@@ -412,7 +412,7 @@ public class AstUtils {
    */
   public static Expression box(Expression expression) {
     TypeDescriptor primitiveType = expression.getTypeDescriptor();
-    Preconditions.checkArgument(TypeDescriptors.isPrimitiveType(primitiveType));
+    Preconditions.checkArgument(TypeDescriptors.isNonVoidPrimitiveType(primitiveType));
     Preconditions.checkArgument(!TypeDescriptors.isPrimitiveBooleanOrDouble(primitiveType));
     TypeDescriptor boxType = TypeDescriptors.getBoxTypeFromPrimitiveType(primitiveType);
 

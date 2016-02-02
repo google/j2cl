@@ -66,4 +66,16 @@ public class CastToPrimitive {
     f = (float) d;
     d = (double) d;
   }
+
+  public void testReferenceToPrimitive() {
+    Object o = new Object();
+    boolean bool = (boolean) o;
+    byte b = (byte) o;
+    char c = (char) o;
+    short s = (short) o;
+    int i = (int) o;
+    long l = (long) o;
+    float f = (float) o;
+    double d = (double) o;
+  }
 }

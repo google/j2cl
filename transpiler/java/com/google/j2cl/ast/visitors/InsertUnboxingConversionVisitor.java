@@ -54,7 +54,7 @@ public class InsertUnboxingConversionVisitor extends ConversionContextVisitor {
 
           @Override
           public Expression rewriteCastContext(CastExpression castExpression) {
-            if (TypeDescriptors.isPrimitiveType(castExpression.getCastTypeDescriptor())
+            if (TypeDescriptors.isNonVoidPrimitiveType(castExpression.getCastTypeDescriptor())
                 && TypeDescriptors.isBoxedType(
                     castExpression.getExpression().getTypeDescriptor())) {
               // Actually remove the cast and replace it with the unboxing.
@@ -80,7 +80,7 @@ public class InsertUnboxingConversionVisitor extends ConversionContextVisitor {
   }
 
   private static Expression maybeUnbox(TypeDescriptor toTypeDescriptor, Expression expression) {
-    if (TypeDescriptors.isPrimitiveType(toTypeDescriptor)
+    if (TypeDescriptors.isNonVoidPrimitiveType(toTypeDescriptor)
         && TypeDescriptors.isBoxedType(expression.getTypeDescriptor())) {
       return AstUtils.unbox(expression);
     }
