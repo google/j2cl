@@ -142,4 +142,7 @@ j2cl_transpile = rule(
         ),
     },
     implementation=_impl,
+    outputs={
+      "files": "%{name}.js.zip"
+    }
 )
