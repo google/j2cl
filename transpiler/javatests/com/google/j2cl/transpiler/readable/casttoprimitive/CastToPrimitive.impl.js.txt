@@ -146,6 +146,19 @@ class CastToPrimitive extends Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  m_testUnboxAndWiden() {
+    let boxedByte = Byte.m_valueOf__byte($Primitives.$narrowIntToByte(0));
+    let s = boxedByte.m_byteValue();
+    let i = boxedByte.m_byteValue();
+    let l = $Primitives.$widenByteToLong(boxedByte.m_byteValue());
+    let f = boxedByte.m_byteValue();
+    let d = boxedByte.m_byteValue();
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public

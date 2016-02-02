@@ -65,6 +65,10 @@ public class SimpleAutoBoxing {
     return c; // auto-unboxing by return
   }
 
+  public double takesAndReturnsPrimitiveDouble(double d) {
+    return d;
+  }
+
   @SuppressWarnings("unused")
   public void testNull() {
     Boolean b = null;
@@ -146,6 +150,22 @@ public class SimpleAutoBoxing {
     boxL = box(boxL);
     boxS = box(boxS);
     boxC = box(boxC);
+
+    // auto-unboxing and widening by assignment
+    d = boxB;
+    d = boxF;
+    d = boxI;
+    d = boxL;
+    d = boxS;
+    d = boxC;
+
+    // auto-unboxing and widening by parameter
+    takesAndReturnsPrimitiveDouble(boxB);
+    takesAndReturnsPrimitiveDouble(boxF);
+    takesAndReturnsPrimitiveDouble(boxI);
+    takesAndReturnsPrimitiveDouble(boxL);
+    takesAndReturnsPrimitiveDouble(boxS);
+    takesAndReturnsPrimitiveDouble(boxC);
 
     // auto-unboxing by operator
     bool = boxBool && boxBool;

@@ -23,9 +23,9 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 
 /**
- * Inserts an unboxing operation when a boxed type is being put into a primitive type slot in
- * casting, assignment, method invocation, unary numeric promotion or binary numeric promotion
- * conversion contexts.
+ * Inserts an unboxing operation (and optionally followed by a widening primitive conversion in some
+ * contexts) when a boxed type is being put into a primitive type slot in casting, assignment,
+ * method invocation, unary numeric promotion or binary numeric promotion conversion contexts.
  */
 public class InsertUnboxingConversionVisitor extends ConversionContextVisitor {
 
@@ -40,7 +40,7 @@ public class InsertUnboxingConversionVisitor extends ConversionContextVisitor {
           @Override
           public Expression rewriteAssignmentContext(
               TypeDescriptor toTypeDescriptor, Expression expression) {
-            return maybeUnbox(toTypeDescriptor, expression);
+            return maybeUnboxAndWiden(toTypeDescriptor, expression);
           }
 
           @Override
@@ -54,11 +54,21 @@ public class InsertUnboxingConversionVisitor extends ConversionContextVisitor {
 
           @Override
           public Expression rewriteCastContext(CastExpression castExpression) {
-            if (TypeDescriptors.isNonVoidPrimitiveType(castExpression.getCastTypeDescriptor())
-                && TypeDescriptors.isBoxedType(
-                    castExpression.getExpression().getTypeDescriptor())) {
-              // Actually remove the cast and replace it with the unboxing.
-              return AstUtils.unbox(castExpression.getExpression());
+            TypeDescriptor fromTypeDescriptor = castExpression.getExpression().getTypeDescriptor();
+            TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
+            if (TypeDescriptors.isNonVoidPrimitiveType(toTypeDescriptor)
+                && TypeDescriptors.isBoxedType(fromTypeDescriptor)) {
+
+              // An unboxing conversion....
+              Expression resultExpression = AstUtils.unbox(castExpression.getExpression());
+
+              // ...optionally followed by a widening primitive conversion.
+              fromTypeDescriptor = resultExpression.getTypeDescriptor();
+              if (fromTypeDescriptor != toTypeDescriptor) {
+                resultExpression = new CastExpression(resultExpression, toTypeDescriptor);
+              }
+
+              return resultExpression;
             }
             return castExpression;
           }
@@ -66,7 +76,7 @@ public class InsertUnboxingConversionVisitor extends ConversionContextVisitor {
           @Override
           public Expression rewriteMethodInvocationContext(
               TypeDescriptor parameterTypeDescriptor, Expression argumentExpression) {
-            return maybeUnbox(parameterTypeDescriptor, argumentExpression);
+            return maybeUnboxAndWiden(parameterTypeDescriptor, argumentExpression);
           }
 
           @Override
@@ -79,10 +89,22 @@ public class InsertUnboxingConversionVisitor extends ConversionContextVisitor {
         });
   }
 
-  private static Expression maybeUnbox(TypeDescriptor toTypeDescriptor, Expression expression) {
+  private static Expression maybeUnboxAndWiden(
+      TypeDescriptor toTypeDescriptor, Expression expression) {
+    TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
+
     if (TypeDescriptors.isNonVoidPrimitiveType(toTypeDescriptor)
-        && TypeDescriptors.isBoxedType(expression.getTypeDescriptor())) {
-      return AstUtils.unbox(expression);
+        && TypeDescriptors.isBoxedType(fromTypeDescriptor)) {
+      // An unboxing conversion....
+      Expression resultExpression = AstUtils.unbox(expression);
+
+      // ...optionally followed by a widening primitive conversion.
+      fromTypeDescriptor = resultExpression.getTypeDescriptor();
+      if (fromTypeDescriptor != toTypeDescriptor) {
+        resultExpression = new CastExpression(resultExpression, toTypeDescriptor);
+      }
+
+      return resultExpression;
     }
     return expression;
   }

@@ -78,4 +78,15 @@ public class CastToPrimitive {
     float f = (float) o;
     double d = (double) o;
   }
+
+  public void testUnboxAndWiden() {
+    Byte boxedByte = Byte.valueOf((byte) 0);
+
+    // char c = (char) boxedByte; // illegal
+    short s = (short) boxedByte;
+    int i = (int) boxedByte;
+    long l = (long) boxedByte;
+    float f = (float) boxedByte;
+    double d = (double) boxedByte;
+  }
 }

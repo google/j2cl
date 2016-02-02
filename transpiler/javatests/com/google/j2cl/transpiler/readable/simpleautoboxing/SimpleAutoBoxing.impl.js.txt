@@ -182,6 +182,13 @@ class SimpleAutoBoxing extends Object {
   m_unbox__java_lang_Character(c) { return c.m_charValue(); }
 
   /**
+   * @param {number} d
+   * @return {number}
+   * @public
+   */
+  m_takesAndReturnsPrimitiveDouble__double(d) { return d; }
+
+  /**
    * @return {void}
    * @public
    */
@@ -265,6 +272,19 @@ class SimpleAutoBoxing extends Object {
     boxL = this.m_box__long(boxL.m_longValue());
     boxS = this.m_box__short(boxS.m_shortValue());
     boxC = this.m_box__char(boxC.m_charValue());
+    d = boxB.m_byteValue();
+    d = boxF.m_floatValue();
+    d = boxI.m_intValue();
+    d = $Primitives.$widenLongToDouble(boxL.m_longValue());
+    d = boxS.m_shortValue();
+    d = boxC.m_charValue();
+    this.m_takesAndReturnsPrimitiveDouble__double(boxB.m_byteValue());
+    this.m_takesAndReturnsPrimitiveDouble__double(boxF.m_floatValue());
+    this.m_takesAndReturnsPrimitiveDouble__double(boxI.m_intValue());
+    this.m_takesAndReturnsPrimitiveDouble__double(
+        $Primitives.$widenLongToDouble(boxL.m_longValue()));
+    this.m_takesAndReturnsPrimitiveDouble__double(boxS.m_shortValue());
+    this.m_takesAndReturnsPrimitiveDouble__double(boxC.m_charValue());
     bool = Boolean.m_booleanValue__java_lang_Boolean(boxBool) &&
         Boolean.m_booleanValue__java_lang_Boolean(boxBool);
     d = Double.m_doubleValue__java_lang_Double(boxD) +

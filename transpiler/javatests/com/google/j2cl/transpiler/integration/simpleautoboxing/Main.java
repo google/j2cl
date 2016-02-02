@@ -65,6 +65,10 @@ public class Main {
     return c.charValue();
   }
 
+  public double takesAndReturnsPrimitiveDouble(double d) {
+    return d;
+  }
+
   public void testBoxByParameter() {
     byte b = (byte) 100;
     double d = 1111.0;
@@ -120,6 +124,8 @@ public class Main {
     Short boxS = new Short((short) 100);
     Boolean boxBool = new Boolean(true);
     Character boxC = new Character('c');
+
+    // Unbox
     assert (box(boxB).equals(boxB));
     assert (box(boxD).equals(boxD));
     assert (box(boxF).equals(boxF));
@@ -128,6 +134,14 @@ public class Main {
     assert (box(boxS).equals(boxS));
     assert (box(boxBool).equals(boxBool));
     assert (box(boxC).equals(boxC));
+
+    // Unbox and widen
+    assert takesAndReturnsPrimitiveDouble(boxB) == boxB.byteValue();
+    assert takesAndReturnsPrimitiveDouble(boxC) == boxC.charValue();
+    assert takesAndReturnsPrimitiveDouble(boxS) == boxS.shortValue();
+    assert takesAndReturnsPrimitiveDouble(boxI) == boxI.intValue();
+    assert takesAndReturnsPrimitiveDouble(boxL) == boxL.longValue();
+    assert takesAndReturnsPrimitiveDouble(boxF) == boxF.floatValue();
   }
 
   public void testUnboxByAssignment() {
@@ -139,6 +153,8 @@ public class Main {
     Short boxS = new Short((short) 100);
     Boolean boxBool = new Boolean(true);
     Character boxC = new Character('a');
+
+    // Unbox
     byte b = boxB;
     double d = boxD;
     float f = boxF;
@@ -155,6 +171,22 @@ public class Main {
     assert (s == boxS.shortValue());
     assert (bool == boxBool.booleanValue());
     assert (c == boxC.charValue());
+
+    // Unbox and widen
+    d = boxB;
+    assert (d == boxB.byteValue());
+    d = boxD;
+    assert (d == boxD.doubleValue());
+    d = boxF;
+    assert (d == boxF.floatValue());
+    d = boxI;
+    assert (d == boxI.intValue());
+    d = boxL;
+    assert (d == boxL.longValue());
+    d = boxS;
+    assert (d == boxS.shortValue());
+    d = boxC;
+    assert (d == boxC.charValue());
   }
 
   public void testUnboxByOperator() {
@@ -292,11 +324,16 @@ public class Main {
 
   @SuppressWarnings("cast")
   public void testCasts() {
+    // Box
     Integer boxedInteger = (Integer) 100;
+    // Unbox
     int primitiveInteger = (int) new Integer(100);
+    // Unbox and widen
+    double primitiveDouble = (double) new Integer(100);
 
     assert boxedInteger instanceof Integer;
     assert primitiveInteger == 100;
+    assert primitiveDouble == 100d;
   }
 
   @SuppressWarnings("cast")
