@@ -622,18 +622,25 @@ public class JdtUtils {
   }
 
   /**
-   * Returns whether {@code subTypeBinding} is a subtype of {@code superTypeBinding}.
+   * Returns whether {@code subTypeBinding} is a subtype of {@code superTypeBinding} either
+   * because subTypeBinding is a child class of class superTypeBinding or because
+   * subTypeBinding implements interface superTypeBinding. As 'subtype' is transitive and
+   * reflective, a type is subtype of itself.
    */
   static boolean isSubType(ITypeBinding subTypeBinding, ITypeBinding superTypeBinding) {
     if (areSameErasedType(superTypeBinding, subTypeBinding)) {
       return true;
     }
+    // Check if it's a child class.
     ITypeBinding superClass = subTypeBinding.getSuperclass();
-    while (superClass != null) {
-      if (areSameErasedType(superTypeBinding, superClass)) {
+    if (superClass != null && isSubType(superClass, superTypeBinding)) {
+      return true;
+    }
+    // Check if it implements the interface.
+    for (ITypeBinding superInterface : subTypeBinding.getInterfaces()) {
+      if (isSubType(superInterface, superTypeBinding)) {
         return true;
       }
-      superClass = superClass.getSuperclass();
     }
     return false;
   }

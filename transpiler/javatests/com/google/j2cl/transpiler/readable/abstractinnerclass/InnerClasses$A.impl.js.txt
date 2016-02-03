@@ -1,0 +1,109 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses$A.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses$A$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let InnerClasses = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+/**
+ * @interface
+ */
+class InnerClasses$A {
+  /**
+   * @return {void}
+   * @public
+   */
+  m_foo() {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_abstractinnerclass_InnerClasses$A =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        instance
+            .$implements__com_google_j2cl_transpiler_readable_abstractinnerclass_InnerClasses$A;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        classConstructor.prototype
+            .$implements__com_google_j2cl_transpiler_readable_abstractinnerclass_InnerClasses$A;
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    InnerClasses$A.$clinit();
+    if (!InnerClasses$A.$classInnerClasses$A_) {
+      InnerClasses$A.$classInnerClasses$A_ = Class.$createForInterface(
+          $Util.$generateId('A'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses$A'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses.A'));
+    }
+    return InnerClasses$A.$classInnerClasses$A_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    InnerClasses = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+  }
+};
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+InnerClasses$A.$classInnerClasses$A_ = null;
+
+
+InnerClasses$A.$markImplementor(/** @type {Function} */ (InnerClasses$A));
+
+
+/**
+ * Export class.
+ */
+exports = InnerClasses$A;
+//# sourceMappingURL=InnerClasses$A.js.map
