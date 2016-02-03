@@ -11,6 +11,8 @@ goog.module('gen.com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2$impl
 let Enum = goog.require('gen.java.lang.Enum$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let $NativeObject = goog.forwardDeclare('extern.Object');
+let $NativeString = goog.forwardDeclare('extern.String');
 let SimpleEnum = goog.forwardDeclare(
     'gen.com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum$impl');
 let SimpleEnum2$1 = goog.forwardDeclare(
@@ -280,7 +282,7 @@ class SimpleEnum2 extends Enum {
 
   /**
    * A static field getter.
-   * @return {*}
+   * @return {$NativeObject<$NativeString, *>}
    * @public
    */
   static get
@@ -292,7 +294,7 @@ class SimpleEnum2 extends Enum {
 
   /**
    * A static field setter.
-   * @param {*} value
+   * @param {$NativeObject<$NativeString, *>} value
    * @return {void}
    * @public
    */
@@ -311,6 +313,8 @@ class SimpleEnum2 extends Enum {
    */
   static $clinit() {
     SimpleEnum2.$clinit = function() {};
+    $NativeObject = goog.module.get('extern.Object');
+    $NativeString = goog.module.get('extern.String');
     SimpleEnum = goog.module.get(
         'gen.com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum$impl');
     SimpleEnum2$1 = goog.module.get(
@@ -379,7 +383,7 @@ SimpleEnum2
 
 
 /**
- * @private {*}
+ * @private {$NativeObject<$NativeString, *>}
  */
 SimpleEnum2
     .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2_ =

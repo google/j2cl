@@ -11,6 +11,8 @@ goog.module('com.google.j2cl.transpiler.readable.jstypeenum.Color$impl');
 let Enum = goog.require('gen.java.lang.Enum$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let $NativeObject = goog.forwardDeclare('extern.Object');
+let $NativeString = goog.forwardDeclare('extern.String');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let Object = goog.forwardDeclare('gen.java.lang.Object$impl');
 let String = goog.forwardDeclare('gen.java.lang.String$impl');
@@ -207,7 +209,7 @@ class Color extends Enum {
 
   /**
    * A static field getter.
-   * @return {*}
+   * @return {$NativeObject<$NativeString, *>}
    * @public
    */
   static get
@@ -219,7 +221,7 @@ class Color extends Enum {
 
   /**
    * A static field setter.
-   * @param {*} value
+   * @param {$NativeObject<$NativeString, *>} value
    * @return {void}
    * @public
    */
@@ -238,6 +240,8 @@ class Color extends Enum {
    */
   static $clinit() {
     Color.$clinit = function() {};
+    $NativeObject = goog.module.get('extern.Object');
+    $NativeString = goog.module.get('extern.String');
     Class = goog.module.get('gen.java.lang.Class$impl');
     Object = goog.module.get('gen.java.lang.Object$impl');
     String = goog.module.get('gen.java.lang.String$impl');
@@ -281,7 +285,7 @@ Color.$BLUE = null;
 
 
 /**
- * @private {*}
+ * @private {$NativeObject<$NativeString, *>}
  */
 Color
     .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =

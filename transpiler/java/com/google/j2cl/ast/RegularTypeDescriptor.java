@@ -235,6 +235,7 @@ public class RegularTypeDescriptor extends TypeDescriptor {
       return TypeDescriptor.createSynthetic(
           getPackageComponents(),
           getClassComponents(),
+          ImmutableList.<TypeDescriptor>of(),
           isJsFunction,
           isJsType,
           isNative,

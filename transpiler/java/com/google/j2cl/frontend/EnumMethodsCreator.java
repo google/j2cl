@@ -1,6 +1,7 @@
 package com.google.j2cl.frontend;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.BinaryExpression;
@@ -16,12 +17,14 @@ import com.google.j2cl.ast.FieldDescriptorBuilder;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JsInfo;
+import com.google.j2cl.ast.JsInteropUtils;
 import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.NullLiteral;
+import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -35,7 +38,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * This class generates the ast structure for the synthesized static methods values and valueOf on
+ * This class generates the AST structure for the synthesized static methods values and valueOf on
  * Enum types.  Additionally, we add a private static field "namesToValuesMap" which is created
  * the first time valueOf() is called and allows for quick lookup of Enum values by (String) name.
  */
@@ -65,7 +68,20 @@ public class EnumMethodsCreator {
         FieldDescriptorBuilder.fromDefault(
                 enumType.getDescriptor(),
                 NAMES_TO_VALUES_MAP_FIELD_NAME,
-                TypeDescriptors.get().javaLangObject)
+                RegularTypeDescriptor.createSynthetic(
+                    new ArrayList<String>(),
+                    // Import alias.
+                    Lists.newArrayList("NativeObject"),
+                    // Type parameters.
+                    Lists.newArrayList(
+                        TypeDescriptors.NATIVE_STRING, TypeDescriptors.get().javaLangObject),
+                    false,
+                    true,
+                    true,
+                    // Browser global
+                    JsInteropUtils.JS_GLOBAL,
+                    // Native type name
+                    "Object"))
             .isStatic(true)
             .visibility(Visibility.PRIVATE)
             .build();

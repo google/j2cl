@@ -82,6 +82,7 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
   public static TypeDescriptor createSynthetic(
       Iterable<String> packageComponents,
       Iterable<String> classComponents,
+      Iterable<TypeDescriptor> typeArgumentDescriptors,
       boolean isJsFunction,
       boolean isJsType,
       boolean isNative,
@@ -93,7 +94,7 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
                 ImmutableList.copyOf(packageComponents),
                 ImmutableList.copyOf(classComponents),
                 false,
-                ImmutableList.<TypeDescriptor>of(),
+                ImmutableList.copyOf(typeArgumentDescriptors),
                 isJsFunction,
                 isJsType,
                 isNative,

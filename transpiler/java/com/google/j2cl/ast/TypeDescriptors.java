@@ -19,11 +19,14 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableBiMap;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
 
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -249,6 +252,21 @@ public class TypeDescriptors {
     }
     return null;
   }
+
+  // Common browser native types.
+  public static final TypeDescriptor NATIVE_STRING =
+      RegularTypeDescriptor.createSynthetic(
+          new ArrayList<String>(),
+          // Import alias.
+          Lists.newArrayList("NativeString"),
+          ImmutableList.<TypeDescriptor>of(),
+          false,
+          true,
+          true,
+          // Browser global
+          JsInteropUtils.JS_GLOBAL,
+          // Native type name
+          "String");
 
   /**
    * Holds the bootstrap types.

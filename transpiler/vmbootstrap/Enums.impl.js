@@ -10,12 +10,14 @@ let Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 class Enums {
   /**
    * @param {Array<*>} values
-   * @return {Object}
+   * @return {Object<string, *>}
    * @public
    */
   static createMapFromValues(values) {
+    /** @type {Object<string, *>} */
     let map = {};
     for (var i = 0; i < values.length; i++) {
+      /** @type {string} */
       let name = values[i].m_name();
       map[name] = values[i];
     }
