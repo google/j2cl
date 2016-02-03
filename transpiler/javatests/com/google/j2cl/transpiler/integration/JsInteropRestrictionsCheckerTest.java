@@ -15,6 +15,15 @@
  */
 package com.google.j2cl.transpiler.integration;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.Iterables;
+import com.google.common.io.Files;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -28,6 +37,18 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   public static String[] extraArgs = {
     "-source", "1.8", "-encoding", "UTF-8", "-cp", JSINTEROP_PATH + ":" + JRE_PATH
   };
+
+  protected File inputDir;
+  protected File outputDir;
+
+  @Override
+  protected void setUp() throws IOException {
+    File tempDir = Files.createTempDir();
+    inputDir = new File(tempDir, "input");
+    inputDir.mkdir();
+    outputDir = new File(tempDir, "output");
+    outputDir.mkdir();
+  }
 
   //  // TODO: eventually test this for default methods in Java 8.
   //  public void testCollidingAccidentalOverrideConcreteMethodFails() throws Exception {
@@ -1455,57 +1476,134 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //  }
   //
   public void testJsOverlayOnNativeJsTypeInterfaceSucceds() throws Exception {
-    TranspileResult transpileResult =
-        transpileDirectory(
-            "jsinteroprestrictionschecker/jsoverlayonnativejstypeinterface",
-            OutputType.DIR,
-            extraArgs);
-    assertBuggySucceeds(transpileResult.errorLines);
+    File sourcePackage = createPackage("jsoverlayonnativejstypeinterface");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsoverlayonnativejstypeinterface;",
+        "import jsinterop.annotations.JsOverlay;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public interface Buggy {",
+        "  @JsOverlay Object obj = new Object();",
+        "  // TODO: uncomment once default method is supported.",
+        "  // @JsOverlay default void someOverlayMethod(){};",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
   }
 
   public void testJsOverlayOnNativeJsTypeMemberSucceeds() throws Exception {
-    TranspileResult transpileResult =
-        transpileDirectory(
-            "jsinteroprestrictionschecker/jsoverlayonnativejstypemember",
-            OutputType.DIR,
-            extraArgs);
-    assertBuggySucceeds(transpileResult.errorLines);
+    File sourcePackage = createPackage("jsoverlayonnativejstypemember");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsoverlayonnativejstypemember;",
+        "import jsinterop.annotations.JsOverlay;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy {",
+        "  @JsOverlay public static Object object = new Object();",
+        "  @JsOverlay",
+        "  public static void m() {}",
+        "  @JsOverlay",
+        "  public static void m(int x) {}",
+        "  @JsOverlay",
+        "  private static void m(boolean x) {}",
+        "  @JsOverlay",
+        "  public final void n() {}",
+        "  @JsOverlay",
+        "  public final void n(int x) {}",
+        "  @JsOverlay",
+        "  private final void n(boolean x) {}",
+        "  @JsOverlay",
+        "  final void o() {}",
+        "  @JsOverlay",
+        "  protected final void p() {}",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
   }
 
   public void testJsOverlayImplementingInterfaceMethodFails() throws Exception {
-    TranspileResult transpileResult =
-        transpileDirectory(
-            "jsinteroprestrictionschecker/jsoverlayimplementinginterfacemethod",
-            OutputType.DIR,
-            extraArgs);
-    assertBuggyFails(
-        transpileResult.errorLines,
+    File sourcePackage = createPackage("jsoverlayimplementinginterfacemethod");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsoverlayimplementinginterfacemethod;",
+        "import jsinterop.annotations.JsOverlay;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy implements IBuggy {",
+        "  @JsOverlay",
+        "  public void m() {}",
+        "}");
+
+    createSourceFile(
+        sourcePackage,
+        "IBuggy.java",
+        "package jsoverlayimplementinginterfacemethod;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public interface IBuggy {",
+        "  void m();",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
         "JsInterop restrictions error: JsOverlay method '$void Buggy.m()' cannot override a "
             + "supertype method.",
         "1 error(s)");
   }
 
   public void testJsOverlayOverridingSuperclassMethodFails() throws Exception {
-    TranspileResult transpileResult =
-        transpileDirectory(
-            "jsinteroprestrictionschecker/jsoverlayoverridingsuperclassmethod",
-            OutputType.DIR,
-            extraArgs);
-    assertBuggyFails(
-        transpileResult.errorLines,
+    File sourcePackage = createPackage("jsoverlayoverridingsuperclassmethod");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsoverlayoverridingsuperclassmethod;",
+        "import jsinterop.annotations.JsOverlay;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy extends Super {",
+        "  @JsOverlay",
+        "  public void m() {}",
+        "}");
+
+    createSourceFile(
+        sourcePackage,
+        "Super.java",
+        "package jsoverlayoverridingsuperclassmethod;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Super {",
+        "  public native void m();",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
         "JsInterop restrictions error: JsOverlay method '$void Buggy.m()' cannot override a "
             + "supertype method.",
         "1 error(s)");
   }
 
   public void testJsOverlayOnNonFinalMethodAndInstanceFieldFails() throws Exception {
-    TranspileResult transpileResult =
-        transpileDirectory(
-            "jsinteroprestrictionschecker/jsoverlayonnonfinalmethodandinstancefield",
-            OutputType.DIR,
-            extraArgs);
-    assertBuggyFails(
-        transpileResult.errorLines,
+    File sourcePackage = createPackage("jsoverlayonnonfinalmethodandinstancefield");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsoverlayonnonfinalmethodandinstancefield;",
+        "import jsinterop.annotations.JsOverlay;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy {",
+        "  @JsOverlay public final int f2 = 2;",
+        "  @JsOverlay",
+        "  public void m() {}",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
         // TODO: one more error about "Native JsType cannot have initializer." after check on
         // native js type is implemented.
         "JsInterop restrictions error: JsOverlay field '$int Buggy.f2' can only be static.",
@@ -1515,22 +1613,40 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   }
 
   public void testJsOverlayWithStaticInitializerSucceeds() throws Exception {
-    TranspileResult transpileResult =
-        transpileDirectory(
-            "jsinteroprestrictionschecker/jsoverlaywithstaticinitializer",
-            OutputType.DIR,
-            extraArgs);
+    File sourcePackage = createPackage("jsoverlaywithstaticinitializer");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsoverlaywithstaticinitializer;",
+        "import jsinterop.annotations.JsOverlay;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy {",
+        "  @JsOverlay public static final Object f1 = new Object();",
+        "  @JsOverlay public static int f2 = 2;",
+        "}");
 
-    assertBuggySucceeds(transpileResult.errorLines);
+    assertCompileSucceeds(sourcePackage);
   }
 
   public void testJsOverlayOnNativeMethodFails() throws Exception {
-    TranspileResult transpileResult =
-        transpileDirectory(
-            "jsinteroprestrictionschecker/jsoverlayonnativemethod", OutputType.DIR, extraArgs);
+    File sourcePackage = createPackage("jsoverlayonnativemethod");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsoverlayonnativemethod;",
+        "import jsinterop.annotations.JsOverlay;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy {",
+        "  @JsOverlay",
+        "  public static final native void m1();",
+        "  @JsOverlay",
+        "  public final native void m2();",
+        "}");
 
-    assertBuggyFails(
-        transpileResult.errorLines,
+    assertCompileFails(
+        sourcePackage,
         "JsInterop restrictions error: JsOverlay method '$void Buggy.m1()' cannot be non-final nor "
             + "native.",
         "JsInterop restrictions error: JsOverlay method '$void Buggy.m2()' cannot be non-final nor "
@@ -1565,12 +1681,22 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //      }
 
   public void testJsOverlayOnNonNativeJsTypeFails() throws Exception {
-    TranspileResult transpileResult =
-        transpileDirectory(
-            "jsinteroprestrictionschecker/jsoverlayonnonnativejstype", OutputType.DIR, extraArgs);
+    File sourcePackage = createPackage("jsoverlayonnonnativejstype");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsoverlayonnonnativejstype;",
+        "import jsinterop.annotations.JsOverlay;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType",
+        "public class Buggy {",
+        "  @JsOverlay public static final int F = 2;",
+        "  @JsOverlay",
+        "  public final void m() {};",
+        "}");
 
-    assertBuggyFails(
-        transpileResult.errorLines,
+    assertCompileFails(
+        sourcePackage,
         "JsInterop restrictions error: JsOverlay '$int Buggy.F' can only be declared in a native "
             + "type.",
         "JsInterop restrictions error: JsOverlay '$void Buggy.m()' can only be declared in a native"
@@ -1850,12 +1976,22 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //  }
 
   public void testNonJsTypeInterfaceExtendsNativeJsTypeInterfaceSucceeds() throws Exception {
-    TranspileResult transpileResult =
-        transpileDirectory(
-            "jsinteroprestrictionschecker/nonjstypeinterfaceextendsnativejstypeinterface",
-            OutputType.DIR,
-            extraArgs);
-    assertBuggySucceeds(transpileResult.errorLines);
+    File sourcePackage = createPackage("nonJsTypeInterfaceExtendsNativeJsTypeInterface");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nonJsTypeInterfaceExtendsNativeJsTypeInterface;",
+        "public interface Buggy extends Interface {}");
+
+    createSourceFile(
+        sourcePackage,
+        "Interface.java",
+        "package nonJsTypeInterfaceExtendsNativeJsTypeInterface;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public interface Interface {}");
+
+    assertCompileSucceeds(sourcePackage);
   }
 
   //  public void testUnusableByJsSuppressionSucceeds() throws Exception {
@@ -2014,14 +2150,68 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //    }
   //  };
 
-  public static void assertBuggySucceeds(List<String> errorLines) {
+  private void assertCompileSucceeds(File sourcePackage) throws Exception {
+    TranspileResult transpileResult = transpile(getTranspilerArgs(sourcePackage), outputDir);
+    assertBuggySucceeds(transpileResult.errorLines);
+  }
+
+  private void assertCompileFails(File sourcePackage, String... expectedErrors) throws Exception {
+    TranspileResult transpileResult = transpile(getTranspilerArgs(sourcePackage), outputDir);
+    assertBuggyFails(transpileResult.errorLines, expectedErrors);
+  }
+
+  private static void assertBuggySucceeds(List<String> errorLines) {
     assert errorLines.isEmpty();
   }
 
-  public static void assertBuggyFails(List<String> errorLines, String... expectedErrors) {
+  private static void assertBuggyFails(List<String> errorLines, String... expectedErrors) {
     assert errorLines.size() == expectedErrors.length;
     for (String expectedError : expectedErrors) {
       assertLogContainsSnippet(errorLines, expectedError);
     }
+  }
+
+  private File createPackage(String packageName) {
+    File sourcePackage = new File(inputDir, packageName);
+    if (sourcePackage.mkdirs()) {
+      return sourcePackage;
+    }
+    return null;
+  }
+
+  private void createSourceFile(File sourcePackage, String fileName, String... source)
+      throws IOException {
+    File file = new File(sourcePackage, fileName);
+    Files.write(Joiner.on("\n").join(source), file, Charset.forName("UTF-8"));
+  }
+
+  private String[] getTranspilerArgs(File inputDirectory) {
+    List<String> argList = new ArrayList<>();
+
+    argList.add(TRANSPILER_BINARY);
+
+    // Output dir
+    argList.add("-d");
+    argList.add(outputDir.getAbsolutePath());
+
+    // Input source
+    for (File sourceFile : listSourceFilesInDir(inputDirectory)) {
+      argList.add(sourceFile.getAbsolutePath());
+    }
+
+    Collections.addAll(argList, extraArgs);
+
+    return Iterables.toArray(argList, String.class);
+  }
+
+  private static List<File> listSourceFilesInDir(File directory) {
+    List<File> extensionFilesInDir = new ArrayList<>();
+    for (File fileInDir : directory.listFiles()) {
+      String fileName = fileInDir.getName();
+      if (fileName.endsWith(".java") || fileName.endsWith(".srcjar")) {
+        extensionFilesInDir.add(fileInDir);
+      }
+    }
+    return extensionFilesInDir;
   }
 }
