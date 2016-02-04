@@ -26,6 +26,7 @@ public class FieldDescriptorBuilder {
   private String fieldName;
   private TypeDescriptor typeDescriptor;
   private boolean isJsOverlay;
+  private boolean isJsProperty;
 
   public static FieldDescriptorBuilder from(FieldDescriptor fieldDescriptor) {
     FieldDescriptorBuilder builder = new FieldDescriptorBuilder();
@@ -36,6 +37,7 @@ public class FieldDescriptorBuilder {
     builder.fieldName = fieldDescriptor.getFieldName();
     builder.typeDescriptor = fieldDescriptor.getTypeDescriptor();
     builder.isJsOverlay = fieldDescriptor.isJsOverlay();
+    builder.isJsProperty = fieldDescriptor.isJsOverlay();
     return builder;
   }
 
@@ -74,6 +76,7 @@ public class FieldDescriptorBuilder {
         enclosingClassTypeDescriptor,
         fieldName,
         typeDescriptor,
-        isJsOverlay);
+        isJsOverlay,
+        isJsProperty);
   }
 }

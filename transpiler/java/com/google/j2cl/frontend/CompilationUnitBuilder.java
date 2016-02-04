@@ -365,15 +365,17 @@ public class CompilationUnitBuilder {
               ? new Block(new ArrayList<Statement>())
               : convert(methodDeclaration.getBody());
 
+      IMethodBinding methodBinding = methodDeclaration.resolveBinding();
       Method method =
           new Method(
-              JdtUtils.createMethodDescriptor(methodDeclaration.resolveBinding()),
+              JdtUtils.createMethodDescriptor(methodBinding),
               parameters,
               body,
-              JdtUtils.isAbstract(methodDeclaration.getModifiers()),
-              JdtUtils.isJsOverride(methodDeclaration.resolveBinding()),
-              JdtUtils.isFinal(methodDeclaration.getModifiers()),
+              JdtUtils.isAbstract(methodBinding.getModifiers()),
+              JdtUtils.isJsOverride(methodBinding),
+              JdtUtils.isFinal(methodBinding.getModifiers()),
               null);
+
       return method;
     }
 

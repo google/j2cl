@@ -282,6 +282,11 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  public boolean isEnumOrSubclass() {
+    return TypeProxyUtils.isEnumOrSubclass(typeBinding);
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_RegularTypeDescriptor.visit(processor, this);
   }

@@ -311,6 +311,10 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
     return false;
   }
 
+  public boolean isEnumOrSubclass() {
+    return false;
+  }
+
   public boolean subclassesJsConstructorClass() {
     return false;
   }

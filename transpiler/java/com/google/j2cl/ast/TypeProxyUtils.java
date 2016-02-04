@@ -151,6 +151,13 @@ public class TypeProxyUtils {
     return false;
   }
 
+  public static boolean isEnumOrSubclass(ITypeBinding typeBinding) {
+    if (typeBinding == null) {
+      return false;
+    }
+    return typeBinding.isEnum() || isEnumOrSubclass(typeBinding.getSuperclass());
+  }
+
   /**
    * Returns true if the given type has a JsConstructor.
    */

@@ -20,6 +20,8 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.errors.Errors;
 
+import java.util.List;
+
 /**
  * Checks and throws errors for invalid JsInterop constructs.
  */
@@ -41,6 +43,11 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkJavaType(JavaType javaType) {
+    if (javaType.getDescriptor().isNative()) {
+      if (!checkNativeJsType(javaType)) {
+        return;
+      }
+    }
     for (Field field : javaType.getFields()) {
       checkField(field);
     }
@@ -51,6 +58,9 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkField(Field field) {
+    if (field.getDescriptor().getEnclosingClassTypeDescriptor().isNative()) {
+      checkFieldOfNativeJsType(field);
+    }
     if (field.getDescriptor().isJsOverlay()) {
       checkJsOverlay(field);
     }
@@ -58,6 +68,9 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkMethod(Method method) {
+    if (method.getDescriptor().getEnclosingClassTypeDescriptor().isNative()) {
+      checkMethodOfNativeJsType(method);
+    }
     if (method.getDescriptor().isJsOverlay()) {
       checkJsOverlay(method);
     }
@@ -103,6 +116,125 @@ public class JsInteropRestrictionsChecker {
           "JsOverlay method '%s' cannot be non-final nor native.",
           readableDescription);
     }
+  }
+
+  private boolean checkNativeJsType(JavaType javaType) {
+    TypeDescriptor typeDescriptor = javaType.getDescriptor();
+    String readableDescription = getReadableDescription(typeDescriptor);
+
+    if (typeDescriptor.isEnumOrSubclass()) {
+      errors.error(
+          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          "Enum '%s' cannot be a native JsType.",
+          readableDescription);
+      return false;
+    }
+    if (typeDescriptor.isInstanceNestedClass()) {
+      errors.error(
+          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          "Non static inner class '%s' cannot be a native JsType.",
+          readableDescription);
+      return false;
+    }
+
+    TypeDescriptor superTypeDescriptor = javaType.getSuperTypeDescriptor();
+    if (superTypeDescriptor != null
+        && superTypeDescriptor != TypeDescriptors.get().javaLangObject
+        && !superTypeDescriptor.isNative()) {
+      errors.error(
+          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          "Native JsType '%s' can only extend native JsType classes.",
+          readableDescription);
+    }
+    for (TypeDescriptor interfaceType : javaType.getSuperInterfaceTypeDescriptors()) {
+      if (!interfaceType.isNative()) {
+        errors.error(
+            Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+            "Native JsType '%s' can only %s native JsType interfaces.",
+            readableDescription,
+            javaType.isInterface() ? "extend" : "implement");
+      }
+    }
+
+    if (!javaType.getInstanceInitializerBlocks().isEmpty()) {
+      errors.error(
+          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          "Native JsType '%s' cannot have initializer.",
+          readableDescription);
+    }
+
+    if (!javaType.getStaticInitializerBlocks().isEmpty()) {
+      errors.error(
+          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          "Native JsType '%s' cannot have static initializer.",
+          readableDescription);
+    }
+    return true;
+  }
+
+  private void checkMethodOfNativeJsType(Method method) {
+    if (method.getDescriptor().isJsOverlay()) {
+      return;
+    }
+    String readableDescription = getReadableDescription(method.getDescriptor());
+    JsMemberType jsMemberType = method.getDescriptor().getJsInfo().getJsMemberType();
+    switch (jsMemberType) {
+      case CONSTRUCTOR:
+        if (!isConstructorEmpty(method)) {
+          errors.error(
+              Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+              "Native JsType constructor '%s' cannot have non-empty method body.",
+              readableDescription);
+        }
+        break;
+      case METHOD:
+      case GETTER:
+      case SETTER:
+      case PROPERTY:
+        if (!method.isAbstract() && !method.isNative()) {
+          errors.error(
+              Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+              "Native JsType method '%s' should be native or abstract.",
+              readableDescription);
+        }
+        break;
+      case NONE:
+        errors.error(
+            Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+            "Native JsType member '%s' cannot have @JsIgnore.",
+            readableDescription);
+        break;
+      default:
+        break;
+    }
+  }
+
+  private void checkFieldOfNativeJsType(Field field) {
+    if (field.getDescriptor().isJsOverlay()) {
+      return;
+    }
+    String readableDescription = getReadableDescription(field.getDescriptor());
+    if (field.getDescriptor().isJsProperty()) {
+      if (field.hasInitializer()) {
+        errors.error(
+            Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+            "Native JsType field '%s' cannot have initializer.",
+            readableDescription);
+      }
+    } else {
+      errors.error(
+          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          "Native JsType member '%s' cannot have @JsIgnore.",
+          readableDescription);
+    }
+  }
+
+  /**
+   * Returns true if the constructor method is locally empty (allows calls to super constructor).
+   */
+  private static boolean isConstructorEmpty(Method constructor) {
+    List<Statement> statements = constructor.getBody().getStatements();
+    return statements.isEmpty() || (statements.size() == 1 && AstUtils.hasSuperCall(constructor));
   }
 
   private String getReadableDescription(FieldDescriptor fieldDescriptor) {

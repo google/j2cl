@@ -1220,97 +1220,172 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //        "Line 6: JsFunction 'EntryPoint.Buggy' cannot have static initializer.");
   //  }
   //
-  //  public void testNativeJsTypeStaticInitializerFails() {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) public static class Buggy {",
-  //        "  static {  int x = 1; }",
-  //        "}",
-  //        "@JsType(isNative=true) public static class Buggy2 {",
-  //        "  static {  Object.class.getName(); }",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //        "Line 4: Native JsType 'EntryPoint.Buggy' cannot have static initializer.",
-  //        "Line 7: Native JsType 'EntryPoint.Buggy2' cannot have static initializer.");
-  //  }
-  //
-  //  public void testNativeJsTypeInstanceInitializerFails() {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) public static class Buggy {",
-  //        "  { Object.class.getName(); }",
-  //        "}",
-  //        "@JsType(isNative=true) public static class Buggy2 {",
-  //        "  { int x = 1; }",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //        "Line 4: Native JsType 'EntryPoint.Buggy' cannot have initializer.",
-  //        "Line 7: Native JsType 'EntryPoint.Buggy2' cannot have initializer.");
-  //  }
-  //
-  //  public void testNativeJsTypeNonEmptyConstructorFails() {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) public static class Buggy {",
-  //        "  public Buggy(int n) {",
-  //        "    n++;",
-  //        "  }",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //       "Line 5: Native JsType constructor 'EntryPoint.Buggy.EntryPoint$Buggy(int)' cannot have "
-  //            + "non-empty method body.");
-  //  }
-  //
-  //  public void testNativeJsTypeImplicitSuperSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) public static class Super {",
-  //        "  public Super() {",
-  //        "  }",
-  //        "}",
-  //        "@JsType(isNative=true) public static class Buggy extends Super {",
-  //        "  public Buggy(int n) {",
-  //        "  }",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testNativeJsTypeExplicitSuperSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) public static class Super {",
-  //        "  public Super(int x) {",
-  //        "  }",
-  //        "}",
-  //        "@JsType(isNative=true) public static class Buggy extends Super {",
-  //        "  public Buggy(int n) {",
-  //        "    super(n);",
-  //        "  }",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testNativeJsTypeExplicitSuperWithEffectSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) public static class Super {",
-  //        "  public Super(int x) {",
-  //        "  }",
-  //        "}",
-  //        "@JsType(isNative=true) public static class Buggy extends Super {",
-  //        "  public Buggy(int n) {",
-  //        "    super(n++);",
-  //        "  }",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
+  public void testNativeJsTypeStaticInitializerFails() throws Exception {
+    File sourcePackage = createPackage("nativejstypestaticinitializer");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nativejstypestaticinitializer;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy {",
+        "  static {",
+        "    int x = 1;",
+        "  }",
+        "}");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy2.java",
+        "package nativejstypestaticinitializer;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy2 {",
+        "  static {",
+        "    Object.class.getName();",
+        "  }",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: Native JsType 'Buggy' cannot have static initializer.",
+        "JsInterop restrictions error: Native JsType 'Buggy2' cannot have static initializer.",
+        "2 error(s).");
+  }
+
+  public void testNativeJsTypeInstanceInitializerFails() throws Exception {
+    File sourcePackage = createPackage("nativejstypeinstanceinitializer");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nativejstypeinstanceinitializer;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy {",
+        "  {",
+        "    Object.class.getName();",
+        "  }",
+        "}");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy2.java",
+        "package nativejstypeinstanceinitializer;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy2 {",
+        "  {",
+        "    int x = 1;",
+        "  }",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: Native JsType 'Buggy' cannot have initializer.",
+        "JsInterop restrictions error: Native JsType 'Buggy2' cannot have initializer.",
+        "2 error(s).");
+  }
+
+  public void testNativeJsTypeNonEmptyConstructorFails() throws Exception {
+    File sourcePackage = createPackage("nativejstypenonemptyconstructor");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nativejstypenonemptyconstructor;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy {",
+        "  public Buggy(int n) {",
+        "    n++;",
+        "  }",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: Native JsType constructor 'Buggy.Buggy($int)' cannot have "
+            + "non-empty method body.",
+        "1 error(s).");
+  }
+
+  public void testNativeJsTypeImplicitSuperSucceeds() throws Exception {
+    File sourcePackage = createPackage("nativejstypeimplicitsuper");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nativejstypeimplicitsuper;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy extends Super {",
+        "  public Buggy(int n) {}",
+        "}");
+
+    createSourceFile(
+        sourcePackage,
+        "Super.java",
+        "package nativejstypeimplicitsuper;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Super {",
+        "  public Super() {}",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
+  public void testNativeJsTypeExplicitSuperSucceeds() throws Exception {
+    File sourcePackage = createPackage("nativejstypeexplicitsuper");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nativejstypeexplicitsuper;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy extends Super {",
+        "  public Buggy(int n) {",
+        "    super(n);",
+        "  }",
+        "}");
+
+    createSourceFile(
+        sourcePackage,
+        "Super.java",
+        "package nativejstypeexplicitsuper;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Super {",
+        "  public Super(int x) {}",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
+  public void testNativeJsTypeExplicitSuperWithEffectSucceeds() throws Exception {
+    File sourcePackage = createPackage("nativejstypeexplicitsuperwitheffect");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nativejstypeexplicitsuperwitheffect;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy extends Super {",
+        "  public Buggy(int n) {",
+        "    super(n++);",
+        "  }",
+        "}");
+
+    createSourceFile(
+        sourcePackage,
+        "Super.java",
+        "package nativejstypeexplicitsuperwitheffect;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Super {",
+        "  public Super(int x) {}",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
   //  public void testJsTypeInterfaceInInstanceofFails() throws Exception {
   //    addSnippetImport("jsinterop.annotations.JsType");
   //    addSnippetClassDecl(
@@ -1323,32 +1398,59 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //        + "'EntryPoint.IBuggy'.");
   //  }
   //
-  //  public void testNativeJsTypeEnumFails() {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) public enum Buggy { A, B }");
-  //
-  //    assertBuggyFails(
-  //        "Line 4: Enum 'EntryPoint.Buggy' cannot be a native JsType.");
-  //  }
-  //
-  //  public void testInnerNativeJsTypeFails() {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) public class Buggy { }");
-  //
-  //    assertBuggyFails(
-  //        "Line 4: Non static inner class 'EntryPoint.Buggy' cannot be a native JsType.");
-  //  }
-  //
-  //  public void testInnerJsTypeSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@SuppressWarnings(\"unusable-by-js\") @JsType public class Buggy { }");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
+  public void testNativeJsTypeEnumFails() throws Exception {
+    File sourcePackage = createPackage("nativejstypeenum");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nativejstypeenum;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public enum Buggy {",
+        "  A,",
+        "  B",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: Enum 'Buggy' cannot be a native JsType.",
+        "1 error(s).");
+  }
+
+  public void testInnerNativeJsTypeFails() throws Exception {
+    File sourcePackage = createPackage("innernativejstype");
+    createSourceFile(
+        sourcePackage,
+        "EntryPoint.java",
+        "package innernativejstype;",
+        "import jsinterop.annotations.JsType;",
+        "public class EntryPoint {",
+        "  @JsType(isNative = true)",
+        "  public class Buggy {}",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: Non static inner class 'EntryPoint$Buggy' cannot be a "
+            + "native JsType.",
+        "1 error(s).");
+  }
+
+  public void testInnerJsTypeSucceeds() throws Exception {
+    File sourcePackage = createPackage("innerjstype");
+    createSourceFile(
+        sourcePackage,
+        "EntryPoint.java",
+        "package innerjstype;",
+        "import jsinterop.annotations.JsType;",
+        "public class EntryPoint {",
+        "  @JsType",
+        "  public static class Buggy {}",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
   //  public void testLocalJsTypeFails() {
   //    addSnippetImport("jsinterop.annotations.JsType");
   //    addSnippetClassDecl(
@@ -1358,99 +1460,190 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //        "Line 4: Local class 'EntryPoint.Buggy.1Local' cannot be a JsType.");
   //  }
   //
-  //  public void testNativeJsTypeExtendsNativeJsTypeSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) public static class Super {",
-  //        "}",
-  //        "@JsType(isNative=true) public static class Buggy extends Super {",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testNativeJsTypeImplementsNativeJsTypeSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) public interface Super {",
-  //        "}",
-  //        "@JsType(isNative=true) public static class Buggy implements Super {",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testNativeJsTypeInterfaceImplementsNativeJsTypeSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) public interface Super {",
-  //        "}",
-  //        "@JsType(isNative=true) public interface Buggy extends Super {",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testNativeJsTypeExtendsJsTypeFails() {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType public static class Super {",
-  //        "}",
-  //        "@JsType(isNative=true) public static class Buggy extends Super {",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //        "Line 6: Native JsType 'EntryPoint.Buggy' can only extend native JsType classes.");
-  //  }
-  //
-  //  public void testNativeJsTypeImplementsJsTypeInterfaceFails() {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType public interface Interface {",
-  //        "}",
-  //        "@JsType(isNative=true) public static class Buggy implements Interface {",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //     "Line 6: Native JsType ''EntryPoint.Buggy'' can only implement native JsType interfaces.");
-  //  }
-  //
-  //  public void testNativeJsTypeInterfaceExtendsJsTypeInterfaceFails() {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType public interface Interface {",
-  //        "}",
-  //        "@JsType(isNative=true) public interface Buggy extends Interface {",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //        "Line 6: Native JsType ''EntryPoint.Buggy'' can only extend native JsType interfaces.");
-  //  }
-  //
-  //  public void testNativeJsTypeImplementsNonJsTypeFails() {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "public interface Super {",
-  //        "}",
-  //        "@JsType(isNative=true) public static class Buggy implements Super {",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //     "Line 6: Native JsType ''EntryPoint.Buggy'' can only implement native JsType interfaces.");
-  //  }
-  //
-  //  public void testNativeJsTypeInterfaceExtendsNonJsTypeFails() {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "public interface Super {",
-  //        "}",
-  //        "@JsType(isNative=true) public interface Buggy extends Super {",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //        "Line 6: Native JsType ''EntryPoint.Buggy'' can only extend native JsType interfaces.");
-  //  }
-  //
+  public void testNativeJsTypeExtendsNativeJsTypeSucceeds() throws Exception {
+    File sourcePackage = createPackage("nativejstypeextendsjstype");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nativejstypeextendsnativejstype;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy extends Super {}");
+
+    createSourceFile(
+        sourcePackage,
+        "Super.java",
+        "package nativejstypeextendsnativejstype;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Super {}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
+  public void testNativeJsTypeImplementsNativeJsTypeSucceeds() throws Exception {
+    File sourcePackage = createPackage("nativejstypeimplementsnativejstype");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nativejstypeimplementsnativejstype;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy implements Super {}");
+
+    createSourceFile(
+        sourcePackage,
+        "Super.java",
+        "package nativejstypeimplementsnativejstype;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public interface Super {}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
+  public void testNativeJsTypeInterfaceImplementsNativeJsTypeSucceeds() throws Exception {
+    File sourcePackage = createPackage("nativejstypeinterfaceimplementsnativejstype");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nativejstypeinterfaceimplementsnativejstype;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public interface Buggy extends Super {}");
+
+    createSourceFile(
+        sourcePackage,
+        "Super.java",
+        "package nativejstypeinterfaceimplementsnativejstype;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public interface Super {}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
+  public void testNativeJsTypeExtendsJsTypeFails() throws Exception {
+    File sourcePackage = createPackage("nativejstypeextendsjstype");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nativejstypeextendsjstype;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy extends Super {}");
+
+    createSourceFile(
+        sourcePackage,
+        "Super.java",
+        "package nativejstypeextendsjstype;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType",
+        "public class Super {}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: Native JsType 'Buggy' can only extend native JsType "
+            + "classes.",
+        "1 error(s).");
+  }
+
+  public void testNativeJsTypeImplementsJsTypeInterfaceFails() throws Exception {
+    File sourcePackage = createPackage("nativejstypeimplementsjstypeinterface");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nativejstypeimplementsjstypeinterface;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy implements Interface {}");
+
+    createSourceFile(
+        sourcePackage,
+        "Interface.java",
+        "package nativejstypeimplementsjstypeinterface;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType",
+        "public interface Interface {}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: Native JsType 'Buggy' can only implement native "
+            + "JsType interfaces.",
+        "1 error(s).");
+  }
+
+  public void testNativeJsTypeInterfaceExtendsJsTypeInterfaceFails() throws Exception {
+    File sourcePackage = createPackage("nativejstypeinterfaceextendsjstypeinterface");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nativejstypeinterfaceextendsjstypeinterface;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public interface Buggy extends Interface {}");
+
+    createSourceFile(
+        sourcePackage,
+        "Interface.java",
+        "package nativejstypeinterfaceextendsjstypeinterface;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType",
+        "public interface Interface {}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: Native JsType 'Buggy' can only extend native JsType "
+            + "interfaces.",
+        "1 error(s).");
+  }
+
+  public void testNativeJsTypeImplementsNonJsTypeFails() throws Exception {
+    File sourcePackage = createPackage("nativejstypeimplementsnonjstype");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nativejstypeimplementsnonjstype;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy implements Interface {}");
+
+    createSourceFile(
+        sourcePackage,
+        "Interface.java",
+        "package nativejstypeimplementsnonjstype;",
+        "public interface Interface {}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: Native JsType 'Buggy' can only implement native JsType "
+            + "interfaces.",
+        "1 error(s).");
+  }
+
+  public void testNativeJsTypeInterfaceExtendsNonJsTypeFails() throws Exception {
+    File sourcePackage = createPackage("nativejstypeinterfaceextendsnonjstype");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nativejstypeinterfaceextendsnonjstype;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public interface Buggy extends Super {}");
+
+    createSourceFile(
+        sourcePackage,
+        "Super.java",
+        "package nativejstypeinterfaceextendsnonjstype;",
+        "public interface Super {}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: Native JsType 'Buggy' can only extend native JsType "
+            + "interfaces.",
+        "1 error(s).");
+  }
+
   //  public void testNativeJsTypeInterfaceDefenderMethodsFails() {
   //    addSnippetImport("jsinterop.annotations.JsType");
   //    addSnippetImport("jsinterop.annotations.JsOverlay");
@@ -1604,8 +1797,6 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        // TODO: one more error about "Native JsType cannot have initializer." after check on
-        // native js type is implemented.
         "JsInterop restrictions error: JsOverlay field '$int Buggy.f2' can only be static.",
         "JsInterop restrictions error: JsOverlay method '$void Buggy.m()' cannot be non-final nor "
             + "native.",
@@ -1771,98 +1962,118 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //    assertBuggySucceeds();
   //  }
   //
-  //  public void testNativeJsTypeExtendsNaiveJsTypeSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) public static class Super {",
-  //        "}",
-  //        "@JsType(isNative=true) public static class Buggy extends Super {",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testNativeJsTypeBadMembersFails() {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsIgnore");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) static class Buggy {",
-  //        "  public static final int s = 42;",
-  //        "  public int f = 42;",
-  //        "  @JsIgnore public Buggy() { }",
-  //        "  @JsIgnore public int x;",
-  //        "  @JsIgnore public native void n();",
-  //        "  public void o() {}",
-  //        "  public native void p() /*-{}-*/;",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //    "Line 5: Native JsType 'EntryPoint.Buggy' cannot have initializer.",
-  //    "Line 6: Native JsType field 'int EntryPoint.Buggy.s' cannot have initializer.",
-  //    "Line 7: Native JsType field 'int EntryPoint.Buggy.f' cannot have initializer.",
-  //    "Line 8: Native JsType member 'EntryPoint.Buggy.EntryPoint$Buggy()' cannot have @JsIgnore.",
-  //    "Line 9: Native JsType member 'int EntryPoint.Buggy.x' cannot have @JsIgnore.",
-  //    "Line 10: Native JsType member 'void EntryPoint.Buggy.n()' cannot have @JsIgnore.",
-  //    "Line 11: Native JsType method 'void EntryPoint.Buggy.o()' should be native or abstract.",
-  //    "Line 12: JSNI method 'void EntryPoint.Buggy.p()' is not allowed in a native JsType.");
-  //  }
-  //
-  //  public void testNativeMethodOnJsTypeSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsMethod");
-  //    addSnippetClassDecl(
-  //        "public static class Buggy {",
-  //        "  @JsMethod public native void m();",
-  //        "  @JsMethod public native void n() /*-{}-*/;",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testNativeJsTypeSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) abstract static class Buggy {",
-  //        "  public static native void m();",
-  //        "  protected static native void m(Object o);",
-  //        "  private static native void m(String o);",
-  //        "  public Buggy() { }",
-  //        "  protected Buggy(Object o) { }",
-  //        "  private Buggy(String o) { }",
-  //        "  public native void n();",
-  //        "  protected native void n(Object o);",
-  //        "  private native void n(String o);",
-  //        "  public abstract void o();",
-  //        "  protected abstract void o(Object o);",
-  //        "  abstract void o(String o);",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testNativeJsTypeFieldsSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) static class Buggy {",
-  //        "  public static int f1;",
-  //        "  protected static int f2;",
-  //        "  private static int f3;",
-  //        "  public int f4;",
-  //        "  protected int f5;",
-  //        "  private int f6;",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testNativeJsTypeDefaultConstructorSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType(isNative=true) static class Buggy {",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
+
+  public void testNativeJsTypeBadMembersFails() throws Exception {
+    File sourcePackage = createPackage("nativejstypebadmembers");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nativejstypebadmembers;",
+        "import jsinterop.annotations.JsIgnore;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy {",
+        "  public static final int S = 42;",
+        "  public int f = 42;",
+        "  @JsIgnore",
+        "  public Buggy() {}",
+        "  @JsIgnore public int x;",
+        "  @JsIgnore",
+        "  public native void n();",
+        "  public void o() {}",
+        "  public native void p() /*-{}-*/;",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: Native JsType field '$int Buggy.S' cannot have initializer.",
+        "JsInterop restrictions error: Native JsType field '$int Buggy.f' cannot have initializer.",
+        "JsInterop restrictions error: Native JsType member 'Buggy.Buggy()' cannot have @JsIgnore.",
+        "JsInterop restrictions error: Native JsType member '$int Buggy.x' cannot have @JsIgnore.",
+        "JsInterop restrictions error: Native JsType member '$void Buggy.n()' cannot have "
+            + "@JsIgnore.",
+        "JsInterop restrictions error: Native JsType method '$void Buggy.o()' should be native or "
+            + "abstract.",
+        "6 error(s).");
+  }
+
+  public void testNativeMethodOnJsTypeSucceeds() throws Exception {
+    File sourcePackage = createPackage("nativemethodonjstype");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nativemethodonjstype;",
+        "import jsinterop.annotations.JsMethod;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType",
+        "public class Buggy {",
+        "  @JsMethod",
+        "  public native void m();",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
+  public void testNativeJsTypeSucceeds() throws Exception {
+    File sourcePackage = createPackage("nativejstype");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nativejstype;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public abstract class Buggy {",
+        "  public static native void m();",
+        "  protected static native void m(Object o);",
+        "  private static native void m(String o);",
+        "  public Buggy() {}",
+        "  protected Buggy(Object o) {}",
+        "  private Buggy(String o) {}",
+        "  public native void n();",
+        "  protected native void n(Object o);",
+        "  private native void n(String o);",
+        "  public abstract void o();",
+        "  protected abstract void o(Object o);",
+        "  abstract void o(String o);",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
+  public void testNativeJsTypeFieldsSucceeds() throws Exception {
+    File sourcePackage = createPackage("nativejstypefields");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nativejstypefields;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy {",
+        "  public static int f1;",
+        "  protected static int f2;",
+        "  private static int f3;",
+        "  public int f4;",
+        "  protected int f5;",
+        "  private int f6;",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
+  public void testNativeJsTypeDefaultConstructorSucceeds() throws Exception {
+    File sourcePackage = createPackage("nativejstypedefaultconstructor");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package nativejstypedefaultconstructor;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType(isNative = true)",
+        "public class Buggy {}",
+        "");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
   //  public void testNonJsTypeExtendingNativeJsTypeWithInstanceMethodSucceeds() throws Exception {
   //    addSnippetImport("jsinterop.annotations.JsType");
   //    addSnippetClassDecl(
