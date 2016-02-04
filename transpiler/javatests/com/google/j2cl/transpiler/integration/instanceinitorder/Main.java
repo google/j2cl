@@ -12,11 +12,12 @@ public class Main {
   }
 
   public int field1 = this.initializeField1();
-  public int field2 = initializeField2();
 
   {
-    assert initStep++ == 3; // #3
+    assert initStep++ == 2; // #2
   }
+
+  public int field2 = initializeField2();
 
   {
     assert initStep++ == 4; // #4
@@ -32,7 +33,7 @@ public class Main {
   }
 
   public int initializeField2() {
-    assert initStep++ == 2; // #2
+    assert initStep++ == 3; // #3
     return 0;
   }
 }

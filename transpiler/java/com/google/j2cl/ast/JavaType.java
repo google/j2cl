@@ -23,6 +23,8 @@ import com.google.j2cl.ast.processors.Context;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -227,7 +229,7 @@ public class JavaType extends Node {
   }
 
   public void addStaticInitializerBlock(Block staticInitializer) {
-    this.staticInitializerBlocks.add(staticInitializer);
+    staticInitializerBlocks.add(staticInitializer);
   }
 
   public TypeDescriptor getEnclosingTypeDescriptor() {
@@ -304,8 +306,41 @@ public class JavaType extends Node {
             }));
   }
 
+  /**
+   * Returns all the static fields and the static initializer blocks of the class, ordered by
+   * position.
+   */
+  public List<Positioned> getStaticFieldsAndInitializerBlocks() {
+    List<Positioned> staticFieldsAndInitializers = new ArrayList<>();
+    staticFieldsAndInitializers.addAll(getStaticFields());
+    staticFieldsAndInitializers.addAll(staticInitializerBlocks);
+    sortByPosition(staticFieldsAndInitializers);
+    return staticFieldsAndInitializers;
+  }
+
+  /**
+   * Returns all the instance fields and the instance initializer blocks of the class, ordered by
+   * position.
+   */
+  public List<Positioned> getInstanceFieldsAndInitializerBlocks() {
+    List<Positioned> instanceFieldsAndInitializers = new ArrayList<>();
+    instanceFieldsAndInitializers.addAll(getInstanceFields());
+    instanceFieldsAndInitializers.addAll(instanceInitializerBlocks);
+    sortByPosition(instanceFieldsAndInitializers);
+    return instanceFieldsAndInitializers;
+  }
+
   @Override
   public Node accept(Processor processor) {
     return Visitor_JavaType.visit(processor, this);
+  }
+
+  private static void sortByPosition(List<Positioned> elements) {
+    Collections.sort(elements, new Comparator<Positioned>() {
+      @Override
+      public int compare(Positioned a, Positioned b) {
+        return Integer.compare(a.getPosition(), b.getPosition());
+      }
+    });
   }
 }

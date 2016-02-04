@@ -9,15 +9,16 @@ public class Main {
   public static void main(String... args) {
     assert Main.counter == 5;
     assert Main.field1 == 2;
-    assert Main.field2 == 3;
+    assert Main.field2 == 4;
   }
 
   public static int field1 = initializeField1();
-  public static int field2 = initializeField2();
 
   static {
-    assert counter++ == 3; // #3
+    assert counter++ == 2; // #2
   }
+
+  public static int field2 = initializeField2();
 
   static {
     assert counter++ == 4; // #4
@@ -29,7 +30,7 @@ public class Main {
   }
 
   public static int initializeField2() {
-    assert counter++ == 2; // #2
+    assert counter++ == 3; // #3
     return counter;
   }
 }

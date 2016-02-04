@@ -111,6 +111,7 @@ public class EnumMethodsCreator {
     enumType.addField(
         FieldBuilder.fromDefault(this.namesToValuesMapFieldDescriptor)
             .initializer(NullLiteral.NULL)
+            .setPosition(-1) /* Position is not important */
             .build());
     enumType.addMethod(createValueOfMethod());
     enumType.addMethod(createValuesMethod());

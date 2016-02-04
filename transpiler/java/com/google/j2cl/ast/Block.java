@@ -25,8 +25,9 @@ import java.util.List;
  * Block Statement.
  */
 @Visitable
-public class Block extends Statement {
+public class Block extends Statement implements Positioned {
   @Visitable List<Statement> statements = new ArrayList<>();
+  private Integer position;
 
   public Block(List<Statement> statements) {
     Preconditions.checkNotNull(statements);
@@ -37,6 +38,18 @@ public class Block extends Statement {
 
   public List<Statement> getStatements() {
     return statements;
+  }
+
+  @Override
+  public int getPosition() {
+    if (position == null) {
+      throw new IllegalStateException("Position not defined for block " + this);
+    }
+    return position;
+  }
+
+  public void setPosition(Integer position) {
+    this.position = position;
   }
 
   @Override

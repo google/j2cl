@@ -596,18 +596,25 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       String superTypeName = expressionToString(superTypeDescriptor);
       sb.appendln("%s.$clinit();", superTypeName);
     }
-    for (Field field : javaType.getStaticFields()) {
-      if (field.hasInitializer() && !field.isCompileTimeConstant()) {
-        String fieldInitializer = expressionToString(field.getInitializer());
-        String fieldName = ManglingNameUtils.getMangledName(field.getDescriptor());
-        sb.appendln("%s.$%s = %s;", className, fieldName, fieldInitializer);
+    // Static field and static initializer blocks.
+    for (Object element : javaType.getStaticFieldsAndInitializerBlocks()) {
+      if (element instanceof Field) {
+        Field field = (Field) element;
+        if (field.hasInitializer() && !field.isCompileTimeConstant()) {
+          String fieldInitializer = expressionToString(field.getInitializer());
+          String fieldName = ManglingNameUtils.getMangledName(field.getDescriptor());
+          sb.appendln("%s.$%s = %s;", className, fieldName, fieldInitializer);
+        }
+      } else if (element instanceof Block) {
+        Block block = (Block) element;
+        for (Statement initializer : block.getStatements()) {
+          statementTransformer.renderStatement(initializer);
+        }
+      } else {
+        throw new UnsupportedOperationException("Unsupported element: " + element);
       }
     }
-    for (Block block : javaType.getStaticInitializerBlocks()) {
-      for (Statement initializer : block.getStatements()) {
-        statementTransformer.renderStatement(initializer);
-      }
-    }
+
     sb.appendln("}");
     sb.newLine();
     environment.setClinitEnclosingTypeDescriptor(null);
@@ -624,18 +631,24 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sb.appendln(" */");
     String methodName = String.format("$init__%s", mangledTypeName);
     sb.appendln("%s() {", methodName);
-    for (Field field : javaType.getInstanceFields()) {
-      if (field.hasInitializer() && !field.isCompileTimeConstant()) {
-        String fieldInitializer = expressionToString(field.getInitializer());
-        String fieldName = ManglingNameUtils.getMangledName(field.getDescriptor());
-        sb.appendln("this.%s = %s;", fieldName, fieldInitializer);
+    for (Object element : javaType.getInstanceFieldsAndInitializerBlocks()) {
+      if (element instanceof Field) {
+        Field field = (Field) element;
+        if (field.hasInitializer() && !field.isCompileTimeConstant()) {
+          String fieldInitializer = expressionToString(field.getInitializer());
+          String fieldName = ManglingNameUtils.getMangledName(field.getDescriptor());
+          sb.appendln("this.%s = %s;", fieldName, fieldInitializer);
+        }
+      } else if (element instanceof Block) {
+        Block block = (Block) element;
+        for (Statement initializer : block.getStatements()) {
+          statementTransformer.renderStatement(initializer);
+        }
+      } else {
+        throw new UnsupportedOperationException("Unsupported element: " + element);
       }
     }
-    for (Block block : javaType.getInstanceInitializerBlocks()) {
-      for (Statement initializer : block.getStatements()) {
-        statementTransformer.renderStatement(initializer);
-      }
-    }
+
     sb.appendln("}");
   }
 

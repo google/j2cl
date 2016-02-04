@@ -222,19 +222,22 @@ public class CompilationUnitBuilder {
         capturesByTypeDescriptor.putAll(
             currentTypeDescriptor, capturesByTypeDescriptor.get(type.getSuperTypeDescriptor()));
       }
-      for (Object object : bodyDeclarations) {
+      for (int i = 0; i < bodyDeclarations.size(); i++) {
+        Object object = bodyDeclarations.get(i);
         if (object instanceof FieldDeclaration) {
           FieldDeclaration fieldDeclaration = (FieldDeclaration) object;
-          type.addFields(convert(fieldDeclaration));
+          type.addFields(convert(fieldDeclaration, i));
         } else if (object instanceof MethodDeclaration) {
           MethodDeclaration methodDeclaration = (MethodDeclaration) object;
           type.addMethod(convert(methodDeclaration));
         } else if (object instanceof Initializer) {
           Initializer initializer = (Initializer) object;
+          Block block = convert(initializer.getBody());
+          block.setPosition(i);
           if (JdtUtils.isStatic(initializer.getModifiers())) {
-            type.addStaticInitializerBlock(convert(initializer.getBody()));
+            type.addStaticInitializerBlock(block);
           } else {
-            type.addInstanceInitializerBlock(convert(initializer.getBody()));
+            type.addInstanceInitializerBlock(block);
           }
         } else if (object instanceof AbstractTypeDeclaration) {
           // Nested class
@@ -253,14 +256,18 @@ public class CompilationUnitBuilder {
         FieldDescriptor fieldDescriptor =
             AstUtils.getFieldDescriptorForCapture(currentTypeDescriptor, capturedVariable);
         type.addField(
-            FieldBuilder.fromDefault(fieldDescriptor).capturedVariable(capturedVariable).build());
+            FieldBuilder.fromDefault(fieldDescriptor)
+            .capturedVariable(capturedVariable)
+            .setPosition(-1) /* Position is not important */
+            .build());
       }
       if (!inStaticContext && JdtUtils.isInstanceNestedClass(typeBinding)) {
         // add field for enclosing instance.
         type.addField(
             new Field(
                 AstUtils.getFieldDescriptorForEnclosingInstance(
-                    currentTypeDescriptor, type.getEnclosingTypeDescriptor())));
+                    currentTypeDescriptor, type.getEnclosingTypeDescriptor()),
+                -1 /* Position is not important */));
       }
 
       // Add dispatch methods for package private methods.
@@ -290,10 +297,11 @@ public class CompilationUnitBuilder {
               JdtUtils.createFieldDescriptor(enumConstantDeclaration.resolveVariable()))
           .initializer(initializer)
           .isEnumField(true)
+          .setPosition(-1) /* Position is not important */
           .build();
     }
 
-    private List<Field> convert(FieldDeclaration fieldDeclaration) {
+    private List<Field> convert(FieldDeclaration fieldDeclaration, int position) {
       List<Field> fields = new ArrayList<>();
       for (Object object : fieldDeclaration.fragments()) {
         org.eclipse.jdt.core.dom.VariableDeclarationFragment fragment =
@@ -310,6 +318,7 @@ public class CompilationUnitBuilder {
             FieldBuilder.fromDefault(JdtUtils.createFieldDescriptor(variableBinding))
                 .initializer(initializer)
                 .compileTimeConstant(variableBinding.getConstantValue() != null)
+                .setPosition(position)
                 .build();
         fields.add(field);
       }
@@ -1018,13 +1027,17 @@ public class CompilationUnitBuilder {
         FieldDescriptor fieldDescriptor =
             AstUtils.getFieldDescriptorForCapture(lambdaTypeDescriptor, capturedVariable);
         lambdaType.addField(
-            FieldBuilder.fromDefault(fieldDescriptor).capturedVariable(capturedVariable).build());
+            FieldBuilder.fromDefault(fieldDescriptor)
+                .capturedVariable(capturedVariable)
+                .setPosition(-1) /* Position is not important */
+                .build());
       }
       // Add field for enclosing instance.
       lambdaType.addField(
           new Field(
               AstUtils.getFieldDescriptorForEnclosingInstance(
-                  lambdaTypeDescriptor, lambdaType.getEnclosingTypeDescriptor())));
+                  lambdaTypeDescriptor, lambdaType.getEnclosingTypeDescriptor()),
+              -1 /* Position is not important */));
 
       // Add lambda class to compilation unit.
       j2clCompilationUnit.addType(lambdaType);

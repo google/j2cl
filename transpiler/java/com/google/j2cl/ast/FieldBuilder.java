@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
+
 /**
  * A Builder for easily and correctly creating modified versions of fields.
  */
@@ -24,6 +26,7 @@ public class FieldBuilder {
   private boolean compileTimeConstant;
   private boolean isEnumField;
   private Variable capturedVariable;
+  private Integer position;
 
   public static FieldBuilder from(Field field) {
     FieldBuilder builder = new FieldBuilder();
@@ -32,6 +35,7 @@ public class FieldBuilder {
     builder.compileTimeConstant = field.isCompileTimeConstant();
     builder.isEnumField = field.isEnumField();
     builder.capturedVariable = field.getCapturedVariable();
+    builder.position = field.getPosition();
     return builder;
   }
 
@@ -69,8 +73,14 @@ public class FieldBuilder {
     return this;
   }
 
+  public FieldBuilder setPosition(int position) {
+    this.position = position;
+    return this;
+  }
+
   public Field build() {
+    Preconditions.checkNotNull(position, "A position must be set");
     return new Field(
-        fieldDescriptor, initializer, compileTimeConstant, isEnumField, capturedVariable);
+        fieldDescriptor, initializer, compileTimeConstant, isEnumField, capturedVariable, position);
   }
 }
