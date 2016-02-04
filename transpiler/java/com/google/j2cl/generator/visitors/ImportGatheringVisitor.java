@@ -143,12 +143,12 @@ public class ImportGatheringVisitor extends AbstractVisitor {
       addTypeDescriptor(javaType.getNativeTypeDescriptor(), ImportCategory.EAGER);
     } else {
       // The synthesized JsOverlayImpl type does not need the class literal stuff, thus does not
-      // need the Util and Class native_boostrap types.
-      // TODO: remove this special casing when it becomes unnecessary after the $clinit() method is
-      // synthesized in the AST instead of in the template.
+      // need eagerly import the Class native_boostrap types.
       addTypeDescriptor(TypeDescriptors.get().javaLangClass, ImportCategory.LAZY);
-      addTypeDescriptor(BootstrapType.NATIVE_UTIL.getDescriptor(), ImportCategory.EAGER);
     }
+    // Util class implements some utility functions and does not depend on any other class, always
+    // import it eagerly.
+    addTypeDescriptor(BootstrapType.NATIVE_UTIL.getDescriptor(), ImportCategory.EAGER);
 
     // Collect type references.
     javaType.accept(this);
