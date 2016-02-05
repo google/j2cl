@@ -1,7 +1,12 @@
 # Description:
 #   j2cl/tools: j2cl tools.
 
-package(default_visibility = ["//:__subpackages__"])
+package(
+    default_visibility = [
+        "//java/com/google/protobuf/contrib/gwt:__pkg__",
+        "//:__subpackages__",
+    ],
+)
 
 # Google owns the copyright
 licenses(["unencumbered"])
