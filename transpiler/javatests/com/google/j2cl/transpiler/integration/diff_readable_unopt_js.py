@@ -14,12 +14,10 @@ import repo_util
 
 
 # pylint: disable=global-variable-not-assigned
-MANAGED_GOOGLE3_PATH = repo_util.MANAGED_GOOGLE3_PATH
 MIN_DIFF_CL = 98430399
 
 
 def main():
-  global MANAGED_GOOGLE3_PATH
   global MIN_DIFF_CL
 
   if len(sys.argv) != 2:
@@ -44,11 +42,13 @@ def main():
 
   print ("  blaze building readable unopt JS for '%s' in the managed repo" %
          test_name)
-  repo_util.build_readable_unoptimized_test(test_name, cwd=MANAGED_GOOGLE3_PATH)
+  repo_util.build_readable_unoptimized_test(test_name,
+                                            repo_util.get_managed_path())
 
   print "    formatting JS"
   managed_js_file = "/tmp/managed.%s.js" % test_name
-  shutil.copyfile(MANAGED_GOOGLE3_PATH + "/" + js_file_path, managed_js_file)
+  shutil.copyfile(repo_util.get_managed_path() + "/" + js_file_path,
+                  managed_js_file)
   process_util.run_cmd_get_output(["clang-format", "-i", managed_js_file])
 
   print ("  blaze building readable unopt JS for '%s' in the live repo" %

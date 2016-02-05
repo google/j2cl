@@ -13,10 +13,6 @@ import time
 import repo_util
 
 
-# pylint: disable=global-variable-not-assigned
-MANAGED_GOOGLE3_PATH = repo_util.MANAGED_GOOGLE3_PATH
-
-
 def find_last_stats(stat_lines, synced_to_cl):
   """Returns the opt size in the highest CL before the current sync cl."""
   last_optimized_size = 0
@@ -36,10 +32,9 @@ def find_last_stats(stat_lines, synced_to_cl):
 
 def make_size_report():
   """Compare current test sizes and generate a report."""
-  size_report_file = open(
-      os.path.join(
-          os.path.dirname(__file__), "size_report.txt"),
-      "w+")
+  file_name = os.path.join(os.path.dirname(__file__), "size_report.txt")
+  repo_util.check_out_file(file_name)
+  size_report_file = open(file_name, "w+")
 
   synced_to_cl = repo_util.compute_synced_to_cl()
   repo_util.managed_repo_sync_to(synced_to_cl)
@@ -52,9 +47,9 @@ def make_size_report():
   size_report_file.write("Synced @%s.\n" % synced_to_cl)
 
   print "  Collecting original optimized sizes."
-  repo_util.build_optimized_tests(cwd=MANAGED_GOOGLE3_PATH)
+  repo_util.build_optimized_tests(repo_util.get_managed_path())
   original_js_files_by_test_name = (
-      repo_util.get_js_files_by_test_name(cwd=MANAGED_GOOGLE3_PATH))
+      repo_util.get_js_files_by_test_name(repo_util.get_managed_path()))
   print "  Collecting modified optimized sizes."
   repo_util.build_optimized_tests()
   modified_js_files_by_test_name = repo_util.get_js_files_by_test_name()
@@ -79,7 +74,7 @@ def make_size_report():
     modified_js_file = modified_js_files_by_test_name.get(test_name)
 
     if original_js_file:
-      original_js_file = MANAGED_GOOGLE3_PATH + "/" + original_js_file
+      original_js_file = repo_util.get_managed_path() + "/" + original_js_file
 
     original_optimized_size = os.path.getsize(
         original_js_file) if original_js_file else -1

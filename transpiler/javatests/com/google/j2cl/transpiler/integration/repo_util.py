@@ -5,6 +5,7 @@
 """Util funcs for running Blaze on int. tests in managed and unmanaged repo."""
 
 
+import getpass
 import os
 from os.path import expanduser
 
@@ -38,8 +39,13 @@ READABLE_TEST_FILE = (
     "com/google/j2cl/transpiler/integration/"
     "%s/readable_unoptimized_js.js")
 HOME_DIR_PATH = expanduser("~")
-MANAGED_REPO_PATH = HOME_DIR_PATH + "/.j2cl-size-repo"
-MANAGED_GOOGLE3_PATH = MANAGED_REPO_PATH + "/google3"
+
+GIT_MANAGED_REPO_PATH = HOME_DIR_PATH + "/.j2cl-size-repo"
+GIT_GOOGLE3_PATH = GIT_MANAGED_REPO_PATH + "/google3"
+
+CITC_GOOGLE3_PATH = ("/google/src/cloud/%s/j2cl-size/google3" %
+                     getpass.getuser())
+
 JAVA8_BOOT_CLASS_PATH = ("--javac_bootclasspath="
                          "//third_party/java/jdk:langtools8-bootclasspath")
 
@@ -99,11 +105,15 @@ def build_readable_unoptimized_test(test_name, cwd=None):
 
 
 def compute_synced_to_cl():
-  """Returns the cl that git5 is currently synced to."""
-  status_line = process_util.run_cmd_get_output(["git5", "status"])
-  synced_to_cl = process_util.extract_pattern(
-      "Synced at CL (.*?) = ", status_line)
-  return int(synced_to_cl)
+  """Returns the cl that version control is currently synced to."""
+  if is_git():
+    status_line = process_util.run_cmd_get_output(["git5", "status"])
+    synced_to_cl = process_util.extract_pattern("Synced at CL (.*?) = ",
+                                                status_line)
+    return int(synced_to_cl)
+  else:
+    synced_to_cl = process_util.run_cmd_get_output(["srcfs", "get_readonly"])
+    return int(synced_to_cl)
 
 
 def get_js_files_by_test_name(cwd=None):
@@ -128,18 +138,65 @@ def get_js_files_by_test_name(cwd=None):
 
 
 def managed_repo_sync_to(cl):
-  process_util.run_cmd_get_output(
-      ["git5", "sync", "@" + str(cl), "--rebase"], cwd=MANAGED_GOOGLE3_PATH)
+  if is_git():
+    process_util.run_cmd_get_output(
+        ["git5", "sync", "@" + str(cl), "--rebase"],
+        cwd=GIT_GOOGLE3_PATH)
+  else:
+    process_util.run_cmd_get_output(
+        ["g4", "sync", "@" + str(cl)],
+        cwd=CITC_GOOGLE3_PATH)
 
 
 def managed_repo_validate_environment():
   """Ensure expected directories exist."""
-  global MANAGED_REPO_PATH
+  global GIT_MANAGED_REPO_PATH
 
-  if not os.path.isdir(MANAGED_REPO_PATH):
-    print("  Creating managed opt size tracking git5 repo at '%s'" %
-          MANAGED_REPO_PATH)
-    os.mkdir(MANAGED_REPO_PATH)
-    process_util.run_cmd_get_output(
-        ["git5", "start", "base", "//depot/google3/third_party/java_src/j2cl"],
-        cwd=MANAGED_REPO_PATH)
+  if is_git():
+    if not os.path.isdir(GIT_MANAGED_REPO_PATH):
+      print("  Creating managed opt size tracking git5 repo at '%s'" %
+            GIT_MANAGED_REPO_PATH)
+      os.mkdir(GIT_MANAGED_REPO_PATH)
+      process_util.run_cmd_get_output(
+          ["git5", "start", "base",
+           "//depot/google3/third_party/java_src/j2cl"],
+          cwd=GIT_MANAGED_REPO_PATH)
+  else:
+    if not os.path.isdir(CITC_GOOGLE3_PATH):
+      print("  Creating managed opt size tracking citc client at '%s'" %
+            CITC_GOOGLE3_PATH)
+      process_util.run_cmd_get_output(["g4", "citc", "j2cl-size"])
+
+
+def check_out_file(file_name):
+  """Edits/adds the specified file in the current VCS, if necessary."""
+  if is_git():
+    # No action necessary if in a git client.
+    return
+  if not os.path.isfile(file_name):
+    process_util.run_cmd_get_output(["g4", "add", file_name])
+  else:
+    process_util.run_cmd_get_output(["g4", "edit", file_name])
+
+
+_IS_GIT = None
+
+
+def is_git():
+  """Returns whether this is a git client."""
+  global _IS_GIT
+  if _IS_GIT is None:
+    _IS_GIT = True
+    try:
+      process_util.run_cmd_get_output(["git", "branch"])
+    except process_util.CmdExecutionError:
+      _IS_GIT = False
+  return _IS_GIT
+
+
+def get_cwd(managed):
+  return None if not managed else get_managed_path()
+
+
+def get_managed_path():
+  return GIT_GOOGLE3_PATH if is_git() else CITC_GOOGLE3_PATH
