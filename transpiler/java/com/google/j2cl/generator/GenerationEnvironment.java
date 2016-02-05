@@ -27,14 +27,19 @@ import java.util.Map;
  * Contains alias for variables and Type Descriptors.
  */
 public class GenerationEnvironment {
-  private Map<TypeDescriptor, String> aliasByTypeDescriptor = new HashMap<>();
+
+  /**
+   * A map from type binary named (e.g. a.b.Foo) to alias for that type. Keyed by binary name so
+   * generic and non-generic permutations of a class all map to the same type.
+   */
+  private Map<String, String> aliasByTypeBinaryName = new HashMap<>();
   private final Map<Variable, String> aliasByVariable;
   private TypeDescriptor clinitEnclosingTypeDescriptor;
 
   public GenerationEnvironment(Collection<Import> imports, Map<Variable, String> aliasByVariable) {
     JsDocNameUtils.init();
     for (Import anImport : imports) {
-      aliasByTypeDescriptor.put(anImport.getTypeDescriptor(), anImport.getAlias());
+      aliasByTypeBinaryName.put(anImport.getTypeDescriptor().getBinaryName(), anImport.getAlias());
     }
     this.aliasByVariable = aliasByVariable;
   }
@@ -47,7 +52,7 @@ public class GenerationEnvironment {
   }
 
   public String aliasForType(TypeDescriptor typeDescriptor) {
-    String alias = aliasByTypeDescriptor.get(typeDescriptor);
+    String alias = aliasByTypeBinaryName.get(typeDescriptor.getBinaryName());
     return alias == null ? typeDescriptor.getClassName() : alias;
   }
 
