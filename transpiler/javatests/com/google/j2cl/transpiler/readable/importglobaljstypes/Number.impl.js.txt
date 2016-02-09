@@ -11,13 +11,14 @@ goog.module('gen.com.google.j2cl.transpiler.readable.importglobaljstypes.Number$
 let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Number = goog.forwardDeclare('extern.Number');
-let $String = goog.forwardDeclare('extern.String');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let String = goog.forwardDeclare('gen.java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+let $Number = window.Number;
+let $String = window.String;
 
 
 class Number extends Object {
@@ -126,8 +127,6 @@ class Number extends Object {
    * @public
    */
   static $clinit() {
-    $Number = goog.module.get('extern.Number');
-    $String = goog.module.get('extern.String');
     Class = goog.module.get('gen.java.lang.Class$impl');
     String = goog.module.get('gen.java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');

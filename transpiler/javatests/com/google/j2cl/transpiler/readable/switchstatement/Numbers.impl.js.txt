@@ -11,8 +11,6 @@ goog.module('gen.com.google.j2cl.transpiler.readable.switchstatement.Numbers$imp
 let Enum = goog.require('gen.java.lang.Enum$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let $NativeObject = goog.forwardDeclare('extern.Object');
-let $NativeString = goog.forwardDeclare('extern.String');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let Object = goog.forwardDeclare('gen.java.lang.Object$impl');
 let String = goog.forwardDeclare('gen.java.lang.String$impl');
@@ -20,6 +18,9 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+let $NativeObject = window.Object;
+let $NativeString = window.String;
 
 
 /**
@@ -236,8 +237,6 @@ class Numbers extends Enum {
    */
   static $clinit() {
     Numbers.$clinit = function() {};
-    $NativeObject = goog.module.get('extern.Object');
-    $NativeString = goog.module.get('extern.String');
     Class = goog.module.get('gen.java.lang.Class$impl');
     Object = goog.module.get('gen.java.lang.Object$impl');
     String = goog.module.get('gen.java.lang.String$impl');

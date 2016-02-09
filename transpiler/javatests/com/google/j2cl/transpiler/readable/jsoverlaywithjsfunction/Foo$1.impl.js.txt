@@ -12,8 +12,9 @@ let Foo$Intf = goog.require('gen.com.google.j2cl.transpiler.readable.jsoverlaywi
 let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Foo = goog.forwardDeclare('extern.Object');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+let $Foo = window.Object;
 
 
 /**
@@ -134,7 +135,6 @@ class Foo$1 extends Object {
    * @public
    */
   static $clinit() {
-    $Foo = goog.module.get('extern.Object');
     Class = goog.module.get('gen.java.lang.Class$impl');
     Object.$clinit();
   }

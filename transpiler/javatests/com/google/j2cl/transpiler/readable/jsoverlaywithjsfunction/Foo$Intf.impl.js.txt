@@ -10,8 +10,9 @@ goog.module('gen.com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Foo = goog.forwardDeclare('extern.Object');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+let $Foo = window.Object;
 
 
 /**
@@ -82,10 +83,7 @@ class Foo$Intf {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {
-    $Foo = goog.module.get('extern.Object');
-    Class = goog.module.get('gen.java.lang.Class$impl');
-  }
+  static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
 };
 
 

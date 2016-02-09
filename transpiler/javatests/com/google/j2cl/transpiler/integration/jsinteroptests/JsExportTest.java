@@ -18,7 +18,6 @@ package com.google.j2cl.transpiler.integration.jsinteroptests;
 import com.google.j2cl.transpiler.integration.jsinteroptests.MyExportedClass.InnerClass;
 
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
@@ -290,16 +289,19 @@ public class JsExportTest extends MyTestCase {
   @JsProperty(namespace = "foo.MyExportedClassWithNamespace", name = "BAR")
   private static native int getBAR();
 
-  public void testInheritClassNamespace_empty() {
-    assertEquals(82, getDAN());
-    assertNotNull(new NativeMyClassWithEmptyNamespace());
-  }
-
-  @JsProperty(namespace = "MyClassWithEmptyNamespace", name = "DAN")
-  private static native int getDAN();
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "MyClassWithEmptyNamespace")
-  private static class NativeMyClassWithEmptyNamespace { }
+// Not supported in J2CL since the Closure import/export system does not allow exporting types
+// onto the global scope and if we emitted a normal "var $NativeFoo = window.Foo;" style global
+// type alias there would be nothing causing the file that provides Foo to be loaded.
+//  public void testInheritClassNamespace_empty() {
+//    assertEquals(82, getDAN());
+//    assertNotNull(new NativeMyClassWithEmptyNamespace());
+//  }
+//
+//  @JsProperty(namespace = "MyClassWithEmptyNamespace", name = "DAN")
+//  private static native int getDAN();
+//
+//  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "MyClassWithEmptyNamespace")
+//  private static class NativeMyClassWithEmptyNamespace {}
 
   public void testInheritClassNamespace_withName() {
     assertEquals(42, getBooBAR());

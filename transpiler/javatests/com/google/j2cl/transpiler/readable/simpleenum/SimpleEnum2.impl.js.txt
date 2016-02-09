@@ -11,8 +11,6 @@ goog.module('gen.com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2$impl
 let Enum = goog.require('gen.java.lang.Enum$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let $NativeObject = goog.forwardDeclare('extern.Object');
-let $NativeString = goog.forwardDeclare('extern.String');
 let SimpleEnum = goog.forwardDeclare(
     'gen.com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum$impl');
 let SimpleEnum2$1 = goog.forwardDeclare(
@@ -24,6 +22,9 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+let $NativeObject = window.Object;
+let $NativeString = window.String;
 
 
 /**
@@ -313,8 +314,6 @@ class SimpleEnum2 extends Enum {
    */
   static $clinit() {
     SimpleEnum2.$clinit = function() {};
-    $NativeObject = goog.module.get('extern.Object');
-    $NativeString = goog.module.get('extern.String');
     SimpleEnum = goog.module.get(
         'gen.com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum$impl');
     SimpleEnum2$1 = goog.module.get(

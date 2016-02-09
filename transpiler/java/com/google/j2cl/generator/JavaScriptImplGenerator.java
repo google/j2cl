@@ -117,20 +117,39 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sb.newLine();
 
     // goog.require(...) for eager imports.
-    for (Import eagerImport : ImportUtils.sortedList(importsByCategory.get(ImportCategory.EAGER))) {
-      String alias = eagerImport.getAlias();
-      String path = eagerImport.getImplModulePath();
-      sb.appendln("let %s = goog.require('%s');", alias, path);
+    List<Import> eagerImports = ImportUtils.sortedList(importsByCategory.get(ImportCategory.EAGER));
+    if (!eagerImports.isEmpty()) {
+      for (Import eagerImport : eagerImports) {
+        String alias = eagerImport.getAlias();
+        String path = eagerImport.getImplModulePath();
+        sb.appendln("let %s = goog.require('%s');", alias, path);
+      }
+      sb.newLine();
     }
-    sb.newLine();
 
     // goog.forwardDeclare(...) for lazy imports.
-    for (Import lazyImport : ImportUtils.sortedList(importsByCategory.get(ImportCategory.LAZY))) {
-      String alias = lazyImport.getAlias();
-      String path = lazyImport.getImplModulePath();
-      sb.appendln("let %s = goog.forwardDeclare('%s');", alias, path);
+    List<Import> lazyImports = ImportUtils.sortedList(importsByCategory.get(ImportCategory.LAZY));
+    if (!lazyImports.isEmpty()) {
+      for (Import lazyImport : lazyImports) {
+        String alias = lazyImport.getAlias();
+        String path = lazyImport.getImplModulePath();
+        sb.appendln("let %s = goog.forwardDeclare('%s');", alias, path);
+      }
+      sb.newLine();
     }
-    sb.newLine();
+
+    // = window.Blah; for extern imports (this is really just alias creation).
+    List<Import> externImports =
+        ImportUtils.sortedList(importsByCategory.get(ImportCategory.EXTERN));
+    if (!externImports.isEmpty()) {
+      for (Import externImport : externImports) {
+        String alias = externImport.getAlias();
+        String path = externImport.getImplModulePath();
+        sb.appendln("let %s = %s;", alias, path);
+      }
+      sb.newLine();
+    }
+
     sb.newLine();
   }
 

@@ -51,7 +51,8 @@ public class ImportGatheringVisitor extends AbstractVisitor {
    */
   public enum ImportCategory {
     EAGER,
-    LAZY
+    LAZY,
+    EXTERN
   }
 
   private Set<RegularTypeDescriptor> typeDescriptorsDefinedInCompilationUnit =
@@ -166,12 +167,15 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     recordLocalNameUses(typeDescriptorsDefinedInCompilationUnit);
     recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.LAZY));
     recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.EAGER));
+    recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.EXTERN));
 
     Map<ImportCategory, Set<Import>> importsByCategory = new LinkedHashMap<>();
     importsByCategory.put(
         ImportCategory.LAZY, toImports(typeDescriptorsByCategory.get(ImportCategory.LAZY)));
     importsByCategory.put(
         ImportCategory.EAGER, toImports(typeDescriptorsByCategory.get(ImportCategory.EAGER)));
+    importsByCategory.put(
+        ImportCategory.EXTERN, toImports(typeDescriptorsByCategory.get(ImportCategory.EXTERN)));
 
     return importsByCategory;
   }
@@ -204,12 +208,8 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     // Special case expand a dependency on the 'long' primitive into a dependency on both the 'long'
     // primitive and the native JS 'Long' emulation class.
     if (TypeDescriptors.get().primitiveLong == typeDescriptor) {
-      typeDescriptorsByCategory
-          .get(ImportCategory.EAGER)
-          .add((RegularTypeDescriptor) BootstrapType.NATIVE_LONG.getDescriptor());
-      typeDescriptorsByCategory
-          .get(importCategory)
-          .add((RegularTypeDescriptor) TypeDescriptors.get().primitiveLong);
+      addRawTypeDescriptor(ImportCategory.EAGER, BootstrapType.NATIVE_LONG.getDescriptor());
+      addRawTypeDescriptor(importCategory, TypeDescriptors.get().primitiveLong);
       return;
     }
 
@@ -243,13 +243,22 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
     // Do not import <global>, which has an empty qualified name.
     // Do not import "literal" native type, i.e. a native JS interface with global namespace.
-    if (typeDescriptor.isGlobal() || typeDescriptor.isGloballNativeInterface()) {
+    if (typeDescriptor.isGlobal() || typeDescriptor.isGlobalNativeInterface()) {
       return;
     }
 
-    typeDescriptorsByCategory
-        .get(importCategory)
-        .add((RegularTypeDescriptor) typeDescriptor.getRawTypeDescriptor());
+    addRawTypeDescriptor(importCategory, typeDescriptor.getRawTypeDescriptor());
+  }
+
+  private void addRawTypeDescriptor(
+      ImportCategory importCategory, TypeDescriptor rawTypeDescriptor) {
+    Preconditions.checkArgument(rawTypeDescriptor.getTypeArgumentDescriptors().isEmpty());
+
+    if (rawTypeDescriptor.isExtern()) {
+      importCategory = ImportCategory.EXTERN;
+    }
+
+    typeDescriptorsByCategory.get(importCategory).add((RegularTypeDescriptor) rawTypeDescriptor);
   }
 
   private void addLongsTypeDescriptor() {
@@ -279,5 +288,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   private ImportGatheringVisitor() {
     typeDescriptorsByCategory.put(ImportCategory.EAGER, new LinkedHashSet<RegularTypeDescriptor>());
     typeDescriptorsByCategory.put(ImportCategory.LAZY, new LinkedHashSet<RegularTypeDescriptor>());
+    typeDescriptorsByCategory.put(
+        ImportCategory.EXTERN, new LinkedHashSet<RegularTypeDescriptor>());
   }
 }

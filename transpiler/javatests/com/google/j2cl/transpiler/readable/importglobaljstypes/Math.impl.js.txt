@@ -11,9 +11,10 @@ goog.module('gen.com.google.j2cl.transpiler.readable.importglobaljstypes.Math$im
 let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Math$NativeMath = goog.forwardDeclare('extern.Math');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
+
+let $Math$NativeMath = window.Math;
 
 
 class Math extends Object {
@@ -112,7 +113,6 @@ class Math extends Object {
    * @public
    */
   static $clinit() {
-    $Math$NativeMath = goog.module.get('extern.Math');
     Class = goog.module.get('gen.java.lang.Class$impl');
     $double = goog.module.get('vmbootstrap.primitives.$double$impl');
     Object.$clinit();

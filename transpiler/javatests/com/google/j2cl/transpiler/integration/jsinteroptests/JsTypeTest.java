@@ -15,8 +15,6 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
-import static jsinterop.annotations.JsPackage.GLOBAL;
-
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
@@ -31,7 +29,7 @@ public class JsTypeTest extends MyTestCase {
 
   static class MyNativeJsTypeInterfaceImpl implements MyNativeJsTypeInterface {}
 
-  @JsType(isNative = true, namespace = GLOBAL, name = "JsTypeTest_MyNativeJsType")
+  @JsType(isNative = true, namespace = "qux", name = "JsTypeTest_MyNativeJsType")
   static class MyNativeJsType {}
 
   static class MyNativeJsTypeSubclass extends MyNativeJsType {}
@@ -77,7 +75,7 @@ public class JsTypeTest extends MyTestCase {
   /**
    * A test class marked with JsType but isn't referenced from any Java code except instanceof.
    */
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "JsTypeTest_MyNativeJsType")
+  @JsType(isNative = true, namespace = "qux", name = "JsTypeTest_MyNativeJsType")
   static class AliasToMyNativeJsTypeWithOnlyInstanceofReference {}
 
   @JsType(isNative = true, namespace = "testfoo.bar")

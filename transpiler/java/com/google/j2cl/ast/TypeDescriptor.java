@@ -263,7 +263,7 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
    *<p>This is used for the workaround that not generating goog.require for "literal" native types
    * so that users do not need to provide goog.module for it.
    */
-  public boolean isGloballNativeInterface() {
+  public boolean isGlobalNativeInterface() {
     return isNative() && isInterface() && JsInteropUtils.isGlobal(getJsTypeNamespace());
   }
 

@@ -206,7 +206,7 @@ public class JsDocNameUtils {
     }
 
     // Literal native js types do not refer to any concrete types.
-    if (typeDescriptor.isGloballNativeInterface()) {
+    if (typeDescriptor.isGlobalNativeInterface()) {
       return "*";
     }
 

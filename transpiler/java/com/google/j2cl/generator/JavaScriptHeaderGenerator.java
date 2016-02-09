@@ -58,6 +58,7 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
       String path = eagerImport.getHeaderModulePath();
       sb.appendln("let _%s = goog.require('%s');", alias, path);
     }
+    // externs imports are always available in the browser and don't need a header reference.
     sb.newLine();
     sb.newLine();
 

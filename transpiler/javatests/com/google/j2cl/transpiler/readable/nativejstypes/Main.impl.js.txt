@@ -14,13 +14,14 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let Foo = goog.forwardDeclare('com.acme.MyFoo');
 let Bar = goog.forwardDeclare(
     'com.google.j2cl.transpiler.readable.nativejstypes.Bar');
-let $Headers = goog.forwardDeclare('extern.Headers');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $JavaScriptObject =
     goog.forwardDeclare('vmbootstrap.JavaScriptObject$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+let $Headers = window.Headers;
 
 
 class Main extends Object {
@@ -159,7 +160,6 @@ class Main extends Object {
     Foo = goog.module.get('com.acme.MyFoo');
     Bar = goog.module.get(
         'com.google.j2cl.transpiler.readable.nativejstypes.Bar');
-    $Headers = goog.module.get('extern.Headers');
     Class = goog.module.get('gen.java.lang.Class$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $JavaScriptObject = goog.module.get('vmbootstrap.JavaScriptObject$impl');

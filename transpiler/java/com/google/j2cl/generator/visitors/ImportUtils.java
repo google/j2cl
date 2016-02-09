@@ -33,7 +33,8 @@ public class ImportUtils {
     return sortedList(
         union(
             importsByCategory.get(ImportCategory.EAGER),
-            importsByCategory.get(ImportCategory.LAZY)));
+            importsByCategory.get(ImportCategory.LAZY),
+            importsByCategory.get(ImportCategory.EXTERN)));
   }
 
   public static <T extends Comparable<T>> List<T> sortedList(Set<T> set) {

@@ -11,7 +11,6 @@ goog.module('gen.com.google.j2cl.transpiler.readable.jsproperties.Main$impl');
 let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let $Math = goog.forwardDeclare('extern.Math');
 let Bar = goog.forwardDeclare(
     'gen.com.google.j2cl.transpiler.readable.jsproperties.Bar$impl');
 let Foo = goog.forwardDeclare(
@@ -19,6 +18,8 @@ let Foo = goog.forwardDeclare(
 let NativeFoo = goog.forwardDeclare(
     'gen.com.google.j2cl.transpiler.readable.jsproperties.NativeFoo$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+let $Math = window.Math;
 
 
 class Main extends Object {
@@ -128,7 +129,6 @@ class Main extends Object {
    * @public
    */
   static $clinit() {
-    $Math = goog.module.get('extern.Math');
     Bar = goog.module.get(
         'gen.com.google.j2cl.transpiler.readable.jsproperties.Bar$impl');
     Foo = goog.module.get(

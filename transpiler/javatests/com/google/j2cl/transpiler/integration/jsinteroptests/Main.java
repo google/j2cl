@@ -32,7 +32,7 @@ public class Main {
     test.testExportedFieldRefInExportedMethod();
     test.testExportedMethod();
     test.testInheritClassNamespace();
-    test.testInheritClassNamespace_empty();
+    // test.testInheritClassNamespace_empty();
     // test.testInheritClassNamespace_nested();
     test.testInheritClassNamespace_nestedNoExport();
     test.testInheritClassNamespace_noExport();

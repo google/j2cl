@@ -10,7 +10,7 @@ licenses(["unencumbered"])
 
 js_library(
     name = "nativebootstrap",
-    srcs = glob(["**/*.js"]),
+    srcs = glob(["*.js"]),
     deps = [
         "//javascript/closure/math:long",
         "//javascript/closure:base",
