@@ -156,6 +156,12 @@ public class JsDocNameUtils {
         // JsDoc type should be a union type.
         jsDocName = String.format("(%s|%s)", jsDocName, getJsDocNameOfUnionType(rawTypeDescriptor));
       }
+      if (!shouldUseClassName
+          && (typeDescriptor.isJsFunctionInterface()
+              || typeDescriptor.isJsFunctionImplementation())) {
+        // JsFunction interface and implementor should accept a real JS function.
+        jsDocName = String.format("(%s|Function)", jsDocName);
+      }
       return jsDocName;
     }
 

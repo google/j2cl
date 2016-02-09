@@ -28,7 +28,6 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  * Devirtualizes method calls to instance methods of Object, unboxed types (Boolean, Double, String)
@@ -46,13 +45,12 @@ public class DevirtualizeMethodCallsVisitor extends AbstractRewriter {
   @Override
   public Node rewriteMethodCall(MethodCall methodCall) {
     MethodDescriptor targetMethodDescriptor = methodCall.getTarget();
-    if (targetMethodDescriptor.isStatic()
-        || targetMethodDescriptor.isConstructor()
-        || targetMethodDescriptor.isJsProperty() // never devirtualize JsProperty method.
-        || targetMethodDescriptor.isInit()) { // do not devirtualize the synthesized $init method.
+    if (targetMethodDescriptor.isStaticDispatch() || targetMethodDescriptor.isInit()) {
+      // TODO: remove the special casing for checking isInit() after init() function is synthesized
+      // at AST.
       return methodCall;
     }
-    return doDevirtualization(methodCall);
+    return devirtualize(methodCall);
   }
 
   /**
@@ -64,24 +62,24 @@ public class DevirtualizeMethodCallsVisitor extends AbstractRewriter {
    * Object and the super classes/interfaces of unboxed types are translated to the trampoline
    * methods which are implemented in corresponding types (Objects, Numbers, etc.).
    */
-  private Map<TypeDescriptor, TypeDescriptor> devirtualizationTypeDescriptorsMapping =
-      new LinkedHashMap<>();
+  private Map<TypeDescriptor, TypeDescriptor>
+      devirtualizedMethodTargetTypeDescriptorByTypeDescriptor = new LinkedHashMap<>();
 
   {
-    devirtualizationTypeDescriptorsMapping.put(
+    devirtualizedMethodTargetTypeDescriptorByTypeDescriptor.put(
         TypeDescriptors.get().javaLangObject, BootstrapType.OBJECTS.getDescriptor());
-    devirtualizationTypeDescriptorsMapping.put(
+    devirtualizedMethodTargetTypeDescriptorByTypeDescriptor.put(
         TypeDescriptors.get().javaLangBoolean, TypeDescriptors.get().javaLangBoolean);
-    devirtualizationTypeDescriptorsMapping.put(
+    devirtualizedMethodTargetTypeDescriptorByTypeDescriptor.put(
         TypeDescriptors.get().javaLangDouble, TypeDescriptors.get().javaLangDouble);
-    devirtualizationTypeDescriptorsMapping.put(
+    devirtualizedMethodTargetTypeDescriptorByTypeDescriptor.put(
         TypeDescriptors.get().javaLangString, TypeDescriptors.get().javaLangString);
-    devirtualizationTypeDescriptorsMapping.put(
+    devirtualizedMethodTargetTypeDescriptorByTypeDescriptor.put(
         TypeDescriptors.get().javaLangNumber, BootstrapType.NUMBERS.getDescriptor());
-    devirtualizationTypeDescriptorsMapping.put(
+    devirtualizedMethodTargetTypeDescriptorByTypeDescriptor.put(
         TypeDescriptors.get().javaLangComparable.getRawTypeDescriptor(),
         BootstrapType.COMPARABLES.getDescriptor());
-    devirtualizationTypeDescriptorsMapping.put(
+    devirtualizedMethodTargetTypeDescriptorByTypeDescriptor.put(
         TypeDescriptors.get().javaLangCharSequence, BootstrapType.CHAR_SEQUENCES.getDescriptor());
   }
 
@@ -96,11 +94,12 @@ public class DevirtualizeMethodCallsVisitor extends AbstractRewriter {
     }
     TypeDescriptor enclosingClassTypeDescriptor =
         methodCall.getTarget().getEnclosingClassTypeDescriptor().getRawTypeDescriptor();
-    for (Entry<TypeDescriptor, TypeDescriptor> entry :
-        devirtualizationTypeDescriptorsMapping.entrySet()) {
-      if (enclosingClassTypeDescriptor == entry.getKey()) {
-        return AstUtils.createDevirtualizedMethodCall(methodCall, entry.getValue(), entry.getKey());
-      }
+    if (devirtualizedMethodTargetTypeDescriptorByTypeDescriptor.containsKey(
+        enclosingClassTypeDescriptor)) {
+      return AstUtils.createDevirtualizedMethodCall(
+          methodCall,
+          devirtualizedMethodTargetTypeDescriptorByTypeDescriptor.get(
+              enclosingClassTypeDescriptor));
     }
     return methodCall;
   }
@@ -112,11 +111,10 @@ public class DevirtualizeMethodCallsVisitor extends AbstractRewriter {
       // Do not devirtualize the JsFunction method.
       return methodCall;
     }
-    return AstUtils.createDevirtualizedMethodCall(
-        methodCall, enclosingClassTypeDescriptor, enclosingClassTypeDescriptor);
+    return AstUtils.createDevirtualizedMethodCall(methodCall, enclosingClassTypeDescriptor);
   }
 
-  private MethodCall doDevirtualization(MethodCall methodCall) {
+  private MethodCall devirtualize(MethodCall methodCall) {
     if (methodCall.getTarget().getEnclosingClassTypeDescriptor().isJsFunctionImplementation()) {
       return devirtualizeJsFunctionImplMethodCalls(methodCall);
     } else {

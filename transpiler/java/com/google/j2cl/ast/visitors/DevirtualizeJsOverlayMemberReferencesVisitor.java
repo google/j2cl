@@ -69,8 +69,7 @@ public class DevirtualizeJsOverlayMemberReferencesVisitor extends AbstractRewrit
           .build();
     } else {
       // Devirtualize *instance* JsOverlay method.
-      return AstUtils.createDevirtualizedMethodCall(
-          methodCall, overlayTypeDescriptor, originalTypeDescriptor);
+      return AstUtils.createDevirtualizedMethodCall(methodCall, overlayTypeDescriptor);
     }
   }
 }

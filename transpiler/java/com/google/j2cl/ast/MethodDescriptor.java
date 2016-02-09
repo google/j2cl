@@ -174,6 +174,10 @@ public abstract class MethodDescriptor extends Node implements Member {
     return getJsInfo().getJsMemberType() == JsMemberType.CONSTRUCTOR;
   }
 
+  public boolean isStaticDispatch() {
+    return isStatic() || isConstructor();
+  }
+
   @Override
   public Node accept(Processor processor) {
     return Visitor_MethodDescriptor.visit(processor, this);

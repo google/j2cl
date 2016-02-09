@@ -75,6 +75,8 @@ are copyright and licensed as follows:
   4). 1) - 3) also apply on successors of JsConstructor class.
 - JsMethod:
   1). namespace can only be defined on native static methods. (cl/106852320)
+- JsFunction implementor
+  1). members in JsFunction implementor cannot be JsProperty/JsMethod. (maybe)
 
 ## Tracking Closure warning issues
 - https://b.corp.google.com/hotlists/269212

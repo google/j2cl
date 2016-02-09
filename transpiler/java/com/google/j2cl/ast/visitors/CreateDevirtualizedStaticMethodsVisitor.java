@@ -15,7 +15,9 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.AbstractRewriter;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JavaType;
@@ -53,17 +55,7 @@ public class CreateDevirtualizedStaticMethodsVisitor extends AbstractRewriter {
 
   @Override
   public Node rewriteMethod(Method method) {
-    if (method.getDescriptor().isStatic()
-        || method.isConstructor()
-        || method.getDescriptor().isJsProperty()) { // never devirtualize JsProperty method.
-      return method;
-    }
-    if (method.getDescriptor().isJsFunction()) {
-      return method; // Do not need to devirtualize JsFunction method.
-    }
-    if (method.getDescriptor().getEnclosingClassTypeDescriptor().isNative()
-        && !method.getDescriptor().isJsOverlay()) {
-      // do not devirtualize non-JsOverlay method in native JS type.
+    if (!shouldDevirtualize(method, getCurrentJavaType())) {
       return method;
     }
     Variable thisArg = new Variable("$thisArg", getCurrentJavaType().getDescriptor(), false, true);
@@ -89,6 +81,33 @@ public class CreateDevirtualizedStaticMethodsVisitor extends AbstractRewriter {
     // implement all the methods in its super interfaces.
     method.setBody(new Block());
     return method;
+  }
+
+  private boolean shouldDevirtualize(Method method, JavaType javaType) {
+    if (method.getDescriptor().isStaticDispatch()) {
+      return false;
+    }
+    // do not devirtualize non-JsOverlay method.
+    if (javaType.getDescriptor().isNative() && !method.getDescriptor().isJsOverlay()) {
+      return false;
+    }
+    if (javaType.getDescriptor().isJsFunctionImplementation()) {
+      if (method.getDescriptor().isJsFunction()) {
+        // If the JsFunction method has different method signature from the SAM method, it should be
+        // devirtualized.
+        MethodDescriptor samMethodDescriptor =
+            method
+                .getDescriptor()
+                .getEnclosingClassTypeDescriptor()
+                .getJsFunctionMethodDescriptor();
+        return !AstUtils.areParameterErasureEqual(method.getDescriptor(), samMethodDescriptor);
+      }
+    }
+    Preconditions.checkArgument(
+        !method.getDescriptor().isJsProperty(), "JsProperty should never be devirtualized");
+    // TODO: remove once init() function is synthesized in AST.
+    Preconditions.checkArgument(!method.getDescriptor().isInit(), "Do not devirtualize init().");
+    return true;
   }
 
   /**

@@ -218,12 +218,10 @@ public class TypeProxyUtils {
         "Type %s should have one and only one method.",
         jsFunctionInterface.getName());
     IMethodBinding interfaceSAM = jsFunctionInterface.getDeclaredMethods()[0];
-    for (IMethodBinding method : typeBinding.getDeclaredMethods()) {
-      if (method.overrides(interfaceSAM)) {
-        return JdtMethodUtils.createMethodDescriptor(method);
-      }
-    }
-    return null;
+    // If it is a parametric method, returns the original generic method, which has the same
+    // MethodDescriptor as the bridge method, and the JsFunction instance should return the bridge
+    // method, which does a casting on arguments.
+    return JdtMethodUtils.createMethodDescriptor(interfaceSAM.getMethodDeclaration());
   }
 
   private static List<TypeDescriptor> createTypeDescriptors(ITypeBinding[] typeBindings) {

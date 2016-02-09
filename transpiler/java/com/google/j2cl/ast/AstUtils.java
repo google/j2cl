@@ -380,21 +380,28 @@ public class AstUtils {
    * <p>instance.instanceMethod(a, b) => staticMethod(instance, a, b)
    */
   public static MethodCall createDevirtualizedMethodCall(
-      MethodCall methodCall,
-      TypeDescriptor enclosingClassTypeDescriptor,
-      TypeDescriptor instanceTypeDescriptor) {
+      MethodCall methodCall, TypeDescriptor targetTypeDescriptor) {
     MethodDescriptor targetMethodDescriptor = methodCall.getTarget();
     Preconditions.checkArgument(!targetMethodDescriptor.isConstructor());
     Preconditions.checkArgument(!targetMethodDescriptor.isStatic());
 
+    JsInfo devirtualizedMethodJsInfo = targetMethodDescriptor.getJsInfo();
+    // Devirtualized method is not JsFunction method.
+    if (devirtualizedMethodJsInfo.getJsMemberType() == JsMemberType.JS_FUNCTION) {
+      Preconditions.checkArgument(
+          !devirtualizedMethodJsInfo.isJsOverlay(), "JsFunction method cannot be JsOverlay.");
+      devirtualizedMethodJsInfo = JsInfo.NONE;
+    }
+    TypeDescriptor sourceTypeDescriptor = methodCall.getTarget().getEnclosingClassTypeDescriptor();
     MethodDescriptor methodDescriptor =
         MethodDescriptorBuilder.from(targetMethodDescriptor)
-            .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+            .enclosingClassTypeDescriptor(targetTypeDescriptor)
             .parameterTypeDescriptors(
                 Iterables.concat(
-                    Arrays.asList(instanceTypeDescriptor), // add the first parameter type.
+                    Arrays.asList(sourceTypeDescriptor), // add the first parameter type.
                     targetMethodDescriptor.getParameterTypeDescriptors()))
             .isStatic(true)
+            .jsInfo(devirtualizedMethodJsInfo)
             .build();
 
     List<Expression> arguments = methodCall.getArguments();
@@ -451,7 +458,7 @@ public class AstUtils {
 
     MethodCall methodCall = MethodCall.createRegularMethodCall(expression, valueMethodDescriptor);
     if (TypeDescriptors.isBoxedBooleanOrDouble(boxType)) {
-      methodCall = createDevirtualizedMethodCall(methodCall, boxType, boxType);
+      methodCall = createDevirtualizedMethodCall(methodCall, boxType);
     }
     return methodCall;
   }
@@ -746,5 +753,24 @@ public class AstUtils {
       }
     }
     return null;
+  }
+
+  /**
+   * Two methods are parameter erasure equal if the erasure of their parameters' types are equal.
+   */
+  public static boolean areParameterErasureEqual(MethodDescriptor left, MethodDescriptor right) {
+    List<TypeDescriptor> leftParameterTypeDescriptors = left.getParameterTypeDescriptors();
+    List<TypeDescriptor> rightParameterTypeDescriptors = right.getParameterTypeDescriptors();
+    if (!left.getMethodName().equals(right.getMethodName())
+        || leftParameterTypeDescriptors.size() != rightParameterTypeDescriptors.size()) {
+      return false;
+    }
+    for (int i = 0; i < leftParameterTypeDescriptors.size(); i++) {
+      if (leftParameterTypeDescriptors.get(i).getRawTypeDescriptor()
+          != rightParameterTypeDescriptors.get(i).getRawTypeDescriptor()) {
+        return false;
+      }
+    }
+    return true;
   }
 }

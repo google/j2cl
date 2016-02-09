@@ -21,6 +21,8 @@ import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
+import com.google.j2cl.ast.JsInfo;
+import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -252,6 +254,13 @@ public class BridgeMethodsCreator {
     // The MethodDescriptor of the delegated method.
     MethodDescriptor targetMethodDescriptor =
         createMethodDescriptorInCurrentType(targetMethod, targetMethod.getReturnType());
+    JsInfo targetMethodJsInfo = targetMethodDescriptor.getJsInfo();
+    // If a JsFunction method needs a bridge, only the bridge method is a JsFunction method, and it
+    // delegates to the *real* implementation, which is not a JsFunction method.
+    if (targetMethodJsInfo.getJsMemberType() == JsMemberType.JS_FUNCTION) {
+      targetMethodDescriptor =
+          MethodDescriptorBuilder.from(targetMethodDescriptor).jsInfo(JsInfo.NONE).build();
+    }
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
 
@@ -295,6 +304,6 @@ public class BridgeMethodsCreator {
         false,
         false,
         false,
-        "Synthetic method.");
+        "Bridge method.");
   }
 }
