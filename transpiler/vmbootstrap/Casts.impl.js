@@ -38,15 +38,18 @@ class Casts {
    * @return {*}
    */
   static toInternal(instance, castTypeIsInstance) {
-    if (!CAST_CHECKS_ENABLED_) {
+    // This format can be inlined when the define is off. Be careful when
+    // editing this code.
+    if (CAST_CHECKS_ENABLED_) {
+      if (instance == null) {
+        return instance;
+      }
+      if (!castTypeIsInstance(instance)) {
+        Casts.throwCastException();
+      }
       return instance;
     }
-    if (instance == null) {
-      return instance;
-    }
-    if (!castTypeIsInstance(instance)) {
-      Casts.throwCastException();
-    }
+
     return instance;
   }
 
