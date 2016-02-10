@@ -23,22 +23,47 @@ import org.apache.commons.lang.StringUtils;
  * Builds source and tracks line numbers using a StringBuilder.
  */
 class SourceBuilder {
+  static final String INDENT = "  ";
   private StringBuilder sb = new StringBuilder();
   private int lineNumber = 0;
+  private int indentationLevel = 0;
+  private boolean onNewLine = false;
 
   /**
    * Appends some source and returns its resulting location.
    */
   public SourceInfo append(String source) {
-    sb.append(source);
     int numNewLines = StringUtils.countMatches(source, System.lineSeparator());
+    // For lines with JSDoc we do want to unindent so we just leave it at the same indentation
+    // level.
+    boolean containsBlock = source.contains("{") && source.contains("}");
+    if (!containsBlock) {
+      // We unindent immediately if there is a } so that the } is at the outer indentation level
+      indentationLevel -= StringUtils.countMatches(source, "}");
+    }
+
     int lastNewLineIndex = 0;
     if (numNewLines > 0) {
       lastNewLineIndex = source.lastIndexOf(System.lineSeparator());
     }
+
+    String indent = onNewLine ? StringUtils.repeat(INDENT, indentationLevel) : "";
+    sb.append(indent + source);
+
+    if (!containsBlock) {
+      // We want to keep the { at the outer indentation so we indent after it has been written
+      // to the buffer.
+      indentationLevel += StringUtils.countMatches(source, "{");
+    }
+
     SourceInfo outputLocation =
-        new SourceInfo(lineNumber, 0, lineNumber + numNewLines, source.length() - lastNewLineIndex);
+        new SourceInfo(
+            lineNumber,
+            indent.length(),
+            lineNumber + numNewLines,
+            source.length() - lastNewLineIndex);
     lineNumber += numNewLines;
+    onNewLine = source.endsWith(System.lineSeparator());
     return outputLocation;
   }
 
@@ -48,7 +73,7 @@ class SourceBuilder {
    */
   public SourceInfo appendln(String sourceLine) {
     SourceInfo outputLocation = append(sourceLine);
-    append("\n");
+    append(System.lineSeparator());
     return outputLocation;
   }
 

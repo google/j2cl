@@ -131,7 +131,7 @@ public class StatementTransformer {
         SourceInfo location = builder.append("do ");
         doWhileStatement.getBody().accept(this);
         String conditionAsString = toSourceExpression(doWhileStatement.getConditionExpression());
-        builder.appendln(String.format(" while(%s);", conditionAsString));
+        builder.appendln(String.format("while(%s);", conditionAsString));
         doWhileStatement.setOutputSourceInfo(location);
         return false;
       }

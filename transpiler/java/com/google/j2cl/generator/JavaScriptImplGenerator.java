@@ -533,8 +533,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sb.appendln(" * Defines instance fields.");
     sb.appendln(" * @private");
     sb.appendln(" */");
-    sb.appendln("  constructor() {");
-    sb.appendln("    super();");
+    sb.appendln("constructor() {");
+    sb.appendln("super();");
     renderFieldsInitialValues();
     sb.appendln("}");
     sb.newLine();
