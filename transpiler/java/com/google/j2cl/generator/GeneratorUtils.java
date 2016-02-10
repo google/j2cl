@@ -21,6 +21,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryOperator;
+import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
@@ -170,12 +171,19 @@ public class GeneratorUtils {
    * Returns whether the $clinit function should be rewritten as NOP.
    */
   public static boolean needRewriteClinit(JavaType type) {
-    for (Field staticField : type.getStaticFields()) {
-      if (staticField.hasInitializer()) {
+    for (Object element : type.getStaticFieldsAndInitializerBlocks()) {
+      if (element instanceof Field) {
+        Field field = (Field) element;
+        if (field.hasInitializer() && !field.isCompileTimeConstant()) {
+          return true;
+        }
+      } else if (element instanceof Block) {
         return true;
+      } else {
+        throw new UnsupportedOperationException("Unsupported element: " + element);
       }
     }
-    return !type.getStaticInitializerBlocks().isEmpty();
+    return false;
   }
 
   /**
