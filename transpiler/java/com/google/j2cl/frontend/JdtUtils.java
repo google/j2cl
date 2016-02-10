@@ -131,6 +131,7 @@ public class JdtUtils {
     boolean isJsProperty = JsInteropUtils.isJsProperty(variableBinding);
     boolean isRaw = isJsProperty;
     boolean isJsOverlay = JsInteropUtils.isJsOverlay(variableBinding);
+    boolean isCompileTimeConstant = variableBinding.getConstantValue() != null;
     return FieldDescriptor.create(
         isStatic,
         isRaw,
@@ -139,7 +140,8 @@ public class JdtUtils {
         fieldName,
         thisTypeDescriptor,
         isJsOverlay,
-        isJsProperty);
+        isJsProperty,
+        isCompileTimeConstant);
   }
 
   public static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {

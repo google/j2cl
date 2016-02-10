@@ -23,7 +23,6 @@ import com.google.common.base.Preconditions;
 public class FieldBuilder {
   private FieldDescriptor fieldDescriptor;
   private Expression initializer;
-  private boolean compileTimeConstant;
   private boolean isEnumField;
   private Variable capturedVariable;
   private Integer position;
@@ -32,7 +31,6 @@ public class FieldBuilder {
     FieldBuilder builder = new FieldBuilder();
     builder.fieldDescriptor = field.getDescriptor();
     builder.initializer = field.getInitializer();
-    builder.compileTimeConstant = field.isCompileTimeConstant();
     builder.isEnumField = field.isEnumField();
     builder.capturedVariable = field.getCapturedVariable();
     builder.position = field.getPosition();
@@ -47,11 +45,6 @@ public class FieldBuilder {
 
   public FieldBuilder initializer(Expression initializer) {
     this.initializer = initializer;
-    return this;
-  }
-
-  public FieldBuilder compileTimeConstant(boolean compileTimeConstant) {
-    this.compileTimeConstant = compileTimeConstant;
     return this;
   }
 
@@ -80,7 +73,6 @@ public class FieldBuilder {
 
   public Field build() {
     Preconditions.checkNotNull(position, "A position must be set");
-    return new Field(
-        fieldDescriptor, initializer, compileTimeConstant, isEnumField, capturedVariable, position);
+    return new Field(fieldDescriptor, initializer, isEnumField, capturedVariable, position);
   }
 }

@@ -32,7 +32,8 @@ public abstract class FieldDescriptor extends Node implements Member {
       String fieldName,
       TypeDescriptor typeDescriptor,
       boolean isJsOverlay,
-      boolean isJsProperty) {
+      boolean isJsProperty,
+      boolean isCompileTimeConstant) {
     return new AutoValue_FieldDescriptor(
         isStatic,
         isRaw,
@@ -41,7 +42,8 @@ public abstract class FieldDescriptor extends Node implements Member {
         fieldName,
         typeDescriptor,
         isJsOverlay,
-        isJsProperty);
+        isJsProperty,
+        isCompileTimeConstant);
   }
 
   /**
@@ -59,6 +61,7 @@ public abstract class FieldDescriptor extends Node implements Member {
         enclosingClassTypeDescriptor,
         fieldName,
         typeDescriptor,
+        false,
         false,
         false);
   }
@@ -84,6 +87,8 @@ public abstract class FieldDescriptor extends Node implements Member {
   public abstract boolean isJsOverlay();
 
   public abstract boolean isJsProperty();
+
+  public abstract boolean isCompileTimeConstant();
 
   public boolean isFieldDescriptorForCapturedVariables() {
     return getFieldName().startsWith(AstUtils.CAPTURES_PREFIX);

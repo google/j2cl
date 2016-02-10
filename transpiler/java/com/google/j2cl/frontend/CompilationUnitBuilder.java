@@ -317,7 +317,6 @@ public class CompilationUnitBuilder {
         Field field =
             FieldBuilder.fromDefault(JdtUtils.createFieldDescriptor(variableBinding))
                 .initializer(initializer)
-                .compileTimeConstant(variableBinding.getConstantValue() != null)
                 .setPosition(position)
                 .build();
         fields.add(field);

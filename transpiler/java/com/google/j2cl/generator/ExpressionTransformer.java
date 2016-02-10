@@ -164,13 +164,18 @@ public class ExpressionTransformer {
 
       @Override
       public String transformFieldAccess(FieldAccess fieldAccess) {
-        // Populated by template system when inside of $clinits.
-        boolean accessStaticFieldDirectly =
-            fieldAccess.getTarget().getEnclosingClassTypeDescriptor().equals(
-                environment.getClinitEnclosingTypeDescriptor());
+        // When inside a $clinits, access static fields directly.
+        boolean insideEnclosingClassClinit =
+            fieldAccess
+                .getTarget()
+                .getEnclosingClassTypeDescriptor()
+                .equals(environment.getClinitEnclosingTypeDescriptor());
+        // No private backing field for compile time constants.
+        boolean accessBackingPrivateField =
+            !fieldAccess.getTarget().isCompileTimeConstant() && insideEnclosingClassClinit;
 
         String fieldMangledName =
-            ManglingNameUtils.getMangledName(fieldAccess.getTarget(), accessStaticFieldDirectly);
+            ManglingNameUtils.getMangledName(fieldAccess.getTarget(), accessBackingPrivateField);
         String qualifier = transform(fieldAccess.getQualifier(), environment);
         return String.format("%s.%s", qualifier, fieldMangledName);
       }

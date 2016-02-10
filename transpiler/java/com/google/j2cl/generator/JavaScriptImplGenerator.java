@@ -555,6 +555,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderStaticFieldGettersSetters() {
     for (Field staticField : javaType.getStaticFields()) {
+      if (staticField.isCompileTimeConstant()) {
+        continue;
+      }
       Visibility staticFieldVisibility = staticField.getDescriptor().getVisibility();
       String staticFieldType = getJsDocName(staticField.getDescriptor().getTypeDescriptor());
       String indirectStaticFieldName =
@@ -675,13 +678,23 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     for (Field staticField : javaType.getStaticFields()) {
       String jsDocType =
           JsDocNameUtils.getJsDocName(staticField.getDescriptor().getTypeDescriptor(), environment);
-      String directFieldAccess =
-          ManglingNameUtils.getMangledName(staticField.getDescriptor(), true);
       String initialValue = expressionToString(GeneratorUtils.getInitialValue(staticField));
-      sb.appendln("/**");
-      sb.appendln(" * @private {%s}", jsDocType);
-      sb.appendln(" */");
-      sb.appendln("%s.%s = %s;", className, directFieldAccess, initialValue);
+      if (staticField.isCompileTimeConstant()) {
+        String publicFieldAccess =
+            ManglingNameUtils.getMangledName(staticField.getDescriptor(), false);
+        sb.appendln("/**");
+        sb.appendln(" * @public {%s}", jsDocType);
+        sb.appendln(" * @const");
+        sb.appendln(" */");
+        sb.appendln("%s.%s = %s;", className, publicFieldAccess, initialValue);
+      } else {
+        String privateFieldAccess =
+            ManglingNameUtils.getMangledName(staticField.getDescriptor(), true);
+        sb.appendln("/**");
+        sb.appendln(" * @private {%s}", jsDocType);
+        sb.appendln(" */");
+        sb.appendln("%s.%s = %s;", className, privateFieldAccess, initialValue);
+      }
       sb.newLine();
       sb.newLine();
     }

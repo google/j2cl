@@ -29,7 +29,6 @@ import javax.annotation.Nullable;
 public class Field extends Node implements Positioned {
   @Visitable FieldDescriptor fieldDescriptor;
   @Visitable @Nullable Expression initializer;
-  private boolean compileTimeConstant;
   private boolean isEnumField;
   private Variable capturedVariable;
   private final int position;
@@ -37,13 +36,11 @@ public class Field extends Node implements Positioned {
   public Field(
       FieldDescriptor fieldDescriptor,
       Expression initializer,
-      boolean compileTimeConstant,
       boolean isEnumField,
       Variable capturedVariable,
       int position) {
     this(fieldDescriptor, position);
     this.initializer = initializer;
-    this.compileTimeConstant = compileTimeConstant;
     this.isEnumField = isEnumField;
     this.capturedVariable = capturedVariable;
   }
@@ -71,7 +68,7 @@ public class Field extends Node implements Positioned {
   }
 
   public boolean isCompileTimeConstant() {
-    return compileTimeConstant;
+    return fieldDescriptor.isCompileTimeConstant();
   }
 
   public boolean isEnumField() {
