@@ -28,7 +28,7 @@ class MyFunction {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -54,7 +54,7 @@ class MyFunction {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -96,7 +96,7 @@ class MyFunction {
 MyFunction.$classMyFunction_ = null;
 
 
-MyFunction.$markImplementor(/** @type {Function} */ (MyFunction));
+MyFunction.$markImplementor(/** @type {window.Function} */ (MyFunction));
 
 
 /**

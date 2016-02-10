@@ -23,7 +23,7 @@ let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 class SubNativeInterface {
   /**
    * Marks the provided class as implementing this interface.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -50,7 +50,7 @@ class SubNativeInterface {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -93,7 +93,7 @@ SubNativeInterface.$classSubNativeInterface_ = null;
 
 
 SubNativeInterface.$markImplementor(
-    /** @type {Function} */ (SubNativeInterface));
+    /** @type {window.Function} */ (SubNativeInterface));
 
 
 /**

@@ -207,7 +207,7 @@ public class JsDocNameUtils {
         && (typeDescriptor.isJsFunctionInterface()
             || typeDescriptor.isJsFunctionImplementation())) {
       return String.format(
-          "(%s|Function)", ExpressionTransformer.transform(typeDescriptor, environment));
+          "(%s|window.Function)", ExpressionTransformer.transform(typeDescriptor, environment));
 
     }
 

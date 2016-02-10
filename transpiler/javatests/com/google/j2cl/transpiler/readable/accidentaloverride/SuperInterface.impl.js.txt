@@ -28,7 +28,7 @@ class SuperInterface {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -54,7 +54,7 @@ class SuperInterface {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -96,7 +96,8 @@ class SuperInterface {
 SuperInterface.$classSuperInterface_ = null;
 
 
-SuperInterface.$markImplementor(/** @type {Function} */ (SuperInterface));
+SuperInterface.$markImplementor(
+    /** @type {window.Function} */ (SuperInterface));
 
 
 /**

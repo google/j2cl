@@ -54,7 +54,7 @@ class StaticConstant extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -87,33 +87,6 @@ class StaticConstant extends Object {
   m_getClass() { return StaticConstant.$getClass(); }
 
   /**
-   * A static field getter.
-   * @return {number}
-   * @public
-   */
-  static get
-  f_FOO__com_google_j2cl_transpiler_readable_staticconstant_StaticConstant() {
-    StaticConstant.$clinit();
-    return StaticConstant
-        .$f_FOO__com_google_j2cl_transpiler_readable_staticconstant_StaticConstant;
-  }
-
-  /**
-   * A static field setter.
-   * @param {number} value
-   * @return {void}
-   * @public
-   */
-  static set
-      f_FOO__com_google_j2cl_transpiler_readable_staticconstant_StaticConstant(
-          value) {
-    StaticConstant.$clinit();
-    StaticConstant
-        .$f_FOO__com_google_j2cl_transpiler_readable_staticconstant_StaticConstant =
-        value;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -132,10 +105,11 @@ class StaticConstant extends Object {
 
 
 /**
- * @private {number}
+ * @public {number}
+ * @const
  */
 StaticConstant
-    .$f_FOO__com_google_j2cl_transpiler_readable_staticconstant_StaticConstant =
+    .f_FOO__com_google_j2cl_transpiler_readable_staticconstant_StaticConstant =
     1;
 
 

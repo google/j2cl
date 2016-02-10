@@ -29,7 +29,7 @@ class Map {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -55,7 +55,7 @@ class Map {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -97,7 +97,7 @@ class Map {
 Map.$classMap_ = null;
 
 
-Map.$markImplementor(/** @type {Function} */ (Map));
+Map.$markImplementor(/** @type {window.Function} */ (Map));
 
 
 /**

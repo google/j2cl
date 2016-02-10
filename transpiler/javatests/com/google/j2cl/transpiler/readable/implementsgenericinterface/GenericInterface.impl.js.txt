@@ -20,7 +20,7 @@ let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 class GenericInterface {
   /**
    * Marks the provided class as implementing this interface.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -46,7 +46,7 @@ class GenericInterface {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -88,7 +88,8 @@ class GenericInterface {
 GenericInterface.$classGenericInterface_ = null;
 
 
-GenericInterface.$markImplementor(/** @type {Function} */ (GenericInterface));
+GenericInterface.$markImplementor(
+    /** @type {window.Function} */ (GenericInterface));
 
 
 /**

@@ -28,7 +28,7 @@ class SimpleGenericInterface {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -54,7 +54,7 @@ class SimpleGenericInterface {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -98,7 +98,7 @@ SimpleGenericInterface.$classSimpleGenericInterface_ = null;
 
 
 SimpleGenericInterface.$markImplementor(
-    /** @type {Function} */ (SimpleGenericInterface));
+    /** @type {window.Function} */ (SimpleGenericInterface));
 
 
 /**

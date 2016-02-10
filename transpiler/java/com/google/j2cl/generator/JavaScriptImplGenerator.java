@@ -271,7 +271,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     sb.appendln("/**");
     sb.appendln(" * Marks the provided class as implementing this interface.");
-    sb.appendln(" * @param {Function} classConstructor");
+    sb.appendln(" * @param {window.Function} classConstructor");
     sb.appendln(" * @public");
     sb.appendln(" */");
     sb.appendln("static $markImplementor(classConstructor) {");
@@ -410,7 +410,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     sb.appendln("/**");
     sb.appendln(" * Returns whether the provided class is or extends this class.");
-    sb.appendln(" * @param {Function} classConstructor");
+    sb.appendln(" * @param {window.Function} classConstructor");
     sb.appendln(" * @return {boolean}");
     sb.appendln(" * @public");
     sb.appendln(" */");
@@ -725,7 +725,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     if (javaType.isInterface()) {
       // TODO: remove cast after b/20102666 is handled in Closure.
-      sb.appendln("%s.$markImplementor(/** @type {Function} */ (%s));", className, className);
+      sb.appendln(
+          "%s.$markImplementor(/** @type {window.Function} */ (%s));", className, className);
     } else { // Not an interface so it is a Class.
       for (TypeDescriptor interfaceTypeDescriptor : javaType.getSuperInterfaceTypeDescriptors()) {
         if (interfaceTypeDescriptor.isNative()) {

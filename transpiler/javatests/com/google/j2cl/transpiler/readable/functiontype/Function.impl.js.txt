@@ -1,0 +1,97 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.functiontype.Function.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.functiontype.Function$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+/**
+ * @interface
+ */
+class Function {
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {window.Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_functiontype_Function =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        instance
+            .$implements__com_google_j2cl_transpiler_readable_functiontype_Function;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        classConstructor.prototype
+            .$implements__com_google_j2cl_transpiler_readable_functiontype_Function;
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    Function.$clinit();
+    if (!Function.$classFunction_) {
+      Function.$classFunction_ = Class.$createForInterface(
+          $Util.$generateId('Function'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.functiontype.Function'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.functiontype.Function'));
+    }
+    return Function.$classFunction_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
+};
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Function.$classFunction_ = null;
+
+
+Function.$markImplementor(/** @type {window.Function} */ (Function));
+
+
+/**
+ * Export class.
+ */
+exports = Function;
+//# sourceMappingURL=Function.js.map
