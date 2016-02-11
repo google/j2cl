@@ -397,8 +397,12 @@ class Primitives {
    * @private
    */
   static $checkArithmeticException(result) {
-    if (!Number.isFinite(result)) {
-      Primitives.$throwArithmeticException();
+    // This format can be inlined when the define is off. Be careful when
+    // editing this code.
+    if (ARITHMETIC_EXCEPTION_CHECKS_ENABLED_) {
+      if (!Number.isFinite(result)) {
+        Primitives.$throwArithmeticException();
+      }
     }
   }
 
@@ -426,6 +430,13 @@ class Primitives {
     Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
   }
 };
+
+
+/**
+ * @define {boolean} Whether to check if arithmetic results were infinity.
+ * @private
+ */
+goog.define('ARITHMETIC_EXCEPTION_CHECKS_ENABLED_', true);
 
 
 /**
