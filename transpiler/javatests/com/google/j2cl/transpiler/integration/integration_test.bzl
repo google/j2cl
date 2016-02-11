@@ -19,7 +19,6 @@ integration_test(
 
 """
 
-
 load("/javascript/closure/builddefs", "CLOSURE_COMPILER_FLAGS_FULL_TYPED")
 load("/third_party/java/j2cl/j2cl_library", "j2cl_library")
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_package")
@@ -28,9 +27,10 @@ load("/tools/build_defs/label/def", "absolute_label")
 # Copy the Closure flags but remove --variable_renaming=ALL since it interferes
 # with tests and can't be turned off.
 _CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
-    flag for flag in CLOSURE_COMPILER_FLAGS_FULL_TYPED
-    if flag != "--variable_renaming=ALL"]
-
+    flag
+    for flag in CLOSURE_COMPILER_FLAGS_FULL_TYPED
+    if flag != "--variable_renaming=ALL"
+]
 
 def integration_test(
     name, srcs=[], deps=[], defs=[], native_srcs=[], native_srcs_pkg="ABSOLUTE",
@@ -44,6 +44,8 @@ def integration_test(
   java_package = get_java_package(PACKAGE_NAME)
 
   deps = [absolute_label(dep) for dep in deps]
+
+  closure_defines = dict(closure_defines) # make a copy to ensure mutability
 
   # Turn on assertions since the integration tests rely on them.
   if not "ASSERTIONS_ENABLED_" in closure_defines:
