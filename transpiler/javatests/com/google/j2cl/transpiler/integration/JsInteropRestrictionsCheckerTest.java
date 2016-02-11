@@ -1099,127 +1099,232 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //    assertBuggySucceeds();
   //  }
   //
-  //  public void testJsFunctionWithNoExtendsSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsFunction");
-  //    addSnippetClassDecl(
-  //        "@JsFunction",
-  //        "public interface Buggy {",
-  //        "  void foo();",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testJsFunctionExtendsInterfaceFails() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsFunction");
-  //    addSnippetClassDecl(
-  //        "interface AnotherInterface {}",
-  //        "@JsFunction",
-  //        "public interface Buggy extends AnotherInterface {",
-  //        "  void foo();",
-  //        "}");
-  //
-  //    assertBuggyFails("Line 6: JsFunction 'EntryPoint.Buggy' cannot extend other interfaces.");
-  //  }
-  //
-  //  public void testJsFunctionExtendedByInterfaceFails() throws Exception {
-  //    addAll(jsFunctionInterface);
-  //
-  //    addSnippetClassDecl("public interface Buggy extends MyJsFunctionInterface {}");
-  //
-  //    assertBuggyFails(
-  //        "Line 3: 'EntryPoint.Buggy' cannot extend JsFunction 'MyJsFunctionInterface'.");
-  //  }
-  //
-  //  public void testJsFunctionMarkedAsJsTypeFails() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsFunction");
-  //    addSnippetClassDecl(
-  //        "@JsFunction @JsType",
-  //        "public interface Buggy {",
-  //        "  void foo();",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //       "Line 6: 'EntryPoint.Buggy' cannot be both a JsFunction and a JsType at the same time.");
-  //  }
-  //
-  //  public void testJsFunctionImplementationWithSingleInterfaceSucceeds() throws Exception {
-  //    addAll(jsFunctionInterface);
-  //    addSnippetClassDecl(
-  //        "public static class Buggy implements MyJsFunctionInterface {",
-  //        "  public int foo(int x) { return 0; }",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testJsFunctionImplementationWithMultipleSuperInterfacesFails() throws Exception {
-  //    addAll(jsFunctionInterface);
-  //    addSnippetClassDecl(
-  //        "interface AnotherInterface {}",
-  //        "public static class Buggy implements MyJsFunctionInterface, AnotherInterface {",
-  //        "  public int foo(int x) { return 0; }",
-  //        "  public int bar(int x) { return 0; }",
-  //        "}");
-  //
-  //    assertBuggyFails("Line 4: JsFunction implementation 'EntryPoint.Buggy' cannot "
-  //        + "implement more than one interface.");
-  //  }
-  //
-  //  public void testJsFunctionImplementationWithSuperClassFails() throws Exception {
-  //    addAll(jsFunctionInterface);
-  //    addSnippetClassDecl(
-  //        "public static class BaseClass {}",
-  //        "public static class Buggy extends BaseClass implements MyJsFunctionInterface {",
-  //        "  public int foo(int x) { return 0; }",
-  //        "}");
-  //
-  //    assertBuggyFails("Line 4: JsFunction implementation 'EntryPoint.Buggy' cannot "
-  //        + "extend a class.");
-  //  }
-  //
-  //  public void testJsFunctionImplementationWithSubclassesFails() throws Exception {
-  //    addAll(jsFunctionInterface);
-  //    addSnippetClassDecl(
-  //        "public static class BaseClass implements MyJsFunctionInterface {",
-  //        "  public int foo(int x) { return 0; }",
-  //        "}",
-  //        "public static class Buggy extends BaseClass  {",
-  //        "}");
-  //
-  //    assertBuggyFails("Line 6: 'EntryPoint.Buggy' cannot extend "
-  //        + "JsFunction implementation 'EntryPoint.BaseClass'.");
-  //  }
-  //
-  //  public void testJsFunctionImplementationMarkedAsJsTypeFails() throws Exception {
-  //    addAll(jsFunctionInterface);
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType",
-  //        "public static class Buggy implements MyJsFunctionInterface {",
-  //        "  public int foo(int x) { return 0; }",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //        "Line 5: 'EntryPoint.Buggy' cannot be both a JsFunction implementation and a JsType "
-  //            + "at the same time.");
-  //  }
-  //
-  //  public void testJsFunctionStaticInitializerFails() {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsFunction");
-  //    addSnippetClassDecl(
-  //        "public static String someString() { return \"hello\"; }",
-  //        "@JsFunction public interface Buggy {",
-  //        "  static String s = someString();",
-  //        "  void m();",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //        "Line 6: JsFunction 'EntryPoint.Buggy' cannot have static initializer.");
-  //  }
-  //
+  public void testJsFunctionWithNoExtendsSucceeds() throws Exception {
+    File sourcePackage = createPackage("jsfunctionwithnoextends");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsfunctionwithnoextends;",
+        "import jsinterop.annotations.JsFunction;",
+        "@JsFunction",
+        "public interface Buggy {",
+        "  void foo();",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
+  public void testJsFunctionExtendsInterfaceFails() throws Exception {
+    File sourcePackage = createPackage("jsfunctionextendsinterface");
+
+    createSourceFile(
+        sourcePackage,
+        "AnotherInterface.java",
+        "package jsfunctionextendsinterface;",
+        "public interface AnotherInterface {}");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsfunctionextendsinterface;",
+        "import jsinterop.annotations.JsFunction;",
+        "@JsFunction",
+        "public interface Buggy extends AnotherInterface {",
+        "  void foo();",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: JsFunction 'Buggy' cannot extend other interfaces.",
+        "1 error(s).");
+  }
+
+  public void testJsFunctionExtendedByInterfaceFails() throws Exception {
+    File sourcePackage = createPackage("jsfunctionextendedbyinterface");
+    createJsFunctionInterfaceInPackage(sourcePackage, "jsfunctionextendedbyinterface");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsfunctionextendedbyinterface;",
+        "public interface Buggy extends MyJsFunctionInterface {}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: 'Buggy' cannot extend JsFunction 'MyJsFunctionInterface'.",
+        "1 error(s).");
+  }
+
+  public void testJsFunctionMarkedAsJsTypeFails() throws Exception {
+    File sourcePackage = createPackage("jsfunctionmarkedasjstype");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsfunctionmarkedasjstype;",
+        "import jsinterop.annotations.JsType;",
+        "import jsinterop.annotations.JsFunction;",
+        "@JsFunction @JsType",
+        "public interface Buggy {",
+        "  void foo();",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: 'Buggy' cannot be both a JsFunction and a JsType at the same"
+            + " time.",
+        "1 error(s).");
+  }
+
+  public void testJsFunctionImplementationWithSingleInterfaceSucceeds() throws Exception {
+    File sourcePackage = createPackage("jsfunctionimplementationwithsingleinterface");
+    createJsFunctionInterfaceInPackage(
+        sourcePackage, "jsfunctionimplementationwithsingleinterface");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsfunctionimplementationwithsingleinterface;",
+        "public class Buggy implements MyJsFunctionInterface {",
+        "  public int foo(int x) { return 0; }",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
+  public void testJsFunctionImplementationWithMultipleSuperInterfacesFails() throws Exception {
+    File sourcePackage = createPackage("jsfunctionimplementationwithmultiplesuperinterfaces");
+    createJsFunctionInterfaceInPackage(
+        sourcePackage, "jsfunctionimplementationwithmultiplesuperinterfaces");
+
+    createSourceFile(
+        sourcePackage,
+        "AnotherInterface.java",
+        "package jsfunctionimplementationwithmultiplesuperinterfaces;",
+        "public interface AnotherInterface {}");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsfunctionimplementationwithmultiplesuperinterfaces;",
+        "public class Buggy implements MyJsFunctionInterface, AnotherInterface {",
+        "  public int foo(int x) { return 0; }",
+        "  public int bar(int x) { return 0; }",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: JsFunction implementation 'Buggy' cannot implement more than"
+            + " one interface.",
+        "1 error(s).");
+  }
+
+  public void testJsFunctionImplementationWithSuperClassFails() throws Exception {
+    File sourcePackage = createPackage("jsfunctionimplementationwithsuperclass");
+    createJsFunctionInterfaceInPackage(sourcePackage, "jsfunctionimplementationwithsuperclass");
+
+    createSourceFile(
+        sourcePackage,
+        "BaseClass.java",
+        "package jsfunctionimplementationwithsuperclass;",
+        "public class BaseClass {}");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsfunctionimplementationwithsuperclass;",
+        "public class Buggy extends BaseClass implements MyJsFunctionInterface {",
+        "  public int foo(int x) { return 0; }",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: JsFunction implementation 'Buggy' cannot extend a class.",
+        "1 error(s).");
+  }
+
+  public void testJsFunctionImplementationWithSubclassesFails() throws Exception {
+    File sourcePackage = createPackage("jsfunctionimplementationwithsubclasses");
+    createJsFunctionInterfaceInPackage(sourcePackage, "jsfunctionimplementationwithsubclasses");
+
+    createSourceFile(
+        sourcePackage,
+        "BaseClass.java",
+        "package jsfunctionimplementationwithsubclasses;",
+        "public class BaseClass implements MyJsFunctionInterface {",
+        "  public int foo(int x) { return 0; }",
+        "}");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsfunctionimplementationwithsubclasses;",
+        "public class Buggy extends BaseClass  {",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: 'Buggy' cannot extend JsFunction implementation "
+            + "'BaseClass'.",
+        "1 error(s).");
+  }
+
+  public void testJsFunctionImplementationMarkedAsJsTypeFails() throws Exception {
+    File sourcePackage = createPackage("jsfunctionimplementationmarkedasjstype");
+    createJsFunctionInterfaceInPackage(sourcePackage, "jsfunctionimplementationmarkedasjstype");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsfunctionimplementationmarkedasjstype;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType",
+        "public class Buggy implements MyJsFunctionInterface {",
+        "  public int foo(int x) { return 0; }",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: 'Buggy' cannot be both a JsFunction implementation and a "
+            + "JsType at the same time.",
+        "1 error(s).");
+  }
+
+  public void testJsFunctionStaticInitializerFails() throws Exception {
+    File sourcePackage = createPackage("jsfunctionstaticinitializer");
+    createSourceFile(
+        sourcePackage,
+        "EntryPoint.java",
+        "package jsfunctionstaticinitializer;",
+        "import jsinterop.annotations.JsType;",
+        "import jsinterop.annotations.JsFunction;",
+        "public class EntryPoint {",
+        "  public static String someString() { return \"hello\"; }",
+        "  @JsFunction public interface Buggy {",
+        "    static String s = someString();",
+        "    void m();",
+        "  }",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: JsFunction 'EntryPoint$Buggy' cannot have static "
+            + "initializer.",
+        "1 error(s).");
+  }
+
+  private void createJsFunctionInterfaceInPackage(File sourcePackage, String packageName)
+      throws IOException {
+    createSourceFile(
+        sourcePackage,
+        "MyJsFunctionInterface.java",
+        "package " + packageName + ";",
+        "import jsinterop.annotations.JsFunction;",
+        "@JsFunction public interface MyJsFunctionInterface {",
+        " int foo(int x);",
+        "}");
+  }
+  
   public void testNativeJsTypeStaticInitializerFails() throws Exception {
     File sourcePackage = createPackage("nativejstypestaticinitializer");
     createSourceFile(
@@ -2376,7 +2481,12 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   }
 
   private static void assertBuggyFails(List<String> errorLines, String... expectedErrors) {
-    assert errorLines.size() == expectedErrors.length;
+    assert errorLines.size() == expectedErrors.length
+        : "Expected "
+            + expectedErrors.length
+            + " errors but actually "
+            + errorLines.size()
+            + " errors.";
     for (String expectedError : expectedErrors) {
       assertLogContainsSnippet(errorLines, expectedError);
     }

@@ -48,6 +48,15 @@ public class JsInteropRestrictionsChecker {
         return;
       }
     }
+
+    if (javaType.getDescriptor().isJsFunctionInterface()) {
+      checkJsFunctionInterface(javaType);
+    } else if (javaType.getDescriptor().isJsFunctionImplementation()) {
+      checkJsFunctionImplementation(javaType);
+    } else {
+      checkJsFunctionSubtype(javaType);
+    }
+
     for (Field field : javaType.getFields()) {
       checkField(field);
     }
@@ -229,12 +238,95 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
+  private void checkJsFunctionInterface(JavaType javaType) {
+    String readableDescription = getReadableDescription(javaType.getDescriptor());
+    if (!isClinitEmpty(javaType)) {
+      errors.error(
+          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          "JsFunction '%s' cannot have static initializer.",
+          readableDescription);
+    }
+    if (!javaType.getSuperInterfaceTypeDescriptors().isEmpty()) {
+      errors.error(
+          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          "JsFunction '%s' cannot extend other interfaces.",
+          readableDescription);
+    }
+
+    if (javaType.getDescriptor().isJsType()) {
+      errors.error(
+          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          "'%s' cannot be both a JsFunction and a JsType at the same time.",
+          readableDescription);
+    }
+  }
+
+  private void checkJsFunctionImplementation(JavaType javaType) {
+    String readableDescription = getReadableDescription(javaType.getDescriptor());
+    if (javaType.getSuperInterfaceTypeDescriptors().size() != 1) {
+      errors.error(
+          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          "JsFunction implementation '%s' cannot implement more than one interface.",
+          readableDescription);
+    }
+
+    if (javaType.getDescriptor().isJsType()) {
+      errors.error(
+          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          "'%s' cannot be both a JsFunction implementation and a JsType at the same time.",
+          readableDescription);
+    }
+
+    if (javaType.getSuperTypeDescriptor() != TypeDescriptors.get().javaLangObject) {
+      errors.error(
+          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          "JsFunction implementation '%s' cannot extend a class.",
+          readableDescription);
+    }
+  }
+
+  private void checkJsFunctionSubtype(JavaType javaType) {
+    TypeDescriptor superClassTypeDescriptor = javaType.getSuperTypeDescriptor();
+    if (superClassTypeDescriptor != null && superClassTypeDescriptor.isJsFunctionImplementation()) {
+      errors.error(
+          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          "'%s' cannot extend JsFunction implementation '%s'.",
+          getReadableDescription(javaType.getDescriptor()),
+          getReadableDescription(superClassTypeDescriptor));
+    }
+    for (TypeDescriptor superInterface : javaType.getSuperInterfaceTypeDescriptors()) {
+      if (superInterface.isJsFunctionInterface()) {
+        errors.error(
+            Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+            "'%s' cannot extend JsFunction '%s'.",
+            getReadableDescription(javaType.getDescriptor()),
+            getReadableDescription(superInterface));
+      }
+    }
+  }
+
   /**
    * Returns true if the constructor method is locally empty (allows calls to super constructor).
    */
   private static boolean isConstructorEmpty(Method constructor) {
     List<Statement> statements = constructor.getBody().getStatements();
     return statements.isEmpty() || (statements.size() == 1 && AstUtils.hasSuperCall(constructor));
+  }
+
+  /**
+   * Returns true if the type does not have any static initialization blocks and does not do any
+   * initializations on static fields except for compile time constants.
+   */
+  private static boolean isClinitEmpty(JavaType javaType) {
+    if (!javaType.getStaticInitializerBlocks().isEmpty()) {
+      return false;
+    }
+    for (Field staticField : javaType.getStaticFields()) {
+      if (staticField.hasInitializer() && !staticField.isCompileTimeConstant()) {
+        return false;
+      }
+    }
+    return true;
   }
 
   private String getReadableDescription(FieldDescriptor fieldDescriptor) {

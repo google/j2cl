@@ -63,7 +63,6 @@ public class RegularTypeDescriptor extends TypeDescriptor {
       isNative = JsInteropUtils.isNative(jsTypeAnnotation);
       jsTypeNamespace = JsInteropUtils.getJsNamespace(jsTypeAnnotation);
       jsTypeName = JsInteropUtils.getJsName(jsTypeAnnotation);
-      return;
     }
     isJsFunction = JsInteropUtils.isJsFunction(typeBinding);
   }
