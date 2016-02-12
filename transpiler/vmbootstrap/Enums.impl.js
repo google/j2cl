@@ -6,19 +6,20 @@ goog.module('vmbootstrap.Enums$impl');
 let IllegalArgumentException =
     goog.forwardDeclare('gen.java.lang.IllegalArgumentException$impl');
 let Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+let Enum = goog.forwardDeclare('gen.java.lang.Enum$impl');
 
 class Enums {
   /**
-   * @param {Array<*>} values
-   * @return {Object<string, *>}
+   * @param {Array<T>} values An array containing all instances of a particular
+   *     enum type.
+   * @return {Object<string, T>} A map from enum name to enum instance.
+   * @template T
    * @public
    */
   static createMapFromValues(values) {
-    /** @type {Object<string, *>} */
     let map = {};
     for (var i = 0; i < values.length; i++) {
-      /** @type {string} */
-      let name = values[i].m_name();
+      let name = /** @type {Enum} */ (values[i]).m_name();
       map[name] = values[i];
     }
     return map;
@@ -26,6 +27,10 @@ class Enums {
 
   /**
    * We need to throw an exception if the name does not exist in the map.
+   * @param {?string} name
+   * @param {Object<string, T>} map
+   * @return {T}
+   * @template T
    * @public
    */
   static getValueFromNameAndMap(name, map) {
@@ -48,6 +53,7 @@ class Enums {
     IllegalArgumentException =
         goog.module.get('gen.java.lang.IllegalArgumentException$impl');
     Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+    Enum = goog.module.get('gen.java.lang.Enum$impl');
   }
 };
 

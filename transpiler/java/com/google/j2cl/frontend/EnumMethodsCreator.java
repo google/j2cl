@@ -74,7 +74,7 @@ public class EnumMethodsCreator {
                     Lists.newArrayList("NativeObject"),
                     // Type parameters.
                     Lists.newArrayList(
-                        TypeDescriptors.NATIVE_STRING, TypeDescriptors.get().javaLangObject),
+                        TypeDescriptors.NATIVE_STRING, enumType.getDescriptor()),
                     false,
                     true,
                     true,

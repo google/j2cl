@@ -12,7 +12,6 @@ let Enum = goog.require('gen.java.lang.Enum$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
-let Object = goog.forwardDeclare('gen.java.lang.Object$impl');
 let String = goog.forwardDeclare('gen.java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
@@ -210,7 +209,7 @@ class Color extends Enum {
 
   /**
    * A static field getter.
-   * @return {$NativeObject<$NativeString, *>}
+   * @return {$NativeObject<$NativeString, Color>}
    * @public
    */
   static get
@@ -222,7 +221,7 @@ class Color extends Enum {
 
   /**
    * A static field setter.
-   * @param {$NativeObject<$NativeString, *>} value
+   * @param {$NativeObject<$NativeString, Color>} value
    * @return {void}
    * @public
    */
@@ -242,7 +241,6 @@ class Color extends Enum {
   static $clinit() {
     Color.$clinit = function() {};
     Class = goog.module.get('gen.java.lang.Class$impl');
-    Object = goog.module.get('gen.java.lang.Object$impl');
     String = goog.module.get('gen.java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
@@ -284,7 +282,7 @@ Color.$BLUE = null;
 
 
 /**
- * @private {$NativeObject<$NativeString, *>}
+ * @private {$NativeObject<$NativeString, Color>}
  */
 Color
     .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
