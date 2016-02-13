@@ -185,7 +185,7 @@ public class J2clAstProcessor extends AbstractProcessor {
     Field(String name, TypeElement type, boolean isNullable) {
       this.name = name;
       this.isNullable = isNullable;
-      if (type.getQualifiedName().toString().equals("java.util.List")) {
+      if (type.getQualifiedName().contentEquals("java.util.List")) {
         this.type = Type.LIST;
       } else {
         this.type = Type.SCALAR;
@@ -363,14 +363,13 @@ public class J2clAstProcessor extends AbstractProcessor {
             new Predicate<ExecutableElement>() {
               @Override
               public boolean apply(@Nullable ExecutableElement executableElement) {
-                return executableElement.getSimpleName().toString().equals("accept")
+                return executableElement.getSimpleName().contentEquals("accept")
                     && executableElement.getParameters().size() == 1
                     && processingEnv
                         .getTypeUtils()
                         .asElement(executableElement.getParameters().get(0).asType())
                         .getSimpleName()
-                        .toString()
-                        .equals("Processor");
+                        .contentEquals("Processor");
               }
             });
   }
