@@ -49,7 +49,7 @@ class Main extends Object {
   }
 
   /**
-   * @param {(MyJsFunctionInterface|window.Function)} fn
+   * @param {window.Function} fn
    * @param {number} a
    * @return {number}
    * @public
@@ -57,7 +57,7 @@ class Main extends Object {
   static m_fun__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionInterface__int(
       fn, a) {
     Main.$clinit();
-    return (/** @type {Function} */ (fn))(a);
+    return fn(a);
   }
 
   /**
@@ -68,7 +68,7 @@ class Main extends Object {
     let func = $Util.$makeLambdaFunction(
         MyJsFunctionImpl.prototype.m_foo__int, MyJsFunctionImpl.$create(),
         MyJsFunctionImpl.$copy);
-    (/** @type {Function} */ (func))(10);
+    func(10);
     Main.callAsFunction(func, 10);
     Main.m_fun__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionInterface__int(
         Main.createMyJsFunction(), 10);
@@ -164,7 +164,7 @@ Main.callAsFunction = function(fn, arg) {
 };
 
 /**
- * @return {MyJsFunctionInterface | Function}
+ * @return {!Function}
  * @public
  */
 Main.createMyJsFunction =

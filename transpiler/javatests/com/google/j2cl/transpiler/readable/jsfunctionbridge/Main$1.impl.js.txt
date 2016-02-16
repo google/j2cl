@@ -74,6 +74,7 @@ class Main$1 extends Object {
 
   /**
    * Bridge method.
+   * @this {window.Function}
    * @param {?string} arg0
    * @return {?string}
    * @public
@@ -85,7 +86,7 @@ class Main$1 extends Object {
   }
 
   /**
-   * @param {(Main$1|window.Function)} $thisArg
+   * @param {window.Function} $thisArg
    * @param {?string} s
    * @return {?string}
    * @public
@@ -99,7 +100,7 @@ class Main$1 extends Object {
   }
 
   /**
-   * @param {(Main$1|window.Function)} $thisArg
+   * @param {window.Function} $thisArg
    * @return {?string}
    * @public
    */
@@ -109,7 +110,7 @@ class Main$1 extends Object {
     return "" +
         $thisArg
             .f_field__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main$1 +
-        (/** @type {Function} */ ($thisArg))("a");
+        $thisArg("a");
   }
 
   /**

@@ -313,7 +313,7 @@ public class ExpressionTransformer {
         String qualifier = transform(expression.getQualifier(), environment);
         if (target.isJsFunction()) {
           // Call to a JsFunction method is emitted as the call on the qualifier itself:
-          return String.format("(/** @type {Function} */(%s))", qualifier);
+          return String.format("%s", qualifier);
         } else if (expression.isStaticDispatch()) {
           String typeName = transform(target.getEnclosingClassTypeDescriptor(), environment);
           String methodName = ExpressionTransformer.stringForMethodDescriptor(target);

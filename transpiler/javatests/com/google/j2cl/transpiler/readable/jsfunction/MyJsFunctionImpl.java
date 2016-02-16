@@ -13,6 +13,6 @@ public class MyJsFunctionImpl implements MyJsFunctionInterface {
 
   @Override
   public int foo(int a) {
-    return a;
+    return a + this.bar() + this.field;
   }
 }

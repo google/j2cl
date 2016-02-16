@@ -160,7 +160,7 @@ public class JsDocNameUtils {
           && (typeDescriptor.isJsFunctionInterface()
               || typeDescriptor.isJsFunctionImplementation())) {
         // JsFunction interface and implementor should accept a real JS function.
-        jsDocName = String.format("(%s|Function)", jsDocName);
+        jsDocName = "window.Function";
       }
       return jsDocName;
     }
@@ -206,9 +206,7 @@ public class JsDocNameUtils {
     if (!shouldUseClassName
         && (typeDescriptor.isJsFunctionInterface()
             || typeDescriptor.isJsFunctionImplementation())) {
-      return String.format(
-          "(%s|window.Function)", ExpressionTransformer.transform(typeDescriptor, environment));
-
+      return "window.Function";
     }
 
     // Literal native js types do not refer to any concrete types.

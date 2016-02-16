@@ -70,14 +70,21 @@ class MyJsFunctionImpl extends Object {
 
   /**
    * @override
+   * @this {window.Function}
    * @param {number} a
    * @return {number}
    * @public
    */
-  m_foo__int(a) { return a; }
+  m_foo__int(a) {
+    return a +
+        MyJsFunctionImpl
+            .m_bar__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl(
+                this) +
+        this.f_field__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl;
+  }
 
   /**
-   * @param {(MyJsFunctionImpl|window.Function)} $thisArg
+   * @param {window.Function} $thisArg
    * @return {number}
    * @public
    */
@@ -88,7 +95,7 @@ class MyJsFunctionImpl extends Object {
   }
 
   /**
-   * @param {(MyJsFunctionImpl|window.Function)} $thisArg
+   * @param {window.Function} $thisArg
    * @return {number}
    * @public
    */
@@ -98,7 +105,7 @@ class MyJsFunctionImpl extends Object {
     return MyJsFunctionImpl
                .m_bar__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl(
                    $thisArg) +
-        (/** @type {Function} */ ($thisArg))(1);
+        $thisArg(1);
   }
 
   /**

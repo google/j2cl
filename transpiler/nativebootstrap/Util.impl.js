@@ -37,10 +37,9 @@ class Util {
    * and copies {@code instance}' properties to itself.
    *
    * @param {Function} jsFunctionMethod
-   * @param {T} instance
+   * @param {*} instance
    * @param {Function} copyMethod
-   * @return {Function | T}
-   * @template T
+   * @return {!Function}
    * @public
    */
   static $makeLambdaFunction(jsFunctionMethod, instance, copyMethod) {

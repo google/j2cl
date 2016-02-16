@@ -232,12 +232,12 @@ class Main extends Object {
         Main$AFunction.$create(), Main$AFunction.$copy);
     let o1 = Object.$create();
     let o2 = Object.$create();
-    (/** @type {Function} */ (a))(0, o1, o2);
-    (/** @type {Function} */ (a))(0);
-    (/** @type {Function} */ (a))(0, o1, o2);
-    (/** @type {Function} */ (a))(0);
+    a(0, o1, o2);
+    a(0);
+    a(0, o1, o2);
+    a(0);
     let os = [o1, o2];
-    (/** @type {Function} */ (a)).apply(null, [0].concat(os));
+    a.apply(null, [0].concat(os));
   }
 
   /**

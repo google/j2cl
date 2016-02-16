@@ -9,7 +9,7 @@ Main.callAsFunction = function(fn, arg) {
 };
 
 /**
- * @return {MyJsFunctionInterface | Function}
+ * @return {!Function}
  * @public
  */
 Main.createMyJsFunction = function() {
