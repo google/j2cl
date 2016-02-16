@@ -147,6 +147,8 @@ def integration_test(
           "--language_in=ECMASCRIPT6_STRICT",
           "--language_out=ECMASCRIPT5",
           "--pretty_print",
+          "--property_renaming=OFF",
+          "--variable_renaming=OFF",
           "--only_closure_dependencies",
           "--closure_entry_point=gen.opt.Harness",
           "--jscomp_off=lateProvide",
