@@ -1,0 +1,122 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsmethodoverride.Child.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsmethodoverride.Child$impl');
+
+
+let Parent = goog.require('gen.com.google.j2cl.transpiler.readable.jsmethodoverride.Parent$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+class Child extends Parent {
+  /**
+   * Real constructor.
+   * @public
+   */
+  constructor() {
+    Child.$clinit();
+    super();
+    this.$ctor__com_google_j2cl_transpiler_readable_jsmethodoverride_Child();
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Child}
+   * @public
+   */
+  static $create() { return new Child(); }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsmethodoverride_Child() {
+    this.$ctor__com_google_j2cl_transpiler_readable_jsmethodoverride_Parent();
+    this.$init__com_google_j2cl_transpiler_readable_jsmethodoverride_Child();
+  }
+
+  /**
+   * @override
+   * @return {void}
+   * @public
+   */
+  bar() {}
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Child; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Child);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    Child.$clinit();
+    if (!Child.$classChild_) {
+      Child.$classChild_ = Class.$createForClass(
+          $Util.$generateId('Child'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsmethodoverride.Child'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsmethodoverride.Child'));
+    }
+    return Child.$classChild_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return Child.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Parent.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsmethodoverride_Child() {}
+};
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Child.$classChild_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = Child;
+//# sourceMappingURL=Child.js.map

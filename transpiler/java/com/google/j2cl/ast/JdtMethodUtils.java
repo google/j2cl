@@ -24,8 +24,10 @@ import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.Modifier;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -99,19 +101,33 @@ public class JdtMethodUtils {
    * Checks overriding chain to compute JsInfo.
    */
   static JsInfo computeJsInfo(IMethodBinding methodBinding) {
-    // The direct JsInfo.
+    List<JsInfo> jsInfoList = new ArrayList<>();
+    // Add the JsInfo of the method and all the overridden methods to the list.
     JsInfo jsInfo = JsInteropUtils.getJsInfo(methodBinding);
     if (!jsInfo.isNone()) {
-      return jsInfo;
+      jsInfoList.add(jsInfo);
     }
-    // Checks overriding chain.
     for (IMethodBinding overriddenMethod : getOverriddenMethods(methodBinding)) {
       JsInfo inheritedJsInfo = JsInteropUtils.getJsInfo(overriddenMethod);
       if (!inheritedJsInfo.isNone()) {
-        return inheritedJsInfo;
+        jsInfoList.add(inheritedJsInfo);
       }
     }
-    return JsInfo.NONE;
+
+    if (jsInfoList.isEmpty()) {
+      return JsInfo.NONE;
+    }
+
+    // TODO: Do the same for JsProperty?
+    if (jsInfoList.get(0).getJsMemberType() == JsMemberType.METHOD) {
+      // Return the first JsInfo with a Js name specified.
+      for (JsInfo jsInfoElement : jsInfoList) {
+        if (jsInfoElement.getJsName() != null) {
+          return jsInfoElement;
+        }
+      }
+    }
+    return jsInfoList.get(0);
   }
 
   public static Set<IMethodBinding> getOverriddenJsMembers(IMethodBinding methodBinding) {
