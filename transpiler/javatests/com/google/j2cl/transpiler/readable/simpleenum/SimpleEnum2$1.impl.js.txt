@@ -12,6 +12,7 @@ let SimpleEnum2 = goog.require('gen.com.google.j2cl.transpiler.readable.simpleen
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Enum = goog.forwardDeclare('gen.java.lang.Enum$impl');
 let String = goog.forwardDeclare('gen.java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
@@ -63,7 +64,7 @@ class SimpleEnum2$1 extends SimpleEnum2 {
    * @public
    */
   m_compareTo__java_lang_Object(arg0) {
-    return this.m_compareTo__java_lang_Enum(
+    return super.m_compareTo__java_lang_Enum(
         /**@type {SimpleEnum2} */ ($Casts.to(arg0, SimpleEnum2)));
   }
 
@@ -114,6 +115,7 @@ class SimpleEnum2$1 extends SimpleEnum2 {
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
+    Enum = goog.module.get('gen.java.lang.Enum$impl');
     String = goog.module.get('gen.java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');

@@ -1,0 +1,112 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.bridgejsmethod.Main$J.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.bridgejsmethod.Main$J$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.bridgejsmethod.Main$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+/**
+ * @interface
+ * @template C_J_T
+ */
+class Main$J {
+  /**
+   * Abstract method.
+   * @param {C_J_T} t
+   * @return {void}
+   * @public
+   */
+  m_bar__java_lang_Object(t) {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {window.Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_bridgejsmethod_Main$J =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        instance
+            .$implements__com_google_j2cl_transpiler_readable_bridgejsmethod_Main$J;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        classConstructor.prototype
+            .$implements__com_google_j2cl_transpiler_readable_bridgejsmethod_Main$J;
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    Main$J.$clinit();
+    if (!Main$J.$classMain$J_) {
+      Main$J.$classMain$J_ = Class.$createForInterface(
+          $Util.$generateId('J'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$J'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.bridgejsmethod.Main.J'));
+    }
+    return Main$J.$classMain$J_;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Main = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.bridgejsmethod.Main$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+  }
+};
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Main$J.$classMain$J_ = null;
+
+
+Main$J.$markImplementor(/** @type {window.Function} */ (Main$J));
+
+
+/**
+ * Export class.
+ */
+exports = Main$J;
+//# sourceMappingURL=Main$J.js.map

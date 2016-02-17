@@ -17,18 +17,23 @@ package com.google.j2cl.frontend;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
+import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
+import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptorBuilder;
+import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
+import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -52,24 +57,63 @@ import java.util.Set;
  */
 public class BridgeMethodsCreator {
   /**
-   * Returns generated bridge methods.
+   * Creates and adds bridge methods to the java type and fixes the delegated JS methods.
    */
-  public static List<Method> create(ITypeBinding typeBinding) {
-    BridgeMethodsCreator bridgeMethodsCreator = new BridgeMethodsCreator(typeBinding);
+  public static void create(ITypeBinding typeBinding, JavaType javaType) {
+    final BridgeMethodsCreator bridgeMethodsCreator = new BridgeMethodsCreator(typeBinding);
+
+    // create bridge methods.
     List<Method> generatedBridgeMethods = new ArrayList<>();
-    Set<MethodDescriptor> generatedBridgeMethodDescriptors = new HashSet<>();
+    Set<String> generatedBridgeMethodMangledNames = new HashSet<>();
+    Set<MethodDescriptor> toBeFixedMethodDescriptors = new HashSet<>();
+
     for (Map.Entry<IMethodBinding, IMethodBinding> entry :
         bridgeMethodsCreator.findBridgeMethods().entrySet()) { // bridgeMethod -> delegateMethod.
       Method bridgeMethod =
           bridgeMethodsCreator.createBridgeMethod(entry.getKey(), entry.getValue());
-      if (generatedBridgeMethodDescriptors.contains(bridgeMethod.getDescriptor())) {
+      String manglingName = ManglingNameUtils.getMangledName(bridgeMethod.getDescriptor());
+      if (generatedBridgeMethodMangledNames.contains(manglingName)) {
         // do not generate duplicate bridge methods in one class.
         continue;
       }
+      if (bridgeMethod.getDescriptor().isJsMethod()
+          && entry.getValue().getDeclaringClass() == typeBinding) {
+        toBeFixedMethodDescriptors.add(JdtUtils.createMethodDescriptor(entry.getValue()));
+      }
       generatedBridgeMethods.add(bridgeMethod);
-      generatedBridgeMethodDescriptors.add(bridgeMethod.getDescriptor());
+      generatedBridgeMethodMangledNames.add(manglingName);
     }
-    return generatedBridgeMethods;
+
+    // fix delegating JsMethods.
+    fixJsDelegatedMethods(javaType, toBeFixedMethodDescriptors);
+    // add bridge methods.
+    javaType.addMethods(generatedBridgeMethods);
+  }
+
+  private static void fixJsDelegatedMethods(
+      JavaType javaType, final Set<MethodDescriptor> toBeFixedMethodDescriptors) {
+    javaType.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteMethod(Method method) {
+            if (toBeFixedMethodDescriptors.contains(method.getDescriptor())) {
+              MethodDescriptor newMethodDescriptor =
+                  MethodDescriptorBuilder.from(method.getDescriptor())
+                      .jsInfo(JsInfo.NONE)
+                      .isRaw(false)
+                      .build();
+              return new Method(
+                  newMethodDescriptor,
+                  method.getParameters(),
+                  method.getBody(),
+                  method.isAbstract(),
+                  method.isOverride(),
+                  method.isFinal(),
+                  method.getJsDocDescription());
+            }
+            return method;
+          }
+        });
   }
 
   private final ITypeBinding typeBinding;
@@ -252,15 +296,25 @@ public class BridgeMethodsCreator {
     MethodDescriptor bridgeMethodDescriptor =
         createMethodDescriptorInCurrentType(bridgeMethod, returnType);
     // The MethodDescriptor of the delegated method.
-    MethodDescriptor targetMethodDescriptor =
-        createMethodDescriptorInCurrentType(targetMethod, targetMethod.getReturnType());
+    MethodDescriptor targetMethodDescriptor = JdtUtils.createMethodDescriptor(targetMethod);
     JsInfo targetMethodJsInfo = targetMethodDescriptor.getJsInfo();
+    boolean isRaw = targetMethodDescriptor.isRaw();
     // If a JsFunction method needs a bridge, only the bridge method is a JsFunction method, and it
     // delegates to the *real* implementation, which is not a JsFunction method.
-    if (targetMethodJsInfo.getJsMemberType() == JsMemberType.JS_FUNCTION) {
-      targetMethodDescriptor =
-          MethodDescriptorBuilder.from(targetMethodDescriptor).jsInfo(JsInfo.NONE).build();
+    // If both a method and the bridge method are JsMethod, only the bridge method is a JsMethod,
+    // and it delegates to the *real* implementation, which should be emit as non-JsMethod.
+    if (targetMethodJsInfo.getJsMemberType() == JsMemberType.JS_FUNCTION
+        || (bridgeMethodDescriptor.isJsMethod()
+            && targetMethodDescriptor.getEnclosingClassTypeDescriptor()
+                == bridgeMethodDescriptor.getEnclosingClassTypeDescriptor())) {
+      targetMethodJsInfo = JsInfo.NONE;
+      isRaw = false;
     }
+    targetMethodDescriptor =
+        MethodDescriptorBuilder.from(targetMethodDescriptor)
+            .jsInfo(targetMethodJsInfo)
+            .isRaw(isRaw)
+            .build();
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
 
@@ -287,11 +341,15 @@ public class BridgeMethodsCreator {
               : new CastExpression(parameterReference, castToParameterTypeDescriptor);
       arguments.add(argument);
     }
+    TypeDescriptor targetEnclosingClassTypeDescriptor =
+        targetMethodDescriptor.getEnclosingClassTypeDescriptor();
+    Expression qualifier =
+        targetEnclosingClassTypeDescriptor
+                == bridgeMethodDescriptor.getEnclosingClassTypeDescriptor()
+            ? new ThisReference(targetEnclosingClassTypeDescriptor)
+            : new SuperReference(targetEnclosingClassTypeDescriptor);
     Expression dispatchMethodCall =
-        MethodCall.createRegularMethodCall(
-            new ThisReference(targetMethodDescriptor.getEnclosingClassTypeDescriptor()),
-            targetMethodDescriptor,
-            arguments);
+        MethodCall.createRegularMethodCall(qualifier, targetMethodDescriptor, arguments);
     Statement statement =
         bridgeMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.get().primitiveVoid
             ? new ExpressionStatement(dispatchMethodCall)

@@ -15,12 +15,15 @@
  */
 package com.google.j2cl.frontend;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AstUtils;
+import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JdtMethodUtils;
 import com.google.j2cl.ast.JsInteropUtils;
+import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MethodDescriptorBuilder;
 
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
@@ -38,10 +41,11 @@ import java.util.Set;
  */
 public class JsBridgeMethodsCreator {
   /**
-   * Returns generated bridge methods.
+   * Creates bridge methods and adds them to the java type.
    */
-  public static List<Method> create(ITypeBinding typeBinding) {
-    return new JsBridgeMethodsCreator(typeBinding).createBridgeMethods();
+  public static void create(ITypeBinding typeBinding, JavaType javaType) {
+    javaType.addMethods(
+        new JsBridgeMethodsCreator(typeBinding).createBridgeMethods(javaType.getMethods()));
   }
 
   private ITypeBinding typeBinding;
@@ -65,17 +69,30 @@ public class JsBridgeMethodsCreator {
    * <p>2(b). If interface method is a non-JsMember, and accidental overridding method is JsMember,
    * a bridge method is needed from non-JsMember delegating to JsMember.
    */
-  private List<Method> createBridgeMethods() {
+  private List<Method> createBridgeMethods(List<Method> existingMethods) {
     List<Method> generatedBridgeMethods = new ArrayList<>();
-    Set<MethodDescriptor> generatedBridgeMethodDescriptors = new HashSet<>();
+    Set<String> generatedBridgeMethodMangledNames = new HashSet<>();
+    List<String> existingMethodMangledNames =
+        Lists.transform(
+            existingMethods,
+            new Function<Method, String>() {
+              @Override
+              public String apply(Method method) {
+                return ManglingNameUtils.getMangledName(method.getDescriptor());
+              }
+            });
     for (Entry<IMethodBinding, IMethodBinding> entry :
         getBridgeDelegateMethodsMapping().entrySet()) {
       Method bridgeMethod = createBridgeMethod(entry.getKey(), entry.getValue());
-      if (generatedBridgeMethodDescriptors.contains(bridgeMethod.getDescriptor())) {
+      String manglingName = ManglingNameUtils.getMangledName(bridgeMethod.getDescriptor());
+      if (generatedBridgeMethodMangledNames.contains(manglingName)
+          || existingMethodMangledNames.contains(manglingName)) {
+        // Do not generate duplicate methods that have the same signature of the existing methods
+        // in the type.
         continue;
       }
       generatedBridgeMethods.add(bridgeMethod);
-      generatedBridgeMethodDescriptors.add(bridgeMethod.getDescriptor());
+      generatedBridgeMethodMangledNames.add(manglingName);
     }
     return generatedBridgeMethods;
   }
@@ -143,13 +160,14 @@ public class JsBridgeMethodsCreator {
   }
 
   private Method createBridgeMethod(
-      IMethodBinding bridgeMethodBinding, IMethodBinding forwardingMethodBinding) {
-    MethodDescriptor bridgeMethodDescriptor =
-        MethodDescriptorBuilder.from(JdtUtils.createMethodDescriptor(bridgeMethodBinding))
-            .enclosingClassTypeDescriptor(JdtUtils.createTypeDescriptor(typeBinding))
-            .build();
-    MethodDescriptor forwardingMethodDescriptor =
-        JdtUtils.createMethodDescriptor(forwardingMethodBinding);
-    return AstUtils.createForwardingMethod(bridgeMethodDescriptor, forwardingMethodDescriptor);
+      IMethodBinding bridgeMethodBinding, IMethodBinding forwardToMethodBinding) {
+    MethodDescriptor forwardToMethodDescriptor =
+        JdtUtils.createMethodDescriptor(forwardToMethodBinding);
+    MethodDescriptor bridgeMethodDescriptor = JdtUtils.createMethodDescriptor(bridgeMethodBinding);
+    return AstUtils.createForwardingMethod(
+        bridgeMethodDescriptor,
+        forwardToMethodDescriptor,
+        JdtUtils.createTypeDescriptor(typeBinding),
+        "Bridge method for exposing non-JsMethod.");
   }
 }

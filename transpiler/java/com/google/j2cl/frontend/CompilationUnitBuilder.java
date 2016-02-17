@@ -271,16 +271,16 @@ public class CompilationUnitBuilder {
       }
 
       // Add dispatch methods for package private methods.
-      currentType.addMethods(PackagePrivateMethodsDispatcher.create(typeBinding));
+      PackagePrivateMethodsDispatcher.create(typeBinding, type);
 
       // Add bridge methods.
-      currentType.addMethods(BridgeMethodsCreator.create(typeBinding));
+      BridgeMethodsCreator.create(typeBinding, type);
 
       // Add unimplemented methods.
-      currentType.addMethods(UnimplementedMethodsCreator.create(typeBinding));
+      UnimplementedMethodsCreator.create(typeBinding, type);
 
       // Add bridge methods for JsMethods
-      currentType.addMethods(JsBridgeMethodsCreator.create(typeBinding));
+      JsBridgeMethodsCreator.create(typeBinding, type);
       popType();
       return type;
     }

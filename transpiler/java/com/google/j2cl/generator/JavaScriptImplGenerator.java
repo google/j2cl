@@ -20,6 +20,7 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;

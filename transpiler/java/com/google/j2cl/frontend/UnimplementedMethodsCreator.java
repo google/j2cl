@@ -16,6 +16,7 @@
 package com.google.j2cl.frontend;
 
 import com.google.j2cl.ast.Block;
+import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptorBuilder;
@@ -42,7 +43,7 @@ public class UnimplementedMethodsCreator {
   /**
    * Returns the synthesized unimplemented methods in {@code typeBinding}.
    */
-  public static List<Method> create(ITypeBinding typeBinding) {
+  public static void create(ITypeBinding typeBinding, JavaType javaType) {
     List<Method> unimplementedMethods = new ArrayList<>();
     // used to avoid generating duplicate methods.
     Set<MethodDescriptor> unimplementedMethodDescriptors = new LinkedHashSet<>();
@@ -56,7 +57,7 @@ public class UnimplementedMethodsCreator {
       unimplementedMethodDescriptors.add(unimplementedMethodDescriptor);
       unimplementedMethods.add(createEmptyMethod(methodBinding, typeBinding));
     }
-    return unimplementedMethods;
+    javaType.addMethods(unimplementedMethods);
   }
 
   /**

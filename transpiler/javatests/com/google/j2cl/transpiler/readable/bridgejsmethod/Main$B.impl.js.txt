@@ -1,0 +1,163 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.bridgejsmethod.Main$B.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.bridgejsmethod.Main$B$impl');
+
+
+let Main$A = goog.require('gen.com.google.j2cl.transpiler.readable.bridgejsmethod.Main$A$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.bridgejsmethod.Main$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let String = goog.forwardDeclare('gen.java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+/**
+ * @extends {Main$A<?string>}
+ */
+class Main$B extends Main$A {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Main$B}
+   * @public
+   */
+  static $create() {
+    Main$B.$clinit();
+    let $instance = new Main$B;
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main$B();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main$B() {
+    this.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main$A();
+    this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main$B();
+  }
+
+  /**
+   * @param {?string} s
+   * @return {?string}
+   * @public
+   */
+  m_fun__java_lang_String(s) { return s; }
+
+  /**
+   * @param {?string} s
+   * @return {void}
+   * @public
+   */
+  bar(s) {}
+
+  /**
+   * Bridge method.
+   * @param {?string} arg0
+   * @return {void}
+   * @public
+   */
+  m_bar__java_lang_Object(arg0) {
+    this.bar(/**@type {?string} */ ($Casts.to(arg0, String)));
+  }
+
+  /**
+   * Bridge method.
+   * @param {?string} arg0
+   * @return {?string}
+   * @public
+   */
+  fun(arg0) {
+    return this.m_fun__java_lang_String(
+        /**@type {?string} */ ($Casts.to(arg0, String)));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Main$B; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Main$B);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    Main$B.$clinit();
+    if (!Main$B.$classMain$B_) {
+      Main$B.$classMain$B_ = Class.$createForClass(
+          $Util.$generateId('B'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$B'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.bridgejsmethod.Main.B'));
+    }
+    return Main$B.$classMain$B_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return Main$B.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Main = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.bridgejsmethod.Main$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    String = goog.module.get('gen.java.lang.String$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    Main$A.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main$B() {}
+};
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Main$B.$classMain$B_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = Main$B;
+//# sourceMappingURL=Main$B.js.map

@@ -13,16 +13,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.generator;
+package com.google.j2cl.ast;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import com.google.j2cl.ast.FieldDescriptor;
-import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.TypeDescriptor;
 
 import java.util.List;
 
@@ -51,8 +48,10 @@ public class ManglingNameUtils {
       return getCtorMangledName(methodDescriptor);
     }
     if (methodDescriptor.isJsProperty()) {
-      // return the property name.
-      return methodDescriptor.getJsPropertyName();
+      // return get/set prefix plus the property name.
+      String getterSetterPrefix = methodDescriptor.isJsPropertyGetter() ? "get" : "set";
+      String jsPropertyName = methodDescriptor.getJsPropertyName();
+      return getterSetterPrefix + " " + jsPropertyName;
     }
     if (methodDescriptor.isRaw()) {
       return methodDescriptor.getJsName() == null

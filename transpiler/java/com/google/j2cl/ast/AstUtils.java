@@ -333,35 +333,38 @@ public class AstUtils {
   }
 
   /**
-   * Returns forwarding method for exposed package private methods (which means that one of its
-   * overriding method is public or protected, so the package private method is exposed).
-   * The forwarding method is like:
-   * exposedMethodDescriptor (args) {return this.forwardToMethodDescriptor(args);}
+   * Creates forwarding method that has the same signature of {@code fromMethodDescriptor} in
+   * type {@code enclosingClassTypeDescriptor}, and delegates to {@code toMethodDescriptor}, e.g.
+   *
+   * enclosingClassTypeDescriptor.toMethodDescriptor (args) {
+   *    return this.toMethodDescriptor(args);
+   * }
    */
   public static Method createForwardingMethod(
-      MethodDescriptor exposedMethodDescriptor, MethodDescriptor forwardToMethodDescriptor) {
+      MethodDescriptor fromMethodDescriptor,
+      MethodDescriptor toMethodDescriptor,
+      TypeDescriptor enclosingClassTypeDescriptor,
+      String jsDocDescription) {
     MethodDescriptor forwardingMethodDescriptor =
-        MethodDescriptorBuilder.from(exposedMethodDescriptor)
-            .enclosingClassTypeDescriptor(
-                forwardToMethodDescriptor.getEnclosingClassTypeDescriptor())
-            .returnTypeDescriptor(forwardToMethodDescriptor.getReturnTypeDescriptor())
+        MethodDescriptorBuilder.from(fromMethodDescriptor)
+            .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
             .build();
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
-    for (int i = 0; i < exposedMethodDescriptor.getParameterTypeDescriptors().size(); i++) {
+    for (int i = 0; i < fromMethodDescriptor.getParameterTypeDescriptors().size(); i++) {
       Variable parameter =
           new Variable(
-              "arg" + i, exposedMethodDescriptor.getParameterTypeDescriptors().get(i), false, true);
+              "arg" + i, fromMethodDescriptor.getParameterTypeDescriptors().get(i), false, true);
       parameters.add(parameter);
       arguments.add(parameter.getReference());
     }
     Expression forwardingMethodCall =
-        MethodCall.createRegularMethodCall(null, forwardToMethodDescriptor, arguments);
+        MethodCall.createRegularMethodCall(null, toMethodDescriptor, arguments);
     Statement statement =
-        exposedMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.get().primitiveVoid
+        fromMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.get().primitiveVoid
             ? new ExpressionStatement(forwardingMethodCall)
             : new ReturnStatement(
-                forwardingMethodCall, exposedMethodDescriptor.getReturnTypeDescriptor());
+                forwardingMethodCall, fromMethodDescriptor.getReturnTypeDescriptor());
     return new Method(
         forwardingMethodDescriptor,
         parameters,
@@ -369,7 +372,7 @@ public class AstUtils {
         false,
         true,
         false,
-        "Synthetic method.");
+        jsDocDescription);
   }
 
   /**

@@ -26,6 +26,7 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodBuilder;
@@ -88,15 +89,9 @@ public class GeneratorUtils {
   public static String getMethodHeader(Method method, GenerationEnvironment environment) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
     String staticQualifier = methodDescriptor.isStatic() ? "static" : null;
-    String getterSetterPrefix =
-        methodDescriptor.isJsPropertyGetter()
-            ? "get"
-            : methodDescriptor.isJsPropertySetter() ? "set" : null;
     String methodName = ManglingNameUtils.getMangledName(methodDescriptor);
     String parameterList = getParameterList(method, environment);
-    return Joiner.on(" ")
-        .skipNulls()
-        .join(staticQualifier, getterSetterPrefix, methodName + "(" + parameterList + ")");
+    return Joiner.on(" ").skipNulls().join(staticQualifier, methodName + "(" + parameterList + ")");
   }
 
   /**
