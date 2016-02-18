@@ -1,0 +1,167 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsfunction.JsArray$1.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.jsfunction.JsArray$1$impl');
+
+
+let JsArray$CompareFunction = goog.require('gen.com.google.j2cl.transpiler.readable.jsfunction.JsArray$CompareFunction$impl');
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+let $JsArray = window.Array;
+
+
+/**
+ * @implements {JsArray$CompareFunction}
+ */
+class JsArray$1 extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {$JsArray}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_jsfunction_JsArray$1 =
+        null;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {$JsArray} $outer_this
+   * @return {!JsArray$1}
+   * @public
+   */
+  static $create__com_google_j2cl_transpiler_readable_jsfunction_JsArray(
+      $outer_this) {
+    JsArray$1.$clinit();
+    let $instance = new JsArray$1;
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsfunction_JsArray$1__com_google_j2cl_transpiler_readable_jsfunction_JsArray(
+            $outer_this);
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {$JsArray} $outer_this
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsfunction_JsArray$1__com_google_j2cl_transpiler_readable_jsfunction_JsArray(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_jsfunction_JsArray$1 =
+        $outer_this;
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_jsfunction_JsArray$1();
+  }
+
+  /**
+   * @override
+   * @this {?function(*, *):number}
+   * @param {*} o1
+   * @param {*} o2
+   * @return {number}
+   * @public
+   */
+  m_apply__java_lang_Object__java_lang_Object(o1, o2) { return 0; }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        instance.$is__com_google_j2cl_transpiler_readable_jsfunction_JsArray$1;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, JsArray$1);
+  }
+
+  /**
+   * Copies the fields from {@code from} to {@code to}.
+   * @param {JsArray$1} from
+   * @param {*} to
+   * @public
+   */
+  static $copy(from, to) {
+    to.f_$outer_this__com_google_j2cl_transpiler_readable_jsfunction_JsArray$1 =
+        from.f_$outer_this__com_google_j2cl_transpiler_readable_jsfunction_JsArray$1;
+    // Marks the object is an instance of this class.
+    to.$is__com_google_j2cl_transpiler_readable_jsfunction_JsArray$1 = true;
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    JsArray$1.$clinit();
+    if (!JsArray$1.$classJsArray$1_) {
+      JsArray$1.$classJsArray$1_ = Class.$createForClass(
+          $Util.$generateId('1'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsfunction.JsArray$1'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsfunction.JsArray.1'));
+    }
+    return JsArray$1.$classJsArray$1_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return JsArray$1.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsfunction_JsArray$1() {}
+};
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+JsArray$1.$classJsArray$1_ = null;
+
+
+JsArray$CompareFunction.$markImplementor(JsArray$1);
+
+
+/**
+ * Export class.
+ */
+exports = JsArray$1;
+//# sourceMappingURL=JsArray$1.js.map

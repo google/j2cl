@@ -1,0 +1,138 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.ImportTypeInJsFunctionMethod.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.ImportTypeInJsFunctionMethod$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let ImportTypeInJsFunctionMethod$FooFunction = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.ImportTypeInJsFunctionMethod$FooFunction$impl');
+let Main = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
+
+
+class ImportTypeInJsFunctionMethod extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {?function(Main):void}
+     */
+    this.f_fooFunction__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_ImportTypeInJsFunctionMethod =
+        null;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!ImportTypeInJsFunctionMethod}
+   * @public
+   */
+  static $create() {
+    ImportTypeInJsFunctionMethod.$clinit();
+    let $instance = new ImportTypeInJsFunctionMethod;
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_ImportTypeInJsFunctionMethod();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_ImportTypeInJsFunctionMethod() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_ImportTypeInJsFunctionMethod();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof ImportTypeInJsFunctionMethod;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, ImportTypeInJsFunctionMethod);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    ImportTypeInJsFunctionMethod.$clinit();
+    if (!ImportTypeInJsFunctionMethod.$classImportTypeInJsFunctionMethod_) {
+      ImportTypeInJsFunctionMethod
+          .$classImportTypeInJsFunctionMethod_ = Class.$createForClass(
+          $Util.$generateId('ImportTypeInJsFunctionMethod'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.ImportTypeInJsFunctionMethod'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.ImportTypeInJsFunctionMethod'));
+    }
+    return ImportTypeInJsFunctionMethod.$classImportTypeInJsFunctionMethod_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return ImportTypeInJsFunctionMethod.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    ImportTypeInJsFunctionMethod$FooFunction = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.ImportTypeInJsFunctionMethod$FooFunction$impl');
+    Main = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_ImportTypeInJsFunctionMethod() {
+  }
+};
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+ImportTypeInJsFunctionMethod.$classImportTypeInJsFunctionMethod_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = ImportTypeInJsFunctionMethod;
+//# sourceMappingURL=ImportTypeInJsFunctionMethod.js.map
