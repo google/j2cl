@@ -34,7 +34,36 @@ import java.util.Set;
  * Utility functions to transpile JDT MethodBinding to J2cl MethodDescriptor.
  */
 public class JdtMethodUtils {
+  /**
+   * Creates a MethodDescriptor based on the given method binding, and changed its parameter types
+   * to match the method declaration. In J2CL AST, we always use the erasured parameter types in
+   * a MethodDescriptor.
+   */
   public static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
+    MethodDescriptor methodDescriptor = createConcreteMethodDescriptor(methodBinding);
+    Iterable<TypeDescriptor> parameterTypeDescriptors =
+        // Use the method declaration.
+        FluentIterable.from(Arrays.asList(methodBinding.getMethodDeclaration().getParameterTypes()))
+            .transform(
+                new Function<ITypeBinding, TypeDescriptor>() {
+                  @Override
+                  public TypeDescriptor apply(ITypeBinding typeBinding) {
+                    // Whenever we create the parameter types of a method,
+                    // we use the rawTypeDescriptor.
+                    return TypeProxyUtils.createTypeDescriptor(typeBinding).getRawTypeDescriptor();
+                  }
+                });
+    return MethodDescriptorBuilder.from(methodDescriptor)
+        .parameterTypeDescriptors(parameterTypeDescriptors)
+        .build();
+  }
+
+  /**
+   * Creates a MethodDescriptor directly based on the given JDT method binding. The returned
+   * MethodDescriptor contains exactly matching information with the given method binding, e.g.
+   * parameter type of a type variable is a type variable, not the erasure type.
+   */
+  public static MethodDescriptor createConcreteMethodDescriptor(IMethodBinding methodBinding) {
     int modifiers = methodBinding.getModifiers();
     boolean isStatic = Modifier.isStatic(modifiers);
     Visibility visibility = TypeProxyUtils.getVisibility(modifiers);
@@ -56,14 +85,12 @@ public class JdtMethodUtils {
 
     // generate parameters type descriptors.
     Iterable<TypeDescriptor> parameterTypeDescriptors =
-        FluentIterable.from(Arrays.asList(methodBinding.getMethodDeclaration().getParameterTypes()))
+        FluentIterable.from(Arrays.asList(methodBinding.getParameterTypes()))
             .transform(
                 new Function<ITypeBinding, TypeDescriptor>() {
                   @Override
                   public TypeDescriptor apply(ITypeBinding typeBinding) {
-                    // Whenever we create the parameter types of a method,
-                    // we use the rawTypeDescriptor.
-                    return TypeProxyUtils.createTypeDescriptor(typeBinding).getRawTypeDescriptor();
+                    return TypeProxyUtils.createTypeDescriptor(typeBinding);
                   }
                 });
     // generate type parameters declared in the method.

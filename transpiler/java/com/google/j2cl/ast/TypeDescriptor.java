@@ -169,6 +169,10 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
     return false;
   }
 
+  public boolean isRawType() {
+    return false;
+  }
+
   public abstract int getDimensions();
 
   public abstract TypeDescriptor getLeafTypeDescriptor();
@@ -231,6 +235,10 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
   }
 
   public MethodDescriptor getJsFunctionMethodDescriptor() {
+    return null;
+  }
+
+  public MethodDescriptor getConcreteJsFunctionMethodDescriptor() {
     return null;
   }
 

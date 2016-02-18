@@ -22,11 +22,14 @@ import com.google.common.base.Strings;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
+import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -160,7 +163,7 @@ public class JsDocNameUtils {
           && (typeDescriptor.isJsFunctionInterface()
               || typeDescriptor.isJsFunctionImplementation())) {
         // JsFunction interface and implementor should accept a real JS function.
-        jsDocName = "window.Function";
+        jsDocName = getJsDocNameForJsFunction(typeDescriptor, environment);
       }
       return jsDocName;
     }
@@ -206,7 +209,7 @@ public class JsDocNameUtils {
     if (!shouldUseClassName
         && (typeDescriptor.isJsFunctionInterface()
             || typeDescriptor.isJsFunctionImplementation())) {
-      return "window.Function";
+      return getJsDocNameForJsFunction(typeDescriptor, environment);
     }
 
     // Literal native js types do not refer to any concrete types.
@@ -236,5 +239,42 @@ public class JsDocNameUtils {
                     return jsDocNamesByUnboxedTypeDescriptor.get(unboxedTypeDescriptor);
                   }
                 }));
+  }
+
+  private static String getJsDocNameForJsFunction(
+      TypeDescriptor typeDescriptor, GenerationEnvironment environment) {
+    // Java does not do type checking on raw type, which is very similar as 'window.Function' in
+    // JS compiler's type system. 'window.Function' is both a super class and a sub class of any
+    // function(...): types.
+    if (typeDescriptor.isRawType()) {
+      return "window.Function";
+    }
+    MethodDescriptor jsFunctionMethodDescriptor =
+        typeDescriptor.getConcreteJsFunctionMethodDescriptor();
+    Preconditions.checkNotNull(jsFunctionMethodDescriptor);
+
+    int parameterIndex = 0;
+    int parameterCount = jsFunctionMethodDescriptor.getParameterTypeDescriptors().size();
+    List<String> parameterTypesList = new ArrayList<>();
+    for (TypeDescriptor parameterTypeDescriptor :
+        jsFunctionMethodDescriptor.getParameterTypeDescriptors()) {
+      String parameterTypeAnnotation;
+      if (jsFunctionMethodDescriptor.isJsMethodVarargs() && parameterIndex == parameterCount - 1) {
+        // variable parameters
+        Preconditions.checkArgument(parameterTypeDescriptor.isArray());
+        String typeName =
+            JsDocNameUtils.getJsDocName(
+                parameterTypeDescriptor.getComponentTypeDescriptor(), environment);
+        parameterTypeAnnotation = "..." + typeName;
+      } else {
+        parameterTypeAnnotation = JsDocNameUtils.getJsDocName(parameterTypeDescriptor, environment);
+      }
+      parameterIndex++;
+      parameterTypesList.add(parameterTypeAnnotation);
+    }
+    return String.format(
+        "function(%s):%s",
+        Joiner.on(", ").join(parameterTypesList),
+        getJsDocName(jsFunctionMethodDescriptor.getReturnTypeDescriptor(), environment));
   }
 }

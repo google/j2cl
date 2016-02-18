@@ -22,12 +22,12 @@ public class Main {
     foo.apply("a");
   }
 
-  public static void callGeneric(ApplyFunction af, Object o) {
-    af.apply(o);
+  public static Object callGeneric(ApplyFunction af, Object o) {
+    return af.apply(o);
   }
 
-  public static void callParametric(ApplyFunction<String> af, String s) {
-    af.apply(s);
+  public static String callParametric(ApplyFunction<String> af, String s) {
+    return af.apply(s);
   }
 
   @JsFunction

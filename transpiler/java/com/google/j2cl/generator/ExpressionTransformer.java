@@ -151,6 +151,17 @@ public class ExpressionTransformer {
       public String transformCastExpression(CastExpression expression) {
         Preconditions.checkArgument(
             expression.isRaw(), "Java CastExpression should have been normalized to method call.");
+        if (expression.getExpression() instanceof NewInstance) {
+          TypeDescriptor targetTypeDescriptor =
+              ((NewInstance) expression.getExpression())
+                  .getTarget()
+                  .getEnclosingClassTypeDescriptor();
+          if (targetTypeDescriptor.isJsFunctionImplementation()) {
+            Preconditions.checkArgument(expression.getCastTypeDescriptor() == targetTypeDescriptor);
+            // Do not generate the same cast twice.
+            return transform(expression.getExpression(), environment);
+          }
+        }
         return annotateWithJsDoc(
             expression.getCastTypeDescriptor(), transform(expression.getExpression(), environment));
       }
@@ -500,13 +511,18 @@ public class ExpressionTransformer {
         TypeDescriptor targetTypeDescriptor =
             expression.getTarget().getEnclosingClassTypeDescriptor();
         String enclosingClassName = transform(targetTypeDescriptor, environment);
-        return String.format(
-            "%s.$makeLambdaFunction(%s.prototype.%s, %s, %s.$copy)",
-            transform(TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor(), environment),
-            enclosingClassName,
-            ManglingNameUtils.getMangledName(targetTypeDescriptor.getJsFunctionMethodDescriptor()),
-            transformRegularNewInstance(expression),
-            enclosingClassName);
+        String makeLambdaFunctionCall =
+            String.format(
+                "%s.$makeLambdaFunction(%s.prototype.%s, %s, %s.$copy)",
+                transform(TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor(), environment),
+                enclosingClassName,
+                ManglingNameUtils.getMangledName(
+                    targetTypeDescriptor.getJsFunctionMethodDescriptor()),
+                transformRegularNewInstance(expression),
+                enclosingClassName);
+        // generate specific type annotation for Util.$makeLambdaFunction() because we cannot
+        // specify a specific type at the declaration of the utility function.
+        return annotateWithJsDoc(targetTypeDescriptor, makeLambdaFunctionCall);
       }
     }
     if (expression == null) {

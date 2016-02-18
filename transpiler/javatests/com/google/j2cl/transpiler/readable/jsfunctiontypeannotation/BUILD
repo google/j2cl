@@ -1,0 +1,18 @@
+package(default_visibility = ["//:__subpackages__"])
+
+# Google owns the copyright
+licenses(["unencumbered"])
+
+load(
+    "//transpiler:javatests/com/google/j2cl/transpiler/readable/readable_example.bzl",
+    "readable_example",
+)
+
+# Creates verification target
+readable_example(
+    name = "jsfunctiontypeannotation",
+    srcs = glob(["*.java"]),
+    native_srcs = ["native_sources/Main.native.js"],
+    native_srcs_pkg = "com/google/j2cl/transpiler/readable/jsfunctiontypeannotation",
+    deps = ["//jre/java:gwt-jsinterop-annotations"],
+)

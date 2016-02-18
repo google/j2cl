@@ -1,0 +1,184 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main$A.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main$A$impl');
+
+
+let Main$ApplyFunction = goog.require('gen.com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main$ApplyFunction$impl');
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Double = goog.forwardDeclare('gen.java.lang.Double$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+/**
+ * @implements {Main$ApplyFunction<?number, ?number>}
+ */
+class Main$A extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Main$A}
+   * @public
+   */
+  static $create() {
+    Main$A.$clinit();
+    let $instance = new Main$A;
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$A();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$A() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$A();
+  }
+
+  /**
+   * @param {?number} d
+   * @param {?number} i
+   * @return {?number}
+   * @public
+   */
+  m_apply__java_lang_Double__java_lang_Double(d, i) {}
+
+  /**
+   * Bridge method.
+   * @this {function(?number, ?number):?number}
+   * @param {?number} arg0
+   * @param {?number} arg1
+   * @return {?number}
+   * @public
+   */
+  m_apply__java_lang_Object__java_lang_Number(arg0, arg1) {
+    return Main$A
+        .m_apply__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$A__java_lang_Double__java_lang_Double(
+            this, /**@type {?number} */ ($Casts.to(arg0, Double)),
+            /**@type {?number} */ ($Casts.to(arg1, Double)));
+  }
+
+  /**
+   * @param {function(?number, ?number):?number} $thisArg
+   * @param {?number} d
+   * @param {?number} i
+   * @return {?number}
+   * @public
+   */
+  static m_apply__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$A__java_lang_Double__java_lang_Double(
+      $thisArg, d, i) {
+    Main$A.$clinit();
+    return d;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        instance
+            .$is__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$A;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Main$A);
+  }
+
+  /**
+   * Copies the fields from {@code from} to {@code to}.
+   * @param {Main$A} from
+   * @param {*} to
+   * @public
+   */
+  static $copy(from, to) {
+    // Marks the object is an instance of this class.
+    to.$is__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$A =
+        true;
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    Main$A.$clinit();
+    if (!Main$A.$classMain$A_) {
+      Main$A.$classMain$A_ = Class.$createForClass(
+          $Util.$generateId('A'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main$A'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.A'));
+    }
+    return Main$A.$classMain$A_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return Main$A.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Main = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Double = goog.module.get('gen.java.lang.Double$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$A() {
+  }
+};
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Main$A.$classMain$A_ = null;
+
+
+Main$ApplyFunction.$markImplementor(Main$A);
+
+
+/**
+ * Export class.
+ */
+exports = Main$A;
+//# sourceMappingURL=Main$A.js.map

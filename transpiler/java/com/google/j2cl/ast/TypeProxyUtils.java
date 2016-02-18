@@ -202,26 +202,52 @@ public class TypeProxyUtils {
   }
 
   /**
-   * Returns the MethodDescriptor for the SAM method of {@code typeBinding}.
+   * Returns the MethodDescriptor for the SAM method in JsFunction interface.
    */
   public static MethodDescriptor getJsFunctionMethodDescriptor(ITypeBinding typeBinding) {
-    if (!isJsFunctionImplementation(typeBinding)) {
+    IMethodBinding samInJsFunctionInterface = getSAMInJsFunctionInterface(typeBinding);
+    return samInJsFunctionInterface == null
+        ? null
+        : JdtMethodUtils.createMethodDescriptor(samInJsFunctionInterface.getMethodDeclaration());
+  }
+
+  /**
+   * Returns the MethodDescriptor for the concrete JsFunction method implementation.
+   */
+  public static MethodDescriptor getConcreteJsFunctionMethodDescriptor(ITypeBinding typeBinding) {
+    IMethodBinding samInJsFunctionInterface = getSAMInJsFunctionInterface(typeBinding);
+    if (samInJsFunctionInterface == null) {
       return null;
     }
-    Preconditions.checkArgument(
-        typeBinding.getInterfaces().length == 1,
-        "Type %s should implement one and only one super interface.",
-        typeBinding.getName());
-    ITypeBinding jsFunctionInterface = typeBinding.getInterfaces()[0];
+    if (typeBinding.isInterface()) {
+      return JdtMethodUtils.createConcreteMethodDescriptor(samInJsFunctionInterface);
+    }
+    for (IMethodBinding methodBinding : typeBinding.getDeclaredMethods()) {
+      if (methodBinding.isSynthetic()) {
+        // skip the synthetic method.
+        continue;
+      }
+      if (methodBinding.overrides(samInJsFunctionInterface)) {
+        return JdtMethodUtils.createConcreteMethodDescriptor(methodBinding);
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Returns JsFunction method in JsFunction interface.
+   */
+  private static IMethodBinding getSAMInJsFunctionInterface(ITypeBinding typeBinding) {
+    if (!isJsFunctionImplementation(typeBinding) && !JsInteropUtils.isJsFunction(typeBinding)) {
+      return null;
+    }
+    ITypeBinding jsFunctionInterface =
+        typeBinding.isInterface() ? typeBinding : typeBinding.getInterfaces()[0];
     Preconditions.checkArgument(
         jsFunctionInterface.getDeclaredMethods().length == 1,
         "Type %s should have one and only one method.",
         jsFunctionInterface.getName());
-    IMethodBinding interfaceSAM = jsFunctionInterface.getDeclaredMethods()[0];
-    // If it is a parametric method, returns the original generic method, which has the same
-    // MethodDescriptor as the bridge method, and the JsFunction instance should return the bridge
-    // method, which does a casting on arguments.
-    return JdtMethodUtils.createMethodDescriptor(interfaceSAM.getMethodDeclaration());
+    return jsFunctionInterface.getDeclaredMethods()[0];
   }
 
   private static List<TypeDescriptor> createTypeDescriptors(ITypeBinding[] typeBindings) {

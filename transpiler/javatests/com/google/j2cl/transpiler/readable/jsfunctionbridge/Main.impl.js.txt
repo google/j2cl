@@ -55,9 +55,10 @@ class Main extends Object {
    */
   static m_test() {
     Main.$clinit();
-    let foo = $Util.$makeLambdaFunction(
-        Main$1.prototype.m_apply__java_lang_Object, Main$1.$create(),
-        Main$1.$copy);
+    let foo = /**@type {function(?string):?string} */ (
+        $Util.$makeLambdaFunction(
+            Main$1.prototype.m_apply__java_lang_Object, Main$1.$create(),
+            Main$1.$copy));
     Main.m_callGeneric__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main$ApplyFunction__java_lang_Object(
         foo, "a");
     Main.m_callParametric__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main$ApplyFunction__java_lang_String(
@@ -68,25 +69,25 @@ class Main extends Object {
   /**
    * @param {window.Function} af
    * @param {*} o
-   * @return {void}
+   * @return {*}
    * @public
    */
   static m_callGeneric__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main$ApplyFunction__java_lang_Object(
       af, o) {
     Main.$clinit();
-    af(o);
+    return af(o);
   }
 
   /**
-   * @param {window.Function} af
+   * @param {function(?string):?string} af
    * @param {?string} s
-   * @return {void}
+   * @return {?string}
    * @public
    */
   static m_callParametric__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main$ApplyFunction__java_lang_String(
       af, s) {
     Main.$clinit();
-    af(s);
+    return af(s);
   }
 
   /**

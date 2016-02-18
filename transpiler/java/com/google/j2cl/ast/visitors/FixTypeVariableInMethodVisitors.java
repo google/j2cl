@@ -58,7 +58,11 @@ public class FixTypeVariableInMethodVisitors extends AbstractRewriter {
     // If it is a type variable that is declared by the method, replace with its bound.
     if (typeDescriptor.isTypeVariable()
         && method != null
-        && method.getDescriptor().getTypeParameterTypeDescriptors().contains(typeDescriptor)) {
+        && (method.getDescriptor().getTypeParameterTypeDescriptors().contains(typeDescriptor)
+            || (method.getDescriptor().isJsFunction()))) {
+      // A JsFunction method uses @this tag to specify the type of 'this', which makes templates
+      // unresolved inside the method.
+      // TODO: double check if this is the same issue with b/24476009.
       TypeDescriptor boundTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
       return boundTypeDescriptor.isParameterizedType()
           ? boundTypeDescriptor.getRawTypeDescriptor()

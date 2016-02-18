@@ -117,6 +117,11 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  public boolean isRawType() {
+    return (typeBinding != null && typeBinding.isRawType());
+  }
+
+  @Override
   public String getBinaryName() {
     return Joiner.on(".")
         .join(
@@ -308,6 +313,11 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   @Override
   public MethodDescriptor getJsFunctionMethodDescriptor() {
     return TypeProxyUtils.getJsFunctionMethodDescriptor(typeBinding);
+  }
+
+  @Override
+  public MethodDescriptor getConcreteJsFunctionMethodDescriptor() {
+    return TypeProxyUtils.getConcreteJsFunctionMethodDescriptor(typeBinding);
   }
 
   @Override

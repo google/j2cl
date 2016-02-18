@@ -66,8 +66,6 @@ are copyright and licensed as follows:
     thinks these things are live.
 - Fix and double check equals/hashcode methods on all TypeDescriptor flavors.
   see cl/112695016 for more information.
-- Generate more specific type annotation (function(): with specific parameter
-  types and return type) for JsFunction types.
 
 ##JsInterop Restrictions to check
 - JsConstructor:
