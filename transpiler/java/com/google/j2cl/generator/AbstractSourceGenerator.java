@@ -28,9 +28,11 @@ import java.nio.file.Path;
  */
 public abstract class AbstractSourceGenerator {
   protected final Errors errors;
+  protected final boolean declareLegacyNamespace;
 
-  public AbstractSourceGenerator(Errors errors) {
+  public AbstractSourceGenerator(Errors errors, boolean declareLegacyNamespace) {
     this.errors = errors;
+    this.declareLegacyNamespace = declareLegacyNamespace;
   }
 
   public void writeToFile(Path outputPath, Charset charset) {

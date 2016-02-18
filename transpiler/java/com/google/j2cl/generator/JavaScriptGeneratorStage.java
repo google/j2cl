@@ -40,6 +40,7 @@ public class JavaScriptGeneratorStage {
   private Errors errors;
   private FileSystem outputFileSystem;
   private String outputLocationPath;
+  private boolean declareLegacyNamespace;
 
   public JavaScriptGeneratorStage(
       Charset charset,
@@ -47,12 +48,14 @@ public class JavaScriptGeneratorStage {
       Set<String> nativeJavaScriptFileZipPaths,
       FileSystem outputFileSystem,
       String outputLocationPath,
+      boolean declareLegacyNamespace,
       Errors errors) {
     this.charset = charset;
     this.omitSourceFiles = omitSourceFiles;
     this.nativeJavaScriptFileZipPaths = nativeJavaScriptFileZipPaths;
     this.outputFileSystem = outputFileSystem;
     this.outputLocationPath = outputLocationPath;
+    this.declareLegacyNamespace = declareLegacyNamespace;
     this.errors = errors;
   }
 
@@ -75,7 +78,8 @@ public class JavaScriptGeneratorStage {
           continue;
         }
 
-        JavaScriptImplGenerator jsImplGenerator = new JavaScriptImplGenerator(errors, javaType);
+        JavaScriptImplGenerator jsImplGenerator =
+            new JavaScriptImplGenerator(errors, declareLegacyNamespace, javaType);
 
         // If the java type contains any native methods, search for matching native file.
         if (javaType.containsNativeMethods()) {
@@ -117,7 +121,7 @@ public class JavaScriptGeneratorStage {
         jsImplGenerator.writeToFile(absolutePathForImpl, charset);
 
         JavaScriptHeaderGenerator jsHeaderGenerator =
-            new JavaScriptHeaderGenerator(errors, javaType);
+            new JavaScriptHeaderGenerator(errors, declareLegacyNamespace, javaType);
         Path absolutePathForHeader =
             GeneratorUtils.getAbsolutePath(
                 outputFileSystem,

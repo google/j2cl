@@ -27,8 +27,9 @@ import com.google.j2cl.generator.visitors.ImportUtils;
  */
 public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
 
-  public JavaScriptHeaderGenerator(Errors errors, JavaType javaType) {
-    super(errors, javaType);
+  public JavaScriptHeaderGenerator(
+      Errors errors, boolean declareLegacyNamespace, JavaType javaType) {
+    super(errors, declareLegacyNamespace, javaType);
   }
 
   @Override
@@ -41,6 +42,9 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     sb.appendln(" * Header transpiled from %s.", binaryName);
     sb.appendln(" */");
     sb.appendln("goog.module('%s');", selfImport.getHeaderModulePath());
+    if (declareLegacyNamespace) {
+      sb.appendln("goog.module.declareLegacyNamespace();");
+    }
     sb.newLine();
     sb.newLine();
     sb.appendln("// Imports headers for both eager and lazy dependencies to ensure that");

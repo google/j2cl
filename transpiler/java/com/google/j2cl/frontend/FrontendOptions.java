@@ -57,6 +57,7 @@ public class FrontendOptions {
   private List<String> omitSourceFilePaths;
   private FileSystem outputFileSystem;
   private boolean shouldPrintReadableMap;
+  private boolean declareLegacyNamespace;
 
   private static final Set<String> VALID_JAVA_VERSIONS =
       ImmutableSet.of("1.8", "1.7", "1.6", "1.5");
@@ -84,6 +85,7 @@ public class FrontendOptions {
     setSourceVersion(flags.source);
     setEncoding(flags.encoding);
     setShouldPrintReadableSourceMap(flags.readableSourceMaps);
+    setDeclareLegacyNamespace(flags.declareLegacyNamespace);
   }
 
   public List<String> getClasspathEntries() {
@@ -269,6 +271,14 @@ public class FrontendOptions {
 
   public void setShouldPrintReadableSourceMap(boolean shouldPrintReadableMap) {
     this.shouldPrintReadableMap = shouldPrintReadableMap;
+  }
+
+  public boolean getDeclareLegacyNamespace() {
+    return declareLegacyNamespace;
+  }
+
+  public void setDeclareLegacyNamespace(boolean declareLegacyNamespace) {
+    this.declareLegacyNamespace = declareLegacyNamespace;
   }
 
   private boolean checkSourceFiles(List<String> sourceFiles) {

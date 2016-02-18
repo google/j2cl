@@ -48,8 +48,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   protected StatementTransformer statementTransformer;
 
-  public JavaScriptImplGenerator(Errors errors, JavaType javaType) {
-    super(errors, javaType);
+  public JavaScriptImplGenerator(Errors errors, boolean declareLegacyNamespace, JavaType javaType) {
+    super(errors, declareLegacyNamespace, javaType);
     this.className = expressionToString(javaType.getDescriptor());
     this.mangledTypeName = ManglingNameUtils.getMangledName(javaType.getDescriptor());
     this.subclassesJsConstructorClass = javaType.getDescriptor().subclassesJsConstructorClass();
@@ -114,6 +114,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
     // goog.module(...) declaration.
     sb.appendln("goog.module('%s');", selfImport.getImplModulePath());
+    if (declareLegacyNamespace) {
+      sb.appendln("goog.module.declareLegacyNamespace();");
+    }
     sb.newLine();
     sb.newLine();
 

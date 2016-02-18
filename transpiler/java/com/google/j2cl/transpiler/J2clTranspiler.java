@@ -210,6 +210,7 @@ public class J2clTranspiler {
             nativeJavaScriptFileZipPaths,
             options.getOutputFileSystem(),
             options.getOutput(),
+            options.getDeclareLegacyNamespace(),
             errors)
         .generateJavaScriptSources(j2clCompilationUnits);
     maybeExitGracefully();

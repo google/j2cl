@@ -89,9 +89,14 @@ def _impl(ctx):
     joined_paths = separator.join(js_native_zip_files_paths)
     compiler_args += ["-nativesourcezip", joined_paths]
 
-  # generate readable_maps
+  # Generate readable_maps
   if ctx.attr.readable_source_maps:
     compiler_args += ["-readableSourceMaps"]
+
+  # Emit goog.module.declareLegacyNamespace(). This is a temporary measure
+  # while onboarding Docs, do not use.
+  if ctx.attr.declare_legacy_namespace:
+    compiler_args += ["-declareLegacyNamespace"]
 
   # The transpiler expects each java file path as a separate argument.
   compiler_args += java_files_paths
@@ -134,6 +139,7 @@ j2cl_transpile = rule(
         ),
         "omit_srcs": attr.string_list(default=[]),
         "readable_source_maps": attr.bool(default=False),
+        "declare_legacy_namespace": attr.bool(default=False),
         "transpiler": attr.label(
             cfg=HOST_CFG,
             executable=True,

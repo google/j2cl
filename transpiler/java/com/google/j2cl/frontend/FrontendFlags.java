@@ -106,6 +106,15 @@ public class FrontendFlags {
   )
   protected boolean readableSourceMaps = false;
 
+  @Option(
+    name = "-declareLegacyNamespace",
+    usage =
+        "Enable goog.module.declareLegacyNamespace() for generated goog.module()."
+            + " For Docs during onboarding, do not use.",
+    hidden = true
+  )
+  protected boolean declareLegacyNamespace = false;
+
   private final Errors errors;
 
   public FrontendFlags(Errors errors) {

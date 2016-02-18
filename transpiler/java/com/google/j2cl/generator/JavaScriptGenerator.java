@@ -39,8 +39,8 @@ public abstract class JavaScriptGenerator extends AbstractSourceGenerator {
   protected Map<ImportCategory, Set<Import>> importsByCategory;
   protected SourceBuilder sb;
 
-  public JavaScriptGenerator(Errors errors, JavaType javaType) {
-    super(errors);
+  public JavaScriptGenerator(Errors errors, boolean declareLegacyNamespace, JavaType javaType) {
+    super(errors, declareLegacyNamespace);
     this.javaType = javaType;
     sb = new SourceBuilder();
     importsByCategory = ImportGatheringVisitor.gatherImports(javaType);
