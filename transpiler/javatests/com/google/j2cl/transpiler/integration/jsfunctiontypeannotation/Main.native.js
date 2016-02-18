@@ -1,5 +1,5 @@
 /**
- * @param {function(?number, ?number):?number} fn
+ * @param {?function(?number, ?number):?number} fn
  * @return {?number}
  * @public
  */

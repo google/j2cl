@@ -273,7 +273,7 @@ public class JsDocNameUtils {
       parameterTypesList.add(parameterTypeAnnotation);
     }
     return String.format(
-        "function(%s):%s",
+        "?function(%s):%s",
         Joiner.on(", ").join(parameterTypesList),
         getJsDocName(jsFunctionMethodDescriptor.getReturnTypeDescriptor(), environment));
   }

@@ -55,7 +55,7 @@ class Main extends Object {
    */
   static m_test() {
     Main.$clinit();
-    let foo = /**@type {function(?string):?string} */ (
+    let foo = /**@type {?function(?string):?string} */ (
         $Util.$makeLambdaFunction(
             Main$1.prototype.m_apply__java_lang_Object, Main$1.$create(),
             Main$1.$copy));
@@ -79,7 +79,7 @@ class Main extends Object {
   }
 
   /**
-   * @param {function(?string):?string} af
+   * @param {?function(?string):?string} af
    * @param {?string} s
    * @return {?string}
    * @public
