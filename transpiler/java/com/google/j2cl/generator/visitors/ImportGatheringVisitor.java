@@ -247,18 +247,6 @@ public class ImportGatheringVisitor extends AbstractVisitor {
       return;
     }
 
-    // JsFunction type is annotated as ?function(Foo):Bar, we need to import the parameter types
-    // and return type.
-    if (typeDescriptor.isJsFunctionImplementation() || typeDescriptor.isJsFunctionInterface()) {
-      MethodDescriptor jsFunctionMethodDescriptor =
-          typeDescriptor.getConcreteJsFunctionMethodDescriptor();
-      for (TypeDescriptor parameterTypeDescriptor :
-          jsFunctionMethodDescriptor.getParameterTypeDescriptors()) {
-        addTypeDescriptor(parameterTypeDescriptor, ImportCategory.LAZY);
-      }
-      addTypeDescriptor(jsFunctionMethodDescriptor.getReturnTypeDescriptor(), ImportCategory.LAZY);
-    }
-
     addRawTypeDescriptor(importCategory, typeDescriptor.getRawTypeDescriptor());
   }
 

@@ -243,11 +243,6 @@ public class JsDocNameUtils {
 
   private static String getJsDocNameForJsFunction(
       TypeDescriptor typeDescriptor, GenerationEnvironment environment) {
-    return getJsDocNameForJsFunction(typeDescriptor, environment, true);
-  }
-
-  public static String getJsDocNameForJsFunction(
-      TypeDescriptor typeDescriptor, GenerationEnvironment environment, boolean nullable) {
     // Java does not do type checking on raw type, which is very similar as 'window.Function' in
     // JS compiler's type system. 'window.Function' is both a super class and a sub class of any
     // function(...): types.
@@ -278,8 +273,7 @@ public class JsDocNameUtils {
       parameterTypesList.add(parameterTypeAnnotation);
     }
     return String.format(
-        "%s(%s):%s",
-        nullable ? "?function" : "function",
+        "?function(%s):%s",
         Joiner.on(", ").join(parameterTypesList),
         getJsDocName(jsFunctionMethodDescriptor.getReturnTypeDescriptor(), environment));
   }

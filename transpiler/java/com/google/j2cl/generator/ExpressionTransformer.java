@@ -522,11 +522,7 @@ public class ExpressionTransformer {
                 enclosingClassName);
         // generate specific type annotation for Util.$makeLambdaFunction() because we cannot
         // specify a specific type at the declaration of the utility function.
-        // NewInstance returns non-nullable type.
-        return String.format(
-            "/**@type {%s} */ (%s)",
-            JsDocNameUtils.getJsDocNameForJsFunction(targetTypeDescriptor, environment, false),
-            makeLambdaFunctionCall);
+        return annotateWithJsDoc(targetTypeDescriptor, makeLambdaFunctionCall);
       }
     }
     if (expression == null) {

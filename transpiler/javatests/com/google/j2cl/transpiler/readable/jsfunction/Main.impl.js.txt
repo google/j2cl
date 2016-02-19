@@ -65,7 +65,7 @@ class Main extends Object {
    * @public
    */
   m_test() {
-    let func = /**@type {function(number):number} */ (
+    let func = /**@type {?function(number):number} */ (
         $Util.$makeLambdaFunction(
             MyJsFunctionImpl.prototype.m_foo__int, MyJsFunctionImpl.$create(),
             MyJsFunctionImpl.$copy));

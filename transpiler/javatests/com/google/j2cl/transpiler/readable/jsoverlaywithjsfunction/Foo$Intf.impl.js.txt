@@ -11,7 +11,6 @@ goog.module('gen.com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
-let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
 
 let $Foo = window.Object;
 
@@ -84,10 +83,7 @@ class Foo$Intf {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {
-    Class = goog.module.get('gen.java.lang.Class$impl');
-    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
-  }
+  static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
 };
 
 

@@ -10,10 +10,8 @@ goog.module('gen.com.google.j2cl.transpiler.readable.jsfunction.JsArray$Overlay$
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let JsArray$1 = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.jsfunction.JsArray$1$impl');
-let Object = goog.forwardDeclare('gen.java.lang.Object$impl');
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let MyJsFunctionImpl = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl$impl');
 
 let $JsArray = window.Array;
 
@@ -28,13 +26,10 @@ class JsArray$Overlay {
       $thisArg) {
     JsArray$Overlay.$clinit();
     $thisArg.sort(
-        /**@type {function(*, *):number} */ (
+        /**@type {?function(number):number} */ (
             $Util.$makeLambdaFunction(
-                JsArray$1.prototype.m_apply__java_lang_Object__java_lang_Object,
-                JsArray$1
-                    .$create__com_google_j2cl_transpiler_readable_jsfunction_JsArray(
-                        $thisArg),
-                JsArray$1.$copy)));
+                MyJsFunctionImpl.prototype.m_foo__int,
+                MyJsFunctionImpl.$create(), MyJsFunctionImpl.$copy)));
   }
 
   /**
@@ -49,10 +44,8 @@ class JsArray$Overlay {
    * @public
    */
   static $clinit() {
-    JsArray$1 = goog.module.get(
-        'gen.com.google.j2cl.transpiler.readable.jsfunction.JsArray$1$impl');
-    Object = goog.module.get('gen.java.lang.Object$impl');
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    MyJsFunctionImpl = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl$impl');
   }
 };
 

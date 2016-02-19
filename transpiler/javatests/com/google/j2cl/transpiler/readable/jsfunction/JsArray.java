@@ -1,6 +1,5 @@
 package com.google.j2cl.transpiler.readable.jsfunction;
 
-import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -9,19 +8,8 @@ import jsinterop.annotations.JsType;
 public class JsArray {
   @JsOverlay
   public final void sort() {
-    sort(
-        new CompareFunction() {
-          @Override
-          public int apply(Object o1, Object o2) {
-            return 0;
-          }
-        });
+    sort(new MyJsFunctionImpl());
   }
 
-  @JsFunction
-  interface CompareFunction {
-    int apply(Object o1, Object o2);
-  }
-
-  private native void sort(CompareFunction func);
+  private native void sort(MyJsFunctionInterface func);
 }
