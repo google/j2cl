@@ -67,8 +67,8 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
   private Node rewriteRegularCastExpression(CastExpression castExpression) {
     Preconditions.checkArgument(
         castExpression.getCastTypeDescriptor() instanceof RegularTypeDescriptor);
-    RegularTypeDescriptor castTypeDescriptor =
-        (RegularTypeDescriptor) castExpression.getCastTypeDescriptor();
+    TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
+    TypeDescriptor rawCastTypeDescriptor = castTypeDescriptor.getRawTypeDescriptor();
     Expression expression = castExpression.getExpression();
 
     MethodDescriptor castToMethodDescriptor =
@@ -84,10 +84,14 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
             .build();
     List<Expression> arguments = new ArrayList<>();
     arguments.add(expression);
-    arguments.add(
-        castTypeDescriptor.isNative()
-            ? AstUtils.createJsOverlayImplTypeDescriptor(castTypeDescriptor)
-            : castTypeDescriptor.getRawTypeDescriptor());
+    TypeDescriptor castTypeDescriptorArgument =
+        rawCastTypeDescriptor.isNative()
+            ? AstUtils.createJsOverlayImplTypeDescriptor(rawCastTypeDescriptor)
+            : rawCastTypeDescriptor;
+    Preconditions.checkArgument(
+        !castTypeDescriptorArgument.isNative(),
+        "Should not pass a native type to Arrays.$castTo().");
+    arguments.add(castTypeDescriptorArgument);
 
     // Casts.to(expr, TypeName);
     MethodCall castMethodCall =
@@ -99,9 +103,8 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
   private Node rewriteArrayCastExpression(CastExpression castExpression) {
     Preconditions.checkArgument(
         castExpression.getCastTypeDescriptor() instanceof ArrayTypeDescriptor);
-    ArrayTypeDescriptor arrayCastTypeDescriptor =
-        (ArrayTypeDescriptor) castExpression.getCastTypeDescriptor();
-    if (arrayCastTypeDescriptor.getLeafTypeDescriptor().isNative()) {
+    TypeDescriptor arrayCastTypeDescriptor = castExpression.getCastTypeDescriptor();
+    if (arrayCastTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor().isNative()) {
       return rewriteNativeJsArrayCastExpression(castExpression);
     }
     return rewriteJavaArrayCastExpression(castExpression);
@@ -124,7 +127,12 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
             .build();
     List<Expression> arguments = new ArrayList<>();
     arguments.add(castExpression.getExpression());
-    arguments.add(arrayCastTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor());
+    TypeDescriptor castTypeDescriptorArgument =
+        arrayCastTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor();
+    Preconditions.checkArgument(
+        !castTypeDescriptorArgument.isNative(),
+        "Should not pass a native type to Arrays.$castTo().");
+    arguments.add(castTypeDescriptorArgument);
     arguments.add(
         new NumberLiteral(
             TypeDescriptors.get().primitiveInt, arrayCastTypeDescriptor.getDimensions()));
@@ -139,7 +147,8 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
   private Node rewriteNativeJsArrayCastExpression(CastExpression castExpression) {
     TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
     Preconditions.checkArgument(castTypeDescriptor.isArray());
-    Preconditions.checkArgument(castTypeDescriptor.getLeafTypeDescriptor().isNative());
+    Preconditions.checkArgument(
+        castTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor().isNative());
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
             .isRaw(true)

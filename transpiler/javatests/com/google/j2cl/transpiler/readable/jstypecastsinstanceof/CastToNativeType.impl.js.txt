@@ -13,12 +13,17 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 
 let CastToNativeType$NativeJsType$Overlay = goog.forwardDeclare(
     'gen.com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType$NativeJsType$Overlay$impl');
+let CastToNativeType$NativeObject$Overlay = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType$NativeObject$Overlay$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let String = goog.forwardDeclare('gen.java.lang.String$impl');
 let CastToNativeType$NativeJsType =
     goog.forwardDeclare('test.foo.NativeJsType');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
+
+let $CastToNativeType$NativeObject = window.Object;
 
 
 class CastToNativeType extends Object {
@@ -61,6 +66,16 @@ class CastToNativeType extends Object {
         $Casts.to(a, CastToNativeType$NativeJsType$Overlay));
     let c = CastToNativeType$NativeJsType$Overlay.$isInstance(a);
     let d = /**@type {Array<CastToNativeType$NativeJsType>} */ (
+        $Arrays.$castToNative(a));
+    c = $Arrays.$instanceIsOfNative(a);
+    let e = /**@type {$CastToNativeType$NativeObject} */ (
+        $Casts.to(a, CastToNativeType$NativeObject$Overlay));
+    let f = /**@type {$CastToNativeType$NativeObject<?string, *>} */ (
+        $Casts.to(a, CastToNativeType$NativeObject$Overlay));
+    c = CastToNativeType$NativeObject$Overlay.$isInstance(a);
+    let g = /**@type {Array<$CastToNativeType$NativeObject>} */ (
+        $Arrays.$castToNative(a));
+    let h = /**@type {Array<$CastToNativeType$NativeObject<?string, *>>} */ (
         $Arrays.$castToNative(a));
     c = $Arrays.$instanceIsOfNative(a);
   }
@@ -113,7 +128,10 @@ class CastToNativeType extends Object {
   static $clinit() {
     CastToNativeType$NativeJsType$Overlay = goog.module.get(
         'gen.com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType$NativeJsType$Overlay$impl');
+    CastToNativeType$NativeObject$Overlay = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType$NativeObject$Overlay$impl');
     Class = goog.module.get('gen.java.lang.Class$impl');
+    String = goog.module.get('gen.java.lang.String$impl');
     CastToNativeType$NativeJsType = goog.module.get('test.foo.NativeJsType');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
