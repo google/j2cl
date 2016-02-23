@@ -233,7 +233,7 @@ public class JsExportTest extends MyTestCase {
     setExportedField2(myExportedClassNewInnerClass(10));
 
     // Different than GWT, exported fields and methods are not an immutable copy.
-    assertEquals(10, getExportedField2());
+    assertEquals(10, accessField(getExportedField2()));
     assertEquals(12, MyExportedClass.bar(1, 1));
     assertEquals(12, callExportedFieldByExportedMethod(1, 1));
   }
@@ -247,8 +247,14 @@ public class JsExportTest extends MyTestCase {
   @JsMethod(namespace = "woo.MyExportedClass", name = "newInnerClass")
   private static native InnerClass myExportedClassNewInnerClass(int a);
 
-  @JsProperty(namespace = "woo.MyExportedClass", name = "EXPORTED_2.field")
-  private static native int getExportedField2();
+  // Not exported in J2CL, the same functionality can be achieved by the following two steps access.
+  // @JsProperty(namespace = "woo.MyExportedClass", name = "EXPORTED_2.field")
+  // private static native int getExportedField2();
+  @JsProperty(namespace = "woo.MyExportedClass", name = "EXPORTED_2")
+  private static native Object getExportedField2();
+
+  @JsMethod
+  private static native int accessField(Object o);
 
   public void testNoExport() {
     assertNull(getNotExportedMethod1());
@@ -473,17 +479,21 @@ public class JsExportTest extends MyTestCase {
   private static native Object getEnumerationC();
 
   public void testEnum_subclassMethodCallFromExportedEnumerations() {
-    assertEquals(100, callPublicMethodFromEnumerationA());
-    assertEquals(200, callPublicMethodFromEnumerationB());
-    assertEquals(1, callPublicMethodFromEnumerationC());
+    assertEquals(100, callFoo(getEnumerationA()));
+    assertEquals(200, callFoo(getEnumerationB()));
+    assertEquals(1, callFoo(getEnumerationC()));
   }
 
-  @JsMethod(namespace = "woo.MyEnumWithSubclassGen", name = "A.foo")
-  private static native int callPublicMethodFromEnumerationA();
+  @JsMethod
+  private static native int callFoo(Object o);
 
-  @JsMethod(namespace = "woo.MyEnumWithSubclassGen", name = "B.foo")
-  private static native int callPublicMethodFromEnumerationB();
-
-  @JsMethod(namespace = "woo.MyEnumWithSubclassGen", name = "C.foo")
-  private static native int callPublicMethodFromEnumerationC();
+  // Not supported in J2CL.
+  //  @JsMethod(namespace = "woo.MyEnumWithSubclassGen", name = "A.foo")
+  //  private static native int callPublicMethodFromEnumerationA();
+  //
+  //  @JsMethod(namespace = "woo.MyEnumWithSubclassGen", name = "B.foo")
+  //  private static native int callPublicMethodFromEnumerationB();
+  //
+  //  @JsMethod(namespace = "woo.MyEnumWithSubclassGen", name = "C.foo")
+  //  private static native int callPublicMethodFromEnumerationC();
 }

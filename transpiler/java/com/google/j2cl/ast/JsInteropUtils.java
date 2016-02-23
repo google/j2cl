@@ -156,6 +156,35 @@ public class JsInteropUtils {
   }
 
   /**
+   * Simply resolve the JsInfo from annotations. Do not do any extra computations. For example, if
+   * there is no "name" is specified in the annotation, just returns null for JsName.
+   */
+  public static JsInfo getJsInfo(IVariableBinding variableBinding) {
+    // check @JsIgnore annotation
+    IAnnotationBinding jsIgnoreAnnotation = getJsIgnoreAnnotation(variableBinding);
+    if (jsIgnoreAnnotation != null) {
+      return JsInfo.NONE;
+    }
+    boolean isJsOverlay = isJsOverlay(variableBinding);
+    // check @JsProperty annotation
+    IAnnotationBinding jsPropertyAnnotation = getJsPropertyAnnotation(variableBinding);
+    if (jsPropertyAnnotation != null) {
+      String jsPropertyName = getJsName(jsPropertyAnnotation);
+      String jsPropertyNamespace = getJsNamespace(jsPropertyAnnotation);
+      return JsInfo.create(JsMemberType.PROPERTY, jsPropertyName, jsPropertyNamespace, isJsOverlay);
+    }
+    // check @JsType annotation
+    IAnnotationBinding jsTypeAnnotation = getJsTypeAnnotation(variableBinding.getDeclaringClass());
+    // In native @JsType all members (regardless of visibility) is implicit JsProperty/JsMethod.
+    if (jsTypeAnnotation != null
+        && (Modifier.isPublic(variableBinding.getModifiers())
+            || JsInteropUtils.isNative(jsTypeAnnotation))) {
+      return JsInfo.create(JsMemberType.PROPERTY, null, null, isJsOverlay);
+    }
+    return JsInfo.create(JsMemberType.NONE, null, null, isJsOverlay);
+  }
+
+  /**
    * Returns true if the method is a a JsMember because of immediate conditions (either it is
    * directly annotated or it's enclosing class is annotated).
    */

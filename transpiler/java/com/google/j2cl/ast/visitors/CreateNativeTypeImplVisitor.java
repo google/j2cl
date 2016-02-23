@@ -42,7 +42,7 @@ public class CreateNativeTypeImplVisitor extends AbstractRewriter {
 
   @Override
   public boolean shouldProcessJavaType(JavaType javaType) {
-    if (!javaType.getDescriptor().isNative() || javaType.getDescriptor().isGlobal()) {
+    if (!javaType.getDescriptor().isNative()) {
       return false;
     }
     jsOverlayImplTypeDescriptor =

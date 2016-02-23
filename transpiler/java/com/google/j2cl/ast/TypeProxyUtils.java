@@ -136,6 +136,10 @@ public class TypeProxyUtils {
     return typeBinding.isNested() && !Modifier.isStatic(typeBinding.getModifiers());
   }
 
+  public static boolean isLocal(ITypeBinding typeBinding) {
+    return typeBinding.isLocal();
+  }
+
   /**
    * Returns true if {@code typeBinding} is a class that implements a JsFunction interface.
    */

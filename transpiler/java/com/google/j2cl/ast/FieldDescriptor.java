@@ -32,7 +32,7 @@ public abstract class FieldDescriptor extends Node implements Member {
       String fieldName,
       TypeDescriptor typeDescriptor,
       boolean isJsOverlay,
-      boolean isJsProperty,
+      JsInfo jsInfo,
       boolean isCompileTimeConstant) {
     return new AutoValue_FieldDescriptor(
         isStatic,
@@ -42,7 +42,7 @@ public abstract class FieldDescriptor extends Node implements Member {
         fieldName,
         typeDescriptor,
         isJsOverlay,
-        isJsProperty,
+        jsInfo,
         isCompileTimeConstant);
   }
 
@@ -62,7 +62,7 @@ public abstract class FieldDescriptor extends Node implements Member {
         fieldName,
         typeDescriptor,
         false,
-        false,
+        JsInfo.NONE,
         false);
   }
 
@@ -86,7 +86,7 @@ public abstract class FieldDescriptor extends Node implements Member {
 
   public abstract boolean isJsOverlay();
 
-  public abstract boolean isJsProperty();
+  public abstract JsInfo getJsInfo();
 
   public abstract boolean isCompileTimeConstant();
 
@@ -100,6 +100,27 @@ public abstract class FieldDescriptor extends Node implements Member {
 
   public boolean isFieldDescriptorForAllCaptures() {
     return isFieldDescriptorForCapturedVariables() || isFieldDescriptorForEnclosingInstance();
+  }
+
+  public boolean isJsProperty() {
+    return getJsInfo().getJsMemberType() == JsMemberType.PROPERTY;
+  }
+
+  @Override
+  public String getJsName() {
+    String jsName = getJsInfo().getJsName();
+    return jsName == null ? getFieldName() : jsName;
+  }
+
+  @Override
+  public String getJsNamespace() {
+    String jsNamespace = getJsInfo().getJsNamespace();
+    return jsNamespace == null ? getEnclosingClassTypeDescriptor().getJsNamespace() : jsNamespace;
+  }
+
+  @Override
+  public boolean isStaticDispatch() {
+    return isStatic();
   }
 
   @Override

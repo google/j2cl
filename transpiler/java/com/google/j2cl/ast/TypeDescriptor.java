@@ -36,7 +36,8 @@ import java.util.List;
  * Base class for type reference.
  */
 @Visitable
-public abstract class TypeDescriptor extends Expression implements Comparable<TypeDescriptor> {
+public abstract class TypeDescriptor extends Expression
+    implements Comparable<TypeDescriptor>, HasJsName {
   public static final String VOID_TYPE_NAME = "void";
   public static final String INT_TYPE_NAME = "int";
   public static final String BOOLEAN_TYPE_NAME = "boolean";
@@ -246,11 +247,13 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
     return false;
   }
 
-  public String getJsTypeNamespace() {
+  @Override
+  public String getJsNamespace() {
     return null;
   }
 
-  public String getJsTypeName() {
+  @Override
+  public String getJsName() {
     return null;
   }
 
@@ -261,18 +264,8 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
    */
   public boolean isExtern() {
     boolean isSynthesizedGlobalType = isRaw() && JsInteropUtils.isGlobal(getPackageName());
-    boolean isNativeJsType = isNative() && JsInteropUtils.isGlobal(getJsTypeNamespace());
+    boolean isNativeJsType = isNative() && JsInteropUtils.isGlobal(getJsNamespace());
     return isSynthesizedGlobalType || isNativeJsType;
-  }
-
-  /**
-   * Returns true if it is a native JsType interface with namespace GLOBAL.
-   *
-   *<p>This is used for the workaround that not generating goog.require for "literal" native types
-   * so that users do not need to provide goog.module for it.
-   */
-  public boolean isGlobalNativeInterface() {
-    return isNative() && isInterface() && JsInteropUtils.isGlobal(getJsTypeNamespace());
   }
 
   public String getQualifiedName() {
@@ -280,9 +273,9 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
     String className = getClassName();
 
     // If a custom js namespace was specified.
-    if (getJsTypeNamespace() != null) {
+    if (getJsNamespace() != null) {
       // The effect is to replace both the package and the class's enclosing class prefixes.
-      namespace = getJsTypeNamespace();
+      namespace = getJsNamespace();
       className = getSimpleName();
     }
 
@@ -293,9 +286,9 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
     }
 
     // If a custom JS name was specified.
-    if (getJsTypeName() != null) {
+    if (getJsName() != null) {
       // Then use it instead of the (potentially enclosing class qualified) class name.
-      className = getJsTypeName();
+      className = getJsName();
     }
 
     return Joiner.on(".")
@@ -312,6 +305,10 @@ public abstract class TypeDescriptor extends Expression implements Comparable<Ty
   }
 
   public boolean isInstanceNestedClass() {
+    return false;
+  }
+
+  public boolean isLocal() {
     return false;
   }
 

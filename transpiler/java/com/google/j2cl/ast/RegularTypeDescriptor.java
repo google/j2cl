@@ -281,6 +281,11 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  public boolean isLocal() {
+    return TypeProxyUtils.isLocal(typeBinding);
+  }
+
+  @Override
   public boolean isInterface() {
     return typeBinding != null && typeBinding.isInterface();
   }
@@ -331,12 +336,12 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public String getJsTypeNamespace() {
+  public String getJsNamespace() {
     return jsTypeNamespace;
   }
 
   @Override
-  public String getJsTypeName() {
+  public String getJsName() {
     return jsTypeName;
   }
 }

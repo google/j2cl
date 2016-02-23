@@ -242,8 +242,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     }
 
     // Do not import <global>, which has an empty qualified name.
-    // Do not import "literal" native type, i.e. a native JS interface with global namespace.
-    if (typeDescriptor.isGlobal() || typeDescriptor.isGlobalNativeInterface()) {
+    if (typeDescriptor.isGlobal()) {
       return;
     }
 

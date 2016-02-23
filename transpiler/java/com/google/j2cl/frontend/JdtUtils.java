@@ -31,7 +31,9 @@ import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
 import com.google.j2cl.ast.JdtMethodUtils;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsInteropUtils;
+import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -128,8 +130,8 @@ public class JdtUtils {
         createTypeDescriptor(variableBinding.getDeclaringClass());
     String fieldName = variableBinding.getName();
     TypeDescriptor thisTypeDescriptor = createTypeDescriptor(variableBinding.getType());
-    boolean isJsProperty = JsInteropUtils.isJsProperty(variableBinding);
-    boolean isRaw = isJsProperty;
+    JsInfo jsInfo = JsInteropUtils.getJsInfo(variableBinding);
+    boolean isRaw = jsInfo.getJsMemberType() == JsMemberType.PROPERTY;
     boolean isJsOverlay = JsInteropUtils.isJsOverlay(variableBinding);
     boolean isCompileTimeConstant = variableBinding.getConstantValue() != null;
     return FieldDescriptor.create(
@@ -140,7 +142,7 @@ public class JdtUtils {
         fieldName,
         thisTypeDescriptor,
         isJsOverlay,
-        isJsProperty,
+        jsInfo,
         isCompileTimeConstant);
   }
 

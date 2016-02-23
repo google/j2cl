@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+ * Copyright 2016 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,13 +16,10 @@
 package com.google.j2cl.ast;
 
 /**
- * Abstracts class members (i.e. fields and methods).
+ * Abstracts JsInterop name related information for the AST nodes.
  */
-public interface Member extends HasJsName {
+public interface HasJsName {
+  String getJsName();
 
-  boolean isStatic();
-
-  TypeDescriptor getEnclosingClassTypeDescriptor();
-
-  boolean isStaticDispatch();
+  String getJsNamespace();
 }

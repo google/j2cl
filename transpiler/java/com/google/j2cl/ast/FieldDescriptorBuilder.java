@@ -26,7 +26,7 @@ public class FieldDescriptorBuilder {
   private String fieldName;
   private TypeDescriptor typeDescriptor;
   private boolean isJsOverlay;
-  private boolean isJsProperty;
+  private JsInfo jsInfo;
   private boolean isCompileTimeConstant;
 
   public static FieldDescriptorBuilder from(FieldDescriptor fieldDescriptor) {
@@ -38,7 +38,7 @@ public class FieldDescriptorBuilder {
     builder.fieldName = fieldDescriptor.getFieldName();
     builder.typeDescriptor = fieldDescriptor.getTypeDescriptor();
     builder.isJsOverlay = fieldDescriptor.isJsOverlay();
-    builder.isJsProperty = fieldDescriptor.isJsOverlay();
+    builder.jsInfo = fieldDescriptor.getJsInfo();
     builder.isCompileTimeConstant = fieldDescriptor.isCompileTimeConstant();
     return builder;
   }
@@ -52,6 +52,7 @@ public class FieldDescriptorBuilder {
     builder.enclosingClassTypeDescriptor = enclosingClassTypeDescriptor;
     builder.fieldName = fieldName;
     builder.typeDescriptor = typeDescriptor;
+    builder.jsInfo = JsInfo.NONE;
     builder.isCompileTimeConstant = false;
     return builder;
   }
@@ -80,7 +81,7 @@ public class FieldDescriptorBuilder {
         fieldName,
         typeDescriptor,
         isJsOverlay,
-        isJsProperty,
+        jsInfo,
         isCompileTimeConstant);
   }
 }

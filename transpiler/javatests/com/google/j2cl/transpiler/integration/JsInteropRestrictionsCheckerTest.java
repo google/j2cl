@@ -1032,73 +1032,98 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
   //
   //    assertBuggySucceeds();
   //  }
-  //
-  //  public void testJsNameInvalidNamesFails() {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsMethod");
-  //    addSnippetImport("jsinterop.annotations.JsProperty");
-  //    addSnippetClassDecl(
-  //        "@JsType(name = \"a.b.c\") public static class Buggy {",
-  //        "   @JsMethod(name = \"34s\") public void m() {}",
-  //        "   @JsProperty(name = \"s^\") public int  m;",
-  //        "   @JsProperty(name = \"\") public int n;",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //        "Line 6: 'EntryPoint.Buggy' has invalid name 'a.b.c'.",
-  //        "Line 7: 'void EntryPoint.Buggy.m()' has invalid name '34s'.",
-  //        "Line 8: 'int EntryPoint.Buggy.m' has invalid name 's^'.",
-  //        "Line 9: 'int EntryPoint.Buggy.n' cannot have an empty name.");
-  //  }
-  //
-  //  public void testJsNameInvalidNamespacesFails() {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsMethod");
-  //    addSnippetImport("jsinterop.annotations.JsProperty");
-  //    addSnippetClassDecl(
-  //        "@JsType(namespace = \"a.b.\") public static class Buggy {",
-  //        "   @JsMethod(namespace = \"34s\") public static void m() {}",
-  //        "   @JsProperty(namespace = \"s^\") public static int  n;",
-  //        "   @JsMethod(namespace = \"\") public static void o() {}",
-  //        "   @JsProperty(namespace = \"\") public int p;",
-  //        "   @JsMethod(namespace = \"a\") public void q() {}",
-  //        "}");
-  //
-  //    assertBuggyFails(
-  //        "Line 6: 'EntryPoint.Buggy' has invalid namespace 'a.b.'.",
-  //        "Line 7: 'void EntryPoint.Buggy.m()' has invalid namespace '34s'.",
-  //        "Line 8: 'int EntryPoint.Buggy.n' has invalid namespace 's^'.",
-  //        "Line 9: 'void EntryPoint.Buggy.o()' cannot have an empty namespace.",
-  //        "Line 10: Instance member 'int EntryPoint.Buggy.p' cannot declare a namespace.",
-  //        "Line 11: Instance member 'void EntryPoint.Buggy.q()' cannot declare a namespace.");
-  //  }
-  //
-  //  public void testJsNameGlobalNamespacesSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetImport("jsinterop.annotations.JsMethod");
-  //    addSnippetImport("jsinterop.annotations.JsProperty");
-  //    addSnippetImport("jsinterop.annotations.JsPackage");
-  //    addSnippetClassDecl(
-  //        "@JsType(namespace = JsPackage.GLOBAL) public static class Buggy {",
-  //        "   @JsMethod(namespace = JsPackage.GLOBAL) public static void m() {}",
-  //        "   @JsProperty(namespace = JsPackage.GLOBAL) public static int  n;",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
-  //  public void testSingleJsTypeSucceeds() throws Exception {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "@JsType",
-  //        "public static class Buggy {",
-  //        "  public static void show1() {}",
-  //        "  public void show2() {}",
-  //        "}");
-  //
-  //    assertBuggySucceeds();
-  //  }
-  //
+
+  public void testJsNameInvalidNamesFails() throws Exception {
+    File sourcePackage = createPackage("jsnameinvalidnames");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsnameinvalidnames;",
+        "import jsinterop.annotations.JsType;",
+        "import jsinterop.annotations.JsMethod;",
+        "import jsinterop.annotations.JsProperty;",
+        "@JsType(name = \"a.b.c\") public class Buggy {",
+        "   @JsMethod(name = \"34s\") public void m() {}",
+        "   @JsProperty(name = \"s^\") public int  m;",
+        "   @JsProperty(name = \"\") public int n;",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: 'Buggy' has invalid name 'a.b.c'.",
+        "JsInterop restrictions error: '$void Buggy.m()' has invalid name '34s'.",
+        "JsInterop restrictions error: '$int Buggy.m' has invalid name 's^'.",
+        "JsInterop restrictions error: '$int Buggy.n' cannot have an empty name.",
+        "4 error(s).");
+  }
+
+  public void testJsNameInvalidNamespacesFails() throws Exception {
+    File sourcePackage = createPackage("jsnameinvalidnamespace");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsnameinvalidnamespace;",
+        "import jsinterop.annotations.JsType;",
+        "import jsinterop.annotations.JsMethod;",
+        "import jsinterop.annotations.JsProperty;",
+        "@JsType(namespace = \"a.b.\") public class Buggy {",
+        "   @JsMethod(namespace = \"34s\") public static void m() {}",
+        "   @JsProperty(namespace = \"s^\") public static int  n;",
+        "   @JsMethod(namespace = \"\") public static void o() {}",
+        "   @JsProperty(namespace = \"\") public int p;",
+        "   @JsMethod(namespace = \"a\") public void q() {}",
+        "}");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: 'Buggy' has invalid namespace 'a.b.'.",
+        "JsInterop restrictions error: '$void Buggy.m()' has invalid namespace '34s'.",
+        "JsInterop restrictions error: '$int Buggy.n' has invalid namespace 's^'.",
+        "JsInterop restrictions error: '$void Buggy.o()' cannot have an empty namespace.",
+        "JsInterop restrictions error: Instance member '$int Buggy.p' cannot declare a namespace.",
+        "JsInterop restrictions error: Instance member '$void Buggy.q()' cannot declare a "
+            + "namespace.",
+        "6 error(s).");
+  }
+
+  public void testJsNameGlobalNamespacesSucceeds() throws Exception {
+    File sourcePackage = createPackage("jsnameglobalnamespace");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package jsnameglobalnamespace;",
+        "import jsinterop.annotations.JsType;",
+        "import jsinterop.annotations.JsMethod;",
+        "import jsinterop.annotations.JsProperty;",
+        "import jsinterop.annotations.JsPackage;",
+        "@JsType(namespace = JsPackage.GLOBAL) public class Buggy {",
+        "   @JsMethod(namespace = JsPackage.GLOBAL) public static void m() {}",
+        "   @JsProperty(namespace = JsPackage.GLOBAL) public static int  n;",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+
+  public void testSingleJsTypeSucceeds() throws Exception {
+    File sourcePackage = createPackage("singlejstype");
+
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package singlejstype;",
+        "import jsinterop.annotations.JsType;",
+        "@JsType",
+        "public class Buggy {",
+        "  public static void show1() {}",
+        "  public void show2() {}",
+        "}");
+
+    assertCompileSucceeds(sourcePackage);
+  }
+  
   public void testJsFunctionWithNoExtendsSucceeds() throws Exception {
     File sourcePackage = createPackage("jsfunctionwithnoextends");
 
@@ -1556,15 +1581,21 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
     assertCompileSucceeds(sourcePackage);
   }
 
-  //  public void testLocalJsTypeFails() {
-  //    addSnippetImport("jsinterop.annotations.JsType");
-  //    addSnippetClassDecl(
-  //        "public class Buggy { void m() { @JsType class Local {} } }");
-  //
-  //    assertBuggyFails(
-  //        "Line 4: Local class 'EntryPoint.Buggy.1Local' cannot be a JsType.");
-  //  }
-  //
+  public void testLocalJsTypeFails() throws Exception {
+    File sourcePackage = createPackage("localjstype");
+    createSourceFile(
+        sourcePackage,
+        "Buggy.java",
+        "package localjstype;",
+        "import jsinterop.annotations.JsType;",
+        "public class Buggy { void m() { @JsType class Local {} } }");
+
+    assertCompileFails(
+        sourcePackage,
+        "JsInterop restrictions error: Local class 'Buggy$1Local' cannot be a JsType.",
+        "1 error(s).");
+  }
+
   public void testNativeJsTypeExtendsNativeJsTypeSucceeds() throws Exception {
     File sourcePackage = createPackage("nativejstypeextendsjstype");
     createSourceFile(

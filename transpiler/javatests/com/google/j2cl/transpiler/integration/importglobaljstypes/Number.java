@@ -21,7 +21,7 @@ public class Number {
   /**
    * Tests for generic native type.
    */
-  @JsType(isNative = true, namespace = GLOBAL, name = "")
+  @JsType(isNative = true, namespace = GLOBAL, name = "Function")
   private interface NativeFunction<T> {
     T apply(Object thisContext, int[] argsArray);
   }

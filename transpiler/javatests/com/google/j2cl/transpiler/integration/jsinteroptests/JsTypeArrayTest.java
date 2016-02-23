@@ -27,7 +27,7 @@ import jsinterop.annotations.JsType;
 public class JsTypeArrayTest extends MyTestCase {
   /* MAKE SURE EACH TYPE IS ONLY USED ONCE PER TEST CASE */
 
-  @JsType(isNative = true, namespace = GLOBAL, name = "")
+  @JsType(isNative = true, namespace = GLOBAL, name = "Object")
   interface SimpleJsTypeReturnFromNative {}
 
   public void testJsTypeArray_returnFromNative() {
@@ -39,7 +39,7 @@ public class JsTypeArrayTest extends MyTestCase {
   @JsMethod
   private static native SimpleJsTypeReturnFromNative[] returnJsTypeFromNative();
 
-  @JsType(isNative = true, namespace = GLOBAL, name = "")
+  @JsType(isNative = true, namespace = GLOBAL, name = "Object")
   interface SimpleJsTypeReturnFromNativeWithAMethod {
     @JsProperty
     int getId();
@@ -53,7 +53,7 @@ public class JsTypeArrayTest extends MyTestCase {
   @JsMethod
   private static native SimpleJsTypeReturnFromNativeWithAMethod[] returnJsTypeWithIdsFromNative();
 
-  @JsType(isNative = true, namespace = GLOBAL, name = "")
+  @JsType(isNative = true, namespace = GLOBAL, name = "Object")
   interface SimpleJsTypeAsAField {}
 
   @JsType
@@ -73,7 +73,7 @@ public class JsTypeArrayTest extends MyTestCase {
   @JsMethod
   private static native void fillArrayField(SimpleJsTypeAsAFieldHolder holder);
 
-  @JsType(isNative = true, namespace = GLOBAL, name = "")
+  @JsType(isNative = true, namespace = GLOBAL, name = "Object")
   interface SimpleJsTypeAsAParam {}
 
   @JsType

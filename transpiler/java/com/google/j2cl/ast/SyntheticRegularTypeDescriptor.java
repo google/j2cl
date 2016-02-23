@@ -99,6 +99,11 @@ public class SyntheticRegularTypeDescriptor extends RegularTypeDescriptor {
   }
 
   @Override
+  public boolean isLocal() {
+    return false;
+  }
+
+  @Override
   public boolean isRaw() {
     return isRaw;
   }

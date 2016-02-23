@@ -114,12 +114,16 @@ public abstract class MethodDescriptor extends Node implements Member {
     return getMethodName().equals(INIT_METHOD_NAME) && !isStatic();
   }
 
+  @Override
   public String getJsName() {
-    return getJsInfo().getJsName();
+    String jsName = getJsInfo().getJsName();
+    return jsName == null ? getMethodName() : jsName;
   }
 
+  @Override
   public String getJsNamespace() {
-    return getJsInfo().getJsNamespace();
+    String jsNamespace = getJsInfo().getJsNamespace();
+    return jsNamespace == null ? getEnclosingClassTypeDescriptor().getJsNamespace() : jsNamespace;
   }
 
   public boolean hasJsNamespace() {
@@ -174,6 +178,7 @@ public abstract class MethodDescriptor extends Node implements Member {
     return getJsInfo().getJsMemberType() == JsMemberType.CONSTRUCTOR;
   }
 
+  @Override
   public boolean isStaticDispatch() {
     return isStatic() || isConstructor();
   }

@@ -43,6 +43,14 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkJavaType(JavaType javaType) {
+    if (javaType.getDescriptor().isJsType()) {
+      if (!checkJsType(javaType)) {
+        return;
+      }
+      checkJsName(javaType.getDescriptor());
+      checkJsNamespace(javaType.getDescriptor());
+    }
+
     if (javaType.getDescriptor().isNative()) {
       if (!checkNativeJsType(javaType)) {
         return;
@@ -66,6 +74,17 @@ public class JsInteropRestrictionsChecker {
     // TODO: do other checks.
   }
 
+  private boolean checkJsType(JavaType type) {
+    if (type.getDescriptor().isLocal()) {
+      errors.error(
+          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          "Local class '%s' cannot be a JsType.",
+          getReadableDescription(type.getDescriptor()));
+      return false;
+    }
+    return true;
+  }
+
   private void checkField(Field field) {
     if (field.getDescriptor().getEnclosingClassTypeDescriptor().isNative()) {
       checkFieldOfNativeJsType(field);
@@ -73,6 +92,7 @@ public class JsInteropRestrictionsChecker {
     if (field.getDescriptor().isJsOverlay()) {
       checkJsOverlay(field);
     }
+    checkMemberQualifiedJsName(field.getDescriptor());
     // TODO: do other checks.
   }
 
@@ -83,7 +103,39 @@ public class JsInteropRestrictionsChecker {
     if (method.getDescriptor().isJsOverlay()) {
       checkJsOverlay(method);
     }
+    checkMemberQualifiedJsName(method.getDescriptor());
     // TODO: do other checks.
+  }
+
+  private void checkMemberQualifiedJsName(Member member) {
+    if (member instanceof Method) {
+      if (((Method) member).isConstructor()) {
+        // Constructors always inherit their name and namespace from the enclosing type.
+        // The corresponding checks are done for the type separately.
+        return;
+      }
+    }
+
+    checkJsName(member);
+
+    if (member.getJsNamespace() == null) {
+      return;
+    }
+
+    if (member.getJsNamespace().equals(member.getEnclosingClassTypeDescriptor().getJsNamespace())) {
+      // Namespace set by the enclosing type has already been checked.
+      return;
+    }
+
+    if (!member.isStaticDispatch()) {
+      errors.error(
+          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          "Instance member '%s' cannot declare a namespace.",
+          getReadableDescription(member));
+      return;
+    }
+
+    checkJsNamespace(member);
   }
 
   private void checkJsOverlay(Field field) {
@@ -305,6 +357,44 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
+  private <T extends HasJsName> void checkJsName(T item) {
+    String jsName = item.getJsName();
+    if (jsName == null) {
+      return;
+    }
+    if (jsName.isEmpty()) {
+      errors.error(
+          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          "'%s' cannot have an empty name.",
+          getReadableDescription(item));
+    } else if (!JsUtils.isValidJsIdentifier(jsName)) {
+      errors.error(
+          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          "'%s' has invalid name '%s'.",
+          getReadableDescription(item),
+          jsName);
+    }
+  }
+
+  private <T extends HasJsName> void checkJsNamespace(T item) {
+    String jsNamespace = item.getJsNamespace();
+    if (jsNamespace == null || JsInteropUtils.isGlobal(jsNamespace)) {
+      return;
+    }
+    if (jsNamespace.isEmpty()) {
+      errors.error(
+          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          "'%s' cannot have an empty namespace.",
+          getReadableDescription(item));
+    } else if (!JsUtils.isValidJsQualifiedName(item.getJsNamespace())) {
+      errors.error(
+          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          "'%s' has invalid namespace '%s'.",
+          getReadableDescription(item),
+          item.getJsNamespace());
+    }
+  }
+
   /**
    * Returns true if the constructor method is locally empty (allows calls to super constructor).
    */
@@ -327,6 +417,17 @@ public class JsInteropRestrictionsChecker {
       }
     }
     return true;
+  }
+
+  private String getReadableDescription(HasJsName hasJsName) {
+    if (hasJsName instanceof FieldDescriptor) {
+      return getReadableDescription((FieldDescriptor) hasJsName);
+    } else if (hasJsName instanceof MethodDescriptor) {
+      return getReadableDescription((MethodDescriptor) hasJsName);
+    } else if (hasJsName instanceof TypeDescriptor) {
+      return getReadableDescription((TypeDescriptor) hasJsName);
+    }
+    return null;
   }
 
   private String getReadableDescription(FieldDescriptor fieldDescriptor) {
