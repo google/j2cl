@@ -635,8 +635,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         Field field = (Field) element;
         if (field.hasInitializer() && !field.isCompileTimeConstant()) {
           String fieldInitializer = expressionToString(field.getInitializer());
-          String fieldName = ManglingNameUtils.getMangledName(field.getDescriptor());
-          sb.appendln("%s.$%s = %s;", className, fieldName, fieldInitializer);
+          String fieldName = ManglingNameUtils.getMangledName(field.getDescriptor(), true);
+          sb.appendln("%s.%s = %s;", className, fieldName, fieldInitializer);
         }
       } else if (element instanceof Block) {
         Block block = (Block) element;

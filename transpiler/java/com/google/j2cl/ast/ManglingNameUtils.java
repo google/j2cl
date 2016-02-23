@@ -117,11 +117,11 @@ public class ManglingNameUtils {
    */
   public static String getMangledName(
       FieldDescriptor fieldDescriptor, boolean accessStaticsDirectly) {
-    String prefix = accessStaticsDirectly ? "$" : "";
-    if (fieldDescriptor.isRaw()) {
-      return prefix + fieldDescriptor.getFieldName();
+    if (fieldDescriptor.isRaw() && !accessStaticsDirectly) {
+      return fieldDescriptor.getFieldName();
     }
 
+    String prefix = accessStaticsDirectly ? "$" : "";
     Preconditions.checkArgument(!fieldDescriptor.getEnclosingClassTypeDescriptor().isArray());
     String name = fieldDescriptor.getFieldName();
     String typeMangledName = getMangledName(fieldDescriptor.getEnclosingClassTypeDescriptor());
