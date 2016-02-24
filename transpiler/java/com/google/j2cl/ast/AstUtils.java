@@ -383,19 +383,12 @@ public class AstUtils {
    * <p>instance.instanceMethod(a, b) => staticMethod(instance, a, b)
    */
   public static MethodCall createDevirtualizedMethodCall(
-      MethodCall methodCall, TypeDescriptor targetTypeDescriptor) {
+      MethodCall methodCall, TypeDescriptor targetTypeDescriptor,
+      TypeDescriptor sourceTypeDescriptor) {
     MethodDescriptor targetMethodDescriptor = methodCall.getTarget();
     Preconditions.checkArgument(!targetMethodDescriptor.isConstructor());
     Preconditions.checkArgument(!targetMethodDescriptor.isStatic());
 
-    JsInfo devirtualizedMethodJsInfo = targetMethodDescriptor.getJsInfo();
-    // Devirtualized method is not JsFunction method.
-    if (devirtualizedMethodJsInfo.getJsMemberType() == JsMemberType.JS_FUNCTION) {
-      Preconditions.checkArgument(
-          !devirtualizedMethodJsInfo.isJsOverlay(), "JsFunction method cannot be JsOverlay.");
-      devirtualizedMethodJsInfo = JsInfo.NONE;
-    }
-    TypeDescriptor sourceTypeDescriptor = methodCall.getTarget().getEnclosingClassTypeDescriptor();
     MethodDescriptor methodDescriptor =
         MethodDescriptorBuilder.from(targetMethodDescriptor)
             .enclosingClassTypeDescriptor(targetTypeDescriptor)
@@ -404,7 +397,8 @@ public class AstUtils {
                     Arrays.asList(sourceTypeDescriptor), // add the first parameter type.
                     targetMethodDescriptor.getParameterTypeDescriptors()))
             .isStatic(true)
-            .jsInfo(devirtualizedMethodJsInfo)
+            .isRaw(false)
+            .jsInfo(JsInfo.NONE)
             .build();
 
     List<Expression> arguments = methodCall.getArguments();
@@ -414,6 +408,12 @@ public class AstUtils {
     arguments.add(0, instance);
     // Call the method like Objects.foo(instance, ...)
     return MethodCall.createRegularMethodCall(null, methodDescriptor, arguments);
+  }
+
+  public static MethodCall createDevirtualizedMethodCall(
+      MethodCall methodCall, TypeDescriptor targetTypeDescriptor) {
+    return createDevirtualizedMethodCall(
+        methodCall, targetTypeDescriptor, methodCall.getTarget().getEnclosingClassTypeDescriptor());
   }
 
   /**

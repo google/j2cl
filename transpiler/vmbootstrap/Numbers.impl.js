@@ -135,21 +135,6 @@ class Numbers {
 
   /**
    * @param {*} obj
-   * @return {?string}
-   * @public
-   */
-  static m_toString__java_lang_Comparable(obj) {
-    Numbers.$clinit();
-    var type = typeof obj;
-    if (type == 'number') {
-      return obj.toString();
-    } else {
-      return obj.m_toString();
-    }
-  }
-
-  /**
-   * @param {*} obj
    * @return {Class}
    * @public
    */

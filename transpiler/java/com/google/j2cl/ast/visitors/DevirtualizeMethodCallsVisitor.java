@@ -20,6 +20,7 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodDescriptors;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -94,6 +95,14 @@ public class DevirtualizeMethodCallsVisitor extends AbstractRewriter {
     }
     TypeDescriptor enclosingClassTypeDescriptor =
         methodCall.getTarget().getEnclosingClassTypeDescriptor().getRawTypeDescriptor();
+    if (MethodDescriptors.isToStringMethodDescriptor(methodCall.getTarget())) {
+      // Always devirtualize toString method to trampoline method. This ensures that javascript
+      // class even if they extend java classes could still override toString method.
+      return AstUtils.createDevirtualizedMethodCall(
+          methodCall,
+          BootstrapType.OBJECTS.getDescriptor(),
+          TypeDescriptors.get().javaLangObject);
+    }
     if (devirtualizedMethodTargetTypeDescriptorByTypeDescriptor.containsKey(
         enclosingClassTypeDescriptor)) {
       return AstUtils.createDevirtualizedMethodCall(

@@ -22,6 +22,12 @@ import java.util.List;
  * Utility class holding method descriptor creation utilities.
  */
 public class MethodDescriptors {
+
+  public static boolean isToStringMethodDescriptor(MethodDescriptor methodDescriptor) {
+    return methodDescriptor.getMethodName().equals("toString")
+        && methodDescriptor.getParameterTypeDescriptors().isEmpty();
+  }
+
   /**
    * Creates a copy of the given method descriptor by adding the provided parameters to its end.
    * 

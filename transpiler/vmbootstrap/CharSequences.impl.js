@@ -96,20 +96,6 @@ class CharSequences {
 
   /**
    * @param {*} obj
-   * @return {?string}
-   * @public
-   */
-  static m_toString__java_lang_CharSequence(obj) {
-    CharSequences.$clinit();
-    if (typeof obj == 'string') {
-      return obj.toString();
-    } else {
-      return obj.m_toString();
-    }
-  }
-
-  /**
-   * @param {*} obj
    * @return {Class}
    * @public
    */

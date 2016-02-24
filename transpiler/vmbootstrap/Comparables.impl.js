@@ -83,25 +83,6 @@ class Comparables {
 
   /**
    * @param {*} obj
-   * @return {?string}
-   * @public
-   */
-  static m_toString__java_lang_Comparable(obj) {
-    Comparables.$clinit();
-    var type = typeof obj;
-    if (type == 'number') {
-      return obj.toString();
-    } else if (type == 'boolean') {
-      return obj.toString();
-    } else if (typeof obj == 'string') {
-      return obj.toString();
-    } else {
-      return obj.m_toString();
-    }
-  }
-
-  /**
-   * @param {*} obj
    * @return {Class}
    * @public
    */
