@@ -13,6 +13,8 @@
  */
 package java.lang;
 
+import jsinterop.annotations.JsMethod;
+
 /**
  * See <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Object.html">the
@@ -36,7 +38,15 @@ public class Object {
     return 0;
   }
 
+  @JsMethod(name = "$javaToString")
   public String toString() {
+    // Super-source replaced.
+    return null;
+  }
+
+
+  @JsMethod(name = "toString")
+  private String toStringBridge() {
     // Super-source replaced.
     return null;
   }

@@ -64,11 +64,19 @@ class Object {
    * @return {?string}
    * @public
    */
-  m_toString() {
+  $javaToString() {
     // TODO: fix this implementation. The hash code should be returned in hex
     // but can't currently depend on Integer to get access to that static
     // function because Closure doesn't yet support module circular references.
     return this.m_getClass().m_getName() + '@' + this.m_hashCode();
+  }
+
+  /**
+   * @return {string}
+   * @public
+   */
+  toString() {
+    return String(this.$javaToString());
   }
 
   /**

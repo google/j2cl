@@ -15,5 +15,6 @@ public class Main {
     assert a.fun(1) == 0;
     assert b.fun(1) == 0;
     assert d.fun(1) == 0;
+    assert a.toString().startsWith(a.getClass().getName());
   }
 }

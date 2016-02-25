@@ -191,7 +191,7 @@ class Class extends Object {
    * @return {string}
    * @public
    */
-  m_toString() {
+  $javaToString() {
     return (this.m_isInterface() ? 'interface ' :
             (this.m_isPrimitive() ? '' : 'class ')) +
         this.m_getName();

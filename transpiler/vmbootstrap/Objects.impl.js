@@ -67,8 +67,8 @@ class Objects {
    */
   static m_toString__java_lang_Object(obj) {
     Objects.$clinit();
-    if (obj.m_toString) {
-      return obj.m_toString();
+    if (obj.$javaToString) {
+      return obj.$javaToString();
     } else if (obj instanceof Array) {
       return Arrays.m_toString__java_lang_Object(obj);
     } else {

@@ -56,7 +56,7 @@ class String extends Object {
    * @return {?string}
    * @public
    */
-  m_toString() {}
+  $javaToString() {}
 
   /**
    * @override
@@ -129,6 +129,14 @@ class String extends Object {
   m_compareTo__java_lang_Object(arg0) {}
 
   /**
+   * Bridge method for exposing non-JsMethod.
+   * @override
+   * @return {?string}
+   * @public
+   */
+  m_toString() {}
+
+  /**
    * @param {?string} $thisArg
    * @param {*} o
    * @return {boolean}
@@ -154,7 +162,7 @@ class String extends Object {
    * @return {?string}
    * @public
    */
-  static m_toString__java_lang_String($thisArg) {
+  static $javaToString($thisArg) {
     String.$clinit();
     return $thisArg;
   }
@@ -246,6 +254,16 @@ class String extends Object {
     String.$clinit();
     return String.m_compareTo__java_lang_String__java_lang_String(
         $thisArg, /**@type {?string} */ ($Casts.to(arg0, String)));
+  }
+
+  /**
+   * @param {?string} $thisArg
+   * @return {?string}
+   * @public
+   */
+  static m_toString__java_lang_String($thisArg) {
+    String.$clinit();
+    return $Objects.m_toString__java_lang_Object($thisArg);
   }
 
   /**
