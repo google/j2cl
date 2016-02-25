@@ -255,14 +255,11 @@ public class TypeDescriptors {
 
   // Common browser native types.
   public static final TypeDescriptor NATIVE_STRING =
-      RegularTypeDescriptor.createSynthetic(
+      RegularTypeDescriptor.createSyntheticNativeTypeDescriptor(
           new ArrayList<String>(),
           // Import alias.
           Lists.newArrayList("NativeString"),
           ImmutableList.<TypeDescriptor>of(),
-          false,
-          true,
-          true,
           // Browser global
           JsInteropUtils.JS_GLOBAL,
           // Native type name
@@ -291,8 +288,7 @@ public class TypeDescriptors {
     private TypeDescriptor typeDescriptor;
 
     private BootstrapType(List<String> pathComponents, String name) {
-      boolean isNative = false;
-      this.typeDescriptor = TypeDescriptor.createRaw(pathComponents, name, isNative);
+      this.typeDescriptor = TypeDescriptor.createRaw(pathComponents, name);
     }
 
     public TypeDescriptor getDescriptor() {

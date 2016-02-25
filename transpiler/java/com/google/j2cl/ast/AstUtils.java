@@ -17,6 +17,7 @@ package com.google.j2cl.ast;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
@@ -733,12 +734,13 @@ public class AstUtils {
     Preconditions.checkArgument(typeDescriptor.isNative());
     Preconditions.checkArgument(typeDescriptor instanceof RegularTypeDescriptor);
     RegularTypeDescriptor nativeTypeDescriptor = (RegularTypeDescriptor) typeDescriptor;
-    return TypeDescriptor.createSynthetic(
+    return TypeDescriptor.createSyntheticRegularTypeDescriptor(
         nativeTypeDescriptor.getPackageComponents(),
         Iterables.concat(
             nativeTypeDescriptor.getClassComponents(),
             Arrays.asList(JS_OVERLAY_METHODS_IMPL_SUFFIX)),
-        false);
+        false,
+        ImmutableList.<TypeDescriptor>of());
   }
 
   /**

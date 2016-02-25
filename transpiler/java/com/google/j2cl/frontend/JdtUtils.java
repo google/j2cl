@@ -581,11 +581,8 @@ public class JdtUtils {
       ITypeBinding lambdaInterfaceBinding,
       RegularTypeDescriptor enclosingClassTypeDescriptor) {
     TypeDescriptor lambdaClassTypeDescriptor =
-        TypeDescriptor.createSynthetic(
-            enclosingClassTypeDescriptor.getPackageComponents(),
-            Iterables.concat(
-                enclosingClassTypeDescriptor.getClassComponents(), Arrays.asList(lambdaBinaryName)),
-            enclosingClassTypeDescriptor.isNative());
+        TypeDescriptor.createLambdaTypeDescriptor(
+            enclosingClassTypeDescriptor, lambdaBinaryName, lambdaInterfaceBinding);
     JavaType lambdaType = new JavaType(Kind.CLASS, Visibility.PRIVATE, lambdaClassTypeDescriptor);
 
     lambdaType.setEnclosingTypeDescriptor(enclosingClassTypeDescriptor);

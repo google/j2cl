@@ -15,43 +15,43 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 
 /**
- * Synthesized RegularTypeDescriptor.
- * <p>
- * This class represents the type descriptor that does not have a JDT typeBinding mapping,
- * for example, the nativebootstrap and vmbootstrap type descriptors.
+ * Represents the type descriptor that does not have a JDT typeBinding mapping. It is used to
+ * synthesize the nativebootstrap, vmbootstrap type descriptors, synthetic native js types and
+ * overlay types.
+ * TODO: reexamine if we need a separate class for overlay type.
  */
 public class SyntheticRegularTypeDescriptor extends RegularTypeDescriptor {
-
+  /**
+   * Constructor for a regular synthetic type that does not contain any JsInterop information.
+   */
   SyntheticRegularTypeDescriptor(
       Iterable<String> packageComponents,
       Iterable<String> classComponents,
       boolean isRaw,
-      boolean isNative,
       Iterable<TypeDescriptor> typeArgumentDescriptors) {
     super(null);
     this.packageComponents = ImmutableList.copyOf(packageComponents);
     this.classComponents = ImmutableList.copyOf(classComponents);
     this.isRaw = isRaw;
-    this.isNative = isNative;
     this.typeArgumentDescriptors = ImmutableList.copyOf(typeArgumentDescriptors);
   }
 
+  /**
+   * Constructor for a synthetic native js type.
+   */
   SyntheticRegularTypeDescriptor(
       Iterable<String> packageComponents,
       Iterable<String> classComponents,
-      boolean isRaw,
       Iterable<TypeDescriptor> typeArgumentDescriptors,
-      boolean isJsFunction,
-      boolean isJsType,
-      boolean isNative,
       String jsTypeNamespace,
       String jsTypeName) {
-    this(packageComponents, classComponents, isRaw, isNative, typeArgumentDescriptors);
-    this.isJsFunction = isJsFunction;
-    this.isJsType = isJsType;
+    this(packageComponents, classComponents, false, typeArgumentDescriptors);
+    this.isNative = true;
+    this.isJsType = true;
     this.jsTypeNamespace = jsTypeNamespace;
     this.jsTypeName = jsTypeName;
   }
@@ -72,15 +72,29 @@ public class SyntheticRegularTypeDescriptor extends RegularTypeDescriptor {
   }
 
   @Override
+  public TypeDescriptor getRawTypeDescriptor() {
+    return isJsType
+        ? TypeDescriptor.createSyntheticNativeTypeDescriptor(
+            getPackageComponents(),
+            getClassComponents(),
+            ImmutableList.<TypeDescriptor>of(),
+            jsTypeNamespace,
+            jsTypeName)
+        : TypeDescriptor.createSyntheticRegularTypeDescriptor(
+            getPackageComponents(),
+            getClassComponents(),
+            isRaw(),
+            ImmutableList.<TypeDescriptor>of());
+  }
+
+  @Override
   public TypeDescriptor getSuperTypeDescriptor() {
-    throw new UnsupportedOperationException(
-        "Synthetic type descriptors do not know their super type.");
+    return null;
   }
 
   @Override
   public TypeDescriptor getEnclosingTypeDescriptor() {
-    throw new UnsupportedOperationException(
-        "Synthetic type descriptors do not know their enclosing type.");
+    return null;
   }
 
   @Override
@@ -95,6 +109,33 @@ public class SyntheticRegularTypeDescriptor extends RegularTypeDescriptor {
 
   @Override
   public boolean isInstanceNestedClass() {
+    return false;
+  }
+
+  @Override
+  public boolean isEnumOrSubclass() {
+    return false;
+  }
+
+  @Override
+  public boolean isJsFunctionImplementation() {
+    return false;
+  }
+
+  @Override
+  public MethodDescriptor getJsFunctionMethodDescriptor() {
+    Preconditions.checkArgument(!isJsFunctionInterface() && !isJsFunctionImplementation());
+    return null;
+  }
+
+  @Override
+  public MethodDescriptor getConcreteJsFunctionMethodDescriptor() {
+    Preconditions.checkArgument(!isJsFunctionInterface() && !isJsFunctionImplementation());
+    return null;
+  }
+
+  @Override
+  public boolean subclassesJsConstructorClass() {
     return false;
   }
 

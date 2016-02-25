@@ -70,11 +70,8 @@ public class FixTypeVariableInMethodVisitors extends AbstractRewriter {
     }
     if (typeDescriptor.isParameterizedType()) {
       RegularTypeDescriptor regularTypeDescriptor = (RegularTypeDescriptor) typeDescriptor;
-      return TypeDescriptor.create(
-          regularTypeDescriptor.getPackageComponents(),
-          regularTypeDescriptor.getClassComponents(),
-          regularTypeDescriptor.isRaw(),
-          regularTypeDescriptor.isNative(),
+      return TypeDescriptor.createSyntheticParametricTypeDescriptor(
+          regularTypeDescriptor,
           Lists.transform(
               regularTypeDescriptor.getTypeArgumentDescriptors(),
               new Function<TypeDescriptor, TypeDescriptor>() {

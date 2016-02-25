@@ -229,28 +229,18 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   }
 
   /**
-   * Raw type of a parameterized type is the type without type parameters or type arguments.
-   * Raw type of a type variable is its bound.
-   * Otherwise, raw type is the type itself.
+   * Returns the erasure type (see definition of erasure type at
+   * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
    */
   @Override
   public TypeDescriptor getRawTypeDescriptor() {
-    if (isParameterizedType()) {
-      return TypeDescriptor.createSynthetic(
-          getPackageComponents(),
-          getClassComponents(),
-          ImmutableList.<TypeDescriptor>of(),
-          isJsFunction,
-          isJsType,
-          isNative,
-          jsTypeNamespace,
-          jsTypeName);
+    RegularTypeDescriptor rawTypeDescriptor =
+        (RegularTypeDescriptor) TypeProxyUtils.createTypeDescriptor(typeBinding.getErasure());
+    if (rawTypeDescriptor.isParameterizedType()) {
+      return TypeDescriptor.createSyntheticParametricTypeDescriptor(
+          rawTypeDescriptor, ImmutableList.<TypeDescriptor>of());
     }
-    if (isTypeVariable()) {
-      Preconditions.checkNotNull(typeBinding);
-      return TypeProxyUtils.createTypeDescriptor(typeBinding.getErasure());
-    }
-    return this;
+    return rawTypeDescriptor;
   }
 
   @Override

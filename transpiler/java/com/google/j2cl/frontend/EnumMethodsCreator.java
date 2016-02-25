@@ -68,16 +68,12 @@ public class EnumMethodsCreator {
         FieldDescriptorBuilder.fromDefault(
                 enumType.getDescriptor(),
                 NAMES_TO_VALUES_MAP_FIELD_NAME,
-                RegularTypeDescriptor.createSynthetic(
+                RegularTypeDescriptor.createSyntheticNativeTypeDescriptor(
                     new ArrayList<String>(),
                     // Import alias.
                     Lists.newArrayList("NativeObject"),
                     // Type parameters.
-                    Lists.newArrayList(
-                        TypeDescriptors.NATIVE_STRING, enumType.getDescriptor()),
-                    false,
-                    true,
-                    true,
+                    Lists.newArrayList(TypeDescriptors.NATIVE_STRING, enumType.getDescriptor()),
                     // Browser global
                     JsInteropUtils.JS_GLOBAL,
                     // Native type name
