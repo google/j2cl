@@ -66,7 +66,17 @@ jsni_to_j2cl_converter = rule(
             allow_files=FileType([".java"]),
         ),
         "debug": attr.bool(default=False),
+        # Uh-oh: jsni_to_j2cl_converter needs to depend on
+        # restricted_to=j2cl_compilation targets. But the jsni_to_j2cl_converter
+        # can't (or at least probably shouldn't?) itself be
+        # restricted-to=j2cl_compilation. Our solution is to defeat the
+        # constraints system by building the dependencies as host dep. For more
+        # information, see the similar comment in
+        # third_party/java/j2cl/j2cl_library.bzl
+        # TODO(cpovirk): Find a less evil solution, maybe based on
+        # http://b/27044764
         "deps": attr.label_list(
+            cfg=HOST_CFG,
             allow_files=FileType([".jar"]),
         ),
         "excludes": attr.string_list(default=[]),

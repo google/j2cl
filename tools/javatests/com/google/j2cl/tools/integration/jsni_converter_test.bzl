@@ -39,7 +39,7 @@ load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_root")
 
 
 def jsni_converter_test(
-    java_files=[], generated_js_files=[], js_test_files=[], deps=[], **kwargs):
+    java_files=[], generated_js_files=[], js_test_files=[], deps=[], restricted_to=None, **kwargs):
 
   rule_name = kwargs["name"]
   converter_rule_name = rule_name + "_converter"
@@ -49,6 +49,7 @@ def jsni_converter_test(
   jsni_to_j2cl_converter(
       name=converter_rule_name,
       srcs=java_files,
+      restricted_to=restricted_to,
       deps=deps,
   )
 
@@ -70,6 +71,7 @@ def jsni_converter_test(
           "do mv \"$$file\" \"$${file//$$/_}\";",
           "done;"]),
       srcs=[":" + converter_rule_name],
+      restricted_to=restricted_to,
       outs=generated_js_files,
       tools=[
           "//third_party/unzip",
@@ -83,12 +85,14 @@ def jsni_converter_test(
           "Mock.js",
           ":" + unzipper_rule_name,
       ],
+      restricted_to=restricted_to,
       testonly=1,
   )
 
   native.jsunit_test(
       name=rule_name,
       srcs=js_test_files,
+      restricted_to=restricted_to,
       deps=[":" + js_library_rule_name],
       jvm_flags=[
           "-Dcom.google.testing.selenium.browser=CHROME_LINUX"

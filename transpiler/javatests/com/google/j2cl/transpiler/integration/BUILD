@@ -61,6 +61,7 @@ java_test(
     name = "NativeSourcesErrorTest",
     srcs = ["NativeSourcesErrorTest.java"],
     data = glob(["nativesourceserror/**/*"]) + ["//jre/java:libJavaJre_java_library.jar"],
+    restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
     deps = [
         ":IntegrationTestCase",
         "//transpiler/java/com/google/j2cl/generator",
@@ -71,6 +72,7 @@ java_test(
     name = "OutputTest",
     srcs = ["OutputTest.java"],
     data = glob(["output/**/*"]) + ["//jre/java:libJavaJre_java_library.jar"],
+    restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
     deps = [":IntegrationTestCase"],
 )
 
@@ -88,6 +90,7 @@ java_test(
         "//third_party/java/gwt:gwt-jsinterop-annotations",
         "//jre/java:libJavaJre_java_library.jar",
     ],
+    restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
     deps = [
         ":IntegrationTestCase",
         "//java/com/google/common/base",

@@ -183,6 +183,7 @@ def integration_test(
     native.gwt_module(
         name="gwt_module",
         srcs=srcs + ["MainEntryPoint.java"],
+        restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
         deps=java_library_deps,
         entry_points=[java_package + ".MainEntryPoint"],
         javacopts=[

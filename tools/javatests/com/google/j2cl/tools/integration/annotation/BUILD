@@ -11,5 +11,6 @@ jsni_converter_test(
     generated_js_files = ["AnnotatedMethod.native.js"],
     java_files = ["AnnotatedMethod.java"],
     js_test_files = ["annotation_test.js"],
+    restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
     deps = ["//jre/java:gwt-jsinterop-annotations_java_library"],
 )

@@ -72,6 +72,7 @@ java_library(
     name = "emul_tests_lib",
     testonly = 1,
     srcs = TEST_SRCS,
+    restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
     deps = [
         ":javaemul_interal_java_library",
         "//third_party/java/gwt:gwt-jsinterop-annotations",
@@ -83,6 +84,7 @@ java_test(
     name = "AllEmulTest_Java",
     size = "small",
     srcs = ["com/google/gwt/emultest/AllTests.java"],
+    restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
     test_class = "com.google.gwt.emultest.AllTests",
     deps = [
         ":emul_tests_lib",
