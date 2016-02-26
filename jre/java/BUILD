@@ -14,6 +14,19 @@ licenses(["unencumbered"])
 load("//build_def:j2cl_source_copy.bzl", "j2cl_source_copy")
 load("//build_def:jsni_to_j2cl_converter.bzl", "jsni_to_j2cl_converter")
 
+J2CL_SPECIFIC_JRE_SRC = [
+    "java/lang/Class.java",
+    "java/lang/Enum.java",
+    "java/lang/Object.java",
+    "java/util/InternalJsMapFactory.java",
+    "java/lang/invoke/MethodHandles.java",
+]
+
+JRE_SRC = J2CL_SPECIFIC_JRE_SRC + [
+    ":emul_dev",
+    ":emul_user",
+]
+
 j2cl_source_copy(
     name = "emul_dev",
     srcs = ["//third_party/java_src/gwt/svn/trunk/dev:emul"],
@@ -25,41 +38,12 @@ j2cl_source_copy(
     srcs = ["//third_party/java_src/gwt/svn/trunk/user:emul"],
     base_strip_path = "third_party/java_src/gwt/svn/trunk/user/super/com/google/gwt/emul/",
     # Java classes that are different in j2cl and thus should not be copied from GWT
-    excludes = [
-        "java/lang/Class.java",
-        "java/lang/Enum.java",
-        "java/lang/Object.java",
-        # TODO(dankurka): once JsInterop lands in GWT this class can be changed
-        # to work with both GWT and j2cl
-        "java/util/InternalJsIterator.java",
-        "java/util/InternalJsIteratorEntry.java",
-        "java/util/InternalJsMap.java",
-        "java/util/InternalJsMapFactory.java",
-    ],
+    excludes = J2CL_SPECIFIC_JRE_SRC,
 )
-
-JRE_SRC = [
-    "java/lang/Class.java",
-    "java/lang/Enum.java",
-    "java/lang/Object.java",
-    "java/util/InternalJsMapFactory.java",
-    "java/lang/invoke/MethodHandles.java",
-    ":emul_dev",
-    ":emul_user",
-]
 
 jsni_to_j2cl_converter(
     name = "convert_jsni_emul",
-    srcs = [
-        "java/lang/Enum.java",
-        "java/lang/Object.java",
-        "java/util/InternalJsIterator.java",
-        "java/util/InternalJsIteratorEntry.java",
-        "java/util/InternalJsMap.java",
-        "java/util/InternalJsMapFactory.java",
-        ":emul_dev",
-        ":emul_user",
-    ],
+    srcs = JRE_SRC,
     # Files containing JSNI field / method references.
     # These would be rejected by the jsni converter.
     excludes = [

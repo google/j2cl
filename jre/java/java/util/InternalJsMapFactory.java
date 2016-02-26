@@ -15,17 +15,20 @@
  */
 package java.util;
 
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
+
 /**
  * A factory to create JavaScript Map instances.
+ * This is a simpler version than GWT as polyfill is not needed, instead provided by Closure.
  */
-// TODO(dankurka): This type is a copy from GWT's version since the GWT version still uses
-// JavaScriptObject, as soon as we can use JsInterop in GWT code these types need to get united
-// again. For now these files are just placeholders and need to be updated to be actually runable
-// with j2cl.
 class InternalJsMapFactory {
 
-  public static  <V> InternalJsMap<V> newJsMap() {return null;}/*-{
-    return null;
-  }-*/;
+  @JsType(isNative = true, name = "Map", namespace = JsPackage.GLOBAL)
+  private static class NativeMap<V> extends InternalJsMap<V> { }
+
+  public static  <V> InternalJsMap<V> newJsMap() {
+    return new NativeMap();
+  }
 }
 
