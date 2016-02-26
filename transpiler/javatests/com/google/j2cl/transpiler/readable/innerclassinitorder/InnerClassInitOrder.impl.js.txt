@@ -171,7 +171,7 @@ class InnerClassInitOrder extends Object {
    * @public
    */
   m_testExtendsNestedWithGenerics() {
-    let o = /**@type {InnerClassInitOrder$ESWGOuter<?string>} */ (
+    let o = /**@type {!InnerClassInitOrder$ESWGOuter<?string>} */ (
         InnerClassInitOrder$ESWGOuter.$create());
     $Asserts.$enabled() &&
         $Asserts.$assert(
@@ -206,7 +206,7 @@ class InnerClassInitOrder extends Object {
    * @public
    */
   m_testInnerClassCtors() {
-    let p1 = /**@type {InnerClassInitOrder$P1<*>} */ (
+    let p1 = /**@type {!InnerClassInitOrder$P1<*>} */ (
         InnerClassInitOrder$P1.$create());
     $Asserts.$enabled() &&
         $Asserts.$assert(
@@ -215,7 +215,7 @@ class InnerClassInitOrder extends Object {
     $Asserts.$enabled() &&
         $Asserts.$assert(
             (2 ==
-             /**@type {InnerClassInitOrder$P1<*>} */ (
+             /**@type {!InnerClassInitOrder$P1<*>} */ (
                  InnerClassInitOrder$P1.$create__int(2))
                  .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1));
     let p2 = /**@type {InnerClassInitOrder$P1$P2<*>} */ (

@@ -1,0 +1,328 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let EqualFunction = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunction$impl');
+let EqualFunctions$1 = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$1$impl');
+let EqualFunctions$2 = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$2$impl');
+let EqualFunctions$3 = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$3$impl');
+let EqualFunctions$Foo = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$Foo$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Integer = goog.forwardDeclare('gen.java.lang.Integer$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
+
+let $NativeFunction = window.Function;
+
+
+class EqualFunctions extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!EqualFunctions}
+   * @public
+   */
+  static $create() {
+    EqualFunctions.$clinit();
+    let $instance = new EqualFunctions;
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions();
+  }
+
+  /**
+   * @template M_T
+   * @return {?function(M_T, M_T):boolean}
+   * @public
+   */
+  static m_objectEqualFunction() {
+    EqualFunctions.$clinit();
+    return /**@type {$NativeFunction} */ (
+        $Casts.to(
+            EqualFunctions
+                .f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions,
+            EqualFunction));
+  }
+
+  /**
+   * @template M_T
+   * @return {?function(M_T, M_T):boolean}
+   * @public
+   */
+  static m_collectionEqualFunction() {
+    EqualFunctions.$clinit();
+    return /**@type {$NativeFunction} */ (
+        $Casts.to(
+            EqualFunctions
+                .f_forCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions,
+            EqualFunction));
+  }
+
+  /**
+   * @template M_T
+   * @param {?function(M_T, M_T):boolean} customFunction
+   * @return {?function(M_T, M_T):boolean}
+   * @public
+   */
+  static m_withCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunction(
+      customFunction) {
+    EqualFunctions.$clinit();
+    return /**@type {!$NativeFunction} */ (
+        $Util.$makeLambdaFunction(
+            EqualFunctions$2.prototype
+                .m_equal__java_lang_Object__java_lang_Object,
+            EqualFunctions$2.$create(), EqualFunctions$2.$copy));
+  }
+
+  /**
+   * @template M_T
+   * @param {?function(M_T, M_T):boolean} equalFn
+   * @return {?function(EqualFunctions$Foo<M_T>,
+   * EqualFunctions$Foo<M_T>):boolean}
+   * @public
+   */
+  static m_createEqualFn__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunction(
+      equalFn) {
+    EqualFunctions.$clinit();
+    return /**@type {!$NativeFunction} */ (
+        $Util.$makeLambdaFunction(
+            EqualFunctions$3.prototype
+                .m_equal__java_lang_Object__java_lang_Object,
+            EqualFunctions$3.$create(), EqualFunctions$3.$copy));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof EqualFunctions; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, EqualFunctions);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    EqualFunctions.$clinit();
+    if (!EqualFunctions.$classEqualFunctions_) {
+      EqualFunctions.$classEqualFunctions_ = Class.$createForClass(
+          $Util.$generateId('EqualFunctions'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions'));
+    }
+    return EqualFunctions.$classEqualFunctions_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return EqualFunctions.$getClass(); }
+
+  /**
+   * A static field getter.
+   * @return {?function(*, *):boolean}
+   * @public
+   */
+  static get
+  f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions() {
+    EqualFunctions.$clinit();
+    return EqualFunctions
+        .$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions;
+  }
+
+  /**
+   * A static field setter.
+   * @param {?function(*, *):boolean} value
+   * @return {void}
+   * @public
+   */
+  static set
+      f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions(
+          value) {
+    EqualFunctions.$clinit();
+    EqualFunctions
+        .$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions =
+        value;
+  }
+
+  /**
+   * A static field getter.
+   * @return {?function(Integer, Integer):boolean}
+   * @public
+   */
+  static get
+  f_forInteger__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions() {
+    EqualFunctions.$clinit();
+    return EqualFunctions
+        .$f_forInteger__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions;
+  }
+
+  /**
+   * A static field setter.
+   * @param {?function(Integer, Integer):boolean} value
+   * @return {void}
+   * @public
+   */
+  static set
+      f_forInteger__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions(
+          value) {
+    EqualFunctions.$clinit();
+    EqualFunctions
+        .$f_forInteger__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions =
+        value;
+  }
+
+  /**
+   * A static field getter.
+   * @return {?function(*, *):boolean}
+   * @public
+   */
+  static get
+  f_forCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions() {
+    EqualFunctions.$clinit();
+    return EqualFunctions
+        .$f_forCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions;
+  }
+
+  /**
+   * A static field setter.
+   * @param {?function(*, *):boolean} value
+   * @return {void}
+   * @public
+   */
+  static set
+      f_forCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions(
+          value) {
+    EqualFunctions.$clinit();
+    EqualFunctions
+        .$f_forCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions =
+        value;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    EqualFunctions.$clinit = function() {};
+    EqualFunction = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunction$impl');
+    EqualFunctions$1 = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$1$impl');
+    EqualFunctions$2 = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$2$impl');
+    EqualFunctions$3 = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$3$impl');
+    EqualFunctions$Foo = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$Foo$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Integer = goog.module.get('gen.java.lang.Integer$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
+    Object.$clinit();
+    EqualFunctions
+        .$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions =
+        /**@type {function(*, *):boolean} */ (
+            $Util.$makeLambdaFunction(
+                EqualFunctions$1.prototype
+                    .m_equal__java_lang_Object__java_lang_Object,
+                EqualFunctions$1.$create(), EqualFunctions$1.$copy));
+    EqualFunctions
+        .$f_forInteger__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions =
+        EqualFunctions.m_objectEqualFunction();
+    EqualFunctions
+        .$f_forCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions =
+        EqualFunctions
+            .m_withCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunction(
+                EqualFunctions
+                    .$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions);
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions() {}
+};
+
+
+/**
+ * @private {?function(*, *):boolean}
+ */
+EqualFunctions
+    .$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions =
+    null;
+
+
+/**
+ * @private {?function(Integer, Integer):boolean}
+ */
+EqualFunctions
+    .$f_forInteger__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions =
+    null;
+
+
+/**
+ * @private {?function(*, *):boolean}
+ */
+EqualFunctions
+    .$f_forCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions =
+    null;
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+EqualFunctions.$classEqualFunctions_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = EqualFunctions;
+//# sourceMappingURL=EqualFunctions.js.map

@@ -18,6 +18,7 @@ let HashFunctions$1 = goog.forwardDeclare(
 let HashFunctions$2 = goog.forwardDeclare(
     'gen.com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions$2$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Enum = goog.forwardDeclare('gen.java.lang.Enum$impl');
 
 
 class HashFunctions extends Object {
@@ -57,7 +58,7 @@ class HashFunctions extends Object {
    */
   static m_hashFunction() {
     HashFunctions.$clinit();
-    return HashFunctions$1.$create();
+    return /**@type {!HashFunctions$1<*>} */ (HashFunctions$1.$create());
   }
 
   /**
@@ -67,7 +68,7 @@ class HashFunctions extends Object {
    */
   static m_enumHashFunction() {
     HashFunctions.$clinit();
-    return HashFunctions$2.$create();
+    return /**@type {!HashFunctions$2<Enum>} */ (HashFunctions$2.$create());
   }
 
   /**
@@ -123,6 +124,7 @@ class HashFunctions extends Object {
     HashFunctions$2 = goog.module.get(
         'gen.com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions$2$impl');
     Class = goog.module.get('gen.java.lang.Class$impl');
+    Enum = goog.module.get('gen.java.lang.Enum$impl');
     Object.$clinit();
   }
 

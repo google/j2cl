@@ -264,6 +264,16 @@ public class TypeDescriptors {
           JsInteropUtils.JS_GLOBAL,
           // Native type name
           "String");
+  public static final TypeDescriptor NATIVE_FUNCTION =
+      RegularTypeDescriptor.createSyntheticNativeTypeDescriptor(
+          new ArrayList<String>(),
+          // Import alias.
+          Lists.newArrayList("NativeFunction"),
+          ImmutableList.<TypeDescriptor>of(),
+          // Browser global
+          JsInteropUtils.JS_GLOBAL,
+          // Native type name
+          "Function");
 
   /**
    * Holds the bootstrap types.

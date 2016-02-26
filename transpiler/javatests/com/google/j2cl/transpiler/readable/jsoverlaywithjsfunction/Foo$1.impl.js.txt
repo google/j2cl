@@ -13,6 +13,7 @@ let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
 
 let $Foo = window.Object;
 
@@ -136,6 +137,7 @@ class Foo$1 extends Object {
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
+    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
     Object.$clinit();
   }
 

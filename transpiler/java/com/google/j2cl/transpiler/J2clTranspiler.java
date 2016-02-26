@@ -26,6 +26,7 @@ import com.google.j2cl.ast.visitors.FixBooleanOperatorsPass;
 import com.google.j2cl.ast.visitors.FixSuperCallQualifiersVisitor;
 import com.google.j2cl.ast.visitors.FixTypeVariableInMethodVisitors;
 import com.google.j2cl.ast.visitors.InsertBoxingConversionVisitor;
+import com.google.j2cl.ast.visitors.InsertCastOnNewInstancesVisitor;
 import com.google.j2cl.ast.visitors.InsertClassInitStaticMethods;
 import com.google.j2cl.ast.visitors.InsertExceptionConversionVisitor;
 import com.google.j2cl.ast.visitors.InsertExplicitSuperCallsVisitor;
@@ -143,6 +144,8 @@ public class J2clTranspiler {
 
       NormalizeTryWithResourceVisitor.applyTo(j2clUnit);
       NormalizeCatchClausesVisitor.applyTo(j2clUnit);
+      // Runs before normalizing nested classes.
+      InsertCastOnNewInstancesVisitor.applyTo(j2clUnit);
       FixAnonymousClassConstructorsVisitor.applyTo(j2clUnit);
       MakeExplicitEnumConstructionVisitor.applyTo(j2clUnit);
       FixSuperCallQualifiersVisitor.applyTo(j2clUnit);

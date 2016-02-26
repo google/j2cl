@@ -548,12 +548,7 @@ public class CompilationUnitBuilder {
         newInstance = new NewInstance(qualifier, constructorMethodDescriptor, arguments);
       }
 
-      if (newInstance.getTypeDescriptor().isParameterizedType()) {
-        // add type annotation to ClassInstanceCreation of generic type.
-        return CastExpression.createRaw(newInstance, newInstance.getTypeDescriptor());
-      } else {
-        return newInstance;
-      }
+      return newInstance;
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.Expression expression) {

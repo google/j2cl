@@ -65,7 +65,7 @@ class CastToGenerics extends Object {
     let t = /**@type {C_T} */ ($Casts.to(o, Object));
     let es = /**@type {Array<C_E>} */ ($Arrays.$castTo(o, Number, 1));
     let ts = /**@type {Array<C_T>} */ ($Arrays.$castTo(o, Object, 1));
-    let c = /**@type {CastToGenerics<?string, (Number|?number)>} */ (
+    let c = /**@type {!CastToGenerics<?string, (Number|?number)>} */ (
         CastToGenerics.$create());
     let cc = /**@type {CastToGenerics<Error, (Number|?number)>} */ (
         $Casts.to(c, CastToGenerics));

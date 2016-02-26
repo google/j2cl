@@ -78,8 +78,10 @@ public class ExpressionTransformer {
 
   public static String transform(Expression expression, final GenerationEnvironment environment) {
     class ToSourceTransformer extends AbstractTransformer<String> {
-      private String annotateWithJsDoc(TypeDescriptor castTypeDescriptor, String expression) {
-        String jsdoc = JsDocNameUtils.getJsDocName(castTypeDescriptor, environment);
+      private String annotateWithJsDoc(
+          TypeDescriptor castTypeDescriptor, String expression, boolean nullable) {
+        String jsdoc =
+            JsDocNameUtils.getJsDocName(castTypeDescriptor, false, nullable, environment);
         return String.format("/**@type {%s} */ (%s)", jsdoc, expression);
       }
 
@@ -151,19 +153,11 @@ public class ExpressionTransformer {
       public String transformCastExpression(CastExpression expression) {
         Preconditions.checkArgument(
             expression.isRaw(), "Java CastExpression should have been normalized to method call.");
-        if (expression.getExpression() instanceof NewInstance) {
-          TypeDescriptor targetTypeDescriptor =
-              ((NewInstance) expression.getExpression())
-                  .getTarget()
-                  .getEnclosingClassTypeDescriptor();
-          if (targetTypeDescriptor.isJsFunctionImplementation()) {
-            Preconditions.checkArgument(expression.getCastTypeDescriptor() == targetTypeDescriptor);
-            // Do not generate the same cast twice.
-            return transform(expression.getExpression(), environment);
-          }
-        }
         return annotateWithJsDoc(
-            expression.getCastTypeDescriptor(), transform(expression.getExpression(), environment));
+            expression.getCastTypeDescriptor(),
+            transform(expression.getExpression(), environment),
+            // annotate as non-nullable for NewInstance.
+            !(expression.getExpression() instanceof NewInstance));
       }
 
       @Override
@@ -511,18 +505,13 @@ public class ExpressionTransformer {
         TypeDescriptor targetTypeDescriptor =
             expression.getTarget().getEnclosingClassTypeDescriptor();
         String enclosingClassName = transform(targetTypeDescriptor, environment);
-        String makeLambdaFunctionCall =
-            String.format(
-                "%s.$makeLambdaFunction(%s.prototype.%s, %s, %s.$copy)",
-                transform(TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor(), environment),
-                enclosingClassName,
-                ManglingNameUtils.getMangledName(
-                    targetTypeDescriptor.getJsFunctionMethodDescriptor()),
-                transformRegularNewInstance(expression),
-                enclosingClassName);
-        // generate specific type annotation for Util.$makeLambdaFunction() because we cannot
-        // specify a specific type at the declaration of the utility function.
-        return annotateWithJsDoc(targetTypeDescriptor, makeLambdaFunctionCall);
+        return String.format(
+            "%s.$makeLambdaFunction(%s.prototype.%s, %s, %s.$copy)",
+            transform(TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor(), environment),
+            enclosingClassName,
+            ManglingNameUtils.getMangledName(targetTypeDescriptor.getJsFunctionMethodDescriptor()),
+            transformRegularNewInstance(expression),
+            enclosingClassName);
       }
     }
     if (expression == null) {

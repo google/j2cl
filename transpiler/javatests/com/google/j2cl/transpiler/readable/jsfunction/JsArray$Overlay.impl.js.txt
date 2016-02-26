@@ -12,6 +12,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 
 let MyJsFunctionImpl = goog.forwardDeclare(
     'gen.com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 let $JsArray = window.Array;
 
@@ -26,7 +27,7 @@ class JsArray$Overlay {
       $thisArg) {
     JsArray$Overlay.$clinit();
     $thisArg.sort(
-        /**@type {?function(number):number} */ (
+        /**@type {function(number):number} */ (
             $Util.$makeLambdaFunction(
                 MyJsFunctionImpl.prototype.m_foo__int,
                 MyJsFunctionImpl.$create(), MyJsFunctionImpl.$copy)));
@@ -46,6 +47,7 @@ class JsArray$Overlay {
   static $clinit() {
     MyJsFunctionImpl = goog.module.get(
         'gen.com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };
 

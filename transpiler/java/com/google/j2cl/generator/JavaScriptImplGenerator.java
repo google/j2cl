@@ -75,8 +75,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     return JsDocNameUtils.getJsDocName(typeDescriptor, environment);
   }
 
-  public String getJsDocName(TypeDescriptor typeDescriptor, boolean shouldUseClassName) {
-    return JsDocNameUtils.getJsDocName(typeDescriptor, shouldUseClassName, environment);
+  public String getJsDocName(
+      TypeDescriptor typeDescriptor, boolean shouldUseClassName, boolean nullable) {
+    return JsDocNameUtils.getJsDocName(typeDescriptor, shouldUseClassName, nullable, environment);
   }
 
   public String getJsDocNames(List<TypeDescriptor> typeDescriptors) {
@@ -169,7 +170,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         sb.appendln(" * @template %s", templates);
       }
       for (TypeDescriptor superInterfaceType : javaType.getSuperInterfaceTypeDescriptors()) {
-        sb.appendln(" * @extends {%s}", getJsDocName(superInterfaceType, true));
+        sb.appendln(" * @extends {%s}", getJsDocName(superInterfaceType, true, true));
       }
       sb.appendln(" */");
     } else { // Not an interface so it is a Class.
@@ -185,11 +186,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         sb.appendln(" * @template %s", templates);
       }
       if (javaType.getSuperTypeDescriptor().isParameterizedType()) {
-        String templates = getJsDocName(javaType.getSuperTypeDescriptor(), true);
+        String templates = getJsDocName(javaType.getSuperTypeDescriptor(), true, true);
         sb.appendln(" * @extends {%s}", templates);
       }
       for (TypeDescriptor superInterfaceType : javaType.getSuperInterfaceTypeDescriptors()) {
-        sb.appendln(" * @implements {%s}", getJsDocName(superInterfaceType, true));
+        sb.appendln(" * @implements {%s}", getJsDocName(superInterfaceType, true, true));
       }
       sb.appendln(" */");
     }
@@ -321,7 +322,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         GeneratorUtils.getParameterAnnotationsJsDoc(constructor, environment)) {
       sb.appendln(" * @param %s", paramTypeName);
     }
-    sb.appendln(" * @return {!%s}", getJsDocName(javaType.getDescriptor(), true));
+    sb.appendln(" * @return {%s}", getJsDocName(javaType.getDescriptor(), true, false));
     sb.appendln(" * @%s", constructor.getDescriptor().getVisibility().jsText);
     sb.appendln(" */");
     sb.appendln("static %s(%s) {", mangledNameOfCreate, parameterList);
