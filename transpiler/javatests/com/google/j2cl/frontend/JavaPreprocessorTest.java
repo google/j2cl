@@ -177,25 +177,4 @@ public class JavaPreprocessorTest {
                 "}");
     assertEquals(after, javaPreprocessor.preprocessFile(before));
   }
-
-  @Test
-  public void testUnusedImports() {
-    String before =
-        Joiner.on("\n")
-            .join(
-                "import a.b.X;",
-                "public class Foo {",
-                "  /** {@see X}. */",
-                "  public void m() {}",
-                "}");
-    String after =
-        Joiner.on("\n")
-            .join(
-                "/*import a.b.X;*/",
-                "public class Foo {",
-                "  /** {@see X}. */",
-                "  public void m() {}",
-                "}");
-    assertEquals(after, javaPreprocessor.preprocessFile(before));
-  }
 }

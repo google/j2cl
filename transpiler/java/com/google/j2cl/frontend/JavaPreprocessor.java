@@ -102,6 +102,10 @@ public class JavaPreprocessor {
 
   @VisibleForTesting
   String preprocessFile(String fileContent) {
+    if (!fileContent.contains("GwtIncompatible")) {
+      return null;
+    }
+
     // Parse the file.
     ASTParser parser = ASTParser.newParser(AST.JLS8);
     parser.setCompilerOptions(compilerOptions);
@@ -119,9 +123,7 @@ public class JavaPreprocessor {
       gwtIncompatibleNode.delete();
     }
 
-    // Gets all the imports that are no longer needed. Note that we need to run this even if the
-    // class doesn't have anything that is {@code GwtIncompatible}, since there might be imports
-    // needed only for JavaDoc.
+    // Gets all the imports that are no longer needed.
     UnusedImportsNodeCollector unusedImportsNodeCollector = new UnusedImportsNodeCollector();
     compilationUnit.accept(unusedImportsNodeCollector);
     List<ImportDeclaration> unusedImportsNodes = unusedImportsNodeCollector.getUnusedImports();
