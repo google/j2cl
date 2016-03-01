@@ -455,25 +455,46 @@ public class CompilationUnitBuilder {
       // {@code constructorImplicitParameterTypeDescriptors} are the types for the aforementioned
       // parameters.
       TypeDescriptor[] constructorImplicitParameterTypeDescriptors =
-          FluentIterable.from(Arrays.asList(constructorBinding.getParameterTypes()))
-              .transform(
-                  new Function<ITypeBinding, TypeDescriptor>() {
-                    @Override
-                    public TypeDescriptor apply(ITypeBinding typeBinding) {
-                      return JdtUtils.createTypeDescriptor(typeBinding);
-                    }
-                  })
-              .toArray(TypeDescriptor.class);
+          getParameterTypeDescriptors(constructorBinding.getParameterTypes());
 
+      ITypeBinding typeBinding = typeDeclaration.resolveBinding();
       AnonymousJavaType anonymousClass =
           (AnonymousJavaType)
               convertAndAddJavaType(
                   JdtUtils.isInStaticContext(typeDeclaration),
-                  typeDeclaration.resolveBinding(),
+                  typeBinding,
                   JdtUtils.<BodyDeclaration>asTypedList(typeDeclaration.bodyDeclarations()));
       anonymousClass.addConstructorParameterTypeDescriptors(
           Arrays.asList(constructorImplicitParameterTypeDescriptors));
+
+      // Record the types of the superclass constructor's parameters, if they exist.
+      ITypeBinding superTypeBinding = typeBinding.getSuperclass();
+      for (IMethodBinding methodBinding : superTypeBinding.getDeclaredMethods()) {
+        if (methodBinding.isConstructor() && constructorBinding.isSubsignature(methodBinding)) {
+          // Note that we get the types from the declaration, not the binding, because we need the
+          // declared type to figure out how to reference the method.
+          TypeDescriptor[] superConstructorImplicitParameterTypeDescriptors =
+              getParameterTypeDescriptors(
+                  methodBinding.getMethodDeclaration().getParameterTypes());
+          anonymousClass.addSuperConstructorParameterTypeDescriptors(
+              Arrays.asList(superConstructorImplicitParameterTypeDescriptors));
+        }
+      }
+
       return anonymousClass;
+    }
+
+    private TypeDescriptor[] getParameterTypeDescriptors(ITypeBinding[] parameterTypes) {
+      return FluentIterable
+          .from(Arrays.asList(parameterTypes))
+          .transform(
+              new Function<ITypeBinding, TypeDescriptor>() {
+                @Override
+                public TypeDescriptor apply(ITypeBinding typeBinding) {
+                  return JdtUtils.createTypeDescriptor(typeBinding);
+                }
+              })
+          .toArray(TypeDescriptor.class);
     }
 
     private Expression convertAnonymousClassCreation(

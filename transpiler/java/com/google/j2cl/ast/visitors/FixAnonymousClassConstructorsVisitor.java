@@ -58,6 +58,7 @@ public class FixAnonymousClassConstructorsVisitor extends AbstractRewriter {
   }
 
   private List<Variable> constructorParameters = new ArrayList<>();
+  private List<Variable> superConstructorParameters = new ArrayList<>();
 
   @Override
   public boolean shouldProcessJavaType(JavaType javaType) {
@@ -67,11 +68,18 @@ public class FixAnonymousClassConstructorsVisitor extends AbstractRewriter {
     AnonymousJavaType anonymousJavaType = (AnonymousJavaType) javaType;
     // Create and collect parameters for the default constructor of only the current JavaType.
     constructorParameters.clear();
+    superConstructorParameters.clear();
     int i = 0;
     for (TypeDescriptor parameterTypeDescriptor :
         anonymousJavaType.getConstructorParameterTypeDescriptors()) {
       Variable parameter = new Variable("$_" + i++, parameterTypeDescriptor, false, true);
       constructorParameters.add(parameter);
+    }
+    int j = 0;
+    for (TypeDescriptor parameterTypeDescriptor :
+        anonymousJavaType.getSuperConstructorParameterTypeDescriptors()) {
+      Variable parameter = new Variable("$_" + j++, parameterTypeDescriptor, false, true);
+      superConstructorParameters.add(parameter);
     }
     return true;
   }
@@ -101,7 +109,7 @@ public class FixAnonymousClassConstructorsVisitor extends AbstractRewriter {
     }
 
     MethodCallBuilder methodCallBuilder = MethodCallBuilder.from(methodCall);
-    for (Variable parameter : constructorParameters) {
+    for (Variable parameter : superConstructorParameters) {
       methodCallBuilder.argument(parameter.getReference(), parameter.getTypeDescriptor());
     }
 

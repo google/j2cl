@@ -36,6 +36,13 @@ public class AnonymousJavaType extends JavaType {
    * anonymous class.
    */
   private List<TypeDescriptor> constructorParameterTypeDescriptors = new ArrayList<>();
+
+  /**
+   * Parameter types of the super class's default constructor. Used to synthesize the call to the
+   * default constructor of the super class, if one exists.
+   */
+  private List<TypeDescriptor> superConstructorParameterTypeDescriptors = new ArrayList<>();
+
   /**
    * Qualifier of NewInstance, which is actually the qualifier of the super call and is a
    * reference to what will be the enclosing instance for this class's super type.
@@ -46,9 +53,18 @@ public class AnonymousJavaType extends JavaType {
     return constructorParameterTypeDescriptors;
   }
 
+  public List<TypeDescriptor> getSuperConstructorParameterTypeDescriptors() {
+    return superConstructorParameterTypeDescriptors;
+  }
+
   public void addConstructorParameterTypeDescriptors(
       List<TypeDescriptor> constructorParameterTypeDescriptors) {
     this.constructorParameterTypeDescriptors.addAll(constructorParameterTypeDescriptors);
+  }
+
+  public void addSuperConstructorParameterTypeDescriptors(
+      List<TypeDescriptor> superConstructorParameterTypeDescriptors) {
+    this.superConstructorParameterTypeDescriptors.addAll(superConstructorParameterTypeDescriptors);
   }
 
   public Expression getSuperCallQualifier() {

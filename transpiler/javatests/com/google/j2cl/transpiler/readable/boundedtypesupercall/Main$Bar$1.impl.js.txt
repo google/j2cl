@@ -1,0 +1,151 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar$1.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar$1$impl');
+
+
+let Main$Foo = goog.require('gen.com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Foo$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main$Bar = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+/**
+ * @template C_Bar_T
+ * @extends {Main$Foo<C_Bar_T>}
+ */
+class Main$Bar$1 extends Main$Foo {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() {
+    super();
+    /**
+     * @public {Main$Bar<C_Bar_T>}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar$1 =
+        null;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_Bar_T
+   * @param {C_Bar_T} $_0
+   * @param {Main$Bar<C_Bar_T>} $outer_this
+   * @return {!Main$Bar$1<C_Bar_T>}
+   * @public
+   */
+  static $create__java_lang_Comparable__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar(
+      $_0, $outer_this) {
+    Main$Bar$1.$clinit();
+    let $instance = new Main$Bar$1;
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar$1__java_lang_Comparable__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar(
+            $_0, $outer_this);
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {C_Bar_T} $_0
+   * @param {Main$Bar<C_Bar_T>} $outer_this
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar$1__java_lang_Comparable__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar(
+      $_0, $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar$1 =
+        $outer_this;
+    this.$ctor__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Foo__java_lang_Object(
+        $_0);
+    this.$init__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar$1();
+  }
+
+  /**
+   * @override
+   * @return {void}
+   * @public
+   */
+  m_foo() {}
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Main$Bar$1; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Main$Bar$1);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    Main$Bar$1.$clinit();
+    if (!Main$Bar$1.$classMain$Bar$1_) {
+      Main$Bar$1.$classMain$Bar$1_ = Class.$createForClass(
+          $Util.$generateId('1'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar$1'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar.1'));
+    }
+    return Main$Bar$1.$classMain$Bar$1_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return Main$Bar$1.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Main$Bar = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Main$Foo.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar$1() {
+  }
+};
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Main$Bar$1.$classMain$Bar$1_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = Main$Bar$1;
+//# sourceMappingURL=Main$Bar$1.js.map

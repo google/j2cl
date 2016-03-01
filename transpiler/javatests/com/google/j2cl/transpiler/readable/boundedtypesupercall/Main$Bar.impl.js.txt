@@ -1,0 +1,150 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main$Bar$1 = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar$1$impl');
+let Main$Foo = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Foo$impl');
+let Main = goog.forwardDeclare(
+    'gen.com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+/**
+ * @template C_Bar_T
+ */
+class Main$Bar extends Object {
+  /**
+   * Defines instance fields.
+   * @private
+   */
+  constructor() { super(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_Bar_T
+   * @return {!Main$Bar<C_Bar_T>}
+   * @public
+   */
+  static $create() {
+    Main$Bar.$clinit();
+    let $instance = new Main$Bar;
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar();
+  }
+
+  /**
+   * @return {C_Bar_T}
+   * @public
+   */
+  m_getSomething() { return null; }
+
+  /**
+   * @return {Main$Foo<C_Bar_T>}
+   * @public
+   */
+  m_doSomething() {
+    return /**@type {!Main$Bar$1<C_Bar_T>} */ (
+        Main$Bar$1
+            .$create__java_lang_Comparable__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar(
+                this.m_getSomething(), this));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Main$Bar; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Main$Bar);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    Main$Bar.$clinit();
+    if (!Main$Bar.$classMain$Bar_) {
+      Main$Bar.$classMain$Bar_ = Class.$createForClass(
+          $Util.$generateId('Bar'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar'));
+    }
+    return Main$Bar.$classMain$Bar_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return Main$Bar.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Main$Bar$1 = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar$1$impl');
+    Main$Foo = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Foo$impl');
+    Main = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar() {}
+};
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+Main$Bar.$classMain$Bar_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = Main$Bar;
+//# sourceMappingURL=Main$Bar.js.map
