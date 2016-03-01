@@ -583,8 +583,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sb.appendln(" * @%s", staticFieldVisibility.jsText);
       sb.appendln(" */");
       sb.appendln("static get %s() {", indirectStaticFieldName);
-      sb.appendln("%s.$clinit();", className);
-      sb.appendln("return %s.%s;", className, directStaticFieldAccess);
+      sb.appendln("return (%s.$clinit(), %s.%s);", className, className, directStaticFieldAccess);
       sb.appendln("}");
       sb.newLine();
 
@@ -595,8 +594,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sb.appendln(" * @%s", staticFieldVisibility.jsText);
       sb.appendln(" */");
       sb.appendln("static set %s(value) {", indirectStaticFieldName);
-      sb.appendln("%s.$clinit();", className);
-      sb.appendln("%s.%s = value;", className, directStaticFieldAccess);
+      sb.appendln("(%s.$clinit(), %s.%s = value);", className, className, directStaticFieldAccess);
       sb.appendln("}");
       sb.newLine();
     }
