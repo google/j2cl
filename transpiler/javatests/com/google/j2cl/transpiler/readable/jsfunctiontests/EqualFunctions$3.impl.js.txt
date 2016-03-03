@@ -12,10 +12,8 @@ let EqualFunction = goog.require('gen.com.google.j2cl.transpiler.readable.jsfunc
 let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let EqualFunctions$Foo = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$Foo$impl');
-let EqualFunctions = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$impl');
+let EqualFunctions$Foo = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$Foo$impl');
+let EqualFunctions = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
@@ -85,8 +83,7 @@ class EqualFunctions$3 extends Object {
 
   /**
    * @template M_T
-   * @param {?function(EqualFunctions$Foo<M_T>,
-   * EqualFunctions$Foo<M_T>):boolean} $thisArg
+   * @param {?function(EqualFunctions$Foo<M_T>, EqualFunctions$Foo<M_T>):boolean} $thisArg
    * @param {EqualFunctions$Foo<M_T>} first
    * @param {EqualFunctions$Foo<M_T>} second
    * @return {boolean}

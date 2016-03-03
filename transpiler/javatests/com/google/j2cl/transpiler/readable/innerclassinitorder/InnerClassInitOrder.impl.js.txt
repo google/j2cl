@@ -11,50 +11,28 @@ goog.module('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerCl
 let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let InnerClassInitOrder$1 = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$1$impl');
-let InnerClassInitOrder$1AddNumber = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$1AddNumber$impl');
-let InnerClassInitOrder$2 = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$2$impl');
-let InnerClassInitOrder$3 = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$3$impl');
-let InnerClassInitOrder$4 = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$4$impl');
-let InnerClassInitOrder$ESInnerSubclass = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESInnerSubclass$impl');
-let InnerClassInitOrder$ESOuter$ESInner = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESOuter$ESInner$impl');
-let InnerClassInitOrder$ESOuter = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESOuter$impl');
-let InnerClassInitOrder$ESWGInnerSubclass = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGInnerSubclass$impl');
-let InnerClassInitOrder$ESWGOuter$ESWGInner = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter$ESWGInner$impl');
-let InnerClassInitOrder$ESWGOuter = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter$impl');
-let InnerClassInitOrder$InnerClass = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$InnerClass$impl');
-let InnerClassInitOrder$Outer$OuterIsNotSuper = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$OuterIsNotSuper$impl');
-let InnerClassInitOrder$Outer$OuterIsSuper = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$OuterIsSuper$impl');
-let InnerClassInitOrder$Outer$TestQualifiedSuperCall = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall$impl');
-let InnerClassInitOrder$Outer$TestUnqualifiedSuperCall = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestUnqualifiedSuperCall$impl');
-let InnerClassInitOrder$Outer = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$impl');
-let InnerClassInitOrder$OuterRefFromSuperCtorCall = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorCall$impl');
-let InnerClassInitOrder$OuterRefFromThisCtorCall = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromThisCtorCall$impl');
-let InnerClassInitOrder$P1$P2$P3 = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1$P2$P3$impl');
-let InnerClassInitOrder$P1$P2 = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1$P2$impl');
-let InnerClassInitOrder$P1 = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1$impl');
+let InnerClassInitOrder$1 = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$1$impl');
+let InnerClassInitOrder$1AddNumber = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$1AddNumber$impl');
+let InnerClassInitOrder$2 = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$2$impl');
+let InnerClassInitOrder$3 = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$3$impl');
+let InnerClassInitOrder$4 = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$4$impl');
+let InnerClassInitOrder$ESInnerSubclass = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESInnerSubclass$impl');
+let InnerClassInitOrder$ESOuter$ESInner = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESOuter$ESInner$impl');
+let InnerClassInitOrder$ESOuter = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESOuter$impl');
+let InnerClassInitOrder$ESWGInnerSubclass = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGInnerSubclass$impl');
+let InnerClassInitOrder$ESWGOuter$ESWGInner = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter$ESWGInner$impl');
+let InnerClassInitOrder$ESWGOuter = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter$impl');
+let InnerClassInitOrder$InnerClass = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$InnerClass$impl');
+let InnerClassInitOrder$Outer$OuterIsNotSuper = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$OuterIsNotSuper$impl');
+let InnerClassInitOrder$Outer$OuterIsSuper = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$OuterIsSuper$impl');
+let InnerClassInitOrder$Outer$TestQualifiedSuperCall = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall$impl');
+let InnerClassInitOrder$Outer$TestUnqualifiedSuperCall = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestUnqualifiedSuperCall$impl');
+let InnerClassInitOrder$Outer = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$impl');
+let InnerClassInitOrder$OuterRefFromSuperCtorCall = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorCall$impl');
+let InnerClassInitOrder$OuterRefFromThisCtorCall = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromThisCtorCall$impl');
+let InnerClassInitOrder$P1$P2$P3 = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1$P2$P3$impl');
+let InnerClassInitOrder$P1$P2 = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1$P2$impl');
+let InnerClassInitOrder$P1 = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let String = goog.forwardDeclare('gen.java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');

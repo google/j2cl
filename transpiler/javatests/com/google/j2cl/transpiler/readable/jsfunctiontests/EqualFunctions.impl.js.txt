@@ -11,16 +11,11 @@ goog.module('gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFuncti
 let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let EqualFunction = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunction$impl');
-let EqualFunctions$1 = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$1$impl');
-let EqualFunctions$2 = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$2$impl');
-let EqualFunctions$3 = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$3$impl');
-let EqualFunctions$Foo = goog.forwardDeclare(
-    'gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$Foo$impl');
+let EqualFunction = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunction$impl');
+let EqualFunctions$1 = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$1$impl');
+let EqualFunctions$2 = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$2$impl');
+let EqualFunctions$3 = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$3$impl');
+let EqualFunctions$Foo = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$Foo$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let Integer = goog.forwardDeclare('gen.java.lang.Integer$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
@@ -106,8 +101,7 @@ class EqualFunctions extends Object {
   /**
    * @template M_T
    * @param {?function(M_T, M_T):boolean} equalFn
-   * @return {?function(EqualFunctions$Foo<M_T>,
-   * EqualFunctions$Foo<M_T>):boolean}
+   * @return {?function(EqualFunctions$Foo<M_T>, EqualFunctions$Foo<M_T>):boolean}
    * @public
    */
   static m_createEqualFn__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunction(
