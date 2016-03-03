@@ -6,35 +6,38 @@ package com.google.j2cl.transpiler.integration.innerclassinitorder;
 public class Main {
   public int number = 0;
 
-  static class OuterRefFromSuperCtorBase {
-    OuterRefFromSuperCtorBase(Object o) {
-      o.toString();
+  static class Base {
+    public void polymorph() {
+    }
+  }
+
+  static class OuterRefFromSuperCtorBase extends Base {
+    OuterRefFromSuperCtorBase(Base o) {
+      o.polymorph();
     }
   }
   
   class OuterRefFromSuperCtorCall extends OuterRefFromSuperCtorBase {
     OuterRefFromSuperCtorCall() {
-      super(new Object() {
+      super(new Base() {
         @Override
-        public String toString() {
+        public void polymorph() {
           number += 100;
-          return "";
         }
       });
     }
   }
 
   class OuterRefFromThisCtorCall extends OuterRefFromSuperCtorBase {
-    public OuterRefFromThisCtorCall(Object object) {
+    public OuterRefFromThisCtorCall(Base object) {
       super(object);
     }
 
     public OuterRefFromThisCtorCall() {
-      this(new Object() {
+      this(new Base() {
         @Override
-        public String toString() {
+        public void polymorph() {
           number += 1000;
-          return "";
         }
       });
     }
