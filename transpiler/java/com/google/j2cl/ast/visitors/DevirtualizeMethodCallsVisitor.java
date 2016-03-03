@@ -23,6 +23,7 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptors;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.SuperReference;
+import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
@@ -90,7 +91,10 @@ public class DevirtualizeMethodCallsVisitor extends AbstractRewriter {
     // version of the method in the super class. If we were to perform Object method
     // devirtualization then the resulting routing through Objects.doFoo() would end up calling
     // back onto the version of the method on the prototype (aka the wrong one).
-    if (methodCall.getQualifier() instanceof SuperReference) {
+    // Also as an optimization we do not perform devirtualization on 'this' method calls as the
+    // trampoline is not necessary.
+    if (methodCall.getQualifier() instanceof SuperReference
+        || methodCall.getQualifier() instanceof ThisReference) {
       return methodCall;
     }
     TypeDescriptor enclosingClassTypeDescriptor =

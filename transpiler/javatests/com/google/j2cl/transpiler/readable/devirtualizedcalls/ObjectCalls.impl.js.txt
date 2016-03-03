@@ -70,16 +70,14 @@ class ObjectCalls extends Object {
    * @public
    */
   m_test() {
-    $Objects.m_equals__java_lang_Object__java_lang_Object(
-        this, Object.$create());
-    $Objects.m_hashCode__java_lang_Object(this);
-    $Objects.m_toString__java_lang_Object(this);
-    $Objects.m_getClass__java_lang_Object(this);
-    $Objects.m_equals__java_lang_Object__java_lang_Object(
-        this, Object.$create());
-    $Objects.m_hashCode__java_lang_Object(this);
-    $Objects.m_toString__java_lang_Object(this);
-    $Objects.m_getClass__java_lang_Object(this);
+    this.m_equals__java_lang_Object(Object.$create());
+    this.m_hashCode();
+    this.$javaToString();
+    this.m_getClass();
+    this.m_equals__java_lang_Object(Object.$create());
+    this.m_hashCode();
+    this.$javaToString();
+    this.m_getClass();
   }
 
   /**
