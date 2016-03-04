@@ -1,0 +1,23 @@
+requirement: {
+  type: CUSTOM
+  java_class: 'com.google.javascript.jscomp.ConformanceRules$BanUnknownThis'
+  error_message: 'References to "this" that are typed as "unknown" are not allowed. See http://go/closure-js-conformance#unknownThis'
+  whitelist: 'javascript/closure/base.js'
+}
+
+requirement: {
+  type: CUSTOM
+  java_class: 'com.google.javascript.jscomp.ConformanceRules$BanUnresolvedType'
+  error_message: 'Accessing properties from objects that are forward-declared type names is discouraged.'
+}
+
+requirement: {
+  type: CUSTOM
+  java_class: 'com.google.javascript.jscomp.ConformanceRules$BanUnknownTypedClassPropsReferences'
+  error_message: 'Type of property reference is unknown.'
+  whitelist: 'javascript/closure/base.js'
+  # TODO(goktug): Re-work maps.
+  whitelist_regexp: '.*/java/util/InternalHashCodeMap.*'
+  # TODO(michaelthomas): Figure out why this regressed.
+  whitelist_regexp: '.*/java/util/TreeMap.*'
+}

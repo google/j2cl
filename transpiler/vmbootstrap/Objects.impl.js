@@ -12,7 +12,9 @@ let Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let JavaScriptObject = goog.forwardDeclare('vmbootstrap.JavaScriptObject$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
+let Object = goog.require('gen.java.lang.Object$impl');
 
+let JsObject = window.Object;
 
 /**
  * Provides devirtualized Object methods
@@ -26,7 +28,7 @@ class Objects {
    */
   static m_equals__java_lang_Object__java_lang_Object(obj, other) {
     Objects.$clinit();
-    if (obj.m_equals__java_lang_Object) {
+    if (obj instanceof Object) {
       return obj.m_equals__java_lang_Object(other);
     } else if (obj.equals) {
       return obj.equals(other);
@@ -44,14 +46,14 @@ class Objects {
     Objects.$clinit();
     let type = typeof obj;
     if (type == 'number') {
-      return Double.m_hashCode__java_lang_Double(/**@type {?number}*/ (obj));
+      return Double.m_hashCode__java_lang_Double(/**@type {number}*/ (obj));
     } else if (type == 'boolean') {
-      return Boolean.m_hashCode__java_lang_Boolean(/**@type {?boolean}*/ (obj));
+      return Boolean.m_hashCode__java_lang_Boolean(/**@type {boolean}*/ (obj));
     } else if (type == 'string') {
-      return String.m_hashCode__java_lang_String(/**@type {?string}*/ (obj));
+      return String.m_hashCode__java_lang_String(/**@type {string}*/ (obj));
     } else if (obj instanceof Array) {
       return Arrays.m_hashCode__java_lang_Object(obj);
-    } else if (obj.m_hashCode) {
+    } else if (obj instanceof Object) {
       return obj.m_hashCode();
     } else if (obj.hashCode) {
       return obj.hashCode();
@@ -90,7 +92,7 @@ class Objects {
       return String.$getClass();
     } else if (obj instanceof Array) {
       return Arrays.m_getClass__java_lang_Object(obj);
-    } else if (obj.m_getClass) {
+    } else if (obj instanceof Object) {
       return obj.m_getClass();
       // Do not need to check 'getClass' because java.lang.Object
       // getClass() is final.

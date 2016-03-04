@@ -177,16 +177,19 @@ class Arrays {
     if (ARRAY_CHECK_TYPES_) {
       // Only check when the array has a known leaf type. JS native arrays won't
       // have it.
-      if (array.leafTypeIsInstance != null) {
-        if (array.dimensionCount > 1) {
+      if (/** @type {*} */ (array).leafTypeIsInstance) {
+        var enhancedArray = /** @type {Arrays.EnhancedArray_} */ (array);
+        if (enhancedArray.dimensionCount > 1) {
           if (!Arrays.$instanceIsOfTypeInternal(
-                  value, array.leafType, array.leafTypeIsAssignableFrom,
-                  array.dimensionCount - 1)) {
+                  value,
+                  enhancedArray.leafType,
+                  enhancedArray.leafTypeIsAssignableFrom,
+                  enhancedArray.dimensionCount - 1)) {
             // The inserted array must fit dimensions and the array leaf
             // type.
             Arrays.$throwArrayStoreException();
           }
-        } else if (value != null && !array.leafTypeIsInstance(value)) {
+        } else if (value != null && !enhancedArray.leafTypeIsInstance(value)) {
           // The inserted value must fit the array leaf type.
           // If leafType is not a primitive type, a 'null' should always be a
           // legal value. If leafType is a primitive type, value cannot be null
@@ -207,11 +210,14 @@ class Arrays {
    * @public
    */
   static $stampType(array, otherArray) {
-    array.leafType = otherArray.leafType;
-    array.leafTypeIsInstance = otherArray.leafTypeIsInstance;
-    array.leafTypeIsAssignableFrom = otherArray.leafTypeIsAssignableFrom;
-    array.leafTypeGetClass = otherArray.leafTypeGetClass;
-    array.dimensionCount = otherArray.dimensionCount;
+    var enhancedArray = /** @type {Arrays.EnhancedArray_} */ (array);
+    var otherEnhancedArray = /** @type {Arrays.EnhancedArray_} */ (otherArray);
+    enhancedArray.leafType = otherEnhancedArray.leafType;
+    enhancedArray.leafTypeIsInstance = otherEnhancedArray.leafTypeIsInstance;
+    enhancedArray.leafTypeIsAssignableFrom =
+        otherEnhancedArray.leafTypeIsAssignableFrom;
+    enhancedArray.leafTypeGetClass = otherEnhancedArray.leafTypeGetClass;
+    enhancedArray.dimensionCount = otherEnhancedArray.dimensionCount;
   }
 
   /**
@@ -248,13 +254,17 @@ class Arrays {
       return false;
     }
 
+    // TODO(michaelthomas): Consider checking that this is an enhanced array
+    // before casting.
+    var enhancedArray = /** @type {Arrays.EnhancedArray_} */ (instance);
+
     // One dimensional Object arrays are emitted as a raw JS [] array literal
     // and will be missing the dimensionCount field.
-    var effectiveInstanceDimensionCount = (instance.dimensionCount || 1);
+    var effectiveInstanceDimensionCount = (enhancedArray.dimensionCount || 1);
 
     if (effectiveInstanceDimensionCount == requiredDimensionCount) {
       // If dimensions are equal then the leaftypes must be castable.
-      return requiredLeafTypeIsAssignableFrom(instance.leafType);
+      return requiredLeafTypeIsAssignableFrom(enhancedArray.leafType);
     }
     if (effectiveInstanceDimensionCount > requiredDimensionCount) {
       // If shrinking the dimensions then the new leaf type must *be* Object.
@@ -547,6 +557,24 @@ class Arrays {
     Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
   }
 };
+
+
+/**
+ * A typedef for the extra properties added to new arrays which are created via
+ * this class. These properties allow for better emulation of Java array
+ * semantics.
+ *
+ * @typedef {{
+ *   leafType: *,
+ *   leafTypeIsInstance: Function,
+ *   leafTypeIsAssignableFrom: Function,
+ *   leafTypeGetClass: Function,
+ *   dimensionCount: number,
+ *   length: number
+ * }}
+ * @private
+ */
+Arrays.EnhancedArray_;
 
 
 /**

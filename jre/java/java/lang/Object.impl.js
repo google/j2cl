@@ -11,9 +11,9 @@ let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 
 
 class Object {
+  // TODO(michaelthomas): Make private when b/27149891 is resolved.
   /**
    * Defines instance fields.
-   * @private
    */
   constructor() {}
 

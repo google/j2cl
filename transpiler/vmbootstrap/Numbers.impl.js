@@ -10,6 +10,7 @@ let Character = goog.forwardDeclare('gen.java.lang.Character$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let Double = goog.forwardDeclare('gen.java.lang.Double$impl');
 let Number = goog.forwardDeclare('gen.java.lang.Number$impl');
+let Object = goog.forwardDeclare('gen.java.lang.Object$impl');
 let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
 
 
@@ -26,9 +27,8 @@ class Numbers {
     Numbers.$clinit();
     if (typeof obj == 'number') {
       return Double.m_byteValue__java_lang_Double(/**@type {number}*/ (obj));
-    } else {
-      return obj.m_byteValue();
     }
+    return obj.m_byteValue();
   }
 
   /**
@@ -40,9 +40,8 @@ class Numbers {
     Numbers.$clinit();
     if (typeof obj == 'number') {
       return Double.m_doubleValue__java_lang_Double(/**@type {number}*/ (obj));
-    } else {
-      return obj.m_doubleValue();
     }
+    return obj.m_doubleValue();
   }
 
   /**
@@ -54,9 +53,8 @@ class Numbers {
     Numbers.$clinit();
     if (typeof obj == 'number') {
       return Double.m_floatValue__java_lang_Double(/**@type {number}*/ (obj));
-    } else {
-      return obj.m_floatValue();
     }
+    return obj.m_floatValue();
   }
 
   /**
@@ -68,9 +66,8 @@ class Numbers {
     Numbers.$clinit();
     if (typeof obj == 'number') {
       return Double.m_intValue__java_lang_Double(/**@type {number}*/ (obj));
-    } else {
-      return obj.m_intValue();
     }
+    return obj.m_intValue();
   }
 
   /**
@@ -82,9 +79,8 @@ class Numbers {
     Numbers.$clinit();
     if (typeof obj == 'number') {
       return Double.m_longValue__java_lang_Double(/**@type {number}*/ (obj));
-    } else {
-      return obj.m_longValue();
     }
+    return obj.m_longValue();
   }
 
   /**
@@ -96,9 +92,8 @@ class Numbers {
     Numbers.$clinit();
     if (typeof obj == 'number') {
       return Double.m_shortValue__java_lang_Double(/**@type {number}*/ (obj));
-    } else {
-      return obj.m_shortValue();
     }
+    return obj.m_shortValue();
   }
 
   /**
@@ -113,9 +108,8 @@ class Numbers {
     if (type == 'number') {
       return Double.m_equals__java_lang_Double__java_lang_Object(
           /**@type {?number}*/ (obj), other);
-    } else {
-      return obj.m_equals__java_lang_Object(other);
     }
+    return /** @type {Object} */ (obj).m_equals__java_lang_Object(other);
   }
 
   /**
@@ -128,9 +122,8 @@ class Numbers {
     var type = typeof obj;
     if (type == 'number') {
       return Double.m_hashCode__java_lang_Double(/**@type {?number}*/ (obj));
-    } else {
-      return obj.m_hashCode();
     }
+    return /** @type {Object} */ (obj).m_hashCode();
   }
 
   /**
@@ -143,9 +136,8 @@ class Numbers {
     var type = typeof obj;
     if (type == 'number') {
       return $double.$getClass();
-    } else {
-      return obj.m_getClass();
     }
+    return /** @type {Object} */ (obj).m_getClass();
   }
 
   /**
@@ -157,6 +149,7 @@ class Numbers {
     Class = goog.module.get('gen.java.lang.Class$impl');
     Double = goog.module.get('gen.java.lang.Double$impl');
     Number = goog.module.get('gen.java.lang.Number$impl');
+    Object = goog.module.get('gen.java.lang.Object$impl');
     $double = goog.module.get('vmbootstrap.primitives.$double$impl');
   }
 };

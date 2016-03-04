@@ -8,6 +8,9 @@
 
 package(default_visibility = ["//:__subpackages__"])
 
+load("/tools/build_rules/build_test", "build_test")
+load("/javascript/closure/builddefs", "CLOSURE_COMPILER_FLAGS_FULL_TYPED")
+
 # Google owns the copyright
 licenses(["unencumbered"])
 
@@ -111,4 +114,33 @@ java_library(
         "//java/com/google/devtools/build/runtime:runfiles",
         "//third_party/java/junit",
     ],
+)
+
+js_binary(
+    name = "integration_binary",
+    compile = 1,
+    compiler = "//javascript/tools/jscompiler:head",
+    defs = CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
+        "--j2cl_pass",
+        "--language_in=ECMASCRIPT6_STRICT",
+        "--language_out=ECMASCRIPT5",
+        "--strict",
+        "--remove_unused_constructor_properties=ON",
+        "--jscomp_off=lateProvide",
+        "--conformance_config=conformance_proto.txt",
+        # TODO(michaelthomas): Enable once all errors are fixed. Yes, seriously.
+        # "--jscomp_error=reportUnknownTypes",
+    ],
+    externs_list = ["//javascript/externs:common"],
+    extra_inputs = [
+        "conformance_proto.txt",
+    ],
+    deps = [
+        "//transpiler/javatests/com/google/j2cl/transpiler/integration/emptyclass",
+    ],
+)
+
+build_test(
+    name = "compiled_test",
+    targets = [":integration_binary"],
 )
