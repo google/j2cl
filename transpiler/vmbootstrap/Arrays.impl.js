@@ -342,25 +342,6 @@ class Arrays {
 
   /**
    * @param {*} obj
-   * @param {*} other
-   * @return {boolean}
-   * @public
-   */
-  static m_equals__java_lang_Object__java_lang_Object(obj, other) {
-    return obj === other;
-  }
-
-  /**
-   * @param {*} obj
-   * @return {number}
-   * @public
-   */
-  static m_hashCode__java_lang_Object(obj) {
-    return Hashing.$getHashCode(/** @type {Object} */ (obj));
-  }
-
-  /**
-   * @param {*} obj
    * @return {?string}
    * @public
    */

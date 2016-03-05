@@ -4,7 +4,6 @@
 goog.module('vmbootstrap.JavaScriptObject$impl');
 
 
-let $Hashing = goog.require('nativebootstrap.Hashing$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
@@ -15,21 +14,6 @@ let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
  * JS objects.
  */
 class JavaScriptObject {
-  /**
-   * @param {*} obj
-   * @param {*} other
-   * @return {boolean}
-   * @public
-   */
-  static m_equals__Object__Object(obj, other) { return obj === other; }
-
-  /**
-   * @param {*} obj
-   * @return {number}
-   * @public
-   */
-  static m_hashCode__Object(obj) { return $Hashing.$getHashCode(obj); }
-
   /**
    * @param {*} obj
    * @return {Class}

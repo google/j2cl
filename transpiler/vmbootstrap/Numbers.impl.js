@@ -97,50 +97,6 @@ class Numbers {
   }
 
   /**
-   * @param {*} obj
-   * @param {*} other
-   * @return {boolean}
-   * @public
-   */
-  static m_equals__java_lang_Comparable__java_lang_Object(obj, other) {
-    Numbers.$clinit();
-    var type = typeof obj;
-    if (type == 'number') {
-      return Double.m_equals__java_lang_Double__java_lang_Object(
-          /**@type {?number}*/ (obj), other);
-    }
-    return /** @type {Object} */ (obj).m_equals__java_lang_Object(other);
-  }
-
-  /**
-   * @param {*} obj
-   * @return {number}
-   * @public
-   */
-  static m_hashCode__java_lang_Comparable(obj) {
-    Numbers.$clinit();
-    var type = typeof obj;
-    if (type == 'number') {
-      return Double.m_hashCode__java_lang_Double(/**@type {?number}*/ (obj));
-    }
-    return /** @type {Object} */ (obj).m_hashCode();
-  }
-
-  /**
-   * @param {*} obj
-   * @return {Class}
-   * @public
-   */
-  static m_getClass__java_lang_Number(obj) {
-    Numbers.$clinit();
-    var type = typeof obj;
-    if (type == 'number') {
-      return $double.$getClass();
-    }
-    return /** @type {Object} */ (obj).m_getClass();
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */

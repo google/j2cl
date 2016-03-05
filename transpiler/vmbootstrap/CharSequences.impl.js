@@ -66,36 +66,6 @@ class CharSequences {
 
   /**
    * @param {*} obj
-   * @param {*} other
-   * @return {boolean}
-   * @public
-   */
-  static m_equals__java_lang_CharSequence__java_lang_Object(obj, other) {
-    CharSequences.$clinit();
-    if (typeof obj == 'string') {
-      return String.m_equals__java_lang_String__java_lang_Object(
-          /**@type {?string}*/ (obj), other);
-    } else {
-      return obj.m_equals__java_lang_Object(other);
-    }
-  }
-
-  /**
-   * @param {*} obj
-   * @return {number}
-   * @public
-   */
-  static m_hashCode__java_lang_CharSequence(obj) {
-    CharSequences.$clinit();
-    if (typeof obj == 'string') {
-      return String.m_hashCode__java_lang_String(/**@type {?string}*/ (obj));
-    } else {
-      return obj.m_hashCode();
-    }
-  }
-
-  /**
-   * @param {*} obj
    * @return {Class}
    * @public
    */
@@ -118,7 +88,6 @@ class CharSequences {
     String = goog.module.get('gen.java.lang.String$impl');
   }
 }
-;
 
 
 /**

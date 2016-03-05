@@ -40,67 +40,6 @@ class Comparables {
   }
 
   /**
-   * @param {*} obj
-   * @param {*} other
-   * @return {boolean}
-   * @public
-   */
-  static m_equals__java_lang_Comparable__java_lang_Object(obj, other) {
-    Comparables.$clinit();
-    var type = typeof obj;
-    if (type == 'number') {
-      return Double.m_equals__java_lang_Double__java_lang_Object(
-          /**@type {?number}*/ (obj), other);
-    } else if (type == 'boolean') {
-      return Boolean.m_equals__java_lang_Boolean__java_lang_Object(
-          /**@type {?boolean} */ (obj), other);
-    } else if (type == 'string') {
-      return String.m_equals__java_lang_String__java_lang_Object(
-          /**@type {?string}*/ (obj), other);
-    } else {
-      return obj.m_equals__java_lang_Object(other);
-    }
-  }
-
-  /**
-   * @param {*} obj
-   * @return {number}
-   * @public
-   */
-  static m_hashCode__java_lang_Comparable(obj) {
-    Comparables.$clinit();
-    var type = typeof obj;
-    if (type == 'number') {
-      return Double.m_hashCode__java_lang_Double(/**@type {?number}*/ (obj));
-    } else if (type == 'boolean') {
-      return Boolean.m_hashCode__java_lang_Boolean(/**@type {boolean} */ (obj));
-    } else if (typeof obj == 'string') {
-      return String.m_hashCode__java_lang_String(/**@type {?string}*/ (obj));
-    } else {
-      return obj.m_hashCode();
-    }
-  }
-
-  /**
-   * @param {*} obj
-   * @return {Class}
-   * @public
-   */
-  static m_getClass__java_lang_Comparable(obj) {
-    Comparables.$clinit();
-    var type = typeof obj;
-    if (type == 'number') {
-      return $double.$getClass();
-    } else if (type == 'boolean') {
-      return $boolean.$getClass();
-    } else if (typeof obj == 'string') {
-      return String.$getClass();
-    } else {
-      return obj.m_getClass();
-    }
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
