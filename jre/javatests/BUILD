@@ -12,29 +12,15 @@ load("//build_def:jsni_to_j2cl_converter.bzl", "jsni_to_j2cl_converter")
 
 j2cl_source_copy(
     name = "emul_test_copy",
-    srcs = ["//third_party/java_src/gwt/svn/trunk/user:emul_test"],
+    srcs = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_test"],
     base_strip_path = "third_party/java_src/gwt/svn/trunk/user/test/",
-    excludes = [
-        "com/google/gwt/emultest/java8/util/OptionalTest.java",
-        "com/google/gwt/emultest/EmulJava8Suite.java",
-    ],
 )
 
 j2cl_source_copy(
-    name = "emul_test_javaemul_copy",
-    srcs = ["//third_party/java_src/gwt/svn/trunk/dev:emul"],
-    base_strip_path = "third_party/java_src/gwt/svn/trunk/dev/core/super/",
+    name = "java_emul_internal_copy",
+    srcs = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_internal"],
+    base_strip_path = "third_party/java_src/gwt/svn/trunk/user/super/com/google/gwt/emul/",
     excludes = ["javaemul/internal/EmulatedCharset.java"],
-)
-
-# Since the tests refer to javaemul.internal
-# we need these Java references to be valid, this is why we
-# are exposing the extra java_library.
-# The actual transpiled JavaScript code is coming from the
-# underlying JRE dep of the j2cl_library rule.
-java_library(
-    name = "javaemul_interal_java",
-    srcs = [":emul_test_javaemul_copy"],
 )
 
 jsni_to_j2cl_converter(
@@ -71,10 +57,8 @@ TEST_SRCS = [
 java_library(
     name = "emul_tests_lib",
     testonly = 1,
-    srcs = TEST_SRCS,
-    restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
+    srcs = TEST_SRCS + [":java_emul_internal_copy"],
     deps = [
-        ":javaemul_interal_java_library",
         "//third_party/java/gwt:gwt-jsinterop-annotations",
         "//third_party/java/junit",
     ],
@@ -84,11 +68,9 @@ java_test(
     name = "AllEmulTest_Java",
     size = "small",
     srcs = ["com/google/gwt/emultest/AllTests.java"],
-    restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
     test_class = "com.google.gwt.emultest.AllTests",
     deps = [
         ":emul_tests_lib",
-        ":javaemul_interal_java_library",
         "//third_party/java/junit",
     ],
 )
