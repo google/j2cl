@@ -19,6 +19,7 @@ class Exceptions {
    *
    * @param {AutoClosable} resource
    * @param {Throwable} currentException
+   * @return {Throwable}
    */
   static safeClose(resource, currentException) {
     if (resource == null) {
@@ -47,12 +48,12 @@ class Exceptions {
 
   /**
    * @param {Throwable} t
+   * @return {*}
    */
   static toJs(t) {
-    return t.backingJsObject;
+    return /** @type {Error} */ (t.backingJsObject);
   }
-
-};
+}
 
 
 /**

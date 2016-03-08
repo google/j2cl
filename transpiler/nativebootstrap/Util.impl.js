@@ -25,11 +25,14 @@ class Util {
    *
    * Unlike instanceof, this function operates on classes instead of
    * instances.
+   * @param {Function} fromClass
+   * @param {Function} toClass
+   * @return {boolean}
    * @public
    */
   static $canCastClass(fromClass, toClass) {
     return (fromClass != null &&
-            (fromClass == toClass || fromClass.prototype instanceof toClass));
+        (fromClass == toClass || fromClass.prototype instanceof toClass));
   }
 
   /**
@@ -55,7 +58,7 @@ class Util {
    * @public
    */
   static $clinit() {}
-};
+}
 
 
 /**
