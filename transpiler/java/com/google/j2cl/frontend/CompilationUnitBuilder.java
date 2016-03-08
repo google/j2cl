@@ -1597,7 +1597,7 @@ public class CompilationUnitBuilder {
             convertOuterClassReference(
                 JdtUtils.findCurrentTypeBinding(expression),
                 superclassBinding.getDeclaringClass(),
-                true);
+                false);
       }
       MethodCall superCall =
           MethodCall.createRegularMethodCall(qualifier, methodDescriptor, arguments);

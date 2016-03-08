@@ -182,6 +182,13 @@ public class AstUtils {
   }
 
   /**
+   * Returns whether other is a subtype of one.
+   */
+  public static boolean isSubType(TypeDescriptor one, TypeDescriptor other) {
+    return one == other || one != null && isSubType(one.getSuperTypeDescriptor(), other);
+  }
+
+  /**
    * The following is the cast table between primitive types. The cell marked as 'X'
    * indicates that no cast is needed.
    * <p>

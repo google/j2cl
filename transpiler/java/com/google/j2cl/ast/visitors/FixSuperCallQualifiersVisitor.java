@@ -85,7 +85,7 @@ public class FixSuperCallQualifiersVisitor extends AbstractRewriter {
     Expression qualifier = new ThisReference(typeDescriptor);
     TypeDescriptor currentTypeDescriptor = typeDescriptor;
     while (currentTypeDescriptor.getEnclosingTypeDescriptor() != null
-        && currentTypeDescriptor != outerTypeDescriptor) {
+        && !AstUtils.isSubType(currentTypeDescriptor, outerTypeDescriptor)) {
       qualifier =
           new FieldAccess(
               qualifier,
