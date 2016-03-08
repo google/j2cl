@@ -351,9 +351,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO: Move this to the ast in a normalization pass.
   private void renderIsInstanceMethod() {
-    if (javaType.isJsOverlayImpl()) {
-      renderIsInstanceForJsOverlayType();
-    } else if (javaType.isInterface()) {
+    if (javaType.isInterface()) {
       renderIsInstanceForInterfaceType();
     } else { // Not an interface so it is a Class.
       renderIsInstanceForClassType();
@@ -377,7 +375,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (javaType.getDescriptor().isJsFunctionImplementation()) {
       sb.appendln("return instance != null && instance.$is__%s;", mangledTypeName);
     } else {
-      String className = expressionToString(javaType.getDescriptor());
+      String className =
+          expressionToString(
+              javaType.isJsOverlayImpl()
+                  ? javaType.getNativeTypeDescriptor().getRawTypeDescriptor()
+                  : javaType.getDescriptor());
       sb.appendln("return instance instanceof %s;", className);
     }
     sb.appendln("}");
@@ -391,28 +393,14 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sb.appendln(" * @public");
     sb.appendln(" */");
     sb.appendln("static $isInstance(instance) {");
-    if (javaType.getDescriptor().isJsFunctionInterface()) {
+    if (javaType.isJsOverlayImpl()) {
+      sb.appendln("return true;");
+    } else if (javaType.getDescriptor().isJsFunctionInterface()) {
       sb.appendln("return instance != null && typeof instance == \"function\";");
     } else {
       sb.appendln("return instance != null && instance.$implements__%s;", mangledTypeName);
     }
     sb.appendln("}");
-  }
-
-  private void renderIsInstanceForJsOverlayType() {
-    sb.appendln("/**");
-    sb.appendln(" * Returns whether the provided instance is an instance of this class.");
-    sb.appendln(" * @return {boolean}");
-    sb.appendln(" * @public");
-    sb.appendln(" */");
-    if (javaType.isInterface()) {
-      sb.appendln("static $isInstance(instance) { return true; }");
-    } else {
-      String nativeClassName =
-          expressionToString(javaType.getNativeTypeDescriptor().getRawTypeDescriptor());
-      sb.appendln(
-          "static $isInstance(instance) { return instance instanceof %s; }", nativeClassName);
-    }
   }
 
   // TODO: Move this to the ast in a normalization pass.
