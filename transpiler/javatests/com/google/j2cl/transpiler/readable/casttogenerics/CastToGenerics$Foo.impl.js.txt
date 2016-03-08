@@ -1,0 +1,126 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics$Foo.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics$Foo$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let CastToGenerics = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+
+
+/**
+ * @template C_Foo_V
+ */
+class CastToGenerics$Foo extends Object {
+  /**
+   * Defines instance fields.
+   */
+  constructor() { super(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_Foo_V
+   * @return {!CastToGenerics$Foo<C_Foo_V>}
+   * @public
+   */
+  static $create() {
+    CastToGenerics$Foo.$clinit();
+    let $instance = new CastToGenerics$Foo;
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics$Foo();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics$Foo() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics$Foo();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof CastToGenerics$Foo;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, CastToGenerics$Foo);
+  }
+
+  /**
+   * @return {Class}
+   * @public
+   */
+  static $getClass() {
+    CastToGenerics$Foo.$clinit();
+    if (!CastToGenerics$Foo.$classCastToGenerics$Foo_) {
+      CastToGenerics$Foo.$classCastToGenerics$Foo_ = Class.$createForClass(
+          $Util.$generateId('Foo'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics$Foo'),
+          $Util.$generateId(
+              'com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.Foo'));
+    }
+    return CastToGenerics$Foo.$classCastToGenerics$Foo_;
+  }
+
+  /**
+   * @override
+   * @return {Class}
+   * @public
+   */
+  m_getClass() { return CastToGenerics$Foo.$getClass(); }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    CastToGenerics = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics$Foo() {
+  }
+};
+
+
+/**
+ * The class literal field.
+ * @private {Class}
+ */
+CastToGenerics$Foo.$classCastToGenerics$Foo_ = null;
+
+
+
+/**
+ * Export class.
+ */
+exports = CastToGenerics$Foo;
+//# sourceMappingURL=CastToGenerics$Foo.js.map

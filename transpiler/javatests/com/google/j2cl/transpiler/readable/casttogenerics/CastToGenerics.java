@@ -23,4 +23,10 @@ public class CastToGenerics<T, E extends Number> {
     c = (S[]) o;
     c = (V) o;
   }
+
+  public static <T> Foo<T> doSomething() {
+    return new Foo<T>() { };
+  }
+
+  public static class Foo<V> { }
 }

@@ -109,8 +109,11 @@ public class TypeProxyUtils {
           typeArgumentDescriptors.addAll(
               createTypeDescriptors(typeBinding.getDeclaringMethod().getTypeParameters()));
         }
-        typeArgumentDescriptors.addAll(
-            createTypeDescriptor(typeBinding.getDeclaringClass()).getTypeArgumentDescriptors());
+        if (typeBinding.getDeclaringMember() == null
+            || !Modifier.isStatic(typeBinding.getDeclaringMember().getModifiers())) {
+          typeArgumentDescriptors.addAll(
+              createTypeDescriptor(typeBinding.getDeclaringClass()).getTypeArgumentDescriptors());
+        }
       }
     }
     return typeArgumentDescriptors;

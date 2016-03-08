@@ -11,6 +11,8 @@ goog.module('gen.com.google.j2cl.transpiler.readable.casttogenerics.CastToGeneri
 let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let CastToGenerics$1 = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics$1$impl');
+let CastToGenerics$Foo = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics$Foo$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let Enum = goog.forwardDeclare('gen.java.lang.Enum$impl');
 let Error = goog.forwardDeclare('gen.java.lang.Error$impl');
@@ -86,6 +88,16 @@ class CastToGenerics extends Object {
   }
 
   /**
+   * @template M_T
+   * @return {CastToGenerics$Foo<M_T>}
+   * @public
+   */
+  static m_doSomething() {
+    CastToGenerics.$clinit();
+    return /**@type {!CastToGenerics$1<*>} */ (CastToGenerics$1.$create());
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @return {boolean}
    * @public
@@ -131,6 +143,10 @@ class CastToGenerics extends Object {
    * @public
    */
   static $clinit() {
+    CastToGenerics$1 = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics$1$impl');
+    CastToGenerics$Foo = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics$Foo$impl');
     Class = goog.module.get('gen.java.lang.Class$impl');
     Enum = goog.module.get('gen.java.lang.Enum$impl');
     Error = goog.module.get('gen.java.lang.Error$impl');
