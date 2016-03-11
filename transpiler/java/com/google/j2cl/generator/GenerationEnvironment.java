@@ -34,7 +34,7 @@ public class GenerationEnvironment {
    */
   private Map<String, String> aliasByTypeBinaryName = new HashMap<>();
   private final Map<Variable, String> aliasByVariable;
-  private TypeDescriptor clinitEnclosingTypeDescriptor;
+  private TypeDescriptor enclosingTypeDescriptor;
 
   public GenerationEnvironment(Collection<Import> imports, Map<Variable, String> aliasByVariable) {
     JsDocNameUtils.init();
@@ -56,16 +56,16 @@ public class GenerationEnvironment {
     return alias == null ? typeDescriptor.getClassName() : alias;
   }
 
-  public TypeDescriptor getClinitEnclosingTypeDescriptor() {
-    return clinitEnclosingTypeDescriptor;
+  public TypeDescriptor getEnclosingTypeDescriptor() {
+    return enclosingTypeDescriptor;
   }
 
   /**
    * Allows the template system to control whether static field references are generated to the
    * wrapping getter/setter or the private data field. Makes it possible to ensure that references
-   * are direct when inside of $clinit() methods.
+   * are direct when the reference site is internal to the same class..
    */
-  public void setClinitEnclosingTypeDescriptor(TypeDescriptor clinitEnclosingTypeDescriptor) {
-    this.clinitEnclosingTypeDescriptor = clinitEnclosingTypeDescriptor;
+  public void setEnclosingTypeDescriptor(TypeDescriptor enclosingTypeDescriptor) {
+    this.enclosingTypeDescriptor = enclosingTypeDescriptor;
   }
 }

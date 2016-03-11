@@ -199,6 +199,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private void renderTypeBody() {
     String extendsClause = GeneratorUtils.getExtendsClause(javaType, environment);
     sb.appendln("class %s %s{", className, extendsClause);
+    environment.setEnclosingTypeDescriptor(javaType.getDescriptor());
     renderConstructor();
     renderJavaTypeMethods();
     renderMarkImplementorMethod();
@@ -209,6 +210,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     renderStaticFieldGettersSetters();
     renderClinit();
     renderInit();
+    environment.setEnclosingTypeDescriptor(null);
     sb.appendln("};");
     sb.newLine();
     sb.newLine();
@@ -601,7 +603,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sb.appendln(" * Runs inline static field initializers.");
     sb.appendln(" * @public");
     sb.appendln(" */");
-    environment.setClinitEnclosingTypeDescriptor(javaType.getDescriptor());
     sb.appendln("static $clinit() {");
     if (GeneratorUtils.needRewriteClinit(javaType)) {
       // Set this method to reference an empty function so that it cannot be called again.
@@ -640,7 +641,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
     sb.appendln("}");
     sb.newLine();
-    environment.setClinitEnclosingTypeDescriptor(null);
   }
 
   // TODO: Move this to the ast in a normalization pass.

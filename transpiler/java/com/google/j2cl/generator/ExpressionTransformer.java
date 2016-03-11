@@ -170,15 +170,16 @@ public class ExpressionTransformer {
 
       @Override
       public String transformFieldAccess(FieldAccess fieldAccess) {
-        // When inside a $clinits, access static fields directly.
-        boolean insideEnclosingClassClinit =
-            fieldAccess
+        // When inside the same class, access static fields directly.
+        boolean insideSameEnclosingClass =
+            fieldAccess.getTarget().isStatic()
+             && fieldAccess
                 .getTarget()
                 .getEnclosingClassTypeDescriptor()
-                .equals(environment.getClinitEnclosingTypeDescriptor());
+                .equals(environment.getEnclosingTypeDescriptor());
         // No private backing field for compile time constants.
         boolean accessBackingPrivateField =
-            !fieldAccess.getTarget().isCompileTimeConstant() && insideEnclosingClassClinit;
+            !fieldAccess.getTarget().isCompileTimeConstant() && insideSameEnclosingClass;
 
         String fieldMangledName =
             ManglingNameUtils.getMangledName(fieldAccess.getTarget(), accessBackingPrivateField);

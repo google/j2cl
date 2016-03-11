@@ -79,16 +79,16 @@ class Color extends Enum {
   static valueOf(name) {
     Color.$clinit();
     if (Color
-            .f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ ==
+            .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ ==
         null) {
       Color
-          .f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
+          .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
           $Enums.createMapFromValues(Color.values());
     }
     return $Enums.getValueFromNameAndMap(
         name,
         Color
-            .f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_);
+            .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_);
   }
 
   /**
@@ -98,7 +98,16 @@ class Color extends Enum {
   static values() {
     Color.$clinit();
     return /**@type {Array<Color>} */ (
-        $Arrays.$init([Color.RED, Color.GREEN, Color.BLUE], Color));
+        $Arrays.$init(
+            [
+              Color
+                  .$f_RED__com_google_j2cl_transpiler_readable_jstypeenum_Color,
+              Color
+                  .$f_GREEN__com_google_j2cl_transpiler_readable_jstypeenum_Color,
+              Color
+                  .$f_BLUE__com_google_j2cl_transpiler_readable_jstypeenum_Color
+            ],
+            Color));
   }
 
   /**
