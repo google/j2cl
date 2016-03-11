@@ -368,6 +368,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     sb.appendln("/**");
     sb.appendln(" * Returns whether the provided instance is an instance of this class.");
+    sb.appendln(" * @param {*} instance");
     sb.appendln(" * @return {boolean}");
     sb.appendln(" * @public");
     sb.appendln(" */");
@@ -389,6 +390,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sb.appendln("/**");
     sb.appendln(" * Returns whether the provided instance is of a class that implements this");
     sb.appendln(" * interface.");
+    sb.appendln(" * @param {*} instance");
     sb.appendln(" * @return {boolean}");
     sb.appendln(" * @public");
     sb.appendln(" */");
