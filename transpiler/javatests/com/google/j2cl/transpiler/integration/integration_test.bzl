@@ -93,6 +93,8 @@ def integration_test(
       cmd="echo \"%s\" > $@" % opt_harness,
       executable=1,
   )
+
+  # NOTE: --closure_entry_point is not used to avoid hiding leaks in the size report.
   native.js_binary(
       name="optimized_js",
       srcs=["OptHarness.js"],
@@ -105,9 +107,6 @@ def integration_test(
           "--remove_unused_local_vars=ON",
           "--remove_unused_vars",
           "--variable_renaming=ALL",
-          "--remove_unused_constructor_properties=ON",
-          "--only_closure_dependencies",
-          "--closure_entry_point=gen.opt.Harness",
           "--jscomp_off=lateProvide",
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
@@ -129,9 +128,6 @@ def integration_test(
           "--pretty_print",
           "--property_renaming=OFF",
           "--variable_renaming=OFF",
-          "--remove_unused_constructor_properties=ON",
-          "--only_closure_dependencies",
-          "--closure_entry_point=gen.opt.Harness",
           "--jscomp_off=lateProvide",
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
@@ -149,8 +145,6 @@ def integration_test(
           "--pretty_print",
           "--property_renaming=OFF",
           "--variable_renaming=OFF",
-          "--only_closure_dependencies",
-          "--closure_entry_point=gen.opt.Harness",
           "--jscomp_off=lateProvide",
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
@@ -260,9 +254,6 @@ def integration_test(
           "--pretty_print",
           "--strict",
           "--variable_renaming=OFF",
-          "--remove_unused_constructor_properties=ON",
-          "--only_closure_dependencies",
-          "--closure_entry_point=gen.test.Harness",
           "--jscomp_off=lateProvide",
       ] + defs,
       deps=js_deps + [
