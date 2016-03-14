@@ -94,7 +94,11 @@ def integration_test(
       executable=1,
   )
 
-  # NOTE: --closure_entry_point is not used to avoid hiding leaks in the size report.
+  # NOTE: --closure_entry_point is not used (to avoid hiding leaks in the size
+  #       report).
+  # NOTE: --norewrite_polyfills *is* used so that size tracking only focuses on
+  #       size issues that are actionable outside of JSCompiler or are expected
+  #       to eventually be addressed inside of JSCompiler.
   native.js_binary(
       name="optimized_js",
       srcs=["OptHarness.js"],
@@ -106,6 +110,7 @@ def integration_test(
           "--remove_dead_code",
           "--remove_unused_local_vars=ON",
           "--remove_unused_vars",
+          "--norewrite_polyfills",
           "--variable_renaming=ALL",
           "--jscomp_off=lateProvide",
       ] + defs,
@@ -125,6 +130,7 @@ def integration_test(
           "--remove_dead_code",
           "--remove_unused_local_vars=ON",
           "--remove_unused_vars",
+          "--norewrite_polyfills",
           "--pretty_print",
           "--property_renaming=OFF",
           "--variable_renaming=OFF",
@@ -252,6 +258,7 @@ def integration_test(
           "--language_out=ECMASCRIPT5",
           "--property_renaming=OFF",
           "--pretty_print",
+          "--norewrite_polyfills",
           "--strict",
           "--variable_renaming=OFF",
           "--jscomp_off=lateProvide",
