@@ -53,7 +53,9 @@ JAVA8_BOOT_CLASS_PATH = ("--javac_bootclasspath="
 def build_optimized_tests(cwd=None):
   """Blaze builds all integration tests in parallel."""
   process_util.run_cmd_get_output(
-      ["blaze", "build", TEST_TARGET_PATTERN, JAVA8_BOOT_CLASS_PATH], cwd=cwd)
+      ["blaze", "build", TEST_TARGET_PATTERN, JAVA8_BOOT_CLASS_PATH,
+       "--nocheck_visibility"],
+      cwd=cwd)
 
 
 def get_obfuscated_optimized_test_file(test_name):

@@ -95,7 +95,7 @@ def blaze_build(target_names):
   args = ["blaze", "build"]
   args += [EXAMPLES_DIR + target_name + ":" + target_name + "_j2cl_transpile"
            for target_name in target_names]
-  args += [JAVA8_BOOT_CLASS_PATH]
+  args += [JAVA8_BOOT_CLASS_PATH, "--nocheck_visibility"]
   return run_cmd_get_output(args)
 
 
@@ -166,7 +166,7 @@ def gather_closure_warnings():
   # Blaze build parallelize all the work. Saves a lot of time.
   build_logs = run_cmd_get_output(
       ["blaze", "build", READABLE_TARGET_PATTERN, INTEGRATION_TARGET_PATTERN,
-       JAVA8_BOOT_CLASS_PATH], include_stderr=True)
+       JAVA8_BOOT_CLASS_PATH, "--nocheck_visibility"], include_stderr=True)
   build_logs = build_logs.split("____From Compiling JavaScript ")[1:]
   build_logs = filter(None, build_logs)
   for build_log in build_logs:
