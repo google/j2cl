@@ -18,7 +18,6 @@ import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsInteropUtils;
-import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -83,23 +82,21 @@ public class EnumMethodsCreator {
             .build();
     this.valuesMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
-            .isRaw(jsType)
             .isStatic(true)
             .enclosingClassTypeDescriptor(enumType.getDescriptor())
             .methodName(VALUES_METHOD_NAME)
             .returnTypeDescriptor(enumType.getDescriptor().getForArray(1))
             .parameterTypeDescriptors(Arrays.asList(new TypeDescriptor[0]))
-            .jsInfo(jsType ? JsInfo.create(JsMemberType.METHOD, null, null, false) : JsInfo.NONE)
+            .jsInfo(jsType ? JsInfo.RAW : JsInfo.NONE)
             .build();
     this.valueOfMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
-            .isRaw(jsType)
             .isStatic(true)
             .enclosingClassTypeDescriptor(enumType.getDescriptor())
             .methodName(VALUE_OF_METHOD_NAME)
             .returnTypeDescriptor(enumType.getDescriptor())
             .parameterTypeDescriptors(Arrays.asList(TypeDescriptors.get().javaLangString))
-            .jsInfo(jsType ? JsInfo.create(JsMemberType.METHOD, null, null, false) : JsInfo.NONE)
+            .jsInfo(jsType ? JsInfo.RAW : JsInfo.NONE)
             .build();
   }
 
@@ -129,7 +126,7 @@ public class EnumMethodsCreator {
         new Variable("name", TypeDescriptors.get().javaLangString, false, true);
     MethodDescriptor createMapMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
-            .isRaw(true)
+            .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .enclosingClassTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
             .methodName(CREATE_MAP_METHOD_NAME)
@@ -138,7 +135,7 @@ public class EnumMethodsCreator {
             .build();
     MethodDescriptor getMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
-            .isRaw(true)
+            .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .enclosingClassTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
             .methodName(GET_VALUE_METHOD_NAME)

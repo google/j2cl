@@ -23,6 +23,7 @@ import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptorBuilder;
@@ -83,7 +84,7 @@ public class NormalizeLongsVisitor extends AbstractRewriter {
 
     MethodDescriptor longUtilsMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
-            .isRaw(true)
+            .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .enclosingClassTypeDescriptor(BootstrapType.LONGS.getDescriptor())
             .methodName(getLongOperationFunctionName(operator))
@@ -114,7 +115,7 @@ public class NormalizeLongsVisitor extends AbstractRewriter {
 
     MethodDescriptor longUtilsMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
-            .isRaw(true)
+            .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .enclosingClassTypeDescriptor(BootstrapType.LONGS.getDescriptor())
             .methodName(getLongOperationFunctionName(operator))

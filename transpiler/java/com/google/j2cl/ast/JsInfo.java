@@ -41,6 +41,8 @@ public abstract class JsInfo {
    */
   public static final JsInfo NONE = create(JsMemberType.NONE, null, null, false);
 
+  public static final JsInfo RAW = create(JsMemberType.METHOD, null, null, false);
+
   private static Interner<JsInfo> interner;
 
   /**

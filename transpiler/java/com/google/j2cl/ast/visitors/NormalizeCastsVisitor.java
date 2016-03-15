@@ -23,6 +23,7 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptorBuilder;
@@ -73,7 +74,7 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
 
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
-            .isRaw(true)
+            .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .enclosingClassTypeDescriptor(BootstrapType.CASTS.getDescriptor())
             .methodName("to")
@@ -114,7 +115,7 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
     TypeDescriptor arrayCastTypeDescriptor = castExpression.getCastTypeDescriptor();
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
-            .isRaw(true)
+            .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .enclosingClassTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
             .methodName("$castTo")
@@ -151,7 +152,7 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
         castTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor().isNative());
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
-            .isRaw(true)
+            .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .enclosingClassTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
             .methodName("$castToNative")

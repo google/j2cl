@@ -77,8 +77,6 @@ public class JdtMethodUtils {
             : methodBinding.getName();
 
     JsInfo jsInfo = computeJsInfo(methodBinding);
-    boolean isRaw =
-        !JsInteropUtils.isJsOverlay(methodBinding) && isOrOverridesJsMember(methodBinding);
 
     TypeDescriptor returnTypeDescriptor =
         TypeProxyUtils.createTypeDescriptor(methodBinding.getReturnType());
@@ -106,7 +104,6 @@ public class JdtMethodUtils {
 
     return MethodDescriptor.create(
         isStatic,
-        isRaw,
         visibility,
         enclosingClassTypeDescriptor,
         methodName,

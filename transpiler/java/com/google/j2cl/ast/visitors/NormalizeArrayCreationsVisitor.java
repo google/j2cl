@@ -23,6 +23,7 @@ import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptorBuilder;
@@ -64,7 +65,7 @@ public class NormalizeArrayCreationsVisitor extends AbstractRewriter {
     MethodDescriptor arrayCreateMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
             .enclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
-            .isRaw(true)
+            .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .methodName("$create")
             .parameterTypeDescriptors(
@@ -96,7 +97,7 @@ public class NormalizeArrayCreationsVisitor extends AbstractRewriter {
     MethodDescriptor arrayInitMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
             .enclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
-            .isRaw(true)
+            .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .methodName("$init")
             .parameterTypeDescriptors(

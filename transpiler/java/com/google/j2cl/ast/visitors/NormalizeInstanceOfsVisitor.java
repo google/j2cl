@@ -22,6 +22,7 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.InstanceOfExpression;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptorBuilder;
@@ -62,7 +63,7 @@ public class NormalizeInstanceOfsVisitor extends AbstractRewriter {
 
     MethodDescriptor isInstanceMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
-            .isRaw(true)
+            .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .enclosingClassTypeDescriptor(checkTypeDescriptor)
             .methodName("$isInstance")
@@ -90,7 +91,7 @@ public class NormalizeInstanceOfsVisitor extends AbstractRewriter {
     TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
     MethodDescriptor isInstanceMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
-            .isRaw(true)
+            .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .enclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
             .methodName("$instanceIsOfType")
@@ -121,7 +122,7 @@ public class NormalizeInstanceOfsVisitor extends AbstractRewriter {
 
     MethodDescriptor isInstanceMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
-            .isRaw(true)
+            .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .enclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
             .methodName("$instanceIsOfNative")

@@ -25,6 +25,7 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.IfStatement;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptorBuilder;
@@ -113,7 +114,7 @@ public class NormalizeTryWithResourceVisitor extends AbstractRewriter {
   private List<Statement> removeResourceDeclarations(TryStatement tryStatement) {
     MethodDescriptor safeClose =
         MethodDescriptorBuilder.fromDefault()
-            .isRaw(true)
+            .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .enclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
             .methodName("safeClose")

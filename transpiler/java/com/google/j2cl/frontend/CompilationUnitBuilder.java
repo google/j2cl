@@ -51,6 +51,7 @@ import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.LabeledStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
@@ -1110,7 +1111,7 @@ public class CompilationUnitBuilder {
 
       MethodDescriptor methodDescriptor =
           MethodDescriptorBuilder.fromDefault()
-              .isRaw(true)
+              .jsInfo(JsInfo.RAW)
               .visibility(Visibility.PRIVATE)
               .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
               .methodName(methodName)
@@ -1638,7 +1639,7 @@ public class CompilationUnitBuilder {
       // <ClassLiteralClass>.$getClass()
       MethodDescriptor classMethodDescriptor =
           MethodDescriptorBuilder.fromDefault()
-              .isRaw(true)
+              .jsInfo(JsInfo.RAW)
               .isStatic(true)
               .enclosingClassTypeDescriptor(literalTypeDescriptor)
               .methodName("$getClass")
@@ -1651,7 +1652,7 @@ public class CompilationUnitBuilder {
         TypeDescriptor literalTypeDescriptor, TypeDescriptor javaLangClassTypeDescriptor) {
       MethodDescriptor classMethodDescriptor =
           MethodDescriptorBuilder.fromDefault()
-              .isRaw(true)
+              .jsInfo(JsInfo.RAW)
               .isStatic(true)
               .enclosingClassTypeDescriptor(literalTypeDescriptor.getLeafTypeDescriptor())
               .methodName("$getClass")
@@ -1660,7 +1661,7 @@ public class CompilationUnitBuilder {
 
       MethodDescriptor forArrayMethodDescriptor =
           MethodDescriptorBuilder.fromDefault()
-              .isRaw(true)
+              .jsInfo(JsInfo.RAW)
               .enclosingClassTypeDescriptor(javaLangClassTypeDescriptor)
               .methodName("$forArray")
               .parameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().primitiveInt))

@@ -53,10 +53,8 @@ public class ManglingNameUtils {
       String jsPropertyName = methodDescriptor.getJsPropertyName();
       return getterSetterPrefix + " " + jsPropertyName;
     }
-    if (methodDescriptor.isRaw()) {
-      return methodDescriptor.getJsName() == null
-          ? methodDescriptor.getMethodName()
-          : methodDescriptor.getJsName();
+    if (methodDescriptor.isJsMethod()) {
+      return methodDescriptor.getJsName();
     }
     String suffix;
     switch (methodDescriptor.getVisibility()) {

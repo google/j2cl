@@ -23,6 +23,7 @@ import com.google.j2cl.ast.CatchClause;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.IfStatement;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptorBuilder;
@@ -161,7 +162,7 @@ public class NormalizeCatchClausesVisitor extends AbstractRewriter {
         MethodDescriptorBuilder.fromDefault()
             .methodName(MethodDescriptor.IS_INSTANCE_METHOD_NAME)
             .isStatic(true)
-            .isRaw(true)
+            .jsInfo(JsInfo.RAW)
             .enclosingClassTypeDescriptor(descriptor)
             .visibility(Visibility.PUBLIC)
             .parameterTypeDescriptors(Arrays.asList(TypeDescriptors.get().javaLangObject))

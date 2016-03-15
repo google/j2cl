@@ -100,7 +100,6 @@ public class BridgeMethodsCreator {
               MethodDescriptor newMethodDescriptor =
                   MethodDescriptorBuilder.from(method.getDescriptor())
                       .jsInfo(JsInfo.NONE)
-                      .isRaw(false)
                       .build();
               return new Method(
                   newMethodDescriptor,
@@ -298,7 +297,7 @@ public class BridgeMethodsCreator {
     // The MethodDescriptor of the delegated method.
     MethodDescriptor targetMethodDescriptor = JdtUtils.createMethodDescriptor(targetMethod);
     JsInfo targetMethodJsInfo = targetMethodDescriptor.getJsInfo();
-    boolean isRaw = targetMethodDescriptor.isRaw();
+
     // If a JsFunction method needs a bridge, only the bridge method is a JsFunction method, and it
     // delegates to the *real* implementation, which is not a JsFunction method.
     // If both a method and the bridge method are JsMethod, only the bridge method is a JsMethod,
@@ -308,12 +307,10 @@ public class BridgeMethodsCreator {
             && targetMethodDescriptor.getEnclosingClassTypeDescriptor()
                 == bridgeMethodDescriptor.getEnclosingClassTypeDescriptor())) {
       targetMethodJsInfo = JsInfo.NONE;
-      isRaw = false;
     }
     targetMethodDescriptor =
         MethodDescriptorBuilder.from(targetMethodDescriptor)
             .jsInfo(targetMethodJsInfo)
-            .isRaw(isRaw)
             .build();
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();

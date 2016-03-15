@@ -22,7 +22,6 @@ import com.google.common.collect.ImmutableList;
  */
 public class MethodDescriptorBuilder {
   private boolean isStatic;
-  private boolean isRaw;
   private Visibility visibility;
   private TypeDescriptor enclosingClassTypeDescriptor;
   private String methodName;
@@ -50,7 +49,6 @@ public class MethodDescriptorBuilder {
   public static MethodDescriptorBuilder from(MethodDescriptor methodDescriptor) {
     MethodDescriptorBuilder builder = new MethodDescriptorBuilder();
     builder.isStatic = methodDescriptor.isStatic();
-    builder.isRaw = methodDescriptor.isRaw();
     builder.visibility = methodDescriptor.getVisibility();
     builder.enclosingClassTypeDescriptor = methodDescriptor.getEnclosingClassTypeDescriptor();
     builder.methodName = methodDescriptor.getMethodName();
@@ -101,11 +99,6 @@ public class MethodDescriptorBuilder {
     return this;
   }
 
-  public MethodDescriptorBuilder isRaw(boolean isRaw) {
-    this.isRaw = isRaw;
-    return this;
-  }
-
   public MethodDescriptorBuilder typeParameterDescriptors(
       Iterable<TypeDescriptor> typeParameterDescriptors) {
     this.typeParameterDescriptors = ImmutableList.copyOf(typeParameterDescriptors);
@@ -125,7 +118,6 @@ public class MethodDescriptorBuilder {
   public MethodDescriptor build() {
     return MethodDescriptor.create(
         isStatic,
-        isRaw,
         visibility,
         enclosingClassTypeDescriptor,
         methodName,

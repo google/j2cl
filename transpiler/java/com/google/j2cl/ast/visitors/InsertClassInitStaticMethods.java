@@ -19,6 +19,7 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodBuilder;
 import com.google.j2cl.ast.MethodCall;
@@ -42,7 +43,7 @@ public class InsertClassInitStaticMethods {
       if (node.getDescriptor().isStatic()) {
         MethodDescriptor clinitDescriptor =
             MethodDescriptorBuilder.fromDefault()
-                .isRaw(true)
+                .jsInfo(JsInfo.RAW)
                 .isStatic(true)
                 .enclosingClassTypeDescriptor(
                     node.getDescriptor().getEnclosingClassTypeDescriptor())

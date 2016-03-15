@@ -21,6 +21,7 @@ import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptorBuilder;
@@ -145,7 +146,7 @@ public class InsertUnderflowOverflowConversionVisitor extends ConversionContextV
         String.format("$to%s", AstUtils.toProperCase(toTypeDescriptor.getSimpleName()));
     MethodDescriptor overflowMethodDescriptor =
         MethodDescriptorBuilder.fromDefault()
-            .isRaw(true)
+            .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .enclosingClassTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
             .methodName(overflowMethodName)

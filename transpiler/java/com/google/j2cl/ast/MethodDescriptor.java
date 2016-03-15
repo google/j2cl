@@ -43,7 +43,6 @@ public abstract class MethodDescriptor extends Node implements Member {
    */
   public static MethodDescriptor create(
       boolean isStatic,
-      boolean isRaw,
       Visibility visibility,
       TypeDescriptor enclosingClassTypeDescriptor,
       String methodName,
@@ -58,7 +57,6 @@ public abstract class MethodDescriptor extends Node implements Member {
         .intern(
             new AutoValue_MethodDescriptor(
                 isStatic,
-                isRaw,
                 visibility,
                 enclosingClassTypeDescriptor,
                 methodName,
@@ -80,12 +78,6 @@ public abstract class MethodDescriptor extends Node implements Member {
 
   @Override
   public abstract boolean isStatic();
-
-  /**
-   * Returns whether this is a Raw reference. Raw references are not mangled in the output and
-   * thus can be used to describe reference to JS apis.
-   */
-  public abstract boolean isRaw();
 
   public abstract Visibility getVisibility();
 

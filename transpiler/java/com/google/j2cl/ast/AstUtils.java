@@ -68,7 +68,7 @@ public class AstUtils {
   public static MethodDescriptor createUtilSameMethodDescriptor() {
     return MethodDescriptorBuilder.fromDefault()
         .isStatic(true)
-        .isRaw(true)
+        .jsInfo(JsInfo.RAW)
         .enclosingClassTypeDescriptor(BootstrapType.NATIVE_EQUALITY.getDescriptor())
         .methodName(MethodDescriptor.SAME_METHOD_NAME)
         .returnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
@@ -84,7 +84,7 @@ public class AstUtils {
   public static MethodDescriptor createUtilNotSameMethodDescriptor() {
     return MethodDescriptorBuilder.fromDefault()
         .isStatic(true)
-        .isRaw(true)
+        .jsInfo(JsInfo.RAW)
         .enclosingClassTypeDescriptor(BootstrapType.NATIVE_EQUALITY.getDescriptor())
         .methodName(MethodDescriptor.NOT_SAME_METHOD_NAME)
         .returnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
@@ -405,7 +405,6 @@ public class AstUtils {
                     Arrays.asList(sourceTypeDescriptor), // add the first parameter type.
                     targetMethodDescriptor.getParameterTypeDescriptors()))
             .isStatic(true)
-            .isRaw(false)
             .jsInfo(JsInfo.NONE)
             .build();
 

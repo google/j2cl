@@ -138,6 +138,7 @@ public class JsInteropUtils {
     IAnnotationBinding jsTypeAnnotation = getJsTypeAnnotation(methodBinding.getDeclaringClass());
     // In native @JsType all members (regardless of visibility) is implicit JsProperty/JsMethod.
     if (jsTypeAnnotation != null
+        && !isJsOverlay
         && (Modifier.isPublic(methodBinding.getModifiers())
             || JsInteropUtils.isNative(jsTypeAnnotation))) {
       return JsInfo.create(
