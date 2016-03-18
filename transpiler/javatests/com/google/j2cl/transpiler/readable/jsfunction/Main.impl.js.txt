@@ -62,10 +62,9 @@ class Main extends Object {
    * @public
    */
   m_test() {
-    let func = /**@type {function(number):number} */ (
-        $Util.$makeLambdaFunction(
-            MyJsFunctionImpl.prototype.m_foo__int, MyJsFunctionImpl.$create(),
-            MyJsFunctionImpl.$copy));
+    let func = /**@type {function(number):number} */ ($Util.$makeLambdaFunction(
+        MyJsFunctionImpl.prototype.m_foo__int, MyJsFunctionImpl.$create(),
+        MyJsFunctionImpl.$copy));
     func(10);
     Main.callAsFunction(func, 10);
     Main.m_fun__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionInterface__int(

@@ -130,13 +130,13 @@ class Main extends Object {
             Main$A.prototype.m_apply__java_lang_Object__java_lang_Number,
             Main$A.$create(), Main$A.$copy));
     Main.m_callGenericInterface__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$ApplyFunction__java_lang_Object__java_lang_Number(
-        foo, "a", Integer.m_valueOf__int(1));
+        foo, 'a', Integer.m_valueOf__int(1));
     Main.m_callGenericInterface__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$ApplyFunction__java_lang_Object__java_lang_Number(
         bar, 1.1, 1.1);
     Main.m_callParametricInterface__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$ApplyFunction__java_lang_String(
-        foo, "a");
+        foo, 'a');
     Main.m_callParametricWithTypeVariable__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$ApplyFunction__java_lang_Object__java_lang_Number(
-        foo, "a", Integer.m_valueOf__int(1));
+        foo, 'a', Integer.m_valueOf__int(1));
     Main.m_callParametricWithTypeVariable__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$ApplyFunction__java_lang_Object__java_lang_Number(
         bar, 1.1, 1.1);
     Main.m_callImplementorGeneric__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$B__java_lang_Object__java_lang_Integer(
@@ -150,14 +150,13 @@ class Main extends Object {
             $Util.$makeLambdaFunction(
                 Main$B.prototype.m_apply__java_lang_Object__java_lang_Number,
                 Main$B.$create(), Main$B.$copy)),
-        "");
-    foo("a", Integer.m_valueOf__int(1));
+        '');
+    foo('a', Integer.m_valueOf__int(1));
     bar(1.1, 1.1);
-    Main.callOnFunction(
-        /**@type {function(?number, ?number):?number} */ (
-            $Util.$makeLambdaFunction(
-                Main$A.prototype.m_apply__java_lang_Object__java_lang_Number,
-                Main$A.$create(), Main$A.$copy)));
+    Main.callOnFunction(/**@type {function(?number, ?number):?number} */ (
+        $Util.$makeLambdaFunction(
+            Main$A.prototype.m_apply__java_lang_Object__java_lang_Number,
+            Main$A.$create(), Main$A.$copy)));
   }
 
   /**
@@ -186,18 +185,15 @@ class Main extends Object {
    */
   static m_testNewInstance() {
     Main.$clinit();
-    let b1 = /**@type {!window.Function} */ (
-        $Util.$makeLambdaFunction(
-            Main$B.prototype.m_apply__java_lang_Object__java_lang_Number,
-            Main$B.$create(), Main$B.$copy));
-    let b2 = /**@type {window.Function} */ (
-        $Casts.to(
-            /**@type {function(?string, Integer):?string} */ (
-                $Util.$makeLambdaFunction(
-                    Main$B.prototype
-                        .m_apply__java_lang_Object__java_lang_Number,
-                    Main$B.$create(), Main$B.$copy)),
-            Main$B));
+    let b1 = /**@type {!window.Function} */ ($Util.$makeLambdaFunction(
+        Main$B.prototype.m_apply__java_lang_Object__java_lang_Number,
+        Main$B.$create(), Main$B.$copy));
+    let b2 = /**@type {window.Function} */ ($Casts.to(
+        /**@type {function(?string, Integer):?string} */ (
+            $Util.$makeLambdaFunction(
+                Main$B.prototype.m_apply__java_lang_Object__java_lang_Number,
+                Main$B.$create(), Main$B.$copy)),
+        Main$B));
     let af1 = /**@type {function(?number, ?number):?number} */ (
         $Util.$makeLambdaFunction(
             Main$A.prototype.m_apply__java_lang_Object__java_lang_Number,

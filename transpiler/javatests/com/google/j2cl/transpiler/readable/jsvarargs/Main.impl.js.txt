@@ -184,9 +184,8 @@ class Main extends Object {
     Main.f2();
     Main.generics(/**@type {!Array<number>} */ ($Arrays.$init([], $int)));
     let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
-    let integers = /**@type {!Array<Integer>} */ (
-        $Arrays.$init(
-            [Integer.m_valueOf__int(1), Integer.m_valueOf__int(2)], Integer));
+    let integers = /**@type {!Array<Integer>} */ ($Arrays.$init(
+        [Integer.m_valueOf__int(1), Integer.m_valueOf__int(2)], Integer));
     Main.f2(...ints);
     Main.f2(...ints);
     Main.generics(...integers);
@@ -225,10 +224,9 @@ class Main extends Object {
    * @public
    */
   m_testJsFunction() {
-    let a = /**@type {function(number, ...*):*} */ (
-        $Util.$makeLambdaFunction(
-            Main$AFunction.prototype.m_f1__int__arrayOf_java_lang_Object,
-            Main$AFunction.$create(), Main$AFunction.$copy));
+    let a = /**@type {function(number, ...*):*} */ ($Util.$makeLambdaFunction(
+        Main$AFunction.prototype.m_f1__int__arrayOf_java_lang_Object,
+        Main$AFunction.$create(), Main$AFunction.$copy));
     let o1 = Object.$create();
     let o2 = Object.$create();
     a(0, o1, o2);

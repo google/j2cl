@@ -94,9 +94,9 @@ class InnerClassInitOrder extends Object {
   m_testOuterThisFromSuperCall() {
     this.m_$create_InnerClassInitOrder$OuterRefFromSuperCtorCall_$pp_com_google_j2cl_transpiler_readable_innerclassinitorder();
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            (this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder ==
-             100));
+        $Asserts.$assert((
+            this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder ==
+            100));
   }
 
   /**
@@ -106,9 +106,9 @@ class InnerClassInitOrder extends Object {
   m_testOuterThisFromThisCall() {
     this.m_$create_InnerClassInitOrder$OuterRefFromThisCtorCall();
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            (this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder ==
-             1100));
+        $Asserts.$assert((
+            this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder ==
+            1100));
   }
 
   /**
@@ -118,29 +118,29 @@ class InnerClassInitOrder extends Object {
   m_testExtendsNested() {
     let o = InnerClassInitOrder$ESOuter.$create();
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            (1 ==
-             o.m_$create_InnerClassInitOrder$ESOuter$ESInner()
-                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESOuter$ESInner));
+        $Asserts.$assert((
+            1 ==
+            o.m_$create_InnerClassInitOrder$ESOuter$ESInner()
+                .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESOuter$ESInner));
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            (2 ==
-             o.m_$create_InnerClassInitOrder$ESOuter$ESInner__int(2)
-                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESOuter$ESInner));
+        $Asserts.$assert((
+            2 ==
+            o.m_$create_InnerClassInitOrder$ESOuter$ESInner__int(2)
+                .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESOuter$ESInner));
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            (1 ==
-             InnerClassInitOrder$ESInnerSubclass
-                 .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESOuter(
-                     o)
-                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESOuter$ESInner));
+        $Asserts.$assert((
+            1 ==
+            InnerClassInitOrder$ESInnerSubclass
+                .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESOuter(
+                    o)
+                .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESOuter$ESInner));
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            (2 ==
-             InnerClassInitOrder$ESInnerSubclass
-                 .$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESOuter(
-                     2, o)
-                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESOuter$ESInner));
+        $Asserts.$assert((
+            2 ==
+            InnerClassInitOrder$ESInnerSubclass
+                .$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESOuter(
+                    2, o)
+                .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESOuter$ESInner));
   }
 
   /**
@@ -151,31 +151,31 @@ class InnerClassInitOrder extends Object {
     let o = /**@type {!InnerClassInitOrder$ESWGOuter<?string>} */ (
         InnerClassInitOrder$ESWGOuter.$create());
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            (1 ==
-             /**@type {!InnerClassInitOrder$ESWGOuter$ESWGInner<?string>} */ (
-                 o.m_$create_InnerClassInitOrder$ESWGOuter$ESWGInner())
-                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter$ESWGInner));
+        $Asserts.$assert((
+            1 ==
+            /**@type {!InnerClassInitOrder$ESWGOuter$ESWGInner<?string>} */ (
+                o.m_$create_InnerClassInitOrder$ESWGOuter$ESWGInner())
+                .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter$ESWGInner));
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            (2 ==
-             /**@type {!InnerClassInitOrder$ESWGOuter$ESWGInner<?string>} */ (
-                 o.m_$create_InnerClassInitOrder$ESWGOuter$ESWGInner__int(2))
-                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter$ESWGInner));
+        $Asserts.$assert((
+            2 ==
+            /**@type {!InnerClassInitOrder$ESWGOuter$ESWGInner<?string>} */ (
+                o.m_$create_InnerClassInitOrder$ESWGOuter$ESWGInner__int(2))
+                .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter$ESWGInner));
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            (1 ==
-             InnerClassInitOrder$ESWGInnerSubclass
-                 .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter(
-                     o)
-                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter$ESWGInner));
+        $Asserts.$assert((
+            1 ==
+            InnerClassInitOrder$ESWGInnerSubclass
+                .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter(
+                    o)
+                .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter$ESWGInner));
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            (2 ==
-             InnerClassInitOrder$ESWGInnerSubclass
-                 .$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter(
-                     2, o)
-                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter$ESWGInner));
+        $Asserts.$assert((
+            2 ==
+            InnerClassInitOrder$ESWGInnerSubclass
+                .$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter(
+                    2, o)
+                .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter$ESWGInner));
   }
 
   /**
@@ -186,41 +186,41 @@ class InnerClassInitOrder extends Object {
     let p1 = /**@type {!InnerClassInitOrder$P1<*>} */ (
         InnerClassInitOrder$P1.$create());
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            (1 ==
-             p1.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1));
+        $Asserts.$assert((
+            1 ==
+            p1.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1));
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            (2 ==
-             /**@type {!InnerClassInitOrder$P1<*>} */ (
-                 InnerClassInitOrder$P1.$create__int(2))
-                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1));
+        $Asserts.$assert((
+            2 ==
+            /**@type {!InnerClassInitOrder$P1<*>} */ (
+                InnerClassInitOrder$P1.$create__int(2))
+                .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1));
     let p2 = /**@type {!InnerClassInitOrder$P1$P2<*>} */ (
         p1.m_$create_InnerClassInitOrder$P1$P2_$pp_com_google_j2cl_transpiler_readable_innerclassinitorder());
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            (1 ==
-             p2.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1));
+        $Asserts.$assert((
+            1 ==
+            p2.f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1));
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            (2 ==
-             /**@type {!InnerClassInitOrder$P1$P2<*>} */ (
-                 p1.m_$create_InnerClassInitOrder$P1$P2__int_$pp_com_google_j2cl_transpiler_readable_innerclassinitorder(
-                     2))
-                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1));
+        $Asserts.$assert((
+            2 ==
+            /**@type {!InnerClassInitOrder$P1$P2<*>} */ (
+                p1.m_$create_InnerClassInitOrder$P1$P2__int_$pp_com_google_j2cl_transpiler_readable_innerclassinitorder(
+                    2))
+                .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1));
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            (1 ==
-             /**@type {!InnerClassInitOrder$P1$P2$P3<*>} */ (
-                 p2.m_$create_InnerClassInitOrder$P1$P2$P3_$pp_com_google_j2cl_transpiler_readable_innerclassinitorder())
-                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1));
+        $Asserts.$assert((
+            1 ==
+            /**@type {!InnerClassInitOrder$P1$P2$P3<*>} */ (
+                p2.m_$create_InnerClassInitOrder$P1$P2$P3_$pp_com_google_j2cl_transpiler_readable_innerclassinitorder())
+                .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1));
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            (2 ==
-             /**@type {!InnerClassInitOrder$P1$P2$P3<*>} */ (
-                 p2.m_$create_InnerClassInitOrder$P1$P2$P3__int_$pp_com_google_j2cl_transpiler_readable_innerclassinitorder(
-                     2))
-                 .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1));
+        $Asserts.$assert((
+            2 ==
+            /**@type {!InnerClassInitOrder$P1$P2$P3<*>} */ (
+                p2.m_$create_InnerClassInitOrder$P1$P2$P3__int_$pp_com_google_j2cl_transpiler_readable_innerclassinitorder(
+                    2))
+                .f_value__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1));
   }
 
   /**
@@ -230,9 +230,9 @@ class InnerClassInitOrder extends Object {
   m_testInnerClassInitialization() {
     this.m_$create_InnerClassInitOrder$InnerClass_$pp_com_google_j2cl_transpiler_readable_innerclassinitorder();
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            (this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder ==
-             1111));
+        $Asserts.$assert((
+            this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder ==
+            1111));
   }
 
   /**
@@ -254,9 +254,9 @@ class InnerClassInitOrder extends Object {
       theAp.m_act();
     }
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            (this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder ==
-             1156));
+        $Asserts.$assert((
+            this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder ==
+            1156));
   }
 
   /**
@@ -310,15 +310,15 @@ class InnerClassInitOrder extends Object {
    */
   m_testSuperDispatch() {
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            (1 ==
-             this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_
-                 .m_checkDispatchFromSub1()));
+        $Asserts.$assert((
+            1 ==
+            this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_
+                .m_checkDispatchFromSub1()));
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            (1 ==
-             this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_
-                 .m_checkDispatchFromSub2()));
+        $Asserts.$assert((
+            1 ==
+            this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_
+                .m_checkDispatchFromSub2()));
   }
 
   /**

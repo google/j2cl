@@ -52,15 +52,15 @@ class Main extends Object {
    */
   static m_test() {
     Main.$clinit();
-    let foo = /**@type {function(?string):?string} */ (
-        $Util.$makeLambdaFunction(
+    let foo =
+        /**@type {function(?string):?string} */ ($Util.$makeLambdaFunction(
             Main$1.prototype.m_apply__java_lang_Object, Main$1.$create(),
             Main$1.$copy));
     Main.m_callGeneric__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main$ApplyFunction__java_lang_Object(
-        foo, "a");
+        foo, 'a');
     Main.m_callParametric__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main$ApplyFunction__java_lang_String(
-        foo, "a");
-    foo("a");
+        foo, 'a');
+    foo('a');
   }
 
   /**

@@ -59,27 +59,23 @@ class MultipleAbstractParents extends Object {
   static m_main__arrayOf_java_lang_String(args) {
     MultipleAbstractParents.$clinit();
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            String.m_equals__java_lang_String__java_lang_Object(
-                /**@type {!MultipleAbstractParents$ArrayList<?string>} */ (
-                    MultipleAbstractParents$ArrayList.$create())
-                    .m_getFoo__java_lang_Object(null),
-                "AbstractCollection"));
+        $Asserts.$assert(String.m_equals__java_lang_String__java_lang_Object(
+            /**@type {!MultipleAbstractParents$ArrayList<?string>} */ (
+                MultipleAbstractParents$ArrayList.$create())
+                .m_getFoo__java_lang_Object(null),
+            'AbstractCollection'));
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            String.m_equals__java_lang_String__java_lang_Object(
-                MultipleAbstractParents$StringList.$create()
-                    .m_getFoo__java_lang_Object(null),
-                "AbstractCollection"));
+        $Asserts.$assert(String.m_equals__java_lang_String__java_lang_Object(
+            MultipleAbstractParents$StringList.$create()
+                .m_getFoo__java_lang_Object(null),
+            'AbstractCollection'));
     $Asserts.$enabled() &&
-        $Asserts.$assert(
-            String.m_equals__java_lang_String__java_lang_Object(
-                (/**@type {MultipleAbstractParents$IStringList} */ (
-                     $Casts.to(
-                         MultipleAbstractParents$StringList.$create(),
-                         MultipleAbstractParents$IStringList)))
-                    .m_getFoo__java_lang_String(null),
-                "AbstractCollection"));
+        $Asserts.$assert(String.m_equals__java_lang_String__java_lang_Object(
+            (/**@type {MultipleAbstractParents$IStringList} */ ($Casts.to(
+                 MultipleAbstractParents$StringList.$create(),
+                 MultipleAbstractParents$IStringList)))
+                .m_getFoo__java_lang_String(null),
+            'AbstractCollection'));
   }
 
   /**

@@ -53,16 +53,16 @@ class StringConversion extends Object {
   m_test() {
     let s1 = null;
     let s2 = null;
-    let s3 = "" + s1 + s2;
-    s2 = "" + s2 + s2;
-    s1 += "a";
-    s3 = "" + s1 + s1 + s2 + String.m_valueOf__java_lang_Object(null) + "a";
-    s3 = "a" + s1 + s1 + s2 + String.m_valueOf__java_lang_Object(null);
+    let s3 = '' + s1 + s2;
+    s2 = '' + s2 + s2;
+    s1 += 'a';
+    s3 = '' + s1 + s1 + s2 + String.m_valueOf__java_lang_Object(null) + 'a';
+    s3 = 'a' + s1 + s1 + s2 + String.m_valueOf__java_lang_Object(null);
     let s4;
     let c1 = 70 /* 'F' */;
     let c2 = 111 /* 'o' */;
     s4 = String.m_valueOf__java_lang_Object(Character.m_valueOf__char(c1)) +
-        String.m_valueOf__java_lang_Object(Character.m_valueOf__char(c2)) + "o";
+        String.m_valueOf__java_lang_Object(Character.m_valueOf__char(c2)) + 'o';
   }
 
   /**
