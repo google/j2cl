@@ -19,12 +19,14 @@ import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
+import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodCallBuilder;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeReference;
 
 /**
  * Rewrites strange field or method accesses of the form "instance.staticField" to the more normal
@@ -44,34 +46,43 @@ public class NormalizeStaticMemberQualifiersPass {
     compilationUnit.accept(new FixFieldAssignmentQualifiers());
     compilationUnit.accept(new FixOtherQualifiers());
   }
+  
+  /**
+   * Returns whether the member reference is statically accessed on a instance for example:
+   * <p>new Instance().staticField;
+   * <p>or
+   * <p>new Instance().staticMethod();
+   */
+  private boolean isStaticMemberReferenceWithInstanceQualifier(Expression expression) {
+    if (!(expression instanceof MemberReference)) {
+      return false;
+    }
+    MemberReference memeberReference = (MemberReference) expression;
+    return memeberReference.getTarget().isStatic()
+        && !(memeberReference.getQualifier() instanceof TypeReference);
+  }
 
   private class FixFieldAssignmentQualifiers extends AbstractRewriter {
     @Override
     public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
-      // Only look at assignments into fields where the field has an instance qualifier.
-      if (!binaryExpression.getOperator().doesAssignment()) {
-        return binaryExpression;
-      }
-      if (!(binaryExpression.getLeftOperand() instanceof FieldAccess)) {
-        return binaryExpression;
-      }
-      FieldAccess fieldAccess = (FieldAccess) binaryExpression.getLeftOperand();
-      if (!fieldAccess.getTarget().isStatic()
-          || fieldAccess.getQualifier() instanceof TypeDescriptor) {
-        return binaryExpression;
-      }
-
       // For the node on the left hand side of an assignment you only need to handle field accesses
       // and not method calls because method calls are illegal there (you can't assign into a method
       // call).
-      return new MultiExpression(
-          Lists.newArrayList(
-              fieldAccess.getQualifier(), // Preserve the side effect.
-              new BinaryExpression( // Rewrite the assignment without the qualifier.
-                  binaryExpression.getTypeDescriptor(),
-                  new FieldAccess(null, fieldAccess.getTarget()),
-                  binaryExpression.getOperator(),
-                  binaryExpression.getRightOperand())));
+      // Only look at assignments into fields where the field has an instance qualifier.
+      Expression leftOperand = binaryExpression.getLeftOperand();
+      if (binaryExpression.getOperator().doesAssignment()
+          && isStaticMemberReferenceWithInstanceQualifier(leftOperand)) {
+        FieldAccess fieldAccess = (FieldAccess) leftOperand;
+        return new MultiExpression(
+            Lists.newArrayList(
+                fieldAccess.getQualifier(), // Preserve the side effect.
+                new BinaryExpression( // Rewrite the assignment without the qualifier.
+                    binaryExpression.getTypeDescriptor(),
+                    new FieldAccess(null, fieldAccess.getTarget()),
+                    binaryExpression.getOperator(),
+                    binaryExpression.getRightOperand())));
+      }
+      return binaryExpression;
     }
   }
 
@@ -80,8 +91,7 @@ public class NormalizeStaticMemberQualifiersPass {
     public Node rewriteFieldAccess(FieldAccess fieldAccess) {
       // If the access is of the very strange form "instance.staticField" then remove the qualifier
       // so that it is logically a "SomeClass.staticField".
-      if (fieldAccess.getTarget().isStatic()
-          && !(fieldAccess.getQualifier() instanceof TypeDescriptor)) {
+      if (isStaticMemberReferenceWithInstanceQualifier(fieldAccess)) {
         return new MultiExpression(
             Lists.newArrayList(
                 fieldAccess.getQualifier(), // Preserve side effects.
@@ -96,8 +106,7 @@ public class NormalizeStaticMemberQualifiersPass {
     public Node rewriteMethodCall(MethodCall methodCall) {
       // If the access is of the very strange form "instance.staticMethod()" then remove the
       // qualifier so that it is logically a "SomeClass.staticMethod()".
-      if (methodCall.getTarget().isStatic()
-          && !(methodCall.getQualifier() instanceof TypeDescriptor)) {
+      if (isStaticMemberReferenceWithInstanceQualifier(methodCall)) {
         return new MultiExpression(
             Lists.newArrayList(
                 methodCall.getQualifier(), // Preserve side effects.

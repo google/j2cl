@@ -284,7 +284,7 @@ public class GeneratorUtils {
     if (superTypeDescriptor == null) {
       return "";
     }
-    String superTypeName = ExpressionTransformer.transform(superTypeDescriptor, environment);
+    String superTypeName = environment.aliasForType(superTypeDescriptor);
     return String.format("extends %s ", superTypeName);
   }
 

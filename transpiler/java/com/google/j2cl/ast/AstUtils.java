@@ -699,13 +699,13 @@ public class AstUtils {
    * <p>If {@code qualifier} is null, returns EnclosingClassTypeDescriptor as the qualifier for
    * static method/field and 'this' reference as the qualifier for instance method/field.
    */
-  public static Expression getExplicitQualifier(Expression qualifier, Member member) {
+  static Expression getExplicitQualifier(Expression qualifier, Member member) {
     if (qualifier != null) {
       return qualifier;
     }
     TypeDescriptor enclosingClassTypeDescriptor = member.getEnclosingClassTypeDescriptor();
     return member.isStatic()
-        ? enclosingClassTypeDescriptor
+        ? new TypeReference(enclosingClassTypeDescriptor)
         : new ThisReference(enclosingClassTypeDescriptor);
   }
 

@@ -65,6 +65,12 @@ public abstract class CallBuilder<C extends Call> {
     originalArguments.remove(originalArguments.size() - 1);
     return this;
   }
+  
+  public CallBuilder<C> arguments(List<Expression> arguments) {
+    originalArguments.clear();
+    originalArguments.addAll(arguments);
+    return this;
+  }
 
   public CallBuilder<C> qualifier(Expression qualifierExpression) {
     this.qualifierExpression = qualifierExpression;

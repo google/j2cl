@@ -31,6 +31,7 @@ import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeReference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -80,7 +81,9 @@ public class NormalizeArrayCreationsVisitor extends AbstractRewriter {
             newArrayExpression.getDimensionExpressions()));
     // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
     // parameter type instead of the type parameter itself.
-    arguments.add(newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor());
+    TypeReference leafTypeReference =
+        new TypeReference(newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor());
+    arguments.add(leafTypeReference);
     MethodCall arrayCreateMethodCall =
         MethodCall.createRegularMethodCall(null, arrayCreateMethodDescriptor, arguments);
 
@@ -119,7 +122,9 @@ public class NormalizeArrayCreationsVisitor extends AbstractRewriter {
       arguments.add(newArrayExpression.getArrayLiteral());
       // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
       // parameter type instead of the type parameter itself.
-      arguments.add(newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor());
+      TypeReference leafTypeReference =
+          new TypeReference(newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor());
+      arguments.add(leafTypeReference);
       MethodCall arrayInitMethodCall =
           MethodCall.createRegularMethodCall(null, arrayInitMethodDescriptor, arguments);
 
@@ -138,7 +143,9 @@ public class NormalizeArrayCreationsVisitor extends AbstractRewriter {
       arguments.add(newArrayExpression.getArrayLiteral());
       // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
       // parameter type instead of the type parameter itself.
-      arguments.add(newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor());
+      TypeReference leafTypeReference =
+          new TypeReference(newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor());
+      arguments.add(leafTypeReference);
       arguments.add(new NumberLiteral(TypeDescriptors.get().primitiveInt, dimensionCount));
       MethodCall arrayInitMethodCall =
           MethodCall.createRegularMethodCall(null, arrayInitMethodDescriptor, arguments);

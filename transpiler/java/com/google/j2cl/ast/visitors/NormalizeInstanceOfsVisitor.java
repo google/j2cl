@@ -30,6 +30,7 @@ import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,7 +105,7 @@ public class NormalizeInstanceOfsVisitor extends AbstractRewriter {
             .build();
     List<Expression> arguments = new ArrayList<>();
     arguments.add(instanceOfExpression.getExpression());
-    arguments.add(checkTypeDescriptor.getLeafTypeDescriptor());
+    arguments.add(new TypeReference(checkTypeDescriptor.getLeafTypeDescriptor()));
     arguments.add(
         new NumberLiteral(TypeDescriptors.get().primitiveInt, checkTypeDescriptor.getDimensions()));
     // Arrays.$instanceIsOfType(expr, leafType, dimensions);

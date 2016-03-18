@@ -52,6 +52,7 @@ import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
+import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
@@ -86,11 +87,11 @@ public class ExpressionTransformer {
       }
 
       private String arraysTypeAlias() {
-        return transform(BootstrapType.ARRAYS.getDescriptor(), environment);
+        return environment.aliasForType(BootstrapType.ARRAYS.getDescriptor());
       }
 
       private String longsTypeAlias() {
-        return transform(BootstrapType.LONGS.getDescriptor(), environment);
+        return environment.aliasForType(BootstrapType.LONGS.getDescriptor());
       }
 
       @Override
@@ -226,7 +227,7 @@ public class ExpressionTransformer {
         MethodDescriptor methodDescriptor = expression.getTarget();
         List<String> argumentSources = transformNodesToSource(expression.getArguments());
         String typeName =
-            transform(methodDescriptor.getEnclosingClassTypeDescriptor(), environment);
+            environment.aliasForType(methodDescriptor.getEnclosingClassTypeDescriptor());
         String qualifier = methodDescriptor.isStatic() ? typeName : typeName + ".prototype";
         return String.format(
             "%s.%s.call(%s)",
@@ -290,7 +291,7 @@ public class ExpressionTransformer {
           // Call to a JsFunction method is emitted as the call on the qualifier itself:
           return String.format("%s", qualifier);
         } else if (expression.isStaticDispatch()) {
-          String typeName = transform(target.getEnclosingClassTypeDescriptor(), environment);
+          String typeName = environment.aliasForType(target.getEnclosingClassTypeDescriptor());
           String methodName = ExpressionTransformer.stringForMethodDescriptor(target);
           return typeName + ".prototype." + methodName;
         } else {
@@ -312,7 +313,7 @@ public class ExpressionTransformer {
         String argumentsList =
             Joiner.on(", ").join(transformNodesToSource(expression.getArguments()));
         return String.format(
-            "new %s(%s)", transform(targetTypeDescriptor, environment), argumentsList);
+            "new %s(%s)", environment.aliasForType(targetTypeDescriptor), argumentsList);
       }
 
       @Override
@@ -427,8 +428,8 @@ public class ExpressionTransformer {
       }
 
       @Override
-      public String transformTypeDescriptor(TypeDescriptor typeDescriptor) {
-        return environment.aliasForType(typeDescriptor);
+      public String transformTypeReference(TypeReference typeReference) {
+        return environment.aliasForType(typeReference.getTypeDescriptor());
       }
 
       @Override
@@ -473,10 +474,10 @@ public class ExpressionTransformer {
       private String transfromJsFunctionNewInstance(NewInstance expression) {
         TypeDescriptor targetTypeDescriptor =
             expression.getTarget().getEnclosingClassTypeDescriptor();
-        String enclosingClassName = transform(targetTypeDescriptor, environment);
+        String enclosingClassName = environment.aliasForType(targetTypeDescriptor);
         return String.format(
             "%s.$makeLambdaFunction(%s.prototype.%s, %s, %s.$copy)",
-            transform(TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor(), environment),
+            environment.aliasForType(TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor()),
             enclosingClassName,
             ManglingNameUtils.getMangledName(targetTypeDescriptor.getJsFunctionMethodDescriptor()),
             transformRegularNewInstance(expression),

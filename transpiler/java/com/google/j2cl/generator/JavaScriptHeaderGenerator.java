@@ -66,7 +66,7 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     sb.newLine();
     sb.newLine();
 
-    String className = expressionToString(javaType.getDescriptor());
+    String className = environment.aliasForType(javaType.getDescriptor());
     String implementationPath = selfImport.getImplModulePath();
     sb.appendln("// Re-exports the implementation.");
     sb.appendln("var %s = goog.require('%s');", className, implementationPath);

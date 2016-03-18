@@ -34,6 +34,7 @@ import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
+import com.google.j2cl.ast.TypeReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +95,7 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
     Preconditions.checkArgument(
         !castTypeDescriptorArgument.isNative(),
         "Should not pass a native type to Arrays.$castTo().");
-    arguments.add(castTypeDescriptorArgument);
+    arguments.add(new TypeReference(castTypeDescriptorArgument));
 
     // Casts.to(expr, TypeName);
     MethodCall castMethodCall =
@@ -138,7 +139,7 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
     Preconditions.checkArgument(
         !castTypeDescriptorArgument.isNative(),
         "Should not pass a native type to Arrays.$castTo().");
-    arguments.add(castTypeDescriptorArgument);
+    arguments.add(new TypeReference(castTypeDescriptorArgument));
     arguments.add(
         new NumberLiteral(
             TypeDescriptors.get().primitiveInt, arrayCastTypeDescriptor.getDimensions()));

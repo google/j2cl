@@ -154,7 +154,7 @@ public class JsDocNameUtils {
           String.format(
               "%s%s<%s>",
               nullable ? "" : "!",
-              ExpressionTransformer.transform(rawTypeDescriptor, environment),
+              environment.aliasForType(rawTypeDescriptor),
               getJsDocNames(typeDescriptor.getTypeArgumentDescriptors(), environment));
       if (!shouldUseClassName
           && unboxedTypeDescriptorsBySuperTypeDescriptor.containsKey(rawTypeDescriptor)) {
@@ -181,9 +181,7 @@ public class JsDocNameUtils {
       case TypeDescriptor.CHAR_TYPE_NAME:
         return JS_NUMBER_TYPE_NAME;
       case TypeDescriptor.LONG_TYPE_NAME:
-        return "!"
-            + ExpressionTransformer.transform(
-                BootstrapType.NATIVE_LONG.getDescriptor(), environment);
+        return "!" + environment.aliasForType(BootstrapType.NATIVE_LONG.getDescriptor());
       case "java.lang.Object":
         if (!shouldUseClassName) {
           return "*";
@@ -201,7 +199,7 @@ public class JsDocNameUtils {
         && unboxedTypeDescriptorsBySuperTypeDescriptor.containsKey(typeDescriptor)) {
       return String.format(
           "(%s|%s)",
-          ExpressionTransformer.transform(typeDescriptor, environment),
+          environment.aliasForType(typeDescriptor),
           getJsDocNameOfUnionType(typeDescriptor));
     }
     if (typeDescriptor.isPrimitive()) {
@@ -215,7 +213,7 @@ public class JsDocNameUtils {
       return getJsDocNameForJsFunction(typeDescriptor, nullable, environment);
     }
 
-    return (nullable ? "" : "!") + ExpressionTransformer.transform(typeDescriptor, environment);
+    return (nullable ? "" : "!") + environment.aliasForType(typeDescriptor);
   }
 
   /**

@@ -50,7 +50,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   public JavaScriptImplGenerator(Errors errors, boolean declareLegacyNamespace, JavaType javaType) {
     super(errors, declareLegacyNamespace, javaType);
-    this.className = expressionToString(javaType.getDescriptor());
+    this.className = environment.aliasForType(javaType.getDescriptor());
     this.mangledTypeName = ManglingNameUtils.getMangledName(javaType.getDescriptor());
     this.subclassesJsConstructorClass = javaType.getDescriptor().subclassesJsConstructorClass();
     statementTransformer = new StatementTransformer(sb, environment);
@@ -293,7 +293,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       if (superInterface.isNative()) {
         continue;
       }
-      String superInterfaceName = expressionToString(superInterface);
+      String superInterfaceName = environment.aliasForType(superInterface);
       sb.appendln("%s.$markImplementor(classConstructor);", superInterfaceName);
     }
     sb.appendln("/**");
@@ -379,7 +379,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sb.appendln("return instance != null && instance.$is__%s;", mangledTypeName);
     } else {
       String className =
-          expressionToString(
+          environment.aliasForType(
               javaType.isJsOverlayImpl()
                   ? javaType.getNativeTypeDescriptor().getRawTypeDescriptor()
                   : javaType.getDescriptor());
@@ -425,7 +425,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
           mangledTypeName);
     } else { // For classes
       BootstrapType.NATIVE_UTIL.getDescriptor();
-      String utilAlias = expressionToString(BootstrapType.NATIVE_UTIL.getDescriptor());
+      String utilAlias = environment.aliasForType(BootstrapType.NATIVE_UTIL.getDescriptor());
       sb.appendln("return %s.$canCastClass(classConstructor, %s);", utilAlias, className);
     }
     sb.appendln("}");
@@ -461,8 +461,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       return; // Don't render $getClass for overlay types.
     }
     String classAlias =
-        expressionToString(TypeDescriptors.get().javaLangClass.getRawTypeDescriptor());
-    String utilAlias = expressionToString(BootstrapType.NATIVE_UTIL.getDescriptor());
+        environment.aliasForType(TypeDescriptors.get().javaLangClass.getRawTypeDescriptor());
+    String utilAlias = environment.aliasForType(BootstrapType.NATIVE_UTIL.getDescriptor());
     sb.appendln("/**");
     sb.appendln(" * @return {%s}", classAlias);
     sb.appendln(" * @public", classAlias);
@@ -617,7 +617,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (GeneratorUtils.needCallSuperClinit(javaType)) {
       // call the super class $clinit.
       TypeDescriptor superTypeDescriptor = javaType.getSuperTypeDescriptor();
-      String superTypeName = expressionToString(superTypeDescriptor);
+      String superTypeName = environment.aliasForType(superTypeDescriptor);
       sb.appendln("%s.$clinit();", superTypeName);
     }
     // Static field and static initializer blocks.
@@ -703,7 +703,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderClassLiteralFieldDeclaration() {
     String classAlias =
-        expressionToString(TypeDescriptors.get().javaLangClass.getRawTypeDescriptor());
+        environment.aliasForType(TypeDescriptors.get().javaLangClass.getRawTypeDescriptor());
     if (javaType.isJsOverlayImpl()) {
       return;
     }
@@ -733,7 +733,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         if (interfaceTypeDescriptor.isNative()) {
           continue;
         }
-        String interfaceName = expressionToString(interfaceTypeDescriptor);
+        String interfaceName = environment.aliasForType(interfaceTypeDescriptor);
         sb.appendln("%s.$markImplementor(%s);", interfaceName, className);
       }
     }

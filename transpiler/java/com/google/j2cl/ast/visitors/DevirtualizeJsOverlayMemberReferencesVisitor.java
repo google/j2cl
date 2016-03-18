@@ -65,7 +65,7 @@ public class DevirtualizeJsOverlayMemberReferencesVisitor extends AbstractRewrit
       // Devirtualize *static* JsOverlay method.
       return MethodCallBuilder.from(methodCall)
           .enclosingClass(overlayTypeDescriptor)
-          .qualifier(overlayTypeDescriptor)
+          .qualifier(null)
           .build();
     } else {
       // Devirtualize *instance* JsOverlay method.

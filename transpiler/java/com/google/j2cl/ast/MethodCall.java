@@ -45,7 +45,7 @@ public class MethodCall extends Expression implements MemberReference, Call {
    */
   private boolean isStaticDispatch;
 
-  public MethodCall(
+  MethodCall(
       Expression qualifier,
       MethodDescriptor targetMethodDescriptor,
       List<Expression> arguments,
@@ -62,28 +62,19 @@ public class MethodCall extends Expression implements MemberReference, Call {
 
   public static MethodCall createRegularMethodCall(
       Expression qualifier, MethodDescriptor targetMethodDescriptor, List<Expression> arguments) {
-    return new MethodCall(
-        AstUtils.getExplicitQualifier(qualifier, targetMethodDescriptor),
-        targetMethodDescriptor,
-        arguments,
-        CallStyle.DIRECT,
-        false);
+    return new MethodCall(qualifier, targetMethodDescriptor, arguments, CallStyle.DIRECT, false);
   }
 
   public static MethodCall createRegularMethodCall(
       Expression qualifier, MethodDescriptor targetMethodDescriptor, Expression... arguments) {
     return new MethodCall(
-        AstUtils.getExplicitQualifier(qualifier, targetMethodDescriptor),
-        targetMethodDescriptor,
-        Arrays.asList(arguments),
-        CallStyle.DIRECT,
-        false);
+        qualifier, targetMethodDescriptor, Arrays.asList(arguments), CallStyle.DIRECT, false);
   }
 
   public static MethodCall createCallMethodCall(
       Expression qualifier, MethodDescriptor targetMethodDescriptor, List<Expression> arguments) {
     return new MethodCall(
-        AstUtils.getExplicitQualifier(qualifier, targetMethodDescriptor),
+        qualifier,
         targetMethodDescriptor,
         arguments,
         CallStyle.CALL,

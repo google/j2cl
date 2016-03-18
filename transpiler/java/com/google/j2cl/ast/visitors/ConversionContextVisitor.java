@@ -31,7 +31,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldBuilder;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.MethodCallBuilder;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
@@ -190,15 +190,8 @@ public class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public Node rewriteMethodCall(MethodCall methodCall) {
     // method invocation context
-    Expression qualifier = methodCall.getQualifier();
-    MethodDescriptor targetMethodDescriptor = methodCall.getTarget();
     List<Expression> arguments = rewriteMethodInvocationContextArguments(methodCall);
-    return new MethodCall(
-        qualifier,
-        targetMethodDescriptor,
-        arguments,
-        methodCall.getCallStyle(),
-        methodCall.isStaticDispatch());
+    return MethodCallBuilder.from(methodCall).arguments(arguments).build();
   }
 
   @Override

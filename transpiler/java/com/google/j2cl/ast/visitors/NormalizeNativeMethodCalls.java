@@ -15,14 +15,15 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeReference;
 
 /**
  * Normalizes the static native js method calls with the real native method calls.
@@ -60,10 +61,7 @@ public class NormalizeNativeMethodCalls extends AbstractRewriter {
             .enclosingClassTypeDescriptor(
                 TypeDescriptor.createNative(methodDescriptor.getJsNamespace()))
             .build();
-    Expression qualifier =
-        methodCall.getQualifier() instanceof TypeDescriptor ? null : methodCall.getQualifier();
-
-    return MethodCall.createRegularMethodCall(
-        qualifier, newMethodDescriptor, methodCall.getArguments());
+    Preconditions.checkArgument(methodCall.getQualifier() instanceof TypeReference);
+    return MethodCall.createRegularMethodCall(null, newMethodDescriptor, methodCall.getArguments());
   }
 }

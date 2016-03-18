@@ -66,7 +66,7 @@ public class StatementTransformer {
 
       @Override
       public boolean enterAssertStatement(AssertStatement assertStatement) {
-        String assertAlias = toSourceExpression(BootstrapType.ASSERTS.getDescriptor());
+        String assertAlias = environment.aliasForType(BootstrapType.ASSERTS.getDescriptor());
         String line;
         if (assertStatement.getMessage() == null) {
           line =
