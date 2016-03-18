@@ -49,11 +49,11 @@ class ArraySimple extends Object {
    * @public
    */
   m_main() {
-    let objects = /**@type {Array<*>} */ ($Arrays.$create([100], Object));
+    let objects = /**@type {!Array<*>} */ ($Arrays.$create([100], Object));
     let objects2d =
-        /**@type {Array<Array<*>>} */ ($Arrays.$create([5, 10], Object));
+        /**@type {!Array<Array<*>>} */ ($Arrays.$create([5, 10], Object));
     let objectsPartial =
-        /**@type {Array<Array<*>>} */ ($Arrays.$create([20, null], Object));
+        /**@type {!Array<Array<*>>} */ ($Arrays.$create([20, null], Object));
     let object = objects[0];
     object = objects2d[0][1];
     $Arrays.$set(objects, 0, null);

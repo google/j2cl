@@ -335,7 +335,7 @@ public class BridgeMethodsCreator {
           bridgeMethodDescriptor.getParameterTypeDescriptors().get(i)
                   == castToParameterTypeDescriptor
               ? parameterReference
-              : new CastExpression(parameterReference, castToParameterTypeDescriptor);
+              : CastExpression.create(parameterReference, castToParameterTypeDescriptor);
       arguments.add(argument);
     }
     TypeDescriptor targetEnclosingClassTypeDescriptor =

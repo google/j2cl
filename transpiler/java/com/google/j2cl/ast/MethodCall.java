@@ -33,8 +33,7 @@ public class MethodCall extends Expression implements MemberReference, Call {
    */
   public enum CallStyle {
     DIRECT,
-    CALL,
-    APPLY
+    CALL
   }
 
   @Visitable Expression qualifier;

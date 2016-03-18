@@ -67,12 +67,12 @@ class Main extends Object {
    */
   static m_foo() {
     Main.$clinit();
-    let numbers = /**@type {Array<number>} */ ($Arrays.$init([1, 2], $int));
+    let numbers = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
     Main.m_fun__arrayOf_java_lang_Double(
-        /**@type {Array<?number>} */ (
+        /**@type {!Array<?number>} */ (
             $Arrays.$init([97 /* 'a' */, 4, numbers[0]], Double)));
     Main.m_bar__arrayOf_java_lang_Float(
-        /**@type {Array<Float>} */ (
+        /**@type {!Array<Float>} */ (
             $Arrays.$init(
                 [
                   Float.m_valueOf__float(97 /* 'a' */),

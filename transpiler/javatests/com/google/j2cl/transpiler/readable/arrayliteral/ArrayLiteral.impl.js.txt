@@ -51,12 +51,12 @@ class ArrayLiteral extends Object {
    */
   m_main() {
     let object = Object.$create();
-    let ints = /**@type {Array<number>} */ ($Arrays.$init([0, 1, 2], $int));
-    let objects2d = /**@type {Array<Array<*>>} */ (
+    let ints = /**@type {!Array<number>} */ ($Arrays.$init([0, 1, 2], $int));
+    let objects2d = /**@type {!Array<Array<*>>} */ (
         $Arrays.$init([[object, object], [object, object]], Object, 2));
     let partial =
-        /**@type {Array<Array<number>>} */ ($Arrays.$init([], $int, 2));
-    let unbalanced = /**@type {Array<Array<*>>} */ (
+        /**@type {!Array<Array<number>>} */ ($Arrays.$init([], $int, 2));
+    let unbalanced = /**@type {!Array<Array<*>>} */ (
         $Arrays.$init([[object, object], null], Object, 2));
   }
 

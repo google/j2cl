@@ -418,7 +418,7 @@ public class CompilationUnitBuilder {
     private CastExpression convert(org.eclipse.jdt.core.dom.CastExpression expression) {
       TypeDescriptor castTypeDescriptor =
           JdtUtils.createTypeDescriptor(expression.getType().resolveBinding());
-      return new CastExpression(convert(expression.getExpression()), castTypeDescriptor);
+      return CastExpression.create(convert(expression.getExpression()), castTypeDescriptor);
     }
 
     private CharacterLiteral convert(org.eclipse.jdt.core.dom.CharacterLiteral literal) {

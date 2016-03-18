@@ -24,7 +24,8 @@ public enum PrefixOperator {
   PLUS("+"),
   MINUS("-"),
   COMPLEMENT("~"),
-  NOT("!");
+  NOT("!"),
+  SPREAD("..."); // Refers to the Javascript ES6 spread operator.
   private String symbol;
 
   PrefixOperator(String symbol) {

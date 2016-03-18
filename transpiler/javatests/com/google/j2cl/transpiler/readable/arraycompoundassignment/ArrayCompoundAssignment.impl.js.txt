@@ -51,7 +51,7 @@ class ArrayCompoundAssignment extends Object {
    * @public
    */
   m_main() {
-    let ints = /**@type {Array<number>} */ ($Arrays.$create([100], $int));
+    let ints = /**@type {!Array<number>} */ ($Arrays.$create([100], $int));
     $Arrays.$addSet(ints, 0, 1);
     $Arrays.$subSet(ints, 0, 1);
     $Arrays.$mulSet(ints, 0, 1);

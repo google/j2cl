@@ -76,10 +76,10 @@ public class NormalizeLongsVisitor extends AbstractRewriter {
     }
 
     if (leftArgument.getTypeDescriptor() != leftParameterTypeDescriptor) {
-      leftArgument = new CastExpression(leftArgument, leftParameterTypeDescriptor);
+      leftArgument = CastExpression.create(leftArgument, leftParameterTypeDescriptor);
     }
     if (rightArgument.getTypeDescriptor() != rightParameterTypeDescriptor) {
-      rightArgument = new CastExpression(rightArgument, rightParameterTypeDescriptor);
+      rightArgument = CastExpression.create(rightArgument, rightParameterTypeDescriptor);
     }
 
     MethodDescriptor longUtilsMethodDescriptor =

@@ -94,14 +94,14 @@ class NestedGenericClass extends Object {
   m_test() {
     let n = /**@type {!NestedGenericClass<(Number|?number)>} */ (
         NestedGenericClass.$create());
-    let a = /**@type {NestedGenericClass$A<Error>} */ (
+    let a = /**@type {!NestedGenericClass$A<Error>} */ (
         n.m_$create_NestedGenericClass$A());
-    let b = /**@type {NestedGenericClass$A$B<Exception>} */ (
+    let b = /**@type {!NestedGenericClass$A$B<Exception>} */ (
         a.m_$create_NestedGenericClass$A$B());
-    /**@type {NestedGenericClass$C<(Number|?number)>} */ (
+    /**@type {!NestedGenericClass$C<(Number|?number)>} */ (
         n.m_$create_NestedGenericClass$C());
-    /**@type {NestedGenericClass$C$D<(Number|?number)>} */ (
-        /**@type {NestedGenericClass$C<(Number|?number)>} */ (
+    /**@type {!NestedGenericClass$C$D<(Number|?number)>} */ (
+        /**@type {!NestedGenericClass$C<(Number|?number)>} */ (
             n.m_$create_NestedGenericClass$C())
             .m_$create_NestedGenericClass$C$D());
   }

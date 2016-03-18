@@ -25,22 +25,30 @@ import com.google.j2cl.ast.processors.Visitable;
 public class CastExpression extends Expression {
   @Visitable Expression expression;
   @Visitable TypeDescriptor castTypeDescriptor;
-  boolean isRaw;
+  private boolean isRaw; // Raw casts are those that are not checked at run time. Only annotated.
+  private boolean isNullable;
 
-  private CastExpression(Expression expression, TypeDescriptor castTypeDescriptor, boolean isRaw) {
+  CastExpression(
+      Expression expression, TypeDescriptor castTypeDescriptor, boolean isRaw, boolean isNullable) {
     Preconditions.checkNotNull(expression);
     Preconditions.checkNotNull(castTypeDescriptor);
     this.expression = expression;
     this.castTypeDescriptor = castTypeDescriptor;
     this.isRaw = isRaw;
+    this.isNullable = isNullable;
   }
-
-  public CastExpression(Expression expression, TypeDescriptor castTypeDescriptor) {
-    this(expression, castTypeDescriptor, false);
+  
+  public static CastExpression create(Expression expression, TypeDescriptor castTypeDescriptor) {
+    return new CastExpression(expression, castTypeDescriptor, false, true);
   }
 
   public static CastExpression createRaw(Expression expression, TypeDescriptor castTypeDescriptor) {
-    return new CastExpression(expression, castTypeDescriptor, true);
+    return new CastExpression(expression, castTypeDescriptor, true, true);
+  }
+
+  public static CastExpression createRawNonNullable(
+      Expression expression, TypeDescriptor castTypeDescriptor) {
+    return new CastExpression(expression, castTypeDescriptor, true, false);
   }
 
   public TypeDescriptor getCastTypeDescriptor() {
@@ -70,6 +78,10 @@ public class CastExpression extends Expression {
    */
   public boolean isRaw() {
     return isRaw;
+  }
+  
+  public boolean isNullable() {
+    return isNullable;
   }
 
   @Override

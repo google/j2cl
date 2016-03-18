@@ -104,7 +104,6 @@ public class NormalizeStaticMemberQualifiersPass {
                 MethodCallBuilder.from(methodCall).qualifier(null).build()) // Static dispatch
         );
       }
-
       return methodCall;
     }
   }

@@ -58,30 +58,31 @@ class PrimitiveArrays extends Object {
    * @public
    */
   m_main() {
-    let bytes = /**@type {Array<number>} */ ($Arrays.$create([100], $byte));
+    let bytes = /**@type {!Array<number>} */ ($Arrays.$create([100], $byte));
     let bytes2d =
-        /**@type {Array<Array<number>>} */ ($Arrays.$create([5, 10], $byte));
-    let shorts = /**@type {Array<number>} */ ($Arrays.$create([100], $short));
+        /**@type {!Array<Array<number>>} */ ($Arrays.$create([5, 10], $byte));
+    let shorts = /**@type {!Array<number>} */ ($Arrays.$create([100], $short));
     let shorts2d =
-        /**@type {Array<Array<number>>} */ ($Arrays.$create([5, 10], $short));
-    let ints = /**@type {Array<number>} */ ($Arrays.$create([100], $int));
+        /**@type {!Array<Array<number>>} */ ($Arrays.$create([5, 10], $short));
+    let ints = /**@type {!Array<number>} */ ($Arrays.$create([100], $int));
     let ints2d =
-        /**@type {Array<Array<number>>} */ ($Arrays.$create([5, 10], $int));
-    let longs = /**@type {Array<!$Long>} */ ($Arrays.$create([100], $long));
+        /**@type {!Array<Array<number>>} */ ($Arrays.$create([5, 10], $int));
+    let longs = /**@type {!Array<!$Long>} */ ($Arrays.$create([100], $long));
     let longs2d =
-        /**@type {Array<Array<!$Long>>} */ ($Arrays.$create([5, 10], $long));
-    let floats = /**@type {Array<number>} */ ($Arrays.$create([100], $float));
+        /**@type {!Array<Array<!$Long>>} */ ($Arrays.$create([5, 10], $long));
+    let floats = /**@type {!Array<number>} */ ($Arrays.$create([100], $float));
     let floats2d =
-        /**@type {Array<Array<number>>} */ ($Arrays.$create([5, 10], $float));
-    let doubles = /**@type {Array<number>} */ ($Arrays.$create([100], $double));
+        /**@type {!Array<Array<number>>} */ ($Arrays.$create([5, 10], $float));
+    let doubles =
+        /**@type {!Array<number>} */ ($Arrays.$create([100], $double));
     let doubles2d =
-        /**@type {Array<Array<number>>} */ ($Arrays.$create([5, 10], $double));
-    let chars = /**@type {Array<number>} */ ($Arrays.$create([100], $char));
+        /**@type {!Array<Array<number>>} */ ($Arrays.$create([5, 10], $double));
+    let chars = /**@type {!Array<number>} */ ($Arrays.$create([100], $char));
     let chars2d =
-        /**@type {Array<Array<number>>} */ ($Arrays.$create([5, 10], $char));
+        /**@type {!Array<Array<number>>} */ ($Arrays.$create([5, 10], $char));
     let booleans =
-        /**@type {Array<boolean>} */ ($Arrays.$create([100], $boolean));
-    let booleans2d = /**@type {Array<Array<boolean>>} */ (
+        /**@type {!Array<boolean>} */ ($Arrays.$create([100], $boolean));
+    let booleans2d = /**@type {!Array<Array<boolean>>} */ (
         $Arrays.$create([5, 10], $boolean));
     let foo = ints[0];
     foo = ints2d[0][1];

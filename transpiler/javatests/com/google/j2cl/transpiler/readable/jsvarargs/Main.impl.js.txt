@@ -65,7 +65,7 @@ class Main extends Object {
    */
   static f1(multiplier, numbers) {
     Main.$clinit();
-    let $var_args_copy = /**@type {Array<number>} */ (
+    let $var_args_copy = /**@type {!Array<number>} */ (
         $Arrays.$create([arguments.length - 1], $int));
     for (let $i = 0; $i < arguments.length - 1; $i++)
       $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
@@ -79,8 +79,8 @@ class Main extends Object {
    */
   static f2(numbers) {
     Main.$clinit();
-    let $var_args_copy =
-        /**@type {Array<number>} */ ($Arrays.$create([arguments.length], $int));
+    let $var_args_copy = /**@type {!Array<number>} */ (
+        $Arrays.$create([arguments.length], $int));
     for (let $i = 0; $i < arguments.length; $i++)
       $Arrays.$set($var_args_copy, $i, arguments[$i]);
     return $var_args_copy.length + $var_args_copy[0];
@@ -93,7 +93,7 @@ class Main extends Object {
    * @public
    */
   f3(m, numbers) {
-    let $var_args_copy = /**@type {Array<number>} */ (
+    let $var_args_copy = /**@type {!Array<number>} */ (
         $Arrays.$create([arguments.length - 1], $int));
     for (let $i = 0; $i < arguments.length - 1; $i++)
       $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
@@ -107,8 +107,8 @@ class Main extends Object {
    * @public
    */
   f4(numbers) {
-    let $var_args_copy =
-        /**@type {Array<number>} */ ($Arrays.$create([arguments.length], $int));
+    let $var_args_copy = /**@type {!Array<number>} */ (
+        $Arrays.$create([arguments.length], $int));
     for (let $i = 0; $i < arguments.length; $i++)
       $Arrays.$set($var_args_copy, $i, arguments[$i]);
     return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main +
@@ -124,7 +124,7 @@ class Main extends Object {
   static generics(elements) {
     Main.$clinit();
     let $var_args_copy =
-        /**@type {Array<*>} */ ($Arrays.$create([arguments.length], Object));
+        /**@type {!Array<*>} */ ($Arrays.$create([arguments.length], Object));
     for (let $i = 0; $i < arguments.length; $i++)
       $Arrays.$set($var_args_copy, $i, arguments[$i]);
     return $var_args_copy[0];
@@ -137,7 +137,7 @@ class Main extends Object {
    */
   static parameterizedType(elements) {
     Main.$clinit();
-    let $var_args_copy = /**@type {Array<List<Main>>} */ (
+    let $var_args_copy = /**@type {!Array<List<Main>>} */ (
         $Arrays.$create([arguments.length], List));
     for (let $i = 0; $i < arguments.length; $i++)
       $Arrays.$set($var_args_copy, $i, arguments[$i]);
@@ -157,9 +157,9 @@ class Main extends Object {
     Main.f1(1, 1, 2);
     Main.f1(1);
     Main.f1(1);
-    let ints = /**@type {Array<number>} */ ($Arrays.$init([1, 2], $int));
-    Main.f1.apply(null, [1].concat(ints));
-    Main.f1.apply(null, [1].concat(ints));
+    let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
+    Main.f1(1, ...ints);
+    Main.f1(1, ...ints);
   }
 
   /**
@@ -178,18 +178,18 @@ class Main extends Object {
     Main.generics();
     Main.f2(1, 2);
     Main.f2(1, 2);
-    Main.generics(/**@type {Array<number>} */ ($Arrays.$init([1, 2], $int)));
+    Main.generics(/**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int)));
     Main.generics(Integer.m_valueOf__int(1), Integer.m_valueOf__int(2));
     Main.f2();
     Main.f2();
-    Main.generics(/**@type {Array<number>} */ ($Arrays.$init([], $int)));
-    let ints = /**@type {Array<number>} */ ($Arrays.$init([1, 2], $int));
-    let integers = /**@type {Array<Integer>} */ (
+    Main.generics(/**@type {!Array<number>} */ ($Arrays.$init([], $int)));
+    let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
+    let integers = /**@type {!Array<Integer>} */ (
         $Arrays.$init(
             [Integer.m_valueOf__int(1), Integer.m_valueOf__int(2)], Integer));
-    Main.f2.apply(null, ints);
-    Main.f2.apply(null, ints);
-    Main.generics.apply(null, integers);
+    Main.f2(...ints);
+    Main.f2(...ints);
+    Main.generics(...integers);
   }
 
   /**
@@ -202,8 +202,8 @@ class Main extends Object {
     m.f3(1);
     m.f3(1, 1, 2);
     m.f3(1);
-    let ints = /**@type {Array<number>} */ ($Arrays.$init([1, 2], $int));
-    m.f3.apply(m, [1].concat(ints));
+    let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
+    m.f3(1, ...ints);
   }
 
   /**
@@ -216,8 +216,8 @@ class Main extends Object {
     m.f4();
     m.f4(1, 2);
     m.f4();
-    let ints = /**@type {Array<number>} */ ($Arrays.$init([1, 2], $int));
-    m.f4.apply(m, ints);
+    let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
+    m.f4(...ints);
   }
 
   /**
@@ -236,7 +236,7 @@ class Main extends Object {
     a(0, o1, o2);
     a(0);
     let os = [o1, o2];
-    a.apply(null, [0].concat(os));
+    a(0, ...os);
   }
 
   /**
@@ -244,9 +244,8 @@ class Main extends Object {
    * @public
    */
   m_testSideEffect() {
-    let ints = /**@type {Array<number>} */ ($Arrays.$init([1, 2], $int));
-    ($Util.$q = Main.$create__int(1),
-     $Util.$q.f3.apply($Util.$q, [1].concat(ints)));
+    let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
+    Main.$create__int(1).f3(1, ...ints);
   }
 
   /**

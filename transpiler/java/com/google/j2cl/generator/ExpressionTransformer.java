@@ -150,14 +150,14 @@ public class ExpressionTransformer {
       }
 
       @Override
-      public String transformCastExpression(CastExpression expression) {
+      public String transformCastExpression(CastExpression castExpression) {
         Preconditions.checkArgument(
-            expression.isRaw(), "Java CastExpression should have been normalized to method call.");
+            castExpression.isRaw(),
+            "Java CastExpression should have been normalized to method call.");
         return annotateWithJsDoc(
-            expression.getCastTypeDescriptor(),
-            transform(expression.getExpression(), environment),
-            // annotate as non-nullable for NewInstance.
-            !(expression.getExpression() instanceof NewInstance));
+            castExpression.getCastTypeDescriptor(),
+            transform(castExpression.getExpression(), environment),
+            castExpression.isNullable());
       }
 
       @Override
@@ -215,42 +215,10 @@ public class ExpressionTransformer {
       @Override
       public String transformMethodCall(MethodCall expression) {
         switch (expression.getCallStyle()) {
-          case APPLY:
-            return transformApplyMethodCall(expression);
           case CALL:
             return transformCallMethodCall(expression);
           default:
             return transformDirectMethodCall(expression);
-        }
-      }
-
-      private String transformApplyMethodCall(MethodCall expression) {
-        Preconditions.checkArgument(expression.getCallStyle() == MethodCall.CallStyle.APPLY);
-        String lastArgument = transform(Iterables.getLast(expression.getArguments()), environment);
-        String methodCallHeader = transformMethodCallHeader(expression);
-        String thisArg =
-            expression.getTarget().isStatic() || expression.getTarget().isJsFunction()
-                ? "null"
-                : expression.getQualifier() instanceof SuperReference
-                    ? "this"
-                    : transform(expression.getQualifier(), environment);
-
-        if (expression.getArguments().size() == 1) {
-          // fn.apply(thisArg, varargsArray);
-          return String.format("%s.apply(%s, %s)", methodCallHeader, thisArg, lastArgument);
-        } else {
-          // fn.apply(thisArg, [a1, a2, ...].concat(varargsArray));
-          return String.format(
-              "%s.apply(%s, [%s].concat(%s))",
-              methodCallHeader,
-              thisArg,
-              Joiner.on(", ")
-                  .join(
-                      transformNodesToSource(
-                          expression
-                              .getArguments()
-                              .subList(0, expression.getArguments().size() - 1))),
-              lastArgument);
         }
       }
 

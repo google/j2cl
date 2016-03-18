@@ -36,7 +36,7 @@ public class InsertCastOnNewInstancesVisitor extends AbstractRewriter {
     if (newInstance.getTypeDescriptor().isParameterizedType()
         || newInstance.getTypeDescriptor().isJsFunctionImplementation()) {
       // add type annotation to ClassInstanceCreation of generic type and JsFunction type.
-      return CastExpression.createRaw(newInstance, newInstance.getTypeDescriptor());
+      return CastExpression.createRawNonNullable(newInstance, newInstance.getTypeDescriptor());
     } else {
       return newInstance;
     }

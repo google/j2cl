@@ -59,19 +59,19 @@ class ArrayOfBoxedType extends Object {
    */
   m_test() {
     let numberArray =
-        /**@type {Array<(Number|?number)>} */ ($Arrays.$create([2], Number));
-    let byteArray = /**@type {Array<Byte>} */ ($Arrays.$create([2], Byte));
+        /**@type {!Array<(Number|?number)>} */ ($Arrays.$create([2], Number));
+    let byteArray = /**@type {!Array<Byte>} */ ($Arrays.$create([2], Byte));
     let doublerArray =
-        /**@type {Array<?number>} */ ($Arrays.$create([2], Double));
-    let floatArray = /**@type {Array<Float>} */ ($Arrays.$create([2], Float));
+        /**@type {!Array<?number>} */ ($Arrays.$create([2], Double));
+    let floatArray = /**@type {!Array<Float>} */ ($Arrays.$create([2], Float));
     let integerArray =
-        /**@type {Array<Integer>} */ ($Arrays.$create([2], Integer));
-    let longArray = /**@type {Array<Long>} */ ($Arrays.$create([2], Long));
-    let shortArray = /**@type {Array<Short>} */ ($Arrays.$create([2], Short));
+        /**@type {!Array<Integer>} */ ($Arrays.$create([2], Integer));
+    let longArray = /**@type {!Array<Long>} */ ($Arrays.$create([2], Long));
+    let shortArray = /**@type {!Array<Short>} */ ($Arrays.$create([2], Short));
     let characterArray =
-        /**@type {Array<Character>} */ ($Arrays.$create([2], Character));
+        /**@type {!Array<Character>} */ ($Arrays.$create([2], Character));
     let booleanArray =
-        /**@type {Array<?boolean>} */ ($Arrays.$create([2], Boolean));
+        /**@type {!Array<?boolean>} */ ($Arrays.$create([2], Boolean));
     let nArray = /**@type {Array<(Number|?number)>} */ (
         $Arrays.$castTo(byteArray, Number, 1));
     let bArray =

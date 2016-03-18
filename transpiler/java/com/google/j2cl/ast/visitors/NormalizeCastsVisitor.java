@@ -21,6 +21,7 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
+import com.google.j2cl.ast.CastExpressionBuilder;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsInfo;
@@ -69,7 +70,8 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
     Preconditions.checkArgument(
         castExpression.getCastTypeDescriptor() instanceof RegularTypeDescriptor);
     TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
-    TypeDescriptor rawCastTypeDescriptor = castTypeDescriptor.getRawTypeDescriptor();
+    TypeDescriptor rawCastTypeDescriptor =
+        castExpression.getCastTypeDescriptor().getRawTypeDescriptor();
     Expression expression = castExpression.getExpression();
 
     MethodDescriptor castToMethodDescriptor =
@@ -98,7 +100,10 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
     MethodCall castMethodCall =
         MethodCall.createRegularMethodCall(null, castToMethodDescriptor, arguments);
     // /**@type {}*/ ()
-    return CastExpression.createRaw(castMethodCall, castTypeDescriptor);
+    return CastExpressionBuilder.from(castExpression)
+        .isRaw(true)
+        .expression(castMethodCall)
+        .build();
   }
 
   private Node rewriteArrayCastExpression(CastExpression castExpression) {

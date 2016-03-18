@@ -45,8 +45,8 @@ public class InsertNarrowingReferenceConversionVisitor extends ConversionContext
               TypeDescriptor boxedTypeDescriptor =
                   TypeDescriptors.getBoxTypeFromPrimitiveType(toTypeDescriptor);
               // (int) new Object(); => (int) (Integer) new Object();
-              return new CastExpression(
-                  new CastExpression(castExpression.getExpression(), boxedTypeDescriptor),
+              return CastExpression.create(
+                  CastExpression.create(castExpression.getExpression(), boxedTypeDescriptor),
                   toTypeDescriptor);
             }
             // In other casting context, narrowing reference conversion should have been explicitly

@@ -28,22 +28,20 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodBuilder;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodCallBuilder;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PostfixOperator;
+import com.google.j2cl.ast.PrefixExpression;
+import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.Statement;
-import com.google.j2cl.ast.SuperReference;
-import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
@@ -211,8 +209,7 @@ public class NormalizeJsVarargsVisitor extends AbstractRewriter {
       }
       Expression lastArgument = Iterables.getLast(methodCall.getArguments());
       MethodCallBuilder methodCallBuilder = MethodCallBuilder.from(methodCall);
-
-      // Case A. If the last argument is an array literal, or an array creation with array literal,
+      // If the last argument is an array literal, or an array creation with array literal,
       // unwrap array literal, and pass the unwrapped arguments directly.
       ArrayLiteral arrayLiteral = null;
       if (lastArgument instanceof ArrayLiteral) {
@@ -231,45 +228,12 @@ public class NormalizeJsVarargsVisitor extends AbstractRewriter {
         return methodCallBuilder.build();
       }
 
-      // Case B. Otherwise, wrap all the arguments and transform to 'APPLY' style.
-      // i.e. in the form of fn.apply(thisArg, [args]);
-      Expression qualifier = methodCall.getQualifier();
-
-      // Case B.1. Simple cases, in which the qualifiers would not cause double side effect, thus
-      // just simply mark the method call as 'APPLY' style.
-      if (target.isStatic()) {
-        Preconditions.checkArgument(
-            qualifier instanceof TypeDescriptor,
-            "Qualifier of a static method call should have been normalized to the TypeDescriptor");
-        return methodCallBuilder.callStyle(MethodCall.CallStyle.APPLY).build();
-      }
-      if (qualifier instanceof VariableReference || qualifier instanceof ThisReference) {
-        return methodCallBuilder.callStyle(MethodCall.CallStyle.APPLY).build();
-      }
-
-      if (qualifier instanceof SuperReference || methodCall.isStaticDispatch()) {
-        // static dispatch method calls would not cause double side effect.
-        return methodCallBuilder.callStyle(MethodCall.CallStyle.APPLY).staticDispatch(true).build();
-      }
-
-      // Case B.2. Qualifier may have side effect, copy the potentially side effecting qualifier
-      // temporarily.
-      Expression utilQ =
-          new FieldAccess(
-              null,
-              FieldDescriptor.createRaw(
-                  true,
-                  TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor(),
-                  "$q",
-                  TypeDescriptors.get().javaLangObject)); // Util.$q;
-      // Util.$q = qualifier;
-      Expression copyQualifier =
-          new BinaryExpression(utilQ.getTypeDescriptor(), utilQ, BinaryOperator.ASSIGN, qualifier);
-      // (Util.$q = qualifier, Util.$q.)
-      return new MultiExpression(
-          Arrays.asList(
-              copyQualifier,
-              methodCallBuilder.callStyle(MethodCall.CallStyle.APPLY).qualifier(utilQ).build()));
+      methodCallBuilder.removeLastArgument();
+      methodCallBuilder.argument(
+          new PrefixExpression(
+              lastArgument.getTypeDescriptor(), lastArgument, PrefixOperator.SPREAD),
+          null);
+      return methodCallBuilder.build();
     }
   }
 }

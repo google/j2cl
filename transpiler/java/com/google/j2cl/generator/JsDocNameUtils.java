@@ -141,7 +141,8 @@ public class JsDocNameUtils {
       GenerationEnvironment environment) {
     if (typeDescriptor.isArray()) {
       return String.format(
-          "%s%s%s",
+          "%s%s%s%s",
+          nullable ? "" : "!",
           Strings.repeat("Array<", typeDescriptor.getDimensions()),
           getJsDocName(typeDescriptor.getLeafTypeDescriptor(), environment),
           Strings.repeat(">", typeDescriptor.getDimensions()));
