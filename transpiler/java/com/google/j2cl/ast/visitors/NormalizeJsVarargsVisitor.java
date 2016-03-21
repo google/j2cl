@@ -30,9 +30,7 @@ import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodBuilder;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodCallBuilder;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.Node;
@@ -187,7 +185,7 @@ public class NormalizeJsVarargsVisitor extends AbstractRewriter {
                   new PostfixExpression(
                       primitiveInt, loopVariable.getReference(), PostfixOperator.INCREMENT)));
 
-      return MethodBuilder.from(method)
+      return Method.Builder.from(method)
           .statement(0, variableDeclaration)
           .statement(1, forStatement)
           .build();
@@ -208,7 +206,8 @@ public class NormalizeJsVarargsVisitor extends AbstractRewriter {
         return methodCall;
       }
       Expression lastArgument = Iterables.getLast(methodCall.getArguments());
-      MethodCallBuilder methodCallBuilder = MethodCallBuilder.from(methodCall);
+      MethodCall.Builder methodCallBuilder = MethodCall.Builder.from(methodCall);
+
       // If the last argument is an array literal, or an array creation with array literal,
       // unwrap array literal, and pass the unwrapped arguments directly.
       ArrayLiteral arrayLiteral = null;
@@ -223,13 +222,13 @@ public class NormalizeJsVarargsVisitor extends AbstractRewriter {
         methodCallBuilder.removeLastArgument();
         for (Expression varArgument : arrayLiteral.getValueExpressions()) {
           // add argument to the call site, but do not change the MethodDescriptor.
-          methodCallBuilder.argument(varArgument, null);
+          methodCallBuilder.addArgument(varArgument, null);
         }
         return methodCallBuilder.build();
       }
 
       methodCallBuilder.removeLastArgument();
-      methodCallBuilder.argument(
+      methodCallBuilder.addArgument(
           new PrefixExpression(
               lastArgument.getTypeDescriptor(), lastArgument, PrefixOperator.SPREAD),
           null);

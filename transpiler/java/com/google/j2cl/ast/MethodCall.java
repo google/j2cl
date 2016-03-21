@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ import java.util.List;
  * Class for method call expression.
  */
 @Visitable
-public class MethodCall extends Expression implements MemberReference, Call {
+public class MethodCall extends Expression implements Invocation {
   /**
    * Represents the call styles: direct method call, or function.call(thisArg, ...), or
    * function.apply(thisArg, [...]).
@@ -51,12 +52,10 @@ public class MethodCall extends Expression implements MemberReference, Call {
       List<Expression> arguments,
       CallStyle callStyle,
       boolean isStaticDispatch) {
-    Preconditions.checkNotNull(targetMethodDescriptor);
-    Preconditions.checkNotNull(arguments);
+    this.targetMethodDescriptor = checkNotNull(targetMethodDescriptor);
+    this.callStyle = checkNotNull(callStyle);
     this.qualifier = AstUtils.getExplicitQualifier(qualifier, targetMethodDescriptor);
-    this.targetMethodDescriptor = targetMethodDescriptor;
-    this.arguments.addAll(arguments);
-    this.callStyle = callStyle;
+    this.arguments.addAll(checkNotNull(arguments));
     this.isStaticDispatch = isStaticDispatch;
   }
 
@@ -108,18 +107,6 @@ public class MethodCall extends Expression implements MemberReference, Call {
     return isStaticDispatch;
   }
 
-  public void setTargetMethodDescriptor(MethodDescriptor targetMethodDescriptor) {
-    this.targetMethodDescriptor = targetMethodDescriptor;
-  }
-
-  public void setCallStyle(CallStyle callStyle) {
-    this.callStyle = callStyle;
-  }
-
-  public void setStaticDispatch(boolean isStaticDispatch) {
-    this.isStaticDispatch = isStaticDispatch;
-  }
-
   @Override
   public TypeDescriptor getTypeDescriptor() {
     return targetMethodDescriptor.getReturnTypeDescriptor();
@@ -128,5 +115,45 @@ public class MethodCall extends Expression implements MemberReference, Call {
   @Override
   public Node accept(Processor processor) {
     return Visitor_MethodCall.visit(processor, this);
+  }
+
+  /**
+   * A Builder for easily and correctly creating modified versions of method calls.
+   *
+   * <p>Takes care of the busy work of keeping argument list and method descriptor parameter types
+   * list in sync.
+   */
+  public static class Builder extends Invocation.Builder<MethodCall> {
+    private CallStyle callStyle;
+    private boolean isStaticDispatch;
+
+    public static Builder from(MethodCall methodCall) {
+      Builder builder = new Builder();
+      builder.initFrom(methodCall);
+      builder.callStyle = methodCall.getCallStyle();
+      builder.isStaticDispatch = methodCall.isStaticDispatch();
+      return builder;
+    }
+
+    public Builder callStyle(CallStyle callStyle) {
+      this.callStyle = callStyle;
+      return this;
+    }
+
+    public Builder staticDispatch(boolean isStaticDispatch) {
+      this.isStaticDispatch = isStaticDispatch;
+      return this;
+    }
+
+    @Override
+    protected MethodCall doCreateInvocation(
+        Expression qualifierExpression,
+        MethodDescriptor methodDescriptor,
+        List<Expression> arguments) {
+      return new MethodCall(
+          qualifierExpression, methodDescriptor, arguments, callStyle, isStaticDispatch);
+    }
+
+    private Builder() {}
   }
 }

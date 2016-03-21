@@ -29,7 +29,6 @@ import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodBuilder;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -145,7 +144,7 @@ public class GeneratorUtils {
             new Function<Expression, String>() {
               @Override
               public String apply(Expression expression) {
-                return ExpressionTransformer.transform(expression, environment);
+                return ExpressionTranspiler.transform(expression, environment);
               }
             });
     return Joiner.on(", ").join(parameterNameList);
@@ -302,17 +301,18 @@ public class GeneratorUtils {
    * constructor, the this() call should have been invoked in constructor and should be removed in
    * $ctor.
    */
-  public static Method createNonPrimaryCtor(Method ctor) {
-    TypeDescriptor currentTypeDescriptor = ctor.getDescriptor().getEnclosingClassTypeDescriptor();
+  public static Method createNonPrimaryConstructor(Method constructor) {
+    TypeDescriptor currentTypeDescriptor =
+        constructor.getDescriptor().getEnclosingClassTypeDescriptor();
     TypeDescriptor superclassTypeDescriptor = currentTypeDescriptor.getSuperTypeDescriptor();
     boolean removeFirstStatement =
-        AstUtils.hasThisCall(ctor)
+        AstUtils.hasThisCall(constructor)
             ? currentTypeDescriptor.subclassesJsConstructorClass()
             : superclassTypeDescriptor.subclassesJsConstructorClass();
     if (removeFirstStatement) {
-      return MethodBuilder.from(ctor).removeStatement(0).build();
+      return Method.Builder.from(constructor).removeStatement(0).build();
     }
-    return ctor;
+    return constructor;
   }
 
   /**

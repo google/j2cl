@@ -19,6 +19,8 @@ package com.google.j2cl.ast.processors;
  * Marks a node as having meta data that the rewriter needs to preserve.  Its up to the node
  * implementation to copy the metadata.
  */
-public interface HasMetadata {
-  public void copyMetadataFrom(HasMetadata store);
+public interface HasMetadata<T extends HasMetadata<T>> {
+  void copyMetadataFrom(HasMetadata<T> store);
+
+  T getMetadata();
 }

@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.CompilationUnit;
@@ -23,7 +22,6 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodCallBuilder;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeReference;
@@ -70,17 +68,17 @@ public class NormalizeStaticMemberQualifiersPass {
       // call).
       // Only look at assignments into fields where the field has an instance qualifier.
       Expression leftOperand = binaryExpression.getLeftOperand();
-      if (binaryExpression.getOperator().doesAssignment()
+      if (binaryExpression.getOperator().hasSideEffect()
           && isStaticMemberReferenceWithInstanceQualifier(leftOperand)) {
+
         FieldAccess fieldAccess = (FieldAccess) leftOperand;
         return new MultiExpression(
-            Lists.newArrayList(
-                fieldAccess.getQualifier(), // Preserve the side effect.
-                new BinaryExpression( // Rewrite the assignment without the qualifier.
-                    binaryExpression.getTypeDescriptor(),
-                    new FieldAccess(null, fieldAccess.getTarget()),
-                    binaryExpression.getOperator(),
-                    binaryExpression.getRightOperand())));
+            fieldAccess.getQualifier(), // Preserve the side effect.
+            new BinaryExpression( // Rewrite the assignment without the qualifier.
+                binaryExpression.getTypeDescriptor(),
+                new FieldAccess(null, fieldAccess.getTarget()),
+                binaryExpression.getOperator(),
+                binaryExpression.getRightOperand()));
       }
       return binaryExpression;
     }
@@ -93,10 +91,9 @@ public class NormalizeStaticMemberQualifiersPass {
       // so that it is logically a "SomeClass.staticField".
       if (isStaticMemberReferenceWithInstanceQualifier(fieldAccess)) {
         return new MultiExpression(
-            Lists.newArrayList(
-                fieldAccess.getQualifier(), // Preserve side effects.
-                new FieldAccess(null, fieldAccess.getTarget())) // Static dispatch
-        );
+            fieldAccess.getQualifier(), // Preserve side effects.
+            new FieldAccess(null, fieldAccess.getTarget()) // Static dispatch
+            );
       }
 
       return fieldAccess;
@@ -108,10 +105,9 @@ public class NormalizeStaticMemberQualifiersPass {
       // qualifier so that it is logically a "SomeClass.staticMethod()".
       if (isStaticMemberReferenceWithInstanceQualifier(methodCall)) {
         return new MultiExpression(
-            Lists.newArrayList(
-                methodCall.getQualifier(), // Preserve side effects.
-                MethodCallBuilder.from(methodCall).qualifier(null).build()) // Static dispatch
-        );
+            methodCall.getQualifier(), // Preserve side effects.
+            MethodCall.Builder.from(methodCall).qualifier(null).build() // Static dispatch
+            );
       }
       return methodCall;
     }

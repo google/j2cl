@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -27,10 +28,8 @@ public class InstanceOfExpression extends Expression {
   @Visitable TypeDescriptor testTypeDescriptor;
 
   public InstanceOfExpression(Expression expression, TypeDescriptor testTypeDescriptor) {
-    Preconditions.checkNotNull(expression);
-    Preconditions.checkNotNull(testTypeDescriptor);
-    this.expression = expression;
-    this.testTypeDescriptor = testTypeDescriptor;
+    this.expression = checkNotNull(expression);
+    this.testTypeDescriptor = checkNotNull(testTypeDescriptor);
   }
 
   public Expression getExpression() {
@@ -39,14 +38,6 @@ public class InstanceOfExpression extends Expression {
 
   public TypeDescriptor getTestTypeDescriptor() {
     return testTypeDescriptor;
-  }
-
-  public void setExpression(Expression leftOperand) {
-    this.expression = leftOperand;
-  }
-
-  public void setTestTypeDescriptor(TypeDescriptor testTypeDescriptor) {
-    this.testTypeDescriptor = testTypeDescriptor;
   }
 
   @Override

@@ -24,12 +24,12 @@ import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractTransformer;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
-import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CharacterLiteral;
+import com.google.j2cl.ast.ConditionalExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.InstanceOfExpression;
@@ -47,7 +47,6 @@ import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.StringLiteral;
 import com.google.j2cl.ast.SuperReference;
-import com.google.j2cl.ast.TernaryExpression;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -65,7 +64,7 @@ import java.util.List;
 /**
  * Transforms Expression to JavaScript source strings.
  */
-public class ExpressionTransformer {
+public class ExpressionTranspiler {
   private static String stringForMethodDescriptor(MethodDescriptor methodDescriptor) {
     if (methodDescriptor.isConstructor()) {
       return ManglingNameUtils.getCtorMangledName(methodDescriptor);
@@ -105,7 +104,7 @@ public class ExpressionTransformer {
       // TODO: extend to handle long[].
       private String transformArrayAssignmentBinaryExpression(BinaryExpression expression) {
         Preconditions.checkState(
-            AstUtils.isAssignmentOperator(expression.getOperator())
+            expression.getOperator().hasSideEffect()
                 && expression.getLeftOperand() instanceof ArrayAccess);
 
         ArrayAccess arrayAccess = (ArrayAccess) expression.getLeftOperand();
@@ -130,11 +129,11 @@ public class ExpressionTransformer {
         Expression leftOperand = expression.getLeftOperand();
         BinaryOperator operator = expression.getOperator();
 
-        if (AstUtils.isAssignmentOperator(operator) && leftOperand instanceof ArrayAccess) {
+        if (operator.hasSideEffect() && leftOperand instanceof ArrayAccess) {
           return transformArrayAssignmentBinaryExpression(expression);
         } else {
           Preconditions.checkState(
-              !(AstUtils.isAssignmentOperator(expression.getOperator())
+              !(expression.getOperator().hasSideEffect()
                   && expression.getLeftOperand() instanceof ArrayAccess));
 
           return String.format(
@@ -174,10 +173,10 @@ public class ExpressionTransformer {
         // When inside the same class, access static fields directly.
         boolean insideSameEnclosingClass =
             fieldAccess.getTarget().isStatic()
-             && fieldAccess
-                .getTarget()
-                .getEnclosingClassTypeDescriptor()
-                .equals(environment.getEnclosingTypeDescriptor());
+                && fieldAccess
+                    .getTarget()
+                    .getEnclosingClassTypeDescriptor()
+                    .equals(environment.getEnclosingTypeDescriptor());
         // No private backing field for compile time constants.
         boolean accessBackingPrivateField =
             !fieldAccess.getTarget().isCompileTimeConstant() && insideSameEnclosingClass;
@@ -232,12 +231,27 @@ public class ExpressionTransformer {
         return String.format(
             "%s.%s.call(%s)",
             qualifier,
-            ExpressionTransformer.stringForMethodDescriptor(methodDescriptor),
+            ExpressionTranspiler.stringForMethodDescriptor(methodDescriptor),
             Joiner.on(", ")
                 .join(
                     Iterables.concat(
                         Arrays.asList(transform(expression.getQualifier(), environment)),
                         argumentSources)));
+      }
+
+      @Override
+      public String transformConditionalExpression(ConditionalExpression conditionalExpression) {
+        String conditionExpressionAsString =
+            transform(conditionalExpression.getConditionExpression(), environment);
+        String trueExpressionAsString =
+            transform(conditionalExpression.getTrueExpression(), environment);
+        String falseExpressionAsString =
+            transform(conditionalExpression.getFalseExpression(), environment);
+        return String.format(
+            "%s ? %s : %s",
+            conditionExpressionAsString,
+            trueExpressionAsString,
+            falseExpressionAsString);
       }
 
       private String transformDirectMethodCall(MethodCall expression) {
@@ -292,10 +306,10 @@ public class ExpressionTransformer {
           return String.format("%s", qualifier);
         } else if (expression.isStaticDispatch()) {
           String typeName = environment.aliasForType(target.getEnclosingClassTypeDescriptor());
-          String methodName = ExpressionTransformer.stringForMethodDescriptor(target);
+          String methodName = ExpressionTranspiler.stringForMethodDescriptor(target);
           return typeName + ".prototype." + methodName;
         } else {
-          String methodName = ExpressionTransformer.stringForMethodDescriptor(target);
+          String methodName = ExpressionTranspiler.stringForMethodDescriptor(target);
           return Joiner.on(".").skipNulls().join(Strings.emptyToNull(qualifier), methodName);
         }
       }
@@ -405,21 +419,6 @@ public class ExpressionTransformer {
       @Override
       public String transformSuperReference(SuperReference expression) {
         return "super";
-      }
-
-      @Override
-      public String transformTernaryExpression(TernaryExpression ternaryExpression) {
-        String conditionExpressionAsString =
-            transform(ternaryExpression.getConditionExpression(), environment);
-        String trueExpressionAsString =
-            transform(ternaryExpression.getTrueExpression(), environment);
-        String falseExpressionAsString =
-            transform(ternaryExpression.getFalseExpression(), environment);
-        return String.format(
-            "%s ? %s : %s",
-            conditionExpressionAsString,
-            trueExpressionAsString,
-            falseExpressionAsString);
       }
 
       @Override

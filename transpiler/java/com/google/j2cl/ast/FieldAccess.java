@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -27,9 +28,8 @@ public class FieldAccess extends Expression implements MemberReference {
   @Visitable FieldDescriptor targetFieldDescriptor;
 
   public FieldAccess(Expression qualifier, FieldDescriptor targetFieldDescriptor) {
-    Preconditions.checkNotNull(targetFieldDescriptor);
+    this.targetFieldDescriptor = checkNotNull(targetFieldDescriptor);
     this.qualifier = AstUtils.getExplicitQualifier(qualifier, targetFieldDescriptor);
-    this.targetFieldDescriptor = targetFieldDescriptor;
   }
 
   @Override
@@ -44,10 +44,6 @@ public class FieldAccess extends Expression implements MemberReference {
   @Override
   public FieldDescriptor getTarget() {
     return targetFieldDescriptor;
-  }
-
-  public void setTargetFieldDescriptor(FieldDescriptor targetFieldDescriptor) {
-    this.targetFieldDescriptor = targetFieldDescriptor;
   }
 
   @Override

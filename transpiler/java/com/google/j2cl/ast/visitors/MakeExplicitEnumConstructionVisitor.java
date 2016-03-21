@@ -23,11 +23,8 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodBuilder;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodCallBuilder;
 import com.google.j2cl.ast.NewInstance;
-import com.google.j2cl.ast.NewInstanceBuilder;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.StringLiteral;
@@ -60,14 +57,10 @@ public class MakeExplicitEnumConstructionVisitor extends AbstractRewriter {
     if (!method.isConstructor() || !isEnumOrSubclass(getCurrentJavaType())) {
       return method;
     }
-    MethodBuilder methodBuilder = MethodBuilder.from(method);
-
-    methodBuilder.parameter(nameVariable, nameVariable.getTypeDescriptor());
-    methodBuilder.parameter(ordinalVariable, ordinalVariable.getTypeDescriptor());
-
-    Method newMethod = methodBuilder.build();
-
-    return newMethod;
+    return Method.Builder.from(method)
+        .parameter(nameVariable, nameVariable.getTypeDescriptor())
+        .parameter(ordinalVariable, ordinalVariable.getTypeDescriptor())
+        .build();
   }
 
   @Override
@@ -82,12 +75,10 @@ public class MakeExplicitEnumConstructionVisitor extends AbstractRewriter {
       return methodCall;
     }
 
-    MethodCallBuilder methodCallBuilder = MethodCallBuilder.from(methodCall);
-
-    methodCallBuilder.argument(nameVariable.getReference(), nameVariable.getTypeDescriptor());
-    methodCallBuilder.argument(ordinalVariable.getReference(), ordinalVariable.getTypeDescriptor());
-
-    return methodCallBuilder.build();
+    return MethodCall.Builder.from(methodCall)
+        .addArgument(nameVariable.getReference(), nameVariable.getTypeDescriptor())
+        .addArgument(ordinalVariable.getReference(), ordinalVariable.getTypeDescriptor())
+        .build();
   }
 
   @Override
@@ -105,7 +96,6 @@ public class MakeExplicitEnumConstructionVisitor extends AbstractRewriter {
     }
     // This is definitely an enum initialization NewInstance.
 
-    NewInstanceBuilder newInstanceBuilder = NewInstanceBuilder.from(newInstance);
 
     Field enumField = getCurrentField();
     Preconditions.checkState(
@@ -116,14 +106,14 @@ public class MakeExplicitEnumConstructionVisitor extends AbstractRewriter {
         ordinalsByEnumTypeDescriptor.add(
             enumField.getDescriptor().getEnclosingClassTypeDescriptor(), 1);
 
-    newInstanceBuilder.argument(
-        new StringLiteral("\"" + enumField.getDescriptor().getFieldName() + "\""),
-        TypeDescriptors.get().javaLangString);
-    newInstanceBuilder.argument(
-        new NumberLiteral(TypeDescriptors.get().primitiveInt, currentOrdinal),
-        TypeDescriptors.get().primitiveInt);
-
-    return newInstanceBuilder.build();
+    return NewInstance.Builder.from(newInstance)
+        .addArgument(
+            StringLiteral.fromPlainText(enumField.getDescriptor().getFieldName()),
+            TypeDescriptors.get().javaLangString)
+        .addArgument(
+            new NumberLiteral(TypeDescriptors.get().primitiveInt, currentOrdinal),
+            TypeDescriptors.get().primitiveInt)
+        .build();
   }
 
   private void makeEnumConstructionExplicit() {

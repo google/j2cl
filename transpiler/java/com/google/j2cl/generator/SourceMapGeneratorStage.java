@@ -68,7 +68,7 @@ public class SourceMapGeneratorStage {
         sourceMapGenerator.reset();
         List<Statement> sortedStatements = statementsSortedByJavaSourcePosition();
         for (Statement statement : sortedStatements) {
-          SourceInfo javaSourcePosition = statement.getInputSourceInfo();
+          SourceInfo javaSourcePosition = statement.getJavaSourceInfo();
           SourceInfo javaScriptSourcePosition = statement.getOutputSourceInfo();
           if (javaSourcePosition == SourceInfo.UNKNOWN_SOURCE_INFO
               || javaScriptSourcePosition == SourceInfo.UNKNOWN_SOURCE_INFO) {

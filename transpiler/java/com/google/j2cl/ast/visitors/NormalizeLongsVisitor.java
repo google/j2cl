@@ -169,11 +169,11 @@ public class NormalizeLongsVisitor extends AbstractRewriter {
         return "$equals";
       case NOT_EQUALS:
         return "$notEquals";
-      case XOR:
+      case BIT_XOR:
         return "$xor";
-      case AND:
+      case BIT_AND:
         return "$and";
-      case OR:
+      case BIT_OR:
         return "$or";
       default:
         Preconditions.checkArgument(

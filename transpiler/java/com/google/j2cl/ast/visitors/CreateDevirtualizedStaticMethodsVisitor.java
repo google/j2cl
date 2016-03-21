@@ -18,7 +18,6 @@ package com.google.j2cl.ast.visitors;
 import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
@@ -79,8 +78,7 @@ public class CreateDevirtualizedStaticMethodsVisitor extends AbstractRewriter {
     // Turn the instance method to an empty method since it should not be called. But we should not
     // delete it otherwise it may lead to JSCompiler errors that complains that the class does not
     // implement all the methods in its super interfaces.
-    method.setBody(new Block());
-    return method;
+    return Method.Builder.from(method).clearStatements().build();
   }
 
   private boolean shouldDevirtualize(Method method, JavaType javaType) {

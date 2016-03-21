@@ -15,8 +15,12 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
+
+import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
  * String literal node.
@@ -26,12 +30,12 @@ public class StringLiteral extends Expression {
   private final String escapedValue;
 
   public StringLiteral(String escapedValue) {
-    Preconditions.checkArgument(
+    this.escapedValue = checkNotNull(escapedValue);
+    checkArgument(
         escapedValue.startsWith("\"") && escapedValue.endsWith("\""),
         "The 'escapedValue' argument must be escaped (and conform to JDT's definition "
             + "of escaped) which that means that it also includes it's own starting "
             + "and ending \"s.");
-    this.escapedValue = escapedValue;
   }
 
   public String getEscapedValue() {
@@ -46,5 +50,12 @@ public class StringLiteral extends Expression {
   @Override
   public TypeDescriptor getTypeDescriptor() {
     return TypeDescriptors.get().javaLangString;
+  }
+
+  /**
+   * Creates a StringLiteral from plain text.
+   */
+  public static StringLiteral fromPlainText(String string) {
+    return new StringLiteral("\"" + StringEscapeUtils.escapeJava(string) + "\"");
   }
 }

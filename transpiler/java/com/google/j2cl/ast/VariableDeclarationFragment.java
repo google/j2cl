@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 import javax.annotation.Nullable;
@@ -31,8 +32,7 @@ public class VariableDeclarationFragment extends Expression {
   @Visitable @Nullable Expression initializer;
 
   public VariableDeclarationFragment(Variable variable, Expression initializer) {
-    Preconditions.checkNotNull(variable);
-    this.variable = variable;
+    this.variable = checkNotNull(variable);
     this.initializer = initializer;
   }
 

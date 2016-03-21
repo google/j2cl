@@ -51,9 +51,9 @@ public class FixBooleanOperatorsPass {
       // Maybe perform this transformation:
       // "bool ^ bool" -> "!!(bool ^ bool)"
       if (binaryExpression.getTypeDescriptor() == primitiveBoolean) {
-        if (binaryExpression.getOperator() == BinaryOperator.AND
-            || binaryExpression.getOperator() == BinaryOperator.OR
-            || binaryExpression.getOperator() == BinaryOperator.XOR) {
+        if (binaryExpression.getOperator() == BinaryOperator.BIT_AND
+            || binaryExpression.getOperator() == BinaryOperator.BIT_OR
+            || binaryExpression.getOperator() == BinaryOperator.BIT_XOR) {
           return new PrefixExpression(
               primitiveBoolean,
               new PrefixExpression(

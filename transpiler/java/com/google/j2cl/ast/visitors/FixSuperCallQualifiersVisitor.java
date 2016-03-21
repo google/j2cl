@@ -24,7 +24,6 @@ import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodCallBuilder;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.ThisReference;
@@ -71,7 +70,7 @@ public class FixSuperCallQualifiersVisitor extends AbstractRewriter {
       // has an explicit qualifier.
       return methodCall;
     }
-    return MethodCallBuilder.from(methodCall)
+    return MethodCall.Builder.from(methodCall)
         .qualifier(findSuperCallQualifier(getCurrentJavaType().getDescriptor()))
         .build();
   }

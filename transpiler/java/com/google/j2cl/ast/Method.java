@@ -15,7 +15,9 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import com.google.common.collect.Lists;
 import com.google.j2cl.ast.processors.Context;
 import com.google.j2cl.ast.processors.Visitable;
 
@@ -48,16 +50,13 @@ public class Method extends Node {
       boolean isOverride,
       boolean isFinal,
       String jsDocDescription) {
-    Preconditions.checkNotNull(methodDescriptor);
-    Preconditions.checkNotNull(parameters);
-    Preconditions.checkNotNull(body);
-    this.methodDescriptor = methodDescriptor;
-    this.parameters.addAll(parameters);
-    this.body = body;
+    this.methodDescriptor = checkNotNull(methodDescriptor);
+    this.parameters.addAll(checkNotNull(parameters));
     this.isAbstract = isAbstract;
     this.isOverride = isOverride;
     this.isFinal = isFinal;
     this.jsDocDescription = jsDocDescription;
+    this.body = checkNotNull(body);
     if (jsDocDescription == null && isConstructor()) {
       this.jsDocDescription = "Initializes instance fields for a particular Java constructor.";
     }
@@ -81,10 +80,6 @@ public class Method extends Node {
 
   public boolean isNative() {
     return methodDescriptor.isNative();
-  }
-
-  public void setBody(Block body) {
-    this.body = body;
   }
 
   public boolean isAbstract() {
@@ -118,5 +113,100 @@ public class Method extends Node {
   @Override
   public Node accept(Processor processor) {
     return Visitor_Method.visit(processor, this);
+  }
+
+  /**
+   * A Builder for easily and correctly creating modified versions of methods.
+   *
+   * <p>Takes care of the busy work of keeping parameter list and method descriptor parameter type
+   * list in sync.
+   */
+  public static class Builder {
+
+    private MethodDescriptor originalMethodDescriptor;
+    private List<Variable> originalParameterVariables = new ArrayList<>();
+    private List<Variable> addedParameterVariables = new ArrayList<>();
+    private List<TypeDescriptor> addedParameterTypeDescriptors = new ArrayList<>();
+    private List<Statement> statements = new ArrayList<>();
+    private boolean isAbstract;
+    private boolean isOverride;
+    private String jsDocDescription;
+    private boolean isFinal;
+
+    public static Builder from(Method method) {
+      Builder builder = new Builder();
+      builder.originalMethodDescriptor = method.getDescriptor();
+      builder.originalParameterVariables = Lists.newArrayList(method.getParameters());
+      builder.statements = Lists.newArrayList(method.getBody().getStatements());
+      builder.isAbstract = method.isAbstract();
+      builder.isOverride = method.isOverride();
+      builder.jsDocDescription = method.getJsDocDescription();
+      builder.isFinal = method.isFinal();
+      builder.isFinal = method.isFinal();
+      return builder;
+    }
+
+    public Builder parameter(Variable parameterVariable, TypeDescriptor parameterTypeDescriptor) {
+      addedParameterVariables.add(parameterVariable);
+      addedParameterTypeDescriptors.add(parameterTypeDescriptor);
+      return this;
+    }
+
+    public Builder statement(Statement statement) {
+      statements.add(statement);
+      return this;
+    }
+
+    public Builder statement(int index, Statement statement) {
+      statements.add(index, statement);
+      return this;
+    }
+
+    public Builder clearStatements() {
+      statements.clear();
+      return this;
+    }
+
+    public Builder removeStatement(int index) {
+      statements.remove(index);
+      return this;
+    }
+
+    public Builder enclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
+      this.originalMethodDescriptor =
+          MethodDescriptorBuilder.from(originalMethodDescriptor)
+              .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+              .build();
+      return this;
+    }
+
+    public Builder isOverride(boolean isOverride) {
+      this.isOverride = isOverride;
+      return this;
+    }
+
+    public Builder jsDocDescription(String jsDocDescription) {
+      this.jsDocDescription = jsDocDescription;
+      return this;
+    }
+
+    public Method build() {
+      List<Variable> finalParameters = new ArrayList<>();
+      finalParameters.addAll(originalParameterVariables);
+      finalParameters.addAll(addedParameterVariables);
+
+      MethodDescriptor finalMethodDescriptor =
+          MethodDescriptors.createModifiedCopy(
+              originalMethodDescriptor, addedParameterTypeDescriptors);
+
+      return new Method(
+          finalMethodDescriptor,
+          finalParameters,
+          new Block(statements),
+          isAbstract,
+          isOverride,
+          isFinal,
+          jsDocDescription);
+    }
   }
 }

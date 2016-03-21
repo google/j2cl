@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
@@ -30,10 +31,8 @@ public class SwitchStatement extends Statement {
   @Visitable List<Statement> bodyStatements = new ArrayList<>();
 
   public SwitchStatement(Expression matchExpression, List<Statement> bodyStatements) {
-    Preconditions.checkNotNull(matchExpression);
-    Preconditions.checkNotNull(bodyStatements);
-    this.matchExpression = matchExpression;
-    this.bodyStatements.addAll(bodyStatements);
+    this.matchExpression = checkNotNull(matchExpression);
+    this.bodyStatements.addAll(checkNotNull(bodyStatements));
   }
 
   public Expression getMatchExpression() {

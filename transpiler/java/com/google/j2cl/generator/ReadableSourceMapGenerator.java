@@ -58,7 +58,7 @@ public class ReadableSourceMapGenerator {
 
     @Override
     public boolean enterStatement(Statement statement) {
-      SourceInfo intput = statement.getInputSourceInfo();
+      SourceInfo intput = statement.getJavaSourceInfo();
       SourceInfo output = statement.getOutputSourceInfo();
       writer.append(String.format("%s ", statement.getClass().getSimpleName()));
       writer.append(formatSourceInfo(intput));

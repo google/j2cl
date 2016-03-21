@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -26,8 +27,7 @@ public class VariableReference extends Expression {
   @Visitable Variable target;
 
   public VariableReference(Variable target) {
-    Preconditions.checkNotNull(target);
-    this.target = target;
+    setTarget(target);
   }
 
   public Variable getTarget() {
@@ -35,7 +35,7 @@ public class VariableReference extends Expression {
   }
 
   public void setTarget(Variable target) {
-    this.target = target;
+    this.target = checkNotNull(target);
   }
 
   @Override

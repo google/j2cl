@@ -53,6 +53,6 @@ public abstract class JavaScriptGenerator extends AbstractSourceGenerator {
   // TODO: This is almost exclusively used to transform type descriptors, once we move field
   // initialization to the ast we can change this to getDescriptorName(TypeDescriptor descriptor)
   public String expressionToString(Expression expression) {
-    return ExpressionTransformer.transform(expression, environment);
+    return ExpressionTranspiler.transform(expression, environment);
   }
 }

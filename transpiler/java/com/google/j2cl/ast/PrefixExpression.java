@@ -15,46 +15,26 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
- * Class for Prefix Expression.
+ * Class for prefix unary expressions.
  */
 @Visitable
-public class PrefixExpression extends Expression {
-  private TypeDescriptor typeDescriptor;
-  @Visitable Expression operand;
+public class PrefixExpression extends UnaryExpression {
   private PrefixOperator operator;
 
   public PrefixExpression(
       TypeDescriptor typeDescriptor, Expression operand, PrefixOperator operator) {
-    Preconditions.checkNotNull(typeDescriptor);
-    Preconditions.checkNotNull(operand);
-    this.typeDescriptor = typeDescriptor;
-    this.operand = operand;
-    this.operator = operator;
-  }
-
-  public Expression getOperand() {
-    return operand;
-  }
-
-  public PrefixOperator getOperator() {
-    return operator;
-  }
-
-  public void setOperand(Expression operand) {
-    this.operand = operand;
-  }
-
-  public void setOperator(PrefixOperator operator) {
-    this.operator = operator;
+    super(checkNotNull(typeDescriptor), operand);
+    this.operator = checkNotNull(operator);
   }
 
   @Override
-  public TypeDescriptor getTypeDescriptor() {
-    return typeDescriptor;
+  public PrefixOperator getOperator() {
+    return operator;
   }
 
   @Override

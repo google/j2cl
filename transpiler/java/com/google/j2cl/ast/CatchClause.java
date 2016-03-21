@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -27,10 +28,8 @@ public class CatchClause extends Node {
   @Visitable Variable exceptionVar;
 
   public CatchClause(Block body, Variable exceptionVar) {
-    Preconditions.checkNotNull(body);
-    Preconditions.checkNotNull(exceptionVar);
-    this.body = body;
-    this.exceptionVar = exceptionVar;
+    this.body = checkNotNull(body);
+    this.exceptionVar = checkNotNull(exceptionVar);
   }
 
   public Block getBody() {

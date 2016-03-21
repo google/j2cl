@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -26,16 +27,11 @@ public class ExpressionStatement extends Statement {
   @Visitable Expression expression;
 
   public ExpressionStatement(Expression expression) {
-    Preconditions.checkNotNull(expression);
-    this.expression = expression;
+    this.expression = checkNotNull(expression);
   }
 
   public Expression getExpression() {
     return expression;
-  }
-
-  public void setExpression(Expression expression) {
-    this.expression = expression;
   }
 
   @Override

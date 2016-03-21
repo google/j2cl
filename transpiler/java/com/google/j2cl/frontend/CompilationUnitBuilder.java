@@ -37,6 +37,7 @@ import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CatchClause;
 import com.google.j2cl.ast.CharacterLiteral;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.ConditionalExpression;
 import com.google.j2cl.ast.ContinueStatement;
 import com.google.j2cl.ast.DoWhileStatement;
 import com.google.j2cl.ast.EmptyStatement;
@@ -73,7 +74,6 @@ import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.SwitchCase;
 import com.google.j2cl.ast.SwitchStatement;
 import com.google.j2cl.ast.SynchronizedStatement;
-import com.google.j2cl.ast.TernaryExpression;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
@@ -88,7 +88,6 @@ import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.ast.sourcemap.SourceInfo;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
 import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
@@ -332,13 +331,10 @@ public class CompilationUnitBuilder {
             JdtUtils.createTypeDescriptor(variableBinding.getType()), (Number) constantValue);
       }
       if (constantValue instanceof String) {
-        return new StringLiteral(
-            "\"" + StringEscapeUtils.escapeJava((String) constantValue) + "\"");
+        return StringLiteral.fromPlainText((String) constantValue);
       }
       if (constantValue instanceof Character) {
-        return new CharacterLiteral(
-            (char) constantValue,
-            "\"" + StringEscapeUtils.escapeJava(String.valueOf((char) constantValue)) + "\"");
+        return new CharacterLiteral((char) constantValue);
       }
       if (constantValue instanceof Boolean) {
         return (boolean) constantValue ? BooleanLiteral.TRUE : BooleanLiteral.FALSE;
@@ -704,12 +700,12 @@ public class CompilationUnitBuilder {
               }));
     }
 
-    private TernaryExpression convert(
+    private ConditionalExpression convert(
         org.eclipse.jdt.core.dom.ConditionalExpression jdtConditionalExpression) {
       Expression conditionExpression = convert(jdtConditionalExpression.getExpression());
       Expression trueExpression = convert(jdtConditionalExpression.getThenExpression());
       Expression falseExpression = convert(jdtConditionalExpression.getElseExpression());
-      return new TernaryExpression(
+      return new ConditionalExpression(
           JdtUtils.createTypeDescriptor(jdtConditionalExpression.resolveTypeBinding()),
           conditionExpression,
           trueExpression,
@@ -784,7 +780,7 @@ public class CompilationUnitBuilder {
       SourceInfo position = sourceInfoForNode(statement);
       Statement j2clStatement = convertStatement(statement);
       if (j2clStatement != null) {
-        j2clStatement.setInputSourceInfo(position);
+        j2clStatement.setJavaSourceInfo(position);
       }
       return j2clStatement;
     }

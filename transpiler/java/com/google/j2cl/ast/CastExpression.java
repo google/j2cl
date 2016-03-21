@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -28,12 +29,10 @@ public class CastExpression extends Expression {
   private boolean isRaw; // Raw casts are those that are not checked at run time. Only annotated.
   private boolean isNullable;
 
-  CastExpression(
+  private CastExpression(
       Expression expression, TypeDescriptor castTypeDescriptor, boolean isRaw, boolean isNullable) {
-    Preconditions.checkNotNull(expression);
-    Preconditions.checkNotNull(castTypeDescriptor);
-    this.expression = expression;
-    this.castTypeDescriptor = castTypeDescriptor;
+    this.expression = checkNotNull(expression);
+    this.castTypeDescriptor = checkNotNull(castTypeDescriptor);
     this.isRaw = isRaw;
     this.isNullable = isNullable;
   }
@@ -87,5 +86,48 @@ public class CastExpression extends Expression {
   @Override
   public Node accept(Processor processor) {
     return Visitor_CastExpression.visit(processor, this);
+  }
+
+  /**
+   * A Builder for easily and correctly creating modified versions of CastExpressions.
+   */
+  public static class Builder {
+    private Expression expression;
+    private TypeDescriptor castTypeDescriptor;
+    private boolean isRaw;
+    private boolean isNullable;
+
+    public static Builder from(CastExpression cast) {
+      Builder builder = new Builder();
+      builder.expression = cast.getExpression();
+      builder.castTypeDescriptor = cast.getCastTypeDescriptor();
+      builder.isRaw = cast.isRaw();
+      builder.isNullable = cast.isNullable();
+      return builder;
+    }
+
+    public Builder expression(Expression expression) {
+      this.expression = expression;
+      return this;
+    }
+
+    public Builder castTypeDescriptor(TypeDescriptor castTypeDescriptor) {
+      this.castTypeDescriptor = castTypeDescriptor;
+      return this;
+    }
+
+    public Builder isRaw(boolean isRaw) {
+      this.isRaw = isRaw;
+      return this;
+    }
+
+    public Builder isNullable(boolean isNullable) {
+      this.isNullable = isNullable;
+      return this;
+    }
+
+    public CastExpression build() {
+      return new CastExpression(expression, castTypeDescriptor, isRaw, isNullable);
+    }
   }
 }

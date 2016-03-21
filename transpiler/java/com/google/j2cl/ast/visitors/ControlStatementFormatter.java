@@ -69,7 +69,7 @@ public class ControlStatementFormatter extends AbstractRewriter {
         forStatement.getConditionExpression(),
         new Block(Collections.singletonList(body)),
         forStatement.getInitializers(),
-        forStatement.getUpdaters());
+        forStatement.getUpdates());
   }
 
   @Override

@@ -20,14 +20,9 @@ import com.google.j2cl.ast.processors.HasMetadata;
 /**
  * Forces a node to keep track of its location within the original Java Source.
  */
-public interface TracksSourceInfo extends HasMetadata {
+public interface TracksSourceInfo extends HasMetadata<TracksSourceInfo> {
   // The location in the original Java source file.
-  public SourceInfo getInputSourceInfo();
+  SourceInfo getJavaSourceInfo();
 
-  public void setInputSourceInfo(SourceInfo sourceInfo);
-
-  // The location in the generate Javascript file.
-  public SourceInfo getOutputSourceInfo();
-
-  public void setOutputSourceInfo(SourceInfo sourceInfo);
+  void setJavaSourceInfo(SourceInfo sourceInfo);
 }

@@ -48,11 +48,11 @@ import java.util.List;
 /**
  * Transforms Statements to JavaScript source strings.
  */
-public class StatementTransformer {
+public class StatementTranspiler {
   SourceBuilder builder;
   GenerationEnvironment environment;
 
-  public StatementTransformer(SourceBuilder builder, GenerationEnvironment environment) {
+  public StatementTranspiler(SourceBuilder builder, GenerationEnvironment environment) {
     this.builder = builder;
     this.environment = environment;
   }
@@ -158,7 +158,7 @@ public class StatementTransformer {
                 : toSourceExpression(forStatement.getConditionExpression());
 
         List<String> updaters = new ArrayList<>();
-        for (Expression e : forStatement.getUpdaters()) {
+        for (Expression e : forStatement.getUpdates()) {
           updaters.add(toSourceExpression(e));
         }
         String updatersAsString = Joiner.on(",").join(updaters);
@@ -301,7 +301,7 @@ public class StatementTransformer {
       }
 
       private String toSourceExpression(Expression expression) {
-        return ExpressionTransformer.transform(expression, environment);
+        return ExpressionTranspiler.transform(expression, environment);
       }
 
       @Override

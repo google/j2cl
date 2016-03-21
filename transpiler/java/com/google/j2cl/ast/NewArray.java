@@ -15,7 +15,9 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
@@ -36,14 +38,11 @@ public class NewArray extends Expression {
       ArrayTypeDescriptor typeDescriptor,
       List<Expression> dimensionExpressions,
       ArrayLiteral arrayLiteral) {
-    Preconditions.checkNotNull(typeDescriptor);
-    Preconditions.checkNotNull(dimensionExpressions);
-    Preconditions.checkState(typeDescriptor.getDimensions() == dimensionExpressions.size());
-    Preconditions.checkState(
-        arrayLiteral == null || arrayLiteral.getTypeDescriptor() == typeDescriptor);
-    this.typeDescriptor = typeDescriptor;
-    this.dimensionExpressions.addAll(dimensionExpressions);
+    this.typeDescriptor = checkNotNull(typeDescriptor);
+    this.dimensionExpressions.addAll(checkNotNull(dimensionExpressions));
     this.arrayLiteral = arrayLiteral;
+    checkArgument(typeDescriptor.getDimensions() == dimensionExpressions.size());
+    checkArgument(arrayLiteral == null || arrayLiteral.getTypeDescriptor() == typeDescriptor);
   }
 
   public ArrayLiteral getArrayLiteral() {

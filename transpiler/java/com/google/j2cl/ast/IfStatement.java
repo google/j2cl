@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 import javax.annotation.Nullable;
@@ -31,10 +32,8 @@ public class IfStatement extends Statement {
 
   public IfStatement(
       Expression conditionExpression, Statement thenStatement, Statement elseStatement) {
-    Preconditions.checkNotNull(conditionExpression);
-    Preconditions.checkNotNull(thenStatement);
-    this.conditionExpression = conditionExpression;
-    this.thenStatement = thenStatement;
+    this.conditionExpression = checkNotNull(conditionExpression);
+    this.thenStatement = checkNotNull(thenStatement);
     this.elseStatement = elseStatement;
   }
 

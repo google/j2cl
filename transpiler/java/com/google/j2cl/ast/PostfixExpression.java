@@ -15,46 +15,26 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
- * Class for Postfix Expression.
+ * Class for postfix unary expressions.
  */
 @Visitable
-public class PostfixExpression extends Expression {
-  private TypeDescriptor typeDescriptor;
-  @Visitable Expression operand;
+public class PostfixExpression extends UnaryExpression {
   private PostfixOperator operator;
 
   public PostfixExpression(
       TypeDescriptor typeDescriptor, Expression operand, PostfixOperator operator) {
-    Preconditions.checkNotNull(typeDescriptor);
-    Preconditions.checkNotNull(operand);
-    this.typeDescriptor = typeDescriptor;
-    this.operand = operand;
-    this.operator = operator;
-  }
-
-  public Expression getOperand() {
-    return operand;
-  }
-
-  public PostfixOperator getOperator() {
-    return operator;
-  }
-
-  public void setOperand(Expression operand) {
-    this.operand = operand;
-  }
-
-  public void setOperator(PostfixOperator operator) {
-    this.operator = operator;
+    super(checkNotNull(typeDescriptor), operand);
+    this.operator = checkNotNull(operator);
   }
 
   @Override
-  public TypeDescriptor getTypeDescriptor() {
-    return typeDescriptor;
+  public PostfixOperator getOperator() {
+    return operator;
   }
 
   @Override

@@ -64,6 +64,7 @@ public class RemoveUnusedMultiExpressionReturnValues extends AbstractRewriter {
     }
     // Only target return values that are FieldAccesses since we know they are side effect free and
     // we know that we generate this case.
+    // TODO: This is not technically correct as field accesses could trigger getters.
     if (!(Iterables.getLast(expressions) instanceof FieldAccess)) {
       return expressionStatement;
     }

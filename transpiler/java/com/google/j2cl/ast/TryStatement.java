@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
@@ -38,10 +39,8 @@ public class TryStatement extends Statement {
       Block body,
       List<CatchClause> catchClauses,
       Block finallyBlock) {
-    Preconditions.checkNotNull(body);
-    Preconditions.checkNotNull(catchClauses);
-    this.body = body;
-    this.catchClauses.addAll(catchClauses);
+    this.body = checkNotNull(body);
+    this.catchClauses.addAll(checkNotNull(catchClauses));
     this.finallyBlock = finallyBlock;
     this.resourceDeclarations.addAll(resourceDeclarations);
   }

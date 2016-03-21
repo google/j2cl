@@ -15,10 +15,13 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -30,9 +33,13 @@ import java.util.List;
 public class MultiExpression extends Expression {
   @Visitable List<Expression> expressions = new ArrayList<>();
 
+  public MultiExpression(Expression... expressions) {
+    this(Arrays.asList(expressions));
+  }
+
   public MultiExpression(List<Expression> expressions) {
-    Preconditions.checkNotNull(expressions);
-    this.expressions.addAll(expressions);
+    this.expressions.addAll(checkNotNull(expressions));
+    checkArgument(!expressions.isEmpty());
   }
 
   public List<Expression> getExpressions() {
@@ -41,7 +48,6 @@ public class MultiExpression extends Expression {
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
-    Preconditions.checkArgument(!expressions.isEmpty());
     return expressions.get(expressions.size() - 1).getTypeDescriptor();
   }
 

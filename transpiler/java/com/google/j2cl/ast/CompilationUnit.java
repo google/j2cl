@@ -15,7 +15,9 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.j2cl.ast.processors.Context;
@@ -31,27 +33,24 @@ import java.util.List;
 @Visitable
 @Context
 public class CompilationUnit extends Node {
-  private String filePath;
-  private String packageName;
+
+  private static final String COMPILATION_UNIT_FILENAME_SUFFIX = ".java";
+
+  private final String filePath;
+  private final String packageName;
   @Visitable List<JavaType> types = new ArrayList<>();
 
   public CompilationUnit(String filePath, String packageName) {
-    Preconditions.checkNotNull(filePath);
-    Preconditions.checkNotNull(packageName);
-    this.filePath = filePath;
-    this.packageName = packageName;
+    this.filePath = checkNotNull(filePath);
+    this.packageName = checkNotNull(packageName);
+    checkState(filePath.endsWith(COMPILATION_UNIT_FILENAME_SUFFIX));
   }
 
   public String getFilePath() {
     return filePath;
   }
 
-  public void setFilePath(String filePath) {
-    this.filePath = filePath;
-  }
-
   public String getDirectoryPath() {
-    Preconditions.checkNotNull(filePath);
     if (!filePath.contains(File.separator)) {
       return "";
     }
@@ -59,7 +58,6 @@ public class CompilationUnit extends Node {
   }
 
   public String getFileName() {
-    Preconditions.checkNotNull(filePath);
     String[] pathComponents = filePath.split(File.separator);
     return pathComponents[pathComponents.length - 1];
   }
@@ -69,7 +67,7 @@ public class CompilationUnit extends Node {
   }
 
   public void addType(JavaType type) {
-    this.types.add(Preconditions.checkNotNull(type));
+    this.types.add(checkNotNull(type));
   }
 
   public List<JavaType> getTypes() {
@@ -90,10 +88,9 @@ public class CompilationUnit extends Node {
   }
 
   public String getName() {
-    int endIndex = filePath.lastIndexOf(".java");
-    Preconditions.checkState(endIndex != -1);
-
-    return filePath.substring(filePath.lastIndexOf(File.separatorChar) + 1, endIndex);
+    return filePath.substring(
+        filePath.lastIndexOf(File.separatorChar) + 1,
+        filePath.length() - COMPILATION_UNIT_FILENAME_SUFFIX.length());
   }
 
   @Override

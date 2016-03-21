@@ -13,24 +13,7 @@ public class Visitor_${className} {
 #end
     if (processorImpl.shouldProcess${className}(node)) {
       node = processorImpl.preProcess${className}(node);
-
-#foreach($field in $fields)
-#if(${field.isNullable()})
-      if (node.${field.Name} != null) {
-#end
-#if(${field.isList()})
-        VisitorUtils.visitList(processorImpl, node.${field.Name});
-#elseif (${field.isNullable()})
-        node.${field.Name} = (${field.TypeName}) node.${field.Name}.accept(processorImpl);
-#else
-        node.${field.Name} = (${field.TypeName}) Preconditions.checkNotNull(
-             node.${field.Name}.accept(processorImpl),
-             "Field \"${field.Name}\" in class \"${className}\" cannot be null");
-#end
-#if(${field.isNullable()})
-      }
-#end
-#end
+      visitMembers(processorImpl, node);
       result = processorImpl.postProcess${className}(node);
     }
 #if (${visitableClass.isContext()})
@@ -38,5 +21,30 @@ public class Visitor_${className} {
     processorImpl.setCurrent${className}(null);
 #end
     return result;
+  }
+
+  static void visitMembers(Processor processor, ${className} node) {
+    ProcessorPrivate processorImpl = (ProcessorPrivate) processor;
+#if(${visitableClass.isTop()})
+#else
+    Visitor_${visitableClass.SuperclassName}.visitMembers(processorImpl, node);
+#end
+#foreach($field in $fields)
+#if(${field.isNullable()})
+    if (node.${field.Name} != null) {
+#end
+#if(${field.isList()})
+      VisitorUtils.visitList(processorImpl, node.${field.Name});
+#elseif (${field.isNullable()})
+      node.${field.Name} = (${field.TypeName}) node.${field.Name}.accept(processorImpl);
+#else
+      node.${field.Name} = (${field.TypeName}) Preconditions.checkNotNull(
+      node.${field.Name}.accept(processorImpl),
+          "Field \"${field.Name}\" in class \"${className}\" cannot be null");
+#end
+#if(${field.isNullable()})
+    }
+#end
+#end
   }
 }

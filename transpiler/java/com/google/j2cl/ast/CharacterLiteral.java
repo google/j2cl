@@ -15,7 +15,11 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
+
+import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
  * Character literal node.
@@ -25,9 +29,13 @@ public class CharacterLiteral extends Expression {
   private char value;
   private String escapedValue;
 
+  public CharacterLiteral(char value) {
+    this(value, "\"" + StringEscapeUtils.escapeJava(String.valueOf(value)) + "\"");
+  }
+
   public CharacterLiteral(char value, String escapedValue) {
     this.value = value;
-    this.escapedValue = escapedValue;
+    this.escapedValue = checkNotNull(escapedValue);
   }
 
   public char getValue() {

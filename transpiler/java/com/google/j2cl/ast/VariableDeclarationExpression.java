@@ -15,7 +15,9 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
@@ -29,8 +31,8 @@ public class VariableDeclarationExpression extends Expression {
   @Visitable List<VariableDeclarationFragment> fragments = new ArrayList<>();
 
   public VariableDeclarationExpression(List<VariableDeclarationFragment> fragments) {
-    Preconditions.checkNotNull(fragments);
-    this.fragments.addAll(fragments);
+    this.fragments.addAll(checkNotNull(fragments));
+    checkArgument(!fragments.isEmpty());
   }
 
   public List<VariableDeclarationFragment> getFragments() {

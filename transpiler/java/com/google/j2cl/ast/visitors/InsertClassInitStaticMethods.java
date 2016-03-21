@@ -21,7 +21,6 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodBuilder;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptorBuilder;
@@ -39,21 +38,21 @@ public class InsertClassInitStaticMethods {
 
   private static class ClassInitStaticMethodsRewriter extends AbstractRewriter {
     @Override
-    public Node rewriteMethod(Method node) {
-      if (node.getDescriptor().isStatic()) {
+    public Node rewriteMethod(Method method) {
+      if (method.getDescriptor().isStatic()) {
         MethodDescriptor clinitDescriptor =
             MethodDescriptorBuilder.fromDefault()
                 .jsInfo(JsInfo.RAW)
                 .isStatic(true)
                 .enclosingClassTypeDescriptor(
-                    node.getDescriptor().getEnclosingClassTypeDescriptor())
+                    method.getDescriptor().getEnclosingClassTypeDescriptor())
                 .methodName("$clinit")
                 .build();
         MethodCall call =
             MethodCall.createRegularMethodCall(null, clinitDescriptor, new ArrayList<Expression>());
-        return MethodBuilder.from(node).statement(0, new ExpressionStatement(call)).build();
+        return Method.Builder.from(method).statement(0, new ExpressionStatement(call)).build();
       }
-      return node;
+      return method;
     }
   }
 }

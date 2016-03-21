@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -27,10 +28,8 @@ public class WhileStatement extends Statement {
   @Visitable Statement body;
 
   public WhileStatement(Expression conditionExpression, Statement body) {
-    Preconditions.checkNotNull(conditionExpression);
-    Preconditions.checkNotNull(body);
-    this.conditionExpression = conditionExpression;
-    this.body = body;
+    this.conditionExpression = checkNotNull(conditionExpression);
+    this.body = checkNotNull(body);
   }
 
   public Expression getConditionExpression() {

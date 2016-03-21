@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 import javax.annotation.Nullable;
@@ -29,9 +30,8 @@ public class ReturnStatement extends Statement {
   private final TypeDescriptor returnTypeDescriptor;
 
   public ReturnStatement(Expression expression, TypeDescriptor returnTypeDescriptor) {
-    Preconditions.checkNotNull(returnTypeDescriptor);
     this.expression = expression;
-    this.returnTypeDescriptor = returnTypeDescriptor;
+    this.returnTypeDescriptor = checkNotNull(returnTypeDescriptor);
   }
 
   /**

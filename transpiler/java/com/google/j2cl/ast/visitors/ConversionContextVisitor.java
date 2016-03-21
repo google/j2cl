@@ -24,14 +24,14 @@ import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
-import com.google.j2cl.ast.Call;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.ConditionalExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldBuilder;
+import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodCallBuilder;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
@@ -40,7 +40,6 @@ import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.SwitchStatement;
-import com.google.j2cl.ast.TernaryExpression;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.VariableDeclarationFragment;
@@ -171,6 +170,19 @@ public class ConversionContextVisitor extends AbstractRewriter {
   }
 
   @Override
+  public Node rewriteConditionalExpression(ConditionalExpression conditionalExpression) {
+    // assignment context
+    TypeDescriptor typeDescriptor = conditionalExpression.getTypeDescriptor();
+    return new ConditionalExpression(
+        typeDescriptor,
+        conditionalExpression.getConditionExpression(),
+        contextRewriter.rewriteAssignmentContext(
+            typeDescriptor, conditionalExpression.getTrueExpression()),
+        contextRewriter.rewriteAssignmentContext(
+            typeDescriptor, conditionalExpression.getFalseExpression()));
+  }
+
+  @Override
   public Node rewriteField(Field field) {
     if (field.getInitializer() == null) {
       // Nothing to rewrite.
@@ -190,8 +202,9 @@ public class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public Node rewriteMethodCall(MethodCall methodCall) {
     // method invocation context
-    List<Expression> arguments = rewriteMethodInvocationContextArguments(methodCall);
-    return MethodCallBuilder.from(methodCall).arguments(arguments).build();
+    return MethodCall.Builder.from(methodCall)
+        .arguments(rewriteMethodInvocationContextArguments(methodCall))
+        .build();
   }
 
   @Override
@@ -272,19 +285,6 @@ public class ConversionContextVisitor extends AbstractRewriter {
   }
 
   @Override
-  public Node rewriteTernaryExpression(TernaryExpression ternaryExpression) {
-    // assignment context
-    TypeDescriptor typeDescriptor = ternaryExpression.getTypeDescriptor();
-    return new TernaryExpression(
-        typeDescriptor,
-        ternaryExpression.getConditionExpression(),
-        contextRewriter.rewriteAssignmentContext(
-            typeDescriptor, ternaryExpression.getTrueExpression()),
-        contextRewriter.rewriteAssignmentContext(
-            typeDescriptor, ternaryExpression.getFalseExpression()));
-  }
-
-  @Override
   public Node rewriteVariableDeclarationFragment(VariableDeclarationFragment variableDeclaration) {
     if (variableDeclaration.getInitializer() == null) {
       // Nothing to rewrite.
@@ -342,10 +342,10 @@ public class ConversionContextVisitor extends AbstractRewriter {
     return binaryExpression;
   }
 
-  private List<Expression> rewriteMethodInvocationContextArguments(Call call) {
+  private List<Expression> rewriteMethodInvocationContextArguments(Invocation invocation) {
     ImmutableList<TypeDescriptor> parameterTypeDescriptors =
-        call.getTarget().getParameterTypeDescriptors();
-    List<Expression> argumentExpressions = call.getArguments();
+        invocation.getTarget().getParameterTypeDescriptors();
+    List<Expression> argumentExpressions = invocation.getArguments();
 
     // Look at each param/argument pair.
     List<Expression> newArgumentExpressions = new ArrayList<>();
@@ -365,8 +365,10 @@ public class ConversionContextVisitor extends AbstractRewriter {
     }
     BinaryExpression assignmentRightOperand =
         new BinaryExpression(
-            binaryExpression.getTypeDescriptor(), binaryExpression.getLeftOperand(),
-            binaryExpression.getOperator().withoutAssignment(), binaryExpression.getRightOperand());
+            binaryExpression.getTypeDescriptor(),
+            binaryExpression.getLeftOperand(),
+            binaryExpression.getOperator().getUnderlyingBinaryOperator(),
+            binaryExpression.getRightOperand());
     BinaryExpression assignmentExpression =
         new BinaryExpression(
             TypeDescriptors.asOperatorReturnType(binaryExpression.getTypeDescriptor()),
@@ -383,7 +385,7 @@ public class ConversionContextVisitor extends AbstractRewriter {
         new BinaryExpression(
             postfixExpression.getTypeDescriptor(),
             operand,
-            postfixExpression.getOperator().withoutSideEffect(),
+            postfixExpression.getOperator().getUnderlyingBinaryOperator(),
             OperatorSideEffectUtils.createLiteralOne(operand.getTypeDescriptor()));
     BinaryExpression assignmentExpression =
         new BinaryExpression(
@@ -404,7 +406,7 @@ public class ConversionContextVisitor extends AbstractRewriter {
         new BinaryExpression(
             prefixExpression.getTypeDescriptor(),
             operand,
-            prefixExpression.getOperator().withoutSideEffect(),
+            prefixExpression.getOperator().getUnderlyingBinaryOperator(),
             OperatorSideEffectUtils.createLiteralOne(operand.getTypeDescriptor()));
     BinaryExpression assignmentExpression =
         new BinaryExpression(

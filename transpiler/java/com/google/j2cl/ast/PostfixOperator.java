@@ -18,18 +18,26 @@ package com.google.j2cl.ast;
 /**
  * Class for postfix operator.
  */
-public enum PostfixOperator {
-  INCREMENT("++"),
-  DECREMENT("--");
+public enum PostfixOperator implements Operator {
+  INCREMENT("++", BinaryOperator.PLUS),
+  DECREMENT("--", BinaryOperator.MINUS);
 
   private String symbol;
+  private BinaryOperator underlyingBinaryOperator;
 
-  PostfixOperator(String symbol) {
+  PostfixOperator(String symbol, BinaryOperator underlyingBinaryOperator) {
     this.symbol = symbol;
+    this.underlyingBinaryOperator = underlyingBinaryOperator;
   }
 
+  @Override
   public String getSymbol() {
     return symbol;
+  }
+
+  @Override
+  public boolean hasSideEffect() {
+    return true;
   }
 
   @Override
@@ -37,13 +45,8 @@ public enum PostfixOperator {
     return symbol;
   }
 
-  public BinaryOperator withoutSideEffect() {
-    switch (this) {
-      case DECREMENT:
-        return BinaryOperator.MINUS;
-      default:
-      case INCREMENT:
-        return BinaryOperator.PLUS;
-    }
+  @Override
+  public BinaryOperator getUnderlyingBinaryOperator() {
+    return underlyingBinaryOperator;
   }
 }

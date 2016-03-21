@@ -46,14 +46,14 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private boolean subclassesJsConstructorClass;
 
-  protected StatementTransformer statementTransformer;
+  protected final StatementTranspiler statementTranspiler;
 
   public JavaScriptImplGenerator(Errors errors, boolean declareLegacyNamespace, JavaType javaType) {
     super(errors, declareLegacyNamespace, javaType);
     this.className = environment.aliasForType(javaType.getDescriptor());
     this.mangledTypeName = ManglingNameUtils.getMangledName(javaType.getDescriptor());
     this.subclassesJsConstructorClass = javaType.getDescriptor().subclassesJsConstructorClass();
-    statementTransformer = new StatementTransformer(sb, environment);
+    this.statementTranspiler = new StatementTranspiler(sb, environment);
   }
 
   @Override
@@ -228,7 +228,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         }
         renderFactoryCreateMethod(method);
         if (subclassesJsConstructorClass) {
-          method = GeneratorUtils.createNonPrimaryCtor(method);
+          method = GeneratorUtils.createNonPrimaryConstructor(method);
         }
       }
       if (GeneratorUtils.shouldNotEmitCode(method)) {
@@ -273,7 +273,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         sb.appendln("  // native " + GeneratorUtils.getMethodHeader(method, environment));
       } else {
         sb.appendln(GeneratorUtils.getMethodHeader(method, environment));
-        statementTransformer.renderStatement(method.getBody());
+        statementTranspiler.renderStatement(method.getBody());
       }
       sb.newLine();
     }
@@ -632,7 +632,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       } else if (element instanceof Block) {
         Block block = (Block) element;
         for (Statement initializer : block.getStatements()) {
-          statementTransformer.renderStatement(initializer);
+          statementTranspiler.renderStatement(initializer);
         }
       } else {
         throw new UnsupportedOperationException("Unsupported element: " + element);
@@ -665,7 +665,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       } else if (element instanceof Block) {
         Block block = (Block) element;
         for (Statement initializer : block.getStatements()) {
-          statementTransformer.renderStatement(initializer);
+          statementTranspiler.renderStatement(initializer);
         }
       } else {
         throw new UnsupportedOperationException("Unsupported element: " + element);

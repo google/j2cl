@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Context;
 import com.google.j2cl.ast.processors.Visitable;
 
@@ -33,7 +34,7 @@ public class Field extends Node implements Positioned {
   private Variable capturedVariable;
   private final int position;
 
-  public Field(
+  Field(
       FieldDescriptor fieldDescriptor,
       Expression initializer,
       boolean isEnumField,
@@ -46,8 +47,7 @@ public class Field extends Node implements Positioned {
   }
 
   public Field(FieldDescriptor fieldDescriptor, int position) {
-    Preconditions.checkNotNull(fieldDescriptor);
-    this.fieldDescriptor = fieldDescriptor;
+    this.fieldDescriptor = checkNotNull(fieldDescriptor);
     this.position = position;
   }
 

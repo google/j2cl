@@ -53,7 +53,7 @@ public class InsertStringConversionVisitor extends ConversionContextVisitor {
                 // string operation.
                 return new BinaryExpression(
                     TypeDescriptors.get().javaLangString,
-                    new StringLiteral("\"\""),
+                    StringLiteral.fromPlainText(""),
                     BinaryOperator.PLUS,
                     operandExpression);
               }

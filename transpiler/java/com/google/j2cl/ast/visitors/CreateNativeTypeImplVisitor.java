@@ -22,7 +22,6 @@ import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldBuilder;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodBuilder;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeDescriptor;
 
@@ -65,7 +64,7 @@ public class CreateNativeTypeImplVisitor extends AbstractRewriter {
       return method;
     }
     // Replace the enclosingClassTypeDescriptor.
-    return MethodBuilder.from(method).enclosingClass(jsOverlayImplTypeDescriptor).build();
+    return Method.Builder.from(method).enclosingClass(jsOverlayImplTypeDescriptor).build();
   }
 
   @Override

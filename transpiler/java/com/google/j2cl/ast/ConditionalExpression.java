@@ -15,32 +15,29 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
- * Ternary expression.
+ * Ternary conditional expression.
  */
 @Visitable
-public class TernaryExpression extends Expression {
+public class ConditionalExpression extends Expression {
   private TypeDescriptor typeDescriptor;
   @Visitable Expression conditionExpression;
   @Visitable Expression trueExpression;
   @Visitable Expression falseExpression;
 
-  public TernaryExpression(
+  public ConditionalExpression(
       TypeDescriptor typeDescriptor,
       Expression conditionExpression,
       Expression trueExpression,
       Expression falseExpression) {
-    Preconditions.checkNotNull(typeDescriptor);
-    Preconditions.checkNotNull(conditionExpression);
-    Preconditions.checkNotNull(trueExpression);
-    Preconditions.checkNotNull(falseExpression);
-    this.typeDescriptor = typeDescriptor;
-    this.conditionExpression = conditionExpression;
-    this.trueExpression = trueExpression;
-    this.falseExpression = falseExpression;
+    this.typeDescriptor = checkNotNull(typeDescriptor);
+    this.conditionExpression = checkNotNull(conditionExpression);
+    this.trueExpression = checkNotNull(trueExpression);
+    this.falseExpression = checkNotNull(falseExpression);
   }
 
   public Expression getConditionExpression() {
@@ -62,6 +59,6 @@ public class TernaryExpression extends Expression {
 
   @Override
   public Node accept(Processor processor) {
-    return Visitor_TernaryExpression.visit(processor, this);
+    return Visitor_ConditionalExpression.visit(processor, this);
   }
 }

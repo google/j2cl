@@ -15,7 +15,9 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -120,7 +122,7 @@ public class AstUtils {
    * or returns null if it does not have one.
    */
   public static MethodCall getConstructorInvocation(Method method) {
-    Preconditions.checkArgument(method.isConstructor());
+    checkArgument(method.isConstructor());
     if (method.getBody().getStatements().isEmpty()) {
       return null;
     }
@@ -394,8 +396,8 @@ public class AstUtils {
       MethodCall methodCall, TypeDescriptor targetTypeDescriptor,
       TypeDescriptor sourceTypeDescriptor) {
     MethodDescriptor targetMethodDescriptor = methodCall.getTarget();
-    Preconditions.checkArgument(!targetMethodDescriptor.isConstructor());
-    Preconditions.checkArgument(!targetMethodDescriptor.isStatic());
+    checkArgument(!targetMethodDescriptor.isConstructor());
+    checkArgument(!targetMethodDescriptor.isStatic());
 
     MethodDescriptor methodDescriptor =
         MethodDescriptorBuilder.from(targetMethodDescriptor)
@@ -410,8 +412,7 @@ public class AstUtils {
 
     List<Expression> arguments = methodCall.getArguments();
     // Turn the instance into now a first parameter to the devirtualized method.
-    Expression instance = methodCall.getQualifier();
-    Preconditions.checkNotNull(instance);
+    Expression instance = checkNotNull(methodCall.getQualifier());
     arguments.add(0, instance);
     // Call the method like Objects.foo(instance, ...)
     return MethodCall.createRegularMethodCall(null, methodDescriptor, arguments);
@@ -429,8 +430,8 @@ public class AstUtils {
    */
   public static Expression box(Expression expression) {
     TypeDescriptor primitiveType = expression.getTypeDescriptor();
-    Preconditions.checkArgument(TypeDescriptors.isNonVoidPrimitiveType(primitiveType));
-    Preconditions.checkArgument(!TypeDescriptors.isPrimitiveBooleanOrDouble(primitiveType));
+    checkArgument(TypeDescriptors.isNonVoidPrimitiveType(primitiveType));
+    checkArgument(!TypeDescriptors.isPrimitiveBooleanOrDouble(primitiveType));
     TypeDescriptor boxType = TypeDescriptors.getBoxTypeFromPrimitiveType(primitiveType);
 
     MethodDescriptor valueOfMethodDescriptor =
@@ -450,7 +451,7 @@ public class AstUtils {
    */
   public static Expression unbox(Expression expression) {
     TypeDescriptor boxType = expression.getTypeDescriptor();
-    Preconditions.checkArgument(TypeDescriptors.isBoxedType(boxType));
+    checkArgument(TypeDescriptors.isBoxedType(boxType));
     TypeDescriptor primitiveType = TypeDescriptors.getPrimitiveTypeFromBoxType(boxType);
 
     MethodDescriptor valueMethodDescriptor =
@@ -477,20 +478,10 @@ public class AstUtils {
    * Returns whether the given expression is a syntactically valid qualifier for a MethodCall.
    */
   private static boolean isValidMethodCallQualifier(Expression expression) {
-    return !(expression instanceof TernaryExpression
+    return !(expression instanceof ConditionalExpression
         || expression instanceof BinaryExpression
         || expression instanceof PrefixExpression
         || expression instanceof PostfixExpression);
-  }
-
-  public static boolean isConstructorOfImmediateNestedClass(Method method, JavaType targetType) {
-    if (method == null || targetType == null || targetType.getEnclosingTypeDescriptor() == null) {
-      return false;
-    }
-    if (method.getDescriptor().getEnclosingClassTypeDescriptor() != targetType.getDescriptor()) {
-      return false;
-    }
-    return !targetType.isStatic() && method.isConstructor();
   }
 
   public static boolean isDelegatedConstructorCall(
@@ -505,31 +496,6 @@ public class AstUtils {
         .equals(targetTypeDescriptor.getRawTypeDescriptor());
   }
 
-  public static boolean isAssignmentOperator(BinaryOperator binaryOperator) {
-    switch (binaryOperator) {
-      case ASSIGN:
-      case PLUS_ASSIGN:
-      case MINUS_ASSIGN:
-      case TIMES_ASSIGN:
-      case DIVIDE_ASSIGN:
-      case BIT_AND_ASSIGN:
-      case BIT_OR_ASSIGN:
-      case BIT_XOR_ASSIGN:
-      case REMAINDER_ASSIGN:
-      case LEFT_SHIFT_ASSIGN:
-      case RIGHT_SHIFT_SIGNED_ASSIGN:
-      case RIGHT_SHIFT_UNSIGNED_ASSIGN:
-        return true;
-      default:
-        return false;
-    }
-  }
-
-  public static boolean isValidForLongs(BinaryOperator binaryOperator) {
-    return binaryOperator != BinaryOperator.CONDITIONAL_AND
-        && binaryOperator != BinaryOperator.CONDITIONAL_OR;
-  }
-
   /**
    * See JLS 5.2.
    *
@@ -537,7 +503,7 @@ public class AstUtils {
    * that check up to our conversion implementation(s)
    */
   public static boolean matchesAssignmentContext(BinaryOperator binaryOperator) {
-    return binaryOperator.doesAssignment();
+    return binaryOperator.hasSideEffect();
   }
 
   /**
@@ -571,14 +537,7 @@ public class AstUtils {
    * See JLS 5.6.1.
    */
   public static boolean matchesUnaryNumericPromotionContext(BinaryExpression binaryExpression) {
-    switch (binaryExpression.getOperator()) {
-      case LEFT_SHIFT:
-      case RIGHT_SHIFT_SIGNED:
-      case RIGHT_SHIFT_UNSIGNED:
-        return true;
-      default:
-        return false;
-    }
+    return binaryExpression.getOperator().isShiftOperator();
   }
 
   /**
@@ -616,9 +575,9 @@ public class AstUtils {
       case GREATER:
       case LESS_EQUALS:
       case GREATER_EQUALS:
-      case XOR:
-      case AND:
-      case OR:
+      case BIT_XOR:
+      case BIT_AND:
+      case BIT_OR:
         return true; // Both numerics and booleans get these operators.
       case CONDITIONAL_AND:
       case CONDITIONAL_OR:
@@ -641,8 +600,8 @@ public class AstUtils {
    */
   public static TypeDescriptor chooseWidenedTypeDescriptor(
       TypeDescriptor leftTypeDescriptor, TypeDescriptor rightTypeDescriptor) {
-    Preconditions.checkArgument(leftTypeDescriptor.isPrimitive());
-    Preconditions.checkArgument(rightTypeDescriptor.isPrimitive());
+    checkArgument(leftTypeDescriptor.isPrimitive());
+    checkArgument(rightTypeDescriptor.isPrimitive());
 
     // Pick the wider of the two provided type descriptors.
     TypeDescriptor widenedTypeDescriptor =
@@ -700,6 +659,7 @@ public class AstUtils {
    * static method/field and 'this' reference as the qualifier for instance method/field.
    */
   static Expression getExplicitQualifier(Expression qualifier, Member member) {
+    checkNotNull(member);
     if (qualifier != null) {
       return qualifier;
     }
@@ -737,8 +697,8 @@ public class AstUtils {
    * Returns TypeDescriptor that contains the devirtualized JsOverlay methods of a native type.
    */
   public static TypeDescriptor createJsOverlayImplTypeDescriptor(TypeDescriptor typeDescriptor) {
-    Preconditions.checkArgument(typeDescriptor.isNative());
-    Preconditions.checkArgument(typeDescriptor instanceof RegularTypeDescriptor);
+    checkArgument(typeDescriptor.isNative());
+    checkArgument(typeDescriptor instanceof RegularTypeDescriptor);
     RegularTypeDescriptor nativeTypeDescriptor = (RegularTypeDescriptor) typeDescriptor;
     return TypeDescriptor.createSyntheticRegularTypeDescriptor(
         nativeTypeDescriptor.getPackageComponents(),

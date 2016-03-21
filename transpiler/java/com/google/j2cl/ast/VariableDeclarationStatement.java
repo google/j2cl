@@ -15,10 +15,12 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -29,13 +31,11 @@ public class VariableDeclarationStatement extends Statement {
   @Visitable List<VariableDeclarationFragment> fragments = new ArrayList<>();
 
   public VariableDeclarationStatement(List<VariableDeclarationFragment> fragments) {
-    Preconditions.checkNotNull(fragments);
-    this.fragments.addAll(fragments);
+    this.fragments.addAll(checkNotNull(fragments));
   }
 
   public VariableDeclarationStatement(VariableDeclarationFragment fragment) {
-    Preconditions.checkNotNull(fragment);
-    this.fragments.add(fragment);
+    this(Collections.singletonList(fragment));
   }
 
   public List<VariableDeclarationFragment> getFragments() {

@@ -18,8 +18,6 @@ package com.google.j2cl.ast;
 import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 
-import java.util.Arrays;
-
 /**
  * Utility functions for splitting operators expressions that have a side effect.
  *
@@ -48,11 +46,12 @@ public class OperatorSideEffectUtils {
 
     Expression qualifier = getQualifier(leftOperand);
 
-    if (isSimpleCase(leftOperand)) {
+    if (canExpressionBeEvaluatedTwice(leftOperand)) {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
       // be taken to avoid double side-effects from dereferencing the qualifier twice.
       // a += x => a = a + x
-      return expandExpressionNoQualifier(leftOperand, operator.withoutAssignment(), rightOperand);
+      return expandExpressionNoQualifier(
+          leftOperand, operator.getUnderlyingBinaryOperator(), rightOperand);
     }
 
     // The referenced expression is being modified and it has a qualifier. Take special
@@ -65,9 +64,9 @@ public class OperatorSideEffectUtils {
             createNumbersFieldAccess(NUMBERS_QUALIFIER_TEMP, qualifier.getTypeDescriptor()),
             BinaryOperator.ASSIGN,
             qualifier); // Numbers.$q = q
-    BinaryExpression assignment =
-        expandExpressionWithQualifier(leftOperand, operator.withoutAssignment(), rightOperand);
-    return new MultiExpression(Arrays.<Expression>asList(assignQualifier, assignment));
+    BinaryExpression assignment = expandExpressionWithQualifier(
+        leftOperand, operator.getUnderlyingBinaryOperator(), rightOperand);
+    return new MultiExpression(assignQualifier, assignment);
   }
 
   public static Expression splitPostfixExpression(PostfixExpression postfixExpression) {
@@ -77,7 +76,7 @@ public class OperatorSideEffectUtils {
 
     Expression qualifier = getQualifier(operand);
 
-    if (isSimpleCase(operand)) {
+    if (canExpressionBeEvaluatedTwice(operand)) {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
       // be taken to avoid double side-effects from dereferencing the qualifier twice.
       // a++; => (Numbers.$v = a, a = a + 1, Numbers.$v)
@@ -89,12 +88,11 @@ public class OperatorSideEffectUtils {
               operand); //Numbers.$v = boxA
       BinaryExpression assignment =
           expandExpressionNoQualifier(
-              operand, operator.withoutSideEffect(), createLiteralOne(typeDescriptor));
+              operand, operator.getUnderlyingBinaryOperator(), createLiteralOne(typeDescriptor));
       return new MultiExpression(
-          Arrays.<Expression>asList(
-              assignVar,
-              assignment,
-              createNumbersFieldAccess(NUMBERS_VALUE_TEMP, operand.getTypeDescriptor())));
+          assignVar,
+          assignment,
+          createNumbersFieldAccess(NUMBERS_VALUE_TEMP, operand.getTypeDescriptor()));
     }
 
     // The referenced expression is being modified and it has a qualifier. Take special
@@ -120,13 +118,12 @@ public class OperatorSideEffectUtils {
                 target)); //Numbers.$v = Numbers.$q.a
     BinaryExpression assignment =
         expandExpressionWithQualifier(
-            operand, operator.withoutSideEffect(), createLiteralOne(typeDescriptor));
+            operand, operator.getUnderlyingBinaryOperator(), createLiteralOne(typeDescriptor));
     return new MultiExpression(
-        Arrays.<Expression>asList(
-            assignQualifier,
-            assignVar,
-            assignment,
-            createNumbersFieldAccess(NUMBERS_VALUE_TEMP, target.getTypeDescriptor())));
+        assignQualifier,
+        assignVar,
+        assignment,
+        createNumbersFieldAccess(NUMBERS_VALUE_TEMP, target.getTypeDescriptor()));
   }
 
   public static Expression splitPrefixExpression(PrefixExpression prefixExpression) {
@@ -138,12 +135,12 @@ public class OperatorSideEffectUtils {
 
     Expression qualifier = getQualifier(operand); // qualifier of the boxed instance
 
-    if (isSimpleCase(operand)) {
+    if (canExpressionBeEvaluatedTwice(operand)) {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
       // be taken to avoid double side-effects from dereferencing the qualifier twice.
       // ++a => a = a + 1
       return expandExpressionNoQualifier(
-          operand, operator.withoutSideEffect(), createLiteralOne(typeDescriptor));
+          operand, operator.getUnderlyingBinaryOperator(), createLiteralOne(typeDescriptor));
     }
 
     // The referenced expression is being modified and it has a qualifier. Take special
@@ -158,8 +155,8 @@ public class OperatorSideEffectUtils {
             qualifier); // Numbers.$q = q
     Expression assignment =
         expandExpressionWithQualifier(
-            operand, operator.withoutSideEffect(), createLiteralOne(typeDescriptor));
-    return new MultiExpression(Arrays.<Expression>asList(assignQualifier, assignment));
+            operand, operator.getUnderlyingBinaryOperator(), createLiteralOne(typeDescriptor));
+    return new MultiExpression(assignQualifier, assignment);
   }
 
   /**
@@ -245,7 +242,7 @@ public class OperatorSideEffectUtils {
    * If the expression is a field access with a non-this qualifier, it needs to be split to avoid
    * double side-effect. Otherwise, it is a simple case.
    */
-  private static boolean isSimpleCase(Expression expression) {
+  private static boolean canExpressionBeEvaluatedTwice(Expression expression) {
     if (!(expression instanceof FieldAccess)) {
       return true;
     }

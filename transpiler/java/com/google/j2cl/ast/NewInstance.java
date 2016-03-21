@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ import javax.annotation.Nullable;
  * Class for new instance expression.
  */
 @Visitable
-public class NewInstance extends Expression implements MemberReference, Call {
+public class NewInstance extends Expression implements Invocation {
   @Visitable @Nullable Expression qualifier;
   @Visitable MethodDescriptor constructorMethodDescriptor;
   @Visitable List<Expression> arguments = new ArrayList<>();
@@ -42,11 +43,9 @@ public class NewInstance extends Expression implements MemberReference, Call {
       Expression qualifier,
       MethodDescriptor constructorMethodDescriptor,
       List<Expression> arguments) {
-    Preconditions.checkNotNull(constructorMethodDescriptor);
-    Preconditions.checkNotNull(arguments);
+    this.constructorMethodDescriptor = checkNotNull(constructorMethodDescriptor);
     this.qualifier = qualifier;
-    this.constructorMethodDescriptor = constructorMethodDescriptor;
-    this.arguments.addAll(arguments);
+    this.arguments.addAll(checkNotNull(arguments));
   }
 
   @Override
@@ -64,14 +63,6 @@ public class NewInstance extends Expression implements MemberReference, Call {
     return arguments;
   }
 
-  public void setQualifier(Expression qualifier) {
-    this.qualifier = qualifier;
-  }
-
-  public void setConstructorMethodDescriptor(MethodDescriptor constructorDescriptor) {
-    this.constructorMethodDescriptor = constructorDescriptor;
-  }
-
   @Override
   public TypeDescriptor getTypeDescriptor() {
     return constructorMethodDescriptor.getEnclosingClassTypeDescriptor();
@@ -80,5 +71,27 @@ public class NewInstance extends Expression implements MemberReference, Call {
   @Override
   public Node accept(Processor processor) {
     return Visitor_NewInstance.visit(processor, this);
+  }
+
+  /**
+   * A Builder for easily and correctly creating modified versions of new instance calls.
+   *
+   * <p>Takes care of the busy work of keeping argument list and method descriptor parameter types
+   * list in sync.
+   */
+  public static class Builder extends Invocation.Builder<NewInstance> {
+    public static Builder from(NewInstance newInstance) {
+      Builder builder = new Builder();
+      builder.initFrom(newInstance);
+      return builder;
+    }
+
+    @Override
+    protected NewInstance doCreateInvocation(
+        Expression qualifierExpression,
+        MethodDescriptor methodDescriptor,
+        List<Expression> arguments) {
+      return new NewInstance(qualifierExpression, methodDescriptor, arguments);
+    }
   }
 }

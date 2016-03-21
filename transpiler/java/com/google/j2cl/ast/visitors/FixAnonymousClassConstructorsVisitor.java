@@ -21,11 +21,8 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodBuilder;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodCallBuilder;
 import com.google.j2cl.ast.NewInstance;
-import com.google.j2cl.ast.NewInstanceBuilder;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
@@ -90,7 +87,7 @@ public class FixAnonymousClassConstructorsVisitor extends AbstractRewriter {
       return method;
     }
     // Add parameters to the constructor.
-    MethodBuilder methodBuilder = MethodBuilder.from(method);
+    Method.Builder methodBuilder = Method.Builder.from(method);
     for (Variable parameter : constructorParameters) {
       methodBuilder.parameter(parameter, parameter.getTypeDescriptor());
     }
@@ -108,9 +105,9 @@ public class FixAnonymousClassConstructorsVisitor extends AbstractRewriter {
       return methodCall;
     }
 
-    MethodCallBuilder methodCallBuilder = MethodCallBuilder.from(methodCall);
+    MethodCall.Builder methodCallBuilder = MethodCall.Builder.from(methodCall);
     for (Variable parameter : superConstructorParameters) {
-      methodCallBuilder.argument(parameter.getReference(), parameter.getTypeDescriptor());
+      methodCallBuilder.addArgument(parameter.getReference(), parameter.getTypeDescriptor());
     }
 
     return methodCallBuilder.build();
@@ -159,10 +156,10 @@ public class FixAnonymousClassConstructorsVisitor extends AbstractRewriter {
       if (!method.isConstructor() || parameterForSuperCallQualifier == null) {
         return method;
       }
-      MethodBuilder methodBuilder = MethodBuilder.from(method);
-      methodBuilder.parameter(
-          parameterForSuperCallQualifier, parameterForSuperCallQualifier.getTypeDescriptor());
-      return methodBuilder.build();
+      return Method.Builder.from(method)
+          .parameter(
+              parameterForSuperCallQualifier, parameterForSuperCallQualifier.getTypeDescriptor())
+          .build();
     }
 
     @Override
@@ -174,7 +171,7 @@ public class FixAnonymousClassConstructorsVisitor extends AbstractRewriter {
         return methodCall;
       }
       // super() call, set the qualifier.
-      MethodCallBuilder methodCallBuilder = MethodCallBuilder.from(methodCall);
+      MethodCall.Builder methodCallBuilder = MethodCall.Builder.from(methodCall);
       if (parameterForSuperCallQualifier != null) {
         methodCallBuilder.qualifier(parameterForSuperCallQualifier.getReference());
       }
@@ -216,11 +213,12 @@ public class FixAnonymousClassConstructorsVisitor extends AbstractRewriter {
       if (!qualifierByTypeDescriptor.containsKey(typeDescriptor)) {
         return newInstance;
       }
-      NewInstanceBuilder newInstanceBuilder = NewInstanceBuilder.from(newInstance);
-      newInstanceBuilder.argument(
-          qualifierByTypeDescriptor.get(typeDescriptor),
-          typeDescriptor.getSuperTypeDescriptor().getEnclosingTypeDescriptor());
-      return newInstanceBuilder.build();
+
+      return NewInstance.Builder.from(newInstance)
+          .addArgument(
+              qualifierByTypeDescriptor.get(typeDescriptor),
+              typeDescriptor.getSuperTypeDescriptor().getEnclosingTypeDescriptor())
+          .build();
     }
   }
 }

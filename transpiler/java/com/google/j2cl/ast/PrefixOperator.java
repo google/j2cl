@@ -15,29 +15,45 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Class for prefix operator.
  */
-public enum PrefixOperator {
-  INCREMENT("++"),
-  DECREMENT("--"),
+public enum PrefixOperator implements Operator {
+  INCREMENT("++", BinaryOperator.PLUS),
+  DECREMENT("--", BinaryOperator.MINUS),
   PLUS("+"),
   MINUS("-"),
   COMPLEMENT("~"),
   NOT("!"),
   SPREAD("..."); // Refers to the Javascript ES6 spread operator.
+
   private String symbol;
+  private BinaryOperator underlyingBinaryOperator;
 
   PrefixOperator(String symbol) {
-    this.symbol = symbol;
+    this(symbol, null);
   }
 
+  PrefixOperator(String symbol, BinaryOperator underlyingBinaryOperator) {
+    this.symbol = checkNotNull(symbol);
+    this.underlyingBinaryOperator = underlyingBinaryOperator;
+  }
+
+  @Override
+  public BinaryOperator getUnderlyingBinaryOperator() {
+    return underlyingBinaryOperator;
+  }
+
+  @Override
   public String getSymbol() {
     return symbol;
   }
 
+  @Override
   public boolean hasSideEffect() {
-    return this.withoutSideEffect() != null;
+    return underlyingBinaryOperator != null;
   }
 
   @Override
@@ -45,14 +61,4 @@ public enum PrefixOperator {
     return symbol;
   }
 
-  public BinaryOperator withoutSideEffect() {
-    switch (this) {
-      case INCREMENT:
-        return BinaryOperator.PLUS;
-      case DECREMENT:
-        return BinaryOperator.MINUS;
-      default:
-        return null;
-    }
-  }
 }

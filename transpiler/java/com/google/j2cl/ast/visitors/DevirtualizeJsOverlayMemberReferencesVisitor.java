@@ -22,7 +22,6 @@ import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.FieldDescriptorBuilder;
 import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.MethodCallBuilder;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeDescriptor;
 
@@ -63,7 +62,7 @@ public class DevirtualizeJsOverlayMemberReferencesVisitor extends AbstractRewrit
         AstUtils.createJsOverlayImplTypeDescriptor(originalTypeDescriptor);
     if (methodCall.getTarget().isStatic()) {
       // Devirtualize *static* JsOverlay method.
-      return MethodCallBuilder.from(methodCall)
+      return MethodCall.Builder.from(methodCall)
           .enclosingClass(overlayTypeDescriptor)
           .qualifier(null)
           .build();

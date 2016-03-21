@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -27,8 +29,8 @@ public class LabeledStatement extends Statement {
   @Visitable Statement body;
 
   public LabeledStatement(String labelName, Statement body) {
-    this.labelName = labelName;
-    this.body = body;
+    this.labelName = checkNotNull(labelName);
+    this.body = checkNotNull(body);
   }
 
   public String getLabelName() {

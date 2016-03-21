@@ -19,7 +19,6 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodBuilder;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.ReturnStatement;
@@ -48,13 +47,11 @@ public class RewriteSystemGetPropertyVisitor extends AbstractRewriter {
       returnValueExpression = new VariableReference(method.getParameters().get(1));
     }
 
-    MethodBuilder methodBuilder = MethodBuilder.from(method);
-    methodBuilder.clearStatements();
-    ReturnStatement returnStatement =
-        new ReturnStatement(returnValueExpression, TypeDescriptors.get().javaLangString);
-    methodBuilder.statement(returnStatement);
-    // TODO: integrate closures goog.define here.
-    return methodBuilder.build();
+    return Method.Builder.from(method)
+        .clearStatements()
+        // TODO: integrate closures goog.define here.
+        .statement(new ReturnStatement(returnValueExpression, TypeDescriptors.get().javaLangString))
+        .build();
   }
 
   private void rewriteSystemGetProperty(CompilationUnit compilationUnit) {

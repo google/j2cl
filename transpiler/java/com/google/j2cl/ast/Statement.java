@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.HasMetadata;
 import com.google.j2cl.ast.processors.Visitable;
 import com.google.j2cl.ast.sourcemap.SourceInfo;
@@ -28,32 +27,35 @@ import com.google.j2cl.ast.sourcemap.TracksSourceInfo;
 public abstract class Statement extends Node implements TracksSourceInfo {
   // unknown by default.
   private SourceInfo javaSourceInfo = SourceInfo.UNKNOWN_SOURCE_INFO;
+
   private SourceInfo javaScriptSourceInfo = SourceInfo.UNKNOWN_SOURCE_INFO;
 
   @Override
-  public SourceInfo getInputSourceInfo() {
+  public SourceInfo getJavaSourceInfo() {
     return javaSourceInfo;
   }
 
   @Override
-  public void setInputSourceInfo(SourceInfo sourceInfo) {
+  public void setJavaSourceInfo(SourceInfo sourceInfo) {
     javaSourceInfo = sourceInfo;
   }
 
-  @Override
   public SourceInfo getOutputSourceInfo() {
     return javaScriptSourceInfo;
   }
 
-  @Override
   public void setOutputSourceInfo(SourceInfo sourceInfo) {
     this.javaScriptSourceInfo = sourceInfo;
   }
 
   @Override
-  public void copyMetadataFrom(HasMetadata store) {
-    Preconditions.checkArgument(store instanceof TracksSourceInfo);
-    this.setInputSourceInfo(((TracksSourceInfo) store).getInputSourceInfo());
+  public void copyMetadataFrom(HasMetadata<TracksSourceInfo> store) {
+    setJavaSourceInfo(store.getMetadata().getJavaSourceInfo());
+  }
+
+  @Override
+  public TracksSourceInfo getMetadata() {
+    return this;
   }
 
   @Override

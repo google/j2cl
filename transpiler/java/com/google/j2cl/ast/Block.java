@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
@@ -30,8 +31,7 @@ public class Block extends Statement implements Positioned {
   private Integer position;
 
   public Block(List<Statement> statements) {
-    Preconditions.checkNotNull(statements);
-    this.statements.addAll(statements);
+    this.statements.addAll(checkNotNull(statements));
   }
 
   public Block() {}

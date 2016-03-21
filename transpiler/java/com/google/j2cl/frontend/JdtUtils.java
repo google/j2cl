@@ -189,11 +189,11 @@ public class JdtUtils {
       case "!=":
         return BinaryOperator.NOT_EQUALS;
       case "^":
-        return BinaryOperator.XOR;
+        return BinaryOperator.BIT_XOR;
       case "&":
-        return BinaryOperator.AND;
+        return BinaryOperator.BIT_AND;
       case "|":
-        return BinaryOperator.OR;
+        return BinaryOperator.BIT_OR;
       case "&&":
         return BinaryOperator.CONDITIONAL_AND;
       case "||":

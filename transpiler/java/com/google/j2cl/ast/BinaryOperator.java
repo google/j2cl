@@ -15,10 +15,12 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Binary Operator.
  */
-public enum BinaryOperator {
+public enum BinaryOperator implements Operator {
   TIMES("*"),
   DIVIDE("/"),
   REMAINDER("%"),
@@ -33,49 +35,65 @@ public enum BinaryOperator {
   GREATER_EQUALS(">="),
   EQUALS("=="),
   NOT_EQUALS("!="),
-  XOR("^"),
-  AND("&"),
-  OR("|"),
+  BIT_XOR("^"),
+  BIT_AND("&"),
+  BIT_OR("|"),
   CONDITIONAL_AND("&&"),
   CONDITIONAL_OR("||"),
+  // Assignment operators.
   ASSIGN("="),
-  PLUS_ASSIGN("+="),
-  MINUS_ASSIGN("-="),
-  TIMES_ASSIGN("*="),
-  DIVIDE_ASSIGN("/="),
-  BIT_AND_ASSIGN("&="),
-  BIT_OR_ASSIGN("|="),
-  BIT_XOR_ASSIGN("^="),
-  REMAINDER_ASSIGN("%="),
-  LEFT_SHIFT_ASSIGN("<<="),
-  RIGHT_SHIFT_SIGNED_ASSIGN(">>="),
-  RIGHT_SHIFT_UNSIGNED_ASSIGN(">>>=");
+  PLUS_ASSIGN("+=", PLUS),
+  MINUS_ASSIGN("-=", MINUS),
+  TIMES_ASSIGN("*=", TIMES),
+  DIVIDE_ASSIGN("/=", DIVIDE),
+  BIT_AND_ASSIGN("&=", BIT_AND),
+  BIT_OR_ASSIGN("|=", BIT_OR),
+  BIT_XOR_ASSIGN("^=", BIT_XOR),
+  REMAINDER_ASSIGN("%=", REMAINDER),
+  LEFT_SHIFT_ASSIGN("<<=", LEFT_SHIFT),
+  RIGHT_SHIFT_SIGNED_ASSIGN(">>=", RIGHT_SHIFT_SIGNED),
+  RIGHT_SHIFT_UNSIGNED_ASSIGN(">>>=", RIGHT_SHIFT_UNSIGNED);
+
   private String symbol;
+  private BinaryOperator underlyingBinaryOperator;
 
   BinaryOperator(String symbol) {
-    this.symbol = symbol;
+    this(symbol, null);
   }
 
-  public boolean doesAssignment() {
-    return this != this.withoutAssignment();
+  BinaryOperator(String symbol, BinaryOperator underlyingBinaryOperator) {
+    this.symbol = checkNotNull(symbol);
+    this.underlyingBinaryOperator = underlyingBinaryOperator;
   }
 
+  @Override
+  public BinaryOperator getUnderlyingBinaryOperator() {
+    return underlyingBinaryOperator;
+  }
+
+  @Override
   public String getSymbol() {
     return symbol;
   }
 
+  @Override
+  public boolean hasSideEffect() {
+    return this == ASSIGN || underlyingBinaryOperator != null;
+  }
+
   public boolean isCompoundAssignment() {
-    return this != ASSIGN && doesAssignment();
+    return this != ASSIGN && hasSideEffect();
   }
 
   public boolean isShiftOperator() {
+    if (isCompoundAssignment()) {
+      return getUnderlyingBinaryOperator().isShiftOperator();
+    }
+
     switch (this) {
       case LEFT_SHIFT:
       case RIGHT_SHIFT_SIGNED:
       case RIGHT_SHIFT_UNSIGNED:
-      case LEFT_SHIFT_ASSIGN:
-      case RIGHT_SHIFT_SIGNED_ASSIGN:
-      case RIGHT_SHIFT_UNSIGNED_ASSIGN:
         return true;
       default:
         return false;
@@ -87,34 +105,4 @@ public enum BinaryOperator {
     return symbol;
   }
 
-  public BinaryOperator withoutAssignment() {
-    switch (this) {
-      case ASSIGN:
-        return null;
-      case PLUS_ASSIGN:
-        return BinaryOperator.PLUS;
-      case MINUS_ASSIGN:
-        return BinaryOperator.MINUS;
-      case TIMES_ASSIGN:
-        return BinaryOperator.TIMES;
-      case DIVIDE_ASSIGN:
-        return BinaryOperator.DIVIDE;
-      case BIT_AND_ASSIGN:
-        return BinaryOperator.AND;
-      case BIT_OR_ASSIGN:
-        return BinaryOperator.OR;
-      case BIT_XOR_ASSIGN:
-        return BinaryOperator.XOR;
-      case REMAINDER_ASSIGN:
-        return BinaryOperator.REMAINDER;
-      case LEFT_SHIFT_ASSIGN:
-        return BinaryOperator.LEFT_SHIFT;
-      case RIGHT_SHIFT_SIGNED_ASSIGN:
-        return BinaryOperator.RIGHT_SHIFT_SIGNED;
-      case RIGHT_SHIFT_UNSIGNED_ASSIGN:
-        return BinaryOperator.RIGHT_SHIFT_UNSIGNED;
-      default:
-        return this;
-    }
-  }
 }

@@ -20,28 +20,31 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
- * Synchronized statement.
+ * Class for unary expressions.
  */
 @Visitable
-public class SynchronizedStatement extends Statement {
-  @Visitable Expression expression;
-  @Visitable Block body;
+public abstract class UnaryExpression extends Expression {
+  private TypeDescriptor typeDescriptor;
+  @Visitable Expression operand;
 
-  public SynchronizedStatement(Expression expression, Block body) {
-    this.expression = checkNotNull(expression);
-    this.body = checkNotNull(body);
+  public UnaryExpression(TypeDescriptor typeDescriptor, Expression operand) {
+    this.operand = checkNotNull(operand);
+    this.typeDescriptor = checkNotNull(typeDescriptor);
   }
 
-  public Expression getExpression() {
-    return expression;
+  public Expression getOperand() {
+    return operand;
   }
 
-  public Block getBody() {
-    return body;
+  public abstract Operator getOperator();
+
+  @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return typeDescriptor;
   }
 
   @Override
   public Node accept(Processor processor) {
-    return Visitor_SynchronizedStatement.visit(processor, this);
+    return Visitor_UnaryExpression.visit(processor, this);
   }
 }
