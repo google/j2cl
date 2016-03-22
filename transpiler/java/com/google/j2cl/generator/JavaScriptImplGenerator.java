@@ -514,6 +514,10 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     String superCallArguments = GeneratorUtils.getSuperArguments(primaryConstructor, environment);
     sb.appendln("/**");
     sb.appendln(" * Real constructor.");
+    for (String paramTypeName :
+        GeneratorUtils.getParameterAnnotationsJsDoc(primaryConstructor, environment)) {
+      sb.appendln(" * @param %s", paramTypeName);
+    }
     sb.appendln(" * @public");
     sb.appendln(" */");
     sb.appendln("  constructor(%s) {", parameters);
