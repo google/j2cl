@@ -54,14 +54,14 @@ class ObjectCalls extends Object {
     $Objects.m_equals__java_lang_Object__java_lang_Object(object, object);
     $Objects.m_hashCode__java_lang_Object(object);
     $Objects.m_toString__java_lang_Object(object);
-    $Objects.m_getClass__java_lang_Object(object);
+    /**@type {Class<?>} */ ($Objects.m_getClass__java_lang_Object(object));
     let objectCalls =
         /**@type {!Array<ObjectCalls>} */ ($Arrays.$create([1], ObjectCalls));
     $Objects.m_equals__java_lang_Object__java_lang_Object(
         objectCalls, objectCalls);
     $Objects.m_hashCode__java_lang_Object(objectCalls);
     $Objects.m_toString__java_lang_Object(objectCalls);
-    $Objects.m_getClass__java_lang_Object(objectCalls);
+    /**@type {Class<?>} */ ($Objects.m_getClass__java_lang_Object(objectCalls));
   }
 
   /**
@@ -72,11 +72,11 @@ class ObjectCalls extends Object {
     this.m_equals__java_lang_Object(Object.$create());
     this.m_hashCode();
     this.$javaToString();
-    this.m_getClass();
+    /**@type {Class<?>} */ (this.m_getClass());
     this.m_equals__java_lang_Object(Object.$create());
     this.m_hashCode();
     this.$javaToString();
-    this.m_getClass();
+    /**@type {Class<?>} */ (this.m_getClass());
   }
 
   /**

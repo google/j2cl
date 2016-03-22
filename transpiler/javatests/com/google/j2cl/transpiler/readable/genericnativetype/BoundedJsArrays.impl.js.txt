@@ -54,7 +54,7 @@ class BoundedJsArrays extends Object {
    */
   static m_create() {
     BoundedJsArrays.$clinit();
-    return BoundedJsArray$Overlay.m_create();
+    return /**@type {$BoundedJsArray<*>} */ (BoundedJsArray$Overlay.m_create());
   }
 
   /**
@@ -65,7 +65,8 @@ class BoundedJsArrays extends Object {
    */
   static m_createWithSize__int(size) {
     BoundedJsArrays.$clinit();
-    return BoundedJsArray$Overlay.m_create__int(size);
+    return /**@type {$BoundedJsArray<*>} */ (
+        BoundedJsArray$Overlay.m_create__int(size));
   }
 
   /**

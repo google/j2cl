@@ -49,8 +49,11 @@ class ClassLiteral extends Object {
    * @public
    */
   m_main() {
-    let o = ClassLiteral.$getClass();
-    o = ClassLiteral.$getClass().$forArray(2);
+    let o = /**@type {Class<ClassLiteral>} */ (ClassLiteral.$getClass());
+    o = /**@type {Class<Array<Array<ClassLiteral>>>} */ (
+        /**@type {Class<Array<Array<ClassLiteral>>>} */ (
+            ClassLiteral.$getClass())
+            .$forArray(2));
   }
 
   /**

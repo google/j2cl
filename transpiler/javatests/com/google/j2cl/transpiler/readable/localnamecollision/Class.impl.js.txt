@@ -48,7 +48,10 @@ class Class extends Object {
    * @return {void}
    * @public
    */
-  m_main() { $Objects.m_getClass__java_lang_Object(Class.$create()); }
+  m_main() {
+    /**@type {java_lang_Class<?>} */ (
+        $Objects.m_getClass__java_lang_Object(Class.$create()));
+  }
 
   /**
    * Returns whether the provided instance is an instance of this class.

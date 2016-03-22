@@ -262,13 +262,15 @@ class EqualFunctions extends Object {
             EqualFunctions$1.$create(), EqualFunctions$1.$copy));
     EqualFunctions
         .$f_forInteger__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions =
-        EqualFunctions.m_objectEqualFunction();
+        /**@type {?function(Integer, Integer):boolean} */ (
+            EqualFunctions.m_objectEqualFunction());
     EqualFunctions
         .$f_forCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions =
-        EqualFunctions
-            .m_withCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunction(
-                EqualFunctions
-                    .$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions);
+        /**@type {?function(*, *):boolean} */ (
+            EqualFunctions
+                .m_withCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunction(
+                    EqualFunctions
+                        .$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions));
   }
 
   /**

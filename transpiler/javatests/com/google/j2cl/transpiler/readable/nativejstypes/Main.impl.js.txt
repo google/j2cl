@@ -91,8 +91,10 @@ class Main extends Object {
    */
   static m_testNativeTypeClassLiteral() {
     Main.$clinit();
-    let o1 = $JavaScriptObject.$getClass();
-    o1 = Object.$getClass().$forArray(1);
+    let o1 = /**@type {Class<Bar>} */ ($JavaScriptObject.$getClass());
+    o1 = /**@type {Class<Array<Array<Bar>>>} */ (
+        /**@type {Class<Array<Array<Bar>>>} */ (Object.$getClass())
+            .$forArray(1));
   }
 
   /**

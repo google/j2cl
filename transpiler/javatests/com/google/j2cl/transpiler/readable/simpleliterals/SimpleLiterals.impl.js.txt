@@ -57,7 +57,7 @@ class SimpleLiterals extends Object {
     let c = null;
     let d = 101;
     let e = 'foo';
-    let f = SimpleLiterals.$getClass();
+    let f = /**@type {Class<SimpleLiterals>} */ (SimpleLiterals.$getClass());
   }
 
   /**

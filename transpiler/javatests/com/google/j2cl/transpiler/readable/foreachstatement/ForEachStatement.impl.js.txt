@@ -56,7 +56,9 @@ class ForEachStatement extends Object {
    * @public
    */
   m_test__java_lang_Iterable(iterable) {
-    for (let $iterator = iterable.m_iterator(); $iterator.m_hasNext();) {
+    for (let $iterator =
+             /**@type {Iterator<Throwable>} */ (iterable.m_iterator());
+         $iterator.m_hasNext();) {
       let t = $iterator.m_next();
       $Objects.m_toString__java_lang_Object(t);
     }

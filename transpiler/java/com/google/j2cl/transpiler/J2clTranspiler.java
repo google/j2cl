@@ -26,6 +26,7 @@ import com.google.j2cl.ast.visitors.FixBooleanOperatorsPass;
 import com.google.j2cl.ast.visitors.FixSuperCallQualifiersVisitor;
 import com.google.j2cl.ast.visitors.FixTypeVariableInMethodVisitors;
 import com.google.j2cl.ast.visitors.InsertBoxingConversionVisitor;
+import com.google.j2cl.ast.visitors.InsertCastOnGenericReturnTypeVisitor;
 import com.google.j2cl.ast.visitors.InsertCastOnNewInstancesVisitor;
 import com.google.j2cl.ast.visitors.InsertClassInitStaticMethods;
 import com.google.j2cl.ast.visitors.InsertExceptionConversionVisitor;
@@ -184,6 +185,8 @@ public class J2clTranspiler {
       InsertExceptionConversionVisitor.applyTo(j2clUnit);
 
       // Dodge JSCompiler limitations.
+      // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
+      InsertCastOnGenericReturnTypeVisitor.applyTo(j2clUnit);
       // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
       FixTypeVariableInMethodVisitors.applyTo(j2clUnit);
       RemoveUnusedMultiExpressionReturnValues.applyTo(j2clUnit);
