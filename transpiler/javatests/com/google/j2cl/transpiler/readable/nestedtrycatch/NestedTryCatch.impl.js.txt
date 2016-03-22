@@ -53,12 +53,12 @@ class NestedTryCatch extends Object {
   m_main() {
     try {
       throw $Exceptions.toJs(Exception.$create());
-    } catch (ae) {
+    } catch (/** @type {*} */ ae) {
       ae = $Exceptions.toJava(ae);
       if (Exception.$isInstance(ae)) {
         try {
           throw $Exceptions.toJs(Exception.$create());
-        } catch (ie) {
+        } catch (/** @type {*} */ ie) {
           ie = $Exceptions.toJava(ie);
           if (Exception.$isInstance(ie)) {
           } else {

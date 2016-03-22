@@ -257,7 +257,8 @@ public class StatementTranspiler {
           CatchClause catchClause = tryStatement.getCatchClauses().get(0);
           builder.appendln(
               String.format(
-                  "catch (%s)", environment.aliasForVariable(catchClause.getExceptionVar())));
+                  "catch (/** @type {*} */ %s)",
+                  environment.aliasForVariable(catchClause.getExceptionVar())));
           catchClause.getBody().accept(this);
         }
         // Generate finally block.

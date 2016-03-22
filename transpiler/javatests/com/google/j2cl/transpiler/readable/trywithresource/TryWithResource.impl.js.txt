@@ -62,7 +62,7 @@ class TryWithResource extends Object {
       try {
         thing = TryWithResource$ClosableThing.$create();
         let i = 0;
-      } catch ($exceptionFromTry) {
+      } catch (/** @type {*} */ $exceptionFromTry) {
         $exceptionFromTry = $Exceptions.toJava($exceptionFromTry);
         if (Throwable.$isInstance($exceptionFromTry)) {
           $primaryExc = $exceptionFromTry;
@@ -95,7 +95,7 @@ class TryWithResource extends Object {
         thing2 = TryWithResource$ClosableThing.$create();
         let i = 0;
         throw $Exceptions.toJs(Exception.$create());
-      } catch ($exceptionFromTry) {
+      } catch (/** @type {*} */ $exceptionFromTry) {
         $exceptionFromTry = $Exceptions.toJava($exceptionFromTry);
         if (Throwable.$isInstance($exceptionFromTry)) {
           $primaryExc = $exceptionFromTry;
@@ -110,7 +110,7 @@ class TryWithResource extends Object {
           throw $Exceptions.toJs($primaryExc);
         }
       }
-    } catch (e) {
+    } catch (/** @type {*} */ e) {
       e = $Exceptions.toJava(e);
       if (Exception.$isInstance(e)) {
         let b = 10;

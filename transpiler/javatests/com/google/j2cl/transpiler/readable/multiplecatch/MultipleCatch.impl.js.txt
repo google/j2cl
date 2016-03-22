@@ -55,7 +55,7 @@ class MultipleCatch extends Object {
   m_main() {
     try {
       throw $Exceptions.toJs(ClassCastException.$create());
-    } catch (e) {
+    } catch (/** @type {*} */ e) {
       e = $Exceptions.toJava(e);
       if (NullPointerException.$isInstance(e) ||
           ClassCastException.$isInstance(e)) {
