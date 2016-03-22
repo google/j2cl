@@ -38,6 +38,7 @@ class Comparable {
   /**
    * Returns whether the provided instance is of a class that implements this
    * interface.
+   * @param {*} instance
    * @return {boolean}
    * @public
    */

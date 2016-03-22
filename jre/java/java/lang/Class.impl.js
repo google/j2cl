@@ -27,7 +27,6 @@ class Class extends Object {
    * @param {Array<Object>} enumConstants
    * @param {Class} arrayElementClassLiteral
    * @param {number} dimensionCount
-   * @private
    */
   constructor(simpleName, name, type, canonicalName, enumConstants,
       arrayElementClassLiteral, dimensionCount) {
@@ -253,11 +252,11 @@ class Class extends Object {
    *
    * @param {string} simpleName
    * @param {string} name
+   * @param {?string=} opt_canonicalName
    * @return {Class}
    * @public
    */
-  static $createForInterface(simpleName, name,
-      opt_canonicalName) {
+  static $createForInterface(simpleName, name, opt_canonicalName) {
     Class.$clinit();
     return new Class(simpleName, name, Class.Type_.INTERFACE,
         opt_canonicalName || null, null, null, 0);

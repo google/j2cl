@@ -49,6 +49,7 @@ class Arrays {
    * @param {Function} leafTypeIsInstance
    * @param {Function} leafTypeIsAssignableFrom
    * @param {Function} leafTypeGetClass
+   * @param {*} leafTypeInitialValue
    * @return {Array<*>}
    * @private
    */
@@ -303,6 +304,7 @@ class Arrays {
   /**
    * @param {*} instance
    * @param {*} requiredLeafType
+   * @param {Function} requiredLeafTypeIsAssignableFrom
    * @param {number} requiredDimensionCount
    * @return {*}
    * @public
