@@ -24,8 +24,7 @@ import com.google.j2cl.ast.processors.Visitable;
 public abstract class Expression extends Node {
 
   /**
-   * Returns the type descriptor of the value that either this expression is (in the case of a
-   * literal) or the value returned by this expression (in the case of computation).
+   * Returns the type descriptor of the value that is returned by this expression.
    */
   public abstract TypeDescriptor getTypeDescriptor();
 

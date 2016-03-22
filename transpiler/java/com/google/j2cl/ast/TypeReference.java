@@ -32,6 +32,10 @@ public class TypeReference extends Expression {
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
+    return TypeDescriptors.NATIVE_FUNCTION;
+  }
+
+  public TypeDescriptor getReferencedTypeDescriptor() {
     return typeDescriptor;
   }
 

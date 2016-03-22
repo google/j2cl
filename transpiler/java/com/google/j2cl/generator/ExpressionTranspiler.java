@@ -428,7 +428,7 @@ public class ExpressionTranspiler {
 
       @Override
       public String transformTypeReference(TypeReference typeReference) {
-        return environment.aliasForType(typeReference.getTypeDescriptor());
+        return environment.aliasForType(typeReference.getReferencedTypeDescriptor());
       }
 
       @Override
