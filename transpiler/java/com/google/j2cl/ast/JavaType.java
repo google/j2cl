@@ -88,6 +88,16 @@ public class JavaType extends Node {
     return isStatic;
   }
 
+  public boolean containsJsMethod(String name) {
+    for (Method method : methods) {
+      MethodDescriptor methodDescriptor = method.getDescriptor();
+      if (methodDescriptor.isJsMethod() && methodDescriptor.getJsName().equals(name)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public boolean containsNonJsNativeMethods() {
     for (Method method : methods) {
       if (method.isNative()

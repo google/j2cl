@@ -22,6 +22,7 @@ import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
+import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -219,7 +220,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private void renderJavaTypeMethods() {
     for (Method method : javaType.getMethods()) {
       if (method.isConstructor()) {
-        if (GeneratorUtils.isBoxedTypeAsPrimitive(javaType.getDescriptor())) {
+        String mangledNameOfCreate =
+            ManglingNameUtils.getConstructorMangledName(method.getDescriptor());
+        if (javaType.containsJsMethod(mangledNameOfCreate)) {
           sb.appendln("/**");
           sb.appendln(" * Constructor function implementation is provided separately.");
           sb.appendln(" */");
@@ -362,7 +365,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderIsInstanceForClassType() {
-    if (GeneratorUtils.superBoxedTypeAsPrimitive(javaType.getDescriptor())) {
+    if (javaType.containsJsMethod(MethodDescriptor.IS_INSTANCE_METHOD_NAME)) {
       sb.appendln("/**");
       sb.appendln(" * $isInstance() function implementation is provided separately.");
       sb.appendln(" */");
@@ -409,8 +412,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO: Move this to the ast in a normalization pass.
   private void renderIsAssignableFromMethod() {
-    if (javaType.isJsOverlayImpl()) {
-      return; // Don't render for overlay types.
+    if (javaType.isJsOverlayImpl()
+        || javaType.containsJsMethod(MethodDescriptor.IS_ASSIGNABLE_FROM_METHOD_NAME)) {
+      return; // Don't render for overlay types or if the method exists.
     }
     sb.appendln("/**");
     sb.appendln(" * Returns whether the provided class is or extends this class.");
@@ -493,10 +497,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
     if (!javaType.isJsOverlayImpl() && !javaType.isInterface()) {
       sb.appendln("/**");
-      TypeDescriptor superTypeDescriptor = javaType.getSuperTypeDescriptor();
-      if (!superTypeDescriptor.isNative()) {
+      if (GeneratorUtils.hasNonNativeSuperClass(javaType)) {
         sb.appendln(" * @override");
-
       }
       sb.appendln(" * @return {%s}", classAlias);
       sb.appendln(" * @public");
@@ -539,7 +541,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     // sb.appendln(" * @private");
     sb.appendln(" */");
     sb.appendln("constructor() {");
-    sb.appendln("super();");
+    if (javaType.getSuperTypeDescriptor() != null) {
+      sb.appendln("super();");
+    }
     renderFieldsInitialValues();
     sb.appendln("}");
     sb.newLine();
@@ -614,7 +618,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       String path = lazyImport.getImplModulePath();
       sb.appendln("%s = goog.module.get('%s');", alias, path);
     }
-    if (GeneratorUtils.needCallSuperClinit(javaType)) {
+    if (GeneratorUtils.hasNonNativeSuperClass(javaType)) {
       // call the super class $clinit.
       TypeDescriptor superTypeDescriptor = javaType.getSuperTypeDescriptor();
       String superTypeName = environment.aliasForType(superTypeDescriptor);

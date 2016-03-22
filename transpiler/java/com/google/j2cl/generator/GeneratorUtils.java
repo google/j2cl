@@ -157,7 +157,7 @@ public class GeneratorUtils {
   /**
    * Returns true if the type has a superclass that is not a native js type.
    */
-  public static boolean needCallSuperClinit(JavaType type) {
+  public static boolean hasNonNativeSuperClass(JavaType type) {
     return type.getSuperTypeDescriptor() != null && !type.getSuperTypeDescriptor().isNative();
   }
 
@@ -257,25 +257,6 @@ public class GeneratorUtils {
   public static boolean shouldNotEmitCode(Method method) {
     return method.isNative()
         && (method.getDescriptor().isJsProperty() || method.getDescriptor().isJsMethod());
-  }
-
-  // Returns if it is java type that is unboxed as Javascript primitive types.
-  // java.lang.Boolean, java.lang.Double and java.lang.String are unboxed as JS primitives.
-  public static boolean isBoxedTypeAsPrimitive(TypeDescriptor typeDescriptor) {
-    return TypeDescriptors.isBoxedTypeAsJsPrimitives(typeDescriptor);
-  }
-
-  // Returns true if typeDescriptor is unboxed as JS primitive types or it is super class or super
-  // interfaces of these types.
-  public static boolean superBoxedTypeAsPrimitive(TypeDescriptor typeDescriptor) {
-    // TODO: add
-    // ... || typeDescriptor.getRawTypeDescriptor()
-    //        == TypeDescriptors.get().javaLangComparable.getRawTypeDescriptor()
-    // || typeDescriptor == TypeDescriptors.get().javaLangCharSequence
-    // We are not having tests for 'DoubleInstance instanceof Comparable', currently just emit
-    // regular $isInstance methods for Comparable and CharSequence.
-    return isBoxedTypeAsPrimitive(typeDescriptor)
-        || typeDescriptor == TypeDescriptors.get().javaLangNumber;
   }
 
   public static String getExtendsClause(JavaType javaType, GenerationEnvironment environment) {
