@@ -38,7 +38,6 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
-import com.google.j2cl.ast.VariableDeclarationStatement;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -129,8 +128,8 @@ public class NormalizeTryWithResourceVisitor extends AbstractRewriter {
         new Variable("$primaryExc", TypeDescriptors.get().javaLangThrowable, false, false);
     VariableDeclarationFragment fragment =
         new VariableDeclarationFragment(primaryException, NullLiteral.NULL);
-    VariableDeclarationStatement declarePrimaryException =
-        new VariableDeclarationStatement(Arrays.asList(fragment));
+    ExpressionStatement declarePrimaryException =
+        new ExpressionStatement(new VariableDeclarationExpression(fragment));
     outputStatements.add(declarePrimaryException);
 
     List<Statement> tryBlockBodyStatements = new ArrayList<>();
@@ -143,7 +142,7 @@ public class NormalizeTryWithResourceVisitor extends AbstractRewriter {
           new VariableDeclarationFragment(
               originalResourceDeclaration.getVariable(), NullLiteral.NULL);
       VariableDeclarationExpression nullDeclaration =
-          new VariableDeclarationExpression(Arrays.asList(declareResourceNull));
+          new VariableDeclarationExpression(declareResourceNull);
       Statement openResource = new ExpressionStatement(nullDeclaration);
       outputStatements.add(openResource);
 

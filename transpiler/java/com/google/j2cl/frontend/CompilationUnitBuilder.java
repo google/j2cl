@@ -83,7 +83,6 @@ import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
-import com.google.j2cl.ast.VariableDeclarationStatement;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.ast.sourcemap.SourceInfo;
@@ -866,9 +865,9 @@ public class CompilationUnitBuilder {
               new FieldAccess(
                   arrayVariable.getReference(), AstUtils.ARRAY_LENGTH_FIELD_DESCRIPTION));
 
-      VariableDeclarationStatement forVariableDeclarationStatement =
-          new VariableDeclarationStatement(
-              Collections.singletonList(
+      ExpressionStatement forVariableDeclarationStatement =
+          new ExpressionStatement(
+              new VariableDeclarationExpression(
                   new VariableDeclarationFragment(
                       convert(statement.getParameter()),
                       new ArrayAccess(
@@ -886,8 +885,7 @@ public class CompilationUnitBuilder {
           body,
           Collections.<Expression>singletonList(
               new VariableDeclarationExpression(
-                  ImmutableList.of(
-                      arrayVariableDeclarationFragment, indexVariableDeclarationFragment))),
+                  arrayVariableDeclarationFragment, indexVariableDeclarationFragment)),
           Collections.<Expression>singletonList(
               new PostfixExpression(
                   TypeDescriptors.get().primitiveInt,
@@ -939,9 +937,9 @@ public class CompilationUnitBuilder {
       // T v = $iterator.next();
       IMethodBinding nextMethodBinding =
           JdtUtils.getMethodBinding(iteratorMethodBinding.getReturnType(), "next");
-      VariableDeclarationStatement forVariableDeclarationStatement =
-          new VariableDeclarationStatement(
-              Collections.singletonList(
+      ExpressionStatement forVariableDeclarationStatement =
+          new ExpressionStatement(
+              new VariableDeclarationExpression(
                   new VariableDeclarationFragment(
                       convert(statement.getParameter()),
                       MethodCall.createRegularMethodCall(
@@ -959,7 +957,7 @@ public class CompilationUnitBuilder {
           condition,
           body,
           Collections.<Expression>singletonList(
-              new VariableDeclarationExpression(Collections.singletonList(iteratorDeclaration))),
+              new VariableDeclarationExpression(iteratorDeclaration)),
           Collections.<Expression>emptyList());
     }
 
@@ -1733,7 +1731,7 @@ public class CompilationUnitBuilder {
       enclosingTypeByVariable.put(variable, enclosingType);
     }
 
-    private VariableDeclarationStatement convert(
+    private ExpressionStatement convert(
         org.eclipse.jdt.core.dom.VariableDeclarationStatement statement) {
       List<VariableDeclarationFragment> variableDeclarations = new ArrayList<>();
       for (Object object : statement.fragments()) {
@@ -1741,7 +1739,7 @@ public class CompilationUnitBuilder {
             (org.eclipse.jdt.core.dom.VariableDeclarationFragment) object;
         variableDeclarations.add(convert(fragment));
       }
-      return new VariableDeclarationStatement(variableDeclarations);
+      return new ExpressionStatement(new VariableDeclarationExpression(variableDeclarations));
     }
 
     /**

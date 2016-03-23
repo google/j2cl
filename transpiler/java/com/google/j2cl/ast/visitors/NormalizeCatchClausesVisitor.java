@@ -22,6 +22,7 @@ import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CatchClause;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
@@ -35,8 +36,8 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
+import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
-import com.google.j2cl.ast.VariableDeclarationStatement;
 import com.google.j2cl.ast.Visibility;
 
 import java.util.ArrayList;
@@ -128,8 +129,8 @@ public class NormalizeCatchClausesVisitor extends AbstractRewriter {
       VariableDeclarationFragment assignmentFragment =
           new VariableDeclarationFragment(
               caughtVariableWithThrowableType, mainVariable.getReference());
-      VariableDeclarationStatement assignment =
-          new VariableDeclarationStatement(assignmentFragment);
+      ExpressionStatement assignment =
+          new ExpressionStatement(new VariableDeclarationExpression(assignmentFragment));
       catchClauseBody.add(0, assignment);
     }
     Statement rest = bodyBuilder(clauses.subList(1, clauses.size()), mainVariable);

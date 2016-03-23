@@ -45,7 +45,6 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
-import com.google.j2cl.ast.VariableDeclarationStatement;
 import com.google.j2cl.ast.VariableReference;
 
 import java.util.Arrays;
@@ -145,8 +144,9 @@ public class NormalizeJsVarargsVisitor extends AbstractRewriter {
               Arrays.<Expression>asList(arraySize),
               null);
       Statement variableDeclaration =
-          new VariableDeclarationStatement(
-              new VariableDeclarationFragment(varargsLocalCopy, newArray));
+          new ExpressionStatement(
+              new VariableDeclarationExpression(
+                  new VariableDeclarationFragment(varargsLocalCopy, newArray)));
 
       // (2) (loop body) $var_args_copy[i] = arguments[i + varargsIndex];
       Variable loopVariable = new Variable("$i", primitiveInt, false, false);
@@ -178,9 +178,8 @@ public class NormalizeJsVarargsVisitor extends AbstractRewriter {
               body,
               Arrays.<Expression>asList(
                   new VariableDeclarationExpression(
-                      Arrays.asList(
-                          new VariableDeclarationFragment(
-                              loopVariable, new NumberLiteral(primitiveInt, 0))))),
+                      new VariableDeclarationFragment(
+                          loopVariable, new NumberLiteral(primitiveInt, 0)))),
               Arrays.<Expression>asList(
                   new PostfixExpression(
                       primitiveInt, loopVariable.getReference(), PostfixOperator.INCREMENT)));

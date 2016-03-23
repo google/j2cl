@@ -37,8 +37,6 @@ import com.google.j2cl.ast.SynchronizedStatement;
 import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
-import com.google.j2cl.ast.VariableDeclarationFragment;
-import com.google.j2cl.ast.VariableDeclarationStatement;
 import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.ast.sourcemap.SourceInfo;
 
@@ -266,19 +264,6 @@ public class StatementTranspiler {
           builder.append("finally");
           tryStatement.getFinallyBlock().accept(this);
         }
-        return false;
-      }
-
-      @Override
-      public boolean enterVariableDeclarationStatement(
-          VariableDeclarationStatement variableDeclarationStatement) {
-        List<String> fragmentsAsString = new ArrayList<>();
-        for (VariableDeclarationFragment fragment : variableDeclarationStatement.getFragments()) {
-          fragmentsAsString.add(toSourceExpression(fragment));
-        }
-        SourceInfo location =
-            builder.appendln("let " + Joiner.on(", ").join(fragmentsAsString) + ";");
-        variableDeclarationStatement.setOutputSourceInfo(location);
         return false;
       }
 

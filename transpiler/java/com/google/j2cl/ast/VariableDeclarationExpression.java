@@ -21,6 +21,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,6 +30,10 @@ import java.util.List;
 @Visitable
 public class VariableDeclarationExpression extends Expression {
   @Visitable List<VariableDeclarationFragment> fragments = new ArrayList<>();
+
+  public VariableDeclarationExpression(VariableDeclarationFragment... fragments) {
+    this(Arrays.asList(fragments));
+  }
 
   public VariableDeclarationExpression(List<VariableDeclarationFragment> fragments) {
     this.fragments.addAll(checkNotNull(fragments));
