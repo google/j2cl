@@ -89,4 +89,9 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   public Node accept(Processor processor) {
     return Visitor_ArrayTypeDescriptor.visit(processor, this);
   }
+
+  @Override
+  public String toString() {
+    return getLeafTypeDescriptor().toString() + Strings.repeat("[]", getDimensions());
+  }
 }

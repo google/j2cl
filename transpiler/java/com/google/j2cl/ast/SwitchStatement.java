@@ -27,16 +27,16 @@ import java.util.List;
  */
 @Visitable
 public class SwitchStatement extends Statement {
-  @Visitable Expression matchExpression;
+  @Visitable Expression switchExpression;
   @Visitable List<Statement> bodyStatements = new ArrayList<>();
 
-  public SwitchStatement(Expression matchExpression, List<Statement> bodyStatements) {
-    this.matchExpression = checkNotNull(matchExpression);
+  public SwitchStatement(Expression switchExpression, List<Statement> bodyStatements) {
+    this.switchExpression = checkNotNull(switchExpression);
     this.bodyStatements.addAll(checkNotNull(bodyStatements));
   }
 
-  public Expression getMatchExpression() {
-    return matchExpression;
+  public Expression getSwitchExpression() {
+    return switchExpression;
   }
 
   public List<Statement> getBodyStatements() {

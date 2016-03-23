@@ -25,4 +25,9 @@ public abstract class Node {
   public Node accept(Processor processor) {
     return Visitor_Node.visit(processor, this);
   }
+
+  @Override
+  public String toString() {
+    return ToStringRenderer.render(this);
+  }
 }

@@ -280,7 +280,7 @@ public class ConversionContextVisitor extends AbstractRewriter {
   public Node rewriteSwitchStatement(SwitchStatement switchStatement) {
     // unary numeric promotion
     return new SwitchStatement(
-        contextRewriter.rewriteUnaryNumericPromotionContext(switchStatement.getMatchExpression()),
+        contextRewriter.rewriteUnaryNumericPromotionContext(switchStatement.getSwitchExpression()),
         switchStatement.getBodyStatements());
   }
 

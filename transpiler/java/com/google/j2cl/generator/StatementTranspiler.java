@@ -224,7 +224,7 @@ public class StatementTranspiler {
         SourceInfo location =
             builder.appendln(
                 String.format(
-                    "switch (%s) {", toSourceExpression(switchStatement.getMatchExpression())));
+                    "switch (%s) {", toSourceExpression(switchStatement.getSwitchExpression())));
         switchStatement.setOutputSourceInfo(location);
         return true; // Allow the visitor to enter the switch cases.
       }

@@ -334,4 +334,9 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   public String getJsName() {
     return jsTypeName;
   }
+
+  @Override
+  public String toString() {
+    return getSourceName();
+  }
 }

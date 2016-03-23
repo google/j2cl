@@ -3,6 +3,7 @@ package com.google.j2cl.ast;
 import com.google.auto.value.AutoValue;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.processors.Visitable;
@@ -92,5 +93,20 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   @Override
   public Node accept(Processor processor) {
     return Visitor_UnionTypeDescriptor.visit(processor, this);
+  }
+
+  @Override
+  public String toString() {
+    return "("
+        + Joiner.on("|")
+            .join(
+                FluentIterable.from(getTypes())
+                    .transform(
+                        new Function<TypeDescriptor, String>() {
+                          @Override
+                          public String apply(TypeDescriptor typeDescriptor) {
+                            return typeDescriptor.toString();
+                          }
+                        }));
   }
 }
