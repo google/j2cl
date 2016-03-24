@@ -10,5 +10,6 @@ licenses(["unencumbered"])
 
 js_library(
     name = "vmbootstrap",
-    srcs = glob(["**/*.js"]),
+    srcs = glob(["*.js"]),
+    deps = ["//transpiler/vmbootstrap/primitives"],
 )
