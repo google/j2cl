@@ -58,11 +58,11 @@ import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MethodDescriptorBuilder;
+import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.NumberLiteral;
-import com.google.j2cl.ast.ParenthesizedExpression;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PostfixOperator;
 import com.google.j2cl.ast.PrefixExpression;
@@ -1348,9 +1348,10 @@ public class CompilationUnitBuilder {
           JdtUtils.createTypeDescriptor(literal.resolveTypeBinding()), constantValue);
     }
 
-    private ParenthesizedExpression convert(
-        org.eclipse.jdt.core.dom.ParenthesizedExpression expression) {
-      return new ParenthesizedExpression(convert(expression.getExpression()));
+    private Expression convert(org.eclipse.jdt.core.dom.ParenthesizedExpression expression) {
+      // Preserve the parenthesis. J2CL does not yet handle properly parenthesizing the output
+      // according to operator precedence.
+      return new MultiExpression(convert(expression.getExpression()));
     }
 
     private PostfixExpression convert(org.eclipse.jdt.core.dom.PostfixExpression expression) {

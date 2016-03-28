@@ -463,9 +463,7 @@ public class AstUtils {
 
     // We want "(a ? b : c).intValue()", not "a ? b : c.intValue()".
     expression =
-        isValidMethodCallQualifier(expression)
-            ? expression
-            : new ParenthesizedExpression(expression);
+        isValidMethodCallQualifier(expression) ? expression : new MultiExpression(expression);
 
     MethodCall methodCall = MethodCall.createRegularMethodCall(expression, valueMethodDescriptor);
     if (TypeDescriptors.isBoxedBooleanOrDouble(boxType)) {

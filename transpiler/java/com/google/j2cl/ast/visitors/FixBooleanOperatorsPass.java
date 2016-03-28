@@ -19,9 +19,9 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.OperatorSideEffectUtils;
-import com.google.j2cl.ast.ParenthesizedExpression;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -57,9 +57,7 @@ public class FixBooleanOperatorsPass {
           return new PrefixExpression(
               primitiveBoolean,
               new PrefixExpression(
-                  primitiveBoolean,
-                  new ParenthesizedExpression(binaryExpression),
-                  PrefixOperator.NOT),
+                  primitiveBoolean, new MultiExpression(binaryExpression), PrefixOperator.NOT),
               PrefixOperator.NOT);
         }
       }

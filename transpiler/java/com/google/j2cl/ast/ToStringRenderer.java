@@ -303,14 +303,6 @@ class ToStringRenderer {
       }
 
       @Override
-      public boolean enterParenthesizedExpression(ParenthesizedExpression parenthesizedExpression) {
-        print("(");
-        accept(parenthesizedExpression.getExpression());
-        print(")");
-        return false;
-      }
-
-      @Override
       public boolean enterPostfixExpression(PostfixExpression binaryExpression) {
         accept(binaryExpression.getOperand());
         print(binaryExpression.getOperator().getSymbol());

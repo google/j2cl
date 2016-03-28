@@ -41,7 +41,6 @@ import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.NumberLiteral;
-import com.google.j2cl.ast.ParenthesizedExpression;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.PrefixOperator;
@@ -318,7 +317,7 @@ public class ExpressionTranspiler {
       public String transformMultiExpression(MultiExpression multipleExpression) {
         String expressionsAsString =
             Joiner.on(", ").join(transformNodesToSource(multipleExpression.getExpressions()));
-        return "( " + expressionsAsString + " )";
+        return "(" + expressionsAsString + ")";
       }
 
       private String transformNativeNewInstance(NewInstance expression) {
@@ -371,11 +370,6 @@ public class ExpressionTranspiler {
           return transformLongNumberLiteral(expression);
         }
         return expression.getValue().toString();
-      }
-
-      @Override
-      public String transformParenthesizedExpression(ParenthesizedExpression expression) {
-        return String.format("(%s)", transform(expression.getExpression(), environment));
       }
 
       @Override
