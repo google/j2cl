@@ -51,15 +51,15 @@ class OuterClass extends Object {
    */
   m_test() {
     OuterClass.$create()
-        .m_$create_OuterClass$InnerClass()
-        .m_$create_OuterClass$InnerClass$InnerInnerClass();
+        .$create_OuterClass$InnerClass()
+        .$create_OuterClass$InnerClass$InnerInnerClass();
   }
 
   /**
    * @return {OuterClass$InnerClass}
    * @public
    */
-  m_$create_OuterClass$InnerClass() {
+  $create_OuterClass$InnerClass() {
     return OuterClass$InnerClass
         .$create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass(
             this);

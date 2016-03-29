@@ -221,7 +221,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     for (Method method : javaType.getMethods()) {
       if (method.isConstructor()) {
         String mangledNameOfCreate =
-            ManglingNameUtils.getConstructorMangledName(method.getDescriptor());
+            ManglingNameUtils.getFactoryMethodMangledName(method.getDescriptor());
         if (javaType.containsJsMethod(mangledNameOfCreate)) {
           sb.appendln("/**");
           sb.appendln(" * Constructor function implementation is provided separately.");
@@ -309,7 +309,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderFactoryCreateMethod(Method constructor) {
     String mangledNameOfCreate =
-        ManglingNameUtils.getConstructorMangledName(constructor.getDescriptor());
+        ManglingNameUtils.getFactoryMethodMangledName(constructor.getDescriptor());
     String mangledNameOfCtor = ManglingNameUtils.getCtorMangledName(constructor.getDescriptor());
     String parameterList = GeneratorUtils.getParameterList(constructor, environment);
     sb.appendln("/**");

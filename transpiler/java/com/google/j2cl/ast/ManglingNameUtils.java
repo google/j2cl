@@ -77,13 +77,19 @@ public class ManglingNameUtils {
         break;
     }
     String parameterSignature = getMangledParameterSignature(methodDescriptor);
-    return String.format("m_%s%s%s", methodDescriptor.getMethodName(), parameterSignature, suffix);
+    String prefix = "m_";
+    if (methodDescriptor.getMethodName().startsWith("$")) {
+      // This is an internal method so we render the actual name
+      prefix = "";
+    }
+    return String.format(
+        "%s%s%s%s", prefix, methodDescriptor.getMethodName(), parameterSignature, suffix);
   }
 
   /**
    * Returns the mangled name of the constructor factory method $create.
    */
-  public static String getConstructorMangledName(MethodDescriptor methodDescriptor) {
+  public static String getFactoryMethodMangledName(MethodDescriptor methodDescriptor) {
     return "$create" + getMangledParameterSignature(methodDescriptor);
   }
 

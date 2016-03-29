@@ -401,7 +401,7 @@ public class ExpressionTranspiler {
         String className =
             environment.aliasForType(expression.getTarget().getEnclosingClassTypeDescriptor());
         String constructorMangledName =
-            ManglingNameUtils.getConstructorMangledName(expression.getTarget());
+            ManglingNameUtils.getFactoryMethodMangledName(expression.getTarget());
         return String.format("%s.%s(%s)", className, constructorMangledName, argumentsList);
       }
 

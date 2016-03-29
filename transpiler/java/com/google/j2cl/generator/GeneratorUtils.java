@@ -312,7 +312,7 @@ public class GeneratorUtils {
     Preconditions.checkNotNull(
         constructorInvocation,
         "constructor %s must delegate to the primary constructor",
-        ManglingNameUtils.getConstructorMangledName(method.getDescriptor()));
+        ManglingNameUtils.getFactoryMethodMangledName(method.getDescriptor()));
     return getArgumentList(constructorInvocation.getArguments(), environment);
   }
 
