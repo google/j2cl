@@ -108,7 +108,8 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
   private Node rewriteArrayCastExpression(CastExpression castExpression) {
     Preconditions.checkArgument(
         castExpression.getCastTypeDescriptor() instanceof ArrayTypeDescriptor);
-    TypeDescriptor arrayCastTypeDescriptor = castExpression.getCastTypeDescriptor();
+    ArrayTypeDescriptor arrayCastTypeDescriptor =
+        (ArrayTypeDescriptor) castExpression.getCastTypeDescriptor();
     if (arrayCastTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor().isNative()) {
       return rewriteNativeJsArrayCastExpression(castExpression);
     }
@@ -116,7 +117,8 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
   }
 
   private Node rewriteJavaArrayCastExpression(CastExpression castExpression) {
-    TypeDescriptor arrayCastTypeDescriptor = castExpression.getCastTypeDescriptor();
+    ArrayTypeDescriptor arrayCastTypeDescriptor =
+        (ArrayTypeDescriptor) castExpression.getCastTypeDescriptor();
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
             .jsInfo(JsInfo.RAW)
@@ -150,8 +152,8 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
   }
 
   private Node rewriteNativeJsArrayCastExpression(CastExpression castExpression) {
-    TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
-    Preconditions.checkArgument(castTypeDescriptor.isArray());
+    ArrayTypeDescriptor castTypeDescriptor =
+        (ArrayTypeDescriptor) castExpression.getCastTypeDescriptor();
     Preconditions.checkArgument(
         castTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor().isNative());
     MethodDescriptor castToMethodDescriptor =

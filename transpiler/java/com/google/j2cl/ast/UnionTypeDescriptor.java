@@ -33,11 +33,6 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public TypeDescriptor getLeafTypeDescriptor() {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
   public String getSimpleName() {
     throw new UnsupportedOperationException();
   }

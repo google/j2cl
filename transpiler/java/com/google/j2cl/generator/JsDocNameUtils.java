@@ -22,6 +22,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
+import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -144,7 +145,7 @@ public class JsDocNameUtils {
           "%s%s%s%s",
           nullable ? "" : "!",
           Strings.repeat("Array<", typeDescriptor.getDimensions()),
-          getJsDocName(typeDescriptor.getLeafTypeDescriptor(), environment),
+          getJsDocName(((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor(), environment),
           Strings.repeat(">", typeDescriptor.getDimensions()));
     }
 
@@ -279,7 +280,8 @@ public class JsDocNameUtils {
         Preconditions.checkArgument(parameterTypeDescriptor.isArray());
         String typeName =
             JsDocNameUtils.getJsDocName(
-                parameterTypeDescriptor.getComponentTypeDescriptor(), environment);
+                ((ArrayTypeDescriptor) parameterTypeDescriptor).getComponentTypeDescriptor(),
+                environment);
         parameterTypeAnnotation = "..." + typeName;
       } else {
         parameterTypeAnnotation = JsDocNameUtils.getJsDocName(parameterTypeDescriptor, environment);

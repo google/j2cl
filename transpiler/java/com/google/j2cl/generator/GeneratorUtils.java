@@ -19,6 +19,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
@@ -32,7 +33,6 @@ import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.generator.visitors.Import;
@@ -113,7 +113,8 @@ public class GeneratorUtils {
               Preconditions.checkArgument(parameterTypeDescriptor.isArray());
               String typeName =
                   JsDocNameUtils.getJsDocName(
-                      parameterTypeDescriptor.getComponentTypeDescriptor(), environment);
+                      ((ArrayTypeDescriptor) parameterTypeDescriptor).getComponentTypeDescriptor(),
+                      environment);
               return String.format("{...%s} %s", typeName, name);
             } else {
               String typeName = JsDocNameUtils.getJsDocName(parameterTypeDescriptor, environment);
@@ -148,10 +149,6 @@ public class GeneratorUtils {
               }
             });
     return Joiner.on(", ").join(parameterNameList);
-  }
-
-  public static boolean isVoid(TypeDescriptor typeDescriptor) {
-    return typeDescriptor == TypeDescriptors.get().primitiveVoid;
   }
 
   /**

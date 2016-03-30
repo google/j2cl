@@ -219,11 +219,6 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public TypeDescriptor getLeafTypeDescriptor() {
-    return null;
-  }
-
-  @Override
   public boolean isParameterizedType() {
     return !getTypeArgumentDescriptors().isEmpty();
   }

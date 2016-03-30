@@ -1616,7 +1616,7 @@ public class CompilationUnitBuilder {
             javaLangClassTypeDescriptor);
       }
       if (literalTypeDescriptor.isArray()
-          && literalTypeDescriptor.getLeafTypeDescriptor().isNative()) {
+          && ((ArrayTypeDescriptor) literalTypeDescriptor).getLeafTypeDescriptor().isNative()) {
         // class literal of native js type array returns Object[].class
         return convertArrayTypeLiteral(
             TypeDescriptors.get().javaLangObject.getForArray(1), javaLangClassTypeDescriptor);
@@ -1647,7 +1647,8 @@ public class CompilationUnitBuilder {
           MethodDescriptor.Builder.fromDefault()
               .jsInfo(JsInfo.RAW)
               .isStatic(true)
-              .enclosingClassTypeDescriptor(literalTypeDescriptor.getLeafTypeDescriptor())
+              .enclosingClassTypeDescriptor(
+                  ((ArrayTypeDescriptor) literalTypeDescriptor).getLeafTypeDescriptor())
               .methodName("$getClass")
               .returnTypeDescriptor(javaLangClassTypeDescriptor)
               .build();

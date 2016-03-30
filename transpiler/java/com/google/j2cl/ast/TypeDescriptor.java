@@ -186,12 +186,6 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
 
   public abstract int getDimensions();
 
-  public abstract TypeDescriptor getLeafTypeDescriptor();
-
-  public TypeDescriptor getComponentTypeDescriptor() {
-    return getLeafTypeDescriptor();
-  }
-
   public Expression getDefaultValue() {
     // Primitives.
     switch (this.getSourceName()) {

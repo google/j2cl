@@ -29,10 +29,8 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   @Override
   public abstract int getDimensions();
 
-  @Override
   public abstract TypeDescriptor getLeafTypeDescriptor();
 
-  @Override
   public TypeDescriptor getComponentTypeDescriptor() {
     return getLeafTypeDescriptor().getForArray(getDimensions() - 1);
   }

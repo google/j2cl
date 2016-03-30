@@ -35,7 +35,7 @@ public class ManglingNameUtils {
     TypeDescriptor erasureTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
     if (erasureTypeDescriptor.isArray()) {
       return Strings.repeat("arrayOf_", erasureTypeDescriptor.getDimensions())
-          + getMangledName(erasureTypeDescriptor.getLeafTypeDescriptor());
+          + getMangledName(((ArrayTypeDescriptor) erasureTypeDescriptor).getLeafTypeDescriptor());
     }
     return erasureTypeDescriptor.getBinaryName().replace('.', '_');
   }

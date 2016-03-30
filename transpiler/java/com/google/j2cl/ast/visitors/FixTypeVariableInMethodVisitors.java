@@ -19,6 +19,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
+import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Method;
@@ -87,7 +88,8 @@ public class FixTypeVariableInMethodVisitors extends AbstractRewriter {
               }));
     }
     if (typeDescriptor.isArray()) {
-      return replaceTypeVariableWithBound(typeDescriptor.getLeafTypeDescriptor(), method)
+      return replaceTypeVariableWithBound(
+              ((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor(), method)
           .getForArray(typeDescriptor.getDimensions());
     }
     return typeDescriptor;
@@ -123,7 +125,9 @@ public class FixTypeVariableInMethodVisitors extends AbstractRewriter {
       return false;
     }
     if (typeDescriptor.isArray()) {
-      return containsTypeVariableDeclaredByMethod(typeDescriptor.getLeafTypeDescriptor(), method);
+      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
+      return containsTypeVariableDeclaredByMethod(
+          arrayTypeDescriptor.getLeafTypeDescriptor(), method);
     }
     return false;
   }
