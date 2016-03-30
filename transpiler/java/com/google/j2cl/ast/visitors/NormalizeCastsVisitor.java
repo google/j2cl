@@ -26,7 +26,6 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.RegularTypeDescriptor;
@@ -75,7 +74,7 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
     Expression expression = castExpression.getExpression();
 
     MethodDescriptor castToMethodDescriptor =
-        MethodDescriptorBuilder.fromDefault()
+        MethodDescriptor.Builder.fromDefault()
             .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .enclosingClassTypeDescriptor(BootstrapType.CASTS.getDescriptor())
@@ -119,7 +118,7 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
   private Node rewriteJavaArrayCastExpression(CastExpression castExpression) {
     TypeDescriptor arrayCastTypeDescriptor = castExpression.getCastTypeDescriptor();
     MethodDescriptor castToMethodDescriptor =
-        MethodDescriptorBuilder.fromDefault()
+        MethodDescriptor.Builder.fromDefault()
             .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .enclosingClassTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
@@ -156,7 +155,7 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
     Preconditions.checkArgument(
         castTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor().isNative());
     MethodDescriptor castToMethodDescriptor =
-        MethodDescriptorBuilder.fromDefault()
+        MethodDescriptor.Builder.fromDefault()
             .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .enclosingClassTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())

@@ -29,7 +29,6 @@ import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
@@ -98,9 +97,7 @@ public class BridgeMethodsCreator {
           public Node rewriteMethod(Method method) {
             if (toBeFixedMethodDescriptors.contains(method.getDescriptor())) {
               MethodDescriptor newMethodDescriptor =
-                  MethodDescriptorBuilder.from(method.getDescriptor())
-                      .jsInfo(JsInfo.NONE)
-                      .build();
+                  MethodDescriptor.Builder.from(method.getDescriptor()).jsInfo(JsInfo.NONE).build();
               return new Method(
                   newMethodDescriptor,
                   method.getParameters(),
@@ -270,7 +267,7 @@ public class BridgeMethodsCreator {
     TypeDescriptor returnTypeDescriptor = JdtUtils.createTypeDescriptor(returnType);
     MethodDescriptor originalMethodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
 
-    return MethodDescriptorBuilder.from(originalMethodDescriptor)
+    return MethodDescriptor.Builder.from(originalMethodDescriptor)
         .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
         .returnTypeDescriptor(returnTypeDescriptor)
         .build();
@@ -309,9 +306,7 @@ public class BridgeMethodsCreator {
       targetMethodJsInfo = JsInfo.NONE;
     }
     targetMethodDescriptor =
-        MethodDescriptorBuilder.from(targetMethodDescriptor)
-            .jsInfo(targetMethodJsInfo)
-            .build();
+        MethodDescriptor.Builder.from(targetMethodDescriptor).jsInfo(targetMethodJsInfo).build();
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
 

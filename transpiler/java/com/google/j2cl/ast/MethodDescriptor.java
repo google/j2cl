@@ -186,4 +186,115 @@ public abstract class MethodDescriptor extends Node implements Member {
   public String toString() {
     return getEnclosingClassTypeDescriptor().toString() + "." + getMethodName();
   }
+
+  /**
+   * A Builder for easily and correctly creating modified versions of MethodDescriptors.
+   */
+  public static class Builder {
+    private boolean isStatic;
+    private Visibility visibility;
+    private TypeDescriptor enclosingClassTypeDescriptor;
+    private String methodName;
+    private boolean isConstructor;
+    private boolean isNative;
+    private boolean isVarargs;
+    private ImmutableList<TypeDescriptor> parameterTypeDescriptors;
+    private TypeDescriptor returnTypeDescriptor;
+    private ImmutableList<TypeDescriptor> typeParameterDescriptors;
+    private JsInfo jsInfo;
+
+    public static Builder fromDefault() {
+      Builder builder = new Builder();
+      builder.visibility = Visibility.PUBLIC;
+      builder.enclosingClassTypeDescriptor =
+          TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor();
+      builder.methodName = "";
+      builder.parameterTypeDescriptors = ImmutableList.<TypeDescriptor>of();
+      builder.returnTypeDescriptor = TypeDescriptors.get().primitiveVoid;
+      builder.typeParameterDescriptors = ImmutableList.<TypeDescriptor>of();
+      builder.jsInfo = JsInfo.NONE;
+      return builder;
+    }
+
+    public static Builder from(MethodDescriptor methodDescriptor) {
+      Builder builder = new Builder();
+      builder.isStatic = methodDescriptor.isStatic();
+      builder.visibility = methodDescriptor.getVisibility();
+      builder.enclosingClassTypeDescriptor = methodDescriptor.getEnclosingClassTypeDescriptor();
+      builder.methodName = methodDescriptor.getMethodName();
+      builder.isConstructor = methodDescriptor.isConstructor();
+      builder.isNative = methodDescriptor.isNative();
+      builder.isVarargs = methodDescriptor.isVarargs();
+      builder.parameterTypeDescriptors = methodDescriptor.getParameterTypeDescriptors();
+      builder.returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
+      builder.typeParameterDescriptors = methodDescriptor.getTypeParameterTypeDescriptors();
+      builder.jsInfo = methodDescriptor.getJsInfo();
+      return builder;
+    }
+
+    public Builder enclosingClassTypeDescriptor(TypeDescriptor enclosingClassTypeDescriptor) {
+      this.enclosingClassTypeDescriptor = enclosingClassTypeDescriptor;
+      return this;
+    }
+
+    public Builder methodName(String methodName) {
+      this.methodName = methodName;
+      return this;
+    }
+
+    public Builder returnTypeDescriptor(TypeDescriptor returnTypeDescriptor) {
+      this.returnTypeDescriptor = returnTypeDescriptor;
+      return this;
+    }
+
+    public Builder parameterTypeDescriptors(TypeDescriptor... typeDescriptors) {
+      this.parameterTypeDescriptors = ImmutableList.copyOf(typeDescriptors);
+      return this;
+    }
+
+    public Builder parameterTypeDescriptors(Iterable<TypeDescriptor> parameterTypeDescriptors) {
+      this.parameterTypeDescriptors = ImmutableList.copyOf(parameterTypeDescriptors);
+      return this;
+    }
+
+    public Builder isConstructor(boolean isConstructor) {
+      this.isConstructor = isConstructor;
+      return this;
+    }
+
+    public Builder isStatic(boolean isStatic) {
+      this.isStatic = isStatic;
+      return this;
+    }
+
+    public Builder typeParameterDescriptors(Iterable<TypeDescriptor> typeParameterDescriptors) {
+      this.typeParameterDescriptors = ImmutableList.copyOf(typeParameterDescriptors);
+      return this;
+    }
+
+    public Builder visibility(Visibility visibility) {
+      this.visibility = visibility;
+      return this;
+    }
+
+    public Builder jsInfo(JsInfo jsInfo) {
+      this.jsInfo = jsInfo;
+      return this;
+    }
+
+    public MethodDescriptor build() {
+      return create(
+          isStatic,
+          visibility,
+          enclosingClassTypeDescriptor,
+          methodName,
+          isConstructor,
+          isNative,
+          isVarargs,
+          returnTypeDescriptor,
+          parameterTypeDescriptors,
+          typeParameterDescriptors,
+          jsInfo);
+    }
+  }
 }

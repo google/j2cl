@@ -26,7 +26,6 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.PrefixOperator;
@@ -83,7 +82,7 @@ public class NormalizeLongsVisitor extends AbstractRewriter {
     }
 
     MethodDescriptor longUtilsMethodDescriptor =
-        MethodDescriptorBuilder.fromDefault()
+        MethodDescriptor.Builder.fromDefault()
             .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .enclosingClassTypeDescriptor(BootstrapType.LONGS.getDescriptor())
@@ -114,7 +113,7 @@ public class NormalizeLongsVisitor extends AbstractRewriter {
     TypeDescriptor returnTypeDescriptor = TypeDescriptors.get().primitiveLong;
 
     MethodDescriptor longUtilsMethodDescriptor =
-        MethodDescriptorBuilder.fromDefault()
+        MethodDescriptor.Builder.fromDefault()
             .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .enclosingClassTypeDescriptor(BootstrapType.LONGS.getDescriptor())

@@ -20,7 +20,6 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
-import com.google.j2cl.ast.FieldDescriptorBuilder;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -46,7 +45,7 @@ public class DevirtualizeJsOverlayMemberReferencesVisitor extends AbstractRewrit
       TypeDescriptor overlayTypeDescriptor =
           AstUtils.createJsOverlayImplTypeDescriptor(target.getEnclosingClassTypeDescriptor());
       return new FieldAccess(
-          null, FieldDescriptorBuilder.from(target).enclosingClass(overlayTypeDescriptor).build());
+          null, FieldDescriptor.Builder.from(target).enclosingClass(overlayTypeDescriptor).build());
     }
     return fieldAccess;
   }

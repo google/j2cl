@@ -53,7 +53,7 @@ public class JdtMethodUtils {
                     return TypeProxyUtils.createTypeDescriptor(typeBinding).getRawTypeDescriptor();
                   }
                 });
-    return MethodDescriptorBuilder.from(methodDescriptor)
+    return MethodDescriptor.Builder.from(methodDescriptor)
         .parameterTypeDescriptors(parameterTypeDescriptors)
         .build();
   }

@@ -29,7 +29,6 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.ConditionalExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
-import com.google.j2cl.ast.FieldBuilder;
 import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.NewArray;
@@ -192,7 +191,7 @@ public class ConversionContextVisitor extends AbstractRewriter {
 
     // assignment context
     Field newField =
-        FieldBuilder.from(field)
+        Field.Builder.from(field)
             .initializer(
                 contextRewriter.rewriteAssignmentContext(
                     field.getDescriptor().getTypeDescriptor(), field.getInitializer()))

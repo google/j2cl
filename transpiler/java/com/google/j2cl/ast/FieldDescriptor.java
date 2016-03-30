@@ -127,4 +127,75 @@ public abstract class FieldDescriptor extends Node implements Member {
   public Node accept(Processor processor) {
     return Visitor_FieldDescriptor.visit(processor, this);
   }
+
+  /**
+   * A Builder for easily and correctly creating modified versions of FieldDescriptors.
+   */
+  public static class Builder {
+    private boolean isStatic;
+    private boolean isRaw;
+    private Visibility visibility;
+    private TypeDescriptor enclosingClassTypeDescriptor;
+    private String fieldName;
+    private TypeDescriptor typeDescriptor;
+    private boolean isJsOverlay;
+    private JsInfo jsInfo;
+    private boolean isCompileTimeConstant;
+
+    public static Builder from(FieldDescriptor fieldDescriptor) {
+      Builder builder = new Builder();
+      builder.isStatic = fieldDescriptor.isStatic();
+      builder.isRaw = fieldDescriptor.isRaw();
+      builder.visibility = fieldDescriptor.getVisibility();
+      builder.enclosingClassTypeDescriptor = fieldDescriptor.getEnclosingClassTypeDescriptor();
+      builder.fieldName = fieldDescriptor.getFieldName();
+      builder.typeDescriptor = fieldDescriptor.getTypeDescriptor();
+      builder.isJsOverlay = fieldDescriptor.isJsOverlay();
+      builder.jsInfo = fieldDescriptor.getJsInfo();
+      builder.isCompileTimeConstant = fieldDescriptor.isCompileTimeConstant();
+      return builder;
+    }
+
+    public static Builder fromDefault(
+        TypeDescriptor enclosingClassTypeDescriptor,
+        String fieldName,
+        TypeDescriptor typeDescriptor) {
+      Builder builder = new Builder();
+      builder.visibility = Visibility.PUBLIC;
+      builder.enclosingClassTypeDescriptor = enclosingClassTypeDescriptor;
+      builder.fieldName = fieldName;
+      builder.typeDescriptor = typeDescriptor;
+      builder.jsInfo = JsInfo.NONE;
+      builder.isCompileTimeConstant = false;
+      return builder;
+    }
+
+    public Builder enclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
+      this.enclosingClassTypeDescriptor = enclosingClassTypeDescriptor;
+      return this;
+    }
+
+    public Builder isStatic(boolean isStatic) {
+      this.isStatic = isStatic;
+      return this;
+    }
+
+    public Builder visibility(Visibility visibility) {
+      this.visibility = visibility;
+      return this;
+    }
+
+    public FieldDescriptor build() {
+      return create(
+          isStatic,
+          isRaw,
+          visibility,
+          enclosingClassTypeDescriptor,
+          fieldName,
+          typeDescriptor,
+          isJsOverlay,
+          jsInfo,
+          isCompileTimeConstant);
+    }
+  }
 }

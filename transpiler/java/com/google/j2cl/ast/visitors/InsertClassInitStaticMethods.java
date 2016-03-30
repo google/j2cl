@@ -23,7 +23,6 @@ import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.Node;
 
 import java.util.ArrayList;
@@ -41,7 +40,7 @@ public class InsertClassInitStaticMethods {
     public Node rewriteMethod(Method method) {
       if (method.getDescriptor().isStatic()) {
         MethodDescriptor clinitDescriptor =
-            MethodDescriptorBuilder.fromDefault()
+            MethodDescriptor.Builder.fromDefault()
                 .jsInfo(JsInfo.RAW)
                 .isStatic(true)
                 .enclosingClassTypeDescriptor(

@@ -57,7 +57,7 @@ public class AstUtils {
    */
   public static MethodDescriptor createInitMethodDescriptor(
       TypeDescriptor enclosingClassTypeDescriptor) {
-    return MethodDescriptorBuilder.fromDefault()
+    return MethodDescriptor.Builder.fromDefault()
         .visibility(Visibility.PRIVATE)
         .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
         .methodName(MethodDescriptor.INIT_METHOD_NAME)
@@ -68,7 +68,7 @@ public class AstUtils {
    * Create "Equality.$same()" MethodDescriptor.
    */
   public static MethodDescriptor createUtilSameMethodDescriptor() {
-    return MethodDescriptorBuilder.fromDefault()
+    return MethodDescriptor.Builder.fromDefault()
         .isStatic(true)
         .jsInfo(JsInfo.RAW)
         .enclosingClassTypeDescriptor(BootstrapType.NATIVE_EQUALITY.getDescriptor())
@@ -84,7 +84,7 @@ public class AstUtils {
    * Create "Equality.$notSame()" MethodDescriptor.
    */
   public static MethodDescriptor createUtilNotSameMethodDescriptor() {
-    return MethodDescriptorBuilder.fromDefault()
+    return MethodDescriptor.Builder.fromDefault()
         .isStatic(true)
         .jsInfo(JsInfo.RAW)
         .enclosingClassTypeDescriptor(BootstrapType.NATIVE_EQUALITY.getDescriptor())
@@ -107,7 +107,7 @@ public class AstUtils {
         typeDescriptor.isJsType()
             ? JsInfo.create(JsMemberType.CONSTRUCTOR, null, null, false)
             : JsInfo.NONE;
-    return MethodDescriptorBuilder.fromDefault()
+    return MethodDescriptor.Builder.fromDefault()
         .visibility(visibility)
         .enclosingClassTypeDescriptor(typeDescriptor)
         .methodName(typeDescriptor.getClassName())
@@ -252,7 +252,7 @@ public class AstUtils {
    */
   public static FieldDescriptor getFieldDescriptorForEnclosingInstance(
       TypeDescriptor enclosingClassDescriptor, TypeDescriptor fieldTypeDescriptor) {
-    return FieldDescriptorBuilder.fromDefault(
+    return FieldDescriptor.Builder.fromDefault(
             enclosingClassDescriptor, ENCLOSING_INSTANCE_NAME, fieldTypeDescriptor)
         .build();
   }
@@ -297,7 +297,7 @@ public class AstUtils {
                     }
                   })));
     }
-    return MethodDescriptorBuilder.fromDefault()
+    return MethodDescriptor.Builder.fromDefault()
         .visibility(innerclassConstructorDescriptor.getVisibility())
         .enclosingClassTypeDescriptor(outerclassTypeDescriptor)
         .methodName(methodName)
@@ -356,7 +356,7 @@ public class AstUtils {
       TypeDescriptor enclosingClassTypeDescriptor,
       String jsDocDescription) {
     MethodDescriptor forwardingMethodDescriptor =
-        MethodDescriptorBuilder.from(fromMethodDescriptor)
+        MethodDescriptor.Builder.from(fromMethodDescriptor)
             .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
             .build();
     List<Variable> parameters = new ArrayList<>();
@@ -400,7 +400,7 @@ public class AstUtils {
     checkArgument(!targetMethodDescriptor.isStatic());
 
     MethodDescriptor methodDescriptor =
-        MethodDescriptorBuilder.from(targetMethodDescriptor)
+        MethodDescriptor.Builder.from(targetMethodDescriptor)
             .enclosingClassTypeDescriptor(targetTypeDescriptor)
             .parameterTypeDescriptors(
                 Iterables.concat(
@@ -435,7 +435,7 @@ public class AstUtils {
     TypeDescriptor boxType = TypeDescriptors.getBoxTypeFromPrimitiveType(primitiveType);
 
     MethodDescriptor valueOfMethodDescriptor =
-        MethodDescriptorBuilder.fromDefault()
+        MethodDescriptor.Builder.fromDefault()
             .isStatic(true)
             .enclosingClassTypeDescriptor(boxType)
             .methodName(MethodDescriptor.VALUE_OF_METHOD_NAME)
@@ -455,7 +455,7 @@ public class AstUtils {
     TypeDescriptor primitiveType = TypeDescriptors.getPrimitiveTypeFromBoxType(boxType);
 
     MethodDescriptor valueMethodDescriptor =
-        MethodDescriptorBuilder.fromDefault()
+        MethodDescriptor.Builder.fromDefault()
             .enclosingClassTypeDescriptor(boxType)
             .methodName(primitiveType.getSimpleName() + MethodDescriptor.VALUE_METHOD_SUFFIX)
             .returnTypeDescriptor(primitiveType)
@@ -617,7 +617,7 @@ public class AstUtils {
   }
 
   public static MethodDescriptor createStringValueOfMethodDescriptor() {
-    return MethodDescriptorBuilder.fromDefault()
+    return MethodDescriptor.Builder.fromDefault()
         .isStatic(true)
         .enclosingClassTypeDescriptor(TypeDescriptors.get().javaLangString)
         .methodName("valueOf")

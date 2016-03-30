@@ -94,7 +94,7 @@ public interface Invocation extends MemberReference {
 
     public Builder<T> enclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
       this.originalMethodDescriptor =
-          MethodDescriptorBuilder.from(originalMethodDescriptor)
+          MethodDescriptor.Builder.from(originalMethodDescriptor)
               .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
               .build();
       return this;

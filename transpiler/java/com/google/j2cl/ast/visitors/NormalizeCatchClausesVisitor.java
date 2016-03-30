@@ -27,7 +27,6 @@ import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.ThrowStatement;
@@ -160,7 +159,7 @@ public class NormalizeCatchClausesVisitor extends AbstractRewriter {
    */
   private MethodCall checkIsInstanceCall(TypeDescriptor descriptor, Expression exceptionVariable) {
     MethodDescriptor methodDescriptor =
-        MethodDescriptorBuilder.fromDefault()
+        MethodDescriptor.Builder.fromDefault()
             .methodName(MethodDescriptor.IS_INSTANCE_METHOD_NAME)
             .isStatic(true)
             .jsInfo(JsInfo.RAW)

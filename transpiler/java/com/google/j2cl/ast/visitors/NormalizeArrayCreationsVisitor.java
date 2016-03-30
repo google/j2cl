@@ -26,7 +26,6 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
@@ -64,7 +63,7 @@ public class NormalizeArrayCreationsVisitor extends AbstractRewriter {
   private Node rewriteArrayCreate(NewArray newArrayExpression) {
     Preconditions.checkArgument(newArrayExpression.getArrayLiteral() == null);
     MethodDescriptor arrayCreateMethodDescriptor =
-        MethodDescriptorBuilder.fromDefault()
+        MethodDescriptor.Builder.fromDefault()
             .enclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
             .jsInfo(JsInfo.RAW)
             .isStatic(true)
@@ -99,7 +98,7 @@ public class NormalizeArrayCreationsVisitor extends AbstractRewriter {
     Preconditions.checkArgument(newArrayExpression.getArrayLiteral() != null);
     int dimensionCount = newArrayExpression.getDimensionExpressions().size();
     MethodDescriptor arrayInitMethodDescriptor =
-        MethodDescriptorBuilder.fromDefault()
+        MethodDescriptor.Builder.fromDefault()
             .enclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
             .jsInfo(JsInfo.RAW)
             .isStatic(true)
@@ -133,7 +132,7 @@ public class NormalizeArrayCreationsVisitor extends AbstractRewriter {
     } else {
       // It's multidimensional, make dimensions explicit.
       arrayInitMethodDescriptor =
-          MethodDescriptorBuilder.from(arrayInitMethodDescriptor)
+          MethodDescriptor.Builder.from(arrayInitMethodDescriptor)
               .parameterTypeDescriptors(
                   Iterables.concat(
                       arrayInitMethodDescriptor.getParameterTypeDescriptors(),

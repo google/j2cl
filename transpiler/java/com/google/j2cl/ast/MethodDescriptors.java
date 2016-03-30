@@ -39,7 +39,7 @@ public class MethodDescriptors {
     List<TypeDescriptor> parameters =
         new ArrayList<>(methodDescriptor.getParameterTypeDescriptors());
     parameters.addAll(addedParameters);
-    return MethodDescriptorBuilder.from(methodDescriptor)
+    return MethodDescriptor.Builder.from(methodDescriptor)
         .parameterTypeDescriptors(parameters)
         .build();
   }
@@ -62,7 +62,7 @@ public class MethodDescriptors {
     // as the method is static, it has to copy the enclosing class's type parameters to its own.
     typeParameterTypeDescriptors.addAll(
         methodDescriptor.getEnclosingClassTypeDescriptor().getTypeArgumentDescriptors());
-    return MethodDescriptorBuilder.from(methodDescriptor)
+    return MethodDescriptor.Builder.from(methodDescriptor)
         .parameterTypeDescriptors(parameterTypeDescriptors)
         .typeParameterDescriptors(typeParameterTypeDescriptors)
         .isStatic(true)

@@ -84,4 +84,64 @@ public class Field extends Node implements Positioned {
   public Node accept(Processor processor) {
     return Visitor_Field.visit(processor, this);
   }
+
+  /**
+   * A Builder for easily and correctly creating modified versions of fields.
+   */
+  public static class Builder {
+    private FieldDescriptor fieldDescriptor;
+    private Expression initializer;
+    private boolean isEnumField;
+    private Variable capturedVariable;
+    private Integer position;
+
+    public static Builder from(Field field) {
+      Builder builder = new Builder();
+      builder.fieldDescriptor = field.getDescriptor();
+      builder.initializer = field.getInitializer();
+      builder.isEnumField = field.isEnumField();
+      builder.capturedVariable = field.getCapturedVariable();
+      builder.position = field.getPosition();
+      return builder;
+    }
+
+    public static Builder fromDefault(FieldDescriptor fieldDescriptor) {
+      Builder builder = new Builder();
+      builder.fieldDescriptor = fieldDescriptor;
+      return builder;
+    }
+
+    public Builder initializer(Expression initializer) {
+      this.initializer = initializer;
+      return this;
+    }
+
+    public Builder isEnumField(boolean isEnumField) {
+      this.isEnumField = isEnumField;
+      return this;
+    }
+
+    public Builder capturedVariable(Variable capturedVariable) {
+      this.capturedVariable = capturedVariable;
+      return this;
+    }
+
+    public Builder enclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
+      this.fieldDescriptor =
+          FieldDescriptor.Builder.from(fieldDescriptor)
+              .enclosingClass(enclosingClassTypeDescriptor)
+              .build();
+      return this;
+    }
+
+    public Builder setPosition(int position) {
+      this.position = position;
+      return this;
+    }
+
+    public Field build() {
+      checkNotNull(position, "A position must be set");
+      return new Field(fieldDescriptor, initializer, isEnumField, capturedVariable, position);
+    }
+  }
 }

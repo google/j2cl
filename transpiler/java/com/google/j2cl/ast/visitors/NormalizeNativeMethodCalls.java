@@ -20,7 +20,6 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeReference;
@@ -57,7 +56,7 @@ public class NormalizeNativeMethodCalls extends AbstractRewriter {
 
     // A.abs() -> Math.abs().
     MethodDescriptor newMethodDescriptor =
-        MethodDescriptorBuilder.from(methodDescriptor)
+        MethodDescriptor.Builder.from(methodDescriptor)
             .enclosingClassTypeDescriptor(
                 TypeDescriptor.createNative(methodDescriptor.getJsNamespace()))
             .build();

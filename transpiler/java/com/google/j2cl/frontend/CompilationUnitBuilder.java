@@ -45,7 +45,6 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.FieldBuilder;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.IfStatement;
@@ -57,7 +56,6 @@ import com.google.j2cl.ast.LabeledStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
@@ -255,10 +253,10 @@ public class CompilationUnitBuilder {
         FieldDescriptor fieldDescriptor =
             AstUtils.getFieldDescriptorForCapture(currentTypeDescriptor, capturedVariable);
         type.addField(
-            FieldBuilder.fromDefault(fieldDescriptor)
-            .capturedVariable(capturedVariable)
-            .setPosition(-1) /* Position is not important */
-            .build());
+            Field.Builder.fromDefault(fieldDescriptor)
+                .capturedVariable(capturedVariable)
+                .setPosition(-1) /* Position is not important */
+                .build());
       }
       if (!inStaticContext && JdtUtils.isInstanceNestedClass(typeBinding)) {
         // add field for enclosing instance.
@@ -292,7 +290,7 @@ public class CompilationUnitBuilder {
               convertExpressions(
                   JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(
                       enumConstantDeclaration.arguments())));
-      return FieldBuilder.fromDefault(
+      return Field.Builder.fromDefault(
               JdtUtils.createFieldDescriptor(enumConstantDeclaration.resolveVariable()))
           .initializer(initializer)
           .isEnumField(true)
@@ -314,7 +312,7 @@ public class CompilationUnitBuilder {
           initializer = convertConstantToLiteral(variableBinding);
         }
         Field field =
-            FieldBuilder.fromDefault(JdtUtils.createFieldDescriptor(variableBinding))
+            Field.Builder.fromDefault(JdtUtils.createFieldDescriptor(variableBinding))
                 .initializer(initializer)
                 .setPosition(position)
                 .build();
@@ -1039,7 +1037,7 @@ public class CompilationUnitBuilder {
         FieldDescriptor fieldDescriptor =
             AstUtils.getFieldDescriptorForCapture(lambdaTypeDescriptor, capturedVariable);
         lambdaType.addField(
-            FieldBuilder.fromDefault(fieldDescriptor)
+            Field.Builder.fromDefault(fieldDescriptor)
                 .capturedVariable(capturedVariable)
                 .setPosition(-1) /* Position is not important */
                 .build());
@@ -1104,7 +1102,7 @@ public class CompilationUnitBuilder {
               });
 
       MethodDescriptor methodDescriptor =
-          MethodDescriptorBuilder.fromDefault()
+          MethodDescriptor.Builder.fromDefault()
               .jsInfo(JsInfo.RAW)
               .visibility(Visibility.PRIVATE)
               .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
@@ -1633,7 +1631,7 @@ public class CompilationUnitBuilder {
         TypeDescriptor literalTypeDescriptor, TypeDescriptor javaLangClassTypeDescriptor) {
       // <ClassLiteralClass>.$getClass()
       MethodDescriptor classMethodDescriptor =
-          MethodDescriptorBuilder.fromDefault()
+          MethodDescriptor.Builder.fromDefault()
               .jsInfo(JsInfo.RAW)
               .isStatic(true)
               .enclosingClassTypeDescriptor(literalTypeDescriptor)
@@ -1646,7 +1644,7 @@ public class CompilationUnitBuilder {
     private Expression convertArrayTypeLiteral(
         TypeDescriptor literalTypeDescriptor, TypeDescriptor javaLangClassTypeDescriptor) {
       MethodDescriptor classMethodDescriptor =
-          MethodDescriptorBuilder.fromDefault()
+          MethodDescriptor.Builder.fromDefault()
               .jsInfo(JsInfo.RAW)
               .isStatic(true)
               .enclosingClassTypeDescriptor(literalTypeDescriptor.getLeafTypeDescriptor())
@@ -1655,7 +1653,7 @@ public class CompilationUnitBuilder {
               .build();
 
       MethodDescriptor forArrayMethodDescriptor =
-          MethodDescriptorBuilder.fromDefault()
+          MethodDescriptor.Builder.fromDefault()
               .jsInfo(JsInfo.RAW)
               .enclosingClassTypeDescriptor(javaLangClassTypeDescriptor)
               .methodName("$forArray")

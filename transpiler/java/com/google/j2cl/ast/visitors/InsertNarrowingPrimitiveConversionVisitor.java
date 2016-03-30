@@ -24,7 +24,6 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
@@ -92,7 +91,7 @@ public class InsertNarrowingPrimitiveConversionVisitor extends ConversionContext
                     AstUtils.toProperCase(fromTypeDescriptor.getSimpleName()),
                     AstUtils.toProperCase(toTypeDescriptor.getSimpleName()));
             MethodDescriptor narrowMethodDescriptor =
-                MethodDescriptorBuilder.fromDefault()
+                MethodDescriptor.Builder.fromDefault()
                     .jsInfo(JsInfo.RAW)
                     .isStatic(true)
                     .enclosingClassTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())

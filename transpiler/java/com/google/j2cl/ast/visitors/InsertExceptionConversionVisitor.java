@@ -25,7 +25,6 @@ import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.MethodDescriptorBuilder;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -69,7 +68,7 @@ public class InsertExceptionConversionVisitor extends AbstractRewriter {
             false);
 
     MethodDescriptor toJava =
-        MethodDescriptorBuilder.fromDefault()
+        MethodDescriptor.Builder.fromDefault()
             .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .enclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
@@ -96,7 +95,7 @@ public class InsertExceptionConversionVisitor extends AbstractRewriter {
   @Override
   public Node rewriteThrowStatement(ThrowStatement originalStatement) {
     MethodDescriptor toJs =
-        MethodDescriptorBuilder.fromDefault()
+        MethodDescriptor.Builder.fromDefault()
             .jsInfo(JsInfo.RAW)
             .isStatic(true)
             .enclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
