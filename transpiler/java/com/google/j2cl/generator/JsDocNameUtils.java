@@ -150,12 +150,27 @@ public class JsDocNameUtils {
 
     if (typeDescriptor.isParameterizedType()) {
       TypeDescriptor rawTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
+      List<TypeDescriptor> typeArgumentDescriptors = typeDescriptor.getTypeArgumentDescriptors();
+      String typeParametersJsDoc = getJsDocNames(typeArgumentDescriptors, environment);
+
+      // If the type is the native 'Object' class and is being given exactly one type parameter
+      // then it is being used as a map. Expand it to two type parameters where the first one
+      // (the implicit key type parameter) is a 'string'. This special case exists to replicate the
+      // same special case that already exists in the JSCompiler optimizing backend, and to
+      // generalize it to work everywhere (including when types are referenced via an alias).
+      String typeQualifiedName = rawTypeDescriptor.getQualifiedName();
+      if ((typeQualifiedName.equals("Object") || typeQualifiedName.equals("window.Object"))
+          && rawTypeDescriptor.isJsType()
+          && typeArgumentDescriptors.size() == 1) {
+        typeParametersJsDoc = "string, " + typeParametersJsDoc;
+      }
+
       String jsDocName =
           String.format(
               "%s%s<%s>",
               nullable ? "" : "!",
               environment.aliasForType(rawTypeDescriptor),
-              getJsDocNames(typeDescriptor.getTypeArgumentDescriptors(), environment));
+              typeParametersJsDoc);
       if (!shouldUseClassName
           && unboxedTypeDescriptorsBySuperTypeDescriptor.containsKey(rawTypeDescriptor)) {
         // types that are extended or implemented by unboxed types

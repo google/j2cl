@@ -18,6 +18,7 @@ J2CL_SPECIFIC_JRE_SRC = [
     "java/lang/Class.java",
     "java/lang/Enum.java",
     "java/lang/Object.java",
+    "java/util/InternalJsMap.java",
     "java/util/InternalJsMapFactory.java",
     "java/lang/invoke/MethodHandles.java",
 ]
