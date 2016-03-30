@@ -47,4 +47,45 @@ public abstract class UnaryExpression extends Expression {
   public Node accept(Processor processor) {
     return Visitor_UnaryExpression.visit(processor, this);
   }
+
+  abstract Builder newBuilder();
+
+  /**
+   * A Builder for unary expressions.
+   */
+  public abstract static class Builder {
+    private Expression operand;
+    private Operator operator;
+    private TypeDescriptor typeDescriptor;
+
+    public static Builder from(UnaryExpression expression) {
+      Builder builder = expression.newBuilder();
+      builder.operand = expression.getOperand();
+      builder.typeDescriptor = expression.getTypeDescriptor();
+      builder.operator = expression.getOperator();
+      return builder;
+    }
+
+    public Builder operand(Expression operand) {
+      this.operand = operand;
+      return this;
+    }
+
+    public Builder operator(Operator operator) {
+      this.operator = (PrefixOperator) operator;
+      return this;
+    }
+
+    public Builder typeDescriptor(TypeDescriptor typeDescriptor) {
+      this.typeDescriptor = typeDescriptor;
+      return this;
+    }
+
+    public final Expression build() {
+      return doBuild(typeDescriptor, operand, operator);
+    }
+
+    abstract Expression doBuild(
+        TypeDescriptor typeDescriptor, Expression operand, Operator operator);
+  }
 }

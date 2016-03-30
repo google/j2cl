@@ -41,4 +41,21 @@ public class PostfixExpression extends UnaryExpression {
   public Node accept(Processor processor) {
     return Visitor_PostfixExpression.visit(processor, this);
   }
+
+  @Override
+  Builder newBuilder() {
+    return new Builder();
+  }
+
+  /**
+   * A Builder for postfix unary expressions.
+   */
+  public static class Builder extends UnaryExpression.Builder {
+
+    @Override
+    PostfixExpression doBuild(
+        TypeDescriptor typeDescriptor, Expression operand, Operator operator) {
+      return new PostfixExpression(typeDescriptor, operand, (PostfixOperator) operator);
+    }
+  }
 }

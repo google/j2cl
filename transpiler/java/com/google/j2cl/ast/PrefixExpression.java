@@ -17,6 +17,7 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.j2cl.ast.UnaryExpression.Builder;
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -40,5 +41,21 @@ public class PrefixExpression extends UnaryExpression {
   @Override
   public Node accept(Processor processor) {
     return Visitor_PrefixExpression.visit(processor, this);
+  }
+
+  @Override
+  Builder newBuilder() {
+    return new Builder();
+  }
+
+  /**
+   * A Builder for prefix unary expressions.
+   */
+  public static class Builder extends UnaryExpression.Builder {
+
+    @Override
+    PrefixExpression doBuild(TypeDescriptor typeDescriptor, Expression operand, Operator operator) {
+      return new PrefixExpression(typeDescriptor, operand, (PrefixOperator) operator);
+    }
   }
 }

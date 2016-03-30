@@ -42,6 +42,7 @@ import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.SwitchStatement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.UnaryExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 
 import java.util.ArrayList;
@@ -379,38 +380,20 @@ public class ConversionContextVisitor extends AbstractRewriter {
         || rewriteRegularBinaryExpression(assignmentRightOperand) != assignmentRightOperand;
   }
 
-  private boolean splitEnablesMoreConversions(PostfixExpression postfixExpression) {
-    Expression operand = postfixExpression.getOperand();
-    BinaryExpression assignmentRightOperand =
-        new BinaryExpression(
-            postfixExpression.getTypeDescriptor(),
-            operand,
-            postfixExpression.getOperator().getUnderlyingBinaryOperator(),
-            OperatorSideEffectUtils.createLiteralOne(operand.getTypeDescriptor()));
-    BinaryExpression assignmentExpression =
-        new BinaryExpression(
-            TypeDescriptors.asOperatorReturnType(postfixExpression.getTypeDescriptor()),
-            operand,
-            BinaryOperator.ASSIGN,
-            assignmentRightOperand);
-    return rewriteRegularBinaryExpression(assignmentExpression) != assignmentExpression
-        || rewriteRegularBinaryExpression(assignmentRightOperand) != assignmentRightOperand;
-  }
-
-  private boolean splitEnablesMoreConversions(PrefixExpression prefixExpression) {
-    if (!prefixExpression.getOperator().hasSideEffect()) {
+  private boolean splitEnablesMoreConversions(UnaryExpression unaryExpression) {
+    if (!unaryExpression.getOperator().hasSideEffect()) {
       return false;
     }
-    Expression operand = prefixExpression.getOperand();
+    Expression operand = unaryExpression.getOperand();
     BinaryExpression assignmentRightOperand =
         new BinaryExpression(
-            prefixExpression.getTypeDescriptor(),
+            unaryExpression.getTypeDescriptor(),
             operand,
-            prefixExpression.getOperator().getUnderlyingBinaryOperator(),
+            unaryExpression.getOperator().getUnderlyingBinaryOperator(),
             OperatorSideEffectUtils.createLiteralOne(operand.getTypeDescriptor()));
     BinaryExpression assignmentExpression =
         new BinaryExpression(
-            TypeDescriptors.asOperatorReturnType(prefixExpression.getTypeDescriptor()),
+            TypeDescriptors.asOperatorReturnType(unaryExpression.getTypeDescriptor()),
             operand,
             BinaryOperator.ASSIGN,
             assignmentRightOperand);

@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
@@ -37,9 +38,9 @@ public class MultiExpression extends Expression {
     this(Arrays.asList(expressions));
   }
 
-  public MultiExpression(List<Expression> expressions) {
-    this.expressions.addAll(checkNotNull(expressions));
-    checkArgument(!expressions.isEmpty());
+  public MultiExpression(Iterable<Expression> expressions) {
+    Iterables.addAll(this.expressions, checkNotNull(expressions));
+    checkArgument(!Iterables.isEmpty(expressions));
   }
 
   public List<Expression> getExpressions() {

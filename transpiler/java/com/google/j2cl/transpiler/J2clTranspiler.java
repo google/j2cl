@@ -47,6 +47,7 @@ import com.google.j2cl.ast.visitors.NormalizeEqualityVisitor;
 import com.google.j2cl.ast.visitors.NormalizeInstanceOfsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeJsVarargsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeLongsVisitor;
+import com.google.j2cl.ast.visitors.NormalizeMultiExpressions;
 import com.google.j2cl.ast.visitors.NormalizeNativeMethodCalls;
 import com.google.j2cl.ast.visitors.NormalizeNestedClassConstructorsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeStaticMemberQualifiersPass;
@@ -183,6 +184,7 @@ public class J2clTranspiler {
       NormalizeJsVarargsVisitor.applyTo(j2clUnit);
       NormalizeArrayCreationsVisitor.applyTo(j2clUnit);
       InsertExceptionConversionVisitor.applyTo(j2clUnit);
+      NormalizeMultiExpressions.applyTo(j2clUnit);
 
       // Dodge JSCompiler limitations.
       // TODO: remove the temporary fix once switch to JSCompiler's new type checker.

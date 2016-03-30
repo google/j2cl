@@ -16,7 +16,6 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
@@ -41,8 +40,7 @@ public class NormalizeStaticMemberQualifiersPass {
   }
 
   private void rewriteSystemGetProperty(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new FixFieldAssignmentQualifiers());
-    compilationUnit.accept(new FixOtherQualifiers());
+    compilationUnit.accept(new FixQualifiers());
   }
   
   /**
@@ -60,31 +58,7 @@ public class NormalizeStaticMemberQualifiersPass {
         && !(memeberReference.getQualifier() instanceof TypeReference);
   }
 
-  private class FixFieldAssignmentQualifiers extends AbstractRewriter {
-    @Override
-    public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
-      // For the node on the left hand side of an assignment you only need to handle field accesses
-      // and not method calls because method calls are illegal there (you can't assign into a method
-      // call).
-      // Only look at assignments into fields where the field has an instance qualifier.
-      Expression leftOperand = binaryExpression.getLeftOperand();
-      if (binaryExpression.getOperator().hasSideEffect()
-          && isStaticMemberReferenceWithInstanceQualifier(leftOperand)) {
-
-        FieldAccess fieldAccess = (FieldAccess) leftOperand;
-        return new MultiExpression(
-            fieldAccess.getQualifier(), // Preserve the side effect.
-            new BinaryExpression( // Rewrite the assignment without the qualifier.
-                binaryExpression.getTypeDescriptor(),
-                new FieldAccess(null, fieldAccess.getTarget()),
-                binaryExpression.getOperator(),
-                binaryExpression.getRightOperand()));
-      }
-      return binaryExpression;
-    }
-  }
-
-  private class FixOtherQualifiers extends AbstractRewriter {
+  private class FixQualifiers extends AbstractRewriter {
     @Override
     public Node rewriteFieldAccess(FieldAccess fieldAccess) {
       // If the access is of the very strange form "instance.staticField" then remove the qualifier

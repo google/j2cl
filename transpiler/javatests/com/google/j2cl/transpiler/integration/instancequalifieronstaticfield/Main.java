@@ -73,8 +73,6 @@ public class Main {
     }
     
     // Test side effects on binary operator
-    // TODO: Disabled until the compiler fixes it. b/27721224
-    /*
     {
       {
         main.getWithSideEffects().staticField++;
@@ -87,7 +85,6 @@ public class Main {
         assert sideEffectCount == 6;
       }
     }
-    */
 
     // Stress
     {
@@ -105,8 +102,8 @@ public class Main {
               .getWithSideEffects()
               .getStaticMain()
               .staticField;
-      assert staticField == 1000;
-      assert sideEffectCount == 10;
+      assert staticField == 1004;
+      assert sideEffectCount == 12;
     }
   }
 }
