@@ -152,7 +152,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       for (Import externImport : externImports) {
         String alias = externImport.getAlias();
         String path = externImport.getImplModulePath();
-        sb.appendln("let %s = %s;", alias, path);
+        sb.appendln("/** @constructor */ let %s = %s;", alias, path);
       }
       sb.newLine();
     }
