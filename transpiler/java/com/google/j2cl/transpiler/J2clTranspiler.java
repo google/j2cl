@@ -74,6 +74,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.FileTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -254,6 +255,9 @@ public class J2clTranspiler {
               StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES
             };
         Files.copy(Paths.get(j2clUnit.getFilePath()), outputPath, options);
+        // Wipe entries modification time so that input->output mapping is stable
+        // regardless of the time of day.
+        Files.setLastModifiedTime(outputPath, FileTime.fromMillis(0));
       } catch (IOException e) {
         // TODO(tdeegan): This blows up during the JRE compile
         // errors.error(Error.ERR_ERROR, "Could not copy java file: " + outputPath + e);

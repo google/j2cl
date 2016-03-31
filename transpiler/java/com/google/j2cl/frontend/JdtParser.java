@@ -29,6 +29,7 @@ import org.eclipse.jdt.core.dom.FileASTRequestor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -94,7 +95,11 @@ public class JdtParser {
 
     // Parse and create a compilation unit for every file.
     ASTParser parser = newASTParser(true);
-    final Map<String, CompilationUnit> compilationUnitsByFilePath = new HashMap<>();
+
+    // The map must be ordered because it will be iterated over later and if it was not ordered then
+    // our output would be unstable.
+    final Map<String, CompilationUnit> compilationUnitsByFilePath = new LinkedHashMap<>();
+
     FileASTRequestor astRequestor =
         new FileASTRequestor() {
           @Override

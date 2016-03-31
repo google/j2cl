@@ -17,9 +17,7 @@ package com.google.j2cl.generator;
 
 import com.google.j2cl.errors.Errors;
 
-import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
@@ -36,15 +34,7 @@ public abstract class AbstractSourceGenerator {
   }
 
   public void writeToFile(Path outputPath, Charset charset) {
-    try {
-      // Write using the provided fileSystem (which might be the regular file system or might be a
-      // zip file.)
-      Files.createDirectories(outputPath.getParent());
-      Files.write(outputPath, toSource().getBytes(charset));
-    } catch (IOException e) {
-      errors.error(Errors.Error.ERR_ERROR, e.getClass().getSimpleName() + ": " + e.getMessage());
-      errors.maybeReportAndExit();
-    }
+    GeneratorUtils.writeToFile(outputPath, toSource(), charset, errors);
   }
 
   public abstract String toSource();

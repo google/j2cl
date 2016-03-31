@@ -13,7 +13,6 @@ import com.google.j2cl.errors.Errors;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.FileSystem;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -94,7 +93,11 @@ public class SourceMapGeneratorStage {
                   outputLocationPath,
                   GeneratorUtils.getRelativePath(javaType),
                   SOURCE_MAP_SUFFIX);
-          writeToFile(absolutePathForSourceMap, generateReadableSourceMaps ? readableMap : output);
+          GeneratorUtils.writeToFile(
+              absolutePathForSourceMap,
+              generateReadableSourceMaps ? readableMap : output,
+              charset,
+              errors);
         } catch (IOException e) {
           e.printStackTrace();
         }
@@ -118,18 +121,6 @@ public class SourceMapGeneratorStage {
     SourceMapGatheringVisitor visitor = new SourceMapGatheringVisitor();
     for (CompilationUnit j2clUnit : j2clCompilationUnits) {
       j2clUnit.accept(visitor);
-    }
-  }
-
-  private void writeToFile(Path outputPath, String sourceMap) {
-    try {
-      // Write using the provided fileSystem (which might be the regular file system or might be a
-      // zip file.)
-      Files.createDirectories(outputPath.getParent());
-      Files.write(outputPath, sourceMap.getBytes(charset));
-    } catch (IOException e) {
-      errors.error(Errors.Error.ERR_ERROR, e.getClass().getSimpleName() + ": " + e.getMessage());
-      errors.maybeReportAndExit();
     }
   }
 }

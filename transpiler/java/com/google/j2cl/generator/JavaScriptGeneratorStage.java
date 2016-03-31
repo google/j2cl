@@ -22,7 +22,7 @@ import com.google.j2cl.errors.Errors;
 import java.nio.charset.Charset;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -60,7 +60,12 @@ public class JavaScriptGeneratorStage {
   }
 
   public void generateJavaScriptSources(List<CompilationUnit> j2clCompilationUnits) {
-    Map<String, NativeJavaScriptFile> nativeFilesByPath = new HashMap<>();
+    // The map must be ordered because it will be iterated over later and if it was not ordered then
+    // our output would be unstable. Actually this one can't actually destabilize output but since
+    // it's being safely iterated over now it's best to guard against it being unsafely iterated
+    // over in the future.
+    Map<String, NativeJavaScriptFile> nativeFilesByPath = new LinkedHashMap<>();
+
     for (String nativeJavascriptFileZipPath : nativeJavaScriptFileZipPaths) {
       nativeFilesByPath.putAll(
           NativeJavaScriptFile.getFilesByPathFromZip(

@@ -30,7 +30,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -68,7 +68,10 @@ public class JavaPreprocessor {
       return null;
     }
 
-    Map<String, String> tempToOriginalFileMap = new HashMap<>();
+    // The map must be ordered because it will be iterated over later and if it was not ordered then
+    // our output would be unstable.
+    Map<String, String> tempToOriginalFileMap = new LinkedHashMap<>();
+
     for (String filePath : filePaths) {
       try {
         String preprocessedFileContent = preprocessFile(Paths.get(filePath), encoding);

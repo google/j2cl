@@ -35,11 +35,16 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
+import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.FileSystem;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.attribute.FileTime;
 import java.util.List;
 
 /**
@@ -344,5 +349,20 @@ public class GeneratorUtils {
       return "protected";
     }
     return method.getDescriptor().getVisibility().jsText;
+  }
+
+  public static void writeToFile(Path outputPath, String content, Charset charset, Errors errors) {
+    try {
+      // Write using the provided fileSystem (which might be the regular file system or might be a
+      // zip file.)
+      Files.createDirectories(outputPath.getParent());
+      Files.write(outputPath, content.getBytes(charset));
+      // Wipe entries modification time so that input->output mapping is stable
+      // regardless of the time of day.
+      Files.setLastModifiedTime(outputPath, FileTime.fromMillis(0));
+    } catch (IOException e) {
+      errors.error(Errors.Error.ERR_ERROR, e.getClass().getSimpleName() + ": " + e.getMessage());
+      errors.maybeReportAndExit();
+    }
   }
 }
