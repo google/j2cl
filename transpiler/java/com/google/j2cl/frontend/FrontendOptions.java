@@ -34,6 +34,7 @@ import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -227,11 +228,23 @@ public class FrontendOptions {
       }
     }
 
+    // Make sure to extract all of the Jars into a single temp dir so that when later sorting
+    // sourceFilePaths there is no instability introduced by differences in randomly generated
+    // temp dir prefixes.
+    Path srcjarContentDir;
+    try {
+      srcjarContentDir = Files.createTempDirectory(SRCJAR_EXTENSION);
+    } catch (IOException e) {
+      errors.error(Errors.Error.ERR_CANNOT_CREATE_TEMP_DIR);
+      return;
+    }
+
+    final List<String> jarSourceFilePaths = new ArrayList<>();
+
     // Extract sourceJars and accumulate their contained .java files back into sourceFilePaths.
     for (String sourceJarPath : sourceJarPaths) {
       try {
         // Extract the sourceJar.
-        Path srcjarContentDir = Files.createTempDirectory(SRCJAR_EXTENSION);
         ZipFiles.unzipFile(new File(sourceJarPath), srcjarContentDir.toFile());
 
         // Accumulate the contained .java files back into sourceFilePaths.
@@ -242,7 +255,7 @@ public class FrontendOptions {
               public FileVisitResult visitFile(Path path, BasicFileAttributes attrs)
                   throws IOException {
                 if (path.toString().endsWith(JAVA_EXTENSION)) {
-                  sourceFilePaths.add(path.toAbsolutePath().toString());
+                  jarSourceFilePaths.add(path.toAbsolutePath().toString());
                 }
                 return FileVisitResult.CONTINUE;
               }
@@ -251,6 +264,14 @@ public class FrontendOptions {
         errors.error(Errors.Error.ERR_CANNOT_EXTRACT_ZIP, sourceJarPath);
       }
     }
+
+    // Sort source file paths so that our input is always in a stable order. If this is not done
+    // and you can't trust the input to have been provided already in a stable order then the result
+    // is that you will create an output Foo.js.zip with randomly ordered entries, and this will
+    // cause unstable optimization in JSCompiler.
+    Collections.sort(sourceFilePaths);
+    Collections.sort(jarSourceFilePaths);
+    sourceFilePaths.addAll(jarSourceFilePaths);
   }
 
   public List<String> getOmitSourceFiles() {

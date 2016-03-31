@@ -20,7 +20,7 @@ load("/third_party/java/j2cl/j2cl_library", "j2cl_library")
 
 def readable_example(
     name, srcs, native_srcs=[], native_srcs_pkg=None, deps=[], js_deps=[],
-    _declare_legacy_namespace=False):
+    plugins=[], _declare_legacy_namespace=False):
   """Macro that confirms the JS compilability of some transpiled Java.
 
   deps are Labels of j2cl_library() rules. NOT labels of
@@ -38,6 +38,7 @@ def readable_example(
       native_srcs=native_srcs,
       native_srcs_pkg=native_srcs_pkg,
       deps=deps,
+      plugins=plugins,
       _readable_source_maps=True,
       _declare_legacy_namespace=_declare_legacy_namespace,
   )

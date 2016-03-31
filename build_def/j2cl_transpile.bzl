@@ -124,8 +124,10 @@ Args:
 """
 # Private Args:
 #   omit_srcs: Names of files to omit from the generated output. The files
-#       will be included in the compile for reference resolution purposes but no
-#       output JS for them will be kept.
+#       will be included in the compile for reference resolution purposes but
+#       no output JS for them will be kept. If used it will also disable APT
+#       support since it's not possible to filter the Java files contained
+#       within the created srcjar.
 #   transpiler: J2CL compiler jar to use.
 j2cl_transpile = rule(
     attrs={
