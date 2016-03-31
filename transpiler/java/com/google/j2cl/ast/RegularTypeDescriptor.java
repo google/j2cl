@@ -22,6 +22,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.processors.Visitable;
+import com.google.j2cl.common.JsInteropAnnotationUtils;
 
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
@@ -57,12 +58,13 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   }
 
   private void setJsInteropProperties() {
-    IAnnotationBinding jsTypeAnnotation = JsInteropUtils.getJsTypeAnnotation(typeBinding);
+    IAnnotationBinding jsTypeAnnotation =
+        JsInteropAnnotationUtils.getJsTypeAnnotation(typeBinding);
     if (jsTypeAnnotation != null) {
       isJsType = true;
-      isNative = JsInteropUtils.isNative(jsTypeAnnotation);
-      jsTypeNamespace = JsInteropUtils.getJsNamespace(jsTypeAnnotation);
-      jsTypeName = JsInteropUtils.getJsName(jsTypeAnnotation);
+      isNative = JsInteropAnnotationUtils.isNative(jsTypeAnnotation);
+      jsTypeNamespace = JsInteropAnnotationUtils.getJsNamespace(jsTypeAnnotation);
+      jsTypeName = JsInteropAnnotationUtils.getJsName(jsTypeAnnotation);
     }
     isJsFunction = JsInteropUtils.isJsFunction(typeBinding);
   }

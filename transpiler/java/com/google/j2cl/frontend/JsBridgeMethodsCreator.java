@@ -20,10 +20,10 @@ import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JdtMethodUtils;
-import com.google.j2cl.ast.JsInteropUtils;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.common.JsInteropAnnotationUtils;
 
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
@@ -143,8 +143,8 @@ public class JsBridgeMethodsCreator {
       return null;
     }
     // native js type is not generated, thus it does not expose any non-js methods.
-    if (JsInteropUtils.isNative(
-        JsInteropUtils.getJsTypeAnnotation(methodBinding.getDeclaringClass()))) {
+    if (JsInteropAnnotationUtils.isNative(
+        JsInteropAnnotationUtils.getJsTypeAnnotation(methodBinding.getDeclaringClass()))) {
       return null;
     }
     IMethodBinding overriddenNonJsMember = null;

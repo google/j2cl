@@ -84,6 +84,7 @@ import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.ast.sourcemap.SourceInfo;
+import com.google.j2cl.common.PackageInfoCache;
 
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
@@ -115,6 +116,7 @@ import java.util.Map.Entry;
  */
 public class CompilationUnitBuilder {
   private class ASTConverter {
+    private PackageInfoCache packageInfoCache = PackageInfoCache.get();
     private Map<String, String> lambdaBinaryNameByKey = new HashMap<>();
     private Map<IVariableBinding, Variable> variableByJdtBinding = new HashMap<>();
     private Map<Variable, JavaType> enclosingTypeByVariable = new HashMap<>();
@@ -145,6 +147,11 @@ public class CompilationUnitBuilder {
       String packageName = JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit);
       j2clCompilationUnit = new CompilationUnit(sourceFilePath, packageName);
       this.jdtCompilationUnit = jdtCompilationUnit;
+      // Records information about package-info files supplied as source code.
+      if (currentSourceFile.endsWith("package-info.java")) {
+        packageInfoCache.setPackageAnnotations(packageName,
+            jdtCompilationUnit.getPackage().annotations());
+      }
       for (Object object : jdtCompilationUnit.types()) {
         AbstractTypeDeclaration abstractTypeDeclaration = (AbstractTypeDeclaration) object;
         convert(abstractTypeDeclaration);

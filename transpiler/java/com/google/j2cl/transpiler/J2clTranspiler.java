@@ -56,6 +56,7 @@ import com.google.j2cl.ast.visitors.RemoveUnusedMultiExpressionReturnValues;
 import com.google.j2cl.ast.visitors.RewriteSystemGetPropertyVisitor;
 import com.google.j2cl.ast.visitors.SplitCompoundLongAssignmentsVisitor;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCountsVisitor;
+import com.google.j2cl.common.PackageInfoCache;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.frontend.CompilationUnitBuilder;
 import com.google.j2cl.frontend.FrontendFlags;
@@ -114,6 +115,8 @@ public class J2clTranspiler {
 
   private List<CompilationUnit> convertUnits(
       Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath) {
+    // Records information about package-info files supplied as byte code.
+    PackageInfoCache.init(options.getClasspathEntries(), errors);
     List<CompilationUnit> compilationUnits = CompilationUnitBuilder.build(jdtUnitsByFilePath);
     maybeExitGracefully();
     return compilationUnits;
