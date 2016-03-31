@@ -379,12 +379,10 @@ public class CompilationUnitBuilder {
       return method;
     }
 
-    @SuppressWarnings("cast")
     private ArrayAccess convert(org.eclipse.jdt.core.dom.ArrayAccess expression) {
       return new ArrayAccess(convert(expression.getArray()), convert(expression.getIndex()));
     }
 
-    @SuppressWarnings({"cast"})
     private NewArray convert(org.eclipse.jdt.core.dom.ArrayCreation expression) {
       ArrayType arrayType = expression.getType();
 
@@ -404,7 +402,7 @@ public class CompilationUnitBuilder {
       return new NewArray(typeDescriptor, dimensionExpressions, arrayLiteral);
     }
 
-    @SuppressWarnings({"cast", "unchecked"})
+    @SuppressWarnings("unchecked")
     private ArrayLiteral convert(org.eclipse.jdt.core.dom.ArrayInitializer expression) {
       return new ArrayLiteral(
           (ArrayTypeDescriptor) JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
@@ -1616,22 +1614,22 @@ public class CompilationUnitBuilder {
       TypeDescriptor literalTypeDescriptor = JdtUtils.createTypeDescriptor(typeBinding);
       TypeDescriptor javaLangClassTypeDescriptor =
           JdtUtils.createTypeDescriptor(literal.resolveTypeBinding());
+
+      if (literalTypeDescriptor.isArray()) {
+        ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) literalTypeDescriptor;
+        if (arrayTypeDescriptor.getLeafTypeDescriptor().isNative()) {
+          // class literal of native js type array returns Object[].class
+          arrayTypeDescriptor =
+              (ArrayTypeDescriptor) TypeDescriptors.get().javaLangObject.getForArray(1);
+        }
+        return convertArrayTypeLiteral(arrayTypeDescriptor, javaLangClassTypeDescriptor);
+      }
+
       if (literalTypeDescriptor.isNative()) {
-        // class literal of native js type returns JavaScriptObject.class
-        return convertRegularTypeLiteral(
-            TypeDescriptors.BootstrapType.JAVA_SCRIPT_OBJECT.getDescriptor(),
-            javaLangClassTypeDescriptor);
+        // class literal of native JsType is JavaScriptObject.class
+        literalTypeDescriptor = TypeDescriptors.BootstrapType.JAVA_SCRIPT_OBJECT.getDescriptor();
       }
-      if (literalTypeDescriptor.isArray()
-          && ((ArrayTypeDescriptor) literalTypeDescriptor).getLeafTypeDescriptor().isNative()) {
-        // class literal of native js type array returns Object[].class
-        return convertArrayTypeLiteral(
-            TypeDescriptors.get().javaLangObject.getForArray(1), javaLangClassTypeDescriptor);
-      }
-      if (typeBinding.getDimensions() == 0) {
-        return convertRegularTypeLiteral(literalTypeDescriptor, javaLangClassTypeDescriptor);
-      }
-      return convertArrayTypeLiteral(literalTypeDescriptor, javaLangClassTypeDescriptor);
+      return convertRegularTypeLiteral(literalTypeDescriptor, javaLangClassTypeDescriptor);
     }
 
     private Expression convertRegularTypeLiteral(
