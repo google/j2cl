@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
@@ -182,7 +184,8 @@ public class JdtMethodUtils {
       IMethodBinding methodBinding, ITypeBinding typeBinding) {
     Set<IMethodBinding> overriddenMethods = new HashSet<>();
     for (IMethodBinding declaredMethod : typeBinding.getDeclaredMethods()) {
-      if (methodBinding.overrides(declaredMethod)) {
+      if (methodBinding.overrides(declaredMethod) && !methodBinding.isConstructor()) {
+        checkArgument(!Modifier.isStatic(methodBinding.getModifiers()));
         overriddenMethods.add(declaredMethod);
       }
     }
