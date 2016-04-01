@@ -75,30 +75,6 @@ class LambdaInSubClass extends Parent {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    LambdaInSubClass.$clinit();
-    if (!LambdaInSubClass.$classLambdaInSubClass_) {
-      LambdaInSubClass.$classLambdaInSubClass_ = Class.$createForClass(
-          $Util.$generateId('LambdaInSubClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass'));
-    }
-    return LambdaInSubClass.$classLambdaInSubClass_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return LambdaInSubClass.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -119,12 +95,9 @@ class LambdaInSubClass extends Parent {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-LambdaInSubClass.$classLambdaInSubClass_ = null;
+$Util.$setClassMetadata(
+    LambdaInSubClass,
+    'com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass');
 
 
 

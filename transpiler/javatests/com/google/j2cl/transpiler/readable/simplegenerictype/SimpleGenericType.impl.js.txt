@@ -99,30 +99,6 @@ class SimpleGenericType extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    SimpleGenericType.$clinit();
-    if (!SimpleGenericType.$classSimpleGenericType_) {
-      SimpleGenericType.$classSimpleGenericType_ = Class.$createForClass(
-          $Util.$generateId('SimpleGenericType'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType'));
-    }
-    return SimpleGenericType.$classSimpleGenericType_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return SimpleGenericType.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -140,12 +116,9 @@ class SimpleGenericType extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-SimpleGenericType.$classSimpleGenericType_ = null;
+$Util.$setClassMetadata(
+    SimpleGenericType,
+    'com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType');
 
 
 

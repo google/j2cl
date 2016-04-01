@@ -77,6 +77,7 @@ import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
@@ -1639,42 +1640,35 @@ public class CompilationUnitBuilder {
           MethodDescriptor.Builder.fromDefault()
               .jsInfo(JsInfo.RAW)
               .isStatic(true)
-              .enclosingClassTypeDescriptor(literalTypeDescriptor)
-              .methodName("$getClass")
+              .enclosingClassTypeDescriptor(javaLangClassTypeDescriptor)
+              .methodName("$get")
+              .parameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.NATIVE_FUNCTION))
               .returnTypeDescriptor(javaLangClassTypeDescriptor)
               .build();
-      return MethodCall.createRegularMethodCall(null, classMethodDescriptor);
+      return MethodCall.createRegularMethodCall(
+          null, classMethodDescriptor, new TypeReference(literalTypeDescriptor));
     }
 
     private Expression convertArrayTypeLiteral(
-        TypeDescriptor literalTypeDescriptor, TypeDescriptor javaLangClassTypeDescriptor) {
+        ArrayTypeDescriptor literalTypeDescriptor, TypeDescriptor javaLangClassTypeDescriptor) {
       MethodDescriptor classMethodDescriptor =
           MethodDescriptor.Builder.fromDefault()
               .jsInfo(JsInfo.RAW)
               .isStatic(true)
-              .enclosingClassTypeDescriptor(
-                  ((ArrayTypeDescriptor) literalTypeDescriptor).getLeafTypeDescriptor())
-              .methodName("$getClass")
-              .returnTypeDescriptor(javaLangClassTypeDescriptor)
-              .build();
-
-      MethodDescriptor forArrayMethodDescriptor =
-          MethodDescriptor.Builder.fromDefault()
-              .jsInfo(JsInfo.RAW)
               .enclosingClassTypeDescriptor(javaLangClassTypeDescriptor)
-              .methodName("$forArray")
-              .parameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().primitiveInt))
+              .methodName("$get")
+              .parameterTypeDescriptors(
+                  Lists.newArrayList(
+                      TypeDescriptors.NATIVE_FUNCTION, TypeDescriptors.get().primitiveInt))
               .returnTypeDescriptor(javaLangClassTypeDescriptor)
               .build();
 
-      // <ClassLiteralClass>.$getClass().forArray(<dimensions>)
       return MethodCall.createRegularMethodCall(
-          MethodCall.createRegularMethodCall(
-              null, classMethodDescriptor, new ArrayList<Expression>()),
-          forArrayMethodDescriptor,
-          ImmutableList.<Expression>of(
-              new NumberLiteral(
-                  TypeDescriptors.get().primitiveInt, literalTypeDescriptor.getDimensions())));
+          null,
+          classMethodDescriptor,
+          new TypeReference(literalTypeDescriptor.getLeafTypeDescriptor()),
+          new NumberLiteral(
+              TypeDescriptors.get().primitiveInt, literalTypeDescriptor.getDimensions()));
     }
 
     private ThrowStatement convert(org.eclipse.jdt.core.dom.ThrowStatement statement) {

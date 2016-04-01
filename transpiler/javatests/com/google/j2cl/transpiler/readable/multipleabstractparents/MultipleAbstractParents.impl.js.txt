@@ -99,31 +99,6 @@ class MultipleAbstractParents extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    MultipleAbstractParents.$clinit();
-    if (!MultipleAbstractParents.$classMultipleAbstractParents_) {
-      MultipleAbstractParents
-          .$classMultipleAbstractParents_ = Class.$createForClass(
-          $Util.$generateId('MultipleAbstractParents'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents'));
-    }
-    return MultipleAbstractParents.$classMultipleAbstractParents_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return MultipleAbstractParents.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -152,12 +127,9 @@ class MultipleAbstractParents extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-MultipleAbstractParents.$classMultipleAbstractParents_ = null;
+$Util.$setClassMetadata(
+    MultipleAbstractParents,
+    'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents');
 
 
 

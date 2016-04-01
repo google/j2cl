@@ -77,30 +77,6 @@ class AbstractMap extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    AbstractMap.$clinit();
-    if (!AbstractMap.$classAbstractMap_) {
-      AbstractMap.$classAbstractMap_ = Class.$createForClass(
-          $Util.$generateId('AbstractMap'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.bridgemethodcasts.AbstractMap'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.bridgemethodcasts.AbstractMap'));
-    }
-    return AbstractMap.$classAbstractMap_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return AbstractMap.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -116,12 +92,9 @@ class AbstractMap extends Object {
   $init__com_google_j2cl_transpiler_readable_bridgemethodcasts_AbstractMap() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-AbstractMap.$classAbstractMap_ = null;
+$Util.$setClassMetadata(
+    AbstractMap,
+    'com.google.j2cl.transpiler.readable.bridgemethodcasts.AbstractMap');
 
 
 Map.$markImplementor(AbstractMap);

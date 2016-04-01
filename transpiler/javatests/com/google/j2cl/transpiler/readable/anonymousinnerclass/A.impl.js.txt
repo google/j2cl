@@ -73,30 +73,6 @@ class A extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    A.$clinit();
-    if (!A.$classA_) {
-      A.$classA_ = Class.$createForClass(
-          $Util.$generateId('A'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.anonymousinnerclass.A'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.anonymousinnerclass.A'));
-    }
-    return A.$classA_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return A.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -114,12 +90,8 @@ class A extends Object {
   $init__com_google_j2cl_transpiler_readable_anonymousinnerclass_A() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-A.$classA_ = null;
+$Util.$setClassMetadata(
+    A, 'com.google.j2cl.transpiler.readable.anonymousinnerclass.A');
 
 
 

@@ -101,31 +101,6 @@ class InnerClassInitOrder$ESWGOuter extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    InnerClassInitOrder$ESWGOuter.$clinit();
-    if (!InnerClassInitOrder$ESWGOuter.$classInnerClassInitOrder$ESWGOuter_) {
-      InnerClassInitOrder$ESWGOuter
-          .$classInnerClassInitOrder$ESWGOuter_ = Class.$createForClass(
-          $Util.$generateId('ESWGOuter'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter'));
-    }
-    return InnerClassInitOrder$ESWGOuter.$classInnerClassInitOrder$ESWGOuter_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return InnerClassInitOrder$ESWGOuter.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -147,12 +122,9 @@ class InnerClassInitOrder$ESWGOuter extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-InnerClassInitOrder$ESWGOuter.$classInnerClassInitOrder$ESWGOuter_ = null;
+$Util.$setClassMetadata(
+    InnerClassInitOrder$ESWGOuter,
+    'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter');
 
 
 

@@ -75,30 +75,6 @@ class AnonymousClass extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    AnonymousClass.$clinit();
-    if (!AnonymousClass.$classAnonymousClass_) {
-      AnonymousClass.$classAnonymousClass_ = Class.$createForClass(
-          $Util.$generateId('AnonymousClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass'));
-    }
-    return AnonymousClass.$classAnonymousClass_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return AnonymousClass.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -118,12 +94,9 @@ class AnonymousClass extends Object {
   $init__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-AnonymousClass.$classAnonymousClass_ = null;
+$Util.$setClassMetadata(
+    AnonymousClass,
+    'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass');
 
 
 

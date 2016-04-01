@@ -83,30 +83,6 @@ class CharSequenceCalls extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    CharSequenceCalls.$clinit();
-    if (!CharSequenceCalls.$classCharSequenceCalls_) {
-      CharSequenceCalls.$classCharSequenceCalls_ = Class.$createForClass(
-          $Util.$generateId('CharSequenceCalls'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls'));
-    }
-    return CharSequenceCalls.$classCharSequenceCalls_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return CharSequenceCalls.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -126,12 +102,9 @@ class CharSequenceCalls extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-CharSequenceCalls.$classCharSequenceCalls_ = null;
+$Util.$setClassMetadata(
+    CharSequenceCalls,
+    'com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls');
 
 
 

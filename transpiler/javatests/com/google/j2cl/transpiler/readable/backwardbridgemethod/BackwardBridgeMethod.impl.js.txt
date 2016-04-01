@@ -92,30 +92,6 @@ class BackwardBridgeMethod extends C {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    BackwardBridgeMethod.$clinit();
-    if (!BackwardBridgeMethod.$classBackwardBridgeMethod_) {
-      BackwardBridgeMethod.$classBackwardBridgeMethod_ = Class.$createForClass(
-          $Util.$generateId('BackwardBridgeMethod'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod'));
-    }
-    return BackwardBridgeMethod.$classBackwardBridgeMethod_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return BackwardBridgeMethod.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -134,12 +110,9 @@ class BackwardBridgeMethod extends C {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-BackwardBridgeMethod.$classBackwardBridgeMethod_ = null;
+$Util.$setClassMetadata(
+    BackwardBridgeMethod,
+    'com.google.j2cl.transpiler.readable.backwardbridgemethod.BackwardBridgeMethod');
 
 
 I.$markImplementor(BackwardBridgeMethod);

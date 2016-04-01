@@ -100,30 +100,6 @@ class TypeWildCards extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    TypeWildCards.$clinit();
-    if (!TypeWildCards.$classTypeWildCards_) {
-      TypeWildCards.$classTypeWildCards_ = Class.$createForClass(
-          $Util.$generateId('TypeWildCards'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards'));
-    }
-    return TypeWildCards.$classTypeWildCards_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return TypeWildCards.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -141,12 +117,9 @@ class TypeWildCards extends Object {
   $init__com_google_j2cl_transpiler_readable_typewildcards_TypeWildCards() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-TypeWildCards.$classTypeWildCards_ = null;
+$Util.$setClassMetadata(
+    TypeWildCards,
+    'com.google.j2cl.transpiler.readable.typewildcards.TypeWildCards');
 
 
 

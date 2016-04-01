@@ -90,31 +90,6 @@ class OuterClass$InnerClass extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    OuterClass$InnerClass.$clinit();
-    if (!OuterClass$InnerClass.$classOuterClass$InnerClass_) {
-      OuterClass$InnerClass
-          .$classOuterClass$InnerClass_ = Class.$createForClass(
-          $Util.$generateId('InnerClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$InnerClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass'));
-    }
-    return OuterClass$InnerClass.$classOuterClass$InnerClass_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return OuterClass$InnerClass.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -135,12 +110,9 @@ class OuterClass$InnerClass extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-OuterClass$InnerClass.$classOuterClass$InnerClass_ = null;
+$Util.$setClassMetadata(
+    OuterClass$InnerClass,
+    'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$InnerClass');
 
 
 

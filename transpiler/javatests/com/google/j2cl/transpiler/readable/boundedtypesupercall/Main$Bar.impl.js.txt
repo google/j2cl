@@ -86,30 +86,6 @@ class Main$Bar extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Main$Bar.$clinit();
-    if (!Main$Bar.$classMain$Bar_) {
-      Main$Bar.$classMain$Bar_ = Class.$createForClass(
-          $Util.$generateId('Bar'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar'));
-    }
-    return Main$Bar.$classMain$Bar_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Main$Bar.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -131,12 +107,9 @@ class Main$Bar extends Object {
   $init__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Bar() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Main$Bar.$classMain$Bar_ = null;
+$Util.$setClassMetadata(
+    Main$Bar,
+    'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Bar');
 
 
 

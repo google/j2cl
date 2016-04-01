@@ -76,30 +76,6 @@ class ParentOuter extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    ParentOuter.$clinit();
-    if (!ParentOuter.$classParentOuter_) {
-      ParentOuter.$classParentOuter_ = Class.$createForClass(
-          $Util.$generateId('ParentOuter'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinheritance.ParentOuter'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinheritance.ParentOuter'));
-    }
-    return ParentOuter.$classParentOuter_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return ParentOuter.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -117,12 +93,9 @@ class ParentOuter extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-ParentOuter.$classParentOuter_ = null;
+$Util.$setClassMetadata(
+    ParentOuter,
+    'com.google.j2cl.transpiler.readable.innerclassinheritance.ParentOuter');
 
 
 

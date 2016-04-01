@@ -62,35 +62,15 @@ class SubNativeInterface {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    SubNativeInterface.$clinit();
-    if (!SubNativeInterface.$classSubNativeInterface_) {
-      SubNativeInterface.$classSubNativeInterface_ = Class.$createForInterface(
-          $Util.$generateId('SubNativeInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.markimplementornativetypes.SubNativeInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.markimplementornativetypes.SubNativeInterface'));
-    }
-    return SubNativeInterface.$classSubNativeInterface_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
   static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-SubNativeInterface.$classSubNativeInterface_ = null;
+$Util.$setClassMetadataForInterface(
+    SubNativeInterface,
+    'com.google.j2cl.transpiler.readable.markimplementornativetypes.SubNativeInterface');
 
 
 SubNativeInterface.$markImplementor(

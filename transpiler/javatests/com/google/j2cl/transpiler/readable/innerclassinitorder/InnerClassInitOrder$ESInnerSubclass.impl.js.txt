@@ -106,33 +106,6 @@ class InnerClassInitOrder$ESInnerSubclass extends
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    InnerClassInitOrder$ESInnerSubclass.$clinit();
-    if (!InnerClassInitOrder$ESInnerSubclass
-             .$classInnerClassInitOrder$ESInnerSubclass_) {
-      InnerClassInitOrder$ESInnerSubclass
-          .$classInnerClassInitOrder$ESInnerSubclass_ = Class.$createForClass(
-          $Util.$generateId('ESInnerSubclass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESInnerSubclass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESInnerSubclass'));
-    }
-    return InnerClassInitOrder$ESInnerSubclass
-        .$classInnerClassInitOrder$ESInnerSubclass_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return InnerClassInitOrder$ESInnerSubclass.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -154,13 +127,9 @@ class InnerClassInitOrder$ESInnerSubclass extends
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-InnerClassInitOrder$ESInnerSubclass.$classInnerClassInitOrder$ESInnerSubclass_ =
-    null;
+$Util.$setClassMetadata(
+    InnerClassInitOrder$ESInnerSubclass,
+    'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESInnerSubclass');
 
 
 

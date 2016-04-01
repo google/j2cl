@@ -97,31 +97,6 @@ class MultipleNestings$InnerClass1 extends MultipleNestings$Parent {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    MultipleNestings$InnerClass1.$clinit();
-    if (!MultipleNestings$InnerClass1.$classMultipleNestings$InnerClass1_) {
-      MultipleNestings$InnerClass1
-          .$classMultipleNestings$InnerClass1_ = Class.$createForClass(
-          $Util.$generateId('InnerClass1'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$InnerClass1'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1'));
-    }
-    return MultipleNestings$InnerClass1.$classMultipleNestings$InnerClass1_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return MultipleNestings$InnerClass1.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -142,12 +117,9 @@ class MultipleNestings$InnerClass1 extends MultipleNestings$Parent {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-MultipleNestings$InnerClass1.$classMultipleNestings$InnerClass1_ = null;
+$Util.$setClassMetadata(
+    MultipleNestings$InnerClass1,
+    'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$InnerClass1');
 
 
 

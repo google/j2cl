@@ -66,23 +66,6 @@ class EqualFunction {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    EqualFunction.$clinit();
-    if (!EqualFunction.$classEqualFunction_) {
-      EqualFunction.$classEqualFunction_ = Class.$createForInterface(
-          $Util.$generateId('EqualFunction'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunction'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunction'));
-    }
-    return EqualFunction.$classEqualFunction_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -92,12 +75,9 @@ class EqualFunction {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-EqualFunction.$classEqualFunction_ = null;
+$Util.$setClassMetadataForInterface(
+    EqualFunction,
+    'com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunction');
 
 
 EqualFunction.$markImplementor(/** @type {window.Function} */ (EqualFunction));

@@ -79,33 +79,6 @@ class StaticJsMethodsWithClassNamespace extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    StaticJsMethodsWithClassNamespace.$clinit();
-    if (!StaticJsMethodsWithClassNamespace
-             .$classStaticJsMethodsWithClassNamespace_) {
-      StaticJsMethodsWithClassNamespace
-          .$classStaticJsMethodsWithClassNamespace_ = Class.$createForClass(
-          $Util.$generateId('StaticJsMethodsWithClassNamespace'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace'));
-    }
-    return StaticJsMethodsWithClassNamespace
-        .$classStaticJsMethodsWithClassNamespace_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return StaticJsMethodsWithClassNamespace.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -122,13 +95,9 @@ class StaticJsMethodsWithClassNamespace extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-StaticJsMethodsWithClassNamespace.$classStaticJsMethodsWithClassNamespace_ =
-    null;
+$Util.$setClassMetadata(
+    StaticJsMethodsWithClassNamespace,
+    'com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace');
 
 
 

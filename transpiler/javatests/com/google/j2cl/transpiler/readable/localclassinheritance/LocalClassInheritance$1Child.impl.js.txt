@@ -95,31 +95,6 @@ class LocalClassInheritance$1Child extends LocalClassInheritance$1Parent {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    LocalClassInheritance$1Child.$clinit();
-    if (!LocalClassInheritance$1Child.$classLocalClassInheritance$1Child_) {
-      LocalClassInheritance$1Child
-          .$classLocalClassInheritance$1Child_ = Class.$createForClass(
-          $Util.$generateId('1Child'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance$1Child'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance.1Child'));
-    }
-    return LocalClassInheritance$1Child.$classLocalClassInheritance$1Child_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return LocalClassInheritance$1Child.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -139,12 +114,9 @@ class LocalClassInheritance$1Child extends LocalClassInheritance$1Parent {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-LocalClassInheritance$1Child.$classLocalClassInheritance$1Child_ = null;
+$Util.$setClassMetadata(
+    LocalClassInheritance$1Child,
+    'com.google.j2cl.transpiler.readable.localclassinheritance.LocalClassInheritance$1Child');
 
 
 

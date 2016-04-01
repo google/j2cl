@@ -75,31 +75,6 @@ class JsTypeInnerClassWithNamespace extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    JsTypeInnerClassWithNamespace.$clinit();
-    if (!JsTypeInnerClassWithNamespace.$classJsTypeInnerClassWithNamespace_) {
-      JsTypeInnerClassWithNamespace
-          .$classJsTypeInnerClassWithNamespace_ = Class.$createForClass(
-          $Util.$generateId('JsTypeInnerClassWithNamespace'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace'));
-    }
-    return JsTypeInnerClassWithNamespace.$classJsTypeInnerClassWithNamespace_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return JsTypeInnerClassWithNamespace.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -118,12 +93,9 @@ class JsTypeInnerClassWithNamespace extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-JsTypeInnerClassWithNamespace.$classJsTypeInnerClassWithNamespace_ = null;
+$Util.$setClassMetadata(
+    JsTypeInnerClassWithNamespace,
+    'com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace');
 
 
 

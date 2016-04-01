@@ -62,23 +62,6 @@ class HashFunction {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    HashFunction.$clinit();
-    if (!HashFunction.$classHashFunction_) {
-      HashFunction.$classHashFunction_ = Class.$createForInterface(
-          $Util.$generateId('HashFunction'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction'));
-    }
-    return HashFunction.$classHashFunction_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -88,12 +71,9 @@ class HashFunction {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-HashFunction.$classHashFunction_ = null;
+$Util.$setClassMetadataForInterface(
+    HashFunction,
+    'com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction');
 
 
 HashFunction.$markImplementor(/** @type {window.Function} */ (HashFunction));

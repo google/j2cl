@@ -76,31 +76,6 @@ class TryWithResource$ClosableThing extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    TryWithResource$ClosableThing.$clinit();
-    if (!TryWithResource$ClosableThing.$classTryWithResource$ClosableThing_) {
-      TryWithResource$ClosableThing
-          .$classTryWithResource$ClosableThing_ = Class.$createForClass(
-          $Util.$generateId('ClosableThing'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.trywithresource.TryWithResource$ClosableThing'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.ClosableThing'));
-    }
-    return TryWithResource$ClosableThing.$classTryWithResource$ClosableThing_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return TryWithResource$ClosableThing.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -119,12 +94,9 @@ class TryWithResource$ClosableThing extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-TryWithResource$ClosableThing.$classTryWithResource$ClosableThing_ = null;
+$Util.$setClassMetadata(
+    TryWithResource$ClosableThing,
+    'com.google.j2cl.transpiler.readable.trywithresource.TryWithResource$ClosableThing');
 
 
 AutoCloseable.$markImplementor(TryWithResource$ClosableThing);

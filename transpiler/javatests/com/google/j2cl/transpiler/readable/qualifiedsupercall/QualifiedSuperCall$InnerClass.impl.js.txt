@@ -89,31 +89,6 @@ class QualifiedSuperCall$InnerClass extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    QualifiedSuperCall$InnerClass.$clinit();
-    if (!QualifiedSuperCall$InnerClass.$classQualifiedSuperCall$InnerClass_) {
-      QualifiedSuperCall$InnerClass
-          .$classQualifiedSuperCall$InnerClass_ = Class.$createForClass(
-          $Util.$generateId('InnerClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall$InnerClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall.InnerClass'));
-    }
-    return QualifiedSuperCall$InnerClass.$classQualifiedSuperCall$InnerClass_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return QualifiedSuperCall$InnerClass.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -134,12 +109,9 @@ class QualifiedSuperCall$InnerClass extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-QualifiedSuperCall$InnerClass.$classQualifiedSuperCall$InnerClass_ = null;
+$Util.$setClassMetadata(
+    QualifiedSuperCall$InnerClass,
+    'com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall$InnerClass');
 
 
 

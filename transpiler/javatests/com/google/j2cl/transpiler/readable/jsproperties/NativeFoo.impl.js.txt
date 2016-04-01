@@ -62,30 +62,6 @@ class NativeFoo extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    NativeFoo.$clinit();
-    if (!NativeFoo.$classNativeFoo_) {
-      NativeFoo.$classNativeFoo_ = Class.$createForClass(
-          $Util.$generateId('NativeFoo'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsproperties.NativeFoo'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsproperties.NativeFoo'));
-    }
-    return NativeFoo.$classNativeFoo_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return NativeFoo.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -101,12 +77,8 @@ class NativeFoo extends Object {
   $init__com_google_j2cl_transpiler_readable_jsproperties_NativeFoo() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-NativeFoo.$classNativeFoo_ = null;
+$Util.$setClassMetadata(
+    NativeFoo, 'com.google.j2cl.transpiler.readable.jsproperties.NativeFoo');
 
 
 

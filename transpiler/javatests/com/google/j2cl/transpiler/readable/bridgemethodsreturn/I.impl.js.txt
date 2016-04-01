@@ -66,35 +66,14 @@ class I {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    I.$clinit();
-    if (!I.$classI_) {
-      I.$classI_ = Class.$createForInterface(
-          $Util.$generateId('I'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.bridgemethodsreturn.I'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.bridgemethodsreturn.I'));
-    }
-    return I.$classI_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
   static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-I.$classI_ = null;
+$Util.$setClassMetadataForInterface(
+    I, 'com.google.j2cl.transpiler.readable.bridgemethodsreturn.I');
 
 
 I.$markImplementor(/** @type {window.Function} */ (I));

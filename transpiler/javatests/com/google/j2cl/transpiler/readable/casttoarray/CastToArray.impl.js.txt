@@ -72,30 +72,6 @@ class CastToArray extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    CastToArray.$clinit();
-    if (!CastToArray.$classCastToArray_) {
-      CastToArray.$classCastToArray_ = Class.$createForClass(
-          $Util.$generateId('CastToArray'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.casttoarray.CastToArray'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.casttoarray.CastToArray'));
-    }
-    return CastToArray.$classCastToArray_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return CastToArray.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -112,12 +88,8 @@ class CastToArray extends Object {
   $init__com_google_j2cl_transpiler_readable_casttoarray_CastToArray() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-CastToArray.$classCastToArray_ = null;
+$Util.$setClassMetadata(
+    CastToArray, 'com.google.j2cl.transpiler.readable.casttoarray.CastToArray');
 
 
 

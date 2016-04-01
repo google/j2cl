@@ -64,30 +64,6 @@ class Child extends Varargs {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Child.$clinit();
-    if (!Child.$classChild_) {
-      Child.$classChild_ = Class.$createForClass(
-          $Util.$generateId('Child'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.varargs.Child'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.varargs.Child'));
-    }
-    return Child.$classChild_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Child.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -105,12 +81,8 @@ class Child extends Varargs {
   $init__com_google_j2cl_transpiler_readable_varargs_Child() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Child.$classChild_ = null;
+$Util.$setClassMetadata(
+    Child, 'com.google.j2cl.transpiler.readable.varargs.Child');
 
 
 

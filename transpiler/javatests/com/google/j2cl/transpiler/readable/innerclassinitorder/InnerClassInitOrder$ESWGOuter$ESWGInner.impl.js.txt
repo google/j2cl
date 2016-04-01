@@ -127,33 +127,6 @@ class InnerClassInitOrder$ESWGOuter$ESWGInner extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    InnerClassInitOrder$ESWGOuter$ESWGInner.$clinit();
-    if (!InnerClassInitOrder$ESWGOuter$ESWGInner
-             .$classInnerClassInitOrder$ESWGOuter$ESWGInner_) {
-      InnerClassInitOrder$ESWGOuter$ESWGInner
-          .$classInnerClassInitOrder$ESWGOuter$ESWGInner_ = Class.$createForClass(
-          $Util.$generateId('ESWGInner'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter$ESWGInner'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner'));
-    }
-    return InnerClassInitOrder$ESWGOuter$ESWGInner
-        .$classInnerClassInitOrder$ESWGOuter$ESWGInner_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return InnerClassInitOrder$ESWGOuter$ESWGInner.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -173,13 +146,9 @@ class InnerClassInitOrder$ESWGOuter$ESWGInner extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-InnerClassInitOrder$ESWGOuter$ESWGInner
-    .$classInnerClassInitOrder$ESWGOuter$ESWGInner_ = null;
+$Util.$setClassMetadata(
+    InnerClassInitOrder$ESWGOuter$ESWGInner,
+    'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter$ESWGInner');
 
 
 

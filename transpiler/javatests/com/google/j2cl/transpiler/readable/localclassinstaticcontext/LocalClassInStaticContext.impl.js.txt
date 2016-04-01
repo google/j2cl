@@ -79,31 +79,6 @@ class LocalClassInStaticContext extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    LocalClassInStaticContext.$clinit();
-    if (!LocalClassInStaticContext.$classLocalClassInStaticContext_) {
-      LocalClassInStaticContext
-          .$classLocalClassInStaticContext_ = Class.$createForClass(
-          $Util.$generateId('LocalClassInStaticContext'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext'));
-    }
-    return LocalClassInStaticContext.$classLocalClassInStaticContext_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return LocalClassInStaticContext.$getClass(); }
-
-  /**
    * A static field getter.
    * @return {*}
    * @public
@@ -164,6 +139,10 @@ class LocalClassInStaticContext extends Object {
   }
 };
 
+$Util.$setClassMetadata(
+    LocalClassInStaticContext,
+    'com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext');
+
 
 /**
  * @private {*}
@@ -171,13 +150,6 @@ class LocalClassInStaticContext extends Object {
 LocalClassInStaticContext
     .$f_f__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext =
     null;
-
-
-/**
- * The class literal field.
- * @private {Class}
- */
-LocalClassInStaticContext.$classLocalClassInStaticContext_ = null;
 
 
 

@@ -22,6 +22,8 @@ public abstract class Class<T> implements java.io.Serializable {
 
   public abstract boolean desiredAssertionStatus();
 
+  // J2CL doesn't follow JLS strictly here and provides an approximation that is good enough for
+  // debugging and testing uses.
   public abstract String getCanonicalName();
 
   public abstract Class<?> getComponentType();
@@ -30,6 +32,8 @@ public abstract class Class<T> implements java.io.Serializable {
 
   public abstract String getName();
 
+  // J2CL doesn't follow JLS strictly here and provides an approximation that is good enough for
+  // debugging and testing uses.
   public abstract String getSimpleName();
 
   public abstract Class<? super T> getSuperclass();

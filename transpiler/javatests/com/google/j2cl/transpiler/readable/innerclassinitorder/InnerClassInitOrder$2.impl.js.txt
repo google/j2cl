@@ -83,31 +83,6 @@ class InnerClassInitOrder$2 extends InnerClassInitOrder$Outer$OuterIsNotSuper {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    InnerClassInitOrder$2.$clinit();
-    if (!InnerClassInitOrder$2.$classInnerClassInitOrder$2_) {
-      InnerClassInitOrder$2
-          .$classInnerClassInitOrder$2_ = Class.$createForClass(
-          $Util.$generateId('2'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$2'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.2'));
-    }
-    return InnerClassInitOrder$2.$classInnerClassInitOrder$2_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return InnerClassInitOrder$2.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -128,12 +103,9 @@ class InnerClassInitOrder$2 extends InnerClassInitOrder$Outer$OuterIsNotSuper {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-InnerClassInitOrder$2.$classInnerClassInitOrder$2_ = null;
+$Util.$setClassMetadata(
+    InnerClassInitOrder$2,
+    'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$2');
 
 
 

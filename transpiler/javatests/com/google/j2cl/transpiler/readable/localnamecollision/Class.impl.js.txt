@@ -72,30 +72,6 @@ class Class extends Object {
   }
 
   /**
-   * @return {java_lang_Class}
-   * @public
-   */
-  static $getClass() {
-    Class.$clinit();
-    if (!Class.$classClass_) {
-      Class.$classClass_ = java_lang_Class.$createForClass(
-          $Util.$generateId('Class'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.localnamecollision.Class'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.localnamecollision.Class'));
-    }
-    return Class.$classClass_;
-  }
-
-  /**
-   * @override
-   * @return {java_lang_Class}
-   * @public
-   */
-  m_getClass() { return Class.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -112,12 +88,8 @@ class Class extends Object {
   $init__com_google_j2cl_transpiler_readable_localnamecollision_Class() {}
 };
 
-
-/**
- * The class literal field.
- * @private {java_lang_Class}
- */
-Class.$classClass_ = null;
+$Util.$setClassMetadata(
+    Class, 'com.google.j2cl.transpiler.readable.localnamecollision.Class');
 
 
 

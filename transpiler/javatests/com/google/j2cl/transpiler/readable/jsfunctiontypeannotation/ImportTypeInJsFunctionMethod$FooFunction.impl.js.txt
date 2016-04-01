@@ -67,26 +67,6 @@ class ImportTypeInJsFunctionMethod$FooFunction {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    ImportTypeInJsFunctionMethod$FooFunction.$clinit();
-    if (!ImportTypeInJsFunctionMethod$FooFunction
-             .$classImportTypeInJsFunctionMethod$FooFunction_) {
-      ImportTypeInJsFunctionMethod$FooFunction
-          .$classImportTypeInJsFunctionMethod$FooFunction_ = Class.$createForInterface(
-          $Util.$generateId('FooFunction'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.ImportTypeInJsFunctionMethod$FooFunction'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.ImportTypeInJsFunctionMethod.FooFunction'));
-    }
-    return ImportTypeInJsFunctionMethod$FooFunction
-        .$classImportTypeInJsFunctionMethod$FooFunction_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -100,13 +80,9 @@ class ImportTypeInJsFunctionMethod$FooFunction {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-ImportTypeInJsFunctionMethod$FooFunction
-    .$classImportTypeInJsFunctionMethod$FooFunction_ = null;
+$Util.$setClassMetadataForInterface(
+    ImportTypeInJsFunctionMethod$FooFunction,
+    'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.ImportTypeInJsFunctionMethod$FooFunction');
 
 
 ImportTypeInJsFunctionMethod$FooFunction.$markImplementor(

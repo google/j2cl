@@ -69,30 +69,6 @@ class CastOnArrayInit$Foo extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    CastOnArrayInit$Foo.$clinit();
-    if (!CastOnArrayInit$Foo.$classCastOnArrayInit$Foo_) {
-      CastOnArrayInit$Foo.$classCastOnArrayInit$Foo_ = Class.$createForClass(
-          $Util.$generateId('Foo'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit$Foo'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.Foo'));
-    }
-    return CastOnArrayInit$Foo.$classCastOnArrayInit$Foo_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return CastOnArrayInit$Foo.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -111,12 +87,9 @@ class CastOnArrayInit$Foo extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-CastOnArrayInit$Foo.$classCastOnArrayInit$Foo_ = null;
+$Util.$setClassMetadata(
+    CastOnArrayInit$Foo,
+    'com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit$Foo');
 
 
 

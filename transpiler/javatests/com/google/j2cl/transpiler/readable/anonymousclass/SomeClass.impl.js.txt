@@ -74,30 +74,6 @@ class SomeClass extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    SomeClass.$clinit();
-    if (!SomeClass.$classSomeClass_) {
-      SomeClass.$classSomeClass_ = Class.$createForClass(
-          $Util.$generateId('SomeClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.anonymousclass.SomeClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.anonymousclass.SomeClass'));
-    }
-    return SomeClass.$classSomeClass_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return SomeClass.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -115,12 +91,8 @@ class SomeClass extends Object {
   $init__com_google_j2cl_transpiler_readable_anonymousclass_SomeClass() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-SomeClass.$classSomeClass_ = null;
+$Util.$setClassMetadata(
+    SomeClass, 'com.google.j2cl.transpiler.readable.anonymousclass.SomeClass');
 
 
 

@@ -97,30 +97,6 @@ class InnerClasses$C extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    InnerClasses$C.$clinit();
-    if (!InnerClasses$C.$classInnerClasses$C_) {
-      InnerClasses$C.$classInnerClasses$C_ = Class.$createForClass(
-          $Util.$generateId('C'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses$C'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses.C'));
-    }
-    return InnerClasses$C.$classInnerClasses$C_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return InnerClasses$C.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -139,12 +115,9 @@ class InnerClasses$C extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-InnerClasses$C.$classInnerClasses$C_ = null;
+$Util.$setClassMetadata(
+    InnerClasses$C,
+    'com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses$C');
 
 
 InnerClasses$A.$markImplementor(InnerClasses$C);

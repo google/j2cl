@@ -142,33 +142,6 @@ class LocalClassWithConstructor$1LocalClass extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    LocalClassWithConstructor$1LocalClass.$clinit();
-    if (!LocalClassWithConstructor$1LocalClass
-             .$classLocalClassWithConstructor$1LocalClass_) {
-      LocalClassWithConstructor$1LocalClass
-          .$classLocalClassWithConstructor$1LocalClass_ = Class.$createForClass(
-          $Util.$generateId('1LocalClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor$1LocalClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor.1LocalClass'));
-    }
-    return LocalClassWithConstructor$1LocalClass
-        .$classLocalClassWithConstructor$1LocalClass_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return LocalClassWithConstructor$1LocalClass.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -188,13 +161,9 @@ class LocalClassWithConstructor$1LocalClass extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-LocalClassWithConstructor$1LocalClass
-    .$classLocalClassWithConstructor$1LocalClass_ = null;
+$Util.$setClassMetadata(
+    LocalClassWithConstructor$1LocalClass,
+    'com.google.j2cl.transpiler.readable.localclasswithconstructor.LocalClassWithConstructor$1LocalClass');
 
 
 

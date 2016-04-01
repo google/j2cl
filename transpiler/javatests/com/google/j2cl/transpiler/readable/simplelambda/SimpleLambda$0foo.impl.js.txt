@@ -97,30 +97,6 @@ class SimpleLambda$0foo extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    SimpleLambda$0foo.$clinit();
-    if (!SimpleLambda$0foo.$classSimpleLambda$0foo_) {
-      SimpleLambda$0foo.$classSimpleLambda$0foo_ = Class.$createForClass(
-          $Util.$generateId('0foo'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$0foo'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda.0foo'));
-    }
-    return SimpleLambda$0foo.$classSimpleLambda$0foo_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return SimpleLambda$0foo.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -139,12 +115,9 @@ class SimpleLambda$0foo extends Object {
   $init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda$0foo() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-SimpleLambda$0foo.$classSimpleLambda$0foo_ = null;
+$Util.$setClassMetadata(
+    SimpleLambda$0foo,
+    'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$0foo');
 
 
 MyInterface.$markImplementor(SimpleLambda$0foo);

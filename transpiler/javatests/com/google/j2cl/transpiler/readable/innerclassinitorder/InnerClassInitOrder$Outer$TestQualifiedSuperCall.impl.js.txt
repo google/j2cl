@@ -70,35 +70,6 @@ class InnerClassInitOrder$Outer$TestQualifiedSuperCall extends
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    InnerClassInitOrder$Outer$TestQualifiedSuperCall.$clinit();
-    if (!InnerClassInitOrder$Outer$TestQualifiedSuperCall
-             .$classInnerClassInitOrder$Outer$TestQualifiedSuperCall_) {
-      InnerClassInitOrder$Outer$TestQualifiedSuperCall
-          .$classInnerClassInitOrder$Outer$TestQualifiedSuperCall_ = Class.$createForClass(
-          $Util.$generateId('TestQualifiedSuperCall'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall'));
-    }
-    return InnerClassInitOrder$Outer$TestQualifiedSuperCall
-        .$classInnerClassInitOrder$Outer$TestQualifiedSuperCall_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() {
-    return InnerClassInitOrder$Outer$TestQualifiedSuperCall.$getClass();
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -119,13 +90,9 @@ class InnerClassInitOrder$Outer$TestQualifiedSuperCall extends
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-InnerClassInitOrder$Outer$TestQualifiedSuperCall
-    .$classInnerClassInitOrder$Outer$TestQualifiedSuperCall_ = null;
+$Util.$setClassMetadata(
+    InnerClassInitOrder$Outer$TestQualifiedSuperCall,
+    'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$TestQualifiedSuperCall');
 
 
 

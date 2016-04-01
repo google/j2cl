@@ -57,35 +57,14 @@ class Function {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Function.$clinit();
-    if (!Function.$classFunction_) {
-      Function.$classFunction_ = Class.$createForInterface(
-          $Util.$generateId('Function'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.functiontype.Function'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.functiontype.Function'));
-    }
-    return Function.$classFunction_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
   static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Function.$classFunction_ = null;
+$Util.$setClassMetadataForInterface(
+    Function, 'com.google.j2cl.transpiler.readable.functiontype.Function');
 
 
 Function.$markImplementor(/** @type {window.Function} */ (Function));

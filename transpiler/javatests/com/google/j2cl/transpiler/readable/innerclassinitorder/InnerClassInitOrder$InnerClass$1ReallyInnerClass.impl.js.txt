@@ -93,35 +93,6 @@ class InnerClassInitOrder$InnerClass$1ReallyInnerClass extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    InnerClassInitOrder$InnerClass$1ReallyInnerClass.$clinit();
-    if (!InnerClassInitOrder$InnerClass$1ReallyInnerClass
-             .$classInnerClassInitOrder$InnerClass$1ReallyInnerClass_) {
-      InnerClassInitOrder$InnerClass$1ReallyInnerClass
-          .$classInnerClassInitOrder$InnerClass$1ReallyInnerClass_ = Class.$createForClass(
-          $Util.$generateId('1ReallyInnerClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$InnerClass$1ReallyInnerClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass'));
-    }
-    return InnerClassInitOrder$InnerClass$1ReallyInnerClass
-        .$classInnerClassInitOrder$InnerClass$1ReallyInnerClass_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() {
-    return InnerClassInitOrder$InnerClass$1ReallyInnerClass.$getClass();
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -144,13 +115,9 @@ class InnerClassInitOrder$InnerClass$1ReallyInnerClass extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-InnerClassInitOrder$InnerClass$1ReallyInnerClass
-    .$classInnerClassInitOrder$InnerClass$1ReallyInnerClass_ = null;
+$Util.$setClassMetadata(
+    InnerClassInitOrder$InnerClass$1ReallyInnerClass,
+    'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$InnerClass$1ReallyInnerClass');
 
 
 

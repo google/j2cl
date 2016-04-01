@@ -69,30 +69,6 @@ class EqualFunctions$Foo extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    EqualFunctions$Foo.$clinit();
-    if (!EqualFunctions$Foo.$classEqualFunctions$Foo_) {
-      EqualFunctions$Foo.$classEqualFunctions$Foo_ = Class.$createForClass(
-          $Util.$generateId('Foo'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$Foo'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions.Foo'));
-    }
-    return EqualFunctions$Foo.$classEqualFunctions$Foo_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return EqualFunctions$Foo.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -111,12 +87,9 @@ class EqualFunctions$Foo extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-EqualFunctions$Foo.$classEqualFunctions$Foo_ = null;
+$Util.$setClassMetadata(
+    EqualFunctions$Foo,
+    'com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$Foo');
 
 
 

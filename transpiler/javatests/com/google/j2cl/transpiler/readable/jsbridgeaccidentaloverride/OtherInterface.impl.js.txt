@@ -66,23 +66,6 @@ class OtherInterface {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    OtherInterface.$clinit();
-    if (!OtherInterface.$classOtherInterface_) {
-      OtherInterface.$classOtherInterface_ = Class.$createForInterface(
-          $Util.$generateId('OtherInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface'));
-    }
-    return OtherInterface.$classOtherInterface_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -92,12 +75,9 @@ class OtherInterface {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-OtherInterface.$classOtherInterface_ = null;
+$Util.$setClassMetadataForInterface(
+    OtherInterface,
+    'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface');
 
 
 OtherInterface.$markImplementor(

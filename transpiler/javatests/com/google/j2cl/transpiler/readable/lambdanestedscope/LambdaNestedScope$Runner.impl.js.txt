@@ -66,24 +66,6 @@ class LambdaNestedScope$Runner {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    LambdaNestedScope$Runner.$clinit();
-    if (!LambdaNestedScope$Runner.$classLambdaNestedScope$Runner_) {
-      LambdaNestedScope$Runner
-          .$classLambdaNestedScope$Runner_ = Class.$createForInterface(
-          $Util.$generateId('Runner'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope$Runner'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope.Runner'));
-    }
-    return LambdaNestedScope$Runner.$classLambdaNestedScope$Runner_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -95,12 +77,9 @@ class LambdaNestedScope$Runner {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-LambdaNestedScope$Runner.$classLambdaNestedScope$Runner_ = null;
+$Util.$setClassMetadataForInterface(
+    LambdaNestedScope$Runner,
+    'com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope$Runner');
 
 
 LambdaNestedScope$Runner.$markImplementor(

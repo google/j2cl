@@ -74,31 +74,6 @@ class ImportTypeInJsFunctionMethod extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    ImportTypeInJsFunctionMethod.$clinit();
-    if (!ImportTypeInJsFunctionMethod.$classImportTypeInJsFunctionMethod_) {
-      ImportTypeInJsFunctionMethod
-          .$classImportTypeInJsFunctionMethod_ = Class.$createForClass(
-          $Util.$generateId('ImportTypeInJsFunctionMethod'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.ImportTypeInJsFunctionMethod'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.ImportTypeInJsFunctionMethod'));
-    }
-    return ImportTypeInJsFunctionMethod.$classImportTypeInJsFunctionMethod_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return ImportTypeInJsFunctionMethod.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -120,12 +95,9 @@ class ImportTypeInJsFunctionMethod extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-ImportTypeInJsFunctionMethod.$classImportTypeInJsFunctionMethod_ = null;
+$Util.$setClassMetadata(
+    ImportTypeInJsFunctionMethod,
+    'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.ImportTypeInJsFunctionMethod');
 
 
 

@@ -79,30 +79,6 @@ class LambdaNestedScope$1 extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    LambdaNestedScope$1.$clinit();
-    if (!LambdaNestedScope$1.$classLambdaNestedScope$1_) {
-      LambdaNestedScope$1.$classLambdaNestedScope$1_ = Class.$createForClass(
-          $Util.$generateId('1'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope$1'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope.1'));
-    }
-    return LambdaNestedScope$1.$classLambdaNestedScope$1_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return LambdaNestedScope$1.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -121,12 +97,9 @@ class LambdaNestedScope$1 extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-LambdaNestedScope$1.$classLambdaNestedScope$1_ = null;
+$Util.$setClassMetadata(
+    LambdaNestedScope$1,
+    'com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope$1');
 
 
 

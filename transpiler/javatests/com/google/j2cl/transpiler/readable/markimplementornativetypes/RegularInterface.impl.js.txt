@@ -57,35 +57,15 @@ class RegularInterface {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    RegularInterface.$clinit();
-    if (!RegularInterface.$classRegularInterface_) {
-      RegularInterface.$classRegularInterface_ = Class.$createForInterface(
-          $Util.$generateId('RegularInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.markimplementornativetypes.RegularInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.markimplementornativetypes.RegularInterface'));
-    }
-    return RegularInterface.$classRegularInterface_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
   static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-RegularInterface.$classRegularInterface_ = null;
+$Util.$setClassMetadataForInterface(
+    RegularInterface,
+    'com.google.j2cl.transpiler.readable.markimplementornativetypes.RegularInterface');
 
 
 RegularInterface.$markImplementor(

@@ -102,30 +102,6 @@ class JsConstructorClass$A extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    JsConstructorClass$A.$clinit();
-    if (!JsConstructorClass$A.$classJsConstructorClass$A_) {
-      JsConstructorClass$A.$classJsConstructorClass$A_ = Class.$createForClass(
-          $Util.$generateId('A'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$A'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.A'));
-    }
-    return JsConstructorClass$A.$classJsConstructorClass$A_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return JsConstructorClass$A.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -147,12 +123,9 @@ class JsConstructorClass$A extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-JsConstructorClass$A.$classJsConstructorClass$A_ = null;
+$Util.$setClassMetadata(
+    JsConstructorClass$A,
+    'com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass$A');
 
 
 

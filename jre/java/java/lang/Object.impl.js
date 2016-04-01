@@ -45,7 +45,7 @@ class Object {
    * @return {Class}
    * @public
    */
-  m_getClass() { return Object.$getClass(); }
+  m_getClass() { return Class.$get(this.constructor); }
 
   /**
    * @return {number}
@@ -100,21 +100,6 @@ class Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Object.$clinit();
-    if (!Object.$classObject_) {
-      Object.$classObject_ = Class.$createForClass(
-        $Util.$generateId('Object'),
-        $Util.$generateId('java.lang.Object'),
-        $Util.$generateId('java.lang.Object'));
-    }
-    return Object.$classObject_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @protected
    */
@@ -124,11 +109,7 @@ class Object {
 };
 
 
-/**
- * The class literal field.
- * @private {Class}
- */
-Object.$classObject_ = null;
+$Util.$setClassMetadata(Object, 'java.lang.Object');
 
 
 /**

@@ -76,30 +76,6 @@ class Task extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Task.$clinit();
-    if (!Task.$classTask_) {
-      Task.$classTask_ = Class.$createForClass(
-          $Util.$generateId('Task'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplebridgemethods.Task'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplebridgemethods.Task'));
-    }
-    return Task.$classTask_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Task.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -115,12 +91,8 @@ class Task extends Object {
   $init__com_google_j2cl_transpiler_readable_simplebridgemethods_Task() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Task.$classTask_ = null;
+$Util.$setClassMetadata(
+    Task, 'com.google.j2cl.transpiler.readable.simplebridgemethods.Task');
 
 
 Callable.$markImplementor(Task);

@@ -157,30 +157,6 @@ class ImplicitParenthesis extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    ImplicitParenthesis.$clinit();
-    if (!ImplicitParenthesis.$classImplicitParenthesis_) {
-      ImplicitParenthesis.$classImplicitParenthesis_ = Class.$createForClass(
-          $Util.$generateId('ImplicitParenthesis'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis'));
-    }
-    return ImplicitParenthesis.$classImplicitParenthesis_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return ImplicitParenthesis.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -202,12 +178,9 @@ class ImplicitParenthesis extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-ImplicitParenthesis.$classImplicitParenthesis_ = null;
+$Util.$setClassMetadata(
+    ImplicitParenthesis,
+    'com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis');
 
 
 

@@ -79,30 +79,6 @@ class Main$Foo extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Main$Foo.$clinit();
-    if (!Main$Foo.$classMain$Foo_) {
-      Main$Foo.$classMain$Foo_ = Class.$createForClass(
-          $Util.$generateId('Foo'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Foo'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Foo'));
-    }
-    return Main$Foo.$classMain$Foo_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Main$Foo.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -120,12 +96,9 @@ class Main$Foo extends Object {
   $init__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Foo() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Main$Foo.$classMain$Foo_ = null;
+$Util.$setClassMetadata(
+    Main$Foo,
+    'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main$Foo');
 
 
 

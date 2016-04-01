@@ -96,30 +96,6 @@ class LambdaNoReturn$0run extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    LambdaNoReturn$0run.$clinit();
-    if (!LambdaNoReturn$0run.$classLambdaNoReturn$0run_) {
-      LambdaNoReturn$0run.$classLambdaNoReturn$0run_ = Class.$createForClass(
-          $Util.$generateId('0run'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn$0run'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn.0run'));
-    }
-    return LambdaNoReturn$0run.$classLambdaNoReturn$0run_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return LambdaNoReturn$0run.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -138,12 +114,9 @@ class LambdaNoReturn$0run extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-LambdaNoReturn$0run.$classLambdaNoReturn$0run_ = null;
+$Util.$setClassMetadata(
+    LambdaNoReturn$0run,
+    'com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn$0run');
 
 
 LambdaNoReturn$Runner.$markImplementor(LambdaNoReturn$0run);

@@ -63,30 +63,6 @@ class JsTypeWithNamespace extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    JsTypeWithNamespace.$clinit();
-    if (!JsTypeWithNamespace.$classJsTypeWithNamespace_) {
-      JsTypeWithNamespace.$classJsTypeWithNamespace_ = Class.$createForClass(
-          $Util.$generateId('JsTypeWithNamespace'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jstypewithnamespace.JsTypeWithNamespace'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jstypewithnamespace.JsTypeWithNamespace'));
-    }
-    return JsTypeWithNamespace.$classJsTypeWithNamespace_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return JsTypeWithNamespace.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -103,12 +79,9 @@ class JsTypeWithNamespace extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-JsTypeWithNamespace.$classJsTypeWithNamespace_ = null;
+$Util.$setClassMetadata(
+    JsTypeWithNamespace,
+    'com.google.j2cl.transpiler.readable.jstypewithnamespace.JsTypeWithNamespace');
 
 
 

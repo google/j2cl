@@ -86,30 +86,6 @@ class IfStatement extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    IfStatement.$clinit();
-    if (!IfStatement.$classIfStatement_) {
-      IfStatement.$classIfStatement_ = Class.$createForClass(
-          $Util.$generateId('IfStatement'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.ifstatement.IfStatement'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.ifstatement.IfStatement'));
-    }
-    return IfStatement.$classIfStatement_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return IfStatement.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -127,12 +103,8 @@ class IfStatement extends Object {
   $init__com_google_j2cl_transpiler_readable_ifstatement_IfStatement() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-IfStatement.$classIfStatement_ = null;
+$Util.$setClassMetadata(
+    IfStatement, 'com.google.j2cl.transpiler.readable.ifstatement.IfStatement');
 
 
 

@@ -70,26 +70,6 @@ class MultipleAbstractParents$IStringList {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    MultipleAbstractParents$IStringList.$clinit();
-    if (!MultipleAbstractParents$IStringList
-             .$classMultipleAbstractParents$IStringList_) {
-      MultipleAbstractParents$IStringList
-          .$classMultipleAbstractParents$IStringList_ = Class.$createForInterface(
-          $Util.$generateId('IStringList'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$IStringList'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList'));
-    }
-    return MultipleAbstractParents$IStringList
-        .$classMultipleAbstractParents$IStringList_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -101,13 +81,9 @@ class MultipleAbstractParents$IStringList {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-MultipleAbstractParents$IStringList.$classMultipleAbstractParents$IStringList_ =
-    null;
+$Util.$setClassMetadataForInterface(
+    MultipleAbstractParents$IStringList,
+    'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$IStringList');
 
 
 MultipleAbstractParents$IStringList.$markImplementor(

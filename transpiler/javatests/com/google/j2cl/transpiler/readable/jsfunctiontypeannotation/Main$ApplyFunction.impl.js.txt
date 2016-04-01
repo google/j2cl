@@ -66,23 +66,6 @@ class Main$ApplyFunction {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Main$ApplyFunction.$clinit();
-    if (!Main$ApplyFunction.$classMain$ApplyFunction_) {
-      Main$ApplyFunction.$classMain$ApplyFunction_ = Class.$createForInterface(
-          $Util.$generateId('ApplyFunction'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main$ApplyFunction'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.ApplyFunction'));
-    }
-    return Main$ApplyFunction.$classMain$ApplyFunction_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -93,12 +76,9 @@ class Main$ApplyFunction {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Main$ApplyFunction.$classMain$ApplyFunction_ = null;
+$Util.$setClassMetadataForInterface(
+    Main$ApplyFunction,
+    'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main$ApplyFunction');
 
 
 Main$ApplyFunction.$markImplementor(

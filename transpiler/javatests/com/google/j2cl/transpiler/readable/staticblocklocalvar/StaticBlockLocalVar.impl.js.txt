@@ -65,30 +65,6 @@ class StaticBlockLocalVar extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    StaticBlockLocalVar.$clinit();
-    if (!StaticBlockLocalVar.$classStaticBlockLocalVar_) {
-      StaticBlockLocalVar.$classStaticBlockLocalVar_ = Class.$createForClass(
-          $Util.$generateId('StaticBlockLocalVar'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.staticblocklocalvar.StaticBlockLocalVar'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.staticblocklocalvar.StaticBlockLocalVar'));
-    }
-    return StaticBlockLocalVar.$classStaticBlockLocalVar_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return StaticBlockLocalVar.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -109,12 +85,9 @@ class StaticBlockLocalVar extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-StaticBlockLocalVar.$classStaticBlockLocalVar_ = null;
+$Util.$setClassMetadata(
+    StaticBlockLocalVar,
+    'com.google.j2cl.transpiler.readable.staticblocklocalvar.StaticBlockLocalVar');
 
 
 

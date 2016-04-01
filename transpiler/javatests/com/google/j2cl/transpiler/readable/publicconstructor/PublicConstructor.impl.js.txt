@@ -62,30 +62,6 @@ class PublicConstructor extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    PublicConstructor.$clinit();
-    if (!PublicConstructor.$classPublicConstructor_) {
-      PublicConstructor.$classPublicConstructor_ = Class.$createForClass(
-          $Util.$generateId('PublicConstructor'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructor'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructor'));
-    }
-    return PublicConstructor.$classPublicConstructor_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return PublicConstructor.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -102,12 +78,9 @@ class PublicConstructor extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-PublicConstructor.$classPublicConstructor_ = null;
+$Util.$setClassMetadata(
+    PublicConstructor,
+    'com.google.j2cl.transpiler.readable.publicconstructor.PublicConstructor');
 
 
 

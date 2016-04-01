@@ -73,30 +73,6 @@ class SubParent extends Parent {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    SubParent.$clinit();
-    if (!SubParent.$classSubParent_) {
-      SubParent.$classSubParent_ = Class.$createForClass(
-          $Util.$generateId('SubParent'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent'));
-    }
-    return SubParent.$classSubParent_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return SubParent.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -114,12 +90,9 @@ class SubParent extends Parent {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-SubParent.$classSubParent_ = null;
+$Util.$setClassMetadata(
+    SubParent,
+    'com.google.j2cl.transpiler.readable.packageprivatemethods.package2.SubParent');
 
 
 

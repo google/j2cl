@@ -86,30 +86,6 @@ class SimpleTryCatchThrow extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    SimpleTryCatchThrow.$clinit();
-    if (!SimpleTryCatchThrow.$classSimpleTryCatchThrow_) {
-      SimpleTryCatchThrow.$classSimpleTryCatchThrow_ = Class.$createForClass(
-          $Util.$generateId('SimpleTryCatchThrow'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow'));
-    }
-    return SimpleTryCatchThrow.$classSimpleTryCatchThrow_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return SimpleTryCatchThrow.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -132,12 +108,9 @@ class SimpleTryCatchThrow extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-SimpleTryCatchThrow.$classSimpleTryCatchThrow_ = null;
+$Util.$setClassMetadata(
+    SimpleTryCatchThrow,
+    'com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow');
 
 
 

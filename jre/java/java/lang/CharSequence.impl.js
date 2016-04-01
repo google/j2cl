@@ -6,7 +6,6 @@ goog.module('gen.java.lang.CharSequence$impl');
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let String = goog.forwardDeclare('gen.java.lang.String$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
@@ -87,36 +86,17 @@ class CharSequence {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    CharSequence.$clinit();
-    if (!CharSequence.$classCharSequence_) {
-      CharSequence.$classCharSequence_ = Class.$createForInterface(
-          $Util.$generateId('CharSequence'),
-          $Util.$generateId('java.lang.CharSequence'),
-          $Util.$generateId('java.lang.CharSequence'));
-    }
-    return CharSequence.$classCharSequence_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @protected
    */
   static $clinit() {
-    Class = goog.module.get('gen.java.lang.Class$impl');
     String = goog.module.get('gen.java.lang.String$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-  }};
+  }
+};
 
 
-/**
- * The class literal field.
- * @private {Class}
- */
-CharSequence.$classCharSequence_ = null;
+$Util.$setClassMetadataForInterface(CharSequence, 'java.lang.CharSequence');
 
 
 CharSequence.$markImplementor(/** @type {Function} */(CharSequence));

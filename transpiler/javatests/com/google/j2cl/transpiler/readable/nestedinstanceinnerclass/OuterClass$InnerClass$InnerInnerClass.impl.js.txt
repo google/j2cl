@@ -91,33 +91,6 @@ class OuterClass$InnerClass$InnerInnerClass extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    OuterClass$InnerClass$InnerInnerClass.$clinit();
-    if (!OuterClass$InnerClass$InnerInnerClass
-             .$classOuterClass$InnerClass$InnerInnerClass_) {
-      OuterClass$InnerClass$InnerInnerClass
-          .$classOuterClass$InnerClass$InnerInnerClass_ = Class.$createForClass(
-          $Util.$generateId('InnerInnerClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$InnerClass$InnerInnerClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass'));
-    }
-    return OuterClass$InnerClass$InnerInnerClass
-        .$classOuterClass$InnerClass$InnerInnerClass_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return OuterClass$InnerClass$InnerInnerClass.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -143,13 +116,9 @@ class OuterClass$InnerClass$InnerInnerClass extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-OuterClass$InnerClass$InnerInnerClass
-    .$classOuterClass$InnerClass$InnerInnerClass_ = null;
+$Util.$setClassMetadata(
+    OuterClass$InnerClass$InnerInnerClass,
+    'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$InnerClass$InnerInnerClass');
 
 
 

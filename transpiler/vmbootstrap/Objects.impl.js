@@ -105,19 +105,19 @@ class Objects {
     // different classes.
     let type = typeof obj;
     if (type == 'number') {
-      return $double.$getClass();
+      return Class.$get($double);
     } else if (type == 'boolean') {
-      return $boolean.$getClass();
+      return Class.$get($boolean);
     } else if (type == 'string') {
-      return String.$getClass();
+      return Class.$get(String);
     } else if (obj instanceof Array) {
       return Arrays.m_getClass__java_lang_Object(obj);
     } else if (obj instanceof Object) {
-      return obj.m_getClass();
+      return Class.$get(obj.constructor);
     } else {
       // Do not need to check existence of 'getClass' since j.l.Object#getClass
       // is final and all native types map to a single special class.
-      return JavaScriptObject.m_getClass__Object(obj);
+      return Class.$get(JavaScriptObject);
     }
   }
 

@@ -70,31 +70,6 @@ class GenericInterfaceGenericImpl extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    GenericInterfaceGenericImpl.$clinit();
-    if (!GenericInterfaceGenericImpl.$classGenericInterfaceGenericImpl_) {
-      GenericInterfaceGenericImpl
-          .$classGenericInterfaceGenericImpl_ = Class.$createForClass(
-          $Util.$generateId('GenericInterfaceGenericImpl'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterfaceGenericImpl'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterfaceGenericImpl'));
-    }
-    return GenericInterfaceGenericImpl.$classGenericInterfaceGenericImpl_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return GenericInterfaceGenericImpl.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -111,12 +86,9 @@ class GenericInterfaceGenericImpl extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-GenericInterfaceGenericImpl.$classGenericInterfaceGenericImpl_ = null;
+$Util.$setClassMetadata(
+    GenericInterfaceGenericImpl,
+    'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterfaceGenericImpl');
 
 
 GenericInterface.$markImplementor(GenericInterfaceGenericImpl);

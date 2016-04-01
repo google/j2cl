@@ -79,30 +79,6 @@ class TreeMap extends Map {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    TreeMap.$clinit();
-    if (!TreeMap.$classTreeMap_) {
-      TreeMap.$classTreeMap_ = Class.$createForClass(
-          $Util.$generateId('TreeMap'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap'));
-    }
-    return TreeMap.$classTreeMap_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return TreeMap.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -120,12 +96,8 @@ class TreeMap extends Map {
   $init__com_google_j2cl_transpiler_readable_nobridgemethods_TreeMap() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-TreeMap.$classTreeMap_ = null;
+$Util.$setClassMetadata(
+    TreeMap, 'com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap');
 
 
 

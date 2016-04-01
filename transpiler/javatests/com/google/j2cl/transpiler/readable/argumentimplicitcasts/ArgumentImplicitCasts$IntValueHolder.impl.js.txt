@@ -80,33 +80,6 @@ class ArgumentImplicitCasts$IntValueHolder extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    ArgumentImplicitCasts$IntValueHolder.$clinit();
-    if (!ArgumentImplicitCasts$IntValueHolder
-             .$classArgumentImplicitCasts$IntValueHolder_) {
-      ArgumentImplicitCasts$IntValueHolder
-          .$classArgumentImplicitCasts$IntValueHolder_ = Class.$createForClass(
-          $Util.$generateId('IntValueHolder'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts$IntValueHolder'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.IntValueHolder'));
-    }
-    return ArgumentImplicitCasts$IntValueHolder
-        .$classArgumentImplicitCasts$IntValueHolder_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return ArgumentImplicitCasts$IntValueHolder.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -126,13 +99,9 @@ class ArgumentImplicitCasts$IntValueHolder extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-ArgumentImplicitCasts$IntValueHolder
-    .$classArgumentImplicitCasts$IntValueHolder_ = null;
+$Util.$setClassMetadata(
+    ArgumentImplicitCasts$IntValueHolder,
+    'com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts$IntValueHolder');
 
 
 

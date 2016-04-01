@@ -76,30 +76,6 @@ class ParentInner extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    ParentInner.$clinit();
-    if (!ParentInner.$classParentInner_) {
-      ParentInner.$classParentInner_ = Class.$createForClass(
-          $Util.$generateId('ParentInner'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinheritance.ParentInner'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinheritance.ParentInner'));
-    }
-    return ParentInner.$classParentInner_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return ParentInner.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -117,12 +93,9 @@ class ParentInner extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-ParentInner.$classParentInner_ = null;
+$Util.$setClassMetadata(
+    ParentInner,
+    'com.google.j2cl.transpiler.readable.innerclassinheritance.ParentInner');
 
 
 

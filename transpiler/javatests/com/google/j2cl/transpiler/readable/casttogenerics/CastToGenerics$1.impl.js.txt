@@ -68,30 +68,6 @@ class CastToGenerics$1 extends CastToGenerics$Foo {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    CastToGenerics$1.$clinit();
-    if (!CastToGenerics$1.$classCastToGenerics$1_) {
-      CastToGenerics$1.$classCastToGenerics$1_ = Class.$createForClass(
-          $Util.$generateId('1'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics$1'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.1'));
-    }
-    return CastToGenerics$1.$classCastToGenerics$1_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return CastToGenerics$1.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -110,12 +86,9 @@ class CastToGenerics$1 extends CastToGenerics$Foo {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-CastToGenerics$1.$classCastToGenerics$1_ = null;
+$Util.$setClassMetadata(
+    CastToGenerics$1,
+    'com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics$1');
 
 
 

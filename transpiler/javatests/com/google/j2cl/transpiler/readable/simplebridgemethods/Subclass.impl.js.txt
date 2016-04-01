@@ -85,30 +85,6 @@ class Subclass extends Superclass {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Subclass.$clinit();
-    if (!Subclass.$classSubclass_) {
-      Subclass.$classSubclass_ = Class.$createForClass(
-          $Util.$generateId('Subclass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass'));
-    }
-    return Subclass.$classSubclass_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Subclass.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -126,12 +102,9 @@ class Subclass extends Superclass {
   $init__com_google_j2cl_transpiler_readable_simplebridgemethods_Subclass() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Subclass.$classSubclass_ = null;
+$Util.$setClassMetadata(
+    Subclass,
+    'com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass');
 
 
 

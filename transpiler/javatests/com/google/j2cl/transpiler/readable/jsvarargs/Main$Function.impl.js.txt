@@ -68,23 +68,6 @@ class Main$Function {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Main$Function.$clinit();
-    if (!Main$Function.$classMain$Function_) {
-      Main$Function.$classMain$Function_ = Class.$createForInterface(
-          $Util.$generateId('Function'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsvarargs.Main$Function'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsvarargs.Main.Function'));
-    }
-    return Main$Function.$classMain$Function_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -98,12 +81,9 @@ class Main$Function {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Main$Function.$classMain$Function_ = null;
+$Util.$setClassMetadataForInterface(
+    Main$Function,
+    'com.google.j2cl.transpiler.readable.jsvarargs.Main$Function');
 
 
 Main$Function.$markImplementor(/** @type {window.Function} */ (Main$Function));

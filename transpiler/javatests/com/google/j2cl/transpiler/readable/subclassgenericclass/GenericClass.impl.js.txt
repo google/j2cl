@@ -66,30 +66,6 @@ class GenericClass extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    GenericClass.$clinit();
-    if (!GenericClass.$classGenericClass_) {
-      GenericClass.$classGenericClass_ = Class.$createForClass(
-          $Util.$generateId('GenericClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass'));
-    }
-    return GenericClass.$classGenericClass_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return GenericClass.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -106,12 +82,9 @@ class GenericClass extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-GenericClass.$classGenericClass_ = null;
+$Util.$setClassMetadata(
+    GenericClass,
+    'com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass');
 
 
 

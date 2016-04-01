@@ -85,35 +85,6 @@ class MultipleAbstractParents$AbstractStringList extends
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    MultipleAbstractParents$AbstractStringList.$clinit();
-    if (!MultipleAbstractParents$AbstractStringList
-             .$classMultipleAbstractParents$AbstractStringList_) {
-      MultipleAbstractParents$AbstractStringList
-          .$classMultipleAbstractParents$AbstractStringList_ = Class.$createForClass(
-          $Util.$generateId('AbstractStringList'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractStringList'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractStringList'));
-    }
-    return MultipleAbstractParents$AbstractStringList
-        .$classMultipleAbstractParents$AbstractStringList_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() {
-    return MultipleAbstractParents$AbstractStringList.$getClass();
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -135,13 +106,9 @@ class MultipleAbstractParents$AbstractStringList extends
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-MultipleAbstractParents$AbstractStringList
-    .$classMultipleAbstractParents$AbstractStringList_ = null;
+$Util.$setClassMetadata(
+    MultipleAbstractParents$AbstractStringList,
+    'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractStringList');
 
 
 MultipleAbstractParents$IStringList.$markImplementor(

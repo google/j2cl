@@ -100,31 +100,6 @@ class NestedLocalClasses$1InnerClass extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    NestedLocalClasses$1InnerClass.$clinit();
-    if (!NestedLocalClasses$1InnerClass.$classNestedLocalClasses$1InnerClass_) {
-      NestedLocalClasses$1InnerClass
-          .$classNestedLocalClasses$1InnerClass_ = Class.$createForClass(
-          $Util.$generateId('1InnerClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses$1InnerClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses.1InnerClass'));
-    }
-    return NestedLocalClasses$1InnerClass.$classNestedLocalClasses$1InnerClass_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return NestedLocalClasses$1InnerClass.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -146,12 +121,9 @@ class NestedLocalClasses$1InnerClass extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-NestedLocalClasses$1InnerClass.$classNestedLocalClasses$1InnerClass_ = null;
+$Util.$setClassMetadata(
+    NestedLocalClasses$1InnerClass,
+    'com.google.j2cl.transpiler.readable.nestedlocalclasses.NestedLocalClasses$1InnerClass');
 
 
 

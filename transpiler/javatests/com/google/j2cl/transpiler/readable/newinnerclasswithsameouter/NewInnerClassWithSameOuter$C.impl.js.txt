@@ -79,31 +79,6 @@ class NewInnerClassWithSameOuter$C extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    NewInnerClassWithSameOuter$C.$clinit();
-    if (!NewInnerClassWithSameOuter$C.$classNewInnerClassWithSameOuter$C_) {
-      NewInnerClassWithSameOuter$C
-          .$classNewInnerClassWithSameOuter$C_ = Class.$createForClass(
-          $Util.$generateId('C'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter$C'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter.C'));
-    }
-    return NewInnerClassWithSameOuter$C.$classNewInnerClassWithSameOuter$C_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return NewInnerClassWithSameOuter$C.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -122,12 +97,9 @@ class NewInnerClassWithSameOuter$C extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-NewInnerClassWithSameOuter$C.$classNewInnerClassWithSameOuter$C_ = null;
+$Util.$setClassMetadata(
+    NewInnerClassWithSameOuter$C,
+    'com.google.j2cl.transpiler.readable.newinnerclasswithsameouter.NewInnerClassWithSameOuter$C');
 
 
 

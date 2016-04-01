@@ -160,30 +160,6 @@ class LongImplicitCasts extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    LongImplicitCasts.$clinit();
-    if (!LongImplicitCasts.$classLongImplicitCasts_) {
-      LongImplicitCasts.$classLongImplicitCasts_ = Class.$createForClass(
-          $Util.$generateId('LongImplicitCasts'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts'));
-    }
-    return LongImplicitCasts.$classLongImplicitCasts_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return LongImplicitCasts.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -210,12 +186,9 @@ class LongImplicitCasts extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-LongImplicitCasts.$classLongImplicitCasts_ = null;
+$Util.$setClassMetadata(
+    LongImplicitCasts,
+    'com.google.j2cl.transpiler.readable.longimplicitcasts.LongImplicitCasts');
 
 
 

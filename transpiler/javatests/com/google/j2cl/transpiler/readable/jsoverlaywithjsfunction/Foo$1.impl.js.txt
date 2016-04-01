@@ -108,30 +108,6 @@ class Foo$1 extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Foo$1.$clinit();
-    if (!Foo$1.$classFoo$1_) {
-      Foo$1.$classFoo$1_ = Class.$createForClass(
-          $Util.$generateId('1'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo$1'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo.1'));
-    }
-    return Foo$1.$classFoo$1_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Foo$1.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -148,12 +124,8 @@ class Foo$1 extends Object {
   $init__com_google_j2cl_transpiler_readable_jsoverlaywithjsfunction_Foo$1() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Foo$1.$classFoo$1_ = null;
+$Util.$setClassMetadata(
+    Foo$1, 'com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo$1');
 
 
 Foo$Intf.$markImplementor(Foo$1);

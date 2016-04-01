@@ -89,30 +89,6 @@ class B extends A {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    B.$clinit();
-    if (!B.$classB_) {
-      B.$classB_ = Class.$createForClass(
-          $Util.$generateId('B'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.bridgemethodsreturn.B'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.bridgemethodsreturn.B'));
-    }
-    return B.$classB_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return B.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -132,12 +108,8 @@ class B extends A {
   $init__com_google_j2cl_transpiler_readable_bridgemethodsreturn_B() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-B.$classB_ = null;
+$Util.$setClassMetadata(
+    B, 'com.google.j2cl.transpiler.readable.bridgemethodsreturn.B');
 
 
 I.$markImplementor(B);

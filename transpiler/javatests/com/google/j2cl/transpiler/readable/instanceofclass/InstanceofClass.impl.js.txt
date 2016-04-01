@@ -76,30 +76,6 @@ class InstanceofClass extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    InstanceofClass.$clinit();
-    if (!InstanceofClass.$classInstanceofClass_) {
-      InstanceofClass.$classInstanceofClass_ = Class.$createForClass(
-          $Util.$generateId('InstanceofClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass'));
-    }
-    return InstanceofClass.$classInstanceofClass_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return InstanceofClass.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -118,12 +94,9 @@ class InstanceofClass extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-InstanceofClass.$classInstanceofClass_ = null;
+$Util.$setClassMetadata(
+    InstanceofClass,
+    'com.google.j2cl.transpiler.readable.instanceofclass.InstanceofClass');
 
 
 

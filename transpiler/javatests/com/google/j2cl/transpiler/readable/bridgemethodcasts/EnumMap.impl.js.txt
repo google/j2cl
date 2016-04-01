@@ -91,30 +91,6 @@ class EnumMap extends AbstractMap {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    EnumMap.$clinit();
-    if (!EnumMap.$classEnumMap_) {
-      EnumMap.$classEnumMap_ = Class.$createForClass(
-          $Util.$generateId('EnumMap'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.bridgemethodcasts.EnumMap'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.bridgemethodcasts.EnumMap'));
-    }
-    return EnumMap.$classEnumMap_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return EnumMap.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -133,12 +109,8 @@ class EnumMap extends AbstractMap {
   $init__com_google_j2cl_transpiler_readable_bridgemethodcasts_EnumMap() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-EnumMap.$classEnumMap_ = null;
+$Util.$setClassMetadata(
+    EnumMap, 'com.google.j2cl.transpiler.readable.bridgemethodcasts.EnumMap');
 
 
 

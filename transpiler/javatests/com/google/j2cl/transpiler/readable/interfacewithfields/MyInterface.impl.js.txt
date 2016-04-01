@@ -58,23 +58,6 @@ class MyInterface {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    MyInterface.$clinit();
-    if (!MyInterface.$classMyInterface_) {
-      MyInterface.$classMyInterface_ = Class.$createForInterface(
-          $Util.$generateId('MyInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.interfacewithfields.MyInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.interfacewithfields.MyInterface'));
-    }
-    return MyInterface.$classMyInterface_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -83,6 +66,10 @@ class MyInterface {
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };
+
+$Util.$setClassMetadataForInterface(
+    MyInterface,
+    'com.google.j2cl.transpiler.readable.interfacewithfields.MyInterface');
 
 
 /**
@@ -101,13 +88,6 @@ MyInterface
 MyInterface
     .f_b__com_google_j2cl_transpiler_readable_interfacewithfields_MyInterface =
     2;
-
-
-/**
- * The class literal field.
- * @private {Class}
- */
-MyInterface.$classMyInterface_ = null;
 
 
 MyInterface.$markImplementor(/** @type {window.Function} */ (MyInterface));

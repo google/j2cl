@@ -67,35 +67,14 @@ class Map {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Map.$clinit();
-    if (!Map.$classMap_) {
-      Map.$classMap_ = Class.$createForInterface(
-          $Util.$generateId('Map'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.bridgemethodcasts.Map'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.bridgemethodcasts.Map'));
-    }
-    return Map.$classMap_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
   static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Map.$classMap_ = null;
+$Util.$setClassMetadataForInterface(
+    Map, 'com.google.j2cl.transpiler.readable.bridgemethodcasts.Map');
 
 
 Map.$markImplementor(/** @type {window.Function} */ (Map));

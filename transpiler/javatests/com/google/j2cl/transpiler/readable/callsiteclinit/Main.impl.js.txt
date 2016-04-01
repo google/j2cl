@@ -86,30 +86,6 @@ class Main extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Main.$clinit();
-    if (!Main.$classMain_) {
-      Main.$classMain_ = Class.$createForClass(
-          $Util.$generateId('Main'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.callsiteclinit.Main'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.callsiteclinit.Main'));
-    }
-    return Main.$classMain_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Main.$getClass(); }
-
-  /**
    * A static field getter.
    * @return {?string}
    * @public
@@ -201,6 +177,9 @@ class Main extends Object {
   }
 };
 
+$Util.$setClassMetadata(
+    Main, 'com.google.j2cl.transpiler.readable.callsiteclinit.Main');
+
 
 /**
  * @private {?string}
@@ -214,13 +193,6 @@ Main.$f_staticField__com_google_j2cl_transpiler_readable_callsiteclinit_Main_ =
  */
 Main.$f_staticWithBlock__com_google_j2cl_transpiler_readable_callsiteclinit_Main_ =
     null;
-
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Main.$classMain_ = null;
 
 
 

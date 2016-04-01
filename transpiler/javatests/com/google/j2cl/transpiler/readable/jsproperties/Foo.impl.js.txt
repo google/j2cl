@@ -100,30 +100,6 @@ class Foo extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Foo.$clinit();
-    if (!Foo.$classFoo_) {
-      Foo.$classFoo_ = Class.$createForClass(
-          $Util.$generateId('Foo'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsproperties.Foo'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsproperties.Foo'));
-    }
-    return Foo.$classFoo_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Foo.$getClass(); }
-
-  /**
    * A static field getter.
    * @return {number}
    * @public
@@ -162,18 +138,14 @@ class Foo extends Object {
   $init__com_google_j2cl_transpiler_readable_jsproperties_Foo() {}
 };
 
+$Util.$setClassMetadata(
+    Foo, 'com.google.j2cl.transpiler.readable.jsproperties.Foo');
+
 
 /**
  * @private {number}
  */
 Foo.$f_f__com_google_j2cl_transpiler_readable_jsproperties_Foo_ = 0;
-
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Foo.$classFoo_ = null;
 
 
 

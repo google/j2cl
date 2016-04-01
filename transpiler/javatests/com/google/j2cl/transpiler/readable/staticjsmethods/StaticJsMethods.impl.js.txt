@@ -98,30 +98,6 @@ class StaticJsMethods extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    StaticJsMethods.$clinit();
-    if (!StaticJsMethods.$classStaticJsMethods_) {
-      StaticJsMethods.$classStaticJsMethods_ = Class.$createForClass(
-          $Util.$generateId('StaticJsMethods'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.staticjsmethods.StaticJsMethods'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.staticjsmethods.StaticJsMethods'));
-    }
-    return StaticJsMethods.$classStaticJsMethods_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return StaticJsMethods.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -141,12 +117,9 @@ class StaticJsMethods extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-StaticJsMethods.$classStaticJsMethods_ = null;
+$Util.$setClassMetadata(
+    StaticJsMethods,
+    'com.google.j2cl.transpiler.readable.staticjsmethods.StaticJsMethods');
 
 
 

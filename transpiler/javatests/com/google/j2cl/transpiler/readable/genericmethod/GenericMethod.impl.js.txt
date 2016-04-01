@@ -135,30 +135,6 @@ class GenericMethod extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    GenericMethod.$clinit();
-    if (!GenericMethod.$classGenericMethod_) {
-      GenericMethod.$classGenericMethod_ = Class.$createForClass(
-          $Util.$generateId('GenericMethod'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.genericmethod.GenericMethod'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.genericmethod.GenericMethod'));
-    }
-    return GenericMethod.$classGenericMethod_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return GenericMethod.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -179,12 +155,9 @@ class GenericMethod extends Object {
   $init__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-GenericMethod.$classGenericMethod_ = null;
+$Util.$setClassMetadata(
+    GenericMethod,
+    'com.google.j2cl.transpiler.readable.genericmethod.GenericMethod');
 
 
 

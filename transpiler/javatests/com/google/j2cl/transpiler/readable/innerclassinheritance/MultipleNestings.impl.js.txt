@@ -90,30 +90,6 @@ class MultipleNestings extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    MultipleNestings.$clinit();
-    if (!MultipleNestings.$classMultipleNestings_) {
-      MultipleNestings.$classMultipleNestings_ = Class.$createForClass(
-          $Util.$generateId('MultipleNestings'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings'));
-    }
-    return MultipleNestings.$classMultipleNestings_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return MultipleNestings.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -134,12 +110,9 @@ class MultipleNestings extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-MultipleNestings.$classMultipleNestings_ = null;
+$Util.$setClassMetadata(
+    MultipleNestings,
+    'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings');
 
 
 

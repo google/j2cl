@@ -71,30 +71,6 @@ class Left extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Left.$clinit();
-    if (!Left.$classLeft_) {
-      Left.$classLeft_ = Class.$createForClass(
-          $Util.$generateId('Left'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.circularimportuse.Left'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.circularimportuse.Left'));
-    }
-    return Left.$classLeft_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Left.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -112,12 +88,8 @@ class Left extends Object {
   $init__com_google_j2cl_transpiler_readable_circularimportuse_Left() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Left.$classLeft_ = null;
+$Util.$setClassMetadata(
+    Left, 'com.google.j2cl.transpiler.readable.circularimportuse.Left');
 
 
 

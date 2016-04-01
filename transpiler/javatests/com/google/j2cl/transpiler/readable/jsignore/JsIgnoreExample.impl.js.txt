@@ -74,30 +74,6 @@ class JsIgnoreExample extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    JsIgnoreExample.$clinit();
-    if (!JsIgnoreExample.$classJsIgnoreExample_) {
-      JsIgnoreExample.$classJsIgnoreExample_ = Class.$createForClass(
-          $Util.$generateId('JsIgnoreExample'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample'));
-    }
-    return JsIgnoreExample.$classJsIgnoreExample_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return JsIgnoreExample.$getClass(); }
-
-  /**
    * A static field getter.
    * @return {number}
    * @public
@@ -202,6 +178,10 @@ class JsIgnoreExample extends Object {
   $init__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample() {}
 };
 
+$Util.$setClassMetadata(
+    JsIgnoreExample,
+    'com.google.j2cl.transpiler.readable.jsignore.JsIgnoreExample');
+
 
 /**
  * @private {number}
@@ -225,13 +205,6 @@ JsIgnoreExample
 JsIgnoreExample
     .$f_CONSTNAME__com_google_j2cl_transpiler_readable_jsignore_JsIgnoreExample =
     null;
-
-
-/**
- * The class literal field.
- * @private {Class}
- */
-JsIgnoreExample.$classJsIgnoreExample_ = null;
 
 
 

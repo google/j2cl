@@ -112,30 +112,6 @@ class ArrayOfBoxedType extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    ArrayOfBoxedType.$clinit();
-    if (!ArrayOfBoxedType.$classArrayOfBoxedType_) {
-      ArrayOfBoxedType.$classArrayOfBoxedType_ = Class.$createForClass(
-          $Util.$generateId('ArrayOfBoxedType'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.arrayofboxedtype.ArrayOfBoxedType'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.arrayofboxedtype.ArrayOfBoxedType'));
-    }
-    return ArrayOfBoxedType.$classArrayOfBoxedType_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return ArrayOfBoxedType.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -162,12 +138,9 @@ class ArrayOfBoxedType extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-ArrayOfBoxedType.$classArrayOfBoxedType_ = null;
+$Util.$setClassMetadata(
+    ArrayOfBoxedType,
+    'com.google.j2cl.transpiler.readable.arrayofboxedtype.ArrayOfBoxedType');
 
 
 

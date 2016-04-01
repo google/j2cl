@@ -85,30 +85,6 @@ class Math extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Math.$clinit();
-    if (!Math.$classMath_) {
-      Math.$classMath_ = Class.$createForClass(
-          $Util.$generateId('Math'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.importglobaljstypes.Math'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.importglobaljstypes.Math'));
-    }
-    return Math.$classMath_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Math.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -125,12 +101,8 @@ class Math extends Object {
   $init__com_google_j2cl_transpiler_readable_importglobaljstypes_Math() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Math.$classMath_ = null;
+$Util.$setClassMetadata(
+    Math, 'com.google.j2cl.transpiler.readable.importglobaljstypes.Math');
 
 
 

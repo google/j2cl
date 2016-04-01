@@ -57,7 +57,7 @@ class SimpleLiterals extends Object {
     let c = null;
     let d = 101;
     let e = 'foo';
-    let f = /**@type {Class<SimpleLiterals>} */ (SimpleLiterals.$getClass());
+    let f = /**@type {Class<SimpleLiterals>} */ (Class.$get(SimpleLiterals));
   }
 
   /**
@@ -79,30 +79,6 @@ class SimpleLiterals extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    SimpleLiterals.$clinit();
-    if (!SimpleLiterals.$classSimpleLiterals_) {
-      SimpleLiterals.$classSimpleLiterals_ = Class.$createForClass(
-          $Util.$generateId('SimpleLiterals'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals'));
-    }
-    return SimpleLiterals.$classSimpleLiterals_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return SimpleLiterals.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -122,12 +98,9 @@ class SimpleLiterals extends Object {
   $init__com_google_j2cl_transpiler_readable_simpleliterals_SimpleLiterals() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-SimpleLiterals.$classSimpleLiterals_ = null;
+$Util.$setClassMetadata(
+    SimpleLiterals,
+    'com.google.j2cl.transpiler.readable.simpleliterals.SimpleLiterals');
 
 
 

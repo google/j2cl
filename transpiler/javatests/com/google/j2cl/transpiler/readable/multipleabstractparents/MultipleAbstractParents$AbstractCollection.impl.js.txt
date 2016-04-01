@@ -79,35 +79,6 @@ class MultipleAbstractParents$AbstractCollection extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    MultipleAbstractParents$AbstractCollection.$clinit();
-    if (!MultipleAbstractParents$AbstractCollection
-             .$classMultipleAbstractParents$AbstractCollection_) {
-      MultipleAbstractParents$AbstractCollection
-          .$classMultipleAbstractParents$AbstractCollection_ = Class.$createForClass(
-          $Util.$generateId('AbstractCollection'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractCollection'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractCollection'));
-    }
-    return MultipleAbstractParents$AbstractCollection
-        .$classMultipleAbstractParents$AbstractCollection_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() {
-    return MultipleAbstractParents$AbstractCollection.$getClass();
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -127,13 +98,9 @@ class MultipleAbstractParents$AbstractCollection extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-MultipleAbstractParents$AbstractCollection
-    .$classMultipleAbstractParents$AbstractCollection_ = null;
+$Util.$setClassMetadata(
+    MultipleAbstractParents$AbstractCollection,
+    'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractCollection');
 
 
 

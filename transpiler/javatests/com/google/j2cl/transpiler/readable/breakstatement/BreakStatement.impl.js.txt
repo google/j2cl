@@ -72,30 +72,6 @@ class BreakStatement extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    BreakStatement.$clinit();
-    if (!BreakStatement.$classBreakStatement_) {
-      BreakStatement.$classBreakStatement_ = Class.$createForClass(
-          $Util.$generateId('BreakStatement'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.breakstatement.BreakStatement'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.breakstatement.BreakStatement'));
-    }
-    return BreakStatement.$classBreakStatement_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return BreakStatement.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -111,12 +87,9 @@ class BreakStatement extends Object {
   $init__com_google_j2cl_transpiler_readable_breakstatement_BreakStatement() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-BreakStatement.$classBreakStatement_ = null;
+$Util.$setClassMetadata(
+    BreakStatement,
+    'com.google.j2cl.transpiler.readable.breakstatement.BreakStatement');
 
 
 

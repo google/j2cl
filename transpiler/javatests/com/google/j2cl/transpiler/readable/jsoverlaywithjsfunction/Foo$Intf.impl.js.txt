@@ -65,23 +65,6 @@ class Foo$Intf {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Foo$Intf.$clinit();
-    if (!Foo$Intf.$classFoo$Intf_) {
-      Foo$Intf.$classFoo$Intf_ = Class.$createForInterface(
-          $Util.$generateId('Intf'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo$Intf'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo.Intf'));
-    }
-    return Foo$Intf.$classFoo$Intf_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -91,12 +74,9 @@ class Foo$Intf {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Foo$Intf.$classFoo$Intf_ = null;
+$Util.$setClassMetadataForInterface(
+    Foo$Intf,
+    'com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo$Intf');
 
 
 Foo$Intf.$markImplementor(/** @type {window.Function} */ (Foo$Intf));

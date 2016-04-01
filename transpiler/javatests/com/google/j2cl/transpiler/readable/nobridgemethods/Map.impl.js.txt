@@ -75,30 +75,6 @@ class Map extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Map.$clinit();
-    if (!Map.$classMap_) {
-      Map.$classMap_ = Class.$createForClass(
-          $Util.$generateId('Map'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.nobridgemethods.Map'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.nobridgemethods.Map'));
-    }
-    return Map.$classMap_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Map.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -116,12 +92,8 @@ class Map extends Object {
   $init__com_google_j2cl_transpiler_readable_nobridgemethods_Map() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Map.$classMap_ = null;
+$Util.$setClassMetadata(
+    Map, 'com.google.j2cl.transpiler.readable.nobridgemethods.Map');
 
 
 

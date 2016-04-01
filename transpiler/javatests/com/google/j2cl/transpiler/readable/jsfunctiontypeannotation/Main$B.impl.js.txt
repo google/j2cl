@@ -124,30 +124,6 @@ class Main$B extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Main$B.$clinit();
-    if (!Main$B.$classMain$B_) {
-      Main$B.$classMain$B_ = Class.$createForClass(
-          $Util.$generateId('B'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main$B'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.B'));
-    }
-    return Main$B.$classMain$B_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Main$B.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -168,12 +144,9 @@ class Main$B extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Main$B.$classMain$B_ = null;
+$Util.$setClassMetadata(
+    Main$B,
+    'com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main$B');
 
 
 Main$ApplyFunction.$markImplementor(Main$B);

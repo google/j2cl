@@ -102,30 +102,6 @@ class Number extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Number.$clinit();
-    if (!Number.$classNumber_) {
-      Number.$classNumber_ = Class.$createForClass(
-          $Util.$generateId('Number'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.importglobaljstypes.Number'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.importglobaljstypes.Number'));
-    }
-    return Number.$classNumber_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Number.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -145,12 +121,8 @@ class Number extends Object {
   $init__com_google_j2cl_transpiler_readable_importglobaljstypes_Number() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Number.$classNumber_ = null;
+$Util.$setClassMetadata(
+    Number, 'com.google.j2cl.transpiler.readable.importglobaljstypes.Number');
 
 
 

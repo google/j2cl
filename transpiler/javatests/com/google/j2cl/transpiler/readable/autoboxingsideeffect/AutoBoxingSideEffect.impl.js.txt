@@ -161,30 +161,6 @@ class AutoBoxingSideEffect extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    AutoBoxingSideEffect.$clinit();
-    if (!AutoBoxingSideEffect.$classAutoBoxingSideEffect_) {
-      AutoBoxingSideEffect.$classAutoBoxingSideEffect_ = Class.$createForClass(
-          $Util.$generateId('AutoBoxingSideEffect'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect'));
-    }
-    return AutoBoxingSideEffect.$classAutoBoxingSideEffect_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return AutoBoxingSideEffect.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -206,12 +182,9 @@ class AutoBoxingSideEffect extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-AutoBoxingSideEffect.$classAutoBoxingSideEffect_ = null;
+$Util.$setClassMetadata(
+    AutoBoxingSideEffect,
+    'com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect');
 
 
 

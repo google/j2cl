@@ -88,31 +88,6 @@ class NestedGenericClass$1F extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    NestedGenericClass$1F.$clinit();
-    if (!NestedGenericClass$1F.$classNestedGenericClass$1F_) {
-      NestedGenericClass$1F
-          .$classNestedGenericClass$1F_ = Class.$createForClass(
-          $Util.$generateId('1F'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass$1F'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass.1F'));
-    }
-    return NestedGenericClass$1F.$classNestedGenericClass$1F_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return NestedGenericClass$1F.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -131,12 +106,9 @@ class NestedGenericClass$1F extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-NestedGenericClass$1F.$classNestedGenericClass$1F_ = null;
+$Util.$setClassMetadata(
+    NestedGenericClass$1F,
+    'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass$1F');
 
 
 

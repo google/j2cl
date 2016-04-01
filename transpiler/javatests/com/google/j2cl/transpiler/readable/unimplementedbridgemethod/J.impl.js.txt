@@ -61,23 +61,6 @@ class J {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    J.$clinit();
-    if (!J.$classJ_) {
-      J.$classJ_ = Class.$createForInterface(
-          $Util.$generateId('J'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.unimplementedbridgemethod.J'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.unimplementedbridgemethod.J'));
-    }
-    return J.$classJ_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -87,12 +70,8 @@ class J {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-J.$classJ_ = null;
+$Util.$setClassMetadataForInterface(
+    J, 'com.google.j2cl.transpiler.readable.unimplementedbridgemethod.J');
 
 
 J.$markImplementor(/** @type {window.Function} */ (J));

@@ -82,30 +82,6 @@ class GrandParent extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    GrandParent.$clinit();
-    if (!GrandParent.$classGrandParent_) {
-      GrandParent.$classGrandParent_ = Class.$createForClass(
-          $Util.$generateId('GrandParent'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.supermethodcall.GrandParent'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.supermethodcall.GrandParent'));
-    }
-    return GrandParent.$classGrandParent_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return GrandParent.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -122,12 +98,9 @@ class GrandParent extends Object {
   $init__com_google_j2cl_transpiler_readable_supermethodcall_GrandParent() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-GrandParent.$classGrandParent_ = null;
+$Util.$setClassMetadata(
+    GrandParent,
+    'com.google.j2cl.transpiler.readable.supermethodcall.GrandParent');
 
 
 

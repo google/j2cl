@@ -79,30 +79,6 @@ class ArrayLiteral extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    ArrayLiteral.$clinit();
-    if (!ArrayLiteral.$classArrayLiteral_) {
-      ArrayLiteral.$classArrayLiteral_ = Class.$createForClass(
-          $Util.$generateId('ArrayLiteral'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.arrayliteral.ArrayLiteral'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.arrayliteral.ArrayLiteral'));
-    }
-    return ArrayLiteral.$classArrayLiteral_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return ArrayLiteral.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -120,12 +96,9 @@ class ArrayLiteral extends Object {
   $init__com_google_j2cl_transpiler_readable_arrayliteral_ArrayLiteral() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-ArrayLiteral.$classArrayLiteral_ = null;
+$Util.$setClassMetadata(
+    ArrayLiteral,
+    'com.google.j2cl.transpiler.readable.arrayliteral.ArrayLiteral');
 
 
 

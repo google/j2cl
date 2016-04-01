@@ -84,30 +84,6 @@ class StringConversion extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    StringConversion.$clinit();
-    if (!StringConversion.$classStringConversion_) {
-      StringConversion.$classStringConversion_ = Class.$createForClass(
-          $Util.$generateId('StringConversion'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.stringconversion.StringConversion'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.stringconversion.StringConversion'));
-    }
-    return StringConversion.$classStringConversion_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return StringConversion.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -127,12 +103,9 @@ class StringConversion extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-StringConversion.$classStringConversion_ = null;
+$Util.$setClassMetadata(
+    StringConversion,
+    'com.google.j2cl.transpiler.readable.stringconversion.StringConversion');
 
 
 

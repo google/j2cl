@@ -76,30 +76,6 @@ class StringCalls extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    StringCalls.$clinit();
-    if (!StringCalls.$classStringCalls_) {
-      StringCalls.$classStringCalls_ = Class.$createForClass(
-          $Util.$generateId('StringCalls'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls'));
-    }
-    return StringCalls.$classStringCalls_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return StringCalls.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -117,12 +93,9 @@ class StringCalls extends Object {
   $init__com_google_j2cl_transpiler_readable_devirtualizedcalls_StringCalls() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-StringCalls.$classStringCalls_ = null;
+$Util.$setClassMetadata(
+    StringCalls,
+    'com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls');
 
 
 

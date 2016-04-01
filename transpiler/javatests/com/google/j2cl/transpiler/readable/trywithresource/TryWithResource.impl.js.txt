@@ -139,30 +139,6 @@ class TryWithResource extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    TryWithResource.$clinit();
-    if (!TryWithResource.$classTryWithResource_) {
-      TryWithResource.$classTryWithResource_ = Class.$createForClass(
-          $Util.$generateId('TryWithResource'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.trywithresource.TryWithResource'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.trywithresource.TryWithResource'));
-    }
-    return TryWithResource.$classTryWithResource_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return TryWithResource.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -187,12 +163,9 @@ class TryWithResource extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-TryWithResource.$classTryWithResource_ = null;
+$Util.$setClassMetadata(
+    TryWithResource,
+    'com.google.j2cl.transpiler.readable.trywithresource.TryWithResource');
 
 
 

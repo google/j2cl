@@ -69,30 +69,6 @@ class ExternalCaller extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    ExternalCaller.$clinit();
-    if (!ExternalCaller.$classExternalCaller_) {
-      ExternalCaller.$classExternalCaller_ = Class.$createForClass(
-          $Util.$generateId('ExternalCaller'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.ExternalCaller'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.ExternalCaller'));
-    }
-    return ExternalCaller.$classExternalCaller_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return ExternalCaller.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -111,12 +87,9 @@ class ExternalCaller extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-ExternalCaller.$classExternalCaller_ = null;
+$Util.$setClassMetadata(
+    ExternalCaller,
+    'com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.ExternalCaller');
 
 
 

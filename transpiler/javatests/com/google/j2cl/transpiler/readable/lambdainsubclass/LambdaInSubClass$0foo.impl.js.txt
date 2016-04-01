@@ -115,31 +115,6 @@ class LambdaInSubClass$0foo extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    LambdaInSubClass$0foo.$clinit();
-    if (!LambdaInSubClass$0foo.$classLambdaInSubClass$0foo_) {
-      LambdaInSubClass$0foo
-          .$classLambdaInSubClass$0foo_ = Class.$createForClass(
-          $Util.$generateId('0foo'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass$0foo'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass.0foo'));
-    }
-    return LambdaInSubClass$0foo.$classLambdaInSubClass$0foo_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return LambdaInSubClass$0foo.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -161,12 +136,9 @@ class LambdaInSubClass$0foo extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-LambdaInSubClass$0foo.$classLambdaInSubClass$0foo_ = null;
+$Util.$setClassMetadata(
+    LambdaInSubClass$0foo,
+    'com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInSubClass$0foo');
 
 
 LambdaInterface.$markImplementor(LambdaInSubClass$0foo);

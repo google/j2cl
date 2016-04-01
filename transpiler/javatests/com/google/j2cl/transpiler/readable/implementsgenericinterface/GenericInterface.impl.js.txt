@@ -58,35 +58,15 @@ class GenericInterface {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    GenericInterface.$clinit();
-    if (!GenericInterface.$classGenericInterface_) {
-      GenericInterface.$classGenericInterface_ = Class.$createForInterface(
-          $Util.$generateId('GenericInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterface'));
-    }
-    return GenericInterface.$classGenericInterface_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
   static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-GenericInterface.$classGenericInterface_ = null;
+$Util.$setClassMetadataForInterface(
+    GenericInterface,
+    'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericInterface');
 
 
 GenericInterface.$markImplementor(

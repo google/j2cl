@@ -75,30 +75,6 @@ class AssertSimple extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    AssertSimple.$clinit();
-    if (!AssertSimple.$classAssertSimple_) {
-      AssertSimple.$classAssertSimple_ = Class.$createForClass(
-          $Util.$generateId('AssertSimple'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.assertsimple.AssertSimple'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.assertsimple.AssertSimple'));
-    }
-    return AssertSimple.$classAssertSimple_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return AssertSimple.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -117,12 +93,9 @@ class AssertSimple extends Object {
   $init__com_google_j2cl_transpiler_readable_assertsimple_AssertSimple() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-AssertSimple.$classAssertSimple_ = null;
+$Util.$setClassMetadata(
+    AssertSimple,
+    'com.google.j2cl.transpiler.readable.assertsimple.AssertSimple');
 
 
 

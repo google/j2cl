@@ -68,31 +68,6 @@ class ImportsFullyQualified extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    ImportsFullyQualified.$clinit();
-    if (!ImportsFullyQualified.$classImportsFullyQualified_) {
-      ImportsFullyQualified
-          .$classImportsFullyQualified_ = Class.$createForClass(
-          $Util.$generateId('ImportsFullyQualified'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.importsfullyqualified.ImportsFullyQualified'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.importsfullyqualified.ImportsFullyQualified'));
-    }
-    return ImportsFullyQualified.$classImportsFullyQualified_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return ImportsFullyQualified.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -109,12 +84,9 @@ class ImportsFullyQualified extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-ImportsFullyQualified.$classImportsFullyQualified_ = null;
+$Util.$setClassMetadata(
+    ImportsFullyQualified,
+    'com.google.j2cl.transpiler.readable.importsfullyqualified.ImportsFullyQualified');
 
 
 Serializable.$markImplementor(ImportsFullyQualified);

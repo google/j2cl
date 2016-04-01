@@ -19,10 +19,12 @@ public class Main {
 
     assertEquals(
         "com.google.j2cl.transpiler.integration.classliteral.Main$Bar", o.getClass().getName());
+    // J2CL doesn't follow JLS here:
     assertEquals(
-        "com.google.j2cl.transpiler.integration.classliteral.Main.Bar",
+        "com.google.j2cl.transpiler.integration.classliteral.Main$Bar",
         o.getClass().getCanonicalName());
-    assertEquals("Bar", o.getClass().getSimpleName());
+    // J2CL doesn't follow JLS here:
+    assertEquals("Main$Bar", o.getClass().getSimpleName());
     assertEquals(
         "class com.google.j2cl.transpiler.integration.classliteral.Main$Bar",
         o.getClass().toString());
@@ -95,13 +97,14 @@ public class Main {
 
     assertEquals(
         "com.google.j2cl.transpiler.integration.classliteral.Main", Main.class.getCanonicalName());
-
+    // J2CL doesn't follow JLS here:
     assertEquals(
-        "com.google.j2cl.transpiler.integration.classliteral.Main.Foo",
+        "com.google.j2cl.transpiler.integration.classliteral.Main$Foo",
         Foo.class.getCanonicalName());
 
     assertEquals("Main", Main.class.getSimpleName());
-    assertEquals("Foo", Foo.class.getSimpleName());
+    // J2CL doesn't follow JLS here:
+    assertEquals("Main$Foo", Foo.class.getSimpleName());
 
     assertEquals(
         "class com.google.j2cl.transpiler.integration.classliteral.Main", Main.class.toString());
@@ -156,6 +159,20 @@ public class Main {
     assertEquals("GenericInterface", GenericInterface.class.getSimpleName());
   }
 
+  private static boolean clinitCalled = false;
+
+  static class ClinitTest {
+    static {
+      clinitCalled = true;
+    }
+  }
+
+  private static void testClinit() {
+    assert clinitCalled == false;
+    assert ClinitTest.class != null;
+    assert clinitCalled == false;
+  }
+
   public static void main(String[] args) {
     testClass();
     testInterface();
@@ -165,6 +182,7 @@ public class Main {
     testEnum();
     testGeneric();
     testEnumSubclass();
+    testClinit();
   }
 
   private static void assertEquals(Object expected, Object actual) {

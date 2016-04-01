@@ -73,30 +73,6 @@ class Superclass extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Superclass.$clinit();
-    if (!Superclass.$classSuperclass_) {
-      Superclass.$classSuperclass_ = Class.$createForClass(
-          $Util.$generateId('Superclass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass'));
-    }
-    return Superclass.$classSuperclass_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Superclass.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -112,12 +88,9 @@ class Superclass extends Object {
   $init__com_google_j2cl_transpiler_readable_simplebridgemethods_Superclass() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Superclass.$classSuperclass_ = null;
+$Util.$setClassMetadata(
+    Superclass,
+    'com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass');
 
 
 

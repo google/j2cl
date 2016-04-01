@@ -132,31 +132,6 @@ class InnerClassInitOrder$P1 extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    InnerClassInitOrder$P1.$clinit();
-    if (!InnerClassInitOrder$P1.$classInnerClassInitOrder$P1_) {
-      InnerClassInitOrder$P1
-          .$classInnerClassInitOrder$P1_ = Class.$createForClass(
-          $Util.$generateId('P1'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1'));
-    }
-    return InnerClassInitOrder$P1.$classInnerClassInitOrder$P1_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return InnerClassInitOrder$P1.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -178,12 +153,9 @@ class InnerClassInitOrder$P1 extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-InnerClassInitOrder$P1.$classInnerClassInitOrder$P1_ = null;
+$Util.$setClassMetadata(
+    InnerClassInitOrder$P1,
+    'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1');
 
 
 

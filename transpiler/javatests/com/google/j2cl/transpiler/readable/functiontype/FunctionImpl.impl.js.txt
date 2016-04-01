@@ -73,30 +73,6 @@ class FunctionImpl extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    FunctionImpl.$clinit();
-    if (!FunctionImpl.$classFunctionImpl_) {
-      FunctionImpl.$classFunctionImpl_ = Class.$createForClass(
-          $Util.$generateId('FunctionImpl'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.functiontype.FunctionImpl'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.functiontype.FunctionImpl'));
-    }
-    return FunctionImpl.$classFunctionImpl_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return FunctionImpl.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -112,12 +88,9 @@ class FunctionImpl extends Object {
   $init__com_google_j2cl_transpiler_readable_functiontype_FunctionImpl() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-FunctionImpl.$classFunctionImpl_ = null;
+$Util.$setClassMetadata(
+    FunctionImpl,
+    'com.google.j2cl.transpiler.readable.functiontype.FunctionImpl');
 
 
 Function.$markImplementor(FunctionImpl);

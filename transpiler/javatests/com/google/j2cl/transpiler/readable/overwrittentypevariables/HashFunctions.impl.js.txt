@@ -86,30 +86,6 @@ class HashFunctions extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    HashFunctions.$clinit();
-    if (!HashFunctions.$classHashFunctions_) {
-      HashFunctions.$classHashFunctions_ = Class.$createForClass(
-          $Util.$generateId('HashFunctions'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions'));
-    }
-    return HashFunctions.$classHashFunctions_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return HashFunctions.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -133,12 +109,9 @@ class HashFunctions extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-HashFunctions.$classHashFunctions_ = null;
+$Util.$setClassMetadata(
+    HashFunctions,
+    'com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions');
 
 
 

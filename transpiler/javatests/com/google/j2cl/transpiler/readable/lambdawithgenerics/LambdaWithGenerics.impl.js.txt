@@ -90,30 +90,6 @@ class LambdaWithGenerics extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    LambdaWithGenerics.$clinit();
-    if (!LambdaWithGenerics.$classLambdaWithGenerics_) {
-      LambdaWithGenerics.$classLambdaWithGenerics_ = Class.$createForClass(
-          $Util.$generateId('LambdaWithGenerics'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics'));
-    }
-    return LambdaWithGenerics.$classLambdaWithGenerics_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return LambdaWithGenerics.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -135,12 +111,9 @@ class LambdaWithGenerics extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-LambdaWithGenerics.$classLambdaWithGenerics_ = null;
+$Util.$setClassMetadata(
+    LambdaWithGenerics,
+    'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics');
 
 
 

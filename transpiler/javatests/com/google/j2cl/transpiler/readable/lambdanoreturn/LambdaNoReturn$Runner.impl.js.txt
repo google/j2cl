@@ -65,24 +65,6 @@ class LambdaNoReturn$Runner {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    LambdaNoReturn$Runner.$clinit();
-    if (!LambdaNoReturn$Runner.$classLambdaNoReturn$Runner_) {
-      LambdaNoReturn$Runner
-          .$classLambdaNoReturn$Runner_ = Class.$createForInterface(
-          $Util.$generateId('Runner'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn$Runner'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn.Runner'));
-    }
-    return LambdaNoReturn$Runner.$classLambdaNoReturn$Runner_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -93,12 +75,9 @@ class LambdaNoReturn$Runner {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-LambdaNoReturn$Runner.$classLambdaNoReturn$Runner_ = null;
+$Util.$setClassMetadataForInterface(
+    LambdaNoReturn$Runner,
+    'com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn$Runner');
 
 
 LambdaNoReturn$Runner.$markImplementor(

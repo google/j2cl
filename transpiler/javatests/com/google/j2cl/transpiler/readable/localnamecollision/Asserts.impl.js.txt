@@ -72,30 +72,6 @@ class Asserts extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Asserts.$clinit();
-    if (!Asserts.$classAsserts_) {
-      Asserts.$classAsserts_ = Class.$createForClass(
-          $Util.$generateId('Asserts'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.localnamecollision.Asserts'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.localnamecollision.Asserts'));
-    }
-    return Asserts.$classAsserts_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Asserts.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -112,12 +88,8 @@ class Asserts extends Object {
   $init__com_google_j2cl_transpiler_readable_localnamecollision_Asserts() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Asserts.$classAsserts_ = null;
+$Util.$setClassMetadata(
+    Asserts, 'com.google.j2cl.transpiler.readable.localnamecollision.Asserts');
 
 
 

@@ -74,30 +74,6 @@ class InstanceofInterface extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    InstanceofInterface.$clinit();
-    if (!InstanceofInterface.$classInstanceofInterface_) {
-      InstanceofInterface.$classInstanceofInterface_ = Class.$createForClass(
-          $Util.$generateId('InstanceofInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.instanceofinterface.InstanceofInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.instanceofinterface.InstanceofInterface'));
-    }
-    return InstanceofInterface.$classInstanceofInterface_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return InstanceofInterface.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -115,12 +91,9 @@ class InstanceofInterface extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-InstanceofInterface.$classInstanceofInterface_ = null;
+$Util.$setClassMetadata(
+    InstanceofInterface,
+    'com.google.j2cl.transpiler.readable.instanceofinterface.InstanceofInterface');
 
 
 

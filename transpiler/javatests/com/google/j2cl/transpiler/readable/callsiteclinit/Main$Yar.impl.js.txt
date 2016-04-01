@@ -64,30 +64,6 @@ class Main$Yar extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Main$Yar.$clinit();
-    if (!Main$Yar.$classMain$Yar_) {
-      Main$Yar.$classMain$Yar_ = Class.$createForClass(
-          $Util.$generateId('Yar'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.callsiteclinit.Main$Yar'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.callsiteclinit.Main.Yar'));
-    }
-    return Main$Yar.$classMain$Yar_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Main$Yar.$getClass(); }
-
-  /**
    * A static field getter.
    * @return {?string}
    * @public
@@ -136,19 +112,15 @@ class Main$Yar extends Object {
   $init__com_google_j2cl_transpiler_readable_callsiteclinit_Main$Yar() {}
 };
 
+$Util.$setClassMetadata(
+    Main$Yar, 'com.google.j2cl.transpiler.readable.callsiteclinit.Main$Yar');
+
 
 /**
  * @private {?string}
  */
 Main$Yar.$f_b__com_google_j2cl_transpiler_readable_callsiteclinit_Main$Yar =
     null;
-
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Main$Yar.$classMain$Yar_ = null;
 
 
 

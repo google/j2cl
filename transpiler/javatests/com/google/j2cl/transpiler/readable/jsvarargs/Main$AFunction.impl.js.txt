@@ -101,30 +101,6 @@ class Main$AFunction extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Main$AFunction.$clinit();
-    if (!Main$AFunction.$classMain$AFunction_) {
-      Main$AFunction.$classMain$AFunction_ = Class.$createForClass(
-          $Util.$generateId('AFunction'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsvarargs.Main$AFunction'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsvarargs.Main.AFunction'));
-    }
-    return Main$AFunction.$classMain$AFunction_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Main$AFunction.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -145,12 +121,9 @@ class Main$AFunction extends Object {
   $init__com_google_j2cl_transpiler_readable_jsvarargs_Main$AFunction() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Main$AFunction.$classMain$AFunction_ = null;
+$Util.$setClassMetadata(
+    Main$AFunction,
+    'com.google.j2cl.transpiler.readable.jsvarargs.Main$AFunction');
 
 
 Main$Function.$markImplementor(Main$AFunction);

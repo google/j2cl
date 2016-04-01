@@ -292,31 +292,6 @@ class ArgumentImplicitCasts extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    ArgumentImplicitCasts.$clinit();
-    if (!ArgumentImplicitCasts.$classArgumentImplicitCasts_) {
-      ArgumentImplicitCasts
-          .$classArgumentImplicitCasts_ = Class.$createForClass(
-          $Util.$generateId('ArgumentImplicitCasts'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts'));
-    }
-    return ArgumentImplicitCasts.$classArgumentImplicitCasts_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return ArgumentImplicitCasts.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -347,6 +322,10 @@ class ArgumentImplicitCasts extends Object {
   $init__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts() {
   }
 };
+
+$Util.$setClassMetadata(
+    ArgumentImplicitCasts,
+    'com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts');
 
 
 /**
@@ -410,13 +389,6 @@ ArgumentImplicitCasts
 ArgumentImplicitCasts
     .f_DOUBLE_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts =
     1.7976931348623157E308;
-
-
-/**
- * The class literal field.
- * @private {Class}
- */
-ArgumentImplicitCasts.$classArgumentImplicitCasts_ = null;
 
 
 

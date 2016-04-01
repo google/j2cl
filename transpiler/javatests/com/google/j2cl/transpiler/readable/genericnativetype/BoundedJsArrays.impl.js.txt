@@ -88,30 +88,6 @@ class BoundedJsArrays extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    BoundedJsArrays.$clinit();
-    if (!BoundedJsArrays.$classBoundedJsArrays_) {
-      BoundedJsArrays.$classBoundedJsArrays_ = Class.$createForClass(
-          $Util.$generateId('BoundedJsArrays'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArrays'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArrays'));
-    }
-    return BoundedJsArrays.$classBoundedJsArrays_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return BoundedJsArrays.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -131,12 +107,9 @@ class BoundedJsArrays extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-BoundedJsArrays.$classBoundedJsArrays_ = null;
+$Util.$setClassMetadata(
+    BoundedJsArrays,
+    'com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArrays');
 
 
 

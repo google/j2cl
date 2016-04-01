@@ -65,23 +65,6 @@ class InnerClasses$A {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    InnerClasses$A.$clinit();
-    if (!InnerClasses$A.$classInnerClasses$A_) {
-      InnerClasses$A.$classInnerClasses$A_ = Class.$createForInterface(
-          $Util.$generateId('A'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses$A'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses.A'));
-    }
-    return InnerClasses$A.$classInnerClasses$A_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -92,12 +75,9 @@ class InnerClasses$A {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-InnerClasses$A.$classInnerClasses$A_ = null;
+$Util.$setClassMetadataForInterface(
+    InnerClasses$A,
+    'com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses$A');
 
 
 InnerClasses$A.$markImplementor(

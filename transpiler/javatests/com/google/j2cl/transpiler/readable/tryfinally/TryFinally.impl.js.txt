@@ -74,30 +74,6 @@ class TryFinally extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    TryFinally.$clinit();
-    if (!TryFinally.$classTryFinally_) {
-      TryFinally.$classTryFinally_ = Class.$createForClass(
-          $Util.$generateId('TryFinally'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.tryfinally.TryFinally'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.tryfinally.TryFinally'));
-    }
-    return TryFinally.$classTryFinally_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return TryFinally.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -114,12 +90,8 @@ class TryFinally extends Object {
   $init__com_google_j2cl_transpiler_readable_tryfinally_TryFinally() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-TryFinally.$classTryFinally_ = null;
+$Util.$setClassMetadata(
+    TryFinally, 'com.google.j2cl.transpiler.readable.tryfinally.TryFinally');
 
 
 

@@ -117,33 +117,6 @@ class InnerClassInitOrder$Outer$OuterIsSuper extends InnerClassInitOrder$Outer {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    InnerClassInitOrder$Outer$OuterIsSuper.$clinit();
-    if (!InnerClassInitOrder$Outer$OuterIsSuper
-             .$classInnerClassInitOrder$Outer$OuterIsSuper_) {
-      InnerClassInitOrder$Outer$OuterIsSuper
-          .$classInnerClassInitOrder$Outer$OuterIsSuper_ = Class.$createForClass(
-          $Util.$generateId('OuterIsSuper'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$OuterIsSuper'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper'));
-    }
-    return InnerClassInitOrder$Outer$OuterIsSuper
-        .$classInnerClassInitOrder$Outer$OuterIsSuper_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return InnerClassInitOrder$Outer$OuterIsSuper.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -165,13 +138,9 @@ class InnerClassInitOrder$Outer$OuterIsSuper extends InnerClassInitOrder$Outer {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-InnerClassInitOrder$Outer$OuterIsSuper
-    .$classInnerClassInitOrder$Outer$OuterIsSuper_ = null;
+$Util.$setClassMetadata(
+    InnerClassInitOrder$Outer$OuterIsSuper,
+    'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$Outer$OuterIsSuper');
 
 
 

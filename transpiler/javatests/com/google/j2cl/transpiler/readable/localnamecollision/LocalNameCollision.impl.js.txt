@@ -133,31 +133,6 @@ class LocalNameCollision extends Object {
   }
 
   /**
-   * @return {java_lang_Class}
-   * @public
-   */
-  static $getClass() {
-    LocalNameCollision.$clinit();
-    if (!LocalNameCollision.$classLocalNameCollision_) {
-      LocalNameCollision
-          .$classLocalNameCollision_ = java_lang_Class.$createForClass(
-          $Util.$generateId('LocalNameCollision'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollision'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollision'));
-    }
-    return LocalNameCollision.$classLocalNameCollision_;
-  }
-
-  /**
-   * @override
-   * @return {java_lang_Class}
-   * @public
-   */
-  m_getClass() { return LocalNameCollision.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -188,12 +163,9 @@ class LocalNameCollision extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {java_lang_Class}
- */
-LocalNameCollision.$classLocalNameCollision_ = null;
+$Util.$setClassMetadata(
+    LocalNameCollision,
+    'com.google.j2cl.transpiler.readable.localnamecollision.LocalNameCollision');
 
 
 

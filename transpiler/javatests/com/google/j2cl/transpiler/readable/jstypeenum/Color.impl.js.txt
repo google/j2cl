@@ -126,31 +126,6 @@ class Color extends Enum {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Color.$clinit();
-    if (!Color.$classColor_) {
-      Color.$classColor_ = Class.$createForEnum(
-          $Util.$generateId('Color'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jstypeenum.Color'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jstypeenum.Color'),
-          null);
-    }
-    return Color.$classColor_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Color.$getClass(); }
-
-  /**
    * A static field getter.
    * @return {Color}
    * @public
@@ -278,6 +253,9 @@ class Color extends Enum {
   $init__com_google_j2cl_transpiler_readable_jstypeenum_Color() {}
 };
 
+$Util.$setClassMetadataForEnum(
+    Color, 'com.google.j2cl.transpiler.readable.jstypeenum.Color');
+
 
 /**
  * @private {Color}
@@ -303,13 +281,6 @@ Color.$f_BLUE__com_google_j2cl_transpiler_readable_jstypeenum_Color = null;
 Color
     .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
     null;
-
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Color.$classColor_ = null;
 
 
 

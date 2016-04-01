@@ -96,30 +96,6 @@ class MyJsType extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    MyJsType.$clinit();
-    if (!MyJsType.$classMyJsType_) {
-      MyJsType.$classMyJsType_ = Class.$createForClass(
-          $Util.$generateId('MyJsType'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType'));
-    }
-    return MyJsType.$classMyJsType_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return MyJsType.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -137,12 +113,9 @@ class MyJsType extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-MyJsType.$classMyJsType_ = null;
+$Util.$setClassMetadata(
+    MyJsType,
+    'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType');
 
 
 OtherInterface.$markImplementor(MyJsType);

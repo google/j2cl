@@ -120,30 +120,6 @@ class GenericConstructor extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    GenericConstructor.$clinit();
-    if (!GenericConstructor.$classGenericConstructor_) {
-      GenericConstructor.$classGenericConstructor_ = Class.$createForClass(
-          $Util.$generateId('GenericConstructor'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor'));
-    }
-    return GenericConstructor.$classGenericConstructor_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return GenericConstructor.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -162,12 +138,9 @@ class GenericConstructor extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-GenericConstructor.$classGenericConstructor_ = null;
+$Util.$setClassMetadata(
+    GenericConstructor,
+    'com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor');
 
 
 

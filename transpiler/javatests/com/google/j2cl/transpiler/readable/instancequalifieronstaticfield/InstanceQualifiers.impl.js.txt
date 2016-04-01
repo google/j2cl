@@ -142,30 +142,6 @@ class InstanceQualifiers extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    InstanceQualifiers.$clinit();
-    if (!InstanceQualifiers.$classInstanceQualifiers_) {
-      InstanceQualifiers.$classInstanceQualifiers_ = Class.$createForClass(
-          $Util.$generateId('InstanceQualifiers'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.instancequalifieronstaticfield.InstanceQualifiers'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.instancequalifieronstaticfield.InstanceQualifiers'));
-    }
-    return InstanceQualifiers.$classInstanceQualifiers_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return InstanceQualifiers.$getClass(); }
-
-  /**
    * A static field getter.
    * @return {number}
    * @public
@@ -248,6 +224,10 @@ class InstanceQualifiers extends Object {
   }
 };
 
+$Util.$setClassMetadata(
+    InstanceQualifiers,
+    'com.google.j2cl.transpiler.readable.instancequalifieronstaticfield.InstanceQualifiers');
+
 
 /**
  * @private {number}
@@ -263,13 +243,6 @@ InstanceQualifiers
 InstanceQualifiers
     .$f_sideEffectCount__com_google_j2cl_transpiler_readable_instancequalifieronstaticfield_InstanceQualifiers =
     0;
-
-
-/**
- * The class literal field.
- * @private {Class}
- */
-InstanceQualifiers.$classInstanceQualifiers_ = null;
 
 
 

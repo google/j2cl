@@ -71,30 +71,6 @@ class Srcjar extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Srcjar.$clinit();
-    if (!Srcjar.$classSrcjar_) {
-      Srcjar.$classSrcjar_ = Class.$createForClass(
-          $Util.$generateId('Srcjar'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.srcjar.Srcjar'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.srcjar.Srcjar'));
-    }
-    return Srcjar.$classSrcjar_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Srcjar.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -112,12 +88,8 @@ class Srcjar extends Object {
   $init__com_google_j2cl_transpiler_readable_srcjar_Srcjar() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Srcjar.$classSrcjar_ = null;
+$Util.$setClassMetadata(
+    Srcjar, 'com.google.j2cl.transpiler.readable.srcjar.Srcjar');
 
 
 

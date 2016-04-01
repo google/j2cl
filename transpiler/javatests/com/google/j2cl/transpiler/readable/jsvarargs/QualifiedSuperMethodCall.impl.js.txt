@@ -75,31 +75,6 @@ class QualifiedSuperMethodCall extends Main {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    QualifiedSuperMethodCall.$clinit();
-    if (!QualifiedSuperMethodCall.$classQualifiedSuperMethodCall_) {
-      QualifiedSuperMethodCall
-          .$classQualifiedSuperMethodCall_ = Class.$createForClass(
-          $Util.$generateId('QualifiedSuperMethodCall'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall'));
-    }
-    return QualifiedSuperMethodCall.$classQualifiedSuperMethodCall_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return QualifiedSuperMethodCall.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -118,12 +93,9 @@ class QualifiedSuperMethodCall extends Main {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-QualifiedSuperMethodCall.$classQualifiedSuperMethodCall_ = null;
+$Util.$setClassMetadata(
+    QualifiedSuperMethodCall,
+    'com.google.j2cl.transpiler.readable.jsvarargs.QualifiedSuperMethodCall');
 
 
 

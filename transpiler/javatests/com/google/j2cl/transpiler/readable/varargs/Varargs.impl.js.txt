@@ -131,30 +131,6 @@ class Varargs extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Varargs.$clinit();
-    if (!Varargs.$classVarargs_) {
-      Varargs.$classVarargs_ = Class.$createForClass(
-          $Util.$generateId('Varargs'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.varargs.Varargs'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.varargs.Varargs'));
-    }
-    return Varargs.$classVarargs_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Varargs.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -172,12 +148,8 @@ class Varargs extends Object {
   $init__com_google_j2cl_transpiler_readable_varargs_Varargs() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Varargs.$classVarargs_ = null;
+$Util.$setClassMetadata(
+    Varargs, 'com.google.j2cl.transpiler.readable.varargs.Varargs');
 
 
 

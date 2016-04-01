@@ -64,35 +64,15 @@ class MyInterface {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    MyInterface.$clinit();
-    if (!MyInterface.$classMyInterface_) {
-      MyInterface.$classMyInterface_ = Class.$createForInterface(
-          $Util.$generateId('MyInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.abstractinterfaceimpl.MyInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.abstractinterfaceimpl.MyInterface'));
-    }
-    return MyInterface.$classMyInterface_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
   static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-MyInterface.$classMyInterface_ = null;
+$Util.$setClassMetadataForInterface(
+    MyInterface,
+    'com.google.j2cl.transpiler.readable.abstractinterfaceimpl.MyInterface');
 
 
 MyInterface.$markImplementor(/** @type {window.Function} */ (MyInterface));

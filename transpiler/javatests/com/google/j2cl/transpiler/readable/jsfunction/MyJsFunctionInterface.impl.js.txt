@@ -64,24 +64,6 @@ class MyJsFunctionInterface {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    MyJsFunctionInterface.$clinit();
-    if (!MyJsFunctionInterface.$classMyJsFunctionInterface_) {
-      MyJsFunctionInterface
-          .$classMyJsFunctionInterface_ = Class.$createForInterface(
-          $Util.$generateId('MyJsFunctionInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionInterface'));
-    }
-    return MyJsFunctionInterface.$classMyJsFunctionInterface_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -91,12 +73,9 @@ class MyJsFunctionInterface {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-MyJsFunctionInterface.$classMyJsFunctionInterface_ = null;
+$Util.$setClassMetadataForInterface(
+    MyJsFunctionInterface,
+    'com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionInterface');
 
 
 MyJsFunctionInterface.$markImplementor(

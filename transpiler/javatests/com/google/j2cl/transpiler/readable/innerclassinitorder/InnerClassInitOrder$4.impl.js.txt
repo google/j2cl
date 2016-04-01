@@ -84,31 +84,6 @@ class InnerClassInitOrder$4 extends
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    InnerClassInitOrder$4.$clinit();
-    if (!InnerClassInitOrder$4.$classInnerClassInitOrder$4_) {
-      InnerClassInitOrder$4
-          .$classInnerClassInitOrder$4_ = Class.$createForClass(
-          $Util.$generateId('4'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$4'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.4'));
-    }
-    return InnerClassInitOrder$4.$classInnerClassInitOrder$4_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return InnerClassInitOrder$4.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -129,12 +104,9 @@ class InnerClassInitOrder$4 extends
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-InnerClassInitOrder$4.$classInnerClassInitOrder$4_ = null;
+$Util.$setClassMetadata(
+    InnerClassInitOrder$4,
+    'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$4');
 
 
 

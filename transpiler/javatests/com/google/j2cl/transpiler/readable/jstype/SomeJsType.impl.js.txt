@@ -124,30 +124,6 @@ class SomeJsType extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    SomeJsType.$clinit();
-    if (!SomeJsType.$classSomeJsType_) {
-      SomeJsType.$classSomeJsType_ = Class.$createForClass(
-          $Util.$generateId('SomeJsType'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jstype.SomeJsType'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jstype.SomeJsType'));
-    }
-    return SomeJsType.$classSomeJsType_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return SomeJsType.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -164,12 +140,8 @@ class SomeJsType extends Object {
   $init__com_google_j2cl_transpiler_readable_jstype_SomeJsType() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-SomeJsType.$classSomeJsType_ = null;
+$Util.$setClassMetadata(
+    SomeJsType, 'com.google.j2cl.transpiler.readable.jstype.SomeJsType');
 
 
 

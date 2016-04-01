@@ -81,30 +81,6 @@ class Main$A extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Main$A.$clinit();
-    if (!Main$A.$classMain$A_) {
-      Main$A.$classMain$A_ = Class.$createForClass(
-          $Util.$generateId('A'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$A'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.bridgejsmethod.Main.A'));
-    }
-    return Main$A.$classMain$A_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Main$A.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -122,12 +98,8 @@ class Main$A extends Object {
   $init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main$A() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Main$A.$classMain$A_ = null;
+$Util.$setClassMetadata(
+    Main$A, 'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$A');
 
 
 

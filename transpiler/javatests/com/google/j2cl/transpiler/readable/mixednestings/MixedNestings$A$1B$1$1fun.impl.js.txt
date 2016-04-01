@@ -120,31 +120,6 @@ class MixedNestings$A$1B$1$1fun extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    MixedNestings$A$1B$1$1fun.$clinit();
-    if (!MixedNestings$A$1B$1$1fun.$classMixedNestings$A$1B$1$1fun_) {
-      MixedNestings$A$1B$1$1fun
-          .$classMixedNestings$A$1B$1$1fun_ = Class.$createForClass(
-          $Util.$generateId('1fun'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$1$1fun'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A.1B.1.1fun'));
-    }
-    return MixedNestings$A$1B$1$1fun.$classMixedNestings$A$1B$1$1fun_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return MixedNestings$A$1B$1$1fun.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -172,12 +147,9 @@ class MixedNestings$A$1B$1$1fun extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-MixedNestings$A$1B$1$1fun.$classMixedNestings$A$1B$1$1fun_ = null;
+$Util.$setClassMetadata(
+    MixedNestings$A$1B$1$1fun,
+    'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings$A$1B$1$1fun');
 
 
 MyInterface.$markImplementor(MixedNestings$A$1B$1$1fun);

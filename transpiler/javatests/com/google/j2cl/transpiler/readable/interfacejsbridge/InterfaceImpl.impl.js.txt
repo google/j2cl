@@ -84,30 +84,6 @@ class InterfaceImpl extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    InterfaceImpl.$clinit();
-    if (!InterfaceImpl.$classInterfaceImpl_) {
-      InterfaceImpl.$classInterfaceImpl_ = Class.$createForClass(
-          $Util.$generateId('InterfaceImpl'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.interfacejsbridge.InterfaceImpl'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.interfacejsbridge.InterfaceImpl'));
-    }
-    return InterfaceImpl.$classInterfaceImpl_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return InterfaceImpl.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -125,12 +101,9 @@ class InterfaceImpl extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-InterfaceImpl.$classInterfaceImpl_ = null;
+$Util.$setClassMetadata(
+    InterfaceImpl,
+    'com.google.j2cl.transpiler.readable.interfacejsbridge.InterfaceImpl');
 
 
 SubInterface.$markImplementor(InterfaceImpl);

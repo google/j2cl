@@ -150,30 +150,6 @@ class BooleanOperations extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    BooleanOperations.$clinit();
-    if (!BooleanOperations.$classBooleanOperations_) {
-      BooleanOperations.$classBooleanOperations_ = Class.$createForClass(
-          $Util.$generateId('BooleanOperations'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations'));
-    }
-    return BooleanOperations.$classBooleanOperations_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return BooleanOperations.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -193,12 +169,9 @@ class BooleanOperations extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-BooleanOperations.$classBooleanOperations_ = null;
+$Util.$setClassMetadata(
+    BooleanOperations,
+    'com.google.j2cl.transpiler.readable.booleanoperations.BooleanOperations');
 
 
 

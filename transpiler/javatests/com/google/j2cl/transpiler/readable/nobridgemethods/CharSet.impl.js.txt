@@ -76,30 +76,6 @@ class CharSet extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    CharSet.$clinit();
-    if (!CharSet.$classCharSet_) {
-      CharSet.$classCharSet_ = Class.$createForClass(
-          $Util.$generateId('CharSet'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.nobridgemethods.CharSet'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.nobridgemethods.CharSet'));
-    }
-    return CharSet.$classCharSet_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return CharSet.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -121,12 +97,8 @@ class CharSet extends Object {
   $init__com_google_j2cl_transpiler_readable_nobridgemethods_CharSet() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-CharSet.$classCharSet_ = null;
+$Util.$setClassMetadata(
+    CharSet, 'com.google.j2cl.transpiler.readable.nobridgemethods.CharSet');
 
 
 

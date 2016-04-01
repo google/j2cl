@@ -73,30 +73,6 @@ class C extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    C.$clinit();
-    if (!C.$classC_) {
-      C.$classC_ = Class.$createForClass(
-          $Util.$generateId('C'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.backwardbridgemethod.C'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.backwardbridgemethod.C'));
-    }
-    return C.$classC_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return C.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -112,12 +88,8 @@ class C extends Object {
   $init__com_google_j2cl_transpiler_readable_backwardbridgemethod_C() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-C.$classC_ = null;
+$Util.$setClassMetadata(
+    C, 'com.google.j2cl.transpiler.readable.backwardbridgemethod.C');
 
 
 

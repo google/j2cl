@@ -72,30 +72,6 @@ class BlockScoping extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    BlockScoping.$clinit();
-    if (!BlockScoping.$classBlockScoping_) {
-      BlockScoping.$classBlockScoping_ = Class.$createForClass(
-          $Util.$generateId('BlockScoping'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.blockscoping.BlockScoping'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.blockscoping.BlockScoping'));
-    }
-    return BlockScoping.$classBlockScoping_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return BlockScoping.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -112,12 +88,9 @@ class BlockScoping extends Object {
   $init__com_google_j2cl_transpiler_readable_blockscoping_BlockScoping() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-BlockScoping.$classBlockScoping_ = null;
+$Util.$setClassMetadata(
+    BlockScoping,
+    'com.google.j2cl.transpiler.readable.blockscoping.BlockScoping');
 
 
 

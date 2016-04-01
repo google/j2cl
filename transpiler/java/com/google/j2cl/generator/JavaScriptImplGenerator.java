@@ -25,7 +25,6 @@ import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.errors.Errors;
@@ -92,7 +91,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     renderTypeAnnotation();
     renderTypeBody();
     renderStaticFieldDeclarations();
-    renderClassLiteralFieldDeclaration();
     renderMarkImplementorCalls();
     renderNativeSource();
     renderExports();
@@ -207,12 +205,13 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     renderIsInstanceMethod();
     renderIsAssignableFromMethod();
     renderCopyMethod();
-    renderGetClassMethod();
     renderStaticFieldGettersSetters();
     renderClinit();
     renderInit();
     environment.setEnclosingTypeDescriptor(null);
     sb.appendln("};");
+    sb.newLine();
+    renderClassMetadata();
     sb.newLine();
     sb.newLine();
   }
@@ -460,51 +459,18 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   // TODO: Move this to the ast in a normalization pass.
-  private void renderGetClassMethod() {
+  private void renderClassMetadata() {
     if (javaType.isJsOverlayImpl()) {
       return; // Don't render $getClass for overlay types.
     }
-    String classAlias =
-        environment.aliasForType(TypeDescriptors.get().javaLangClass.getRawTypeDescriptor());
     String utilAlias = environment.aliasForType(BootstrapType.NATIVE_UTIL.getDescriptor());
-    sb.appendln("/**");
-    sb.appendln(" * @return {%s}", classAlias);
-    sb.appendln(" * @public", classAlias);
-    sb.appendln(" */");
-    sb.appendln("static $getClass() {");
-    sb.appendln(className + ".$clinit();");
-    sb.appendln("if (!%s.$class%s_) {", className, className);
+    String name = javaType.getDescriptor().getBinaryName();
     if (javaType.isInterface()) {
-      sb.appendln("%s.$class%s_ = %s.$createForInterface(", className, className, classAlias);
+      sb.appendln("%s.$setClassMetadataForInterface(%s, '%s');", utilAlias, className, name);
     } else if (javaType.isEnum()) {
-      sb.appendln("%s.$class%s_ = %s.$createForEnum(", className, className, classAlias);
+      sb.appendln("%s.$setClassMetadataForEnum(%s, '%s');", utilAlias, className, name);
     } else {
-      sb.appendln("%s.$class%s_ = %s.$createForClass(", className, className, classAlias);
-    }
-    sb.appendln("%s.$generateId('%s'),", utilAlias, javaType.getDescriptor().getSimpleName());
-    sb.appendln("%s.$generateId('%s'),", utilAlias, javaType.getDescriptor().getBinaryName());
-    sb.append(
-        String.format("%s.$generateId('%s')", utilAlias, javaType.getDescriptor().getSourceName()));
-    if (javaType.isEnum()) {
-      sb.appendln(",null);");
-    } else {
-      sb.appendln(");");
-    }
-    sb.appendln("}");
-    sb.appendln("return %s.$class%s_;", className, className);
-    sb.appendln("}");
-    sb.newLine();
-
-    if (!javaType.isJsOverlayImpl() && !javaType.isInterface()) {
-      sb.appendln("/**");
-      if (GeneratorUtils.hasNonNativeSuperClass(javaType)) {
-        sb.appendln(" * @override");
-      }
-      sb.appendln(" * @return {%s}", classAlias);
-      sb.appendln(" * @public");
-      sb.appendln(" */");
-      sb.appendln("m_getClass() { return %s.$getClass(); }", className);
-      sb.newLine();
+      sb.appendln("%s.$setClassMetadata(%s, '%s');", utilAlias, className, name);
     }
   }
 
@@ -707,21 +673,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sb.newLine();
       sb.newLine();
     }
-  }
-
-  private void renderClassLiteralFieldDeclaration() {
-    String classAlias =
-        environment.aliasForType(TypeDescriptors.get().javaLangClass.getRawTypeDescriptor());
-    if (javaType.isJsOverlayImpl()) {
-      return;
-    }
-    sb.appendln("/**");
-    sb.appendln(" * The class literal field.");
-    sb.appendln(" * @private {%s}", classAlias);
-    sb.appendln(" */");
-    sb.appendln("%s.$class%s_ = null;", className, className);
-    sb.newLine();
-    sb.newLine();
   }
 
   /**

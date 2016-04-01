@@ -89,31 +89,6 @@ class SynchronizedStatement extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    SynchronizedStatement.$clinit();
-    if (!SynchronizedStatement.$classSynchronizedStatement_) {
-      SynchronizedStatement
-          .$classSynchronizedStatement_ = Class.$createForClass(
-          $Util.$generateId('SynchronizedStatement'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.synchronizedstatement.SynchronizedStatement'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.synchronizedstatement.SynchronizedStatement'));
-    }
-    return SynchronizedStatement.$classSynchronizedStatement_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return SynchronizedStatement.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -131,12 +106,9 @@ class SynchronizedStatement extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-SynchronizedStatement.$classSynchronizedStatement_ = null;
+$Util.$setClassMetadata(
+    SynchronizedStatement,
+    'com.google.j2cl.transpiler.readable.synchronizedstatement.SynchronizedStatement');
 
 
 

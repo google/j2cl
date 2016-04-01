@@ -71,30 +71,6 @@ class EmptyMethod extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    EmptyMethod.$clinit();
-    if (!EmptyMethod.$classEmptyMethod_) {
-      EmptyMethod.$classEmptyMethod_ = Class.$createForClass(
-          $Util.$generateId('EmptyMethod'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod'));
-    }
-    return EmptyMethod.$classEmptyMethod_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return EmptyMethod.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -112,12 +88,8 @@ class EmptyMethod extends Object {
   $init__com_google_j2cl_transpiler_readable_emptymethod_EmptyMethod() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-EmptyMethod.$classEmptyMethod_ = null;
+$Util.$setClassMetadata(
+    EmptyMethod, 'com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod');
 
 
 

@@ -87,29 +87,6 @@ class SubNativeJsType extends MyNativeJsType {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    SubNativeJsType.$clinit();
-    if (!SubNativeJsType.$classSubNativeJsType_) {
-      SubNativeJsType.$classSubNativeJsType_ = Class.$createForClass(
-          $Util.$generateId('SubNativeJsType'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.subnativejstype.SubNativeJsType'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.subnativejstype.SubNativeJsType'));
-    }
-    return SubNativeJsType.$classSubNativeJsType_;
-  }
-
-  /**
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return SubNativeJsType.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -126,12 +103,9 @@ class SubNativeJsType extends MyNativeJsType {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-SubNativeJsType.$classSubNativeJsType_ = null;
+$Util.$setClassMetadata(
+    SubNativeJsType,
+    'com.google.j2cl.transpiler.readable.subnativejstype.SubNativeJsType');
 
 
 

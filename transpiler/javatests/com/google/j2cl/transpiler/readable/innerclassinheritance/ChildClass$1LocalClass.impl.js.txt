@@ -100,31 +100,6 @@ class ChildClass$1LocalClass extends ChildClass {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    ChildClass$1LocalClass.$clinit();
-    if (!ChildClass$1LocalClass.$classChildClass$1LocalClass_) {
-      ChildClass$1LocalClass
-          .$classChildClass$1LocalClass_ = Class.$createForClass(
-          $Util.$generateId('1LocalClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$1LocalClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass.1LocalClass'));
-    }
-    return ChildClass$1LocalClass.$classChildClass$1LocalClass_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return ChildClass$1LocalClass.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -143,12 +118,9 @@ class ChildClass$1LocalClass extends ChildClass {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-ChildClass$1LocalClass.$classChildClass$1LocalClass_ = null;
+$Util.$setClassMetadata(
+    ChildClass$1LocalClass,
+    'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$1LocalClass');
 
 
 

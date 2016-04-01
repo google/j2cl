@@ -99,31 +99,6 @@ class LambdaWithGenerics$0foo extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    LambdaWithGenerics$0foo.$clinit();
-    if (!LambdaWithGenerics$0foo.$classLambdaWithGenerics$0foo_) {
-      LambdaWithGenerics$0foo
-          .$classLambdaWithGenerics$0foo_ = Class.$createForClass(
-          $Util.$generateId('0foo'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$0foo'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.0foo'));
-    }
-    return LambdaWithGenerics$0foo.$classLambdaWithGenerics$0foo_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return LambdaWithGenerics$0foo.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -143,12 +118,9 @@ class LambdaWithGenerics$0foo extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-LambdaWithGenerics$0foo.$classLambdaWithGenerics$0foo_ = null;
+$Util.$setClassMetadata(
+    LambdaWithGenerics$0foo,
+    'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$0foo');
 
 
 MyInterface.$markImplementor(LambdaWithGenerics$0foo);

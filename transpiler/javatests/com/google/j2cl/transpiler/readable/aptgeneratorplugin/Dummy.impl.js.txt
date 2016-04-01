@@ -62,30 +62,6 @@ class Dummy extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Dummy.$clinit();
-    if (!Dummy.$classDummy_) {
-      Dummy.$classDummy_ = Class.$createForClass(
-          $Util.$generateId('Dummy'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.aptgeneratorplugin.Dummy'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.aptgeneratorplugin.Dummy'));
-    }
-    return Dummy.$classDummy_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Dummy.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -101,12 +77,8 @@ class Dummy extends Object {
   $init__com_google_j2cl_transpiler_readable_aptgeneratorplugin_Dummy() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Dummy.$classDummy_ = null;
+$Util.$setClassMetadata(
+    Dummy, 'com.google.j2cl.transpiler.readable.aptgeneratorplugin.Dummy');
 
 
 

@@ -79,30 +79,6 @@ class SuperParent extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    SuperParent.$clinit();
-    if (!SuperParent.$classSuperParent_) {
-      SuperParent.$classSuperParent_ = Class.$createForClass(
-          $Util.$generateId('SuperParent'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent'));
-    }
-    return SuperParent.$classSuperParent_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return SuperParent.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -119,12 +95,9 @@ class SuperParent extends Object {
   $init__com_google_j2cl_transpiler_readable_instancejsmethods_SuperParent() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-SuperParent.$classSuperParent_ = null;
+$Util.$setClassMetadata(
+    SuperParent,
+    'com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent');
 
 
 

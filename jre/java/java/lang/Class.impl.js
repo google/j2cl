@@ -6,6 +6,7 @@ goog.module('gen.java.lang.Class$impl');
 
 let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
+let Reflect = goog.require('goog.reflect');
 
 
 /**
@@ -20,65 +21,21 @@ class Class extends Object {
   /**
    * Defines instance fields.
    *
-   * @param {?string} simpleName
-   * @param {?string} name
-   * @param {Class.Type_} type
-   * @param {?string} canonicalName
-   * @param {Array<Object>} enumConstants
-   * @param {Class} arrayElementClassLiteral
+   * @param {*} ctor
    * @param {number} dimensionCount
    */
-  constructor(simpleName, name, type, canonicalName, enumConstants,
-      arrayElementClassLiteral, dimensionCount) {
+  constructor(ctor, dimensionCount) {
     super();
 
     /**
-     * @private {?string}
+     * @private {*}
      */
-    this.$name_ = name;
-
-    /**
-     * @private {?string}
-     */
-    this.$simpleName_ = simpleName;
-
-    /**
-     * @private {Class.Type_}
-     */
-    this.$type_ = type;
-
-    /**
-     * @private {?string}
-     */
-    this.$canonicalName_ = canonicalName || name;
-
-    /**
-     * @private {Array<Object>}
-     */
-    this.$enumConstants_ = enumConstants;
-
-    /**
-     * Only used for Array class literals.
-     *
-     * @private {Class}
-     */
-    this.$arrayElementClassLiteral_ = arrayElementClassLiteral;
+    this.ctor_ = ctor;
 
     /**
      * @private {number}
      */
-    this.$dimensionCount_ = dimensionCount;
-
-    /**
-     * An array of lazily created class literals that describe Arrays of the
-     * same type as the type being described by this class literal. For example
-     * if this class literal is for class "Bar" then when array classes Bar[]
-     * and Bar[][] are created class literals to describe them will be created
-     * and stored here.
-     *
-     * @private {Array<Class>}
-     */
-    this.$arrayClassLiteralsByDimensions_ = [];
+    this.dimensionCount_ = dimensionCount;
   }
 
   /**
@@ -92,16 +49,11 @@ class Class extends Object {
    * @public
    */
   m_getCanonicalName() {
-    if (this.m_isArray() && this.$canonicalName_ == null) {
-      let canonicalNameSuffix = '';
-      for (let i = 0; i < this.$dimensionCount_; i++) {
-        canonicalNameSuffix = canonicalNameSuffix + '[]';
-      }
-      this.$canonicalName_ =
-          this.$arrayElementClassLiteral_.m_getCanonicalName() +
-          canonicalNameSuffix;
+    let simpleNameSuffix = '';
+    for (let i = 0; i < this.dimensionCount_; i++) {
+      simpleNameSuffix = simpleNameSuffix + '[]';
     }
-    return this.$canonicalName_;
+    return $Util.$extractClassName(this.ctor_) + simpleNameSuffix;
   }
 
   /**
@@ -113,9 +65,7 @@ class Class extends Object {
    */
   m_getComponentType() {
     if (this.m_isArray()) {
-      return this.$dimensionCount_ == 1 ?
-          this.$arrayElementClassLiteral_ :
-          this.$arrayElementClassLiteral_.$forArray(this.$dimensionCount_ - 1);
+      return Class.$get(this.ctor_, this.dimensionCount_ - 1);
     }
     return null;
   }
@@ -124,26 +74,25 @@ class Class extends Object {
    * @return {Array<Object>}
    * @public
    */
-  m_getEnumConstants() { return this.$enumConstants_; }
+  m_getEnumConstants() { return null; }
 
   /**
    * @return {?string}
    * @public
    */
   m_getName() {
-    if (this.m_isArray() && this.$name_ == null) {
+    let className = $Util.$extractClassName(this.ctor_);
+    if (this.m_isArray()) {
       let namePrefix = '';
-      for (let i = 0; i < this.$dimensionCount_; i++) {
+      for (let i = 0; i < this.dimensionCount_; i++) {
         namePrefix = namePrefix + '[';
       }
-      let isPrimitive =
-          this.$arrayElementClassLiteral_.$type_ == Class.Type_.PRIMITIVE;
+      let isPrimitive = this.m_isPrimitive();
       let typePrefix = isPrimitive ? '' : 'L';
       let typeSuffix = isPrimitive ? '' : ';';
-      this.$name_ = namePrefix + typePrefix +
-          this.$arrayElementClassLiteral_.m_getName() + typeSuffix;
+      return namePrefix + typePrefix + className + typeSuffix;
     }
-    return this.$name_;
+    return className;
   }
 
   /**
@@ -151,40 +100,47 @@ class Class extends Object {
    * @public
    */
   m_getSimpleName() {
-    if (this.m_isArray() && this.$simpleName_ == null) {
-      let simpleNameSuffix = '';
-      for (let i = 0; i < this.$dimensionCount_; i++) {
-        simpleNameSuffix = simpleNameSuffix + '[]';
-      }
-      this.$simpleName_ =
-          this.$arrayElementClassLiteral_.m_getSimpleName() + simpleNameSuffix;
+    let className = $Util.$extractClassName(this.ctor_);
+    let simpleClassName = className.substring(className.lastIndexOf('.') + 1);
+    let simpleNameSuffix = '';
+    for (let i = 0; i < this.dimensionCount_; i++) {
+      simpleNameSuffix = simpleNameSuffix + '[]';
     }
-    return this.$simpleName_;
+    return simpleClassName + simpleNameSuffix;
   }
 
   /**
    * @return {boolean}
    * @public
    */
-  m_isArray() { return this.$type_ == Class.Type_.ARRAY; }
+  m_isArray() { return this.dimensionCount_ != 0; }
+
+  /**
+   * @param {$Util.ClassType} type
+   * @return {boolean}
+   * @private
+   */
+  $isOfType_(type) {
+    return !this.m_isArray() && $Util.$extractClassType(this.ctor_) == type;
+  }
 
   /**
    * @return {boolean}
    * @public
    */
-  m_isEnum() { return this.$type_ == Class.Type_.ENUM; }
+  m_isEnum() { return this.$isOfType_($Util.ClassType.ENUM); }
 
   /**
    * @return {boolean}
    * @public
    */
-  m_isInterface() { return this.$type_ == Class.Type_.INTERFACE; }
+  m_isInterface() { return this.$isOfType_($Util.ClassType.INTERFACE); }
 
   /**
    * @return {boolean}
    * @public
    */
-  m_isPrimitive() { return this.$type_ == Class.Type_.PRIMITIVE; }
+  m_isPrimitive() { return this.$isOfType_($Util.ClassType.PRIMITIVE); }
 
   /**
    * @return {string}
@@ -197,80 +153,19 @@ class Class extends Object {
   }
 
   /**
-   * @param {number} dimensionCount
-   * @return {Class}
-   * @public
-   */
-  $forArray(dimensionCount) {
-    let arrayClassLiteral =
-        this.$arrayClassLiteralsByDimensions_[dimensionCount];
-    if (arrayClassLiteral != null) {
-      return arrayClassLiteral;
-    }
-
-    arrayClassLiteral = new Class(
-        null, null, Class.Type_.ARRAY,
-        null, null, this, dimensionCount);
-    this.$arrayClassLiteralsByDimensions_[dimensionCount] = arrayClassLiteral;
-    return arrayClassLiteral;
-  }
-
-  /**
-   * Should only ever be called once as part of a Class declaration.
+   * Returns the Class instance that corresponds to provided constructor and
+   * optional dimension count in the case of an array.
    *
-   * @param {string} simpleName
-   * @param {string} name
-   * @param {string=} opt_canonicalName
+   * @param {*} classConstructor
+   * @param {number=} opt_dimensionCount
    * @return {Class}
    * @public
    */
-  static $createForClass(simpleName, name, opt_canonicalName) {
-    Class.$clinit();
-    return new Class(simpleName, name, Class.Type_.PLAIN,
-        opt_canonicalName || null, null, null, 0);
-  }
-
-  /**
-   * Should only ever be called once as part of an Enum class declaration.
-   *
-   * @param {string} simpleName
-   * @param {string} name
-   * @param {string} canonicalName
-   * @param {Array<Object>} enumConstants
-   * @return {Class}
-   * @public
-   */
-  static $createForEnum(simpleName, name, canonicalName,
-      enumConstants) {
-    Class.$clinit();
-    return new Class(simpleName, name, Class.Type_.ENUM,
-        canonicalName, enumConstants, null, 0);
-  }
-
-  /**
-   * Should only ever be called once as part of an Interface declaration.
-   *
-   * @param {string} simpleName
-   * @param {string} name
-   * @param {?string=} opt_canonicalName
-   * @return {Class}
-   * @public
-   */
-  static $createForInterface(simpleName, name, opt_canonicalName) {
-    Class.$clinit();
-    return new Class(simpleName, name, Class.Type_.INTERFACE,
-        opt_canonicalName || null, null, null, 0);
-  }
-
-  /**
-   * @param {string} simpleName
-   * @return {Class}
-   * @public
-   */
-  static $createForPrimitive(simpleName) {
-    Class.$clinit();
-    return new Class(simpleName, simpleName, Class.Type_.PRIMITIVE,
-        simpleName, null, null, 0);
+  static $get(classConstructor, opt_dimensionCount) {
+    let dimensionCount = opt_dimensionCount || 0;
+    return Reflect.cache(
+        classConstructor.prototype, '$$class/' + dimensionCount,
+        function() { return new Class(classConstructor, dimensionCount); });
   }
 
   /**
@@ -296,27 +191,6 @@ class Class extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    if (!Class.$classClass_) {
-      Class.$classClass_ = Class.$createForClass(
-          $Util.$generateId('Class'),
-          $Util.$generateId('java.lang.Class'),
-          $Util.$generateId('java.lang.Class'));
-    }
-    return Class.$classClass_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Class.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    *
    * @protected
@@ -325,32 +199,7 @@ class Class extends Object {
 };
 
 
-/**
- * The class literal field.
- * @private {Class}
- */
-Class.$classClass_ = null;
-
-
-/**
- * @enum {number}
- * @private
- */
-Class.Type_ = {
-  PLAIN: 0,
-  ARRAY: 1,
-  ENUM: 2,
-  INTERFACE: 3,
-  PRIMITIVE: 4
-};
-
-
-/**
- * @define {boolean} Whether or not to keep getName() and getCanonicalName()
- *         accurate.
- * @private
- */
-goog.define('CLASS_NAMES_ENABLED_', true);
+$Util.$setClassMetadata(Class, 'java.lang.Class');
 
 
 /**

@@ -67,23 +67,6 @@ class Main$I {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Main$I.$clinit();
-    if (!Main$I.$classMain$I_) {
-      Main$I.$classMain$I_ = Class.$createForInterface(
-          $Util.$generateId('I'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$I'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.bridgejsmethod.Main.I'));
-    }
-    return Main$I.$classMain$I_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -94,12 +77,8 @@ class Main$I {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Main$I.$classMain$I_ = null;
+$Util.$setClassMetadataForInterface(
+    Main$I, 'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$I');
 
 
 Main$I.$markImplementor(/** @type {window.Function} */ (Main$I));

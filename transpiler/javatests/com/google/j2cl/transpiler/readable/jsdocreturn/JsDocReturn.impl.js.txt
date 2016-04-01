@@ -74,30 +74,6 @@ class JsDocReturn extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    JsDocReturn.$clinit();
-    if (!JsDocReturn.$classJsDocReturn_) {
-      JsDocReturn.$classJsDocReturn_ = Class.$createForClass(
-          $Util.$generateId('JsDocReturn'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsdocreturn.JsDocReturn'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsdocreturn.JsDocReturn'));
-    }
-    return JsDocReturn.$classJsDocReturn_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return JsDocReturn.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -113,12 +89,8 @@ class JsDocReturn extends Object {
   $init__com_google_j2cl_transpiler_readable_jsdocreturn_JsDocReturn() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-JsDocReturn.$classJsDocReturn_ = null;
+$Util.$setClassMetadata(
+    JsDocReturn, 'com.google.j2cl.transpiler.readable.jsdocreturn.JsDocReturn');
 
 
 

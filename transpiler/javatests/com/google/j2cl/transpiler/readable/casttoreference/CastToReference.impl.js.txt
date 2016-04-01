@@ -110,30 +110,6 @@ class CastToReference extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    CastToReference.$clinit();
-    if (!CastToReference.$classCastToReference_) {
-      CastToReference.$classCastToReference_ = Class.$createForClass(
-          $Util.$generateId('CastToReference'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.casttoreference.CastToReference'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.casttoreference.CastToReference'));
-    }
-    return CastToReference.$classCastToReference_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return CastToReference.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -165,12 +141,9 @@ class CastToReference extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-CastToReference.$classCastToReference_ = null;
+$Util.$setClassMetadata(
+    CastToReference,
+    'com.google.j2cl.transpiler.readable.casttoreference.CastToReference');
 
 
 

@@ -144,30 +144,6 @@ class MyJsFunctionImpl extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    MyJsFunctionImpl.$clinit();
-    if (!MyJsFunctionImpl.$classMyJsFunctionImpl_) {
-      MyJsFunctionImpl.$classMyJsFunctionImpl_ = Class.$createForClass(
-          $Util.$generateId('MyJsFunctionImpl'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl'));
-    }
-    return MyJsFunctionImpl.$classMyJsFunctionImpl_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return MyJsFunctionImpl.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -184,12 +160,9 @@ class MyJsFunctionImpl extends Object {
   $init__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-MyJsFunctionImpl.$classMyJsFunctionImpl_ = null;
+$Util.$setClassMetadata(
+    MyJsFunctionImpl,
+    'com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl');
 
 
 MyJsFunctionInterface.$markImplementor(MyJsFunctionImpl);

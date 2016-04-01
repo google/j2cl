@@ -74,30 +74,6 @@ class DoWhileStatement extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    DoWhileStatement.$clinit();
-    if (!DoWhileStatement.$classDoWhileStatement_) {
-      DoWhileStatement.$classDoWhileStatement_ = Class.$createForClass(
-          $Util.$generateId('DoWhileStatement'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.dowhilestatement.DoWhileStatement'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.dowhilestatement.DoWhileStatement'));
-    }
-    return DoWhileStatement.$classDoWhileStatement_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return DoWhileStatement.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -115,12 +91,9 @@ class DoWhileStatement extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-DoWhileStatement.$classDoWhileStatement_ = null;
+$Util.$setClassMetadata(
+    DoWhileStatement,
+    'com.google.j2cl.transpiler.readable.dowhilestatement.DoWhileStatement');
 
 
 

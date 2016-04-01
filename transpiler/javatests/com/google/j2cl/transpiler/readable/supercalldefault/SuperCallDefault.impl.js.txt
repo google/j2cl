@@ -62,30 +62,6 @@ class SuperCallDefault extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    SuperCallDefault.$clinit();
-    if (!SuperCallDefault.$classSuperCallDefault_) {
-      SuperCallDefault.$classSuperCallDefault_ = Class.$createForClass(
-          $Util.$generateId('SuperCallDefault'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault'));
-    }
-    return SuperCallDefault.$classSuperCallDefault_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return SuperCallDefault.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -102,12 +78,9 @@ class SuperCallDefault extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-SuperCallDefault.$classSuperCallDefault_ = null;
+$Util.$setClassMetadata(
+    SuperCallDefault,
+    'com.google.j2cl.transpiler.readable.supercalldefault.SuperCallDefault');
 
 
 

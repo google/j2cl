@@ -76,30 +76,6 @@ class AbstractImpl extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    AbstractImpl.$clinit();
-    if (!AbstractImpl.$classAbstractImpl_) {
-      AbstractImpl.$classAbstractImpl_ = Class.$createForClass(
-          $Util.$generateId('AbstractImpl'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.genericinterfaceabstractimpl.AbstractImpl'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.genericinterfaceabstractimpl.AbstractImpl'));
-    }
-    return AbstractImpl.$classAbstractImpl_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return AbstractImpl.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -117,12 +93,9 @@ class AbstractImpl extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-AbstractImpl.$classAbstractImpl_ = null;
+$Util.$setClassMetadata(
+    AbstractImpl,
+    'com.google.j2cl.transpiler.readable.genericinterfaceabstractimpl.AbstractImpl');
 
 
 MyInterface.$markImplementor(AbstractImpl);

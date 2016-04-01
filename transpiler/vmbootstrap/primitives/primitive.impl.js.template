@@ -1,6 +1,6 @@
 goog.module('vmbootstrap.primitives.$%PRIMITIVE_NAME%$impl');
 
-let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
 %long_ONLY% let Long = goog.require('nativebootstrap.Long$impl');
 
 
@@ -12,8 +12,6 @@ let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 class $%PRIMITIVE_NAME% {
   /**
    * Defines instance fields.
-   *
-   * @private
    */
   constructor() {}
 
@@ -38,40 +36,14 @@ class $%PRIMITIVE_NAME% {
   static $isAssignableFrom(classConstructor) {
     return classConstructor === $%PRIMITIVE_NAME%;
   }
-
-  /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    $%PRIMITIVE_NAME%.$clinit();
-    if (!$%PRIMITIVE_NAME%.$class$%PRIMITIVE_NAME%_) {
-      $%PRIMITIVE_NAME%.$class$%PRIMITIVE_NAME%_ = Class.$createForPrimitive('%PRIMITIVE_NAME%');
-    }
-    return $%PRIMITIVE_NAME%.$class$%PRIMITIVE_NAME%_;
-  }
-
-  /**
-   * Runs inline static field initializers.
-   * @protected
-   */
-  static $clinit() {
-    Class = goog.module.get('gen.java.lang.Class$impl');
-  }
 };
-
-
-/**
- * The class literal field.
- * @private {Class}
- */
-$%PRIMITIVE_NAME%.$class$%PRIMITIVE_NAME%_ = null;
 
 
 /**
  * @public {%PRIMITIVE_JS_TYPE%}
  */
 $%PRIMITIVE_NAME%.$initialArrayValue = %PRIMITIVE_INIT_VALUE%;
+
 
 %int_ONLY% /**
 %int_ONLY%  * @public {number}
@@ -82,6 +54,10 @@ $%PRIMITIVE_NAME%.$initialArrayValue = %PRIMITIVE_INIT_VALUE%;
 %int_ONLY% * @public {number}
 %int_ONLY% */
 %int_ONLY% $int.MIN_VALUE = -0x80000000;
+
+
+$Util.$setClassMetadataForPrimitive($%PRIMITIVE_NAME%, '%PRIMITIVE_NAME%');
+
 
 /**
  * Exported class.

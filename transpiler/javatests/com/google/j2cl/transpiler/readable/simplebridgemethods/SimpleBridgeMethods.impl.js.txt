@@ -64,30 +64,6 @@ class SimpleBridgeMethods extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    SimpleBridgeMethods.$clinit();
-    if (!SimpleBridgeMethods.$classSimpleBridgeMethods_) {
-      SimpleBridgeMethods.$classSimpleBridgeMethods_ = Class.$createForClass(
-          $Util.$generateId('SimpleBridgeMethods'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplebridgemethods.SimpleBridgeMethods'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplebridgemethods.SimpleBridgeMethods'));
-    }
-    return SimpleBridgeMethods.$classSimpleBridgeMethods_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return SimpleBridgeMethods.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -104,12 +80,9 @@ class SimpleBridgeMethods extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-SimpleBridgeMethods.$classSimpleBridgeMethods_ = null;
+$Util.$setClassMetadata(
+    SimpleBridgeMethods,
+    'com.google.j2cl.transpiler.readable.simplebridgemethods.SimpleBridgeMethods');
 
 
 

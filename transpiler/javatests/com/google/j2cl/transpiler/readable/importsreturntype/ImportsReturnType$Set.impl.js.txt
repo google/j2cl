@@ -69,31 +69,6 @@ class ImportsReturnType$Set extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    ImportsReturnType$Set.$clinit();
-    if (!ImportsReturnType$Set.$classImportsReturnType$Set_) {
-      ImportsReturnType$Set
-          .$classImportsReturnType$Set_ = Class.$createForClass(
-          $Util.$generateId('Set'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType$Set'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType.Set'));
-    }
-    return ImportsReturnType$Set.$classImportsReturnType$Set_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return ImportsReturnType$Set.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -112,12 +87,9 @@ class ImportsReturnType$Set extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-ImportsReturnType$Set.$classImportsReturnType$Set_ = null;
+$Util.$setClassMetadata(
+    ImportsReturnType$Set,
+    'com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType$Set');
 
 
 

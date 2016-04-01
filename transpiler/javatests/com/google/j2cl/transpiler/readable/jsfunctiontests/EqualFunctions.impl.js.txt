@@ -126,30 +126,6 @@ class EqualFunctions extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    EqualFunctions.$clinit();
-    if (!EqualFunctions.$classEqualFunctions_) {
-      EqualFunctions.$classEqualFunctions_ = Class.$createForClass(
-          $Util.$generateId('EqualFunctions'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions'));
-    }
-    return EqualFunctions.$classEqualFunctions_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return EqualFunctions.$getClass(); }
-
-  /**
    * A static field getter.
    * @return {?function(*, *):boolean}
    * @public
@@ -280,6 +256,10 @@ class EqualFunctions extends Object {
   $init__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions() {}
 };
 
+$Util.$setClassMetadata(
+    EqualFunctions,
+    'com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions');
+
 
 /**
  * @private {?function(*, *):boolean}
@@ -303,13 +283,6 @@ EqualFunctions
 EqualFunctions
     .$f_forCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions =
     null;
-
-
-/**
- * The class literal field.
- * @private {Class}
- */
-EqualFunctions.$classEqualFunctions_ = null;
 
 
 

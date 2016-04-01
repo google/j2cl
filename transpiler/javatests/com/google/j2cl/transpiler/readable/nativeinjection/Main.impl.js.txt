@@ -81,30 +81,6 @@ class Main extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Main.$clinit();
-    if (!Main.$classMain_) {
-      Main.$classMain_ = Class.$createForClass(
-          $Util.$generateId('Main'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.nativeinjection.Main'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.nativeinjection.Main'));
-    }
-    return Main.$classMain_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Main.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -125,12 +101,8 @@ class Main extends Object {
   $init__com_google_j2cl_transpiler_readable_nativeinjection_Main() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Main.$classMain_ = null;
+$Util.$setClassMetadata(
+    Main, 'com.google.j2cl.transpiler.readable.nativeinjection.Main');
 
 
 

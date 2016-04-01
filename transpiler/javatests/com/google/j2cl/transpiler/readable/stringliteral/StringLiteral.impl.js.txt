@@ -80,30 +80,6 @@ class StringLiteral extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    StringLiteral.$clinit();
-    if (!StringLiteral.$classStringLiteral_) {
-      StringLiteral.$classStringLiteral_ = Class.$createForClass(
-          $Util.$generateId('StringLiteral'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.stringliteral.StringLiteral'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.stringliteral.StringLiteral'));
-    }
-    return StringLiteral.$classStringLiteral_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return StringLiteral.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -127,12 +103,9 @@ class StringLiteral extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-StringLiteral.$classStringLiteral_ = null;
+$Util.$setClassMetadata(
+    StringLiteral,
+    'com.google.j2cl.transpiler.readable.stringliteral.StringLiteral');
 
 
 

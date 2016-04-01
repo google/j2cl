@@ -51,7 +51,7 @@ class Foo extends Object {
    * @public
    */
   $javaToString() {
-    return /**@type {Class<Dummy>} */ (Dummy.$getClass()).m_getSimpleName();
+    return /**@type {Class<Dummy>} */ (Class.$get(Dummy)).m_getSimpleName();
   }
 
   /**
@@ -73,30 +73,6 @@ class Foo extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Foo.$clinit();
-    if (!Foo.$classFoo_) {
-      Foo.$classFoo_ = Class.$createForClass(
-          $Util.$generateId('Foo'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.aptgeneratorplugin.Foo'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.aptgeneratorplugin.Foo'));
-    }
-    return Foo.$classFoo_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Foo.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -115,12 +91,8 @@ class Foo extends Object {
   $init__com_google_j2cl_transpiler_readable_aptgeneratorplugin_Foo() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Foo.$classFoo_ = null;
+$Util.$setClassMetadata(
+    Foo, 'com.google.j2cl.transpiler.readable.aptgeneratorplugin.Foo');
 
 
 

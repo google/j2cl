@@ -49,11 +49,9 @@ class ClassLiteral extends Object {
    * @public
    */
   m_main() {
-    let o = /**@type {Class<ClassLiteral>} */ (ClassLiteral.$getClass());
+    let o = /**@type {Class<ClassLiteral>} */ (Class.$get(ClassLiteral));
     o = /**@type {Class<Array<Array<ClassLiteral>>>} */ (
-        /**@type {Class<Array<Array<ClassLiteral>>>} */ (
-            ClassLiteral.$getClass())
-            .$forArray(2));
+        Class.$get(ClassLiteral, 2));
   }
 
   /**
@@ -75,30 +73,6 @@ class ClassLiteral extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    ClassLiteral.$clinit();
-    if (!ClassLiteral.$classClassLiteral_) {
-      ClassLiteral.$classClassLiteral_ = Class.$createForClass(
-          $Util.$generateId('ClassLiteral'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.classliteral.ClassLiteral'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.classliteral.ClassLiteral'));
-    }
-    return ClassLiteral.$classClassLiteral_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return ClassLiteral.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -115,12 +89,9 @@ class ClassLiteral extends Object {
   $init__com_google_j2cl_transpiler_readable_classliteral_ClassLiteral() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-ClassLiteral.$classClassLiteral_ = null;
+$Util.$setClassMetadata(
+    ClassLiteral,
+    'com.google.j2cl.transpiler.readable.classliteral.ClassLiteral');
 
 
 

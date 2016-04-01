@@ -72,30 +72,6 @@ class InstanceInitializers extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    InstanceInitializers.$clinit();
-    if (!InstanceInitializers.$classInstanceInitializers_) {
-      InstanceInitializers.$classInstanceInitializers_ = Class.$createForClass(
-          $Util.$generateId('InstanceInitializers'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.instanceinitializers.InstanceInitializers'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.instanceinitializers.InstanceInitializers'));
-    }
-    return InstanceInitializers.$classInstanceInitializers_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return InstanceInitializers.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -117,12 +93,9 @@ class InstanceInitializers extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-InstanceInitializers.$classInstanceInitializers_ = null;
+$Util.$setClassMetadata(
+    InstanceInitializers,
+    'com.google.j2cl.transpiler.readable.instanceinitializers.InstanceInitializers');
 
 
 

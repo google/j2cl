@@ -95,30 +95,6 @@ class CastToNativeType extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    CastToNativeType.$clinit();
-    if (!CastToNativeType.$classCastToNativeType_) {
-      CastToNativeType.$classCastToNativeType_ = Class.$createForClass(
-          $Util.$generateId('CastToNativeType'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType'));
-    }
-    return CastToNativeType.$classCastToNativeType_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return CastToNativeType.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -144,12 +120,9 @@ class CastToNativeType extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-CastToNativeType.$classCastToNativeType_ = null;
+$Util.$setClassMetadata(
+    CastToNativeType,
+    'com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType');
 
 
 

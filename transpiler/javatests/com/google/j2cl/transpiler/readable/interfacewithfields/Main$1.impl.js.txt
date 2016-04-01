@@ -81,30 +81,6 @@ class Main$1 extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Main$1.$clinit();
-    if (!Main$1.$classMain$1_) {
-      Main$1.$classMain$1_ = Class.$createForClass(
-          $Util.$generateId('1'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.interfacewithfields.Main$1'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.interfacewithfields.Main.1'));
-    }
-    return Main$1.$classMain$1_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Main$1.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -122,12 +98,8 @@ class Main$1 extends Object {
   $init__com_google_j2cl_transpiler_readable_interfacewithfields_Main$1() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Main$1.$classMain$1_ = null;
+$Util.$setClassMetadata(
+    Main$1, 'com.google.j2cl.transpiler.readable.interfacewithfields.Main$1');
 
 
 MyInterface.$markImplementor(Main$1);

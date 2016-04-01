@@ -82,31 +82,6 @@ class AnonymousInnerClass$1 extends AnonymousInnerClass$InnerClass {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    AnonymousInnerClass$1.$clinit();
-    if (!AnonymousInnerClass$1.$classAnonymousInnerClass$1_) {
-      AnonymousInnerClass$1
-          .$classAnonymousInnerClass$1_ = Class.$createForClass(
-          $Util.$generateId('1'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass$1'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.1'));
-    }
-    return AnonymousInnerClass$1.$classAnonymousInnerClass$1_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return AnonymousInnerClass$1.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -125,12 +100,9 @@ class AnonymousInnerClass$1 extends AnonymousInnerClass$InnerClass {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-AnonymousInnerClass$1.$classAnonymousInnerClass$1_ = null;
+$Util.$setClassMetadata(
+    AnonymousInnerClass$1,
+    'com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass$1');
 
 
 

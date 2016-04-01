@@ -66,35 +66,15 @@ class Callable {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Callable.$clinit();
-    if (!Callable.$classCallable_) {
-      Callable.$classCallable_ = Class.$createForInterface(
-          $Util.$generateId('Callable'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplebridgemethods.Callable'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplebridgemethods.Callable'));
-    }
-    return Callable.$classCallable_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
   static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Callable.$classCallable_ = null;
+$Util.$setClassMetadataForInterface(
+    Callable,
+    'com.google.j2cl.transpiler.readable.simplebridgemethods.Callable');
 
 
 Callable.$markImplementor(/** @type {window.Function} */ (Callable));

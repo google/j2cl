@@ -83,30 +83,6 @@ class Equality extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Equality.$clinit();
-    if (!Equality.$classEquality_) {
-      Equality.$classEquality_ = Class.$createForClass(
-          $Util.$generateId('Equality'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.equality.Equality'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.equality.Equality'));
-    }
-    return Equality.$classEquality_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Equality.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -124,12 +100,8 @@ class Equality extends Object {
   $init__com_google_j2cl_transpiler_readable_equality_Equality() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Equality.$classEquality_ = null;
+$Util.$setClassMetadata(
+    Equality, 'com.google.j2cl.transpiler.readable.equality.Equality');
 
 
 

@@ -127,31 +127,6 @@ class Numbers extends Enum {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Numbers.$clinit();
-    if (!Numbers.$classNumbers_) {
-      Numbers.$classNumbers_ = Class.$createForEnum(
-          $Util.$generateId('Numbers'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.switchstatement.Numbers'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.switchstatement.Numbers'),
-          null);
-    }
-    return Numbers.$classNumbers_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Numbers.$getClass(); }
-
-  /**
    * A static field getter.
    * @return {Numbers}
    * @public
@@ -264,6 +239,9 @@ class Numbers extends Enum {
   $init__com_google_j2cl_transpiler_readable_switchstatement_Numbers() {}
 };
 
+$Util.$setClassMetadataForEnum(
+    Numbers, 'com.google.j2cl.transpiler.readable.switchstatement.Numbers');
+
 
 /**
  * @private {Numbers}
@@ -285,13 +263,6 @@ Numbers.$f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers =
 Numbers
     .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_switchstatement_Numbers_ =
     null;
-
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Numbers.$classNumbers_ = null;
 
 
 

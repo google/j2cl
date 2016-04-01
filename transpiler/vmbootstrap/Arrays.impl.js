@@ -39,8 +39,7 @@ class Arrays {
   static $create(dimensionLengths, leafType) {
     return Arrays.$createInternal(
         dimensionLengths, leafType, leafType.$isInstance,
-        leafType.$isAssignableFrom, leafType.$getClass,
-        leafType.$initialArrayValue);
+        leafType.$isAssignableFrom, leafType.$initialArrayValue);
   }
 
   /**
@@ -48,14 +47,13 @@ class Arrays {
    * @param {*} leafType
    * @param {Function} leafTypeIsInstance
    * @param {Function} leafTypeIsAssignableFrom
-   * @param {Function} leafTypeGetClass
    * @param {*} leafTypeInitialValue
    * @return {Array<*>}
    * @private
    */
   static $createInternal(
       dimensionLengths, leafType, leafTypeIsInstance, leafTypeIsAssignableFrom,
-      leafTypeGetClass, leafTypeInitialValue) {
+      leafTypeInitialValue) {
     let length = dimensionLengths[0];
     if (length == null) {
       return null;
@@ -65,7 +63,6 @@ class Arrays {
     array.leafType = leafType;
     array.leafTypeIsInstance = leafTypeIsInstance;
     array.leafTypeIsAssignableFrom = leafTypeIsAssignableFrom;
-    array.leafTypeGetClass = leafTypeGetClass;
     array.dimensionCount = dimensionLengths.length;
     array.length = length;
 
@@ -75,7 +72,7 @@ class Arrays {
       for (let i = 0; i < length; i++) {
         array[i] = Arrays.$createInternal(
             subDimensionLengths, leafType, leafTypeIsInstance,
-            leafTypeIsAssignableFrom, leafTypeGetClass, leafTypeInitialValue);
+            leafTypeIsAssignableFrom, leafTypeInitialValue);
       }
     } else {
       // Contains leaf type values.
@@ -113,14 +110,13 @@ class Arrays {
    */
   static $init(array, leafType, opt_dimensionCount) {
     return Arrays.$initRecursiveInternal(
-        array, leafType, leafType.$getClass, leafType.$isInstance,
-        leafType.$isAssignableFrom, opt_dimensionCount || 1);
+        array, leafType, leafType.$isInstance, leafType.$isAssignableFrom,
+        opt_dimensionCount || 1);
   }
 
   /**
    * @param {Array<*>} array
    * @param {*} leafType
-   * @param {Function} leafTypeGetClass
    * @param {Function} leafTypeIsInstance
    * @param {Function} leafTypeIsAssignableFrom
    * @param {number} dimensionCount
@@ -128,12 +124,11 @@ class Arrays {
    * @private
    */
   static $initRecursiveInternal(
-      array, leafType, leafTypeGetClass, leafTypeIsInstance,
-      leafTypeIsAssignableFrom, dimensionCount) {
+      array, leafType, leafTypeIsInstance, leafTypeIsAssignableFrom,
+      dimensionCount) {
     array.leafType = leafType;
     array.leafTypeIsInstance = leafTypeIsInstance;
     array.leafTypeIsAssignableFrom = leafTypeIsAssignableFrom;
-    array.leafTypeGetClass = leafTypeGetClass;
     array.dimensionCount = dimensionCount;
 
     // Length is not set since the provided array already contain values and
@@ -145,8 +140,8 @@ class Arrays {
           continue;
         }
         Arrays.$initRecursiveInternal(
-            /** @type {Array<*>} */ (nestedArray), leafType, leafTypeGetClass,
-            leafTypeIsInstance, leafTypeIsAssignableFrom, dimensionCount - 1);
+            /** @type {Array<*>} */ (nestedArray), leafType, leafTypeIsInstance,
+            leafTypeIsAssignableFrom, dimensionCount - 1);
       }
     }
 
@@ -217,7 +212,6 @@ class Arrays {
     enhancedArray.leafTypeIsInstance = otherEnhancedArray.leafTypeIsInstance;
     enhancedArray.leafTypeIsAssignableFrom =
         otherEnhancedArray.leafTypeIsAssignableFrom;
-    enhancedArray.leafTypeGetClass = otherEnhancedArray.leafTypeGetClass;
     enhancedArray.dimensionCount = otherEnhancedArray.dimensionCount;
   }
 
@@ -360,12 +354,11 @@ class Arrays {
    */
   static m_getClass__java_lang_Object(obj) {
     Arrays.$clinit();
-    if (obj.leafTypeGetClass) {
-      return obj.leafTypeGetClass().$forArray(obj.dimensionCount || 1);
+    if (obj.leafType) {
+      return Class.$get(obj.leafType, obj.dimensionCount || 1);
     }
-    // Uninitialized arrays lack a 'leafTypeGetClass' method but are implicitly
-    // Object[].
-    return Object.$getClass().$forArray(1);
+    // Uninitialized arrays lack a 'leafType' but are implicitly Object[].
+    return Class.$get(Object, 1);
   }
 
   /**
@@ -551,7 +544,6 @@ class Arrays {
  *   leafType: *,
  *   leafTypeIsInstance: Function,
  *   leafTypeIsAssignableFrom: Function,
- *   leafTypeGetClass: Function,
  *   dimensionCount: number,
  *   length: number
  * }}

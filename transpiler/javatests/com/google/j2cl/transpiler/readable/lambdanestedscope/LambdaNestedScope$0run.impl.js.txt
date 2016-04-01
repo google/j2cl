@@ -101,31 +101,6 @@ class LambdaNestedScope$0run extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    LambdaNestedScope$0run.$clinit();
-    if (!LambdaNestedScope$0run.$classLambdaNestedScope$0run_) {
-      LambdaNestedScope$0run
-          .$classLambdaNestedScope$0run_ = Class.$createForClass(
-          $Util.$generateId('0run'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope$0run'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope.0run'));
-    }
-    return LambdaNestedScope$0run.$classLambdaNestedScope$0run_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return LambdaNestedScope$0run.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -146,12 +121,9 @@ class LambdaNestedScope$0run extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-LambdaNestedScope$0run.$classLambdaNestedScope$0run_ = null;
+$Util.$setClassMetadata(
+    LambdaNestedScope$0run,
+    'com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope$0run');
 
 
 LambdaNestedScope$Runner.$markImplementor(LambdaNestedScope$0run);

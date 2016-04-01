@@ -8,7 +8,6 @@ goog.module('vmbootstrap.CharSequences');
 // all files are included in the dependency tree.
 
 let _Numbers = goog.require('vmbootstrap.Numbers');
-let _Class = goog.require('gen.java.lang.Class');
 let _Comparable = goog.require('gen.java.lang.CharSequence');
 let _String = goog.require('gen.java.lang.String');
 

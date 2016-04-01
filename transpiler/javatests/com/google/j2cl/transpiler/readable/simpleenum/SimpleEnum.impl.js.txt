@@ -127,31 +127,6 @@ class SimpleEnum extends Enum {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    SimpleEnum.$clinit();
-    if (!SimpleEnum.$classSimpleEnum_) {
-      SimpleEnum.$classSimpleEnum_ = Class.$createForEnum(
-          $Util.$generateId('SimpleEnum'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum'),
-          null);
-    }
-    return SimpleEnum.$classSimpleEnum_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return SimpleEnum.$getClass(); }
-
-  /**
    * A static field getter.
    * @return {SimpleEnum}
    * @public
@@ -262,6 +237,9 @@ class SimpleEnum extends Enum {
   $init__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum() {}
 };
 
+$Util.$setClassMetadataForEnum(
+    SimpleEnum, 'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum');
+
 
 /**
  * @private {SimpleEnum}
@@ -283,13 +261,6 @@ SimpleEnum.$f_V2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum =
 SimpleEnum
     .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum_ =
     null;
-
-
-/**
- * The class literal field.
- * @private {Class}
- */
-SimpleEnum.$classSimpleEnum_ = null;
 
 
 

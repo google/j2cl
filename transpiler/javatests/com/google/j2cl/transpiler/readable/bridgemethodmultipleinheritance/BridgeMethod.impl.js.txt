@@ -130,30 +130,6 @@ class BridgeMethod extends Parent {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    BridgeMethod.$clinit();
-    if (!BridgeMethod.$classBridgeMethod_) {
-      BridgeMethod.$classBridgeMethod_ = Class.$createForClass(
-          $Util.$generateId('BridgeMethod'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod'));
-    }
-    return BridgeMethod.$classBridgeMethod_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return BridgeMethod.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -173,12 +149,9 @@ class BridgeMethod extends Parent {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-BridgeMethod.$classBridgeMethod_ = null;
+$Util.$setClassMetadata(
+    BridgeMethod,
+    'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod');
 
 
 SomeInterface.$markImplementor(BridgeMethod);

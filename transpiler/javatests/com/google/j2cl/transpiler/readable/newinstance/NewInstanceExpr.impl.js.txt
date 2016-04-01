@@ -74,30 +74,6 @@ class NewInstanceExpr extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    NewInstanceExpr.$clinit();
-    if (!NewInstanceExpr.$classNewInstanceExpr_) {
-      NewInstanceExpr.$classNewInstanceExpr_ = Class.$createForClass(
-          $Util.$generateId('NewInstanceExpr'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr'));
-    }
-    return NewInstanceExpr.$classNewInstanceExpr_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return NewInstanceExpr.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -115,12 +91,9 @@ class NewInstanceExpr extends Object {
   $init__com_google_j2cl_transpiler_readable_newinstance_NewInstanceExpr() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-NewInstanceExpr.$classNewInstanceExpr_ = null;
+$Util.$setClassMetadata(
+    NewInstanceExpr,
+    'com.google.j2cl.transpiler.readable.newinstance.NewInstanceExpr');
 
 
 

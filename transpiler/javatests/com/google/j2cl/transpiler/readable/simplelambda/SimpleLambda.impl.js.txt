@@ -168,30 +168,6 @@ class SimpleLambda extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    SimpleLambda.$clinit();
-    if (!SimpleLambda.$classSimpleLambda_) {
-      SimpleLambda.$classSimpleLambda_ = Class.$createForClass(
-          $Util.$generateId('SimpleLambda'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda'));
-    }
-    return SimpleLambda.$classSimpleLambda_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return SimpleLambda.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -225,12 +201,9 @@ class SimpleLambda extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-SimpleLambda.$classSimpleLambda_ = null;
+$Util.$setClassMetadata(
+    SimpleLambda,
+    'com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda');
 
 
 

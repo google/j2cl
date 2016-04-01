@@ -57,35 +57,15 @@ class EmptyInterface {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    EmptyInterface.$clinit();
-    if (!EmptyInterface.$classEmptyInterface_) {
-      EmptyInterface.$classEmptyInterface_ = Class.$createForInterface(
-          $Util.$generateId('EmptyInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.emptyinterface.EmptyInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.emptyinterface.EmptyInterface'));
-    }
-    return EmptyInterface.$classEmptyInterface_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
   static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-EmptyInterface.$classEmptyInterface_ = null;
+$Util.$setClassMetadataForInterface(
+    EmptyInterface,
+    'com.google.j2cl.transpiler.readable.emptyinterface.EmptyInterface');
 
 
 EmptyInterface.$markImplementor(

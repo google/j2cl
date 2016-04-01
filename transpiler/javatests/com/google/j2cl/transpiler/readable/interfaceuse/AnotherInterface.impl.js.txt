@@ -67,35 +67,15 @@ class AnotherInterface {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    AnotherInterface.$clinit();
-    if (!AnotherInterface.$classAnotherInterface_) {
-      AnotherInterface.$classAnotherInterface_ = Class.$createForInterface(
-          $Util.$generateId('AnotherInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface'));
-    }
-    return AnotherInterface.$classAnotherInterface_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
   static $clinit() { Class = goog.module.get('gen.java.lang.Class$impl'); }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-AnotherInterface.$classAnotherInterface_ = null;
+$Util.$setClassMetadataForInterface(
+    AnotherInterface,
+    'com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface');
 
 
 AnotherInterface.$markImplementor(

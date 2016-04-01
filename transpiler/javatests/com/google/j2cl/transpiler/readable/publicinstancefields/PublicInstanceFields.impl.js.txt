@@ -77,30 +77,6 @@ class PublicInstanceFields extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    PublicInstanceFields.$clinit();
-    if (!PublicInstanceFields.$classPublicInstanceFields_) {
-      PublicInstanceFields.$classPublicInstanceFields_ = Class.$createForClass(
-          $Util.$generateId('PublicInstanceFields'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.publicinstancefields.PublicInstanceFields'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.publicinstancefields.PublicInstanceFields'));
-    }
-    return PublicInstanceFields.$classPublicInstanceFields_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return PublicInstanceFields.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -120,12 +96,9 @@ class PublicInstanceFields extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-PublicInstanceFields.$classPublicInstanceFields_ = null;
+$Util.$setClassMetadata(
+    PublicInstanceFields,
+    'com.google.j2cl.transpiler.readable.publicinstancefields.PublicInstanceFields');
 
 
 

@@ -64,30 +64,6 @@ class PrivateConstructor extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    PrivateConstructor.$clinit();
-    if (!PrivateConstructor.$classPrivateConstructor_) {
-      PrivateConstructor.$classPrivateConstructor_ = Class.$createForClass(
-          $Util.$generateId('PrivateConstructor'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor'));
-    }
-    return PrivateConstructor.$classPrivateConstructor_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return PrivateConstructor.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -104,12 +80,9 @@ class PrivateConstructor extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-PrivateConstructor.$classPrivateConstructor_ = null;
+$Util.$setClassMetadata(
+    PrivateConstructor,
+    'com.google.j2cl.transpiler.readable.privateconstructor.PrivateConstructor');
 
 
 

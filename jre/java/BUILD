@@ -59,6 +59,7 @@ js_library(
         exclude = ["**/*.native.js"],
     ),
     deps = [
+        "//javascript/closure/reflect",
         "//transpiler:nativebootstrap",
         ":JavaJre",
     ],

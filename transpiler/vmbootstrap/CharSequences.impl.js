@@ -3,7 +3,6 @@
  */
 goog.module('vmbootstrap.CharSequences$impl');
 
-let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let CharSequence = goog.forwardDeclare('gen.java.lang.CharSequence$impl');
 let String = goog.forwardDeclare('gen.java.lang.String$impl');
 
@@ -65,25 +64,10 @@ class CharSequences {
   }
 
   /**
-   * @param {*} obj
-   * @return {Class}
-   * @public
-   */
-  static m_getClass__java_lang_CharSequence(obj) {
-    CharSequences.$clinit();
-    if (typeof obj == 'string') {
-      return String.$getClass();
-    } else {
-      return obj.m_getClass();
-    }
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
   static $clinit() {
-    Class = goog.module.get('gen.java.lang.Class$impl');
     CharSequence = goog.module.get('gen.java.lang.CharSequence$impl');
     String = goog.module.get('gen.java.lang.String$impl');
   }

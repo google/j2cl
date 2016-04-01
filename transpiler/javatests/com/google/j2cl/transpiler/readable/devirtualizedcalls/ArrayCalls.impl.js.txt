@@ -76,30 +76,6 @@ class ArrayCalls extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    ArrayCalls.$clinit();
-    if (!ArrayCalls.$classArrayCalls_) {
-      ArrayCalls.$classArrayCalls_ = Class.$createForClass(
-          $Util.$generateId('ArrayCalls'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.devirtualizedcalls.ArrayCalls'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.devirtualizedcalls.ArrayCalls'));
-    }
-    return ArrayCalls.$classArrayCalls_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return ArrayCalls.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -118,12 +94,9 @@ class ArrayCalls extends Object {
   $init__com_google_j2cl_transpiler_readable_devirtualizedcalls_ArrayCalls() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-ArrayCalls.$classArrayCalls_ = null;
+$Util.$setClassMetadata(
+    ArrayCalls,
+    'com.google.j2cl.transpiler.readable.devirtualizedcalls.ArrayCalls');
 
 
 

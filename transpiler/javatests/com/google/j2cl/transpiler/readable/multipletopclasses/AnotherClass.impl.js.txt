@@ -62,30 +62,6 @@ class AnotherClass extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    AnotherClass.$clinit();
-    if (!AnotherClass.$classAnotherClass_) {
-      AnotherClass.$classAnotherClass_ = Class.$createForClass(
-          $Util.$generateId('AnotherClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.multipletopclasses.AnotherClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.multipletopclasses.AnotherClass'));
-    }
-    return AnotherClass.$classAnotherClass_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return AnotherClass.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -102,12 +78,9 @@ class AnotherClass extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-AnotherClass.$classAnotherClass_ = null;
+$Util.$setClassMetadata(
+    AnotherClass,
+    'com.google.j2cl.transpiler.readable.multipletopclasses.AnotherClass');
 
 
 

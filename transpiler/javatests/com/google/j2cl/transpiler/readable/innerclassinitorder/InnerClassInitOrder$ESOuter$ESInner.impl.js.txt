@@ -122,33 +122,6 @@ class InnerClassInitOrder$ESOuter$ESInner extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    InnerClassInitOrder$ESOuter$ESInner.$clinit();
-    if (!InnerClassInitOrder$ESOuter$ESInner
-             .$classInnerClassInitOrder$ESOuter$ESInner_) {
-      InnerClassInitOrder$ESOuter$ESInner
-          .$classInnerClassInitOrder$ESOuter$ESInner_ = Class.$createForClass(
-          $Util.$generateId('ESInner'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESOuter$ESInner'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner'));
-    }
-    return InnerClassInitOrder$ESOuter$ESInner
-        .$classInnerClassInitOrder$ESOuter$ESInner_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return InnerClassInitOrder$ESOuter$ESInner.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -168,13 +141,9 @@ class InnerClassInitOrder$ESOuter$ESInner extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-InnerClassInitOrder$ESOuter$ESInner.$classInnerClassInitOrder$ESOuter$ESInner_ =
-    null;
+$Util.$setClassMetadata(
+    InnerClassInitOrder$ESOuter$ESInner,
+    'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESOuter$ESInner');
 
 
 

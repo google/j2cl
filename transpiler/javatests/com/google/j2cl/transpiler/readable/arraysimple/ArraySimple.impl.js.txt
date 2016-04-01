@@ -79,30 +79,6 @@ class ArraySimple extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    ArraySimple.$clinit();
-    if (!ArraySimple.$classArraySimple_) {
-      ArraySimple.$classArraySimple_ = Class.$createForClass(
-          $Util.$generateId('ArraySimple'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.arraysimple.ArraySimple'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.arraysimple.ArraySimple'));
-    }
-    return ArraySimple.$classArraySimple_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return ArraySimple.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -119,12 +95,8 @@ class ArraySimple extends Object {
   $init__com_google_j2cl_transpiler_readable_arraysimple_ArraySimple() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-ArraySimple.$classArraySimple_ = null;
+$Util.$setClassMetadata(
+    ArraySimple, 'com.google.j2cl.transpiler.readable.arraysimple.ArraySimple');
 
 
 

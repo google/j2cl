@@ -76,30 +76,6 @@ class Bar extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Bar.$clinit();
-    if (!Bar.$classBar_) {
-      Bar.$classBar_ = Class.$createForClass(
-          $Util.$generateId('Bar'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.unimplementedbridgemethod.Bar'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.unimplementedbridgemethod.Bar'));
-    }
-    return Bar.$classBar_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Bar.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -116,12 +92,8 @@ class Bar extends Object {
   $init__com_google_j2cl_transpiler_readable_unimplementedbridgemethod_Bar() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Bar.$classBar_ = null;
+$Util.$setClassMetadata(
+    Bar, 'com.google.j2cl.transpiler.readable.unimplementedbridgemethod.Bar');
 
 
 J.$markImplementor(Bar);

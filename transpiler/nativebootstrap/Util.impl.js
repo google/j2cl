@@ -21,6 +21,69 @@ class Util {
   static $generateId(id) { return id; }
 
   /**
+   * @param {*} ctor
+   * @param {string} name
+   * @public
+   */
+  static $setClassMetadata(ctor, name) {
+    ctor.prototype.$$classMetadata = [name, Util.ClassType.CLASS];
+  }
+
+  /**
+   * @param {*} ctor
+   * @param {string} name
+   * @public
+   */
+  static $setClassMetadataForInterface(ctor, name) {
+    ctor.prototype.$$classMetadata = [name, Util.ClassType.INTERFACE];
+  }
+
+  /**
+   * @param {*} ctor
+   * @param {string} name
+   * @public
+   */
+  static $setClassMetadataForEnum(ctor, name) {
+    ctor.prototype.$$classMetadata = [name, Util.ClassType.ENUM];
+  }
+
+  /**
+   * @param {*} ctor
+   * @param {string} name
+   * @public
+   */
+  static $setClassMetadataForPrimitive(ctor, name) {
+    ctor.prototype.$$classMetadata = [name, Util.ClassType.PRIMITIVE];
+  }
+
+  /**
+   * @param {*} ctor
+   * @return {string}
+   * @public
+   */
+  static $extractClassName(ctor) {
+    if (CLASS_METADATA_ENABLED_) {
+      return ctor.prototype.$$classMetadata[0];
+    } else {
+      // TODO(goktug): use uniq ID
+      return 'Class$obf';
+    }
+  }
+
+  /**
+   * @param {*} ctor
+   * @return {Util.ClassType}
+   * @public
+   */
+  static $extractClassType(ctor) {
+    if (CLASS_METADATA_ENABLED_) {
+      return ctor.prototype.$$classMetadata[1];
+    } else {
+      return Util.ClassType.CLASS;
+    }
+  }
+
+  /**
    * Returns whether the "from" class can be cast to the "to" class.
    *
    * Unlike instanceof, this function operates on classes instead of
@@ -66,6 +129,25 @@ class Util {
  * @public {*}
  */
 Util.$q = null;
+
+
+/**
+ * @define {boolean} Whether or not to keep getName() and getCanonicalName()
+ *         accurate.
+ * @private
+ */
+goog.define('CLASS_METADATA_ENABLED_', true);
+
+
+/**
+ * @enum {number}
+ */
+Util.ClassType = {
+  CLASS: 0,
+  INTERFACE: 1,
+  ENUM: 2,
+  PRIMITIVE: 3
+};
 
 
 /**

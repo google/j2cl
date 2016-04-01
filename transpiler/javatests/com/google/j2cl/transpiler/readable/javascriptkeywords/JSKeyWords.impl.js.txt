@@ -73,30 +73,6 @@ class JSKeyWords extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    JSKeyWords.$clinit();
-    if (!JSKeyWords.$classJSKeyWords_) {
-      JSKeyWords.$classJSKeyWords_ = Class.$createForClass(
-          $Util.$generateId('JSKeyWords'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords'));
-    }
-    return JSKeyWords.$classJSKeyWords_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return JSKeyWords.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -113,12 +89,9 @@ class JSKeyWords extends Object {
   $init__com_google_j2cl_transpiler_readable_javascriptkeywords_JSKeyWords() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-JSKeyWords.$classJSKeyWords_ = null;
+$Util.$setClassMetadata(
+    JSKeyWords,
+    'com.google.j2cl.transpiler.readable.javascriptkeywords.JSKeyWords');
 
 
 

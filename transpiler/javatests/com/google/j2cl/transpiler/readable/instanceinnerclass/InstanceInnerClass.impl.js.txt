@@ -97,30 +97,6 @@ class InstanceInnerClass extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    InstanceInnerClass.$clinit();
-    if (!InstanceInnerClass.$classInstanceInnerClass_) {
-      InstanceInnerClass.$classInstanceInnerClass_ = Class.$createForClass(
-          $Util.$generateId('InstanceInnerClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass'));
-    }
-    return InstanceInnerClass.$classInstanceInnerClass_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return InstanceInnerClass.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -140,12 +116,9 @@ class InstanceInnerClass extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-InstanceInnerClass.$classInstanceInnerClass_ = null;
+$Util.$setClassMetadata(
+    InstanceInnerClass,
+    'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass');
 
 
 

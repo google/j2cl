@@ -63,31 +63,6 @@ class JsTypesWithConstructor extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    JsTypesWithConstructor.$clinit();
-    if (!JsTypesWithConstructor.$classJsTypesWithConstructor_) {
-      JsTypesWithConstructor
-          .$classJsTypesWithConstructor_ = Class.$createForClass(
-          $Util.$generateId('JsTypesWithConstructor'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jstypeswithconstructor.JsTypesWithConstructor'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jstypeswithconstructor.JsTypesWithConstructor'));
-    }
-    return JsTypesWithConstructor.$classJsTypesWithConstructor_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return JsTypesWithConstructor.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -104,12 +79,9 @@ class JsTypesWithConstructor extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-JsTypesWithConstructor.$classJsTypesWithConstructor_ = null;
+$Util.$setClassMetadata(
+    JsTypesWithConstructor,
+    'com.google.j2cl.transpiler.readable.jstypeswithconstructor.JsTypesWithConstructor');
 
 
 

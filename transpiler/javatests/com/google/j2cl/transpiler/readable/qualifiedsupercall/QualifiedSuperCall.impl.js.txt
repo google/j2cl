@@ -75,30 +75,6 @@ class QualifiedSuperCall extends Parent {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    QualifiedSuperCall.$clinit();
-    if (!QualifiedSuperCall.$classQualifiedSuperCall_) {
-      QualifiedSuperCall.$classQualifiedSuperCall_ = Class.$createForClass(
-          $Util.$generateId('QualifiedSuperCall'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall'));
-    }
-    return QualifiedSuperCall.$classQualifiedSuperCall_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return QualifiedSuperCall.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -117,12 +93,9 @@ class QualifiedSuperCall extends Parent {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-QualifiedSuperCall.$classQualifiedSuperCall_ = null;
+$Util.$setClassMetadata(
+    QualifiedSuperCall,
+    'com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall');
 
 
 

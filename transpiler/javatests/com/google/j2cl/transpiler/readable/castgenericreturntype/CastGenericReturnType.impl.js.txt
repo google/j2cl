@@ -96,31 +96,6 @@ class CastGenericReturnType extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    CastGenericReturnType.$clinit();
-    if (!CastGenericReturnType.$classCastGenericReturnType_) {
-      CastGenericReturnType
-          .$classCastGenericReturnType_ = Class.$createForClass(
-          $Util.$generateId('CastGenericReturnType'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType'));
-    }
-    return CastGenericReturnType.$classCastGenericReturnType_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return CastGenericReturnType.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -138,12 +113,9 @@ class CastGenericReturnType extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-CastGenericReturnType.$classCastGenericReturnType_ = null;
+$Util.$setClassMetadata(
+    CastGenericReturnType,
+    'com.google.j2cl.transpiler.readable.castgenericreturntype.CastGenericReturnType');
 
 
 

@@ -87,30 +87,6 @@ class SimpleLocalClass extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    SimpleLocalClass.$clinit();
-    if (!SimpleLocalClass.$classSimpleLocalClass_) {
-      SimpleLocalClass.$classSimpleLocalClass_ = Class.$createForClass(
-          $Util.$generateId('SimpleLocalClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass'));
-    }
-    return SimpleLocalClass.$classSimpleLocalClass_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return SimpleLocalClass.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -132,12 +108,9 @@ class SimpleLocalClass extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-SimpleLocalClass.$classSimpleLocalClass_ = null;
+$Util.$setClassMetadata(
+    SimpleLocalClass,
+    'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass');
 
 
 

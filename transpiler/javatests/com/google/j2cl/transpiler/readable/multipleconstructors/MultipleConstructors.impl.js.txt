@@ -150,30 +150,6 @@ class MultipleConstructors extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    MultipleConstructors.$clinit();
-    if (!MultipleConstructors.$classMultipleConstructors_) {
-      MultipleConstructors.$classMultipleConstructors_ = Class.$createForClass(
-          $Util.$generateId('MultipleConstructors'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors'));
-    }
-    return MultipleConstructors.$classMultipleConstructors_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return MultipleConstructors.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -192,12 +168,9 @@ class MultipleConstructors extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-MultipleConstructors.$classMultipleConstructors_ = null;
+$Util.$setClassMetadata(
+    MultipleConstructors,
+    'com.google.j2cl.transpiler.readable.multipleconstructors.MultipleConstructors');
 
 
 

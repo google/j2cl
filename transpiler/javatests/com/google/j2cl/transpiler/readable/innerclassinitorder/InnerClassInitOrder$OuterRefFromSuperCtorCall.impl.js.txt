@@ -85,35 +85,6 @@ class InnerClassInitOrder$OuterRefFromSuperCtorCall extends
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    InnerClassInitOrder$OuterRefFromSuperCtorCall.$clinit();
-    if (!InnerClassInitOrder$OuterRefFromSuperCtorCall
-             .$classInnerClassInitOrder$OuterRefFromSuperCtorCall_) {
-      InnerClassInitOrder$OuterRefFromSuperCtorCall
-          .$classInnerClassInitOrder$OuterRefFromSuperCtorCall_ = Class.$createForClass(
-          $Util.$generateId('OuterRefFromSuperCtorCall'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorCall'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall'));
-    }
-    return InnerClassInitOrder$OuterRefFromSuperCtorCall
-        .$classInnerClassInitOrder$OuterRefFromSuperCtorCall_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() {
-    return InnerClassInitOrder$OuterRefFromSuperCtorCall.$getClass();
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -134,13 +105,9 @@ class InnerClassInitOrder$OuterRefFromSuperCtorCall extends
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-InnerClassInitOrder$OuterRefFromSuperCtorCall
-    .$classInnerClassInitOrder$OuterRefFromSuperCtorCall_ = null;
+$Util.$setClassMetadata(
+    InnerClassInitOrder$OuterRefFromSuperCtorCall,
+    'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorCall');
 
 
 

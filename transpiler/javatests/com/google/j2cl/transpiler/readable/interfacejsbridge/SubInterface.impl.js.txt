@@ -73,23 +73,6 @@ class SubInterface {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    SubInterface.$clinit();
-    if (!SubInterface.$classSubInterface_) {
-      SubInterface.$classSubInterface_ = Class.$createForInterface(
-          $Util.$generateId('SubInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.interfacejsbridge.SubInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.interfacejsbridge.SubInterface'));
-    }
-    return SubInterface.$classSubInterface_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -99,12 +82,9 @@ class SubInterface {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-SubInterface.$classSubInterface_ = null;
+$Util.$setClassMetadataForInterface(
+    SubInterface,
+    'com.google.j2cl.transpiler.readable.interfacejsbridge.SubInterface');
 
 
 SubInterface.$markImplementor(/** @type {window.Function} */ (SubInterface));

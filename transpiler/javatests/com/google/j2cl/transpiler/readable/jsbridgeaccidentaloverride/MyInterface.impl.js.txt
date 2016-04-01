@@ -74,23 +74,6 @@ class MyInterface {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    MyInterface.$clinit();
-    if (!MyInterface.$classMyInterface_) {
-      MyInterface.$classMyInterface_ = Class.$createForInterface(
-          $Util.$generateId('MyInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyInterface'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyInterface'));
-    }
-    return MyInterface.$classMyInterface_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -100,12 +83,9 @@ class MyInterface {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-MyInterface.$classMyInterface_ = null;
+$Util.$setClassMetadataForInterface(
+    MyInterface,
+    'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyInterface');
 
 
 MyInterface.$markImplementor(/** @type {window.Function} */ (MyInterface));

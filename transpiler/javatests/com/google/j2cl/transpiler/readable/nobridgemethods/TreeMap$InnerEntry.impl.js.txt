@@ -71,30 +71,6 @@ class TreeMap$InnerEntry extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    TreeMap$InnerEntry.$clinit();
-    if (!TreeMap$InnerEntry.$classTreeMap$InnerEntry_) {
-      TreeMap$InnerEntry.$classTreeMap$InnerEntry_ = Class.$createForClass(
-          $Util.$generateId('InnerEntry'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap$InnerEntry'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap.InnerEntry'));
-    }
-    return TreeMap$InnerEntry.$classTreeMap$InnerEntry_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return TreeMap$InnerEntry.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -113,12 +89,9 @@ class TreeMap$InnerEntry extends Object {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-TreeMap$InnerEntry.$classTreeMap$InnerEntry_ = null;
+$Util.$setClassMetadata(
+    TreeMap$InnerEntry,
+    'com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap$InnerEntry');
 
 
 Entry.$markImplementor(TreeMap$InnerEntry);

@@ -6,8 +6,6 @@ goog.module('gen.java.lang.Comparable$impl');
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
-
 
 /**
  * @interface
@@ -64,35 +62,13 @@ class Comparable {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Comparable.$clinit();
-    if (!Comparable.$classComparable_) {
-      Comparable.$classComparable_ = Class.$createForInterface(
-          $Util.$generateId('Comparable'),
-          $Util.$generateId('java.lang.Comparable'),
-          $Util.$generateId('java.lang.Comparable'));
-    }
-    return Comparable.$classComparable_;
-  }
-
-  /**
    * Runs inline static field initializers.
    * @protected
    */
-  static $clinit() {
-    Class = goog.module.get('gen.java.lang.Class$impl');
-  }};
+  static $clinit() {}
+};
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Comparable.$classComparable_ = null;
-
+$Util.$setClassMetadataForInterface(Comparable, 'java.lang.Comparable');
 
 Comparable.$markImplementor(/** @type {Function} */(Comparable));
 

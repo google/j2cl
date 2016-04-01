@@ -107,30 +107,6 @@ class Parent extends SuperParent {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    Parent.$clinit();
-    if (!Parent.$classParent_) {
-      Parent.$classParent_ = Class.$createForClass(
-          $Util.$generateId('Parent'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent'));
-    }
-    return Parent.$classParent_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return Parent.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -150,12 +126,9 @@ class Parent extends SuperParent {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-Parent.$classParent_ = null;
+$Util.$setClassMetadata(
+    Parent,
+    'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent');
 
 
 

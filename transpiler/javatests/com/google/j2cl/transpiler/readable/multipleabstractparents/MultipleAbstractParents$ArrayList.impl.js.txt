@@ -72,33 +72,6 @@ class MultipleAbstractParents$ArrayList extends
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    MultipleAbstractParents$ArrayList.$clinit();
-    if (!MultipleAbstractParents$ArrayList
-             .$classMultipleAbstractParents$ArrayList_) {
-      MultipleAbstractParents$ArrayList
-          .$classMultipleAbstractParents$ArrayList_ = Class.$createForClass(
-          $Util.$generateId('ArrayList'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$ArrayList'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.ArrayList'));
-    }
-    return MultipleAbstractParents$ArrayList
-        .$classMultipleAbstractParents$ArrayList_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return MultipleAbstractParents$ArrayList.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -117,13 +90,9 @@ class MultipleAbstractParents$ArrayList extends
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-MultipleAbstractParents$ArrayList.$classMultipleAbstractParents$ArrayList_ =
-    null;
+$Util.$setClassMetadata(
+    MultipleAbstractParents$ArrayList,
+    'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$ArrayList');
 
 
 

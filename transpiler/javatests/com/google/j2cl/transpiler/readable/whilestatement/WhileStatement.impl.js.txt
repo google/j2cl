@@ -74,30 +74,6 @@ class WhileStatement extends Object {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    WhileStatement.$clinit();
-    if (!WhileStatement.$classWhileStatement_) {
-      WhileStatement.$classWhileStatement_ = Class.$createForClass(
-          $Util.$generateId('WhileStatement'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.whilestatement.WhileStatement'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.whilestatement.WhileStatement'));
-    }
-    return WhileStatement.$classWhileStatement_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return WhileStatement.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -114,12 +90,9 @@ class WhileStatement extends Object {
   $init__com_google_j2cl_transpiler_readable_whilestatement_WhileStatement() {}
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-WhileStatement.$classWhileStatement_ = null;
+$Util.$setClassMetadata(
+    WhileStatement,
+    'com.google.j2cl.transpiler.readable.whilestatement.WhileStatement');
 
 
 

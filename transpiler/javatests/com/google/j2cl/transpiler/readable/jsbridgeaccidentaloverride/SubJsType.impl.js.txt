@@ -91,30 +91,6 @@ class SubJsType extends MyJsType {
   }
 
   /**
-   * @return {Class}
-   * @public
-   */
-  static $getClass() {
-    SubJsType.$clinit();
-    if (!SubJsType.$classSubJsType_) {
-      SubJsType.$classSubJsType_ = Class.$createForClass(
-          $Util.$generateId('SubJsType'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType'),
-          $Util.$generateId(
-              'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType'));
-    }
-    return SubJsType.$classSubJsType_;
-  }
-
-  /**
-   * @override
-   * @return {Class}
-   * @public
-   */
-  m_getClass() { return SubJsType.$getClass(); }
-
-  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -132,12 +108,9 @@ class SubJsType extends MyJsType {
   }
 };
 
-
-/**
- * The class literal field.
- * @private {Class}
- */
-SubJsType.$classSubJsType_ = null;
+$Util.$setClassMetadata(
+    SubJsType,
+    'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType');
 
 
 MyInterface.$markImplementor(SubJsType);
