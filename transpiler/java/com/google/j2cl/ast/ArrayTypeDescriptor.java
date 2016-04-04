@@ -17,7 +17,11 @@ package com.google.j2cl.ast;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.processors.Visitable;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * A (by name) reference to an Array type.
@@ -27,12 +31,8 @@ import com.google.j2cl.ast.processors.Visitable;
 public abstract class ArrayTypeDescriptor extends TypeDescriptor {
 
   @Override
-  public abstract int getDimensions();
-
-  public abstract TypeDescriptor getLeafTypeDescriptor();
-
-  public TypeDescriptor getComponentTypeDescriptor() {
-    return getLeafTypeDescriptor().getForArray(getDimensions() - 1);
+  public Node accept(Processor processor) {
+    return Visitor_ArrayTypeDescriptor.visit(processor, this);
   }
 
   @Override
@@ -41,8 +41,81 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  public ImmutableList<String> getClassComponents() {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
   public String getClassName() {
     return getLeafTypeDescriptor().getClassName() + getSuffix();
+  }
+
+  public TypeDescriptor getComponentTypeDescriptor() {
+    return getLeafTypeDescriptor().getForArray(getDimensions() - 1);
+  }
+
+  @Override
+  public MethodDescriptor getConcreteJsFunctionMethodDescriptor() {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public Expression getDefaultValue() {
+    return NullLiteral.NULL;
+  }
+
+  @Override
+  public abstract int getDimensions();
+
+  @Override
+  public TypeDescriptor getEnclosingTypeDescriptor() {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public TypeDescriptor getForArray(int dimensions) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public MethodDescriptor getJsFunctionMethodDescriptor() {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public String getJsName() {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public String getJsNamespace() {
+    throw new UnsupportedOperationException();
+  }
+
+  public abstract TypeDescriptor getLeafTypeDescriptor();
+
+  @Override
+  public ImmutableList<String> getPackageComponents() {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public String getPackageName() {
+    return getLeafTypeDescriptor().getPackageName();
+  }
+
+  private String getPrefix() {
+    return Strings.repeat("[", getDimensions());
+  }
+
+  @Override
+  public String getQualifiedName() {
+    return TypeDescriptors.getQualifiedName(this);
+  }
+
+  @Override
+  public TypeDescriptor getRawTypeDescriptor() {
+    return this;
   }
 
   @Override
@@ -55,9 +128,18 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
     return getLeafTypeDescriptor().getSourceName() + getSuffix();
   }
 
+  private String getSuffix() {
+    return Strings.repeat("[]", getDimensions());
+  }
+
   @Override
-  public String getPackageName() {
-    return getLeafTypeDescriptor().getPackageName();
+  public TypeDescriptor getSuperTypeDescriptor() {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public List<TypeDescriptor> getTypeArgumentDescriptors() {
+    return Collections.emptyList();
   }
 
   @Override
@@ -66,8 +148,78 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  public Visibility getVisibility() {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
   public boolean isArray() {
     return true;
+  }
+
+  @Override
+  public boolean isEnumOrSubclass() {
+    return false;
+  }
+
+  @Override
+  public boolean isExtern() {
+    return TypeDescriptors.isExtern(this);
+  }
+
+  @Override
+  public boolean isGlobal() {
+    return TypeDescriptors.isGlobal(this);
+  }
+
+  @Override
+  public boolean isInstanceMemberClass() {
+    return false;
+  }
+
+  @Override
+  public boolean isInstanceNestedClass() {
+    return false;
+  }
+
+  @Override
+  public boolean isInterface() {
+    return false;
+  }
+
+  @Override
+  public boolean isJsFunctionImplementation() {
+    return false;
+  }
+
+  @Override
+  public boolean isJsFunctionInterface() {
+    return false;
+  }
+
+  @Override
+  public boolean isJsType() {
+    return false;
+  }
+
+  @Override
+  public boolean isLocal() {
+    return false;
+  }
+
+  @Override
+  public boolean isNative() {
+    return false;
+  }
+
+  @Override
+  public boolean isParameterizedType() {
+    return false;
+  }
+
+  @Override
+  public boolean isPrimitive() {
+    return false;
   }
 
   @Override
@@ -75,17 +227,29 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
     return getLeafTypeDescriptor().isRaw();
   }
 
-  private String getSuffix() {
-    return Strings.repeat("[]", getDimensions());
-  }
-
-  private String getPrefix() {
-    return Strings.repeat("[", getDimensions());
+  @Override
+  public boolean isRawType() {
+    return false;
   }
 
   @Override
-  public Node accept(Processor processor) {
-    return Visitor_ArrayTypeDescriptor.visit(processor, this);
+  public boolean isTypeVariable() {
+    return false;
+  }
+
+  @Override
+  public boolean isUnion() {
+    return false;
+  }
+
+  @Override
+  public boolean isWildCard() {
+    return false;
+  }
+
+  @Override
+  public boolean subclassesJsConstructorClass() {
+    return false;
   }
 
   @Override

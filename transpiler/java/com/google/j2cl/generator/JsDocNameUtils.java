@@ -189,14 +189,14 @@ public class JsDocNameUtils {
 
     // Special cases.
     switch (typeDescriptor.getSourceName()) {
-      case TypeDescriptor.BYTE_TYPE_NAME:
-      case TypeDescriptor.SHORT_TYPE_NAME:
-      case TypeDescriptor.INT_TYPE_NAME:
-      case TypeDescriptor.FLOAT_TYPE_NAME:
-      case TypeDescriptor.DOUBLE_TYPE_NAME:
-      case TypeDescriptor.CHAR_TYPE_NAME:
+      case TypeDescriptors.BYTE_TYPE_NAME:
+      case TypeDescriptors.SHORT_TYPE_NAME:
+      case TypeDescriptors.INT_TYPE_NAME:
+      case TypeDescriptors.FLOAT_TYPE_NAME:
+      case TypeDescriptors.DOUBLE_TYPE_NAME:
+      case TypeDescriptors.CHAR_TYPE_NAME:
         return JS_NUMBER_TYPE_NAME;
-      case TypeDescriptor.LONG_TYPE_NAME:
+      case TypeDescriptors.LONG_TYPE_NAME:
         return "!" + environment.aliasForType(BootstrapType.NATIVE_LONG.getDescriptor());
       case "java.lang.Object":
         if (!shouldUseClassName) {

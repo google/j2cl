@@ -15,326 +15,25 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
-import com.google.common.base.Preconditions;
-import com.google.common.base.Splitter;
-import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Interner;
-import com.google.common.collect.Interners;
-import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.processors.Visitable;
 
-import org.eclipse.jdt.core.dom.ITypeBinding;
-
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
- * Base class for type reference.
+ * Abstract base class for type reference.
+ *
+ * Only abstract methods are allowed here. For simplificity of design (avoiding hierarchy) it is
+ * *required* that all implementation be in subclasses.
  */
 @Visitable
 public abstract class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, HasJsName {
-  public static final String VOID_TYPE_NAME = "void";
-  public static final String INT_TYPE_NAME = "int";
-  public static final String BOOLEAN_TYPE_NAME = "boolean";
-  public static final String BYTE_TYPE_NAME = "byte";
-  public static final String CHAR_TYPE_NAME = "char";
-  public static final String DOUBLE_TYPE_NAME = "double";
-  public static final String FLOAT_TYPE_NAME = "float";
-  public static final String LONG_TYPE_NAME = "long";
-  public static final String SHORT_TYPE_NAME = "short";
-
-  private static Interner<TypeDescriptor> interner;
-
-  // This is only used by TypeProxyUtils, and cannot be used elsewhere. Because to create a
-  // TypeDescriptor from a TypeBinding, it should go through the path to check array type.
-  static TypeDescriptor create(ITypeBinding typeBinding) {
-    Preconditions.checkArgument(!typeBinding.isArray());
-    return getInterner().intern(new RegularTypeDescriptor(typeBinding));
-  }
-
-  public static TypeDescriptor createSyntheticRegularTypeDescriptor(
-      Iterable<String> packageComponents,
-      Iterable<String> classComponents,
-      boolean isRaw,
-      Iterable<TypeDescriptor> typeArgumentDescriptors) {
-    Preconditions.checkArgument(!Iterables.getLast(classComponents).contains("<"));
-    return getInterner()
-        .intern(
-            new SyntheticRegularTypeDescriptor(
-                ImmutableList.copyOf(packageComponents),
-                ImmutableList.copyOf(classComponents),
-                isRaw,
-                ImmutableList.copyOf(typeArgumentDescriptors)));
-  }
-
-  public static TypeDescriptor createSyntheticNativeTypeDescriptor(
-      Iterable<String> packageComponents,
-      Iterable<String> classComponents,
-      Iterable<TypeDescriptor> typeArgumentDescriptors,
-      String jsTypeNamespace,
-      String jsTypeName) {
-    return getInterner()
-        .intern(
-            new SyntheticRegularTypeDescriptor(
-                ImmutableList.copyOf(packageComponents),
-                ImmutableList.copyOf(classComponents),
-                ImmutableList.copyOf(typeArgumentDescriptors),
-                jsTypeNamespace,
-                jsTypeName));
-  }
-
-  public static TypeDescriptor createSyntheticParametricTypeDescriptor(
-      RegularTypeDescriptor originalTypeDescriptor,
-      Iterable<TypeDescriptor> typeArgumentTypeDescriptors) {
-    return getInterner()
-        .intern(
-            new SyntheticParametricTypeDescriptor(
-                originalTypeDescriptor, typeArgumentTypeDescriptors));
-  }
-
-  public static TypeDescriptor createLambdaTypeDescriptor(
-      RegularTypeDescriptor enclosingClassTypeDescriptor,
-      String lambdaBinaryName,
-      ITypeBinding lambdaInterfaceBinding) {
-    return getInterner()
-        .intern(
-            new LambdaTypeDescriptor(
-                enclosingClassTypeDescriptor, lambdaBinaryName, lambdaInterfaceBinding));
-  }
-
-  // TODO(stalcup): examine whether createRaw() uses should be turned into createNative() uses,
-  // since accessing native bootstrap classes is so conceptually similar to accessing native JsType
-  // classes.
-  public static TypeDescriptor createRaw(Iterable<String> nameSpaceComponents, String className) {
-    return createSyntheticRegularTypeDescriptor(
-        nameSpaceComponents, Arrays.asList(className), true, ImmutableList.<TypeDescriptor>of());
-  }
-
-  /**
-   * Creates a native TypeDescriptor from a qualified name.
-   */
-  public static TypeDescriptor createNative(String qualifiedName) {
-    if (JsInteropUtils.isGlobal(qualifiedName)) {
-      return TypeDescriptor.createSyntheticNativeTypeDescriptor(
-          Arrays.asList(JsInteropUtils.JS_GLOBAL),
-          Arrays.asList(""),
-          ImmutableList.<TypeDescriptor>of(),
-          JsInteropUtils.JS_GLOBAL,
-          "");
-    }
-    List<String> nameComponents = Splitter.on('.').splitToList(qualifiedName);
-    int size = nameComponents.size();
-    // Fill in JS_GLOBAL as the namespace if the namespace is empty.
-    List<String> namespaceComponents =
-        size == 1 ? Arrays.asList(JsInteropUtils.JS_GLOBAL) : nameComponents.subList(0, size - 1);
-    return TypeDescriptor.createSyntheticNativeTypeDescriptor(
-        namespaceComponents,
-        nameComponents.subList(size - 1, size),
-        ImmutableList.<TypeDescriptor>of(),
-        Joiner.on(".").join(namespaceComponents),
-        nameComponents.get(size - 1));
-  }
-
-  static Interner<TypeDescriptor> getInterner() {
-    if (interner == null) {
-      interner = Interners.newWeakInterner();
-    }
-    return interner;
-  }
-
-  public abstract String getBinaryName();
-
-  public abstract String getClassName();
-
-  public abstract String getSimpleName();
-
-  public abstract String getSourceName();
-
-  public abstract String getPackageName();
-
-  public abstract boolean isArray();
-
-  /**
-   * Returns whether this is a Raw reference. Raw references are not mangled in the output and
-   * thus can be used to describe reference to JS apis.
-   */
-  public abstract boolean isRaw();
-
-  public boolean isPrimitive() {
-    return false;
-  }
-
-  public boolean isParameterizedType() {
-    return false;
-  }
-
-  public boolean isTypeVariable() {
-    return false;
-  }
-
-  public boolean isWildCard() {
-    return false;
-  }
-
-  public boolean isRawType() {
-    return false;
-  }
-
-  public abstract int getDimensions();
-
-  public Expression getDefaultValue() {
-    // Primitives.
-    switch (this.getSourceName()) {
-      case TypeDescriptor.BOOLEAN_TYPE_NAME:
-        return BooleanLiteral.FALSE;
-      case TypeDescriptor.BYTE_TYPE_NAME:
-      case TypeDescriptor.SHORT_TYPE_NAME:
-      case TypeDescriptor.INT_TYPE_NAME:
-      case TypeDescriptor.FLOAT_TYPE_NAME:
-      case TypeDescriptor.DOUBLE_TYPE_NAME:
-      case TypeDescriptor.CHAR_TYPE_NAME:
-        return new NumberLiteral(this, 0);
-      case TypeDescriptor.LONG_TYPE_NAME:
-        return new NumberLiteral(this, 0L);
-    }
-
-    // Objects.
-    return NullLiteral.NULL;
-  }
-
-  public TypeDescriptor getRawTypeDescriptor() {
-    return this;
-  }
-
-  public TypeDescriptor getSuperTypeDescriptor() {
-    return null;
-  }
-
-  public TypeDescriptor getEnclosingTypeDescriptor() {
-    return null;
-  }
-
-  public Visibility getVisibility() {
-    return null;
-  }
-
-  public boolean isJsType() {
-    return false;
-  }
-
-  public boolean isJsFunctionInterface() {
-    return false;
-  }
-
-  public boolean isJsFunctionImplementation() {
-    return false;
-  }
-
-  public MethodDescriptor getJsFunctionMethodDescriptor() {
-    return null;
-  }
-
-  public MethodDescriptor getConcreteJsFunctionMethodDescriptor() {
-    return null;
-  }
-
-  public boolean isNative() {
-    return false;
-  }
 
   @Override
-  public String getJsNamespace() {
-    return null;
+  public Node accept(Processor processor) {
+    return Visitor_TypeDescriptor.visit(processor, this);
   }
-
-  @Override
-  public String getJsName() {
-    return null;
-  }
-
-  /**
-   * TODO: Currently we depends on the namespace to tell if a type is an extern type. Returns true
-   * if the namespace is an empty string. It is true for most common cases, but not always true. We
-   * may need to introduce a new annotation to tell if it is extern when we hit the problem.
-   */
-  public boolean isExtern() {
-    boolean isSynthesizedGlobalType = isRaw() && JsInteropUtils.isGlobal(getPackageName());
-    boolean isNativeJsType = isNative() && JsInteropUtils.isGlobal(getJsNamespace());
-    return isSynthesizedGlobalType || isNativeJsType;
-  }
-
-  public String getQualifiedName() {
-    String namespace = getPackageName();
-    String className = getClassName();
-
-    // If a custom js namespace was specified.
-    if (getJsNamespace() != null) {
-      // The effect is to replace both the package and the class's enclosing class prefixes.
-      namespace = getJsNamespace();
-      className = getSimpleName();
-    }
-
-    // If the JS namespace the user specified was JsPackage.GLOBAL then consider that to be top
-    // level.
-    if (JsInteropUtils.isGlobal(namespace)) {
-      namespace = "";
-    }
-
-    // If a custom JS name was specified.
-    if (getJsName() != null) {
-      // Then use it instead of the (potentially enclosing class qualified) class name.
-      className = getJsName();
-    }
-
-    return Joiner.on(".")
-        .skipNulls()
-        .join(Strings.emptyToNull(namespace), Strings.emptyToNull(className));
-  }
-
-  public boolean isGlobal() {
-    return "".equals(getQualifiedName());
-  }
-
-  public boolean isInstanceMemberClass() {
-    return false;
-  }
-
-  public boolean isInstanceNestedClass() {
-    return false;
-  }
-
-  public boolean isLocal() {
-    return false;
-  }
-
-  public boolean isInterface() {
-    return false;
-  }
-
-  public boolean isEnumOrSubclass() {
-    return false;
-  }
-
-  public boolean subclassesJsConstructorClass() {
-    return false;
-  }
-
-  public List<TypeDescriptor> getTypeArgumentDescriptors() {
-    return Collections.emptyList();
-  }
-
-  public TypeDescriptor getForArray(int dimensions) {
-    if (dimensions == 0) {
-      return this;
-    }
-    return getInterner().intern(new AutoValue_ArrayTypeDescriptor(dimensions, this));
-  }
-
-  public abstract String getUniqueId();
 
   @Override
   public int compareTo(TypeDescriptor that) {
@@ -349,13 +48,124 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
     return false;
   }
 
+  /**
+   * Returns the fully package qualified binary name like "com.google.common.Outer$Inner".
+   */
+  public abstract String getBinaryName();
+
+  public abstract ImmutableList<String> getClassComponents();
+
+  /**
+   * Returns the unqualified binary name like "Outer$Inner".
+   */
+  public abstract String getClassName();
+
+  public abstract MethodDescriptor getConcreteJsFunctionMethodDescriptor();
+
+  public abstract Expression getDefaultValue();
+
+  public abstract int getDimensions();
+
+  public abstract TypeDescriptor getEnclosingTypeDescriptor();
+
+  public abstract TypeDescriptor getForArray(int dimensions);
+
+  public abstract MethodDescriptor getJsFunctionMethodDescriptor();
+
+  @Override
+  public abstract String getJsName();
+
+  @Override
+  public abstract String getJsNamespace();
+
+  public abstract ImmutableList<String> getPackageComponents();
+
+  /**
+   * Returns the fully package qualified name like "com.google.common".
+   */
+  public abstract String getPackageName();
+
+  public abstract String getQualifiedName();
+
+  public abstract TypeDescriptor getRawTypeDescriptor();
+
+  /**
+   * Returns the unqualified and unenclosed simple name like "Inner".
+   */
+  public abstract String getSimpleName();
+
+  /**
+   * Returns the fully package qualified source name like "com.google.common.Outer.Inner".
+   */
+  public abstract String getSourceName();
+
+  public abstract TypeDescriptor getSuperTypeDescriptor();
+
+  public abstract List<TypeDescriptor> getTypeArgumentDescriptors();
+
+  public abstract String getUniqueId();
+
+  public abstract Visibility getVisibility();
+
   @Override
   public int hashCode() {
     return Objects.hashCode(getUniqueId());
   }
 
-  @Override
-  public Node accept(Processor processor) {
-    return Visitor_TypeDescriptor.visit(processor, this);
-  }
+  /**
+   * Returns whether this is an array type descriptor. Only true when it is an instance of the
+   * ArrayTypeDescriptor subclass.
+   */
+  public abstract boolean isArray();
+
+  public abstract boolean isEnumOrSubclass();
+
+  /**
+   * TODO: Currently we depends on the namespace to tell if a type is an extern type. Returns true
+   * if the namespace is an empty string. It is true for most common cases, but not always true. We
+   * may need to introduce a new annotation to tell if it is extern when we hit the problem.
+   */
+  public abstract boolean isExtern();
+
+  public abstract boolean isGlobal();
+
+  public abstract boolean isInstanceMemberClass();
+
+  public abstract boolean isInstanceNestedClass();
+
+  public abstract boolean isInterface();
+
+  public abstract boolean isJsFunctionImplementation();
+
+  public abstract boolean isJsFunctionInterface();
+
+  public abstract boolean isJsType();
+
+  public abstract boolean isLocal();
+
+  public abstract boolean isNative();
+
+  public abstract boolean isParameterizedType();
+
+  public abstract boolean isPrimitive();
+
+  /**
+   * Returns whether this is a Raw reference. Raw references are not mangled in the output and
+   * thus can be used to describe reference to JS apis.
+   */
+  public abstract boolean isRaw();
+
+  public abstract boolean isRawType();
+
+  public abstract boolean isTypeVariable();
+
+  /**
+   * Returns whether this is a union type descriptor. Only true when it is an instance of the
+   * UnionTypeDescriptor subclass.
+   */
+  public abstract boolean isUnion();
+
+  public abstract boolean isWildCard();
+
+  public abstract boolean subclassesJsConstructorClass();
 }

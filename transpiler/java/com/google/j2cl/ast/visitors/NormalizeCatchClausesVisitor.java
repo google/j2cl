@@ -114,7 +114,7 @@ public class NormalizeCatchClausesVisitor extends AbstractRewriter {
     Variable caughtVariable = clause.getExceptionVar();
     TypeDescriptor exceptionTypeDescriptor = caughtVariable.getTypeDescriptor();
     List<TypeDescriptor> typesToCheck =
-        exceptionTypeDescriptor instanceof UnionTypeDescriptor
+        exceptionTypeDescriptor.isUnion()
             ? ((UnionTypeDescriptor) exceptionTypeDescriptor).getTypes()
             : Arrays.asList(exceptionTypeDescriptor);
     Expression condition = checkTypeExpression(mainVariable, typesToCheck);

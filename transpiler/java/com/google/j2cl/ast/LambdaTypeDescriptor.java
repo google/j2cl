@@ -15,8 +15,10 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.j2cl.ast.processors.Visitable;
 
 import org.eclipse.jdt.core.dom.ITypeBinding;
 
@@ -25,15 +27,26 @@ import java.util.Arrays;
 /**
  * Represents a TypeDescriptor for Lambda Type.
  */
-public class LambdaTypeDescriptor extends RegularTypeDescriptor {
+@Visitable
+public class LambdaTypeDescriptor extends TypeDescriptor {
+  private ImmutableList<String> classComponents;
+  private TypeDescriptor enclosingClassTypeDescriptor;
+
+  // JsInterop properties
+  private boolean isJsFunction;
+  private boolean isJsType;
+  private boolean isNative;
+  private String jsTypeName;
+  private String jsTypeNamespace;
+
   private ITypeBinding lambdaInterfaceBinding;
-  private RegularTypeDescriptor enclosingClassTypeDescriptor;
+  private ImmutableList<String> packageComponents;
+  private ImmutableList<TypeDescriptor> typeArgumentDescriptors;
 
   LambdaTypeDescriptor(
-      RegularTypeDescriptor enclosingClassTypeDescriptor,
+      TypeDescriptor enclosingClassTypeDescriptor,
       String lambdaBinaryName,
       ITypeBinding lambdaInterfaceBinding) {
-    super(null);
     this.lambdaInterfaceBinding = lambdaInterfaceBinding;
     this.packageComponents =
         ImmutableList.copyOf(enclosingClassTypeDescriptor.getPackageComponents());
@@ -42,19 +55,43 @@ public class LambdaTypeDescriptor extends RegularTypeDescriptor {
             Iterables.concat(
                 enclosingClassTypeDescriptor.getClassComponents(),
                 Arrays.asList(lambdaBinaryName)));
-    this.isRaw = false;
     this.isNative = false;
     this.typeArgumentDescriptors = ImmutableList.<TypeDescriptor>of();
   }
 
   @Override
-  public TypeDescriptor getRawTypeDescriptor() {
-    return this;
+  public Node accept(Processor processor) {
+    return Visitor_LambdaTypeDescriptor.visit(processor, this);
   }
 
   @Override
-  public TypeDescriptor getSuperTypeDescriptor() {
-    return TypeDescriptors.get().javaLangObject;
+  public String getBinaryName() {
+    return TypeDescriptors.getBinaryName(this);
+  }
+
+  @Override
+  public ImmutableList<String> getClassComponents() {
+    return classComponents;
+  }
+
+  @Override
+  public String getClassName() {
+    return TypeDescriptors.getClassName(this);
+  }
+
+  @Override
+  public MethodDescriptor getConcreteJsFunctionMethodDescriptor() {
+    return TypeProxyUtils.getConcreteJsFunctionMethodDescriptor(lambdaInterfaceBinding);
+  }
+
+  @Override
+  public Expression getDefaultValue() {
+    return NullLiteral.NULL;
+  }
+
+  @Override
+  public int getDimensions() {
+    return 0;
   }
 
   @Override
@@ -63,39 +100,113 @@ public class LambdaTypeDescriptor extends RegularTypeDescriptor {
   }
 
   @Override
+  public TypeDescriptor getForArray(int dimensions) {
+    return TypeDescriptors.getForArray(this, dimensions);
+  }
+
+  @Override
+  public MethodDescriptor getJsFunctionMethodDescriptor() {
+    return TypeProxyUtils.getJsFunctionMethodDescriptor(lambdaInterfaceBinding);
+  }
+
+  @Override
+  public String getJsName() {
+    return jsTypeName;
+  }
+
+  @Override
+  public String getJsNamespace() {
+    return jsTypeNamespace;
+  }
+
+  @Override
+  public ImmutableList<String> getPackageComponents() {
+    return packageComponents;
+  }
+
+  @Override
+  public String getPackageName() {
+    return Joiner.on(".").join(getPackageComponents());
+  }
+
+  @Override
+  public String getQualifiedName() {
+    return TypeDescriptors.getQualifiedName(this);
+  }
+
+  @Override
+  public TypeDescriptor getRawTypeDescriptor() {
+    return this;
+  }
+
+  @Override
+  public String getSimpleName() {
+    return Iterables.getLast(getClassComponents());
+  }
+
+  @Override
+  public String getSourceName() {
+    return Joiner.on(".").join(Iterables.concat(getPackageComponents(), getClassComponents()));
+  }
+
+  @Override
+  public TypeDescriptor getSuperTypeDescriptor() {
+    return TypeDescriptors.get().javaLangObject;
+  }
+
+  @Override
+  public ImmutableList<TypeDescriptor> getTypeArgumentDescriptors() {
+    return typeArgumentDescriptors;
+  }
+
+  @Override
+  public String getUniqueId() {
+    // For type variable, we use its JDT binary name plus its erasure's binary name, which will
+    // ensure the uniqueness of the type variable. Since in j2cl we only care about the left bound
+    // of the type variable (which is returned by getErasure()), it should be enough for uniqueness.
+    if (isTypeVariable()) {
+      throw new UnsupportedOperationException();
+    }
+    return getBinaryName() + TypeDescriptors.getTypeArgumentsUniqueId(this);
+  }
+
+  @Override
   public Visibility getVisibility() {
     return Visibility.PRIVATE;
   }
 
-  /**
-   * A lambda class is not a member class.
-   */
+  @Override
+  public boolean isArray() {
+    return false;
+  }
+
+  @Override
+  public boolean isEnumOrSubclass() {
+    return false;
+  }
+
+  @Override
+  public boolean isExtern() {
+    return TypeDescriptors.isExtern(this);
+  }
+
+  @Override
+  public boolean isGlobal() {
+    return TypeDescriptors.isGlobal(this);
+  }
+
   @Override
   public boolean isInstanceMemberClass() {
     return false;
   }
 
-  /**
-   * A lambda class is an instance nested class.
-   */
   @Override
   public boolean isInstanceNestedClass() {
     return true;
   }
 
-  /**
-   * A lambda class is not an interface.
-   */
   @Override
   public boolean isInterface() {
-    return false;
-  }
-
-  /**
-   * A lambda class is not an enum or its subclass.
-   */
-  @Override
-  public boolean isEnumOrSubclass() {
     return false;
   }
 
@@ -105,13 +216,58 @@ public class LambdaTypeDescriptor extends RegularTypeDescriptor {
   }
 
   @Override
-  public MethodDescriptor getJsFunctionMethodDescriptor() {
-    return TypeProxyUtils.getJsFunctionMethodDescriptor(lambdaInterfaceBinding);
+  public boolean isJsFunctionInterface() {
+    return isJsFunction;
   }
 
   @Override
-  public MethodDescriptor getConcreteJsFunctionMethodDescriptor() {
-    return TypeProxyUtils.getConcreteJsFunctionMethodDescriptor(lambdaInterfaceBinding);
+  public boolean isJsType() {
+    return isJsType;
+  }
+
+  @Override
+  public boolean isLocal() {
+    return true;
+  }
+
+  @Override
+  public boolean isNative() {
+    return isNative;
+  }
+
+  @Override
+  public boolean isParameterizedType() {
+    return !getTypeArgumentDescriptors().isEmpty();
+  }
+
+  @Override
+  public boolean isPrimitive() {
+    return false;
+  }
+
+  @Override
+  public boolean isRaw() {
+    return false;
+  }
+
+  @Override
+  public boolean isRawType() {
+    return false;
+  }
+
+  @Override
+  public boolean isTypeVariable() {
+    return false;
+  }
+
+  @Override
+  public boolean isUnion() {
+    return false;
+  }
+
+  @Override
+  public boolean isWildCard() {
+    return false;
   }
 
   @Override
@@ -119,11 +275,8 @@ public class LambdaTypeDescriptor extends RegularTypeDescriptor {
     return false;
   }
 
-  /**
-   * A lambda class is a local class.
-   */
   @Override
-  public boolean isLocal() {
-    return true;
+  public String toString() {
+    return getSourceName();
   }
 }

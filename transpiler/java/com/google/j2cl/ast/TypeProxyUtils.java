@@ -47,7 +47,7 @@ public class TypeProxyUtils {
       return leafTypeDescriptor.getForArray(typeBinding.getDimensions());
     }
 
-    return TypeDescriptor.create(typeBinding);
+    return TypeDescriptors.create(typeBinding);
   }
 
   static List<String> getPackageComponents(ITypeBinding typeBinding) {

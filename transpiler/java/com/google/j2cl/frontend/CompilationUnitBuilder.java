@@ -64,7 +64,6 @@ import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PostfixOperator;
 import com.google.j2cl.ast.PrefixExpression;
-import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.StringLiteral;
@@ -131,7 +130,9 @@ public class CompilationUnitBuilder {
     private CompilationUnit j2clCompilationUnit;
 
     private void pushType(JavaType type) {
-      Preconditions.checkArgument(type.getDescriptor() instanceof RegularTypeDescriptor);
+      Preconditions.checkArgument(!type.getDescriptor().isArray());
+      Preconditions.checkArgument(!type.getDescriptor().isUnion());
+
       typeStack.add(type);
       currentType = type;
     }
@@ -1023,7 +1024,7 @@ public class CompilationUnitBuilder {
           JdtUtils.createLambdaJavaType(
               lambdaBinaryName,
               expression.resolveTypeBinding(),
-              (RegularTypeDescriptor) JdtUtils.createTypeDescriptor(enclosingClassTypeBinding));
+              JdtUtils.createTypeDescriptor(enclosingClassTypeBinding));
       pushType(lambdaType);
       TypeDescriptor lambdaTypeDescriptor = lambdaType.getDescriptor();
 

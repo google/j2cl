@@ -20,7 +20,6 @@ import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NullLiteral;
-import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -64,7 +63,7 @@ public class EnumMethodsCreator {
         FieldDescriptor.Builder.fromDefault(
                 enumType.getDescriptor(),
                 NAMES_TO_VALUES_MAP_FIELD_NAME,
-                RegularTypeDescriptor.createSyntheticNativeTypeDescriptor(
+                TypeDescriptors.createSyntheticNativeTypeDescriptor(
                     new ArrayList<String>(),
                     // Import alias.
                     Lists.newArrayList("NativeObject"),

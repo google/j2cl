@@ -28,7 +28,6 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
-import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
@@ -66,8 +65,9 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
   }
 
   private Node rewriteRegularCastExpression(CastExpression castExpression) {
-    Preconditions.checkArgument(
-        castExpression.getCastTypeDescriptor() instanceof RegularTypeDescriptor);
+    Preconditions.checkArgument(!castExpression.getCastTypeDescriptor().isArray());
+    Preconditions.checkArgument(!castExpression.getCastTypeDescriptor().isUnion());
+
     TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
     TypeDescriptor rawCastTypeDescriptor =
         castExpression.getCastTypeDescriptor().getRawTypeDescriptor();
@@ -106,8 +106,8 @@ public class NormalizeCastsVisitor extends AbstractRewriter {
   }
 
   private Node rewriteArrayCastExpression(CastExpression castExpression) {
-    Preconditions.checkArgument(
-        castExpression.getCastTypeDescriptor() instanceof ArrayTypeDescriptor);
+    Preconditions.checkArgument(castExpression.getCastTypeDescriptor().isArray());
+
     ArrayTypeDescriptor arrayCastTypeDescriptor =
         (ArrayTypeDescriptor) castExpression.getCastTypeDescriptor();
     if (arrayCastTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor().isNative()) {

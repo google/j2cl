@@ -696,13 +696,13 @@ public class AstUtils {
    */
   public static TypeDescriptor createJsOverlayImplTypeDescriptor(TypeDescriptor typeDescriptor) {
     checkArgument(typeDescriptor.isNative());
-    checkArgument(typeDescriptor instanceof RegularTypeDescriptor);
-    RegularTypeDescriptor nativeTypeDescriptor = (RegularTypeDescriptor) typeDescriptor;
-    return TypeDescriptor.createSyntheticRegularTypeDescriptor(
-        nativeTypeDescriptor.getPackageComponents(),
+    checkArgument(!typeDescriptor.isArray());
+    checkArgument(!typeDescriptor.isUnion());
+
+    return TypeDescriptors.createSyntheticRegularTypeDescriptor(
+        typeDescriptor.getPackageComponents(),
         Iterables.concat(
-            nativeTypeDescriptor.getClassComponents(),
-            Arrays.asList(JS_OVERLAY_METHODS_IMPL_SUFFIX)),
+            typeDescriptor.getClassComponents(), Arrays.asList(JS_OVERLAY_METHODS_IMPL_SUFFIX)),
         false,
         ImmutableList.<TypeDescriptor>of());
   }

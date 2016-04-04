@@ -39,7 +39,6 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.PostfixOperator;
 import com.google.j2cl.ast.PrefixOperator;
-import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -579,9 +578,9 @@ public class JdtUtils {
   static JavaType createLambdaJavaType(
       String lambdaBinaryName,
       ITypeBinding lambdaInterfaceBinding,
-      RegularTypeDescriptor enclosingClassTypeDescriptor) {
+      TypeDescriptor enclosingClassTypeDescriptor) {
     TypeDescriptor lambdaClassTypeDescriptor =
-        TypeDescriptor.createLambdaTypeDescriptor(
+        TypeDescriptors.createLambdaTypeDescriptor(
             enclosingClassTypeDescriptor, lambdaBinaryName, lambdaInterfaceBinding);
     JavaType lambdaType = new JavaType(Kind.CLASS, Visibility.PRIVATE, lambdaClassTypeDescriptor);
 

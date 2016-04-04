@@ -15,40 +15,33 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.j2cl.ast.processors.Visitable;
 import com.google.j2cl.common.JsInteropAnnotationUtils;
 
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 /**
  * A (by name) reference to a class.
  */
 @Visitable
 public class RegularTypeDescriptor extends TypeDescriptor {
-  private ITypeBinding typeBinding;
-
-  protected ImmutableList<String> packageComponents;
-  protected ImmutableList<String> classComponents;
-  protected boolean isRaw;
-  protected ImmutableList<TypeDescriptor> typeArgumentDescriptors;
+  private ImmutableList<String> classComponents;
 
   // JsInterop properties
-  protected boolean isJsFunction;
-  protected boolean isJsType;
-  protected boolean isNative;
-  protected String jsTypeNamespace;
-  protected String jsTypeName;
+  private boolean isJsFunction;
+  private boolean isJsType;
+  private boolean isNative;
+  private String jsTypeName;
+  private String jsTypeNamespace;
+
+  private ImmutableList<String> packageComponents;
+  private ImmutableList<TypeDescriptor> typeArgumentDescriptors;
+  private ITypeBinding typeBinding;
 
   RegularTypeDescriptor(ITypeBinding typeBinding) {
     this.typeBinding = typeBinding;
@@ -57,27 +50,17 @@ public class RegularTypeDescriptor extends TypeDescriptor {
     }
   }
 
-  private void setJsInteropProperties() {
-    IAnnotationBinding jsTypeAnnotation =
-        JsInteropAnnotationUtils.getJsTypeAnnotation(typeBinding);
-    if (jsTypeAnnotation != null) {
-      isJsType = true;
-      isNative = JsInteropAnnotationUtils.isNative(jsTypeAnnotation);
-      jsTypeNamespace = JsInteropAnnotationUtils.getJsNamespace(jsTypeAnnotation);
-      jsTypeName = JsInteropAnnotationUtils.getJsName(jsTypeAnnotation);
-    }
-    isJsFunction = JsInteropUtils.isJsFunction(typeBinding);
+  @Override
+  public Node accept(Processor processor) {
+    return Visitor_RegularTypeDescriptor.visit(processor, this);
   }
 
-  public ImmutableList<String> getPackageComponents() {
-    // Lazily initialize packageComponents.
-    if (packageComponents == null) {
-      Preconditions.checkNotNull(typeBinding);
-      packageComponents = ImmutableList.copyOf(TypeProxyUtils.getPackageComponents(typeBinding));
-    }
-    return packageComponents;
+  @Override
+  public String getBinaryName() {
+    return TypeDescriptors.getBinaryName(this);
   }
 
+  @Override
   public ImmutableList<String> getClassComponents() {
     // Lazily initialize classComponents.
     if (classComponents == null) {
@@ -88,8 +71,116 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public boolean isRaw() {
-    return false;
+  public String getClassName() {
+    return TypeDescriptors.getClassName(this);
+  }
+
+  @Override
+  public MethodDescriptor getConcreteJsFunctionMethodDescriptor() {
+    return TypeProxyUtils.getConcreteJsFunctionMethodDescriptor(typeBinding);
+  }
+
+  @Override
+  public Expression getDefaultValue() {
+    // Primitives.
+    switch (this.getSourceName()) {
+      case TypeDescriptors.BOOLEAN_TYPE_NAME:
+        return BooleanLiteral.FALSE;
+      case TypeDescriptors.BYTE_TYPE_NAME:
+      case TypeDescriptors.SHORT_TYPE_NAME:
+      case TypeDescriptors.INT_TYPE_NAME:
+      case TypeDescriptors.FLOAT_TYPE_NAME:
+      case TypeDescriptors.DOUBLE_TYPE_NAME:
+      case TypeDescriptors.CHAR_TYPE_NAME:
+        return new NumberLiteral(this, 0);
+      case TypeDescriptors.LONG_TYPE_NAME:
+        return new NumberLiteral(this, 0L);
+    }
+
+    // Objects.
+    return NullLiteral.NULL;
+  }
+
+  @Override
+  public int getDimensions() {
+    return 0;
+  }
+
+  @Override
+  public TypeDescriptor getEnclosingTypeDescriptor() {
+    // Will return a consistent interned copy, should be decently fast.
+    return TypeProxyUtils.createTypeDescriptor(typeBinding.getDeclaringClass());
+  }
+
+  @Override
+  public TypeDescriptor getForArray(int dimensions) {
+    return TypeDescriptors.getForArray(this, dimensions);
+  }
+
+  @Override
+  public MethodDescriptor getJsFunctionMethodDescriptor() {
+    return TypeProxyUtils.getJsFunctionMethodDescriptor(typeBinding);
+  }
+
+  @Override
+  public String getJsName() {
+    return jsTypeName;
+  }
+
+  @Override
+  public String getJsNamespace() {
+    return jsTypeNamespace;
+  }
+
+  @Override
+  public ImmutableList<String> getPackageComponents() {
+    // Lazily initialize packageComponents.
+    if (packageComponents == null) {
+      Preconditions.checkNotNull(typeBinding);
+      packageComponents = ImmutableList.copyOf(TypeProxyUtils.getPackageComponents(typeBinding));
+    }
+    return packageComponents;
+  }
+
+  @Override
+  public String getPackageName() {
+    return Joiner.on(".").join(getPackageComponents());
+  }
+
+  @Override
+  public String getQualifiedName() {
+    return TypeDescriptors.getQualifiedName(this);
+  }
+
+  /**
+   * Returns the erasure type (see definition of erasure type at
+   * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
+   */
+  @Override
+  public TypeDescriptor getRawTypeDescriptor() {
+    TypeDescriptor rawTypeDescriptor =
+        TypeProxyUtils.createTypeDescriptor(typeBinding.getErasure());
+    if (rawTypeDescriptor.isParameterizedType()) {
+      return TypeDescriptors.createSyntheticParametricTypeDescriptor(
+          rawTypeDescriptor, ImmutableList.<TypeDescriptor>of());
+    }
+    return rawTypeDescriptor;
+  }
+
+  @Override
+  public String getSimpleName() {
+    return Iterables.getLast(getClassComponents());
+  }
+
+  @Override
+  public String getSourceName() {
+    return Joiner.on(".").join(Iterables.concat(getPackageComponents(), getClassComponents()));
+  }
+
+  @Override
+  public TypeDescriptor getSuperTypeDescriptor() {
+    // Will return a consistent interned copy, should be decently fast.
+    return TypeProxyUtils.createTypeDescriptor(typeBinding.getSuperclass());
   }
 
   @Override
@@ -104,75 +195,6 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public boolean isPrimitive() {
-    return typeBinding != null && typeBinding.isPrimitive();
-  }
-
-  @Override
-  public boolean isTypeVariable() {
-    return typeBinding != null && typeBinding.isTypeVariable();
-  }
-
-  @Override
-  public boolean isWildCard() {
-    return (typeBinding != null && (typeBinding.isWildcardType() || typeBinding.isCapture()));
-  }
-
-  @Override
-  public boolean isRawType() {
-    return (typeBinding != null && typeBinding.isRawType());
-  }
-
-  @Override
-  public String getBinaryName() {
-    return Joiner.on(".")
-        .join(
-            Iterables.concat(
-                getPackageComponents(),
-                Collections.singleton(Joiner.on("$").join(getClassComponents()))));
-  }
-
-  @Override
-  public String getClassName() {
-    if (isPrimitive()) {
-      return "$" + getSimpleName();
-    }
-    if (getSimpleName().equals("?")) {
-      return "?";
-    }
-    if (isTypeVariable()) {
-      Preconditions.checkArgument(
-          getClassComponents().size() > 1,
-          "Type Variable (not including wild card type) should have at least two name components");
-      // skip the top level class component for better output readability.
-      List<String> nameComponents =
-          new ArrayList<>(getClassComponents().subList(1, getClassComponents().size()));
-
-      // move the prefix in the simple name to the class name to avoid collisions between method-
-      // level and class-level type variable and avoid variable name starts with a number.
-      // concat class components to avoid collisions between type variables in inner/outer class.
-      // use '_' instead of '$' because '$' is not allowed in template variable name in closure.
-      String simpleName = getSimpleName();
-      nameComponents.set(
-          nameComponents.size() - 1, simpleName.substring(simpleName.indexOf('_') + 1));
-      String prefix = simpleName.substring(0, simpleName.indexOf('_') + 1);
-
-      return prefix + Joiner.on('_').join(nameComponents);
-    }
-    return Joiner.on('$').join(getClassComponents());
-  }
-
-  @Override
-  public String getSimpleName() {
-    return Iterables.getLast(getClassComponents());
-  }
-
-  @Override
-  public String getSourceName() {
-    return Joiner.on(".").join(Iterables.concat(getPackageComponents(), getClassComponents()));
-  }
-
-  @Override
   public String getUniqueId() {
     // For type variable, we use its JDT binary name plus its erasure's binary name, which will
     // ensure the uniqueness of the type variable. Since in j2cl we only care about the left bound
@@ -184,30 +206,12 @@ public class RegularTypeDescriptor extends TypeDescriptor {
       // binary name of T is "test.Bar$()LFoo;$T"
       return typeBinding.getBinaryName() + ":" + typeBinding.getErasure().getBinaryName();
     }
-    return getBinaryName() + getTypeArgumentsUniqueId();
-  }
-
-  private String getTypeArgumentsUniqueId() {
-    if (isParameterizedType()) {
-      return String.format(
-          "<%s>",
-          Joiner.on(", ")
-              .join(
-                  Lists.transform(
-                      getTypeArgumentDescriptors(),
-                      new Function<TypeDescriptor, String>() {
-                        @Override
-                        public String apply(TypeDescriptor typeDescriptor) {
-                          return typeDescriptor.getUniqueId();
-                        }
-                      })));
-    }
-    return "";
+    return getBinaryName() + TypeDescriptors.getTypeArgumentsUniqueId(this);
   }
 
   @Override
-  public String getPackageName() {
-    return Joiner.on(".").join(getPackageComponents());
+  public Visibility getVisibility() {
+    return TypeProxyUtils.getVisibility(typeBinding.getModifiers());
   }
 
   @Override
@@ -216,45 +220,18 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public int getDimensions() {
-    return 0;
+  public boolean isEnumOrSubclass() {
+    return TypeProxyUtils.isEnumOrSubclass(typeBinding);
   }
 
   @Override
-  public boolean isParameterizedType() {
-    return !getTypeArgumentDescriptors().isEmpty();
-  }
-
-  /**
-   * Returns the erasure type (see definition of erasure type at
-   * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
-   */
-  @Override
-  public TypeDescriptor getRawTypeDescriptor() {
-    RegularTypeDescriptor rawTypeDescriptor =
-        (RegularTypeDescriptor) TypeProxyUtils.createTypeDescriptor(typeBinding.getErasure());
-    if (rawTypeDescriptor.isParameterizedType()) {
-      return TypeDescriptor.createSyntheticParametricTypeDescriptor(
-          rawTypeDescriptor, ImmutableList.<TypeDescriptor>of());
-    }
-    return rawTypeDescriptor;
+  public boolean isExtern() {
+    return TypeDescriptors.isExtern(this);
   }
 
   @Override
-  public TypeDescriptor getSuperTypeDescriptor() {
-    // Will return a consistent interned copy, should be decently fast.
-    return TypeProxyUtils.createTypeDescriptor(typeBinding.getSuperclass());
-  }
-
-  @Override
-  public TypeDescriptor getEnclosingTypeDescriptor() {
-    // Will return a consistent interned copy, should be decently fast.
-    return TypeProxyUtils.createTypeDescriptor(typeBinding.getDeclaringClass());
-  }
-
-  @Override
-  public Visibility getVisibility() {
-    return TypeProxyUtils.getVisibility(typeBinding.getModifiers());
+  public boolean isGlobal() {
+    return TypeDescriptors.isGlobal(this);
   }
 
   @Override
@@ -268,33 +245,8 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public boolean isLocal() {
-    return TypeProxyUtils.isLocal(typeBinding);
-  }
-
-  @Override
   public boolean isInterface() {
     return typeBinding != null && typeBinding.isInterface();
-  }
-
-  @Override
-  public boolean isEnumOrSubclass() {
-    return TypeProxyUtils.isEnumOrSubclass(typeBinding);
-  }
-
-  @Override
-  public Node accept(Processor processor) {
-    return Visitor_RegularTypeDescriptor.visit(processor, this);
-  }
-
-  @Override
-  public boolean isJsType() {
-    return isJsType;
-  }
-
-  @Override
-  public boolean isJsFunctionInterface() {
-    return isJsFunction;
   }
 
   @Override
@@ -303,18 +255,18 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public MethodDescriptor getJsFunctionMethodDescriptor() {
-    return TypeProxyUtils.getJsFunctionMethodDescriptor(typeBinding);
+  public boolean isJsFunctionInterface() {
+    return isJsFunction;
   }
 
   @Override
-  public MethodDescriptor getConcreteJsFunctionMethodDescriptor() {
-    return TypeProxyUtils.getConcreteJsFunctionMethodDescriptor(typeBinding);
+  public boolean isJsType() {
+    return isJsType;
   }
 
   @Override
-  public boolean subclassesJsConstructorClass() {
-    return TypeProxyUtils.subclassesJsConstructorClass(typeBinding);
+  public boolean isLocal() {
+    return TypeProxyUtils.isLocal(typeBinding);
   }
 
   @Override
@@ -323,13 +275,54 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public String getJsNamespace() {
-    return jsTypeNamespace;
+  public boolean isParameterizedType() {
+    return !getTypeArgumentDescriptors().isEmpty();
   }
 
   @Override
-  public String getJsName() {
-    return jsTypeName;
+  public boolean isPrimitive() {
+    return typeBinding != null && typeBinding.isPrimitive();
+  }
+
+  @Override
+  public boolean isRaw() {
+    return false;
+  }
+
+  @Override
+  public boolean isRawType() {
+    return (typeBinding != null && typeBinding.isRawType());
+  }
+
+  @Override
+  public boolean isTypeVariable() {
+    return typeBinding != null && typeBinding.isTypeVariable();
+  }
+
+  @Override
+  public boolean isUnion() {
+    return false;
+  }
+
+  @Override
+  public boolean isWildCard() {
+    return (typeBinding != null && (typeBinding.isWildcardType() || typeBinding.isCapture()));
+  }
+
+  private void setJsInteropProperties() {
+    IAnnotationBinding jsTypeAnnotation = JsInteropAnnotationUtils.getJsTypeAnnotation(typeBinding);
+    if (jsTypeAnnotation != null) {
+      isJsType = true;
+      isNative = JsInteropAnnotationUtils.isNative(jsTypeAnnotation);
+      jsTypeNamespace = JsInteropAnnotationUtils.getJsNamespace(jsTypeAnnotation);
+      jsTypeName = JsInteropAnnotationUtils.getJsName(jsTypeAnnotation);
+    }
+    isJsFunction = JsInteropUtils.isJsFunction(typeBinding);
+  }
+
+  @Override
+  public boolean subclassesJsConstructorClass() {
+    return TypeProxyUtils.subclassesJsConstructorClass(typeBinding);
   }
 
   @Override

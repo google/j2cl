@@ -25,7 +25,6 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.RegularTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 
@@ -74,11 +73,10 @@ public class FixTypeVariableInMethodVisitors extends AbstractRewriter {
       return typeDescriptor;
     }
     if (typeDescriptor.isParameterizedType()) {
-      RegularTypeDescriptor regularTypeDescriptor = (RegularTypeDescriptor) typeDescriptor;
-      return TypeDescriptor.createSyntheticParametricTypeDescriptor(
-          regularTypeDescriptor,
+      return TypeDescriptors.createSyntheticParametricTypeDescriptor(
+          typeDescriptor,
           Lists.transform(
-              regularTypeDescriptor.getTypeArgumentDescriptors(),
+              typeDescriptor.getTypeArgumentDescriptors(),
               new Function<TypeDescriptor, TypeDescriptor>() {
                 @Override
                 public TypeDescriptor apply(TypeDescriptor typeArgument) {

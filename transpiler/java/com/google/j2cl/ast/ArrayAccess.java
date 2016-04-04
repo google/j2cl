@@ -29,9 +29,10 @@ public class ArrayAccess extends Expression {
   @Visitable Expression indexExpression;
 
   public ArrayAccess(Expression arrayExpression, Expression indexExpression) {
+    Preconditions.checkArgument(arrayExpression.getTypeDescriptor().isArray());
+
     this.arrayExpression = checkNotNull(arrayExpression);
     this.indexExpression = checkNotNull(indexExpression);
-    Preconditions.checkArgument(arrayExpression.getTypeDescriptor() instanceof ArrayTypeDescriptor);
   }
 
   public Expression getArrayExpression() {
