@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.generator;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.sourcemap.SourceInfo;
 
 import org.apache.commons.lang.StringUtils;
@@ -33,6 +34,10 @@ class SourceBuilder {
    * Appends some source and returns its resulting location.
    */
   public SourceInfo append(String source) {
+    Preconditions.checkArgument(
+        !source.startsWith("  "),
+        "Let SourceBuilder manage indentation, don't provide spaces at the beginning "
+            + "of appended lines.");
     int numNewLines = StringUtils.countMatches(source, System.lineSeparator());
     // For lines with JSDoc we do want to unindent so we just leave it at the same indentation
     // level.

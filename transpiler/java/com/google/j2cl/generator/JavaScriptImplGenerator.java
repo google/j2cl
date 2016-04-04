@@ -272,7 +272,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sb.appendln(" * @%s", GeneratorUtils.visibilityForMethod(method));
       sb.appendln(" */");
       if (method.isNative()) {
-        sb.appendln("  // native " + GeneratorUtils.getMethodHeader(method, environment));
+        sb.appendln("// native " + GeneratorUtils.getMethodHeader(method, environment));
       } else {
         sb.appendln(GeneratorUtils.getMethodHeader(method, environment));
         statementTranspiler.renderStatement(method.getBody());
@@ -486,9 +486,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     sb.appendln(" * @public");
     sb.appendln(" */");
-    sb.appendln("  constructor(%s) {", parameters);
-    sb.appendln("    %s.$clinit();", className);
-    sb.appendln("    super(%s);", superCallArguments);
+    sb.appendln("constructor(%s) {", parameters);
+    sb.appendln("%s.$clinit();", className);
+    sb.appendln("super(%s);", superCallArguments);
     renderFieldsInitialValues();
     String mangledCtorName =
         ManglingNameUtils.getCtorMangledName(primaryConstructor.getDescriptor());
