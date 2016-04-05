@@ -345,7 +345,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       String argumentsList = GeneratorUtils.getNewInstanceArguments(constructor, environment);
       sb.appendln("let $instance = new %s(%s);", className, argumentsList);
     } else {
-      sb.appendln("let $instance = new %s;", className);
+      sb.appendln("let $instance = new %s();", className);
     }
     sb.appendln("$instance.%s(%s);", mangledNameOfCtor, parameterList);
     sb.appendln("return $instance;");
