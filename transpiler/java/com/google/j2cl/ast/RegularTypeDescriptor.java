@@ -25,6 +25,8 @@ import com.google.j2cl.common.JsInteropAnnotationUtils;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 
+import java.util.Collections;
+
 /**
  * A (by name) reference to a class.
  */
@@ -162,7 +164,7 @@ public class RegularTypeDescriptor extends TypeDescriptor {
         TypeProxyUtils.createTypeDescriptor(typeBinding.getErasure());
     if (rawTypeDescriptor.isParameterizedType()) {
       return TypeDescriptors.createSyntheticParametricTypeDescriptor(
-          rawTypeDescriptor, ImmutableList.<TypeDescriptor>of());
+          rawTypeDescriptor, Collections.emptyList());
     }
     return rawTypeDescriptor;
   }

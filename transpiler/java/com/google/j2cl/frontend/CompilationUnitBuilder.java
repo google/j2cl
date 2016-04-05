@@ -18,7 +18,6 @@ package com.google.j2cl.frontend;
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.FluentIterable;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
@@ -363,9 +362,7 @@ public class CompilationUnitBuilder {
 
       // If a method has no body, initialize the body with an empty list of statements.
       Block body =
-          methodDeclaration.getBody() == null
-              ? new Block(new ArrayList<Statement>())
-              : convert(methodDeclaration.getBody());
+          methodDeclaration.getBody() == null ? new Block() : convert(methodDeclaration.getBody());
 
       IMethodBinding methodBinding = methodDeclaration.resolveBinding();
       Method method =
@@ -879,12 +876,11 @@ public class CompilationUnitBuilder {
                           arrayVariable.getReference(), indexVariable.getReference()))));
 
       //  {   T t = $array[$index]; S; }
-      Statement body = convert(statement.getBody());
-      if (body instanceof Block) {
-        ((Block) body).getStatements().add(0, forVariableDeclarationStatement);
-      } else {
-        body = new Block(ImmutableList.of(forVariableDeclarationStatement, body));
-      }
+      Statement bodyStatement = convert(statement.getBody());
+      Block body =
+          bodyStatement instanceof Block ? (Block) bodyStatement : new Block(bodyStatement);
+      body.getStatements().add(0, forVariableDeclarationStatement);
+
       return new ForStatement(
           condition,
           body,
@@ -952,18 +948,16 @@ public class CompilationUnitBuilder {
                           JdtUtils.createMethodDescriptor(nextMethodBinding),
                           Collections.<Expression>emptyList()))));
 
-      Statement body = convert(statement.getBody());
-      if (body instanceof Block) {
-        ((Block) body).getStatements().add(0, forVariableDeclarationStatement);
-      } else {
-        body = new Block(ImmutableList.of(forVariableDeclarationStatement, body));
-      }
+      Statement bodyStatement = convert(statement.getBody());
+      Block body =
+          bodyStatement instanceof Block ? (Block) bodyStatement : new Block(bodyStatement);
+      body.getStatements().add(0, forVariableDeclarationStatement);
+
       return new ForStatement(
           condition,
           body,
-          Collections.<Expression>singletonList(
-              new VariableDeclarationExpression(iteratorDeclaration)),
-          Collections.<Expression>emptyList());
+          Collections.singletonList(new VariableDeclarationExpression(iteratorDeclaration)),
+          Collections.emptyList());
     }
 
     private DoWhileStatement convert(org.eclipse.jdt.core.dom.DoStatement statement) {
@@ -1094,7 +1088,7 @@ public class CompilationUnitBuilder {
             returnTypeDescriptor == TypeDescriptors.get().primitiveVoid
                 ? new ExpressionStatement(lambdaMethodBody)
                 : new ReturnStatement(lambdaMethodBody, returnTypeDescriptor);
-        body = new Block(Arrays.asList(statement));
+        body = new Block(statement);
       }
 
       // generate parameters type descriptors.
@@ -1313,7 +1307,7 @@ public class CompilationUnitBuilder {
                   methodBinding.getParameterTypes()[parametersLength - 1]);
       if (j2clArguments.size() < parametersLength) {
         // no argument for the varargs, add an empty array.
-        return new ArrayLiteral(varargsTypeDescriptor, new ArrayList<Expression>());
+        return new ArrayLiteral(varargsTypeDescriptor);
       }
       List<Expression> valueExpressions = new ArrayList<>();
       for (int i = parametersLength - 1; i < j2clArguments.size(); i++) {

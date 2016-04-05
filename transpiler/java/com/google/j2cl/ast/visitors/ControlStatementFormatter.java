@@ -45,16 +45,13 @@ public class ControlStatementFormatter extends AbstractRewriter {
       return ifStatement;
     }
 
-    thenStatement =
-        thenStatement instanceof Block
-            ? thenStatement
-            : new Block(Collections.singletonList(thenStatement));
+    thenStatement = thenStatement instanceof Block ? thenStatement : new Block(thenStatement);
     elseStatement =
         elseStatement == null
                 || elseStatement instanceof Block
                 || elseStatement instanceof IfStatement
             ? elseStatement
-            : new Block(Collections.singletonList(elseStatement));
+            : new Block(elseStatement);
     return new IfStatement(ifStatement.getConditionExpression(), thenStatement, elseStatement);
   }
 
@@ -79,8 +76,7 @@ public class ControlStatementFormatter extends AbstractRewriter {
       return doWhileStatement;
     }
 
-    return new DoWhileStatement(
-        doWhileStatement.getConditionExpression(), new Block(Collections.singletonList(body)));
+    return new DoWhileStatement(doWhileStatement.getConditionExpression(), new Block(body));
   }
 
   @Override
@@ -90,8 +86,7 @@ public class ControlStatementFormatter extends AbstractRewriter {
       return whileStatement;
     }
 
-    return new WhileStatement(
-        whileStatement.getConditionExpression(), new Block(Collections.singletonList(body)));
+    return new WhileStatement(whileStatement.getConditionExpression(), new Block(body));
   }
 
   private void formatControlStatements(CompilationUnit compilationUnit) {

@@ -60,13 +60,9 @@ public class NormalizeMultiExpressions {
           && expression.getLeftOperand() instanceof MultiExpression) {
         List<Expression> lhsExpressions =
             ((MultiExpression) expression.getLeftOperand()).getExpressions();
-        Expression rightMostExpression = Iterables.getLast(lhsExpressions);
+        Expression rightMostLhsExpression = Iterables.getLast(lhsExpressions);
         Expression innerExpression =
-            new BinaryExpression(
-                expression.getTypeDescriptor(),
-                rightMostExpression,
-                expression.getOperator(),
-                expression.getRightOperand());
+            BinaryExpression.Builder.from(expression).leftOperand(rightMostLhsExpression).build();
         return new MultiExpression(
             Iterables.concat(
                 lhsExpressions.subList(0, lhsExpressions.size() - 1),

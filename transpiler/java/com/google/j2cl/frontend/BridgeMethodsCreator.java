@@ -350,7 +350,7 @@ public class BridgeMethodsCreator {
     return new Method(
         bridgeMethodDescriptor,
         parameters,
-        new Block(Arrays.asList(statement)),
+        new Block(statement),
         false,
         false,
         false,

@@ -27,7 +27,6 @@ import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.Modifier;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -45,7 +44,7 @@ public class JdtMethodUtils {
     MethodDescriptor methodDescriptor = createConcreteMethodDescriptor(methodBinding);
     Iterable<TypeDescriptor> parameterTypeDescriptors =
         // Use the method declaration.
-        FluentIterable.from(Arrays.asList(methodBinding.getMethodDeclaration().getParameterTypes()))
+        FluentIterable.from(methodBinding.getMethodDeclaration().getParameterTypes())
             .transform(
                 new Function<ITypeBinding, TypeDescriptor>() {
                   @Override
@@ -85,7 +84,7 @@ public class JdtMethodUtils {
 
     // generate parameters type descriptors.
     Iterable<TypeDescriptor> parameterTypeDescriptors =
-        FluentIterable.from(Arrays.asList(methodBinding.getParameterTypes()))
+        FluentIterable.from(methodBinding.getParameterTypes())
             .transform(
                 new Function<ITypeBinding, TypeDescriptor>() {
                   @Override
@@ -95,7 +94,7 @@ public class JdtMethodUtils {
                 });
     // generate type parameters declared in the method.
     Iterable<TypeDescriptor> typeParameterDescriptors =
-        FluentIterable.from(Arrays.asList(methodBinding.getTypeParameters()))
+        FluentIterable.from(methodBinding.getTypeParameters())
             .transform(
                 new Function<ITypeBinding, TypeDescriptor>() {
                   @Override

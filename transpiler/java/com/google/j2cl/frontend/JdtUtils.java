@@ -20,7 +20,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryOperator;
@@ -107,7 +106,7 @@ public class JdtUtils {
   }
 
   static Iterable<TypeDescriptor> createTypeDescriptors(ITypeBinding[] typeBindings) {
-    return FluentIterable.from(Arrays.asList(typeBindings))
+    return FluentIterable.from(typeBindings)
         .transform(
             new Function<ITypeBinding, TypeDescriptor>() {
               @Override
@@ -368,7 +367,7 @@ public class JdtUtils {
 
   private static List<IMethodBinding> filterMethodBindings(
       IMethodBinding[] methodBindings, Predicate<IMethodBinding> predicate) {
-    return Lists.newArrayList(FluentIterable.from(methodBindings).filter(predicate));
+    return FluentIterable.from(methodBindings).filter(predicate).toList();
   }
 
   /**
@@ -615,7 +614,7 @@ public class JdtUtils {
         new Method(
             samMethodDescriptor,
             parameters,
-            new Block(Arrays.asList(statement)),
+            new Block(statement),
             false,
             true,
             true, // cannot be overridden, thus is final.

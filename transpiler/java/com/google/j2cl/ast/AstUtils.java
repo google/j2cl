@@ -19,13 +19,13 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -378,7 +378,7 @@ public class AstUtils {
     return new Method(
         forwardingMethodDescriptor,
         parameters,
-        new Block(Arrays.asList(statement)),
+        new Block(statement),
         false,
         true,
         false,
@@ -704,7 +704,7 @@ public class AstUtils {
         Iterables.concat(
             typeDescriptor.getClassComponents(), Arrays.asList(JS_OVERLAY_METHODS_IMPL_SUFFIX)),
         false,
-        ImmutableList.<TypeDescriptor>of());
+        Collections.emptyList());
   }
 
   /**

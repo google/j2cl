@@ -209,9 +209,9 @@ public abstract class MethodDescriptor extends Node implements Member {
       builder.enclosingClassTypeDescriptor =
           TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor();
       builder.methodName = "";
-      builder.parameterTypeDescriptors = ImmutableList.<TypeDescriptor>of();
+      builder.parameterTypeDescriptors = ImmutableList.of();
       builder.returnTypeDescriptor = TypeDescriptors.get().primitiveVoid;
-      builder.typeParameterDescriptors = ImmutableList.<TypeDescriptor>of();
+      builder.typeParameterDescriptors = ImmutableList.of();
       builder.jsInfo = JsInfo.NONE;
       return builder;
     }

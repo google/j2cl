@@ -73,4 +73,66 @@ public class BinaryExpression extends Expression {
   public Node accept(Processor processor) {
     return Visitor_BinaryExpression.visit(processor, this);
   }
+
+  /**
+   * A Builder for binary expressions.
+   */
+  public static class Builder {
+    private BinaryOperator operator;
+    private TypeDescriptor typeDescriptor;
+    private Expression leftOperand;
+    private Expression rightOperand;
+
+    public static Builder from(BinaryExpression expression) {
+      Builder builder =
+          new Builder()
+              .leftOperand(expression.getLeftOperand())
+              .operator(expression.getOperator())
+              .rightOperand(expression.getRightOperand())
+              .typeDescriptor(expression.getTypeDescriptor());
+      return builder;
+    }
+
+    public static Builder assignTo(Variable variable) {
+      Builder builder =
+          new Builder()
+              .leftOperand(variable.getReference())
+              .typeDescriptor(variable.getTypeDescriptor())
+              .operator(BinaryOperator.ASSIGN);
+      return builder;
+    }
+
+    public static Builder assignTo(Expression lvalue) {
+      Builder builder =
+          new Builder()
+              .leftOperand(lvalue)
+              .typeDescriptor(lvalue.getTypeDescriptor())
+              .operator(BinaryOperator.ASSIGN);
+      return builder;
+    }
+
+    public Builder leftOperand(Expression operand) {
+      this.leftOperand = operand;
+      return this;
+    }
+
+    public Builder rightOperand(Expression operand) {
+      this.rightOperand = operand;
+      return this;
+    }
+
+    public Builder operator(BinaryOperator operator) {
+      this.operator = operator;
+      return this;
+    }
+
+    public Builder typeDescriptor(TypeDescriptor typeDescriptor) {
+      this.typeDescriptor = typeDescriptor;
+      return this;
+    }
+
+    public final BinaryExpression build() {
+      return new BinaryExpression(typeDescriptor, leftOperand, operator, rightOperand);
+    }
+  }
 }

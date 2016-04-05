@@ -17,7 +17,6 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CatchClause;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
@@ -81,11 +80,7 @@ public class InsertExceptionConversionVisitor extends AbstractRewriter {
         mainVariable.getReference());
 
     Expression assignment =
-        new BinaryExpression(
-            mainVariable.getTypeDescriptor(),
-            mainVariable.getReference(),
-            BinaryOperator.ASSIGN,
-            toJavaCall);
+        BinaryExpression.Builder.assignTo(mainVariable).rightOperand(toJavaCall).build();
 
     catchClause.getBody().getStatements().add(0, new ExpressionStatement(assignment));
 

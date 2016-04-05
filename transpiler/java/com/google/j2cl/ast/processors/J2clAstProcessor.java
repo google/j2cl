@@ -168,7 +168,7 @@ public class J2clAstProcessor extends AbstractProcessor {
   }
 
   /**
-   * Field represents a visitable filed in a visitable class.
+   * Field represents a visitable field in a visitable class.
    */
   public static class Field {
     enum Type {
@@ -266,7 +266,7 @@ public class J2clAstProcessor extends AbstractProcessor {
    * Qualified names of {@code @AutoValue} classes that we attempted to process but had to abandon
    * because we needed other types that they referenced and those other types were missing.
    */
-  private final List<String> deferredTypeNames = new ArrayList<String>();
+  private final List<String> deferredTypeNames = new ArrayList<>();
 
   private Multimap<String, VisitableClass> processedVisitableClassesByPackageName =
       LinkedHashMultimap.create();

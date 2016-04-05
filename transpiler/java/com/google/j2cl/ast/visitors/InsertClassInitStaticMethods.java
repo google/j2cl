@@ -25,7 +25,7 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
 
-import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * The first line of a static method should be a call to the Class's clinit.
@@ -48,7 +48,8 @@ public class InsertClassInitStaticMethods {
                 .methodName("$clinit")
                 .build();
         MethodCall call =
-            MethodCall.createRegularMethodCall(null, clinitDescriptor, new ArrayList<Expression>());
+            MethodCall.createRegularMethodCall(
+                null, clinitDescriptor, Collections.<Expression>emptyList());
         return Method.Builder.from(method).statement(0, new ExpressionStatement(call)).build();
       }
       return method;

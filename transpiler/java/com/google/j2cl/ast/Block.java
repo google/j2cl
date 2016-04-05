@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,6 +30,10 @@ import java.util.List;
 public class Block extends Statement implements Positioned {
   @Visitable List<Statement> statements = new ArrayList<>();
   private Integer position;
+
+  public Block(Statement... statements) {
+    this(Arrays.asList(statements));
+  }
 
   public Block(List<Statement> statements) {
     this.statements.addAll(checkNotNull(statements));

@@ -278,17 +278,17 @@ public class TypeDescriptors {
           new ArrayList<String>(),
           // Import alias.
           Lists.newArrayList("NativeString"),
-          ImmutableList.<TypeDescriptor>of(),
+          Collections.emptyList(),
           // Browser global
           JsInteropUtils.JS_GLOBAL,
           // Native type name
           "String");
   public static final TypeDescriptor NATIVE_FUNCTION =
       createSyntheticNativeTypeDescriptor(
-          new ArrayList<String>(),
+          Collections.emptyList(),
           // Import alias.
           Lists.newArrayList("NativeFunction"),
-          ImmutableList.<TypeDescriptor>of(),
+          Collections.emptyList(),
           // Browser global
           JsInteropUtils.JS_GLOBAL,
           // Native type name
@@ -392,7 +392,7 @@ public class TypeDescriptors {
   // classes.
   public static TypeDescriptor createRaw(Iterable<String> nameSpaceComponents, String className) {
     return createSyntheticRegularTypeDescriptor(
-        nameSpaceComponents, Arrays.asList(className), true, ImmutableList.<TypeDescriptor>of());
+        nameSpaceComponents, Arrays.asList(className), true, Collections.emptyList());
   }
 
   /**
@@ -403,7 +403,7 @@ public class TypeDescriptors {
       return createSyntheticNativeTypeDescriptor(
           Arrays.asList(JsInteropUtils.JS_GLOBAL),
           Arrays.asList(""),
-          ImmutableList.<TypeDescriptor>of(),
+          Collections.emptyList(),
           JsInteropUtils.JS_GLOBAL,
           "");
     }
@@ -415,7 +415,7 @@ public class TypeDescriptors {
     return createSyntheticNativeTypeDescriptor(
         namespaceComponents,
         nameComponents.subList(size - 1, size),
-        ImmutableList.<TypeDescriptor>of(),
+        Collections.emptyList(),
         Joiner.on(".").join(namespaceComponents),
         nameComponents.get(size - 1));
   }

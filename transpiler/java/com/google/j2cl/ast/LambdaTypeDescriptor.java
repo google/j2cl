@@ -56,7 +56,7 @@ public class LambdaTypeDescriptor extends TypeDescriptor {
                 enclosingClassTypeDescriptor.getClassComponents(),
                 Arrays.asList(lambdaBinaryName)));
     this.isNative = false;
-    this.typeArgumentDescriptors = ImmutableList.<TypeDescriptor>of();
+    this.typeArgumentDescriptors = ImmutableList.of();
   }
 
   @Override

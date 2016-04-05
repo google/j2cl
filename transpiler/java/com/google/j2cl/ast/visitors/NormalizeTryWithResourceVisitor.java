@@ -40,6 +40,7 @@ import com.google.j2cl.ast.VariableDeclarationFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -69,11 +70,11 @@ public class NormalizeTryWithResourceVisitor extends AbstractRewriter {
           new TryStatement(
               tryStatement.getResourceDeclarations(),
               tryStatement.getBody(),
-              new ArrayList<CatchClause>(),
+              Collections.emptyList(),
               null);
       Block refactoredTryBlock = new Block(removeResourceDeclarations(tryBlock));
       return new TryStatement(
-          new ArrayList<VariableDeclarationExpression>(),
+          Collections.emptyList(),
           refactoredTryBlock,
           tryStatement.getCatchClauses(),
           tryStatement.getFinallyBlock());
@@ -146,11 +147,9 @@ public class NormalizeTryWithResourceVisitor extends AbstractRewriter {
       outputStatements.add(openResource);
 
       Expression assignResourceInitializer =
-          new BinaryExpression(
-              originalResourceDeclaration.getVariable().getTypeDescriptor(),
-              originalResourceDeclaration.getVariable().getReference(),
-              BinaryOperator.ASSIGN,
-              originalResourceDeclaration.getInitializer());
+          BinaryExpression.Builder.assignTo(originalResourceDeclaration.getVariable())
+              .rightOperand(originalResourceDeclaration.getInitializer())
+              .build();
       tryBlockBodyStatements.add(new ExpressionStatement(assignResourceInitializer));
     }
     tryBlockBodyStatements.addAll(tryStatement.getBody().getStatements());
@@ -160,17 +159,15 @@ public class NormalizeTryWithResourceVisitor extends AbstractRewriter {
 
     List<Statement> catchBlockStatments = new ArrayList<>();
     Expression assignPrimaryExceptionToExceptionFromTry =
-        new BinaryExpression(
-            primaryException.getTypeDescriptor(),
-            primaryException.getReference(),
-            BinaryOperator.ASSIGN,
-            exceptionFromTry.getReference());
+        BinaryExpression.Builder.assignTo(primaryException)
+            .rightOperand(exceptionFromTry.getReference())
+            .build();
     catchBlockStatments.add(new ExpressionStatement(assignPrimaryExceptionToExceptionFromTry));
     catchBlockStatments.add(new ThrowStatement(exceptionFromTry.getReference()));
 
     List<Statement> finallyBlockStatments = new ArrayList<>();
     for (VariableDeclarationExpression declaration : Lists.reverse(resourceDeclarations)) {
-      MethodCall call =
+      MethodCall safeCloseCall =
           MethodCall.createRegularMethodCall(
               null,
               safeClose,
@@ -178,11 +175,7 @@ public class NormalizeTryWithResourceVisitor extends AbstractRewriter {
                   declaration.getFragments().get(0).getVariable().getReference(),
                   primaryException.getReference()));
       Expression assignExceptionFromSafeCloseCall =
-          new BinaryExpression(
-              primaryException.getTypeDescriptor(),
-              primaryException.getReference(),
-              BinaryOperator.ASSIGN,
-              call);
+          BinaryExpression.Builder.assignTo(primaryException).rightOperand(safeCloseCall).build();
       finallyBlockStatments.add(new ExpressionStatement(assignExceptionFromSafeCloseCall));
     }
 
@@ -201,7 +194,7 @@ public class NormalizeTryWithResourceVisitor extends AbstractRewriter {
         new CatchClause(new Block(catchBlockStatments), exceptionFromTry);
     TryStatement innerTryStatement =
         new TryStatement(
-            new ArrayList<VariableDeclarationExpression>(),
+            Collections.emptyList(),
             new Block(tryBlockBodyStatements),
             Arrays.asList(catchTryException),
             new Block(finallyBlockStatments));

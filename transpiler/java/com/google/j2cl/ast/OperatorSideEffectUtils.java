@@ -192,13 +192,10 @@ public class OperatorSideEffectUtils {
       Expression leftOperand, BinaryOperator operator, Expression rightOperand) {
     TypeDescriptor numericTypeDescriptor =
         TypeDescriptors.asOperatorReturnType(leftOperand.getTypeDescriptor());
-    BinaryExpression assignment =
-        new BinaryExpression(
-            leftOperand.getTypeDescriptor(),
-            leftOperand,
-            BinaryOperator.ASSIGN,
-            new BinaryExpression(numericTypeDescriptor, leftOperand, operator, rightOperand));
-    return assignment;
+    return BinaryExpression.Builder.assignTo(leftOperand)
+        .rightOperand(
+            new BinaryExpression(numericTypeDescriptor, leftOperand, operator, rightOperand))
+        .build();
   }
 
   /**

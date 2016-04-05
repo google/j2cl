@@ -20,6 +20,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.processors.Visitable;
 
+import java.util.Collections;
+
 /**
  * Represents a synthetic parametric TypeDescriptor.
  *
@@ -132,7 +134,7 @@ public class SyntheticParametricTypeDescriptor extends TypeDescriptor {
   @Override
   public TypeDescriptor getRawTypeDescriptor() {
     return TypeDescriptors.createSyntheticParametricTypeDescriptor(
-        originalTypeDescriptor, ImmutableList.<TypeDescriptor>of());
+        originalTypeDescriptor, Collections.emptyList());
   }
 
   @Override

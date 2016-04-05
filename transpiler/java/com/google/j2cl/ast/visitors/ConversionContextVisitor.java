@@ -364,11 +364,9 @@ public class ConversionContextVisitor extends AbstractRewriter {
       return false;
     }
     BinaryExpression assignmentRightOperand =
-        new BinaryExpression(
-            binaryExpression.getTypeDescriptor(),
-            binaryExpression.getLeftOperand(),
-            binaryExpression.getOperator().getUnderlyingBinaryOperator(),
-            binaryExpression.getRightOperand());
+        BinaryExpression.Builder.from(binaryExpression)
+            .operator(binaryExpression.getOperator().getUnderlyingBinaryOperator())
+            .build();
     BinaryExpression assignmentExpression =
         new BinaryExpression(
             TypeDescriptors.asOperatorReturnType(binaryExpression.getTypeDescriptor()),

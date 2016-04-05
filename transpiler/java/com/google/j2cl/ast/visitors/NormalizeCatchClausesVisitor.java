@@ -100,7 +100,7 @@ public class NormalizeCatchClausesVisitor extends AbstractRewriter {
             false,
             false);
     Statement body = bodyBuilder(clauses, mainVariable);
-    return new CatchClause(new Block(Arrays.asList(body)), mainVariable);
+    return new CatchClause(new Block(body), mainVariable);
   }
 
   private Statement bodyBuilder(List<CatchClause> clauses, Variable mainVariable) {

@@ -20,6 +20,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.processors.Visitable;
 
+import java.util.Collections;
+
 /**
  * Represents the type descriptor that does not have a JDT typeBinding mapping. It is used to
  * synthesize the nativebootstrap, vmbootstrap type descriptors, synthetic native js types and
@@ -152,14 +154,11 @@ public class SyntheticRegularTypeDescriptor extends TypeDescriptor {
         ? TypeDescriptors.createSyntheticNativeTypeDescriptor(
             getPackageComponents(),
             getClassComponents(),
-            ImmutableList.<TypeDescriptor>of(),
+            Collections.emptyList(),
             jsTypeNamespace,
             jsTypeName)
         : TypeDescriptors.createSyntheticRegularTypeDescriptor(
-            getPackageComponents(),
-            getClassComponents(),
-            isRaw(),
-            ImmutableList.<TypeDescriptor>of());
+            getPackageComponents(), getClassComponents(), isRaw(), Collections.emptyList());
   }
 
   @Override

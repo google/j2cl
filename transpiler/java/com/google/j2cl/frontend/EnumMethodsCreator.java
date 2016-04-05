@@ -30,6 +30,7 @@ import com.google.j2cl.ast.Visibility;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -64,7 +65,7 @@ public class EnumMethodsCreator {
                 enumType.getDescriptor(),
                 NAMES_TO_VALUES_MAP_FIELD_NAME,
                 TypeDescriptors.createSyntheticNativeTypeDescriptor(
-                    new ArrayList<String>(),
+                    Collections.emptyList(),
                     // Import alias.
                     Lists.newArrayList("NativeObject"),
                     // Type parameters.
@@ -91,7 +92,7 @@ public class EnumMethodsCreator {
             .enclosingClassTypeDescriptor(enumType.getDescriptor())
             .methodName(VALUE_OF_METHOD_NAME)
             .returnTypeDescriptor(enumType.getDescriptor())
-            .parameterTypeDescriptors(Arrays.asList(TypeDescriptors.get().javaLangString))
+            .parameterTypeDescriptors(TypeDescriptors.get().javaLangString)
             .jsInfo(jsType ? JsInfo.RAW : JsInfo.NONE)
             .build();
   }
@@ -158,13 +159,11 @@ public class EnumMethodsCreator {
     Expression createMapCall =
         MethodCall.createRegularMethodCall(null, createMapMethodDescriptor, valuesCall);
     Expression assignMapCallToField =
-        new BinaryExpression(
-            namesToValuesMapFieldAccess.getTypeDescriptor(),
-            namesToValuesMapFieldAccess,
-            BinaryOperator.ASSIGN,
-            createMapCall);
+        BinaryExpression.Builder.assignTo(namesToValuesMapFieldAccess)
+            .rightOperand(createMapCall)
+            .build();
     Statement thenStatement = new ExpressionStatement(assignMapCallToField);
-    Block thenBlock = new Block(Arrays.asList(thenStatement));
+    Block thenBlock = new Block(thenStatement);
     Statement ifStatement = new IfStatement(namesToValuesMapIsNullComparison, thenBlock, null);
 
     // Return statement
