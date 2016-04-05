@@ -1,0 +1,131 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class InitMethodDispatch extends Object {
+  /**
+   * Defines instance fields.
+   */
+  constructor() {
+    super();
+    /**
+     * @public {number}
+     */
+    this.f_value__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch =
+        0;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!InitMethodDispatch}
+   * @public
+   */
+  static $create() {
+    InitMethodDispatch.$clinit();
+    let $instance = new InitMethodDispatch;
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch() {
+    this.$ctor__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch__int(
+        1);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {number} i
+   * @return {!InitMethodDispatch}
+   * @public
+   */
+  static $create__int(i) {
+    InitMethodDispatch.$clinit();
+    let $instance = new InitMethodDispatch;
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch__int(
+            i);
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {number} i
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch__int(
+      i) {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch();
+    this.f_value__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch =
+        i;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof InitMethodDispatch;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, InitMethodDispatch);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_initmethoddispatch_InitMethodDispatch() {
+  }
+};
+
+$Util.$setClassMetadata(
+    InitMethodDispatch,
+    'com.google.j2cl.transpiler.readable.initmethoddispatch.InitMethodDispatch');
+
+
+
+/**
+ * Export class.
+ */
+exports = InitMethodDispatch;
+//# sourceMappingURL=InitMethodDispatch.js.map
