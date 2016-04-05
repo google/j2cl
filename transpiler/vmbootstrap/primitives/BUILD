@@ -40,7 +40,7 @@ generate_primitive_type(
     jsTypeName = "boolean",
 )
 
-js_library(
+filegroup(
     name = "primitives",
     srcs = glob(["*.js"]) + [
         ":src_double",
