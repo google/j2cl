@@ -18,6 +18,7 @@ let SimpleLambda$2foo = goog.forwardDeclare('gen.com.google.j2cl.transpiler.read
 let SimpleLambda$3foo = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$3foo$impl');
 let SimpleLambda$4foo = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$4foo$impl');
 let SimpleLambda$5foo = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$5foo$impl');
+let SimpleLambda$6foo = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$6foo$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
@@ -150,6 +151,15 @@ class SimpleLambda extends Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  static m_testLambdaInStaticContext() {
+    SimpleLambda.$clinit();
+    let f = SimpleLambda$6foo.$create();
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -186,6 +196,8 @@ class SimpleLambda extends Object {
         'gen.com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$4foo$impl');
     SimpleLambda$5foo = goog.module.get(
         'gen.com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$5foo$impl');
+    SimpleLambda$6foo = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.simplelambda.SimpleLambda$6foo$impl');
     Class = goog.module.get('gen.java.lang.Class$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Object.$clinit();

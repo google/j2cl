@@ -30,14 +30,9 @@ import java.util.Arrays;
 @Visitable
 public class LambdaTypeDescriptor extends TypeDescriptor {
   private ImmutableList<String> classComponents;
-  private TypeDescriptor enclosingClassTypeDescriptor;
 
   // JsInterop properties
-  private boolean isJsFunction;
-  private boolean isJsType;
   private boolean isNative;
-  private String jsTypeName;
-  private String jsTypeNamespace;
 
   private ITypeBinding lambdaInterfaceBinding;
   private ImmutableList<String> packageComponents;
@@ -96,7 +91,7 @@ public class LambdaTypeDescriptor extends TypeDescriptor {
 
   @Override
   public TypeDescriptor getEnclosingTypeDescriptor() {
-    return this.enclosingClassTypeDescriptor;
+    return null;
   }
 
   @Override
@@ -111,12 +106,12 @@ public class LambdaTypeDescriptor extends TypeDescriptor {
 
   @Override
   public String getJsName() {
-    return jsTypeName;
+    return null;
   }
 
   @Override
   public String getJsNamespace() {
-    return jsTypeNamespace;
+    return null;
   }
 
   @Override
@@ -217,12 +212,12 @@ public class LambdaTypeDescriptor extends TypeDescriptor {
 
   @Override
   public boolean isJsFunctionInterface() {
-    return isJsFunction;
+    return false;
   }
 
   @Override
   public boolean isJsType() {
-    return isJsType;
+    return false;
   }
 
   @Override

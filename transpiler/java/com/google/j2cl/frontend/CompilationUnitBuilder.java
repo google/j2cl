@@ -1043,12 +1043,15 @@ public class CompilationUnitBuilder {
                 .setPosition(-1) /* Position is not important */
                 .build());
       }
-      // Add field for enclosing instance.
-      lambdaType.addField(
-          new Field(
-              AstUtils.getFieldDescriptorForEnclosingInstance(
-                  lambdaTypeDescriptor, lambdaType.getEnclosingTypeDescriptor()),
-              -1 /* Position is not important */));
+
+      if (!JdtUtils.isInStaticContext(expression)) {
+        // Add field for enclosing instance.
+        lambdaType.addField(
+            new Field(
+                AstUtils.getFieldDescriptorForEnclosingInstance(
+                    lambdaTypeDescriptor, lambdaType.getEnclosingTypeDescriptor()),
+                -1 /* Position is not important */));
+      }
 
       // Add lambda class to compilation unit.
       j2clCompilationUnit.addType(lambdaType);
@@ -1059,7 +1062,10 @@ public class CompilationUnitBuilder {
           AstUtils.createDefaultConstructorDescriptor(lambdaTypeDescriptor, Visibility.PUBLIC);
       // qualifier should not be null if the lambda is nested in another lambda.
       Expression qualifier =
-          convertOuterClassReference(enclosingClassTypeBinding, enclosingClassTypeBinding, true);
+          !JdtUtils.isInStaticContext(expression)
+              ? convertOuterClassReference(
+                  enclosingClassTypeBinding, enclosingClassTypeBinding, true)
+              : null;
       return new NewInstance(qualifier, constructorMethodDescriptor);
     }
 

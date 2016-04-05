@@ -54,4 +54,8 @@ public class SimpleLambda {
             },
             10);
   }
+
+  public static void testLambdaInStaticContext() {
+    MyInterface f = (i) -> i;
+  }
 }
