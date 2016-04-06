@@ -109,6 +109,15 @@ public class Method extends Node {
   public String getJsDocDescription() {
     return jsDocDescription;
   }
+  
+  public boolean isPrimaryConstructor() {
+    if (isConstructor()) {
+      if (getDescriptor().getEnclosingClassTypeDescriptor().subclassesJsConstructorClass()) {
+        return !AstUtils.hasThisCall(this);
+      }
+    }
+    return false;
+  }
 
   @Override
   public Node accept(Processor processor) {

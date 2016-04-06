@@ -40,7 +40,10 @@ class JsConstructorClass$C extends JsConstructorClass$B {
    * @return {!JsConstructorClass$C}
    * @public
    */
-  static $create__int(x) { return new JsConstructorClass$C(x); }
+  static $create__int(x) {
+    JsConstructorClass$C.$clinit();
+    return new JsConstructorClass$C(x);
+  }
 
   /**
    * Initializes instance fields for a particular Java constructor.

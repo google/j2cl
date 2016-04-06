@@ -5,5 +5,5 @@ import jsinterop.annotations.JsType;
 public class JsTypeInnerClassWithNamespace {
 
   @JsType(namespace = "bar.foo.baz")
-  class InnerClass {}
+  static class InnerClass {}
 }

@@ -30,7 +30,10 @@ class JsTypesWithConstructor extends Object {
    * @return {!JsTypesWithConstructor}
    * @public
    */
-  static $create() { return new JsTypesWithConstructor(); }
+  static $create() {
+    JsTypesWithConstructor.$clinit();
+    return new JsTypesWithConstructor();
+  }
 
   /**
    * Initializes instance fields for a particular Java constructor.

@@ -30,7 +30,10 @@ class Child extends Parent {
    * @return {!Child}
    * @public
    */
-  static $create() { return new Child(); }
+  static $create() {
+    Child.$clinit();
+    return new Child();
+  }
 
   /**
    * Initializes instance fields for a particular Java constructor.

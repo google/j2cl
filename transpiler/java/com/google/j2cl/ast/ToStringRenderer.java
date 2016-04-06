@@ -115,9 +115,6 @@ class ToStringRenderer {
       @Override
       public boolean enterCastExpression(CastExpression castExpression) {
         print(castExpression.isRaw() ? "/**" : "(");
-        if (castExpression.isNullable()) {
-          print("!");
-        }
         print(castExpression.getCastTypeDescriptor());
         print(castExpression.isRaw() ? "**/" : ")");
         print(" ");

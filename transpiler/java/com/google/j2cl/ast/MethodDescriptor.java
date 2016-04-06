@@ -19,6 +19,8 @@ import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.j2cl.ast.processors.Visitable;
 
 /**
@@ -35,6 +37,7 @@ public abstract class MethodDescriptor extends Node implements Member {
   public static final String IS_INSTANCE_METHOD_NAME = "$isInstance";
   public static final String IS_ASSIGNABLE_FROM_METHOD_NAME = "$isAssignableFrom";
   public static final String TO_STRING_METHOD_NAME = "toString";
+  public static final String CREATE_METHOD_NAME = "$create";
 
   private static Interner<MethodDescriptor> interner;
 
@@ -280,6 +283,12 @@ public abstract class MethodDescriptor extends Node implements Member {
     public Builder jsInfo(JsInfo jsInfo) {
       this.jsInfo = jsInfo;
       return this;
+    }
+    
+    public Builder addParameter(TypeDescriptor parameterTypeDescriptor) {
+      return parameterTypeDescriptors(
+          Iterables.concat(
+              this.parameterTypeDescriptors, Lists.newArrayList(parameterTypeDescriptor)));
     }
 
     public MethodDescriptor build() {

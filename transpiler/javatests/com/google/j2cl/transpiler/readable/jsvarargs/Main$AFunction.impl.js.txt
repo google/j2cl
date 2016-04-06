@@ -18,6 +18,8 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
 
+/** @constructor */ let $NativeFunction = window.Function;
+
 
 /**
  * @implements {Main$Function}
@@ -30,7 +32,7 @@ class Main$AFunction extends Object {
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!Main$AFunction}
+   * @return {function(number, ...*):*}
    * @public
    */
   static $create() {
@@ -38,7 +40,9 @@ class Main$AFunction extends Object {
     let $instance = new Main$AFunction();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main$AFunction();
-    return $instance;
+    return $Util.$makeLambdaFunction(
+        $Util.$getPrototype(Main$AFunction).m_f1__int__arrayOf_java_lang_Object,
+        $instance, Main$AFunction.$copy);
   }
 
   /**

@@ -17,6 +17,8 @@ let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let Integer = goog.forwardDeclare('gen.java.lang.Integer$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
+/** @constructor */ let $NativeFunction = window.Function;
+
 
 /**
  * @template C_B_T
@@ -31,7 +33,7 @@ class Main$B extends Object {
   /**
    * A particular Java constructor as a factory method.
    * @template C_B_T
-   * @return {!Main$B<C_B_T>}
+   * @return {function(C_B_T, Integer):C_B_T}
    * @public
    */
   static $create() {
@@ -39,7 +41,9 @@ class Main$B extends Object {
     let $instance = new Main$B();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$B();
-    return $instance;
+    return $Util.$makeLambdaFunction(
+        $Util.$getPrototype(Main$B).m_apply__java_lang_Object__java_lang_Number,
+        $instance, Main$B.$copy);
   }
 
   /**

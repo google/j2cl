@@ -24,19 +24,15 @@ import com.google.j2cl.ast.Node;
  */
 public class InsertCastOnNewInstancesVisitor extends AbstractRewriter {
   public static void applyTo(CompilationUnit compilationUnit) {
-    new InsertCastOnNewInstancesVisitor().insertCastOnNewInstances(compilationUnit);
-  }
-
-  private void insertCastOnNewInstances(CompilationUnit compilationUnit) {
-    compilationUnit.accept(this);
+    compilationUnit.accept(new InsertCastOnNewInstancesVisitor());
   }
 
   @Override
   public Node rewriteNewInstance(NewInstance newInstance) {
-    if (newInstance.getTypeDescriptor().isParameterizedType()
-        || newInstance.getTypeDescriptor().isJsFunctionImplementation()) {
+    if (newInstance.getTypeDescriptor().isParameterizedType()) {
       // add type annotation to ClassInstanceCreation of generic type and JsFunction type.
-      return CastExpression.createRawNonNullable(newInstance, newInstance.getTypeDescriptor());
+      return CastExpression.createRaw(
+          newInstance, newInstance.getTypeDescriptor().getNonNullable());
     } else {
       return newInstance;
     }

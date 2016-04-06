@@ -85,9 +85,8 @@ public class NormalizeArrayCreationsVisitor extends AbstractRewriter {
     arguments.add(leafTypeReference);
     MethodCall arrayCreateMethodCall =
         MethodCall.createRegularMethodCall(null, arrayCreateMethodDescriptor, arguments);
-
-    return CastExpression.createRawNonNullable(
-        arrayCreateMethodCall, newArrayExpression.getTypeDescriptor());
+    return CastExpression.createRaw(
+        arrayCreateMethodCall, newArrayExpression.getTypeDescriptor().getNonNullable());
   }
 
   /**
@@ -127,8 +126,8 @@ public class NormalizeArrayCreationsVisitor extends AbstractRewriter {
       MethodCall arrayInitMethodCall =
           MethodCall.createRegularMethodCall(null, arrayInitMethodDescriptor, arguments);
 
-      return CastExpression.createRawNonNullable(
-          arrayInitMethodCall, newArrayExpression.getTypeDescriptor());
+      return CastExpression.createRaw(
+          arrayInitMethodCall, newArrayExpression.getTypeDescriptor().getNonNullable());
     } else {
       // It's multidimensional, make dimensions explicit.
       arrayInitMethodDescriptor =
@@ -148,9 +147,9 @@ public class NormalizeArrayCreationsVisitor extends AbstractRewriter {
       arguments.add(new NumberLiteral(TypeDescriptors.get().primitiveInt, dimensionCount));
       MethodCall arrayInitMethodCall =
           MethodCall.createRegularMethodCall(null, arrayInitMethodDescriptor, arguments);
-
-      return CastExpression.createRawNonNullable(
-          arrayInitMethodCall, newArrayExpression.getTypeDescriptor());
+      
+      return CastExpression.createRaw(
+          arrayInitMethodCall, newArrayExpression.getTypeDescriptor().getNonNullable());
     }
   }
 }

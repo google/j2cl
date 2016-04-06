@@ -77,10 +77,8 @@ public class ExpressionTranspiler {
 
   public static String transform(Expression expression, final GenerationEnvironment environment) {
     class ToSourceTransformer extends AbstractTransformer<String> {
-      private String annotateWithJsDoc(
-          TypeDescriptor castTypeDescriptor, String expression, boolean nullable) {
-        String jsdoc =
-            JsDocNameUtils.getJsDocName(castTypeDescriptor, false, nullable, environment);
+      private String annotateWithJsDoc(TypeDescriptor castTypeDescriptor, String expression) {
+        String jsdoc = JsDocNameUtils.getJsDocName(castTypeDescriptor, false, environment);
         return String.format("/**@type {%s} */ (%s)", jsdoc, expression);
       }
 
@@ -155,8 +153,7 @@ public class ExpressionTranspiler {
             "Java CastExpression should have been normalized to method call.");
         return annotateWithJsDoc(
             castExpression.getCastTypeDescriptor(),
-            transform(castExpression.getExpression(), environment),
-            castExpression.isNullable());
+            transform(castExpression.getExpression(), environment));
       }
 
       @Override
@@ -320,15 +317,6 @@ public class ExpressionTranspiler {
         return "(" + expressionsAsString + ")";
       }
 
-      private String transformNativeNewInstance(NewInstance expression) {
-        TypeDescriptor targetTypeDescriptor =
-            expression.getTarget().getEnclosingClassTypeDescriptor().getRawTypeDescriptor();
-        String argumentsList =
-            Joiner.on(", ").join(transformNodesToSource(expression.getArguments()));
-        return String.format(
-            "new %s(%s)", environment.aliasForType(targetTypeDescriptor), argumentsList);
-      }
-
       @Override
       public String transformNewArray(NewArray newArrayExpression) {
         Preconditions.checkArgument(false, "NewArray should have been normalized.");
@@ -338,14 +326,11 @@ public class ExpressionTranspiler {
       @Override
       public String transformNewInstance(NewInstance expression) {
         TypeDescriptor targetTypeDescriptor =
-            expression.getTarget().getEnclosingClassTypeDescriptor();
-        if (targetTypeDescriptor.isNative()) {
-          return transformNativeNewInstance(expression);
-        } else if (targetTypeDescriptor.isJsFunctionImplementation()) {
-          return transfromJsFunctionNewInstance(expression);
-        } else {
-          return transformRegularNewInstance(expression);
-        }
+            expression.getTarget().getEnclosingClassTypeDescriptor().getRawTypeDescriptor();
+        String argumentsList =
+            Joiner.on(", ").join(transformNodesToSource(expression.getArguments()));
+        return String.format(
+            "new %s(%s)", environment.aliasForType(targetTypeDescriptor), argumentsList);
       }
 
       public List<String> transformNodesToSource(List<Expression> nodes) {
@@ -395,16 +380,6 @@ public class ExpressionTranspiler {
             transform(expression.getOperand(), environment));
       }
 
-      private String transformRegularNewInstance(NewInstance expression) {
-        String argumentsList =
-            Joiner.on(", ").join(transformNodesToSource(expression.getArguments()));
-        String className =
-            environment.aliasForType(expression.getTarget().getEnclosingClassTypeDescriptor());
-        String constructorMangledName =
-            ManglingNameUtils.getFactoryMethodMangledName(expression.getTarget());
-        return String.format("%s.%s(%s)", className, constructorMangledName, argumentsList);
-      }
-
       @Override
       public String transformStringLiteral(StringLiteral expression) {
         return expression.getEscapedValue();
@@ -450,31 +425,6 @@ public class ExpressionTranspiler {
       @Override
       public String transformVariableReference(VariableReference expression) {
         return environment.aliasForVariable(expression.getTarget());
-      }
-
-      /**
-       * We transform:
-       *
-       * new A() // A implements a JsFunction interface.
-       *
-       * to:
-       *
-       * Util.$makeLambdaFunction(A.prototype.fun, new A(), A.$copy).
-       *
-       * TODO: translate anonymous class and lambda to light function. (Real JS function, without
-       * generating any class literals).
-       */
-      private String transfromJsFunctionNewInstance(NewInstance expression) {
-        TypeDescriptor targetTypeDescriptor =
-            expression.getTarget().getEnclosingClassTypeDescriptor();
-        String enclosingClassName = environment.aliasForType(targetTypeDescriptor);
-        return String.format(
-            "%s.$makeLambdaFunction(%s.prototype.%s, %s, %s.$copy)",
-            environment.aliasForType(TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor()),
-            enclosingClassName,
-            ManglingNameUtils.getMangledName(targetTypeDescriptor.getJsFunctionMethodDescriptor()),
-            transformRegularNewInstance(expression),
-            enclosingClassName);
       }
     }
     if (expression == null) {

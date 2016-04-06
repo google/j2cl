@@ -30,7 +30,10 @@ class StaticJsMethodsWithClassNamespace extends Object {
    * @return {!StaticJsMethodsWithClassNamespace}
    * @public
    */
-  static $create() { return new StaticJsMethodsWithClassNamespace(); }
+  static $create() {
+    StaticJsMethodsWithClassNamespace.$clinit();
+    return new StaticJsMethodsWithClassNamespace();
+  }
 
   /**
    * Initializes instance fields for a particular Java constructor.

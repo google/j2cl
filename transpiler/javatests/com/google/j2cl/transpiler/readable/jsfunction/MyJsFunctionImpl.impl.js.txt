@@ -15,6 +15,8 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
+/** @constructor */ let $NativeFunction = window.Function;
+
 
 /**
  * @implements {MyJsFunctionInterface}
@@ -34,7 +36,7 @@ class MyJsFunctionImpl extends Object {
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!MyJsFunctionImpl}
+   * @return {function(number):number}
    * @public
    */
   static $create() {
@@ -42,7 +44,9 @@ class MyJsFunctionImpl extends Object {
     let $instance = new MyJsFunctionImpl();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionImpl();
-    return $instance;
+    return $Util.$makeLambdaFunction(
+        $Util.$getPrototype(MyJsFunctionImpl).m_foo__int, $instance,
+        MyJsFunctionImpl.$copy);
   }
 
   /**

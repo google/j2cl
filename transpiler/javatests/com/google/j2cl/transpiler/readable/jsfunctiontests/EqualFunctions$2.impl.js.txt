@@ -16,6 +16,8 @@ let EqualFunctions = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readabl
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 
+/** @constructor */ let $NativeFunction = window.Function;
+
 
 /**
  * @template M_T
@@ -30,7 +32,7 @@ class EqualFunctions$2 extends Object {
   /**
    * A particular Java constructor as a factory method.
    * @template M_T
-   * @return {!EqualFunctions$2<M_T>}
+   * @return {function(M_T, M_T):boolean}
    * @public
    */
   static $create() {
@@ -38,7 +40,10 @@ class EqualFunctions$2 extends Object {
     let $instance = new EqualFunctions$2();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions$2();
-    return $instance;
+    return $Util.$makeLambdaFunction(
+        $Util.$getPrototype(EqualFunctions$2)
+            .m_equal__java_lang_Object__java_lang_Object,
+        $instance, EqualFunctions$2.$copy);
   }
 
   /**

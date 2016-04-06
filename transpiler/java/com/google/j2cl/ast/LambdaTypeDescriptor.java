@@ -274,4 +274,14 @@ public class LambdaTypeDescriptor extends TypeDescriptor {
   public String toString() {
     return getSourceName();
   }
+
+  @Override
+  public boolean isNullable() {
+    return true;
+  }
+
+  @Override
+  public NonNullableTypeDescriptor getNonNullable() {
+    return NonNullableTypeDescriptor.create(this);
+  }
 }

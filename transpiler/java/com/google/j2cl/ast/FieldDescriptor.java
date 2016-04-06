@@ -184,6 +184,16 @@ public abstract class FieldDescriptor extends Node implements Member {
       this.visibility = visibility;
       return this;
     }
+    
+    public Builder isRaw(boolean isRaw) {
+      this.isRaw = isRaw;
+      return this;
+    }
+
+    public Builder jsInfo(JsInfo jsInfo) {
+      this.jsInfo = jsInfo;
+      return this;
+    }
 
     public FieldDescriptor build() {
       return create(

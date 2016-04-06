@@ -34,7 +34,10 @@ class SubNativeJsType extends MyNativeJsType {
    * @return {!SubNativeJsType}
    * @public
    */
-  static $create__int(x) { return new SubNativeJsType(x); }
+  static $create__int(x) {
+    SubNativeJsType.$clinit();
+    return new SubNativeJsType(x);
+  }
 
   /**
    * Initializes instance fields for a particular Java constructor.

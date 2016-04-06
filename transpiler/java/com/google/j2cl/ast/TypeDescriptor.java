@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * Abstract base class for type reference.
  *
- * Only abstract methods are allowed here. For simplificity of design (avoiding hierarchy) it is
+ * Only abstract methods are allowed here. For simplicity of design (avoiding hierarchy) it is
  * *required* that all implementation be in subclasses.
  */
 @Visitable
@@ -164,6 +164,10 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
    * UnionTypeDescriptor subclass.
    */
   public abstract boolean isUnion();
+  
+  public abstract boolean isNullable();
+
+  public abstract NonNullableTypeDescriptor getNonNullable();
 
   public abstract boolean isWildCard();
 

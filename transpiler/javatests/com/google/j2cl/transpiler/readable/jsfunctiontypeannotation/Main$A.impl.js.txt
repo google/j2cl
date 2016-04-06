@@ -17,6 +17,8 @@ let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let Double = goog.forwardDeclare('gen.java.lang.Double$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
+/** @constructor */ let $NativeFunction = window.Function;
+
 
 /**
  * @implements {Main$ApplyFunction<?number, ?number>}
@@ -29,7 +31,7 @@ class Main$A extends Object {
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!Main$A}
+   * @return {function(?number, ?number):?number}
    * @public
    */
   static $create() {
@@ -37,7 +39,9 @@ class Main$A extends Object {
     let $instance = new Main$A();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$A();
-    return $instance;
+    return $Util.$makeLambdaFunction(
+        $Util.$getPrototype(Main$A).m_apply__java_lang_Object__java_lang_Number,
+        $instance, Main$A.$copy);
   }
 
   /**

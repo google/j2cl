@@ -35,7 +35,10 @@ class MyJsType extends Object {
    * @return {!MyJsType}
    * @public
    */
-  static $create() { return new MyJsType(); }
+  static $create() {
+    MyJsType.$clinit();
+    return new MyJsType();
+  }
 
   /**
    * Initializes instance fields for a particular Java constructor.

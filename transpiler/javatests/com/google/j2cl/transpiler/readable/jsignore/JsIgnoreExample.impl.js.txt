@@ -31,7 +31,10 @@ class JsIgnoreExample extends Object {
    * @return {!JsIgnoreExample}
    * @public
    */
-  static $create() { return new JsIgnoreExample(); }
+  static $create() {
+    JsIgnoreExample.$clinit();
+    return new JsIgnoreExample();
+  }
 
   /**
    * Initializes instance fields for a particular Java constructor.

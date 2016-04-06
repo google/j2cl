@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsIgnore;
 import jsinterop.annotations.JsType;
 
 /**
@@ -30,6 +31,7 @@ public class MyClassExportsConstructor {
     this.a = a;
   }
 
+  @JsIgnore
   public MyClassExportsConstructor() {
     this(1);
   }

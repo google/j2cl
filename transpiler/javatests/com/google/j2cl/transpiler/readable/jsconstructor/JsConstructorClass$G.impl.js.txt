@@ -31,7 +31,10 @@ class JsConstructorClass$G extends Object {
    * @return {!JsConstructorClass$G}
    * @public
    */
-  static $create() { return new JsConstructorClass$G(); }
+  static $create() {
+    JsConstructorClass$G.$clinit();
+    return new JsConstructorClass$G();
+  }
 
   /**
    * Initializes instance fields for a particular Java constructor.

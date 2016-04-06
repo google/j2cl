@@ -272,6 +272,16 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   public boolean subclassesJsConstructorClass() {
     return false;
   }
+  
+  @Override
+  public boolean isNullable() {
+    return true;
+  }
+
+  @Override
+  public NonNullableTypeDescriptor getNonNullable() {
+    return NonNullableTypeDescriptor.create(this);
+  }
 
   @Override
   public String toString() {

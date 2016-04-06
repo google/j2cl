@@ -24,6 +24,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.NonNullableTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
@@ -110,7 +111,7 @@ public class JsDocNameUtils {
    * Returns the JsDoc type name.
    */
   static String getJsDocName(TypeDescriptor typeDescriptor, GenerationEnvironment environment) {
-    return getJsDocName(typeDescriptor, false, true, environment);
+    return getJsDocName(typeDescriptor, false, environment);
   }
 
   /**
@@ -138,12 +139,62 @@ public class JsDocNameUtils {
   static String getJsDocName(
       TypeDescriptor typeDescriptor,
       boolean shouldUseClassName,
-      boolean nullable,
       GenerationEnvironment environment) {
+    {
+      boolean nullable = typeDescriptor.isNullable();
+      // JsFunction interface and implementor is a real JS function.
+      // Unlike other js types, functions have to be explicitly set to nullable.
+      if (!typeDescriptor.isRawType()
+          && !shouldUseClassName
+          && (typeDescriptor.isJsFunctionInterface()
+              || typeDescriptor.isJsFunctionImplementation())) {
+        if (nullable) {
+          return "?" + getJsDocNameForJsFunction(typeDescriptor, environment);
+        } else {
+          return getJsDocNameForJsFunction(typeDescriptor, environment);
+        }
+      }
+      if (!nullable) {
+        return "!"
+            + getJsDocName(
+                ((NonNullableTypeDescriptor) typeDescriptor).getUnderlyingTypeDescriptor(),
+                shouldUseClassName,
+                environment);
+      }
+      // Everything below is nullable.
+      Preconditions.checkArgument(nullable);
+    }
+    // Special cases.
+    switch (typeDescriptor.getSourceName()) {
+      case TypeDescriptors.BYTE_TYPE_NAME:
+      case TypeDescriptors.SHORT_TYPE_NAME:
+      case TypeDescriptors.INT_TYPE_NAME:
+      case TypeDescriptors.FLOAT_TYPE_NAME:
+      case TypeDescriptors.DOUBLE_TYPE_NAME:
+      case TypeDescriptors.CHAR_TYPE_NAME:
+        return JS_NUMBER_TYPE_NAME;
+      case TypeDescriptors.LONG_TYPE_NAME:
+        return "!" + environment.aliasForType(BootstrapType.NATIVE_LONG.getDescriptor());
+      case "java.lang.Object":
+        if (!shouldUseClassName) {
+          return "*";
+        }
+        break;
+    }
+
+    // Java does not do type checking on raw type, which is very similar as 'window.Function' in
+    // JS compiler's type system. 'window.Function' is both a super class and a sub class of any
+    // function(...): types.
+    if (typeDescriptor.isRawType()
+        && !shouldUseClassName
+        && (typeDescriptor.isJsFunctionInterface()
+            || typeDescriptor.isJsFunctionImplementation())) {
+      return "window.Function";
+    }
+
     if (typeDescriptor.isArray()) {
       return String.format(
-          "%s%s%s%s",
-          nullable ? "" : "!",
+          "%s%s%s",
           Strings.repeat("Array<", typeDescriptor.getDimensions()),
           getJsDocName(((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor(), environment),
           Strings.repeat(">", typeDescriptor.getDimensions()));
@@ -167,42 +218,14 @@ public class JsDocNameUtils {
       }
 
       String jsDocName =
-          String.format(
-              "%s%s<%s>",
-              nullable ? "" : "!",
-              environment.aliasForType(rawTypeDescriptor),
-              typeParametersJsDoc);
+          String.format("%s<%s>", environment.aliasForType(rawTypeDescriptor), typeParametersJsDoc);
       if (!shouldUseClassName
           && unboxedTypeDescriptorsBySuperTypeDescriptor.containsKey(rawTypeDescriptor)) {
         // types that are extended or implemented by unboxed types
         // JsDoc type should be a union type.
         jsDocName = String.format("(%s|%s)", jsDocName, getJsDocNameOfUnionType(rawTypeDescriptor));
       }
-      if (!shouldUseClassName
-          && (typeDescriptor.isJsFunctionInterface()
-              || typeDescriptor.isJsFunctionImplementation())) {
-        // JsFunction interface and implementor should accept a real JS function.
-        jsDocName = getJsDocNameForJsFunction(typeDescriptor, nullable, environment);
-      }
       return jsDocName;
-    }
-
-    // Special cases.
-    switch (typeDescriptor.getSourceName()) {
-      case TypeDescriptors.BYTE_TYPE_NAME:
-      case TypeDescriptors.SHORT_TYPE_NAME:
-      case TypeDescriptors.INT_TYPE_NAME:
-      case TypeDescriptors.FLOAT_TYPE_NAME:
-      case TypeDescriptors.DOUBLE_TYPE_NAME:
-      case TypeDescriptors.CHAR_TYPE_NAME:
-        return JS_NUMBER_TYPE_NAME;
-      case TypeDescriptors.LONG_TYPE_NAME:
-        return "!" + environment.aliasForType(BootstrapType.NATIVE_LONG.getDescriptor());
-      case "java.lang.Object":
-        if (!shouldUseClassName) {
-          return "*";
-        }
-        break;
     }
 
     // Special cases for unboxed types.
@@ -221,15 +244,7 @@ public class JsDocNameUtils {
     if (typeDescriptor.isPrimitive()) {
       return typeDescriptor.getSimpleName();
     }
-
-    // JsFunction interface and implementor is a real JS function.
-    if (!shouldUseClassName
-        && (typeDescriptor.isJsFunctionInterface()
-            || typeDescriptor.isJsFunctionImplementation())) {
-      return getJsDocNameForJsFunction(typeDescriptor, nullable, environment);
-    }
-
-    return (nullable ? "" : "!") + environment.aliasForType(typeDescriptor);
+    return environment.aliasForType(typeDescriptor);
   }
 
   /**
@@ -254,17 +269,12 @@ public class JsDocNameUtils {
   }
 
   public static String getJsDocNameForJsFunction(
-      TypeDescriptor typeDescriptor, boolean nullable, GenerationEnvironment environment) {
+      TypeDescriptor typeDescriptor, GenerationEnvironment environment) {
     Preconditions.checkState(
         typeDescriptor.isJsFunctionImplementation() || typeDescriptor.isJsFunctionInterface(),
         "'%s' is not a JsFunction type.",
         typeDescriptor.getBinaryName());
-    // Java does not do type checking on raw type, which is very similar as 'window.Function' in
-    // JS compiler's type system. 'window.Function' is both a super class and a sub class of any
-    // function(...): types.
-    if (typeDescriptor.isRawType()) {
-      return nullable ? "window.Function" : "!window.Function";
-    }
+
     MethodDescriptor jsFunctionMethodDescriptor =
         typeDescriptor.getConcreteJsFunctionMethodDescriptor();
     Preconditions.checkNotNull(jsFunctionMethodDescriptor);
@@ -290,8 +300,7 @@ public class JsDocNameUtils {
       parameterTypesList.add(parameterTypeAnnotation);
     }
     return String.format(
-        "%sfunction(%s):%s",
-        nullable ? "?" : "",
+        "function(%s):%s",
         Joiner.on(", ").join(parameterTypesList),
         getJsDocName(jsFunctionMethodDescriptor.getReturnTypeDescriptor(), environment));
   }

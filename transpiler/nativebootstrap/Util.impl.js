@@ -117,6 +117,19 @@ class Util {
   }
 
   /**
+   * Helper to access a field on the prototype since we don't current have a
+   * way of representing this in our AST.
+   * @param {Function} constructor
+   * @return {*}
+   * @public
+   */
+  static $getPrototype(constructor) { return constructor.prototype; }
+
+  /**
+   * Helper to get
+   */
+
+  /**
    * Runs inline static field initializers.
    * @public
    */

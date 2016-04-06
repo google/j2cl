@@ -15,6 +15,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
 
+/** @constructor */ let $NativeFunction = window.Function;
 /** @constructor */ let $Foo = window.Object;
 
 
@@ -37,7 +38,7 @@ class Foo$1 extends Object {
   /**
    * A particular Java constructor as a factory method.
    * @param {$Foo} $outer_this
-   * @return {!Foo$1}
+   * @return {function():void}
    * @public
    */
   static $create__com_google_j2cl_transpiler_readable_jsoverlaywithjsfunction_Foo(
@@ -47,7 +48,8 @@ class Foo$1 extends Object {
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_jsoverlaywithjsfunction_Foo$1__com_google_j2cl_transpiler_readable_jsoverlaywithjsfunction_Foo(
             $outer_this);
-    return $instance;
+    return $Util.$makeLambdaFunction(
+        $Util.$getPrototype(Foo$1).m_run, $instance, Foo$1.$copy);
   }
 
   /**

@@ -328,8 +328,10 @@ public class AstUtils {
 
     // adds 'this' as the last parameter.
     MethodDescriptor newInnerclassConstructorDescriptor =
-        MethodDescriptors.createModifiedCopy(
-            innerclassConstructorDescriptor, Lists.newArrayList(outerclassTypeDescriptor));
+        MethodDescriptor.Builder.from(innerclassConstructorDescriptor)
+            .jsInfo(JsInfo.NONE) // Remove any js info since this is only called internally.
+            .addParameter(outerclassTypeDescriptor)
+            .build();
 
     Expression newInnerClass = new NewInstance(null, newInnerclassConstructorDescriptor, arguments);
     List<Statement> statements = new ArrayList<>();
@@ -393,7 +395,8 @@ public class AstUtils {
    * <p>instance.instanceMethod(a, b) => staticMethod(instance, a, b)
    */
   public static MethodCall createDevirtualizedMethodCall(
-      MethodCall methodCall, TypeDescriptor targetTypeDescriptor,
+      MethodCall methodCall,
+      TypeDescriptor targetTypeDescriptor,
       TypeDescriptor sourceTypeDescriptor) {
     MethodDescriptor targetMethodDescriptor = methodCall.getTarget();
     checkArgument(!targetMethodDescriptor.isConstructor());
@@ -713,11 +716,8 @@ public class AstUtils {
    * real ES6 constructor.
    */
   public static Method getPrimaryConstructor(JavaType javaType) {
-    if (!javaType.getDescriptor().subclassesJsConstructorClass()) {
-      return null;
-    }
     for (Method method : javaType.getMethods()) {
-      if (method.isConstructor() && !AstUtils.hasThisCall(method)) {
+      if (method.isPrimaryConstructor()) {
         return method;
       }
     }
@@ -741,5 +741,64 @@ public class AstUtils {
       }
     }
     return true;
+  }
+
+  /**
+   * Generates the following code:
+   *
+   * $Util.$makeLambdaFunction( $Util.$getPrototype(Type).m_equal, $instance, Type.$copy);
+   */
+  public static MethodCall createLambdaInstance(TypeDescriptor lambdaType, Expression instance) {
+    checkArgument(lambdaType.isJsFunctionImplementation());
+
+    // Class.prototype.apply
+    String applyMethodName =
+        ManglingNameUtils.getMangledName(lambdaType.getJsFunctionMethodDescriptor());
+
+    // Util getPrototype
+    MethodDescriptor getPrototype =
+        MethodDescriptor.Builder.fromDefault()
+            .enclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor())
+            .methodName("$getPrototype")
+            .isStatic(true)
+            .jsInfo(JsInfo.RAW)
+            .parameterTypeDescriptors(TypeDescriptors.NATIVE_FUNCTION)
+            .returnTypeDescriptor(TypeDescriptors.get().javaLangObject)
+            .build();
+
+    MethodCall getPrototypeCall =
+        MethodCall.createRegularMethodCall(null, getPrototype, new TypeReference(lambdaType));
+
+    FieldAccess applyFunctionFieldAccess =
+        new FieldAccess(
+            getPrototypeCall,
+            FieldDescriptor.Builder.fromDefault(
+                    lambdaType, applyMethodName, TypeDescriptors.NATIVE_FUNCTION)
+                .isRaw(true)
+                .build());
+
+    MethodDescriptor makeLambdaCall =
+        MethodDescriptor.Builder.fromDefault()
+            .enclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor())
+            .methodName("$makeLambdaFunction")
+            .isStatic(true)
+            .jsInfo(JsInfo.RAW)
+            .parameterTypeDescriptors(
+                TypeDescriptors.NATIVE_FUNCTION,
+                TypeDescriptors.get().javaLangObject,
+                TypeDescriptors.NATIVE_FUNCTION)
+            .build();
+
+    FieldAccess copyFunctionFieldAccess =
+        new FieldAccess(
+            new TypeReference(lambdaType),
+            FieldDescriptor.Builder.fromDefault(
+                    lambdaType, "$copy", TypeDescriptors.NATIVE_FUNCTION)
+                .isRaw(true)
+                .jsInfo(JsInfo.create(JsMemberType.PROPERTY, "$copy", null, false))
+                .build());
+
+    return MethodCall.createRegularMethodCall(
+        null, makeLambdaCall, applyFunctionFieldAccess, instance, copyFunctionFieldAccess);
   }
 }

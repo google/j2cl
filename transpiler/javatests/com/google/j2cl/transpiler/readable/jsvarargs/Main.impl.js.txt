@@ -224,9 +224,7 @@ class Main extends Object {
    * @public
    */
   m_testJsFunction() {
-    let a = /**@type {function(number, ...*):*} */ ($Util.$makeLambdaFunction(
-        Main$AFunction.prototype.m_f1__int__arrayOf_java_lang_Object,
-        Main$AFunction.$create(), Main$AFunction.$copy));
+    let a = Main$AFunction.$create();
     let o1 = Object.$create();
     let o2 = Object.$create();
     a(0, o1, o2);

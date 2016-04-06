@@ -30,7 +30,10 @@ class JsTypeWithNamespace extends Object {
    * @return {!JsTypeWithNamespace}
    * @public
    */
-  static $create() { return new JsTypeWithNamespace(); }
+  static $create() {
+    JsTypeWithNamespace.$clinit();
+    return new JsTypeWithNamespace();
+  }
 
   /**
    * Initializes instance fields for a particular Java constructor.

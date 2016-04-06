@@ -35,7 +35,10 @@ class SubJsType extends MyJsType {
    * @return {!SubJsType}
    * @public
    */
-  static $create() { return new SubJsType(); }
+  static $create() {
+    SubJsType.$clinit();
+    return new SubJsType();
+  }
 
   /**
    * Initializes instance fields for a particular Java constructor.

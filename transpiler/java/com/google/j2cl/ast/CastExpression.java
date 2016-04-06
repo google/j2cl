@@ -27,27 +27,19 @@ public class CastExpression extends Expression {
   @Visitable Expression expression;
   @Visitable TypeDescriptor castTypeDescriptor;
   private boolean isRaw; // Raw casts are those that are not checked at run time. Only annotated.
-  private boolean isNullable;
 
-  private CastExpression(
-      Expression expression, TypeDescriptor castTypeDescriptor, boolean isRaw, boolean isNullable) {
+  private CastExpression(Expression expression, TypeDescriptor castTypeDescriptor, boolean isRaw) {
     this.expression = checkNotNull(expression);
     this.castTypeDescriptor = checkNotNull(castTypeDescriptor);
     this.isRaw = isRaw;
-    this.isNullable = isNullable;
   }
   
   public static CastExpression create(Expression expression, TypeDescriptor castTypeDescriptor) {
-    return new CastExpression(expression, castTypeDescriptor, false, true);
+    return new CastExpression(expression, castTypeDescriptor, false);
   }
 
   public static CastExpression createRaw(Expression expression, TypeDescriptor castTypeDescriptor) {
-    return new CastExpression(expression, castTypeDescriptor, true, true);
-  }
-
-  public static CastExpression createRawNonNullable(
-      Expression expression, TypeDescriptor castTypeDescriptor) {
-    return new CastExpression(expression, castTypeDescriptor, true, false);
+    return new CastExpression(expression, castTypeDescriptor, true);
   }
 
   public TypeDescriptor getCastTypeDescriptor() {
@@ -78,10 +70,6 @@ public class CastExpression extends Expression {
   public boolean isRaw() {
     return isRaw;
   }
-  
-  public boolean isNullable() {
-    return isNullable;
-  }
 
   @Override
   public Node accept(Processor processor) {
@@ -95,14 +83,12 @@ public class CastExpression extends Expression {
     private Expression expression;
     private TypeDescriptor castTypeDescriptor;
     private boolean isRaw;
-    private boolean isNullable;
 
     public static Builder from(CastExpression cast) {
       Builder builder = new Builder();
       builder.expression = cast.getExpression();
       builder.castTypeDescriptor = cast.getCastTypeDescriptor();
       builder.isRaw = cast.isRaw();
-      builder.isNullable = cast.isNullable();
       return builder;
     }
 
@@ -121,13 +107,8 @@ public class CastExpression extends Expression {
       return this;
     }
 
-    public Builder isNullable(boolean isNullable) {
-      this.isNullable = isNullable;
-      return this;
-    }
-
     public CastExpression build() {
-      return new CastExpression(expression, castTypeDescriptor, isRaw, isNullable);
+      return new CastExpression(expression, castTypeDescriptor, isRaw);
     }
   }
 }

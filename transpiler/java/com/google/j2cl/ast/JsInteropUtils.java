@@ -100,7 +100,7 @@ public class JsInteropUtils {
           methodBinding.isConstructor() ? JsMemberType.CONSTRUCTOR : JsMemberType.METHOD,
           null,
           null,
-          isJsOverlay);
+          false);
     }
     // check @JsFunction annotation
     IAnnotationBinding jsFunctionAnnotation =

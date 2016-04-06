@@ -25,6 +25,7 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
+import com.google.j2cl.ast.NonNullableTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 
@@ -58,6 +59,12 @@ public class FixTypeVariableInMethodVisitors extends AbstractRewriter {
   private TypeDescriptor replaceTypeVariableWithBound(
       TypeDescriptor typeDescriptor, final Method method) {
     // If it is a type variable that is declared by the method, replace with its bound.
+    if (!typeDescriptor.isNullable()) {
+      return replaceTypeVariableWithBound(
+              ((NonNullableTypeDescriptor) typeDescriptor).getUnderlyingTypeDescriptor(), method)
+          .getNonNullable();
+    }
+    Preconditions.checkState(typeDescriptor.isNullable());
     if (isTypeVariableDeclaredByMethod(typeDescriptor, method)) {
       TypeDescriptor boundTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
       return boundTypeDescriptor.isParameterizedType()
@@ -110,6 +117,7 @@ public class FixTypeVariableInMethodVisitors extends AbstractRewriter {
    */
   private boolean containsTypeVariableDeclaredByMethod(
       TypeDescriptor typeDescriptor, Method method) {
+    Preconditions.checkState(typeDescriptor.isNullable());
     if (isTypeVariableDeclaredByMethod(typeDescriptor, method)) {
       return true;
     }
@@ -132,6 +140,7 @@ public class FixTypeVariableInMethodVisitors extends AbstractRewriter {
 
   private boolean containsTypeVariableDeclaredByMethodInJsFunction(
       TypeDescriptor typeDescriptor, Method method) {
+    Preconditions.checkState(typeDescriptor.isNullable());
     Preconditions.checkState(
         typeDescriptor.isJsFunctionImplementation() || typeDescriptor.isJsFunctionInterface());
     MethodDescriptor jsFunctionMethodDescriptor =

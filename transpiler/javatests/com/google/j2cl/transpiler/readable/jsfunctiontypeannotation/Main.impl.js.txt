@@ -121,14 +121,9 @@ class Main extends Object {
    */
   static m_testParameterTypes() {
     Main.$clinit();
-    let foo = /**@type {function(?string, Integer):?string} */ (
-        $Util.$makeLambdaFunction(
-            Main$B.prototype.m_apply__java_lang_Object__java_lang_Number,
-            Main$B.$create(), Main$B.$copy));
-    let bar = /**@type {function(?number, ?number):?number} */ (
-        $Util.$makeLambdaFunction(
-            Main$A.prototype.m_apply__java_lang_Object__java_lang_Number,
-            Main$A.$create(), Main$A.$copy));
+    let foo =
+        /**@type {function(?string, Integer):?string} */ (Main$B.$create());
+    let bar = Main$A.$create();
     Main.m_callGenericInterface__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$ApplyFunction__java_lang_Object__java_lang_Number(
         foo, 'a', Integer.m_valueOf__int(1));
     Main.m_callGenericInterface__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$ApplyFunction__java_lang_Object__java_lang_Number(
@@ -140,23 +135,14 @@ class Main extends Object {
     Main.m_callParametricWithTypeVariable__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$ApplyFunction__java_lang_Object__java_lang_Number(
         bar, 1.1, 1.1);
     Main.m_callImplementorGeneric__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$B__java_lang_Object__java_lang_Integer(
-        /**@type {function(?number, Integer):?number} */ (
-            $Util.$makeLambdaFunction(
-                Main$B.prototype.m_apply__java_lang_Object__java_lang_Number,
-                Main$B.$create(), Main$B.$copy)),
+        /**@type {function(?number, Integer):?number} */ (Main$B.$create()),
         1.1, Integer.m_valueOf__int(1));
     Main.m_callImplementorParametric__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$B__java_lang_String(
-        /**@type {function(?string, Integer):?string} */ (
-            $Util.$makeLambdaFunction(
-                Main$B.prototype.m_apply__java_lang_Object__java_lang_Number,
-                Main$B.$create(), Main$B.$copy)),
+        /**@type {function(?string, Integer):?string} */ (Main$B.$create()),
         '');
     foo('a', Integer.m_valueOf__int(1));
     bar(1.1, 1.1);
-    Main.callOnFunction(/**@type {function(?number, ?number):?number} */ (
-        $Util.$makeLambdaFunction(
-            Main$A.prototype.m_apply__java_lang_Object__java_lang_Number,
-            Main$A.$create(), Main$A.$copy)));
+    Main.callOnFunction(Main$A.$create());
   }
 
   /**
@@ -165,10 +151,7 @@ class Main extends Object {
    */
   static m_testCast() {
     Main.$clinit();
-    let o = /**@type {function(?string, Integer):?string} */ (
-        $Util.$makeLambdaFunction(
-            Main$B.prototype.m_apply__java_lang_Object__java_lang_Number,
-            Main$B.$create(), Main$B.$copy));
+    let o = /**@type {function(?string, Integer):?string} */ (Main$B.$create());
     let b1 = /**@type {window.Function} */ ($Casts.to(o, Main$B));
     let b2 = /**@type {?function(?string, Integer):?string} */ (
         $Casts.to(o, Main$B));
@@ -185,19 +168,11 @@ class Main extends Object {
    */
   static m_testNewInstance() {
     Main.$clinit();
-    let b1 = /**@type {!window.Function} */ ($Util.$makeLambdaFunction(
-        Main$B.prototype.m_apply__java_lang_Object__java_lang_Number,
-        Main$B.$create(), Main$B.$copy));
+    let b1 = Main$B.$create();
     let b2 = /**@type {window.Function} */ ($Casts.to(
-        /**@type {function(?string, Integer):?string} */ (
-            $Util.$makeLambdaFunction(
-                Main$B.prototype.m_apply__java_lang_Object__java_lang_Number,
-                Main$B.$create(), Main$B.$copy)),
+        /**@type {function(?string, Integer):?string} */ (Main$B.$create()),
         Main$B));
-    let af1 = /**@type {function(?number, ?number):?number} */ (
-        $Util.$makeLambdaFunction(
-            Main$A.prototype.m_apply__java_lang_Object__java_lang_Number,
-            Main$A.$create(), Main$A.$copy));
+    let af1 = Main$A.$create();
   }
 
   /**

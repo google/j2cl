@@ -27,6 +27,7 @@ import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.NonNullableTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
@@ -109,6 +110,13 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   private void addTypeDescriptor(TypeDescriptor typeDescriptor, ImportCategory importCategory) {
     // Type variables can't be depended upon.
     if (typeDescriptor.isTypeVariable() || typeDescriptor.isWildCard()) {
+      return;
+    }
+    
+    if (!typeDescriptor.isNullable()) {
+      addTypeDescriptor(
+          ((NonNullableTypeDescriptor) typeDescriptor).getUnderlyingTypeDescriptor(),
+          importCategory);
       return;
     }
 

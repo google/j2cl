@@ -43,6 +43,7 @@ import com.google.j2cl.ast.visitors.NormalizeArrayCreationsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeArrayLiteralsPass;
 import com.google.j2cl.ast.visitors.NormalizeCastsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeCatchClausesVisitor;
+import com.google.j2cl.ast.visitors.NormalizeConstructors;
 import com.google.j2cl.ast.visitors.NormalizeEqualityVisitor;
 import com.google.j2cl.ast.visitors.NormalizeInstanceOfsVisitor;
 import com.google.j2cl.ast.visitors.NormalizeJsVarargsVisitor;
@@ -161,6 +162,7 @@ public class J2clTranspiler {
       // apply other normalizations on the synthesized native JS types.
       CreateNativeTypeImplVisitor.applyTo(j2clUnit);
 
+
       // Statement/Expression normalizations
       RewriteSystemGetPropertyVisitor.applyTo(j2clUnit);
       NormalizeArrayLiteralsPass.applyTo(j2clUnit);
@@ -181,6 +183,7 @@ public class J2clTranspiler {
       InsertUnderflowOverflowConversionVisitor.applyTo(j2clUnit);
       FixBooleanOperatorsPass.applyTo(j2clUnit);
       InsertStringConversionVisitor.applyTo(j2clUnit);
+      NormalizeConstructors.applyTo(j2clUnit);
       NormalizeCastsVisitor.applyTo(j2clUnit);
       NormalizeInstanceOfsVisitor.applyTo(j2clUnit);
       NormalizeEqualityVisitor.applyTo(j2clUnit);
@@ -196,7 +199,6 @@ public class J2clTranspiler {
       // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
       FixTypeVariableInMethodVisitors.applyTo(j2clUnit);
       RemoveUnusedMultiExpressionReturnValues.applyTo(j2clUnit);
-      // has to be done after AddClassInitAtCallSite
       InsertClassInitStaticMethods.applyTo(j2clUnit);
 
       verifyUnit(j2clUnit);
