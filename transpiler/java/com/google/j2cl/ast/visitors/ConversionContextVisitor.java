@@ -25,7 +25,6 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CastExpression;
-import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.ConditionalExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
@@ -53,11 +52,7 @@ import java.util.List;
  * <p>Traverses the AST, recognizing and categorizing different conversion contexts and dispatching
  * conversion requests in that context.
  */
-public class ConversionContextVisitor extends AbstractRewriter {
-
-  public void run(CompilationUnit compilationUnit) {
-    compilationUnit.accept(this);
-  }
+public abstract class ConversionContextVisitor extends AbstractRewriter {
 
   /**
    * Base class for defining how to insert a conversion operation in a given conversion context.
@@ -112,10 +107,6 @@ public class ConversionContextVisitor extends AbstractRewriter {
      */
     public Expression rewriteUnaryNumericPromotionContext(Expression operandExpression) {
       return operandExpression;
-    }
-
-    public void run(CompilationUnit compilationUnit) {
-      new ConversionContextVisitor(this).run(compilationUnit);
     }
   }
 

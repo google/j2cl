@@ -30,8 +30,9 @@ import java.util.Collections;
  * Makes sure that body of conditional are always blocks (except in the else if case).
  */
 public class ControlStatementFormatter extends AbstractRewriter {
+
   public static void applyTo(CompilationUnit compilationUnit) {
-    new ControlStatementFormatter().formatControlStatements(compilationUnit);
+    compilationUnit.accept(new ControlStatementFormatter());
   }
 
   @Override
@@ -87,9 +88,5 @@ public class ControlStatementFormatter extends AbstractRewriter {
     }
 
     return new WhileStatement(whileStatement.getConditionExpression(), new Block(body));
-  }
-
-  private void formatControlStatements(CompilationUnit compilationUnit) {
-    compilationUnit.accept(this);
   }
 }

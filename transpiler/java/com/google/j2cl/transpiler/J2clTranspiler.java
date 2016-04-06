@@ -16,47 +16,47 @@ package com.google.j2cl.transpiler;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JsInteropRestrictionsChecker;
 import com.google.j2cl.ast.visitors.ControlStatementFormatter;
-import com.google.j2cl.ast.visitors.CreateDefaultConstructorsVisitor;
-import com.google.j2cl.ast.visitors.CreateDevirtualizedStaticMethodsVisitor;
-import com.google.j2cl.ast.visitors.CreateNativeTypeImplVisitor;
-import com.google.j2cl.ast.visitors.DevirtualizeJsOverlayMemberReferencesVisitor;
-import com.google.j2cl.ast.visitors.DevirtualizeMethodCallsVisitor;
-import com.google.j2cl.ast.visitors.FixAnonymousClassConstructorsVisitor;
-import com.google.j2cl.ast.visitors.FixBooleanOperatorsPass;
-import com.google.j2cl.ast.visitors.FixSuperCallQualifiersVisitor;
-import com.google.j2cl.ast.visitors.FixTypeVariableInMethodVisitors;
-import com.google.j2cl.ast.visitors.InsertBoxingConversionVisitor;
-import com.google.j2cl.ast.visitors.InsertCastOnGenericReturnTypeVisitor;
-import com.google.j2cl.ast.visitors.InsertCastOnNewInstancesVisitor;
+import com.google.j2cl.ast.visitors.CreateDefaultConstructors;
+import com.google.j2cl.ast.visitors.CreateDevirtualizedStaticMethods;
+import com.google.j2cl.ast.visitors.CreateNativeTypeImplementations;
+import com.google.j2cl.ast.visitors.DevirtualizeJsOverlayMemberReferences;
+import com.google.j2cl.ast.visitors.DevirtualizeMethodCalls;
+import com.google.j2cl.ast.visitors.FixAnonymousClassConstructors;
+import com.google.j2cl.ast.visitors.FixBooleanOperators;
+import com.google.j2cl.ast.visitors.FixSuperCallQualifiers;
+import com.google.j2cl.ast.visitors.FixTypeVariablesInMethods;
+import com.google.j2cl.ast.visitors.InsertBoxingConversion;
+import com.google.j2cl.ast.visitors.InsertCastOnGenericReturnTypes;
+import com.google.j2cl.ast.visitors.InsertCastOnNewInstances;
 import com.google.j2cl.ast.visitors.InsertClassInitStaticMethods;
-import com.google.j2cl.ast.visitors.InsertExceptionConversionVisitor;
-import com.google.j2cl.ast.visitors.InsertExplicitSuperCallsVisitor;
-import com.google.j2cl.ast.visitors.InsertInstanceInitCallsVisitor;
-import com.google.j2cl.ast.visitors.InsertNarrowingPrimitiveConversionVisitor;
-import com.google.j2cl.ast.visitors.InsertNarrowingReferenceConversionVisitor;
-import com.google.j2cl.ast.visitors.InsertStringConversionVisitor;
-import com.google.j2cl.ast.visitors.InsertUnboxingConversionVisitor;
-import com.google.j2cl.ast.visitors.InsertUnderflowOverflowConversionVisitor;
-import com.google.j2cl.ast.visitors.InsertWideningPrimitiveConversionVisitor;
-import com.google.j2cl.ast.visitors.MakeExplicitEnumConstructionVisitor;
-import com.google.j2cl.ast.visitors.NormalizeArrayCreationsVisitor;
-import com.google.j2cl.ast.visitors.NormalizeArrayLiteralsPass;
-import com.google.j2cl.ast.visitors.NormalizeCastsVisitor;
-import com.google.j2cl.ast.visitors.NormalizeCatchClausesVisitor;
+import com.google.j2cl.ast.visitors.InsertExceptionConversions;
+import com.google.j2cl.ast.visitors.InsertExplicitSuperCalls;
+import com.google.j2cl.ast.visitors.InsertInstanceInitCalls;
+import com.google.j2cl.ast.visitors.InsertNarrowingPrimitiveConversions;
+import com.google.j2cl.ast.visitors.InsertNarrowingReferenceConversions;
+import com.google.j2cl.ast.visitors.InsertStringConversions;
+import com.google.j2cl.ast.visitors.InsertUnboxingConversions;
+import com.google.j2cl.ast.visitors.InsertUnderflowOverflowConversions;
+import com.google.j2cl.ast.visitors.InsertWideningPrimitiveConversions;
+import com.google.j2cl.ast.visitors.MakeEnumConstructionsExplicit;
+import com.google.j2cl.ast.visitors.NormalizeArrayCreations;
+import com.google.j2cl.ast.visitors.NormalizeArrayLiterals;
+import com.google.j2cl.ast.visitors.NormalizeCasts;
+import com.google.j2cl.ast.visitors.NormalizeCatchClauses;
 import com.google.j2cl.ast.visitors.NormalizeConstructors;
-import com.google.j2cl.ast.visitors.NormalizeEqualityVisitor;
-import com.google.j2cl.ast.visitors.NormalizeInstanceOfsVisitor;
-import com.google.j2cl.ast.visitors.NormalizeJsVarargsVisitor;
-import com.google.j2cl.ast.visitors.NormalizeLongsVisitor;
+import com.google.j2cl.ast.visitors.NormalizeEquality;
+import com.google.j2cl.ast.visitors.NormalizeInstanceOfs;
+import com.google.j2cl.ast.visitors.NormalizeJsVarargs;
+import com.google.j2cl.ast.visitors.NormalizeLongs;
 import com.google.j2cl.ast.visitors.NormalizeMultiExpressions;
 import com.google.j2cl.ast.visitors.NormalizeNativeMethodCalls;
-import com.google.j2cl.ast.visitors.NormalizeNestedClassConstructorsVisitor;
+import com.google.j2cl.ast.visitors.NormalizeNestedClassConstructors;
 import com.google.j2cl.ast.visitors.NormalizeStaticMemberQualifiersPass;
-import com.google.j2cl.ast.visitors.NormalizeTryWithResourceVisitor;
+import com.google.j2cl.ast.visitors.NormalizeTryWithResources;
 import com.google.j2cl.ast.visitors.RemoveUnusedMultiExpressionReturnValues;
-import com.google.j2cl.ast.visitors.RewriteSystemGetPropertyVisitor;
-import com.google.j2cl.ast.visitors.SplitCompoundLongAssignmentsVisitor;
-import com.google.j2cl.ast.visitors.VerifyParamAndArgCountsVisitor;
+import com.google.j2cl.ast.visitors.RewriteSystemGetPropertyMethod;
+import com.google.j2cl.ast.visitors.SplitCompoundLongAssignments;
+import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
 import com.google.j2cl.common.PackageInfoCache;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.frontend.CompilationUnitBuilder;
@@ -145,59 +145,58 @@ public class J2clTranspiler {
 
       // Class structure normalizations.
       // Default constructors and explicit super calls should be synthesized first.
-      CreateDefaultConstructorsVisitor.applyTo(j2clUnit);
-      InsertExplicitSuperCallsVisitor.applyTo(j2clUnit);
-      CreateDevirtualizedStaticMethodsVisitor.applyTo(j2clUnit);
+      CreateDefaultConstructors.applyTo(j2clUnit);
+      InsertExplicitSuperCalls.applyTo(j2clUnit);
+      CreateDevirtualizedStaticMethods.applyTo(j2clUnit);
 
-      NormalizeTryWithResourceVisitor.applyTo(j2clUnit);
-      NormalizeCatchClausesVisitor.applyTo(j2clUnit);
+      NormalizeTryWithResources.applyTo(j2clUnit);
+      NormalizeCatchClauses.applyTo(j2clUnit);
       // Runs before normalizing nested classes.
-      InsertCastOnNewInstancesVisitor.applyTo(j2clUnit);
-      FixAnonymousClassConstructorsVisitor.applyTo(j2clUnit);
-      MakeExplicitEnumConstructionVisitor.applyTo(j2clUnit);
-      FixSuperCallQualifiersVisitor.applyTo(j2clUnit);
-      InsertInstanceInitCallsVisitor.applyTo(j2clUnit);
-      NormalizeNestedClassConstructorsVisitor.applyTo(j2clUnit);
+      InsertCastOnNewInstances.applyTo(j2clUnit);
+      FixAnonymousClassConstructors.applyTo(j2clUnit);
+      MakeEnumConstructionsExplicit.applyTo(j2clUnit);
+      FixSuperCallQualifiers.applyTo(j2clUnit);
+      InsertInstanceInitCalls.applyTo(j2clUnit);
+      NormalizeNestedClassConstructors.applyTo(j2clUnit);
       // Runs at the very end of 'Class structure normalizations' section since we do not need to
       // apply other normalizations on the synthesized native JS types.
-      CreateNativeTypeImplVisitor.applyTo(j2clUnit);
-
+      CreateNativeTypeImplementations.applyTo(j2clUnit);
 
       // Statement/Expression normalizations
-      RewriteSystemGetPropertyVisitor.applyTo(j2clUnit);
-      NormalizeArrayLiteralsPass.applyTo(j2clUnit);
+      RewriteSystemGetPropertyMethod.applyTo(j2clUnit);
+      NormalizeArrayLiterals.applyTo(j2clUnit);
       NormalizeStaticMemberQualifiersPass.applyTo(j2clUnit);
       // Runs after NormalizeStaticMemberQualifiersPass.
-      DevirtualizeJsOverlayMemberReferencesVisitor.applyTo(j2clUnit);
-      DevirtualizeMethodCallsVisitor.applyTo(j2clUnit);
+      DevirtualizeJsOverlayMemberReferences.applyTo(j2clUnit);
+      DevirtualizeMethodCalls.applyTo(j2clUnit);
       ControlStatementFormatter.applyTo(j2clUnit);
-      SplitCompoundLongAssignmentsVisitor.applyTo(j2clUnit);
+      SplitCompoundLongAssignments.applyTo(j2clUnit);
       // Runs before unboxing conversion.
-      InsertNarrowingReferenceConversionVisitor.applyTo(j2clUnit);
-      InsertUnboxingConversionVisitor.applyTo(j2clUnit);
-      NormalizeLongsVisitor.applyTo(j2clUnit);
-      InsertBoxingConversionVisitor.applyTo(j2clUnit);
-      InsertNarrowingPrimitiveConversionVisitor.applyTo(j2clUnit);
-      InsertWideningPrimitiveConversionVisitor.applyTo(j2clUnit);
+      InsertNarrowingReferenceConversions.applyTo(j2clUnit);
+      InsertUnboxingConversions.applyTo(j2clUnit);
+      NormalizeLongs.applyTo(j2clUnit);
+      InsertBoxingConversion.applyTo(j2clUnit);
+      InsertNarrowingPrimitiveConversions.applyTo(j2clUnit);
+      InsertWideningPrimitiveConversions.applyTo(j2clUnit);
       // TODO: InsertWideningAndNarrowingPrimitiveConversionVisitor.applyTo(j2clUnit);
-      InsertUnderflowOverflowConversionVisitor.applyTo(j2clUnit);
-      FixBooleanOperatorsPass.applyTo(j2clUnit);
-      InsertStringConversionVisitor.applyTo(j2clUnit);
+      InsertUnderflowOverflowConversions.applyTo(j2clUnit);
+      FixBooleanOperators.applyTo(j2clUnit);
+      InsertStringConversions.applyTo(j2clUnit);
       NormalizeConstructors.applyTo(j2clUnit);
-      NormalizeCastsVisitor.applyTo(j2clUnit);
-      NormalizeInstanceOfsVisitor.applyTo(j2clUnit);
-      NormalizeEqualityVisitor.applyTo(j2clUnit);
+      NormalizeCasts.applyTo(j2clUnit);
+      NormalizeInstanceOfs.applyTo(j2clUnit);
+      NormalizeEquality.applyTo(j2clUnit);
       NormalizeNativeMethodCalls.applyTo(j2clUnit);
-      NormalizeJsVarargsVisitor.applyTo(j2clUnit);
-      NormalizeArrayCreationsVisitor.applyTo(j2clUnit);
-      InsertExceptionConversionVisitor.applyTo(j2clUnit);
+      NormalizeJsVarargs.applyTo(j2clUnit);
+      NormalizeArrayCreations.applyTo(j2clUnit);
+      InsertExceptionConversions.applyTo(j2clUnit);
       NormalizeMultiExpressions.applyTo(j2clUnit);
 
       // Dodge JSCompiler limitations.
       // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
-      InsertCastOnGenericReturnTypeVisitor.applyTo(j2clUnit);
+      InsertCastOnGenericReturnTypes.applyTo(j2clUnit);
       // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
-      FixTypeVariableInMethodVisitors.applyTo(j2clUnit);
+      FixTypeVariablesInMethods.applyTo(j2clUnit);
       RemoveUnusedMultiExpressionReturnValues.applyTo(j2clUnit);
       InsertClassInitStaticMethods.applyTo(j2clUnit);
 
@@ -206,7 +205,7 @@ public class J2clTranspiler {
   }
 
   private void verifyUnit(CompilationUnit j2clUnit) {
-    VerifyParamAndArgCountsVisitor.applyTo(j2clUnit);
+    VerifyParamAndArgCounts.applyTo(j2clUnit);
   }
 
   private void generateJavaScriptSources(List<CompilationUnit> j2clCompilationUnits) {

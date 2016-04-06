@@ -31,6 +31,7 @@ import java.util.Collections;
  * The first line of a static method should be a call to the Class's clinit.
  */
 public class InsertClassInitStaticMethods {
+
   public static void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new ClassInitStaticMethodsRewriter());
   }

@@ -37,12 +37,8 @@ import com.google.j2cl.ast.TypeReference;
  */
 public class NormalizeNativeMethodCalls extends AbstractRewriter {
 
-  private void normalizeNativeMethodCalls(CompilationUnit compilationUnit) {
-    compilationUnit.accept(this);
-  }
-
   public static void applyTo(CompilationUnit compilationUnit) {
-    new NormalizeNativeMethodCalls().normalizeNativeMethodCalls(compilationUnit);
+    compilationUnit.accept(new NormalizeNativeMethodCalls());
   }
 
   @Override

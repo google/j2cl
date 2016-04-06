@@ -36,20 +36,16 @@ import com.google.j2cl.ast.TypeReference;
 public class NormalizeStaticMemberQualifiersPass {
 
   public static void applyTo(CompilationUnit compilationUnit) {
-    new NormalizeStaticMemberQualifiersPass().rewriteSystemGetProperty(compilationUnit);
-  }
-
-  private void rewriteSystemGetProperty(CompilationUnit compilationUnit) {
     compilationUnit.accept(new FixQualifiers());
   }
-  
+
   /**
    * Returns whether the member reference is statically accessed on a instance for example:
    * <p>new Instance().staticField;
    * <p>or
    * <p>new Instance().staticMethod();
    */
-  private boolean isStaticMemberReferenceWithInstanceQualifier(Expression expression) {
+  private static boolean isStaticMemberReferenceWithInstanceQualifier(Expression expression) {
     if (!(expression instanceof MemberReference)) {
       return false;
     }
@@ -58,7 +54,7 @@ public class NormalizeStaticMemberQualifiersPass {
         && !(memeberReference.getQualifier() instanceof TypeReference);
   }
 
-  private class FixQualifiers extends AbstractRewriter {
+  private static class FixQualifiers extends AbstractRewriter {
     @Override
     public Node rewriteFieldAccess(FieldAccess fieldAccess) {
       // If the access is of the very strange form "instance.staticField" then remove the qualifier

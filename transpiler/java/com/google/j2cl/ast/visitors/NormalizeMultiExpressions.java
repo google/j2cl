@@ -33,6 +33,7 @@ import java.util.List;
  * operator.
  */
 public class NormalizeMultiExpressions {
+
   public static void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new FlattenMultiExpressions());
     compilationUnit.accept(new SwitchMultiExpressionsAndSideEffectingExpressions());

@@ -51,6 +51,7 @@ import java.util.List;
  * For each NewInstance node we convert it to a call to the $create factory method.
  */
 public class NormalizeConstructors {
+
   public static void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new RewriteNewInstance());
     compilationUnit.accept(new InsertFactoryMethods());
