@@ -34,7 +34,8 @@ _CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
 
 def integration_test(
     name, srcs=[], deps=[], defs=[], native_srcs=[],
-    native_srcs_pkg="CONVENTION", js_deps=[], closure_defines=dict()):
+    native_srcs_pkg="CONVENTION", js_deps=[], closure_defines=dict(),
+    generate_build_test=None):
   """Macro that turns Java files into integration test targets.
 
   deps are Labels of j2cl_library() rules. NOT labels of
@@ -72,6 +73,7 @@ def integration_test(
     j2cl_library(
         name=name,
         srcs=srcs,
+        generate_build_test=generate_build_test,
         deps=deps,
         javacopts=[
             "-source 8",
