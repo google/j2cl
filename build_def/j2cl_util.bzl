@@ -40,25 +40,3 @@ def get_or_default(key, map, default):
   if key in map and map[key]:
     return map[key]
   return default
-
-
-J2CL_BINARY_DEFS = [
-    "--collapse_properties", # optimize to work around b/25512693
-    "--j2cl_pass",
-    "--language_in=ECMASCRIPT6_STRICT",
-    "--language_out=ECMASCRIPT5",
-    "--export_test_functions=true",
-    "--strict",
-    "--pretty_print",
-    "--property_renaming=OFF",
-    "--variable_renaming=OFF",
-    "--jscomp_off=checkTypes",
-    "--jscomp_off=duplicateZipContents",
-    "--jscomp_off=lateProvide",
-    "--jscomp_off=undefinedVars",
-]
-
-
-J2CL_TEST_DEFS = J2CL_BINARY_DEFS + [
-    "--define=goog.testing.jsunit.AUTO_RUN_ONLOAD=false",
-]

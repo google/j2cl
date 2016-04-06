@@ -17,7 +17,6 @@ integration_test(
     srcs = glob(["**/*.java"]),
     # TODO: fix the hidden JS output bug and remove this suppression.
     defs = ["--jscomp_warning=checkTypes"],
-    generate_build_test = False,
     js_deps = [":native_types"],
     native_srcs = glob(["*.native.js"]),
     deps = ["//jre/java:gwt-jsinterop-annotations"],
