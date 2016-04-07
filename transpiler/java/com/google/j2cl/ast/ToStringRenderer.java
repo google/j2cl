@@ -221,7 +221,26 @@ class ToStringRenderer {
 
       @Override
       public boolean enterJavaType(JavaType javaType) {
+        print(javaType.isInterface() ? "interface " : (javaType.isEnum() ? "enum " : "class "));
         print(javaType.getDescriptor().toString());
+        if (javaType.getSuperTypeDescriptor() != null) {
+          print(" extends " + javaType.getSuperTypeDescriptor());
+        }
+        String separator = " implements ";
+        for (TypeDescriptor interfaceTypeDescriptor : javaType.getSuperInterfaceTypeDescriptors()) {
+          print(separator);
+          separator = ", ";
+          print(interfaceTypeDescriptor);
+        }
+        print(" {");
+        newLine();
+        indent();
+        for (Method method : javaType.getMethods()) {
+          accept(method);
+          newLine();
+        }
+        unIndent();
+        newLine();
         return false;
       }
 
@@ -235,7 +254,8 @@ class ToStringRenderer {
 
       @Override
       public boolean enterMethod(Method method) {
-        print(method.getDescriptor().toString());
+        print(method.getDescriptor() + " ");
+        accept(method.body);
         return false;
       }
 
