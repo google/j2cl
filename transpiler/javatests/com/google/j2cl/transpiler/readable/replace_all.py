@@ -7,6 +7,7 @@ import os
 import re
 from subprocess import PIPE
 from subprocess import Popen
+import sys
 
 # pylint: disable=global-variable-not-assigned
 READABLE_TARGET_PATTERN = ("third_party/java_src/j2cl/transpiler/javatests/"
@@ -186,7 +187,7 @@ def gather_closure_warnings():
       build_log_file.write(build_log)
 
 
-def main():
+def main(argv=sys.argv):
   print "Generating readable JS and build logs:"
   readable_target_names = get_readable_target_names()
 
@@ -196,8 +197,12 @@ def main():
   print "  Copying and reformatting transpiled JS"
   replace_transpiled_js(readable_target_names)
 
-  print "  Re-Closure compiling examples to gather logs"
-  gather_closure_warnings()
+  no_logs = (len(argv) > 1 and argv[1] == "--nologs")
+  if no_logs:
+    print "  Skipping logs!!!"
+  else:
+    print "  Re-Closure compiling examples to gather logs"
+    gather_closure_warnings()
 
   print "run 'git gui' to see changes"
 
