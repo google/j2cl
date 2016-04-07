@@ -1,0 +1,116 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer$Inner.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.test.Inner$impl');
+
+
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main$Outer = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class Main$Outer$Inner extends Object {
+  /**
+   * Real constructor.
+   * @param {Main$Outer} $outer_this
+   * @public
+   */
+  constructor($outer_this) {
+    Main$Outer$Inner.$clinit();
+    super();
+    /**
+     * @public {number}
+     */
+    this.f_b__com_google_j2cl_transpiler_readable_jsinnerclass_Main$Outer$Inner_ =
+        0;
+    /**
+     * @public {Main$Outer}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_jsinnerclass_Main$Outer$Inner =
+        null;
+    this.$ctor__com_google_j2cl_transpiler_readable_jsinnerclass_Main$Outer$Inner__com_google_j2cl_transpiler_readable_jsinnerclass_Main$Outer(
+        $outer_this);
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {Main$Outer} $outer_this
+   * @return {void}
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsinnerclass_Main$Outer$Inner__com_google_j2cl_transpiler_readable_jsinnerclass_Main$Outer(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_jsinnerclass_Main$Outer$Inner =
+        $outer_this;
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_jsinnerclass_Main$Outer$Inner();
+    this.f_b__com_google_j2cl_transpiler_readable_jsinnerclass_Main$Outer$Inner_ =
+        $outer_this
+            .f_a__com_google_j2cl_transpiler_readable_jsinnerclass_Main$Outer +
+        1;
+  }
+
+  /**
+   * @return {number}
+   * @public
+   */
+  getB() {
+    return this
+        .f_b__com_google_j2cl_transpiler_readable_jsinnerclass_Main$Outer$Inner_;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Main$Outer$Inner; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Main$Outer$Inner);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Main$Outer = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsinnerclass_Main$Outer$Inner() {}
+};
+
+$Util.$setClassMetadata(
+    Main$Outer$Inner,
+    'com.google.j2cl.transpiler.readable.jsinnerclass.Main$Outer$Inner');
+
+
+
+/**
+ * Export class.
+ */
+exports = Main$Outer$Inner;
+//# sourceMappingURL=Main$Outer$Inner.js.map

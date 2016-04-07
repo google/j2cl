@@ -329,7 +329,6 @@ public class AstUtils {
     // adds 'this' as the last parameter.
     MethodDescriptor newInnerclassConstructorDescriptor =
         MethodDescriptor.Builder.from(innerclassConstructorDescriptor)
-            .jsInfo(JsInfo.NONE) // Remove any js info since this is only called internally.
             .addParameter(outerclassTypeDescriptor)
             .build();
 
