@@ -429,9 +429,15 @@ public class TypeDescriptors {
 
   // This is only used by TypeProxyUtils, and cannot be used elsewhere. Because to create a
   // TypeDescriptor from a TypeBinding, it should go through the path to check array type.
-  static TypeDescriptor create(ITypeBinding typeBinding) {
+  static TypeDescriptor create(ITypeBinding typeBinding,
+      List<TypeDescriptor> typeArgumentDescriptors) {
     Preconditions.checkArgument(!typeBinding.isArray());
-    return getInterner().intern(new RegularTypeDescriptor(typeBinding));
+    TypeDescriptor typeDescriptor =
+        new RegularTypeDescriptor(typeBinding, typeArgumentDescriptors);
+    if (typeBinding.isPrimitive()) {
+      typeDescriptor = typeDescriptor.getNonNullable();
+    }
+    return getInterner().intern(typeDescriptor);
   }
 
   /**

@@ -114,7 +114,6 @@ public class FixTypeVariablesInMethods extends AbstractRewriter {
    */
   private boolean containsTypeVariableDeclaredByMethod(
       TypeDescriptor typeDescriptor, Method method) {
-    Preconditions.checkState(typeDescriptor.isNullable());
     if (isTypeVariableDeclaredByMethod(typeDescriptor, method)) {
       return true;
     }

@@ -26,6 +26,7 @@ import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 
 import java.util.Collections;
+import java.util.List;
 
 /**
  * A (by name) reference to a class.
@@ -46,9 +47,17 @@ public class RegularTypeDescriptor extends TypeDescriptor {
   private ITypeBinding typeBinding;
 
   RegularTypeDescriptor(ITypeBinding typeBinding) {
+    this(typeBinding, null);
+  }
+
+  RegularTypeDescriptor(ITypeBinding typeBinding,
+      List<TypeDescriptor> typeArgumentDescriptors) {
     this.typeBinding = typeBinding;
     if (typeBinding != null) {
       setJsInteropProperties();
+    }
+    if (typeArgumentDescriptors != null) {
+      this.typeArgumentDescriptors = ImmutableList.copyOf(typeArgumentDescriptors);
     }
   }
 
@@ -94,9 +103,9 @@ public class RegularTypeDescriptor extends TypeDescriptor {
       case TypeDescriptors.FLOAT_TYPE_NAME:
       case TypeDescriptors.DOUBLE_TYPE_NAME:
       case TypeDescriptors.CHAR_TYPE_NAME:
-        return new NumberLiteral(this, 0);
+        return new NumberLiteral(this.getNonNullable(), 0);
       case TypeDescriptors.LONG_TYPE_NAME:
-        return new NumberLiteral(this, 0L);
+        return new NumberLiteral(this.getNonNullable(), 0L);
     }
 
     // Objects.

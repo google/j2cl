@@ -17,6 +17,7 @@ package com.google.j2cl.frontend;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
@@ -105,6 +106,7 @@ import org.eclipse.jdt.core.dom.VariableDeclaration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -149,7 +151,8 @@ public class CompilationUnitBuilder {
       j2clCompilationUnit = new CompilationUnit(sourceFilePath, packageName);
       this.jdtCompilationUnit = jdtCompilationUnit;
       // Records information about package-info files supplied as source code.
-      if (currentSourceFile.endsWith("package-info.java")) {
+      if (currentSourceFile.endsWith("package-info.java")
+          && jdtCompilationUnit.getPackage() != null) {
         packageInfoCache.setPackageAnnotations(packageName,
             jdtCompilationUnit.getPackage().annotations());
       }
@@ -1797,12 +1800,40 @@ public class CompilationUnitBuilder {
     CompilationUnitBuilder compilationUnitBuilder = new CompilationUnitBuilder();
 
     List<CompilationUnit> compilationUnits = new ArrayList<>();
-    for (Entry<String, org.eclipse.jdt.core.dom.CompilationUnit> entry :
-        jdtUnitsByFilePath.entrySet()) {
+    List<Entry<String, org.eclipse.jdt.core.dom.CompilationUnit>> entries =
+        new ArrayList<>(jdtUnitsByFilePath.entrySet());
+    // Ensure that all source package-info classes come before all other classes so that the
+    // freshness of the PackageInfoCache can be trusted.
+    sortPackageInfoFirst(entries);
+
+    for (Entry<String, org.eclipse.jdt.core.dom.CompilationUnit> entry : entries) {
       compilationUnits.add(
           compilationUnitBuilder.buildCompilationUnit(entry.getKey(), entry.getValue()));
     }
     return compilationUnits;
+  }
+
+  private static void sortPackageInfoFirst(
+      List<Entry<String, org.eclipse.jdt.core.dom.CompilationUnit>> entries) {
+    // Ensure that all source package-info classes come before all other classes so that the
+    // freshness of the PackageInfoCache can be trusted.
+    Collections.sort(
+        entries,
+        new Comparator<Entry<String, org.eclipse.jdt.core.dom.CompilationUnit>>() {
+          @Override
+          public int compare(
+              Entry<String, org.eclipse.jdt.core.dom.CompilationUnit> thisEntry,
+              Entry<String, org.eclipse.jdt.core.dom.CompilationUnit> thatEntry) {
+            String thisFilePath = thisEntry.getKey();
+            String thatFilePath = thatEntry.getKey();
+            boolean thisIsPackageInfo = thisFilePath.endsWith("package-info.java");
+            boolean thatIsPackageInfo = thatFilePath.endsWith("package-info.java");
+            return ComparisonChain.start()
+                .compareTrueFirst(thisIsPackageInfo, thatIsPackageInfo)
+                .compare(thisFilePath, thatFilePath)
+                .result();
+          }
+        });
   }
 
   private CompilationUnitBuilder() {}

@@ -112,7 +112,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     if (typeDescriptor.isTypeVariable() || typeDescriptor.isWildCard()) {
       return;
     }
-    
+
     if (!typeDescriptor.isNullable()) {
       addTypeDescriptor(
           ((NonNullableTypeDescriptor) typeDescriptor).getUnderlyingTypeDescriptor(),
@@ -122,7 +122,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
     // Special case expand a dependency on the 'long' primitive into a dependency on both the 'long'
     // primitive and the native JS 'Long' emulation class.
-    if (TypeDescriptors.get().primitiveLong == typeDescriptor) {
+    if (TypeDescriptors.get().primitiveLong.equalsIgnoreNullability(typeDescriptor)) {
       addRawTypeDescriptor(ImportCategory.EAGER, BootstrapType.NATIVE_LONG.getDescriptor());
       addRawTypeDescriptor(importCategory, TypeDescriptors.get().primitiveLong);
       return;

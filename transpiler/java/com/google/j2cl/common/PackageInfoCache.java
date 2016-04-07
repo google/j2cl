@@ -118,8 +118,10 @@ public class PackageInfoCache {
       if (JsInteropAnnotationUtils.isJsPackageAnnotation(annotationBinding)) {
         namespace = JsInteropAnnotationUtils.getJsNamespace(annotationBinding);
       }
-      // TODO(simionato): Determine what annotations to use to determine if a package
-      // supports nullability and read them here.
+      // TODO(simionato): Determine what annotations to use and update here.
+      if (annotationBinding.getAnnotationType().getName().equals("PackageDefaultNonNullable")) {
+        supportsNullability = true;
+      }
     }
 
     jsInteropNamespaceByPackagePath.put(packagePath, namespace);

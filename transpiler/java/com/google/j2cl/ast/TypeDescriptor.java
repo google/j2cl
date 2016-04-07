@@ -49,6 +49,13 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
   }
 
   /**
+   * Returns whether the two given type descriptors are the same, ignoring nullability.
+   */
+  public boolean equalsIgnoreNullability(TypeDescriptor other) {
+    return this.getNonNullable().equals(other.getNonNullable());
+  }
+
+  /**
    * Returns the fully package qualified binary name like "com.google.common.Outer$Inner".
    */
   public abstract String getBinaryName();

@@ -148,22 +148,19 @@ public class JsDocNameUtils {
           && !shouldUseClassName
           && (typeDescriptor.isJsFunctionInterface()
               || typeDescriptor.isJsFunctionImplementation())) {
-        if (nullable) {
-          return "?" + getJsDocNameForJsFunction(typeDescriptor, environment);
-        } else {
-          return getJsDocNameForJsFunction(typeDescriptor, environment);
-        }
+        return getJsDocNameWithNullability(getJsDocNameForJsFunction(typeDescriptor, environment),
+            nullable);
       }
       if (!nullable) {
-        return "!"
-            + getJsDocName(
+        return getJsDocNameWithNullability(getJsDocName(
                 ((NonNullableTypeDescriptor) typeDescriptor).getUnderlyingTypeDescriptor(),
                 shouldUseClassName,
-                environment);
+                environment), false /* nullable */);
       }
       // Everything below is nullable.
       Preconditions.checkArgument(nullable);
     }
+
     // Special cases.
     switch (typeDescriptor.getSourceName()) {
       case TypeDescriptors.BYTE_TYPE_NAME:
@@ -245,6 +242,25 @@ public class JsDocNameUtils {
       return typeDescriptor.getSimpleName();
     }
     return environment.aliasForType(typeDescriptor);
+  }
+
+  private static String getJsDocNameWithNullability(String jsDocType, boolean nullable) {
+    if (jsDocType.startsWith("?") || jsDocType.startsWith("!")) {
+      jsDocType = jsDocType.substring(1);
+    }
+    if (jsDocType.equals("void")) {
+      return jsDocType;
+    }
+    if (!nullable
+        && (jsDocType.equals("boolean")
+            || jsDocType.equals("number")
+            || jsDocType.equals("string")
+            || jsDocType.startsWith("function("))) {
+      // Those types are not nullable by default.
+      // Use 'function(' to make sure we are not matching on some type that starts with 'function'.
+      return jsDocType;
+    }
+    return (nullable ? "?" : "!") + jsDocType;
   }
 
   /**

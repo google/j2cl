@@ -39,6 +39,14 @@ public class TypeProxyUtils {
    * Creates a TypeDescriptor from a JDT TypeBinding.
    */
   public static TypeDescriptor createTypeDescriptor(ITypeBinding typeBinding) {
+    return createTypeDescriptor(typeBinding, null);
+  }
+
+  /**
+   * Creates a TypeDescriptor from a JDT TypeBinding.
+   */
+  public static TypeDescriptor createTypeDescriptor(ITypeBinding typeBinding,
+      List<TypeDescriptor> typeArgumentDescriptors) {
     if (typeBinding == null) {
       return null;
     }
@@ -47,7 +55,7 @@ public class TypeProxyUtils {
       return leafTypeDescriptor.getForArray(typeBinding.getDimensions());
     }
 
-    return TypeDescriptors.create(typeBinding);
+    return TypeDescriptors.create(typeBinding, typeArgumentDescriptors);
   }
 
   static List<String> getPackageComponents(ITypeBinding typeBinding) {

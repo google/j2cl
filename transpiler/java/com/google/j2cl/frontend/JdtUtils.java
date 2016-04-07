@@ -45,6 +45,7 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeProxyUtils;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
+import com.google.j2cl.common.PackageInfoCache;
 
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
@@ -52,6 +53,7 @@ import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
+import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
@@ -101,8 +103,56 @@ public class JdtUtils {
     return nameEnvironment;
   }
 
+  // TODO(simionato): Delete this method and make all the callers use
+  // createTypeDescriptorWithNullability.
   static TypeDescriptor createTypeDescriptor(ITypeBinding typeBinding) {
     return TypeProxyUtils.createTypeDescriptor(typeBinding);
+  }
+
+  /**
+   * Creates a type descriptor for the given type binding, taking into account nullability.
+   * @param typeBinding the type binding
+   * @param packageName the name of the package containing the field/method/variable/etc. with the
+   *     provided type binding (not the package in which the type is defined).
+   */
+  static TypeDescriptor createTypeDescriptorWithNullability(ITypeBinding typeBinding,
+      String packageName) {
+    TypeDescriptor descriptor;
+    if (typeBinding.isParameterizedType()) {
+      List<TypeDescriptor> typeArgumentsDescriptors = new ArrayList<>();
+      for (ITypeBinding typeArgumentBinding : typeBinding.getTypeArguments()) {
+        typeArgumentsDescriptors.add(createTypeDescriptorWithNullability(typeArgumentBinding,
+            packageName));
+      }
+      descriptor = TypeProxyUtils.createTypeDescriptor(typeBinding, typeArgumentsDescriptors);
+    } else {
+      descriptor = TypeProxyUtils.createTypeDescriptor(typeBinding);
+    }
+
+    return isNullable(typeBinding, packageName) ? descriptor : descriptor.getNonNullable();
+  }
+
+  /**
+   * Returns whether the given type binding should be nullable, according to the annotations
+   * on it and if nullability is enabled for the package containing the binding.
+   */
+  static boolean isNullable(ITypeBinding typeBinding, String packageName) {
+     if (typeBinding.isPrimitive()) {
+      return false;
+    }
+    if (!PackageInfoCache.get().isNullabilityEnabled(packageName)) {
+      return true;
+    }
+    Iterable<IAnnotationBinding> allAnnotations = Iterables.concat(
+        Arrays.asList(typeBinding.getAnnotations()),
+        Arrays.asList(typeBinding.getTypeAnnotations()));
+    for (IAnnotationBinding annotation : allAnnotations) {
+      if (annotation.getName().equals("Nullable") || annotation.getName().equals("NullableType")) {
+        return true;
+      }
+      // TODO(simionato): Consider supporting NotNull as well.
+    }
+    return false;
   }
 
   static Iterable<TypeDescriptor> createTypeDescriptors(ITypeBinding[] typeBindings) {
@@ -127,7 +177,8 @@ public class JdtUtils {
     TypeDescriptor enclosingClassTypeDescriptor =
         createTypeDescriptor(variableBinding.getDeclaringClass());
     String fieldName = variableBinding.getName();
-    TypeDescriptor thisTypeDescriptor = createTypeDescriptor(variableBinding.getType());
+    TypeDescriptor thisTypeDescriptor = createTypeDescriptorWithNullability(
+        variableBinding.getType(), variableBinding.getDeclaringClass().getPackage().getName());
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableBinding);
     boolean isRaw = jsInfo.getJsMemberType() == JsMemberType.PROPERTY;
     boolean isJsOverlay = JsInteropUtils.isJsOverlay(variableBinding);
