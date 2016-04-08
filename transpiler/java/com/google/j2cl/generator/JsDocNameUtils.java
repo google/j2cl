@@ -19,8 +19,8 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -86,7 +86,7 @@ public class JsDocNameUtils {
       // Already initialized.
       return;
     }
-    unboxedTypeDescriptorsBySuperTypeDescriptor = HashMultimap.create();
+    unboxedTypeDescriptorsBySuperTypeDescriptor = LinkedHashMultimap.create();
     TypeDescriptor rawJavaLangComparable =
         TypeDescriptors.get().javaLangComparable.getRawTypeDescriptor();
     TypeDescriptor javaLangBoolean = TypeDescriptors.get().javaLangBoolean;
