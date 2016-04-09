@@ -21,6 +21,7 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Represents the type descriptor that does not have a JDT typeBinding mapping. It is used to
@@ -30,7 +31,7 @@ import java.util.Collections;
  */
 @Visitable
 public class SyntheticRegularTypeDescriptor extends TypeDescriptor {
-  private final ImmutableList<String> classComponents;
+  private final List<String> classComponents;
 
   // JsInterop properties
   private boolean isJsFunction;
@@ -40,15 +41,15 @@ public class SyntheticRegularTypeDescriptor extends TypeDescriptor {
   private String jsTypeName;
   private String jsTypeNamespace;
 
-  private final ImmutableList<String> packageComponents;
-  private final ImmutableList<TypeDescriptor> typeArgumentDescriptors;
+  private final List<String> packageComponents;
+  private final List<TypeDescriptor> typeArgumentDescriptors;
 
   /**
    * Constructor for a regular synthetic type that does not contain any JsInterop information.
    */
   SyntheticRegularTypeDescriptor(
-      Iterable<String> packageComponents,
-      Iterable<String> classComponents,
+      List<String> packageComponents,
+      List<String> classComponents,
       boolean isRaw,
       Iterable<TypeDescriptor> typeArgumentDescriptors) {
     this.packageComponents = ImmutableList.copyOf(packageComponents);
@@ -61,9 +62,9 @@ public class SyntheticRegularTypeDescriptor extends TypeDescriptor {
    * Constructor for a synthetic native js type.
    */
   SyntheticRegularTypeDescriptor(
-      Iterable<String> packageComponents,
-      Iterable<String> classComponents,
-      Iterable<TypeDescriptor> typeArgumentDescriptors,
+      List<String> packageComponents,
+      List<String> classComponents,
+      List<TypeDescriptor> typeArgumentDescriptors,
       String jsTypeNamespace,
       String jsTypeName) {
     this(packageComponents, classComponents, false, typeArgumentDescriptors);
@@ -84,7 +85,7 @@ public class SyntheticRegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public ImmutableList<String> getClassComponents() {
+  public List<String> getClassComponents() {
     return classComponents;
   }
 
@@ -99,11 +100,6 @@ public class SyntheticRegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public Expression getDefaultValue() {
-    return NullLiteral.NULL;
-  }
-
-  @Override
   public int getDimensions() {
     return 0;
   }
@@ -111,11 +107,6 @@ public class SyntheticRegularTypeDescriptor extends TypeDescriptor {
   @Override
   public TypeDescriptor getEnclosingTypeDescriptor() {
     throw new UnsupportedOperationException();
-  }
-
-  @Override
-  public TypeDescriptor getForArray(int dimensions) {
-    return TypeDescriptors.getForArray(this, dimensions);
   }
 
   @Override
@@ -134,7 +125,7 @@ public class SyntheticRegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public ImmutableList<String> getPackageComponents() {
+  public List<String> getPackageComponents() {
     return packageComponents;
   }
 
@@ -177,7 +168,7 @@ public class SyntheticRegularTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public ImmutableList<TypeDescriptor> getTypeArgumentDescriptors() {
+  public List<TypeDescriptor> getTypeArgumentDescriptors() {
     return typeArgumentDescriptors;
   }
 

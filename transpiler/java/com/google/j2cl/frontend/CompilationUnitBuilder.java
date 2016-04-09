@@ -1625,7 +1625,8 @@ public class CompilationUnitBuilder {
         if (arrayTypeDescriptor.getLeafTypeDescriptor().isNative()) {
           // class literal of native js type array returns Object[].class
           arrayTypeDescriptor =
-              (ArrayTypeDescriptor) TypeDescriptors.get().javaLangObject.getForArray(1);
+              (ArrayTypeDescriptor)
+                  TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1);
         }
         return convertArrayTypeLiteral(arrayTypeDescriptor, javaLangClassTypeDescriptor);
       }

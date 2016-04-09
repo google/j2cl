@@ -29,8 +29,12 @@ import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.j2cl.ast.TypeDescriptor.MethodDescriptorFactory;
+import com.google.j2cl.ast.TypeDescriptor.TypeDescriptorFactory;
+import com.google.j2cl.common.JsInteropAnnotationUtils;
 
 import org.eclipse.jdt.core.dom.AST;
+import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 
 import java.util.ArrayList;
@@ -150,12 +154,13 @@ public class TypeDescriptors {
   }
 
   /**
-   * Converts a type into the correct type that should result from an operation on it.
-   * Returned values are always primitive or String.
+   * Converts a type into the correct type that should result from an operation on it. Returned
+   * values are always primitive or String.
    */
   public static TypeDescriptor asOperatorReturnType(TypeDescriptor typeDescriptor) {
     Preconditions.checkArgument(
         isBoxedOrPrimitiveType(typeDescriptor) || typeDescriptor == get().javaLangString);
+
     if (isBoxedType(typeDescriptor)) {
       return getPrimitiveTypeFromBoxType(typeDescriptor);
     }
@@ -208,7 +213,8 @@ public class TypeDescriptors {
    * Returns an idea of the "width" of a numeric primitive type to help with deciding when a
    * conversion would be a narrowing and when it would be a widening.
    *
-   * <p>Even though the floating point types are only 4 and 8 bytes respectively they are considered
+   * <p>
+   * Even though the floating point types are only 4 and 8 bytes respectively they are considered
    * very wide because of the magnitude of the maximum values they can encode.
    */
   public static int getWidth(TypeDescriptor typeDescriptor) {
@@ -339,42 +345,48 @@ public class TypeDescriptors {
   private TypeDescriptors() {}
 
   public static TypeDescriptor createSyntheticRegularTypeDescriptor(
-      Iterable<String> packageComponents,
-      Iterable<String> classComponents,
+      List<String> packageComponents,
+      List<String> classComponents,
       boolean isRaw,
-      Iterable<TypeDescriptor> typeArgumentDescriptors) {
+      List<TypeDescriptor> typeArgumentDescriptors) {
     Preconditions.checkArgument(!Iterables.getLast(classComponents).contains("<"));
+
     return getInterner()
         .intern(
             new SyntheticRegularTypeDescriptor(
-                ImmutableList.copyOf(packageComponents),
-                ImmutableList.copyOf(classComponents),
-                isRaw,
-                ImmutableList.copyOf(typeArgumentDescriptors)));
+                packageComponents, classComponents, isRaw, typeArgumentDescriptors));
   }
 
   public static TypeDescriptor createSyntheticNativeTypeDescriptor(
-      Iterable<String> packageComponents,
-      Iterable<String> classComponents,
-      Iterable<TypeDescriptor> typeArgumentDescriptors,
+      List<String> packageComponents,
+      List<String> classComponents,
+      List<TypeDescriptor> typeArgumentDescriptors,
       String jsTypeNamespace,
       String jsTypeName) {
     return getInterner()
         .intern(
             new SyntheticRegularTypeDescriptor(
-                ImmutableList.copyOf(packageComponents),
-                ImmutableList.copyOf(classComponents),
-                ImmutableList.copyOf(typeArgumentDescriptors),
+                packageComponents,
+                classComponents,
+                typeArgumentDescriptors,
                 jsTypeNamespace,
                 jsTypeName));
   }
 
-  public static TypeDescriptor createSyntheticParametricTypeDescriptor(
+  public static TypeDescriptor replaceTypeArgumentDescriptors(
       TypeDescriptor originalTypeDescriptor, Iterable<TypeDescriptor> typeArgumentTypeDescriptors) {
-    return getInterner()
-        .intern(
-            new SyntheticParametricTypeDescriptor(
-                originalTypeDescriptor, typeArgumentTypeDescriptors));
+    Preconditions.checkArgument(!originalTypeDescriptor.isTypeVariable());
+
+    List<TypeDescriptor> typeArgumentDescriptors = Lists.newArrayList(typeArgumentTypeDescriptors);
+    RegularTypeDescriptor newTypeDescriptor =
+        RegularTypeDescriptor.Builder.from(originalTypeDescriptor)
+            .setTypeArgumentDescriptors(typeArgumentDescriptors)
+            .setUniqueId(
+                originalTypeDescriptor.getBinaryName()
+                    + TypeDescriptors.getTypeArgumentsUniqueId(typeArgumentDescriptors))
+            .build();
+
+    return getInterner().intern(newTypeDescriptor);
   }
 
   public static TypeDescriptor createLambdaTypeDescriptor(
@@ -390,7 +402,7 @@ public class TypeDescriptors {
   // TODO(stalcup): examine whether createRaw() uses should be turned into createNative() uses,
   // since accessing native bootstrap classes is so conceptually similar to accessing native JsType
   // classes.
-  public static TypeDescriptor createRaw(Iterable<String> nameSpaceComponents, String className) {
+  public static TypeDescriptor createRaw(List<String> nameSpaceComponents, String className) {
     return createSyntheticRegularTypeDescriptor(
         nameSpaceComponents, Arrays.asList(className), true, Collections.emptyList());
   }
@@ -429,11 +441,199 @@ public class TypeDescriptors {
 
   // This is only used by TypeProxyUtils, and cannot be used elsewhere. Because to create a
   // TypeDescriptor from a TypeBinding, it should go through the path to check array type.
-  static TypeDescriptor create(ITypeBinding typeBinding,
-      List<TypeDescriptor> typeArgumentDescriptors) {
+  static TypeDescriptor createFromTypeBinding(
+      final ITypeBinding typeBinding, List<TypeDescriptor> overrideTypeArgumentDescriptors) {
     Preconditions.checkArgument(!typeBinding.isArray());
+
+    // These must be lazily calculated or else there are guarranteed infinite loops of
+    // TypeDescriptor creation.
+    MethodDescriptorFactory concreteJsFunctionmethodDescriptorFactory =
+        new MethodDescriptorFactory() {
+          @Override
+          public MethodDescriptor create() {
+            return TypeProxyUtils.getConcreteJsFunctionMethodDescriptor(typeBinding);
+          }
+        };
+    TypeDescriptorFactory enclosingTypeDescriptorFactory =
+        new TypeDescriptorFactory() {
+          @Override
+          public TypeDescriptor create() {
+            return TypeProxyUtils.createTypeDescriptor(typeBinding.getDeclaringClass());
+          }
+        };
+    MethodDescriptorFactory jsFunctionMethodDescriptorFactory =
+        new MethodDescriptorFactory() {
+          @Override
+          public MethodDescriptor create() {
+            return TypeProxyUtils.getJsFunctionMethodDescriptor(typeBinding);
+          }
+        };
+    TypeDescriptorFactory rawTypeDescriptorFactory =
+        new TypeDescriptorFactory() {
+          @Override
+          public TypeDescriptor create() {
+            TypeDescriptor rawTypeDescriptor =
+                TypeProxyUtils.createTypeDescriptor(typeBinding.getErasure());
+            if (rawTypeDescriptor.isParameterizedType()) {
+              return TypeDescriptors.replaceTypeArgumentDescriptors(
+                  rawTypeDescriptor, ImmutableList.<TypeDescriptor>of());
+            }
+            return rawTypeDescriptor;
+          }
+        };
+    TypeDescriptorFactory superTypeDescriptorFactory =
+        new TypeDescriptorFactory() {
+          @Override
+          public TypeDescriptor create() {
+            return TypeProxyUtils.createTypeDescriptor(typeBinding.getSuperclass());
+          }
+        };
+
+    // Compute these first since they're reused in other calculations.
+    List<String> classComponents = TypeProxyUtils.getClassComponents(typeBinding);
+    List<String> packageComponents = TypeProxyUtils.getPackageComponents(typeBinding);
+    boolean isPrimitive = typeBinding.isPrimitive();
+    boolean isTypeVariable = typeBinding.isTypeVariable();
+    IAnnotationBinding jsTypeAnnotation = JsInteropAnnotationUtils.getJsTypeAnnotation(typeBinding);
+    String simpleName = Iterables.getLast(classComponents);
+
+    // Compute everything else.
+    String binaryName =
+        Joiner.on(".")
+            .join(
+                Iterables.concat(
+                    packageComponents,
+                    Collections.singleton(Joiner.on("$").join(classComponents))));
+    String className;
+    {
+      if (isPrimitive) {
+        className = "$" + simpleName;
+      } else if (simpleName.equals("?")) {
+        className = "?";
+      } else if (isTypeVariable) {
+        // skip the top level class component for better output readability.
+        List<String> nameComponents =
+            new ArrayList<>(classComponents.subList(1, classComponents.size()));
+
+        // move the prefix in the simple name to the class name to avoid collisions between method-
+        // level and class-level type variable and avoid variable name starts with a number.
+        // concat class components to avoid collisions between type variables in inner/outer class.
+        // use '_' instead of '$' because '$' is not allowed in template variable name in closure.
+        nameComponents.set(
+            nameComponents.size() - 1, simpleName.substring(simpleName.indexOf('_') + 1));
+        String prefix = simpleName.substring(0, simpleName.indexOf('_') + 1);
+
+        className = prefix + Joiner.on('_').join(nameComponents);
+      } else {
+        className = Joiner.on('$').join(classComponents);
+      }
+    }
+    int dimensions = 0;
+    boolean isArray = false;
+    boolean isEnumOrSubclass = TypeProxyUtils.isEnumOrSubclass(typeBinding);
+    boolean isGlobal = false;
+    boolean isInstanceMemberClass = TypeProxyUtils.isInstanceMemberClass(typeBinding);
+    boolean isInstanceNestedClass = TypeProxyUtils.isInstanceNestedClass(typeBinding);
+    boolean isInterface = typeBinding.isInterface();
+    boolean isJsFunction = JsInteropUtils.isJsFunction(typeBinding);
+    boolean isJsFunctionImplementation = TypeProxyUtils.isJsFunctionImplementation(typeBinding);
+    boolean isJsType = jsTypeAnnotation != null;
+    boolean isLocal = TypeProxyUtils.isLocal(typeBinding);
+    boolean isNative = JsInteropAnnotationUtils.isNative(jsTypeAnnotation);
+    boolean isRaw = false;
+    boolean isRawType = typeBinding.isRawType();
+    boolean isUnion = false;
+    boolean isWildCard = typeBinding.isWildcardType() || typeBinding.isCapture();
+    String jsTypeName = JsInteropAnnotationUtils.getJsName(jsTypeAnnotation);
+    String jsTypeNamespace = JsInteropAnnotationUtils.getJsNamespace(jsTypeAnnotation);
+    String packageName = Joiner.on(".").join(packageComponents);
+    String qualifiedName;
+    {
+      String localNamespace = packageName;
+      String localClassName = className;
+
+      // If a custom js namespace was specified.
+      if (jsTypeNamespace != null) {
+        // The effect is to replace both the package and the class's enclosing class prefixes.
+        localNamespace = jsTypeNamespace;
+        localClassName = simpleName;
+      }
+
+      // If the JS namespace the user specified was JsPackage.GLOBAL then consider that to be top
+      // level.
+      if (JsInteropUtils.isGlobal(localNamespace)) {
+        localNamespace = "";
+      }
+
+      // If a custom JS name was specified.
+      if (jsTypeName != null) {
+        // Then use it instead of the (potentially enclosing class qualified) class name.
+        localClassName = jsTypeName;
+      }
+
+      qualifiedName =
+          Joiner.on(".")
+              .skipNulls()
+              .join(Strings.emptyToNull(localNamespace), Strings.emptyToNull(localClassName));
+    }
+    String sourceName = Joiner.on(".").join(Iterables.concat(packageComponents, classComponents));
+    boolean subclassesJsConstructorClass = TypeProxyUtils.subclassesJsConstructorClass(typeBinding);
+    String toString = sourceName;
+    List<TypeDescriptor> typeArgumentDescriptors =
+        overrideTypeArgumentDescriptors != null
+            ? overrideTypeArgumentDescriptors
+            : TypeProxyUtils.getTypeArgumentDescriptors(typeBinding);
+    String uniqueId =
+        isTypeVariable
+            ? typeBinding.getBinaryName() + ":" + typeBinding.getErasure().getBinaryName()
+            : binaryName + TypeDescriptors.getTypeArgumentsUniqueId(typeArgumentDescriptors);
+    Visibility visibility = TypeProxyUtils.getVisibility(typeBinding.getModifiers());
+
+    // Compute these even later
+    boolean isExtern = isNative && JsInteropUtils.isGlobal(jsTypeNamespace);
+
     TypeDescriptor typeDescriptor =
-        new RegularTypeDescriptor(typeBinding, typeArgumentDescriptors);
+        new RegularTypeDescriptor(
+            binaryName,
+            classComponents,
+            className,
+            concreteJsFunctionmethodDescriptorFactory,
+            dimensions,
+            enclosingTypeDescriptorFactory,
+            isArray,
+            isEnumOrSubclass,
+            isExtern,
+            isGlobal,
+            isInstanceMemberClass,
+            isInstanceNestedClass,
+            isInterface,
+            isJsFunction,
+            isJsFunctionImplementation,
+            isJsType,
+            isLocal,
+            isNative,
+            isPrimitive,
+            isRaw,
+            isRawType,
+            isTypeVariable,
+            isUnion,
+            isWildCard,
+            jsFunctionMethodDescriptorFactory,
+            jsTypeName,
+            jsTypeNamespace,
+            packageComponents,
+            packageName,
+            qualifiedName,
+            rawTypeDescriptorFactory,
+            simpleName,
+            sourceName,
+            subclassesJsConstructorClass,
+            superTypeDescriptorFactory,
+            toString,
+            typeArgumentDescriptors,
+            uniqueId,
+            visibility);
+
     if (typeBinding.isPrimitive()) {
       typeDescriptor = typeDescriptor.getNonNullable();
     }
@@ -476,6 +676,7 @@ public class TypeDescriptors {
       Preconditions.checkArgument(
           typeDescriptor.getClassComponents().size() > 1,
           "Type Variable (not including wild card type) should have at least two name components");
+
       // skip the top level class component for better output readability.
       List<String> nameComponents =
           new ArrayList<>(
@@ -498,6 +699,9 @@ public class TypeDescriptors {
   }
 
   public static TypeDescriptor getForArray(TypeDescriptor typeDescriptor, int dimensions) {
+    Preconditions.checkArgument(!typeDescriptor.isArray());
+    Preconditions.checkArgument(!typeDescriptor.isUnion());
+
     if (dimensions == 0) {
       return typeDescriptor;
     }
@@ -534,19 +738,49 @@ public class TypeDescriptors {
 
   public static String getTypeArgumentsUniqueId(final TypeDescriptor typeDescriptor) {
     if (typeDescriptor.isParameterizedType()) {
-      return String.format(
-          "<%s>",
-          Joiner.on(", ")
-              .join(
-                  Lists.transform(
-                      typeDescriptor.getTypeArgumentDescriptors(),
-                      new Function<TypeDescriptor, String>() {
-                        @Override
-                        public String apply(TypeDescriptor typeDescriptor) {
-                          return typeDescriptor.getUniqueId();
-                        }
-                      })));
+      List<TypeDescriptor> typeArgumentDescriptors = typeDescriptor.getTypeArgumentDescriptors();
+      return getTypeArgumentsUniqueId(typeArgumentDescriptors);
     }
     return "";
+  }
+
+  private static String getTypeArgumentsUniqueId(List<TypeDescriptor> typeArgumentDescriptors) {
+    if (typeArgumentDescriptors.isEmpty()) {
+      return "";
+    }
+    return String.format(
+        "<%s>",
+        Joiner.on(", ")
+            .join(
+                Lists.transform(
+                    typeArgumentDescriptors,
+                    new Function<TypeDescriptor, String>() {
+                      @Override
+                      public String apply(TypeDescriptor typeDescriptor) {
+                        return typeDescriptor.getUniqueId();
+                      }
+                    })));
+  }
+
+  public static Expression getDefaultValue(TypeDescriptor typeDescriptor) {
+    Preconditions.checkArgument(!typeDescriptor.isUnion());
+
+    // Primitives.
+    switch (typeDescriptor.getSourceName()) {
+      case BOOLEAN_TYPE_NAME:
+        return BooleanLiteral.FALSE;
+      case BYTE_TYPE_NAME:
+      case SHORT_TYPE_NAME:
+      case INT_TYPE_NAME:
+      case FLOAT_TYPE_NAME:
+      case DOUBLE_TYPE_NAME:
+      case CHAR_TYPE_NAME:
+        return new NumberLiteral(typeDescriptor, 0);
+      case LONG_TYPE_NAME:
+        return new NumberLiteral(typeDescriptor, 0L);
+    }
+
+    // Objects.
+    return NullLiteral.NULL;
   }
 }

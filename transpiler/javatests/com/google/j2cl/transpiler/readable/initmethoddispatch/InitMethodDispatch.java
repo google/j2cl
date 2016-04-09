@@ -1,6 +1,6 @@
 package com.google.j2cl.transpiler.readable.initmethoddispatch;
 
-class InitMethodDispatch {
+class InitMethodDispatch<T> {
   int value;
 
   InitMethodDispatch() {

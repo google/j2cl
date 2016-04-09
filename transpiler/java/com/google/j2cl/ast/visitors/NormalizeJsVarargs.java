@@ -50,13 +50,15 @@ import com.google.j2cl.ast.VariableReference;
 import java.util.Arrays;
 
 /**
- * Implements JavaScript varargs calling convention by rewriting varargs calls and adding a
- * prolog to varargs JsMethods.
+ * Implements JavaScript varargs calling convention by rewriting varargs calls and adding a prolog
+ * to varargs JsMethods.
  *
- * <p>At the method body, we copy the var arguments to a local array, and replaces reference to the
- * var parameter with reference to the local copy.
+ * <p>
+ * At the method body, we copy the var arguments to a local array, and replaces reference to the var
+ * parameter with reference to the local copy.
  *
- * <p>At the call sites, array creation/literal is unwrapped as array literals, which are passed as
+ * <p>
+ * At the call sites, array creation/literal is unwrapped as array literals, which are passed as
  * individual parameters. And array object is wrapped with other arguments and passed as a single
  * array of arguments, and invoked in the form of fn.apply().
  *
@@ -66,7 +68,11 @@ import java.util.Arrays;
 public class NormalizeJsVarargs extends AbstractRewriter {
   private static final Variable ARGUMENTS_PARAMETER =
       new Variable(
-          "arguments", TypeDescriptors.get().javaLangObject.getForArray(1), false, true, true);
+          "arguments",
+          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+          false,
+          true,
+          true);
   private static TypeDescriptor primitiveInt = TypeDescriptors.get().primitiveInt;
   private static TypeDescriptor primitiveBoolean = TypeDescriptors.get().primitiveBoolean;
 
@@ -78,9 +84,11 @@ public class NormalizeJsVarargs extends AbstractRewriter {
   /**
    * Normalizes varargs JsMethods, which includes
    *
-   * <p>1. Adding preamble to the method body to copy the var arguments to a local variable.
+   * <p>
+   * 1. Adding preamble to the method body to copy the var arguments to a local variable.
    *
-   * <p>2. Fixing references to the varargs parameter with references to the local variable.
+   * <p>
+   * 2. Fixing references to the varargs parameter with references to the local variable.
    */
   private static class NormalizeJsMethodsVarargs extends AbstractRewriter {
     private Variable varargsParameter = null;
@@ -190,7 +198,8 @@ public class NormalizeJsVarargs extends AbstractRewriter {
   /**
    * Normalizes method calls to varargs JsMethods.
    *
-   * <p>If the var argument is in the form of array literal, unwrap it at call site. Otherwise, call
+   * <p>
+   * If the var argument is in the form of array literal, unwrap it at call site. Otherwise, call
    * the function in the form of function.apply(thisArg, [args]).
    */
   private static class NormalizeVarargsJsMethodCallsVisitor extends AbstractRewriter {

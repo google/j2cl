@@ -33,6 +33,7 @@ import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.errors.Errors;
@@ -242,7 +243,7 @@ public class GeneratorUtils {
     if (field.isCompileTimeConstant()) {
       return field.getInitializer();
     }
-    return field.getDescriptor().getTypeDescriptor().getDefaultValue();
+    return TypeDescriptors.getDefaultValue(field.getDescriptor().getTypeDescriptor());
   }
 
   public static boolean hasJsDoc(JavaType type) {

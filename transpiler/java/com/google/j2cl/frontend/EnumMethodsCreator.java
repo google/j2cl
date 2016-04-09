@@ -82,7 +82,7 @@ public class EnumMethodsCreator {
             .isStatic(true)
             .enclosingClassTypeDescriptor(enumType.getDescriptor())
             .methodName(VALUES_METHOD_NAME)
-            .returnTypeDescriptor(enumType.getDescriptor().getForArray(1))
+            .returnTypeDescriptor(TypeDescriptors.getForArray(enumType.getDescriptor(), 1))
             .parameterTypeDescriptors(Arrays.asList(new TypeDescriptor[0]))
             .jsInfo(jsType ? JsInfo.RAW : JsInfo.NONE)
             .build();
@@ -171,7 +171,8 @@ public class EnumMethodsCreator {
         MethodCall.createRegularMethodCall(
             null, getMethodDescriptor, nameParameterAccess, namesToValuesMapFieldAccess);
     Statement returnStatement =
-        new ReturnStatement(getMethodCall, enumType.getDescriptor().getForArray(1));
+        new ReturnStatement(
+            getMethodCall, TypeDescriptors.getForArray(enumType.getDescriptor(), 1));
 
     List<Statement> blockStatements = new ArrayList<>();
     blockStatements.add(ifStatement);
@@ -197,9 +198,11 @@ public class EnumMethodsCreator {
       values.add(new FieldAccess(null, enumField.getDescriptor()));
     }
     Expression arrayOfValues =
-        new ArrayLiteral((ArrayTypeDescriptor) enumType.getDescriptor().getForArray(1), values);
+        new ArrayLiteral(
+            (ArrayTypeDescriptor) TypeDescriptors.getForArray(enumType.getDescriptor(), 1), values);
     Statement returnStatement =
-        new ReturnStatement(arrayOfValues, enumType.getDescriptor().getForArray(1));
+        new ReturnStatement(
+            arrayOfValues, TypeDescriptors.getForArray(enumType.getDescriptor(), 1));
     List<Statement> blockStatements = new ArrayList<>();
     blockStatements.add(returnStatement);
     Block body = new Block(blockStatements);

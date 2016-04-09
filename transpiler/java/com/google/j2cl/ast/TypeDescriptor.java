@@ -16,7 +16,6 @@
 package com.google.j2cl.ast;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.List;
@@ -29,6 +28,20 @@ import java.util.List;
  */
 @Visitable
 public abstract class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, HasJsName {
+
+  /**
+   * Enables delayed TypeDescriptor creation.
+   */
+  public interface TypeDescriptorFactory {
+    TypeDescriptor create();
+  }
+
+  /**
+   * Enables delayed MethodDescriptor creation.
+   */
+  public interface MethodDescriptorFactory {
+    MethodDescriptor create();
+  }
 
   @Override
   public Node accept(Processor processor) {
@@ -60,7 +73,12 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
    */
   public abstract String getBinaryName();
 
-  public abstract ImmutableList<String> getClassComponents();
+  /**
+   * Returns a list of Strings representing the current type's simple name and enclosing type simple
+   * names. For example for "com.google.foo.Outer" the class components are ["Outer"] and for
+   * "com.google.foo.Outer.Inner" the class components are ["Outer", "Inner"].
+   */
+  public abstract List<String> getClassComponents();
 
   /**
    * Returns the unqualified binary name like "Outer$Inner".
@@ -69,13 +87,9 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
 
   public abstract MethodDescriptor getConcreteJsFunctionMethodDescriptor();
 
-  public abstract Expression getDefaultValue();
-
   public abstract int getDimensions();
 
   public abstract TypeDescriptor getEnclosingTypeDescriptor();
-
-  public abstract TypeDescriptor getForArray(int dimensions);
 
   public abstract MethodDescriptor getJsFunctionMethodDescriptor();
 
@@ -85,7 +99,7 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
   @Override
   public abstract String getJsNamespace();
 
-  public abstract ImmutableList<String> getPackageComponents();
+  public abstract List<String> getPackageComponents();
 
   /**
    * Returns the fully package qualified name like "com.google.common".
@@ -94,6 +108,10 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
 
   public abstract String getQualifiedName();
 
+  /**
+   * Returns the erasure type (see definition of erasure type at
+   * http://help.eclipse.org/luna/index.jsp) with an empty type arguments list.
+   */
   public abstract TypeDescriptor getRawTypeDescriptor();
 
   /**
@@ -120,8 +138,7 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
   }
 
   /**
-   * Returns whether this is an array type descriptor. Only true when it is an instance of the
-   * ArrayTypeDescriptor subclass.
+   * Returns whether the described type is an array.
    */
   public abstract boolean isArray();
 
@@ -148,6 +165,29 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
 
   public abstract boolean isJsType();
 
+  /**
+   * Returns whether the described type is a nested type (i.e. it is defined inside the body of some
+   * enclosing type) but is not a member type because it's location in the body is not in the
+   * declaration scope of the enclosing type. For example:
+   *
+   * <code>
+   * class Foo {
+   *   void bar() {
+   *     class Baz {}
+   *   }
+   * }
+   * </code>
+   *
+   * or
+   *
+   * <code>
+   * class Foo {
+   *   void bar() {
+   *     Comparable comparable = new Comparable() { ... }
+   *   }
+   * }
+   * </code>
+   */
   public abstract boolean isLocal();
 
   public abstract boolean isNative();
@@ -157,8 +197,8 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
   public abstract boolean isPrimitive();
 
   /**
-   * Returns whether this is a Raw reference. Raw references are not mangled in the output and
-   * thus can be used to describe reference to JS apis.
+   * Returns whether this is a Raw reference. Raw references are not mangled in the output and thus
+   * can be used to describe reference to JS apis.
    */
   public abstract boolean isRaw();
 
@@ -171,7 +211,7 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
    * UnionTypeDescriptor subclass.
    */
   public abstract boolean isUnion();
-  
+
   public abstract boolean isNullable();
 
   public abstract NonNullableTypeDescriptor getNonNullable();

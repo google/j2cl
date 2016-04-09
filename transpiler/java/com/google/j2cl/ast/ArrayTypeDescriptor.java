@@ -51,7 +51,7 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   }
 
   public TypeDescriptor getComponentTypeDescriptor() {
-    return getLeafTypeDescriptor().getForArray(getDimensions() - 1);
+    return TypeDescriptors.getForArray(getLeafTypeDescriptor(), getDimensions() - 1);
   }
 
   @Override
@@ -60,20 +60,10 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public Expression getDefaultValue() {
-    return NullLiteral.NULL;
-  }
-
-  @Override
   public abstract int getDimensions();
 
   @Override
   public TypeDescriptor getEnclosingTypeDescriptor() {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
-  public TypeDescriptor getForArray(int dimensions) {
     throw new UnsupportedOperationException();
   }
 

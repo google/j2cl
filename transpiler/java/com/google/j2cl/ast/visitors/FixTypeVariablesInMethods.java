@@ -77,7 +77,7 @@ public class FixTypeVariablesInMethods extends AbstractRewriter {
       return typeDescriptor;
     }
     if (typeDescriptor.isParameterizedType()) {
-      return TypeDescriptors.createSyntheticParametricTypeDescriptor(
+      return TypeDescriptors.replaceTypeArgumentDescriptors(
           typeDescriptor,
           Lists.transform(
               typeDescriptor.getTypeArgumentDescriptors(),
@@ -90,9 +90,10 @@ public class FixTypeVariablesInMethods extends AbstractRewriter {
               }));
     }
     if (typeDescriptor.isArray()) {
-      return replaceTypeVariableWithBound(
-              ((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor(), method)
-          .getForArray(typeDescriptor.getDimensions());
+      TypeDescriptor leafTypeDescriptor =
+          ((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor();
+      TypeDescriptor boundTypeDescriptor = replaceTypeVariableWithBound(leafTypeDescriptor, method);
+      return TypeDescriptors.getForArray(boundTypeDescriptor, typeDescriptor.getDimensions());
     }
     return typeDescriptor;
   }

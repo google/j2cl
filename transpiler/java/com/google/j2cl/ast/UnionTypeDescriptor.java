@@ -71,22 +71,12 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public Expression getDefaultValue() {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
   public int getDimensions() {
     return 0;
   }
 
   @Override
   public TypeDescriptor getEnclosingTypeDescriptor() {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
-  public TypeDescriptor getForArray(int dimensions) {
     throw new UnsupportedOperationException();
   }
 

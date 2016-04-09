@@ -15,6 +15,9 @@ let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
+/**
+ * @template C_T
+ */
 class InitMethodDispatch extends Object {
   /**
    * Defines instance fields.
@@ -30,7 +33,8 @@ class InitMethodDispatch extends Object {
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!InitMethodDispatch}
+   * @template C_T
+   * @return {!InitMethodDispatch<C_T>}
    * @public
    */
   static $create() {
@@ -53,8 +57,9 @@ class InitMethodDispatch extends Object {
 
   /**
    * A particular Java constructor as a factory method.
+   * @template C_T
    * @param {number} i
-   * @return {!InitMethodDispatch}
+   * @return {!InitMethodDispatch<C_T>}
    * @public
    */
   static $create__int(i) {

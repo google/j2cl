@@ -15,11 +15,9 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
-import com.google.common.collect.Lists;
 
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
@@ -52,10 +50,10 @@ public class TypeProxyUtils {
     }
     if (typeBinding.isArray()) {
       TypeDescriptor leafTypeDescriptor = createTypeDescriptor(typeBinding.getElementType());
-      return leafTypeDescriptor.getForArray(typeBinding.getDimensions());
+      return TypeDescriptors.getForArray(leafTypeDescriptor, typeBinding.getDimensions());
     }
 
-    return TypeDescriptors.create(typeBinding, typeArgumentDescriptors);
+    return TypeDescriptors.createFromTypeBinding(typeBinding, typeArgumentDescriptors);
   }
 
   static List<String> getPackageComponents(ITypeBinding typeBinding) {
@@ -266,13 +264,10 @@ public class TypeProxyUtils {
   }
 
   private static List<TypeDescriptor> createTypeDescriptors(ITypeBinding[] typeBindings) {
-    return Lists.transform(
-        Arrays.asList(typeBindings),
-        new Function<ITypeBinding, TypeDescriptor>() {
-          @Override
-          public TypeDescriptor apply(ITypeBinding typeBinding) {
-            return createTypeDescriptor(typeBinding);
-          }
-        });
+    List<TypeDescriptor> typeDescriptors = new ArrayList<>();
+    for (ITypeBinding typeBinding : typeBindings) {
+      typeDescriptors.add(createTypeDescriptor(typeBinding));
+    }
+    return typeDescriptors;
   }
 }

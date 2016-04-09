@@ -80,11 +80,6 @@ public class LambdaTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public Expression getDefaultValue() {
-    return NullLiteral.NULL;
-  }
-
-  @Override
   public int getDimensions() {
     return 0;
   }
@@ -92,11 +87,6 @@ public class LambdaTypeDescriptor extends TypeDescriptor {
   @Override
   public TypeDescriptor getEnclosingTypeDescriptor() {
     return null;
-  }
-
-  @Override
-  public TypeDescriptor getForArray(int dimensions) {
-    return TypeDescriptors.getForArray(this, dimensions);
   }
 
   @Override

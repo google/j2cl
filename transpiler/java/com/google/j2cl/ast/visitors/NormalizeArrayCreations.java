@@ -54,8 +54,7 @@ public class NormalizeArrayCreations extends AbstractRewriter {
   }
 
   /**
-   * We transform new Object[100][100]; to
-   * Arrays.$create([100, 100], Object);
+   * We transform new Object[100][100]; to Arrays.$create([100, 100], Object);
    */
   private Node rewriteArrayCreate(NewArray newArrayExpression) {
     Preconditions.checkArgument(newArrayExpression.getArrayLiteral() == null);
@@ -67,13 +66,14 @@ public class NormalizeArrayCreations extends AbstractRewriter {
             .methodName("$create")
             .parameterTypeDescriptors(
                 Arrays.asList(
-                    TypeDescriptors.get().primitiveInt.getForArray(1),
+                    TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
                     TypeDescriptors.get().javaLangObject))
             .build();
     List<Expression> arguments = new ArrayList<>();
     arguments.add(
         new ArrayLiteral(
-            (ArrayTypeDescriptor) TypeDescriptors.get().primitiveInt.getForArray(1),
+            (ArrayTypeDescriptor)
+                TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
             newArrayExpression.getDimensionExpressions()));
     // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
     // parameter type instead of the type parameter itself.
@@ -101,7 +101,7 @@ public class NormalizeArrayCreations extends AbstractRewriter {
             .methodName("$init")
             .parameterTypeDescriptors(
                 Arrays.asList(
-                    TypeDescriptors.get().javaLangObject.getForArray(1),
+                    TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
                     TypeDescriptors.get().javaLangObject))
             .build();
     if (dimensionCount == 1) {

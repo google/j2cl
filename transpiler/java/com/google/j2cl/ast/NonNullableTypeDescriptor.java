@@ -3,8 +3,6 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.common.collect.ImmutableList;
-
 import java.util.List;
 
 /**
@@ -114,23 +112,13 @@ public class NonNullableTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public ImmutableList<String> getClassComponents() {
+  public List<String> getClassComponents() {
     return underlyingTypeDescriptor.getClassComponents();
-  }
-
-  @Override
-  public Expression getDefaultValue() {
-    return underlyingTypeDescriptor.getDefaultValue();
   }
 
   @Override
   public TypeDescriptor getEnclosingTypeDescriptor() {
     return underlyingTypeDescriptor.getEnclosingTypeDescriptor();
-  }
-
-  @Override
-  public TypeDescriptor getForArray(int dimensions) {
-    return TypeDescriptors.getForArray(this, dimensions);
   }
 
   @Override
@@ -149,7 +137,7 @@ public class NonNullableTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public ImmutableList<String> getPackageComponents() {
+  public List<String> getPackageComponents() {
     return underlyingTypeDescriptor.getPackageComponents();
   }
 

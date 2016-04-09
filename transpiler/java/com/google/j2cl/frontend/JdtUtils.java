@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.frontend;
 
-import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
@@ -64,8 +63,6 @@ import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.Modifier;
 import org.eclipse.jdt.core.dom.PostfixExpression;
 import org.eclipse.jdt.core.dom.PrefixExpression;
-import org.eclipse.jdt.internal.compiler.batch.FileSystem;
-import org.eclipse.jdt.internal.compiler.env.INameEnvironment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -86,21 +83,6 @@ public class JdtUtils {
     return compilationUnit.getPackage() == null
         ? ""
         : compilationUnit.getPackage().getName().getFullyQualifiedName();
-  }
-
-  /**
-   * Creates and returns a JDT name environment for finding class files by name.
-   * <p>
-   * Sadly this work is redundant with work already done by the JDT parser, but it's not possible to
-   * grab the parser's internal name environment instance.
-   */
-  static INameEnvironment createNameEnvironment(FrontendOptions options) {
-    INameEnvironment nameEnvironment =
-        new FileSystem(
-            Iterables.toArray(options.getClasspathEntries(), String.class),
-            null,
-            options.getEncoding());
-    return nameEnvironment;
   }
 
   // TODO(simionato): Delete this method and make all the callers use
@@ -153,17 +135,6 @@ public class JdtUtils {
       // TODO(simionato): Consider supporting NotNull as well.
     }
     return false;
-  }
-
-  static Iterable<TypeDescriptor> createTypeDescriptors(ITypeBinding[] typeBindings) {
-    return FluentIterable.from(typeBindings)
-        .transform(
-            new Function<ITypeBinding, TypeDescriptor>() {
-              @Override
-              public TypeDescriptor apply(ITypeBinding typeBinding) {
-                return createTypeDescriptor(typeBinding);
-              }
-            });
   }
 
   static FieldDescriptor createFieldDescriptor(IVariableBinding variableBinding) {
@@ -507,10 +478,6 @@ public class JdtUtils {
 
   static boolean isStatic(int modifier) {
     return Modifier.isStatic(modifier);
-  }
-
-  static boolean isNative(int modifier) {
-    return Modifier.isNative(modifier);
   }
 
   static boolean isInstanceNestedClass(ITypeBinding typeBinding) {

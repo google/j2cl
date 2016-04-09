@@ -703,8 +703,10 @@ public class AstUtils {
 
     return TypeDescriptors.createSyntheticRegularTypeDescriptor(
         typeDescriptor.getPackageComponents(),
-        Iterables.concat(
-            typeDescriptor.getClassComponents(), Arrays.asList(JS_OVERLAY_METHODS_IMPL_SUFFIX)),
+        Lists.newArrayList(
+            Iterables.concat(
+                typeDescriptor.getClassComponents(),
+                Arrays.asList(JS_OVERLAY_METHODS_IMPL_SUFFIX))),
         false,
         Collections.emptyList());
   }
