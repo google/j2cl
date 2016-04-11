@@ -578,6 +578,9 @@ public class AstUtils {
       case BIT_XOR:
       case BIT_AND:
       case BIT_OR:
+      case LEFT_SHIFT:
+      case RIGHT_SHIFT_SIGNED:
+      case RIGHT_SHIFT_UNSIGNED:
         return true; // Both numerics and booleans get these operators.
       case CONDITIONAL_AND:
       case CONDITIONAL_OR:

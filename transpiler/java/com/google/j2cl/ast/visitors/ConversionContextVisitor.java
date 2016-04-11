@@ -39,7 +39,6 @@ import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.SwitchStatement;
 import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.UnaryExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 
@@ -358,12 +357,13 @@ public abstract class ConversionContextVisitor extends AbstractRewriter {
         BinaryExpression.Builder.from(binaryExpression)
             .operator(binaryExpression.getOperator().getUnderlyingBinaryOperator())
             .build();
+    // The assignment operation retains the type of the original compound operation, which
+    // in turn must be equal to the type of the lvalue (lhs).
     BinaryExpression assignmentExpression =
-        new BinaryExpression(
-            TypeDescriptors.asOperatorReturnType(binaryExpression.getTypeDescriptor()),
-            binaryExpression.getLeftOperand(),
-            BinaryOperator.ASSIGN,
-            assignmentRightOperand);
+        BinaryExpression.Builder.from(binaryExpression)
+            .operator(BinaryOperator.ASSIGN)
+            .rightOperand(assignmentRightOperand)
+            .build();
     return rewriteRegularBinaryExpression(assignmentExpression) != assignmentExpression
         || rewriteRegularBinaryExpression(assignmentRightOperand) != assignmentRightOperand;
   }
@@ -379,12 +379,11 @@ public abstract class ConversionContextVisitor extends AbstractRewriter {
             operand,
             unaryExpression.getOperator().getUnderlyingBinaryOperator(),
             OperatorSideEffectUtils.createLiteralOne(operand.getTypeDescriptor()));
+    // The assignment operation retains the type of the original compound operation, which
+    // in turn must be equal to the type of the lvalue.
     BinaryExpression assignmentExpression =
         new BinaryExpression(
-            TypeDescriptors.asOperatorReturnType(unaryExpression.getTypeDescriptor()),
-            operand,
-            BinaryOperator.ASSIGN,
-            assignmentRightOperand);
+            operand.getTypeDescriptor(), operand, BinaryOperator.ASSIGN, assignmentRightOperand);
     return rewriteRegularBinaryExpression(assignmentExpression) != assignmentExpression
         || rewriteRegularBinaryExpression(assignmentRightOperand) != assignmentRightOperand;
   }

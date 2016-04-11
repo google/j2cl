@@ -15,9 +15,11 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
-import com.google.common.base.Preconditions;
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import com.google.common.collect.BiMap;
@@ -153,20 +155,6 @@ public class TypeDescriptors {
     return typeDescriptorsStorage.get();
   }
 
-  /**
-   * Converts a type into the correct type that should result from an operation on it. Returned
-   * values are always primitive or String.
-   */
-  public static TypeDescriptor asOperatorReturnType(TypeDescriptor typeDescriptor) {
-    Preconditions.checkArgument(
-        isBoxedOrPrimitiveType(typeDescriptor) || typeDescriptor == get().javaLangString);
-
-    if (isBoxedType(typeDescriptor)) {
-      return getPrimitiveTypeFromBoxType(typeDescriptor);
-    }
-    return typeDescriptor;
-  }
-
   public static TypeDescriptor getBoxTypeFromPrimitiveType(TypeDescriptor primitiveType) {
     return get().boxedTypeByPrimitiveType.get(primitiveType);
   }
@@ -218,7 +206,7 @@ public class TypeDescriptors {
    * very wide because of the magnitude of the maximum values they can encode.
    */
   public static int getWidth(TypeDescriptor typeDescriptor) {
-    Preconditions.checkArgument(typeDescriptor.isPrimitive());
+    checkArgument(isNumericPrimitive(typeDescriptor));
 
     TypeDescriptors typeDescriptors = get();
     if (typeDescriptor == typeDescriptors.primitiveByte) {
@@ -233,7 +221,8 @@ public class TypeDescriptors {
       return 8;
     } else if (typeDescriptor == typeDescriptors.primitiveFloat) {
       return 4 + 100;
-    } else { // typeDescriptor == typeDescriptors.primitiveDouble
+    } else {
+      checkArgument(typeDescriptor == typeDescriptors.primitiveDouble);
       return 8 + 100;
     }
   }
@@ -247,7 +236,7 @@ public class TypeDescriptors {
    */
   private static TypeDescriptor createJavaLangNumber(AST ast) {
     ITypeBinding javaLangInteger = ast.resolveWellKnownType("java.lang.Integer");
-    Preconditions.checkNotNull(javaLangInteger);
+    checkNotNull(javaLangInteger);
     return TypeProxyUtils.createTypeDescriptor(javaLangInteger.getSuperclass());
   }
 
@@ -256,9 +245,9 @@ public class TypeDescriptors {
    */
   private static TypeDescriptor createJavaLangComparable(AST ast) {
     ITypeBinding javaLangInteger = ast.resolveWellKnownType("java.lang.Integer");
-    Preconditions.checkNotNull(javaLangInteger);
+    checkNotNull(javaLangInteger);
     ITypeBinding[] interfaces = javaLangInteger.getInterfaces();
-    Preconditions.checkArgument(interfaces.length == 1);
+    checkArgument(interfaces.length == 1);
     return TypeProxyUtils.createTypeDescriptor(interfaces[0].getErasure());
   }
 
@@ -267,9 +256,9 @@ public class TypeDescriptors {
    */
   private static TypeDescriptor createJavaLangCharSequence(AST ast) {
     ITypeBinding javaLangString = ast.resolveWellKnownType("java.lang.String");
-    Preconditions.checkNotNull(javaLangString);
+    checkNotNull(javaLangString);
     ITypeBinding[] interfaces = javaLangString.getInterfaces();
-    Preconditions.checkArgument(interfaces.length == 3);
+    checkArgument(interfaces.length == 3);
     for (ITypeBinding i : interfaces) {
       if (i.getBinaryName().equals("java.lang.CharSequence")) {
         return TypeProxyUtils.createTypeDescriptor(i);
@@ -348,9 +337,8 @@ public class TypeDescriptors {
       List<String> packageComponents,
       List<String> classComponents,
       boolean isRaw,
-      List<TypeDescriptor> typeArgumentDescriptors) {
-    Preconditions.checkArgument(!Iterables.getLast(classComponents).contains("<"));
-
+      Iterable<TypeDescriptor> typeArgumentDescriptors) {
+    checkArgument(!Iterables.getLast(classComponents).contains("<"));
     return getInterner()
         .intern(
             new SyntheticRegularTypeDescriptor(
@@ -375,7 +363,7 @@ public class TypeDescriptors {
 
   public static TypeDescriptor replaceTypeArgumentDescriptors(
       TypeDescriptor originalTypeDescriptor, Iterable<TypeDescriptor> typeArgumentTypeDescriptors) {
-    Preconditions.checkArgument(!originalTypeDescriptor.isTypeVariable());
+    checkArgument(!originalTypeDescriptor.isTypeVariable());
 
     List<TypeDescriptor> typeArgumentDescriptors = Lists.newArrayList(typeArgumentTypeDescriptors);
     RegularTypeDescriptor newTypeDescriptor =
@@ -443,7 +431,7 @@ public class TypeDescriptors {
   // TypeDescriptor from a TypeBinding, it should go through the path to check array type.
   static TypeDescriptor createFromTypeBinding(
       final ITypeBinding typeBinding, List<TypeDescriptor> overrideTypeArgumentDescriptors) {
-    Preconditions.checkArgument(!typeBinding.isArray());
+    checkArgument(!typeBinding.isArray());
 
     // These must be lazily calculated or else there are guarranteed infinite loops of
     // TypeDescriptor creation.
@@ -673,7 +661,7 @@ public class TypeDescriptors {
       return "?";
     }
     if (typeDescriptor.isTypeVariable()) {
-      Preconditions.checkArgument(
+      checkArgument(
           typeDescriptor.getClassComponents().size() > 1,
           "Type Variable (not including wild card type) should have at least two name components");
 
@@ -699,8 +687,8 @@ public class TypeDescriptors {
   }
 
   public static TypeDescriptor getForArray(TypeDescriptor typeDescriptor, int dimensions) {
-    Preconditions.checkArgument(!typeDescriptor.isArray());
-    Preconditions.checkArgument(!typeDescriptor.isUnion());
+    checkArgument(!typeDescriptor.isArray());
+    checkArgument(!typeDescriptor.isUnion());
 
     if (dimensions == 0) {
       return typeDescriptor;
@@ -763,7 +751,7 @@ public class TypeDescriptors {
   }
 
   public static Expression getDefaultValue(TypeDescriptor typeDescriptor) {
-    Preconditions.checkArgument(!typeDescriptor.isUnion());
+    checkArgument(!typeDescriptor.isUnion());
 
     // Primitives.
     switch (typeDescriptor.getSourceName()) {

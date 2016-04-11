@@ -14,5 +14,11 @@ public class ArithmeticExpressions {
     int j = (1 + 2) * (3 + 4);
     boolean k = !(1 + 2 + 3 == 4);
     boolean l = (1 + 2 != 4);
+    boolean m = Long.MAX_VALUE != 9223372036854776833d;
+    getLongArray()[0]++;
+  }
+
+  static long[] getLongArray() {
+    return new long[10];
   }
 }

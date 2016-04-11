@@ -126,11 +126,13 @@ class LongUtils {
 
   /**
    * @param {!Long} valueLong The starting value to shift.
-   * @param {number} numBits The number of bits to shift to the left.
+   * @param {!Long} numBits The number of bits to shift to the left.
    * @return {!Long} A Long representing the left shifted value.
    * @public
    */
-  static $leftShift(valueLong, numBits) { return valueLong.shiftLeft(numBits); }
+  static $leftShift(valueLong, numBits) {
+    return valueLong.shiftLeft(numBits.toInt());
+  }
 
   /**
    * @param {!Long} leftLong The left Long in the operation.
@@ -206,22 +208,22 @@ class LongUtils {
 
   /**
    * @param {!Long} valueLong The starting value to shift.
-   * @param {number} numBits The number of bits to shift to the right.
+   * @param {!Long} numBits The number of bits to shift to the right.
    * @return {!Long} A Long representing the right shifted value.
    * @public
    */
   static $rightShiftSigned(valueLong, numBits) {
-    return valueLong.shiftRight(numBits);
+    return valueLong.shiftRight(numBits.toInt());
   }
 
   /**
    * @param {!Long} valueLong The starting value to shift.
-   * @param {number} numBits The number of bits to shift to the right.
+   * @param {!Long} numBits The number of bits to shift to the right.
    * @return {!Long} A Long representing the right shifted value.
    * @public
    */
   static $rightShiftUnsigned(valueLong, numBits) {
-    return valueLong.shiftRightUnsigned(numBits);
+    return valueLong.shiftRightUnsigned(numBits.toInt());
   }
 
   /**

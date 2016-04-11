@@ -15,7 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 
 /**
@@ -38,13 +39,12 @@ public class OperatorSideEffectUtils {
   public static final String NUMBERS_VALUE_TEMP = "$v";
 
   public static Expression splitBinaryExpression(BinaryExpression binaryExpression) {
-    Preconditions.checkArgument(binaryExpression.getOperator().isCompoundAssignment());
+    checkArgument(binaryExpression.getOperator().isCompoundAssignment());
 
     BinaryOperator operator = binaryExpression.getOperator();
     Expression leftOperand = binaryExpression.getLeftOperand();
     Expression rightOperand = binaryExpression.getRightOperand();
 
-    Expression qualifier = getQualifier(leftOperand);
 
     if (canExpressionBeEvaluatedTwice(leftOperand)) {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
@@ -58,6 +58,7 @@ public class OperatorSideEffectUtils {
     // care to only dereference the qualifier once (to avoid double side effects), store it in a
     // temporary variable and use that temporary variable in the rest of the computation.
     // q.a += b; => (Numbers.$q = q, Numbers.$q.a = Numbers.$q.a + b)
+    Expression qualifier = ((FieldAccess) leftOperand).getQualifier();
     BinaryExpression assignQualifier =
         new BinaryExpression(
             qualifier.getTypeDescriptor(),
@@ -73,8 +74,6 @@ public class OperatorSideEffectUtils {
     Expression operand = postfixExpression.getOperand();
     PostfixOperator operator = postfixExpression.getOperator();
     TypeDescriptor typeDescriptor = operand.getTypeDescriptor();
-
-    Expression qualifier = getQualifier(operand);
 
     if (canExpressionBeEvaluatedTwice(operand)) {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
@@ -100,7 +99,9 @@ public class OperatorSideEffectUtils {
     // temporary variable and use that temporary variable in the rest of the computation.
     // q.a++; =>
     // (Numbers.$q = q, Numbers.$v = Numbers.$q.a, Numbers.$q.a = Numbers.$q.a + 1, Numbers.$v)
-    FieldDescriptor target = ((FieldAccess) operand).getTarget();
+    FieldAccess fieldAccess = (FieldAccess) operand;
+    Expression qualifier = fieldAccess.getQualifier();
+    FieldDescriptor target = fieldAccess.getTarget();
 
     BinaryExpression assignQualifier =
         new BinaryExpression(
@@ -127,13 +128,12 @@ public class OperatorSideEffectUtils {
   }
 
   public static Expression splitPrefixExpression(PrefixExpression prefixExpression) {
-    Preconditions.checkArgument(prefixExpression.getOperator().hasSideEffect());
+    checkArgument(prefixExpression.getOperator().hasSideEffect());
 
     Expression operand = prefixExpression.getOperand();
     PrefixOperator operator = prefixExpression.getOperator();
     TypeDescriptor typeDescriptor = operand.getTypeDescriptor();
 
-    Expression qualifier = getQualifier(operand); // qualifier of the boxed instance
 
     if (canExpressionBeEvaluatedTwice(operand)) {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
@@ -147,6 +147,7 @@ public class OperatorSideEffectUtils {
     // care to only dereference the qualifier once (to avoid double side effects), store it in a
     // temporary variable and use that temporary variable in the rest of the computation.
     // ++q.a; => (Numbers.$q = q, Numbers.$q.a = Numbers.$q.a + 1)
+    Expression qualifier = ((FieldAccess) operand).getQualifier();
     BinaryExpression assignQualifier =
         new BinaryExpression(
             qualifier.getTypeDescriptor(),
@@ -190,11 +191,18 @@ public class OperatorSideEffectUtils {
    */
   private static BinaryExpression expandExpressionNoQualifier(
       Expression leftOperand, BinaryOperator operator, Expression rightOperand) {
-    TypeDescriptor numericTypeDescriptor =
-        TypeDescriptors.asOperatorReturnType(leftOperand.getTypeDescriptor());
+
+    // TODO: leftOperand is not being cloned and is duplicated in the AST. This
+    // violates the invariant that the AST is a proper tree (not a DAG). Fix.
+
     return BinaryExpression.Builder.assignTo(leftOperand)
         .rightOperand(
-            new BinaryExpression(numericTypeDescriptor, leftOperand, operator, rightOperand))
+            new BinaryExpression(
+                binaryOperationResultType(operator,
+                    leftOperand.getTypeDescriptor(), rightOperand.getTypeDescriptor()),
+                leftOperand,
+                operator,
+                rightOperand))
         .build();
   }
 
@@ -206,11 +214,11 @@ public class OperatorSideEffectUtils {
    */
   private static BinaryExpression expandExpressionWithQualifier(
       Expression leftOperand, BinaryOperator operator, Expression rightOperand) {
-    TypeDescriptor numericTypeDescriptor =
-        TypeDescriptors.asOperatorReturnType(leftOperand.getTypeDescriptor());
+
     BinaryExpression binaryExpression =
         new BinaryExpression(
-            numericTypeDescriptor,
+            binaryOperationResultType(operator,
+                leftOperand.getTypeDescriptor(), rightOperand.getTypeDescriptor()),
             replaceQualifier(leftOperand), // Numbers.$q.a
             operator,
             rightOperand);
@@ -224,27 +232,37 @@ public class OperatorSideEffectUtils {
   }
 
   /**
-   * If {@code expression} is in the form of q.boxA.intValue(), returns q.
-   * Else if {@code expression} is in the form of q.a, returns q.
-   * Otherwise returns null.
-   */
-  private static Expression getQualifier(Expression expression) {
-    if (!(expression instanceof FieldAccess)) {
-      return null;
-    }
-    return ((FieldAccess) expression).getQualifier();
-  }
-
-  /**
    * If the expression is a field access with a non-this qualifier, it needs to be split to avoid
    * double side-effect. Otherwise, it is a simple case.
    */
   private static boolean canExpressionBeEvaluatedTwice(Expression expression) {
-    if (!(expression instanceof FieldAccess)) {
+    if (expression instanceof VariableReference) {
       return true;
     }
-    FieldAccess fieldAccess = (FieldAccess) expression;
-    return AstUtils.hasThisReferenceAsQualifier(fieldAccess);
+
+    if (expression instanceof FieldAccess) {
+      FieldAccess fieldAccess = (FieldAccess) expression;
+      // TODO: This one could be relaxed by doing
+      //
+      //    return canBeEvaluatedTwice(fieldAccess.getQualifier());
+      //
+      // and adding a true return for a this reference.
+      return AstUtils.hasThisReferenceAsQualifier(fieldAccess);
+    }
+
+    // TODO: array access lvalues can have side effects but are not correctly covered here;
+    // the following code should be uncommented, and the code to pre evaluate the side effect
+    // expressions is fixed to handle array lvalues.
+    //
+    //    if (expression instanceof ArrayAccess) {
+    //      ArrayAccess arrayAccess = (ArrayAccess) expression;
+    //      return canExpressionBeEvaluatedTwice(arrayAccess.getArrayExpression())
+    //          && canExpressionBeEvaluatedTwice(arrayAccess.getIndexExpression());
+    //  }
+    //
+    //  return false;
+
+    return true;
   }
 
   /**
@@ -260,5 +278,93 @@ public class OperatorSideEffectUtils {
         createNumbersFieldAccess(
             NUMBERS_QUALIFIER_TEMP, ((FieldAccess) expression).getQualifier().getTypeDescriptor());
     return new FieldAccess(newQualifier, ((FieldAccess) expression).getTarget());
+  }
+
+  /**
+   * Determines the binary operation type based on the types of the operands.
+   */
+  private static TypeDescriptor binaryOperationResultType(BinaryOperator operator,
+      TypeDescriptor leftOperandType, TypeDescriptor rightRightType) {
+    TypeDescriptor unboxedLeftOperandType = unboxIfBoxedType(leftOperandType);
+
+    if (!unboxedLeftOperandType.isPrimitive()) {
+      // This is a string operation.
+      return unboxedLeftOperandType;
+    }
+
+    /**
+     * Rules per JLS (Chapter 15) require that binary promotion be previously applied to the
+     * operands and makes the operation to be the same type as both operands. Since this method
+     * is potentially called before or while numeric promotion is being performed there is no
+     * guarantee operand promotion was already performed; so that fact is taken into account.
+     *
+     */
+    switch (operator) {
+      /**
+       * Bitwise and logical operators: JLS 15.22.
+       */
+      case BIT_AND:
+      case BIT_OR:
+      case BIT_XOR:
+        if (unboxedLeftOperandType == TypeDescriptors.get().primitiveBoolean) {
+          // Handle logical operations (on type boolean).
+          return unboxedLeftOperandType;
+        }
+        // fallthrough for bitwise operations on numbers.
+      /**
+       * Additive operators for numeric types: JLS 15.18.2.
+       */
+      case PLUS:
+      case MINUS:
+      /**
+       * Multiplicative operators for numeric types: JLS 15.17.
+       */
+      case TIMES:
+      case DIVIDE:
+      case REMAINDER:
+        /**
+         * The type of the operation should the promoted type of the operands, which is equivalent
+         * to the widest type of its operands (or integer is integer is wider).
+         */
+        // TODO: Return primitiveInt if wider. Due to order in which promotion operations are
+        // applied doing so here breaks code.
+        checkArgument(TypeDescriptors.isBoxedOrPrimitiveType(rightRightType));
+        TypeDescriptor unboxedRightOperandType = unboxIfBoxedType(rightRightType);
+        return widerType(unboxedLeftOperandType, unboxedRightOperandType);
+      case LEFT_SHIFT:
+      case RIGHT_SHIFT_SIGNED:
+      case RIGHT_SHIFT_UNSIGNED:
+        /**
+         * Shift operators: JLS 15.19.
+         *
+         * Type type of the operation is the type of the promoted left hand operand.
+         */
+        return unboxedLeftOperandType;
+      default:
+        // This method only handles operations resulting from unfolding compound assignment
+        // expressions.
+        throw new IllegalArgumentException();
+    }
+  }
+
+  /**
+   * Returns the type descirptor for the wider type.
+   */
+  private static TypeDescriptor widerType(TypeDescriptor thisTypeDescriptor,
+      TypeDescriptor thatTypeDescriptor) {
+    return TypeDescriptors.getWidth(thatTypeDescriptor)
+        > TypeDescriptors.getWidth(thisTypeDescriptor)
+      ? thatTypeDescriptor : thisTypeDescriptor;
+  }
+
+  /**
+   * Returns the corresponding unboxed type if the {@code typeDescriptor} is a boxed type;
+   * {@code typeDescriptor} otherwise
+   */
+  private static TypeDescriptor unboxIfBoxedType(TypeDescriptor typeDescriptor) {
+    if (TypeDescriptors.isBoxedType(typeDescriptor)) {
+      return TypeDescriptors.getPrimitiveTypeFromBoxType(typeDescriptor);
+    }
+    return typeDescriptor;
   }
 }

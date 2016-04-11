@@ -68,9 +68,9 @@ class CastToPrimitive extends Object {
    * @public
    */
   m_test() {
-    let b = 1;
-    let c = 1;
-    let s = 1;
+    let b = $Primitives.$narrowIntToByte(1);
+    let c = $Primitives.$narrowIntToChar(1);
+    let s = $Primitives.$narrowIntToShort(1);
     let i = 1;
     let l = $LongUtils.$fromInt(1);
     let f = 1.100000023841858;

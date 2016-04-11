@@ -181,7 +181,6 @@ public class Main {
       assert new SubMain(fint).fieldLong == (long) fint;
     }
 
-    // Bit shift operations should coerce the right hand side to int (NOT long).
     {
       // If implicit casts away from long are not inserted then long library operations will receive
       // invalid parameters and result in a runtime error.
@@ -197,6 +196,24 @@ public class Main {
       assert tlong == 0L;
       tlong >>>= flong;
       assert tlong == 0L;
+    }
+
+    assert Long.MAX_VALUE != 9223372036854776833d;
+
+    {
+      // Long arrays
+      int i = 0;
+      long[] longArray = new long[3];
+      longArray[i++] += 3;
+
+      // TODO: the previous line should have been expanded into
+      //    ($index = i++, longArray[$index] = longArray[$index] + 3)
+      // but was expanded to
+      //    longArray[i++] = longArray[i++] + 3
+      // instead
+      // Look at TODOS in OperatorSideEffectUtils.java
+
+      // assert i == 1;
     }
   }
 }

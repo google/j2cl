@@ -20,7 +20,6 @@ import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
-import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsInfo;
@@ -63,19 +62,6 @@ public class NormalizeLongs extends AbstractRewriter {
 
     TypeDescriptor leftParameterTypeDescriptor = TypeDescriptors.get().primitiveLong;
     TypeDescriptor rightParameterTypeDescriptor = TypeDescriptors.get().primitiveLong;
-
-    // Our LongUtils shift functions require int for the second parameter. This is a special case
-    // that doesn't derive from Java itself but still needs to be taken care of.
-    if (operator.isShiftOperator()) {
-      rightParameterTypeDescriptor = TypeDescriptors.get().primitiveInt;
-    }
-
-    if (leftArgument.getTypeDescriptor() != leftParameterTypeDescriptor) {
-      leftArgument = CastExpression.create(leftArgument, leftParameterTypeDescriptor);
-    }
-    if (rightArgument.getTypeDescriptor() != rightParameterTypeDescriptor) {
-      rightArgument = CastExpression.create(rightArgument, rightParameterTypeDescriptor);
-    }
 
     MethodDescriptor longUtilsMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()

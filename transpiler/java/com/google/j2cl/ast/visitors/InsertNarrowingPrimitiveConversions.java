@@ -46,44 +46,68 @@ public class InsertNarrowingPrimitiveConversions extends ConversionContextVisito
           @Override
           public Expression rewriteAssignmentContext(
               TypeDescriptor toTypeDescriptor, Expression expression) {
-            // Under most circumstances an implicit narrowing is a compile error in assignment. In
-            // the rare circumstances where it is legal the JLS says it must be from a constant
-            // expression into a variable where the constant value fits with no conversion. So
-            // there is no work for us.
-            return expression;
+            TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
+
+            if (AstUtils.canRemoveCast(fromTypeDescriptor, toTypeDescriptor)
+                || !shouldNarrow(fromTypeDescriptor, toTypeDescriptor)) {
+              return expression;
+            }
+
+            return insertNarrowingCall(expression, toTypeDescriptor);
           }
 
           @Override
           public Expression rewriteCastContext(CastExpression castExpression) {
             Expression expression = castExpression.getExpression();
-            TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
             TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
+            TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
 
-            // Don't modify non-primitive casts.
-            if (!fromTypeDescriptor.isPrimitive() || !toTypeDescriptor.isPrimitive()) {
-              return castExpression;
-            }
-            // Remove completely redundant primitive casts.
-            if (fromTypeDescriptor == toTypeDescriptor) {
+            if (toTypeDescriptor.isPrimitive()
+                && fromTypeDescriptor.isPrimitive()
+                && AstUtils.canRemoveCast(fromTypeDescriptor, toTypeDescriptor)) {
               return expression;
             }
 
-            Set<TypeDescriptor> typeDescriptors =
-                Sets.newHashSet(fromTypeDescriptor, toTypeDescriptor);
+            if (!shouldNarrow(fromTypeDescriptor, toTypeDescriptor)) {
+              return castExpression;
+            }
+
+            return insertNarrowingCall(expression, toTypeDescriptor);
+          }
+
+          private boolean shouldNarrow(
+              TypeDescriptor fromTypeDescriptor, TypeDescriptor toTypeDescriptor) {
+
+            if (fromTypeDescriptor == toTypeDescriptor) {
+              return false;
+            }
+
+            if (!fromTypeDescriptor.isPrimitive() || !toTypeDescriptor.isPrimitive()) {
+              // Non-primitive casts are not narrowing.
+              return false;
+            }
 
             int fromWidth = TypeDescriptors.getWidth(fromTypeDescriptor);
             int toWidth = TypeDescriptors.getWidth(toTypeDescriptor);
 
-            // Don't modify non-narrowing casts, except for the special case between short and char.
+            Set<TypeDescriptor> typeDescriptors =
+                Sets.newHashSet(fromTypeDescriptor, toTypeDescriptor);
+
             if (fromWidth <= toWidth
                 && !(typeDescriptors.contains(TypeDescriptors.get().primitiveShort)
                     && typeDescriptors.contains(TypeDescriptors.get().primitiveChar))) {
-              return castExpression;
+              // Don't modify non-narrowing casts, except for the special case between
+              // short and char.
+              return false;
             }
-            // Don't emit known NOOP narrowings.
-            if (AstUtils.canRemoveCast(fromTypeDescriptor, toTypeDescriptor)) {
-              return expression;
-            }
+
+            return true;
+          }
+
+          private Expression insertNarrowingCall(
+              Expression expression, TypeDescriptor toTypeDescriptor) {
+
+            TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
 
             String narrowMethodName =
                 String.format(

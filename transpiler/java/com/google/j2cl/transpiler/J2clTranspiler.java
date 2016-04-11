@@ -174,11 +174,11 @@ public class J2clTranspiler {
       // Runs before unboxing conversion.
       InsertNarrowingReferenceConversions.applyTo(j2clUnit);
       InsertUnboxingConversions.applyTo(j2clUnit);
-      NormalizeLongs.applyTo(j2clUnit);
       InsertBoxingConversion.applyTo(j2clUnit);
       InsertNarrowingPrimitiveConversions.applyTo(j2clUnit);
       InsertWideningPrimitiveConversions.applyTo(j2clUnit);
       // TODO: InsertWideningAndNarrowingPrimitiveConversionVisitor.applyTo(j2clUnit);
+      NormalizeLongs.applyTo(j2clUnit);
       InsertUnderflowOverflowConversions.applyTo(j2clUnit);
       FixBooleanOperators.applyTo(j2clUnit);
       InsertStringConversions.applyTo(j2clUnit);

@@ -58,21 +58,21 @@ public class InsertWideningPrimitiveConversions extends ConversionContextVisitor
 
           @Override
           public Expression rewriteBinaryNumericPromotionContext(
-              Expression subjectOperandExpression, Expression otherOperandExpression) {
-            if (!otherOperandExpression.getTypeDescriptor().isPrimitive()
-                || !subjectOperandExpression.getTypeDescriptor().isPrimitive()) {
+              Expression subjectOperand, Expression otherOperand) {
+            if (!TypeDescriptors.isNumericPrimitive(subjectOperand.getTypeDescriptor())
+                || !TypeDescriptors.isNumericPrimitive(otherOperand.getTypeDescriptor())) {
               // Widening only applies between primitive types.
-              return subjectOperandExpression;
+              return subjectOperand;
             }
 
             TypeDescriptor widenedTypeDescriptor =
                 AstUtils.chooseWidenedTypeDescriptor(
-                    otherOperandExpression.getTypeDescriptor(),
-                    subjectOperandExpression.getTypeDescriptor());
-            if (!shouldWiden(widenedTypeDescriptor, subjectOperandExpression)) {
-              return subjectOperandExpression;
+                    otherOperand.getTypeDescriptor(),
+                    subjectOperand.getTypeDescriptor());
+            if (!shouldWiden(widenedTypeDescriptor, subjectOperand)) {
+              return subjectOperand;
             }
-            return widenTo(widenedTypeDescriptor, subjectOperandExpression);
+            return widenTo(widenedTypeDescriptor, subjectOperand);
           }
 
           @Override
@@ -99,7 +99,8 @@ public class InsertWideningPrimitiveConversions extends ConversionContextVisitor
       TypeDescriptor toTypeDescriptor, Expression subjectExpression) {
     TypeDescriptor fromTypeDescriptor = subjectExpression.getTypeDescriptor();
 
-    if (!fromTypeDescriptor.isPrimitive() || !toTypeDescriptor.isPrimitive()) {
+    if (!TypeDescriptors.isNumericPrimitive(fromTypeDescriptor)
+        || !TypeDescriptors.isNumericPrimitive(toTypeDescriptor)) {
       // Widening only applies between primitive types.
       return false;
     }
