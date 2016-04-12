@@ -42,6 +42,7 @@ import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeProxyUtils;
+import com.google.j2cl.ast.TypeProxyUtils.Nullability;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.common.PackageInfoCache;
@@ -85,8 +86,6 @@ public class JdtUtils {
         : compilationUnit.getPackage().getName().getFullyQualifiedName();
   }
 
-  // TODO(simionato): Delete this method and make all the callers use
-  // createTypeDescriptorWithNullability.
   static TypeDescriptor createTypeDescriptor(ITypeBinding typeBinding) {
     return TypeProxyUtils.createTypeDescriptor(typeBinding);
   }
@@ -148,8 +147,11 @@ public class JdtUtils {
     TypeDescriptor enclosingClassTypeDescriptor =
         createTypeDescriptor(variableBinding.getDeclaringClass());
     String fieldName = variableBinding.getName();
-    TypeDescriptor thisTypeDescriptor = createTypeDescriptorWithNullability(
-        variableBinding.getType(), variableBinding.getDeclaringClass().getPackage().getName());
+    TypeDescriptor thisTypeDescriptor = TypeProxyUtils.createTypeDescriptorWithNullability(
+        variableBinding.getType(),
+        variableBinding,
+        TypeProxyUtils.getPackageDefaultNullability(
+            variableBinding.getDeclaringClass().getPackage()));
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableBinding);
     boolean isRaw = jsInfo.getJsMemberType() == JsMemberType.PROPERTY;
     boolean isJsOverlay = JsInteropUtils.isJsOverlay(variableBinding);
@@ -170,9 +172,11 @@ public class JdtUtils {
     return JdtMethodUtils.createMethodDescriptor(methodBinding);
   }
 
-  static Variable createVariable(IVariableBinding variableBinding) {
+  static Variable createVariable(IVariableBinding variableBinding, Nullability defaultNullability) {
     String name = variableBinding.getName();
-    TypeDescriptor typeDescriptor = createTypeDescriptor(variableBinding.getType());
+    TypeDescriptor typeDescriptor =
+        TypeProxyUtils.createTypeDescriptorWithNullability(
+            variableBinding.getType(), variableBinding, defaultNullability);
     boolean isFinal = isFinal(variableBinding.getModifiers());
     boolean isParameter = variableBinding.isParameter();
     return new Variable(name, typeDescriptor, isFinal, isParameter);

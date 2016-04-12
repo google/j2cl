@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.common;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.errors.Errors;
@@ -57,6 +58,11 @@ public class PackageInfoCache {
 
   public static PackageInfoCache get() {
     return Preconditions.checkNotNull(packageInfoCacheStorage.get());
+  }
+
+  @VisibleForTesting
+  public static void clear() {
+    packageInfoCacheStorage.remove();
   }
 
   public static void init(List<String> classPathEntries, Errors errors) {

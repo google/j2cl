@@ -21,6 +21,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Sets;
+import com.google.j2cl.ast.TypeProxyUtils.Nullability;
 
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
@@ -76,11 +77,14 @@ public class JdtMethodUtils {
         isConstructor
             ? TypeProxyUtils.createTypeDescriptor(methodBinding.getDeclaringClass()).getClassName()
             : methodBinding.getName();
+    final Nullability defaultNullabilityForPackage =
+        TypeProxyUtils.getPackageDefaultNullability(methodBinding.getDeclaringClass().getPackage());
 
     JsInfo jsInfo = computeJsInfo(methodBinding);
 
     TypeDescriptor returnTypeDescriptor =
-        TypeProxyUtils.createTypeDescriptor(methodBinding.getReturnType());
+        TypeProxyUtils.createTypeDescriptorWithNullability(
+            methodBinding.getReturnType(), methodBinding, defaultNullabilityForPackage);
 
     // generate parameters type descriptors.
     Iterable<TypeDescriptor> parameterTypeDescriptors =
@@ -89,7 +93,8 @@ public class JdtMethodUtils {
                 new Function<ITypeBinding, TypeDescriptor>() {
                   @Override
                   public TypeDescriptor apply(ITypeBinding typeBinding) {
-                    return TypeProxyUtils.createTypeDescriptor(typeBinding);
+                    return TypeProxyUtils.createTypeDescriptorWithNullability(
+                        typeBinding, null, defaultNullabilityForPackage);
                   }
                 });
     // generate type parameters declared in the method.

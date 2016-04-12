@@ -12,6 +12,7 @@ let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Double = goog.forwardDeclare('gen.java.lang.Double$impl');
 let String = goog.forwardDeclare('gen.java.lang.String$impl');
 let ArrayList = goog.forwardDeclare('gen.java.util.ArrayList$impl');
 let List = goog.forwardDeclare('gen.java.util.List$impl');
@@ -26,32 +27,37 @@ class DefaultNonNullable extends Object {
     /**
      * @public {string}
      */
-    this.f_a__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
+    this.f_f1__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
         null;
     /**
      * @public {?string}
      */
-    this.f_b__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
+    this.f_f2__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
+        null;
+    /**
+     * @public {?string}
+     */
+    this.f_f3__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
         null;
     /**
      * @public {!List<string>}
      */
-    this.f_c__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
+    this.f_f4__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
         null;
     /**
      * @public {List<string>}
      */
-    this.f_d__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
+    this.f_f5__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
         null;
     /**
      * @public {!List<?string>}
      */
-    this.f_e__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
+    this.f_f6__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
         null;
     /**
      * @public {List<?string>}
      */
-    this.f_f__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
+    this.f_f7__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
         null;
   }
 
@@ -79,6 +85,22 @@ class DefaultNonNullable extends Object {
   }
 
   /**
+   * @param {string} a
+   * @param {!List<number>} b
+   * @return {string}
+   * @public
+   */
+  m_m1__java_lang_String__java_util_List(a, b) { return ''; }
+
+  /**
+   * @param {?string} a
+   * @param {!List<?number>} b
+   * @return {?string}
+   * @public
+   */
+  m_m2__java_lang_String__java_util_List(a, b) { return null; }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -104,6 +126,7 @@ class DefaultNonNullable extends Object {
    */
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
+    Double = goog.module.get('gen.java.lang.Double$impl');
     String = goog.module.get('gen.java.lang.String$impl');
     ArrayList = goog.module.get('gen.java.util.ArrayList$impl');
     List = goog.module.get('gen.java.util.List$impl');
@@ -115,17 +138,19 @@ class DefaultNonNullable extends Object {
    * @private
    */
   $init__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable() {
-    this.f_a__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
+    this.f_f1__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
         'Hello';
-    this.f_b__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
+    this.f_f2__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
         null;
-    this.f_c__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
+    this.f_f3__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
+        null;
+    this.f_f4__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
         /**@type {!ArrayList<?string>} */ (ArrayList.$create());
-    this.f_d__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
+    this.f_f5__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
         /**@type {!ArrayList<?string>} */ (ArrayList.$create());
-    this.f_e__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
+    this.f_f6__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
         /**@type {!ArrayList<?string>} */ (ArrayList.$create());
-    this.f_f__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
+    this.f_f7__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
         null;
   }
 };

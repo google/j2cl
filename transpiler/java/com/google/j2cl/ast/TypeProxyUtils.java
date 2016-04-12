@@ -18,8 +18,13 @@ package com.google.j2cl.ast;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.Iterables;
+import com.google.j2cl.common.PackageInfoCache;
 
+import org.eclipse.jdt.core.dom.IAnnotationBinding;
+import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
+import org.eclipse.jdt.core.dom.IPackageBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.Modifier;
 
@@ -34,10 +39,85 @@ import java.util.List;
  */
 public class TypeProxyUtils {
   /**
+   * The nullability of a package, type, class, etc.
+   */
+  public enum Nullability {
+    NULL,
+    NOT_NULL
+  }
+
+  /**
    * Creates a TypeDescriptor from a JDT TypeBinding.
    */
+  // TODO(simionato): Delete this method and make all the callers use
+  // createTypeDescriptorWithNullability.
   public static TypeDescriptor createTypeDescriptor(ITypeBinding typeBinding) {
     return createTypeDescriptor(typeBinding, null);
+  }
+
+  /**
+   * Creates a type descriptor for the given type binding, taking into account nullability.
+   * @param typeBinding the type binding, used to create the type descriptor.
+   * @param elementBinding type element binding, for example an IMethodBinding, used to look for
+   *     nullability annotations.
+   */
+  public static TypeDescriptor createTypeDescriptorWithNullability(
+      ITypeBinding typeBinding, IBinding elementBinding,
+      Nullability defaultNullabilityForCompilationUnit) {
+    TypeDescriptor descriptor;
+    if (typeBinding.isParameterizedType()) {
+      List<TypeDescriptor> typeArgumentsDescriptors = new ArrayList<>();
+      for (ITypeBinding typeArgumentBinding : typeBinding.getTypeArguments()) {
+        typeArgumentsDescriptors.add(
+            createTypeDescriptorWithNullability(typeArgumentBinding, null,
+                defaultNullabilityForCompilationUnit));
+      }
+      descriptor = createTypeDescriptor(typeBinding, typeArgumentsDescriptors);
+    } else {
+      descriptor = createTypeDescriptor(typeBinding);
+    }
+
+    return isNullable(typeBinding, elementBinding, defaultNullabilityForCompilationUnit)
+        ? descriptor
+        : descriptor.getNonNullable();
+  }
+
+  /**
+   * Returns whether the given type binding should be nullable, according to the annotations on it
+   * and if nullability is enabled for the package containing the binding.
+   */
+  private static boolean isNullable(
+      ITypeBinding typeBinding, IBinding elementBinding,
+      Nullability defaultNullabilityForCompilationUnit) {
+    if (typeBinding.isPrimitive()) {
+      return false;
+    }
+    if (defaultNullabilityForCompilationUnit == Nullability.NULL) {
+      return true;
+    }
+    Iterable<IAnnotationBinding> allAnnotations =
+        Iterables.concat(
+            elementBinding == null
+                ? new ArrayList<IAnnotationBinding>()
+                : Arrays.asList(elementBinding.getAnnotations()),
+            Arrays.asList(typeBinding.getTypeAnnotations()),
+            Arrays.asList(typeBinding.getAnnotations()));
+    for (IAnnotationBinding annotation : allAnnotations) {
+      if (annotation.getName().equals("Nullable") || annotation.getName().equals("NullableType")) {
+        return true;
+      }
+      // TODO(simionato): Consider supporting NotNull as well.
+    }
+    return false;
+  }
+
+  /**
+   * Gets the default nullability for the given package, by examining the package-info file.
+   */
+  public static Nullability getPackageDefaultNullability(IPackageBinding packageBinding) {
+    boolean nullabilityEnabled =
+        PackageInfoCache.get().isNullabilityEnabled(packageBinding.getName());
+    return nullabilityEnabled ? Nullability.NOT_NULL : Nullability.NULL;
   }
 
   /**

@@ -22,6 +22,7 @@ import com.google.common.flags.Flag;
 import com.google.common.flags.FlagSpec;
 import com.google.common.flags.Flags;
 import com.google.common.flags.InvalidFlagValueException;
+import com.google.j2cl.common.PackageInfoCache;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.frontend.JdtParser;
 
@@ -52,6 +53,8 @@ public class JsniConverter {
 
   @FlagSpec(name = "excludes", help = "The paths of files whose JSNI to exclude.")
   private static final Flag<List<String>> excludesFlag = Flag.stringCollector();
+
+  private final Errors errors = new Errors();
 
   public static void main(String[] args) throws InvalidFlagValueException {
     String[] fileNames = Flags.parseAndReturnLeftovers(args);
@@ -121,6 +124,9 @@ public class JsniConverter {
   public void convert(
       List<String> javaFileNames, List<String> classPathEntries, Set<String> excludeFileNames) {
     Multimap<String, JsniMethod> jsniMethodsByType = ArrayListMultimap.create();
+
+    PackageInfoCache.init(classPathEntries, errors);
+    errors.maybeReportAndExit();
 
     for (Entry<String, CompilationUnit> entry :
         getCompilationUnitsByPath(javaFileNames, classPathEntries).entrySet()) {

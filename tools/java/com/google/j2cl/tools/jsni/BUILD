@@ -19,6 +19,7 @@ java_library(
         "//java/com/google/common/io",
         "//third_party/java/eclipse:eclipse-jdt-core",
         "//transpiler/java/com/google/j2cl/ast",
+        "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/errors",
         "//transpiler/java/com/google/j2cl/frontend",
         "//transpiler/java/com/google/j2cl/generator",

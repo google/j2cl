@@ -76,6 +76,8 @@ import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeProxyUtils;
+import com.google.j2cl.ast.TypeProxyUtils.Nullability;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
@@ -358,7 +360,11 @@ public class CompilationUnitBuilder {
       for (Object element : methodDeclaration.parameters()) {
         SingleVariableDeclaration parameter = (SingleVariableDeclaration) element;
         IVariableBinding parameterBinding = parameter.resolveBinding();
-        Variable j2clParameter = JdtUtils.createVariable(parameterBinding);
+        Variable j2clParameter =
+            JdtUtils.createVariable(
+                parameterBinding,
+                TypeProxyUtils.getPackageDefaultNullability(
+                    methodDeclaration.resolveBinding().getDeclaringClass().getPackage()));
         parameters.add(j2clParameter);
         variableByJdtBinding.put(parameterBinding, j2clParameter);
       }
@@ -1706,7 +1712,7 @@ public class CompilationUnitBuilder {
     private VariableDeclarationFragment convert(
         org.eclipse.jdt.core.dom.VariableDeclarationFragment variableDeclarationFragment) {
       IVariableBinding variableBinding = variableDeclarationFragment.resolveBinding();
-      Variable variable = JdtUtils.createVariable(variableBinding);
+      Variable variable = JdtUtils.createVariable(variableBinding, Nullability.NULL);
       recordEnclosingType(variable, currentType);
       Expression initializer =
           variableDeclarationFragment.getInitializer() == null
