@@ -16,6 +16,9 @@ let Double = goog.forwardDeclare('gen.java.lang.Double$impl');
 let String = goog.forwardDeclare('gen.java.lang.String$impl');
 let ArrayList = goog.forwardDeclare('gen.java.util.ArrayList$impl');
 let List = goog.forwardDeclare('gen.java.util.List$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
 
 
 class DefaultNullable extends Object {
@@ -59,6 +62,21 @@ class DefaultNullable extends Object {
      */
     this.f_f7__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ =
         null;
+    /**
+     * @public {Array<?string>}
+     */
+    this.f_f8__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ =
+        null;
+    /**
+     * @public {Array<?string>}
+     */
+    this.f_f9__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ =
+        null;
+    /**
+     * @public {Array<?string>}
+     */
+    this.f_f10__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ =
+        null;
   }
 
   /**
@@ -101,6 +119,18 @@ class DefaultNullable extends Object {
   m_m2__java_lang_String__java_util_List(a, b) { return null; }
 
   /**
+   * @param {...?string} args
+   * @return {void}
+   * @public
+   */
+  m3(args) {
+    let $var_args_copy = /**@type {!Array<?string>} */ (
+        $Arrays.$create([arguments.length], String));
+    for (let $i = 0; $i < arguments.length; $i++)
+      $Arrays.$set($var_args_copy, $i, arguments[$i]);
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -128,6 +158,9 @@ class DefaultNullable extends Object {
     String = goog.module.get('gen.java.lang.String$impl');
     ArrayList = goog.module.get('gen.java.util.ArrayList$impl');
     List = goog.module.get('gen.java.util.List$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
     Object.$clinit();
   }
 
@@ -150,6 +183,12 @@ class DefaultNullable extends Object {
         /**@type {!ArrayList<?string>} */ (ArrayList.$create());
     this.f_f7__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ =
         null;
+    this.f_f8__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ =
+        /**@type {!Array<?string>} */ ($Arrays.$init([], String));
+    this.f_f9__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ =
+        /**@type {!Array<?string>} */ ($Arrays.$init([], String));
+    this.f_f10__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ =
+        /**@type {!Array<?string>} */ ($Arrays.$init([], String));
   }
 };
 

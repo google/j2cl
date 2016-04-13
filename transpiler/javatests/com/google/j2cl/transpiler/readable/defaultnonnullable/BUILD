@@ -14,6 +14,7 @@ readable_example(
     srcs = glob(["*.java"]),
     deps = [
         "//third_party/java/checker_framework:annotations-j2cl",
+        "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
         "//third_party/java/jsr305_annotations:jsr305_annotations-j2cl",
     ],
 )

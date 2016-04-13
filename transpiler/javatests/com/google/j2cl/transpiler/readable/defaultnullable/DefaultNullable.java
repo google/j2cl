@@ -1,5 +1,7 @@
 package com.google.j2cl.transpiler.readable.defaultnullable;
 
+import jsinterop.annotations.JsMethod;
+
 import org.checkerframework.checker.nullness.compatqual.NullableType;
 
 import java.util.ArrayList;
@@ -15,6 +17,11 @@ public class DefaultNullable {
   @Nullable private List<String> f5 = new ArrayList<>();
   private List<@NullableType String> f6 = new ArrayList<>();
   @Nullable private List<@NullableType String> f7 = null;
+  private String[] f8 = {};
+  // Nonnullable array of nullable strings.
+  @org.checkerframework.checker.nullness.qual.Nullable private String[] f9 = {};
+  // Nullable array of non-nullable strings.
+  private String @NullableType [] f10 = {};
 
   public String m1(String a, List<Double> b) {
     return "";
@@ -23,5 +30,9 @@ public class DefaultNullable {
   @Nullable
   public String m2(@Nullable String a, List<@NullableType Double> b) {
     return null;
+  }
+
+  @JsMethod
+  public void m3(String... args) {
   }
 }

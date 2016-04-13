@@ -65,7 +65,11 @@ public class TypeProxyUtils {
       ITypeBinding typeBinding, IBinding elementBinding,
       Nullability defaultNullabilityForCompilationUnit) {
     TypeDescriptor descriptor;
-    if (typeBinding.isParameterizedType()) {
+    if (typeBinding.isArray()) {
+      TypeDescriptor leafTypeDescriptor = createTypeDescriptorWithNullability(
+          typeBinding.getElementType(), null, defaultNullabilityForCompilationUnit);
+      descriptor = TypeDescriptors.getForArray(leafTypeDescriptor, typeBinding.getDimensions());
+    } else if (typeBinding.isParameterizedType()) {
       List<TypeDescriptor> typeArgumentsDescriptors = new ArrayList<>();
       for (ITypeBinding typeArgumentBinding : typeBinding.getTypeArguments()) {
         typeArgumentsDescriptors.add(

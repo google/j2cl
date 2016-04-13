@@ -32,6 +32,7 @@ import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.NonNullableTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
@@ -116,10 +117,17 @@ public class GeneratorUtils {
             String name = environment.aliasForVariable(variable);
             if (method.getDescriptor().isJsMethodVarargs() && isLast) {
               // The parameter is a js var arg so we convert the type to an array
-              Preconditions.checkArgument(parameterTypeDescriptor.isArray());
+              TypeDescriptor nullableTypeDescriptor;
+              if (parameterTypeDescriptor instanceof NonNullableTypeDescriptor) {
+                nullableTypeDescriptor = ((NonNullableTypeDescriptor) parameterTypeDescriptor)
+                    .getUnderlyingTypeDescriptor();
+              } else {
+                nullableTypeDescriptor = parameterTypeDescriptor;
+              }
+              Preconditions.checkArgument(nullableTypeDescriptor.isArray());
               String typeName =
                   JsDocNameUtils.getJsDocName(
-                      ((ArrayTypeDescriptor) parameterTypeDescriptor).getComponentTypeDescriptor(),
+                      ((ArrayTypeDescriptor) nullableTypeDescriptor).getComponentTypeDescriptor(),
                       environment);
               return String.format("{...%s} %s", typeName, name);
             } else {

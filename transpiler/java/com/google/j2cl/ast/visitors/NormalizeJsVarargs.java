@@ -34,6 +34,7 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.Node;
+import com.google.j2cl.ast.NonNullableTypeDescriptor;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PostfixOperator;
@@ -142,9 +143,14 @@ public class NormalizeJsVarargs extends AbstractRewriter {
                   argumentsLengthReference,
                   BinaryOperator.MINUS,
                   new NumberLiteral(primitiveInt, varargsIndex));
+
+      TypeDescriptor typeDescriptor = varargsParameter.getTypeDescriptor();
+      if (typeDescriptor instanceof NonNullableTypeDescriptor) {
+        typeDescriptor = ((NonNullableTypeDescriptor) typeDescriptor).getUnderlyingTypeDescriptor();
+      }
       Expression newArray =
           new NewArray(
-              (ArrayTypeDescriptor) varargsParameter.getTypeDescriptor(),
+              (ArrayTypeDescriptor) typeDescriptor,
               Arrays.<Expression>asList(arraySize),
               null);
       Statement variableDeclaration =
