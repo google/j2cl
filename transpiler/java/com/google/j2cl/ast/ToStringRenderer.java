@@ -129,6 +129,18 @@ class ToStringRenderer {
       }
 
       @Override
+      public boolean enterCompilationUnit(CompilationUnit compilationUnit) {
+        print("package  " + compilationUnit.getPackageName() + ";");
+        newLine();
+        newLine();
+        for (JavaType type : compilationUnit.getTypes()) {
+          accept(type);
+          newLine();
+        }
+        return false;
+      }
+
+      @Override
       public boolean enterConditionalExpression(ConditionalExpression conditionalExpression) {
         accept(conditionalExpression.getConditionExpression());
         print(" ? ");
@@ -179,9 +191,35 @@ class ToStringRenderer {
       }
 
       @Override
+      public boolean enterField(Field field) {
+        print(field.getDescriptor().getTypeDescriptor());
+        print(" ");
+        print(field.getDescriptor().toString());
+        indent();
+        if (field.getInitializer() != null) {
+          print(" = ");
+          accept(field.getInitializer());
+        }
+        print(";");
+        unIndent();
+        return false;
+      }
+
+      @Override
       public boolean enterFieldAccess(FieldAccess fieldAccess) {
-        accept(fieldAccess.getQualifier());
+        if (fieldAccess.getQualifier() != null) {
+          accept(fieldAccess.getQualifier());
+          print(".");
+        }
         print(fieldAccess.getTarget().getFieldName());
+        return false;
+      }
+
+      @Override
+      public boolean enterFieldDescriptor(FieldDescriptor fieldDescriptor) {
+        print(fieldDescriptor.getEnclosingClassTypeDescriptor());
+        print(".");
+        print(fieldDescriptor.getFieldName());
         return false;
       }
 
@@ -235,6 +273,27 @@ class ToStringRenderer {
         print(" {");
         newLine();
         indent();
+
+        for (Field field : javaType.getFields()) {
+          accept(field);
+          newLine();
+        }
+
+        if (!javaType.instanceInitializerBlocks.isEmpty()) {
+          for (Block block : javaType.instanceInitializerBlocks) {
+            accept(block);
+            newLine();
+          }
+        }
+
+        if (!javaType.staticInitializerBlocks.isEmpty()) {
+          for (Block block : javaType.staticInitializerBlocks) {
+            print("static ");
+            accept(block);
+            newLine();
+          }
+        }
+
         for (Method method : javaType.getMethods()) {
           accept(method);
           newLine();
@@ -263,6 +322,14 @@ class ToStringRenderer {
       public boolean enterMethodCall(MethodCall methodCall) {
         accept(methodCall.qualifier);
         printInvocation(methodCall, "." + methodCall.getTarget().getMethodName());
+        return false;
+      }
+
+      @Override
+      public boolean enterMethodDescriptor(MethodDescriptor methodDescriptor) {
+        print(methodDescriptor.getEnclosingClassTypeDescriptor());
+        print(".");
+        print(methodDescriptor.getMethodName());
         return false;
       }
 
@@ -443,6 +510,12 @@ class ToStringRenderer {
           print(" finally ");
           accept(tryStatement.getFinallyBlock());
         }
+        return false;
+      }
+
+      @Override
+      public boolean enterTypeDescriptor(TypeDescriptor typeDescriptor) {
+        print(typeDescriptor.getSourceName());
         return false;
       }
 

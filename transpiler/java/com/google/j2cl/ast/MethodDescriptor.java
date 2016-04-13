@@ -185,11 +185,6 @@ public abstract class MethodDescriptor extends Node implements Member {
     return Visitor_MethodDescriptor.visit(processor, this);
   }
 
-  @Override
-  public String toString() {
-    return getEnclosingClassTypeDescriptor().toString() + "." + getMethodName();
-  }
-
   /**
    * A Builder for easily and correctly creating modified versions of MethodDescriptors.
    */
