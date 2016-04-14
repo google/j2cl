@@ -5,7 +5,7 @@ public class SimpleTryCatchThrow {
     try {
       throw new ClassCastException();
     } catch (NullPointerException | ClassCastException e) {
-      // expected empty body.
+      System.out.println("saw exception: " + e);
     } finally {
     }
   }

@@ -57,12 +57,12 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
 
   @Override
   public ImmutableList<String> getClassComponents() {
-    throw new UnsupportedOperationException();
+    return null;
   }
 
   @Override
   public String getClassName() {
-    throw new UnsupportedOperationException();
+    return null;
   }
 
   @Override
@@ -72,7 +72,7 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
 
   @Override
   public MethodDescriptor getConcreteJsFunctionMethodDescriptor() {
-    throw new UnsupportedOperationException();
+    return null;
   }
 
   @Override
@@ -82,22 +82,22 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
 
   @Override
   public TypeDescriptor getEnclosingTypeDescriptor() {
-    throw new UnsupportedOperationException();
+    return null;
   }
 
   @Override
   public MethodDescriptor getJsFunctionMethodDescriptor() {
-    throw new UnsupportedOperationException();
+    return null;
   }
 
   @Override
   public String getJsName() {
-    throw new UnsupportedOperationException();
+    return null;
   }
 
   @Override
   public String getJsNamespace() {
-    throw new UnsupportedOperationException();
+    return null;
   }
 
   @Override
@@ -107,12 +107,12 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
 
   @Override
   public ImmutableList<String> getPackageComponents() {
-    throw new UnsupportedOperationException();
+    return null;
   }
 
   @Override
   public String getPackageName() {
-    throw new UnsupportedOperationException();
+    return null;
   }
 
   @Override
@@ -127,17 +127,17 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
 
   @Override
   public String getSimpleName() {
-    throw new UnsupportedOperationException();
+    return null;
   }
 
   @Override
   public String getSourceName() {
-    throw new UnsupportedOperationException();
+    return null;
   }
 
   @Override
   public TypeDescriptor getSuperTypeDescriptor() {
-    throw new UnsupportedOperationException();
+    return null;
   }
 
   @Override
@@ -163,7 +163,7 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
 
   @Override
   public Visibility getVisibility() {
-    throw new UnsupportedOperationException();
+    return null;
   }
 
   @Override

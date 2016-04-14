@@ -11,9 +11,12 @@ goog.module('gen.com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleT
 let Object = goog.require('gen.java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let PrintStream = goog.forwardDeclare('gen.java.io.PrintStream$impl');
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let ClassCastException = goog.forwardDeclare('gen.java.lang.ClassCastException$impl');
 let NullPointerException = goog.forwardDeclare('gen.java.lang.NullPointerException$impl');
+let String = goog.forwardDeclare('gen.java.lang.String$impl');
+let System = goog.forwardDeclare('gen.java.lang.System$impl');
 let Throwable = goog.forwardDeclare('gen.java.lang.Throwable$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
@@ -58,6 +61,8 @@ class SimpleTryCatchThrow extends Object {
       e = $Exceptions.toJava(e);
       if (NullPointerException.$isInstance(e) ||
           ClassCastException.$isInstance(e)) {
+        System.f_out__java_lang_System.m_println__java_lang_String(
+            'saw exception: ' + String.m_valueOf__java_lang_Object(e));
       } else {
         throw $Exceptions.toJs(e);
       }
@@ -90,11 +95,14 @@ class SimpleTryCatchThrow extends Object {
    * @public
    */
   static $clinit() {
+    PrintStream = goog.module.get('gen.java.io.PrintStream$impl');
     Class = goog.module.get('gen.java.lang.Class$impl');
     ClassCastException =
         goog.module.get('gen.java.lang.ClassCastException$impl');
     NullPointerException =
         goog.module.get('gen.java.lang.NullPointerException$impl');
+    String = goog.module.get('gen.java.lang.String$impl');
+    System = goog.module.get('gen.java.lang.System$impl');
     Throwable = goog.module.get('gen.java.lang.Throwable$impl');
     $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
     Object.$clinit();
