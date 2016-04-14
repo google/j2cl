@@ -25,7 +25,6 @@ import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.AnonymousJavaType;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
-import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
@@ -155,8 +154,8 @@ public class CompilationUnitBuilder {
       // Records information about package-info files supplied as source code.
       if (currentSourceFile.endsWith("package-info.java")
           && jdtCompilationUnit.getPackage() != null) {
-        packageInfoCache.setPackageAnnotations(packageName,
-            jdtCompilationUnit.getPackage().annotations());
+        packageInfoCache.setPackageAnnotations(
+            packageName, jdtCompilationUnit.getPackage().annotations());
       }
       for (Object object : jdtCompilationUnit.types()) {
         AbstractTypeDeclaration abstractTypeDeclaration = (AbstractTypeDeclaration) object;
@@ -405,15 +404,15 @@ public class CompilationUnitBuilder {
       ArrayLiteral arrayLiteral =
           expression.getInitializer() == null ? null : convert(expression.getInitializer());
 
-      ArrayTypeDescriptor typeDescriptor =
-          (ArrayTypeDescriptor) JdtUtils.createTypeDescriptor(expression.resolveTypeBinding());
+      TypeDescriptor typeDescriptor =
+          JdtUtils.createTypeDescriptor(expression.resolveTypeBinding());
       return new NewArray(typeDescriptor, dimensionExpressions, arrayLiteral);
     }
 
     @SuppressWarnings("unchecked")
     private ArrayLiteral convert(org.eclipse.jdt.core.dom.ArrayInitializer expression) {
       return new ArrayLiteral(
-          (ArrayTypeDescriptor) JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
+          JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()),
           convertExpressions(expression.expressions()));
     }
 
@@ -481,8 +480,7 @@ public class CompilationUnitBuilder {
           // Note that we get the types from the declaration, not the binding, because we need the
           // declared type to figure out how to reference the method.
           TypeDescriptor[] superConstructorImplicitParameterTypeDescriptors =
-              getParameterTypeDescriptors(
-                  methodBinding.getMethodDeclaration().getParameterTypes());
+              getParameterTypeDescriptors(methodBinding.getMethodDeclaration().getParameterTypes());
           anonymousClass.addSuperConstructorParameterTypeDescriptors(
               Arrays.asList(superConstructorImplicitParameterTypeDescriptors));
         }
@@ -492,8 +490,7 @@ public class CompilationUnitBuilder {
     }
 
     private TypeDescriptor[] getParameterTypeDescriptors(ITypeBinding[] parameterTypes) {
-      return FluentIterable
-          .from(Arrays.asList(parameterTypes))
+      return FluentIterable.from(Arrays.asList(parameterTypes))
           .transform(
               new Function<ITypeBinding, TypeDescriptor>() {
                 @Override
@@ -1005,11 +1002,9 @@ public class CompilationUnitBuilder {
       /**
        * Lambda expression is converted to an inner class:
        *
-       * class Enclosing$lambda$0 implements I {
-       *   Enclosing$lambda$0(captures) {// initialize captures}
-       *   private T lambda$0(args) {...lambda_expression_with_captures ... }
-       *   public T samMethod0(args) { return this.lambda$0(args); }
-       * }
+       * class Enclosing$lambda$0 implements I { Enclosing$lambda$0(captures) {// initialize
+       * captures} private T lambda$0(args) {...lambda_expression_with_captures ... } public T
+       * samMethod0(args) { return this.lambda$0(args); } }
        *
        * And replaces the lambda with new Enclosing$lambda$0(captures).
        */
@@ -1226,8 +1221,8 @@ public class CompilationUnitBuilder {
 
     /**
      * Returns a qualifier for a method invocation that doesn't have one, specifically,
-     * instanceMethod() will return a resolved qualifier that may refer to "this" or to
-     * the enclosing instances. A staticMethod() will return null.
+     * instanceMethod() will return a resolved qualifier that may refer to "this" or to the
+     * enclosing instances. A staticMethod() will return null.
      */
     private Expression getExplicitQualifier(
         org.eclipse.jdt.core.dom.MethodInvocation methodInvocation) {
@@ -1316,10 +1311,8 @@ public class CompilationUnitBuilder {
         IMethodBinding methodBinding, List<Expression> j2clArguments) {
       Preconditions.checkArgument(methodBinding.isVarargs());
       int parametersLength = methodBinding.getParameterTypes().length;
-      ArrayTypeDescriptor varargsTypeDescriptor =
-          (ArrayTypeDescriptor)
-              JdtUtils.createTypeDescriptor(
-                  methodBinding.getParameterTypes()[parametersLength - 1]);
+      TypeDescriptor varargsTypeDescriptor =
+          JdtUtils.createTypeDescriptor(methodBinding.getParameterTypes()[parametersLength - 1]);
       if (j2clArguments.size() < parametersLength) {
         // no argument for the varargs, add an empty array.
         return new ArrayLiteral(varargsTypeDescriptor);
@@ -1484,13 +1477,12 @@ public class CompilationUnitBuilder {
     /**
      * Convert A.this to corresponding field access knowing A's type is {@code outerTypeBinding}.
      * <p>
-     * In the case of outside a constructor,
-     * if A is the direct enclosing class, A.this => this.f_$outer_this.
-     * if A is the enclosing class of the direct enclosing class,
-     * A.this => this.f_$outer_this$.f_$outer_this.
+     * In the case of outside a constructor, if A is the direct enclosing class, A.this =>
+     * this.f_$outer_this. if A is the enclosing class of the direct enclosing class, A.this =>
+     * this.f_$outer_this$.f_$outer_this.
      * <p>
-     * In the case of inside a constructor, the above two cases should be translated to
-     * $outer_this and $outer_this.f_outer$, $outer_this is the added parameter of the constructor.
+     * In the case of inside a constructor, the above two cases should be translated to $outer_this
+     * and $outer_this.f_outer$, $outer_this is the added parameter of the constructor.
      * <p>
      * In the context where this function is called, {@code typeBinding} may be concretely resolved,
      * or it may be inferred by method call or field access. In the first case, it does a 'strict'
@@ -1627,14 +1619,12 @@ public class CompilationUnitBuilder {
           JdtUtils.createTypeDescriptor(literal.resolveTypeBinding());
 
       if (literalTypeDescriptor.isArray()) {
-        ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) literalTypeDescriptor;
-        if (arrayTypeDescriptor.getLeafTypeDescriptor().isNative()) {
+        if (literalTypeDescriptor.getLeafTypeDescriptor().isNative()) {
           // class literal of native js type array returns Object[].class
-          arrayTypeDescriptor =
-              (ArrayTypeDescriptor)
-                  TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1);
+          literalTypeDescriptor =
+              TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1);
         }
-        return convertArrayTypeLiteral(arrayTypeDescriptor, javaLangClassTypeDescriptor);
+        return convertArrayTypeLiteral(literalTypeDescriptor, javaLangClassTypeDescriptor);
       }
 
       if (literalTypeDescriptor.isNative()) {
@@ -1661,7 +1651,9 @@ public class CompilationUnitBuilder {
     }
 
     private Expression convertArrayTypeLiteral(
-        ArrayTypeDescriptor literalTypeDescriptor, TypeDescriptor javaLangClassTypeDescriptor) {
+        TypeDescriptor literalTypeDescriptor, TypeDescriptor javaLangClassTypeDescriptor) {
+      Preconditions.checkState(literalTypeDescriptor.isArray());
+
       MethodDescriptor classMethodDescriptor =
           MethodDescriptor.Builder.fromDefault()
               .jsInfo(JsInfo.RAW)

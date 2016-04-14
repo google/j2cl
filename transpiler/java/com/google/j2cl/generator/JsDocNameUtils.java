@@ -22,9 +22,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
-import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.NonNullableTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
@@ -140,26 +138,27 @@ public class JsDocNameUtils {
       TypeDescriptor typeDescriptor,
       boolean shouldUseClassName,
       GenerationEnvironment environment) {
-    {
-      boolean nullable = typeDescriptor.isNullable();
-      // JsFunction interface and implementor is a real JS function.
-      // Unlike other js types, functions have to be explicitly set to nullable.
-      if (!typeDescriptor.isRawType()
-          && !shouldUseClassName
-          && (typeDescriptor.isJsFunctionInterface()
-              || typeDescriptor.isJsFunctionImplementation())) {
-        return getJsDocNameWithNullability(getJsDocNameForJsFunction(typeDescriptor, environment),
-            nullable);
-      }
-      if (!nullable) {
-        return getJsDocNameWithNullability(getJsDocName(
-                ((NonNullableTypeDescriptor) typeDescriptor).getUnderlyingTypeDescriptor(),
-                shouldUseClassName,
-                environment), false /* nullable */);
-      }
-      // Everything below is nullable.
-      Preconditions.checkArgument(nullable);
+    // TODO: this looks like a hack to me, really the TypeDescriptor for JsFunctions should be
+    // created in the first place to know they themselves are nullable.
+
+    // JsFunction interface and implementor is a real JS function.
+    // Unlike other js types, functions have to be explicitly set to nullable.
+    if (!typeDescriptor.isRawType()
+        && !shouldUseClassName
+        && (typeDescriptor.isJsFunctionInterface()
+            || typeDescriptor.isJsFunctionImplementation())) {
+      return getJsDocNameWithNullability(
+          getJsDocNameForJsFunction(typeDescriptor, environment), typeDescriptor.isNullable());
     }
+
+    if (!typeDescriptor.isNullable()) {
+      return getJsDocNameWithNullability(
+          getJsDocName(TypeDescriptors.toNullable(typeDescriptor), shouldUseClassName, environment),
+          false /* nullable */);
+    }
+
+    // Everything below is nullable.
+    Preconditions.checkArgument(typeDescriptor.isNullable());
 
     // Special cases.
     switch (typeDescriptor.getSourceName()) {
@@ -193,7 +192,7 @@ public class JsDocNameUtils {
       return String.format(
           "%s%s%s",
           Strings.repeat("Array<", typeDescriptor.getDimensions()),
-          getJsDocName(((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor(), environment),
+          getJsDocName(typeDescriptor.getLeafTypeDescriptor(), environment),
           Strings.repeat(">", typeDescriptor.getDimensions()));
     }
 
@@ -309,8 +308,7 @@ public class JsDocNameUtils {
         Preconditions.checkArgument(parameterTypeDescriptor.isArray());
         String typeName =
             JsDocNameUtils.getJsDocName(
-                ((ArrayTypeDescriptor) parameterTypeDescriptor).getComponentTypeDescriptor(),
-                environment);
+                parameterTypeDescriptor.getComponentTypeDescriptor(), environment);
         parameterTypeAnnotation = "..." + typeName;
       } else {
         parameterTypeAnnotation = JsDocNameUtils.getJsDocName(parameterTypeDescriptor, environment);

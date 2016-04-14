@@ -98,19 +98,21 @@ public class JdtUtils {
    */
   static TypeDescriptor createTypeDescriptorWithNullability(ITypeBinding typeBinding,
       String packageName) {
-    TypeDescriptor descriptor;
+    TypeDescriptor typeDescriptor;
     if (typeBinding.isParameterizedType()) {
       List<TypeDescriptor> typeArgumentsDescriptors = new ArrayList<>();
       for (ITypeBinding typeArgumentBinding : typeBinding.getTypeArguments()) {
         typeArgumentsDescriptors.add(createTypeDescriptorWithNullability(typeArgumentBinding,
             packageName));
       }
-      descriptor = TypeProxyUtils.createTypeDescriptor(typeBinding, typeArgumentsDescriptors);
+      typeDescriptor = TypeProxyUtils.createTypeDescriptor(typeBinding, typeArgumentsDescriptors);
     } else {
-      descriptor = TypeProxyUtils.createTypeDescriptor(typeBinding);
+      typeDescriptor = TypeProxyUtils.createTypeDescriptor(typeBinding);
     }
 
-    return isNullable(typeBinding, packageName) ? descriptor : descriptor.getNonNullable();
+    return isNullable(typeBinding, packageName)
+        ? typeDescriptor
+        : TypeDescriptors.toNonNullable(typeDescriptor);
   }
 
   /**

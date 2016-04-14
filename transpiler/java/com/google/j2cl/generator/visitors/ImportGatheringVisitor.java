@@ -19,7 +19,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import com.google.j2cl.ast.AbstractVisitor;
-import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
@@ -27,7 +26,6 @@ import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.NonNullableTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
@@ -113,16 +111,12 @@ public class ImportGatheringVisitor extends AbstractVisitor {
       return;
     }
 
-    if (!typeDescriptor.isNullable()) {
-      addTypeDescriptor(
-          ((NonNullableTypeDescriptor) typeDescriptor).getUnderlyingTypeDescriptor(),
-          importCategory);
-      return;
-    }
-
     // Special case expand a dependency on the 'long' primitive into a dependency on both the 'long'
     // primitive and the native JS 'Long' emulation class.
-    if (TypeDescriptors.get().primitiveLong.equalsIgnoreNullability(typeDescriptor)) {
+    boolean equalIgnoringNullability =
+        TypeDescriptors.toNonNullable(TypeDescriptors.get().primitiveLong)
+            .equals(TypeDescriptors.toNonNullable(typeDescriptor));
+    if (equalIgnoringNullability) {
       addRawTypeDescriptor(ImportCategory.EAGER, BootstrapType.NATIVE_LONG.getDescriptor());
       addRawTypeDescriptor(importCategory, TypeDescriptors.get().primitiveLong);
       return;
@@ -140,9 +134,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     // Unroll the leaf type in an array type and special case add the native Array utilities.
     if (typeDescriptor.isArray()) {
       addTypeDescriptor(BootstrapType.ARRAYS.getDescriptor(), ImportCategory.LAZY);
-
-      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
-      addTypeDescriptor(arrayTypeDescriptor.getLeafTypeDescriptor(), importCategory);
+      addTypeDescriptor(typeDescriptor.getLeafTypeDescriptor(), importCategory);
       return;
     }
 

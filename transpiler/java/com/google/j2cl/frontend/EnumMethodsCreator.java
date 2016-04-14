@@ -3,7 +3,6 @@ package com.google.j2cl.frontend;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.ArrayLiteral;
-import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
@@ -35,8 +34,8 @@ import java.util.List;
 
 /**
  * This class generates the AST structure for the synthesized static methods values and valueOf on
- * Enum types.  Additionally, we add a private static field "namesToValuesMap" which is created
- * the first time valueOf() is called and allows for quick lookup of Enum values by (String) name.
+ * Enum types. Additionally, we add a private static field "namesToValuesMap" which is created the
+ * first time valueOf() is called and allows for quick lookup of Enum values by (String) name.
  */
 public class EnumMethodsCreator {
   private static final String VALUE_OF_METHOD_NAME = "valueOf";
@@ -110,6 +109,7 @@ public class EnumMethodsCreator {
   /**
    * Creates the ast needed for valueOf(String name) which is of the form:
    *
+   * <code>
    * private Object namesToValuesMap = null;
    * public static EnumType valueOf(String name) {
    *   if(namesToValuesMap == null){
@@ -117,6 +117,7 @@ public class EnumMethodsCreator {
    *   }
    *   return Enums.getValueFromNameAndMap(name, namesToValuesMap);
    * }
+   * </code>
    */
   private Method createValueOfMethod() {
     Variable nameParameter =
@@ -184,12 +185,14 @@ public class EnumMethodsCreator {
   /**
    * Creates the ast needed for values() which is of the form:
    *
+   * <code>
    * static EnumType[] values() {
    *   return [
    *     EnumType.VALUE1,
    *     EnumType.VALUE2 ...
    *   ];
    * }
+   * </code>
    */
   private Method createValuesMethod() {
     // Create method body.
@@ -198,8 +201,7 @@ public class EnumMethodsCreator {
       values.add(new FieldAccess(null, enumField.getDescriptor()));
     }
     Expression arrayOfValues =
-        new ArrayLiteral(
-            (ArrayTypeDescriptor) TypeDescriptors.getForArray(enumType.getDescriptor(), 1), values);
+        new ArrayLiteral(TypeDescriptors.getForArray(enumType.getDescriptor(), 1), values);
     Statement returnStatement =
         new ReturnStatement(
             arrayOfValues, TypeDescriptors.getForArray(enumType.getDescriptor(), 1));

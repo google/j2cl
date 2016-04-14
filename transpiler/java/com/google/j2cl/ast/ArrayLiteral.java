@@ -17,6 +17,7 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
@@ -28,14 +29,16 @@ import java.util.List;
  */
 @Visitable
 public class ArrayLiteral extends Expression {
-  private ArrayTypeDescriptor typeDescriptor;
+  private TypeDescriptor typeDescriptor;
   @Visitable List<Expression> valueExpressions = new ArrayList<>();
 
-  public ArrayLiteral(ArrayTypeDescriptor typeDescriptor, Expression... valueExpressions) {
+  public ArrayLiteral(TypeDescriptor typeDescriptor, Expression... valueExpressions) {
     this(typeDescriptor, Arrays.asList(valueExpressions));
   }
 
-  public ArrayLiteral(ArrayTypeDescriptor typeDescriptor, List<Expression> valueExpressions) {
+  public ArrayLiteral(TypeDescriptor typeDescriptor, List<Expression> valueExpressions) {
+    Preconditions.checkState(typeDescriptor.isArray());
+
     this.typeDescriptor = checkNotNull(typeDescriptor);
     this.valueExpressions.addAll(checkNotNull(valueExpressions));
   }
@@ -45,7 +48,7 @@ public class ArrayLiteral extends Expression {
   }
 
   @Override
-  public ArrayTypeDescriptor getTypeDescriptor() {
+  public TypeDescriptor getTypeDescriptor() {
     return typeDescriptor;
   }
 

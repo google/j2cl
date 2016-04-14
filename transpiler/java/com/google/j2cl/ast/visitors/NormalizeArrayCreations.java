@@ -19,7 +19,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayLiteral;
-import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
@@ -72,8 +71,7 @@ public class NormalizeArrayCreations extends AbstractRewriter {
     List<Expression> arguments = new ArrayList<>();
     arguments.add(
         new ArrayLiteral(
-            (ArrayTypeDescriptor)
-                TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
+            TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
             newArrayExpression.getDimensionExpressions()));
     // Use the raw type as the stamped leaf type. So that we use the upper bound of a generic type
     // parameter type instead of the type parameter itself.
@@ -83,12 +81,13 @@ public class NormalizeArrayCreations extends AbstractRewriter {
     MethodCall arrayCreateMethodCall =
         MethodCall.createRegularMethodCall(null, arrayCreateMethodDescriptor, arguments);
     return CastExpression.createRaw(
-        arrayCreateMethodCall, newArrayExpression.getTypeDescriptor().getNonNullable());
+        arrayCreateMethodCall,
+        TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()));
   }
 
   /**
-   * We transform new Object[][] {{object, object}, {object, object}} to
-   * Arrays.$init([[object, object], [object, object]], Object, 2);
+   * We transform new Object[][] {{object, object}, {object, object}} to Arrays.$init([[object,
+   * object], [object, object]], Object, 2);
    */
   private Node rewriteArrayInit(NewArray newArrayExpression) {
     Preconditions.checkArgument(newArrayExpression.getArrayLiteral() != null);
@@ -124,7 +123,8 @@ public class NormalizeArrayCreations extends AbstractRewriter {
           MethodCall.createRegularMethodCall(null, arrayInitMethodDescriptor, arguments);
 
       return CastExpression.createRaw(
-          arrayInitMethodCall, newArrayExpression.getTypeDescriptor().getNonNullable());
+          arrayInitMethodCall,
+          TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()));
     } else {
       // It's multidimensional, make dimensions explicit.
       arrayInitMethodDescriptor =
@@ -146,7 +146,8 @@ public class NormalizeArrayCreations extends AbstractRewriter {
           MethodCall.createRegularMethodCall(null, arrayInitMethodDescriptor, arguments);
 
       return CastExpression.createRaw(
-          arrayInitMethodCall, newArrayExpression.getTypeDescriptor().getNonNullable());
+          arrayInitMethodCall,
+          TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()));
     }
   }
 }

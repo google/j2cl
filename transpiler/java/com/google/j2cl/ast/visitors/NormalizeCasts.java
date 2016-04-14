@@ -18,7 +18,6 @@ package com.google.j2cl.ast.visitors;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
@@ -105,17 +104,18 @@ public class NormalizeCasts extends AbstractRewriter {
   private Node rewriteArrayCastExpression(CastExpression castExpression) {
     Preconditions.checkArgument(castExpression.getCastTypeDescriptor().isArray());
 
-    ArrayTypeDescriptor arrayCastTypeDescriptor =
-        (ArrayTypeDescriptor) castExpression.getCastTypeDescriptor();
-    if (arrayCastTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor().isNative()) {
+    if (castExpression
+        .getCastTypeDescriptor()
+        .getLeafTypeDescriptor()
+        .getRawTypeDescriptor()
+        .isNative()) {
       return rewriteNativeJsArrayCastExpression(castExpression);
     }
     return rewriteJavaArrayCastExpression(castExpression);
   }
 
   private Node rewriteJavaArrayCastExpression(CastExpression castExpression) {
-    ArrayTypeDescriptor arrayCastTypeDescriptor =
-        (ArrayTypeDescriptor) castExpression.getCastTypeDescriptor();
+    TypeDescriptor arrayCastTypeDescriptor = castExpression.getCastTypeDescriptor();
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
             .jsInfo(JsInfo.RAW)
@@ -149,8 +149,7 @@ public class NormalizeCasts extends AbstractRewriter {
   }
 
   private Node rewriteNativeJsArrayCastExpression(CastExpression castExpression) {
-    ArrayTypeDescriptor castTypeDescriptor =
-        (ArrayTypeDescriptor) castExpression.getCastTypeDescriptor();
+    TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
     Preconditions.checkArgument(
         castTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor().isNative());
     MethodDescriptor castToMethodDescriptor =

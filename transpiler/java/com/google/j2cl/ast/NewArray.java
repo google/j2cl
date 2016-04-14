@@ -30,12 +30,12 @@ import javax.annotation.Nullable;
  */
 @Visitable
 public class NewArray extends Expression {
-  @Visitable ArrayTypeDescriptor typeDescriptor;
+  @Visitable TypeDescriptor typeDescriptor;
   @Visitable List<Expression> dimensionExpressions = new ArrayList<>();
   @Nullable @Visitable ArrayLiteral arrayLiteral;
 
   public NewArray(
-      ArrayTypeDescriptor typeDescriptor,
+      TypeDescriptor typeDescriptor,
       List<Expression> dimensionExpressions,
       ArrayLiteral arrayLiteral) {
     this.typeDescriptor = checkNotNull(typeDescriptor);
@@ -58,7 +58,7 @@ public class NewArray extends Expression {
   }
 
   @Override
-  public ArrayTypeDescriptor getTypeDescriptor() {
+  public TypeDescriptor getTypeDescriptor() {
     return typeDescriptor;
   }
 

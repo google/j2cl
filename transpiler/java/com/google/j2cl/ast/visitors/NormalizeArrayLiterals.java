@@ -18,7 +18,6 @@ package com.google.j2cl.ast.visitors;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.ArrayLiteral;
-import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.NewArray;
@@ -73,10 +72,10 @@ public class NormalizeArrayLiterals {
       }
 
       // Rewrite ArrayLiteral as NewArray(ArrayLiteral).
-      ArrayTypeDescriptor arrayTypeDescriptor = arrayLiteral.getTypeDescriptor();
       return new NewArray(
-          arrayTypeDescriptor,
-          Collections.<Expression>nCopies(arrayTypeDescriptor.getDimensions(), NullLiteral.NULL),
+          arrayLiteral.getTypeDescriptor(),
+          Collections.<Expression>nCopies(
+              arrayLiteral.getTypeDescriptor().getDimensions(), NullLiteral.NULL),
           arrayLiteral);
     }
   }

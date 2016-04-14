@@ -62,13 +62,6 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
   }
 
   /**
-   * Returns whether the two given type descriptors are the same, ignoring nullability.
-   */
-  public boolean equalsIgnoreNullability(TypeDescriptor other) {
-    return this.getNonNullable().equals(other.getNonNullable());
-  }
-
-  /**
    * Returns the fully package qualified binary name like "com.google.common.Outer$Inner".
    */
   public abstract String getBinaryName();
@@ -85,6 +78,8 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
    */
   public abstract String getClassName();
 
+  public abstract TypeDescriptor getComponentTypeDescriptor();
+
   public abstract MethodDescriptor getConcreteJsFunctionMethodDescriptor();
 
   public abstract int getDimensions();
@@ -98,6 +93,8 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
 
   @Override
   public abstract String getJsNamespace();
+
+  public abstract TypeDescriptor getLeafTypeDescriptor();
 
   public abstract List<String> getPackageComponents();
 
@@ -213,8 +210,6 @@ public abstract class TypeDescriptor extends Node implements Comparable<TypeDesc
   public abstract boolean isUnion();
 
   public abstract boolean isNullable();
-
-  public abstract NonNullableTypeDescriptor getNonNullable();
 
   public abstract boolean isWildCard();
 

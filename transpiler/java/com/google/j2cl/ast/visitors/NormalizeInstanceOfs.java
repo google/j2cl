@@ -18,7 +18,6 @@ package com.google.j2cl.ast.visitors;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
@@ -76,18 +75,14 @@ public class NormalizeInstanceOfs extends AbstractRewriter {
   }
 
   private Node rewriteArrayInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
-    ArrayTypeDescriptor checkTypeDescriptor =
-        (ArrayTypeDescriptor) instanceOfExpression.getTestTypeDescriptor();
-
-    if (checkTypeDescriptor.getLeafTypeDescriptor().isNative()) {
+    if (instanceOfExpression.getTestTypeDescriptor().getLeafTypeDescriptor().isNative()) {
       return rewriteNativeJsArrayInstanceOfExpression(instanceOfExpression);
     }
     return rewriteJavaArrayInstanceOfExpression(instanceOfExpression);
   }
 
   private Node rewriteJavaArrayInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
-    ArrayTypeDescriptor checkTypeDescriptor =
-        (ArrayTypeDescriptor) instanceOfExpression.getTestTypeDescriptor();
+    TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
     MethodDescriptor isInstanceMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
             .jsInfo(JsInfo.RAW)
@@ -115,8 +110,7 @@ public class NormalizeInstanceOfs extends AbstractRewriter {
    * instance is a raw JS array (i.e. Array.isArray(instance)).
    */
   private Node rewriteNativeJsArrayInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
-    ArrayTypeDescriptor checkTypeDescriptor =
-        (ArrayTypeDescriptor) instanceOfExpression.getTestTypeDescriptor();
+    TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
     Preconditions.checkArgument(checkTypeDescriptor.isArray());
     Preconditions.checkArgument(checkTypeDescriptor.getLeafTypeDescriptor().isNative());
 

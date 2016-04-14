@@ -123,7 +123,8 @@ public class NormalizeConstructors {
         .methodName(MethodDescriptor.CREATE_METHOD_NAME)
         .visibility(Visibility.PUBLIC)
         .isConstructor(false)
-        .returnTypeDescriptor(constructor.getEnclosingClassTypeDescriptor().getNonNullable())
+        .returnTypeDescriptor(
+            TypeDescriptors.toNonNullable(constructor.getEnclosingClassTypeDescriptor()))
         .typeParameterDescriptors(allParameterTypes)
         .build();
   }

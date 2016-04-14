@@ -83,7 +83,7 @@ public class TypeProxyUtils {
 
     return isNullable(typeBinding, elementBinding, defaultNullabilityForCompilationUnit)
         ? descriptor
-        : descriptor.getNonNullable();
+        : TypeDescriptors.toNonNullable(descriptor);
   }
 
   /**

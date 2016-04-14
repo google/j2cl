@@ -66,6 +66,11 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  public TypeDescriptor getComponentTypeDescriptor() {
+    return null;
+  }
+
+  @Override
   public MethodDescriptor getConcreteJsFunctionMethodDescriptor() {
     throw new UnsupportedOperationException();
   }
@@ -93,6 +98,11 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   @Override
   public String getJsNamespace() {
     throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public TypeDescriptor getLeafTypeDescriptor() {
+    return null;
   }
 
   @Override
@@ -266,11 +276,6 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   @Override
   public boolean isNullable() {
     return true;
-  }
-
-  @Override
-  public NonNullableTypeDescriptor getNonNullable() {
-    return NonNullableTypeDescriptor.create(this);
   }
 
   @Override

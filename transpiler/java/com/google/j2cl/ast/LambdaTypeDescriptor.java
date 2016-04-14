@@ -75,6 +75,11 @@ public class LambdaTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  public TypeDescriptor getComponentTypeDescriptor() {
+    return null;
+  }
+
+  @Override
   public MethodDescriptor getConcreteJsFunctionMethodDescriptor() {
     return TypeProxyUtils.getConcreteJsFunctionMethodDescriptor(lambdaInterfaceBinding);
   }
@@ -107,6 +112,11 @@ public class LambdaTypeDescriptor extends TypeDescriptor {
   @Override
   public ImmutableList<String> getPackageComponents() {
     return packageComponents;
+  }
+
+  @Override
+  public TypeDescriptor getLeafTypeDescriptor() {
+    return null;
   }
 
   @Override
@@ -268,10 +278,5 @@ public class LambdaTypeDescriptor extends TypeDescriptor {
   @Override
   public boolean isNullable() {
     return true;
-  }
-
-  @Override
-  public NonNullableTypeDescriptor getNonNullable() {
-    return NonNullableTypeDescriptor.create(this);
   }
 }

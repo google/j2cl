@@ -18,6 +18,7 @@ import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
+import com.google.j2cl.ast.TypeDescriptors;
 
 /**
  * Inserts type annotation for 'new' a generic type or a JsFunction type.
@@ -33,7 +34,7 @@ public class InsertCastOnNewInstances extends AbstractRewriter {
     if (newInstance.getTypeDescriptor().isParameterizedType()) {
       // add type annotation to ClassInstanceCreation of generic type and JsFunction type.
       return CastExpression.createRaw(
-          newInstance, newInstance.getTypeDescriptor().getNonNullable());
+          newInstance, TypeDescriptors.toNonNullable(newInstance.getTypeDescriptor()));
     } else {
       return newInstance;
     }

@@ -19,7 +19,6 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
@@ -32,7 +31,6 @@ import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.NonNullableTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
@@ -61,9 +59,9 @@ public class GeneratorUtils {
    * Returns the relative output path for a given type.
    */
   public static String getRelativePath(JavaType javaType) {
-    TypeDescriptor descriptor = javaType.getDescriptor();
-    String typeName = descriptor.getClassName();
-    String packageName = descriptor.getPackageName();
+    TypeDescriptor typeDescriptor = javaType.getDescriptor();
+    String typeName = typeDescriptor.getClassName();
+    String packageName = typeDescriptor.getPackageName();
     return packageName.replace(".", File.separator) + File.separator + typeName;
   }
 
@@ -71,8 +69,8 @@ public class GeneratorUtils {
    * Returns the absolute binary path for a given type.
    */
   public static String getAbsolutePath(CompilationUnit compilationUnit, JavaType javaType) {
-    TypeDescriptor descriptor = javaType.getDescriptor();
-    String typeName = descriptor.getClassName();
+    TypeDescriptor typeDescriptor = javaType.getDescriptor();
+    String typeName = typeDescriptor.getClassName();
     return compilationUnit.getDirectoryPath() + File.separator + typeName;
   }
 
@@ -117,18 +115,10 @@ public class GeneratorUtils {
             String name = environment.aliasForVariable(variable);
             if (method.getDescriptor().isJsMethodVarargs() && isLast) {
               // The parameter is a js var arg so we convert the type to an array
-              TypeDescriptor nullableTypeDescriptor;
-              if (parameterTypeDescriptor instanceof NonNullableTypeDescriptor) {
-                nullableTypeDescriptor = ((NonNullableTypeDescriptor) parameterTypeDescriptor)
-                    .getUnderlyingTypeDescriptor();
-              } else {
-                nullableTypeDescriptor = parameterTypeDescriptor;
-              }
-              Preconditions.checkArgument(nullableTypeDescriptor.isArray());
+              Preconditions.checkArgument(parameterTypeDescriptor.isArray());
               String typeName =
                   JsDocNameUtils.getJsDocName(
-                      ((ArrayTypeDescriptor) nullableTypeDescriptor).getComponentTypeDescriptor(),
-                      environment);
+                      parameterTypeDescriptor.getComponentTypeDescriptor(), environment);
               return String.format("{...%s} %s", typeName, name);
             } else {
               String typeName = JsDocNameUtils.getJsDocName(parameterTypeDescriptor, environment);

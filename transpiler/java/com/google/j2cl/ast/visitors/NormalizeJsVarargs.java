@@ -20,7 +20,6 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
-import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
@@ -34,7 +33,6 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.NonNullableTypeDescriptor;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.PostfixExpression;
 import com.google.j2cl.ast.PostfixOperator;
@@ -143,16 +141,9 @@ public class NormalizeJsVarargs extends AbstractRewriter {
                   argumentsLengthReference,
                   BinaryOperator.MINUS,
                   new NumberLiteral(primitiveInt, varargsIndex));
-
-      TypeDescriptor typeDescriptor = varargsParameter.getTypeDescriptor();
-      if (typeDescriptor instanceof NonNullableTypeDescriptor) {
-        typeDescriptor = ((NonNullableTypeDescriptor) typeDescriptor).getUnderlyingTypeDescriptor();
-      }
       Expression newArray =
           new NewArray(
-              (ArrayTypeDescriptor) typeDescriptor,
-              Arrays.<Expression>asList(arraySize),
-              null);
+              varargsParameter.getTypeDescriptor(), Arrays.<Expression>asList(arraySize), null);
       Statement variableDeclaration =
           new ExpressionStatement(
               new VariableDeclarationExpression(

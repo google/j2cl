@@ -19,7 +19,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
-import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
@@ -126,7 +125,7 @@ public abstract class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public Node rewriteArrayLiteral(ArrayLiteral arrayLiteral) {
     // assignment context
-    ArrayTypeDescriptor typeDescriptor = arrayLiteral.getTypeDescriptor();
+    TypeDescriptor typeDescriptor = arrayLiteral.getTypeDescriptor();
     List<Expression> valueExpressions = new ArrayList<>();
     for (Expression valueExpression : arrayLiteral.getValueExpressions()) {
       valueExpressions.add(

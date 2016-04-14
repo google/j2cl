@@ -19,22 +19,21 @@ import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.ArrayTypeDescriptor;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.NonNullableTypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 
 /**
  * Temporary workaround for b/24476009.
  *
- * <p> Template declared in a method is not resolved inside the method by JSCompiler. To get rid of
- * the warnings, this class replaces cast to a type variable that is declared by a method with
- * cast to its bound.
+ * <p>
+ * Template declared in a method is not resolved inside the method by JSCompiler. To get rid of the
+ * warnings, this class replaces cast to a type variable that is declared by a method with cast to
+ * its bound.
  */
 public class FixTypeVariablesInMethods extends AbstractRewriter {
 
@@ -56,12 +55,6 @@ public class FixTypeVariablesInMethods extends AbstractRewriter {
   private TypeDescriptor replaceTypeVariableWithBound(
       TypeDescriptor typeDescriptor, final Method method) {
     // If it is a type variable that is declared by the method, replace with its bound.
-    if (!typeDescriptor.isNullable()) {
-      return replaceTypeVariableWithBound(
-              ((NonNullableTypeDescriptor) typeDescriptor).getUnderlyingTypeDescriptor(), method)
-          .getNonNullable();
-    }
-    Preconditions.checkState(typeDescriptor.isNullable());
     if (isTypeVariableDeclaredByMethod(typeDescriptor, method)) {
       TypeDescriptor boundTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
       return boundTypeDescriptor.isParameterizedType()
@@ -72,7 +65,9 @@ public class FixTypeVariablesInMethods extends AbstractRewriter {
     // replace it with 'window.Function' to get rid of 'bad type annotation' error.
     if (typeDescriptor.isJsFunctionImplementation() || typeDescriptor.isJsFunctionInterface()) {
       if (containsTypeVariableDeclaredByMethodInJsFunction(typeDescriptor, method)) {
-        return TypeDescriptors.NATIVE_FUNCTION;
+        // Match the nullability of the starting type descriptor.
+        return TypeDescriptors.toGivenNullability(
+            TypeDescriptors.NATIVE_FUNCTION, typeDescriptor.isNullable());
       }
       return typeDescriptor;
     }
@@ -90,10 +85,10 @@ public class FixTypeVariablesInMethods extends AbstractRewriter {
               }));
     }
     if (typeDescriptor.isArray()) {
-      TypeDescriptor leafTypeDescriptor =
-          ((ArrayTypeDescriptor) typeDescriptor).getLeafTypeDescriptor();
-      TypeDescriptor boundTypeDescriptor = replaceTypeVariableWithBound(leafTypeDescriptor, method);
-      return TypeDescriptors.getForArray(boundTypeDescriptor, typeDescriptor.getDimensions());
+      TypeDescriptor boundTypeDescriptor =
+          replaceTypeVariableWithBound(typeDescriptor.getLeafTypeDescriptor(), method);
+      return TypeDescriptors.getForArray(
+          boundTypeDescriptor, typeDescriptor.getDimensions(), typeDescriptor.isNullable());
     }
     return typeDescriptor;
   }
@@ -128,16 +123,13 @@ public class FixTypeVariablesInMethods extends AbstractRewriter {
       return false;
     }
     if (typeDescriptor.isArray()) {
-      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
-      return containsTypeVariableDeclaredByMethod(
-          arrayTypeDescriptor.getLeafTypeDescriptor(), method);
+      return containsTypeVariableDeclaredByMethod(typeDescriptor.getLeafTypeDescriptor(), method);
     }
     return false;
   }
 
   private boolean containsTypeVariableDeclaredByMethodInJsFunction(
       TypeDescriptor typeDescriptor, Method method) {
-    Preconditions.checkState(typeDescriptor.isNullable());
     Preconditions.checkState(
         typeDescriptor.isJsFunctionImplementation() || typeDescriptor.isJsFunctionInterface());
     MethodDescriptor jsFunctionMethodDescriptor =
