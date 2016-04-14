@@ -26,7 +26,7 @@ class Util {
    * @public
    */
   static $setClassMetadata(ctor, name) {
-    ctor.prototype.$$classMetadata = [name, Util.ClassType.CLASS];
+    ctor.prototype.$$classMetadata = [name, Util.TYPE_CLASS];
   }
 
   /**
@@ -35,7 +35,7 @@ class Util {
    * @public
    */
   static $setClassMetadataForInterface(ctor, name) {
-    ctor.prototype.$$classMetadata = [name, Util.ClassType.INTERFACE];
+    ctor.prototype.$$classMetadata = [name, Util.TYPE_INTERFACE];
   }
 
   /**
@@ -44,7 +44,7 @@ class Util {
    * @public
    */
   static $setClassMetadataForEnum(ctor, name) {
-    ctor.prototype.$$classMetadata = [name, Util.ClassType.ENUM];
+    ctor.prototype.$$classMetadata = [name, Util.TYPE_ENUM];
   }
 
   /**
@@ -53,7 +53,7 @@ class Util {
    * @public
    */
   static $setClassMetadataForPrimitive(ctor, name) {
-    ctor.prototype.$$classMetadata = [name, Util.ClassType.PRIMITIVE];
+    ctor.prototype.$$classMetadata = [name, Util.TYPE_PRIMITIVE];
   }
 
   /**
@@ -72,14 +72,14 @@ class Util {
 
   /**
    * @param {*} ctor
-   * @return {Util.ClassType}
+   * @return {number}
    * @public
    */
   static $extractClassType(ctor) {
     if (CLASS_METADATA_ENABLED_) {
       return ctor.prototype.$$classMetadata[1];
     } else {
-      return Util.ClassType.CLASS;
+      return Util.TYPE_CLASS;
     }
   }
 
@@ -153,14 +153,24 @@ goog.define('CLASS_METADATA_ENABLED_', true);
 
 
 /**
- * @enum {number}
+ * @type {number}
  */
-Util.ClassType = {
-  CLASS: 0,
-  INTERFACE: 1,
-  ENUM: 2,
-  PRIMITIVE: 3
-};
+Util.TYPE_CLASS = 0;
+
+/**
+ * @type {number}
+ */
+Util.TYPE_INTERFACE = 1;
+
+/**
+ * @type {number}
+ */
+Util.TYPE_ENUM = 2;
+
+/**
+ * @type {number}
+ */
+Util.TYPE_PRIMITIVE = 3;
 
 
 /**
