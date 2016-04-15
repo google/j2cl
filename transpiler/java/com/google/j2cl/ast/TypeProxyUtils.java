@@ -96,6 +96,10 @@ public class TypeProxyUtils {
     if (typeBinding.isPrimitive()) {
       return false;
     }
+    if (typeBinding.getQualifiedName().equals("java.lang.Void")) {
+      // Void is nullable by default.
+      return true;
+    }
     if (defaultNullabilityForCompilationUnit == Nullability.NULL) {
       return true;
     }

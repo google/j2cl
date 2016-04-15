@@ -22,6 +22,7 @@ public class DefaultNullable {
   @org.checkerframework.checker.nullness.qual.Nullable private String[] f9 = {};
   // Nullable array of non-nullable strings.
   private String @NullableType [] f10 = {};
+  private Void f11 = null;
 
   public String m1(String a, List<Double> b) {
     return "";

@@ -90,54 +90,6 @@ public class JdtUtils {
     return TypeProxyUtils.createTypeDescriptor(typeBinding);
   }
 
-  /**
-   * Creates a type descriptor for the given type binding, taking into account nullability.
-   * @param typeBinding the type binding
-   * @param packageName the name of the package containing the field/method/variable/etc. with the
-   *     provided type binding (not the package in which the type is defined).
-   */
-  static TypeDescriptor createTypeDescriptorWithNullability(ITypeBinding typeBinding,
-      String packageName) {
-    TypeDescriptor typeDescriptor;
-    if (typeBinding.isParameterizedType()) {
-      List<TypeDescriptor> typeArgumentsDescriptors = new ArrayList<>();
-      for (ITypeBinding typeArgumentBinding : typeBinding.getTypeArguments()) {
-        typeArgumentsDescriptors.add(createTypeDescriptorWithNullability(typeArgumentBinding,
-            packageName));
-      }
-      typeDescriptor = TypeProxyUtils.createTypeDescriptor(typeBinding, typeArgumentsDescriptors);
-    } else {
-      typeDescriptor = TypeProxyUtils.createTypeDescriptor(typeBinding);
-    }
-
-    return isNullable(typeBinding, packageName)
-        ? typeDescriptor
-        : TypeDescriptors.toNonNullable(typeDescriptor);
-  }
-
-  /**
-   * Returns whether the given type binding should be nullable, according to the annotations
-   * on it and if nullability is enabled for the package containing the binding.
-   */
-  static boolean isNullable(ITypeBinding typeBinding, String packageName) {
-     if (typeBinding.isPrimitive()) {
-      return false;
-    }
-    if (!PackageInfoCache.get().isNullabilityEnabled(packageName)) {
-      return true;
-    }
-    Iterable<IAnnotationBinding> allAnnotations = Iterables.concat(
-        Arrays.asList(typeBinding.getAnnotations()),
-        Arrays.asList(typeBinding.getTypeAnnotations()));
-    for (IAnnotationBinding annotation : allAnnotations) {
-      if (annotation.getName().equals("Nullable") || annotation.getName().equals("NullableType")) {
-        return true;
-      }
-      // TODO(simionato): Consider supporting NotNull as well.
-    }
-    return false;
-  }
-
   static FieldDescriptor createFieldDescriptor(IVariableBinding variableBinding) {
     if (isArrayLengthBinding(variableBinding)) {
       return AstUtils.ARRAY_LENGTH_FIELD_DESCRIPTION;
