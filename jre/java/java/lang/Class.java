@@ -98,8 +98,14 @@ public class Class<T> {
     return null;
   }
 
-  // TODO: implement
-  public native Class<? super T> getSuperclass();
+  @SuppressWarnings("unchecked")
+  public Class<? super T> getSuperclass() {
+    Object superCtor = getSuperCtor(ctor);
+    return superCtor == null ? null : (Class<? super T>) Class.$get(superCtor, 0);
+  }
+
+  @JsMethod
+  private static native Object getSuperCtor(Object ctor);
 
   public boolean desiredAssertionStatus() {
     return false;

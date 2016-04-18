@@ -12,3 +12,14 @@ Class.$get = function(classConstructor, opt_dimensionCount) {
       classConstructor.prototype, '$$class/' + dimensionCount,
       function() { return new Class(classConstructor, dimensionCount); });
 };
+
+/**
+ * @param {*} classConstructor
+ * @return {*}
+ * @private
+ */
+Class.getSuperCtor = function(classConstructor) {
+  var parentCtor =
+      window.Object.getPrototypeOf(classConstructor.prototype).constructor;
+  return parentCtor == window.Object ? null : parentCtor;
+};

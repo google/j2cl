@@ -16,6 +16,7 @@ public class Main {
   public static void testEnum() {
     Object o = Bar.BAR;
     assertSame(Bar.class, o.getClass());
+    assertSame(Enum.class, o.getClass().getSuperclass());
 
     assertEquals(
         "com.google.j2cl.transpiler.integration.classliteral.Main$Bar", o.getClass().getName());
@@ -29,6 +30,7 @@ public class Main {
         "class com.google.j2cl.transpiler.integration.classliteral.Main$Bar",
         o.getClass().toString());
 
+
     assert !o.getClass().isArray() : "Bar.BAR.class.isArray() returned true";
     assert o.getClass().isEnum() : "Bar.BAR.class.isEnum() returned false";
     assert !o.getClass().isPrimitive() : "Bar.BAR.class.isPrimitive() returned true";
@@ -38,6 +40,7 @@ public class Main {
   public static void testEnumSubclass() {
     Object o = Bar.BAZ;
     assertNotSame(Bar.class, o.getClass());
+    assertSame(Bar.class, o.getClass().getSuperclass());
 
     assertEquals(
         "com.google.j2cl.transpiler.integration.classliteral.Main$Bar$1", o.getClass().getName());
@@ -54,6 +57,8 @@ public class Main {
   public static void testArray() {
     Object o = new Foo[3];
     assertSame(Foo[].class, o.getClass());
+    assertSame(Object.class, o.getClass().getSuperclass());
+
     assertSame(Foo.class, o.getClass().getComponentType());
     assertSame(Foo[].class, Foo[][].class.getComponentType());
 
@@ -73,6 +78,8 @@ public class Main {
   }
 
   public static void testInterface() {
+    assertSame(null, IFoo.class.getSuperclass());
+
     assertEquals("com.google.j2cl.transpiler.integration.classliteral.IFoo", IFoo.class.getName());
     assertEquals(
         "com.google.j2cl.transpiler.integration.classliteral.IFoo", IFoo.class.getCanonicalName());
@@ -89,7 +96,9 @@ public class Main {
 
   public static void testClass() {
     Object o = new Main();
-    assertEquals(Main.class, o.getClass());
+    assertSame(Main.class, o.getClass());
+    assertSame(Object.class, o.getClass().getSuperclass());
+    assertSame(null, Object.class.getSuperclass());
 
     assertEquals("com.google.j2cl.transpiler.integration.classliteral.Main", Main.class.getName());
     assertEquals(
@@ -118,6 +127,8 @@ public class Main {
   }
 
   public static void testPrimitive() {
+    assertSame(null, int.class.getSuperclass());
+
     assertEquals("int", int.class.getName());
     assertEquals("int", int.class.getCanonicalName());
     assertEquals("int", int.class.getSimpleName());
