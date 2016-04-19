@@ -15,14 +15,22 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Splitter;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.JsInteropUtils;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
+import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeReference;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Normalizes the static native js method calls with the real native method calls.
@@ -50,11 +58,35 @@ public class NormalizeNativeMethodCalls extends AbstractRewriter {
       return methodCall;
     }
 
+    String qualifiedName = methodDescriptor.getJsNamespace();
+    TypeDescriptor nativeTypeDescriptor;
+    if (JsInteropUtils.isGlobal(qualifiedName)) {
+      nativeTypeDescriptor =
+          TypeDescriptors.createNative(
+              Arrays.asList(JsInteropUtils.JS_GLOBAL),
+              Arrays.asList(""),
+              Collections.emptyList(),
+              JsInteropUtils.JS_GLOBAL,
+              "");
+    } else {
+      List<String> nameComponents = Splitter.on('.').splitToList(qualifiedName);
+      int size = nameComponents.size();
+      // Fill in JS_GLOBAL as the namespace if the namespace is empty.
+      List<String> namespaceComponents =
+          size == 1 ? Arrays.asList(JsInteropUtils.JS_GLOBAL) : nameComponents.subList(0, size - 1);
+      nativeTypeDescriptor =
+          TypeDescriptors.createNative(
+              namespaceComponents,
+              nameComponents.subList(size - 1, size),
+              Collections.emptyList(),
+              Joiner.on(".").join(namespaceComponents),
+              nameComponents.get(size - 1));
+    }
+
     // A.abs() -> Math.abs().
     MethodDescriptor newMethodDescriptor =
         MethodDescriptor.Builder.from(methodDescriptor)
-            .enclosingClassTypeDescriptor(
-                TypeDescriptors.createNative(methodDescriptor.getJsNamespace()))
+            .enclosingClassTypeDescriptor(nativeTypeDescriptor)
             .build();
     Preconditions.checkArgument(methodCall.getQualifier() instanceof TypeReference);
     return MethodCall.createRegularMethodCall(null, newMethodDescriptor, methodCall.getArguments());

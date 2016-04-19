@@ -33,7 +33,6 @@ import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
@@ -44,11 +43,12 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Since JavaScript doesn't support multiple catch clauses, we convert multiple catch clauses to
- * a single catch clause that contains control flow to route to the correct block of code.
+ * Since JavaScript doesn't support multiple catch clauses, we convert multiple catch clauses to a
+ * single catch clause that contains control flow to route to the correct block of code.
  *
  * In Java:
  *
+ * <code>
  *  try {
  *    throw new ClassCastException();
  *  } catch (NullPointerException | ClassCastException e) {
@@ -71,6 +71,7 @@ import java.util.List;
  *      throw e;
  *    }
  *  }
+ * </code>
  */
 public class NormalizeCatchClauses extends AbstractRewriter {
   public static void applyTo(CompilationUnit compilationUnit) {
@@ -115,7 +116,7 @@ public class NormalizeCatchClauses extends AbstractRewriter {
     TypeDescriptor exceptionTypeDescriptor = caughtVariable.getTypeDescriptor();
     List<TypeDescriptor> typesToCheck =
         exceptionTypeDescriptor.isUnion()
-            ? ((UnionTypeDescriptor) exceptionTypeDescriptor).getTypes()
+            ? exceptionTypeDescriptor.getUnionedTypeDescriptors()
             : Arrays.asList(exceptionTypeDescriptor);
     Expression condition = checkTypeExpression(mainVariable, typesToCheck);
     List<Statement> catchClauseBody = new ArrayList<>(clause.getBody().getStatements());
@@ -143,10 +144,11 @@ public class NormalizeCatchClauses extends AbstractRewriter {
    *
    * t1.$isInstance(e) || t2.$isInstance(e) || t3.$isInstance(e) ...
    */
-  private Expression checkTypeExpression(Variable exceptionVariable, List<TypeDescriptor> types) {
+  private Expression checkTypeExpression(
+      Variable exceptionVariable, List<TypeDescriptor> typeDescriptors) {
     List<Expression> methodCalls = new ArrayList<>();
-    for (TypeDescriptor descriptor : types) {
-      methodCalls.add(checkIsInstanceCall(descriptor, exceptionVariable.getReference()));
+    for (TypeDescriptor typeDescriptor : typeDescriptors) {
+      methodCalls.add(checkIsInstanceCall(typeDescriptor, exceptionVariable.getReference()));
     }
     return AstUtils.joinExpressionsWithBinaryOperator(
         TypeDescriptors.get().primitiveBoolean, BinaryOperator.CONDITIONAL_OR, methodCalls);

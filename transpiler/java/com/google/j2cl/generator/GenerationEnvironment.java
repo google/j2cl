@@ -53,7 +53,7 @@ public class GenerationEnvironment {
 
   public String aliasForType(TypeDescriptor typeDescriptor) {
     String alias = aliasByTypeBinaryName.get(typeDescriptor.getBinaryName());
-    return alias == null ? typeDescriptor.getClassName() : alias;
+    return alias == null ? typeDescriptor.getBinaryClassName() : alias;
   }
 
   public TypeDescriptor getEnclosingTypeDescriptor() {

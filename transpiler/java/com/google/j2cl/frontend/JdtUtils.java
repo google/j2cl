@@ -555,7 +555,7 @@ public class JdtUtils {
       ITypeBinding lambdaInterfaceBinding,
       TypeDescriptor enclosingClassTypeDescriptor) {
     TypeDescriptor lambdaClassTypeDescriptor =
-        TypeDescriptors.createLambdaTypeDescriptor(
+        TypeDescriptors.createLambda(
             enclosingClassTypeDescriptor, lambdaBinaryName, lambdaInterfaceBinding);
     JavaType lambdaType = new JavaType(Kind.CLASS, Visibility.PRIVATE, lambdaClassTypeDescriptor);
 

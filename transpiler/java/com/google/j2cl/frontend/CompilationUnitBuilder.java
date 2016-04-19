@@ -78,7 +78,6 @@ import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeProxyUtils;
 import com.google.j2cl.ast.TypeProxyUtils.Nullability;
 import com.google.j2cl.ast.TypeReference;
-import com.google.j2cl.ast.UnionTypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
@@ -1692,13 +1691,13 @@ public class CompilationUnitBuilder {
       return new TryStatement(resources, body, catchClauses, finallyBlock);
     }
 
-    private UnionTypeDescriptor convert(org.eclipse.jdt.core.dom.UnionType unionType) {
-      List<TypeDescriptor> types = new ArrayList<>();
+    private TypeDescriptor convert(org.eclipse.jdt.core.dom.UnionType unionType) {
+      List<TypeDescriptor> unionedTypeDescriptors = new ArrayList<>();
       for (Object object : unionType.types()) {
         org.eclipse.jdt.core.dom.Type type = (org.eclipse.jdt.core.dom.Type) object;
-        types.add(JdtUtils.createTypeDescriptor(type.resolveBinding()));
+        unionedTypeDescriptors.add(JdtUtils.createTypeDescriptor(type.resolveBinding()));
       }
-      return UnionTypeDescriptor.create(types);
+      return TypeDescriptors.createUnion(unionedTypeDescriptors);
     }
 
     private VariableDeclarationFragment convert(

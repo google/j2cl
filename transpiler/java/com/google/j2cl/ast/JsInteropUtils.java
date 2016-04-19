@@ -31,6 +31,9 @@ import org.eclipse.jdt.core.dom.Modifier;
 public class JsInteropUtils {
   public static final String JS_GLOBAL = "<global>";
 
+  /**
+   * Returns whether a type should be considered global based on its namespace.
+   */
   public static boolean isGlobal(String jsNamespace) {
     return JS_GLOBAL.equals(jsNamespace);
   }
@@ -228,5 +231,4 @@ public class JsInteropUtils {
   public static boolean isJsType(ITypeBinding typeBinding) {
     return JsInteropAnnotationUtils.getJsTypeAnnotation(typeBinding) != null;
   }
-
 }

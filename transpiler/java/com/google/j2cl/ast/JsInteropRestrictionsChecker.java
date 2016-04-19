@@ -459,6 +459,6 @@ public class JsInteropRestrictionsChecker {
   }
 
   private String getReadableDescription(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.getClassName();
+    return typeDescriptor.getBinaryClassName();
   }
 }

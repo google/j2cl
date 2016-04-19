@@ -42,8 +42,8 @@ public abstract class MethodDescriptor extends Node implements Member {
   private static Interner<MethodDescriptor> interner;
 
   /**
-   * Creates an instance of an AutoValue generated MethodDescriptor which uses Interners
-   * to share identical instances of MethodDescriptors.
+   * Creates an instance of an AutoValue generated MethodDescriptor which uses Interners to share
+   * identical instances of MethodDescriptors.
    */
   public static MethodDescriptor create(
       boolean isStatic,
@@ -279,7 +279,7 @@ public abstract class MethodDescriptor extends Node implements Member {
       this.jsInfo = jsInfo;
       return this;
     }
-    
+
     public Builder addParameter(TypeDescriptor parameterTypeDescriptor) {
       return parameterTypeDescriptors(
           Iterables.concat(

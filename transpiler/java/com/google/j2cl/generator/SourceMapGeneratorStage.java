@@ -83,7 +83,7 @@ public class SourceMapGeneratorStage {
 
         StringBuilder builder = new StringBuilder();
         try {
-          String typeName = javaType.getDescriptor().getClassName();
+          String typeName = javaType.getDescriptor().getBinaryClassName();
           sourceMapGenerator.appendTo(builder, typeName + ".impl.js");
           String output = builder.toString();
           String readableMap = ReadableSourceMapGenerator.generateForJavaType(javaType);

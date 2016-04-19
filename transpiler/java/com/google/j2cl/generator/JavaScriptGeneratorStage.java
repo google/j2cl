@@ -115,7 +115,8 @@ public class JavaScriptGeneratorStage {
         }
 
         jsImplGenerator.setRelativeSourceMapLocation(
-            javaType.getDescriptor().getClassName() + SourceMapGeneratorStage.SOURCE_MAP_SUFFIX);
+            javaType.getDescriptor().getBinaryClassName()
+                + SourceMapGeneratorStage.SOURCE_MAP_SUFFIX);
 
         Path absolutePathForImpl =
             GeneratorUtils.getAbsolutePath(

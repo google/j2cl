@@ -101,6 +101,6 @@ public class VariableAliasesGatheringVisitor extends AbstractVisitor {
                     return importModule.getAlias();
                   }
                 }));
-    this.importAliases.add(javaType.getDescriptor().getClassName());
+    this.importAliases.add(javaType.getDescriptor().getBinaryClassName());
   }
 }

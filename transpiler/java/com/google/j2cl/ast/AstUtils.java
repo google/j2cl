@@ -110,7 +110,7 @@ public class AstUtils {
     return MethodDescriptor.Builder.fromDefault()
         .visibility(visibility)
         .enclosingClassTypeDescriptor(typeDescriptor)
-        .methodName(typeDescriptor.getClassName())
+        .methodName(typeDescriptor.getBinaryClassName())
         .isConstructor(true)
         .parameterTypeDescriptors(Arrays.asList(parameterTypeDescriptors))
         .jsInfo(jsInfo)
@@ -704,7 +704,7 @@ public class AstUtils {
     checkArgument(!typeDescriptor.isArray());
     checkArgument(!typeDescriptor.isUnion());
 
-    return TypeDescriptors.createSyntheticRegularTypeDescriptor(
+    return TypeDescriptors.createExactly(
         typeDescriptor.getPackageComponents(),
         Lists.newArrayList(
             Iterables.concat(

@@ -63,7 +63,7 @@ public class EnumMethodsCreator {
         FieldDescriptor.Builder.fromDefault(
                 enumType.getDescriptor(),
                 NAMES_TO_VALUES_MAP_FIELD_NAME,
-                TypeDescriptors.createSyntheticNativeTypeDescriptor(
+                TypeDescriptors.createNative(
                     Collections.emptyList(),
                     // Import alias.
                     Lists.newArrayList("NativeObject"),

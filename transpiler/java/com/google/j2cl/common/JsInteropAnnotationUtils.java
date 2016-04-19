@@ -79,6 +79,9 @@ public class JsInteropAnnotationUtils {
     return JdtAnnotationUtils.getAnnotationParameterBoolean(annotationBinding, "isNative", false);
   }
 
+  /**
+   * The namespace specified on a package, type, method or field.
+   */
   public static String getJsNamespace(IAnnotationBinding annotationBinding) {
     return JdtAnnotationUtils.getAnnotationParameterString(annotationBinding, "namespace");
   }

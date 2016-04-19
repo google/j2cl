@@ -21,7 +21,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -105,30 +104,51 @@ public class TypeDescriptors {
     TypeDescriptors typeDescriptors = new TypeDescriptors();
 
     // initialize primitive types.
-    typeDescriptors.primitiveBoolean = create(ast, BOOLEAN_TYPE_NAME);
-    typeDescriptors.primitiveByte = create(ast, BYTE_TYPE_NAME);
-    typeDescriptors.primitiveChar = create(ast, CHAR_TYPE_NAME);
-    typeDescriptors.primitiveDouble = create(ast, DOUBLE_TYPE_NAME);
-    typeDescriptors.primitiveFloat = create(ast, FLOAT_TYPE_NAME);
-    typeDescriptors.primitiveInt = create(ast, INT_TYPE_NAME);
-    typeDescriptors.primitiveLong = create(ast, LONG_TYPE_NAME);
-    typeDescriptors.primitiveShort = create(ast, SHORT_TYPE_NAME);
-    typeDescriptors.primitiveVoid = create(ast, VOID_TYPE_NAME);
+    typeDescriptors.primitiveBoolean =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType(BOOLEAN_TYPE_NAME));
+    typeDescriptors.primitiveByte =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType(BYTE_TYPE_NAME));
+    typeDescriptors.primitiveChar =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType(CHAR_TYPE_NAME));
+    typeDescriptors.primitiveDouble =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType(DOUBLE_TYPE_NAME));
+    typeDescriptors.primitiveFloat =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType(FLOAT_TYPE_NAME));
+    typeDescriptors.primitiveInt =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType(INT_TYPE_NAME));
+    typeDescriptors.primitiveLong =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType(LONG_TYPE_NAME));
+    typeDescriptors.primitiveShort =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType(SHORT_TYPE_NAME));
+    typeDescriptors.primitiveVoid =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType(VOID_TYPE_NAME));
 
     // initialize boxed types.
-    typeDescriptors.javaLangBoolean = create(ast, "java.lang.Boolean");
-    typeDescriptors.javaLangByte = create(ast, "java.lang.Byte");
-    typeDescriptors.javaLangCharacter = create(ast, "java.lang.Character");
-    typeDescriptors.javaLangDouble = create(ast, "java.lang.Double");
-    typeDescriptors.javaLangFloat = create(ast, "java.lang.Float");
-    typeDescriptors.javaLangInteger = create(ast, "java.lang.Integer");
-    typeDescriptors.javaLangLong = create(ast, "java.lang.Long");
-    typeDescriptors.javaLangShort = create(ast, "java.lang.Short");
-    typeDescriptors.javaLangString = create(ast, "java.lang.String");
+    typeDescriptors.javaLangBoolean =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType("java.lang.Boolean"));
+    typeDescriptors.javaLangByte =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType("java.lang.Byte"));
+    typeDescriptors.javaLangCharacter =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType("java.lang.Character"));
+    typeDescriptors.javaLangDouble =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType("java.lang.Double"));
+    typeDescriptors.javaLangFloat =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType("java.lang.Float"));
+    typeDescriptors.javaLangInteger =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType("java.lang.Integer"));
+    typeDescriptors.javaLangLong =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType("java.lang.Long"));
+    typeDescriptors.javaLangShort =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType("java.lang.Short"));
+    typeDescriptors.javaLangString =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType("java.lang.String"));
 
-    typeDescriptors.javaLangClass = create(ast, "java.lang.Class");
-    typeDescriptors.javaLangObject = create(ast, "java.lang.Object");
-    typeDescriptors.javaLangThrowable = create(ast, "java.lang.Throwable");
+    typeDescriptors.javaLangClass =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType("java.lang.Class"));
+    typeDescriptors.javaLangObject =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType("java.lang.Object"));
+    typeDescriptors.javaLangThrowable =
+        TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType("java.lang.Throwable"));
 
     typeDescriptors.javaLangNumber = createJavaLangNumber(ast);
     typeDescriptors.javaLangComparable = createJavaLangComparable(ast);
@@ -228,10 +248,6 @@ public class TypeDescriptors {
     }
   }
 
-  private static TypeDescriptor create(AST ast, String typeName) {
-    return TypeProxyUtils.createTypeDescriptor(ast.resolveWellKnownType(typeName));
-  }
-
   /**
    * Create TypeDescriptor for java.lang.Number, which is not a well known type by JDT.
    */
@@ -270,7 +286,7 @@ public class TypeDescriptors {
 
   // Common browser native types.
   public static final TypeDescriptor NATIVE_STRING =
-      createSyntheticNativeTypeDescriptor(
+      createNative(
           new ArrayList<String>(),
           // Import alias.
           Arrays.asList("NativeString"),
@@ -280,7 +296,7 @@ public class TypeDescriptors {
           // Native type name
           "String");
   public static final TypeDescriptor NATIVE_FUNCTION =
-      createSyntheticNativeTypeDescriptor(
+      createNative(
           Collections.emptyList(),
           // Import alias.
           Arrays.asList("NativeFunction"),
@@ -313,7 +329,8 @@ public class TypeDescriptors {
     private TypeDescriptor typeDescriptor;
 
     private BootstrapType(List<String> pathComponents, String name) {
-      this.typeDescriptor = createRaw(pathComponents, name);
+      this.typeDescriptor =
+          createExactly(pathComponents, Arrays.asList(name), true, Collections.emptyList());
     }
 
     public TypeDescriptor getDescriptor() {
@@ -334,13 +351,13 @@ public class TypeDescriptors {
   // Not externally instantiable.
   private TypeDescriptors() {}
 
-  public static TypeDescriptor createSyntheticRegularTypeDescriptor(
+  public static TypeDescriptor createExactly(
       List<String> packageComponents,
       List<String> classComponents,
       boolean isRaw,
       List<TypeDescriptor> typeArgumentDescriptors) {
     checkArgument(!Iterables.getLast(classComponents).contains("<"));
-    return createTypeDescriptor(
+    return createExactly(
         packageComponents,
         classComponents,
         typeArgumentDescriptors,
@@ -351,170 +368,121 @@ public class TypeDescriptors {
         false);
   }
 
-  public static TypeDescriptor createSyntheticNativeTypeDescriptor(
+  public static TypeDescriptor createNative(
       List<String> packageComponents,
       List<String> classComponents,
       List<TypeDescriptor> typeArgumentDescriptors,
-      String jsTypeNamespace,
-      String jsTypeName) {
-    return createTypeDescriptor(
+      String jsNamespace,
+      String jsName) {
+    return createExactly(
         packageComponents,
         classComponents,
         typeArgumentDescriptors,
-        jsTypeNamespace,
-        jsTypeName,
+        jsNamespace,
+        jsName,
         false,
         true,
         true);
   }
 
-  private static TypeDescriptor createTypeDescriptor(
+  public static TypeDescriptor createUnion(final List<TypeDescriptor> unionedTypeDescriptors) {
+    final TypeDescriptor[] self = new TypeDescriptor[1];
+
+    TypeDescriptor newTypeDescriptor =
+        new TypeDescriptor.Builder()
+            .setBinaryName(createUnionBinaryName(unionedTypeDescriptors))
+            .setIsNullable(true)
+            .setIsUnion(true)
+            .setRawTypeDescriptorFactory(
+                new TypeDescriptorFactory() {
+                  @Override
+                  public TypeDescriptor create() {
+                    return self[0];
+                  }
+                })
+            .setUnionedTypeDescriptors(unionedTypeDescriptors)
+            .setUniqueId(
+                createUniqueId(
+                    true, false, null, 0, true, unionedTypeDescriptors, null, null, false, null))
+            .build();
+    self[0] = newTypeDescriptor;
+
+    return intern(newTypeDescriptor);
+  }
+
+  private static TypeDescriptor createExactly(
       final List<String> packageComponents,
       final List<String> classComponents,
       final List<TypeDescriptor> typeArgumentDescriptors,
-      final String jsTypeNamespace,
-      final String jsTypeName,
+      final String jsNamespace,
+      final String jsName,
       final boolean isRaw,
       final boolean isNative,
       final boolean isJsType) {
-    // These must be lazily calculated or else there are guarranteed infinite loops of
-    // TypeDescriptor creation.
     TypeDescriptorFactory rawTypeDescriptorFactory =
         new TypeDescriptorFactory() {
           @Override
           public TypeDescriptor create() {
             List<TypeDescriptor> emptyTypeArgumentDescriptors = Collections.emptyList();
-            return createTypeDescriptor(
+            return createExactly(
                 packageComponents,
                 classComponents,
                 emptyTypeArgumentDescriptors,
-                jsTypeNamespace,
-                jsTypeName,
+                jsNamespace,
+                jsName,
                 isRaw,
                 isNative,
                 isJsType);
           }
         };
 
-    // Compute these first since they're reused in other calculations.
     String simpleName = Iterables.getLast(classComponents);
-
-    // Compute everything else.
     String binaryName =
         Joiner.on(".")
             .join(
                 Iterables.concat(
                     packageComponents,
                     Collections.singleton(Joiner.on("$").join(classComponents))));
-    String className = createClassName(classComponents, simpleName, false, false);
-    boolean isGlobal =
-        JsInteropUtils.JS_GLOBAL.equals(jsTypeNamespace) && Strings.isNullOrEmpty(jsTypeName);
+    String binaryClassName = createBinaryClassName(classComponents, simpleName, false, false);
     String packageName = Joiner.on(".").join(packageComponents);
-    String qualifiedName =
-        createQualifiedName(packageName, className, simpleName, jsTypeNamespace, jsTypeName);
-    String sourceName = Joiner.on(".").join(Iterables.concat(packageComponents, classComponents));
-    String toString = sourceName;
-    String uniqueId =
-        "?" + binaryName + TypeDescriptors.getTypeArgumentsUniqueId(typeArgumentDescriptors);
-    Visibility visibility = Visibility.PUBLIC;
-
-    // Compute these even later
-    boolean isExtern = isNative && JsInteropUtils.isGlobal(jsTypeNamespace);
 
     return intern(
-        new RegularTypeDescriptor.Builder()
+        new TypeDescriptor.Builder()
             .setBinaryName(binaryName)
             .setClassComponents(classComponents)
-            .setClassName(className)
-            .setIsExtern(isExtern)
-            .setIsGlobal(isGlobal)
+            .setBinaryClassName(binaryClassName)
+            .setIsExtern(isNative && JsInteropUtils.isGlobal(jsNamespace))
+            .setIsGlobal(
+                JsInteropUtils.JS_GLOBAL.equals(jsNamespace) && Strings.isNullOrEmpty(jsName))
             .setIsJsType(isJsType)
             .setIsNative(isNative)
             .setIsNullable(true)
             .setIsRaw(isRaw)
-            .setJsTypeName(jsTypeName)
-            .setJsTypeNamespace(jsTypeNamespace)
+            .setJsName(jsName)
+            .setJsNamespace(jsNamespace)
             .setPackageComponents(packageComponents)
             .setPackageName(packageName)
-            .setQualifiedName(qualifiedName)
+            .setQualifiedName(
+                createQualifiedName(packageName, binaryClassName, simpleName, jsNamespace, jsName))
             .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
             .setSimpleName(simpleName)
-            .setSourceName(sourceName)
-            .setToString(toString)
+            .setSourceName(
+                Joiner.on(".").join(Iterables.concat(packageComponents, classComponents)))
             .setTypeArgumentDescriptors(typeArgumentDescriptors)
-            .setUniqueId(uniqueId)
-            .setVisibility(visibility)
+            .setUniqueId(
+                createUniqueId(
+                    true,
+                    false,
+                    null,
+                    0,
+                    false,
+                    null,
+                    binaryName,
+                    typeArgumentDescriptors,
+                    false,
+                    null))
+            .setVisibility(Visibility.PUBLIC)
             .build());
-  }
-
-  private static String createQualifiedName(
-      String packageName,
-      String className,
-      String simpleName,
-      String jsTypeNamespace,
-      String jsTypeName) {
-    String qualifiedName;
-    {
-      String localNamespace = packageName;
-      String localClassName = className;
-
-      // If a custom js namespace was specified.
-      if (jsTypeNamespace != null) {
-        // The effect is to replace both the package and the class's enclosing class prefixes.
-        localNamespace = jsTypeNamespace;
-        localClassName = simpleName;
-      }
-
-      // If the JS namespace the user specified was JsPackage.GLOBAL then consider that to be top
-      // level.
-      if (JsInteropUtils.isGlobal(localNamespace)) {
-        localNamespace = "";
-      }
-
-      // If a custom JS name was specified.
-      if (jsTypeName != null) {
-        // Then use it instead of the (potentially enclosing class qualified) class name.
-        localClassName = jsTypeName;
-      }
-
-      qualifiedName =
-          Joiner.on(".")
-              .skipNulls()
-              .join(Strings.emptyToNull(localNamespace), Strings.emptyToNull(localClassName));
-    }
-    return qualifiedName;
-  }
-
-  private static String createClassName(
-      List<String> classComponents,
-      String simpleName,
-      boolean isPrimitive,
-      boolean isTypeVariable) {
-    String className;
-    {
-      if (isPrimitive) {
-        className = "$" + simpleName;
-      } else if (simpleName.equals("?")) {
-        className = "?";
-      } else if (isTypeVariable) {
-        // skip the top level class component for better output readability.
-        List<String> nameComponents =
-            new ArrayList<>(classComponents.subList(1, classComponents.size()));
-
-        // move the prefix in the simple name to the class name to avoid collisions between method-
-        // level and class-level type variable and avoid variable name starts with a number.
-        // concat class components to avoid collisions between type variables in inner/outer class.
-        // use '_' instead of '$' because '$' is not allowed in template variable name in closure.
-        nameComponents.set(
-            nameComponents.size() - 1, simpleName.substring(simpleName.indexOf('_') + 1));
-        String prefix = simpleName.substring(0, simpleName.indexOf('_') + 1);
-
-        className = prefix + Joiner.on('_').join(nameComponents);
-      } else {
-        className = Joiner.on('$').join(classComponents);
-      }
-    }
-    return className;
   }
 
   public static TypeDescriptor replaceTypeArgumentDescriptors(
@@ -522,17 +490,23 @@ public class TypeDescriptors {
     Preconditions.checkArgument(!originalTypeDescriptor.isArray());
     checkArgument(!originalTypeDescriptor.isTypeVariable());
 
-    String nullabilityPrefix = originalTypeDescriptor.isNullable() ? "?" : "!";
     List<TypeDescriptor> typeArgumentDescriptors = Lists.newArrayList(typeArgumentTypeDescriptors);
-    String uniqueId =
-        nullabilityPrefix
-            + originalTypeDescriptor.getBinaryName()
-            + TypeDescriptors.getTypeArgumentsUniqueId(typeArgumentDescriptors);
 
-    RegularTypeDescriptor newTypeDescriptor =
-        RegularTypeDescriptor.Builder.from(originalTypeDescriptor)
+    TypeDescriptor newTypeDescriptor =
+        TypeDescriptor.Builder.from(originalTypeDescriptor)
             .setTypeArgumentDescriptors(typeArgumentDescriptors)
-            .setUniqueId(uniqueId)
+            .setUniqueId(
+                createUniqueId(
+                    originalTypeDescriptor.isNullable(),
+                    originalTypeDescriptor.isArray(),
+                    originalTypeDescriptor.getLeafTypeDescriptor(),
+                    originalTypeDescriptor.getDimensions(),
+                    originalTypeDescriptor.isUnion(),
+                    originalTypeDescriptor.getUnionedTypeDescriptors(),
+                    originalTypeDescriptor.getBinaryName(),
+                    typeArgumentDescriptors,
+                    false,
+                    null))
             .build();
 
     return intern(newTypeDescriptor);
@@ -553,26 +527,21 @@ public class TypeDescriptors {
       return originalTypeDescriptor;
     }
 
-    String nullabilityPrefix = "!";
-    String uniqueId;
-    if (originalTypeDescriptor.isArray()) {
-      uniqueId =
-          "("
-              + originalTypeDescriptor.getLeafTypeDescriptor().getUniqueId()
-              + ")"
-              + Strings.repeat("[]", originalTypeDescriptor.getDimensions());
-    } else {
-      uniqueId =
-          originalTypeDescriptor.getBinaryName()
-              + TypeDescriptors.getTypeArgumentsUniqueId(
-                  originalTypeDescriptor.getTypeArgumentDescriptors());
-    }
-    uniqueId = nullabilityPrefix + uniqueId;
-
-    RegularTypeDescriptor newTypeDescriptor =
-        RegularTypeDescriptor.Builder.from(originalTypeDescriptor)
+    TypeDescriptor newTypeDescriptor =
+        TypeDescriptor.Builder.from(originalTypeDescriptor)
             .setIsNullable(false)
-            .setUniqueId(uniqueId)
+            .setUniqueId(
+                createUniqueId(
+                    false,
+                    originalTypeDescriptor.isArray(),
+                    originalTypeDescriptor.getLeafTypeDescriptor(),
+                    originalTypeDescriptor.getDimensions(),
+                    originalTypeDescriptor.isUnion(),
+                    originalTypeDescriptor.getUnionedTypeDescriptors(),
+                    originalTypeDescriptor.getBinaryName(),
+                    originalTypeDescriptor.getTypeArgumentDescriptors(),
+                    false,
+                    null))
             .build();
 
     return intern(newTypeDescriptor);
@@ -585,96 +554,116 @@ public class TypeDescriptors {
       return originalTypeDescriptor;
     }
 
-    String nullabilityPrefix = "?";
-    // TODO (stalcup): pull out a reusable uniqueId calculation function once.
-    String uniqueId;
-    if (originalTypeDescriptor.isArray()) {
-      uniqueId =
-          "("
-              + originalTypeDescriptor.getLeafTypeDescriptor().getUniqueId()
-              + ")"
-              + Strings.repeat("[]", originalTypeDescriptor.getDimensions());
-    } else {
-      uniqueId =
-          originalTypeDescriptor.getBinaryName()
-              + TypeDescriptors.getTypeArgumentsUniqueId(
-                  originalTypeDescriptor.getTypeArgumentDescriptors());
-    }
-    uniqueId = nullabilityPrefix + uniqueId;
-
-    RegularTypeDescriptor newTypeDescriptor =
-        RegularTypeDescriptor.Builder.from(originalTypeDescriptor)
+    TypeDescriptor newTypeDescriptor =
+        TypeDescriptor.Builder.from(originalTypeDescriptor)
             .setIsNullable(true)
-            .setUniqueId(uniqueId)
+            .setUniqueId(
+                createUniqueId(
+                    true,
+                    originalTypeDescriptor.isArray(),
+                    originalTypeDescriptor.getLeafTypeDescriptor(),
+                    originalTypeDescriptor.getDimensions(),
+                    originalTypeDescriptor.isUnion(),
+                    originalTypeDescriptor.getUnionedTypeDescriptors(),
+                    originalTypeDescriptor.getBinaryName(),
+                    originalTypeDescriptor.getTypeArgumentDescriptors(),
+                    false,
+                    null))
             .build();
 
     return intern(newTypeDescriptor);
   }
 
-  public static TypeDescriptor createLambdaTypeDescriptor(
+  public static TypeDescriptor createLambda(
       TypeDescriptor enclosingClassTypeDescriptor,
       String lambdaBinaryName,
-      ITypeBinding lambdaInterfaceBinding) {
-    return intern(
-        new LambdaTypeDescriptor(
-            enclosingClassTypeDescriptor, lambdaBinaryName, lambdaInterfaceBinding));
-  }
+      final ITypeBinding lambdaInterfaceBinding) {
+    final TypeDescriptor[] self = new TypeDescriptor[1];
 
-  // TODO(stalcup): examine whether createRaw() uses should be turned into createNative() uses,
-  // since accessing native bootstrap classes is so conceptually similar to accessing native JsType
-  // classes.
-  public static TypeDescriptor createRaw(List<String> nameSpaceComponents, String className) {
-    return createSyntheticRegularTypeDescriptor(
-        nameSpaceComponents, Arrays.asList(className), true, Collections.emptyList());
-  }
+    MethodDescriptorFactory concreteJsFunctionMethodDescriptorFactory =
+        new MethodDescriptorFactory() {
+          @Override
+          public MethodDescriptor create() {
+            return TypeProxyUtils.getConcreteJsFunctionMethodDescriptor(lambdaInterfaceBinding);
+          }
+        };
+    MethodDescriptorFactory jsFunctionMethodDescriptorFactory =
+        new MethodDescriptorFactory() {
+          @Override
+          public MethodDescriptor create() {
+            return TypeProxyUtils.getJsFunctionMethodDescriptor(lambdaInterfaceBinding);
+          }
+        };
+    TypeDescriptorFactory rawTypeDescriptorFactory =
+        new TypeDescriptorFactory() {
+          @Override
+          public TypeDescriptor create() {
+            return self[0];
+          }
+        };
+    TypeDescriptorFactory superTypeDescriptorFactory =
+        new TypeDescriptorFactory() {
+          @Override
+          public TypeDescriptor create() {
+            return TypeDescriptors.get().javaLangObject;
+          }
+        };
 
-  /**
-   * Creates a native TypeDescriptor from a qualified name.
-   */
-  public static TypeDescriptor createNative(String qualifiedName) {
-    if (JsInteropUtils.isGlobal(qualifiedName)) {
-      return createSyntheticNativeTypeDescriptor(
-          Arrays.asList(JsInteropUtils.JS_GLOBAL),
-          Arrays.asList(""),
-          Collections.emptyList(),
-          JsInteropUtils.JS_GLOBAL,
-          "");
-    }
-    List<String> nameComponents = Splitter.on('.').splitToList(qualifiedName);
-    int size = nameComponents.size();
-    // Fill in JS_GLOBAL as the namespace if the namespace is empty.
-    List<String> namespaceComponents =
-        size == 1 ? Arrays.asList(JsInteropUtils.JS_GLOBAL) : nameComponents.subList(0, size - 1);
-    return createSyntheticNativeTypeDescriptor(
-        namespaceComponents,
-        nameComponents.subList(size - 1, size),
-        Collections.emptyList(),
-        Joiner.on(".").join(namespaceComponents),
-        nameComponents.get(size - 1));
-  }
+    // Compute these first since they're reused in other calculations.
+    List<String> classComponents =
+        ImmutableList.copyOf(
+            Iterables.concat(
+                enclosingClassTypeDescriptor.getClassComponents(),
+                Arrays.asList(lambdaBinaryName)));
+    List<String> packageComponents = enclosingClassTypeDescriptor.getPackageComponents();
+    String simpleName = Iterables.getLast(classComponents);
 
-  private static Interner<TypeDescriptor> getInterner() {
-    if (interner == null) {
-      interner = Interners.newWeakInterner();
-    }
-    return interner;
-  }
+    // Compute everything else.
+    String binaryName =
+        Joiner.on(".")
+            .join(
+                Iterables.concat(
+                    packageComponents,
+                    Collections.singleton(Joiner.on("$").join(classComponents))));
+    String binaryClassName = createBinaryClassName(classComponents, simpleName, false, false);
+    String packageName = Joiner.on(".").join(packageComponents);
+    String qualifiedName =
+        createQualifiedName(packageName, binaryClassName, simpleName, null, null);
+    String sourceName = Joiner.on(".").join(Iterables.concat(packageComponents, classComponents));
 
-  private static TypeDescriptor intern(TypeDescriptor typeDescriptor) {
-    // Run interning through a central function so that debugging has an opportunity to inspect
-    // all of them.
-    TypeDescriptor internedTypeDescriptor = getInterner().intern(typeDescriptor);
-    return internedTypeDescriptor;
+    TypeDescriptor typeDescriptor =
+        new TypeDescriptor.Builder()
+            .setBinaryName(binaryName)
+            .setClassComponents(classComponents)
+            .setBinaryClassName(binaryClassName)
+            .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
+            .setIsInstanceNestedClass(true)
+            .setIsJsFunctionImplementation(JsInteropUtils.isJsFunction(lambdaInterfaceBinding))
+            .setIsLocal(true)
+            .setIsNullable(true)
+            .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)
+            .setPackageComponents(packageComponents)
+            .setPackageName(packageName)
+            .setQualifiedName(qualifiedName)
+            .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
+            .setSimpleName(simpleName)
+            .setSourceName(sourceName)
+            .setSuperTypeDescriptorFactory(superTypeDescriptorFactory)
+            .setUniqueId(
+                createUniqueId(true, false, null, 0, false, null, binaryName, null, false, null))
+            .setVisibility(Visibility.PRIVATE)
+            .build();
+    self[0] = typeDescriptor;
+
+    return intern(typeDescriptor);
   }
 
   // This is only used by TypeProxyUtils, and cannot be used elsewhere. Because to create a
   // TypeDescriptor from a TypeBinding, it should go through the path to check array type.
-  static TypeDescriptor createFromTypeBinding(
+  static TypeDescriptor createForType(
       final ITypeBinding typeBinding, List<TypeDescriptor> overrideTypeArgumentDescriptors) {
     checkArgument(!typeBinding.isArray());
 
-    // These must be lazily calculated or else there are guarranteed infinite loops of
-    // TypeDescriptor creation.
     MethodDescriptorFactory concreteJsFunctionMethodDescriptorFactory =
         new MethodDescriptorFactory() {
           @Override
@@ -732,27 +721,27 @@ public class TypeDescriptors {
                 Iterables.concat(
                     packageComponents,
                     Collections.singleton(Joiner.on("$").join(classComponents))));
-    String className = createClassName(classComponents, simpleName, isPrimitive, isTypeVariable);
+    String binaryClassName =
+        createBinaryClassName(classComponents, simpleName, isPrimitive, isTypeVariable);
     boolean isNative = JsInteropAnnotationUtils.isNative(jsTypeAnnotation);
     boolean isNullable = !typeBinding.isPrimitive();
-    String jsTypeName = JsInteropAnnotationUtils.getJsName(jsTypeAnnotation);
-    String jsTypeNamespace = JsInteropAnnotationUtils.getJsNamespace(jsTypeAnnotation);
+    String jsName = JsInteropAnnotationUtils.getJsName(jsTypeAnnotation);
+    String jsNamespace = JsInteropAnnotationUtils.getJsNamespace(jsTypeAnnotation);
     String packageName = Joiner.on(".").join(packageComponents);
     String sourceName = Joiner.on(".").join(Iterables.concat(packageComponents, classComponents));
-    String toString = sourceName;
     List<TypeDescriptor> typeArgumentDescriptors =
         overrideTypeArgumentDescriptors != null
             ? overrideTypeArgumentDescriptors
             : TypeProxyUtils.getTypeArgumentDescriptors(typeBinding);
 
     // Compute these even later
-    boolean isExtern = isNative && JsInteropUtils.isGlobal(jsTypeNamespace);
+    boolean isExtern = isNative && JsInteropUtils.isGlobal(jsNamespace);
 
     return intern(
-        new RegularTypeDescriptor.Builder()
+        new TypeDescriptor.Builder()
             .setBinaryName(binaryName)
             .setClassComponents(classComponents)
-            .setClassName(className)
+            .setBinaryClassName(binaryClassName)
             .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
             .setEnclosingTypeDescriptorFactory(enclosingTypeDescriptorFactory)
             .setIsEnumOrSubclass(TypeProxyUtils.isEnumOrSubclass(typeBinding))
@@ -771,89 +760,33 @@ public class TypeDescriptors {
             .setIsTypeVariable(isTypeVariable)
             .setIsWildCard(typeBinding.isWildcardType() || typeBinding.isCapture())
             .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)
-            .setJsTypeName(jsTypeName)
-            .setJsTypeNamespace(jsTypeNamespace)
+            .setJsName(jsName)
+            .setJsNamespace(jsNamespace)
             .setPackageComponents(packageComponents)
             .setPackageName(packageName)
             .setQualifiedName(
-                createQualifiedName(
-                    packageName, className, simpleName, jsTypeNamespace, jsTypeName))
+                createQualifiedName(packageName, binaryClassName, simpleName, jsNamespace, jsName))
             .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
             .setSimpleName(simpleName)
             .setSourceName(sourceName)
             .setSubclassesJsConstructorClass(
                 TypeProxyUtils.subclassesJsConstructorClass(typeBinding))
             .setSuperTypeDescriptorFactory(superTypeDescriptorFactory)
-            .setToString(toString)
             .setTypeArgumentDescriptors(typeArgumentDescriptors)
             .setUniqueId(
-                (isNullable ? "?" : "!")
-                    + (isTypeVariable
-                        ? typeBinding.getBinaryName()
-                            + ":"
-                            + typeBinding.getErasure().getBinaryName()
-                        : binaryName
-                            + TypeDescriptors.getTypeArgumentsUniqueId(typeArgumentDescriptors)))
+                createUniqueId(
+                    isNullable,
+                    false,
+                    null,
+                    0,
+                    false,
+                    null,
+                    binaryName,
+                    typeArgumentDescriptors,
+                    isTypeVariable,
+                    typeBinding.getErasure().getBinaryName()))
             .setVisibility(TypeProxyUtils.getVisibility(typeBinding.getModifiers()))
             .build());
-  }
-
-  /**
-   * TODO: Currently we depends on the namespace to tell if a type is an extern type. Returns true
-   * if the namespace is an empty string. It is true for most common cases, but not always true. We
-   * may need to introduce a new annotation to tell if it is extern when we hit the problem.
-   */
-  public static boolean isExtern(TypeDescriptor typeDescriptor) {
-    boolean isSynthesizedGlobalType =
-        typeDescriptor.isRaw() && JsInteropUtils.isGlobal(typeDescriptor.getPackageName());
-    boolean isNativeJsType =
-        typeDescriptor.isNative() && JsInteropUtils.isGlobal(typeDescriptor.getJsNamespace());
-    return isSynthesizedGlobalType || isNativeJsType;
-  }
-
-  public static boolean isGlobal(TypeDescriptor typeDescriptor) {
-    return "".equals(typeDescriptor.getQualifiedName());
-  }
-
-  public static String getBinaryName(TypeDescriptor typeDescriptor) {
-    return Joiner.on(".")
-        .join(
-            Iterables.concat(
-                typeDescriptor.getPackageComponents(),
-                Collections.singleton(Joiner.on("$").join(typeDescriptor.getClassComponents()))));
-  }
-
-  public static String getClassName(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor.isPrimitive()) {
-      return "$" + typeDescriptor.getSimpleName();
-    }
-    if (typeDescriptor.getSimpleName().equals("?")) {
-      return "?";
-    }
-    if (typeDescriptor.isTypeVariable()) {
-      checkArgument(
-          typeDescriptor.getClassComponents().size() > 1,
-          "Type Variable (not including wild card type) should have at least two name components");
-
-      // skip the top level class component for better output readability.
-      List<String> nameComponents =
-          new ArrayList<>(
-              typeDescriptor
-                  .getClassComponents()
-                  .subList(1, typeDescriptor.getClassComponents().size()));
-
-      // move the prefix in the simple name to the class name to avoid collisions between method-
-      // level and class-level type variable and avoid variable name starts with a number.
-      // concat class components to avoid collisions between type variables in inner/outer class.
-      // use '_' instead of '$' because '$' is not allowed in template variable name in closure.
-      String simpleName = typeDescriptor.getSimpleName();
-      nameComponents.set(
-          nameComponents.size() - 1, simpleName.substring(simpleName.indexOf('_') + 1));
-      String prefix = simpleName.substring(0, simpleName.indexOf('_') + 1);
-
-      return prefix + Joiner.on('_').join(nameComponents);
-    }
-    return Joiner.on('$').join(typeDescriptor.getClassComponents());
   }
 
   public static TypeDescriptor getForArray(TypeDescriptor leafTypeDescriptor, int dimensions) {
@@ -868,41 +801,37 @@ public class TypeDescriptors {
     if (dimensions == 0) {
       return leafTypeDescriptor;
     }
-    final TypeDescriptor[] holder = new TypeDescriptor[1];
+    final TypeDescriptor[] self = new TypeDescriptor[1];
 
-    // These must be lazily calculated or else there are guarranteed infinite loops of
-    // TypeDescriptor creation.
     TypeDescriptorFactory rawTypeDescriptorFactory =
         new TypeDescriptorFactory() {
           @Override
           public TypeDescriptor create() {
-            return holder[0];
+            return self[0];
           }
         };
 
     // Compute these first since they're reused in other calculations.
-    String prefix = Strings.repeat("[", dimensions);
-    String suffix = Strings.repeat("[]", dimensions);
-    String simpleName = leafTypeDescriptor.getSimpleName() + suffix;
+    String arrayPrefix = Strings.repeat("[", dimensions);
+    String arraySuffix = Strings.repeat("[]", dimensions);
+    String simpleName = leafTypeDescriptor.getSimpleName() + arraySuffix;
 
     // Compute everything else.
-    String binaryName = prefix + leafTypeDescriptor.getBinaryName();
-    String className = leafTypeDescriptor.getClassName() + suffix;
+    String binaryName = arrayPrefix + leafTypeDescriptor.getBinaryName();
+    String binaryClassName = leafTypeDescriptor.getBinaryClassName() + arraySuffix;
     TypeDescriptor componentTypeDescriptor =
         getForArray(leafTypeDescriptor, dimensions - 1, isNullable);
     String packageName = leafTypeDescriptor.getPackageName();
-    String qualifiedName = createQualifiedName(packageName, className, simpleName, null, null);
-    String sourceName = leafTypeDescriptor.getSourceName() + suffix;
-    String toString = sourceName;
+    String qualifiedName =
+        createQualifiedName(packageName, binaryClassName, simpleName, null, null);
+    String sourceName = leafTypeDescriptor.getSourceName() + arraySuffix;
     List<TypeDescriptor> typeArgumentDescriptors = Collections.emptyList();
-    String uniqueId = leafTypeDescriptor.getUniqueId() + suffix;
-    uniqueId = (isNullable ? "?" : "!") + uniqueId;
 
     TypeDescriptor typeDescriptor =
         intern(
-            new RegularTypeDescriptor.Builder()
+            new TypeDescriptor.Builder()
                 .setBinaryName(binaryName)
-                .setClassName(className)
+                .setBinaryClassName(binaryClassName)
                 .setComponentTypeDescriptor(componentTypeDescriptor)
                 .setDimensions(dimensions)
                 .setIsArray(true)
@@ -914,68 +843,24 @@ public class TypeDescriptors {
                 .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
                 .setSimpleName(simpleName)
                 .setSourceName(sourceName)
-                .setToString(toString)
                 .setTypeArgumentDescriptors(typeArgumentDescriptors)
-                .setUniqueId(uniqueId)
+                .setUniqueId(
+                    createUniqueId(
+                        isNullable,
+                        true,
+                        leafTypeDescriptor,
+                        dimensions,
+                        false,
+                        null,
+                        binaryName,
+                        typeArgumentDescriptors,
+                        false,
+                        null))
                 .build());
 
-    holder[0] = typeDescriptor;
+    self[0] = typeDescriptor;
 
     return typeDescriptor;
-  }
-
-  public static String getQualifiedName(TypeDescriptor typeDescriptor) {
-    String namespace = typeDescriptor.getPackageName();
-    String className = typeDescriptor.getClassName();
-
-    // If a custom js namespace was specified.
-    if (typeDescriptor.getJsNamespace() != null) {
-      // The effect is to replace both the package and the class's enclosing class prefixes.
-      namespace = typeDescriptor.getJsNamespace();
-      className = typeDescriptor.getSimpleName();
-    }
-
-    // If the JS namespace the user specified was JsPackage.GLOBAL then consider that to be top
-    // level.
-    if (JsInteropUtils.isGlobal(namespace)) {
-      namespace = "";
-    }
-
-    // If a custom JS name was specified.
-    if (typeDescriptor.getJsName() != null) {
-      // Then use it instead of the (potentially enclosing class qualified) class name.
-      className = typeDescriptor.getJsName();
-    }
-
-    return Joiner.on(".")
-        .skipNulls()
-        .join(Strings.emptyToNull(namespace), Strings.emptyToNull(className));
-  }
-
-  public static String getTypeArgumentsUniqueId(final TypeDescriptor typeDescriptor) {
-    if (typeDescriptor.isParameterizedType()) {
-      List<TypeDescriptor> typeArgumentDescriptors = typeDescriptor.getTypeArgumentDescriptors();
-      return getTypeArgumentsUniqueId(typeArgumentDescriptors);
-    }
-    return "";
-  }
-
-  private static String getTypeArgumentsUniqueId(List<TypeDescriptor> typeArgumentDescriptors) {
-    if (typeArgumentDescriptors.isEmpty()) {
-      return "";
-    }
-    return String.format(
-        "<%s>",
-        Joiner.on(", ")
-            .join(
-                Lists.transform(
-                    typeArgumentDescriptors,
-                    new Function<TypeDescriptor, String>() {
-                      @Override
-                      public String apply(TypeDescriptor typeDescriptor) {
-                        return typeDescriptor.getUniqueId();
-                      }
-                    })));
   }
 
   public static Expression getDefaultValue(TypeDescriptor typeDescriptor) {
@@ -998,5 +883,146 @@ public class TypeDescriptors {
 
     // Objects.
     return NullLiteral.NULL;
+  }
+
+  private static String createUniqueId(
+      boolean isNullable,
+      boolean isArray,
+      TypeDescriptor leafTypeDescriptor,
+      int dimensions,
+      boolean isUnion,
+      List<TypeDescriptor> unionedTypeDescriptors,
+      String binaryName,
+      List<TypeDescriptor> typeArgumentDescriptors,
+      boolean isTypeVariable,
+      String erasureBinaryName) {
+    String uniqueId;
+
+    if (isArray) {
+      uniqueId = "(" + leafTypeDescriptor.getUniqueId() + ")" + Strings.repeat("[]", dimensions);
+    } else if (isUnion) {
+      uniqueId = createUnionBinaryName(unionedTypeDescriptors);
+    } else if (isTypeVariable) {
+      uniqueId = binaryName + ":" + erasureBinaryName;
+    } else {
+      uniqueId = binaryName + TypeDescriptors.createTypeArgumentsUniqueId(typeArgumentDescriptors);
+    }
+
+    return (isNullable ? "?" : "!") + uniqueId;
+  }
+
+  private static String createTypeArgumentsUniqueId(List<TypeDescriptor> typeArgumentDescriptors) {
+    if (typeArgumentDescriptors == null || typeArgumentDescriptors.isEmpty()) {
+      return "";
+    }
+    return String.format(
+        "<%s>",
+        Joiner.on(", ")
+            .join(
+                Lists.transform(
+                    typeArgumentDescriptors,
+                    new Function<TypeDescriptor, String>() {
+                      @Override
+                      public String apply(TypeDescriptor typeDescriptor) {
+                        return typeDescriptor.getUniqueId();
+                      }
+                    })));
+  }
+
+  private static String createQualifiedName(
+      String packageName,
+      String binaryClassName,
+      String simpleName,
+      String jsNamespace,
+      String jsName) {
+    String qualifiedName;
+    {
+      String localNamespace = packageName;
+      String localBinaryClassName = binaryClassName;
+
+      // If a custom js namespace was specified.
+      if (jsNamespace != null) {
+        // The effect is to replace both the package and the class's enclosing class prefixes.
+        localNamespace = jsNamespace;
+        localBinaryClassName = simpleName;
+      }
+
+      // If the JS namespace the user specified was JsPackage.GLOBAL then consider that to be top
+      // level.
+      if (JsInteropUtils.isGlobal(localNamespace)) {
+        localNamespace = "";
+      }
+
+      // If a custom JS name was specified.
+      if (jsName != null) {
+        // Then use it instead of the (potentially enclosing class qualified) class name.
+        localBinaryClassName = jsName;
+      }
+
+      qualifiedName =
+          Joiner.on(".")
+              .skipNulls()
+              .join(Strings.emptyToNull(localNamespace), Strings.emptyToNull(localBinaryClassName));
+    }
+    return qualifiedName;
+  }
+
+  private static String createBinaryClassName(
+      List<String> classComponents,
+      String simpleName,
+      boolean isPrimitive,
+      boolean isTypeVariable) {
+    String binaryClassName;
+    {
+      if (isPrimitive) {
+        binaryClassName = "$" + simpleName;
+      } else if (simpleName.equals("?")) {
+        binaryClassName = "?";
+      } else if (isTypeVariable) {
+        // skip the top level class component for better output readability.
+        List<String> nameComponents =
+            new ArrayList<>(classComponents.subList(1, classComponents.size()));
+
+        // move the prefix in the simple name to the class name to avoid collisions between method-
+        // level and class-level type variable and avoid variable name starts with a number.
+        // concat class components to avoid collisions between type variables in inner/outer class.
+        // use '_' instead of '$' because '$' is not allowed in template variable name in closure.
+        nameComponents.set(
+            nameComponents.size() - 1, simpleName.substring(simpleName.indexOf('_') + 1));
+        String prefix = simpleName.substring(0, simpleName.indexOf('_') + 1);
+
+        binaryClassName = prefix + Joiner.on('_').join(nameComponents);
+      } else {
+        binaryClassName = Joiner.on('$').join(classComponents);
+      }
+    }
+    return binaryClassName;
+  }
+
+  private static String createUnionBinaryName(final List<TypeDescriptor> unionedTypeDescriptors) {
+    return Joiner.on(" | ")
+        .join(
+            Lists.transform(
+                unionedTypeDescriptors,
+                new Function<TypeDescriptor, String>() {
+                  @Override
+                  public String apply(TypeDescriptor typeDescriptor) {
+                    return typeDescriptor.getBinaryName();
+                  }
+                }));
+  }
+
+  private static Interner<TypeDescriptor> getInterner() {
+    if (interner == null) {
+      interner = Interners.newWeakInterner();
+    }
+    return interner;
+  }
+
+  private static TypeDescriptor intern(TypeDescriptor typeDescriptor) {
+    // Run interning through a central function so that debugging has an opportunity to inspect
+    // all of them.
+    TypeDescriptor internedTypeDescriptor = getInterner().intern(typeDescriptor);
+    return internedTypeDescriptor;
   }
 }

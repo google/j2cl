@@ -75,7 +75,8 @@ public class JdtMethodUtils {
     boolean isConstructor = methodBinding.isConstructor();
     String methodName =
         isConstructor
-            ? TypeProxyUtils.createTypeDescriptor(methodBinding.getDeclaringClass()).getClassName()
+            ? TypeProxyUtils.createTypeDescriptor(methodBinding.getDeclaringClass())
+                .getBinaryClassName()
             : methodBinding.getName();
     final Nullability defaultNullabilityForPackage =
         TypeProxyUtils.getPackageDefaultNullability(methodBinding.getDeclaringClass().getPackage());

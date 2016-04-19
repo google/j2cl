@@ -60,7 +60,7 @@ public class GeneratorUtils {
    */
   public static String getRelativePath(JavaType javaType) {
     TypeDescriptor typeDescriptor = javaType.getDescriptor();
-    String typeName = typeDescriptor.getClassName();
+    String typeName = typeDescriptor.getBinaryClassName();
     String packageName = typeDescriptor.getPackageName();
     return packageName.replace(".", File.separator) + File.separator + typeName;
   }
@@ -70,7 +70,7 @@ public class GeneratorUtils {
    */
   public static String getAbsolutePath(CompilationUnit compilationUnit, JavaType javaType) {
     TypeDescriptor typeDescriptor = javaType.getDescriptor();
-    String typeName = typeDescriptor.getClassName();
+    String typeName = typeDescriptor.getBinaryClassName();
     return compilationUnit.getDirectoryPath() + File.separator + typeName;
   }
 

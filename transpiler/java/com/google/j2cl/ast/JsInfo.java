@@ -28,9 +28,15 @@ import javax.annotation.Nullable;
 public abstract class JsInfo {
   public abstract JsMemberType getJsMemberType();
 
+  /**
+   * The name specified directly on a type, method or field.
+   */
   @Nullable
   public abstract String getJsName();
 
+  /**
+   * The namespace specified on a package, type, method or field.
+   */
   @Nullable
   public abstract String getJsNamespace();
 
@@ -46,8 +52,8 @@ public abstract class JsInfo {
   private static Interner<JsInfo> interner;
 
   /**
-   * Creates an instance of an AutoValue generated JsInfo which uses Interners
-   * to share identical instances of JsInfos.
+   * Creates an instance of an AutoValue generated JsInfo which uses Interners to share identical
+   * instances of JsInfos.
    */
   public static JsInfo create(
       JsMemberType jsMemberType, String jsName, String jsNamespace, boolean isJsOverlay) {

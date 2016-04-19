@@ -29,7 +29,6 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
-import com.google.j2cl.ast.UnionTypeDescriptor;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -64,8 +63,8 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   private static String getShortAliasName(TypeDescriptor typeDescriptor) {
     // Add "$" prefix for bootstrap types and extern types.
     return BootstrapType.typeDescriptors.contains(typeDescriptor) || typeDescriptor.isExtern()
-        ? "$" + typeDescriptor.getClassName()
-        : typeDescriptor.getClassName();
+        ? "$" + typeDescriptor.getBinaryClassName()
+        : typeDescriptor.getBinaryClassName();
   }
 
   private static boolean needImportForJsDoc(TypeDescriptor returnTypeDescriptor) {
@@ -124,8 +123,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
     // Unroll the types inside of a union type.
     if (typeDescriptor.isUnion()) {
-      UnionTypeDescriptor unionTypeDescriptor = (UnionTypeDescriptor) typeDescriptor;
-      for (TypeDescriptor containedTypeDescriptor : unionTypeDescriptor.getTypes()) {
+      for (TypeDescriptor containedTypeDescriptor : typeDescriptor.getUnionedTypeDescriptors()) {
         addTypeDescriptor(containedTypeDescriptor, importCategory);
       }
       return;
@@ -263,11 +261,6 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     for (TypeDescriptor typeArgument : typeDescriptor.getTypeArgumentDescriptors()) {
       addTypeDescriptor(typeArgument, ImportCategory.LAZY);
     }
-  }
-
-  @Override
-  public void exitUnionTypeDescriptor(UnionTypeDescriptor unionTypeDescriptor) {
-    addTypeDescriptor(unionTypeDescriptor, ImportCategory.LAZY);
   }
 
   /**

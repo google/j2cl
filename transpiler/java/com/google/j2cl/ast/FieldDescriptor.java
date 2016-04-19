@@ -70,8 +70,8 @@ public abstract class FieldDescriptor extends Node implements Member {
   public abstract boolean isStatic();
 
   /**
-   * Returns whether this is a Raw reference. Raw references are not mangled in the output and
-   * thus can be used to describe reference to JS apis.
+   * Returns whether this is a Raw reference. Raw references are not mangled in the output and thus
+   * can be used to describe reference to JS apis.
    */
   public abstract boolean isRaw();
 
@@ -184,7 +184,7 @@ public abstract class FieldDescriptor extends Node implements Member {
       this.visibility = visibility;
       return this;
     }
-    
+
     public Builder isRaw(boolean isRaw) {
       this.isRaw = isRaw;
       return this;

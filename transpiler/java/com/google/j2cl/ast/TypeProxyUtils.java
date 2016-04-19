@@ -141,7 +141,7 @@ public class TypeProxyUtils {
       return TypeDescriptors.getForArray(leafTypeDescriptor, typeBinding.getDimensions());
     }
 
-    return TypeDescriptors.createFromTypeBinding(typeBinding, typeArgumentDescriptors);
+    return TypeDescriptors.createForType(typeBinding, typeArgumentDescriptors);
   }
 
   static List<String> getPackageComponents(ITypeBinding typeBinding) {
@@ -225,22 +225,22 @@ public class TypeProxyUtils {
     }
   }
 
-  public static boolean isInstanceMemberClass(ITypeBinding typeBinding) {
+  static boolean isInstanceMemberClass(ITypeBinding typeBinding) {
     return typeBinding.isMember() && !Modifier.isStatic(typeBinding.getModifiers());
   }
 
-  public static boolean isInstanceNestedClass(ITypeBinding typeBinding) {
+  static boolean isInstanceNestedClass(ITypeBinding typeBinding) {
     return typeBinding.isNested() && !Modifier.isStatic(typeBinding.getModifiers());
   }
 
-  public static boolean isLocal(ITypeBinding typeBinding) {
+  static boolean isLocal(ITypeBinding typeBinding) {
     return typeBinding.isLocal();
   }
 
   /**
    * Returns true if {@code typeBinding} is a class that implements a JsFunction interface.
    */
-  public static boolean isJsFunctionImplementation(ITypeBinding typeBinding) {
+  static boolean isJsFunctionImplementation(ITypeBinding typeBinding) {
     if (typeBinding == null || !typeBinding.isClass()) {
       return false;
     }
@@ -252,7 +252,7 @@ public class TypeProxyUtils {
     return false;
   }
 
-  public static boolean isEnumOrSubclass(ITypeBinding typeBinding) {
+  static boolean isEnumOrSubclass(ITypeBinding typeBinding) {
     if (typeBinding == null) {
       return false;
     }
@@ -262,7 +262,7 @@ public class TypeProxyUtils {
   /**
    * Returns true if the given type has a JsConstructor.
    */
-  public static boolean isJsConstructorClass(ITypeBinding typeBinding) {
+  static boolean isJsConstructorClass(ITypeBinding typeBinding) {
     if (typeBinding == null || !typeBinding.isClass()) {
       return false;
     }
@@ -294,7 +294,7 @@ public class TypeProxyUtils {
    * Returns true if the given type has a JsConstructor, or it is a successor of a class that has a
    * JsConstructor.
    */
-  public static boolean subclassesJsConstructorClass(ITypeBinding typeBinding) {
+  static boolean subclassesJsConstructorClass(ITypeBinding typeBinding) {
     if (typeBinding == null) {
       return false;
     }
@@ -305,7 +305,7 @@ public class TypeProxyUtils {
   /**
    * Returns the MethodDescriptor for the SAM method in JsFunction interface.
    */
-  public static MethodDescriptor getJsFunctionMethodDescriptor(ITypeBinding typeBinding) {
+  static MethodDescriptor getJsFunctionMethodDescriptor(ITypeBinding typeBinding) {
     IMethodBinding samInJsFunctionInterface = getSAMInJsFunctionInterface(typeBinding);
     return samInJsFunctionInterface == null
         ? null
@@ -315,7 +315,7 @@ public class TypeProxyUtils {
   /**
    * Returns the MethodDescriptor for the concrete JsFunction method implementation.
    */
-  public static MethodDescriptor getConcreteJsFunctionMethodDescriptor(ITypeBinding typeBinding) {
+  static MethodDescriptor getConcreteJsFunctionMethodDescriptor(ITypeBinding typeBinding) {
     IMethodBinding samInJsFunctionInterface = getSAMInJsFunctionInterface(typeBinding);
     if (samInJsFunctionInterface == null) {
       return null;
