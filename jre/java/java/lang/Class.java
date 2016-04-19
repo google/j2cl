@@ -17,12 +17,14 @@ import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
+import java.io.Serializable;
+import java.lang.reflect.Type;
+
 /**
- * See <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html">the
- * official Java API doc</a> for details.
+ * See <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html">the official Java API
+ * doc</a> for details.
  */
-public class Class<T> {
+public final class Class<T> implements Type, Serializable {
 
   /**
    * Returns the Class instance that corresponds to provided constructor and optional dimension
