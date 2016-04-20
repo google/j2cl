@@ -13,7 +13,10 @@
  */
 package java.lang;
 
+import javaemul.internal.HashCodes;
+
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsProperty;
 
 /**
  * See <a
@@ -23,30 +26,40 @@ import jsinterop.annotations.JsMethod;
 public class Object {
 
   public boolean equals(Object that) {
-    // Super-source replaced.
-    return false;
-  }
-
-  public final Class<?> getClass() {
-    // Super-source replaced.
-    return null;
+    return this == that;
   }
 
   public int hashCode() {
-    // Super-source replaced.
-    return 0;
+    return HashCodes.getObjectIdentityHashCode(this);
   }
 
   @JsMethod(name = "$javaToString")
   public String toString() {
-    // Super-source replaced.
-    return null;
+    // TODO: fix this implementation. The hash code should be returned in hex
+    // but can't currently depend on Integer to get access to that static
+    // function because Closure doesn't yet support module circular references.
+    return this.getClass().getName() + "@" + this.hashCode();
   }
 
-
+  // Defined as native so that we can modify the JsDoc to change return type to non-null.
+  // TODO(goktug): Use @NotNull when available.
   @JsMethod(name = "toString")
-  private String toStringBridge() {
-    // Super-source replaced.
-    return null;
+  private native String toStringBridge();
+
+  public final Class<?> getClass() {
+    return Class.$get(getConstructor());
+  }
+
+  @JsProperty
+  private native Object getConstructor();
+
+  @JsMethod
+  private static boolean $isInstance(Object instance) {
+    return true;
+  }
+
+  @JsMethod
+  private static boolean $isAssignableFrom(Object instance) {
+    return true;
   }
 }
