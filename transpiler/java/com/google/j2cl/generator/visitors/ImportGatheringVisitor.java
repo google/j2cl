@@ -62,9 +62,11 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   private static String getShortAliasName(TypeDescriptor typeDescriptor) {
     // Add "$" prefix for bootstrap types and extern types.
-    return BootstrapType.typeDescriptors.contains(typeDescriptor) || typeDescriptor.isExtern()
-        ? "$" + typeDescriptor.getBinaryClassName()
-        : typeDescriptor.getBinaryClassName();
+    if (BootstrapType.typeDescriptors.contains(TypeDescriptors.toNullable(typeDescriptor))
+        || typeDescriptor.isExtern()) {
+      return "$" + typeDescriptor.getBinaryClassName();
+    }
+    return typeDescriptor.getBinaryClassName();
   }
 
   private static boolean needImportForJsDoc(TypeDescriptor returnTypeDescriptor) {

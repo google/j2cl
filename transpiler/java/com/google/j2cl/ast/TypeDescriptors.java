@@ -181,11 +181,14 @@ public class TypeDescriptors {
   }
 
   public static TypeDescriptor getPrimitiveTypeFromBoxType(TypeDescriptor boxType) {
-    return get().boxedTypeByPrimitiveType.inverse().get(boxType);
+    return get().boxedTypeByPrimitiveType.inverse().get(TypeDescriptors.toNullable(boxType));
   }
 
   public static boolean isBoxedType(TypeDescriptor typeDescriptor) {
-    return get().boxedTypeByPrimitiveType.containsValue(typeDescriptor);
+    if (typeDescriptor.isTypeVariable()) {
+      return false;
+    }
+    return get().boxedTypeByPrimitiveType.containsValue(TypeDescriptors.toNullable(typeDescriptor));
   }
 
   public static boolean isNonVoidPrimitiveType(TypeDescriptor typeDescriptor) {
@@ -193,7 +196,8 @@ public class TypeDescriptors {
   }
 
   public static boolean isBoxedBooleanOrDouble(TypeDescriptor typeDescriptor) {
-    return typeDescriptor == get().javaLangBoolean || typeDescriptor == get().javaLangDouble;
+    return typeDescriptor.equalsIgnoreNullability(get().javaLangBoolean)
+        || typeDescriptor.equalsIgnoreNullability(get().javaLangDouble);
   }
 
   public static boolean isPrimitiveBooleanOrDouble(TypeDescriptor typeDescriptor) {
@@ -211,7 +215,8 @@ public class TypeDescriptors {
   }
 
   public static boolean isBoxedTypeAsJsPrimitives(TypeDescriptor typeDescriptor) {
-    return isBoxedBooleanOrDouble(typeDescriptor) || typeDescriptor == get().javaLangString;
+    return isBoxedBooleanOrDouble(typeDescriptor)
+        || typeDescriptor.equalsIgnoreNullability(get().javaLangString);
   }
 
   public static boolean isNonBoxedReferenceType(TypeDescriptor typeDescriptor) {

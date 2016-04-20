@@ -86,8 +86,8 @@ public class MakeEnumConstructionsExplicit extends AbstractRewriter {
     // and name.
     if (!getCurrentJavaType().isEnum()
         || getCurrentField() == null
-        || getCurrentField().getDescriptor().getTypeDescriptor()
-            != getCurrentJavaType().getDescriptor()) {
+        || !getCurrentField().getDescriptor().getTypeDescriptor().equalsIgnoreNullability(
+                getCurrentJavaType().getDescriptor())) {
 
       // Enum constants creations are exactly those that are field initializers for fields
       // whose class is then enum class.

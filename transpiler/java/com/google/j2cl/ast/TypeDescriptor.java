@@ -420,6 +420,10 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return false;
   }
 
+  public boolean equalsIgnoreNullability(TypeDescriptor other) {
+    return TypeDescriptors.toNullable(this).equals(TypeDescriptors.toNullable(other));
+  }
+
   /**
    * Returns the unqualified binary name like "Outer$Inner".
    */
