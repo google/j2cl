@@ -4,9 +4,9 @@
 goog.module('vmbootstrap.Enums$impl');
 
 let IllegalArgumentException =
-    goog.forwardDeclare('gen.java.lang.IllegalArgumentException$impl');
+    goog.forwardDeclare('java.lang.IllegalArgumentException$impl');
 let Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
-let Enum = goog.forwardDeclare('gen.java.lang.Enum$impl');
+let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 
 class Enums {
   /**
@@ -51,9 +51,9 @@ class Enums {
    */
   static $clinit() {
     IllegalArgumentException =
-        goog.module.get('gen.java.lang.IllegalArgumentException$impl');
+        goog.module.get('java.lang.IllegalArgumentException$impl');
     Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
-    Enum = goog.module.get('gen.java.lang.Enum$impl');
+    Enum = goog.module.get('java.lang.Enum$impl');
   }
 };
 

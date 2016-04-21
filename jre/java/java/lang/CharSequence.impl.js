@@ -1,12 +1,12 @@
 /**
  * Impl transpiled from java.lang.CharSequence.
  */
-goog.module('gen.java.lang.CharSequence$impl');
+goog.module('java.lang.CharSequence$impl');
 
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let String = goog.forwardDeclare('gen.java.lang.String$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -90,7 +90,7 @@ class CharSequence {
    * @protected
    */
   static $clinit() {
-    String = goog.module.get('gen.java.lang.String$impl');
+    String = goog.module.get('java.lang.String$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };

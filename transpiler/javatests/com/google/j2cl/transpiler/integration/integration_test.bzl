@@ -86,7 +86,7 @@ def integration_test(
   # blaze build :optimized_js
   opt_harness = """
       goog.module('gen.opt.Harness');
-      var Main = goog.require('gen.%s.Main');
+      var Main = goog.require('%s.Main');
       Main.m_main__arrayOf_java_lang_String([]);
   """ % java_package
   native.genrule(
@@ -221,7 +221,7 @@ def integration_test(
       %s
 
       var testSuite = goog.require('goog.testing.testSuite');
-      var Main = goog.require('gen.%s.Main');
+      var Main = goog.require('%s.Main');
       testSuite({
         test_Main: function() {
           Main.m_main__arrayOf_java_lang_String([]);

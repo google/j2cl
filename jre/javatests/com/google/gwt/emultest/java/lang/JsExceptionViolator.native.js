@@ -1,4 +1,4 @@
-let JsException = goog.require("gen.java.lang.JsException");
+let JsException = goog.require("java.lang.JsException");
 
 /**
  * @param {*} wrapped

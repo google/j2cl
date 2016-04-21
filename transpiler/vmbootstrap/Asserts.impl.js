@@ -5,7 +5,7 @@ goog.module('vmbootstrap.Asserts$impl');
 
 
 let AssertionError =
-     goog.forwardDeclare('gen.java.lang.AssertionError$impl');
+     goog.forwardDeclare('java.lang.AssertionError$impl');
 let Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 
@@ -45,7 +45,7 @@ class Asserts {
   * @protected
   */
   static $clinit() {
-    AssertionError = goog.module.get('gen.java.lang.AssertionError$impl');
+    AssertionError = goog.module.get('java.lang.AssertionError$impl');
     Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
   }
 };

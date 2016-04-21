@@ -6,7 +6,7 @@ goog.module('vmbootstrap.Asserts');
 
 // Imports headers for both eager and lazy dependencies to ensure that
 // all files are included in the dependency tree.
-let _AssertionError = goog.require('gen.java.lang.AssertionError');
+let _AssertionError = goog.require('java.lang.AssertionError');
 let _Exceptions = goog.require('vmbootstrap.Exceptions');
 
 // Re-exports the implementation.

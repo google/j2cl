@@ -3,8 +3,8 @@
  */
 goog.module('vmbootstrap.CharSequences$impl');
 
-let CharSequence = goog.forwardDeclare('gen.java.lang.CharSequence$impl');
-let String = goog.forwardDeclare('gen.java.lang.String$impl');
+let CharSequence = goog.forwardDeclare('java.lang.CharSequence$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 
 
 /**
@@ -68,8 +68,8 @@ class CharSequences {
    * @public
    */
   static $clinit() {
-    CharSequence = goog.module.get('gen.java.lang.CharSequence$impl');
-    String = goog.module.get('gen.java.lang.String$impl');
+    CharSequence = goog.module.get('java.lang.CharSequence$impl');
+    String = goog.module.get('java.lang.String$impl');
   }
 }
 

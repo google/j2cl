@@ -5,13 +5,13 @@
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
  * const, missingRequire}
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.equality.Equality$impl');
+goog.module('com.google.j2cl.transpiler.readable.equality.Equality$impl');
 
 
-let Object = goog.require('gen.java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
@@ -87,7 +87,7 @@ class Equality extends Object {
    * @public
    */
   static $clinit() {
-    Class = goog.module.get('gen.java.lang.Class$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
     Object.$clinit();

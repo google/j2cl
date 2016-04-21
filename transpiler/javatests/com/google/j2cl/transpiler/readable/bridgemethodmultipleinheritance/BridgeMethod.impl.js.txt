@@ -5,16 +5,16 @@
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
  * const, missingRequire}
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod$impl');
+goog.module('com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod$impl');
 
 
-let Parent = goog.require('gen.com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent$impl');
-let SomeInterface = goog.require('gen.com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeInterface$impl');
+let Parent = goog.require('com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent$impl');
+let SomeInterface = goog.require('com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeInterface$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let AssertionError = goog.forwardDeclare('gen.java.lang.AssertionError$impl');
-let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
-let Number = goog.forwardDeclare('gen.java.lang.Number$impl');
+let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
@@ -134,9 +134,9 @@ class BridgeMethod extends Parent {
    * @public
    */
   static $clinit() {
-    AssertionError = goog.module.get('gen.java.lang.AssertionError$impl');
-    Class = goog.module.get('gen.java.lang.Class$impl');
-    Number = goog.module.get('gen.java.lang.Number$impl');
+    AssertionError = goog.module.get('java.lang.AssertionError$impl');
+    Class = goog.module.get('java.lang.Class$impl');
+    Number = goog.module.get('java.lang.Number$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     Parent.$clinit();
   }

@@ -5,14 +5,14 @@
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
  * const, missingRequire}
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.staticjsmethods.StaticJsMethods$impl');
+goog.module('com.google.j2cl.transpiler.readable.staticjsmethods.StaticJsMethods$impl');
 
 
-let Object = goog.require('gen.java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Bar = goog.forwardDeclare('foo.Bar');
-let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
@@ -103,7 +103,7 @@ class StaticJsMethods extends Object {
    */
   static $clinit() {
     Bar = goog.module.get('foo.Bar');
-    Class = goog.module.get('gen.java.lang.Class$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     $double = goog.module.get('vmbootstrap.primitives.$double$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Object.$clinit();

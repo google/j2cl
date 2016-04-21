@@ -86,12 +86,6 @@ public class Import implements Comparable<Import> {
       // TODO: use "self.Foo" (it will work in more environments) when JSCompiler understands it.
       return "window." + typeDescriptor.getQualifiedName();
     }
-    if (typeDescriptor.isRaw()) {
-      return typeDescriptor.getBinaryName();
-    }
-    if (typeDescriptor.isJsType()) {
-      return typeDescriptor.getQualifiedName();
-    }
-    return "gen." + typeDescriptor.getBinaryName();
+    return typeDescriptor.getQualifiedName();
   }
 }

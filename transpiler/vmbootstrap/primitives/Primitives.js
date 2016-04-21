@@ -9,7 +9,7 @@ goog.module('vmbootstrap.primitives.Primitives');
 let Long = goog.require('nativebootstrap.Long');
 let _LongUtils = goog.require('vmbootstrap.LongUtils');
 let _$int = goog.require('vmbootstrap.primitives.$int');
-let _ArithmeticException = goog.require('gen.java.lang.ArithmeticException');
+let _ArithmeticException = goog.require('java.lang.ArithmeticException');
 
 
 // Re-exports the implementation.

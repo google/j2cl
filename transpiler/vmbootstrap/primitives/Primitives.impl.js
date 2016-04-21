@@ -8,7 +8,7 @@ let $Long = goog.require('nativebootstrap.Long$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 let ArithmeticException =
-    goog.forwardDeclare('gen.java.lang.ArithmeticException$impl');
+    goog.forwardDeclare('java.lang.ArithmeticException$impl');
 let Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 /**
@@ -426,7 +426,7 @@ class Primitives {
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
     ArithmeticException =
-        goog.module.get('gen.java.lang.ArithmeticException$impl');
+        goog.module.get('java.lang.ArithmeticException$impl');
     Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
   }
 };

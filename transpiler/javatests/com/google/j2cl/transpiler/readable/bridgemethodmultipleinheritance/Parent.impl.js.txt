@@ -5,15 +5,15 @@
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
  * const, missingRequire}
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent$impl');
+goog.module('com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.Parent$impl');
 
 
-let SuperParent = goog.require('gen.com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent$impl');
+let SuperParent = goog.require('com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SuperParent$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
-let Error = goog.forwardDeclare('gen.java.lang.Error$impl');
-let Number = goog.forwardDeclare('gen.java.lang.Number$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let Error = goog.forwardDeclare('java.lang.Error$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
@@ -111,9 +111,9 @@ class Parent extends SuperParent {
    * @public
    */
   static $clinit() {
-    Class = goog.module.get('gen.java.lang.Class$impl');
-    Error = goog.module.get('gen.java.lang.Error$impl');
-    Number = goog.module.get('gen.java.lang.Number$impl');
+    Class = goog.module.get('java.lang.Class$impl');
+    Error = goog.module.get('java.lang.Error$impl');
+    Number = goog.module.get('java.lang.Number$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     SuperParent.$clinit();
   }

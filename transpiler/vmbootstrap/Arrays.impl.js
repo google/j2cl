@@ -9,14 +9,14 @@ goog.module('vmbootstrap.Arrays$impl');
 let Hashing = goog.require('nativebootstrap.Hashing$impl');
 
 let ArrayIndexOutOfBoundsException =
-    goog.forwardDeclare('gen.java.lang.ArrayIndexOutOfBoundsException$impl');
+    goog.forwardDeclare('java.lang.ArrayIndexOutOfBoundsException$impl');
 let ArrayStoreException =
-    goog.forwardDeclare('gen.java.lang.ArrayStoreException$impl');
-let Class = goog.forwardDeclare('gen.java.lang.Class');
-let Object = goog.forwardDeclare('gen.java.lang.Object');
-let Integer = goog.forwardDeclare('gen.java.lang.Integer$impl');
+    goog.forwardDeclare('java.lang.ArrayStoreException$impl');
+let Class = goog.forwardDeclare('java.lang.Class');
+let Object = goog.forwardDeclare('java.lang.Object');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let NullPointerException =
-    goog.forwardDeclare('gen.java.lang.NullPointerException$impl');
+    goog.forwardDeclare('java.lang.NullPointerException$impl');
 let Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
@@ -521,14 +521,14 @@ class Arrays {
    */
   static $clinit() {
     ArrayIndexOutOfBoundsException =
-        goog.module.get('gen.java.lang.ArrayIndexOutOfBoundsException$impl');
+        goog.module.get('java.lang.ArrayIndexOutOfBoundsException$impl');
     ArrayStoreException =
-        goog.module.get('gen.java.lang.ArrayStoreException$impl');
-    Class = goog.module.get('gen.java.lang.Class');
-    Object = goog.module.get('gen.java.lang.Object');
-    Integer = goog.module.get('gen.java.lang.Integer$impl');
+        goog.module.get('java.lang.ArrayStoreException$impl');
+    Class = goog.module.get('java.lang.Class');
+    Object = goog.module.get('java.lang.Object');
+    Integer = goog.module.get('java.lang.Integer$impl');
     NullPointerException =
-        goog.module.get('gen.java.lang.NullPointerException$impl');
+        goog.module.get('java.lang.NullPointerException$impl');
     Casts = goog.module.get('vmbootstrap.Casts$impl');
     Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
   }

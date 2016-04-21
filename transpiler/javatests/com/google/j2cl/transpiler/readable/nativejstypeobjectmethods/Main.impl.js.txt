@@ -5,13 +5,13 @@
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
  * const, missingRequire}
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main$impl');
+goog.module('com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main$impl');
 
 
-let Object = goog.require('gen.java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Main$NativeJsTypeWithToString = goog.forwardDeclare('test.foo.NativeJsTypeWithToString');
 let Main$NativeJsTypeWithoutToString = goog.forwardDeclare('test.foo.NativeJsTypeWithoutToString');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
@@ -85,7 +85,7 @@ class Main extends Object {
    * @public
    */
   static $clinit() {
-    Class = goog.module.get('gen.java.lang.Class$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     Main$NativeJsTypeWithToString =
         goog.module.get('test.foo.NativeJsTypeWithToString');
     Main$NativeJsTypeWithoutToString =

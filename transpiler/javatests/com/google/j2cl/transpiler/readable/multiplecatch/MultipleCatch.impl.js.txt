@@ -5,17 +5,17 @@
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
  * const, missingRequire}
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch$impl');
+goog.module('com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch$impl');
 
 
-let Object = goog.require('gen.java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
-let ClassCastException = goog.forwardDeclare('gen.java.lang.ClassCastException$impl');
-let NullPointerException = goog.forwardDeclare('gen.java.lang.NullPointerException$impl');
-let RuntimeException = goog.forwardDeclare('gen.java.lang.RuntimeException$impl');
-let Throwable = goog.forwardDeclare('gen.java.lang.Throwable$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let ClassCastException = goog.forwardDeclare('java.lang.ClassCastException$impl');
+let NullPointerException = goog.forwardDeclare('java.lang.NullPointerException$impl');
+let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
+let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 
@@ -91,13 +91,12 @@ class MultipleCatch extends Object {
    * @public
    */
   static $clinit() {
-    Class = goog.module.get('gen.java.lang.Class$impl');
-    ClassCastException =
-        goog.module.get('gen.java.lang.ClassCastException$impl');
+    Class = goog.module.get('java.lang.Class$impl');
+    ClassCastException = goog.module.get('java.lang.ClassCastException$impl');
     NullPointerException =
-        goog.module.get('gen.java.lang.NullPointerException$impl');
-    RuntimeException = goog.module.get('gen.java.lang.RuntimeException$impl');
-    Throwable = goog.module.get('gen.java.lang.Throwable$impl');
+        goog.module.get('java.lang.NullPointerException$impl');
+    RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
+    Throwable = goog.module.get('java.lang.Throwable$impl');
     $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
     Object.$clinit();
   }

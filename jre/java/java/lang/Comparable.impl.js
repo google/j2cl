@@ -1,7 +1,7 @@
 /**
  * Impl transpiled from java.lang.Comparable.
  */
-goog.module('gen.java.lang.Comparable$impl');
+goog.module('java.lang.Comparable$impl');
 
 
 let $Util = goog.require('nativebootstrap.Util$impl');

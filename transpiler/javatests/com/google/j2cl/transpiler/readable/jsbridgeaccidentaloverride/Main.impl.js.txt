@@ -5,17 +5,17 @@
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
  * const, missingRequire}
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main$impl');
+goog.module('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main$impl');
 
 
-let Object = goog.require('gen.java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let MyInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyInterface$impl');
 let MyJsType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType$impl');
-let MyInterface = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyInterface$impl');
-let OtherInterface = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface$impl');
-let SubJsType = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType$impl');
-let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let OtherInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface$impl');
+let SubJsType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
 class Main extends Object {
@@ -90,15 +90,15 @@ class Main extends Object {
    * @public
    */
   static $clinit() {
+    MyInterface = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyInterface$impl');
     MyJsType = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType$impl');
-    MyInterface = goog.module.get(
-        'gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyInterface$impl');
     OtherInterface = goog.module.get(
-        'gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface$impl');
+        'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface$impl');
     SubJsType = goog.module.get(
-        'gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType$impl');
-    Class = goog.module.get('gen.java.lang.Class$impl');
+        'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }
 

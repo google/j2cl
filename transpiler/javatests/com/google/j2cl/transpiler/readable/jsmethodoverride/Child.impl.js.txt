@@ -8,10 +8,10 @@
 goog.module('com.google.j2cl.transpiler.readable.jsmethodoverride.Child$impl');
 
 
-let Parent = goog.require('gen.com.google.j2cl.transpiler.readable.jsmethodoverride.Parent$impl');
+let Parent = goog.require('com.google.j2cl.transpiler.readable.jsmethodoverride.Parent$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
 class Child extends Parent {
@@ -75,7 +75,7 @@ class Child extends Parent {
    * @public
    */
   static $clinit() {
-    Class = goog.module.get('gen.java.lang.Class$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     Parent.$clinit();
   }
 

@@ -3,9 +3,9 @@
  */
 goog.module('vmbootstrap.Exceptions$impl');
 
-let AutoClosable = goog.require('gen.java.lang.AutoCloseable$impl');
-let JsException = goog.require('gen.java.lang.JsException$impl');
-let Throwable = goog.require('gen.java.lang.Throwable$impl');
+let AutoClosable = goog.require('java.lang.AutoCloseable$impl');
+let JsException = goog.require('java.lang.JsException$impl');
+let Throwable = goog.require('java.lang.Throwable$impl');
 
 /**
  * Provides helper methods.

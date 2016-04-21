@@ -3,11 +3,11 @@
  */
 goog.module('vmbootstrap.Objects$impl');
 
-let Boolean = goog.forwardDeclare('gen.java.lang.Boolean$impl');
-let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
-let Double = goog.forwardDeclare('gen.java.lang.Double$impl');
-let Object = goog.forwardDeclare('gen.java.lang.Object$impl');
-let String = goog.forwardDeclare('gen.java.lang.String$impl');
+let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let Object = goog.forwardDeclare('java.lang.Object$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 let Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let JavaScriptObject = goog.forwardDeclare('vmbootstrap.JavaScriptObject$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
@@ -126,11 +126,11 @@ class Objects {
    * @public
    */
   static $clinit() {
-    Object = goog.module.get('gen.java.lang.Object$impl');
-    Boolean = goog.module.get('gen.java.lang.Boolean$impl');
-    Class = goog.module.get('gen.java.lang.Class$impl');
-    Double = goog.module.get('gen.java.lang.Double$impl');
-    String = goog.module.get('gen.java.lang.String$impl');
+    Object = goog.module.get('java.lang.Object$impl');
+    Boolean = goog.module.get('java.lang.Boolean$impl');
+    Class = goog.module.get('java.lang.Class$impl');
+    Double = goog.module.get('java.lang.Double$impl');
+    String = goog.module.get('java.lang.String$impl');
     Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     JavaScriptObject = goog.module.get('vmbootstrap.JavaScriptObject$impl');
     $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');

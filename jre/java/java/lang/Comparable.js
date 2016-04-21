@@ -1,7 +1,7 @@
 /**
  * Header transpiled from java.lang.Comparable.
  */
-goog.module('gen.java.lang.Comparable');
+goog.module('java.lang.Comparable');
 
 
 // Imports headers for both eager and lazy dependencies to ensure that
@@ -10,5 +10,5 @@ let _$Util = goog.require('nativebootstrap.Util');
 
 
 // Re-exports the implementation.
-var Comparable = goog.require('gen.java.lang.Comparable$impl');
+var Comparable = goog.require('java.lang.Comparable$impl');
 exports = Comparable;

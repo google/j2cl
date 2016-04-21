@@ -5,14 +5,14 @@
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
  * const, missingRequire}
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.instancejsmethods.Child$impl');
+goog.module('com.google.j2cl.transpiler.readable.instancejsmethods.Child$impl');
 
 
-let MyInterface = goog.require('gen.com.google.j2cl.transpiler.readable.instancejsmethods.MyInterface$impl');
-let Parent = goog.require('gen.com.google.j2cl.transpiler.readable.instancejsmethods.Parent$impl');
+let MyInterface = goog.require('com.google.j2cl.transpiler.readable.instancejsmethods.MyInterface$impl');
+let Parent = goog.require('com.google.j2cl.transpiler.readable.instancejsmethods.Parent$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -111,7 +111,7 @@ class Child extends Parent {
    * @public
    */
   static $clinit() {
-    Class = goog.module.get('gen.java.lang.Class$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Parent.$clinit();
   }

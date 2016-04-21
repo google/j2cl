@@ -5,19 +5,19 @@
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
  * const, missingRequire}
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow$impl');
+goog.module('com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow$impl');
 
 
-let Object = goog.require('gen.java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let PrintStream = goog.forwardDeclare('gen.java.io.PrintStream$impl');
-let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
-let ClassCastException = goog.forwardDeclare('gen.java.lang.ClassCastException$impl');
-let NullPointerException = goog.forwardDeclare('gen.java.lang.NullPointerException$impl');
-let String = goog.forwardDeclare('gen.java.lang.String$impl');
-let System = goog.forwardDeclare('gen.java.lang.System$impl');
-let Throwable = goog.forwardDeclare('gen.java.lang.Throwable$impl');
+let PrintStream = goog.forwardDeclare('java.io.PrintStream$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let ClassCastException = goog.forwardDeclare('java.lang.ClassCastException$impl');
+let NullPointerException = goog.forwardDeclare('java.lang.NullPointerException$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
+let System = goog.forwardDeclare('java.lang.System$impl');
+let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 
@@ -95,15 +95,14 @@ class SimpleTryCatchThrow extends Object {
    * @public
    */
   static $clinit() {
-    PrintStream = goog.module.get('gen.java.io.PrintStream$impl');
-    Class = goog.module.get('gen.java.lang.Class$impl');
-    ClassCastException =
-        goog.module.get('gen.java.lang.ClassCastException$impl');
+    PrintStream = goog.module.get('java.io.PrintStream$impl');
+    Class = goog.module.get('java.lang.Class$impl');
+    ClassCastException = goog.module.get('java.lang.ClassCastException$impl');
     NullPointerException =
-        goog.module.get('gen.java.lang.NullPointerException$impl');
-    String = goog.module.get('gen.java.lang.String$impl');
-    System = goog.module.get('gen.java.lang.System$impl');
-    Throwable = goog.module.get('gen.java.lang.Throwable$impl');
+        goog.module.get('java.lang.NullPointerException$impl');
+    String = goog.module.get('java.lang.String$impl');
+    System = goog.module.get('java.lang.System$impl');
+    Throwable = goog.module.get('java.lang.Throwable$impl');
     $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
     Object.$clinit();
   }

@@ -5,14 +5,14 @@
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
  * const, missingRequire}
  */
-goog.module('gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType$impl');
+goog.module('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType$impl');
 
 
+let MyInterface = goog.require('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyInterface$impl');
 let MyJsType = goog.require('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType$impl');
-let MyInterface = goog.require('gen.com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyInterface$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -98,7 +98,7 @@ class SubJsType extends MyJsType {
    * @public
    */
   static $clinit() {
-    Class = goog.module.get('gen.java.lang.Class$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     MyJsType.$clinit();
   }
