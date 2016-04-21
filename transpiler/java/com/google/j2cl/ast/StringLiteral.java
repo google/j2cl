@@ -20,8 +20,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.processors.Visitable;
 
-import org.apache.commons.lang3.StringEscapeUtils;
-
 /**
  * String literal node.
  */
@@ -56,6 +54,6 @@ public class StringLiteral extends Expression {
    * Creates a StringLiteral from plain text.
    */
   public static StringLiteral fromPlainText(String string) {
-    return new StringLiteral("\"" + StringEscapeUtils.escapeJava(string) + "\"");
+    return new StringLiteral("\"" + AstUtils.escapeJavaString(string) + "\"");
   }
 }

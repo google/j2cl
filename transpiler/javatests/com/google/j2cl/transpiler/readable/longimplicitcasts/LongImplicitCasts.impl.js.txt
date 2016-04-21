@@ -99,9 +99,9 @@ class LongImplicitCasts extends Object {
    * @public
    */
   m_test() {
-    let fbyte = $Primitives.$narrowIntToByte(11);
-    let fchar = $Primitives.$narrowIntToChar(12);
-    let fshort = $Primitives.$narrowIntToShort(13);
+    let fbyte = 11;
+    let fchar = 12 /* "\f" */;
+    let fshort = 13;
     let fint = 14;
     let flong = $Primitives.$widenIntToLong(15);
     let ffloat = 16;

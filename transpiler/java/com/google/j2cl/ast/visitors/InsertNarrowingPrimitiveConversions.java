@@ -19,11 +19,13 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
+import com.google.j2cl.ast.CharacterLiteral;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
@@ -104,11 +106,43 @@ public class InsertNarrowingPrimitiveConversions extends ConversionContextVisito
             return true;
           }
 
+          private Expression convertLiteral(Object literalValue, TypeDescriptor toTypeDescriptor) {
+            if (literalValue instanceof Number) {
+              Number numberLiteral = (Number) literalValue;
+              // Narrow at compile time.
+              if (toTypeDescriptor == TypeDescriptors.get().primitiveByte) {
+                return new NumberLiteral(toTypeDescriptor, numberLiteral.byteValue());
+              } else if (toTypeDescriptor == TypeDescriptors.get().primitiveChar) {
+                return new CharacterLiteral((char) numberLiteral.intValue());
+              } else if (toTypeDescriptor == TypeDescriptors.get().primitiveShort) {
+                return new NumberLiteral(toTypeDescriptor, numberLiteral.shortValue());
+              } else if (toTypeDescriptor == TypeDescriptors.get().primitiveInt) {
+                return new NumberLiteral(toTypeDescriptor, numberLiteral.intValue());
+              } else if (toTypeDescriptor == TypeDescriptors.get().primitiveLong) {
+                return new NumberLiteral(toTypeDescriptor, numberLiteral.longValue());
+              } else if (toTypeDescriptor == TypeDescriptors.get().primitiveFloat) {
+                return new NumberLiteral(toTypeDescriptor, numberLiteral.floatValue());
+              } else if (toTypeDescriptor == TypeDescriptors.get().primitiveFloat) {
+                return new NumberLiteral(toTypeDescriptor, numberLiteral.doubleValue());
+              }
+            } else if (literalValue instanceof Character) {
+              Character characterLiteral = (Character) literalValue;
+              return convertLiteral((int) characterLiteral.charValue(), toTypeDescriptor);
+            }
+            throw new IllegalArgumentException();
+          }
+
           private Expression insertNarrowingCall(
               Expression expression, TypeDescriptor toTypeDescriptor) {
 
-            TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
+            // Narrow literals at compile time.
+            if (expression instanceof NumberLiteral) {
+              return convertLiteral(((NumberLiteral) expression).getValue(), toTypeDescriptor);
+            } else if (expression instanceof CharacterLiteral) {
+              return convertLiteral(((CharacterLiteral) expression).getValue(), toTypeDescriptor);
+            }
 
+            TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
             String narrowMethodName =
                 String.format(
                     "$narrow%sTo%s",

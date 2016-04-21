@@ -29,12 +29,12 @@ class StringLiteral extends Object {
     /**
      * @public {?string}
      */
-    this.f_escapeCodes__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
+    this.f_nonBmpChar__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
         null;
     /**
      * @public {?string}
      */
-    this.f_nonBmpChar__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
+    this.f_wideColon__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
         null;
   }
 
@@ -96,16 +96,34 @@ class StringLiteral extends Object {
   $init__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral() {
     this.f_someString__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
         'This is a string literal';
-    this.f_escapeCodes__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
-        '\b\f\n\r\t"\'\\\u0000';
     this.f_nonBmpChar__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
         '𐍆';
+    this.f_wideColon__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
+        '：';
   }
 };
 
 $Util.$setClassMetadata(
     StringLiteral,
     'com.google.j2cl.transpiler.readable.stringliteral.StringLiteral');
+
+
+/**
+ * @public {?string}
+ * @const
+ */
+StringLiteral
+    .f_ESCAPE_CODES__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
+    '\b\f\n\r\t"\'\\\u0000\u007F\uD800\uDF46\uFF1A';
+
+
+/**
+ * @public {?string}
+ * @const
+ */
+StringLiteral
+    .f_ESCAPE_CODES_COPY__com_google_j2cl_transpiler_readable_stringliteral_StringLiteral_ =
+    '\b\f\n\r\t"\'\\\u0000\u007F\uD800\uDF46\uFF1A';
 
 
 

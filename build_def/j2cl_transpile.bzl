@@ -107,7 +107,7 @@ def _impl(ctx):
       outputs=[js_zip_artifact],
       executable=ctx.executable.transpiler,
       arguments=compiler_args,
-      env=dict(LANG="en_US"),
+      env=dict(LANG="en_US.UTF-8"),
   )
 
   return struct(

@@ -13,7 +13,6 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
 let $char = goog.forwardDeclare('vmbootstrap.primitives.$char$impl');
-let $Primitives = goog.forwardDeclare('vmbootstrap.primitives.Primitives$impl');
 
 
 class CharacterLiteral extends Object {
@@ -51,25 +50,25 @@ class CharacterLiteral extends Object {
    */
   m_main() {
     let a = 32 /* ' ' */;
-    a = $Primitives.$narrowIntToChar(0);
-    a = $Primitives.$narrowIntToChar(127);
-    a = $Primitives.$narrowIntToChar(255);
+    a = 0 /* "\u0000" */;
+    a = 127 /* "\u007F" */;
+    a = 255 /* "\u00FF" */;
     a = 8 /* '\b' */;
-    a = $Primitives.$narrowIntToChar(8);
+    a = 8 /* "\b" */;
     a = 9 /* '\t' */;
-    a = $Primitives.$narrowIntToChar(9);
+    a = 9 /* "\t" */;
     a = 10 /* '\n' */;
-    a = $Primitives.$narrowIntToChar(10);
+    a = 10 /* "\n" */;
     a = 12 /* '\f' */;
-    a = $Primitives.$narrowIntToChar(12);
+    a = 12 /* "\f" */;
     a = 13 /* '\r' */;
-    a = $Primitives.$narrowIntToChar(13);
+    a = 13 /* "\r" */;
     a = 34 /* '\"' */;
-    a = $Primitives.$narrowIntToChar(34);
+    a = 34 /* "\"" */;
     a = 39 /* '\'' */;
-    a = $Primitives.$narrowIntToChar(39);
+    a = 39 /* "'" */;
     a = 92 /* '\\' */;
-    a = $Primitives.$narrowIntToChar(92);
+    a = 92 /* "\\" */;
     a = 0 /* '\u0000' */;
     a = 0 /* '\0' */;
     a = 1 /* '\u0001' */;
@@ -197,7 +196,6 @@ class CharacterLiteral extends Object {
   static $clinit() {
     Class = goog.module.get('gen.java.lang.Class$impl');
     $char = goog.module.get('vmbootstrap.primitives.$char$impl');
-    $Primitives = goog.module.get('vmbootstrap.primitives.Primitives$impl');
     Object.$clinit();
   }
 

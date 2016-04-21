@@ -23,6 +23,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -818,5 +820,13 @@ public class AstUtils {
 
     return MethodCall.createRegularMethodCall(
         null, makeLambdaCall, applyFunctionFieldAccess, instance, copyFunctionFieldAccess);
+  }
+
+  /**
+   * Escapes a string into a representation suitable for literals.
+   */
+  static String escapeJavaString(String string) {
+    // NOTE: StringEscapeUtils.escapeJava does not escape unprintable character 127 (delete).
+    return StringEscapeUtils.escapeJava(string).replace("\u007f", "\\u007F");
   }
 }

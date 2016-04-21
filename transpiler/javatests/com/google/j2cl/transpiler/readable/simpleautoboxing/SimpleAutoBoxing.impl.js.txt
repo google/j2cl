@@ -205,11 +205,11 @@ class SimpleAutoBoxing extends Object {
   m_testBoxing() {
     let bool = true;
     let d = 1111.0;
-    let b = $Primitives.$narrowIntToByte(100);
+    let b = 100;
     let f = 1111.0;
     let i = 1111;
     let l = $LongUtils.$fromInt(1111);
-    let s = $Primitives.$narrowIntToShort(100);
+    let s = 100;
     let c = 97 /* 'a' */;
     let boxBool = bool;
     let boxD = d;
@@ -248,11 +248,11 @@ class SimpleAutoBoxing extends Object {
   m_testUnboxing() {
     let boxBool = Boolean.$create__boolean(true);
     let boxD = Double.$create__double(1111.0);
-    let boxB = Byte.$create__byte($Primitives.$narrowIntToByte(100));
+    let boxB = Byte.$create__byte(100);
     let boxF = Float.$create__float(1111.0);
     let boxI = Integer.$create__int(1111);
     let boxL = Long.$create__long($LongUtils.$fromInt(1111));
-    let boxS = Short.$create__short($Primitives.$narrowIntToShort(100));
+    let boxS = Short.$create__short(100);
     let boxC = Character.$create__char(97 /* 'a' */);
     let bool = Boolean.m_booleanValue__java_lang_Boolean(boxBool);
     let d = Double.m_doubleValue__java_lang_Double(boxD);

@@ -68,9 +68,9 @@ class CastToPrimitive extends Object {
    * @public
    */
   m_test() {
-    let b = $Primitives.$narrowIntToByte(1);
-    let c = $Primitives.$narrowIntToChar(1);
-    let s = $Primitives.$narrowIntToShort(1);
+    let b = 1;
+    let c = 1 /* "\u0001" */;
+    let s = 1;
     let i = 1;
     let l = $LongUtils.$fromInt(1);
     let f = 1.100000023841858;
@@ -149,7 +149,7 @@ class CastToPrimitive extends Object {
    * @public
    */
   m_testUnboxAndWiden() {
-    let boxedByte = Byte.m_valueOf__byte($Primitives.$narrowIntToByte(0));
+    let boxedByte = Byte.m_valueOf__byte(0);
     let s = boxedByte.m_byteValue();
     let i = boxedByte.m_byteValue();
     let l = $Primitives.$widenByteToLong(boxedByte.m_byteValue());
