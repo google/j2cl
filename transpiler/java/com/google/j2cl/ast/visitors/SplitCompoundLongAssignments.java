@@ -27,8 +27,9 @@ import com.google.j2cl.ast.TypeDescriptors;
 /**
  * Splits all compound assignments that are on primitive long variables.
  *
- * <p>The rewrite is needed because Longs are emulated and the emulation class instances are
- * immutable. If you left compound assignments in then you'd have to translate things like a++ into
+ * <p>
+ * The rewrite is needed because Longs are emulated and the emulation class instances are immutable.
+ * If you left compound assignments in then you'd have to translate things like a++ into
  * a.increment(), but that would be invalid since a.increment() couldn't modify the value in itself.
  */
 public class SplitCompoundLongAssignments extends AbstractRewriter {
@@ -40,8 +41,9 @@ public class SplitCompoundLongAssignments extends AbstractRewriter {
   @Override
   public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
     if (binaryExpression.getOperator().isCompoundAssignment()
-        && TypeDescriptors.get().primitiveLong
-            == binaryExpression.getLeftOperand().getTypeDescriptor()) {
+        && TypeDescriptors.get()
+            .primitiveLong
+            .equalsIgnoreNullability(binaryExpression.getLeftOperand().getTypeDescriptor())) {
       return OperatorSideEffectUtils.splitBinaryExpression(binaryExpression);
     }
     return binaryExpression;
@@ -50,8 +52,9 @@ public class SplitCompoundLongAssignments extends AbstractRewriter {
   @Override
   public Node rewritePrefixExpression(PrefixExpression prefixExpression) {
     if (prefixExpression.getOperator().hasSideEffect()
-        && TypeDescriptors.get().primitiveLong
-            == prefixExpression.getOperand().getTypeDescriptor()) {
+        && TypeDescriptors.get()
+            .primitiveLong
+            .equalsIgnoreNullability(prefixExpression.getOperand().getTypeDescriptor())) {
       return OperatorSideEffectUtils.splitPrefixExpression(prefixExpression);
     }
     return prefixExpression;

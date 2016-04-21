@@ -48,10 +48,15 @@ public class NormalizeLongs extends AbstractRewriter {
     TypeDescriptor returnTypeDescriptor = binaryExpression.getTypeDescriptor();
 
     // Skips non-long operations.
-    if ((leftArgument.getTypeDescriptor() != TypeDescriptors.get().primitiveLong
-            && rightArgument.getTypeDescriptor() != TypeDescriptors.get().primitiveLong)
-        || (returnTypeDescriptor != TypeDescriptors.get().primitiveLong
-            && returnTypeDescriptor != TypeDescriptors.get().primitiveBoolean)) {
+    if ((!leftArgument
+                .getTypeDescriptor()
+                .equalsIgnoreNullability(TypeDescriptors.get().primitiveLong)
+            && !rightArgument
+                .getTypeDescriptor()
+                .equalsIgnoreNullability(TypeDescriptors.get().primitiveLong))
+        || (!returnTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveLong)
+            && !returnTypeDescriptor.equalsIgnoreNullability(
+                TypeDescriptors.get().primitiveBoolean))) {
       return binaryExpression;
     }
     BinaryOperator operator = binaryExpression.getOperator();
@@ -82,7 +87,9 @@ public class NormalizeLongs extends AbstractRewriter {
   public Node rewritePrefixExpression(PrefixExpression prefixExpression) {
     Expression argument = prefixExpression.getOperand();
     // Only interested in longs.
-    if (argument.getTypeDescriptor() != TypeDescriptors.get().primitiveLong) {
+    if (!argument
+        .getTypeDescriptor()
+        .equalsIgnoreNullability(TypeDescriptors.get().primitiveLong)) {
       return prefixExpression;
     }
     PrefixOperator operator = prefixExpression.getOperator();

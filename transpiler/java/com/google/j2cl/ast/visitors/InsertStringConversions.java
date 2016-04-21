@@ -42,7 +42,7 @@ public class InsertStringConversions extends ConversionContextVisitor {
           public Expression rewriteStringContext(
               Expression operandExpression, Expression otherOperandExpression) {
             TypeDescriptor typeDescriptor = operandExpression.getTypeDescriptor();
-            if (typeDescriptor == TypeDescriptors.get().javaLangString) {
+            if (typeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().javaLangString)) {
               // If it's a string, and it is not null or the otherOperandExpression is not null,
               // leave it alone.
               if (AstUtils.isNonNullString(operandExpression)
@@ -63,13 +63,13 @@ public class InsertStringConversions extends ConversionContextVisitor {
             // since Java converts char to the matching String glyph and JS converts it into a
             // number String.
             if (TypeDescriptors.isNonVoidPrimitiveType(typeDescriptor)
-                && typeDescriptor != TypeDescriptors.get().primitiveChar) {
+                && !typeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveChar)) {
               return operandExpression;
             }
 
             // Convert char to Character so that Character.toString() will be called and thus Java's
             // semantic around char String conversion will be honored.
-            if (typeDescriptor == TypeDescriptors.get().primitiveChar) {
+            if (typeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveChar)) {
               operandExpression = AstUtils.box(operandExpression);
             }
 

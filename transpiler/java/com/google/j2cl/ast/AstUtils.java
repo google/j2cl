@@ -118,8 +118,8 @@ public class AstUtils {
   }
 
   /**
-   * Returns the constructor invocation (super call or this call) in a specified constructor,
-   * or returns null if it does not have one.
+   * Returns the constructor invocation (super call or this call) in a specified constructor, or
+   * returns null if it does not have one.
    */
   public static MethodCall getConstructorInvocation(Method method) {
     checkArgument(method.isConstructor());
@@ -187,19 +187,21 @@ public class AstUtils {
    * Returns whether other is a subtype of one.
    */
   public static boolean isSubType(TypeDescriptor one, TypeDescriptor other) {
-    return one == other || one != null && isSubType(one.getSuperTypeDescriptor(), other);
+    return one != null
+        && (one.equalsIgnoreNullability(other) || isSubType(one.getSuperTypeDescriptor(), other));
   }
 
   /**
-   * The following is the cast table between primitive types. The cell marked as 'X'
-   * indicates that no cast is needed.
+   * The following is the cast table between primitive types. The cell marked as 'X' indicates that
+   * no cast is needed.
    * <p>
    * For other cases, cast from A to B is translated to method call $castAToB.
    * <p>
-   * The general pattern is that you need casts that shrink, all casts involving
-   * 'long' (because it has a custom boxed implementation) and the byte->char and
-   * char->short casts because char is unsigned.
+   * The general pattern is that you need casts that shrink, all casts involving 'long' (because it
+   * has a custom boxed implementation) and the byte->char and char->short casts because char is
+   * unsigned.
    * <p>
+   * <code>
    * from\to       byte |  char | short | int   | long | float | double|
    * -------------------------------------------------------------------
    * byte        |  X   |       |   X   |   X   |      |   X   |   X   |
@@ -215,24 +217,26 @@ public class AstUtils {
    * float       |      |       |       |       |      |   X   |   X   |
    * -------------------------------------------------------------------
    * double      |      |       |       |       |      |   X   |   X   |
+   * </code>
    */
   public static boolean canRemoveCast(
       TypeDescriptor fromTypeDescriptor, TypeDescriptor toTypeDescriptor) {
-    if (fromTypeDescriptor == toTypeDescriptor) {
+    if (fromTypeDescriptor.equalsIgnoreNullability(toTypeDescriptor)) {
       return true;
     }
-    if (fromTypeDescriptor == TypeDescriptors.get().primitiveLong
-        || toTypeDescriptor == TypeDescriptors.get().primitiveLong) {
+    if (fromTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveLong)
+        || toTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveLong)) {
       return false;
     }
-    return toTypeDescriptor == TypeDescriptors.get().primitiveFloat
-        || toTypeDescriptor == TypeDescriptors.get().primitiveDouble
-        || (toTypeDescriptor == TypeDescriptors.get().primitiveInt
-            && (fromTypeDescriptor == TypeDescriptors.get().primitiveByte
-                || fromTypeDescriptor == TypeDescriptors.get().primitiveChar
-                || fromTypeDescriptor == TypeDescriptors.get().primitiveShort))
-        || (toTypeDescriptor == TypeDescriptors.get().primitiveShort
-            && fromTypeDescriptor == TypeDescriptors.get().primitiveByte);
+    return toTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveFloat)
+        || toTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveDouble)
+        || (toTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveInt)
+            && (fromTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveByte)
+                || fromTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveChar)
+                || fromTypeDescriptor.equalsIgnoreNullability(
+                    TypeDescriptors.get().primitiveShort)))
+        || (toTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveShort)
+            && fromTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveByte));
   }
 
   /**
@@ -269,8 +273,8 @@ public class AstUtils {
   }
 
   /**
-   * Returns the MethodDescriptor for the wrapper function in outer class that creates its
-   * inner class by calling the corresponding inner class constructor.
+   * Returns the MethodDescriptor for the wrapper function in outer class that creates its inner
+   * class by calling the corresponding inner class constructor.
    */
   public static MethodDescriptor createMethodDescriptorForInnerClassCreation(
       final TypeDescriptor outerclassTypeDescriptor,
@@ -308,8 +312,8 @@ public class AstUtils {
   }
 
   /**
-   * Returns the Method for the wrapper function in outer class that creates its inner class
-   * by calling the corresponding inner class constructor.
+   * Returns the Method for the wrapper function in outer class that creates its inner class by
+   * calling the corresponding inner class constructor.
    */
   public static Method createMethodForInnerClassCreation(
       final TypeDescriptor outerclassTypeDescriptor, Method innerclassConstructor) {
@@ -344,11 +348,10 @@ public class AstUtils {
   }
 
   /**
-   * Creates forwarding method that has the same signature of {@code fromMethodDescriptor} in
-   * type {@code enclosingClassTypeDescriptor}, and delegates to {@code toMethodDescriptor}, e.g.
+   * Creates forwarding method that has the same signature of {@code fromMethodDescriptor} in type
+   * {@code enclosingClassTypeDescriptor}, and delegates to {@code toMethodDescriptor}, e.g.
    *
-   * enclosingClassTypeDescriptor.toMethodDescriptor (args) {
-   *    return this.toMethodDescriptor(args);
+   * enclosingClassTypeDescriptor.toMethodDescriptor (args) { return this.toMethodDescriptor(args);
    * }
    */
   public static Method createForwardingMethod(
@@ -372,7 +375,9 @@ public class AstUtils {
     Expression forwardingMethodCall =
         MethodCall.createRegularMethodCall(null, toMethodDescriptor, arguments);
     Statement statement =
-        fromMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.get().primitiveVoid
+        fromMethodDescriptor
+                .getReturnTypeDescriptor()
+                .equalsIgnoreNullability(TypeDescriptors.get().primitiveVoid)
             ? new ExpressionStatement(forwardingMethodCall)
             : new ReturnStatement(
                 forwardingMethodCall, fromMethodDescriptor.getReturnTypeDescriptor());
@@ -387,11 +392,12 @@ public class AstUtils {
   }
 
   /**
-   * Creates devirtualized method call of {@code methodCall} as method call to the static method
-   * in {@code enclosingClassTypeDescriptor} with the {@code instanceTypeDescriptor} as the first
+   * Creates devirtualized method call of {@code methodCall} as method call to the static method in
+   * {@code enclosingClassTypeDescriptor} with the {@code instanceTypeDescriptor} as the first
    * parameter type.
    *
-   * <p>instance.instanceMethod(a, b) => staticMethod(instance, a, b)
+   * <p>
+   * instance.instanceMethod(a, b) => staticMethod(instance, a, b)
    */
   public static MethodCall createDevirtualizedMethodCall(
       MethodCall methodCall,
@@ -427,8 +433,8 @@ public class AstUtils {
   }
 
   /**
-   * Boxes {@code expression} using the valueOf() method of the corresponding boxed type.
-   * e.g. expression => Integer.valueOf(expression).
+   * Boxes {@code expression} using the valueOf() method of the corresponding boxed type. e.g.
+   * expression => Integer.valueOf(expression).
    */
   public static Expression box(Expression expression) {
     TypeDescriptor primitiveType = expression.getTypeDescriptor();
@@ -448,8 +454,8 @@ public class AstUtils {
   }
 
   /**
-   * Unboxes {expression} using the ***Value() method of the corresponding boxed type.
-   * e.g expression => expression.intValue().
+   * Unboxes {expression} using the ***Value() method of the corresponding boxed type. e.g
+   * expression => expression.intValue().
    */
   public static Expression unbox(Expression expression) {
     TypeDescriptor boxType = expression.getTypeDescriptor();
@@ -499,8 +505,9 @@ public class AstUtils {
   /**
    * See JLS 5.2.
    *
-   * <p>Would normally also verify that the right operand type is being changed, but we're leaving
-   * that check up to our conversion implementation(s)
+   * <p>
+   * Would normally also verify that the right operand type is being changed, but we're leaving that
+   * check up to our conversion implementation(s)
    */
   public static boolean matchesAssignmentContext(BinaryOperator binaryOperator) {
     return binaryOperator.hasSideEffect();
@@ -512,7 +519,9 @@ public class AstUtils {
   public static boolean matchesStringContext(BinaryExpression binaryExpression) {
     BinaryOperator operator = binaryExpression.getOperator();
     return (operator == BinaryOperator.PLUS_ASSIGN || operator == BinaryOperator.PLUS)
-        && binaryExpression.getTypeDescriptor() == TypeDescriptors.get().javaLangString;
+        && binaryExpression
+            .getTypeDescriptor()
+            .equalsIgnoreNullability(TypeDescriptors.get().javaLangString);
   }
 
   /**
@@ -596,10 +605,12 @@ public class AstUtils {
   /**
    * See JLS 5.6.2.
    *
+   * <code>
    * X and double -> double
    * X and float -> float
    * X and long -> long
    * otherwise -> int
+   * </code>
    */
   public static TypeDescriptor chooseWidenedTypeDescriptor(
       TypeDescriptor leftTypeDescriptor, TypeDescriptor rightTypeDescriptor) {
@@ -658,8 +669,9 @@ public class AstUtils {
   /**
    * Returns explicit qualifier for member reference (field access or method call).
    *
-   * <p>If {@code qualifier} is null, returns EnclosingClassTypeDescriptor as the qualifier for
-   * static method/field and 'this' reference as the qualifier for instance method/field.
+   * <p>
+   * If {@code qualifier} is null, returns EnclosingClassTypeDescriptor as the qualifier for static
+   * method/field and 'this' reference as the qualifier for instance method/field.
    */
   static Expression getExplicitQualifier(Expression qualifier, Member member) {
     checkNotNull(member);
@@ -739,8 +751,10 @@ public class AstUtils {
       return false;
     }
     for (int i = 0; i < leftParameterTypeDescriptors.size(); i++) {
-      if (leftParameterTypeDescriptors.get(i).getRawTypeDescriptor()
-          != rightParameterTypeDescriptors.get(i).getRawTypeDescriptor()) {
+      if (!leftParameterTypeDescriptors
+          .get(i)
+          .getRawTypeDescriptor()
+          .equalsIgnoreNullability(rightParameterTypeDescriptors.get(i).getRawTypeDescriptor())) {
         return false;
       }
     }

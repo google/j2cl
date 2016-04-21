@@ -80,8 +80,10 @@ public class CompilationUnit extends Node {
             new Predicate<JavaType>() {
               @Override
               public boolean apply(JavaType javaType) {
-                return javaType.getDescriptor().getRawTypeDescriptor()
-                    == typeDescriptor.getRawTypeDescriptor();
+                return javaType
+                    .getDescriptor()
+                    .getRawTypeDescriptor()
+                    .equalsIgnoreNullability(typeDescriptor.getRawTypeDescriptor());
               }
             })
         .orNull();

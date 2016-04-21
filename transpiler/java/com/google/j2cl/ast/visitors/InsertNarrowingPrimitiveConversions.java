@@ -78,7 +78,7 @@ public class InsertNarrowingPrimitiveConversions extends ConversionContextVisito
           private boolean shouldNarrow(
               TypeDescriptor fromTypeDescriptor, TypeDescriptor toTypeDescriptor) {
 
-            if (fromTypeDescriptor == toTypeDescriptor) {
+            if (fromTypeDescriptor.equalsIgnoreNullability(toTypeDescriptor)) {
               return false;
             }
 

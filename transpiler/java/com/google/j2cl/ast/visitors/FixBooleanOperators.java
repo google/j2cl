@@ -30,11 +30,12 @@ import com.google.j2cl.ast.TypeDescriptors;
 /**
  * Corrects the return type of some operators on boolean parameters.
  *
- * <p>In Java &/|/^ operators return a boolean when given boolean input but in JS they return a
- * number.
+ * <p>
+ * In Java &/|/^ operators return a boolean when given boolean input but in JS they return a number.
  *
- * <p>This visitor finds these "bool ^ bool" situations and converts them to "!!(bool ^ bool)" so
- * that the return type is proper.
+ * <p>
+ * This visitor finds these "bool ^ bool" situations and converts them to "!!(bool ^ bool)" so that
+ * the return type is proper.
  */
 public class FixBooleanOperators {
 
@@ -50,7 +51,7 @@ public class FixBooleanOperators {
     public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
       // Maybe perform this transformation:
       // "bool ^ bool" -> "!!(bool ^ bool)"
-      if (binaryExpression.getTypeDescriptor() == primitiveBoolean) {
+      if (binaryExpression.getTypeDescriptor().equalsIgnoreNullability(primitiveBoolean)) {
         if (binaryExpression.getOperator() == BinaryOperator.BIT_AND
             || binaryExpression.getOperator() == BinaryOperator.BIT_OR
             || binaryExpression.getOperator() == BinaryOperator.BIT_XOR) {
@@ -71,7 +72,7 @@ public class FixBooleanOperators {
     public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
       // Maybe perform this transformation:
       // "bool ^= bool" -> "bool = bool ^ bool"
-      if (binaryExpression.getTypeDescriptor() == primitiveBoolean) {
+      if (binaryExpression.getTypeDescriptor().equalsIgnoreNullability(primitiveBoolean)) {
         if (binaryExpression.getOperator() == BinaryOperator.BIT_AND_ASSIGN
             || binaryExpression.getOperator() == BinaryOperator.BIT_OR_ASSIGN
             || binaryExpression.getOperator() == BinaryOperator.BIT_XOR_ASSIGN) {

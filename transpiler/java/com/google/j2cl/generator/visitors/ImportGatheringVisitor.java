@@ -36,8 +36,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Traverses a Type, gathers imports for all things it references and creates
- * non colliding local aliases for each import.
+ * Traverses a Type, gathers imports for all things it references and creates non colliding local
+ * aliases for each import.
  */
 public class ImportGatheringVisitor extends AbstractVisitor {
 
@@ -71,7 +71,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   private static boolean needImportForJsDoc(TypeDescriptor returnTypeDescriptor) {
     return !returnTypeDescriptor.isPrimitive()
-        && returnTypeDescriptor != TypeDescriptors.get().javaLangString;
+        && !returnTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().javaLangString);
   }
 
   private final Multiset<String> localNameUses = HashMultiset.create();
@@ -206,7 +206,9 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   @Override
   public void exitExpression(Expression expression) {
-    if (TypeDescriptors.get().primitiveLong == expression.getTypeDescriptor()) {
+    if (TypeDescriptors.get()
+        .primitiveLong
+        .equalsIgnoreNullability(expression.getTypeDescriptor())) {
       // for Long operation method dispatch.
       addLongsTypeDescriptor();
     }
@@ -214,7 +216,9 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
   @Override
   public void exitField(Field field) {
-    if (TypeDescriptors.get().primitiveLong == field.getDescriptor().getTypeDescriptor()) {
+    if (TypeDescriptors.get()
+        .primitiveLong
+        .equalsIgnoreNullability(field.getDescriptor().getTypeDescriptor())) {
       addLongsTypeDescriptor();
     }
   }
@@ -243,7 +247,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   public void exitMethod(Method method) {
     TypeDescriptor returnTypeDescriptor = method.getDescriptor().getReturnTypeDescriptor();
     if (!returnTypeDescriptor.isPrimitive()
-        || returnTypeDescriptor == TypeDescriptors.get().primitiveLong) {
+        || returnTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveLong)) {
       addTypeDescriptor(returnTypeDescriptor, ImportCategory.LAZY);
     }
   }
@@ -266,8 +270,8 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   }
 
   /**
-   * JsFunction type is annotated as function(Foo):Bar, we need to import the parameter types
-   * and return type.
+   * JsFunction type is annotated as function(Foo):Bar, we need to import the parameter types and
+   * return type.
    */
   private void mayAddTypeDescriptorsIntroducedByJsFunction(TypeDescriptor typeDescriptor) {
     if (typeDescriptor.isJsFunctionImplementation() || typeDescriptor.isJsFunctionInterface()) {

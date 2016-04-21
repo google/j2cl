@@ -57,7 +57,7 @@ public class InsertBoxingConversion extends ConversionContextVisitor {
               Expression boxedExpression = AstUtils.box(castExpression.getExpression());
               // It's possible that casting a primitive type to a non-boxed reference type.
               // e.g. (Object) i; in this case, just keep the NOOP casting after boxing.
-              if (boxedExpression.getTypeDescriptor() != toTypeDescriptor) {
+              if (!boxedExpression.getTypeDescriptor().equalsIgnoreNullability(toTypeDescriptor)) {
                 return CastExpression.create(boxedExpression, toTypeDescriptor);
               }
               return boxedExpression;

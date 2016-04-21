@@ -42,7 +42,9 @@ public class NewArray extends Expression {
     this.dimensionExpressions.addAll(checkNotNull(dimensionExpressions));
     this.arrayLiteral = arrayLiteral;
     checkArgument(typeDescriptor.getDimensions() == dimensionExpressions.size());
-    checkArgument(arrayLiteral == null || arrayLiteral.getTypeDescriptor() == typeDescriptor);
+    checkArgument(
+        arrayLiteral == null
+            || arrayLiteral.getTypeDescriptor().equalsIgnoreNullability(typeDescriptor));
   }
 
   public ArrayLiteral getArrayLiteral() {

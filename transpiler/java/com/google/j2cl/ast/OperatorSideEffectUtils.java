@@ -22,16 +22,18 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 /**
  * Utility functions for splitting operators expressions that have a side effect.
  *
- * <p>For example:
+ * <p>
+ * For example:
  * <ul>
- * <li>i++ becomes i = i + 1<li>
- * <li>a = i++ becomes a = (v = i, i = i + 1, v)<li>
- * <li>a = change().i++ becomes a = (q = change(), v = q.i, q.i = q.i + 1, v)<li>
+ * <li>i++ becomes i = i + 1
+ * <li>a = i++ becomes a = (v = i, i = i + 1, v)
+ * <li>a = change().i++ becomes a = (q = change(), v = q.i, q.i = q.i + 1, v)
  * </ul>
  *
- * <p>This kind of rewrite is useful when the numeric type in question is represented by an
- * immutable emulation class or when a conversion operation (such as boxing or unboxing) needs to be
- * inserted between the numeric and assignment stages of an operation.
+ * <p>
+ * This kind of rewrite is useful when the numeric type in question is represented by an immutable
+ * emulation class or when a conversion operation (such as boxing or unboxing) needs to be inserted
+ * between the numeric and assignment stages of an operation.
  */
 public class OperatorSideEffectUtils {
 
@@ -44,7 +46,6 @@ public class OperatorSideEffectUtils {
     BinaryOperator operator = binaryExpression.getOperator();
     Expression leftOperand = binaryExpression.getLeftOperand();
     Expression rightOperand = binaryExpression.getRightOperand();
-
 
     if (canExpressionBeEvaluatedTwice(leftOperand)) {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
@@ -65,8 +66,9 @@ public class OperatorSideEffectUtils {
             createNumbersFieldAccess(NUMBERS_QUALIFIER_TEMP, qualifier.getTypeDescriptor()),
             BinaryOperator.ASSIGN,
             qualifier); // Numbers.$q = q
-    BinaryExpression assignment = expandExpressionWithQualifier(
-        leftOperand, operator.getUnderlyingBinaryOperator(), rightOperand);
+    BinaryExpression assignment =
+        expandExpressionWithQualifier(
+            leftOperand, operator.getUnderlyingBinaryOperator(), rightOperand);
     return new MultiExpression(assignQualifier, assignment);
   }
 
@@ -134,7 +136,6 @@ public class OperatorSideEffectUtils {
     PrefixOperator operator = prefixExpression.getOperator();
     TypeDescriptor typeDescriptor = operand.getTypeDescriptor();
 
-
     if (canExpressionBeEvaluatedTwice(operand)) {
       // The referenced expression *is* being modified but it has no qualifier so no care needs to
       // be taken to avoid double side-effects from dereferencing the qualifier twice.
@@ -198,8 +199,8 @@ public class OperatorSideEffectUtils {
     return BinaryExpression.Builder.assignTo(leftOperand)
         .rightOperand(
             new BinaryExpression(
-                binaryOperationResultType(operator,
-                    leftOperand.getTypeDescriptor(), rightOperand.getTypeDescriptor()),
+                binaryOperationResultType(
+                    operator, leftOperand.getTypeDescriptor(), rightOperand.getTypeDescriptor()),
                 leftOperand,
                 operator,
                 rightOperand))
@@ -207,18 +208,17 @@ public class OperatorSideEffectUtils {
   }
 
   /**
-   * For {@code leftOperand} in the form of qualifier.a, returns
-   * Numbers.$q.a = Numbers.$q.a operator rightOperand.
-   * If a is in the form of boxA.intValue(), fix it with
-   * Numbers.$q.boxA = box(Numbers.$q.a operator rightOperand)
+   * For {@code leftOperand} in the form of qualifier.a, returns Numbers.$q.a = Numbers.$q.a
+   * operator rightOperand. If a is in the form of boxA.intValue(), fix it with Numbers.$q.boxA =
+   * box(Numbers.$q.a operator rightOperand)
    */
   private static BinaryExpression expandExpressionWithQualifier(
       Expression leftOperand, BinaryOperator operator, Expression rightOperand) {
 
     BinaryExpression binaryExpression =
         new BinaryExpression(
-            binaryOperationResultType(operator,
-                leftOperand.getTypeDescriptor(), rightOperand.getTypeDescriptor()),
+            binaryOperationResultType(
+                operator, leftOperand.getTypeDescriptor(), rightOperand.getTypeDescriptor()),
             replaceQualifier(leftOperand), // Numbers.$q.a
             operator,
             rightOperand);
@@ -267,8 +267,8 @@ public class OperatorSideEffectUtils {
 
   /**
    * If {@code expression} is in the form of q.boxA.intValue(), returns Numbers.$q.boxA.intValue().
-   * Else if {@code expression} is in the form of q.a, returns Numbers.$q.a.
-   * Otherwise returns {@code expression} itself.
+   * Else if {@code expression} is in the form of q.a, returns Numbers.$q.a. Otherwise returns
+   * {@code expression} itself.
    */
   private static Expression replaceQualifier(Expression expression) {
     if (!(expression instanceof FieldAccess)) {
@@ -283,8 +283,8 @@ public class OperatorSideEffectUtils {
   /**
    * Determines the binary operation type based on the types of the operands.
    */
-  private static TypeDescriptor binaryOperationResultType(BinaryOperator operator,
-      TypeDescriptor leftOperandType, TypeDescriptor rightRightType) {
+  private static TypeDescriptor binaryOperationResultType(
+      BinaryOperator operator, TypeDescriptor leftOperandType, TypeDescriptor rightRightType) {
     TypeDescriptor unboxedLeftOperandType = unboxIfBoxedType(leftOperandType);
 
     if (!unboxedLeftOperandType.isPrimitive()) {
@@ -294,31 +294,32 @@ public class OperatorSideEffectUtils {
 
     /**
      * Rules per JLS (Chapter 15) require that binary promotion be previously applied to the
-     * operands and makes the operation to be the same type as both operands. Since this method
-     * is potentially called before or while numeric promotion is being performed there is no
-     * guarantee operand promotion was already performed; so that fact is taken into account.
+     * operands and makes the operation to be the same type as both operands. Since this method is
+     * potentially called before or while numeric promotion is being performed there is no guarantee
+     * operand promotion was already performed; so that fact is taken into account.
      *
      */
     switch (operator) {
-      /**
-       * Bitwise and logical operators: JLS 15.22.
-       */
+        /*
+         * Bitwise and logical operators: JLS 15.22.
+         */
       case BIT_AND:
       case BIT_OR:
       case BIT_XOR:
-        if (unboxedLeftOperandType == TypeDescriptors.get().primitiveBoolean) {
+        if (unboxedLeftOperandType.equalsIgnoreNullability(
+            TypeDescriptors.get().primitiveBoolean)) {
           // Handle logical operations (on type boolean).
           return unboxedLeftOperandType;
         }
         // fallthrough for bitwise operations on numbers.
-      /**
-       * Additive operators for numeric types: JLS 15.18.2.
-       */
+        /*
+         * Additive operators for numeric types: JLS 15.18.2.
+         */
       case PLUS:
       case MINUS:
-      /**
-       * Multiplicative operators for numeric types: JLS 15.17.
-       */
+        /*
+         * Multiplicative operators for numeric types: JLS 15.17.
+         */
       case TIMES:
       case DIVIDE:
       case REMAINDER:
@@ -350,11 +351,12 @@ public class OperatorSideEffectUtils {
   /**
    * Returns the type descirptor for the wider type.
    */
-  private static TypeDescriptor widerType(TypeDescriptor thisTypeDescriptor,
-      TypeDescriptor thatTypeDescriptor) {
+  private static TypeDescriptor widerType(
+      TypeDescriptor thisTypeDescriptor, TypeDescriptor thatTypeDescriptor) {
     return TypeDescriptors.getWidth(thatTypeDescriptor)
-        > TypeDescriptors.getWidth(thisTypeDescriptor)
-      ? thatTypeDescriptor : thisTypeDescriptor;
+            > TypeDescriptors.getWidth(thisTypeDescriptor)
+        ? thatTypeDescriptor
+        : thisTypeDescriptor;
   }
 
   /**

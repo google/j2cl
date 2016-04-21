@@ -144,9 +144,10 @@ public class BridgeMethodsCreator {
    * Returns all the potential methods in the super classes and super interfaces that may need a
    * bridge method generating in {@code type}.
    *
-   * <p>A bridge method is needed in a type when the type extends or implements a parameterized
-   * class or interface and type erasure changes the signature of any inherited method. This
-   * inherited method is a potential method that may need a bridge method.
+   * <p>
+   * A bridge method is needed in a type when the type extends or implements a parameterized class
+   * or interface and type erasure changes the signature of any inherited method. This inherited
+   * method is a potential method that may need a bridge method.
    */
   private static List<IMethodBinding> getPotentialBridgeMethods(ITypeBinding type) {
     List<IMethodBinding> potentialBridgeMethods = new ArrayList<>();
@@ -175,9 +176,9 @@ public class BridgeMethodsCreator {
         new Predicate<IMethodBinding>() {
           @Override
           /**
-           * If {@code method}, the method with more specific type arguments, has different
-           * method signature with {@code method.getMethodDeclaration()}, the original generic
-           * method, it means this method is a potential method that may need a bridge method.
+           * If {@code method}, the method with more specific type arguments, has different method
+           * signature with {@code method.getMethodDeclaration()}, the original generic method, it
+           * means this method is a potential method that may need a bridge method.
            */
           public boolean apply(IMethodBinding method) {
             return !method.isConstructor()
@@ -194,10 +195,11 @@ public class BridgeMethodsCreator {
    * Returns the delegated method (implemented or inherited) by {@code type} that
    * {@code bridgeMethod} should be delegated to.
    *
-   * <p>If a method (a method with more specific type arguments) in {@code type} or in its
-   * super types has the same erasured signature with {@code bridgeMethod}, it is an overriding
-   * method for {@code bridgeMethod}. And if their original method declarations are different then
-   * a bridge method is needed to make overriding work.
+   * <p>
+   * If a method (a method with more specific type arguments) in {@code type} or in its super types
+   * has the same erasured signature with {@code bridgeMethod}, it is an overriding method for
+   * {@code bridgeMethod}. And if their original method declarations are different then a bridge
+   * method is needed to make overriding work.
    */
   private static IMethodBinding findForwardingMethod(
       IMethodBinding bridgeMethod, ITypeBinding type) {
@@ -208,7 +210,7 @@ public class BridgeMethodsCreator {
               method, bridgeMethod) // concrete methods have the same signature, thus an overriding.
           && !JdtUtils
               .areParameterErasureEqual( // original method declarations have different signatures
-              method.getMethodDeclaration(), bridgeMethod.getMethodDeclaration())) {
+                  method.getMethodDeclaration(), bridgeMethod.getMethodDeclaration())) {
         // find a overriding method (also possible accidental overriding), this is the method that
         // should be delegated to.
         return method;
@@ -236,7 +238,8 @@ public class BridgeMethodsCreator {
    * Returns the method in its super interface that needs a bridge method delegating to
    * {@code bridgeMethod}.
    *
-   * <p>If a method in the super interfaces of {@code type} is a method with more specific type
+   * <p>
+   * If a method in the super interfaces of {@code type} is a method with more specific type
    * arguments, and it is overridden by a generic method, it needs a bridge method that delegates to
    * the generic method.
    */
@@ -276,9 +279,10 @@ public class BridgeMethodsCreator {
   /**
    * Returns bridge method that calls the delegated method in its body.
    *
-   * <p>bridgeMethod: parameterized method with more specific type arguments.
-   * bridgeMethod.getMethodDeclaration(): original declaration method.
-   * targetMethod: concrete implementation that should be delegated to.
+   * <p>
+   * bridgeMethod: parameterized method with more specific type arguments.
+   * bridgeMethod.getMethodDeclaration(): original declaration method. targetMethod: concrete
+   * implementation that should be delegated to.
    */
   private Method createBridgeMethod(IMethodBinding bridgeMethod, IMethodBinding targetMethod) {
     // The MethodDescriptor of the generated bridge method should have the same signature as the
@@ -301,8 +305,10 @@ public class BridgeMethodsCreator {
     // and it delegates to the *real* implementation, which should be emit as non-JsMethod.
     if (targetMethodJsInfo.getJsMemberType() == JsMemberType.JS_FUNCTION
         || (bridgeMethodDescriptor.isJsMethod()
-            && targetMethodDescriptor.getEnclosingClassTypeDescriptor()
-                == bridgeMethodDescriptor.getEnclosingClassTypeDescriptor())) {
+            && targetMethodDescriptor
+                .getEnclosingClassTypeDescriptor()
+                .equalsIgnoreNullability(
+                    bridgeMethodDescriptor.getEnclosingClassTypeDescriptor()))) {
       targetMethodJsInfo = JsInfo.NONE;
     }
     targetMethodDescriptor =
@@ -327,8 +333,10 @@ public class BridgeMethodsCreator {
       // if the parameter type in bridge method is different from that in parameterized method,
       // add a cast.
       Expression argument =
-          bridgeMethodDescriptor.getParameterTypeDescriptors().get(i)
-                  == castToParameterTypeDescriptor
+          bridgeMethodDescriptor
+                  .getParameterTypeDescriptors()
+                  .get(i)
+                  .equalsIgnoreNullability(castToParameterTypeDescriptor)
               ? parameterReference
               : CastExpression.create(parameterReference, castToParameterTypeDescriptor);
       arguments.add(argument);
@@ -336,14 +344,16 @@ public class BridgeMethodsCreator {
     TypeDescriptor targetEnclosingClassTypeDescriptor =
         targetMethodDescriptor.getEnclosingClassTypeDescriptor();
     Expression qualifier =
-        targetEnclosingClassTypeDescriptor
-                == bridgeMethodDescriptor.getEnclosingClassTypeDescriptor()
+        targetEnclosingClassTypeDescriptor.equalsIgnoreNullability(
+                bridgeMethodDescriptor.getEnclosingClassTypeDescriptor())
             ? new ThisReference(targetEnclosingClassTypeDescriptor)
             : new SuperReference(targetEnclosingClassTypeDescriptor);
     Expression dispatchMethodCall =
         MethodCall.createRegularMethodCall(qualifier, targetMethodDescriptor, arguments);
     Statement statement =
-        bridgeMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.get().primitiveVoid
+        bridgeMethodDescriptor
+                .getReturnTypeDescriptor()
+                .equalsIgnoreNullability(TypeDescriptors.get().primitiveVoid)
             ? new ExpressionStatement(dispatchMethodCall)
             : new ReturnStatement(
                 dispatchMethodCall, bridgeMethodDescriptor.getReturnTypeDescriptor());

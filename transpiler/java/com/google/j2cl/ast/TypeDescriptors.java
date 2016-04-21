@@ -201,13 +201,14 @@ public class TypeDescriptors {
   }
 
   public static boolean isPrimitiveBooleanOrDouble(TypeDescriptor typeDescriptor) {
-    return typeDescriptor == get().primitiveBoolean || typeDescriptor == get().primitiveDouble;
+    return typeDescriptor.equalsIgnoreNullability(get().primitiveBoolean)
+        || typeDescriptor.equalsIgnoreNullability(get().primitiveDouble);
   }
 
   public static boolean isNumericPrimitive(TypeDescriptor typeDescriptor) {
     return typeDescriptor.isPrimitive()
-        && typeDescriptor != get().primitiveBoolean
-        && typeDescriptor != get().primitiveVoid;
+        && !typeDescriptor.equalsIgnoreNullability(get().primitiveBoolean)
+        && !typeDescriptor.equalsIgnoreNullability(get().primitiveVoid);
   }
 
   public static boolean isBoxedOrPrimitiveType(TypeDescriptor typeDescriptor) {
@@ -235,20 +236,20 @@ public class TypeDescriptors {
     checkArgument(isNumericPrimitive(typeDescriptor));
 
     TypeDescriptors typeDescriptors = get();
-    if (typeDescriptor == typeDescriptors.primitiveByte) {
+    if (typeDescriptor.equalsIgnoreNullability(typeDescriptors.primitiveByte)) {
       return 1;
-    } else if (typeDescriptor == typeDescriptors.primitiveShort) {
+    } else if (typeDescriptor.equalsIgnoreNullability(typeDescriptors.primitiveShort)) {
       return 2;
-    } else if (typeDescriptor == typeDescriptors.primitiveChar) {
+    } else if (typeDescriptor.equalsIgnoreNullability(typeDescriptors.primitiveChar)) {
       return 2;
-    } else if (typeDescriptor == typeDescriptors.primitiveInt) {
+    } else if (typeDescriptor.equalsIgnoreNullability(typeDescriptors.primitiveInt)) {
       return 4;
-    } else if (typeDescriptor == typeDescriptors.primitiveLong) {
+    } else if (typeDescriptor.equalsIgnoreNullability(typeDescriptors.primitiveLong)) {
       return 8;
-    } else if (typeDescriptor == typeDescriptors.primitiveFloat) {
+    } else if (typeDescriptor.equalsIgnoreNullability(typeDescriptors.primitiveFloat)) {
       return 4 + 100;
     } else {
-      checkArgument(typeDescriptor == typeDescriptors.primitiveDouble);
+      checkArgument(typeDescriptor.equalsIgnoreNullability(typeDescriptors.primitiveDouble));
       return 8 + 100;
     }
   }

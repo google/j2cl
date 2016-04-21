@@ -64,7 +64,7 @@ public class InsertUnboxingConversions extends ConversionContextVisitor {
 
               // ...optionally followed by a widening primitive conversion.
               fromTypeDescriptor = resultExpression.getTypeDescriptor();
-              if (fromTypeDescriptor != toTypeDescriptor) {
+              if (!fromTypeDescriptor.equalsIgnoreNullability(toTypeDescriptor)) {
                 resultExpression = CastExpression.create(resultExpression, toTypeDescriptor);
               }
 
@@ -100,7 +100,7 @@ public class InsertUnboxingConversions extends ConversionContextVisitor {
 
       // ...optionally followed by a widening primitive conversion.
       fromTypeDescriptor = resultExpression.getTypeDescriptor();
-      if (fromTypeDescriptor != toTypeDescriptor) {
+      if (!fromTypeDescriptor.equalsIgnoreNullability(toTypeDescriptor)) {
         resultExpression = CastExpression.create(resultExpression, toTypeDescriptor);
       }
 

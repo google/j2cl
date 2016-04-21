@@ -47,10 +47,11 @@ import java.util.Map;
  * instances, fix calls to the constructors, and add initializers to the added fields in each
  * constructor.
  *
- * <p>Normalization of nested classes are done in two parts, one is in CompilationUnitBuilder, and
- * the other one is here in NormalizeNestedClassConstructorsVisitor. CompilationUnitBuilder resolves
- * all the qualifiers and arguments. NormalizeNestedClassConstructorsVisitor does all normalization
- * and structural AST changes.
+ * <p>
+ * Normalization of nested classes are done in two parts, one is in CompilationUnitBuilder, and the
+ * other one is here in NormalizeNestedClassConstructorsVisitor. CompilationUnitBuilder resolves all
+ * the qualifiers and arguments. NormalizeNestedClassConstructorsVisitor does all normalization and
+ * structural AST changes.
  */
 public class NormalizeNestedClassConstructors extends AbstractRewriter {
 
@@ -211,11 +212,13 @@ public class NormalizeNestedClassConstructors extends AbstractRewriter {
   /**
    * Visitor class that fixes field accesses to capturing fields in a constructor.
    *
-   * <p>All field accesses to capturing fields in a constructor are replaced with references to the
+   * <p>
+   * All field accesses to capturing fields in a constructor are replaced with references to the
    * corresponding parameters. Otherwise, the arguments to cascaded constructor call are evaluated
    * before the capturing fields are initialized, which may lead to wrong result.
    *
    * <p>For example,
+   * <code>
    * class A {
    *   class B{
    *     final int a = 10;
@@ -224,6 +227,7 @@ public class NormalizeNestedClassConstructors extends AbstractRewriter {
    *                     // because field this.$c_a is not initialized yet.
    *   }
    * }
+   * </code>
    */
   private class FixFieldAccessInConstructorsVisitor extends AbstractRewriter {
     public void applyTo(CompilationUnit compilationUnit) {
@@ -369,9 +373,13 @@ public class NormalizeNestedClassConstructors extends AbstractRewriter {
     Preconditions.checkArgument(fieldDescriptor.isFieldDescriptorForAllCaptures());
     for (Variable parameter : method.getParameters()) {
       if (parameter.getName().equals(fieldDescriptor.getFieldName())
-          && parameter.getTypeDescriptor() == fieldDescriptor.getTypeDescriptor()
-          && method.getDescriptor().getEnclosingClassTypeDescriptor()
-              == fieldDescriptor.getEnclosingClassTypeDescriptor()) {
+          && parameter
+              .getTypeDescriptor()
+              .equalsIgnoreNullability(fieldDescriptor.getTypeDescriptor())
+          && method
+              .getDescriptor()
+              .getEnclosingClassTypeDescriptor()
+              .equalsIgnoreNullability(fieldDescriptor.getEnclosingClassTypeDescriptor())) {
         return parameter;
       }
     }

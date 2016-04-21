@@ -94,7 +94,7 @@ public class InsertUnderflowOverflowConversions extends ConversionContextVisitor
       Expression expression, TypeDescriptor fromTypeDescriptor, TypeDescriptor toTypeDescriptor) {
     // Only examine same type assignments since overflow can only occur there (other cases
     // are already covered by Narrowing Primitive Conversion).
-    if (fromTypeDescriptor != toTypeDescriptor) {
+    if (!fromTypeDescriptor.equalsIgnoreNullability(toTypeDescriptor)) {
       return expression;
     }
     // Only examine primitive assignments.
@@ -121,19 +121,19 @@ public class InsertUnderflowOverflowConversions extends ConversionContextVisitor
     //
     // The narrowing operations also produce ArithmeticExceptions that result from division by 0
     // and modulus by 0 so we also keep the check for modulus operations.
-    if (fromTypeDescriptor == TypeDescriptors.get().primitiveInt
+    if (fromTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveInt)
         && binaryExpression.getOperator() != BinaryOperator.DIVIDE
         && binaryExpression.getOperator() != BinaryOperator.REMAINDER) {
       return expression;
     }
 
-    if (fromTypeDescriptor == TypeDescriptors.get().primitiveLong) {
+    if (fromTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveLong)) {
       // The long emulation library already handles over and underflow internally.
       return expression;
     }
 
-    if (fromTypeDescriptor == TypeDescriptors.get().primitiveFloat
-        || fromTypeDescriptor == TypeDescriptors.get().primitiveDouble) {
+    if (fromTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveFloat)
+        || fromTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveDouble)) {
       // The float and double numeric operations in JS already get the benefit of
       // native over and underflow.
       return expression;

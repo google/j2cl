@@ -99,8 +99,8 @@ public class GeneratorUtils {
   }
 
   /**
-   * Returns the list of js doc annotations for the parameters in method.
-   * They are of the form: {parameterType} parameterName
+   * Returns the list of js doc annotations for the parameters in method. They are of the form:
+   * {parameterType} parameterName
    */
   public static List<String> getParameterAnnotationsJsDoc(
       final Method method, final GenerationEnvironment environment) {
@@ -272,14 +272,15 @@ public class GeneratorUtils {
   /**
    * For a constructor of a JsConstructor class or a subclass of a JsConstructor class, as the
    * primary constructor in the class is output as the real ES6 constructor, the first statement
-   * (which must either be a super() call or a this() call), has been invoked in ES6 constructor
-   * and thus should be removed from the $ctor method. It follows the following rules:
+   * (which must either be a super() call or a this() call), has been invoked in ES6 constructor and
+   * thus should be removed from the $ctor method. It follows the following rules:
    *
-   * <p>If the super class has a primary constructor, which should have been output as ES6
-   * constructor, the super() call should have been invoked in constructor and should be removed in
-   * $ctor.
+   * <p>
+   * If the super class has a primary constructor, which should have been output as ES6 constructor,
+   * the super() call should have been invoked in constructor and should be removed in $ctor.
    *
-   * <p>If the current class has a primary constructor, which should have been output as ES6
+   * <p>
+   * If the current class has a primary constructor, which should have been output as ES6
    * constructor, the this() call should have been invoked in constructor and should be removed in
    * $ctor.
    */
@@ -300,7 +301,8 @@ public class GeneratorUtils {
   /**
    * Returns the arguments for 'new A' statement in constructor factory method $create.
    *
-   * <p>If the given constructor delegates to the primary constructor, the delegating this() call
+   * <p>
+   * If the given constructor delegates to the primary constructor, the delegating this() call
    * should be invoked by the 'new A' statement in the $create factory method, thus passing the
    * arguments here.
    */
@@ -320,7 +322,8 @@ public class GeneratorUtils {
   /**
    * Returns the arguments for 'super()' call in ES6 constructor.
    *
-   * <p>If the given constructor invokes the primary constructor in its super class, pass in the
+   * <p>
+   * If the given constructor invokes the primary constructor in its super class, pass in the
    * arguments to the super call here.
    */
   public static String getSuperArguments(

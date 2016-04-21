@@ -105,7 +105,9 @@ public class NormalizeArrayCreations extends AbstractRewriter {
             .build();
     if (dimensionCount == 1) {
       // It's 1 dimensional.
-      if (TypeDescriptors.get().javaLangObject == newArrayExpression.getLeafTypeDescriptor()) {
+      if (TypeDescriptors.get()
+          .javaLangObject
+          .equalsIgnoreNullability(newArrayExpression.getLeafTypeDescriptor())) {
         // And the leaf type is Object. All arrays are implicitly Array<Object> so leave out the
         // init.
         return newArrayExpression.getArrayLiteral();

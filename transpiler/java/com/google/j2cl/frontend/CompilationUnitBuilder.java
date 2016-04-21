@@ -1094,7 +1094,7 @@ public class CompilationUnitBuilder {
         Preconditions.checkArgument(lambdaBody instanceof org.eclipse.jdt.core.dom.Expression);
         Expression lambdaMethodBody = convert((org.eclipse.jdt.core.dom.Expression) lambdaBody);
         Statement statement =
-            returnTypeDescriptor == TypeDescriptors.get().primitiveVoid
+            returnTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveVoid)
                 ? new ExpressionStatement(lambdaMethodBody)
                 : new ReturnStatement(lambdaMethodBody, returnTypeDescriptor);
         body = new Block(statement);
@@ -1493,7 +1493,8 @@ public class CompilationUnitBuilder {
         ITypeBinding currentTypeBinding, ITypeBinding outerTypeBinding, boolean strict) {
       Expression qualifier = new ThisReference(currentType.getDescriptor());
       ITypeBinding innerTypeBinding = currentTypeBinding;
-      if (JdtUtils.createTypeDescriptor(innerTypeBinding) != currentType.getDescriptor()) {
+      if (!JdtUtils.createTypeDescriptor(innerTypeBinding)
+          .equalsIgnoreNullability(currentType.getDescriptor())) {
         // currentType is a lambda type.
         qualifier =
             new FieldAccess(

@@ -18,7 +18,6 @@ package com.google.j2cl.frontend;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryOperator;
@@ -45,7 +44,6 @@ import com.google.j2cl.ast.TypeProxyUtils;
 import com.google.j2cl.ast.TypeProxyUtils.Nullability;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
-import com.google.j2cl.common.PackageInfoCache;
 
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
@@ -53,7 +51,6 @@ import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
-import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
@@ -101,11 +98,12 @@ public class JdtUtils {
     TypeDescriptor enclosingClassTypeDescriptor =
         createTypeDescriptor(variableBinding.getDeclaringClass());
     String fieldName = variableBinding.getName();
-    TypeDescriptor thisTypeDescriptor = TypeProxyUtils.createTypeDescriptorWithNullability(
-        variableBinding.getType(),
-        variableBinding,
-        TypeProxyUtils.getPackageDefaultNullability(
-            variableBinding.getDeclaringClass().getPackage()));
+    TypeDescriptor thisTypeDescriptor =
+        TypeProxyUtils.createTypeDescriptorWithNullability(
+            variableBinding.getType(),
+            variableBinding,
+            TypeProxyUtils.getPackageDefaultNullability(
+                variableBinding.getDeclaringClass().getPackage()));
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableBinding);
     boolean isRaw = jsInfo.getJsMemberType() == JsMemberType.PROPERTY;
     boolean isJsOverlay = JsInteropUtils.isJsOverlay(variableBinding);
@@ -272,8 +270,8 @@ public class JdtUtils {
   }
 
   /**
-   * Returns the methods that are declared by {@code superTypeBinding} and are not implemented
-   * by {@code typeBinding}.
+   * Returns the methods that are declared by {@code superTypeBinding} and are not implemented by
+   * {@code typeBinding}.
    */
   private static List<IMethodBinding> getUnimplementedMethodBindings(
       ITypeBinding superTypeBinding, final ITypeBinding typeBinding) {
@@ -302,7 +300,8 @@ public class JdtUtils {
   /**
    * Returns the methods in {@code typeBinding}'s interfaces that are accidentally overridden.
    *
-   * <p>'Accidentally overridden' means the type itself does not have its own declared overriding
+   * <p>
+   * 'Accidentally overridden' means the type itself does not have its own declared overriding
    * method, and the method it inherits does not really override, but just has the same signature of
    * the overridden method.
    */
@@ -317,8 +316,8 @@ public class JdtUtils {
   }
 
   /**
-   * Returns the methods that are declared by {@code superTypeBinding} but are not declared
-   * by {@code typeBinding}.
+   * Returns the methods that are declared by {@code superTypeBinding} but are not declared by
+   * {@code typeBinding}.
    */
   private static List<IMethodBinding> getUndeclaredMethodBindings(
       ITypeBinding superTypeBinding, final ITypeBinding typeBinding) {
@@ -583,7 +582,9 @@ public class JdtUtils {
     Expression callLambda =
         MethodCall.createRegularMethodCall(null, lambdaMethodDescriptor, arguments);
     Statement statement =
-        lambdaMethodDescriptor.getReturnTypeDescriptor() == TypeDescriptors.get().primitiveVoid
+        lambdaMethodDescriptor
+                .getReturnTypeDescriptor()
+                .equalsIgnoreNullability(TypeDescriptors.get().primitiveVoid)
             ? new ExpressionStatement(callLambda)
             : new ReturnStatement(callLambda, samMethodDescriptor.getReturnTypeDescriptor());
     Method samMethod =
@@ -599,10 +600,10 @@ public class JdtUtils {
   }
 
   /**
-   * Returns whether {@code subTypeBinding} is a subtype of {@code superTypeBinding} either
-   * because subTypeBinding is a child class of class superTypeBinding or because
-   * subTypeBinding implements interface superTypeBinding. As 'subtype' is transitive and
-   * reflective, a type is subtype of itself.
+   * Returns whether {@code subTypeBinding} is a subtype of {@code superTypeBinding} either because
+   * subTypeBinding is a child class of class superTypeBinding or because subTypeBinding implements
+   * interface superTypeBinding. As 'subtype' is transitive and reflective, a type is subtype of
+   * itself.
    */
   static boolean isSubType(ITypeBinding subTypeBinding, ITypeBinding superTypeBinding) {
     if (areSameErasedType(superTypeBinding, subTypeBinding)) {
