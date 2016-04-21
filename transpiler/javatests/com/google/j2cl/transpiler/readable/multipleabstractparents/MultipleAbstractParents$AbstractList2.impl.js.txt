@@ -1,0 +1,117 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractList2.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('gen.com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractList2$impl');
+
+
+let MultipleAbstractParents$List = goog.require('gen.com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$List$impl');
+let Object = goog.require('gen.java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let MultipleAbstractParents = goog.forwardDeclare('gen.com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$impl');
+let Class = goog.forwardDeclare('gen.java.lang.Class$impl');
+let String = goog.forwardDeclare('gen.java.lang.String$impl');
+
+
+/**
+ * Abstract class, do not instantiate.
+ * @template C_AbstractList2_T
+ * @implements {MultipleAbstractParents$List<C_AbstractList2_T>}
+ */
+class MultipleAbstractParents$AbstractList2 extends Object {
+  /**
+   * Defines instance fields.
+   */
+  constructor() { super(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_AbstractList2_T
+   * @return {!MultipleAbstractParents$AbstractList2<C_AbstractList2_T>}
+   * @public
+   */
+  static $create() {
+    MultipleAbstractParents$AbstractList2.$clinit();
+    let $instance = new MultipleAbstractParents$AbstractList2();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents$AbstractList2();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents$AbstractList2() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents$AbstractList2();
+  }
+
+  /**
+   * Abstract method.
+   * @param {C_AbstractList2_T} arg0
+   * @return {?string}
+   * @public
+   */
+  m_getFoo__java_lang_Object(arg0) {}
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof MultipleAbstractParents$AbstractList2;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(
+        classConstructor, MultipleAbstractParents$AbstractList2);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    MultipleAbstractParents = goog.module.get(
+        'gen.com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$impl');
+    Class = goog.module.get('gen.java.lang.Class$impl');
+    String = goog.module.get('gen.java.lang.String$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents$AbstractList2() {
+  }
+};
+
+$Util.$setClassMetadata(
+    MultipleAbstractParents$AbstractList2,
+    'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$AbstractList2');
+
+
+MultipleAbstractParents$List.$markImplementor(
+    MultipleAbstractParents$AbstractList2);
+
+
+/**
+ * Export class.
+ */
+exports = MultipleAbstractParents$AbstractList2;
+//# sourceMappingURL=MultipleAbstractParents$AbstractList2.js.map

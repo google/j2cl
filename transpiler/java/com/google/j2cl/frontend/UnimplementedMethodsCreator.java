@@ -47,7 +47,18 @@ public class UnimplementedMethodsCreator {
     // used to avoid generating duplicate methods.
     Set<MethodDescriptor> unimplementedMethodDescriptors = new LinkedHashSet<>();
 
+    List<IMethodBinding> unimplementedMethodsInSuperClass = new ArrayList<>();
+    if (typeBinding.getSuperclass() != null) {
+      unimplementedMethodsInSuperClass =
+          JdtUtils.getUnimplementedMethodBindings(typeBinding.getSuperclass());
+    }
+
     for (IMethodBinding methodBinding : JdtUtils.getUnimplementedMethodBindings(typeBinding)) {
+      if (JdtUtils.hasMethodWithSameErasureAs(methodBinding, unimplementedMethodsInSuperClass)) {
+        // While the method is not implemented in Java, this class will generate empty methods
+        // for it when processing the superclass, so there is no need to add an empty method here.
+        continue;
+      }
       MethodDescriptor unimplementedMethodDescriptor =
           createMethodDescriptorInType(methodBinding, typeBinding);
       if (unimplementedMethodDescriptors.contains(unimplementedMethodDescriptor)) {

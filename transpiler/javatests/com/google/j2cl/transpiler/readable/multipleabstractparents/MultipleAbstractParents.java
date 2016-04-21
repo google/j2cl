@@ -14,6 +14,8 @@ public class MultipleAbstractParents {
 
   public abstract static class AbstractList<T> extends AbstractCollection<T> implements List<T> {}
 
+  public abstract static class AbstractList2<T> implements List<T> {}
+
   public static class ArrayList<T> extends AbstractList<T> {}
 
   public interface IStringList extends List<String> {
@@ -22,6 +24,9 @@ public class MultipleAbstractParents {
   }
 
   public abstract static class AbstractStringList extends AbstractList<String>
+      implements IStringList {}
+
+  public abstract static class AbstractStringList2 extends AbstractList2<String>
       implements IStringList {}
 
   public static class StringList extends AbstractStringList {}

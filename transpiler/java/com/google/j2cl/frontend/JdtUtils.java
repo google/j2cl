@@ -336,8 +336,18 @@ public class JdtUtils {
    * {@code methodBinding} in its body.
    */
   private static boolean isDeclaredBy(IMethodBinding methodBinding, ITypeBinding typeBinding) {
-    for (IMethodBinding declaredMethodBinding : typeBinding.getDeclaredMethods()) {
-      if (areParameterErasureEqual(declaredMethodBinding, methodBinding)) {
+    return hasMethodWithSameErasureAs(methodBinding,
+        Arrays.asList(typeBinding.getDeclaredMethods()));
+  }
+
+  /**
+   * Returns true if the given list of method bindings contains a method with the same signature of
+   * {@code methodBinding}.
+   */
+  public static boolean hasMethodWithSameErasureAs(IMethodBinding method,
+      List<IMethodBinding> methodBindings) {
+    for (IMethodBinding methodBinding : methodBindings) {
+      if (areParameterErasureEqual(method, methodBinding)) {
         return true;
       }
     }
