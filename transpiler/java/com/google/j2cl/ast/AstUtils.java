@@ -303,11 +303,25 @@ public class AstUtils {
                     }
                   })));
     }
+
+    MethodDescriptor declarationMethodDescriptor = MethodDescriptor.Builder.fromDefault()
+        .visibility(innerclassConstructorDescriptor.getVisibility())
+        .enclosingClassTypeDescriptor(outerclassTypeDescriptor)
+        .methodName(methodName)
+        .returnTypeDescriptor(
+            innerclassConstructorDescriptor.getDeclarationMethodDescriptor()
+                .getEnclosingClassTypeDescriptor())
+        .parameterTypeDescriptors(innerclassConstructorDescriptor.getDeclarationMethodDescriptor()
+            .getParameterTypeDescriptors())
+        .typeParameterDescriptors(typeParameterDescriptors)
+        .build();
+
     return MethodDescriptor.Builder.fromDefault()
         .visibility(innerclassConstructorDescriptor.getVisibility())
         .enclosingClassTypeDescriptor(outerclassTypeDescriptor)
         .methodName(methodName)
         .returnTypeDescriptor(returnTypeDescriptor)
+        .declarationMethodDescriptor(declarationMethodDescriptor)
         .parameterTypeDescriptors(innerclassConstructorDescriptor.getParameterTypeDescriptors())
         .typeParameterDescriptors(typeParameterDescriptors)
         .build();
@@ -333,8 +347,14 @@ public class AstUtils {
     arguments.add(new ThisReference(outerclassTypeDescriptor));
 
     // adds 'this' as the last parameter.
+    MethodDescriptor newInnerclassConstructorDescriptorDeclaration =
+        MethodDescriptor.Builder.from(
+                innerclassConstructorDescriptor.getDeclarationMethodDescriptor())
+            .addParameter(outerclassTypeDescriptor)
+            .build();
     MethodDescriptor newInnerclassConstructorDescriptor =
         MethodDescriptor.Builder.from(innerclassConstructorDescriptor)
+            .declarationMethodDescriptor(newInnerclassConstructorDescriptorDeclaration)
             .addParameter(outerclassTypeDescriptor)
             .build();
 
@@ -367,10 +387,11 @@ public class AstUtils {
             .build();
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
-    for (int i = 0; i < fromMethodDescriptor.getParameterTypeDescriptors().size(); i++) {
-      Variable parameter =
-          new Variable(
-              "arg" + i, fromMethodDescriptor.getParameterTypeDescriptors().get(i), false, true);
+    List<TypeDescriptor> parameterTypes =
+        fromMethodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors();
+    for (int i = 0; i < parameterTypes.size(); i++) {
+      Variable parameter = new Variable("arg" + i,
+          parameterTypes.get(i).getRawTypeDescriptor(), false, true);
       parameters.add(parameter);
       arguments.add(parameter.getReference());
     }
@@ -409,13 +430,26 @@ public class AstUtils {
     checkArgument(!targetMethodDescriptor.isConstructor());
     checkArgument(!targetMethodDescriptor.isStatic());
 
+    Iterable<TypeDescriptor> parameterTypes = Iterables.concat(
+        Arrays.asList(sourceTypeDescriptor), // add the first parameter type.
+        targetMethodDescriptor.getParameterTypeDescriptors());
+    Iterable<TypeDescriptor> methoDeclarationParameterTypes = Iterables.concat(
+        Arrays.asList(sourceTypeDescriptor), // add the first parameter type.
+        targetMethodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors());
+
+    MethodDescriptor declarationMethodDescriptor =
+        MethodDescriptor.Builder.from(targetMethodDescriptor.getDeclarationMethodDescriptor())
+            .enclosingClassTypeDescriptor(targetTypeDescriptor)
+            .parameterTypeDescriptors(methoDeclarationParameterTypes)
+            .isStatic(true)
+            .jsInfo(JsInfo.NONE)
+            .build();
+
     MethodDescriptor methodDescriptor =
         MethodDescriptor.Builder.from(targetMethodDescriptor)
+            .declarationMethodDescriptor(declarationMethodDescriptor)
             .enclosingClassTypeDescriptor(targetTypeDescriptor)
-            .parameterTypeDescriptors(
-                Iterables.concat(
-                    Arrays.asList(sourceTypeDescriptor), // add the first parameter type.
-                    targetMethodDescriptor.getParameterTypeDescriptors()))
+            .parameterTypeDescriptors(parameterTypes)
             .isStatic(true)
             .jsInfo(JsInfo.NONE)
             .build();
@@ -746,8 +780,11 @@ public class AstUtils {
    * Two methods are parameter erasure equal if the erasure of their parameters' types are equal.
    */
   public static boolean areParameterErasureEqual(MethodDescriptor left, MethodDescriptor right) {
-    List<TypeDescriptor> leftParameterTypeDescriptors = left.getParameterTypeDescriptors();
-    List<TypeDescriptor> rightParameterTypeDescriptors = right.getParameterTypeDescriptors();
+    List<TypeDescriptor> leftParameterTypeDescriptors =
+        left.getDeclarationMethodDescriptor().getParameterTypeDescriptors();
+    List<TypeDescriptor> rightParameterTypeDescriptors =
+        right.getDeclarationMethodDescriptor().getParameterTypeDescriptors();
+
     if (!left.getMethodName().equals(right.getMethodName())
         || leftParameterTypeDescriptors.size() != rightParameterTypeDescriptors.size()) {
       return false;

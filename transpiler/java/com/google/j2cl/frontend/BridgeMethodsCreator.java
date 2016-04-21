@@ -23,6 +23,7 @@ import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.JdtMethodUtils;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.ManglingNameUtils;
@@ -268,7 +269,8 @@ public class BridgeMethodsCreator {
       IMethodBinding methodBinding, ITypeBinding returnType) {
     TypeDescriptor enclosingClassTypeDescriptor = JdtUtils.createTypeDescriptor(typeBinding);
     TypeDescriptor returnTypeDescriptor = JdtUtils.createTypeDescriptor(returnType);
-    MethodDescriptor originalMethodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
+    MethodDescriptor originalMethodDescriptor =
+        JdtMethodUtils.createMethodDescriptor(methodBinding);
 
     return MethodDescriptor.Builder.from(originalMethodDescriptor)
         .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
@@ -316,7 +318,8 @@ public class BridgeMethodsCreator {
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
 
-    for (int i = 0; i < bridgeMethodDescriptor.getParameterTypeDescriptors().size(); i++) {
+    for (int i = 0; i < bridgeMethodDescriptor.getDeclarationMethodDescriptor()
+        .getParameterTypeDescriptors().size(); i++) {
       Variable parameter =
           new Variable(
               "arg" + i,
@@ -334,8 +337,10 @@ public class BridgeMethodsCreator {
       // add a cast.
       Expression argument =
           bridgeMethodDescriptor
+                  .getDeclarationMethodDescriptor()
                   .getParameterTypeDescriptors()
                   .get(i)
+                  .getRawTypeDescriptor()
                   .equalsIgnoreNullability(castToParameterTypeDescriptor)
               ? parameterReference
               : CastExpression.create(parameterReference, castToParameterTypeDescriptor);

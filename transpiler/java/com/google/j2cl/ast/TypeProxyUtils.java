@@ -321,7 +321,7 @@ public class TypeProxyUtils {
       return null;
     }
     if (typeBinding.isInterface()) {
-      return JdtMethodUtils.createConcreteMethodDescriptor(samInJsFunctionInterface);
+      return JdtMethodUtils.createMethodDescriptor(samInJsFunctionInterface);
     }
     for (IMethodBinding methodBinding : typeBinding.getDeclaredMethods()) {
       if (methodBinding.isSynthetic()) {
@@ -329,7 +329,7 @@ public class TypeProxyUtils {
         continue;
       }
       if (methodBinding.overrides(samInJsFunctionInterface)) {
-        return JdtMethodUtils.createConcreteMethodDescriptor(methodBinding);
+        return JdtMethodUtils.createMethodDescriptor(methodBinding);
       }
     }
     return null;

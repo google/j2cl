@@ -451,11 +451,11 @@ public class JsInteropRestrictionsChecker {
         Joiner.on(", ")
             .join(
                 Iterables.transform(
-                    methodDescriptor.getParameterTypeDescriptors(),
+                    methodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors(),
                     new Function<TypeDescriptor, String>() {
                       @Override
                       public String apply(TypeDescriptor type) {
-                        return getReadableDescription(type);
+                        return getReadableDescription(type.getRawTypeDescriptor());
                       }
                     })));
   }

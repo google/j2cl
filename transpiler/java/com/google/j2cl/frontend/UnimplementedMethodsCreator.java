@@ -79,7 +79,14 @@ public class UnimplementedMethodsCreator {
     TypeDescriptor enclosingClassTypeDescriptor = JdtUtils.createTypeDescriptor(typeBinding);
 
     MethodDescriptor originalMethodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
+
+    MethodDescriptor newDeclarationMethodDescriptor =
+        MethodDescriptor.Builder.from(originalMethodDescriptor.getDeclarationMethodDescriptor())
+        .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+        .build();
+
     return MethodDescriptor.Builder.from(originalMethodDescriptor)
+        .declarationMethodDescriptor(newDeclarationMethodDescriptor)
         .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
         .build();
   }

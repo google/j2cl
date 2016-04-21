@@ -36,36 +36,11 @@ import java.util.Set;
  * Utility functions to transpile JDT MethodBinding to J2cl MethodDescriptor.
  */
 public class JdtMethodUtils {
-  /**
-   * Creates a MethodDescriptor based on the given method binding, and changed its parameter types
-   * to match the method declaration. In J2CL AST, we always use the erasured parameter types in
-   * a MethodDescriptor.
-   */
-  public static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
-    MethodDescriptor methodDescriptor = createConcreteMethodDescriptor(methodBinding);
-    Iterable<TypeDescriptor> parameterTypeDescriptors =
-        // Use the method declaration.
-        FluentIterable.from(methodBinding.getMethodDeclaration().getParameterTypes())
-            .transform(
-                new Function<ITypeBinding, TypeDescriptor>() {
-                  @Override
-                  public TypeDescriptor apply(ITypeBinding typeBinding) {
-                    // Whenever we create the parameter types of a method,
-                    // we use the rawTypeDescriptor.
-                    return TypeProxyUtils.createTypeDescriptor(typeBinding).getRawTypeDescriptor();
-                  }
-                });
-    return MethodDescriptor.Builder.from(methodDescriptor)
-        .parameterTypeDescriptors(parameterTypeDescriptors)
-        .build();
-  }
 
   /**
-   * Creates a MethodDescriptor directly based on the given JDT method binding. The returned
-   * MethodDescriptor contains exactly matching information with the given method binding, e.g.
-   * parameter type of a type variable is a type variable, not the erasure type.
+   * Creates a MethodDescriptor directly based on the given JDT method binding.
    */
-  public static MethodDescriptor createConcreteMethodDescriptor(IMethodBinding methodBinding) {
+  public static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
     int modifiers = methodBinding.getModifiers();
     boolean isStatic = Modifier.isStatic(modifiers);
     Visibility visibility = TypeProxyUtils.getVisibility(modifiers);
@@ -98,6 +73,12 @@ public class JdtMethodUtils {
                         typeBinding, null, defaultNullabilityForPackage);
                   }
                 });
+
+    MethodDescriptor declarationMethodDescriptor = null;
+    if (methodBinding.getMethodDeclaration() != methodBinding) {
+      declarationMethodDescriptor = createMethodDescriptor(methodBinding.getMethodDeclaration());
+    }
+
     // generate type parameters declared in the method.
     Iterable<TypeDescriptor> typeParameterDescriptors =
         FluentIterable.from(methodBinding.getTypeParameters())
@@ -117,6 +98,7 @@ public class JdtMethodUtils {
         isConstructor,
         isNative,
         methodBinding.isVarargs(),
+        declarationMethodDescriptor,
         returnTypeDescriptor,
         parameterTypeDescriptors,
         typeParameterDescriptors,

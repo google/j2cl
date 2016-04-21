@@ -145,11 +145,11 @@ public class ManglingNameUtils {
    */
   private static List<String> getMangledParameterTypes(MethodDescriptor methodDescriptor) {
     return Lists.transform(
-        methodDescriptor.getParameterTypeDescriptors(),
+        methodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors(),
         new Function<TypeDescriptor, String>() {
           @Override
           public String apply(TypeDescriptor parameterTypeDescriptor) {
-            return getMangledName(parameterTypeDescriptor);
+            return getMangledName(parameterTypeDescriptor.getRawTypeDescriptor());
           }
         });
   }

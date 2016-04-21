@@ -582,10 +582,11 @@ public class JdtUtils {
     MethodDescriptor samMethodDescriptor = JdtUtils.createMethodDescriptor(samMethodBinding);
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
-    for (int i = 0; i < lambdaMethodDescriptor.getParameterTypeDescriptors().size(); i++) {
+    List<TypeDescriptor> parameterTypes =
+        lambdaMethodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors();
+    for (int i = 0; i < parameterTypes.size(); i++) {
       Variable parameter =
-          new Variable(
-              "arg" + i, lambdaMethodDescriptor.getParameterTypeDescriptors().get(i), false, true);
+          new Variable("arg" + i, parameterTypes.get(i).getRawTypeDescriptor(), false, true);
       parameters.add(parameter);
       arguments.add(parameter.getReference());
     }

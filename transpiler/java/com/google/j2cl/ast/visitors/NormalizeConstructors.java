@@ -151,6 +151,7 @@ public class NormalizeConstructors {
             true,
             false,
             false,
+            null,
             TypeDescriptors.get().primitiveVoid,
             new ArrayList<TypeDescriptor>(),
             new ArrayList<TypeDescriptor>(),
@@ -167,8 +168,15 @@ public class NormalizeConstructors {
           constructorInvocation, "this() call was null!" + constructor.toString());
 
       arguments = constructorInvocation.getArguments();
+      MethodDescriptor javascriptConstructorDeclaration =
+          MethodDescriptor.Builder.from(javascriptConstructor)
+             .parameterTypeDescriptors(
+                 constructorInvocation.getTarget().getDeclarationMethodDescriptor()
+                     .getParameterTypeDescriptors())
+             .build();
       javascriptConstructor =
           MethodDescriptor.Builder.from(javascriptConstructor)
+              .declarationMethodDescriptor(javascriptConstructorDeclaration)
               .parameterTypeDescriptors(
                   constructorInvocation.getTarget().getParameterTypeDescriptors())
               .build();
@@ -235,6 +243,7 @@ public class NormalizeConstructors {
             true,
             false,
             false,
+            null,
             TypeDescriptors.get().primitiveVoid,
             new ArrayList<TypeDescriptor>(),
             new ArrayList<TypeDescriptor>(),
@@ -250,8 +259,16 @@ public class NormalizeConstructors {
               }
             });
 
+    MethodDescriptor javascriptConstructorDeclaration =
+        MethodDescriptor.Builder.from(javascriptConstructor)
+        .parameterTypeDescriptors(
+            primaryConstructor.getDescriptor().getDeclarationMethodDescriptor()
+                .getParameterTypeDescriptors())
+        .build();
+
     javascriptConstructor =
         MethodDescriptor.Builder.from(javascriptConstructor)
+            .declarationMethodDescriptor(javascriptConstructorDeclaration)
             .parameterTypeDescriptors(
                 primaryConstructor.getDescriptor().getParameterTypeDescriptors())
             .build();

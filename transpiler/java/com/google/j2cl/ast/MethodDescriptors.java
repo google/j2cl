@@ -33,15 +33,24 @@ public class MethodDescriptors {
    * 
    * <p>Takes care to correctly mirror the update to any contained erased method descriptor version.
    */
+  // TODO(simionato): Verify that it is always correct to add the same parameters to the method
+  // descriptor and its declaration.
   public static MethodDescriptor createModifiedCopy(
       MethodDescriptor methodDescriptor, List<TypeDescriptor> addedParameters) {
     // Add the provided parameters to the end of the existing parameters list.
     List<TypeDescriptor> parameters =
         new ArrayList<>(methodDescriptor.getParameterTypeDescriptors());
     parameters.addAll(addedParameters);
-    return MethodDescriptor.Builder.from(methodDescriptor)
-        .parameterTypeDescriptors(parameters)
-        .build();
+
+    MethodDescriptor.Builder methodBuilder = MethodDescriptor.Builder.from(methodDescriptor)
+        .parameterTypeDescriptors(parameters);
+
+    if (methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()) {
+      methodBuilder.declarationMethodDescriptor(
+          createModifiedCopy(methodDescriptor.getDeclarationMethodDescriptor(), addedParameters));
+    }
+
+    return methodBuilder.build();
   }
 
   /**
@@ -54,18 +63,38 @@ public class MethodDescriptors {
     if (methodDescriptor.isStatic() || methodDescriptor.isConstructor()) {
       return methodDescriptor;
     }
+    TypeDescriptor enclosingClassTypeDescriptor =
+        methodDescriptor.getEnclosingClassTypeDescriptor();
     List<TypeDescriptor> parameterTypeDescriptors = new ArrayList<>();
-    parameterTypeDescriptors.add(methodDescriptor.getEnclosingClassTypeDescriptor());
+    parameterTypeDescriptors.add(enclosingClassTypeDescriptor);
     parameterTypeDescriptors.addAll(methodDescriptor.getParameterTypeDescriptors());
+
     List<TypeDescriptor> typeParameterTypeDescriptors = new ArrayList<>();
     typeParameterTypeDescriptors.addAll(methodDescriptor.getTypeParameterTypeDescriptors());
     // as the method is static, it has to copy the enclosing class's type parameters to its own.
     typeParameterTypeDescriptors.addAll(
         methodDescriptor.getEnclosingClassTypeDescriptor().getTypeArgumentDescriptors());
-    return MethodDescriptor.Builder.from(methodDescriptor)
+
+    MethodDescriptor.Builder methodBuilder = MethodDescriptor.Builder.from(methodDescriptor)
         .parameterTypeDescriptors(parameterTypeDescriptors)
         .typeParameterDescriptors(typeParameterTypeDescriptors)
-        .isStatic(true)
-        .build();
+        .isStatic(true);
+
+    if (methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()) {
+      MethodDescriptor declarationMethodDescriptor =
+          methodDescriptor.getDeclarationMethodDescriptor();
+
+      List<TypeDescriptor> methodDeclarationParameterTypeDescriptors = new ArrayList<>();
+      methodDeclarationParameterTypeDescriptors.add(enclosingClassTypeDescriptor);
+      methodDeclarationParameterTypeDescriptors.addAll(
+          declarationMethodDescriptor.getParameterTypeDescriptors());
+
+      MethodDescriptor newDeclarationMethodDescriptor =
+          MethodDescriptor.Builder.from(makeStaticMethodDescriptor(declarationMethodDescriptor))
+             .parameterTypeDescriptors(methodDeclarationParameterTypeDescriptors)
+             .build();
+      methodBuilder.declarationMethodDescriptor(newDeclarationMethodDescriptor);
+    }
+    return methodBuilder.build();
   }
 }

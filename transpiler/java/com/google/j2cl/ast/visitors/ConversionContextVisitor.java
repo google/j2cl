@@ -333,13 +333,14 @@ public abstract class ConversionContextVisitor extends AbstractRewriter {
 
   private List<Expression> rewriteMethodInvocationContextArguments(Invocation invocation) {
     ImmutableList<TypeDescriptor> parameterTypeDescriptors =
-        invocation.getTarget().getParameterTypeDescriptors();
+        invocation.getTarget().getDeclarationMethodDescriptor().getParameterTypeDescriptors();
     List<Expression> argumentExpressions = invocation.getArguments();
 
     // Look at each param/argument pair.
     List<Expression> newArgumentExpressions = new ArrayList<>();
     for (int argIndex = 0; argIndex < parameterTypeDescriptors.size(); argIndex++) {
-      TypeDescriptor parameterTypeDescriptor = parameterTypeDescriptors.get(argIndex);
+      TypeDescriptor parameterTypeDescriptor =
+          parameterTypeDescriptors.get(argIndex).getRawTypeDescriptor();
       Expression argumentExpression = argumentExpressions.get(argIndex);
       newArgumentExpressions.add(
           contextRewriter.rewriteMethodInvocationContext(

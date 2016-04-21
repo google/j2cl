@@ -16,12 +16,15 @@
 package com.google.j2cl.ast;
 
 import com.google.auto.value.AutoValue;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.processors.Visitable;
+
+import javax.annotation.Nullable;
 
 /**
  * A (by signature) reference to a method.
@@ -53,10 +56,25 @@ public abstract class MethodDescriptor extends Node implements Member {
       boolean isConstructor,
       boolean isNative,
       boolean isVarargs,
+      @Nullable MethodDescriptor declarationMethodDescriptorOrNull,
       TypeDescriptor returnTypeDescriptor,
       Iterable<TypeDescriptor> parameterTypeDescriptors,
       Iterable<TypeDescriptor> typeParameterTypeDescriptors,
       JsInfo jsInfo) {
+
+    ImmutableList<TypeDescriptor> parameterTypeDescriptorsList =
+        ImmutableList.copyOf(parameterTypeDescriptors);
+
+    if (declarationMethodDescriptorOrNull != null) {
+      ImmutableList<TypeDescriptor> methodDeclarationParameters =
+          declarationMethodDescriptorOrNull.getParameterTypeDescriptors();
+      Preconditions.checkArgument(
+          parameterTypeDescriptorsList.size() == methodDeclarationParameters.size(),
+          "Method parameters (%s) don't match with method declaration (%s)",
+          parameterTypeDescriptorsList,
+          methodDeclarationParameters);
+    }
+
     return getInterner()
         .intern(
             new AutoValue_MethodDescriptor(
@@ -67,7 +85,8 @@ public abstract class MethodDescriptor extends Node implements Member {
                 isConstructor,
                 isNative,
                 isVarargs,
-                ImmutableList.copyOf(parameterTypeDescriptors),
+                declarationMethodDescriptorOrNull,
+                parameterTypeDescriptorsList,
                 returnTypeDescriptor,
                 ImmutableList.copyOf(typeParameterTypeDescriptors),
                 jsInfo));
@@ -96,6 +115,9 @@ public abstract class MethodDescriptor extends Node implements Member {
 
   public abstract boolean isVarargs();
 
+  @Nullable
+  abstract MethodDescriptor getDeclarationMethodDescriptorOrNull();
+
   public abstract ImmutableList<TypeDescriptor> getParameterTypeDescriptors();
 
   public abstract TypeDescriptor getReturnTypeDescriptor();
@@ -109,6 +131,15 @@ public abstract class MethodDescriptor extends Node implements Member {
 
   public boolean isInit() {
     return getMethodName().equals(INIT_METHOD_NAME) && !isStatic();
+  }
+
+  /**
+   * Returns the descriptor of the method declaration or this instance if this is already a method
+   * declaration or there is no method declaration.
+   */
+  public MethodDescriptor getDeclarationMethodDescriptor() {
+    return getDeclarationMethodDescriptorOrNull() == null
+        ? this : getDeclarationMethodDescriptorOrNull();
   }
 
   @Override
@@ -196,6 +227,7 @@ public abstract class MethodDescriptor extends Node implements Member {
     private boolean isConstructor;
     private boolean isNative;
     private boolean isVarargs;
+    private MethodDescriptor declarationMethodDescriptor;
     private ImmutableList<TypeDescriptor> parameterTypeDescriptors;
     private TypeDescriptor returnTypeDescriptor;
     private ImmutableList<TypeDescriptor> typeParameterDescriptors;
@@ -223,6 +255,9 @@ public abstract class MethodDescriptor extends Node implements Member {
       builder.isConstructor = methodDescriptor.isConstructor();
       builder.isNative = methodDescriptor.isNative();
       builder.isVarargs = methodDescriptor.isVarargs();
+      if (methodDescriptor.getDeclarationMethodDescriptor() != methodDescriptor) {
+        builder.declarationMethodDescriptor = methodDescriptor.getDeclarationMethodDescriptor();
+      }
       builder.parameterTypeDescriptors = methodDescriptor.getParameterTypeDescriptors();
       builder.returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
       builder.typeParameterDescriptors = methodDescriptor.getTypeParameterTypeDescriptors();
@@ -237,6 +272,11 @@ public abstract class MethodDescriptor extends Node implements Member {
 
     public Builder methodName(String methodName) {
       this.methodName = methodName;
+      return this;
+    }
+
+    public Builder declarationMethodDescriptor(MethodDescriptor declarationMethodDescriptor) {
+      this.declarationMethodDescriptor = declarationMethodDescriptor;
       return this;
     }
 
@@ -295,6 +335,7 @@ public abstract class MethodDescriptor extends Node implements Member {
           isConstructor,
           isNative,
           isVarargs,
+          declarationMethodDescriptor,
           returnTypeDescriptor,
           parameterTypeDescriptors,
           typeParameterDescriptors,
