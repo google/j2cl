@@ -14,7 +14,6 @@
 package java.lang;
 
 import javaemul.internal.HashCodes;
-
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 
@@ -35,10 +34,7 @@ public class Object {
 
   @JsMethod(name = "$javaToString")
   public String toString() {
-    // TODO: fix this implementation. The hash code should be returned in hex
-    // but can't currently depend on Integer to get access to that static
-    // function because Closure doesn't yet support module circular references.
-    return this.getClass().getName() + "@" + this.hashCode();
+    return getClass().getName() + "@" + Integer.toHexString(hashCode());
   }
 
   // Defined as native so that we can modify the JsDoc to change return type to non-null.
