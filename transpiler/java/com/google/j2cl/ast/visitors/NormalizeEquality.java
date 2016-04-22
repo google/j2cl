@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
@@ -24,6 +23,8 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NullLiteral;
+import com.google.j2cl.ast.PrefixExpression;
+import com.google.j2cl.ast.PrefixOperator;
 
 /**
  * Replaces object == object expressions with Equality.$same(object, object) calls.
@@ -56,11 +57,15 @@ public class NormalizeEquality extends AbstractRewriter {
 
     // Rewrite object - object comparisons to avoid JS implicit conversions and still treat null and
     // undefined as equivalent.
-    return MethodCall.createRegularMethodCall(
-        null,
-        binaryExpression.getOperator() == BinaryOperator.EQUALS
-            ? AstUtils.createUtilSameMethodDescriptor()
-            : AstUtils.createUtilNotSameMethodDescriptor(),
-        Lists.newArrayList(binaryExpression.getLeftOperand(), binaryExpression.getRightOperand()));
+    MethodCall sameCall =
+        MethodCall.createRegularMethodCall(
+            null,
+            AstUtils.createUtilSameMethodDescriptor(),
+            binaryExpression.getLeftOperand(),
+            binaryExpression.getRightOperand());
+    if (binaryExpression.getOperator() == BinaryOperator.NOT_EQUALS) {
+      return new PrefixExpression(sameCall.getTypeDescriptor(), sameCall, PrefixOperator.NOT);
+    }
+    return sameCall;
   }
 }

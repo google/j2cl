@@ -310,8 +310,8 @@ class SimpleAutoBoxing extends Object {
     br = $Equality.$same(boxB1, boxB2);
     $Asserts.$enabled() && $Asserts.$assert(boxr);
     $Asserts.$enabled() && $Asserts.$assert(br);
-    boxr = $Equality.$notSame(boxB1, boxB2);
-    br = $Equality.$notSame(boxB1, boxB2);
+    boxr = !$Equality.$same(boxB1, boxB2);
+    br = !$Equality.$same(boxB1, boxB2);
     $Asserts.$enabled() && $Asserts.$assert(boxr);
     $Asserts.$enabled() && $Asserts.$assert(br);
     boxr =

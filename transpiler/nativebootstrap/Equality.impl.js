@@ -18,17 +18,6 @@ class Equality {
   static $same(left, right) {
     return left === right || (left == null && right == null);
   }
-
-  /**
-   * Strict inequality that combines undefined and null.
-   *
-   * @param {*} left
-   * @param {*} right
-   * @return {boolean}
-   */
-  static $notSame(left, right) {
-    return left !== right && (left != null || right != null);
-  }
 };
 
 
