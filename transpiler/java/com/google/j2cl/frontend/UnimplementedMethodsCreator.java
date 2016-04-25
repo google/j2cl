@@ -20,8 +20,10 @@ import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeProxyUtils;
 import com.google.j2cl.ast.Variable;
 
+import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 
@@ -102,7 +104,14 @@ public class UnimplementedMethodsCreator {
     for (ITypeBinding parameterTypeBinding : methodBinding.getParameterTypes()) {
       Variable parameter =
           new Variable(
-              "arg" + i++, JdtUtils.createTypeDescriptor(parameterTypeBinding), false, true);
+              "arg" + i++,
+              TypeProxyUtils.createTypeDescriptorWithNullability(
+                  parameterTypeBinding,
+                  new IAnnotationBinding[0],
+                  TypeProxyUtils.getPackageDefaultNullability(
+                      methodBinding.getDeclaringClass().getPackage())),
+              false,
+              true);
       parameters.add(parameter);
     }
     Block body = new Block();

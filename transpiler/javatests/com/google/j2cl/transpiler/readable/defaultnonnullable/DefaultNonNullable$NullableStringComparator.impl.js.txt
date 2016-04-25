@@ -1,0 +1,142 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$NullableStringComparator.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$NullableStringComparator$impl');
+
+
+let Object = goog.require('java.lang.Object$impl');
+let Comparator = goog.require('java.util.Comparator$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let DefaultNonNullable = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+
+/**
+ * @implements {Comparator<?string>}
+ */
+class DefaultNonNullable$NullableStringComparator extends Object {
+  /**
+   * Defines instance fields.
+   */
+  constructor() {
+    super();
+    /**
+     * @public {DefaultNonNullable}
+     */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable$NullableStringComparator =
+        null;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {DefaultNonNullable} $outer_this
+   * @return {!DefaultNonNullable$NullableStringComparator}
+   * @public
+   */
+  static $create__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable(
+      $outer_this) {
+    DefaultNonNullable$NullableStringComparator.$clinit();
+    let $instance = new DefaultNonNullable$NullableStringComparator();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable$NullableStringComparator__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable(
+            $outer_this);
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {DefaultNonNullable} $outer_this
+   * @return {void}
+   * @protected
+   */
+  $ctor__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable$NullableStringComparator__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable$NullableStringComparator =
+        $outer_this;
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable$NullableStringComparator();
+  }
+
+  /**
+   * @param {?string} a
+   * @param {?string} b
+   * @return {number}
+   * @public
+   */
+  m_compare__java_lang_String__java_lang_String(a, b) { return 0; }
+
+  /**
+   * Bridge method.
+   * @param {?string} arg0
+   * @param {?string} arg1
+   * @return {number}
+   * @public
+   */
+  m_compare__java_lang_Object__java_lang_Object(arg0, arg1) {
+    return this.m_compare__java_lang_String__java_lang_String(
+        /**@type {?string} */ ($Casts.to(arg0, String)),
+        /**@type {?string} */ ($Casts.to(arg1, String)));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof DefaultNonNullable$NullableStringComparator;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(
+        classConstructor, DefaultNonNullable$NullableStringComparator);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    DefaultNonNullable = goog.module.get(
+        'com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$impl');
+    Class = goog.module.get('java.lang.Class$impl');
+    String = goog.module.get('java.lang.String$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable$NullableStringComparator() {
+  }
+};
+
+$Util.$setClassMetadata(
+    DefaultNonNullable$NullableStringComparator,
+    'com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$NullableStringComparator');
+
+
+Comparator.$markImplementor(DefaultNonNullable$NullableStringComparator);
+
+
+/**
+ * Export class.
+ */
+exports = DefaultNonNullable$NullableStringComparator;
+//# sourceMappingURL=DefaultNonNullable$NullableStringComparator.js.map

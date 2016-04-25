@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+// TODO(simionato): Update this example after there is support for @NotNull.
 public class DefaultNullable {
   private String f1 = "Hello";
   @Nullable private String f2 = null;

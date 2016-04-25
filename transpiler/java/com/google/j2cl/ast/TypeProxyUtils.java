@@ -22,7 +22,6 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.common.PackageInfoCache;
 
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
-import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.IPackageBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
@@ -58,32 +57,34 @@ public class TypeProxyUtils {
   /**
    * Creates a type descriptor for the given type binding, taking into account nullability.
    * @param typeBinding the type binding, used to create the type descriptor.
-   * @param elementBinding type element binding, for example an IMethodBinding, used to look for
-   *     nullability annotations.
+   * @param elementAnnotations the annotations on the element
    */
   public static TypeDescriptor createTypeDescriptorWithNullability(
-      ITypeBinding typeBinding, IBinding elementBinding,
+      ITypeBinding typeBinding, IAnnotationBinding[] elementAnnotations,
       Nullability defaultNullabilityForCompilationUnit) {
     TypeDescriptor descriptor;
     if (typeBinding.isArray()) {
       TypeDescriptor leafTypeDescriptor = createTypeDescriptorWithNullability(
-          typeBinding.getElementType(), null, defaultNullabilityForCompilationUnit);
+          typeBinding.getElementType(),
+          new IAnnotationBinding[0],
+          defaultNullabilityForCompilationUnit);
       descriptor = TypeDescriptors.getForArray(leafTypeDescriptor, typeBinding.getDimensions());
     } else if (typeBinding.isParameterizedType()) {
       List<TypeDescriptor> typeArgumentsDescriptors = new ArrayList<>();
       for (ITypeBinding typeArgumentBinding : typeBinding.getTypeArguments()) {
-        typeArgumentsDescriptors.add(
-            createTypeDescriptorWithNullability(typeArgumentBinding, null,
-                defaultNullabilityForCompilationUnit));
+        typeArgumentsDescriptors.add(createTypeDescriptorWithNullability(
+            typeArgumentBinding, new IAnnotationBinding[0], defaultNullabilityForCompilationUnit));
       }
       descriptor = createTypeDescriptor(typeBinding, typeArgumentsDescriptors);
     } else {
       descriptor = createTypeDescriptor(typeBinding);
     }
 
-    return isNullable(typeBinding, elementBinding, defaultNullabilityForCompilationUnit)
-        ? descriptor
-        : TypeDescriptors.toNonNullable(descriptor);
+    if (isNullable(typeBinding, elementAnnotations, defaultNullabilityForCompilationUnit)
+        || descriptor.isTypeVariable()) {
+      return descriptor;
+    }
+    return TypeDescriptors.toNonNullable(descriptor);
   }
 
   /**
@@ -91,7 +92,7 @@ public class TypeProxyUtils {
    * and if nullability is enabled for the package containing the binding.
    */
   private static boolean isNullable(
-      ITypeBinding typeBinding, IBinding elementBinding,
+      ITypeBinding typeBinding, IAnnotationBinding[] elementAnnotations,
       Nullability defaultNullabilityForCompilationUnit) {
     if (typeBinding.isPrimitive()) {
       return false;
@@ -105,9 +106,7 @@ public class TypeProxyUtils {
     }
     Iterable<IAnnotationBinding> allAnnotations =
         Iterables.concat(
-            elementBinding == null
-                ? new ArrayList<IAnnotationBinding>()
-                : Arrays.asList(elementBinding.getAnnotations()),
+            Arrays.asList(elementAnnotations),
             Arrays.asList(typeBinding.getTypeAnnotations()),
             Arrays.asList(typeBinding.getAnnotations()));
     for (IAnnotationBinding annotation : allAnnotations) {

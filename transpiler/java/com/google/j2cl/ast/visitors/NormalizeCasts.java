@@ -77,7 +77,7 @@ public class NormalizeCasts extends AbstractRewriter {
             .methodName("to")
             .parameterTypeDescriptors(
                 Lists.newArrayList(
-                    TypeDescriptors.get().javaLangObject, TypeDescriptors.get().primitiveBoolean))
+                    TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangObject))
             .returnTypeDescriptor(castTypeDescriptor)
             .build();
     List<Expression> arguments = new ArrayList<>();

@@ -39,6 +39,10 @@ public class CastExpression extends Expression {
   }
 
   public static CastExpression createRaw(Expression expression, TypeDescriptor castTypeDescriptor) {
+    if (expression instanceof CastExpression && ((CastExpression) expression).isRaw()) {
+      // If there is already a cast, replace it instead of wrapping it.
+      expression = ((CastExpression) expression).getExpression();
+    }
     return new CastExpression(expression, castTypeDescriptor, true);
   }
 

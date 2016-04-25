@@ -98,12 +98,13 @@ public class JdtUtils {
     TypeDescriptor enclosingClassTypeDescriptor =
         createTypeDescriptor(variableBinding.getDeclaringClass());
     String fieldName = variableBinding.getName();
-    TypeDescriptor thisTypeDescriptor =
-        TypeProxyUtils.createTypeDescriptorWithNullability(
-            variableBinding.getType(),
-            variableBinding,
-            TypeProxyUtils.getPackageDefaultNullability(
-                variableBinding.getDeclaringClass().getPackage()));
+
+    TypeDescriptor thisTypeDescriptor = TypeProxyUtils.createTypeDescriptorWithNullability(
+        variableBinding.getType(),
+        variableBinding.getAnnotations(),
+        TypeProxyUtils.getPackageDefaultNullability(
+            variableBinding.getDeclaringClass().getPackage()));
+
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableBinding);
     boolean isRaw = jsInfo.getJsMemberType() == JsMemberType.PROPERTY;
     boolean isJsOverlay = JsInteropUtils.isJsOverlay(variableBinding);
@@ -128,7 +129,7 @@ public class JdtUtils {
     String name = variableBinding.getName();
     TypeDescriptor typeDescriptor =
         TypeProxyUtils.createTypeDescriptorWithNullability(
-            variableBinding.getType(), variableBinding, defaultNullability);
+            variableBinding.getType(), variableBinding.getAnnotations(), defaultNullability);
     boolean isFinal = isFinal(variableBinding.getModifiers());
     boolean isParameter = variableBinding.isParameter();
     return new Variable(name, typeDescriptor, isFinal, isParameter);

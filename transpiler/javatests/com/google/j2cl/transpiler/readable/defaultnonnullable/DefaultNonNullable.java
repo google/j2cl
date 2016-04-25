@@ -1,15 +1,20 @@
 package com.google.j2cl.transpiler.readable.defaultnonnullable;
 
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
+import com.google.j2cl.transpiler.readable.defaultnonnullable.subpackage.NullableClass;
+
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
 
 import org.checkerframework.checker.nullness.compatqual.NullableType;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.Nullable;
 
-// TODO(simionato): Update this example after there is support for @NotNull.
 public class DefaultNonNullable {
   private String f1 = "Hello";
   @Nullable private String f2 = null;
@@ -23,18 +28,80 @@ public class DefaultNonNullable {
   @org.checkerframework.checker.nullness.qual.Nullable private String[] f9 = {};
   // Nullable array of non-nullable strings.
   private String @NullableType [] f10 = {};
+  // Void is nullable by default.
   private Void f11 = null;
+  // Conversion from generic type parameter.
+  private List<String> f12 = NullableClass.newArrayList();
 
-  public String m1(String a, List<Double> b) {
+  @JsConstructor
+  public DefaultNonNullable(String a) {}
+
+  public String m1(String a, List<Double> b, @Nullable String c) {
     return "";
   }
 
   @Nullable
   public String m2(@Nullable String a, List<@NullableType Double> b) {
-    return null;
+    return "";
   }
 
   @JsMethod
-  public void m3(String... args) {
+  @Nullable
+  public String m3(String a, String... args) {
+    return null;
+  }
+
+  // Cases in which calling other method and returning doesn't require casting.
+  // TODO(simionato): This creates casting even thought it's not needed, add a visitor to do
+  // flow analysis to tighten nullability on local variables to fix this.
+  public String castingNotNeeded() {
+    String a = "";
+    List<Double> b = new ArrayList<>();
+    String c = null;
+    m1(a, b, c);
+    this.f1 = a;
+    return a;
+  }
+
+  // Cases in which casting is needed, since we can't infer nullability or we are using a library
+  // that doesn't have nullability annotations.
+  public String castingNeeded(@Nullable String a, Foo<String> foo) {
+    this.f4 = Lists.newArrayList();
+    this.f4 = new StringList();
+    this.f4 = (List) new StringList();
+    String x = m3("");
+    Preconditions.checkNotNull(x);
+    // JS Compiler can't infer that after this point x is not null.
+    new DefaultNonNullable(x);
+    m3(x, x, x);
+    this.f1 = x;
+    foo.bar(x);
+    if (true) {
+      return x;
+    }
+    // Cast needed since NullableClass.getString returns ?string.
+    return NullableClass.getString();
+  }
+
+  static class Foo<T> {
+    void bar(T t) {}
+  }
+
+  public static class StringList extends ArrayList<@NullableType String> {}
+
+  // Should implement Comparator<?string>
+  public class StringComparator implements Comparator<String> {
+    @Override
+    public int compare(String a, String b) {
+      return 0;
+    }
+  }
+
+  // Should implement Comparator<string>
+  public class NullableStringComparator implements Comparator<@NullableType String> {
+    @Override
+    public int compare(@Nullable String a, @Nullable String b) {
+      return 0;
+    }
   }
 }

@@ -60,19 +60,19 @@ public class JdtMethodUtils {
 
     TypeDescriptor returnTypeDescriptor =
         TypeProxyUtils.createTypeDescriptorWithNullability(
-            methodBinding.getReturnType(), methodBinding, defaultNullabilityForPackage);
+            methodBinding.getReturnType(),
+            methodBinding.getAnnotations(),
+            defaultNullabilityForPackage);
 
     // generate parameters type descriptors.
-    Iterable<TypeDescriptor> parameterTypeDescriptors =
-        FluentIterable.from(methodBinding.getParameterTypes())
-            .transform(
-                new Function<ITypeBinding, TypeDescriptor>() {
-                  @Override
-                  public TypeDescriptor apply(ITypeBinding typeBinding) {
-                    return TypeProxyUtils.createTypeDescriptorWithNullability(
-                        typeBinding, null, defaultNullabilityForPackage);
-                  }
-                });
+    List<TypeDescriptor> parameterTypeDescriptors = new ArrayList<>();
+    for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
+      TypeDescriptor descriptor = TypeProxyUtils.createTypeDescriptorWithNullability(
+          methodBinding.getParameterTypes()[i],
+          methodBinding.getParameterAnnotations(i),
+          defaultNullabilityForPackage);
+      parameterTypeDescriptors.add(descriptor);
+    }
 
     MethodDescriptor declarationMethodDescriptor = null;
     if (methodBinding.getMethodDeclaration() != methodBinding) {

@@ -28,6 +28,7 @@ import com.google.j2cl.ast.visitors.FixTypeVariablesInMethods;
 import com.google.j2cl.ast.visitors.InsertBoxingConversion;
 import com.google.j2cl.ast.visitors.InsertCastOnGenericReturnTypes;
 import com.google.j2cl.ast.visitors.InsertCastOnNewInstances;
+import com.google.j2cl.ast.visitors.InsertCastOnNullabilityMismatch;
 import com.google.j2cl.ast.visitors.InsertClassInitStaticMethods;
 import com.google.j2cl.ast.visitors.InsertExceptionConversions;
 import com.google.j2cl.ast.visitors.InsertExplicitSuperCalls;
@@ -191,6 +192,7 @@ public class J2clTranspiler {
       NormalizeArrayCreations.applyTo(j2clUnit);
       InsertExceptionConversions.applyTo(j2clUnit);
       NormalizeMultiExpressions.applyTo(j2clUnit);
+      InsertCastOnNullabilityMismatch.applyTo(j2clUnit);
 
       // Dodge JSCompiler limitations.
       // TODO: remove the temporary fix once switch to JSCompiler's new type checker.

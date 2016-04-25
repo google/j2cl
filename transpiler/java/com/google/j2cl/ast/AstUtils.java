@@ -390,11 +390,11 @@ public class AstUtils {
     List<TypeDescriptor> parameterTypes =
         fromMethodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors();
     for (int i = 0; i < parameterTypes.size(); i++) {
-      Variable parameter = new Variable("arg" + i,
-          parameterTypes.get(i).getRawTypeDescriptor(), false, true);
+      Variable parameter = new Variable("arg" + i, parameterTypes.get(i), false, true);
       parameters.add(parameter);
       arguments.add(parameter.getReference());
     }
+
     Expression forwardingMethodCall =
         MethodCall.createRegularMethodCall(null, toMethodDescriptor, arguments);
     Statement statement =

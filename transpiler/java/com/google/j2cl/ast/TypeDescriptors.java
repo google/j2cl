@@ -33,6 +33,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.TypeDescriptor.MethodDescriptorFactory;
 import com.google.j2cl.ast.TypeDescriptor.TypeDescriptorFactory;
+import com.google.j2cl.ast.TypeDescriptor.TypeDescriptorsFactory;
 import com.google.j2cl.common.JsInteropAnnotationUtils;
 
 import org.eclipse.jdt.core.dom.AST;
@@ -518,6 +519,41 @@ public class TypeDescriptors {
     return intern(newTypeDescriptor);
   }
 
+  /**
+   * Returns the type in the hierarchy of {@code type} that matches (excluding nullability and
+   * generics) with {@code typeToMatch}.
+   * If there is no match, returns null.
+   */
+  public static TypeDescriptor getMatchingTypeInHierarchy(
+      TypeDescriptor subjectTypeDescriptor, TypeDescriptor toMatchTypeDescriptor) {
+    if (subjectTypeDescriptor.getRawTypeDescriptor().equalsIgnoreNullability(
+        toMatchTypeDescriptor.getRawTypeDescriptor())) {
+      return subjectTypeDescriptor;
+    }
+
+    // Check superclasses.
+    if (subjectTypeDescriptor.getSuperTypeDescriptor() != null) {
+      TypeDescriptor match =
+          getMatchingTypeInHierarchy(
+              subjectTypeDescriptor.getSuperTypeDescriptor(),
+              toMatchTypeDescriptor);
+      if (match != null) {
+        return match;
+      }
+    }
+
+    // Check implemented interfaces.
+    for (TypeDescriptor interfaceDescriptor : subjectTypeDescriptor.getInterfacesTypeDescriptors()) {
+      TypeDescriptor match =
+          getMatchingTypeInHierarchy(interfaceDescriptor, toMatchTypeDescriptor);
+      if (match != null) {
+        return match;
+      }
+    }
+
+    return null;
+  }
+
   public static TypeDescriptor toGivenNullability(
       TypeDescriptor originalTypeDescriptor, boolean nullable) {
     if (nullable) {
@@ -711,6 +747,17 @@ public class TypeDescriptors {
             return TypeProxyUtils.createTypeDescriptor(typeBinding.getSuperclass());
           }
         };
+    TypeDescriptorsFactory interfacesDescriptorsFactory =
+        new TypeDescriptorsFactory() {
+          @Override
+          public ImmutableList<TypeDescriptor> create() {
+            ImmutableList.Builder<TypeDescriptor> typeDescriptors = ImmutableList.builder();
+            for (ITypeBinding binding : typeBinding.getInterfaces()) {
+              typeDescriptors.add(TypeProxyUtils.createTypeDescriptor(binding));
+            }
+            return typeDescriptors.build();
+          }
+        };
 
     // Compute these first since they're reused in other calculations.
     List<String> classComponents = TypeProxyUtils.getClassComponents(typeBinding);
@@ -750,6 +797,7 @@ public class TypeDescriptors {
             .setBinaryClassName(binaryClassName)
             .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
             .setEnclosingTypeDescriptorFactory(enclosingTypeDescriptorFactory)
+            .setInterfacesTypeDescriptorsFactory(interfacesDescriptorsFactory)
             .setIsEnumOrSubclass(TypeProxyUtils.isEnumOrSubclass(typeBinding))
             .setIsExtern(isExtern)
             .setIsInstanceMemberClass(TypeProxyUtils.isInstanceMemberClass(typeBinding))

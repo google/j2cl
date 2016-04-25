@@ -16,6 +16,7 @@
 package com.google.j2cl.ast;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.Collections;
@@ -62,6 +63,13 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
             @Override
             public TypeDescriptor create() {
               return typeDescriptor.getEnclosingTypeDescriptor();
+            }
+          };
+      newTypeDescriptor.interfacesTypeDescriptorsFactory =
+          new TypeDescriptorsFactory() {
+            @Override
+            public List<TypeDescriptor> create() {
+              return typeDescriptor.getInterfacesTypeDescriptors();
             }
           };
       newTypeDescriptor.isArray = typeDescriptor.isArray();
@@ -163,6 +171,12 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     public Builder setEnclosingTypeDescriptorFactory(
         TypeDescriptorFactory enclosingTypeDescriptorFactory) {
       newTypeDescriptor.enclosingTypeDescriptorFactory = enclosingTypeDescriptorFactory;
+      return this;
+    }
+
+    public Builder setInterfacesTypeDescriptorsFactory(
+        TypeDescriptorsFactory interfacesTypeDescriptorsFactory) {
+      newTypeDescriptor.interfacesTypeDescriptorsFactory = interfacesTypeDescriptorsFactory;
       return this;
     }
 
@@ -357,6 +371,14 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     TypeDescriptor create();
   }
 
+  /**
+   * Enables delayed TypeDescriptor creation.
+   */
+  public interface TypeDescriptorsFactory {
+    List<TypeDescriptor> create();
+  }
+
+
   private String binaryClassName;
   private String binaryName;
   private List<String> classComponents = Collections.emptyList();
@@ -364,6 +386,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   private MethodDescriptorFactory concreteJsFunctionMethodDescriptorFactory;
   private int dimensions;
   private TypeDescriptorFactory enclosingTypeDescriptorFactory;
+  private TypeDescriptorsFactory interfacesTypeDescriptorsFactory;
   private boolean isArray;
   private boolean isEnumOrSubclass;
   private boolean isExtern;
@@ -471,6 +494,13 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       return null;
     }
     return enclosingTypeDescriptorFactory.create();
+  }
+
+  public ImmutableList<TypeDescriptor> getInterfacesTypeDescriptors() {
+    if (interfacesTypeDescriptorsFactory == null) {
+      return ImmutableList.of();
+    }
+    return ImmutableList.copyOf(interfacesTypeDescriptorsFactory.create());
   }
 
   public MethodDescriptor getJsFunctionMethodDescriptor() {

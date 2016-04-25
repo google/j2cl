@@ -37,8 +37,11 @@ import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeProxyUtils;
+import com.google.j2cl.ast.TypeProxyUtils.Nullability;
 import com.google.j2cl.ast.Variable;
 
+import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 
@@ -267,8 +270,19 @@ public class BridgeMethodsCreator {
    */
   private MethodDescriptor createMethodDescriptorInCurrentType(
       IMethodBinding methodBinding, ITypeBinding returnType) {
-    TypeDescriptor enclosingClassTypeDescriptor = JdtUtils.createTypeDescriptor(typeBinding);
-    TypeDescriptor returnTypeDescriptor = JdtUtils.createTypeDescriptor(returnType);
+    Nullability defaultNullability = TypeProxyUtils.getPackageDefaultNullability(
+        methodBinding.getDeclaringClass().getPackage());
+    TypeDescriptor enclosingClassTypeDescriptor =
+        TypeProxyUtils.createTypeDescriptorWithNullability(
+            typeBinding,
+            new IAnnotationBinding[0],
+            defaultNullability);
+    TypeDescriptor returnTypeDescriptor =
+        TypeProxyUtils.createTypeDescriptorWithNullability(
+            returnType,
+            new IAnnotationBinding[0],
+            defaultNullability);
+
     MethodDescriptor originalMethodDescriptor =
         JdtMethodUtils.createMethodDescriptor(methodBinding);
 
