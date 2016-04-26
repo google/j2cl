@@ -45,6 +45,13 @@ import java.util.concurrent.TimeUnit;
  */
 public class IntegrationTestCase extends TestCase {
 
+  private static final String TEST_ROOT = "third_party/java_src/j2cl/transpiler/javatests";
+
+  // The bundle contains both the standard library and its deps so that tests don't have to know how
+  // to dep on all.
+  protected static final String JRE_PATH =
+      TEST_ROOT + "/com/google/j2cl/transpiler/integration/jre_bundle_deploy.jar";
+
   public enum OutputType {
     DIR,
     ZIP
@@ -113,9 +120,7 @@ public class IntegrationTestCase extends TestCase {
 
   private static List<File> listFilesInDir(Class<?> clazz, String directoryName) {
     return Lists.newArrayList(
-        Runfiles.packageRelativeLocation(
-                "third_party/java_src/j2cl/transpiler/javatests", clazz, directoryName)
-            .listFiles());
+        Runfiles.packageRelativeLocation(TEST_ROOT, clazz, directoryName).listFiles());
   }
 
   private static List<File> listSourceFilesInDir(Class<?> clazz, String directoryName) {

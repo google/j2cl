@@ -30,13 +30,7 @@ import java.util.List;
  * Tests for JsInteropRestrictionsChecker.
  */
 public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
-  public static final String JSINTEROP_PATH =
-      "third_party/java_src/gwt/svn/trunk/user/libgwt-jsinterop-annotations.jar";
-  public static final String JRE_PATH =
-      "third_party/java_src/j2cl/jre/java/libJavaJre_java_library.jar";
-  public static String[] extraArgs = {
-    "-source", "1.8", "-encoding", "UTF-8", "-cp", JSINTEROP_PATH + ":" + JRE_PATH
-  };
+  public static String[] extraArgs = {"-source", "1.8", "-encoding", "UTF-8", "-cp", JRE_PATH};
 
   protected File inputDir;
   protected File outputDir;

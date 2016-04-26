@@ -14,6 +14,14 @@ load("/javascript/closure/builddefs", "CLOSURE_COMPILER_FLAGS_FULL_TYPED")
 # Google owns the copyright
 licenses(["unencumbered"])
 
+# A java_binary to create a merged jar of all deps of the standard runtime.
+java_binary(
+    name = "jre_bundle",
+    create_executable = 0,
+    restricted_to = ["//buildenv/j2cl:j2cl_compilation"],
+    runtime_deps = ["//jre/java:JavaJre_java_library"],
+)
+
 java_test(
     name = "HelpFlagTest",
     srcs = ["HelpFlagTest.java"],
@@ -63,7 +71,7 @@ java_test(
 java_test(
     name = "NativeSourcesErrorTest",
     srcs = ["NativeSourcesErrorTest.java"],
-    data = glob(["nativesourceserror/**/*"]) + ["//jre/java:libJavaJre_java_library.jar"],
+    data = glob(["nativesourceserror/**/*"]) + [":jre_bundle_deploy.jar"],
     restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
     deps = [
         ":IntegrationTestCase",
@@ -74,7 +82,7 @@ java_test(
 java_test(
     name = "OutputTest",
     srcs = ["OutputTest.java"],
-    data = glob(["output/**/*"]) + ["//jre/java:libJavaJre_java_library.jar"],
+    data = glob(["output/**/*"]) + [":jre_bundle_deploy.jar"],
     restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
     deps = [":IntegrationTestCase"],
 )
@@ -89,10 +97,7 @@ java_test(
 java_test(
     name = "JsInteropRestrictionsCheckerTest",
     srcs = ["JsInteropRestrictionsCheckerTest.java"],
-    data = [
-        "//third_party/java/gwt:gwt-jsinterop-annotations",
-        "//jre/java:libJavaJre_java_library.jar",
-    ],
+    data = [":jre_bundle_deploy.jar"],
     restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
     deps = [
         ":IntegrationTestCase",

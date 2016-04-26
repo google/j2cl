@@ -33,7 +33,7 @@ public class OutputTest extends IntegrationTestCase {
             "-encoding",
             "UTF-8",
             "-cp",
-            "third_party/java_src/j2cl/jre/java/libJavaJre_java_library.jar");
+            JRE_PATH);
 
     assertEquals(0, transpileResult.exitCode);
     assertTrue(transpileResult.errorLines.isEmpty());
@@ -72,7 +72,7 @@ public class OutputTest extends IntegrationTestCase {
             "-encoding",
             "UTF-8",
             "-cp",
-            "third_party/java_src/j2cl/jre/java/libJavaJre_java_library.jar");
+            JRE_PATH);
 
     assertEquals(0, transpileResult.exitCode);
     assertTrue(transpileResult.errorLines.isEmpty());
