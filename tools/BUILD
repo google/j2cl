@@ -5,6 +5,7 @@ package(
     default_visibility = [
         "//java/com/google/protobuf/contrib/gwt:__pkg__",
         "//:__subpackages__",
+        "//third_party/java_src/jbox2d:__subpackages__",
     ],
 )
 
