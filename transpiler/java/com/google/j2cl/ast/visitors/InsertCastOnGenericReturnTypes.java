@@ -1,9 +1,9 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.JsTypeAnnotation;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.Node;
 
@@ -21,9 +21,9 @@ public class InsertCastOnGenericReturnTypes extends AbstractRewriter {
   }
 
   @Override
-  public boolean shouldProcessCastExpression(CastExpression castExpression) {
-    if (castExpression.getExpression() instanceof MethodCall) {
-      MethodCall methodCall = (MethodCall) castExpression.getExpression();
+  public boolean shouldProcessJsTypeAnnotation(JsTypeAnnotation annotation) {
+    if (annotation.getExpression() instanceof MethodCall) {
+      MethodCall methodCall = (MethodCall) annotation.getExpression();
       for (Expression expression : methodCall.getArguments()) {
         // process arguments
         expression.accept(this);
@@ -31,14 +31,13 @@ public class InsertCastOnGenericReturnTypes extends AbstractRewriter {
       // Don't rewrite the castExpression nor its sub expressions.
       return false;
     }
-
     return true;
   }
 
   @Override
   public Node rewriteMethodCall(MethodCall methodCall) {
     if (methodCall.getTarget().getReturnTypeDescriptor().isParameterizedType()) {
-      return CastExpression.createRaw(methodCall, methodCall.getTypeDescriptor());
+      return JsTypeAnnotation.createTypeAnnotation(methodCall, methodCall.getTypeDescriptor());
     }
     return methodCall;
   }

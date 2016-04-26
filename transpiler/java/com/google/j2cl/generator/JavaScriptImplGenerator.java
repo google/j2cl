@@ -16,7 +16,6 @@
 package com.google.j2cl.generator;
 
 import com.google.common.base.Preconditions;
-import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
@@ -44,15 +43,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private String className;
   private String mangledTypeName;
 
-  private boolean subclassesJsConstructorClass;
-
   protected final StatementTranspiler statementTranspiler;
 
   public JavaScriptImplGenerator(Errors errors, boolean declareLegacyNamespace, JavaType javaType) {
     super(errors, declareLegacyNamespace, javaType);
     this.className = environment.aliasForType(javaType.getDescriptor());
     this.mangledTypeName = ManglingNameUtils.getMangledName(javaType.getDescriptor());
-    this.subclassesJsConstructorClass = javaType.getDescriptor().subclassesJsConstructorClass();
     this.statementTranspiler = new StatementTranspiler(sb, environment);
   }
 
@@ -198,7 +194,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     String extendsClause = GeneratorUtils.getExtendsClause(javaType, environment);
     sb.appendln("class %s %s{", className, extendsClause);
     environment.setEnclosingTypeDescriptor(javaType.getDescriptor());
-    renderConstructor();
     renderJavaTypeMethods();
     renderMarkImplementorMethod();
     renderIsInstanceMethod();
@@ -227,9 +222,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
           sb.newLine();
           continue;
         }
-        if (subclassesJsConstructorClass) {
-          method = GeneratorUtils.createNonPrimaryConstructor(method);
-        }
       }
       if (GeneratorUtils.shouldNotEmitCode(method)) {
         continue;
@@ -256,7 +248,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
       if (javaType.getDescriptor().isJsFunctionImplementation()
           && !method.getDescriptor().isStaticDispatch()
-          && !method.getBody().getStatements().isEmpty()) {
+          && !method.getBody().getStatements().isEmpty()
+          && !method.getDescriptor().getMethodName().startsWith("$ctor")) {
         sb.appendln(" * @this {%s}", getJsDocName(javaType.getDescriptor()));
       }
       for (String paramTypeName :
@@ -264,7 +257,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         sb.appendln(" * @param %s", paramTypeName);
       }
       String returnTypeName = getJsDocName(method.getDescriptor().getReturnTypeDescriptor());
-      sb.appendln(" * @return {%s}", returnTypeName);
+      if (!method.getDescriptor().isConstructor()) {
+        sb.appendln(" * @return {%s}", returnTypeName);
+      }
       sb.appendln(" * @%s", GeneratorUtils.visibilityForMethod(method));
       sb.appendln(" */");
       if (method.isNative()) {
@@ -420,64 +415,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sb.appendln("%s.$setClassMetadataForEnum(%s, '%s');", utilAlias, className, name);
     } else {
       sb.appendln("%s.$setClassMetadata(%s, '%s');", utilAlias, className, name);
-    }
-  }
-
-  private void renderJsConstructor() {
-    Method primaryConstructor = AstUtils.getPrimaryConstructor(javaType);
-    String parameters = GeneratorUtils.getParameterList(primaryConstructor, environment);
-    String superCallArguments = GeneratorUtils.getSuperArguments(primaryConstructor, environment);
-    sb.appendln("/**");
-    sb.appendln(" * Real constructor.");
-    for (String paramTypeName :
-        GeneratorUtils.getParameterAnnotationsJsDoc(primaryConstructor, environment)) {
-      sb.appendln(" * @param %s", paramTypeName);
-    }
-    sb.appendln(" * @public");
-    sb.appendln(" */");
-    sb.appendln("constructor(%s) {", parameters);
-    sb.appendln("%s.$clinit();", className);
-    sb.appendln("super(%s);", superCallArguments);
-    renderFieldsInitialValues();
-    String mangledCtorName =
-        ManglingNameUtils.getCtorMangledName(primaryConstructor.getDescriptor());
-    sb.appendln("this.%s(%s);", mangledCtorName, parameters);
-    sb.appendln("}");
-    sb.newLine();
-  }
-
-  private void renderConstructor() {
-    if (javaType.isJsOverlayImpl() || javaType.isInterface()) {
-      return;
-    }
-    if (subclassesJsConstructorClass) {
-      renderJsConstructor();
-      return;
-    }
-    sb.appendln("/**");
-    sb.appendln(" * Defines instance fields.");
-    // TODO(michaelthomas): Uncomment when b/27149891 is resolved.
-    // sb.appendln(" * @private");
-    sb.appendln(" */");
-    sb.appendln("constructor() {");
-    if (javaType.getSuperTypeDescriptor() != null) {
-      sb.appendln("super();");
-    }
-    renderFieldsInitialValues();
-    sb.appendln("}");
-    sb.newLine();
-  }
-
-  // Sets all the instance fields to their default java value.
-  private void renderFieldsInitialValues() {
-    for (Field field : javaType.getInstanceFields()) {
-      String fieldType = getJsDocName(field.getDescriptor().getTypeDescriptor());
-      String fieldName = ManglingNameUtils.getMangledName(field.getDescriptor());
-      String intialValue = expressionToString(GeneratorUtils.getInitialValue(field));
-      sb.appendln("/**");
-      sb.appendln(" * @%s {%s}", field.getDescriptor().getVisibility().jsText, fieldType);
-      sb.appendln(" */");
-      sb.appendln("this.%s = %s;", fieldName, intialValue);
     }
   }
 

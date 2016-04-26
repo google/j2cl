@@ -34,7 +34,6 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
-import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;
 
@@ -347,9 +346,6 @@ public class GeneratorUtils {
    * unless a super class calls it as part of the ctor chain.
    */
   public static String visibilityForMethod(Method method) {
-    if (method.isConstructor() && method.getDescriptor().getVisibility() == Visibility.PUBLIC) {
-      return "protected";
-    }
     return method.getDescriptor().getVisibility().jsText;
   }
 

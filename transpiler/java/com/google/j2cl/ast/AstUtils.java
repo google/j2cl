@@ -118,26 +118,42 @@ public class AstUtils {
         .jsInfo(jsInfo)
         .build();
   }
+  
+  /**
+   * Returns the constructor invocation (super call or this call) in a specified constructor, or
+   * returns null if it does not have one.
+   */
+  public static ExpressionStatement getConstructorInvocationStatement(Method method) {
+    checkArgument(method.isConstructor());
+    for (Statement statement : method.getBody().getStatements()) {
+      if (!(statement instanceof ExpressionStatement)) {
+        continue;
+      }
+      Expression expression = ((ExpressionStatement) statement).getExpression();
+      if (!(expression instanceof MethodCall)) {
+        continue;
+      }
+      MethodCall methodCall = (MethodCall) expression;
+      if (methodCall.getTarget().isConstructor()) {
+        return (ExpressionStatement) statement;
+      }
+    }
+    return null;
+  }
 
   /**
    * Returns the constructor invocation (super call or this call) in a specified constructor, or
    * returns null if it does not have one.
    */
   public static MethodCall getConstructorInvocation(Method method) {
-    checkArgument(method.isConstructor());
-    if (method.getBody().getStatements().isEmpty()) {
+    ExpressionStatement statement = getConstructorInvocationStatement(method);
+    if (statement == null) {
       return null;
     }
-    Statement firstStatement = method.getBody().getStatements().get(0);
-    if (!(firstStatement instanceof ExpressionStatement)) {
-      return null;
-    }
-    Expression expression = ((ExpressionStatement) firstStatement).getExpression();
-    if (!(expression instanceof MethodCall)) {
-      return null;
-    }
-    MethodCall methodCall = (MethodCall) expression;
-    return methodCall.getTarget().isConstructor() ? methodCall : null;
+    checkArgument(statement.getExpression() instanceof MethodCall);
+    MethodCall methodCall = (MethodCall) statement.getExpression();
+    checkArgument(methodCall.getTarget().isConstructor());
+    return methodCall;
   }
 
   /**
@@ -857,6 +873,33 @@ public class AstUtils {
 
     return MethodCall.createRegularMethodCall(
         null, makeLambdaCall, applyFunctionFieldAccess, instance, copyFunctionFieldAccess);
+  }
+  
+  private static Expression getInitialValue(Field field) {
+    if (field.isCompileTimeConstant()) {
+      return field.getInitializer();
+    }
+    return TypeDescriptors.getDefaultValue(field.getDescriptor().getTypeDescriptor());
+  }
+
+  public static List<Statement> generateFieldDeclarations(JavaType type) {
+    List<Statement> fieldInits = new ArrayList<>();
+    for (Field field : type.getFields()) {
+      if (field.getDescriptor().isStatic()) {
+        continue;
+      }
+      Statement declaration =
+          new ExpressionStatement(
+              JsTypeAnnotation.createDeclarationAnnotation(
+                  new BinaryExpression(
+                      TypeDescriptors.get().primitiveVoid,
+                      new FieldAccess(null, field.getDescriptor()),
+                      BinaryOperator.ASSIGN,
+                      getInitialValue(field)),
+                  field.getDescriptor().getTypeDescriptor()));
+      fieldInits.add(declaration);
+    }
+    return fieldInits;
   }
 
   /**

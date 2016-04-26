@@ -19,8 +19,8 @@ import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.JsTypeAnnotation;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
@@ -40,16 +40,15 @@ public class FixTypeVariablesInMethods extends AbstractRewriter {
   public static void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new FixTypeVariablesInMethods());
   }
-
+  
   @Override
-  public Node rewriteCastExpression(CastExpression castExpression) {
-    Preconditions.checkArgument(
-        castExpression.isRaw(),
-        "FixTypeVariableInMethodVisitors should be run after NormalizeCastsVisitor.");
-    TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
-    return CastExpression.Builder.from(castExpression)
-        .castTypeDescriptor(replaceTypeVariableWithBound(castTypeDescriptor, getCurrentMethod()))
-        .build();
+  public Node rewriteJsTypeAnnotation(JsTypeAnnotation annotation) {
+    if (annotation.isDeclaration()) {
+      return annotation;
+    }
+    TypeDescriptor castTypeDescriptor = annotation.getTypeDescriptor();
+    TypeDescriptor boundType = replaceTypeVariableWithBound(castTypeDescriptor, getCurrentMethod());
+    return JsTypeAnnotation.createTypeAnnotation(annotation.getExpression(), boundType);
   }
 
   private TypeDescriptor replaceTypeVariableWithBound(

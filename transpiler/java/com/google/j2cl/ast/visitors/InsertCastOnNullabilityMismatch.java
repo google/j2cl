@@ -18,12 +18,12 @@ package com.google.j2cl.ast.visitors;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
-import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.Invocation;
+import com.google.j2cl.ast.JsTypeAnnotation;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
@@ -68,7 +68,7 @@ public class InsertCastOnNullabilityMismatch extends AbstractRewriter {
       TypeDescriptor fixedType = getTypeWithMatchingNullability(fieldType, assignedType);
       if (fixedType != assignedType) {
         return Field.Builder.from(field)
-            .initializer(CastExpression.createRaw(initializer, fixedType))
+            .initializer(JsTypeAnnotation.createTypeAnnotation(initializer, fixedType))
             .build();
       }
     }
@@ -87,7 +87,8 @@ public class InsertCastOnNullabilityMismatch extends AbstractRewriter {
       TypeDescriptor assignedType = rightOperand.getTypeDescriptor();
       TypeDescriptor fixedType = getTypeWithMatchingNullability(fieldType, assignedType);
       if (fixedType != assignedType) {
-        binaryExpression.setRightOperand(CastExpression.createRaw(rightOperand, fixedType));
+        binaryExpression.setRightOperand(
+            JsTypeAnnotation.createTypeAnnotation(rightOperand, fixedType));
       }
     }
     return binaryExpression;
@@ -108,7 +109,7 @@ public class InsertCastOnNullabilityMismatch extends AbstractRewriter {
 
       TypeDescriptor fixedType = getTypeWithMatchingNullability(parameterType, argumentType);
       if (fixedType != argumentType) {
-        arguments.set(i, CastExpression.createRaw(arguments.get(i), fixedType));
+        arguments.set(i, JsTypeAnnotation.createTypeAnnotation(arguments.get(i), fixedType));
       }
     }
   }
@@ -132,7 +133,7 @@ public class InsertCastOnNullabilityMismatch extends AbstractRewriter {
 
     if (fixedType != actualReturnType) {
       returnStatement.setExpression(
-          CastExpression.createRaw(returnStatement.getExpression(), fixedType));
+          JsTypeAnnotation.createTypeAnnotation(returnStatement.getExpression(), fixedType));
     }
     return returnStatement;
   }

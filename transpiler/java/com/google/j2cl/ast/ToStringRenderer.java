@@ -114,13 +114,21 @@ class ToStringRenderer {
 
       @Override
       public boolean enterCastExpression(CastExpression castExpression) {
-        print(castExpression.isRaw() ? "/**" : "(");
-        print(castExpression.getCastTypeDescriptor());
-        print(castExpression.isRaw() ? "**/" : ")");
-        print(" ");
+        print(String.format("(%s) ", castExpression.getCastTypeDescriptor()));
         accept(castExpression.getExpression());
         return false;
       }
+
+      @Override
+      public boolean enterJsTypeAnnotation(JsTypeAnnotation annotation) {
+        if (annotation.isDeclaration()) {
+          print(String.format("/** @public {%s} */ ", annotation.getTypeDescriptor()));
+        } else {
+          print(String.format("/** @type {%s} */ ", annotation.getTypeDescriptor()));
+        }
+        accept(annotation.getExpression());
+        return false;
+      };
 
       @Override
       public boolean enterCharacterLiteral(CharacterLiteral characterLiteral) {

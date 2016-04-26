@@ -23,6 +23,7 @@ import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsInfo;
+import com.google.j2cl.ast.JsTypeAnnotation;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
@@ -46,9 +47,6 @@ public class NormalizeCasts extends AbstractRewriter {
 
   @Override
   public Node rewriteCastExpression(CastExpression expression) {
-    if (expression.isRaw()) {
-      return expression;
-    }
     TypeDescriptor castTypeDescriptor = expression.getCastTypeDescriptor();
     Preconditions.checkArgument(
         !castTypeDescriptor.isPrimitive(),
@@ -95,10 +93,8 @@ public class NormalizeCasts extends AbstractRewriter {
     MethodCall castMethodCall =
         MethodCall.createRegularMethodCall(null, castToMethodDescriptor, arguments);
     // /**@type {}*/ ()
-    return CastExpression.Builder.from(castExpression)
-        .isRaw(true)
-        .expression(castMethodCall)
-        .build();
+    return JsTypeAnnotation.createTypeAnnotation(
+        castMethodCall, castExpression.getCastTypeDescriptor());
   }
 
   private Node rewriteArrayCastExpression(CastExpression castExpression) {
@@ -145,7 +141,7 @@ public class NormalizeCasts extends AbstractRewriter {
     MethodCall castMethodCall =
         MethodCall.createRegularMethodCall(null, castToMethodDescriptor, arguments);
     // /**@type {}*/ ()
-    return CastExpression.createRaw(castMethodCall, arrayCastTypeDescriptor);
+    return JsTypeAnnotation.createTypeAnnotation(castMethodCall, arrayCastTypeDescriptor);
   }
 
   private Node rewriteNativeJsArrayCastExpression(CastExpression castExpression) {
@@ -168,6 +164,6 @@ public class NormalizeCasts extends AbstractRewriter {
     MethodCall castMethodCall =
         MethodCall.createRegularMethodCall(null, castToMethodDescriptor, arguments);
     // /**@type {}*/ ()
-    return CastExpression.createRaw(castMethodCall, castTypeDescriptor);
+    return JsTypeAnnotation.createTypeAnnotation(castMethodCall, castTypeDescriptor);
   }
 }

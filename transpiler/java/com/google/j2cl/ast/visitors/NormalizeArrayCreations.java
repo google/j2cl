@@ -19,10 +19,10 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayLiteral;
-import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JsInfo;
+import com.google.j2cl.ast.JsTypeAnnotation;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewArray;
@@ -80,7 +80,7 @@ public class NormalizeArrayCreations extends AbstractRewriter {
     arguments.add(leafTypeReference);
     MethodCall arrayCreateMethodCall =
         MethodCall.createRegularMethodCall(null, arrayCreateMethodDescriptor, arguments);
-    return CastExpression.createRaw(
+    return JsTypeAnnotation.createTypeAnnotation(
         arrayCreateMethodCall,
         TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()));
   }
@@ -123,8 +123,7 @@ public class NormalizeArrayCreations extends AbstractRewriter {
       arguments.add(leafTypeReference);
       MethodCall arrayInitMethodCall =
           MethodCall.createRegularMethodCall(null, arrayInitMethodDescriptor, arguments);
-
-      return CastExpression.createRaw(
+      return JsTypeAnnotation.createTypeAnnotation(
           arrayInitMethodCall,
           TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()));
     } else {
@@ -147,7 +146,7 @@ public class NormalizeArrayCreations extends AbstractRewriter {
       MethodCall arrayInitMethodCall =
           MethodCall.createRegularMethodCall(null, arrayInitMethodDescriptor, arguments);
 
-      return CastExpression.createRaw(
+      return JsTypeAnnotation.createTypeAnnotation(
           arrayInitMethodCall,
           TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()));
     }

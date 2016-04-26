@@ -57,9 +57,6 @@ public class Method extends Node {
     this.isFinal = isFinal;
     this.jsDocDescription = jsDocDescription;
     this.body = checkNotNull(body);
-    if (jsDocDescription == null && isConstructor()) {
-      this.jsDocDescription = "Initializes instance fields for a particular Java constructor.";
-    }
   }
 
   public MethodDescriptor getDescriptor() {
@@ -150,7 +147,6 @@ public class Method extends Node {
       builder.isAbstract = method.isAbstract();
       builder.isOverride = method.isOverride();
       builder.jsDocDescription = method.getJsDocDescription();
-      builder.isFinal = method.isFinal();
       builder.isFinal = method.isFinal();
       return builder;
     }

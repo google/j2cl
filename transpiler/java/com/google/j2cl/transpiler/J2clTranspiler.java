@@ -29,12 +29,12 @@ import com.google.j2cl.ast.visitors.InsertBoxingConversion;
 import com.google.j2cl.ast.visitors.InsertCastOnGenericReturnTypes;
 import com.google.j2cl.ast.visitors.InsertCastOnNewInstances;
 import com.google.j2cl.ast.visitors.InsertCastOnNullabilityMismatch;
-import com.google.j2cl.ast.visitors.InsertClassInitStaticMethods;
 import com.google.j2cl.ast.visitors.InsertExceptionConversions;
 import com.google.j2cl.ast.visitors.InsertExplicitSuperCalls;
 import com.google.j2cl.ast.visitors.InsertInstanceInitCalls;
 import com.google.j2cl.ast.visitors.InsertNarrowingPrimitiveConversions;
 import com.google.j2cl.ast.visitors.InsertNarrowingReferenceConversions;
+import com.google.j2cl.ast.visitors.InsertStaticClassInitializerMethods;
 import com.google.j2cl.ast.visitors.InsertStringConversions;
 import com.google.j2cl.ast.visitors.InsertUnboxingConversions;
 import com.google.j2cl.ast.visitors.InsertUnderflowOverflowConversions;
@@ -200,8 +200,7 @@ public class J2clTranspiler {
       // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
       FixTypeVariablesInMethods.applyTo(j2clUnit);
       RemoveUnusedMultiExpressionReturnValues.applyTo(j2clUnit);
-      InsertClassInitStaticMethods.applyTo(j2clUnit);
-
+      InsertStaticClassInitializerMethods.applyTo(j2clUnit);
       verifyUnit(j2clUnit);
     }
   }

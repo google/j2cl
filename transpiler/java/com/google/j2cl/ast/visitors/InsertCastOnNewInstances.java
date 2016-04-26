@@ -14,8 +14,8 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.JsTypeAnnotation;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -33,7 +33,7 @@ public class InsertCastOnNewInstances extends AbstractRewriter {
   public Node rewriteNewInstance(NewInstance newInstance) {
     if (newInstance.getTypeDescriptor().isParameterizedType()) {
       // add type annotation to ClassInstanceCreation of generic type and JsFunction type.
-      return CastExpression.createRaw(
+      return JsTypeAnnotation.createTypeAnnotation(
           newInstance, TypeDescriptors.toNonNullable(newInstance.getTypeDescriptor()));
     } else {
       return newInstance;

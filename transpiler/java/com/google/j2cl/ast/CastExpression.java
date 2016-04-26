@@ -26,24 +26,14 @@ import com.google.j2cl.ast.processors.Visitable;
 public class CastExpression extends Expression {
   @Visitable Expression expression;
   @Visitable TypeDescriptor castTypeDescriptor;
-  private boolean isRaw; // Raw casts are those that are not checked at run time. Only annotated.
 
-  private CastExpression(Expression expression, TypeDescriptor castTypeDescriptor, boolean isRaw) {
+  private CastExpression(Expression expression, TypeDescriptor castTypeDescriptor) {
     this.expression = checkNotNull(expression);
     this.castTypeDescriptor = checkNotNull(castTypeDescriptor);
-    this.isRaw = isRaw;
   }
   
   public static CastExpression create(Expression expression, TypeDescriptor castTypeDescriptor) {
-    return new CastExpression(expression, castTypeDescriptor, false);
-  }
-
-  public static CastExpression createRaw(Expression expression, TypeDescriptor castTypeDescriptor) {
-    if (expression instanceof CastExpression && ((CastExpression) expression).isRaw()) {
-      // If there is already a cast, replace it instead of wrapping it.
-      expression = ((CastExpression) expression).getExpression();
-    }
-    return new CastExpression(expression, castTypeDescriptor, true);
+    return new CastExpression(expression, castTypeDescriptor);
   }
 
   public TypeDescriptor getCastTypeDescriptor() {
@@ -67,14 +57,6 @@ public class CastExpression extends Expression {
     this.castTypeDescriptor = castTypeDescriptor;
   }
 
-  /**
-   * Returns if the CastExpression isRaw. A raw CastExpression represents the type cast in
-   * JavaScript which is output as @type {} (expression);
-   */
-  public boolean isRaw() {
-    return isRaw;
-  }
-
   @Override
   public Node accept(Processor processor) {
     return Visitor_CastExpression.visit(processor, this);
@@ -86,13 +68,11 @@ public class CastExpression extends Expression {
   public static class Builder {
     private Expression expression;
     private TypeDescriptor castTypeDescriptor;
-    private boolean isRaw;
-
+    
     public static Builder from(CastExpression cast) {
       Builder builder = new Builder();
       builder.expression = cast.getExpression();
       builder.castTypeDescriptor = cast.getCastTypeDescriptor();
-      builder.isRaw = cast.isRaw();
       return builder;
     }
 
@@ -106,13 +86,8 @@ public class CastExpression extends Expression {
       return this;
     }
 
-    public Builder isRaw(boolean isRaw) {
-      this.isRaw = isRaw;
-      return this;
-    }
-
     public CastExpression build() {
-      return new CastExpression(expression, castTypeDescriptor, isRaw);
+      return new CastExpression(expression, castTypeDescriptor);
     }
   }
 }

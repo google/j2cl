@@ -20,12 +20,11 @@ let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 class ChildClass extends ParentOuter {
   /**
    * Defines instance fields.
+   * @public
    */
   constructor() {
     super();
-    /**
-     * @public {number}
-     */
+    /** @public {number} */
     this.f_fieldInOuter__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass =
         0;
   }
@@ -46,7 +45,7 @@ class ChildClass extends ParentOuter {
   /**
    * Initializes instance fields for a particular Java constructor.
    * @return {void}
-   * @protected
+   * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass() {
     this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentOuter();

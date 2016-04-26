@@ -33,6 +33,7 @@ import com.google.j2cl.ast.ConditionalExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.InstanceOfExpression;
+import com.google.j2cl.ast.JsTypeAnnotation;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -65,9 +66,7 @@ import java.util.List;
  */
 public class ExpressionTranspiler {
   private static String stringForMethodDescriptor(MethodDescriptor methodDescriptor) {
-    if (methodDescriptor.isConstructor()) {
-      return ManglingNameUtils.getCtorMangledName(methodDescriptor);
-    } else if (methodDescriptor.isInit()) {
+    if (methodDescriptor.isInit()) {
       return ManglingNameUtils.getInitMangledName(
           methodDescriptor.getEnclosingClassTypeDescriptor());
     } else {
@@ -77,11 +76,6 @@ public class ExpressionTranspiler {
 
   public static String transform(Expression expression, final GenerationEnvironment environment) {
     class ToSourceTransformer extends AbstractTransformer<String> {
-      private String annotateWithJsDoc(TypeDescriptor castTypeDescriptor, String expression) {
-        String jsdoc = JsDocNameUtils.getJsDocName(castTypeDescriptor, false, environment);
-        return String.format("/**@type {%s} */ (%s)", jsdoc, expression);
-      }
-
       private String arraysTypeAlias() {
         return environment.aliasForType(BootstrapType.ARRAYS.getDescriptor());
       }
@@ -148,12 +142,19 @@ public class ExpressionTranspiler {
 
       @Override
       public String transformCastExpression(CastExpression castExpression) {
-        Preconditions.checkArgument(
-            castExpression.isRaw(),
-            "Java CastExpression should have been normalized to method call.");
-        return annotateWithJsDoc(
-            castExpression.getCastTypeDescriptor(),
-            transform(castExpression.getExpression(), environment));
+        throw new IllegalStateException(
+            castExpression + " CastExpression should have been normalized to method call.");
+      }
+
+      @Override
+      public String transformJsTypeAnnotation(JsTypeAnnotation annotation) {
+        String jsdoc =
+            JsDocNameUtils.getJsDocName(annotation.getTypeDescriptor(), false, environment);
+        String expression = transform(annotation.getExpression(), environment);
+        if (annotation.isDeclaration()) {
+          return String.format("/** @public {%s} */\n    %s", jsdoc, expression);
+        }
+        return String.format("/**@type {%s} */ (%s)", jsdoc, expression);
       }
 
       @Override
@@ -297,6 +298,9 @@ public class ExpressionTranspiler {
       private String transformMethodCallHeader(MethodCall expression) {
         MethodDescriptor target = expression.getTarget();
         String qualifier = transform(expression.getQualifier(), environment);
+        if (target.isConstructor()) {
+          return "super";
+        }
         if (target.isJsFunction()) {
           // Call to a JsFunction method is emitted as the call on the qualifier itself:
           return String.format("%s", qualifier);

@@ -19,7 +19,6 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
-import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -30,19 +29,20 @@ import java.util.Collections;
 /**
  * The first line of a static method should be a call to the Class's clinit.
  */
-public class InsertClassInitStaticMethods {
+public class InsertStaticClassInitializerMethods {
 
   public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new ClassInitStaticMethodsRewriter());
+    compilationUnit.accept(new StaticClassInitializerMethodsRewriter());
   }
 
-  private static class ClassInitStaticMethodsRewriter extends AbstractRewriter {
+  private static class StaticClassInitializerMethodsRewriter extends AbstractRewriter {
     @Override
     public Node rewriteMethod(Method method) {
-      if (method.getDescriptor().isStatic()) {
+      boolean isStaticMethod = method.getDescriptor().isStatic();
+      boolean isJsConstructor = method.getDescriptor().isJsConstructor();
+      if (isStaticMethod || isJsConstructor) {
         MethodDescriptor clinitDescriptor =
             MethodDescriptor.Builder.fromDefault()
-                .jsInfo(JsInfo.RAW)
                 .isStatic(true)
                 .enclosingClassTypeDescriptor(
                     method.getDescriptor().getEnclosingClassTypeDescriptor())

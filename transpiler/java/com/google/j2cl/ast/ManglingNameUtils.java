@@ -45,7 +45,7 @@ public class ManglingNameUtils {
    */
   public static String getMangledName(MethodDescriptor methodDescriptor) {
     if (methodDescriptor.isConstructor()) {
-      return getCtorMangledName(methodDescriptor);
+      return "constructor";
     }
     if (methodDescriptor.isJsProperty()) {
       // return get/set prefix plus the property name.
@@ -81,6 +81,10 @@ public class ManglingNameUtils {
     if (methodDescriptor.getMethodName().startsWith("$")) {
       // This is an internal method so we render the actual name
       prefix = "";
+    }
+    // TODO: We can remove this check and just use the regular method naming pattern.
+    if (methodDescriptor.getMethodName().startsWith("$ctor")) {
+      return methodDescriptor.getMethodName();
     }
     return String.format(
         "%s%s%s%s", prefix, methodDescriptor.getMethodName(), parameterSignature, suffix);
