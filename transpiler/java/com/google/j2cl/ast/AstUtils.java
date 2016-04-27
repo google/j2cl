@@ -34,7 +34,7 @@ import java.util.List;
  * Utility functions to manipulate J2CL AST.
  */
 public class AstUtils {
-  public static final String JS_OVERLAY_METHODS_IMPL_SUFFIX = "Overlay";
+  public static final String OVERLAY_IMPLEMENTATION_CLASS_SUFFIX = "$Overlay";
   public static final String CAPTURES_PREFIX = "$c_";
   public static final String ENCLOSING_INSTANCE_NAME = "$outer_this";
   public static final String CREATE_PREFIX = "$create_";
@@ -320,17 +320,21 @@ public class AstUtils {
                   })));
     }
 
-    MethodDescriptor declarationMethodDescriptor = MethodDescriptor.Builder.fromDefault()
-        .visibility(innerclassConstructorDescriptor.getVisibility())
-        .enclosingClassTypeDescriptor(outerclassTypeDescriptor)
-        .methodName(methodName)
-        .returnTypeDescriptor(
-            innerclassConstructorDescriptor.getDeclarationMethodDescriptor()
-                .getEnclosingClassTypeDescriptor())
-        .parameterTypeDescriptors(innerclassConstructorDescriptor.getDeclarationMethodDescriptor()
-            .getParameterTypeDescriptors())
-        .typeParameterDescriptors(typeParameterDescriptors)
-        .build();
+    MethodDescriptor declarationMethodDescriptor =
+        MethodDescriptor.Builder.fromDefault()
+            .visibility(innerclassConstructorDescriptor.getVisibility())
+            .enclosingClassTypeDescriptor(outerclassTypeDescriptor)
+            .methodName(methodName)
+            .returnTypeDescriptor(
+                innerclassConstructorDescriptor
+                    .getDeclarationMethodDescriptor()
+                    .getEnclosingClassTypeDescriptor())
+            .parameterTypeDescriptors(
+                innerclassConstructorDescriptor
+                    .getDeclarationMethodDescriptor()
+                    .getParameterTypeDescriptors())
+            .typeParameterTypeDescriptors(typeParameterDescriptors)
+            .build();
 
     return MethodDescriptor.Builder.fromDefault()
         .visibility(innerclassConstructorDescriptor.getVisibility())
@@ -339,7 +343,7 @@ public class AstUtils {
         .returnTypeDescriptor(returnTypeDescriptor)
         .declarationMethodDescriptor(declarationMethodDescriptor)
         .parameterTypeDescriptors(innerclassConstructorDescriptor.getParameterTypeDescriptors())
-        .typeParameterDescriptors(typeParameterDescriptors)
+        .typeParameterTypeDescriptors(typeParameterDescriptors)
         .build();
   }
 
@@ -763,7 +767,8 @@ public class AstUtils {
   /**
    * Returns TypeDescriptor that contains the devirtualized JsOverlay methods of a native type.
    */
-  public static TypeDescriptor createJsOverlayImplTypeDescriptor(TypeDescriptor typeDescriptor) {
+  public static TypeDescriptor createOverlayImplementationClassTypeDescriptor(
+      TypeDescriptor typeDescriptor) {
     checkArgument(typeDescriptor.isNative());
     checkArgument(!typeDescriptor.isArray());
     checkArgument(!typeDescriptor.isUnion());
@@ -773,7 +778,7 @@ public class AstUtils {
         Lists.newArrayList(
             Iterables.concat(
                 typeDescriptor.getClassComponents(),
-                Arrays.asList(JS_OVERLAY_METHODS_IMPL_SUFFIX))),
+                Arrays.asList(OVERLAY_IMPLEMENTATION_CLASS_SUFFIX))),
         false,
         Collections.emptyList());
   }

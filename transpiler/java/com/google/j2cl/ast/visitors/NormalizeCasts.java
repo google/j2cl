@@ -82,7 +82,7 @@ public class NormalizeCasts extends AbstractRewriter {
     arguments.add(expression);
     TypeDescriptor castTypeDescriptorArgument =
         rawCastTypeDescriptor.isNative()
-            ? AstUtils.createJsOverlayImplTypeDescriptor(rawCastTypeDescriptor)
+            ? AstUtils.createOverlayImplementationClassTypeDescriptor(rawCastTypeDescriptor)
             : rawCastTypeDescriptor;
     Preconditions.checkArgument(
         !castTypeDescriptorArgument.isNative(),

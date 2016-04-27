@@ -422,7 +422,7 @@ public class NormalizeConstructors {
         .isConstructor(false)
         .returnTypeDescriptor(
             TypeDescriptors.toNonNullable(constructor.getEnclosingClassTypeDescriptor()))
-        .typeParameterDescriptors(allParameterTypes)
+        .typeParameterTypeDescriptors(allParameterTypes)
         .build();
   }
 
@@ -440,19 +440,11 @@ public class NormalizeConstructors {
   private static Method factoryMethodForConstructor(Method constructor, JavaType javaType) {
     TypeDescriptor enclosingType = javaType.getDescriptor();
     MethodDescriptor javascriptConstructor =
-        MethodDescriptor.create(
-            false,
-            Visibility.PUBLIC,
-            enclosingType,
-            "",
-            true,
-            false,
-            false,
-            null,
-            TypeDescriptors.get().primitiveVoid,
-            new ArrayList<TypeDescriptor>(),
-            new ArrayList<TypeDescriptor>(),
-            JsInfo.NONE);
+        MethodDescriptor.Builder.fromDefault()
+            .enclosingClassTypeDescriptor(enclosingType)
+            .isConstructor(true)
+            .returnTypeDescriptor(TypeDescriptors.get().primitiveVoid)
+            .build();
 
     List<Expression> arguments = Lists.newArrayList();
     if (enclosingType.subclassesJsConstructorClass()) {
@@ -532,19 +524,13 @@ public class NormalizeConstructors {
     TypeDescriptor enclosingType =
         primaryConstructor.getDescriptor().getEnclosingClassTypeDescriptor();
     MethodDescriptor javascriptConstructor =
-        MethodDescriptor.create(
-            false,
-            Visibility.PRIVATE,
-            enclosingType,
-            "",
-            true,
-            false,
-            false,
-            null,
-            TypeDescriptors.get().primitiveVoid,
-            new ArrayList<TypeDescriptor>(),
-            new ArrayList<TypeDescriptor>(),
-            JsInfo.NONE);
+        MethodDescriptor.Builder.fromDefault()
+            .enclosingClassTypeDescriptor(enclosingType)
+            .isConstructor(true)
+            .returnTypeDescriptor(TypeDescriptors.get().primitiveVoid)
+            .visibility(Visibility.PRIVATE)
+            .build();
+
     // $instance.$ctor...();
     List<Expression> relayArguments =
         Lists.transform(

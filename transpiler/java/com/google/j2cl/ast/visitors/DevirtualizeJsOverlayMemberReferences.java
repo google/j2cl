@@ -39,7 +39,8 @@ public class DevirtualizeJsOverlayMemberReferences extends AbstractRewriter {
     FieldDescriptor target = fieldAccess.getTarget();
     if (target.isStatic() && target.isJsOverlay()) {
       TypeDescriptor overlayTypeDescriptor =
-          AstUtils.createJsOverlayImplTypeDescriptor(target.getEnclosingClassTypeDescriptor());
+          AstUtils.createOverlayImplementationClassTypeDescriptor(
+              target.getEnclosingClassTypeDescriptor());
       return new FieldAccess(
           null, FieldDescriptor.Builder.from(target).enclosingClass(overlayTypeDescriptor).build());
     }
@@ -54,7 +55,7 @@ public class DevirtualizeJsOverlayMemberReferences extends AbstractRewriter {
     TypeDescriptor originalTypeDescriptor =
         methodCall.getTarget().getEnclosingClassTypeDescriptor();
     TypeDescriptor overlayTypeDescriptor =
-        AstUtils.createJsOverlayImplTypeDescriptor(originalTypeDescriptor);
+        AstUtils.createOverlayImplementationClassTypeDescriptor(originalTypeDescriptor);
     if (methodCall.getTarget().isStatic()) {
       // Devirtualize *static* JsOverlay method.
       return MethodCall.Builder.from(methodCall)

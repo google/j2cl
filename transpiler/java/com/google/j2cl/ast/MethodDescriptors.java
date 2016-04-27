@@ -75,10 +75,11 @@ public class MethodDescriptors {
     typeParameterTypeDescriptors.addAll(
         methodDescriptor.getEnclosingClassTypeDescriptor().getTypeArgumentDescriptors());
 
-    MethodDescriptor.Builder methodBuilder = MethodDescriptor.Builder.from(methodDescriptor)
-        .parameterTypeDescriptors(parameterTypeDescriptors)
-        .typeParameterDescriptors(typeParameterTypeDescriptors)
-        .isStatic(true);
+    MethodDescriptor.Builder methodBuilder =
+        MethodDescriptor.Builder.from(methodDescriptor)
+            .parameterTypeDescriptors(parameterTypeDescriptors)
+            .typeParameterTypeDescriptors(typeParameterTypeDescriptors)
+            .isStatic(true);
 
     if (methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()) {
       MethodDescriptor declarationMethodDescriptor =

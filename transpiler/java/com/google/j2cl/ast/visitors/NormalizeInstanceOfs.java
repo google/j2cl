@@ -55,7 +55,8 @@ public class NormalizeInstanceOfs extends AbstractRewriter {
   private Node rewriteRegularInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
     TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
     if (checkTypeDescriptor.isNative()) {
-      checkTypeDescriptor = AstUtils.createJsOverlayImplTypeDescriptor(checkTypeDescriptor);
+      checkTypeDescriptor =
+          AstUtils.createOverlayImplementationClassTypeDescriptor(checkTypeDescriptor);
     }
 
     MethodDescriptor isInstanceMethodDescriptor =

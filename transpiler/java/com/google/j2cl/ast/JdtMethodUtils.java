@@ -80,7 +80,7 @@ public class JdtMethodUtils {
     }
 
     // generate type parameters declared in the method.
-    Iterable<TypeDescriptor> typeParameterDescriptors =
+    Iterable<TypeDescriptor> typeParameterTypeDescriptors =
         FluentIterable.from(methodBinding.getTypeParameters())
             .transform(
                 new Function<ITypeBinding, TypeDescriptor>() {
@@ -90,19 +90,20 @@ public class JdtMethodUtils {
                   }
                 });
 
-    return MethodDescriptor.create(
-        isStatic,
-        visibility,
-        enclosingClassTypeDescriptor,
-        methodName,
-        isConstructor,
-        isNative,
-        methodBinding.isVarargs(),
-        declarationMethodDescriptor,
-        returnTypeDescriptor,
-        parameterTypeDescriptors,
-        typeParameterDescriptors,
-        jsInfo);
+    return MethodDescriptor.Builder.fromDefault()
+        .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+        .methodName(methodName)
+        .declarationMethodDescriptor(declarationMethodDescriptor)
+        .returnTypeDescriptor(returnTypeDescriptor)
+        .parameterTypeDescriptors(parameterTypeDescriptors)
+        .typeParameterTypeDescriptors(typeParameterTypeDescriptors)
+        .jsInfo(jsInfo)
+        .visibility(visibility)
+        .isStatic(isStatic)
+        .isConstructor(isConstructor)
+        .isNative(isNative)
+        .isVarargs(methodBinding.isVarargs())
+        .build();
   }
 
   public static boolean isOrOverridesJsMember(IMethodBinding methodBinding) {

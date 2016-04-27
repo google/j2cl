@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.processors.Context;
 import com.google.j2cl.ast.processors.Visitable;
+import com.google.j2cl.ast.sourcemap.SourceInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,6 +139,8 @@ public class Method extends Node {
     private boolean isOverride;
     private String jsDocDescription;
     private boolean isFinal;
+    private SourceInfo javaSourceInfo;
+    private SourceInfo outputSourceInfo;
 
     public static Builder from(Method method) {
       Builder builder = new Builder();
@@ -148,6 +151,8 @@ public class Method extends Node {
       builder.isOverride = method.isOverride();
       builder.jsDocDescription = method.getJsDocDescription();
       builder.isFinal = method.isFinal();
+      builder.javaSourceInfo = method.getBody().getJavaSourceInfo();
+      builder.outputSourceInfo = method.getBody().getOutputSourceInfo();
       return builder;
     }
 
@@ -204,10 +209,14 @@ public class Method extends Node {
           MethodDescriptors.createModifiedCopy(
               originalMethodDescriptor, addedParameterTypeDescriptors);
 
+      Block body = new Block(statements);
+      body.setJavaSourceInfo(javaSourceInfo);
+      body.setOutputSourceInfo(outputSourceInfo);
+
       return new Method(
           finalMethodDescriptor,
           finalParameters,
-          new Block(statements),
+          body,
           isAbstract,
           isOverride,
           isFinal,

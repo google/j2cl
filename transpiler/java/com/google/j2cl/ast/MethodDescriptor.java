@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.auto.value.AutoValue;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
@@ -23,6 +25,8 @@ import com.google.common.collect.Interners;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.processors.Visitable;
+
+import java.util.List;
 
 import javax.annotation.Nullable;
 
@@ -48,7 +52,7 @@ public abstract class MethodDescriptor extends Node implements Member {
    * Creates an instance of an AutoValue generated MethodDescriptor which uses Interners to share
    * identical instances of MethodDescriptors.
    */
-  public static MethodDescriptor create(
+  private static MethodDescriptor create(
       boolean isStatic,
       Visibility visibility,
       TypeDescriptor enclosingClassTypeDescriptor,
@@ -58,21 +62,18 @@ public abstract class MethodDescriptor extends Node implements Member {
       boolean isVarargs,
       @Nullable MethodDescriptor declarationMethodDescriptorOrNull,
       TypeDescriptor returnTypeDescriptor,
-      Iterable<TypeDescriptor> parameterTypeDescriptors,
-      Iterable<TypeDescriptor> typeParameterTypeDescriptors,
+      List<TypeDescriptor> parameterTypeDescriptors,
+      List<TypeDescriptor> typeParameterTypeDescriptors,
       JsInfo jsInfo) {
 
-    ImmutableList<TypeDescriptor> parameterTypeDescriptorsList =
-        ImmutableList.copyOf(parameterTypeDescriptors);
-
     if (declarationMethodDescriptorOrNull != null) {
-      ImmutableList<TypeDescriptor> methodDeclarationParameters =
+      ImmutableList<TypeDescriptor> methodDeclarationParameterTypeDescriptors =
           declarationMethodDescriptorOrNull.getParameterTypeDescriptors();
       Preconditions.checkArgument(
-          parameterTypeDescriptorsList.size() == methodDeclarationParameters.size(),
+          methodDeclarationParameterTypeDescriptors.size() == parameterTypeDescriptors.size(),
           "Method parameters (%s) don't match with method declaration (%s)",
-          parameterTypeDescriptorsList,
-          methodDeclarationParameters);
+          parameterTypeDescriptors,
+          methodDeclarationParameterTypeDescriptors);
     }
 
     return getInterner()
@@ -86,7 +87,7 @@ public abstract class MethodDescriptor extends Node implements Member {
                 isNative,
                 isVarargs,
                 declarationMethodDescriptorOrNull,
-                parameterTypeDescriptorsList,
+                ImmutableList.copyOf(parameterTypeDescriptors),
                 returnTypeDescriptor,
                 ImmutableList.copyOf(typeParameterTypeDescriptors),
                 jsInfo));
@@ -230,7 +231,7 @@ public abstract class MethodDescriptor extends Node implements Member {
     private MethodDescriptor declarationMethodDescriptor;
     private ImmutableList<TypeDescriptor> parameterTypeDescriptors;
     private TypeDescriptor returnTypeDescriptor;
-    private ImmutableList<TypeDescriptor> typeParameterDescriptors;
+    private ImmutableList<TypeDescriptor> typeParameterTypeDescriptors;
     private JsInfo jsInfo;
 
     public static Builder fromDefault() {
@@ -241,7 +242,7 @@ public abstract class MethodDescriptor extends Node implements Member {
       builder.methodName = "";
       builder.parameterTypeDescriptors = ImmutableList.of();
       builder.returnTypeDescriptor = TypeDescriptors.get().primitiveVoid;
-      builder.typeParameterDescriptors = ImmutableList.of();
+      builder.typeParameterTypeDescriptors = ImmutableList.of();
       builder.jsInfo = JsInfo.NONE;
       return builder;
     }
@@ -260,7 +261,7 @@ public abstract class MethodDescriptor extends Node implements Member {
       }
       builder.parameterTypeDescriptors = methodDescriptor.getParameterTypeDescriptors();
       builder.returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
-      builder.typeParameterDescriptors = methodDescriptor.getTypeParameterTypeDescriptors();
+      builder.typeParameterTypeDescriptors = methodDescriptor.getTypeParameterTypeDescriptors();
       builder.jsInfo = methodDescriptor.getJsInfo();
       return builder;
     }
@@ -300,13 +301,24 @@ public abstract class MethodDescriptor extends Node implements Member {
       return this;
     }
 
+    public Builder isNative(boolean isNative) {
+      this.isNative = isNative;
+      return this;
+    }
+
     public Builder isStatic(boolean isStatic) {
       this.isStatic = isStatic;
       return this;
     }
 
-    public Builder typeParameterDescriptors(Iterable<TypeDescriptor> typeParameterDescriptors) {
-      this.typeParameterDescriptors = ImmutableList.copyOf(typeParameterDescriptors);
+    public Builder isVarargs(boolean isVarargs) {
+      this.isVarargs = isVarargs;
+      return this;
+    }
+
+    public Builder typeParameterTypeDescriptors(
+        Iterable<TypeDescriptor> typeParameterTypeDescriptors) {
+      this.typeParameterTypeDescriptors = ImmutableList.copyOf(typeParameterTypeDescriptors);
       return this;
     }
 
@@ -327,6 +339,11 @@ public abstract class MethodDescriptor extends Node implements Member {
     }
 
     public MethodDescriptor build() {
+      // TODO: We should compute the constructor name instead of allowing empty method name to
+      // percolate into the MethodDescriptor.
+      checkState(
+          !methodName.isEmpty() || isConstructor,
+          "Empty method names are only allowed in constructors.");
       return create(
           isStatic,
           visibility,
@@ -338,7 +355,7 @@ public abstract class MethodDescriptor extends Node implements Member {
           declarationMethodDescriptor,
           returnTypeDescriptor,
           parameterTypeDescriptors,
-          typeParameterDescriptors,
+          typeParameterTypeDescriptors,
           jsInfo);
     }
   }

@@ -18,7 +18,7 @@ import com.google.j2cl.ast.JsInteropRestrictionsChecker;
 import com.google.j2cl.ast.visitors.ControlStatementFormatter;
 import com.google.j2cl.ast.visitors.CreateDefaultConstructors;
 import com.google.j2cl.ast.visitors.CreateDevirtualizedStaticMethods;
-import com.google.j2cl.ast.visitors.CreateNativeTypeImplementations;
+import com.google.j2cl.ast.visitors.CreateOverlayImplementationTypes;
 import com.google.j2cl.ast.visitors.DevirtualizeJsOverlayMemberReferences;
 import com.google.j2cl.ast.visitors.DevirtualizeMethodCalls;
 import com.google.j2cl.ast.visitors.FixAnonymousClassConstructors;
@@ -161,7 +161,7 @@ public class J2clTranspiler {
       NormalizeNestedClassConstructors.applyTo(j2clUnit);
       // Runs at the very end of 'Class structure normalizations' section since we do not need to
       // apply other normalizations on the synthesized native JS types.
-      CreateNativeTypeImplementations.applyTo(j2clUnit);
+      CreateOverlayImplementationTypes.applyTo(j2clUnit);
 
       // Statement/Expression normalizations
       RewriteSystemGetPropertyMethod.applyTo(j2clUnit);

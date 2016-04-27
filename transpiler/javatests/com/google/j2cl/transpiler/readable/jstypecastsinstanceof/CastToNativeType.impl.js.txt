@@ -11,8 +11,8 @@ goog.module('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNat
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let CastToNativeType$NativeJsType$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType$NativeJsType$Overlay$impl');
-let CastToNativeType$NativeObject$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType$NativeObject$Overlay$impl');
+let CastToNativeType$NativeJsType$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType$NativeJsType$$Overlay$impl');
+let CastToNativeType$NativeObject$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType$NativeObject$$Overlay$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
 let CastToNativeType$NativeJsType = goog.forwardDeclare('test.foo.NativeJsType');
@@ -60,16 +60,16 @@ class CastToNativeType extends Object {
   m_test() {
     let a = new CastToNativeType$NativeJsType();
     let b = /**@type {CastToNativeType$NativeJsType} */ (
-        $Casts.to(a, CastToNativeType$NativeJsType$Overlay));
-    let c = CastToNativeType$NativeJsType$Overlay.$isInstance(a);
+        $Casts.to(a, CastToNativeType$NativeJsType$$Overlay));
+    let c = CastToNativeType$NativeJsType$$Overlay.$isInstance(a);
     let d = /**@type {Array<CastToNativeType$NativeJsType>} */ (
         $Arrays.$castToNative(a));
     c = $Arrays.$instanceIsOfNative(a);
     let e = /**@type {$CastToNativeType$NativeObject} */ (
-        $Casts.to(a, CastToNativeType$NativeObject$Overlay));
+        $Casts.to(a, CastToNativeType$NativeObject$$Overlay));
     let f = /**@type {$CastToNativeType$NativeObject<?string, *>} */ (
-        $Casts.to(a, CastToNativeType$NativeObject$Overlay));
-    c = CastToNativeType$NativeObject$Overlay.$isInstance(a);
+        $Casts.to(a, CastToNativeType$NativeObject$$Overlay));
+    c = CastToNativeType$NativeObject$$Overlay.$isInstance(a);
     let g = /**@type {Array<$CastToNativeType$NativeObject>} */ (
         $Arrays.$castToNative(a));
     let h = /**@type {Array<$CastToNativeType$NativeObject<?string, *>>} */ (
@@ -100,10 +100,10 @@ class CastToNativeType extends Object {
    * @public
    */
   static $clinit() {
-    CastToNativeType$NativeJsType$Overlay = goog.module.get(
-        'com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType$NativeJsType$Overlay$impl');
-    CastToNativeType$NativeObject$Overlay = goog.module.get(
-        'com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType$NativeObject$Overlay$impl');
+    CastToNativeType$NativeJsType$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType$NativeJsType$$Overlay$impl');
+    CastToNativeType$NativeObject$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType$NativeObject$$Overlay$impl');
     Class = goog.module.get('java.lang.Class$impl');
     String = goog.module.get('java.lang.String$impl');
     CastToNativeType$NativeJsType = goog.module.get('test.foo.NativeJsType');
