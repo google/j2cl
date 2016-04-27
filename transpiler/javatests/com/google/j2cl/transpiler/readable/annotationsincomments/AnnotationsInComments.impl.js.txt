@@ -1,0 +1,112 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.annotationsincomments.AnnotationsInComments.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.annotationsincomments.AnnotationsInComments$impl');
+
+
+let Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
+
+
+class AnnotationsInComments extends Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() { super(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!AnnotationsInComments}
+   * @public
+   */
+  static $create() {
+    AnnotationsInComments.$clinit();
+    let $instance = new AnnotationsInComments();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_annotationsincomments_AnnotationsInComments();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_annotationsincomments_AnnotationsInComments() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_annotationsincomments_AnnotationsInComments();
+  }
+
+  /**
+   * @param {!List<?string>} a
+   * @return {void}
+   * @public
+   */
+  m_foo__java_util_List(a) {}
+
+  /**
+   * @param {!List<?string>} b
+   * @return {void}
+   * @public
+   */
+  m_bar__java_util_List(b) {}
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof AnnotationsInComments;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, AnnotationsInComments);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
+    String = goog.module.get('java.lang.String$impl');
+    List = goog.module.get('java.util.List$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_annotationsincomments_AnnotationsInComments() {
+  }
+};
+
+$Util.$setClassMetadata(
+    AnnotationsInComments,
+    'com.google.j2cl.transpiler.readable.annotationsincomments.AnnotationsInComments');
+
+
+
+/**
+ * Export class.
+ */
+exports = AnnotationsInComments;
+//# sourceMappingURL=AnnotationsInComments.js.map

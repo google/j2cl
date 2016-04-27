@@ -17,6 +17,7 @@ package com.google.j2cl.frontend;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.j2cl.errors.Errors;
 
@@ -33,6 +34,7 @@ import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.annotation.Nullable;
 
@@ -45,6 +47,13 @@ import javax.annotation.Nullable;
  * so won't go thorough this preprocessor.
  */
 public class JavaPreprocessor {
+  private static final ImmutableMap<String, String> NULLABILITY_ANNOTATION_REPLACEMENTS =
+      ImmutableMap.of(
+          "/*@NullableType*/",
+          "@org.checkerframework.checker.nullness.compatqual.NullableType ",
+          "/*@org.checkerframework.checker.nullness.compatqual.NullableType*/",
+          "@org.checkerframework.checker.nullness.compatqual.NullableType ");
+
   private Map<String, String> compilerOptions;
 
   public JavaPreprocessor(Map<String, String> compilerOptions) {
@@ -100,13 +109,37 @@ public class JavaPreprocessor {
    */
   public String preprocessFile(Path filePath, @Nullable String encoding) throws IOException {
     byte[] bytes = Files.readAllBytes(filePath);
-    return preprocessFile(encoding == null ? new String(bytes) : new String(bytes, encoding));
+    String fileContent = encoding == null ? new String(bytes) : new String(bytes, encoding);
+    String preprocessedFileContent = preprocessFile(fileContent);
+    return fileContent.equals(preprocessedFileContent) ? null : preprocessedFileContent;
   }
 
   @VisibleForTesting
   String preprocessFile(String fileContent) {
+    String newFileContent = commentGwtIncompatibleNodes(fileContent);
+    newFileContent = uncommentNullabilityAnnotations(newFileContent);
+    return newFileContent;
+  }
+
+  /**
+   * Uncomments all the annotations and code in comment. This is needed since those
+   * annotations are not supported in Java 7 or below.
+   */
+  String uncommentNullabilityAnnotations(String fileContent) {
+    for (Entry<String, String> annotationReplacement :
+        NULLABILITY_ANNOTATION_REPLACEMENTS.entrySet()) {
+      fileContent =
+          fileContent.replace(annotationReplacement.getKey(), annotationReplacement.getValue());
+    }
+    return fileContent;
+  }
+
+  /**
+   * Comments out all the nodes (fields, methods, classes) marked with {@code GwtIncompatible}.
+   */
+  String commentGwtIncompatibleNodes(String fileContent) {
     if (!fileContent.contains("GwtIncompatible")) {
-      return null;
+      return fileContent;
     }
 
     // Parse the file.
@@ -137,7 +170,7 @@ public class JavaPreprocessor {
     nodesToWrap.addAll(gwtIncompatibleNodes);
     if (nodesToWrap.isEmpty()) {
       // Nothing was changed.
-      return null;
+      return fileContent;
     }
     // Precondition: Node ranges must not overlap and they must be sorted by position.
     StringBuilder newFileContent = new StringBuilder();
