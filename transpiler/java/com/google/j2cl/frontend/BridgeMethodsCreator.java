@@ -337,7 +337,11 @@ public class BridgeMethodsCreator {
       Variable parameter =
           new Variable(
               "arg" + i,
-              JdtUtils.createTypeDescriptor(bridgeMethod.getParameterTypes()[i]),
+              TypeProxyUtils.createTypeDescriptorWithNullability(
+                  bridgeMethod.getParameterTypes()[i],
+                  new IAnnotationBinding[0],
+                  TypeProxyUtils.getPackageDefaultNullability(
+                      targetMethod.getDeclaringClass().getPackage())),
               false,
               true);
       parameters.add(parameter);
