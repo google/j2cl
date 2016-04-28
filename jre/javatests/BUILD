@@ -8,7 +8,7 @@ licenses(["unencumbered"])
 
 load("//build_def:j2cl_source_copy.bzl", "j2cl_source_copy")
 load("//jre/javatests:j2cl_multi_test.bzl", "j2cl_multi_test")
-load("//build_def:jsni_to_j2cl_converter.bzl", "jsni_to_j2cl_converter")
+load("//build_def:jsni_to_j2cl_converter.bzl", "jsni_to_native_js_bundle")
 
 j2cl_source_copy(
     name = "emul_test_copy",
@@ -23,24 +23,11 @@ j2cl_source_copy(
     excludes = ["javaemul/internal/EmulatedCharset.java"],
 )
 
-jsni_to_j2cl_converter(
-    name = "convert_jsni_emul_j2cl",
-    testonly = 1,
-    srcs = [
-        ":emul_test_copy",
-    ],
-    excludes = [
-        "com/google/gwt/testing/TestUtils.java",
-        "java/lang/JsExceptionViolator.java",
-        "java/math/BigIntegerViolator.java",
-        "java/util/TreeMapViolator.java",
-        "java/util/TreeMapViolator.java",
-    ],
-    deps = [
-        ":emul_tests_lib",
-        "//jre/java:jre_java_library",
-        "//junit/opensource/java:junit_emul_java_library",
-    ],
+jsni_to_native_js_bundle(
+    name = "native_js_bundle",
+    srcs = [":emul_test_copy"],
+    native_srcs = glob(["**/*.native.js"]),
+    deps = [":emul_tests_lib_j2cl_java_library"],
 )
 
 TEST_SRCS = [

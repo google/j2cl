@@ -16,7 +16,7 @@ def _get_java_root_index(pkg_name):
     javatests_index = pkg_name.rfind("javatests/")
 
   if java_index == -1 and javatests_index == -1:
-    fail("can not find java root")
+    fail("can not find java root: " + pkg_name)
 
   if java_index > javatests_index:
     index = java_index + len("java/")
@@ -30,9 +30,14 @@ def get_java_root(pkg_name):
   return pkg_name[:_get_java_root_index(pkg_name)]
 
 
+def get_java_path(pkg_name):
+  """Extract the java path from the build package"""
+  return pkg_name[len(get_java_root(pkg_name)):]
+
+
 def get_java_package(pkg_name):
   """Extract the java package from the build package"""
-  return pkg_name[len(get_java_root(pkg_name)):].replace("/", ".")
+  return get_java_path(pkg_name).replace("/", ".")
 
 
 def get_or_default(key, map, default):
@@ -40,6 +45,39 @@ def get_or_default(key, map, default):
   if key in map and map[key]:
     return map[key]
   return default
+
+
+def generate_zip(name, srcs, pkg):
+  """Generates a zip target with given srcs. See j2cl_library for details of pkg handling"""
+  native.genzip(
+      name=name,
+      deps=[name + "_pkg_library"],
+  )
+
+  if pkg == "RELATIVE":
+    flatten = 0
+    package_dir = None
+    strip_prefix = None
+  elif pkg == "ABSOLUTE":
+    flatten = 0
+    package_dir = None
+    strip_prefix = ""
+  elif pkg == "CONVENTION":
+    flatten = 1
+    package_dir = get_java_path(PACKAGE_NAME)
+    strip_prefix = None
+  else:
+    flatten = 1
+    package_dir = pkg
+    strip_prefix = None
+
+  native.pkg_library(
+      name=name + "_pkg_library",
+      srcs=srcs,
+      flatten=flatten,
+      package_dir=package_dir,
+      strip_prefix=strip_prefix,
+  )
 
 
 J2CL_BINARY_DEFS = [

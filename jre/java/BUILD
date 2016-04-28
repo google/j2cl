@@ -12,7 +12,7 @@ package(default_visibility = [
 licenses(["unencumbered"])
 
 load("//build_def:j2cl_source_copy.bzl", "j2cl_source_copy")
-load("//build_def:jsni_to_j2cl_converter.bzl", "jsni_to_j2cl_converter")
+load("//build_def:jsni_to_j2cl_converter.bzl", "jsni_to_native_js_bundle")
 
 J2CL_SPECIFIC_JRE_SRC = [
     "java/lang/Class.java",
@@ -36,17 +36,10 @@ j2cl_source_copy(
     excludes = J2CL_SPECIFIC_JRE_SRC,
 )
 
-jsni_to_j2cl_converter(
-    name = "convert_jsni_emul",
+jsni_to_native_js_bundle(
+    name = "native_js_bundle",
     srcs = JRE_SRC,
-    # Files containing JSNI field / method references.
-    # These would be rejected by the jsni converter.
-    excludes = [
-        "javaemul/internal/ArrayStamper.java",
-        "javaemul/internal/HashCodes.java",
-        "javaemul/internal/LongCompareHolder.java",
-        "java/lang/Throwable.java",
-    ],
+    native_srcs = glob(["**/*.native.js"]),
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
 )
 

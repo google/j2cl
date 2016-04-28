@@ -6,25 +6,24 @@ files from them.
 
 Example use:
 
-jsni_to_j2cl_converter(
+jsni_to_native_js_bundle(
     name = "foo_lib_native_js",
     srcs = glob(["*.java"]),
+    native_srcs = glob(["*.native.js"]),
 )
+
+which automatically excludes the files that a native.js file already provided
+and generates a single bundle together with auto generated natve.js files.
 
 """
 
-
-def _should_be_excluded(java_file, excludes):
-  for exclude in excludes:
-    if java_file.path.endswith(exclude):
-      return True
-  return False
+load("/third_party/java_src/j2cl/build_def/j2cl_util", "generate_zip")
 
 
 def _impl(ctx):
   java_files = ctx.files.srcs
-  exclude_files = [f for f in ctx.files.srcs
-                   if _should_be_excluded(f, ctx.attr.excludes)]
+  exclude_files = [f for f in java_files
+                   if any([f.path.endswith(x) for x in ctx.attr.excludes])]
   dep_targets = ctx.attr.deps
   zip_file = ctx.new_file(ctx.label.name + "_native.js.zip")  # output zip file
 
@@ -59,6 +58,7 @@ def _impl(ctx):
   )
 
 
+# TODO: Hide jsni_to_j2cl_converter after all references are gone.
 jsni_to_j2cl_converter = rule(
     attrs={
         "srcs": attr.label_list(
@@ -89,3 +89,23 @@ jsni_to_j2cl_converter = rule(
     },
     implementation=_impl,
 )
+
+def jsni_to_native_js_bundle(name, srcs, native_srcs=[], **kwargs):
+
+  jsni_to_j2cl_converter(
+     name = name + "_autogen",
+     srcs = srcs,
+     excludes = [n.replace(".native.js", ".java") for n in native_srcs],
+     **kwargs
+  )
+
+  generate_zip(
+      name = name + "_handrolled",
+      srcs = native_srcs,
+      pkg = "RELATIVE",
+  )
+
+  native.filegroup(
+      name = name,
+      srcs = [":" + name + "_autogen", ":" + name + "_handrolled"],
+  )
