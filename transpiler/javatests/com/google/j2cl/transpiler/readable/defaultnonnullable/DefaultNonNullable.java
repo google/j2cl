@@ -2,7 +2,8 @@ package com.google.j2cl.transpiler.readable.defaultnonnullable;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import com.google.j2cl.transpiler.readable.defaultnonnullable.subpackage.NullableClass;
+import com.google.j2cl.transpiler.readable.defaultnonnullable.nonnullablesubpackage.NonNullableClass;
+import com.google.j2cl.transpiler.readable.defaultnonnullable.nullablesubpackage.NullableClass;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsMethod;
@@ -60,6 +61,10 @@ public class DefaultNonNullable {
     String c = null;
     m1(a, b, c);
     this.f1 = a;
+    if (true) {
+      // Cast not needed since NonNullableClass.getString returns !string.
+      return NonNullableClass.getString();
+    }
     return a;
   }
 

@@ -25,10 +25,13 @@ import jsinterop.annotations.JsPackage;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -124,9 +127,13 @@ public class PackageInfoCache {
       if (JsInteropAnnotationUtils.isJsPackageAnnotation(annotationBinding)) {
         namespace = JsInteropAnnotationUtils.getJsNamespace(annotationBinding);
       }
-      // TODO(simionato): Determine what annotations to use and update here.
-      if (annotationBinding.getAnnotationType().getName().equals("PackageDefaultNonNullable")) {
-        supportsNullability = true;
+
+      if (annotationBinding.getAnnotationType().getName().equals("AnnotatedFor")) {
+        Object[] value =
+            JdtAnnotationUtils.getAnnotationParameterArray(annotationBinding, "value");
+        if (value != null && Arrays.asList(value).contains("nullness")) {
+          supportsNullability = true;
+        }
       }
     }
 
@@ -156,8 +163,20 @@ public class PackageInfoCache {
       if (annotation instanceof JsPackage) {
         namespace = ((JsPackage) annotation).namespace();
       }
-      // TODO(simionato): Determine what annotations to use to determine if a package
-      // supports nullability and read them here.
+      Class<? extends Annotation> annotationType = annotation.annotationType();
+      if (annotationType.getSimpleName().equals("AnnotatedFor")) {
+        try {
+          Method valueMethod = annotationType.getDeclaredMethod("value");
+          Object result = valueMethod.invoke(annotation);
+          if (result instanceof String[]) {
+            if (Arrays.asList((String[]) result).contains("nullness")) {
+              supportsNullability = true;
+            }
+          }
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+          // Not the annotation we are looking for.
+        }
+      }
     }
     jsInteropNamespaceByPackagePath.put(packagePath, namespace);
     nullabilityEnabledByPackagePath.put(packagePath, supportsNullability);

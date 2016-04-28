@@ -1,4 +1,4 @@
-package com.google.j2cl.transpiler.readable.defaultnonnullable.subpackage;
+package com.google.j2cl.transpiler.readable.defaultnonnullable.nullablesubpackage;
 
 import java.util.ArrayList;
 import java.util.List;

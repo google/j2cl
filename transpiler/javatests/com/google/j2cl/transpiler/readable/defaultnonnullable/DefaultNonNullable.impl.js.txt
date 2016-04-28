@@ -17,7 +17,8 @@ let DefaultNonNullable$Foo = goog.forwardDeclare('com.google.j2cl.transpiler.rea
 let DefaultNonNullable$NullableStringComparator = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$NullableStringComparator$impl');
 let DefaultNonNullable$StringComparator = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$StringComparator$impl');
 let DefaultNonNullable$StringList = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$StringList$impl');
-let NullableClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultnonnullable.subpackage.NullableClass$impl');
+let NonNullableClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultnonnullable.nonnullablesubpackage.NonNullableClass$impl');
+let NullableClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultnonnullable.nullablesubpackage.NullableClass$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
@@ -147,6 +148,9 @@ class DefaultNonNullable extends Object {
         /**@type {string} */ (a), /**@type {!List<number>} */ (b), c);
     this.f_f1__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ =
         /**@type {string} */ (a);
+    if (true) {
+      return NonNullableClass.m_getString();
+    }
     return /**@type {string} */ (a);
   }
 
@@ -237,8 +241,10 @@ class DefaultNonNullable extends Object {
         'com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$StringComparator$impl');
     DefaultNonNullable$StringList = goog.module.get(
         'com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$StringList$impl');
+    NonNullableClass = goog.module.get(
+        'com.google.j2cl.transpiler.readable.defaultnonnullable.nonnullablesubpackage.NonNullableClass$impl');
     NullableClass = goog.module.get(
-        'com.google.j2cl.transpiler.readable.defaultnonnullable.subpackage.NullableClass$impl');
+        'com.google.j2cl.transpiler.readable.defaultnonnullable.nullablesubpackage.NullableClass$impl');
     Class = goog.module.get('java.lang.Class$impl');
     Double = goog.module.get('java.lang.Double$impl');
     String = goog.module.get('java.lang.String$impl');

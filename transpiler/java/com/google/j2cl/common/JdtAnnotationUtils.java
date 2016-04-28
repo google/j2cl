@@ -48,6 +48,21 @@ public class JdtAnnotationUtils {
     return null;
   }
 
+  public static Object[] getAnnotationParameterArray(
+      IAnnotationBinding annotationBinding, String paramName) {
+    if (annotationBinding == null) {
+      return null;
+    }
+    for (IMemberValuePairBinding member : annotationBinding.getDeclaredMemberValuePairs()) {
+      if (paramName.equals(member.getName())) {
+        if (member.getValue() instanceof Object[]) {
+          return (Object[]) member.getValue();
+        }
+      }
+    }
+    return null;
+  }
+
   public static boolean getAnnotationParameterBoolean(
       IAnnotationBinding annotationBinding, String paramName, boolean defaultValue) {
     if (annotationBinding == null) {

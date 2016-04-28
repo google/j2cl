@@ -11,12 +11,15 @@ load(
 # Creates verification target
 readable_example(
     name = "defaultnonnullable",
-    srcs = glob(["**/*.java"]),
+    srcs = glob(["*.java"]),
     deps = [
+        ":nonnullablesubpackage",
+        ":nullablesubpackage",
         "//java/com/google/common/base:base-j2cl",
         "//java/com/google/common/collect:collect-j2cl",
         "//third_party/java/checker_framework:annotations-j2cl",
         "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
+        "//third_party/java/j2cl:annotations-j2cl",
         "//third_party/java/jsr305_annotations:jsr305_annotations-j2cl",
     ],
 )
