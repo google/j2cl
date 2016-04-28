@@ -19,7 +19,7 @@ java_binary(
     name = "jre_bundle",
     create_executable = 0,
     restricted_to = ["//buildenv/j2cl:j2cl_compilation"],
-    runtime_deps = ["//jre/java:JavaJre_java_library"],
+    runtime_deps = ["//jre/java:jre_java_library"],
 )
 
 java_test(

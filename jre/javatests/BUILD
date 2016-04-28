@@ -38,7 +38,7 @@ jsni_to_j2cl_converter(
     ],
     deps = [
         ":emul_tests_lib",
-        "//jre/java:JavaJre_java_library",
+        "//jre/java:jre_java_library",
         "//junit/opensource/java:junit_emul_java_library",
     ],
 )

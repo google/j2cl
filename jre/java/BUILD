@@ -50,17 +50,16 @@ jsni_to_j2cl_converter(
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
 )
 
-# Bundles together both hand-rolled JS versions of Java classes with transpiled
-# versions of Java classes into a complete JRE.
+# Handrolled JRE classes
 js_library(
-    name = "jre",
+    name = "jre_handrolled_js",
     srcs = glob(
         ["**/*.js"],
         exclude = ["**/*.native.js"],
     ),
     deps = [
         "//javascript/closure/reflect",
-        "//transpiler:nativebootstrap",
-        ":JavaJre",
+        "//transpiler/nativebootstrap",
+        "//transpiler/vmbootstrap",
     ],
 )
