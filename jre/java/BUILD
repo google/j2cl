@@ -31,7 +31,6 @@ j2cl_source_copy(
         "//third_party/java_src/gwt/svn/trunk/user:java_emul",
         "//third_party/java_src/gwt/svn/trunk/user:java_emul_internal",
     ],
-    base_strip_path = "third_party/java_src/gwt/svn/trunk/user/super/com/google/gwt/emul/",
     # Java classes that are different in j2cl and thus should not be copied from GWT
     excludes = J2CL_SPECIFIC_JRE_SRC,
 )

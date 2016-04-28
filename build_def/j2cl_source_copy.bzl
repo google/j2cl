@@ -8,12 +8,10 @@ Example use:
 j2cl_source_copy(
    name = "my_copy",
    srcs = ["//path/to/files/A.java"],
-   base_strip_path = "path/to/",
    excludes = ["foo/bar/Baz.java"],
 )
 
 """
-
 
 def _impl(ctx):
   java_files = ctx.files.srcs
@@ -21,17 +19,15 @@ def _impl(ctx):
 
   java_out_files = []
   for java_file in java_files:
-    if not java_file.path.startswith(ctx.attr.base_strip_path):
-      fail("Incorrect base strip path for file:" + java_file.path)
-    out_file_name = java_file.path[len(ctx.attr.base_strip_path):]
-    if out_file_name in excludes:
-      continue
+    out_file_name = java_file.path;
+    if any([out_file_name.endswith(x) for x in excludes]):
+      continue;
 
     java_file_artifact = ctx.new_file(out_file_name)
     java_out_files += [java_file_artifact]
     arguments = [
         java_file.path,
-        ctx.configuration.bin_dir.path + "/" + ctx.attr.base_add_path + "/" +
+        ctx.configuration.bin_dir.path + "/" + ctx.label.package + "/" +
         out_file_name,
     ]
 
@@ -55,22 +51,14 @@ _j2cl_source_copy = rule(
             allow_files=FileType([".java"]),
         ),
         "excludes": attr.string_list(),
-        "base_strip_path": attr.string(
-            default="",
-        ),
-        "base_add_path": attr.string(
-            default="",
-        ),
     },
     implementation=_impl,
 )
 
 
-def j2cl_source_copy(name, srcs, base_strip_path, excludes=[]):
+def j2cl_source_copy(name, srcs, excludes=[]):
   _j2cl_source_copy(
       name=name,
       srcs=srcs,
-      base_strip_path=base_strip_path,
-      base_add_path=PACKAGE_NAME,
       excludes=excludes,
   )

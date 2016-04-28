@@ -13,13 +13,11 @@ load("//build_def:jsni_to_j2cl_converter.bzl", "jsni_to_native_js_bundle")
 j2cl_source_copy(
     name = "emul_test_copy",
     srcs = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_test"],
-    base_strip_path = "third_party/java_src/gwt/svn/trunk/user/test/",
 )
 
 j2cl_source_copy(
     name = "java_emul_internal_copy",
     srcs = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_internal"],
-    base_strip_path = "third_party/java_src/gwt/svn/trunk/user/super/com/google/gwt/emul/",
     excludes = ["javaemul/internal/EmulatedCharset.java"],
 )
 
