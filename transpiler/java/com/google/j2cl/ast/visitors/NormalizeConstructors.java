@@ -67,13 +67,14 @@ public class NormalizeConstructors {
   /**
    * This pass transforms Java constructors into methods with the $ctor prefix, then synthesizes a
    * single constructor per class that represents the actual Javascript ES6 constructor. There are
-   * 3 stages:
+   * 4 stages:
    * <p>1) Gather primary constructors which is needed to generate correct Javascript constructors
-   * for classes annotated with @JsConstructor.  Remove calls to super to from these constructors
+   * for classes annotated with @JsConstructor and subclasses of @JsConstructor.
+   * <p>2) Remove calls to super to from these constructors
    * since super will be called by the Javascript constructor instead.
-   * <p>2) Rewrite Java constructors as simple methods with the $ctor prefix and update references
+   * <p>3) Rewrite Java constructors as simple methods with the $ctor prefix and update references
    * to constructor calls such as "super(...)" and "this(...)" to point to the synthesize methods.
-   * <p>3) Synthesize Javascript constructors.
+   * <p>4) Synthesize Javascript constructors.
    * <p> Note that before this pass, constructors are Java constructors, whereas after this pass
    * constructors are actually Javascript constructors.
    *
@@ -207,7 +208,6 @@ public class NormalizeConstructors {
       @Override
       public Node rewriteMethod(Method constructor) {
         if (constructor.isConstructor()) {
-
           return new Method(
               ctorMethodDescritorFromJavaConstructor(constructor.getDescriptor()),
               constructor.getParameters(),
