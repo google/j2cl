@@ -7,7 +7,6 @@ package(default_visibility = ["//:__subpackages__"])
 licenses(["unencumbered"])
 
 load("//build_def:j2cl_source_copy.bzl", "j2cl_source_copy")
-load("//jre/javatests:j2cl_multi_test.bzl", "j2cl_multi_test")
 load("//build_def:jsni_to_j2cl_converter.bzl", "jsni_to_native_js_bundle")
 
 j2cl_source_copy(
@@ -16,7 +15,7 @@ j2cl_source_copy(
 )
 
 j2cl_source_copy(
-    name = "java_emul_internal_copy",
+    name = "java_emul_internal",
     srcs = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_internal"],
     excludes = ["javaemul/internal/EmulatedCharset.java"],
 )
@@ -25,77 +24,42 @@ jsni_to_native_js_bundle(
     name = "native_js_bundle",
     srcs = [":emul_test_copy"],
     native_srcs = glob(["**/*.native.js"]),
-    deps = [":emul_tests_lib_j2cl_java_library"],
+    deps = [":emul_tests_lib_java_library"],
 )
 
-TEST_SRCS = [
-    "com/google/gwt/core/client/JavaScriptObject.java",
-    "com/google/gwt/junit/DoNotRunWith.java",
-    "com/google/gwt/junit/Platform.java",
-    "com/google/gwt/junit/client/GWTTestCase.java",
-    "com/google/gwt/junit/tools/GWTTestSuite.java",
-    ":emul_test_copy",
-]
+TEST_SRCS = glob(["**/*.java"]) + [":emul_test_copy"]
 
 # This runs all GWTTestCases for emul in a pure JRE, this way we can make sure that our tests
 # assert the right behaviour for the JRE emulation.
-java_library(
-    name = "emul_tests_lib",
-    testonly = 1,
-    srcs = TEST_SRCS + [":java_emul_internal_copy"],
+java_test(
+    name = "AllEmulTest_Java",
+    size = "small",
+    srcs = TEST_SRCS + [":java_emul_internal"],
+    test_class = "com.google.gwt.emultest.AllTests",
     deps = [
         "//third_party/java/gwt:gwt-jsinterop-annotations",
         "//third_party/java/junit",
     ],
 )
 
-java_test(
-    name = "AllEmulTest_Java",
-    size = "small",
-    srcs = ["com/google/gwt/emultest/AllTests.java"],
-    test_class = "com.google.gwt.emultest.AllTests",
-    deps = [
-        ":emul_tests_lib",
-        "//third_party/java/junit",
-    ],
-)
+load(":j2cl_multi_test.bzl", "j2cl_multi_test")
 
 j2cl_multi_test(
     name = "BigDecimal",
-    srcs = ["com/google/gwt/emultest/BigDecimalTests.java"],
     test_class = "com.google.gwt.emultest.BigDecimalTests",
-    deps = [
-        ":emul_tests_lib_j2cl",
-        "//third_party/java/junit",
-    ],
 )
 
 j2cl_multi_test(
     name = "BigInteger",
-    srcs = ["com/google/gwt/emultest/BigIntegerTests.java"],
     test_class = "com.google.gwt.emultest.BigIntegerTests",
-    deps = [
-        ":emul_tests_lib_j2cl",
-        "//third_party/java/junit",
-    ],
 )
 
 j2cl_multi_test(
     name = "Collections",
-    srcs = ["com/google/gwt/emultest/CollectionsTests.java"],
     test_class = "com.google.gwt.emultest.CollectionsTests",
-    deps = [
-        ":emul_tests_lib_j2cl",
-        "//third_party/java/junit",
-    ],
 )
 
 j2cl_multi_test(
     name = "Emul",
-    srcs = ["com/google/gwt/emultest/EmulTests.java"],
     test_class = "com.google.gwt.emultest.EmulTests",
-    deps = [
-        ":emul_tests_lib_j2cl",
-        "//third_party/java/junit",
-    ],
 )
