@@ -244,8 +244,8 @@ public class JsDocNameUtils {
   }
 
   private static String getJsDocNameWithNullability(String jsDocType, boolean nullable) {
-    if (jsDocType.equals("?")) {
-      return "?";
+    if (jsDocType.equals("?") || jsDocType.equals("*")) {
+      return jsDocType;
     }
     if (jsDocType.startsWith("?") || jsDocType.startsWith("!")) {
       jsDocType = jsDocType.substring(1);

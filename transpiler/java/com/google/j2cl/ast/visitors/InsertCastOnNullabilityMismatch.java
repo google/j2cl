@@ -30,6 +30,7 @@ import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.VariableReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,8 @@ import java.util.List;
  * that some variable is non nullable.
  */
 // TODO(simionato): Add a cast when initializing arrays.
+// TODO(simionato): Handle method calls with erased types, for example
+// List<@NotNull String> x; x.add(nullableString) requires cast.
 public class InsertCastOnNullabilityMismatch extends AbstractRewriter {
 
   public static void applyTo(CompilationUnit compilationUnit) {
@@ -80,7 +83,7 @@ public class InsertCastOnNullabilityMismatch extends AbstractRewriter {
     Expression leftOperand = binaryExpression.getLeftOperand();
 
     if (binaryExpression.getOperator() == BinaryOperator.ASSIGN
-        && leftOperand instanceof FieldAccess) {
+        && isFieldOrMethodParameter(leftOperand)) {
       // Field assignment
       Expression rightOperand = binaryExpression.getRightOperand();
       TypeDescriptor fieldType = leftOperand.getTypeDescriptor();
@@ -92,6 +95,16 @@ public class InsertCastOnNullabilityMismatch extends AbstractRewriter {
       }
     }
     return binaryExpression;
+  }
+
+  private boolean isFieldOrMethodParameter(Expression expression) {
+    if (expression instanceof FieldAccess) {
+      return true;
+    }
+    if (expression instanceof VariableReference) {
+      return ((VariableReference) expression).getTarget().isParameter();
+    }
+    return false;
   }
 
   private void rewriteInvocation(Invocation invocation) {
@@ -145,6 +158,10 @@ public class InsertCastOnNullabilityMismatch extends AbstractRewriter {
    */
   private TypeDescriptor getTypeWithMatchingNullability(
       TypeDescriptor requiredType, TypeDescriptor actualType) {
+    if (actualType.equalsIgnoreNullability(TypeDescriptors.get().javaLangObject)) {
+      // Object is exported as the all type, so there is no point in casting it.
+      return actualType;
+    }
     if (actualType.isTypeVariable()) {
       return actualType;
     }

@@ -70,7 +70,7 @@ public class DefaultNonNullable {
 
   // Cases in which casting is needed, since we can't infer nullability or we are using a library
   // that doesn't have nullability annotations.
-  public String castingNeeded(@Nullable String a, Foo<String> foo) {
+  public String castingNeeded(@Nullable String a, Foo<String> foo, String b) {
     this.f4 = Lists.newArrayList();
     this.f4 = new StringList();
     this.f4 = (List) new StringList();
@@ -80,6 +80,7 @@ public class DefaultNonNullable {
     new DefaultNonNullable(x);
     m3(x, x, x);
     this.f1 = x;
+    b = x;
     foo.bar(x);
     if (true) {
       return x;
