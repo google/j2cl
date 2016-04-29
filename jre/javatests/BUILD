@@ -7,11 +7,15 @@ package(default_visibility = ["//:__subpackages__"])
 licenses(["unencumbered"])
 
 load("//build_def:j2cl_source_copy.bzl", "j2cl_source_copy")
-load("//build_def:jsni_to_j2cl_converter.bzl", "jsni_to_native_js_bundle")
+load("//build_def:j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt")
 
-j2cl_source_copy(
-    name = "emul_test_copy",
-    srcs = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_test"],
+j2cl_mirror_from_gwt(
+    name = "emul_tests_lib",
+    mirrored_files = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_test"],
+    deps = [
+        "//jre/java:gwt-jsinterop-annotations",
+        "//third_party/java/junit",
+    ],
 )
 
 j2cl_source_copy(
@@ -20,21 +24,15 @@ j2cl_source_copy(
     excludes = ["javaemul/internal/EmulatedCharset.java"],
 )
 
-jsni_to_native_js_bundle(
-    name = "native_js_bundle",
-    srcs = [":emul_test_copy"],
-    native_srcs = glob(["**/*.native.js"]),
-    deps = [":emul_tests_lib_java_library"],
-)
-
-TEST_SRCS = glob(["**/*.java"]) + [":emul_test_copy"]
-
 # This runs all GWTTestCases for emul in a pure JRE, this way we can make sure that our tests
 # assert the right behaviour for the JRE emulation.
 java_test(
     name = "AllEmulTest_Java",
     size = "small",
-    srcs = TEST_SRCS + [":java_emul_internal"],
+    srcs = [
+        ":emul_tests_lib_files",
+        ":java_emul_internal",
+    ],
     test_class = "com.google.gwt.emultest.AllTests",
     deps = [
         "//third_party/java/gwt:gwt-jsinterop-annotations",
