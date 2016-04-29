@@ -6,6 +6,7 @@ import com.google.j2cl.transpiler.readable.defaultnonnullable.nonnullablesubpack
 import com.google.j2cl.transpiler.readable.defaultnonnullable.nullablesubpackage.NullableClass;
 
 import jsinterop.annotations.JsConstructor;
+import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 
 import org.checkerframework.checker.nullness.compatqual.NullableType;
@@ -52,6 +53,9 @@ public class DefaultNonNullable {
     return null;
   }
 
+  public void m4(MyFunction f) {
+  }
+
   // Cases in which calling other method and returning doesn't require casting.
   // TODO(simionato): This creates casting even thought it's not needed, add a visitor to do
   // flow analysis to tighten nullability on local variables to fix this.
@@ -82,6 +86,7 @@ public class DefaultNonNullable {
     this.f1 = x;
     b = x;
     foo.bar(x);
+    b = foo.toString();
     if (true) {
       return x;
     }
@@ -89,8 +94,23 @@ public class DefaultNonNullable {
     return NullableClass.getString();
   }
 
+  public void functions(@Nullable MyFunction function) {
+    // Will have to generate a cast here.
+    m4(function);
+  }
+
   static class Foo<T> {
     void bar(T t) {}
+
+    @Override
+    public String toString() {
+      return "Foo";
+    }
+  }
+
+  @JsFunction
+  interface MyFunction {
+    String x(String a);
   }
 
   public static class StringList extends ArrayList<@NullableType String> {}

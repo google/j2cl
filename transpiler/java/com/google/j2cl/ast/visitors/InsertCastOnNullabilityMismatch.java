@@ -166,8 +166,10 @@ public class InsertCastOnNullabilityMismatch extends AbstractRewriter {
       return actualType;
     }
     if (actualType.isJsFunctionInterface() || actualType.isJsFunctionImplementation()) {
-      // TODO(simionato): Add support for functions.
-      return actualType;
+      // TODO(simionato): Examine function parameters/return type to produce the appropriate cast.
+      if (!requiredType.isNullable() && actualType.isNullable()) {
+        return TypeDescriptors.toNonNullable(actualType);
+      }
     }
 
     if (actualType.isArray()) {

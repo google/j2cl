@@ -77,7 +77,7 @@ class Objects {
 
   /**
    * @param {*} obj
-   * @return {?string}
+   * @return {string}
    * @public
    */
   static m_toString__java_lang_Object(obj) {
