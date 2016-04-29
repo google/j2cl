@@ -67,7 +67,7 @@ public class IntegrationTestCase extends TestCase {
     public File outputLocation;
   }
 
-  protected static final String TRANSPILER_BINARY = "third_party/java_src/j2cl/j2cl";
+  protected static final String TRANSPILER_BINARY = "third_party/java/j2cl/J2clTranspiler";
 
   protected static void assertLogContainsSnippet(List<String> logLines, String snippet) {
     boolean foundSnippet = false;

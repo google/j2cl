@@ -1,7 +1,10 @@
 # Description:
 #   Jsni to native js file converter tool code.
 
-package(default_visibility = ["//:__subpackages__"])
+package(default_visibility = [
+    "//third_party/java/j2cl:__pkg__",
+    "//:__subpackages__",
+])
 
 # Google owns the copyright
 licenses(["unencumbered"])
@@ -10,7 +13,7 @@ licenses(["unencumbered"])
 # =========================================================
 
 java_library(
-    name = "jsniConverter",
+    name = "jsni",
     srcs = glob(["*.java"]),
     deps = [
         "//java/com/google/common/base",

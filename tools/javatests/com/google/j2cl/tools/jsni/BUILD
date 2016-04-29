@@ -22,7 +22,7 @@ java_library(
         "//java/com/google/devtools/build/runtime:runfiles",
         "//third_party/java/junit",
         "//third_party/java/truth",
-        "//tools/java/com/google/j2cl/tools/jsni:jsniConverter",
+        "//tools/java/com/google/j2cl/tools/jsni",
         "//transpiler/java/com/google/j2cl/common",
     ],
 )

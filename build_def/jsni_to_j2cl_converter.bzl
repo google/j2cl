@@ -17,7 +17,7 @@ and generates a single bundle together with auto generated natve.js files.
 
 """
 
-load("/third_party/java_src/j2cl/build_def/j2cl_util", "generate_zip")
+load(":j2cl_util.bzl", "generate_zip")
 
 
 def _impl(ctx):
@@ -84,7 +84,7 @@ jsni_to_j2cl_converter = rule(
             cfg=HOST_CFG,
             allow_files=True,
             executable=True,
-            default=Label("//tools:jsni2js")
+            default=Label("//third_party/java/j2cl:JsniConverter")
         )
     },
     implementation=_impl,
