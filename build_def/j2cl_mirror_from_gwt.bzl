@@ -6,7 +6,7 @@ overlaying files from current directory.
 """
 
 load(":j2cl_source_copy.bzl", "j2cl_source_copy")
-load(":jsni_to_j2cl_converter.bzl", "jsni_to_native_js_bundle")
+load(":jsni_to_native_js_bundle.bzl", "jsni_to_native_js_bundle")
 load("//third_party/java/j2cl:j2cl_library.bzl", "j2cl_library")
 
 def j2cl_mirror_from_gwt(name, mirrored_files, deps=[], js_deps=[], **kwargs):

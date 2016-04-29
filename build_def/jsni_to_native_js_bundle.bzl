@@ -58,8 +58,7 @@ def _impl(ctx):
   )
 
 
-# TODO: Hide jsni_to_j2cl_converter after all references are gone.
-jsni_to_j2cl_converter = rule(
+_jsni_to_j2cl_converter = rule(
     attrs={
         "srcs": attr.label_list(
             mandatory=True,
@@ -92,7 +91,7 @@ jsni_to_j2cl_converter = rule(
 
 def jsni_to_native_js_bundle(name, srcs, native_srcs=[], **kwargs):
 
-  jsni_to_j2cl_converter(
+  _jsni_to_j2cl_converter(
      name = name + "_autogen",
      srcs = srcs,
      excludes = [n.replace(".native.js", ".java") for n in native_srcs],
