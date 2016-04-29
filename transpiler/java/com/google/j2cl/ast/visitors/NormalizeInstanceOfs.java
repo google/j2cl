@@ -72,7 +72,7 @@ public class NormalizeInstanceOfs extends AbstractRewriter {
     arguments.add(instanceOfExpression.getExpression());
 
     // TypeName.$isInstance(expr);
-    return MethodCall.createRegularMethodCall(null, isInstanceMethodDescriptor, arguments);
+    return MethodCall.createMethodCall(null, isInstanceMethodDescriptor, arguments);
   }
 
   private Node rewriteArrayInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
@@ -103,7 +103,7 @@ public class NormalizeInstanceOfs extends AbstractRewriter {
     arguments.add(
         new NumberLiteral(TypeDescriptors.get().primitiveInt, checkTypeDescriptor.getDimensions()));
     // Arrays.$instanceIsOfType(expr, leafType, dimensions);
-    return MethodCall.createRegularMethodCall(null, isInstanceMethodDescriptor, arguments);
+    return MethodCall.createMethodCall(null, isInstanceMethodDescriptor, arguments);
   }
 
   /**
@@ -127,6 +127,6 @@ public class NormalizeInstanceOfs extends AbstractRewriter {
     List<Expression> arguments = new ArrayList<>();
     arguments.add(instanceOfExpression.getExpression());
     // Arrays.$isArray(expr);
-    return MethodCall.createRegularMethodCall(null, isInstanceMethodDescriptor, arguments);
+    return MethodCall.createMethodCall(null, isInstanceMethodDescriptor, arguments);
   }
 }

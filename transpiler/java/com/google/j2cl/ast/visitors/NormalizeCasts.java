@@ -91,7 +91,7 @@ public class NormalizeCasts extends AbstractRewriter {
 
     // Casts.to(expr, TypeName);
     MethodCall castMethodCall =
-        MethodCall.createRegularMethodCall(null, castToMethodDescriptor, arguments);
+        MethodCall.createMethodCall(null, castToMethodDescriptor, arguments);
     // /**@type {}*/ ()
     return JsTypeAnnotation.createTypeAnnotation(
         castMethodCall, castExpression.getCastTypeDescriptor());
@@ -139,7 +139,7 @@ public class NormalizeCasts extends AbstractRewriter {
 
     // Arrays.$castTo(expr, leafType, dimension);
     MethodCall castMethodCall =
-        MethodCall.createRegularMethodCall(null, castToMethodDescriptor, arguments);
+        MethodCall.createMethodCall(null, castToMethodDescriptor, arguments);
     // /**@type {}*/ ()
     return JsTypeAnnotation.createTypeAnnotation(castMethodCall, arrayCastTypeDescriptor);
   }
@@ -162,7 +162,7 @@ public class NormalizeCasts extends AbstractRewriter {
 
     // Arrays.$castToNative(expr);
     MethodCall castMethodCall =
-        MethodCall.createRegularMethodCall(null, castToMethodDescriptor, arguments);
+        MethodCall.createMethodCall(null, castToMethodDescriptor, arguments);
     // /**@type {}*/ ()
     return JsTypeAnnotation.createTypeAnnotation(castMethodCall, castTypeDescriptor);
   }

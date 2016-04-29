@@ -79,7 +79,7 @@ public class NormalizeArrayCreations extends AbstractRewriter {
         new TypeReference(newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor());
     arguments.add(leafTypeReference);
     MethodCall arrayCreateMethodCall =
-        MethodCall.createRegularMethodCall(null, arrayCreateMethodDescriptor, arguments);
+        MethodCall.createMethodCall(null, arrayCreateMethodDescriptor, arguments);
     return JsTypeAnnotation.createTypeAnnotation(
         arrayCreateMethodCall,
         TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()));
@@ -122,7 +122,7 @@ public class NormalizeArrayCreations extends AbstractRewriter {
           new TypeReference(newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor());
       arguments.add(leafTypeReference);
       MethodCall arrayInitMethodCall =
-          MethodCall.createRegularMethodCall(null, arrayInitMethodDescriptor, arguments);
+          MethodCall.createMethodCall(null, arrayInitMethodDescriptor, arguments);
       return JsTypeAnnotation.createTypeAnnotation(
           arrayInitMethodCall,
           TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()));
@@ -144,7 +144,7 @@ public class NormalizeArrayCreations extends AbstractRewriter {
       arguments.add(leafTypeReference);
       arguments.add(new NumberLiteral(TypeDescriptors.get().primitiveInt, dimensionCount));
       MethodCall arrayInitMethodCall =
-          MethodCall.createRegularMethodCall(null, arrayInitMethodDescriptor, arguments);
+          MethodCall.createMethodCall(null, arrayInitMethodDescriptor, arguments);
 
       return JsTypeAnnotation.createTypeAnnotation(
           arrayInitMethodCall,

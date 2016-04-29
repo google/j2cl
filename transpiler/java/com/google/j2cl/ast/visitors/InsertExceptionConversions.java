@@ -77,8 +77,7 @@ public class InsertExceptionConversions extends AbstractRewriter {
             .returnTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
             .build();
 
-    MethodCall toJavaCall =
-        MethodCall.createRegularMethodCall(null, toJava, mainVariable.getReference());
+    MethodCall toJavaCall = MethodCall.createMethodCall(null, toJava, mainVariable.getReference());
 
     Expression assignment =
         BinaryExpression.Builder.assignTo(mainVariable).rightOperand(toJavaCall).build();
@@ -101,7 +100,7 @@ public class InsertExceptionConversions extends AbstractRewriter {
             .build();
 
     MethodCall toJsCall =
-        MethodCall.createRegularMethodCall(null, toJs, originalStatement.getExpression());
+        MethodCall.createMethodCall(null, toJs, originalStatement.getExpression());
 
     return new ThrowStatement(toJsCall);
   }

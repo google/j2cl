@@ -165,7 +165,7 @@ public class NormalizeTryWithResources extends AbstractRewriter {
     List<Statement> finallyBlockStatments = new ArrayList<>();
     for (VariableDeclarationExpression declaration : Lists.reverse(resourceDeclarations)) {
       MethodCall safeCloseCall =
-          MethodCall.createRegularMethodCall(
+          MethodCall.createMethodCall(
               null,
               safeClose,
               Arrays.asList(

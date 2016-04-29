@@ -49,7 +49,7 @@ public class InsertStaticClassInitializerMethods {
                 .methodName("$clinit")
                 .build();
         MethodCall call =
-            MethodCall.createRegularMethodCall(
+            MethodCall.createMethodCall(
                 null, clinitDescriptor, Collections.<Expression>emptyList());
         return Method.Builder.from(method).statement(0, new ExpressionStatement(call)).build();
       }

@@ -74,7 +74,7 @@ public class InsertExplicitSuperCalls extends AbstractVisitor {
         AstUtils.createDefaultConstructorDescriptor(
             superTypeDescriptor, superTypeDescriptor.getVisibility());
     List<Expression> arguments = new ArrayList<>();
-    MethodCall superCall = MethodCall.createRegularMethodCall(null, methodDescriptor, arguments);
+    MethodCall superCall = MethodCall.createMethodCall(null, methodDescriptor, arguments);
     method.getBody().getStatements().add(0, new ExpressionStatement(superCall));
   }
 }

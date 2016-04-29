@@ -170,6 +170,6 @@ public class NormalizeCatchClauses extends AbstractRewriter {
             .parameterTypeDescriptors(Arrays.asList(TypeDescriptors.get().javaLangObject))
             .returnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
             .build();
-    return MethodCall.createRegularMethodCall(null, methodDescriptor, exceptionVariable);
+    return MethodCall.createMethodCall(null, methodDescriptor, exceptionVariable);
   }
 }

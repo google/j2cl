@@ -58,7 +58,7 @@ public class NormalizeEquality extends AbstractRewriter {
     // Rewrite object - object comparisons to avoid JS implicit conversions and still treat null and
     // undefined as equivalent.
     MethodCall sameCall =
-        MethodCall.createRegularMethodCall(
+        MethodCall.createMethodCall(
             null,
             AstUtils.createUtilSameMethodDescriptor(),
             binaryExpression.getLeftOperand(),

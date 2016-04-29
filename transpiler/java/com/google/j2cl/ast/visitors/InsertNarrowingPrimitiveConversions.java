@@ -158,7 +158,7 @@ public class InsertNarrowingPrimitiveConversions extends ConversionContextVisito
                     .returnTypeDescriptor(toTypeDescriptor)
                     .build();
             // Primitives.$narrowAToB(expr);
-            return MethodCall.createRegularMethodCall(null, narrowMethodDescriptor, expression);
+            return MethodCall.createMethodCall(null, narrowMethodDescriptor, expression);
           }
         });
   }

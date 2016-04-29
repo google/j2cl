@@ -119,8 +119,8 @@ public abstract class FieldDescriptor extends Node implements Member {
   }
 
   @Override
-  public boolean isStaticDispatch() {
-    return isStatic();
+  public boolean isPolymorphic() {
+    return !isStatic();
   }
 
   @Override

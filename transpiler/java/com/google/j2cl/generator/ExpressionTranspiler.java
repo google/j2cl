@@ -211,15 +211,20 @@ public class ExpressionTranspiler {
 
       @Override
       public String transformMethodCall(MethodCall expression) {
-        switch (expression.getCallStyle()) {
-          case CALL:
-            return transformCallMethodCall(expression);
-          default:
-            return transformDirectMethodCall(expression);
+        if (expression.isStaticDispatch()) {
+          return transformStaticDispatchMethodCall(expression);
+        } else if (expression.getTarget().isJsProperty()) {
+          return transformJsPropertyCall(expression);
+        } else {
+          List<String> argumentSources = transformNodesToSource(expression.getArguments());
+          return String.format(
+              "%s(%s)",
+              transformMethodCallHeader(expression),
+              Joiner.on(", ").join(argumentSources));
         }
       }
 
-      private String transformCallMethodCall(MethodCall expression) {
+      private String transformStaticDispatchMethodCall(MethodCall expression) {
         MethodDescriptor methodDescriptor = expression.getTarget();
         List<String> argumentSources = transformNodesToSource(expression.getArguments());
         String typeName =
@@ -249,18 +254,6 @@ public class ExpressionTranspiler {
             conditionExpressionAsString,
             trueExpressionAsString,
             falseExpressionAsString);
-      }
-
-      private String transformDirectMethodCall(MethodCall expression) {
-        if (expression.getTarget().isJsProperty()) {
-          return transformJsPropertyCall(expression);
-        } else {
-          List<String> argumentSources = transformNodesToSource(expression.getArguments());
-          return String.format(
-              "%s(%s)",
-              transformMethodCallHeader(expression),
-              Joiner.on(", ").join(argumentSources));
-        }
       }
 
       private String transformJsPropertyCall(MethodCall expression) {

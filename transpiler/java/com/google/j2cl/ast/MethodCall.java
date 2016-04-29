@@ -28,56 +28,38 @@ import java.util.List;
  */
 @Visitable
 public class MethodCall extends Expression implements Invocation {
-  /**
-   * Represents the call styles: direct method call, or function.call(thisArg, ...), or
-   * function.apply(thisArg, [...]).
-   */
-  public enum CallStyle {
-    DIRECT,
-    CALL
-  }
-
   @Visitable Expression qualifier;
   @Visitable MethodDescriptor targetMethodDescriptor;
   @Visitable List<Expression> arguments = new ArrayList<>();
-  private CallStyle callStyle;
   /**
    * If an instance call should be dispatched statically, e.g. A.super.method() invocation.
    */
   private boolean isStaticDispatch;
 
-  MethodCall(
+  private MethodCall(
       Expression qualifier,
       MethodDescriptor targetMethodDescriptor,
       List<Expression> arguments,
-      CallStyle callStyle,
       boolean isStaticDispatch) {
     this.targetMethodDescriptor = checkNotNull(targetMethodDescriptor);
-    this.callStyle = checkNotNull(callStyle);
     this.qualifier = AstUtils.getExplicitQualifier(qualifier, targetMethodDescriptor);
     this.arguments.addAll(checkNotNull(arguments));
     this.isStaticDispatch = isStaticDispatch;
   }
 
-  public static MethodCall createRegularMethodCall(
+  public static MethodCall createMethodCall(
       Expression qualifier, MethodDescriptor targetMethodDescriptor, List<Expression> arguments) {
-    return new MethodCall(qualifier, targetMethodDescriptor, arguments, CallStyle.DIRECT, false);
+    return new MethodCall(qualifier, targetMethodDescriptor, arguments, false);
   }
 
-  public static MethodCall createRegularMethodCall(
+  public static MethodCall createMethodCall(
       Expression qualifier, MethodDescriptor targetMethodDescriptor, Expression... arguments) {
-    return new MethodCall(
-        qualifier, targetMethodDescriptor, Arrays.asList(arguments), CallStyle.DIRECT, false);
+    return new MethodCall(qualifier, targetMethodDescriptor, Arrays.asList(arguments), false);
   }
 
-  public static MethodCall createCallMethodCall(
+  public static MethodCall createStaticDispatchMethodCall(
       Expression qualifier, MethodDescriptor targetMethodDescriptor, List<Expression> arguments) {
-    return new MethodCall(
-        qualifier,
-        targetMethodDescriptor,
-        arguments,
-        CallStyle.CALL,
-        true); // 'call' style is always static dispatch.
+    return new MethodCall(qualifier, targetMethodDescriptor, arguments, true);
   }
 
   @Override
@@ -97,10 +79,6 @@ public class MethodCall extends Expression implements Invocation {
   @Override
   public List<Expression> getArguments() {
     return this.arguments;
-  }
-
-  public CallStyle getCallStyle() {
-    return callStyle;
   }
 
   public boolean isStaticDispatch() {
@@ -124,20 +102,13 @@ public class MethodCall extends Expression implements Invocation {
    * list in sync.
    */
   public static class Builder extends Invocation.Builder<MethodCall> {
-    private CallStyle callStyle;
     private boolean isStaticDispatch;
 
     public static Builder from(MethodCall methodCall) {
       Builder builder = new Builder();
       builder.initFrom(methodCall);
-      builder.callStyle = methodCall.getCallStyle();
       builder.isStaticDispatch = methodCall.isStaticDispatch();
       return builder;
-    }
-
-    public Builder callStyle(CallStyle callStyle) {
-      this.callStyle = callStyle;
-      return this;
     }
 
     public Builder staticDispatch(boolean isStaticDispatch) {
@@ -150,8 +121,7 @@ public class MethodCall extends Expression implements Invocation {
         Expression qualifierExpression,
         MethodDescriptor methodDescriptor,
         List<Expression> arguments) {
-      return new MethodCall(
-          qualifierExpression, methodDescriptor, arguments, callStyle, isStaticDispatch);
+      return new MethodCall(qualifierExpression, methodDescriptor, arguments, isStaticDispatch);
     }
 
     private Builder() {}

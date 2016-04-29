@@ -26,8 +26,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.processors.Visitable;
 
-import java.util.List;
-
 import javax.annotation.Nullable;
 
 /**
@@ -45,60 +43,6 @@ public abstract class MethodDescriptor extends Node implements Member {
   public static final String IS_ASSIGNABLE_FROM_METHOD_NAME = "$isAssignableFrom";
   public static final String TO_STRING_METHOD_NAME = "toString";
   public static final String CREATE_METHOD_NAME = "$create";
-
-  private static Interner<MethodDescriptor> interner;
-
-  /**
-   * Creates an instance of an AutoValue generated MethodDescriptor which uses Interners to share
-   * identical instances of MethodDescriptors.
-   */
-  private static MethodDescriptor create(
-      boolean isStatic,
-      Visibility visibility,
-      TypeDescriptor enclosingClassTypeDescriptor,
-      String methodName,
-      boolean isConstructor,
-      boolean isNative,
-      boolean isVarargs,
-      @Nullable MethodDescriptor declarationMethodDescriptorOrNull,
-      TypeDescriptor returnTypeDescriptor,
-      List<TypeDescriptor> parameterTypeDescriptors,
-      List<TypeDescriptor> typeParameterTypeDescriptors,
-      JsInfo jsInfo) {
-
-    if (declarationMethodDescriptorOrNull != null) {
-      ImmutableList<TypeDescriptor> methodDeclarationParameterTypeDescriptors =
-          declarationMethodDescriptorOrNull.getParameterTypeDescriptors();
-      Preconditions.checkArgument(
-          methodDeclarationParameterTypeDescriptors.size() == parameterTypeDescriptors.size(),
-          "Method parameters (%s) don't match with method declaration (%s)",
-          parameterTypeDescriptors,
-          methodDeclarationParameterTypeDescriptors);
-    }
-
-    return getInterner()
-        .intern(
-            new AutoValue_MethodDescriptor(
-                isStatic,
-                visibility,
-                enclosingClassTypeDescriptor,
-                methodName,
-                isConstructor,
-                isNative,
-                isVarargs,
-                declarationMethodDescriptorOrNull,
-                ImmutableList.copyOf(parameterTypeDescriptors),
-                returnTypeDescriptor,
-                ImmutableList.copyOf(typeParameterTypeDescriptors),
-                jsInfo));
-  }
-
-  static Interner<MethodDescriptor> getInterner() {
-    if (interner == null) {
-      interner = Interners.newWeakInterner();
-    }
-    return interner;
-  }
 
   @Override
   public abstract boolean isStatic();
@@ -208,8 +152,8 @@ public abstract class MethodDescriptor extends Node implements Member {
   }
 
   @Override
-  public boolean isStaticDispatch() {
-    return isStatic() || isConstructor();
+  public boolean isPolymorphic() {
+    return !isStatic() && !isConstructor();
   }
 
   @Override
@@ -233,6 +177,8 @@ public abstract class MethodDescriptor extends Node implements Member {
     private TypeDescriptor returnTypeDescriptor;
     private ImmutableList<TypeDescriptor> typeParameterTypeDescriptors;
     private JsInfo jsInfo;
+
+    private static Interner<MethodDescriptor> interner = Interners.newWeakInterner();
 
     public static Builder fromDefault() {
       Builder builder = new Builder();
@@ -344,19 +290,31 @@ public abstract class MethodDescriptor extends Node implements Member {
       checkState(
           !methodName.isEmpty() || isConstructor,
           "Empty method names are only allowed in constructors.");
-      return create(
-          isStatic,
-          visibility,
-          enclosingClassTypeDescriptor,
-          methodName,
-          isConstructor,
-          isNative,
-          isVarargs,
-          declarationMethodDescriptor,
-          returnTypeDescriptor,
-          parameterTypeDescriptors,
-          typeParameterTypeDescriptors,
-          jsInfo);
+
+      if (declarationMethodDescriptor != null) {
+        ImmutableList<TypeDescriptor> methodDeclarationParameterTypeDescriptors =
+            declarationMethodDescriptor.getParameterTypeDescriptors();
+        Preconditions.checkArgument(
+            methodDeclarationParameterTypeDescriptors.size() == parameterTypeDescriptors.size(),
+            "Method parameters (%s) don't match with method declaration (%s)",
+            parameterTypeDescriptors,
+            methodDeclarationParameterTypeDescriptors);
+      }
+
+      return interner.intern(
+          new AutoValue_MethodDescriptor(
+              isStatic,
+              visibility,
+              enclosingClassTypeDescriptor,
+              methodName,
+              isConstructor,
+              isNative,
+              isVarargs,
+              declarationMethodDescriptor,
+              ImmutableList.copyOf(parameterTypeDescriptors),
+              returnTypeDescriptor,
+              ImmutableList.copyOf(typeParameterTypeDescriptors),
+              jsInfo));
     }
   }
 }

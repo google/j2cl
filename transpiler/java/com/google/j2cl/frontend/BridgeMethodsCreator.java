@@ -372,7 +372,7 @@ public class BridgeMethodsCreator {
             ? new ThisReference(targetEnclosingClassTypeDescriptor)
             : new SuperReference(targetEnclosingClassTypeDescriptor);
     Expression dispatchMethodCall =
-        MethodCall.createRegularMethodCall(qualifier, targetMethodDescriptor, arguments);
+        MethodCall.createMethodCall(qualifier, targetMethodDescriptor, arguments);
     Statement statement =
         bridgeMethodDescriptor
                 .getReturnTypeDescriptor()

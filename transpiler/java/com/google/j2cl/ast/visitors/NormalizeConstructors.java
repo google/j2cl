@@ -223,7 +223,7 @@ public class NormalizeConstructors {
       @Override
       public Node rewriteMethodCall(MethodCall methodCall) {
         if (methodCall.getTarget().isConstructor()) {
-          return MethodCall.createRegularMethodCall(
+          return MethodCall.createMethodCall(
               methodCall.getQualifier(),
               ctorMethodDescritorFromJavaConstructor(methodCall.getTarget()),
               methodCall.getArguments());
@@ -265,7 +265,7 @@ public class NormalizeConstructors {
                     return var.getReference();
                   }
                 });
-        MethodCall ctorCall = MethodCall.createRegularMethodCall(null, ctorDescriptor, arguments);
+        MethodCall ctorCall = MethodCall.createMethodCall(null, ctorDescriptor, arguments);
         body.add(new ExpressionStatement(ctorCall));
 
         List<Expression> superArguments = Collections.<Expression>emptyList();
@@ -332,7 +332,7 @@ public class NormalizeConstructors {
                 .jsInfo(JsInfo.create(JsMemberType.CONSTRUCTOR, "super", null, false))
                 .isConstructor(true)
                 .build();
-        return MethodCall.createRegularMethodCall(null, jsSuperDescriptor, superArguments);
+        return MethodCall.createMethodCall(null, jsSuperDescriptor, superArguments);
       }
 
       @Override
@@ -366,7 +366,7 @@ public class NormalizeConstructors {
       }
 
       MethodDescriptor staticFactoryMethod = factoryDescriptorForConstructor(originalConstructor);
-      return MethodCall.createRegularMethodCall(
+      return MethodCall.createMethodCall(
           null, staticFactoryMethod, constructorInvocation.getArguments());
     }
   }
@@ -491,7 +491,7 @@ public class NormalizeConstructors {
               }
             });
     MethodCall ctorCall =
-        MethodCall.createRegularMethodCall(
+        MethodCall.createMethodCall(
             newInstance.getReference(), constructor.getDescriptor(), relayArguments);
     Statement ctorCallStatement = new ExpressionStatement(ctorCall);
 

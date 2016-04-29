@@ -127,7 +127,7 @@ public class JsInteropRestrictionsChecker {
       return;
     }
 
-    if (!member.isStaticDispatch()) {
+    if (member.isPolymorphic()) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "Instance member '%s' cannot declare a namespace.",

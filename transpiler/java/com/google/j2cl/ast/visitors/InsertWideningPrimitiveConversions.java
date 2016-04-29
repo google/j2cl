@@ -138,6 +138,6 @@ public class InsertWideningPrimitiveConversions extends ConversionContextVisitor
             .returnTypeDescriptor(toTypeDescriptor)
             .build();
     // Primitives.$widenAToB(expr);
-    return MethodCall.createRegularMethodCall(null, widenMethodDescriptor, subjectExpression);
+    return MethodCall.createMethodCall(null, widenMethodDescriptor, subjectExpression);
   }
 }

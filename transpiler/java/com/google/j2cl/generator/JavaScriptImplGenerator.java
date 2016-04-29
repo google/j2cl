@@ -247,7 +247,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       }
 
       if (javaType.getDescriptor().isJsFunctionImplementation()
-          && !method.getDescriptor().isStaticDispatch()
+          && method.getDescriptor().isPolymorphic()
           && !method.getBody().getStatements().isEmpty()
           && !method.getDescriptor().getMethodName().startsWith("$ctor")) {
         sb.appendln(" * @this {%s}", getJsDocName(javaType.getDescriptor()));

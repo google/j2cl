@@ -416,7 +416,7 @@ public class AstUtils {
     }
 
     Expression forwardingMethodCall =
-        MethodCall.createRegularMethodCall(null, toMethodDescriptor, arguments);
+        MethodCall.createMethodCall(null, toMethodDescriptor, arguments);
     Statement statement =
         fromMethodDescriptor
                 .getReturnTypeDescriptor()
@@ -479,7 +479,7 @@ public class AstUtils {
     Expression instance = checkNotNull(methodCall.getQualifier());
     arguments.add(0, instance);
     // Call the method like Objects.foo(instance, ...)
-    return MethodCall.createRegularMethodCall(null, methodDescriptor, arguments);
+    return MethodCall.createMethodCall(null, methodDescriptor, arguments);
   }
 
   public static MethodCall createDevirtualizedMethodCall(
@@ -506,7 +506,7 @@ public class AstUtils {
             .returnTypeDescriptor(boxType)
             .parameterTypeDescriptors(Arrays.asList(primitiveType))
             .build();
-    return MethodCall.createRegularMethodCall(null, valueOfMethodDescriptor, expression);
+    return MethodCall.createMethodCall(null, valueOfMethodDescriptor, expression);
   }
 
   /**
@@ -529,7 +529,7 @@ public class AstUtils {
     expression =
         isValidMethodCallQualifier(expression) ? expression : new MultiExpression(expression);
 
-    MethodCall methodCall = MethodCall.createRegularMethodCall(expression, valueMethodDescriptor);
+    MethodCall methodCall = MethodCall.createMethodCall(expression, valueMethodDescriptor);
     if (TypeDescriptors.isBoxedBooleanOrDouble(boxType)) {
       methodCall = createDevirtualizedMethodCall(methodCall, boxType);
     }
@@ -845,7 +845,7 @@ public class AstUtils {
             .build();
 
     MethodCall getPrototypeCall =
-        MethodCall.createRegularMethodCall(null, getPrototype, new TypeReference(lambdaType));
+        MethodCall.createMethodCall(null, getPrototype, new TypeReference(lambdaType));
 
     FieldAccess applyFunctionFieldAccess =
         new FieldAccess(
@@ -876,7 +876,7 @@ public class AstUtils {
                 .jsInfo(JsInfo.create(JsMemberType.PROPERTY, "$copy", null, false))
                 .build());
 
-    return MethodCall.createRegularMethodCall(
+    return MethodCall.createMethodCall(
         null, makeLambdaCall, applyFunctionFieldAccess, instance, copyFunctionFieldAccess);
   }
   

@@ -44,7 +44,7 @@ public class DevirtualizeMethodCalls extends AbstractRewriter {
   @Override
   public Node rewriteMethodCall(MethodCall methodCall) {
     MethodDescriptor targetMethodDescriptor = methodCall.getTarget();
-    if (targetMethodDescriptor.isStaticDispatch() || targetMethodDescriptor.isInit()) {
+    if (!targetMethodDescriptor.isPolymorphic() || targetMethodDescriptor.isInit()) {
       // TODO: remove the special casing for checking isInit() after init() function is synthesized
       // at AST.
       return methodCall;

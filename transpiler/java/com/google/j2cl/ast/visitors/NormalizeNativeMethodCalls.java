@@ -89,6 +89,6 @@ public class NormalizeNativeMethodCalls extends AbstractRewriter {
             .enclosingClassTypeDescriptor(nativeTypeDescriptor)
             .build();
     Preconditions.checkArgument(methodCall.getQualifier() instanceof TypeReference);
-    return MethodCall.createRegularMethodCall(null, newMethodDescriptor, methodCall.getArguments());
+    return MethodCall.createMethodCall(null, newMethodDescriptor, methodCall.getArguments());
   }
 }

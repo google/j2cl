@@ -155,10 +155,10 @@ public class EnumMethodsCreator {
             namesToValuesMapFieldAccess,
             BinaryOperator.EQUALS,
             NullLiteral.NULL);
-    Expression valuesCall = MethodCall.createRegularMethodCall(null, valuesMethodDescriptor);
+    Expression valuesCall = MethodCall.createMethodCall(null, valuesMethodDescriptor);
 
     Expression createMapCall =
-        MethodCall.createRegularMethodCall(null, createMapMethodDescriptor, valuesCall);
+        MethodCall.createMethodCall(null, createMapMethodDescriptor, valuesCall);
     Expression assignMapCallToField =
         BinaryExpression.Builder.assignTo(namesToValuesMapFieldAccess)
             .rightOperand(createMapCall)
@@ -169,7 +169,7 @@ public class EnumMethodsCreator {
 
     // Return statement
     Expression getMethodCall =
-        MethodCall.createRegularMethodCall(
+        MethodCall.createMethodCall(
             null, getMethodDescriptor, nameParameterAccess, namesToValuesMapFieldAccess);
     Statement returnStatement =
         new ReturnStatement(

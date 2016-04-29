@@ -24,5 +24,5 @@ public interface Member extends HasJsName {
 
   TypeDescriptor getEnclosingClassTypeDescriptor();
 
-  boolean isStaticDispatch();
+  boolean isPolymorphic();
 }

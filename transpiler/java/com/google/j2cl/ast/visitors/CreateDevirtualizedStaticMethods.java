@@ -79,7 +79,7 @@ public class CreateDevirtualizedStaticMethods extends AbstractRewriter {
   }
 
   private boolean shouldDevirtualize(Method method, JavaType javaType) {
-    if (method.getDescriptor().isStaticDispatch()) {
+    if (!method.getDescriptor().isPolymorphic()) {
       return false;
     }
     // do not devirtualize non-JsOverlay method.
