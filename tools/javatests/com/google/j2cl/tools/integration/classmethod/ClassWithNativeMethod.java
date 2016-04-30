@@ -15,31 +15,29 @@
  */
 package com.google.j2cl.tools.integration.classmethod;
 
+import jsinterop.annotations.JsProperty;
+
 /**
  * Class containing native instance and static methods.
  */
 public class ClassWithNativeMethod {
+
+  @JsProperty static String staticField;
+  @JsProperty String field;
+
   public native void nativeMethod(String fieldValue) /*-{
     this.field = fieldValue;
   }-*/;
 
   public native String nativeMethodWithResult() /*-{
-      return "nativeMethodWithResult";
+    return "nativeMethodWithResult";
   }-*/;
-
-  public void nonNativeMethod(String fieldValue){
-    // do nothing
-  }
 
   public static native void staticNative(String value) /*-{
     ClassWithNativeMethod.staticField = value;
   }-*/;
 
   public static native String staticNativeWithResult() /*-{
-      return "staticNativeWithResult";
+    return "staticNativeWithResult";
   }-*/;
-
-  public static void staticNotNative(String value) {
-      // do nothing
-  }
 }

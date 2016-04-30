@@ -13,31 +13,23 @@
  *  License for the specific language governing permissions and limitations under
  *  the License.
  */
-package com.google.j2cl.tools.integration.innerclasses;
+package com.google.j2cl.tools.integration.clinit;
+
+import jsinterop.annotations.JsProperty;
+
+import junit.framework.TestCase;
 
 /**
- * Testing conversion of inner classes.
+ * Test that $clinit is called by static native methods.
  */
-public class Outer {
+class Test extends TestCase {
 
-  public static class Inner {
+  @JsProperty(namespace = "window")
+  public static native Boolean isClinitCalled();
 
-    public static class InnerInner {
-      public static native String staticInnerInner() /*-{
-          return "staticInnerInner";
-      }-*/;
-
-      public native String innerInner() /*-{
-        return "innerInner";
-      }-*/;
-    }
-
-    public static native String staticInner() /*-{
-        return "staticInner";
-    }-*/;
-
-    public native String inner() /*-{
-        return "inner";
-    }-*/;
+  public void testClinitMethodCalledByStaticNativeMethod() {
+    assertNull(isClinitCalled());
+    Main.staticNativeMethod();
+    assertTrue(isClinitCalled());
   }
 }

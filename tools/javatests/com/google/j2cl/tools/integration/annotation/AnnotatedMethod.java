@@ -21,27 +21,17 @@ import jsinterop.annotations.JsMethod;
  * Class using JsMethod annotations to rename the javascript method.
  */
 public class AnnotatedMethod {
-  @JsMethod(name = "staticMethod")
-  public static native void annotatedStaticNativeMethod() /*-{
+  @JsMethod(name = "x")
+  public static native String annotatedStaticNativeMethod() /*-{
     return "annotatedStaticNativeMethod";
   }-*/;
 
-  @JsMethod(name = "fqnStaticMethod")
-  public static native void fqnAnnotatedStaticNativeMethod() /*-{
-      return "fqnAnnotatedStaticNativeMethod";
-  }-*/;
-
-  @JsMethod(name = "nativeMethod")
+  @JsMethod(name = "y")
   public native String annotatedNativeMethod() /*-{
       return "annotatedNativeMethod";
   }-*/;
 
-  @JsMethod(name = "fqnNativeMethod")
-  public native String fqnAnnotatedNativeMethod() /*-{
-      return "fqnAnnotatedNativeMethod";
-  }-*/;
-
-  @JsMethod()
+  @JsMethod
   public native String notRenamedNativeMethod() /*-{
       return "notRenamedNativeMethod";
   }-*/;
