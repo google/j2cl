@@ -17,9 +17,8 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JsInteropRestrictionsChecker;
 import com.google.j2cl.ast.visitors.ControlStatementFormatter;
 import com.google.j2cl.ast.visitors.CreateDefaultConstructors;
-import com.google.j2cl.ast.visitors.CreateDevirtualizedStaticMethods;
-import com.google.j2cl.ast.visitors.CreateOverlayImplementationTypes;
-import com.google.j2cl.ast.visitors.DevirtualizeJsOverlayMemberReferences;
+import com.google.j2cl.ast.visitors.CreateOverlayImplementationTypesAndDevirtualizeCalls;
+import com.google.j2cl.ast.visitors.DevirtualizeBoxedTypesAndJsFunctionImplementations;
 import com.google.j2cl.ast.visitors.DevirtualizeMethodCalls;
 import com.google.j2cl.ast.visitors.FixAnonymousClassConstructors;
 import com.google.j2cl.ast.visitors.FixBooleanOperators;
@@ -148,7 +147,7 @@ public class J2clTranspiler {
       // Default constructors and explicit super calls should be synthesized first.
       CreateDefaultConstructors.applyTo(j2clUnit);
       InsertExplicitSuperCalls.applyTo(j2clUnit);
-      CreateDevirtualizedStaticMethods.applyTo(j2clUnit);
+      DevirtualizeBoxedTypesAndJsFunctionImplementations.applyTo(j2clUnit);
 
       NormalizeTryWithResources.applyTo(j2clUnit);
       NormalizeCatchClauses.applyTo(j2clUnit);
@@ -161,14 +160,13 @@ public class J2clTranspiler {
       NormalizeNestedClassConstructors.applyTo(j2clUnit);
       // Runs at the very end of 'Class structure normalizations' section since we do not need to
       // apply other normalizations on the synthesized native JS types.
-      CreateOverlayImplementationTypes.applyTo(j2clUnit);
+      CreateOverlayImplementationTypesAndDevirtualizeCalls.applyTo(j2clUnit);
 
       // Statement/Expression normalizations
       RewriteSystemGetPropertyMethod.applyTo(j2clUnit);
       NormalizeArrayLiterals.applyTo(j2clUnit);
       NormalizeStaticMemberQualifiersPass.applyTo(j2clUnit);
       // Runs after NormalizeStaticMemberQualifiersPass.
-      DevirtualizeJsOverlayMemberReferences.applyTo(j2clUnit);
       DevirtualizeMethodCalls.applyTo(j2clUnit);
       ControlStatementFormatter.applyTo(j2clUnit);
       SplitCompoundLongAssignments.applyTo(j2clUnit);

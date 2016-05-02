@@ -328,6 +328,9 @@ class ToStringRenderer {
 
       @Override
       public boolean enterMethodCall(MethodCall methodCall) {
+        if (methodCall.isStaticDispatch()) {
+          print(methodCall.getTarget().getEnclosingClassTypeDescriptor().getSimpleName() + ".");
+        }
         accept(methodCall.qualifier);
         printInvocation(methodCall, "." + methodCall.getTarget().getMethodName());
         return false;

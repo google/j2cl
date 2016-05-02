@@ -132,6 +132,18 @@ public class JavaType extends Node {
     return false;
   }
 
+  public boolean containsDefaultMethods() {
+    if (!isInterface()) {
+      return false;
+    }
+    for (Method method : methods) {
+      if (method.getDescriptor().isDefault()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public void setStatic(boolean isStatic) {
     this.isStatic = isStatic;
   }

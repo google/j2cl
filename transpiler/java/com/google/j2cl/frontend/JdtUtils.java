@@ -440,6 +440,10 @@ public class JdtUtils {
     return Modifier.isAbstract(modifier);
   }
 
+  static boolean isDefault(int modifier) {
+    return Modifier.isDefault(modifier);
+  }
+
   static boolean isFinal(int modifier) {
     return Modifier.isFinal(modifier);
   }

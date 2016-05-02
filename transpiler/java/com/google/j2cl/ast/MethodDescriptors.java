@@ -30,7 +30,7 @@ public class MethodDescriptors {
 
   /**
    * Creates a copy of the given method descriptor by adding the provided parameters to its end.
-   * 
+   *
    * <p>Takes care to correctly mirror the update to any contained erased method descriptor version.
    */
   // TODO(simionato): Verify that it is always correct to add the same parameters to the method
@@ -92,9 +92,10 @@ public class MethodDescriptors {
 
       MethodDescriptor newDeclarationMethodDescriptor =
           MethodDescriptor.Builder.from(makeStaticMethodDescriptor(declarationMethodDescriptor))
-             .parameterTypeDescriptors(methodDeclarationParameterTypeDescriptors)
-             .build();
-      methodBuilder.declarationMethodDescriptor(newDeclarationMethodDescriptor);
+              .parameterTypeDescriptors(methodDeclarationParameterTypeDescriptors)
+              .build();
+      methodBuilder.declarationMethodDescriptor(
+          makeStaticMethodDescriptor(newDeclarationMethodDescriptor));
     }
     return methodBuilder.build();
   }

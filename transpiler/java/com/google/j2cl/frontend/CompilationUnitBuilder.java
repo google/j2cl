@@ -279,6 +279,9 @@ public class CompilationUnitBuilder {
                 -1 /* Position is not important */));
       }
 
+      // Resolve default methods
+      DefaultMethodsResolver.resolve(typeBinding, type);
+
       // Add dispatch methods for package private methods.
       PackagePrivateMethodsDispatcher.create(typeBinding, type);
 
@@ -1273,6 +1276,12 @@ public class CompilationUnitBuilder {
       if (expression.getQualifier() == null) {
         return MethodCall.createMethodCall(
             new SuperReference(currentType.getSuperTypeDescriptor()), methodDescriptor, arguments);
+      } else if (expression.getQualifier().resolveTypeBinding().isInterface()) {
+        // This is a default method call.
+        return MethodCall.createStaticDispatchMethodCall(
+            new ThisReference(methodDescriptor.getEnclosingClassTypeDescriptor()),
+            methodDescriptor,
+            arguments);
       } else {
         // OuterClass.super.fun() is transpiled to
         // SuperClassOfOuterClass.prototype.fun.call(OuterClass.this);

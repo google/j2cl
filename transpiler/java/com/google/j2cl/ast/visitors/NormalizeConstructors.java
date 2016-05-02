@@ -459,10 +459,12 @@ public class NormalizeConstructors {
       arguments = constructorInvocation.getArguments();
       MethodDescriptor javascriptConstructorDeclaration =
           MethodDescriptor.Builder.from(javascriptConstructor)
-             .parameterTypeDescriptors(
-                 constructorInvocation.getTarget().getDeclarationMethodDescriptor()
-                     .getParameterTypeDescriptors())
-             .build();
+              .parameterTypeDescriptors(
+                  constructorInvocation
+                      .getTarget()
+                      .getDeclarationMethodDescriptor()
+                      .getParameterTypeDescriptors())
+              .build();
       javascriptConstructor =
           MethodDescriptor.Builder.from(javascriptConstructor)
               .declarationMethodDescriptor(javascriptConstructorDeclaration)
@@ -544,10 +546,12 @@ public class NormalizeConstructors {
 
     MethodDescriptor javascriptConstructorDeclaration =
         MethodDescriptor.Builder.from(javascriptConstructor)
-        .parameterTypeDescriptors(
-            primaryConstructor.getDescriptor().getDeclarationMethodDescriptor()
-                .getParameterTypeDescriptors())
-        .build();
+            .parameterTypeDescriptors(
+                primaryConstructor
+                    .getDescriptor()
+                    .getDeclarationMethodDescriptor()
+                    .getParameterTypeDescriptors())
+            .build();
 
     javascriptConstructor =
         MethodDescriptor.Builder.from(javascriptConstructor)

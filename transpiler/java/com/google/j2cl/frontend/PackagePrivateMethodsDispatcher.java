@@ -43,9 +43,10 @@ public class PackagePrivateMethodsDispatcher {
         findExposedOverriddenMethods(typeBinding).entrySet()) {
       dispatchMethods.add(
           AstUtils.createForwardingMethod(
-              entry.getValue(),
+              MethodDescriptor.Builder.from(entry.getValue())
+                  .enclosingClassTypeDescriptor(JdtUtils.createTypeDescriptor(typeBinding))
+                  .build(),
               entry.getKey(),
-              JdtUtils.createTypeDescriptor(typeBinding),
               "Forwarding method for package private method."));
     }
     javaType.addMethods(dispatchMethods);

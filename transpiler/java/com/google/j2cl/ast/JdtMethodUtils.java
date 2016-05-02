@@ -102,6 +102,7 @@ public class JdtMethodUtils {
         .isStatic(isStatic)
         .isConstructor(isConstructor)
         .isNative(isNative)
+        .isDefault(Modifier.isDefault(methodBinding.getModifiers()))
         .isVarargs(methodBinding.isVarargs())
         .build();
   }

@@ -390,21 +390,44 @@ public class AstUtils {
   }
 
   /**
-   * Creates forwarding method that has the same signature of {@code fromMethodDescriptor} in type
-   * {@code enclosingClassTypeDescriptor}, and delegates to {@code toMethodDescriptor}, e.g.
+   * Creates static forwarding method that has the same signature of {@code targetMethodDescriptor}
+   * in type {@code fromTypeDescriptor}, and delegates to {@code targetMethodDescriptor}, e.g.
    *
-   * enclosingClassTypeDescriptor.toMethodDescriptor (args) { return this.toMethodDescriptor(args);
+   * fromTypeDescriptor.method (args) { return Target.prototype.method.call(this,args); }
+   * }
+   */
+  public static Method createStaticForwardingMethod(
+      MethodDescriptor targetMethodDescriptor,
+      TypeDescriptor fromTypeDescriptor,
+      String jsDocDescription) {
+    return createForwardingMethod(
+        MethodDescriptor.Builder.from(targetMethodDescriptor)
+            .enclosingClassTypeDescriptor(fromTypeDescriptor)
+            .build(),
+        targetMethodDescriptor,
+        jsDocDescription,
+        true);
+  }
+  /**
+   * Creates forwarding method {@code fromMethodDescriptor} that deletgates to
+   * {@code toMethodDescriptor}, e.g.
+   *
+   * fromMethodDescriptor (args) { return this.toMethodDescriptor(args);
    * }
    */
   public static Method createForwardingMethod(
       MethodDescriptor fromMethodDescriptor,
       MethodDescriptor toMethodDescriptor,
-      TypeDescriptor enclosingClassTypeDescriptor,
       String jsDocDescription) {
-    MethodDescriptor forwardingMethodDescriptor =
-        MethodDescriptor.Builder.from(fromMethodDescriptor)
-            .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
-            .build();
+    return createForwardingMethod(
+        fromMethodDescriptor, toMethodDescriptor, jsDocDescription, false);
+  }
+
+  private static Method createForwardingMethod(
+      MethodDescriptor fromMethodDescriptor,
+      MethodDescriptor toMethodDescriptor,
+      String jsDocDescription,
+      boolean isStaticDispatch) {
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
     List<TypeDescriptor> parameterTypes = fromMethodDescriptor.getParameterTypeDescriptors();
@@ -414,8 +437,13 @@ public class AstUtils {
       arguments.add(parameter.getReference());
     }
 
+    // TODO: Casts are probably needed on arguments if the types differ between the
+    // targetMethodDescriptor and its declarationMethodDescriptor.
     Expression forwardingMethodCall =
-        MethodCall.createMethodCall(null, toMethodDescriptor, arguments);
+        isStaticDispatch
+            ? MethodCall.createStaticDispatchMethodCall(null, toMethodDescriptor, arguments)
+            : MethodCall.createMethodCall(null, toMethodDescriptor, arguments);
+
     Statement statement =
         fromMethodDescriptor
                 .getReturnTypeDescriptor()
@@ -424,7 +452,7 @@ public class AstUtils {
             : new ReturnStatement(
                 forwardingMethodCall, fromMethodDescriptor.getReturnTypeDescriptor());
     return new Method(
-        forwardingMethodDescriptor,
+        fromMethodDescriptor,
         parameters,
         new Block(statement),
         false,
@@ -768,7 +796,7 @@ public class AstUtils {
    */
   public static TypeDescriptor createOverlayImplementationClassTypeDescriptor(
       TypeDescriptor typeDescriptor) {
-    checkArgument(typeDescriptor.isNative());
+    checkArgument(typeDescriptor.isNative() || typeDescriptor.isInterface());
     checkArgument(!typeDescriptor.isArray());
     checkArgument(!typeDescriptor.isUnion());
 
@@ -780,6 +808,39 @@ public class AstUtils {
                 Arrays.asList(OVERLAY_IMPLEMENTATION_CLASS_SUFFIX))),
         false,
         Collections.emptyList());
+  }
+
+  public static Method createDevirtualizedMethod(Method method) {
+    checkArgument(
+        !method.getDescriptor().isJsProperty(), "JsProperty should never be devirtualized");
+    checkArgument(method.getDescriptor().isPolymorphic());
+    // TODO: remove once init() function is synthesized in AST.
+    checkArgument(!method.getDescriptor().isInit(), "Do not devirtualize init().");
+
+    final Variable thisArg =
+        new Variable(
+            "$thisArg", method.getDescriptor().getEnclosingClassTypeDescriptor(), false, true);
+
+    // Replace all 'this' references in the method with parameter references.
+    method.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteThisReference(ThisReference thisReference) {
+            return thisArg.getReference();
+          }
+        });
+
+    // MethodDescriptor for the devirtualized static method.
+    MethodDescriptor newMethodDescriptor =
+        MethodDescriptors.makeStaticMethodDescriptor(method.getDescriptor());
+
+    // Parameters for the devirtualized static method.
+    List<Variable> newParameters = new ArrayList<>();
+    newParameters.add(thisArg); // added extra parameter.
+    newParameters.addAll(method.getParameters()); // original parameters in the instance method.
+
+    // Add the static method to current type.
+    return new Method(newMethodDescriptor, newParameters, new Block(method.getBody()));
   }
 
   /**
@@ -878,7 +939,7 @@ public class AstUtils {
     return MethodCall.createMethodCall(
         null, makeLambdaCall, applyFunctionFieldAccess, instance, copyFunctionFieldAccess);
   }
-  
+
   private static Expression getInitialValue(Field field) {
     if (field.isCompileTimeConstant()) {
       return field.getInitializer();

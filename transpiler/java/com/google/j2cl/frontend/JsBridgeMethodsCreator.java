@@ -165,9 +165,10 @@ public class JsBridgeMethodsCreator {
         JdtUtils.createMethodDescriptor(forwardToMethodBinding);
     MethodDescriptor bridgeMethodDescriptor = JdtUtils.createMethodDescriptor(bridgeMethodBinding);
     return AstUtils.createForwardingMethod(
-        bridgeMethodDescriptor,
+        MethodDescriptor.Builder.from(bridgeMethodDescriptor)
+            .enclosingClassTypeDescriptor(JdtUtils.createTypeDescriptor(typeBinding))
+            .build(),
         forwardToMethodDescriptor,
-        JdtUtils.createTypeDescriptor(typeBinding),
         "Bridge method for exposing non-JsMethod.");
   }
 }

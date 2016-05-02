@@ -1,0 +1,121 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$AConcreteList.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$AConcreteList$impl');
+
+
+let DefaultMethods$List = goog.require('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$List$impl');
+let Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let DefaultMethods$List$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$List$$Overlay$impl');
+let DefaultMethods = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
+
+/**
+ * @template C_AConcreteList_T
+ * @implements {DefaultMethods$List<C_AConcreteList_T>}
+ */
+class DefaultMethods$AConcreteList extends Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() { super(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_AConcreteList_T
+   * @return {!DefaultMethods$AConcreteList<C_AConcreteList_T>}
+   * @public
+   */
+  static $create() {
+    DefaultMethods$AConcreteList.$clinit();
+    let $instance = new DefaultMethods$AConcreteList();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods$AConcreteList();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods$AConcreteList() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods$AConcreteList();
+  }
+
+  /**
+   * Default method forwarding stub.
+   * @override
+   * @param {C_AConcreteList_T} arg0
+   * @return {void}
+   * @public
+   */
+  m_add__java_lang_Object(arg0) {
+    DefaultMethods$List$$Overlay
+        .m_add__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods$List__java_lang_Object(
+            this, arg0);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof DefaultMethods$AConcreteList;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, DefaultMethods$AConcreteList);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    DefaultMethods$List$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$List$$Overlay$impl');
+    DefaultMethods = goog.module.get(
+        'com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$impl');
+    Class = goog.module.get('java.lang.Class$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods$AConcreteList() {
+  }
+};
+
+$Util.$setClassMetadata(
+    DefaultMethods$AConcreteList,
+    'com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$AConcreteList');
+
+
+DefaultMethods$List.$markImplementor(DefaultMethods$AConcreteList);
+
+
+/**
+ * Export class.
+ */
+exports = DefaultMethods$AConcreteList;
+//# sourceMappingURL=DefaultMethods$AConcreteList.js.map

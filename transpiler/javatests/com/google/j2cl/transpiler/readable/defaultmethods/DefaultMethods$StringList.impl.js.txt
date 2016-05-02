@@ -1,0 +1,121 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$StringList.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$StringList$impl');
+
+
+let DefaultMethods$List = goog.require('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$List$impl');
+let Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let DefaultMethods$List$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$List$$Overlay$impl');
+let DefaultMethods = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
+
+
+/**
+ * @implements {DefaultMethods$List<?string>}
+ */
+class DefaultMethods$StringList extends Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() { super(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!DefaultMethods$StringList}
+   * @public
+   */
+  static $create() {
+    DefaultMethods$StringList.$clinit();
+    let $instance = new DefaultMethods$StringList();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods$StringList();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods$StringList() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods$StringList();
+  }
+
+  /**
+   * Default method forwarding stub.
+   * @override
+   * @param {?string} arg0
+   * @return {void}
+   * @public
+   */
+  m_add__java_lang_Object(arg0) {
+    DefaultMethods$List$$Overlay
+        .m_add__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods$List__java_lang_Object(
+            this, arg0);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof DefaultMethods$StringList;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, DefaultMethods$StringList);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    DefaultMethods$List$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$List$$Overlay$impl');
+    DefaultMethods = goog.module.get(
+        'com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$impl');
+    Class = goog.module.get('java.lang.Class$impl');
+    String = goog.module.get('java.lang.String$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_defaultmethods_DefaultMethods$StringList() {
+  }
+};
+
+$Util.$setClassMetadata(
+    DefaultMethods$StringList,
+    'com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$StringList');
+
+
+DefaultMethods$List.$markImplementor(DefaultMethods$StringList);
+
+
+/**
+ * Export class.
+ */
+exports = DefaultMethods$StringList;
+//# sourceMappingURL=DefaultMethods$StringList.js.map

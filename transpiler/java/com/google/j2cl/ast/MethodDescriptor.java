@@ -60,6 +60,8 @@ public abstract class MethodDescriptor extends Node implements Member {
 
   public abstract boolean isVarargs();
 
+  public abstract boolean isDefault();
+
   @Nullable
   abstract MethodDescriptor getDeclarationMethodDescriptorOrNull();
 
@@ -171,6 +173,7 @@ public abstract class MethodDescriptor extends Node implements Member {
     private String methodName;
     private boolean isConstructor;
     private boolean isNative;
+    private boolean isDefault;
     private boolean isVarargs;
     private MethodDescriptor declarationMethodDescriptor;
     private ImmutableList<TypeDescriptor> parameterTypeDescriptors;
@@ -201,6 +204,7 @@ public abstract class MethodDescriptor extends Node implements Member {
       builder.methodName = methodDescriptor.getMethodName();
       builder.isConstructor = methodDescriptor.isConstructor();
       builder.isNative = methodDescriptor.isNative();
+      builder.isDefault = methodDescriptor.isDefault();
       builder.isVarargs = methodDescriptor.isVarargs();
       if (methodDescriptor.getDeclarationMethodDescriptor() != methodDescriptor) {
         builder.declarationMethodDescriptor = methodDescriptor.getDeclarationMethodDescriptor();
@@ -244,6 +248,11 @@ public abstract class MethodDescriptor extends Node implements Member {
 
     public Builder isConstructor(boolean isConstructor) {
       this.isConstructor = isConstructor;
+      return this;
+    }
+
+    public Builder isDefault(boolean isDefault) {
+      this.isDefault = isDefault;
       return this;
     }
 
@@ -310,6 +319,7 @@ public abstract class MethodDescriptor extends Node implements Member {
               isConstructor,
               isNative,
               isVarargs,
+              isDefault,
               declarationMethodDescriptor,
               ImmutableList.copyOf(parameterTypeDescriptors),
               returnTypeDescriptor,

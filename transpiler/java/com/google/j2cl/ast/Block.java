@@ -31,6 +31,13 @@ public class Block extends Statement implements Positioned {
   @Visitable List<Statement> statements = new ArrayList<>();
   private Integer position;
 
+  public Block(Block fromBlock) {
+    this(fromBlock.getStatements());
+    this.position = fromBlock.position;
+    setJavaSourceInfo(fromBlock.getJavaSourceInfo());
+    setOutputSourceInfo(fromBlock.getOutputSourceInfo());
+  }
+
   public Block(Statement... statements) {
     this(Arrays.asList(statements));
   }

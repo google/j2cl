@@ -107,7 +107,7 @@ public class Method extends Node {
   public String getJsDocDescription() {
     return jsDocDescription;
   }
-  
+
   public boolean isPrimaryConstructor() {
     if (isConstructor()) {
       if (getDescriptor().getEnclosingClassTypeDescriptor().subclassesJsConstructorClass()) {
