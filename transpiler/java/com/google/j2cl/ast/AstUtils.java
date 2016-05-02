@@ -407,8 +407,7 @@ public class AstUtils {
             .build();
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
-    List<TypeDescriptor> parameterTypes =
-        fromMethodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors();
+    List<TypeDescriptor> parameterTypes = fromMethodDescriptor.getParameterTypeDescriptors();
     for (int i = 0; i < parameterTypes.size(); i++) {
       Variable parameter = new Variable("arg" + i, parameterTypes.get(i), false, true);
       parameters.add(parameter);
