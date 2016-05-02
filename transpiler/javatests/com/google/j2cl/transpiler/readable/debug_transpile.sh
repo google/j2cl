@@ -20,8 +20,8 @@
 
 java_dir="third_party/java_src/j2cl/transpiler/javatests"
 examples_dir="$java_dir/com/google/j2cl/transpiler/readable/"
-transpiler_bin="blaze-bin/third_party/java_src/j2cl/j2cl"
-jre_jar="blaze-bin/third_party/java_src/j2cl/jre/java/libJavaJre_java_library.jar"
+transpiler_bin="blaze-bin/third_party/java/j2cl/J2clTranspiler"
+jre_jar="blaze-bin/third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/integration/jre_bundle_deploy.jar"
 jsinterop_jar="blaze-bin/third_party/java_src/gwt/svn/trunk/user/libgwt-jsinterop-annotations.jar"
 example_name=$1
 
@@ -32,10 +32,11 @@ set -x
 set -e
 
 # Build  JRE
-blaze build third_party/java_src/j2cl/jre/java:JavaJre_java_library &> /dev/null
+blaze build third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/integration:jre_bundle_deploy.jar&> /dev/null
 
 # Build the transpiler
-blaze build third_party/java_src/j2cl:j2cl
+blaze build third_party/java/j2cl:J2clTranspiler
+
 
 # Figure out where the referenced example lives
 example_dir=$examples_dir$example_name
