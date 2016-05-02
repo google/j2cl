@@ -34,8 +34,8 @@ _CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
 
 def integration_test(
     name, srcs=[], deps=[], defs=[], native_srcs=[],
-    native_srcs_pkg="CONVENTION", js_deps=[], closure_defines=dict(),
-    generate_build_test=None):
+    native_srcs_pkg="CONVENTION", js_deps=[], enable_gwt=False, gwt_deps=[],
+    closure_defines=dict(), generate_build_test=None):
   """Macro that turns Java files into integration test targets.
 
   deps are Labels of j2cl_library() rules. NOT labels of
@@ -162,7 +162,7 @@ def integration_test(
 
   # For constructing GWT transpiled output.
   srcjars = [src for src in srcs if ".srcjar" in src]
-  if srcs and not srcjars:
+  if srcs and not srcjars and enable_gwt:
     # Only provide a GWT target if there are no srcjars since gwt_module can't
     # handle them directly.
     gwt_harness = """
@@ -181,11 +181,10 @@ def integration_test(
         cmd="echo \"%s\" > $@" % gwt_harness,
         executable=1,
     )
-    java_library_deps = [dep + "_java_library" for dep in deps]
+    java_library_deps = gwt_deps if gwt_deps else [dep + "_java_library" for dep in deps]
     native.gwt_module(
         name="gwt_module",
         srcs=srcs + ["MainEntryPoint.java"],
-        restricted_to = ["//buildenv/j2cl:j2cl_compilation"],  # SPECIAL CASE. Normal code should not do this.
         deps=java_library_deps,
         entry_points=[java_package + ".MainEntryPoint"],
         javacopts=[
@@ -201,6 +200,28 @@ def integration_test(
             "-setProperty user.agent=safari",
             "-generateJsInteropExports",
             "-ea",
+        ],
+        shard_count=1,
+        module_target=":gwt_module",
+        tags=["manual"],
+    )
+
+    native.gwt_application(
+        name="optimized_gwt_application",
+        compiler_opts=[
+            "-optimize 9",
+            "-style OBFUSCATED",
+            # "-style DETAILED",
+            "-setProperty user.agent=safari",
+            "-setProperty compiler.stackMode=strip",
+            "-setProperty compiler.enum.obfuscate.names=true",
+            "-setProperty gwt.logging.enabled=FALSE",
+            "-setProperty document.compatMode.severity=IGNORE",
+            "-setProperty user.agent.runtimeWarning=false",
+            "-setProperty jre.checks.checkLevel=MINIMAL",
+            "-XnoclassMetadata",
+            # "-XclosureCompiler",
+            "-setProperty compiler.useSourceMaps=true",
         ],
         shard_count=1,
         module_target=":gwt_module",
