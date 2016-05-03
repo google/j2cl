@@ -15,7 +15,6 @@ load(
 integration_test(
     name = "nativejstypes",
     srcs = glob(["*.java"]),
-    generate_build_test = False,
     js_deps = [":native_types"],
     deps = ["//jre/java:gwt-jsinterop-annotations"],
 )

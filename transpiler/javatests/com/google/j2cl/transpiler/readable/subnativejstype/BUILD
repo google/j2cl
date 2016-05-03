@@ -12,7 +12,6 @@ load(
 readable_example(
     name = "subnativejstype",
     srcs = glob(["*.java"]),
-    generate_build_test = False,
     js_deps = [":native_types"],
     deps = ["//jre/java:gwt-jsinterop-annotations"],
 )

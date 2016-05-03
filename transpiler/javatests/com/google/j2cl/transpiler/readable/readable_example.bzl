@@ -40,6 +40,7 @@ def readable_example(
       native_srcs_pkg=native_srcs_pkg,
       deps=deps,
       plugins=plugins,
+      _js_deps=js_deps,
       _readable_source_maps=True,
       _declare_legacy_namespace=_declare_legacy_namespace,
   )
@@ -59,5 +60,5 @@ def readable_example(
       ],
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
-      deps=js_deps + [":" + name],
+      deps=[":" + name],
   )

@@ -79,6 +79,7 @@ def integration_test(
             "-source 8",
             "-target 8"
         ],
+        _js_deps=js_deps,
         native_srcs=native_srcs,
         native_srcs_pkg=native_srcs_pkg,
     )
@@ -118,7 +119,7 @@ def integration_test(
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
-      deps=js_deps + srcs_lib_dep,
+      deps=srcs_lib_dep,
   )
   # For constructing readable optimized diffs.
   native.js_binary(
@@ -140,7 +141,7 @@ def integration_test(
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
-      deps=js_deps + srcs_lib_dep,
+      deps=srcs_lib_dep,
   )
   # For constructing readable unoptimized diffs.
   native.js_binary(
@@ -157,7 +158,7 @@ def integration_test(
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
-      deps=js_deps + srcs_lib_dep,
+      deps=srcs_lib_dep,
   )
 
   # For constructing GWT transpiled output.
@@ -259,7 +260,7 @@ def integration_test(
       name="uncompiled_test",
       srcs=["TestHarness.js"],
       compile=0,
-      deps=js_deps + [
+      deps=[
           ":" + name,
           "//javascript/closure/testing:testsuite",
       ],
@@ -286,7 +287,7 @@ def integration_test(
           "--variable_renaming=OFF",
           "--jscomp_off=lateProvide",
       ] + defs,
-      deps=js_deps + [
+      deps=[
           ":" + name,
           "//javascript/closure/testing:testsuite",
       ],

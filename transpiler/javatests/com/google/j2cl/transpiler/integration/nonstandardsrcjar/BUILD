@@ -14,5 +14,6 @@ load(
 # blaze test :uncompiled_test
 integration_test(
     name = "nonstandardsrcjar",
+    srcs = ["Filler.java"],
     js_deps = [":Main"],
 )

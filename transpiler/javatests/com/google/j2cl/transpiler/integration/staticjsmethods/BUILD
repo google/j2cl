@@ -20,7 +20,6 @@ js_library(
 integration_test(
     name = "staticjsmethods",
     srcs = glob(["*.java"]),
-    generate_build_test = False,
     js_deps = [":Bar"],
     native_srcs = ["Main.native.js"],
     deps = ["//jre/java:gwt-jsinterop-annotations"],
