@@ -23,7 +23,6 @@ import com.google.j2cl.common.PackageInfoCache;
 
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
-import org.eclipse.jdt.core.dom.IPackageBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.Modifier;
 
@@ -56,24 +55,30 @@ public class TypeProxyUtils {
 
   /**
    * Creates a type descriptor for the given type binding, taking into account nullability.
+   *
    * @param typeBinding the type binding, used to create the type descriptor.
    * @param elementAnnotations the annotations on the element
    */
   public static TypeDescriptor createTypeDescriptorWithNullability(
-      ITypeBinding typeBinding, IAnnotationBinding[] elementAnnotations,
+      ITypeBinding typeBinding,
+      IAnnotationBinding[] elementAnnotations,
       Nullability defaultNullabilityForCompilationUnit) {
     TypeDescriptor descriptor;
     if (typeBinding.isArray()) {
-      TypeDescriptor leafTypeDescriptor = createTypeDescriptorWithNullability(
-          typeBinding.getElementType(),
-          new IAnnotationBinding[0],
-          defaultNullabilityForCompilationUnit);
+      TypeDescriptor leafTypeDescriptor =
+          createTypeDescriptorWithNullability(
+              typeBinding.getElementType(),
+              new IAnnotationBinding[0],
+              defaultNullabilityForCompilationUnit);
       descriptor = TypeDescriptors.getForArray(leafTypeDescriptor, typeBinding.getDimensions());
     } else if (typeBinding.isParameterizedType()) {
       List<TypeDescriptor> typeArgumentsDescriptors = new ArrayList<>();
       for (ITypeBinding typeArgumentBinding : typeBinding.getTypeArguments()) {
-        typeArgumentsDescriptors.add(createTypeDescriptorWithNullability(
-            typeArgumentBinding, new IAnnotationBinding[0], defaultNullabilityForCompilationUnit));
+        typeArgumentsDescriptors.add(
+            createTypeDescriptorWithNullability(
+                typeArgumentBinding,
+                new IAnnotationBinding[0],
+                defaultNullabilityForCompilationUnit));
       }
       descriptor = createTypeDescriptor(typeBinding, typeArgumentsDescriptors);
     } else {
@@ -92,7 +97,8 @@ public class TypeProxyUtils {
    * and if nullability is enabled for the package containing the binding.
    */
   private static boolean isNullable(
-      ITypeBinding typeBinding, IAnnotationBinding[] elementAnnotations,
+      ITypeBinding typeBinding,
+      IAnnotationBinding[] elementAnnotations,
       Nullability defaultNullabilityForCompilationUnit) {
     if (typeBinding.isPrimitive()) {
       return false;
@@ -119,19 +125,43 @@ public class TypeProxyUtils {
   }
 
   /**
-   * Gets the default nullability for the given package, by examining the package-info file.
+   * Gets the default nullability for the given type by examining the package-info file in the
+   * type's package in the same class path entry.
    */
-  public static Nullability getPackageDefaultNullability(IPackageBinding packageBinding) {
-    boolean nullabilityEnabled =
-        PackageInfoCache.get().isNullabilityEnabled(packageBinding.getName());
+  public static Nullability getTypeDefaultNullability(ITypeBinding typeBinding) {
+    ITypeBinding topLevelTypeBinding = toTopLevelTypeBinding(typeBinding);
+
+    if (topLevelTypeBinding.isFromSource()) {
+      // Let the PackageInfoCache know that this class is Source, otherwise it would have to rummage
+      // around in the class path to figure it out and it might even come up with the wrong answer
+      // for example if this class has also been globbed into some other library that is a
+      // dependency of this one.
+      PackageInfoCache.get().markAsSource(typeBinding.getBinaryName());
+    }
+
+    // For a top level class the binary and source name are the same.
+    String sourceName = topLevelTypeBinding.getBinaryName();
+
+    boolean nullabilityEnabled = PackageInfoCache.get().isNullabilityEnabled(sourceName);
     return nullabilityEnabled ? Nullability.NOT_NULL : Nullability.NULL;
+  }
+
+  /**
+   * Incase the given type binding is nested, return the outermost possible enclosing type binding.
+   */
+  private static ITypeBinding toTopLevelTypeBinding(ITypeBinding typeBinding) {
+    ITypeBinding topLevelClass = typeBinding;
+    while (topLevelClass.getDeclaringClass() != null) {
+      topLevelClass = topLevelClass.getDeclaringClass();
+    }
+    return topLevelClass;
   }
 
   /**
    * Creates a TypeDescriptor from a JDT TypeBinding.
    */
-  public static TypeDescriptor createTypeDescriptor(ITypeBinding typeBinding,
-      List<TypeDescriptor> typeArgumentDescriptors) {
+  public static TypeDescriptor createTypeDescriptor(
+      ITypeBinding typeBinding, List<TypeDescriptor> typeArgumentDescriptors) {
     if (typeBinding == null) {
       return null;
     }

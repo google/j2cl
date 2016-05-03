@@ -99,11 +99,11 @@ public class JdtUtils {
         createTypeDescriptor(variableBinding.getDeclaringClass());
     String fieldName = variableBinding.getName();
 
-    TypeDescriptor thisTypeDescriptor = TypeProxyUtils.createTypeDescriptorWithNullability(
-        variableBinding.getType(),
-        variableBinding.getAnnotations(),
-        TypeProxyUtils.getPackageDefaultNullability(
-            variableBinding.getDeclaringClass().getPackage()));
+    TypeDescriptor thisTypeDescriptor =
+        TypeProxyUtils.createTypeDescriptorWithNullability(
+            variableBinding.getType(),
+            variableBinding.getAnnotations(),
+            TypeProxyUtils.getTypeDefaultNullability(variableBinding.getDeclaringClass()));
 
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableBinding);
     boolean isRaw = jsInfo.getJsMemberType() == JsMemberType.PROPERTY;

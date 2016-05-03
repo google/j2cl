@@ -1,0 +1,112 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.nonnullablecomplex.Main.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.nonnullablecomplex.Main$impl');
+
+
+let Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let NonNullableExample = goog.forwardDeclare('com.google.j2cl.transpiler.integration.nonnullablecomplex.sub.NonNullableExample$impl');
+let NullableExample = goog.forwardDeclare('com.google.j2cl.transpiler.integration.nonnullablecomplex.sub.NullableExample$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+
+class Main extends Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() { super(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Main}
+   * @public
+   */
+  static $create() {
+    Main.$clinit();
+    let $instance = new Main();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_nonnullablecomplex_Main();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_nonnullablecomplex_Main() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_nonnullablecomplex_Main();
+  }
+
+  /**
+   * @param {Array<?string>} args
+   * @return {void}
+   * @public
+   */
+  static m_main__arrayOf_java_lang_String(args) {
+    Main.$clinit();
+    NonNullableExample.m_takeValue__java_lang_String(/**@type {string} */ (
+        NullableExample
+            .f_NULLABLE_VALUE__com_google_j2cl_transpiler_integration_nonnullablecomplex_sub_NullableExample));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Main; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Main);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    NonNullableExample = goog.module.get(
+        'com.google.j2cl.transpiler.integration.nonnullablecomplex.sub.NonNullableExample$impl');
+    NullableExample = goog.module.get(
+        'com.google.j2cl.transpiler.integration.nonnullablecomplex.sub.NullableExample$impl');
+    Class = goog.module.get('java.lang.Class$impl');
+    String = goog.module.get('java.lang.String$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_nonnullablecomplex_Main() {}
+};
+
+$Util.$setClassMetadata(
+    Main, 'com.google.j2cl.transpiler.readable.nonnullablecomplex.Main');
+
+
+
+/**
+ * Export class.
+ */
+exports = Main;
+//# sourceMappingURL=Main.js.map

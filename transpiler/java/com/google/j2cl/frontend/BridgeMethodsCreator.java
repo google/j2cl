@@ -270,18 +270,14 @@ public class BridgeMethodsCreator {
    */
   private MethodDescriptor createMethodDescriptorInCurrentType(
       IMethodBinding methodBinding, ITypeBinding returnType) {
-    Nullability defaultNullability = TypeProxyUtils.getPackageDefaultNullability(
-        methodBinding.getDeclaringClass().getPackage());
+    Nullability defaultNullability =
+        TypeProxyUtils.getTypeDefaultNullability(methodBinding.getDeclaringClass());
     TypeDescriptor enclosingClassTypeDescriptor =
         TypeProxyUtils.createTypeDescriptorWithNullability(
-            typeBinding,
-            new IAnnotationBinding[0],
-            defaultNullability);
+            typeBinding, new IAnnotationBinding[0], defaultNullability);
     TypeDescriptor returnTypeDescriptor =
         TypeProxyUtils.createTypeDescriptorWithNullability(
-            returnType,
-            new IAnnotationBinding[0],
-            defaultNullability);
+            returnType, new IAnnotationBinding[0], defaultNullability);
 
     MethodDescriptor originalMethodDescriptor =
         JdtMethodUtils.createMethodDescriptor(methodBinding);
@@ -332,16 +328,20 @@ public class BridgeMethodsCreator {
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
 
-    for (int i = 0; i < bridgeMethodDescriptor.getDeclarationMethodDescriptor()
-        .getParameterTypeDescriptors().size(); i++) {
+    for (int i = 0;
+        i
+            < bridgeMethodDescriptor
+                .getDeclarationMethodDescriptor()
+                .getParameterTypeDescriptors()
+                .size();
+        i++) {
       Variable parameter =
           new Variable(
               "arg" + i,
               TypeProxyUtils.createTypeDescriptorWithNullability(
                   bridgeMethod.getParameterTypes()[i],
                   new IAnnotationBinding[0],
-                  TypeProxyUtils.getPackageDefaultNullability(
-                      targetMethod.getDeclaringClass().getPackage())),
+                  TypeProxyUtils.getTypeDefaultNullability(targetMethod.getDeclaringClass())),
               false,
               true);
       parameters.add(parameter);

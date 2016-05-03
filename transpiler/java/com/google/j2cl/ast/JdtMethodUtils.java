@@ -54,7 +54,7 @@ public class JdtMethodUtils {
                 .getBinaryClassName()
             : methodBinding.getName();
     final Nullability defaultNullabilityForPackage =
-        TypeProxyUtils.getPackageDefaultNullability(methodBinding.getDeclaringClass().getPackage());
+        TypeProxyUtils.getTypeDefaultNullability(methodBinding.getDeclaringClass());
 
     JsInfo jsInfo = computeJsInfo(methodBinding);
 

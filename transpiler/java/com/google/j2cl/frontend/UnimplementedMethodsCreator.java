@@ -108,8 +108,7 @@ public class UnimplementedMethodsCreator {
               TypeProxyUtils.createTypeDescriptorWithNullability(
                   parameterTypeBinding,
                   new IAnnotationBinding[0],
-                  TypeProxyUtils.getPackageDefaultNullability(
-                      methodBinding.getDeclaringClass().getPackage())),
+                  TypeProxyUtils.getTypeDefaultNullability(methodBinding.getDeclaringClass())),
               false,
               true);
       parameters.add(parameter);

@@ -88,6 +88,7 @@ import com.google.j2cl.common.PackageInfoCache;
 
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
+import org.eclipse.jdt.core.dom.Annotation;
 import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.ArrayType;
 import org.eclipse.jdt.core.dom.BodyDeclaration;
@@ -144,18 +145,23 @@ public class CompilationUnitBuilder {
       currentType = typeStack.isEmpty() ? null : typeStack.get(typeStack.size() - 1);
     }
 
+    @SuppressWarnings({"cast", "unchecked"})
     private CompilationUnit convert(
         String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
       TypeDescriptors.init(jdtCompilationUnit.getAST());
-      currentSourceFile = sourceFilePath;
-      String packageName = JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit);
-      j2clCompilationUnit = new CompilationUnit(sourceFilePath, packageName);
       this.jdtCompilationUnit = jdtCompilationUnit;
+
+      currentSourceFile = sourceFilePath;
+      j2clCompilationUnit =
+          new CompilationUnit(
+              sourceFilePath, JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit));
       // Records information about package-info files supplied as source code.
       if (currentSourceFile.endsWith("package-info.java")
           && jdtCompilationUnit.getPackage() != null) {
-        packageInfoCache.setPackageAnnotations(
-            packageName, jdtCompilationUnit.getPackage().annotations());
+        packageInfoCache.setInfo(
+            PackageInfoCache.SOURCE_CLASS_PATH_ENTRY,
+            JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit),
+            (List<Annotation>) jdtCompilationUnit.getPackage().annotations());
       }
       for (Object object : jdtCompilationUnit.types()) {
         AbstractTypeDeclaration abstractTypeDeclaration = (AbstractTypeDeclaration) object;
@@ -365,8 +371,8 @@ public class CompilationUnitBuilder {
         Variable j2clParameter =
             JdtUtils.createVariable(
                 parameterBinding,
-                TypeProxyUtils.getPackageDefaultNullability(
-                    methodDeclaration.resolveBinding().getDeclaringClass().getPackage()));
+                TypeProxyUtils.getTypeDefaultNullability(
+                    methodDeclaration.resolveBinding().getDeclaringClass()));
         parameters.add(j2clParameter);
         variableByJdtBinding.put(parameterBinding, j2clParameter);
       }
@@ -1412,8 +1418,7 @@ public class CompilationUnitBuilder {
           TypeProxyUtils.createTypeDescriptorWithNullability(
               currentMethodBinding.getReturnType(),
               currentMethodBinding.getAnnotations(),
-              TypeProxyUtils.getPackageDefaultNullability(
-                  currentMethodBinding.getDeclaringClass().getPackage()));
+              TypeProxyUtils.getTypeDefaultNullability(currentMethodBinding.getDeclaringClass()));
       return new ReturnStatement(expression, returnTypeDescriptor);
     }
 
@@ -1790,10 +1795,11 @@ public class CompilationUnitBuilder {
           JdtUtils.createTypeDescriptor(typeBinding.getDeclaringClass()));
 
       if (superclassBinding != null) {
-        TypeDescriptor superTypeDescriptor = TypeProxyUtils.createTypeDescriptorWithNullability(
-            superclassBinding,
-            new IAnnotationBinding[0],
-            TypeProxyUtils.getPackageDefaultNullability(typeBinding.getPackage()));
+        TypeDescriptor superTypeDescriptor =
+            TypeProxyUtils.createTypeDescriptorWithNullability(
+                superclassBinding,
+                new IAnnotationBinding[0],
+                TypeProxyUtils.getTypeDefaultNullability(typeBinding));
         // The superclass is always non-nullable, however the type parameters might be, for example
         // 'extends List<@Nullable String>'
         superTypeDescriptor = TypeDescriptors.toNullable(superTypeDescriptor);
@@ -1806,7 +1812,7 @@ public class CompilationUnitBuilder {
             TypeProxyUtils.createTypeDescriptorWithNullability(
                 superInterface,
                 new IAnnotationBinding[0],
-                TypeProxyUtils.getPackageDefaultNullability(typeBinding.getPackage()));
+                TypeProxyUtils.getTypeDefaultNullability(typeBinding));
         // The interface is always non-nullable, however type parameters might be.
         superInterfaceDescriptor = TypeDescriptors.toNullable(superInterfaceDescriptor);
         type.addSuperInterfaceDescriptor(superInterfaceDescriptor);
