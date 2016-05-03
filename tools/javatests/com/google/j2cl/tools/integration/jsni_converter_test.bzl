@@ -44,7 +44,6 @@ def jsni_converter_test():
   j2cl_test(
       name = "Test",
       srcs = ["Test.java"],
-      compile = 0,
       deps = [
           ":test_library",
           "//third_party/java/gwt:gwt-jsinterop-annotations-j2cl",
