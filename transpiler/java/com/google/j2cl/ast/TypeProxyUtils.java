@@ -136,7 +136,7 @@ public class TypeProxyUtils {
       // around in the class path to figure it out and it might even come up with the wrong answer
       // for example if this class has also been globbed into some other library that is a
       // dependency of this one.
-      PackageInfoCache.get().markAsSource(typeBinding.getBinaryName());
+      PackageInfoCache.get().markAsSource(topLevelTypeBinding.getBinaryName());
     }
 
     // For a top level class the binary and source name are the same.
