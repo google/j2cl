@@ -44,14 +44,7 @@ public class JsBridgeMethodsCreator {
    * Creates bridge methods and adds them to the java type.
    */
   public static void create(ITypeBinding typeBinding, JavaType javaType) {
-    javaType.addMethods(
-        new JsBridgeMethodsCreator(typeBinding).createBridgeMethods(javaType.getMethods()));
-  }
-
-  private ITypeBinding typeBinding;
-
-  private JsBridgeMethodsCreator(ITypeBinding typeBinding) {
-    this.typeBinding = typeBinding;
+    javaType.addMethods(createBridgeMethods(typeBinding, javaType.getMethods()));
   }
 
   /**
@@ -69,7 +62,8 @@ public class JsBridgeMethodsCreator {
    * <p>2(b). If interface method is a non-JsMember, and accidental overridding method is JsMember,
    * a bridge method is needed from non-JsMember delegating to JsMember.
    */
-  private List<Method> createBridgeMethods(List<Method> existingMethods) {
+  private static List<Method> createBridgeMethods(
+      ITypeBinding typeBinding, List<Method> existingMethods) {
     List<Method> generatedBridgeMethods = new ArrayList<>();
     Set<String> generatedBridgeMethodMangledNames = new HashSet<>();
     List<String> existingMethodMangledNames =
@@ -82,8 +76,8 @@ public class JsBridgeMethodsCreator {
               }
             });
     for (Entry<IMethodBinding, IMethodBinding> entry :
-        getBridgeDelegateMethodsMapping().entrySet()) {
-      Method bridgeMethod = createBridgeMethod(entry.getKey(), entry.getValue());
+        getBridgeDelegateMethodsMapping(typeBinding).entrySet()) {
+      Method bridgeMethod = createBridgeMethod(typeBinding, entry.getKey(), entry.getValue());
       String manglingName = ManglingNameUtils.getMangledName(bridgeMethod.getDescriptor());
       if (generatedBridgeMethodMangledNames.contains(manglingName)
           || existingMethodMangledNames.contains(manglingName)) {
@@ -100,7 +94,8 @@ public class JsBridgeMethodsCreator {
   /**
    * Returns the mapping from the bridge method to the delegating method.
    */
-  private Map<IMethodBinding, IMethodBinding> getBridgeDelegateMethodsMapping() {
+  private static Map<IMethodBinding, IMethodBinding> getBridgeDelegateMethodsMapping(
+      ITypeBinding typeBinding) {
     Map<IMethodBinding, IMethodBinding> delegateByBridgeMethods = new LinkedHashMap<>();
 
     // case 1. exposed non-JsMember to the exposing JsMethod.
@@ -159,14 +154,16 @@ public class JsBridgeMethodsCreator {
     return overriddenNonJsMember;
   }
 
-  private Method createBridgeMethod(
-      IMethodBinding bridgeMethodBinding, IMethodBinding forwardToMethodBinding) {
+  private static Method createBridgeMethod(
+      ITypeBinding targetTypeBinding,
+      IMethodBinding bridgeMethodBinding,
+      IMethodBinding forwardToMethodBinding) {
     MethodDescriptor forwardToMethodDescriptor =
         JdtUtils.createMethodDescriptor(forwardToMethodBinding);
     MethodDescriptor bridgeMethodDescriptor = JdtUtils.createMethodDescriptor(bridgeMethodBinding);
     return AstUtils.createForwardingMethod(
         MethodDescriptor.Builder.from(bridgeMethodDescriptor)
-            .enclosingClassTypeDescriptor(JdtUtils.createTypeDescriptor(typeBinding))
+            .enclosingClassTypeDescriptor(JdtUtils.createTypeDescriptor(targetTypeBinding))
             .build(),
         forwardToMethodDescriptor,
         "Bridge method for exposing non-JsMethod.");

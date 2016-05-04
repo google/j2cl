@@ -63,17 +63,15 @@ public class BridgeMethodsCreator {
    * Creates and adds bridge methods to the java type and fixes the delegated JS methods.
    */
   public static void create(ITypeBinding typeBinding, JavaType javaType) {
-    final BridgeMethodsCreator bridgeMethodsCreator = new BridgeMethodsCreator(typeBinding);
-
     // create bridge methods.
     List<Method> generatedBridgeMethods = new ArrayList<>();
     Set<String> generatedBridgeMethodMangledNames = new HashSet<>();
     Set<MethodDescriptor> toBeFixedMethodDescriptors = new HashSet<>();
 
     for (Map.Entry<IMethodBinding, IMethodBinding> entry :
-        bridgeMethodsCreator.findBridgeMethods().entrySet()) { // bridgeMethod -> delegateMethod.
-      Method bridgeMethod =
-          bridgeMethodsCreator.createBridgeMethod(entry.getKey(), entry.getValue());
+        findBridgeMethods(typeBinding).entrySet()) {
+      // bridgeMethod -> delegateMethod.
+      Method bridgeMethod = createBridgeMethod(typeBinding, entry.getKey(), entry.getValue());
       String manglingName = ManglingNameUtils.getMangledName(bridgeMethod.getDescriptor());
       if (generatedBridgeMethodMangledNames.contains(manglingName)) {
         // do not generate duplicate bridge methods in one class.
@@ -116,16 +114,10 @@ public class BridgeMethodsCreator {
         });
   }
 
-  private final ITypeBinding typeBinding;
-
-  private BridgeMethodsCreator(ITypeBinding typeBinding) {
-    this.typeBinding = typeBinding;
-  }
-
   /**
    * Returns the mappings from the needed bridge method to the delegated method.
    */
-  public Map<IMethodBinding, IMethodBinding> findBridgeMethods() {
+  public static Map<IMethodBinding, IMethodBinding> findBridgeMethods(ITypeBinding typeBinding) {
     Map<IMethodBinding, IMethodBinding> bridgeMethodByDelegateMethod = new LinkedHashMap<>();
     for (IMethodBinding bridgeMethod : getPotentialBridgeMethods(typeBinding)) {
       IMethodBinding delegateMethod = findForwardingMethod(bridgeMethod, typeBinding);
@@ -265,11 +257,11 @@ public class BridgeMethodsCreator {
   }
 
   /**
-   * Creates MethodDescriptor in current class that has the same signature of {@code methodBinding},
-   * with return type of {@code returnType}.
+   * Creates MethodDescriptor in {@code typeBinding} that has the same signature as
+   * {@code methodBinding} with return type of {@code returnType}.
    */
-  private MethodDescriptor createMethodDescriptorInCurrentType(
-      IMethodBinding methodBinding, ITypeBinding returnType) {
+  private static MethodDescriptor createMethodDescriptor(
+      ITypeBinding typeBinding, IMethodBinding methodBinding, ITypeBinding returnType) {
     Nullability defaultNullability =
         TypeProxyUtils.getTypeDefaultNullability(methodBinding.getDeclaringClass());
     TypeDescriptor enclosingClassTypeDescriptor =
@@ -296,7 +288,8 @@ public class BridgeMethodsCreator {
    * bridgeMethod.getMethodDeclaration(): original declaration method. targetMethod: concrete
    * implementation that should be delegated to.
    */
-  private Method createBridgeMethod(IMethodBinding bridgeMethod, IMethodBinding targetMethod) {
+  private static Method createBridgeMethod(
+      ITypeBinding typeBinding, IMethodBinding bridgeMethod, IMethodBinding targetMethod) {
     // The MethodDescriptor of the generated bridge method should have the same signature as the
     // original declared method.
     // Using the return type of the delegated method also avoids generating redundant bridge methods
@@ -306,7 +299,7 @@ public class BridgeMethodsCreator {
             ? bridgeMethod.getReturnType() // use its own return type if it is a concrete method
             : targetMethod.getReturnType(); // otherwise use the return type of the target method.
     MethodDescriptor bridgeMethodDescriptor =
-        createMethodDescriptorInCurrentType(bridgeMethod, returnType);
+        createMethodDescriptor(typeBinding, bridgeMethod, returnType);
     // The MethodDescriptor of the delegated method.
     MethodDescriptor targetMethodDescriptor = JdtUtils.createMethodDescriptor(targetMethod);
     JsInfo targetMethodJsInfo = targetMethodDescriptor.getJsInfo();
