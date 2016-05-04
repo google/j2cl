@@ -21,7 +21,6 @@ import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
-import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.JsTypeAnnotation;
 import com.google.j2cl.ast.MethodCall;
@@ -30,7 +29,7 @@ import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.VariableReference;
+import com.google.j2cl.ast.VariableDeclarationFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,32 +78,34 @@ public class InsertCastOnNullabilityMismatch extends AbstractRewriter {
   }
 
   @Override
-  public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
-    Expression leftOperand = binaryExpression.getLeftOperand();
+  public Node rewriteVariableDeclarationFragment(VariableDeclarationFragment declarationFragment) {
+    if (declarationFragment.getInitializer() == null) {
+      return declarationFragment;
+    }
+    TypeDescriptor variableType = declarationFragment.getVariable().getTypeDescriptor();
+    TypeDescriptor assignedType = declarationFragment.getInitializer().getTypeDescriptor();
+    TypeDescriptor fixedType = getTypeWithMatchingNullability(variableType, assignedType);
+    if (fixedType != assignedType) {
+      declarationFragment.setInitializer(
+          JsTypeAnnotation.createTypeAnnotation(declarationFragment.getInitializer(), fixedType));
+    }
+    return declarationFragment;
+  }
 
-    if (binaryExpression.getOperator() == BinaryOperator.ASSIGN
-        && isFieldOrMethodParameter(leftOperand)) {
-      // Field assignment
+  @Override
+  public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
+    if (binaryExpression.getOperator() == BinaryOperator.ASSIGN) {
+      Expression leftOperand = binaryExpression.getLeftOperand();
       Expression rightOperand = binaryExpression.getRightOperand();
-      TypeDescriptor fieldType = leftOperand.getTypeDescriptor();
+      TypeDescriptor lhsType = leftOperand.getTypeDescriptor();
       TypeDescriptor assignedType = rightOperand.getTypeDescriptor();
-      TypeDescriptor fixedType = getTypeWithMatchingNullability(fieldType, assignedType);
+      TypeDescriptor fixedType = getTypeWithMatchingNullability(lhsType, assignedType);
       if (fixedType != assignedType) {
         binaryExpression.setRightOperand(
             JsTypeAnnotation.createTypeAnnotation(rightOperand, fixedType));
       }
     }
     return binaryExpression;
-  }
-
-  private boolean isFieldOrMethodParameter(Expression expression) {
-    if (expression instanceof FieldAccess) {
-      return true;
-    }
-    if (expression instanceof VariableReference) {
-      return ((VariableReference) expression).getTarget().isParameter();
-    }
-    return false;
   }
 
   private void rewriteInvocation(Invocation invocation) {

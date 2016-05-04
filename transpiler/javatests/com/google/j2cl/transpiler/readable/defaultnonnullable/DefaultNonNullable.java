@@ -61,7 +61,8 @@ public class DefaultNonNullable {
   // flow analysis to tighten nullability on local variables to fix this.
   public String castingNotNeeded() {
     String a = "";
-    List<Double> b = new ArrayList<>();
+    List<Double> b = new ArrayList<>(); // VariableDeclaration
+    b = new ArrayList<>(); // Binary Expression
     String c = null;
     m1(a, b, c);
     this.f1 = a;

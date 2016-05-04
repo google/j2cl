@@ -152,7 +152,8 @@ class DefaultNonNullable extends Object {
    */
   m_castingNotNeeded() {
     let a = '';
-    let b = /**@type {!ArrayList<?number>} */ (ArrayList.$create());
+    let b = /**@type {List<number>} */ (ArrayList.$create());
+    b = /**@type {List<number>} */ (ArrayList.$create());
     let c = null;
     this.m_m1__java_lang_String__java_util_List__java_lang_String(
         /**@type {string} */ (a), /**@type {!List<number>} */ (b), c);

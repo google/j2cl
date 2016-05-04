@@ -76,7 +76,6 @@ import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeProxyUtils;
-import com.google.j2cl.ast.TypeProxyUtils.Nullability;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
@@ -1722,7 +1721,17 @@ public class CompilationUnitBuilder {
     private VariableDeclarationFragment convert(
         org.eclipse.jdt.core.dom.VariableDeclarationFragment variableDeclarationFragment) {
       IVariableBinding variableBinding = variableDeclarationFragment.resolveBinding();
-      Variable variable = JdtUtils.createVariable(variableBinding, Nullability.NULL);
+      Variable variable = JdtUtils.createVariable(
+          variableBinding,
+          TypeProxyUtils.getTypeDefaultNullability(
+              JdtUtils.findCurrentTypeBinding(variableDeclarationFragment)));
+      if (!variable.getTypeDescriptor().isTypeVariable()
+          && !variable.getTypeDescriptor().isPrimitive()) {
+        // Local variables default to nullable. A flow analysis pass will later tighten their type
+        // based on the values that are assigned to them.
+        variable.setTypeDescriptor(TypeDescriptors.toNullable(variable.getTypeDescriptor()));
+      }
+
       recordEnclosingType(variable, currentType);
       Expression initializer =
           variableDeclarationFragment.getInitializer() == null
