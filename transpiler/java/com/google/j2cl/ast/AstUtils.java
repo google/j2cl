@@ -531,7 +531,7 @@ public class AstUtils {
             .enclosingClassTypeDescriptor(boxType)
             .methodName(MethodDescriptor.VALUE_OF_METHOD_NAME)
             .returnTypeDescriptor(boxType)
-            .parameterTypeDescriptors(Arrays.asList(primitiveType))
+            .parameterTypeDescriptors(primitiveType)
             .build();
     return MethodCall.createMethodCall(null, valueOfMethodDescriptor, expression);
   }

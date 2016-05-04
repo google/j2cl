@@ -537,6 +537,14 @@ class ToStringRenderer {
       }
 
       @Override
+      public boolean enterVariable(Variable variable) {
+        print(variable.getTypeDescriptor());
+        print(" ");
+        print(variable.getName());
+        return false;
+      }
+
+      @Override
       public boolean enterVariableDeclarationFragment(
           VariableDeclarationFragment variableDeclarationFragment) {
         print(variableDeclarationFragment.getTypeDescriptor());

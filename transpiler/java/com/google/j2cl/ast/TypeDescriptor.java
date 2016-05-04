@@ -20,7 +20,9 @@ import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * A reference to a type.
@@ -494,6 +496,23 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       return null;
     }
     return enclosingTypeDescriptorFactory.create();
+  }
+
+  public Set<TypeDescriptor> getAllTypeVariables() {
+    Set<TypeDescriptor> typeVariables = new LinkedHashSet<>();
+    getAllTypeVariables(this, typeVariables);
+    return typeVariables;
+  }
+
+  private static void getAllTypeVariables(
+      TypeDescriptor typeDescriptor, Set<TypeDescriptor> typeVariables) {
+    for (TypeDescriptor typeArgumentTypeDescriptor : typeDescriptor.getTypeArgumentDescriptors()) {
+      if (typeArgumentTypeDescriptor.isTypeVariable) {
+        typeVariables.add(typeArgumentTypeDescriptor);
+      } else {
+        getAllTypeVariables(typeArgumentTypeDescriptor, typeVariables);
+      }
+    }
   }
 
   public ImmutableList<TypeDescriptor> getInterfacesTypeDescriptors() {

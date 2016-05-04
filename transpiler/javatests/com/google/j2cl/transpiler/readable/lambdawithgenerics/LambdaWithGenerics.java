@@ -5,11 +5,16 @@ interface MyInterface<T> {
 }
 
 public class LambdaWithGenerics {
-  public Error test(MyInterface<Error> intf, Error e) {
+  public <T> T test1(MyInterface<T> intf, T e) {
+    return intf.foo(e);
+  }
+
+  public Error test2(MyInterface<Error> intf, Error e) {
     return intf.foo(e);
   }
 
   public void testLambdaNoCapture() {
-    test(i -> i, new Error());
+    test1(i -> i, new Error());
+    test2(i -> i, new Error());
   }
 }

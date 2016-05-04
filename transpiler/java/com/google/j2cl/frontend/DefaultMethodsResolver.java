@@ -37,26 +37,34 @@ public class DefaultMethodsResolver {
    * Creates forwarding stubs in classes that 'inherit' a default method implementation.
    */
   public static void resolve(ITypeBinding typeBinding, JavaType javaType) {
-    if (typeBinding.isInterface() || JdtUtils.isAbstract(typeBinding.getModifiers())) {
+    if (javaType.isInterface() || javaType.isAbstract()) {
       // Only concrete classes inherit default methods. Nothing to do.
       return;
     }
 
     // Collect all super interfaces, in topological order with respect the subtype relationship;
     // i.e. subtypes always appear before supertypes.
-    Set<ITypeBinding> superInterfaces =
-        new TreeSet<>(
-            new Comparator<ITypeBinding>() {
-              @Override
-              public int compare(ITypeBinding thisTypeBinding, ITypeBinding thatTypeBinding) {
-                return thisTypeBinding == thatTypeBinding
-                    ? 0
-                    : (thisTypeBinding.isSubTypeCompatible(thatTypeBinding) ? -1 : 1);
-              }
-            });
+    Set<ITypeBinding> superInterfaces = collectSuperInterfaces(typeBinding);
 
-    collectSuperInterfaces(superInterfaces, typeBinding);
+    // Gather all (most specific) default methods declared through the interfaces of this class.
+    Map<String, IMethodBinding> applicableDefaultMethodsBySignature =
+        getApplicableDefaultMethodsBySignature(superInterfaces);
 
+    // Remove methods that are already implemented in the class or any of its superclasses
+    for (ITypeBinding implementingClass = typeBinding.isInterface() ? null : typeBinding;
+        implementingClass != null;
+        implementingClass = implementingClass.getSuperclass()) {
+      for (IMethodBinding implementedMethod : implementingClass.getDeclaredMethods()) {
+        applicableDefaultMethodsBySignature.remove(getMethodSignature(implementedMethod));
+      }
+    }
+
+    // Finally implement the methods by as forwarding stubs to the actual interface method.
+    implementDefaultMethods(javaType, applicableDefaultMethodsBySignature);
+  }
+
+  private static Map<String, IMethodBinding> getApplicableDefaultMethodsBySignature(
+      Set<ITypeBinding> superInterfaces) {
     // Gather all (most specific) default methods declared through the interfaces of this class.
     Map<String, IMethodBinding> applicableDefaultMethodsBySignature = new LinkedHashMap<>();
     for (ITypeBinding interfaceBinding : superInterfaces) {
@@ -71,22 +79,7 @@ public class DefaultMethodsResolver {
         applicableDefaultMethodsBySignature.put(signature, methodBinding);
       }
     }
-
-    // Remove methods that are already implemented in the class or any of its superclasses
-    ITypeBinding implementingClass = typeBinding;
-    do {
-      for (IMethodBinding implementedMethod : implementingClass.getDeclaredMethods()) {
-        applicableDefaultMethodsBySignature.remove(getMethodSignature(implementedMethod));
-      }
-    } while ((implementingClass = implementingClass.getSuperclass()) != null);
-
-    // Finally implement the methods by as forwarding stubs to the actual interface method.
-    for (IMethodBinding method : applicableDefaultMethodsBySignature.values()) {
-      MethodDescriptor targetMethod = JdtMethodUtils.createMethodDescriptor(method);
-      javaType.addMethod(
-          AstUtils.createStaticForwardingMethod(
-              targetMethod, javaType.getDescriptor(), "Default method forwarding stub."));
-    }
+    return applicableDefaultMethodsBySignature;
   }
 
   private static String getMethodSignature(IMethodBinding methodBinding) {
@@ -100,6 +93,24 @@ public class DefaultMethodsResolver {
     return key;
   }
 
+  private static Set<ITypeBinding> collectSuperInterfaces(ITypeBinding type) {
+    // Collect all super interfaces, in topological order with respect the subtype relationship;
+    // i.e. subtypes always appear before supertypes.
+    Set<ITypeBinding> superInterfaces =
+        new TreeSet<>(
+            new Comparator<ITypeBinding>() {
+              @Override
+              public int compare(ITypeBinding thisTypeBinding, ITypeBinding thatTypeBinding) {
+                return thisTypeBinding == thatTypeBinding
+                    ? 0
+                    : (thisTypeBinding.isSubTypeCompatible(thatTypeBinding) ? -1 : 1);
+              }
+            });
+
+    collectSuperInterfaces(superInterfaces, type);
+    return superInterfaces;
+  }
+
   private static void collectSuperInterfaces(Set<ITypeBinding> collected, ITypeBinding type) {
     if (type.isInterface()) {
       collected.add(type);
@@ -111,4 +122,16 @@ public class DefaultMethodsResolver {
       collectSuperInterfaces(collected, interfaceType);
     }
   }
+
+  private static void implementDefaultMethods(
+      JavaType lambdaJavaType, Map<String, IMethodBinding> applicableDefaultMethodsBySignature) {
+    // Finally implement the methods by as forwarding stubs to the actual interface method.
+    for (IMethodBinding method : applicableDefaultMethodsBySignature.values()) {
+      MethodDescriptor targetMethod = JdtMethodUtils.createMethodDescriptor(method);
+      lambdaJavaType.addMethod(
+          AstUtils.createStaticForwardingMethod(
+              targetMethod, lambdaJavaType.getDescriptor(), "Default method forwarding stub."));
+    }
+  }
+
 }

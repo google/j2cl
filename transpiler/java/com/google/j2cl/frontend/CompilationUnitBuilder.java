@@ -109,9 +109,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * Creates a J2CL Java AST from the AST provided by JDT.
@@ -1026,10 +1028,11 @@ public class CompilationUnitBuilder {
               lambdaMethodBinding.getName(),
               lambdaMethodBinding.getKey());
 
+      ITypeBinding functionalInterfaceTypeBinding = expression.resolveTypeBinding();
       JavaType lambdaType =
           JdtUtils.createLambdaJavaType(
               lambdaBinaryName,
-              expression.resolveTypeBinding(),
+              functionalInterfaceTypeBinding,
               JdtUtils.createTypeDescriptor(enclosingClassTypeBinding));
       pushType(lambdaType);
       TypeDescriptor lambdaTypeDescriptor = lambdaType.getDescriptor();
@@ -1042,15 +1045,14 @@ public class CompilationUnitBuilder {
 
       // Construct and add SAM method that delegates to the lambda method.
       Method samMethod =
-          JdtUtils.createSamMethod(expression.resolveTypeBinding(), lambdaMethod.getDescriptor());
+          JdtUtils.createSamMethod(functionalInterfaceTypeBinding, lambdaMethod.getDescriptor());
       lambdaType.addMethod(samMethod);
 
       // Add fields for captured local variables.
       for (Variable capturedVariable : capturesByTypeDescriptor.get(lambdaTypeDescriptor)) {
-        FieldDescriptor fieldDescriptor =
-            AstUtils.getFieldDescriptorForCapture(lambdaTypeDescriptor, capturedVariable);
         lambdaType.addField(
-            Field.Builder.fromDefault(fieldDescriptor)
+            Field.Builder.fromDefault(
+                    AstUtils.getFieldDescriptorForCapture(lambdaTypeDescriptor, capturedVariable))
                 .capturedVariable(capturedVariable)
                 .setPosition(-1) /* Position is not important */
                 .build());
@@ -1064,6 +1066,44 @@ public class CompilationUnitBuilder {
                     lambdaTypeDescriptor, lambdaType.getEnclosingTypeDescriptor()),
                 -1 /* Position is not important */));
       }
+
+      // Collect all type variables that are in context. Those might come from the functional
+      // interface instantiation and also from the captures (which are the fields in this synthetic
+      // anonymous inner class, e.g.
+      //
+      // interface Func<T, U> {
+      //   U apply(T t);
+      // }
+      //
+      // static <T> void f() {
+      //    List<T>  var = ...
+      //    m((String s)-> var.get(0));
+      //
+      // The lambda class here should be declared
+      //
+      // class lambdaimplememntation<T> implements Func<String, T> {
+      //   List<T> captured$var;
+      //   ....
+      //   public T apply(String t) {return captured$var.get(0); }
+      // }
+      //
+      // and type variable T in this example comes for the captured variable "var" fo type List<T>.
+      //
+
+      Set<TypeDescriptor> lambdaTypeParameterTypeDescriptors = new LinkedHashSet<>();
+      lambdaTypeParameterTypeDescriptors.addAll(lambdaTypeDescriptor.getAllTypeVariables());
+      for (Field field : lambdaType.getFields()) {
+        lambdaTypeParameterTypeDescriptors.addAll(
+            field.getDescriptor().getTypeDescriptor().getAllTypeVariables());
+      }
+      // Add the relevant type parameters to the anonymous inner class that implements the lambda.
+      lambdaType.setDescriptor(
+          TypeDescriptor.Builder.from(lambdaType.getDescriptor())
+              .setTypeArgumentDescriptors(new ArrayList<>(lambdaTypeParameterTypeDescriptors))
+              .build());
+
+      // Resolve default methods
+      DefaultMethodsResolver.resolve(functionalInterfaceTypeBinding, lambdaType);
 
       // Add lambda class to compilation unit.
       j2clCompilationUnit.addType(lambdaType);
@@ -1863,11 +1903,9 @@ public class CompilationUnitBuilder {
     // freshness of the PackageInfoCache can be trusted.
     Collections.sort(
         entries,
-        new Comparator<Entry<String, org.eclipse.jdt.core.dom.CompilationUnit>>() {
+        new Comparator<Entry<String, ?>>() {
           @Override
-          public int compare(
-              Entry<String, org.eclipse.jdt.core.dom.CompilationUnit> thisEntry,
-              Entry<String, org.eclipse.jdt.core.dom.CompilationUnit> thatEntry) {
+          public int compare(Entry<String, ?> thisEntry, Entry<String, ?> thatEntry) {
             String thisFilePath = thisEntry.getKey();
             String thatFilePath = thatEntry.getKey();
             boolean thisIsPackageInfo = thisFilePath.endsWith("package-info.java");

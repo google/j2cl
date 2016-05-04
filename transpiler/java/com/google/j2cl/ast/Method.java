@@ -139,6 +139,7 @@ public class Method extends Node {
     private boolean isOverride;
     private String jsDocDescription;
     private boolean isFinal;
+    private TypeDescriptor returnTypeDescriptor;
     private SourceInfo javaSourceInfo;
     private SourceInfo outputSourceInfo;
 
@@ -151,6 +152,7 @@ public class Method extends Node {
       builder.isOverride = method.isOverride();
       builder.jsDocDescription = method.getJsDocDescription();
       builder.isFinal = method.isFinal();
+      builder.returnTypeDescriptor = method.getDescriptor().getReturnTypeDescriptor();
       builder.javaSourceInfo = method.getBody().getJavaSourceInfo();
       builder.outputSourceInfo = method.getBody().getOutputSourceInfo();
       return builder;
@@ -169,6 +171,11 @@ public class Method extends Node {
 
     public Builder statement(int index, Statement statement) {
       statements.add(index, statement);
+      return this;
+    }
+
+    public Builder returnTypeDescpriptor(TypeDescriptor returnTypeDescriptor) {
+      this.returnTypeDescriptor = returnTypeDescriptor;
       return this;
     }
 
@@ -206,8 +213,11 @@ public class Method extends Node {
       finalParameters.addAll(addedParameterVariables);
 
       MethodDescriptor finalMethodDescriptor =
-          MethodDescriptors.createModifiedCopy(
-              originalMethodDescriptor, addedParameterTypeDescriptors);
+          MethodDescriptor.Builder.from(
+                  MethodDescriptors.createModifiedCopy(
+                      originalMethodDescriptor, addedParameterTypeDescriptors))
+              .returnTypeDescriptor(returnTypeDescriptor)
+              .build();
 
       Block body = new Block(statements);
       body.setJavaSourceInfo(javaSourceInfo);

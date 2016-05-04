@@ -219,7 +219,7 @@ public class TypeProxyUtils {
     return classComponents;
   }
 
-  static List<TypeDescriptor> getTypeArgumentDescriptors(ITypeBinding typeBinding) {
+  public static List<TypeDescriptor> getTypeArgumentDescriptors(ITypeBinding typeBinding) {
     List<TypeDescriptor> typeArgumentDescriptors = new ArrayList<>();
     if (typeBinding.isParameterizedType()) {
       typeArgumentDescriptors.addAll(createTypeDescriptors(typeBinding.getTypeArguments()));

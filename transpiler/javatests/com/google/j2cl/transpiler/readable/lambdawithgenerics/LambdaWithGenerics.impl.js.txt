@@ -12,6 +12,7 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let LambdaWithGenerics$0foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$0foo$impl');
+let LambdaWithGenerics$1foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$1foo$impl');
 let MyInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
@@ -48,12 +49,24 @@ class LambdaWithGenerics extends Object {
   }
 
   /**
+   * @template M_T
+   * @param {MyInterface<M_T>} intf
+   * @param {M_T} e
+   * @return {M_T}
+   * @public
+   */
+  m_test1__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Object(
+      intf, e) {
+    return intf.m_foo__java_lang_Object(e);
+  }
+
+  /**
    * @param {MyInterface<Error>} intf
    * @param {Error} e
    * @return {Error}
    * @public
    */
-  m_test__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Error(
+  m_test2__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Error(
       intf, e) {
     return intf.m_foo__java_lang_Object(e);
   }
@@ -63,8 +76,13 @@ class LambdaWithGenerics extends Object {
    * @public
    */
   m_testLambdaNoCapture() {
-    this.m_test__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Error(
+    this.m_test1__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Object(
         LambdaWithGenerics$0foo
+            .$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
+                this),
+        Error.$create());
+    this.m_test2__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Error(
+        LambdaWithGenerics$1foo
             .$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
                 this),
         Error.$create());
@@ -97,6 +115,8 @@ class LambdaWithGenerics extends Object {
   static $clinit() {
     LambdaWithGenerics$0foo = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$0foo$impl');
+    LambdaWithGenerics$1foo = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$1foo$impl');
     MyInterface = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface$impl');
     Class = goog.module.get('java.lang.Class$impl');

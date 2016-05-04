@@ -21,8 +21,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 import com.google.common.collect.BiMap;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableList;
@@ -31,6 +33,7 @@ import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.j2cl.ast.TypeDescriptor.Builder;
 import com.google.j2cl.ast.TypeDescriptor.MethodDescriptorFactory;
 import com.google.j2cl.ast.TypeDescriptor.TypeDescriptorFactory;
 import com.google.j2cl.ast.TypeDescriptor.TypeDescriptorsFactory;
@@ -646,7 +649,9 @@ public class TypeDescriptors {
         new TypeDescriptorFactory() {
           @Override
           public TypeDescriptor create() {
-            return self[0];
+            return Builder.from(self[0])
+                .setTypeArgumentDescriptors(Collections.emptyList())
+                .build();
           }
         };
     TypeDescriptorFactory superTypeDescriptorFactory =
@@ -699,6 +704,17 @@ public class TypeDescriptors {
             .setSuperTypeDescriptorFactory(superTypeDescriptorFactory)
             .setUniqueId(
                 createUniqueId(true, false, null, 0, false, null, binaryName, null, false, null))
+            .setTypeArgumentDescriptors(
+                FluentIterable.from(
+                        TypeProxyUtils.getTypeArgumentDescriptors(lambdaInterfaceBinding))
+                    .filter(
+                        new Predicate<TypeDescriptor>() {
+                          @Override
+                          public boolean apply(TypeDescriptor typeDescriptor) {
+                            return typeDescriptor.isTypeVariable();
+                          }
+                        })
+                    .toList())
             .setVisibility(Visibility.PRIVATE)
             .build();
     self[0] = typeDescriptor;
