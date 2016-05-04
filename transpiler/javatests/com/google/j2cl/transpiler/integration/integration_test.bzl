@@ -20,15 +20,18 @@ integration_test(
 """
 
 load("/javascript/closure/builddefs", "CLOSURE_COMPILER_FLAGS_FULL_TYPED")
+load("/javascript/tools/jscompiler/builddefs/flags", "ADVANCED_OPTIMIZATIONS_FLAGS")
 load("/third_party/java/j2cl/j2cl_library", "j2cl_library")
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_package")
 load("/tools/build_defs/label/def", "absolute_label")
 
 # Copy the Closure flags but remove --variable_renaming=ALL since it interferes
 # with tests and can't be turned off.
-_CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
+# TODO: centralize these in j2cl_util.bzl
+PREDEFINED_FLAGS = [
     flag
-    for flag in CLOSURE_COMPILER_FLAGS_FULL_TYPED
+    for flag in (CLOSURE_COMPILER_FLAGS_FULL_TYPED +
+                 ADVANCED_OPTIMIZATIONS_FLAGS)
     if flag != "--variable_renaming=ALL"
 ]
 
@@ -105,14 +108,10 @@ def integration_test(
   native.js_binary(
       name="optimized_js",
       srcs=["OptHarness.js"],
-      defs=_CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
+      defs=PREDEFINED_FLAGS + [
           "--j2cl_pass",
           "--language_in=ECMASCRIPT6_STRICT",
           "--language_out=ECMASCRIPT5",
-          "--remove_dead_assignments",
-          "--remove_dead_code",
-          "--remove_unused_local_vars=ON",
-          "--remove_unused_vars",
           "--norewrite_polyfills",
           "--variable_renaming=ALL",
           "--jscomp_off=lateProvide",
@@ -125,14 +124,10 @@ def integration_test(
   native.js_binary(
       name="readable_optimized_js",
       srcs=["OptHarness.js"],
-      defs=_CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
+      defs=PREDEFINED_FLAGS + [
           "--j2cl_pass",
           "--language_in=ECMASCRIPT6_STRICT",
           "--language_out=ECMASCRIPT5",
-          "--remove_dead_assignments",
-          "--remove_dead_code",
-          "--remove_unused_local_vars=ON",
-          "--remove_unused_vars",
           "--norewrite_polyfills",
           "--pretty_print",
           "--property_renaming=OFF",
@@ -275,7 +270,7 @@ def integration_test(
       srcs=["TestHarness.js"],
       compile=1,
       compiler="//javascript/tools/jscompiler:head",
-      defs=_CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
+      defs=PREDEFINED_FLAGS + [
           "--j2cl_pass",
           "--export_test_functions=true",
           "--language_in=ECMASCRIPT6_STRICT",
