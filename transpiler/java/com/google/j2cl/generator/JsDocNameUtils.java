@@ -161,6 +161,9 @@ public class JsDocNameUtils {
     Preconditions.checkArgument(typeDescriptor.isNullable());
 
     // Special cases.
+    if (typeDescriptor == TypeDescriptors.get().unknownType) {
+      return "?";
+    }
     switch (typeDescriptor.getSourceName()) {
       case TypeDescriptors.BYTE_TYPE_NAME:
       case TypeDescriptors.SHORT_TYPE_NAME:

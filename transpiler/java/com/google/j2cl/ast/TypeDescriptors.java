@@ -78,6 +78,8 @@ public class TypeDescriptors {
   public TypeDescriptor javaLangComparable;
   public TypeDescriptor javaLangCharSequence;
 
+  public TypeDescriptor unknownType;
+
   public static final String SHORT_TYPE_NAME = "short";
   public static final String LONG_TYPE_NAME = "long";
   public static final String FLOAT_TYPE_NAME = "float";
@@ -154,6 +156,10 @@ public class TypeDescriptors {
     typeDescriptors.javaLangNumber = createJavaLangNumber(ast);
     typeDescriptors.javaLangComparable = createJavaLangComparable(ast);
     typeDescriptors.javaLangCharSequence = createJavaLangCharSequence(ast);
+
+    typeDescriptors.unknownType = TypeDescriptors.createExactly(
+        Collections.emptyList(), Lists.newArrayList("$$unknown$$"), false,
+        Collections.emptyList());
 
     initBoxedPrimitiveTypeMapping(typeDescriptors);
 
@@ -936,7 +942,15 @@ public class TypeDescriptors {
     }
 
     // Objects.
-    return NullLiteral.NULL;
+    if (typeDescriptor.isNullable()) {
+      return NullLiteral.NULL;
+    }
+    // If the type is not nullable, we can't assign null to it, so we cast to the unknown type to
+    // avoid JSCompiler errors. It's assumed that the Java code has already been checked and this
+    // assignment is only temporary and it will be overwritten before the end of the constructor.
+    return JsTypeAnnotation.createTypeAnnotation(
+        NullLiteral.NULL,
+        TypeDescriptors.get().unknownType);
   }
 
   private static String createUniqueId(
