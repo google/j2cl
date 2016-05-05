@@ -173,12 +173,17 @@ public class InsertCastOnNullabilityMismatch extends AbstractRewriter {
       }
     }
 
-    if (actualType.isArray()) {
-      // TODO(simionato): Add support for arrays.
-      return actualType;
-    }
-
-    if (requiredType.isParameterizedType()) {
+    if (requiredType.isArray() && actualType.isArray()) {
+      TypeDescriptor requiredLeafType = requiredType.getLeafTypeDescriptor();
+      TypeDescriptor actualLeafType = actualType.getLeafTypeDescriptor();
+      TypeDescriptor fixedLeafType =
+          getTypeWithMatchingNullability(requiredLeafType, actualLeafType);
+      if (actualLeafType != fixedLeafType) {
+        actualType =
+            TypeDescriptors.getForArray(
+                fixedLeafType, actualType.getDimensions(), actualType.isNullable());
+      }
+    } else if (requiredType.isParameterizedType()) {
       TypeDescriptor matchingType =
           TypeDescriptors.getMatchingTypeInHierarchy(actualType, requiredType);
       if (matchingType == null) {

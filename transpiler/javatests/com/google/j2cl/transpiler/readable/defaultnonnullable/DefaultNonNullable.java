@@ -91,6 +91,8 @@ public class DefaultNonNullable {
     if (true) {
       return x;
     }
+    String[] myArray = "Hel-lo".split("-");
+    m3(myArray[0]);
     // Cast needed since NullableClass.getString returns ?string.
     return NullableClass.getString();
   }
