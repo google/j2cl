@@ -19,26 +19,19 @@ public class Main {
     public static final char CHAR_COMPILE_TIME_CONSTANT = 100;
     public static final boolean BOOLEAN_COMPILE_TIME_CONSTANT = true;
 
-    public static String STRING_CONSTANT = "qwer";
-    public static byte BYTE_CONSTANT = 100;
-    public static short SHORT_CONSTANT = 100;
-    public static int INT_CONSTANT = 100;
-    public static long LONG_CONSTANT = 100;
-    public static float FLOAT_CONSTANT = 100;
-    public static double DOUBLE_CONSTANT = 100;
-    public static char CHAR_CONSTANT = 100;
-    public static boolean BOOLEAN_CONSTANT = true;
+    public static Object initialized = new Object();
 
     private static String init() {
-      assert Foo.STRING_COMPILE_TIME_CONSTANT != Foo.STRING_CONSTANT;
-      assert Foo.BYTE_COMPILE_TIME_CONSTANT != Foo.BYTE_CONSTANT;
-      assert Foo.SHORT_COMPILE_TIME_CONSTANT != Foo.SHORT_CONSTANT;
-      assert Foo.INT_COMPILE_TIME_CONSTANT != Foo.INT_CONSTANT;
-      assert Foo.LONG_COMPILE_TIME_CONSTANT != Foo.LONG_CONSTANT;
-      assert Foo.FLOAT_COMPILE_TIME_CONSTANT != Foo.FLOAT_CONSTANT;
-      assert Foo.DOUBLE_COMPILE_TIME_CONSTANT != Foo.DOUBLE_CONSTANT;
-      assert Foo.CHAR_COMPILE_TIME_CONSTANT != Foo.CHAR_CONSTANT;
-      assert Foo.BOOLEAN_COMPILE_TIME_CONSTANT != Foo.BOOLEAN_CONSTANT;
+      assert initialized == null;
+      assert STRING_COMPILE_TIME_CONSTANT == "qwer";
+      assert BYTE_COMPILE_TIME_CONSTANT == 100;
+      assert SHORT_COMPILE_TIME_CONSTANT == 100;
+      assert INT_COMPILE_TIME_CONSTANT == 100;
+      assert LONG_COMPILE_TIME_CONSTANT == 100;
+      assert FLOAT_COMPILE_TIME_CONSTANT == 100;
+      assert DOUBLE_COMPILE_TIME_CONSTANT == 100;
+      assert CHAR_COMPILE_TIME_CONSTANT == 100;
+      assert BOOLEAN_COMPILE_TIME_CONSTANT == true;
 
       return Bar.circular;
     }
@@ -59,26 +52,19 @@ public class Main {
     public static final char CHAR_COMPILE_TIME_CONSTANT = 100;
     public static final boolean BOOLEAN_COMPILE_TIME_CONSTANT = true;
 
-    public static String STRING_CONSTANT = "qwer";
-    public static byte BYTE_CONSTANT = 100;
-    public static short SHORT_CONSTANT = 100;
-    public static int INT_CONSTANT = 100;
-    public static long LONG_CONSTANT = 100;
-    public static float FLOAT_CONSTANT = 100;
-    public static double DOUBLE_CONSTANT = 100;
-    public static char CHAR_CONSTANT = 100;
-    public static boolean BOOLEAN_CONSTANT = true;
+    public static Object initialized = new Object();
 
     private static String init() {
-      assert Bar.STRING_COMPILE_TIME_CONSTANT != Bar.STRING_CONSTANT;
-      assert Bar.BYTE_COMPILE_TIME_CONSTANT != Bar.BYTE_CONSTANT;
-      assert Bar.SHORT_COMPILE_TIME_CONSTANT != Bar.SHORT_CONSTANT;
-      assert Bar.INT_COMPILE_TIME_CONSTANT != Bar.INT_CONSTANT;
-      assert Bar.LONG_COMPILE_TIME_CONSTANT != Bar.LONG_CONSTANT;
-      assert Bar.FLOAT_COMPILE_TIME_CONSTANT != Bar.FLOAT_CONSTANT;
-      assert Bar.DOUBLE_COMPILE_TIME_CONSTANT != Bar.DOUBLE_CONSTANT;
-      assert Bar.CHAR_COMPILE_TIME_CONSTANT != Bar.CHAR_CONSTANT;
-      assert Bar.BOOLEAN_COMPILE_TIME_CONSTANT != Bar.BOOLEAN_CONSTANT;
+      assert initialized == null;
+      assert STRING_COMPILE_TIME_CONSTANT == "qwer";
+      assert BYTE_COMPILE_TIME_CONSTANT == 100;
+      assert SHORT_COMPILE_TIME_CONSTANT == 100;
+      assert INT_COMPILE_TIME_CONSTANT == 100;
+      assert LONG_COMPILE_TIME_CONSTANT == 100;
+      assert FLOAT_COMPILE_TIME_CONSTANT == 100;
+      assert DOUBLE_COMPILE_TIME_CONSTANT == 100;
+      assert CHAR_COMPILE_TIME_CONSTANT == 100;
+      assert BOOLEAN_COMPILE_TIME_CONSTANT == true;
 
       return Foo.circular;
     }

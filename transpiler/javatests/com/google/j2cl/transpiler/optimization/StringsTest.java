@@ -50,4 +50,19 @@ class StringsTest {
   public void simpleSameOptimizes() {
     assertFunctionMatches(getStringSameString(), "return !0");
   }
+
+  private static boolean staticField = "asd".equals("asd");
+
+  @JsMethod
+  public static boolean stringEqualsStringOnStatic() {
+    return staticField;
+  }
+
+  @JsProperty
+  private static native Object getStringEqualsStringOnStatic();
+
+  @Test
+  public void staticFieldEqualsOptimizes() {
+    assertFunctionMatches(getStringEqualsStringOnStatic(), "return !0");
+  }
 }
