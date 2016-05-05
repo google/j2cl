@@ -83,11 +83,7 @@ public class FixAnonymousClassConstructors extends AbstractRewriter {
       return method;
     }
     // Add parameters to the constructor.
-    Method.Builder methodBuilder = Method.Builder.from(method);
-    for (Variable parameter : constructorParameters) {
-      methodBuilder.parameter(parameter, parameter.getTypeDescriptor());
-    }
-    return methodBuilder.build();
+    return Method.Builder.from(method).addParameters(constructorParameters).build();
   }
 
   @Override
@@ -149,10 +145,7 @@ public class FixAnonymousClassConstructors extends AbstractRewriter {
       if (!method.isConstructor() || parameterForSuperCallQualifier == null) {
         return method;
       }
-      return Method.Builder.from(method)
-          .parameter(
-              parameterForSuperCallQualifier, parameterForSuperCallQualifier.getTypeDescriptor())
-          .build();
+      return Method.Builder.from(method).addParameters(parameterForSuperCallQualifier).build();
     }
 
     @Override

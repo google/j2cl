@@ -383,17 +383,14 @@ public class CompilationUnitBuilder {
           methodDeclaration.getBody() == null ? new Block() : convert(methodDeclaration.getBody());
 
       IMethodBinding methodBinding = methodDeclaration.resolveBinding();
-      Method method =
-          new Method(
-              JdtUtils.createMethodDescriptor(methodBinding),
-              parameters,
-              body,
-              JdtUtils.isAbstract(methodBinding.getModifiers()),
-              JdtUtils.isJsOverride(methodBinding),
-              JdtUtils.isFinal(methodBinding.getModifiers()),
-              null);
-
-      return method;
+      return Method.Builder.fromDefault()
+          .setMethodDescriptor(JdtUtils.createMethodDescriptor(methodBinding))
+          .setParameters(parameters)
+          .addStatements(body.getStatements())
+          .isAbstract(JdtUtils.isAbstract(methodBinding.getModifiers()))
+          .isOverride(JdtUtils.isJsOverride(methodBinding))
+          .isFinal(JdtUtils.isFinal(methodBinding.getModifiers()))
+          .build();
     }
 
     private ArrayAccess convert(org.eclipse.jdt.core.dom.ArrayAccess expression) {
@@ -1169,7 +1166,11 @@ public class CompilationUnitBuilder {
               .parameterTypeDescriptors(parameterTypeDescriptors)
               .returnTypeDescriptor(returnTypeDescriptor)
               .build();
-      return new Method(methodDescriptor, parameters, body);
+      return Method.Builder.fromDefault()
+          .setMethodDescriptor(methodDescriptor)
+          .setParameters(parameters)
+          .addStatements(body.getStatements())
+          .build();
     }
 
     private AssertStatement convert(org.eclipse.jdt.core.dom.AssertStatement statement) {

@@ -17,12 +17,16 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.processors.Context;
 import com.google.j2cl.ast.processors.Visitable;
 import com.google.j2cl.ast.sourcemap.SourceInfo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -39,11 +43,7 @@ public class Method extends Node {
   private String jsDocDescription;
   private boolean isFinal;
 
-  public Method(MethodDescriptor methodDescriptor, List<Variable> parameters, Block body) {
-    this(methodDescriptor, parameters, body, false, false, false, null);
-  }
-
-  public Method(
+  private Method(
       MethodDescriptor methodDescriptor,
       List<Variable> parameters,
       Block body,
@@ -130,52 +130,70 @@ public class Method extends Node {
    */
   public static class Builder {
 
-    private MethodDescriptor originalMethodDescriptor;
-    private List<Variable> originalParameterVariables = new ArrayList<>();
-    private List<Variable> addedParameterVariables = new ArrayList<>();
-    private List<TypeDescriptor> addedParameterTypeDescriptors = new ArrayList<>();
+    private MethodDescriptor methodDescriptor;
+    private List<Variable> parameters = new ArrayList<>();
     private List<Statement> statements = new ArrayList<>();
     private boolean isAbstract;
     private boolean isOverride;
     private String jsDocDescription;
     private boolean isFinal;
-    private TypeDescriptor returnTypeDescriptor;
-    private SourceInfo javaSourceInfo;
-    private SourceInfo outputSourceInfo;
+    private SourceInfo javaSourceInfo = SourceInfo.UNKNOWN_SOURCE_INFO;
+    private SourceInfo outputSourceInfo = SourceInfo.UNKNOWN_SOURCE_INFO;
+
+    public static Builder fromDefault() {
+      return new Builder();
+    }
 
     public static Builder from(Method method) {
       Builder builder = new Builder();
-      builder.originalMethodDescriptor = method.getDescriptor();
-      builder.originalParameterVariables = Lists.newArrayList(method.getParameters());
+      builder.methodDescriptor = method.getDescriptor();
+      builder.parameters = Lists.newArrayList(method.getParameters());
       builder.statements = Lists.newArrayList(method.getBody().getStatements());
       builder.isAbstract = method.isAbstract();
       builder.isOverride = method.isOverride();
       builder.jsDocDescription = method.getJsDocDescription();
       builder.isFinal = method.isFinal();
-      builder.returnTypeDescriptor = method.getDescriptor().getReturnTypeDescriptor();
       builder.javaSourceInfo = method.getBody().getJavaSourceInfo();
       builder.outputSourceInfo = method.getBody().getOutputSourceInfo();
       return builder;
     }
 
-    public Builder parameter(Variable parameterVariable, TypeDescriptor parameterTypeDescriptor) {
-      addedParameterVariables.add(parameterVariable);
-      addedParameterTypeDescriptors.add(parameterTypeDescriptor);
+    public Builder addParameters(Variable... parameters) {
+      return addParameters(Arrays.asList(parameters));
+    }
+
+    public Builder addParameters(Iterable<Variable> newParameters) {
+      Iterables.addAll(parameters, newParameters);
       return this;
     }
 
-    public Builder statement(Statement statement) {
-      statements.add(statement);
+    public Builder addStatements(Statement... statements) {
+      Collections.addAll(this.statements, statements);
       return this;
     }
 
-    public Builder statement(int index, Statement statement) {
-      statements.add(index, statement);
+    public Builder addStatements(List<Statement> statements) {
+      this.statements.addAll(statements);
       return this;
     }
 
-    public Builder returnTypeDescpriptor(TypeDescriptor returnTypeDescriptor) {
-      this.returnTypeDescriptor = returnTypeDescriptor;
+    public Builder addStatement(int index, Statement statement) {
+      this.statements.add(index, statement);
+      return this;
+    }
+
+    public Builder setParameters(Variable... parameters) {
+      this.parameters = Arrays.asList(parameters);
+      return this;
+    }
+
+    public Builder setParameters(List<Variable> parameters) {
+      this.parameters = new ArrayList<>(parameters);
+      return this;
+    }
+
+    public Builder setMethodDescriptor(MethodDescriptor methodDescriptor) {
+      this.methodDescriptor = methodDescriptor;
       return this;
     }
 
@@ -189,9 +207,9 @@ public class Method extends Node {
       return this;
     }
 
-    public Builder enclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
-      this.originalMethodDescriptor =
-          MethodDescriptor.Builder.from(originalMethodDescriptor)
+    public Builder setEnclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
+      this.methodDescriptor =
+          MethodDescriptor.Builder.from(methodDescriptor)
               .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
               .build();
       return this;
@@ -202,35 +220,46 @@ public class Method extends Node {
       return this;
     }
 
-    public Builder jsDocDescription(String jsDocDescription) {
+    public Builder isFinal(boolean isFinal) {
+      this.isFinal = isFinal;
+      return this;
+    }
+
+    public Builder isAbstract(boolean isAbstract) {
+      this.isAbstract = isAbstract;
+      return this;
+    }
+
+    public Builder setJsDocDescription(String jsDocDescription) {
       this.jsDocDescription = jsDocDescription;
       return this;
     }
 
     public Method build() {
-      List<Variable> finalParameters = new ArrayList<>();
-      finalParameters.addAll(originalParameterVariables);
-      finalParameters.addAll(addedParameterVariables);
-
-      MethodDescriptor finalMethodDescriptor =
-          MethodDescriptor.Builder.from(
-                  MethodDescriptors.createModifiedCopy(
-                      originalMethodDescriptor, addedParameterTypeDescriptors))
-              .returnTypeDescriptor(returnTypeDescriptor)
-              .build();
-
       Block body = new Block(statements);
       body.setJavaSourceInfo(javaSourceInfo);
       body.setOutputSourceInfo(outputSourceInfo);
-
-      return new Method(
-          finalMethodDescriptor,
-          finalParameters,
-          body,
-          isAbstract,
-          isOverride,
-          isFinal,
-          jsDocDescription);
+      Method method =
+          new Method(
+              // Update method descriptor parameter types from actual parameter types.
+              MethodDescriptor.Builder.from(methodDescriptor)
+                  .parameterTypeDescriptors(
+                      Iterables.transform(
+                          parameters,
+                          new Function<Variable, TypeDescriptor>() {
+                            @Override
+                            public TypeDescriptor apply(Variable parameter) {
+                              return parameter.getTypeDescriptor();
+                            }
+                          }))
+                  .build(),
+              parameters,
+              body,
+              isAbstract,
+              isOverride,
+              isFinal,
+              jsDocDescription);
+      return method;
     }
   }
 }

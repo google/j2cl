@@ -21,7 +21,6 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryOperator;
-import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldDescriptor;
@@ -602,16 +601,14 @@ public class JdtUtils {
                 .equalsIgnoreNullability(TypeDescriptors.get().primitiveVoid)
             ? new ExpressionStatement(callLambda)
             : new ReturnStatement(callLambda, samMethodDescriptor.getReturnTypeDescriptor());
-    Method samMethod =
-        new Method(
-            samMethodDescriptor,
-            parameters,
-            new Block(statement),
-            false,
-            true,
-            true, // cannot be overridden, thus is final.
-            null);
-    return samMethod;
+
+    return Method.Builder.fromDefault()
+        .setMethodDescriptor(samMethodDescriptor)
+        .setParameters(parameters)
+        .addStatements(statement)
+        .isOverride(true)
+        .isFinal(true)
+        .build();
   }
 
   /**

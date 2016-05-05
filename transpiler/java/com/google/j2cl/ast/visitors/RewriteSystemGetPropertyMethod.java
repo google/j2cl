@@ -50,7 +50,8 @@ public class RewriteSystemGetPropertyMethod extends AbstractRewriter {
     return Method.Builder.from(method)
         .clearStatements()
         // TODO: integrate closures goog.define here.
-        .statement(new ReturnStatement(returnValueExpression, TypeDescriptors.get().javaLangString))
+        .addStatements(
+            new ReturnStatement(returnValueExpression, TypeDescriptors.get().javaLangString))
         .build();
   }
 }

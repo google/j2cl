@@ -378,15 +378,15 @@ public class AstUtils {
             .addParameter(outerclassTypeDescriptor)
             .build();
 
-    Expression newInnerClass = new NewInstance(null, newInnerclassConstructorDescriptor, arguments);
-    List<Statement> statements = new ArrayList<>();
-    statements.add(
-        new ReturnStatement(
-            newInnerClass, innerclassConstructorDescriptor.getReturnTypeDescriptor()));
-    // return new InnerClass();
-    Block body = new Block(statements);
-
-    return new Method(methodDescriptor, innerclassConstructor.getParameters(), body);
+    return Method.Builder.fromDefault()
+        .setMethodDescriptor(methodDescriptor)
+        .setParameters(innerclassConstructor.getParameters())
+        // return new InnerClass();
+        .addStatements(
+            new ReturnStatement(
+                new NewInstance(null, newInnerclassConstructorDescriptor, arguments),
+                innerclassConstructorDescriptor.getReturnTypeDescriptor()))
+        .build();
   }
 
   /**
@@ -451,14 +451,13 @@ public class AstUtils {
             ? new ExpressionStatement(forwardingMethodCall)
             : new ReturnStatement(
                 forwardingMethodCall, fromMethodDescriptor.getReturnTypeDescriptor());
-    return new Method(
-        fromMethodDescriptor,
-        parameters,
-        new Block(statement),
-        false,
-        true,
-        false,
-        jsDocDescription);
+    return Method.Builder.fromDefault()
+        .setMethodDescriptor(fromMethodDescriptor)
+        .setParameters(parameters)
+        .addStatements(statement)
+        .isOverride(true)
+        .setJsDocDescription(jsDocDescription)
+        .build();
   }
 
   /**
@@ -840,7 +839,11 @@ public class AstUtils {
     newParameters.addAll(method.getParameters()); // original parameters in the instance method.
 
     // Add the static method to current type.
-    return new Method(newMethodDescriptor, newParameters, new Block(method.getBody()));
+    return Method.Builder.fromDefault()
+        .setMethodDescriptor(newMethodDescriptor)
+        .setParameters(newParameters)
+        .addStatements(method.getBody().getStatements())
+        .build();
   }
 
   /**

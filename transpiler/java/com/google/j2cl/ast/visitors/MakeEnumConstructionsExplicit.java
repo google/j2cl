@@ -56,10 +56,7 @@ public class MakeEnumConstructionsExplicit extends AbstractRewriter {
     if (!method.isConstructor() || !isEnumOrSubclass(getCurrentJavaType())) {
       return method;
     }
-    return Method.Builder.from(method)
-        .parameter(nameVariable, nameVariable.getTypeDescriptor())
-        .parameter(ordinalVariable, ordinalVariable.getTypeDescriptor())
-        .build();
+    return Method.Builder.from(method).addParameters(nameVariable, ordinalVariable).build();
   }
 
   @Override

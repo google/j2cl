@@ -106,7 +106,8 @@ public interface Invocation extends MemberReference {
       finalArguments.addAll(additionalArguments);
 
       MethodDescriptor finalMethodDescriptor =
-          MethodDescriptors.createModifiedCopy(originalMethodDescriptor, additionalTypeDescriptors);
+          MethodDescriptors.createWithExtraParameters(
+              originalMethodDescriptor, additionalTypeDescriptors);
 
       return doCreateInvocation(qualifierExpression, finalMethodDescriptor, finalArguments);
     }

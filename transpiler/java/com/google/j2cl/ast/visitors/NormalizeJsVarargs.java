@@ -186,8 +186,8 @@ public class NormalizeJsVarargs extends AbstractRewriter {
                       primitiveInt, loopVariable.getReference(), PostfixOperator.INCREMENT)));
 
       return Method.Builder.from(method)
-          .statement(0, variableDeclaration)
-          .statement(1, forStatement)
+          .addStatement(0, variableDeclaration)
+          .addStatement(1, forStatement)
           .build();
     }
   }

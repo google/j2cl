@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -109,12 +110,17 @@ public class NormalizeNestedClassConstructors extends AbstractRewriter {
         return method;
       }
       // Add parameters through which to pass captured variables for the current type.
-      Method.Builder methodBuilder = Method.Builder.from(getCurrentMethod());
-      for (Field capturedField : getFieldsForAllCaptures(getCurrentJavaType())) {
-        Variable parameter = AstUtils.createOuterParamByField(capturedField);
-        methodBuilder.parameter(parameter, parameter.getTypeDescriptor());
-      }
-      return methodBuilder.build();
+      return Method.Builder.from(getCurrentMethod())
+          .addParameters(
+              Iterables.transform(
+                  getFieldsForAllCaptures(getCurrentJavaType()),
+                  new Function<Field, Variable>() {
+                    @Override
+                    public Variable apply(Field capturedField) {
+                      return AstUtils.createOuterParamByField(capturedField);
+                    }
+                  }))
+          .build();
     }
   }
 
@@ -201,7 +207,7 @@ public class NormalizeNestedClassConstructors extends AbstractRewriter {
                       capturedField.getDescriptor()),
                   BinaryOperator.ASSIGN,
                   parameter.getReference());
-          methodBuilder.statement(i++, new ExpressionStatement(initializer));
+          methodBuilder.addStatement(i++, new ExpressionStatement(initializer));
         }
         return methodBuilder.build();
       }

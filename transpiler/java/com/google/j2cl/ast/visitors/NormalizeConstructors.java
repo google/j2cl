@@ -24,7 +24,6 @@ import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
@@ -208,14 +207,13 @@ public class NormalizeConstructors {
       @Override
       public Node rewriteMethod(Method constructor) {
         if (constructor.isConstructor()) {
-          return new Method(
-              ctorMethodDescritorFromJavaConstructor(constructor.getDescriptor()),
-              constructor.getParameters(),
-              constructor.getBody(),
-              false,
-              false,
-              false,
-              "Initializes instance fields for a particular Java constructor.");
+          return Method.Builder.fromDefault()
+              .setMethodDescriptor(
+                  ctorMethodDescritorFromJavaConstructor(constructor.getDescriptor()))
+              .setParameters(constructor.getParameters())
+              .addStatements(constructor.getBody().getStatements())
+              .setJsDocDescription("Initializes instance fields for a particular Java constructor.")
+              .build();
         }
         return constructor;
       }
@@ -234,7 +232,6 @@ public class NormalizeConstructors {
 
     private class InsertJavascriptConstructors extends AbstractVisitor {
       private Method synthesizeJsConstructorRealConstructor(JavaType javaType) {
-        String comment = "Real constructor.";
         List<Statement> body = AstUtils.generateFieldDeclarations(javaType);
 
         Method primaryConstructor =
@@ -282,14 +279,12 @@ public class NormalizeConstructors {
                 javaType.getSuperTypeDescriptor(), superArgumentTypes, superArguments);
         body.add(0, new ExpressionStatement(jsSuperCall));
 
-        return new Method(
-            constructorDescriptor,
-            constructorArguments,
-            new Block(body),
-            false,
-            false,
-            false,
-            comment);
+        return Method.Builder.fromDefault()
+            .setMethodDescriptor(constructorDescriptor)
+            .setParameters(constructorArguments)
+            .addStatements(body)
+            .setJsDocDescription("Real constructor.")
+            .build();
       }
 
       private Method synthesizeRegularEs6Constructor(JavaType javaType) {
@@ -308,14 +303,11 @@ public class NormalizeConstructors {
                 .visibility(Visibility.PUBLIC)
                 .build();
 
-        return new Method(
-            constructorDescriptor,
-            Collections.<Variable>emptyList(),
-            new Block(body),
-            false,
-            false,
-            false,
-            "Defines instance fields.");
+        return Method.Builder.fromDefault()
+            .setMethodDescriptor(constructorDescriptor)
+            .addStatements(body)
+            .setJsDocDescription("Defines instance fields.")
+            .build();
       }
 
       /**
@@ -509,14 +501,13 @@ public class NormalizeConstructors {
             newInstanceReference, constructor.getDescriptor().getEnclosingClassTypeDescriptor());
 
     String factoryMethodDescription = "A particular Java constructor as a factory method.";
-    return new Method(
-        factoryDescriptorForConstructor(constructor.getDescriptor()),
-        constructor.getParameters(),
-        new Block(newInstanceStatement, ctorCallStatement, returnStatement),
-        false,
-        false,
-        true,
-        factoryMethodDescription);
+    return Method.Builder.fromDefault()
+        .setMethodDescriptor(factoryDescriptorForConstructor(constructor.getDescriptor()))
+        .setParameters(constructor.getParameters())
+        .addStatements(newInstanceStatement, ctorCallStatement, returnStatement)
+        .isFinal(true)
+        .setJsDocDescription(factoryMethodDescription)
+        .build();
   }
 
   /**
@@ -567,13 +558,12 @@ public class NormalizeConstructors {
             primaryConstructor.getDescriptor().getEnclosingClassTypeDescriptor());
 
     String factoryMethodDescription = "A particular Java constructor as a factory method.";
-    return new Method(
-        factoryDescriptorForConstructor(primaryConstructor.getDescriptor()),
-        primaryConstructor.getParameters(),
-        new Block(returnStatement),
-        false,
-        false,
-        true,
-        factoryMethodDescription);
+    return Method.Builder.fromDefault()
+        .setMethodDescriptor(factoryDescriptorForConstructor(primaryConstructor.getDescriptor()))
+        .setParameters(primaryConstructor.getParameters())
+        .addStatements(returnStatement)
+        .isFinal(true)
+        .setJsDocDescription(factoryMethodDescription)
+        .build();
   }
 }

@@ -112,7 +112,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls {
                     method.getDescriptor().isStatic()
                         ? method
                         : AstUtils.createDevirtualizedMethod(method))
-                .enclosingClass(overlayImplTypeDescriptor)
+                .setEnclosingClass(overlayImplTypeDescriptor)
                 .build());
 
         // clear the method body from the original type.

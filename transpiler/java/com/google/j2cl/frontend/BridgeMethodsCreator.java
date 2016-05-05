@@ -18,7 +18,6 @@ package com.google.j2cl.frontend;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
@@ -100,14 +99,7 @@ public class BridgeMethodsCreator {
             if (toBeFixedMethodDescriptors.contains(method.getDescriptor())) {
               MethodDescriptor newMethodDescriptor =
                   MethodDescriptor.Builder.from(method.getDescriptor()).jsInfo(JsInfo.NONE).build();
-              return new Method(
-                  newMethodDescriptor,
-                  method.getParameters(),
-                  method.getBody(),
-                  method.isAbstract(),
-                  method.isOverride(),
-                  method.isFinal(),
-                  method.getJsDocDescription());
+              return Method.Builder.from(method).setMethodDescriptor(newMethodDescriptor).build();
             }
             return method;
           }
@@ -373,13 +365,11 @@ public class BridgeMethodsCreator {
             ? new ExpressionStatement(dispatchMethodCall)
             : new ReturnStatement(
                 dispatchMethodCall, bridgeMethodDescriptor.getReturnTypeDescriptor());
-    return new Method(
-        bridgeMethodDescriptor,
-        parameters,
-        new Block(statement),
-        false,
-        false,
-        false,
-        "Bridge method.");
+    return Method.Builder.fromDefault()
+        .setMethodDescriptor(bridgeMethodDescriptor)
+        .setParameters(parameters)
+        .addStatements(statement)
+        .setJsDocDescription("Bridge method.")
+        .build();
   }
 }

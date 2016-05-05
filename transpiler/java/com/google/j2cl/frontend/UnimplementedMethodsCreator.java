@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.frontend;
 
-import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -113,14 +112,11 @@ public class UnimplementedMethodsCreator {
               true);
       parameters.add(parameter);
     }
-    Block body = new Block();
-    return new Method(
-        methodDescriptor,
-        parameters,
-        body,
-        true,
-        false,
-        JdtUtils.isFinal(methodBinding.getModifiers()),
-        null);
+    return Method.Builder.fromDefault()
+        .setMethodDescriptor(methodDescriptor)
+        .setParameters(parameters)
+        .isAbstract(true)
+        .isFinal(JdtUtils.isFinal(methodBinding.getModifiers()))
+        .build();
   }
 }

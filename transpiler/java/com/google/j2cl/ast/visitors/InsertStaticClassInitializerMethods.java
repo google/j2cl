@@ -17,14 +17,11 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
-
-import java.util.Collections;
 
 /**
  * The first line of a static method should be a call to the Class's clinit.
@@ -48,10 +45,8 @@ public class InsertStaticClassInitializerMethods {
                     method.getDescriptor().getEnclosingClassTypeDescriptor())
                 .methodName("$clinit")
                 .build();
-        MethodCall call =
-            MethodCall.createMethodCall(
-                null, clinitDescriptor, Collections.<Expression>emptyList());
-        return Method.Builder.from(method).statement(0, new ExpressionStatement(call)).build();
+        MethodCall call = MethodCall.createMethodCall(null, clinitDescriptor);
+        return Method.Builder.from(method).addStatement(0, new ExpressionStatement(call)).build();
       }
       return method;
     }

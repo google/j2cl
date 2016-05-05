@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.collect.Iterables;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,19 +37,20 @@ public class MethodDescriptors {
    */
   // TODO(simionato): Verify that it is always correct to add the same parameters to the method
   // descriptor and its declaration.
-  public static MethodDescriptor createModifiedCopy(
-      MethodDescriptor methodDescriptor, List<TypeDescriptor> addedParameters) {
+  public static MethodDescriptor createWithExtraParameters(
+      MethodDescriptor methodDescriptor, Iterable<TypeDescriptor> extraParameters) {
     // Add the provided parameters to the end of the existing parameters list.
     List<TypeDescriptor> parameters =
         new ArrayList<>(methodDescriptor.getParameterTypeDescriptors());
-    parameters.addAll(addedParameters);
+    Iterables.addAll(parameters, extraParameters);
 
     MethodDescriptor.Builder methodBuilder = MethodDescriptor.Builder.from(methodDescriptor)
         .parameterTypeDescriptors(parameters);
 
     if (methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()) {
       methodBuilder.declarationMethodDescriptor(
-          createModifiedCopy(methodDescriptor.getDeclarationMethodDescriptor(), addedParameters));
+          createWithExtraParameters(
+              methodDescriptor.getDeclarationMethodDescriptor(), extraParameters));
     }
 
     return methodBuilder.build();

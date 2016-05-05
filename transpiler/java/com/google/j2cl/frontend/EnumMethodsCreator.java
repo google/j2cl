@@ -175,11 +175,11 @@ public class EnumMethodsCreator {
         new ReturnStatement(
             getMethodCall, TypeDescriptors.getForArray(enumType.getDescriptor(), 1));
 
-    List<Statement> blockStatements = new ArrayList<>();
-    blockStatements.add(ifStatement);
-    blockStatements.add(returnStatement);
-    Block body = new Block(blockStatements);
-    return new Method(valueOfMethodDescriptor, Arrays.asList(nameParameter), body);
+    return Method.Builder.fromDefault()
+        .setMethodDescriptor(valueOfMethodDescriptor)
+        .setParameters(nameParameter)
+        .addStatements(ifStatement, returnStatement)
+        .build();
   }
 
   /**
@@ -207,7 +207,10 @@ public class EnumMethodsCreator {
             arrayOfValues, TypeDescriptors.getForArray(enumType.getDescriptor(), 1));
     List<Statement> blockStatements = new ArrayList<>();
     blockStatements.add(returnStatement);
-    Block body = new Block(blockStatements);
-    return new Method(valuesMethodDescriptor, Arrays.asList(new Variable[0]), body);
+
+    return Method.Builder.fromDefault()
+        .setMethodDescriptor(valuesMethodDescriptor)
+        .addStatements(blockStatements)
+        .build();
   }
 }
