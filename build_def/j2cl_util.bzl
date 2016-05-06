@@ -49,6 +49,10 @@ def get_or_default(key, map, default):
 
 def generate_zip(name, srcs, pkg):
   """Generates a zip target with given srcs. See j2cl_library for details of pkg handling"""
+  # Exit early to avoid parse errors when running under bazel
+  if not hasattr(native, "genzip"):
+    return
+
   native.genzip(
       name=name,
       deps=[name + "_pkg_library"],
