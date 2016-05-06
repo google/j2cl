@@ -30,7 +30,7 @@ java_test(
     name = "AllEmulTest_Java",
     size = "small",
     srcs = [
-        ":emul_tests_lib_files",
+        ":emul_tests_lib_java_files",
         ":java_emul_internal",
     ],
     test_class = "com.google.gwt.emultest.AllTests",

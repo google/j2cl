@@ -15,11 +15,14 @@ load("//build_def:j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt")
 
 j2cl_mirror_from_gwt(
     name = "jre",
+    extra_js_srcs = [
+        "//jre/java/javaemul/internal/vmbootstrap/primitives",
+    ],
     generate_build_test = False,
     js_deps = [
         "//javascript/closure/reflect",
-        "//transpiler/nativebootstrap",
-        "//transpiler/vmbootstrap",
+        "//javascript/closure/math:long",
+        "//javascript/closure:base",
     ],
     mirrored_files = [
         "//third_party/java_src/gwt/svn/trunk/user:java_emul",
