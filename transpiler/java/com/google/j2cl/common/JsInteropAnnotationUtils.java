@@ -29,6 +29,7 @@ public class JsInteropAnnotationUtils {
   private static final String JS_FUNCTION_ANNOTATION_NAME = "jsinterop.annotations.JsFunction";
   private static final String JS_IGNORE_ANNOTATION_NAME = "jsinterop.annotations.JsIgnore";
   private static final String JS_METHOD_ANNOTATION_NAME = "jsinterop.annotations.JsMethod";
+  private static final String JS_OPTIONAL_ANNOTATION_NAME = "jsinterop.annotations.JsOptional";
   private static final String JS_OVERLAY_ANNOTATION_NAME = "jsinterop.annotations.JsOverlay";
   private static final String JS_PACKAGE_ANNOTATION_NAME = "jsinterop.annotations.JsPackage";
   private static final String JS_PROPERTY_ANNOTATION_NAME = "jsinterop.annotations.JsProperty";
@@ -64,6 +65,12 @@ public class JsInteropAnnotationUtils {
   public static IAnnotationBinding getJsPropertyAnnotation(IBinding methodBinding) {
     return JdtAnnotationUtils.findAnnotationBindingByName(
         methodBinding.getAnnotations(), JS_PROPERTY_ANNOTATION_NAME);
+  }
+
+  public static IAnnotationBinding getJsOptionalAnnotation(
+      IMethodBinding methodBinding, int parameterIndex) {
+    return JdtAnnotationUtils.findAnnotationBindingByName(
+        methodBinding.getParameterAnnotations(parameterIndex), JS_OPTIONAL_ANNOTATION_NAME);
   }
 
   public static IAnnotationBinding getJsOverlayAnnotation(IBinding methodBinding) {

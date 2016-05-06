@@ -42,7 +42,7 @@ public class Errors {
     ERR_NATIVE_UNUSED_NATIVE_SOURCE("native JavaScript file not used"),
     ERR_CANNOT_CREATE_TEMP_DIR("cannot create temporary directory"),
     ERR_CANNOT_OPEN_FILE("cannot open file"),
-    ERR_JSINTEROP_RESTRICTIONS_ERROR("JsInterop restrictions error"),
+    ERR_JSINTEROP_RESTRICTIONS_ERROR("JsInterop error"),
     ERR_AMBIGUOUS_NATIVE_FILE_MATCH("native JavaScript file matched multiple srcs"),
     ERR_PACKAGE_INFO_PARSE("resource was found but it failed to parse"),
     ERR_CLASS_PATH_URL("class path entry is not a valid url"),

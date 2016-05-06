@@ -104,6 +104,7 @@ public class JsInteropRestrictionsChecker {
       checkJsOverlay(method);
     }
     checkMemberQualifiedJsName(method.getDescriptor());
+    checkMethodParameters(method);
     // TODO: do other checks.
   }
 
@@ -394,6 +395,57 @@ public class JsInteropRestrictionsChecker {
           "'%s' has invalid namespace '%s'.",
           getReadableDescription(item),
           item.getJsNamespace());
+    }
+  }
+
+  private void checkMethodParameters(Method method) {
+    // TODO(rluble): When overriding is included in the AST representation, add the relevant checks,
+    // i.e. that a parameter can not change from optional into non optional in an override.
+    boolean hasOptionalParameters = false;
+    MethodDescriptor methodDescriptor = method.getDescriptor();
+
+    int numberOfParameters = method.getParameters().size();
+    for (int i = 0; i < numberOfParameters; i++) {
+      int lastParameter = numberOfParameters - 1;
+      boolean isVarargsParameter = (i == lastParameter) && methodDescriptor.isJsMethodVarargs();
+
+      if (method.isParameterOptional(i)) {
+        if (methodDescriptor.getParameterTypeDescriptors().get(i).isPrimitive()) {
+          errors.error(
+              Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+              "JsOptional parameter '%s' in method '%s' cannot be of a primitive type.",
+              method.getParameters().get(i).getName(),
+              getReadableDescription(methodDescriptor));
+        }
+        if (isVarargsParameter) {
+          errors.error(
+              Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+              "JsOptional parameter '%s' in method '%s' cannot be a varargs parameter.",
+              method.getParameters().get(i).getName(),
+              getReadableDescription(methodDescriptor));
+        }
+        hasOptionalParameters = true;
+        continue;
+      }
+      if (hasOptionalParameters && !isVarargsParameter) {
+        errors.error(
+            Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+            "JsOptional parameter '%s' in method '%s' cannot precede parameters that are not "
+                + "JsOptional.",
+            method.getParameters().get(i - 1).getName(),
+            getReadableDescription(methodDescriptor));
+        break;
+      }
+    }
+    if (hasOptionalParameters
+        && !methodDescriptor.isJsMethod()
+        && !methodDescriptor.isJsConstructor()
+        && !methodDescriptor.isJsFunction()) {
+      errors.error(
+          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
+          "JsOptional parameter in '%s' can only be declared in a JsMethod, a JsConstructor or a "
+              + "JsFunction.",
+          getReadableDescription(methodDescriptor));
     }
   }
 

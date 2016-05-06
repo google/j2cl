@@ -98,33 +98,29 @@ public class GeneratorUtils {
   }
 
   /**
-   * Returns the list of js doc annotations for the parameters in method. They are of the form:
-   * {parameterType} parameterName
+   * Returns the js doc annotations for parameter at {@code index} in {@code method}. It is of
+   * the form:
+   *  @param {parameterType} parameterName
    */
-  public static List<String> getParameterAnnotationsJsDoc(
-      final Method method, final GenerationEnvironment environment) {
-    final List<Variable> variables = method.getParameters();
-    return Lists.transform(
-        variables,
-        new Function<Variable, String>() {
-          @Override
-          public String apply(Variable variable) {
-            boolean isLast = variable == variables.get(variables.size() - 1);
-            TypeDescriptor parameterTypeDescriptor = variable.getTypeDescriptor();
-            String name = environment.aliasForVariable(variable);
-            if (method.getDescriptor().isJsMethodVarargs() && isLast) {
-              // The parameter is a js var arg so we convert the type to an array
-              Preconditions.checkArgument(parameterTypeDescriptor.isArray());
-              String typeName =
-                  JsDocNameUtils.getJsDocName(
-                      parameterTypeDescriptor.getComponentTypeDescriptor(), environment);
-              return String.format("{...%s} %s", typeName, name);
-            } else {
-              String typeName = JsDocNameUtils.getJsDocName(parameterTypeDescriptor, environment);
-              return String.format("{%s} %s", typeName, name);
-            }
-          }
-        });
+  public static String getParameterJsDocAnnotation(
+      Method method, int index, GenerationEnvironment environment) {
+    Variable parameter = method.getParameters().get(index);
+    TypeDescriptor parameterTypeDescriptor = parameter.getTypeDescriptor();
+    String name = environment.aliasForVariable(parameter);
+    if (method.getDescriptor().isJsMethodVarargs() && index + 1 == method.getParameters().size()) {
+      // The parameter is a js var arg so we convert the type to an array
+      Preconditions.checkArgument(parameterTypeDescriptor.isArray());
+      String typeName =
+          JsDocNameUtils.getJsDocName(
+              parameterTypeDescriptor.getComponentTypeDescriptor(), environment);
+      return String.format("@param {...%s} %s", typeName, name);
+    } else {
+      return String.format(
+          "@param {%s%s} %s",
+          JsDocNameUtils.getJsDocName(parameterTypeDescriptor, environment),
+          method.isParameterOptional(index) ? "=" : "",
+          name);
+    }
   }
 
   public static String getParameterList(Method method, final GenerationEnvironment environment) {

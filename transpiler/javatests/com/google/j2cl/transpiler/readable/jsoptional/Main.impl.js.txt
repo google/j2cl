@@ -1,0 +1,126 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsoptional.Main.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsoptional.Main$impl');
+
+
+let Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
+
+
+class Main extends Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() { super(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Main}
+   * @public
+   */
+  static $create() {
+    Main.$clinit();
+    let $instance = new Main();
+    $instance.$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsoptional_Main() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main();
+  }
+
+  /**
+   * @param {number} i1
+   * @param {?number=} d
+   * @param {Integer=} i
+   * @return {void}
+   * @public
+   */
+  method1(i1, d, i) {}
+
+  /**
+   * @param {?string} s1
+   * @param {?number=} d
+   * @param {...?boolean} i
+   * @return {void}
+   * @public
+   */
+  method2(s1, d, i) {
+    let $var_args_copy = /**@type {!Array<?boolean>} */ (
+        $Arrays.$create([arguments.length - 2], Boolean));
+    for (let $i = 0; $i < arguments.length - 2; $i++)
+      $Arrays.$set($var_args_copy, $i, arguments[$i + 2]);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Main; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Main);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Boolean = goog.module.get('java.lang.Boolean$impl');
+    Class = goog.module.get('java.lang.Class$impl');
+    Double = goog.module.get('java.lang.Double$impl');
+    Integer = goog.module.get('java.lang.Integer$impl');
+    String = goog.module.get('java.lang.String$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsoptional_Main() {}
+};
+
+$Util.$setClassMetadata(
+    Main, 'com.google.j2cl.transpiler.readable.jsoptional.Main');
+
+
+
+/**
+ * Export class.
+ */
+exports = Main;
+//# sourceMappingURL=Main.js.map

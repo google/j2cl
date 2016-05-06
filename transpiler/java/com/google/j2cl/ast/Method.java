@@ -26,6 +26,7 @@ import com.google.j2cl.ast.sourcemap.SourceInfo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.BitSet;
 import java.util.Collections;
 import java.util.List;
 
@@ -42,6 +43,7 @@ public class Method extends Node {
   private boolean isOverride;
   private String jsDocDescription;
   private boolean isFinal;
+  private BitSet parameterOptionality;
 
   private Method(
       MethodDescriptor methodDescriptor,
@@ -96,6 +98,10 @@ public class Method extends Node {
     this.isOverride = isOverride;
   }
 
+  public boolean isParameterOptional(int i) {
+    return parameterOptionality.get(i);
+  }
+
   public boolean isFinal() {
     return this.isFinal;
   }
@@ -139,6 +145,7 @@ public class Method extends Node {
     private boolean isFinal;
     private SourceInfo javaSourceInfo = SourceInfo.UNKNOWN_SOURCE_INFO;
     private SourceInfo outputSourceInfo = SourceInfo.UNKNOWN_SOURCE_INFO;
+    private BitSet parameterOptionality = new BitSet();
 
     public static Builder fromDefault() {
       return new Builder();
@@ -155,6 +162,7 @@ public class Method extends Node {
       builder.isFinal = method.isFinal();
       builder.javaSourceInfo = method.getBody().getJavaSourceInfo();
       builder.outputSourceInfo = method.getBody().getOutputSourceInfo();
+      builder.parameterOptionality = method.parameterOptionality;
       return builder;
     }
 
@@ -235,6 +243,11 @@ public class Method extends Node {
       return this;
     }
 
+    public Builder setParameterOptional(int parameterIndex, boolean isOptional) {
+      parameterOptionality.set(parameterIndex, isOptional);
+      return this;
+    }
+
     public Method build() {
       Block body = new Block(statements);
       body.setJavaSourceInfo(javaSourceInfo);
@@ -259,6 +272,7 @@ public class Method extends Node {
               isOverride,
               isFinal,
               jsDocDescription);
+      method.parameterOptionality = parameterOptionality;
       return method;
     }
   }

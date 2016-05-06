@@ -51,6 +51,7 @@ import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
 import com.google.j2cl.ast.JsInfo;
+import com.google.j2cl.ast.JsInteropUtils;
 import com.google.j2cl.ast.LabeledStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
@@ -383,14 +384,18 @@ public class CompilationUnitBuilder {
           methodDeclaration.getBody() == null ? new Block() : convert(methodDeclaration.getBody());
 
       IMethodBinding methodBinding = methodDeclaration.resolveBinding();
-      return Method.Builder.fromDefault()
-          .setMethodDescriptor(JdtUtils.createMethodDescriptor(methodBinding))
-          .setParameters(parameters)
-          .addStatements(body.getStatements())
-          .isAbstract(JdtUtils.isAbstract(methodBinding.getModifiers()))
-          .isOverride(JdtUtils.isJsOverride(methodBinding))
-          .isFinal(JdtUtils.isFinal(methodBinding.getModifiers()))
-          .build();
+      Method.Builder methodBuilder =
+          Method.Builder.fromDefault()
+              .setMethodDescriptor(JdtUtils.createMethodDescriptor(methodBinding))
+              .setParameters(parameters)
+              .addStatements(body.getStatements())
+              .isAbstract(JdtUtils.isAbstract(methodBinding.getModifiers()))
+              .isOverride(JdtUtils.isJsOverride(methodBinding))
+              .isFinal(JdtUtils.isFinal(methodBinding.getModifiers()));
+      for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
+        methodBuilder.setParameterOptional(i, JsInteropUtils.isJsOptional(methodBinding, i));
+      }
+      return methodBuilder.build();
     }
 
     private ArrayAccess convert(org.eclipse.jdt.core.dom.ArrayAccess expression) {

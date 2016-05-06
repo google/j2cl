@@ -205,6 +205,10 @@ public class JsInteropUtils {
     return JsInteropAnnotationUtils.getJsOverlayAnnotation(methodBinding) != null;
   }
 
+  public static boolean isJsOptional(IMethodBinding methodBinding, int i) {
+    return JsInteropAnnotationUtils.getJsOptionalAnnotation(methodBinding, i) != null;
+  }
+
   public static boolean isJsConstructor(IMethodBinding methodBinding) {
     // check @JsIgnore annotation
     IAnnotationBinding jsIgnoreAnnotation =

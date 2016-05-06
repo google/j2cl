@@ -1,0 +1,96 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsoptional.Main$Function.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsoptional.Main$Function$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsoptional.Main$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let Object = goog.forwardDeclare('java.lang.Object$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+
+/**
+ * @interface
+ */
+class Main$Function {
+  /**
+   * Abstract method.
+   * @param {?string=} i
+   * @param {...*} args
+   * @return {*}
+   * @public
+   */
+  m_f1__java_lang_String__arrayOf_java_lang_Object(i, args) {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {window.Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_jsoptional_Main$Function =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null && typeof instance == 'function';
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        classConstructor.prototype
+            .$implements__com_google_j2cl_transpiler_readable_jsoptional_Main$Function;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Main = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsoptional.Main$impl');
+    Class = goog.module.get('java.lang.Class$impl');
+    Object = goog.module.get('java.lang.Object$impl');
+    String = goog.module.get('java.lang.String$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    Main$Function,
+    'com.google.j2cl.transpiler.readable.jsoptional.Main$Function');
+
+
+Main$Function.$markImplementor(/** @type {window.Function} */ (Main$Function));
+
+
+/**
+ * Export class.
+ */
+exports = Main$Function;
+//# sourceMappingURL=Main$Function.js.map

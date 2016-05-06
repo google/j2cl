@@ -252,9 +252,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
           && !method.getDescriptor().getMethodName().startsWith("$ctor")) {
         sb.appendln(" * @this {%s}", getJsDocName(javaType.getDescriptor()));
       }
-      for (String paramTypeName :
-          GeneratorUtils.getParameterAnnotationsJsDoc(method, environment)) {
-        sb.appendln(" * @param %s", paramTypeName);
+      for (int i = 0; i < method.getParameters().size(); i++) {
+        sb.appendln(" * %s", GeneratorUtils.getParameterJsDocAnnotation(method, i, environment));
       }
       String returnTypeName = getJsDocName(method.getDescriptor().getReturnTypeDescriptor());
       if (!method.getDescriptor().isConstructor()) {
