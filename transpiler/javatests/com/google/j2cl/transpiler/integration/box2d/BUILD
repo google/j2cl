@@ -23,6 +23,7 @@ integration_test(
         "ARITHMETIC_EXCEPTION_CHECKS_ENABLED_": "false",
         "ARRAY_CHECK_BOUNDS_": "false",
         "ARRAY_CHECK_TYPES_": "false",
+        "ASSERTIONS_ENABLED_": "false",
         "CAST_CHECKS_ENABLED_": "false",
         "CLASS_METADATA_ENABLED_": "false",
     },
