@@ -55,7 +55,7 @@ public class PackagePrivateMethodsDispatcher {
   /**
    * Returns the mapping from public/protected method to its package private overridden method.
    */
-  public static Map<MethodDescriptor, MethodDescriptor> findExposedOverriddenMethods(
+  private static Map<MethodDescriptor, MethodDescriptor> findExposedOverriddenMethods(
       ITypeBinding type) {
     Map<MethodDescriptor, MethodDescriptor> exposedOverriddenMethodsByOverridingMethod =
         new LinkedHashMap<>();

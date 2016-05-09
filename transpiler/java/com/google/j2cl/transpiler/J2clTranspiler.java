@@ -119,6 +119,8 @@ public class J2clTranspiler {
       Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath) {
     // Records information about package-info files supplied as byte code.
     PackageInfoCache.init(options.getClasspathEntries(), errors);
+    maybeExitGracefully();
+
     List<CompilationUnit> compilationUnits = CompilationUnitBuilder.build(jdtUnitsByFilePath);
     maybeExitGracefully();
     return compilationUnits;

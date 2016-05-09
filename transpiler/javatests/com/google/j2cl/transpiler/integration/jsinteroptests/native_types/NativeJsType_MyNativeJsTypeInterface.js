@@ -1,1 +1,1 @@
-goog.module('com.google.j2cl.transpiler.integration.jsinteroptests.NativeJsTypeTest$MyNativeJsTypeInterface');
+goog.module('woo.NativeJsTypeTest$MyNativeJsTypeInterface');

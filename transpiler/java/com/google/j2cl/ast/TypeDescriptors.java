@@ -38,6 +38,7 @@ import com.google.j2cl.ast.TypeDescriptor.MethodDescriptorFactory;
 import com.google.j2cl.ast.TypeDescriptor.TypeDescriptorFactory;
 import com.google.j2cl.ast.TypeDescriptor.TypeDescriptorsFactory;
 import com.google.j2cl.common.JsInteropAnnotationUtils;
+import com.google.j2cl.common.PackageInfoCache;
 
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
@@ -390,6 +391,7 @@ public class TypeDescriptors {
       List<TypeDescriptor> typeArgumentDescriptors,
       String jsNamespace,
       String jsName) {
+
     return createExactly(
         packageComponents,
         classComponents,
@@ -426,7 +428,7 @@ public class TypeDescriptors {
     return intern(newTypeDescriptor);
   }
 
-  private static TypeDescriptor createExactly(
+  public static TypeDescriptor createExactly(
       final List<String> packageComponents,
       final List<String> classComponents,
       final List<TypeDescriptor> typeArgumentDescriptors,
@@ -440,6 +442,7 @@ public class TypeDescriptors {
           @Override
           public TypeDescriptor create() {
             List<TypeDescriptor> emptyTypeArgumentDescriptors = Collections.emptyList();
+
             return createExactly(
                 packageComponents,
                 classComponents,
@@ -478,8 +481,6 @@ public class TypeDescriptors {
             .setJsNamespace(jsNamespace)
             .setPackageComponents(packageComponents)
             .setPackageName(packageName)
-            .setQualifiedName(
-                createQualifiedName(packageName, binaryClassName, simpleName, jsNamespace, jsName))
             .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
             .setSimpleName(simpleName)
             .setSourceName(
@@ -530,13 +531,13 @@ public class TypeDescriptors {
 
   /**
    * Returns the type in the hierarchy of {@code type} that matches (excluding nullability and
-   * generics) with {@code typeToMatch}.
-   * If there is no match, returns null.
+   * generics) with {@code typeToMatch}. If there is no match, returns null.
    */
   public static TypeDescriptor getMatchingTypeInHierarchy(
       TypeDescriptor subjectTypeDescriptor, TypeDescriptor toMatchTypeDescriptor) {
-    if (subjectTypeDescriptor.getRawTypeDescriptor().equalsIgnoreNullability(
-        toMatchTypeDescriptor.getRawTypeDescriptor())) {
+    if (subjectTypeDescriptor
+        .getRawTypeDescriptor()
+        .equalsIgnoreNullability(toMatchTypeDescriptor.getRawTypeDescriptor())) {
       return subjectTypeDescriptor;
     }
 
@@ -544,17 +545,16 @@ public class TypeDescriptors {
     if (subjectTypeDescriptor.getSuperTypeDescriptor() != null) {
       TypeDescriptor match =
           getMatchingTypeInHierarchy(
-              subjectTypeDescriptor.getSuperTypeDescriptor(),
-              toMatchTypeDescriptor);
+              subjectTypeDescriptor.getSuperTypeDescriptor(), toMatchTypeDescriptor);
       if (match != null) {
         return match;
       }
     }
 
     // Check implemented interfaces.
-    for (TypeDescriptor interfaceDescriptor : subjectTypeDescriptor.getInterfacesTypeDescriptors()) {
-      TypeDescriptor match =
-          getMatchingTypeInHierarchy(interfaceDescriptor, toMatchTypeDescriptor);
+    for (TypeDescriptor interfaceDescriptor :
+        subjectTypeDescriptor.getInterfacesTypeDescriptors()) {
+      TypeDescriptor match = getMatchingTypeInHierarchy(interfaceDescriptor, toMatchTypeDescriptor);
       if (match != null) {
         return match;
       }
@@ -626,7 +626,7 @@ public class TypeDescriptors {
   }
 
   public static TypeDescriptor createLambda(
-      TypeDescriptor enclosingClassTypeDescriptor,
+      final TypeDescriptor enclosingClassTypeDescriptor,
       String lambdaBinaryName,
       final ITypeBinding lambdaInterfaceBinding) {
     final TypeDescriptor[] self = new TypeDescriptor[1];
@@ -661,6 +661,13 @@ public class TypeDescriptors {
             return TypeDescriptors.get().javaLangObject;
           }
         };
+    TypeDescriptorFactory enclosingTypeDescriptorFactory =
+        new TypeDescriptorFactory() {
+          @Override
+          public TypeDescriptor create() {
+            return enclosingClassTypeDescriptor;
+          }
+        };
 
     // Compute these first since they're reused in other calculations.
     List<String> classComponents =
@@ -680,8 +687,6 @@ public class TypeDescriptors {
                     Collections.singleton(Joiner.on("$").join(classComponents))));
     String binaryClassName = createBinaryClassName(classComponents, simpleName, false, false);
     String packageName = Joiner.on(".").join(packageComponents);
-    String qualifiedName =
-        createQualifiedName(packageName, binaryClassName, simpleName, null, null);
     String sourceName = Joiner.on(".").join(Iterables.concat(packageComponents, classComponents));
 
     TypeDescriptor typeDescriptor =
@@ -690,6 +695,7 @@ public class TypeDescriptors {
             .setClassComponents(classComponents)
             .setBinaryClassName(binaryClassName)
             .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
+            .setEnclosingTypeDescriptorFactory(enclosingTypeDescriptorFactory)
             .setIsInstanceNestedClass(true)
             .setIsJsFunctionImplementation(JsInteropUtils.isJsFunction(lambdaInterfaceBinding))
             .setIsLocal(true)
@@ -697,7 +703,6 @@ public class TypeDescriptors {
             .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)
             .setPackageComponents(packageComponents)
             .setPackageName(packageName)
-            .setQualifiedName(qualifiedName)
             .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
             .setSimpleName(simpleName)
             .setSourceName(sourceName)
@@ -727,6 +732,17 @@ public class TypeDescriptors {
   static TypeDescriptor createForType(
       final ITypeBinding typeBinding, List<TypeDescriptor> overrideTypeArgumentDescriptors) {
     checkArgument(!typeBinding.isArray());
+
+    PackageInfoCache packageInfoCache = PackageInfoCache.get();
+
+    ITypeBinding topLevelTypeBinding = TypeProxyUtils.toTopLevelTypeBinding(typeBinding);
+    if (topLevelTypeBinding.isFromSource()) {
+      // Let the PackageInfoCache know that this class is Source, otherwise it would have to rummage
+      // around in the class path to figure it out and it might even come up with the wrong answer
+      // for example if this class has also been globbed into some other library that is a
+      // dependency of this one.
+      PackageInfoCache.get().markAsSource(topLevelTypeBinding.getBinaryName());
+    }
 
     MethodDescriptorFactory concreteJsFunctionMethodDescriptorFactory =
         new MethodDescriptorFactory() {
@@ -801,7 +817,25 @@ public class TypeDescriptors {
     boolean isNative = JsInteropAnnotationUtils.isNative(jsTypeAnnotation);
     boolean isNullable = !typeBinding.isPrimitive();
     String jsName = JsInteropAnnotationUtils.getJsName(jsTypeAnnotation);
-    String jsNamespace = JsInteropAnnotationUtils.getJsNamespace(jsTypeAnnotation);
+    String jsNamespace = null;
+
+    // If a package-info file has specified a JsPackage namespace then it is sugar for setting the
+    // jsNamespace of all top level types in that package.
+    boolean isTopLevelType = typeBinding.getDeclaringClass() == null;
+    if (isTopLevelType) {
+      String jsPackageNamespace =
+          packageInfoCache.getJsNamespace(
+              TypeProxyUtils.toTopLevelTypeBinding(typeBinding).getBinaryName());
+      if (jsPackageNamespace != null) {
+        jsNamespace = jsPackageNamespace;
+      }
+    }
+
+    String jsTypeNamespace = JsInteropAnnotationUtils.getJsNamespace(jsTypeAnnotation);
+    if (jsTypeNamespace != null) {
+      jsNamespace = jsTypeNamespace;
+    }
+
     String packageName = Joiner.on(".").join(packageComponents);
     String sourceName = Joiner.on(".").join(Iterables.concat(packageComponents, classComponents));
     List<TypeDescriptor> typeArgumentDescriptors =
@@ -840,8 +874,6 @@ public class TypeDescriptors {
             .setJsNamespace(jsNamespace)
             .setPackageComponents(packageComponents)
             .setPackageName(packageName)
-            .setQualifiedName(
-                createQualifiedName(packageName, binaryClassName, simpleName, jsNamespace, jsName))
             .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
             .setSimpleName(simpleName)
             .setSourceName(sourceName)
@@ -898,8 +930,6 @@ public class TypeDescriptors {
     TypeDescriptor componentTypeDescriptor =
         getForArray(leafTypeDescriptor, dimensions - 1, isNullable);
     String packageName = leafTypeDescriptor.getPackageName();
-    String qualifiedName =
-        createQualifiedName(packageName, binaryClassName, simpleName, null, null);
     String sourceName = leafTypeDescriptor.getSourceName() + arraySuffix;
     List<TypeDescriptor> typeArgumentDescriptors = Collections.emptyList();
 
@@ -915,7 +945,6 @@ public class TypeDescriptors {
                 .setIsRaw(leafTypeDescriptor.isRaw())
                 .setLeafTypeDescriptor(leafTypeDescriptor)
                 .setPackageName(packageName)
-                .setQualifiedName(qualifiedName)
                 .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
                 .setSimpleName(simpleName)
                 .setSourceName(sourceName)
@@ -1011,44 +1040,6 @@ public class TypeDescriptors {
                         return typeDescriptor.getUniqueId();
                       }
                     })));
-  }
-
-  private static String createQualifiedName(
-      String packageName,
-      String binaryClassName,
-      String simpleName,
-      String jsNamespace,
-      String jsName) {
-    String qualifiedName;
-    {
-      String localNamespace = packageName;
-      String localBinaryClassName = binaryClassName;
-
-      // If a custom js namespace was specified.
-      if (jsNamespace != null) {
-        // The effect is to replace both the package and the class's enclosing class prefixes.
-        localNamespace = jsNamespace;
-        localBinaryClassName = simpleName;
-      }
-
-      // If the JS namespace the user specified was JsPackage.GLOBAL then consider that to be top
-      // level.
-      if (JsInteropUtils.isGlobal(localNamespace)) {
-        localNamespace = "";
-      }
-
-      // If a custom JS name was specified.
-      if (jsName != null) {
-        // Then use it instead of the (potentially enclosing class qualified) class name.
-        localBinaryClassName = jsName;
-      }
-
-      qualifiedName =
-          Joiner.on(".")
-              .skipNulls()
-              .join(Strings.emptyToNull(localNamespace), Strings.emptyToNull(localBinaryClassName));
-    }
-    return qualifiedName;
   }
 
   private static String createBinaryClassName(

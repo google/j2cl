@@ -149,7 +149,7 @@ public class TypeProxyUtils {
   /**
    * Incase the given type binding is nested, return the outermost possible enclosing type binding.
    */
-  private static ITypeBinding toTopLevelTypeBinding(ITypeBinding typeBinding) {
+  public static ITypeBinding toTopLevelTypeBinding(ITypeBinding typeBinding) {
     ITypeBinding topLevelClass = typeBinding;
     while (topLevelClass.getDeclaringClass() != null) {
       topLevelClass = topLevelClass.getDeclaringClass();

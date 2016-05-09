@@ -37,7 +37,7 @@ PREDEFINED_FLAGS = [
 
 def integration_test(
     name, srcs=[], deps=[], defs=[], native_srcs=[],
-    native_srcs_pkg="CONVENTION", js_deps=[], enable_gwt=False, gwt_deps=[],
+    native_srcs_pkg="CONVENTION", js_deps=[], main_class=None, enable_gwt=False, gwt_deps=[],
     closure_defines=dict(), generate_build_test=None):
   """Macro that turns Java files into integration test targets.
 
@@ -46,6 +46,9 @@ def integration_test(
   """
   # figure out the current location
   java_package = get_java_package(PACKAGE_NAME)
+
+  if not main_class:
+    main_class = java_package + ".Main"
 
   deps = [absolute_label(dep) for dep in deps]
 
@@ -90,9 +93,9 @@ def integration_test(
   # blaze build :optimized_js
   opt_harness = """
       goog.module('gen.opt.Harness');
-      var Main = goog.require('%s.Main');
+      var Main = goog.require('%s');
       Main.m_main__arrayOf_java_lang_String([]);
-  """ % java_package
+  """ % main_class
   native.genrule(
       name="opt_harness_generator",
       outs=["OptHarness.js"],
@@ -238,13 +241,13 @@ def integration_test(
       %s
 
       var testSuite = goog.require('goog.testing.testSuite');
-      var Main = goog.require('%s.Main');
+      var Main = goog.require('%s');
       testSuite({
         test_Main: function() {
           Main.m_main__arrayOf_java_lang_String([]);
         }
       });
-  """ % (test_harness_defines, java_package)
+  """ % (test_harness_defines, main_class)
   native.genrule(
       name="test_harness_generator",
       outs=["TestHarness.js"],

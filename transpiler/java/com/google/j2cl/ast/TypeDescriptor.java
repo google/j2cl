@@ -105,7 +105,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       newTypeDescriptor.leafTypeDescriptor = typeDescriptor.getLeafTypeDescriptor();
       newTypeDescriptor.packageComponents = typeDescriptor.getPackageComponents();
       newTypeDescriptor.packageName = typeDescriptor.getPackageName();
-      newTypeDescriptor.qualifiedName = typeDescriptor.getQualifiedName();
       newTypeDescriptor.rawTypeDescriptorFactory =
           new TypeDescriptorFactory() {
             @Override
@@ -308,11 +307,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       return this;
     }
 
-    public Builder setQualifiedName(String qualifiedName) {
-      newTypeDescriptor.qualifiedName = qualifiedName;
-      return this;
-    }
-
     public Builder setRawTypeDescriptorFactory(TypeDescriptorFactory rawTypeDescriptorFactory) {
       newTypeDescriptor.rawTypeDescriptorFactory = rawTypeDescriptorFactory;
       return this;
@@ -414,7 +408,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   private TypeDescriptor leafTypeDescriptor;
   private List<String> packageComponents = Collections.emptyList();
   private String packageName;
-  private String qualifiedName;
   private TypeDescriptorFactory rawTypeDescriptorFactory;
   private String simpleName;
   private String sourceName;
@@ -555,7 +548,35 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   }
 
   public String getQualifiedName() {
-    return qualifiedName;
+    String effectiveSimpleName = jsName == null ? simpleName : jsName;
+    String effectivePrefix = jsNamespace;
+    TypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
+    if (effectivePrefix == null && enclosingTypeDescriptor != null) {
+
+      if (enclosingTypeDescriptor.isNative) {
+        // When there is a type nested within a native type, it's important not to generate a name
+        // like "Array.1" (like would happen if the outer native type was claiming to be native
+        // Array and the nested type was anonymous) since this is almost guarranteed to collide
+        // with other people also creating nested classes within a native type that claims to be
+        // native Array.
+        effectivePrefix = enclosingTypeDescriptor.getSourceName();
+      } else {
+        effectivePrefix = enclosingTypeDescriptor.getQualifiedName();
+      }
+    }
+    if (effectivePrefix == null) {
+      effectivePrefix = packageName;
+    }
+
+    if (JsInteropUtils.isGlobal(effectivePrefix)) {
+      return effectiveSimpleName;
+    }
+    // TODO(stalcup): output "." instead of "$" as soon as Docs is migrated.
+    if (enclosingTypeDescriptor == null || jsNamespace != null) {
+      return effectivePrefix + "." + effectiveSimpleName;
+    } else {
+      return effectivePrefix + "$" + effectiveSimpleName;
+    }
   }
 
   /**

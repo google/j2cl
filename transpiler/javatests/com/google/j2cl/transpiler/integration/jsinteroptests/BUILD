@@ -18,6 +18,7 @@ integration_test(
     # TODO: fix the hidden JS output bug and remove this suppression.
     defs = ["--jscomp_warning=checkTypes"],
     js_deps = [":native_types"],
+    main_class = "woo.Main",
     native_srcs = glob(["*.native.js"]),
     deps = ["//jre/java:gwt-jsinterop-annotations"],
 )

@@ -1,4 +1,4 @@
-goog.module('com.google.j2cl.transpiler.integration.jsinteroptests.JsTypeArrayTest$SimpleJsTypeReturnForMultiDimArray');
+goog.module('woo.JsTypeArrayTest$SimpleJsTypeReturnForMultiDimArray');
 
 class JsTypeArrayTest$SimpleJsTypeReturnForMultiDimArray {}
 

@@ -1,4 +1,4 @@
-goog.module('com.google.j2cl.transpiler.integration.jsinteroptests.JsTypeTest$InterfaceWithSingleJavaConcrete');
+goog.module('woo.JsTypeTest$InterfaceWithSingleJavaConcrete');
 
 /**
  * @interface

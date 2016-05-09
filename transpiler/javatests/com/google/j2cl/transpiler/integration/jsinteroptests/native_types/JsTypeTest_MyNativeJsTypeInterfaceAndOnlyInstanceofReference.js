@@ -1,4 +1,4 @@
-goog.module('com.google.j2cl.transpiler.integration.jsinteroptests.JsTypeTest$MyNativeJsTypeInterfaceAndOnlyInstanceofReference');
+goog.module('woo.JsTypeTest$MyNativeJsTypeInterfaceAndOnlyInstanceofReference');
 
 class JsTypeTest$MyNativeJsTypeInterfaceAndOnlyInstanceofReference {}
 

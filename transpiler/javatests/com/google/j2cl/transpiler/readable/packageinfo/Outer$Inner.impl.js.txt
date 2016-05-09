@@ -1,0 +1,92 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.packageinfo.Outer$Inner.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('readable.packageinfo.Outer$Inner$impl');
+
+
+let Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let Outer = goog.forwardDeclare('readable.packageinfo.Outer$impl');
+
+
+class Outer$Inner extends Object {
+  /**
+   * Real constructor.
+   * @param {Outer} $outer_this
+   * @public
+   */
+  constructor($outer_this) {
+    Outer$Inner.$clinit();
+    super();
+    /** @public {Outer} */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_packageinfo_Outer$Inner =
+        null;
+    this.$ctor__com_google_j2cl_transpiler_readable_packageinfo_Outer$Inner__com_google_j2cl_transpiler_readable_packageinfo_Outer(
+        $outer_this);
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {Outer} $outer_this
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_packageinfo_Outer$Inner__com_google_j2cl_transpiler_readable_packageinfo_Outer(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_packageinfo_Outer$Inner =
+        $outer_this;
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_packageinfo_Outer$Inner();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Outer$Inner; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Outer$Inner);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
+    Outer = goog.module.get('readable.packageinfo.Outer$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_packageinfo_Outer$Inner() {}
+};
+
+$Util.$setClassMetadata(
+    Outer$Inner, 'com.google.j2cl.transpiler.readable.packageinfo.Outer$Inner');
+
+
+
+/**
+ * Export class.
+ */
+exports = Outer$Inner;
+//# sourceMappingURL=Outer$Inner.js.map

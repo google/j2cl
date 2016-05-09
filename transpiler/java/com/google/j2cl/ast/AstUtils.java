@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -799,14 +800,21 @@ public class AstUtils {
     checkArgument(!typeDescriptor.isArray());
     checkArgument(!typeDescriptor.isUnion());
 
-    return TypeDescriptors.createExactly(
-        typeDescriptor.getPackageComponents(),
+    List<String> classComponents =
         Lists.newArrayList(
             Iterables.concat(
                 typeDescriptor.getClassComponents(),
-                Arrays.asList(OVERLAY_IMPLEMENTATION_CLASS_SUFFIX))),
+                Arrays.asList(OVERLAY_IMPLEMENTATION_CLASS_SUFFIX)));
+
+    return TypeDescriptors.createExactly(
+        typeDescriptor.getPackageComponents(),
+        classComponents,
+        Collections.<TypeDescriptor>emptyList(),
+        Joiner.on(".").join(typeDescriptor.getPackageComponents()),
+        Joiner.on("$").join(classComponents),
         false,
-        Collections.emptyList());
+        false,
+        false);
   }
 
   public static Method createDevirtualizedMethod(Method method) {

@@ -1,1 +1,1 @@
-goog.module('com.google.j2cl.transpiler.integration.jsinteroptests.JsPropertyTest$JsTypeGetProperty');
+goog.module('woo.JsPropertyTest$JsTypeGetProperty');
