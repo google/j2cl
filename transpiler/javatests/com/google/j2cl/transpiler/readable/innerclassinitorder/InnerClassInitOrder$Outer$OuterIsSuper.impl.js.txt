@@ -91,7 +91,9 @@ class InnerClassInitOrder$Outer$OuterIsSuper extends InnerClassInitOrder$Outer {
    * @public
    */
   m_unqualifiedAlloc() {
-    return this.$create_InnerClassInitOrder$Outer$OuterIsNotSuper();
+    return InnerClassInitOrder$Outer$OuterIsNotSuper
+        .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer(
+            this);
   }
 
   /**

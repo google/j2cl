@@ -11,7 +11,6 @@ goog.module('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGeneri
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let NestedGenericClass$C$D = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass$C$D$impl');
 let NestedGenericClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 
@@ -66,17 +65,6 @@ class NestedGenericClass$C extends Object {
   }
 
   /**
-   * @return {NestedGenericClass$C$D<C_T>}
-   * @public
-   */
-  $create_NestedGenericClass$C$D() {
-    return /**@type {!NestedGenericClass$C$D<C_T>} */ (
-        NestedGenericClass$C$D
-            .$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass$C(
-                this));
-  }
-
-  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -101,8 +89,6 @@ class NestedGenericClass$C extends Object {
    * @public
    */
   static $clinit() {
-    NestedGenericClass$C$D = goog.module.get(
-        'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass$C$D$impl');
     NestedGenericClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedgenericclass.NestedGenericClass$impl');
     Class = goog.module.get('java.lang.Class$impl');

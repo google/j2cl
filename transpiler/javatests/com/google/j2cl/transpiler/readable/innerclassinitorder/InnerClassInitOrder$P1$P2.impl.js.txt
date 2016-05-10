@@ -11,9 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassI
 let InnerClassInitOrder$P1 = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let InnerClassInitOrder$P1$P2$P3 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1$P2$P3$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
-let Object = goog.forwardDeclare('java.lang.Object$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -98,32 +96,6 @@ class InnerClassInitOrder$P1$P2 extends InnerClassInitOrder$P1 {
   }
 
   /**
-   * @template C_P1_P2_P3_T3
-   * @return {InnerClassInitOrder$P1$P2$P3<C_P1_P2_P3_T3, C_P1_P2_T2, C_P1_T1>}
-   * @public
-   */
-  $create_InnerClassInitOrder$P1$P2$P3_$pp_com_google_j2cl_transpiler_readable_innerclassinitorder() {
-    return /**@type {!InnerClassInitOrder$P1$P2$P3<*, C_P1_P2_T2, C_P1_T1>} */ (
-        InnerClassInitOrder$P1$P2$P3
-            .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1$P2(
-                this));
-  }
-
-  /**
-   * @template C_P1_P2_P3_T3
-   * @param {number} i
-   * @return {InnerClassInitOrder$P1$P2$P3<C_P1_P2_P3_T3, C_P1_P2_T2, C_P1_T1>}
-   * @public
-   */
-  $create_InnerClassInitOrder$P1$P2$P3__int_$pp_com_google_j2cl_transpiler_readable_innerclassinitorder(
-      i) {
-    return /**@type {!InnerClassInitOrder$P1$P2$P3<*, C_P1_P2_T2, C_P1_T1>} */ (
-        InnerClassInitOrder$P1$P2$P3
-            .$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$P1$P2(
-                i, this));
-  }
-
-  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -148,10 +120,7 @@ class InnerClassInitOrder$P1$P2 extends InnerClassInitOrder$P1 {
    * @public
    */
   static $clinit() {
-    InnerClassInitOrder$P1$P2$P3 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$P1$P2$P3$impl');
     Class = goog.module.get('java.lang.Class$impl');
-    Object = goog.module.get('java.lang.Object$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     InnerClassInitOrder$P1.$clinit();
   }

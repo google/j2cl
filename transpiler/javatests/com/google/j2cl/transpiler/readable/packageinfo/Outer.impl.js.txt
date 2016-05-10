@@ -12,7 +12,6 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('java.lang.Class$impl');
-let Outer$Inner = goog.forwardDeclare('readable.packageinfo.Outer$Inner$impl');
 
 
 class Outer extends Object {
@@ -47,12 +46,6 @@ class Outer extends Object {
   }
 
   /**
-   * @return {Outer$Inner}
-   * @public
-   */
-  $create_Outer$Inner() { return new Outer$Inner(this); }
-
-  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -76,7 +69,6 @@ class Outer extends Object {
    */
   static $clinit() {
     Class = goog.module.get('java.lang.Class$impl');
-    Outer$Inner = goog.module.get('readable.packageinfo.Outer$Inner$impl');
     Object.$clinit();
   }
 

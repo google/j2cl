@@ -14,7 +14,6 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let InnerClassInitOrder$ESWGOuter$ESWGInner = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter$ESWGInner$impl');
 let InnerClassInitOrder = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 /**
@@ -57,30 +56,9 @@ class InnerClassInitOrder$ESWGOuter extends Object {
    */
   m_newESWGInner() {
     return /**@type {!InnerClassInitOrder$ESWGOuter$ESWGInner<C_ESWGOuter_T>} */ (
-        this.$create_InnerClassInitOrder$ESWGOuter$ESWGInner());
-  }
-
-  /**
-   * @return {InnerClassInitOrder$ESWGOuter$ESWGInner<C_ESWGOuter_T>}
-   * @public
-   */
-  $create_InnerClassInitOrder$ESWGOuter$ESWGInner() {
-    return /**@type {!InnerClassInitOrder$ESWGOuter$ESWGInner<C_ESWGOuter_T>} */ (
         InnerClassInitOrder$ESWGOuter$ESWGInner
             .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter(
                 this));
-  }
-
-  /**
-   * @param {number} value
-   * @return {InnerClassInitOrder$ESWGOuter$ESWGInner<C_ESWGOuter_T>}
-   * @public
-   */
-  $create_InnerClassInitOrder$ESWGOuter$ESWGInner__int(value) {
-    return /**@type {!InnerClassInitOrder$ESWGOuter$ESWGInner<C_ESWGOuter_T>} */ (
-        InnerClassInitOrder$ESWGOuter$ESWGInner
-            .$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$ESWGOuter(
-                value, this));
   }
 
   /**
@@ -113,7 +91,6 @@ class InnerClassInitOrder$ESWGOuter extends Object {
     InnerClassInitOrder = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
     Class = goog.module.get('java.lang.Class$impl');
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Object.$clinit();
   }
 

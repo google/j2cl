@@ -11,8 +11,6 @@ goog.module('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleN
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let MultipleNestings$InnerClass1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$InnerClass1$impl');
-let MultipleNestings$Parent = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$Parent$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
@@ -53,26 +51,6 @@ class MultipleNestings extends Object {
   m_funInM() {}
 
   /**
-   * @return {MultipleNestings$Parent}
-   * @public
-   */
-  $create_MultipleNestings$Parent() {
-    return MultipleNestings$Parent
-        .$create__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings(
-            this);
-  }
-
-  /**
-   * @return {MultipleNestings$InnerClass1}
-   * @public
-   */
-  $create_MultipleNestings$InnerClass1() {
-    return MultipleNestings$InnerClass1
-        .$create__com_google_j2cl_transpiler_readable_innerclassinheritance_MultipleNestings(
-            this);
-  }
-
-  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -95,10 +73,6 @@ class MultipleNestings extends Object {
    * @public
    */
   static $clinit() {
-    MultipleNestings$InnerClass1 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$InnerClass1$impl');
-    MultipleNestings$Parent = goog.module.get(
-        'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$Parent$impl');
     Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }

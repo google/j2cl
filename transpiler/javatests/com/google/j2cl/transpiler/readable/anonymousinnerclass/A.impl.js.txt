@@ -11,7 +11,6 @@ goog.module('com.google.j2cl.transpiler.readable.anonymousinnerclass.A$impl');
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let A$B = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousinnerclass.A$B$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
@@ -46,16 +45,6 @@ class A extends Object {
   }
 
   /**
-   * @return {A$B}
-   * @public
-   */
-  $create_A$B_$pp_com_google_j2cl_transpiler_readable_anonymousinnerclass() {
-    return A$B
-        .$create__com_google_j2cl_transpiler_readable_anonymousinnerclass_A(
-            this);
-  }
-
-  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -78,8 +67,6 @@ class A extends Object {
    * @public
    */
   static $clinit() {
-    A$B = goog.module.get(
-        'com.google.j2cl.transpiler.readable.anonymousinnerclass.A$B$impl');
     Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }

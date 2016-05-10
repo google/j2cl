@@ -56,15 +56,9 @@ class Main$Outer extends Object {
    * @public
    */
   m_method() {
-    return this.$create_Main$Outer$Inner().getB() +
+    return new Main$Outer$Inner(this).getB() +
         this.f_a__com_google_j2cl_transpiler_readable_jsinnerclass_Main$Outer;
   }
-
-  /**
-   * @return {Main$Outer$Inner}
-   * @public
-   */
-  $create_Main$Outer$Inner() { return new Main$Outer$Inner(this); }
 
   /**
    * Returns whether the provided instance is an instance of this class.

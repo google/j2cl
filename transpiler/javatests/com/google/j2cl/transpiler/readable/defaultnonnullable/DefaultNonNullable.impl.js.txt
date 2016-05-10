@@ -15,8 +15,6 @@ let Preconditions = goog.forwardDeclare('com.google.common.base.Preconditions$im
 let Lists = goog.forwardDeclare('com.google.common.collect.Lists$impl');
 let DefaultNonNullable$Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$Foo$impl');
 let DefaultNonNullable$MyFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$MyFunction$impl');
-let DefaultNonNullable$NullableStringComparator = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$NullableStringComparator$impl');
-let DefaultNonNullable$StringComparator = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$StringComparator$impl');
 let DefaultNonNullable$StringList = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$StringList$impl');
 let NonNullableClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultnonnullable.nonnullablesubpackage.NonNullableClass$impl');
 let NullableClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultnonnullable.nullablesubpackage.NullableClass$impl');
@@ -214,26 +212,6 @@ class DefaultNonNullable extends Object {
   }
 
   /**
-   * @return {DefaultNonNullable$StringComparator}
-   * @public
-   */
-  $create_DefaultNonNullable$StringComparator() {
-    return DefaultNonNullable$StringComparator
-        .$create__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable(
-            this);
-  }
-
-  /**
-   * @return {DefaultNonNullable$NullableStringComparator}
-   * @public
-   */
-  $create_DefaultNonNullable$NullableStringComparator() {
-    return DefaultNonNullable$NullableStringComparator
-        .$create__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable(
-            this);
-  }
-
-  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -265,10 +243,6 @@ class DefaultNonNullable extends Object {
         'com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$Foo$impl');
     DefaultNonNullable$MyFunction = goog.module.get(
         'com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$MyFunction$impl');
-    DefaultNonNullable$NullableStringComparator = goog.module.get(
-        'com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$NullableStringComparator$impl');
-    DefaultNonNullable$StringComparator = goog.module.get(
-        'com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$StringComparator$impl');
     DefaultNonNullable$StringList = goog.module.get(
         'com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$StringList$impl');
     NonNullableClass = goog.module.get(

@@ -51,19 +51,11 @@ class OuterClass extends Object {
    * @public
    */
   m_test() {
-    OuterClass.$create()
-        .$create_OuterClass$InnerClass()
-        .$create_OuterClass$InnerClass$InnerInnerClass();
-  }
-
-  /**
-   * @return {OuterClass$InnerClass}
-   * @public
-   */
-  $create_OuterClass$InnerClass() {
-    return OuterClass$InnerClass
-        .$create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass(
-            this);
+    OuterClass$InnerClass$InnerInnerClass
+        .$create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass$InnerClass(
+            OuterClass$InnerClass
+                .$create__com_google_j2cl_transpiler_readable_nestedinstanceinnerclass_OuterClass(
+                    OuterClass.$create()));
   }
 
   /**
