@@ -618,6 +618,10 @@ public class CompilationUnitBuilder {
         case ASTNode.CONDITIONAL_EXPRESSION:
           j2clExpression = convert((org.eclipse.jdt.core.dom.ConditionalExpression) expression);
           break;
+        case ASTNode.EXPRESSION_METHOD_REFERENCE:
+          // TODO(stalcup): Implement method references properly
+          j2clExpression = NullLiteral.NULL;
+          break;
         case ASTNode.FIELD_ACCESS:
           j2clExpression = convert((org.eclipse.jdt.core.dom.FieldAccess) expression);
           break;
