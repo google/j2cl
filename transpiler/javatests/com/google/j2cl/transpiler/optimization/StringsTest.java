@@ -30,10 +30,6 @@ class StringsTest {
 
   @Test
   public void simpleEqualsOptimizes() {
-    // TODO: Remove.
-    // Prevent inlining of Equality.$same into String.equals.
-    new Object().equals("sdsd");
-
     assertFunctionMatches(getStringEqualsString(), "return !0");
     assertFunctionMatches(getStringNotEqualsString(), "return !1");
   }
