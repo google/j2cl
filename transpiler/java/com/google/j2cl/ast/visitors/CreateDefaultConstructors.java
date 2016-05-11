@@ -21,6 +21,7 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.Visibility;
 
 /**
  * Creates a default constructor for class that does not have any explicit constructors.
@@ -53,7 +54,9 @@ public class CreateDefaultConstructors extends AbstractVisitor {
 
   private void synthesizeDefaultConstructor(JavaType type) {
     MethodDescriptor methodDescriptor =
-        AstUtils.createDefaultConstructorDescriptor(type.getDescriptor(), type.getVisibility());
+        AstUtils.createDefaultConstructorDescriptor(
+            type.getDescriptor(),
+            type.getDescriptor().isEnumOrSubclass() ? Visibility.PRIVATE : type.getVisibility());
     type.addMethod(0, Method.Builder.fromDefault().setMethodDescriptor(methodDescriptor).build());
   }
 }

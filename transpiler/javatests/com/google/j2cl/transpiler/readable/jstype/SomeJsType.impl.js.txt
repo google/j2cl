@@ -41,17 +41,6 @@ class SomeJsType extends Object {
   }
 
   /**
-   * A particular Java constructor as a factory method.
-   * @template C_T
-   * @return {!SomeJsType<C_T>}
-   * @public
-   */
-  static $create() {
-    SomeJsType.$clinit();
-    return new SomeJsType();
-  }
-
-  /**
    * Initializes instance fields for a particular Java constructor.
    * @return {void}
    * @public

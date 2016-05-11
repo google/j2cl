@@ -877,8 +877,8 @@ public class TypeDescriptors {
             .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
             .setSimpleName(simpleName)
             .setSourceName(sourceName)
-            .setSubclassesJsConstructorClass(
-                TypeProxyUtils.subclassesJsConstructorClass(typeBinding))
+            .setIsOrSubclassesJsConstructorClass(
+                TypeProxyUtils.isOrSubclassesJsConstructorClass(typeBinding))
             .setSuperTypeDescriptorFactory(superTypeDescriptorFactory)
             .setTypeArgumentDescriptors(typeArgumentDescriptors)
             .setUniqueId(

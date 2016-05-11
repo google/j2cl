@@ -285,8 +285,8 @@ public class GeneratorUtils {
     TypeDescriptor superclassTypeDescriptor = currentTypeDescriptor.getSuperTypeDescriptor();
     boolean removeFirstStatement =
         AstUtils.hasThisCall(constructor)
-            ? currentTypeDescriptor.subclassesJsConstructorClass()
-            : superclassTypeDescriptor.subclassesJsConstructorClass();
+            ? currentTypeDescriptor.isOrSubclassesJsConstructorClass()
+            : superclassTypeDescriptor.isOrSubclassesJsConstructorClass();
     if (removeFirstStatement) {
       return Method.Builder.from(constructor).removeStatement(0).build();
     }
@@ -303,7 +303,7 @@ public class GeneratorUtils {
    */
   public static String getNewInstanceArguments(Method method, GenerationEnvironment environment) {
     TypeDescriptor typeDescriptor = method.getDescriptor().getEnclosingClassTypeDescriptor();
-    if (!typeDescriptor.subclassesJsConstructorClass()) {
+    if (!typeDescriptor.isOrSubclassesJsConstructorClass()) {
       return "";
     }
     MethodCall constructorInvocation = AstUtils.getConstructorInvocation(method);
@@ -332,7 +332,7 @@ public class GeneratorUtils {
     return constructorInvocation
             .getTarget()
             .getEnclosingClassTypeDescriptor()
-            .subclassesJsConstructorClass()
+            .isOrSubclassesJsConstructorClass()
         ? getArgumentList(constructorInvocation.getArguments(), environment)
         : "";
   }

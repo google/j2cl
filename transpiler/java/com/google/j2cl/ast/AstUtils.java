@@ -107,7 +107,7 @@ public class AstUtils {
       Visibility visibility,
       TypeDescriptor... parameterTypeDescriptors) {
     JsInfo jsInfo =
-        typeDescriptor.isJsType()
+        typeDescriptor.isJsType() && visibility.isPublic()
             ? JsInfo.create(JsMemberType.CONSTRUCTOR, null, null, false)
             : JsInfo.NONE;
     return MethodDescriptor.Builder.fromDefault()

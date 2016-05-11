@@ -116,7 +116,7 @@ public class Method extends Node {
 
   public boolean isPrimaryConstructor() {
     if (isConstructor()) {
-      if (getDescriptor().getEnclosingClassTypeDescriptor().subclassesJsConstructorClass()) {
+      if (getDescriptor().getEnclosingClassTypeDescriptor().isOrSubclassesJsConstructorClass()) {
         return !AstUtils.hasThisCall(this);
       }
     }

@@ -304,8 +304,10 @@ public class TypeProxyUtils {
                 return method.isConstructor();
               }
             });
-    if (constructors.isEmpty()) {
-      // A JsType with default constructor is a JsConstructor class.
+    if (constructors.isEmpty()
+        && Modifier.isPublic(typeBinding.getModifiers())
+        && !typeBinding.isEnum()) {
+      // A public JsType with default constructor is a JsConstructor class.
       return JsInteropUtils.isJsType(typeBinding);
     }
     return !Collections2.filter(
@@ -323,12 +325,12 @@ public class TypeProxyUtils {
    * Returns true if the given type has a JsConstructor, or it is a successor of a class that has a
    * JsConstructor.
    */
-  static boolean subclassesJsConstructorClass(ITypeBinding typeBinding) {
+  static boolean isOrSubclassesJsConstructorClass(ITypeBinding typeBinding) {
     if (typeBinding == null) {
       return false;
     }
     return isJsConstructorClass(typeBinding)
-        || subclassesJsConstructorClass(typeBinding.getSuperclass());
+        || isOrSubclassesJsConstructorClass(typeBinding.getSuperclass());
   }
 
   /**

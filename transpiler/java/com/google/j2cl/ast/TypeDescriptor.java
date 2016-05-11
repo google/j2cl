@@ -114,8 +114,8 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
           };
       newTypeDescriptor.simpleName = typeDescriptor.getSimpleName();
       newTypeDescriptor.sourceName = typeDescriptor.getSourceName();
-      newTypeDescriptor.subclassesJsConstructorClass =
-          typeDescriptor.subclassesJsConstructorClass();
+      newTypeDescriptor.isOrSubclassesJsConstructorClass =
+          typeDescriptor.isOrSubclassesJsConstructorClass();
       newTypeDescriptor.superTypeDescriptorFactory =
           new TypeDescriptorFactory() {
             @Override
@@ -322,8 +322,8 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       return this;
     }
 
-    public Builder setSubclassesJsConstructorClass(boolean subclassesJsConstructorClass) {
-      newTypeDescriptor.subclassesJsConstructorClass = subclassesJsConstructorClass;
+    public Builder setIsOrSubclassesJsConstructorClass(boolean isOrSubclassesJsConstructorClass) {
+      newTypeDescriptor.isOrSubclassesJsConstructorClass = isOrSubclassesJsConstructorClass;
       return this;
     }
 
@@ -411,7 +411,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   private TypeDescriptorFactory rawTypeDescriptorFactory;
   private String simpleName;
   private String sourceName;
-  private boolean subclassesJsConstructorClass;
+  private boolean isOrSubclassesJsConstructorClass;
   private TypeDescriptorFactory superTypeDescriptorFactory;
   private List<TypeDescriptor> typeArgumentDescriptors = Collections.emptyList();
   private List<TypeDescriptor> unionedTypeDescriptors = Collections.emptyList();
@@ -745,8 +745,8 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return isWildCard;
   }
 
-  public boolean subclassesJsConstructorClass() {
-    return subclassesJsConstructorClass;
+  public boolean isOrSubclassesJsConstructorClass() {
+    return isOrSubclassesJsConstructorClass;
   }
 
   @Override
