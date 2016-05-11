@@ -207,13 +207,17 @@ public class NormalizeConstructors {
       @Override
       public Node rewriteMethod(Method constructor) {
         if (constructor.isConstructor()) {
-          return Method.Builder.fromDefault()
+          Method.Builder methodBuilder = Method.Builder.fromDefault()
               .setMethodDescriptor(
                   ctorMethodDescritorFromJavaConstructor(constructor.getDescriptor()))
               .setParameters(constructor.getParameters())
               .addStatements(constructor.getBody().getStatements())
-              .setJsDocDescription("Initializes instance fields for a particular Java constructor.")
-              .build();
+              .setJsDocDescription(
+                  "Initializes instance fields for a particular Java constructor.");
+          for (int i = 0; i < constructor.getParameters().size(); i++) {
+            methodBuilder.setParameterOptional(i, constructor.isParameterOptional(i));
+          }
+          return methodBuilder.build();
         }
         return constructor;
       }
@@ -248,7 +252,7 @@ public class NormalizeConstructors {
           builder.addParameter(typeParameter.getTypeDescriptor());
         }
         MethodDescriptor constructorDescriptor = builder.build();
-        List<Variable> constructorArguments = primaryConstructor.getParameters();
+        List<Variable> constructorParameters = primaryConstructor.getParameters();
 
         // Must call the corresponding the $ctor method.
         MethodDescriptor ctorDescriptor =
@@ -279,12 +283,16 @@ public class NormalizeConstructors {
                 javaType.getSuperTypeDescriptor(), superArgumentTypes, superArguments);
         body.add(0, new ExpressionStatement(jsSuperCall));
 
-        return Method.Builder.fromDefault()
-            .setMethodDescriptor(constructorDescriptor)
-            .setParameters(constructorArguments)
-            .addStatements(body)
-            .setJsDocDescription("Real constructor.")
-            .build();
+        Method.Builder constructorBuilder =
+            Method.Builder.fromDefault()
+                .setMethodDescriptor(constructorDescriptor)
+                .setParameters(constructorParameters)
+                .addStatements(body)
+                .setJsDocDescription("Real constructor.");
+        for (int i = 0; i < constructorParameters.size(); i++) {
+          constructorBuilder.setParameterOptional(i, primaryConstructor.isParameterOptional(i));
+        }
+        return constructorBuilder.build();
       }
 
       private Method synthesizeRegularEs6Constructor(JavaType javaType) {

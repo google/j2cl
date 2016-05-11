@@ -23,31 +23,15 @@ let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
 
 class Main extends Object {
   /**
-   * Defines instance fields.
+   * Real constructor.
+   * @param {?string=} a
    * @public
    */
-  constructor() { super(); }
-
-  /**
-   * A particular Java constructor as a factory method.
-   * @return {!Main}
-   * @public
-   */
-  static $create() {
+  constructor(a) {
     Main.$clinit();
-    let $instance = new Main();
-    $instance.$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main();
-    return $instance;
-  }
-
-  /**
-   * Initializes instance fields for a particular Java constructor.
-   * @return {void}
-   * @public
-   */
-  $ctor__com_google_j2cl_transpiler_readable_jsoptional_Main() {
-    this.$ctor__java_lang_Object();
-    this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main();
+    super();
+    this.$ctor__com_google_j2cl_transpiler_readable_jsoptional_Main__java_lang_String(
+        a);
   }
 
   /**
@@ -71,6 +55,29 @@ class Main extends Object {
         $Arrays.$create([arguments.length - 2], Boolean));
     for (let $i = 0; $i < arguments.length - 2; $i++)
       $Arrays.$set($var_args_copy, $i, arguments[$i + 2]);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {?string} a
+   * @return {!Main}
+   * @public
+   */
+  static $create__java_lang_String(a) {
+    Main.$clinit();
+    return new Main(a);
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {?string=} a
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsoptional_Main__java_lang_String(
+      a) {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_jsoptional_Main();
   }
 
   /**

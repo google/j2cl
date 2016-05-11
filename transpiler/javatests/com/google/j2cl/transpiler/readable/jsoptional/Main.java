@@ -1,5 +1,6 @@
 package com.google.j2cl.transpiler.readable.jsoptional;
 
+import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsOptional;
@@ -16,8 +17,10 @@ public class Main {
     Object f1(@JsOptional String i, Object... args);
   }
 
-  static class AFunction implements Function {
+  @JsConstructor
+  public Main(@JsOptional String a) {}
 
+  static class AFunction implements Function {
     @Override
     public Object f1(@JsOptional String i, Object... args) {
       return args[0];
