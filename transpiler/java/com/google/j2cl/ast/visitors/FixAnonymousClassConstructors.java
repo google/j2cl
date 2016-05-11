@@ -99,7 +99,7 @@ public class FixAnonymousClassConstructors extends AbstractRewriter {
 
     MethodCall.Builder methodCallBuilder = MethodCall.Builder.from(methodCall);
     for (Variable parameter : superConstructorParameters) {
-      methodCallBuilder.addArgument(parameter.getReference(), parameter.getTypeDescriptor());
+      methodCallBuilder.appendArgumentAndUpdateDescriptor(parameter.getReference());
     }
 
     return methodCallBuilder.build();
@@ -201,7 +201,7 @@ public class FixAnonymousClassConstructors extends AbstractRewriter {
       }
 
       return NewInstance.Builder.from(newInstance)
-          .addArgument(
+          .appendArgumentAndUpdateDescriptor(
               qualifierByTypeDescriptor.get(typeDescriptor),
               typeDescriptor.getSuperTypeDescriptor().getEnclosingTypeDescriptor())
           .build();

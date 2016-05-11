@@ -122,7 +122,7 @@ public class NormalizeNestedClassConstructors {
       if (targetTypeDescriptor.isInstanceMemberClass()) {
         // outerClassInstance.new InnerClass() => new InnerClass(outerClassInstance)
         return NewInstance.Builder.from(newInstance)
-            .addArgument(
+            .appendArgumentAndUpdateDescriptor(
                 newInstance.getQualifier(), targetTypeDescriptor.getEnclosingTypeDescriptor())
             .build();
       }
@@ -224,20 +224,20 @@ public class NormalizeNestedClassConstructors {
 
     @Override
     public Node rewriteNewInstance(NewInstance newInstance) {
-      NewInstance.Builder newInstanceBuilder = NewInstance.Builder.from(newInstance);
       TypeDescriptor typeDescriptor = newInstance.getTarget().getEnclosingClassTypeDescriptor();
       JavaType type = getJavaType(typeDescriptor);
       if (type == null || type.isStatic() || type.getEnclosingTypeDescriptor() == null) {
         return newInstance;
       }
 
+      NewInstance.Builder newInstanceBuilder = NewInstance.Builder.from(newInstance);
       // Add arguments that reference the variables captured by the given type.
       addCapturedVariableArguments(newInstanceBuilder, typeDescriptor);
 
       // Maybe add the qualifier of the NewInstance as the last argument to the constructor of a
       // local class. The qualifier may be null if the local class is in a static context.
       if (type.isLocal() && newInstance.getQualifier() != null) {
-        newInstanceBuilder.addArgument(
+        newInstanceBuilder.appendArgumentAndUpdateDescriptor(
             newInstance.getQualifier(), newInstance.getQualifier().getTypeDescriptor());
       }
 
@@ -246,19 +246,20 @@ public class NormalizeNestedClassConstructors {
 
     @Override
     public Node rewriteMethodCall(MethodCall methodCall) {
-      MethodCall.Builder methodCallBuilder = MethodCall.Builder.from(methodCall);
       MethodDescriptor target = methodCall.getTarget();
       if (!target.isConstructor()) {
         return methodCall;
       }
 
+      MethodCall.Builder methodCallBuilder = MethodCall.Builder.from(methodCall);
       if (AstUtils.isDelegatedConstructorCall(methodCall, getCurrentJavaType().getDescriptor())) {
         // this() call, expands the given arguments list with references to the captured variable
         // passing parameters in the constructor method.
         for (Field capturedField : getFieldsForAllCaptures(getCurrentJavaType())) {
           Variable parameter =
               getParameterForCapturedField(capturedField.getDescriptor(), getCurrentMethod());
-          methodCallBuilder.addArgument(parameter.getReference(), parameter.getTypeDescriptor());
+          methodCallBuilder.appendArgumentAndUpdateDescriptor(
+              parameter.getReference(), parameter.getTypeDescriptor());
         }
       } else {
         // super() call
@@ -268,7 +269,7 @@ public class NormalizeNestedClassConstructors {
         // a.super() => super(a)
         if (!AstUtils.hasThisReferenceAsQualifier(methodCall)) {
           methodCallBuilder
-              .addArgument(
+              .appendArgumentAndUpdateDescriptor(
                   methodCall.getQualifier(), superTypeDescriptor.getEnclosingTypeDescriptor())
               .setQualifier(null);
         }
@@ -281,7 +282,7 @@ public class NormalizeNestedClassConstructors {
      * Expands the given arguments list with references to the variables captured by the given type.
      */
     private void addCapturedVariableArguments(
-        Invocation.Builder<?> invocationBuilder, TypeDescriptor typeDescriptor) {
+        Invocation.Builder invocationBuilder, TypeDescriptor typeDescriptor) {
       JavaType type = getJavaType(typeDescriptor);
       if (type == null) {
         return;
@@ -296,13 +297,13 @@ public class NormalizeNestedClassConstructors {
         if (capturingField != null) {
           // If the capturedVariable is also a captured variable in current type, pass the
           // corresponding field in current type as an argument.
-          invocationBuilder.addArgument(
+          invocationBuilder.appendArgumentAndUpdateDescriptor(
               new FieldAccess(new ThisReference(typeDescriptor), capturingField.getDescriptor()),
               capturingField.getDescriptor().getTypeDescriptor());
         } else {
           // otherwise, the captured variable is in the scope of the current type, so pass the
           // variable directly as an argument.
-          invocationBuilder.addArgument(
+          invocationBuilder.appendArgumentAndUpdateDescriptor(
               capturedVariable.getReference(), capturedVariable.getTypeDescriptor());
         }
       }

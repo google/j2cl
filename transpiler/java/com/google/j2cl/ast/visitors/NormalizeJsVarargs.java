@@ -207,33 +207,29 @@ public class NormalizeJsVarargs extends AbstractRewriter {
         return methodCall;
       }
       Expression lastArgument = Iterables.getLast(methodCall.getArguments());
-      MethodCall.Builder methodCallBuilder = MethodCall.Builder.from(methodCall);
 
       // If the last argument is an array literal, or an array creation with array literal,
       // unwrap array literal, and pass the unwrapped arguments directly.
-      ArrayLiteral arrayLiteral = null;
       if (lastArgument instanceof ArrayLiteral) {
-        arrayLiteral = (ArrayLiteral) lastArgument;
-      }
-      if (lastArgument instanceof NewArray) {
-        arrayLiteral = ((NewArray) lastArgument).getArrayLiteral();
-      }
-      if (arrayLiteral != null) {
-        // Directly unwrap as array literal.
-        methodCallBuilder.removeLastArgument();
-        for (Expression varArgument : arrayLiteral.getValueExpressions()) {
-          // add argument to the call site, but do not change the MethodDescriptor.
-          methodCallBuilder.addArgument(varArgument, null);
-        }
-        return methodCallBuilder.build();
+        return MethodCall.Builder.from(methodCall)
+            .replaceVarargsArgument(((ArrayLiteral) lastArgument).getValueExpressions())
+            .build();
       }
 
-      methodCallBuilder.removeLastArgument();
-      methodCallBuilder.addArgument(
-          new PrefixExpression(
-              lastArgument.getTypeDescriptor(), lastArgument, PrefixOperator.SPREAD),
-          null);
-      return methodCallBuilder.build();
+      if (lastArgument instanceof NewArray) {
+        ArrayLiteral arrayLiteral = ((NewArray) lastArgument).getArrayLiteral();
+        if (arrayLiteral != null) {
+          return MethodCall.Builder.from(methodCall)
+              .replaceVarargsArgument(arrayLiteral.getValueExpressions())
+              .build();
+        }
+      }
+
+      return MethodCall.Builder.from(methodCall)
+          .replaceVarargsArgument(
+              new PrefixExpression(
+                  lastArgument.getTypeDescriptor(), lastArgument, PrefixOperator.SPREAD))
+          .build();
     }
   }
 }

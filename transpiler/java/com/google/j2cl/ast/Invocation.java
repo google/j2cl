@@ -15,104 +15,129 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Preconditions;
+import static com.google.common.base.Preconditions.checkState;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * Abstracts invocations, i.e. method calls and new instances.
  */
-public interface Invocation extends MemberReference {
+@Visitable
+public abstract class Invocation extends Expression implements MemberReference {
 
   @Override
-  MethodDescriptor getTarget();
+  public abstract MethodDescriptor getTarget();
 
-  List<Expression> getArguments();
+  public abstract List<Expression> getArguments();
 
+  abstract Builder newBuilder();
+
+  @Override
+  public abstract Node accept(Processor processor);
   /**
    * Common logic for a builder to create method calls and new instances.
    *
    * <p>Takes care of the busy work of keeping argument list and method descriptor parameter types
    * list in sync.
    */
-  abstract class Builder<T extends Invocation> {
+  public abstract static class Builder {
 
     private Expression qualifierExpression;
-    private MethodDescriptor originalMethodDescriptor;
-    private List<Expression> originalArguments = new ArrayList<>();
-    private List<Expression> additionalArguments = new ArrayList<>();
-    private List<TypeDescriptor> additionalTypeDescriptors = new ArrayList<>();
+    private MethodDescriptor methodDescriptor;
+    private List<Expression> arguments = new ArrayList<>();
 
-    protected void initFrom(T call) {
-      this.qualifierExpression = call.getQualifier();
-      this.originalMethodDescriptor = call.getTarget();
-      this.originalArguments = Lists.newArrayList(call.getArguments());
+    public static Builder from(Invocation invocation) {
+      Builder builder = invocation.newBuilder();
+      builder.qualifierExpression = invocation.getQualifier();
+      builder.methodDescriptor = invocation.getTarget();
+      builder.arguments = Lists.newArrayList(invocation.getArguments());
+      return builder;
     }
 
-    public Builder<T> setArguments(List<Expression> arguments) {
-      originalArguments.clear();
-      originalArguments.addAll(arguments);
+    public Builder setArguments(List<Expression> arguments) {
+      this.arguments.clear();
+      this.arguments.addAll(arguments);
       return this;
     }
 
-    public Builder<T> addArgument(
+    public Builder appendArgumentsAndUpdateDescriptor(Expression... argumentExpressions) {
+      return appendArgumentsAndUpdateDescriptor(Arrays.asList(argumentExpressions));
+    }
+
+    public Builder appendArgumentsAndUpdateDescriptor(Iterable<Expression> argumentExpressions) {
+      Iterables.addAll(arguments, argumentExpressions);
+      methodDescriptor =
+          MethodDescriptors.createWithExtraParameters(
+              methodDescriptor,
+              Iterables.transform(
+                  argumentExpressions,
+                  new Function<Expression, TypeDescriptor>() {
+                    @Override
+                    public TypeDescriptor apply(Expression expression) {
+                      return expression.getTypeDescriptor();
+                    }
+                  }));
+      return this;
+    }
+
+    public Builder appendArgumentAndUpdateDescriptor(Expression argumentExpression) {
+      arguments.add(argumentExpression);
+      methodDescriptor =
+          MethodDescriptors.createWithExtraParameters(
+              methodDescriptor, argumentExpression.getTypeDescriptor());
+      return this;
+    }
+
+    public Builder appendArgumentAndUpdateDescriptor(
         Expression argumentExpression, TypeDescriptor parameterTypeDescriptor) {
-      additionalArguments.add(argumentExpression);
-      if (parameterTypeDescriptor == null) {
-        // We allow adding an argument to a method call without adding a corresponding parameter in
-        // the MethodDescriptor if the method is a JsMethod vararg method, because the method call
-        // will accept multiple individual arguments as the varargs, rather than a wrapped array.
-        Preconditions.checkArgument(
-            originalMethodDescriptor.isJsMethodVarargs(),
-            "Parameter TypeDescriptor must be provided when adding argument to a MethodCall that is"
-                + "not a vararg JS method call.");
-      } else {
-        additionalTypeDescriptors.add(parameterTypeDescriptor);
-      }
+      arguments.add(argumentExpression);
+      methodDescriptor =
+          MethodDescriptors.createWithExtraParameters(methodDescriptor, parameterTypeDescriptor);
       return this;
     }
 
-    public Builder<T> removeLastArgument() {
-      Preconditions.checkArgument(
-          originalMethodDescriptor.isJsMethodVarargs(),
-          "Unsupported operation for methods that are not varargs JS methods.");
-      originalArguments.remove(originalArguments.size() - 1);
+    public Builder replaceVarargsArgument(Expression... replacementArguments) {
+      return replaceVarargsArgument(Arrays.asList(replacementArguments));
+    }
+
+    public Builder replaceVarargsArgument(List<Expression> replacementArguments) {
+      checkState(methodDescriptor.isJsMethodVarargs());
+      int lastArgumentPosition = arguments.size() - 1;
+      arguments.remove(lastArgumentPosition);
+      arguments.addAll(replacementArguments);
       return this;
     }
 
-    public Builder<T> setQualifier(Expression qualifierExpression) {
+    public Builder setQualifier(Expression qualifierExpression) {
       this.qualifierExpression = qualifierExpression;
       return this;
     }
 
-    public Builder<T> setMethodDescriptor(MethodDescriptor methodDescriptor) {
-      this.originalMethodDescriptor = methodDescriptor;
+    public Builder setMethodDescriptor(MethodDescriptor methodDescriptor) {
+      this.methodDescriptor = methodDescriptor;
       return this;
     }
 
-    public Builder<T> setEnclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
-      this.originalMethodDescriptor =
-          MethodDescriptor.Builder.from(originalMethodDescriptor)
+    public Builder setEnclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
+      this.methodDescriptor =
+          MethodDescriptor.Builder.from(methodDescriptor)
               .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
               .build();
       return this;
     }
 
-    public T build() {
-      List<Expression> finalArguments = new ArrayList<>();
-      finalArguments.addAll(originalArguments);
-      finalArguments.addAll(additionalArguments);
-
-      MethodDescriptor finalMethodDescriptor =
-          MethodDescriptors.createWithExtraParameters(
-              originalMethodDescriptor, additionalTypeDescriptors);
-
-      return doCreateInvocation(qualifierExpression, finalMethodDescriptor, finalArguments);
+    public Invocation build() {
+      return doCreateInvocation(qualifierExpression, methodDescriptor, arguments);
     }
 
-    protected abstract T doCreateInvocation(
+    protected abstract Invocation doCreateInvocation(
         Expression qualifierExpression,
         MethodDescriptor finalMethodDescriptor,
         List<Expression> finalArguments);

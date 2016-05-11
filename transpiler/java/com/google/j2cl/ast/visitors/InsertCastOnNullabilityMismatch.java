@@ -23,8 +23,6 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.JsTypeAnnotation;
-import com.google.j2cl.ast.MethodCall;
-import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -47,18 +45,6 @@ public class InsertCastOnNullabilityMismatch extends AbstractRewriter {
 
   public static void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new InsertCastOnNullabilityMismatch());
-  }
-
-  @Override
-  public Node rewriteNewInstance(NewInstance newInstance) {
-    rewriteInvocation(newInstance);
-    return newInstance;
-  }
-
-  @Override
-  public Node rewriteMethodCall(MethodCall methodCall) {
-    rewriteInvocation(methodCall);
-    return methodCall;
   }
 
   @Override
@@ -108,7 +94,8 @@ public class InsertCastOnNullabilityMismatch extends AbstractRewriter {
     return binaryExpression;
   }
 
-  private void rewriteInvocation(Invocation invocation) {
+  @Override
+  public Node rewriteInvocation(Invocation invocation) {
     List<TypeDescriptor> parameterTypes = invocation.getTarget().getParameterTypeDescriptors();
     List<Expression> arguments = invocation.getArguments();
 
@@ -126,6 +113,7 @@ public class InsertCastOnNullabilityMismatch extends AbstractRewriter {
         arguments.set(i, JsTypeAnnotation.createTypeAnnotation(arguments.get(i), fixedType));
       }
     }
+    return invocation;
   }
 
   @Override

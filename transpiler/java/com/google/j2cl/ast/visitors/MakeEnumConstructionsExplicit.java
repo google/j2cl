@@ -72,8 +72,8 @@ public class MakeEnumConstructionsExplicit extends AbstractRewriter {
     }
 
     return MethodCall.Builder.from(methodCall)
-        .addArgument(nameVariable.getReference(), nameVariable.getTypeDescriptor())
-        .addArgument(ordinalVariable.getReference(), ordinalVariable.getTypeDescriptor())
+        .appendArgumentsAndUpdateDescriptor(
+            nameVariable.getReference(), ordinalVariable.getReference())
         .build();
   }
 
@@ -102,12 +102,9 @@ public class MakeEnumConstructionsExplicit extends AbstractRewriter {
             enumField.getDescriptor().getEnclosingClassTypeDescriptor(), 1);
 
     return NewInstance.Builder.from(newInstance)
-        .addArgument(
+        .appendArgumentsAndUpdateDescriptor(
             StringLiteral.fromPlainText(enumField.getDescriptor().getFieldName()),
-            TypeDescriptors.get().javaLangString)
-        .addArgument(
-            new NumberLiteral(TypeDescriptors.get().primitiveInt, currentOrdinal),
-            TypeDescriptors.get().primitiveInt)
+            new NumberLiteral(TypeDescriptors.get().primitiveInt, currentOrdinal))
         .build();
   }
 

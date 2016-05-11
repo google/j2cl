@@ -17,6 +17,7 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.j2cl.ast.Invocation.Builder;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ import javax.annotation.Nullable;
  * Class for new instance expression.
  */
 @Visitable
-public class NewInstance extends Expression implements Invocation {
+public class NewInstance extends Invocation {
   @Visitable @Nullable Expression qualifier;
   @Visitable MethodDescriptor constructorMethodDescriptor;
   @Visitable List<Expression> arguments = new ArrayList<>();
@@ -69,6 +70,11 @@ public class NewInstance extends Expression implements Invocation {
   }
 
   @Override
+  Builder newBuilder() {
+    return new Builder();
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_NewInstance.visit(processor, this);
   }
@@ -79,11 +85,9 @@ public class NewInstance extends Expression implements Invocation {
    * <p>Takes care of the busy work of keeping argument list and method descriptor parameter types
    * list in sync.
    */
-  public static class Builder extends Invocation.Builder<NewInstance> {
+  public static class Builder extends Invocation.Builder {
     public static Builder from(NewInstance newInstance) {
-      Builder builder = new Builder();
-      builder.initFrom(newInstance);
-      return builder;
+      return (Builder) Invocation.Builder.from(newInstance);
     }
 
     @Override

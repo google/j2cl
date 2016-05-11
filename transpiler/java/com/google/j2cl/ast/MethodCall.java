@@ -17,6 +17,7 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.j2cl.ast.Invocation.Builder;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ import java.util.List;
  * Class for method call expression.
  */
 @Visitable
-public class MethodCall extends Expression implements Invocation {
+public class MethodCall extends Invocation {
   @Visitable Expression qualifier;
   @Visitable MethodDescriptor targetMethodDescriptor;
   @Visitable List<Expression> arguments = new ArrayList<>();
@@ -91,6 +92,11 @@ public class MethodCall extends Expression implements Invocation {
   }
 
   @Override
+  Builder newBuilder() {
+    return new Builder();
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_MethodCall.visit(processor, this);
   }
@@ -101,12 +107,11 @@ public class MethodCall extends Expression implements Invocation {
    * <p>Takes care of the busy work of keeping argument list and method descriptor parameter types
    * list in sync.
    */
-  public static class Builder extends Invocation.Builder<MethodCall> {
+  public static class Builder extends Invocation.Builder {
     private boolean isStaticDispatch;
 
     public static Builder from(MethodCall methodCall) {
-      Builder builder = new Builder();
-      builder.initFrom(methodCall);
+      Builder builder = (Builder) Invocation.Builder.from(methodCall);
       builder.isStaticDispatch = methodCall.isStaticDispatch();
       return builder;
     }

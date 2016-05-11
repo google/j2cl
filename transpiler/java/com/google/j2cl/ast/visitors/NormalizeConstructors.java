@@ -466,13 +466,12 @@ public class NormalizeConstructors {
         new ReturnStatement(
             newInstanceReference, constructor.getDescriptor().getEnclosingClassTypeDescriptor());
 
-    String factoryMethodDescription = "A particular Java constructor as a factory method.";
     return Method.Builder.fromDefault()
         .setMethodDescriptor(factoryDescriptorForConstructor(constructor.getDescriptor()))
         .setParameters(constructor.getParameters())
         .addStatements(newInstanceStatement, ctorCallStatement, returnStatement)
         .setIsFinal(true)
-        .setJsDocDescription(factoryMethodDescription)
+        .setJsDocDescription("A particular Java constructor as a factory method.")
         .build();
   }
 
@@ -523,13 +522,12 @@ public class NormalizeConstructors {
             new NewInstance(null, javascriptConstructor, relayArguments),
             primaryConstructor.getDescriptor().getEnclosingClassTypeDescriptor());
 
-    String factoryMethodDescription = "A particular Java constructor as a factory method.";
     return Method.Builder.fromDefault()
         .setMethodDescriptor(factoryDescriptorForConstructor(primaryConstructor.getDescriptor()))
         .setParameters(primaryConstructor.getParameters())
         .addStatements(returnStatement)
         .setIsFinal(true)
-        .setJsDocDescription(factoryMethodDescription)
+        .setJsDocDescription("A particular Java constructor as a factory method.")
         .build();
   }
 }

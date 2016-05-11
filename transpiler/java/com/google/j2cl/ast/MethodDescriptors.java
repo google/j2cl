@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import com.google.common.collect.Iterables;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,6 +29,16 @@ public class MethodDescriptors {
   public static boolean isToStringMethodDescriptor(MethodDescriptor methodDescriptor) {
     return methodDescriptor.getMethodName().equals("toString")
         && methodDescriptor.getParameterTypeDescriptors().isEmpty();
+  }
+
+  /**
+   * Creates a copy of the given method descriptor by adding the provided parameters to its end.
+   *
+   * <p>Takes care to correctly mirror the update to any contained erased method descriptor version.
+   */
+  public static MethodDescriptor createWithExtraParameters(
+      MethodDescriptor methodDescriptor, TypeDescriptor... extraParameters) {
+    return createWithExtraParameters(methodDescriptor, Arrays.asList(extraParameters));
   }
 
   /**
