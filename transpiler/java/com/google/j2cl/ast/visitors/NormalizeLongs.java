@@ -70,13 +70,13 @@ public class NormalizeLongs extends AbstractRewriter {
 
     MethodDescriptor longUtilsMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .jsInfo(JsInfo.RAW)
-            .isStatic(true)
-            .enclosingClassTypeDescriptor(BootstrapType.LONGS.getDescriptor())
-            .methodName(getLongOperationFunctionName(operator))
-            .parameterTypeDescriptors(
+            .setJsInfo(JsInfo.RAW)
+            .setIsStatic(true)
+            .setEnclosingClassTypeDescriptor(BootstrapType.LONGS.getDescriptor())
+            .setMethodName(getLongOperationFunctionName(operator))
+            .setParameterTypeDescriptors(
                 Lists.newArrayList(leftParameterTypeDescriptor, rightParameterTypeDescriptor))
-            .returnTypeDescriptor(returnTypeDescriptor)
+            .setReturnTypeDescriptor(returnTypeDescriptor)
             .build();
     // LongUtils.$someOperation(leftOperand, rightOperand);
     return MethodCall.createMethodCall(
@@ -103,12 +103,12 @@ public class NormalizeLongs extends AbstractRewriter {
 
     MethodDescriptor longUtilsMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .jsInfo(JsInfo.RAW)
-            .isStatic(true)
-            .enclosingClassTypeDescriptor(BootstrapType.LONGS.getDescriptor())
-            .methodName(getLongOperationFunctionName(operator))
-            .parameterTypeDescriptors(Lists.newArrayList(parameterTypeDescriptor))
-            .returnTypeDescriptor(returnTypeDescriptor)
+            .setJsInfo(JsInfo.RAW)
+            .setIsStatic(true)
+            .setEnclosingClassTypeDescriptor(BootstrapType.LONGS.getDescriptor())
+            .setMethodName(getLongOperationFunctionName(operator))
+            .setParameterTypeDescriptors(Lists.newArrayList(parameterTypeDescriptor))
+            .setReturnTypeDescriptor(returnTypeDescriptor)
             .build();
     // LongUtils.$someOperation(operand);
     return MethodCall.createMethodCall(null, longUtilsMethodDescriptor, argument);

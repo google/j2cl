@@ -76,12 +76,12 @@ public class CastExpression extends Expression {
       return builder;
     }
 
-    public Builder expression(Expression expression) {
+    public Builder setExpression(Expression expression) {
       this.expression = expression;
       return this;
     }
 
-    public Builder castTypeDescriptor(TypeDescriptor castTypeDescriptor) {
+    public Builder setCastTypeDescriptor(TypeDescriptor castTypeDescriptor) {
       this.castTypeDescriptor = castTypeDescriptor;
       return this;
     }

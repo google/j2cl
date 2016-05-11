@@ -150,12 +150,12 @@ public class InsertNarrowingPrimitiveConversions extends ConversionContextVisito
                     AstUtils.toProperCase(toTypeDescriptor.getSimpleName()));
             MethodDescriptor narrowMethodDescriptor =
                 MethodDescriptor.Builder.fromDefault()
-                    .jsInfo(JsInfo.RAW)
-                    .isStatic(true)
-                    .enclosingClassTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
-                    .methodName(narrowMethodName)
-                    .parameterTypeDescriptors(Lists.newArrayList(fromTypeDescriptor))
-                    .returnTypeDescriptor(toTypeDescriptor)
+                    .setJsInfo(JsInfo.RAW)
+                    .setIsStatic(true)
+                    .setEnclosingClassTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
+                    .setMethodName(narrowMethodName)
+                    .setParameterTypeDescriptors(Lists.newArrayList(fromTypeDescriptor))
+                    .setReturnTypeDescriptor(toTypeDescriptor)
                     .build();
             // Primitives.$narrowAToB(expr);
             return MethodCall.createMethodCall(null, narrowMethodDescriptor, expression);

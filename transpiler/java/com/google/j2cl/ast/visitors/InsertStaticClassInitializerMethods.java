@@ -40,10 +40,10 @@ public class InsertStaticClassInitializerMethods {
       if (isStaticMethod || isJsConstructor) {
         MethodDescriptor clinitDescriptor =
             MethodDescriptor.Builder.fromDefault()
-                .isStatic(true)
-                .enclosingClassTypeDescriptor(
+                .setIsStatic(true)
+                .setEnclosingClassTypeDescriptor(
                     method.getDescriptor().getEnclosingClassTypeDescriptor())
-                .methodName("$clinit")
+                .setMethodName("$clinit")
                 .build();
         MethodCall call = MethodCall.createMethodCall(null, clinitDescriptor);
         return Method.Builder.from(method).addStatement(0, new ExpressionStatement(call)).build();

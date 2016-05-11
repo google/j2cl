@@ -218,22 +218,22 @@ public class Method extends Node {
     public Builder setEnclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
       this.methodDescriptor =
           MethodDescriptor.Builder.from(methodDescriptor)
-              .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+              .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
               .build();
       return this;
     }
 
-    public Builder isOverride(boolean isOverride) {
+    public Builder setIsOverride(boolean isOverride) {
       this.isOverride = isOverride;
       return this;
     }
 
-    public Builder isFinal(boolean isFinal) {
+    public Builder setIsFinal(boolean isFinal) {
       this.isFinal = isFinal;
       return this;
     }
 
-    public Builder isAbstract(boolean isAbstract) {
+    public Builder setIsAbstract(boolean isAbstract) {
       this.isAbstract = isAbstract;
       return this;
     }
@@ -256,7 +256,7 @@ public class Method extends Node {
           new Method(
               // Update method descriptor parameter types from actual parameter types.
               MethodDescriptor.Builder.from(methodDescriptor)
-                  .parameterTypeDescriptors(
+                  .setParameterTypeDescriptors(
                       Iterables.transform(
                           parameters,
                           new Function<Variable, TypeDescriptor>() {

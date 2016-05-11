@@ -51,7 +51,7 @@ public interface Invocation extends MemberReference {
       this.originalArguments = Lists.newArrayList(call.getArguments());
     }
 
-    public Builder<T> arguments(List<Expression> arguments) {
+    public Builder<T> setArguments(List<Expression> arguments) {
       originalArguments.clear();
       originalArguments.addAll(arguments);
       return this;
@@ -82,20 +82,20 @@ public interface Invocation extends MemberReference {
       return this;
     }
 
-    public Builder<T> qualifier(Expression qualifierExpression) {
+    public Builder<T> setQualifier(Expression qualifierExpression) {
       this.qualifierExpression = qualifierExpression;
       return this;
     }
 
-    public Builder<T> methodDescriptor(MethodDescriptor methodDescriptor) {
+    public Builder<T> setMethodDescriptor(MethodDescriptor methodDescriptor) {
       this.originalMethodDescriptor = methodDescriptor;
       return this;
     }
 
-    public Builder<T> enclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
+    public Builder<T> setEnclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
       this.originalMethodDescriptor =
           MethodDescriptor.Builder.from(originalMethodDescriptor)
-              .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+              .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
               .build();
       return this;
     }

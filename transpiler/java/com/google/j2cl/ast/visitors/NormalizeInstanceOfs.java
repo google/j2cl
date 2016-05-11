@@ -61,12 +61,12 @@ public class NormalizeInstanceOfs extends AbstractRewriter {
 
     MethodDescriptor isInstanceMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .jsInfo(JsInfo.RAW)
-            .isStatic(true)
-            .enclosingClassTypeDescriptor(checkTypeDescriptor)
-            .methodName("$isInstance")
-            .parameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))
-            .returnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
+            .setJsInfo(JsInfo.RAW)
+            .setIsStatic(true)
+            .setEnclosingClassTypeDescriptor(checkTypeDescriptor)
+            .setMethodName("$isInstance")
+            .setParameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))
+            .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
             .build();
     List<Expression> arguments = new ArrayList<>();
     arguments.add(instanceOfExpression.getExpression());
@@ -86,16 +86,16 @@ public class NormalizeInstanceOfs extends AbstractRewriter {
     TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
     MethodDescriptor isInstanceMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .jsInfo(JsInfo.RAW)
-            .isStatic(true)
-            .enclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
-            .methodName("$instanceIsOfType")
-            .parameterTypeDescriptors(
+            .setJsInfo(JsInfo.RAW)
+            .setIsStatic(true)
+            .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
+            .setMethodName("$instanceIsOfType")
+            .setParameterTypeDescriptors(
                 Lists.newArrayList(
                     TypeDescriptors.get().javaLangObject,
                     TypeDescriptors.get().javaLangObject,
                     TypeDescriptors.get().primitiveInt))
-            .returnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
+            .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
             .build();
     List<Expression> arguments = new ArrayList<>();
     arguments.add(instanceOfExpression.getExpression());
@@ -117,12 +117,12 @@ public class NormalizeInstanceOfs extends AbstractRewriter {
 
     MethodDescriptor isInstanceMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .jsInfo(JsInfo.RAW)
-            .isStatic(true)
-            .enclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
-            .methodName("$instanceIsOfNative")
-            .parameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))
-            .returnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
+            .setJsInfo(JsInfo.RAW)
+            .setIsStatic(true)
+            .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
+            .setMethodName("$instanceIsOfNative")
+            .setParameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))
+            .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
             .build();
     List<Expression> arguments = new ArrayList<>();
     arguments.add(instanceOfExpression.getExpression());

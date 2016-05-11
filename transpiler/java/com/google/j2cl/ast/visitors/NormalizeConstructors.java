@@ -136,11 +136,11 @@ public class NormalizeConstructors {
       MethodDescriptor constructor) {
     checkArgument(constructor.isConstructor());
     return MethodDescriptor.Builder.from(constructor)
-        .methodName(ManglingNameUtils.getCtorMangledName(constructor))
-        .isConstructor(false)
-        .isStatic(false)
-        .jsInfo(JsInfo.NONE)
-        .visibility(Visibility.PUBLIC)
+        .setMethodName(ManglingNameUtils.getCtorMangledName(constructor))
+        .setIsConstructor(false)
+        .setIsStatic(false)
+        .setJsInfo(JsInfo.NONE)
+        .setVisibility(Visibility.PUBLIC)
         .build();
   }
 
@@ -218,10 +218,10 @@ public class NormalizeConstructors {
 
     MethodDescriptor.Builder builder =
         MethodDescriptor.Builder.fromDefault()
-            .isConstructor(true)
-            .jsInfo(JsInfo.create(JsMemberType.CONSTRUCTOR, "constructor", null, false))
-            .visibility(Visibility.PUBLIC)
-            .enclosingClassTypeDescriptor(javaType.getDescriptor());
+            .setIsConstructor(true)
+            .setJsInfo(JsInfo.create(JsMemberType.CONSTRUCTOR, "constructor", null, false))
+            .setVisibility(Visibility.PUBLIC)
+            .setEnclosingClassTypeDescriptor(javaType.getDescriptor());
     for (Variable typeParameter : primaryConstructor.getParameters()) {
       builder.addParameter(typeParameter.getTypeDescriptor());
     }
@@ -289,9 +289,9 @@ public class NormalizeConstructors {
 
     MethodDescriptor constructorDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .isConstructor(true)
-            .enclosingClassTypeDescriptor(javaType.getDescriptor())
-            .visibility(Visibility.PUBLIC)
+            .setIsConstructor(true)
+            .setEnclosingClassTypeDescriptor(javaType.getDescriptor())
+            .setVisibility(Visibility.PUBLIC)
             .build();
 
     return Method.Builder.fromDefault()
@@ -310,10 +310,10 @@ public class NormalizeConstructors {
       List<Expression> superArguments) {
     MethodDescriptor jsSuperDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .parameterTypeDescriptors(superArgumentTypes)
-            .enclosingClassTypeDescriptor(superType)
-            .jsInfo(JsInfo.create(JsMemberType.CONSTRUCTOR, "super", null, false))
-            .isConstructor(true)
+            .setParameterTypeDescriptors(superArgumentTypes)
+            .setEnclosingClassTypeDescriptor(superType)
+            .setJsInfo(JsInfo.create(JsMemberType.CONSTRUCTOR, "super", null, false))
+            .setIsConstructor(true)
             .build();
     return MethodCall.createMethodCall(null, jsSuperDescriptor, superArguments);
   }
@@ -374,13 +374,13 @@ public class NormalizeConstructors {
         constructor.getEnclosingClassTypeDescriptor().getTypeArgumentDescriptors());
     allParameterTypes.addAll(constructor.getTypeParameterTypeDescriptors());
     return MethodDescriptor.Builder.from(constructor)
-        .isStatic(true)
-        .methodName(MethodDescriptor.CREATE_METHOD_NAME)
-        .visibility(Visibility.PUBLIC)
-        .isConstructor(false)
-        .returnTypeDescriptor(
+        .setIsStatic(true)
+        .setMethodName(MethodDescriptor.CREATE_METHOD_NAME)
+        .setVisibility(Visibility.PUBLIC)
+        .setIsConstructor(false)
+        .setReturnTypeDescriptor(
             TypeDescriptors.toNonNullable(constructor.getEnclosingClassTypeDescriptor()))
-        .typeParameterTypeDescriptors(allParameterTypes)
+        .setTypeParameterTypeDescriptors(allParameterTypes)
         .build();
   }
 
@@ -399,9 +399,9 @@ public class NormalizeConstructors {
     TypeDescriptor enclosingType = javaType.getDescriptor();
     MethodDescriptor javascriptConstructor =
         MethodDescriptor.Builder.fromDefault()
-            .enclosingClassTypeDescriptor(enclosingType)
-            .isConstructor(true)
-            .returnTypeDescriptor(TypeDescriptors.get().primitiveVoid)
+            .setEnclosingClassTypeDescriptor(enclosingType)
+            .setIsConstructor(true)
+            .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid)
             .build();
 
     List<Expression> arguments = Lists.newArrayList();
@@ -417,7 +417,7 @@ public class NormalizeConstructors {
       arguments = constructorInvocation.getArguments();
       MethodDescriptor javascriptConstructorDeclaration =
           MethodDescriptor.Builder.from(javascriptConstructor)
-              .parameterTypeDescriptors(
+              .setParameterTypeDescriptors(
                   constructorInvocation
                       .getTarget()
                       .getDeclarationMethodDescriptor()
@@ -425,8 +425,8 @@ public class NormalizeConstructors {
               .build();
       javascriptConstructor =
           MethodDescriptor.Builder.from(javascriptConstructor)
-              .declarationMethodDescriptor(javascriptConstructorDeclaration)
-              .parameterTypeDescriptors(
+              .setDeclarationMethodDescriptor(javascriptConstructorDeclaration)
+              .setParameterTypeDescriptors(
                   constructorInvocation.getTarget().getParameterTypeDescriptors())
               .build();
     }
@@ -471,7 +471,7 @@ public class NormalizeConstructors {
         .setMethodDescriptor(factoryDescriptorForConstructor(constructor.getDescriptor()))
         .setParameters(constructor.getParameters())
         .addStatements(newInstanceStatement, ctorCallStatement, returnStatement)
-        .isFinal(true)
+        .setIsFinal(true)
         .setJsDocDescription(factoryMethodDescription)
         .build();
   }
@@ -484,10 +484,10 @@ public class NormalizeConstructors {
         primaryConstructor.getDescriptor().getEnclosingClassTypeDescriptor();
     MethodDescriptor javascriptConstructor =
         MethodDescriptor.Builder.fromDefault()
-            .enclosingClassTypeDescriptor(enclosingType)
-            .isConstructor(true)
-            .returnTypeDescriptor(TypeDescriptors.get().primitiveVoid)
-            .visibility(Visibility.PRIVATE)
+            .setEnclosingClassTypeDescriptor(enclosingType)
+            .setIsConstructor(true)
+            .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid)
+            .setVisibility(Visibility.PRIVATE)
             .build();
 
     // $instance.$ctor...();
@@ -503,7 +503,7 @@ public class NormalizeConstructors {
 
     MethodDescriptor javascriptConstructorDeclaration =
         MethodDescriptor.Builder.from(javascriptConstructor)
-            .parameterTypeDescriptors(
+            .setParameterTypeDescriptors(
                 primaryConstructor
                     .getDescriptor()
                     .getDeclarationMethodDescriptor()
@@ -512,8 +512,8 @@ public class NormalizeConstructors {
 
     javascriptConstructor =
         MethodDescriptor.Builder.from(javascriptConstructor)
-            .declarationMethodDescriptor(javascriptConstructorDeclaration)
-            .parameterTypeDescriptors(
+            .setDeclarationMethodDescriptor(javascriptConstructorDeclaration)
+            .setParameterTypeDescriptors(
                 primaryConstructor.getDescriptor().getParameterTypeDescriptors())
             .build();
 
@@ -528,7 +528,7 @@ public class NormalizeConstructors {
         .setMethodDescriptor(factoryDescriptorForConstructor(primaryConstructor.getDescriptor()))
         .setParameters(primaryConstructor.getParameters())
         .addStatements(returnStatement)
-        .isFinal(true)
+        .setIsFinal(true)
         .setJsDocDescription(factoryMethodDescription)
         .build();
   }

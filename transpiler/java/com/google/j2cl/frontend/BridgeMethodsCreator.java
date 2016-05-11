@@ -98,7 +98,7 @@ public class BridgeMethodsCreator {
           public Node rewriteMethod(Method method) {
             if (toBeFixedMethodDescriptors.contains(method.getDescriptor())) {
               MethodDescriptor newMethodDescriptor =
-                  MethodDescriptor.Builder.from(method.getDescriptor()).jsInfo(JsInfo.NONE).build();
+                  MethodDescriptor.Builder.from(method.getDescriptor()).setJsInfo(JsInfo.NONE).build();
               return Method.Builder.from(method).setMethodDescriptor(newMethodDescriptor).build();
             }
             return method;
@@ -267,8 +267,8 @@ public class BridgeMethodsCreator {
         JdtMethodUtils.createMethodDescriptor(methodBinding);
 
     return MethodDescriptor.Builder.from(originalMethodDescriptor)
-        .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
-        .returnTypeDescriptor(returnTypeDescriptor)
+        .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+        .setReturnTypeDescriptor(returnTypeDescriptor)
         .build();
   }
 
@@ -309,7 +309,7 @@ public class BridgeMethodsCreator {
       targetMethodJsInfo = JsInfo.NONE;
     }
     targetMethodDescriptor =
-        MethodDescriptor.Builder.from(targetMethodDescriptor).jsInfo(targetMethodJsInfo).build();
+        MethodDescriptor.Builder.from(targetMethodDescriptor).setJsInfo(targetMethodJsInfo).build();
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
 

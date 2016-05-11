@@ -63,7 +63,7 @@ public class NormalizeMultiExpressions {
             ((MultiExpression) expression.getLeftOperand()).getExpressions();
         Expression rightMostLhsExpression = Iterables.getLast(lhsExpressions);
         Expression innerExpression =
-            BinaryExpression.Builder.from(expression).leftOperand(rightMostLhsExpression).build();
+            BinaryExpression.Builder.from(expression).setLeftOperand(rightMostLhsExpression).build();
         return new MultiExpression(
             Iterables.concat(
                 lhsExpressions.subList(0, lhsExpressions.size() - 1),
@@ -79,7 +79,7 @@ public class NormalizeMultiExpressions {
         List<Expression> expressions = ((MultiExpression) expression.getOperand()).getExpressions();
         Expression rightMostExpression = Iterables.getLast(expressions);
         Expression innerExpression =
-            UnaryExpression.Builder.from(expression).operand(rightMostExpression).build();
+            UnaryExpression.Builder.from(expression).setOperand(rightMostExpression).build();
         return new MultiExpression(
             Iterables.concat(
                 expressions.subList(0, expressions.size() - 1),

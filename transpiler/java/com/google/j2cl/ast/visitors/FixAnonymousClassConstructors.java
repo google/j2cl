@@ -159,7 +159,7 @@ public class FixAnonymousClassConstructors extends AbstractRewriter {
       // super() call, set the qualifier.
       MethodCall.Builder methodCallBuilder = MethodCall.Builder.from(methodCall);
       if (parameterForSuperCallQualifier != null) {
-        methodCallBuilder.qualifier(parameterForSuperCallQualifier.getReference());
+        methodCallBuilder.setQualifier(parameterForSuperCallQualifier.getReference());
       }
 
       return methodCallBuilder.build();

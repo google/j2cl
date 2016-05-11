@@ -130,12 +130,12 @@ public class InsertWideningPrimitiveConversions extends ConversionContextVisitor
             AstUtils.toProperCase(toTypeDescriptor.getSimpleName()));
     MethodDescriptor widenMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .jsInfo(JsInfo.RAW)
-            .isStatic(true)
-            .enclosingClassTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
-            .methodName(widenMethodName)
-            .parameterTypeDescriptors(Lists.newArrayList(fromTypeDescriptor))
-            .returnTypeDescriptor(toTypeDescriptor)
+            .setJsInfo(JsInfo.RAW)
+            .setIsStatic(true)
+            .setEnclosingClassTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
+            .setMethodName(widenMethodName)
+            .setParameterTypeDescriptors(Lists.newArrayList(fromTypeDescriptor))
+            .setReturnTypeDescriptor(toTypeDescriptor)
             .build();
     // Primitives.$widenAToB(expr);
     return MethodCall.createMethodCall(null, widenMethodDescriptor, subjectExpression);

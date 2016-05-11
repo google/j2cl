@@ -66,17 +66,17 @@ public abstract class UnaryExpression extends Expression {
       return builder;
     }
 
-    public Builder operand(Expression operand) {
+    public Builder setOperand(Expression operand) {
       this.operand = operand;
       return this;
     }
 
-    public Builder operator(Operator operator) {
+    public Builder setOperator(Operator operator) {
       this.operator = (PrefixOperator) operator;
       return this;
     }
 
-    public Builder typeDescriptor(TypeDescriptor typeDescriptor) {
+    public Builder setTypeDescriptor(TypeDescriptor typeDescriptor) {
       this.typeDescriptor = typeDescriptor;
       return this;
     }

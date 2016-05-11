@@ -270,7 +270,7 @@ public class NormalizeNestedClassConstructors {
           methodCallBuilder
               .addArgument(
                   methodCall.getQualifier(), superTypeDescriptor.getEnclosingTypeDescriptor())
-              .qualifier(null);
+              .setQualifier(null);
         }
       }
 

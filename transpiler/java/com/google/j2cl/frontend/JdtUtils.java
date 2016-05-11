@@ -606,8 +606,8 @@ public class JdtUtils {
         .setMethodDescriptor(samMethodDescriptor)
         .setParameters(parameters)
         .addStatements(statement)
-        .isOverride(true)
-        .isFinal(true)
+        .setIsOverride(true)
+        .setIsFinal(true)
         .build();
   }
 

@@ -73,33 +73,33 @@ public class EnumMethodsCreator {
                     JsInteropUtils.JS_GLOBAL,
                     // Native type name
                     "Object"))
-            .isStatic(true)
-            .visibility(Visibility.PRIVATE)
+            .setIsStatic(true)
+            .setVisibility(Visibility.PRIVATE)
             .build();
     this.valuesMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .isStatic(true)
-            .enclosingClassTypeDescriptor(enumType.getDescriptor())
-            .methodName(VALUES_METHOD_NAME)
-            .returnTypeDescriptor(TypeDescriptors.getForArray(enumType.getDescriptor(), 1))
-            .parameterTypeDescriptors(Arrays.asList(new TypeDescriptor[0]))
-            .jsInfo(jsType ? JsInfo.RAW : JsInfo.NONE)
+            .setIsStatic(true)
+            .setEnclosingClassTypeDescriptor(enumType.getDescriptor())
+            .setMethodName(VALUES_METHOD_NAME)
+            .setReturnTypeDescriptor(TypeDescriptors.getForArray(enumType.getDescriptor(), 1))
+            .setParameterTypeDescriptors(Arrays.asList(new TypeDescriptor[0]))
+            .setJsInfo(jsType ? JsInfo.RAW : JsInfo.NONE)
             .build();
     this.valueOfMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .isStatic(true)
-            .enclosingClassTypeDescriptor(enumType.getDescriptor())
-            .methodName(VALUE_OF_METHOD_NAME)
-            .returnTypeDescriptor(enumType.getDescriptor())
-            .parameterTypeDescriptors(TypeDescriptors.get().javaLangString)
-            .jsInfo(jsType ? JsInfo.RAW : JsInfo.NONE)
+            .setIsStatic(true)
+            .setEnclosingClassTypeDescriptor(enumType.getDescriptor())
+            .setMethodName(VALUE_OF_METHOD_NAME)
+            .setReturnTypeDescriptor(enumType.getDescriptor())
+            .setParameterTypeDescriptors(TypeDescriptors.get().javaLangString)
+            .setJsInfo(jsType ? JsInfo.RAW : JsInfo.NONE)
             .build();
   }
 
   private void run() {
     enumType.addField(
         Field.Builder.fromDefault(this.namesToValuesMapFieldDescriptor)
-            .initializer(NullLiteral.NULL)
+            .setInitializer(NullLiteral.NULL)
             .setPosition(-1) /* Position is not important */
             .build());
     enumType.addMethod(createValueOfMethod());
@@ -124,21 +124,21 @@ public class EnumMethodsCreator {
         new Variable("name", TypeDescriptors.get().javaLangString, false, true);
     MethodDescriptor createMapMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .jsInfo(JsInfo.RAW)
-            .isStatic(true)
-            .enclosingClassTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
-            .methodName(CREATE_MAP_METHOD_NAME)
-            .returnTypeDescriptor(namesToValuesMapFieldDescriptor.getTypeDescriptor())
-            .parameterTypeDescriptors(Arrays.asList(enumType.getDescriptor()))
+            .setJsInfo(JsInfo.RAW)
+            .setIsStatic(true)
+            .setEnclosingClassTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
+            .setMethodName(CREATE_MAP_METHOD_NAME)
+            .setReturnTypeDescriptor(namesToValuesMapFieldDescriptor.getTypeDescriptor())
+            .setParameterTypeDescriptors(Arrays.asList(enumType.getDescriptor()))
             .build();
     MethodDescriptor getMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .jsInfo(JsInfo.RAW)
-            .isStatic(true)
-            .enclosingClassTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
-            .methodName(GET_VALUE_METHOD_NAME)
-            .returnTypeDescriptor(enumType.getDescriptor())
-            .parameterTypeDescriptors(
+            .setJsInfo(JsInfo.RAW)
+            .setIsStatic(true)
+            .setEnclosingClassTypeDescriptor(BootstrapType.ENUMS.getDescriptor())
+            .setMethodName(GET_VALUE_METHOD_NAME)
+            .setReturnTypeDescriptor(enumType.getDescriptor())
+            .setParameterTypeDescriptors(
                 Arrays.asList(
                     nameParameter.getTypeDescriptor(),
                     namesToValuesMapFieldDescriptor.getTypeDescriptor()))
@@ -160,8 +160,8 @@ public class EnumMethodsCreator {
     Expression createMapCall =
         MethodCall.createMethodCall(null, createMapMethodDescriptor, valuesCall);
     Expression assignMapCallToField =
-        BinaryExpression.Builder.assignTo(namesToValuesMapFieldAccess)
-            .rightOperand(createMapCall)
+        BinaryExpression.Builder.asAssignmentTo(namesToValuesMapFieldAccess)
+            .setRightOperand(createMapCall)
             .build();
     Statement thenStatement = new ExpressionStatement(assignMapCallToField);
     Block thenBlock = new Block(thenStatement);

@@ -162,13 +162,13 @@ public class NormalizeCatchClauses extends AbstractRewriter {
   private MethodCall checkIsInstanceCall(TypeDescriptor descriptor, Expression exceptionVariable) {
     MethodDescriptor methodDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .methodName(MethodDescriptor.IS_INSTANCE_METHOD_NAME)
-            .isStatic(true)
-            .jsInfo(JsInfo.RAW)
-            .enclosingClassTypeDescriptor(descriptor)
-            .visibility(Visibility.PUBLIC)
-            .parameterTypeDescriptors(Arrays.asList(TypeDescriptors.get().javaLangObject))
-            .returnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
+            .setMethodName(MethodDescriptor.IS_INSTANCE_METHOD_NAME)
+            .setIsStatic(true)
+            .setJsInfo(JsInfo.RAW)
+            .setEnclosingClassTypeDescriptor(descriptor)
+            .setVisibility(Visibility.PUBLIC)
+            .setParameterTypeDescriptors(Arrays.asList(TypeDescriptors.get().javaLangObject))
+            .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
             .build();
     return MethodCall.createMethodCall(null, methodDescriptor, exceptionVariable);
   }

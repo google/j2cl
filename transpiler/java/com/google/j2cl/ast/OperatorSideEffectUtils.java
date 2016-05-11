@@ -196,8 +196,8 @@ public class OperatorSideEffectUtils {
     // TODO: leftOperand is not being cloned and is duplicated in the AST. This
     // violates the invariant that the AST is a proper tree (not a DAG). Fix.
 
-    return BinaryExpression.Builder.assignTo(leftOperand)
-        .rightOperand(
+    return BinaryExpression.Builder.asAssignmentTo(leftOperand)
+        .setRightOperand(
             new BinaryExpression(
                 binaryOperationResultType(
                     operator, leftOperand.getTypeDescriptor(), rightOperand.getTypeDescriptor()),
@@ -360,8 +360,8 @@ public class OperatorSideEffectUtils {
   }
 
   /**
-   * Returns the corresponding unboxed type if the {@code typeDescriptor} is a boxed type;
-   * {@code typeDescriptor} otherwise
+   * Returns the corresponding unboxed type if the {@code setTypeDescriptor} is a boxed type;
+   * {@code setTypeDescriptor} otherwise
    */
   private static TypeDescriptor unboxIfBoxedType(TypeDescriptor typeDescriptor) {
     if (TypeDescriptors.isBoxedType(typeDescriptor)) {

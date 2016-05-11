@@ -269,7 +269,7 @@ public class JsDocNameUtils {
   }
 
   /**
-   * Assume {@code typeDescriptor} is extended or implemented by an unboxed type,
+   * Assume {@code setTypeDescriptor} is extended or implemented by an unboxed type,
    * it returns the JsDoc name of the union of all its inheriting/implementing types.
    */
   private static String getJsDocNameOfUnionType(TypeDescriptor typeDescriptor) {

@@ -68,7 +68,7 @@ public class FixSuperCallQualifiers extends AbstractRewriter {
       return methodCall;
     }
     return MethodCall.Builder.from(methodCall)
-        .qualifier(findSuperCallQualifier(getCurrentJavaType().getDescriptor()))
+        .setQualifier(findSuperCallQualifier(getCurrentJavaType().getDescriptor()))
         .build();
   }
 

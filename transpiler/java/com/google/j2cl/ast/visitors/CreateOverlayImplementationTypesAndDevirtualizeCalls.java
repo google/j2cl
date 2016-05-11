@@ -70,8 +70,8 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls {
                 AstUtils.createOverlayImplementationClassTypeDescriptor(originalTypeDescriptor);
             if (methodCall.getTarget().isStatic()) {
               return MethodCall.Builder.from(methodCall)
-                  .enclosingClass(overlayTypeDescriptor)
-                  .qualifier(null)
+                  .setEnclosingClass(overlayTypeDescriptor)
+                  .setQualifier(null)
                   .build();
             }
             // Devirtualize *instance* JsOverlay method.
@@ -89,7 +89,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls {
               return new FieldAccess(
                   null,
                   FieldDescriptor.Builder.from(target)
-                      .enclosingClass(overlayTypeDescriptor)
+                      .setEnclosingClass(overlayTypeDescriptor)
                       .build());
             }
             return fieldAccess;
@@ -124,7 +124,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls {
       if (field.getDescriptor().isJsOverlay()) {
         checkState(field.getDescriptor().isStatic());
         overlayClass.addField(
-            Field.Builder.from(field).enclosingClass(overlayImplTypeDescriptor).build());
+            Field.Builder.from(field).setEnclosingClass(overlayImplTypeDescriptor).build());
       }
     }
     return overlayClass;

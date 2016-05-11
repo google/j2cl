@@ -61,9 +61,9 @@ public class AstUtils {
   public static MethodDescriptor createInitMethodDescriptor(
       TypeDescriptor enclosingClassTypeDescriptor) {
     return MethodDescriptor.Builder.fromDefault()
-        .visibility(Visibility.PRIVATE)
-        .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
-        .methodName(MethodDescriptor.INIT_METHOD_NAME)
+        .setVisibility(Visibility.PRIVATE)
+        .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+        .setMethodName(MethodDescriptor.INIT_METHOD_NAME)
         .build();
   }
 
@@ -72,12 +72,12 @@ public class AstUtils {
    */
   public static MethodDescriptor createUtilSameMethodDescriptor() {
     return MethodDescriptor.Builder.fromDefault()
-        .isStatic(true)
-        .jsInfo(JsInfo.RAW)
-        .enclosingClassTypeDescriptor(BootstrapType.NATIVE_EQUALITY.getDescriptor())
-        .methodName(MethodDescriptor.SAME_METHOD_NAME)
-        .returnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
-        .parameterTypeDescriptors(
+        .setIsStatic(true)
+        .setJsInfo(JsInfo.RAW)
+        .setEnclosingClassTypeDescriptor(BootstrapType.NATIVE_EQUALITY.getDescriptor())
+        .setMethodName(MethodDescriptor.SAME_METHOD_NAME)
+        .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
+        .setParameterTypeDescriptors(
             Lists.newArrayList(
                 TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangObject))
         .build();
@@ -88,12 +88,12 @@ public class AstUtils {
    */
   public static MethodDescriptor createUtilNotSameMethodDescriptor() {
     return MethodDescriptor.Builder.fromDefault()
-        .isStatic(true)
-        .jsInfo(JsInfo.RAW)
-        .enclosingClassTypeDescriptor(BootstrapType.NATIVE_EQUALITY.getDescriptor())
-        .methodName(MethodDescriptor.NOT_SAME_METHOD_NAME)
-        .returnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
-        .parameterTypeDescriptors(
+        .setIsStatic(true)
+        .setJsInfo(JsInfo.RAW)
+        .setEnclosingClassTypeDescriptor(BootstrapType.NATIVE_EQUALITY.getDescriptor())
+        .setMethodName(MethodDescriptor.NOT_SAME_METHOD_NAME)
+        .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
+        .setParameterTypeDescriptors(
             Lists.newArrayList(
                 TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangObject))
         .build();
@@ -111,12 +111,12 @@ public class AstUtils {
             ? JsInfo.create(JsMemberType.CONSTRUCTOR, null, null, false)
             : JsInfo.NONE;
     return MethodDescriptor.Builder.fromDefault()
-        .visibility(visibility)
-        .enclosingClassTypeDescriptor(typeDescriptor)
-        .methodName(typeDescriptor.getBinaryClassName())
-        .isConstructor(true)
-        .parameterTypeDescriptors(Arrays.asList(parameterTypeDescriptors))
-        .jsInfo(jsInfo)
+        .setVisibility(visibility)
+        .setEnclosingClassTypeDescriptor(typeDescriptor)
+        .setMethodName(typeDescriptor.getBinaryClassName())
+        .setIsConstructor(true)
+        .setParameterTypeDescriptors(Arrays.asList(parameterTypeDescriptors))
+        .setJsInfo(jsInfo)
         .build();
   }
   
@@ -323,28 +323,28 @@ public class AstUtils {
 
     MethodDescriptor declarationMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .visibility(innerclassConstructorDescriptor.getVisibility())
-            .enclosingClassTypeDescriptor(outerclassTypeDescriptor)
-            .methodName(methodName)
-            .returnTypeDescriptor(
+            .setVisibility(innerclassConstructorDescriptor.getVisibility())
+            .setEnclosingClassTypeDescriptor(outerclassTypeDescriptor)
+            .setMethodName(methodName)
+            .setReturnTypeDescriptor(
                 innerclassConstructorDescriptor
                     .getDeclarationMethodDescriptor()
                     .getEnclosingClassTypeDescriptor())
-            .parameterTypeDescriptors(
+            .setParameterTypeDescriptors(
                 innerclassConstructorDescriptor
                     .getDeclarationMethodDescriptor()
                     .getParameterTypeDescriptors())
-            .typeParameterTypeDescriptors(typeParameterDescriptors)
+            .setTypeParameterTypeDescriptors(typeParameterDescriptors)
             .build();
 
     return MethodDescriptor.Builder.fromDefault()
-        .visibility(innerclassConstructorDescriptor.getVisibility())
-        .enclosingClassTypeDescriptor(outerclassTypeDescriptor)
-        .methodName(methodName)
-        .returnTypeDescriptor(returnTypeDescriptor)
-        .declarationMethodDescriptor(declarationMethodDescriptor)
-        .parameterTypeDescriptors(innerclassConstructorDescriptor.getParameterTypeDescriptors())
-        .typeParameterTypeDescriptors(typeParameterDescriptors)
+        .setVisibility(innerclassConstructorDescriptor.getVisibility())
+        .setEnclosingClassTypeDescriptor(outerclassTypeDescriptor)
+        .setMethodName(methodName)
+        .setReturnTypeDescriptor(returnTypeDescriptor)
+        .setDeclarationMethodDescriptor(declarationMethodDescriptor)
+        .setParameterTypeDescriptors(innerclassConstructorDescriptor.getParameterTypeDescriptors())
+        .setTypeParameterTypeDescriptors(typeParameterDescriptors)
         .build();
   }
 
@@ -375,7 +375,7 @@ public class AstUtils {
             .build();
     MethodDescriptor newInnerclassConstructorDescriptor =
         MethodDescriptor.Builder.from(innerclassConstructorDescriptor)
-            .declarationMethodDescriptor(newInnerclassConstructorDescriptorDeclaration)
+            .setDeclarationMethodDescriptor(newInnerclassConstructorDescriptorDeclaration)
             .addParameter(outerclassTypeDescriptor)
             .build();
 
@@ -403,7 +403,7 @@ public class AstUtils {
       String jsDocDescription) {
     return createForwardingMethod(
         MethodDescriptor.Builder.from(targetMethodDescriptor)
-            .enclosingClassTypeDescriptor(fromTypeDescriptor)
+            .setEnclosingClassTypeDescriptor(fromTypeDescriptor)
             .build(),
         targetMethodDescriptor,
         jsDocDescription,
@@ -456,7 +456,7 @@ public class AstUtils {
         .setMethodDescriptor(fromMethodDescriptor)
         .setParameters(parameters)
         .addStatements(statement)
-        .isOverride(true)
+        .setIsOverride(true)
         .setJsDocDescription(jsDocDescription)
         .build();
   }
@@ -486,19 +486,19 @@ public class AstUtils {
 
     MethodDescriptor declarationMethodDescriptor =
         MethodDescriptor.Builder.from(targetMethodDescriptor.getDeclarationMethodDescriptor())
-            .enclosingClassTypeDescriptor(targetTypeDescriptor)
-            .parameterTypeDescriptors(methoDeclarationParameterTypes)
-            .isStatic(true)
-            .jsInfo(JsInfo.NONE)
+            .setEnclosingClassTypeDescriptor(targetTypeDescriptor)
+            .setParameterTypeDescriptors(methoDeclarationParameterTypes)
+            .setIsStatic(true)
+            .setJsInfo(JsInfo.NONE)
             .build();
 
     MethodDescriptor methodDescriptor =
         MethodDescriptor.Builder.from(targetMethodDescriptor)
-            .declarationMethodDescriptor(declarationMethodDescriptor)
-            .enclosingClassTypeDescriptor(targetTypeDescriptor)
-            .parameterTypeDescriptors(parameterTypes)
-            .isStatic(true)
-            .jsInfo(JsInfo.NONE)
+            .setDeclarationMethodDescriptor(declarationMethodDescriptor)
+            .setEnclosingClassTypeDescriptor(targetTypeDescriptor)
+            .setParameterTypeDescriptors(parameterTypes)
+            .setIsStatic(true)
+            .setJsInfo(JsInfo.NONE)
             .build();
 
     List<Expression> arguments = methodCall.getArguments();
@@ -527,11 +527,11 @@ public class AstUtils {
 
     MethodDescriptor valueOfMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .isStatic(true)
-            .enclosingClassTypeDescriptor(boxType)
-            .methodName(MethodDescriptor.VALUE_OF_METHOD_NAME)
-            .returnTypeDescriptor(boxType)
-            .parameterTypeDescriptors(primitiveType)
+            .setIsStatic(true)
+            .setEnclosingClassTypeDescriptor(boxType)
+            .setMethodName(MethodDescriptor.VALUE_OF_METHOD_NAME)
+            .setReturnTypeDescriptor(boxType)
+            .setParameterTypeDescriptors(primitiveType)
             .build();
     return MethodCall.createMethodCall(null, valueOfMethodDescriptor, expression);
   }
@@ -547,9 +547,9 @@ public class AstUtils {
 
     MethodDescriptor valueMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .enclosingClassTypeDescriptor(boxType)
-            .methodName(primitiveType.getSimpleName() + MethodDescriptor.VALUE_METHOD_SUFFIX)
-            .returnTypeDescriptor(primitiveType)
+            .setEnclosingClassTypeDescriptor(boxType)
+            .setMethodName(primitiveType.getSimpleName() + MethodDescriptor.VALUE_METHOD_SUFFIX)
+            .setReturnTypeDescriptor(primitiveType)
             .build();
 
     // We want "(a ? b : c).intValue()", not "a ? b : c.intValue()".
@@ -717,11 +717,11 @@ public class AstUtils {
 
   public static MethodDescriptor createStringValueOfMethodDescriptor() {
     return MethodDescriptor.Builder.fromDefault()
-        .isStatic(true)
-        .enclosingClassTypeDescriptor(TypeDescriptors.get().javaLangString)
-        .methodName("valueOf")
-        .returnTypeDescriptor(TypeDescriptors.get().javaLangString)
-        .parameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))
+        .setIsStatic(true)
+        .setEnclosingClassTypeDescriptor(TypeDescriptors.get().javaLangString)
+        .setMethodName("valueOf")
+        .setReturnTypeDescriptor(TypeDescriptors.get().javaLangString)
+        .setParameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))
         .build();
   }
 
@@ -907,12 +907,12 @@ public class AstUtils {
     // Util getPrototype
     MethodDescriptor getPrototype =
         MethodDescriptor.Builder.fromDefault()
-            .enclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor())
-            .methodName("$getPrototype")
-            .isStatic(true)
-            .jsInfo(JsInfo.RAW)
-            .parameterTypeDescriptors(TypeDescriptors.NATIVE_FUNCTION)
-            .returnTypeDescriptor(TypeDescriptors.get().javaLangObject)
+            .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor())
+            .setMethodName("$getPrototype")
+            .setIsStatic(true)
+            .setJsInfo(JsInfo.RAW)
+            .setParameterTypeDescriptors(TypeDescriptors.NATIVE_FUNCTION)
+            .setReturnTypeDescriptor(TypeDescriptors.get().javaLangObject)
             .build();
 
     MethodCall getPrototypeCall =
@@ -923,16 +923,16 @@ public class AstUtils {
             getPrototypeCall,
             FieldDescriptor.Builder.fromDefault(
                     lambdaType, applyMethodName, TypeDescriptors.NATIVE_FUNCTION)
-                .isRaw(true)
+                .setIsRaw(true)
                 .build());
 
     MethodDescriptor makeLambdaCall =
         MethodDescriptor.Builder.fromDefault()
-            .enclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor())
-            .methodName("$makeLambdaFunction")
-            .isStatic(true)
-            .jsInfo(JsInfo.RAW)
-            .parameterTypeDescriptors(
+            .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor())
+            .setMethodName("$makeLambdaFunction")
+            .setIsStatic(true)
+            .setJsInfo(JsInfo.RAW)
+            .setParameterTypeDescriptors(
                 TypeDescriptors.NATIVE_FUNCTION,
                 TypeDescriptors.get().javaLangObject,
                 TypeDescriptors.NATIVE_FUNCTION)
@@ -943,8 +943,8 @@ public class AstUtils {
             new TypeReference(lambdaType),
             FieldDescriptor.Builder.fromDefault(
                     lambdaType, "$copy", TypeDescriptors.NATIVE_FUNCTION)
-                .isRaw(true)
-                .jsInfo(JsInfo.create(JsMemberType.PROPERTY, "$copy", null, false))
+                .setIsRaw(true)
+                .setJsInfo(JsInfo.create(JsMemberType.PROPERTY, "$copy", null, false))
                 .build());
 
     return MethodCall.createMethodCall(

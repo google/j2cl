@@ -170,27 +170,27 @@ public abstract class FieldDescriptor extends Node implements Member {
       return builder;
     }
 
-    public Builder enclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
+    public Builder setEnclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
       this.enclosingClassTypeDescriptor = enclosingClassTypeDescriptor;
       return this;
     }
 
-    public Builder isStatic(boolean isStatic) {
+    public Builder setIsStatic(boolean isStatic) {
       this.isStatic = isStatic;
       return this;
     }
 
-    public Builder visibility(Visibility visibility) {
+    public Builder setVisibility(Visibility visibility) {
       this.visibility = visibility;
       return this;
     }
 
-    public Builder isRaw(boolean isRaw) {
+    public Builder setIsRaw(boolean isRaw) {
       this.isRaw = isRaw;
       return this;
     }
 
-    public Builder jsInfo(JsInfo jsInfo) {
+    public Builder setJsInfo(JsInfo jsInfo) {
       this.jsInfo = jsInfo;
       return this;
     }

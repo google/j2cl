@@ -69,18 +69,18 @@ public class InsertExceptionConversions extends AbstractRewriter {
 
     MethodDescriptor toJava =
         MethodDescriptor.Builder.fromDefault()
-            .jsInfo(JsInfo.RAW)
-            .isStatic(true)
-            .enclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
-            .methodName("toJava")
-            .parameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
-            .returnTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
+            .setJsInfo(JsInfo.RAW)
+            .setIsStatic(true)
+            .setEnclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
+            .setMethodName("toJava")
+            .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
+            .setReturnTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
             .build();
 
     MethodCall toJavaCall = MethodCall.createMethodCall(null, toJava, mainVariable.getReference());
 
     Expression assignment =
-        BinaryExpression.Builder.assignTo(mainVariable).rightOperand(toJavaCall).build();
+        BinaryExpression.Builder.asAssignmentTo(mainVariable).setRightOperand(toJavaCall).build();
 
     catchClause.getBody().getStatements().add(0, new ExpressionStatement(assignment));
 
@@ -91,12 +91,12 @@ public class InsertExceptionConversions extends AbstractRewriter {
   public Node rewriteThrowStatement(ThrowStatement originalStatement) {
     MethodDescriptor toJs =
         MethodDescriptor.Builder.fromDefault()
-            .jsInfo(JsInfo.RAW)
-            .isStatic(true)
-            .enclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
-            .methodName("toJs")
-            .parameterTypeDescriptors(TypeDescriptors.get().javaLangThrowable)
-            .returnTypeDescriptor(TypeDescriptors.get().javaLangObject)
+            .setJsInfo(JsInfo.RAW)
+            .setIsStatic(true)
+            .setEnclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
+            .setMethodName("toJs")
+            .setParameterTypeDescriptors(TypeDescriptors.get().javaLangThrowable)
+            .setReturnTypeDescriptor(TypeDescriptors.get().javaLangObject)
             .build();
 
     MethodCall toJsCall =

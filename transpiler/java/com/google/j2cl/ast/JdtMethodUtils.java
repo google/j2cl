@@ -91,19 +91,19 @@ public class JdtMethodUtils {
                 });
 
     return MethodDescriptor.Builder.fromDefault()
-        .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
-        .methodName(methodName)
-        .declarationMethodDescriptor(declarationMethodDescriptor)
-        .returnTypeDescriptor(returnTypeDescriptor)
-        .parameterTypeDescriptors(parameterTypeDescriptors)
-        .typeParameterTypeDescriptors(typeParameterTypeDescriptors)
-        .jsInfo(jsInfo)
-        .visibility(visibility)
-        .isStatic(isStatic)
-        .isConstructor(isConstructor)
-        .isNative(isNative)
-        .isDefault(Modifier.isDefault(methodBinding.getModifiers()))
-        .isVarargs(methodBinding.isVarargs())
+        .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+        .setMethodName(methodName)
+        .setDeclarationMethodDescriptor(declarationMethodDescriptor)
+        .setReturnTypeDescriptor(returnTypeDescriptor)
+        .setParameterTypeDescriptors(parameterTypeDescriptors)
+        .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
+        .setJsInfo(jsInfo)
+        .setVisibility(visibility)
+        .setIsStatic(isStatic)
+        .setIsConstructor(isConstructor)
+        .setIsNative(isNative)
+        .setIsDefault(Modifier.isDefault(methodBinding.getModifiers()))
+        .setIsVarargs(methodBinding.isVarargs())
         .build();
   }
 

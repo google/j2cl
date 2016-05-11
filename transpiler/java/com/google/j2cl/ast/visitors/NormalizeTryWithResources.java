@@ -110,14 +110,14 @@ public class NormalizeTryWithResources extends AbstractRewriter {
   private List<Statement> removeResourceDeclarations(TryStatement tryStatement) {
     MethodDescriptor safeClose =
         MethodDescriptor.Builder.fromDefault()
-            .jsInfo(JsInfo.RAW)
-            .isStatic(true)
-            .enclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
-            .methodName("safeClose")
-            .parameterTypeDescriptors(
+            .setJsInfo(JsInfo.RAW)
+            .setIsStatic(true)
+            .setEnclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
+            .setMethodName("safeClose")
+            .setParameterTypeDescriptors(
                 Arrays.asList(
                     TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangThrowable))
-            .returnTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
+            .setReturnTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
             .build();
     List<Statement> outputStatements = new ArrayList<>();
 
@@ -144,8 +144,8 @@ public class NormalizeTryWithResources extends AbstractRewriter {
       outputStatements.add(openResource);
 
       Expression assignResourceInitializer =
-          BinaryExpression.Builder.assignTo(originalResourceDeclaration.getVariable())
-              .rightOperand(originalResourceDeclaration.getInitializer())
+          BinaryExpression.Builder.asAssignmentTo(originalResourceDeclaration.getVariable())
+              .setRightOperand(originalResourceDeclaration.getInitializer())
               .build();
       tryBlockBodyStatements.add(new ExpressionStatement(assignResourceInitializer));
     }
@@ -156,8 +156,8 @@ public class NormalizeTryWithResources extends AbstractRewriter {
 
     List<Statement> catchBlockStatments = new ArrayList<>();
     Expression assignPrimaryExceptionToExceptionFromTry =
-        BinaryExpression.Builder.assignTo(primaryException)
-            .rightOperand(exceptionFromTry.getReference())
+        BinaryExpression.Builder.asAssignmentTo(primaryException)
+            .setRightOperand(exceptionFromTry.getReference())
             .build();
     catchBlockStatments.add(new ExpressionStatement(assignPrimaryExceptionToExceptionFromTry));
     catchBlockStatments.add(new ThrowStatement(exceptionFromTry.getReference()));
@@ -172,7 +172,7 @@ public class NormalizeTryWithResources extends AbstractRewriter {
                   declaration.getFragments().get(0).getVariable().getReference(),
                   primaryException.getReference()));
       Expression assignExceptionFromSafeCloseCall =
-          BinaryExpression.Builder.assignTo(primaryException).rightOperand(safeCloseCall).build();
+          BinaryExpression.Builder.asAssignmentTo(primaryException).setRightOperand(safeCloseCall).build();
       finallyBlockStatments.add(new ExpressionStatement(assignExceptionFromSafeCloseCall));
     }
 

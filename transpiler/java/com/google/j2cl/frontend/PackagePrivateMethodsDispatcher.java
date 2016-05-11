@@ -44,7 +44,7 @@ public class PackagePrivateMethodsDispatcher {
       dispatchMethods.add(
           AstUtils.createForwardingMethod(
               MethodDescriptor.Builder.from(entry.getValue())
-                  .enclosingClassTypeDescriptor(JdtUtils.createTypeDescriptor(typeBinding))
+                  .setEnclosingClassTypeDescriptor(JdtUtils.createTypeDescriptor(typeBinding))
                   .build(),
               entry.getKey(),
               "Forwarding method for package private method."));

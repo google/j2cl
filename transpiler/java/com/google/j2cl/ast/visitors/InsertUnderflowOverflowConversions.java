@@ -146,12 +146,12 @@ public class InsertUnderflowOverflowConversions extends ConversionContextVisitor
         String.format("$to%s", AstUtils.toProperCase(toTypeDescriptor.getSimpleName()));
     MethodDescriptor overflowMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .jsInfo(JsInfo.RAW)
-            .isStatic(true)
-            .enclosingClassTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
-            .methodName(overflowMethodName)
-            .parameterTypeDescriptors(Lists.newArrayList(fromTypeDescriptor))
-            .returnTypeDescriptor(toTypeDescriptor)
+            .setJsInfo(JsInfo.RAW)
+            .setIsStatic(true)
+            .setEnclosingClassTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
+            .setMethodName(overflowMethodName)
+            .setParameterTypeDescriptors(Lists.newArrayList(fromTypeDescriptor))
+            .setReturnTypeDescriptor(toTypeDescriptor)
             .build();
     // Primitives.$toA(expr);
     return MethodCall.createMethodCall(null, overflowMethodDescriptor, expression);

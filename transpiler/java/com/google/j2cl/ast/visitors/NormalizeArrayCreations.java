@@ -59,11 +59,11 @@ public class NormalizeArrayCreations extends AbstractRewriter {
     Preconditions.checkArgument(newArrayExpression.getArrayLiteral() == null);
     MethodDescriptor arrayCreateMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .enclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
-            .jsInfo(JsInfo.RAW)
-            .isStatic(true)
-            .methodName("$create")
-            .parameterTypeDescriptors(
+            .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
+            .setJsInfo(JsInfo.RAW)
+            .setIsStatic(true)
+            .setMethodName("$create")
+            .setParameterTypeDescriptors(
                 Arrays.asList(
                     TypeDescriptors.getForArray(TypeDescriptors.get().primitiveInt, 1),
                     TypeDescriptors.get().javaLangObject))
@@ -94,11 +94,11 @@ public class NormalizeArrayCreations extends AbstractRewriter {
     int dimensionCount = newArrayExpression.getDimensionExpressions().size();
     MethodDescriptor arrayInitMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .enclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
-            .jsInfo(JsInfo.RAW)
-            .isStatic(true)
-            .methodName("$init")
-            .parameterTypeDescriptors(
+            .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
+            .setJsInfo(JsInfo.RAW)
+            .setIsStatic(true)
+            .setMethodName("$init")
+            .setParameterTypeDescriptors(
                 Arrays.asList(
                     TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
                     TypeDescriptors.get().javaLangObject))
@@ -130,7 +130,7 @@ public class NormalizeArrayCreations extends AbstractRewriter {
       // It's multidimensional, make dimensions explicit.
       arrayInitMethodDescriptor =
           MethodDescriptor.Builder.from(arrayInitMethodDescriptor)
-              .parameterTypeDescriptors(
+              .setParameterTypeDescriptors(
                   Iterables.concat(
                       arrayInitMethodDescriptor.getParameterTypeDescriptors(),
                       Arrays.asList(TypeDescriptors.get().primitiveInt)))

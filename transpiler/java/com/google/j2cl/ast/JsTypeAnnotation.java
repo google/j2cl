@@ -94,12 +94,12 @@ public class JsTypeAnnotation extends Expression {
       return builder;
     }
 
-    public Builder expression(Expression expression) {
+    public Builder setExpression(Expression expression) {
       this.expression = expression;
       return this;
     }
 
-    public Builder annotationType(TypeDescriptor annotationType) {
+    public Builder setAnnotationType(TypeDescriptor annotationType) {
       this.annotationType = annotationType;
       return this;
     }

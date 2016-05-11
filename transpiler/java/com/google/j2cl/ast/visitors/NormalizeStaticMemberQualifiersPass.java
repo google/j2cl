@@ -76,7 +76,7 @@ public class NormalizeStaticMemberQualifiersPass {
       if (isStaticMemberReferenceWithInstanceQualifier(methodCall)) {
         return new MultiExpression(
             methodCall.getQualifier(), // Preserve side effects.
-            MethodCall.Builder.from(methodCall).qualifier(null).build() // Static dispatch
+            MethodCall.Builder.from(methodCall).setQualifier(null).build() // Static dispatch
             );
       }
       return methodCall;

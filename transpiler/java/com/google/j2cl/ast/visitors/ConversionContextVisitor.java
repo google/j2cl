@@ -181,7 +181,7 @@ public abstract class ConversionContextVisitor extends AbstractRewriter {
     // assignment context
     Field newField =
         Field.Builder.from(field)
-            .initializer(
+            .setInitializer(
                 contextRewriter.rewriteAssignmentContext(
                     field.getDescriptor().getTypeDescriptor(), field.getInitializer()))
             .build();
@@ -192,7 +192,7 @@ public abstract class ConversionContextVisitor extends AbstractRewriter {
   public Node rewriteMethodCall(MethodCall methodCall) {
     // method invocation context
     return MethodCall.Builder.from(methodCall)
-        .arguments(rewriteMethodInvocationContextArguments(methodCall))
+        .setArguments(rewriteMethodInvocationContextArguments(methodCall))
         .build();
   }
 
@@ -355,14 +355,14 @@ public abstract class ConversionContextVisitor extends AbstractRewriter {
     }
     BinaryExpression assignmentRightOperand =
         BinaryExpression.Builder.from(binaryExpression)
-            .operator(binaryExpression.getOperator().getUnderlyingBinaryOperator())
+            .setOperator(binaryExpression.getOperator().getUnderlyingBinaryOperator())
             .build();
     // The assignment operation retains the type of the original compound operation, which
     // in turn must be equal to the type of the lvalue (lhs).
     BinaryExpression assignmentExpression =
         BinaryExpression.Builder.from(binaryExpression)
-            .operator(BinaryOperator.ASSIGN)
-            .rightOperand(assignmentRightOperand)
+            .setOperator(BinaryOperator.ASSIGN)
+            .setRightOperand(assignmentRightOperand)
             .build();
     return rewriteRegularBinaryExpression(assignmentExpression) != assignmentExpression
         || rewriteRegularBinaryExpression(assignmentRightOperand) != assignmentRightOperand;

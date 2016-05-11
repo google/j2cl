@@ -111,25 +111,25 @@ public class Field extends Node implements Positioned {
       return builder;
     }
 
-    public Builder initializer(Expression initializer) {
+    public Builder setInitializer(Expression initializer) {
       this.initializer = initializer;
       return this;
     }
 
-    public Builder isEnumField(boolean isEnumField) {
+    public Builder setIsEnumField(boolean isEnumField) {
       this.isEnumField = isEnumField;
       return this;
     }
 
-    public Builder capturedVariable(Variable capturedVariable) {
+    public Builder setCapturedVariable(Variable capturedVariable) {
       this.capturedVariable = capturedVariable;
       return this;
     }
 
-    public Builder enclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
+    public Builder setEnclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
       this.fieldDescriptor =
           FieldDescriptor.Builder.from(fieldDescriptor)
-              .enclosingClass(enclosingClassTypeDescriptor)
+              .setEnclosingClass(enclosingClassTypeDescriptor)
               .build();
       return this;
     }

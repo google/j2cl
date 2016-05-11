@@ -83,12 +83,12 @@ public class UnimplementedMethodsCreator {
 
     MethodDescriptor newDeclarationMethodDescriptor =
         MethodDescriptor.Builder.from(originalMethodDescriptor.getDeclarationMethodDescriptor())
-        .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+        .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
         .build();
 
     return MethodDescriptor.Builder.from(originalMethodDescriptor)
-        .declarationMethodDescriptor(newDeclarationMethodDescriptor)
-        .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+        .setDeclarationMethodDescriptor(newDeclarationMethodDescriptor)
+        .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
         .build();
   }
 
@@ -115,8 +115,8 @@ public class UnimplementedMethodsCreator {
     return Method.Builder.fromDefault()
         .setMethodDescriptor(methodDescriptor)
         .setParameters(parameters)
-        .isAbstract(true)
-        .isFinal(JdtUtils.isFinal(methodBinding.getModifiers()))
+        .setIsAbstract(true)
+        .setIsFinal(JdtUtils.isFinal(methodBinding.getModifiers()))
         .build();
   }
 }

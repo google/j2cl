@@ -69,14 +69,14 @@ public class NormalizeCasts extends AbstractRewriter {
 
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .jsInfo(JsInfo.RAW)
-            .isStatic(true)
-            .enclosingClassTypeDescriptor(BootstrapType.CASTS.getDescriptor())
-            .methodName("to")
-            .parameterTypeDescriptors(
+            .setJsInfo(JsInfo.RAW)
+            .setIsStatic(true)
+            .setEnclosingClassTypeDescriptor(BootstrapType.CASTS.getDescriptor())
+            .setMethodName("to")
+            .setParameterTypeDescriptors(
                 Lists.newArrayList(
                     TypeDescriptors.get().javaLangObject, TypeDescriptors.get().javaLangObject))
-            .returnTypeDescriptor(castTypeDescriptor)
+            .setReturnTypeDescriptor(castTypeDescriptor)
             .build();
     List<Expression> arguments = new ArrayList<>();
     arguments.add(expression);
@@ -114,16 +114,16 @@ public class NormalizeCasts extends AbstractRewriter {
     TypeDescriptor arrayCastTypeDescriptor = castExpression.getCastTypeDescriptor();
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .jsInfo(JsInfo.RAW)
-            .isStatic(true)
-            .enclosingClassTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
-            .methodName("$castTo")
-            .parameterTypeDescriptors(
+            .setJsInfo(JsInfo.RAW)
+            .setIsStatic(true)
+            .setEnclosingClassTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
+            .setMethodName("$castTo")
+            .setParameterTypeDescriptors(
                 Lists.newArrayList(
                     TypeDescriptors.get().javaLangObject,
                     TypeDescriptors.get().javaLangObject,
                     TypeDescriptors.get().primitiveInt))
-            .returnTypeDescriptor(arrayCastTypeDescriptor)
+            .setReturnTypeDescriptor(arrayCastTypeDescriptor)
             .build();
     List<Expression> arguments = new ArrayList<>();
     arguments.add(castExpression.getExpression());
@@ -150,12 +150,12 @@ public class NormalizeCasts extends AbstractRewriter {
         castTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor().isNative());
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .jsInfo(JsInfo.RAW)
-            .isStatic(true)
-            .enclosingClassTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
-            .methodName("$castToNative")
-            .parameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))
-            .returnTypeDescriptor(TypeDescriptors.get().javaLangObject)
+            .setJsInfo(JsInfo.RAW)
+            .setIsStatic(true)
+            .setEnclosingClassTypeDescriptor(BootstrapType.ARRAYS.getDescriptor())
+            .setMethodName("$castToNative")
+            .setParameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))
+            .setReturnTypeDescriptor(TypeDescriptors.get().javaLangObject)
             .build();
     List<Expression> arguments = new ArrayList<>();
     arguments.add(castExpression.getExpression());

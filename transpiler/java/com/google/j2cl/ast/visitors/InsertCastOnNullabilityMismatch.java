@@ -70,7 +70,7 @@ public class InsertCastOnNullabilityMismatch extends AbstractRewriter {
       TypeDescriptor fixedType = getTypeWithMatchingNullability(fieldType, assignedType);
       if (fixedType != assignedType) {
         return Field.Builder.from(field)
-            .initializer(JsTypeAnnotation.createTypeAnnotation(initializer, fixedType))
+            .setInitializer(JsTypeAnnotation.createTypeAnnotation(initializer, fixedType))
             .build();
       }
     }

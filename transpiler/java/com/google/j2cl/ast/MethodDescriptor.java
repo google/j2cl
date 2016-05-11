@@ -216,79 +216,79 @@ public abstract class MethodDescriptor extends Node implements Member {
       return builder;
     }
 
-    public Builder enclosingClassTypeDescriptor(TypeDescriptor enclosingClassTypeDescriptor) {
+    public Builder setEnclosingClassTypeDescriptor(TypeDescriptor enclosingClassTypeDescriptor) {
       this.enclosingClassTypeDescriptor = enclosingClassTypeDescriptor;
       return this;
     }
 
-    public Builder methodName(String methodName) {
+    public Builder setMethodName(String methodName) {
       this.methodName = methodName;
       return this;
     }
 
-    public Builder declarationMethodDescriptor(MethodDescriptor declarationMethodDescriptor) {
+    public Builder setDeclarationMethodDescriptor(MethodDescriptor declarationMethodDescriptor) {
       this.declarationMethodDescriptor = declarationMethodDescriptor;
       return this;
     }
 
-    public Builder returnTypeDescriptor(TypeDescriptor returnTypeDescriptor) {
+    public Builder setReturnTypeDescriptor(TypeDescriptor returnTypeDescriptor) {
       this.returnTypeDescriptor = returnTypeDescriptor;
       return this;
     }
 
-    public Builder parameterTypeDescriptors(TypeDescriptor... typeDescriptors) {
+    public Builder setParameterTypeDescriptors(TypeDescriptor... typeDescriptors) {
       this.parameterTypeDescriptors = ImmutableList.copyOf(typeDescriptors);
       return this;
     }
 
-    public Builder parameterTypeDescriptors(Iterable<TypeDescriptor> parameterTypeDescriptors) {
+    public Builder setParameterTypeDescriptors(Iterable<TypeDescriptor> parameterTypeDescriptors) {
       this.parameterTypeDescriptors = ImmutableList.copyOf(parameterTypeDescriptors);
       return this;
     }
 
-    public Builder isConstructor(boolean isConstructor) {
+    public Builder setIsConstructor(boolean isConstructor) {
       this.isConstructor = isConstructor;
       return this;
     }
 
-    public Builder isDefault(boolean isDefault) {
+    public Builder setIsDefault(boolean isDefault) {
       this.isDefault = isDefault;
       return this;
     }
 
-    public Builder isNative(boolean isNative) {
+    public Builder setIsNative(boolean isNative) {
       this.isNative = isNative;
       return this;
     }
 
-    public Builder isStatic(boolean isStatic) {
+    public Builder setIsStatic(boolean isStatic) {
       this.isStatic = isStatic;
       return this;
     }
 
-    public Builder isVarargs(boolean isVarargs) {
+    public Builder setIsVarargs(boolean isVarargs) {
       this.isVarargs = isVarargs;
       return this;
     }
 
-    public Builder typeParameterTypeDescriptors(
+    public Builder setTypeParameterTypeDescriptors(
         Iterable<TypeDescriptor> typeParameterTypeDescriptors) {
       this.typeParameterTypeDescriptors = ImmutableList.copyOf(typeParameterTypeDescriptors);
       return this;
     }
 
-    public Builder visibility(Visibility visibility) {
+    public Builder setVisibility(Visibility visibility) {
       this.visibility = visibility;
       return this;
     }
 
-    public Builder jsInfo(JsInfo jsInfo) {
+    public Builder setJsInfo(JsInfo jsInfo) {
       this.jsInfo = jsInfo;
       return this;
     }
 
     public Builder addParameter(TypeDescriptor parameterTypeDescriptor) {
-      return parameterTypeDescriptors(
+      return setParameterTypeDescriptors(
           Iterables.concat(
               this.parameterTypeDescriptors, Lists.newArrayList(parameterTypeDescriptor)));
     }

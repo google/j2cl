@@ -274,7 +274,7 @@ public class CompilationUnitBuilder {
             AstUtils.getFieldDescriptorForCapture(currentTypeDescriptor, capturedVariable);
         type.addField(
             Field.Builder.fromDefault(fieldDescriptor)
-                .capturedVariable(capturedVariable)
+                .setCapturedVariable(capturedVariable)
                 .setPosition(-1) /* Position is not important */
                 .build());
       }
@@ -315,8 +315,8 @@ public class CompilationUnitBuilder {
                       enumConstantDeclaration.arguments())));
       return Field.Builder.fromDefault(
               JdtUtils.createFieldDescriptor(enumConstantDeclaration.resolveVariable()))
-          .initializer(initializer)
-          .isEnumField(true)
+          .setInitializer(initializer)
+          .setIsEnumField(true)
           .setPosition(-1) /* Position is not important */
           .build();
     }
@@ -336,7 +336,7 @@ public class CompilationUnitBuilder {
         }
         Field field =
             Field.Builder.fromDefault(JdtUtils.createFieldDescriptor(variableBinding))
-                .initializer(initializer)
+                .setInitializer(initializer)
                 .setPosition(position)
                 .build();
         fields.add(field);
@@ -389,9 +389,9 @@ public class CompilationUnitBuilder {
               .setMethodDescriptor(JdtUtils.createMethodDescriptor(methodBinding))
               .setParameters(parameters)
               .addStatements(body.getStatements())
-              .isAbstract(JdtUtils.isAbstract(methodBinding.getModifiers()))
-              .isOverride(JdtUtils.isJsOverride(methodBinding))
-              .isFinal(JdtUtils.isFinal(methodBinding.getModifiers()));
+              .setIsAbstract(JdtUtils.isAbstract(methodBinding.getModifiers()))
+              .setIsOverride(JdtUtils.isJsOverride(methodBinding))
+              .setIsFinal(JdtUtils.isFinal(methodBinding.getModifiers()));
       for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
         methodBuilder.setParameterOptional(i, JsInteropUtils.isJsOptional(methodBinding, i));
       }
@@ -1059,7 +1059,7 @@ public class CompilationUnitBuilder {
         lambdaType.addField(
             Field.Builder.fromDefault(
                     AstUtils.getFieldDescriptorForCapture(lambdaTypeDescriptor, capturedVariable))
-                .capturedVariable(capturedVariable)
+                .setCapturedVariable(capturedVariable)
                 .setPosition(-1) /* Position is not important */
                 .build());
       }
@@ -1168,12 +1168,12 @@ public class CompilationUnitBuilder {
 
       MethodDescriptor methodDescriptor =
           MethodDescriptor.Builder.fromDefault()
-              .jsInfo(JsInfo.RAW)
-              .visibility(Visibility.PRIVATE)
-              .enclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
-              .methodName(methodName)
-              .parameterTypeDescriptors(parameterTypeDescriptors)
-              .returnTypeDescriptor(returnTypeDescriptor)
+              .setJsInfo(JsInfo.RAW)
+              .setVisibility(Visibility.PRIVATE)
+              .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+              .setMethodName(methodName)
+              .setParameterTypeDescriptors(parameterTypeDescriptors)
+              .setReturnTypeDescriptor(returnTypeDescriptor)
               .build();
       return Method.Builder.fromDefault()
           .setMethodDescriptor(methodDescriptor)
@@ -1706,12 +1706,12 @@ public class CompilationUnitBuilder {
       // <ClassLiteralClass>.$getClass()
       MethodDescriptor classMethodDescriptor =
           MethodDescriptor.Builder.fromDefault()
-              .jsInfo(JsInfo.RAW)
-              .isStatic(true)
-              .enclosingClassTypeDescriptor(javaLangClassTypeDescriptor)
-              .methodName("$get")
-              .parameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.NATIVE_FUNCTION))
-              .returnTypeDescriptor(javaLangClassTypeDescriptor)
+              .setJsInfo(JsInfo.RAW)
+              .setIsStatic(true)
+              .setEnclosingClassTypeDescriptor(javaLangClassTypeDescriptor)
+              .setMethodName("$get")
+              .setParameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.NATIVE_FUNCTION))
+              .setReturnTypeDescriptor(javaLangClassTypeDescriptor)
               .build();
       return MethodCall.createMethodCall(
           null, classMethodDescriptor, new TypeReference(literalTypeDescriptor));
@@ -1723,14 +1723,14 @@ public class CompilationUnitBuilder {
 
       MethodDescriptor classMethodDescriptor =
           MethodDescriptor.Builder.fromDefault()
-              .jsInfo(JsInfo.RAW)
-              .isStatic(true)
-              .enclosingClassTypeDescriptor(javaLangClassTypeDescriptor)
-              .methodName("$get")
-              .parameterTypeDescriptors(
+              .setJsInfo(JsInfo.RAW)
+              .setIsStatic(true)
+              .setEnclosingClassTypeDescriptor(javaLangClassTypeDescriptor)
+              .setMethodName("$get")
+              .setParameterTypeDescriptors(
                   Lists.newArrayList(
                       TypeDescriptors.NATIVE_FUNCTION, TypeDescriptors.get().primitiveInt))
-              .returnTypeDescriptor(javaLangClassTypeDescriptor)
+              .setReturnTypeDescriptor(javaLangClassTypeDescriptor)
               .build();
 
       return MethodCall.createMethodCall(

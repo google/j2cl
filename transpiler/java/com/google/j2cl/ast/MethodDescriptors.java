@@ -45,10 +45,10 @@ public class MethodDescriptors {
     Iterables.addAll(parameters, extraParameters);
 
     MethodDescriptor.Builder methodBuilder = MethodDescriptor.Builder.from(methodDescriptor)
-        .parameterTypeDescriptors(parameters);
+        .setParameterTypeDescriptors(parameters);
 
     if (methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()) {
-      methodBuilder.declarationMethodDescriptor(
+      methodBuilder.setDeclarationMethodDescriptor(
           createWithExtraParameters(
               methodDescriptor.getDeclarationMethodDescriptor(), extraParameters));
     }
@@ -80,9 +80,9 @@ public class MethodDescriptors {
 
     MethodDescriptor.Builder methodBuilder =
         MethodDescriptor.Builder.from(methodDescriptor)
-            .parameterTypeDescriptors(parameterTypeDescriptors)
-            .typeParameterTypeDescriptors(typeParameterTypeDescriptors)
-            .isStatic(true);
+            .setParameterTypeDescriptors(parameterTypeDescriptors)
+            .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
+            .setIsStatic(true);
 
     if (methodDescriptor != methodDescriptor.getDeclarationMethodDescriptor()) {
       MethodDescriptor declarationMethodDescriptor =
@@ -95,9 +95,9 @@ public class MethodDescriptors {
 
       MethodDescriptor newDeclarationMethodDescriptor =
           MethodDescriptor.Builder.from(makeStaticMethodDescriptor(declarationMethodDescriptor))
-              .parameterTypeDescriptors(methodDeclarationParameterTypeDescriptors)
+              .setParameterTypeDescriptors(methodDeclarationParameterTypeDescriptors)
               .build();
-      methodBuilder.declarationMethodDescriptor(
+      methodBuilder.setDeclarationMethodDescriptor(
           makeStaticMethodDescriptor(newDeclarationMethodDescriptor));
     }
     return methodBuilder.build();

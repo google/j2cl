@@ -86,47 +86,47 @@ public class BinaryExpression extends Expression {
     public static Builder from(BinaryExpression expression) {
       Builder builder =
           new Builder()
-              .leftOperand(expression.getLeftOperand())
-              .operator(expression.getOperator())
-              .rightOperand(expression.getRightOperand())
-              .typeDescriptor(expression.getTypeDescriptor());
+              .setLeftOperand(expression.getLeftOperand())
+              .setOperator(expression.getOperator())
+              .setRightOperand(expression.getRightOperand())
+              .setTypeDescriptor(expression.getTypeDescriptor());
       return builder;
     }
 
-    public static Builder assignTo(Variable variable) {
+    public static Builder asAssignmentTo(Variable variable) {
       Builder builder =
           new Builder()
-              .leftOperand(variable.getReference())
-              .typeDescriptor(variable.getTypeDescriptor())
-              .operator(BinaryOperator.ASSIGN);
+              .setLeftOperand(variable.getReference())
+              .setTypeDescriptor(variable.getTypeDescriptor())
+              .setOperator(BinaryOperator.ASSIGN);
       return builder;
     }
 
-    public static Builder assignTo(Expression lvalue) {
+    public static Builder asAssignmentTo(Expression lvalue) {
       Builder builder =
           new Builder()
-              .leftOperand(lvalue)
-              .typeDescriptor(lvalue.getTypeDescriptor())
-              .operator(BinaryOperator.ASSIGN);
+              .setLeftOperand(lvalue)
+              .setTypeDescriptor(lvalue.getTypeDescriptor())
+              .setOperator(BinaryOperator.ASSIGN);
       return builder;
     }
 
-    public Builder leftOperand(Expression operand) {
+    public Builder setLeftOperand(Expression operand) {
       this.leftOperand = operand;
       return this;
     }
 
-    public Builder rightOperand(Expression operand) {
+    public Builder setRightOperand(Expression operand) {
       this.rightOperand = operand;
       return this;
     }
 
-    public Builder operator(BinaryOperator operator) {
+    public Builder setOperator(BinaryOperator operator) {
       this.operator = operator;
       return this;
     }
 
-    public Builder typeDescriptor(TypeDescriptor typeDescriptor) {
+    public Builder setTypeDescriptor(TypeDescriptor typeDescriptor) {
       this.typeDescriptor = typeDescriptor;
       return this;
     }
