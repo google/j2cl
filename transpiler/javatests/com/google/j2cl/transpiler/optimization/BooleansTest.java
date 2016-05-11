@@ -24,4 +24,17 @@ class BooleansTest {
   public void simpleCompOptimizes() {
     assertFunctionMatches(getSimpleComp(), "return !0");
   }
+
+  @JsMethod
+  public static boolean boxedComp() {
+    return Boolean.TRUE == Boolean.TRUE;
+  }
+
+  @JsProperty
+  private static native Object getBoxedComp();
+
+  @Test
+  public void boxedCompOptimizes() {
+    assertFunctionMatches(getBoxedComp(), "return !0");
+  }
 }
