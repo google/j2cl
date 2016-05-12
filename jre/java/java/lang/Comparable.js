@@ -1,5 +1,7 @@
 /**
- * Header transpiled from java.lang.Comparable.
+ * @fileoverview Header transpiled from java.lang.Comparable.
+ *
+ * @suppress {lateProvide}
  */
 goog.module('java.lang.Comparable');
 

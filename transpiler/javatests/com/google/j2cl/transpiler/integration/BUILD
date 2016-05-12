@@ -132,7 +132,6 @@ js_binary(
         "--language_out=ECMASCRIPT5",
         "--strict",
         "--remove_unused_constructor_properties=ON",
-        "--jscomp_off=lateProvide",
         "--conformance_config=conformance_proto.txt",
         # TODO(michaelthomas): Enable once all errors are fixed. Yes, seriously.
         # "--jscomp_error=reportUnknownTypes",

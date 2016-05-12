@@ -96,7 +96,6 @@ J2CL_BINARY_DEFS = [
     "--variable_renaming=OFF",
     "--jscomp_off=checkTypes",
     "--jscomp_off=duplicateZipContents",
-    "--jscomp_off=lateProvide",
     "--jscomp_off=undefinedVars",
 ]
 

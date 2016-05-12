@@ -1,5 +1,7 @@
 /**
- * Header hand rolled.
+ * @fileoverview Header hand rolled.
+ *
+ * @suppress {lateProvide}
  */
 goog.module('vmbootstrap.LongUtils');
 

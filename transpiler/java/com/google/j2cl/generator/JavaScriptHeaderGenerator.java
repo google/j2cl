@@ -39,7 +39,9 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     String binaryName = javaType.getDescriptor().getRawTypeDescriptor().getBinaryName();
     sb = new SourceBuilder();
     sb.appendln("/**");
-    sb.appendln(" * Header transpiled from %s.", binaryName);
+    sb.appendln(" * @fileoverview Header transpiled from %s", binaryName);
+    sb.appendln(" *");
+    sb.appendln(" * @suppress {lateProvide}");
     sb.appendln(" */");
     sb.appendln("goog.module('%s');", selfImport.getHeaderModulePath());
     if (declareLegacyNamespace) {

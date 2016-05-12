@@ -56,7 +56,6 @@ def readable_example(
           "--remove_unused_vars",
           "--remove_unused_local_vars=ON",
           "--remove_dead_assignments",
-          "--jscomp_off=lateProvide",
       ],
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],

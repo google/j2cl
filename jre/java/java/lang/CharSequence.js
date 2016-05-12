@@ -1,5 +1,7 @@
 /**
- * Header transpiled from java.lang.CharSequence.
+ * @fileoverview Header transpiled from java.lang.CharSequence.
+ *
+ * @suppress {lateProvide}
  */
 goog.module('java.lang.CharSequence');
 
