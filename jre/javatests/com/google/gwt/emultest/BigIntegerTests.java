@@ -19,7 +19,6 @@ import com.google.gwt.emultest.java.math.BigIntegerAddTest;
 import com.google.gwt.emultest.java.math.BigIntegerAndTest;
 import com.google.gwt.emultest.java.math.BigIntegerCompareTest;
 import com.google.gwt.emultest.java.math.BigIntegerConstructorsTest;
-import com.google.gwt.emultest.java.math.BigIntegerConvertTest;
 import com.google.gwt.emultest.java.math.BigIntegerDivideTest;
 import com.google.gwt.emultest.java.math.BigIntegerHashCodeTest;
 import com.google.gwt.emultest.java.math.BigIntegerModPowTest;
@@ -44,7 +43,6 @@ import org.junit.runners.Suite.SuiteClasses;
   BigIntegerAndTest.class,
   BigIntegerCompareTest.class,
   BigIntegerConstructorsTest.class,
-  BigIntegerConvertTest.class,
   BigIntegerDivideTest.class,
   BigIntegerHashCodeTest.class,
   BigIntegerModPowTest.class,
