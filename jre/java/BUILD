@@ -64,7 +64,7 @@ commands = [
     "set -e",
     "mkdir compile_out",
     "third_party/java/jdk/jdk8-google-v7-64/bin/javac -source 8 -target 8 -d compile_out" +
-    " -cp blaze-out/host/bin/third_party/java_src/j2cl/jre/java/jre_deps_deploy.jar" +
+    " -cp $(location :jre_deps_deploy.jar)" +
     " $(SRCS)",
     "cd compile_out/",
     "zip -r tmp.jar *",
