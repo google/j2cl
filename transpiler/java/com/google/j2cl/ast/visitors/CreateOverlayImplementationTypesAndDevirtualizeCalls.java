@@ -25,6 +25,7 @@ import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -112,6 +113,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls {
                     method.getDescriptor().isStatic()
                         ? method
                         : AstUtils.createDevirtualizedMethod(method))
+                .setJsInfo(JsInfo.NONE)
                 .setEnclosingClass(overlayImplTypeDescriptor)
                 .build());
 

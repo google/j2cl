@@ -124,13 +124,13 @@ public class DefaultMethodsResolver {
   }
 
   private static void implementDefaultMethods(
-      JavaType lambdaJavaType, Map<String, IMethodBinding> applicableDefaultMethodsBySignature) {
+      JavaType type, Map<String, IMethodBinding> applicableDefaultMethodsBySignature) {
     // Finally implement the methods by as forwarding stubs to the actual interface method.
     for (IMethodBinding method : applicableDefaultMethodsBySignature.values()) {
       MethodDescriptor targetMethod = JdtMethodUtils.createMethodDescriptor(method);
-      lambdaJavaType.addMethod(
+      type.addMethod(
           AstUtils.createStaticForwardingMethod(
-              targetMethod, lambdaJavaType.getDescriptor(), "Default method forwarding stub."));
+              targetMethod, type.getDescriptor(), "Default method forwarding stub."));
     }
   }
 

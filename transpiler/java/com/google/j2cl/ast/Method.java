@@ -243,6 +243,12 @@ public class Method extends Node {
       return this;
     }
 
+    public Builder setJsInfo(JsInfo jsInfo) {
+      this.methodDescriptor =
+          MethodDescriptor.Builder.from(methodDescriptor).setJsInfo(jsInfo).build();
+      return this;
+    }
+
     public Builder setParameterOptional(int parameterIndex, boolean isOptional) {
       parameterOptionality.set(parameterIndex, isOptional);
       return this;

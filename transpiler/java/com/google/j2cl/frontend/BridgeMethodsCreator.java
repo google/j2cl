@@ -15,8 +15,11 @@
  */
 package com.google.j2cl.frontend;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.Expression;
@@ -110,6 +113,10 @@ public class BridgeMethodsCreator {
    * Returns the mappings from the needed bridge method to the delegated method.
    */
   public static Map<IMethodBinding, IMethodBinding> findBridgeMethods(ITypeBinding typeBinding) {
+    if (typeBinding.isInterface()) {
+      // Do not create bridge methods in interfaces.
+      return ImmutableMap.of();
+    }
     Map<IMethodBinding, IMethodBinding> bridgeMethodByDelegateMethod = new LinkedHashMap<>();
     for (IMethodBinding bridgeMethod : getPotentialBridgeMethods(typeBinding)) {
       IMethodBinding delegateMethod = findForwardingMethod(bridgeMethod, typeBinding);
@@ -254,6 +261,8 @@ public class BridgeMethodsCreator {
    */
   private static MethodDescriptor createMethodDescriptor(
       ITypeBinding typeBinding, IMethodBinding methodBinding, ITypeBinding returnType) {
+    checkArgument(!typeBinding.isInterface());
+
     Nullability defaultNullability =
         TypeProxyUtils.getTypeDefaultNullability(methodBinding.getDeclaringClass());
     TypeDescriptor enclosingClassTypeDescriptor =
@@ -353,7 +362,8 @@ public class BridgeMethodsCreator {
         targetMethodDescriptor.getEnclosingClassTypeDescriptor();
     Expression qualifier =
         targetEnclosingClassTypeDescriptor.equalsIgnoreNullability(
-                bridgeMethodDescriptor.getEnclosingClassTypeDescriptor())
+                    bridgeMethodDescriptor.getEnclosingClassTypeDescriptor())
+                || targetEnclosingClassTypeDescriptor.isInterface()
             ? new ThisReference(targetEnclosingClassTypeDescriptor)
             : new SuperReference(targetEnclosingClassTypeDescriptor);
     Expression dispatchMethodCall =

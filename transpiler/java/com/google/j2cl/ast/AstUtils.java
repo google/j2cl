@@ -410,7 +410,7 @@ public class AstUtils {
         true);
   }
   /**
-   * Creates forwarding method {@code fromMethodDescriptor} that deletgates to
+   * Creates forwarding method {@code fromMethodDescriptor} that delegates to
    * {@code toMethodDescriptor}, e.g.
    *
    * fromMethodDescriptor (args) { return this.toMethodDescriptor(args);
@@ -429,6 +429,7 @@ public class AstUtils {
       MethodDescriptor toMethodDescriptor,
       String jsDocDescription,
       boolean isStaticDispatch) {
+    checkArgument(!fromMethodDescriptor.getEnclosingClassTypeDescriptor().isInterface());
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
     List<TypeDescriptor> parameterTypes = fromMethodDescriptor.getParameterTypeDescriptors();
