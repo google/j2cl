@@ -13,7 +13,10 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 
 let DefaultNonNullable = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
+let Iterable$$Overlay = goog.forwardDeclare('java.lang.Iterable$$Overlay$impl');
+let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
+let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 
 
 /**
@@ -50,6 +53,18 @@ class DefaultNonNullable$StringList extends ArrayList {
   }
 
   /**
+   * Default method forwarding stub.
+   * @override
+   * @param {Consumer<?>} arg0
+   * @return {void}
+   * @public
+   */
+  m_forEach__java_util_function_Consumer(arg0) {
+    Iterable$$Overlay
+        .m_forEach__java_lang_Iterable__java_util_function_Consumer(this, arg0);
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -77,7 +92,10 @@ class DefaultNonNullable$StringList extends ArrayList {
     DefaultNonNullable = goog.module.get(
         'com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$impl');
     Class = goog.module.get('java.lang.Class$impl');
+    Iterable$$Overlay = goog.module.get('java.lang.Iterable$$Overlay$impl');
+    Iterable = goog.module.get('java.lang.Iterable$impl');
     String = goog.module.get('java.lang.String$impl');
+    Consumer = goog.module.get('java.util.function.Consumer$impl');
     ArrayList.$clinit();
   }
 
