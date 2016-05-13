@@ -28,6 +28,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.ForStatement;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -225,10 +226,31 @@ public class NormalizeJsVarargs extends AbstractRewriter {
         }
       }
 
+      // Here we wrap the vararg type with $Util.$checkNotNullVararg before applying the spread
+      // operator because the spread of a null causes a runtime exception in Javascript.
+      // The reason for this is that there is a mismatch between Java varargs and Javascript varargs
+      // semantics.  In Java, if you pass a null for the varargs it passes a null array rather than
+      // an array with a single null object.  In Javascript however we pass the values of the
+      // varargs as arguments not as an array so there is no way to express this.
+      // $checkNotNullVararg errors out early if null is passed as a jsvararg parameter.
+      // TODO: For non-nullable types we can avoid this.
+      TypeDescriptor returnType = TypeDescriptors.toNonNullable(lastArgument.getTypeDescriptor());
+      MethodDescriptor nullToEmptyDescriptor =
+          MethodDescriptor.Builder.fromDefault()
+              .setReturnTypeDescriptor(returnType)
+              .setIsStatic(true)
+              .setMethodName("$checkNotNull")
+              .setJsInfo(JsInfo.RAW)
+              .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
+              .setReturnTypeDescriptor(returnType)
+              .addParameter(lastArgument.getTypeDescriptor())
+              .build();
+
+      MethodCall nullToEmpty =
+          MethodCall.createMethodCall(null, nullToEmptyDescriptor, lastArgument);
       return MethodCall.Builder.from(methodCall)
           .replaceVarargsArgument(
-              new PrefixExpression(
-                  lastArgument.getTypeDescriptor(), lastArgument, PrefixOperator.SPREAD))
+              new PrefixExpression(returnType, nullToEmpty, PrefixOperator.SPREAD))
           .build();
     }
   }

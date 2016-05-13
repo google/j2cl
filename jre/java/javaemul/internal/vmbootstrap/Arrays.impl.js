@@ -19,7 +19,8 @@ let NullPointerException =
     goog.forwardDeclare('java.lang.NullPointerException$impl');
 let Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
-
+let InternalPreconditions =
+    goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 
 /**
  * Static Array helper and devirtualized functions.
@@ -516,6 +517,17 @@ class Arrays {
   }
 
   /**
+   * Ensure the array is not null before returning it.
+   * @param {Array<*>} arrayOrNull
+   * @return {!Array<*>}
+   */
+  static $checkNotNull(arrayOrNull) {
+    Arrays.$clinit();
+    InternalPreconditions.m_checkNotNull__java_lang_Object(arrayOrNull);
+    return /** @type {!Array<*>} */ (arrayOrNull);
+  }
+
+  /**
    * Runs inline static field initializers.
    * @public
    */
@@ -531,6 +543,8 @@ class Arrays {
         goog.module.get('java.lang.NullPointerException$impl');
     Casts = goog.module.get('vmbootstrap.Casts$impl');
     Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+    InternalPreconditions =
+      goog.module.get('javaemul.internal.InternalPreconditions$impl');
   }
 };
 

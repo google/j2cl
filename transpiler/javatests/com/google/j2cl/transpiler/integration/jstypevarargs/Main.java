@@ -255,6 +255,23 @@ public class Main {
     assert sm.test4() == 10;
     assert sm.test5() == 40;
   }
+  
+  @JsMethod
+  private static int count(String... strings) {
+    return strings.length;
+  }
+
+  public static void testCallVarargsWithNull() {
+    assert count("Hello") == 1;
+    try {
+      String[] strings = null;
+      assert count(strings) == 0;
+      assert false;
+    } catch (Exception expected) {
+      return;
+    }
+    assert false;
+  }
 
   @JsMethod
   private static native Double callSumAndMultiply();
@@ -282,6 +299,7 @@ public class Main {
     testJsFunction();
     testSideEffect();
     testSuperMethodCall();
+    testCallVarargsWithNull();
     QualifiedSuperMethodCall.test();
   }
 }

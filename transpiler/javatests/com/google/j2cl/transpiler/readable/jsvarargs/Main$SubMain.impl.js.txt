@@ -65,7 +65,7 @@ class Main$SubMain extends Main {
     a += super.f3(1, 1, 2);
     a += super.f3(1);
     let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
-    a += super.f3(1, ...ints);
+    a += super.f3(1, ...$Arrays.$checkNotNull(ints));
     return a;
   }
 

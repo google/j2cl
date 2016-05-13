@@ -157,8 +157,8 @@ class Main extends Object {
     Main.f1(1);
     Main.f1(1);
     let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
-    Main.f1(1, ...ints);
-    Main.f1(1, ...ints);
+    Main.f1(1, ...$Arrays.$checkNotNull(ints));
+    Main.f1(1, ...$Arrays.$checkNotNull(ints));
   }
 
   /**
@@ -185,9 +185,9 @@ class Main extends Object {
     let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
     let integers = /**@type {!Array<Integer>} */ ($Arrays.$init(
         [Integer.m_valueOf__int(1), Integer.m_valueOf__int(2)], Integer));
-    Main.f2(...ints);
-    Main.f2(...ints);
-    Main.generics(...integers);
+    Main.f2(...$Arrays.$checkNotNull(ints));
+    Main.f2(...$Arrays.$checkNotNull(ints));
+    Main.generics(...$Arrays.$checkNotNull(integers));
   }
 
   /**
@@ -201,7 +201,7 @@ class Main extends Object {
     m.f3(1, 1, 2);
     m.f3(1);
     let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
-    m.f3(1, ...ints);
+    m.f3(1, ...$Arrays.$checkNotNull(ints));
   }
 
   /**
@@ -215,7 +215,7 @@ class Main extends Object {
     m.f4(1, 2);
     m.f4();
     let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
-    m.f4(...ints);
+    m.f4(...$Arrays.$checkNotNull(ints));
   }
 
   /**
@@ -231,7 +231,7 @@ class Main extends Object {
     a(0, o1, o2);
     a(0);
     let os = [o1, o2];
-    a(0, ...os);
+    a(0, ...$Arrays.$checkNotNull(os));
   }
 
   /**
@@ -240,7 +240,7 @@ class Main extends Object {
    */
   m_testSideEffect() {
     let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
-    Main.$create__int(1).f3(1, ...ints);
+    Main.$create__int(1).f3(1, ...$Arrays.$checkNotNull(ints));
   }
 
   /**
