@@ -25,7 +25,8 @@ import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.JavaType;
-import com.google.j2cl.ast.JdtMethodUtils;
+import com.google.j2cl.ast.JdtBindingUtils;
+import com.google.j2cl.ast.JdtBindingUtils.Nullability;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.ManglingNameUtils;
@@ -39,8 +40,6 @@ import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.TypeProxyUtils;
-import com.google.j2cl.ast.TypeProxyUtils.Nullability;
 import com.google.j2cl.ast.Variable;
 
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
@@ -100,9 +99,7 @@ public class BridgeMethodsCreator {
           @Override
           public Node rewriteMethod(Method method) {
             if (toBeFixedMethodDescriptors.contains(method.getDescriptor())) {
-              MethodDescriptor newMethodDescriptor =
-                  MethodDescriptor.Builder.from(method.getDescriptor()).setJsInfo(JsInfo.NONE).build();
-              return Method.Builder.from(method).setMethodDescriptor(newMethodDescriptor).build();
+              return Method.Builder.from(method).setJsInfo(JsInfo.NONE).build();
             }
             return method;
           }
@@ -181,7 +178,7 @@ public class BridgeMethodsCreator {
                 // is a parameterized method.
                 && method != method.getMethodDeclaration()
                 // type erasure changes the signature
-                && !JdtUtils.areParameterErasureEqual(method, method.getMethodDeclaration());
+                && !JdtUtils.areMethodsOverrideEquivalent(method, method.getMethodDeclaration());
           }
         });
   }
@@ -201,11 +198,11 @@ public class BridgeMethodsCreator {
     for (IMethodBinding method : type.getDeclaredMethods()) {
       if (!method.isEqualTo(bridgeMethod) // should not delegate to itself
           && !Modifier.isAbstract(method.getModifiers()) // should be a concrete implementation.
-          && JdtUtils.areParameterErasureEqual(
-              method, bridgeMethod) // concrete methods have the same signature, thus an overriding.
-          && !JdtUtils
-              .areParameterErasureEqual( // original method declarations have different signatures
-                  method.getMethodDeclaration(), bridgeMethod.getMethodDeclaration())) {
+          // concrete methods have the same signature, thus an overriding.
+          && JdtUtils.areMethodsOverrideEquivalent(method, bridgeMethod)
+          // original method declarations have different signatures
+          && !JdtUtils.areMethodsOverrideEquivalent(
+              method.getMethodDeclaration(), bridgeMethod.getMethodDeclaration())) {
         // find a overriding method (also possible accidental overriding), this is the method that
         // should be delegated to.
         return method;
@@ -244,9 +241,9 @@ public class BridgeMethodsCreator {
       for (IMethodBinding methodBinding : superInterface.getDeclaredMethods()) {
         if (methodBinding == methodBinding.getMethodDeclaration() // non-generic method,
             // generic method has been investigated by findForwardingMethod.
-            && JdtUtils.areParameterErasureEqual(methodBinding, bridgeMethod)
+            && JdtUtils.areMethodsOverrideEquivalent(methodBinding, bridgeMethod)
             // is overridden by a generic method with different erasure parameter types.
-            && !JdtUtils.areParameterErasureEqual(
+            && !JdtUtils.areMethodsOverrideEquivalent(
                 methodBinding, bridgeMethod.getMethodDeclaration())) {
           return methodBinding;
         }
@@ -264,16 +261,16 @@ public class BridgeMethodsCreator {
     checkArgument(!typeBinding.isInterface());
 
     Nullability defaultNullability =
-        TypeProxyUtils.getTypeDefaultNullability(methodBinding.getDeclaringClass());
+        JdtBindingUtils.getTypeDefaultNullability(methodBinding.getDeclaringClass());
     TypeDescriptor enclosingClassTypeDescriptor =
-        TypeProxyUtils.createTypeDescriptorWithNullability(
+        JdtBindingUtils.createTypeDescriptorWithNullability(
             typeBinding, new IAnnotationBinding[0], defaultNullability);
     TypeDescriptor returnTypeDescriptor =
-        TypeProxyUtils.createTypeDescriptorWithNullability(
+        JdtBindingUtils.createTypeDescriptorWithNullability(
             returnType, new IAnnotationBinding[0], defaultNullability);
 
     MethodDescriptor originalMethodDescriptor =
-        JdtMethodUtils.createMethodDescriptor(methodBinding);
+        JdtBindingUtils.createMethodDescriptor(methodBinding);
 
     return MethodDescriptor.Builder.from(originalMethodDescriptor)
         .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
@@ -332,10 +329,10 @@ public class BridgeMethodsCreator {
       Variable parameter =
           new Variable(
               "arg" + i,
-              TypeProxyUtils.createTypeDescriptorWithNullability(
+              JdtBindingUtils.createTypeDescriptorWithNullability(
                   bridgeMethod.getParameterTypes()[i],
                   new IAnnotationBinding[0],
-                  TypeProxyUtils.getTypeDefaultNullability(targetMethod.getDeclaringClass())),
+                  JdtBindingUtils.getTypeDefaultNullability(targetMethod.getDeclaringClass())),
               false,
               true);
       parameters.add(parameter);

@@ -16,10 +16,10 @@
 package com.google.j2cl.frontend;
 
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.JdtBindingUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
-import com.google.j2cl.ast.TypeProxyUtils;
 import com.google.j2cl.ast.Variable;
 
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
@@ -55,7 +55,7 @@ public class UnimplementedMethodsCreator {
     }
 
     for (IMethodBinding methodBinding : JdtUtils.getUnimplementedMethodBindings(typeBinding)) {
-      if (JdtUtils.hasMethodWithSameErasureAs(methodBinding, unimplementedMethodsInSuperClass)) {
+      if (JdtUtils.hasOverrideEquivalentMethod(methodBinding, unimplementedMethodsInSuperClass)) {
         // While the method is not implemented in Java, this class will generate empty methods
         // for it when processing the superclass, so there is no need to add an empty method here.
         continue;
@@ -104,10 +104,10 @@ public class UnimplementedMethodsCreator {
       Variable parameter =
           new Variable(
               "arg" + i++,
-              TypeProxyUtils.createTypeDescriptorWithNullability(
+              JdtBindingUtils.createTypeDescriptorWithNullability(
                   parameterTypeBinding,
                   new IAnnotationBinding[0],
-                  TypeProxyUtils.getTypeDefaultNullability(methodBinding.getDeclaringClass())),
+                  JdtBindingUtils.getTypeDefaultNullability(methodBinding.getDeclaringClass())),
               false,
               true);
       parameters.add(parameter);
@@ -116,7 +116,7 @@ public class UnimplementedMethodsCreator {
         .setMethodDescriptor(methodDescriptor)
         .setParameters(parameters)
         .setIsAbstract(true)
-        .setIsFinal(JdtUtils.isFinal(methodBinding.getModifiers()))
+        .setIsFinal(JdtBindingUtils.isFinal(methodBinding))
         .build();
   }
 }

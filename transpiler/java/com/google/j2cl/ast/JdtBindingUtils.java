@@ -15,13 +15,19 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
+import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.google.j2cl.common.PackageInfoCache;
 
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
+import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.Modifier;
@@ -29,13 +35,15 @@ import org.eclipse.jdt.core.dom.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Utility functions to transpile JDT TypeBinding to J2cl TypeDescriptor.
  */
-public class TypeProxyUtils {
+public class JdtBindingUtils {
   /**
    * The nullability of a package, type, class, etc.
    */
@@ -242,7 +250,11 @@ public class TypeProxyUtils {
     return typeArgumentDescriptors;
   }
 
-  public static Visibility getVisibility(int modifiers) {
+  public static Visibility getVisibility(IBinding binding) {
+    return getVisibility(binding.getModifiers());
+  }
+
+  private static Visibility getVisibility(int modifiers) {
     if (Modifier.isPublic(modifiers)) {
       return Visibility.PUBLIC;
     } else if (Modifier.isProtected(modifiers)) {
@@ -254,12 +266,210 @@ public class TypeProxyUtils {
     }
   }
 
+  public static boolean isDefaultMethod(IMethodBinding binding) {
+    return Modifier.isDefault(binding.getModifiers());
+  }
+
+  public static boolean isAbstract(IBinding binding) {
+    return Modifier.isAbstract(binding.getModifiers());
+  }
+
+  public static boolean isFinal(IBinding binding) {
+    return Modifier.isFinal(binding.getModifiers());
+  }
+
+  public static boolean isStatic(IBinding binding) {
+    return Modifier.isStatic(binding.getModifiers());
+  }
+
   static boolean isInstanceMemberClass(ITypeBinding typeBinding) {
     return typeBinding.isMember() && !Modifier.isStatic(typeBinding.getModifiers());
   }
 
   static boolean isInstanceNestedClass(ITypeBinding typeBinding) {
     return typeBinding.isNested() && !Modifier.isStatic(typeBinding.getModifiers());
+  }
+
+  /**
+   * Creates a MethodDescriptor directly based on the given JDT method binding.
+   */
+  public static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
+    int modifiers = methodBinding.getModifiers();
+    boolean isStatic = Modifier.isStatic(modifiers);
+    Visibility visibility = getVisibility(methodBinding);
+    boolean isNative = Modifier.isNative(modifiers);
+    TypeDescriptor enclosingClassTypeDescriptor =
+        createTypeDescriptor(methodBinding.getDeclaringClass());
+    boolean isConstructor = methodBinding.isConstructor();
+    String methodName =
+        isConstructor
+            ? createTypeDescriptor(methodBinding.getDeclaringClass()).getBinaryClassName()
+            : methodBinding.getName();
+    final Nullability defaultNullabilityForPackage =
+        getTypeDefaultNullability(methodBinding.getDeclaringClass());
+
+    JsInfo jsInfo = computeJsInfo(methodBinding);
+
+    TypeDescriptor returnTypeDescriptor =
+        createTypeDescriptorWithNullability(
+            methodBinding.getReturnType(),
+            methodBinding.getAnnotations(),
+            defaultNullabilityForPackage);
+
+    // generate parameters type descriptors.
+    List<TypeDescriptor> parameterTypeDescriptors = new ArrayList<>();
+    for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
+      TypeDescriptor descriptor =
+          createTypeDescriptorWithNullability(
+              methodBinding.getParameterTypes()[i],
+              methodBinding.getParameterAnnotations(i),
+              defaultNullabilityForPackage);
+      parameterTypeDescriptors.add(descriptor);
+    }
+
+    MethodDescriptor declarationMethodDescriptor = null;
+    if (methodBinding.getMethodDeclaration() != methodBinding) {
+      declarationMethodDescriptor = createMethodDescriptor(methodBinding.getMethodDeclaration());
+    }
+
+    // generate type parameters declared in the method.
+    Iterable<TypeDescriptor> typeParameterTypeDescriptors =
+        FluentIterable.from(methodBinding.getTypeParameters())
+            .transform(
+                new Function<ITypeBinding, TypeDescriptor>() {
+                  @Override
+                  public TypeDescriptor apply(ITypeBinding typeBinding) {
+                    return createTypeDescriptor(typeBinding);
+                  }
+                });
+
+    return MethodDescriptor.Builder.fromDefault()
+        .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+        .setMethodName(methodName)
+        .setDeclarationMethodDescriptor(declarationMethodDescriptor)
+        .setReturnTypeDescriptor(returnTypeDescriptor)
+        .setParameterTypeDescriptors(parameterTypeDescriptors)
+        .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
+        .setJsInfo(jsInfo)
+        .setVisibility(visibility)
+        .setIsStatic(isStatic)
+        .setIsConstructor(isConstructor)
+        .setIsNative(isNative)
+        .setIsDefault(Modifier.isDefault(methodBinding.getModifiers()))
+        .setIsVarargs(methodBinding.isVarargs())
+        .build();
+  }
+
+  public static boolean isOrOverridesJsMember(IMethodBinding methodBinding) {
+    return JsInteropUtils.isJsMember(methodBinding)
+        || !getOverriddenJsMembers(methodBinding).isEmpty();
+  }
+
+  /**
+   * Checks overriding chain to compute JsInfo.
+   */
+  static JsInfo computeJsInfo(IMethodBinding methodBinding) {
+    List<JsInfo> jsInfoList = new ArrayList<>();
+    // Add the JsInfo of the method and all the overridden methods to the list.
+    JsInfo jsInfo = JsInteropUtils.getJsInfo(methodBinding);
+    if (!jsInfo.isNone()) {
+      jsInfoList.add(jsInfo);
+    }
+    for (IMethodBinding overriddenMethod : getOverriddenMethods(methodBinding)) {
+      JsInfo inheritedJsInfo = JsInteropUtils.getJsInfo(overriddenMethod);
+      if (!inheritedJsInfo.isNone()) {
+        jsInfoList.add(inheritedJsInfo);
+      }
+    }
+
+    if (jsInfoList.isEmpty()) {
+      return JsInfo.NONE;
+    }
+
+    // TODO: Do the same for JsProperty?
+    if (jsInfoList.get(0).getJsMemberType() == JsMemberType.METHOD) {
+      // Return the first JsInfo with a Js name specified.
+      for (JsInfo jsInfoElement : jsInfoList) {
+        if (jsInfoElement.getJsName() != null) {
+          return jsInfoElement;
+        }
+      }
+    }
+    return jsInfoList.get(0);
+  }
+
+  public static Set<IMethodBinding> getOverriddenJsMembers(IMethodBinding methodBinding) {
+    return Sets.filter(
+        getOverriddenMethods(methodBinding),
+        new Predicate<IMethodBinding>() {
+          @Override
+          public boolean apply(IMethodBinding overriddenMethod) {
+            return JsInteropUtils.isJsMember(overriddenMethod);
+          }
+        });
+  }
+
+  /**
+   * Returns the method signature, which identifies a method up to overriding.
+   */
+  public static String getMethodSignature(IMethodBinding methodBinding) {
+    StringBuilder signatureBuilder = new StringBuilder("");
+
+    Visibility methodVisibility = getVisibility(methodBinding);
+    if (methodVisibility.isPackagePrivate()) {
+      signatureBuilder.append(":pp:");
+      signatureBuilder.append(methodBinding.getDeclaringClass().getPackage());
+      signatureBuilder.append(":");
+    } else if (methodVisibility.isPrivate()) {
+      signatureBuilder.append(":p:");
+      signatureBuilder.append(methodBinding.getDeclaringClass().getBinaryName());
+      signatureBuilder.append(":");
+    }
+
+    signatureBuilder.append(methodBinding.getName());
+    signatureBuilder.append("(");
+
+    String separator = "";
+    for (ITypeBinding parameterType : methodBinding.getParameterTypes()) {
+      signatureBuilder.append(separator);
+      signatureBuilder.append(parameterType.getErasure().getBinaryName());
+      separator = ";";
+    }
+    signatureBuilder.append(")");
+    return signatureBuilder.toString();
+  }
+
+  public static Set<IMethodBinding> getOverriddenMethods(IMethodBinding methodBinding) {
+    Set<IMethodBinding> overriddenMethods = new HashSet<>();
+    ITypeBinding enclosingClass = methodBinding.getDeclaringClass();
+    ITypeBinding superClass = enclosingClass.getSuperclass();
+    if (superClass != null) {
+      overriddenMethods.addAll(getOverriddenMethodsInType(methodBinding, superClass));
+    }
+    for (ITypeBinding superInterface : enclosingClass.getInterfaces()) {
+      overriddenMethods.addAll(getOverriddenMethodsInType(methodBinding, superInterface));
+    }
+    return overriddenMethods;
+  }
+
+  static Set<IMethodBinding> getOverriddenMethodsInType(
+      IMethodBinding methodBinding, ITypeBinding typeBinding) {
+    Set<IMethodBinding> overriddenMethods = new HashSet<>();
+    for (IMethodBinding declaredMethod : typeBinding.getDeclaredMethods()) {
+      if (methodBinding.overrides(declaredMethod) && !methodBinding.isConstructor()) {
+        checkArgument(!Modifier.isStatic(methodBinding.getModifiers()));
+        overriddenMethods.add(declaredMethod);
+      }
+    }
+    // Recurse into immediate super class and interfaces for overridden method.
+    if (typeBinding.getSuperclass() != null) {
+      overriddenMethods.addAll(
+          getOverriddenMethodsInType(methodBinding, typeBinding.getSuperclass()));
+    }
+    for (ITypeBinding interfaceBinding : typeBinding.getInterfaces()) {
+      overriddenMethods.addAll(getOverriddenMethodsInType(methodBinding, interfaceBinding));
+    }
+    return overriddenMethods;
   }
 
   static boolean isLocal(ITypeBinding typeBinding) {
@@ -340,7 +550,7 @@ public class TypeProxyUtils {
     IMethodBinding samInJsFunctionInterface = getSAMInJsFunctionInterface(typeBinding);
     return samInJsFunctionInterface == null
         ? null
-        : JdtMethodUtils.createMethodDescriptor(samInJsFunctionInterface.getMethodDeclaration());
+        : createMethodDescriptor(samInJsFunctionInterface.getMethodDeclaration());
   }
 
   /**
@@ -352,7 +562,7 @@ public class TypeProxyUtils {
       return null;
     }
     if (typeBinding.isInterface()) {
-      return JdtMethodUtils.createMethodDescriptor(samInJsFunctionInterface);
+      return createMethodDescriptor(samInJsFunctionInterface);
     }
     for (IMethodBinding methodBinding : typeBinding.getDeclaredMethods()) {
       if (methodBinding.isSynthetic()) {
@@ -360,7 +570,7 @@ public class TypeProxyUtils {
         continue;
       }
       if (methodBinding.overrides(samInJsFunctionInterface)) {
-        return JdtMethodUtils.createMethodDescriptor(methodBinding);
+        return createMethodDescriptor(methodBinding);
       }
     }
     return null;

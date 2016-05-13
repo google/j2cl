@@ -50,6 +50,7 @@ import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
+import com.google.j2cl.ast.JdtBindingUtils;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsInteropUtils;
 import com.google.j2cl.ast.LabeledStatement;
@@ -76,7 +77,6 @@ import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.TypeProxyUtils;
 import com.google.j2cl.ast.TypeReference;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
@@ -251,7 +251,7 @@ public class CompilationUnitBuilder {
           Initializer initializer = (Initializer) object;
           Block block = convert(initializer.getBody());
           block.setPosition(i);
-          if (JdtUtils.isStatic(initializer.getModifiers())) {
+          if (JdtUtils.isStatic(initializer)) {
             type.addStaticInitializerBlock(block);
           } else {
             type.addInstanceInitializerBlock(block);
@@ -373,7 +373,7 @@ public class CompilationUnitBuilder {
         Variable j2clParameter =
             JdtUtils.createVariable(
                 parameterBinding,
-                TypeProxyUtils.getTypeDefaultNullability(
+                JdtBindingUtils.getTypeDefaultNullability(
                     methodDeclaration.resolveBinding().getDeclaringClass()));
         parameters.add(j2clParameter);
         variableByJdtBinding.put(parameterBinding, j2clParameter);
@@ -389,9 +389,9 @@ public class CompilationUnitBuilder {
               .setMethodDescriptor(JdtUtils.createMethodDescriptor(methodBinding))
               .setParameters(parameters)
               .addStatements(body.getStatements())
-              .setIsAbstract(JdtUtils.isAbstract(methodBinding.getModifiers()))
+              .setIsAbstract(JdtBindingUtils.isAbstract(methodBinding))
               .setIsOverride(JdtUtils.isJsOverride(methodBinding))
-              .setIsFinal(JdtUtils.isFinal(methodBinding.getModifiers()));
+              .setIsFinal(JdtBindingUtils.isFinal(methodBinding));
       for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
         methodBuilder.setParameterOptional(i, JsInteropUtils.isJsOptional(methodBinding, i));
       }
@@ -1288,7 +1288,7 @@ public class CompilationUnitBuilder {
       if (methodInvocation.getExpression() == null) {
         // No qualifier specified.
         IMethodBinding methodBinding = methodInvocation.resolveMethodBinding();
-        if (JdtUtils.isStatic(methodBinding.getModifiers())) {
+        if (JdtBindingUtils.isStatic(methodBinding)) {
           return null;
         } else { // Not static so has to be a reference to 'this
           return convertOuterClassReference(
@@ -1464,10 +1464,10 @@ public class CompilationUnitBuilder {
       Expression expression =
           statement.getExpression() == null ? null : convert(statement.getExpression());
       TypeDescriptor returnTypeDescriptor =
-          TypeProxyUtils.createTypeDescriptorWithNullability(
+          JdtBindingUtils.createTypeDescriptorWithNullability(
               currentMethodBinding.getReturnType(),
               currentMethodBinding.getAnnotations(),
-              TypeProxyUtils.getTypeDefaultNullability(currentMethodBinding.getDeclaringClass()));
+              JdtBindingUtils.getTypeDefaultNullability(currentMethodBinding.getDeclaringClass()));
       return new ReturnStatement(expression, returnTypeDescriptor);
     }
 
@@ -1771,10 +1771,11 @@ public class CompilationUnitBuilder {
     private VariableDeclarationFragment convert(
         org.eclipse.jdt.core.dom.VariableDeclarationFragment variableDeclarationFragment) {
       IVariableBinding variableBinding = variableDeclarationFragment.resolveBinding();
-      Variable variable = JdtUtils.createVariable(
-          variableBinding,
-          TypeProxyUtils.getTypeDefaultNullability(
-              JdtUtils.findCurrentTypeBinding(variableDeclarationFragment)));
+      Variable variable =
+          JdtUtils.createVariable(
+              variableBinding,
+              JdtBindingUtils.getTypeDefaultNullability(
+                  JdtUtils.findCurrentTypeBinding(variableDeclarationFragment)));
       if (!variable.getTypeDescriptor().isTypeVariable()
           && !variable.getTypeDescriptor().isPrimitive()) {
         // Local variables default to nullable. A flow analysis pass will later tighten their type
@@ -1843,7 +1844,7 @@ public class CompilationUnitBuilder {
       }
       ITypeBinding superclassBinding = typeBinding.getSuperclass();
       Kind kind = JdtUtils.getKindFromTypeBinding(typeBinding);
-      Visibility visibility = JdtUtils.getVisibility(typeBinding.getModifiers());
+      Visibility visibility = JdtBindingUtils.getVisibility(typeBinding);
       TypeDescriptor typeDescriptor = JdtUtils.createTypeDescriptor(typeBinding);
       JavaType type =
           typeBinding.isAnonymous()
@@ -1855,10 +1856,10 @@ public class CompilationUnitBuilder {
 
       if (superclassBinding != null) {
         TypeDescriptor superTypeDescriptor =
-            TypeProxyUtils.createTypeDescriptorWithNullability(
+            JdtBindingUtils.createTypeDescriptorWithNullability(
                 superclassBinding,
                 new IAnnotationBinding[0],
-                TypeProxyUtils.getTypeDefaultNullability(typeBinding));
+                JdtBindingUtils.getTypeDefaultNullability(typeBinding));
         // The superclass is always non-nullable, however the type parameters might be, for example
         // 'extends List<@Nullable String>'
         superTypeDescriptor = TypeDescriptors.toNullable(superTypeDescriptor);
@@ -1868,17 +1869,17 @@ public class CompilationUnitBuilder {
       for (ITypeBinding superInterface : typeBinding.getInterfaces()) {
         //
         TypeDescriptor superInterfaceDescriptor =
-            TypeProxyUtils.createTypeDescriptorWithNullability(
+            JdtBindingUtils.createTypeDescriptorWithNullability(
                 superInterface,
                 new IAnnotationBinding[0],
-                TypeProxyUtils.getTypeDefaultNullability(typeBinding));
+                JdtBindingUtils.getTypeDefaultNullability(typeBinding));
         // The interface is always non-nullable, however type parameters might be.
         superInterfaceDescriptor = TypeDescriptors.toNullable(superInterfaceDescriptor);
         type.addSuperInterfaceDescriptor(superInterfaceDescriptor);
       }
       type.setLocal(typeBinding.isLocal());
-      type.setStatic(JdtUtils.isStatic(typeBinding.getModifiers()));
-      type.setAbstract(JdtUtils.isAbstract(typeBinding.getModifiers()));
+      type.setStatic(JdtBindingUtils.isStatic(typeBinding));
+      type.setAbstract(JdtBindingUtils.isAbstract(typeBinding));
       return type;
     }
   }

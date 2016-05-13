@@ -26,7 +26,8 @@ import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
-import com.google.j2cl.ast.JdtMethodUtils;
+import com.google.j2cl.ast.JdtBindingUtils;
+import com.google.j2cl.ast.JdtBindingUtils.Nullability;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsInteropUtils;
 import com.google.j2cl.ast.JsMemberType;
@@ -39,8 +40,6 @@ import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
-import com.google.j2cl.ast.TypeProxyUtils;
-import com.google.j2cl.ast.TypeProxyUtils.Nullability;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 
@@ -48,19 +47,18 @@ import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
 import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.Assignment;
+import org.eclipse.jdt.core.dom.BodyDeclaration;
 import org.eclipse.jdt.core.dom.CompilationUnit;
-import org.eclipse.jdt.core.dom.FieldDeclaration;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.InfixExpression;
-import org.eclipse.jdt.core.dom.Initializer;
 import org.eclipse.jdt.core.dom.LambdaExpression;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
-import org.eclipse.jdt.core.dom.Modifier;
 import org.eclipse.jdt.core.dom.PostfixExpression;
 import org.eclipse.jdt.core.dom.PrefixExpression;
 
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -83,7 +81,7 @@ public class JdtUtils {
   }
 
   static TypeDescriptor createTypeDescriptor(ITypeBinding typeBinding) {
-    return TypeProxyUtils.createTypeDescriptor(typeBinding);
+    return JdtBindingUtils.createTypeDescriptor(typeBinding);
   }
 
   static FieldDescriptor createFieldDescriptor(IVariableBinding variableBinding) {
@@ -91,18 +89,17 @@ public class JdtUtils {
       return AstUtils.ARRAY_LENGTH_FIELD_DESCRIPTION;
     }
 
-    int modifiers = variableBinding.getModifiers();
-    boolean isStatic = isStatic(modifiers);
-    Visibility visibility = getVisibility(modifiers);
+    boolean isStatic = JdtBindingUtils.isStatic(variableBinding);
+    Visibility visibility = JdtBindingUtils.getVisibility(variableBinding);
     TypeDescriptor enclosingClassTypeDescriptor =
         createTypeDescriptor(variableBinding.getDeclaringClass());
     String fieldName = variableBinding.getName();
 
     TypeDescriptor thisTypeDescriptor =
-        TypeProxyUtils.createTypeDescriptorWithNullability(
+        JdtBindingUtils.createTypeDescriptorWithNullability(
             variableBinding.getType(),
             variableBinding.getAnnotations(),
-            TypeProxyUtils.getTypeDefaultNullability(variableBinding.getDeclaringClass()));
+            JdtBindingUtils.getTypeDefaultNullability(variableBinding.getDeclaringClass()));
 
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableBinding);
     boolean isRaw = jsInfo.getJsMemberType() == JsMemberType.PROPERTY;
@@ -121,15 +118,15 @@ public class JdtUtils {
   }
 
   public static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
-    return JdtMethodUtils.createMethodDescriptor(methodBinding);
+    return JdtBindingUtils.createMethodDescriptor(methodBinding);
   }
 
   static Variable createVariable(IVariableBinding variableBinding, Nullability defaultNullability) {
     String name = variableBinding.getName();
     TypeDescriptor typeDescriptor =
-        TypeProxyUtils.createTypeDescriptorWithNullability(
+        JdtBindingUtils.createTypeDescriptorWithNullability(
             variableBinding.getType(), variableBinding.getAnnotations(), defaultNullability);
-    boolean isFinal = isFinal(variableBinding.getModifiers());
+    boolean isFinal = JdtBindingUtils.isFinal(variableBinding);
     boolean isParameter = variableBinding.isParameter();
     return new Variable(name, typeDescriptor, isFinal, isParameter);
   }
@@ -259,7 +256,7 @@ public class JdtUtils {
   static List<IMethodBinding> getUnimplementedMethodBindings(ITypeBinding typeBinding) {
     List<IMethodBinding> unimplementedMethodBindings = new ArrayList<>();
     // Only abstract class may have unimplemented methods.
-    if (!isAbstract(typeBinding.getModifiers())) {
+    if (!JdtBindingUtils.isAbstract(typeBinding)) {
       return unimplementedMethodBindings;
     }
     for (ITypeBinding superInterface : getAllInterfaces(typeBinding)) {
@@ -336,18 +333,18 @@ public class JdtUtils {
    * {@code methodBinding} in its body.
    */
   private static boolean isDeclaredBy(IMethodBinding methodBinding, ITypeBinding typeBinding) {
-    return hasMethodWithSameErasureAs(methodBinding,
-        Arrays.asList(typeBinding.getDeclaredMethods()));
+    return hasOverrideEquivalentMethod(
+        methodBinding, Arrays.asList(typeBinding.getDeclaredMethods()));
   }
 
   /**
    * Returns true if the given list of method bindings contains a method with the same signature of
    * {@code methodBinding}.
    */
-  public static boolean hasMethodWithSameErasureAs(IMethodBinding method,
-      List<IMethodBinding> methodBindings) {
+  public static boolean hasOverrideEquivalentMethod(
+      IMethodBinding method, List<IMethodBinding> methodBindings) {
     for (IMethodBinding methodBinding : methodBindings) {
-      if (areParameterErasureEqual(method, methodBinding)) {
+      if (areMethodsOverrideEquivalent(method, methodBinding)) {
         return true;
       }
     }
@@ -388,7 +385,7 @@ public class JdtUtils {
     while (superclass != null) {
       for (IMethodBinding methodInSuperclass : superclass.getDeclaredMethods()) {
         // TODO: excludes package private method, and add a test for it.
-        if (JdtUtils.areParameterErasureEqual(methodInSuperclass, methodBinding)) {
+        if (JdtUtils.areMethodsOverrideEquivalent(methodInSuperclass, methodBinding)) {
           return methodInSuperclass;
         }
       }
@@ -425,8 +422,8 @@ public class JdtUtils {
     return null;
   }
 
-  static Visibility getVisibility(int modifiers) {
-    return TypeProxyUtils.getVisibility(modifiers);
+  static boolean isStatic(BodyDeclaration bodyDeclaration) {
+    return Modifier.isStatic(bodyDeclaration.getModifiers());
   }
 
   static boolean isArrayLengthBinding(IVariableBinding variableBinding) {
@@ -435,28 +432,12 @@ public class JdtUtils {
         && variableBinding.getDeclaringClass() == null;
   }
 
-  static boolean isAbstract(int modifier) {
-    return Modifier.isAbstract(modifier);
-  }
-
-  static boolean isDefault(int modifier) {
-    return Modifier.isDefault(modifier);
-  }
-
-  static boolean isFinal(int modifier) {
-    return Modifier.isFinal(modifier);
-  }
-
-  static boolean isStatic(int modifier) {
-    return Modifier.isStatic(modifier);
-  }
-
   static boolean isInstanceNestedClass(ITypeBinding typeBinding) {
-    return typeBinding.getDeclaringClass() != null && !isStatic(typeBinding.getModifiers());
+    return typeBinding.getDeclaringClass() != null && !JdtBindingUtils.isStatic(typeBinding);
   }
 
   static boolean isInstanceMemberClass(ITypeBinding typeBinding) {
-    return typeBinding.isMember() && !isStatic(typeBinding.getModifiers());
+    return typeBinding.isMember() && !JdtBindingUtils.isStatic(typeBinding);
   }
 
   static boolean isJsOverride(IMethodBinding methodBinding) {
@@ -470,7 +451,7 @@ public class JdtUtils {
    */
   static boolean isFirstJsMember(IMethodBinding methodBinding) {
     return JsInteropUtils.isJsMember(methodBinding)
-        && JdtMethodUtils.getOverriddenJsMembers(methodBinding).isEmpty();
+        && JdtBindingUtils.getOverriddenJsMembers(methodBinding).isEmpty();
   }
 
   static boolean isOverride(IMethodBinding overridingMethod) {
@@ -495,7 +476,7 @@ public class JdtUtils {
       // have different method names and they are connected by dispatch method,
       if (overridingMethod.overrides(method.getMethodDeclaration())
           && (!upgradesPackagePrivateVisibility(overridingMethod, method.getMethodDeclaration()))
-          && areParameterErasureEqual(overridingMethod, method.getMethodDeclaration())) {
+          && areMethodsOverrideEquivalent(overridingMethod, method.getMethodDeclaration())) {
         return true;
       }
     }
@@ -516,8 +497,8 @@ public class JdtUtils {
   static boolean upgradesPackagePrivateVisibility(
       IMethodBinding overridingMethod, IMethodBinding overriddenMethod) {
     Preconditions.checkArgument(overridingMethod.overrides(overriddenMethod));
-    Visibility overriddenMethodVisibility = getVisibility(overriddenMethod.getModifiers());
-    Visibility overridingMethodVisibility = getVisibility(overridingMethod.getModifiers());
+    Visibility overriddenMethodVisibility = JdtBindingUtils.getVisibility(overriddenMethod);
+    Visibility overridingMethodVisibility = JdtBindingUtils.getVisibility(overridingMethod);
     return overriddenMethodVisibility.isPackagePrivate()
         && (overridingMethodVisibility.isPublic() || overridingMethodVisibility.isProtected());
   }
@@ -527,21 +508,10 @@ public class JdtUtils {
    * Parameter erasure equal means that they are overriding signature equal, which means that they
    * are real overriding/overridden or accidental overriding/overridden.
    */
-  static boolean areParameterErasureEqual(IMethodBinding leftMethod, IMethodBinding rightMethod) {
-    ITypeBinding[] leftParameterTypes = leftMethod.getParameterTypes();
-    ITypeBinding[] rightParameterTypes = rightMethod.getParameterTypes();
-    if (!leftMethod.getName().equals(rightMethod.getName())
-        || leftParameterTypes.length != rightParameterTypes.length) {
-      return false;
-    }
-    for (int i = 0; i < leftParameterTypes.length; i++) {
-      ITypeBinding leftParameterType = leftParameterTypes[i].getErasure();
-      ITypeBinding rightParameterType = rightParameterTypes[i].getErasure();
-      if (!leftParameterType.isEqualTo(rightParameterType)) {
-        return false;
-      }
-    }
-    return true;
+  static boolean areMethodsOverrideEquivalent(
+      IMethodBinding leftMethod, IMethodBinding rightMethod) {
+    return JdtBindingUtils.getMethodSignature(leftMethod)
+        .equals(JdtBindingUtils.getMethodSignature(rightMethod));
   }
 
   static IMethodBinding findSamMethodBinding(ITypeBinding typeBinding) {
@@ -550,7 +520,7 @@ public class JdtUtils {
     // example to address the potential issue.
     Preconditions.checkArgument(typeBinding.isInterface());
     for (IMethodBinding method : typeBinding.getDeclaredMethods()) {
-      if (isAbstract(method.getModifiers())) {
+      if (JdtBindingUtils.isAbstract(method)) {
         return method;
       }
     }
@@ -690,11 +660,9 @@ public class JdtUtils {
     while (currentNode != null) {
       switch (currentNode.getNodeType()) {
         case ASTNode.METHOD_DECLARATION:
-          return isStatic(((MethodDeclaration) currentNode).getModifiers());
         case ASTNode.FIELD_DECLARATION:
-          return isStatic(((FieldDeclaration) currentNode).getModifiers());
         case ASTNode.INITIALIZER:
-          return isStatic(((Initializer) currentNode).getModifiers());
+          return isStatic((BodyDeclaration) currentNode);
         case ASTNode.ENUM_CONSTANT_DECLARATION: // enum constants are implicitly static.
           return true;
       }

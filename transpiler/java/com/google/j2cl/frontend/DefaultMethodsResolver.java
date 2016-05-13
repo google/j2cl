@@ -17,7 +17,7 @@ package com.google.j2cl.frontend;
 
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.JavaType;
-import com.google.j2cl.ast.JdtMethodUtils;
+import com.google.j2cl.ast.JdtBindingUtils;
 import com.google.j2cl.ast.MethodDescriptor;
 
 import org.eclipse.jdt.core.dom.IMethodBinding;
@@ -55,7 +55,8 @@ public class DefaultMethodsResolver {
         implementingClass != null;
         implementingClass = implementingClass.getSuperclass()) {
       for (IMethodBinding implementedMethod : implementingClass.getDeclaredMethods()) {
-        applicableDefaultMethodsBySignature.remove(getMethodSignature(implementedMethod));
+        applicableDefaultMethodsBySignature.remove(
+            JdtBindingUtils.getMethodSignature(implementedMethod));
       }
     }
 
@@ -69,10 +70,10 @@ public class DefaultMethodsResolver {
     Map<String, IMethodBinding> applicableDefaultMethodsBySignature = new LinkedHashMap<>();
     for (ITypeBinding interfaceBinding : superInterfaces) {
       for (IMethodBinding methodBinding : interfaceBinding.getDeclaredMethods()) {
-        if (!JdtUtils.isDefault(methodBinding.getModifiers())) {
+        if (!JdtBindingUtils.isDefaultMethod(methodBinding)) {
           continue;
         }
-        String signature = getMethodSignature(methodBinding);
+        String signature = JdtBindingUtils.getMethodSignature(methodBinding);
         if (applicableDefaultMethodsBySignature.containsKey(signature)) {
           continue;
         }
@@ -80,17 +81,6 @@ public class DefaultMethodsResolver {
       }
     }
     return applicableDefaultMethodsBySignature;
-  }
-
-  private static String getMethodSignature(IMethodBinding methodBinding) {
-    String key = methodBinding.getName() + "(";
-    String separator = "";
-    for (ITypeBinding parameterType : methodBinding.getParameterTypes()) {
-      key += separator + parameterType.getErasure().getBinaryName();
-      separator = ";";
-    }
-    key += ")";
-    return key;
   }
 
   private static Set<ITypeBinding> collectSuperInterfaces(ITypeBinding type) {
@@ -127,7 +117,7 @@ public class DefaultMethodsResolver {
       JavaType type, Map<String, IMethodBinding> applicableDefaultMethodsBySignature) {
     // Finally implement the methods by as forwarding stubs to the actual interface method.
     for (IMethodBinding method : applicableDefaultMethodsBySignature.values()) {
-      MethodDescriptor targetMethod = JdtMethodUtils.createMethodDescriptor(method);
+      MethodDescriptor targetMethod = JdtBindingUtils.createMethodDescriptor(method);
       type.addMethod(
           AstUtils.createStaticForwardingMethod(
               targetMethod, type.getDescriptor(), "Default method forwarding stub."));

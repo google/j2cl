@@ -19,7 +19,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.JavaType;
-import com.google.j2cl.ast.JdtMethodUtils;
+import com.google.j2cl.ast.JdtBindingUtils;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -116,8 +116,8 @@ public class JsBridgeMethodsCreator {
       }
       // if for the overridden and overriding methods, one is JsMember, and the other is not,
       // generate a bridge method from the overridden method to the overriding method.
-      boolean isJsMemberOne = JdtMethodUtils.isOrOverridesJsMember(overridingMethod);
-      boolean isJsMemberOther = JdtMethodUtils.isOrOverridesJsMember(accidentalOverriddenMethod);
+      boolean isJsMemberOne = JdtBindingUtils.isOrOverridesJsMember(overridingMethod);
+      boolean isJsMemberOther = JdtBindingUtils.isOrOverridesJsMember(accidentalOverriddenMethod);
       if (isJsMemberOne != isJsMemberOther) {
         delegateByBridgeMethods.put(accidentalOverriddenMethod, overridingMethod);
       }
@@ -131,9 +131,9 @@ public class JsBridgeMethodsCreator {
    * non-JsMember, returns the non-JsMember it exposes, otherwise, returns null.
    */
   private static IMethodBinding getExposedNonJsMember(IMethodBinding methodBinding) {
-    if (!JdtMethodUtils.isOrOverridesJsMember(methodBinding)
+    if (!JdtBindingUtils.isOrOverridesJsMember(methodBinding)
         || methodBinding.getDeclaringClass().isInterface()
-        || JdtUtils.isStatic(methodBinding.getModifiers())
+        || JdtBindingUtils.isStatic(methodBinding)
         || methodBinding.isConstructor()) {
       return null;
     }
@@ -143,8 +143,8 @@ public class JsBridgeMethodsCreator {
       return null;
     }
     IMethodBinding overriddenNonJsMember = null;
-    for (IMethodBinding overriddenMethod : JdtMethodUtils.getOverriddenMethods(methodBinding)) {
-      if (!JdtMethodUtils.isOrOverridesJsMember(overriddenMethod)) {
+    for (IMethodBinding overriddenMethod : JdtBindingUtils.getOverriddenMethods(methodBinding)) {
+      if (!JdtBindingUtils.isOrOverridesJsMember(overriddenMethod)) {
         overriddenNonJsMember = overriddenMethod;
       }
       if (getExposedNonJsMember(overriddenMethod) != null) {
