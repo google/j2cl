@@ -27,9 +27,9 @@ import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 /**
  * Creates unimplemented methods in abstract class.
@@ -44,31 +44,27 @@ public class UnimplementedMethodsCreator {
    * Returns the synthesized unimplemented methods in {@code typeBinding}.
    */
   public static void create(ITypeBinding typeBinding, JavaType javaType) {
-    List<Method> unimplementedMethods = new ArrayList<>();
-    // used to avoid generating duplicate methods.
-    Set<MethodDescriptor> unimplementedMethodDescriptors = new LinkedHashSet<>();
-
-    List<IMethodBinding> unimplementedMethodsInSuperClass = new ArrayList<>();
-    if (typeBinding.getSuperclass() != null) {
-      unimplementedMethodsInSuperClass =
-          JdtUtils.getUnimplementedMethodBindings(typeBinding.getSuperclass());
-    }
+    // Used to avoid generating duplicate methods.
+    Map<String, IMethodBinding> unimplementedMethodBindingBySignature = new LinkedHashMap<>();
 
     for (IMethodBinding methodBinding : JdtUtils.getUnimplementedMethodBindings(typeBinding)) {
-      if (JdtUtils.hasOverrideEquivalentMethod(methodBinding, unimplementedMethodsInSuperClass)) {
-        // While the method is not implemented in Java, this class will generate empty methods
-        // for it when processing the superclass, so there is no need to add an empty method here.
-        continue;
-      }
-      MethodDescriptor unimplementedMethodDescriptor =
-          createMethodDescriptorInType(methodBinding, typeBinding);
-      if (unimplementedMethodDescriptors.contains(unimplementedMethodDescriptor)) {
-        continue;
-      }
-      unimplementedMethodDescriptors.add(unimplementedMethodDescriptor);
-      unimplementedMethods.add(createEmptyMethod(methodBinding, typeBinding));
+      unimplementedMethodBindingBySignature.put(
+          JdtBindingUtils.getMethodSignature(methodBinding), methodBinding);
     }
-    javaType.addMethods(unimplementedMethods);
+
+    if (typeBinding.getSuperclass() != null) {
+      for (IMethodBinding methodBinding :
+          JdtUtils.getUnimplementedMethodBindings(typeBinding.getSuperclass())) {
+        // Do not stub methods that would be stubbed anyway in the supertypes.
+        unimplementedMethodBindingBySignature.remove(
+            JdtBindingUtils.getMethodSignature(methodBinding));
+      }
+    }
+
+    for (IMethodBinding unimplementedMethodBinding :
+        unimplementedMethodBindingBySignature.values()) {
+      javaType.addMethod(createEmptyMethod(unimplementedMethodBinding, typeBinding));
+    }
   }
 
   /**

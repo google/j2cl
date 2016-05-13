@@ -5,6 +5,12 @@ public class MultipleAbstractParents {
     String getFoo(T t);
   }
 
+  public interface Collection<T> {
+    String getFoo(T t);
+  }
+
+  public abstract static class AbstractListCollection<T> implements List<T>, Collection<T> {}
+
   public abstract static class AbstractCollection<T> {
     @SuppressWarnings("unused")
     public String getFoo(T t) {
