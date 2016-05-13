@@ -112,6 +112,7 @@ public class UnimplementedMethodsCreator {
         .setMethodDescriptor(methodDescriptor)
         .setParameters(parameters)
         .setIsAbstract(true)
+        .setIsOverride(true)
         .setIsFinal(JdtBindingUtils.isFinal(methodBinding))
         .build();
   }
