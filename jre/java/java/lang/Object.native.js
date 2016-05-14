@@ -1,5 +1,6 @@
 
 /**
+ * @override
  * @return {string}
  * @public
  */
