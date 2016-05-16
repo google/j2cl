@@ -103,8 +103,9 @@ def integration_test(
       executable=1,
   )
 
-  # NOTE: --closure_entry_point is not used (to avoid hiding leaks in the size
-  #       report).
+  # NOTE: --closure_entry_point *is* used because it cuts optimize time nearly
+  #       in half and the optimization leaks that it previously hid no longer
+  #       exist.
   # NOTE: --norewrite_polyfills *is* used so that size tracking only focuses on
   #       size issues that are actionable outside of JSCompiler or are expected
   #       to eventually be addressed inside of JSCompiler.
@@ -117,6 +118,7 @@ def integration_test(
           "--language_out=ECMASCRIPT5",
           "--norewrite_polyfills",
           "--variable_renaming=ALL",
+          "--closure_entry_point=gen.opt.Harness",
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
@@ -134,6 +136,7 @@ def integration_test(
           "--pretty_print",
           "--property_renaming=OFF",
           "--variable_renaming=OFF",
+          "--closure_entry_point=gen.opt.Harness",
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
@@ -280,6 +283,7 @@ def integration_test(
           "--norewrite_polyfills",
           "--strict",
           "--variable_renaming=OFF",
+          "--closure_entry_point=gen.test.Harness",
       ] + defs,
       deps=[
           ":" + name,
