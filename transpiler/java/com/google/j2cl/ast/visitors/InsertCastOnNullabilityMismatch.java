@@ -122,12 +122,6 @@ public class InsertCastOnNullabilityMismatch extends AbstractRewriter {
       // Void method.
       return returnStatement;
     }
-    if (getCurrentMethod().getDescriptor().getJsName().startsWith("$create")) {
-      // TODO(simionato): Remove this if statement once we add the flow analysis that minimizes
-      // the number of casts. If we remove this statement now, we are gonna add not needed casts
-      // in every single $create method.
-      return returnStatement;
-    }
 
     TypeDescriptor methodReturnType = returnStatement.getTypeDescriptor();
     TypeDescriptor actualReturnType = returnStatement.getExpression().getTypeDescriptor();
