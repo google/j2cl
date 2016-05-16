@@ -151,9 +151,10 @@ public class InsertCastOnNullabilityMismatch extends AbstractRewriter {
       // Object is exported as the all type, so there is no point in casting it.
       return actualType;
     }
-    if (actualType.isTypeVariable()) {
+    if (requiredType.isTypeVariable()) {
       return actualType;
     }
+
     if (actualType.isJsFunctionInterface() || actualType.isJsFunctionImplementation()) {
       // TODO(simionato): Examine function parameters/return type to produce the appropriate cast.
       if (!requiredType.isNullable() && actualType.isNullable()) {

@@ -233,11 +233,13 @@ public class CompilationUnitBuilder {
       JavaType type = createJavaType(typeBinding);
       pushType(type);
       j2clCompilationUnit.addType(type);
-      TypeDescriptor currentTypeDescriptor = type.getDescriptor();
+      TypeDescriptor currentTypeDescriptor = TypeDescriptors.toNullable(type.getDescriptor());
       ITypeBinding superclassBinding = typeBinding.getSuperclass();
       if (superclassBinding != null) {
         capturesByTypeDescriptor.putAll(
-            currentTypeDescriptor, capturesByTypeDescriptor.get(type.getSuperTypeDescriptor()));
+            currentTypeDescriptor,
+            capturesByTypeDescriptor.get(
+                TypeDescriptors.toNullable(type.getSuperTypeDescriptor())));
       }
       for (int i = 0; i < bodyDeclarations.size(); i++) {
         Object object = bodyDeclarations.get(i);
@@ -1041,7 +1043,7 @@ public class CompilationUnitBuilder {
               functionalInterfaceTypeBinding,
               JdtUtils.createTypeDescriptor(enclosingClassTypeBinding));
       pushType(lambdaType);
-      TypeDescriptor lambdaTypeDescriptor = lambdaType.getDescriptor();
+      TypeDescriptor lambdaTypeDescriptor = TypeDescriptors.toNullable(lambdaType.getDescriptor());
 
       // Construct lambda method and add it to lambda inner class.
       String lambdaMethodBinaryName = "lambda" + lambdaBinaryName;
@@ -1243,7 +1245,7 @@ public class CompilationUnitBuilder {
       if (qualifier instanceof ThisReference
           && !fieldDescriptor
               .getEnclosingClassTypeDescriptor()
-              .equals(currentType.getDescriptor())) {
+              .equalsIgnoreNullability(currentType.getDescriptor())) {
         return new FieldAccess(
             convertOuterClassReference(
                 JdtUtils.findCurrentTypeBinding(expression),
@@ -1508,7 +1510,7 @@ public class CompilationUnitBuilder {
           if (!fieldDescriptor.isStatic()
               && !fieldDescriptor
                   .getEnclosingClassTypeDescriptor()
-                  .equals(currentType.getDescriptor())) {
+                  .equalsIgnoreNullability(currentType.getDescriptor())) {
             return new FieldAccess(
                 convertOuterClassReference(
                     JdtUtils.findCurrentTypeBinding(expression),
@@ -1525,7 +1527,7 @@ public class CompilationUnitBuilder {
           // The innermost type in which this variable is declared.
           TypeDescriptor enclosingTypeDescriptor = findEnclosingTypeDescriptor(variableBinding);
           TypeDescriptor currentTypeDescriptor = currentType.getDescriptor();
-          if (!enclosingTypeDescriptor.equals(currentTypeDescriptor)) {
+          if (!enclosingTypeDescriptor.equalsIgnoreNullability(currentTypeDescriptor)) {
             return convertCapturedVariableReference(variable, enclosingTypeDescriptor);
           } else {
             return variable.getReference();
@@ -1599,10 +1601,11 @@ public class CompilationUnitBuilder {
       // type, and also a captured variable to the outer class in the type stack that is
       // inside {@code enclosingClassRef}.
       for (int i = typeStack.size() - 1; i >= 0; i--) {
-        if (typeStack.get(i).getDescriptor().equals(enclosingClassDescriptor)) {
+        if (typeStack.get(i).getDescriptor().equalsIgnoreNullability(enclosingClassDescriptor)) {
           break;
         }
-        capturesByTypeDescriptor.put(typeStack.get(i).getDescriptor(), variable);
+        capturesByTypeDescriptor.put(
+            TypeDescriptors.toNullable(typeStack.get(i).getDescriptor()), variable);
       }
       // for reference to a captured variable, if it is in a constructor, translate to
       // reference to outer parameter, otherwise, translate to reference to corresponding
@@ -1867,7 +1870,6 @@ public class CompilationUnitBuilder {
       }
 
       for (ITypeBinding superInterface : typeBinding.getInterfaces()) {
-        //
         TypeDescriptor superInterfaceDescriptor =
             JdtBindingUtils.createTypeDescriptorWithNullability(
                 superInterface,

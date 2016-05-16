@@ -572,8 +572,6 @@ public class TypeDescriptors {
   }
 
   public static TypeDescriptor toNonNullable(TypeDescriptor originalTypeDescriptor) {
-    Preconditions.checkArgument(!originalTypeDescriptor.isTypeVariable());
-
     if (!originalTypeDescriptor.isNullable()) {
       return originalTypeDescriptor;
     }
@@ -591,16 +589,15 @@ public class TypeDescriptors {
                     originalTypeDescriptor.getUnionedTypeDescriptors(),
                     originalTypeDescriptor.getBinaryName(),
                     originalTypeDescriptor.getTypeArgumentDescriptors(),
-                    false,
-                    null))
+                    originalTypeDescriptor.isTypeVariable(),
+                    originalTypeDescriptor.isTypeVariable()
+                        ? originalTypeDescriptor.getRawTypeDescriptor().getBinaryName() : null))
             .build();
 
     return intern(newTypeDescriptor);
   }
 
   public static TypeDescriptor toNullable(TypeDescriptor originalTypeDescriptor) {
-    Preconditions.checkArgument(!originalTypeDescriptor.isTypeVariable());
-
     if (originalTypeDescriptor.isNullable()) {
       return originalTypeDescriptor;
     }
@@ -618,8 +615,9 @@ public class TypeDescriptors {
                     originalTypeDescriptor.getUnionedTypeDescriptors(),
                     originalTypeDescriptor.getBinaryName(),
                     originalTypeDescriptor.getTypeArgumentDescriptors(),
-                    false,
-                    null))
+                    originalTypeDescriptor.isTypeVariable(),
+                    originalTypeDescriptor.isTypeVariable()
+                        ? originalTypeDescriptor.getRawTypeDescriptor().getBinaryName() : null))
             .build();
 
     return intern(newTypeDescriptor);
@@ -815,7 +813,7 @@ public class TypeDescriptors {
     String binaryClassName =
         createBinaryClassName(classComponents, simpleName, isPrimitive, isTypeVariable);
     boolean isNative = JsInteropAnnotationUtils.isNative(jsTypeAnnotation);
-    boolean isNullable = !typeBinding.isPrimitive();
+    boolean isNullable = !typeBinding.isPrimitive() && !typeBinding.isTypeVariable();
     String jsName = JsInteropAnnotationUtils.getJsName(jsTypeAnnotation);
     String jsNamespace = null;
 
@@ -845,7 +843,6 @@ public class TypeDescriptors {
 
     // Compute these even later
     boolean isExtern = isNative && JsInteropUtils.isGlobal(jsNamespace);
-
     return intern(
         new TypeDescriptor.Builder()
             .setBinaryName(binaryName)

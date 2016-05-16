@@ -93,9 +93,8 @@ public class JdtBindingUtils {
       descriptor = createTypeDescriptor(typeBinding);
     }
 
-    if (isNullable(typeBinding, elementAnnotations, defaultNullabilityForCompilationUnit)
-        || descriptor.isTypeVariable()) {
-      return descriptor;
+    if (isNullable(typeBinding, elementAnnotations, defaultNullabilityForCompilationUnit)) {
+      return TypeDescriptors.toNullable(descriptor);
     }
     return TypeDescriptors.toNonNullable(descriptor);
   }
@@ -108,28 +107,30 @@ public class JdtBindingUtils {
       ITypeBinding typeBinding,
       IAnnotationBinding[] elementAnnotations,
       Nullability defaultNullabilityForCompilationUnit) {
+    Preconditions.checkNotNull(defaultNullabilityForCompilationUnit);
     if (typeBinding.isPrimitive()) {
       return false;
     }
     if (typeBinding.getQualifiedName().equals("java.lang.Void")) {
-      // Void is nullable by default.
+      // Void is always nullable.
       return true;
     }
-    if (defaultNullabilityForCompilationUnit == Nullability.NULL) {
-      return true;
-    }
-    Iterable<IAnnotationBinding> allAnnotations =
-        Iterables.concat(
-            Arrays.asList(elementAnnotations),
-            Arrays.asList(typeBinding.getTypeAnnotations()),
-            Arrays.asList(typeBinding.getAnnotations()));
-    for (IAnnotationBinding annotation : allAnnotations) {
-      if (annotation.getName().equals("Nullable") || annotation.getName().equals("NullableType")) {
-        return true;
+    if (defaultNullabilityForCompilationUnit == Nullability.NOT_NULL) {
+      Iterable<IAnnotationBinding> allAnnotations =
+          Iterables.concat(
+              Arrays.asList(elementAnnotations),
+              Arrays.asList(typeBinding.getTypeAnnotations()),
+              Arrays.asList(typeBinding.getAnnotations()));
+      for (IAnnotationBinding annotation : allAnnotations) {
+        if (annotation.getName().equals("Nullable")
+            || annotation.getName().equals("NullableType")) {
+          return true;
+        }
+        // TODO(simionato): Consider supporting NotNull as well.
       }
-      // TODO(simionato): Consider supporting NotNull as well.
+      return false;
     }
-    return false;
+    return !typeBinding.isTypeVariable();
   }
 
   /**

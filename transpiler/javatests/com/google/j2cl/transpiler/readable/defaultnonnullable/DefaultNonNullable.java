@@ -105,6 +105,11 @@ public class DefaultNonNullable {
   static class Foo<T> {
     void bar(T t) {}
 
+    @Nullable
+    T baz() {
+      return null;
+    }
+
     @Override
     public String toString() {
       return "Foo";

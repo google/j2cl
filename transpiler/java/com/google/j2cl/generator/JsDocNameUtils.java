@@ -152,6 +152,10 @@ public class JsDocNameUtils {
     }
 
     if (!typeDescriptor.isNullable()) {
+      if (typeDescriptor.isTypeVariable()) {
+        // Type variables are non-nullable by default, so there is no need to output the '!'.
+        return environment.aliasForType(typeDescriptor);
+      }
       return getJsDocNameWithNullability(
           getJsDocName(TypeDescriptors.toNullable(typeDescriptor), shouldUseClassName, environment),
           false /* nullable */);
@@ -243,6 +247,11 @@ public class JsDocNameUtils {
     if (typeDescriptor.isPrimitive()) {
       return typeDescriptor.getSimpleName();
     }
+
+    if (typeDescriptor.isTypeVariable()) {
+      return getJsDocNameWithNullability(environment.aliasForType(typeDescriptor), true);
+    }
+
     return environment.aliasForType(typeDescriptor);
   }
 

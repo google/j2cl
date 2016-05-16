@@ -98,7 +98,10 @@ public class FixTypeVariablesInMethods extends AbstractRewriter {
     // TODO: double check if this is the same issue with b/24476009.
     return typeDescriptor.isTypeVariable()
         && method != null
-        && (method.getDescriptor().getTypeParameterTypeDescriptors().contains(typeDescriptor)
+        && (method
+                .getDescriptor()
+                .getTypeParameterTypeDescriptors()
+                .contains(TypeDescriptors.toNonNullable(typeDescriptor))
             || (method.getDescriptor().isJsFunction()));
   }
 

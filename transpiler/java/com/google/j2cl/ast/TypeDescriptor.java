@@ -439,11 +439,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   }
 
   public boolean equalsIgnoreNullability(TypeDescriptor other) {
-    // Don't try to convert type variables to non-nullable.
-    TypeDescriptor right = other.isTypeVariable() ? other : TypeDescriptors.toNullable(other);
-    TypeDescriptor left = this.isTypeVariable() ? this : TypeDescriptors.toNullable(this);
-
-    return left.equals(right);
+    return TypeDescriptors.toNullable(other).equals(TypeDescriptors.toNullable(this));
   }
 
   /**
