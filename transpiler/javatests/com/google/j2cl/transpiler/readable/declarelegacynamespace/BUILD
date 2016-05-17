@@ -13,4 +13,5 @@ readable_example(
     name = "declarelegacynamespace",
     srcs = glob(["*.java"]),
     _declare_legacy_namespace = True,
+    deps = ["//jre/java:gwt-jsinterop-annotations"],
 )

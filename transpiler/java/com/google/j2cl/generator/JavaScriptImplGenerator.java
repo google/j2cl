@@ -16,6 +16,7 @@
 package com.google.j2cl.generator;
 
 import com.google.common.base.Preconditions;
+import com.google.j2cl.ast.AnonymousJavaType;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.JavaType;
@@ -110,7 +111,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
     // goog.module(...) declaration.
     sb.appendln("goog.module('%s');", selfImport.getImplModulePath());
-    if (declareLegacyNamespace) {
+    if (declareLegacyNamespace && javaType.getDescriptor().isJsType()
+        && !(javaType instanceof AnonymousJavaType)) {
+      // Even if opted into declareLegacyNamespace, this only makes sense for classes that are
+      // intended to be accessed from the native JS. Thus we only emit declareLegacyNamespace
+      // for non-anonymous JsType classes.
       sb.appendln("goog.module.declareLegacyNamespace();");
     }
     sb.newLine();
