@@ -5,14 +5,14 @@
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
  * const, missingRequire}
  */
-goog.module('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$InnerClass1$InnerClass2$impl');
+goog.module('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2$impl');
 
 
-let MultipleNestings$Parent = goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$Parent$impl');
+let MultipleNestings$Parent = goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.Parent$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let MultipleNestings$InnerClass1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$InnerClass1$impl');
 let MultipleNestings = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$impl');
+let MultipleNestings$InnerClass1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
@@ -114,10 +114,10 @@ class MultipleNestings$InnerClass1$InnerClass2 extends MultipleNestings$Parent {
    * @public
    */
   static $clinit() {
-    MultipleNestings$InnerClass1 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$InnerClass1$impl');
     MultipleNestings = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$impl');
+    MultipleNestings$InnerClass1 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings.InnerClass1$impl');
     Class = goog.module.get('java.lang.Class$impl');
     MultipleNestings$Parent.$clinit();
   }

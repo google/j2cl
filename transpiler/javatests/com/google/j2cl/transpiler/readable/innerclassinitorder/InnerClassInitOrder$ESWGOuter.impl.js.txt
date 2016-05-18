@@ -5,14 +5,14 @@
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
  * const, missingRequire}
  */
-goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter$impl');
+goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter$impl');
 
 
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let InnerClassInitOrder$ESWGOuter$ESWGInner = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter$ESWGInner$impl');
 let InnerClassInitOrder = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
+let InnerClassInitOrder$ESWGOuter$ESWGInner = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
@@ -86,10 +86,10 @@ class InnerClassInitOrder$ESWGOuter extends Object {
    * @public
    */
   static $clinit() {
-    InnerClassInitOrder$ESWGOuter$ESWGInner = goog.module.get(
-        'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter$ESWGInner$impl');
     InnerClassInitOrder = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
+    InnerClassInitOrder$ESWGOuter$ESWGInner = goog.module.get(
+        'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner$impl');
     Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }

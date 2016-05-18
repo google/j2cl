@@ -1,1 +1,1 @@
-goog.module('woo.JsPropertyTest$MyJsTypeInterfaceWithProtectedNames');
+goog.module('woo.JsPropertyTest.MyJsTypeInterfaceWithProtectedNames');

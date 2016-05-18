@@ -1,4 +1,4 @@
-goog.module('woo.JsTypeArrayTest$SimpleJsTypeReturnForMultiDimArray');
+goog.module('woo.JsTypeArrayTest.SimpleJsTypeReturnForMultiDimArray');
 
 class JsTypeArrayTest$SimpleJsTypeReturnForMultiDimArray {}
 

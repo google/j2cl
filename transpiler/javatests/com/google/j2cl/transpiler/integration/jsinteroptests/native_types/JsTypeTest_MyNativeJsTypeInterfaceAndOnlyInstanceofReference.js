@@ -1,4 +1,4 @@
-goog.module('woo.JsTypeTest$MyNativeJsTypeInterfaceAndOnlyInstanceofReference');
+goog.module('woo.JsTypeTest.MyNativeJsTypeInterfaceAndOnlyInstanceofReference');
 
 class JsTypeTest$MyNativeJsTypeInterfaceAndOnlyInstanceofReference {}
 

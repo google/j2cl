@@ -1,4 +1,4 @@
-goog.module('woo.JsTypeTest$InterfaceWithSingleJavaConcrete');
+goog.module('woo.JsTypeTest.InterfaceWithSingleJavaConcrete');
 
 /**
  * @interface

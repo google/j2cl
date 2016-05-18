@@ -13,5 +13,5 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-@jsinterop.annotations.JsPackage(namespace = "woo")  // Remove when package-info files are supported
+@jsinterop.annotations.JsPackage(namespace = "woo")
 package com.google.j2cl.transpiler.integration.jsinteroptests;

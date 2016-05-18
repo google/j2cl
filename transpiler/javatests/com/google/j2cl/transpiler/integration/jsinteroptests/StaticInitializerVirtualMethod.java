@@ -20,7 +20,7 @@ import jsinterop.annotations.JsType;
 /**
  * Test access to static field from JS through exported virtual method.
  */
-@JsType(namespace = "woo")  // Remove when package-info files are supported.
+@JsType
 public class StaticInitializerVirtualMethod {
   private static StaticInitializerVirtualMethod STATIC = new StaticInitializerVirtualMethod();
 

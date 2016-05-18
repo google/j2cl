@@ -1,4 +1,4 @@
-goog.module('woo.JsPropertyTest$AccidentalOverridePropertyJsTypeInterface');
+goog.module('woo.JsPropertyTest.AccidentalOverridePropertyJsTypeInterface');
 
 /**
  * @interface

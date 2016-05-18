@@ -20,7 +20,7 @@ import jsinterop.annotations.JsType;
 /**
  * This enum is annotated as @JsType.
  */
-@JsType(namespace = "woo")  // Remove when package-info files are supported.
+@JsType
 public enum MyExportedEnum {
   TEST1,
   TEST2;

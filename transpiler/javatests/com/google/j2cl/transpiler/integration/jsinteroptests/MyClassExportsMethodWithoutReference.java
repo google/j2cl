@@ -16,12 +16,10 @@
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsType;
 
 /**
  * A test class exports a method but isn't referenced from any Java code.
  */
-@JsType(namespace = "woo")  // Remove when package-info files are supported.
 public class MyClassExportsMethodWithoutReference {
   @JsMethod(name = "onlyCalledFromJs")
   public static int callMe() {

@@ -17,8 +17,8 @@ public class Main {
     JsExportTest test = new JsExportTest();
     test.testClinit_staticField();
     test.testClinit_staticMethod();
-    // test.testClinit_virtualMethod();
-    // test.testClinit();
+    test.testClinit_virtualMethod();
+    test.testClinit();
     test.testEnum_enumerations();
     test.testEnum_exportedFields();
     test.testEnum_exportedMethods();
@@ -32,13 +32,16 @@ public class Main {
     test.testExportedFieldRefInExportedMethod();
     test.testExportedMethod();
     test.testInheritClassNamespace();
+    // Not supported in J2CL since the Closure import/export system does not allow exporting types
+    // onto the global scope and if we emitted a normal "var $NativeFoo = window.Foo;" style global
+    // type alias there would be nothing causing the file that provides Foo to be loaded.
     // test.testInheritClassNamespace_empty();
-    // test.testInheritClassNamespace_nested();
+    test.testInheritClassNamespace_nested();
     test.testInheritClassNamespace_nestedNoExport();
     test.testInheritClassNamespace_noExport();
-    // test.testInheritClassNamespace_withName();
-    // test.testInheritPackageNamespace_nestedClass();
-    // test.testInheritPackageNamespace_nestedEnum();
+    test.testInheritClassNamespace_withName();
+    test.testInheritPackageNamespace_nestedClass();
+    test.testInheritPackageNamespace_nestedEnum();
     test.testInheritPackageNamespace_subpackage();
     test.testInheritPackageNamespace();
     test.testMethodExport_notReferencedFromJava();

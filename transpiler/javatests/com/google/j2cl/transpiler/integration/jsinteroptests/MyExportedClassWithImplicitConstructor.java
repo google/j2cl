@@ -15,11 +15,8 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
-import jsinterop.annotations.JsType;
-
 /**
  * A class which only has implicit default constructor and is exported.
  * Its default constructor is exported automatically.
  */
-@JsType(namespace = "woo")  // Remove when package-info files are supported.
 public class MyExportedClassWithImplicitConstructor {}

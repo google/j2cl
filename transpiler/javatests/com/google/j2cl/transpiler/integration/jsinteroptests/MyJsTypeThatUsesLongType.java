@@ -20,7 +20,7 @@ import jsinterop.annotations.JsType;
 /**
  * A class with a method that takes and returns longs.
  */
-@JsType(namespace = "woo")  // Remove when package-info files are supported.
+@JsType
 public class MyJsTypeThatUsesLongType {
 
   @SuppressWarnings("unusable-by-js")

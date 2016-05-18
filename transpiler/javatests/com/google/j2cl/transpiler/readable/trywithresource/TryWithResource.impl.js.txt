@@ -11,7 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.trywithresource.TryWithResource
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let TryWithResource$ClosableThing = goog.forwardDeclare('com.google.j2cl.transpiler.readable.trywithresource.TryWithResource$ClosableThing$impl');
+let TryWithResource$ClosableThing = goog.forwardDeclare('com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.ClosableThing$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Exception = goog.forwardDeclare('java.lang.Exception$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
@@ -145,7 +145,7 @@ class TryWithResource extends Object {
    */
   static $clinit() {
     TryWithResource$ClosableThing = goog.module.get(
-        'com.google.j2cl.transpiler.readable.trywithresource.TryWithResource$ClosableThing$impl');
+        'com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.ClosableThing$impl');
     Class = goog.module.get('java.lang.Class$impl');
     Exception = goog.module.get('java.lang.Exception$impl');
     String = goog.module.get('java.lang.String$impl');

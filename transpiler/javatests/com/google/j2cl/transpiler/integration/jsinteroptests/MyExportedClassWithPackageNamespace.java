@@ -20,7 +20,7 @@ import jsinterop.annotations.JsType;
 /**
  * An exported class.
  */
-@JsType(namespace = "woo")  // Remove when package-info files are supported.
+@JsType
 public class MyExportedClassWithPackageNamespace {
   /**
    * Exported field.

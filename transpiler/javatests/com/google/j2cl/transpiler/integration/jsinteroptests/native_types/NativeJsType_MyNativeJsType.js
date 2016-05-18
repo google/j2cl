@@ -1,1 +1,1 @@
-goog.module('woo.NativeJsTypeTest$MyNativeJsType');
+goog.module('woo.NativeJsTypeTest.MyNativeJsType');

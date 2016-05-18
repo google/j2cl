@@ -16,6 +16,7 @@
 package com.google.j2cl.ast;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.processors.Visitable;
 
@@ -504,6 +505,14 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     }
   }
 
+  private static boolean startsWithNumber(String string) {
+    if (Strings.isNullOrEmpty(string)) {
+      return false;
+    }
+    char firstChar = string.charAt(0);
+    return firstChar >= '0' && firstChar <= '9';
+  }
+
   public ImmutableList<TypeDescriptor> getInterfacesTypeDescriptors() {
     if (interfacesTypeDescriptorsFactory == null) {
       return ImmutableList.of();
@@ -552,7 +561,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       if (enclosingTypeDescriptor.isNative) {
         // When there is a type nested within a native type, it's important not to generate a name
         // like "Array.1" (like would happen if the outer native type was claiming to be native
-        // Array and the nested type was anonymous) since this is almost guarranteed to collide
+        // Array and the nested type was anonymous) since this is almost guaranteed to collide
         // with other people also creating nested classes within a native type that claims to be
         // native Array.
         effectivePrefix = enclosingTypeDescriptor.getSourceName();
@@ -567,12 +576,13 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     if (JsInteropUtils.isGlobal(effectivePrefix)) {
       return effectiveSimpleName;
     }
-    // TODO(stalcup): output "." instead of "$" as soon as Docs is migrated.
-    if (enclosingTypeDescriptor == null || jsNamespace != null) {
-      return effectivePrefix + "." + effectiveSimpleName;
-    } else {
-      return effectivePrefix + "$" + effectiveSimpleName;
+    // If the user opted in to declareLegacyNamespaces, then JSCompiler will complain when seeing
+    // namespaces like "foo.bar.Baz.4". Prefix anonymous numbered classes with a string to make
+    // JSCompiler happy.
+    if (startsWithNumber(effectiveSimpleName)) {
+      effectiveSimpleName = "$Anonymous" + effectiveSimpleName;
     }
+    return effectivePrefix + "." + effectiveSimpleName;
   }
 
   /**

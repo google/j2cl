@@ -1,1 +1,1 @@
-goog.module('woo.NativeJsTypeTest$NativeJsTypeWithStaticInitializationAndFieldAccess');
+goog.module('woo.NativeJsTypeTest.NativeJsTypeWithStaticInitializationAndFieldAccess');

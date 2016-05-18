@@ -92,17 +92,17 @@ public class JsExportTest extends MyTestCase {
       namespace = "woo.MyClassExportsMethodWithoutReference", name = "onlyCalledFromJs")
   private static native int onlyCalledFromJs();
 
-//  public void testClinit() {
-//    new NativeMyClassExportsMethodWithClinit();
-//    assertEquals(23, MyClassExportsMethodWithClinit.magicNumber);
-//  }
-//
-//  /**
-//   * Native interface to type MyClassExportsMethodWithClinit which has been exported to a
-//   * particular namespaces.
-//   */
-//  @JsType(isNative = true, namespace = "woo", name = "MyClassExportsMethodWithClinit")
-//  private static class NativeMyClassExportsMethodWithClinit { }
+  public void testClinit() {
+    new NativeMyClassExportsMethodWithClinit();
+    assertEquals(23, MyClassExportsMethodWithClinit.magicNumber);
+  }
+
+  /**
+   * Native interface to type MyClassExportsMethodWithClinit which has been exported to a
+   * particular namespaces.
+   */
+  @JsType(isNative = true, namespace = "woo", name = "MyClassExportsMethodWithClinit")
+  private static class NativeMyClassExportsMethodWithClinit {}
 
   public void testClinit_staticField() {
     assertNotNull(getStaticInitializerStaticFieldExported1());
@@ -116,7 +116,7 @@ public class JsExportTest extends MyTestCase {
   @JsProperty(namespace = "woo.StaticInitializerStaticField", name = "EXPORTED_2")
   private static native Object getStaticInitializerStaticFieldExported2();
 
-  @JsProperty(namespace = "woo.InterfaceWithField", name = "STATIC")
+  @JsProperty(namespace = "woo.StaticInitializerStaticField.InterfaceWithField", name = "STATIC")
   private static native Object getStaticInitializerStaticFieldInterfaceStatic();
 
   public void testClinit_staticMethod() {
@@ -126,21 +126,21 @@ public class JsExportTest extends MyTestCase {
   @JsMethod(namespace = "woo.StaticInitializerStaticMethod", name = "getInstance")
   private static native int getStaticInitializerStaticMethod();
 
-//  public void testClinit_virtualMethod() {
-//    NativeStaticInitializerVirtualMethod instance1 = new NativeStaticInitializerVirtualMethod();
-//    assertNotNull(instance1);
-//    NativeStaticInitializerVirtualMethod instance2 = instance1.getInstance();
-//    assertNotNull(instance2);
-//  }
-//
-//  /**
-//   * Native interface to type StaticInitializerVirtualMethod which has been exported to a
-//   * particular namespaces.
-//   */
-//  @JsType(isNative = true, namespace = "woo", name = "StaticInitializerVirtualMethod")
-//  private static class NativeStaticInitializerVirtualMethod {
-//    public native NativeStaticInitializerVirtualMethod getInstance();
-//  }
+  public void testClinit_virtualMethod() {
+    NativeStaticInitializerVirtualMethod instance1 = new NativeStaticInitializerVirtualMethod();
+    assertNotNull(instance1);
+    NativeStaticInitializerVirtualMethod instance2 = instance1.getInstance();
+    assertNotNull(instance2);
+  }
+
+  /**
+   * Native interface to type StaticInitializerVirtualMethod which has been exported to a
+   * particular namespaces.
+   */
+  @JsType(isNative = true, namespace = "woo", name = "StaticInitializerVirtualMethod")
+  private static class NativeStaticInitializerVirtualMethod {
+    public native NativeStaticInitializerVirtualMethod getInstance();
+  }
 
   @JsType(namespace = "bar.foo.baz")
   class MyExportedClassCorrectNamespace {
@@ -323,16 +323,16 @@ public class JsExportTest extends MyTestCase {
   @JsProperty(namespace = "foobaz.MyClassWithNamespace", name = "BAZ")
   private static native int getBAZ();
 
-//  public void testInheritClassNamespace_nested() {
-//    assertEquals(99, getLOO());
-//    assertNotNull(new BlooInner());
-//  }
-//
-//  @JsProperty(namespace = "woo.Bloo", name = "Inner.LOO")
-//  private static native int getLOO();
-//
-//  @JsType(isNative = true, namespace = "woo.Bloo", name = "Inner")
-//  private static class BlooInner { }
+  public void testInheritClassNamespace_nested() {
+    assertEquals(99, getLOO());
+    assertNotNull(new BlooInner());
+  }
+
+  @JsProperty(namespace = "woo.Bloo.Inner", name = "LOO")
+  private static native int getLOO();
+
+  @JsType(isNative = true, namespace = "woo.Bloo", name = "Inner")
+  private static class BlooInner {}
 
   public void testInheritClassNamespace_nestedNoExport() {
     assertEquals(999, getWOOZ());
@@ -352,23 +352,23 @@ public class JsExportTest extends MyTestCase {
   @JsProperty(namespace = "woo.MyExportedClassWithPackageNamespace", name = "WOO")
   private static native int getWOO();
 
-//  public void testInheritPackageNamespace_nestedClass() {
-//    assertEquals(99, getNestedWOO());
-//    assertNotNull(new NativeMyClassWithNestedExportedClassInner());
-//  }
-//
-//  @JsProperty(namespace = "woo.MyClassWithNestedExportedClass.Inner", name = "WOO")
-//  private static native int getNestedWOO();
-//
-//  @JsType(isNative = true, namespace = "woo.MyClassWithNestedExportedClass", name = "Inner")
-//  private static class NativeMyClassWithNestedExportedClassInner { }
-//
-//  public void testInheritPackageNamespace_nestedEnum() {
-//    assertNotNull(getNestedEnum());
-//  }
-//
-//  @JsProperty(namespace = "woo.MyClassWithNestedExportedClass", name = "InnerEnum.AA")
-//  private static native Object getNestedEnum();
+  public void testInheritPackageNamespace_nestedClass() {
+    assertEquals(99, getNestedWOO());
+    assertNotNull(new NativeMyClassWithNestedExportedClassInner());
+  }
+
+  @JsProperty(namespace = "woo.MyClassWithNestedExportedClass.Inner", name = "WOO")
+  private static native int getNestedWOO();
+
+  @JsType(isNative = true, namespace = "woo.MyClassWithNestedExportedClass", name = "Inner")
+  private static class NativeMyClassWithNestedExportedClassInner {}
+
+  public void testInheritPackageNamespace_nestedEnum() {
+    assertNotNull(getNestedEnum());
+  }
+
+  @JsProperty(namespace = "woo.MyClassWithNestedExportedClass.InnerEnum", name = "AA")
+  private static native Object getNestedEnum();
 
   public void testInheritPackageNamespace_subpackage() {
     // This is different than GWT. Sub packages can't be imported or referenced in a goog.module()

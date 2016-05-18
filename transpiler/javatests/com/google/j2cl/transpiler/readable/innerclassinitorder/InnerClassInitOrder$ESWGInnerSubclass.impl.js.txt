@@ -5,14 +5,14 @@
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
  * const, missingRequire}
  */
-goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGInnerSubclass$impl');
+goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass$impl');
 
 
-let InnerClassInitOrder$ESWGOuter$ESWGInner = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter$ESWGInner$impl');
+let InnerClassInitOrder$ESWGOuter$ESWGInner = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let InnerClassInitOrder$ESWGOuter = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter$impl');
 let InnerClassInitOrder = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
+let InnerClassInitOrder$ESWGOuter = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
@@ -115,10 +115,10 @@ class InnerClassInitOrder$ESWGInnerSubclass extends
    * @public
    */
   static $clinit() {
-    InnerClassInitOrder$ESWGOuter = goog.module.get(
-        'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$ESWGOuter$impl');
     InnerClassInitOrder = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
+    InnerClassInitOrder$ESWGOuter = goog.module.get(
+        'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter$impl');
     Class = goog.module.get('java.lang.Class$impl');
     String = goog.module.get('java.lang.String$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');

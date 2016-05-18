@@ -20,7 +20,7 @@ import jsinterop.annotations.JsType;
 /**
  * Exported class with a nested exported class.
  */
-@JsType(namespace = "woo", name = "Bloo")  // Remove when package-info files are supported.
+@JsType(name = "Bloo")
 public class MyExportedClassWithNestedExportedClass {
   /**
    * Exported nested class.

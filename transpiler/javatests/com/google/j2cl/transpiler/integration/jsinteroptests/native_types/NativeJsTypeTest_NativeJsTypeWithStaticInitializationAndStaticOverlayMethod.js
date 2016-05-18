@@ -1,1 +1,1 @@
-goog.module('woo.NativeJsTypeTest$NativeJsTypeWithStaticInitializationAndStaticOverlayMethod');
+goog.module('woo.NativeJsTypeTest.NativeJsTypeWithStaticInitializationAndStaticOverlayMethod');

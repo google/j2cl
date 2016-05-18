@@ -16,12 +16,10 @@
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsType;
 
 /**
  * A test class that exhibits a variety of @JsTypes.
  */
-@JsType(namespace = "woo")  // Remove when package-info files are supported.
 public class MyClassExportsMethod {
   public static boolean calledFromCallMe1 = false;
   public static boolean calledFromCallMe2 = false;

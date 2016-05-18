@@ -812,7 +812,7 @@ public class AstUtils {
         classComponents,
         Collections.<TypeDescriptor>emptyList(),
         Joiner.on(".").join(typeDescriptor.getPackageComponents()),
-        Joiner.on("$").join(classComponents),
+        Joiner.on(".").join(classComponents),
         false,
         false,
         false);

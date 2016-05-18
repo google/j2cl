@@ -21,7 +21,7 @@ import jsinterop.annotations.JsType;
 /**
  * Test access to static field from JS, ensuring clinit run.
  */
-@JsType(namespace = "woo")  // Remove when package-info files are supported.
+@JsType
 public class StaticInitializerStaticField {
   public static final Object EXPORTED_1 = new Object();
 
@@ -45,7 +45,7 @@ public class StaticInitializerStaticField {
   /**
    * Test interface that export a static field.
    */
-  @JsType(namespace = "woo")  // Remove when package-info files are supported.
+  @JsType
   public interface InterfaceWithField {
     Object STATIC = new Object();
   }

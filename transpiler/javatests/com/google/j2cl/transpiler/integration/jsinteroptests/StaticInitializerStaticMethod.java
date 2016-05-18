@@ -21,7 +21,7 @@ import jsinterop.annotations.JsType;
 /**
  * Test access to static field from JS through exported static method.
  */
-@JsType(namespace = "woo")  // Remove when package-info files are supported.
+@JsType
 public class StaticInitializerStaticMethod {
   private static StaticInitializerStaticMethod STATIC = new StaticInitializerStaticMethod();
 

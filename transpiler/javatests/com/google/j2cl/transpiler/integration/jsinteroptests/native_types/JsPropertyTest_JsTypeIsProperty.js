@@ -1,1 +1,1 @@
-goog.module('woo.JsPropertyTest$JsTypeIsProperty');
+goog.module('woo.JsPropertyTest.JsTypeIsProperty');

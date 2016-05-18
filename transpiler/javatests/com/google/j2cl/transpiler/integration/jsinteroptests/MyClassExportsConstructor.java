@@ -17,12 +17,10 @@ package com.google.j2cl.transpiler.integration.jsinteroptests;
 
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsIgnore;
-import jsinterop.annotations.JsType;
 
 /**
  * A test class that exports a constructor.
  */
-@JsType(namespace = "woo")  // Remove when package-info files are supported.
 public class MyClassExportsConstructor {
   private int a;
 

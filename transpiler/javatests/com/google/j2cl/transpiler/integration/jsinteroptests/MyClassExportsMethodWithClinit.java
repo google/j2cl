@@ -18,9 +18,7 @@ package com.google.j2cl.transpiler.integration.jsinteroptests;
 import static com.google.j2cl.transpiler.integration.jsinteroptests.MyTestCase.assertEquals;
 
 import jsinterop.annotations.JsConstructor;
-import jsinterop.annotations.JsType;
 
-@JsType(namespace = "woo")  // Remove when package-info files are supported.
 class MyClassExportsMethodWithClinit {
 
   public static int magicNumber = 0;
