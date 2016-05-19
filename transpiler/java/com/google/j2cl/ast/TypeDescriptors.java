@@ -709,7 +709,7 @@ public class TypeDescriptors {
                 createUniqueId(true, false, null, 0, false, null, binaryName, null, false, null))
             .setTypeArgumentDescriptors(
                 FluentIterable.from(
-                        JdtBindingUtils.getTypeArgumentDescriptors(lambdaInterfaceBinding))
+                        JdtBindingUtils.getTypeArgumentTypeDescriptors(lambdaInterfaceBinding))
                     .filter(
                         new Predicate<TypeDescriptor>() {
                           @Override
@@ -839,7 +839,7 @@ public class TypeDescriptors {
     List<TypeDescriptor> typeArgumentDescriptors =
         overrideTypeArgumentDescriptors != null
             ? overrideTypeArgumentDescriptors
-            : JdtBindingUtils.getTypeArgumentDescriptors(typeBinding);
+            : JdtBindingUtils.getTypeArgumentTypeDescriptors(typeBinding);
 
     // Compute these even later
     boolean isExtern = isNative && JsInteropUtils.isGlobal(jsNamespace);

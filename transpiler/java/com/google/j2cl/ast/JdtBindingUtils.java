@@ -165,20 +165,48 @@ public class JdtBindingUtils {
     }
     return topLevelClass;
   }
+  
+  private static boolean isIntersectionType(ITypeBinding binding) {
+    boolean isIntersectionType = !binding.isPrimitive()
+        && !binding.isCapture()
+        && !binding.isArray()
+        && !binding.isTypeVariable()
+        && !binding.isWildcardType()
+        && binding.getPackage() == null;
+    if (isIntersectionType) {
+      checkArgument(
+          (binding.getSuperclass() != null && binding.getInterfaces().length >= 1)
+              || (binding.getSuperclass() == null && binding.getInterfaces().length >= 2));
+    }
+    return isIntersectionType;
+  }
+
+  /**
+   * This is a hack to get intersection types working temporarily.  We simply take the first type
+   * in the intersection and return it.
+   * TODO: Find out how to support intersection types in the jscompiler type system and fix this.
+   */
+  private static ITypeBinding getTypeForIntersectionType(ITypeBinding binding) {
+    checkArgument(isIntersectionType(binding));
+    return binding.getInterfaces()[0];
+  }
 
   /**
    * Creates a TypeDescriptor from a JDT TypeBinding.
    */
-  public static TypeDescriptor createTypeDescriptor(
+  private static TypeDescriptor createTypeDescriptor(
       ITypeBinding typeBinding, List<TypeDescriptor> typeArgumentDescriptors) {
     if (typeBinding == null) {
       return null;
+    }
+    if (isIntersectionType(typeBinding)) {
+      ITypeBinding intersectionType = getTypeForIntersectionType(typeBinding);
+      return createTypeDescriptor(intersectionType, getTypeArgumentTypeDescriptors(typeBinding));
     }
     if (typeBinding.isArray()) {
       TypeDescriptor leafTypeDescriptor = createTypeDescriptor(typeBinding.getElementType());
       return TypeDescriptors.getForArray(leafTypeDescriptor, typeBinding.getDimensions());
     }
-
     return TypeDescriptors.createForType(typeBinding, typeArgumentDescriptors);
   }
 
@@ -228,9 +256,12 @@ public class JdtBindingUtils {
     return classComponents;
   }
 
-  public static List<TypeDescriptor> getTypeArgumentDescriptors(ITypeBinding typeBinding) {
+  public static List<TypeDescriptor> getTypeArgumentTypeDescriptors(ITypeBinding typeBinding) {
     List<TypeDescriptor> typeArgumentDescriptors = new ArrayList<>();
-    if (typeBinding.isParameterizedType()) {
+    if (isIntersectionType(typeBinding)) {
+      ITypeBinding intersectionTypeBinding = getTypeForIntersectionType(typeBinding);
+      return getTypeArgumentTypeDescriptors(intersectionTypeBinding);
+    } else if (typeBinding.isParameterizedType()) {
       typeArgumentDescriptors.addAll(createTypeDescriptors(typeBinding.getTypeArguments()));
     } else {
       typeArgumentDescriptors.addAll(createTypeDescriptors(typeBinding.getTypeParameters()));
