@@ -152,8 +152,6 @@ public class NormalizeJsVarargs extends AbstractRewriter {
 
       // (2) (loop body) $var_args_copy[i] = arguments[i + varargsIndex];
       Variable loopVariable = new Variable("$i", primitiveInt, false, false);
-      Expression leftOperand =
-          new ArrayAccess(varargsLocalCopy.getReference(), loopVariable.getReference());
       Expression indexExpression =
           varargsIndex == 0
               ? loopVariable.getReference()
@@ -162,15 +160,13 @@ public class NormalizeJsVarargs extends AbstractRewriter {
                   loopVariable.getReference(),
                   BinaryOperator.PLUS,
                   new NumberLiteral(primitiveInt, varargsIndex));
-      Expression rightOperand =
-          new ArrayAccess(ARGUMENTS_PARAMETER.getReference(), indexExpression);
       Statement body =
           new ExpressionStatement(
-              new BinaryExpression(
-                  leftOperand.getTypeDescriptor(),
-                  leftOperand,
+              AstUtils.createArraySetExpression(
+                  varargsLocalCopy.getReference(),
+                  loopVariable.getReference(),
                   BinaryOperator.ASSIGN,
-                  rightOperand));
+                  new ArrayAccess(ARGUMENTS_PARAMETER.getReference(), indexExpression)));
 
       // (3). (for statement) for ($i = 0; i < arguments.length - idx; i++) { ... }
       Statement forStatement =

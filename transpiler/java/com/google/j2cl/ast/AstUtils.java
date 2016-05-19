@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -985,5 +986,193 @@ public class AstUtils {
   static String escapeJavaString(String string) {
     // NOTE: StringEscapeUtils.escapeJava does not escape unprintable character 127 (delete).
     return StringEscapeUtils.escapeJava(string).replace("\u007f", "\\u007F");
+  }
+
+  /**
+   * Create a call to an array set expression for a binary operator.
+   * @param array
+   * @param index
+   * @param operator
+   * @param value
+   * @return The method call.
+   */
+  public static Expression createArraySetExpression(
+      Expression array, Expression index, BinaryOperator operator, Expression value) {
+
+    // Get the type of the elements in the array.
+    TypeDescriptor elementType = array.getTypeDescriptor().getComponentTypeDescriptor();
+
+    // Get the name of the method that should be called
+    String methodName = AstUtils.getArrayAssignmentMethodName(elementType, operator);
+
+    // Create the parameter type descriptor list.
+    TypeDescriptor[] methodParams = {
+        BootstrapType.ARRAYS.getDescriptor(), // array
+        TypeDescriptors.get().primitiveInt, // index
+        elementType}; // value
+
+    MethodDescriptor arraySetMethodDescriptor =
+        createArraySetMethodDescriptor(elementType, methodName, methodParams);
+    return MethodCall.createMethodCall(null, arraySetMethodDescriptor, array, index, value);
+  }
+
+  /**
+   * Create a call to an array set expression for a postfix operator.
+   * @param array
+   * @param index
+   * @param operator
+   * @return The method call.
+   */
+  public static Node createArraySetPostfixExpression(
+      Expression array, Expression index, PostfixOperator operator) {
+
+    // Get the type of the elements in the array.
+    TypeDescriptor elementType = array.getTypeDescriptor().getComponentTypeDescriptor();
+
+    // Get the name of the method that should be called
+    String methodName = AstUtils.getArrayPostfixAssignmentMethodName(elementType, operator);
+
+    // Create the parameter type descriptor list.
+    TypeDescriptor[] methodParams = {
+        BootstrapType.ARRAYS.getDescriptor(), // array
+        TypeDescriptors.get().primitiveInt}; // index
+
+    MethodDescriptor arraySetMethodDescriptor =
+        createArraySetMethodDescriptor(elementType, methodName, methodParams);
+    return MethodCall.createMethodCall(null, arraySetMethodDescriptor, array, index);
+  }
+
+  /**
+   * Create a method descriptor for a call to an array set expression for a binary operator.
+   * @param elementType
+   * @param methodName
+   * @param methodParams
+   * @return The method descriptor.
+   */
+  private static MethodDescriptor createArraySetMethodDescriptor(
+      TypeDescriptor elementType, String methodName, TypeDescriptor... methodParams) {
+
+    // Get the descriptor for the class on which the array set method should be called.
+    // (LongUtils if the array is a long array, else Arrays)
+    TypeDescriptor enclosingClassType;
+    if (elementType.equals(TypeDescriptors.get().primitiveLong)) {
+      enclosingClassType = BootstrapType.LONGS.getDescriptor();
+    } else {
+      enclosingClassType = BootstrapType.ARRAYS.getDescriptor();
+    }
+
+    // Create and return the method descriptor.
+    return MethodDescriptor.Builder.fromDefault()
+        .setJsInfo(JsInfo.RAW)
+        .setIsStatic(true)
+        .setEnclosingClassTypeDescriptor(enclosingClassType)
+        .setMethodName(methodName)
+        .setParameterTypeDescriptors(methodParams)
+        .setReturnTypeDescriptor(elementType)
+        .build();
+  }
+
+  /**
+   * Get the name of the method that should be called for an array set expression.
+   * @param elementType
+   * @param operator
+   * @return The string method name.
+   */
+  private static String getArrayAssignmentMethodName(
+      TypeDescriptor elementType, BinaryOperator operator) {
+    String methodName;
+    switch (operator) {
+      case ASSIGN:
+        methodName = "$set";
+        break;
+      case PLUS_ASSIGN:
+        methodName = "$addSet";
+        break;
+      case MINUS_ASSIGN:
+        methodName = "$subSet";
+        break;
+      case TIMES_ASSIGN:
+        methodName = "$mulSet";
+        break;
+      case DIVIDE_ASSIGN:
+        methodName = "$divSet";
+        break;
+      case BIT_AND_ASSIGN:
+        methodName = "$andSet";
+        break;
+      case BIT_OR_ASSIGN:
+        methodName = "$orSet";
+        break;
+      case BIT_XOR_ASSIGN:
+        methodName = "$xorSet";
+        break;
+      case REMAINDER_ASSIGN:
+        methodName = "$modSet";
+        break;
+      case LEFT_SHIFT_ASSIGN:
+        methodName = "$lshiftSet";
+        break;
+      case RIGHT_SHIFT_SIGNED_ASSIGN:
+        methodName = "$rshiftSet";
+        break;
+      case RIGHT_SHIFT_UNSIGNED_ASSIGN:
+        methodName = "$rshiftUSet";
+        break;
+      default:
+        Preconditions.checkState(
+            false, "Requested the array assignment function name for a non-assignment operator.");
+        return null;
+    }
+    // Long arrays use the LongUtils set methods, which are suffixed by "Array".
+    if (elementType.equals(TypeDescriptors.get().primitiveLong)) {
+      methodName = methodName.concat("Array");
+    }
+    return methodName;
+  }
+
+  /**
+   * Get the name of the method that should be called for an array set expression.
+   * @param elementType
+   * @param operator
+   * @return The string method name.
+   */
+  private static String getArrayPostfixAssignmentMethodName(
+      TypeDescriptor elementType, PostfixOperator operator) {
+    String methodName;
+    switch (operator) {
+      case INCREMENT:
+        methodName = "$postfixIncrement";
+        break;
+      case DECREMENT:
+        methodName = "$postfixDecrement";
+        break;
+      default:
+        Preconditions.checkState(
+            false,
+            "Requested the postfix array assignment function name for a non-postfix operator.");
+        return null;
+    }
+    // Long arrays use the LongUtils set methods, which are suffixed by "Array".
+    if (elementType.equals(TypeDescriptors.get().primitiveLong)) {
+      methodName = methodName.concat("Array");
+    }
+    return methodName;
+  }
+
+  /**
+   * Get the binary compound assignment operator corresponding to the given operator.
+   * + or ++ will return +=. - or -- will return -=.
+   * @param operator
+   * @return The corresponding compound assignment binary operator.
+   */
+  public static BinaryOperator getCorrespondingCompoundAssignmentOperator(Operator operator) {
+    switch (operator.getUnderlyingBinaryOperator()) {
+      case PLUS:
+        return BinaryOperator.PLUS_ASSIGN;
+      case MINUS:
+        return BinaryOperator.MINUS_ASSIGN;
+      default:
+        return operator.getUnderlyingBinaryOperator();
+    }
   }
 }

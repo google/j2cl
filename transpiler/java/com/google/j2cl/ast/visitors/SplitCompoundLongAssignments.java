@@ -16,6 +16,7 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
+import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Node;
@@ -43,7 +44,8 @@ public class SplitCompoundLongAssignments extends AbstractRewriter {
     if (binaryExpression.getOperator().isCompoundAssignment()
         && TypeDescriptors.get()
             .primitiveLong
-            .equalsIgnoreNullability(binaryExpression.getLeftOperand().getTypeDescriptor())) {
+            .equalsIgnoreNullability(binaryExpression.getLeftOperand().getTypeDescriptor())
+        && !(binaryExpression.getLeftOperand() instanceof ArrayAccess)) {
       return OperatorSideEffectUtils.splitBinaryExpression(binaryExpression);
     }
     return binaryExpression;
@@ -54,7 +56,8 @@ public class SplitCompoundLongAssignments extends AbstractRewriter {
     if (prefixExpression.getOperator().hasSideEffect()
         && TypeDescriptors.get()
             .primitiveLong
-            .equalsIgnoreNullability(prefixExpression.getOperand().getTypeDescriptor())) {
+            .equalsIgnoreNullability(prefixExpression.getOperand().getTypeDescriptor())
+        && !(prefixExpression.getOperand() instanceof ArrayAccess)) {
       return OperatorSideEffectUtils.splitPrefixExpression(prefixExpression);
     }
     return prefixExpression;
@@ -62,7 +65,8 @@ public class SplitCompoundLongAssignments extends AbstractRewriter {
 
   @Override
   public Node rewritePostfixExpression(PostfixExpression postfixExpression) {
-    if (TypeDescriptors.get().primitiveLong == postfixExpression.getOperand().getTypeDescriptor()) {
+    if (TypeDescriptors.get().primitiveLong == postfixExpression.getOperand().getTypeDescriptor()
+        && !(postfixExpression.getOperand() instanceof ArrayAccess)) {
       return OperatorSideEffectUtils.splitPostfixExpression(postfixExpression);
     }
     return postfixExpression;

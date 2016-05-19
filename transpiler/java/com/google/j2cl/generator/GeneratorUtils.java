@@ -20,7 +20,6 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
@@ -188,39 +187,6 @@ public class GeneratorUtils {
   }
 
   private GeneratorUtils() {}
-
-  public static String getArrayAssignmentFunctionName(BinaryOperator binaryOperator) {
-    switch (binaryOperator) {
-      case ASSIGN:
-        return "$set";
-      case PLUS_ASSIGN:
-        return "$addSet";
-      case MINUS_ASSIGN:
-        return "$subSet";
-      case TIMES_ASSIGN:
-        return "$mulSet";
-      case DIVIDE_ASSIGN:
-        return "$divSet";
-      case BIT_AND_ASSIGN:
-        return "$andSet";
-      case BIT_OR_ASSIGN:
-        return "$orSet";
-      case BIT_XOR_ASSIGN:
-        return "$xorSet";
-      case REMAINDER_ASSIGN:
-        return "$modSet";
-      case LEFT_SHIFT_ASSIGN:
-        return "$lshiftSet";
-      case RIGHT_SHIFT_SIGNED_ASSIGN:
-        return "$rshiftSet";
-      case RIGHT_SHIFT_UNSIGNED_ASSIGN:
-        return "$rshiftUSet";
-      default:
-        Preconditions.checkState(
-            false, "Requested the Arrays function name for a non-assignment operator.");
-        return null;
-    }
-  }
 
   /**
    * If possible, returns the qualifier of the provided expression, otherwise null.

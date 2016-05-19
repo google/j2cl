@@ -250,19 +250,14 @@ public class OperatorSideEffectUtils {
       return AstUtils.hasThisReferenceAsQualifier(fieldAccess);
     }
 
-    // TODO: array access lvalues can have side effects but are not correctly covered here;
-    // the following code should be uncommented, and the code to pre evaluate the side effect
-    // expressions is fixed to handle array lvalues.
-    //
-    //    if (expression instanceof ArrayAccess) {
-    //      ArrayAccess arrayAccess = (ArrayAccess) expression;
-    //      return canExpressionBeEvaluatedTwice(arrayAccess.getArrayExpression())
-    //          && canExpressionBeEvaluatedTwice(arrayAccess.getIndexExpression());
-    //  }
-    //
-    //  return false;
+    // For array access expressions.
+    if (expression instanceof ArrayAccess) {
+      ArrayAccess arrayAccess = (ArrayAccess) expression;
+      return canExpressionBeEvaluatedTwice(arrayAccess.getArrayExpression())
+          && canExpressionBeEvaluatedTwice(arrayAccess.getIndexExpression());
+    }
 
-    return true;
+    return false;
   }
 
   /**
@@ -349,7 +344,7 @@ public class OperatorSideEffectUtils {
   }
 
   /**
-   * Returns the type descirptor for the wider type.
+   * Returns the type descriptor for the wider type.
    */
   private static TypeDescriptor widerType(
       TypeDescriptor thisTypeDescriptor, TypeDescriptor thatTypeDescriptor) {

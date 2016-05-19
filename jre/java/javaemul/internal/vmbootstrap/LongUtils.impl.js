@@ -4,8 +4,9 @@
 goog.module('vmbootstrap.LongUtils$impl');
 
 
-let Long = goog.require('nativebootstrap.Long$impl');
-let Primitives = goog.require('vmbootstrap.primitives.Primitives$impl');
+const Long = goog.require('nativebootstrap.Long$impl');
+const Arrays = goog.require('vmbootstrap.Arrays$impl');
+const Primitives = goog.require('vmbootstrap.primitives.Primitives$impl');
 
 
 /**
@@ -273,6 +274,176 @@ class LongUtils {
     if (divisor.isZero()) {
       Primitives.$throwArithmeticException();
     }
+  }
+
+  /**
+   * Sets array[index] to value.
+   * @param {Array<!Long>} array
+   * @param {number} index
+   * @param {!Long} value
+   * @returns {!Long}
+   * @public
+   */
+  static $setArray(array, index, value) {
+    return Arrays.$set(array, index, value);
+  }
+
+  /**
+   * Sets array[index] to array[index] + value.
+   * @param {Array<!Long>} array
+   * @param {number} index
+   * @param {!Long} value
+   * @returns {!Long}
+   * @public
+   */
+  static $addSetArray(array, index, value) {
+    return Arrays.$set(array, index, LongUtils.$plus(array[index], value));
+  }
+
+  /**
+   * Sets array[index] to array[index] - value.
+   * @param {Array<!Long>} array
+   * @param {number} index
+   * @param {!Long} value
+   * @returns {!Long}
+   * @public
+   */
+  static $subSetArray(array, index, value) {
+    return Arrays.$set(array, index, LongUtils.$minus(array[index], value));
+  }
+
+  /**
+   * Sets array[index] to array[index] * value.
+   * @param {Array<!Long>} array
+   * @param {number} index
+   * @param {!Long} value
+   * @returns {!Long}
+   * @public
+   */
+  static $mulSetArray(array, index, value) {
+    return Arrays.$set(array, index, LongUtils.$times(array[index], value));
+  }
+
+  /**
+   * Sets array[index] to array[index] / value.
+   * @param {Array<!Long>} array
+   * @param {number} index
+   * @param {!Long} value
+   * @returns {!Long}
+   * @public
+   */
+  static $divSetArray(array, index, value) {
+    return Arrays.$set(array, index, LongUtils.$divide(array[index], value));
+  }
+
+  /**
+   * Sets array[index] to array[index] & value.
+   * @param {Array<!Long>} array
+   * @param {number} index
+   * @param {!Long} value
+   * @returns {!Long}
+   * @public
+   */
+  static $andSetArray(array, index, value) {
+    return Arrays.$set(array, index, LongUtils.$and(array[index], value));
+  }
+
+  /**
+   * Sets array[index] to array[index] | value.
+   * @param {Array<!Long>} array
+   * @param {number} index
+   * @param {!Long} value
+   * @returns {!Long}
+   * @public
+   */
+  static $orSetArray(array, index, value) {
+    return Arrays.$set(array, index, LongUtils.$or(array[index], value));
+  }
+
+  /**
+   * Sets array[index] to array[index] ^ value.
+   * @param {Array<!Long>} array
+   * @param {number} index
+   * @param {!Long} value
+   * @returns {!Long}
+   * @public
+   */
+  static $xorSetArray(array, index, value) {
+    return Arrays.$set(array, index, LongUtils.$xor(array[index], value));
+  }
+
+  /**
+   * Sets array[index] to array[index] % value.
+   * @param {Array<!Long>} array
+   * @param {number} index
+   * @param {!Long} value
+   * @returns {!Long}
+   * @public
+   */
+  static $modSetArray(array, index, value) {
+    return Arrays.$set(array, index, LongUtils.$remainder(array[index], value));
+  }
+
+  /**
+   * Sets array[index] to array[index] << value.
+   * @param {Array<!Long>} array
+   * @param {number} index
+   * @param {!Long} value The number of bits to shift left by.
+   * @returns {!Long}
+   * @public
+   */
+  static $lshiftSetArray(array, index, value) {
+    return Arrays.$set(array, index, LongUtils.$leftShift(array[index], value));
+  }
+
+  /**
+   * Sets array[index] to array[index] >> value.
+   * @param {Array<!Long>} array
+   * @param {number} index
+   * @param {!Long} value The number of bits to shift right by.
+   * @returns {!Long}
+   * @public
+   */
+  static $rshiftSetArray(array, index, value) {
+    return Arrays.$set(
+        array, index, LongUtils.$rightShiftSigned(array[index], value));
+  }
+
+  /**
+   * Sets array[index] to array[index] >>> value.
+   * @param {Array<!Long>} array
+   * @param {number} index
+   * @param {!Long} value The number of bits to shift right by.
+   * @returns {!Long}
+   * @public
+   */
+  static $rshiftUSetArray(array, index, value) {
+    return Arrays.$set(
+        array, index, LongUtils.$rightShiftUnsigned(array[index], value));
+  }
+
+  /**
+   * @param {Array<!Long>} array
+   * @param {number} index
+   * @returns {!Long}
+   * @public
+   */
+  static $postfixIncrementArray(array, index) {
+    const value = array[index];
+    LongUtils.$addSetArray(array, index, LongUtils.$fromNumber(1));
+    return value;
+  }
+
+  /**
+   * @param {Array<!Long>} array
+   * @param {number} index
+   * @returns {!Long}
+   * @public
+   */
+  static $postfixDecrementArray(array, index) {
+    const value = array[index];
+    LongUtils.$subSetArray(array, index, LongUtils.$fromNumber(1));
+    return value;
   }
 };
 

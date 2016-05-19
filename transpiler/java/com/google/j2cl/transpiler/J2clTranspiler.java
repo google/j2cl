@@ -15,6 +15,7 @@ package com.google.j2cl.transpiler;
 
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JsInteropRestrictionsChecker;
+import com.google.j2cl.ast.visitors.ArrayAccessNormalizer;
 import com.google.j2cl.ast.visitors.ControlStatementFormatter;
 import com.google.j2cl.ast.visitors.CreateDefaultConstructors;
 import com.google.j2cl.ast.visitors.CreateOverlayImplementationTypesAndDevirtualizeCalls;
@@ -172,6 +173,7 @@ public class J2clTranspiler {
       DevirtualizeMethodCalls.applyTo(j2clUnit);
       ControlStatementFormatter.applyTo(j2clUnit);
       SplitCompoundLongAssignments.applyTo(j2clUnit);
+      ArrayAccessNormalizer.applyTo(j2clUnit);
       // Runs before unboxing conversion.
       InsertNarrowingReferenceConversions.applyTo(j2clUnit);
       InsertUnboxingConversions.applyTo(j2clUnit);

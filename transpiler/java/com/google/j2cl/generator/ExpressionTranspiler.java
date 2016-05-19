@@ -25,7 +25,6 @@ import com.google.j2cl.ast.AbstractTransformer;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.BinaryExpression;
-import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.BooleanLiteral;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CharacterLiteral;
@@ -76,9 +75,6 @@ public class ExpressionTranspiler {
 
   public static String transform(Expression expression, final GenerationEnvironment environment) {
     class ToSourceTransformer extends AbstractTransformer<String> {
-      private String arraysTypeAlias() {
-        return environment.aliasForType(BootstrapType.ARRAYS.getDescriptor());
-      }
 
       private String longsTypeAlias() {
         return environment.aliasForType(BootstrapType.LONGS.getDescriptor());
@@ -92,22 +88,6 @@ public class ExpressionTranspiler {
             transform(arrayAccess.getIndexExpression(), environment));
       }
 
-      // TODO: extend to handle long[].
-      private String transformArrayAssignmentBinaryExpression(BinaryExpression expression) {
-        Preconditions.checkState(
-            expression.getOperator().hasSideEffect()
-                && expression.getLeftOperand() instanceof ArrayAccess);
-
-        ArrayAccess arrayAccess = (ArrayAccess) expression.getLeftOperand();
-        return String.format(
-            "%s.%s(%s, %s, %s)",
-            arraysTypeAlias(),
-            GeneratorUtils.getArrayAssignmentFunctionName(expression.getOperator()),
-            transform(arrayAccess.getArrayExpression(), environment),
-            transform(arrayAccess.getIndexExpression(), environment),
-            transform(expression.getRightOperand(), environment));
-      }
-
       @Override
       public String transformArrayLiteral(ArrayLiteral arrayLiteral) {
         String valuesAsString =
@@ -117,22 +97,15 @@ public class ExpressionTranspiler {
 
       @Override
       public String transformBinaryExpression(BinaryExpression expression) {
-        Expression leftOperand = expression.getLeftOperand();
-        BinaryOperator operator = expression.getOperator();
+        Preconditions.checkState(
+            !(expression.getOperator().hasSideEffect()
+                && expression.getLeftOperand() instanceof ArrayAccess));
 
-        if (operator.hasSideEffect() && leftOperand instanceof ArrayAccess) {
-          return transformArrayAssignmentBinaryExpression(expression);
-        } else {
-          Preconditions.checkState(
-              !(expression.getOperator().hasSideEffect()
-                  && expression.getLeftOperand() instanceof ArrayAccess));
-
-          return String.format(
-              "%s %s %s",
-              transform(expression.getLeftOperand(), environment),
-              expression.getOperator().toString(),
-              transform(expression.getRightOperand(), environment));
-        }
+        return String.format(
+            "%s %s %s",
+            transform(expression.getLeftOperand(), environment),
+            expression.getOperator().toString(),
+            transform(expression.getRightOperand(), environment));
       }
 
       @Override
