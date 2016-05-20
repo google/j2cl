@@ -11,8 +11,8 @@ goog.module('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTy
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let IntersectionType$Getable = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionType$Getable$impl');
-let IntersectionType$Setable = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionType$Setable$impl');
+let IntersectionType$Getable = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionType.Getable$impl');
+let IntersectionType$Setable = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionType.Setable$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
@@ -83,9 +83,9 @@ class IntersectionType extends Object {
    */
   static $clinit() {
     IntersectionType$Getable = goog.module.get(
-        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionType$Getable$impl');
+        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionType.Getable$impl');
     IntersectionType$Setable = goog.module.get(
-        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionType$Setable$impl');
+        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionType.Setable$impl');
     Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }
