@@ -52,24 +52,22 @@ def integration_test(
 
   deps = [absolute_label(dep) for dep in deps]
 
-  closure_defines = dict(closure_defines) # make a copy to ensure mutability
-
-  # Turn on assertions since the integration tests rely on them.
-  if not "ASSERTIONS_ENABLED_" in closure_defines:
-    closure_defines["ASSERTIONS_ENABLED_"] = "true"
-  # Since integration tests are used for optimized size tracking, set array
+  # Since integration tests are used for optimized size tracking, set
   # behavior to the mode with the smallest output size which is what we expect
   # will also be used for customer application production releases. If some
   # particular test needs one of these on they can override with
   # closure_defines.
-  if not "ARRAY_CHECK_BOUNDS_" in closure_defines:
-    closure_defines["ARRAY_CHECK_BOUNDS_"] = "false"
-  if not "ARRAY_CHECK_TYPES_" in closure_defines:
-    closure_defines["ARRAY_CHECK_TYPES_"] = "false"
+  defines = {
+    # Turn on assertions since the integration tests rely on them.
+    "ASSERTIONS_ENABLED_" : "true",
+    "ARRAY_CHECK_BOUNDS_" : "false",
+    "ARRAY_CHECK_TYPES_" : "false",
+  }
 
-  define_flags = []
-  for def_name, value in closure_defines.items():
-    define_flags.append("--define={0}={1}".format(def_name, value))
+  defines.update(closure_defines)
+
+  define_flags = ["--define=%s=%s" % (k,v) for (k,v) in defines.items()]
+
   defs = defs + define_flags
 
   srcs_lib_dep = []
@@ -96,12 +94,8 @@ def integration_test(
       var Main = goog.require('%s');
       Main.m_main__arrayOf_java_lang_String([]);
   """ % main_class
-  native.genrule(
-      name="opt_harness_generator",
-      outs=["OptHarness.js"],
-      cmd="echo \"%s\" > $@" % opt_harness,
-      executable=1,
-  )
+  _genfile("OptHarness.js", opt_harness)
+
 
   # NOTE: --closure_entry_point *is* used because it cuts optimize time nearly
   #       in half and the optimization leaks that it previously hid no longer
@@ -174,12 +168,8 @@ def integration_test(
           }
         }
     """ % java_package
-    native.genrule(
-        name="gwt_harness_generator",
-        outs=["MainEntryPoint.java"],
-        cmd="echo \"%s\" > $@" % gwt_harness,
-        executable=1,
-    )
+    _genfile("MainEntryPoint.java", gwt_harness)
+
     java_library_deps = gwt_deps if gwt_deps else [dep + "_java_library" for dep in deps]
     native.gwt_module(
         name="gwt_module",
@@ -227,18 +217,21 @@ def integration_test(
         tags=["manual"],
     )
 
-  test_harness_defines = ""
-  for def_name, value in closure_defines.items():
-    test_harness_defines += "window.{0} = {1};\n".format(def_name, value)
 
   # blaze test :uncompiled_test
   # blaze test :compiled_test
+
+  test_harness_defines = ["'%s':%s" % (k,v) for (k,v) in defines.items()]
+
+  test_bootstrap = """
+      var CLOSURE_UNCOMPILED_DEFINES = {%s};
+  """ % (",".join(test_harness_defines))
+  _genfile("TestBootstrap.js", test_bootstrap)
+
+
   test_harness = """
       goog.module('gen.test.Harness');
       goog.setTestOnly();
-
-      // Closure defines.
-      %s
 
       var testSuite = goog.require('goog.testing.testSuite');
       var Main = goog.require('%s');
@@ -247,15 +240,12 @@ def integration_test(
           Main.m_main__arrayOf_java_lang_String([]);
         }
       });
-  """ % (test_harness_defines, main_class)
-  native.genrule(
-      name="test_harness_generator",
-      outs=["TestHarness.js"],
-      cmd="echo \"%s\" > $@" % test_harness,
-  )
+  """ % (main_class)
+  _genfile("TestHarness.js", test_harness)
 
   native.jsunit_test(
       name="uncompiled_test",
+      bootstrap_files=["TestBootstrap.js"],
       srcs=["TestHarness.js"],
       compile=0,
       deps=[
@@ -293,4 +283,12 @@ def integration_test(
       externs_list=["//javascript/externs:common"],
       jvm_flags=["-Dcom.google.testing.selenium.browser=CHROME_LINUX"],
       data=["//testing/matrix/nativebrowsers/chrome:stable_data"],
+  )
+
+
+def _genfile(name, str):
+  native.genrule(
+      name=name.replace(".", "_"),
+      outs=[name],
+      cmd="echo \"%s\" > $@" % str,
   )
