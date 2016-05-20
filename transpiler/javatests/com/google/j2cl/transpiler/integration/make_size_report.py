@@ -69,10 +69,12 @@ def make_size_report():
 
     original_size = os.path.getsize(
         original_js_file) if original_js_file else -1
-    original_size_gzip = get_gzip_size(open(original_js_file).read())
+    original_size_gzip = get_gzip_size(
+        open(original_js_file).read()) if original_js_file else -1
     modified_size = os.path.getsize(
         modified_js_file) if modified_js_file else -1
-    modified_size_gzip = get_gzip_size(open(modified_js_file).read())
+    modified_size_gzip = get_gzip_size(
+        open(modified_js_file).read()) if modified_js_file else -1
 
     # If this is a pre-existing test
     if original_size >= 0:
@@ -114,8 +116,7 @@ def make_size_report():
         note = "new"
         message = (
             row_format %
-            (original_size_gzip, modified_size_gzip, size_percent_gzip,
-             test_name, note))
+            (original_size_gzip, modified_size_gzip, test_name, note))
         all_reports.append((size_percent, message))
         new_reports.append(message)
 
