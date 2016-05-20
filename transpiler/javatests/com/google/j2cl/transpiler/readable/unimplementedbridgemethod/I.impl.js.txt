@@ -27,6 +27,15 @@ class I {
   m_foo__java_lang_Object(t) {}
 
   /**
+   * @return {number}
+   * @public
+   */
+  static m_staticFoo() {
+    I.$clinit();
+    return 0;
+  }
+
+  /**
    * Marks the provided class as implementing this interface.
    * @param {window.Function} classConstructor
    * @public

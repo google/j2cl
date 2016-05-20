@@ -277,7 +277,9 @@ public class JdtUtils {
         new Predicate<IMethodBinding>() {
           @Override
           public boolean apply(IMethodBinding methodBinding) {
-            return !isImplementedBy(methodBinding, typeBinding);
+            return !JdtBindingUtils.isStatic(methodBinding)
+                && !methodBinding.isConstructor()
+                && !isImplementedBy(methodBinding, typeBinding);
           }
         });
   }

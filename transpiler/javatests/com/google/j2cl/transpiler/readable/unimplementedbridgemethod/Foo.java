@@ -2,6 +2,9 @@ package com.google.j2cl.transpiler.readable.unimplementedbridgemethod;
 
 interface I<T> {
   int foo(T t);
+  static int staticFoo() {
+    return 0;
+  }
 }
 
 interface J extends I<String> {}
