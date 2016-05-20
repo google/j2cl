@@ -15,7 +15,7 @@ _CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
 ]
 
 
-def j2cl_optimization_test(name):
+def j2cl_optimization_test(name, defs=[]):
   j2cl_test(
     name = name,
     srcs = [name + ".java"],
@@ -32,7 +32,7 @@ def j2cl_optimization_test(name):
         "--norewrite_polyfills",
         "--strict",
         "--variable_renaming=OFF",
-    ],
+    ] + defs,
     deps_mgmt = "closure",
     externs_list = ["//javascript/externs:common"],
     jvm_flags = ["-Dcom.google.testing.selenium.browser=CHROME_LINUX"],

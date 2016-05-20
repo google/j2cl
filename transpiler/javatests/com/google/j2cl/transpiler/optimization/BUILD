@@ -15,3 +15,8 @@ j2cl_optimization_test(
 j2cl_optimization_test(
     name = "StringsTest",
 )
+
+j2cl_optimization_test(
+    name = "CastDisableOptimizationTest",
+    defs = ["--define=CAST_CHECKS_ENABLED_=false"],
+)

@@ -22,7 +22,7 @@ class BooleansTest {
 
   @Test
   public void simpleCompOptimizes() {
-    assertFunctionMatches(getSimpleComp(), "return !0");
+    assertFunctionMatches(getSimpleComp(), "return !0;");
   }
 
   @JsMethod
@@ -35,6 +35,6 @@ class BooleansTest {
 
   @Test
   public void boxedCompOptimizes() {
-    assertFunctionMatches(getBoxedComp(), "return !0");
+    assertFunctionMatches(getBoxedComp(), "return !0;");
   }
 }

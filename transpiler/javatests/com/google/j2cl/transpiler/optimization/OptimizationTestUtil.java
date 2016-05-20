@@ -16,12 +16,7 @@ public final class OptimizationTestUtil {
 
   private static String getFunctionContent(String functionDef) {
     String stripped = functionDef.replaceAll("\\s", "");
-    String funcDeclare = "function(){";
-    assertTrue("Invalid start: " + functionDef, stripped.startsWith(funcDeclare));
-    stripped = stripped.substring(funcDeclare.length());
-    assertTrue("Invalid end: " + functionDef, stripped.endsWith("}"));
-    stripped = stripped.substring(0, stripped.length() - 1);
-    stripped = stripped.replace('"', '\''); // for HtmlUnit
+    stripped = stripped.replace('"', '\'');
     return stripped;
   }
 
@@ -30,10 +25,9 @@ public final class OptimizationTestUtil {
     for (char toBeEscaped : ".[](){}+=?".toCharArray()) {
       pattern = pattern.replace("" + toBeEscaped, "\\" + toBeEscaped);
     }
-    pattern = pattern.replace("\\(\\)", "(\\(\\))?"); // to account for the removal of ()
-    // in new operations.
+    pattern = "function\\(.*\\){" + pattern + "}";
     pattern = pattern.replace("<obf>", "[\\w$_]+");
-    return pattern + ";?";
+    return pattern;
   }
 
   private OptimizationTestUtil() {

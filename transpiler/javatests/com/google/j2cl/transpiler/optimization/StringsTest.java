@@ -30,8 +30,8 @@ class StringsTest {
 
   @Test
   public void simpleEqualsOptimizes() {
-    assertFunctionMatches(getStringEqualsString(), "return !0");
-    assertFunctionMatches(getStringNotEqualsString(), "return !1");
+    assertFunctionMatches(getStringEqualsString(), "return !0;");
+    assertFunctionMatches(getStringNotEqualsString(), "return !1;");
   }
 
   @JsMethod
@@ -44,7 +44,7 @@ class StringsTest {
 
   @Test
   public void simpleSameOptimizes() {
-    assertFunctionMatches(getStringSameString(), "return !0");
+    assertFunctionMatches(getStringSameString(), "return !0;");
   }
 
   private static boolean staticField = "asd".equals("asd");
@@ -59,6 +59,6 @@ class StringsTest {
 
   @Test
   public void staticFieldEqualsOptimizes() {
-    assertFunctionMatches(getStringEqualsStringOnStatic(), "return !0");
+    assertFunctionMatches(getStringEqualsStringOnStatic(), "return !0;");
   }
 }
