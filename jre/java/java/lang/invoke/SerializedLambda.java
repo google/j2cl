@@ -20,4 +20,37 @@ import java.io.Serializable;
  * <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/invoke/SerializedLambda.html">the
  * official Java API doc</a> for details.
  */
-public final class SerializedLambda implements Serializable {}
+public final class SerializedLambda implements Serializable {
+
+  public Object getCapturedArg(int i) {
+    return null;
+  }
+
+  public String getFunctionalInterfaceClass() {
+    return null;
+  }
+
+  public String getFunctionalInterfaceMethodName() {
+    return null;
+  }
+
+  public String getFunctionalInterfaceMethodSignature() {
+    return null;
+  }
+
+  public String getImplClass() {
+    return null;
+  }
+
+  public int getImplMethodKind() {
+    return 0;
+  }
+
+  public String getImplMethodName() {
+    return null;
+  }
+
+  public String getImplMethodSignature() {
+    return null;
+  }
+}
