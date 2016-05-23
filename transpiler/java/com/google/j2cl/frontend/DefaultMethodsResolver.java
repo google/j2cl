@@ -18,6 +18,8 @@ package com.google.j2cl.frontend;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JdtBindingUtils;
+import com.google.j2cl.ast.JsInfo;
+import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 
 import org.eclipse.jdt.core.dom.IMethodBinding;
@@ -118,9 +120,19 @@ public class DefaultMethodsResolver {
     // Finally implement the methods by as forwarding stubs to the actual interface method.
     for (IMethodBinding method : applicableDefaultMethodsBySignature.values()) {
       MethodDescriptor targetMethod = JdtBindingUtils.createMethodDescriptor(method);
-      type.addMethod(
+      Method defaultForwardingMethod =
           AstUtils.createStaticForwardingMethod(
-              targetMethod, type.getDescriptor(), "Default method forwarding stub."));
+              targetMethod, type.getDescriptor(), "Default method forwarding stub.");
+      type.addMethod(defaultForwardingMethod);
+      if (JdtBindingUtils.isOrOverridesJsMember(method)) {
+        type.addMethod(
+            AstUtils.createForwardingMethod(
+                MethodDescriptor.Builder.from(defaultForwardingMethod.getDescriptor())
+                    .setJsInfo(JsInfo.NONE)
+                    .build(),
+                defaultForwardingMethod.getDescriptor(),
+                "Bridge to JsMethod."));
+      }
     }
   }
 

@@ -76,7 +76,7 @@ public class JsBridgeMethodsCreator {
               }
             });
     for (Entry<IMethodBinding, IMethodBinding> entry :
-        getBridgeDelegateMethodsMapping(typeBinding).entrySet()) {
+        delegatedMethodBindingsByBridgeMethodBinding(typeBinding).entrySet()) {
       Method bridgeMethod = createBridgeMethod(typeBinding, entry.getKey(), entry.getValue());
       String manglingName = ManglingNameUtils.getMangledName(bridgeMethod.getDescriptor());
       if (generatedBridgeMethodMangledNames.contains(manglingName)
@@ -94,15 +94,16 @@ public class JsBridgeMethodsCreator {
   /**
    * Returns the mapping from the bridge method to the delegating method.
    */
-  private static Map<IMethodBinding, IMethodBinding> getBridgeDelegateMethodsMapping(
+  private static Map<IMethodBinding, IMethodBinding> delegatedMethodBindingsByBridgeMethodBinding(
       ITypeBinding typeBinding) {
-    Map<IMethodBinding, IMethodBinding> delegateByBridgeMethods = new LinkedHashMap<>();
+    Map<IMethodBinding, IMethodBinding> delegateMethodBindingsByBridgeMethodBinding =
+        new LinkedHashMap<>();
 
     // case 1. exposed non-JsMember to the exposing JsMethod.
     for (IMethodBinding declaredMethod : typeBinding.getDeclaredMethods()) {
       IMethodBinding exposedNonJsMember = getExposedNonJsMember(declaredMethod);
       if (exposedNonJsMember != null) {
-        delegateByBridgeMethods.put(exposedNonJsMember, declaredMethod);
+        delegateMethodBindingsByBridgeMethodBinding.put(exposedNonJsMember, declaredMethod);
       }
     }
 
@@ -119,11 +120,12 @@ public class JsBridgeMethodsCreator {
       boolean isJsMemberOne = JdtBindingUtils.isOrOverridesJsMember(overridingMethod);
       boolean isJsMemberOther = JdtBindingUtils.isOrOverridesJsMember(accidentalOverriddenMethod);
       if (isJsMemberOne != isJsMemberOther) {
-        delegateByBridgeMethods.put(accidentalOverriddenMethod, overridingMethod);
+        delegateMethodBindingsByBridgeMethodBinding.put(
+            accidentalOverriddenMethod, overridingMethod);
       }
     }
 
-    return delegateByBridgeMethods;
+    return delegateMethodBindingsByBridgeMethodBinding;
   }
 
   /**
