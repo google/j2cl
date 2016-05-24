@@ -24,8 +24,18 @@ Throwable.prototype.m_constructJavaStackTrace_$p_java_lang_Throwable =
 };
 
 /**
- * @param {*} e
- * @return {*}
+ * @param {?string} msg
+ * @return {Error}
+ * @public
+ */
+Throwable.prototype.m_createError__java_lang_String_$pp_java_lang =
+    function(msg) {
+  return new Error(msg);
+};
+
+/**
+ * @param {Error} e
+ * @return {Error}
  * @public
  */
 Throwable.m_fixIE__java_lang_Object_$p_java_lang_Throwable = function(e) {
