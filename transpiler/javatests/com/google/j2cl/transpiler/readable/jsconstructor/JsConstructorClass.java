@@ -129,4 +129,26 @@ public class JsConstructorClass {
    * Subclass of a JsType class with default constructor.
    */
   public static class H extends G {}
+
+  public static class Varargs extends A {
+    @JsConstructor
+    public Varargs(int... args) {
+      super(args[1]);
+    }
+  }
+
+  public static class SubVarargs extends Varargs {
+    public SubVarargs(Object i, int... args) {
+      super(args);
+    }
+
+    public SubVarargs(int j) {
+      this(new Object(), j);
+    }
+
+    static void subNativeInvocation() {
+      SubVarargs s1 = new SubVarargs(2);
+      SubVarargs s2 = new SubVarargs(new Object(), 1, 2, 3);
+    }
+  }
 }

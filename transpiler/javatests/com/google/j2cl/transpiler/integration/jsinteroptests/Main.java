@@ -156,11 +156,11 @@ public class Main {
 
   public static void runJsTypeVarargsTest() {
     JsTypeVarargsTest test = new JsTypeVarargsTest();
-    // test.testVarargsCall_constructors();
+    test.testVarargsCall_constructors();
     test.testVarargsCall_fromJavaScript();
     test.testVarargsCall_jsFunction();
     test.testVarargsCall_regularMethods();
-    // test.testVarargsCall_superCalls();
-    // test.testVarargsCall_sideEffectingInstance();
+    test.testVarargsCall_superCalls();
+    test.testVarargsCall_sideEffectingInstance();
   }
 }

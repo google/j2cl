@@ -71,7 +71,7 @@ public class NewInstance extends Invocation {
 
   @Override
   Builder newBuilder() {
-    return new Builder();
+    return new Builder(this);
   }
 
   @Override
@@ -87,7 +87,7 @@ public class NewInstance extends Invocation {
    */
   public static class Builder extends Invocation.Builder {
     public static Builder from(NewInstance newInstance) {
-      return (Builder) Invocation.Builder.from(newInstance);
+      return new Builder(newInstance);
     }
 
     @Override
@@ -96,6 +96,10 @@ public class NewInstance extends Invocation {
         MethodDescriptor methodDescriptor,
         List<Expression> arguments) {
       return new NewInstance(qualifierExpression, methodDescriptor, arguments);
+    }
+    
+    private Builder(NewInstance newInstance) {
+      super(newInstance);
     }
   }
 }

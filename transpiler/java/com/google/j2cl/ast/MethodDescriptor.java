@@ -146,7 +146,7 @@ public abstract class MethodDescriptor extends Node implements Member {
    * to re-examine it after we import JsInteropRestrictionChecker and do refactoring on the AST.
    */
   public boolean isJsMethodVarargs() {
-    return isVarargs() && ((isJsMethod() && !isJsOverlay()) || isJsFunction());
+    return isVarargs() && ((isJsMethod() && !isJsOverlay()) || isJsFunction() || isConstructor());
   }
 
   public boolean isJsConstructor() {

@@ -28,6 +28,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.ForStatement;
+import com.google.j2cl.ast.Invocation;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
@@ -198,17 +199,17 @@ public class NormalizeJsVarargs extends AbstractRewriter {
    */
   private static class NormalizeVarargsJsMethodCallsVisitor extends AbstractRewriter {
     @Override
-    public Node rewriteMethodCall(MethodCall methodCall) {
-      MethodDescriptor target = methodCall.getTarget();
+    public Node rewriteInvocation(Invocation invocation) {
+      MethodDescriptor target = invocation.getTarget();
       if (!target.isJsMethodVarargs()) {
-        return methodCall;
+        return invocation;
       }
-      Expression lastArgument = Iterables.getLast(methodCall.getArguments());
+      Expression lastArgument = Iterables.getLast(invocation.getArguments());
 
       // If the last argument is an array literal, or an array creation with array literal,
       // unwrap array literal, and pass the unwrapped arguments directly.
       if (lastArgument instanceof ArrayLiteral) {
-        return MethodCall.Builder.from(methodCall)
+        return MethodCall.Builder.from(invocation)
             .replaceVarargsArgument(((ArrayLiteral) lastArgument).getValueExpressions())
             .build();
       }
@@ -216,7 +217,7 @@ public class NormalizeJsVarargs extends AbstractRewriter {
       if (lastArgument instanceof NewArray) {
         ArrayLiteral arrayLiteral = ((NewArray) lastArgument).getArrayLiteral();
         if (arrayLiteral != null) {
-          return MethodCall.Builder.from(methodCall)
+          return MethodCall.Builder.from(invocation)
               .replaceVarargsArgument(arrayLiteral.getValueExpressions())
               .build();
         }
@@ -244,7 +245,7 @@ public class NormalizeJsVarargs extends AbstractRewriter {
 
       MethodCall nullToEmpty =
           MethodCall.createMethodCall(null, nullToEmptyDescriptor, lastArgument);
-      return MethodCall.Builder.from(methodCall)
+      return MethodCall.Builder.from(invocation)
           .replaceVarargsArgument(
               new PrefixExpression(returnType, nullToEmpty, PrefixOperator.SPREAD))
           .build();

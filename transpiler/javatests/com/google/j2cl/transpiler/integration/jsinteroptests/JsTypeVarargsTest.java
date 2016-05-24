@@ -32,43 +32,47 @@ public class JsTypeVarargsTest extends MyTestCase {
   @JsType(isNative = true, namespace = GLOBAL, name = "Object")
   static class NativeJsType {}
 
-  //  @JsType(isNative = true, namespace = GLOBAL,
-  //      name = "JsTypeVarargsTest_MyNativeJsTypeVarargsConstructor")
-  //  static class NativeJsTypeWithVarargsConstructor {
-  //    public Object a;
-  //    public int b;
-  //    NativeJsTypeWithVarargsConstructor(int i, Object... args) { }
-  //  }
-  //
-  //  static class SubclassNativeWithVarargsConstructor extends NativeJsTypeWithVarargsConstructor {
-  //    SubclassNativeWithVarargsConstructor(String s, Object... args) {
-  //      super(1, args[0], args[1], null);
-  //    }
-  //
-  //    SubclassNativeWithVarargsConstructor(int i, Object... args) {
-  //      super(i, args);
-  //    }
-  //
-  //    @JsMethod
-  //    Object varargsMethod(int i, Object... args) {
-  //      return args[i];
-  //    }
-  //  }
-  //
-  //  static class SubSubclassNativeWithVarargsConstructor
-  //      extends SubclassNativeWithVarargsConstructor {
-  //    SubSubclassNativeWithVarargsConstructor() {
-  //      super(0, null);
-  //    }
-  //
-  //    Object varargsMethod(int i, Object... args) {
-  //      return super.varargsMethod(i, args);
-  //    }
-  //
-  //    Object nonJsVarargsMethod() {
-  //      return super.varargsMethod(1, null ,this);
-  //    }
-  //  }
+  @JsType(
+    isNative = true,
+    namespace = "test.foo",
+    name = "JsTypeVarargsTest_MyNativeJsTypeVarargsConstructor"
+  )
+  static class NativeJsTypeWithVarargsConstructor {
+    public Object a;
+    public int b;
+
+    NativeJsTypeWithVarargsConstructor(int i, Object... args) {}
+  }
+
+  static class SubNativeWithVarargsConstructor extends NativeJsTypeWithVarargsConstructor {
+    SubNativeWithVarargsConstructor(String s, Object... args) {
+      this(1, args[0], args[1], null);
+    }
+
+    SubNativeWithVarargsConstructor(int i, Object... args) {
+      super(i, args);
+    }
+
+    @JsMethod
+    Object varargsMethod(int i, Object... args) {
+      return args[i];
+    }
+  }
+
+  static class SubSubNativeWithVarargsConstructor extends SubNativeWithVarargsConstructor {
+    SubSubNativeWithVarargsConstructor() {
+      super(0, new Object());
+    }
+
+    @Override
+    Object varargsMethod(int i, Object... args) {
+      return super.varargsMethod(i, args);
+    }
+
+    Object nonJsVarargsMethod() {
+      return super.varargsMethod(1, null, this);
+    }
+  }
 
   public void testVarargsCall_regularMethods() {
     // pass multiple args
@@ -101,30 +105,30 @@ public class JsTypeVarargsTest extends MyTestCase {
     assertEquals(3, varargsMethod4(1, "A", "B", "C").length);
   }
 
-  //  public void testVarargsCall_constructors() {
-  //    NativeJsType someNativeObject = new NativeJsType();
-  //    NativeJsTypeWithVarargsConstructor object =
-  //        new NativeJsTypeWithVarargsConstructor(1, someNativeObject, null);
-  //
-  //    assertSame(someNativeObject, object.a);
-  //    assertEquals(3, object.b);
-  //
-  //    Object[] params = new Object[] { someNativeObject, null };
-  //    object = new NativeJsTypeWithVarargsConstructor(1, params);
-  //
-  //    assertSame(someNativeObject, object.a);
-  //    assertEquals(3, object.b);
-  //
-  //    object = new SubclassNativeWithVarargsConstructor("", someNativeObject, null);
-  //
-  //    assertSame(someNativeObject, object.a);
-  //    assertEquals(4, object.b);
-  //
-  //    object = new SubclassNativeWithVarargsConstructor(1, someNativeObject, null);
-  //
-  //    assertSame(someNativeObject, object.a);
-  //    assertEquals(3, object.b);
-  //  }
+  public void testVarargsCall_constructors() {
+    NativeJsType someNativeObject = new NativeJsType();
+    NativeJsTypeWithVarargsConstructor object =
+        new NativeJsTypeWithVarargsConstructor(1, someNativeObject, null);
+
+    assertSame(someNativeObject, object.a);
+    assertEquals(3, object.b);
+
+    Object[] params = new Object[] {someNativeObject, null};
+    object = new NativeJsTypeWithVarargsConstructor(1, params);
+
+    assertSame(someNativeObject, object.a);
+    assertEquals(3, object.b);
+
+    object = new SubNativeWithVarargsConstructor("", someNativeObject, null);
+
+    assertSame(someNativeObject, object.a);
+    assertEquals(4, object.b);
+
+    object = new SubNativeWithVarargsConstructor(1, someNativeObject, null);
+
+    assertSame(someNativeObject, object.a);
+    assertEquals(3, object.b);
+  }
 
   @JsMethod
   public static Double sumAndMultiply(Double multiplier, Double... numbers) {
@@ -185,25 +189,25 @@ public class JsTypeVarargsTest extends MyTestCase {
     assertSame(null, function.f(1, null, null, function, null));
   }
 
-  //  public void testVarargsCall_superCalls() {
-  //    SubSubclassNativeWithVarargsConstructor object =
-  //        new SubSubclassNativeWithVarargsConstructor();
-  //    assertSame(object, object.nonJsVarargsMethod());
-  //    assertSame(object, object.varargsMethod(1, null, object, null));
-  //  }
-  //
-  //  private static int sideEffectCount;
-  //  private SubclassNativeWithVarargsConstructor doSideEffect(
-  //      SubclassNativeWithVarargsConstructor obj) {
-  //    sideEffectCount++;
-  //    return obj;
-  //  }
-  //  public void testVarargsCall_sideEffectingInstance() {
-  //    SubclassNativeWithVarargsConstructor object =
-  //        new SubclassNativeWithVarargsConstructor(0, null);
-  //    sideEffectCount = 0;
-  //    Object[] params = new Object[] { object, null };
-  //    assertSame(object, doSideEffect(object).varargsMethod(0, params));
-  //    assertSame(1, sideEffectCount);
-  //  }
+  public void testVarargsCall_superCalls() {
+    SubSubNativeWithVarargsConstructor object = new SubSubNativeWithVarargsConstructor();
+    assertSame(object, object.nonJsVarargsMethod());
+    assertSame(object, object.varargsMethod(1, null, object, null));
+  }
+
+  private static int sideEffectCount;
+
+  private SubNativeWithVarargsConstructor doSideEffect(SubNativeWithVarargsConstructor obj) {
+    sideEffectCount++;
+    return obj;
+  }
+
+  public void testVarargsCall_sideEffectingInstance() {
+    Object arg = new Object();
+    SubNativeWithVarargsConstructor object = new SubNativeWithVarargsConstructor(0, arg);
+    sideEffectCount = 0;
+    Object[] params = new Object[] {object, null};
+    assertSame(object, doSideEffect(object).varargsMethod(0, params));
+    assertSame(1, sideEffectCount);
+  }
 }

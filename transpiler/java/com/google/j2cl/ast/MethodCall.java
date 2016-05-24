@@ -92,7 +92,7 @@ public class MethodCall extends Invocation {
 
   @Override
   Builder newBuilder() {
-    return new Builder();
+    return new Builder(this);
   }
 
   @Override
@@ -110,9 +110,7 @@ public class MethodCall extends Invocation {
     private boolean isStaticDispatch;
 
     public static Builder from(MethodCall methodCall) {
-      Builder builder = (Builder) Invocation.Builder.from(methodCall);
-      builder.isStaticDispatch = methodCall.isStaticDispatch();
-      return builder;
+      return new Builder(methodCall);
     }
 
     public Builder setIsStaticDispatch(boolean isStaticDispatch) {
@@ -128,6 +126,9 @@ public class MethodCall extends Invocation {
       return new MethodCall(qualifierExpression, methodDescriptor, arguments, isStaticDispatch);
     }
 
-    private Builder() {}
+    private Builder(MethodCall methodCall) {
+      super(methodCall);
+      this.isStaticDispatch = methodCall.isStaticDispatch();
+    }
   }
 }

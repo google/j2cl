@@ -54,11 +54,7 @@ public abstract class Invocation extends Expression implements MemberReference {
     private List<Expression> arguments = new ArrayList<>();
 
     public static Builder from(Invocation invocation) {
-      Builder builder = invocation.newBuilder();
-      builder.qualifierExpression = invocation.getQualifier();
-      builder.methodDescriptor = invocation.getTarget();
-      builder.arguments = Lists.newArrayList(invocation.getArguments());
-      return builder;
+      return invocation.newBuilder();
     }
 
     public Builder setArguments(List<Expression> arguments) {
@@ -141,5 +137,11 @@ public abstract class Invocation extends Expression implements MemberReference {
         Expression qualifierExpression,
         MethodDescriptor finalMethodDescriptor,
         List<Expression> finalArguments);
+    
+    protected Builder(Invocation invocation) {
+      this.qualifierExpression = invocation.getQualifier();
+      this.methodDescriptor = invocation.getTarget();
+      this.arguments = Lists.newArrayList(invocation.getArguments());
+    }
   }
 }

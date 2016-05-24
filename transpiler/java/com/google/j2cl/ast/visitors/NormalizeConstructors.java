@@ -29,7 +29,6 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JsInfo;
-import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
@@ -47,7 +46,6 @@ import com.google.j2cl.ast.Visibility;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -63,7 +61,7 @@ public class NormalizeConstructors {
    * This pass transforms Java constructors into methods with the $ctor prefix, and synthesizes a
    * single constructor per class (which will end up being the actual Javascript ES6 constructor).
    * The process is done in three stages:
-   * <p>1) Synthesize the primary (an only) constructor that will be emitted in the output.
+   * <p>1) Synthesize the primary (and only) constructor that will be emitted in the output.
    * <p>2) Remove calls to super to from these constructors (which will be transformed into ctor
    * methods) since super will be called by the primary constructor instead.
    * <p>3) Rewrite Java constructors as simple methods with the $ctor prefix and update references
@@ -194,7 +192,6 @@ public class NormalizeConstructors {
         methodBuilder.setParameterOptional(i, method.isParameterOptional(i));
       }
       return methodBuilder.build();
-
     }
 
     @Override
@@ -213,20 +210,12 @@ public class NormalizeConstructors {
   private static Method synthesizeJsConstructor(JavaType javaType) {
     Method primaryConstructor = checkNotNull(AstUtils.getPrimaryConstructor(javaType));
     MethodCall superConstructorInvocation = AstUtils.getConstructorInvocation(primaryConstructor);
+    checkArgument(
+        superConstructorInvocation == null
+            || superConstructorInvocation.getTarget().getEnclosingClassTypeDescriptor()
+                == javaType.getSuperTypeDescriptor());
 
     List<Statement> body = AstUtils.generateFieldDeclarations(javaType);
-
-    MethodDescriptor.Builder builder =
-        MethodDescriptor.Builder.fromDefault()
-            .setIsConstructor(true)
-            .setJsInfo(JsInfo.create(JsMemberType.CONSTRUCTOR, "constructor", null, false))
-            .setVisibility(Visibility.PUBLIC)
-            .setEnclosingClassTypeDescriptor(javaType.getDescriptor());
-    for (Variable typeParameter : primaryConstructor.getParameters()) {
-      builder.addParameter(typeParameter.getTypeDescriptor());
-    }
-    MethodDescriptor constructorDescriptor = builder.build();
-    List<Variable> constructorParameters = primaryConstructor.getParameters();
 
     // Must call the corresponding the $ctor method.
     MethodDescriptor ctorDescriptor =
@@ -243,20 +232,25 @@ public class NormalizeConstructors {
     MethodCall ctorCall = MethodCall.createMethodCall(null, ctorDescriptor, arguments);
     body.add(new ExpressionStatement(ctorCall));
 
-    List<Expression> superArguments = Collections.emptyList();
-    List<TypeDescriptor> superArgumentTypes = Collections.emptyList();
-    // Note that the super call arguments empty if this @JsConstructor class is a subclass of a
+    // Note that the super call arguments are empty if this @JsConstructor class is a subclass of a
     // regular Java class.  Otherwise we get the arguments from the primary constructor.  Also
     // note that the super call may be null if the super constructor was native.
-    if (superConstructorInvocation != null
-        && javaType.getSuperTypeDescriptor().isOrSubclassesJsConstructorClass()) {
-      superArguments = superConstructorInvocation.getArguments();
-      superArgumentTypes = superConstructorInvocation.getTarget().getParameterTypeDescriptors();
+    // TODO: We should verify that these nodes are not being referenced multiple times in the AST.
+    if (superConstructorInvocation == null
+        || !javaType.getSuperTypeDescriptor().isOrSubclassesJsConstructorClass()) {
+      superConstructorInvocation = synthesizeEmptySuperCall(javaType.getSuperTypeDescriptor());
     }
-    MethodCall jsSuperCall =
-        synthesizeSuperCall(javaType.getSuperTypeDescriptor(), superArgumentTypes, superArguments);
-    body.add(0, new ExpressionStatement(jsSuperCall));
+    body.add(0, new ExpressionStatement(superConstructorInvocation));
 
+    MethodDescriptor.Builder builder =
+        MethodDescriptor.Builder.from(primaryConstructor.getDescriptor())
+            .setVisibility(Visibility.PUBLIC);
+    for (Variable typeParameter : primaryConstructor.getParameters()) {
+      builder.addParameter(typeParameter.getTypeDescriptor());
+    }
+    MethodDescriptor constructorDescriptor = builder.build();
+
+    List<Variable> constructorParameters = primaryConstructor.getParameters();
     Method.Builder constructorBuilder =
         Method.Builder.fromDefault()
             .setMethodDescriptor(constructorDescriptor)
@@ -279,12 +273,7 @@ public class NormalizeConstructors {
 
     if (javaType.getDescriptor().getSuperTypeDescriptor() != null) {
       body.add(
-          0,
-          new ExpressionStatement(
-              synthesizeSuperCall(
-                  javaType.getSuperTypeDescriptor(),
-                  Collections.<TypeDescriptor>emptyList(),
-                  Collections.<Expression>emptyList())));
+          0, new ExpressionStatement(synthesizeEmptySuperCall(javaType.getSuperTypeDescriptor())));
     }
 
     MethodDescriptor constructorDescriptor =
@@ -302,20 +291,15 @@ public class NormalizeConstructors {
   }
 
   /**
-   * Synthesizes a super method call to the only constructor.
+   * Synthesizes a method descriptor for a "super" call to the constructor.
    */
-  private static MethodCall synthesizeSuperCall(
-      TypeDescriptor superType,
-      List<TypeDescriptor> superArgumentTypes,
-      List<Expression> superArguments) {
-    MethodDescriptor jsSuperDescriptor =
+  private static MethodCall synthesizeEmptySuperCall(TypeDescriptor superType) {
+    MethodDescriptor superDescriptor =
         MethodDescriptor.Builder.fromDefault()
-            .setParameterTypeDescriptors(superArgumentTypes)
             .setEnclosingClassTypeDescriptor(superType)
-            .setJsInfo(JsInfo.create(JsMemberType.CONSTRUCTOR, "super", null, false))
             .setIsConstructor(true)
             .build();
-    return MethodCall.createMethodCall(null, jsSuperDescriptor, superArguments);
+    return MethodCall.createMethodCall(null, superDescriptor);
   }
 
   /**
@@ -428,6 +412,7 @@ public class NormalizeConstructors {
               .setDeclarationMethodDescriptor(javascriptConstructorDeclaration)
               .setParameterTypeDescriptors(
                   constructorInvocation.getTarget().getParameterTypeDescriptors())
+              .setIsVarargs(constructorInvocation.getTarget().isVarargs())
               .build();
     }
 
@@ -481,12 +466,14 @@ public class NormalizeConstructors {
   private static Method originalContructorBodyMethod(Method primaryConstructor) {
     TypeDescriptor enclosingType =
         primaryConstructor.getDescriptor().getEnclosingClassTypeDescriptor();
+    
     MethodDescriptor javascriptConstructor =
         MethodDescriptor.Builder.fromDefault()
             .setEnclosingClassTypeDescriptor(enclosingType)
             .setIsConstructor(true)
             .setReturnTypeDescriptor(TypeDescriptors.get().primitiveVoid)
             .setVisibility(Visibility.PRIVATE)
+            .setIsVarargs(primaryConstructor.getDescriptor().isVarargs())
             .build();
 
     // $instance.$ctor...();
