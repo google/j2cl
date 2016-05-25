@@ -48,15 +48,15 @@ def get_or_default(key, map, default):
 
 
 def generate_zip(name, srcs, pkg):
-  """Generates a zip target with given srcs. See j2cl_library for details of pkg handling"""
+  """Generates a zip target with given srcs.
+
+  See j2cl_library for details of pkg handling
+  """
   # Exit early to avoid parse errors when running under bazel
   if not hasattr(native, "genzip"):
     return
 
-  native.genzip(
-      name=name,
-      deps=[name + "_pkg_library"],
-  )
+  native.genzip(name=name, deps=[name + "_pkg_library"],)
 
   if pkg == "RELATIVE":
     flatten = 0
@@ -84,22 +84,30 @@ def generate_zip(name, srcs, pkg):
   )
 
 
-J2CL_BINARY_DEFS = [
-    "--collapse_properties", # optimize to work around b/25512693
+# Can't disable property renaming with a simple override because of
+# Blaze bug b/28770521.
+def make_output_readable(flags):
+  new_flags = [flag for flag in flags if flag != "--variable_renaming=ALL"]
+  return new_flags + [
+      "--property_renaming=OFF",
+      "--pretty_print",
+  ]
+
+
+load("/javascript/closure/builddefs", "CLOSURE_COMPILER_FLAGS_FULL_TYPED")
+load("/javascript/tools/jscompiler/builddefs/flags",
+     "ADVANCED_OPTIMIZATIONS_FLAGS")
+
+J2CL_UNOPTIMIZED_DEFS = [
     "--j2cl_pass",
     "--language_in=ECMASCRIPT6_STRICT",
     "--language_out=ECMASCRIPT5",
+]
+
+J2CL_OPTIMIZED_DEFS = (J2CL_UNOPTIMIZED_DEFS + CLOSURE_COMPILER_FLAGS_FULL_TYPED
+                       + ADVANCED_OPTIMIZATIONS_FLAGS)
+
+# TODO(28940369): convert to optimized defs.
+J2CL_TEST_DEFS = make_output_readable(J2CL_UNOPTIMIZED_DEFS + [
     "--export_test_functions=true",
-    "--strict",
-    "--pretty_print",
-    "--property_renaming=OFF",
-    "--variable_renaming=OFF",
-    "--jscomp_off=checkTypes",
-    "--jscomp_off=duplicateZipContents",
-    "--jscomp_off=undefinedVars",
-]
-
-
-J2CL_TEST_DEFS = J2CL_BINARY_DEFS + [
-    "--define=goog.testing.jsunit.AUTO_RUN_ONLOAD=false",
-]
+])

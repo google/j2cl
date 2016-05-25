@@ -11,6 +11,7 @@ load("//build_def:j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt")
 
 j2cl_mirror_from_gwt(
     name = "emul_tests_lib",
+    generate_build_test = False,
     mirrored_files = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_test"],
     deps = [
         "//jre/java:gwt-jsinterop-annotations",

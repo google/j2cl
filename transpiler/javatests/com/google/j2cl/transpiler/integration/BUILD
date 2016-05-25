@@ -9,7 +9,7 @@
 package(default_visibility = ["//:__subpackages__"])
 
 load("/tools/build_rules/build_test", "build_test")
-load("/javascript/closure/builddefs", "CLOSURE_COMPILER_FLAGS_FULL_TYPED")
+load("/third_party/java_src/j2cl/build_def/j2cl_util", "J2CL_OPTIMIZED_DEFS")
 
 # Google owns the copyright
 licenses(["unencumbered"])
@@ -126,12 +126,7 @@ js_binary(
     name = "integration_binary",
     compile = 1,
     compiler = "//javascript/tools/jscompiler:head",
-    defs = CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
-        "--j2cl_pass",
-        "--language_in=ECMASCRIPT6_STRICT",
-        "--language_out=ECMASCRIPT5",
-        "--strict",
-        "--remove_unused_constructor_properties=ON",
+    defs = J2CL_OPTIMIZED_DEFS + [
         "--conformance_config=conformance_proto.txt",
         # TODO(michaelthomas): Enable once all errors are fixed. Yes, seriously.
         # "--jscomp_error=reportUnknownTypes",

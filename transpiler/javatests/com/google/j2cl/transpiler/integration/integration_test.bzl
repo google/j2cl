@@ -19,21 +19,12 @@ integration_test(
 
 """
 
-load("/javascript/closure/builddefs", "CLOSURE_COMPILER_FLAGS_FULL_TYPED")
-load("/javascript/tools/jscompiler/builddefs/flags", "ADVANCED_OPTIMIZATIONS_FLAGS")
+load("/third_party/java_src/j2cl/build_def/j2cl_util", "J2CL_UNOPTIMIZED_DEFS",
+     "J2CL_OPTIMIZED_DEFS", "J2CL_TEST_DEFS", "make_output_readable")
 load("/third_party/java/j2cl/j2cl_library", "j2cl_library")
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_package")
 load("/tools/build_defs/label/def", "absolute_label")
 
-# Copy the Closure flags but remove --variable_renaming=ALL since it interferes
-# with tests and can't be turned off.
-# TODO: centralize these in j2cl_util.bzl
-PREDEFINED_FLAGS = [
-    flag
-    for flag in (CLOSURE_COMPILER_FLAGS_FULL_TYPED +
-                 ADVANCED_OPTIMIZATIONS_FLAGS)
-    if flag != "--variable_renaming=ALL"
-]
 
 def integration_test(
     name, srcs=[], deps=[], defs=[], native_srcs=[],
@@ -106,12 +97,8 @@ def integration_test(
   native.js_binary(
       name="optimized_js",
       srcs=["OptHarness.js"],
-      defs=PREDEFINED_FLAGS + [
-          "--j2cl_pass",
-          "--language_in=ECMASCRIPT6_STRICT",
-          "--language_out=ECMASCRIPT5",
+      defs=J2CL_OPTIMIZED_DEFS + [
           "--norewrite_polyfills",
-          "--variable_renaming=ALL",
           "--closure_entry_point=gen.opt.Harness",
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
@@ -122,16 +109,10 @@ def integration_test(
   native.js_binary(
       name="readable_optimized_js",
       srcs=["OptHarness.js"],
-      defs=PREDEFINED_FLAGS + [
-          "--j2cl_pass",
-          "--language_in=ECMASCRIPT6_STRICT",
-          "--language_out=ECMASCRIPT5",
+      defs=make_output_readable(J2CL_OPTIMIZED_DEFS + [
           "--norewrite_polyfills",
-          "--pretty_print",
-          "--property_renaming=OFF",
-          "--variable_renaming=OFF",
           "--closure_entry_point=gen.opt.Harness",
-      ] + defs,
+      ] + defs),
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
       deps=srcs_lib_dep,
@@ -140,14 +121,7 @@ def integration_test(
   native.js_binary(
       name="readable_unoptimized_js",
       srcs=["OptHarness.js"],
-      defs=[
-          "--j2cl_pass",
-          "--language_in=ECMASCRIPT6_STRICT",
-          "--language_out=ECMASCRIPT5",
-          "--pretty_print",
-          "--property_renaming=OFF",
-          "--variable_renaming=OFF",
-      ] + defs,
+      defs=make_output_readable(J2CL_UNOPTIMIZED_DEFS + defs),
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
       deps=srcs_lib_dep,
@@ -263,17 +237,8 @@ def integration_test(
       srcs=["TestHarness.js"],
       compile=1,
       compiler="//javascript/tools/jscompiler:head",
-      defs=PREDEFINED_FLAGS + [
-          "--j2cl_pass",
-          "--export_test_functions=true",
-          "--language_in=ECMASCRIPT6_STRICT",
-          "--language_out=ECMASCRIPT5",
-          "--property_renaming=OFF",
-          "--pretty_print",
-          "--norewrite_polyfills",
-          "--strict",
-          "--variable_renaming=OFF",
-          "--closure_entry_point=gen.test.Harness",
+      defs=J2CL_TEST_DEFS + [
+          "--closure_entry_point=gen.test.Harness"
       ] + defs,
       deps=[
           ":" + name,

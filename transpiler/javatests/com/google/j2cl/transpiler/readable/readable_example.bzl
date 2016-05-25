@@ -14,13 +14,13 @@ readable_example(
 """
 
 
-load("/javascript/closure/builddefs", "CLOSURE_COMPILER_FLAGS_FULL_TYPED")
+load("/third_party/java_src/j2cl/build_def/j2cl_util", "J2CL_OPTIMIZED_DEFS")
 load("/third_party/java/j2cl/j2cl_library", "j2cl_library")
 
 
 def readable_example(
     name, srcs, native_srcs=[], native_srcs_pkg=None, deps=[], js_deps=[],
-    plugins=[], _declare_legacy_namespace=False, generate_build_test=None):
+    plugins=[], _declare_legacy_namespace=False):
   """Macro that confirms the JS compilability of some transpiled Java.
 
   deps are Labels of j2cl_library() rules. NOT labels of
@@ -31,7 +31,7 @@ def readable_example(
   j2cl_library(
       name=name,
       srcs=srcs,
-      generate_build_test=generate_build_test,
+      generate_build_test=False,
       javacopts=[
           "-source 8",
           "-target 8"
@@ -48,15 +48,7 @@ def readable_example(
   # Verify compilability of generated JS.
   native.js_binary(
       name=name + "_binary",
-      defs=CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
-          "--j2cl_pass",
-          "--language_in=ECMASCRIPT6_STRICT",
-          "--language_out=ECMASCRIPT5",
-          "--remove_dead_code",
-          "--remove_unused_vars",
-          "--remove_unused_local_vars=ON",
-          "--remove_dead_assignments",
-      ],
+      defs=J2CL_OPTIMIZED_DEFS,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
       deps=[":" + name],
