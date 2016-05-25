@@ -32,7 +32,9 @@ import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
 import com.google.j2cl.generator.visitors.ImportUtils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Generates JavaScript source impl files.
@@ -122,12 +124,20 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sb.newLine();
 
     // goog.require(...) for eager imports.
+    Map<String, String> aliasesByPath = new HashMap<>();
     List<Import> eagerImports = ImportUtils.sortedList(importsByCategory.get(ImportCategory.EAGER));
     if (!eagerImports.isEmpty()) {
       for (Import eagerImport : eagerImports) {
         String alias = eagerImport.getAlias();
         String path = eagerImport.getImplModulePath();
-        sb.appendln("let %s = goog.require('%s');", alias, path);
+        String previousAlias = aliasesByPath.get(path);
+        if (previousAlias == null) {
+          sb.appendln("let %s = goog.require('%s');", alias, path);
+          aliasesByPath.put(path, alias);
+        } else {
+          // Do not goog.require second time to avoid JsCompiler warnings.
+          sb.appendln("let %s = %s;", alias, previousAlias);
+        }
       }
       sb.newLine();
     }
@@ -473,10 +483,18 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sb.appendln("%s.$clinit = function() {};", className);
     }
     // goog.module.get(...) for lazy imports.
+    Map<String, String> aliasesByPath = new HashMap<>();
     for (Import lazyImport : ImportUtils.sortedList(importsByCategory.get(ImportCategory.LAZY))) {
       String alias = lazyImport.getAlias();
       String path = lazyImport.getImplModulePath();
-      sb.appendln("%s = goog.module.get('%s');", alias, path);
+      String previousAlias = aliasesByPath.get(path);
+      if (previousAlias == null) {
+        sb.appendln("%s = goog.module.get('%s');", alias, path);
+        aliasesByPath.put(path, alias);
+      } else {
+        // Do not goog.require second time to avoid JsCompiler warnings.
+        sb.appendln("%s = %s;", alias, previousAlias);
+      }
     }
     if (GeneratorUtils.hasNonNativeSuperClass(javaType)) {
       // call the super class $clinit.

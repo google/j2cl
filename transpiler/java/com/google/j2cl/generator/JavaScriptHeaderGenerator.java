@@ -23,6 +23,9 @@ import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
 import com.google.j2cl.generator.visitors.ImportUtils;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Generates JavaScript source header files.
  */
@@ -59,17 +62,22 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     sb.appendln("// Imports headers for both eager and lazy dependencies to ensure that");
     sb.appendln("// all files are included in the dependency tree.");
 
+    Set<String> requiredPaths = new HashSet<>();
     // goog.require(...) for eager imports.
     for (Import eagerImport : ImportUtils.sortedList(importsByCategory.get(ImportCategory.EAGER))) {
       String alias = eagerImport.getAlias();
       String path = eagerImport.getHeaderModulePath();
-      sb.appendln("let _%s = goog.require('%s');", alias, path);
+      if (requiredPaths.add(path)) {
+        sb.appendln("let _%s = goog.require('%s');", alias, path);
+      }
     }
     // goog.require(...) for lazy imports.
     for (Import eagerImport : ImportUtils.sortedList(importsByCategory.get(ImportCategory.LAZY))) {
       String alias = eagerImport.getAlias();
       String path = eagerImport.getHeaderModulePath();
-      sb.appendln("let _%s = goog.require('%s');", alias, path);
+      if (requiredPaths.add(path)) {
+        sb.appendln("let _%s = goog.require('%s');", alias, path);
+      }
     }
     // externs imports are always available in the browser and don't need a header reference.
     sb.newLine();
