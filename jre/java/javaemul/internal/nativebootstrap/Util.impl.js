@@ -9,16 +9,22 @@ goog.module('nativebootstrap.Util$impl');
  */
 class Util {
   /**
-   * Generates and returns a unique id from a String.
+   * Return the value defined by a goog.define or the default value
+   * if it is not defined.
    *
-   * Closure compiler can optionally replace this function with
-   * some other strategy.
-   *
-   * @param {string} id
-   * @return {string}
+   * @param {string} name
+   * @param {?string=} opt_defaultValue
+   * @return {?string}
    * @public
    */
-  static $generateId(id) { return id; }
+  static $getDefine(name, opt_defaultValue) {
+    // Default the optional param. Note that we are not using the common
+    // 'opt_value || default_value' pattern otherwise that would replace
+    // empty string with null value.
+    var defaultValue = opt_defaultValue == null ? null : opt_defaultValue;
+    var rv = goog.getObjectByName(name);
+    return rv == null ? defaultValue : String(rv);
+  }
 
   /**
    * @param {*} ctor
