@@ -10,7 +10,6 @@ goog.module('com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNu
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let DefaultNonNullable = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
 
@@ -69,8 +68,6 @@ class DefaultNonNullable$MyFunction {
    * @public
    */
   static $clinit() {
-    DefaultNonNullable = goog.module.get(
-        'com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$impl');
     Class = goog.module.get('java.lang.Class$impl');
     String = goog.module.get('java.lang.String$impl');
   }

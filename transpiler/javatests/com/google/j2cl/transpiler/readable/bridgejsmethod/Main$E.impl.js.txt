@@ -12,7 +12,6 @@ let Main$B = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Ma
 let Main$J = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.J$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Main = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgejsmethod.Main$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
@@ -96,8 +95,6 @@ class Main$E extends Main$B {
    * @public
    */
   static $clinit() {
-    Main = goog.module.get(
-        'com.google.j2cl.transpiler.readable.bridgejsmethod.Main$impl');
     Class = goog.module.get('java.lang.Class$impl');
     String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');

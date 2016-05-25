@@ -11,7 +11,6 @@ goog.module('com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.$
 let CastToGenerics$Foo = goog.require('com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.Foo$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let CastToGenerics = goog.forwardDeclare('com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
@@ -73,8 +72,6 @@ class CastToGenerics$1 extends CastToGenerics$Foo {
    * @public
    */
   static $clinit() {
-    CastToGenerics = goog.module.get(
-        'com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics$impl');
     Class = goog.module.get('java.lang.Class$impl');
     CastToGenerics$Foo.$clinit();
   }

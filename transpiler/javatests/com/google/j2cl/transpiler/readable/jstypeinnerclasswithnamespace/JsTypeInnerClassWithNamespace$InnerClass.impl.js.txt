@@ -11,7 +11,6 @@ goog.module('bar.foo.baz.InnerClass$impl');
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let JsTypeInnerClassWithNamespace = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
@@ -71,8 +70,6 @@ class JsTypeInnerClassWithNamespace$InnerClass extends Object {
    * @public
    */
   static $clinit() {
-    JsTypeInnerClassWithNamespace = goog.module.get(
-        'com.google.j2cl.transpiler.readable.jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace$impl');
     Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }

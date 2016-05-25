@@ -12,7 +12,6 @@ let MultipleAbstractParents$AbstractList = goog.require('com.google.j2cl.transpi
 let MultipleAbstractParents$IStringList = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let MultipleAbstractParents = goog.forwardDeclare('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$impl');
 let MultipleAbstractParents$List = goog.forwardDeclare('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.List$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
@@ -91,8 +90,6 @@ class MultipleAbstractParents$AbstractStringList extends
    * @public
    */
   static $clinit() {
-    MultipleAbstractParents = goog.module.get(
-        'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$impl');
     MultipleAbstractParents$List = goog.module.get(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.List$impl');
     Class = goog.module.get('java.lang.Class$impl');

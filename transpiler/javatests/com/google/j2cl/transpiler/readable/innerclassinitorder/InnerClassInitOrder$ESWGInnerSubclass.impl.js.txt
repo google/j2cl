@@ -11,7 +11,6 @@ goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassI
 let InnerClassInitOrder$ESWGOuter$ESWGInner = goog.require('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let InnerClassInitOrder = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
 let InnerClassInitOrder$ESWGOuter = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
@@ -115,8 +114,6 @@ class InnerClassInitOrder$ESWGInnerSubclass extends
    * @public
    */
   static $clinit() {
-    InnerClassInitOrder = goog.module.get(
-        'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
     InnerClassInitOrder$ESWGOuter = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESWGOuter$impl');
     Class = goog.module.get('java.lang.Class$impl');

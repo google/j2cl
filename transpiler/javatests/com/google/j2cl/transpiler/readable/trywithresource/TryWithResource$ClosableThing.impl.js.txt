@@ -12,7 +12,6 @@ let AutoCloseable = goog.require('java.lang.AutoCloseable$impl');
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let TryWithResource = goog.forwardDeclare('com.google.j2cl.transpiler.readable.trywithresource.TryWithResource$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
@@ -81,8 +80,6 @@ class TryWithResource$ClosableThing extends Object {
    * @public
    */
   static $clinit() {
-    TryWithResource = goog.module.get(
-        'com.google.j2cl.transpiler.readable.trywithresource.TryWithResource$impl');
     Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }

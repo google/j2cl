@@ -10,7 +10,6 @@ goog.module('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTy
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let IntersectionType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionType$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
@@ -68,11 +67,7 @@ class IntersectionType$Getable {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {
-    IntersectionType = goog.module.get(
-        'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionType$impl');
-    Class = goog.module.get('java.lang.Class$impl');
-  }
+  static $clinit() { Class = goog.module.get('java.lang.Class$impl'); }
 };
 
 $Util.$setClassMetadataForInterface(

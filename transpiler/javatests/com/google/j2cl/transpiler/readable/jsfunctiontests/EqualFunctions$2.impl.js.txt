@@ -12,7 +12,6 @@ let EqualFunction = goog.require('com.google.j2cl.transpiler.readable.jsfunction
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let EqualFunctions = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 
@@ -106,8 +105,6 @@ class EqualFunctions$2 extends Object {
    * @public
    */
   static $clinit() {
-    EqualFunctions = goog.module.get(
-        'com.google.j2cl.transpiler.readable.jsfunctiontests.EqualFunctions$impl');
     Class = goog.module.get('java.lang.Class$impl');
     $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
     Object.$clinit();

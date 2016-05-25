@@ -12,7 +12,6 @@ let Entry = goog.require('com.google.j2cl.transpiler.readable.nobridgemethods.En
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let TreeMap = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
@@ -76,8 +75,6 @@ class TreeMap$InnerEntry extends Object {
    * @public
    */
   static $clinit() {
-    TreeMap = goog.module.get(
-        'com.google.j2cl.transpiler.readable.nobridgemethods.TreeMap$impl');
     Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }

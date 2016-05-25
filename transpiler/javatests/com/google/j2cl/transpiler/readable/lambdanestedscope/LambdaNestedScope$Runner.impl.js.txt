@@ -10,7 +10,6 @@ goog.module('com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedS
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let LambdaNestedScope = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Object = goog.forwardDeclare('java.lang.Object$impl');
 
@@ -70,8 +69,6 @@ class LambdaNestedScope$Runner {
    * @public
    */
   static $clinit() {
-    LambdaNestedScope = goog.module.get(
-        'com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope$impl');
     Class = goog.module.get('java.lang.Class$impl');
     Object = goog.module.get('java.lang.Object$impl');
   }

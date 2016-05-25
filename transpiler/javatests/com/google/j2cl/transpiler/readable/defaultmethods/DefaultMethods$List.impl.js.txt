@@ -10,7 +10,6 @@ goog.module('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.L
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let DefaultMethods = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
@@ -69,11 +68,7 @@ class DefaultMethods$List {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {
-    DefaultMethods = goog.module.get(
-        'com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$impl');
-    Class = goog.module.get('java.lang.Class$impl');
-  }
+  static $clinit() { Class = goog.module.get('java.lang.Class$impl'); }
 };
 
 $Util.$setClassMetadataForInterface(

@@ -11,7 +11,6 @@ goog.module('com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNu
 let ArrayList = goog.require('java.util.ArrayList$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let DefaultNonNullable = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
 let Iterable$$Overlay = goog.forwardDeclare('java.lang.Iterable.$Overlay$impl');
@@ -103,8 +102,6 @@ class DefaultNonNullable$StringList extends ArrayList {
    * @public
    */
   static $clinit() {
-    DefaultNonNullable = goog.module.get(
-        'com.google.j2cl.transpiler.readable.defaultnonnullable.DefaultNonNullable$impl');
     Class = goog.module.get('java.lang.Class$impl');
     Iterable = goog.module.get('java.lang.Iterable$impl');
     Iterable$$Overlay = goog.module.get('java.lang.Iterable.$Overlay$impl');

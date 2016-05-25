@@ -49,9 +49,9 @@ public class JavaType extends Node {
   private boolean isStatic;
   private boolean isLocal;
   private boolean isAbstract;
-  @Visitable @Nullable TypeDescriptor enclosingTypeDescriptor;
-  @Visitable @Nullable TypeDescriptor superTypeDescriptor;
-  @Visitable List<TypeDescriptor> superInterfaceTypeDescriptors = new ArrayList<>();
+  @Nullable TypeDescriptor enclosingTypeDescriptor;
+  @Nullable TypeDescriptor superTypeDescriptor;
+  List<TypeDescriptor> superInterfaceTypeDescriptors = new ArrayList<>();
   @Visitable TypeDescriptor typeDescriptor;
   @Visitable List<Field> fields = new ArrayList<>();
   @Visitable List<Method> methods = new ArrayList<>();

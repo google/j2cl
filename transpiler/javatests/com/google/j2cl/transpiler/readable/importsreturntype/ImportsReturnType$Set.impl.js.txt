@@ -11,7 +11,6 @@ goog.module('com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturn
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let ImportsReturnType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
@@ -74,8 +73,6 @@ class ImportsReturnType$Set extends Object {
    * @public
    */
   static $clinit() {
-    ImportsReturnType = goog.module.get(
-        'com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType$impl');
     Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }
