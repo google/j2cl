@@ -95,7 +95,6 @@ import org.eclipse.jdt.core.dom.BodyDeclaration;
 import org.eclipse.jdt.core.dom.EnumConstantDeclaration;
 import org.eclipse.jdt.core.dom.EnumDeclaration;
 import org.eclipse.jdt.core.dom.FieldDeclaration;
-import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
@@ -1845,7 +1844,6 @@ public class CompilationUnitBuilder {
       if (typeBinding == null) {
         return null;
       }
-      ITypeBinding superclassBinding = typeBinding.getSuperclass();
       Kind kind = JdtUtils.getKindFromTypeBinding(typeBinding);
       Visibility visibility = JdtBindingUtils.getVisibility(typeBinding);
       TypeDescriptor typeDescriptor = JdtUtils.createTypeDescriptor(typeBinding);
@@ -1854,31 +1852,6 @@ public class CompilationUnitBuilder {
               ? new AnonymousJavaType(kind, visibility, typeDescriptor)
               : new JavaType(kind, visibility, typeDescriptor);
 
-      type.setEnclosingTypeDescriptor(
-          JdtUtils.createTypeDescriptor(typeBinding.getDeclaringClass()));
-
-      if (superclassBinding != null) {
-        TypeDescriptor superTypeDescriptor =
-            JdtBindingUtils.createTypeDescriptorWithNullability(
-                superclassBinding,
-                new IAnnotationBinding[0],
-                JdtBindingUtils.getTypeDefaultNullability(typeBinding));
-        // The superclass is always non-nullable, however the type parameters might be, for example
-        // 'extends List<@Nullable String>'
-        superTypeDescriptor = TypeDescriptors.toNullable(superTypeDescriptor);
-        type.setSuperTypeDescriptor(superTypeDescriptor);
-      }
-
-      for (ITypeBinding superInterface : typeBinding.getInterfaces()) {
-        TypeDescriptor superInterfaceDescriptor =
-            JdtBindingUtils.createTypeDescriptorWithNullability(
-                superInterface,
-                new IAnnotationBinding[0],
-                JdtBindingUtils.getTypeDefaultNullability(typeBinding));
-        // The interface is always non-nullable, however type parameters might be.
-        superInterfaceDescriptor = TypeDescriptors.toNullable(superInterfaceDescriptor);
-        type.addSuperInterfaceDescriptor(superInterfaceDescriptor);
-      }
       type.setLocal(typeBinding.isLocal());
       type.setStatic(JdtBindingUtils.isStatic(typeBinding));
       type.setAbstract(JdtBindingUtils.isAbstract(typeBinding));

@@ -27,8 +27,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.annotation.Nullable;
-
 /**
  * A node that represents a Java Type declaration in the compilation unit.
  */
@@ -49,9 +47,6 @@ public class JavaType extends Node {
   private boolean isStatic;
   private boolean isLocal;
   private boolean isAbstract;
-  @Nullable TypeDescriptor enclosingTypeDescriptor;
-  @Nullable TypeDescriptor superTypeDescriptor;
-  List<TypeDescriptor> superInterfaceTypeDescriptors = new ArrayList<>();
   @Visitable TypeDescriptor typeDescriptor;
   @Visitable List<Field> fields = new ArrayList<>();
   @Visitable List<Method> methods = new ArrayList<>();
@@ -59,7 +54,7 @@ public class JavaType extends Node {
   @Visitable List<Block> staticInitializerBlocks = new ArrayList<>();
 
   // Used to store the original native type for a synthesized JsOverlyImpl type.
-  private TypeDescriptor nativeTypeDescriptor;
+  private TypeDescriptor overlayTypeDescriptor;
 
   public JavaType(Kind kind, Visibility visibility, TypeDescriptor typeDescriptor) {
     this.kind = kind;
@@ -166,16 +161,16 @@ public class JavaType extends Node {
 
   public TypeDescriptor getNativeTypeDescriptor() {
     Preconditions.checkArgument(
-        !(nativeTypeDescriptor != null && superTypeDescriptor != null),
+        overlayTypeDescriptor == null || typeDescriptor.getSuperTypeDescriptor() == null,
         "A JsInterop Overlay type should not have super class.");
-    return this.nativeTypeDescriptor;
+    return this.overlayTypeDescriptor;
   }
 
   public void setNativeTypeDescriptor(TypeDescriptor nativeTypeDescriptor) {
     Preconditions.checkArgument(
-        !(nativeTypeDescriptor != null && superTypeDescriptor != null),
+        nativeTypeDescriptor == null || typeDescriptor.getSuperTypeDescriptor() == null,
         "A JsInterop Overlay type should not have super class.");
-    this.nativeTypeDescriptor = nativeTypeDescriptor;
+    this.overlayTypeDescriptor = nativeTypeDescriptor;
   }
 
   public boolean isJsOverlayImpl() {
@@ -255,33 +250,18 @@ public class JavaType extends Node {
   }
 
   public TypeDescriptor getEnclosingTypeDescriptor() {
-    return enclosingTypeDescriptor;
-  }
-
-  public void setEnclosingTypeDescriptor(TypeDescriptor enclosingTypeDescriptor) {
-    this.enclosingTypeDescriptor = enclosingTypeDescriptor;
+    return typeDescriptor.getEnclosingTypeDescriptor();
   }
 
   public TypeDescriptor getSuperTypeDescriptor() {
     Preconditions.checkArgument(
-        !(nativeTypeDescriptor != null && superTypeDescriptor != null),
+        overlayTypeDescriptor == null || typeDescriptor.getSuperTypeDescriptor() == null,
         "A Java type with a SuperClass can't also be a JsInterop Overlay.");
-    return superTypeDescriptor;
-  }
-
-  public void setSuperTypeDescriptor(TypeDescriptor superTypeDescriptor) {
-    Preconditions.checkArgument(
-        !(nativeTypeDescriptor != null && superTypeDescriptor != null),
-        "A Java type with a SuperClass can't also be a JsInterop Overlay.");
-    this.superTypeDescriptor = superTypeDescriptor;
+    return typeDescriptor.getSuperTypeDescriptor();
   }
 
   public List<TypeDescriptor> getSuperInterfaceTypeDescriptors() {
-    return superInterfaceTypeDescriptors;
-  }
-
-  public void addSuperInterfaceDescriptor(TypeDescriptor superInterfaceTypeDescriptor) {
-    this.superInterfaceTypeDescriptors.add(superInterfaceTypeDescriptor);
+    return typeDescriptor.getInterfacesTypeDescriptors();
   }
 
   public TypeDescriptor getDescriptor() {

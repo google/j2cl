@@ -71,6 +71,9 @@ public class JdtBindingUtils {
       ITypeBinding typeBinding,
       IAnnotationBinding[] elementAnnotations,
       Nullability defaultNullabilityForCompilationUnit) {
+    if (typeBinding == null) {
+      return null;
+    }
     TypeDescriptor descriptor;
     if (typeBinding.isArray()) {
       TypeDescriptor leafTypeDescriptor =

@@ -666,6 +666,13 @@ public class TypeDescriptors {
             return enclosingClassTypeDescriptor;
           }
         };
+    TypeDescriptorsFactory interfacesDescriptorsFactory =
+        new TypeDescriptorsFactory() {
+          @Override
+          public ImmutableList<TypeDescriptor> create() {
+            return ImmutableList.of(JdtBindingUtils.createTypeDescriptor(lambdaInterfaceBinding));
+          }
+        };
 
     // Compute these first since they're reused in other calculations.
     List<String> classComponents =
@@ -704,6 +711,7 @@ public class TypeDescriptors {
             .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
             .setSimpleName(simpleName)
             .setSourceName(sourceName)
+            .setInterfacesTypeDescriptorsFactory(interfacesDescriptorsFactory)
             .setSuperTypeDescriptorFactory(superTypeDescriptorFactory)
             .setUniqueId(
                 createUniqueId(true, false, null, 0, false, null, binaryName, null, false, null))
@@ -780,7 +788,10 @@ public class TypeDescriptors {
         new TypeDescriptorFactory() {
           @Override
           public TypeDescriptor create() {
-            return JdtBindingUtils.createTypeDescriptor(typeBinding.getSuperclass());
+            return JdtBindingUtils.createTypeDescriptorWithNullability(
+                typeBinding.getSuperclass(),
+                new IAnnotationBinding[0],
+                JdtBindingUtils.getTypeDefaultNullability(typeBinding));
           }
         };
     TypeDescriptorsFactory interfacesDescriptorsFactory =
@@ -788,8 +799,12 @@ public class TypeDescriptors {
           @Override
           public ImmutableList<TypeDescriptor> create() {
             ImmutableList.Builder<TypeDescriptor> typeDescriptors = ImmutableList.builder();
-            for (ITypeBinding binding : typeBinding.getInterfaces()) {
-              typeDescriptors.add(JdtBindingUtils.createTypeDescriptor(binding));
+            for (ITypeBinding interfaceBinding : typeBinding.getInterfaces()) {
+              TypeDescriptor interfaceType = JdtBindingUtils.createTypeDescriptorWithNullability(
+                  interfaceBinding,
+                  new IAnnotationBinding[0],
+                  JdtBindingUtils.getTypeDefaultNullability(typeBinding));
+              typeDescriptors.add(interfaceType);
             }
             return typeDescriptors.build();
           }
