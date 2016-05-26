@@ -17,6 +17,14 @@ j2cl_optimization_test(
 )
 
 j2cl_optimization_test(
+    name = "ArraysTest",
+    defs = [
+        "--define=ARRAY_CHECK_BOUNDS_=false",
+        "--define=ARRAY_CHECK_TYPES_=false",
+    ],
+)
+
+j2cl_optimization_test(
     name = "CastDisableOptimizationTest",
     defs = ["--define=CAST_CHECKS_ENABLED_=false"],
 )

@@ -161,10 +161,6 @@ class Arrays {
    */
   static $set(array, index, value) {
     Arrays.$clinit();
-    if (array == null) {
-      // Array can not be null.
-      Arrays.$throwNullPointerException();
-    }
     if (ARRAY_CHECK_BOUNDS_) {
       if (index >= array.length || index < 0) {
         // Index must be within bounds.
