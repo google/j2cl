@@ -21,10 +21,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 import com.google.common.collect.BiMap;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableList;
@@ -716,16 +714,9 @@ public class TypeDescriptors {
             .setUniqueId(
                 createUniqueId(true, false, null, 0, false, null, binaryName, null, false, null))
             .setTypeArgumentDescriptors(
-                FluentIterable.from(
-                        JdtBindingUtils.getTypeArgumentTypeDescriptors(lambdaInterfaceBinding))
-                    .filter(
-                        new Predicate<TypeDescriptor>() {
-                          @Override
-                          public boolean apply(TypeDescriptor typeDescriptor) {
-                            return typeDescriptor.isTypeVariable();
-                          }
-                        })
-                    .toList())
+                new ArrayList<>(
+                    JdtBindingUtils.createTypeDescriptor(lambdaInterfaceBinding)
+                        .getAllTypeVariables()))
             .setVisibility(Visibility.PRIVATE)
             .build();
     self[0] = typeDescriptor;

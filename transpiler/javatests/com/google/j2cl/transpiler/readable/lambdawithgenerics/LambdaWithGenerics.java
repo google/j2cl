@@ -13,8 +13,13 @@ public class LambdaWithGenerics {
     return intf.foo(e);
   }
 
-  public void testLambdaNoCapture() {
+  public static <T extends Enum<T>> Enum<T> test3(MyInterface<Enum<T>> intf, Enum<T> e) {
+    return intf.foo(e);
+  }
+
+  public <T extends Enum<T>> void testLambdaNoCapture() {
     test1(i -> i, new Error());
     test2(i -> i, new Error());
+    test3(i -> i, (Enum<T>) null);
   }
 }

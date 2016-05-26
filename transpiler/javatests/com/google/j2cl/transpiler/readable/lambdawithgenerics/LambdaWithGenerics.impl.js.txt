@@ -13,9 +13,12 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 
 let LambdaWithGenerics$0foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Anonymous0foo$impl');
 let LambdaWithGenerics$1foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Anonymous1foo$impl');
+let LambdaWithGenerics$2foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Anonymous2foo$impl');
 let MyInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
+let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 class LambdaWithGenerics extends Object {
@@ -72,6 +75,20 @@ class LambdaWithGenerics extends Object {
   }
 
   /**
+   * @template M_T
+   * @param {MyInterface<Enum<M_T>>} intf
+   * @param {Enum<M_T>} e
+   * @return {Enum<M_T>}
+   * @public
+   */
+  static m_test3__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Enum(
+      intf, e) {
+    LambdaWithGenerics.$clinit();
+    return /**@type {Enum<Enum>} */ (intf.m_foo__java_lang_Object(e));
+  }
+
+  /**
+   * @template M_T
    * @return {void}
    * @public
    */
@@ -86,6 +103,14 @@ class LambdaWithGenerics extends Object {
             .$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
                 this),
         Error.$create());
+    /**@type {Enum<Enum>} */ (
+        LambdaWithGenerics
+            .m_test3__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Enum(
+                /**@type {!LambdaWithGenerics$2foo<Enum>} */ (
+                    LambdaWithGenerics$2foo
+                        .$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
+                            this)),
+                /**@type {Enum<Enum>} */ ($Casts.to(null, Enum))));
   }
 
   /**
@@ -117,10 +142,14 @@ class LambdaWithGenerics extends Object {
         'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Anonymous0foo$impl');
     LambdaWithGenerics$1foo = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Anonymous1foo$impl');
+    LambdaWithGenerics$2foo = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Anonymous2foo$impl');
     MyInterface = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface$impl');
     Class = goog.module.get('java.lang.Class$impl');
+    Enum = goog.module.get('java.lang.Enum$impl');
     Error = goog.module.get('java.lang.Error$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
     Object.$clinit();
   }
 
