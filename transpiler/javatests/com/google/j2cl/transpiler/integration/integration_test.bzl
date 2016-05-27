@@ -49,10 +49,13 @@ def integration_test(
   # particular test needs one of these on they can override with
   # closure_defines.
   defines = {
-    # Turn on assertions since the integration tests rely on them.
-    "ASSERTIONS_ENABLED_" : "true",
-    "ARRAY_CHECK_BOUNDS_" : "false",
-    "ARRAY_CHECK_TYPES_" : "false",
+      # Turn on assertions since the integration tests rely on them.
+      "ASSERTIONS_ENABLED_" : "true",
+      "ARRAY_CHECK_BOUNDS_" : "false",
+      "ARRAY_CHECK_TYPES_" : "false",
+      "jre.checks.checkLevel" : "'MINIMAL'",
+      "jre.checkedMode" : "'DISABLED'",
+      "gwt.logging.enabled" : "'FALSE'",
   }
 
   defines.update(closure_defines)

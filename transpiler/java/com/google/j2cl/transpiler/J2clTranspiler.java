@@ -56,7 +56,6 @@ import com.google.j2cl.ast.visitors.NormalizeNestedClassConstructors;
 import com.google.j2cl.ast.visitors.NormalizeStaticMemberQualifiersPass;
 import com.google.j2cl.ast.visitors.NormalizeTryWithResources;
 import com.google.j2cl.ast.visitors.RemoveUnusedMultiExpressionReturnValues;
-import com.google.j2cl.ast.visitors.RewriteSystemGetPropertyMethod;
 import com.google.j2cl.ast.visitors.SplitCompoundLongAssignments;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
 import com.google.j2cl.common.PackageInfoCache;
@@ -155,7 +154,6 @@ public class J2clTranspiler {
       CreateOverlayImplementationTypesAndDevirtualizeCalls.applyTo(j2clUnit);
 
       // Statement/Expression normalizations
-      RewriteSystemGetPropertyMethod.applyTo(j2clUnit);
       NormalizeArrayLiterals.applyTo(j2clUnit);
       NormalizeStaticMemberQualifiersPass.applyTo(j2clUnit);
       // Runs after NormalizeStaticMemberQualifiersPass.

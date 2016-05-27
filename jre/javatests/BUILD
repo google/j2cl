@@ -60,5 +60,13 @@ j2cl_multi_test(
 
 j2cl_multi_test(
     name = "Emul",
+    _js_srcs = ["test_defines.js"],
+    bootstrap_files = ["test_defines.js"],
     test_class = "com.google.gwt.emultest.EmulTests",
+)
+
+genrule(
+    name = "test_defines",
+    outs = ["test_defines.js"],
+    cmd = "echo \"/** @define {string} */ var someConfigurationProperty='conf';\" > $@",
 )
