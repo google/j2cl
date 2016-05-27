@@ -212,8 +212,10 @@ public class NormalizeConstructors {
     MethodCall superConstructorInvocation = AstUtils.getConstructorInvocation(primaryConstructor);
     checkArgument(
         superConstructorInvocation == null
-            || superConstructorInvocation.getTarget().getEnclosingClassTypeDescriptor()
-                == javaType.getSuperTypeDescriptor());
+            || superConstructorInvocation
+                .getTarget()
+                .getEnclosingClassTypeDescriptor()
+                .equalsIgnoreNullability(javaType.getSuperTypeDescriptor()));
 
     List<Statement> body = AstUtils.generateFieldDeclarations(javaType);
 
