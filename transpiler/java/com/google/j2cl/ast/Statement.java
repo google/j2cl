@@ -17,44 +17,34 @@ package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.processors.HasMetadata;
 import com.google.j2cl.ast.processors.Visitable;
-import com.google.j2cl.ast.sourcemap.SourceInfo;
-import com.google.j2cl.ast.sourcemap.TracksSourceInfo;
+import com.google.j2cl.ast.sourcemap.HasSourcePosition;
+import com.google.j2cl.ast.sourcemap.SourcePosition;
 
 /**
  * A base class for Statement.
  */
 @Visitable
-public abstract class Statement extends Node implements TracksSourceInfo {
+public abstract class Statement extends Node implements HasSourcePosition {
   // unknown by default.
-  private SourceInfo javaSourceInfo = SourceInfo.UNKNOWN_SOURCE_INFO;
-
-  private SourceInfo javaScriptSourceInfo = SourceInfo.UNKNOWN_SOURCE_INFO;
+  private SourcePosition javaSourcePosition = SourcePosition.UNKNOWN;
 
   @Override
-  public SourceInfo getJavaSourceInfo() {
-    return javaSourceInfo;
+  public SourcePosition getSourcePosition() {
+    return javaSourcePosition;
   }
 
   @Override
-  public void setJavaSourceInfo(SourceInfo sourceInfo) {
-    javaSourceInfo = sourceInfo;
-  }
-
-  public SourceInfo getOutputSourceInfo() {
-    return javaScriptSourceInfo;
-  }
-
-  public void setOutputSourceInfo(SourceInfo sourceInfo) {
-    this.javaScriptSourceInfo = sourceInfo;
+  public void setSourcePosition(SourcePosition sourcePosition) {
+    javaSourcePosition = sourcePosition;
   }
 
   @Override
-  public void copyMetadataFrom(HasMetadata<TracksSourceInfo> store) {
-    setJavaSourceInfo(store.getMetadata().getJavaSourceInfo());
+  public void copyMetadataFrom(HasMetadata<HasSourcePosition> store) {
+    setSourcePosition(store.getMetadata().getSourcePosition());
   }
 
   @Override
-  public TracksSourceInfo getMetadata() {
+  public HasSourcePosition getMetadata() {
     return this;
   }
 

@@ -18,15 +18,16 @@ package com.google.j2cl.ast.sourcemap;
 import com.google.debugging.sourcemap.FilePosition;
 
 /**
- * Describes the location of a node in the original source.
+ * Describes the location of a node in the original source in the form of a range
+ * (line,column)-(line,column); where both line and column are zero-based.
  */
-public class SourceInfo implements Comparable<SourceInfo> {
-  public static final SourceInfo UNKNOWN_SOURCE_INFO = new SourceInfo(-1, -1, -1, -1);
+public class SourcePosition implements Comparable<SourcePosition> {
+  public static final SourcePosition UNKNOWN = new SourcePosition(-1, -1, -1, -1);
 
   private FilePosition startPosition;
   private FilePosition endPosition;
 
-  public SourceInfo(
+  public SourcePosition(
       int startLineNumber, int startColumnNumber, int endLineNumber, int endColumnNumber) {
     startPosition = new FilePosition(startLineNumber, startColumnNumber);
     endPosition = new FilePosition(endLineNumber, endColumnNumber);
@@ -41,7 +42,7 @@ public class SourceInfo implements Comparable<SourceInfo> {
   }
 
   @Override
-  public int compareTo(SourceInfo o) {
+  public int compareTo(SourcePosition o) {
     if (startPosition.getLine() == o.startPosition.getLine()) {
       return startPosition.getColumn() - o.startPosition.getColumn();
     }

@@ -38,7 +38,7 @@ import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.WhileStatement;
-import com.google.j2cl.ast.sourcemap.SourceInfo;
+import com.google.j2cl.ast.sourcemap.SourcePosition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,20 +48,18 @@ import java.util.List;
  */
 public class StatementTranspiler {
   SourceBuilder builder;
+  SourceMapBuilder sourceMapBuilder;
   GenerationEnvironment environment;
 
-  public StatementTranspiler(SourceBuilder builder, GenerationEnvironment environment) {
+  public StatementTranspiler(
+      SourceBuilder builder, SourceMapBuilder sourceMapBuilder, GenerationEnvironment environment) {
     this.builder = builder;
     this.environment = environment;
+    this.sourceMapBuilder = sourceMapBuilder;
   }
 
   public void renderStatement(Statement node) {
     class SourceTransformer extends AbstractVisitor {
-      @Override
-      public boolean enterStatement(Statement statement) {
-        return true;
-      }
-
       @Override
       public boolean enterAssertStatement(AssertStatement assertStatement) {
         String assertAlias = environment.aliasForType(BootstrapType.ASSERTS.getDescriptor());
@@ -82,8 +80,8 @@ public class StatementTranspiler {
                   toSourceExpression(assertStatement.getExpression()),
                   toSourceExpression(assertStatement.getMessage()));
         }
-        SourceInfo location = builder.appendln(line);
-        assertStatement.setOutputSourceInfo(location);
+        SourcePosition location = builder.appendln(line);
+        addSourceMapping(assertStatement, location);
         return false;
       }
 
@@ -95,13 +93,13 @@ public class StatementTranspiler {
 
       @Override
       public boolean enterBreakStatement(BreakStatement breakStatement) {
-        SourceInfo location;
+        SourcePosition location;
         if (breakStatement.getLabelName() == null) {
           location = builder.appendln("break;");
         } else {
-          location = builder.appendln(String.format("break %s;", breakStatement.getLabelName()));
+          location = builder.appendln("break %s;", breakStatement.getLabelName());
         }
-        breakStatement.setOutputSourceInfo(location);
+        addSourceMapping(breakStatement, location);
         return false;
       }
 
@@ -113,32 +111,31 @@ public class StatementTranspiler {
 
       @Override
       public boolean enterContinueStatement(ContinueStatement continueStatement) {
-        SourceInfo location;
+        SourcePosition location;
         if (continueStatement.getLabelName() == null) {
           location = builder.appendln("continue;");
         } else {
-          location =
-              builder.appendln(String.format("continue %s;", continueStatement.getLabelName()));
+          location = builder.appendln("continue %s;", continueStatement.getLabelName());
         }
-        continueStatement.setOutputSourceInfo(location);
+        addSourceMapping(continueStatement, location);
         return false;
       }
 
       @Override
       public boolean enterDoWhileStatement(DoWhileStatement doWhileStatement) {
-        SourceInfo location = builder.append("do ");
+        SourcePosition location = builder.append("do ");
         doWhileStatement.getBody().accept(this);
         String conditionAsString = toSourceExpression(doWhileStatement.getConditionExpression());
-        builder.appendln(String.format("while(%s);", conditionAsString));
-        doWhileStatement.setOutputSourceInfo(location);
+        builder.appendln("while(%s);", conditionAsString);
+        addSourceMapping(doWhileStatement, location);
         return false;
       }
 
       @Override
       public boolean enterExpressionStatement(ExpressionStatement expressionStatement) {
-        SourceInfo location =
+        SourcePosition location =
             builder.appendln(toSourceExpression(expressionStatement.getExpression()) + ";");
-        expressionStatement.setOutputSourceInfo(location);
+        addSourceMapping(expressionStatement, location);
         return false;
       }
 
@@ -160,24 +157,21 @@ public class StatementTranspiler {
           updaters.add(toSourceExpression(e));
         }
         String updatersAsString = Joiner.on(",").join(updaters);
-        SourceInfo location =
+        SourcePosition location =
             builder.appendln(
-                String.format(
-                    "for (%s; %s; %s)",
-                    initializerAsString,
-                    conditionExpressionAsString,
-                    updatersAsString));
-        forStatement.setOutputSourceInfo(location);
+                "for (%s; %s; %s)",
+                initializerAsString, conditionExpressionAsString, updatersAsString);
+        addSourceMapping(forStatement, location);
         forStatement.getBody().accept(this);
         return false;
       }
 
       @Override
       public boolean enterIfStatement(IfStatement ifStatement) {
-        SourceInfo location =
+        SourcePosition location =
             builder.append(
                 String.format("if (%s)", toSourceExpression(ifStatement.getConditionExpression())));
-        ifStatement.setOutputSourceInfo(location);
+        addSourceMapping(ifStatement, location);
         ifStatement.getThenStatement().accept(this);
         if (ifStatement.getElseStatement() != null) {
           builder.append(" else ");
@@ -188,16 +182,17 @@ public class StatementTranspiler {
 
       @Override
       public boolean enterLabeledStatement(LabeledStatement labelStatement) {
-        SourceInfo location = builder.append(String.format("%s: ", labelStatement.getLabelName()));
-        labelStatement.setOutputSourceInfo(location);
+        SourcePosition location =
+            builder.append(String.format("%s: ", labelStatement.getLabelName()));
+        addSourceMapping(labelStatement, location);
         labelStatement.getBody().accept(this);
         return false;
       }
 
       @Override
       public boolean enterReturnStatement(ReturnStatement returnStatement) {
-        SourceInfo location = builder.append("return");
-        returnStatement.setOutputSourceInfo(location);
+        SourcePosition location = builder.append("return");
+        addSourceMapping(returnStatement, location);
         Expression expression = returnStatement.getExpression();
         if (expression != null) {
           builder.append(" " + toSourceExpression(expression));
@@ -208,24 +203,23 @@ public class StatementTranspiler {
 
       @Override
       public boolean enterSwitchCase(SwitchCase switchCase) {
-        SourceInfo location;
+        SourcePosition location;
         if (switchCase.isDefault()) {
           location = builder.appendln("default:");
         } else {
           location =
               builder.appendln("case " + toSourceExpression(switchCase.getMatchExpression()) + ":");
         }
-        switchCase.setOutputSourceInfo(location);
+        addSourceMapping(switchCase, location);
         return false;
       }
 
       @Override
       public boolean enterSwitchStatement(SwitchStatement switchStatement) {
-        SourceInfo location =
+        SourcePosition location =
             builder.appendln(
-                String.format(
-                    "switch (%s) {", toSourceExpression(switchStatement.getSwitchExpression())));
-        switchStatement.setOutputSourceInfo(location);
+                "switch (%s) {", toSourceExpression(switchStatement.getSwitchExpression()));
+        addSourceMapping(switchStatement, location);
         return true; // Allow the visitor to enter the switch cases.
       }
 
@@ -238,16 +232,16 @@ public class StatementTranspiler {
 
       @Override
       public boolean enterThrowStatement(ThrowStatement throwStatement) {
-        SourceInfo location =
+        SourcePosition location =
             builder.appendln("throw " + toSourceExpression(throwStatement.getExpression()) + ";");
-        throwStatement.setOutputSourceInfo(location);
+        addSourceMapping(throwStatement, location);
         return false;
       }
 
       @Override
       public boolean enterTryStatement(TryStatement tryStatement) {
-        SourceInfo location = builder.append("try");
-        tryStatement.setOutputSourceInfo(location);
+        SourcePosition location = builder.append("try");
+        addSourceMapping(tryStatement, location);
         tryStatement.getBody().accept(this);
         // Generate catch clause.
         Preconditions.checkArgument(tryStatement.getCatchClauses().size() < 2);
@@ -270,15 +264,15 @@ public class StatementTranspiler {
       @Override
       public boolean enterWhileStatement(WhileStatement whileStatement) {
         String conditionAsString = toSourceExpression(whileStatement.getConditionExpression());
-        SourceInfo location = builder.append(String.format("while (%s)", conditionAsString));
-        whileStatement.setOutputSourceInfo(location);
+        SourcePosition location = builder.append(String.format("while (%s)", conditionAsString));
+        addSourceMapping(whileStatement, location);
         return true; // Allow this to enter block.
       }
 
       @Override
       public void exitBlock(Block blockStatement) {
-        SourceInfo location = builder.appendln("}");
-        blockStatement.setOutputSourceInfo(location);
+        SourcePosition location = builder.appendln("}");
+        addSourceMapping(blockStatement, location);
       }
 
       @Override
@@ -286,13 +280,18 @@ public class StatementTranspiler {
         builder.appendln("}");
       }
 
+      @Override
+      public String toString() {
+        return builder.build();
+      }
+
       private String toSourceExpression(Expression expression) {
         return ExpressionTranspiler.transform(expression, environment);
       }
 
-      @Override
-      public String toString() {
-        return builder.build();
+      private void addSourceMapping(Statement statement, SourcePosition location) {
+        sourceMapBuilder.addMapping(
+            statement.getClass().getSimpleName(), statement.getSourcePosition(), location);
       }
     }
     SourceTransformer transformer = new SourceTransformer();

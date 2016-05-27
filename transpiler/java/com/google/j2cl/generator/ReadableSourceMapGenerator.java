@@ -15,66 +15,47 @@
  */
 package com.google.j2cl.generator;
 
-import com.google.j2cl.ast.AbstractVisitor;
-import com.google.j2cl.ast.JavaType;
-import com.google.j2cl.ast.Statement;
-import com.google.j2cl.ast.sourcemap.SourceInfo;
+import com.google.j2cl.ast.sourcemap.SourcePosition;
 
-import java.io.StringWriter;
-import java.util.Map;
-import java.util.TreeMap;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.nio.file.Path;
+import java.util.Map.Entry;
 
 /**
- * Used for testing.
+ * Generates a readable version of the sourcemap.
  */
 public class ReadableSourceMapGenerator {
-  private static Map<SourceInfo, String> orderedRanges = new TreeMap<>();
-  /**
-   * The source location of the ast node to print, input or output.
-   */
-  public static String generateForJavaType(JavaType javaType) {
-    StringWriter stringWriter = new StringWriter();
-    orderedRanges.clear();
-    StaticFieldAccessGatherer gatherer = new StaticFieldAccessGatherer(stringWriter);
-    javaType.accept(gatherer);
-    for (String line : orderedRanges.values()) {
-      stringWriter.append(line);
+
+  public static String generate(
+      SourceMapBuilder sourceMapBuilder,
+      Path javaSourceFile,
+      String javaScriptImplementationFilecontents) {
+    StringBuilder sb = new StringBuilder();
+    for (Entry<SourcePosition, Pair<String, SourcePosition>> entry :
+        sourceMapBuilder.getMappings().entrySet()) {
+      SourcePosition javaSourcePosition = entry.getValue().getRight();
+      SourcePosition javaScriptSourcePosition = entry.getKey();
+      sb.append(String.format("%s ", entry.getValue().getLeft()));
+      sb.append(formatSourceInfo(javaSourcePosition));
+      sb.append(" => ");
+      sb.append(formatSourceInfo(javaScriptSourcePosition));
+      sb.append("\n");
     }
-    return stringWriter.toString();
+
+    return sb.toString();
   }
 
-  private static class StaticFieldAccessGatherer extends AbstractVisitor {
-    StringWriter writer;
-
-    private StaticFieldAccessGatherer(StringWriter writer) {
-      this.writer = writer;
-    }
-
-    private String formatSourceInfo(SourceInfo sourceInfo) {
-      if (sourceInfo == SourceInfo.UNKNOWN_SOURCE_INFO) {
-        return "UNKNOWN";
-      } else {
-        return String.format(
-            "l%d c%d - l%d c%d",
-            sourceInfo.getStartFilePosition().getLine(),
-            sourceInfo.getStartFilePosition().getColumn(),
-            sourceInfo.getEndFilePosition().getLine(),
-            sourceInfo.getEndFilePosition().getColumn());
-      }
-    }
-
-    @Override
-    public boolean enterStatement(Statement statement) {
-      SourceInfo intput = statement.getJavaSourceInfo();
-      SourceInfo output = statement.getOutputSourceInfo();
-      StringBuilder writer = new StringBuilder();
-      writer.append(String.format("%s ", statement.getClass().getSimpleName()));
-      writer.append(formatSourceInfo(intput));
-      writer.append(" => ");
-      writer.append(formatSourceInfo(output));
-      writer.append("\n");
-      orderedRanges.put(output, writer.toString());
-      return true;
+  private static String formatSourceInfo(SourcePosition sourcePosition) {
+    if (sourcePosition == SourcePosition.UNKNOWN) {
+      return "UNKNOWN";
+    } else {
+      return String.format(
+          "l%d c%d - l%d c%d",
+          sourcePosition.getStartFilePosition().getLine(),
+          sourcePosition.getStartFilePosition().getColumn(),
+          sourcePosition.getEndFilePosition().getLine(),
+          sourcePosition.getEndFilePosition().getColumn());
     }
   }
 }

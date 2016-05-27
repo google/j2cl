@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
@@ -56,30 +56,33 @@ public class NativeJavaScriptFile {
   }
 
   /**
-   * Given a zipFilePath, this method will extract files with the extension @NATIVE_EXTENSION and
-   * return the a map of file paths to NativeJavaScriptFile objects of the form:
+   * Given a list of zip file paths, this method will extract files with the extension
+   * @NATIVE_EXTENSION and return the a map of file paths to NativeJavaScriptFile objects of the
+   * form:
    *
    * <p>/com/google/example/nativejsfile1 => NativeJavaScriptFile
    *
    * <p>/com/google/example/nativejsfile2 => NativeJavaScriptFile
    */
   public static Map<String, NativeJavaScriptFile> getFilesByPathFromZip(
-      String zipPath, String charSet, Errors errors) {
-    Map<String, NativeJavaScriptFile> loadedFilesByPath = new HashMap<>();
-    try (ZipFile zipFile = new ZipFile(zipPath)) {
-      List<? extends ZipEntry> entries = Collections.list(zipFile.entries());
-      for (ZipEntry entry : entries) {
-        if (!entry.getName().endsWith(NATIVE_EXTENSION)) {
-          continue; // If the path isn't of type NATIVE_EXTENSION, don't add it.
+      List<String> zipPaths, String charSet, Errors errors) {
+    Map<String, NativeJavaScriptFile> loadedFilesByPath = new LinkedHashMap<>();
+    for (String zipPath : zipPaths) {
+      try (ZipFile zipFile = new ZipFile(zipPath)) {
+        List<? extends ZipEntry> entries = Collections.list(zipFile.entries());
+        for (ZipEntry entry : entries) {
+          if (!entry.getName().endsWith(NATIVE_EXTENSION)) {
+            continue; // If the path isn't of type NATIVE_EXTENSION, don't add it.
+          }
+          InputStream stream = zipFile.getInputStream(entry);
+          String content = CharStreams.toString(new InputStreamReader(stream, charSet));
+          Closeables.closeQuietly(stream);
+          NativeJavaScriptFile file = new NativeJavaScriptFile(entry.getName(), content, zipPath);
+          loadedFilesByPath.put(file.getPathWithoutExtension(), file);
         }
-        InputStream stream = zipFile.getInputStream(entry);
-        String content = CharStreams.toString(new InputStreamReader(stream, charSet));
-        Closeables.closeQuietly(stream);
-        NativeJavaScriptFile file = new NativeJavaScriptFile(entry.getName(), content, zipPath);
-        loadedFilesByPath.put(file.getPathWithoutExtension(), file);
+      } catch (IOException e) {
+        errors.error(Errors.Error.ERR_CANNOT_OPEN_ZIP, zipPath);
       }
-    } catch (IOException e) {
-      errors.error(Errors.Error.ERR_CANNOT_OPEN_ZIP, zipPath);
     }
     return loadedFilesByPath;
   }

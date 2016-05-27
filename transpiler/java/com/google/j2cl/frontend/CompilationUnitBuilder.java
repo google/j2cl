@@ -83,7 +83,7 @@ import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.WhileStatement;
-import com.google.j2cl.ast.sourcemap.SourceInfo;
+import com.google.j2cl.ast.sourcemap.SourcePosition;
 import com.google.j2cl.common.PackageInfoCache;
 
 import org.eclipse.jdt.core.dom.ASTNode;
@@ -791,20 +791,20 @@ public class CompilationUnitBuilder {
       }
     }
 
-    public SourceInfo sourceInfoForNode(ASTNode node) {
+    public SourcePosition sourceInfoForNode(ASTNode node) {
       int startLineNumber = jdtCompilationUnit.getLineNumber(node.getStartPosition()) - 1;
       int startColumnNumber = jdtCompilationUnit.getColumnNumber(node.getStartPosition());
       int endPositionCharacterIndex = node.getStartPosition() + node.getLength();
       int endLineNumber = jdtCompilationUnit.getLineNumber(endPositionCharacterIndex) - 1;
       int endColumnNumber = jdtCompilationUnit.getColumnNumber(endPositionCharacterIndex);
-      return new SourceInfo(startLineNumber, startColumnNumber, endLineNumber, endColumnNumber);
+      return new SourcePosition(startLineNumber, startColumnNumber, endLineNumber, endColumnNumber);
     }
 
     private Statement convert(org.eclipse.jdt.core.dom.Statement statement) {
-      SourceInfo position = sourceInfoForNode(statement);
+      SourcePosition position = sourceInfoForNode(statement);
       Statement j2clStatement = convertStatement(statement);
       if (j2clStatement != null) {
-        j2clStatement.setJavaSourceInfo(position);
+        j2clStatement.setSourcePosition(position);
       }
       return j2clStatement;
     }

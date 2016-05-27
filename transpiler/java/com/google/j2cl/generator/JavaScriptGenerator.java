@@ -15,9 +15,9 @@
  */
 package com.google.j2cl.generator;
 
-import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Variable;
+import com.google.j2cl.ast.sourcemap.SourcePosition;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatheringVisitor;
@@ -25,6 +25,8 @@ import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
 import com.google.j2cl.generator.visitors.ImportUtils;
 import com.google.j2cl.generator.visitors.VariableAliasesGatheringVisitor;
 
+import java.nio.charset.Charset;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -33,16 +35,18 @@ import java.util.Set;
  * A base class for JavaScript source generators. We may have two subclasses, which are
  * for Header and Impl generation.
  */
-public abstract class JavaScriptGenerator extends AbstractSourceGenerator {
+public abstract class JavaScriptGenerator {
   protected final JavaType javaType;
   protected GenerationEnvironment environment;
   protected Map<ImportCategory, Set<Import>> importsByCategory;
-  protected SourceBuilder sb;
+  protected final SourceBuilder sourceBuilder = new SourceBuilder();
+  protected final Errors errors;
+  protected final boolean declareLegacyNamespace;
 
   public JavaScriptGenerator(Errors errors, boolean declareLegacyNamespace, JavaType javaType) {
-    super(errors, declareLegacyNamespace);
+    this.errors = errors;
+    this.declareLegacyNamespace = declareLegacyNamespace;
     this.javaType = javaType;
-    sb = new SourceBuilder();
     importsByCategory = ImportGatheringVisitor.gatherImports(javaType);
     List<Import> sortedImports = ImportUtils.getSortedImports(importsByCategory);
     Map<Variable, String> aliasByVariable =
@@ -50,9 +54,11 @@ public abstract class JavaScriptGenerator extends AbstractSourceGenerator {
     environment = new GenerationEnvironment(sortedImports, aliasByVariable);
   }
 
-  // TODO: This is almost exclusively used to transform type descriptors, once we move field
-  // initialization to the ast we can change this to getDescriptorName(TypeDescriptor descriptor)
-  public String expressionToString(Expression expression) {
-    return ExpressionTranspiler.transform(expression, environment);
+  public Map<SourcePosition, SourcePosition> generateOutput(Path outputPath, Charset charset) {
+    GeneratorUtils.writeToFile(outputPath, renderOutput(), charset, errors);
+    return null;
   }
+  abstract String renderOutput();
+
+  abstract String getSuffix();
 }

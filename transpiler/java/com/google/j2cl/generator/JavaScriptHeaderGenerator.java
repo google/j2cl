@@ -37,30 +37,30 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
   }
 
   @Override
-  public String toSource() {
+  public String renderOutput() {
     TypeDescriptor selfTypeDescriptor = javaType.getDescriptor().getRawTypeDescriptor();
     Import selfImport = new Import(selfTypeDescriptor.getSimpleName(), selfTypeDescriptor);
     String binaryName = javaType.getDescriptor().getRawTypeDescriptor().getBinaryName();
-    sb = new SourceBuilder();
-    sb.appendln("/**");
-    sb.appendln(" * @fileoverview Header transpiled from %s", binaryName);
-    sb.appendln(" *");
-    sb.appendln(" * @suppress {lateProvide}");
-    sb.appendln(" */");
-    sb.appendln("goog.module('%s');", selfImport.getHeaderModulePath());
+    sourceBuilder.appendln("/**");
+    sourceBuilder.appendln(" * @fileoverview Header transpiled from %s", binaryName);
+    sourceBuilder.appendln(" *");
+    sourceBuilder.appendln(" * @suppress {lateProvide}");
+    sourceBuilder.appendln(" */");
+    sourceBuilder.appendln("goog.module('%s');", selfImport.getHeaderModulePath());
 
     if (declareLegacyNamespace && javaType.getDescriptor().isJsType()
         && !(javaType instanceof AnonymousJavaType)) {
       // Even if opted into declareLegacyNamespace, this only makes sense for classes that are
       // intended to be accessed from the native JS. Thus we only emit declareLegacyNamespace
       // for non-anonymous JsType classes.
-      sb.appendln("goog.module.declareLegacyNamespace();");
+      sourceBuilder.appendln("goog.module.declareLegacyNamespace();");
     }
 
-    sb.newLine();
-    sb.newLine();
-    sb.appendln("// Imports headers for both eager and lazy dependencies to ensure that");
-    sb.appendln("// all files are included in the dependency tree.");
+    sourceBuilder.newLine();
+    sourceBuilder.newLine();
+    sourceBuilder.appendln(
+        "// Imports headers for both eager and lazy dependencies to ensure that");
+    sourceBuilder.appendln("// all files are included in the dependency tree.");
 
     Set<String> requiredPaths = new HashSet<>();
     // goog.require(...) for eager imports.
@@ -68,7 +68,7 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
       String alias = eagerImport.getAlias();
       String path = eagerImport.getHeaderModulePath();
       if (requiredPaths.add(path)) {
-        sb.appendln("let _%s = goog.require('%s');", alias, path);
+        sourceBuilder.appendln("let _%s = goog.require('%s');", alias, path);
       }
     }
     // goog.require(...) for lazy imports.
@@ -76,19 +76,19 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
       String alias = eagerImport.getAlias();
       String path = eagerImport.getHeaderModulePath();
       if (requiredPaths.add(path)) {
-        sb.appendln("let _%s = goog.require('%s');", alias, path);
+        sourceBuilder.appendln("let _%s = goog.require('%s');", alias, path);
       }
     }
     // externs imports are always available in the browser and don't need a header reference.
-    sb.newLine();
-    sb.newLine();
+    sourceBuilder.newLine();
+    sourceBuilder.newLine();
 
     String className = environment.aliasForType(javaType.getDescriptor());
     String implementationPath = selfImport.getImplModulePath();
-    sb.appendln("// Re-exports the implementation.");
-    sb.appendln("var %s = goog.require('%s');", className, implementationPath);
-    sb.appendln("exports = %s;", className);
-    return sb.build();
+    sourceBuilder.appendln("// Re-exports the implementation.");
+    sourceBuilder.appendln("var %s = goog.require('%s');", className, implementationPath);
+    sourceBuilder.appendln("exports = %s;", className);
+    return sourceBuilder.build();
   }
 
   @Override

@@ -16,7 +16,7 @@
 package com.google.j2cl.generator;
 
 import com.google.common.base.Preconditions;
-import com.google.j2cl.ast.sourcemap.SourceInfo;
+import com.google.j2cl.ast.sourcemap.SourcePosition;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -33,7 +33,7 @@ class SourceBuilder {
   /**
    * Appends some source and returns its resulting location.
    */
-  public SourceInfo append(String source) {
+  public SourcePosition append(String source) {
     Preconditions.checkArgument(
         !source.startsWith("  "),
         "Let SourceBuilder manage indentation, don't provide spaces at the beginning "
@@ -61,8 +61,8 @@ class SourceBuilder {
       indentationLevel += StringUtils.countMatches(source, "{");
     }
 
-    SourceInfo outputLocation =
-        new SourceInfo(
+    SourcePosition outputLocation =
+        new SourcePosition(
             lineNumber,
             indent.length(),
             lineNumber + numNewLines,
@@ -76,13 +76,13 @@ class SourceBuilder {
    * Appends the given string to the output source and then appends a new line character.
    * Returns the location of the string in the output source code without the new line.
    */
-  public SourceInfo appendln(String sourceLine) {
-    SourceInfo outputLocation = append(sourceLine);
+  public SourcePosition appendln(String sourceLine) {
+    SourcePosition outputLocation = append(sourceLine);
     append(System.lineSeparator());
     return outputLocation;
   }
 
-  public SourceInfo appendln(String template, Object... parameters) {
+  public SourcePosition appendln(String template, Object... parameters) {
     return appendln(String.format(template, parameters));
   }
 

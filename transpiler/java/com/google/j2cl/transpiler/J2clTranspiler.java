@@ -13,6 +13,7 @@
  */
 package com.google.j2cl.transpiler;
 
+import com.google.common.collect.Sets;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JsInteropRestrictionsChecker;
 import com.google.j2cl.ast.visitors.ArrayAccessNormalizer;
@@ -64,23 +65,12 @@ import com.google.j2cl.frontend.CompilationUnitBuilder;
 import com.google.j2cl.frontend.FrontendFlags;
 import com.google.j2cl.frontend.FrontendOptions;
 import com.google.j2cl.frontend.JdtParser;
-import com.google.j2cl.generator.GeneratorUtils;
-import com.google.j2cl.generator.JavaScriptGeneratorStage;
-import com.google.j2cl.generator.SourceMapGeneratorStage;
+import com.google.j2cl.generator.OutputGeneratorStage;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.file.CopyOption;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.nio.file.attribute.FileTime;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Translation tool for generating JavaScript source files from Java sources.
@@ -102,8 +92,7 @@ public class J2clTranspiler {
     List<CompilationUnit> j2clUnits = convertUnits(createJdtUnits());
     checkUnits(j2clUnits);
     normalizeUnits(j2clUnits);
-    generateJavaScriptSources(j2clUnits);
-    generateSourceMaps(j2clUnits);
+    generateOutputs(j2clUnits);
     maybeCloseFileSystem();
   }
 
@@ -211,62 +200,19 @@ public class J2clTranspiler {
     VerifyParamAndArgCounts.applyTo(j2clUnit);
   }
 
-  private void generateJavaScriptSources(List<CompilationUnit> j2clCompilationUnits) {
+  private void generateOutputs(List<CompilationUnit> j2clCompilationUnits) {
     Charset charset = Charset.forName(options.getEncoding());
 
-    Set<String> omitSourceFiles = new HashSet<>();
-    omitSourceFiles.addAll(options.getOmitSourceFiles());
-
-    Set<String> nativeJavaScriptFileZipPaths = new HashSet<>();
-    nativeJavaScriptFileZipPaths.addAll(options.getNativeSourceZipEntries());
-
-    new JavaScriptGeneratorStage(
+    new OutputGeneratorStage(
             charset,
-            omitSourceFiles,
-            nativeJavaScriptFileZipPaths,
+            Sets.newHashSet(options.getOmitSourceFiles()),
+            options.getNativeSourceZipEntries(),
             options.getOutputFileSystem(),
             options.getOutput(),
             options.getDeclareLegacyNamespace(),
+            options.getShouldPrintReadableSourceMap(),
             errors)
-        .generateJavaScriptSources(j2clCompilationUnits);
-    maybeExitGracefully();
-  }
-
-  private void generateSourceMaps(List<CompilationUnit> j2clUnits) {
-    Charset charset = Charset.forName(options.getEncoding());
-
-    // Generate sourcemap files.
-    new SourceMapGeneratorStage(
-            charset,
-            options.getOutputFileSystem(),
-            options.getOutput(),
-            errors,
-            options.getShouldPrintReadableSourceMap())
-        .generateSourceMaps(j2clUnits);
-
-    // Copy .java files.
-    for (CompilationUnit j2clUnit : j2clUnits) {
-      String relativePath =
-          j2clUnit.getPackageName().replace(".", File.separator)
-              + File.separator
-              + j2clUnit.getName();
-      Path outputPath =
-          GeneratorUtils.getAbsolutePath(
-              options.getOutputFileSystem(), options.getOutput(), relativePath, ".java");
-      try {
-        CopyOption[] options =
-            new CopyOption[] {
-              StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES
-            };
-        Files.copy(Paths.get(j2clUnit.getFilePath()), outputPath, options);
-        // Wipe entries modification time so that input->output mapping is stable
-        // regardless of the time of day.
-        Files.setLastModifiedTime(outputPath, FileTime.fromMillis(0));
-      } catch (IOException e) {
-        // TODO(tdeegan): This blows up during the JRE compile
-        // errors.error(Error.ERR_ERROR, "Could not copy java file: " + outputPath + e);
-      }
-    }
+        .generateOutputs(j2clCompilationUnits);
     maybeExitGracefully();
   }
 

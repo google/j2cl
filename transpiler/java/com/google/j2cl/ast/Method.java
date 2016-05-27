@@ -22,7 +22,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.processors.Context;
 import com.google.j2cl.ast.processors.Visitable;
-import com.google.j2cl.ast.sourcemap.SourceInfo;
+import com.google.j2cl.ast.sourcemap.SourcePosition;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -143,8 +143,7 @@ public class Method extends Node {
     private boolean isOverride;
     private String jsDocDescription;
     private boolean isFinal;
-    private SourceInfo javaSourceInfo = SourceInfo.UNKNOWN_SOURCE_INFO;
-    private SourceInfo outputSourceInfo = SourceInfo.UNKNOWN_SOURCE_INFO;
+    private SourcePosition bodyJavaSourcePosition = SourcePosition.UNKNOWN;
     private BitSet parameterOptionality = new BitSet();
 
     public static Builder fromDefault() {
@@ -160,8 +159,7 @@ public class Method extends Node {
       builder.isOverride = method.isOverride();
       builder.jsDocDescription = method.getJsDocDescription();
       builder.isFinal = method.isFinal();
-      builder.javaSourceInfo = method.getBody().getJavaSourceInfo();
-      builder.outputSourceInfo = method.getBody().getOutputSourceInfo();
+      builder.bodyJavaSourcePosition = method.getBody().getSourcePosition();
       builder.parameterOptionality = method.parameterOptionality;
       return builder;
     }
@@ -256,8 +254,7 @@ public class Method extends Node {
 
     public Method build() {
       Block body = new Block(statements);
-      body.setJavaSourceInfo(javaSourceInfo);
-      body.setOutputSourceInfo(outputSourceInfo);
+      body.setSourcePosition(bodyJavaSourcePosition);
       Method method =
           new Method(
               // Update method descriptor parameter types from actual parameter types.

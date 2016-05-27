@@ -19,10 +19,15 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.errors.Errors;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.FileSystem;
+import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.LinkedHashMap;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.FileTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -30,25 +35,28 @@ import java.util.Set;
 
 /**
  * The JavaScriptGeneratorStage contains all necessary information for generating the JavaScript
- * output for the transpiler.  It is responsible for pulling in native sources and omitted sources
- * and then generating header and implementation files for each Java Type.
+ * output and corresponding source maps for the transpiler.  It is responsible for pulling in
+ * native sources and omitted sources and then generating header, implementation and sourcemap files
+ * for each Java Type.
  */
-public class JavaScriptGeneratorStage {
-  private Charset charset;
-  private Set<String> omitSourceFiles;
-  private Set<String> nativeJavaScriptFileZipPaths;
-  private Errors errors;
-  private FileSystem outputFileSystem;
-  private String outputLocationPath;
-  private boolean declareLegacyNamespace;
+public class OutputGeneratorStage {
+  private final Charset charset;
+  private final Set<String> omitSourceFiles;
+  private final List<String> nativeJavaScriptFileZipPaths;
+  private final Errors errors;
+  private final FileSystem outputFileSystem;
+  private final String outputLocationPath;
+  private final boolean declareLegacyNamespace;
+  private final boolean shouldGenerateReadableSourceMaps;
 
-  public JavaScriptGeneratorStage(
+  public OutputGeneratorStage(
       Charset charset,
       Set<String> omitSourceFiles,
-      Set<String> nativeJavaScriptFileZipPaths,
+      List<String> nativeJavaScriptFileZipPaths,
       FileSystem outputFileSystem,
       String outputLocationPath,
       boolean declareLegacyNamespace,
+      boolean shouldGenerateReadableSourceMaps,
       Errors errors) {
     this.charset = charset;
     this.omitSourceFiles = omitSourceFiles;
@@ -56,21 +64,18 @@ public class JavaScriptGeneratorStage {
     this.outputFileSystem = outputFileSystem;
     this.outputLocationPath = outputLocationPath;
     this.declareLegacyNamespace = declareLegacyNamespace;
+    this.shouldGenerateReadableSourceMaps = shouldGenerateReadableSourceMaps;
     this.errors = errors;
   }
 
-  public void generateJavaScriptSources(List<CompilationUnit> j2clCompilationUnits) {
+  public void generateOutputs(List<CompilationUnit> j2clCompilationUnits) {
     // The map must be ordered because it will be iterated over later and if it was not ordered then
     // our output would be unstable. Actually this one can't actually destabilize output but since
     // it's being safely iterated over now it's best to guard against it being unsafely iterated
     // over in the future.
-    Map<String, NativeJavaScriptFile> nativeFilesByPath = new LinkedHashMap<>();
-
-    for (String nativeJavascriptFileZipPath : nativeJavaScriptFileZipPaths) {
-      nativeFilesByPath.putAll(
-          NativeJavaScriptFile.getFilesByPathFromZip(
-              nativeJavascriptFileZipPath, charset.name(), errors));
-    }
+    Map<String, NativeJavaScriptFile> nativeFilesByPath =
+        NativeJavaScriptFile.getFilesByPathFromZip(
+            nativeJavaScriptFileZipPaths, charset.name(), errors);
 
     for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
       if (omitSourceFiles.contains(j2clCompilationUnit.getFilePath())) {
@@ -83,8 +88,9 @@ public class JavaScriptGeneratorStage {
           continue;
         }
 
+        SourceMapBuilder sourceMapBuilder = new SourceMapBuilder();
         JavaScriptImplGenerator jsImplGenerator =
-            new JavaScriptImplGenerator(errors, declareLegacyNamespace, javaType);
+            new JavaScriptImplGenerator(errors, declareLegacyNamespace, javaType, sourceMapBuilder);
 
         // If the java type contains any native methods, search for matching native file.
         if (javaType.containsNativeMethods()) {
@@ -124,7 +130,9 @@ public class JavaScriptGeneratorStage {
                 outputLocationPath,
                 GeneratorUtils.getRelativePath(javaType),
                 jsImplGenerator.getSuffix());
-        jsImplGenerator.writeToFile(absolutePathForImpl, charset);
+        String javaScriptImplementationSource = jsImplGenerator.renderOutput();
+        GeneratorUtils.writeToFile(
+            absolutePathForImpl, javaScriptImplementationSource, charset, errors);
 
         JavaScriptHeaderGenerator jsHeaderGenerator =
             new JavaScriptHeaderGenerator(errors, declareLegacyNamespace, javaType);
@@ -134,8 +142,14 @@ public class JavaScriptGeneratorStage {
                 outputLocationPath,
                 GeneratorUtils.getRelativePath(javaType),
                 jsHeaderGenerator.getSuffix());
-        jsHeaderGenerator.writeToFile(absolutePathForHeader, charset);
+        String javaScriptHeaderFile = jsHeaderGenerator.renderOutput();
+        GeneratorUtils.writeToFile(absolutePathForHeader, javaScriptHeaderFile, charset, errors);
+
+        generateSourceMaps(
+            j2clCompilationUnit, javaType, javaScriptImplementationSource, sourceMapBuilder);
       }
+
+      copyJavaSourcesToOutput(j2clCompilationUnit);
     }
 
     // Error if any of the native implementation files were not used.
@@ -145,6 +159,55 @@ public class JavaScriptGeneratorStage {
             Errors.Error.ERR_NATIVE_UNUSED_NATIVE_SOURCE,
             fileEntry.getValue().getZipPath() + "!/" + fileEntry.getKey());
       }
+    }
+  }
+
+  private void generateSourceMaps(
+      CompilationUnit j2clUnit,
+      JavaType type,
+      String javaScriptImplementationFileContents,
+      SourceMapBuilder sourceMapBuilder) {
+    String compilationUnitFileName = j2clUnit.getFileName();
+    String compilationUnitFilePath = j2clUnit.getFilePath();
+    // Generate sourcemap files.
+    new SourceMapGeneratorStage(
+            charset,
+            outputFileSystem,
+            compilationUnitFileName,
+            outputLocationPath,
+            compilationUnitFilePath,
+            javaScriptImplementationFileContents,
+            errors,
+            shouldGenerateReadableSourceMaps)
+        .generateSourceMaps(type, sourceMapBuilder);
+  }
+
+  /**
+   * Copy Java source files to the output. Sourcemaps reference locations in the Java source file,
+   * and having it available as output simplifies the process of source debugging in the browser.
+   */
+  private void copyJavaSourcesToOutput(CompilationUnit j2clUnit) {
+    String relativePath =
+        j2clUnit.getPackageName().replace(".", File.separator)
+            + File.separator
+            + j2clUnit.getName();
+    Path outputPath =
+        GeneratorUtils.getAbsolutePath(outputFileSystem, outputLocationPath, relativePath, ".java");
+    try {
+      Files.copy(
+          Paths.get(j2clUnit.getFilePath()),
+          outputPath,
+          StandardCopyOption.REPLACE_EXISTING,
+          StandardCopyOption.COPY_ATTRIBUTES);
+      // Wipe entries modification time so that input->output mapping is stable
+      // regardless of the time of day.
+      Files.setLastModifiedTime(outputPath, FileTime.fromMillis(0));
+    } catch (IOException e) {
+      // TODO(tdeegan): This blows up during the JRE compile. Did this ever work? The sources are
+      // available for compilation so no errors should be seen here unless there is an exceptional
+      // condition.
+      // errors.error(Errors.Error.ERR_ERROR, "Could not copy java file: "
+      // + outputPath + ":" + e.getMessage());
     }
   }
 }

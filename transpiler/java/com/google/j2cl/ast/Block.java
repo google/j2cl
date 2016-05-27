@@ -34,8 +34,7 @@ public class Block extends Statement implements Positioned {
   public Block(Block fromBlock) {
     this(fromBlock.getStatements());
     this.position = fromBlock.position;
-    setJavaSourceInfo(fromBlock.getJavaSourceInfo());
-    setOutputSourceInfo(fromBlock.getOutputSourceInfo());
+    setSourcePosition(fromBlock.getSourcePosition());
   }
 
   public Block(Statement... statements) {

@@ -18,11 +18,11 @@ package com.google.j2cl.ast.sourcemap;
 import com.google.j2cl.ast.processors.HasMetadata;
 
 /**
- * Forces a node to keep track of its location within the original Java Source.
+ * An interface for source nodes that know their position in the original source.
  */
-public interface TracksSourceInfo extends HasMetadata<TracksSourceInfo> {
+public interface HasSourcePosition extends HasMetadata<HasSourcePosition> {
   // The location in the original Java source file.
-  SourceInfo getJavaSourceInfo();
+  SourcePosition getSourcePosition();
 
-  void setJavaSourceInfo(SourceInfo sourceInfo);
+  void setSourcePosition(SourcePosition sourcePosition);
 }

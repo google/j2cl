@@ -3,21 +3,18 @@ package com.google.j2cl.generator;
 import com.google.debugging.sourcemap.SourceMapFormat;
 import com.google.debugging.sourcemap.SourceMapGenerator;
 import com.google.debugging.sourcemap.SourceMapGeneratorFactory;
-import com.google.j2cl.ast.AbstractVisitor;
-import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JavaType;
-import com.google.j2cl.ast.Statement;
-import com.google.j2cl.ast.sourcemap.SourceInfo;
+import com.google.j2cl.ast.sourcemap.SourcePosition;
 import com.google.j2cl.errors.Errors;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.nio.file.Paths;
+import java.util.Map.Entry;
 
 /**
  * Generates the source maps.
@@ -25,102 +22,78 @@ import java.util.List;
 public class SourceMapGeneratorStage {
   public static final String SOURCE_MAP_SUFFIX = ".js.map";
 
-  private Charset charset;
-  private Errors errors;
-  private FileSystem outputFileSystem;
-  private String outputLocationPath;
-  private boolean generateReadableSourceMaps;
+  private final Charset charset;
+  private final Errors errors;
+  private final FileSystem outputFileSystem;
+  private final String outputLocationPath;
+  private final String javaSourceFile;
+  private final String javaScriptImplementationFileContents;
+  private final boolean generateReadableSourceMaps;
+  private final String compilationUnitSourceFileName;
 
   public SourceMapGeneratorStage(
       Charset charset,
       FileSystem outputFileSystem,
+      String compilationUnitSourceFileName,
       String outputLocationPath,
+      String javaSourceFile,
+      String javaScriptImplementationFileContents,
       Errors errors,
       boolean generateReadableSourceMaps) {
     this.charset = charset;
     this.outputFileSystem = outputFileSystem;
     this.outputLocationPath = outputLocationPath;
+    this.javaSourceFile = javaSourceFile;
     this.errors = errors;
     this.generateReadableSourceMaps = generateReadableSourceMaps;
+    this.compilationUnitSourceFileName = compilationUnitSourceFileName;
+    this.javaScriptImplementationFileContents = javaScriptImplementationFileContents;
   }
 
-  public void generateSourceMaps(List<CompilationUnit> j2clCompilationUnits) {
-    class SourceMapGatheringVisitor extends AbstractVisitor {
-      private List<Statement> gatheredStatements = new ArrayList<>();
-      private SourceMapGenerator sourceMapGenerator =
-          SourceMapGeneratorFactory.getInstance(SourceMapFormat.V3);
+  public void generateSourceMaps(JavaType javaType, SourceMapBuilder sourceMapBuilder) {
+    try {
+      String output =
+          generateReadableSourceMaps
+              ? ReadableSourceMapGenerator.generate(
+                  sourceMapBuilder, Paths.get(javaSourceFile), javaScriptImplementationFileContents)
+              : renderSourceMapToString(javaType, sourceMapBuilder);
 
-      @Override
-      public boolean enterStatement(Statement statement) {
-        gatheredStatements.add(statement);
-        return true;
-      }
-
-      /**
-       * For each of the java types we iterate over the statements it contains in order of the
-       * output location and add them to the SourceMapGenerator. Finally we render the contents of
-       * the source map to a file ending in ".js.map".
-       */
-      @Override
-      public void exitJavaType(JavaType javaType) {
-        final String inputSourceName = getCurrentCompilationUnit().getFileName();
-        sourceMapGenerator.reset();
-        List<Statement> sortedStatements = statementsSortedByJavaSourcePosition();
-        for (Statement statement : sortedStatements) {
-          SourceInfo javaSourcePosition = statement.getJavaSourceInfo();
-          SourceInfo javaScriptSourcePosition = statement.getOutputSourceInfo();
-          if (javaSourcePosition == SourceInfo.UNKNOWN_SOURCE_INFO
-              || javaScriptSourcePosition == SourceInfo.UNKNOWN_SOURCE_INFO) {
-            continue;
-          }
-          sourceMapGenerator.addMapping(
-              inputSourceName,
-              null,
-              javaSourcePosition.getStartFilePosition(),
-              javaScriptSourcePosition.getStartFilePosition(),
-              javaScriptSourcePosition.getEndFilePosition());
-        }
-
-        StringBuilder builder = new StringBuilder();
-        try {
-          String typeName = javaType.getDescriptor().getBinaryClassName();
-          sourceMapGenerator.appendTo(builder, typeName + ".impl.js");
-          String output = builder.toString();
-          String readableMap = ReadableSourceMapGenerator.generateForJavaType(javaType);
-          Path absolutePathForSourceMap =
-              GeneratorUtils.getAbsolutePath(
-                  outputFileSystem,
-                  outputLocationPath,
-                  GeneratorUtils.getRelativePath(javaType),
-                  SOURCE_MAP_SUFFIX);
-          GeneratorUtils.writeToFile(
-              absolutePathForSourceMap,
-              generateReadableSourceMaps ? readableMap : output,
-              charset,
-              errors);
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-        // Empty the gathered statements.
-        gatheredStatements.clear();
-      }
-
-      private List<Statement> statementsSortedByJavaSourcePosition() {
-        Collections.sort(
-            gatheredStatements,
-            new Comparator<Statement>() {
-              @Override
-              public int compare(Statement o1, Statement o2) {
-                return o1.getOutputSourceInfo().compareTo(o2.getOutputSourceInfo());
-              }
-            });
-        return gatheredStatements;
-      }
+      Path absolutePathForSourceMap =
+          GeneratorUtils.getAbsolutePath(
+              outputFileSystem,
+              outputLocationPath,
+              GeneratorUtils.getRelativePath(javaType),
+              SOURCE_MAP_SUFFIX);
+      GeneratorUtils.writeToFile(absolutePathForSourceMap, output, charset, errors);
+    } catch (IOException e) {
+      errors.error(
+          Errors.Error.ERR_ERROR,
+          "Could not generate source maps for: " + javaSourceFile + ":" + e.getMessage());
     }
+  }
 
-    SourceMapGatheringVisitor visitor = new SourceMapGatheringVisitor();
-    for (CompilationUnit j2clUnit : j2clCompilationUnits) {
-      j2clUnit.accept(visitor);
+  private String renderSourceMapToString(JavaType javaType, SourceMapBuilder sourceMapBuilder)
+      throws IOException {
+    SourceMapGenerator sourceMapGenerator =
+        SourceMapGeneratorFactory.getInstance(SourceMapFormat.V3);
+    for (Entry<SourcePosition, Pair<String, SourcePosition>> entry :
+        sourceMapBuilder.getMappings().entrySet()) {
+      SourcePosition javaSourcePosition = entry.getValue().getRight();
+      SourcePosition javaScriptSourcePosition = entry.getKey();
+      if (javaSourcePosition == SourcePosition.UNKNOWN
+          || javaScriptSourcePosition == SourcePosition.UNKNOWN) {
+        continue;
+      }
+      sourceMapGenerator.addMapping(
+          compilationUnitSourceFileName,
+          null,
+          javaSourcePosition.getStartFilePosition(),
+          javaScriptSourcePosition.getStartFilePosition(),
+          javaScriptSourcePosition.getEndFilePosition());
     }
+    StringBuilder sb = new StringBuilder();
+    String typeName = javaType.getDescriptor().getBinaryClassName();
+    sourceMapGenerator.appendTo(sb, typeName + ".impl.js");
+    return sb.toString();
   }
 }
