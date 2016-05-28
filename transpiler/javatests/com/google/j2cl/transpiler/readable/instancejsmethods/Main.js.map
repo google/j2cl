@@ -1,40 +1,35 @@
-ExpressionStatement UNKNOWN => l25 c4 - l25 c8
-Block UNKNOWN => l26 c2 - l26 c1
-ExpressionStatement UNKNOWN => l35 c4 - l35 c15
-ExpressionStatement UNKNOWN => l36 c4 - l36 c27
-ExpressionStatement UNKNOWN => l37 c4 - l37 c78
-ReturnStatement UNKNOWN => l38 c4 - l38 c6
-Block UNKNOWN => l39 c2 - l39 c1
-ExpressionStatement UNKNOWN => l48 c4 - l48 c31
-ExpressionStatement UNKNOWN => l49 c4 - l49 c73
-Block UNKNOWN => l50 c2 - l50 c1
-ExpressionStatement l4 c4 - l4 c39 => l58 c4 - l58 c31
-ExpressionStatement l5 c4 - l5 c33 => l59 c4 - l59 c25
-ExpressionStatement l6 c4 - l6 c32 => l60 c4 - l60 c24
-ExpressionStatement l7 c4 - l7 c29 => l61 c4 - l61 c26
-ExpressionStatement l8 c4 - l8 c28 => l62 c4 - l62 c25
-ExpressionStatement l9 c4 - l9 c35 => l63 c4 - l63 c27
-ExpressionStatement l11 c4 - l11 c19 => l64 c4 - l64 c27
-ExpressionStatement l12 c4 - l12 c17 => l65 c4 - l65 c25
-ExpressionStatement l13 c4 - l13 c18 => l66 c4 - l66 c26
-ExpressionStatement l14 c4 - l14 c16 => l67 c4 - l67 c24
-ExpressionStatement l15 c4 - l15 c18 => l68 c4 - l68 c26
-ExpressionStatement l16 c4 - l16 c16 => l69 c4 - l69 c24
-ExpressionStatement l17 c4 - l17 c14 => l70 c4 - l70 c12
-ExpressionStatement l18 c4 - l18 c14 => l71 c4 - l71 c12
-ExpressionStatement l19 c4 - l19 c19 => l72 c4 - l72 c17
-Block UNKNOWN => l73 c2 - l73 c1
-ExpressionStatement UNKNOWN => l81 c4 - l81 c15
-ExpressionStatement l23 c4 - l23 c39 => l82 c4 - l82 c31
-ExpressionStatement l24 c4 - l24 c28 => l83 c4 - l83 c25
-ExpressionStatement l25 c4 - l25 c26 => l84 c4 - l84 c24
-ExpressionStatement l27 c4 - l27 c19 => l85 c4 - l85 c27
-ExpressionStatement l28 c4 - l28 c17 => l86 c4 - l86 c25
-ExpressionStatement l29 c4 - l29 c18 => l87 c4 - l87 c14
-ExpressionStatement l30 c4 - l30 c16 => l88 c4 - l88 c12
-ExpressionStatement l31 c4 - l31 c13 => l89 c4 - l89 c11
-ExpressionStatement l32 c4 - l32 c18 => l90 c4 - l90 c14
-ExpressionStatement l33 c4 - l33 c16 => l91 c4 - l91 c12
-ExpressionStatement l34 c4 - l34 c13 => l92 c4 - l92 c11
-ExpressionStatement l35 c4 - l35 c16 => l93 c4 - l93 c12
-Block UNKNOWN => l94 c2 - l94 c1
+[UNKNOWN] => [super();]
+[UNKNOWN] => [Main.$clinit();]
+[UNKNOWN] => [let $instance = new Main();]
+[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_instancejsmethods_Main();]
+[UNKNOWN] => [return $instance;]
+[UNKNOWN] => [this.$ctor__java_lang_Object();]
+[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_instancejsmethods_Main();]
+[SuperParent sp = new SuperParent();] => [let sp = SuperParent.$create();]
+[SuperParent p = new Parent();] => [let p = Parent.$create();]
+[SuperParent c = new Child();] => [let c = Child.$create();]
+[Parent pp = new Parent();] => [let pp = Parent.$create();]
+[Parent cc = new Child();] => [let cc = Child.$create();]
+[MyInterface intf = new Child();] => [let intf = Child.$create();]
+[sp.fun(12, 35);] => [sp.m_fun__int__int(12, 35);]
+[sp.bar(6, 7);] => [sp.m_bar__int__int(6, 7);]
+[p.fun(12, 35);] => [p.m_fun__int__int(12, 35);]
+[p.bar(6, 7);] => [p.m_bar__int__int(6, 7);]
+[c.fun(12, 35);] => [c.m_fun__int__int(12, 35);]
+[c.bar(6, 7);] => [c.m_bar__int__int(6, 7);]
+[pp.foo(1);] => [pp.myFoo(1);]
+[cc.foo(1);] => [cc.myFoo(1);]
+[intf.intfFoo();] => [intf.m_intfFoo();]
+[UNKNOWN] => [Main.$clinit();]
+[SuperParent sp = new SuperParent();] => [let sp = SuperParent.$create();]
+[Parent p = new Parent();] => [let p = Parent.$create();]
+[Child c = new Child();] => [let c = Child.$create();]
+[sp.fun(12, 35);] => [sp.m_fun__int__int(12, 35);]
+[sp.bar(6, 7);] => [sp.m_bar__int__int(6, 7);]
+[p.fun(12, 35);] => [p.sum(12, 35);]
+[p.bar(6, 7);] => [p.bar(6, 7);]
+[p.foo(1);] => [p.myFoo(1);]
+[c.fun(12, 35);] => [c.sum(12, 35);]
+[c.bar(6, 7);] => [c.bar(6, 7);]
+[c.foo(1);] => [c.myFoo(1);]
+[c.intfFoo();] => [c.intfFoo();]

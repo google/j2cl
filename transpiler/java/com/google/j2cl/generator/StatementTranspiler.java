@@ -191,13 +191,13 @@ public class StatementTranspiler {
 
       @Override
       public boolean enterReturnStatement(ReturnStatement returnStatement) {
-        SourcePosition location = builder.append("return");
-        addSourceMapping(returnStatement, location);
         Expression expression = returnStatement.getExpression();
-        if (expression != null) {
-          builder.append(" " + toSourceExpression(expression));
-        }
-        builder.appendln(";");
+        SourcePosition location =
+            builder.appendln(
+                "return"
+                    + (expression == null ? "" : (" " + toSourceExpression(expression)))
+                    + ";");
+        addSourceMapping(returnStatement, location);
         return false;
       }
 
@@ -264,15 +264,14 @@ public class StatementTranspiler {
       @Override
       public boolean enterWhileStatement(WhileStatement whileStatement) {
         String conditionAsString = toSourceExpression(whileStatement.getConditionExpression());
-        SourcePosition location = builder.append(String.format("while (%s)", conditionAsString));
+        SourcePosition location = builder.append("while (" + conditionAsString + ")");
         addSourceMapping(whileStatement, location);
         return true; // Allow this to enter block.
       }
 
       @Override
       public void exitBlock(Block blockStatement) {
-        SourcePosition location = builder.appendln("}");
-        addSourceMapping(blockStatement, location);
+        builder.appendln("}");
       }
 
       @Override
@@ -290,8 +289,7 @@ public class StatementTranspiler {
       }
 
       private void addSourceMapping(Statement statement, SourcePosition location) {
-        sourceMapBuilder.addMapping(
-            statement.getClass().getSimpleName(), statement.getSourcePosition(), location);
+        sourceMapBuilder.addMapping(statement.getSourcePosition(), location);
       }
     }
     SourceTransformer transformer = new SourceTransformer();

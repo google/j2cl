@@ -17,7 +17,6 @@ package com.google.j2cl.generator;
 
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Variable;
-import com.google.j2cl.ast.sourcemap.SourcePosition;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatheringVisitor;
@@ -25,8 +24,6 @@ import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
 import com.google.j2cl.generator.visitors.ImportUtils;
 import com.google.j2cl.generator.visitors.VariableAliasesGatheringVisitor;
 
-import java.nio.charset.Charset;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -54,10 +51,6 @@ public abstract class JavaScriptGenerator {
     environment = new GenerationEnvironment(sortedImports, aliasByVariable);
   }
 
-  public Map<SourcePosition, SourcePosition> generateOutput(Path outputPath, Charset charset) {
-    GeneratorUtils.writeToFile(outputPath, renderOutput(), charset, errors);
-    return null;
-  }
   abstract String renderOutput();
 
   abstract String getSuffix();

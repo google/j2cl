@@ -34,6 +34,9 @@ class SourceBuilder {
    * Appends some source and returns its resulting location.
    */
   public SourcePosition append(String source) {
+    // TODO: the code here is quite fragile and buggy, the SourcePosition is only correct if
+    // starting on a new line.
+
     Preconditions.checkArgument(
         !source.startsWith("  "),
         "Let SourceBuilder manage indentation, don't provide spaces at the beginning "
@@ -66,7 +69,7 @@ class SourceBuilder {
             lineNumber,
             indent.length(),
             lineNumber + numNewLines,
-            source.length() - lastNewLineIndex);
+            indent.length() + source.length() - lastNewLineIndex);
     lineNumber += numNewLines;
     onNewLine = source.endsWith(System.lineSeparator());
     return outputLocation;

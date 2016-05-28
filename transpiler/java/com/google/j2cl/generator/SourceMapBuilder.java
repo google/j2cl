@@ -17,8 +17,6 @@ package com.google.j2cl.generator;
 
 import com.google.j2cl.ast.sourcemap.SourcePosition;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -26,16 +24,14 @@ import java.util.TreeMap;
  * Maintains the source mapping information used to build source maps.
  */
 public class SourceMapBuilder {
-  // TODO: replace the Pair with a plain SourcePosition
-  private final SortedMap<SourcePosition, Pair<String, SourcePosition>>
-      javaSourceInfoByOutputSourceInfo = new TreeMap<>();
+  private final SortedMap<SourcePosition, SourcePosition> javaSourceInfoByOutputSourceInfo =
+      new TreeMap<>();
 
-  public void addMapping(
-      String name, SourcePosition inputSourcePosition, SourcePosition outputSourcePosition) {
-    javaSourceInfoByOutputSourceInfo.put(outputSourcePosition, Pair.of(name, inputSourcePosition));
+  public void addMapping(SourcePosition inputSourcePosition, SourcePosition outputSourcePosition) {
+    javaSourceInfoByOutputSourceInfo.put(outputSourcePosition, inputSourcePosition);
   }
 
-  public SortedMap<SourcePosition, Pair<String, SourcePosition>> getMappings() {
+  public SortedMap<SourcePosition, SourcePosition> getMappings() {
     return javaSourceInfoByOutputSourceInfo;
   }
 }

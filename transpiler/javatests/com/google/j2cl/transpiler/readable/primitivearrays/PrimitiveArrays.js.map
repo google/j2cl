@@ -1,33 +1,29 @@
-ExpressionStatement UNKNOWN => l31 c4 - l31 c8
-Block UNKNOWN => l32 c2 - l32 c1
-ExpressionStatement UNKNOWN => l41 c4 - l41 c26
-ExpressionStatement UNKNOWN => l42 c4 - l42 c38
-ExpressionStatement UNKNOWN => l43 c4 - l43 c87
-ReturnStatement UNKNOWN => l44 c4 - l44 c6
-Block UNKNOWN => l45 c2 - l45 c1
-ExpressionStatement UNKNOWN => l54 c4 - l54 c31
-ExpressionStatement UNKNOWN => l55 c4 - l55 c82
-Block UNKNOWN => l56 c2 - l56 c1
-ExpressionStatement l4 c4 - l4 c33 => l64 c4 - l64 c75
-ExpressionStatement l5 c4 - l5 c39 => l65 c4 - l65 c86
-ExpressionStatement l7 c4 - l7 c36 => l66 c4 - l66 c77
-ExpressionStatement l8 c4 - l8 c42 => l67 c4 - l67 c88
-ExpressionStatement l10 c4 - l10 c30 => l68 c4 - l68 c73
-ExpressionStatement l11 c4 - l11 c36 => l69 c4 - l69 c84
-ExpressionStatement l13 c4 - l13 c33 => l70 c4 - l70 c75
-ExpressionStatement l14 c4 - l14 c39 => l71 c4 - l71 c86
-ExpressionStatement l16 c4 - l16 c36 => l72 c4 - l72 c77
-ExpressionStatement l17 c4 - l17 c42 => l73 c4 - l73 c88
-ExpressionStatement l19 c4 - l19 c39 => l74 c4 - l74 c79
-ExpressionStatement l20 c4 - l20 c45 => l75 c4 - l75 c90
-ExpressionStatement l22 c4 - l22 c33 => l76 c4 - l76 c75
-ExpressionStatement l23 c4 - l23 c39 => l77 c4 - l77 c86
-ExpressionStatement l25 c4 - l25 c42 => l78 c4 - l78 c82
-ExpressionStatement l26 c4 - l26 c48 => l79 c4 - l79 c93
-ExpressionStatement l29 c4 - l29 c22 => l80 c4 - l80 c18
-ExpressionStatement l30 c4 - l30 c23 => l81 c4 - l81 c19
-ExpressionStatement l33 c4 - l33 c17 => l82 c4 - l82 c26
-ExpressionStatement l34 c4 - l34 c22 => l83 c4 - l83 c31
-ExpressionStatement l37 c4 - l37 c17 => l84 c4 - l84 c28
-ExpressionStatement l38 c4 - l38 c22 => l85 c4 - l85 c33
-Block UNKNOWN => l86 c2 - l86 c1
+[UNKNOWN] => [super();]
+[UNKNOWN] => [PrimitiveArrays.$clinit();]
+[UNKNOWN] => [let $instance = new PrimitiveArrays();]
+[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_primitivearrays_PrimitiveArrays();]
+[UNKNOWN] => [return $instance;]
+[UNKNOWN] => [this.$ctor__java_lang_Object();]
+[UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_primitivearrays_PrimitiveArrays();]
+[byte[] bytes = new byte[100];] => [let bytes = /**@type {!Array<number>} */ ($Arrays.$create([ 100 ], $byte));]
+[byte[][] bytes2d = new byte[5][10];] => [let bytes2d = /**@type {!Array<Array<number>>} */ ($Arrays.$create([ 5, 10 ], $byte));]
+[short[] shorts = new short[100];] => [let shorts = /**@type {!Array<number>} */ ($Arrays.$create([ 100 ], $short));]
+[short[][] shorts2d = new short[5][10];] => [let shorts2d = /**@type {!Array<Array<number>>} */ ($Arrays.$create([ 5, 10 ], $short));]
+[int[] ints = new int[100];] => [let ints = /**@type {!Array<number>} */ ($Arrays.$create([ 100 ], $int));]
+[int[][] ints2d = new int[5][10];] => [let ints2d = /**@type {!Array<Array<number>>} */ ($Arrays.$create([ 5, 10 ], $int));]
+[long[] longs = new long[100];] => [let longs = /**@type {!Array<!$Long>} */ ($Arrays.$create([ 100 ], $long));]
+[long[][] longs2d = new long[5][10];] => [let longs2d = /**@type {!Array<Array<!$Long>>} */ ($Arrays.$create([ 5, 10 ], $long));]
+[float[] floats = new float[100];] => [let floats = /**@type {!Array<number>} */ ($Arrays.$create([ 100 ], $float));]
+[float[][] floats2d = new float[5][10];] => [let floats2d = /**@type {!Array<Array<number>>} */ ($Arrays.$create([ 5, 10 ], $float));]
+[double[] doubles = new double[100];] => [let doubles = /**@type {!Array<number>} */ ($Arrays.$create([ 100 ], $double));]
+[double[][] doubles2d = new double[5][10];] => [let doubles2d = /**@type {!Array<Array<number>>} */ ($Arrays.$create([ 5, 10 ], $double));]
+[char[] chars = new char[100];] => [let chars = /**@type {!Array<number>} */ ($Arrays.$create([ 100 ], $char));]
+[char[][] chars2d = new char[5][10];] => [let chars2d = /**@type {!Array<Array<number>>} */ ($Arrays.$create([ 5, 10 ], $char));]
+[boolean[] booleans = new boolean[100];] => [let booleans = /**@type {!Array<boolean>} */ ($Arrays.$create([ 100 ], $boolean));]
+[boolean[][] booleans2d = new boolean[5][10];] => [let booleans2d = /**@type {!Array<Array<boolean>>} */ ($Arrays.$create([ 5, 10 ], $boolean));]
+[int foo = ints[0];] => [let foo = ints[0];]
+[foo = ints2d[0][1];] => [foo = ints2d[0][1];]
+[ints[0] = 10;] => [$Arrays.$set(ints, 0, 10);]
+[ints2d[0][1] = 20;] => [$Arrays.$set(ints2d[0], 1, 20);]
+[ints[0] += 1;] => [$Arrays.$addSet(ints, 0, 1);]
+[ints2d[0][1] -= 1;] => [$Arrays.$subSet(ints2d[0], 1, 1);]

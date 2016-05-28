@@ -7,8 +7,6 @@ import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
 import com.google.j2cl.errors.Errors;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.FileSystem;
@@ -76,9 +74,8 @@ public class SourceMapGeneratorStage {
       throws IOException {
     SourceMapGenerator sourceMapGenerator =
         SourceMapGeneratorFactory.getInstance(SourceMapFormat.V3);
-    for (Entry<SourcePosition, Pair<String, SourcePosition>> entry :
-        sourceMapBuilder.getMappings().entrySet()) {
-      SourcePosition javaSourcePosition = entry.getValue().getRight();
+    for (Entry<SourcePosition, SourcePosition> entry : sourceMapBuilder.getMappings().entrySet()) {
+      SourcePosition javaSourcePosition = entry.getValue();
       SourcePosition javaScriptSourcePosition = entry.getKey();
       if (javaSourcePosition == SourcePosition.UNKNOWN
           || javaScriptSourcePosition == SourcePosition.UNKNOWN) {
