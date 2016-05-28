@@ -215,7 +215,8 @@ public class NormalizeConstructors {
             || superConstructorInvocation
                 .getTarget()
                 .getEnclosingClassTypeDescriptor()
-                .equalsIgnoreNullability(javaType.getSuperTypeDescriptor()));
+                .getRawTypeDescriptor()
+                .equalsIgnoreNullability(javaType.getSuperTypeDescriptor().getRawTypeDescriptor()));
 
     List<Statement> body = AstUtils.generateFieldDeclarations(javaType);
 
