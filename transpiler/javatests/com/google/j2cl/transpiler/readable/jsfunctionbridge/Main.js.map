@@ -6,7 +6,19 @@
 [UNKNOWN] => [this.$ctor__java_lang_Object();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main();]
 [UNKNOWN] => [Main.$clinit();]
-[ApplyFunction<String> foo =...] => [let foo = Main$1.$create();]
+[ApplyFunction<String> foo =
+        new ApplyFunction<String>() {
+          public String field = "abc";
+
+          @Override
+          public String apply(String s) {
+            return s + field;
+          }
+
+          public String fun() {
+            return field + apply("a");
+          }
+        };] => [let foo = Main$1.$create();]
 [callGeneric(foo, "a");] => [Main.m_callGeneric__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main$ApplyFunction__java_lang_Object(foo, "a");]
 [callParametric(foo, "a");] => [Main.m_callParametric__com_google_j2cl_transpiler_readable_jsfunctionbridge_Main$ApplyFunction__java_lang_String(foo, "a");]
 [foo.apply("a");] => [foo("a");]

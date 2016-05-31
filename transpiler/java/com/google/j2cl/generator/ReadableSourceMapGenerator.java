@@ -46,10 +46,10 @@ public class ReadableSourceMapGenerator {
           sourceMapBuilder.getMappings().entrySet()) {
         SourcePosition javaSourcePosition = entry.getValue();
         SourcePosition javaScriptSourcePosition = entry.getKey();
-        sb.append("[" + extract(javaSourcePosition, javaSourceLines));
-        sb.append("] => [");
+        sb.append(extract(javaSourcePosition, javaSourceLines));
+        sb.append(" => ");
         sb.append(extract(javaScriptSourcePosition, javaScriptSourceLines).trim());
-        sb.append("]\n");
+        sb.append("\n");
       }
     } catch (IOException e) {
       e.printStackTrace();
@@ -58,27 +58,25 @@ public class ReadableSourceMapGenerator {
   }
 
   private static String extract(SourcePosition sourcePosition, List<String> lines) {
-    try {
-      if (sourcePosition == SourcePosition.UNKNOWN) {
-        return "UNKNOWN";
-      }
-      int startLine = sourcePosition.getStartFilePosition().getLine();
-      String fragment = lines.get(startLine);
-      int endLine = sourcePosition.getEndFilePosition().getLine();
-      int endColumn = sourcePosition.getEndFilePosition().getColumn();
-      int startColumn = sourcePosition.getStartFilePosition().getColumn();
-      if (endLine != startLine || endColumn == -1) {
-        return fragment.substring(startColumn) + ((endLine != startLine) ? "..." : "");
-      }
-
-      return fragment.substring(startColumn, endColumn);
-    } catch (IndexOutOfBoundsException e) {
-      return String.format(
-          "Non existing output range (%d,%d)-(%d,%d)",
-          sourcePosition.getStartFilePosition().getLine(),
-          sourcePosition.getStartFilePosition().getColumn(),
-          sourcePosition.getEndFilePosition().getLine(),
-          sourcePosition.getEndFilePosition().getColumn());
+    int startLine = sourcePosition.getStartFilePosition().getLine();
+    int endLine = sourcePosition.getEndFilePosition().getLine();
+    if (sourcePosition == SourcePosition.UNKNOWN) {
+      return "[UNKNOWN]";
     }
+    String fragment = lines.get(startLine);
+    int endColumn = sourcePosition.getEndFilePosition().getColumn();
+    int startColumn = sourcePosition.getStartFilePosition().getColumn();
+    if (endLine != startLine || endColumn == -1) {
+      StringBuilder content = new StringBuilder(fragment.substring(startColumn));
+      for (int line = startLine + 1; line < endLine; line++) {
+        content.append("\n");
+        content.append(lines.get(line));
+      }
+      content.append("\n");
+      content.append(lines.get(endLine).substring(0, endColumn));
+      return "[" + content.toString() + "]";
+    }
+
+    return "[" + fragment.substring(startColumn, endColumn) + "]";
   }
 }

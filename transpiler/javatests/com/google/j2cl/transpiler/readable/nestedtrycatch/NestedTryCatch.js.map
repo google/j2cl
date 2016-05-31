@@ -5,11 +5,23 @@
 [UNKNOWN] => [return $instance;]
 [UNKNOWN] => [this.$ctor__java_lang_Object();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_nestedtrycatch_NestedTryCatch();]
-[try {...] => [try]
+[try {
+      throw new Exception();
+    } catch (Exception ae) {
+      try {
+        throw new Exception();
+      } catch (Exception ie) {
+        // expected empty body.
+      }
+    }] => [try]
 [throw new Exception();] => [throw $Exceptions.toJs(Exception.$create());]
 [UNKNOWN] => [ae = $Exceptions.toJava(ae);]
 [UNKNOWN] => [if (Exception.$isInstance(ae))]
-[try {...] => [try]
+[try {
+        throw new Exception();
+      } catch (Exception ie) {
+        // expected empty body.
+      }] => [try]
 [throw new Exception();] => [throw $Exceptions.toJs(Exception.$create());]
 [UNKNOWN] => [ie = $Exceptions.toJava(ie);]
 [UNKNOWN] => [if (Exception.$isInstance(ie))]

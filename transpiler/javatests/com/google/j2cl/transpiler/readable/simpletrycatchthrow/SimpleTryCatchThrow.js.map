@@ -5,7 +5,12 @@
 [UNKNOWN] => [return $instance;]
 [UNKNOWN] => [this.$ctor__java_lang_Object();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_simpletrycatchthrow_SimpleTryCatchThrow();]
-[try {...] => [try]
+[try {
+      throw new ClassCastException();
+    } catch (NullPointerException | ClassCastException e) {
+      System.out.println("saw exception: " + e);
+    } finally {
+    }] => [try]
 [throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create());]
 [UNKNOWN] => [e = $Exceptions.toJava(e);]
 [UNKNOWN] => [if (NullPointerException.$isInstance(e) || ClassCastException.$isInstance(e))]

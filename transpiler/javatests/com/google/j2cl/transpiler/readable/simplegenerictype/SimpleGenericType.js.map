@@ -1,6 +1,8 @@
 [UNKNOWN] => [super();]
-[UNKNOWN] => [/** @public {C_T} */...]
-[UNKNOWN] => [/** @public {C_S} */...]
+[UNKNOWN] => [/** @public {C_T} */
+    this.f_first__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType = /**@type {?} */ (null);]
+[UNKNOWN] => [/** @public {C_S} */
+    this.f_second__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType = /**@type {?} */ (null);]
 [UNKNOWN] => [SimpleGenericType.$clinit();]
 [UNKNOWN] => [let $instance = new SimpleGenericType();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType__java_lang_Object__java_lang_Object(t, s);]
@@ -9,4 +11,5 @@
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType();]
 [this.first = t;] => [this.f_first__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType = t;]
 [this.second = s;] => [this.f_second__com_google_j2cl_transpiler_readable_simplegenerictype_SimpleGenericType = s;]
-[@SuppressWarnings("unused")...] => [let g = /**@type {!SimpleGenericType<*, Error>} */ (SimpleGenericType.$create__java_lang_Object__java_lang_Object(Object.$create(), Error.$create()));]
+[@SuppressWarnings("unused")
+    SimpleGenericType<Object, Error> g = new SimpleGenericType<>(new Object(), new Error());] => [let g = /**@type {!SimpleGenericType<*, Error>} */ (SimpleGenericType.$create__java_lang_Object__java_lang_Object(Object.$create(), Error.$create()));]

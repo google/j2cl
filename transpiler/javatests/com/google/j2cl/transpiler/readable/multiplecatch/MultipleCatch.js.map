@@ -5,11 +5,17 @@
 [UNKNOWN] => [return $instance;]
 [UNKNOWN] => [this.$ctor__java_lang_Object();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_multiplecatch_MultipleCatch();]
-[try {...] => [try]
+[try {
+      throw new ClassCastException();
+    } catch (NullPointerException | ClassCastException e) {
+      // expected empty body.
+    } catch (RuntimeException r) {
+      r = null; // used to show exception variable is transpiled correctly.
+    }] => [try]
 [throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create());]
 [UNKNOWN] => [e = $Exceptions.toJava(e);]
 [UNKNOWN] => [if (NullPointerException.$isInstance(e) || ClassCastException.$isInstance(e))]
-[UNKNOWN] => [else if (RuntimeException.$is]
+[UNKNOWN] => [       else if (RuntimeException.$isInstance(e))]
 [UNKNOWN] => [let r = e;]
 [r = null;] => [r = null;]
 [UNKNOWN] => [throw $Exceptions.toJs(e);]

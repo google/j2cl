@@ -1,7 +1,10 @@
 [UNKNOWN] => [super();]
-[UNKNOWN] => [/** @public {number} */...]
-[UNKNOWN] => [/** @public {InnerClassInitOrder$Outer} */...]
-[UNKNOWN] => [/** @public {InnerClassInitOrder$Outer$OuterIsSuper} */...]
+[UNKNOWN] => [/** @public {number} */
+    this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder = 0;]
+[UNKNOWN] => [/** @public {InnerClassInitOrder$Outer} */
+    this.f_outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ = null;]
+[UNKNOWN] => [/** @public {InnerClassInitOrder$Outer$OuterIsSuper} */
+    this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ = null;]
 [UNKNOWN] => [InnerClassInitOrder.$clinit();]
 [UNKNOWN] => [let $instance = new InnerClassInitOrder();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder();]
@@ -33,16 +36,32 @@
 [new InnerClass();] => [InnerClassInitOrder$InnerClass.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(this);]
 [assert (number == 1111);] => [$Asserts.$enabled() && $Asserts.$assert((this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder == 1111));]
 [AddNumber[] results = new AddNumber[10];] => [let results = /**@type {!Array<InnerClassInitOrder$1AddNumber>} */ ($Arrays.$create([ 10 ], InnerClassInitOrder$1AddNumber));]
-[for (int i = 0; i < 10; i++) {...] => [for (let i = 0; i < 10; i++)]
-[AddNumber ap = new AddNumber(i) {...] => [let ap = InnerClassInitOrder$1.$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(i, this);]
+[for (int i = 0; i < 10; i++) {
+      AddNumber ap = new AddNumber(i) {
+        @Override
+        public void act() {
+          number += num;
+        }
+      };
+      results[i] = ap;
+    }] => [for (let i = 0; i < 10; i++)]
+[AddNumber ap = new AddNumber(i) {
+        @Override
+        public void act() {
+          number += num;
+        }
+      };] => [let ap = InnerClassInitOrder$1.$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(i, this);]
 [results[i] = ap;] => [$Arrays.$set(results, i, ap);]
-[for (AddNumber theAp : results) {...] => [for (let $array = results, $index = 0; $index < $array.length; $index++)]
+[for (AddNumber theAp : results) {
+      theAp.act();
+    }] => [for (let $array = results, $index = 0; $index < $array.length; $index++)]
 [UNKNOWN] => [let theAp = $array[$index];]
 [theAp.act();] => [theAp.m_act();]
 [assert (number == 1156);] => [$Asserts.$enabled() && $Asserts.$assert((this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder == 1156));]
 [Outer.OuterIsNotSuper x = outerIsSuper.new OuterIsNotSuper();] => [let x = InnerClassInitOrder$Outer$OuterIsNotSuper.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer(this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_);]
 [assert (2 == x.getValue());] => [$Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue()));]
-[Outer.OuterIsNotSuper x = outerIsSuper.new OuterIsNotSuper() {...] => [let x = InnerClassInitOrder$2.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_, this);]
+[Outer.OuterIsNotSuper x = outerIsSuper.new OuterIsNotSuper() {
+    };] => [let x = InnerClassInitOrder$2.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_, this);]
 [assert (2 == x.getValue());] => [$Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue()));]
 [Outer.TestQualifiedSuperCall x = new Outer.TestQualifiedSuperCall();] => [let x = InnerClassInitOrder$Outer$TestQualifiedSuperCall.$create();]
 [assert (2 == x.getValue());] => [$Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue()));]
@@ -54,7 +73,8 @@
 [assert (2 == x.getValue());] => [$Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue()));]
 [Outer.TestUnqualifiedSuperCall x = outerIsSuper.new TestUnqualifiedSuperCall();] => [let x = InnerClassInitOrder$Outer$TestUnqualifiedSuperCall.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer(this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_);]
 [assert (2 == x.getValue());] => [$Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue()));]
-[Outer.TestUnqualifiedSuperCall x = outerIsSuper.new TestUnqualifiedSuperCall() {...] => [let x = InnerClassInitOrder$4.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_, this);]
+[Outer.TestUnqualifiedSuperCall x = outerIsSuper.new TestUnqualifiedSuperCall() {
+    };] => [let x = InnerClassInitOrder$4.$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_, this);]
 [assert (2 == x.getValue());] => [$Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue()));]
 [UNKNOWN] => [InnerClassInitOrder.$clinit();]
 [InnerClassInitOrder m = new InnerClassInitOrder();] => [let m = InnerClassInitOrder.$create();]

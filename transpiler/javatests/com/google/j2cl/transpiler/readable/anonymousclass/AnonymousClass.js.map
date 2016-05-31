@@ -5,4 +5,9 @@
 [UNKNOWN] => [return $instance;]
 [UNKNOWN] => [this.$ctor__java_lang_Object();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass();]
-[SomeClass instance =...] => [let instance = AnonymousClass$1.$create__int__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass(1, this);]
+[SomeClass instance =
+        new SomeClass(1) {
+          public String foo() {
+            return "a";
+          }
+        };] => [let instance = AnonymousClass$1.$create__int__com_google_j2cl_transpiler_readable_anonymousclass_AnonymousClass(1, this);]

@@ -10,6 +10,16 @@
 [UNKNOWN] => [EqualFunctions.$clinit();]
 [return (EqualFunction<T>) forCollection;] => [return /**@type {$NativeFunction} */ ($Casts.to(EqualFunctions.$f_forCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions, EqualFunction));]
 [UNKNOWN] => [EqualFunctions.$clinit();]
-[return new EqualFunction<T>() {...] => [return /**@type {!$NativeFunction} */ (EqualFunctions$2.$create());]
+[return new EqualFunction<T>() {
+      @Override
+      public boolean equal(T objA, T objB) {
+        return true;
+      }
+    };] => [return /**@type {!$NativeFunction} */ (EqualFunctions$2.$create());]
 [UNKNOWN] => [EqualFunctions.$clinit();]
-[return new EqualFunction<Foo<T>>() {...] => [return /**@type {!$NativeFunction} */ (EqualFunctions$3.$create());]
+[return new EqualFunction<Foo<T>>() {
+      @Override
+      public boolean equal(Foo<T> first, Foo<T> second) {
+        return first == second;
+      }
+    };] => [return /**@type {!$NativeFunction} */ (EqualFunctions$3.$create());]

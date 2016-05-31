@@ -5,9 +5,19 @@
 [UNKNOWN] => [return $instance;]
 [UNKNOWN] => [this.$ctor__java_lang_Object();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_labelstatement_LabeledStatement();]
-[for (; ; ) {...] => [LABEL:]
-[LABEL:...] => [LABEL:]
+[for (; ; ) {
+      break LABEL;
+    }] => [    LABEL: for (; ; )]
+[LABEL:
+    for (; ; ) {
+      break LABEL;
+    }] => [LABEL: ]
 [break LABEL;] => [break LABEL;]
-[for (; ; ) {...] => [LABEL1]
-[LABEL1:...] => [LABEL1:]
+[for (; ; ) {
+      continue LABEL1;
+    }] => [    LABEL1: for (; ; )]
+[LABEL1:
+    for (; ; ) {
+      continue LABEL1;
+    }] => [LABEL1: ]
 [continue LABEL1;] => [continue LABEL1;]

@@ -1,17 +1,29 @@
 [UNKNOWN] => [DefaultNonNullable.$clinit();]
 [UNKNOWN] => [super();]
-[UNKNOWN] => [/** @public {string} */...]
-[UNKNOWN] => [/** @public {?string} */...]
-[UNKNOWN] => [/** @public {?string} */...]
-[UNKNOWN] => [/** @public {!List<string>} */...]
-[UNKNOWN] => [/** @public {List<string>} */...]
-[UNKNOWN] => [/** @public {!List<?string>} */...]
-[UNKNOWN] => [/** @public {List<?string>} */...]
-[UNKNOWN] => [/** @public {!Array<string>} */...]
-[UNKNOWN] => [/** @public {!Array<?string>} */...]
-[UNKNOWN] => [/** @public {Array<string>} */...]
-[UNKNOWN] => [/** @public {Void} */...]
-[UNKNOWN] => [/** @public {!List<string>} */...]
+[UNKNOWN] => [/** @public {string} */
+    this.f_f1__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = /**@type {?} */ (null);]
+[UNKNOWN] => [/** @public {?string} */
+    this.f_f2__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = null;]
+[UNKNOWN] => [/** @public {?string} */
+    this.f_f3__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = null;]
+[UNKNOWN] => [/** @public {!List<string>} */
+    this.f_f4__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = /**@type {?} */ (null);]
+[UNKNOWN] => [/** @public {List<string>} */
+    this.f_f5__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = null;]
+[UNKNOWN] => [/** @public {!List<?string>} */
+    this.f_f6__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = /**@type {?} */ (null);]
+[UNKNOWN] => [/** @public {List<?string>} */
+    this.f_f7__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = null;]
+[UNKNOWN] => [/** @public {!Array<string>} */
+    this.f_f8__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = /**@type {?} */ (null);]
+[UNKNOWN] => [/** @public {!Array<?string>} */
+    this.f_f9__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = /**@type {?} */ (null);]
+[UNKNOWN] => [/** @public {Array<string>} */
+    this.f_f10__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = null;]
+[UNKNOWN] => [/** @public {Void} */
+    this.f_f11__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = null;]
+[UNKNOWN] => [/** @public {!List<string>} */
+    this.f_f12__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = /**@type {?} */ (null);]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable__java_lang_String(a);]
 [UNKNOWN] => [this.$ctor__java_lang_Object();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable();]
@@ -27,7 +39,10 @@
 [String c = null;] => [let c = null;]
 [m1(a, b, c);] => [this.m_m1__java_lang_String__java_util_List__java_lang_String(/**@type {string} */ (a), /**@type {!List<number>} */ (b), c);]
 [this.f1 = a;] => [this.f_f1__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = /**@type {string} */ (a);]
-[if (true) {...] => [if (true)]
+[if (true) {
+      // Cast not needed since NonNullableClass.getString returns !string.
+      return NonNullableClass.getString();
+    }] => [if (true)]
 [return NonNullableClass.getString();] => [return NonNullableClass.m_getString();]
 [return a;] => [return /**@type {string} */ (a);]
 [this.f4 = Lists.newArrayList();] => [this.f_f4__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = /**@type {!List<string>} */ (Lists.m_newArrayList());]
@@ -41,7 +56,9 @@
 [b = x;] => [b = /**@type {string} */ (x);]
 [foo.bar(x);] => [foo.m_bar__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_defaultnonnullable(/**@type {string} */ (x));]
 [b = foo.toString();] => [b = $Objects.m_toString__java_lang_Object(foo);]
-[if (true) {...] => [if (true)]
+[if (true) {
+      return x;
+    }] => [if (true)]
 [return x;] => [return /**@type {string} */ (x);]
 [String[] myArray = "Hel-lo".split("-");] => [let myArray = /**@type {Array<string>} */ (String.m_split__java_lang_String__java_lang_String("Hel-lo", "-"));]
 [m3(myArray[0]);] => [this.m3(myArray[0]);]

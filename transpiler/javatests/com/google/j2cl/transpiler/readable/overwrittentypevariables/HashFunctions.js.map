@@ -6,6 +6,16 @@
 [UNKNOWN] => [this.$ctor__java_lang_Object();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_overwrittentypevariables_HashFunctions();]
 [UNKNOWN] => [HashFunctions.$clinit();]
-[return new HashFunction<T>() {...] => [return /**@type {!HashFunctions$1<*>} */ (HashFunctions$1.$create());]
+[return new HashFunction<T>() {
+      @Override
+      public String apply(T input) {
+        return "";
+      }
+    };] => [return /**@type {!HashFunctions$1<*>} */ (HashFunctions$1.$create());]
 [UNKNOWN] => [HashFunctions.$clinit();]
-[return new HashFunction<T>() {...] => [return /**@type {!HashFunctions$2<Enum>} */ (HashFunctions$2.$create());]
+[return new HashFunction<T>() {
+      @Override
+      public String apply(T input) {
+        return "" + input.ordinal();
+      }
+    };] => [return /**@type {!HashFunctions$2<Enum>} */ (HashFunctions$2.$create());]

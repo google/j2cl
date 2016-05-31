@@ -1,5 +1,6 @@
 [UNKNOWN] => [super();]
-[UNKNOWN] => [/** @public {MixedNestings$A$1B$1} */...]
+[UNKNOWN] => [/** @public {MixedNestings$A$1B$1} */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$0fun = null;]
 [UNKNOWN] => [MixedNestings$A$1B$1$0fun.$clinit();]
 [UNKNOWN] => [let $instance = new MixedNestings$A$1B$1$0fun();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$0fun__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1($outer_this);]
@@ -10,6 +11,17 @@
 [mm();] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$0fun.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A.m_mm();]
 [aa();] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$0fun.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B.m_aa();]
 [bb();] => [this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$0fun.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1.m_bb();]
-[MyInterface iii =...] => [let iii = MixedNestings$A$1B$1$1fun.$create__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1(this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$0fun);]
+[MyInterface iii =
+                            m -> {
+                              mm();
+                              aa();
+                              bb();
+                              return new MyInterface() {
+                                @Override
+                                public int fun(int b) {
+                                  return b;
+                                }
+                              }.fun(100);
+                            };] => [let iii = MixedNestings$A$1B$1$1fun.$create__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1(this.f_$outer_this__com_google_j2cl_transpiler_readable_mixednestings_MixedNestings$A$1B$1$0fun);]
 [return iii.fun(200);] => [return iii.m_fun__int(200);]
 [UNKNOWN] => [return this.lambda0fun(arg0);]

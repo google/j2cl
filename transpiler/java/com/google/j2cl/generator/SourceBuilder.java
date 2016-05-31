@@ -34,9 +34,6 @@ class SourceBuilder {
    * Appends some source and returns its resulting location.
    */
   public SourcePosition append(String source) {
-    // TODO: the code here is quite fragile and buggy, the SourcePosition is only correct if
-    // starting on a new line.
-
     Preconditions.checkArgument(
         !source.startsWith("  "),
         "Let SourceBuilder manage indentation, don't provide spaces at the beginning "
@@ -49,12 +46,6 @@ class SourceBuilder {
       // We unindent immediately if there is a } so that the } is at the outer indentation level
       indentationLevel -= StringUtils.countMatches(source, "}");
     }
-
-    int lastNewLineIndex = 0;
-    if (numNewLines > 0) {
-      lastNewLineIndex = source.lastIndexOf(System.lineSeparator());
-    }
-
     String indent = onNewLine ? StringUtils.repeat(INDENT, indentationLevel) : "";
     sb.append(indent + source);
 
@@ -69,7 +60,7 @@ class SourceBuilder {
             lineNumber,
             indent.length(),
             lineNumber + numNewLines,
-            indent.length() + source.length() - lastNewLineIndex);
+            sb.length() - sb.lastIndexOf(System.lineSeparator()) - 1);
     lineNumber += numNewLines;
     onNewLine = source.endsWith(System.lineSeparator());
     return outputLocation;

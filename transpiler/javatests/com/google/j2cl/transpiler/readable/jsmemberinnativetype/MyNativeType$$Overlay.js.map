@@ -1,5 +1,6 @@
 [UNKNOWN] => [MyNativeType$$Overlay.$clinit();]
-[@SuppressWarnings("unused")...] => [let value = $thisArg.publicField + $thisArg.privateField + $thisArg.packageField + $thisArg.protectedField;]
+[@SuppressWarnings("unused")
+    int value = publicField + privateField + packageField + protectedField;] => [let value = $thisArg.publicField + $thisArg.privateField + $thisArg.packageField + $thisArg.protectedField;]
 [publicMethod();] => [$thisArg.publicMethod();]
 [privateMethod();] => [$thisArg.privateMethod();]
 [packageMethod();] => [$thisArg.packageMethod();]

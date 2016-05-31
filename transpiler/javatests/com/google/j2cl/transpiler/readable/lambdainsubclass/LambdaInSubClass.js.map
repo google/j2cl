@@ -5,4 +5,16 @@
 [UNKNOWN] => [return $instance;]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_lambdainsubclass_Parent();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_lambdainsubclass_LambdaInSubClass();]
-[LambdaInterface l =...] => [let l = (LambdaInSubClass$0foo.$create__com_google_j2cl_transpiler_readable_lambdainsubclass_LambdaInSubClass(this));]
+[LambdaInterface l =
+        (i -> {
+          // call to outer class's inherited function
+          funInParent(); // this.outer.funInParent()
+          this.funInParent(); // this.outer.funInParent()
+          LambdaInSubClass.this.funInParent(); // this.outer.funInParent()
+
+          // access to outer class's inherited fields
+          int a = fieldInParent;
+          a = this.fieldInParent;
+          a = LambdaInSubClass.this.fieldInParent;
+          return a;
+        });] => [let l = (LambdaInSubClass$0foo.$create__com_google_j2cl_transpiler_readable_lambdainsubclass_LambdaInSubClass(this));]

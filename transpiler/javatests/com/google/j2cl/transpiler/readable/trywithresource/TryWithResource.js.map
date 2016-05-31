@@ -20,7 +20,12 @@
 [UNKNOWN] => [if ($primaryExc != null)]
 [UNKNOWN] => [throw $Exceptions.toJs($primaryExc);]
 [UNKNOWN] => [TryWithResource.$clinit();]
-[try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {...] => [try]
+[try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
+      int i = 0;
+      throw new Exception();
+    } catch (Exception e) {
+      int b = 10;
+    }] => [try]
 [UNKNOWN] => [let $primaryExc = null;]
 [UNKNOWN] => [let thing = null;]
 [UNKNOWN] => [let thing2 = null;]
