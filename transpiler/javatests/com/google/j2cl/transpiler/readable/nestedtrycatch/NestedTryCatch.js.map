@@ -16,7 +16,7 @@
     }] => [try]
 [throw new Exception();] => [throw $Exceptions.toJs(Exception.$create());]
 [UNKNOWN] => [ae = $Exceptions.toJava(ae);]
-[UNKNOWN] => [if (Exception.$isInstance(ae))]
+[UNKNOWN] => [if (Exception.$isInstance(ae)) ]
 [try {
         throw new Exception();
       } catch (Exception ie) {
@@ -24,6 +24,6 @@
       }] => [try]
 [throw new Exception();] => [throw $Exceptions.toJs(Exception.$create());]
 [UNKNOWN] => [ie = $Exceptions.toJava(ie);]
-[UNKNOWN] => [if (Exception.$isInstance(ie))]
+[UNKNOWN] => [if (Exception.$isInstance(ie)) ]
 [UNKNOWN] => [throw $Exceptions.toJs(ie);]
 [UNKNOWN] => [throw $Exceptions.toJs(ae);]

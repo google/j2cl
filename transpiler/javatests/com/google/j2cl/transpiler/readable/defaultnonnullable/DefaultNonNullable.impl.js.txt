@@ -120,8 +120,9 @@ class DefaultNonNullable extends Object {
   m3(a, args) {
     let $var_args_copy = /**@type {!Array<string>} */ (
         $Arrays.$create([arguments.length - 1], String));
-    for (let $i = 0; $i < arguments.length - 1; $i++)
+    for (let $i = 0; $i < arguments.length - 1; $i++) {
       $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
+    }
     return null;
   }
 

@@ -23,6 +23,7 @@ import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
+import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
@@ -174,7 +175,7 @@ public class NormalizeJsVarargs extends AbstractRewriter {
           new ForStatement(
               new BinaryExpression(
                   primitiveBoolean, loopVariable.getReference(), BinaryOperator.LESS, arraySize),
-              body,
+              new Block(body),
               Arrays.<Expression>asList(
                   new VariableDeclarationExpression(
                       new VariableDeclarationFragment(

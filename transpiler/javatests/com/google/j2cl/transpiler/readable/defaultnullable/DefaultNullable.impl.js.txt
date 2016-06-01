@@ -111,8 +111,9 @@ class DefaultNullable extends Object {
   m3(args) {
     let $var_args_copy = /**@type {!Array<?string>} */ (
         $Arrays.$create([arguments.length], String));
-    for (let $i = 0; $i < arguments.length; $i++)
+    for (let $i = 0; $i < arguments.length; $i++) {
       $Arrays.$set($var_args_copy, $i, arguments[$i]);
+    }
   }
 
   /**

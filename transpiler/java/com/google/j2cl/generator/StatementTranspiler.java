@@ -170,7 +170,8 @@ public class StatementTranspiler {
       public boolean enterIfStatement(IfStatement ifStatement) {
         SourcePosition location =
             builder.append(
-                String.format("if (%s)", toSourceExpression(ifStatement.getConditionExpression())));
+                String.format(
+                    "if (%s) ", toSourceExpression(ifStatement.getConditionExpression())));
         addSourceMapping(ifStatement, location);
         ifStatement.getThenStatement().accept(this);
         if (ifStatement.getElseStatement() != null) {
@@ -264,7 +265,7 @@ public class StatementTranspiler {
       @Override
       public boolean enterWhileStatement(WhileStatement whileStatement) {
         String conditionAsString = toSourceExpression(whileStatement.getConditionExpression());
-        SourcePosition location = builder.append("while (" + conditionAsString + ")");
+        SourcePosition location = builder.append("while (" + conditionAsString + ") ");
         addSourceMapping(whileStatement, location);
         return true; // Allow this to enter block.
       }

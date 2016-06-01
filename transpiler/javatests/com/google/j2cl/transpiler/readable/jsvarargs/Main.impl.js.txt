@@ -66,8 +66,9 @@ class Main extends Object {
     Main.$clinit();
     let $var_args_copy = /**@type {!Array<number>} */ (
         $Arrays.$create([arguments.length - 1], $int));
-    for (let $i = 0; $i < arguments.length - 1; $i++)
+    for (let $i = 0; $i < arguments.length - 1; $i++) {
       $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
+    }
     return $var_args_copy.length + $var_args_copy[0] + multiplier;
   }
 
@@ -80,8 +81,9 @@ class Main extends Object {
     Main.$clinit();
     let $var_args_copy = /**@type {!Array<number>} */ (
         $Arrays.$create([arguments.length], $int));
-    for (let $i = 0; $i < arguments.length; $i++)
+    for (let $i = 0; $i < arguments.length; $i++) {
       $Arrays.$set($var_args_copy, $i, arguments[$i]);
+    }
     return $var_args_copy.length + $var_args_copy[0];
   }
 
@@ -94,8 +96,9 @@ class Main extends Object {
   f3(m, numbers) {
     let $var_args_copy = /**@type {!Array<number>} */ (
         $Arrays.$create([arguments.length - 1], $int));
-    for (let $i = 0; $i < arguments.length - 1; $i++)
+    for (let $i = 0; $i < arguments.length - 1; $i++) {
       $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
+    }
     return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main +
         m + $var_args_copy[1];
   }
@@ -108,8 +111,9 @@ class Main extends Object {
   f4(numbers) {
     let $var_args_copy = /**@type {!Array<number>} */ (
         $Arrays.$create([arguments.length], $int));
-    for (let $i = 0; $i < arguments.length; $i++)
+    for (let $i = 0; $i < arguments.length; $i++) {
       $Arrays.$set($var_args_copy, $i, arguments[$i]);
+    }
     return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main +
         $var_args_copy[1];
   }
@@ -124,8 +128,9 @@ class Main extends Object {
     Main.$clinit();
     let $var_args_copy =
         /**@type {!Array<*>} */ ($Arrays.$create([arguments.length], Object));
-    for (let $i = 0; $i < arguments.length; $i++)
+    for (let $i = 0; $i < arguments.length; $i++) {
       $Arrays.$set($var_args_copy, $i, arguments[$i]);
+    }
     return $var_args_copy[0];
   }
 
@@ -138,9 +143,10 @@ class Main extends Object {
     Main.$clinit();
     let $var_args_copy = /**@type {!Array<List<Main>>} */ (
         $Arrays.$create([arguments.length], List));
-    for (let $i = 0; $i < arguments.length; $i++)
+    for (let $i = 0; $i < arguments.length; $i++) {
       /**@type {List<Main>} */ (
           $Arrays.$set($var_args_copy, $i, arguments[$i]));
+    }
     return $var_args_copy[0].m_get__int(0);
   }
 

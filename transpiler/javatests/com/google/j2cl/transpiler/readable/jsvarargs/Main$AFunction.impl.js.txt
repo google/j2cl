@@ -66,8 +66,9 @@ class Main$AFunction extends Object {
   m_f1__int__arrayOf_java_lang_Object(i, args) {
     let $var_args_copy = /**@type {!Array<*>} */ (
         $Arrays.$create([arguments.length - 1], Object));
-    for (let $i = 0; $i < arguments.length - 1; $i++)
+    for (let $i = 0; $i < arguments.length - 1; $i++) {
       $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
+    }
     return $var_args_copy[i];
   }
 

@@ -28,8 +28,9 @@ class JsConstructorClass$Varargs extends JsConstructorClass$A {
     JsConstructorClass$Varargs.$clinit();
     let $var_args_copy = /**@type {!Array<number>} */ (
         $Arrays.$create([arguments.length], $int));
-    for (let $i = 0; $i < arguments.length; $i++)
+    for (let $i = 0; $i < arguments.length; $i++) {
       $Arrays.$set($var_args_copy, $i, arguments[$i]);
+    }
     super();
     this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$Varargs__arrayOf_int(
         $var_args_copy);

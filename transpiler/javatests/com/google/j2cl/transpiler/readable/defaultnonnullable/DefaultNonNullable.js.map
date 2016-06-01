@@ -42,7 +42,7 @@
 [if (true) {
       // Cast not needed since NonNullableClass.getString returns !string.
       return NonNullableClass.getString();
-    }] => [if (true)]
+    }] => [if (true) ]
 [return NonNullableClass.getString();] => [return NonNullableClass.m_getString();]
 [return a;] => [return /**@type {string} */ (a);]
 [this.f4 = Lists.newArrayList();] => [this.f_f4__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = /**@type {!List<string>} */ (Lists.m_newArrayList());]
@@ -58,7 +58,7 @@
 [b = foo.toString();] => [b = $Objects.m_toString__java_lang_Object(foo);]
 [if (true) {
       return x;
-    }] => [if (true)]
+    }] => [if (true) ]
 [return x;] => [return /**@type {string} */ (x);]
 [String[] myArray = "Hel-lo".split("-");] => [let myArray = /**@type {Array<string>} */ (String.m_split__java_lang_String__java_lang_String("Hel-lo", "-"));]
 [m3(myArray[0]);] => [this.m3(myArray[0]);]
