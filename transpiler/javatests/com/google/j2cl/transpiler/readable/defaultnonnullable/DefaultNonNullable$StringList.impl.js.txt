@@ -12,13 +12,10 @@ let ArrayList = goog.require('java.util.ArrayList$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('java.lang.Class$impl');
-let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
-let Iterable$$Overlay = goog.forwardDeclare('java.lang.Iterable.$Overlay$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let List$$Overlay = goog.forwardDeclare('java.util.List.$Overlay$impl');
 let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
-let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 
 
 /**
@@ -66,18 +63,6 @@ class DefaultNonNullable$StringList extends ArrayList {
   }
 
   /**
-   * Default method forwarding stub.
-   * @override
-   * @param {Consumer<?>} arg0
-   * @return {void}
-   * @public
-   */
-  m_forEach__java_util_function_Consumer(arg0) {
-    Iterable$$Overlay
-        .m_forEach__java_lang_Iterable__java_util_function_Consumer(this, arg0);
-  }
-
-  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -103,13 +88,10 @@ class DefaultNonNullable$StringList extends ArrayList {
    */
   static $clinit() {
     Class = goog.module.get('java.lang.Class$impl');
-    Iterable = goog.module.get('java.lang.Iterable$impl');
-    Iterable$$Overlay = goog.module.get('java.lang.Iterable.$Overlay$impl');
     String = goog.module.get('java.lang.String$impl');
     List = goog.module.get('java.util.List$impl');
     List$$Overlay = goog.module.get('java.util.List.$Overlay$impl');
     Spliterator = goog.module.get('java.util.Spliterator$impl');
-    Consumer = goog.module.get('java.util.function.Consumer$impl');
     ArrayList.$clinit();
   }
 
