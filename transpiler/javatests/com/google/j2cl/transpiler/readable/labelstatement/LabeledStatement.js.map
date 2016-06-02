@@ -5,19 +5,27 @@
 [UNKNOWN] => [return $instance;]
 [UNKNOWN] => [this.$ctor__java_lang_Object();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_labelstatement_LabeledStatement();]
-[for (; ; ) {
-      break LABEL;
-    }] => [    LABEL: for (; ; )]
 [LABEL:
     for (; ; ) {
       break LABEL;
-    }] => [LABEL: ]
-[break LABEL;] => [break LABEL;]
+    }] => [LABEL: for (; ; ) {
+      break LABEL;
+    }]
 [for (; ; ) {
-      continue LABEL1;
-    }] => [    LABEL1: for (; ; )]
+      break LABEL;
+    }] => [for (; ; ) {
+      break LABEL;
+    }]
+[break LABEL;] => [break LABEL;]
 [LABEL1:
     for (; ; ) {
       continue LABEL1;
-    }] => [LABEL1: ]
+    }] => [LABEL1: for (; ; ) {
+      continue LABEL1;
+    }]
+[for (; ; ) {
+      continue LABEL1;
+    }] => [for (; ; ) {
+      continue LABEL1;
+    }]
 [continue LABEL1;] => [continue LABEL1;]

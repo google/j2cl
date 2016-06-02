@@ -171,7 +171,7 @@ class ToStringRenderer {
 
       @Override
       public boolean enterDoWhileStatement(DoWhileStatement doWhileStatement) {
-        print("do");
+        print("do ");
         accept(doWhileStatement.getBody());
         print(" while (");
         accept(doWhileStatement.getConditionExpression());

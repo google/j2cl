@@ -125,7 +125,7 @@ public class ExpressionTranspiler {
             JsDocNameUtils.getJsDocName(annotation.getTypeDescriptor(), false, environment);
         String expression = transform(annotation.getExpression(), environment);
         if (annotation.isDeclaration()) {
-          return String.format("/** @public {%s} */\n    %s", jsdoc, expression);
+          return String.format("/** @public {%s} */\n%s", jsdoc, expression);
         }
         return String.format("/**@type {%s} */ (%s)", jsdoc, expression);
       }

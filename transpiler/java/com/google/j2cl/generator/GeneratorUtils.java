@@ -19,7 +19,6 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
@@ -28,7 +27,6 @@ import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.Method;
-import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -135,20 +133,6 @@ public class GeneratorUtils {
     return Joiner.on(", ").join(parameterNameList);
   }
 
-  public static String getArgumentList(
-      List<Expression> arguments, final GenerationEnvironment environment) {
-    List<String> parameterNameList =
-        Lists.transform(
-            arguments,
-            new Function<Expression, String>() {
-              @Override
-              public String apply(Expression expression) {
-                return ExpressionTranspiler.transform(expression, environment);
-              }
-            });
-    return Joiner.on(", ").join(parameterNameList);
-  }
-
   /**
    * Returns true if the type has a superclass that is not a native js type.
    */
@@ -228,79 +212,6 @@ public class GeneratorUtils {
     }
     String superTypeName = environment.aliasForType(superTypeDescriptor);
     return String.format("extends %s ", superTypeName);
-  }
-
-  /**
-   * For a constructor of a JsConstructor class or a subclass of a JsConstructor class, as the
-   * primary constructor in the class is output as the real ES6 constructor, the first statement
-   * (which must either be a super() call or a this() call), has been invoked in ES6 constructor and
-   * thus should be removed from the $ctor method. It follows the following rules:
-   *
-   * <p>
-   * If the super class has a primary constructor, which should have been output as ES6 constructor,
-   * the super() call should have been invoked in constructor and should be removed in $ctor.
-   *
-   * <p>
-   * If the current class has a primary constructor, which should have been output as ES6
-   * constructor, the this() call should have been invoked in constructor and should be removed in
-   * $ctor.
-   */
-  public static Method createNonPrimaryConstructor(Method constructor) {
-    TypeDescriptor currentTypeDescriptor =
-        constructor.getDescriptor().getEnclosingClassTypeDescriptor();
-    TypeDescriptor superclassTypeDescriptor = currentTypeDescriptor.getSuperTypeDescriptor();
-    boolean removeFirstStatement =
-        AstUtils.hasThisCall(constructor)
-            ? currentTypeDescriptor.isOrSubclassesJsConstructorClass()
-            : superclassTypeDescriptor.isOrSubclassesJsConstructorClass();
-    if (removeFirstStatement) {
-      return Method.Builder.from(constructor).removeStatement(0).build();
-    }
-    return constructor;
-  }
-
-  /**
-   * Returns the arguments for 'new A' statement in constructor factory method $create.
-   *
-   * <p>
-   * If the given constructor delegates to the primary constructor, the delegating this() call
-   * should be invoked by the 'new A' statement in the $create factory method, thus passing the
-   * arguments here.
-   */
-  public static String getNewInstanceArguments(Method method, GenerationEnvironment environment) {
-    TypeDescriptor typeDescriptor = method.getDescriptor().getEnclosingClassTypeDescriptor();
-    if (!typeDescriptor.isOrSubclassesJsConstructorClass()) {
-      return "";
-    }
-    MethodCall constructorInvocation = AstUtils.getConstructorInvocation(method);
-    Preconditions.checkNotNull(
-        constructorInvocation,
-        "constructor %s must delegate to the primary constructor",
-        ManglingNameUtils.getFactoryMethodMangledName(method.getDescriptor()));
-    return getArgumentList(constructorInvocation.getArguments(), environment);
-  }
-
-  /**
-   * Returns the arguments for 'super()' call in ES6 constructor.
-   *
-   * <p>
-   * If the given constructor invokes the primary constructor in its super class, pass in the
-   * arguments to the super call here.
-   */
-  public static String getSuperArguments(
-      Method primaryConstructor, GenerationEnvironment environment) {
-    MethodCall constructorInvocation = AstUtils.getConstructorInvocation(primaryConstructor);
-    if (constructorInvocation == null) {
-      // This case happens when the super class is a native type, and we do not synthesize the
-      // default super() call for the default constructor.
-      return "";
-    }
-    return constructorInvocation
-            .getTarget()
-            .getEnclosingClassTypeDescriptor()
-            .isOrSubclassesJsConstructorClass()
-        ? getArgumentList(constructorInvocation.getArguments(), environment)
-        : "";
   }
 
   /**

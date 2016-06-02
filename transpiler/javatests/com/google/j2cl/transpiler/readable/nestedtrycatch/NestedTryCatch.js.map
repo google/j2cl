@@ -13,17 +13,57 @@
       } catch (Exception ie) {
         // expected empty body.
       }
-    }] => [try]
+    }] => [try {
+      throw $Exceptions.toJs(Exception.$create());
+    } catch (/** @type {*} */ ae) {
+      ae = $Exceptions.toJava(ae);
+      if (Exception.$isInstance(ae)) {
+        try {
+          throw $Exceptions.toJs(Exception.$create());
+        } catch (/** @type {*} */ ie) {
+          ie = $Exceptions.toJava(ie);
+          if (Exception.$isInstance(ie)) {
+          } else {
+            throw $Exceptions.toJs(ie);
+          }
+        }
+      } else {
+        throw $Exceptions.toJs(ae);
+      }
+    }]
 [throw new Exception();] => [throw $Exceptions.toJs(Exception.$create());]
 [UNKNOWN] => [ae = $Exceptions.toJava(ae);]
-[UNKNOWN] => [if (Exception.$isInstance(ae)) ]
+[UNKNOWN] => [if (Exception.$isInstance(ae)) {
+        try {
+          throw $Exceptions.toJs(Exception.$create());
+        } catch (/** @type {*} */ ie) {
+          ie = $Exceptions.toJava(ie);
+          if (Exception.$isInstance(ie)) {
+          } else {
+            throw $Exceptions.toJs(ie);
+          }
+        }
+      } else {
+        throw $Exceptions.toJs(ae);
+      }]
 [try {
         throw new Exception();
       } catch (Exception ie) {
         // expected empty body.
-      }] => [try]
+      }] => [try {
+          throw $Exceptions.toJs(Exception.$create());
+        } catch (/** @type {*} */ ie) {
+          ie = $Exceptions.toJava(ie);
+          if (Exception.$isInstance(ie)) {
+          } else {
+            throw $Exceptions.toJs(ie);
+          }
+        }]
 [throw new Exception();] => [throw $Exceptions.toJs(Exception.$create());]
 [UNKNOWN] => [ie = $Exceptions.toJava(ie);]
-[UNKNOWN] => [if (Exception.$isInstance(ie)) ]
+[UNKNOWN] => [if (Exception.$isInstance(ie)) {
+          } else {
+            throw $Exceptions.toJs(ie);
+          }]
 [UNKNOWN] => [throw $Exceptions.toJs(ie);]
 [UNKNOWN] => [throw $Exceptions.toJs(ae);]

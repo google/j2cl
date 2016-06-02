@@ -27,6 +27,11 @@ public class SourcePosition implements Comparable<SourcePosition> {
   private FilePosition startPosition;
   private FilePosition endPosition;
 
+  public SourcePosition(FilePosition startPosition, FilePosition endPosition) {
+    this.startPosition = startPosition;
+    this.endPosition = endPosition;
+  }
+
   public SourcePosition(
       int startLineNumber, int startColumnNumber, int endLineNumber, int endColumnNumber) {
     startPosition = new FilePosition(startLineNumber, startColumnNumber);

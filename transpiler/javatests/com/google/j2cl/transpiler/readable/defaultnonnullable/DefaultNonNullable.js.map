@@ -30,7 +30,9 @@
 [return "";] => [return /**@type {string} */ ("");]
 [return "";] => [return "";]
 [UNKNOWN] => [let $var_args_copy = /**@type {!Array<string>} */ ($Arrays.$create([ arguments.length - 1 ], String));]
-[UNKNOWN] => [for (let $i = 0; $i < arguments.length - 1; $i++)]
+[UNKNOWN] => [for (let $i = 0; $i < arguments.length - 1; $i++) {
+      $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
+    }]
 [UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i + 1]);]
 [return null;] => [return null;]
 [String a = "";] => [let a = "";]
@@ -42,7 +44,9 @@
 [if (true) {
       // Cast not needed since NonNullableClass.getString returns !string.
       return NonNullableClass.getString();
-    }] => [if (true) ]
+    }] => [if (true) {
+      return NonNullableClass.m_getString();
+    }]
 [return NonNullableClass.getString();] => [return NonNullableClass.m_getString();]
 [return a;] => [return /**@type {string} */ (a);]
 [this.f4 = Lists.newArrayList();] => [this.f_f4__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = /**@type {!List<string>} */ (Lists.m_newArrayList());]
@@ -58,9 +62,23 @@
 [b = foo.toString();] => [b = $Objects.m_toString__java_lang_Object(foo);]
 [if (true) {
       return x;
-    }] => [if (true) ]
+    }] => [if (true) {
+      return /**@type {string} */ (x);
+    }]
 [return x;] => [return /**@type {string} */ (x);]
 [String[] myArray = "Hel-lo".split("-");] => [let myArray = /**@type {Array<string>} */ (String.m_split__java_lang_String__java_lang_String("Hel-lo", "-"));]
 [m3(myArray[0]);] => [this.m3(myArray[0]);]
 [return NullableClass.getString();] => [return /**@type {string} */ (NullableClass.m_getString());]
 [m4(function);] => [this.m_m4__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable$MyFunction(/**@type {function(string):string} */ (l_function));]
+[private String f1 = "Hello";] => [this.f_f1__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = /**@type {string} */ ("Hello");]
+[@Nullable private String f2 = null;] => [this.f_f2__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = null;]
+[@org.checkerframework.checker.nullness.qual.Nullable private String f3 = null;] => [this.f_f3__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = null;]
+[private List<String> f4 = new ArrayList<>();] => [this.f_f4__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = /**@type {!List<string>} */ (ArrayList.$create());]
+[@Nullable private List<String> f5 = new ArrayList<>();] => [this.f_f5__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = /**@type {List<string>} */ (ArrayList.$create());]
+[private List<@NullableType String> f6 = new ArrayList<>();] => [this.f_f6__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = /**@type {!ArrayList<?string>} */ (ArrayList.$create());]
+[@Nullable private List<@NullableType String> f7 = null;] => [this.f_f7__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = null;]
+[private String[] f8 = {};] => [this.f_f8__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = /**@type {!Array<string>} */ ($Arrays.$init([  ], String));]
+[@org.checkerframework.checker.nullness.qual.Nullable private String[] f9 = {};] => [this.f_f9__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = /**@type {!Array<?string>} */ ($Arrays.$init([  ], String));]
+[private String @NullableType [] f10 = {};] => [this.f_f10__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = /**@type {!Array<string>} */ ($Arrays.$init([  ], String));]
+[private Void f11 = null;] => [this.f_f11__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = null;]
+[private List<String> f12 = NullableClass.newArrayList();] => [this.f_f12__com_google_j2cl_transpiler_readable_defaultnonnullable_DefaultNonNullable_ = /**@type {!List<string>} */ (NullableClass.m_newArrayList());]

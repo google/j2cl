@@ -1,5 +1,7 @@
 [UNKNOWN] => [let $var_args_copy = /**@type {!Array<number>} */ ($Arrays.$create([ arguments.length - 1 ], $int));]
-[UNKNOWN] => [for (let $i = 0; $i < arguments.length - 1; $i++)]
+[UNKNOWN] => [for (let $i = 0; $i < arguments.length - 1; $i++) {
+      $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
+    }]
 [UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i + 1]);]
 [UNKNOWN] => [super(...$Arrays.$checkNotNull($var_args_copy));]
 [UNKNOWN] => [this.$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$SubVarargs__java_lang_Object__arrayOf_int(i, $var_args_copy);]

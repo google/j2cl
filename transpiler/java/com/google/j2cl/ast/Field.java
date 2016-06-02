@@ -18,7 +18,10 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.processors.Context;
+import com.google.j2cl.ast.processors.HasMetadata;
 import com.google.j2cl.ast.processors.Visitable;
+import com.google.j2cl.ast.sourcemap.HasSourcePosition;
+import com.google.j2cl.ast.sourcemap.SourcePosition;
 
 import javax.annotation.Nullable;
 
@@ -27,23 +30,26 @@ import javax.annotation.Nullable;
  */
 @Visitable
 @Context
-public class Field extends Node implements Positioned {
+public class Field extends Node implements Positioned, HasSourcePosition {
   @Visitable FieldDescriptor fieldDescriptor;
   @Visitable @Nullable Expression initializer;
   private boolean isEnumField;
   private Variable capturedVariable;
   private final int position;
+  private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
 
-  Field(
+  private Field(
       FieldDescriptor fieldDescriptor,
       Expression initializer,
       boolean isEnumField,
       Variable capturedVariable,
-      int position) {
+      int position,
+      SourcePosition sourcePosition) {
     this(fieldDescriptor, position);
     this.initializer = initializer;
     this.isEnumField = isEnumField;
     this.capturedVariable = capturedVariable;
+    this.sourcePosition = sourcePosition;
   }
 
   public Field(FieldDescriptor fieldDescriptor, int position) {
@@ -76,6 +82,26 @@ public class Field extends Node implements Positioned {
   }
 
   @Override
+  public SourcePosition getSourcePosition() {
+    return sourcePosition;
+  }
+
+  @Override
+  public void setSourcePosition(SourcePosition sourcePosition) {
+    this.sourcePosition = sourcePosition;
+  }
+
+  @Override
+  public void copyMetadataFrom(HasMetadata<HasSourcePosition> store) {
+    setSourcePosition(store.getMetadata().getSourcePosition());
+  }
+
+  @Override
+  public HasSourcePosition getMetadata() {
+    return this;
+  }
+
+  @Override
   public int getPosition() {
     return position;
   }
@@ -94,7 +120,7 @@ public class Field extends Node implements Positioned {
     private boolean isEnumField;
     private Variable capturedVariable;
     private Integer position;
-
+    private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
     public static Builder from(Field field) {
       Builder builder = new Builder();
       builder.fieldDescriptor = field.getDescriptor();
@@ -102,6 +128,7 @@ public class Field extends Node implements Positioned {
       builder.isEnumField = field.isEnumField();
       builder.capturedVariable = field.getCapturedVariable();
       builder.position = field.getPosition();
+      builder.sourcePosition = field.getSourcePosition();
       return builder;
     }
 
@@ -139,9 +166,15 @@ public class Field extends Node implements Positioned {
       return this;
     }
 
+    public Builder setSourcePosition(SourcePosition sourcePosition) {
+      this.sourcePosition = sourcePosition;
+      return this;
+    }
+
     public Field build() {
       checkNotNull(position, "A position must be set");
-      return new Field(fieldDescriptor, initializer, isEnumField, capturedVariable, position);
+      return new Field(
+          fieldDescriptor, initializer, isEnumField, capturedVariable, position, sourcePosition);
     }
   }
 }

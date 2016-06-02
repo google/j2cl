@@ -10,9 +10,23 @@
     } catch (NullPointerException | ClassCastException e) {
       System.out.println("saw exception: " + e);
     } finally {
-    }] => [try]
+    }] => [try {
+      throw $Exceptions.toJs(ClassCastException.$create());
+    } catch (/** @type {*} */ e) {
+      e = $Exceptions.toJava(e);
+      if (NullPointerException.$isInstance(e) || ClassCastException.$isInstance(e)) {
+        System.f_out__java_lang_System.m_println__java_lang_String("saw exception: " + String.m_valueOf__java_lang_Object(e));
+      } else {
+        throw $Exceptions.toJs(e);
+      }
+    } finally {
+    }]
 [throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create());]
 [UNKNOWN] => [e = $Exceptions.toJava(e);]
-[UNKNOWN] => [if (NullPointerException.$isInstance(e) || ClassCastException.$isInstance(e)) ]
+[UNKNOWN] => [if (NullPointerException.$isInstance(e) || ClassCastException.$isInstance(e)) {
+        System.f_out__java_lang_System.m_println__java_lang_String("saw exception: " + String.m_valueOf__java_lang_Object(e));
+      } else {
+        throw $Exceptions.toJs(e);
+      }]
 [System.out.println("saw exception: " + e);] => [System.f_out__java_lang_System.m_println__java_lang_String("saw exception: " + String.m_valueOf__java_lang_Object(e));]
 [UNKNOWN] => [throw $Exceptions.toJs(e);]

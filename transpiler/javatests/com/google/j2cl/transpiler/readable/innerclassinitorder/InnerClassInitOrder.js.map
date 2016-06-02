@@ -44,7 +44,10 @@
         }
       };
       results[i] = ap;
-    }] => [for (let i = 0; i < 10; i++)]
+    }] => [for (let i = 0; i < 10; i++) {
+      let ap = InnerClassInitOrder$1.$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(i, this);
+      $Arrays.$set(results, i, ap);
+    }]
 [AddNumber ap = new AddNumber(i) {
         @Override
         public void act() {
@@ -54,7 +57,10 @@
 [results[i] = ap;] => [$Arrays.$set(results, i, ap);]
 [for (AddNumber theAp : results) {
       theAp.act();
-    }] => [for (let $array = results, $index = 0; $index < $array.length; $index++)]
+    }] => [for (let $array = results, $index = 0; $index < $array.length; $index++) {
+      let theAp = $array[$index];
+      theAp.m_act();
+    }]
 [UNKNOWN] => [let theAp = $array[$index];]
 [theAp.act();] => [theAp.m_act();]
 [assert (number == 1156);] => [$Asserts.$enabled() && $Asserts.$assert((this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder == 1156));]
@@ -93,3 +99,6 @@
 [m.testUnqualifiedAlloc();] => [m.m_testUnqualifiedAlloc();]
 [m.testUnqualifiedSuperCall();] => [m.m_testUnqualifiedSuperCall();]
 [m.testUnqualifiedSuperCallAnon();] => [m.m_testUnqualifiedSuperCallAnon();]
+[public int number = 0;] => [this.f_number__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder = 0;]
+[private final Outer outer = new Outer(1);] => [this.f_outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ = InnerClassInitOrder$Outer.$create__int(1);]
+[private final Outer.OuterIsSuper outerIsSuper = outer.new OuterIsSuper(2);] => [this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_ = InnerClassInitOrder$Outer$OuterIsSuper.$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer(2, this.f_outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_);]

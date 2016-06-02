@@ -8,16 +8,39 @@
 [UNKNOWN] => [TryWithResource.$clinit();]
 [UNKNOWN] => [let $primaryExc = null;]
 [UNKNOWN] => [let thing = null;]
-[UNKNOWN] => [try]
+[UNKNOWN] => [try {
+        thing = TryWithResource$ClosableThing.$create();
+        let i = 0;
+      } catch (/** @type {*} */ $exceptionFromTry) {
+        $exceptionFromTry = $Exceptions.toJava($exceptionFromTry);
+        if (Throwable.$isInstance($exceptionFromTry)) {
+          $primaryExc = $exceptionFromTry;
+          throw $Exceptions.toJs($exceptionFromTry);
+        } else {
+          throw $Exceptions.toJs($exceptionFromTry);
+        }
+      } finally {
+        $primaryExc = $Exceptions.safeClose(thing, $primaryExc);
+        if ($primaryExc != null) {
+          throw $Exceptions.toJs($primaryExc);
+        }
+      }]
 [UNKNOWN] => [thing = TryWithResource$ClosableThing.$create();]
 [int i = 0;] => [let i = 0;]
 [UNKNOWN] => [$exceptionFromTry = $Exceptions.toJava($exceptionFromTry);]
-[UNKNOWN] => [if (Throwable.$isInstance($exceptionFromTry)) ]
+[UNKNOWN] => [if (Throwable.$isInstance($exceptionFromTry)) {
+          $primaryExc = $exceptionFromTry;
+          throw $Exceptions.toJs($exceptionFromTry);
+        } else {
+          throw $Exceptions.toJs($exceptionFromTry);
+        }]
 [UNKNOWN] => [$primaryExc = $exceptionFromTry;]
 [UNKNOWN] => [throw $Exceptions.toJs($exceptionFromTry);]
 [UNKNOWN] => [throw $Exceptions.toJs($exceptionFromTry);]
 [UNKNOWN] => [$primaryExc = $Exceptions.safeClose(thing, $primaryExc);]
-[UNKNOWN] => [if ($primaryExc != null) ]
+[UNKNOWN] => [if ($primaryExc != null) {
+          throw $Exceptions.toJs($primaryExc);
+        }]
 [UNKNOWN] => [throw $Exceptions.toJs($primaryExc);]
 [UNKNOWN] => [TryWithResource.$clinit();]
 [try (ClosableThing thing = new ClosableThing(); ClosableThing thing2 = new ClosableThing()) {
@@ -25,25 +48,86 @@
       throw new Exception();
     } catch (Exception e) {
       int b = 10;
-    }] => [try]
+    }] => [try {
+      let $primaryExc = null;
+      let thing = null;
+      let thing2 = null;
+      try {
+        thing = TryWithResource$ClosableThing.$create();
+        thing2 = TryWithResource$ClosableThing.$create();
+        let i = 0;
+        throw $Exceptions.toJs(Exception.$create());
+      } catch (/** @type {*} */ $exceptionFromTry) {
+        $exceptionFromTry = $Exceptions.toJava($exceptionFromTry);
+        if (Throwable.$isInstance($exceptionFromTry)) {
+          $primaryExc = $exceptionFromTry;
+          throw $Exceptions.toJs($exceptionFromTry);
+        } else {
+          throw $Exceptions.toJs($exceptionFromTry);
+        }
+      } finally {
+        $primaryExc = $Exceptions.safeClose(thing2, $primaryExc);
+        $primaryExc = $Exceptions.safeClose(thing, $primaryExc);
+        if ($primaryExc != null) {
+          throw $Exceptions.toJs($primaryExc);
+        }
+      }
+    } catch (/** @type {*} */ e) {
+      e = $Exceptions.toJava(e);
+      if (Exception.$isInstance(e)) {
+        let b = 10;
+      } else {
+        throw $Exceptions.toJs(e);
+      }
+    }]
 [UNKNOWN] => [let $primaryExc = null;]
 [UNKNOWN] => [let thing = null;]
 [UNKNOWN] => [let thing2 = null;]
-[UNKNOWN] => [try]
+[UNKNOWN] => [try {
+        thing = TryWithResource$ClosableThing.$create();
+        thing2 = TryWithResource$ClosableThing.$create();
+        let i = 0;
+        throw $Exceptions.toJs(Exception.$create());
+      } catch (/** @type {*} */ $exceptionFromTry) {
+        $exceptionFromTry = $Exceptions.toJava($exceptionFromTry);
+        if (Throwable.$isInstance($exceptionFromTry)) {
+          $primaryExc = $exceptionFromTry;
+          throw $Exceptions.toJs($exceptionFromTry);
+        } else {
+          throw $Exceptions.toJs($exceptionFromTry);
+        }
+      } finally {
+        $primaryExc = $Exceptions.safeClose(thing2, $primaryExc);
+        $primaryExc = $Exceptions.safeClose(thing, $primaryExc);
+        if ($primaryExc != null) {
+          throw $Exceptions.toJs($primaryExc);
+        }
+      }]
 [UNKNOWN] => [thing = TryWithResource$ClosableThing.$create();]
 [UNKNOWN] => [thing2 = TryWithResource$ClosableThing.$create();]
 [int i = 0;] => [let i = 0;]
 [throw new Exception();] => [throw $Exceptions.toJs(Exception.$create());]
 [UNKNOWN] => [$exceptionFromTry = $Exceptions.toJava($exceptionFromTry);]
-[UNKNOWN] => [if (Throwable.$isInstance($exceptionFromTry)) ]
+[UNKNOWN] => [if (Throwable.$isInstance($exceptionFromTry)) {
+          $primaryExc = $exceptionFromTry;
+          throw $Exceptions.toJs($exceptionFromTry);
+        } else {
+          throw $Exceptions.toJs($exceptionFromTry);
+        }]
 [UNKNOWN] => [$primaryExc = $exceptionFromTry;]
 [UNKNOWN] => [throw $Exceptions.toJs($exceptionFromTry);]
 [UNKNOWN] => [throw $Exceptions.toJs($exceptionFromTry);]
 [UNKNOWN] => [$primaryExc = $Exceptions.safeClose(thing2, $primaryExc);]
 [UNKNOWN] => [$primaryExc = $Exceptions.safeClose(thing, $primaryExc);]
-[UNKNOWN] => [if ($primaryExc != null) ]
+[UNKNOWN] => [if ($primaryExc != null) {
+          throw $Exceptions.toJs($primaryExc);
+        }]
 [UNKNOWN] => [throw $Exceptions.toJs($primaryExc);]
 [UNKNOWN] => [e = $Exceptions.toJava(e);]
-[UNKNOWN] => [if (Exception.$isInstance(e)) ]
+[UNKNOWN] => [if (Exception.$isInstance(e)) {
+        let b = 10;
+      } else {
+        throw $Exceptions.toJs(e);
+      }]
 [int b = 10;] => [let b = 10;]
 [UNKNOWN] => [throw $Exceptions.toJs(e);]

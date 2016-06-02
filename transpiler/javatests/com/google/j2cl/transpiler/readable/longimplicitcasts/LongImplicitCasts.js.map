@@ -38,3 +38,4 @@
 [new LongImplicitCasts(flong);] => [LongImplicitCasts.$create__long(flong);]
 [tlong = flong << flong;] => [tlong = $LongUtils.$leftShift(flong, flong);]
 [tlong <<= flong;] => [tlong = $LongUtils.$leftShift(tlong, flong);]
+[public long fieldLong = 100;] => [this.f_fieldLong__com_google_j2cl_transpiler_readable_longimplicitcasts_LongImplicitCasts = $Primitives.$widenIntToLong(100);]

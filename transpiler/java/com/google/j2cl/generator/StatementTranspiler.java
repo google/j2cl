@@ -15,8 +15,7 @@
  */
 package com.google.j2cl.generator;
 
-import com.google.common.base.Joiner;
-import com.google.common.base.Preconditions;
+import com.google.debugging.sourcemap.FilePosition;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.Block;
@@ -29,6 +28,7 @@ import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.LabeledStatement;
+import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.SwitchCase;
@@ -40,7 +40,6 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -58,226 +57,241 @@ public class StatementTranspiler {
     this.sourceMapBuilder = sourceMapBuilder;
   }
 
-  public void renderStatement(Statement node) {
+  public void renderStatement(Statement statement) {
     class SourceTransformer extends AbstractVisitor {
+      private void render(Node node) {
+        node.accept(this);
+      }
+
+      private String toSeparatedExpressions(String separator, List<Expression> expressions) {
+        StringBuilder sb = new StringBuilder();
+        String nextSeparator = "";
+        for (Expression expression : expressions) {
+          sb.append(nextSeparator);
+          nextSeparator = separator;
+          sb.append(toSourceExpression(expression));
+        }
+        return sb.toString();
+      }
+
       @Override
       public boolean enterAssertStatement(AssertStatement assertStatement) {
+        FilePosition startPosition = builder.getCurrentPosition();
+
         String assertAlias = environment.aliasForType(BootstrapType.ASSERTS.getDescriptor());
-        String line;
+        builder.append(assertAlias + ".$enabled() && ");
         if (assertStatement.getMessage() == null) {
-          line =
-              String.format(
-                  "%s.$enabled() && %s.$assert(%s);",
-                  assertAlias,
-                  assertAlias,
-                  toSourceExpression(assertStatement.getExpression()));
+          builder.append(
+              assertAlias
+                  + ".$assert("
+                  + toSourceExpression(assertStatement.getExpression())
+                  + ");");
         } else {
-          line =
-              String.format(
-                  "%s.$enabled() && %s.$assertWithMessage(%s, %s);",
-                  assertAlias,
-                  assertAlias,
-                  toSourceExpression(assertStatement.getExpression()),
-                  toSourceExpression(assertStatement.getMessage()));
+          builder.append(
+              assertAlias
+                  + ".$assertWithMessage("
+                  + toSourceExpression(assertStatement.getExpression())
+                  + ", "
+                  + toSourceExpression(assertStatement.getMessage())
+                  + ");");
         }
-        SourcePosition location = builder.appendln(line);
-        addSourceMapping(assertStatement, location);
+        addSourceMapping(assertStatement, startPosition, builder.getCurrentPosition());
         return false;
       }
 
       @Override
-      public boolean enterBlock(Block blockStatement) {
-        builder.appendln("{");
-        return true; // Allow the visitor to visit the contained statements.
+      public boolean enterBlock(Block block) {
+        builder.openBrace();
+        for (Statement statement : block.getStatements()) {
+          builder.newLine();
+          render(statement);
+        }
+        builder.closeBrace();
+        return false;
       }
 
       @Override
       public boolean enterBreakStatement(BreakStatement breakStatement) {
-        SourcePosition location;
-        if (breakStatement.getLabelName() == null) {
-          location = builder.appendln("break;");
-        } else {
-          location = builder.appendln("break %s;", breakStatement.getLabelName());
+        FilePosition startPosition = builder.getCurrentPosition();
+
+        builder.append("break");
+        if (breakStatement.getLabelName() != null) {
+          builder.append(" " + breakStatement.getLabelName());
         }
-        addSourceMapping(breakStatement, location);
+        builder.append(";");
+
+        addSourceMapping(breakStatement, startPosition, builder.getCurrentPosition());
         return false;
       }
 
       @Override
       public boolean enterCatchClause(CatchClause catchClause) {
-        catchClause.getBody().accept(this);
-        return super.enterCatchClause(catchClause);
+        render(catchClause.getBody());
+        return false;
       }
 
       @Override
       public boolean enterContinueStatement(ContinueStatement continueStatement) {
-        SourcePosition location;
-        if (continueStatement.getLabelName() == null) {
-          location = builder.appendln("continue;");
-        } else {
-          location = builder.appendln("continue %s;", continueStatement.getLabelName());
+        FilePosition startPosition = builder.getCurrentPosition();
+        builder.append("continue");
+        if (continueStatement.getLabelName() != null) {
+          builder.append(" " + continueStatement.getLabelName());
         }
-        addSourceMapping(continueStatement, location);
+        builder.append(";");
+        addSourceMapping(continueStatement, startPosition, builder.getCurrentPosition());
         return false;
       }
 
       @Override
       public boolean enterDoWhileStatement(DoWhileStatement doWhileStatement) {
-        SourcePosition location = builder.append("do ");
-        doWhileStatement.getBody().accept(this);
-        String conditionAsString = toSourceExpression(doWhileStatement.getConditionExpression());
-        builder.appendln("while(%s);", conditionAsString);
-        addSourceMapping(doWhileStatement, location);
+        FilePosition startPosition = builder.getCurrentPosition();
+        builder.append("do ");
+        render(doWhileStatement.getBody());
+        builder.append("while (");
+        builder.append(toSourceExpression(doWhileStatement.getConditionExpression()));
+        builder.append(");");
+        addSourceMapping(doWhileStatement, startPosition, builder.getCurrentPosition());
         return false;
       }
 
       @Override
       public boolean enterExpressionStatement(ExpressionStatement expressionStatement) {
-        SourcePosition location =
-            builder.appendln(toSourceExpression(expressionStatement.getExpression()) + ";");
-        addSourceMapping(expressionStatement, location);
+        FilePosition startPosition = builder.getCurrentPosition();
+        builder.append(toSourceExpression(expressionStatement.getExpression()) + ";");
+        addSourceMapping(expressionStatement, startPosition, builder.getCurrentPosition());
         return false;
       }
 
       @Override
       public boolean enterForStatement(ForStatement forStatement) {
-        List<String> initializers = new ArrayList<>();
-        for (Expression e : forStatement.getInitializers()) {
-          initializers.add(toSourceExpression(e));
-        }
-        String initializerAsString = Joiner.on(",").join(initializers);
-
-        String conditionExpressionAsString =
-            forStatement.getConditionExpression() == null
-                ? ""
-                : toSourceExpression(forStatement.getConditionExpression());
-
-        List<String> updaters = new ArrayList<>();
-        for (Expression e : forStatement.getUpdates()) {
-          updaters.add(toSourceExpression(e));
-        }
-        String updatersAsString = Joiner.on(",").join(updaters);
-        SourcePosition location =
-            builder.appendln(
-                "for (%s; %s; %s)",
-                initializerAsString, conditionExpressionAsString, updatersAsString);
-        addSourceMapping(forStatement, location);
-        forStatement.getBody().accept(this);
+        FilePosition startPosition = builder.getCurrentPosition();
+        builder.append("for (");
+        builder.append(toSeparatedExpressions(", ", forStatement.getInitializers()));
+        builder.append("; ");
+        builder.append(toSourceExpression(forStatement.getConditionExpression()));
+        builder.append("; ");
+        builder.append(toSeparatedExpressions(", ", forStatement.getUpdates()));
+        builder.append(") ");
+        render(forStatement.getBody());
+        addSourceMapping(forStatement, startPosition, builder.getCurrentPosition());
         return false;
       }
 
       @Override
       public boolean enterIfStatement(IfStatement ifStatement) {
-        SourcePosition location =
-            builder.append(
-                String.format(
-                    "if (%s) ", toSourceExpression(ifStatement.getConditionExpression())));
-        addSourceMapping(ifStatement, location);
-        ifStatement.getThenStatement().accept(this);
+        FilePosition startPosition = builder.getCurrentPosition();
+        builder.append("if (");
+        builder.append(toSourceExpression(ifStatement.getConditionExpression()));
+        builder.append(") ");
+        render(ifStatement.getThenStatement());
         if (ifStatement.getElseStatement() != null) {
           builder.append(" else ");
-          ifStatement.getElseStatement().accept(this);
+          render(ifStatement.getElseStatement());
         }
+        addSourceMapping(ifStatement, startPosition, builder.getCurrentPosition());
         return false;
       }
 
       @Override
       public boolean enterLabeledStatement(LabeledStatement labelStatement) {
-        SourcePosition location =
-            builder.append(String.format("%s: ", labelStatement.getLabelName()));
-        addSourceMapping(labelStatement, location);
-        labelStatement.getBody().accept(this);
+        FilePosition startPosition = builder.getCurrentPosition();
+        builder.append(labelStatement.getLabelName() + ": ");
+        render(labelStatement.getBody());
+        addSourceMapping(labelStatement, startPosition, builder.getCurrentPosition());
         return false;
       }
 
       @Override
       public boolean enterReturnStatement(ReturnStatement returnStatement) {
+        FilePosition startPosition = builder.getCurrentPosition();
         Expression expression = returnStatement.getExpression();
-        SourcePosition location =
-            builder.appendln(
-                "return"
-                    + (expression == null ? "" : (" " + toSourceExpression(expression)))
-                    + ";");
-        addSourceMapping(returnStatement, location);
+        builder.append(
+            "return" + (expression == null ? "" : (" " + toSourceExpression(expression))) + ";");
+        addSourceMapping(returnStatement, startPosition, builder.getCurrentPosition());
         return false;
       }
 
       @Override
       public boolean enterSwitchCase(SwitchCase switchCase) {
-        SourcePosition location;
+        FilePosition startPosition = builder.getCurrentPosition();
         if (switchCase.isDefault()) {
-          location = builder.appendln("default:");
+          builder.append("default: ");
         } else {
-          location =
-              builder.appendln("case " + toSourceExpression(switchCase.getMatchExpression()) + ":");
+          builder.append("case " + toSourceExpression(switchCase.getMatchExpression()) + ": ");
         }
-        addSourceMapping(switchCase, location);
+        addSourceMapping(switchCase, startPosition, builder.getCurrentPosition());
         return false;
       }
 
       @Override
       public boolean enterSwitchStatement(SwitchStatement switchStatement) {
-        SourcePosition location =
-            builder.appendln(
-                "switch (%s) {", toSourceExpression(switchStatement.getSwitchExpression()));
-        addSourceMapping(switchStatement, location);
-        return true; // Allow the visitor to enter the switch cases.
+        FilePosition startPosition = builder.getCurrentPosition();
+        builder.append(
+            "switch (" + toSourceExpression(switchStatement.getSwitchExpression()) + ")");
+        builder.openBrace();
+        builder.indent();
+        for (Statement statement : switchStatement.getBodyStatements()) {
+          if (statement instanceof SwitchCase) {
+            builder.unindent();
+          }
+          builder.newLine();
+          render(statement);
+          if (statement instanceof SwitchCase) {
+            builder.indent();
+          }
+        }
+        builder.unindent();
+        builder.closeBrace();
+        addSourceMapping(switchStatement, startPosition, builder.getCurrentPosition());
+        return false;
       }
 
       @Override
       public boolean enterSynchronizedStatement(SynchronizedStatement synchronizedStatement) {
-        builder.appendln(toSourceExpression(synchronizedStatement.getExpression()) + ";");
-        synchronizedStatement.getBody().accept(this);
+        FilePosition startPosition = builder.getCurrentPosition();
+        builder.append(toSourceExpression(synchronizedStatement.getExpression()) + ";");
+        builder.newLine();
+        render(synchronizedStatement.getBody());
+        addSourceMapping(synchronizedStatement, startPosition, builder.getCurrentPosition());
         return false;
       }
 
       @Override
       public boolean enterThrowStatement(ThrowStatement throwStatement) {
-        SourcePosition location =
-            builder.appendln("throw " + toSourceExpression(throwStatement.getExpression()) + ";");
-        addSourceMapping(throwStatement, location);
+        FilePosition startPosition = builder.getCurrentPosition();
+        builder.append("throw " + toSourceExpression(throwStatement.getExpression()) + ";");
+        addSourceMapping(throwStatement, startPosition, builder.getCurrentPosition());
         return false;
       }
 
       @Override
       public boolean enterTryStatement(TryStatement tryStatement) {
-        SourcePosition location = builder.append("try");
-        addSourceMapping(tryStatement, location);
-        tryStatement.getBody().accept(this);
-        // Generate catch clause.
-        Preconditions.checkArgument(tryStatement.getCatchClauses().size() < 2);
-        if (tryStatement.getCatchClauses().size() == 1) {
-          CatchClause catchClause = tryStatement.getCatchClauses().get(0);
-          builder.appendln(
-              String.format(
-                  "catch (/** @type {*} */ %s)",
-                  environment.aliasForVariable(catchClause.getExceptionVar())));
-          catchClause.getBody().accept(this);
+        FilePosition startPosition = builder.getCurrentPosition();
+        builder.append("try ");
+        render(tryStatement.getBody());
+        for (CatchClause catchClause : tryStatement.getCatchClauses()) {
+          builder.append(
+              " catch (/** @type {*} */ "
+                  + environment.aliasForVariable(catchClause.getExceptionVar())
+                  + ") ");
+          render(catchClause.getBody());
         }
-        // Generate finally block.
         if (tryStatement.getFinallyBlock() != null) {
-          builder.append("finally");
-          tryStatement.getFinallyBlock().accept(this);
+          builder.append(" finally ");
+          render(tryStatement.getFinallyBlock());
         }
+        addSourceMapping(tryStatement, startPosition, builder.getCurrentPosition());
         return false;
       }
 
       @Override
       public boolean enterWhileStatement(WhileStatement whileStatement) {
+        FilePosition startPosition = builder.getCurrentPosition();
         String conditionAsString = toSourceExpression(whileStatement.getConditionExpression());
-        SourcePosition location = builder.append("while (" + conditionAsString + ") ");
-        addSourceMapping(whileStatement, location);
-        return true; // Allow this to enter block.
-      }
-
-      @Override
-      public void exitBlock(Block blockStatement) {
-        builder.appendln("}");
-      }
-
-      @Override
-      public void exitSwitchStatement(SwitchStatement node) {
-        builder.appendln("}");
+        builder.append("while (" + conditionAsString + ") ");
+        render(whileStatement.getBody());
+        addSourceMapping(whileStatement, startPosition, builder.getCurrentPosition());
+        return false;
       }
 
       @Override
@@ -286,14 +300,19 @@ public class StatementTranspiler {
       }
 
       private String toSourceExpression(Expression expression) {
+        if (expression == null) {
+          return "";
+        }
         return ExpressionTranspiler.transform(expression, environment);
       }
 
-      private void addSourceMapping(Statement statement, SourcePosition location) {
-        sourceMapBuilder.addMapping(statement.getSourcePosition(), location);
+      private void addSourceMapping(
+          Statement statement, FilePosition startPosition, FilePosition endPosition) {
+        sourceMapBuilder.addMapping(
+            statement.getSourcePosition(), new SourcePosition(startPosition, endPosition));
       }
     }
     SourceTransformer transformer = new SourceTransformer();
-    node.accept(transformer);
+    statement.accept(transformer);
   }
 }

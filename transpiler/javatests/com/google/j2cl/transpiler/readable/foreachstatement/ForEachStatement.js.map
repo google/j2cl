@@ -7,11 +7,17 @@
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement();]
 [for (Throwable t : iterable) {
       t.toString();
-    }] => [for (let $iterator = /**@type {Iterator<Throwable>} */ (iterable.m_iterator()); $iterator.m_hasNext(); )]
+    }] => [for (let $iterator = /**@type {Iterator<Throwable>} */ (iterable.m_iterator()); $iterator.m_hasNext(); ) {
+      let t = $iterator.m_next();
+      $Objects.m_toString__java_lang_Object(t);
+    }]
 [UNKNOWN] => [let t = $iterator.m_next();]
 [t.toString();] => [$Objects.m_toString__java_lang_Object(t);]
 [for (Throwable t : new Throwable[10]) {
       t.toString();
-    }] => [for (let $array = /**@type {!Array<Throwable>} */ ($Arrays.$create([ 10 ], Throwable)), $index = 0; $index < $array.length; $index++)]
+    }] => [for (let $array = /**@type {!Array<Throwable>} */ ($Arrays.$create([ 10 ], Throwable)), $index = 0; $index < $array.length; $index++) {
+      let t = $array[$index];
+      $Objects.m_toString__java_lang_Object(t);
+    }]
 [UNKNOWN] => [let t = $array[$index];]
 [t.toString();] => [$Objects.m_toString__java_lang_Object(t);]

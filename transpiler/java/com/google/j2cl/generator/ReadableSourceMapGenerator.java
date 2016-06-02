@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.generator;
 
+import com.google.common.base.CharMatcher;
 import com.google.common.io.Files;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
 
@@ -67,10 +68,11 @@ public class ReadableSourceMapGenerator {
     int endColumn = sourcePosition.getEndFilePosition().getColumn();
     int startColumn = sourcePosition.getStartFilePosition().getColumn();
     if (endLine != startLine || endColumn == -1) {
-      StringBuilder content = new StringBuilder(fragment.substring(startColumn));
+      StringBuilder content =
+          new StringBuilder(trimTrailingWhitespace(fragment.substring(startColumn)));
       for (int line = startLine + 1; line < endLine; line++) {
         content.append("\n");
-        content.append(lines.get(line));
+        content.append(trimTrailingWhitespace(lines.get(line)));
       }
       content.append("\n");
       content.append(lines.get(endLine).substring(0, endColumn));
@@ -78,5 +80,9 @@ public class ReadableSourceMapGenerator {
     }
 
     return "[" + fragment.substring(startColumn, endColumn) + "]";
+  }
+
+  private static String trimTrailingWhitespace(String string) {
+    return CharMatcher.whitespace().trimTrailingFrom(string);
   }
 }

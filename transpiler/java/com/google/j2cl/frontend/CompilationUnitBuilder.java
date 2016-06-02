@@ -319,6 +319,7 @@ public class CompilationUnitBuilder {
           .setInitializer(initializer)
           .setIsEnumField(true)
           .setPosition(-1) /* Position is not important */
+          .setSourcePosition(getSourcePosition(enumConstantDeclaration))
           .build();
     }
 
@@ -339,6 +340,7 @@ public class CompilationUnitBuilder {
             Field.Builder.fromDefault(JdtUtils.createFieldDescriptor(variableBinding))
                 .setInitializer(initializer)
                 .setPosition(position)
+                .setSourcePosition(getSourcePosition(fieldDeclaration))
                 .build();
         fields.add(field);
       }
@@ -791,7 +793,7 @@ public class CompilationUnitBuilder {
       }
     }
 
-    public SourcePosition sourceInfoForNode(ASTNode node) {
+    public SourcePosition getSourcePosition(ASTNode node) {
       int startLineNumber = jdtCompilationUnit.getLineNumber(node.getStartPosition()) - 1;
       int startColumnNumber = jdtCompilationUnit.getColumnNumber(node.getStartPosition());
       int endPositionCharacterIndex = node.getStartPosition() + node.getLength();
@@ -801,7 +803,7 @@ public class CompilationUnitBuilder {
     }
 
     private Statement convert(org.eclipse.jdt.core.dom.Statement statement) {
-      SourcePosition position = sourceInfoForNode(statement);
+      SourcePosition position = getSourcePosition(statement);
       Statement j2clStatement = convertStatement(statement);
       if (j2clStatement != null) {
         j2clStatement.setSourcePosition(position);

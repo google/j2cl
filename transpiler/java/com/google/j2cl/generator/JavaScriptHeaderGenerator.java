@@ -41,12 +41,14 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     TypeDescriptor selfTypeDescriptor = javaType.getDescriptor().getRawTypeDescriptor();
     Import selfImport = new Import(selfTypeDescriptor.getSimpleName(), selfTypeDescriptor);
     String binaryName = javaType.getDescriptor().getRawTypeDescriptor().getBinaryName();
-    sourceBuilder.appendln("/**");
-    sourceBuilder.appendln(" * @fileoverview Header transpiled from %s", binaryName);
-    sourceBuilder.appendln(" *");
-    sourceBuilder.appendln(" * @suppress {lateProvide}");
-    sourceBuilder.appendln(" */");
-    sourceBuilder.appendln("goog.module('%s');", selfImport.getHeaderModulePath());
+    sourceBuilder.appendLines(
+        "/**",
+        " * @fileoverview Header transpiled from " + binaryName,
+        " *",
+        " * @suppress {lateProvide}",
+        " */",
+        "goog.module('" + selfImport.getHeaderModulePath() + "');");
+    sourceBuilder.newLine();
 
     if (declareLegacyNamespace && javaType.getDescriptor().isJsType()
         && !(javaType instanceof AnonymousJavaType)) {
@@ -58,9 +60,10 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
 
     sourceBuilder.newLine();
     sourceBuilder.newLine();
-    sourceBuilder.appendln(
-        "// Imports headers for both eager and lazy dependencies to ensure that");
-    sourceBuilder.appendln("// all files are included in the dependency tree.");
+    sourceBuilder.appendLines(
+        "// Imports headers for both eager and lazy dependencies to ensure that",
+        "// all files are included in the dependency tree.");
+    sourceBuilder.newLine();
 
     Set<String> requiredPaths = new HashSet<>();
     // goog.require(...) for eager imports.
@@ -68,7 +71,7 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
       String alias = eagerImport.getAlias();
       String path = eagerImport.getHeaderModulePath();
       if (requiredPaths.add(path)) {
-        sourceBuilder.appendln("let _%s = goog.require('%s');", alias, path);
+        sourceBuilder.appendln("let _" + alias + " = goog.require('" + path + "');");
       }
     }
     // goog.require(...) for lazy imports.
@@ -76,7 +79,7 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
       String alias = eagerImport.getAlias();
       String path = eagerImport.getHeaderModulePath();
       if (requiredPaths.add(path)) {
-        sourceBuilder.appendln("let _%s = goog.require('%s');", alias, path);
+        sourceBuilder.appendln("let _" + alias + " = goog.require('" + path + "');");
       }
     }
     // externs imports are always available in the browser and don't need a header reference.
@@ -85,9 +88,11 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
 
     String className = environment.aliasForType(javaType.getDescriptor());
     String implementationPath = selfImport.getImplModulePath();
-    sourceBuilder.appendln("// Re-exports the implementation.");
-    sourceBuilder.appendln("var %s = goog.require('%s');", className, implementationPath);
-    sourceBuilder.appendln("exports = %s;", className);
+    sourceBuilder.appendLines(
+        "// Re-exports the implementation.",
+        "var " + className + " = goog.require('" + implementationPath + "');",
+        "exports = " + className + ";");
+    sourceBuilder.newLine();
     return sourceBuilder.build();
   }
 

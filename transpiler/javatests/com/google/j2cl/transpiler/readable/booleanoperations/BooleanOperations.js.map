@@ -39,29 +39,43 @@
 [br = (Boolean) (ls = rs);] => [br = /**@type {?boolean} */ ($Casts.to((ls = rs), Boolean));]
 [if (ls == rs) {
       r = true;
-    }] => [if (ls == rs) ]
+    }] => [if (ls == rs) {
+      r = true;
+    }]
 [r = true;] => [r = true;]
 [if (ls != rs) {
       r = true;
-    }] => [if (ls != rs) ]
+    }] => [if (ls != rs) {
+      r = true;
+    }]
 [r = true;] => [r = true;]
 [if (ls ^ rs) {
       r = true;
-    }] => [if (!!(ls ^ rs)) ]
+    }] => [if (!!(ls ^ rs)) {
+      r = true;
+    }]
 [r = true;] => [r = true;]
 [if (ls & rs) {
       r = true;
-    }] => [if (!!(ls & rs)) ]
+    }] => [if (!!(ls & rs)) {
+      r = true;
+    }]
 [r = true;] => [r = true;]
 [if (ls | rs) {
       r = true;
-    }] => [if (!!(ls | rs)) ]
+    }] => [if (!!(ls | rs)) {
+      r = true;
+    }]
 [r = true;] => [r = true;]
 [if (ls && rs) {
       r = true;
-    }] => [if (ls && rs) ]
+    }] => [if (ls && rs) {
+      r = true;
+    }]
 [r = true;] => [r = true;]
 [if (ls || rs) {
       r = true;
-    }] => [if (ls || rs) ]
+    }] => [if (ls || rs) {
+      r = true;
+    }]
 [r = true;] => [r = true;]

@@ -23,3 +23,15 @@
         return first == second;
       }
     };] => [return /**@type {!$NativeFunction} */ (EqualFunctions$3.$create());]
+[public static EqualFunction<Object> forObject =
+      new EqualFunction<Object>() {
+        @Override
+        public boolean equal(Object first, Object second) {
+          return first == second;
+        }
+      };] => [EqualFunctions.$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions = EqualFunctions$1.$create();]
+[public static final EqualFunction<Integer> forInteger = objectEqualFunction();] => [EqualFunctions.$f_forInteger__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions = /**@type {?function(Integer, Integer):boolean} */ (EqualFunctions.m_objectEqualFunction());]
+[/**
+   * Equal function handling array equal logic in addition to object equal.
+   */
+  public static EqualFunction<Object> forCollection = withCollection(forObject);] => [EqualFunctions.$f_forCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions = /**@type {?function(*, *):boolean} */ (EqualFunctions.m_withCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunction(EqualFunctions.$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions));]

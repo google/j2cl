@@ -11,11 +11,33 @@
       // expected empty body.
     } catch (RuntimeException r) {
       r = null; // used to show exception variable is transpiled correctly.
-    }] => [try]
+    }] => [try {
+      throw $Exceptions.toJs(ClassCastException.$create());
+    } catch (/** @type {*} */ e) {
+      e = $Exceptions.toJava(e);
+      if (NullPointerException.$isInstance(e) || ClassCastException.$isInstance(e)) {
+      } else if (RuntimeException.$isInstance(e)) {
+        let r = e;
+        r = null;
+      } else {
+        throw $Exceptions.toJs(e);
+      }
+    }]
 [throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create());]
 [UNKNOWN] => [e = $Exceptions.toJava(e);]
-[UNKNOWN] => [if (NullPointerException.$isInstance(e) || ClassCastException.$isInstance(e)) ]
-[UNKNOWN] => [       else if (RuntimeException.$isInstance(e)) ]
+[UNKNOWN] => [if (NullPointerException.$isInstance(e) || ClassCastException.$isInstance(e)) {
+      } else if (RuntimeException.$isInstance(e)) {
+        let r = e;
+        r = null;
+      } else {
+        throw $Exceptions.toJs(e);
+      }]
+[UNKNOWN] => [if (RuntimeException.$isInstance(e)) {
+        let r = e;
+        r = null;
+      } else {
+        throw $Exceptions.toJs(e);
+      }]
 [UNKNOWN] => [let r = e;]
 [r = null;] => [r = null;]
 [UNKNOWN] => [throw $Exceptions.toJs(e);]

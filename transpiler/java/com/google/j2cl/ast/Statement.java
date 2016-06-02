@@ -26,16 +26,16 @@ import com.google.j2cl.ast.sourcemap.SourcePosition;
 @Visitable
 public abstract class Statement extends Node implements HasSourcePosition {
   // unknown by default.
-  private SourcePosition javaSourcePosition = SourcePosition.UNKNOWN;
+  private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
 
   @Override
   public SourcePosition getSourcePosition() {
-    return javaSourcePosition;
+    return sourcePosition;
   }
 
   @Override
   public void setSourcePosition(SourcePosition sourcePosition) {
-    javaSourcePosition = sourcePosition;
+    this.sourcePosition = sourcePosition;
   }
 
   @Override

@@ -11,11 +11,17 @@
         break;
       default:
         return;
-    }] => [switch ("one") {]
-[case "one":] => [case "one":]
-[case "two":] => [case "two":]
+    }] => [switch ("one"){
+      case "one":
+      case "two":
+        break;
+      default:
+        return;
+    }]
+[case "one":] => [case "one": ]
+[case "two":] => [case "two": ]
 [break;] => [break;]
-[default:] => [default:]
+[default:] => [default: ]
 [return;] => [return;]
 [switch ('1') {
       case '1':
@@ -23,11 +29,17 @@
         break;
       default:
         return;
-    }] => [switch (49 /* '1' */) {]
-[case '1':] => [case 49 /* '1' */:]
-[case '2':] => [case 50 /* '2' */:]
+    }] => [switch (49 /* '1' */){
+      case 49 /* '1' */:
+      case 50 /* '2' */:
+        break;
+      default:
+        return;
+    }]
+[case '1':] => [case 49 /* '1' */: ]
+[case '2':] => [case 50 /* '2' */: ]
 [break;] => [break;]
-[default:] => [default:]
+[default:] => [default: ]
 [return;] => [return;]
 [switch (1) {
       case 1:
@@ -35,11 +47,17 @@
         break;
       default:
         return;
-    }] => [switch (1) {]
-[case 1:] => [case 1:]
-[case 2:] => [case 2:]
+    }] => [switch (1){
+      case 1:
+      case 2:
+        break;
+      default:
+        return;
+    }]
+[case 1:] => [case 1: ]
+[case 2:] => [case 2: ]
 [break;] => [break;]
-[default:] => [default:]
+[default:] => [default: ]
 [return;] => [return;]
 [switch (Numbers.ONE) {
       case ONE:
@@ -47,9 +65,15 @@
         break;
       default:
         return;
-    }] => [switch (Numbers.f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers) {]
-[case ONE:] => [case Numbers.f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers:]
-[case TWO:] => [case Numbers.f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers:]
+    }] => [switch (Numbers.f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers){
+      case Numbers.f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers:
+      case Numbers.f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers:
+        break;
+      default:
+        return;
+    }]
+[case ONE:] => [case Numbers.f_ONE__com_google_j2cl_transpiler_readable_switchstatement_Numbers: ]
+[case TWO:] => [case Numbers.f_TWO__com_google_j2cl_transpiler_readable_switchstatement_Numbers: ]
 [break;] => [break;]
-[default:] => [default:]
+[default:] => [default: ]
 [return;] => [return;]

@@ -8,5 +8,8 @@
 [try {
       assert true;
     } finally {
-    }] => [try]
+    }] => [try {
+      $Asserts.$enabled() && $Asserts.$assert(true);
+    } finally {
+    }]
 [assert true;] => [$Asserts.$enabled() && $Asserts.$assert(true);]
