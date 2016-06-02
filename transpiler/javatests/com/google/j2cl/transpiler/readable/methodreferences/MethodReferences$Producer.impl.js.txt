@@ -1,0 +1,87 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$Producer.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Producer$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
+
+/**
+ * @interface
+ * @template C_Producer_T
+ */
+class MethodReferences$Producer {
+  /**
+   * Abstract method.
+   * @return {C_Producer_T}
+   * @public
+   */
+  m_produce() {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {window.Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences$Producer =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        instance
+            .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences$Producer;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        classConstructor.prototype
+            .$implements__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences$Producer;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() { Class = goog.module.get('java.lang.Class$impl'); }
+};
+
+$Util.$setClassMetadataForInterface(
+    MethodReferences$Producer,
+    'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$Producer');
+
+
+MethodReferences$Producer.$markImplementor(
+    /** @type {window.Function} */ (MethodReferences$Producer));
+
+
+/**
+ * Export class.
+ */
+exports = MethodReferences$Producer;
+//# sourceMappingURL=MethodReferences$Producer.js.map

@@ -1,0 +1,113 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$impl');
+
+
+let Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let MethodReferences$Producer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Producer$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
+
+class MethodReferences extends Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() { super(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!MethodReferences}
+   * @public
+   */
+  static $create() {
+    MethodReferences.$clinit();
+    let $instance = new MethodReferences();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences();
+  }
+
+  /**
+   * @return {*}
+   * @public
+   */
+  static m_m_$pp_com_google_j2cl_transpiler_readable_methodreferences() {
+    MethodReferences.$clinit();
+    return Object.$create();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  m_main_$pp_com_google_j2cl_transpiler_readable_methodreferences() {
+    let objectFactory = null;
+    objectFactory = null;
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof MethodReferences; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, MethodReferences);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    MethodReferences$Producer = goog.module.get(
+        'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences.Producer$impl');
+    Class = goog.module.get('java.lang.Class$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_methodreferences_MethodReferences() {
+  }
+};
+
+$Util.$setClassMetadata(
+    MethodReferences,
+    'com.google.j2cl.transpiler.readable.methodreferences.MethodReferences');
+
+
+
+/**
+ * Export class.
+ */
+exports = MethodReferences;
+//# sourceMappingURL=MethodReferences.js.map

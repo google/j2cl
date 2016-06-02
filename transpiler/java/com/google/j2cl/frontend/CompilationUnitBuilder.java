@@ -622,6 +622,7 @@ public class CompilationUnitBuilder {
           j2clExpression = convert((org.eclipse.jdt.core.dom.ConditionalExpression) expression);
           break;
         case ASTNode.EXPRESSION_METHOD_REFERENCE:
+        case ASTNode.CREATION_REFERENCE:
           // TODO(stalcup): Implement method references properly
           j2clExpression = NullLiteral.NULL;
           break;
