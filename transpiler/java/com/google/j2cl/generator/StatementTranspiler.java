@@ -47,31 +47,17 @@ import java.util.List;
  */
 public class StatementTranspiler {
   SourceBuilder builder;
-  SourceMapBuilder sourceMapBuilder;
   GenerationEnvironment environment;
 
-  public StatementTranspiler(
-      SourceBuilder builder, SourceMapBuilder sourceMapBuilder, GenerationEnvironment environment) {
+  public StatementTranspiler(SourceBuilder builder, GenerationEnvironment environment) {
     this.builder = builder;
     this.environment = environment;
-    this.sourceMapBuilder = sourceMapBuilder;
   }
 
   public void renderStatement(Statement statement) {
     class SourceTransformer extends AbstractVisitor {
       private void render(Node node) {
         node.accept(this);
-      }
-
-      private String toSeparatedExpressions(String separator, List<Expression> expressions) {
-        StringBuilder sb = new StringBuilder();
-        String nextSeparator = "";
-        for (Expression expression : expressions) {
-          sb.append(nextSeparator);
-          nextSeparator = separator;
-          sb.append(toSourceExpression(expression));
-        }
-        return sb.toString();
       }
 
       @Override
@@ -81,19 +67,15 @@ public class StatementTranspiler {
         String assertAlias = environment.aliasForType(BootstrapType.ASSERTS.getDescriptor());
         builder.append(assertAlias + ".$enabled() && ");
         if (assertStatement.getMessage() == null) {
-          builder.append(
-              assertAlias
-                  + ".$assert("
-                  + toSourceExpression(assertStatement.getExpression())
-                  + ");");
+          builder.append(assertAlias + ".$assert(");
+          renderExpression(assertStatement.getExpression());
+          builder.append(");");
         } else {
-          builder.append(
-              assertAlias
-                  + ".$assertWithMessage("
-                  + toSourceExpression(assertStatement.getExpression())
-                  + ", "
-                  + toSourceExpression(assertStatement.getMessage())
-                  + ");");
+          builder.append(assertAlias + ".$assertWithMessage(");
+          renderExpression(assertStatement.getExpression());
+          builder.append(", ");
+          renderExpression(assertStatement.getMessage());
+          builder.append(");");
         }
         addSourceMapping(assertStatement, startPosition, builder.getCurrentPosition());
         return false;
@@ -148,7 +130,7 @@ public class StatementTranspiler {
         builder.append("do ");
         render(doWhileStatement.getBody());
         builder.append("while (");
-        builder.append(toSourceExpression(doWhileStatement.getConditionExpression()));
+        renderExpression(doWhileStatement.getConditionExpression());
         builder.append(");");
         addSourceMapping(doWhileStatement, startPosition, builder.getCurrentPosition());
         return false;
@@ -157,7 +139,8 @@ public class StatementTranspiler {
       @Override
       public boolean enterExpressionStatement(ExpressionStatement expressionStatement) {
         FilePosition startPosition = builder.getCurrentPosition();
-        builder.append(toSourceExpression(expressionStatement.getExpression()) + ";");
+        renderExpression(expressionStatement.getExpression());
+        builder.append(";");
         addSourceMapping(expressionStatement, startPosition, builder.getCurrentPosition());
         return false;
       }
@@ -166,11 +149,11 @@ public class StatementTranspiler {
       public boolean enterForStatement(ForStatement forStatement) {
         FilePosition startPosition = builder.getCurrentPosition();
         builder.append("for (");
-        builder.append(toSeparatedExpressions(", ", forStatement.getInitializers()));
+        renderSeparated(", ", forStatement.getInitializers());
         builder.append("; ");
-        builder.append(toSourceExpression(forStatement.getConditionExpression()));
+        renderExpression(forStatement.getConditionExpression());
         builder.append("; ");
-        builder.append(toSeparatedExpressions(", ", forStatement.getUpdates()));
+        renderSeparated(", ", forStatement.getUpdates());
         builder.append(") ");
         render(forStatement.getBody());
         addSourceMapping(forStatement, startPosition, builder.getCurrentPosition());
@@ -181,7 +164,7 @@ public class StatementTranspiler {
       public boolean enterIfStatement(IfStatement ifStatement) {
         FilePosition startPosition = builder.getCurrentPosition();
         builder.append("if (");
-        builder.append(toSourceExpression(ifStatement.getConditionExpression()));
+        renderExpression(ifStatement.getConditionExpression());
         builder.append(") ");
         render(ifStatement.getThenStatement());
         if (ifStatement.getElseStatement() != null) {
@@ -205,8 +188,12 @@ public class StatementTranspiler {
       public boolean enterReturnStatement(ReturnStatement returnStatement) {
         FilePosition startPosition = builder.getCurrentPosition();
         Expression expression = returnStatement.getExpression();
-        builder.append(
-            "return" + (expression == null ? "" : (" " + toSourceExpression(expression))) + ";");
+        builder.append("return");
+        if (expression != null) {
+          builder.append(" ");
+          renderExpression(expression);
+        }
+        builder.append(";");
         addSourceMapping(returnStatement, startPosition, builder.getCurrentPosition());
         return false;
       }
@@ -217,7 +204,9 @@ public class StatementTranspiler {
         if (switchCase.isDefault()) {
           builder.append("default: ");
         } else {
-          builder.append("case " + toSourceExpression(switchCase.getMatchExpression()) + ": ");
+          builder.append("case ");
+          renderExpression(switchCase.getMatchExpression());
+          builder.append(": ");
         }
         addSourceMapping(switchCase, startPosition, builder.getCurrentPosition());
         return false;
@@ -226,21 +215,21 @@ public class StatementTranspiler {
       @Override
       public boolean enterSwitchStatement(SwitchStatement switchStatement) {
         FilePosition startPosition = builder.getCurrentPosition();
-        builder.append(
-            "switch (" + toSourceExpression(switchStatement.getSwitchExpression()) + ")");
+        builder.append("switch (");
+        renderExpression(switchStatement.getSwitchExpression());
+        builder.append(") ");
         builder.openBrace();
-        builder.indent();
         for (Statement statement : switchStatement.getBodyStatements()) {
           if (statement instanceof SwitchCase) {
+            builder.newLine();
+            render(statement);
+          } else {
+            builder.indent();
+            builder.newLine();
+            render(statement);
             builder.unindent();
           }
-          builder.newLine();
-          render(statement);
-          if (statement instanceof SwitchCase) {
-            builder.indent();
-          }
         }
-        builder.unindent();
         builder.closeBrace();
         addSourceMapping(switchStatement, startPosition, builder.getCurrentPosition());
         return false;
@@ -249,8 +238,8 @@ public class StatementTranspiler {
       @Override
       public boolean enterSynchronizedStatement(SynchronizedStatement synchronizedStatement) {
         FilePosition startPosition = builder.getCurrentPosition();
-        builder.append(toSourceExpression(synchronizedStatement.getExpression()) + ";");
-        builder.newLine();
+        renderExpression(synchronizedStatement.getExpression());
+        builder.appendln(";");
         render(synchronizedStatement.getBody());
         addSourceMapping(synchronizedStatement, startPosition, builder.getCurrentPosition());
         return false;
@@ -259,7 +248,9 @@ public class StatementTranspiler {
       @Override
       public boolean enterThrowStatement(ThrowStatement throwStatement) {
         FilePosition startPosition = builder.getCurrentPosition();
-        builder.append("throw " + toSourceExpression(throwStatement.getExpression()) + ";");
+        builder.append("throw ");
+        renderExpression(throwStatement.getExpression());
+        builder.append(";");
         addSourceMapping(throwStatement, startPosition, builder.getCurrentPosition());
         return false;
       }
@@ -287,8 +278,9 @@ public class StatementTranspiler {
       @Override
       public boolean enterWhileStatement(WhileStatement whileStatement) {
         FilePosition startPosition = builder.getCurrentPosition();
-        String conditionAsString = toSourceExpression(whileStatement.getConditionExpression());
-        builder.append("while (" + conditionAsString + ") ");
+        builder.append("while (");
+        renderExpression(whileStatement.getConditionExpression());
+        builder.append(") ");
         render(whileStatement.getBody());
         addSourceMapping(whileStatement, startPosition, builder.getCurrentPosition());
         return false;
@@ -299,16 +291,25 @@ public class StatementTranspiler {
         return builder.build();
       }
 
-      private String toSourceExpression(Expression expression) {
+      private void renderExpression(Expression expression) {
         if (expression == null) {
-          return "";
+          return;
         }
-        return ExpressionTranspiler.transform(expression, environment);
+        ExpressionTranspiler.render(expression, environment, builder);
+      }
+
+      private void renderSeparated(String separator, List<? extends Expression> expressions) {
+        String nextSeparator = "";
+        for (Expression expression : expressions) {
+          builder.append(nextSeparator);
+          nextSeparator = separator;
+          renderExpression(expression);
+        }
       }
 
       private void addSourceMapping(
           Statement statement, FilePosition startPosition, FilePosition endPosition) {
-        sourceMapBuilder.addMapping(
+        builder.addMapping(
             statement.getSourcePosition(), new SourcePosition(startPosition, endPosition));
       }
     }

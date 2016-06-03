@@ -17,6 +17,7 @@ package com.google.j2cl.generator;
 
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Variable;
+import com.google.j2cl.ast.sourcemap.SourcePosition;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatheringVisitor;
@@ -49,6 +50,10 @@ public abstract class JavaScriptGenerator {
     Map<Variable, String> aliasByVariable =
         VariableAliasesGatheringVisitor.gatherVariableAliases(sortedImports, javaType);
     environment = new GenerationEnvironment(sortedImports, aliasByVariable);
+  }
+
+  public Map<SourcePosition, SourcePosition> getSourceMappings() {
+    return sourceBuilder.getMappings();
   }
 
   abstract String renderOutput();

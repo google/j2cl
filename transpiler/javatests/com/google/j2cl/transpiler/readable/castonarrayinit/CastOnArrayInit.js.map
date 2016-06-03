@@ -9,4 +9,4 @@
 [UNKNOWN] => [CastOnArrayInit.$clinit();]
 [Foo<E> f1 = new Foo<>();] => [let f1 = /**@type {!CastOnArrayInit$Foo<*>} */ (CastOnArrayInit$Foo.$create());]
 [Foo<E> f2 = new Foo<>();] => [let f2 = /**@type {!CastOnArrayInit$Foo<*>} */ (CastOnArrayInit$Foo.$create());]
-[fun(f1, f2);] => [CastOnArrayInit.m_fun__arrayOf_com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit$Foo(/**@type {!Array<CastOnArrayInit$Foo<*>>} */ ($Arrays.$init([ f1, f2 ], CastOnArrayInit$Foo)));]
+[fun(f1, f2);] => [CastOnArrayInit.m_fun__arrayOf_com_google_j2cl_transpiler_readable_castonarrayinit_CastOnArrayInit$Foo(/**@type {!Array<CastOnArrayInit$Foo<*>>} */ ($Arrays.$init([f1, f2], CastOnArrayInit$Foo)));]

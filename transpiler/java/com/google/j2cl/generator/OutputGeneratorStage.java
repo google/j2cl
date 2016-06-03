@@ -17,6 +17,7 @@ package com.google.j2cl.generator;
 
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.sourcemap.SourcePosition;
 import com.google.j2cl.errors.Errors;
 
 import java.io.File;
@@ -88,9 +89,8 @@ public class OutputGeneratorStage {
           continue;
         }
 
-        SourceMapBuilder sourceMapBuilder = new SourceMapBuilder();
         JavaScriptImplGenerator jsImplGenerator =
-            new JavaScriptImplGenerator(errors, declareLegacyNamespace, javaType, sourceMapBuilder);
+            new JavaScriptImplGenerator(errors, declareLegacyNamespace, javaType);
 
         // If the java type contains any native methods, search for matching native file.
         if (javaType.containsNativeMethods()) {
@@ -146,7 +146,10 @@ public class OutputGeneratorStage {
         GeneratorUtils.writeToFile(absolutePathForHeader, javaScriptHeaderFile, charset, errors);
 
         generateSourceMaps(
-            j2clCompilationUnit, javaType, javaScriptImplementationSource, sourceMapBuilder);
+            j2clCompilationUnit,
+            javaType,
+            javaScriptImplementationSource,
+            jsImplGenerator.getSourceMappings());
       }
 
       copyJavaSourcesToOutput(j2clCompilationUnit);
@@ -166,7 +169,7 @@ public class OutputGeneratorStage {
       CompilationUnit j2clUnit,
       JavaType type,
       String javaScriptImplementationFileContents,
-      SourceMapBuilder sourceMapBuilder) {
+      Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition) {
     String compilationUnitFileName = j2clUnit.getFileName();
     String compilationUnitFilePath = j2clUnit.getFilePath();
     // Generate sourcemap files.
@@ -179,7 +182,7 @@ public class OutputGeneratorStage {
             javaScriptImplementationFileContents,
             errors,
             shouldGenerateReadableSourceMaps)
-        .generateSourceMaps(type, sourceMapBuilder);
+        .generateSourceMaps(type, javaSourcePositionByOutputSourcePosition);
   }
 
   /**

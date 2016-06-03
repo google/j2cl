@@ -1,4 +1,4 @@
-[UNKNOWN] => [let $var_args_copy = /**@type {!Array<number>} */ ($Arrays.$create([ arguments.length - 1 ], $int));]
+[UNKNOWN] => [let $var_args_copy = /**@type {!Array<number>} */ ($Arrays.$create([arguments.length - 1], $int));]
 [UNKNOWN] => [for (let $i = 0; $i < arguments.length - 1; $i++) {
       $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
     }]
@@ -14,4 +14,4 @@
 [UNKNOWN] => [return $instance;]
 [UNKNOWN] => [JsConstructorClass$SubVarargs.$clinit();]
 [SubVarargs s1 = new SubVarargs(2);] => [let s1 = JsConstructorClass$SubVarargs.$create__int(2);]
-[SubVarargs s2 = new SubVarargs(new Object(), 1, 2, 3);] => [let s2 = JsConstructorClass$SubVarargs.$create__java_lang_Object__arrayOf_int(Object.$create(), /**@type {!Array<number>} */ ($Arrays.$init([ 1, 2, 3 ], $int)));]
+[SubVarargs s2 = new SubVarargs(new Object(), 1, 2, 3);] => [let s2 = JsConstructorClass$SubVarargs.$create__java_lang_Object__arrayOf_int(Object.$create(), /**@type {!Array<number>} */ ($Arrays.$init([1, 2, 3], $int)));]

@@ -24,6 +24,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 /**
@@ -34,7 +35,7 @@ public class ReadableSourceMapGenerator {
    * The source location of the ast node to print, input or output.
    */
   public static String generate(
-      SourceMapBuilder sourceMapBuilder,
+      Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition,
       Path javaSourceFile,
       String javaScriptImplementationFilecontents) {
     StringBuilder sb = new StringBuilder();
@@ -44,7 +45,7 @@ public class ReadableSourceMapGenerator {
       List<String> javaScriptSourceLines =
           Arrays.asList(javaScriptImplementationFilecontents.split("\n"));
       for (Entry<SourcePosition, SourcePosition> entry :
-          sourceMapBuilder.getMappings().entrySet()) {
+          javaSourcePositionByOutputSourcePosition.entrySet()) {
         SourcePosition javaSourcePosition = entry.getValue();
         SourcePosition javaScriptSourcePosition = entry.getKey();
         sb.append(extract(javaSourcePosition, javaSourceLines));

@@ -17,8 +17,12 @@ package com.google.j2cl.generator;
 
 import com.google.common.base.Strings;
 import com.google.debugging.sourcemap.FilePosition;
+import com.google.j2cl.ast.sourcemap.SourcePosition;
 
 import org.apache.commons.lang.StringUtils;
+
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  * Builds source and tracks line numbers using a StringBuilder.
@@ -29,6 +33,16 @@ class SourceBuilder {
   private int currentLine = 0;
   private int currentColumn = 0;
   private int currentIndentation = 0;
+  private final SortedMap<SourcePosition, SourcePosition> javaSourceInfoByOutputSourceInfo =
+      new TreeMap<>();
+
+  public void addMapping(SourcePosition inputSourcePosition, SourcePosition outputSourcePosition) {
+    javaSourceInfoByOutputSourceInfo.put(outputSourcePosition, inputSourcePosition);
+  }
+
+  public SortedMap<SourcePosition, SourcePosition> getMappings() {
+    return javaSourceInfoByOutputSourceInfo;
+  }
 
   /**
    * Appends some source and returns its resulting location.

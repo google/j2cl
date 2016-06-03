@@ -15,12 +15,8 @@
  */
 package com.google.j2cl.generator;
 
-import com.google.common.base.Function;
-import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractTransformer;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
@@ -56,90 +52,91 @@ import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableReference;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Collections;
 
 /**
  * Transforms Expression to JavaScript source strings.
  */
 public class ExpressionTranspiler {
-  private static String stringForMethodDescriptor(MethodDescriptor methodDescriptor) {
-    if (methodDescriptor.isInit()) {
-      return ManglingNameUtils.getInitMangledName(
-          methodDescriptor.getEnclosingClassTypeDescriptor());
-    } else {
-      return ManglingNameUtils.getMangledName(methodDescriptor);
+  public static void render(
+      Expression expression,
+      final GenerationEnvironment environment,
+      final SourceBuilder sourceBuilder) {
+
+    if (expression == null) {
+      return;
     }
-  }
 
-  public static String transform(Expression expression, final GenerationEnvironment environment) {
-    class ToSourceTransformer extends AbstractTransformer<String> {
+    // TODO(rluble): create a visitor based abstraction for cases like this where the only
+    // feature that is needed is the delegated dynamic dispatch.
+    new AbstractTransformer<Void>() {
 
-      private String longsTypeAlias() {
-        return environment.aliasForType(BootstrapType.LONGS.getDescriptor());
+      @Override
+      public Void transformArrayAccess(ArrayAccess arrayAccess) {
+        process(arrayAccess.getArrayExpression());
+        sourceBuilder.append("[");
+        process(arrayAccess.getIndexExpression());
+        sourceBuilder.append("]");
+        return null;
       }
 
       @Override
-      public String transformArrayAccess(ArrayAccess arrayAccess) {
-        return String.format(
-            "%s[%s]",
-            transform(arrayAccess.getArrayExpression(), environment),
-            transform(arrayAccess.getIndexExpression(), environment));
+      public Void transformArrayLiteral(ArrayLiteral arrayLiteral) {
+        renderDelimitedAndSeparated("[", ", ", "]", arrayLiteral.getValueExpressions());
+        return null;
       }
 
       @Override
-      public String transformArrayLiteral(ArrayLiteral arrayLiteral) {
-        String valuesAsString =
-            Joiner.on(", ").join(transformNodesToSource(arrayLiteral.getValueExpressions()));
-        return "[ " + valuesAsString + " ]";
-      }
-
-      @Override
-      public String transformBinaryExpression(BinaryExpression expression) {
+      public Void transformBinaryExpression(BinaryExpression expression) {
         Preconditions.checkState(
             !(expression.getOperator().hasSideEffect()
                 && expression.getLeftOperand() instanceof ArrayAccess));
-
-        return String.format(
-            "%s %s %s",
-            transform(expression.getLeftOperand(), environment),
-            expression.getOperator().toString(),
-            transform(expression.getRightOperand(), environment));
+        process(expression.getLeftOperand());
+        sourceBuilder.append(" " + expression.getOperator() + " ");
+        process(expression.getRightOperand());
+        return null;
       }
 
       @Override
-      public String transformBooleanLiteral(BooleanLiteral expression) {
-        return expression.getValue() ? "true" : "false";
+      public Void transformBooleanLiteral(BooleanLiteral expression) {
+        sourceBuilder.append(expression.getValue() ? "true" : "false");
+        return null;
       }
 
       @Override
-      public String transformCastExpression(CastExpression castExpression) {
-        throw new IllegalStateException(
-            castExpression + " CastExpression should have been normalized to method call.");
+      public Void transformCastExpression(CastExpression castExpression) {
+        Preconditions.checkArgument(
+            false, castExpression + " CastExpression should have been normalized to method call.");
+        return null;
       }
 
       @Override
-      public String transformJsTypeAnnotation(JsTypeAnnotation annotation) {
+      public Void transformJsTypeAnnotation(JsTypeAnnotation annotation) {
         String jsdoc =
             JsDocNameUtils.getJsDocName(annotation.getTypeDescriptor(), false, environment);
-        String expression = transform(annotation.getExpression(), environment);
         if (annotation.isDeclaration()) {
-          return String.format("/** @public {%s} */\n%s", jsdoc, expression);
+          sourceBuilder.appendln("/** @public {" + jsdoc + "} */");
+          process(annotation.getExpression());
+        } else {
+          sourceBuilder.append("/**@type {" + jsdoc + "} */ (");
+          process(annotation.getExpression());
+          sourceBuilder.append(")");
         }
-        return String.format("/**@type {%s} */ (%s)", jsdoc, expression);
+        return null;
       }
 
       @Override
-      public String transformCharacterLiteral(CharacterLiteral characterLiteral) {
-        return String.format(
-            "%s /* %s */",
-            Integer.toString(characterLiteral.getValue()),
-            characterLiteral.getEscapedValue());
+      public Void transformCharacterLiteral(CharacterLiteral characterLiteral) {
+        sourceBuilder.append(
+            Integer.toString(characterLiteral.getValue())
+                + " /* "
+                + characterLiteral.getEscapedValue()
+                + " */");
+        return null;
       }
 
       @Override
-      public String transformFieldAccess(FieldAccess fieldAccess) {
+      public Void transformFieldAccess(FieldAccess fieldAccess) {
         // When inside the same class, access static fields directly.
         boolean insideSameEnclosingClass =
             fieldAccess.getTarget().isStatic()
@@ -153,257 +150,275 @@ public class ExpressionTranspiler {
 
         String fieldMangledName =
             ManglingNameUtils.getMangledName(fieldAccess.getTarget(), accessBackingPrivateField);
-        String qualifier = transform(fieldAccess.getQualifier(), environment);
-        return String.format("%s.%s", qualifier, fieldMangledName);
+        process(fieldAccess.getQualifier());
+        sourceBuilder.append("." + fieldMangledName);
+        return null;
       }
 
       @Override
-      public String transformInstanceOfExpression(InstanceOfExpression expression) {
+      public Void transformInstanceOfExpression(InstanceOfExpression expression) {
         Preconditions.checkArgument(false, "InstanceOf expression should have been normalized.");
-        return "";
+        return null;
       }
 
-      private String transformLongNumberLiteral(NumberLiteral expression) {
+      private void renderLongNumberLiteral(NumberLiteral expression) {
         long longValue = expression.getValue().longValue();
 
         if (longValue < Integer.MAX_VALUE && longValue > Integer.MIN_VALUE) {
           // The long value is small enough to fit in an int. Emit the terse initialization.
-          return String.format("%s.$fromInt(%s)", longsTypeAlias(), Long.toString(longValue));
+          sourceBuilder.append(longsTypeAlias() + ".$fromInt(" + longValue + ")");
+          return;
         }
 
         // The long value is pretty large. Emit the verbose initialization.
         long lowOrderBits = longValue << 32 >> 32;
         long highOrderBits = longValue >> 32;
-        return String.format(
-            "%s.$fromBits(%s, %s) /* %s */",
-            longsTypeAlias(),
-            Long.toString(lowOrderBits),
-            Long.toString(highOrderBits),
-            Long.toString(longValue));
+        sourceBuilder.append(
+            longsTypeAlias()
+                + ".$fromBits("
+                + Long.toString(lowOrderBits)
+                + ", "
+                + Long.toString(highOrderBits)
+                + ") /* "
+                + longValue
+                + " */");
       }
 
       @Override
-      public String transformMethodCall(MethodCall expression) {
-        if (expression.isStaticDispatch()) {
-          return transformStaticDispatchMethodCall(expression);
-        } else if (expression.getTarget().isJsProperty()) {
-          return transformJsPropertyCall(expression);
-        } else {
-          List<String> argumentSources = transformNodesToSource(expression.getArguments());
-          return String.format(
-              "%s(%s)",
-              transformMethodCallHeader(expression),
-              Joiner.on(", ").join(argumentSources));
-        }
+      public Void transformConditionalExpression(ConditionalExpression conditionalExpression) {
+        process(conditionalExpression.getConditionExpression());
+        sourceBuilder.append(" ? ");
+        process(conditionalExpression.getTrueExpression());
+        sourceBuilder.append(" : ");
+        process(conditionalExpression.getFalseExpression());
+        return null;
       }
 
-      private String transformStaticDispatchMethodCall(MethodCall expression) {
+      @Override
+      public Void transformMethodCall(MethodCall expression) {
+        if (expression.isStaticDispatch()) {
+          renderStaticDispatchMethodCall(expression);
+        } else if (expression.getTarget().isJsProperty()) {
+          renderJsPropertyCall(expression);
+        } else {
+          renderMethodCallHeader(expression);
+          renderDelimitedAndSeparated("(", ", ", ")", expression.getArguments());
+        }
+        return null;
+      }
+
+      private void renderStaticDispatchMethodCall(MethodCall expression) {
         MethodDescriptor methodDescriptor = expression.getTarget();
-        List<String> argumentSources = transformNodesToSource(expression.getArguments());
         String typeName =
             environment.aliasForType(methodDescriptor.getEnclosingClassTypeDescriptor());
         String qualifier = methodDescriptor.isStatic() ? typeName : typeName + ".prototype";
-        return String.format(
-            "%s.%s.call(%s)",
-            qualifier,
-            ExpressionTranspiler.stringForMethodDescriptor(methodDescriptor),
-            Joiner.on(", ")
-                .join(
-                    Iterables.concat(
-                        Arrays.asList(transform(expression.getQualifier(), environment)),
-                        argumentSources)));
+
+        sourceBuilder.append(qualifier + "." + getJsMethodName(methodDescriptor) + ".call");
+        renderDelimitedAndSeparated(
+            "(",
+            ", ",
+            ")",
+            Iterables.concat(
+                Collections.singletonList(expression.getQualifier()), expression.getArguments()));
       }
 
-      @Override
-      public String transformConditionalExpression(ConditionalExpression conditionalExpression) {
-        String conditionExpressionAsString =
-            transform(conditionalExpression.getConditionExpression(), environment);
-        String trueExpressionAsString =
-            transform(conditionalExpression.getTrueExpression(), environment);
-        String falseExpressionAsString =
-            transform(conditionalExpression.getFalseExpression(), environment);
-        return String.format(
-            "%s ? %s : %s",
-            conditionExpressionAsString,
-            trueExpressionAsString,
-            falseExpressionAsString);
-      }
-
-      private String transformJsPropertyCall(MethodCall expression) {
+      private void renderJsPropertyCall(MethodCall expression) {
         if (expression.getTarget().isJsPropertyGetter()) {
-          return transformJsPropertyGetter(expression);
+          renderJsPropertyAccess(expression);
         } else {
-          return transformJsPropertySetter(expression);
+          renderJsPropertySetter(expression);
         }
+      }
+
+      private void renderQualifiedName(Expression qualifier, String jsPropertyName) {
+        if (qualifier != null
+            // Hack: <global> qualifier should have been normalized out.
+            && (!(qualifier instanceof TypeReference)
+                || !((TypeReference) qualifier).getReferencedTypeDescriptor().isGlobal())) {
+          process(qualifier);
+          sourceBuilder.append(".");
+        }
+        sourceBuilder.append(jsPropertyName);
       }
 
       /**
        * JsProperty getter is emitted as property access: qualifier.property.
        */
-      private String transformJsPropertyGetter(MethodCall expression) {
-        MethodDescriptor methodDescriptor = expression.getTarget();
-        String qualifier = transform(expression.getQualifier(), environment);
-        String propertyName = methodDescriptor.getJsPropertyName();
-        return Joiner.on(".").skipNulls().join(Strings.emptyToNull(qualifier), propertyName);
+      private void renderJsPropertyAccess(MethodCall expression) {
+        String jsPropertyName = expression.getTarget().getJsPropertyName();
+        renderQualifiedName(expression.getQualifier(), jsPropertyName);
       }
 
       /**
        * JsProperty setter is emitted as property set: qualifier.property = argument.
        */
-      private String transformJsPropertySetter(MethodCall expression) {
-        MethodDescriptor methodDescriptor = expression.getTarget();
-        String qualifier = transform(expression.getQualifier(), environment);
-        String propertyName = methodDescriptor.getJsPropertyName();
-        Preconditions.checkArgument(expression.getArguments().size() == 1);
-        return String.format(
-            "%s = %s",
-            Joiner.on(".").skipNulls().join(Strings.emptyToNull(qualifier), propertyName),
-            transform(expression.getArguments().get(0), environment));
+      private String renderJsPropertySetter(MethodCall expression) {
+        renderJsPropertyAccess(expression);
+        sourceBuilder.append(" = ");
+        process(expression.getArguments().get(0));
+        return null;
       }
 
-      private String transformMethodCallHeader(MethodCall expression) {
+      private void renderMethodCallHeader(MethodCall expression) {
         MethodDescriptor target = expression.getTarget();
-        String qualifier = transform(expression.getQualifier(), environment);
         if (target.isConstructor()) {
-          return "super";
-        }
-        if (target.isJsFunction()) {
+          sourceBuilder.append("super");
+        } else if (target.isJsFunction()) {
           // Call to a JsFunction method is emitted as the call on the qualifier itself:
-          return String.format("%s", qualifier);
+          process(expression.getQualifier());
         } else if (expression.isStaticDispatch()) {
           String typeName = environment.aliasForType(target.getEnclosingClassTypeDescriptor());
-          String methodName = ExpressionTranspiler.stringForMethodDescriptor(target);
-          return typeName + ".prototype." + methodName;
+          sourceBuilder.append(typeName + ".prototype." + getJsMethodName(target));
         } else {
-          String methodName = ExpressionTranspiler.stringForMethodDescriptor(target);
-          return Joiner.on(".").skipNulls().join(Strings.emptyToNull(qualifier), methodName);
+          renderQualifiedName(expression.getQualifier(), getJsMethodName(target));
         }
       }
 
       @Override
-      public String transformMultiExpression(MultiExpression multipleExpression) {
-        String expressionsAsString =
-            Joiner.on(", ").join(transformNodesToSource(multipleExpression.getExpressions()));
-        return "(" + expressionsAsString + ")";
+      public Void transformMultiExpression(MultiExpression multipleExpression) {
+        renderDelimitedAndSeparated("(", ", ", ")", multipleExpression.getExpressions());
+        return null;
       }
 
       @Override
-      public String transformNewArray(NewArray newArrayExpression) {
+      public Void transformNewArray(NewArray newArrayExpression) {
         Preconditions.checkArgument(false, "NewArray should have been normalized.");
-        return "";
+        return null;
       }
 
       @Override
-      public String transformNewInstance(NewInstance expression) {
+      public Void transformNewInstance(NewInstance expression) {
         TypeDescriptor targetTypeDescriptor =
             expression.getTarget().getEnclosingClassTypeDescriptor().getRawTypeDescriptor();
-        String argumentsList =
-            Joiner.on(", ").join(transformNodesToSource(expression.getArguments()));
-        return String.format(
-            "new %s(%s)", environment.aliasForType(targetTypeDescriptor), argumentsList);
-      }
 
-      public List<String> transformNodesToSource(List<Expression> nodes) {
-        return Lists.transform(
-            nodes,
-            new Function<Expression, String>() {
-              @Override
-              public String apply(Expression node) {
-                return transform(node, environment);
-              }
-            });
+        sourceBuilder.append("new " + environment.aliasForType(targetTypeDescriptor));
+        renderDelimitedAndSeparated("(", ", ", ")", expression.getArguments());
+        return null;
       }
 
       @Override
-      public String transformNullLiteral(NullLiteral expression) {
-        return "null";
+      public Void transformNullLiteral(NullLiteral expression) {
+        sourceBuilder.append("null");
+        return null;
       }
 
       @Override
-      public String transformNumberLiteral(NumberLiteral expression) {
+      public Void transformNumberLiteral(NumberLiteral expression) {
         if (TypeDescriptors.get()
             .primitiveLong
             .equalsIgnoreNullability(expression.getTypeDescriptor())) {
-          return transformLongNumberLiteral(expression);
+          renderLongNumberLiteral(expression);
+        } else {
+          sourceBuilder.append(expression.getValue().toString());
         }
-        return expression.getValue().toString();
+        return null;
       }
 
       @Override
-      public String transformPostfixExpression(PostfixExpression expression) {
+      public Void transformPostfixExpression(PostfixExpression expression) {
         Preconditions.checkArgument(
             !TypeDescriptors.get()
                 .primitiveLong
                 .equalsIgnoreNullability(expression.getTypeDescriptor()));
-        return String.format(
-            "%s%s",
-            transform(expression.getOperand(), environment),
-            expression.getOperator().toString());
+        process(expression.getOperand());
+        sourceBuilder.append(expression.getOperator().toString());
+        return null;
       }
 
       @Override
-      public String transformPrefixExpression(PrefixExpression expression) {
+      public Void transformPrefixExpression(PrefixExpression expression) {
         // The + prefix operator is a NOP.
         if (expression.getOperator() == PrefixOperator.PLUS) {
-          return transform(expression.getOperand(), environment);
+          process(expression.getOperand());
+          return null;
         }
-
-        return String.format(
-            "%s%s",
-            expression.getOperator().toString(),
-            transform(expression.getOperand(), environment));
+        sourceBuilder.append(expression.getOperator().toString());
+        process(expression.getOperand());
+        return null;
       }
 
       @Override
-      public String transformStringLiteral(StringLiteral expression) {
-        return expression.getEscapedValue();
+      public Void transformStringLiteral(StringLiteral expression) {
+        sourceBuilder.append(expression.getEscapedValue());
+        return null;
       }
 
       @Override
-      public String transformSuperReference(SuperReference expression) {
-        return "super";
+      public Void transformSuperReference(SuperReference expression) {
+        sourceBuilder.append("super");
+        return null;
       }
 
       @Override
-      public String transformThisReference(ThisReference expression) {
-        return "this";
+      public Void transformThisReference(ThisReference expression) {
+        sourceBuilder.append("this");
+        return null;
       }
 
       @Override
-      public String transformTypeReference(TypeReference typeReference) {
-        return environment.aliasForType(typeReference.getReferencedTypeDescriptor());
+      public Void transformTypeReference(TypeReference typeReference) {
+        sourceBuilder.append(environment.aliasForType(typeReference.getReferencedTypeDescriptor()));
+        return null;
       }
 
       @Override
-      public String transformVariableDeclarationExpression(
+      public Void transformVariableDeclarationExpression(
           VariableDeclarationExpression variableDeclarationExpression) {
-        List<String> fragmentsAsString = new ArrayList<>();
-        for (VariableDeclarationFragment fragment : variableDeclarationExpression.getFragments()) {
-          fragmentsAsString.add(transform(fragment, environment));
-        }
-        return "let " + Joiner.on(", ").join(fragmentsAsString);
+        renderDelimitedAndSeparated("let ", ", ", "", variableDeclarationExpression.getFragments());
+        return null;
       }
 
       @Override
-      public String transformVariableDeclarationFragment(VariableDeclarationFragment fragment) {
+      public Void transformVariableDeclarationFragment(VariableDeclarationFragment fragment) {
         Variable variable = fragment.getVariable();
-        String variableAsString = environment.aliasForVariable(variable);
-        if (fragment.getInitializer() == null) {
-          return variableAsString;
+        sourceBuilder.append(environment.aliasForVariable(variable));
+        if (fragment.getInitializer() != null) {
+          sourceBuilder.append(" = ");
+          process(fragment.getInitializer());
         }
-
-        String initializerAsString = transform(fragment.getInitializer(), environment);
-        return String.format("%s = %s", variableAsString, initializerAsString);
+        return null;
       }
 
       @Override
-      public String transformVariableReference(VariableReference expression) {
-        return environment.aliasForVariable(expression.getTarget());
+      public Void transformVariableReference(VariableReference expression) {
+        sourceBuilder.append(environment.aliasForVariable(expression.getTarget()));
+        return null;
       }
-    }
-    if (expression == null) {
-      return "";
-    }
-    return new ToSourceTransformer().process(expression);
+
+      private void renderDelimitedAndSeparated(
+          String prefix,
+          String separator,
+          String suffix,
+          Iterable<? extends Expression> expressions) {
+        sourceBuilder.append(prefix);
+        renderSeparated(separator, expressions);
+        sourceBuilder.append(suffix);
+      }
+
+      private void renderSeparated(String separator, Iterable<? extends Expression> expressions) {
+        String currentSeparator = "";
+        for (Expression expression : expressions) {
+          if (expression == null) {
+            continue;
+          }
+          sourceBuilder.append(currentSeparator);
+          currentSeparator = separator;
+          process(expression);
+        }
+      }
+
+      private String longsTypeAlias() {
+        return environment.aliasForType(BootstrapType.LONGS.getDescriptor());
+      }
+
+      private String getJsMethodName(MethodDescriptor methodDescriptor) {
+        if (methodDescriptor.isInit()) {
+          return ManglingNameUtils.getInitMangledName(
+              methodDescriptor.getEnclosingClassTypeDescriptor());
+        } else {
+          return ManglingNameUtils.getMangledName(methodDescriptor);
+        }
+      }
+    }.process(expression);
   }
 }

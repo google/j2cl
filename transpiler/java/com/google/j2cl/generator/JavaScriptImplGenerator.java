@@ -51,19 +51,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private String mangledTypeName;
 
   protected final StatementTranspiler statementTranspiler;
-  private final SourceMapBuilder sourceMapBuilder;
 
-  public JavaScriptImplGenerator(
-      Errors errors,
-      boolean declareLegacyNamespace,
-      JavaType javaType,
-      SourceMapBuilder sourceMapBuilder) {
+  public JavaScriptImplGenerator(Errors errors, boolean declareLegacyNamespace, JavaType javaType) {
     super(errors, declareLegacyNamespace, javaType);
     this.className = environment.aliasForType(javaType.getDescriptor());
     this.mangledTypeName = ManglingNameUtils.getMangledName(javaType.getDescriptor());
-    this.sourceMapBuilder = sourceMapBuilder;
-    this.statementTranspiler =
-        new StatementTranspiler(sourceBuilder, sourceMapBuilder, environment);
+    this.statementTranspiler = new StatementTranspiler(sourceBuilder, environment);
   }
 
   @Override
@@ -353,7 +346,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         " */",
         "static $isInstance(instance) ");
     sourceBuilder.openBrace();
-    ;
     sourceBuilder.newLine();
     if (javaType.getDescriptor().isJsFunctionImplementation()) {
       sourceBuilder.appendln("return instance != null && instance.$is__" + mangledTypeName + ";");
@@ -408,6 +400,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         " */",
         "static $isAssignableFrom(classConstructor) ");
     sourceBuilder.openBrace();
+    sourceBuilder.newLine();
+
     if (javaType.isInterface()) { // For interfaces
       sourceBuilder.append(
           "return classConstructor != null && classConstructor.prototype.$implements__"
@@ -596,17 +590,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
           sourceBuilder.newLine();
           FilePosition startPostion = sourceBuilder.getCurrentPosition();
           boolean isInstanceField = !field.getDescriptor().isStatic();
-          String fieldInitializer = expressionToString(field.getInitializer());
           String fieldName =
               ManglingNameUtils.getMangledName(field.getDescriptor(), !isInstanceField);
-          sourceBuilder.append(
-              (isInstanceField ? "this" : className)
-                  + "."
-                  + fieldName
-                  + " = "
-                  + fieldInitializer
-                  + ";");
-          sourceMapBuilder.addMapping(
+          sourceBuilder.append((isInstanceField ? "this" : className) + "." + fieldName + " = ");
+          renderExpression(field.getInitializer());
+          sourceBuilder.append(";");
+          sourceBuilder.addMapping(
               field.getSourcePosition(),
               new SourcePosition(startPostion, sourceBuilder.getCurrentPosition()));
         }
@@ -626,7 +615,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     for (Field staticField : javaType.getStaticFields()) {
       String jsDocType =
           JsDocNameUtils.getJsDocName(staticField.getDescriptor().getTypeDescriptor(), environment);
-      String initialValue = expressionToString(GeneratorUtils.getInitialValue(staticField));
       if (staticField.isCompileTimeConstant()) {
         String publicFieldAccess =
             ManglingNameUtils.getMangledName(staticField.getDescriptor(), false);
@@ -635,7 +623,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
             " * @public {" + jsDocType + "}",
             " * @const",
             " */",
-            className + "." + publicFieldAccess + " = " + initialValue + ";");
+            className + "." + publicFieldAccess + " = ");
+        renderExpression(GeneratorUtils.getInitialValue(staticField));
+        sourceBuilder.append(";");
       } else {
         String privateFieldAccess =
             ManglingNameUtils.getMangledName(staticField.getDescriptor(), true);
@@ -643,7 +633,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
             "/**",
             " * @private {" + jsDocType + "}",
             " */",
-            className + "." + privateFieldAccess + " = " + initialValue + ";");
+            className + "." + privateFieldAccess + " = ");
+        renderExpression(GeneratorUtils.getInitialValue(staticField));
+        sourceBuilder.append(";");
       }
       // emit 2 empty lines
       sourceBuilder.newLines(3);
@@ -694,7 +686,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
   }
 
-  private String expressionToString(Expression expression) {
-    return ExpressionTranspiler.transform(expression, environment);
+  private void renderExpression(Expression expression) {
+    ExpressionTranspiler.render(expression, environment, sourceBuilder);
   }
 }

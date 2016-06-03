@@ -12,6 +12,7 @@ import java.nio.charset.Charset;
 import java.nio.file.FileSystem;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 import java.util.Map.Entry;
 
 /**
@@ -48,13 +49,17 @@ public class SourceMapGeneratorStage {
     this.javaScriptImplementationFileContents = javaScriptImplementationFileContents;
   }
 
-  public void generateSourceMaps(JavaType javaType, SourceMapBuilder sourceMapBuilder) {
+  public void generateSourceMaps(
+      JavaType javaType,
+      Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition) {
     try {
       String output =
           generateReadableSourceMaps
               ? ReadableSourceMapGenerator.generate(
-                  sourceMapBuilder, Paths.get(javaSourceFile), javaScriptImplementationFileContents)
-              : renderSourceMapToString(javaType, sourceMapBuilder);
+                  javaSourcePositionByOutputSourcePosition,
+                  Paths.get(javaSourceFile),
+                  javaScriptImplementationFileContents)
+              : renderSourceMapToString(javaType, javaSourcePositionByOutputSourcePosition);
 
       Path absolutePathForSourceMap =
           GeneratorUtils.getAbsolutePath(
@@ -70,11 +75,14 @@ public class SourceMapGeneratorStage {
     }
   }
 
-  private String renderSourceMapToString(JavaType javaType, SourceMapBuilder sourceMapBuilder)
+  private String renderSourceMapToString(
+      JavaType javaType,
+      Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition)
       throws IOException {
     SourceMapGenerator sourceMapGenerator =
         SourceMapGeneratorFactory.getInstance(SourceMapFormat.V3);
-    for (Entry<SourcePosition, SourcePosition> entry : sourceMapBuilder.getMappings().entrySet()) {
+    for (Entry<SourcePosition, SourcePosition> entry :
+        javaSourcePositionByOutputSourcePosition.entrySet()) {
       SourcePosition javaSourcePosition = entry.getValue();
       SourcePosition javaScriptSourcePosition = entry.getKey();
       if (javaSourcePosition == SourcePosition.UNKNOWN
