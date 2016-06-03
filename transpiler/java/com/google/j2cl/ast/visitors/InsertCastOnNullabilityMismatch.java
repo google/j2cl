@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.BinaryExpression;
 import com.google.j2cl.ast.BinaryOperator;
@@ -97,15 +98,18 @@ public class InsertCastOnNullabilityMismatch extends AbstractRewriter {
   @Override
   public Node rewriteInvocation(Invocation invocation) {
     List<TypeDescriptor> parameterTypes = invocation.getTarget().getParameterTypeDescriptors();
+    int parametersNum = parameterTypes.size();
     List<Expression> arguments = invocation.getArguments();
+    boolean isVarArgs = invocation.getTarget().isJsMethodVarargs();
 
     for (int i = 0; i < arguments.size(); i++) {
-      // Use the last parameter type if there are more arguments than parameters, to account for
-      // varargs methods.
-      TypeDescriptor parameterType =
-          i < parameterTypes.size()
-              ? parameterTypes.get(i)
-              : parameterTypes.get(parameterTypes.size() - 1);
+      TypeDescriptor parameterType;
+      if (isVarArgs && i >= parametersNum - 1) {
+        Preconditions.checkState(parameterTypes.get(parametersNum - 1).isArray());
+        parameterType = parameterTypes.get(parametersNum - 1).getLeafTypeDescriptor();
+      } else {
+        parameterType = parameterTypes.get(i);
+      }
       TypeDescriptor argumentType = arguments.get(i).getTypeDescriptor();
 
       TypeDescriptor fixedType = getTypeWithMatchingNullability(parameterType, argumentType);

@@ -58,7 +58,8 @@ public class JdtBindingUtils {
   // TODO(simionato): Delete this method and make all the callers use
   // createTypeDescriptorWithNullability.
   public static TypeDescriptor createTypeDescriptor(ITypeBinding typeBinding) {
-    return createTypeDescriptor(typeBinding, null);
+    return createTypeDescriptorWithNullability(
+        typeBinding, new IAnnotationBinding[0], Nullability.NULL);
   }
 
   /**
@@ -93,7 +94,7 @@ public class JdtBindingUtils {
       }
       descriptor = createTypeDescriptor(typeBinding, typeArgumentsDescriptors);
     } else {
-      descriptor = createTypeDescriptor(typeBinding);
+      descriptor = createTypeDescriptor(typeBinding, null);
     }
 
     if (isNullable(typeBinding, elementAnnotations, defaultNullabilityForCompilationUnit)) {
@@ -118,22 +119,24 @@ public class JdtBindingUtils {
       // Void is always nullable.
       return true;
     }
-    if (defaultNullabilityForCompilationUnit == Nullability.NOT_NULL) {
-      Iterable<IAnnotationBinding> allAnnotations =
-          Iterables.concat(
-              Arrays.asList(elementAnnotations),
-              Arrays.asList(typeBinding.getTypeAnnotations()),
-              Arrays.asList(typeBinding.getAnnotations()));
-      for (IAnnotationBinding annotation : allAnnotations) {
-        if (annotation.getName().equals("Nullable")
-            || annotation.getName().equals("NullableType")) {
-          return true;
-        }
-        // TODO(simionato): Consider supporting NotNull as well.
+    Iterable<IAnnotationBinding> allAnnotations =
+        Iterables.concat(
+            Arrays.asList(elementAnnotations),
+            Arrays.asList(typeBinding.getTypeAnnotations()),
+            Arrays.asList(typeBinding.getAnnotations()));
+    for (IAnnotationBinding annotation : allAnnotations) {
+      String annotationName = annotation.getName();
+      // TODO(simionato): Replace those annotations with J2CL-specific annotations
+      if (annotationName.equals("Nullable") || annotationName.equals("NullableType")) {
+        return true;
       }
-      return false;
+      if (annotationName.equalsIgnoreCase("Nonnull")) {
+        return false;
+      }
     }
-    return !typeBinding.isTypeVariable();
+
+    return defaultNullabilityForCompilationUnit == Nullability.NULL
+        && !typeBinding.isTypeVariable();
   }
 
   /**

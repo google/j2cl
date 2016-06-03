@@ -22,7 +22,6 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 
-import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 
@@ -95,14 +94,13 @@ public class UnimplementedMethodsCreator {
   private static Method createEmptyMethod(IMethodBinding methodBinding, ITypeBinding typeBinding) {
     MethodDescriptor methodDescriptor = createMethodDescriptorInType(methodBinding, typeBinding);
     List<Variable> parameters = new ArrayList<>();
-    int i = 0;
-    for (ITypeBinding parameterTypeBinding : methodBinding.getParameterTypes()) {
+    for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
       Variable parameter =
           new Variable(
-              "arg" + i++,
+              "arg" + i,
               JdtBindingUtils.createTypeDescriptorWithNullability(
-                  parameterTypeBinding,
-                  new IAnnotationBinding[0],
+                  methodBinding.getParameterTypes()[i],
+                  methodBinding.getParameterAnnotations(i),
                   JdtBindingUtils.getTypeDefaultNullability(methodBinding.getDeclaringClass())),
               false,
               true);

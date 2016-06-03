@@ -331,7 +331,7 @@ public class BridgeMethodsCreator {
               "arg" + i,
               JdtBindingUtils.createTypeDescriptorWithNullability(
                   bridgeMethod.getParameterTypes()[i],
-                  new IAnnotationBinding[0],
+                  bridgeMethod.getParameterAnnotations(i),
                   JdtBindingUtils.getTypeDefaultNullability(targetMethod.getDeclaringClass())),
               false,
               true);

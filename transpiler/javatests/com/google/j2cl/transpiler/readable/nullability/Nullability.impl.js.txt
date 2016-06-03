@@ -1,0 +1,296 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.nullability.Nullability.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.nullability.Nullability$impl');
+
+
+let Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Preconditions = goog.forwardDeclare('com.google.common.base.Preconditions$impl');
+let Lists = goog.forwardDeclare('com.google.common.collect.Lists$impl');
+let Nullability$Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nullability.Nullability.Foo$impl');
+let Nullability$MyFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nullability.Nullability.MyFunction$impl');
+let Nullability$StringList = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nullability.Nullability.StringList$impl');
+let ClassInSubpackage = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nullability.subpackage.ClassInSubpackage$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let Double = goog.forwardDeclare('java.lang.Double$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
+let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
+
+
+class Nullability extends Object {
+  /**
+   * Real constructor.
+   * @param {string} a
+   * @public
+   */
+  constructor(a) {
+    Nullability.$clinit();
+    super();
+    /** @public {string} */
+    this.f_f1__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        /**@type {?} */ (null);
+    /** @public {?string} */
+    this.f_f2__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        null;
+    /** @public {?string} */
+    this.f_f3__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        null;
+    /** @public {!List<string>} */
+    this.f_f4__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        /**@type {?} */ (null);
+    /** @public {List<string>} */
+    this.f_f5__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        null;
+    /** @public {!List<?string>} */
+    this.f_f6__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        /**@type {?} */ (null);
+    /** @public {List<?string>} */
+    this.f_f7__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        null;
+    /** @public {!Array<string>} */
+    this.f_f8__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        /**@type {?} */ (null);
+    /** @public {!Array<?string>} */
+    this.f_f9__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        /**@type {?} */ (null);
+    /** @public {Array<string>} */
+    this.f_f10__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        null;
+    /** @public {List<?string>} */
+    this.f_f12__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        null;
+    this.$ctor__com_google_j2cl_transpiler_readable_nullability_Nullability__java_lang_String(
+        a);
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {string} a
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_nullability_Nullability__java_lang_String(
+      a) {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_nullability_Nullability();
+  }
+
+  /**
+   * @param {string} a
+   * @param {!List<number>} b
+   * @param {?string} c
+   * @return {string}
+   * @public
+   */
+  m_m1__java_lang_String__java_util_List__java_lang_String(a, b, c) {
+    return /**@type {string} */ ('');
+  }
+
+  /**
+   * @param {?string} a
+   * @param {!List<?number>} b
+   * @return {?string}
+   * @public
+   */
+  m_m2__java_lang_String__java_util_List(a, b) { return ''; }
+
+  /**
+   * @param {string} a
+   * @param {...string} args
+   * @return {?string}
+   * @public
+   */
+  m3(a, args) {
+    let $var_args_copy = /**@type {!Array<string>} */ (
+        $Arrays.$create([arguments.length - 1], String));
+    for (let $i = 0; $i < arguments.length - 1; $i++) {
+      $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
+    }
+    return null;
+  }
+
+  /**
+   * @param {function(string):string} f
+   * @return {void}
+   * @public
+   */
+  m_m4__com_google_j2cl_transpiler_readable_nullability_Nullability$MyFunction(
+      f) {}
+
+  /**
+   * @param {boolean} a
+   * @param {?string} s
+   * @return {string}
+   * @public
+   */
+  m_ternary__boolean__java_lang_String(a, s) {
+    return /**@type {string} */ (a ? s : s);
+  }
+
+  /**
+   * @return {string}
+   * @public
+   */
+  m_castingNotNeeded() {
+    let a = '';
+    let b = /**@type {!ArrayList<number>} */ (ArrayList.$create());
+    b = /**@type {!ArrayList<number>} */ (ArrayList.$create());
+    let c = null;
+    this.m_m1__java_lang_String__java_util_List__java_lang_String(
+        /**@type {string} */ (a), /**@type {!List<number>} */ (b), c);
+    this.f_f1__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        /**@type {string} */ (a);
+    if (true) {
+      return ClassInSubpackage.m_getNonNullString();
+    }
+    return /**@type {string} */ (a);
+  }
+
+  /**
+   * @param {?string} a
+   * @param {Nullability$Foo<string>} foo
+   * @param {string} b
+   * @return {string}
+   * @public
+   */
+  m_castingNeeded__java_lang_String__com_google_j2cl_transpiler_readable_nullability_Nullability$Foo__java_lang_String(
+      a, foo, b) {
+    this.f_f4__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        /**@type {!ArrayList<string>} */ (Lists.m_newArrayList());
+    this.f_f4__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        /**@type {!List<string>} */ (Nullability$StringList.$create());
+    this.f_f4__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        /**@type {!List} */ ($Casts.to(Nullability$StringList.$create(), List));
+    let x = this.m3(/**@type {string} */ (''));
+    Preconditions.m_checkNotNull__java_lang_Object(x);
+    new Nullability(/**@type {string} */ (x));
+    this.m3(
+        /**@type {string} */ (x), /**@type {string} */ (x),
+        /**@type {string} */ (x));
+    this.f_f1__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        /**@type {string} */ (x);
+    b = /**@type {string} */ (x);
+    foo.m_bar__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_nullability(
+        /**@type {string} */ (x));
+    b = /**@type {string} */ ($Objects.m_toString__java_lang_Object(foo));
+    if (true) {
+      return /**@type {string} */ (x);
+    }
+    let myArray = /**@type {Array<string>} */ (
+        String.m_split__java_lang_String__java_lang_String('Hel-lo', '-'));
+    this.m3(myArray[0]);
+    return /**@type {string} */ (ClassInSubpackage.m_getString());
+  }
+
+  /**
+   * @param {?function(string):string} l_function
+   * @return {void}
+   * @public
+   */
+  m_functions__com_google_j2cl_transpiler_readable_nullability_Nullability$MyFunction(
+      l_function) {
+    this.m_m4__com_google_j2cl_transpiler_readable_nullability_Nullability$MyFunction(
+        /**@type {function(string):string} */ (l_function));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Nullability; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Nullability);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Preconditions =
+        goog.module.get('com.google.common.base.Preconditions$impl');
+    Lists = goog.module.get('com.google.common.collect.Lists$impl');
+    Nullability$Foo = goog.module.get(
+        'com.google.j2cl.transpiler.readable.nullability.Nullability.Foo$impl');
+    Nullability$MyFunction = goog.module.get(
+        'com.google.j2cl.transpiler.readable.nullability.Nullability.MyFunction$impl');
+    Nullability$StringList = goog.module.get(
+        'com.google.j2cl.transpiler.readable.nullability.Nullability.StringList$impl');
+    ClassInSubpackage = goog.module.get(
+        'com.google.j2cl.transpiler.readable.nullability.subpackage.ClassInSubpackage$impl');
+    Class = goog.module.get('java.lang.Class$impl');
+    Double = goog.module.get('java.lang.Double$impl');
+    String = goog.module.get('java.lang.String$impl');
+    ArrayList = goog.module.get('java.util.ArrayList$impl');
+    List = goog.module.get('java.util.List$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $Objects = goog.module.get('vmbootstrap.Objects$impl');
+    $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_nullability_Nullability() {
+    this.f_f1__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        /**@type {string} */ ('Hello');
+    this.f_f2__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        null;
+    this.f_f3__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        null;
+    this.f_f4__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        /**@type {!ArrayList<string>} */ (ArrayList.$create());
+    this.f_f5__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        /**@type {!ArrayList<string>} */ (ArrayList.$create());
+    this.f_f6__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        /**@type {!ArrayList<?string>} */ (ArrayList.$create());
+    this.f_f7__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        null;
+    this.f_f8__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        /**@type {!Array<string>} */ ($Arrays.$init([], String));
+    this.f_f9__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        /**@type {!Array<?string>} */ ($Arrays.$init([], String));
+    this.f_f10__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        /**@type {!Array<string>} */ ($Arrays.$init([], String));
+    this.f_f12__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
+        /**@type {ArrayList<?string>} */ (Lists.m_newArrayList());
+  }
+};
+
+$Util.$setClassMetadata(
+    Nullability, 'com.google.j2cl.transpiler.readable.nullability.Nullability');
+
+
+
+/**
+ * Export class.
+ */
+exports = Nullability;
+//# sourceMappingURL=Nullability.js.map
