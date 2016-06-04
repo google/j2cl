@@ -658,8 +658,12 @@ public class JdtUtils {
     org.eclipse.jdt.core.dom.ASTNode currentNode = node.getParent();
     while (currentNode != null) {
       switch (currentNode.getNodeType()) {
-        case ASTNode.METHOD_DECLARATION:
         case ASTNode.FIELD_DECLARATION:
+          if (findCurrentTypeBinding(currentNode).isInterface()) {
+            // Field declarations in interface are implicitly static.
+            return true;
+          }
+        case ASTNode.METHOD_DECLARATION:
         case ASTNode.INITIALIZER:
           return isStatic((BodyDeclaration) currentNode);
         case ASTNode.ENUM_CONSTANT_DECLARATION: // enum constants are implicitly static.

@@ -1,0 +1,126 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let SomeClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousclass.SomeClass$impl');
+let SomeInterface$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface.$Anonymous1$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
+
+/**
+ * @interface
+ */
+class SomeInterface {
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {window.Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_anonymousclass_SomeInterface =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        instance
+            .$implements__com_google_j2cl_transpiler_readable_anonymousclass_SomeInterface;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        classConstructor.prototype
+            .$implements__com_google_j2cl_transpiler_readable_anonymousclass_SomeInterface;
+  }
+
+  /**
+   * A static field getter.
+   * @return {SomeClass}
+   * @public
+   */
+  static get
+  f_implicitlyStatic__com_google_j2cl_transpiler_readable_anonymousclass_SomeInterface() {
+    return (
+        SomeInterface.$clinit(),
+        SomeInterface
+            .$f_implicitlyStatic__com_google_j2cl_transpiler_readable_anonymousclass_SomeInterface);
+  }
+
+  /**
+   * A static field setter.
+   * @param {SomeClass} value
+   * @return {void}
+   * @public
+   */
+  static set
+  f_implicitlyStatic__com_google_j2cl_transpiler_readable_anonymousclass_SomeInterface(
+      value) {
+    (SomeInterface.$clinit(),
+     SomeInterface
+         .$f_implicitlyStatic__com_google_j2cl_transpiler_readable_anonymousclass_SomeInterface =
+         value);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    SomeInterface.$clinit = function() {};
+    SomeClass = goog.module.get(
+        'com.google.j2cl.transpiler.readable.anonymousclass.SomeClass$impl');
+    SomeInterface$1 = goog.module.get(
+        'com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface.$Anonymous1$impl');
+    Class = goog.module.get('java.lang.Class$impl');
+    SomeInterface
+        .$f_implicitlyStatic__com_google_j2cl_transpiler_readable_anonymousclass_SomeInterface =
+        SomeInterface$1.$create__int(1);
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    SomeInterface,
+    'com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface');
+
+
+/**
+ * @private {SomeClass}
+ */
+SomeInterface
+    .$f_implicitlyStatic__com_google_j2cl_transpiler_readable_anonymousclass_SomeInterface =
+    null;
+
+
+SomeInterface.$markImplementor(/** @type {window.Function} */ (SomeInterface));
+
+
+/**
+ * Export class.
+ */
+exports = SomeInterface;
+//# sourceMappingURL=SomeInterface.js.map

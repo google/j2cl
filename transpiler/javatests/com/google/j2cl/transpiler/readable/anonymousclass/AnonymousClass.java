@@ -16,3 +16,12 @@ public class AnonymousClass {
         };
   }
 }
+
+interface SomeInterface {
+  SomeClass implicitlyStatic =
+      new SomeClass(1) {
+        public String foo() {
+          return "a";
+        }
+      };
+}
