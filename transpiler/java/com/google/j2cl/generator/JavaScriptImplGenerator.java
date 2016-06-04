@@ -233,16 +233,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderJavaTypeMethods() {
     for (Method method : javaType.getMethods()) {
-      if (method.isConstructor()) {
-        String mangledNameOfCreate =
-            ManglingNameUtils.getFactoryMethodMangledName(method.getDescriptor());
-        if (javaType.containsJsMethod(mangledNameOfCreate)) {
-          sourceBuilder.appendLines(
-              "/**", " * Constructor function implementation is provided separately.", " */");
-          sourceBuilder.newLines(2);
-          continue;
-        }
-      }
       if (GeneratorUtils.shouldNotEmitCode(method)) {
         continue;
       }
