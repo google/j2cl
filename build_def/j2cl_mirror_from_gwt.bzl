@@ -20,7 +20,6 @@ def j2cl_mirror_from_gwt(name,
   super_srcs = native.glob(["**/*.java"]) + extra_srcs
   native_srcs = native.glob(["**/*.native.js"])
   js_srcs = native.glob(["**/*.js"], exclude = native_srcs) + extra_js_srcs
-  omitted_srcs = [f.replace(".js", ".java") for f in js_srcs if not f.endswith(".impl.js")]
 
   j2cl_source_copy(
       name = name + "_copy",
@@ -53,7 +52,6 @@ def j2cl_mirror_from_gwt(name,
       native_srcs_zips = [":" + name + "_native_zips"],
       deps = deps,
       _js_deps = js_deps,
-      _omit_srcs = omitted_srcs,
       testonly = kwargs.get("testonly", 0),
       **kwargs
   )

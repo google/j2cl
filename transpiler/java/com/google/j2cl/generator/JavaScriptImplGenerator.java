@@ -313,6 +313,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO: Move this to the ast in a normalization pass.
   private void renderIsInstanceMethod() {
+    if (javaType.containsJsMethod(MethodDescriptor.IS_INSTANCE_METHOD_NAME)) {
+      sourceBuilder.appendLines(
+          "/**", " * $isInstance() function implementation is provided separately.", " */");
+      sourceBuilder.newLine();
+      return;
+    }
     if (javaType.isInterface()) {
       renderIsInstanceForInterfaceType();
     } else { // Not an interface so it is a Class.
@@ -321,12 +327,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderIsInstanceForClassType() {
-    if (javaType.containsJsMethod(MethodDescriptor.IS_INSTANCE_METHOD_NAME)) {
-      sourceBuilder.appendLines(
-          "/**", " * $isInstance() function implementation is provided separately.", " */");
-      sourceBuilder.newLine();
-      return;
-    }
     sourceBuilder.appendLines(
         "/**",
         " * Returns whether the provided instance is an instance of this class.",

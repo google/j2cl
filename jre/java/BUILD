@@ -102,10 +102,6 @@ j2cl_transpile(
     name = "jre_transpiled",
     srcs = [":jre_hidden_java_files"],
     native_srcs_zips = [":jre_native_zips"],
-    omit_srcs = [
-        "java/lang/CharSequence.java",
-        "java/lang/Comparable.java",
-    ],
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
 )
 
