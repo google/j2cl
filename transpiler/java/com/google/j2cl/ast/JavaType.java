@@ -45,7 +45,6 @@ public class JavaType extends Node {
   private Kind kind;
   private Visibility visibility;
   private boolean isStatic;
-  private boolean isLocal;
   private boolean isAbstract;
   private boolean isAnonymous;
   @Visitable TypeDescriptor typeDescriptor;
@@ -70,14 +69,6 @@ public class JavaType extends Node {
 
   public void setKind(Kind kind) {
     this.kind = kind;
-  }
-
-  public boolean isLocal() {
-    return isLocal;
-  }
-
-  public void setLocal(boolean isLocal) {
-    this.isLocal = isLocal;
   }
 
   public boolean isStatic() {

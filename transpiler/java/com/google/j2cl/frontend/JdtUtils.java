@@ -544,7 +544,6 @@ public class JdtUtils {
             enclosingClassTypeDescriptor, lambdaBinaryName, lambdaInterfaceBinding);
     JavaType lambdaType = new JavaType(Kind.CLASS, Visibility.PRIVATE, lambdaClassTypeDescriptor);
 
-    lambdaType.setLocal(true);
     return lambdaType;
   }
 

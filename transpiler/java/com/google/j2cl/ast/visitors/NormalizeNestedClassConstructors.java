@@ -236,7 +236,7 @@ public class NormalizeNestedClassConstructors {
 
       // Maybe add the qualifier of the NewInstance as the last argument to the constructor of a
       // local class. The qualifier may be null if the local class is in a static context.
-      if (type.isLocal() && newInstance.getQualifier() != null) {
+      if (type.getDescriptor().isLocal() && newInstance.getQualifier() != null) {
         newInstanceBuilder.appendArgumentAndUpdateDescriptor(
             newInstance.getQualifier(), newInstance.getQualifier().getTypeDescriptor());
       }

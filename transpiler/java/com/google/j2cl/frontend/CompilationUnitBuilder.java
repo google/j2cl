@@ -1909,7 +1909,6 @@ public class CompilationUnitBuilder {
               ? new AnonymousJavaType(kind, visibility, typeDescriptor)
               : new JavaType(kind, visibility, typeDescriptor);
 
-      type.setLocal(typeBinding.isLocal());
       type.setStatic(JdtBindingUtils.isStatic(typeBinding));
       type.setAbstract(JdtBindingUtils.isAbstract(typeBinding));
       type.setAnonymous(typeBinding.isAnonymous());
