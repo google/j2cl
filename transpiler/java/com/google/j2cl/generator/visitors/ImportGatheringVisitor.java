@@ -162,7 +162,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   }
 
   private Map<ImportCategory, Set<Import>> doGatherImports(JavaType javaType) {
-    if (javaType.isJsOverlayImpl()) {
+    if (javaType.isJsOverlayImplementation()) {
       // The synthesized JsOverlayImpl type should import the native type eagerly.
       addTypeDescriptor(javaType.getNativeTypeDescriptor(), ImportCategory.EAGER);
     } else {

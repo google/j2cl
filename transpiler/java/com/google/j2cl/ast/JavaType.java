@@ -47,6 +47,7 @@ public class JavaType extends Node {
   private boolean isStatic;
   private boolean isLocal;
   private boolean isAbstract;
+  private boolean isAnonymous;
   @Visitable TypeDescriptor typeDescriptor;
   @Visitable List<Field> fields = new ArrayList<>();
   @Visitable List<Method> methods = new ArrayList<>();
@@ -150,6 +151,13 @@ public class JavaType extends Node {
   public void setAbstract(boolean isAbstract) {
     this.isAbstract = isAbstract;
   }
+  public void setAnonymous(boolean isAnonymous) {
+    this.isAnonymous = isAnonymous;
+  }
+
+  public boolean isAnonymous() {
+    return isAnonymous;
+  }
 
   public boolean isEnum() {
     return this.kind == Kind.ENUM;
@@ -173,7 +181,7 @@ public class JavaType extends Node {
     this.overlayTypeDescriptor = nativeTypeDescriptor;
   }
 
-  public boolean isJsOverlayImpl() {
+  public boolean isJsOverlayImplementation() {
     return getNativeTypeDescriptor() != null;
   }
 

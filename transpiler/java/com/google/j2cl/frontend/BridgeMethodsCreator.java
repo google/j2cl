@@ -377,6 +377,7 @@ public class BridgeMethodsCreator {
         .setParameters(parameters)
         .addStatements(statement)
         .setIsOverride(true)
+        .setIsBridge(true)
         .setJsDocDescription("Bridge method.")
         .build();
   }

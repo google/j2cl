@@ -71,6 +71,7 @@ public class Main {
     test.testJsFunctionReferentialIntegrity();
     test.testJsFunctionSuccessiveCalls();
     test.testJsFunctionViaFunctionMethods();
+    test.testGetClass_jsFunction();
   }
 
   public static void runJsMethodTest() {

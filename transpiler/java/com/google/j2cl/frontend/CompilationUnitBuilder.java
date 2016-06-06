@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.frontend;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ComparisonChain;
@@ -46,6 +48,7 @@ import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.ForStatement;
+import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaType;
@@ -100,6 +103,7 @@ import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.Initializer;
+import org.eclipse.jdt.core.dom.LambdaExpression;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclaration;
@@ -134,8 +138,8 @@ public class CompilationUnitBuilder {
     private CompilationUnit j2clCompilationUnit;
 
     private void pushType(JavaType type) {
-      Preconditions.checkArgument(!type.getDescriptor().isArray());
-      Preconditions.checkArgument(!type.getDescriptor().isUnion());
+      checkArgument(!type.getDescriptor().isArray());
+      checkArgument(!type.getDescriptor().isUnion());
 
       typeStack.add(type);
       currentType = type;
@@ -462,7 +466,9 @@ public class CompilationUnitBuilder {
           arguments);
 
       // anonymous creation.
-      if (expression.getAnonymousClassDeclaration() != null) {
+      AnonymousClassDeclaration anonymousClassDeclaration =
+          expression.getAnonymousClassDeclaration();
+      if (anonymousClassDeclaration != null) {
         return convertAnonymousClassCreation(expression, constructorMethodDescriptor, arguments);
       } else {
         return convertRegularClassCreation(expression, constructorMethodDescriptor, arguments);
@@ -583,7 +589,7 @@ public class CompilationUnitBuilder {
                 : qualifier;
         newInstance = new NewInstance(qualifier, constructorMethodDescriptor, arguments);
       } else {
-        Preconditions.checkArgument(
+        checkArgument(
             qualifier == null, "NewInstance of non nested class should have no qualifier.");
         newInstance = new NewInstance(qualifier, constructorMethodDescriptor, arguments);
       }
@@ -1027,6 +1033,39 @@ public class CompilationUnitBuilder {
       return new InstanceOfExpression(convert(expression.getLeftOperand()), testTypeDescriptor);
     }
 
+    private FunctionExpression convertLambdaToFunctionExpression(LambdaExpression expression) {
+      ITypeBinding lambdaTypeBinding = expression.resolveTypeBinding();
+
+      List<Variable> parameters = new ArrayList<>();
+      for (VariableDeclaration parameter :
+          JdtUtils.<VariableDeclaration>asTypedList(expression.parameters())) {
+        parameters.add(convert(parameter));
+      }
+      TypeDescriptor returnTypeDescriptor =
+          JdtUtils.createTypeDescriptor(expression.resolveMethodBinding().getReturnType());
+      Block body = convertLambdaBody(expression.getBody(), returnTypeDescriptor);
+      return new FunctionExpression(
+          JdtUtils.createTypeDescriptor(lambdaTypeBinding), parameters, body.getStatements());
+    }
+
+    // Lambda expression bodies can be either an Expression or a Statement
+    private Block convertLambdaBody(ASTNode lambdaBody, TypeDescriptor returnTypeDescriptor) {
+      Block body;
+      if (lambdaBody.getNodeType() == ASTNode.BLOCK) {
+        body = convert((org.eclipse.jdt.core.dom.Block) lambdaBody);
+      } else {
+        checkArgument(lambdaBody instanceof org.eclipse.jdt.core.dom.Expression);
+        Expression lambdaMethodBody = convert((org.eclipse.jdt.core.dom.Expression) lambdaBody);
+        Statement statement =
+            returnTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveVoid)
+                ? new ExpressionStatement(lambdaMethodBody)
+                : new ReturnStatement(lambdaMethodBody, returnTypeDescriptor);
+        statement.setSourcePosition(getSourcePosition(lambdaBody));
+        body = new Block(statement);
+      }
+      return body;
+    }
+
     private Expression convert(org.eclipse.jdt.core.dom.LambdaExpression expression) {
       /**
        * Lambda expression is converted to an inner class:
@@ -1048,6 +1087,12 @@ public class CompilationUnitBuilder {
               lambdaMethodBinding.getKey());
 
       ITypeBinding functionalInterfaceTypeBinding = expression.resolveTypeBinding();
+      TypeDescriptor functionInterfaceTypeDescriptor =
+          JdtUtils.createTypeDescriptor(functionalInterfaceTypeBinding);
+      if (functionInterfaceTypeDescriptor.isJsFunctionInterface()) {
+        return convertLambdaToFunctionExpression(expression);
+      }
+
       JavaType lambdaType =
           JdtUtils.createLambdaJavaType(
               lambdaBinaryName,
@@ -1162,20 +1207,7 @@ public class CompilationUnitBuilder {
       TypeDescriptor returnTypeDescriptor =
           JdtUtils.createTypeDescriptor(methodBinding.getReturnType());
 
-      // the lambda expression body, which can be either a Block or an Expression.
-      ASTNode lambdaBody = expression.getBody();
-      Block body;
-      if (lambdaBody.getNodeType() == ASTNode.BLOCK) {
-        body = convert((org.eclipse.jdt.core.dom.Block) lambdaBody);
-      } else {
-        Preconditions.checkArgument(lambdaBody instanceof org.eclipse.jdt.core.dom.Expression);
-        Expression lambdaMethodBody = convert((org.eclipse.jdt.core.dom.Expression) lambdaBody);
-        Statement statement =
-            returnTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveVoid)
-                ? new ExpressionStatement(lambdaMethodBody)
-                : new ReturnStatement(lambdaMethodBody, returnTypeDescriptor);
-        body = new Block(statement);
-      }
+      Block body = convertLambdaBody(expression.getBody(), returnTypeDescriptor);
 
       // generate parameters type descriptors.
       List<TypeDescriptor> parameterTypeDescriptors =
@@ -1395,7 +1427,7 @@ public class CompilationUnitBuilder {
      */
     private Expression getPackagedVarargs(
         IMethodBinding methodBinding, List<Expression> j2clArguments) {
-      Preconditions.checkArgument(methodBinding.isVarargs());
+      checkArgument(methodBinding.isVarargs());
       int parametersLength = methodBinding.getParameterTypes().length;
       TypeDescriptor varargsTypeDescriptor =
           JdtUtils.createTypeDescriptor(methodBinding.getParameterTypes()[parametersLength - 1]);
@@ -1720,6 +1752,10 @@ public class CompilationUnitBuilder {
       if (literalTypeDescriptor.isNative()) {
         // class literal of native JsType is JavaScriptObject.class
         literalTypeDescriptor = TypeDescriptors.BootstrapType.JAVA_SCRIPT_OBJECT.getDescriptor();
+      } else if (literalTypeDescriptor.isJsFunctionInterface()
+          || literalTypeDescriptor.isJsFunctionImplementation()) {
+        // class literal for JsFunction interfaces and implementations.
+        literalTypeDescriptor = TypeDescriptors.BootstrapType.JAVA_SCRIPT_FUNCTION.getDescriptor();
       }
       return convertRegularTypeLiteral(literalTypeDescriptor, javaLangClassTypeDescriptor);
     }
@@ -1876,6 +1912,7 @@ public class CompilationUnitBuilder {
       type.setLocal(typeBinding.isLocal());
       type.setStatic(JdtBindingUtils.isStatic(typeBinding));
       type.setAbstract(JdtBindingUtils.isAbstract(typeBinding));
+      type.setAnonymous(typeBinding.isAnonymous());
       return type;
     }
   }

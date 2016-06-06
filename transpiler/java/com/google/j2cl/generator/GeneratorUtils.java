@@ -164,7 +164,7 @@ public class GeneratorUtils {
    * does not have any JsOverlay members.
    */
   public static boolean needClinit(JavaType type, List<Import> lazyImports) {
-    if (!type.isJsOverlayImpl()) {
+    if (!type.isJsOverlayImplementation()) {
       return true;
     }
     return !lazyImports.isEmpty() || type.containsJsOverlay();

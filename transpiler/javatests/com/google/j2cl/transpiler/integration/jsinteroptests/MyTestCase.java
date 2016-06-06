@@ -2,7 +2,8 @@ package com.google.j2cl.transpiler.integration.jsinteroptests;
 
 public class MyTestCase {
   public static void assertEquals(Object expected, Object actual) {
-    assert (expected.equals(actual));
+    assert expected.equals(actual)
+        : "Not equals - expected: <" + expected + "> - actual: <" + actual + ">";
   }
 
   public static void assertEquals(int expected, int actual) {
@@ -34,7 +35,8 @@ public class MyTestCase {
   }
 
   public static void assertSame(Object expected, Object actual) {
-    assert expected == actual;
+    assert expected == actual
+        : "Not same - expected: <" + expected + "> - actual: <" + actual + ">";
   }
 
   public static void fail(String message) {

@@ -279,6 +279,40 @@ public class JsFunctionTest extends MyTestCase {
     assertFalse(object instanceof HTMLElementConcreteNativeJsType);
   }
 
+  public void testGetClass_jsFunction() {
+    // inline lambda
+    MyJsFunctionInterface lambda = a -> a;
+
+    assertEquals(MyJsFunctionInterface.class, lambda.getClass());
+
+    // inner class optimizable to lambda
+    MyJsFunctionInterface optimizableInner =
+        new MyJsFunctionInterface() {
+          @Override
+          public int foo(int a) {
+            return a;
+          }
+        };
+    assertEquals(MyJsFunctionInterface.class, optimizableInner.getClass());
+    // The toString comparison is a bit misleading, because these are native functions
+    // toString() returns the JS source code which in this case, same function, same
+    // variable names, same JS source.
+    assertEquals(optimizableInner.toString(), lambda.toString());
+    // inner class optimizable to lambda
+    MyJsFunctionInterface unoptimizableInner =
+        new MyJsFunctionInterface() {
+          @Override
+          public int foo(int a) {
+            return id(a);
+          }
+
+          private int id(int a) {
+            return a;
+          }
+        };
+    assertEquals(MyJsFunctionInterface.class, unoptimizableInner.getClass());
+  }
+
   // uncomment when Java8 is supported.
   // public void testJsFunctionLambda_JS() {
   //   MyJsFunctionInterface jsFunctionInterface = a -> { return a + 2; };

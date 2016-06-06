@@ -43,7 +43,7 @@ class ToStringRenderer {
       @Override
       public boolean enterArrayLiteral(ArrayLiteral arrayLiteral) {
         print("[");
-        printSeparatedExpressions(",", arrayLiteral.getValueExpressions());
+        printSeparated(",", arrayLiteral.getValueExpressions());
         print("]");
         return false;
       }
@@ -234,13 +234,22 @@ class ToStringRenderer {
       @Override
       public boolean enterForStatement(ForStatement forStatement) {
         print(" for (");
-        printSeparatedExpressions(",", forStatement.getInitializers());
+        printSeparated(",", forStatement.getInitializers());
         print(";");
         accept(forStatement.getConditionExpression());
         print(";");
-        printSeparatedExpressions(",", forStatement.getUpdates());
+        printSeparated(",", forStatement.getUpdates());
         print(") ");
         accept(forStatement.getBody());
+        return false;
+      }
+
+      @Override
+      public boolean enterFunctionExpression(FunctionExpression functionExpression) {
+        print(" function (");
+        printSeparated(",", functionExpression.getParameters());
+        print(")");
+        accept(functionExpression.getBody());
         return false;
       }
 
@@ -347,7 +356,7 @@ class ToStringRenderer {
       @Override
       public boolean enterMultiExpression(MultiExpression multiExpression) {
         print("(");
-        printSeparatedExpressions(",", multiExpression.getExpressions());
+        printSeparated(",", multiExpression.getExpressions());
         print(")");
         return false;
       }
@@ -366,7 +375,7 @@ class ToStringRenderer {
         }
         if (newArray.getArrayLiteral() != null) {
           print(" {");
-          printSeparatedExpressions(",", newArray.getArrayLiteral().getValueExpressions());
+          printSeparated(",", newArray.getArrayLiteral().getValueExpressions());
           print("}");
         }
         return false;
@@ -508,7 +517,7 @@ class ToStringRenderer {
           indent();
           indent();
           newLine();
-          printSeparatedExpressions(";\n", tryStatement.getResourceDeclarations());
+          printSeparated(";\n", tryStatement.getResourceDeclarations());
           unIndent();
           unIndent();
           print(") ");
@@ -605,10 +614,9 @@ class ToStringRenderer {
         print(typeDescriptor.toString());
       }
 
-      private void printSeparatedExpressions(
-          String separator, List<? extends Expression> expressions) {
+      private void printSeparated(String separator, List<? extends Node> expressions) {
         String nextSeparator = "";
-        for (Expression argument : expressions) {
+        for (Node argument : expressions) {
           print(nextSeparator);
           nextSeparator = separator;
           accept(argument);
@@ -618,7 +626,7 @@ class ToStringRenderer {
       private void printInvocation(Invocation invocation, String methodName) {
         print(methodName);
         print("(");
-        printSeparatedExpressions(",", invocation.getArguments());
+        printSeparated(",", invocation.getArguments());
         print(")");
       }
 

@@ -27,6 +27,7 @@ import com.google.j2cl.ast.CharacterLiteral;
 import com.google.j2cl.ast.ConditionalExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
+import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JsTypeAnnotation;
 import com.google.j2cl.ast.ManglingNameUtils;
@@ -152,6 +153,21 @@ public class ExpressionTranspiler {
             ManglingNameUtils.getMangledName(fieldAccess.getTarget(), accessBackingPrivateField);
         process(fieldAccess.getQualifier());
         sourceBuilder.append("." + fieldMangledName);
+        return null;
+      }
+
+      @Override
+      public Void transformFunctionExpression(FunctionExpression expression) {
+        sourceBuilder.append("((");
+        String separator = "";
+        for (Variable parameter : expression.getParameters()) {
+          sourceBuilder.append(separator);
+          sourceBuilder.append(parameter.getName());
+          separator = ", ";
+        }
+        sourceBuilder.append(") =>");
+        new StatementTranspiler(sourceBuilder, environment).renderStatement(expression.getBody());
+        sourceBuilder.append(")");
         return null;
       }
 

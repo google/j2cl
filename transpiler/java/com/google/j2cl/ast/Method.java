@@ -43,6 +43,7 @@ public class Method extends Node {
   private boolean isOverride;
   private String jsDocDescription;
   private boolean isFinal;
+  private boolean isBridge;
   private BitSet parameterOptionality;
 
   private Method(
@@ -52,6 +53,7 @@ public class Method extends Node {
       boolean isAbstract,
       boolean isOverride,
       boolean isFinal,
+      boolean isBridge,
       String jsDocDescription) {
     this.methodDescriptor = checkNotNull(methodDescriptor);
     this.parameters.addAll(checkNotNull(parameters));
@@ -60,6 +62,7 @@ public class Method extends Node {
     this.isFinal = isFinal;
     this.jsDocDescription = jsDocDescription;
     this.body = checkNotNull(body);
+    this.isBridge = isBridge;
   }
 
   public MethodDescriptor getDescriptor() {
@@ -80,6 +83,10 @@ public class Method extends Node {
 
   public boolean isNative() {
     return methodDescriptor.isNative();
+  }
+
+  public boolean isBridge() {
+    return isBridge;
   }
 
   public boolean isAbstract() {
@@ -140,9 +147,10 @@ public class Method extends Node {
     private List<Variable> parameters = new ArrayList<>();
     private List<Statement> statements = new ArrayList<>();
     private boolean isAbstract;
+    private boolean isBridge;
+    private boolean isFinal;
     private boolean isOverride;
     private String jsDocDescription;
-    private boolean isFinal;
     private SourcePosition bodyJavaSourcePosition = SourcePosition.UNKNOWN;
     private BitSet parameterOptionality = new BitSet();
 
@@ -161,6 +169,7 @@ public class Method extends Node {
       builder.isFinal = method.isFinal();
       builder.bodyJavaSourcePosition = method.getBody().getSourcePosition();
       builder.parameterOptionality = method.parameterOptionality;
+      builder.isBridge = method.isBridge;
       return builder;
     }
 
@@ -236,6 +245,11 @@ public class Method extends Node {
       return this;
     }
 
+    public Builder setIsBridge(boolean isBridge) {
+      this.isBridge = isBridge;
+      return this;
+    }
+
     public Builder setJsDocDescription(String jsDocDescription) {
       this.jsDocDescription = jsDocDescription;
       return this;
@@ -274,6 +288,7 @@ public class Method extends Node {
               isAbstract,
               isOverride,
               isFinal,
+              isBridge,
               jsDocDescription);
       method.parameterOptionality = parameterOptionality;
       return method;

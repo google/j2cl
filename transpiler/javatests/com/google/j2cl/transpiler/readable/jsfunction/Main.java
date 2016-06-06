@@ -18,6 +18,26 @@ public class Main {
     // call other instance methods and fields.
     int a = func.field;
     func.bar();
+
+    final int n = 4;
+    fun((x) -> x + n, n);
+    fun(
+        new MyJsFunctionInterface() {
+          @Override
+          public int foo(int a) {
+            return a + n;
+          }
+        },
+        n);
+
+    new MyJsFunctionInterface() {
+      @Override
+      public int foo(int a) {
+        handleReceiveCommands();
+        return 0;
+      }
+    }.foo(3);
+
   }
 
   @JsMethod
@@ -25,4 +45,6 @@ public class Main {
 
   @JsMethod
   public static native MyJsFunctionInterface createMyJsFunction();
+
+  private void handleReceiveCommands() {}
 }

@@ -1,6 +1,7 @@
 package com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction;
 
 import static jsinterop.annotations.JsPackage.GLOBAL;
+
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsType;

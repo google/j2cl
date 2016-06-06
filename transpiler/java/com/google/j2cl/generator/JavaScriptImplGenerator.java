@@ -173,7 +173,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderTypeAnnotation() {
-    if (javaType.isJsOverlayImpl()) {
+    if (javaType.isJsOverlayImplementation()) {
       // Do nothing.
     } else if (javaType.isInterface()) {
       sourceBuilder.appendLines("/**", " * @interface");
@@ -283,7 +283,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderMarkImplementorMethod() {
-    if (!javaType.isInterface() || javaType.isJsOverlayImpl()) {
+    if (!javaType.isInterface() || javaType.isJsOverlayImplementation()) {
       return; // Only render markImplementor code for interfaces.
     }
     sourceBuilder.appendLines(
@@ -342,7 +342,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     } else {
       String className =
           environment.aliasForType(
-              javaType.isJsOverlayImpl()
+              javaType.isJsOverlayImplementation()
                   ? javaType.getNativeTypeDescriptor().getRawTypeDescriptor()
                   : javaType.getDescriptor());
       sourceBuilder.append("return instance instanceof " + className + ";");
@@ -363,7 +363,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         "static $isInstance(instance) ");
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
-    if (javaType.isJsOverlayImpl()) {
+    if (javaType.isJsOverlayImplementation()) {
       sourceBuilder.append("return true;");
     } else if (javaType.getDescriptor().isJsFunctionInterface()) {
       sourceBuilder.append("return instance != null && typeof instance == \"function\";");
@@ -377,7 +377,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO: Move this to the ast in a normalization pass.
   private void renderIsAssignableFromMethod() {
-    if (javaType.isJsOverlayImpl()
+    if (javaType.isJsOverlayImplementation()
         || javaType.containsJsMethod(MethodDescriptor.IS_ASSIGNABLE_FROM_METHOD_NAME)) {
       return; // Don't render for overlay types or if the method exists.
     }
@@ -437,8 +437,10 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO: Move this to the ast in a normalization pass.
   private void renderClassMetadata() {
-    if (javaType.isJsOverlayImpl()) {
-      return; // Don't render $getClass for overlay types.
+    if (javaType.isJsOverlayImplementation()) {
+      // Don't render $getClass for overlay types.
+      // implementations.
+      return;
     }
     String utilAlias = environment.aliasForType(BootstrapType.NATIVE_UTIL.getDescriptor());
     String name = javaType.getDescriptor().getBinaryName();
@@ -557,7 +559,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO: Move this to the ast in a normalization pass.
   private void renderInitMethod() {
-    if (javaType.isJsOverlayImpl() || javaType.isInterface()) {
+    if (javaType.isJsOverlayImplementation() || javaType.isInterface()) {
       return;
     }
     sourceBuilder.appendLines(
@@ -637,7 +639,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
    * to determine if it implements an interface.
    */
   private void renderMarkImplementorCalls() {
-    if (javaType.isJsOverlayImpl()) {
+    if (javaType.isJsOverlayImplementation()) {
       return; // Do nothing
     }
     if (javaType.isInterface()) {

@@ -15,21 +15,30 @@
       public boolean equal(T objA, T objB) {
         return true;
       }
-    };] => [return /**@type {!$NativeFunction} */ (EqualFunctions$2.$create());]
+    };] => [return ((objA, objB) =>{
+      return true;
+    });]
+[return true;] => [return true;]
 [UNKNOWN] => [EqualFunctions.$clinit();]
 [return new EqualFunction<Foo<T>>() {
       @Override
       public boolean equal(Foo<T> first, Foo<T> second) {
         return first == second;
       }
-    };] => [return /**@type {!$NativeFunction} */ (EqualFunctions$3.$create());]
+    };] => [return ((first, second) =>{
+      return $Equality.$same(first, second);
+    });]
+[return first == second;] => [return $Equality.$same(first, second);]
 [public static EqualFunction<Object> forObject =
       new EqualFunction<Object>() {
         @Override
         public boolean equal(Object first, Object second) {
           return first == second;
         }
-      };] => [EqualFunctions.$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions = EqualFunctions$1.$create();]
+      };] => [EqualFunctions.$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions = ((first, second) =>{
+      return $Equality.$same(first, second);
+    });]
+[return first == second;] => [return $Equality.$same(first, second);]
 [public static final EqualFunction<Integer> forInteger = objectEqualFunction();] => [EqualFunctions.$f_forInteger__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions = /**@type {?function(Integer, Integer):boolean} */ (EqualFunctions.m_objectEqualFunction());]
 [/**
    * Equal function handling array equal logic in addition to object equal.

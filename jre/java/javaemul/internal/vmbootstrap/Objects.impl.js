@@ -9,6 +9,7 @@ let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Object = goog.forwardDeclare('java.lang.Object$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
 let Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
 let JavaScriptObject = goog.forwardDeclare('vmbootstrap.JavaScriptObject$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
@@ -116,8 +117,10 @@ class Objects {
       return Class.$get(obj.constructor);
     } else {
       // Do not need to check existence of 'getClass' since j.l.Object#getClass
-      // is final and all native types map to a single special class.
-      return Class.$get(JavaScriptObject);
+      // is final and all native types map to a single special class and so do
+      // native functions.
+      return Class.$get(
+          type == 'function' ? JavaScriptFunction : JavaScriptObject);
     }
   }
 
@@ -132,6 +135,7 @@ class Objects {
     Double = goog.module.get('java.lang.Double$impl');
     String = goog.module.get('java.lang.String$impl');
     Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    JavaScriptFunction = goog.module.get('vmbootstrap.JavaScriptFunction$impl');
     JavaScriptObject = goog.module.get('vmbootstrap.JavaScriptObject$impl');
     $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
     $double = goog.module.get('vmbootstrap.primitives.$double$impl');

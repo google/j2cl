@@ -268,7 +268,7 @@ public class NormalizeConstructors {
 
 
   private static Method maybeSynthesizePrivateConstructor(JavaType javaType) {
-    if (javaType.isJsOverlayImpl() || javaType.isInterface()) {
+    if (javaType.isJsOverlayImplementation() || javaType.isInterface()) {
       return null;
     }
 

@@ -55,6 +55,7 @@ import com.google.j2cl.ast.visitors.NormalizeNativeMethodCalls;
 import com.google.j2cl.ast.visitors.NormalizeNestedClassConstructors;
 import com.google.j2cl.ast.visitors.NormalizeStaticMemberQualifiersPass;
 import com.google.j2cl.ast.visitors.NormalizeTryWithResources;
+import com.google.j2cl.ast.visitors.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.ast.visitors.RemoveUnusedMultiExpressionReturnValues;
 import com.google.j2cl.ast.visitors.SplitCompoundLongAssignments;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
@@ -135,6 +136,7 @@ public class J2clTranspiler {
       verifyUnit(j2clUnit);
 
       // Class structure normalizations.
+      OptimizeAnonymousInnerClassesToFunctionExpressions.applyTo(j2clUnit);
       // Default constructors and explicit super calls should be synthesized first.
       CreateDefaultConstructors.applyTo(j2clUnit);
       InsertExplicitSuperCalls.applyTo(j2clUnit);
@@ -236,7 +238,7 @@ public class J2clTranspiler {
    *
    * <p>Is preferred over System.exit() since it is caught here and will not end an external caller.
    */
-  private class ExitGracefullyException extends RuntimeException {}
+  private static class ExitGracefullyException extends RuntimeException {}
 
   /**
    * Entry point for the tool, which runs the entire J2CL pipeline.

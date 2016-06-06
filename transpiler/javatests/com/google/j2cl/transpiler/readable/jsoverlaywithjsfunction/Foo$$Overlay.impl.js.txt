@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo.$Ov
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Foo$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo.$Anonymous1$impl');
+let Foo$Intf = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo.Intf$impl');
 let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
 
 /** @constructor */ let $Foo = window.Object;
@@ -25,9 +25,7 @@ class Foo$$Overlay {
   static m_bar__com_google_j2cl_transpiler_readable_jsoverlaywithjsfunction_Foo(
       $thisArg) {
     Foo$$Overlay.$clinit();
-    Foo$1
-        .$create__com_google_j2cl_transpiler_readable_jsoverlaywithjsfunction_Foo(
-            $thisArg)();
+    (() => {})();
   }
 
   /**
@@ -43,8 +41,8 @@ class Foo$$Overlay {
    * @public
    */
   static $clinit() {
-    Foo$1 = goog.module.get(
-        'com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo.$Anonymous1$impl');
+    Foo$Intf = goog.module.get(
+        'com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo.Intf$impl');
     $void = goog.module.get('vmbootstrap.primitives.$void$impl');
   }
 };

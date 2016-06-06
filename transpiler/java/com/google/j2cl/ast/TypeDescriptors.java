@@ -336,6 +336,7 @@ public class TypeDescriptors {
     ENUMS(Arrays.asList("vmbootstrap"), "Enums"),
     LONGS(Arrays.asList("vmbootstrap"), "LongUtils"),
     JAVA_SCRIPT_OBJECT(Arrays.asList("vmbootstrap"), "JavaScriptObject"),
+    JAVA_SCRIPT_FUNCTION(Arrays.asList("vmbootstrap"), "JavaScriptFunction"),
     NATIVE_EQUALITY(Arrays.asList("nativebootstrap"), "Equality"),
     NATIVE_UTIL(Arrays.asList("nativebootstrap"), "Util"),
     NATIVE_LONG(Arrays.asList("nativebootstrap"), "Long"),
