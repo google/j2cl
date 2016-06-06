@@ -1109,12 +1109,21 @@ public class CompilationUnitBuilder {
       // and type variable T in this example comes for the captured variable "var" fo type List<T>.
       //
 
+      // Collect all free type variables as they will be the type variables for the lambda
+      // implementation class
       Set<TypeDescriptor> lambdaTypeParameterTypeDescriptors = new LinkedHashSet<>();
       lambdaTypeParameterTypeDescriptors.addAll(lambdaTypeDescriptor.getAllTypeVariables());
       for (Field field : lambdaType.getFields()) {
         lambdaTypeParameterTypeDescriptors.addAll(
             field.getDescriptor().getTypeDescriptor().getAllTypeVariables());
       }
+      lambdaTypeParameterTypeDescriptors.addAll(
+          lambdaMethod.getDescriptor().getReturnTypeDescriptor().getAllTypeVariables());
+      for (TypeDescriptor parameterTypeDescriptor :
+          lambdaMethod.getDescriptor().getParameterTypeDescriptors()) {
+        lambdaTypeParameterTypeDescriptors.addAll(parameterTypeDescriptor.getAllTypeVariables());
+      }
+
       // Add the relevant type parameters to the anonymous inner class that implements the lambda.
       lambdaType.setDescriptor(
           TypeDescriptor.Builder.from(lambdaType.getDescriptor())

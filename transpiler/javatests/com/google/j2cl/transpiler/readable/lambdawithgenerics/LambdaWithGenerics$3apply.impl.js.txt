@@ -1,0 +1,170 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$3apply.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Anonymous3apply$impl');
+
+
+let Object = goog.require('java.lang.Object$impl');
+let Function = goog.require('java.util.function.Function$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+let $LongUtils = goog.require('vmbootstrap.LongUtils$impl');
+
+let LambdaWithGenerics = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let Enum = goog.forwardDeclare('java.lang.Enum$impl');
+let Long = goog.forwardDeclare('java.lang.Long$impl');
+let Function$$Overlay = goog.forwardDeclare('java.util.function.Function.$Overlay$impl');
+
+
+/**
+ * @template M_T
+ * @implements {Function<?, ?>}
+ */
+class LambdaWithGenerics$3apply extends Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+    /** @public {LambdaWithGenerics} */
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$3apply =
+        null;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template M_T
+   * @param {LambdaWithGenerics} $outer_this
+   * @return {!LambdaWithGenerics$3apply<M_T>}
+   * @public
+   */
+  static $create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
+      $outer_this) {
+    LambdaWithGenerics$3apply.$clinit();
+    let $instance = new LambdaWithGenerics$3apply();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$3apply__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
+            $outer_this);
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {LambdaWithGenerics} $outer_this
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$3apply__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
+      $outer_this) {
+    this.f_$outer_this__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$3apply =
+        $outer_this;
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$3apply();
+  }
+
+  /**
+   * @param {M_T} item
+   * @return {*}
+   * @public
+   */
+  lambda3apply(item) { return Long.m_valueOf__long($LongUtils.$fromInt(1)); }
+
+  /**
+   * @override
+   * @param {Enum} arg0
+   * @return {?}
+   * @public
+   */
+  m_apply__java_lang_Object(arg0) { return this.lambda3apply(arg0); }
+
+  /**
+   * Default method forwarding stub.
+   * @override
+   * @template M_V
+   * @param {Function<?, ?>} arg0
+   * @return {Function<?, M_V>}
+   * @public
+   */
+  m_andThen__java_util_function_Function(arg0) {
+    return /**@type {Function<?, *>} */ (
+        Function$$Overlay
+            .m_andThen__java_util_function_Function__java_util_function_Function(
+                this, arg0));
+  }
+
+  /**
+   * Default method forwarding stub.
+   * @override
+   * @template M_V
+   * @param {Function<?, ?>} arg0
+   * @return {Function<M_V, ?>}
+   * @public
+   */
+  m_compose__java_util_function_Function(arg0) {
+    return /**@type {Function<*, ?>} */ (
+        Function$$Overlay
+            .m_compose__java_util_function_Function__java_util_function_Function(
+                this, arg0));
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof LambdaWithGenerics$3apply;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, LambdaWithGenerics$3apply);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    LambdaWithGenerics = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$impl');
+    Class = goog.module.get('java.lang.Class$impl');
+    Enum = goog.module.get('java.lang.Enum$impl');
+    Long = goog.module.get('java.lang.Long$impl');
+    Function$$Overlay =
+        goog.module.get('java.util.function.Function.$Overlay$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$3apply() {
+  }
+};
+
+$Util.$setClassMetadata(
+    LambdaWithGenerics$3apply,
+    'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$3apply');
+
+
+Function.$markImplementor(LambdaWithGenerics$3apply);
+
+
+/**
+ * Export class.
+ */
+exports = LambdaWithGenerics$3apply;
+//# sourceMappingURL=LambdaWithGenerics$3apply.js.map

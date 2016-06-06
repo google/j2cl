@@ -1,5 +1,7 @@
 package com.google.j2cl.transpiler.readable.lambdawithgenerics;
 
+import java.util.function.Function;
+
 interface MyInterface<T> {
   T foo(T i);
 }
@@ -21,5 +23,6 @@ public class LambdaWithGenerics {
     test1(i -> i, new Error());
     test2(i -> i, new Error());
     test3(i -> i, (Enum<T>) null);
+    Function<? super T, ?> f = item -> 1L;
   }
 }

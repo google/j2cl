@@ -14,10 +14,12 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let LambdaWithGenerics$0foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Anonymous0foo$impl');
 let LambdaWithGenerics$1foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Anonymous1foo$impl');
 let LambdaWithGenerics$2foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Anonymous2foo$impl');
+let LambdaWithGenerics$3apply = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Anonymous3apply$impl');
 let MyInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
+let Function = goog.forwardDeclare('java.util.function.Function$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
@@ -111,6 +113,10 @@ class LambdaWithGenerics extends Object {
                   .$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
                       this)),
              /**@type {Enum<Enum>} */ ($Casts.to(null, Enum))));
+    let f =
+        LambdaWithGenerics$3apply
+            .$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
+                this);
   }
 
   /**
@@ -144,11 +150,14 @@ class LambdaWithGenerics extends Object {
         'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Anonymous1foo$impl');
     LambdaWithGenerics$2foo = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Anonymous2foo$impl');
+    LambdaWithGenerics$3apply = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Anonymous3apply$impl');
     MyInterface = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface$impl');
     Class = goog.module.get('java.lang.Class$impl');
     Enum = goog.module.get('java.lang.Enum$impl');
     Error = goog.module.get('java.lang.Error$impl');
+    Function = goog.module.get('java.util.function.Function$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     Object.$clinit();
   }

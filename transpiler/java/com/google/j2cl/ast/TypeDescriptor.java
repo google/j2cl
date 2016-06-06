@@ -496,12 +496,11 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
 
   private static void getAllTypeVariables(
       TypeDescriptor typeDescriptor, Set<TypeDescriptor> typeVariables) {
+    if (typeDescriptor.isTypeVariable()) {
+      typeVariables.add(typeDescriptor);
+    }
     for (TypeDescriptor typeArgumentTypeDescriptor : typeDescriptor.getTypeArgumentDescriptors()) {
-      if (typeArgumentTypeDescriptor.isTypeVariable) {
-        typeVariables.add(typeArgumentTypeDescriptor);
-      } else {
-        getAllTypeVariables(typeArgumentTypeDescriptor, typeVariables);
-      }
+      getAllTypeVariables(typeArgumentTypeDescriptor, typeVariables);
     }
   }
 
