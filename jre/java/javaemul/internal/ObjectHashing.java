@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+ * Copyright 2016 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,14 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-let Hashing = goog.require('nativebootstrap.Hashing$impl');
+package javaemul.internal;
+
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsType;
 
 /**
-   * @param {*} o
-   * @return {number}
-   * @public
-   */
-HashCodes.m_getObjectIdentityHashCode__java_lang_Object = function(o) {
-  HashCodes.$clinit();
-  return Hashing.$getHashCode(o);
-};
+ * Object hashcode cache.
+ */
+@JsType(isNative = true, name = "Hashing", namespace = "nativebootstrap")
+class ObjectHashing {
+
+  @JsMethod(name = "$getHashCode")
+  public static native int getHashCode(Object o);
+}

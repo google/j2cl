@@ -22,7 +22,10 @@ j2cl_mirror_from_gwt(
 j2cl_source_copy(
     name = "java_emul_internal",
     srcs = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_internal"],
-    excludes = ["javaemul/internal/EmulatedCharset.java"],
+    excludes = [
+        "javaemul/internal/EmulatedCharset.java",
+        "javaemul/internal/HashCodes.java",  # relies on java8 only APIs
+    ],
 )
 
 # This runs all GWTTestCases for emul in a pure JRE, this way we can make sure that our tests
