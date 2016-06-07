@@ -313,7 +313,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO: Move this to the ast in a normalization pass.
   private void renderIsInstanceMethod() {
-    if (javaType.containsJsMethod(MethodDescriptor.IS_INSTANCE_METHOD_NAME)) {
+    if (javaType.containsMethod(MethodDescriptor.IS_INSTANCE_METHOD_NAME)) {
       sourceBuilder.appendLines(
           "/**", " * $isInstance() function implementation is provided separately.", " */");
       sourceBuilder.newLine();
@@ -378,7 +378,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   // TODO: Move this to the ast in a normalization pass.
   private void renderIsAssignableFromMethod() {
     if (javaType.isJsOverlayImplementation()
-        || javaType.containsJsMethod(MethodDescriptor.IS_ASSIGNABLE_FROM_METHOD_NAME)) {
+        || javaType.containsMethod(MethodDescriptor.IS_ASSIGNABLE_FROM_METHOD_NAME)) {
       return; // Don't render for overlay types or if the method exists.
     }
     sourceBuilder.appendLines(

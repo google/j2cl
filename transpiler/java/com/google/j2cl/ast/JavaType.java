@@ -75,10 +75,10 @@ public class JavaType extends Node {
     return isStatic;
   }
 
-  public boolean containsJsMethod(String name) {
+  public boolean containsMethod(String mangledName) {
     for (Method method : methods) {
       MethodDescriptor methodDescriptor = method.getDescriptor();
-      if (methodDescriptor.isJsMethod() && methodDescriptor.getJsName().equals(name)) {
+      if (ManglingNameUtils.getMangledName(methodDescriptor).equals(mangledName)) {
         return true;
       }
     }

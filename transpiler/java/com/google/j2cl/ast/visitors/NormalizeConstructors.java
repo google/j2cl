@@ -348,7 +348,7 @@ public class NormalizeConstructors {
     }
     String mangledNameOfCreate =
         ManglingNameUtils.getFactoryMethodMangledName(method.getDescriptor());
-    if (javaType.containsJsMethod(mangledNameOfCreate)) {
+    if (javaType.containsMethod(mangledNameOfCreate)) {
       return false;
     }
     return true;
