@@ -115,7 +115,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -1135,8 +1134,8 @@ public class CompilationUnitBuilder {
       }
 
       // Collect all type variables that are in context. Those might come from the functional
-      // interface instantiation and also from the captures (which are the fields in this synthetic
-      // anonymous inner class, e.g.
+      // interface instantiation, from the captures (which are the fields in this synthetic
+      // anonymous inner class, or from the lambda body e.g.
       //
       // interface Func<T, U> {
       //   U apply(T t);
@@ -1156,20 +1155,12 @@ public class CompilationUnitBuilder {
       //
       // and type variable T in this example comes for the captured variable "var" for type List<T>.
       //
-      // Collect all free type variables as they will be the type variables for the lambda
-      // implementation class.
-      Set<TypeDescriptor> lambdaTypeParameterTypeDescriptors = new LinkedHashSet<>();
-      lambdaTypeParameterTypeDescriptors.addAll(lambdaTypeDescriptor.getAllTypeVariables());
-      for (Field field : lambdaType.getFields()) {
-        lambdaTypeParameterTypeDescriptors.addAll(
-            field.getDescriptor().getTypeDescriptor().getAllTypeVariables());
-      }
-      lambdaTypeParameterTypeDescriptors.addAll(
-          lambdaMethod.getDescriptor().getReturnTypeDescriptor().getAllTypeVariables());
-      for (TypeDescriptor parameterTypeDescriptor :
-          lambdaMethod.getDescriptor().getParameterTypeDescriptors()) {
-        lambdaTypeParameterTypeDescriptors.addAll(parameterTypeDescriptor.getAllTypeVariables());
-      }
+
+      // Collect all free type variables appearing in the body of the implementation as they will
+      // be modelled as type variables for the lambda implementation class.
+      final Set<TypeDescriptor> lambdaTypeParameterTypeDescriptors =
+          AstUtils.getAllTypeVariables(lambdaType);
+
       // Add the relevant type parameters to the anonymous inner class that implements the lambda.
       TypeDescriptor lambdaTypeDescriptorWithCaptures =
           TypeDescriptors.replaceTypeArgumentDescriptors(

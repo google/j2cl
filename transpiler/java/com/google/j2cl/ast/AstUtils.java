@@ -30,7 +30,9 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Utility functions to manipulate J2CL AST.
@@ -1174,5 +1176,41 @@ public class AstUtils {
       default:
         return operator.getUnderlyingBinaryOperator();
     }
+  }
+
+  /**
+   * Returns all type variables that appear in the subtree.
+   */
+  public static Set<TypeDescriptor> getAllTypeVariables(Node node) {
+    final Set<TypeDescriptor> lambdaTypeParameterTypeDescriptors = new LinkedHashSet<>();
+    node.accept(
+        new AbstractVisitor() {
+          @Override
+          public boolean enterTypeDescriptor(TypeDescriptor typeDescriptor) {
+            lambdaTypeParameterTypeDescriptors.addAll(typeDescriptor.getAllTypeVariables());
+            return false;
+          }
+
+          @Override
+          public boolean enterFieldDescriptor(FieldDescriptor fieldDescriptor) {
+            lambdaTypeParameterTypeDescriptors.addAll(
+                fieldDescriptor.getTypeDescriptor().getAllTypeVariables());
+            return false;
+          }
+
+          @Override
+          public boolean enterMethodDescriptor(MethodDescriptor methodDescriptor) {
+
+            lambdaTypeParameterTypeDescriptors.addAll(
+                methodDescriptor.getReturnTypeDescriptor().getAllTypeVariables());
+            for (TypeDescriptor parameterTypeDescriptor :
+                methodDescriptor.getParameterTypeDescriptors()) {
+              lambdaTypeParameterTypeDescriptors.addAll(
+                  parameterTypeDescriptor.getAllTypeVariables());
+            }
+            return false;
+          }
+        });
+    return lambdaTypeParameterTypeDescriptors;
   }
 }
