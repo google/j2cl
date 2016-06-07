@@ -15,11 +15,14 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
+import com.google.common.collect.Lists;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.Collections;
@@ -144,7 +147,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
           };
       newTypeDescriptor.unionedTypeDescriptors = typeDescriptor.getUnionedTypeDescriptors();
       newTypeDescriptor.typeArgumentDescriptors = typeDescriptor.getTypeArgumentDescriptors();
-      newTypeDescriptor.uniqueId = typeDescriptor.getUniqueId();
       newTypeDescriptor.visibility = typeDescriptor.getVisibility();
 
       return builder;
@@ -361,11 +363,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       return this;
     }
 
-    public Builder setUniqueId(String uniqueId) {
-      newTypeDescriptor.uniqueId = uniqueId;
-      return this;
-    }
-
     public Builder setVisibility(Visibility visibility) {
       newTypeDescriptor.visibility = visibility;
       return this;
@@ -434,7 +431,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   private TypeDescriptorFactory superTypeDescriptorFactory;
   private List<TypeDescriptor> typeArgumentDescriptors = Collections.emptyList();
   private List<TypeDescriptor> unionedTypeDescriptors = Collections.emptyList();
-  private String uniqueId;
   private Visibility visibility;
 
   private TypeDescriptor() {}
@@ -643,7 +639,36 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   }
 
   public String getUniqueId() {
-    return uniqueId;
+    String uniqueId;
+
+    if (isArray) {
+      uniqueId = "(" + leafTypeDescriptor.getUniqueId() + ")" + Strings.repeat("[]", dimensions);
+    } else if (isUnion) {
+      uniqueId = TypeDescriptors.createUnionBinaryName(unionedTypeDescriptors);
+    } else if (isTypeVariable) {
+      uniqueId = binaryName;
+    } else {
+      uniqueId = binaryName + TypeDescriptor.createTypeArgumentsUniqueId(typeArgumentDescriptors);
+    }
+    return (isNullable ? "?" : "!") + uniqueId;
+  }
+
+  private static String createTypeArgumentsUniqueId(List<TypeDescriptor> typeArgumentDescriptors) {
+    if (typeArgumentDescriptors == null || typeArgumentDescriptors.isEmpty()) {
+      return "";
+    }
+    return String.format(
+        "<%s>",
+        Joiner.on(", ")
+            .join(
+                Lists.transform(
+                    typeArgumentDescriptors,
+                    new Function<TypeDescriptor, String>() {
+                      @Override
+                      public String apply(TypeDescriptor typeDescriptor) {
+                        return typeDescriptor.getUniqueId();
+                      }
+                    })));
   }
 
   public Visibility getVisibility() {

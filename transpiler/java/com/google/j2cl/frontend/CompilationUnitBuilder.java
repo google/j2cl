@@ -1155,7 +1155,6 @@ public class CompilationUnitBuilder {
       //
       // and type variable T in this example comes for the captured variable "var" for type List<T>.
       //
-
       // Collect all free type variables appearing in the body of the implementation as they will
       // be modelled as type variables for the lambda implementation class.
       final Set<TypeDescriptor> lambdaTypeParameterTypeDescriptors =

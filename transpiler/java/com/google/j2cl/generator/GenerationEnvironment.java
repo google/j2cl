@@ -27,7 +27,6 @@ import java.util.Map;
  * Contains alias for variables and Type Descriptors.
  */
 public class GenerationEnvironment {
-
   /**
    * A map from type binary named (e.g. a.b.Foo) to alias for that type. Keyed by binary name so
    * generic and non-generic permutations of a class all map to the same type.
