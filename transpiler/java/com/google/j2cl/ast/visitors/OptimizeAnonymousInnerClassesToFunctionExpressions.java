@@ -13,8 +13,9 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import static com.google.common.base.Preconditions.checkState;
-
+import com.google.common.base.Function;
+import com.google.common.base.Predicates;
+import com.google.common.collect.FluentIterable;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.CompilationUnit;
@@ -34,7 +35,6 @@ import com.google.j2cl.ast.Variable;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -45,28 +45,20 @@ import java.util.Set;
 public class OptimizeAnonymousInnerClassesToFunctionExpressions {
 
   public static void applyTo(CompilationUnit compilationUnit) {
-    final Map<TypeDescriptor, FunctionExpression> functionExpressionByOptimizableTypeDescriptor =
-        new HashMap<>();
-    for (Iterator<JavaType> iterator = compilationUnit.getTypes().iterator();
-        iterator.hasNext();
-        ) {
-      JavaType type = iterator.next();
-      if (canBeOptimized(type)) {
-        functionExpressionByOptimizableTypeDescriptor.put(
-            type.getDescriptor(), optimizeToFunctionExpression(type));
-        iterator.remove();
-      }
-    }
 
-    // Replace each instantiation with the corresponding functional expression and all references
-    // to the type with that of its JsFunction interface.
+    final Map<TypeDescriptor, JavaType> optimizableJsFunctionsByTypeDescriptor =
+        collectOptimizableJsFunctionsByTypeDescriptor(compilationUnit);
+
+    // Replace each instantiation with the corresponding functional expression.
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
           public Node rewriteNewInstance(NewInstance newInstance) {
             TypeDescriptor targetTypeDescriptor =
                 newInstance.getTarget().getEnclosingClassTypeDescriptor();
-            if (functionExpressionByOptimizableTypeDescriptor.containsKey(targetTypeDescriptor)) {
+            JavaType optimizableJsFunctionImplementation =
+                optimizableJsFunctionsByTypeDescriptor.get(targetTypeDescriptor);
+            if (optimizableJsFunctionImplementation != null) {
               // Rewrites
               //
               //  new JsFunctionInterface() {
@@ -80,16 +72,35 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions {
               //
               //  (E e) -> { return e.toString(); }
               //
-              return functionExpressionByOptimizableTypeDescriptor.get(targetTypeDescriptor);
+              Set<Variable> enclosingCaptures =
+                  FluentIterable.from(getCurrentJavaType().getFields())
+                      .transform(
+                          new Function<Field, Variable>() {
+                            @Override
+                            public Variable apply(Field field) {
+                              return field.getCapturedVariable();
+                            }
+                          })
+                      .filter(Predicates.notNull())
+                      .toSet();
+              return optimizeToFunctionExpression(
+                  optimizableJsFunctionImplementation, enclosingCaptures);
             }
             return newInstance;
           }
+        });
 
+    // Revmove the inner classes that where optimized away.
+    compilationUnit.getTypes().removeAll(optimizableJsFunctionsByTypeDescriptor.values());
+
+    // Replace all references to the type that was optimized away.
+    compilationUnit.accept(
+        new AbstractRewriter() {
           @Override
           public Node rewriteMethodCall(MethodCall methodCall) {
             TypeDescriptor targetTypeDescriptor =
                 methodCall.getTarget().getEnclosingClassTypeDescriptor();
-            if (functionExpressionByOptimizableTypeDescriptor.containsKey(targetTypeDescriptor)) {
+            if (optimizableJsFunctionsByTypeDescriptor.containsKey(targetTypeDescriptor)) {
               // The calls that are typed as directly to the anonymous inner class are redirected
               // to be calls though the interface type, e.g.
               //
@@ -98,15 +109,50 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions {
               //  gets transformed so that it is JsFunctionInterface.apply instead.
               //
               return MethodCall.Builder.from(methodCall)
-                  .setEnclosingClass(targetTypeDescriptor.getInterfacesTypeDescriptors().get(0))
+                  .setEnclosingClass(
+                      targetTypeDescriptor
+                          .getJsFunctionMethodDescriptor()
+                          .getEnclosingClassTypeDescriptor())
                   .build();
             }
             return methodCall;
           }
+
+          @Override
+          public Node rewriteFieldAccess(FieldAccess fieldAccess) {
+            if (optimizableJsFunctionsByTypeDescriptor.containsKey(
+                fieldAccess.getTarget().getEnclosingClassTypeDescriptor())) {
+              // Due to the cascading construction for captures in inner class construction,
+              // at the end some field references might be incorrectly referring
+              // the removed jsfunction class and need to point to the proper enclosing class.
+              return new FieldAccess(
+                  fieldAccess.getQualifier(),
+                  FieldDescriptor.Builder.from(fieldAccess.getTarget())
+                      .setEnclosingClass(getCurrentJavaType().getDescriptor())
+                      .build());
+            }
+            return fieldAccess;
+          }
+
+          @Override
+          public Node rewriteThisReference(ThisReference thisReference) {
+            if (optimizableJsFunctionsByTypeDescriptor.containsKey(
+                thisReference.getTypeDescriptor())) {
+              // Due to the cascading construction for captures in inner class construction,
+              // at the end some this references might be incorrectly referring
+              // the removed jsfunction class and need to point to the proper enclosing class.
+              return new ThisReference(getCurrentJavaType().getDescriptor());
+            }
+            return thisReference;
+          }
         });
   }
 
-  private static FunctionExpression optimizeToFunctionExpression(final JavaType type) {
+  /**
+   * Converts an anonymous inner class that implements a JsFunction into an FunctionExpression.
+   */
+  private static FunctionExpression optimizeToFunctionExpression(
+      final JavaType type, final Set<Variable> enclosingCaptures) {
     Method jsFunctionMethodImplementation = getSingleDeclaredMethod(type);
     FunctionExpression lambdaMethodImplementaion =
         new FunctionExpression(
@@ -127,10 +173,9 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions {
             if (capturesByFieldDescriptor.containsKey(fieldAccess.getTarget())
                 && fieldAccess.getQualifier() instanceof ThisReference) {
               Variable capturedVariable = capturesByFieldDescriptor.get(fieldAccess.getTarget());
-              if (capturedVariable != null) {
+              if (capturedVariable != null && !enclosingCaptures.contains(capturedVariable)) {
                 return capturedVariable.getReference();
-              } else {
-                checkState(fieldAccess.getTarget().getFieldName().equals("$outer_this"));
+              } else if (fieldAccess.getTarget().isFieldDescriptorForEnclosingInstance()) {
                 return new ThisReference(type.getEnclosingTypeDescriptor());
               }
             }
@@ -138,6 +183,17 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions {
           }
         });
     return lambdaMethodImplementaion;
+  }
+
+  private static Map<TypeDescriptor, JavaType> collectOptimizableJsFunctionsByTypeDescriptor(
+      CompilationUnit compilationUnit) {
+    Map<TypeDescriptor, JavaType> optimizableJsFunctionsByTypeDescriptor = new HashMap<>();
+    for (JavaType type : compilationUnit.getTypes()) {
+      if (canBeOptimized(type)) {
+        optimizableJsFunctionsByTypeDescriptor.put(type.getDescriptor(), type);
+      }
+    }
+    return optimizableJsFunctionsByTypeDescriptor;
   }
 
   /**
@@ -151,7 +207,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions {
 
     for (Field field : type.getFields()) {
       if (field.getCapturedVariable() == null
-          && !field.getDescriptor().getFieldName().equals("$outer_this")) {
+          && !field.getDescriptor().isFieldDescriptorForEnclosingInstance()) {
         // if there are any fields other than captured variables, bail out.
         return false;
       }
