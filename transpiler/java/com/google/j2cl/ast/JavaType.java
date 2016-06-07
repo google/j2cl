@@ -271,6 +271,10 @@ public class JavaType extends Node {
     this.typeDescriptor = typeDescriptor;
   }
 
+  public void setFields(List<Field> fields) {
+    this.fields = fields;
+  }
+
   public List<Field> getInstanceFields() {
     return Lists.newArrayList(
         Iterables.filter(

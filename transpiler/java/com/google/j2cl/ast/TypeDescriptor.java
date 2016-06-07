@@ -18,6 +18,8 @@ package com.google.j2cl.ast;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Interner;
+import com.google.common.collect.Interners;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.Collections;
@@ -39,6 +41,22 @@ import java.util.Set;
  */
 @Visitable
 public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, HasJsName {
+
+  public static Interner<TypeDescriptor> interner;
+
+  private static Interner<TypeDescriptor> getInterner() {
+    if (interner == null) {
+      interner = Interners.newWeakInterner();
+    }
+    return interner;
+  }
+
+  private static TypeDescriptor intern(TypeDescriptor typeDescriptor) {
+    // Run interning through a central function so that debugging has an opportunity to inspect
+    // all of them.
+    TypeDescriptor internedTypeDescriptor = getInterner().intern(typeDescriptor);
+    return internedTypeDescriptor;
+  }
 
   /**
    * Builder for a TypeDescriptor.
@@ -135,7 +153,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     private TypeDescriptor newTypeDescriptor = new TypeDescriptor();
 
     public TypeDescriptor build() {
-      return newTypeDescriptor;
+      return TypeDescriptor.intern(newTypeDescriptor);
     }
 
     public Builder setBinaryClassName(String binaryClassName) {

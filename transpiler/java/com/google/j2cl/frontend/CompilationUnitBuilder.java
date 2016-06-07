@@ -24,6 +24,7 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AnonymousJavaType;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
@@ -63,6 +64,7 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
+import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.PostfixExpression;
@@ -1087,19 +1089,20 @@ public class CompilationUnitBuilder {
               lambdaMethodBinding.getKey());
 
       ITypeBinding functionalInterfaceTypeBinding = expression.resolveTypeBinding();
+
+      // Here we convert JsFunctions to function expressions
       TypeDescriptor functionInterfaceTypeDescriptor =
           JdtUtils.createTypeDescriptor(functionalInterfaceTypeBinding);
       if (functionInterfaceTypeDescriptor.isJsFunctionInterface()) {
         return convertLambdaToFunctionExpression(expression);
       }
 
-      JavaType lambdaType =
-          JdtUtils.createLambdaJavaType(
-              lambdaBinaryName,
-              functionalInterfaceTypeBinding,
-              JdtUtils.createTypeDescriptor(enclosingClassTypeBinding));
+      TypeDescriptor enclosingType = JdtUtils.createTypeDescriptor(enclosingClassTypeBinding);
+      TypeDescriptor lambdaTypeDescriptor =
+          TypeDescriptors.createLambda(
+              enclosingType, lambdaBinaryName, functionalInterfaceTypeBinding);
+      JavaType lambdaType = new JavaType(Kind.CLASS, Visibility.PRIVATE, lambdaTypeDescriptor);
       pushType(lambdaType);
-      TypeDescriptor lambdaTypeDescriptor = TypeDescriptors.toNullable(lambdaType.getDescriptor());
 
       // Construct lambda method and add it to lambda inner class.
       String lambdaMethodBinaryName = "lambda" + lambdaBinaryName;
@@ -1151,11 +1154,10 @@ public class CompilationUnitBuilder {
       //   public T apply(String t) {return captured$var.get(0); }
       // }
       //
-      // and type variable T in this example comes for the captured variable "var" fo type List<T>.
+      // and type variable T in this example comes for the captured variable "var" for type List<T>.
       //
-
       // Collect all free type variables as they will be the type variables for the lambda
-      // implementation class
+      // implementation class.
       Set<TypeDescriptor> lambdaTypeParameterTypeDescriptors = new LinkedHashSet<>();
       lambdaTypeParameterTypeDescriptors.addAll(lambdaTypeDescriptor.getAllTypeVariables());
       for (Field field : lambdaType.getFields()) {
@@ -1168,12 +1170,16 @@ public class CompilationUnitBuilder {
           lambdaMethod.getDescriptor().getParameterTypeDescriptors()) {
         lambdaTypeParameterTypeDescriptors.addAll(parameterTypeDescriptor.getAllTypeVariables());
       }
-
       // Add the relevant type parameters to the anonymous inner class that implements the lambda.
-      lambdaType.setDescriptor(
-          TypeDescriptor.Builder.from(lambdaType.getDescriptor())
-              .setTypeArgumentDescriptors(new ArrayList<>(lambdaTypeParameterTypeDescriptors))
-              .build());
+      TypeDescriptor lambdaTypeDescriptorWithCaptures =
+          TypeDescriptors.replaceTypeArgumentDescriptors(
+              lambdaTypeDescriptor, new ArrayList<>(lambdaTypeParameterTypeDescriptors));
+
+      // Note that the original type descriptor for the lambda was computed above.  However, once
+      // we traverse the lambda method we determine the captured variables and need to add their
+      // type variables to the lambda TypeDescriptor's type arguments.  This new TypeDescriptor
+      // needs to replace the old one throughout the Lambda JavaType.
+      replaceLambdaTypeDescriptor(lambdaType, lambdaTypeDescriptorWithCaptures);
 
       // Resolve default methods
       DefaultMethodsResolver.resolve(functionalInterfaceTypeBinding, lambdaType);
@@ -1192,6 +1198,45 @@ public class CompilationUnitBuilder {
                   enclosingClassTypeBinding, enclosingClassTypeBinding, true)
               : null;
       return new NewInstance(qualifier, constructorMethodDescriptor);
+    }
+
+    /**
+     * Replace the type descriptor for a given JavaType. Note that this is only safe for specific
+     * cases where we know the type will not occur recursively inside other TypeDescritpors (the
+     * synthetic lambda class).
+     */
+    private void replaceLambdaTypeDescriptor(
+        final JavaType type, final TypeDescriptor replacement) {
+      final TypeDescriptor original = type.getDescriptor();
+      checkArgument(original.isNullable() && replacement.isNullable());
+      type.accept(
+          new AbstractRewriter() {
+            @Override
+            public Node rewriteTypeDescriptor(TypeDescriptor typeDescriptor) {
+              if (typeDescriptor == original) {
+                return replacement;
+              }
+              return typeDescriptor;
+            }
+
+            @Override
+            public Node rewriteFieldDescriptor(FieldDescriptor node) {
+              if (node.getEnclosingClassTypeDescriptor() == original) {
+                return FieldDescriptor.Builder.from(node).setEnclosingClass(replacement).build();
+              }
+              return node;
+            }
+
+            @Override
+            public Node rewriteMethodDescriptor(MethodDescriptor node) {
+              if (node.getEnclosingClassTypeDescriptor() == original) {
+                return MethodDescriptor.Builder.from(node)
+                    .setEnclosingClassTypeDescriptor(replacement)
+                    .build();
+              }
+              return node;
+            }
+          });
     }
 
     private Method createLambdaMethod(

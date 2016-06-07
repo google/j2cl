@@ -14,10 +14,10 @@ import com.google.j2cl.ast.Node;
  *
  * <p>This should not be necessary when using new type inference in JSCompiler.
  */
-public class InsertCastOnGenericReturnTypes extends AbstractRewriter {
+public class InsertTypeAnnotationOnGenericReturnTypes extends AbstractRewriter {
 
   public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new InsertCastOnGenericReturnTypes());
+    compilationUnit.accept(new InsertTypeAnnotationOnGenericReturnTypes());
   }
 
   @Override

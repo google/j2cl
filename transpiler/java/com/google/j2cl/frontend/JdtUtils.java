@@ -24,7 +24,6 @@ import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldDescriptor;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
 import com.google.j2cl.ast.JdtBindingUtils;
 import com.google.j2cl.ast.JdtBindingUtils.Nullability;
@@ -533,18 +532,6 @@ public class JdtUtils {
       }
     }
     return null;
-  }
-
-  static JavaType createLambdaJavaType(
-      String lambdaBinaryName,
-      ITypeBinding lambdaInterfaceBinding,
-      TypeDescriptor enclosingClassTypeDescriptor) {
-    TypeDescriptor lambdaClassTypeDescriptor =
-        TypeDescriptors.createLambda(
-            enclosingClassTypeDescriptor, lambdaBinaryName, lambdaInterfaceBinding);
-    JavaType lambdaType = new JavaType(Kind.CLASS, Visibility.PRIVATE, lambdaClassTypeDescriptor);
-
-    return lambdaType;
   }
 
   static Method createSamMethod(

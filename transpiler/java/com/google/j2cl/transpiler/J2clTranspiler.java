@@ -27,7 +27,6 @@ import com.google.j2cl.ast.visitors.FixBooleanOperators;
 import com.google.j2cl.ast.visitors.FixSuperCallQualifiers;
 import com.google.j2cl.ast.visitors.FixTypeVariablesInMethods;
 import com.google.j2cl.ast.visitors.InsertBoxingConversion;
-import com.google.j2cl.ast.visitors.InsertCastOnGenericReturnTypes;
 import com.google.j2cl.ast.visitors.InsertCastOnNewInstances;
 import com.google.j2cl.ast.visitors.InsertCastOnNullabilityMismatch;
 import com.google.j2cl.ast.visitors.InsertExceptionConversions;
@@ -37,6 +36,7 @@ import com.google.j2cl.ast.visitors.InsertNarrowingPrimitiveConversions;
 import com.google.j2cl.ast.visitors.InsertNarrowingReferenceConversions;
 import com.google.j2cl.ast.visitors.InsertStaticClassInitializerMethods;
 import com.google.j2cl.ast.visitors.InsertStringConversions;
+import com.google.j2cl.ast.visitors.InsertTypeAnnotationOnGenericReturnTypes;
 import com.google.j2cl.ast.visitors.InsertUnboxingConversions;
 import com.google.j2cl.ast.visitors.InsertUnderflowOverflowConversions;
 import com.google.j2cl.ast.visitors.InsertWideningPrimitiveConversions;
@@ -187,7 +187,7 @@ public class J2clTranspiler {
 
       // Dodge JSCompiler limitations.
       // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
-      InsertCastOnGenericReturnTypes.applyTo(j2clUnit);
+      InsertTypeAnnotationOnGenericReturnTypes.applyTo(j2clUnit);
       // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
       FixTypeVariablesInMethods.applyTo(j2clUnit);
       RemoveUnusedMultiExpressionReturnValues.applyTo(j2clUnit);
