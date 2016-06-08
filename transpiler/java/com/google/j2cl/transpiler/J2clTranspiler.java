@@ -200,14 +200,13 @@ public class J2clTranspiler {
   }
 
   private void generateOutputs(List<CompilationUnit> j2clCompilationUnits) {
-    Charset charset = Charset.forName(options.getEncoding());
-
     new OutputGeneratorStage(
-            charset,
+            Charset.forName(options.getEncoding()),
             options.getNativeSourceZipEntries(),
             options.getOutputFileSystem(),
             options.getOutput(),
             options.getDeclareLegacyNamespace(),
+            options.getDepinfoPath(),
             options.getShouldPrintReadableSourceMap(),
             errors)
         .generateOutputs(j2clCompilationUnits);

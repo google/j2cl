@@ -37,21 +37,21 @@ public class FrontendFlags {
     name = "-classpath",
     aliases = {"-cp"},
     metaVar = "<path>",
-    usage = "Specify where to find user class files and annotation processors"
+    usage = "Specifies where to find user class files and annotation processors."
   )
   protected String classpath = "";
 
   @Option(
     name = "-sourcepath",
     metaVar = "<file>",
-    usage = "Specify where to find input source files"
+    usage = "Specifies where to find input source files."
   )
   protected String sourcepath = "";
 
   @Option(
     name = "-nativesourcezip",
     metaVar = "<file>",
-    usage = "Specify where to find zip file containing js impl files for native methods."
+    usage = "Specifies where to find zip file containing js impl files for native methods."
   )
   protected String nativesourceszippath = "";
 
@@ -61,29 +61,37 @@ public class FrontendFlags {
   @Option(
     name = "-bootclasspath",
     metaVar = "<path>",
-    usage = "Override location of bootstrap class files"
+    usage = "Overrides location of bootstrap class files"
   )
   protected String bootclasspath = "";
 
   @Option(
     name = "-d",
     metaVar = "<file>",
-    usage = "Directory or zip into which to place generated files"
+    usage = "Directory or zip into which to place compiled output."
   )
   // TODO: replace with -output instead of -d
   protected String output = ".";
 
   @Option(
+    name = "-depinfo",
+    metaVar = "<file>",
+    usage = "Specifies whether and where to generate a dependency information file.",
+    hidden = true
+  )
+  protected String depinfoPath = null;
+
+  @Option(
     name = "-encoding",
     metaVar = "<encoding>",
-    usage = "Specify character encoding used by source files"
+    usage = "Specifies character encoding used by source files."
   )
   protected String encoding = System.getProperty("file.encoding", "UTF-8");
 
   @Option(
     name = "-source",
     metaVar = "<release>",
-    usage = "Provide source compatibility with specified release"
+    usage = "Specifies source compatibility level (1.7, 1.8, etc)."
   )
   protected String source = "1.8";
 
@@ -92,7 +100,7 @@ public class FrontendFlags {
 
   @Option(
     name = "-readableSourceMaps",
-    usage = "Output human readable representation of source maps.",
+    usage = "Coerces generated source maps to human readable form.",
     hidden = true
   )
   protected boolean readableSourceMaps = false;

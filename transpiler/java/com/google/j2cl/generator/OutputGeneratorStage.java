@@ -15,10 +15,15 @@
  */
 package com.google.j2cl.generator;
 
+import com.google.common.base.Joiner;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
 import com.google.j2cl.errors.Errors;
+import com.google.j2cl.generator.visitors.Import;
+import com.google.j2cl.generator.visitors.ImportGatheringVisitor;
+import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,11 +37,14 @@ import java.nio.file.attribute.FileTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
- * The JavaScriptGeneratorStage contains all necessary information for generating the JavaScript
- * output and corresponding source maps for the transpiler.  It is responsible for pulling in
- * native sources and then generating header, implementation and sourcemap files for each Java Type.
+ * The OutputGeneratorStage contains all necessary information for generating the JavaScript
+ * output, source maps and depinfo files for the transpiler. It is responsible for pulling in native
+ * sources and then generating header, implementation and sourcemap files for each Java Type.
  */
 public class OutputGeneratorStage {
   private final Charset charset;
@@ -45,6 +53,7 @@ public class OutputGeneratorStage {
   private final FileSystem outputFileSystem;
   private final String outputLocationPath;
   private final boolean declareLegacyNamespace;
+  private final String depinfoPath;
   private final boolean shouldGenerateReadableSourceMaps;
 
   public OutputGeneratorStage(
@@ -53,6 +62,7 @@ public class OutputGeneratorStage {
       FileSystem outputFileSystem,
       String outputLocationPath,
       boolean declareLegacyNamespace,
+      String depinfoPath,
       boolean shouldGenerateReadableSourceMaps,
       Errors errors) {
     this.charset = charset;
@@ -60,6 +70,7 @@ public class OutputGeneratorStage {
     this.outputFileSystem = outputFileSystem;
     this.outputLocationPath = outputLocationPath;
     this.declareLegacyNamespace = declareLegacyNamespace;
+    this.depinfoPath = depinfoPath;
     this.shouldGenerateReadableSourceMaps = shouldGenerateReadableSourceMaps;
     this.errors = errors;
   }
@@ -72,6 +83,9 @@ public class OutputGeneratorStage {
     Map<String, NativeJavaScriptFile> nativeFilesByPath =
         NativeJavaScriptFile.getFilesByPathFromZip(
             nativeJavaScriptFileZipPaths, charset.name(), errors);
+
+    SortedSet<String> importModulePaths = new TreeSet<>();
+    SortedSet<String> exportModulePaths = new TreeSet<>();
 
     for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
       for (JavaType javaType : j2clCompilationUnit.getTypes()) {
@@ -141,9 +155,17 @@ public class OutputGeneratorStage {
             javaType,
             javaScriptImplementationSource,
             jsImplGenerator.getSourceMappings());
+
+        if (depinfoPath != null) {
+          gatherDepinfo(javaType, importModulePaths, exportModulePaths);
+        }
       }
 
       copyJavaSourcesToOutput(j2clCompilationUnit);
+    }
+
+    if (depinfoPath != null) {
+      writeDepinfo(importModulePaths, exportModulePaths);
     }
 
     // Error if any of the native implementation files were not used.
@@ -153,6 +175,51 @@ public class OutputGeneratorStage {
             Errors.Error.ERR_NATIVE_UNUSED_NATIVE_SOURCE,
             fileEntry.getValue().getZipPath() + "!/" + fileEntry.getKey());
       }
+    }
+  }
+
+  private void gatherDepinfo(
+      JavaType javaType, Set<String> importModulePaths, Set<String> exportModulePaths) {
+    // Gather imports.
+    Map<ImportCategory, Set<Import>> importsByCategory =
+        ImportGatheringVisitor.gatherImports(javaType);
+    for (ImportCategory importCategory : ImportCategory.values()) {
+      for (Import anImport : importsByCategory.get(importCategory)) {
+        importModulePaths.add(anImport.getHeaderModulePath());
+        importModulePaths.add(anImport.getImplModulePath());
+      }
+    }
+
+    // Gather exports.
+    TypeDescriptor selfTypeDescriptor = javaType.getDescriptor().getRawTypeDescriptor();
+    Import export = new Import(selfTypeDescriptor.getSimpleName(), selfTypeDescriptor);
+    exportModulePaths.add(export.getHeaderModulePath());
+    exportModulePaths.add(export.getImplModulePath());
+  }
+
+  private void writeDepinfo(
+      SortedSet<String> importModulePaths, SortedSet<String> exportModulePaths) {
+    // Don't report self-dependencies (from things within this compile onto things within this
+    // compile).
+    importModulePaths.removeAll(exportModulePaths);
+
+    // The Trailing comma on each line is on purpose to make sure that both the imports and exports
+    // line contains at least *some* content. This simplifies life if parsing the depinfo file in
+    // Bash.
+    String depinfoContent =
+        Joiner.on(",").join(importModulePaths)
+            + ","
+            + "\n"
+            + Joiner.on(",").join(exportModulePaths)
+            + ",";
+    // The format here is:
+    // line 1: comma separated list of names of imported (goog.require()d) modules
+    // line 2: comma separated list of names of exported (goog.module() declared) modules
+
+    try {
+      com.google.common.io.Files.write(depinfoContent, new File(depinfoPath), charset);
+    } catch (IOException e) {
+      errors.error(Errors.Error.ERR_CANNOT_GENERATE_OUTPUT, depinfoPath);
     }
   }
 
