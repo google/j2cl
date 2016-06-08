@@ -28,6 +28,9 @@ public class Main {
     } catch (ArrayStoreException e) {
       // expected
     }
+
+    // You can always insert null.
+    array[0] = null;
   }
 
   private static void testPartialArray() {
@@ -47,6 +50,7 @@ public class Main {
 
     // And then insert a leaf value that conforms to the strictest leaf type
     partialArray[0][0] = new Person();
+    partialArray[0][0] = null;
   }
 
   private static void testEmptyArray() {

@@ -167,7 +167,7 @@ class Arrays {
         Arrays.$throwArrayIndexOutOfBoundsException();
       }
     }
-    if (ARRAY_CHECK_TYPES_) {
+    if (ARRAY_CHECK_TYPES_ && value != null) {
       // Only check when the array has a known leaf type. JS native arrays won't
       // have it.
       if (/** @type {*} */ (array).leafTypeIsInstance) {
@@ -182,7 +182,7 @@ class Arrays {
             // type.
             Arrays.$throwArrayStoreException();
           }
-        } else if (value != null && !enhancedArray.leafTypeIsInstance(value)) {
+        } else if (!enhancedArray.leafTypeIsInstance(value)) {
           // The inserted value must fit the array leaf type.
           // If leafType is not a primitive type, a 'null' should always be a
           // legal value. If leafType is a primitive type, value cannot be null
