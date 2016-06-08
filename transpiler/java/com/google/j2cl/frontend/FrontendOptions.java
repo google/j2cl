@@ -55,7 +55,6 @@ public class FrontendOptions {
   private String encoding;
   private String sourceVersion;
   private List<String> sourceFilePaths;
-  private List<String> omitSourceFilePaths;
   private FileSystem outputFileSystem;
   private boolean shouldPrintReadableMap;
   private boolean declareLegacyNamespace;
@@ -82,7 +81,6 @@ public class FrontendOptions {
     setNativeSourceZipEntries(flags.nativesourceszippath);
     setOutput(flags.output);
     setSourceFiles(flags.files);
-    setOmitSourceFiles(flags.omitfiles);
     setSourceVersion(flags.source);
     setEncoding(flags.encoding);
     setShouldPrintReadableSourceMap(flags.readableSourceMaps);
@@ -272,18 +270,6 @@ public class FrontendOptions {
     Collections.sort(sourceFilePaths);
     Collections.sort(jarSourceFilePaths);
     sourceFilePaths.addAll(jarSourceFilePaths);
-  }
-
-  public List<String> getOmitSourceFiles() {
-    return this.omitSourceFilePaths;
-  }
-
-  public void setOmitSourceFiles(String omitSourceFiles) {
-    List<String> omitSourceFilePaths =
-        Splitter.on(File.pathSeparator).omitEmptyStrings().splitToList(omitSourceFiles);
-    if (checkSourceFiles(omitSourceFilePaths)) {
-      this.omitSourceFilePaths = omitSourceFilePaths;
-    }
   }
 
   public boolean getShouldPrintReadableSourceMap() {

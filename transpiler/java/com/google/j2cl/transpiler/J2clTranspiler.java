@@ -13,7 +13,6 @@
  */
 package com.google.j2cl.transpiler;
 
-import com.google.common.collect.Sets;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JsInteropRestrictionsChecker;
 import com.google.j2cl.ast.visitors.ArrayAccessNormalizer;
@@ -205,7 +204,6 @@ public class J2clTranspiler {
 
     new OutputGeneratorStage(
             charset,
-            Sets.newHashSet(options.getOmitSourceFiles()),
             options.getNativeSourceZipEntries(),
             options.getOutputFileSystem(),
             options.getOutput(),

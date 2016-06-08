@@ -30,15 +30,6 @@ import java.util.List;
  * The set of supported flags.
  */
 public class FrontendFlags {
-  @Option(
-    name = "-omitfiles",
-    metaVar = "<paths>",
-    usage =
-        "List of files that should be included in the compile but whose "
-            + "output JS should not be kept because the user expects to provide a replacement."
-  )
-  protected String omitfiles = "";
-
   @Argument(metaVar = "<source files .java|.srcjar>", usage = "source files")
   protected List<String> files = new ArrayList<>();
 

@@ -32,17 +32,14 @@ import java.nio.file.attribute.FileTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 /**
  * The JavaScriptGeneratorStage contains all necessary information for generating the JavaScript
  * output and corresponding source maps for the transpiler.  It is responsible for pulling in
- * native sources and omitted sources and then generating header, implementation and sourcemap files
- * for each Java Type.
+ * native sources and then generating header, implementation and sourcemap files for each Java Type.
  */
 public class OutputGeneratorStage {
   private final Charset charset;
-  private final Set<String> omitSourceFiles;
   private final List<String> nativeJavaScriptFileZipPaths;
   private final Errors errors;
   private final FileSystem outputFileSystem;
@@ -52,7 +49,6 @@ public class OutputGeneratorStage {
 
   public OutputGeneratorStage(
       Charset charset,
-      Set<String> omitSourceFiles,
       List<String> nativeJavaScriptFileZipPaths,
       FileSystem outputFileSystem,
       String outputLocationPath,
@@ -60,7 +56,6 @@ public class OutputGeneratorStage {
       boolean shouldGenerateReadableSourceMaps,
       Errors errors) {
     this.charset = charset;
-    this.omitSourceFiles = omitSourceFiles;
     this.nativeJavaScriptFileZipPaths = nativeJavaScriptFileZipPaths;
     this.outputFileSystem = outputFileSystem;
     this.outputLocationPath = outputLocationPath;
@@ -79,10 +74,6 @@ public class OutputGeneratorStage {
             nativeJavaScriptFileZipPaths, charset.name(), errors);
 
     for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
-      if (omitSourceFiles.contains(j2clCompilationUnit.getFilePath())) {
-        continue;
-      }
-
       for (JavaType javaType : j2clCompilationUnit.getTypes()) {
         if (javaType.getDescriptor().isNative()) {
           // Don't generate JS for native JsType.
