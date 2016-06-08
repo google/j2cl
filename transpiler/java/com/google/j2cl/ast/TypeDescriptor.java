@@ -25,6 +25,7 @@ import com.google.common.collect.Interners;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.processors.Visitable;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -72,7 +73,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
 
       newTypeDescriptor.binaryName = typeDescriptor.getBinaryName();
       newTypeDescriptor.classComponents = typeDescriptor.getClassComponents();
-      newTypeDescriptor.binaryClassName = typeDescriptor.getBinaryClassName();
       newTypeDescriptor.componentTypeDescriptor = typeDescriptor.getComponentTypeDescriptor();
       newTypeDescriptor.concreteJsFunctionMethodDescriptorFactory =
           new MethodDescriptorFactory() {
@@ -156,11 +156,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
 
     public TypeDescriptor build() {
       return TypeDescriptor.intern(newTypeDescriptor);
-    }
-
-    public Builder setBinaryClassName(String binaryClassName) {
-      newTypeDescriptor.binaryClassName = binaryClassName;
-      return this;
     }
 
     public Builder setBinaryName(String binaryName) {
@@ -391,7 +386,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   }
 
 
-  private String binaryClassName;
   private String binaryName;
   private List<String> classComponents = Collections.emptyList();
   private TypeDescriptor componentTypeDescriptor;
@@ -461,6 +455,33 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
    * Returns the unqualified binary name like "Outer$Inner".
    */
   public String getBinaryClassName() {
+    String binaryClassName;
+    {
+      if (isPrimitive) {
+        binaryClassName = "$" + simpleName;
+      } else if (simpleName.equals("?")) {
+        binaryClassName = "?";
+      } else if (isTypeVariable) {
+        // skip the top level class component for better output readability.
+        List<String> nameComponents =
+            new ArrayList<>(classComponents.subList(1, classComponents.size()));
+
+        // move the prefix in the simple name to the class name to avoid collisions between method-
+        // level and class-level type variable and avoid variable name starts with a number.
+        // concat class components to avoid collisions between type variables in inner/outer class.
+        // use '_' instead of '$' because '$' is not allowed in template variable name in closure.
+        nameComponents.set(
+            nameComponents.size() - 1, simpleName.substring(simpleName.indexOf('_') + 1));
+        String prefix = simpleName.substring(0, simpleName.indexOf('_') + 1);
+
+        binaryClassName = prefix + Joiner.on('_').join(nameComponents);
+      } else if (isArray) {
+        String arraySuffix = Strings.repeat("[]", dimensions);
+        binaryClassName = leafTypeDescriptor.getBinaryClassName() + arraySuffix;
+      } else {
+        binaryClassName = Joiner.on('$').join(classComponents);
+      }
+    }
     return binaryClassName;
   }
 

@@ -452,13 +452,11 @@ public class TypeDescriptors {
                 Iterables.concat(
                     packageComponents,
                     Collections.singleton(Joiner.on("$").join(classComponents))));
-    String binaryClassName = createBinaryClassName(classComponents, simpleName, false, false);
     String packageName = Joiner.on(".").join(packageComponents);
 
     return new TypeDescriptor.Builder()
         .setBinaryName(binaryName)
         .setClassComponents(classComponents)
-        .setBinaryClassName(binaryClassName)
         .setIsExtern(isNative && JsInteropUtils.isGlobal(jsNamespace))
         .setIsGlobal(JsInteropUtils.JS_GLOBAL.equals(jsNamespace) && Strings.isNullOrEmpty(jsName))
         .setIsJsType(isJsType)
@@ -617,7 +615,6 @@ public class TypeDescriptors {
                 Iterables.concat(
                     packageComponents,
                     Collections.singleton(Joiner.on("$").join(classComponents))));
-    String binaryClassName = createBinaryClassName(classComponents, simpleName, false, false);
     String packageName = Joiner.on(".").join(packageComponents);
     String sourceName = Joiner.on(".").join(Iterables.concat(packageComponents, classComponents));
 
@@ -628,7 +625,6 @@ public class TypeDescriptors {
         new TypeDescriptor.Builder()
             .setBinaryName(binaryName)
             .setClassComponents(classComponents)
-            .setBinaryClassName(binaryClassName)
             .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
             .setEnclosingTypeDescriptorFactory(enclosingTypeDescriptorFactory)
             .setIsInstanceNestedClass(true)
@@ -748,8 +744,6 @@ public class TypeDescriptors {
       binaryName = binaryName + ":" + typeBinding.getErasure().getBinaryName();
     }
 
-    String binaryClassName =
-        createBinaryClassName(classComponents, simpleName, isPrimitive, isTypeVariable);
     boolean isNative = JsInteropAnnotationUtils.isNative(jsTypeAnnotation);
     boolean isNullable = !typeBinding.isPrimitive() && !typeBinding.isTypeVariable();
     String jsName = JsInteropAnnotationUtils.getJsName(jsTypeAnnotation);
@@ -784,7 +778,6 @@ public class TypeDescriptors {
     return new TypeDescriptor.Builder()
         .setBinaryName(binaryName)
         .setClassComponents(classComponents)
-        .setBinaryClassName(binaryClassName)
         .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
         .setEnclosingTypeDescriptorFactory(enclosingTypeDescriptorFactory)
         .setInterfacesTypeDescriptorsFactory(interfacesDescriptorsFactory)
@@ -848,7 +841,6 @@ public class TypeDescriptors {
 
     // Compute everything else.
     String binaryName = arrayPrefix + leafTypeDescriptor.getBinaryName();
-    String binaryClassName = leafTypeDescriptor.getBinaryClassName() + arraySuffix;
     TypeDescriptor componentTypeDescriptor =
         getForArray(leafTypeDescriptor, dimensions - 1, isNullable);
     String packageName = leafTypeDescriptor.getPackageName();
@@ -858,7 +850,6 @@ public class TypeDescriptors {
     TypeDescriptor typeDescriptor =
         new TypeDescriptor.Builder()
             .setBinaryName(binaryName)
-            .setBinaryClassName(binaryClassName)
             .setComponentTypeDescriptor(componentTypeDescriptor)
             .setDimensions(dimensions)
             .setIsArray(true)
@@ -905,38 +896,6 @@ public class TypeDescriptors {
     return JsTypeAnnotation.createTypeAnnotation(
         NullLiteral.NULL,
         TypeDescriptors.get().unknownType);
-  }
-
-  private static String createBinaryClassName(
-      List<String> classComponents,
-      String simpleName,
-      boolean isPrimitive,
-      boolean isTypeVariable) {
-    String binaryClassName;
-    {
-      if (isPrimitive) {
-        binaryClassName = "$" + simpleName;
-      } else if (simpleName.equals("?")) {
-        binaryClassName = "?";
-      } else if (isTypeVariable) {
-        // skip the top level class component for better output readability.
-        List<String> nameComponents =
-            new ArrayList<>(classComponents.subList(1, classComponents.size()));
-
-        // move the prefix in the simple name to the class name to avoid collisions between method-
-        // level and class-level type variable and avoid variable name starts with a number.
-        // concat class components to avoid collisions between type variables in inner/outer class.
-        // use '_' instead of '$' because '$' is not allowed in template variable name in closure.
-        nameComponents.set(
-            nameComponents.size() - 1, simpleName.substring(simpleName.indexOf('_') + 1));
-        String prefix = simpleName.substring(0, simpleName.indexOf('_') + 1);
-
-        binaryClassName = prefix + Joiner.on('_').join(nameComponents);
-      } else {
-        binaryClassName = Joiner.on('$').join(classComponents);
-      }
-    }
-    return binaryClassName;
   }
 
   static String createUnionBinaryName(final List<TypeDescriptor> unionedTypeDescriptors) {
