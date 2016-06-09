@@ -68,7 +68,9 @@ public class EnumMethodsCreator {
                     // Import alias.
                     Lists.newArrayList("NativeObject"),
                     // Type parameters.
-                    Lists.newArrayList(TypeDescriptors.NATIVE_STRING, enumType.getDescriptor()),
+                    Lists.newArrayList(
+                        TypeDescriptors.NATIVE_STRING,
+                        TypeDescriptors.toNonNullable(enumType.getDescriptor())),
                     // Browser global
                     JsUtils.JS_GLOBAL,
                     // Native type name

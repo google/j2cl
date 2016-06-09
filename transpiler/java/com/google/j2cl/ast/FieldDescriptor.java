@@ -195,6 +195,11 @@ public abstract class FieldDescriptor extends Node implements Member {
       return this;
     }
 
+    public Builder setTypeDescriptor(TypeDescriptor typeDescriptor) {
+      this.typeDescriptor = typeDescriptor;
+      return this;
+    }
+
     public FieldDescriptor build() {
       return create(
           isStatic,

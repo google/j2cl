@@ -317,8 +317,14 @@ public class CompilationUnitBuilder {
               convertExpressions(
                   JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(
                       enumConstantDeclaration.arguments())));
-      return Field.Builder.fromDefault(
-              JdtUtils.createFieldDescriptor(enumConstantDeclaration.resolveVariable()))
+      FieldDescriptor fieldDescriptor =
+          JdtUtils.createFieldDescriptor(enumConstantDeclaration.resolveVariable());
+      // Enum fields are always non-nullable.
+      fieldDescriptor =
+          FieldDescriptor.Builder.from(fieldDescriptor)
+              .setTypeDescriptor(TypeDescriptors.toNonNullable(fieldDescriptor.getTypeDescriptor()))
+              .build();
+      return Field.Builder.fromDefault(fieldDescriptor)
           .setInitializer(initializer)
           .setIsEnumField(true)
           .setPosition(-1) /* Position is not important */
