@@ -55,7 +55,6 @@ import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
 import com.google.j2cl.ast.JsInfo;
-import com.google.j2cl.ast.JsInteropUtils;
 import com.google.j2cl.ast.LabeledStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;

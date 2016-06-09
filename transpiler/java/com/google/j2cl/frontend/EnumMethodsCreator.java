@@ -14,7 +14,7 @@ import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JsInfo;
-import com.google.j2cl.ast.JsInteropUtils;
+import com.google.j2cl.ast.JsUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -70,7 +70,7 @@ public class EnumMethodsCreator {
                     // Type parameters.
                     Lists.newArrayList(TypeDescriptors.NATIVE_STRING, enumType.getDescriptor()),
                     // Browser global
-                    JsInteropUtils.JS_GLOBAL,
+                    JsUtils.JS_GLOBAL,
                     // Native type name
                     "Object"))
             .setIsStatic(true)

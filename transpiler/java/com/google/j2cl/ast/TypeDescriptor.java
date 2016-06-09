@@ -607,7 +607,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       effectivePrefix = packageName;
     }
 
-    if (JsInteropUtils.isGlobal(effectivePrefix)) {
+    if (JsUtils.isGlobal(effectivePrefix)) {
       return effectiveSimpleName;
     }
     // If the user opted in to declareLegacyNamespaces, then JSCompiler will complain when seeing

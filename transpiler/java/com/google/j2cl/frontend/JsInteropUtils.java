@@ -13,9 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast;
+package com.google.j2cl.frontend;
 
 import com.google.common.base.Preconditions;
+import com.google.j2cl.ast.JsInfo;
+import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.common.JsInteropAnnotationUtils;
 
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
@@ -29,15 +31,6 @@ import org.eclipse.jdt.core.dom.Modifier;
  * Utility functions for JsInterop properties.
  */
 public class JsInteropUtils {
-  public static final String JS_GLOBAL = "<global>";
-
-  /**
-   * Returns whether a type should be considered global based on its namespace.
-   */
-  public static boolean isGlobal(String jsNamespace) {
-    return JS_GLOBAL.equals(jsNamespace);
-  }
-
   public static boolean isJsFunction(ITypeBinding typeBinding) {
     return JsInteropAnnotationUtils.getJsFunctionAnnotation(typeBinding) != null;
   }

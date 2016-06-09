@@ -35,8 +35,8 @@ import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JavaType.Kind;
 import com.google.j2cl.ast.JsInfo;
-import com.google.j2cl.ast.JsInteropUtils;
 import com.google.j2cl.ast.JsMemberType;
+import com.google.j2cl.ast.JsUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -1598,7 +1598,7 @@ public class JdtUtils {
             : getTypeArgumentTypeDescriptors(typeBinding);
 
     // Compute these even later
-    boolean isExtern = isNative && JsInteropUtils.isGlobal(jsNamespace);
+    boolean isExtern = isNative && JsUtils.isGlobal(jsNamespace);
     return new TypeDescriptor.Builder()
         .setBinaryName(binaryName)
         .setClassComponents(classComponents)

@@ -381,7 +381,7 @@ public class JsInteropRestrictionsChecker {
 
   private <T extends HasJsName> void checkJsNamespace(T item) {
     String jsNamespace = item.getJsNamespace();
-    if (jsNamespace == null || JsInteropUtils.isGlobal(jsNamespace)) {
+    if (jsNamespace == null || JsUtils.isGlobal(jsNamespace)) {
       return;
     }
     if (jsNamespace.isEmpty()) {

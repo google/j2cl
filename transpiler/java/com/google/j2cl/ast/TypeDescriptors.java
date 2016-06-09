@@ -183,7 +183,7 @@ public class TypeDescriptors {
           Arrays.asList("NativeString"),
           Collections.emptyList(),
           // Browser global
-          JsInteropUtils.JS_GLOBAL,
+          JsUtils.JS_GLOBAL,
           // Native type name
           "String");
   public static final TypeDescriptor NATIVE_FUNCTION =
@@ -193,7 +193,7 @@ public class TypeDescriptors {
           Arrays.asList("NativeFunction"),
           Collections.emptyList(),
           // Browser global
-          JsInteropUtils.JS_GLOBAL,
+          JsUtils.JS_GLOBAL,
           // Native type name
           "Function");
 
@@ -339,8 +339,8 @@ public class TypeDescriptors {
     return new TypeDescriptor.Builder()
         .setBinaryName(binaryName)
         .setClassComponents(classComponents)
-        .setIsExtern(isNative && JsInteropUtils.isGlobal(jsNamespace))
-        .setIsGlobal(JsInteropUtils.JS_GLOBAL.equals(jsNamespace) && Strings.isNullOrEmpty(jsName))
+        .setIsExtern(isNative && JsUtils.isGlobal(jsNamespace))
+        .setIsGlobal(JsUtils.JS_GLOBAL.equals(jsNamespace) && Strings.isNullOrEmpty(jsName))
         .setIsJsType(isJsType)
         .setIsNative(isNative)
         .setIsNullable(true)

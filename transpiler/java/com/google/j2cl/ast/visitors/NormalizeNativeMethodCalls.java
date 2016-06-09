@@ -20,7 +20,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Splitter;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.JsInteropUtils;
+import com.google.j2cl.ast.JsUtils;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
@@ -60,20 +60,20 @@ public class NormalizeNativeMethodCalls extends AbstractRewriter {
 
     String qualifiedName = methodDescriptor.getJsNamespace();
     TypeDescriptor nativeTypeDescriptor;
-    if (JsInteropUtils.isGlobal(qualifiedName)) {
+    if (JsUtils.isGlobal(qualifiedName)) {
       nativeTypeDescriptor =
           TypeDescriptors.createNative(
-              Arrays.asList(JsInteropUtils.JS_GLOBAL),
+              Arrays.asList(JsUtils.JS_GLOBAL),
               Arrays.asList(""),
               Collections.emptyList(),
-              JsInteropUtils.JS_GLOBAL,
+              JsUtils.JS_GLOBAL,
               "");
     } else {
       List<String> nameComponents = Splitter.on('.').splitToList(qualifiedName);
       int size = nameComponents.size();
       // Fill in JS_GLOBAL as the namespace if the namespace is empty.
       List<String> namespaceComponents =
-          size == 1 ? Arrays.asList(JsInteropUtils.JS_GLOBAL) : nameComponents.subList(0, size - 1);
+          size == 1 ? Arrays.asList(JsUtils.JS_GLOBAL) : nameComponents.subList(0, size - 1);
       nativeTypeDescriptor =
           TypeDescriptors.createNative(
               namespaceComponents,

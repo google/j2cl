@@ -39,4 +39,13 @@ public class JsUtils {
   public static boolean isValidJsQualifiedName(String name) {
     return JAVASCRIPT_VALID_QUALIFIED_NAME_PATTERN.matcher(name).matches();
   }
+
+  public static final String JS_GLOBAL = "<global>";
+
+  /**
+   * Returns whether a type should be considered global based on its namespace.
+   */
+  public static boolean isGlobal(String jsNamespace) {
+    return JS_GLOBAL.equals(jsNamespace);
+  }
 }
