@@ -15,9 +15,18 @@
  */
 package com.google.j2cl.frontend;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.FluentIterable;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryOperator;
@@ -25,8 +34,6 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JavaType.Kind;
-import com.google.j2cl.ast.JdtBindingUtils;
-import com.google.j2cl.ast.JdtBindingUtils.Nullability;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsInteropUtils;
 import com.google.j2cl.ast.JsMemberType;
@@ -38,28 +45,39 @@ import com.google.j2cl.ast.PrefixOperator;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptor.MethodDescriptorFactory;
+import com.google.j2cl.ast.TypeDescriptor.TypeDescriptorFactory;
+import com.google.j2cl.ast.TypeDescriptor.TypeDescriptorsFactory;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
+import com.google.j2cl.common.JsInteropAnnotationUtils;
+import com.google.j2cl.common.PackageInfoCache;
 
+import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
 import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.BodyDeclaration;
 import org.eclipse.jdt.core.dom.CompilationUnit;
+import org.eclipse.jdt.core.dom.IAnnotationBinding;
+import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.InfixExpression;
 import org.eclipse.jdt.core.dom.LambdaExpression;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
+import org.eclipse.jdt.core.dom.Modifier;
 import org.eclipse.jdt.core.dom.PostfixExpression;
 import org.eclipse.jdt.core.dom.PrefixExpression;
 
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -73,14 +91,18 @@ public class JdtUtils {
   // JdtUtil members are all package private. Code outside frontend should not be aware of the
   // dependency on JDT.
 
+  /**
+   * The nullability of a package, type, class, etc.
+   */
+  public enum Nullability {
+    NULL,
+    NOT_NULL
+  }
+
   static String getCompilationUnitPackageName(CompilationUnit compilationUnit) {
     return compilationUnit.getPackage() == null
         ? ""
         : compilationUnit.getPackage().getName().getFullyQualifiedName();
-  }
-
-  static TypeDescriptor createTypeDescriptor(ITypeBinding typeBinding) {
-    return JdtBindingUtils.createTypeDescriptor(typeBinding);
   }
 
   static FieldDescriptor createFieldDescriptor(IVariableBinding variableBinding) {
@@ -88,17 +110,17 @@ public class JdtUtils {
       return AstUtils.ARRAY_LENGTH_FIELD_DESCRIPTION;
     }
 
-    boolean isStatic = JdtBindingUtils.isStatic(variableBinding);
-    Visibility visibility = JdtBindingUtils.getVisibility(variableBinding);
+    boolean isStatic = isStatic(variableBinding);
+    Visibility visibility = getVisibility(variableBinding);
     TypeDescriptor enclosingClassTypeDescriptor =
         createTypeDescriptor(variableBinding.getDeclaringClass());
     String fieldName = variableBinding.getName();
 
     TypeDescriptor thisTypeDescriptor =
-        JdtBindingUtils.createTypeDescriptorWithNullability(
+        createTypeDescriptorWithNullability(
             variableBinding.getType(),
             variableBinding.getAnnotations(),
-            JdtBindingUtils.getTypeDefaultNullability(variableBinding.getDeclaringClass()));
+            getTypeDefaultNullability(variableBinding.getDeclaringClass()));
 
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableBinding);
     boolean isRaw = jsInfo.getJsMemberType() == JsMemberType.PROPERTY;
@@ -116,16 +138,12 @@ public class JdtUtils {
         isCompileTimeConstant);
   }
 
-  public static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
-    return JdtBindingUtils.createMethodDescriptor(methodBinding);
-  }
-
   static Variable createVariable(IVariableBinding variableBinding, Nullability defaultNullability) {
     String name = variableBinding.getName();
     TypeDescriptor typeDescriptor =
-        JdtBindingUtils.createTypeDescriptorWithNullability(
+        createTypeDescriptorWithNullability(
             variableBinding.getType(), variableBinding.getAnnotations(), defaultNullability);
-    boolean isFinal = JdtBindingUtils.isFinal(variableBinding);
+    boolean isFinal = isFinal(variableBinding);
     boolean isParameter = variableBinding.isParameter();
     return new Variable(name, typeDescriptor, isFinal, isParameter);
   }
@@ -255,7 +273,7 @@ public class JdtUtils {
   static List<IMethodBinding> getUnimplementedMethodBindings(ITypeBinding typeBinding) {
     List<IMethodBinding> unimplementedMethodBindings = new ArrayList<>();
     // Only abstract class may have unimplemented methods.
-    if (!JdtBindingUtils.isAbstract(typeBinding)) {
+    if (!isAbstract(typeBinding)) {
       return unimplementedMethodBindings;
     }
     for (ITypeBinding superInterface : getAllInterfaces(typeBinding)) {
@@ -276,7 +294,7 @@ public class JdtUtils {
         new Predicate<IMethodBinding>() {
           @Override
           public boolean apply(IMethodBinding methodBinding) {
-            return !JdtBindingUtils.isStatic(methodBinding)
+            return !isStatic(methodBinding)
                 && !methodBinding.isConstructor()
                 && !isImplementedBy(methodBinding, typeBinding);
           }
@@ -386,7 +404,7 @@ public class JdtUtils {
     while (superclass != null) {
       for (IMethodBinding methodInSuperclass : superclass.getDeclaredMethods()) {
         // TODO: excludes package private method, and add a test for it.
-        if (JdtUtils.areMethodsOverrideEquivalent(methodInSuperclass, methodBinding)) {
+        if (areMethodsOverrideEquivalent(methodInSuperclass, methodBinding)) {
           return methodInSuperclass;
         }
       }
@@ -433,14 +451,6 @@ public class JdtUtils {
         && variableBinding.getDeclaringClass() == null;
   }
 
-  static boolean isInstanceNestedClass(ITypeBinding typeBinding) {
-    return typeBinding.getDeclaringClass() != null && !JdtBindingUtils.isStatic(typeBinding);
-  }
-
-  static boolean isInstanceMemberClass(ITypeBinding typeBinding) {
-    return typeBinding.isMember() && !JdtBindingUtils.isStatic(typeBinding);
-  }
-
   static boolean isJsOverride(IMethodBinding methodBinding) {
     // If the JsMethod is the first in the override chain, it does not override any methods.
     return isOverride(methodBinding) && !isFirstJsMember(methodBinding);
@@ -452,7 +462,7 @@ public class JdtUtils {
    */
   static boolean isFirstJsMember(IMethodBinding methodBinding) {
     return JsInteropUtils.isJsMember(methodBinding)
-        && JdtBindingUtils.getOverriddenJsMembers(methodBinding).isEmpty();
+        && getOverriddenJsMembers(methodBinding).isEmpty();
   }
 
   static boolean isOverride(IMethodBinding overridingMethod) {
@@ -498,8 +508,8 @@ public class JdtUtils {
   static boolean upgradesPackagePrivateVisibility(
       IMethodBinding overridingMethod, IMethodBinding overriddenMethod) {
     Preconditions.checkArgument(overridingMethod.overrides(overriddenMethod));
-    Visibility overriddenMethodVisibility = JdtBindingUtils.getVisibility(overriddenMethod);
-    Visibility overridingMethodVisibility = JdtBindingUtils.getVisibility(overridingMethod);
+    Visibility overriddenMethodVisibility = getVisibility(overriddenMethod);
+    Visibility overridingMethodVisibility = getVisibility(overridingMethod);
     return overriddenMethodVisibility.isPackagePrivate()
         && (overridingMethodVisibility.isPublic() || overridingMethodVisibility.isProtected());
   }
@@ -511,8 +521,7 @@ public class JdtUtils {
    */
   static boolean areMethodsOverrideEquivalent(
       IMethodBinding leftMethod, IMethodBinding rightMethod) {
-    return JdtBindingUtils.getMethodSignature(leftMethod)
-        .equals(JdtBindingUtils.getMethodSignature(rightMethod));
+    return getMethodSignature(leftMethod).equals(getMethodSignature(rightMethod));
   }
 
   static IMethodBinding findSamMethodBinding(ITypeBinding typeBinding) {
@@ -521,7 +530,7 @@ public class JdtUtils {
     // example to address the potential issue.
     Preconditions.checkArgument(typeBinding.isInterface());
     for (IMethodBinding method : typeBinding.getDeclaredMethods()) {
-      if (JdtBindingUtils.isAbstract(method)) {
+      if (isAbstract(method)) {
         return method;
       }
     }
@@ -536,9 +545,9 @@ public class JdtUtils {
 
   static Method createSamMethod(
       ITypeBinding lambdaInterfaceBinding, MethodDescriptor lambdaMethodDescriptor) {
-    IMethodBinding samMethodBinding = JdtUtils.findSamMethodBinding(lambdaInterfaceBinding);
+    IMethodBinding samMethodBinding = findSamMethodBinding(lambdaInterfaceBinding);
     Preconditions.checkNotNull(samMethodBinding);
-    MethodDescriptor samMethodDescriptor = JdtUtils.createMethodDescriptor(samMethodBinding);
+    MethodDescriptor samMethodDescriptor = createMethodDescriptor(samMethodBinding);
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
     List<TypeDescriptor> parameterTypes =
@@ -660,5 +669,969 @@ public class JdtUtils {
     return false;
   }
 
+  /**
+   * Creates a TypeDescriptor from a JDT TypeBinding.
+   */
+  // TODO(simionato): Delete this method and make all the callers use
+  // createTypeDescriptorWithNullability.
+  public static TypeDescriptor createTypeDescriptor(ITypeBinding typeBinding) {
+    return createTypeDescriptorWithNullability(
+        typeBinding, new IAnnotationBinding[0], Nullability.NULL);
+  }
+
+  /**
+   * Creates a type descriptor for the given type binding, taking into account nullability.
+   *
+   * @param typeBinding the type binding, used to create the type descriptor.
+   * @param elementAnnotations the annotations on the element
+   */
+  public static TypeDescriptor createTypeDescriptorWithNullability(
+      ITypeBinding typeBinding,
+      IAnnotationBinding[] elementAnnotations,
+      Nullability defaultNullabilityForCompilationUnit) {
+    if (typeBinding == null) {
+      return null;
+    }
+    TypeDescriptor descriptor;
+    if (typeBinding.isArray()) {
+      TypeDescriptor leafTypeDescriptor =
+          createTypeDescriptorWithNullability(
+              typeBinding.getElementType(),
+              new IAnnotationBinding[0],
+              defaultNullabilityForCompilationUnit);
+      descriptor = TypeDescriptors.getForArray(leafTypeDescriptor, typeBinding.getDimensions());
+    } else if (typeBinding.isParameterizedType()) {
+      List<TypeDescriptor> typeArgumentsDescriptors = new ArrayList<>();
+      for (ITypeBinding typeArgumentBinding : typeBinding.getTypeArguments()) {
+        typeArgumentsDescriptors.add(
+            createTypeDescriptorWithNullability(
+                typeArgumentBinding,
+                new IAnnotationBinding[0],
+                defaultNullabilityForCompilationUnit));
+      }
+      descriptor = createTypeDescriptor(typeBinding, typeArgumentsDescriptors);
+    } else {
+      descriptor = createTypeDescriptor(typeBinding, null);
+    }
+
+    if (isNullable(typeBinding, elementAnnotations, defaultNullabilityForCompilationUnit)) {
+      return TypeDescriptors.toNullable(descriptor);
+    }
+    return TypeDescriptors.toNonNullable(descriptor);
+  }
+
+  /**
+   * Returns whether the given type binding should be nullable, according to the annotations on it
+   * and if nullability is enabled for the package containing the binding.
+   */
+  private static boolean isNullable(
+      ITypeBinding typeBinding,
+      IAnnotationBinding[] elementAnnotations,
+      Nullability defaultNullabilityForCompilationUnit) {
+    Preconditions.checkNotNull(defaultNullabilityForCompilationUnit);
+    if (typeBinding.isPrimitive()) {
+      return false;
+    }
+    if (typeBinding.getQualifiedName().equals("java.lang.Void")) {
+      // Void is always nullable.
+      return true;
+    }
+    Iterable<IAnnotationBinding> allAnnotations =
+        Iterables.concat(
+            Arrays.asList(elementAnnotations),
+            Arrays.asList(typeBinding.getTypeAnnotations()),
+            Arrays.asList(typeBinding.getAnnotations()));
+    for (IAnnotationBinding annotation : allAnnotations) {
+      String annotationName = annotation.getName();
+      // TODO(simionato): Replace those annotations with J2CL-specific annotations
+      if (annotationName.equals("Nullable") || annotationName.equals("NullableType")) {
+        return true;
+      }
+      if (annotationName.equalsIgnoreCase("Nonnull")) {
+        return false;
+      }
+    }
+
+    return defaultNullabilityForCompilationUnit == Nullability.NULL
+        && !typeBinding.isTypeVariable();
+  }
+
+  /**
+   * Gets the default nullability for the given type by examining the package-info file in the
+   * type's package in the same class path entry.
+   */
+  public static Nullability getTypeDefaultNullability(ITypeBinding typeBinding) {
+    ITypeBinding topLevelTypeBinding = toTopLevelTypeBinding(typeBinding);
+
+    if (topLevelTypeBinding.isFromSource()) {
+      // Let the PackageInfoCache know that this class is Source, otherwise it would have to rummage
+      // around in the class path to figure it out and it might even come up with the wrong answer
+      // for example if this class has also been globbed into some other library that is a
+      // dependency of this one.
+      PackageInfoCache.get().markAsSource(topLevelTypeBinding.getBinaryName());
+    }
+
+    // For a top level class the binary and source name are the same.
+    String sourceName = topLevelTypeBinding.getBinaryName();
+
+    boolean nullabilityEnabled = PackageInfoCache.get().isNullabilityEnabled(sourceName);
+    return nullabilityEnabled ? Nullability.NOT_NULL : Nullability.NULL;
+  }
+
+  /**
+   * Incase the given type binding is nested, return the outermost possible enclosing type binding.
+   */
+  public static ITypeBinding toTopLevelTypeBinding(ITypeBinding typeBinding) {
+    ITypeBinding topLevelClass = typeBinding;
+    while (topLevelClass.getDeclaringClass() != null) {
+      topLevelClass = topLevelClass.getDeclaringClass();
+    }
+    return topLevelClass;
+  }
+
+  private static boolean isIntersectionType(ITypeBinding binding) {
+    boolean isIntersectionType =
+        !binding.isPrimitive()
+            && !binding.isCapture()
+            && !binding.isArray()
+            && !binding.isTypeVariable()
+            && !binding.isWildcardType()
+            && binding.getPackage() == null;
+    if (isIntersectionType) {
+      checkArgument(
+          (binding.getSuperclass() != null && binding.getInterfaces().length >= 1)
+              || (binding.getSuperclass() == null && binding.getInterfaces().length >= 2));
+    }
+    return isIntersectionType;
+  }
+
+  /**
+   * This is a hack to get intersection types working temporarily.  We simply take the first type
+   * in the intersection and return it.
+   * TODO: Find out how to support intersection types in the jscompiler type system and fix this.
+   */
+  public static ITypeBinding getTypeForIntersectionType(ITypeBinding binding) {
+    checkArgument(isIntersectionType(binding));
+    return binding.getInterfaces()[0];
+  }
+
+  /**
+   * Creates a TypeDescriptor from a JDT TypeBinding.
+   */
+  public static TypeDescriptor createTypeDescriptor(
+      ITypeBinding typeBinding, List<TypeDescriptor> typeArgumentDescriptors) {
+    if (typeBinding == null) {
+      return null;
+    }
+    if (isIntersectionType(typeBinding)) {
+      ITypeBinding intersectionType = getTypeForIntersectionType(typeBinding);
+      return createTypeDescriptor(intersectionType, getTypeArgumentTypeDescriptors(typeBinding));
+    }
+    if (typeBinding.isArray()) {
+      TypeDescriptor leafTypeDescriptor = createTypeDescriptor(typeBinding.getElementType());
+      return TypeDescriptors.getForArray(leafTypeDescriptor, typeBinding.getDimensions());
+    }
+    return createForType(typeBinding, typeArgumentDescriptors);
+  }
+
+  public static List<String> getPackageComponents(ITypeBinding typeBinding) {
+    List<String> packageComponents = new ArrayList<>();
+    if (typeBinding.getPackage() != null) {
+      packageComponents = Arrays.asList(typeBinding.getPackage().getNameComponents());
+    }
+    return packageComponents;
+  }
+
+  public static List<String> getClassComponents(ITypeBinding typeBinding) {
+    List<String> classComponents = new LinkedList<>();
+    if (typeBinding.isWildcardType() || typeBinding.isCapture()) {
+      return Arrays.asList("?");
+    }
+    ITypeBinding currentType = typeBinding;
+    while (currentType != null) {
+      String simpleName;
+      if (currentType.isLocal()) {
+        // JDT binary name for local class is like package.components.EnclosingClass$1SimpleName
+        // Extract the name after the last '$' as the class component here.
+        String binaryName = currentType.getErasure().getBinaryName();
+        simpleName = binaryName.substring(binaryName.lastIndexOf('$') + 1);
+      } else if (currentType.isTypeVariable()) {
+        if (currentType.getDeclaringClass() != null) {
+          // If it is a class-level type variable, use the simple name (with prefix "C_") as the
+          // current name component.
+          simpleName = AstUtils.TYPE_VARIABLE_IN_TYPE_PREFIX + currentType.getName();
+        } else {
+          // If it is a method-level type variable, use the simple name (with prefix "M_") as the
+          // current name component, and add declaringClass_declaringMethod as the next name
+          // component, and set currentType to declaringClass for the next iteration.
+          classComponents.add(0, AstUtils.TYPE_VARIABLE_IN_METHOD_PREFIX + currentType.getName());
+          simpleName =
+              currentType.getDeclaringMethod().getDeclaringClass().getName()
+                  + "_"
+                  + currentType.getDeclaringMethod().getName();
+          currentType = currentType.getDeclaringMethod().getDeclaringClass();
+        }
+      } else {
+        simpleName = currentType.getErasure().getName();
+      }
+      classComponents.add(0, simpleName);
+      currentType = currentType.getDeclaringClass();
+    }
+    return classComponents;
+  }
+
+  public static List<TypeDescriptor> getTypeArgumentTypeDescriptors(ITypeBinding typeBinding) {
+    List<TypeDescriptor> typeArgumentDescriptors = new ArrayList<>();
+    if (isIntersectionType(typeBinding)) {
+      ITypeBinding intersectionTypeBinding = getTypeForIntersectionType(typeBinding);
+      return getTypeArgumentTypeDescriptors(intersectionTypeBinding);
+    } else if (typeBinding.isParameterizedType()) {
+      typeArgumentDescriptors.addAll(createTypeDescriptors(typeBinding.getTypeArguments()));
+    } else {
+      typeArgumentDescriptors.addAll(createTypeDescriptors(typeBinding.getTypeParameters()));
+      boolean isInstanceNestedClass =
+          typeBinding.isNested() && !Modifier.isStatic(typeBinding.getModifiers());
+      if (isInstanceNestedClass) {
+        if (typeBinding.getDeclaringMethod() != null) {
+          typeArgumentDescriptors.addAll(
+              createTypeDescriptors(typeBinding.getDeclaringMethod().getTypeParameters()));
+        }
+        if (typeBinding.getDeclaringMember() == null
+            || !Modifier.isStatic(typeBinding.getDeclaringMember().getModifiers())) {
+          typeArgumentDescriptors.addAll(
+              createTypeDescriptor(typeBinding.getDeclaringClass()).getTypeArgumentDescriptors());
+        }
+      }
+    }
+    return typeArgumentDescriptors;
+  }
+
+  public static Visibility getVisibility(IBinding binding) {
+    return getVisibility(binding.getModifiers());
+  }
+
+  public static Visibility getVisibility(int modifiers) {
+    if (Modifier.isPublic(modifiers)) {
+      return Visibility.PUBLIC;
+    } else if (Modifier.isProtected(modifiers)) {
+      return Visibility.PROTECTED;
+    } else if (Modifier.isPrivate(modifiers)) {
+      return Visibility.PRIVATE;
+    } else {
+      return Visibility.PACKAGE_PRIVATE;
+    }
+  }
+
+  public static boolean isDefaultMethod(IMethodBinding binding) {
+    return Modifier.isDefault(binding.getModifiers());
+  }
+
+  public static boolean isAbstract(IBinding binding) {
+    return Modifier.isAbstract(binding.getModifiers());
+  }
+
+  public static boolean isFinal(IBinding binding) {
+    return Modifier.isFinal(binding.getModifiers());
+  }
+
+  public static boolean isStatic(IBinding binding) {
+    return Modifier.isStatic(binding.getModifiers());
+  }
+
+  public static boolean isInstanceMemberClass(ITypeBinding typeBinding) {
+    return typeBinding.isMember() && !Modifier.isStatic(typeBinding.getModifiers());
+  }
+
+  public static boolean isInstanceNestedClass(ITypeBinding typeBinding) {
+    return typeBinding.isNested() && !Modifier.isStatic(typeBinding.getModifiers());
+  }
+
+  /**
+   * Creates a MethodDescriptor directly based on the given JDT method binding.
+   */
+  public static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
+    int modifiers = methodBinding.getModifiers();
+    boolean isStatic = Modifier.isStatic(modifiers);
+    Visibility visibility = getVisibility(methodBinding);
+    boolean isNative = Modifier.isNative(modifiers);
+    TypeDescriptor enclosingClassTypeDescriptor =
+        createTypeDescriptor(methodBinding.getDeclaringClass());
+    boolean isConstructor = methodBinding.isConstructor();
+    String methodName =
+        isConstructor
+            ? createTypeDescriptor(methodBinding.getDeclaringClass()).getBinaryClassName()
+            : methodBinding.getName();
+    final Nullability defaultNullabilityForPackage =
+        getTypeDefaultNullability(methodBinding.getDeclaringClass());
+
+    JsInfo jsInfo = computeJsInfo(methodBinding);
+
+    TypeDescriptor returnTypeDescriptor =
+        createTypeDescriptorWithNullability(
+            methodBinding.getReturnType(),
+            methodBinding.getAnnotations(),
+            defaultNullabilityForPackage);
+
+    // generate parameters type descriptors.
+    List<TypeDescriptor> parameterTypeDescriptors = new ArrayList<>();
+    for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
+      TypeDescriptor descriptor =
+          createTypeDescriptorWithNullability(
+              methodBinding.getParameterTypes()[i],
+              methodBinding.getParameterAnnotations(i),
+              defaultNullabilityForPackage);
+      parameterTypeDescriptors.add(descriptor);
+    }
+
+    MethodDescriptor declarationMethodDescriptor = null;
+    if (methodBinding.getMethodDeclaration() != methodBinding) {
+      declarationMethodDescriptor = createMethodDescriptor(methodBinding.getMethodDeclaration());
+    }
+
+    // generate type parameters declared in the method.
+    Iterable<TypeDescriptor> typeParameterTypeDescriptors =
+        FluentIterable.from(methodBinding.getTypeParameters())
+            .transform(
+                new Function<ITypeBinding, TypeDescriptor>() {
+                  @Override
+                  public TypeDescriptor apply(ITypeBinding typeBinding) {
+                    return createTypeDescriptor(typeBinding);
+                  }
+                });
+
+    return MethodDescriptor.Builder.fromDefault()
+        .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+        .setMethodName(methodName)
+        .setDeclarationMethodDescriptor(declarationMethodDescriptor)
+        .setReturnTypeDescriptor(returnTypeDescriptor)
+        .setParameterTypeDescriptors(parameterTypeDescriptors)
+        .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
+        .setJsInfo(jsInfo)
+        .setVisibility(visibility)
+        .setIsStatic(isStatic)
+        .setIsConstructor(isConstructor)
+        .setIsNative(isNative)
+        .setIsDefault(Modifier.isDefault(methodBinding.getModifiers()))
+        .setIsVarargs(methodBinding.isVarargs())
+        .build();
+  }
+
+  public static boolean isOrOverridesJsMember(IMethodBinding methodBinding) {
+    return JsInteropUtils.isJsMember(methodBinding)
+        || !getOverriddenJsMembers(methodBinding).isEmpty();
+  }
+
+  /**
+   * Checks overriding chain to compute JsInfo.
+   */
+  static JsInfo computeJsInfo(IMethodBinding methodBinding) {
+    List<JsInfo> jsInfoList = new ArrayList<>();
+    // Add the JsInfo of the method and all the overridden methods to the list.
+    JsInfo jsInfo = JsInteropUtils.getJsInfo(methodBinding);
+    if (!jsInfo.isNone()) {
+      jsInfoList.add(jsInfo);
+    }
+    for (IMethodBinding overriddenMethod : getOverriddenMethods(methodBinding)) {
+      JsInfo inheritedJsInfo = JsInteropUtils.getJsInfo(overriddenMethod);
+      if (!inheritedJsInfo.isNone()) {
+        jsInfoList.add(inheritedJsInfo);
+      }
+    }
+
+    if (jsInfoList.isEmpty()) {
+      return JsInfo.NONE;
+    }
+
+    // TODO: Do the same for JsProperty?
+    if (jsInfoList.get(0).getJsMemberType() == JsMemberType.METHOD) {
+      // Return the first JsInfo with a Js name specified.
+      for (JsInfo jsInfoElement : jsInfoList) {
+        if (jsInfoElement.getJsName() != null) {
+          return jsInfoElement;
+        }
+      }
+    }
+    return jsInfoList.get(0);
+  }
+
+  public static Set<IMethodBinding> getOverriddenJsMembers(IMethodBinding methodBinding) {
+    return Sets.filter(
+        getOverriddenMethods(methodBinding),
+        new Predicate<IMethodBinding>() {
+          @Override
+          public boolean apply(IMethodBinding overriddenMethod) {
+            return JsInteropUtils.isJsMember(overriddenMethod);
+          }
+        });
+  }
+
+  /**
+   * Returns the method signature, which identifies a method up to overriding.
+   */
+  public static String getMethodSignature(IMethodBinding methodBinding) {
+    StringBuilder signatureBuilder = new StringBuilder("");
+
+    Visibility methodVisibility = getVisibility(methodBinding);
+    if (methodVisibility.isPackagePrivate()) {
+      signatureBuilder.append(":pp:");
+      signatureBuilder.append(methodBinding.getDeclaringClass().getPackage());
+      signatureBuilder.append(":");
+    } else if (methodVisibility.isPrivate()) {
+      signatureBuilder.append(":p:");
+      signatureBuilder.append(methodBinding.getDeclaringClass().getBinaryName());
+      signatureBuilder.append(":");
+    }
+
+    signatureBuilder.append(methodBinding.getName());
+    signatureBuilder.append("(");
+
+    String separator = "";
+    for (ITypeBinding parameterType : methodBinding.getParameterTypes()) {
+      signatureBuilder.append(separator);
+      signatureBuilder.append(parameterType.getErasure().getBinaryName());
+      separator = ";";
+    }
+    signatureBuilder.append(")");
+    return signatureBuilder.toString();
+  }
+
+  public static Set<IMethodBinding> getOverriddenMethods(IMethodBinding methodBinding) {
+    Set<IMethodBinding> overriddenMethods = new HashSet<>();
+    ITypeBinding enclosingClass = methodBinding.getDeclaringClass();
+    ITypeBinding superClass = enclosingClass.getSuperclass();
+    if (superClass != null) {
+      overriddenMethods.addAll(getOverriddenMethodsInType(methodBinding, superClass));
+    }
+    for (ITypeBinding superInterface : enclosingClass.getInterfaces()) {
+      overriddenMethods.addAll(getOverriddenMethodsInType(methodBinding, superInterface));
+    }
+    return overriddenMethods;
+  }
+
+  public static Set<IMethodBinding> getOverriddenMethodsInType(
+      IMethodBinding methodBinding, ITypeBinding typeBinding) {
+    Set<IMethodBinding> overriddenMethods = new HashSet<>();
+    for (IMethodBinding declaredMethod : typeBinding.getDeclaredMethods()) {
+      if (methodBinding.overrides(declaredMethod) && !methodBinding.isConstructor()) {
+        checkArgument(!Modifier.isStatic(methodBinding.getModifiers()));
+        overriddenMethods.add(declaredMethod);
+      }
+    }
+    // Recurse into immediate super class and interfaces for overridden method.
+    if (typeBinding.getSuperclass() != null) {
+      overriddenMethods.addAll(
+          getOverriddenMethodsInType(methodBinding, typeBinding.getSuperclass()));
+    }
+    for (ITypeBinding interfaceBinding : typeBinding.getInterfaces()) {
+      overriddenMethods.addAll(getOverriddenMethodsInType(methodBinding, interfaceBinding));
+    }
+    return overriddenMethods;
+  }
+
+  public static boolean isLocal(ITypeBinding typeBinding) {
+    return typeBinding.isLocal();
+  }
+
+  /**
+   * Returns true if {@code typeBinding} is a class that implements a JsFunction interface.
+   */
+  public static boolean isJsFunctionImplementation(ITypeBinding typeBinding) {
+    if (typeBinding == null || !typeBinding.isClass()) {
+      return false;
+    }
+    for (ITypeBinding superInterface : typeBinding.getInterfaces()) {
+      if (JsInteropUtils.isJsFunction(superInterface)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public static boolean isEnumOrSubclass(ITypeBinding typeBinding) {
+    if (typeBinding == null) {
+      return false;
+    }
+    return typeBinding.isEnum() || isEnumOrSubclass(typeBinding.getSuperclass());
+  }
+
+  /**
+   * Returns true if the given type has a JsConstructor.
+   */
+  public static boolean isJsConstructorClass(ITypeBinding typeBinding) {
+    if (typeBinding == null || !typeBinding.isClass()) {
+      return false;
+    }
+    Collection<IMethodBinding> constructors =
+        Collections2.filter(
+            Arrays.asList(typeBinding.getDeclaredMethods()),
+            new Predicate<IMethodBinding>() {
+              @Override
+              public boolean apply(IMethodBinding method) {
+                return method.isConstructor();
+              }
+            });
+    if (constructors.isEmpty()
+        && Modifier.isPublic(typeBinding.getModifiers())
+        && !typeBinding.isEnum()) {
+      // A public JsType with default constructor is a JsConstructor class.
+      return JsInteropUtils.isJsType(typeBinding);
+    }
+    return !Collections2.filter(
+            constructors,
+            new Predicate<IMethodBinding>() {
+              @Override
+              public boolean apply(IMethodBinding constructor) {
+                return JsInteropUtils.isJsConstructor(constructor);
+              }
+            })
+        .isEmpty();
+  }
+
+  /**
+   * Returns true if the given type has a JsConstructor, or it is a successor of a class that has a
+   * JsConstructor.
+   */
+  public static boolean isOrSubclassesJsConstructorClass(ITypeBinding typeBinding) {
+    if (typeBinding == null) {
+      return false;
+    }
+    return isJsConstructorClass(typeBinding)
+        || isOrSubclassesJsConstructorClass(typeBinding.getSuperclass());
+  }
+
+  /**
+   * Returns the MethodDescriptor for the SAM method in JsFunction interface.
+   */
+  public static MethodDescriptor getJsFunctionMethodDescriptor(ITypeBinding typeBinding) {
+    IMethodBinding samInJsFunctionInterface = getSAMInJsFunctionInterface(typeBinding);
+    return samInJsFunctionInterface == null
+        ? null
+        : createMethodDescriptor(samInJsFunctionInterface.getMethodDeclaration());
+  }
+
+  /**
+   * Returns the MethodDescriptor for the concrete JsFunction method implementation.
+   */
+  public static MethodDescriptor getConcreteJsFunctionMethodDescriptor(ITypeBinding typeBinding) {
+    IMethodBinding samInJsFunctionInterface = getSAMInJsFunctionInterface(typeBinding);
+    if (samInJsFunctionInterface == null) {
+      return null;
+    }
+    if (typeBinding.isInterface()) {
+      return createMethodDescriptor(samInJsFunctionInterface);
+    }
+    for (IMethodBinding methodBinding : typeBinding.getDeclaredMethods()) {
+      if (methodBinding.isSynthetic()) {
+        // skip the synthetic method.
+        continue;
+      }
+      if (methodBinding.overrides(samInJsFunctionInterface)) {
+        return createMethodDescriptor(methodBinding);
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Returns JsFunction method in JsFunction interface.
+   */
+  private static IMethodBinding getSAMInJsFunctionInterface(ITypeBinding typeBinding) {
+    if (!isJsFunctionImplementation(typeBinding) && !JsInteropUtils.isJsFunction(typeBinding)) {
+      return null;
+    }
+    ITypeBinding jsFunctionInterface =
+        typeBinding.isInterface() ? typeBinding : typeBinding.getInterfaces()[0];
+    Preconditions.checkArgument(
+        jsFunctionInterface.getDeclaredMethods().length == 1,
+        "Type %s should have one and only one method.",
+        jsFunctionInterface.getName());
+    return jsFunctionInterface.getDeclaredMethods()[0];
+  }
+
+  public static List<TypeDescriptor> createTypeDescriptors(ITypeBinding[] typeBindings) {
+    List<TypeDescriptor> typeDescriptors = new ArrayList<>();
+    for (ITypeBinding typeBinding : typeBindings) {
+      typeDescriptors.add(createTypeDescriptor(typeBinding));
+    }
+    return typeDescriptors;
+  }
+
+  public static void initTypeDescriptors(AST ast) {
+    TypeDescriptors typeDescriptors = TypeDescriptors.get();
+
+    // initialize primitive types.
+    typeDescriptors.primitiveBoolean =
+        createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.BOOLEAN_TYPE_NAME));
+    typeDescriptors.primitiveByte =
+        createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.BYTE_TYPE_NAME));
+    typeDescriptors.primitiveChar =
+        createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.CHAR_TYPE_NAME));
+    typeDescriptors.primitiveDouble =
+        createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.DOUBLE_TYPE_NAME));
+    typeDescriptors.primitiveFloat =
+        createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.FLOAT_TYPE_NAME));
+    typeDescriptors.primitiveInt =
+        createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.INT_TYPE_NAME));
+    typeDescriptors.primitiveLong =
+        createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.LONG_TYPE_NAME));
+    typeDescriptors.primitiveShort =
+        createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.SHORT_TYPE_NAME));
+    typeDescriptors.primitiveVoid =
+        createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.VOID_TYPE_NAME));
+
+    // initialize boxed types.
+    typeDescriptors.javaLangBoolean =
+        createTypeDescriptor(ast.resolveWellKnownType("java.lang.Boolean"));
+    typeDescriptors.javaLangByte = createTypeDescriptor(ast.resolveWellKnownType("java.lang.Byte"));
+    typeDescriptors.javaLangCharacter =
+        createTypeDescriptor(ast.resolveWellKnownType("java.lang.Character"));
+    typeDescriptors.javaLangDouble =
+        createTypeDescriptor(ast.resolveWellKnownType("java.lang.Double"));
+    typeDescriptors.javaLangFloat =
+        createTypeDescriptor(ast.resolveWellKnownType("java.lang.Float"));
+    typeDescriptors.javaLangInteger =
+        createTypeDescriptor(ast.resolveWellKnownType("java.lang.Integer"));
+    typeDescriptors.javaLangLong = createTypeDescriptor(ast.resolveWellKnownType("java.lang.Long"));
+    typeDescriptors.javaLangShort =
+        createTypeDescriptor(ast.resolveWellKnownType("java.lang.Short"));
+    typeDescriptors.javaLangString =
+        createTypeDescriptor(ast.resolveWellKnownType("java.lang.String"));
+
+    typeDescriptors.javaLangClass =
+        createTypeDescriptor(ast.resolveWellKnownType("java.lang.Class"));
+    typeDescriptors.javaLangObject =
+        createTypeDescriptor(ast.resolveWellKnownType("java.lang.Object"));
+    typeDescriptors.javaLangThrowable =
+        createTypeDescriptor(ast.resolveWellKnownType("java.lang.Throwable"));
+
+    typeDescriptors.javaLangNumber = createJavaLangNumber(ast);
+    typeDescriptors.javaLangComparable = createJavaLangComparable(ast);
+    typeDescriptors.javaLangCharSequence = createJavaLangCharSequence(ast);
+
+    typeDescriptors.unknownType =
+        TypeDescriptors.createExactly(
+            Collections.emptyList(),
+            Lists.newArrayList("$$unknown$$"),
+            false,
+            Collections.emptyList());
+
+    initBoxedPrimitiveTypeMapping(typeDescriptors);
+  }
+
+  public static void initBoxedPrimitiveTypeMapping(TypeDescriptors typeDescriptors) {
+    TypeDescriptors.addBoxedTypeMapping(
+        typeDescriptors.primitiveBoolean, typeDescriptors.javaLangBoolean);
+    TypeDescriptors.addBoxedTypeMapping(
+        typeDescriptors.primitiveByte, typeDescriptors.javaLangByte);
+    TypeDescriptors.addBoxedTypeMapping(
+        typeDescriptors.primitiveChar, typeDescriptors.javaLangCharacter);
+    TypeDescriptors.addBoxedTypeMapping(
+        typeDescriptors.primitiveDouble, typeDescriptors.javaLangDouble);
+    TypeDescriptors.addBoxedTypeMapping(
+        typeDescriptors.primitiveFloat, typeDescriptors.javaLangFloat);
+    TypeDescriptors.addBoxedTypeMapping(
+        typeDescriptors.primitiveInt, typeDescriptors.javaLangInteger);
+    TypeDescriptors.addBoxedTypeMapping(
+        typeDescriptors.primitiveLong, typeDescriptors.javaLangLong);
+    TypeDescriptors.addBoxedTypeMapping(
+        typeDescriptors.primitiveShort, typeDescriptors.javaLangShort);
+  }
+
+  /**
+   * Create TypeDescriptor for java.lang.Number, which is not a well known type by JDT.
+   */
+  public static TypeDescriptor createJavaLangNumber(AST ast) {
+    ITypeBinding javaLangInteger = ast.resolveWellKnownType("java.lang.Integer");
+    checkNotNull(javaLangInteger);
+    return createTypeDescriptor(javaLangInteger.getSuperclass());
+  }
+
+  /**
+   * Create TypeDescriptor for java.lang.Comparable, which is not a well known type by JDT.
+   */
+  public static TypeDescriptor createJavaLangComparable(AST ast) {
+    ITypeBinding javaLangInteger = ast.resolveWellKnownType("java.lang.Integer");
+    checkNotNull(javaLangInteger);
+    ITypeBinding[] interfaces = javaLangInteger.getInterfaces();
+    checkArgument(interfaces.length == 1);
+    return createTypeDescriptor(interfaces[0].getErasure());
+  }
+
+  /**
+   * Create TypeDescriptor for java.lang.CharSequence, which is not a well known type by JDT.
+   */
+  private static TypeDescriptor createJavaLangCharSequence(AST ast) {
+    ITypeBinding javaLangString = ast.resolveWellKnownType("java.lang.String");
+    checkNotNull(javaLangString);
+    ITypeBinding[] interfaces = javaLangString.getInterfaces();
+    checkArgument(interfaces.length == 3);
+    for (ITypeBinding i : interfaces) {
+      if (i.getBinaryName().equals("java.lang.CharSequence")) {
+        return createTypeDescriptor(i);
+      }
+    }
+    return null;
+  }
+
+  public static TypeDescriptor createLambda(
+      final TypeDescriptor enclosingClassTypeDescriptor,
+      String lambdaBinaryName,
+      final ITypeBinding lambdaInterfaceBinding) {
+    final TypeDescriptor[] self = new TypeDescriptor[1];
+
+    MethodDescriptorFactory concreteJsFunctionMethodDescriptorFactory =
+        new MethodDescriptorFactory() {
+          @Override
+          public MethodDescriptor create() {
+            return getConcreteJsFunctionMethodDescriptor(lambdaInterfaceBinding);
+          }
+        };
+    MethodDescriptorFactory jsFunctionMethodDescriptorFactory =
+        new MethodDescriptorFactory() {
+          @Override
+          public MethodDescriptor create() {
+            return getJsFunctionMethodDescriptor(lambdaInterfaceBinding);
+          }
+        };
+    TypeDescriptorFactory rawTypeDescriptorFactory =
+        new TypeDescriptorFactory() {
+          @Override
+          public TypeDescriptor create() {
+            return TypeDescriptors.replaceTypeArgumentDescriptors(
+                self[0], Collections.<TypeDescriptor>emptyList());
+          }
+        };
+    TypeDescriptorFactory superTypeDescriptorFactory =
+        new TypeDescriptorFactory() {
+          @Override
+          public TypeDescriptor create() {
+            return TypeDescriptors.get().javaLangObject;
+          }
+        };
+    TypeDescriptorFactory enclosingTypeDescriptorFactory =
+        new TypeDescriptorFactory() {
+          @Override
+          public TypeDescriptor create() {
+            return enclosingClassTypeDescriptor;
+          }
+        };
+    TypeDescriptorsFactory interfacesDescriptorsFactory =
+        new TypeDescriptorsFactory() {
+          @Override
+          public ImmutableList<TypeDescriptor> create() {
+            return ImmutableList.of(createTypeDescriptor(lambdaInterfaceBinding));
+          }
+        };
+
+    // Compute these first since they're reused in other calculations.
+    List<String> classComponents =
+        ImmutableList.copyOf(
+            Iterables.concat(
+                enclosingClassTypeDescriptor.getClassComponents(),
+                Arrays.asList(lambdaBinaryName)));
+    List<String> packageComponents = enclosingClassTypeDescriptor.getPackageComponents();
+    String simpleName = Iterables.getLast(classComponents);
+
+    // Compute everything else.
+    String binaryName =
+        Joiner.on(".")
+            .join(
+                Iterables.concat(
+                    packageComponents,
+                    Collections.singleton(Joiner.on("$").join(classComponents))));
+    String packageName = Joiner.on(".").join(packageComponents);
+    String sourceName = Joiner.on(".").join(Iterables.concat(packageComponents, classComponents));
+
+    List<TypeDescriptor> typeArgumentDescriptors =
+        new ArrayList<>(createTypeDescriptor(lambdaInterfaceBinding).getAllTypeVariables());
+    TypeDescriptor typeDescriptor =
+        new TypeDescriptor.Builder()
+            .setBinaryName(binaryName)
+            .setClassComponents(classComponents)
+            .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
+            .setEnclosingTypeDescriptorFactory(enclosingTypeDescriptorFactory)
+            .setIsInstanceNestedClass(true)
+            .setIsJsFunctionImplementation(JsInteropUtils.isJsFunction(lambdaInterfaceBinding))
+            .setIsLocal(true)
+            .setIsNullable(true)
+            .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)
+            .setPackageComponents(packageComponents)
+            .setPackageName(packageName)
+            .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
+            .setSimpleName(simpleName)
+            .setSourceName(sourceName)
+            .setInterfacesTypeDescriptorsFactory(interfacesDescriptorsFactory)
+            .setSuperTypeDescriptorFactory(superTypeDescriptorFactory)
+            .setTypeArgumentDescriptors(typeArgumentDescriptors)
+            .setVisibility(Visibility.PRIVATE)
+            .build();
+    self[0] = typeDescriptor;
+
+    return typeDescriptor;
+  }
+
   private JdtUtils() {}
+
+  // This is only used by TypeProxyUtils, and cannot be used elsewhere. Because to create a
+  // TypeDescriptor from a TypeBinding, it should go through the path to check array type.
+  public static TypeDescriptor createForType(
+      final ITypeBinding typeBinding, List<TypeDescriptor> overrideTypeArgumentDescriptors) {
+    checkArgument(!typeBinding.isArray());
+
+    PackageInfoCache packageInfoCache = PackageInfoCache.get();
+
+    ITypeBinding topLevelTypeBinding = toTopLevelTypeBinding(typeBinding);
+    if (topLevelTypeBinding.isFromSource()) {
+      // Let the PackageInfoCache know that this class is Source, otherwise it would have to rummage
+      // around in the class path to figure it out and it might even come up with the wrong answer
+      // for example if this class has also been globbed into some other library that is a
+      // dependency of this one.
+      PackageInfoCache.get().markAsSource(topLevelTypeBinding.getBinaryName());
+    }
+
+    MethodDescriptorFactory concreteJsFunctionMethodDescriptorFactory =
+        new MethodDescriptorFactory() {
+          @Override
+          public MethodDescriptor create() {
+            return getConcreteJsFunctionMethodDescriptor(typeBinding);
+          }
+        };
+    TypeDescriptorFactory enclosingTypeDescriptorFactory =
+        new TypeDescriptorFactory() {
+          @Override
+          public TypeDescriptor create() {
+            return createTypeDescriptor(typeBinding.getDeclaringClass());
+          }
+        };
+    MethodDescriptorFactory jsFunctionMethodDescriptorFactory =
+        new MethodDescriptorFactory() {
+          @Override
+          public MethodDescriptor create() {
+            return getJsFunctionMethodDescriptor(typeBinding);
+          }
+        };
+    TypeDescriptorFactory rawTypeDescriptorFactory =
+        new TypeDescriptorFactory() {
+          @Override
+          public TypeDescriptor create() {
+            TypeDescriptor rawTypeDescriptor = createTypeDescriptor(typeBinding.getErasure());
+            if (rawTypeDescriptor.isParameterizedType()) {
+              return TypeDescriptors.replaceTypeArgumentDescriptors(
+                  rawTypeDescriptor, ImmutableList.<TypeDescriptor>of());
+            }
+            return rawTypeDescriptor;
+          }
+        };
+    TypeDescriptorFactory superTypeDescriptorFactory =
+        new TypeDescriptorFactory() {
+          @Override
+          public TypeDescriptor create() {
+            return createTypeDescriptorWithNullability(
+                typeBinding.getSuperclass(),
+                new IAnnotationBinding[0],
+                getTypeDefaultNullability(typeBinding));
+          }
+        };
+    TypeDescriptorsFactory interfacesDescriptorsFactory =
+        new TypeDescriptorsFactory() {
+          @Override
+          public ImmutableList<TypeDescriptor> create() {
+            ImmutableList.Builder<TypeDescriptor> typeDescriptors = ImmutableList.builder();
+            for (ITypeBinding interfaceBinding : typeBinding.getInterfaces()) {
+              TypeDescriptor interfaceType =
+                  createTypeDescriptorWithNullability(
+                      interfaceBinding,
+                      new IAnnotationBinding[0],
+                      getTypeDefaultNullability(typeBinding));
+              typeDescriptors.add(interfaceType);
+            }
+            return typeDescriptors.build();
+          }
+        };
+
+    // Compute these first since they're reused in other calculations.
+    List<String> classComponents = getClassComponents(typeBinding);
+    List<String> packageComponents = getPackageComponents(typeBinding);
+    boolean isPrimitive = typeBinding.isPrimitive();
+    boolean isTypeVariable = typeBinding.isTypeVariable();
+    IAnnotationBinding jsTypeAnnotation = JsInteropAnnotationUtils.getJsTypeAnnotation(typeBinding);
+    String simpleName = Iterables.getLast(classComponents);
+
+    // Compute everything else.
+    String binaryName =
+        Joiner.on(".")
+            .join(
+                Iterables.concat(
+                    packageComponents,
+                    Collections.singleton(Joiner.on("$").join(classComponents))));
+
+    if (isTypeVariable) {
+      binaryName = binaryName + ":" + typeBinding.getErasure().getBinaryName();
+    }
+
+    boolean isNative = JsInteropAnnotationUtils.isNative(jsTypeAnnotation);
+    boolean isNullable = !typeBinding.isPrimitive() && !typeBinding.isTypeVariable();
+    String jsName = JsInteropAnnotationUtils.getJsName(jsTypeAnnotation);
+    String jsNamespace = null;
+
+    // If a package-info file has specified a JsPackage namespace then it is sugar for setting the
+    // jsNamespace of all top level types in that package.
+    boolean isTopLevelType = typeBinding.getDeclaringClass() == null;
+    if (isTopLevelType) {
+      String jsPackageNamespace =
+          packageInfoCache.getJsNamespace(toTopLevelTypeBinding(typeBinding).getBinaryName());
+      if (jsPackageNamespace != null) {
+        jsNamespace = jsPackageNamespace;
+      }
+    }
+
+    String jsTypeNamespace = JsInteropAnnotationUtils.getJsNamespace(jsTypeAnnotation);
+    if (jsTypeNamespace != null) {
+      jsNamespace = jsTypeNamespace;
+    }
+
+    String packageName = Joiner.on(".").join(packageComponents);
+    String sourceName = Joiner.on(".").join(Iterables.concat(packageComponents, classComponents));
+    List<TypeDescriptor> typeArgumentDescriptors =
+        overrideTypeArgumentDescriptors != null
+            ? overrideTypeArgumentDescriptors
+            : getTypeArgumentTypeDescriptors(typeBinding);
+
+    // Compute these even later
+    boolean isExtern = isNative && JsInteropUtils.isGlobal(jsNamespace);
+    return new TypeDescriptor.Builder()
+        .setBinaryName(binaryName)
+        .setClassComponents(classComponents)
+        .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
+        .setEnclosingTypeDescriptorFactory(enclosingTypeDescriptorFactory)
+        .setInterfacesTypeDescriptorsFactory(interfacesDescriptorsFactory)
+        .setIsEnumOrSubclass(isEnumOrSubclass(typeBinding))
+        .setIsExtern(isExtern)
+        .setIsInstanceMemberClass(isInstanceMemberClass(typeBinding))
+        .setIsInstanceNestedClass(isInstanceNestedClass(typeBinding))
+        .setIsInterface(typeBinding.isInterface())
+        .setIsJsFunction(JsInteropUtils.isJsFunction(typeBinding))
+        .setIsJsFunctionImplementation(isJsFunctionImplementation(typeBinding))
+        .setIsJsType(jsTypeAnnotation != null)
+        .setIsLocal(isLocal(typeBinding))
+        .setIsNative(isNative)
+        .setIsNullable(isNullable)
+        .setIsPrimitive(isPrimitive)
+        .setIsRawType(typeBinding.isRawType())
+        .setIsTypeVariable(isTypeVariable)
+        .setIsWildCard(typeBinding.isWildcardType() || typeBinding.isCapture())
+        .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)
+        .setJsName(jsName)
+        .setJsNamespace(jsNamespace)
+        .setPackageComponents(packageComponents)
+        .setPackageName(packageName)
+        .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
+        .setSimpleName(simpleName)
+        .setSourceName(sourceName)
+        .setIsOrSubclassesJsConstructorClass(isOrSubclassesJsConstructorClass(typeBinding))
+        .setSuperTypeDescriptorFactory(superTypeDescriptorFactory)
+        .setTypeArgumentDescriptors(typeArgumentDescriptors)
+        .setVisibility(getVisibility(typeBinding))
+        .build();
+  }
 }

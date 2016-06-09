@@ -16,7 +16,6 @@
 package com.google.j2cl.frontend;
 
 import com.google.j2cl.ast.JavaType;
-import com.google.j2cl.ast.JdtBindingUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
@@ -48,15 +47,14 @@ public class UnimplementedMethodsCreator {
 
     for (IMethodBinding methodBinding : JdtUtils.getUnimplementedMethodBindings(typeBinding)) {
       unimplementedMethodBindingBySignature.put(
-          JdtBindingUtils.getMethodSignature(methodBinding), methodBinding);
+          JdtUtils.getMethodSignature(methodBinding), methodBinding);
     }
 
     if (typeBinding.getSuperclass() != null) {
       for (IMethodBinding methodBinding :
           JdtUtils.getUnimplementedMethodBindings(typeBinding.getSuperclass())) {
         // Do not stub methods that would be stubbed anyway in the supertypes.
-        unimplementedMethodBindingBySignature.remove(
-            JdtBindingUtils.getMethodSignature(methodBinding));
+        unimplementedMethodBindingBySignature.remove(JdtUtils.getMethodSignature(methodBinding));
       }
     }
 
@@ -98,10 +96,10 @@ public class UnimplementedMethodsCreator {
       Variable parameter =
           new Variable(
               "arg" + i,
-              JdtBindingUtils.createTypeDescriptorWithNullability(
+              JdtUtils.createTypeDescriptorWithNullability(
                   methodBinding.getParameterTypes()[i],
                   methodBinding.getParameterAnnotations(i),
-                  JdtBindingUtils.getTypeDefaultNullability(methodBinding.getDeclaringClass())),
+                  JdtUtils.getTypeDefaultNullability(methodBinding.getDeclaringClass())),
               false,
               true);
       parameters.add(parameter);
@@ -111,7 +109,7 @@ public class UnimplementedMethodsCreator {
         .setParameters(parameters)
         .setIsAbstract(true)
         .setIsOverride(true)
-        .setIsFinal(JdtBindingUtils.isFinal(methodBinding))
+        .setIsFinal(JdtUtils.isFinal(methodBinding))
         .build();
   }
 }

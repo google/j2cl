@@ -17,7 +17,7 @@ package com.google.j2cl.tools.jsni;
 
 import com.google.common.collect.Multimap;
 import com.google.common.io.Files;
-import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.frontend.JdtUtils;
 
 import org.eclipse.jdt.core.dom.CompilationUnit;
 
@@ -32,7 +32,7 @@ public class NativeMethodExtractor {
 
   public static Multimap<String, JsniMethod> getJsniMethodsByType(
       String fileName, CompilationUnit compilationUnit) {
-    TypeDescriptors.init(compilationUnit.getAST());
+    JdtUtils.initTypeDescriptors(compilationUnit.getAST());
     JsniMethodVisitor methodVisitor = new JsniMethodVisitor(readJavaCode(fileName));
     compilationUnit.accept(methodVisitor);
 

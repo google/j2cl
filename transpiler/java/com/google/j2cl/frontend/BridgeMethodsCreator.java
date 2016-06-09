@@ -25,8 +25,6 @@ import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.JavaType;
-import com.google.j2cl.ast.JdtBindingUtils;
-import com.google.j2cl.ast.JdtBindingUtils.Nullability;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.ManglingNameUtils;
@@ -260,17 +258,16 @@ public class BridgeMethodsCreator {
       ITypeBinding typeBinding, IMethodBinding methodBinding, ITypeBinding returnType) {
     checkArgument(!typeBinding.isInterface());
 
-    Nullability defaultNullability =
-        JdtBindingUtils.getTypeDefaultNullability(methodBinding.getDeclaringClass());
+    JdtUtils.Nullability defaultNullability =
+        JdtUtils.getTypeDefaultNullability(methodBinding.getDeclaringClass());
     TypeDescriptor enclosingClassTypeDescriptor =
-        JdtBindingUtils.createTypeDescriptorWithNullability(
+        JdtUtils.createTypeDescriptorWithNullability(
             typeBinding, new IAnnotationBinding[0], defaultNullability);
     TypeDescriptor returnTypeDescriptor =
-        JdtBindingUtils.createTypeDescriptorWithNullability(
+        JdtUtils.createTypeDescriptorWithNullability(
             returnType, new IAnnotationBinding[0], defaultNullability);
 
-    MethodDescriptor originalMethodDescriptor =
-        JdtBindingUtils.createMethodDescriptor(methodBinding);
+    MethodDescriptor originalMethodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
 
     return MethodDescriptor.Builder.from(originalMethodDescriptor)
         .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
@@ -329,10 +326,10 @@ public class BridgeMethodsCreator {
       Variable parameter =
           new Variable(
               "arg" + i,
-              JdtBindingUtils.createTypeDescriptorWithNullability(
+              JdtUtils.createTypeDescriptorWithNullability(
                   bridgeMethod.getParameterTypes()[i],
                   bridgeMethod.getParameterAnnotations(i),
-                  JdtBindingUtils.getTypeDefaultNullability(targetMethod.getDeclaringClass())),
+                  JdtUtils.getTypeDefaultNullability(targetMethod.getDeclaringClass())),
               false,
               true);
       parameters.add(parameter);

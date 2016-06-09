@@ -17,7 +17,6 @@ package com.google.j2cl.frontend;
 
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.JavaType;
-import com.google.j2cl.ast.JdtBindingUtils;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -57,8 +56,7 @@ public class DefaultMethodsResolver {
         implementingClass != null;
         implementingClass = implementingClass.getSuperclass()) {
       for (IMethodBinding implementedMethod : implementingClass.getDeclaredMethods()) {
-        applicableDefaultMethodsBySignature.remove(
-            JdtBindingUtils.getMethodSignature(implementedMethod));
+        applicableDefaultMethodsBySignature.remove(JdtUtils.getMethodSignature(implementedMethod));
       }
     }
 
@@ -72,10 +70,10 @@ public class DefaultMethodsResolver {
     Map<String, IMethodBinding> applicableDefaultMethodsBySignature = new LinkedHashMap<>();
     for (ITypeBinding interfaceBinding : superInterfaces) {
       for (IMethodBinding methodBinding : interfaceBinding.getDeclaredMethods()) {
-        if (!JdtBindingUtils.isDefaultMethod(methodBinding)) {
+        if (!JdtUtils.isDefaultMethod(methodBinding)) {
           continue;
         }
-        String signature = JdtBindingUtils.getMethodSignature(methodBinding);
+        String signature = JdtUtils.getMethodSignature(methodBinding);
         if (applicableDefaultMethodsBySignature.containsKey(signature)) {
           continue;
         }
@@ -119,12 +117,12 @@ public class DefaultMethodsResolver {
       JavaType type, Map<String, IMethodBinding> applicableDefaultMethodsBySignature) {
     // Finally implement the methods by as forwarding stubs to the actual interface method.
     for (IMethodBinding method : applicableDefaultMethodsBySignature.values()) {
-      MethodDescriptor targetMethod = JdtBindingUtils.createMethodDescriptor(method);
+      MethodDescriptor targetMethod = JdtUtils.createMethodDescriptor(method);
       Method defaultForwardingMethod =
           AstUtils.createStaticForwardingMethod(
               targetMethod, type.getDescriptor(), "Default method forwarding stub.");
       type.addMethod(defaultForwardingMethod);
-      if (JdtBindingUtils.isOrOverridesJsMember(method)) {
+      if (JdtUtils.isOrOverridesJsMember(method)) {
         type.addMethod(
             AstUtils.createForwardingMethod(
                 MethodDescriptor.Builder.from(defaultForwardingMethod.getDescriptor())

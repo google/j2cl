@@ -54,7 +54,6 @@ import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JavaType.Kind;
-import com.google.j2cl.ast.JdtBindingUtils;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsInteropUtils;
 import com.google.j2cl.ast.LabeledStatement;
@@ -154,7 +153,7 @@ public class CompilationUnitBuilder {
     @SuppressWarnings({"cast", "unchecked"})
     private CompilationUnit convert(
         String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
-      TypeDescriptors.init(jdtCompilationUnit.getAST());
+      JdtUtils.initTypeDescriptors(jdtCompilationUnit.getAST());
       this.jdtCompilationUnit = jdtCompilationUnit;
 
       currentSourceFile = sourceFilePath;
@@ -381,7 +380,7 @@ public class CompilationUnitBuilder {
         Variable j2clParameter =
             JdtUtils.createVariable(
                 parameterBinding,
-                JdtBindingUtils.getTypeDefaultNullability(
+                JdtUtils.getTypeDefaultNullability(
                     methodDeclaration.resolveBinding().getDeclaringClass()));
         parameters.add(j2clParameter);
         variableByJdtBinding.put(parameterBinding, j2clParameter);
@@ -397,9 +396,9 @@ public class CompilationUnitBuilder {
               .setMethodDescriptor(JdtUtils.createMethodDescriptor(methodBinding))
               .setParameters(parameters)
               .addStatements(body.getStatements())
-              .setIsAbstract(JdtBindingUtils.isAbstract(methodBinding))
+              .setIsAbstract(JdtUtils.isAbstract(methodBinding))
               .setIsOverride(JdtUtils.isJsOverride(methodBinding))
-              .setIsFinal(JdtBindingUtils.isFinal(methodBinding));
+              .setIsFinal(JdtUtils.isFinal(methodBinding));
       for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
         methodBuilder.setParameterOptional(i, JsInteropUtils.isJsOptional(methodBinding, i));
       }
@@ -1098,8 +1097,7 @@ public class CompilationUnitBuilder {
 
       TypeDescriptor enclosingType = JdtUtils.createTypeDescriptor(enclosingClassTypeBinding);
       TypeDescriptor lambdaTypeDescriptor =
-          TypeDescriptors.createLambda(
-              enclosingType, lambdaBinaryName, functionalInterfaceTypeBinding);
+          JdtUtils.createLambda(enclosingType, lambdaBinaryName, functionalInterfaceTypeBinding);
       JavaType lambdaType = new JavaType(Kind.CLASS, Visibility.PRIVATE, lambdaTypeDescriptor);
       pushType(lambdaType);
 
@@ -1377,7 +1375,7 @@ public class CompilationUnitBuilder {
       if (methodInvocation.getExpression() == null) {
         // No qualifier specified.
         IMethodBinding methodBinding = methodInvocation.resolveMethodBinding();
-        if (JdtBindingUtils.isStatic(methodBinding)) {
+        if (JdtUtils.isStatic(methodBinding)) {
           return null;
         } else { // Not static so has to be a reference to 'this
           return convertOuterClassReference(
@@ -1553,10 +1551,10 @@ public class CompilationUnitBuilder {
       Expression expression =
           statement.getExpression() == null ? null : convert(statement.getExpression());
       TypeDescriptor returnTypeDescriptor =
-          JdtBindingUtils.createTypeDescriptorWithNullability(
+          JdtUtils.createTypeDescriptorWithNullability(
               currentMethodBinding.getReturnType(),
               currentMethodBinding.getAnnotations(),
-              JdtBindingUtils.getTypeDefaultNullability(currentMethodBinding.getDeclaringClass()));
+              JdtUtils.getTypeDefaultNullability(currentMethodBinding.getDeclaringClass()));
       return new ReturnStatement(expression, returnTypeDescriptor);
     }
 
@@ -1868,7 +1866,7 @@ public class CompilationUnitBuilder {
       Variable variable =
           JdtUtils.createVariable(
               variableBinding,
-              JdtBindingUtils.getTypeDefaultNullability(
+              JdtUtils.getTypeDefaultNullability(
                   JdtUtils.findCurrentTypeBinding(variableDeclarationFragment)));
       if (!variable.getTypeDescriptor().isTypeVariable()
           && !variable.getTypeDescriptor().isPrimitive()) {
@@ -1937,15 +1935,15 @@ public class CompilationUnitBuilder {
         return null;
       }
       Kind kind = JdtUtils.getKindFromTypeBinding(typeBinding);
-      Visibility visibility = JdtBindingUtils.getVisibility(typeBinding);
+      Visibility visibility = JdtUtils.getVisibility(typeBinding);
       TypeDescriptor typeDescriptor = JdtUtils.createTypeDescriptor(typeBinding);
       JavaType type =
           typeBinding.isAnonymous()
               ? new AnonymousJavaType(kind, visibility, typeDescriptor)
               : new JavaType(kind, visibility, typeDescriptor);
 
-      type.setStatic(JdtBindingUtils.isStatic(typeBinding));
-      type.setAbstract(JdtBindingUtils.isAbstract(typeBinding));
+      type.setStatic(JdtUtils.isStatic(typeBinding));
+      type.setAbstract(JdtUtils.isAbstract(typeBinding));
       type.setAnonymous(typeBinding.isAnonymous());
       return type;
     }
