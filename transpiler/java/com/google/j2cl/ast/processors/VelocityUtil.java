@@ -1,4 +1,4 @@
-package com.google.j2cl.common;
+package com.google.j2cl.ast.processors;
 
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
@@ -7,7 +7,7 @@ import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 /**
  * Utility methods for using Apache Velocity.
  */
-public class VelocityUtil {
+class VelocityUtil {
   private static final String CLASSPATH_RESOURCE_LOADER_CLASS = "classpath.resource.loader.class";
 
   /**
