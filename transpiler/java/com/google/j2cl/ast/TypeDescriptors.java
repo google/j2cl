@@ -25,7 +25,7 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.j2cl.ast.TypeDescriptor.TypeDescriptorFactory;
+import com.google.j2cl.ast.TypeDescriptor.DescriptorFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -262,25 +262,19 @@ public class TypeDescriptors {
   }
 
   public static TypeDescriptor createUnion(final List<TypeDescriptor> unionedTypeDescriptors) {
-    final TypeDescriptor[] self = new TypeDescriptor[1];
-
-    TypeDescriptor newTypeDescriptor =
-        new TypeDescriptor.Builder()
-            .setBinaryName(createUnionBinaryName(unionedTypeDescriptors))
-            .setIsNullable(true)
-            .setIsUnion(true)
-            .setRawTypeDescriptorFactory(
-                new TypeDescriptorFactory() {
-                  @Override
-                  public TypeDescriptor create() {
-                    return self[0];
-                  }
-                })
-            .setUnionedTypeDescriptors(unionedTypeDescriptors)
-            .build();
-    self[0] = newTypeDescriptor;
-
-    return newTypeDescriptor;
+    return new TypeDescriptor.Builder()
+        .setBinaryName(createUnionBinaryName(unionedTypeDescriptors))
+        .setIsNullable(true)
+        .setIsUnion(true)
+        .setRawTypeDescriptorFactory(
+            new DescriptorFactory<TypeDescriptor>() {
+              @Override
+              public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
+                return selfTypeDescriptor;
+              }
+            })
+        .setUnionedTypeDescriptors(unionedTypeDescriptors)
+        .build();
   }
 
   public static TypeDescriptor createExactly(
@@ -309,12 +303,11 @@ public class TypeDescriptors {
       final boolean isRaw,
       final boolean isNative,
       final boolean isJsType) {
-    TypeDescriptorFactory rawTypeDescriptorFactory =
-        new TypeDescriptorFactory() {
+    DescriptorFactory<TypeDescriptor> rawTypeDescriptorFactory =
+        new DescriptorFactory<TypeDescriptor>() {
           @Override
-          public TypeDescriptor create() {
+          public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
             List<TypeDescriptor> emptyTypeArgumentDescriptors = Collections.emptyList();
-
             return createExactly(
                 packageComponents,
                 classComponents,
@@ -443,13 +436,11 @@ public class TypeDescriptors {
     if (dimensions == 0) {
       return leafTypeDescriptor;
     }
-    final TypeDescriptor[] self = new TypeDescriptor[1];
-
-    TypeDescriptorFactory rawTypeDescriptorFactory =
-        new TypeDescriptorFactory() {
+    DescriptorFactory<TypeDescriptor> rawTypeDescriptorFactory =
+        new DescriptorFactory<TypeDescriptor>() {
           @Override
-          public TypeDescriptor create() {
-            return self[0];
+          public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
+            return selfTypeDescriptor;
           }
         };
 
@@ -465,26 +456,20 @@ public class TypeDescriptors {
     String packageName = leafTypeDescriptor.getPackageName();
     String sourceName = leafTypeDescriptor.getSourceName() + arraySuffix;
     List<TypeDescriptor> typeArgumentDescriptors = Collections.emptyList();
-
-    TypeDescriptor typeDescriptor =
-        new TypeDescriptor.Builder()
-            .setBinaryName(binaryName)
-            .setComponentTypeDescriptor(componentTypeDescriptor)
-            .setDimensions(dimensions)
-            .setIsArray(true)
-            .setIsNullable(isNullable)
-            .setIsRaw(leafTypeDescriptor.isRaw())
-            .setLeafTypeDescriptor(leafTypeDescriptor)
-            .setPackageName(packageName)
-            .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
-            .setSimpleName(simpleName)
-            .setSourceName(sourceName)
-            .setTypeArgumentDescriptors(typeArgumentDescriptors)
-            .build();
-
-    self[0] = typeDescriptor;
-
-    return typeDescriptor;
+    return new TypeDescriptor.Builder()
+        .setBinaryName(binaryName)
+        .setComponentTypeDescriptor(componentTypeDescriptor)
+        .setDimensions(dimensions)
+        .setIsArray(true)
+        .setIsNullable(isNullable)
+        .setIsRaw(leafTypeDescriptor.isRaw())
+        .setLeafTypeDescriptor(leafTypeDescriptor)
+        .setPackageName(packageName)
+        .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
+        .setSimpleName(simpleName)
+        .setSourceName(sourceName)
+        .setTypeArgumentDescriptors(typeArgumentDescriptors)
+        .build();
   }
 
   public static Expression getDefaultValue(TypeDescriptor typeDescriptor) {

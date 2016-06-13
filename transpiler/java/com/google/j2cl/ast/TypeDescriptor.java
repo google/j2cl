@@ -75,24 +75,24 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       newTypeDescriptor.classComponents = typeDescriptor.getClassComponents();
       newTypeDescriptor.componentTypeDescriptor = typeDescriptor.getComponentTypeDescriptor();
       newTypeDescriptor.concreteJsFunctionMethodDescriptorFactory =
-          new MethodDescriptorFactory() {
+          new DescriptorFactory<MethodDescriptor>() {
             @Override
-            public MethodDescriptor create() {
+            public MethodDescriptor create(TypeDescriptor selfTypeDescriptor) {
               return typeDescriptor.getConcreteJsFunctionMethodDescriptor();
             }
           };
       newTypeDescriptor.dimensions = typeDescriptor.getDimensions();
       newTypeDescriptor.enclosingTypeDescriptorFactory =
-          new TypeDescriptorFactory() {
+          new DescriptorFactory<TypeDescriptor>() {
             @Override
-            public TypeDescriptor create() {
+            public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
               return typeDescriptor.getEnclosingTypeDescriptor();
             }
           };
       newTypeDescriptor.interfacesTypeDescriptorsFactory =
-          new TypeDescriptorsFactory() {
+          new DescriptorFactory<List<TypeDescriptor>>() {
             @Override
-            public List<TypeDescriptor> create() {
+            public List<TypeDescriptor> create(TypeDescriptor selfTypeDescriptor) {
               return typeDescriptor.getInterfacesTypeDescriptors();
             }
           };
@@ -116,9 +116,9 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       newTypeDescriptor.isUnion = typeDescriptor.isUnion();
       newTypeDescriptor.isWildCard = typeDescriptor.isWildCard();
       newTypeDescriptor.jsFunctionMethodDescriptorFactory =
-          new MethodDescriptorFactory() {
+          new DescriptorFactory<MethodDescriptor>() {
             @Override
-            public MethodDescriptor create() {
+            public MethodDescriptor create(TypeDescriptor selfTypeDescriptor) {
               return typeDescriptor.getJsFunctionMethodDescriptor();
             }
           };
@@ -128,9 +128,9 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       newTypeDescriptor.packageComponents = typeDescriptor.getPackageComponents();
       newTypeDescriptor.packageName = typeDescriptor.getPackageName();
       newTypeDescriptor.rawTypeDescriptorFactory =
-          new TypeDescriptorFactory() {
+          new DescriptorFactory<TypeDescriptor>() {
             @Override
-            public TypeDescriptor create() {
+            public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
               return typeDescriptor.getRawTypeDescriptor();
             }
           };
@@ -139,9 +139,9 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       newTypeDescriptor.isOrSubclassesJsConstructorClass =
           typeDescriptor.isOrSubclassesJsConstructorClass();
       newTypeDescriptor.superTypeDescriptorFactory =
-          new TypeDescriptorFactory() {
+          new DescriptorFactory<TypeDescriptor>() {
             @Override
-            public TypeDescriptor create() {
+            public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
               return typeDescriptor.getSuperTypeDescriptor();
             }
           };
@@ -174,7 +174,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     }
 
     public Builder setConcreteJsFunctionMethodDescriptorFactory(
-        MethodDescriptorFactory concreteJsFunctionMethodDescriptorFactory) {
+        DescriptorFactory<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory) {
       newTypeDescriptor.concreteJsFunctionMethodDescriptorFactory =
           concreteJsFunctionMethodDescriptorFactory;
       return this;
@@ -186,13 +186,13 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     }
 
     public Builder setEnclosingTypeDescriptorFactory(
-        TypeDescriptorFactory enclosingTypeDescriptorFactory) {
+        DescriptorFactory<TypeDescriptor> enclosingTypeDescriptorFactory) {
       newTypeDescriptor.enclosingTypeDescriptorFactory = enclosingTypeDescriptorFactory;
       return this;
     }
 
     public Builder setInterfacesTypeDescriptorsFactory(
-        TypeDescriptorsFactory interfacesTypeDescriptorsFactory) {
+        DescriptorFactory<List<TypeDescriptor>> interfacesTypeDescriptorsFactory) {
       newTypeDescriptor.interfacesTypeDescriptorsFactory = interfacesTypeDescriptorsFactory;
       return this;
     }
@@ -293,7 +293,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     }
 
     public Builder setJsFunctionMethodDescriptorFactory(
-        MethodDescriptorFactory jsFunctionMethodDescriptorFactory) {
+        DescriptorFactory<MethodDescriptor> jsFunctionMethodDescriptorFactory) {
       newTypeDescriptor.jsFunctionMethodDescriptorFactory = jsFunctionMethodDescriptorFactory;
       return this;
     }
@@ -323,7 +323,8 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       return this;
     }
 
-    public Builder setRawTypeDescriptorFactory(TypeDescriptorFactory rawTypeDescriptorFactory) {
+    public Builder setRawTypeDescriptorFactory(
+        DescriptorFactory<TypeDescriptor> rawTypeDescriptorFactory) {
       newTypeDescriptor.rawTypeDescriptorFactory = rawTypeDescriptorFactory;
       return this;
     }
@@ -343,7 +344,8 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       return this;
     }
 
-    public Builder setSuperTypeDescriptorFactory(TypeDescriptorFactory superTypeDescriptorFactory) {
+    public Builder setSuperTypeDescriptorFactory(
+        DescriptorFactory<TypeDescriptor> superTypeDescriptorFactory) {
       newTypeDescriptor.superTypeDescriptorFactory = superTypeDescriptorFactory;
       return this;
     }
@@ -365,34 +367,21 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   }
 
   /**
-   * Enables delayed MethodDescriptor creation.
+   * References to some descriptors need to be deferred in some cases since it will cause infinite
+   * loops.
    */
-  public interface MethodDescriptorFactory {
-    MethodDescriptor create();
-  }
-
-  /**
-   * Enables delayed TypeDescriptor creation.
-   */
-  public interface TypeDescriptorFactory {
-    TypeDescriptor create();
-  }
-
-  /**
-   * Enables delayed TypeDescriptor creation.
-   */
-  public interface TypeDescriptorsFactory {
-    List<TypeDescriptor> create();
+  public interface DescriptorFactory<T> {
+    T create(TypeDescriptor selfTypeDescriptor);
   }
 
 
   private String binaryName;
   private List<String> classComponents = Collections.emptyList();
   private TypeDescriptor componentTypeDescriptor;
-  private MethodDescriptorFactory concreteJsFunctionMethodDescriptorFactory;
+  private DescriptorFactory<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory;
   private int dimensions;
-  private TypeDescriptorFactory enclosingTypeDescriptorFactory;
-  private TypeDescriptorsFactory interfacesTypeDescriptorsFactory;
+  private DescriptorFactory<TypeDescriptor> enclosingTypeDescriptorFactory;
+  private DescriptorFactory<List<TypeDescriptor>> interfacesTypeDescriptorsFactory;
   private boolean isArray;
   private boolean isEnumOrSubclass;
   private boolean isExtern;
@@ -412,17 +401,17 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   private boolean isTypeVariable;
   private boolean isUnion;
   private boolean isWildCard;
-  private MethodDescriptorFactory jsFunctionMethodDescriptorFactory;
+  private DescriptorFactory<MethodDescriptor> jsFunctionMethodDescriptorFactory;
   private String jsName;
   private String jsNamespace;
   private TypeDescriptor leafTypeDescriptor;
   private List<String> packageComponents = Collections.emptyList();
   private String packageName;
-  private TypeDescriptorFactory rawTypeDescriptorFactory;
+  private DescriptorFactory<TypeDescriptor> rawTypeDescriptorFactory;
   private String simpleName;
   private String sourceName;
   private boolean isOrSubclassesJsConstructorClass;
-  private TypeDescriptorFactory superTypeDescriptorFactory;
+  private DescriptorFactory<TypeDescriptor> superTypeDescriptorFactory;
   private List<TypeDescriptor> typeArgumentDescriptors = Collections.emptyList();
   private List<TypeDescriptor> unionedTypeDescriptors = Collections.emptyList();
   private Visibility visibility;
@@ -509,7 +498,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     if (concreteJsFunctionMethodDescriptorFactory == null) {
       return null;
     }
-    return concreteJsFunctionMethodDescriptorFactory.create();
+    return concreteJsFunctionMethodDescriptorFactory.create(this);
   }
 
   public int getDimensions() {
@@ -520,7 +509,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     if (enclosingTypeDescriptorFactory == null) {
       return null;
     }
-    return enclosingTypeDescriptorFactory.create();
+    return enclosingTypeDescriptorFactory.create(this);
   }
 
   public Set<TypeDescriptor> getAllTypeVariables() {
@@ -551,14 +540,14 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     if (interfacesTypeDescriptorsFactory == null) {
       return ImmutableList.of();
     }
-    return ImmutableList.copyOf(interfacesTypeDescriptorsFactory.create());
+    return ImmutableList.copyOf(interfacesTypeDescriptorsFactory.create(this));
   }
 
   public MethodDescriptor getJsFunctionMethodDescriptor() {
     if (jsFunctionMethodDescriptorFactory == null) {
       return null;
     }
-    return jsFunctionMethodDescriptorFactory.create();
+    return jsFunctionMethodDescriptorFactory.create(this);
   }
 
   @Override
@@ -627,7 +616,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     if (rawTypeDescriptorFactory == null) {
       return null;
     }
-    return rawTypeDescriptorFactory.create();
+    return rawTypeDescriptorFactory.create(this);
   }
 
   /**
@@ -648,7 +637,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     if (superTypeDescriptorFactory == null) {
       return null;
     }
-    return superTypeDescriptorFactory.create();
+    return superTypeDescriptorFactory.create(this);
   }
 
   public List<TypeDescriptor> getTypeArgumentDescriptors() {
