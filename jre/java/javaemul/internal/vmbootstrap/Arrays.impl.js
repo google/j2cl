@@ -564,6 +564,7 @@ class Arrays {
    * @public
    */
   static $clinit() {
+    Arrays.$clinit = function() {};
     ArrayIndexOutOfBoundsException =
         goog.module.get('java.lang.ArrayIndexOutOfBoundsException$impl');
     ArrayStoreException =

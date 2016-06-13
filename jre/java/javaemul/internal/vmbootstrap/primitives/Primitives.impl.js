@@ -423,6 +423,7 @@ class Primitives {
    * @protected
    */
   static $clinit() {
+    Primitives.$clinit = function() {};
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
     ArithmeticException =
