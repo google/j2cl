@@ -14,10 +14,10 @@ java_library(
         "//third_party/java/apache_commons_lang3",
         "//third_party/java/args4j",
         "//third_party/java/eclipse:eclipse-jdt-core",
+        "//third_party/java/gwt:gwt-jsinterop-annotations",
         "//third_party/java/jsr305_annotations",
         "//transpiler/java/com/google/j2cl/ast",
         "//transpiler/java/com/google/j2cl/ast/sourcemap",
-        "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/errors",
     ],
 )

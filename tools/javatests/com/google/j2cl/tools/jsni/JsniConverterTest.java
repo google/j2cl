@@ -18,7 +18,7 @@ package com.google.j2cl.tools.jsni;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.j2cl.tools.jsni.ToolsTestUtils.getDataFilePaths;
 
-import com.google.j2cl.common.PackageInfoCache;
+import com.google.j2cl.frontend.PackageInfoCache;
 
 import org.junit.After;
 import org.junit.Test;

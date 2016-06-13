@@ -49,8 +49,6 @@ import com.google.j2cl.ast.TypeDescriptor.DescriptorFactory;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
-import com.google.j2cl.common.JsInteropAnnotationUtils;
-import com.google.j2cl.common.PackageInfoCache;
 
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;

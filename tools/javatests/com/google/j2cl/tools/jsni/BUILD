@@ -23,6 +23,6 @@ java_library(
         "//third_party/java/junit",
         "//third_party/java/truth",
         "//tools/java/com/google/j2cl/tools/jsni",
-        "//transpiler/java/com/google/j2cl/common",
+        "//transpiler/java/com/google/j2cl/frontend",
     ],
 )

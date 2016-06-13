@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.common;
+package com.google.j2cl.frontend;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;

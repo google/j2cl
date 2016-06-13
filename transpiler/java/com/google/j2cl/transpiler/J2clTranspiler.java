@@ -58,12 +58,12 @@ import com.google.j2cl.ast.visitors.OptimizeAnonymousInnerClassesToFunctionExpre
 import com.google.j2cl.ast.visitors.RemoveUnusedMultiExpressionReturnValues;
 import com.google.j2cl.ast.visitors.SplitCompoundLongAssignments;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
-import com.google.j2cl.common.PackageInfoCache;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.frontend.CompilationUnitBuilder;
 import com.google.j2cl.frontend.FrontendFlags;
 import com.google.j2cl.frontend.FrontendOptions;
 import com.google.j2cl.frontend.JdtParser;
+import com.google.j2cl.frontend.PackageInfoCache;
 import com.google.j2cl.generator.OutputGeneratorStage;
 
 import java.io.IOException;

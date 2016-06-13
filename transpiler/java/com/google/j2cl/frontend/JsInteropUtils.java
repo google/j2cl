@@ -18,7 +18,6 @@ package com.google.j2cl.frontend;
 import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
-import com.google.j2cl.common.JsInteropAnnotationUtils;
 
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;

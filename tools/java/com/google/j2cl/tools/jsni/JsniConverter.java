@@ -22,9 +22,9 @@ import com.google.common.flags.Flag;
 import com.google.common.flags.FlagSpec;
 import com.google.common.flags.Flags;
 import com.google.common.flags.InvalidFlagValueException;
-import com.google.j2cl.common.PackageInfoCache;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.frontend.JdtParser;
+import com.google.j2cl.frontend.PackageInfoCache;
 
 import org.eclipse.jdt.core.dom.CompilationUnit;
 
