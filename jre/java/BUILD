@@ -44,52 +44,19 @@ j2cl_mirror_from_gwt(
 # this one library that actually contains Java 8 idioms.
 # Note: All of this will go away after Java8 day.
 
+load("//third_party/java_src/gwt/build_def:java8_library.bzl", "java8_library")
 load("//third_party/java/j2cl:j2cl_library.bzl", "js_import")
 load("//build_def:j2cl_transpile.bzl", "j2cl_transpile")
 load("//build_def:jsni_to_native_js_bundle.bzl", "jsni_to_native_js_bundle")
 
-# Prepare the 'jre' java_library target
-
-# Since we can not rely on blaze to resolve deps for us
-# we use a java_binary to collect all deps for the compilation
-# into one jar
-java_binary(
-    name = "jre_deps",
-    create_executable = 0,
-    runtime_deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
-)
-
-# commands needed to compile sources and build a jar
-commands = [
-    "set -e",
-    "mkdir compile_out",
-    "third_party/java/jdk/jdk8-google-v7-64/bin/javac -source 8 -target 8 -d compile_out" +
-    " -cp $(location :jre_deps_deploy.jar)" +
-    " $(SRCS)",
-    "cd compile_out/",
-    "zip -r tmp.jar *",
-    "cd ..",
-    "cp compile_out/tmp.jar $(OUTS)",
-]
-
-genrule(
-    name = "compile_jre",
-    srcs = [":jre_hidden_java_files"],
-    outs = ["jre8.jar"],
-    cmd = "\n".join(commands),
-    tools = [
-        ":jre_deps_deploy.jar",
-        "//third_party/java/jdk:jdk8-google-v7-64",
-    ],
-)
-
-java_import(
-    name = "jre_java_library",
-    jars = ["jre8.jar"],
-    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
-)
-
 # Prepare the 'jre' JavaScript target
+
+java8_library(
+    name = "jre_java_library",
+    srcs = [":jre_hidden_java_files"],
+    compile_deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
+    import_deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
+)
 
 jsni_to_native_js_bundle(
     name = "jre_native_zips",
