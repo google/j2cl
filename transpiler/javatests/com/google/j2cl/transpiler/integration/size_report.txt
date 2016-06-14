@@ -1,7 +1,9 @@
 Integration tests optimized size report:
 **************************************
-There are 0 size changes.
-Total size (of already existing tests) did not change.
+There are 12 size changes.
+Total size (of already existing tests) changed from
+  716364 to 716742 bytes (100%->100.05%) and from
+  274368 to 274409 bytes (100%->100.01%) gzipped.
 
 
 New reports:
@@ -11,12 +13,19 @@ New reports:
 
 Shrinkage report highlights:
 **************************************
-  none
+      old    new
+     1042   1021 newinnerclasswithsameouter (-2.02%)
+     1976   1960 instanceinnerclass (-0.81%)
+     1515   1511 stringdevirtualcalls (-0.26%)
 
 
 Expansion report highlights:
 **************************************
-  none
+      old    new
+     1271   1295 localclasswithcaptures (1.89%)
+     1240   1251 iteratormethodresolution (0.89%)
+     1383   1395 foreachstatement (0.87%)
+     1044   1053 castwithsideeffect (0.86%)
 
 
 All reports:
@@ -41,7 +50,7 @@ All reports:
       968    968 backwardbridgemethod (unchanged)
      1045   1045 binaryexpressions (unchanged)
       893    893 blockscoping (unchanged)
-    34591  34591 box2d (unchanged)
+    34628  34632 box2d (0.01%)
      3394   3394 boxingsideeffect (unchanged)
       936    936 breakstatement (unchanged)
      2250   2250 bridgejsmethod (unchanged)
@@ -62,7 +71,7 @@ All reports:
      1268   1268 casttonativetypevariable (unchanged)
      3967   3967 casttoprimitives (unchanged)
      2971   2971 casttoreference (unchanged)
-     1044   1044 castwithsideeffect (unchanged)
+     1044   1053 castwithsideeffect (0.86%)
       907    907 circularcompiletimeconstant (unchanged)
      2528   2528 classliteral (unchanged)
       933    933 compiletimeconstant (unchanged)
@@ -80,13 +89,13 @@ All reports:
        62     62 emptyclasswithfields (unchanged)
        62     62 emptyclasswithparent (unchanged)
      1248   1248 enums (unchanged)
-     1793   1793 enumspecialfunctions (unchanged)
+     1793   1794 enumspecialfunctions (0.06%)
      1212   1212 exceptionnotcaught (unchanged)
       940    940 exports (unchanged)
      1078   1078 externalunqualifiedstaticfield (unchanged)
       934    934 fieldmethodclasscollision (unchanged)
       908    908 finallyblock (unchanged)
-     1383   1383 foreachstatement (unchanged)
+     1383   1395 foreachstatement (0.87%)
       944    944 forstatement (unchanged)
      1027   1027 genericinterfaceabstractimpl (unchanged)
      1147   1147 genericmethod (unchanged)
@@ -97,7 +106,7 @@ All reports:
       795    795 implementsinterface (unchanged)
       931    931 implementsinterfacesamename (unchanged)
      1292   1292 implicitparenthesis (unchanged)
-     1036   1036 importglobaljstypes (unchanged)
+     1034   1034 importglobaljstypes (unchanged)
        62     62 importinnerclass (unchanged)
        62     62 importsfullyqualified (unchanged)
       943    943 inlineinstancefieldinit (unchanged)
@@ -105,7 +114,7 @@ All reports:
      2053   2053 innerclassinitorder (unchanged)
      2252   2252 instancecompiletimeconstant (unchanged)
       894    894 instanceinitorder (unchanged)
-     1976   1976 instanceinnerclass (unchanged)
+     1976   1960 instanceinnerclass (-0.81%)
      1181   1181 instancejsmethods (unchanged)
      1225   1225 instanceofarray (unchanged)
      2798   2798 instanceofboxedtype (unchanged)
@@ -117,31 +126,31 @@ All reports:
        62     62 interfacejsbridge (unchanged)
        62     62 interfacemethoddispatch (unchanged)
       933    933 interfacewithfields (unchanged)
-     1240   1240 iteratormethodresolution (unchanged)
+     1240   1251 iteratormethodresolution (0.89%)
        62     62 jsbridgebackward (unchanged)
      1247   1247 jsbridgemethodaccidentaloverride (unchanged)
        62     62 jsbridgemultipleaccidental (unchanged)
      1011   1011 jsbridgemultipleexposing (unchanged)
      1402   1402 jsconstructor (unchanged)
-     1351   1351 jsfunctionbridge (unchanged)
+     1351   1359 jsfunctionbridge (0.59%)
      1960   1960 jsfunctiontypeannotation (unchanged)
       965    965 jsinnerclass (unchanged)
-    10878  10878 jsinteroptests (unchanged)
+    10877  10877 jsinteroptests (unchanged)
       965    965 jsmethodoverride (unchanged)
       888    888 jsoverlay (unchanged)
       897    897 jsoverlaystaticrefs (unchanged)
        81     81 jsoverlaywithjsfunction (unchanged)
-     1220   1220 jsproperties (unchanged)
+     1216   1216 jsproperties (unchanged)
      2714   2714 jstypevarargs (unchanged)
       938    938 labeledstatement (unchanged)
      1243   1243 lambdas (unchanged)
      1199   1199 lambdaserializable (unchanged)
      1712   1712 lambdasnestedscope (unchanged)
      1078   1078 lambdaswithgenerics (unchanged)
-     1271   1271 localclasswithcaptures (unchanged)
+     1271   1295 localclasswithcaptures (1.89%)
      2906   2906 longimplicitcasts (unchanged)
      2547   2547 longoperationsinglesideeffect (unchanged)
-     1137   1137 multipleabstractparents (unchanged)
+     1137   1145 multipleabstractparents (0.70%)
      1174   1174 multipleanonymousclass (unchanged)
      1165   1165 multiplecatch (unchanged)
       973    973 multipleconstructors (unchanged)
@@ -153,7 +162,7 @@ All reports:
      1082   1082 nestedgenericclass (unchanged)
       951    951 nestednativetype (unchanged)
      1210   1210 nestedtrycatch (unchanged)
-     1042   1042 newinnerclasswithsameouter (unchanged)
+     1042   1021 newinnerclasswithsameouter (-2.02%)
        62     62 nobridgemethods (unchanged)
        62     62 nonnullablecomplex (unchanged)
        62     62 nonstandardsrcjar (unchanged)
@@ -188,11 +197,11 @@ All reports:
        62     62 staticfieldinitializer (unchanged)
        62     62 staticfields (unchanged)
       918    918 staticinitorder (unchanged)
-      900    900 staticjsmethods (unchanged)
+      898    898 staticjsmethods (unchanged)
       991    991 staticnestedclass (unchanged)
      1469   1469 strictequality (unchanged)
      1466   1466 stringconversion (unchanged)
-     1515   1515 stringdevirtualcalls (unchanged)
+     1515   1511 stringdevirtualcalls (-0.26%)
        62     62 stringescapecodes (unchanged)
       949    949 subclassgenericclass (unchanged)
       987    987 subnativejstype (unchanged)
@@ -202,7 +211,7 @@ All reports:
       871    871 synchronizedblock (unchanged)
        62     62 systemgetproperty (unchanged)
      1145   1145 ternaryexpression (unchanged)
-     3872   3872 trywithresource (unchanged)
+     3922   3927 trywithresource (0.13%)
      1020   1020 typewildcards (unchanged)
       923    923 unaryexpressions (unchanged)
      3349   3349 underflowoverflowconversion (unchanged)
