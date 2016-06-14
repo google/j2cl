@@ -1338,7 +1338,9 @@ public class JdtUtils {
   public static TypeDescriptor createJavaLangNumber(AST ast) {
     ITypeBinding javaLangInteger = ast.resolveWellKnownType("java.lang.Integer");
     checkNotNull(javaLangInteger);
-    return createTypeDescriptor(javaLangInteger.getSuperclass());
+    TypeDescriptor numberDescriptor = createTypeDescriptor(javaLangInteger.getSuperclass());
+    Preconditions.checkState("java.lang.Number".equals(numberDescriptor.getSourceName()));
+    return numberDescriptor;
   }
 
   /**
@@ -1349,7 +1351,9 @@ public class JdtUtils {
     checkNotNull(javaLangInteger);
     ITypeBinding[] interfaces = javaLangInteger.getInterfaces();
     checkArgument(interfaces.length == 1);
-    return createTypeDescriptor(interfaces[0].getErasure());
+    TypeDescriptor comparableDescriptor = createTypeDescriptor(interfaces[0].getErasure());
+    Preconditions.checkState("java.lang.Comparable".equals(comparableDescriptor.getSourceName()));
+    return comparableDescriptor;
   }
 
   /**
@@ -1362,7 +1366,10 @@ public class JdtUtils {
     checkArgument(interfaces.length == 3);
     for (ITypeBinding i : interfaces) {
       if (i.getBinaryName().equals("java.lang.CharSequence")) {
-        return createTypeDescriptor(i);
+        TypeDescriptor charSequenceDescriptor = createTypeDescriptor(i);
+        Preconditions.checkState(
+            "java.lang.CharSequence".equals(charSequenceDescriptor.getSourceName()));
+        return charSequenceDescriptor;
       }
     }
     return null;
