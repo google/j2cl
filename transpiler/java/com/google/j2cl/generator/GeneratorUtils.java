@@ -32,7 +32,6 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.errors.Errors;
-import com.google.j2cl.generator.visitors.Import;
 
 import java.io.File;
 import java.io.IOException;
@@ -158,19 +157,6 @@ public class GeneratorUtils {
     }
     return false;
   }
-
-  /**
-   * JsOverlayImpl type does not need $clinit function if it does not have any lazy imports and it
-   * does not have any JsOverlay members.
-   */
-  public static boolean needClinit(JavaType type, List<Import> lazyImports) {
-    if (!type.isJsOverlayImplementation()) {
-      return true;
-    }
-    return !lazyImports.isEmpty() || type.containsJsOverlay();
-  }
-
-  private GeneratorUtils() {}
 
   /**
    * If possible, returns the qualifier of the provided expression, otherwise null.

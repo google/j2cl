@@ -512,10 +512,6 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO: Move this to the ast in a normalization pass.
   private void renderClinit() {
-    List<Import> lazyImports = ImportUtils.sortedList(importsByCategory.get(ImportCategory.LAZY));
-    if (!GeneratorUtils.needClinit(javaType, lazyImports)) {
-      return;
-    }
     sourceBuilder.appendLines(
         "/**",
         " * Runs inline static field initializers.",

@@ -20,6 +20,12 @@ class Foo$$Overlay {
    * @public
    */
   static $isInstance(instance) { return instance instanceof Foo; }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {}
 };
 
 
