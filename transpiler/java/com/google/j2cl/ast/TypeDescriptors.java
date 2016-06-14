@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -84,19 +85,26 @@ public class TypeDescriptors {
 
   private static ThreadLocal<TypeDescriptors> typeDescriptorsStorage = new ThreadLocal<>();
 
+  private static boolean isInitialized = false;
+
   public static TypeDescriptors get() {
-    if (TypeDescriptors.typeDescriptorsStorage.get() == null) {
-      // Type descriptor storage is not already initialized, initialize it.
-      TypeDescriptors typeDescriptors = new TypeDescriptors();
-      TypeDescriptors.typeDescriptorsStorage.set(typeDescriptors);
-    }
+    Preconditions.checkState(
+        typeDescriptorsStorage.get() != null, "TypeDescriptors must be initialized before access.");
     return typeDescriptorsStorage.get();
   }
 
-  public static TypeDescriptor addBoxedTypeMapping(
-      TypeDescriptor primitiveType, TypeDescriptor boxedType) {
-    return get().boxedTypeByPrimitiveType.put(primitiveType, boxedType);
+  private static void set(TypeDescriptors typeDescriptors) {
+    Preconditions.checkState(
+        typeDescriptorsStorage.get() == null,
+        "TypeDescriptors has already been initialized and cannot be reassigned.");
+    isInitialized = true;
+    typeDescriptorsStorage.set(typeDescriptors);
   }
+
+  public static boolean isInitialized() {
+    return isInitialized;
+  }
+
   public static TypeDescriptor getBoxTypeFromPrimitiveType(TypeDescriptor primitiveType) {
     return get().boxedTypeByPrimitiveType.get(primitiveType);
   }
@@ -513,5 +521,126 @@ public class TypeDescriptors {
                     return typeDescriptor.getBinaryName();
                   }
                 }));
+  }
+
+  /**
+   * Builder for TypeDescriptors.
+   */
+  public static class SingletonInitializer {
+
+    private final TypeDescriptors typeDescriptors = new TypeDescriptors();
+
+    public void init() {
+      typeDescriptors.unknownType =
+          TypeDescriptors.createExactly(
+              Collections.emptyList(),
+              Lists.newArrayList("$$unknown$$"),
+              false,
+              Collections.emptyList());
+      set(typeDescriptors);
+    }
+
+    public SingletonInitializer addPrimitiveBoxedTypeDescriptorPair(
+        TypeDescriptor primitiveType, TypeDescriptor boxedType) {
+      addPrimitiveType(primitiveType);
+      addReferenceType(boxedType);
+      addBoxedTypeMapping(primitiveType, boxedType);
+      return this;
+    }
+
+    public SingletonInitializer addPrimitiveType(TypeDescriptor primitiveType) {
+      String name = primitiveType.getSourceName();
+      switch (name) {
+        case TypeDescriptors.BOOLEAN_TYPE_NAME:
+          typeDescriptors.primitiveBoolean = primitiveType;
+          break;
+        case TypeDescriptors.BYTE_TYPE_NAME:
+          typeDescriptors.primitiveByte = primitiveType;
+          break;
+        case TypeDescriptors.CHAR_TYPE_NAME:
+          typeDescriptors.primitiveChar = primitiveType;
+          break;
+        case TypeDescriptors.DOUBLE_TYPE_NAME:
+          typeDescriptors.primitiveDouble = primitiveType;
+          break;
+        case TypeDescriptors.FLOAT_TYPE_NAME:
+          typeDescriptors.primitiveFloat = primitiveType;
+          break;
+        case TypeDescriptors.INT_TYPE_NAME:
+          typeDescriptors.primitiveInt = primitiveType;
+          break;
+        case TypeDescriptors.LONG_TYPE_NAME:
+          typeDescriptors.primitiveLong = primitiveType;
+          break;
+        case TypeDescriptors.SHORT_TYPE_NAME:
+          typeDescriptors.primitiveShort = primitiveType;
+          break;
+        case TypeDescriptors.VOID_TYPE_NAME:
+          typeDescriptors.primitiveVoid = primitiveType;
+          break;
+        default:
+          throw new IllegalStateException("Boxed type descriptor not found: " + name);
+      }
+      return this;
+    }
+
+    public SingletonInitializer addReferenceType(TypeDescriptor boxedType) {
+      String name = boxedType.getSourceName();
+      switch (name) {
+        case "java.lang.Boolean":
+          typeDescriptors.javaLangBoolean = boxedType;
+          break;
+        case "java.lang.Byte":
+          typeDescriptors.javaLangByte = boxedType;
+          break;
+        case "java.lang.Character":
+          typeDescriptors.javaLangCharacter = boxedType;
+          break;
+        case "java.lang.Double":
+          typeDescriptors.javaLangDouble = boxedType;
+          break;
+        case "java.lang.Float":
+          typeDescriptors.javaLangFloat = boxedType;
+          break;
+        case "java.lang.Integer":
+          typeDescriptors.javaLangInteger = boxedType;
+          break;
+        case "java.lang.Long":
+          typeDescriptors.javaLangLong = boxedType;
+          break;
+        case "java.lang.Short":
+          typeDescriptors.javaLangShort = boxedType;
+          break;
+        case "java.lang.String":
+          typeDescriptors.javaLangString = boxedType;
+          break;
+        case "java.lang.Class":
+          typeDescriptors.javaLangClass = boxedType;
+          break;
+        case "java.lang.Object":
+          typeDescriptors.javaLangObject = boxedType;
+          break;
+        case "java.lang.Throwable":
+          typeDescriptors.javaLangThrowable = boxedType;
+          break;
+        case "java.lang.Number":
+          typeDescriptors.javaLangNumber = boxedType;
+          break;
+        case "java.lang.Comparable":
+          typeDescriptors.javaLangComparable = boxedType;
+          break;
+        case "java.lang.CharSequence":
+          typeDescriptors.javaLangCharSequence = boxedType;
+          break;
+        default:
+          throw new IllegalStateException("Non-primitive type descriptor not found: " + name);
+      }
+      return this;
+    }
+
+    private TypeDescriptor addBoxedTypeMapping(
+        TypeDescriptor primitiveType, TypeDescriptor boxedType) {
+      return typeDescriptors.boxedTypeByPrimitiveType.put(primitiveType, boxedType);
+    }
   }
 }

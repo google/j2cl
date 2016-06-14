@@ -26,7 +26,6 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryOperator;
@@ -1252,84 +1251,48 @@ public class JdtUtils {
   }
 
   public static void initTypeDescriptors(AST ast) {
-    TypeDescriptors typeDescriptors = TypeDescriptors.get();
-
-    // initialize primitive types.
-    typeDescriptors.primitiveBoolean =
-        createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.BOOLEAN_TYPE_NAME));
-    typeDescriptors.primitiveByte =
-        createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.BYTE_TYPE_NAME));
-    typeDescriptors.primitiveChar =
-        createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.CHAR_TYPE_NAME));
-    typeDescriptors.primitiveDouble =
-        createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.DOUBLE_TYPE_NAME));
-    typeDescriptors.primitiveFloat =
-        createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.FLOAT_TYPE_NAME));
-    typeDescriptors.primitiveInt =
-        createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.INT_TYPE_NAME));
-    typeDescriptors.primitiveLong =
-        createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.LONG_TYPE_NAME));
-    typeDescriptors.primitiveShort =
-        createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.SHORT_TYPE_NAME));
-    typeDescriptors.primitiveVoid =
-        createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.VOID_TYPE_NAME));
-
-    // initialize boxed types.
-    typeDescriptors.javaLangBoolean =
-        createTypeDescriptor(ast.resolveWellKnownType("java.lang.Boolean"));
-    typeDescriptors.javaLangByte = createTypeDescriptor(ast.resolveWellKnownType("java.lang.Byte"));
-    typeDescriptors.javaLangCharacter =
-        createTypeDescriptor(ast.resolveWellKnownType("java.lang.Character"));
-    typeDescriptors.javaLangDouble =
-        createTypeDescriptor(ast.resolveWellKnownType("java.lang.Double"));
-    typeDescriptors.javaLangFloat =
-        createTypeDescriptor(ast.resolveWellKnownType("java.lang.Float"));
-    typeDescriptors.javaLangInteger =
-        createTypeDescriptor(ast.resolveWellKnownType("java.lang.Integer"));
-    typeDescriptors.javaLangLong = createTypeDescriptor(ast.resolveWellKnownType("java.lang.Long"));
-    typeDescriptors.javaLangShort =
-        createTypeDescriptor(ast.resolveWellKnownType("java.lang.Short"));
-    typeDescriptors.javaLangString =
-        createTypeDescriptor(ast.resolveWellKnownType("java.lang.String"));
-
-    typeDescriptors.javaLangClass =
-        createTypeDescriptor(ast.resolveWellKnownType("java.lang.Class"));
-    typeDescriptors.javaLangObject =
-        createTypeDescriptor(ast.resolveWellKnownType("java.lang.Object"));
-    typeDescriptors.javaLangThrowable =
-        createTypeDescriptor(ast.resolveWellKnownType("java.lang.Throwable"));
-
-    typeDescriptors.javaLangNumber = createJavaLangNumber(ast);
-    typeDescriptors.javaLangComparable = createJavaLangComparable(ast);
-    typeDescriptors.javaLangCharSequence = createJavaLangCharSequence(ast);
-
-    typeDescriptors.unknownType =
-        TypeDescriptors.createExactly(
-            Collections.emptyList(),
-            Lists.newArrayList("$$unknown$$"),
-            false,
-            Collections.emptyList());
-
-    initBoxedPrimitiveTypeMapping(typeDescriptors);
-  }
-
-  public static void initBoxedPrimitiveTypeMapping(TypeDescriptors typeDescriptors) {
-    TypeDescriptors.addBoxedTypeMapping(
-        typeDescriptors.primitiveBoolean, typeDescriptors.javaLangBoolean);
-    TypeDescriptors.addBoxedTypeMapping(
-        typeDescriptors.primitiveByte, typeDescriptors.javaLangByte);
-    TypeDescriptors.addBoxedTypeMapping(
-        typeDescriptors.primitiveChar, typeDescriptors.javaLangCharacter);
-    TypeDescriptors.addBoxedTypeMapping(
-        typeDescriptors.primitiveDouble, typeDescriptors.javaLangDouble);
-    TypeDescriptors.addBoxedTypeMapping(
-        typeDescriptors.primitiveFloat, typeDescriptors.javaLangFloat);
-    TypeDescriptors.addBoxedTypeMapping(
-        typeDescriptors.primitiveInt, typeDescriptors.javaLangInteger);
-    TypeDescriptors.addBoxedTypeMapping(
-        typeDescriptors.primitiveLong, typeDescriptors.javaLangLong);
-    TypeDescriptors.addBoxedTypeMapping(
-        typeDescriptors.primitiveShort, typeDescriptors.javaLangShort);
+    if (TypeDescriptors.isInitialized()) {
+      return;
+    }
+    new TypeDescriptors.SingletonInitializer()
+        // Add primitive void type.
+        .addPrimitiveType(
+            createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.VOID_TYPE_NAME)))
+        // Add primitive boxed types.
+        .addPrimitiveBoxedTypeDescriptorPair(
+            createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.BOOLEAN_TYPE_NAME)),
+            createTypeDescriptor(ast.resolveWellKnownType("java.lang.Boolean")))
+        .addPrimitiveBoxedTypeDescriptorPair(
+            createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.BYTE_TYPE_NAME)),
+            createTypeDescriptor(ast.resolveWellKnownType("java.lang.Byte")))
+        .addPrimitiveBoxedTypeDescriptorPair(
+            createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.CHAR_TYPE_NAME)),
+            createTypeDescriptor(ast.resolveWellKnownType("java.lang.Character")))
+        .addPrimitiveBoxedTypeDescriptorPair(
+            createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.DOUBLE_TYPE_NAME)),
+            createTypeDescriptor(ast.resolveWellKnownType("java.lang.Double")))
+        .addPrimitiveBoxedTypeDescriptorPair(
+            createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.FLOAT_TYPE_NAME)),
+            createTypeDescriptor(ast.resolveWellKnownType("java.lang.Float")))
+        .addPrimitiveBoxedTypeDescriptorPair(
+            createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.INT_TYPE_NAME)),
+            createTypeDescriptor(ast.resolveWellKnownType("java.lang.Integer")))
+        .addPrimitiveBoxedTypeDescriptorPair(
+            createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.LONG_TYPE_NAME)),
+            createTypeDescriptor(ast.resolveWellKnownType("java.lang.Long")))
+        .addPrimitiveBoxedTypeDescriptorPair(
+            createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.SHORT_TYPE_NAME)),
+            createTypeDescriptor(ast.resolveWellKnownType("java.lang.Short")))
+        // Add well-known, non-primitive types.
+        .addReferenceType(createTypeDescriptor(ast.resolveWellKnownType("java.lang.String")))
+        .addReferenceType(createTypeDescriptor(ast.resolveWellKnownType("java.lang.Class")))
+        .addReferenceType(createTypeDescriptor(ast.resolveWellKnownType("java.lang.Object")))
+        .addReferenceType(createTypeDescriptor(ast.resolveWellKnownType("java.lang.Throwable")))
+        // Add not-well-known, non-primitive types.
+        .addReferenceType(createJavaLangNumber(ast))
+        .addReferenceType(createJavaLangComparable(ast))
+        .addReferenceType(createJavaLangCharSequence(ast))
+        .init();
   }
 
   /**
