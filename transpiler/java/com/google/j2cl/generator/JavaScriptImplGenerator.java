@@ -244,7 +244,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         sourceBuilder.appendln(" * " + method.getJsDocDescription());
       }
       if (method.isAbstract()) {
-        sourceBuilder.appendln(" * Abstract method.");
+        sourceBuilder.appendln(" * @abstract");
       }
       if (method.isOverride() && !method.isConstructor()) {
         sourceBuilder.appendln(" * @override");
