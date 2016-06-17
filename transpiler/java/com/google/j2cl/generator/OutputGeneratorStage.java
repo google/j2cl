@@ -43,8 +43,9 @@ import java.util.TreeSet;
 
 /**
  * The OutputGeneratorStage contains all necessary information for generating the JavaScript
- * output, source maps and depinfo files for the transpiler. It is responsible for pulling in native
- * sources and then generating header, implementation and sourcemap files for each Java Type.
+ * output, source maps and depinfo files for the transpiler. It is responsible for pulling in
+ * native sources and then generating header, implementation and sourcemap files for each Java
+ * Type.
  */
 public class OutputGeneratorStage {
   private final Charset charset;
@@ -184,6 +185,11 @@ public class OutputGeneratorStage {
     Map<ImportCategory, Set<Import>> importsByCategory =
         ImportGatheringVisitor.gatherImports(javaType);
     for (ImportCategory importCategory : ImportCategory.values()) {
+      // Don't record use of the environment, it is not considered a dependency.
+      if (importCategory == ImportCategory.EXTERN) {
+        continue;
+      }
+
       for (Import anImport : importsByCategory.get(importCategory)) {
         importModulePaths.add(anImport.getHeaderModulePath());
         importModulePaths.add(anImport.getImplModulePath());
@@ -203,15 +209,17 @@ public class OutputGeneratorStage {
     // compile).
     importModulePaths.removeAll(exportModulePaths);
 
-    // The Trailing comma on each line is on purpose to make sure that both the imports and exports
-    // line contains at least *some* content. This simplifies life if parsing the depinfo file in
-    // Bash.
+    // If there are no imports or exports, include at least a space on the line, to make life easier
+    // if parsing the depinfo file in Bash.
+    if (importModulePaths.isEmpty()) {
+      importModulePaths.add(" ");
+    }
+    if (exportModulePaths.isEmpty()) {
+      exportModulePaths.add(" ");
+    }
+
     String depinfoContent =
-        Joiner.on(",").join(importModulePaths)
-            + ","
-            + "\n"
-            + Joiner.on(",").join(exportModulePaths)
-            + ",";
+        Joiner.on(",").join(importModulePaths) + "\n" + Joiner.on(",").join(exportModulePaths);
     // The format here is:
     // line 1: comma separated list of names of imported (goog.require()d) modules
     // line 2: comma separated list of names of exported (goog.module() declared) modules
