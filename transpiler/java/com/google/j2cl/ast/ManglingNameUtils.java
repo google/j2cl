@@ -125,7 +125,7 @@ public class ManglingNameUtils {
    */
   public static String getMangledName(
       FieldDescriptor fieldDescriptor, boolean accessStaticsDirectly) {
-    if (fieldDescriptor.isRaw() && !accessStaticsDirectly) {
+    if (fieldDescriptor.isJsProperty() && !accessStaticsDirectly) {
       return fieldDescriptor.getFieldName();
     }
 

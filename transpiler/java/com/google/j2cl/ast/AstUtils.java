@@ -927,7 +927,7 @@ public class AstUtils {
             getPrototypeCall,
             FieldDescriptor.Builder.fromDefault(
                     lambdaType, applyMethodName, TypeDescriptors.NATIVE_FUNCTION)
-                .setIsRaw(true)
+                .setJsInfo(JsInfo.RAW_FIELD)
                 .build());
 
     MethodDescriptor makeLambdaCall =
@@ -947,8 +947,7 @@ public class AstUtils {
             new TypeReference(lambdaType),
             FieldDescriptor.Builder.fromDefault(
                     lambdaType, "$copy", TypeDescriptors.NATIVE_FUNCTION)
-                .setIsRaw(true)
-                .setJsInfo(JsInfo.create(JsMemberType.PROPERTY, "$copy", null, false))
+                .setJsInfo(JsInfo.RAW_FIELD)
                 .build());
 
     return MethodCall.createMethodCall(

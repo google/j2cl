@@ -118,12 +118,10 @@ public class JdtUtils {
             getTypeDefaultNullability(variableBinding.getDeclaringClass()));
 
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableBinding);
-    boolean isRaw = jsInfo.getJsMemberType() == JsMemberType.PROPERTY;
     boolean isJsOverlay = JsInteropUtils.isJsOverlay(variableBinding);
     boolean isCompileTimeConstant = variableBinding.getConstantValue() != null;
     return FieldDescriptor.create(
         isStatic,
-        isRaw,
         visibility,
         enclosingClassTypeDescriptor,
         fieldName,

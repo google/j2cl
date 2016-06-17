@@ -26,7 +26,6 @@ import com.google.j2cl.ast.processors.Visitable;
 public abstract class FieldDescriptor extends Node implements Member {
   public static FieldDescriptor create(
       boolean isStatic,
-      boolean isRaw,
       Visibility visibility,
       TypeDescriptor enclosingClassTypeDescriptor,
       String fieldName,
@@ -36,7 +35,6 @@ public abstract class FieldDescriptor extends Node implements Member {
       boolean isCompileTimeConstant) {
     return new AutoValue_FieldDescriptor(
         isStatic,
-        isRaw,
         visibility,
         enclosingClassTypeDescriptor,
         fieldName,
@@ -56,24 +54,17 @@ public abstract class FieldDescriptor extends Node implements Member {
       TypeDescriptor typeDescriptor) {
     return new AutoValue_FieldDescriptor(
         isStatic,
-        true,
         Visibility.PUBLIC,
         enclosingClassTypeDescriptor,
         fieldName,
         typeDescriptor,
         false,
-        JsInfo.NONE,
+        JsInfo.RAW_FIELD,
         false);
   }
 
   @Override
   public abstract boolean isStatic();
-
-  /**
-   * Returns whether this is a Raw reference. Raw references are not mangled in the output and thus
-   * can be used to describe reference to JS apis.
-   */
-  public abstract boolean isRaw();
 
   public abstract Visibility getVisibility();
 
@@ -133,7 +124,6 @@ public abstract class FieldDescriptor extends Node implements Member {
    */
   public static class Builder {
     private boolean isStatic;
-    private boolean isRaw;
     private Visibility visibility;
     private TypeDescriptor enclosingClassTypeDescriptor;
     private String fieldName;
@@ -145,7 +135,6 @@ public abstract class FieldDescriptor extends Node implements Member {
     public static Builder from(FieldDescriptor fieldDescriptor) {
       Builder builder = new Builder();
       builder.isStatic = fieldDescriptor.isStatic();
-      builder.isRaw = fieldDescriptor.isRaw();
       builder.visibility = fieldDescriptor.getVisibility();
       builder.enclosingClassTypeDescriptor = fieldDescriptor.getEnclosingClassTypeDescriptor();
       builder.fieldName = fieldDescriptor.getFieldName();
@@ -185,11 +174,6 @@ public abstract class FieldDescriptor extends Node implements Member {
       return this;
     }
 
-    public Builder setIsRaw(boolean isRaw) {
-      this.isRaw = isRaw;
-      return this;
-    }
-
     public Builder setJsInfo(JsInfo jsInfo) {
       this.jsInfo = jsInfo;
       return this;
@@ -203,7 +187,6 @@ public abstract class FieldDescriptor extends Node implements Member {
     public FieldDescriptor build() {
       return create(
           isStatic,
-          isRaw,
           visibility,
           enclosingClassTypeDescriptor,
           fieldName,
