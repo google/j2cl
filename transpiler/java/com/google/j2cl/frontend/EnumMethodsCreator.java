@@ -69,7 +69,7 @@ public class EnumMethodsCreator {
                     Lists.newArrayList("NativeObject"),
                     // Type parameters.
                     Lists.newArrayList(
-                        TypeDescriptors.NATIVE_STRING,
+                        TypeDescriptors.get().javaLangString,
                         TypeDescriptors.toNonNullable(enumType.getDescriptor())),
                     // Browser global
                     JsUtils.JS_GLOBAL,

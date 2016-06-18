@@ -19,7 +19,6 @@ let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 /** @constructor */ let $NativeObject = window.Object;
-/** @constructor */ let $NativeString = window.String;
 
 
 /**
@@ -85,7 +84,7 @@ class Color extends Enum {
         null) {
       Color
           .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
-          /**@type {$NativeObject<$NativeString, !Color>} */ (
+          /**@type {$NativeObject<?string, !Color>} */ (
               $Enums.createMapFromValues(Color.values()));
     }
     return $Enums.getValueFromNameAndMap(
@@ -198,7 +197,7 @@ class Color extends Enum {
 
   /**
    * A static field getter.
-   * @return {$NativeObject<$NativeString, !Color>}
+   * @return {$NativeObject<?string, !Color>}
    * @public
    */
   static get
@@ -211,7 +210,7 @@ class Color extends Enum {
 
   /**
    * A static field setter.
-   * @param {$NativeObject<$NativeString, !Color>} value
+   * @param {$NativeObject<?string, !Color>} value
    * @return {void}
    * @public
    */
@@ -281,7 +280,7 @@ Color.$f_BLUE__com_google_j2cl_transpiler_readable_jstypeenum_Color =
 
 
 /**
- * @private {$NativeObject<$NativeString, !Color>}
+ * @private {$NativeObject<?string, !Color>}
  */
 Color
     .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_jstypeenum_Color_ =
