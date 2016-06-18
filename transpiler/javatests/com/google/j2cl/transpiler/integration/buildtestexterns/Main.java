@@ -5,7 +5,7 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 @JsType(isNative = true, name = "Foo", namespace = JsPackage.GLOBAL)
-public class FooOverlay {
+class FooOverlay {
   private String foo;
 
   /**
@@ -15,4 +15,11 @@ public class FooOverlay {
   public final String getFoo() {
     return this.foo;
   }
+}
+
+/**
+ * Integration test won't build without Main class with main function.
+ */
+public class Main {
+  public static void main(String... args) {}
 }

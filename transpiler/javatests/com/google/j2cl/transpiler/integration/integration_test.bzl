@@ -29,7 +29,7 @@ load("/tools/build_defs/label/def", "absolute_label")
 def integration_test(
     name, srcs=[], deps=[], defs=[], native_srcs=[],
     native_srcs_pkg="CONVENTION", js_deps=[], main_class=None, enable_gwt=False, gwt_deps=[],
-    closure_defines=dict(), generate_build_test=None):
+    closure_defines=dict(), generate_build_test=None, test_externs_list=None):
   """Macro that turns Java files into integration test targets.
 
   deps are Labels of j2cl_library() rules. NOT labels of
@@ -80,6 +80,7 @@ def integration_test(
         _js_deps=js_deps,
         native_srcs=native_srcs,
         native_srcs_pkg=native_srcs_pkg,
+        _test_externs_list=test_externs_list,
     )
 
   # blaze build :optimized_js
