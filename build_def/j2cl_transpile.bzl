@@ -3,6 +3,10 @@
 Takes Java source and translates it into Closure style JS in a zip bundle. Java
 library deps might be needed for reference resolution.
 
+A .depinfo file is also emitted that summarizes imports and exports for the
+target. Line one is a comma separated list of names of imported
+(goog.require()'d) modules. Line two is a comma separated list of names of
+exported (goog.module() declared) modules.
 
 Example use:
 
@@ -59,12 +63,16 @@ def _impl(ctx):
 
   js_zip_name = ctx.label.name + ".js.zip"
   js_zip_artifact = ctx.new_file(js_zip_name)
-
   compiler_args = [
       "-d",
       ctx.configuration.bin_dir.path + "/" + ctx.label.package + "/" +
-      js_zip_name
+      js_zip_name,
   ]
+
+  depinfo_name = ctx.label.name + ".depinfo"
+  dependency_info_artifact = ctx.new_file(depinfo_name)
+  compiler_args += ["-depinfo", ctx.configuration.bin_dir.path + "/" +
+                    ctx.label.package + "/" + depinfo_name]
 
   if len(deps_paths) > 0:
     compiler_args += ["-cp", separator.join(deps_paths)]
@@ -91,14 +99,14 @@ def _impl(ctx):
   ctx.action(
       progress_message = _get_message(ctx),
       inputs=java_files + list(dep_files) + js_native_zip_files,
-      outputs=[js_zip_artifact],
+      outputs=[js_zip_artifact, dependency_info_artifact],
       executable=ctx.executable.transpiler,
       arguments=compiler_args,
       env=dict(LANG="en_US.UTF-8"),
   )
 
   return struct(
-      files=set([js_zip_artifact]),
+      files=set([js_zip_artifact, dependency_info_artifact])
   )
 
 
@@ -131,7 +139,10 @@ j2cl_transpile = rule(
         ),
     },
     implementation=_impl,
+    # Declare each output artifact by name, otherwise they can not be
+    # referenced by name when being used as inputs for other rules.
     outputs={
-      "files": "%{name}.js.zip"
+        "zip_file": "%{name}.js.zip",
+        "depinfo_file": "%{name}.depinfo",
     }
 )

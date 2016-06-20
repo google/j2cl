@@ -75,7 +75,7 @@ j2cl_transpile(
 js_import(
     name = "jre_import",
     srczips = [
-        ":jre_transpiled",
+        ":jre_transpiled.js.zip",
         ":jre_hidden_handrolled.js.zip",
     ],
 )
