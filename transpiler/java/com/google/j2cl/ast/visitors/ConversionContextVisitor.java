@@ -50,7 +50,7 @@ import java.util.List;
  * <p>Traverses the AST, recognizing and categorizing different conversion contexts and dispatching
  * conversion requests in that context.
  */
-public abstract class ConversionContextVisitor extends AbstractRewriter {
+public final class ConversionContextVisitor extends AbstractRewriter {
 
   /**
    * Base class for defining how to insert a conversion operation in a given conversion context.

@@ -28,45 +28,48 @@ import java.util.List;
 
 /**
  * Finds times when the return value in a MultiExpression is unused, and removes it.
- * <p>
- * This does not do general purpose removal of all possible side-effect-free unused return values.
- * Only the FieldAccess case is addressed since it is the only case we generate that exhibits this
- * problem at this time and since we don't have side-effect tracking.
- * <p>
- * While technically this amounts to a local optimization the actual motivation is to avoid
+ *
+ * <p>This does not do general purpose removal of all possible side-effect-free unused return
+ * values. Only the FieldAccess case is addressed since it is the only case we generate that
+ * exhibits this problem at this time and since we don't have side-effect tracking.
+ *
+ * <p>While technically this amounts to a local optimization the actual motivation is to avoid
  * triggering errors in JSCompiler which does not like seeing unused return values.
  */
-public class RemoveUnusedMultiExpressionReturnValues extends AbstractRewriter {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new RemoveUnusedMultiExpressionReturnValues());
+public class RemoveUnusedMultiExpressionReturnValues extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new Rewriter());
   }
 
-  /**
-   * Examines the case when a MultiExpression is directly contained in an ExpressionStatement since
-   * we know for certain that in this situation the MultiExpression's returned value must be unused.
-   */
-  @Override
-  public Node rewriteExpressionStatement(ExpressionStatement expressionStatement) {
-    // Ignore non multi expressions.
-    if (!(expressionStatement.getExpression() instanceof MultiExpression)) {
-      return expressionStatement;
-    }
-    MultiExpression multiExpression = (MultiExpression) expressionStatement.getExpression();
-    List<Expression> expressions = multiExpression.getExpressions();
-    // Can't do anything if the multi expression contains no expressions.
-    if (expressions.isEmpty()) {
-      return expressionStatement;
-    }
-    // Only target return values that are FieldAccesses since we know they are side effect free and
-    // we know that we generate this case.
-    // TODO: This is not technically correct as field accesses could trigger getters.
-    if (!(Iterables.getLast(expressions) instanceof FieldAccess)) {
-      return expressionStatement;
-    }
+  private static class Rewriter extends AbstractRewriter {
+    /**
+     * Examines the case when a MultiExpression is directly contained in an ExpressionStatement
+     * since we know for certain that in this situation the MultiExpression's returned value must be
+     * unused.
+     */
+    @Override
+    public Node rewriteExpressionStatement(ExpressionStatement expressionStatement) {
+      // Ignore non multi expressions.
+      if (!(expressionStatement.getExpression() instanceof MultiExpression)) {
+        return expressionStatement;
+      }
+      MultiExpression multiExpression = (MultiExpression) expressionStatement.getExpression();
+      List<Expression> expressions = multiExpression.getExpressions();
+      // Can't do anything if the multi expression contains no expressions.
+      if (expressions.isEmpty()) {
+        return expressionStatement;
+      }
+      // Only target return values that are FieldAccesses since we know they are side effect free
+      // and we know that we generate this case.
+      // TODO: This is not technically correct as field accesses could trigger getters.
+      if (!(Iterables.getLast(expressions) instanceof FieldAccess)) {
+        return expressionStatement;
+      }
 
-    // Return a replacement with the unused return value expression trimmed off.
-    return new ExpressionStatement(
-        new MultiExpression(expressions.subList(0, expressions.size() - 1)));
+      // Return a replacement with the unused return value expression trimmed off.
+      return new ExpressionStatement(
+          new MultiExpression(expressions.subList(0, expressions.size() - 1)));
+    }
   }
 }

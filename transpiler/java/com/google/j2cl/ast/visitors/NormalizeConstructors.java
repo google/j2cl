@@ -51,33 +51,35 @@ import java.util.List;
 /**
  * Transforms all classes so that each has only (at most) one constructor to match the one
  * constructor restriction in JavaScript.
- * <p>
- * Creates $create factory methods corresponding to each constructor and transforms newInstances
+ *
+ * <p>Creates $create factory methods corresponding to each constructor and transforms newInstances
  * into calls to these factory methods.
  */
-public class NormalizeConstructors {
+public class NormalizeConstructors extends NormalizationPass {
 
   /**
    * This pass transforms Java constructors into methods with the $ctor prefix, and synthesizes a
    * single constructor per class (which will end up being the actual Javascript ES6 constructor).
    * The process is done in three stages:
+   *
    * <p>1) Synthesize the primary (and only) constructor that will be emitted in the output.
+   *
    * <p>2) Remove calls to super to from these constructors (which will be transformed into ctor
    * methods) since super will be called by the primary constructor instead.
+   *
    * <p>3) Rewrite Java constructors as simple methods with the $ctor prefix and update references
    * to constructor calls such as "super(...)" and "this(...)" to point to the synthesize methods.
-   * <p> Note that before this pass, constructors are Java constructors, whereas after this pass
+   *
+   * <p>Note that before this pass, constructors are Java constructors, whereas after this pass
    * constructors are actually Javascript constructors.
    *
-   * This pass also performs @JsConstructors normalizations. Note that there are 3 forms
-   * of constructors:
-   * </p> 1) Normal Java classes where the Javascript constructor simply defines the class fields.
-   *
-   * </p> 2) @JsConstructor classes that subclass a regular constructor.  This class exposes a
-   * 'real' Javascript constructor that can be used to make an instance of the class.  However, to
+   * <p>This pass also performs @JsConstructors normalizations. Note that there are 3 forms of
+   * constructors: 1) Normal Java classes where the Javascript constructor simply defines the class
+   * fields. 2) @JsConstructor classes that subclass a regular constructor. This class exposes a
+   * 'real' Javascript constructor that can be used to make an instance of the class. However, to
    * call super we cannot call the es6 super(args) since the super class is a regular Java class, it
-   * is expected that the $ctor_super(args) is called.  Hence the constructors look like this:
-   * <pre> {@code
+   * is expected that the $ctor_super(args) is called. Hence the constructors look like this: <pre>
+   *  {@code
    * class JsConstructorClass extends RegularClass
    *   constructor(args) {
    *     super();
@@ -92,12 +94,11 @@ public class NormalizeConstructors {
    * }
    * </pre>
    *
-   * <p> 3) All subclasses of @JsConstructor (somewhere in the hierarchy). All @JsConstructor
+   * <p>3) All subclasses of @JsConstructor (somewhere in the hierarchy). All @JsConstructor
    * subclasses must use the real Javascript constructor to create an instance since calling super
-   * is only possible from the Javascript constructor. Think about a direct subclass then realize
-   * it must apply recursively to all subclasses.  Since super is called in the real Javascript
-   * constructor, it must be removed from the $ctor method.
-   * <pre> {@code
+   * is only possible from the Javascript constructor. Think about a direct subclass then realize it
+   * must apply recursively to all subclasses. Since super is called in the real Javascript
+   * constructor, it must be removed from the $ctor method. <pre> {@code
    * class JsConstructorClass extends JsConstructorClassOrSubclass
    *   constructor(args) {
    *     super(args);
@@ -112,7 +113,8 @@ public class NormalizeConstructors {
    * }
    * </pre>
    */
-  public static void applyTo(CompilationUnit compilationUnit) {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
     for (JavaType type : compilationUnit.getTypes()) {
       Method resultingConstructor =
           type.getDescriptor().isOrSubclassesJsConstructorClass()
@@ -469,7 +471,7 @@ public class NormalizeConstructors {
   private static Method originalContructorBodyMethod(Method primaryConstructor) {
     TypeDescriptor enclosingType =
         primaryConstructor.getDescriptor().getEnclosingClassTypeDescriptor();
-    
+
     MethodDescriptor javascriptConstructor =
         MethodDescriptor.Builder.fromDefault()
             .setEnclosingClassTypeDescriptor(enclosingType)

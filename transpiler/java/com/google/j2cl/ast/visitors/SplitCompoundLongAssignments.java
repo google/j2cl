@@ -28,47 +28,48 @@ import com.google.j2cl.ast.TypeDescriptors;
 /**
  * Splits all compound assignments that are on primitive long variables.
  *
- * <p>
- * The rewrite is needed because Longs are emulated and the emulation class instances are immutable.
- * If you left compound assignments in then you'd have to translate things like a++ into
+ * <p>The rewrite is needed because Longs are emulated and the emulation class instances are
+ * immutable. If you left compound assignments in then you'd have to translate things like a++ into
  * a.increment(), but that would be invalid since a.increment() couldn't modify the value in itself.
  */
-public class SplitCompoundLongAssignments extends AbstractRewriter {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new SplitCompoundLongAssignments());
+public class SplitCompoundLongAssignments extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new Rewriter());
   }
 
-  @Override
-  public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
-    if (binaryExpression.getOperator().isCompoundAssignment()
-        && TypeDescriptors.get()
-            .primitiveLong
-            .equalsIgnoreNullability(binaryExpression.getLeftOperand().getTypeDescriptor())
-        && !(binaryExpression.getLeftOperand() instanceof ArrayAccess)) {
-      return OperatorSideEffectUtils.splitBinaryExpression(binaryExpression);
+  private static class Rewriter extends AbstractRewriter {
+    @Override
+    public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
+      if (binaryExpression.getOperator().isCompoundAssignment()
+          && TypeDescriptors.get()
+              .primitiveLong
+              .equalsIgnoreNullability(binaryExpression.getLeftOperand().getTypeDescriptor())
+          && !(binaryExpression.getLeftOperand() instanceof ArrayAccess)) {
+        return OperatorSideEffectUtils.splitBinaryExpression(binaryExpression);
+      }
+      return binaryExpression;
     }
-    return binaryExpression;
-  }
 
-  @Override
-  public Node rewritePrefixExpression(PrefixExpression prefixExpression) {
-    if (prefixExpression.getOperator().hasSideEffect()
-        && TypeDescriptors.get()
-            .primitiveLong
-            .equalsIgnoreNullability(prefixExpression.getOperand().getTypeDescriptor())
-        && !(prefixExpression.getOperand() instanceof ArrayAccess)) {
-      return OperatorSideEffectUtils.splitPrefixExpression(prefixExpression);
+    @Override
+    public Node rewritePrefixExpression(PrefixExpression prefixExpression) {
+      if (prefixExpression.getOperator().hasSideEffect()
+          && TypeDescriptors.get()
+              .primitiveLong
+              .equalsIgnoreNullability(prefixExpression.getOperand().getTypeDescriptor())
+          && !(prefixExpression.getOperand() instanceof ArrayAccess)) {
+        return OperatorSideEffectUtils.splitPrefixExpression(prefixExpression);
+      }
+      return prefixExpression;
     }
-    return prefixExpression;
-  }
 
-  @Override
-  public Node rewritePostfixExpression(PostfixExpression postfixExpression) {
-    if (TypeDescriptors.get().primitiveLong == postfixExpression.getOperand().getTypeDescriptor()
-        && !(postfixExpression.getOperand() instanceof ArrayAccess)) {
-      return OperatorSideEffectUtils.splitPostfixExpression(postfixExpression);
+    @Override
+    public Node rewritePostfixExpression(PostfixExpression postfixExpression) {
+      if (TypeDescriptors.get().primitiveLong == postfixExpression.getOperand().getTypeDescriptor()
+          && !(postfixExpression.getOperand() instanceof ArrayAccess)) {
+        return OperatorSideEffectUtils.splitPostfixExpression(postfixExpression);
+      }
+      return postfixExpression;
     }
-    return postfixExpression;
   }
 }

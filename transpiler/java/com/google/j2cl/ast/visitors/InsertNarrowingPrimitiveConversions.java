@@ -36,130 +36,128 @@ import java.util.Set;
  * Inserts a narrowing operation when a wider primitive type is being put into a narrower primitive
  * type slot in assignment and cast conversion contexts.
  */
-public class InsertNarrowingPrimitiveConversions extends ConversionContextVisitor {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new InsertNarrowingPrimitiveConversions());
+public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new ConversionContextVisitor(getContextRewriter()));
   }
 
-  public InsertNarrowingPrimitiveConversions() {
-    super(
-        new ContextRewriter() {
-          @Override
-          public Expression rewriteAssignmentContext(
-              TypeDescriptor toTypeDescriptor, Expression expression) {
-            TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
+  private ConversionContextVisitor.ContextRewriter getContextRewriter() {
+    return new ConversionContextVisitor.ContextRewriter() {
+      @Override
+      public Expression rewriteAssignmentContext(
+          TypeDescriptor toTypeDescriptor, Expression expression) {
+        TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
 
-            if (AstUtils.canRemoveCast(fromTypeDescriptor, toTypeDescriptor)
-                || !shouldNarrow(fromTypeDescriptor, toTypeDescriptor)) {
-              return expression;
-            }
+        if (AstUtils.canRemoveCast(fromTypeDescriptor, toTypeDescriptor)
+            || !shouldNarrow(fromTypeDescriptor, toTypeDescriptor)) {
+          return expression;
+        }
 
-            return insertNarrowingCall(expression, toTypeDescriptor);
+        return insertNarrowingCall(expression, toTypeDescriptor);
+      }
+
+      @Override
+      public Expression rewriteCastContext(CastExpression castExpression) {
+        Expression expression = castExpression.getExpression();
+        TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
+        TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
+
+        if (toTypeDescriptor.isPrimitive()
+            && fromTypeDescriptor.isPrimitive()
+            && AstUtils.canRemoveCast(fromTypeDescriptor, toTypeDescriptor)) {
+          return expression;
+        }
+
+        if (!shouldNarrow(fromTypeDescriptor, toTypeDescriptor)) {
+          return castExpression;
+        }
+
+        return insertNarrowingCall(expression, toTypeDescriptor);
+      }
+
+      private boolean shouldNarrow(
+          TypeDescriptor fromTypeDescriptor, TypeDescriptor toTypeDescriptor) {
+
+        if (fromTypeDescriptor.equalsIgnoreNullability(toTypeDescriptor)) {
+          return false;
+        }
+
+        if (!fromTypeDescriptor.isPrimitive() || !toTypeDescriptor.isPrimitive()) {
+          // Non-primitive casts are not narrowing.
+          return false;
+        }
+
+        int fromWidth = TypeDescriptors.getWidth(fromTypeDescriptor);
+        int toWidth = TypeDescriptors.getWidth(toTypeDescriptor);
+
+        Set<TypeDescriptor> typeDescriptors = Sets.newHashSet(fromTypeDescriptor, toTypeDescriptor);
+
+        if (fromWidth <= toWidth
+            && !(typeDescriptors.contains(TypeDescriptors.get().primitiveShort)
+                && typeDescriptors.contains(TypeDescriptors.get().primitiveChar))) {
+          // Don't modify non-narrowing casts, except for the special case between
+          // short and char.
+          return false;
+        }
+
+        return true;
+      }
+
+      private Expression convertLiteral(Object literalValue, TypeDescriptor toTypeDescriptor) {
+        if (literalValue instanceof Number) {
+          Number numberLiteral = (Number) literalValue;
+          // Narrow at compile time.
+          if (toTypeDescriptor == TypeDescriptors.get().primitiveByte) {
+            return new NumberLiteral(toTypeDescriptor, numberLiteral.byteValue());
+          } else if (toTypeDescriptor == TypeDescriptors.get().primitiveChar) {
+            return new CharacterLiteral((char) numberLiteral.intValue());
+          } else if (toTypeDescriptor == TypeDescriptors.get().primitiveShort) {
+            return new NumberLiteral(toTypeDescriptor, numberLiteral.shortValue());
+          } else if (toTypeDescriptor == TypeDescriptors.get().primitiveInt) {
+            return new NumberLiteral(toTypeDescriptor, numberLiteral.intValue());
+          } else if (toTypeDescriptor == TypeDescriptors.get().primitiveLong) {
+            return new NumberLiteral(toTypeDescriptor, numberLiteral.longValue());
+          } else if (toTypeDescriptor == TypeDescriptors.get().primitiveFloat) {
+            return new NumberLiteral(toTypeDescriptor, numberLiteral.floatValue());
+          } else if (toTypeDescriptor == TypeDescriptors.get().primitiveFloat) {
+            return new NumberLiteral(toTypeDescriptor, numberLiteral.doubleValue());
           }
+        } else if (literalValue instanceof Character) {
+          Character characterLiteral = (Character) literalValue;
+          return convertLiteral((int) characterLiteral.charValue(), toTypeDescriptor);
+        }
+        throw new IllegalArgumentException();
+      }
 
-          @Override
-          public Expression rewriteCastContext(CastExpression castExpression) {
-            Expression expression = castExpression.getExpression();
-            TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
-            TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
+      private Expression insertNarrowingCall(
+          Expression expression, TypeDescriptor toTypeDescriptor) {
 
-            if (toTypeDescriptor.isPrimitive()
-                && fromTypeDescriptor.isPrimitive()
-                && AstUtils.canRemoveCast(fromTypeDescriptor, toTypeDescriptor)) {
-              return expression;
-            }
+        // Narrow literals at compile time.
+        if (expression instanceof NumberLiteral) {
+          return convertLiteral(((NumberLiteral) expression).getValue(), toTypeDescriptor);
+        } else if (expression instanceof CharacterLiteral) {
+          return convertLiteral(((CharacterLiteral) expression).getValue(), toTypeDescriptor);
+        }
 
-            if (!shouldNarrow(fromTypeDescriptor, toTypeDescriptor)) {
-              return castExpression;
-            }
-
-            return insertNarrowingCall(expression, toTypeDescriptor);
-          }
-
-          private boolean shouldNarrow(
-              TypeDescriptor fromTypeDescriptor, TypeDescriptor toTypeDescriptor) {
-
-            if (fromTypeDescriptor.equalsIgnoreNullability(toTypeDescriptor)) {
-              return false;
-            }
-
-            if (!fromTypeDescriptor.isPrimitive() || !toTypeDescriptor.isPrimitive()) {
-              // Non-primitive casts are not narrowing.
-              return false;
-            }
-
-            int fromWidth = TypeDescriptors.getWidth(fromTypeDescriptor);
-            int toWidth = TypeDescriptors.getWidth(toTypeDescriptor);
-
-            Set<TypeDescriptor> typeDescriptors =
-                Sets.newHashSet(fromTypeDescriptor, toTypeDescriptor);
-
-            if (fromWidth <= toWidth
-                && !(typeDescriptors.contains(TypeDescriptors.get().primitiveShort)
-                    && typeDescriptors.contains(TypeDescriptors.get().primitiveChar))) {
-              // Don't modify non-narrowing casts, except for the special case between
-              // short and char.
-              return false;
-            }
-
-            return true;
-          }
-
-          private Expression convertLiteral(Object literalValue, TypeDescriptor toTypeDescriptor) {
-            if (literalValue instanceof Number) {
-              Number numberLiteral = (Number) literalValue;
-              // Narrow at compile time.
-              if (toTypeDescriptor == TypeDescriptors.get().primitiveByte) {
-                return new NumberLiteral(toTypeDescriptor, numberLiteral.byteValue());
-              } else if (toTypeDescriptor == TypeDescriptors.get().primitiveChar) {
-                return new CharacterLiteral((char) numberLiteral.intValue());
-              } else if (toTypeDescriptor == TypeDescriptors.get().primitiveShort) {
-                return new NumberLiteral(toTypeDescriptor, numberLiteral.shortValue());
-              } else if (toTypeDescriptor == TypeDescriptors.get().primitiveInt) {
-                return new NumberLiteral(toTypeDescriptor, numberLiteral.intValue());
-              } else if (toTypeDescriptor == TypeDescriptors.get().primitiveLong) {
-                return new NumberLiteral(toTypeDescriptor, numberLiteral.longValue());
-              } else if (toTypeDescriptor == TypeDescriptors.get().primitiveFloat) {
-                return new NumberLiteral(toTypeDescriptor, numberLiteral.floatValue());
-              } else if (toTypeDescriptor == TypeDescriptors.get().primitiveFloat) {
-                return new NumberLiteral(toTypeDescriptor, numberLiteral.doubleValue());
-              }
-            } else if (literalValue instanceof Character) {
-              Character characterLiteral = (Character) literalValue;
-              return convertLiteral((int) characterLiteral.charValue(), toTypeDescriptor);
-            }
-            throw new IllegalArgumentException();
-          }
-
-          private Expression insertNarrowingCall(
-              Expression expression, TypeDescriptor toTypeDescriptor) {
-
-            // Narrow literals at compile time.
-            if (expression instanceof NumberLiteral) {
-              return convertLiteral(((NumberLiteral) expression).getValue(), toTypeDescriptor);
-            } else if (expression instanceof CharacterLiteral) {
-              return convertLiteral(((CharacterLiteral) expression).getValue(), toTypeDescriptor);
-            }
-
-            TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
-            String narrowMethodName =
-                String.format(
-                    "$narrow%sTo%s",
-                    AstUtils.toProperCase(fromTypeDescriptor.getSimpleName()),
-                    AstUtils.toProperCase(toTypeDescriptor.getSimpleName()));
-            MethodDescriptor narrowMethodDescriptor =
-                MethodDescriptor.Builder.fromDefault()
-                    .setJsInfo(JsInfo.RAW)
-                    .setIsStatic(true)
-                    .setEnclosingClassTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
-                    .setMethodName(narrowMethodName)
-                    .setParameterTypeDescriptors(Lists.newArrayList(fromTypeDescriptor))
-                    .setReturnTypeDescriptor(toTypeDescriptor)
-                    .build();
-            // Primitives.$narrowAToB(expr);
-            return MethodCall.createMethodCall(null, narrowMethodDescriptor, expression);
-          }
-        });
+        TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
+        String narrowMethodName =
+            String.format(
+                "$narrow%sTo%s",
+                AstUtils.toProperCase(fromTypeDescriptor.getSimpleName()),
+                AstUtils.toProperCase(toTypeDescriptor.getSimpleName()));
+        MethodDescriptor narrowMethodDescriptor =
+            MethodDescriptor.Builder.fromDefault()
+                .setJsInfo(JsInfo.RAW)
+                .setIsStatic(true)
+                .setEnclosingClassTypeDescriptor(BootstrapType.PRIMITIVES.getDescriptor())
+                .setMethodName(narrowMethodName)
+                .setParameterTypeDescriptors(Lists.newArrayList(fromTypeDescriptor))
+                .setReturnTypeDescriptor(toTypeDescriptor)
+                .build();
+        // Primitives.$narrowAToB(expr);
+        return MethodCall.createMethodCall(null, narrowMethodDescriptor, expression);
+      }
+    };
   }
 }

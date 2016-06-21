@@ -26,46 +26,46 @@ import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.PrefixOperator;
 
-/**
- * Replaces object == object expressions with Equality.$same(object, object) calls.
- */
-public class NormalizeEquality extends AbstractRewriter {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new NormalizeEquality());
+/** Replaces object == object expressions with Equality.$same(object, object) calls. */
+public class NormalizeEquality extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new Rewriter());
   }
 
-  @Override
-  public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
-    // Don't rewrite non-equality expressions.
-    if (binaryExpression.getOperator() != BinaryOperator.EQUALS
-        && binaryExpression.getOperator() != BinaryOperator.NOT_EQUALS) {
-      return binaryExpression;
-    }
+  private static class Rewriter extends AbstractRewriter {
+    @Override
+    public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
+      // Don't rewrite non-equality expressions.
+      if (binaryExpression.getOperator() != BinaryOperator.EQUALS
+          && binaryExpression.getOperator() != BinaryOperator.NOT_EQUALS) {
+        return binaryExpression;
+      }
 
-    // Don't rewrite primitive comparisons since '==' and '!=' are already good enough.
-    if (binaryExpression.getLeftOperand().getTypeDescriptor().isPrimitive()
-        || binaryExpression.getRightOperand().getTypeDescriptor().isPrimitive()) {
-      return binaryExpression;
-    }
+      // Don't rewrite primitive comparisons since '==' and '!=' are already good enough.
+      if (binaryExpression.getLeftOperand().getTypeDescriptor().isPrimitive()
+          || binaryExpression.getRightOperand().getTypeDescriptor().isPrimitive()) {
+        return binaryExpression;
+      }
 
-    // Don't rewrite null literal comparisons since '==' and '!=' are already good enough.
-    if (binaryExpression.getLeftOperand() instanceof NullLiteral
-        || binaryExpression.getRightOperand() instanceof NullLiteral) {
-      return binaryExpression;
-    }
+      // Don't rewrite null literal comparisons since '==' and '!=' are already good enough.
+      if (binaryExpression.getLeftOperand() instanceof NullLiteral
+          || binaryExpression.getRightOperand() instanceof NullLiteral) {
+        return binaryExpression;
+      }
 
-    // Rewrite object - object comparisons to avoid JS implicit conversions and still treat null and
-    // undefined as equivalent.
-    MethodCall sameCall =
-        MethodCall.createMethodCall(
-            null,
-            AstUtils.createUtilSameMethodDescriptor(),
-            binaryExpression.getLeftOperand(),
-            binaryExpression.getRightOperand());
-    if (binaryExpression.getOperator() == BinaryOperator.NOT_EQUALS) {
-      return new PrefixExpression(sameCall.getTypeDescriptor(), sameCall, PrefixOperator.NOT);
+      // Rewrite object - object comparisons to avoid JS implicit conversions and still treat null
+      // and undefined as equivalent.
+      MethodCall sameCall =
+          MethodCall.createMethodCall(
+              null,
+              AstUtils.createUtilSameMethodDescriptor(),
+              binaryExpression.getLeftOperand(),
+              binaryExpression.getRightOperand());
+      if (binaryExpression.getOperator() == BinaryOperator.NOT_EQUALS) {
+        return new PrefixExpression(sameCall.getTypeDescriptor(), sameCall, PrefixOperator.NOT);
+      }
+      return sameCall;
     }
-    return sameCall;
   }
 }

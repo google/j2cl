@@ -39,70 +39,72 @@ import java.util.Map;
  * and sometimes has non-empty parameter list. Then the synthesized super call should also be fixed
  * to call corresponding constructors.
  *
- * <p>For example, A a = new A(1) {}. The default constructor of the anonymous class should have
- * a parameter list of (int), and the super call should call A(int).
+ * <p>For example, A a = new A(1) {}. The default constructor of the anonymous class should have a
+ * parameter list of (int), and the super call should call A(int).
  */
-public class FixAnonymousClassConstructors extends AbstractRewriter {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new FixAnonymousClassConstructors());
+public class FixAnonymousClassConstructors extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new AnonymousClassConstructorRewriter());
     compilationUnit.accept(new FixSuperCallQualifiersVisitor());
     new FixAnonymousClassCreationsVisitor().applyTo(compilationUnit);
   }
 
-  private List<Variable> constructorParameters = new ArrayList<>();
-  private List<Variable> superConstructorParameters = new ArrayList<>();
+  private static class AnonymousClassConstructorRewriter extends AbstractRewriter {
+    private final List<Variable> constructorParameters = new ArrayList<>();
+    private final List<Variable> superConstructorParameters = new ArrayList<>();
 
-  @Override
-  public boolean shouldProcessJavaType(JavaType javaType) {
-    if (!(javaType instanceof AnonymousJavaType)) {
-      return false;
-    }
-    AnonymousJavaType anonymousJavaType = (AnonymousJavaType) javaType;
-    // Create and collect parameters for the default constructor of only the current JavaType.
-    constructorParameters.clear();
-    superConstructorParameters.clear();
-    int i = 0;
-    for (TypeDescriptor parameterTypeDescriptor :
-        anonymousJavaType.getConstructorParameterTypeDescriptors()) {
-      Variable parameter = new Variable("$_" + i++, parameterTypeDescriptor, false, true);
-      constructorParameters.add(parameter);
-    }
-    int j = 0;
-    for (TypeDescriptor parameterTypeDescriptor :
-        anonymousJavaType.getSuperConstructorParameterTypeDescriptors()) {
-      Variable parameter = new Variable("$_" + j++, parameterTypeDescriptor, false, true);
-      superConstructorParameters.add(parameter);
-    }
-    return true;
-  }
-
-  @Override
-  public Node rewriteMethod(Method method) {
-    if (!method.isConstructor()) {
-      return method;
-    }
-    // Add parameters to the constructor.
-    return Method.Builder.from(method).addParameters(constructorParameters).build();
-  }
-
-  @Override
-  public Node rewriteMethodCall(MethodCall methodCall) {
-    /*
-     * Add arguments to super() calls inside of constructor methods in anonymous classes.
-     */
-    if (getCurrentMethod() == null
-        || !getCurrentMethod().isConstructor()
-        || !methodCall.getTarget().isConstructor()) {
-      return methodCall;
+    @Override
+    public boolean shouldProcessJavaType(JavaType javaType) {
+      if (!(javaType instanceof AnonymousJavaType)) {
+        return false;
+      }
+      AnonymousJavaType anonymousJavaType = (AnonymousJavaType) javaType;
+      // Create and collect parameters for the default constructor of only the current JavaType.
+      constructorParameters.clear();
+      superConstructorParameters.clear();
+      int i = 0;
+      for (TypeDescriptor parameterTypeDescriptor :
+          anonymousJavaType.getConstructorParameterTypeDescriptors()) {
+        Variable parameter = new Variable("$_" + i++, parameterTypeDescriptor, false, true);
+        constructorParameters.add(parameter);
+      }
+      int j = 0;
+      for (TypeDescriptor parameterTypeDescriptor :
+          anonymousJavaType.getSuperConstructorParameterTypeDescriptors()) {
+        Variable parameter = new Variable("$_" + j++, parameterTypeDescriptor, false, true);
+        superConstructorParameters.add(parameter);
+      }
+      return true;
     }
 
-    MethodCall.Builder methodCallBuilder = MethodCall.Builder.from(methodCall);
-    for (Variable parameter : superConstructorParameters) {
-      methodCallBuilder.appendArgumentAndUpdateDescriptor(parameter.getReference());
+    @Override
+    public Node rewriteMethod(Method method) {
+      if (!method.isConstructor()) {
+        return method;
+      }
+      // Add parameters to the constructor.
+      return Method.Builder.from(method).addParameters(constructorParameters).build();
     }
 
-    return methodCallBuilder.build();
+    @Override
+    public Node rewriteMethodCall(MethodCall methodCall) {
+      /*
+       * Add arguments to super() calls inside of constructor methods in anonymous classes.
+       */
+      if (getCurrentMethod() == null
+          || !getCurrentMethod().isConstructor()
+          || !methodCall.getTarget().isConstructor()) {
+        return methodCall;
+      }
+
+      MethodCall.Builder methodCallBuilder = MethodCall.Builder.from(methodCall);
+      for (Variable parameter : superConstructorParameters) {
+        methodCallBuilder.appendArgumentAndUpdateDescriptor(parameter.getReference());
+      }
+
+      return methodCallBuilder.build();
+    }
   }
 
   /**

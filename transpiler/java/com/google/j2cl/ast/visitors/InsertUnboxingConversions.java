@@ -27,66 +27,64 @@ import com.google.j2cl.ast.TypeDescriptors;
  * contexts) when a boxed type is being put into a primitive type slot in casting, assignment,
  * method invocation, unary numeric promotion or binary numeric promotion conversion contexts.
  */
-public class InsertUnboxingConversions extends ConversionContextVisitor {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new InsertUnboxingConversions());
+public class InsertUnboxingConversions extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new ConversionContextVisitor(getContextRewriter()));
   }
 
-  public InsertUnboxingConversions() {
-    super(
-        new ContextRewriter() {
+  private ConversionContextVisitor.ContextRewriter getContextRewriter() {
+    return new ConversionContextVisitor.ContextRewriter() {
+      @Override
+      public Expression rewriteAssignmentContext(
+          TypeDescriptor toTypeDescriptor, Expression expression) {
+        return maybeUnboxAndWiden(toTypeDescriptor, expression);
+      }
 
-          @Override
-          public Expression rewriteAssignmentContext(
-              TypeDescriptor toTypeDescriptor, Expression expression) {
-            return maybeUnboxAndWiden(toTypeDescriptor, expression);
+      @Override
+      public Expression rewriteBinaryNumericPromotionContext(
+          Expression subjectOperandExpression, Expression otherOperandExpression) {
+        if (TypeDescriptors.isBoxedType(subjectOperandExpression.getTypeDescriptor())) {
+          return AstUtils.unbox(subjectOperandExpression);
+        }
+        return subjectOperandExpression;
+      }
+
+      @Override
+      public Expression rewriteCastContext(CastExpression castExpression) {
+        TypeDescriptor fromTypeDescriptor = castExpression.getExpression().getTypeDescriptor();
+        TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
+        if (TypeDescriptors.isNonVoidPrimitiveType(toTypeDescriptor)
+            && TypeDescriptors.isBoxedType(fromTypeDescriptor)) {
+
+          // An unboxing conversion....
+          Expression resultExpression = AstUtils.unbox(castExpression.getExpression());
+
+          // ...optionally followed by a widening primitive conversion.
+          fromTypeDescriptor = resultExpression.getTypeDescriptor();
+          if (!fromTypeDescriptor.equalsIgnoreNullability(toTypeDescriptor)) {
+            resultExpression = CastExpression.create(resultExpression, toTypeDescriptor);
           }
 
-          @Override
-          public Expression rewriteBinaryNumericPromotionContext(
-              Expression subjectOperandExpression, Expression otherOperandExpression) {
-            if (TypeDescriptors.isBoxedType(subjectOperandExpression.getTypeDescriptor())) {
-              return AstUtils.unbox(subjectOperandExpression);
-            }
-            return subjectOperandExpression;
-          }
+          return resultExpression;
+        }
+        return castExpression;
+      }
 
-          @Override
-          public Expression rewriteCastContext(CastExpression castExpression) {
-            TypeDescriptor fromTypeDescriptor = castExpression.getExpression().getTypeDescriptor();
-            TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
-            if (TypeDescriptors.isNonVoidPrimitiveType(toTypeDescriptor)
-                && TypeDescriptors.isBoxedType(fromTypeDescriptor)) {
+      @Override
+      public Expression rewriteMethodInvocationContext(
+          TypeDescriptor parameterTypeDescriptor, Expression argumentExpression) {
+        return maybeUnboxAndWiden(parameterTypeDescriptor, argumentExpression);
+      }
 
-              // An unboxing conversion....
-              Expression resultExpression = AstUtils.unbox(castExpression.getExpression());
-
-              // ...optionally followed by a widening primitive conversion.
-              fromTypeDescriptor = resultExpression.getTypeDescriptor();
-              if (!fromTypeDescriptor.equalsIgnoreNullability(toTypeDescriptor)) {
-                resultExpression = CastExpression.create(resultExpression, toTypeDescriptor);
-              }
-
-              return resultExpression;
-            }
-            return castExpression;
-          }
-
-          @Override
-          public Expression rewriteMethodInvocationContext(
-              TypeDescriptor parameterTypeDescriptor, Expression argumentExpression) {
-            return maybeUnboxAndWiden(parameterTypeDescriptor, argumentExpression);
-          }
-
-          @Override
-          public Expression rewriteUnaryNumericPromotionContext(Expression operandExpression) {
-            if (TypeDescriptors.isBoxedType(operandExpression.getTypeDescriptor())) {
-              return AstUtils.unbox(operandExpression);
-            }
-            return operandExpression;
-          }
-        });
+      @Override
+      public Expression rewriteUnaryNumericPromotionContext(Expression operandExpression) {
+        if (TypeDescriptors.isBoxedType(operandExpression.getTypeDescriptor())) {
+          return AstUtils.unbox(operandExpression);
+        }
+        return operandExpression;
+      }
+    };
   }
 
   private static Expression maybeUnboxAndWiden(

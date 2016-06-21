@@ -27,35 +27,35 @@ import com.google.j2cl.ast.MethodDescriptor;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Insert instance $init call to each constructor.
- */
-public class InsertInstanceInitCalls extends AbstractVisitor {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new InsertInstanceInitCalls());
+/** Insert instance $init call to each constructor. */
+public class InsertInstanceInitCalls extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new Visitor());
   }
 
-  @Override
-  public boolean enterMethod(Method method) {
-    if (!method.isConstructor() || AstUtils.hasThisCall(method)) {
-      // A constructor with this() call does not need $init call.
+  private static class Visitor extends AbstractVisitor {
+    @Override
+    public boolean enterMethod(Method method) {
+      if (!method.isConstructor() || AstUtils.hasThisCall(method)) {
+        // A constructor with this() call does not need $init call.
+        return false;
+      }
+      synthesizeInstanceInitCall(method);
       return false;
     }
-    synthesizeInstanceInitCall(method);
-    return false;
-  }
 
-  private void synthesizeInstanceInitCall(Method method) {
-    MethodDescriptor initMethodDescriptor =
-        AstUtils.createInitMethodDescriptor(
-            method.getDescriptor().getEnclosingClassTypeDescriptor());
+    private void synthesizeInstanceInitCall(Method method) {
+      MethodDescriptor initMethodDescriptor =
+          AstUtils.createInitMethodDescriptor(
+              method.getDescriptor().getEnclosingClassTypeDescriptor());
 
-    List<Expression> arguments = new ArrayList<>();
-    MethodCall initCall = MethodCall.createMethodCall(null, initMethodDescriptor, arguments);
-    // If the constructor has a super() call, insert $init call after it. Otherwise, insert
-    // to the top of the method body.
-    int insertIndex = AstUtils.hasSuperCall(method) ? 1 : 0;
-    method.getBody().getStatements().add(insertIndex, new ExpressionStatement(initCall));
+      List<Expression> arguments = new ArrayList<>();
+      MethodCall initCall = MethodCall.createMethodCall(null, initMethodDescriptor, arguments);
+      // If the constructor has a super() call, insert $init call after it. Otherwise, insert
+      // to the top of the method body.
+      int insertIndex = AstUtils.hasSuperCall(method) ? 1 : 0;
+      method.getBody().getStatements().add(insertIndex, new ExpressionStatement(initCall));
+    }
   }
 }

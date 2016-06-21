@@ -23,16 +23,14 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
 
-/**
- * The first line of a static method should be a call to the Class's clinit.
- */
-public class InsertStaticClassInitializerMethods {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new StaticClassInitializerMethodsRewriter());
+/** The first line of a static method should be a call to the Class's clinit. */
+public class InsertStaticClassInitializerMethods extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new Rewriter());
   }
 
-  private static class StaticClassInitializerMethodsRewriter extends AbstractRewriter {
+  private static class Rewriter extends AbstractRewriter {
     @Override
     public Node rewriteMethod(Method method) {
       boolean isStaticMethod = method.getDescriptor().isStatic();

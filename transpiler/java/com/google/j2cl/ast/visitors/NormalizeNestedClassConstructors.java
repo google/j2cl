@@ -47,15 +47,14 @@ import java.util.Map;
  * instances, fix calls to the constructors, and add initializers to the added fields in each
  * constructor.
  *
- * <p>
- * Normalization of nested classes are done in two parts, one is in CompilationUnitBuilder, and the
- * other one is here in NormalizeNestedClassConstructorsVisitor. CompilationUnitBuilder resolves all
- * the qualifiers and arguments. NormalizeNestedClassConstructorsVisitor does all normalization and
- * structural AST changes.
+ * <p>Normalization of nested classes are done in two parts, one is in CompilationUnitBuilder, and
+ * the other one is here in NormalizeNestedClassConstructorsVisitor. CompilationUnitBuilder resolves
+ * all the qualifiers and arguments. NormalizeNestedClassConstructorsVisitor does all normalization
+ * and structural AST changes.
  */
-public class NormalizeNestedClassConstructors {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
+public class NormalizeNestedClassConstructors extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
     Map<TypeDescriptor, JavaType> javaTypeByTypeDescriptor = new HashMap<>();
     for (JavaType type : compilationUnit.getTypes()) {
       javaTypeByTypeDescriptor.put(type.getDescriptor().getRawTypeDescriptor(), type);

@@ -20,23 +20,23 @@ import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeDescriptors;
 
-/**
- * Inserts type annotation for 'new' a generic type or a JsFunction type.
- */
-public class InsertCastOnNewInstances extends AbstractRewriter {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new InsertCastOnNewInstances());
+/** Inserts type annotation for 'new' a generic type or a JsFunction type. */
+public class InsertCastOnNewInstances extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new Rewriter());
   }
 
-  @Override
-  public Node rewriteNewInstance(NewInstance newInstance) {
-    if (newInstance.getTypeDescriptor().isParameterizedType()) {
-      // add type annotation to ClassInstanceCreation of generic type and JsFunction type.
-      return JsTypeAnnotation.createTypeAnnotation(
-          newInstance, TypeDescriptors.toNonNullable(newInstance.getTypeDescriptor()));
-    } else {
-      return newInstance;
+  private static class Rewriter extends AbstractRewriter {
+    @Override
+    public Node rewriteNewInstance(NewInstance newInstance) {
+      if (newInstance.getTypeDescriptor().isParameterizedType()) {
+        // add type annotation to ClassInstanceCreation of generic type and JsFunction type.
+        return JsTypeAnnotation.createTypeAnnotation(
+            newInstance, TypeDescriptors.toNonNullable(newInstance.getTypeDescriptor()));
+      } else {
+        return newInstance;
+      }
     }
   }
 }

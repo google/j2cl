@@ -30,25 +30,28 @@ import com.google.j2cl.ast.TypeDescriptors;
 /**
  * Temporary workaround for b/24476009.
  *
- * <p>
- * Template declared in a method is not resolved inside the method by JSCompiler. To get rid of the
- * warnings, this class replaces cast to a type variable that is declared by a method with cast to
- * its bound.
+ * <p>Template declared in a method is not resolved inside the method by JSCompiler. To get rid of
+ * the warnings, this class replaces cast to a type variable that is declared by a method with cast
+ * to its bound.
  */
-public class FixTypeVariablesInMethods extends AbstractRewriter {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new FixTypeVariablesInMethods());
-  }
-  
+public class FixTypeVariablesInMethods extends NormalizationPass {
   @Override
-  public Node rewriteJsTypeAnnotation(JsTypeAnnotation annotation) {
-    if (annotation.isDeclaration()) {
-      return annotation;
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new Rewriter());
+  }
+
+  private class Rewriter extends AbstractRewriter {
+    @Override
+    public Node rewriteJsTypeAnnotation(JsTypeAnnotation annotation) {
+      if (annotation.isDeclaration()) {
+        return annotation;
+      }
+      TypeDescriptor castTypeDescriptor = annotation.getTypeDescriptor();
+      TypeDescriptor boundType =
+          replaceTypeVariableWithBound(castTypeDescriptor, getCurrentMethod());
+      return JsTypeAnnotation.createTypeAnnotation(annotation.getExpression(), boundType);
     }
-    TypeDescriptor castTypeDescriptor = annotation.getTypeDescriptor();
-    TypeDescriptor boundType = replaceTypeVariableWithBound(castTypeDescriptor, getCurrentMethod());
-    return JsTypeAnnotation.createTypeAnnotation(annotation.getExpression(), boundType);
+
   }
 
   private TypeDescriptor replaceTypeVariableWithBound(

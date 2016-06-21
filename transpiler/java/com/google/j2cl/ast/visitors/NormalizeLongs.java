@@ -32,86 +32,86 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 
-/**
- * Replaces long operations with corresponding long utils method calls.
- */
-public class NormalizeLongs extends AbstractRewriter {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new NormalizeLongs());
+/** Replaces long operations with corresponding long utils method calls. */
+public class NormalizeLongs extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new Rewriter());
   }
 
-  @Override
-  public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
-    Expression leftArgument = binaryExpression.getLeftOperand();
-    Expression rightArgument = binaryExpression.getRightOperand();
-    TypeDescriptor returnTypeDescriptor = binaryExpression.getTypeDescriptor();
+  private static class Rewriter extends AbstractRewriter {
+    @Override
+    public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
+      Expression leftArgument = binaryExpression.getLeftOperand();
+      Expression rightArgument = binaryExpression.getRightOperand();
+      TypeDescriptor returnTypeDescriptor = binaryExpression.getTypeDescriptor();
 
-    // Skips non-long operations.
-    if ((!leftArgument
-                .getTypeDescriptor()
-                .equalsIgnoreNullability(TypeDescriptors.get().primitiveLong)
-            && !rightArgument
-                .getTypeDescriptor()
-                .equalsIgnoreNullability(TypeDescriptors.get().primitiveLong))
-        || (!returnTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveLong)
-            && !returnTypeDescriptor.equalsIgnoreNullability(
-                TypeDescriptors.get().primitiveBoolean))) {
-      return binaryExpression;
-    }
-    BinaryOperator operator = binaryExpression.getOperator();
-    // Skips assignment because it doesn't need special handling.
-    if (operator == BinaryOperator.ASSIGN) {
-      return binaryExpression;
-    }
+      // Skips non-long operations.
+      if ((!leftArgument
+                  .getTypeDescriptor()
+                  .equalsIgnoreNullability(TypeDescriptors.get().primitiveLong)
+              && !rightArgument
+                  .getTypeDescriptor()
+                  .equalsIgnoreNullability(TypeDescriptors.get().primitiveLong))
+          || (!returnTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveLong)
+              && !returnTypeDescriptor.equalsIgnoreNullability(
+                  TypeDescriptors.get().primitiveBoolean))) {
+        return binaryExpression;
+      }
+      BinaryOperator operator = binaryExpression.getOperator();
+      // Skips assignment because it doesn't need special handling.
+      if (operator == BinaryOperator.ASSIGN) {
+        return binaryExpression;
+      }
 
-    TypeDescriptor leftParameterTypeDescriptor = TypeDescriptors.get().primitiveLong;
-    TypeDescriptor rightParameterTypeDescriptor = TypeDescriptors.get().primitiveLong;
+      TypeDescriptor leftParameterTypeDescriptor = TypeDescriptors.get().primitiveLong;
+      TypeDescriptor rightParameterTypeDescriptor = TypeDescriptors.get().primitiveLong;
 
-    MethodDescriptor longUtilsMethodDescriptor =
-        MethodDescriptor.Builder.fromDefault()
-            .setJsInfo(JsInfo.RAW)
-            .setIsStatic(true)
-            .setEnclosingClassTypeDescriptor(BootstrapType.LONGS.getDescriptor())
-            .setMethodName(getLongOperationFunctionName(operator))
-            .setParameterTypeDescriptors(
-                Lists.newArrayList(leftParameterTypeDescriptor, rightParameterTypeDescriptor))
-            .setReturnTypeDescriptor(returnTypeDescriptor)
-            .build();
-    // LongUtils.$someOperation(leftOperand, rightOperand);
-    return MethodCall.createMethodCall(
-        null, longUtilsMethodDescriptor, Lists.newArrayList(leftArgument, rightArgument));
-  }
-
-  @Override
-  public Node rewritePrefixExpression(PrefixExpression prefixExpression) {
-    Expression argument = prefixExpression.getOperand();
-    // Only interested in longs.
-    if (!argument
-        .getTypeDescriptor()
-        .equalsIgnoreNullability(TypeDescriptors.get().primitiveLong)) {
-      return prefixExpression;
-    }
-    PrefixOperator operator = prefixExpression.getOperator();
-    // Unwrap PLUS operator because it's a NOOP.
-    if (operator == PrefixOperator.PLUS) {
-      return prefixExpression.getOperand();
+      MethodDescriptor longUtilsMethodDescriptor =
+          MethodDescriptor.Builder.fromDefault()
+              .setJsInfo(JsInfo.RAW)
+              .setIsStatic(true)
+              .setEnclosingClassTypeDescriptor(BootstrapType.LONGS.getDescriptor())
+              .setMethodName(getLongOperationFunctionName(operator))
+              .setParameterTypeDescriptors(
+                  Lists.newArrayList(leftParameterTypeDescriptor, rightParameterTypeDescriptor))
+              .setReturnTypeDescriptor(returnTypeDescriptor)
+              .build();
+      // LongUtils.$someOperation(leftOperand, rightOperand);
+      return MethodCall.createMethodCall(
+          null, longUtilsMethodDescriptor, Lists.newArrayList(leftArgument, rightArgument));
     }
 
-    TypeDescriptor parameterTypeDescriptor = TypeDescriptors.get().primitiveLong;
-    TypeDescriptor returnTypeDescriptor = TypeDescriptors.get().primitiveLong;
+    @Override
+    public Node rewritePrefixExpression(PrefixExpression prefixExpression) {
+      Expression argument = prefixExpression.getOperand();
+      // Only interested in longs.
+      if (!argument
+          .getTypeDescriptor()
+          .equalsIgnoreNullability(TypeDescriptors.get().primitiveLong)) {
+        return prefixExpression;
+      }
+      PrefixOperator operator = prefixExpression.getOperator();
+      // Unwrap PLUS operator because it's a NOOP.
+      if (operator == PrefixOperator.PLUS) {
+        return prefixExpression.getOperand();
+      }
 
-    MethodDescriptor longUtilsMethodDescriptor =
-        MethodDescriptor.Builder.fromDefault()
-            .setJsInfo(JsInfo.RAW)
-            .setIsStatic(true)
-            .setEnclosingClassTypeDescriptor(BootstrapType.LONGS.getDescriptor())
-            .setMethodName(getLongOperationFunctionName(operator))
-            .setParameterTypeDescriptors(Lists.newArrayList(parameterTypeDescriptor))
-            .setReturnTypeDescriptor(returnTypeDescriptor)
-            .build();
-    // LongUtils.$someOperation(operand);
-    return MethodCall.createMethodCall(null, longUtilsMethodDescriptor, argument);
+      TypeDescriptor parameterTypeDescriptor = TypeDescriptors.get().primitiveLong;
+      TypeDescriptor returnTypeDescriptor = TypeDescriptors.get().primitiveLong;
+
+      MethodDescriptor longUtilsMethodDescriptor =
+          MethodDescriptor.Builder.fromDefault()
+              .setJsInfo(JsInfo.RAW)
+              .setIsStatic(true)
+              .setEnclosingClassTypeDescriptor(BootstrapType.LONGS.getDescriptor())
+              .setMethodName(getLongOperationFunctionName(operator))
+              .setParameterTypeDescriptors(Lists.newArrayList(parameterTypeDescriptor))
+              .setReturnTypeDescriptor(returnTypeDescriptor)
+              .build();
+      // LongUtils.$someOperation(operand);
+      return MethodCall.createMethodCall(null, longUtilsMethodDescriptor, argument);
+    }
   }
 
   private static String getLongOperationFunctionName(PrefixOperator prefixOperator) {

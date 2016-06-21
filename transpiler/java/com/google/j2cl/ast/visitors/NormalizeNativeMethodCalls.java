@@ -35,60 +35,58 @@ import java.util.List;
 /**
  * Normalizes the static native js method calls with the real native method calls.
  *
- * <p>For example,
- * class A {
- *   @JsMethod(namespace="Math") static native double abs(double x);
- * }
- * A.abs() really refers to Javascript built-in Math.abs().
+ * <p>For example, class A {
  *
- * <p>This pass replaces all method calls to A.abs() with Math.abs().
+ * @JsMethod(namespace="Math") static native double abs(double x); } A.abs() really refers to
+ *     Javascript built-in Math.abs().
+ *     <p>This pass replaces all method calls to A.abs() with Math.abs().
  */
-public class NormalizeNativeMethodCalls extends AbstractRewriter {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new NormalizeNativeMethodCalls());
+public class NormalizeNativeMethodCalls extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new Rewriter());
   }
 
-  @Override
-  public Node rewriteMethodCall(MethodCall methodCall) {
-    MethodDescriptor methodDescriptor = methodCall.getTarget();
-    if (!methodDescriptor.isStatic()
-        || !methodDescriptor.isNative()
-        || !methodDescriptor.hasJsNamespace()) {
-      return methodCall;
+  private static class Rewriter extends AbstractRewriter {
+    @Override
+    public Node rewriteMethodCall(MethodCall methodCall) {
+      MethodDescriptor methodDescriptor = methodCall.getTarget();
+      if (!methodDescriptor.isStatic()
+          || !methodDescriptor.isNative()
+          || !methodDescriptor.hasJsNamespace()) {
+        return methodCall;
+      }
+      String qualifiedName = methodDescriptor.getJsNamespace();
+      TypeDescriptor nativeTypeDescriptor;
+      if (JsUtils.isGlobal(qualifiedName)) {
+        nativeTypeDescriptor =
+            TypeDescriptors.createNative(
+                Arrays.asList(JsUtils.JS_GLOBAL),
+                Arrays.asList(""),
+                Collections.emptyList(),
+                JsUtils.JS_GLOBAL,
+                "");
+      } else {
+        List<String> nameComponents = Splitter.on('.').splitToList(qualifiedName);
+        int size = nameComponents.size();
+        // Fill in JS_GLOBAL as the namespace if the namespace is empty.
+        List<String> namespaceComponents =
+            size == 1 ? Arrays.asList(JsUtils.JS_GLOBAL) : nameComponents.subList(0, size - 1);
+        nativeTypeDescriptor =
+            TypeDescriptors.createNative(
+                namespaceComponents,
+                nameComponents.subList(size - 1, size),
+                Collections.emptyList(),
+                Joiner.on(".").join(namespaceComponents),
+                nameComponents.get(size - 1));
+      }
+      // A.abs() -> Math.abs().
+      MethodDescriptor newMethodDescriptor =
+          MethodDescriptor.Builder.from(methodDescriptor)
+              .setEnclosingClassTypeDescriptor(nativeTypeDescriptor)
+              .build();
+      Preconditions.checkArgument(methodCall.getQualifier() instanceof TypeReference);
+      return MethodCall.createMethodCall(null, newMethodDescriptor, methodCall.getArguments());
     }
-
-    String qualifiedName = methodDescriptor.getJsNamespace();
-    TypeDescriptor nativeTypeDescriptor;
-    if (JsUtils.isGlobal(qualifiedName)) {
-      nativeTypeDescriptor =
-          TypeDescriptors.createNative(
-              Arrays.asList(JsUtils.JS_GLOBAL),
-              Arrays.asList(""),
-              Collections.emptyList(),
-              JsUtils.JS_GLOBAL,
-              "");
-    } else {
-      List<String> nameComponents = Splitter.on('.').splitToList(qualifiedName);
-      int size = nameComponents.size();
-      // Fill in JS_GLOBAL as the namespace if the namespace is empty.
-      List<String> namespaceComponents =
-          size == 1 ? Arrays.asList(JsUtils.JS_GLOBAL) : nameComponents.subList(0, size - 1);
-      nativeTypeDescriptor =
-          TypeDescriptors.createNative(
-              namespaceComponents,
-              nameComponents.subList(size - 1, size),
-              Collections.emptyList(),
-              Joiner.on(".").join(namespaceComponents),
-              nameComponents.get(size - 1));
-    }
-
-    // A.abs() -> Math.abs().
-    MethodDescriptor newMethodDescriptor =
-        MethodDescriptor.Builder.from(methodDescriptor)
-            .setEnclosingClassTypeDescriptor(nativeTypeDescriptor)
-            .build();
-    Preconditions.checkArgument(methodCall.getQualifier() instanceof TypeReference);
-    return MethodCall.createMethodCall(null, newMethodDescriptor, methodCall.getArguments());
   }
 }

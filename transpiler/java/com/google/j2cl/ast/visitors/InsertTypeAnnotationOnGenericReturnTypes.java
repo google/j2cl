@@ -14,31 +14,33 @@ import com.google.j2cl.ast.Node;
  *
  * <p>This should not be necessary when using new type inference in JSCompiler.
  */
-public class InsertTypeAnnotationOnGenericReturnTypes extends AbstractRewriter {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new InsertTypeAnnotationOnGenericReturnTypes());
+public class InsertTypeAnnotationOnGenericReturnTypes extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new Rewriter());
   }
 
-  @Override
-  public boolean shouldProcessJsTypeAnnotation(JsTypeAnnotation annotation) {
-    if (annotation.getExpression() instanceof MethodCall) {
-      MethodCall methodCall = (MethodCall) annotation.getExpression();
-      for (Expression expression : methodCall.getArguments()) {
-        // process arguments
-        expression.accept(this);
+  private static class Rewriter extends AbstractRewriter {
+    @Override
+    public boolean shouldProcessJsTypeAnnotation(JsTypeAnnotation annotation) {
+      if (annotation.getExpression() instanceof MethodCall) {
+        MethodCall methodCall = (MethodCall) annotation.getExpression();
+        for (Expression expression : methodCall.getArguments()) {
+          // process arguments
+          expression.accept(this);
+        }
+        // Don't rewrite the castExpression nor its sub expressions.
+        return false;
       }
-      // Don't rewrite the castExpression nor its sub expressions.
-      return false;
+      return true;
     }
-    return true;
-  }
 
-  @Override
-  public Node rewriteMethodCall(MethodCall methodCall) {
-    if (methodCall.getTarget().getReturnTypeDescriptor().isParameterizedType()) {
-      return JsTypeAnnotation.createTypeAnnotation(methodCall, methodCall.getTypeDescriptor());
+    @Override
+    public Node rewriteMethodCall(MethodCall methodCall) {
+      if (methodCall.getTarget().getReturnTypeDescriptor().isParameterizedType()) {
+        return JsTypeAnnotation.createTypeAnnotation(methodCall, methodCall.getTypeDescriptor());
+      }
+      return methodCall;
     }
-    return methodCall;
   }
 }

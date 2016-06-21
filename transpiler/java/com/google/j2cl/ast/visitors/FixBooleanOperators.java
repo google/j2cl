@@ -30,23 +30,22 @@ import com.google.j2cl.ast.TypeDescriptors;
 /**
  * Corrects the return type of some operators on boolean parameters.
  *
- * <p>
- * In Java &/|/^ operators return a boolean when given boolean input but in JS they return a number.
+ * <p>In Java &/|/^ operators return a boolean when given boolean input but in JS they return a
+ * number.
  *
- * <p>
- * This visitor finds these "bool ^ bool" situations and converts them to "!!(bool ^ bool)" so that
- * the return type is proper.
+ * <p>This visitor finds these "bool ^ bool" situations and converts them to "!!(bool ^ bool)" so
+ * that the return type is proper.
  */
-public class FixBooleanOperators {
-
-  private static final TypeDescriptor primitiveBoolean = TypeDescriptors.get().primitiveBoolean;
-
-  public static void applyTo(CompilationUnit compilationUnit) {
+public class FixBooleanOperators extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new SplitBadBooleanCompoundAssignmentsVisitor());
     compilationUnit.accept(new FixBadBooleanOperatorsVisitor());
   }
 
   private static class FixBadBooleanOperatorsVisitor extends AbstractRewriter {
+    private static final TypeDescriptor primitiveBoolean = TypeDescriptors.get().primitiveBoolean;
+
     @Override
     public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
       // Maybe perform this transformation:
@@ -68,6 +67,8 @@ public class FixBooleanOperators {
   }
 
   private static class SplitBadBooleanCompoundAssignmentsVisitor extends AbstractRewriter {
+    private static final TypeDescriptor primitiveBoolean = TypeDescriptors.get().primitiveBoolean;
+
     @Override
     public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
       // Maybe perform this transformation:

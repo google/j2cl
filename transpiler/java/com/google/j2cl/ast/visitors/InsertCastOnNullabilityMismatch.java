@@ -42,100 +42,103 @@ import java.util.List;
 // TODO(simionato): Add a cast when initializing arrays.
 // TODO(simionato): Handle method calls with erased types, for example
 // List<@NotNull String> x; x.add(nullableString) requires cast.
-public class InsertCastOnNullabilityMismatch extends AbstractRewriter {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new InsertCastOnNullabilityMismatch());
+public class InsertCastOnNullabilityMismatch extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new Rewriter());
   }
 
-  @Override
-  public Node rewriteField(Field field) {
-    if (field.hasInitializer()) {
-      Expression initializer = field.getInitializer();
-      TypeDescriptor fieldType = field.getDescriptor().getTypeDescriptor();
-      TypeDescriptor assignedType = initializer.getTypeDescriptor();
-      TypeDescriptor fixedType = getTypeWithMatchingNullability(fieldType, assignedType);
-      if (fixedType != assignedType) {
-        return Field.Builder.from(field)
-            .setInitializer(JsTypeAnnotation.createTypeAnnotation(initializer, fixedType))
-            .build();
+  private static class Rewriter extends AbstractRewriter {
+    @Override
+    public Node rewriteField(Field field) {
+      if (field.hasInitializer()) {
+        Expression initializer = field.getInitializer();
+        TypeDescriptor fieldType = field.getDescriptor().getTypeDescriptor();
+        TypeDescriptor assignedType = initializer.getTypeDescriptor();
+        TypeDescriptor fixedType = getTypeWithMatchingNullability(fieldType, assignedType);
+        if (fixedType != assignedType) {
+          return Field.Builder.from(field)
+              .setInitializer(JsTypeAnnotation.createTypeAnnotation(initializer, fixedType))
+              .build();
+        }
       }
+      return field;
     }
-    return field;
-  }
 
-  @Override
-  public Node rewriteVariableDeclarationFragment(VariableDeclarationFragment declarationFragment) {
-    if (declarationFragment.getInitializer() == null) {
+    @Override
+    public Node rewriteVariableDeclarationFragment(
+        VariableDeclarationFragment declarationFragment) {
+      if (declarationFragment.getInitializer() == null) {
+        return declarationFragment;
+      }
+      TypeDescriptor variableType = declarationFragment.getVariable().getTypeDescriptor();
+      TypeDescriptor assignedType = declarationFragment.getInitializer().getTypeDescriptor();
+      TypeDescriptor fixedType = getTypeWithMatchingNullability(variableType, assignedType);
+      if (fixedType != assignedType) {
+        declarationFragment.setInitializer(
+            JsTypeAnnotation.createTypeAnnotation(declarationFragment.getInitializer(), fixedType));
+      }
       return declarationFragment;
     }
-    TypeDescriptor variableType = declarationFragment.getVariable().getTypeDescriptor();
-    TypeDescriptor assignedType = declarationFragment.getInitializer().getTypeDescriptor();
-    TypeDescriptor fixedType = getTypeWithMatchingNullability(variableType, assignedType);
-    if (fixedType != assignedType) {
-      declarationFragment.setInitializer(
-          JsTypeAnnotation.createTypeAnnotation(declarationFragment.getInitializer(), fixedType));
-    }
-    return declarationFragment;
-  }
 
-  @Override
-  public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
-    if (binaryExpression.getOperator() == BinaryOperator.ASSIGN) {
-      Expression leftOperand = binaryExpression.getLeftOperand();
-      Expression rightOperand = binaryExpression.getRightOperand();
-      TypeDescriptor lhsType = leftOperand.getTypeDescriptor();
-      TypeDescriptor assignedType = rightOperand.getTypeDescriptor();
-      TypeDescriptor fixedType = getTypeWithMatchingNullability(lhsType, assignedType);
-      if (fixedType != assignedType) {
-        binaryExpression.setRightOperand(
-            JsTypeAnnotation.createTypeAnnotation(rightOperand, fixedType));
+    @Override
+    public Node rewriteBinaryExpression(BinaryExpression binaryExpression) {
+      if (binaryExpression.getOperator() == BinaryOperator.ASSIGN) {
+        Expression leftOperand = binaryExpression.getLeftOperand();
+        Expression rightOperand = binaryExpression.getRightOperand();
+        TypeDescriptor lhsType = leftOperand.getTypeDescriptor();
+        TypeDescriptor assignedType = rightOperand.getTypeDescriptor();
+        TypeDescriptor fixedType = getTypeWithMatchingNullability(lhsType, assignedType);
+        if (fixedType != assignedType) {
+          binaryExpression.setRightOperand(
+              JsTypeAnnotation.createTypeAnnotation(rightOperand, fixedType));
+        }
       }
+      return binaryExpression;
     }
-    return binaryExpression;
-  }
 
-  @Override
-  public Node rewriteInvocation(Invocation invocation) {
-    List<TypeDescriptor> parameterTypes = invocation.getTarget().getParameterTypeDescriptors();
-    int parametersNum = parameterTypes.size();
-    List<Expression> arguments = invocation.getArguments();
-    boolean isVarArgs = invocation.getTarget().isJsMethodVarargs();
+    @Override
+    public Node rewriteInvocation(Invocation invocation) {
+      List<TypeDescriptor> parameterTypes = invocation.getTarget().getParameterTypeDescriptors();
+      int parametersNum = parameterTypes.size();
+      List<Expression> arguments = invocation.getArguments();
+      boolean isVarArgs = invocation.getTarget().isJsMethodVarargs();
 
-    for (int i = 0; i < arguments.size(); i++) {
-      TypeDescriptor parameterType;
-      if (isVarArgs && i >= parametersNum - 1) {
-        Preconditions.checkState(parameterTypes.get(parametersNum - 1).isArray());
-        parameterType = parameterTypes.get(parametersNum - 1).getLeafTypeDescriptor();
-      } else {
-        parameterType = parameterTypes.get(i);
+      for (int i = 0; i < arguments.size(); i++) {
+        TypeDescriptor parameterType;
+        if (isVarArgs && i >= parametersNum - 1) {
+          Preconditions.checkState(parameterTypes.get(parametersNum - 1).isArray());
+          parameterType = parameterTypes.get(parametersNum - 1).getLeafTypeDescriptor();
+        } else {
+          parameterType = parameterTypes.get(i);
+        }
+        TypeDescriptor argumentType = arguments.get(i).getTypeDescriptor();
+
+        TypeDescriptor fixedType = getTypeWithMatchingNullability(parameterType, argumentType);
+        if (fixedType != argumentType) {
+          arguments.set(i, JsTypeAnnotation.createTypeAnnotation(arguments.get(i), fixedType));
+        }
       }
-      TypeDescriptor argumentType = arguments.get(i).getTypeDescriptor();
-
-      TypeDescriptor fixedType = getTypeWithMatchingNullability(parameterType, argumentType);
-      if (fixedType != argumentType) {
-        arguments.set(i, JsTypeAnnotation.createTypeAnnotation(arguments.get(i), fixedType));
-      }
+      return invocation;
     }
-    return invocation;
-  }
 
-  @Override
-  public Node rewriteReturnStatement(ReturnStatement returnStatement) {
-    if (returnStatement.getExpression() == null) {
-      // Void method.
+    @Override
+    public Node rewriteReturnStatement(ReturnStatement returnStatement) {
+      if (returnStatement.getExpression() == null) {
+        // Void method.
+        return returnStatement;
+      }
+
+      TypeDescriptor methodReturnType = returnStatement.getTypeDescriptor();
+      TypeDescriptor actualReturnType = returnStatement.getExpression().getTypeDescriptor();
+      TypeDescriptor fixedType = getTypeWithMatchingNullability(methodReturnType, actualReturnType);
+
+      if (fixedType != actualReturnType) {
+        returnStatement.setExpression(
+            JsTypeAnnotation.createTypeAnnotation(returnStatement.getExpression(), fixedType));
+      }
       return returnStatement;
     }
-
-    TypeDescriptor methodReturnType = returnStatement.getTypeDescriptor();
-    TypeDescriptor actualReturnType = returnStatement.getExpression().getTypeDescriptor();
-    TypeDescriptor fixedType = getTypeWithMatchingNullability(methodReturnType, actualReturnType);
-
-    if (fixedType != actualReturnType) {
-      returnStatement.setExpression(
-          JsTypeAnnotation.createTypeAnnotation(returnStatement.getExpression(), fixedType));
-    }
-    return returnStatement;
   }
 
   /**
@@ -143,7 +146,7 @@ public class InsertCastOnNullabilityMismatch extends AbstractRewriter {
    * requiredType. For example, if requiredType is "!Number" and actualType is "?Integer", this
    * method will return "!Integer'.
    */
-  private TypeDescriptor getTypeWithMatchingNullability(
+  private static TypeDescriptor getTypeWithMatchingNullability(
       TypeDescriptor requiredType, TypeDescriptor actualType) {
     if (actualType.equalsIgnoreNullability(TypeDescriptors.get().javaLangObject)) {
       // Object is exported as the all type, so there is no point in casting it.

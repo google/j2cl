@@ -32,10 +32,10 @@ import com.google.j2cl.ast.Variable;
 
 /**
  * Adds Java Throwable to JavaScript Error conversion.
- * <p> This pass makes sure that exceptions work well across Java/JavaScript boundary.
- * Instead of throwing subclasses of Java Throwable class in generated throw statements, we
- * basically throw the backing JavaScript error object so the generated code looks like this:
- * <pre>{@code
+ *
+ * <p>This pass makes sure that exceptions work well across Java/JavaScript boundary. Instead of
+ * throwing subclasses of Java Throwable class in generated throw statements, we basically throw the
+ * backing JavaScript error object so the generated code looks like this: <pre>{@code
  *   try {
  *     throw $Exceptions.toJs(new SomeJavaException);
  *   } catch(e) {
@@ -48,60 +48,63 @@ import com.google.j2cl.ast.Variable;
  *   }
  * }</pre>
  *
- * <p> As the propagated thrown object is converted to real JavaScript error, it plays better with
+ * <p>As the propagated thrown object is converted to real JavaScript error, it plays better with
  * the browser dev tools (doesn't work well with custom error objects) and callers from JavaScript
  * side.
  */
-public class InsertExceptionConversions extends AbstractRewriter {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new InsertExceptionConversions());
+public class InsertExceptionConversions extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new Rewriter());
   }
 
-  @Override
-  public Node rewriteCatchClause(CatchClause catchClause) {
-    Variable mainVariable =
-        new Variable(
-            catchClause.getExceptionVar().getName(),
-            TypeDescriptors.get().javaLangObject,
-            false,
-            false);
+  private static class Rewriter extends AbstractRewriter {
+    @Override
+    public Node rewriteCatchClause(CatchClause catchClause) {
+      Variable mainVariable =
+          new Variable(
+              catchClause.getExceptionVar().getName(),
+              TypeDescriptors.get().javaLangObject,
+              false,
+              false);
 
-    MethodDescriptor toJava =
-        MethodDescriptor.Builder.fromDefault()
-            .setJsInfo(JsInfo.RAW)
-            .setIsStatic(true)
-            .setEnclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
-            .setMethodName("toJava")
-            .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
-            .setReturnTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
-            .build();
+      MethodDescriptor toJava =
+          MethodDescriptor.Builder.fromDefault()
+              .setJsInfo(JsInfo.RAW)
+              .setIsStatic(true)
+              .setEnclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
+              .setMethodName("toJava")
+              .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
+              .setReturnTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
+              .build();
 
-    MethodCall toJavaCall = MethodCall.createMethodCall(null, toJava, mainVariable.getReference());
+      MethodCall toJavaCall =
+          MethodCall.createMethodCall(null, toJava, mainVariable.getReference());
 
-    Expression assignment =
-        BinaryExpression.Builder.asAssignmentTo(mainVariable).setRightOperand(toJavaCall).build();
+      Expression assignment =
+          BinaryExpression.Builder.asAssignmentTo(mainVariable).setRightOperand(toJavaCall).build();
 
-    catchClause.getBody().getStatements().add(0, new ExpressionStatement(assignment));
+      catchClause.getBody().getStatements().add(0, new ExpressionStatement(assignment));
 
-    return catchClause;
-  }
+      return catchClause;
+    }
 
-  @Override
-  public Node rewriteThrowStatement(ThrowStatement originalStatement) {
-    MethodDescriptor toJs =
-        MethodDescriptor.Builder.fromDefault()
-            .setJsInfo(JsInfo.RAW)
-            .setIsStatic(true)
-            .setEnclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
-            .setMethodName("toJs")
-            .setParameterTypeDescriptors(TypeDescriptors.get().javaLangThrowable)
-            .setReturnTypeDescriptor(TypeDescriptors.get().javaLangObject)
-            .build();
+    @Override
+    public Node rewriteThrowStatement(ThrowStatement originalStatement) {
+      MethodDescriptor toJs =
+          MethodDescriptor.Builder.fromDefault()
+              .setJsInfo(JsInfo.RAW)
+              .setIsStatic(true)
+              .setEnclosingClassTypeDescriptor(BootstrapType.EXCEPTIONS.getDescriptor())
+              .setMethodName("toJs")
+              .setParameterTypeDescriptors(TypeDescriptors.get().javaLangThrowable)
+              .setReturnTypeDescriptor(TypeDescriptors.get().javaLangObject)
+              .build();
 
-    MethodCall toJsCall =
-        MethodCall.createMethodCall(null, toJs, originalStatement.getExpression());
+      MethodCall toJsCall =
+          MethodCall.createMethodCall(null, toJs, originalStatement.getExpression());
 
-    return new ThrowStatement(toJsCall);
+      return new ThrowStatement(toJsCall);
+    }
   }
 }

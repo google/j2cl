@@ -47,47 +47,44 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
  * since that pass will re-box some things and then some operations will no longer be in a primitive
  * form that is legal input to the overflow correcting method calls.
  */
-public class InsertUnderflowOverflowConversions extends ConversionContextVisitor {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new InsertUnderflowOverflowConversions());
+public class InsertUnderflowOverflowConversions extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new ConversionContextVisitor(getContextRewriter()));
   }
 
-  public InsertUnderflowOverflowConversions() {
-    super(
-        new ContextRewriter() {
-          @Override
-          public Expression rewriteBinaryNumericPromotionContext(
-              Expression subjectOperandExpression, Expression otherOperandExpression) {
-            return maybeCheckOverflow(
-                subjectOperandExpression,
-                subjectOperandExpression.getTypeDescriptor(),
-                otherOperandExpression.getTypeDescriptor());
-          }
+  private ConversionContextVisitor.ContextRewriter getContextRewriter() {
+    return new ConversionContextVisitor.ContextRewriter() {
+      @Override
+      public Expression rewriteBinaryNumericPromotionContext(
+          Expression subjectOperandExpression, Expression otherOperandExpression) {
+        return maybeCheckOverflow(
+            subjectOperandExpression,
+            subjectOperandExpression.getTypeDescriptor(),
+            otherOperandExpression.getTypeDescriptor());
+      }
 
-          @Override
-          public Expression rewriteMethodInvocationContext(
-              TypeDescriptor parameterTypeDescriptor, Expression argumentExpression) {
-            return maybeCheckOverflow(
-                argumentExpression,
-                argumentExpression.getTypeDescriptor(),
-                parameterTypeDescriptor);
-          }
+      @Override
+      public Expression rewriteMethodInvocationContext(
+          TypeDescriptor parameterTypeDescriptor, Expression argumentExpression) {
+        return maybeCheckOverflow(
+            argumentExpression, argumentExpression.getTypeDescriptor(), parameterTypeDescriptor);
+      }
 
-          @Override
-          public Expression rewriteAssignmentContext(
-              TypeDescriptor toTypeDescriptor, Expression expression) {
-            return maybeCheckOverflow(expression, expression.getTypeDescriptor(), toTypeDescriptor);
-          }
+      @Override
+      public Expression rewriteAssignmentContext(
+          TypeDescriptor toTypeDescriptor, Expression expression) {
+        return maybeCheckOverflow(expression, expression.getTypeDescriptor(), toTypeDescriptor);
+      }
 
-          @Override
-          public Expression rewriteUnaryNumericPromotionContext(Expression operandExpression) {
-            return maybeCheckOverflow(
-                operandExpression,
-                operandExpression.getTypeDescriptor(),
-                operandExpression.getTypeDescriptor());
-          }
-        });
+      @Override
+      public Expression rewriteUnaryNumericPromotionContext(Expression operandExpression) {
+        return maybeCheckOverflow(
+            operandExpression,
+            operandExpression.getTypeDescriptor(),
+            operandExpression.getTypeDescriptor());
+      }
+    };
   }
 
   private static Expression maybeCheckOverflow(

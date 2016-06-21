@@ -32,9 +32,9 @@ import java.util.List;
  * Rewrites the tree to make sure that multiexpressions are never on the lhs of a side effecting
  * operator.
  */
-public class NormalizeMultiExpressions {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
+public class NormalizeMultiExpressions extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new FlattenMultiExpressions());
     compilationUnit.accept(new SwitchMultiExpressionsAndSideEffectingExpressions());
   }

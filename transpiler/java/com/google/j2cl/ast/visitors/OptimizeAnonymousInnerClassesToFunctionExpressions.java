@@ -42,10 +42,9 @@ import java.util.Set;
  * Transforms certain anonymous inner classes that implement JsFunction interfaces into
  * FunctionExpressions.
  */
-public class OptimizeAnonymousInnerClassesToFunctionExpressions {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-
+public class OptimizeAnonymousInnerClassesToFunctionExpressions extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
     final Map<TypeDescriptor, JavaType> optimizableJsFunctionsByTypeDescriptor =
         collectOptimizableJsFunctionsByTypeDescriptor(compilationUnit);
 

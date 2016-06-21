@@ -25,54 +25,54 @@ import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 
-/**
- * Creates the devirtualized methods for devirtualized boxed types.
- */
-public class DevirtualizeBoxedTypesAndJsFunctionImplementations extends AbstractRewriter {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new DevirtualizeBoxedTypesAndJsFunctionImplementations());
-  }
-
+/** Creates the devirtualized methods for devirtualized boxed types. */
+public class DevirtualizeBoxedTypesAndJsFunctionImplementations extends NormalizationPass {
   @Override
-  public boolean shouldProcessJavaType(JavaType type) {
-    // Creates devirtualized static methods for the boxed types (Boolean, Double, String).
-    return TypeDescriptors.isBoxedTypeAsJsPrimitives(type.getDescriptor())
-        || type.getDescriptor().isJsFunctionImplementation();
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new Rewriter());
   }
 
-  @Override
-  public Node rewriteMethod(Method method) {
-    if (!shouldDevirtualize(method)) {
-      return method;
+  private static class Rewriter extends AbstractRewriter {
+    @Override
+    public boolean shouldProcessJavaType(JavaType type) {
+      // Creates devirtualized static methods for the boxed types (Boolean, Double, String).
+      return TypeDescriptors.isBoxedTypeAsJsPrimitives(type.getDescriptor())
+          || type.getDescriptor().isJsFunctionImplementation();
     }
 
-    // Add the static method to current type.
-    // NOTE: The added method will be traversed, and will be skipped.
-    getCurrentJavaType().addMethod(AstUtils.createDevirtualizedMethod(method));
-    // Turn the instance method to an empty method since it should not be called. But we should not
-    // delete it otherwise it may lead to JSCompiler errors that complains that the class does not
-    // implement all the methods in its super interfaces.
-    return Method.Builder.from(method).clearStatements().build();
-  }
+    @Override
+    public Node rewriteMethod(Method method) {
+      if (!shouldDevirtualize(method)) {
+        return method;
+      }
 
-  private boolean shouldDevirtualize(Method method) {
-    MethodDescriptor methodDescriptor = method.getDescriptor();
-    if (!methodDescriptor.isPolymorphic()) {
-      return false;
+      // Add the static method to current type.
+      // NOTE: The added method will be traversed, and will be skipped.
+      getCurrentJavaType().addMethod(AstUtils.createDevirtualizedMethod(method));
+      // Turn the instance method to an empty method since it should not be called. But we should
+      // not delete it otherwise it may lead to JSCompiler errors that complains that the class does
+      // not implement all the methods in its super interfaces.
+      return Method.Builder.from(method).clearStatements().build();
     }
 
-    TypeDescriptor enclosingClassTypeDescriptor =
-        methodDescriptor.getEnclosingClassTypeDescriptor();
+    private boolean shouldDevirtualize(Method method) {
+      MethodDescriptor methodDescriptor = method.getDescriptor();
+      if (!methodDescriptor.isPolymorphic()) {
+        return false;
+      }
 
-    if (enclosingClassTypeDescriptor.isJsFunctionImplementation()
-        && methodDescriptor.isJsFunction()) {
-      // If the JsFunction method has different method signature from the SAM method, it should be
-      // devirtualized.
-      MethodDescriptor samMethodDescriptor =
-          methodDescriptor.getEnclosingClassTypeDescriptor().getJsFunctionMethodDescriptor();
-      return !AstUtils.areParameterErasureEqual(methodDescriptor, samMethodDescriptor);
+      TypeDescriptor enclosingClassTypeDescriptor =
+          methodDescriptor.getEnclosingClassTypeDescriptor();
+
+      if (enclosingClassTypeDescriptor.isJsFunctionImplementation()
+          && methodDescriptor.isJsFunction()) {
+        // If the JsFunction method has different method signature from the SAM method, it should be
+        // devirtualized.
+        MethodDescriptor samMethodDescriptor =
+            methodDescriptor.getEnclosingClassTypeDescriptor().getJsFunctionMethodDescriptor();
+        return !AstUtils.areParameterErasureEqual(methodDescriptor, samMethodDescriptor);
+      }
+      return true;
     }
-    return true;
   }
 }

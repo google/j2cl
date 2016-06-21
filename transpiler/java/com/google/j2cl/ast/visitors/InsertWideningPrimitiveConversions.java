@@ -32,67 +32,64 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
  * type slot in assignment, binary numeric promotion, cast and method invocation conversion
  * contexts.
  *
- * TODO: this pass removes NOOP casts (e.g. int -> float), which may cause wrong side effect if the
- * later passes depend on the cast type. Currently we carefully order these passes in J2clTranspiler
- * to ensure all conversion contexts are correctly caught. But if it turns out the side effect does
- * lead to wrong result, we should remove the NOOP casts in a separate pass.
+ * <p>TODO: this pass removes NOOP casts (e.g. int -> float), which may cause wrong side effect if
+ * the later passes depend on the cast type. Currently we carefully order these passes in
+ * J2clTranspiler to ensure all conversion contexts are correctly caught. But if it turns out the
+ * side effect does lead to wrong result, we should remove the NOOP casts in a separate pass.
  */
-public class InsertWideningPrimitiveConversions extends ConversionContextVisitor {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new InsertWideningPrimitiveConversions());
+public class InsertWideningPrimitiveConversions extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new ConversionContextVisitor(getContextRewriter()));
   }
 
-  public InsertWideningPrimitiveConversions() {
-    super(
-        new ContextRewriter() {
+  private ConversionContextVisitor.ContextRewriter getContextRewriter() {
+    return new ConversionContextVisitor.ContextRewriter() {
 
-          @Override
-          public Expression rewriteAssignmentContext(
-              TypeDescriptor toTypeDescriptor, Expression expression) {
-            if (!shouldWiden(toTypeDescriptor, expression)) {
-              return expression;
-            }
-            return widenTo(toTypeDescriptor, expression);
-          }
+      @Override
+      public Expression rewriteAssignmentContext(
+          TypeDescriptor toTypeDescriptor, Expression expression) {
+        if (!shouldWiden(toTypeDescriptor, expression)) {
+          return expression;
+        }
+        return widenTo(toTypeDescriptor, expression);
+      }
 
-          @Override
-          public Expression rewriteBinaryNumericPromotionContext(
-              Expression subjectOperand, Expression otherOperand) {
-            if (!TypeDescriptors.isNumericPrimitive(subjectOperand.getTypeDescriptor())
-                || !TypeDescriptors.isNumericPrimitive(otherOperand.getTypeDescriptor())) {
-              // Widening only applies between primitive types.
-              return subjectOperand;
-            }
+      @Override
+      public Expression rewriteBinaryNumericPromotionContext(
+          Expression subjectOperand, Expression otherOperand) {
+        if (!TypeDescriptors.isNumericPrimitive(subjectOperand.getTypeDescriptor())
+            || !TypeDescriptors.isNumericPrimitive(otherOperand.getTypeDescriptor())) {
+          // Widening only applies between primitive types.
+          return subjectOperand;
+        }
 
-            TypeDescriptor widenedTypeDescriptor =
-                AstUtils.chooseWidenedTypeDescriptor(
-                    otherOperand.getTypeDescriptor(),
-                    subjectOperand.getTypeDescriptor());
-            if (!shouldWiden(widenedTypeDescriptor, subjectOperand)) {
-              return subjectOperand;
-            }
-            return widenTo(widenedTypeDescriptor, subjectOperand);
-          }
+        TypeDescriptor widenedTypeDescriptor =
+            AstUtils.chooseWidenedTypeDescriptor(
+                otherOperand.getTypeDescriptor(), subjectOperand.getTypeDescriptor());
+        if (!shouldWiden(widenedTypeDescriptor, subjectOperand)) {
+          return subjectOperand;
+        }
+        return widenTo(widenedTypeDescriptor, subjectOperand);
+      }
 
-          @Override
-          public Expression rewriteCastContext(CastExpression castExpression) {
-            if (!shouldWiden(
-                castExpression.getCastTypeDescriptor(), castExpression.getExpression())) {
-              return castExpression;
-            }
-            return widenTo(castExpression.getCastTypeDescriptor(), castExpression.getExpression());
-          }
+      @Override
+      public Expression rewriteCastContext(CastExpression castExpression) {
+        if (!shouldWiden(castExpression.getCastTypeDescriptor(), castExpression.getExpression())) {
+          return castExpression;
+        }
+        return widenTo(castExpression.getCastTypeDescriptor(), castExpression.getExpression());
+      }
 
-          @Override
-          public Expression rewriteMethodInvocationContext(
-              TypeDescriptor parameterTypeDescriptor, Expression argumentExpression) {
-            if (!shouldWiden(parameterTypeDescriptor, argumentExpression)) {
-              return argumentExpression;
-            }
-            return widenTo(parameterTypeDescriptor, argumentExpression);
-          }
-        });
+      @Override
+      public Expression rewriteMethodInvocationContext(
+          TypeDescriptor parameterTypeDescriptor, Expression argumentExpression) {
+        if (!shouldWiden(parameterTypeDescriptor, argumentExpression)) {
+          return argumentExpression;
+        }
+        return widenTo(parameterTypeDescriptor, argumentExpression);
+      }
+    };
   }
 
   private static boolean shouldWiden(

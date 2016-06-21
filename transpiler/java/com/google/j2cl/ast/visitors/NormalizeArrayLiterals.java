@@ -32,9 +32,9 @@ import java.util.Set;
  * Rewrites the rare short form array literal initializers (like "int[] foo = {1, 2, 3};") into the
  * more common long form (like "int[] foo = new int[] {1, 2, 3};").
  */
-public class NormalizeArrayLiterals {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
+public class NormalizeArrayLiterals extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
     Set<ArrayLiteral> longFormArrayLiterals = new HashSet<>();
     compilationUnit.accept(new CollectLongFormArrayLiteralsVisitor(longFormArrayLiterals));
     compilationUnit.accept(new RewriteShortFormToLongFormRewriter(longFormArrayLiterals));

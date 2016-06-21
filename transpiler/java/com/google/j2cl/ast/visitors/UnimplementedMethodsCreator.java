@@ -34,8 +34,9 @@ import java.util.List;
  * of the methods defined by the interface. This class synthesizes the unimplemented methods in an
  * abstract class.
  */
-public class UnimplementedMethodsCreator {
-  public static void applyTo(CompilationUnit compilationUnit) {
+public class UnimplementedMethodsCreator extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new UnimplementedMethodsCreatorVisitor());
   }
 

@@ -26,51 +26,49 @@ import com.google.j2cl.ast.TypeDescriptors;
  * Inserts a boxing operation when a primitive type is being put into a reference type slot in
  * assignment or method invocation conversion contexts.
  */
-public class InsertBoxingConversion extends ConversionContextVisitor {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new InsertBoxingConversion());
+public class InsertBoxingConversion extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new ConversionContextVisitor(getContextRewriter()));
   }
 
-  public InsertBoxingConversion() {
-    super(
-        new ContextRewriter() {
+  private ConversionContextVisitor.ContextRewriter getContextRewriter() {
+    return new ConversionContextVisitor.ContextRewriter() {
+      @Override
+      public Expression rewriteAssignmentContext(
+          TypeDescriptor toTypeDescriptor, Expression expression) {
+        // There should be a following 'widening reference conversion' if the targeting type
+        // is not the boxed type, but as widening reference conversion is always NOOP, and it
+        // is mostly impossible to be optimized by JSCompiler, just avoid the insertion of the
+        // NOOP cast here.
+        return maybeBox(toTypeDescriptor, expression);
+      }
 
-          @Override
-          public Expression rewriteAssignmentContext(
-              TypeDescriptor toTypeDescriptor, Expression expression) {
-            // There should be a following 'widening reference conversion' if the targeting type is
-            // not the boxed type, but as widening reference conversion is always NOOP, and it is
-            // mostly impossible to be optimized by JSCompiler, just avoid the insertion of the
-            // NOOP cast here.
-            return maybeBox(toTypeDescriptor, expression);
+      @Override
+      public Expression rewriteCastContext(CastExpression castExpression) {
+        TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
+        TypeDescriptor fromTypeDescriptor = castExpression.getExpression().getTypeDescriptor();
+        if (!TypeDescriptors.isNonVoidPrimitiveType(toTypeDescriptor)
+            && TypeDescriptors.isNonVoidPrimitiveType(fromTypeDescriptor)
+            && !TypeDescriptors.isPrimitiveBooleanOrDouble(fromTypeDescriptor)) {
+          // Actually remove the cast and replace it with the boxing.
+          Expression boxedExpression = AstUtils.box(castExpression.getExpression());
+          // It's possible that casting a primitive type to a non-boxed reference type.
+          // e.g. (Object) i; in this case, just keep the NOOP casting after boxing.
+          if (!boxedExpression.getTypeDescriptor().equalsIgnoreNullability(toTypeDescriptor)) {
+            return CastExpression.create(boxedExpression, toTypeDescriptor);
           }
+          return boxedExpression;
+        }
+        return castExpression;
+      }
 
-          @Override
-          public Expression rewriteCastContext(CastExpression castExpression) {
-            TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
-            TypeDescriptor fromTypeDescriptor = castExpression.getExpression().getTypeDescriptor();
-            if (!TypeDescriptors.isNonVoidPrimitiveType(toTypeDescriptor)
-                && TypeDescriptors.isNonVoidPrimitiveType(fromTypeDescriptor)
-                && !TypeDescriptors.isPrimitiveBooleanOrDouble(fromTypeDescriptor)) {
-              // Actually remove the cast and replace it with the boxing.
-              Expression boxedExpression = AstUtils.box(castExpression.getExpression());
-              // It's possible that casting a primitive type to a non-boxed reference type.
-              // e.g. (Object) i; in this case, just keep the NOOP casting after boxing.
-              if (!boxedExpression.getTypeDescriptor().equalsIgnoreNullability(toTypeDescriptor)) {
-                return CastExpression.create(boxedExpression, toTypeDescriptor);
-              }
-              return boxedExpression;
-            }
-            return castExpression;
-          }
-
-          @Override
-          public Expression rewriteMethodInvocationContext(
-              TypeDescriptor parameterTypeDescriptor, Expression argumentExpression) {
-            return maybeBox(parameterTypeDescriptor, argumentExpression);
-          }
-        });
+      @Override
+      public Expression rewriteMethodInvocationContext(
+          TypeDescriptor parameterTypeDescriptor, Expression argumentExpression) {
+        return maybeBox(parameterTypeDescriptor, argumentExpression);
+      }
+    };
   }
 
   private static Expression maybeBox(TypeDescriptor toTypeDescriptor, Expression expression) {

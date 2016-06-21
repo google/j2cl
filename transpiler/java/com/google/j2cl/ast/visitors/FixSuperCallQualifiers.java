@@ -33,62 +33,64 @@ import com.google.j2cl.ast.TypeDescriptor;
  * Set the qualifier of super calls that should have a qualifier.
  *
  * <p>For a super call that invokes a constructor of an inner class, it should have an qualifier.
- * For example, class A { class B {} class C extends B{ public C() {super();} } }
- * The super call in C's constructor invokes B's constructor, and the explicit qualifier should be
- * resolved.
+ * For example, class A { class B {} class C extends B{ public C() {super();} } } The super call in
+ * C's constructor invokes B's constructor, and the explicit qualifier should be resolved.
  */
-public class FixSuperCallQualifiers extends AbstractRewriter {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new FixSuperCallQualifiers());
-  }
-
+public class FixSuperCallQualifiers extends NormalizationPass {
   @Override
-  public boolean shouldProcessJavaType(JavaType javaType) {
-    // super class of {@code javaType} is an instance nested class.
-    return javaType.getSuperTypeDescriptor() != null
-        && javaType.getSuperTypeDescriptor().isInstanceNestedClass();
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new Rewriter());
   }
 
-  @Override
-  public boolean shouldProcessMethod(Method method) {
-    return method.isConstructor();
-  }
-
-  @Override
-  public Node rewriteMethodCall(MethodCall methodCall) {
-    MethodDescriptor targetMethod = methodCall.getTarget();
-    if (!targetMethod.isConstructor()
-        || AstUtils.isDelegatedConstructorCall(methodCall, getCurrentJavaType().getDescriptor())) {
-      return methodCall;
+  private static class Rewriter extends AbstractRewriter {
+    @Override
+    public boolean shouldProcessJavaType(JavaType javaType) {
+      // super class of {@code javaType} is an instance nested class.
+      return javaType.getSuperTypeDescriptor() != null
+          && javaType.getSuperTypeDescriptor().isInstanceNestedClass();
     }
-    // super() call.
-    if (!AstUtils.hasThisReferenceAsQualifier(methodCall)) {
-      // has an explicit qualifier.
-      return methodCall;
-    }
-    return MethodCall.Builder.from(methodCall)
-        .setQualifier(findSuperCallQualifier(getCurrentJavaType().getDescriptor()))
-        .build();
-  }
 
-  private Expression findSuperCallQualifier(TypeDescriptor typeDescriptor) {
-    TypeDescriptor superTypeDescriptor = typeDescriptor.getSuperTypeDescriptor();
-    Preconditions.checkNotNull(superTypeDescriptor);
-    TypeDescriptor outerTypeDescriptor = superTypeDescriptor.getEnclosingTypeDescriptor();
-    Preconditions.checkNotNull(outerTypeDescriptor);
-
-    Expression qualifier = new ThisReference(typeDescriptor);
-    TypeDescriptor currentTypeDescriptor = typeDescriptor;
-    while (currentTypeDescriptor.getEnclosingTypeDescriptor() != null
-        && !AstUtils.isSubType(currentTypeDescriptor, outerTypeDescriptor)) {
-      qualifier =
-          new FieldAccess(
-              qualifier,
-              AstUtils.getFieldDescriptorForEnclosingInstance(
-                  currentTypeDescriptor, currentTypeDescriptor.getEnclosingTypeDescriptor()));
-      currentTypeDescriptor = currentTypeDescriptor.getEnclosingTypeDescriptor();
+    @Override
+    public boolean shouldProcessMethod(Method method) {
+      return method.isConstructor();
     }
-    return qualifier;
+
+    @Override
+    public Node rewriteMethodCall(MethodCall methodCall) {
+      MethodDescriptor targetMethod = methodCall.getTarget();
+      if (!targetMethod.isConstructor()
+          || AstUtils.isDelegatedConstructorCall(
+              methodCall, getCurrentJavaType().getDescriptor())) {
+        return methodCall;
+      }
+      // super() call.
+      if (!AstUtils.hasThisReferenceAsQualifier(methodCall)) {
+        // has an explicit qualifier.
+        return methodCall;
+      }
+      return MethodCall.Builder.from(methodCall)
+          .setQualifier(findSuperCallQualifier(getCurrentJavaType().getDescriptor()))
+          .build();
+    }
+
+    private Expression findSuperCallQualifier(TypeDescriptor typeDescriptor) {
+      TypeDescriptor superTypeDescriptor = typeDescriptor.getSuperTypeDescriptor();
+      Preconditions.checkNotNull(superTypeDescriptor);
+      TypeDescriptor outerTypeDescriptor = superTypeDescriptor.getEnclosingTypeDescriptor();
+      Preconditions.checkNotNull(outerTypeDescriptor);
+
+      Expression qualifier = new ThisReference(typeDescriptor);
+      TypeDescriptor currentTypeDescriptor = typeDescriptor;
+      while (currentTypeDescriptor.getEnclosingTypeDescriptor() != null
+          && !AstUtils.isSubType(currentTypeDescriptor, outerTypeDescriptor)) {
+        qualifier =
+            new FieldAccess(
+                qualifier,
+                AstUtils.getFieldDescriptorForEnclosingInstance(
+                    currentTypeDescriptor, currentTypeDescriptor.getEnclosingTypeDescriptor()));
+        currentTypeDescriptor = currentTypeDescriptor.getEnclosingTypeDescriptor();
+      }
+      return qualifier;
+    }
   }
 }

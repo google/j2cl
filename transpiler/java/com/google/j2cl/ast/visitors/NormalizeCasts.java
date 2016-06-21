@@ -36,29 +36,28 @@ import com.google.j2cl.ast.TypeReference;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Replaces cast expression with corresponding cast method call.
- */
-public class NormalizeCasts extends AbstractRewriter {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new NormalizeCasts());
-  }
-
+/** Replaces cast expression with corresponding cast method call. */
+public class NormalizeCasts extends NormalizationPass {
   @Override
-  public Node rewriteCastExpression(CastExpression expression) {
-    TypeDescriptor castTypeDescriptor = expression.getCastTypeDescriptor();
-    Preconditions.checkArgument(
-        !castTypeDescriptor.isPrimitive(),
-        "Narrowing and Widening conversions should have already converted all primitive casts.");
-
-    if (castTypeDescriptor.isArray()) {
-      return rewriteArrayCastExpression(expression);
-    }
-    return rewriteRegularCastExpression(expression);
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new Rewriter());
   }
 
-  private Node rewriteRegularCastExpression(CastExpression castExpression) {
+  private static class Rewriter extends AbstractRewriter {
+    @Override
+    public Node rewriteCastExpression(CastExpression expression) {
+      TypeDescriptor castTypeDescriptor = expression.getCastTypeDescriptor();
+      Preconditions.checkArgument(
+          !castTypeDescriptor.isPrimitive(),
+          "Narrowing and Widening conversions should have already converted all primitive casts.");
+      if (castTypeDescriptor.isArray()) {
+        return rewriteArrayCastExpression(expression);
+      }
+      return rewriteRegularCastExpression(expression);
+    }
+  }
+
+  private static Node rewriteRegularCastExpression(CastExpression castExpression) {
     Preconditions.checkArgument(!castExpression.getCastTypeDescriptor().isArray());
     Preconditions.checkArgument(!castExpression.getCastTypeDescriptor().isUnion());
 
@@ -97,7 +96,7 @@ public class NormalizeCasts extends AbstractRewriter {
         castMethodCall, castExpression.getCastTypeDescriptor());
   }
 
-  private Node rewriteArrayCastExpression(CastExpression castExpression) {
+  private static Node rewriteArrayCastExpression(CastExpression castExpression) {
     Preconditions.checkArgument(castExpression.getCastTypeDescriptor().isArray());
 
     if (castExpression
@@ -110,7 +109,7 @@ public class NormalizeCasts extends AbstractRewriter {
     return rewriteJavaArrayCastExpression(castExpression);
   }
 
-  private Node rewriteJavaArrayCastExpression(CastExpression castExpression) {
+  private static Node rewriteJavaArrayCastExpression(CastExpression castExpression) {
     TypeDescriptor arrayCastTypeDescriptor = castExpression.getCastTypeDescriptor();
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
@@ -144,7 +143,7 @@ public class NormalizeCasts extends AbstractRewriter {
     return JsTypeAnnotation.createTypeAnnotation(castMethodCall, arrayCastTypeDescriptor);
   }
 
-  private Node rewriteNativeJsArrayCastExpression(CastExpression castExpression) {
+  private static Node rewriteNativeJsArrayCastExpression(CastExpression castExpression) {
     TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
     Preconditions.checkArgument(
         castTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor().isNative());

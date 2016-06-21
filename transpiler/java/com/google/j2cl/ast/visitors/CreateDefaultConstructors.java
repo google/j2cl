@@ -29,34 +29,36 @@ import com.google.j2cl.ast.Visibility;
  * <p>The default constructor has an empty parameter list and an empty body. Its visibility is the
  * same as the visibility of the class.
  */
-public class CreateDefaultConstructors extends AbstractVisitor {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new CreateDefaultConstructors());
+public class CreateDefaultConstructors extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new Visitor());
   }
 
-  @Override
-  public boolean enterJavaType(JavaType type) {
-    if (type.isInterface()) {
+  private static class Visitor extends AbstractVisitor {
+    @Override
+    public boolean enterJavaType(JavaType type) {
+      if (type.isInterface()) {
+        return false;
+      }
+
+      for (Method method : type.getMethods()) {
+        if (method.isConstructor()) {
+          // If there is any explicit constructor, then don't synthesize a default one.
+          return false;
+        }
+      }
+
+      synthesizeDefaultConstructor(type);
       return false;
     }
 
-    for (Method method : type.getMethods()) {
-      if (method.isConstructor()) {
-        // If there is any explicit constructor, then don't synthesize a default one.
-        return false;
-      }
+    private void synthesizeDefaultConstructor(JavaType type) {
+      MethodDescriptor methodDescriptor =
+          AstUtils.createDefaultConstructorDescriptor(
+              type.getDescriptor(),
+              type.getDescriptor().isEnumOrSubclass() ? Visibility.PRIVATE : type.getVisibility());
+      type.addMethod(0, Method.Builder.fromDefault().setMethodDescriptor(methodDescriptor).build());
     }
-
-    synthesizeDefaultConstructor(type);
-    return false;
-  }
-
-  private void synthesizeDefaultConstructor(JavaType type) {
-    MethodDescriptor methodDescriptor =
-        AstUtils.createDefaultConstructorDescriptor(
-            type.getDescriptor(),
-            type.getDescriptor().isEnumOrSubclass() ? Visibility.PRIVATE : type.getVisibility());
-    type.addMethod(0, Method.Builder.fromDefault().setMethodDescriptor(methodDescriptor).build());
   }
 }

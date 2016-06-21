@@ -22,37 +22,36 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 
 /**
- * Inserts a narrowing operation when a non-boxed reference type is being put into a primitive
- * type slot in cast conversion contexts.
+ * Inserts a narrowing operation when a non-boxed reference type is being put into a primitive type
+ * slot in cast conversion contexts.
  */
-public class InsertNarrowingReferenceConversions extends ConversionContextVisitor {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new InsertNarrowingReferenceConversions());
+public class InsertNarrowingReferenceConversions extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new ConversionContextVisitor(getContextRewriter()));
   }
 
-  public InsertNarrowingReferenceConversions() {
-    super(
-        new ContextRewriter() {
-          @Override
-          public Expression rewriteCastContext(CastExpression castExpression) {
-            TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
-            TypeDescriptor fromTypeDescriptor = castExpression.getExpression().getTypeDescriptor();
-            // Casting from any reference type other than the eight boxed types to primitive types
-            // does a narrowing reference conversion first, and then does a unboxing conversion.
-            if (toTypeDescriptor.isPrimitive()
-                && TypeDescriptors.isNonBoxedReferenceType(fromTypeDescriptor)) {
-              TypeDescriptor boxedTypeDescriptor =
-                  TypeDescriptors.getBoxTypeFromPrimitiveType(toTypeDescriptor);
-              // (int) new Object(); => (int) (Integer) new Object();
-              return CastExpression.create(
-                  CastExpression.create(castExpression.getExpression(), boxedTypeDescriptor),
-                  toTypeDescriptor);
-            }
-            // In other casting context, narrowing reference conversion should have been explicitly
-            // applied.
-            return castExpression;
-          }
-        });
+  private ConversionContextVisitor.ContextRewriter getContextRewriter() {
+    return new ConversionContextVisitor.ContextRewriter() {
+      @Override
+      public Expression rewriteCastContext(CastExpression castExpression) {
+        TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
+        TypeDescriptor fromTypeDescriptor = castExpression.getExpression().getTypeDescriptor();
+        // Casting from any reference type other than the eight boxed types to primitive types
+        // does a narrowing reference conversion first, and then does a unboxing conversion.
+        if (toTypeDescriptor.isPrimitive()
+            && TypeDescriptors.isNonBoxedReferenceType(fromTypeDescriptor)) {
+          TypeDescriptor boxedTypeDescriptor =
+              TypeDescriptors.getBoxTypeFromPrimitiveType(toTypeDescriptor);
+          // (int) new Object(); => (int) (Integer) new Object();
+          return CastExpression.create(
+              CastExpression.create(castExpression.getExpression(), boxedTypeDescriptor),
+              toTypeDescriptor);
+        }
+        // In other casting context, narrowing reference conversion should have been
+        // explicitlyapplied.
+        return castExpression;
+      }
+    };
   }
 }

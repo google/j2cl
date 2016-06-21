@@ -13,6 +13,7 @@
  */
 package com.google.j2cl.transpiler;
 
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JsInteropRestrictionsChecker;
 import com.google.j2cl.ast.visitors.ArrayAccessNormalizer;
@@ -40,6 +41,7 @@ import com.google.j2cl.ast.visitors.InsertUnboxingConversions;
 import com.google.j2cl.ast.visitors.InsertUnderflowOverflowConversions;
 import com.google.j2cl.ast.visitors.InsertWideningPrimitiveConversions;
 import com.google.j2cl.ast.visitors.MakeEnumConstructionsExplicit;
+import com.google.j2cl.ast.visitors.NormalizationPass;
 import com.google.j2cl.ast.visitors.NormalizeArrayCreations;
 import com.google.j2cl.ast.visitors.NormalizeArrayLiterals;
 import com.google.j2cl.ast.visitors.NormalizeCasts;
@@ -132,67 +134,71 @@ public class J2clTranspiler {
   }
 
   private void normalizeUnits(List<CompilationUnit> j2clUnits) {
+    List<NormalizationPass> passes =
+        ImmutableList.<NormalizationPass>of(
+            // Class structure normalizations.
+            new OptimizeAnonymousInnerClassesToFunctionExpressions(),
+            // Default constructors and explicit super calls should be synthesized first.
+            new CreateDefaultConstructors(),
+            new InsertExplicitSuperCalls(),
+            new DevirtualizeBoxedTypesAndJsFunctionImplementations(),
+            new NormalizeTryWithResources(),
+            new NormalizeCatchClauses(),
+            // Runs before normalizing nested classes.
+            new InsertCastOnNewInstances(),
+            new FixAnonymousClassConstructors(),
+            new MakeEnumConstructionsExplicit(),
+            new FixSuperCallQualifiers(),
+            new InsertInstanceInitCalls(),
+            new NormalizeNestedClassConstructors(),
+            // Runs at the very end of 'Class structure normalizations' section since we do not need
+            // to apply other normalizations on the synthesized native JS types.
+            new CreateOverlayImplementationTypesAndDevirtualizeCalls(),
+
+            // Statement/Expression normalizations
+            new NormalizeArrayLiterals(),
+            new NormalizeStaticMemberQualifiersPass(),
+            // Runs after NormalizeStaticMemberQualifiersPass.
+            new DevirtualizeMethodCalls(),
+            new ControlStatementFormatter(),
+            new SplitCompoundLongAssignments(),
+            new ArrayAccessNormalizer(),
+            // Runs before unboxing conversion.
+            new InsertNarrowingReferenceConversions(),
+            new InsertUnboxingConversions(),
+            new InsertBoxingConversion(),
+            new InsertNarrowingPrimitiveConversions(),
+            new InsertWideningPrimitiveConversions(),
+            // TODO: InsertWideningAndNarrowingPrimitiveConversionVisitor.applyTo(j2clUnit);
+            new NormalizeLongs(),
+            new InsertUnderflowOverflowConversions(),
+            new FixBooleanOperators(),
+            new InsertStringConversions(),
+            new NormalizeConstructors(),
+            new NormalizeCasts(),
+            new NormalizeInstanceOfs(),
+            new NormalizeEquality(),
+            new NormalizeNativeMethodCalls(),
+            new NormalizeJsVarargs(),
+            new NormalizeArrayCreations(),
+            new InsertExceptionConversions(),
+            new NormalizeMultiExpressions(),
+            new InsertCastOnNullabilityMismatch(),
+
+            // Dodge JSCompiler limitations.
+            new UnimplementedMethodsCreator(),
+            // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
+            new InsertTypeAnnotationOnGenericReturnTypes(),
+            // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
+            new FixTypeVariablesInMethods(),
+            new RemoveUnusedMultiExpressionReturnValues(),
+            new InsertStaticClassInitializerMethods());
+
     for (CompilationUnit j2clUnit : j2clUnits) {
       verifyUnit(j2clUnit);
-
-      // Class structure normalizations.
-      OptimizeAnonymousInnerClassesToFunctionExpressions.applyTo(j2clUnit);
-      // Default constructors and explicit super calls should be synthesized first.
-      CreateDefaultConstructors.applyTo(j2clUnit);
-      InsertExplicitSuperCalls.applyTo(j2clUnit);
-      DevirtualizeBoxedTypesAndJsFunctionImplementations.applyTo(j2clUnit);
-
-      NormalizeTryWithResources.applyTo(j2clUnit);
-      NormalizeCatchClauses.applyTo(j2clUnit);
-      // Runs before normalizing nested classes.
-      InsertCastOnNewInstances.applyTo(j2clUnit);
-      FixAnonymousClassConstructors.applyTo(j2clUnit);
-      MakeEnumConstructionsExplicit.applyTo(j2clUnit);
-      FixSuperCallQualifiers.applyTo(j2clUnit);
-      InsertInstanceInitCalls.applyTo(j2clUnit);
-      NormalizeNestedClassConstructors.applyTo(j2clUnit);
-      // Runs at the very end of 'Class structure normalizations' section since we do not need to
-      // apply other normalizations on the synthesized native JS types.
-      CreateOverlayImplementationTypesAndDevirtualizeCalls.applyTo(j2clUnit);
-
-      // Statement/Expression normalizations
-      NormalizeArrayLiterals.applyTo(j2clUnit);
-      NormalizeStaticMemberQualifiersPass.applyTo(j2clUnit);
-      // Runs after NormalizeStaticMemberQualifiersPass.
-      DevirtualizeMethodCalls.applyTo(j2clUnit);
-      ControlStatementFormatter.applyTo(j2clUnit);
-      SplitCompoundLongAssignments.applyTo(j2clUnit);
-      ArrayAccessNormalizer.applyTo(j2clUnit);
-      // Runs before unboxing conversion.
-      InsertNarrowingReferenceConversions.applyTo(j2clUnit);
-      InsertUnboxingConversions.applyTo(j2clUnit);
-      InsertBoxingConversion.applyTo(j2clUnit);
-      InsertNarrowingPrimitiveConversions.applyTo(j2clUnit);
-      InsertWideningPrimitiveConversions.applyTo(j2clUnit);
-      // TODO: InsertWideningAndNarrowingPrimitiveConversionVisitor.applyTo(j2clUnit);
-      NormalizeLongs.applyTo(j2clUnit);
-      InsertUnderflowOverflowConversions.applyTo(j2clUnit);
-      FixBooleanOperators.applyTo(j2clUnit);
-      InsertStringConversions.applyTo(j2clUnit);
-      NormalizeConstructors.applyTo(j2clUnit);
-      NormalizeCasts.applyTo(j2clUnit);
-      NormalizeInstanceOfs.applyTo(j2clUnit);
-      NormalizeEquality.applyTo(j2clUnit);
-      NormalizeNativeMethodCalls.applyTo(j2clUnit);
-      NormalizeJsVarargs.applyTo(j2clUnit);
-      NormalizeArrayCreations.applyTo(j2clUnit);
-      InsertExceptionConversions.applyTo(j2clUnit);
-      NormalizeMultiExpressions.applyTo(j2clUnit);
-      InsertCastOnNullabilityMismatch.applyTo(j2clUnit);
-
-      // Dodge JSCompiler limitations.
-      UnimplementedMethodsCreator.applyTo(j2clUnit);
-      // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
-      InsertTypeAnnotationOnGenericReturnTypes.applyTo(j2clUnit);
-      // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
-      FixTypeVariablesInMethods.applyTo(j2clUnit);
-      RemoveUnusedMultiExpressionReturnValues.applyTo(j2clUnit);
-      InsertStaticClassInitializerMethods.applyTo(j2clUnit);
+      for (NormalizationPass pass : passes) {
+        pass.applyTo(j2clUnit);
+      }
       verifyUnit(j2clUnit);
     }
   }

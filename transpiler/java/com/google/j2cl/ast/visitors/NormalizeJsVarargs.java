@@ -55,30 +55,19 @@ import java.util.Arrays;
  * Implements JavaScript varargs calling convention by rewriting varargs calls and adding a prolog
  * to varargs JsMethods.
  *
- * <p>
- * At the method body, we copy the var arguments to a local array, and replaces reference to the var
- * parameter with reference to the local copy.
+ * <p>At the method body, we copy the var arguments to a local array, and replaces reference to the
+ * var parameter with reference to the local copy.
  *
- * <p>
- * At the call sites, array creation/literal is unwrapped as array literals, which are passed as
+ * <p>At the call sites, array creation/literal is unwrapped as array literals, which are passed as
  * individual parameters. And array object is wrapped with other arguments and passed as a single
  * array of arguments, and invoked in the form of fn.apply().
  *
- * TODO: Optimize the copying away if only read access to vararg[i] and vararg.length happen in the
- * body.
+ * <p>TODO: Optimize the copying away if only read access to vararg[i] and vararg.length happen in
+ * the body.
  */
-public class NormalizeJsVarargs extends AbstractRewriter {
-  private static final Variable ARGUMENTS_PARAMETER =
-      new Variable(
-          "arguments",
-          TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
-          false,
-          true,
-          true);
-  private static TypeDescriptor primitiveInt = TypeDescriptors.get().primitiveInt;
-  private static TypeDescriptor primitiveBoolean = TypeDescriptors.get().primitiveBoolean;
-
-  public static void applyTo(CompilationUnit compilationUnit) {
+public class NormalizeJsVarargs extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new NormalizeJsMethodsVarargs());
     compilationUnit.accept(new NormalizeVarargsJsMethodCallsVisitor());
   }
@@ -93,6 +82,16 @@ public class NormalizeJsVarargs extends AbstractRewriter {
    * 2. Fixing references to the varargs parameter with references to the local variable.
    */
   private static class NormalizeJsMethodsVarargs extends AbstractRewriter {
+    private static final Variable ARGUMENTS_PARAMETER =
+        new Variable(
+            "arguments",
+            TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
+            false,
+            true,
+            true);
+    private static final TypeDescriptor primitiveInt = TypeDescriptors.get().primitiveInt;
+    private static final TypeDescriptor primitiveBoolean = TypeDescriptors.get().primitiveBoolean;
+
     private Variable varargsParameter = null;
     /**
      * Local variable that holds the elements of varargs array.

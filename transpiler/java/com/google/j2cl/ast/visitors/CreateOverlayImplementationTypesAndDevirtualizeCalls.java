@@ -40,9 +40,9 @@ import java.util.List;
  * JsTypes and Interfaces that have default methods, and devirtualized the corresponding method
  * calls
  */
-public class CreateOverlayImplementationTypesAndDevirtualizeCalls {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
+public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
     List<JavaType> replacementTypeList = new ArrayList<>();
 
     for (JavaType type : compilationUnit.getTypes()) {

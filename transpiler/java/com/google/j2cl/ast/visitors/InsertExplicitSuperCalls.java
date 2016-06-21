@@ -34,47 +34,49 @@ import java.util.List;
  *
  * <p>The implicit super call invokes the default constructor that has an empty parameter list.
  */
-public class InsertExplicitSuperCalls extends AbstractVisitor {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new InsertExplicitSuperCalls());
+public class InsertExplicitSuperCalls extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new Pass());
   }
 
-  @Override
-  public boolean enterJavaType(JavaType type) {
-    return !type.isInterface();
-  }
+  private static class Pass extends AbstractVisitor {
+    @Override
+    public boolean enterJavaType(JavaType type) {
+      return !type.isInterface();
+    }
 
-  @Override
-  public boolean enterMethod(Method method) {
-    /*
-     * Only inserts explicit super() call to a constructor that does not have
-     * a super() or this() call, and the corresponding type does have a super class.
-     */
-    if (!method.isConstructor()
-        || AstUtils.hasConstructorInvocation(method)
-        || getCurrentJavaType().getSuperTypeDescriptor() == null) {
+    @Override
+    public boolean enterMethod(Method method) {
+      /*
+       * Only inserts explicit super() call to a constructor that does not have
+       * a super() or this() call, and the corresponding type does have a super class.
+       */
+      if (!method.isConstructor()
+          || AstUtils.hasConstructorInvocation(method)
+          || getCurrentJavaType().getSuperTypeDescriptor() == null) {
+        return false;
+      }
+      /*
+       * Do not insert super() call to a native JS type. Otherwise it will lead to error because a
+       * native JS type is not expected to have a $ctor method.
+       * TODO: super() call to native type should be inserted somewhere otherwise it will lead to
+       * an error if the native type has a non-empty constructor.
+       */
+      if (getCurrentJavaType().getSuperTypeDescriptor().isNative()) {
+        return false;
+      }
+      synthesizeSuperCall(method, getCurrentJavaType().getSuperTypeDescriptor());
       return false;
     }
-    /*
-     * Do not insert super() call to a native JS type. Otherwise it will lead to error because a
-     * native JS type is not expected to have a $ctor method.
-     * TODO: super() call to native type should be inserted somewhere otherwise it will lead to
-     * an error if the native type has a non-empty constructor.
-     */
-    if (getCurrentJavaType().getSuperTypeDescriptor().isNative()) {
-      return false;
-    }
-    synthesizeSuperCall(method, getCurrentJavaType().getSuperTypeDescriptor());
-    return false;
-  }
 
-  private void synthesizeSuperCall(Method method, TypeDescriptor superTypeDescriptor) {
-    MethodDescriptor methodDescriptor =
-        AstUtils.createDefaultConstructorDescriptor(
-            superTypeDescriptor, superTypeDescriptor.getVisibility());
-    List<Expression> arguments = new ArrayList<>();
-    MethodCall superCall = MethodCall.createMethodCall(null, methodDescriptor, arguments);
-    method.getBody().getStatements().add(0, new ExpressionStatement(superCall));
+    private void synthesizeSuperCall(Method method, TypeDescriptor superTypeDescriptor) {
+      MethodDescriptor methodDescriptor =
+          AstUtils.createDefaultConstructorDescriptor(
+              superTypeDescriptor, superTypeDescriptor.getVisibility());
+      List<Expression> arguments = new ArrayList<>();
+      MethodCall superCall = MethodCall.createMethodCall(null, methodDescriptor, arguments);
+      method.getBody().getStatements().add(0, new ExpressionStatement(superCall));
+    }
   }
 }

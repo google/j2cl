@@ -12,52 +12,54 @@ import com.google.j2cl.ast.PrefixExpression;
 
 /**
  * Rewrites array set operations to use Arrays.$set or LongUtils.$set operations.
- * <p>
- * This prevents side effects from being duplicated.
+ *
+ * <p>This prevents side effects from being duplicated.
  */
-public class ArrayAccessNormalizer extends AbstractRewriter {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new ArrayAccessNormalizer());
+public class ArrayAccessNormalizer extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new Rewriter());
   }
 
-  @Override
-  public Node rewriteBinaryExpression(BinaryExpression node) {
-    if (node.getOperator().hasSideEffect() && node.getLeftOperand() instanceof ArrayAccess) {
-      ArrayAccess leftSide = (ArrayAccess) node.getLeftOperand();
-      // Return a call to an Arrays or LongUtils array assignment method.
-      return AstUtils.createArraySetExpression(
-          leftSide.getArrayExpression(),
-          leftSide.getIndexExpression(),
-          node.getOperator(),
-          node.getRightOperand());
+  private static class Rewriter extends AbstractRewriter {
+    @Override
+    public Node rewriteBinaryExpression(BinaryExpression node) {
+      if (node.getOperator().hasSideEffect() && node.getLeftOperand() instanceof ArrayAccess) {
+        ArrayAccess leftSide = (ArrayAccess) node.getLeftOperand();
+        // Return a call to an Arrays or LongUtils array assignment method.
+        return AstUtils.createArraySetExpression(
+            leftSide.getArrayExpression(),
+            leftSide.getIndexExpression(),
+            node.getOperator(),
+            node.getRightOperand());
+      }
+      return node;
     }
-    return node;
-  }
 
-  @Override
-  public Node rewritePrefixExpression(PrefixExpression node) {
-    if (node.getOperator().hasSideEffect() && node.getOperand() instanceof ArrayAccess) {
-      ArrayAccess arrayAccess = (ArrayAccess) node.getOperand();
-      // Return a call to an Arrays or LongUtils array assignment method with the corresponding
-      // binary compound assignment operator and a synthesized literal one.
-      return AstUtils.createArraySetExpression(
-          arrayAccess.getArrayExpression(),
-          arrayAccess.getIndexExpression(),
-          AstUtils.getCorrespondingCompoundAssignmentOperator(node.getOperator()),
-          new NumberLiteral(arrayAccess.getTypeDescriptor(), 1));
+    @Override
+    public Node rewritePrefixExpression(PrefixExpression node) {
+      if (node.getOperator().hasSideEffect() && node.getOperand() instanceof ArrayAccess) {
+        ArrayAccess arrayAccess = (ArrayAccess) node.getOperand();
+        // Return a call to an Arrays or LongUtils array assignment method with the corresponding
+        // binary compound assignment operator and a synthesized literal one.
+        return AstUtils.createArraySetExpression(
+            arrayAccess.getArrayExpression(),
+            arrayAccess.getIndexExpression(),
+            AstUtils.getCorrespondingCompoundAssignmentOperator(node.getOperator()),
+            new NumberLiteral(arrayAccess.getTypeDescriptor(), 1));
+      }
+      return node;
     }
-    return node;
-  }
 
-  @Override
-  public Node rewritePostfixExpression(PostfixExpression node) {
-    if (node.getOperator().hasSideEffect() && node.getOperand() instanceof ArrayAccess) {
-      ArrayAccess arrayAccess = (ArrayAccess) node.getOperand();
-      // Return a call to an Arrays or LongUtils postfix array assignment method.
-      return AstUtils.createArraySetPostfixExpression(
-          arrayAccess.getArrayExpression(), arrayAccess.getIndexExpression(), node.getOperator());
+    @Override
+    public Node rewritePostfixExpression(PostfixExpression node) {
+      if (node.getOperator().hasSideEffect() && node.getOperand() instanceof ArrayAccess) {
+        ArrayAccess arrayAccess = (ArrayAccess) node.getOperand();
+        // Return a call to an Arrays or LongUtils postfix array assignment method.
+        return AstUtils.createArraySetPostfixExpression(
+            arrayAccess.getArrayExpression(), arrayAccess.getIndexExpression(), node.getOperator());
+      }
+      return node;
     }
-    return node;
   }
 }

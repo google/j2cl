@@ -33,9 +33,9 @@ import com.google.j2cl.ast.TypeReference;
  * to be preserved. So we'll sometimes rewrite "getInstance().staticField" to "(getInstance(),
  * SomeClass.staticField)".
  */
-public class NormalizeStaticMemberQualifiersPass {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
+public class NormalizeStaticMemberQualifiersPass extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new FixQualifiers());
   }
 

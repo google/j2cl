@@ -34,22 +34,22 @@ import com.google.j2cl.ast.TypeReference;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Replaces instanceof expression with corresponding $isInstance method call.
- */
-public class NormalizeInstanceOfs extends AbstractRewriter {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new NormalizeInstanceOfs());
+/** Replaces instanceof expression with corresponding $isInstance method call. */
+public class NormalizeInstanceOfs extends NormalizationPass {
+  @Override
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new Rewriter());
   }
 
-  @Override
-  public Node rewriteInstanceOfExpression(InstanceOfExpression expression) {
-    TypeDescriptor checkTypeDescriptor = expression.getTestTypeDescriptor();
-    if (checkTypeDescriptor.isArray()) {
-      return rewriteArrayInstanceOfExpression(expression);
+  private class Rewriter extends AbstractRewriter {
+    @Override
+    public Node rewriteInstanceOfExpression(InstanceOfExpression expression) {
+      TypeDescriptor checkTypeDescriptor = expression.getTestTypeDescriptor();
+      if (checkTypeDescriptor.isArray()) {
+        return rewriteArrayInstanceOfExpression(expression);
+      }
+      return rewriteRegularInstanceOfExpression(expression);
     }
-    return rewriteRegularInstanceOfExpression(expression);
   }
 
   private Node rewriteRegularInstanceOfExpression(InstanceOfExpression instanceOfExpression) {

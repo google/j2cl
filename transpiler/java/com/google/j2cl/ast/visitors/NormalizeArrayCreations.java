@@ -35,27 +35,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Normalizes array creations.
- */
-public class NormalizeArrayCreations extends AbstractRewriter {
-
-  public static void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new NormalizeArrayCreations());
-  }
-
+/** Normalizes array creations. */
+public class NormalizeArrayCreations extends NormalizationPass {
   @Override
-  public Node rewriteNewArray(NewArray newArray) {
-    if (newArray.getArrayLiteral() != null) {
-      return rewriteArrayInit(newArray);
-    }
-    return rewriteArrayCreate(newArray);
+  public void applyTo(CompilationUnit compilationUnit) {
+    compilationUnit.accept(new Rewriter());
   }
 
-  /**
-   * We transform new Object[100][100]; to Arrays.$create([100, 100], Object);
-   */
-  private Node rewriteArrayCreate(NewArray newArrayExpression) {
+  private static class Rewriter extends AbstractRewriter {
+    @Override
+    public Node rewriteNewArray(NewArray newArray) {
+      if (newArray.getArrayLiteral() != null) {
+        return rewriteArrayInit(newArray);
+      }
+      return rewriteArrayCreate(newArray);
+    }
+  }
+
+  /** We transform new Object[100][100]; to Arrays.$create([100, 100], Object); */
+  private static Node rewriteArrayCreate(NewArray newArrayExpression) {
     Preconditions.checkArgument(newArrayExpression.getArrayLiteral() == null);
     MethodDescriptor arrayCreateMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
@@ -89,7 +87,7 @@ public class NormalizeArrayCreations extends AbstractRewriter {
    * We transform new Object[][] {{object, object}, {object, object}} to Arrays.$init([[object,
    * object], [object, object]], Object, 2);
    */
-  private Node rewriteArrayInit(NewArray newArrayExpression) {
+  private static Node rewriteArrayInit(NewArray newArrayExpression) {
     Preconditions.checkArgument(newArrayExpression.getArrayLiteral() != null);
     int dimensionCount = newArrayExpression.getDimensionExpressions().size();
     MethodDescriptor arrayInitMethodDescriptor =
