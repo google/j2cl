@@ -299,9 +299,6 @@ public class CompilationUnitBuilder {
       // Add bridge methods.
       BridgeMethodsCreator.create(typeBinding, type);
 
-      // Add unimplemented methods.
-      UnimplementedMethodsCreator.create(typeBinding, type);
-
       // Add bridge methods for JsMethods
       JsBridgeMethodsCreator.create(typeBinding, type);
       popType();

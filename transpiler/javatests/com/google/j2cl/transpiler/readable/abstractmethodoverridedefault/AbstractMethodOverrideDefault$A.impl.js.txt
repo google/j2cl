@@ -1,0 +1,119 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault$A.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.A$impl');
+
+
+let AbstractMethodOverrideDefault$I = goog.require('com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault.I$impl');
+let Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
+
+/**
+ * Abstract class, do not instantiate.
+ * @implements {AbstractMethodOverrideDefault$I}
+ */
+class AbstractMethodOverrideDefault$A extends Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() { super(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!AbstractMethodOverrideDefault$A}
+   * @public
+   */
+  static $create() {
+    AbstractMethodOverrideDefault$A.$clinit();
+    let $instance = new AbstractMethodOverrideDefault$A();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault$A();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault$A() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault$A();
+  }
+
+  /**
+   * @abstract
+   * @override
+   * @return {void}
+   * @public
+   */
+  m_foo() {}
+
+  /**
+   * @abstract
+   * @override
+   * @return {void}
+   * @public
+   */
+  m_bar() {}
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof AbstractMethodOverrideDefault$A;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(
+        classConstructor, AbstractMethodOverrideDefault$A);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_abstractmethodoverridedefault_AbstractMethodOverrideDefault$A() {
+  }
+};
+
+$Util.$setClassMetadata(
+    AbstractMethodOverrideDefault$A,
+    'com.google.j2cl.transpiler.readable.abstractmethodoverridedefault.AbstractMethodOverrideDefault$A');
+
+
+AbstractMethodOverrideDefault$I.$markImplementor(
+    AbstractMethodOverrideDefault$A);
+
+
+/**
+ * Export class.
+ */
+exports = AbstractMethodOverrideDefault$A;
+//# sourceMappingURL=AbstractMethodOverrideDefault$A.js.map

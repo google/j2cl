@@ -23,23 +23,23 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.j2cl.ast.processors.Visitable;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
  * A reference to a type.
  *
- * <p>
- * This class is mostly a bag of precomputed properties, and the details of how those properties are
- * created lives at in several creation functions in TypeDescriptors.
+ * <p>This class is mostly a bag of precomputed properties, and the details of how those properties
+ * are created lives at in several creation functions in TypeDescriptors.
  *
- * <p>
- * A couple of properties are lazily calculated via the TypeDescriptorFactory and
+ * <p>A couple of properties are lazily calculated via the TypeDescriptorFactory and
  * MethodDescriptorFactory interfaces, since eagerly calculating them would lead to infinite loops
  * of TypeDescriptor creation.
  */
@@ -364,6 +364,12 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       newTypeDescriptor.visibility = visibility;
       return this;
     }
+
+    public Builder setDeclaredMethodDescriptorsFactory(
+        DescriptorFactory<List<MethodDescriptor>> declaredMethodDescriptorsFactory) {
+      newTypeDescriptor.declaredMethodDescriptorsFactory = declaredMethodDescriptorsFactory;
+      return this;
+    }
   }
 
   /**
@@ -373,7 +379,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   public interface DescriptorFactory<T> {
     T create(TypeDescriptor selfTypeDescriptor);
   }
-
 
   private String binaryName;
   private List<String> classComponents = Collections.emptyList();
@@ -415,6 +420,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   private List<TypeDescriptor> typeArgumentDescriptors = Collections.emptyList();
   private List<TypeDescriptor> unionedTypeDescriptors = Collections.emptyList();
   private Visibility visibility;
+  private DescriptorFactory<List<MethodDescriptor>> declaredMethodDescriptorsFactory;
 
   private TypeDescriptor() {}
 
@@ -738,23 +744,11 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
    * enclosing type) but is not a member type because it's location in the body is not in the
    * declaration scope of the enclosing type. For example:
    *
-   * <code>
-   * class Foo {
-   *   void bar() {
-   *     class Baz {}
-   *   }
-   * }
-   * </code>
+   * <p><code> class Foo { void bar() { class Baz {} } } </code>
    *
-   * or
+   * <p>or
    *
-   * <code>
-   * class Foo {
-   *   void bar() {
-   *     Comparable comparable = new Comparable() { ... }
-   *   }
-   * }
-   * </code>
+   * <p><code> class Foo { void bar() { Comparable comparable = new Comparable() { ... } } } </code>
    */
   public boolean isLocal() {
     return isLocal;
@@ -805,6 +799,62 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
 
   public boolean isOrSubclassesJsConstructorClass() {
     return isOrSubclassesJsConstructorClass;
+  }
+
+  /**
+   * The list of methods declared in the type from the JDT. Note: this does not include methods we
+   * synthesize and add to the type like bridge methods.
+   */
+  public List<MethodDescriptor> getDeclaredMethodDescriptors() {
+    if (declaredMethodDescriptorsFactory == null) {
+      return Collections.emptyList();
+    }
+    return declaredMethodDescriptorsFactory.create(this);
+  }
+
+  // Used to cache the results of getAllMethods()
+  private List<MethodDescriptor> allMethods = null;
+
+  /**
+   * The list of all methods available on a given type. TODO: update this code to handle package
+   * private override rules.
+   */
+  public List<MethodDescriptor> getAllMethods() {
+    if (allMethods != null) {
+      return allMethods;
+    }
+    Map<String, MethodDescriptor> methodsBySignature = Maps.newHashMap();
+    // Add methods declared in the type itself.
+    updateMethodsBySignature(methodsBySignature, getDeclaredMethodDescriptors());
+    // Recursively add methods that appear on super types
+    if (getSuperTypeDescriptor() != null) {
+      updateMethodsBySignature(methodsBySignature, getSuperTypeDescriptor().getAllMethods());
+    }
+    // Add methods that appear on super interfaces.
+    for (TypeDescriptor interfaceType : getInterfacesTypeDescriptors()) {
+      updateMethodsBySignature(methodsBySignature, interfaceType.getAllMethods());
+    }
+    allMethods = Lists.newArrayList(methodsBySignature.values());
+    return allMethods;
+  }
+
+  private static void updateMethodsBySignature(
+      Map<String, MethodDescriptor> methodsBySignature, List<MethodDescriptor> methodDescriptors) {
+    for (MethodDescriptor declaredMethod : methodDescriptors) {
+      String methodSignature = declaredMethod.getMethodSignature();
+      if (methodsBySignature.containsKey(methodSignature)) {
+        // We already found a method with this signature.
+        if (declaredMethod.isDefault()
+            && methodsBySignature
+                .get(methodSignature)
+                .getEnclosingClassTypeDescriptor()
+                .isInterface()) {
+          // Allow the method to be replaced.
+        }
+        continue;
+      }
+      methodsBySignature.put(methodSignature, declaredMethod);
+    }
   }
 
   @Override

@@ -57,6 +57,7 @@ import com.google.j2cl.ast.visitors.NormalizeTryWithResources;
 import com.google.j2cl.ast.visitors.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.ast.visitors.RemoveUnusedMultiExpressionReturnValues;
 import com.google.j2cl.ast.visitors.SplitCompoundLongAssignments;
+import com.google.j2cl.ast.visitors.UnimplementedMethodsCreator;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.frontend.CompilationUnitBuilder;
@@ -185,6 +186,7 @@ public class J2clTranspiler {
       InsertCastOnNullabilityMismatch.applyTo(j2clUnit);
 
       // Dodge JSCompiler limitations.
+      UnimplementedMethodsCreator.applyTo(j2clUnit);
       // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
       InsertTypeAnnotationOnGenericReturnTypes.applyTo(j2clUnit);
       // TODO: remove the temporary fix once switch to JSCompiler's new type checker.

@@ -260,53 +260,6 @@ public class JdtUtils {
   }
 
   /**
-   * Returns the methods that are declared by interfaces of {@code typeBinding} and are not
-   * implemented by {@code typeBinding}.
-   */
-  static List<IMethodBinding> getUnimplementedMethodBindings(ITypeBinding typeBinding) {
-    List<IMethodBinding> unimplementedMethodBindings = new ArrayList<>();
-    // Only abstract class may have unimplemented methods.
-    if (!isAbstract(typeBinding)) {
-      return unimplementedMethodBindings;
-    }
-    for (ITypeBinding superInterface : getAllInterfaces(typeBinding)) {
-      unimplementedMethodBindings.addAll(
-          getUnimplementedMethodBindings(superInterface, typeBinding));
-    }
-    return unimplementedMethodBindings;
-  }
-
-  /**
-   * Returns the methods that are declared by {@code superTypeBinding} and are not implemented by
-   * {@code typeBinding}.
-   */
-  private static List<IMethodBinding> getUnimplementedMethodBindings(
-      ITypeBinding superTypeBinding, final ITypeBinding typeBinding) {
-    return filterMethodBindings(
-        superTypeBinding.getDeclaredMethods(),
-        new Predicate<IMethodBinding>() {
-          @Override
-          public boolean apply(IMethodBinding methodBinding) {
-            return !isStatic(methodBinding)
-                && !methodBinding.isConstructor()
-                && !isImplementedBy(methodBinding, typeBinding);
-          }
-        });
-  }
-
-  /**
-   * Returns true if {@code typeBinding} implements an overridden method of {@code methodBinding}.
-   */
-  private static boolean isImplementedBy(IMethodBinding methodBinding, ITypeBinding typeBinding) {
-    if (isDeclaredBy(methodBinding, typeBinding)) {
-      return true;
-    }
-    ITypeBinding superclassTypeBinding = typeBinding.getSuperclass();
-    // implemented by its superclass.
-    return superclassTypeBinding != null && isImplementedBy(methodBinding, superclassTypeBinding);
-  }
-
-  /**
    * Returns the methods in {@code typeBinding}'s interfaces that are accidentally overridden.
    *
    * <p>'Accidentally overridden' means the type itself does not have its own declared overriding
@@ -1005,6 +958,7 @@ public class JdtUtils {
         .setIsNative(isNative)
         .setIsDefault(Modifier.isDefault(methodBinding.getModifiers()))
         .setIsVarargs(methodBinding.isVarargs())
+        .setIsAbstract(Modifier.isAbstract(methodBinding.getModifiers()))
         .build();
   }
 
@@ -1554,6 +1508,22 @@ public class JdtUtils {
             ? overrideTypeArgumentDescriptors
             : getTypeArgumentTypeDescriptors(typeBinding);
 
+    DescriptorFactory<List<MethodDescriptor>> methodDescriptors =
+        new DescriptorFactory<List<MethodDescriptor>>() {
+          @Override
+          public List<MethodDescriptor> create(TypeDescriptor selfTypeDescriptor) {
+            return FluentIterable.from(typeBinding.getDeclaredMethods())
+                .transform(
+                    new Function<IMethodBinding, MethodDescriptor>() {
+                      @Override
+                      public MethodDescriptor apply(IMethodBinding methodBinding) {
+                        return JdtUtils.createMethodDescriptor(methodBinding);
+                      }
+                    })
+                .toList();
+          }
+        };
+
     // Compute these even later
     boolean isExtern = isNative && JsUtils.isGlobal(jsNamespace);
     return new TypeDescriptor.Builder()
@@ -1589,6 +1559,7 @@ public class JdtUtils {
         .setSuperTypeDescriptorFactory(superTypeDescriptorFactory)
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setVisibility(getVisibility(typeBinding))
+        .setDeclaredMethodDescriptorsFactory(methodDescriptors)
         .build();
   }
 }

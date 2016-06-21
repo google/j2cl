@@ -18,7 +18,10 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.auto.value.AutoValue;
+import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
@@ -86,7 +89,8 @@ public abstract class MethodDescriptor extends Node implements Member {
    */
   public MethodDescriptor getDeclarationMethodDescriptor() {
     return getDeclarationMethodDescriptorOrNull() == null
-        ? this : getDeclarationMethodDescriptorOrNull();
+        ? this
+        : getDeclarationMethodDescriptorOrNull();
   }
 
   @Override
@@ -158,6 +162,26 @@ public abstract class MethodDescriptor extends Node implements Member {
     return !isStatic() && !isConstructor();
   }
 
+  public abstract boolean isAbstract();
+
+  public String getMethodSignature() {
+    return getMethodName()
+        + "("
+        + Joiner.on(", ")
+            .join(
+                FluentIterable.from(getParameterTypeDescriptors())
+                    .transform(
+                        new Function<TypeDescriptor, String>() {
+                          @Override
+                          public String apply(TypeDescriptor type) {
+                            return TypeDescriptors.toNonNullable(type)
+                                .getRawTypeDescriptor()
+                                .getBinaryClassName();
+                          }
+                        }))
+        + ")";
+  }
+
   @Override
   public Node accept(Processor processor) {
     return Visitor_MethodDescriptor.visit(processor, this);
@@ -180,6 +204,7 @@ public abstract class MethodDescriptor extends Node implements Member {
     private TypeDescriptor returnTypeDescriptor;
     private ImmutableList<TypeDescriptor> typeParameterTypeDescriptors;
     private JsInfo jsInfo;
+    private boolean isAbstract;
 
     private static Interner<MethodDescriptor> interner = Interners.newWeakInterner();
 
@@ -293,6 +318,11 @@ public abstract class MethodDescriptor extends Node implements Member {
               this.parameterTypeDescriptors, Lists.newArrayList(parameterTypeDescriptor)));
     }
 
+    public Builder setIsAbstract(boolean isAbstract) {
+      this.isAbstract = isAbstract;
+      return this;
+    }
+
     public MethodDescriptor build() {
       // TODO: We should compute the constructor name instead of allowing empty method name to
       // percolate into the MethodDescriptor.
@@ -324,7 +354,8 @@ public abstract class MethodDescriptor extends Node implements Member {
               ImmutableList.copyOf(parameterTypeDescriptors),
               returnTypeDescriptor,
               ImmutableList.copyOf(typeParameterTypeDescriptors),
-              jsInfo));
+              jsInfo,
+              isAbstract));
     }
   }
 }
