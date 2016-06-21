@@ -40,15 +40,18 @@ def j2cl_mirror_from_gwt(name,
       deps = [":" + name + "_java_library"],
   )
 
-  native.filegroup(
-      name = name + "_js_files",
-      srcs = js_srcs,
-  )
+  packaged_js_srcs = None
+  if js_srcs:
+    native.filegroup(
+        name = name + "_js_files",
+        srcs = js_srcs,
+    )
+    packaged_js_srcs = [":" + name + "_js_files"]
 
   j2cl_library(
       name = name,
       srcs = [":" + name + "_java_files"],
-      _js_srcs = [":" + name + "_js_files"],
+      _js_srcs = packaged_js_srcs,
       native_srcs_zips = [":" + name + "_native_zips"],
       deps = deps,
       _js_deps = js_deps,

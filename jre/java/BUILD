@@ -72,11 +72,23 @@ j2cl_transpile(
     deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
 )
 
+# The content of handrolled.depinfo file must be hand-maintained to keep in
+# sync with the handrolled nativebootstrap and vmbootstrap JS files. The first
+# row is a comma separated list of goog.require()d things and the second row
+# is a comma separated list of goog.provide()d things.
+#
+# This is not a very maintainable solution. Only the JRE should go to the
+# trouble to merge hand-rolled JS with a generated ZIP in one step.
+# TODO(b/29509857): Replace all hand-rolled JS with Java then delete this.
 js_import(
     name = "jre_import",
+    depinfos = [
+        "handrolled.depinfo",
+        ":jre_transpiled.depinfo",
+    ],
     srczips = [
-        ":jre_transpiled.js.zip",
         ":jre_hidden_handrolled.js.zip",
+        ":jre_transpiled.js.zip",
     ],
 )
 
