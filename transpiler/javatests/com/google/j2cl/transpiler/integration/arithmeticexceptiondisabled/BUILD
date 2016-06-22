@@ -14,5 +14,4 @@ load(
 integration_test(
     name = "arithmeticexceptiondisabled",
     srcs = glob(["*.java"]),
-    closure_defines = {"ARITHMETIC_EXCEPTION_CHECKS_ENABLED_": "false"},
 )

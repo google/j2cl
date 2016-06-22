@@ -53,6 +53,7 @@ def integration_test(
       "ASSERTIONS_ENABLED_" : "true",
       "ARRAY_CHECK_BOUNDS_" : "false",
       "ARRAY_CHECK_TYPES_" : "false",
+      "ARITHMETIC_EXCEPTION_CHECKS_ENABLED_" : "false",
       "jre.checks.checkLevel" : "'MINIMAL'",
       "jre.checkedMode" : "'DISABLED'",
       "gwt.logging.enabled" : "'FALSE'",
