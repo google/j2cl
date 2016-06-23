@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.common.HasJsName;
+
 /**
  * Abstracts class members (i.e. fields and methods).
  */

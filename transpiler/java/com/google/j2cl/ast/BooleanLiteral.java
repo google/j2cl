@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.j2cl.ast.processors.Visitable;
+import com.google.j2cl.ast.annotations.Visitable;
 
 /**
  * Boolean literal node.

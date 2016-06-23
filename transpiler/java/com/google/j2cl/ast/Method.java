@@ -20,8 +20,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.j2cl.ast.processors.Context;
-import com.google.j2cl.ast.processors.Visitable;
+import com.google.j2cl.ast.annotations.Context;
+import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
 
 import java.util.ArrayList;

@@ -20,8 +20,8 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
-import com.google.j2cl.ast.processors.Context;
-import com.google.j2cl.ast.processors.Visitable;
+import com.google.j2cl.ast.annotations.Context;
+import com.google.j2cl.ast.annotations.Visitable;
 
 import java.io.File;
 import java.util.ArrayList;

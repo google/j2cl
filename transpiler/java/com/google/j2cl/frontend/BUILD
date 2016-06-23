@@ -17,6 +17,7 @@ java_library(
         "//third_party/java/gwt:gwt-jsinterop-annotations",
         "//third_party/java/jsr305_annotations",
         "//transpiler/java/com/google/j2cl/ast",
+        "//transpiler/java/com/google/j2cl/ast/common",
         "//transpiler/java/com/google/j2cl/ast/sourcemap",
         "//transpiler/java/com/google/j2cl/errors",
     ],

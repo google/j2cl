@@ -18,7 +18,7 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.base.Preconditions;
-import com.google.j2cl.ast.processors.Visitable;
+import com.google.j2cl.ast.annotations.Visitable;
 
 import java.util.ArrayList;
 import java.util.Arrays;

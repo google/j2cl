@@ -27,6 +27,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.TypeDescriptor.DescriptorFactory;
+import com.google.j2cl.ast.common.JsUtils;
 
 import java.util.Arrays;
 import java.util.Collections;

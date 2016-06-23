@@ -17,7 +17,7 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import com.google.j2cl.ast.processors.Visitable;
+import com.google.j2cl.ast.annotations.Visitable;
 
 /**
  * A node that represent a type annotation in the Javascript output.

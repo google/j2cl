@@ -20,13 +20,13 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Splitter;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.JsUtils;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeReference;
+import com.google.j2cl.ast.common.JsUtils;
 
 import java.util.Arrays;
 import java.util.Collections;

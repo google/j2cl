@@ -24,7 +24,9 @@ import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.j2cl.ast.processors.Visitable;
+import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.ast.common.HasJsName;
+import com.google.j2cl.ast.common.JsUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;

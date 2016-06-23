@@ -16,7 +16,7 @@
 package com.google.j2cl.ast;
 
 import com.google.auto.value.AutoValue;
-import com.google.j2cl.ast.processors.Visitable;
+import com.google.j2cl.ast.annotations.Visitable;
 
 /**
  * A (by signature) reference to a field.

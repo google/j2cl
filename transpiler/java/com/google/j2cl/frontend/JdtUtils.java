@@ -35,7 +35,6 @@ import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JavaType.Kind;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
-import com.google.j2cl.ast.JsUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -48,6 +47,7 @@ import com.google.j2cl.ast.TypeDescriptor.DescriptorFactory;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
+import com.google.j2cl.ast.common.JsUtils;
 
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;

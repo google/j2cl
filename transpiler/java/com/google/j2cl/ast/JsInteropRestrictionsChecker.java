@@ -18,6 +18,8 @@ package com.google.j2cl.ast;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
+import com.google.j2cl.ast.common.HasJsName;
+import com.google.j2cl.ast.common.JsUtils;
 import com.google.j2cl.errors.Errors;
 
 import java.util.List;

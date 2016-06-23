@@ -13,10 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast.processors;
+package com.google.j2cl.ast.common;
 
 /**
- * Marks a node as having meta data that the rewriter needs to preserve.  Its up to the node
+ * Marks a node as having metadata that the rewriter needs to preserve. Its up to the node
  * implementation to copy the metadata.
  */
 public interface HasMetadata<T extends HasMetadata<T>> {

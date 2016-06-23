@@ -13,13 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast;
+package com.google.j2cl.ast.common;
 
 import java.util.regex.Pattern;
 
-/**
- * Some JavaScript related utility functions.
- */
+/** Some JavaScript related utility functions. */
 public class JsUtils {
   private static final String VALID_JS_NAME_REGEX = "[a-zA-Z_$][\\w_$]*";
   private static final Pattern JAVASCRIPT_VALID_QUALIFIED_NAME_PATTERN =
@@ -42,9 +40,7 @@ public class JsUtils {
 
   public static final String JS_GLOBAL = "<global>";
 
-  /**
-   * Returns whether a type should be considered global based on its namespace.
-   */
+  /** Returns whether a type should be considered global based on its namespace. */
   public static boolean isGlobal(String jsNamespace) {
     return JS_GLOBAL.equals(jsNamespace);
   }

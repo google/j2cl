@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Google Inc.
+ * Copyright 2015 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,19 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast;
+package com.google.j2cl.ast.annotations;
 
-/**
- * Abstracts JsInterop name related information for the AST nodes.
- */
-public interface HasJsName {
-  /**
-   * The name specified directly on a type, method or field.
-   */
-  String getJsName();
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
 
-  /**
-   * The namespace specified on a package, type, method or field.
-   */
-  String getJsNamespace();
-}
+/** Annotation to mark which visitable fields will act as context. */
+@Target({ElementType.TYPE})
+public @interface Context {}

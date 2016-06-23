@@ -15,8 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.j2cl.ast.processors.HasMetadata;
-import com.google.j2cl.ast.processors.Visitable;
+import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.ast.common.HasMetadata;
 import com.google.j2cl.ast.sourcemap.HasSourcePosition;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
 

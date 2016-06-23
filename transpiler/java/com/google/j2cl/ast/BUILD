@@ -12,6 +12,8 @@ java_library(
         "//third_party/java/apache_commons_lang3",
         "//third_party/java/auto:auto_value",
         "//third_party/java/jsr305_annotations",
+        "//transpiler/java/com/google/j2cl/ast/annotations",
+        "//transpiler/java/com/google/j2cl/ast/common",
         "//transpiler/java/com/google/j2cl/ast/processors:visitor-codegen",
         "//transpiler/java/com/google/j2cl/ast/sourcemap",
         "//transpiler/java/com/google/j2cl/errors",

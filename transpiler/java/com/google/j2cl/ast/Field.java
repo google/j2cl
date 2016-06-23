@@ -17,9 +17,9 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.j2cl.ast.processors.Context;
-import com.google.j2cl.ast.processors.HasMetadata;
-import com.google.j2cl.ast.processors.Visitable;
+import com.google.j2cl.ast.annotations.Context;
+import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.ast.common.HasMetadata;
 import com.google.j2cl.ast.sourcemap.HasSourcePosition;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
 

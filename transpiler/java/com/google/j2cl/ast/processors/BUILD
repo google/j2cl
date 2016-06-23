@@ -21,6 +21,7 @@ java_library(
         "//third_party/java/auto:common",
         "//third_party/java/jakarta_velocity",
         "//third_party/java/jsr305_annotations",
+        "//transpiler/java/com/google/j2cl/ast/annotations",
     ],
 )
 

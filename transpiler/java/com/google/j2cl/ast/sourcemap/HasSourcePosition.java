@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.ast.sourcemap;
 
-import com.google.j2cl.ast.processors.HasMetadata;
+import com.google.j2cl.ast.common.HasMetadata;
 
 /**
  * An interface for source nodes that know their position in the original source.
