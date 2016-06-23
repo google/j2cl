@@ -23,11 +23,10 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Interner;
-import com.google.common.collect.Interners;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.Interner;
 
 import javax.annotation.Nullable;
 
@@ -206,7 +205,7 @@ public abstract class MethodDescriptor extends Node implements Member {
     private JsInfo jsInfo;
     private boolean isAbstract;
 
-    private static Interner<MethodDescriptor> interner = Interners.newWeakInterner();
+    private static Interner<MethodDescriptor> interner = new Interner<MethodDescriptor>();
 
     public static Builder fromDefault() {
       Builder builder = new Builder();

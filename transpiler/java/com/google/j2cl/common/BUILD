@@ -5,5 +5,11 @@ licenses(["unencumbered"])
 
 java_library(
     name = "common",
-    srcs = ["J2clUtils.java"],
+    srcs = [
+        "Interner.java",
+        "J2clUtils.java",
+    ],
+    deps = [
+        "//java/com/google/common/collect",
+    ],
 )

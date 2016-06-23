@@ -20,13 +20,12 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Interner;
-import com.google.common.collect.Interners;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsName;
 import com.google.j2cl.ast.common.JsUtils;
+import com.google.j2cl.common.Interner;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -52,7 +51,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
 
   private static Interner<TypeDescriptor> getInterner() {
     if (interner == null) {
-      interner = Interners.newWeakInterner();
+      interner = new Interner<TypeDescriptor>();
     }
     return interner;
   }

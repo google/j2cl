@@ -16,8 +16,7 @@
 package com.google.j2cl.ast;
 
 import com.google.auto.value.AutoValue;
-import com.google.common.collect.Interner;
-import com.google.common.collect.Interners;
+import com.google.j2cl.common.Interner;
 
 import javax.annotation.Nullable;
 
@@ -63,7 +62,7 @@ public abstract class JsInfo {
 
   private static Interner<JsInfo> getInterner() {
     if (interner == null) {
-      interner = Interners.newWeakInterner();
+      interner = new Interner<JsInfo>();
     }
     return interner;
   }
