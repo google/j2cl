@@ -15,15 +15,11 @@
  */
 package com.google.j2cl.ast.common;
 
-import java.util.regex.Pattern;
-
 /** Some JavaScript related utility functions. */
 public class JsUtils {
   private static final String VALID_JS_NAME_REGEX = "[a-zA-Z_$][\\w_$]*";
-  private static final Pattern JAVASCRIPT_VALID_QUALIFIED_NAME_PATTERN =
-      Pattern.compile(VALID_JS_NAME_REGEX + "(\\." + VALID_JS_NAME_REGEX + ")*");
-  private static final Pattern JAVASCRIPT_VALID_IDENTIFIER_PATTERN =
-      Pattern.compile(VALID_JS_NAME_REGEX);
+  private static final String JAVASCRIPT_VALID_QUALIFIED_NAME_REGEX =
+      VALID_JS_NAME_REGEX + "(\\." + VALID_JS_NAME_REGEX + ")*";
 
   /**
    * A JavaScript identifier contains only letters, numbers, _, $ and does not begin with a number.
@@ -31,11 +27,11 @@ public class JsUtils {
    * characters but we disallow those for the time being.
    */
   public static boolean isValidJsIdentifier(String name) {
-    return JAVASCRIPT_VALID_IDENTIFIER_PATTERN.matcher(name).matches();
+    return name.matches(VALID_JS_NAME_REGEX);
   }
 
   public static boolean isValidJsQualifiedName(String name) {
-    return JAVASCRIPT_VALID_QUALIFIED_NAME_PATTERN.matcher(name).matches();
+    return name.matches(JAVASCRIPT_VALID_QUALIFIED_NAME_REGEX);
   }
 
   public static final String JS_GLOBAL = "<global>";
