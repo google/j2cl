@@ -16,7 +16,6 @@
 package com.google.j2cl.generator;
 
 import com.google.common.base.Preconditions;
-import com.google.debugging.sourcemap.FilePosition;
 import com.google.j2cl.ast.AnonymousJavaType;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.Expression;
@@ -30,6 +29,7 @@ import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Visibility;
+import com.google.j2cl.ast.sourcemap.FilePosition;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;

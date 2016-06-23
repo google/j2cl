@@ -16,7 +16,7 @@
 package com.google.j2cl.generator;
 
 import com.google.common.base.Strings;
-import com.google.debugging.sourcemap.FilePosition;
+import com.google.j2cl.ast.sourcemap.FilePosition;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
 
 import org.apache.commons.lang.StringUtils;

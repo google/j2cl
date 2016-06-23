@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.generator;
 
-import com.google.debugging.sourcemap.FilePosition;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.Block;
@@ -38,6 +37,7 @@ import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.WhileStatement;
+import com.google.j2cl.ast.sourcemap.FilePosition;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
 
 import java.util.List;

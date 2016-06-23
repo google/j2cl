@@ -1,5 +1,6 @@
 package com.google.j2cl.generator;
 
+import com.google.debugging.sourcemap.FilePosition;
 import com.google.debugging.sourcemap.SourceMapFormat;
 import com.google.debugging.sourcemap.SourceMapGenerator;
 import com.google.debugging.sourcemap.SourceMapGeneratorFactory;
@@ -92,13 +93,23 @@ public class SourceMapGeneratorStage {
       sourceMapGenerator.addMapping(
           compilationUnitSourceFileName,
           null,
-          javaSourcePosition.getStartFilePosition(),
-          javaScriptSourcePosition.getStartFilePosition(),
-          javaScriptSourcePosition.getEndFilePosition());
+          toFilePosition(javaSourcePosition.getStartFilePosition()),
+          toFilePosition(javaScriptSourcePosition.getStartFilePosition()),
+          toFilePosition(javaScriptSourcePosition.getEndFilePosition()));
     }
     StringBuilder sb = new StringBuilder();
     String typeName = javaType.getDescriptor().getBinaryClassName();
     sourceMapGenerator.appendTo(sb, typeName + ".impl.js");
     return sb.toString();
+  }
+
+  /**
+   * Converts a j2cl File Position to a JsCompiler sourcemap File Position.
+   *
+   * @param j2clFilePosition
+   * @return JsCompiler sourcemap File Position
+   */
+  private FilePosition toFilePosition(com.google.j2cl.ast.sourcemap.FilePosition j2clFilePosition) {
+    return new FilePosition(j2clFilePosition.getLine(), j2clFilePosition.getColumn());
   }
 }

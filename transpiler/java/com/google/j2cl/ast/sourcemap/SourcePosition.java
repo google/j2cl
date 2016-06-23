@@ -15,8 +15,6 @@
  */
 package com.google.j2cl.ast.sourcemap;
 
-import com.google.debugging.sourcemap.FilePosition;
-
 /**
  * Describes the location of a node in the original source in the form of a range
  * (line,column)-(line,column); where both line and column are zero-based.
