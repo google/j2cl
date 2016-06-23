@@ -5,5 +5,5 @@ licenses(["unencumbered"])
 
 java_library(
     name = "common",
-    srcs = glob(["*.java"]),
+    srcs = ["J2clUtils.java"],
 )
