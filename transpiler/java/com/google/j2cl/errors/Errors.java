@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.errors;
 
+import com.google.j2cl.common.J2clUtils;
+
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +93,7 @@ public class Errors {
 
   public void error(Error error, String detailMessage, Object... args) {
     errorCount++;
-    errorMessages.add(error.getErrorMessage() + ": " + String.format(detailMessage, args));
+    errorMessages.add(error.getErrorMessage() + ": " + J2clUtils.format(detailMessage, args));
   }
 
   /**
@@ -101,7 +103,7 @@ public class Errors {
     for (String message : errorMessages) {
       errorStream.println(message);
     }
-    errorStream.printf("%d error(s).%n", errorCount);
+    J2clUtils.printf(errorStream, "%d error(s).%n", errorCount);
   }
 
   /**
@@ -110,7 +112,7 @@ public class Errors {
   public void maybeReportAndExit() {
     if (errorCount > 0) {
       report();
-      System.exit(errorCount);
+      J2clUtils.exit(errorCount);
     }
   }
 }

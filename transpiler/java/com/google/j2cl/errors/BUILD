@@ -8,5 +8,6 @@ java_library(
     srcs = glob(["*.java"]),
     deps = [
         "//java/com/google/common/collect",
+        "//transpiler/java/com/google/j2cl/common",
     ],
 )
