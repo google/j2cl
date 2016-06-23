@@ -15,4 +15,5 @@ load(
 integration_test(
     name = "castwithsideeffect",
     srcs = glob(["*.java"]),
+    closure_defines = {"CAST_CHECKS_ENABLED_": "true"},
 )

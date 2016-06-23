@@ -15,4 +15,5 @@ load(
 integration_test(
     name = "bridgemethodaccidentaloverride",
     srcs = glob(["*.java"]),
+    closure_defines = {"CAST_CHECKS_ENABLED_": "true"},
 )

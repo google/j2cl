@@ -14,4 +14,5 @@ load(
 integration_test(
     name = "casttoboxedtype",
     srcs = glob(["*.java"]),
+    closure_defines = {"CAST_CHECKS_ENABLED_": "true"},
 )

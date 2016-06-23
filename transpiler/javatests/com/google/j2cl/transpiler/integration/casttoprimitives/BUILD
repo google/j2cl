@@ -15,4 +15,5 @@ load(
 integration_test(
     name = "casttoprimitives",
     srcs = glob(["*.java"]),
+    closure_defines = {"CAST_CHECKS_ENABLED_": "true"},
 )

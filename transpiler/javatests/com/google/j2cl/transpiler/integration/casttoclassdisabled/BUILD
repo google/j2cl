@@ -14,5 +14,4 @@ load(
 integration_test(
     name = "casttoclassdisabled",
     srcs = glob(["*.java"]),
-    closure_defines = {"CAST_CHECKS_ENABLED_": "false"},
 )
