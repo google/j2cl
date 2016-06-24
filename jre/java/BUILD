@@ -81,7 +81,7 @@ j2cl_transpile(
 # trouble to merge hand-rolled JS with a generated ZIP in one step.
 # TODO(b/29509857): Replace all hand-rolled JS with Java then delete this.
 js_import(
-    name = "jre_import",
+    name = "jre",
     depinfos = [
         "handrolled.depinfo",
         ":jre_transpiled.depinfo",
@@ -90,15 +90,9 @@ js_import(
         ":jre_hidden_handrolled.js.zip",
         ":jre_transpiled.js.zip",
     ],
-)
-
-# Bundles together JRE code with its deps.
-js_library(
-    name = "jre",
     deps = [
-        ":jre_import",
-        "//javascript/closure/reflect",
-        "//javascript/closure/math:long",
         "//javascript/closure:base",
+        "//javascript/closure/math:long",
+        "//javascript/closure/reflect",
     ],
 )

@@ -11,5 +11,7 @@ java_library(
 
 js_library(
     name = "forwarder",
-    deps = ["//transpiler/javatests/com/google/j2cl/transpiler/integration/depsforwarding/foo"],
+    deps = [
+        "//transpiler/javatests/com/google/j2cl/transpiler/integration/depsforwarding/foo",
+    ],
 )

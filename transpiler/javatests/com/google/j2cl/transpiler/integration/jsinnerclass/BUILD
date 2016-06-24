@@ -14,12 +14,19 @@ load(
 # blaze test :uncompiled_test
 integration_test(
     name = "jsinnerclass",
-    srcs = glob(["*.java"]),
+    srcs = ["Main.java"],
     js_deps = [":native_types"],
-    deps = ["//jre/java:gwt-jsinterop-annotations"],
+    deps = [
+        ":outer",
+        "//jre/java:gwt-jsinterop-annotations",
+    ],
 )
 
 js_library(
     name = "native_types",
     srcs = glob(["*.js"]),
+    deps = [
+        "//javascript/closure:base",
+        ":outer",
+    ],
 )

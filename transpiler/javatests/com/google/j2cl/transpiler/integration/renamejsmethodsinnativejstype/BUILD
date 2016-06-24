@@ -17,6 +17,7 @@ integration_test(
     # Src's JUST the Main class and gets Foo as a dependency. Do not
     # change this since this is part of what the test is verifying.
     srcs = ["Main.java"],
+    js_deps = [":native_types"],
     native_srcs = ["Main.native.js"],
     deps = [
         ":Foo",
@@ -27,4 +28,5 @@ integration_test(
 js_library(
     name = "native_types",
     srcs = ["NativeFoo.js"],
+    deps = ["//javascript/closure:base"],
 )

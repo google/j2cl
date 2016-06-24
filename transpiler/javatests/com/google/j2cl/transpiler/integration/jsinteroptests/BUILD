@@ -25,4 +25,5 @@ integration_test(
 js_library(
     name = "native_types",
     srcs = glob(["native_types/*.js"]),
+    deps = ["//javascript/closure:base"],
 )

@@ -15,5 +15,8 @@ load(
 integration_test(
     name = "depsdeep",
     srcs = ["Main.java"],
-    deps = ["//transpiler/javatests/com/google/j2cl/transpiler/integration/depsdeep/foo"],
+    deps = [
+        "//transpiler/javatests/com/google/j2cl/transpiler/integration/depsdeep/bar",
+        "//transpiler/javatests/com/google/j2cl/transpiler/integration/depsdeep/foo",
+    ],
 )
