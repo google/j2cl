@@ -20,7 +20,7 @@ integration_test(
 """
 
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "J2CL_UNOPTIMIZED_DEFS",
-     "J2CL_OPTIMIZED_DEFS", "J2CL_TEST_DEFS", "make_output_readable")
+     "J2CL_OPTIMIZED_DEFS", "J2CL_TEST_DEFS", "READABLE_OUTPUT_DEFS")
 load("/third_party/java/j2cl/j2cl_library", "j2cl_library")
 load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_package")
 load("/tools/build_defs/label/def", "absolute_label")
@@ -115,10 +115,10 @@ def integration_test(
   native.js_binary(
       name="readable_optimized_js",
       srcs=["OptHarness.js"],
-      defs=make_output_readable(J2CL_OPTIMIZED_DEFS + [
+      defs= J2CL_OPTIMIZED_DEFS + READABLE_OUTPUT_DEFS + [
           "--norewrite_polyfills",
           "--closure_entry_point=gen.opt.Harness",
-      ] + defs),
+      ] + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
       deps=srcs_lib_dep,
@@ -127,7 +127,7 @@ def integration_test(
   native.js_binary(
       name="readable_unoptimized_js",
       srcs=["OptHarness.js"],
-      defs=make_output_readable(J2CL_UNOPTIMIZED_DEFS + defs),
+      defs=J2CL_UNOPTIMIZED_DEFS + READABLE_OUTPUT_DEFS + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list=["//javascript/externs:common"],
       deps=srcs_lib_dep,
