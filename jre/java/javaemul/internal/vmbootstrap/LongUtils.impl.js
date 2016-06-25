@@ -6,7 +6,7 @@ goog.module('vmbootstrap.LongUtils$impl');
 
 const Long = goog.require('nativebootstrap.Long$impl');
 const Arrays = goog.require('vmbootstrap.Arrays$impl');
-const Primitives = goog.require('vmbootstrap.primitives.Primitives$impl');
+const InternalPreconditions = goog.require('javaemul.internal.InternalPreconditions$impl');
 
 
 /**
@@ -271,9 +271,7 @@ class LongUtils {
    * @private
    */
   static checkDivisorZero(divisor) {
-    if (divisor.isZero()) {
-      Primitives.$throwArithmeticException();
-    }
+    InternalPreconditions.m_checkArithmetic__boolean(!divisor.isZero());
   }
 
   /**

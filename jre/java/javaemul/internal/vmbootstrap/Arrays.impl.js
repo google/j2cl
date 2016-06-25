@@ -10,14 +10,11 @@ let Hashing = goog.require('nativebootstrap.Hashing$impl');
 
 let ArrayIndexOutOfBoundsException =
     goog.forwardDeclare('java.lang.ArrayIndexOutOfBoundsException$impl');
-let ArrayStoreException =
-    goog.forwardDeclare('java.lang.ArrayStoreException$impl');
 let Class = goog.forwardDeclare('java.lang.Class');
 let Object = goog.forwardDeclare('java.lang.Object');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let NullPointerException =
     goog.forwardDeclare('java.lang.NullPointerException$impl');
-let Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 let InternalPreconditions =
     goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
@@ -167,32 +164,47 @@ class Arrays {
         Arrays.$throwArrayIndexOutOfBoundsException();
       }
     }
-    if (ARRAY_CHECK_TYPES_ && value != null) {
-      // Only check when the array has a known leaf type. JS native arrays won't
-      // have it.
-      if (/** @type {*} */ (array).leafTypeIsInstance) {
-        var enhancedArray = /** @type {Arrays.EnhancedArray_} */ (array);
-        if (enhancedArray.dimensionCount > 1) {
-          if (!Arrays.$instanceIsOfTypeInternal(
-                  value,
-                  enhancedArray.leafType,
-                  enhancedArray.leafTypeIsAssignableFrom,
-                  enhancedArray.dimensionCount - 1)) {
-            // The inserted array must fit dimensions and the array leaf
-            // type.
-            Arrays.$throwArrayStoreException();
-          }
-        } else if (!enhancedArray.leafTypeIsInstance(value)) {
-          // The inserted value must fit the array leaf type.
-          // If leafType is not a primitive type, a 'null' should always be a
-          // legal value. If leafType is a primitive type, value cannot be null
-          // because that is illegal in Java.
-          Arrays.$throwArrayStoreException();
-        }
-      }
+
+    // TODO(goktug) remove m_isTypeChecked when $canSet_ could be marked or
+    // proved as side effect free.
+    if (InternalPreconditions.m_isTypeChecked()) {
+      InternalPreconditions.m_checkArrayType__boolean(
+          value == null || Arrays.$canSet_(array, index, value));
     }
 
     return array[index] = value;
+  }
+
+  /**
+   * @template T
+   * @param {Array<*>} array
+   * @param {number} index
+   * @param {T} value
+   * @return {boolean}
+   * @private
+   */
+  static $canSet_(array, index, value) {
+    // Only check when the array has a known leaf type. JS native arrays won't
+    // have it.
+    if (/** @type {*} */ (array).leafTypeIsInstance) {
+      var enhancedArray = /** @type {Arrays.EnhancedArray_} */ (array);
+      if (enhancedArray.dimensionCount > 1) {
+        if (!Arrays.$instanceIsOfTypeInternal(
+                value, enhancedArray.leafType,
+                enhancedArray.leafTypeIsAssignableFrom,
+                enhancedArray.dimensionCount - 1)) {
+          // The inserted array must fit dimensions and the array leaf type.
+          return false;
+        }
+      } else if (value != null && !enhancedArray.leafTypeIsInstance(value)) {
+        // The inserted value must fit the array leaf type.
+        // If leafType is not a primitive type, a 'null' should always be a
+        // legal value. If leafType is a primitive type, value cannot be null
+        // because that is illegal in Java.
+        return false;
+      }
+    }
+    return true;
   }
 
   /**
@@ -304,14 +316,12 @@ class Arrays {
       instance, requiredLeafType, requiredLeafTypeIsAssignableFrom,
       requiredDimensionCount) {
     Arrays.$clinit();
-    if (instance == null) {
-      return instance;
-    }
-    return Casts.check(
-        instance,
+    InternalPreconditions.m_checkType__boolean(
+        instance == null ||
         Arrays.$instanceIsOfTypeInternal(
             instance, requiredLeafType, requiredLeafTypeIsAssignableFrom,
             requiredDimensionCount));
+    return instance;
   }
 
   /**
@@ -327,10 +337,9 @@ class Arrays {
    */
   static $castToNative(instance) {
     Arrays.$clinit();
-    if (instance == null) {
-      return instance;
-    }
-    return Casts.check(instance, Array.isArray(instance));
+    InternalPreconditions.m_checkType__boolean(
+        instance == null || Array.isArray(instance));
+    return instance;
   }
 
   /**
@@ -367,17 +376,6 @@ class Arrays {
   static $throwArrayIndexOutOfBoundsException() {
     Arrays.$clinit();
     throw Exceptions.toJs(ArrayIndexOutOfBoundsException.$create());
-  }
-
-  /**
-   * Isolates the exception throw here so that calling functions that perform
-   * casts can still be optimized by V8.
-   *
-   * @private
-   */
-  static $throwArrayStoreException() {
-    Arrays.$clinit();
-    throw Exceptions.toJs(ArrayStoreException.$create());
   }
 
   /**
@@ -567,14 +565,11 @@ class Arrays {
     Arrays.$clinit = function() {};
     ArrayIndexOutOfBoundsException =
         goog.module.get('java.lang.ArrayIndexOutOfBoundsException$impl');
-    ArrayStoreException =
-        goog.module.get('java.lang.ArrayStoreException$impl');
     Class = goog.module.get('java.lang.Class');
     Object = goog.module.get('java.lang.Object');
     Integer = goog.module.get('java.lang.Integer$impl');
     NullPointerException =
         goog.module.get('java.lang.NullPointerException$impl');
-    Casts = goog.module.get('vmbootstrap.Casts$impl');
     Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
     InternalPreconditions =
       goog.module.get('javaemul.internal.InternalPreconditions$impl');
@@ -600,20 +595,14 @@ Arrays.EnhancedArray_;
 
 
 /**
- * Is off by default to match default GWT behavior. Can be turned back on once
- * the standard library is fixed to no longer violate this constraint.
+ * Is off by default to match default GWT behavior. Once the standard library is
+ * fixed to no longer violate this constraint, we can remove this flag and start
+ * using jre.checks.bounds (which is enforced to be enabled in development).
  *
  * @define {boolean} Whether or not to check bounds on insertion.
  * @private
  */
 goog.define('ARRAY_CHECK_BOUNDS_', false);
-
-
-/**
- * @define {boolean} Whether or not to check type on insertion.
- * @private
- */
-goog.define('ARRAY_CHECK_TYPES_', true);
 
 
 /**

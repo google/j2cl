@@ -7,9 +7,7 @@ goog.module('vmbootstrap.primitives.Primitives$impl');
 let $Long = goog.require('nativebootstrap.Long$impl');
 let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
-let ArithmeticException =
-    goog.forwardDeclare('java.lang.ArithmeticException$impl');
-let Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 
 /**
  * Static Primitive helper.
@@ -389,32 +387,15 @@ class Primitives {
   }
 
   /**
-   * If result is Infinity, we assume a division by zero and throw an
-   * ArithmeticException.
+   * Checks if result is Infinity to catch division by zero.
    *
    * @param {number} result
    * @return {void}
    * @private
    */
   static $checkArithmeticException(result) {
-    // This format can be inlined when the define is off. Be careful when
-    // editing this code.
-    if (ARITHMETIC_EXCEPTION_CHECKS_ENABLED_) {
-      if (!Number.isFinite(result)) {
-        Primitives.$throwArithmeticException();
-      }
-    }
-  }
-
-  /**
-   * Isolates the exception throw here so that calling functions that perform
-   * casts can still be optimized by V8.
-   *
-   * @public
-   */
-  static $throwArithmeticException() {
     Primitives.$clinit();
-    throw Exceptions.toJs(ArithmeticException.$create());
+    InternalPreconditions.m_checkArithmetic__boolean(isFinite(result));
   }
 
 
@@ -426,18 +407,10 @@ class Primitives {
     Primitives.$clinit = function() {};
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
-    ArithmeticException =
-        goog.module.get('java.lang.ArithmeticException$impl');
-    Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+    InternalPreconditions =
+        goog.module.get('javaemul.internal.InternalPreconditions$impl');
   }
 };
-
-
-/**
- * @define {boolean} Whether to check if arithmetic results were infinity.
- * @private
- */
-goog.define('ARITHMETIC_EXCEPTION_CHECKS_ENABLED_', true);
 
 
 /**

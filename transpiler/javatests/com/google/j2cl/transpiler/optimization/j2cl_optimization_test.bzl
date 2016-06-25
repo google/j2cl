@@ -32,6 +32,7 @@ def j2cl_optimization_test(name, defs=[]):
         "--norewrite_polyfills",
         "--strict",
         "--variable_renaming=OFF",
+        "--define=jre.checkedMode=DISABLED",
     ] + defs,
     deps_mgmt = "closure",
     externs_list = ["//javascript/externs:common"],
