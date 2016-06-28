@@ -20,11 +20,7 @@ integration_test(
     name = "box2d",
     srcs = glob(["*.java"]),
     closure_defines = {
-        "ARITHMETIC_EXCEPTION_CHECKS_ENABLED_": "false",
-        "ARRAY_CHECK_BOUNDS_": "false",
-        "ARRAY_CHECK_TYPES_": "false",
         "ASSERTIONS_ENABLED_": "false",
-        "CAST_CHECKS_ENABLED_": "false",
         "CLASS_METADATA_ENABLED_": "false",
     },
     enable_gwt = True,

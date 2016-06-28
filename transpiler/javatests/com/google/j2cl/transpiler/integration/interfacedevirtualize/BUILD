@@ -15,5 +15,5 @@ load(
 integration_test(
     name = "interfacedevirtualize",
     srcs = glob(["*.java"]),
-    closure_defines = {"CAST_CHECKS_ENABLED_": "true"},
+    closure_defines = {"jre.checks.type": "ENABLED"},
 )

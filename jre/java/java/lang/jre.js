@@ -3,15 +3,6 @@
  * See InternalPreconditions.java for details.
  */
 
-// TODO(goktug): Remove these after all references are removed
-/** @define {string} */
-goog.define('ARRAY_CHECK_TYPES_', 'auto');
-/** @define {string} */
-goog.define('CAST_CHECKS_ENABLED_', 'auto');
-/** @define {string} */
-goog.define('ARITHMETIC_EXCEPTION_CHECKS_ENABLED_', 'auto');
-
-
 goog.provide('jre');
 
 /** @define {string} */
@@ -29,18 +20,9 @@ goog.define('jre.checks.bounds', 'AUTO');
 /** @define {string} */
 goog.define('jre.checks.api', 'AUTO');
 /** @define {string} */
-goog.define(
-    'jre.checks.numeric', ARITHMETIC_EXCEPTION_CHECKS_ENABLED_ == 'auto' ?
-        'AUTO' :
-        ARITHMETIC_EXCEPTION_CHECKS_ENABLED_ == true ? 'ENABLED' : 'DISABLED');
+goog.define('jre.checks.numeric', 'AUTO');
 /** @define {string} */
-goog.define(
-    'jre.checks.type',
-    (ARRAY_CHECK_TYPES_ == 'auto' && CAST_CHECKS_ENABLED_ == 'auto') ?
-        'AUTO' :
-        (ARRAY_CHECK_TYPES_ == true || CAST_CHECKS_ENABLED_ == true) ?
-        'ENABLED' :
-        'DISABLED');
+goog.define('jre.checks.type', 'AUTO');
 /** @define {string} */
 goog.define('jre.checks.critical', 'AUTO');
 

@@ -14,5 +14,5 @@ load(
 integration_test(
     name = "castdevirtualizedtypes",
     srcs = glob(["*.java"]),
-    closure_defines = {"CAST_CHECKS_ENABLED_": "true"},
+    closure_defines = {"jre.checks.type": "ENABLED"},
 )

@@ -15,6 +15,6 @@ load(
 integration_test(
     name = "casttonativetypevariable",
     srcs = glob(["*.java"]),
-    closure_defines = {"CAST_CHECKS_ENABLED_": "true"},
+    closure_defines = {"jre.checks.type": "ENABLED"},
     deps = ["//jre/java:gwt-jsinterop-annotations"],
 )
