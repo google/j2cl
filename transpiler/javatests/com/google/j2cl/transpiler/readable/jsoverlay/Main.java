@@ -41,6 +41,11 @@ public class Main {
     public static int varargs(int... a) {
       return a[0];
     }
+
+    @JsOverlay
+    private int baz() {
+      return 1;
+    }
   }
 
   public void test() {
@@ -54,5 +59,6 @@ public class Main {
         NativeJsTypeWithOverlay.COMPILE_TIME_CONSTANT + NativeJsTypeWithOverlay.nonJsOverlayField;
     NativeJsTypeWithOverlay.staticField = null;
     NativeJsTypeWithOverlay.varargs(1, 2, 3);
+    n.baz();
   }
 }

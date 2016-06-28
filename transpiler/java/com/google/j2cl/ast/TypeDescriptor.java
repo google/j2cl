@@ -100,6 +100,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       newTypeDescriptor.isArray = typeDescriptor.isArray();
       newTypeDescriptor.isEnumOrSubclass = typeDescriptor.isEnumOrSubclass();
       newTypeDescriptor.isExtern = typeDescriptor.isExtern();
+      newTypeDescriptor.isFinal = typeDescriptor.isFinal();
       newTypeDescriptor.isGlobal = typeDescriptor.isGlobal();
       newTypeDescriptor.isInstanceMemberClass = typeDescriptor.isInstanceMemberClass();
       newTypeDescriptor.isInstanceNestedClass = typeDescriptor.isInstanceNestedClass();
@@ -210,6 +211,11 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
 
     public Builder setIsExtern(boolean isExtern) {
       newTypeDescriptor.isExtern = isExtern;
+      return this;
+    }
+
+    public Builder setIsFinal(boolean isFinal) {
+      newTypeDescriptor.isFinal = isFinal;
       return this;
     }
 
@@ -391,6 +397,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   private boolean isArray;
   private boolean isEnumOrSubclass;
   private boolean isExtern;
+  private boolean isFinal;
   private boolean isGlobal;
   private boolean isInstanceMemberClass;
   private boolean isInstanceNestedClass;
@@ -710,6 +717,10 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
 
   public boolean isExtern() {
     return isExtern;
+  }
+
+  public boolean isFinal() {
+    return isFinal;
   }
 
   public boolean isGlobal() {

@@ -1480,6 +1480,7 @@ public class JdtUtils {
       binaryName = binaryName + ":" + typeBinding.getErasure().getBinaryName();
     }
 
+    boolean isFinal = isFinal(typeBinding);
     boolean isNative = JsInteropAnnotationUtils.isNative(jsTypeAnnotation);
     boolean isNullable = !typeBinding.isPrimitive() && !typeBinding.isTypeVariable();
     String jsName = JsInteropAnnotationUtils.getJsName(jsTypeAnnotation);
@@ -1534,6 +1535,7 @@ public class JdtUtils {
         .setInterfacesTypeDescriptorsFactory(interfacesDescriptorsFactory)
         .setIsEnumOrSubclass(isEnumOrSubclass(typeBinding))
         .setIsExtern(isExtern)
+        .setIsFinal(isFinal)
         .setIsInstanceMemberClass(isInstanceMemberClass(typeBinding))
         .setIsInstanceNestedClass(isInstanceNestedClass(typeBinding))
         .setIsInterface(typeBinding.isInterface())

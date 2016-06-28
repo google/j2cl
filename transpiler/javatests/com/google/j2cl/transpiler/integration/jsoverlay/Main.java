@@ -29,6 +29,21 @@ public class Main {
     private final int foo() {
       return 20;
     }
+
+    @JsOverlay
+    private int baz() {
+      return 30;
+    }
+  }
+
+  @JsType(isNative = true, namespace = "test.foo")
+  static final class NativeFinalJsTypeWithOverlay {
+    public native int e();
+
+    @JsOverlay
+    public int buzz() {
+      return 42;
+    }
   }
 
   public static void testNativeJsWithOverlay() {
@@ -41,6 +56,10 @@ public class Main {
     assert NativeJsTypeWithOverlay.staticField == null;
     assert 10 == NativeJsTypeWithOverlay.bar();
     assert 20 == object.foo();
+    assert 30 == object.baz();
+    NativeFinalJsTypeWithOverlay f = new NativeFinalJsTypeWithOverlay();
+    assert 36 == f.e();
+    assert 42 == f.buzz();
   }
 
   public static void main(String... args) {

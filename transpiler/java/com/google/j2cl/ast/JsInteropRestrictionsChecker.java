@@ -174,7 +174,11 @@ public class JsInteropRestrictionsChecker {
           readableDescription);
       return;
     }
-    if (method.isNative() || (!method.isFinal() && !method.getDescriptor().isStatic())) {
+    if (method.isNative()
+        || (!methodDescriptor.getEnclosingClassTypeDescriptor().isFinal()
+            && !method.isFinal()
+            && !method.getDescriptor().isStatic()
+            && !method.getDescriptor().getVisibility().isPrivate())) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "JsOverlay method '%s' cannot be non-final nor native.",
