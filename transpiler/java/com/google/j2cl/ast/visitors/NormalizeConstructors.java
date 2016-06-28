@@ -74,11 +74,14 @@ public class NormalizeConstructors extends NormalizationPass {
    * constructors are actually Javascript constructors.
    *
    * <p>This pass also performs @JsConstructors normalizations. Note that there are 3 forms of
-   * constructors: 1) Normal Java classes where the Javascript constructor simply defines the class
-   * fields. 2) @JsConstructor classes that subclass a regular constructor. This class exposes a
-   * 'real' Javascript constructor that can be used to make an instance of the class. However, to
-   * call super we cannot call the es6 super(args) since the super class is a regular Java class, it
-   * is expected that the $ctor_super(args) is called. Hence the constructors look like this: <pre>
+   * constructors:
+   *
+   * <p>1) Normal Java classes where the Javascript constructor simply defines the class fields.
+   *
+   * <p>2) @JsConstructor classes that subclass a regular constructor. This class exposes a 'real'
+   * Javascript constructor that can be used to make an instance of the class. However, to call
+   * super we cannot call the es6 super(args) since the super class is a regular Java class, it is
+   * expected that the $ctor_super(args) is called. Hence the constructors look like this: <pre>
    *  {@code
    * class JsConstructorClass extends RegularClass
    *   constructor(args) {

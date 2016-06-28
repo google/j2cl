@@ -46,17 +46,30 @@ import java.util.List;
  * Since JavaScript doesn't support multiple catch clauses, we convert multiple catch clauses to a
  * single catch clause that contains control flow to route to the correct block of code.
  *
- * <p>In Java:
+ * <p>In Java: <pre>{@code
+ * try {
+ *    throw new ClassCastException();
+ *  } catch (NullPointerException | ClassCastException e) {
+ *    // expected empty body.
+ *  } catch (RuntimeException r) {
+ *    r = null; // used to show exception variable is transpiled correctly.
+ *  }
+ *  }</pre>
  *
- * <p><code> try { throw new ClassCastException(); } catch (NullPointerException |
- * ClassCastException e) { // expected empty body. } catch (RuntimeException r) { r = null; // used
- * to show exception variable is transpiled correctly. }
- *
- * <p>is transpiled to JavaScript:
- *
- * <p>try { throw ClassCastException.$create(); } catch (e) { if
- * (NullPointerException.$isInstance(e) || ClassCastException.$isInstance(e)) { } else if
- * (RuntimeException.$isInstance(e)) { let r = e; r = null; } else { throw e; } } </code>
+ * <p>is transpiled to JavaScript: <pre>{@code
+ *  try {
+ *    throw ClassCastException.$create();
+ *  } catch (e) {
+ *    if (NullPointerException.$isInstance(e) ||
+ *        ClassCastException.$isInstance(e)) {
+ *    } else if (RuntimeException.$isInstance(e)) {
+ *      let r = e;
+ *      r = null;
+ *    } else {
+ *      throw e;
+ *    }
+ *  }
+ * }</pre>
  */
 public class NormalizeCatchClauses extends NormalizationPass {
   @Override
@@ -161,5 +174,4 @@ public class NormalizeCatchClauses extends NormalizationPass {
       return MethodCall.createMethodCall(null, methodDescriptor, exceptionVariable);
     }
   }
-  
 }

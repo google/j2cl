@@ -35,11 +35,15 @@ import java.util.List;
 /**
  * Normalizes the static native js method calls with the real native method calls.
  *
- * <p>For example, class A {
+ * <p>For example, <pre>
+ * class A {
+ *   {@literal @}JsMethod(namespace="Math")
+ *   static native double abs(double x);
+ * }
+ * </pre>
  *
- * @JsMethod(namespace="Math") static native double abs(double x); } A.abs() really refers to
- *     Javascript built-in Math.abs().
- *     <p>This pass replaces all method calls to A.abs() with Math.abs().
+ * <p>A.abs() really refers to Javascript built-in Math.abs(). This pass replaces all method calls
+ * to A.abs() with Math.abs().
  */
 public class NormalizeNativeMethodCalls extends NormalizationPass {
   @Override

@@ -79,18 +79,31 @@ public class NormalizeTryWithResources extends NormalizationPass {
     }
 
     /**
-     * We transform:
+     * We transform: <pre>{@code
+     * try (ClosableThing thing = new ClosableThing(), ClosableThing thing2 = new ClosableThing()) {
+     *   ....
+     * }
+     * }</pre>
      *
-     * <p>try (ClosableThing thing = new ClosableThing(), ClosableThing thing2 = new
-     * ClosableThing()) { ....
-     *
-     * <p>to:
-     *
-     * <p>let $primaryExc = null; let thing = null; let thing2 = null; try { let thing =
-     * ClosableThing.$create(); let thing2 = ClosableThing.$create(); ... } catch
-     * ($exceptionFromTry) { $primaryExc = $exceptionFromTry; throw $exceptionFromTry; } finally {
-     * $primaryExc = $Exceptions.safeClose(thing2, $primaryExc); $primaryExc =
-     * $Exceptions.safeClose(thing, $primaryExc); if ($primaryExc != null) { throw $primaryExc; } }
+     * to: <pre>{@code
+     * let $primaryExc = null;
+     * let thing = null;
+     * let thing2 = null;
+     * try {
+     *   let thing = ClosableThing.$create();
+     *   let thing2 = ClosableThing.$create();
+     *   ...
+     * } catch ($exceptionFromTry) {
+     *   $primaryExc = $exceptionFromTry;
+     *   throw $exceptionFromTry;
+     * } finally {
+     *   $primaryExc = $Exceptions.safeClose(thing2, $primaryExc);
+     *   $primaryExc = $Exceptions.safeClose(thing, $primaryExc);
+     *   if ($primaryExc != null) {
+     *     throw $primaryExc;
+     *   }
+     * }
+     * }</pre>
      */
     private List<Statement> removeResourceDeclarations(TryStatement tryStatement) {
       MethodDescriptor safeClose =

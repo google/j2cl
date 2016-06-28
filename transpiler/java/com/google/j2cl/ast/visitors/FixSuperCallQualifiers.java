@@ -33,8 +33,19 @@ import com.google.j2cl.ast.TypeDescriptor;
  * Set the qualifier of super calls that should have a qualifier.
  *
  * <p>For a super call that invokes a constructor of an inner class, it should have an qualifier.
- * For example, class A { class B {} class C extends B{ public C() {super();} } } The super call in
- * C's constructor invokes B's constructor, and the explicit qualifier should be resolved.
+ * For example, <pre>{@code
+ *   class A {
+ *     class B {}
+ *     class C extends B {
+ *       public C() {
+ *         super();
+ *       }
+ *     }
+ *   }
+ * }</pre>
+ *
+ * <p>The super call in C's constructor invokes B's constructor, and the explicit qualifier should
+ * be resolved.
  */
 public class FixSuperCallQualifiers extends NormalizationPass {
   @Override
