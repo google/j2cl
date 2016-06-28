@@ -345,7 +345,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
     Preconditions.checkArgument(method.isConstructor());
     Preconditions.checkArgument(fieldDescriptor.isFieldDescriptorForAllCaptures());
     for (Variable parameter : method.getParameters()) {
-      if (parameter.getName().equals(fieldDescriptor.getFieldName())
+      if (parameter.getName().equals(fieldDescriptor.getName())
           && parameter
               .getTypeDescriptor()
               .equalsIgnoreNullability(fieldDescriptor.getTypeDescriptor())

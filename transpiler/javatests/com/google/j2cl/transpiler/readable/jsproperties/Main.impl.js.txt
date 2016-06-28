@@ -16,7 +16,7 @@ let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsproperties.
 let NativeFoo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsproperties.NativeFoo$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 
-/** @constructor */ let $Math = window.Math;
+/** @constructor */ let $global_Math = window.Math;
 
 
 class Main extends Object {
@@ -54,7 +54,7 @@ class Main extends Object {
    */
   m_testNativeJsProperty() {
     NativeFoo.$create().hasOwnProperty;
-    $Math.PI;
+    $global_Math.PI;
   }
 
   /**

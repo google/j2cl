@@ -29,7 +29,6 @@ import com.google.j2cl.ast.common.JsUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -64,17 +63,14 @@ public class EnumMethodsCreator {
                 enumType.getDescriptor(),
                 NAMES_TO_VALUES_MAP_FIELD_NAME,
                 TypeDescriptors.createNative(
-                    Collections.emptyList(),
-                    // Import alias.
-                    Lists.newArrayList("NativeObject"),
+                    // Browser global
+                    JsUtils.JS_PACKAGE_GLOBAL,
+                    // Native type name
+                    "Object",
                     // Type parameters.
                     Lists.newArrayList(
                         TypeDescriptors.get().javaLangString,
-                        TypeDescriptors.toNonNullable(enumType.getDescriptor())),
-                    // Browser global
-                    JsUtils.JS_GLOBAL,
-                    // Native type name
-                    "Object"))
+                        TypeDescriptors.toNonNullable(enumType.getDescriptor()))))
             .setIsStatic(true)
             .setVisibility(Visibility.PRIVATE)
             .build();

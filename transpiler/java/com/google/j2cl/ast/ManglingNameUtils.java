@@ -78,16 +78,16 @@ public class ManglingNameUtils {
     }
     String parameterSignature = getMangledParameterSignature(methodDescriptor);
     String prefix = "m_";
-    if (methodDescriptor.getMethodName().startsWith("$")) {
+    if (methodDescriptor.getName().startsWith("$")) {
       // This is an internal method so we render the actual name
       prefix = "";
     }
     // TODO: We can remove this check and just use the regular method naming pattern.
-    if (methodDescriptor.getMethodName().startsWith("$ctor")) {
-      return methodDescriptor.getMethodName();
+    if (methodDescriptor.getName().startsWith("$ctor")) {
+      return methodDescriptor.getName();
     }
     return String.format(
-        "%s%s%s%s", prefix, methodDescriptor.getMethodName(), parameterSignature, suffix);
+        "%s%s%s%s", prefix, methodDescriptor.getName(), parameterSignature, suffix);
   }
 
   /**
@@ -126,12 +126,12 @@ public class ManglingNameUtils {
   public static String getMangledName(
       FieldDescriptor fieldDescriptor, boolean accessStaticsDirectly) {
     if (fieldDescriptor.isJsProperty() && !accessStaticsDirectly) {
-      return fieldDescriptor.getFieldName();
+      return fieldDescriptor.getJsName();
     }
 
     String prefix = accessStaticsDirectly ? "$" : "";
     Preconditions.checkArgument(!fieldDescriptor.getEnclosingClassTypeDescriptor().isArray());
-    String name = fieldDescriptor.getFieldName();
+    String name = fieldDescriptor.getName();
     String typeMangledName = getMangledName(fieldDescriptor.getEnclosingClassTypeDescriptor());
     String privateSuffix = fieldDescriptor.getVisibility().isPrivate() ? "_" : "";
     return String.format("%sf_%s__%s%s", prefix, name, typeMangledName, privateSuffix);

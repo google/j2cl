@@ -34,10 +34,11 @@ public class JsUtils {
     return name.matches(JAVASCRIPT_VALID_QUALIFIED_NAME_REGEX);
   }
 
-  public static final String JS_GLOBAL = "<global>";
+  public static final String GLOBAL_ALIAS = "window";
+  public static final String JS_PACKAGE_GLOBAL = "<global>";
 
   /** Returns whether a type should be considered global based on its namespace. */
   public static boolean isGlobal(String jsNamespace) {
-    return JS_GLOBAL.equals(jsNamespace);
+    return JS_PACKAGE_GLOBAL.equals(jsNamespace);
   }
 }

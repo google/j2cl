@@ -495,7 +495,7 @@ public class JsInteropRestrictionsChecker {
         "%s %s.%s",
         getReadableDescription(fieldDescriptor.getTypeDescriptor()),
         getReadableDescription(fieldDescriptor.getEnclosingClassTypeDescriptor()),
-        fieldDescriptor.getFieldName());
+        fieldDescriptor.getName());
   }
 
   private String getReadableDescription(MethodDescriptor methodDescriptor) {
@@ -505,7 +505,7 @@ public class JsInteropRestrictionsChecker {
             ? ""
             : getReadableDescription(methodDescriptor.getReturnTypeDescriptor()) + " ",
         getReadableDescription(methodDescriptor.getEnclosingClassTypeDescriptor()),
-        methodDescriptor.getMethodName(),
+        methodDescriptor.getName(),
         Joiner.on(", ")
             .join(
                 Iterables.transform(

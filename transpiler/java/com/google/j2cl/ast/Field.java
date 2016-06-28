@@ -156,7 +156,7 @@ public class Field extends Node implements Positioned, HasSourcePosition {
     public Builder setEnclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
       this.fieldDescriptor =
           FieldDescriptor.Builder.from(fieldDescriptor)
-              .setEnclosingClass(enclosingClassTypeDescriptor)
+              .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
               .build();
       return this;
     }

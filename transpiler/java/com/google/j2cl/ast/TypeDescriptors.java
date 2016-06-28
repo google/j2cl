@@ -186,14 +186,48 @@ public class TypeDescriptors {
   // Common browser native types.
   public static final TypeDescriptor NATIVE_FUNCTION =
       createNative(
-          Collections.emptyList(),
-          // Import alias.
-          Arrays.asList("NativeFunction"),
-          Collections.emptyList(),
-          // Browser global
-          JsUtils.JS_GLOBAL,
+          JsUtils.JS_PACKAGE_GLOBAL,
           // Native type name
-          "Function");
+          "Function",
+          Collections.emptyList());
+  public static final TypeDescriptor NATIVE_OBJECT =
+      createNative(
+          JsUtils.JS_PACKAGE_GLOBAL,
+          // Native type name
+          "Object",
+          Collections.emptyList());
+  public static final TypeDescriptor GLOBAL_NAMESPACE =
+      // This is the global window references seen as a (phantom) type that will become the
+      // enclosing class of native global methods and properties.
+      createNative(
+          JsUtils.JS_PACKAGE_GLOBAL,
+          // Native type name
+          JsUtils.GLOBAL_ALIAS,
+          Collections.emptyList());
+
+  /** Returns TypeDescriptor that contains the devirtualized JsOverlay methods of a native type. */
+  public static TypeDescriptor createOverlayImplementationClassTypeDescriptor(
+      TypeDescriptor typeDescriptor) {
+    checkArgument(typeDescriptor.isNative() || typeDescriptor.isInterface());
+    checkArgument(!typeDescriptor.isArray());
+    checkArgument(!typeDescriptor.isUnion());
+
+    List<String> classComponents =
+        Lists.newArrayList(
+            Iterables.concat(
+                typeDescriptor.getClassComponents(),
+                Arrays.asList(AstUtils.OVERLAY_IMPLEMENTATION_CLASS_SUFFIX)));
+
+    return createExactly(
+        typeDescriptor.getPackageComponents(),
+        classComponents,
+        Collections.<TypeDescriptor>emptyList(),
+        Joiner.on(".").join(typeDescriptor.getPackageComponents()),
+        Joiner.on(".").join(classComponents),
+        false,
+        false,
+        false);
+  }
 
   /**
    * Holds the bootstrap types.
@@ -218,7 +252,7 @@ public class TypeDescriptors {
 
     private TypeDescriptor typeDescriptor;
 
-    private BootstrapType(List<String> pathComponents, String name) {
+    BootstrapType(List<String> pathComponents, String name) {
       this.typeDescriptor =
           createExactly(pathComponents, Arrays.asList(name), true, Collections.emptyList());
     }
@@ -242,15 +276,11 @@ public class TypeDescriptors {
   private TypeDescriptors() {}
 
   public static TypeDescriptor createNative(
-      List<String> packageComponents,
-      List<String> classComponents,
-      List<TypeDescriptor> typeArgumentDescriptors,
-      String jsNamespace,
-      String jsName) {
+      String jsNamespace, String jsName, List<TypeDescriptor> typeArgumentDescriptors) {
 
     return createExactly(
-        packageComponents,
-        classComponents,
+        Collections.singletonList(jsNamespace),
+        Collections.singletonList((JsUtils.isGlobal(jsNamespace) ? "global_" : "") + jsName),
         typeArgumentDescriptors,
         jsNamespace,
         jsName,
@@ -292,7 +322,7 @@ public class TypeDescriptors {
         false);
   }
 
-  public static TypeDescriptor createExactly(
+  private static TypeDescriptor createExactly(
       final List<String> packageComponents,
       final List<String> classComponents,
       final List<TypeDescriptor> typeArgumentDescriptors,
@@ -326,12 +356,9 @@ public class TypeDescriptors {
                     packageComponents,
                     Collections.singleton(Joiner.on("$").join(classComponents))));
     String packageName = Joiner.on(".").join(packageComponents);
-
     return new TypeDescriptor.Builder()
         .setBinaryName(binaryName)
         .setClassComponents(classComponents)
-        .setIsExtern(isNative && JsUtils.isGlobal(jsNamespace))
-        .setIsGlobal(JsUtils.JS_GLOBAL.equals(jsNamespace) && Strings.isNullOrEmpty(jsName))
         .setIsJsType(isJsType)
         .setIsNative(isNative)
         .setIsNullable(true)

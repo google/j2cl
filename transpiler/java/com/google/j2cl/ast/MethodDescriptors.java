@@ -27,7 +27,7 @@ import java.util.List;
 public class MethodDescriptors {
 
   public static boolean isToStringMethodDescriptor(MethodDescriptor methodDescriptor) {
-    return methodDescriptor.getMethodName().equals("toString")
+    return methodDescriptor.getName().equals("toString")
         && methodDescriptor.getParameterTypeDescriptors().isEmpty();
   }
 

@@ -99,9 +99,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
           };
       newTypeDescriptor.isArray = typeDescriptor.isArray();
       newTypeDescriptor.isEnumOrSubclass = typeDescriptor.isEnumOrSubclass();
-      newTypeDescriptor.isExtern = typeDescriptor.isExtern();
       newTypeDescriptor.isFinal = typeDescriptor.isFinal();
-      newTypeDescriptor.isGlobal = typeDescriptor.isGlobal();
       newTypeDescriptor.isInstanceMemberClass = typeDescriptor.isInstanceMemberClass();
       newTypeDescriptor.isInstanceNestedClass = typeDescriptor.isInstanceNestedClass();
       newTypeDescriptor.isInterface = typeDescriptor.isInterface();
@@ -209,18 +207,8 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       return this;
     }
 
-    public Builder setIsExtern(boolean isExtern) {
-      newTypeDescriptor.isExtern = isExtern;
-      return this;
-    }
-
     public Builder setIsFinal(boolean isFinal) {
       newTypeDescriptor.isFinal = isFinal;
-      return this;
-    }
-
-    public Builder setIsGlobal(boolean isGlobal) {
-      newTypeDescriptor.isGlobal = isGlobal;
       return this;
     }
 
@@ -396,9 +384,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   private DescriptorFactory<List<TypeDescriptor>> interfacesTypeDescriptorsFactory;
   private boolean isArray;
   private boolean isEnumOrSubclass;
-  private boolean isExtern;
   private boolean isFinal;
-  private boolean isGlobal;
   private boolean isInstanceMemberClass;
   private boolean isInstanceNestedClass;
   private boolean isInterface;
@@ -592,6 +578,10 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   public String getQualifiedName() {
     String effectiveSimpleName = jsName == null ? simpleName : jsName;
     String effectivePrefix = jsNamespace;
+    if (JsUtils.isGlobal(jsNamespace)) {
+      effectivePrefix = isExtern() ? JsUtils.GLOBAL_ALIAS : "";
+    }
+
     TypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
     if (effectivePrefix == null && enclosingTypeDescriptor != null) {
 
@@ -610,16 +600,15 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       effectivePrefix = packageName;
     }
 
-    if (JsUtils.isGlobal(effectivePrefix)) {
-      return effectiveSimpleName;
-    }
     // If the user opted in to declareLegacyNamespaces, then JSCompiler will complain when seeing
     // namespaces like "foo.bar.Baz.4". Prefix anonymous numbered classes with a string to make
     // JSCompiler happy.
     if (startsWithNumber(effectiveSimpleName)) {
       effectiveSimpleName = "$Anonymous" + effectiveSimpleName;
     }
-    return effectivePrefix + "." + effectiveSimpleName;
+    return Joiner.on(".")
+        .skipNulls()
+        .join(Strings.emptyToNull(effectivePrefix), effectiveSimpleName);
   }
 
   /**
@@ -716,15 +705,11 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   }
 
   public boolean isExtern() {
-    return isExtern;
+    return JsUtils.isGlobal(getJsNamespace()) && isNative();
   }
 
   public boolean isFinal() {
     return isFinal;
-  }
-
-  public boolean isGlobal() {
-    return isGlobal;
   }
 
   public boolean isInstanceMemberClass() {

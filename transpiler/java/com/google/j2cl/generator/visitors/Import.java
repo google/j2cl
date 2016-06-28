@@ -82,10 +82,6 @@ public class Import implements Comparable<Import> {
     if (typeDescriptor.isPrimitive()) {
       return "vmbootstrap.primitives.$" + typeDescriptor.getBinaryName();
     }
-    if (typeDescriptor.isExtern()) {
-      // TODO: use "self.Foo" (it will work in more environments) when JSCompiler understands it.
-      return "window." + typeDescriptor.getQualifiedName();
-    }
     return typeDescriptor.getQualifiedName();
   }
 }

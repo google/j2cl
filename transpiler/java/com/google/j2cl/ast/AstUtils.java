@@ -18,7 +18,6 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -29,7 +28,6 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -166,7 +164,7 @@ public class AstUtils {
    */
   public static Field getEnclosingInstanceField(JavaType type) {
     for (Field field : type.getFields()) {
-      if (field.getDescriptor().getFieldName().equals(ENCLOSING_INSTANCE_NAME)) {
+      if (field.getDescriptor().getName().equals(ENCLOSING_INSTANCE_NAME)) {
         return field;
       }
     }
@@ -288,10 +286,7 @@ public class AstUtils {
    */
   public static Variable createOuterParamByField(Field field) {
     return new Variable(
-        field.getDescriptor().getFieldName(),
-        field.getDescriptor().getTypeDescriptor(),
-        true,
-        true);
+        field.getDescriptor().getName(), field.getDescriptor().getTypeDescriptor(), true, true);
   }
 
   /**
@@ -301,7 +296,7 @@ public class AstUtils {
   public static MethodDescriptor createMethodDescriptorForInnerClassCreation(
       final TypeDescriptor outerclassTypeDescriptor,
       MethodDescriptor innerclassConstructorDescriptor) {
-    String methodName = CREATE_PREFIX + innerclassConstructorDescriptor.getMethodName();
+    String methodName = CREATE_PREFIX + innerclassConstructorDescriptor.getName();
     TypeDescriptor returnTypeDescriptor =
         innerclassConstructorDescriptor.getEnclosingClassTypeDescriptor();
     // if the inner class is a generic type, add its type parameters to the wrapper method.
@@ -795,32 +790,6 @@ public class AstUtils {
     return new BinaryExpression(outputType, expressions.get(0), operator, joinedExpressions);
   }
 
-  /**
-   * Returns TypeDescriptor that contains the devirtualized JsOverlay methods of a native type.
-   */
-  public static TypeDescriptor createOverlayImplementationClassTypeDescriptor(
-      TypeDescriptor typeDescriptor) {
-    checkArgument(typeDescriptor.isNative() || typeDescriptor.isInterface());
-    checkArgument(!typeDescriptor.isArray());
-    checkArgument(!typeDescriptor.isUnion());
-
-    List<String> classComponents =
-        Lists.newArrayList(
-            Iterables.concat(
-                typeDescriptor.getClassComponents(),
-                Arrays.asList(OVERLAY_IMPLEMENTATION_CLASS_SUFFIX)));
-
-    return TypeDescriptors.createExactly(
-        typeDescriptor.getPackageComponents(),
-        classComponents,
-        Collections.<TypeDescriptor>emptyList(),
-        Joiner.on(".").join(typeDescriptor.getPackageComponents()),
-        Joiner.on(".").join(classComponents),
-        false,
-        false,
-        false);
-  }
-
   public static Method createDevirtualizedMethod(Method method) {
     checkArgument(
         !method.getDescriptor().isJsProperty(), "JsProperty should never be devirtualized");
@@ -881,7 +850,7 @@ public class AstUtils {
     List<TypeDescriptor> rightParameterTypeDescriptors =
         right.getDeclarationMethodDescriptor().getParameterTypeDescriptors();
 
-    if (!left.getMethodName().equals(right.getMethodName())
+    if (!left.getName().equals(right.getName())
         || leftParameterTypeDescriptors.size() != rightParameterTypeDescriptors.size()) {
       return false;
     }

@@ -105,7 +105,7 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
 
       return NewInstance.Builder.from(newInstance)
           .appendArgumentsAndUpdateDescriptor(
-              StringLiteral.fromPlainText(enumField.getDescriptor().getFieldName()),
+              StringLiteral.fromPlainText(enumField.getDescriptor().getName()),
               new NumberLiteral(TypeDescriptors.get().primitiveInt, currentOrdinal))
           .build();
     }

@@ -67,7 +67,7 @@ public enum JsMemberType {
      */
     @Override
     public String computeJsName(MethodDescriptor methodDescriptor) {
-      String methodName = methodDescriptor.getMethodName();
+      String methodName = methodDescriptor.getName();
       if (startsWithCamelCase(methodName, "get")) {
         return Introspector.decapitalize(methodName.substring(3));
       }
@@ -96,7 +96,7 @@ public enum JsMemberType {
      */
     @Override
     public String computeJsName(MethodDescriptor methodDescriptor) {
-      String methodName = methodDescriptor.getMethodName();
+      String methodName = methodDescriptor.getName();
       if (startsWithCamelCase(methodName, "set")) {
         return Introspector.decapitalize(methodName.substring(3));
       }
@@ -131,7 +131,7 @@ public enum JsMemberType {
 
   public String computeJsName(MethodDescriptor methodDescriptor) {
     return methodDescriptor.getJsName() == null
-        ? methodDescriptor.getMethodName()
+        ? methodDescriptor.getName()
         : methodDescriptor.getJsName();
   }
 

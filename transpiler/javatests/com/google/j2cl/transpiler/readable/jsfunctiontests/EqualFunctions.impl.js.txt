@@ -19,7 +19,7 @@ let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 
-/** @constructor */ let $NativeFunction = window.Function;
+/** @constructor */ let $global_Function = window.Function;
 
 
 class EqualFunctions extends Object {
@@ -59,7 +59,7 @@ class EqualFunctions extends Object {
    */
   static m_objectEqualFunction() {
     EqualFunctions.$clinit();
-    return /**@type {$NativeFunction} */ ($Casts.to(
+    return /**@type {$global_Function} */ ($Casts.to(
         EqualFunctions
             .$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions,
         EqualFunction));
@@ -72,7 +72,7 @@ class EqualFunctions extends Object {
    */
   static m_collectionEqualFunction() {
     EqualFunctions.$clinit();
-    return /**@type {$NativeFunction} */ ($Casts.to(
+    return /**@type {$global_Function} */ ($Casts.to(
         EqualFunctions
             .$f_forCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions,
         EqualFunction));

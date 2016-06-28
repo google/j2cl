@@ -1211,7 +1211,9 @@ public class CompilationUnitBuilder {
             @Override
             public Node rewriteFieldDescriptor(FieldDescriptor node) {
               if (node.getEnclosingClassTypeDescriptor() == original) {
-                return FieldDescriptor.Builder.from(node).setEnclosingClass(replacement).build();
+                return FieldDescriptor.Builder.from(node)
+                    .setEnclosingClassTypeDescriptor(replacement)
+                    .build();
               }
               return node;
             }

@@ -18,7 +18,6 @@ package com.google.j2cl.ast.visitors;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
@@ -81,7 +80,7 @@ public class NormalizeCasts extends NormalizationPass {
     arguments.add(expression);
     TypeDescriptor castTypeDescriptorArgument =
         rawCastTypeDescriptor.isNative()
-            ? AstUtils.createOverlayImplementationClassTypeDescriptor(rawCastTypeDescriptor)
+            ? TypeDescriptors.createOverlayImplementationClassTypeDescriptor(rawCastTypeDescriptor)
             : rawCastTypeDescriptor;
     Preconditions.checkArgument(
         !castTypeDescriptorArgument.isNative(),

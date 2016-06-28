@@ -247,27 +247,20 @@ public class ExpressionTranspiler {
       }
 
       private void renderQualifiedName(Expression qualifier, String jsPropertyName) {
-        if (qualifier != null
-            // Hack: <global> qualifier should have been normalized out.
-            && (!(qualifier instanceof TypeReference)
-                || !((TypeReference) qualifier).getReferencedTypeDescriptor().isGlobal())) {
+        if (qualifier != null) {
           process(qualifier);
           sourceBuilder.append(".");
         }
         sourceBuilder.append(jsPropertyName);
       }
 
-      /**
-       * JsProperty getter is emitted as property access: qualifier.property.
-       */
+      /** JsProperty getter is emitted as property access: qualifier.property. */
       private void renderJsPropertyAccess(MethodCall expression) {
         String jsPropertyName = expression.getTarget().getJsPropertyName();
         renderQualifiedName(expression.getQualifier(), jsPropertyName);
       }
 
-      /**
-       * JsProperty setter is emitted as property set: qualifier.property = argument.
-       */
+      /** JsProperty setter is emitted as property set: qualifier.property = argument. */
       private String renderJsPropertySetter(MethodCall expression) {
         renderJsPropertyAccess(expression);
         sourceBuilder.append(" = ");

@@ -219,7 +219,7 @@ class ToStringRenderer {
           accept(fieldAccess.getQualifier());
           print(".");
         }
-        print(fieldAccess.getTarget().getFieldName());
+        print(fieldAccess.getTarget().getName());
         return false;
       }
 
@@ -227,7 +227,7 @@ class ToStringRenderer {
       public boolean enterFieldDescriptor(FieldDescriptor fieldDescriptor) {
         print(fieldDescriptor.getEnclosingClassTypeDescriptor());
         print(".");
-        print(fieldDescriptor.getFieldName());
+        print(fieldDescriptor.getName());
         return false;
       }
 
@@ -341,7 +341,7 @@ class ToStringRenderer {
           print(methodCall.getTarget().getEnclosingClassTypeDescriptor().getSimpleName() + ".");
         }
         accept(methodCall.qualifier);
-        printInvocation(methodCall, "." + methodCall.getTarget().getMethodName());
+        printInvocation(methodCall, "." + methodCall.getTarget().getName());
         return false;
       }
 
@@ -349,7 +349,7 @@ class ToStringRenderer {
       public boolean enterMethodDescriptor(MethodDescriptor methodDescriptor) {
         print(methodDescriptor.getEnclosingClassTypeDescriptor());
         print(".");
-        print(methodDescriptor.getMethodName());
+        print(methodDescriptor.getName());
         return false;
       }
 
@@ -384,7 +384,7 @@ class ToStringRenderer {
       @Override
       public boolean enterNewInstance(NewInstance newInstance) {
         print(" new ");
-        printInvocation(newInstance, newInstance.getTarget().getMethodName());
+        printInvocation(newInstance, newInstance.getTarget().getName());
         return false;
       }
 

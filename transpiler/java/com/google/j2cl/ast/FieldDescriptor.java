@@ -18,12 +18,10 @@ package com.google.j2cl.ast;
 import com.google.auto.value.AutoValue;
 import com.google.j2cl.ast.annotations.Visitable;
 
-/**
- * A (by signature) reference to a field.
- */
+/** A (by signature) reference to a field. */
 @AutoValue
 @Visitable
-public abstract class FieldDescriptor extends Node implements Member {
+public abstract class FieldDescriptor extends MemberDescriptor implements Member {
   public static FieldDescriptor create(
       boolean isStatic,
       Visibility visibility,
@@ -71,22 +69,29 @@ public abstract class FieldDescriptor extends Node implements Member {
   @Override
   public abstract TypeDescriptor getEnclosingClassTypeDescriptor();
 
-  public abstract String getFieldName();
+  @Override
+  public abstract String getName();
 
   public abstract TypeDescriptor getTypeDescriptor();
 
   public abstract boolean isJsOverlay();
 
+  @Override
   public abstract JsInfo getJsInfo();
 
   public abstract boolean isCompileTimeConstant();
 
+  @Override
+  public boolean isNative() {
+    return getEnclosingClassTypeDescriptor().isNative() && !isJsOverlay();
+  }
+
   public boolean isFieldDescriptorForCapturedVariables() {
-    return getFieldName().startsWith(AstUtils.CAPTURES_PREFIX);
+    return getName().startsWith(AstUtils.CAPTURES_PREFIX);
   }
 
   public boolean isFieldDescriptorForEnclosingInstance() {
-    return getFieldName().startsWith(AstUtils.ENCLOSING_INSTANCE_NAME);
+    return getName().startsWith(AstUtils.ENCLOSING_INSTANCE_NAME);
   }
 
   public boolean isFieldDescriptorForAllCaptures() {
@@ -100,7 +105,7 @@ public abstract class FieldDescriptor extends Node implements Member {
   @Override
   public String getJsName() {
     String jsName = getJsInfo().getJsName();
-    return jsName == null ? getFieldName() : jsName;
+    return jsName == null ? getName() : jsName;
   }
 
   @Override
@@ -137,7 +142,7 @@ public abstract class FieldDescriptor extends Node implements Member {
       builder.isStatic = fieldDescriptor.isStatic();
       builder.visibility = fieldDescriptor.getVisibility();
       builder.enclosingClassTypeDescriptor = fieldDescriptor.getEnclosingClassTypeDescriptor();
-      builder.fieldName = fieldDescriptor.getFieldName();
+      builder.fieldName = fieldDescriptor.getName();
       builder.typeDescriptor = fieldDescriptor.getTypeDescriptor();
       builder.isJsOverlay = fieldDescriptor.isJsOverlay();
       builder.jsInfo = fieldDescriptor.getJsInfo();
@@ -159,7 +164,7 @@ public abstract class FieldDescriptor extends Node implements Member {
       return builder;
     }
 
-    public Builder setEnclosingClass(TypeDescriptor enclosingClassTypeDescriptor) {
+    public Builder setEnclosingClassTypeDescriptor(TypeDescriptor enclosingClassTypeDescriptor) {
       this.enclosingClassTypeDescriptor = enclosingClassTypeDescriptor;
       return this;
     }

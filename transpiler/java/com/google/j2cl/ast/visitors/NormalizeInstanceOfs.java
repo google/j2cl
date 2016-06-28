@@ -18,7 +18,6 @@ package com.google.j2cl.ast.visitors;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.InstanceOfExpression;
@@ -56,7 +55,7 @@ public class NormalizeInstanceOfs extends NormalizationPass {
     TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
     if (checkTypeDescriptor.isNative()) {
       checkTypeDescriptor =
-          AstUtils.createOverlayImplementationClassTypeDescriptor(checkTypeDescriptor);
+          TypeDescriptors.createOverlayImplementationClassTypeDescriptor(checkTypeDescriptor);
     }
 
     MethodDescriptor isInstanceMethodDescriptor =

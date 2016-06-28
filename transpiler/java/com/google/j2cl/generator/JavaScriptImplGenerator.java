@@ -27,6 +27,7 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Positioned;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.sourcemap.FilePosition;
@@ -259,7 +260,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       if (javaType.getDescriptor().isJsFunctionImplementation()
           && method.getDescriptor().isPolymorphic()
           && !method.getBody().getStatements().isEmpty()
-          && !method.getDescriptor().getMethodName().startsWith("$ctor")) {
+          && !method.getDescriptor().getName().startsWith("$ctor")) {
         sourceBuilder.appendln(" * @this {" + getJsDocName(javaType.getDescriptor()) + "}");
       }
       for (int i = 0; i < method.getParameters().size(); i++) {
@@ -289,7 +290,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.appendLines(
         "/**",
         " * Marks the provided class as implementing this interface.",
-        " * @param {window.Function} classConstructor",
+        " * @param {" + TypeDescriptors.NATIVE_FUNCTION.getQualifiedName() + "} classConstructor",
         " * @public",
         " */",
         "static $markImplementor(classConstructor) ");
@@ -384,7 +385,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.appendLines(
         "/**",
         " * Returns whether the provided class is or extends this class.",
-        " * @param {window.Function} classConstructor",
+        " * @param {" + TypeDescriptors.NATIVE_FUNCTION.getQualifiedName() + "} classConstructor",
         " * @return {boolean}",
         " * @public",
         " */",
@@ -641,7 +642,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     if (javaType.isInterface()) {
       // TODO: remove cast after b/20102666 is handled in Closure.
       sourceBuilder.appendln(
-          className + ".$markImplementor(/** @type {window.Function} */ (" + className + "));");
+          className
+              + ".$markImplementor(/** @type {"
+              + TypeDescriptors.NATIVE_FUNCTION.getQualifiedName()
+              + "} */ ("
+              + className
+              + "));");
     } else { // Not an interface so it is a Class.
       for (TypeDescriptor interfaceTypeDescriptor : javaType.getSuperInterfaceTypeDescriptors()) {
         if (interfaceTypeDescriptor.isNative()) {

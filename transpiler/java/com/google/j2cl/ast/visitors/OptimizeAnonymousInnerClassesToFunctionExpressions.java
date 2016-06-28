@@ -127,7 +127,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               return new FieldAccess(
                   fieldAccess.getQualifier(),
                   FieldDescriptor.Builder.from(fieldAccess.getTarget())
-                      .setEnclosingClass(getCurrentJavaType().getDescriptor())
+                      .setEnclosingClassTypeDescriptor(getCurrentJavaType().getDescriptor())
                       .build());
             }
             return fieldAccess;

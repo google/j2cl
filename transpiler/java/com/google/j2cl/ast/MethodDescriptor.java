@@ -30,12 +30,10 @@ import com.google.j2cl.common.Interner;
 
 import javax.annotation.Nullable;
 
-/**
- * A (by signature) reference to a method.
- */
+/** A (by signature) reference to a method. */
 @AutoValue
 @Visitable
-public abstract class MethodDescriptor extends Node implements Member {
+public abstract class MethodDescriptor extends MemberDescriptor implements Member {
   public static final String INIT_METHOD_NAME = "$init";
   public static final String VALUE_OF_METHOD_NAME = "valueOf"; // Boxed type valueOf() method.
   public static final String VALUE_METHOD_SUFFIX = "Value"; // Boxed type **Value() method.
@@ -54,10 +52,12 @@ public abstract class MethodDescriptor extends Node implements Member {
   @Override
   public abstract TypeDescriptor getEnclosingClassTypeDescriptor();
 
-  public abstract String getMethodName();
+  @Override
+  public abstract String getName();
 
   public abstract boolean isConstructor();
 
+  @Override
   public abstract boolean isNative();
 
   public abstract boolean isVarargs();
@@ -76,10 +76,11 @@ public abstract class MethodDescriptor extends Node implements Member {
    */
   public abstract ImmutableList<TypeDescriptor> getTypeParameterTypeDescriptors();
 
+  @Override
   public abstract JsInfo getJsInfo();
 
   public boolean isInit() {
-    return getMethodName().equals(INIT_METHOD_NAME) && !isStatic();
+    return getName().equals(INIT_METHOD_NAME) && !isStatic();
   }
 
   /**
@@ -90,22 +91,6 @@ public abstract class MethodDescriptor extends Node implements Member {
     return getDeclarationMethodDescriptorOrNull() == null
         ? this
         : getDeclarationMethodDescriptorOrNull();
-  }
-
-  @Override
-  public String getJsName() {
-    String jsName = getJsInfo().getJsName();
-    return jsName == null ? getMethodName() : jsName;
-  }
-
-  @Override
-  public String getJsNamespace() {
-    String jsNamespace = getJsInfo().getJsNamespace();
-    return jsNamespace == null ? getEnclosingClassTypeDescriptor().getJsNamespace() : jsNamespace;
-  }
-
-  public boolean hasJsNamespace() {
-    return getJsInfo().getJsNamespace() != null;
   }
 
   public boolean isJsPropertyGetter() {
@@ -164,7 +149,7 @@ public abstract class MethodDescriptor extends Node implements Member {
   public abstract boolean isAbstract();
 
   public String getMethodSignature() {
-    return getMethodName()
+    return getName()
         + "("
         + Joiner.on(", ")
             .join(
@@ -225,7 +210,7 @@ public abstract class MethodDescriptor extends Node implements Member {
       builder.isStatic = methodDescriptor.isStatic();
       builder.visibility = methodDescriptor.getVisibility();
       builder.enclosingClassTypeDescriptor = methodDescriptor.getEnclosingClassTypeDescriptor();
-      builder.methodName = methodDescriptor.getMethodName();
+      builder.methodName = methodDescriptor.getName();
       builder.isConstructor = methodDescriptor.isConstructor();
       builder.isNative = methodDescriptor.isNative();
       builder.isDefault = methodDescriptor.isDefault();

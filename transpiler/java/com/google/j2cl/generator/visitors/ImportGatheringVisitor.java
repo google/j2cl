@@ -152,11 +152,6 @@ public class ImportGatheringVisitor extends AbstractVisitor {
       }
     }
 
-    // Do not import <global>, which has an empty qualified name.
-    if (typeDescriptor.isGlobal()) {
-      return;
-    }
-
     mayAddTypeDescriptorsIntroducedByJsFunction(typeDescriptor);
     addRawTypeDescriptor(importCategory, typeDescriptor.getRawTypeDescriptor());
   }

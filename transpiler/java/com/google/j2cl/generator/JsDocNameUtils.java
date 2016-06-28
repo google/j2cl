@@ -196,7 +196,7 @@ public class JsDocNameUtils {
         && !shouldUseClassName
         && (typeDescriptor.isJsFunctionInterface()
             || typeDescriptor.isJsFunctionImplementation())) {
-      return "window.Function";
+      return TypeDescriptors.NATIVE_FUNCTION.getQualifiedName();
     }
 
     if (typeDescriptor.isArray()) {
@@ -218,7 +218,7 @@ public class JsDocNameUtils {
       // same special case that already exists in the JSCompiler optimizing backend, and to
       // generalize it to work everywhere (including when types are referenced via an alias).
       String typeQualifiedName = rawTypeDescriptor.getQualifiedName();
-      if ((typeQualifiedName.equals("Object") || typeQualifiedName.equals("window.Object"))
+      if (typeQualifiedName.equals(TypeDescriptors.NATIVE_OBJECT.getQualifiedName())
           && rawTypeDescriptor.isJsType()
           && typeArgumentDescriptors.size() == 1) {
         typeParametersJsDoc = "string, " + typeParametersJsDoc;

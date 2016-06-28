@@ -47,7 +47,6 @@ import com.google.j2cl.ast.TypeDescriptor.DescriptorFactory;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
-import com.google.j2cl.ast.common.JsUtils;
 
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
@@ -1526,7 +1525,6 @@ public class JdtUtils {
         };
 
     // Compute these even later
-    boolean isExtern = isNative && JsUtils.isGlobal(jsNamespace);
     return new TypeDescriptor.Builder()
         .setBinaryName(binaryName)
         .setClassComponents(classComponents)
@@ -1534,7 +1532,6 @@ public class JdtUtils {
         .setEnclosingTypeDescriptorFactory(enclosingTypeDescriptorFactory)
         .setInterfacesTypeDescriptorsFactory(interfacesDescriptorsFactory)
         .setIsEnumOrSubclass(isEnumOrSubclass(typeBinding))
-        .setIsExtern(isExtern)
         .setIsFinal(isFinal)
         .setIsInstanceMemberClass(isInstanceMemberClass(typeBinding))
         .setIsInstanceNestedClass(isInstanceNestedClass(typeBinding))

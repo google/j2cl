@@ -50,7 +50,7 @@ public class VerifyParamAndArgCounts extends AbstractVisitor {
               + "%s in call to method '%s() from compilation unit %s",
           declaredParameterTypes.size(),
           passedArguments.size(),
-          methodDescriptor.getMethodName(),
+          methodDescriptor.getName(),
           getCurrentCompilationUnit().getName());
     } else {
       Preconditions.checkState(
@@ -59,7 +59,7 @@ public class VerifyParamAndArgCounts extends AbstractVisitor {
               + "%s in call to method '%s() from compilation unit %s",
           declaredParameterTypes.size(),
           passedArguments.size(),
-          methodDescriptor.getMethodName(),
+          methodDescriptor.getName(),
           getCurrentCompilationUnit().getName());
     }
   }
@@ -74,7 +74,7 @@ public class VerifyParamAndArgCounts extends AbstractVisitor {
             + "%s in call to method '%s() from compilation unit %s",
         declaredParameterTypes.size(),
         declaredParameters.size(),
-        methodDescriptor.getMethodName(),
+        methodDescriptor.getName(),
         getCurrentCompilationUnit().getName());
   }
 }

@@ -10,7 +10,7 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "staticjsmethods",
+    name = "staticjsmembers",
     srcs = glob(["*.java"]),
     js_deps = [":native_sources"],
     deps = ["//jre/java:gwt-jsinterop-annotations"],

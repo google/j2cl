@@ -31,6 +31,7 @@ import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeDescriptor;
+import com.google.j2cl.ast.TypeDescriptors;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +69,8 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
             TypeDescriptor originalTypeDescriptor =
                 methodCall.getTarget().getEnclosingClassTypeDescriptor();
             TypeDescriptor overlayTypeDescriptor =
-                AstUtils.createOverlayImplementationClassTypeDescriptor(originalTypeDescriptor);
+                TypeDescriptors.createOverlayImplementationClassTypeDescriptor(
+                    originalTypeDescriptor);
             if (methodCall.getTarget().isStatic()) {
               return MethodCall.Builder.from(methodCall)
                   .setEnclosingClass(overlayTypeDescriptor)
@@ -85,12 +87,12 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
             if (target.isJsOverlay()) {
               checkArgument(target.isStatic());
               TypeDescriptor overlayTypeDescriptor =
-                  AstUtils.createOverlayImplementationClassTypeDescriptor(
+                  TypeDescriptors.createOverlayImplementationClassTypeDescriptor(
                       target.getEnclosingClassTypeDescriptor());
               return new FieldAccess(
                   null,
                   FieldDescriptor.Builder.from(target)
-                      .setEnclosingClass(overlayTypeDescriptor)
+                      .setEnclosingClassTypeDescriptor(overlayTypeDescriptor)
                       .build());
             }
             return fieldAccess;
@@ -100,7 +102,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
 
   private static JavaType createOverlayImplementationType(JavaType type) {
     TypeDescriptor overlayImplTypeDescriptor =
-        AstUtils.createOverlayImplementationClassTypeDescriptor(type.getDescriptor());
+        TypeDescriptors.createOverlayImplementationClassTypeDescriptor(type.getDescriptor());
     JavaType overlayClass =
         new JavaType(type.getKind(), type.getVisibility(), overlayImplTypeDescriptor);
     overlayClass.setNativeTypeDescriptor(type.getDescriptor());
