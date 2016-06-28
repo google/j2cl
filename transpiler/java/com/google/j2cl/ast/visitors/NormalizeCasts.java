@@ -51,13 +51,13 @@ public class NormalizeCasts extends NormalizationPass {
           !castTypeDescriptor.isPrimitive(),
           "Narrowing and Widening conversions should have already converted all primitive casts.");
       if (castTypeDescriptor.isArray()) {
-        return rewriteArrayCastExpression(expression);
+        return createArrayCastExpression(expression);
       }
-      return rewriteRegularCastExpression(expression);
+      return createCastExpression(expression);
     }
   }
 
-  private static Node rewriteRegularCastExpression(CastExpression castExpression) {
+  private static Node createCastExpression(CastExpression castExpression) {
     Preconditions.checkArgument(!castExpression.getCastTypeDescriptor().isArray());
     Preconditions.checkArgument(!castExpression.getCastTypeDescriptor().isUnion());
 
@@ -96,7 +96,7 @@ public class NormalizeCasts extends NormalizationPass {
         castMethodCall, castExpression.getCastTypeDescriptor());
   }
 
-  private static Node rewriteArrayCastExpression(CastExpression castExpression) {
+  private static Node createArrayCastExpression(CastExpression castExpression) {
     Preconditions.checkArgument(castExpression.getCastTypeDescriptor().isArray());
 
     if (castExpression
@@ -104,12 +104,12 @@ public class NormalizeCasts extends NormalizationPass {
         .getLeafTypeDescriptor()
         .getRawTypeDescriptor()
         .isNative()) {
-      return rewriteNativeJsArrayCastExpression(castExpression);
+      return createNativeJsArrayCastExpression(castExpression);
     }
-    return rewriteJavaArrayCastExpression(castExpression);
+    return createJavaArrayCastExpression(castExpression);
   }
 
-  private static Node rewriteJavaArrayCastExpression(CastExpression castExpression) {
+  private static Node createJavaArrayCastExpression(CastExpression castExpression) {
     TypeDescriptor arrayCastTypeDescriptor = castExpression.getCastTypeDescriptor();
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
@@ -143,7 +143,7 @@ public class NormalizeCasts extends NormalizationPass {
     return JsTypeAnnotation.createTypeAnnotation(castMethodCall, arrayCastTypeDescriptor);
   }
 
-  private static Node rewriteNativeJsArrayCastExpression(CastExpression castExpression) {
+  private static Node createNativeJsArrayCastExpression(CastExpression castExpression) {
     TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
     Preconditions.checkArgument(
         castTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor().isNative());
