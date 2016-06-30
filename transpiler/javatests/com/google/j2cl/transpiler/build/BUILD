@@ -1,0 +1,154 @@
+# Description:
+#   Various BUILD configuration tests.
+#
+# No example of Pinto usage *without* PMF Enhancer is provided since PMF
+# Enhancer must be present to handle references to zip files in the .PMF file
+# before MSS sees them.
+#
+# Put another way, if you're using J2CL with MSS, you *must* also be using
+# PMF Enhancer.
+#
+# TODO(stalcup): add an overlapping Java src glob example when AJD allows it.
+# TODO(stalcup): add a Boq web example when Boq web is ready.
+
+package(default_visibility = ["//:__subpackages__"])
+
+load("//apps/framework/modulesets/builddefs:modulesets.bzl", "assembled_content_app_config", "mss_js_compiled_module_set_flat_files")
+load("//javascript/apps/fava/builddefs:fava.bzl", "pinto_processed_module_set")
+load("//build_def:j2cl_util.bzl", "J2CL_UNOPTIMIZED_DEFS")
+
+# Google owns the copyright
+licenses(["unencumbered"])
+
+# ********************************************
+
+js_library(
+    name = "launcher",
+    srcs = ["Launcher.js"],
+    deps = [
+        ":example_j2cl_lib",
+        "//javascript/closure:base",
+    ],
+)
+
+# ********************************************
+
+js_binary(
+    name = "J2clJSCompiler",
+    compiler = "//javascript/tools/jscompiler:head",
+    defs = J2CL_UNOPTIMIZED_DEFS,
+    deps = [":launcher"],
+)
+
+# ********************************************
+
+js_module(
+    name = "J2clJSCompilerWithModules_js_module",
+    srcs = [":launcher"],
+)
+
+js_module_binary(
+    name = "J2clJSCompilerWithModules",
+    compiler = "//javascript/tools/jscompiler:head",
+    defs = J2CL_UNOPTIMIZED_DEFS,
+    deps = [":J2clJSCompilerWithModules_js_module"],
+)
+
+# ********************************************
+
+js_library(
+    name = "J2clAjdJSCompiler_library",
+    deps_mgmt = "closure",  # Turns on AJD.
+    deps = [":launcher"],
+)
+
+js_binary(
+    name = "J2clAjdJSCompiler",
+    srcs = ["Point.js"],
+    compiler = "//javascript/tools/jscompiler:head",
+    defs = J2CL_UNOPTIMIZED_DEFS,
+    deps = [":J2clAjdJSCompiler_library"],
+)
+
+# ********************************************
+
+pinto_module(
+    name = "J2clPintoPmfEnhancerMss_pinto_module",
+    module_id = "J2clPintoPmfEnhancerMss_pinto_module",
+    deps = [":launcher"],
+)
+
+pinto_processed_module_set(
+    name = "J2clPintoPmfEnhancerMss_processed_module_set",
+    externs_list = ["//javascript/externs:common"],
+    prevalent_modules = "J2clPintoPmfEnhancerMss_pinto_module",
+    deps = [":J2clPintoPmfEnhancerMss_pinto_module"],
+)
+
+assembled_content_app_config(
+    name = "J2clPintoPmfEnhancerMss_app_config",
+    config_file = "J2clPintoPmfEnhancerMss.config",
+)
+
+filegroup(
+    name = "J2clPintoPmfEnhancerMss_filegroup",
+    data = [
+        "J2clPintoPmfEnhancerMss_warnings_whitelist.txt",
+        ":J2clPintoPmfEnhancerMss_pinto_module",
+        ":J2clPintoPmfEnhancerMss_processed_module_set",
+        "//javascript/externs:common",
+    ],
+)
+
+mss_js_compiled_module_set_flat_files(
+    name = "J2clPintoPmfEnhancerMss",
+    app_name = "J2clPintoPmfEnhancerMss",
+    compile_modes = ["optimized"],
+    config = ":J2clPintoPmfEnhancerMss_app_config",
+    languages = ["en"],
+    module_sets = ["J2clPintoPmfEnhancerMss_processed_module_set"],
+    scs_rowkey_prefix = "/external_content/modulesets/J2clPintoPmfEnhancerMss",
+    source_filegroup = ":J2clPintoPmfEnhancerMss_filegroup",
+)
+
+# ********************************************
+
+pinto_module(
+    name = "J2clAjdPintoPmfEnhancerMss_pinto_module",
+    deps_mgmt = "closure",  # Turns on AJD.
+    module_id = "J2clAjdPintoPmfEnhancerMss_pinto_module",
+    deps = [":launcher"],
+)
+
+pinto_processed_module_set(
+    name = "J2clAjdPintoPmfEnhancerMss_processed_module_set",
+    externs_list = ["//javascript/externs:common"],
+    prevalent_modules = "J2clAjdPintoPmfEnhancerMss_pinto_module",
+    deps = [":J2clAjdPintoPmfEnhancerMss_pinto_module"],
+)
+
+assembled_content_app_config(
+    name = "J2clAjdPintoPmfEnhancerMss_app_config",
+    config_file = "J2clAjdPintoPmfEnhancerMss.config",
+)
+
+filegroup(
+    name = "J2clAjdPintoPmfEnhancerMss_filegroup",
+    data = [
+        "J2clAjdPintoPmfEnhancerMss_warnings_whitelist.txt",
+        ":J2clAjdPintoPmfEnhancerMss_pinto_module",
+        ":J2clAjdPintoPmfEnhancerMss_processed_module_set",
+        "//javascript/externs:common",
+    ],
+)
+
+mss_js_compiled_module_set_flat_files(
+    name = "J2clAjdPintoPmfEnhancerMss",
+    app_name = "J2clAjdPintoPmfEnhancerMss",
+    compile_modes = ["optimized"],
+    config = ":J2clAjdPintoPmfEnhancerMss_app_config",
+    languages = ["en"],
+    module_sets = ["J2clAjdPintoPmfEnhancerMss_processed_module_set"],
+    scs_rowkey_prefix = "/external_content/modulesets/J2clAjdPintoPmfEnhancerMss",
+    source_filegroup = ":J2clAjdPintoPmfEnhancerMss_filegroup",
+)
