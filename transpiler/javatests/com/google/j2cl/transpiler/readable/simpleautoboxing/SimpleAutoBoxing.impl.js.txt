@@ -220,6 +220,16 @@ class SimpleAutoBoxing extends Object {
     let boxL = Long.m_valueOf__long(l);
     let boxS = Short.m_valueOf__short(s);
     let boxC = Character.m_valueOf__char(c);
+    let o = Integer.m_valueOf__int(0);
+    boxBool = true;
+    boxD = 100.0;
+    boxB = Byte.m_valueOf__byte(0);
+    boxF = Float.m_valueOf__float(100.0);
+    boxI = Integer.m_valueOf__int(1000);
+    boxL = Long.m_valueOf__long($LongUtils.$fromInt(1000));
+    boxS = Short.m_valueOf__short(0);
+    boxC = Character.m_valueOf__char(0 /* "\u0000" */);
+    boxC = Character.m_valueOf__char(97 /* "a" */);
     bool = this.m_unbox__java_lang_Boolean(bool);
     d = this.m_unbox__java_lang_Double(d);
     b = this.m_unbox__java_lang_Byte(Byte.m_valueOf__byte(b));

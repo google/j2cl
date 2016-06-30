@@ -98,6 +98,18 @@ public class SimpleAutoBoxing {
     Short boxS = s;
     Character boxC = c;
 
+    // auto-boxing by assignment with literals
+    Object o = 0;
+    boxBool = true;
+    boxD = 100.0;
+    boxB = 0;
+    boxF = 100.0f;
+    boxI = 1000;
+    boxL = 1000L;
+    boxS = 0;
+    boxC = 0;
+    boxC = 'a';
+
     // auto-boxing by parameter
     bool = unbox(bool);
     d = unbox(d);
