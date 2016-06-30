@@ -53,6 +53,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   protected final StatementTranspiler statementTranspiler;
 
+  public static final String FILE_SUFFIX = ".impl.java.js";
+
   public JavaScriptImplGenerator(Errors errors, boolean declareLegacyNamespace, JavaType javaType) {
     super(errors, declareLegacyNamespace, javaType);
     this.className = environment.aliasForType(javaType.getDescriptor());
@@ -62,7 +64,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   @Override
   public String getSuffix() {
-    return ".impl.js";
+    return FILE_SUFFIX;
   }
 
   public void setRelativeSourceMapLocation(String relativeSourceMapLocation) {

@@ -99,7 +99,7 @@ public class SourceMapGeneratorStage {
     }
     StringBuilder sb = new StringBuilder();
     String typeName = javaType.getDescriptor().getBinaryClassName();
-    sourceMapGenerator.appendTo(sb, typeName + ".impl.js");
+    sourceMapGenerator.appendTo(sb, typeName + JavaScriptImplGenerator.FILE_SUFFIX);
     return sb.toString();
   }
 

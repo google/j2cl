@@ -31,6 +31,7 @@ import java.util.Set;
  */
 public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
 
+  public static final String FILE_SUFFIX = ".java.js";
   public JavaScriptHeaderGenerator(
       Errors errors, boolean declareLegacyNamespace, JavaType javaType) {
     super(errors, declareLegacyNamespace, javaType);
@@ -98,6 +99,6 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
 
   @Override
   public String getSuffix() {
-    return ".js";
+    return FILE_SUFFIX;
   }
 }

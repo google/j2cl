@@ -42,22 +42,22 @@ public class OutputTest extends IntegrationTestCase {
     assertTrue(
         new File(
                 transpileResult.outputLocation,
-                "com/google/j2cl/transpiler/integration/output/Foo.js")
+                "com/google/j2cl/transpiler/integration/output/Foo.java.js")
             .exists());
     assertTrue(
         new File(
                 transpileResult.outputLocation,
-                "com/google/j2cl/transpiler/integration/output/Foo.impl.js")
+                "com/google/j2cl/transpiler/integration/output/Foo.impl.java.js")
             .exists());
     assertTrue(
         new File(
                 transpileResult.outputLocation,
-                "com/google/j2cl/transpiler/integration/output/Bar.js")
+                "com/google/j2cl/transpiler/integration/output/Bar.java.js")
             .exists());
     assertTrue(
         new File(
                 transpileResult.outputLocation,
-                "com/google/j2cl/transpiler/integration/output/Bar.impl.js")
+                "com/google/j2cl/transpiler/integration/output/Bar.impl.java.js")
             .exists());
     assertFalse(new File(transpileResult.outputLocation, "some/thing/Bogus.js").exists());
   }
@@ -79,10 +79,12 @@ public class OutputTest extends IntegrationTestCase {
     assertTrue(transpileResult.outputLocation.exists());
 
     try (ZipFile zipFile = new ZipFile(transpileResult.outputLocation)) {
-      assertNotNull(zipFile.getEntry("com/google/j2cl/transpiler/integration/output/Foo.js"));
-      assertNotNull(zipFile.getEntry("com/google/j2cl/transpiler/integration/output/Foo.impl.js"));
-      assertNotNull(zipFile.getEntry("com/google/j2cl/transpiler/integration/output/Bar.js"));
-      assertNotNull(zipFile.getEntry("com/google/j2cl/transpiler/integration/output/Bar.impl.js"));
+      assertNotNull(zipFile.getEntry("com/google/j2cl/transpiler/integration/output/Foo.java.js"));
+      assertNotNull(
+          zipFile.getEntry("com/google/j2cl/transpiler/integration/output/Foo.impl.java.js"));
+      assertNotNull(zipFile.getEntry("com/google/j2cl/transpiler/integration/output/Bar.java.js"));
+      assertNotNull(
+          zipFile.getEntry("com/google/j2cl/transpiler/integration/output/Bar.impl.java.js"));
       assertNull(zipFile.getEntry("some/thing/Bogus.js"));
     }
   }
