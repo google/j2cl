@@ -200,7 +200,11 @@ def integration_test(
   test_harness_defines = ["'%s':%s" % (k,v) for (k,v) in defines.items()]
 
   test_bootstrap = """
-      var CLOSURE_UNCOMPILED_DEFINES = {%s};
+try {
+  var CLOSURE_UNCOMPILED_DEFINES = {%s};
+} catch (e) {
+  alert('Failure while setting up flags: ' + e);
+}
   """ % (",".join(test_harness_defines))
   _genfile("TestBootstrap.js", test_bootstrap)
 

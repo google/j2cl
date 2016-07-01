@@ -15,7 +15,7 @@ load(
 integration_test(
     name = "jsfunctiontypeannotation",
     srcs = glob(["*.java"]),
-    closure_defines = {"jre.checks.type": "ENABLED"},
+    closure_defines = {"jre.checks.type": "'ENABLED'"},
     native_srcs = ["Main.native.js"],
     deps = ["//jre/java:gwt-jsinterop-annotations"],
 )

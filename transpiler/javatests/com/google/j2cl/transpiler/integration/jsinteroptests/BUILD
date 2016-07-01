@@ -15,7 +15,7 @@ load(
 integration_test(
     name = "jsinteroptests",
     srcs = glob(["**/*.java"]),
-    closure_defines = {"jre.checks.type": "ENABLED"},
+    closure_defines = {"jre.checks.type": "'ENABLED'"},
     js_deps = [":native_types"],
     main_class = "woo.Main",
     native_srcs = glob(["*.native.js"]),

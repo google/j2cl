@@ -15,5 +15,5 @@ load(
 integration_test(
     name = "bridgemethodaccidentaloverride",
     srcs = glob(["*.java"]),
-    closure_defines = {"jre.checks.type": "ENABLED"},
+    closure_defines = {"jre.checks.type": "'ENABLED'"},
 )

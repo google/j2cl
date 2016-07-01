@@ -16,6 +16,6 @@ integration_test(
     srcs = glob(["*.java"]),
     closure_defines = {
         "ARRAY_CHECK_BOUNDS_": "true",
-        "jre.checks.type": "ENABLED",
+        "jre.checks.type": "'ENABLED'",
     },
 )
