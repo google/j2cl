@@ -1,0 +1,120 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest$1cmp.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Anonymous1cmp$impl');
+
+
+let Cmp2 = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.Cmp2$impl');
+let Serial = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.Serial$impl');
+let Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+/**
+ * @implements {Cmp2}
+ * @implements {Serial}
+ */
+class IntersectionTypeTest$1cmp extends Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() { super(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!IntersectionTypeTest$1cmp}
+   * @public
+   */
+  static $create() {
+    IntersectionTypeTest$1cmp.$clinit();
+    let $instance = new IntersectionTypeTest$1cmp();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest$1cmp();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest$1cmp() {
+    this.$ctor__java_lang_Object();
+    this.$init__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest$1cmp();
+  }
+
+  /**
+   * @param {number} a
+   * @return {number}
+   * @public
+   */
+  lambda1cmp(a) { return 1; }
+
+  /**
+   * @override
+   * @param {number} arg0
+   * @return {number}
+   * @public
+   */
+  m_cmp__int(arg0) { return this.lambda1cmp(arg0); }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof IntersectionTypeTest$1cmp;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, IntersectionTypeTest$1cmp);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest$1cmp() {
+  }
+};
+
+$Util.$setClassMetadata(
+    IntersectionTypeTest$1cmp,
+    'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest$1cmp');
+
+
+Cmp2.$markImplementor(IntersectionTypeTest$1cmp);
+Serial.$markImplementor(IntersectionTypeTest$1cmp);
+
+
+/**
+ * Export class.
+ */
+exports = IntersectionTypeTest$1cmp;
+//# sourceMappingURL=IntersectionTypeTest$1cmp.js.map

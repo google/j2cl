@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+c * Copyright 2015 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -20,12 +20,15 @@ import static com.google.common.base.Preconditions.checkArgument;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 import com.google.common.collect.BiMap;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.j2cl.ast.TypeDescriptor.DescriptorFactory;
 import com.google.j2cl.ast.common.JsUtils;
 
@@ -289,9 +292,10 @@ public class TypeDescriptors {
         true);
   }
 
-  public static TypeDescriptor createUnion(final List<TypeDescriptor> unionedTypeDescriptors) {
+  public static TypeDescriptor createUnion(List<TypeDescriptor> unionedTypeDescriptors) {
+    String joinedBinaryName = createJoinedBinaryName(unionedTypeDescriptors, " | ");
     return new TypeDescriptor.Builder()
-        .setBinaryName(createUnionBinaryName(unionedTypeDescriptors))
+        .setBinaryName(joinedBinaryName)
         .setIsNullable(true)
         .setIsUnion(true)
         .setRawTypeDescriptorFactory(
@@ -302,6 +306,57 @@ public class TypeDescriptors {
               }
             })
         .setUnionedTypeDescriptors(unionedTypeDescriptors)
+        .build();
+  }
+
+  public static TypeDescriptor createIntersection(List<TypeDescriptor> intersectedTypeDescriptors) {
+    TypeDescriptor defaultSuperType = get().javaLangObject;
+    final TypeDescriptor superTypeDescriptor =
+        Iterables.find(
+            intersectedTypeDescriptors,
+            new Predicate<TypeDescriptor>() {
+              @Override
+              public boolean apply(TypeDescriptor typeDescriptor) {
+                return !typeDescriptor.isInterface();
+              }
+            },
+            defaultSuperType);
+    final List<TypeDescriptor> interfaceTypeDescriptors =
+        FluentIterable.from(intersectedTypeDescriptors)
+            .filter(
+                new Predicate<TypeDescriptor>() {
+                  @Override
+                  public boolean apply(TypeDescriptor typeDescriptor) {
+                    return typeDescriptor.isInterface();
+                  }
+                })
+            .toList();
+    String joinedBinaryName =
+        TypeDescriptors.createJoinedBinaryName(intersectedTypeDescriptors, " & ");
+    Set<TypeDescriptor> typeVars = Sets.newLinkedHashSet();
+    for (TypeDescriptor intersectedType : intersectedTypeDescriptors) {
+      typeVars.addAll(intersectedType.getAllTypeVariables());
+    }
+    return new TypeDescriptor.Builder()
+        .setIsIntersection(true)
+        .setTypeArgumentDescriptors(typeVars)
+        .setBinaryName(joinedBinaryName)
+        .setVisibility(Visibility.PUBLIC)
+        .setIsNullable(true)
+        .setInterfacesTypeDescriptorsFactory(
+            new DescriptorFactory<List<TypeDescriptor>>() {
+              @Override
+              public List<TypeDescriptor> create(TypeDescriptor selfTypeDescriptor) {
+                return interfaceTypeDescriptors;
+              }
+            })
+        .setSuperTypeDescriptorFactory(
+            new DescriptorFactory<TypeDescriptor>() {
+              @Override
+              public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
+                return superTypeDescriptor;
+              }
+            })
         .build();
   }
 
@@ -379,6 +434,7 @@ public class TypeDescriptors {
       TypeDescriptor originalTypeDescriptor, Iterable<TypeDescriptor> typeArgumentTypeDescriptors) {
     checkArgument(!originalTypeDescriptor.isArray());
     checkArgument(!originalTypeDescriptor.isTypeVariable());
+    checkArgument(!originalTypeDescriptor.isUnion());
 
     List<TypeDescriptor> typeArgumentDescriptors = Lists.newArrayList(typeArgumentTypeDescriptors);
 
@@ -434,9 +490,7 @@ public class TypeDescriptors {
       return originalTypeDescriptor;
     }
 
-    return TypeDescriptor.Builder.from(originalTypeDescriptor)
-        .setIsNullable(false)
-        .build();
+    return TypeDescriptor.Builder.from(originalTypeDescriptor).setIsNullable(false).build();
   }
 
   public static TypeDescriptor toNullable(TypeDescriptor originalTypeDescriptor) {
@@ -444,9 +498,7 @@ public class TypeDescriptors {
       return originalTypeDescriptor;
     }
 
-    return TypeDescriptor.Builder.from(originalTypeDescriptor)
-        .setIsNullable(true)
-        .build();
+    return TypeDescriptor.Builder.from(originalTypeDescriptor).setIsNullable(true).build();
   }
 
   public static TypeDescriptor getForArray(TypeDescriptor leafTypeDescriptor, int dimensions) {
@@ -481,6 +533,7 @@ public class TypeDescriptors {
     String packageName = leafTypeDescriptor.getPackageName();
     String sourceName = leafTypeDescriptor.getSourceName() + arraySuffix;
     List<TypeDescriptor> typeArgumentDescriptors = Collections.emptyList();
+
     return new TypeDescriptor.Builder()
         .setBinaryName(binaryName)
         .setComponentTypeDescriptor(componentTypeDescriptor)
@@ -523,26 +576,30 @@ public class TypeDescriptors {
     // avoid JSCompiler errors. It's assumed that the Java code has already been checked and this
     // assignment is only temporary and it will be overwritten before the end of the constructor.
     return JsTypeAnnotation.createTypeAnnotation(
-        NullLiteral.NULL,
-        TypeDescriptors.get().unknownType);
+        NullLiteral.NULL, TypeDescriptors.get().unknownType);
   }
 
-  static String createUnionBinaryName(final List<TypeDescriptor> unionedTypeDescriptors) {
-    return Joiner.on(" | ")
+  public static String createJoinedBinaryName(
+      final List<TypeDescriptor> typeDescriptors, String separator) {
+    return Joiner.on(separator)
         .join(
             Lists.transform(
-                unionedTypeDescriptors,
+                typeDescriptors,
                 new Function<TypeDescriptor, String>() {
                   @Override
                   public String apply(TypeDescriptor typeDescriptor) {
-                    return typeDescriptor.getBinaryName();
+                    String binaryName = typeDescriptor.getBinaryName();
+                    if (typeDescriptor.isParameterizedType()) {
+                      binaryName += "_";
+                      binaryName +=
+                          createJoinedBinaryName(typeDescriptor.getTypeArgumentDescriptors(), "_");
+                    }
+                    return binaryName.replace(".", "_");
                   }
                 }));
   }
 
-  /**
-   * Builder for TypeDescriptors.
-   */
+  /** Builder for TypeDescriptors. */
   public static class SingletonInitializer {
 
     private final TypeDescriptors typeDescriptors = new TypeDescriptors();

@@ -18,5 +18,12 @@
 [Object c = (CastToGenerics<S, Number>) o;] => [let c = /**@type {CastToGenerics<*, (Number|?number)>} */ ($Casts.to(o, CastToGenerics));]
 [c = (S[]) o;] => [c = /**@type {Array<*>} */ ($Arrays.$castTo(o, Object, 1));]
 [c = (V) o;] => [c = /**@type {Enum} */ ($Casts.to(o, Enum));]
+[if (o instanceof Empty1) {
+      return (EE) o;
+    }] => [if (CastToGenerics$Empty1.$isInstance(o)) {
+      return /**@type {CastToGenerics$Empty1} */ ($Casts.to(o, CastToGenerics$Empty1));
+    }]
+[return (EE) o;] => [return /**@type {CastToGenerics$Empty1} */ ($Casts.to(o, CastToGenerics$Empty1));]
+[return null;] => [return null;]
 [UNKNOWN] => [CastToGenerics.$clinit();]
 [return new Foo<T>() { };] => [return /**@type {!CastToGenerics$1<*>} */ (CastToGenerics$1.$create());]

@@ -23,6 +23,30 @@ public class CastToGenerics<T, E extends Number> {
     c = (S[]) o;
     c = (V) o;
   }
+  
+  /**
+   * This method tests that J2CL correctly sets the Generic to its bound inside a method since
+   * closure compiler cannot handle it.
+   */
+  public <TT extends Enum> void outerGenericMethod() {
+    class Nested<SS> {
+      private void nestedGenericMethod(Object o) {
+        TT t = (TT) o;
+      }
+    }
+  }
+
+  interface Empty1 {};
+
+  interface Empty2<TT> {};
+
+  public <EE extends Empty1 & Empty2<EE>> EE method(Object o) {
+    if (o instanceof Empty1) {
+      return (EE) o;
+    }
+    return null;
+  }
+
 
   public static <T> Foo<T> doSomething() {
     return new Foo<T>() { };

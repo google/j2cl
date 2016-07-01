@@ -158,6 +158,10 @@ public class JavaType extends Node {
     return this.kind == Kind.INTERFACE;
   }
 
+  public boolean isClass() {
+    return this.kind == Kind.ENUM || this.kind == Kind.CLASS;
+  }
+
   public TypeDescriptor getNativeTypeDescriptor() {
     Preconditions.checkArgument(
         overlayTypeDescriptor == null || typeDescriptor.getSuperTypeDescriptor() == null,

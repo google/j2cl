@@ -1,31 +1,22 @@
 /**
  * @fileoverview Impl transpiled from
- * com.google.j2cl.transpiler.readable.intersectiontype.IntersectionType$Setable.
+ * com.google.j2cl.transpiler.readable.intersectiontype.Serial.
  *
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
  * const, missingRequire}
  */
-goog.module('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionType.Setable$impl');
+goog.module('com.google.j2cl.transpiler.readable.intersectiontype.Serial$impl');
 
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('java.lang.Class$impl');
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 /**
  * @interface
  */
-class IntersectionType$Setable {
-  /**
-   * @abstract
-   * @param {number} i
-   * @return {void}
-   * @public
-   */
-  m_set__int(i) {}
-
+class Serial {
   /**
    * Marks the provided class as implementing this interface.
    * @param {window.Function} classConstructor
@@ -36,7 +27,7 @@ class IntersectionType$Setable {
      * @public {boolean}
      */
     classConstructor.prototype
-        .$implements__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionType$Setable =
+        .$implements__com_google_j2cl_transpiler_readable_intersectiontype_Serial =
         true;
   }
 
@@ -50,7 +41,7 @@ class IntersectionType$Setable {
   static $isInstance(instance) {
     return instance != null &&
         instance
-            .$implements__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionType$Setable;
+            .$implements__com_google_j2cl_transpiler_readable_intersectiontype_Serial;
   }
 
   /**
@@ -62,30 +53,25 @@ class IntersectionType$Setable {
   static $isAssignableFrom(classConstructor) {
     return classConstructor != null &&
         classConstructor.prototype
-            .$implements__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionType$Setable;
+            .$implements__com_google_j2cl_transpiler_readable_intersectiontype_Serial;
   }
 
   /**
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {
-    Class = goog.module.get('java.lang.Class$impl');
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-  }
+  static $clinit() { Class = goog.module.get('java.lang.Class$impl'); }
 };
 
 $Util.$setClassMetadataForInterface(
-    IntersectionType$Setable,
-    'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionType$Setable');
+    Serial, 'com.google.j2cl.transpiler.readable.intersectiontype.Serial');
 
 
-IntersectionType$Setable.$markImplementor(
-    /** @type {window.Function} */ (IntersectionType$Setable));
+Serial.$markImplementor(/** @type {window.Function} */ (Serial));
 
 
 /**
  * Export class.
  */
-exports = IntersectionType$Setable;
-//# sourceMappingURL=IntersectionType$Setable.js.map
+exports = Serial;
+//# sourceMappingURL=Serial.js.map

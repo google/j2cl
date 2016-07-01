@@ -15,7 +15,13 @@
  */
 package com.google.j2cl.generator;
 
+import static com.google.common.base.Preconditions.checkState;
+
+import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicate;
+import com.google.common.collect.FluentIterable;
 import com.google.j2cl.ast.AnonymousJavaType;
 import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.Expression;
@@ -85,7 +91,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     return JsDocNameUtils.getJsDocName(typeDescriptor, shouldUseClassName, environment);
   }
 
-  public String getJsDocNames(List<TypeDescriptor> typeDescriptors) {
+  public String getJsDocNames(Iterable<TypeDescriptor> typeDescriptors) {
     return JsDocNameUtils.getJsDocNames(typeDescriptors, environment);
   }
 
@@ -324,7 +330,10 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     if (javaType.isInterface()) {
       renderIsInstanceForInterfaceType();
-    } else { // Not an interface so it is a Class.
+    } else if (javaType.getDescriptor().isIntersection()) {
+      renderIsInstanceForIntersectionType();
+    } else {
+      checkState(javaType.isClass());
       renderIsInstanceForClassType();
     }
   }
@@ -374,6 +383,41 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.append(
           "return instance != null && instance.$implements__" + mangledTypeName + ";");
     }
+    sourceBuilder.closeBrace();
+    sourceBuilder.newLines(2);
+  }
+
+  private final void renderIsInstanceForIntersectionType() {
+    sourceBuilder.appendLines(
+        "/**",
+        " * Returns whether the provided instance matches the intersection type.",
+        " * @param {*} instance",
+        " * @return {boolean}",
+        " * @public",
+        " */",
+        "static $isInstance(instance) ");
+    sourceBuilder.openBrace();
+    sourceBuilder.newLine();
+    String checks =
+        Joiner.on(" && ")
+            .join(
+                FluentIterable.from(javaType.getDescriptor().getIntersectedTypeDescriptors())
+                    .filter(
+                        new Predicate<TypeDescriptor>() {
+                          @Override
+                          public boolean apply(TypeDescriptor intersectedType) {
+                            return intersectedType != TypeDescriptors.get().javaLangObject;
+                          }
+                        })
+                    .transform(
+                        new Function<TypeDescriptor, String>() {
+                          @Override
+                          public String apply(TypeDescriptor intersectedType) {
+                            return environment.aliasForType(intersectedType)
+                                + ".$isInstance(instance)";
+                          }
+                        }));
+    sourceBuilder.append("return " + checks + ";");
     sourceBuilder.closeBrace();
     sourceBuilder.newLines(2);
   }

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
@@ -103,6 +105,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       newTypeDescriptor.isInstanceMemberClass = typeDescriptor.isInstanceMemberClass();
       newTypeDescriptor.isInstanceNestedClass = typeDescriptor.isInstanceNestedClass();
       newTypeDescriptor.isInterface = typeDescriptor.isInterface();
+      newTypeDescriptor.isIntersection = typeDescriptor.isIntersection();
       newTypeDescriptor.isJsFunction = typeDescriptor.isJsFunctionInterface();
       newTypeDescriptor.isJsFunctionImplementation = typeDescriptor.isJsFunctionImplementation();
       newTypeDescriptor.isJsType = typeDescriptor.isJsType();
@@ -155,6 +158,10 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     private TypeDescriptor newTypeDescriptor = new TypeDescriptor();
 
     public TypeDescriptor build() {
+      // TODO(tdeegan): We will want to do some verifications here to make sure we are not producing
+      // a TypeDescriptor that doesn't make sense.
+      // For example, we could verify that union types don't have TypeArguments or that only one of
+      // isParametrized() isIntersection() isUnions isTypeVariable() etc hold true.
       return TypeDescriptor.intern(newTypeDescriptor);
     }
 
@@ -224,6 +231,11 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
 
     public Builder setIsInterface(boolean isInterface) {
       newTypeDescriptor.isInterface = isInterface;
+      return this;
+    }
+
+    public Builder setIsIntersection(boolean isIntersection) {
+      newTypeDescriptor.isIntersection = isIntersection;
       return this;
     }
 
@@ -345,8 +357,8 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       return this;
     }
 
-    public Builder setTypeArgumentDescriptors(List<TypeDescriptor> typeArgumentDescriptors) {
-      newTypeDescriptor.typeArgumentDescriptors = typeArgumentDescriptors;
+    public Builder setTypeArgumentDescriptors(Iterable<TypeDescriptor> typeArgumentDescriptors) {
+      newTypeDescriptor.typeArgumentDescriptors = ImmutableList.copyOf(typeArgumentDescriptors);
       return this;
     }
 
@@ -388,6 +400,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   private boolean isInstanceMemberClass;
   private boolean isInstanceNestedClass;
   private boolean isInterface;
+  private boolean isIntersection;
   private boolean isJsFunction;
   private boolean isJsFunctionImplementation;
   private boolean isJsType;
@@ -444,34 +457,32 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
    * Returns the unqualified binary name like "Outer$Inner".
    */
   public String getBinaryClassName() {
-    String binaryClassName;
-    {
-      if (isPrimitive) {
-        binaryClassName = "$" + simpleName;
-      } else if (simpleName.equals("?")) {
-        binaryClassName = "?";
-      } else if (isTypeVariable) {
-        // skip the top level class component for better output readability.
-        List<String> nameComponents =
-            new ArrayList<>(classComponents.subList(1, classComponents.size()));
-
-        // move the prefix in the simple name to the class name to avoid collisions between method-
-        // level and class-level type variable and avoid variable name starts with a number.
-        // concat class components to avoid collisions between type variables in inner/outer class.
-        // use '_' instead of '$' because '$' is not allowed in template variable name in closure.
-        nameComponents.set(
-            nameComponents.size() - 1, simpleName.substring(simpleName.indexOf('_') + 1));
-        String prefix = simpleName.substring(0, simpleName.indexOf('_') + 1);
-
-        binaryClassName = prefix + Joiner.on('_').join(nameComponents);
-      } else if (isArray) {
-        String arraySuffix = Strings.repeat("[]", dimensions);
-        binaryClassName = leafTypeDescriptor.getBinaryClassName() + arraySuffix;
-      } else {
-        binaryClassName = Joiner.on('$').join(classComponents);
-      }
+    if (isPrimitive) {
+      return "$" + simpleName;
     }
-    return binaryClassName;
+    if (simpleName.equals("?")) {
+      return "?";
+    }
+    if (isTypeVariable) {
+      // skip the top level class component for better output readability.
+      List<String> nameComponents =
+          new ArrayList<>(classComponents.subList(1, classComponents.size()));
+
+      // move the prefix in the simple name to the class name to avoid collisions between method-
+      // level and class-level type variable and avoid variable name starts with a number.
+      // concat class components to avoid collisions between type variables in inner/outer class.
+      // use '_' instead of '$' because '$' is not allowed in template variable name in closure.
+      nameComponents.set(
+          nameComponents.size() - 1, simpleName.substring(simpleName.indexOf('_') + 1));
+      String prefix = simpleName.substring(0, simpleName.indexOf('_') + 1);
+
+      return prefix + Joiner.on('_').join(nameComponents);
+    }
+    if (isArray) {
+      String arraySuffix = Strings.repeat("[]", dimensions);
+      return leafTypeDescriptor.getBinaryClassName() + arraySuffix;
+    }
+    return Joiner.on('$').join(classComponents);
   }
 
   /**
@@ -526,6 +537,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     for (TypeDescriptor typeArgumentTypeDescriptor : typeDescriptor.getTypeArgumentDescriptors()) {
       getAllTypeVariables(typeArgumentTypeDescriptor, typeVariables);
     }
+    checkArgument(!typeDescriptor.isUnion() || typeVariables.isEmpty());
   }
 
   private static boolean startsWithNumber(String string) {
@@ -541,6 +553,17 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       return ImmutableList.of();
     }
     return ImmutableList.copyOf(interfacesTypeDescriptorsFactory.create(this));
+  }
+
+  public List<TypeDescriptor> getIntersectedTypeDescriptors() {
+    checkArgument(isIntersection());
+    TypeDescriptor superType = getSuperTypeDescriptor();
+    if (superType == TypeDescriptors.get().javaLangObject || superType == null) {
+      return getInterfacesTypeDescriptors();
+    }
+    List<TypeDescriptor> types = new ArrayList<>(getInterfacesTypeDescriptors());
+    types.add(superType);
+    return types;
   }
 
   public MethodDescriptor getJsFunctionMethodDescriptor() {
@@ -651,19 +674,16 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return unionedTypeDescriptors;
   }
 
+  /** A unique string for a give type. Used for interning. */
   public String getUniqueId() {
-    String uniqueId;
-
+    String prefix = isNullable ? "?" : "!";
     if (isArray) {
-      uniqueId = "(" + leafTypeDescriptor.getUniqueId() + ")" + Strings.repeat("[]", dimensions);
-    } else if (isUnion) {
-      uniqueId = TypeDescriptors.createUnionBinaryName(unionedTypeDescriptors);
-    } else if (isTypeVariable) {
-      uniqueId = binaryName;
-    } else {
-      uniqueId = binaryName + TypeDescriptor.createTypeArgumentsUniqueId(typeArgumentDescriptors);
+      String leaf = leafTypeDescriptor.getUniqueId();
+      return prefix + "(" + leaf + ")" + Strings.repeat("[]", dimensions);
     }
-    return (isNullable ? "?" : "!") + uniqueId;
+    return prefix
+        + binaryName
+        + TypeDescriptor.createTypeArgumentsUniqueId(typeArgumentDescriptors);
   }
 
   private static String createTypeArgumentsUniqueId(List<TypeDescriptor> typeArgumentDescriptors) {
@@ -722,6 +742,10 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
 
   public boolean isInterface() {
     return isInterface;
+  }
+
+  public boolean isIntersection() {
+    return isIntersection;
   }
 
   public boolean isJsFunctionImplementation() {

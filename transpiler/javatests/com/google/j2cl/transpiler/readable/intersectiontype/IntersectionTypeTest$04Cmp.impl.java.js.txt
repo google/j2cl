@@ -1,0 +1,89 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest$04Cmp.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.$Anonymous04Cmp$impl');
+
+
+let Cmp = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.Cmp$impl');
+let Serial = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.Serial$impl');
+let Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
+
+/**
+ * Abstract class, do not instantiate.
+ * @implements {Cmp}
+ * @implements {Serial}
+ */
+class IntersectionTypeTest$04Cmp extends Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() { super(); }
+
+  /**
+   * @abstract
+   * @override
+   * @return {number}
+   * @public
+   */
+  m_cmp() {}
+
+  /**
+   * Returns whether the provided instance matches the intersection type.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return Cmp.$isInstance(instance) && Serial.$isInstance(instance);
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, IntersectionTypeTest$04Cmp);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_intersectiontype_IntersectionTypeTest$04Cmp() {
+  }
+};
+
+$Util.$setClassMetadata(
+    IntersectionTypeTest$04Cmp,
+    'com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest$04Cmp');
+
+
+Cmp.$markImplementor(IntersectionTypeTest$04Cmp);
+Serial.$markImplementor(IntersectionTypeTest$04Cmp);
+
+
+/**
+ * Export class.
+ */
+exports = IntersectionTypeTest$04Cmp;
+//# sourceMappingURL=IntersectionTypeTest$04Cmp.js.map

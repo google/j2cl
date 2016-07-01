@@ -90,7 +90,6 @@ import com.google.j2cl.ast.sourcemap.SourcePosition;
 
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
-import org.eclipse.jdt.core.dom.Annotation;
 import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
 import org.eclipse.jdt.core.dom.ArrayType;
 import org.eclipse.jdt.core.dom.BodyDeclaration;
@@ -164,7 +163,7 @@ public class CompilationUnitBuilder {
         packageInfoCache.setInfo(
             PackageInfoCache.SOURCE_CLASS_PATH_ENTRY,
             JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit),
-            (List<Annotation>) jdtCompilationUnit.getPackage().annotations());
+            jdtCompilationUnit.getPackage().annotations());
       }
       for (Object object : jdtCompilationUnit.types()) {
         AbstractTypeDeclaration abstractTypeDeclaration = (AbstractTypeDeclaration) object;
@@ -1067,16 +1066,17 @@ public class CompilationUnitBuilder {
       return body;
     }
 
+    /**
+     * Lambda expression is converted to an inner class: <pre>
+     * class Enclosing$lambda$0 implements I {
+     *   Enclosing$lambda$0(captures) {// initialize captures}
+     *   private T lambda$0(args) {...lambda_expression_with_captures ... }
+     *   public T samMethod0(args) { return this.lambda$0(args); }
+     * }</pre>
+     *
+     * <p>And replaces the lambda with {@code new Enclosing$lambda$0(captures)}.
+     */
     private Expression convert(org.eclipse.jdt.core.dom.LambdaExpression expression) {
-      /**
-       * Lambda expression is converted to an inner class:
-       *
-       * class Enclosing$lambda$0 implements I { Enclosing$lambda$0(captures) {// initialize
-       * captures} private T lambda$0(args) {...lambda_expression_with_captures ... } public T
-       * samMethod0(args) { return this.lambda$0(args); } }
-       *
-       * And replaces the lambda with new Enclosing$lambda$0(captures).
-       */
       // Construct a class for the lambda expression.
       ITypeBinding enclosingClassTypeBinding = JdtUtils.findCurrentTypeBinding(expression);
 
@@ -1160,7 +1160,7 @@ public class CompilationUnitBuilder {
           AstUtils.getAllTypeVariables(lambdaType);
 
       // Add the relevant type parameters to the anonymous inner class that implements the lambda.
-      TypeDescriptor lambdaTypeDescriptorWithCaptures =
+      lambdaTypeDescriptor =
           TypeDescriptors.replaceTypeArgumentDescriptors(
               lambdaTypeDescriptor, new ArrayList<>(lambdaTypeParameterTypeDescriptors));
 
@@ -1168,7 +1168,7 @@ public class CompilationUnitBuilder {
       // we traverse the lambda method we determine the captured variables and need to add their
       // type variables to the lambda TypeDescriptor's type arguments.  This new TypeDescriptor
       // needs to replace the old one throughout the Lambda JavaType.
-      replaceLambdaTypeDescriptor(lambdaType, lambdaTypeDescriptorWithCaptures);
+      replaceLambdaTypeDescriptor(lambdaType, lambdaTypeDescriptor);
 
       // Resolve default methods
       DefaultMethodsResolver.resolve(functionalInterfaceTypeBinding, lambdaType);
@@ -1898,9 +1898,9 @@ public class CompilationUnitBuilder {
 
     /**
      * Records associations of variables and their enclosing type.
-     * <p>
-     * Enclosing type is a broader category than declaring type since some variables (fields) have a
-     * declaring type (that is also their enclosing type) while other variables do not.
+     *
+     * <p>Enclosing type is a broader category than declaring type since some variables (fields)
+     * have a declaring type (that is also their enclosing type) while other variables do not.
      */
     private void recordEnclosingType(Variable variable, JavaType enclosingType) {
       enclosingTypeByVariable.put(variable, enclosingType);

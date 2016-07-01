@@ -1,0 +1,85 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.intersectiontype.Getable.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.intersectiontype.Getable$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
+
+/**
+ * @interface
+ * @template C_T
+ */
+class Getable {
+  /**
+   * @abstract
+   * @return {C_T}
+   * @public
+   */
+  m_get() {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {window.Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_intersectiontype_Getable =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        instance
+            .$implements__com_google_j2cl_transpiler_readable_intersectiontype_Getable;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        classConstructor.prototype
+            .$implements__com_google_j2cl_transpiler_readable_intersectiontype_Getable;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() { Class = goog.module.get('java.lang.Class$impl'); }
+};
+
+$Util.$setClassMetadataForInterface(
+    Getable, 'com.google.j2cl.transpiler.readable.intersectiontype.Getable');
+
+
+Getable.$markImplementor(/** @type {window.Function} */ (Getable));
+
+
+/**
+ * Export class.
+ */
+exports = Getable;
+//# sourceMappingURL=Getable.js.map

@@ -17,6 +17,7 @@ package com.google.j2cl.frontend;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -26,6 +27,7 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryOperator;
@@ -637,6 +639,9 @@ public class JdtUtils {
       return null;
     }
     TypeDescriptor descriptor;
+    if (isIntersectionType(typeBinding)) {
+      return createIntersectionType(typeBinding);
+    }
     if (typeBinding.isArray()) {
       TypeDescriptor leafTypeDescriptor =
           createTypeDescriptorWithNullability(
@@ -750,26 +755,12 @@ public class JdtUtils {
   }
 
   /**
-   * This is a hack to get intersection types working temporarily. We simply take the first type in
-   * the intersection and return it. TODO: Find out how to support intersection types in the
-   * jscompiler type system and fix this.
-   */
-  public static ITypeBinding getTypeForIntersectionType(ITypeBinding binding) {
-    checkArgument(isIntersectionType(binding));
-    return binding.getInterfaces()[0];
-  }
-
-  /**
    * Creates a TypeDescriptor from a JDT TypeBinding.
    */
   public static TypeDescriptor createTypeDescriptor(
       ITypeBinding typeBinding, List<TypeDescriptor> typeArgumentDescriptors) {
     if (typeBinding == null) {
       return null;
-    }
-    if (isIntersectionType(typeBinding)) {
-      ITypeBinding intersectionType = getTypeForIntersectionType(typeBinding);
-      return createTypeDescriptor(intersectionType, getTypeArgumentTypeDescriptors(typeBinding));
     }
     if (typeBinding.isArray()) {
       TypeDescriptor leafTypeDescriptor = createTypeDescriptor(typeBinding.getElementType());
@@ -826,10 +817,7 @@ public class JdtUtils {
 
   public static List<TypeDescriptor> getTypeArgumentTypeDescriptors(ITypeBinding typeBinding) {
     List<TypeDescriptor> typeArgumentDescriptors = new ArrayList<>();
-    if (isIntersectionType(typeBinding)) {
-      ITypeBinding intersectionTypeBinding = getTypeForIntersectionType(typeBinding);
-      return getTypeArgumentTypeDescriptors(intersectionTypeBinding);
-    } else if (typeBinding.isParameterizedType()) {
+    if (typeBinding.isParameterizedType()) {
       typeArgumentDescriptors.addAll(createTypeDescriptors(typeBinding.getTypeArguments()));
     } else {
       typeArgumentDescriptors.addAll(createTypeDescriptors(typeBinding.getTypeParameters()));
@@ -1193,12 +1181,16 @@ public class JdtUtils {
     return jsFunctionInterface.getDeclaredMethods()[0];
   }
 
-  public static List<TypeDescriptor> createTypeDescriptors(ITypeBinding[] typeBindings) {
+  static List<TypeDescriptor> createTypeDescriptors(List<ITypeBinding> typeBindings) {
     List<TypeDescriptor> typeDescriptors = new ArrayList<>();
     for (ITypeBinding typeBinding : typeBindings) {
       typeDescriptors.add(createTypeDescriptor(typeBinding));
     }
     return typeDescriptors;
+  }
+
+  static List<TypeDescriptor> createTypeDescriptors(ITypeBinding[] typeBindings) {
+    return createTypeDescriptors(Arrays.asList(typeBindings));
   }
 
   public static void initTypeDescriptors(AST ast) {
@@ -1292,19 +1284,61 @@ public class JdtUtils {
   public static TypeDescriptor createLambda(
       final TypeDescriptor enclosingClassTypeDescriptor,
       String lambdaBinaryName,
-      final ITypeBinding lambdaInterfaceBinding) {
+      final ITypeBinding lambdaTypeBinding) {
+    // About Intersection typed Lambdas:
+    //
+    // From JLS 15.27.3: A lambda expression is compatible in an assignment context, invocation
+    // context, or casting context with a target type T if T is a functional interface type (§9.8)..
+    // From JLS 9.8:
+    // The declaration of a functional interface allows a functional interface type to be used in a
+    // program. There are four kinds of functional interface type:
+    // - The type of a non-generic (§6.1) functional interface
+    // - A parameterized type that is a parameterization (§4.5) of a generic functional interface
+    // - The raw type (§4.8) of a generic functional interface
+    // - An intersection type (§4.9) that induces a notional functional interface
+    // Note:
+    // In special circumstances, it is useful to treat an intersection type as a functional
+    // interface type. Typically, this will look like an intersection of a functional interface
+    // type with one or more marker interface types, such as Runnable & java.io.Serializable. (...)
+    final List<ITypeBinding> lambdaInterfaceBindings =
+        isIntersectionType(lambdaTypeBinding)
+            ? Arrays.asList(lambdaTypeBinding.getInterfaces())
+            : Arrays.asList(lambdaTypeBinding);
+
+    if (isIntersectionType(lambdaTypeBinding)) {
+      checkArgument(lambdaTypeBinding.getSuperclass() == null);
+      checkState(lambdaInterfaceBindings.size() >= 2);
+    }
+
+    boolean isJsFunctionImplementation = false;
+    for (ITypeBinding interfaceBinding : lambdaInterfaceBindings) {
+      isJsFunctionImplementation |= JsInteropUtils.isJsFunction(interfaceBinding);
+    }
+
     DescriptorFactory<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory =
         new DescriptorFactory<MethodDescriptor>() {
           @Override
           public MethodDescriptor create(TypeDescriptor selfTypeDescriptor) {
-            return getConcreteJsFunctionMethodDescriptor(lambdaInterfaceBinding);
+            for (ITypeBinding interfaceBinding : lambdaInterfaceBindings) {
+              MethodDescriptor descriptor = getConcreteJsFunctionMethodDescriptor(interfaceBinding);
+              if (descriptor != null) {
+                return descriptor;
+              }
+            }
+            return null;
           }
         };
     DescriptorFactory<MethodDescriptor> jsFunctionMethodDescriptorFactory =
         new DescriptorFactory<MethodDescriptor>() {
           @Override
           public MethodDescriptor create(TypeDescriptor selfTypeDescriptor) {
-            return getJsFunctionMethodDescriptor(lambdaInterfaceBinding);
+            for (ITypeBinding interfaceBinding : lambdaInterfaceBindings) {
+              MethodDescriptor descriptor = getJsFunctionMethodDescriptor(interfaceBinding);
+              if (descriptor != null) {
+                return descriptor;
+              }
+            }
+            return null;
           }
         };
     DescriptorFactory<TypeDescriptor> rawTypeDescriptorFactory =
@@ -1329,11 +1363,16 @@ public class JdtUtils {
             return enclosingClassTypeDescriptor;
           }
         };
+    final ImmutableList<TypeDescriptor> lambdaInterfaceTypeDescriptors =
+        ImmutableList.copyOf(createTypeDescriptors(lambdaInterfaceBindings));
+    for (TypeDescriptor lambdaInterface : lambdaInterfaceTypeDescriptors) {
+      checkArgument(lambdaInterface.isInterface());
+    }
     DescriptorFactory<List<TypeDescriptor>> interfacesDescriptorsFactory =
         new DescriptorFactory<List<TypeDescriptor>>() {
           @Override
           public List<TypeDescriptor> create(TypeDescriptor selfTypeDescriptor) {
-            return ImmutableList.of(createTypeDescriptor(lambdaInterfaceBinding));
+            return lambdaInterfaceTypeDescriptors;
           }
         };
 
@@ -1356,15 +1395,17 @@ public class JdtUtils {
     String packageName = Joiner.on(".").join(packageComponents);
     String sourceName = Joiner.on(".").join(Iterables.concat(packageComponents, classComponents));
 
-    List<TypeDescriptor> typeArgumentDescriptors =
-        new ArrayList<>(createTypeDescriptor(lambdaInterfaceBinding).getAllTypeVariables());
+    List<TypeDescriptor> typeArgumentDescriptors = Lists.newArrayList();
+    for (TypeDescriptor interfaceTypeDescriptor : lambdaInterfaceTypeDescriptors) {
+      typeArgumentDescriptors.addAll(interfaceTypeDescriptor.getAllTypeVariables());
+    }
     return new TypeDescriptor.Builder()
         .setBinaryName(binaryName)
         .setClassComponents(classComponents)
         .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
         .setEnclosingTypeDescriptorFactory(enclosingTypeDescriptorFactory)
         .setIsInstanceNestedClass(true)
-        .setIsJsFunctionImplementation(JsInteropUtils.isJsFunction(lambdaInterfaceBinding))
+        .setIsJsFunctionImplementation(isJsFunctionImplementation)
         .setIsLocal(true)
         .setIsNullable(true)
         .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)
@@ -1381,6 +1422,33 @@ public class JdtUtils {
   }
 
   private JdtUtils() {}
+
+  /**
+   * Extracts the intersected types from a jdt type binding. These are represented as a super class
+   * and 1 or more super interfaces.
+   */
+  private static List<ITypeBinding> getTypeBindingsForIntersectionType(ITypeBinding binding) {
+    checkArgument(isIntersectionType(binding));
+    List<ITypeBinding> bindings = Lists.newArrayList(binding.getInterfaces());
+    if (binding.getSuperclass() != null) {
+      bindings.add(binding.getSuperclass());
+    }
+    checkArgument(bindings.size() >= 2);
+    return bindings;
+  }
+
+  /**
+   * Since we don't have access to the enclosing class, the proper package and naming cannot be
+   * computed here. Instead we have an early normalization pass that traverses the intersection
+   * types and sets the correct package and binaryName etc.
+   */
+  private static final TypeDescriptor createIntersectionType(ITypeBinding typeBinding) {
+    checkArgument(isIntersectionType(typeBinding));
+    List<ITypeBinding> intersectedTypeBindings = getTypeBindingsForIntersectionType(typeBinding);
+    List<TypeDescriptor> intersectedTypeDescriptors =
+        createTypeDescriptors(intersectedTypeBindings);
+    return TypeDescriptors.createIntersection(intersectedTypeDescriptors);
+  }
 
   // This is only used by TypeProxyUtils, and cannot be used elsewhere. Because to create a
   // TypeDescriptor from a TypeBinding, it should go through the path to check array type.
@@ -1430,32 +1498,6 @@ public class JdtUtils {
                   rawTypeDescriptor, ImmutableList.<TypeDescriptor>of());
             }
             return rawTypeDescriptor;
-          }
-        };
-    DescriptorFactory<TypeDescriptor> superTypeDescriptorFactory =
-        new DescriptorFactory<TypeDescriptor>() {
-          @Override
-          public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
-            return createTypeDescriptorWithNullability(
-                typeBinding.getSuperclass(),
-                new IAnnotationBinding[0],
-                getTypeDefaultNullability(typeBinding));
-          }
-        };
-    DescriptorFactory<List<TypeDescriptor>> interfacesDescriptorsFactory =
-        new DescriptorFactory<List<TypeDescriptor>>() {
-          @Override
-          public List<TypeDescriptor> create(TypeDescriptor selfTypeDescriptor) {
-            ImmutableList.Builder<TypeDescriptor> typeDescriptors = ImmutableList.builder();
-            for (ITypeBinding interfaceBinding : typeBinding.getInterfaces()) {
-              TypeDescriptor interfaceType =
-                  createTypeDescriptorWithNullability(
-                      interfaceBinding,
-                      new IAnnotationBinding[0],
-                      getTypeDefaultNullability(typeBinding));
-              typeDescriptors.add(interfaceType);
-            }
-            return typeDescriptors.build();
           }
         };
 
@@ -1508,7 +1550,7 @@ public class JdtUtils {
             ? overrideTypeArgumentDescriptors
             : getTypeArgumentTypeDescriptors(typeBinding);
 
-    DescriptorFactory<List<MethodDescriptor>> methodDescriptors =
+    DescriptorFactory<List<MethodDescriptor>> declaredMethods =
         new DescriptorFactory<List<MethodDescriptor>>() {
           @Override
           public List<MethodDescriptor> create(TypeDescriptor selfTypeDescriptor) {
@@ -1530,7 +1572,22 @@ public class JdtUtils {
         .setClassComponents(classComponents)
         .setConcreteJsFunctionMethodDescriptorFactory(concreteJsFunctionMethodDescriptorFactory)
         .setEnclosingTypeDescriptorFactory(enclosingTypeDescriptorFactory)
-        .setInterfacesTypeDescriptorsFactory(interfacesDescriptorsFactory)
+        .setInterfacesTypeDescriptorsFactory(
+            new DescriptorFactory<List<TypeDescriptor>>() {
+              @Override
+              public List<TypeDescriptor> create(TypeDescriptor selfTypeDescriptor) {
+                ImmutableList.Builder<TypeDescriptor> typeDescriptors = ImmutableList.builder();
+                for (ITypeBinding interfaceBinding : typeBinding.getInterfaces()) {
+                  TypeDescriptor interfaceType =
+                      createTypeDescriptorWithNullability(
+                          interfaceBinding,
+                          new IAnnotationBinding[0],
+                          getTypeDefaultNullability(typeBinding));
+                  typeDescriptors.add(interfaceType);
+                }
+                return typeDescriptors.build();
+              }
+            })
         .setIsEnumOrSubclass(isEnumOrSubclass(typeBinding))
         .setIsFinal(isFinal)
         .setIsInstanceMemberClass(isInstanceMemberClass(typeBinding))
@@ -1555,10 +1612,19 @@ public class JdtUtils {
         .setSimpleName(simpleName)
         .setSourceName(sourceName)
         .setIsOrSubclassesJsConstructorClass(isOrSubclassesJsConstructorClass(typeBinding))
-        .setSuperTypeDescriptorFactory(superTypeDescriptorFactory)
+        .setSuperTypeDescriptorFactory(
+            new DescriptorFactory<TypeDescriptor>() {
+              @Override
+              public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
+                return createTypeDescriptorWithNullability(
+                    typeBinding.getSuperclass(),
+                    new IAnnotationBinding[0],
+                    getTypeDefaultNullability(typeBinding));
+              }
+            })
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setVisibility(getVisibility(typeBinding))
-        .setDeclaredMethodDescriptorsFactory(methodDescriptors)
+        .setDeclaredMethodDescriptorsFactory(declaredMethods)
         .build();
   }
 }

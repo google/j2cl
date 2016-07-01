@@ -48,6 +48,7 @@ import com.google.j2cl.ast.visitors.NormalizeCatchClauses;
 import com.google.j2cl.ast.visitors.NormalizeConstructors;
 import com.google.j2cl.ast.visitors.NormalizeEquality;
 import com.google.j2cl.ast.visitors.NormalizeInstanceOfs;
+import com.google.j2cl.ast.visitors.NormalizeIntersectionTypes;
 import com.google.j2cl.ast.visitors.NormalizeJsVarargs;
 import com.google.j2cl.ast.visitors.NormalizeLongs;
 import com.google.j2cl.ast.visitors.NormalizeMultiExpressions;
@@ -141,6 +142,7 @@ public class J2clTranspiler {
             new CreateDefaultConstructors(),
             new InsertExplicitSuperCalls(),
             new DevirtualizeBoxedTypesAndJsFunctionImplementations(),
+            new NormalizeIntersectionTypes(),
             new NormalizeTryWithResources(),
             new NormalizeCatchClauses(),
             // Runs before normalizing nested classes.
