@@ -8,7 +8,6 @@
 # Put another way, if you're using J2CL with MSS, you *must* also be using
 # PMF Enhancer.
 #
-# TODO(stalcup): add an overlapping Java src glob example when AJD allows it.
 # TODO(stalcup): add a Boq web example when Boq web is ready.
 
 package(default_visibility = ["//:__subpackages__"])
@@ -27,6 +26,17 @@ js_library(
     srcs = ["Launcher.js"],
     deps = [
         ":example_j2cl_lib",
+        "//javascript/closure:base",
+    ],
+)
+
+# Depends on library that has dupe src glob.
+js_library(
+    name = "dupe_launcher",
+    srcs = ["Launcher.js"],
+    deps = [
+        ":example_j2cl_lib",
+        ":dupe_j2cl_lib",
         "//javascript/closure:base",
     ],
 )
@@ -69,6 +79,24 @@ js_binary(
     defs = J2CL_UNOPTIMIZED_DEFS,
     deps = [":J2clAjdJSCompiler_library"],
 )
+
+# TODO(stalcup): enable when twerth@ cuts an AJD release on 7/4/2016.
+## ********************************************
+## Some zip libraries contain duplicate provides.
+#
+#js_library(
+#    name = "J2clDupeAjdJSCompiler_library",
+#    deps_mgmt = "closure",  # Turns on AJD.
+#    deps = [":dupe_launcher"],
+#)
+#
+#js_binary(
+#    name = "J2clDupeAjdJSCompiler",
+#    srcs = ["Point.js"],
+#    compiler = "//javascript/tools/jscompiler:head",
+#    defs = J2CL_UNOPTIMIZED_DEFS,
+#    deps = [":J2clDupeAjdJSCompiler_library"],
+#)
 
 # ********************************************
 
@@ -152,3 +180,47 @@ mss_js_compiled_module_set_flat_files(
     scs_rowkey_prefix = "/external_content/modulesets/J2clAjdPintoPmfEnhancerMss",
     source_filegroup = ":J2clAjdPintoPmfEnhancerMss_filegroup",
 )
+
+# TODO(stalcup): enable when twerth@ cuts an AJD release on 7/4/2016.
+## ********************************************
+## Some zip libraries contain duplicate provides.
+#
+#pinto_module(
+#    name = "J2clDupeAjdPintoPmfEnhancerMss_pinto_module",
+#    deps_mgmt = "closure",  # Turns on AJD.
+#    module_id = "J2clDupeAjdPintoPmfEnhancerMss_pinto_module",
+#    deps = [":dupe_launcher"],
+#)
+#
+#pinto_processed_module_set(
+#    name = "J2clDupeAjdPintoPmfEnhancerMss_processed_module_set",
+#    externs_list = ["//javascript/externs:common"],
+#    prevalent_modules = "J2clDupeAjdPintoPmfEnhancerMss_pinto_module",
+#    deps = [":J2clDupeAjdPintoPmfEnhancerMss_pinto_module"],
+#)
+#
+#assembled_content_app_config(
+#    name = "J2clDupeAjdPintoPmfEnhancerMss_app_config",
+#    config_file = "J2clDupeAjdPintoPmfEnhancerMss.config",
+#)
+#
+#filegroup(
+#    name = "J2clDupeAjdPintoPmfEnhancerMss_filegroup",
+#    data = [
+#        "J2clDupeAjdPintoPmfEnhancerMss_warnings_whitelist.txt",
+#        ":J2clDupeAjdPintoPmfEnhancerMss_pinto_module",
+#        ":J2clDupeAjdPintoPmfEnhancerMss_processed_module_set",
+#        "//javascript/externs:common",
+#    ],
+#)
+#
+#mss_js_compiled_module_set_flat_files(
+#    name = "J2clDupeAjdPintoPmfEnhancerMss",
+#    app_name = "J2clDupeAjdPintoPmfEnhancerMss",
+#    compile_modes = ["optimized"],
+#    config = ":J2clDupeAjdPintoPmfEnhancerMss_app_config",
+#    languages = ["en"],
+#    module_sets = ["J2clDupeAjdPintoPmfEnhancerMss_processed_module_set"],
+#    scs_rowkey_prefix = "/external_content/modulesets/J2clDupeAjdPintoPmfEnhancerMss",
+#    source_filegroup = ":J2clDupeAjdPintoPmfEnhancerMss_filegroup",
+#)
