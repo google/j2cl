@@ -28,7 +28,6 @@ import com.google.j2cl.ast.visitors.FixSuperCallQualifiers;
 import com.google.j2cl.ast.visitors.FixTypeVariablesInMethods;
 import com.google.j2cl.ast.visitors.InsertBoxingConversion;
 import com.google.j2cl.ast.visitors.InsertCastOnNewInstances;
-import com.google.j2cl.ast.visitors.InsertCastOnNullabilityMismatch;
 import com.google.j2cl.ast.visitors.InsertExceptionConversions;
 import com.google.j2cl.ast.visitors.InsertExplicitSuperCalls;
 import com.google.j2cl.ast.visitors.InsertInstanceInitCalls;
@@ -183,7 +182,6 @@ public class J2clTranspiler {
             new NormalizeArrayCreations(),
             new InsertExceptionConversions(),
             new NormalizeMultiExpressions(),
-            new InsertCastOnNullabilityMismatch(),
 
             // Dodge JSCompiler limitations.
             new UnimplementedMethodsCreator(),

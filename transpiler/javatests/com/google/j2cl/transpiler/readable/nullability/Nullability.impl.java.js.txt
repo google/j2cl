@@ -96,7 +96,7 @@ class Nullability extends Object {
    * @public
    */
   m_m1__java_lang_String__java_util_List__java_lang_String(a, b, c) {
-    return /**@type {string} */ ('');
+    return '';
   }
 
   /**
@@ -136,9 +136,7 @@ class Nullability extends Object {
    * @return {string}
    * @public
    */
-  m_ternary__boolean__java_lang_String(a, s) {
-    return /**@type {string} */ (a ? s : s);
-  }
+  m_ternary__boolean__java_lang_String(a, s) { return a ? s : s; }
 
   /**
    * @return {string}
@@ -149,14 +147,12 @@ class Nullability extends Object {
     let b = /**@type {!ArrayList<number>} */ (ArrayList.$create());
     b = /**@type {!ArrayList<number>} */ (ArrayList.$create());
     let c = null;
-    this.m_m1__java_lang_String__java_util_List__java_lang_String(
-        /**@type {string} */ (a), /**@type {!List<number>} */ (b), c);
-    this.f_f1__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
-        /**@type {string} */ (a);
+    this.m_m1__java_lang_String__java_util_List__java_lang_String(a, b, c);
+    this.f_f1__com_google_j2cl_transpiler_readable_nullability_Nullability_ = a;
     if (true) {
       return ClassInSubpackage.m_getNonNullString();
     }
-    return /**@type {string} */ (a);
+    return a;
   }
 
   /**
@@ -169,30 +165,27 @@ class Nullability extends Object {
   m_castingNeeded__java_lang_String__com_google_j2cl_transpiler_readable_nullability_Nullability$Foo__java_lang_String(
       a, foo, b) {
     this.f_f4__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
-        /**@type {!ArrayList<string>} */ (Lists.m_newArrayList());
+        /**@type {ArrayList<string>} */ (Lists.m_newArrayList());
     this.f_f4__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
-        /**@type {!List<string>} */ (Nullability$StringList.$create());
+        Nullability$StringList.$create();
     this.f_f4__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
-        /**@type {!List} */ ($Casts.to(Nullability$StringList.$create(), List));
-    let x = this.m3(/**@type {string} */ (''));
+        /**@type {List} */ ($Casts.to(Nullability$StringList.$create(), List));
+    let x = this.m3('');
     Preconditions.m_checkNotNull__java_lang_Object(x);
-    new Nullability(/**@type {string} */ (x));
-    this.m3(
-        /**@type {string} */ (x), /**@type {string} */ (x),
-        /**@type {string} */ (x));
-    this.f_f1__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
-        /**@type {string} */ (x);
-    b = /**@type {string} */ (x);
+    new Nullability(x);
+    this.m3(x, x, x);
+    this.f_f1__com_google_j2cl_transpiler_readable_nullability_Nullability_ = x;
+    b = x;
     foo.m_bar__java_lang_Object_$pp_com_google_j2cl_transpiler_readable_nullability(
-        /**@type {string} */ (x));
-    b = /**@type {string} */ ($Objects.m_toString__java_lang_Object(foo));
+        x);
+    b = $Objects.m_toString__java_lang_Object(foo);
     if (true) {
-      return /**@type {string} */ (x);
+      return x;
     }
-    let myArray = /**@type {Array<string>} */ (
-        String.m_split__java_lang_String__java_lang_String('Hel-lo', '-'));
+    let myArray =
+        String.m_split__java_lang_String__java_lang_String('Hel-lo', '-');
     this.m3(myArray[0]);
-    return /**@type {string} */ (ClassInSubpackage.m_getString());
+    return ClassInSubpackage.m_getString();
   }
 
   /**
@@ -203,7 +196,7 @@ class Nullability extends Object {
   m_functions__com_google_j2cl_transpiler_readable_nullability_Nullability$MyFunction(
       l_function) {
     this.m_m4__com_google_j2cl_transpiler_readable_nullability_Nullability$MyFunction(
-        /**@type {function(string):string} */ (l_function));
+        l_function);
   }
 
   /**
@@ -260,7 +253,7 @@ class Nullability extends Object {
    */
   $init__com_google_j2cl_transpiler_readable_nullability_Nullability() {
     this.f_f1__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
-        /**@type {string} */ ('Hello');
+        'Hello';
     this.f_f2__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
         null;
     this.f_f3__com_google_j2cl_transpiler_readable_nullability_Nullability_ =
