@@ -12,7 +12,7 @@
       // Without a cast to fix it, JSCompiler will infer the type of this return statement to be
       // ?Foo<!Foo<?string>>, which does not match the return type, ?Foo<?Foo<?string>>.
       return inferGeneric(foo);
-    }] => [if (foo != null) {
+    }] => [if (!$Equality.$same(foo, null)) {
       return /**@type {CastGenericReturnType<CastGenericReturnType<?string>>} */ (CastGenericReturnType.m_inferGeneric__java_lang_Object(foo));
     }]
 [return inferGeneric(foo);] => [return /**@type {CastGenericReturnType<CastGenericReturnType<?string>>} */ (CastGenericReturnType.m_inferGeneric__java_lang_Object(foo));]

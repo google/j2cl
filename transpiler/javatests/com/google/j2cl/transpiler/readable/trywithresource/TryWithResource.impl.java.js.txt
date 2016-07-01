@@ -16,6 +16,7 @@ let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Exception = goog.forwardDeclare('java.lang.Exception$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
@@ -73,7 +74,7 @@ class TryWithResource extends Object {
         }
       } finally {
         $primaryExc = $Exceptions.safeClose(thing, $primaryExc);
-        if ($primaryExc != null) {
+        if (!$Equality.$same($primaryExc, null)) {
           throw $Exceptions.toJs($primaryExc);
         }
       }
@@ -107,7 +108,7 @@ class TryWithResource extends Object {
       } finally {
         $primaryExc = $Exceptions.safeClose(thing2, $primaryExc);
         $primaryExc = $Exceptions.safeClose(thing, $primaryExc);
-        if ($primaryExc != null) {
+        if (!$Equality.$same($primaryExc, null)) {
           throw $Exceptions.toJs($primaryExc);
         }
       }
@@ -150,6 +151,7 @@ class TryWithResource extends Object {
     Exception = goog.module.get('java.lang.Exception$impl');
     String = goog.module.get('java.lang.String$impl');
     Throwable = goog.module.get('java.lang.Throwable$impl');
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');

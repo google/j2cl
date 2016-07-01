@@ -22,7 +22,6 @@ import com.google.j2cl.ast.BinaryOperator;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.Node;
-import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.PrefixExpression;
 import com.google.j2cl.ast.PrefixOperator;
 
@@ -45,12 +44,6 @@ public class NormalizeEquality extends NormalizationPass {
       // Don't rewrite primitive comparisons since '==' and '!=' are already good enough.
       if (binaryExpression.getLeftOperand().getTypeDescriptor().isPrimitive()
           || binaryExpression.getRightOperand().getTypeDescriptor().isPrimitive()) {
-        return binaryExpression;
-      }
-
-      // Don't rewrite null literal comparisons since '==' and '!=' are already good enough.
-      if (binaryExpression.getLeftOperand() instanceof NullLiteral
-          || binaryExpression.getRightOperand() instanceof NullLiteral) {
         return binaryExpression;
       }
 

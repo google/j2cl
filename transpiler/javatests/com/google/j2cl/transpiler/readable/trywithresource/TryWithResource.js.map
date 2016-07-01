@@ -21,7 +21,7 @@
         }
       } finally {
         $primaryExc = $Exceptions.safeClose(thing, $primaryExc);
-        if ($primaryExc != null) {
+        if (!$Equality.$same($primaryExc, null)) {
           throw $Exceptions.toJs($primaryExc);
         }
       }]
@@ -38,7 +38,7 @@
 [UNKNOWN] => [throw $Exceptions.toJs($exceptionFromTry);]
 [UNKNOWN] => [throw $Exceptions.toJs($exceptionFromTry);]
 [UNKNOWN] => [$primaryExc = $Exceptions.safeClose(thing, $primaryExc);]
-[UNKNOWN] => [if ($primaryExc != null) {
+[UNKNOWN] => [if (!$Equality.$same($primaryExc, null)) {
           throw $Exceptions.toJs($primaryExc);
         }]
 [UNKNOWN] => [throw $Exceptions.toJs($primaryExc);]
@@ -68,7 +68,7 @@
       } finally {
         $primaryExc = $Exceptions.safeClose(thing2, $primaryExc);
         $primaryExc = $Exceptions.safeClose(thing, $primaryExc);
-        if ($primaryExc != null) {
+        if (!$Equality.$same($primaryExc, null)) {
           throw $Exceptions.toJs($primaryExc);
         }
       }
@@ -99,7 +99,7 @@
       } finally {
         $primaryExc = $Exceptions.safeClose(thing2, $primaryExc);
         $primaryExc = $Exceptions.safeClose(thing, $primaryExc);
-        if ($primaryExc != null) {
+        if (!$Equality.$same($primaryExc, null)) {
           throw $Exceptions.toJs($primaryExc);
         }
       }]
@@ -119,7 +119,7 @@
 [UNKNOWN] => [throw $Exceptions.toJs($exceptionFromTry);]
 [UNKNOWN] => [$primaryExc = $Exceptions.safeClose(thing2, $primaryExc);]
 [UNKNOWN] => [$primaryExc = $Exceptions.safeClose(thing, $primaryExc);]
-[UNKNOWN] => [if ($primaryExc != null) {
+[UNKNOWN] => [if (!$Equality.$same($primaryExc, null)) {
           throw $Exceptions.toJs($primaryExc);
         }]
 [UNKNOWN] => [throw $Exceptions.toJs($primaryExc);]

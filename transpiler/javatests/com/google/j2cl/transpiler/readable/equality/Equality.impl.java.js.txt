@@ -60,8 +60,10 @@ class Equality extends Object {
               !$Equality.$same(Object.$create(), Object.$create()));
     }
     {
-      $Asserts.$enabled() && $Asserts.$assert(null != Object.$create());
-      $Asserts.$enabled() && $Asserts.$assert(Object.$create() != null);
+      $Asserts.$enabled() &&
+          $Asserts.$assert(!$Equality.$same(null, Object.$create()));
+      $Asserts.$enabled() &&
+          $Asserts.$assert(!$Equality.$same(Object.$create(), null));
     }
   }
 

@@ -15,6 +15,7 @@ let SimpleEnum = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simple
 let SimpleEnum2$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2.$Anonymous1$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
@@ -121,9 +122,10 @@ class SimpleEnum2 extends Enum {
    */
   static m_valueOf__java_lang_String(name) {
     SimpleEnum2.$clinit();
-    if (SimpleEnum2
-            .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2_ ==
-        null) {
+    if ($Equality.$same(
+            SimpleEnum2
+                .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2_,
+            null)) {
       SimpleEnum2
           .$f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2_ =
           /**@type {$global_Object<?string, !SimpleEnum2>} */ (
@@ -292,6 +294,7 @@ class SimpleEnum2 extends Enum {
         'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2.$Anonymous1$impl');
     Class = goog.module.get('java.lang.Class$impl');
     String = goog.module.get('java.lang.String$impl');
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $Enums = goog.module.get('vmbootstrap.Enums$impl');

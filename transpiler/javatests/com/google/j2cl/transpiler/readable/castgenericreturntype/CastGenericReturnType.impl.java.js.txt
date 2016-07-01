@@ -13,6 +13,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 
 
 /**
@@ -69,7 +70,7 @@ class CastGenericReturnType extends Object {
   static m_tightenType__com_google_j2cl_transpiler_readable_castgenericreturntype_CastGenericReturnType(
       foo) {
     CastGenericReturnType.$clinit();
-    if (foo != null) {
+    if (!$Equality.$same(foo, null)) {
       return /**@type {CastGenericReturnType<CastGenericReturnType<?string>>} */
           (CastGenericReturnType.m_inferGeneric__java_lang_Object(foo));
     }
@@ -103,6 +104,7 @@ class CastGenericReturnType extends Object {
   static $clinit() {
     Class = goog.module.get('java.lang.Class$impl');
     String = goog.module.get('java.lang.String$impl');
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
     Object.$clinit();
   }
 
