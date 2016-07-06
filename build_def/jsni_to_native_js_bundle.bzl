@@ -62,7 +62,7 @@ _jsni_to_j2cl_converter = rule(
     attrs={
         "srcs": attr.label_list(
             mandatory=True,
-            allow_files=FileType([".java"]),
+            allow_files=[".java"],
         ),
         "debug": attr.bool(default=False),
         # Uh-oh: jsni_to_j2cl_converter needs to depend on

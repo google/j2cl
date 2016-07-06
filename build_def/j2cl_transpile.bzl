@@ -121,13 +121,13 @@ Args:
 #   transpiler: J2CL compiler jar to use.
 j2cl_transpile = rule(
     attrs={
-        "deps": attr.label_list(allow_files=FileType([".jar"])),
+        "deps": attr.label_list(allow_files=[".jar"]),
         "srcs": attr.label_list(
             mandatory=True,
-            allow_files=FileType([".java", ".srcjar"]),
+            allow_files=[".java", ".srcjar"],
         ),
         "native_srcs_zips": attr.label_list(
-            allow_files=FileType([".zip"]),
+            allow_files=[".zip"],
         ),
         "readable_source_maps": attr.bool(default=False),
         "declare_legacy_namespace": attr.bool(default=False),
