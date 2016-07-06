@@ -80,23 +80,22 @@ js_binary(
     deps = [":J2clAjdJSCompiler_library"],
 )
 
-# TODO(stalcup): enable when twerth@ cuts an AJD release on 7/4/2016.
-## ********************************************
-## Some zip libraries contain duplicate provides.
-#
-#js_library(
-#    name = "J2clDupeAjdJSCompiler_library",
-#    deps_mgmt = "closure",  # Turns on AJD.
-#    deps = [":dupe_launcher"],
-#)
-#
-#js_binary(
-#    name = "J2clDupeAjdJSCompiler",
-#    srcs = ["Point.js"],
-#    compiler = "//javascript/tools/jscompiler:head",
-#    defs = J2CL_UNOPTIMIZED_DEFS,
-#    deps = [":J2clDupeAjdJSCompiler_library"],
-#)
+# ********************************************
+# Some zip libraries contain duplicate provides.
+
+js_library(
+    name = "J2clDupeAjdJSCompiler_library",
+    deps_mgmt = "closure",  # Turns on AJD.
+    deps = [":dupe_launcher"],
+)
+
+js_binary(
+    name = "J2clDupeAjdJSCompiler",
+    srcs = ["Point.js"],
+    compiler = "//javascript/tools/jscompiler:head",
+    defs = J2CL_UNOPTIMIZED_DEFS,
+    deps = [":J2clDupeAjdJSCompiler_library"],
+)
 
 # ********************************************
 
@@ -181,46 +180,45 @@ mss_js_compiled_module_set_flat_files(
     source_filegroup = ":J2clAjdPintoPmfEnhancerMss_filegroup",
 )
 
-# TODO(stalcup): enable when twerth@ cuts an AJD release on 7/4/2016.
-## ********************************************
-## Some zip libraries contain duplicate provides.
-#
-#pinto_module(
-#    name = "J2clDupeAjdPintoPmfEnhancerMss_pinto_module",
-#    deps_mgmt = "closure",  # Turns on AJD.
-#    module_id = "J2clDupeAjdPintoPmfEnhancerMss_pinto_module",
-#    deps = [":dupe_launcher"],
-#)
-#
-#pinto_processed_module_set(
-#    name = "J2clDupeAjdPintoPmfEnhancerMss_processed_module_set",
-#    externs_list = ["//javascript/externs:common"],
-#    prevalent_modules = "J2clDupeAjdPintoPmfEnhancerMss_pinto_module",
-#    deps = [":J2clDupeAjdPintoPmfEnhancerMss_pinto_module"],
-#)
-#
-#assembled_content_app_config(
-#    name = "J2clDupeAjdPintoPmfEnhancerMss_app_config",
-#    config_file = "J2clDupeAjdPintoPmfEnhancerMss.config",
-#)
-#
-#filegroup(
-#    name = "J2clDupeAjdPintoPmfEnhancerMss_filegroup",
-#    data = [
-#        "J2clDupeAjdPintoPmfEnhancerMss_warnings_whitelist.txt",
-#        ":J2clDupeAjdPintoPmfEnhancerMss_pinto_module",
-#        ":J2clDupeAjdPintoPmfEnhancerMss_processed_module_set",
-#        "//javascript/externs:common",
-#    ],
-#)
-#
-#mss_js_compiled_module_set_flat_files(
-#    name = "J2clDupeAjdPintoPmfEnhancerMss",
-#    app_name = "J2clDupeAjdPintoPmfEnhancerMss",
-#    compile_modes = ["optimized"],
-#    config = ":J2clDupeAjdPintoPmfEnhancerMss_app_config",
-#    languages = ["en"],
-#    module_sets = ["J2clDupeAjdPintoPmfEnhancerMss_processed_module_set"],
-#    scs_rowkey_prefix = "/external_content/modulesets/J2clDupeAjdPintoPmfEnhancerMss",
-#    source_filegroup = ":J2clDupeAjdPintoPmfEnhancerMss_filegroup",
-#)
+# ********************************************
+# Some zip libraries contain duplicate provides.
+
+pinto_module(
+    name = "J2clDupeAjdPintoPmfEnhancerMss_pinto_module",
+    deps_mgmt = "closure",  # Turns on AJD.
+    module_id = "J2clDupeAjdPintoPmfEnhancerMss_pinto_module",
+    deps = [":dupe_launcher"],
+)
+
+pinto_processed_module_set(
+    name = "J2clDupeAjdPintoPmfEnhancerMss_processed_module_set",
+    externs_list = ["//javascript/externs:common"],
+    prevalent_modules = "J2clDupeAjdPintoPmfEnhancerMss_pinto_module",
+    deps = [":J2clDupeAjdPintoPmfEnhancerMss_pinto_module"],
+)
+
+assembled_content_app_config(
+    name = "J2clDupeAjdPintoPmfEnhancerMss_app_config",
+    config_file = "J2clDupeAjdPintoPmfEnhancerMss.config",
+)
+
+filegroup(
+    name = "J2clDupeAjdPintoPmfEnhancerMss_filegroup",
+    data = [
+        "J2clDupeAjdPintoPmfEnhancerMss_warnings_whitelist.txt",
+        ":J2clDupeAjdPintoPmfEnhancerMss_pinto_module",
+        ":J2clDupeAjdPintoPmfEnhancerMss_processed_module_set",
+        "//javascript/externs:common",
+    ],
+)
+
+mss_js_compiled_module_set_flat_files(
+    name = "J2clDupeAjdPintoPmfEnhancerMss",
+    app_name = "J2clDupeAjdPintoPmfEnhancerMss",
+    compile_modes = ["optimized"],
+    config = ":J2clDupeAjdPintoPmfEnhancerMss_app_config",
+    languages = ["en"],
+    module_sets = ["J2clDupeAjdPintoPmfEnhancerMss_processed_module_set"],
+    scs_rowkey_prefix = "/external_content/modulesets/J2clDupeAjdPintoPmfEnhancerMss",
+    source_filegroup = ":J2clDupeAjdPintoPmfEnhancerMss_filegroup",
+)
