@@ -383,8 +383,17 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
    * References to some descriptors need to be deferred in some cases since it will cause infinite
    * loops.
    */
-  public interface DescriptorFactory<T> {
-    T create(TypeDescriptor selfTypeDescriptor);
+  public abstract static class DescriptorFactory<T> {
+    private T cachedDescriptor;
+
+    public T getOrCreate(TypeDescriptor selfTypeDescriptor) {
+      if (cachedDescriptor == null) {
+        cachedDescriptor = create(selfTypeDescriptor);
+      }
+      return cachedDescriptor;
+    }
+
+    protected abstract T create(TypeDescriptor selfTypeDescriptor);
   }
 
   private String binaryName;
@@ -509,7 +518,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     if (concreteJsFunctionMethodDescriptorFactory == null) {
       return null;
     }
-    return concreteJsFunctionMethodDescriptorFactory.create(this);
+    return concreteJsFunctionMethodDescriptorFactory.getOrCreate(this);
   }
 
   public int getDimensions() {
@@ -520,7 +529,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     if (enclosingTypeDescriptorFactory == null) {
       return null;
     }
-    return enclosingTypeDescriptorFactory.create(this);
+    return enclosingTypeDescriptorFactory.getOrCreate(this);
   }
 
   public Set<TypeDescriptor> getAllTypeVariables() {
@@ -552,7 +561,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     if (interfacesTypeDescriptorsFactory == null) {
       return ImmutableList.of();
     }
-    return ImmutableList.copyOf(interfacesTypeDescriptorsFactory.create(this));
+    return ImmutableList.copyOf(interfacesTypeDescriptorsFactory.getOrCreate(this));
   }
 
   public List<TypeDescriptor> getIntersectedTypeDescriptors() {
@@ -570,7 +579,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     if (jsFunctionMethodDescriptorFactory == null) {
       return null;
     }
-    return jsFunctionMethodDescriptorFactory.create(this);
+    return jsFunctionMethodDescriptorFactory.getOrCreate(this);
   }
 
   @Override
@@ -642,7 +651,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     if (rawTypeDescriptorFactory == null) {
       return null;
     }
-    return rawTypeDescriptorFactory.create(this);
+    return rawTypeDescriptorFactory.getOrCreate(this);
   }
 
   /**
@@ -663,7 +672,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     if (superTypeDescriptorFactory == null) {
       return null;
     }
-    return superTypeDescriptorFactory.create(this);
+    return superTypeDescriptorFactory.getOrCreate(this);
   }
 
   public List<TypeDescriptor> getTypeArgumentDescriptors() {
@@ -830,7 +839,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     if (declaredMethodDescriptorsFactory == null) {
       return Collections.emptyList();
     }
-    return declaredMethodDescriptorsFactory.create(this);
+    return declaredMethodDescriptorsFactory.getOrCreate(this);
   }
 
   // Used to cache the results of getAllMethods()
