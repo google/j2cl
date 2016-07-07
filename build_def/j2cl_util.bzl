@@ -84,10 +84,15 @@ def generate_zip(name, srcs, pkg):
   )
 
 
-READABLE_OUTPUT_DEFS = [
-    "--property_renaming=OFF",
-    "--pretty_print",
-]
+# Can't disable property renaming with a simple override because of
+# Blaze bug b/28770521.
+def make_output_readable(flags):
+  new_flags = [flag for flag in flags if flag != "--variable_renaming=ALL"]
+  return new_flags + [
+      "--property_renaming=OFF",
+      "--pretty_print",
+  ]
+
 
 load("/javascript/closure/builddefs", "CLOSURE_COMPILER_FLAGS_FULL_TYPED")
 load("/javascript/tools/jscompiler/builddefs/flags",
@@ -103,6 +108,6 @@ J2CL_OPTIMIZED_DEFS = (J2CL_UNOPTIMIZED_DEFS + CLOSURE_COMPILER_FLAGS_FULL_TYPED
                        + ADVANCED_OPTIMIZATIONS_FLAGS)
 
 # TODO(28940369): convert to optimized defs.
-J2CL_TEST_DEFS = J2CL_UNOPTIMIZED_DEFS + READABLE_OUTPUT_DEFS + [
+J2CL_TEST_DEFS = make_output_readable(J2CL_UNOPTIMIZED_DEFS + [
     "--export_test_functions=true",
-]
+])
