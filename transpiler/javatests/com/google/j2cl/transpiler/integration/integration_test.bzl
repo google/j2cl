@@ -73,7 +73,8 @@ def integration_test(
         deps=deps,
         javacopts=[
             "-source 8",
-            "-target 8"
+            "-target 8",
+            "-Xep:SelfComparison:OFF",  # See go/self-comparison-lsc
         ],
         _js_deps=js_deps,
         native_srcs=native_srcs,
