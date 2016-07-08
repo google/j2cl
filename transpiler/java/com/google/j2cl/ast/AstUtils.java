@@ -100,27 +100,25 @@ public class AstUtils {
         .build();
   }
 
-  /**
-   * Create default constructor MethodDescriptor.
-   */
+  /** Create default constructor MethodDescriptor. */
   public static MethodDescriptor createDefaultConstructorDescriptor(
-      TypeDescriptor typeDescriptor,
+      TypeDescriptor enclosingClassTypeDescriptor,
       Visibility visibility,
       TypeDescriptor... parameterTypeDescriptors) {
     JsInfo jsInfo =
-        typeDescriptor.isJsType() && visibility.isPublic()
+        enclosingClassTypeDescriptor.isJsType() && visibility.isPublic()
             ? JsInfo.create(JsMemberType.CONSTRUCTOR, null, null, false)
             : JsInfo.NONE;
     return MethodDescriptor.Builder.fromDefault()
         .setVisibility(visibility)
-        .setEnclosingClassTypeDescriptor(typeDescriptor)
-        .setMethodName(typeDescriptor.getBinaryClassName())
+        .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
+        .setMethodName(enclosingClassTypeDescriptor.getBinaryClassName())
         .setIsConstructor(true)
         .setParameterTypeDescriptors(Arrays.asList(parameterTypeDescriptors))
         .setJsInfo(jsInfo)
         .build();
   }
-  
+
   /**
    * Returns the constructor invocation (super call or this call) in a specified constructor, or
    * returns null if it does not have one.
