@@ -6,7 +6,9 @@
 goog.provide('jre');
 
 /** @define {string} */
-goog.define('jre.checkedMode', goog.DEBUG ? 'ENABLED' : 'DISABLED');
+goog.define('jre.debugMode', goog.DEBUG ? 'ENABLED' : 'DISABLED');
+/** @define {string} */
+goog.define('jre.checkedMode', jre.debugMode);
 
 
 goog.provide('jre.checks');
@@ -25,11 +27,11 @@ goog.define('jre.checks.type', 'AUTO');
 goog.define('jre.checks.critical', 'AUTO');
 
 
-goog.provide('jre.logging');
-
-goog.require('goog.log');
+// TODO(goktug): rename to jre.logging
+goog.provide('gwt.logging');
 
 /** @define {string} */
-goog.define('jre.logging.logLevel', goog.log.ENABLED ? 'ALL' : 'SEVERE');
+goog.define('gwt.logging.simpleConsoleHandler', "ENABLED");
 /** @define {string} */
-goog.define('jre.logging.simpleConsoleHandler', "ENABLED");
+goog.define(
+    'gwt.logging.enabled', jre.debugMode == 'ENABLED' ? 'TRUE' : 'SEVERE');

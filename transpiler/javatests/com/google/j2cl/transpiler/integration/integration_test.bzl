@@ -53,7 +53,7 @@ def integration_test(
       "ASSERTIONS_ENABLED_" : "true",
       "jre.checks.checkLevel" : "'MINIMAL'",
       "jre.checkedMode" : "'DISABLED'",
-      "jre.logging.logLevel" : "'OFF'",
+      "gwt.logging.enabled" : "'FALSE'",
   }
 
   defines.update(closure_defines)
@@ -180,7 +180,7 @@ def integration_test(
             "-setProperty user.agent=safari",
             "-setProperty compiler.stackMode=strip",
             "-setProperty compiler.enum.obfuscate.names=true",
-            "-setProperty jre.logging.logLevel=OFF",
+            "-setProperty gwt.logging.enabled=FALSE",
             "-setProperty document.compatMode.severity=IGNORE",
             "-setProperty user.agent.runtimeWarning=false",
             "-setProperty jre.checks.checkLevel=MINIMAL",
