@@ -28,7 +28,7 @@ class Casts {
 
     // TODO(goktug) remove isTypeCheck after JsCompiler can remove calls to
     // castTypeIsInstance when the return is unused.
-    if (InternalPreconditions.m_isTypeChecked()) {
+    if (InternalPreconditions.m_isTypeChecked__()) {
       InternalPreconditions.m_checkType__boolean(
           instance == null || castTypeIsInstance(instance));
     }

@@ -167,7 +167,7 @@ class Arrays {
 
     // TODO(goktug) remove m_isTypeChecked when $canSet_ could be marked or
     // proved as side effect free.
-    if (InternalPreconditions.m_isTypeChecked()) {
+    if (InternalPreconditions.m_isTypeChecked__()) {
       InternalPreconditions.m_checkArrayType__boolean(
           value == null || Arrays.$canSet_(array, index, value));
     }
@@ -349,7 +349,7 @@ class Arrays {
    */
   static m_toString__java_lang_Object(obj) {
     Arrays.$clinit();
-    return Arrays.m_getClass__java_lang_Object(obj).m_getName() + '@' +
+    return Arrays.m_getClass__java_lang_Object(obj).m_getName__() + '@' +
            Integer.m_toHexString__int(Hashing.$getHashCode(obj));
   }
 
@@ -375,7 +375,7 @@ class Arrays {
    */
   static $throwArrayIndexOutOfBoundsException() {
     Arrays.$clinit();
-    throw Exceptions.toJs(ArrayIndexOutOfBoundsException.$create());
+    throw Exceptions.toJs(ArrayIndexOutOfBoundsException.$create__());
   }
 
   /**
@@ -386,7 +386,7 @@ class Arrays {
    */
   static $throwNullPointerException() {
     Arrays.$clinit();
-    throw Exceptions.toJs(NullPointerException.$create());
+    throw Exceptions.toJs(NullPointerException.$create__());
   }
 
   /**

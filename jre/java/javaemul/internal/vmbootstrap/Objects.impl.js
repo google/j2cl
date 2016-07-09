@@ -54,7 +54,7 @@ class Objects {
 
     // Objects: use the custom 'hashCode' if it exists.
     if (obj instanceof Object) {
-      return obj.m_hashCode();
+      return obj.m_hashCode__();
     } else if (obj.hashCode) {
       return obj.hashCode();
     }

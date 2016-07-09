@@ -22,7 +22,7 @@ let LongUtils = goog.require('vmbootstrap.LongUtils$impl');
  * @return {function(!Long, !Long):number}
  * @public
  */
-LongCompareHolder.m_getLongComparator = function() {
+LongCompareHolder.m_getLongComparator__ = function() {
   LongCompareHolder.$clinit();
   return LongUtils.$compare;
 };

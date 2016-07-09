@@ -138,9 +138,6 @@ public class ManglingNameUtils {
   }
 
   private static String getMangledParameterSignature(MethodDescriptor methodDescriptor) {
-    if (methodDescriptor.getParameterTypeDescriptors().isEmpty()) {
-      return "";
-    }
     return "__" + Joiner.on("__").join(getMangledParameterTypes(methodDescriptor));
   }
 

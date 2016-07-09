@@ -1,7 +1,7 @@
 /**
  * @public
  */
-Throwable.prototype.m_captureStackTrace_$p_java_lang_Throwable = function() {
+Throwable.prototype.m_captureStackTrace___$p_java_lang_Throwable = function() {
   // Only supporting modern browsers so generating stack by traversing callees
   // is not necessary.
 };
@@ -10,7 +10,7 @@ Throwable.prototype.m_captureStackTrace_$p_java_lang_Throwable = function() {
  * @return {Array<StackTraceElement>}
  * @public
  */
-Throwable.prototype.m_constructJavaStackTrace_$p_java_lang_Throwable =
+Throwable.prototype.m_constructJavaStackTrace___$p_java_lang_Throwable =
     function() {
   var stackTraceElements = $Arrays.$create([0], StackTraceElement);
   var e = this.backingJsObject;

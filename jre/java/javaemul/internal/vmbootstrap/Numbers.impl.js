@@ -28,7 +28,7 @@ class Numbers {
     if (typeof obj == 'number') {
       return Double.m_byteValue__java_lang_Double(/**@type {number}*/ (obj));
     }
-    return obj.m_byteValue();
+    return obj.m_byteValue__();
   }
 
   /**
@@ -41,7 +41,7 @@ class Numbers {
     if (typeof obj == 'number') {
       return Double.m_doubleValue__java_lang_Double(/**@type {number}*/ (obj));
     }
-    return obj.m_doubleValue();
+    return obj.m_doubleValue__();
   }
 
   /**
@@ -54,7 +54,7 @@ class Numbers {
     if (typeof obj == 'number') {
       return Double.m_floatValue__java_lang_Double(/**@type {number}*/ (obj));
     }
-    return obj.m_floatValue();
+    return obj.m_floatValue__();
   }
 
   /**
@@ -67,7 +67,7 @@ class Numbers {
     if (typeof obj == 'number') {
       return Double.m_intValue__java_lang_Double(/**@type {number}*/ (obj));
     }
-    return obj.m_intValue();
+    return obj.m_intValue__();
   }
 
   /**
@@ -80,7 +80,7 @@ class Numbers {
     if (typeof obj == 'number') {
       return Double.m_longValue__java_lang_Double(/**@type {number}*/ (obj));
     }
-    return obj.m_longValue();
+    return obj.m_longValue__();
   }
 
   /**
@@ -93,7 +93,7 @@ class Numbers {
     if (typeof obj == 'number') {
       return Double.m_shortValue__java_lang_Double(/**@type {number}*/ (obj));
     }
-    return obj.m_shortValue();
+    return obj.m_shortValue__();
   }
 
   /**

@@ -19,7 +19,7 @@ class Enums {
   static createMapFromValues(values) {
     let map = {};
     for (var i = 0; i < values.length; i++) {
-      let name = /** @type {Enum} */ (values[i]).m_name();
+      let name = /** @type {Enum} */ (values[i]).m_name__();
       map[name] = values[i];
     }
     return map;
@@ -36,11 +36,11 @@ class Enums {
   static getValueFromNameAndMap(name, map) {
     Enums.$clinit();
     if (name == null) {
-      throw Exceptions.toJs(IllegalArgumentException.$create());
+      throw Exceptions.toJs(IllegalArgumentException.$create__());
     }
     let enumValue = map[name];
     if (enumValue == undefined) {
-      throw Exceptions.toJs(IllegalArgumentException.$create());
+      throw Exceptions.toJs(IllegalArgumentException.$create__());
     }
     return enumValue;
   }

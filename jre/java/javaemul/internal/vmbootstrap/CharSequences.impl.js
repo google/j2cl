@@ -25,7 +25,7 @@ class CharSequences {
       obj = /**@type {string}*/ (obj);
       return String.m_length__java_lang_String(obj);
     }
-    return obj.m_length();
+    return obj.m_length__();
   }
 
   /**

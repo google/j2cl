@@ -25,7 +25,7 @@ class Exceptions {
       return currentException;
     }
     try {
-      resource.m_close();
+      resource.m_close__();
     } catch (e) {
       e = Exceptions.toJava(e);
       if (currentException == null) {
