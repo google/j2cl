@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.base.Preconditions;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
@@ -285,105 +284,6 @@ public class AstUtils {
   public static Variable createOuterParamByField(Field field) {
     return new Variable(
         field.getDescriptor().getName(), field.getDescriptor().getTypeDescriptor(), true, true);
-  }
-
-  /**
-   * Returns the MethodDescriptor for the wrapper function in outer class that creates its inner
-   * class by calling the corresponding inner class constructor.
-   */
-  public static MethodDescriptor createMethodDescriptorForInnerClassCreation(
-      final TypeDescriptor outerclassTypeDescriptor,
-      MethodDescriptor innerclassConstructorDescriptor) {
-    String methodName = CREATE_PREFIX + innerclassConstructorDescriptor.getName();
-    TypeDescriptor returnTypeDescriptor =
-        innerclassConstructorDescriptor.getEnclosingClassTypeDescriptor();
-    // if the inner class is a generic type, add its type parameters to the wrapper method.
-    List<TypeDescriptor> typeParameterDescriptors = new ArrayList<>();
-    TypeDescriptor innerclassTypeDescriptor =
-        innerclassConstructorDescriptor.getEnclosingClassTypeDescriptor();
-    if (innerclassTypeDescriptor.isParameterizedType()) {
-      typeParameterDescriptors.addAll(
-          Lists.newArrayList(
-              Iterables.filter(
-                  // filters out the type parameters declared in the outer class.
-                  innerclassTypeDescriptor.getTypeArgumentDescriptors(),
-                  new Predicate<TypeDescriptor>() {
-                    @Override
-                    public boolean apply(TypeDescriptor typeParameter) {
-                      return !outerclassTypeDescriptor
-                          .getTypeArgumentDescriptors()
-                          .contains(typeParameter);
-                    }
-                  })));
-    }
-
-    MethodDescriptor declarationMethodDescriptor =
-        MethodDescriptor.Builder.fromDefault()
-            .setVisibility(innerclassConstructorDescriptor.getVisibility())
-            .setEnclosingClassTypeDescriptor(outerclassTypeDescriptor)
-            .setMethodName(methodName)
-            .setReturnTypeDescriptor(
-                innerclassConstructorDescriptor
-                    .getDeclarationMethodDescriptor()
-                    .getEnclosingClassTypeDescriptor())
-            .setParameterTypeDescriptors(
-                innerclassConstructorDescriptor
-                    .getDeclarationMethodDescriptor()
-                    .getParameterTypeDescriptors())
-            .setTypeParameterTypeDescriptors(typeParameterDescriptors)
-            .build();
-
-    return MethodDescriptor.Builder.fromDefault()
-        .setVisibility(innerclassConstructorDescriptor.getVisibility())
-        .setEnclosingClassTypeDescriptor(outerclassTypeDescriptor)
-        .setMethodName(methodName)
-        .setReturnTypeDescriptor(returnTypeDescriptor)
-        .setDeclarationMethodDescriptor(declarationMethodDescriptor)
-        .setParameterTypeDescriptors(innerclassConstructorDescriptor.getParameterTypeDescriptors())
-        .setTypeParameterTypeDescriptors(typeParameterDescriptors)
-        .build();
-  }
-
-  /**
-   * Returns the Method for the wrapper function in outer class that creates its inner class by
-   * calling the corresponding inner class constructor.
-   */
-  public static Method createMethodForInnerClassCreation(
-      final TypeDescriptor outerclassTypeDescriptor, Method innerclassConstructor) {
-    MethodDescriptor innerclassConstructorDescriptor = innerclassConstructor.getDescriptor();
-    MethodDescriptor methodDescriptor =
-        createMethodDescriptorForInnerClassCreation(
-            outerclassTypeDescriptor, innerclassConstructorDescriptor);
-
-    // create arguments.
-    List<Expression> arguments = new ArrayList<>();
-    for (Variable parameter : innerclassConstructor.getParameters()) {
-      arguments.add(new VariableReference(parameter));
-    }
-    // adds 'this' as the last argument.
-    arguments.add(new ThisReference(outerclassTypeDescriptor));
-
-    // adds 'this' as the last parameter.
-    MethodDescriptor newInnerclassConstructorDescriptorDeclaration =
-        MethodDescriptor.Builder.from(
-                innerclassConstructorDescriptor.getDeclarationMethodDescriptor())
-            .addParameter(outerclassTypeDescriptor)
-            .build();
-    MethodDescriptor newInnerclassConstructorDescriptor =
-        MethodDescriptor.Builder.from(innerclassConstructorDescriptor)
-            .setDeclarationMethodDescriptor(newInnerclassConstructorDescriptorDeclaration)
-            .addParameter(outerclassTypeDescriptor)
-            .build();
-
-    return Method.Builder.fromDefault()
-        .setMethodDescriptor(methodDescriptor)
-        .setParameters(innerclassConstructor.getParameters())
-        // return new InnerClass();
-        .addStatements(
-            new ReturnStatement(
-                new NewInstance(null, newInnerclassConstructorDescriptor, arguments),
-                innerclassConstructorDescriptor.getReturnTypeDescriptor()))
-        .build();
   }
 
   /**
