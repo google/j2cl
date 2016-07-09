@@ -18,10 +18,10 @@ public class ArrayListsTest {
 
   @JsType(isNative = true, name = "ArrayList", namespace = "java.util")
   interface HasArrayListMethods {
-    @JsProperty(name = "m_get__int")
+    @JsProperty(name = "get")
     public Object getMethod();
 
-    @JsProperty(name = "m_set__int__java_lang_Object")
+    @JsProperty(name = "set")
     public Object setMethod();
   }
 
