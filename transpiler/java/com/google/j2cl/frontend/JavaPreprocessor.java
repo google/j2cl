@@ -17,7 +17,6 @@ package com.google.j2cl.frontend;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.j2cl.errors.Errors;
 
@@ -34,7 +33,6 @@ import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.annotation.Nullable;
 
@@ -47,13 +45,6 @@ import javax.annotation.Nullable;
  * so won't go thorough this preprocessor.
  */
 public class JavaPreprocessor {
-  private static final ImmutableMap<String, String> NULLABILITY_ANNOTATION_REPLACEMENTS =
-      ImmutableMap.of(
-          "/*@NullableType*/",
-          "@org.checkerframework.checker.nullness.compatqual.NullableType ",
-          "/*@org.checkerframework.checker.nullness.compatqual.NullableType*/",
-          "@org.checkerframework.checker.nullness.compatqual.NullableType ");
-
   private Map<String, String> compilerOptions;
 
   public JavaPreprocessor(Map<String, String> compilerOptions) {
@@ -116,22 +107,7 @@ public class JavaPreprocessor {
 
   @VisibleForTesting
   String preprocessFile(String fileContent) {
-    String newFileContent = commentGwtIncompatibleNodes(fileContent);
-    newFileContent = uncommentNullabilityAnnotations(newFileContent);
-    return newFileContent;
-  }
-
-  /**
-   * Uncomments all the annotations and code in comment. This is needed since those
-   * annotations are not supported in Java 7 or below.
-   */
-  String uncommentNullabilityAnnotations(String fileContent) {
-    for (Entry<String, String> annotationReplacement :
-        NULLABILITY_ANNOTATION_REPLACEMENTS.entrySet()) {
-      fileContent =
-          fileContent.replace(annotationReplacement.getKey(), annotationReplacement.getValue());
-    }
-    return fileContent;
+    return commentGwtIncompatibleNodes(fileContent);
   }
 
   /**

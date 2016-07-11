@@ -40,7 +40,6 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 
-import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 
@@ -258,14 +257,8 @@ public class BridgeMethodsCreator {
       ITypeBinding typeBinding, IMethodBinding methodBinding, ITypeBinding returnType) {
     checkArgument(!typeBinding.isInterface());
 
-    JdtUtils.Nullability defaultNullability =
-        JdtUtils.getTypeDefaultNullability(methodBinding.getDeclaringClass());
-    TypeDescriptor enclosingClassTypeDescriptor =
-        JdtUtils.createTypeDescriptorWithNullability(
-            typeBinding, new IAnnotationBinding[0], defaultNullability);
-    TypeDescriptor returnTypeDescriptor =
-        JdtUtils.createTypeDescriptorWithNullability(
-            returnType, new IAnnotationBinding[0], defaultNullability);
+    TypeDescriptor enclosingClassTypeDescriptor = JdtUtils.createTypeDescriptor(typeBinding);
+    TypeDescriptor returnTypeDescriptor = JdtUtils.createTypeDescriptor(returnType);
 
     MethodDescriptor originalMethodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
 
@@ -327,9 +320,7 @@ public class BridgeMethodsCreator {
           new Variable(
               "arg" + i,
               JdtUtils.createTypeDescriptorWithNullability(
-                  bridgeMethod.getParameterTypes()[i],
-                  bridgeMethod.getParameterAnnotations(i),
-                  JdtUtils.getTypeDefaultNullability(targetMethod.getDeclaringClass())),
+                  bridgeMethod.getParameterTypes()[i], bridgeMethod.getParameterAnnotations(i)),
               false,
               true);
       parameters.add(parameter);

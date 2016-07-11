@@ -154,16 +154,13 @@ public class CompilationUnitBuilder {
       this.jdtCompilationUnit = jdtCompilationUnit;
 
       currentSourceFile = sourceFilePath;
-      j2clCompilationUnit =
-          new CompilationUnit(
-              sourceFilePath, JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit));
+      String packageName = JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit);
+      j2clCompilationUnit = new CompilationUnit(sourceFilePath, packageName);
       // Records information about package-info files supplied as source code.
       if (currentSourceFile.endsWith("package-info.java")
           && jdtCompilationUnit.getPackage() != null) {
-        packageInfoCache.setInfo(
-            PackageInfoCache.SOURCE_CLASS_PATH_ENTRY,
-            JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit),
-            jdtCompilationUnit.getPackage().annotations());
+        packageInfoCache.setPackageAnnotations(
+            packageName, jdtCompilationUnit.getPackage().annotations());
       }
       for (Object object : jdtCompilationUnit.types()) {
         AbstractTypeDeclaration abstractTypeDeclaration = (AbstractTypeDeclaration) object;
@@ -377,11 +374,7 @@ public class CompilationUnitBuilder {
       for (Object element : methodDeclaration.parameters()) {
         SingleVariableDeclaration parameter = (SingleVariableDeclaration) element;
         IVariableBinding parameterBinding = parameter.resolveBinding();
-        Variable j2clParameter =
-            JdtUtils.createVariable(
-                parameterBinding,
-                JdtUtils.getTypeDefaultNullability(
-                    methodDeclaration.resolveBinding().getDeclaringClass()));
+        Variable j2clParameter = JdtUtils.createVariable(parameterBinding);
         parameters.add(j2clParameter);
         variableByJdtBinding.put(parameterBinding, j2clParameter);
       }
@@ -1555,9 +1548,7 @@ public class CompilationUnitBuilder {
           statement.getExpression() == null ? null : convert(statement.getExpression());
       TypeDescriptor returnTypeDescriptor =
           JdtUtils.createTypeDescriptorWithNullability(
-              currentMethodBinding.getReturnType(),
-              currentMethodBinding.getAnnotations(),
-              JdtUtils.getTypeDefaultNullability(currentMethodBinding.getDeclaringClass()));
+              currentMethodBinding.getReturnType(), currentMethodBinding.getAnnotations());
       return new ReturnStatement(expression, returnTypeDescriptor);
     }
 
@@ -1866,11 +1857,7 @@ public class CompilationUnitBuilder {
     private VariableDeclarationFragment convert(
         org.eclipse.jdt.core.dom.VariableDeclarationFragment variableDeclarationFragment) {
       IVariableBinding variableBinding = variableDeclarationFragment.resolveBinding();
-      Variable variable =
-          JdtUtils.createVariable(
-              variableBinding,
-              JdtUtils.getTypeDefaultNullability(
-                  JdtUtils.findCurrentTypeBinding(variableDeclarationFragment)));
+      Variable variable = JdtUtils.createVariable(variableBinding);
       if (!variable.getTypeDescriptor().isTypeVariable()
           && !variable.getTypeDescriptor().isPrimitive()) {
         // Local variables default to nullable. A flow analysis pass will later tighten their type

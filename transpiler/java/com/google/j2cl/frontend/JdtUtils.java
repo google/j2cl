@@ -114,9 +114,7 @@ public class JdtUtils {
 
     TypeDescriptor thisTypeDescriptor =
         createTypeDescriptorWithNullability(
-            variableBinding.getType(),
-            variableBinding.getAnnotations(),
-            getTypeDefaultNullability(variableBinding.getDeclaringClass()));
+            variableBinding.getType(), variableBinding.getAnnotations());
 
     JsInfo jsInfo = JsInteropUtils.getJsInfo(variableBinding);
     boolean isJsOverlay = JsInteropUtils.isJsOverlay(variableBinding);
@@ -132,11 +130,13 @@ public class JdtUtils {
         isCompileTimeConstant);
   }
 
-  static Variable createVariable(IVariableBinding variableBinding, Nullability defaultNullability) {
+  static Variable createVariable(IVariableBinding variableBinding) {
     String name = variableBinding.getName();
     TypeDescriptor typeDescriptor =
-        createTypeDescriptorWithNullability(
-            variableBinding.getType(), variableBinding.getAnnotations(), defaultNullability);
+        variableBinding.isParameter()
+            ? createTypeDescriptorWithNullability(
+                variableBinding.getType(), variableBinding.getAnnotations())
+            : createTypeDescriptor(variableBinding.getType());
     boolean isFinal = isFinal(variableBinding);
     boolean isParameter = variableBinding.isParameter();
     return new Variable(name, typeDescriptor, isFinal, isParameter);
@@ -621,8 +621,7 @@ public class JdtUtils {
   // TODO(simionato): Delete this method and make all the callers use
   // createTypeDescriptorWithNullability.
   public static TypeDescriptor createTypeDescriptor(ITypeBinding typeBinding) {
-    return createTypeDescriptorWithNullability(
-        typeBinding, new IAnnotationBinding[0], Nullability.NULL);
+    return createTypeDescriptorWithNullability(typeBinding, new IAnnotationBinding[0]);
   }
 
   /**
@@ -632,9 +631,7 @@ public class JdtUtils {
    * @param elementAnnotations the annotations on the element
    */
   public static TypeDescriptor createTypeDescriptorWithNullability(
-      ITypeBinding typeBinding,
-      IAnnotationBinding[] elementAnnotations,
-      Nullability defaultNullabilityForCompilationUnit) {
+      ITypeBinding typeBinding, IAnnotationBinding[] elementAnnotations) {
     if (typeBinding == null) {
       return null;
     }
@@ -643,30 +640,22 @@ public class JdtUtils {
       return createIntersectionType(typeBinding);
     }
     if (typeBinding.isArray()) {
-      TypeDescriptor leafTypeDescriptor =
-          createTypeDescriptorWithNullability(
-              typeBinding.getElementType(),
-              new IAnnotationBinding[0],
-              defaultNullabilityForCompilationUnit);
+      TypeDescriptor leafTypeDescriptor = createTypeDescriptor(typeBinding.getElementType());
       descriptor = TypeDescriptors.getForArray(leafTypeDescriptor, typeBinding.getDimensions());
     } else if (typeBinding.isParameterizedType()) {
       List<TypeDescriptor> typeArgumentsDescriptors = new ArrayList<>();
       for (ITypeBinding typeArgumentBinding : typeBinding.getTypeArguments()) {
-        typeArgumentsDescriptors.add(
-            createTypeDescriptorWithNullability(
-                typeArgumentBinding,
-                new IAnnotationBinding[0],
-                defaultNullabilityForCompilationUnit));
+        typeArgumentsDescriptors.add(createTypeDescriptor(typeArgumentBinding));
       }
       descriptor = createTypeDescriptor(typeBinding, typeArgumentsDescriptors);
     } else {
       descriptor = createTypeDescriptor(typeBinding, null);
     }
 
-    if (isNullable(typeBinding, elementAnnotations, defaultNullabilityForCompilationUnit)) {
-      return TypeDescriptors.toNullable(descriptor);
+    if (!isNullable(typeBinding, elementAnnotations)) {
+      return TypeDescriptors.toNonNullable(descriptor);
     }
-    return TypeDescriptors.toNonNullable(descriptor);
+    return TypeDescriptors.toNullable(descriptor);
   }
 
   /**
@@ -674,10 +663,10 @@ public class JdtUtils {
    * and if nullability is enabled for the package containing the binding.
    */
   private static boolean isNullable(
-      ITypeBinding typeBinding,
-      IAnnotationBinding[] elementAnnotations,
-      Nullability defaultNullabilityForCompilationUnit) {
-    Preconditions.checkNotNull(defaultNullabilityForCompilationUnit);
+      ITypeBinding typeBinding, IAnnotationBinding[] elementAnnotations) {
+    if (typeBinding.isTypeVariable()) {
+      return true;
+    }
     if (typeBinding.isPrimitive()) {
       return false;
     }
@@ -701,30 +690,7 @@ public class JdtUtils {
       }
     }
 
-    return defaultNullabilityForCompilationUnit == Nullability.NULL
-        && !typeBinding.isTypeVariable();
-  }
-
-  /**
-   * Gets the default nullability for the given type by examining the package-info file in the
-   * type's package in the same class path entry.
-   */
-  public static Nullability getTypeDefaultNullability(ITypeBinding typeBinding) {
-    ITypeBinding topLevelTypeBinding = toTopLevelTypeBinding(typeBinding);
-
-    if (topLevelTypeBinding.isFromSource()) {
-      // Let the PackageInfoCache know that this class is Source, otherwise it would have to rummage
-      // around in the class path to figure it out and it might even come up with the wrong answer
-      // for example if this class has also been globbed into some other library that is a
-      // dependency of this one.
-      PackageInfoCache.get().markAsSource(topLevelTypeBinding.getBinaryName());
-    }
-
-    // For a top level class the binary and source name are the same.
-    String sourceName = topLevelTypeBinding.getBinaryName();
-
-    boolean nullabilityEnabled = PackageInfoCache.get().isNullabilityEnabled(sourceName);
-    return nullabilityEnabled ? Nullability.NOT_NULL : Nullability.NULL;
+    return true;
   }
 
   /**
@@ -893,25 +859,19 @@ public class JdtUtils {
         isConstructor
             ? createTypeDescriptor(methodBinding.getDeclaringClass()).getBinaryClassName()
             : methodBinding.getName();
-    final Nullability defaultNullabilityForPackage =
-        getTypeDefaultNullability(methodBinding.getDeclaringClass());
 
     JsInfo jsInfo = computeJsInfo(methodBinding);
 
     TypeDescriptor returnTypeDescriptor =
         createTypeDescriptorWithNullability(
-            methodBinding.getReturnType(),
-            methodBinding.getAnnotations(),
-            defaultNullabilityForPackage);
+            methodBinding.getReturnType(), methodBinding.getAnnotations());
 
     // generate parameters type descriptors.
     List<TypeDescriptor> parameterTypeDescriptors = new ArrayList<>();
     for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
       TypeDescriptor descriptor =
           createTypeDescriptorWithNullability(
-              methodBinding.getParameterTypes()[i],
-              methodBinding.getParameterAnnotations(i),
-              defaultNullabilityForPackage);
+              methodBinding.getParameterTypes()[i], methodBinding.getParameterAnnotations(i));
       parameterTypeDescriptors.add(descriptor);
     }
 
@@ -1458,15 +1418,6 @@ public class JdtUtils {
 
     PackageInfoCache packageInfoCache = PackageInfoCache.get();
 
-    ITypeBinding topLevelTypeBinding = toTopLevelTypeBinding(typeBinding);
-    if (topLevelTypeBinding.isFromSource()) {
-      // Let the PackageInfoCache know that this class is Source, otherwise it would have to rummage
-      // around in the class path to figure it out and it might even come up with the wrong answer
-      // for example if this class has also been globbed into some other library that is a
-      // dependency of this one.
-      PackageInfoCache.get().markAsSource(topLevelTypeBinding.getBinaryName());
-    }
-
     DescriptorFactory<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory =
         new DescriptorFactory<MethodDescriptor>() {
           @Override
@@ -1523,16 +1474,17 @@ public class JdtUtils {
 
     boolean isFinal = isFinal(typeBinding);
     boolean isNative = JsInteropAnnotationUtils.isNative(jsTypeAnnotation);
-    boolean isNullable = !typeBinding.isPrimitive() && !typeBinding.isTypeVariable();
+    boolean isNullable = !typeBinding.isPrimitive() || typeBinding.isTypeVariable();
     String jsName = JsInteropAnnotationUtils.getJsName(jsTypeAnnotation);
     String jsNamespace = null;
 
     // If a package-info file has specified a JsPackage namespace then it is sugar for setting the
     // jsNamespace of all top level types in that package.
-    boolean isTopLevelType = typeBinding.getDeclaringClass() == null;
+    boolean isTopLevelType =
+        typeBinding.getDeclaringClass() == null && typeBinding.getPackage() != null;
     if (isTopLevelType) {
       String jsPackageNamespace =
-          packageInfoCache.getJsNamespace(toTopLevelTypeBinding(typeBinding).getBinaryName());
+          packageInfoCache.getJsNamespace(typeBinding.getPackage().getName());
       if (jsPackageNamespace != null) {
         jsNamespace = jsPackageNamespace;
       }
@@ -1574,16 +1526,12 @@ public class JdtUtils {
         .setEnclosingTypeDescriptorFactory(enclosingTypeDescriptorFactory)
         .setInterfacesTypeDescriptorsFactory(
             new DescriptorFactory<List<TypeDescriptor>>() {
+
               @Override
               public List<TypeDescriptor> create(TypeDescriptor selfTypeDescriptor) {
                 ImmutableList.Builder<TypeDescriptor> typeDescriptors = ImmutableList.builder();
                 for (ITypeBinding interfaceBinding : typeBinding.getInterfaces()) {
-                  TypeDescriptor interfaceType =
-                      createTypeDescriptorWithNullability(
-                          interfaceBinding,
-                          new IAnnotationBinding[0],
-                          getTypeDefaultNullability(typeBinding));
-                  typeDescriptors.add(interfaceType);
+                  typeDescriptors.add(createTypeDescriptor(interfaceBinding));
                 }
                 return typeDescriptors.build();
               }
@@ -1616,10 +1564,7 @@ public class JdtUtils {
             new DescriptorFactory<TypeDescriptor>() {
               @Override
               public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
-                return createTypeDescriptorWithNullability(
-                    typeBinding.getSuperclass(),
-                    new IAnnotationBinding[0],
-                    getTypeDefaultNullability(typeBinding));
+                return createTypeDescriptor(typeBinding.getSuperclass());
               }
             })
         .setTypeArgumentDescriptors(typeArgumentDescriptors)

@@ -486,6 +486,10 @@ public class TypeDescriptors {
   }
 
   public static TypeDescriptor toNonNullable(TypeDescriptor originalTypeDescriptor) {
+    if (originalTypeDescriptor.isTypeVariable()) {
+      // Type variables are placeholders and do not impose nullability constraints.
+      return originalTypeDescriptor;
+    }
     if (!originalTypeDescriptor.isNullable()) {
       return originalTypeDescriptor;
     }
@@ -494,6 +498,10 @@ public class TypeDescriptors {
   }
 
   public static TypeDescriptor toNullable(TypeDescriptor originalTypeDescriptor) {
+    if (originalTypeDescriptor.isPrimitive()) {
+      // Primitive types are always non nullable.
+      return originalTypeDescriptor;
+    }
     if (originalTypeDescriptor.isNullable()) {
       return originalTypeDescriptor;
     }

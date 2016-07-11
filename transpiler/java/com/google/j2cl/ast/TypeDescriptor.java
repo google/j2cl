@@ -16,6 +16,7 @@
 package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -158,10 +159,10 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     private TypeDescriptor newTypeDescriptor = new TypeDescriptor();
 
     public TypeDescriptor build() {
-      // TODO(tdeegan): We will want to do some verifications here to make sure we are not producing
-      // a TypeDescriptor that doesn't make sense.
-      // For example, we could verify that union types don't have TypeArguments or that only one of
-      // isParametrized() isIntersection() isUnions isTypeVariable() etc hold true.
+      checkState(!newTypeDescriptor.isTypeVariable || newTypeDescriptor.isNullable);
+      checkState(!newTypeDescriptor.isPrimitive || !newTypeDescriptor.isNullable);
+      // TODO(tdeegan): Complete the precondition checks to make sure we are never buiding a
+      // type descriptor that does not make sense.
       return TypeDescriptor.intern(newTypeDescriptor);
     }
 
