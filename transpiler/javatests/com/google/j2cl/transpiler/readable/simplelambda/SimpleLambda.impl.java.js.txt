@@ -40,11 +40,11 @@ class SimpleLambda extends Object {
    * @return {!SimpleLambda}
    * @public
    */
-  static $create() {
+  static $create__() {
     SimpleLambda.$clinit();
     let $instance = new SimpleLambda();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda();
+        .$ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda__();
     return $instance;
   }
 
@@ -53,8 +53,8 @@ class SimpleLambda extends Object {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda() {
-    this.$ctor__java_lang_Object();
+  $ctor__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda__() {
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_simplelambda_SimpleLambda();
   }
 
@@ -62,7 +62,7 @@ class SimpleLambda extends Object {
    * @return {void}
    * @public
    */
-  m_funOuter() {}
+  m_funOuter__() {}
 
   /**
    * @param {MyInterface} intf
@@ -80,7 +80,7 @@ class SimpleLambda extends Object {
    * @return {void}
    * @public
    */
-  m_testLambdaNoCapture() {
+  m_testLambdaNoCapture__() {
     let result =
         this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(
             SimpleLambda$0foo
@@ -99,7 +99,7 @@ class SimpleLambda extends Object {
    * @return {void}
    * @public
    */
-  m_testLambdaCaptureField() {
+  m_testLambdaCaptureField__() {
     let result =
         this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(
             SimpleLambda$2foo
@@ -112,7 +112,7 @@ class SimpleLambda extends Object {
    * @return {void}
    * @public
    */
-  m_testLambdaCaptureLocal() {
+  m_testLambdaCaptureLocal__() {
     let x = 1;
     let result =
         this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(
@@ -126,7 +126,7 @@ class SimpleLambda extends Object {
    * @return {void}
    * @public
    */
-  m_testLambdaCaptureFieldAndLocal() {
+  m_testLambdaCaptureFieldAndLocal__() {
     let x = 1;
     let result =
         this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(
@@ -140,7 +140,7 @@ class SimpleLambda extends Object {
    * @return {void}
    * @public
    */
-  m_testLambdaCallOuterFunction() {
+  m_testLambdaCallOuterFunction__() {
     let result =
         this.m_test__com_google_j2cl_transpiler_readable_simplelambda_MyInterface__int(
             SimpleLambda$5foo
@@ -153,9 +153,9 @@ class SimpleLambda extends Object {
    * @return {void}
    * @public
    */
-  static m_testLambdaInStaticContext() {
+  static m_testLambdaInStaticContext__() {
     SimpleLambda.$clinit();
-    let f = SimpleLambda$6foo.$create();
+    let f = SimpleLambda$6foo.$create__();
   }
 
   /**

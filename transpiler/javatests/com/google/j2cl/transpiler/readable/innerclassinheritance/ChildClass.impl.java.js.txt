@@ -33,11 +33,11 @@ class ChildClass extends ParentOuter {
    * @return {!ChildClass}
    * @public
    */
-  static $create() {
+  static $create__() {
     ChildClass.$clinit();
     let $instance = new ChildClass();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass();
+        .$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass__();
     return $instance;
   }
 
@@ -46,8 +46,8 @@ class ChildClass extends ParentOuter {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass() {
-    this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentOuter();
+  $ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass__() {
+    this.$ctor__com_google_j2cl_transpiler_readable_innerclassinheritance_ParentOuter__();
     this.$init__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass();
   }
 
@@ -55,17 +55,17 @@ class ChildClass extends ParentOuter {
    * @return {void}
    * @public
    */
-  m_funInOuter() {}
+  m_funInOuter__() {}
 
   /**
    * @return {void}
    * @public
    */
-  m_testLocalClass() {
+  m_testLocalClass__() {
     ChildClass$1LocalClass
         .$create__com_google_j2cl_transpiler_readable_innerclassinheritance_ChildClass(
             this)
-        .m_test();
+        .m_test__();
   }
 
   /**

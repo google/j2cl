@@ -34,11 +34,11 @@ class MultipleAbstractParents extends Object {
    * @return {!MultipleAbstractParents}
    * @public
    */
-  static $create() {
+  static $create__() {
     MultipleAbstractParents.$clinit();
     let $instance = new MultipleAbstractParents();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents();
+        .$ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents__();
     return $instance;
   }
 
@@ -47,8 +47,8 @@ class MultipleAbstractParents extends Object {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents() {
-    this.$ctor__java_lang_Object();
+  $ctor__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents__() {
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_multipleabstractparents_MultipleAbstractParents();
   }
 
@@ -62,18 +62,18 @@ class MultipleAbstractParents extends Object {
     $Asserts.$enabled() &&
         $Asserts.$assert(String.m_equals__java_lang_String__java_lang_Object(
             /**@type {!MultipleAbstractParents$ArrayList<?string>} */ (
-                MultipleAbstractParents$ArrayList.$create())
+                MultipleAbstractParents$ArrayList.$create__())
                 .m_getFoo__java_lang_Object(null),
             'AbstractCollection'));
     $Asserts.$enabled() &&
         $Asserts.$assert(String.m_equals__java_lang_String__java_lang_Object(
-            MultipleAbstractParents$StringList.$create()
+            MultipleAbstractParents$StringList.$create__()
                 .m_getFoo__java_lang_Object(null),
             'AbstractCollection'));
     $Asserts.$enabled() &&
         $Asserts.$assert(String.m_equals__java_lang_String__java_lang_Object(
             (/**@type {MultipleAbstractParents$IStringList} */ ($Casts.to(
-                 MultipleAbstractParents$StringList.$create(),
+                 MultipleAbstractParents$StringList.$create__(),
                  MultipleAbstractParents$IStringList)))
                 .m_getFoo__java_lang_String(null),
             'AbstractCollection'));

@@ -34,11 +34,11 @@ class Main extends Object {
    * @return {!Main}
    * @public
    */
-  static $create() {
+  static $create__() {
     Main.$clinit();
     let $instance = new Main();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main();
+        .$ctor__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main__();
     return $instance;
   }
 
@@ -47,8 +47,8 @@ class Main extends Object {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main() {
-    this.$ctor__java_lang_Object();
+  $ctor__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main__() {
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main();
   }
 
@@ -120,11 +120,11 @@ class Main extends Object {
    * @return {void}
    * @public
    */
-  static m_testParameterTypes() {
+  static m_testParameterTypes__() {
     Main.$clinit();
     let foo =
-        /**@type {function(?string, Integer):?string} */ (Main$B.$create());
-    let bar = Main$A.$create();
+        /**@type {function(?string, Integer):?string} */ (Main$B.$create__());
+    let bar = Main$A.$create__();
     Main.m_callGenericInterface__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$ApplyFunction__java_lang_Object__java_lang_Number(
         foo, 'a', Integer.m_valueOf__int(1));
     Main.m_callGenericInterface__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$ApplyFunction__java_lang_Object__java_lang_Number(
@@ -136,23 +136,24 @@ class Main extends Object {
     Main.m_callParametricWithTypeVariable__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$ApplyFunction__java_lang_Object__java_lang_Number(
         bar, 1.1, 1.1);
     Main.m_callImplementorGeneric__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$B__java_lang_Object__java_lang_Integer(
-        /**@type {function(?number, Integer):?number} */ (Main$B.$create()),
+        /**@type {function(?number, Integer):?number} */ (Main$B.$create__()),
         1.1, Integer.m_valueOf__int(1));
     Main.m_callImplementorParametric__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$B__java_lang_String(
-        /**@type {function(?string, Integer):?string} */ (Main$B.$create()),
+        /**@type {function(?string, Integer):?string} */ (Main$B.$create__()),
         '');
     foo('a', Integer.m_valueOf__int(1));
     bar(1.1, 1.1);
-    Main.callOnFunction(Main$A.$create());
+    Main.callOnFunction(Main$A.$create__());
   }
 
   /**
    * @return {void}
    * @public
    */
-  static m_testCast() {
+  static m_testCast__() {
     Main.$clinit();
-    let o = /**@type {function(?string, Integer):?string} */ (Main$B.$create());
+    let o =
+        /**@type {function(?string, Integer):?string} */ (Main$B.$create__());
     let b1 = /**@type {window.Function} */ ($Casts.to(o, Main$B));
     let b2 = /**@type {?function(?string, Integer):?string} */ (
         $Casts.to(o, Main$B));
@@ -167,13 +168,13 @@ class Main extends Object {
    * @return {void}
    * @public
    */
-  static m_testNewInstance() {
+  static m_testNewInstance__() {
     Main.$clinit();
-    let b1 = Main$B.$create();
+    let b1 = Main$B.$create__();
     let b2 = /**@type {window.Function} */ ($Casts.to(
-        /**@type {function(?string, Integer):?string} */ (Main$B.$create()),
+        /**@type {function(?string, Integer):?string} */ (Main$B.$create__()),
         Main$B));
-    let af1 = Main$A.$create();
+    let af1 = Main$A.$create__();
   }
 
   /**

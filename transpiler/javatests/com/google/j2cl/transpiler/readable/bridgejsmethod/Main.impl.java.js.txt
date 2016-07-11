@@ -32,10 +32,11 @@ class Main extends Object {
    * @return {!Main}
    * @public
    */
-  static $create() {
+  static $create__() {
     Main.$clinit();
     let $instance = new Main();
-    $instance.$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main__();
     return $instance;
   }
 
@@ -44,8 +45,8 @@ class Main extends Object {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main() {
-    this.$ctor__java_lang_Object();
+  $ctor__com_google_j2cl_transpiler_readable_bridgejsmethod_Main__() {
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_bridgejsmethod_Main();
   }
 
@@ -53,21 +54,21 @@ class Main extends Object {
    * @return {void}
    * @public
    */
-  static m_test() {
+  static m_test__() {
     Main.$clinit();
-    let a = /**@type {!Main$A<Integer>} */ (Main$A.$create());
+    let a = /**@type {!Main$A<Integer>} */ (Main$A.$create__());
     a.fun(Integer.m_valueOf__int(1));
     a.m_bar__java_lang_Object(Integer.m_valueOf__int(1));
-    let b = Main$B.$create();
+    let b = Main$B.$create__();
     b.fun('abc');
     b.bar('abc');
-    let c = Main$C.$create();
+    let c = Main$C.$create__();
     c.fun(Integer.m_valueOf__int(1));
     c.m_bar__java_lang_Object(Integer.m_valueOf__int(1));
-    let d = Main$D.$create();
+    let d = Main$D.$create__();
     d.fun(Integer.m_valueOf__int(1));
     d.m_bar__java_lang_Object(Integer.m_valueOf__int(1));
-    let e = Main$E.$create();
+    let e = Main$E.$create__();
     e.fun('abc');
     e.bar('abc');
   }

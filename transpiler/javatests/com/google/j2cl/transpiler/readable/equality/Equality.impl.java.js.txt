@@ -28,10 +28,10 @@ class Equality extends Object {
    * @return {!Equality}
    * @public
    */
-  static $create() {
+  static $create__() {
     Equality.$clinit();
     let $instance = new Equality();
-    $instance.$ctor__com_google_j2cl_transpiler_readable_equality_Equality();
+    $instance.$ctor__com_google_j2cl_transpiler_readable_equality_Equality__();
     return $instance;
   }
 
@@ -40,8 +40,8 @@ class Equality extends Object {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_equality_Equality() {
-    this.$ctor__java_lang_Object();
+  $ctor__com_google_j2cl_transpiler_readable_equality_Equality__() {
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_equality_Equality();
   }
 
@@ -49,7 +49,7 @@ class Equality extends Object {
    * @return {void}
    * @public
    */
-  m_test() {
+  m_test__() {
     {
       $Asserts.$enabled() && $Asserts.$assert(false == false);
       $Asserts.$enabled() && $Asserts.$assert(0 != 1);
@@ -57,13 +57,13 @@ class Equality extends Object {
     {
       $Asserts.$enabled() &&
           $Asserts.$assert(
-              !$Equality.$same(Object.$create(), Object.$create()));
+              !$Equality.$same(Object.$create__(), Object.$create__()));
     }
     {
       $Asserts.$enabled() &&
-          $Asserts.$assert(!$Equality.$same(null, Object.$create()));
+          $Asserts.$assert(!$Equality.$same(null, Object.$create__()));
       $Asserts.$enabled() &&
-          $Asserts.$assert(!$Equality.$same(Object.$create(), null));
+          $Asserts.$assert(!$Equality.$same(Object.$create__(), null));
     }
   }
 

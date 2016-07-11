@@ -1,9 +1,9 @@
 [UNKNOWN] => [super();]
 [UNKNOWN] => [NestedTryCatch.$clinit();]
 [UNKNOWN] => [let $instance = new NestedTryCatch();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nestedtrycatch_NestedTryCatch();]
+[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_nestedtrycatch_NestedTryCatch__();]
 [UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__java_lang_Object();]
+[UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_nestedtrycatch_NestedTryCatch();]
 [try {
       throw new Exception();
@@ -14,12 +14,12 @@
         // expected empty body.
       }
     }] => [try {
-      throw $Exceptions.toJs(Exception.$create());
+      throw $Exceptions.toJs(Exception.$create__());
     } catch (/** @type {*} */ ae) {
       ae = $Exceptions.toJava(ae);
       if (Exception.$isInstance(ae)) {
         try {
-          throw $Exceptions.toJs(Exception.$create());
+          throw $Exceptions.toJs(Exception.$create__());
         } catch (/** @type {*} */ ie) {
           ie = $Exceptions.toJava(ie);
           if (Exception.$isInstance(ie)) {
@@ -31,11 +31,11 @@
         throw $Exceptions.toJs(ae);
       }
     }]
-[throw new Exception();] => [throw $Exceptions.toJs(Exception.$create());]
+[throw new Exception();] => [throw $Exceptions.toJs(Exception.$create__());]
 [UNKNOWN] => [ae = $Exceptions.toJava(ae);]
 [UNKNOWN] => [if (Exception.$isInstance(ae)) {
         try {
-          throw $Exceptions.toJs(Exception.$create());
+          throw $Exceptions.toJs(Exception.$create__());
         } catch (/** @type {*} */ ie) {
           ie = $Exceptions.toJava(ie);
           if (Exception.$isInstance(ie)) {
@@ -51,7 +51,7 @@
       } catch (Exception ie) {
         // expected empty body.
       }] => [try {
-          throw $Exceptions.toJs(Exception.$create());
+          throw $Exceptions.toJs(Exception.$create__());
         } catch (/** @type {*} */ ie) {
           ie = $Exceptions.toJava(ie);
           if (Exception.$isInstance(ie)) {
@@ -59,7 +59,7 @@
             throw $Exceptions.toJs(ie);
           }
         }]
-[throw new Exception();] => [throw $Exceptions.toJs(Exception.$create());]
+[throw new Exception();] => [throw $Exceptions.toJs(Exception.$create__());]
 [UNKNOWN] => [ie = $Exceptions.toJava(ie);]
 [UNKNOWN] => [if (Exception.$isInstance(ie)) {
           } else {

@@ -64,11 +64,11 @@ class InnerClassInitOrder extends Object {
    * @return {!InnerClassInitOrder}
    * @public
    */
-  static $create() {
+  static $create__() {
     InnerClassInitOrder.$clinit();
     let $instance = new InnerClassInitOrder();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder();
+        .$ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder__();
     return $instance;
   }
 
@@ -77,8 +77,8 @@ class InnerClassInitOrder extends Object {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder() {
-    this.$ctor__java_lang_Object();
+  $ctor__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder__() {
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder();
   }
 
@@ -86,7 +86,7 @@ class InnerClassInitOrder extends Object {
    * @return {void}
    * @public
    */
-  m_testOuterThisFromSuperCall() {
+  m_testOuterThisFromSuperCall__() {
     InnerClassInitOrder$OuterRefFromSuperCtorCall
         .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
             this);
@@ -100,7 +100,7 @@ class InnerClassInitOrder extends Object {
    * @return {void}
    * @public
    */
-  m_testOuterThisFromThisCall() {
+  m_testOuterThisFromThisCall__() {
     InnerClassInitOrder$OuterRefFromThisCtorCall
         .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
             this);
@@ -114,8 +114,8 @@ class InnerClassInitOrder extends Object {
    * @return {void}
    * @public
    */
-  m_testExtendsNested() {
-    let o = InnerClassInitOrder$ESOuter.$create();
+  m_testExtendsNested__() {
+    let o = InnerClassInitOrder$ESOuter.$create__();
     $Asserts.$enabled() &&
         $Asserts.$assert((
             1 ==
@@ -150,9 +150,9 @@ class InnerClassInitOrder extends Object {
    * @return {void}
    * @public
    */
-  m_testExtendsNestedWithGenerics() {
+  m_testExtendsNestedWithGenerics__() {
     let o = /**@type {!InnerClassInitOrder$ESWGOuter<?string>} */ (
-        InnerClassInitOrder$ESWGOuter.$create());
+        InnerClassInitOrder$ESWGOuter.$create__());
     $Asserts.$enabled() &&
         $Asserts.$assert((
             1 ==
@@ -189,9 +189,9 @@ class InnerClassInitOrder extends Object {
    * @return {void}
    * @public
    */
-  m_testInnerClassCtors() {
+  m_testInnerClassCtors__() {
     let p1 = /**@type {!InnerClassInitOrder$P1<*>} */ (
-        InnerClassInitOrder$P1.$create());
+        InnerClassInitOrder$P1.$create__());
     $Asserts.$enabled() &&
         $Asserts.$assert((
             1 ==
@@ -240,7 +240,7 @@ class InnerClassInitOrder extends Object {
    * @return {void}
    * @public
    */
-  m_testInnerClassInitialization() {
+  m_testInnerClassInitialization__() {
     InnerClassInitOrder$InnerClass
         .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
             this);
@@ -254,7 +254,7 @@ class InnerClassInitOrder extends Object {
    * @return {void}
    * @public
    */
-  m_testInnerClassLoop() {
+  m_testInnerClassLoop__() {
     let results = /**@type {!Array<InnerClassInitOrder$1AddNumber>} */ (
         $Arrays.$create([10], InnerClassInitOrder$1AddNumber));
     for (let i = 0; i < 10; i++) {
@@ -266,7 +266,7 @@ class InnerClassInitOrder extends Object {
     }
     for (let $array = results, $index = 0; $index < $array.length; $index++) {
       let theAp = $array[$index];
-      theAp.m_act();
+      theAp.m_act__();
     }
     $Asserts.$enabled() &&
         $Asserts.$assert((
@@ -278,99 +278,99 @@ class InnerClassInitOrder extends Object {
    * @return {void}
    * @public
    */
-  m_testOuterIsNotSuper() {
+  m_testOuterIsNotSuper__() {
     let x =
         InnerClassInitOrder$Outer$OuterIsNotSuper
             .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer(
                 this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_);
-    $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue()));
+    $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue__()));
   }
 
   /**
    * @return {void}
    * @public
    */
-  m_testOuterIsNotSuperAnon() {
+  m_testOuterIsNotSuperAnon__() {
     let x =
         InnerClassInitOrder$2
             .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
                 this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_,
                 this);
-    $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue()));
+    $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue__()));
   }
 
   /**
    * @return {void}
    * @public
    */
-  m_testQualifiedSuperCall() {
-    let x = InnerClassInitOrder$Outer$TestQualifiedSuperCall.$create();
-    $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue()));
+  m_testQualifiedSuperCall__() {
+    let x = InnerClassInitOrder$Outer$TestQualifiedSuperCall.$create__();
+    $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue__()));
   }
 
   /**
    * @return {void}
    * @public
    */
-  m_testQualifiedSuperCallAnon() {
+  m_testQualifiedSuperCallAnon__() {
     let x =
         InnerClassInitOrder$3
             .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
                 this);
-    $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue()));
+    $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue__()));
   }
 
   /**
    * @return {void}
    * @public
    */
-  m_testSuperDispatch() {
+  m_testSuperDispatch__() {
     $Asserts.$enabled() &&
         $Asserts.$assert((
             1 ==
             this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_
-                .m_checkDispatchFromSub1()));
+                .m_checkDispatchFromSub1__()));
     $Asserts.$enabled() &&
         $Asserts.$assert((
             1 ==
             this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_
-                .m_checkDispatchFromSub2()));
+                .m_checkDispatchFromSub2__()));
   }
 
   /**
    * @return {void}
    * @public
    */
-  m_testUnqualifiedAlloc() {
+  m_testUnqualifiedAlloc__() {
     let x =
         this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_
-            .m_unqualifiedAlloc();
-    $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue()));
+            .m_unqualifiedAlloc__();
+    $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue__()));
   }
 
   /**
    * @return {void}
    * @public
    */
-  m_testUnqualifiedSuperCall() {
+  m_testUnqualifiedSuperCall__() {
     let x =
         InnerClassInitOrder$Outer$TestUnqualifiedSuperCall
             .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer(
                 this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_);
-    $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue()));
+    $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue__()));
   }
 
   /**
    * @return {void}
    * @public
    */
-  m_testUnqualifiedSuperCallAnon() {
+  m_testUnqualifiedSuperCallAnon__() {
     let x =
         InnerClassInitOrder$4
             .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder(
                 this.f_outerIsSuper__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder_,
                 this);
-    $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue()));
+    $Asserts.$enabled() && $Asserts.$assert((2 == x.m_getValue__()));
   }
 
   /**
@@ -380,22 +380,22 @@ class InnerClassInitOrder extends Object {
    */
   static m_main__arrayOf_java_lang_String(args) {
     InnerClassInitOrder.$clinit();
-    let m = InnerClassInitOrder.$create();
-    m.m_testOuterThisFromSuperCall();
-    m.m_testOuterThisFromThisCall();
-    m.m_testExtendsNested();
-    m.m_testExtendsNestedWithGenerics();
-    m.m_testInnerClassCtors();
-    m.m_testInnerClassInitialization();
-    m.m_testInnerClassLoop();
-    m.m_testOuterIsNotSuper();
-    m.m_testOuterIsNotSuperAnon();
-    m.m_testQualifiedSuperCall();
-    m.m_testQualifiedSuperCallAnon();
-    m.m_testSuperDispatch();
-    m.m_testUnqualifiedAlloc();
-    m.m_testUnqualifiedSuperCall();
-    m.m_testUnqualifiedSuperCallAnon();
+    let m = InnerClassInitOrder.$create__();
+    m.m_testOuterThisFromSuperCall__();
+    m.m_testOuterThisFromThisCall__();
+    m.m_testExtendsNested__();
+    m.m_testExtendsNestedWithGenerics__();
+    m.m_testInnerClassCtors__();
+    m.m_testInnerClassInitialization__();
+    m.m_testInnerClassLoop__();
+    m.m_testOuterIsNotSuper__();
+    m.m_testOuterIsNotSuperAnon__();
+    m.m_testQualifiedSuperCall__();
+    m.m_testQualifiedSuperCallAnon__();
+    m.m_testSuperDispatch__();
+    m.m_testUnqualifiedAlloc__();
+    m.m_testUnqualifiedSuperCall__();
+    m.m_testUnqualifiedSuperCallAnon__();
   }
 
   /**

@@ -40,11 +40,11 @@ class NestedGenericClass extends Object {
    * @return {!NestedGenericClass<C_T>}
    * @public
    */
-  static $create() {
+  static $create__() {
     NestedGenericClass.$clinit();
     let $instance = new NestedGenericClass();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass();
+        .$ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass__();
     return $instance;
   }
 
@@ -53,8 +53,8 @@ class NestedGenericClass extends Object {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass() {
-    this.$ctor__java_lang_Object();
+  $ctor__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass__() {
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass();
   }
 
@@ -80,21 +80,21 @@ class NestedGenericClass extends Object {
    * @return {void}
    * @public
    */
-  m_bar() {
+  m_bar__() {
     /**@type {!NestedGenericClass$1G<Error>} */
     (NestedGenericClass$1G
          .$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(
              this))
-        .m_bar();
+        .m_bar__();
   }
 
   /**
    * @return {void}
    * @public
    */
-  m_test() {
+  m_test__() {
     let n = /**@type {!NestedGenericClass<(Number|?number)>} */ (
-        NestedGenericClass.$create());
+        NestedGenericClass.$create__());
     let a = /**@type {!NestedGenericClass$A<Error>} */ (
         NestedGenericClass$A
             .$create__com_google_j2cl_transpiler_readable_nestedgenericclass_NestedGenericClass(

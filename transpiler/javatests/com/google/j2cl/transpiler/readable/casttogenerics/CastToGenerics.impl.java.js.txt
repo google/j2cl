@@ -40,11 +40,11 @@ class CastToGenerics extends Object {
    * @return {!CastToGenerics<C_T, C_E>}
    * @public
    */
-  static $create() {
+  static $create__() {
     CastToGenerics.$clinit();
     let $instance = new CastToGenerics();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics();
+        .$ctor__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics__();
     return $instance;
   }
 
@@ -53,8 +53,8 @@ class CastToGenerics extends Object {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics() {
-    this.$ctor__java_lang_Object();
+  $ctor__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics__() {
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_casttogenerics_CastToGenerics();
   }
 
@@ -62,14 +62,14 @@ class CastToGenerics extends Object {
    * @return {void}
    * @public
    */
-  m_test() {
+  m_test__() {
     let o = Integer.$create__int(1);
     let e = /**@type {C_E} */ ($Casts.to(o, Number));
     let t = /**@type {C_T} */ ($Casts.to(o, Object));
     let es = /**@type {Array<C_E>} */ ($Arrays.$castTo(o, Number, 1));
     let ts = /**@type {Array<C_T>} */ ($Arrays.$castTo(o, Object, 1));
     let c = /**@type {!CastToGenerics<?string, (Number|?number)>} */ (
-        CastToGenerics.$create());
+        CastToGenerics.$create__());
     let cc = /**@type {CastToGenerics<Error, (Number|?number)>} */ (
         $Casts.to(c, CastToGenerics));
     cc = /**@type {CastToGenerics} */ ($Casts.to(c, CastToGenerics));
@@ -80,7 +80,7 @@ class CastToGenerics extends Object {
    * @return {void}
    * @public
    */
-  m_castToTypeVariable() {
+  m_castToTypeVariable__() {
     let o = Integer.$create__int(1);
     let s = /**@type {*} */ ($Casts.to(o, Object));
     let c = /**@type {CastToGenerics<*, (Number|?number)>} */ (
@@ -94,7 +94,7 @@ class CastToGenerics extends Object {
    * @return {void}
    * @public
    */
-  m_outerGenericMethod() {}
+  m_outerGenericMethod__() {}
 
   /**
    * @template M_EE
@@ -115,9 +115,9 @@ class CastToGenerics extends Object {
    * @return {CastToGenerics$Foo<M_T>}
    * @public
    */
-  static m_doSomething() {
+  static m_doSomething__() {
     CastToGenerics.$clinit();
-    return /**@type {!CastToGenerics$1<*>} */ (CastToGenerics$1.$create());
+    return /**@type {!CastToGenerics$1<*>} */ (CastToGenerics$1.$create__());
   }
 
   /**

@@ -29,11 +29,11 @@ class Child extends Parent {
    * @return {!Child}
    * @public
    */
-  static $create() {
+  static $create__() {
     Child.$clinit();
     let $instance = new Child();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_supermethodcall_Child();
+        .$ctor__com_google_j2cl_transpiler_readable_supermethodcall_Child__();
     return $instance;
   }
 
@@ -42,8 +42,8 @@ class Child extends Parent {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_supermethodcall_Child() {
-    this.$ctor__com_google_j2cl_transpiler_readable_supermethodcall_Parent();
+  $ctor__com_google_j2cl_transpiler_readable_supermethodcall_Child__() {
+    this.$ctor__com_google_j2cl_transpiler_readable_supermethodcall_Parent__();
     this.$init__com_google_j2cl_transpiler_readable_supermethodcall_Child();
   }
 
@@ -52,7 +52,7 @@ class Child extends Parent {
    * @return {void}
    * @public
    */
-  m_parentSimplest() { super.m_parentSimplest(); }
+  m_parentSimplest__() { super.m_parentSimplest__(); }
 
   /**
    * @override
@@ -67,8 +67,8 @@ class Child extends Parent {
    * @return {Child}
    * @public
    */
-  m_parentWithChangingReturn() {
-    super.m_parentWithChangingReturn();
+  m_parentWithChangingReturn__() {
+    super.m_parentWithChangingReturn__();
     return this;
   }
 
@@ -77,7 +77,7 @@ class Child extends Parent {
    * @return {void}
    * @public
    */
-  m_grandParentSimplest() { super.m_grandParentSimplest(); }
+  m_grandParentSimplest__() { super.m_grandParentSimplest__(); }
 
   /**
    * @override
@@ -92,8 +92,8 @@ class Child extends Parent {
    * @return {Child}
    * @public
    */
-  m_grandParentWithChangingReturn() {
-    super.m_grandParentWithChangingReturn();
+  m_grandParentWithChangingReturn__() {
+    super.m_grandParentWithChangingReturn__();
     return this;
   }
 

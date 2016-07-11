@@ -35,11 +35,11 @@ class GenericMethod extends Object {
    * @return {!GenericMethod<C_T>}
    * @public
    */
-  static $create() {
+  static $create__() {
     GenericMethod.$clinit();
     let $instance = new GenericMethod();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod();
+        .$ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod__();
     return $instance;
   }
 
@@ -48,8 +48,8 @@ class GenericMethod extends Object {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod() {
-    this.$ctor__java_lang_Object();
+  $ctor__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod__() {
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_genericmethod_GenericMethod();
   }
 
@@ -90,7 +90,7 @@ class GenericMethod extends Object {
    * @return {GenericMethod<M_T>}
    * @public
    */
-  m_bar() { return null; }
+  m_bar__() { return null; }
 
   /**
    * @template M_T
@@ -104,15 +104,15 @@ class GenericMethod extends Object {
    * @return {void}
    * @public
    */
-  m_test() {
+  m_test__() {
     let g = /**@type {!GenericMethod<(Number|?number)>} */ (
-        GenericMethod.$create());
+        GenericMethod.$create__());
     g.m_foo__java_lang_Object__java_lang_Object(g, g);
     g.m_foo__java_lang_Object__java_lang_Object(
-        Error.$create(), Exception.$create());
-    g.m_fun__java_lang_Object(Object.$create());
-    g.m_fun__java_lang_Exception(Exception.$create());
-    g.m_fun__java_lang_Error(Error.$create());
+        Error.$create__(), Exception.$create__());
+    g.m_fun__java_lang_Object(Object.$create__());
+    g.m_fun__java_lang_Exception(Exception.$create__());
+    g.m_fun__java_lang_Error(Error.$create__());
     g.m_fun__arrayOf_java_lang_Object(
         /**@type {!Array<?string>} */ ($Arrays.$init(['asdf'], String)));
   }

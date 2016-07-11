@@ -1,13 +1,13 @@
 [UNKNOWN] => [super();]
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $instance = new Main();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsfunction_Main();]
+[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_jsfunction_Main__();]
 [UNKNOWN] => [return $instance;]
-[UNKNOWN] => [this.$ctor__java_lang_Object();]
+[UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_jsfunction_Main();]
 [UNKNOWN] => [Main.$clinit();]
 [return fn.foo(a);] => [return fn(a);]
-[MyJsFunctionImpl func = new MyJsFunctionImpl();] => [let func = MyJsFunctionImpl.$create();]
+[MyJsFunctionImpl func = new MyJsFunctionImpl();] => [let func = MyJsFunctionImpl.$create__();]
 [func.foo(10);] => [func(10);]
 [callAsFunction(func, 10);] => [Main.callAsFunction(func, 10);]
 [fun(createMyJsFunction(), 10);] => [Main.m_fun__com_google_j2cl_transpiler_readable_jsfunction_MyJsFunctionInterface__int(Main.createMyJsFunction(), 10);]
@@ -36,8 +36,8 @@
         return 0;
       }
     }.foo(3);] => [((a) =>{
-      this.m_handleReceiveCommands_$p_com_google_j2cl_transpiler_readable_jsfunction_Main();
+      this.m_handleReceiveCommands___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();
       return 0;
     })(3);]
-[handleReceiveCommands();] => [this.m_handleReceiveCommands_$p_com_google_j2cl_transpiler_readable_jsfunction_Main();]
+[handleReceiveCommands();] => [this.m_handleReceiveCommands___$p_com_google_j2cl_transpiler_readable_jsfunction_Main();]
 [return 0;] => [return 0;]

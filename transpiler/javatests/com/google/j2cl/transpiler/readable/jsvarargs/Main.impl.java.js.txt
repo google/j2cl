@@ -51,7 +51,7 @@ class Main extends Object {
    * @public
    */
   $ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main__int(f) {
-    this.$ctor__java_lang_Object();
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_jsvarargs_Main();
     this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main = f;
   }
@@ -154,7 +154,7 @@ class Main extends Object {
    * @return {void}
    * @public
    */
-  m_testStaticMethodNotFirst() {
+  m_testStaticMethodNotFirst__() {
     Main.f1(1, 1, 2);
     Main.f1(1, 1, 2);
     Main.f1(1);
@@ -172,7 +172,7 @@ class Main extends Object {
    * @return {void}
    * @public
    */
-  m_testStaticMethodFirst() {
+  m_testStaticMethodFirst__() {
     Main.f2(1, 2);
     Main.generics(Integer.m_valueOf__int(1), Integer.m_valueOf__int(2));
     Main.f2(1, 2);
@@ -201,7 +201,7 @@ class Main extends Object {
    * @return {void}
    * @public
    */
-  m_testInstanceMethodNotFirst() {
+  m_testInstanceMethodNotFirst__() {
     let m = Main.$create__int(1);
     m.f3(1, 1, 2);
     m.f3(1);
@@ -215,7 +215,7 @@ class Main extends Object {
    * @return {void}
    * @public
    */
-  m_testInstanceMethodFirst() {
+  m_testInstanceMethodFirst__() {
     let m = Main.$create__int(1);
     m.f4(1, 2);
     m.f4();
@@ -229,10 +229,10 @@ class Main extends Object {
    * @return {void}
    * @public
    */
-  m_testJsFunction() {
-    let a = Main$AFunction.$create();
-    let o1 = Object.$create();
-    let o2 = Object.$create();
+  m_testJsFunction__() {
+    let a = Main$AFunction.$create__();
+    let o1 = Object.$create__();
+    let o2 = Object.$create__();
     a(0, o1, o2);
     a(0);
     a(0, o1, o2);
@@ -245,7 +245,7 @@ class Main extends Object {
    * @return {void}
    * @public
    */
-  m_testSideEffect() {
+  m_testSideEffect__() {
     let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));
     Main.$create__int(1).f3(1, ...$Arrays.$checkNotNull(ints));
   }

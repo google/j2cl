@@ -39,11 +39,11 @@ class AutoBoxingSideEffect extends Object {
    * @return {!AutoBoxingSideEffect}
    * @public
    */
-  static $create() {
+  static $create__() {
     AutoBoxingSideEffect.$clinit();
     let $instance = new AutoBoxingSideEffect();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect();
+        .$ctor__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect__();
     return $instance;
   }
 
@@ -52,8 +52,8 @@ class AutoBoxingSideEffect extends Object {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect() {
-    this.$ctor__java_lang_Object();
+  $ctor__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect__() {
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect();
   }
 
@@ -61,7 +61,7 @@ class AutoBoxingSideEffect extends Object {
    * @return {AutoBoxingSideEffect}
    * @public
    */
-  m_getWithSideEffect() {
+  m_getWithSideEffect__() {
     this.f_sideEffect__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect_++;
     return this;
   }
@@ -70,45 +70,45 @@ class AutoBoxingSideEffect extends Object {
    * @return {void}
    * @public
    */
-  m_main() {
+  m_main__() {
     let i = Integer.m_valueOf__int(10000);
     let c = Integer.m_valueOf__int(1000);
-    c = Integer.m_valueOf__int(c.m_intValue() + i.m_intValue());
+    c = Integer.m_valueOf__int(c.m_intValue__() + i.m_intValue__());
     this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect =
         Integer.m_valueOf__int(
             this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect
-                .m_intValue() +
-            i.m_intValue());
-    ($Numbers.$q = this.m_getWithSideEffect(),
+                .m_intValue__() +
+            i.m_intValue__());
+    ($Numbers.$q = this.m_getWithSideEffect__(),
      $Numbers.$q
          .f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect =
          Integer.m_valueOf__int(
              $Numbers.$q
                  .f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect
-                 .m_intValue() +
-             i.m_intValue()));
+                 .m_intValue__() +
+             i.m_intValue__()));
     this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect =
         Integer.m_valueOf__int(
             this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect
-                .m_intValue()
-            << i.m_intValue());
-    let e = c = Integer.m_valueOf__int(c.m_intValue() + 1);
+                .m_intValue__()
+            << i.m_intValue__());
+    let e = c = Integer.m_valueOf__int(c.m_intValue__() + 1);
     e = this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect =
         Integer.m_valueOf__int(
             this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect
-                .m_intValue() +
+                .m_intValue__() +
             1);
     e =
-        ($Numbers.$q = this.m_getWithSideEffect(),
+        ($Numbers.$q = this.m_getWithSideEffect__(),
          $Numbers.$q
              .f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect =
              Integer.m_valueOf__int(
                  $Numbers.$q
                      .f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect
-                     .m_intValue() +
+                     .m_intValue__() +
                  1));
     let f =
-        ($Numbers.$v = i, i = Integer.m_valueOf__int(i.m_intValue() + 1),
+        ($Numbers.$v = i, i = Integer.m_valueOf__int(i.m_intValue__() + 1),
          $Numbers.$v);
     f =
         ($Numbers.$v =
@@ -116,11 +116,11 @@ class AutoBoxingSideEffect extends Object {
          this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect =
              Integer.m_valueOf__int(
                  this.f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect
-                     .m_intValue() +
+                     .m_intValue__() +
                  1),
          $Numbers.$v);
     f =
-        ($Numbers.$q = this.m_getWithSideEffect(),
+        ($Numbers.$q = this.m_getWithSideEffect__(),
          $Numbers.$v =
              $Numbers.$q
                  .f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect,
@@ -129,12 +129,12 @@ class AutoBoxingSideEffect extends Object {
              Integer.m_valueOf__int(
                  $Numbers.$q
                      .f_foo__com_google_j2cl_transpiler_readable_autoboxingsideeffect_AutoBoxingSideEffect
-                     .m_intValue() +
+                     .m_intValue__() +
                  1),
          $Numbers.$v);
     let b = Byte.m_valueOf__byte(0);
     ($Numbers.$v = b,
-     b = Byte.m_valueOf__byte($Primitives.$toByte(b.m_byteValue() + 1)));
+     b = Byte.m_valueOf__byte($Primitives.$toByte(b.m_byteValue__() + 1)));
   }
 
   /**

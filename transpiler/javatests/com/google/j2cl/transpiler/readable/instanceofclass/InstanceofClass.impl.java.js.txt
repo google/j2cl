@@ -28,11 +28,11 @@ class InstanceofClass extends Object {
    * @return {!InstanceofClass}
    * @public
    */
-  static $create() {
+  static $create__() {
     InstanceofClass.$clinit();
     let $instance = new InstanceofClass();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass();
+        .$ctor__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass__();
     return $instance;
   }
 
@@ -41,8 +41,8 @@ class InstanceofClass extends Object {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass() {
-    this.$ctor__java_lang_Object();
+  $ctor__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass__() {
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_instanceofclass_InstanceofClass();
   }
 
@@ -50,8 +50,8 @@ class InstanceofClass extends Object {
    * @return {void}
    * @public
    */
-  m_test() {
-    let object = InstanceofClass.$create();
+  m_test__() {
+    let object = InstanceofClass.$create__();
     $Asserts.$enabled() &&
         $Asserts.$assert(InstanceofClass.$isInstance(object));
     $Asserts.$enabled() && $Asserts.$assert(Object.$isInstance(object));

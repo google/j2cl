@@ -40,11 +40,11 @@ class SimpleLongs extends Object {
    * @return {!SimpleLongs}
    * @public
    */
-  static $create() {
+  static $create__() {
     SimpleLongs.$clinit();
     let $instance = new SimpleLongs();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs();
+        .$ctor__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs__();
     return $instance;
   }
 
@@ -53,8 +53,8 @@ class SimpleLongs extends Object {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs() {
-    this.$ctor__java_lang_Object();
+  $ctor__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs__() {
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs();
   }
 
@@ -62,13 +62,13 @@ class SimpleLongs extends Object {
    * @return {!$Long}
    * @public
    */
-  m_getBar() { return $Primitives.$widenIntToLong(0); }
+  m_getBar__() { return $Primitives.$widenIntToLong(0); }
 
   /**
    * @return {SimpleLongs}
    * @public
    */
-  m_getWithSideEffect() {
+  m_getWithSideEffect__() {
     this.f_sideEffect__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs_++;
     return this;
   }
@@ -77,7 +77,7 @@ class SimpleLongs extends Object {
    * @return {void}
    * @public
    */
-  m_main() {
+  m_main__() {
     let a = $LongUtils.$fromInt(0);
     a = $LongUtils.$negate($LongUtils.$fromInt(100000));
     a = $LongUtils.$fromInt(100000);
@@ -94,7 +94,7 @@ class SimpleLongs extends Object {
             this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
             $LongUtils.$fromInt(1));
     e =
-        ($Numbers.$q = this.m_getWithSideEffect(),
+        ($Numbers.$q = this.m_getWithSideEffect__(),
          $Numbers.$q
              .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
              $LongUtils.$plus(
@@ -113,7 +113,7 @@ class SimpleLongs extends Object {
                  $LongUtils.$fromInt(1)),
          $Numbers.$v);
     f =
-        ($Numbers.$q = this.m_getWithSideEffect(),
+        ($Numbers.$q = this.m_getWithSideEffect__(),
          $Numbers.$v =
              $Numbers.$q
                  .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
@@ -126,7 +126,7 @@ class SimpleLongs extends Object {
          $Numbers.$v);
     let g =
         this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs;
-    g = this.m_getBar();
+    g = this.m_getBar__();
   }
 
   /**

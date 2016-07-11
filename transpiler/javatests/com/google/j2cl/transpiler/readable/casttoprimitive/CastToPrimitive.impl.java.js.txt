@@ -46,11 +46,11 @@ class CastToPrimitive extends Object {
    * @return {!CastToPrimitive}
    * @public
    */
-  static $create() {
+  static $create__() {
     CastToPrimitive.$clinit();
     let $instance = new CastToPrimitive();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_casttoprimitive_CastToPrimitive();
+        .$ctor__com_google_j2cl_transpiler_readable_casttoprimitive_CastToPrimitive__();
     return $instance;
   }
 
@@ -59,8 +59,8 @@ class CastToPrimitive extends Object {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_casttoprimitive_CastToPrimitive() {
-    this.$ctor__java_lang_Object();
+  $ctor__com_google_j2cl_transpiler_readable_casttoprimitive_CastToPrimitive__() {
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_casttoprimitive_CastToPrimitive();
   }
 
@@ -68,7 +68,7 @@ class CastToPrimitive extends Object {
    * @return {void}
    * @public
    */
-  m_test() {
+  m_test__() {
     let b = 1;
     let c = 1 /* "\u0001" */;
     let s = 1;
@@ -131,16 +131,16 @@ class CastToPrimitive extends Object {
    * @return {void}
    * @public
    */
-  m_testReferenceToPrimitive() {
-    let o = Object.$create();
+  m_testReferenceToPrimitive__() {
+    let o = Object.$create__();
     let bool = Boolean.m_booleanValue__java_lang_Boolean(
         /**@type {?boolean} */ ($Casts.to(o, Boolean)));
-    let b = /**@type {Byte} */ ($Casts.to(o, Byte)).m_byteValue();
-    let c = /**@type {Character} */ ($Casts.to(o, Character)).m_charValue();
-    let s = /**@type {Short} */ ($Casts.to(o, Short)).m_shortValue();
-    let i = /**@type {Integer} */ ($Casts.to(o, Integer)).m_intValue();
-    let l = /**@type {Long} */ ($Casts.to(o, Long)).m_longValue();
-    let f = /**@type {Float} */ ($Casts.to(o, Float)).m_floatValue();
+    let b = /**@type {Byte} */ ($Casts.to(o, Byte)).m_byteValue__();
+    let c = /**@type {Character} */ ($Casts.to(o, Character)).m_charValue__();
+    let s = /**@type {Short} */ ($Casts.to(o, Short)).m_shortValue__();
+    let i = /**@type {Integer} */ ($Casts.to(o, Integer)).m_intValue__();
+    let l = /**@type {Long} */ ($Casts.to(o, Long)).m_longValue__();
+    let f = /**@type {Float} */ ($Casts.to(o, Float)).m_floatValue__();
     let d = Double.m_doubleValue__java_lang_Double(
         /**@type {?number} */ ($Casts.to(o, Double)));
   }
@@ -149,13 +149,13 @@ class CastToPrimitive extends Object {
    * @return {void}
    * @public
    */
-  m_testUnboxAndWiden() {
+  m_testUnboxAndWiden__() {
     let boxedByte = Byte.m_valueOf__byte(0);
-    let s = boxedByte.m_byteValue();
-    let i = boxedByte.m_byteValue();
-    let l = $Primitives.$widenByteToLong(boxedByte.m_byteValue());
-    let f = boxedByte.m_byteValue();
-    let d = boxedByte.m_byteValue();
+    let s = boxedByte.m_byteValue__();
+    let i = boxedByte.m_byteValue__();
+    let l = $Primitives.$widenByteToLong(boxedByte.m_byteValue__());
+    let f = boxedByte.m_byteValue__();
+    let d = boxedByte.m_byteValue__();
   }
 
   /**

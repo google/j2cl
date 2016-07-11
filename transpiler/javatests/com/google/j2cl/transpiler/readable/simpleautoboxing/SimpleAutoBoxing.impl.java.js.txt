@@ -47,11 +47,11 @@ class SimpleAutoBoxing extends Object {
    * @return {!SimpleAutoBoxing}
    * @public
    */
-  static $create() {
+  static $create__() {
     SimpleAutoBoxing.$clinit();
     let $instance = new SimpleAutoBoxing();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing();
+        .$ctor__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing__();
     return $instance;
   }
 
@@ -60,8 +60,8 @@ class SimpleAutoBoxing extends Object {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing() {
-    this.$ctor__java_lang_Object();
+  $ctor__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing__() {
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_simpleautoboxing_SimpleAutoBoxing();
   }
 
@@ -144,42 +144,42 @@ class SimpleAutoBoxing extends Object {
    * @return {number}
    * @public
    */
-  m_unbox__java_lang_Byte(b) { return b.m_byteValue(); }
+  m_unbox__java_lang_Byte(b) { return b.m_byteValue__(); }
 
   /**
    * @param {Float} f
    * @return {number}
    * @public
    */
-  m_unbox__java_lang_Float(f) { return f.m_floatValue(); }
+  m_unbox__java_lang_Float(f) { return f.m_floatValue__(); }
 
   /**
    * @param {Integer} i
    * @return {number}
    * @public
    */
-  m_unbox__java_lang_Integer(i) { return i.m_intValue(); }
+  m_unbox__java_lang_Integer(i) { return i.m_intValue__(); }
 
   /**
    * @param {Long} l
    * @return {!$Long}
    * @public
    */
-  m_unbox__java_lang_Long(l) { return l.m_longValue(); }
+  m_unbox__java_lang_Long(l) { return l.m_longValue__(); }
 
   /**
    * @param {Short} s
    * @return {number}
    * @public
    */
-  m_unbox__java_lang_Short(s) { return s.m_shortValue(); }
+  m_unbox__java_lang_Short(s) { return s.m_shortValue__(); }
 
   /**
    * @param {Character} c
    * @return {number}
    * @public
    */
-  m_unbox__java_lang_Character(c) { return c.m_charValue(); }
+  m_unbox__java_lang_Character(c) { return c.m_charValue__(); }
 
   /**
    * @param {number} d
@@ -192,7 +192,7 @@ class SimpleAutoBoxing extends Object {
    * @return {void}
    * @public
    */
-  m_testNull() {
+  m_testNull__() {
     let b = null;
     let d = null;
     let i = null;
@@ -203,7 +203,7 @@ class SimpleAutoBoxing extends Object {
    * @return {void}
    * @public
    */
-  m_testBoxing() {
+  m_testBoxing__() {
     let bool = true;
     let d = 1111.0;
     let b = 100;
@@ -242,21 +242,22 @@ class SimpleAutoBoxing extends Object {
         Boolean.m_booleanValue__java_lang_Boolean(boxBool);
     boxD = Double.m_doubleValue__java_lang_Double(boxD) +
         Double.m_doubleValue__java_lang_Double(boxD);
-    boxF = Float.m_valueOf__float(boxF.m_floatValue() - boxF.m_floatValue());
-    boxI = Integer.m_valueOf__int(boxI.m_intValue() * boxI.m_intValue());
+    boxF =
+        Float.m_valueOf__float(boxF.m_floatValue__() - boxF.m_floatValue__());
+    boxI = Integer.m_valueOf__int(boxI.m_intValue__() * boxI.m_intValue__());
     boxL = Long.m_valueOf__long(
-        $LongUtils.$divide(boxL.m_longValue(), boxL.m_longValue()));
+        $LongUtils.$divide(boxL.m_longValue__(), boxL.m_longValue__()));
     boxBool = !boxBool;
-    boxI = Integer.m_valueOf__int(boxI.m_intValue());
-    boxI = Integer.m_valueOf__int(-boxI.m_intValue());
-    boxI = Integer.m_valueOf__int(~boxI.m_intValue());
+    boxI = Integer.m_valueOf__int(boxI.m_intValue__());
+    boxI = Integer.m_valueOf__int(-boxI.m_intValue__());
+    boxI = Integer.m_valueOf__int(~boxI.m_intValue__());
   }
 
   /**
    * @return {void}
    * @public
    */
-  m_testUnboxing() {
+  m_testUnboxing__() {
     let boxBool = Boolean.$create__boolean(true);
     let boxD = Double.$create__double(1111.0);
     let boxB = Byte.$create__byte(100);
@@ -267,52 +268,52 @@ class SimpleAutoBoxing extends Object {
     let boxC = Character.$create__char(97 /* 'a' */);
     let bool = Boolean.m_booleanValue__java_lang_Boolean(boxBool);
     let d = Double.m_doubleValue__java_lang_Double(boxD);
-    let b = boxB.m_byteValue();
-    let f = boxF.m_floatValue();
-    let i = boxI.m_intValue();
-    let l = boxL.m_longValue();
-    let s = boxS.m_shortValue();
-    let c = boxC.m_charValue();
+    let b = boxB.m_byteValue__();
+    let f = boxF.m_floatValue__();
+    let i = boxI.m_intValue__();
+    let l = boxL.m_longValue__();
+    let s = boxS.m_shortValue__();
+    let c = boxC.m_charValue__();
     boxBool =
         this.m_box__boolean(Boolean.m_booleanValue__java_lang_Boolean(boxBool));
     boxD = this.m_box__double(Double.m_doubleValue__java_lang_Double(boxD));
-    boxB = this.m_box__byte(boxB.m_byteValue());
-    boxF = this.m_box__float(boxF.m_floatValue());
-    boxI = this.m_box__int(boxI.m_intValue());
-    boxL = this.m_box__long(boxL.m_longValue());
-    boxS = this.m_box__short(boxS.m_shortValue());
-    boxC = this.m_box__char(boxC.m_charValue());
-    d = boxB.m_byteValue();
-    d = boxF.m_floatValue();
-    d = boxI.m_intValue();
-    d = $Primitives.$widenLongToDouble(boxL.m_longValue());
-    d = boxS.m_shortValue();
-    d = boxC.m_charValue();
-    this.m_takesAndReturnsPrimitiveDouble__double(boxB.m_byteValue());
-    this.m_takesAndReturnsPrimitiveDouble__double(boxF.m_floatValue());
-    this.m_takesAndReturnsPrimitiveDouble__double(boxI.m_intValue());
+    boxB = this.m_box__byte(boxB.m_byteValue__());
+    boxF = this.m_box__float(boxF.m_floatValue__());
+    boxI = this.m_box__int(boxI.m_intValue__());
+    boxL = this.m_box__long(boxL.m_longValue__());
+    boxS = this.m_box__short(boxS.m_shortValue__());
+    boxC = this.m_box__char(boxC.m_charValue__());
+    d = boxB.m_byteValue__();
+    d = boxF.m_floatValue__();
+    d = boxI.m_intValue__();
+    d = $Primitives.$widenLongToDouble(boxL.m_longValue__());
+    d = boxS.m_shortValue__();
+    d = boxC.m_charValue__();
+    this.m_takesAndReturnsPrimitiveDouble__double(boxB.m_byteValue__());
+    this.m_takesAndReturnsPrimitiveDouble__double(boxF.m_floatValue__());
+    this.m_takesAndReturnsPrimitiveDouble__double(boxI.m_intValue__());
     this.m_takesAndReturnsPrimitiveDouble__double(
-        $Primitives.$widenLongToDouble(boxL.m_longValue()));
-    this.m_takesAndReturnsPrimitiveDouble__double(boxS.m_shortValue());
-    this.m_takesAndReturnsPrimitiveDouble__double(boxC.m_charValue());
+        $Primitives.$widenLongToDouble(boxL.m_longValue__()));
+    this.m_takesAndReturnsPrimitiveDouble__double(boxS.m_shortValue__());
+    this.m_takesAndReturnsPrimitiveDouble__double(boxC.m_charValue__());
     bool = Boolean.m_booleanValue__java_lang_Boolean(boxBool) &&
         Boolean.m_booleanValue__java_lang_Boolean(boxBool);
     d = Double.m_doubleValue__java_lang_Double(boxD) +
         Double.m_doubleValue__java_lang_Double(boxD);
-    f = boxF.m_floatValue() - boxF.m_floatValue();
-    i = boxI.m_intValue() * boxI.m_intValue();
-    l = $LongUtils.$divide(boxL.m_longValue(), boxL.m_longValue());
+    f = boxF.m_floatValue__() - boxF.m_floatValue__();
+    i = boxI.m_intValue__() * boxI.m_intValue__();
+    l = $LongUtils.$divide(boxL.m_longValue__(), boxL.m_longValue__());
     bool = !boxBool;
-    i = boxI.m_intValue();
-    i = -boxI.m_intValue();
-    i = ~boxI.m_intValue();
+    i = boxI.m_intValue__();
+    i = -boxI.m_intValue__();
+    i = ~boxI.m_intValue__();
   }
 
   /**
    * @return {void}
    * @public
    */
-  m_testUnboxingBoolean() {
+  m_testUnboxingBoolean__() {
     let boxB1 = Boolean.$create__boolean(true);
     let boxB2 = Boolean.$create__boolean(false);
     let br;
@@ -401,7 +402,7 @@ class SimpleAutoBoxing extends Object {
    * @return {void}
    * @public
    */
-  m_testUnboxingEquality() {
+  m_testUnboxingEquality__() {
     let boxB = Boolean.$create__boolean(true);
     let b = false;
     $Asserts.$enabled() && $Asserts.$assert($Equality.$same(boxB, boxB));
@@ -413,16 +414,16 @@ class SimpleAutoBoxing extends Object {
     let boxI = Integer.$create__int(100);
     let i = 101;
     $Asserts.$enabled() && $Asserts.$assert($Equality.$same(boxI, boxI));
-    $Asserts.$enabled() && $Asserts.$assert(boxI.m_intValue() == i);
+    $Asserts.$enabled() && $Asserts.$assert(boxI.m_intValue__() == i);
     $Asserts.$enabled() && $Asserts.$assert(i != i);
-    $Asserts.$enabled() && $Asserts.$assert(i != boxI.m_intValue());
+    $Asserts.$enabled() && $Asserts.$assert(i != boxI.m_intValue__());
   }
 
   /**
    * @return {void}
    * @public
    */
-  m_testAssertStatement() {
+  m_testAssertStatement__() {
     let boxB = Boolean.$create__boolean(true);
     let b = true;
     $Asserts.$enabled() &&

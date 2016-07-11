@@ -34,10 +34,10 @@ class Main extends Object {
    * @return {!Main}
    * @public
    */
-  static $create() {
+  static $create__() {
     Main.$clinit();
     let $instance = new Main();
-    $instance.$ctor__com_google_j2cl_transpiler_readable_nativejstypes_Main();
+    $instance.$ctor__com_google_j2cl_transpiler_readable_nativejstypes_Main__();
     return $instance;
   }
 
@@ -46,8 +46,8 @@ class Main extends Object {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_nativejstypes_Main() {
-    this.$ctor__java_lang_Object();
+  $ctor__com_google_j2cl_transpiler_readable_nativejstypes_Main__() {
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_nativejstypes_Main();
   }
 
@@ -55,7 +55,7 @@ class Main extends Object {
    * @return {number}
    * @public
    */
-  static m_testNativeJsTypeWithNamespace() {
+  static m_testNativeJsTypeWithNamespace__() {
     Main.$clinit();
     let foo = new Foo();
     foo.x = 50;
@@ -67,7 +67,7 @@ class Main extends Object {
    * @return {number}
    * @public
    */
-  static m_testNativeJsTypeWithoutNamespace() {
+  static m_testNativeJsTypeWithoutNamespace__() {
     Main.$clinit();
     let bar = new Bar(6, 7);
     bar.x = 50;
@@ -80,7 +80,7 @@ class Main extends Object {
    * @return {void}
    * @public
    */
-  static m_testGlobalNativeJsType() {
+  static m_testGlobalNativeJsType__() {
     Main.$clinit();
     let header = new $Headers();
     header.append('Content-Type', 'text/xml');
@@ -90,7 +90,7 @@ class Main extends Object {
    * @return {void}
    * @public
    */
-  static m_testNativeTypeClassLiteral() {
+  static m_testNativeTypeClassLiteral__() {
     Main.$clinit();
     let o1 = /**@type {Class<Bar>} */ (Class.$get($JavaScriptObject));
     o1 = /**@type {Class<Array<Array<Bar>>>} */ (Class.$get(Object, 1));
@@ -100,13 +100,13 @@ class Main extends Object {
    * @return {void}
    * @public
    */
-  static m_testNativeTypeObjectMethods() {
+  static m_testNativeTypeObjectMethods__() {
     Main.$clinit();
     let bar = new Bar(6, 7);
     $Objects.m_toString__java_lang_Object(bar);
     $Objects.m_hashCode__java_lang_Object(bar);
     $Objects.m_equals__java_lang_Object__java_lang_Object(
-        bar, Object.$create());
+        bar, Object.$create__());
   }
 
   /**

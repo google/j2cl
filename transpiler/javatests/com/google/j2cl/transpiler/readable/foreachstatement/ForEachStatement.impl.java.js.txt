@@ -33,11 +33,11 @@ class ForEachStatement extends Object {
    * @return {!ForEachStatement}
    * @public
    */
-  static $create() {
+  static $create__() {
     ForEachStatement.$clinit();
     let $instance = new ForEachStatement();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement();
+        .$ctor__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement__();
     return $instance;
   }
 
@@ -46,8 +46,8 @@ class ForEachStatement extends Object {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement() {
-    this.$ctor__java_lang_Object();
+  $ctor__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement__() {
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_foreachstatement_ForEachStatement();
   }
 
@@ -58,9 +58,9 @@ class ForEachStatement extends Object {
    */
   m_test__java_lang_Iterable(iterable) {
     for (let $iterator =
-             /**@type {Iterator<Throwable>} */ (iterable.m_iterator());
-         $iterator.m_hasNext();) {
-      let t = $iterator.m_next();
+             /**@type {Iterator<Throwable>} */ (iterable.m_iterator__());
+         $iterator.m_hasNext__();) {
+      let t = $iterator.m_next__();
       $Objects.m_toString__java_lang_Object(t);
     }
     for (let $array = /**@type {!Array<Throwable>} */ (

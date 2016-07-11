@@ -46,7 +46,7 @@ class Varargs extends Object {
    */
   $ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(
       args) {
-    this.$ctor__java_lang_Object();
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_varargs_Varargs();
   }
 
@@ -55,10 +55,10 @@ class Varargs extends Object {
    * @return {!Varargs}
    * @public
    */
-  static $create() {
+  static $create__() {
     Varargs.$clinit();
     let $instance = new Varargs();
-    $instance.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs();
+    $instance.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__();
     return $instance;
   }
 
@@ -67,7 +67,7 @@ class Varargs extends Object {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_varargs_Varargs() {
+  $ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__() {
     this.$ctor__com_google_j2cl_transpiler_readable_varargs_Varargs__arrayOf_int(
         /**@type {!Array<number>} */ ($Arrays.$init([1], $int)));
   }
@@ -105,11 +105,11 @@ class Varargs extends Object {
    * @return {void}
    * @public
    */
-  m_main() {
-    let v = Varargs.$create();
+  m_main__() {
+    let v = Varargs.$create__();
     v.m_test__int__arrayOf_java_lang_Object(1, []);
-    v.m_test__int__arrayOf_java_lang_Object(1, [Object.$create()]);
-    v.m_test__int__arrayOf_java_lang_Object(1, [Object.$create()]);
+    v.m_test__int__arrayOf_java_lang_Object(1, [Object.$create__()]);
+    v.m_test__int__arrayOf_java_lang_Object(1, [Object.$create__()]);
     v.m_test__int__arrayOf_java_lang_Object(1, []);
   }
 

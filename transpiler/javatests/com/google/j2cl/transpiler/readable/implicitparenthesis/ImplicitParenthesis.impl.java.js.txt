@@ -31,11 +31,11 @@ class ImplicitParenthesis extends Object {
    * @return {!ImplicitParenthesis}
    * @public
    */
-  static $create() {
+  static $create__() {
     ImplicitParenthesis.$clinit();
     let $instance = new ImplicitParenthesis();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis();
+        .$ctor__com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis__();
     return $instance;
   }
 
@@ -44,8 +44,8 @@ class ImplicitParenthesis extends Object {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis() {
-    this.$ctor__java_lang_Object();
+  $ctor__com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis__() {
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis();
   }
 
@@ -53,18 +53,18 @@ class ImplicitParenthesis extends Object {
    * @return {void}
    * @public
    */
-  m_test() {
+  m_test__() {
     ImplicitParenthesis
-        .m_examples_$p_com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis();
+        .m_examples___$p_com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis();
     ImplicitParenthesis
-        .m_nonExamples_$p_com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis();
+        .m_nonExamples___$p_com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis();
   }
 
   /**
    * @return {void}
    * @public
    */
-  static m_examples_$p_com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis() {
+  static m_examples___$p_com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis() {
     ImplicitParenthesis.$clinit();
     let primitiveInt;
     let boxedInt;
@@ -73,22 +73,22 @@ class ImplicitParenthesis extends Object {
       boxedInt = Integer.$create__int(10);
       primitiveInt = (primitiveInt == 5 ? Integer.$create__int(15) :
                                           Integer.$create__int(30))
-                         .m_intValue();
+                         .m_intValue__();
       $Asserts.$enabled() && $Asserts.$assert(primitiveInt == 15);
     }
     {
       primitiveInt = 5;
       boxedInt = Integer.$create__int(10);
       primitiveInt = (boxedInt = Integer.m_valueOf__int(
-                          boxedInt.m_intValue() + primitiveInt))
-                         .m_intValue();
+                          boxedInt.m_intValue__() + primitiveInt))
+                         .m_intValue__();
       $Asserts.$enabled() && $Asserts.$assert(primitiveInt == 15);
     }
     {
       primitiveInt = 5;
       boxedInt = Integer.$create__int(10);
       primitiveInt =
-          (boxedInt = Integer.m_valueOf__int(primitiveInt)).m_intValue();
+          (boxedInt = Integer.m_valueOf__int(primitiveInt)).m_intValue__();
       $Asserts.$enabled() && $Asserts.$assert(primitiveInt == 5);
     }
     {
@@ -96,17 +96,17 @@ class ImplicitParenthesis extends Object {
       boxedInt = Integer.$create__int(10);
       primitiveInt =
           ($Numbers.$v = boxedInt,
-           boxedInt = Integer.m_valueOf__int(boxedInt.m_intValue() + 1),
+           boxedInt = Integer.m_valueOf__int(boxedInt.m_intValue__() + 1),
            $Numbers.$v)
-              .m_intValue();
+              .m_intValue__();
       $Asserts.$enabled() && $Asserts.$assert(primitiveInt == 10);
     }
     {
       primitiveInt = 5;
       boxedInt = Integer.$create__int(10);
       primitiveInt =
-          (boxedInt = Integer.m_valueOf__int(boxedInt.m_intValue() + 1))
-              .m_intValue();
+          (boxedInt = Integer.m_valueOf__int(boxedInt.m_intValue__() + 1))
+              .m_intValue__();
       $Asserts.$enabled() && $Asserts.$assert(primitiveInt == 11);
     }
   }
@@ -115,7 +115,7 @@ class ImplicitParenthesis extends Object {
    * @return {void}
    * @public
    */
-  static m_nonExamples_$p_com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis() {
+  static m_nonExamples___$p_com_google_j2cl_transpiler_readable_implicitparenthesis_ImplicitParenthesis() {
     ImplicitParenthesis.$clinit();
     let primitiveInt;
     let boxedInt;
@@ -123,14 +123,14 @@ class ImplicitParenthesis extends Object {
     {
       primitiveInt = 5;
       boxedInt = Integer.$create__int(10);
-      primitiveInt = boxedInt.m_intValue() - primitiveInt;
+      primitiveInt = boxedInt.m_intValue__() - primitiveInt;
       $Asserts.$enabled() && $Asserts.$assert(primitiveInt == 5);
     }
     {
       primitiveInt = 5;
       boxedInt = Integer.$create__int(10);
       boxedBoolean = true;
-      boxedBoolean = boxedInt.m_intValue() == primitiveInt;
+      boxedBoolean = boxedInt.m_intValue__() == primitiveInt;
       $Asserts.$enabled() &&
           $Asserts.$assert(
               Boolean.m_booleanValue__java_lang_Boolean(boxedBoolean) == false);

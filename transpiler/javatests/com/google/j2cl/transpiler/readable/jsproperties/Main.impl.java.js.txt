@@ -31,10 +31,10 @@ class Main extends Object {
    * @return {!Main}
    * @public
    */
-  static $create() {
+  static $create__() {
     Main.$clinit();
     let $instance = new Main();
-    $instance.$ctor__com_google_j2cl_transpiler_readable_jsproperties_Main();
+    $instance.$ctor__com_google_j2cl_transpiler_readable_jsproperties_Main__();
     return $instance;
   }
 
@@ -43,8 +43,8 @@ class Main extends Object {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_jsproperties_Main() {
-    this.$ctor__java_lang_Object();
+  $ctor__com_google_j2cl_transpiler_readable_jsproperties_Main__() {
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_jsproperties_Main();
   }
 
@@ -52,8 +52,8 @@ class Main extends Object {
    * @return {void}
    * @public
    */
-  m_testNativeJsProperty() {
-    NativeFoo.$create().hasOwnProperty;
+  m_testNativeJsProperty__() {
+    NativeFoo.$create__().hasOwnProperty;
     $global_Math.PI;
   }
 
@@ -61,7 +61,7 @@ class Main extends Object {
    * @return {void}
    * @public
    */
-  m_testStaticJsProperty() {
+  m_testStaticJsProperty__() {
     Foo.a;
     Foo.a = 10;
     Foo.abc;
@@ -72,8 +72,8 @@ class Main extends Object {
    * @return {void}
    * @public
    */
-  m_testInstanceJsProperty() {
-    let bar = Bar.$create();
+  m_testInstanceJsProperty__() {
+    let bar = Bar.$create__();
     bar.a;
     bar.a = 10;
     bar.abc;

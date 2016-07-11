@@ -67,30 +67,30 @@ class InnerClassInitOrder$Outer$OuterIsSuper extends InnerClassInitOrder$Outer {
    * @return {number}
    * @public
    */
-  m_checkDispatch() { return 2; }
+  m_checkDispatch__() { return 2; }
 
   /**
    * @return {number}
    * @public
    */
-  m_checkDispatchFromSub1() { return super.m_checkDispatch(); }
+  m_checkDispatchFromSub1__() { return super.m_checkDispatch__(); }
 
   /**
    * @return {number}
    * @public
    */
-  m_checkDispatchFromSub2() {
+  m_checkDispatchFromSub2__() {
     return InnerClassInitOrder$Outer$OuterIsSuper$1
         .$create__int__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer$OuterIsSuper(
             1, this)
-        .m_go();
+        .m_go__();
   }
 
   /**
    * @return {InnerClassInitOrder$Outer$OuterIsNotSuper}
    * @public
    */
-  m_unqualifiedAlloc() {
+  m_unqualifiedAlloc__() {
     return InnerClassInitOrder$Outer$OuterIsNotSuper
         .$create__com_google_j2cl_transpiler_readable_innerclassinitorder_InnerClassInitOrder$Outer(
             this);

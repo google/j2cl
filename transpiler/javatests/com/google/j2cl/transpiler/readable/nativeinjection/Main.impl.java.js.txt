@@ -30,10 +30,11 @@ class Main extends Object {
    * @return {!Main}
    * @public
    */
-  static $create() {
+  static $create__() {
     Main.$clinit();
     let $instance = new Main();
-    $instance.$ctor__com_google_j2cl_transpiler_readable_nativeinjection_Main();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_nativeinjection_Main__();
     return $instance;
   }
 
@@ -42,8 +43,8 @@ class Main extends Object {
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_nativeinjection_Main() {
-    this.$ctor__java_lang_Object();
+  $ctor__com_google_j2cl_transpiler_readable_nativeinjection_Main__() {
+    this.$ctor__java_lang_Object__();
     this.$init__com_google_j2cl_transpiler_readable_nativeinjection_Main();
   }
 
@@ -56,11 +57,11 @@ class Main extends Object {
     Main.$clinit();
     $Asserts.$enabled() &&
         $Asserts.$assert(String.m_equals__java_lang_String__java_lang_Object(
-            NativeClass.m_nativeStaticMethod(), 'nativeSaticMethod'));
-    let instance = NativeClass.$create();
+            NativeClass.m_nativeStaticMethod__(), 'nativeSaticMethod'));
+    let instance = NativeClass.$create__();
     $Asserts.$enabled() &&
         $Asserts.$assert(String.m_equals__java_lang_String__java_lang_Object(
-            instance.m_nativeInstanceMethod(), 'nativeInstanceMethod'));
+            instance.m_nativeInstanceMethod__(), 'nativeInstanceMethod'));
   }
 
   /**
