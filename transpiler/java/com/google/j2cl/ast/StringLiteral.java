@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.J2clUtils;
 
 /**
  * String literal node.
@@ -54,6 +55,6 @@ public class StringLiteral extends Expression {
    * Creates a StringLiteral from plain text.
    */
   public static StringLiteral fromPlainText(String string) {
-    return new StringLiteral("\"" + AstUtils.escapeJavaString(string) + "\"");
+    return new StringLiteral("\"" + J2clUtils.escapeJavaString(string) + "\"");
   }
 }

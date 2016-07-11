@@ -11,5 +11,6 @@ java_library(
     ],
     deps = [
         "//java/com/google/common/collect",
+        "//third_party/java/apache_commons_lang3",
     ],
 )

@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.common.J2clUtils;
 
 /**
  * Character literal node.
@@ -28,7 +29,7 @@ public class CharacterLiteral extends Expression {
   private String escapedValue;
 
   public CharacterLiteral(char value) {
-    this(value, "\"" + AstUtils.escapeJavaString(String.valueOf(value)) + "\"");
+    this(value, "\"" + J2clUtils.escapeJavaString(String.valueOf(value)) + "\"");
   }
 
   public CharacterLiteral(char value, String escapedValue) {
