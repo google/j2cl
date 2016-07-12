@@ -114,6 +114,13 @@ public class FrontendFlags {
   )
   protected boolean declareLegacyNamespace = false;
 
+  @Option(
+    name = "-time",
+    usage = "Generates a report of time spent in all stages of the compiler.",
+    hidden = false
+  )
+  protected boolean generateTimeReport = false;
+
   private final Errors errors;
 
   public FrontendFlags(Errors errors) {

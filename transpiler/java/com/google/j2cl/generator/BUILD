@@ -15,6 +15,7 @@ java_library(
         "//third_party/java/jsr305_annotations",
         "//transpiler/java/com/google/j2cl/ast",
         "//transpiler/java/com/google/j2cl/ast/sourcemap",
+        "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/errors",
         "//transpiler/java/com/google/j2cl/generator/visitors",
         "//third_party/java_src/jscomp/java/com/google/debugging/sourcemap:common",

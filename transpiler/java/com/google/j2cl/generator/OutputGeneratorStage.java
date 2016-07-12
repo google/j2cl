@@ -20,6 +20,7 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
+import com.google.j2cl.common.TimingCollector;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatheringVisitor;
@@ -56,6 +57,7 @@ public class OutputGeneratorStage {
   private final boolean declareLegacyNamespace;
   private final String depinfoPath;
   private final boolean shouldGenerateReadableSourceMaps;
+  private final TimingCollector timingReport = TimingCollector.get();
 
   public OutputGeneratorStage(
       Charset charset,
@@ -81,6 +83,8 @@ public class OutputGeneratorStage {
     // our output would be unstable. Actually this one can't actually destabilize output but since
     // it's being safely iterated over now it's best to guard against it being unsafely iterated
     // over in the future.
+    timingReport.startSample("Native files gather");
+
     Map<String, NativeJavaScriptFile> nativeFilesByPath =
         NativeJavaScriptFile.getFilesByPathFromZip(
             nativeJavaScriptFileZipPaths, charset.name(), errors);
@@ -95,10 +99,12 @@ public class OutputGeneratorStage {
           continue;
         }
 
+        timingReport.startSample("Create impl generator (gather variable aliases)");
         JavaScriptImplGenerator jsImplGenerator =
             new JavaScriptImplGenerator(errors, declareLegacyNamespace, javaType);
 
         // If the java type contains any native methods, search for matching native file.
+        timingReport.startSample("Native files read");
         if (javaType.containsNativeMethods()) {
           String typeRelativePath = GeneratorUtils.getRelativePath(javaType);
           String typeAbsolutePath = GeneratorUtils.getAbsolutePath(j2clCompilationUnit, javaType);
@@ -126,6 +132,7 @@ public class OutputGeneratorStage {
           }
         }
 
+        timingReport.startSample("Render impl");
         jsImplGenerator.setRelativeSourceMapLocation(
             javaType.getDescriptor().getBinaryClassName()
                 + SourceMapGeneratorStage.SOURCE_MAP_SUFFIX);
@@ -137,9 +144,11 @@ public class OutputGeneratorStage {
                 GeneratorUtils.getRelativePath(javaType),
                 jsImplGenerator.getSuffix());
         String javaScriptImplementationSource = jsImplGenerator.renderOutput();
+        timingReport.startSample("Write impl");
         GeneratorUtils.writeToFile(
             absolutePathForImpl, javaScriptImplementationSource, charset, errors);
 
+        timingReport.startSample("Render header");
         JavaScriptHeaderGenerator jsHeaderGenerator =
             new JavaScriptHeaderGenerator(errors, declareLegacyNamespace, javaType);
         Path absolutePathForHeader =
@@ -149,26 +158,32 @@ public class OutputGeneratorStage {
                 GeneratorUtils.getRelativePath(javaType),
                 jsHeaderGenerator.getSuffix());
         String javaScriptHeaderFile = jsHeaderGenerator.renderOutput();
+        timingReport.startSample("Write header");
         GeneratorUtils.writeToFile(absolutePathForHeader, javaScriptHeaderFile, charset, errors);
 
+        timingReport.startSample("Render source maps");
         generateSourceMaps(
             j2clCompilationUnit,
             javaType,
             javaScriptImplementationSource,
             jsImplGenerator.getSourceMappings());
 
+        timingReport.startSample("Gather depinfo");
         if (depinfoPath != null) {
           gatherDepinfo(javaType, importModulePaths, exportModulePaths);
         }
       }
 
+      timingReport.startSample("Copy *.java sources");
       copyJavaSourcesToOutput(j2clCompilationUnit);
     }
 
+    timingReport.startSample("Write depinfo");
     if (depinfoPath != null) {
       writeDepinfo(importModulePaths, exportModulePaths);
     }
 
+    timingReport.startSample("Check unused native impl files.");
     // Error if any of the native implementation files were not used.
     for (Entry<String, NativeJavaScriptFile> fileEntry : nativeFilesByPath.entrySet()) {
       if (!fileEntry.getValue().wasUsed()) {

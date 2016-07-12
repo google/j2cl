@@ -29,6 +29,7 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
+import com.google.j2cl.common.TimingCollector;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -57,7 +58,11 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   }
 
   public static Map<ImportCategory, Set<Import>> gatherImports(JavaType javaType) {
-    return new ImportGatheringVisitor().doGatherImports(javaType);
+    TimingCollector.get().startSubSample("Import Gathering Visitor");
+
+    Map<ImportCategory, Set<Import>> map = new ImportGatheringVisitor().doGatherImports(javaType);
+    TimingCollector.get().endSubSample();
+    return map;
   }
 
   private static String getShortAliasName(TypeDescriptor typeDescriptor) {
@@ -157,6 +162,9 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   }
 
   private Map<ImportCategory, Set<Import>> doGatherImports(JavaType javaType) {
+    TimingCollector timingCollector = TimingCollector.get();
+    timingCollector.startSubSample("Add default Classes");
+
     if (javaType.isJsOverlayImplementation()) {
       // The synthesized JsOverlayImpl type should import the native type eagerly.
       addTypeDescriptor(javaType.getNativeTypeDescriptor(), ImportCategory.EAGER);
@@ -170,8 +178,10 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     addTypeDescriptor(BootstrapType.NATIVE_UTIL.getDescriptor(), ImportCategory.EAGER);
 
     // Collect type references.
+    timingCollector.startSample("Collect type references");
     javaType.accept(this);
 
+    timingCollector.startSample("Remove duplicate references");
     typeDescriptorsByCategory
         .get(ImportCategory.LAZY)
         .removeAll(typeDescriptorsByCategory.get(ImportCategory.EAGER));
@@ -182,11 +192,13 @@ public class ImportGatheringVisitor extends AbstractVisitor {
         .get(ImportCategory.EAGER)
         .removeAll(typeDescriptorsDefinedInCompilationUnit);
 
+    timingCollector.startSample("Record Local Name Uses");
     recordLocalNameUses(typeDescriptorsDefinedInCompilationUnit);
     recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.LAZY));
     recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.EAGER));
     recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.EXTERN));
 
+    timingCollector.startSample("Convert to imports");
     Map<ImportCategory, Set<Import>> importsByCategory = new LinkedHashMap<>();
     importsByCategory.put(
         ImportCategory.LAZY, toImports(typeDescriptorsByCategory.get(ImportCategory.LAZY)));
@@ -194,7 +206,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
         ImportCategory.EAGER, toImports(typeDescriptorsByCategory.get(ImportCategory.EAGER)));
     importsByCategory.put(
         ImportCategory.EXTERN, toImports(typeDescriptorsByCategory.get(ImportCategory.EXTERN)));
-
+    timingCollector.endSubSample();
     return importsByCategory;
   }
 

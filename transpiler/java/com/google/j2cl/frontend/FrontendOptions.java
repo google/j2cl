@@ -59,6 +59,7 @@ public class FrontendOptions {
   private FileSystem outputFileSystem;
   private boolean shouldPrintReadableMap;
   private boolean declareLegacyNamespace;
+  private boolean generateTimeReport;
 
   private static final Set<String> VALID_JAVA_VERSIONS =
       ImmutableSet.of("1.8", "1.7", "1.6", "1.5");
@@ -87,6 +88,7 @@ public class FrontendOptions {
     setEncoding(flags.encoding);
     setShouldPrintReadableSourceMap(flags.readableSourceMaps);
     setDeclareLegacyNamespace(flags.declareLegacyNamespace);
+    setGenerateTimeReport(flags.generateTimeReport);
   }
 
   public List<String> getClasspathEntries() {
@@ -296,6 +298,14 @@ public class FrontendOptions {
 
   public void setDeclareLegacyNamespace(boolean declareLegacyNamespace) {
     this.declareLegacyNamespace = declareLegacyNamespace;
+  }
+
+  public boolean getGenerateTimeReport() {
+    return generateTimeReport;
+  }
+
+  private void setGenerateTimeReport(boolean generateTimeReport) {
+    this.generateTimeReport = generateTimeReport;
   }
 
   private boolean checkSourceFiles(List<String> sourceFiles) {

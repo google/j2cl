@@ -61,6 +61,7 @@ import com.google.j2cl.ast.visitors.RemoveUnusedMultiExpressionReturnValues;
 import com.google.j2cl.ast.visitors.SplitCompoundLongAssignments;
 import com.google.j2cl.ast.visitors.UnimplementedMethodsCreator;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
+import com.google.j2cl.common.TimingCollector;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.frontend.CompilationUnitBuilder;
 import com.google.j2cl.frontend.FrontendFlags;
@@ -81,14 +82,13 @@ public class J2clTranspiler {
   private final String[] args;
   private final Errors errors = new Errors();
   private FrontendOptions options;
+  private final TimingCollector timingCollector = TimingCollector.get();
 
   private J2clTranspiler(String[] args) {
     this.args = args;
   }
 
-  /**
-   * Runs the entire J2CL pipeline.
-   */
+  /** Runs the entire J2CL pipeline. */
   private void run() {
     loadOptions();
     List<CompilationUnit> j2clUnits = convertUnits(createJdtUnits());
@@ -96,9 +96,12 @@ public class J2clTranspiler {
     normalizeUnits(j2clUnits);
     generateOutputs(j2clUnits);
     maybeCloseFileSystem();
+    maybeOutputTimeReport();
   }
 
   private void loadOptions() {
+    timingCollector.startSubSample("Parse flags");
+
     FrontendFlags flags = new FrontendFlags(errors);
     flags.parse(args);
     maybeExitGracefully();
@@ -109,6 +112,8 @@ public class J2clTranspiler {
 
   private List<CompilationUnit> convertUnits(
       Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath) {
+    timingCollector.startSample("AST Conversion");
+
     // Records information about package-info files supplied as byte code.
     PackageInfoCache.init(options.getClasspathEntries(), errors);
     maybeExitGracefully();
@@ -119,6 +124,8 @@ public class J2clTranspiler {
   }
 
   private Map<String, org.eclipse.jdt.core.dom.CompilationUnit> createJdtUnits() {
+    timingCollector.startSample("JDT Parse");
+
     JdtParser parser = new JdtParser(options, errors);
     Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath =
         parser.parseFiles(options.getSourceFiles());
@@ -127,6 +134,8 @@ public class J2clTranspiler {
   }
 
   private void checkUnits(List<CompilationUnit> j2clUnits) {
+    timingCollector.startSample("Check Units");
+
     for (CompilationUnit compilationUnit : j2clUnits) {
       JsInteropRestrictionsChecker.check(compilationUnit, errors);
     }
@@ -134,6 +143,9 @@ public class J2clTranspiler {
   }
 
   private void normalizeUnits(List<CompilationUnit> j2clUnits) {
+    timingCollector.startSample("Normalize Units");
+    timingCollector.startSubSample("Create Pass List");
+
     List<NormalizationPass> passes =
         ImmutableList.<NormalizationPass>of(
             // Class structure normalizations.
@@ -197,17 +209,25 @@ public class J2clTranspiler {
     for (CompilationUnit j2clUnit : j2clUnits) {
       verifyUnit(j2clUnit);
       for (NormalizationPass pass : passes) {
+        timingCollector.startSample("Pass " + pass.getClass().getName());
         pass.applyTo(j2clUnit);
       }
       verifyUnit(j2clUnit);
     }
+
+    timingCollector.endSubSample(); // End the sub sample
   }
 
   private void verifyUnit(CompilationUnit j2clUnit) {
+    timingCollector.startSample("Verify Unit");
+
     VerifyParamAndArgCounts.applyTo(j2clUnit);
   }
 
   private void generateOutputs(List<CompilationUnit> j2clCompilationUnits) {
+    timingCollector.startSample("Generate output");
+    timingCollector.startSubSample("OutputGeneratorStage Constructor");
+
     new OutputGeneratorStage(
             Charset.forName(options.getEncoding()),
             options.getNativeSourceZipEntries(),
@@ -218,16 +238,26 @@ public class J2clTranspiler {
             options.getShouldPrintReadableSourceMap(),
             errors)
         .generateOutputs(j2clCompilationUnits);
+    timingCollector.endSubSample();
     maybeExitGracefully();
   }
 
   private void maybeCloseFileSystem() {
+    timingCollector.startSample("Close File System");
+
     if (options.getOutputFileSystem() instanceof com.sun.nio.zipfs.ZipFileSystem) {
       try {
         options.getOutputFileSystem().close();
       } catch (IOException e) {
         errors.error(Errors.Error.ERR_CANNOT_CLOSE_ZIP);
       }
+    }
+  }
+
+  private void maybeOutputTimeReport() {
+    timingCollector.endSubSample();
+    if (options.getGenerateTimeReport()) {
+      timingCollector.printReport();
     }
   }
 
