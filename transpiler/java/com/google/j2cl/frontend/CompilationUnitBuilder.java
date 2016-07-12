@@ -159,8 +159,10 @@ public class CompilationUnitBuilder {
       // Records information about package-info files supplied as source code.
       if (currentSourceFile.endsWith("package-info.java")
           && jdtCompilationUnit.getPackage() != null) {
-        packageInfoCache.setPackageAnnotations(
-            packageName, jdtCompilationUnit.getPackage().annotations());
+        packageInfoCache.setInfo(
+            PackageInfoCache.SOURCE_CLASS_PATH_ENTRY,
+            packageName,
+            jdtCompilationUnit.getPackage().annotations());
       }
       for (Object object : jdtCompilationUnit.types()) {
         AbstractTypeDeclaration abstractTypeDeclaration = (AbstractTypeDeclaration) object;

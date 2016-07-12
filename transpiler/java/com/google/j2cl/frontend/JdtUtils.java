@@ -1418,6 +1418,15 @@ public class JdtUtils {
 
     PackageInfoCache packageInfoCache = PackageInfoCache.get();
 
+    ITypeBinding topLevelTypeBinding = toTopLevelTypeBinding(typeBinding);
+    if (topLevelTypeBinding.isFromSource()) {
+      // Let the PackageInfoCache know that this class is Source, otherwise it would have to rummage
+      // around in the class path to figure it out and it might even come up with the wrong answer
+      // for example if this class has also been globbed into some other library that is a
+      // dependency of this one.
+      PackageInfoCache.get().markAsSource(topLevelTypeBinding.getBinaryName());
+    }
+
     DescriptorFactory<MethodDescriptor> concreteJsFunctionMethodDescriptorFactory =
         new DescriptorFactory<MethodDescriptor>() {
           @Override
@@ -1480,11 +1489,10 @@ public class JdtUtils {
 
     // If a package-info file has specified a JsPackage namespace then it is sugar for setting the
     // jsNamespace of all top level types in that package.
-    boolean isTopLevelType =
-        typeBinding.getDeclaringClass() == null && typeBinding.getPackage() != null;
+    boolean isTopLevelType = typeBinding.getDeclaringClass() == null;
     if (isTopLevelType) {
       String jsPackageNamespace =
-          packageInfoCache.getJsNamespace(typeBinding.getPackage().getName());
+          packageInfoCache.getJsNamespace(toTopLevelTypeBinding(typeBinding).getBinaryName());
       if (jsPackageNamespace != null) {
         jsNamespace = jsPackageNamespace;
       }
