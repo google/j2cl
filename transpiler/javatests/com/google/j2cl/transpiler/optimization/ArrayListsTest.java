@@ -18,10 +18,10 @@ public class ArrayListsTest {
 
   @JsType(isNative = true, name = "ArrayList", namespace = "java.util")
   interface HasArrayListMethods {
-    @JsProperty(name = "get")
+    @JsProperty(name = "getAtIndex")
     public Object getMethod();
 
-    @JsProperty(name = "set")
+    @JsProperty(name = "setAtIndex")
     public Object setMethod();
   }
 
