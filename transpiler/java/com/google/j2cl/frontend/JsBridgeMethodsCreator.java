@@ -22,10 +22,6 @@ import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
-
-import org.eclipse.jdt.core.dom.IMethodBinding;
-import org.eclipse.jdt.core.dom.ITypeBinding;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -33,6 +29,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import org.eclipse.jdt.core.dom.IMethodBinding;
+import org.eclipse.jdt.core.dom.ITypeBinding;
 
 /**
  * Creates bridge methods for instance JsMembers.
@@ -162,10 +160,12 @@ public class JsBridgeMethodsCreator {
         JdtUtils.createMethodDescriptor(forwardToMethodBinding);
     MethodDescriptor bridgeMethodDescriptor = JdtUtils.createMethodDescriptor(bridgeMethodBinding);
     return AstUtils.createForwardingMethod(
+        null,
         MethodDescriptor.Builder.from(bridgeMethodDescriptor)
             .setEnclosingClassTypeDescriptor(JdtUtils.createTypeDescriptor(targetTypeBinding))
             .build(),
         forwardToMethodDescriptor,
-        "Bridge method for exposing non-JsMethod.");
+        "Bridge method for exposing non-JsMethod.",
+        true);
   }
 }

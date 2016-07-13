@@ -12,5 +12,5 @@ class Transitive {
   final native int getJsProperty();
 
   @JsOverlay
-  final void doTransitiveInstanceMethod() {}
+  final void doTransitiveInstanceMethod(String arg1) {}
 }

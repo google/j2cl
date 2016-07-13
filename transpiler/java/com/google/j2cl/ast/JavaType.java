@@ -21,7 +21,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -163,16 +162,10 @@ public class JavaType extends Node {
   }
 
   public TypeDescriptor getNativeTypeDescriptor() {
-    Preconditions.checkArgument(
-        overlayTypeDescriptor == null || typeDescriptor.getSuperTypeDescriptor() == null,
-        "A JsInterop Overlay type should not have super class.");
     return this.overlayTypeDescriptor;
   }
 
   public void setNativeTypeDescriptor(TypeDescriptor nativeTypeDescriptor) {
-    Preconditions.checkArgument(
-        nativeTypeDescriptor == null || typeDescriptor.getSuperTypeDescriptor() == null,
-        "A JsInterop Overlay type should not have super class.");
     this.overlayTypeDescriptor = nativeTypeDescriptor;
   }
 
@@ -257,9 +250,6 @@ public class JavaType extends Node {
   }
 
   public TypeDescriptor getSuperTypeDescriptor() {
-    Preconditions.checkArgument(
-        overlayTypeDescriptor == null || typeDescriptor.getSuperTypeDescriptor() == null,
-        "A Java type with a SuperClass can't also be a JsInterop Overlay.");
     return typeDescriptor.getSuperTypeDescriptor();
   }
 

@@ -10,17 +10,20 @@ goog.module('com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Trans
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let String = goog.forwardDeclare('java.lang.String$impl');
+
 /** @constructor */ let $Transitive = window.Object;
 
 
 class Transitive$$Overlay {
   /**
    * @param {$Transitive} $thisArg
+   * @param {?string} arg1
    * @return {void}
    * @public
    */
-  static m_doTransitiveInstanceMethod__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Transitive_$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport(
-      $thisArg) {
+  static m_doTransitiveInstanceMethod__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Transitive__java_lang_String_$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport(
+      $thisArg, arg1) {
     Transitive$$Overlay.$clinit();
   }
 
@@ -36,7 +39,7 @@ class Transitive$$Overlay {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() { String = goog.module.get('java.lang.String$impl'); }
 };
 
 

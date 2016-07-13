@@ -22,7 +22,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -296,33 +295,39 @@ public class AstUtils {
       TypeDescriptor fromTypeDescriptor,
       String jsDocDescription) {
     return createForwardingMethod(
+        null,
         MethodDescriptor.Builder.from(targetMethodDescriptor)
             .setEnclosingClassTypeDescriptor(fromTypeDescriptor)
             .build(),
         targetMethodDescriptor,
         jsDocDescription,
+        true,
         true);
   }
+
   /**
-   * Creates forwarding method {@code fromMethodDescriptor} that delegates to
-   * {@code toMethodDescriptor}, e.g.
+   * Creates forwarding method {@code fromMethodDescriptor} that delegates to {@code
+   * toMethodDescriptor}, e.g.
    *
-   * fromMethodDescriptor (args) { return this.toMethodDescriptor(args);
-   * }
+   * <p>fromMethodDescriptor (args) { return this.toMethodDescriptor(args); }
    */
   public static Method createForwardingMethod(
-      MethodDescriptor fromMethodDescriptor,
-      MethodDescriptor toMethodDescriptor,
-      String jsDocDescription) {
-    return createForwardingMethod(
-        fromMethodDescriptor, toMethodDescriptor, jsDocDescription, false);
-  }
-
-  private static Method createForwardingMethod(
+      Expression qualifier,
       MethodDescriptor fromMethodDescriptor,
       MethodDescriptor toMethodDescriptor,
       String jsDocDescription,
-      boolean isStaticDispatch) {
+      boolean isOverride) {
+    return createForwardingMethod(
+        qualifier, fromMethodDescriptor, toMethodDescriptor, jsDocDescription, false, isOverride);
+  }
+
+  private static Method createForwardingMethod(
+      Expression qualifier,
+      MethodDescriptor fromMethodDescriptor,
+      MethodDescriptor toMethodDescriptor,
+      String jsDocDescription,
+      boolean isStaticDispatch,
+      boolean isOverride) {
     checkArgument(!fromMethodDescriptor.getEnclosingClassTypeDescriptor().isInterface());
     List<Variable> parameters = new ArrayList<>();
     List<Expression> arguments = new ArrayList<>();
@@ -337,8 +342,8 @@ public class AstUtils {
     // targetMethodDescriptor and its declarationMethodDescriptor.
     Expression forwardingMethodCall =
         isStaticDispatch
-            ? MethodCall.createStaticDispatchMethodCall(null, toMethodDescriptor, arguments)
-            : MethodCall.createMethodCall(null, toMethodDescriptor, arguments);
+            ? MethodCall.createStaticDispatchMethodCall(qualifier, toMethodDescriptor, arguments)
+            : MethodCall.createMethodCall(qualifier, toMethodDescriptor, arguments);
 
     Statement statement =
         fromMethodDescriptor
@@ -351,7 +356,7 @@ public class AstUtils {
         .setMethodDescriptor(fromMethodDescriptor)
         .setParameters(parameters)
         .addStatements(statement)
-        .setIsOverride(true)
+        .setIsOverride(isOverride)
         .setJsDocDescription(jsDocDescription)
         .build();
   }
@@ -375,14 +380,15 @@ public class AstUtils {
     Iterable<TypeDescriptor> parameterTypes = Iterables.concat(
         Arrays.asList(sourceTypeDescriptor), // add the first parameter type.
         targetMethodDescriptor.getParameterTypeDescriptors());
-    Iterable<TypeDescriptor> methoDeclarationParameterTypes = Iterables.concat(
-        Arrays.asList(sourceTypeDescriptor), // add the first parameter type.
-        targetMethodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors());
+    Iterable<TypeDescriptor> methodDeclarationParameterTypes =
+        Iterables.concat(
+            Arrays.asList(sourceTypeDescriptor), // add the first parameter type.
+            targetMethodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors());
 
     MethodDescriptor declarationMethodDescriptor =
         MethodDescriptor.Builder.from(targetMethodDescriptor.getDeclarationMethodDescriptor())
             .setEnclosingClassTypeDescriptor(targetTypeDescriptor)
-            .setParameterTypeDescriptors(methoDeclarationParameterTypes)
+            .setParameterTypeDescriptors(methodDeclarationParameterTypes)
             .setIsStatic(true)
             .setJsInfo(JsInfo.NONE)
             .build();

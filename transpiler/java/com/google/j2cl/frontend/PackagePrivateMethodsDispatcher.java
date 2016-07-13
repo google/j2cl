@@ -19,15 +19,13 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
-
-import org.eclipse.jdt.core.dom.IMethodBinding;
-import org.eclipse.jdt.core.dom.ITypeBinding;
-import org.eclipse.jdt.core.dom.Modifier;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import org.eclipse.jdt.core.dom.IMethodBinding;
+import org.eclipse.jdt.core.dom.ITypeBinding;
+import org.eclipse.jdt.core.dom.Modifier;
 
 /**
  * Checks package private method that is exposed by its public or protected overriding methods,
@@ -43,11 +41,13 @@ public class PackagePrivateMethodsDispatcher {
         findExposedOverriddenMethods(typeBinding).entrySet()) {
       dispatchMethods.add(
           AstUtils.createForwardingMethod(
+              null,
               MethodDescriptor.Builder.from(entry.getValue())
                   .setEnclosingClassTypeDescriptor(JdtUtils.createTypeDescriptor(typeBinding))
                   .build(),
               entry.getKey(),
-              "Forwarding method for package private method."));
+              "Forwarding method for package private method.",
+              true));
     }
     javaType.addMethods(dispatchMethods);
   }

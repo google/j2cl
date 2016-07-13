@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+ * Copyright 2016 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -30,117 +30,252 @@ import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
+import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Creates a Overlay implementation types that contain devirtualized JsOverlay methods from native
- * JsTypes and Interfaces that have default methods, and devirtualized the corresponding method
- * calls
+ * Creates Overlay types, bridges to overlay methods and redirects member accesses:
+ *
+ * <p>Creates Overlay types (by moving fields and methods from the original type to the new Overlay
+ * type) for JsTypes that have fields or methods and for Interfaces that have default methods.
+ *
+ * <p>Any references to the moved fields and methods are redirected to the new location.
+ *
+ * <p>When moving instance methods out of a JsType, those methods must be devirtualized. As a result
+ * reference sites must be converted from instance method calls to static method calls. This
+ * inappropriately creates new imports not present in the original Java source since the class that
+ * implements the static function must be imported. To avoid these imports and to avoid making
+ * strict dependency checkers unhappy we sometimes synthesize bridge methods and sometimes carefully
+ * dispatch static method calls to take advantage of static method inheritance in ES6 classes.
+ *
+ * <p>Take the following scenario:
+ *
+ * <ul>
+ * <li>@JsType(isNative=true) class A { @JsOverlay void fooMethod() {} }
+ * <li>@JsType(isNative=true) class B extends A {}
+ * <li>class C extends B {}
+ * <li>class D extends C {}
+ * </ul>
+ *
+ * <p>A's "fooMethod" should be moved to A$Overlay and instance like "a.fooMethod()" should be
+ * rewritten as "A$Overlay.fooMethod(a)".
+ *
+ * <p>B's B$Overlay class should contain no methods and no bridge either but it will be emitted to
+ * extend A$Overlay. Instance dispatches like "b.fooMethod()" should be rewritten as
+ * "B$Overlay.fooMethod(b)", taking advantage of static method inheritance in ES6 classes.
+ *
+ * <p>C has an impl class instead of an overlay class. A bridge method named "fooMethod" should
+ * added in C that calls "B$Overlay.fooMethod(this)" and instance dispatches like "c.fooMethod()"
+ * should be left as they are.
+ *
+ * <p>D needs no changes since it inherits the bridge added in C. Instance dispatches like
+ * "d.fooMethod()" should be left as they are.
  */
 public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends NormalizationPass {
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    List<JavaType> replacementTypeList = new ArrayList<>();
-
-    for (JavaType type : compilationUnit.getTypes()) {
-      if (!type.getDescriptor().isNative()) {
-        replacementTypeList.add(type);
-      }
-      if (type.getDescriptor().isNative() || type.containsDefaultMethods()) {
-        replacementTypeList.add(createOverlayImplementationType(type));
-      }
-    }
-    compilationUnit.getTypes().clear();
-    compilationUnit.getTypes().addAll(replacementTypeList);
-
-    // Rewrite method calls.
-    compilationUnit.accept(
-        new AbstractRewriter() {
-          @Override
-          public Node rewriteMethodCall(MethodCall methodCall) {
-            if (!shouldRewriteMethodCall(methodCall)) {
-              return methodCall;
-            }
-
-            TypeDescriptor originalTypeDescriptor =
-                methodCall.getTarget().getEnclosingClassTypeDescriptor();
-            TypeDescriptor overlayTypeDescriptor =
-                TypeDescriptors.createOverlayImplementationClassTypeDescriptor(
-                    originalTypeDescriptor);
-            if (methodCall.getTarget().isStatic()) {
-              return MethodCall.Builder.from(methodCall)
-                  .setEnclosingClass(overlayTypeDescriptor)
-                  .setQualifier(null)
-                  .build();
-            }
-            // Devirtualize *instance* JsOverlay method.
-            return AstUtils.createDevirtualizedMethodCall(methodCall, overlayTypeDescriptor);
-          }
-
-          @Override
-          public Node rewriteFieldAccess(FieldAccess fieldAccess) {
-            FieldDescriptor target = fieldAccess.getTarget();
-            if (target.isJsOverlay()) {
-              checkArgument(target.isStatic());
-              TypeDescriptor overlayTypeDescriptor =
-                  TypeDescriptors.createOverlayImplementationClassTypeDescriptor(
-                      target.getEnclosingClassTypeDescriptor());
-              return new FieldAccess(
-                  null,
-                  FieldDescriptor.Builder.from(target)
-                      .setEnclosingClassTypeDescriptor(overlayTypeDescriptor)
-                      .build());
-            }
-            return fieldAccess;
-          }
-        });
+    OverlayImplementationTypesCreator.applyTo(compilationUnit);
+    OverlayBridgesCreator.applyTo(compilationUnit);
+    compilationUnit.accept(new MemberAccessesRedirector());
   }
 
-  private static JavaType createOverlayImplementationType(JavaType type) {
-    TypeDescriptor overlayImplTypeDescriptor =
-        TypeDescriptors.createOverlayImplementationClassTypeDescriptor(type.getDescriptor());
-    JavaType overlayClass =
-        new JavaType(type.getKind(), type.getVisibility(), overlayImplTypeDescriptor);
-    overlayClass.setNativeTypeDescriptor(type.getDescriptor());
-    // Copy static JsOverlay methods. Even instance methods should already be devirtualized to
-    // static.
-    for (Method method : type.getMethods()) {
-      if (method.getDescriptor().isJsOverlay() || method.getDescriptor().isDefault()) {
-        overlayClass.addMethod(
-            Method.Builder.from(
-                    method.getDescriptor().isStatic()
-                        ? method
-                        : AstUtils.createDevirtualizedMethod(method))
-                .setJsInfo(JsInfo.NONE)
-                .setEnclosingClass(overlayImplTypeDescriptor)
-                .build());
+  /**
+   * Finds regular classes that directly subclass a native JsType class, then finds all JsOverlay
+   * methods in the super type hierarchy that are expected to exist in synthesized Overlay classes,
+   * and then creates an instance method bridge to the overlay method. The existence of these
+   * bridges will make it possible to dispatch at method call sites without creating imports that
+   * weren't present in the original Java source.
+   */
+  private static class OverlayBridgesCreator {
 
-        // clear the method body from the original type.
-        method.getBody().getStatements().clear();
+    static void addBridges(
+        JavaType javaType, TypeDescriptor typeDescriptor, TypeDescriptor superTypeDescriptor) {
+      for (MethodDescriptor methodDescriptor : superTypeDescriptor.getAllMethods()) {
+        // The only methods that need a bridge are JsOverlay methods that will be moved to the
+        // Overlay class. This does not include JsProperty(s) since they are not moved to the
+        // Overlay class.
+        if (!methodDescriptor.isJsOverlay()) {
+          continue;
+        }
+
+        javaType.addMethod(createBridgeMethod(typeDescriptor, methodDescriptor));
       }
     }
-    // Copy static JsOverlay fields.
-    for (Field field : type.getFields()) {
-      if (field.getDescriptor().isJsOverlay()) {
-        checkState(field.getDescriptor().isStatic());
-        overlayClass.addField(
-            Field.Builder.from(field).setEnclosingClass(overlayImplTypeDescriptor).build());
+
+    static void applyTo(CompilationUnit compilationUnit) {
+      for (JavaType javaType : compilationUnit.getTypes()) {
+        TypeDescriptor typeDescriptor = javaType.getDescriptor();
+        TypeDescriptor superTypeDescriptor = typeDescriptor.getSuperTypeDescriptor();
+        // The only classes that should have bridges added are regular classes that are the
+        // immediate subclass a native JsType class.
+        if (typeDescriptor.isNative()
+            || superTypeDescriptor == null
+            || !superTypeDescriptor.isNative()) {
+          continue;
+        }
+
+        addBridges(javaType, typeDescriptor, superTypeDescriptor);
       }
     }
-    return overlayClass;
+
+    static Method createBridgeMethod(
+        TypeDescriptor typeDescriptor, MethodDescriptor targetMethodDescriptor) {
+      MethodDescriptor bridgeMethodDescriptor =
+          MethodDescriptor.Builder.from(targetMethodDescriptor)
+              .setEnclosingClassTypeDescriptor(typeDescriptor)
+              .setJsInfo(JsInfo.NONE)
+              .setIsNative(false)
+              .build();
+
+      return AstUtils.createForwardingMethod(
+          new ThisReference(typeDescriptor.getSuperTypeDescriptor()),
+          bridgeMethodDescriptor,
+          targetMethodDescriptor,
+          "Instance bridge to super overlay method.",
+          false);
+    }
   }
 
-  private static boolean shouldRewriteMethodCall(MethodCall methodCall) {
-    MethodDescriptor methodDescriptor = methodCall.getTarget();
-    // do not devirtualize non-JsOverlay method.
-    TypeDescriptor enclosingClassTypeDescriptor =
-        methodDescriptor.getEnclosingClassTypeDescriptor();
+  /**
+   * Finds classes that need a matching overlay class (either because the class is a native JsType
+   * or because it is an interface with default methods) and creates the overlay class by copying
+   * over devirtualized versions of the methods in question.
+   */
+  private static class OverlayImplementationTypesCreator {
 
-    return enclosingClassTypeDescriptor.isNative() && methodDescriptor.isJsOverlay()
-        || methodDescriptor.isDefault() && methodCall.isStaticDispatch();
+    static void applyTo(CompilationUnit compilationUnit) {
+      List<JavaType> replacementTypeList = new ArrayList<>();
+
+      for (JavaType javaType : compilationUnit.getTypes()) {
+        if (!javaType.getDescriptor().isNative()) {
+          replacementTypeList.add(javaType);
+        }
+        if (javaType.getDescriptor().isNative() || javaType.containsDefaultMethods()) {
+          replacementTypeList.add(createOverlayImplementationType(javaType));
+        }
+      }
+      compilationUnit.getTypes().clear();
+      compilationUnit.getTypes().addAll(replacementTypeList);
+    }
+
+    static JavaType createOverlayImplementationType(JavaType javaType) {
+      TypeDescriptor overlayImplTypeDescriptor =
+          TypeDescriptors.createOverlayImplementationClassTypeDescriptor(javaType.getDescriptor());
+      JavaType overlayClass =
+          new JavaType(javaType.getKind(), javaType.getVisibility(), overlayImplTypeDescriptor);
+      overlayClass.setNativeTypeDescriptor(javaType.getDescriptor());
+
+      for (Method method : javaType.getMethods()) {
+        // Copy JsOverlay and Default methods. If they're not already static, devirtualize them.
+        if (method.getDescriptor().isJsOverlay() || method.getDescriptor().isDefault()) {
+          overlayClass.addMethod(createOverlayMethod(method, overlayImplTypeDescriptor));
+          // clear the method body from the original type.
+          method.getBody().getStatements().clear();
+        }
+      }
+
+      for (Field field : javaType.getFields()) {
+        // Copy JsOverlay fields, only already static ones are legal.
+        if (field.getDescriptor().isJsOverlay()) {
+          checkState(field.getDescriptor().isStatic());
+
+          overlayClass.addField(
+              Field.Builder.from(field).setEnclosingClass(overlayImplTypeDescriptor).build());
+        }
+      }
+
+      return overlayClass;
+    }
+
+    static Method createOverlayMethod(Method method, TypeDescriptor overlayImplTypeDescriptor) {
+      Method statifiedMethod =
+          method.getDescriptor().isStatic() ? method : AstUtils.createDevirtualizedMethod(method);
+      Method movedMethod =
+          Method.Builder.from(statifiedMethod)
+              .setJsInfo(JsInfo.NONE)
+              .setEnclosingClass(overlayImplTypeDescriptor)
+              .build();
+      return movedMethod;
+    }
+  }
+
+  /**
+   * Finds accesses to properties that have been moved to overlay classes, and rewrites the accesses
+   * to the new location. So as to avoid introducing new dependencies, these rewritten accesses take
+   * advantage of overlay class static method inheritance, normal-to-native class bridge methods,
+   * and normal class instance method inheritance.
+   */
+  private static class MemberAccessesRedirector extends AbstractRewriter {
+
+    static Node createRedirectedAccessToOverlayClass(FieldAccess fieldAccess) {
+      checkArgument(fieldAccess.getTarget().isStatic());
+
+      FieldDescriptor targetFieldDescriptor = fieldAccess.getTarget();
+      TypeDescriptor overlayTypeDescriptor =
+          TypeDescriptors.createOverlayImplementationClassTypeDescriptor(
+              targetFieldDescriptor.getEnclosingClassTypeDescriptor());
+      return new FieldAccess(
+          null,
+          FieldDescriptor.Builder.from(targetFieldDescriptor)
+              .setEnclosingClassTypeDescriptor(overlayTypeDescriptor)
+              .build());
+    }
+
+    static Node createRedirectedStaticMethodCall(
+        MethodCall methodCall, TypeDescriptor overlayTypeDescriptor) {
+      return MethodCall.Builder.from(methodCall)
+          .setEnclosingClass(overlayTypeDescriptor)
+          .setQualifier(null)
+          .build();
+    }
+
+    @Override
+    public Node rewriteFieldAccess(FieldAccess fieldAccess) {
+      if (fieldAccess.getTarget().isJsOverlay()) {
+        return createRedirectedAccessToOverlayClass(fieldAccess);
+      }
+
+      return fieldAccess;
+    }
+
+    @Override
+    public Node rewriteMethodCall(MethodCall methodCall) {
+      boolean targetIsJsOverlayInNativeClass =
+          methodCall.getTarget().getEnclosingClassTypeDescriptor().isNative()
+              && methodCall.getTarget().isJsOverlay();
+      boolean targetIsDefaultMethodAccessedStatically =
+          methodCall.getTarget().isDefault() && methodCall.isStaticDispatch();
+
+      if (targetIsJsOverlayInNativeClass || targetIsDefaultMethodAccessedStatically) {
+        TypeDescriptor targetOverlayTypeDescriptor =
+            TypeDescriptors.createOverlayImplementationClassTypeDescriptor(
+                methodCall.getTarget().getEnclosingClassTypeDescriptor());
+
+        if (methodCall.getTarget().isStatic()) {
+          // Call already-static method directly at their new overlay class location.
+          return createRedirectedStaticMethodCall(methodCall, targetOverlayTypeDescriptor);
+        } else if (methodCall.getTarget().isDefault()) {
+          // Call default methods statically at their new overlay class location.
+          return AstUtils.createDevirtualizedMethodCall(methodCall, targetOverlayTypeDescriptor);
+        } else if (methodCall.getQualifier().getTypeDescriptor().isNative()) {
+          // If the current instance type has an overlay class then call overlay methods statically
+          // on that overlay class, they will prototypically resolve to the final location.
+          TypeDescriptor instanceOverlayTypeDescriptor =
+              TypeDescriptors.createOverlayImplementationClassTypeDescriptor(
+                  methodCall.getQualifier().getTypeDescriptor());
+          return AstUtils.createDevirtualizedMethodCall(methodCall, instanceOverlayTypeDescriptor);
+        } else {
+          // If the current instance type does not have an overlay class then leave the call alone.
+          // It will prototypically resolve to the overlay bridge method created earlier.
+          return methodCall;
+        }
+      }
+
+      return methodCall;
+    }
   }
 }

@@ -31,15 +31,12 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.TypeDescriptor.DescriptorFactory;
 import com.google.j2cl.ast.common.JsUtils;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Utility class holding type descriptors that need to be referenced directly.
- */
+/** Utility class holding type descriptors that need to be referenced directly. */
 public class TypeDescriptors {
   public TypeDescriptor primitiveBoolean;
   public TypeDescriptor primitiveByte;
@@ -81,9 +78,7 @@ public class TypeDescriptors {
   public static final String INT_TYPE_NAME = "int";
   public static final String VOID_TYPE_NAME = "void";
 
-  /**
-   * Primitive type descriptors and boxed type descriptors mapping.
-   */
+  /** Primitive type descriptors and boxed type descriptors mapping. */
   private BiMap<TypeDescriptor, TypeDescriptor> boxedTypeByPrimitiveType = HashBiMap.create();
 
   private static ThreadLocal<TypeDescriptors> typeDescriptorsStorage = new ThreadLocal<>();
@@ -160,8 +155,7 @@ public class TypeDescriptors {
    * Returns an idea of the "width" of a numeric primitive type to help with deciding when a
    * conversion would be a narrowing and when it would be a widening.
    *
-   * <p>
-   * Even though the floating point types are only 4 and 8 bytes respectively they are considered
+   * <p>Even though the floating point types are only 4 and 8 bytes respectively they are considered
    * very wide because of the magnitude of the maximum values they can encode.
    */
   public static int getWidth(TypeDescriptor typeDescriptor) {
@@ -215,6 +209,14 @@ public class TypeDescriptors {
     checkArgument(!typeDescriptor.isArray());
     checkArgument(!typeDescriptor.isUnion());
 
+    TypeDescriptor superTypeDescriptor =
+        typeDescriptor.getSuperTypeDescriptor() == null
+                || !(typeDescriptor.getSuperTypeDescriptor().isNative()
+                    || typeDescriptor.getSuperTypeDescriptor().isInterface())
+            ? null
+            : createOverlayImplementationClassTypeDescriptor(
+                typeDescriptor.getSuperTypeDescriptor());
+
     List<String> classComponents =
         Lists.newArrayList(
             Iterables.concat(
@@ -222,6 +224,7 @@ public class TypeDescriptors {
                 Arrays.asList(AstUtils.OVERLAY_IMPLEMENTATION_CLASS_SUFFIX)));
 
     return createExactly(
+        superTypeDescriptor,
         typeDescriptor.getPackageComponents(),
         classComponents,
         Collections.<TypeDescriptor>emptyList(),
@@ -232,9 +235,7 @@ public class TypeDescriptors {
         false);
   }
 
-  /**
-   * Holds the bootstrap types.
-   */
+  /** Holds the bootstrap types. */
   public enum BootstrapType {
     OBJECTS(Arrays.asList("vmbootstrap"), "Objects"),
     COMPARABLES(Arrays.asList("vmbootstrap"), "Comparables"),
@@ -282,6 +283,7 @@ public class TypeDescriptors {
       String jsNamespace, String jsName, List<TypeDescriptor> typeArgumentDescriptors) {
 
     return createExactly(
+        null,
         Collections.singletonList(jsNamespace),
         Collections.singletonList((JsUtils.isGlobal(jsNamespace) ? "global_" : "") + jsName),
         typeArgumentDescriptors,
@@ -367,6 +369,7 @@ public class TypeDescriptors {
       List<TypeDescriptor> typeArgumentDescriptors) {
     checkArgument(!Iterables.getLast(classComponents).contains("<"));
     return createExactly(
+        null,
         packageComponents,
         classComponents,
         typeArgumentDescriptors,
@@ -378,6 +381,7 @@ public class TypeDescriptors {
   }
 
   private static TypeDescriptor createExactly(
+      final TypeDescriptor superTypeDescriptor,
       final List<String> packageComponents,
       final List<String> classComponents,
       final List<TypeDescriptor> typeArgumentDescriptors,
@@ -390,8 +394,11 @@ public class TypeDescriptors {
         new DescriptorFactory<TypeDescriptor>() {
           @Override
           public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
+            TypeDescriptor rawSuperTypeDescriptor =
+                superTypeDescriptor != null ? superTypeDescriptor.getRawTypeDescriptor() : null;
             List<TypeDescriptor> emptyTypeArgumentDescriptors = Collections.emptyList();
             return createExactly(
+                rawSuperTypeDescriptor,
                 packageComponents,
                 classComponents,
                 emptyTypeArgumentDescriptors,
@@ -400,6 +407,13 @@ public class TypeDescriptors {
                 isRaw,
                 isNative,
                 isJsType);
+          }
+        };
+    DescriptorFactory<TypeDescriptor> superTypeDescriptorFactory =
+        new DescriptorFactory<TypeDescriptor>() {
+          @Override
+          protected TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
+            return superTypeDescriptor;
           }
         };
 
@@ -425,6 +439,7 @@ public class TypeDescriptors {
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
         .setSimpleName(simpleName)
         .setSourceName(Joiner.on(".").join(Iterables.concat(packageComponents, classComponents)))
+        .setSuperTypeDescriptorFactory(superTypeDescriptorFactory)
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setVisibility(Visibility.PUBLIC)
         .build();

@@ -8,12 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Immediate.$Overlay$impl');
 
 
+let Transitive$$Overlay = goog.require('com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Transitive.$Overlay$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 /** @constructor */ let $Immediate = window.Object;
 
 
-class Immediate$$Overlay {
+class Immediate$$Overlay extends Transitive$$Overlay {
   /**
    * @param {$Immediate} $thisArg
    * @return {void}
@@ -36,7 +37,7 @@ class Immediate$$Overlay {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() { Transitive$$Overlay.$clinit(); }
 };
 
 

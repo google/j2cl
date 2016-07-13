@@ -10,7 +10,9 @@ goog.module('com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNa
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Immediate$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Immediate.$Overlay$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 
 /** @constructor */ let $Immediate = window.Object;
 
@@ -52,6 +54,30 @@ class NonNativeUpper extends $Immediate {
   }
 
   /**
+   * Instance bridge to super overlay method.
+   * @return {void}
+   * @public
+   */
+  m_doImmediateInstanceMethod___$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport() {
+    Immediate$$Overlay
+        .m_doImmediateInstanceMethod__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Immediate_$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport(
+            this);
+  }
+
+  /**
+   * Instance bridge to super overlay method.
+   * @param {?string} arg0
+   * @return {void}
+   * @public
+   */
+  m_doTransitiveInstanceMethod__java_lang_String_$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport(
+      arg0) {
+    Immediate$$Overlay
+        .m_doTransitiveInstanceMethod__com_google_j2cl_transpiler_readable_transitivejsoverlayimport_Transitive__java_lang_String_$pp_com_google_j2cl_transpiler_readable_transitivejsoverlayimport(
+            this, arg0);
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -73,7 +99,12 @@ class NonNativeUpper extends $Immediate {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { Class = goog.module.get('java.lang.Class$impl'); }
+  static $clinit() {
+    Immediate$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Immediate.$Overlay$impl');
+    Class = goog.module.get('java.lang.Class$impl');
+    String = goog.module.get('java.lang.String$impl');
+  }
 
   /**
    * Runs instance field and block initializers.

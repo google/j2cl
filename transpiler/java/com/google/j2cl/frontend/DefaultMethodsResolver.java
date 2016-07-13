@@ -20,15 +20,13 @@ import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
-
-import org.eclipse.jdt.core.dom.IMethodBinding;
-import org.eclipse.jdt.core.dom.ITypeBinding;
-
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import org.eclipse.jdt.core.dom.IMethodBinding;
+import org.eclipse.jdt.core.dom.ITypeBinding;
 
 /**
  * Implements inherited default methods as concrete forwarding methods.
@@ -125,13 +123,14 @@ public class DefaultMethodsResolver {
       if (JdtUtils.isOrOverridesJsMember(method)) {
         type.addMethod(
             AstUtils.createForwardingMethod(
+                null,
                 MethodDescriptor.Builder.from(defaultForwardingMethod.getDescriptor())
                     .setJsInfo(JsInfo.NONE)
                     .build(),
                 defaultForwardingMethod.getDescriptor(),
-                "Bridge to JsMethod."));
+                "Bridge to JsMethod.",
+                true));
       }
     }
   }
-
 }

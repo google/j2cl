@@ -19,9 +19,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
 
-/**
- * Class for local variable and parameter.
- */
+/** Class for local variable and parameter. */
 @Visitable
 public class Variable extends Node {
   private String name;
@@ -65,8 +63,8 @@ public class Variable extends Node {
   }
 
   /**
-   * Returns whether this is a Raw variable. Raw variables are not aliased in the output and
-   * thus can be used to represent JS native variables, for example, 'arguments'.
+   * Returns whether this is a Raw variable. Raw variables are not aliased in the output and thus
+   * can be used to represent JS native variables, for example, 'arguments'.
    */
   public boolean isRaw() {
     return isRaw;
@@ -78,7 +76,6 @@ public class Variable extends Node {
 
   public void setTypeDescriptor(TypeDescriptor typeDescriptor) {
     this.typeDescriptor = checkNotNull(typeDescriptor);
-    ;
   }
 
   public void setFinal(boolean isFinal) {
