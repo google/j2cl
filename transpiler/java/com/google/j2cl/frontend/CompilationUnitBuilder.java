@@ -87,7 +87,15 @@ import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.WhileStatement;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
 import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
@@ -105,16 +113,6 @@ import org.eclipse.jdt.core.dom.LambdaExpression;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclaration;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 /**
  * Creates a J2CL Java AST from the AST provided by JDT.
@@ -563,7 +561,10 @@ public class CompilationUnitBuilder {
           expression.getExpression() == null ? null : convert(expression.getExpression());
       boolean hasQualifier =
           JdtUtils.isInstanceMemberClass(newInstanceTypeBinding)
-              || (newInstanceTypeBinding.isLocal() && !JdtUtils.isInStaticContext(expression));
+              || (newInstanceTypeBinding.isAnonymous() && !JdtUtils.isInStaticContext(expression))
+              || (newInstanceTypeBinding.isLocal()
+                  && !JdtUtils.isStatic(
+                      newInstanceTypeBinding.getTypeDeclaration().getDeclaringMember()));
       // Resolve the qualifier of NewInstance that creates an instance of a nested class.
       // Implicit 'this' doesn't always refer to 'this', it may refer to any enclosing instances.
       if (hasQualifier) {

@@ -11,6 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.localclassinstaticcontext.Local
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let LocalClassInStaticContext$1A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.$Anonymous1A$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
@@ -45,6 +46,14 @@ class LocalClassInStaticContext$3 extends Object {
   }
 
   /**
+   * @return {void}
+   * @public
+   */
+  m_m___$pp_com_google_j2cl_transpiler_readable_localclassinstaticcontext() {
+    LocalClassInStaticContext$1A.$create__();
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -69,6 +78,8 @@ class LocalClassInStaticContext$3 extends Object {
    * @public
    */
   static $clinit() {
+    LocalClassInStaticContext$1A = goog.module.get(
+        'com.google.j2cl.transpiler.readable.localclassinstaticcontext.LocalClassInStaticContext.$Anonymous1A$impl');
     Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }

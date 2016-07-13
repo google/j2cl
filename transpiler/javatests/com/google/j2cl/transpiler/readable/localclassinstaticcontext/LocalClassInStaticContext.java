@@ -7,7 +7,14 @@ public class LocalClassInStaticContext {
     // In a static function.
     class A {}
     new A();
-    Object a = new Object() {};
+    Object a =
+        new Object() {
+          void m() {
+            // Here it is created in an instance context but the class is defined in a static one,
+            // so no extra outer_this.
+            new A();
+          }
+        };
   }
 
   static {

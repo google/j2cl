@@ -7,7 +7,14 @@
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext();]
 [UNKNOWN] => [LocalClassInStaticContext.$clinit();]
 [new A();] => [LocalClassInStaticContext$1A.$create__();]
-[Object a = new Object() {};] => [let a = LocalClassInStaticContext$3.$create__();]
+[Object a =
+        new Object() {
+          void m() {
+            // Here it is created in an instance context but the class is defined in a static one,
+            // so no extra outer_this.
+            new A();
+          }
+        };] => [let a = LocalClassInStaticContext$3.$create__();]
 [public static Object f = new Object() {};] => [LocalClassInStaticContext.$f_f__com_google_j2cl_transpiler_readable_localclassinstaticcontext_LocalClassInStaticContext = LocalClassInStaticContext$1.$create__();]
 [new B();] => [LocalClassInStaticContext$1B.$create__();]
 [Object b = new Object() {};] => [let b = LocalClassInStaticContext$2.$create__();]
