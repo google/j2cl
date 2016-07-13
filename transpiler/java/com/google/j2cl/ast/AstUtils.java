@@ -664,7 +664,7 @@ public class AstUtils {
     }
     TypeDescriptor enclosingClassTypeDescriptor = member.getEnclosingClassTypeDescriptor();
     return member.isStatic()
-        ? new TypeReference(enclosingClassTypeDescriptor)
+        ? new TypeReference(enclosingClassTypeDescriptor.getRawTypeDescriptor())
         : new ThisReference(enclosingClassTypeDescriptor);
   }
 

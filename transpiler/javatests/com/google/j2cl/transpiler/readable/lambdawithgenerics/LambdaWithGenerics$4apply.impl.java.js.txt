@@ -1,97 +1,80 @@
 /**
  * @fileoverview Impl transpiled from
- * com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$3apply.
+ * com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$4apply.
  *
  * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
  * const, missingRequire}
  */
-goog.module('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Anonymous3apply$impl');
+goog.module('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Anonymous4apply$impl');
 
 
 let Object = goog.require('java.lang.Object$impl');
 let Function = goog.require('java.util.function.Function$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
-let $LongUtils = goog.require('vmbootstrap.LongUtils$impl');
 
 let LambdaWithGenerics = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
-let Enum = goog.forwardDeclare('java.lang.Enum$impl');
-let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Function$$Overlay = goog.forwardDeclare('java.util.function.Function.$Overlay$impl');
 
 
 /**
- * @template C_E, M_T
- * @implements {Function<?, ?>}
+ * @implements {Function<*, ?>}
  */
-class LambdaWithGenerics$3apply extends Object {
+class LambdaWithGenerics$4apply extends Object {
   /**
    * Defines instance fields.
    * @public
    */
-  constructor() {
-    super();
-    /** @public {LambdaWithGenerics<C_E>} */
-    this.f_$outer_this__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$3apply =
-        null;
-  }
+  constructor() { super(); }
 
   /**
    * A particular Java constructor as a factory method.
-   * @template C_E, M_T
-   * @param {LambdaWithGenerics<C_E>} $outer_this
-   * @return {!LambdaWithGenerics$3apply<C_E, M_T>}
+   * @return {!LambdaWithGenerics$4apply}
    * @public
    */
-  static $create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
-      $outer_this) {
-    LambdaWithGenerics$3apply.$clinit();
-    let $instance = new LambdaWithGenerics$3apply();
+  static $create__() {
+    LambdaWithGenerics$4apply.$clinit();
+    let $instance = new LambdaWithGenerics$4apply();
     $instance
-        .$ctor__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$3apply__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
-            $outer_this);
+        .$ctor__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$4apply__();
     return $instance;
   }
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {LambdaWithGenerics<C_E>} $outer_this
    * @return {void}
    * @public
    */
-  $ctor__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$3apply__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
-      $outer_this) {
-    this.f_$outer_this__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$3apply =
-        $outer_this;
+  $ctor__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$4apply__() {
     this.$ctor__java_lang_Object__();
-    this.$init__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$3apply();
+    this.$init__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$4apply();
   }
 
   /**
-   * @param {M_T} item
+   * @param {*} l
    * @return {*}
    * @public
    */
-  lambda3apply(item) { return Long.m_valueOf__long($LongUtils.$fromInt(1)); }
+  lambda4apply(l) { return LambdaWithGenerics.m_m__(); }
 
   /**
    * @override
-   * @param {Enum} arg0
+   * @param {*} arg0
    * @return {?}
    * @public
    */
-  m_apply__java_lang_Object(arg0) { return this.lambda3apply(arg0); }
+  m_apply__java_lang_Object(arg0) { return this.lambda4apply(arg0); }
 
   /**
    * Default method forwarding stub.
    * @override
    * @template M_V
    * @param {Function<?, ?>} arg0
-   * @return {Function<?, M_V>}
+   * @return {Function<*, M_V>}
    * @public
    */
   m_andThen__java_util_function_Function(arg0) {
-    return /**@type {Function<?, *>} */ (
+    return /**@type {Function<*, *>} */ (
         Function$$Overlay
             .m_andThen__java_util_function_Function__java_util_function_Function(
                 this, arg0));
@@ -119,7 +102,7 @@ class LambdaWithGenerics$3apply extends Object {
    * @public
    */
   static $isInstance(instance) {
-    return instance instanceof LambdaWithGenerics$3apply;
+    return instance instanceof LambdaWithGenerics$4apply;
   }
 
   /**
@@ -129,7 +112,7 @@ class LambdaWithGenerics$3apply extends Object {
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(classConstructor, LambdaWithGenerics$3apply);
+    return $Util.$canCastClass(classConstructor, LambdaWithGenerics$4apply);
   }
 
   /**
@@ -140,8 +123,6 @@ class LambdaWithGenerics$3apply extends Object {
     LambdaWithGenerics = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$impl');
     Class = goog.module.get('java.lang.Class$impl');
-    Enum = goog.module.get('java.lang.Enum$impl');
-    Long = goog.module.get('java.lang.Long$impl');
     Function$$Overlay =
         goog.module.get('java.util.function.Function.$Overlay$impl');
     Object.$clinit();
@@ -151,20 +132,20 @@ class LambdaWithGenerics$3apply extends Object {
    * Runs instance field and block initializers.
    * @private
    */
-  $init__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$3apply() {
+  $init__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics$4apply() {
   }
 };
 
 $Util.$setClassMetadata(
-    LambdaWithGenerics$3apply,
-    'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$3apply');
+    LambdaWithGenerics$4apply,
+    'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$4apply');
 
 
-Function.$markImplementor(LambdaWithGenerics$3apply);
+Function.$markImplementor(LambdaWithGenerics$4apply);
 
 
 /**
  * Export class.
  */
-exports = LambdaWithGenerics$3apply;
-//# sourceMappingURL=LambdaWithGenerics$3apply.js.map
+exports = LambdaWithGenerics$4apply;
+//# sourceMappingURL=LambdaWithGenerics$4apply.js.map

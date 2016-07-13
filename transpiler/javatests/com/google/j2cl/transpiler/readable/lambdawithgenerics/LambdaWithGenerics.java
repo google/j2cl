@@ -6,7 +6,7 @@ interface MyInterface<T> {
   T foo(T i);
 }
 
-public class LambdaWithGenerics {
+public class LambdaWithGenerics<E> {
   public <T> T test1(MyInterface<T> intf, T e) {
     return intf.foo(e);
   }
@@ -19,10 +19,18 @@ public class LambdaWithGenerics {
     return intf.foo(e);
   }
 
+  public static Object m() {
+    return null;
+  }
+
   public <T extends Enum<T>> void testLambdaNoCapture() {
     test1(i -> i, new Error());
     test2(i -> i, new Error());
     test3(i -> i, (Enum<T>) null);
     Function<? super T, ?> f = item -> 1L;
+  }
+
+  public static void testLabdaCallingStaticMethod() {
+    Function<Object, ?> f = l -> m();
   }
 }
