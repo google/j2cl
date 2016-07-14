@@ -18,20 +18,23 @@ package com.google.j2cl.frontend;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.errors.Errors;
-
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.compiler.IProblem;
-import org.eclipse.jdt.core.dom.AST;
-import org.eclipse.jdt.core.dom.ASTParser;
-import org.eclipse.jdt.core.dom.CompilationUnit;
-import org.eclipse.jdt.core.dom.FileASTRequestor;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.compiler.IProblem;
+import org.eclipse.jdt.core.dom.AST;
+import org.eclipse.jdt.core.dom.ASTParser;
+import org.eclipse.jdt.core.dom.ASTVisitor;
+import org.eclipse.jdt.core.dom.CompilationUnit;
+import org.eclipse.jdt.core.dom.FileASTRequestor;
+import org.eclipse.jdt.core.dom.IAnnotationBinding;
+import org.eclipse.jdt.core.dom.IMethodBinding;
+import org.eclipse.jdt.core.dom.ITypeBinding;
+import org.eclipse.jdt.core.dom.TypeDeclaration;
 
 /**
  * A delegator of JDT's ASTParser that provides a more convenient interface for
@@ -150,7 +153,14 @@ public class JdtParser {
   private boolean checkCompilationErrors(String filename, CompilationUnit unit) {
     boolean hasErrors = false;
     for (IProblem problem : unit.getProblems()) {
+      // TODO(b/30126552): Replace this solution with a better alternative (which possibly is
+      // stripping GwtIncompatible as a preprocessing step outside the transpiler.
       if (problem.isError()) {
+        if (isErrorCausedByNotImplentingGwtIncompatibleOverride(problem, unit)) {
+          // HACK: Ignore GwtIncompatible related errors, this is fragile because is tied
+          // to the jdt error reporting.
+          continue;
+        }
         errors.error(
             Errors.Error.ERR_ERROR,
             String.format(
@@ -159,5 +169,65 @@ public class JdtParser {
       }
     }
     return !hasErrors;
+  }
+
+  private boolean isErrorCausedByNotImplentingGwtIncompatibleOverride(
+      IProblem problem, CompilationUnit unit) {
+    final boolean[] found = new boolean[1];
+    // TODO(rluble): check if this error is caused by the presence of a GwtIncompatible
+    // abstract method.
+    if (problem.getID() == IProblem.AbstractMethodMustBeImplemented) {
+      final String superTypeName = problem.getArguments()[2];
+      final String methodName = problem.getArguments()[0];
+      unit.accept(
+          new ASTVisitor() {
+            @Override
+            public void endVisit(TypeDeclaration typeDeclaration) {
+              // Find the offending supertype.
+              ITypeBinding superTypeBinding =
+                  findTypeBindingByName(typeDeclaration.resolveBinding(), superTypeName);
+              if (superTypeBinding == null) {
+                return;
+              }
+              // Find the offending method.
+              for (IMethodBinding methodBinding : superTypeBinding.getDeclaredMethods()) {
+                if (!methodBinding.getName().equals(methodName)) {
+                  continue;
+                }
+                // Check whether it is annotated with GwtIncompatible.
+                for (IAnnotationBinding annotationBinding : methodBinding.getAnnotations()) {
+                  if (annotationBinding.getName().equals("GwtIncompatible")) {
+                    found[0] = true;
+                  }
+                }
+              }
+            }
+          });
+    }
+    return found[0];
+  }
+
+  private ITypeBinding findTypeBindingByName(ITypeBinding typeBinding, String soughtTypeName) {
+    if (typeBinding == null) {
+      return null;
+    }
+    if (soughtTypeName.equals(typeBinding.getQualifiedName())) {
+      return typeBinding;
+    }
+    ITypeBinding superTypeBinding =
+        findTypeBindingByName(typeBinding.getSuperclass(), soughtTypeName);
+
+    if (superTypeBinding != null) {
+      return superTypeBinding;
+    }
+
+    for (ITypeBinding superInterfaceBinding : typeBinding.getInterfaces()) {
+      superTypeBinding = findTypeBindingByName(superInterfaceBinding, soughtTypeName);
+      if (superTypeBinding != null) {
+        return superTypeBinding;
+      }
+    }
+
+    return null;
   }
 }
