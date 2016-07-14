@@ -23,6 +23,7 @@ j2cl_source_copy(
     name = "java_emul_internal",
     srcs = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_internal"],
     excludes = [
+        "javaemul/internal/ConsoleLogger.java",
         "javaemul/internal/EmulatedCharset.java",
         "javaemul/internal/HashCodes.java",  # relies on java8 only APIs
     ],
