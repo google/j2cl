@@ -4,12 +4,6 @@ package(default_visibility = ["//:__subpackages__"])
 licenses(["unencumbered"])
 
 java_library(
-    name = "visitor-codegen",
-    exported_plugins = [":visitor-apt-processor"],
-    exports = [":processor-components"],
-)
-
-java_library(
     name = "processor-components",
     srcs = glob(["*.java"]),
     resources = glob(["*.vm"]),
@@ -21,7 +15,7 @@ java_library(
         "//third_party/java/auto:common",
         "//third_party/java/jakarta_velocity",
         "//third_party/java/jsr305_annotations",
-        "//transpiler/java/com/google/j2cl/ast/annotations",
+        "//transpiler/java/com/google/j2cl/ast/annotations:annotations-internal",
     ],
 )
 

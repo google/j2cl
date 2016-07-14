@@ -20,7 +20,7 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-
+import com.google.j2cl.common.J2clUtils;
 import java.util.List;
 
 /**
@@ -86,7 +86,7 @@ public class ManglingNameUtils {
     if (methodDescriptor.getName().startsWith("$ctor")) {
       return methodDescriptor.getName();
     }
-    return String.format(
+    return J2clUtils.format(
         "%s%s%s%s", prefix, methodDescriptor.getName(), parameterSignature, suffix);
   }
 
@@ -134,7 +134,7 @@ public class ManglingNameUtils {
     String name = fieldDescriptor.getName();
     String typeMangledName = getMangledName(fieldDescriptor.getEnclosingClassTypeDescriptor());
     String privateSuffix = fieldDescriptor.getVisibility().isPrivate() ? "_" : "";
-    return String.format("%sf_%s__%s%s", prefix, name, typeMangledName, privateSuffix);
+    return J2clUtils.format("%sf_%s__%s%s", prefix, name, typeMangledName, privateSuffix);
   }
 
   private static String getMangledParameterSignature(MethodDescriptor methodDescriptor) {

@@ -22,8 +22,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
-
-import java.io.File;
+import com.google.j2cl.common.J2clUtils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,14 +50,14 @@ public class CompilationUnit extends Node {
   }
 
   public String getDirectoryPath() {
-    if (!filePath.contains(File.separator)) {
+    if (!filePath.contains(J2clUtils.FILEPATH_SEPARATOR)) {
       return "";
     }
-    return filePath.substring(0, filePath.lastIndexOf(File.separator));
+    return filePath.substring(0, filePath.lastIndexOf(J2clUtils.FILEPATH_SEPARATOR));
   }
 
   public String getFileName() {
-    String[] pathComponents = filePath.split(File.separator);
+    String[] pathComponents = filePath.split(J2clUtils.FILEPATH_SEPARATOR);
     return pathComponents[pathComponents.length - 1];
   }
 
@@ -91,7 +90,7 @@ public class CompilationUnit extends Node {
 
   public String getName() {
     return filePath.substring(
-        filePath.lastIndexOf(File.separatorChar) + 1,
+        filePath.lastIndexOf(J2clUtils.FILEPATH_SEPARATOR_CHAR) + 1,
         filePath.length() - COMPILATION_UNIT_FILENAME_SUFFIX.length());
   }
 

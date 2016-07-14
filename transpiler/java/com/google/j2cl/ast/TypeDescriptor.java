@@ -29,7 +29,7 @@ import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsName;
 import com.google.j2cl.ast.common.JsUtils;
 import com.google.j2cl.common.Interner;
-
+import com.google.j2cl.common.J2clUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -700,7 +700,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     if (typeArgumentDescriptors == null || typeArgumentDescriptors.isEmpty()) {
       return "";
     }
-    return String.format(
+    return J2clUtils.format(
         "<%s>",
         Joiner.on(", ")
             .join(

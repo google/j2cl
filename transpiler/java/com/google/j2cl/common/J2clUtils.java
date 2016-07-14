@@ -1,14 +1,18 @@
 package com.google.j2cl.common;
 
-import org.apache.commons.lang3.StringEscapeUtils;
-
+import java.beans.Introspector;
+import java.io.File;
 import java.io.PrintStream;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
  * Utility methods to replace calls to Java methods that J2cl does not support, so they can be
  * supersourced when compiling J2cl with J2cl.
  */
 public class J2clUtils {
+
+  public static final String FILEPATH_SEPARATOR = File.separator;
+  public static final char FILEPATH_SEPARATOR_CHAR = File.separatorChar;
 
   /**
    * J2cl's implementation of String.format(format, args).
@@ -27,6 +31,17 @@ public class J2clUtils {
   public static PrintStream printf(PrintStream stream, String format, Object... args) {
     return stream.printf(format, args);
   }
+  
+  /** Escapes a string into a representation suitable for literals. */
+  public static String escapeJavaString(String string) {
+    // NOTE: StringEscapeUtils.escapeJava does not escape unprintable character 127 (delete).
+    return StringEscapeUtils.escapeJava(string).replace("\u007f", "\\u007F");
+  }
+
+  /** Convert a string to normal Java variable name capitalization. */
+  public static String decapitalize(String substring) {
+    return Introspector.decapitalize(substring);
+  }
 
   /**
    * J2cl's implementation of System.exit(status).
@@ -35,11 +50,5 @@ public class J2clUtils {
    */
   public static void exit(int status) {
     System.exit(status);
-  }
-
-  /** Escapes a string into a representation suitable for literals. */
-  public static String escapeJavaString(String string) {
-    // NOTE: StringEscapeUtils.escapeJava does not escape unprintable character 127 (delete).
-    return StringEscapeUtils.escapeJava(string).replace("\u007f", "\\u007F");
   }
 }

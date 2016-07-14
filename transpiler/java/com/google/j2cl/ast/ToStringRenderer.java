@@ -16,7 +16,7 @@
 package com.google.j2cl.ast;
 
 import com.google.common.base.Strings;
-
+import com.google.j2cl.common.J2clUtils;
 import java.util.List;
 
 /**
@@ -114,7 +114,7 @@ class ToStringRenderer {
 
       @Override
       public boolean enterCastExpression(CastExpression castExpression) {
-        print(String.format("(%s) ", castExpression.getCastTypeDescriptor()));
+        print(J2clUtils.format("(%s) ", castExpression.getCastTypeDescriptor()));
         accept(castExpression.getExpression());
         return false;
       }
@@ -122,9 +122,9 @@ class ToStringRenderer {
       @Override
       public boolean enterJsTypeAnnotation(JsTypeAnnotation annotation) {
         if (annotation.isDeclaration()) {
-          print(String.format("/** @public {%s} */ ", annotation.getTypeDescriptor()));
+          print(J2clUtils.format("/** @public {%s} */ ", annotation.getTypeDescriptor()));
         } else {
-          print(String.format("/** @type {%s} */ ", annotation.getTypeDescriptor()));
+          print(J2clUtils.format("/** @type {%s} */ ", annotation.getTypeDescriptor()));
         }
         accept(annotation.getExpression());
         return false;

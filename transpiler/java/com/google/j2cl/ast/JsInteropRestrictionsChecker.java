@@ -20,8 +20,8 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.common.HasJsName;
 import com.google.j2cl.ast.common.JsUtils;
+import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.errors.Errors;
-
 import java.util.List;
 
 /**
@@ -491,7 +491,7 @@ public class JsInteropRestrictionsChecker {
   }
 
   private String getReadableDescription(FieldDescriptor fieldDescriptor) {
-    return String.format(
+    return J2clUtils.format(
         "%s %s.%s",
         getReadableDescription(fieldDescriptor.getTypeDescriptor()),
         getReadableDescription(fieldDescriptor.getEnclosingClassTypeDescriptor()),
@@ -499,7 +499,7 @@ public class JsInteropRestrictionsChecker {
   }
 
   private String getReadableDescription(MethodDescriptor methodDescriptor) {
-    return String.format(
+    return J2clUtils.format(
         "%s%s.%s(%s)",
         methodDescriptor.isConstructor()
             ? ""
