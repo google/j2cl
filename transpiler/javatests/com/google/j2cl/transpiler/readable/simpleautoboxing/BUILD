@@ -12,4 +12,5 @@ load(
 readable_example(
     name = "simpleautoboxing",
     srcs = glob(["*.java"]),
+    javacopts = ["-Xep:UselessBooleanExpression:OFF"],
 )
