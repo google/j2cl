@@ -26,10 +26,20 @@ load("/third_party/java_src/j2cl/build_def/j2cl_util", "get_java_package")
 load("/tools/build_defs/label/def", "absolute_label")
 
 
-def integration_test(
-    name, srcs=[], deps=[], defs=[], native_srcs=[],
-    native_srcs_pkg="CONVENTION", js_deps=[], main_class=None, enable_gwt=False, gwt_deps=[],
-    closure_defines=dict(), generate_build_test=None, test_externs_list=None):
+def integration_test(name,
+                     srcs=[],
+                     deps=[],
+                     defs=[],
+                     native_srcs=[],
+                     native_srcs_pkg="CONVENTION",
+                     js_deps=[], main_class=None,
+                     enable_gwt=False,
+                     gwt_deps=[],
+                     closure_defines=dict(),
+                     generate_build_test=None,
+                     test_externs_list=None,
+                     plugins = []
+                    ):
   """Macro that turns Java files into integration test targets.
 
   deps are Labels of j2cl_library() rules. NOT labels of
@@ -80,6 +90,7 @@ def integration_test(
         native_srcs=native_srcs,
         native_srcs_pkg=native_srcs_pkg,
         _test_externs_list=test_externs_list,
+        plugins = plugins,
     )
 
   # blaze build :optimized_js
