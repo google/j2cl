@@ -95,15 +95,6 @@ public class JavaType extends Node {
     return false;
   }
 
-  public boolean containsNativeMethods() {
-    for (Method method : methods) {
-      if (method.isNative()) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   public boolean containsJsOverlay() {
     for (Method method : methods) {
       if (method.getDescriptor().isJsOverlay()) {

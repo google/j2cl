@@ -105,31 +105,30 @@ public class OutputGeneratorStage {
 
         // If the java type contains any native methods, search for matching native file.
         timingReport.startSample("Native files read");
-        if (javaType.containsNativeMethods()) {
-          String typeRelativePath = GeneratorUtils.getRelativePath(javaType);
-          String typeAbsolutePath = GeneratorUtils.getAbsolutePath(j2clCompilationUnit, javaType);
 
-          // Locate matching native files that either have the same relative package as their Java
-          // class (useful when Java and native.js files started in different directories on disk).
-          NativeJavaScriptFile matchingNativeFile = nativeFilesByPath.get(typeRelativePath);
-          // or that are in the same absolute path folder on disk as their Java class.
-          if (matchingNativeFile == null) {
-            matchingNativeFile = nativeFilesByPath.get(typeAbsolutePath);
-          }
+        String typeRelativePath = GeneratorUtils.getRelativePath(javaType);
+        String typeAbsolutePath = GeneratorUtils.getAbsolutePath(j2clCompilationUnit, javaType);
 
-          if (matchingNativeFile != null) {
-            jsImplGenerator.setNativeSource(matchingNativeFile.getContent());
-            matchingNativeFile.setUsed();
-          }
+        // Locate matching native files that either have the same relative package as their Java
+        // class (useful when Java and native.js files started in different directories on disk).
+        NativeJavaScriptFile matchingNativeFile = nativeFilesByPath.get(typeRelativePath);
+        // or that are in the same absolute path folder on disk as their Java class.
+        if (matchingNativeFile == null) {
+          matchingNativeFile = nativeFilesByPath.get(typeAbsolutePath);
+        }
 
-          // If not matching native file is found, and the java type contains non-JsMethod native
-          // method, reports an error.
-          if (matchingNativeFile == null && javaType.containsNonJsNativeMethods()) {
-            errors.error(
-                Errors.Error.ERR_NATIVE_JAVA_SOURCE_NO_MATCH,
-                typeRelativePath + NativeJavaScriptFile.NATIVE_EXTENSION);
-            return;
-          }
+        if (matchingNativeFile != null) {
+          jsImplGenerator.setNativeSource(matchingNativeFile.getContent());
+          matchingNativeFile.setUsed();
+        }
+
+        // If not matching native file is found, and the java type contains non-JsMethod native
+        // method, reports an error.
+        if (matchingNativeFile == null && javaType.containsNonJsNativeMethods()) {
+          errors.error(
+              Errors.Error.ERR_NATIVE_JAVA_SOURCE_NO_MATCH,
+              typeRelativePath + NativeJavaScriptFile.NATIVE_EXTENSION);
+          return;
         }
 
         timingReport.startSample("Render impl");
