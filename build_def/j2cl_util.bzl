@@ -114,5 +114,5 @@ J2CL_TEST_DEFS = make_output_readable(J2CL_UNOPTIMIZED_DEFS + [
     "--compute_function_side_effects=false",
     # Enable some optimizations which speed things up.
     "--smart_name_removal",
-    "--extra_smart_name_removal",
+    "--extra_smart_name_removal=true",
 ])
