@@ -20,7 +20,9 @@ public class AbstractMethodOverrideDefault {
   abstract static class B extends A implements J {
     @Override
     public void bar() {
-      bar();
+      if (false) {
+        bar();
+      }
     }
   }
 }

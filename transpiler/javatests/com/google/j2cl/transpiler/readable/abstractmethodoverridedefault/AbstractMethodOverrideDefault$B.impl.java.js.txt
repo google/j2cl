@@ -54,7 +54,11 @@ class AbstractMethodOverrideDefault$B extends AbstractMethodOverrideDefault$A {
    * @return {void}
    * @public
    */
-  m_bar__() { this.m_bar__(); }
+  m_bar__() {
+    if (false) {
+      this.m_bar__();
+    }
+  }
 
   /**
    * Returns whether the provided instance is an instance of this class.
