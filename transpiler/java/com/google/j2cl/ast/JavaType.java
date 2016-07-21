@@ -22,8 +22,6 @@ import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -47,10 +45,7 @@ public class JavaType extends Node {
   private boolean isAbstract;
   private boolean isAnonymous;
   @Visitable TypeDescriptor typeDescriptor;
-  @Visitable List<Field> fields = new ArrayList<>();
-  @Visitable List<Method> methods = new ArrayList<>();
-  @Visitable List<Block> instanceInitializerBlocks = new ArrayList<>();
-  @Visitable List<Block> staticInitializerBlocks = new ArrayList<>();
+  @Visitable List<Member> members = new ArrayList<>();
 
   // Used to store the original native type for a synthesized JsOverlyImpl type.
   private TypeDescriptor overlayTypeDescriptor;
@@ -75,7 +70,7 @@ public class JavaType extends Node {
   }
 
   public boolean containsMethod(String mangledName) {
-    for (Method method : methods) {
+    for (Method method : getMethods()) {
       MethodDescriptor methodDescriptor = method.getDescriptor();
       if (ManglingNameUtils.getMangledName(methodDescriptor).equals(mangledName)) {
         return true;
@@ -85,7 +80,7 @@ public class JavaType extends Node {
   }
 
   public boolean containsNonJsNativeMethods() {
-    for (Method method : methods) {
+    for (Method method : getMethods()) {
       if (method.isNative()
           && !method.getDescriptor().isJsProperty()
           && !method.getDescriptor().isJsMethod()) {
@@ -96,12 +91,12 @@ public class JavaType extends Node {
   }
 
   public boolean containsJsOverlay() {
-    for (Method method : methods) {
+    for (Method method : getMethods()) {
       if (method.getDescriptor().isJsOverlay()) {
         return true;
       }
     }
-    for (Field field : fields) {
+    for (Field field : getFields()) {
       if (field.getDescriptor().isJsOverlay()) {
         return true;
       }
@@ -113,7 +108,7 @@ public class JavaType extends Node {
     if (!isInterface()) {
       return false;
     }
-    for (Method method : methods) {
+    for (Method method : getMethods()) {
       if (method.getDescriptor().isDefault()) {
         return true;
       }
@@ -164,17 +159,21 @@ public class JavaType extends Node {
     return getNativeTypeDescriptor() != null;
   }
 
-  public List<Field> getFields() {
-    return fields;
+  public List<Member> getMembers() {
+    return members;
+  }
+
+  public Iterable<Field> getFields() {
+    return AstUtils.filterFields(members);
   }
 
   public void addField(Field field) {
-    fields.add(field);
+    members.add(field);
   }
 
   public void addFields(List<Field> fields) {
     Preconditions.checkNotNull(fields);
-    this.fields.addAll(fields);
+    this.members.addAll(fields);
   }
 
   /**
@@ -185,7 +184,7 @@ public class JavaType extends Node {
     Preconditions.checkArgument(this.kind == Kind.ENUM);
     Iterable<Field> enumFields =
         Iterables.filter(
-            fields,
+            getFields(),
             new Predicate<Field>() {
               @Override
               public boolean apply(Field field) {
@@ -195,21 +194,21 @@ public class JavaType extends Node {
     return Lists.newArrayList(enumFields);
   }
 
-  public List<Method> getMethods() {
-    return methods;
+  public Iterable<Method> getMethods() {
+    return AstUtils.filterMethods(members);
   }
 
   public void addMethod(Method method) {
-    methods.add(method);
+    members.add(method);
   }
 
   public void addMethod(int index, Method method) {
-    Preconditions.checkArgument(index >= 0 && index <= methods.size());
-    methods.add(index, method);
+    Preconditions.checkArgument(index >= 0 && index <= members.size());
+    members.add(index, method);
   }
 
   public void addMethods(List<Method> methods) {
-    this.methods.addAll(methods);
+    this.members.addAll(methods);
   }
 
   public Visibility getVisibility() {
@@ -220,20 +219,20 @@ public class JavaType extends Node {
     this.visibility = visibility;
   }
 
-  public List<Block> getInstanceInitializerBlocks() {
-    return instanceInitializerBlocks;
+  public boolean hasInstanceInitializerBlocks() {
+    return !Iterables.isEmpty(AstUtils.filterInitializerBlocks(getInstanceMembers()));
   }
 
   public void addInstanceInitializerBlock(Block instanceInitializer) {
-    this.instanceInitializerBlocks.add(instanceInitializer);
+    members.add(new InitializerBlock(instanceInitializer, false));
   }
 
-  public List<Block> getStaticInitializerBlocks() {
-    return staticInitializerBlocks;
+  public boolean hasStaticInitializerBlocks() {
+    return !Iterables.isEmpty(AstUtils.filterInitializerBlocks(getStaticMembers()));
   }
 
   public void addStaticInitializerBlock(Block staticInitializer) {
-    staticInitializerBlocks.add(staticInitializer);
+    members.add(new InitializerBlock(staticInitializer, true));
   }
 
   public TypeDescriptor getEnclosingTypeDescriptor() {
@@ -256,32 +255,34 @@ public class JavaType extends Node {
     this.typeDescriptor = typeDescriptor;
   }
 
-  public void setFields(List<Field> fields) {
-    this.fields = fields;
+  public Iterable<Field> getInstanceFields() {
+    return AstUtils.filterFields(getInstanceMembers());
   }
 
-  public List<Field> getInstanceFields() {
-    return Lists.newArrayList(
-        Iterables.filter(
-            getFields(),
-            new Predicate<Field>() {
-              @Override
-              public boolean apply(Field field) {
-                return !field.getDescriptor().isStatic();
-              }
-            }));
+  public Iterable<Member> getInstanceMembers() {
+    return Iterables.filter(
+        members,
+        new Predicate<Member>() {
+          @Override
+          public boolean apply(Member member) {
+            return !member.isStatic();
+          }
+        });
   }
 
-  public List<Field> getStaticFields() {
-    return Lists.newArrayList(
-        Iterables.filter(
-            getFields(),
-            new Predicate<Field>() {
-              @Override
-              public boolean apply(Field field) {
-                return field.getDescriptor().isStatic();
-              }
-            }));
+  public Iterable<Field> getStaticFields() {
+    return AstUtils.filterFields(getStaticMembers());
+  }
+
+  public Iterable<Member> getStaticMembers() {
+    return Iterables.filter(
+        members,
+        new Predicate<Member>() {
+          @Override
+          public boolean apply(Member member) {
+            return member.isStatic();
+          }
+        });
   }
 
   public List<Method> getConstructors() {
@@ -296,41 +297,8 @@ public class JavaType extends Node {
             }));
   }
 
-  /**
-   * Returns all the static fields and the static initializer blocks of the class, ordered by
-   * position.
-   */
-  public List<Positioned> getStaticFieldsAndInitializerBlocks() {
-    List<Positioned> staticFieldsAndInitializers = new ArrayList<>();
-    staticFieldsAndInitializers.addAll(getStaticFields());
-    staticFieldsAndInitializers.addAll(staticInitializerBlocks);
-    sortByPosition(staticFieldsAndInitializers);
-    return staticFieldsAndInitializers;
-  }
-
-  /**
-   * Returns all the instance fields and the instance initializer blocks of the class, ordered by
-   * position.
-   */
-  public List<Positioned> getInstanceFieldsAndInitializerBlocks() {
-    List<Positioned> instanceFieldsAndInitializers = new ArrayList<>();
-    instanceFieldsAndInitializers.addAll(getInstanceFields());
-    instanceFieldsAndInitializers.addAll(instanceInitializerBlocks);
-    sortByPosition(instanceFieldsAndInitializers);
-    return instanceFieldsAndInitializers;
-  }
-
   @Override
   public Node accept(Processor processor) {
     return Visitor_JavaType.visit(processor, this);
-  }
-
-  private static void sortByPosition(List<Positioned> elements) {
-    Collections.sort(elements, new Comparator<Positioned>() {
-      @Override
-      public int compare(Positioned a, Positioned b) {
-        return Integer.compare(a.getPosition(), b.getPosition());
-      }
-    });
   }
 }

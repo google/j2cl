@@ -21,7 +21,7 @@ import com.google.j2cl.ast.annotations.Visitable;
 /** A (by signature) reference to a field. */
 @AutoValue
 @Visitable
-public abstract class FieldDescriptor extends MemberDescriptor implements Member {
+public abstract class FieldDescriptor extends MemberDescriptor {
   public static FieldDescriptor create(
       boolean isStatic,
       Visibility visibility,

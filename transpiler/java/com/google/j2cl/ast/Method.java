@@ -23,19 +23,16 @@ import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Method declaration.
- */
+/** Method declaration. */
 @Visitable
 @Context
-public class Method extends Node {
+public class Method extends Member {
   @Visitable MethodDescriptor methodDescriptor;
   @Visitable List<Variable> parameters = new ArrayList<>();
   @Visitable Block body;
@@ -115,6 +112,11 @@ public class Method extends Node {
 
   public void setFinal(boolean isFinal) {
     this.isFinal = isFinal;
+  }
+
+  @Override
+  public boolean isStatic() {
+    return methodDescriptor.isStatic();
   }
 
   public String getJsDocDescription() {

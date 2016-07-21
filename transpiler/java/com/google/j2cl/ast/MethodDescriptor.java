@@ -27,13 +27,12 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.Interner;
-
 import javax.annotation.Nullable;
 
 /** A (by signature) reference to a method. */
 @AutoValue
 @Visitable
-public abstract class MethodDescriptor extends MemberDescriptor implements Member {
+public abstract class MethodDescriptor extends MemberDescriptor {
   public static final String INIT_METHOD_NAME = "$init";
   public static final String VALUE_OF_METHOD_NAME = "valueOf"; // Boxed type valueOf() method.
   public static final String VALUE_METHOD_SUFFIX = "Value"; // Boxed type **Value() method.

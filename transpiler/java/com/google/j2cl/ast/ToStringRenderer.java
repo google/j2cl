@@ -291,30 +291,11 @@ class ToStringRenderer {
         newLine();
         indent();
 
-        for (Field field : javaType.getFields()) {
-          accept(field);
+        for (Member member : javaType.getMembers()) {
+          accept(member);
           newLine();
         }
 
-        if (!javaType.instanceInitializerBlocks.isEmpty()) {
-          for (Block block : javaType.instanceInitializerBlocks) {
-            accept(block);
-            newLine();
-          }
-        }
-
-        if (!javaType.staticInitializerBlocks.isEmpty()) {
-          for (Block block : javaType.staticInitializerBlocks) {
-            print("static ");
-            accept(block);
-            newLine();
-          }
-        }
-
-        for (Method method : javaType.getMethods()) {
-          accept(method);
-          newLine();
-        }
         unIndent();
         newLine();
         return false;
@@ -325,6 +306,15 @@ class ToStringRenderer {
         print(labeledStatement.getLabelName());
         print(": ");
         accept(labeledStatement.getBody());
+        return false;
+      }
+
+      @Override
+      public boolean enterInitializerBlock(InitializerBlock initializerBlock) {
+        if (initializerBlock.isStatic()) {
+          print("static ");
+        }
+        accept(initializerBlock.getBlock());
         return false;
       }
 

@@ -16,7 +16,7 @@
 package com.google.j2cl.frontend;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Lists;
+import com.google.common.collect.FluentIterable;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.ManglingNameUtils;
@@ -59,18 +59,19 @@ public class JsBridgeMethodsCreator {
    * a bridge method is needed from non-JsMember delegating to JsMember.
    */
   private static List<Method> createBridgeMethods(
-      ITypeBinding typeBinding, List<Method> existingMethods) {
+      ITypeBinding typeBinding, Iterable<Method> existingMethods) {
     List<Method> generatedBridgeMethods = new ArrayList<>();
     Set<String> generatedBridgeMethodMangledNames = new HashSet<>();
-    List<String> existingMethodMangledNames =
-        Lists.transform(
-            existingMethods,
-            new Function<Method, String>() {
-              @Override
-              public String apply(Method method) {
-                return ManglingNameUtils.getMangledName(method.getDescriptor());
-              }
-            });
+    Set<String> existingMethodMangledNames =
+        FluentIterable.from(existingMethods)
+            .transform(
+                new Function<Method, String>() {
+                  @Override
+                  public String apply(Method method) {
+                    return ManglingNameUtils.getMangledName(method.getDescriptor());
+                  }
+                })
+            .toSet();
     for (Entry<IMethodBinding, IMethodBinding> entry :
         delegatedMethodBindingsByBridgeMethodBinding(typeBinding).entrySet()) {
       Method bridgeMethod = createBridgeMethod(typeBinding, entry.getKey(), entry.getValue());

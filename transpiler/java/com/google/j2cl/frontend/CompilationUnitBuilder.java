@@ -242,14 +242,13 @@ public class CompilationUnitBuilder {
         Object object = bodyDeclarations.get(i);
         if (object instanceof FieldDeclaration) {
           FieldDeclaration fieldDeclaration = (FieldDeclaration) object;
-          type.addFields(convert(fieldDeclaration, i));
+          type.addFields(convert(fieldDeclaration));
         } else if (object instanceof MethodDeclaration) {
           MethodDeclaration methodDeclaration = (MethodDeclaration) object;
           type.addMethod(convert(methodDeclaration));
         } else if (object instanceof Initializer) {
           Initializer initializer = (Initializer) object;
           Block block = convert(initializer.getBody());
-          block.setPosition(i);
           if (JdtUtils.isStatic(initializer)) {
             type.addStaticInitializerBlock(block);
           } else {
@@ -274,7 +273,6 @@ public class CompilationUnitBuilder {
         type.addField(
             Field.Builder.fromDefault(fieldDescriptor)
                 .setCapturedVariable(capturedVariable)
-                .setPosition(-1) /* Position is not important */
                 .build());
       }
       if (!inStaticContext && JdtUtils.isInstanceNestedClass(typeBinding)) {
@@ -282,8 +280,7 @@ public class CompilationUnitBuilder {
         type.addField(
             new Field(
                 AstUtils.getFieldDescriptorForEnclosingInstance(
-                    currentTypeDescriptor, type.getEnclosingTypeDescriptor()),
-                -1 /* Position is not important */));
+                    currentTypeDescriptor, type.getEnclosingTypeDescriptor())));
       }
 
       // Resolve default methods
@@ -319,12 +316,11 @@ public class CompilationUnitBuilder {
       return Field.Builder.fromDefault(fieldDescriptor)
           .setInitializer(initializer)
           .setIsEnumField(true)
-          .setPosition(-1) /* Position is not important */
           .setSourcePosition(getSourcePosition(enumConstantDeclaration))
           .build();
     }
 
-    private List<Field> convert(FieldDeclaration fieldDeclaration, int position) {
+    private List<Field> convert(FieldDeclaration fieldDeclaration) {
       List<Field> fields = new ArrayList<>();
       for (Object object : fieldDeclaration.fragments()) {
         org.eclipse.jdt.core.dom.VariableDeclarationFragment fragment =
@@ -340,7 +336,6 @@ public class CompilationUnitBuilder {
         Field field =
             Field.Builder.fromDefault(JdtUtils.createFieldDescriptor(variableBinding))
                 .setInitializer(initializer)
-                .setPosition(position)
                 .setSourcePosition(getSourcePosition(fieldDeclaration))
                 .build();
         fields.add(field);
@@ -1115,7 +1110,6 @@ public class CompilationUnitBuilder {
             Field.Builder.fromDefault(
                     AstUtils.getFieldDescriptorForCapture(lambdaTypeDescriptor, capturedVariable))
                 .setCapturedVariable(capturedVariable)
-                .setPosition(-1) /* Position is not important */
                 .build());
       }
 
@@ -1124,8 +1118,7 @@ public class CompilationUnitBuilder {
         lambdaType.addField(
             new Field(
                 AstUtils.getFieldDescriptorForEnclosingInstance(
-                    lambdaTypeDescriptor, lambdaType.getEnclosingTypeDescriptor()),
-                -1 /* Position is not important */));
+                    lambdaTypeDescriptor, lambdaType.getEnclosingTypeDescriptor())));
       }
 
       // Collect all type variables that are in context. Those might come from the functional

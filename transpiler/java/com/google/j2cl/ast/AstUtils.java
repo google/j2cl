@@ -18,7 +18,10 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicates;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
@@ -653,17 +656,17 @@ public class AstUtils {
   /**
    * Returns explicit qualifier for member reference (field access or method call).
    *
-   * <p>
-   * If {@code qualifier} is null, returns EnclosingClassTypeDescriptor as the qualifier for static
-   * method/field and 'this' reference as the qualifier for instance method/field.
+   * <p>If {@code qualifier} is null, returns EnclosingClassTypeDescriptor as the qualifier for
+   * static method/field and 'this' reference as the qualifier for instance method/field.
    */
-  static Expression getExplicitQualifier(Expression qualifier, Member member) {
-    checkNotNull(member);
+  static Expression getExplicitQualifier(Expression qualifier, MemberDescriptor memberDescriptor) {
+    checkNotNull(memberDescriptor);
     if (qualifier != null) {
       return qualifier;
     }
-    TypeDescriptor enclosingClassTypeDescriptor = member.getEnclosingClassTypeDescriptor();
-    return member.isStatic()
+    TypeDescriptor enclosingClassTypeDescriptor =
+        memberDescriptor.getEnclosingClassTypeDescriptor();
+    return memberDescriptor.isStatic()
         ? new TypeReference(enclosingClassTypeDescriptor.getRawTypeDescriptor())
         : new ThisReference(enclosingClassTypeDescriptor);
   }
@@ -1074,5 +1077,50 @@ public class AstUtils {
           }
         });
     return lambdaTypeParameterTypeDescriptors;
+  }
+
+  /** Returns an iterable containing only the fields in {@code members}. */
+  public static FluentIterable<Field> filterFields(Iterable<Member> members) {
+    return FluentIterable.from(members)
+        .transform(
+            new Function<Member, Field>() {
+              public Field apply(Member member) {
+                if (member instanceof Field) {
+                  return (Field) member;
+                }
+                return null;
+              }
+            })
+        .filter(Predicates.notNull());
+  }
+
+  /** Returns an iterable containing only the methods in {@code members}. */
+  public static FluentIterable<Method> filterMethods(Iterable<Member> members) {
+    return FluentIterable.from(members)
+        .transform(
+            new Function<Member, Method>() {
+              public Method apply(Member member) {
+                if (member instanceof Method) {
+                  return (Method) member;
+                }
+                return null;
+              }
+            })
+        .filter(Predicates.notNull());
+  }
+
+  /** Returns an iterable containing only the initializer blocks in {@code members}. */
+  public static FluentIterable<InitializerBlock> filterInitializerBlocks(Iterable<Member> members) {
+    return FluentIterable.from(members)
+        .transform(
+            new Function<Member, InitializerBlock>() {
+              public InitializerBlock apply(Member member) {
+                if (member instanceof InitializerBlock) {
+                  return (InitializerBlock) member;
+                }
+                return null;
+              }
+            })
+        .filter(Predicates.notNull());
   }
 }

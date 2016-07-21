@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+ * Copyright 2016 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,15 +15,32 @@
  */
 package com.google.j2cl.ast;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.google.j2cl.ast.annotations.Visitable;
 
-/** Abstract base class for class members. */
+/** A node that represents an initializer block. */
 @Visitable
-public abstract class Member extends Node {
-  public abstract boolean isStatic();
+public class InitializerBlock extends Member {
+  @Visitable Block block;
+  private final boolean isStatic;
+
+  public InitializerBlock(Block block, boolean isStatic) {
+    this.block = checkNotNull(block);
+    this.isStatic = isStatic;
+  }
+
+  public Block getBlock() {
+    return block;
+  }
+
+  @Override
+  public boolean isStatic() {
+    return isStatic;
+  }
 
   @Override
   public Node accept(Processor processor) {
-    return Visitor_Member.visit(processor, this);
+    return Visitor_InitializerBlock.visit(processor, this);
   }
 }

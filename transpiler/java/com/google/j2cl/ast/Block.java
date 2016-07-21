@@ -18,22 +18,17 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Block Statement.
- */
+/** Block Statement. */
 @Visitable
-public class Block extends Statement implements Positioned {
+public class Block extends Statement {
   @Visitable List<Statement> statements = new ArrayList<>();
-  private Integer position;
 
   public Block(Block fromBlock) {
     this(fromBlock.getStatements());
-    this.position = fromBlock.position;
     setSourcePosition(fromBlock.getSourcePosition());
   }
 
@@ -49,18 +44,6 @@ public class Block extends Statement implements Positioned {
 
   public List<Statement> getStatements() {
     return statements;
-  }
-
-  @Override
-  public int getPosition() {
-    if (position == null) {
-      throw new IllegalStateException("Position not defined for block " + this);
-    }
-    return position;
-  }
-
-  public void setPosition(Integer position) {
-    this.position = position;
   }
 
   @Override

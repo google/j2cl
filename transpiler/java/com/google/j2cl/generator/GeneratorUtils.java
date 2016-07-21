@@ -15,16 +15,18 @@
  */
 package com.google.j2cl.generator;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
+import com.google.j2cl.ast.InitializerBlock;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.ManglingNameUtils;
+import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -32,7 +34,6 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.errors.Errors;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -105,7 +106,7 @@ public class GeneratorUtils {
     String name = environment.aliasForVariable(parameter);
     if (method.getDescriptor().isJsMethodVarargs() && index + 1 == method.getParameters().size()) {
       // The parameter is a js var arg so we convert the type to an array
-      Preconditions.checkArgument(parameterTypeDescriptor.isArray());
+      checkArgument(parameterTypeDescriptor.isArray());
       String typeName =
           JsDocNameUtils.getJsDocName(
               parameterTypeDescriptor.getComponentTypeDescriptor(), environment);
@@ -143,17 +144,16 @@ public class GeneratorUtils {
    * Returns whether the $clinit function should be rewritten as NOP.
    */
   public static boolean needRewriteClinit(JavaType type) {
-    for (Object element : type.getStaticFieldsAndInitializerBlocks()) {
-      if (element instanceof Field) {
-        Field field = (Field) element;
+    for (Member member : type.getStaticMembers()) {
+      if (member instanceof Field) {
+        Field field = (Field) member;
         if (field.hasInitializer() && !field.isCompileTimeConstant()) {
           return true;
         }
-      } else if (element instanceof Block) {
+      } else if (member instanceof InitializerBlock) {
         return true;
-      } else {
-        throw new UnsupportedOperationException("Unsupported element: " + element);
       }
+      // other members are not involved in class initialization, hence they are skipped here.
     }
     return false;
   }

@@ -20,7 +20,7 @@ package com.google.j2cl.ast;
  */
 public interface MemberReference {
 
-  Member getTarget();
+  MemberDescriptor getTarget();
 
   Expression getQualifier();
 }

@@ -30,6 +30,7 @@ import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.ManglingNameUtils;
+import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -43,7 +44,6 @@ import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.Visibility;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -130,7 +130,7 @@ public class NormalizeConstructors extends NormalizationPass {
       type.accept(new RewriteCtorsAsMethods());
 
       if (resultingConstructor != null) {
-        type.getMethods().add(0, resultingConstructor);
+        type.addMethod(0, resultingConstructor);
       }
     }
   }
@@ -333,16 +333,17 @@ public class NormalizeConstructors extends NormalizationPass {
   private static class InsertFactoryMethods extends AbstractVisitor {
     @Override
     public boolean enterJavaType(JavaType javaType) {
-      List<Method> allMethods = new ArrayList<>();
-      for (Method method : javaType.getMethods()) {
-        if (shouldOutputStaticFactoryCreateMethod(javaType, method)) {
-          Method create = factoryMethodForConstructor(method, javaType);
-          allMethods.add(create);
+      List<Member> members = javaType.getMembers();
+      for (int i = 0; i < members.size(); i++) {
+        if (!(members.get(i) instanceof Method)) {
+          continue;
         }
-        allMethods.add(method);
+        Method method = (Method) members.get(i);
+        if (shouldOutputStaticFactoryCreateMethod(javaType, method)) {
+          // Insert the factory method just before the corresponding constructor, and advance.
+          members.add(i++, factoryMethodForConstructor(method, javaType));
+        }
       }
-      javaType.getMethods().clear();
-      javaType.addMethods(allMethods);
       return false;
     }
   }

@@ -26,7 +26,6 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 import com.google.j2cl.ast.common.JsUtils;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -98,7 +97,6 @@ public class EnumMethodsCreator {
     enumType.addField(
         Field.Builder.fromDefault(this.namesToValuesMapFieldDescriptor)
             .setInitializer(NullLiteral.NULL)
-            .setPosition(-1) /* Position is not important */
             .build());
     enumType.addMethod(createValueOfMethod());
     enumType.addMethod(createValuesMethod());

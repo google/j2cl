@@ -23,14 +23,14 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.j2cl.ast.AnonymousJavaType;
-import com.google.j2cl.ast.Block;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
+import com.google.j2cl.ast.InitializerBlock;
 import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.ManglingNameUtils;
+import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
-import com.google.j2cl.ast.Positioned;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -42,7 +42,6 @@ import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
 import com.google.j2cl.generator.visitors.ImportUtils;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -595,7 +594,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       sourceBuilder.append(superTypeName + ".$clinit();");
     }
     // Static field and static initializer blocks.
-    renderInitializerElements(javaType.getStaticFieldsAndInitializerBlocks());
+    renderInitializerElements(javaType.getStaticMembers());
     sourceBuilder.closeBrace();
     sourceBuilder.newLines(2);
   }
@@ -612,15 +611,15 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         " */",
         "$init__" + mangledTypeName + "() ");
     sourceBuilder.openBrace();
-    renderInitializerElements(javaType.getInstanceFieldsAndInitializerBlocks());
+    renderInitializerElements(javaType.getInstanceMembers());
     sourceBuilder.closeBrace();
     sourceBuilder.newLines(2);
   }
 
-  private void renderInitializerElements(List<Positioned> initializerElements) {
-    for (Positioned element : initializerElements) {
-      if (element instanceof Field) {
-        Field field = (Field) element;
+  private void renderInitializerElements(Iterable<Member> members) {
+    for (Member member : members) {
+      if (member instanceof Field) {
+        Field field = (Field) member;
         if (field.hasInitializer() && !field.isCompileTimeConstant()) {
           sourceBuilder.newLine();
           FilePosition startPostion = sourceBuilder.getCurrentPosition();
@@ -634,15 +633,14 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
               field.getSourcePosition(),
               new SourcePosition(startPostion, sourceBuilder.getCurrentPosition()));
         }
-      } else if (element instanceof Block) {
-        Block block = (Block) element;
-        for (Statement initializer : block.getStatements()) {
+      } else if (member instanceof InitializerBlock) {
+        InitializerBlock block = (InitializerBlock) member;
+        for (Statement initializer : block.getBlock().getStatements()) {
           sourceBuilder.newLine();
           statementTranspiler.renderStatement(initializer);
         }
-      } else {
-        throw new UnsupportedOperationException("Unsupported element: " + element);
       }
+      // other members are not involved in class initialization, hence they are skipped here.
     }
   }
 

@@ -110,35 +110,37 @@ public class JsInteropRestrictionsChecker {
     // TODO: do other checks.
   }
 
-  private void checkMemberQualifiedJsName(Member member) {
-    if (member instanceof Method) {
-      if (((Method) member).isConstructor()) {
+  private void checkMemberQualifiedJsName(MemberDescriptor memberDescriptor) {
+    if (memberDescriptor instanceof MethodDescriptor) {
+      if (((MethodDescriptor) memberDescriptor).isConstructor()) {
         // Constructors always inherit their name and namespace from the enclosing type.
         // The corresponding checks are done for the type separately.
         return;
       }
     }
 
-    checkJsName(member);
+    checkJsName(memberDescriptor);
 
-    if (member.getJsNamespace() == null) {
+    if (memberDescriptor.getJsNamespace() == null) {
       return;
     }
 
-    if (member.getJsNamespace().equals(member.getEnclosingClassTypeDescriptor().getJsNamespace())) {
+    if (memberDescriptor
+        .getJsNamespace()
+        .equals(memberDescriptor.getEnclosingClassTypeDescriptor().getJsNamespace())) {
       // Namespace set by the enclosing type has already been checked.
       return;
     }
 
-    if (member.isPolymorphic()) {
+    if (memberDescriptor.isPolymorphic()) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "Instance member '%s' cannot declare a namespace.",
-          getReadableDescription(member));
+          getReadableDescription(memberDescriptor));
       return;
     }
 
-    checkJsNamespace(member);
+    checkJsNamespace(memberDescriptor);
   }
 
   private void checkJsOverlay(Field field) {
@@ -224,14 +226,14 @@ public class JsInteropRestrictionsChecker {
       }
     }
 
-    if (!javaType.getInstanceInitializerBlocks().isEmpty()) {
+    if (javaType.hasInstanceInitializerBlocks()) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "Native JsType '%s' cannot have initializer.",
           readableDescription);
     }
 
-    if (!javaType.getStaticInitializerBlocks().isEmpty()) {
+    if (javaType.hasStaticInitializerBlocks()) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "Native JsType '%s' cannot have static initializer.",
@@ -468,7 +470,7 @@ public class JsInteropRestrictionsChecker {
    * initializations on static fields except for compile time constants.
    */
   private static boolean isClinitEmpty(JavaType javaType) {
-    if (!javaType.getStaticInitializerBlocks().isEmpty()) {
+    if (javaType.hasStaticInitializerBlocks()) {
       return false;
     }
     for (Field staticField : javaType.getStaticFields()) {
