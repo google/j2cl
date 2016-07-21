@@ -11,6 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGeneric
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Error = goog.forwardDeclare('java.lang.Error$impl');
 
 
@@ -99,6 +100,7 @@ class SimpleGenericType extends Object {
    * @public
    */
   static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
     Error = goog.module.get('java.lang.Error$impl');
     Object.$clinit();
   }

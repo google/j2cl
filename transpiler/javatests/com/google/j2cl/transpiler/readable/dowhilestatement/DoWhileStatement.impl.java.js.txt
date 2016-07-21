@@ -11,6 +11,9 @@ goog.module('com.google.j2cl.transpiler.readable.dowhilestatement.DoWhileStateme
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
 
 class DoWhileStatement extends Object {
   /**
@@ -75,7 +78,11 @@ class DoWhileStatement extends Object {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { Object.$clinit(); }
+  static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    Object.$clinit();
+  }
 
   /**
    * Runs instance field and block initializers.

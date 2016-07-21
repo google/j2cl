@@ -12,6 +12,8 @@ let Function = goog.require('com.google.j2cl.transpiler.readable.functiontype.Fu
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
 
 /**
  * @implements {Function}
@@ -75,7 +77,10 @@ class FunctionImpl extends Object {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { Object.$clinit(); }
+  static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
+    Object.$clinit();
+  }
 
   /**
    * Runs instance field and block initializers.

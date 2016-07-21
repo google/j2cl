@@ -12,6 +12,8 @@ let ParentInner = goog.require('com.google.j2cl.transpiler.readable.innerclassin
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let ChildClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$impl');
+let ParentOuter = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.ParentOuter$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -126,6 +128,9 @@ class ChildClass$InnerClass extends ParentInner {
   static $clinit() {
     ChildClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$impl');
+    ParentOuter = goog.module.get(
+        'com.google.j2cl.transpiler.readable.innerclassinheritance.ParentOuter$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     ParentInner.$clinit();
   }

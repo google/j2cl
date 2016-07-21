@@ -26,6 +26,7 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -245,14 +246,6 @@ public class JsDocNameUtils {
     }
     if (typeDescriptor.isPrimitive()) {
       return typeDescriptor.getSimpleName();
-    }
-    if (typeDescriptor.isTypeVariable()) {
-      // Template variable like "C_T".
-      return typeDescriptor.getBinaryClassName();
-    }
-    if (typeDescriptor.isWildCard()) {
-      // Wild card like "?".
-      return typeDescriptor.getBinaryClassName();
     }
 
     return environment.aliasForType(typeDescriptor);

@@ -11,6 +11,8 @@ goog.module('com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSup
 let Parent = goog.require('com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
 
 class QualifiedSuperCall extends Parent {
   /**
@@ -66,7 +68,10 @@ class QualifiedSuperCall extends Parent {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { Parent.$clinit(); }
+  static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
+    Parent.$clinit();
+  }
 
   /**
    * Runs instance field and block initializers.

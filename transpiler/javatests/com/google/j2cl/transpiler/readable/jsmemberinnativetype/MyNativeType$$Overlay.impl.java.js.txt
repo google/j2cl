@@ -11,6 +11,8 @@ goog.module('com.google.j2cl.transpiler.readable.jsmemberinnativetype.MyNativeTy
 let $Util = goog.require('nativebootstrap.Util$impl');
 let MyNativeType = goog.require('test.foo.MyNativeType');
 
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
 
 class MyNativeType$$Overlay {
   /**
@@ -41,7 +43,9 @@ class MyNativeType$$Overlay {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+  }
 };
 
 

@@ -13,6 +13,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Parent = goog.forwardDeclare('com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent$impl');
 let QualifiedSuperCall = goog.forwardDeclare('com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
 class QualifiedSuperCall$InnerClass extends Object {
@@ -95,6 +96,7 @@ class QualifiedSuperCall$InnerClass extends Object {
         'com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent$impl');
     QualifiedSuperCall = goog.module.get(
         'com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }
 

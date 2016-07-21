@@ -13,6 +13,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 
 let OuterClass$InnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass$impl');
 let OuterClass$InnerClass$InnerInnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
 class OuterClass extends Object {
@@ -84,6 +85,7 @@ class OuterClass extends Object {
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass$impl');
     OuterClass$InnerClass$InnerInnerClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }
 

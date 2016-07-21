@@ -11,6 +11,8 @@ goog.module('com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.F
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
 
 /**
  * @template C_Foo_V
@@ -70,7 +72,10 @@ class CastToGenerics$Foo extends Object {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { Object.$clinit(); }
+  static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
+    Object.$clinit();
+  }
 
   /**
    * Runs instance field and block initializers.

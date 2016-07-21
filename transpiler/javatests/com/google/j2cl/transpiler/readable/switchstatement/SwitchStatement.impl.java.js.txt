@@ -12,6 +12,7 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Numbers = goog.forwardDeclare('com.google.j2cl.transpiler.readable.switchstatement.Numbers$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
 class SwitchStatement extends Object {
@@ -108,6 +109,7 @@ class SwitchStatement extends Object {
   static $clinit() {
     Numbers = goog.module.get(
         'com.google.j2cl.transpiler.readable.switchstatement.Numbers$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }
 

@@ -11,6 +11,8 @@ goog.module('com.google.j2cl.transpiler.readable.subclassgenericclass.SubclassGe
 let GenericClass = goog.require('com.google.j2cl.transpiler.readable.subclassgenericclass.GenericClass$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
 
 /**
  * @extends {GenericClass<SubclassGenericClass>}
@@ -69,7 +71,10 @@ class SubclassGenericClass extends GenericClass {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { GenericClass.$clinit(); }
+  static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
+    GenericClass.$clinit();
+  }
 
   /**
    * Runs instance field and block initializers.

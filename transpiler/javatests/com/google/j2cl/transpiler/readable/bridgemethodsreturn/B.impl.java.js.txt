@@ -12,6 +12,7 @@ let A = goog.require('com.google.j2cl.transpiler.readable.bridgemethodsreturn.A$
 let I = goog.require('com.google.j2cl.transpiler.readable.bridgemethodsreturn.I$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
@@ -94,6 +95,7 @@ class B extends A {
    * @public
    */
   static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     Number = goog.module.get('java.lang.Number$impl');
     String = goog.module.get('java.lang.String$impl');

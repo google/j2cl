@@ -12,11 +12,13 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
 
 
 class Main extends Object {
@@ -92,11 +94,13 @@ class Main extends Object {
    */
   static $clinit() {
     Boolean = goog.module.get('java.lang.Boolean$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     Double = goog.module.get('java.lang.Double$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
     Object.$clinit();
   }
 

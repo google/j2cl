@@ -14,6 +14,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let $LongUtils = goog.require('vmbootstrap.LongUtils$impl');
 
 let LambdaWithGenerics = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Function$$Overlay = goog.forwardDeclare('java.util.function.Function.$Overlay$impl');
@@ -138,6 +139,7 @@ class LambdaWithGenerics$3apply extends Object {
   static $clinit() {
     LambdaWithGenerics = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     Enum = goog.module.get('java.lang.Enum$impl');
     Long = goog.module.get('java.lang.Long$impl');
     Function$$Overlay =

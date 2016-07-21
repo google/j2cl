@@ -10,6 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn.R
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
 
 /**
  * @interface
@@ -65,7 +67,7 @@ class LambdaNoReturn$Runner {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() { Class = goog.module.get('java.lang.Class$impl'); }
 };
 
 $Util.$setClassMetadataForInterface(

@@ -13,6 +13,7 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Superclass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
@@ -96,6 +97,7 @@ class AnotherTask extends Object {
   static $clinit() {
     Superclass = goog.module.get(
         'com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     Object.$clinit();
   }

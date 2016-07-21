@@ -17,6 +17,7 @@ let Nullability$Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.n
 let Nullability$MyFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nullability.Nullability.MyFunction$impl');
 let Nullability$StringList = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nullability.Nullability.StringList$impl');
 let ClassInSubpackage = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nullability.subpackage.ClassInSubpackage$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
@@ -25,6 +26,8 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
 
 
 class Nullability extends Object {
@@ -231,6 +234,7 @@ class Nullability extends Object {
         'com.google.j2cl.transpiler.readable.nullability.Nullability.StringList$impl');
     ClassInSubpackage = goog.module.get(
         'com.google.j2cl.transpiler.readable.nullability.subpackage.ClassInSubpackage$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     Double = goog.module.get('java.lang.Double$impl');
     String = goog.module.get('java.lang.String$impl');
     ArrayList = goog.module.get('java.util.ArrayList$impl');
@@ -239,6 +243,8 @@ class Nullability extends Object {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
     $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
     Object.$clinit();
   }
 

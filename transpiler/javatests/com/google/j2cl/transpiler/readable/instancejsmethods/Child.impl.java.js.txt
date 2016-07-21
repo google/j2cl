@@ -12,6 +12,7 @@ let MyInterface = goog.require('com.google.j2cl.transpiler.readable.instancejsme
 let Parent = goog.require('com.google.j2cl.transpiler.readable.instancejsmethods.Parent$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -111,6 +112,7 @@ class Child extends Parent {
    * @public
    */
   static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Parent.$clinit();
   }

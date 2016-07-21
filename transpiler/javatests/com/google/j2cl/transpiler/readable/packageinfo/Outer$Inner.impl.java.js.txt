@@ -11,6 +11,7 @@ goog.module('readable.packageinfo.Outer.Inner$impl');
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Outer = goog.forwardDeclare('readable.packageinfo.Outer$impl');
 
 
@@ -67,6 +68,7 @@ class Outer$Inner extends Object {
    * @public
    */
   static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
     Outer = goog.module.get('readable.packageinfo.Outer$impl');
     Object.$clinit();
   }

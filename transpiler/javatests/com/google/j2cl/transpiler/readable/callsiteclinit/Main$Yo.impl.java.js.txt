@@ -11,6 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.callsiteclinit.Main.Yo$impl');
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
 
 
@@ -93,6 +94,7 @@ class Main$Yo extends Object {
    */
   static $clinit() {
     Main$Yo.$clinit = function() {};
+    Class = goog.module.get('java.lang.Class$impl');
     String = goog.module.get('java.lang.String$impl');
     Object.$clinit();
     Main$Yo.$f_a__com_google_j2cl_transpiler_readable_callsiteclinit_Main$Yo =

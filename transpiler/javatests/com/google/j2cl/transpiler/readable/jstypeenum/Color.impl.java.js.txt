@@ -11,6 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.jstypeenum.Color$impl');
 let Enum = goog.require('java.lang.Enum$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
@@ -230,6 +231,7 @@ class Color extends Enum {
    */
   static $clinit() {
     Color.$clinit = function() {};
+    Class = goog.module.get('java.lang.Class$impl');
     String = goog.module.get('java.lang.String$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');

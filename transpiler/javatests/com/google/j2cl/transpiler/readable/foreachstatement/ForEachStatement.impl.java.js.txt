@@ -11,11 +11,14 @@ goog.module('com.google.j2cl.transpiler.readable.foreachstatement.ForEachStateme
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let Iterator = goog.forwardDeclare('java.util.Iterator$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
 
 
 class ForEachStatement extends Object {
@@ -92,11 +95,14 @@ class ForEachStatement extends Object {
    * @public
    */
   static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
     Iterable = goog.module.get('java.lang.Iterable$impl');
     Throwable = goog.module.get('java.lang.Throwable$impl');
     Iterator = goog.module.get('java.util.Iterator$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
     Object.$clinit();
   }
 

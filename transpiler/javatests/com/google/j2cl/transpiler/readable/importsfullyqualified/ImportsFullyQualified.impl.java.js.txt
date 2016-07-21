@@ -12,6 +12,8 @@ let Serializable = goog.require('java.io.Serializable$impl');
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
 
 /**
  * @implements {Serializable}
@@ -70,7 +72,10 @@ class ImportsFullyQualified extends Object {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { Object.$clinit(); }
+  static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
+    Object.$clinit();
+  }
 
   /**
    * Runs instance field and block initializers.

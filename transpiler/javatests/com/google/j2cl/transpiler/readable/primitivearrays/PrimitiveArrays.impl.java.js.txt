@@ -12,6 +12,7 @@ let Object = goog.require('java.lang.Object$impl');
 let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 let $byte = goog.forwardDeclare('vmbootstrap.primitives.$byte$impl');
@@ -115,6 +116,7 @@ class PrimitiveArrays extends Object {
    * @public
    */
   static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
     $byte = goog.module.get('vmbootstrap.primitives.$byte$impl');

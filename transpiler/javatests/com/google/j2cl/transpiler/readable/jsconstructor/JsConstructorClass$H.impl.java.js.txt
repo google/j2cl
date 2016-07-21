@@ -11,6 +11,8 @@ goog.module('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClas
 let JsConstructorClass$G = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.G$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
 
 class JsConstructorClass$H extends JsConstructorClass$G {
   /**
@@ -65,7 +67,10 @@ class JsConstructorClass$H extends JsConstructorClass$G {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { JsConstructorClass$G.$clinit(); }
+  static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
+    JsConstructorClass$G.$clinit();
+  }
 
   /**
    * Runs instance field and block initializers.

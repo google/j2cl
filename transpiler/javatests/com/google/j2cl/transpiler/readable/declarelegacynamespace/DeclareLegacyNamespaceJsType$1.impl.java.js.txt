@@ -11,6 +11,8 @@ goog.module('com.google.j2cl.transpiler.readable.declarelegacynamespace.DeclareL
 let DeclareLegacyNamespaceJsType = goog.require('com.google.j2cl.transpiler.readable.declarelegacynamespace.DeclareLegacyNamespaceJsType$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
 
 class DeclareLegacyNamespaceJsType$1 extends DeclareLegacyNamespaceJsType {
   /**
@@ -73,7 +75,10 @@ class DeclareLegacyNamespaceJsType$1 extends DeclareLegacyNamespaceJsType {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { DeclareLegacyNamespaceJsType.$clinit(); }
+  static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
+    DeclareLegacyNamespaceJsType.$clinit();
+  }
 
   /**
    * Runs instance field and block initializers.

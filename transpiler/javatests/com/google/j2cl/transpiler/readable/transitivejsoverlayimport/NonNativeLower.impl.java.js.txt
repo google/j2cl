@@ -11,6 +11,8 @@ goog.module('com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNa
 let NonNativeUpper = goog.require('com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeUpper$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
+
 
 class NonNativeLower extends NonNativeUpper {
   /**
@@ -70,7 +72,10 @@ class NonNativeLower extends NonNativeUpper {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { NonNativeUpper.$clinit(); }
+  static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
+    NonNativeUpper.$clinit();
+  }
 
   /**
    * Runs instance field and block initializers.

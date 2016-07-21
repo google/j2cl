@@ -4,7 +4,7 @@
 [int Asserts = 1;] => [let l_l_Asserts = 1;]
 [int $Asserts = 1;] => [let l_$Asserts = 1;]
 [int l_Asserts = 1;] => [let l_Asserts = 1;]
-[int com_google_j2cl_transpiler_readable_localnamecollision_Class = 1;] => [let com_google_j2cl_transpiler_readable_localnamecollision_Class = 1;]
+[int com_google_j2cl_transpiler_readable_localnamecollision_Class = 1;] => [let l_com_google_j2cl_transpiler_readable_localnamecollision_Class = 1;]
 [int com_google_j2cl_transpiler_readable_localnamecollision_package1_A = 1;] => [let l_com_google_j2cl_transpiler_readable_localnamecollision_package1_A = 1;]
 [int com_google_j2cl_transpiler_readable_localnamecollision_package2_A = 1;] => [let l_com_google_j2cl_transpiler_readable_localnamecollision_package2_A = 1;]
 [int A = 1;] => [let A = 1;]
@@ -15,7 +15,7 @@
                 instanceof com.google.j2cl.transpiler.readable.localnamecollision.package1.A
             || RuntimeException
                 instanceof com.google.j2cl.transpiler.readable.localnamecollision.package2.A
-            || RuntimeException instanceof Class;] => [l_LocalNameCollision = LocalNameCollision.$isInstance(l_RuntimeException) || RuntimeException.$isInstance(l_RuntimeException) || com_google_j2cl_transpiler_readable_localnamecollision_package1_A.$isInstance(l_RuntimeException) || com_google_j2cl_transpiler_readable_localnamecollision_package2_A.$isInstance(l_RuntimeException) || Class.$isInstance(l_RuntimeException);]
+            || RuntimeException instanceof Class;] => [l_LocalNameCollision = LocalNameCollision.$isInstance(l_RuntimeException) || RuntimeException.$isInstance(l_RuntimeException) || com_google_j2cl_transpiler_readable_localnamecollision_package1_A.$isInstance(l_RuntimeException) || com_google_j2cl_transpiler_readable_localnamecollision_package2_A.$isInstance(l_RuntimeException) || com_google_j2cl_transpiler_readable_localnamecollision_Class.$isInstance(l_RuntimeException);]
 [assert new Asserts().n() == 5;] => [$Asserts.$enabled() && $Asserts.$assert(Asserts.$create__().m_n___$pp_com_google_j2cl_transpiler_readable_localnamecollision() == 5);]
 [return LocalNameCollision
         && Asserts instanceof LocalNameCollision

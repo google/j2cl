@@ -13,6 +13,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 
 let InnerClassInitOrder$Outer = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');
 let InnerClassInitOrder$Outer$OuterIsSuper = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
 class InnerClassInitOrder$Outer$TestQualifiedSuperCall extends
@@ -79,6 +80,7 @@ class InnerClassInitOrder$Outer$TestQualifiedSuperCall extends
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer$impl');
     InnerClassInitOrder$Outer$OuterIsSuper = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     InnerClassInitOrder$Outer$OuterIsNotSuper.$clinit();
   }
 

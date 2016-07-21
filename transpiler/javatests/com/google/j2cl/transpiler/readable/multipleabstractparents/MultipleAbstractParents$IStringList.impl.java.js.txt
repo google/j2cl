@@ -11,6 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.Multipl
 let MultipleAbstractParents$List = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.List$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
 
 
@@ -71,7 +72,10 @@ class MultipleAbstractParents$IStringList {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { String = goog.module.get('java.lang.String$impl'); }
+  static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
+    String = goog.module.get('java.lang.String$impl');
+  }
 };
 
 $Util.$setClassMetadataForInterface(

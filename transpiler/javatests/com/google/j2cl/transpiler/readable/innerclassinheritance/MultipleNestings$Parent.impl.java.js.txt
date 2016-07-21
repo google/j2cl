@@ -12,6 +12,7 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let MultipleNestings = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
 class MultipleNestings$Parent extends Object {
@@ -89,6 +90,7 @@ class MultipleNestings$Parent extends Object {
   static $clinit() {
     MultipleNestings = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }
 

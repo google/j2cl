@@ -12,6 +12,7 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let LambdaNestedScope = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
 class LambdaNestedScope$1 extends Object {
@@ -83,6 +84,7 @@ class LambdaNestedScope$1 extends Object {
   static $clinit() {
     LambdaNestedScope = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdanestedscope.LambdaNestedScope$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }
 

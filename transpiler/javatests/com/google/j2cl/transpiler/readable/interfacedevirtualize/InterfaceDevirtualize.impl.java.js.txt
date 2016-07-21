@@ -12,6 +12,7 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
@@ -160,6 +161,7 @@ class InterfaceDevirtualize extends Object {
    */
   static $clinit() {
     Boolean = goog.module.get('java.lang.Boolean$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     Comparable = goog.module.get('java.lang.Comparable$impl');
     Double = goog.module.get('java.lang.Double$impl');
     Integer = goog.module.get('java.lang.Integer$impl');

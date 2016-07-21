@@ -11,9 +11,11 @@ goog.module('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClas
 let JsConstructorClass$Varargs = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.Varargs$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Object = goog.forwardDeclare('java.lang.Object$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
 
 
 class JsConstructorClass$SubVarargs extends JsConstructorClass$Varargs {
@@ -120,9 +122,11 @@ class JsConstructorClass$SubVarargs extends JsConstructorClass$Varargs {
    * @public
    */
   static $clinit() {
+    Class = goog.module.get('java.lang.Class$impl');
     Object = goog.module.get('java.lang.Object$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
     JsConstructorClass$Varargs.$clinit();
   }
 

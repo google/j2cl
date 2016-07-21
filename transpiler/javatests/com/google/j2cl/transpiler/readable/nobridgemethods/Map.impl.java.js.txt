@@ -12,6 +12,7 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Entry = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nobridgemethods.Entry$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
 /**
@@ -82,6 +83,7 @@ class Map extends Object {
   static $clinit() {
     Entry = goog.module.get(
         'com.google.j2cl.transpiler.readable.nobridgemethods.Entry$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }
 

@@ -12,7 +12,9 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Character = goog.forwardDeclare('java.lang.Character$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
+let $char = goog.forwardDeclare('vmbootstrap.primitives.$char$impl');
 
 
 class StringConversion extends Object {
@@ -88,7 +90,9 @@ class StringConversion extends Object {
    */
   static $clinit() {
     Character = goog.module.get('java.lang.Character$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     String = goog.module.get('java.lang.String$impl');
+    $char = goog.module.get('vmbootstrap.primitives.$char$impl');
     Object.$clinit();
   }
 

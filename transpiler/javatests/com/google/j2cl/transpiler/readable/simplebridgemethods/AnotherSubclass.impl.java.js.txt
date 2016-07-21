@@ -12,6 +12,7 @@ let Superclass = goog.require('com.google.j2cl.transpiler.readable.simplebridgem
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
+let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
 /**
@@ -71,6 +72,7 @@ class AnotherSubclass extends Superclass {
    */
   static $clinit() {
     AssertionError = goog.module.get('java.lang.AssertionError$impl');
+    Class = goog.module.get('java.lang.Class$impl');
     Superclass.$clinit();
   }
 
