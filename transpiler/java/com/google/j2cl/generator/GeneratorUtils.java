@@ -32,7 +32,6 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.errors.Errors;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -96,7 +95,6 @@ public class GeneratorUtils {
   /**
    * Returns the js doc annotations for parameter at {@code index} in {@code method}. It is of
    * the form:
-   *  @param {parameterType} parameterName
    */
   public static String getParameterJsDocAnnotation(
       Method method, int index, GenerationEnvironment environment) {

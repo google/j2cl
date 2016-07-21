@@ -17,7 +17,6 @@ package com.google.j2cl.generator.visitors;
 
 import com.google.common.collect.Lists;
 import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -34,7 +33,8 @@ public class ImportUtils {
         union(
             importsByCategory.get(ImportCategory.EAGER),
             importsByCategory.get(ImportCategory.LAZY),
-            importsByCategory.get(ImportCategory.EXTERN)));
+            importsByCategory.get(ImportCategory.EXTERN),
+            importsByCategory.get(ImportCategory.SELF)));
   }
 
   public static <T extends Comparable<T>> List<T> sortedList(Set<T> set) {

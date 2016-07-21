@@ -11,7 +11,6 @@ goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassI
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
@@ -76,7 +75,6 @@ class InnerClassInitOrder$OuterRefFromSuperCtorBase extends Object {
    * @public
    */
   static $clinit() {
-    Class = goog.module.get('java.lang.Class$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
     Object.$clinit();
   }

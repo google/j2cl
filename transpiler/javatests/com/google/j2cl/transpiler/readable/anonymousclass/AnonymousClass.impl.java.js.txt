@@ -12,8 +12,6 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let AnonymousClass$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass.$Anonymous1$impl');
-let SomeClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousclass.SomeClass$impl');
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
 class AnonymousClass extends Object {
@@ -82,9 +80,6 @@ class AnonymousClass extends Object {
   static $clinit() {
     AnonymousClass$1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass.$Anonymous1$impl');
-    SomeClass = goog.module.get(
-        'com.google.j2cl.transpiler.readable.anonymousclass.SomeClass$impl');
-    Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }
 

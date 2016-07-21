@@ -17,20 +17,25 @@ package com.google.j2cl.generator.visitors;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.HashMultiset;
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AssertStatement;
-import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
-import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.JsTypeAnnotation;
 import com.google.j2cl.ast.Method;
+import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.NewInstance;
+import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
+import com.google.j2cl.ast.TypeReference;
+import com.google.j2cl.ast.Variable;
 import com.google.j2cl.common.TimingCollector;
-
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -43,14 +48,23 @@ import java.util.Set;
 public class ImportGatheringVisitor extends AbstractVisitor {
 
   /**
-   * Enums for describing the category of an import. An eager import is one that should occur in the
-   * declaration phase because it provides a supertype. A lazy import should defer to the execution
-   * phase so that circular imports are avoided.
+   * Enums for describing the category of an import.
+   *
+   * <p>An EAGE import is one that should occur in the declaration phase because it provides a
+   * supertype.
+   *
+   * <p>An EXTERN import should only be emitted as the creation of a type alias.
+   *
+   * <p>A LAZY import should defer to the execution phase so that circular imports are avoided.
+   *
+   * <p>The SELF is not emitted and only exists to ensure that an alias is created for the current
+   * type.
    */
   public enum ImportCategory {
     EAGER,
     EXTERN,
-    LAZY
+    LAZY,
+    SELF
   }
 
   private static String computeLongAliasName(TypeDescriptor typeDescriptor) {
@@ -74,22 +88,82 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     return typeDescriptor.getBinaryClassName();
   }
 
-  private static boolean needImportForJsDoc(TypeDescriptor returnTypeDescriptor) {
-    return !returnTypeDescriptor.isPrimitive()
-        && !returnTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().javaLangString);
-  }
-
   private final Multiset<String> localNameUses = HashMultiset.create();
 
-  private final Map<ImportCategory, Set<TypeDescriptor>> typeDescriptorsByCategory =
-      new LinkedHashMap<>();
+  private final Multimap<ImportCategory, TypeDescriptor> typeDescriptorsByCategory =
+      LinkedHashMultimap.create();
 
-  private final Set<TypeDescriptor> typeDescriptorsDefinedInCompilationUnit = new LinkedHashSet<>();
+  private ImportGatheringVisitor() {}
 
-  private ImportGatheringVisitor() {
-    typeDescriptorsByCategory.put(ImportCategory.EAGER, new LinkedHashSet<TypeDescriptor>());
-    typeDescriptorsByCategory.put(ImportCategory.LAZY, new LinkedHashSet<TypeDescriptor>());
-    typeDescriptorsByCategory.put(ImportCategory.EXTERN, new LinkedHashSet<TypeDescriptor>());
+  @Override
+  public void exitAssertStatement(AssertStatement assertStatement) {
+    addTypeDescriptor(BootstrapType.ASSERTS.getDescriptor(), ImportCategory.LAZY);
+  }
+
+  @Override
+  public void exitField(Field field) {
+    addTypeDescriptor(field.getDescriptor().getTypeDescriptor(), ImportCategory.LAZY);
+  }
+
+  @Override
+  public void exitJavaType(JavaType type) {
+    addTypeDescriptor(type.getDescriptor().getRawTypeDescriptor(), ImportCategory.SELF);
+
+    // Super type and super interface imports are needed eagerly because they are used during the
+    // declaration phase of JS execution. All other imports are lazy.
+    if (type.getSuperTypeDescriptor() != null) {
+      addTypeDescriptor(type.getSuperTypeDescriptor(), ImportCategory.EAGER);
+    }
+    for (TypeDescriptor superInterfaceTypeDescriptor : type.getSuperInterfaceTypeDescriptors()) {
+      addTypeDescriptor(superInterfaceTypeDescriptor, ImportCategory.EAGER);
+    }
+  }
+
+  @Override
+  public void exitJsTypeAnnotation(JsTypeAnnotation jsTypeAnnotation) {
+    addTypeDescriptor(jsTypeAnnotation.getTypeDescriptor(), ImportCategory.LAZY);
+  }
+
+  @Override
+  public void exitMethod(Method method) {
+    TypeDescriptor returnTypeDescriptor = method.getDescriptor().getReturnTypeDescriptor();
+    if (!returnTypeDescriptor.isPrimitive()
+        || returnTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveLong)) {
+      addTypeDescriptor(returnTypeDescriptor, ImportCategory.LAZY);
+    }
+
+    for (Variable parameter : method.getParameters()) {
+      addTypeDescriptor(parameter.getTypeDescriptor(), ImportCategory.LAZY);
+    }
+  }
+
+  @Override
+  public void exitMethodCall(MethodCall methodCall) {
+    if (methodCall.isStaticDispatch()) {
+      addTypeDescriptor(
+          methodCall.getTarget().getEnclosingClassTypeDescriptor(), ImportCategory.LAZY);
+    }
+  }
+
+  @Override
+  public void exitNewInstance(NewInstance newInstance) {
+    addTypeDescriptor(
+        newInstance.getTarget().getEnclosingClassTypeDescriptor(), ImportCategory.LAZY);
+  }
+
+  @Override
+  public void exitNumberLiteral(NumberLiteral numberLiteral) {
+    if (TypeDescriptors.get()
+        .primitiveLong
+        .equalsIgnoreNullability(numberLiteral.getTypeDescriptor())) {
+      // for Long operation method dispatch.
+      addLongsTypeDescriptor();
+    }
+  }
+
+  @Override
+  public void exitTypeReference(TypeReference typeReference) {
+    addTypeDescriptor(typeReference.getReferencedTypeDescriptor(), ImportCategory.LAZY);
   }
 
   private void addLongsTypeDescriptor() {
@@ -108,7 +182,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
       importCategory = ImportCategory.EXTERN;
     }
 
-    typeDescriptorsByCategory.get(importCategory).add(rawTypeDescriptor);
+    typeDescriptorsByCategory.put(importCategory, rawTypeDescriptor);
   }
 
   private void addTypeDescriptor(TypeDescriptor typeDescriptor, ImportCategory importCategory) {
@@ -123,10 +197,8 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
     // Special case expand a dependency on the 'long' primitive into a dependency on both the 'long'
     // primitive and the native JS 'Long' emulation class.
-    boolean equalIgnoringNullability =
-        TypeDescriptors.toNonNullable(TypeDescriptors.get().primitiveLong)
-            .equals(TypeDescriptors.toNonNullable(typeDescriptor));
-    if (equalIgnoringNullability) {
+    if (TypeDescriptors.toNonNullable(TypeDescriptors.get().primitiveLong)
+        .equals(TypeDescriptors.toNonNullable(typeDescriptor))) {
       addRawTypeDescriptor(ImportCategory.EAGER, BootstrapType.NATIVE_LONG.getDescriptor());
       addRawTypeDescriptor(importCategory, TypeDescriptors.get().primitiveLong);
       return;
@@ -168,10 +240,6 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     if (javaType.isJsOverlayImplementation()) {
       // The synthesized JsOverlayImpl type should import the native type eagerly.
       addTypeDescriptor(javaType.getNativeTypeDescriptor(), ImportCategory.EAGER);
-    } else {
-      // The synthesized JsOverlayImpl type does not need the class literal stuff, thus does not
-      // need eagerly import the Class native_boostrap types.
-      addTypeDescriptor(TypeDescriptors.get().javaLangClass, ImportCategory.LAZY);
     }
     // Util class implements some utility functions and does not depend on any other class, always
     // import it eagerly.
@@ -181,103 +249,41 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     timingCollector.startSample("Collect type references");
     javaType.accept(this);
 
+    Preconditions.checkState(typeDescriptorsByCategory.get(ImportCategory.SELF).size() == 1);
+
     timingCollector.startSample("Remove duplicate references");
     typeDescriptorsByCategory
         .get(ImportCategory.LAZY)
         .removeAll(typeDescriptorsByCategory.get(ImportCategory.EAGER));
     typeDescriptorsByCategory
         .get(ImportCategory.LAZY)
-        .removeAll(typeDescriptorsDefinedInCompilationUnit);
+        .removeAll(typeDescriptorsByCategory.get(ImportCategory.SELF));
     typeDescriptorsByCategory
         .get(ImportCategory.EAGER)
-        .removeAll(typeDescriptorsDefinedInCompilationUnit);
+        .removeAll(typeDescriptorsByCategory.get(ImportCategory.SELF));
 
     timingCollector.startSample("Record Local Name Uses");
-    recordLocalNameUses(typeDescriptorsDefinedInCompilationUnit);
-    recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.LAZY));
-    recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.EAGER));
-    recordLocalNameUses(typeDescriptorsByCategory.get(ImportCategory.EXTERN));
+    recordLocalNameUses((Set<TypeDescriptor>) typeDescriptorsByCategory.get(ImportCategory.SELF));
+    recordLocalNameUses((Set<TypeDescriptor>) typeDescriptorsByCategory.get(ImportCategory.LAZY));
+    recordLocalNameUses((Set<TypeDescriptor>) typeDescriptorsByCategory.get(ImportCategory.EAGER));
+    recordLocalNameUses((Set<TypeDescriptor>) typeDescriptorsByCategory.get(ImportCategory.EXTERN));
 
     timingCollector.startSample("Convert to imports");
     Map<ImportCategory, Set<Import>> importsByCategory = new LinkedHashMap<>();
     importsByCategory.put(
-        ImportCategory.LAZY, toImports(typeDescriptorsByCategory.get(ImportCategory.LAZY)));
+        ImportCategory.LAZY,
+        toImports((Set<TypeDescriptor>) typeDescriptorsByCategory.get(ImportCategory.LAZY)));
     importsByCategory.put(
-        ImportCategory.EAGER, toImports(typeDescriptorsByCategory.get(ImportCategory.EAGER)));
+        ImportCategory.EAGER,
+        toImports((Set<TypeDescriptor>) typeDescriptorsByCategory.get(ImportCategory.EAGER)));
     importsByCategory.put(
-        ImportCategory.EXTERN, toImports(typeDescriptorsByCategory.get(ImportCategory.EXTERN)));
+        ImportCategory.EXTERN,
+        toImports((Set<TypeDescriptor>) typeDescriptorsByCategory.get(ImportCategory.EXTERN)));
+    importsByCategory.put(
+        ImportCategory.SELF,
+        toImports((Set<TypeDescriptor>) typeDescriptorsByCategory.get(ImportCategory.SELF)));
     timingCollector.endSubSample();
     return importsByCategory;
-  }
-
-  @Override
-  public void exitAssertStatement(AssertStatement assertStatement) {
-    addTypeDescriptor(BootstrapType.ASSERTS.getDescriptor(), ImportCategory.LAZY);
-  }
-
-  @Override
-  public void exitExpression(Expression expression) {
-    if (TypeDescriptors.get()
-        .primitiveLong
-        .equalsIgnoreNullability(expression.getTypeDescriptor())) {
-      // for Long operation method dispatch.
-      addLongsTypeDescriptor();
-    }
-  }
-
-  @Override
-  public void exitField(Field field) {
-    if (TypeDescriptors.get()
-        .primitiveLong
-        .equalsIgnoreNullability(field.getDescriptor().getTypeDescriptor())) {
-      addLongsTypeDescriptor();
-    }
-  }
-
-  @Override
-  public void exitFieldDescriptor(FieldDescriptor fieldDescriptor) {
-    addTypeDescriptor(fieldDescriptor.getTypeDescriptor(), ImportCategory.LAZY);
-    addTypeDescriptor(fieldDescriptor.getEnclosingClassTypeDescriptor(), ImportCategory.LAZY);
-  }
-
-  @Override
-  public void exitJavaType(JavaType type) {
-    typeDescriptorsDefinedInCompilationUnit.add(type.getDescriptor().getRawTypeDescriptor());
-
-    // Super type and super interface imports are needed eagerly because they are used during the
-    // declaration phase of JS execution. All other imports are lazy.
-    if (type.getSuperTypeDescriptor() != null) {
-      addTypeDescriptor(type.getSuperTypeDescriptor(), ImportCategory.EAGER);
-    }
-    for (TypeDescriptor superInterfaceTypeDescriptor : type.getSuperInterfaceTypeDescriptors()) {
-      addTypeDescriptor(superInterfaceTypeDescriptor, ImportCategory.EAGER);
-    }
-  }
-
-  @Override
-  public void exitMethod(Method method) {
-    TypeDescriptor returnTypeDescriptor = method.getDescriptor().getReturnTypeDescriptor();
-    if (!returnTypeDescriptor.isPrimitive()
-        || returnTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveLong)) {
-      addTypeDescriptor(returnTypeDescriptor, ImportCategory.LAZY);
-    }
-  }
-
-  @Override
-  public void exitMethodDescriptor(MethodDescriptor methodDescriptor) {
-    addTypeDescriptor(methodDescriptor.getEnclosingClassTypeDescriptor(), ImportCategory.LAZY);
-    TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
-    if (needImportForJsDoc(returnTypeDescriptor)) {
-      addTypeDescriptor(returnTypeDescriptor, ImportCategory.LAZY);
-    }
-  }
-
-  @Override
-  public void exitTypeDescriptor(TypeDescriptor typeDescriptor) {
-    addTypeDescriptor(typeDescriptor, ImportCategory.LAZY);
-    for (TypeDescriptor typeArgument : typeDescriptor.getTypeArgumentDescriptors()) {
-      addTypeDescriptor(typeArgument, ImportCategory.LAZY);
-    }
   }
 
   /**

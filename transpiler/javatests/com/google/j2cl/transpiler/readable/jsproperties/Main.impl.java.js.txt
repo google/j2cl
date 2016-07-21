@@ -14,7 +14,6 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let Bar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsproperties.Bar$impl');
 let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsproperties.Foo$impl');
 let NativeFoo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsproperties.NativeFoo$impl');
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 /** @constructor */ let $global_Math = window.Math;
 
@@ -109,7 +108,6 @@ class Main extends Object {
         'com.google.j2cl.transpiler.readable.jsproperties.Foo$impl');
     NativeFoo = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsproperties.NativeFoo$impl');
-    Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }
 

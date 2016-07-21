@@ -11,7 +11,6 @@ goog.module('com.google.j2cl.transpiler.readable.supermethodcall.Parent$impl');
 let GrandParent = goog.require('com.google.j2cl.transpiler.readable.supermethodcall.GrandParent$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Object = goog.forwardDeclare('java.lang.Object$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
@@ -88,7 +87,6 @@ class Parent extends GrandParent {
    * @public
    */
   static $clinit() {
-    Class = goog.module.get('java.lang.Class$impl');
     Object = goog.module.get('java.lang.Object$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     GrandParent.$clinit();

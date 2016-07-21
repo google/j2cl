@@ -12,8 +12,6 @@ let GenericInterface = goog.require('com.google.j2cl.transpiler.readable.impleme
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('java.lang.Class$impl');
-
 
 /**
  * @template C_T
@@ -74,10 +72,7 @@ class GenericInterfaceGenericImpl extends Object {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {
-    Class = goog.module.get('java.lang.Class$impl');
-    Object.$clinit();
-  }
+  static $clinit() { Object.$clinit(); }
 
   /**
    * Runs instance field and block initializers.

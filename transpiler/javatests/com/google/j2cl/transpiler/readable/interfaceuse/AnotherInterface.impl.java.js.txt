@@ -11,8 +11,6 @@ goog.module('com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface$i
 let SomeInterface = goog.require('com.google.j2cl.transpiler.readable.interfaceuse.SomeInterface$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('java.lang.Class$impl');
-
 
 /**
  * @interface
@@ -70,7 +68,7 @@ class AnotherInterface {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { Class = goog.module.get('java.lang.Class$impl'); }
+  static $clinit() {}
 };
 
 $Util.$setClassMetadataForInterface(

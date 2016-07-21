@@ -10,7 +10,6 @@ goog.module('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyIn
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -78,7 +77,6 @@ class MyInterface {
    * @public
    */
   static $clinit() {
-    Class = goog.module.get('java.lang.Class$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };

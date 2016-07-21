@@ -12,7 +12,6 @@ let A = goog.require('com.google.j2cl.transpiler.readable.jsbridgebackward.A$imp
 let MyJsInterface = goog.require('com.google.j2cl.transpiler.readable.jsbridgebackward.MyJsInterface$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -81,7 +80,6 @@ class InterfaceImpl extends A {
    * @public
    */
   static $clinit() {
-    Class = goog.module.get('java.lang.Class$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     A.$clinit();
   }

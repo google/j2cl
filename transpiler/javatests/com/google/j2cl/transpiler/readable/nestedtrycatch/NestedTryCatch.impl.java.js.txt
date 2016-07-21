@@ -11,9 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.nestedtrycatch.NestedTryCatch$i
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Exception = goog.forwardDeclare('java.lang.Exception$impl');
-let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 
@@ -95,9 +93,7 @@ class NestedTryCatch extends Object {
    * @public
    */
   static $clinit() {
-    Class = goog.module.get('java.lang.Class$impl');
     Exception = goog.module.get('java.lang.Exception$impl');
-    Throwable = goog.module.get('java.lang.Throwable$impl');
     $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
     Object.$clinit();
   }

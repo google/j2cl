@@ -11,9 +11,6 @@ goog.module('com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClas
 let ChildClass = goog.require('com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let ParentOuter = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.ParentOuter$impl');
-let Class = goog.forwardDeclare('java.lang.Class$impl');
-
 
 class ChildClass$1LocalClass extends ChildClass {
   /**
@@ -102,12 +99,7 @@ class ChildClass$1LocalClass extends ChildClass {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {
-    ParentOuter = goog.module.get(
-        'com.google.j2cl.transpiler.readable.innerclassinheritance.ParentOuter$impl');
-    Class = goog.module.get('java.lang.Class$impl');
-    ChildClass.$clinit();
-  }
+  static $clinit() { ChildClass.$clinit(); }
 
   /**
    * Runs instance field and block initializers.

@@ -12,7 +12,6 @@ let MultipleNestings$Parent = goog.require('com.google.j2cl.transpiler.readable.
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let MultipleNestings = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$impl');
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
 class MultipleNestings$InnerClass1 extends MultipleNestings$Parent {
@@ -91,7 +90,6 @@ class MultipleNestings$InnerClass1 extends MultipleNestings$Parent {
   static $clinit() {
     MultipleNestings = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinheritance.MultipleNestings$impl');
-    Class = goog.module.get('java.lang.Class$impl');
     MultipleNestings$Parent.$clinit();
   }
 

@@ -12,10 +12,8 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Child = goog.forwardDeclare('com.google.j2cl.transpiler.readable.instancejsmethods.Child$impl');
-let MyInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.instancejsmethods.MyInterface$impl');
 let Parent = goog.forwardDeclare('com.google.j2cl.transpiler.readable.instancejsmethods.Parent$impl');
 let SuperParent = goog.forwardDeclare('com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent$impl');
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
 class Main extends Object {
@@ -115,13 +113,10 @@ class Main extends Object {
   static $clinit() {
     Child = goog.module.get(
         'com.google.j2cl.transpiler.readable.instancejsmethods.Child$impl');
-    MyInterface = goog.module.get(
-        'com.google.j2cl.transpiler.readable.instancejsmethods.MyInterface$impl');
     Parent = goog.module.get(
         'com.google.j2cl.transpiler.readable.instancejsmethods.Parent$impl');
     SuperParent = goog.module.get(
         'com.google.j2cl.transpiler.readable.instancejsmethods.SuperParent$impl');
-    Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }
 

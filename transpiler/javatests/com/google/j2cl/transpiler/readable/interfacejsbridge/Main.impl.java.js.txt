@@ -12,10 +12,6 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let InterfaceImpl = goog.forwardDeclare('com.google.j2cl.transpiler.readable.interfacejsbridge.InterfaceImpl$impl');
-let MyInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.interfacejsbridge.MyInterface$impl');
-let MyJsInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.interfacejsbridge.MyJsInterface$impl');
-let SubInterface = goog.forwardDeclare('com.google.j2cl.transpiler.readable.interfacejsbridge.SubInterface$impl');
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
 class Main extends Object {
@@ -88,13 +84,6 @@ class Main extends Object {
   static $clinit() {
     InterfaceImpl = goog.module.get(
         'com.google.j2cl.transpiler.readable.interfacejsbridge.InterfaceImpl$impl');
-    MyInterface = goog.module.get(
-        'com.google.j2cl.transpiler.readable.interfacejsbridge.MyInterface$impl');
-    MyJsInterface = goog.module.get(
-        'com.google.j2cl.transpiler.readable.interfacejsbridge.MyJsInterface$impl');
-    SubInterface = goog.module.get(
-        'com.google.j2cl.transpiler.readable.interfacejsbridge.SubInterface$impl');
-    Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }
 

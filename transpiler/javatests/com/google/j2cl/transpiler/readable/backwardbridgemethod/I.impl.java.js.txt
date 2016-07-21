@@ -10,7 +10,6 @@ goog.module('com.google.j2cl.transpiler.readable.backwardbridgemethod.I$impl');
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
 
 
@@ -69,10 +68,7 @@ class I {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {
-    Class = goog.module.get('java.lang.Class$impl');
-    String = goog.module.get('java.lang.String$impl');
-  }
+  static $clinit() { String = goog.module.get('java.lang.String$impl'); }
 };
 
 $Util.$setClassMetadataForInterface(

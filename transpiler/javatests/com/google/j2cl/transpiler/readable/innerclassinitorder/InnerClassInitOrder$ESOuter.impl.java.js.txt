@@ -12,7 +12,6 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let InnerClassInitOrder$ESOuter$ESInner = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner$impl');
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
 class InnerClassInitOrder$ESOuter extends Object {
@@ -82,7 +81,6 @@ class InnerClassInitOrder$ESOuter extends Object {
   static $clinit() {
     InnerClassInitOrder$ESOuter$ESInner = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner$impl');
-    Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }
 

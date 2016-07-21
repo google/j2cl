@@ -11,11 +11,9 @@ goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.Multipl
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let MultipleAbstractParents$AbstractCollection = goog.forwardDeclare('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractCollection$impl');
 let MultipleAbstractParents$ArrayList = goog.forwardDeclare('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.ArrayList$impl');
 let MultipleAbstractParents$IStringList = goog.forwardDeclare('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList$impl');
 let MultipleAbstractParents$StringList = goog.forwardDeclare('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.StringList$impl');
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
@@ -104,15 +102,12 @@ class MultipleAbstractParents extends Object {
    * @public
    */
   static $clinit() {
-    MultipleAbstractParents$AbstractCollection = goog.module.get(
-        'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.AbstractCollection$impl');
     MultipleAbstractParents$ArrayList = goog.module.get(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.ArrayList$impl');
     MultipleAbstractParents$IStringList = goog.module.get(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList$impl');
     MultipleAbstractParents$StringList = goog.module.get(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.StringList$impl');
-    Class = goog.module.get('java.lang.Class$impl');
     String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');

@@ -11,7 +11,6 @@ goog.module('com.google.j2cl.transpiler.readable.wideningandboxing.Main$impl');
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Float = goog.forwardDeclare('java.lang.Float$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
@@ -103,7 +102,6 @@ class Main extends Object {
    * @public
    */
   static $clinit() {
-    Class = goog.module.get('java.lang.Class$impl');
     Double = goog.module.get('java.lang.Double$impl');
     Float = goog.module.get('java.lang.Float$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');

@@ -13,7 +13,6 @@ let SomeInterface = goog.require('com.google.j2cl.transpiler.readable.bridgemeth
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
@@ -139,7 +138,6 @@ class BridgeMethod extends Parent {
    */
   static $clinit() {
     AssertionError = goog.module.get('java.lang.AssertionError$impl');
-    Class = goog.module.get('java.lang.Class$impl');
     Number = goog.module.get('java.lang.Number$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     Parent.$clinit();

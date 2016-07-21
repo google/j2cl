@@ -12,10 +12,9 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Asserts = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localnamecollision.Asserts$impl');
-let com_google_j2cl_transpiler_readable_localnamecollision_Class = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localnamecollision.Class$impl');
+let Class = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localnamecollision.Class$impl');
 let com_google_j2cl_transpiler_readable_localnamecollision_package1_A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localnamecollision.package1.A$impl');
 let com_google_j2cl_transpiler_readable_localnamecollision_package2_A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.localnamecollision.package2.A$impl');
-let java_lang_Class = goog.forwardDeclare('java.lang.Class$impl');
 let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
@@ -39,7 +38,7 @@ class LocalNameCollision extends Object {
     let l_l_Asserts = 1;
     let l_$Asserts = 1;
     let l_Asserts = 1;
-    let l_com_google_j2cl_transpiler_readable_localnamecollision_Class = 1;
+    let com_google_j2cl_transpiler_readable_localnamecollision_Class = 1;
     let l_com_google_j2cl_transpiler_readable_localnamecollision_package1_A = 1;
     let l_com_google_j2cl_transpiler_readable_localnamecollision_package2_A = 1;
     let A = 1;
@@ -49,8 +48,7 @@ class LocalNameCollision extends Object {
             .$isInstance(l_RuntimeException) ||
         com_google_j2cl_transpiler_readable_localnamecollision_package2_A
             .$isInstance(l_RuntimeException) ||
-        com_google_j2cl_transpiler_readable_localnamecollision_Class
-            .$isInstance(l_RuntimeException);
+        Class.$isInstance(l_RuntimeException);
     $Asserts.$enabled() &&
         $Asserts.$assert(
             Asserts.$create__()
@@ -140,16 +138,14 @@ class LocalNameCollision extends Object {
   static $clinit() {
     Asserts = goog.module.get(
         'com.google.j2cl.transpiler.readable.localnamecollision.Asserts$impl');
-    com_google_j2cl_transpiler_readable_localnamecollision_Class =
-        goog.module.get(
-            'com.google.j2cl.transpiler.readable.localnamecollision.Class$impl');
+    Class = goog.module.get(
+        'com.google.j2cl.transpiler.readable.localnamecollision.Class$impl');
     com_google_j2cl_transpiler_readable_localnamecollision_package1_A =
         goog.module.get(
             'com.google.j2cl.transpiler.readable.localnamecollision.package1.A$impl');
     com_google_j2cl_transpiler_readable_localnamecollision_package2_A =
         goog.module.get(
             'com.google.j2cl.transpiler.readable.localnamecollision.package2.A$impl');
-    java_lang_Class = goog.module.get('java.lang.Class$impl');
     RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
     $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
