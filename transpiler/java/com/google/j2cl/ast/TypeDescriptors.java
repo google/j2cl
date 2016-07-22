@@ -281,11 +281,24 @@ public class TypeDescriptors {
 
   public static TypeDescriptor createNative(
       String jsNamespace, String jsName, List<TypeDescriptor> typeArgumentDescriptors) {
-
-    return createExactly(
-        null,
+    return createNative(
         Collections.singletonList(jsNamespace),
         Collections.singletonList((JsUtils.isGlobal(jsNamespace) ? "global_" : "") + jsName),
+        jsNamespace,
+        jsName,
+        typeArgumentDescriptors);
+  }
+
+  public static TypeDescriptor createNative(
+      List<String> packageComponents,
+      List<String> classComponents,
+      String jsNamespace,
+      String jsName,
+      List<TypeDescriptor> typeArgumentDescriptors) {
+    return createExactly(
+        null,
+        packageComponents,
+        classComponents,
         typeArgumentDescriptors,
         jsNamespace,
         jsName,

@@ -42,10 +42,9 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
- * The OutputGeneratorStage contains all necessary information for generating the JavaScript
- * output, source maps and depinfo files for the transpiler. It is responsible for pulling in
- * native sources and then generating header, implementation and sourcemap files for each Java
- * Type.
+ * The OutputGeneratorStage contains all necessary information for generating the JavaScript output,
+ * source maps and depinfo files for the transpiler. It is responsible for pulling in native sources
+ * and then generating header, implementation and sourcemap files for each Java Type.
  */
 public class OutputGeneratorStage {
   private final Charset charset;
@@ -94,7 +93,27 @@ public class OutputGeneratorStage {
     for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
       for (Type type : j2clCompilationUnit.getTypes()) {
         if (type.getDescriptor().isNative()) {
-          // Don't generate JS for native JsType.
+          // If the type is a proxy for some transitive dependency JS.
+          if (type.getDescriptor().isJsType() && !type.getDescriptor().isExtern()) {
+            // Forward that transitive dependency via a proxy file.
+            timingReport.startSample("Render native JsType proxy");
+            NativeJsTypeProxyGenerator nativeJsTypeProxyGenerator =
+                new NativeJsTypeProxyGenerator(errors, declareLegacyNamespace, type);
+            Path absolutePathForImpl =
+                GeneratorUtils.getAbsolutePath(
+                    outputFileSystem,
+                    outputLocationPath,
+                    GeneratorUtils.getRelativePath(type),
+                    nativeJsTypeProxyGenerator.getSuffix());
+            String nativeJsTypeProxySource = nativeJsTypeProxyGenerator.renderOutput();
+            timingReport.startSample("Write native JsType proxy");
+            GeneratorUtils.writeToFile(
+                absolutePathForImpl, nativeJsTypeProxySource, charset, errors);
+
+            gatherNativeJsTypeProxyDepInfo(type, importModulePaths, exportModulePaths);
+          }
+
+          // Otherwise don't generate anything.
           continue;
         }
 
@@ -212,6 +231,17 @@ public class OutputGeneratorStage {
     Import export = new Import(selfTypeDescriptor.getSimpleName(), selfTypeDescriptor);
     exportModulePaths.add(export.getHeaderModulePath());
     exportModulePaths.add(export.getImplModulePath());
+  }
+
+  private void gatherNativeJsTypeProxyDepInfo(
+      Type type, SortedSet<String> importModulePaths, SortedSet<String> exportModulePaths) {
+    // Import the native JS class being proxied.
+    importModulePaths.add(type.getDescriptor().getProxiedQualifiedName());
+
+    // Export the name by which the native JS class is being forwarded.
+    TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();
+    Import selfImport = new Import(selfTypeDescriptor.getSimpleName(), selfTypeDescriptor);
+    exportModulePaths.add(selfImport.getHeaderModulePath());
   }
 
   private void writeDepinfo(

@@ -11,8 +11,8 @@ goog.module('com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main$
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Main$NativeJsTypeWithToString = goog.forwardDeclare('test.foo.NativeJsTypeWithToString');
-let Main$NativeJsTypeWithoutToString = goog.forwardDeclare('test.foo.NativeJsTypeWithoutToString');
+let Main$NativeJsTypeWithToString = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.NativeJsTypeWithToString$$Proxy');
+let Main$NativeJsTypeWithoutToString = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString$$Proxy');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
@@ -85,10 +85,10 @@ class Main extends Object {
    * @public
    */
   static $clinit() {
-    Main$NativeJsTypeWithToString =
-        goog.module.get('test.foo.NativeJsTypeWithToString');
-    Main$NativeJsTypeWithoutToString =
-        goog.module.get('test.foo.NativeJsTypeWithoutToString');
+    Main$NativeJsTypeWithToString = goog.module.get(
+        'com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.NativeJsTypeWithToString$$Proxy');
+    Main$NativeJsTypeWithoutToString = goog.module.get(
+        'com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString$$Proxy');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
     Object.$clinit();
   }

@@ -21,6 +21,7 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -66,9 +67,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return internedTypeDescriptor;
   }
 
-  /**
-   * Builder for a TypeDescriptor.
-   */
+  /** Builder for a TypeDescriptor. */
   public static class Builder {
 
     public static Builder from(final TypeDescriptor typeDescriptor) {
@@ -463,9 +462,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return TypeDescriptors.toNullable(other).equals(TypeDescriptors.toNullable(this));
   }
 
-  /**
-   * Returns the unqualified binary name like "Outer$Inner".
-   */
+  /** Returns the unqualified binary name like "Outer$Inner". */
   public String getBinaryClassName() {
     if (isPrimitive) {
       return "$" + simpleName;
@@ -495,9 +492,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return Joiner.on('$').join(classComponents);
   }
 
-  /**
-   * Returns the fully package qualified binary name like "com.google.common.Outer$Inner".
-   */
+  /** Returns the fully package qualified binary name like "com.google.common.Outer$Inner". */
   public String getBinaryName() {
     return binaryName;
   }
@@ -601,47 +596,104 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return packageComponents;
   }
 
-  /**
-   * Returns the fully package qualified name like "com.google.common".
-   */
+  /** Returns the fully package qualified name like "com.google.common". */
   public String getPackageName() {
     return packageName;
   }
 
+  /** Returns the globally unique qualified name by which this type should be imported. */
   public String getQualifiedName() {
+    // Externs have a simple and explicit name by which they are imported.
+    if (isExtern()) {
+      return getQualifiedNameForExtern();
+    }
+    TypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
+
+    String effectiveSimpleName = null;
+    {
+      // A proxy type must be imported with a modified name, otherwise it might collide with the
+      // proxied type if it had the same name.
+      if (isProxy()) {
+        effectiveSimpleName = simpleName + "$$Proxy";
+      }
+      if (effectiveSimpleName == null) {
+        effectiveSimpleName = jsName;
+      }
+      if (effectiveSimpleName == null) {
+        effectiveSimpleName = simpleName;
+      }
+      // If the user opted in to declareLegacyNamespaces, then JSCompiler will complain when seeing
+      // namespaces like "foo.bar.Baz.4". Prefix anonymous numbered classes with a string to make
+      // JSCompiler happy.
+      if (startsWithNumber(effectiveSimpleName)) {
+        effectiveSimpleName = "$Anonymous" + effectiveSimpleName;
+      }
+    }
+
+    String effectivePrefix = null;
+    {
+      // In non-native JsTypes the jsNamespace value customizes the namespace of the type being
+      // translated, but in native JsTypes the jsNamespace stores the namespace of the native JS
+      // class being proxied.
+      if (!isProxy()) {
+        effectivePrefix = jsNamespace;
+      }
+      if (JsUtils.isGlobal(jsNamespace)) {
+        effectivePrefix = "";
+      }
+      if (effectivePrefix == null && enclosingTypeDescriptor != null) {
+        if (enclosingTypeDescriptor.isNative) {
+          // When there is a type nested within a native type, it's important not to generate a name
+          // like "Array.1" (like would happen if the outer native type was claiming to be native
+          // Array and the nested type was anonymous) since this is almost guaranteed to collide
+          // with other people also creating nested classes within a native type that claims to be
+          // native Array.
+          effectivePrefix = enclosingTypeDescriptor.getSourceName();
+        } else {
+          effectivePrefix = enclosingTypeDescriptor.getQualifiedName();
+        }
+      }
+      if (effectivePrefix == null) {
+        effectivePrefix = packageName;
+      }
+    }
+
+    return Joiner.on(".")
+        .skipNulls()
+        .join(Strings.emptyToNull(effectivePrefix), effectiveSimpleName);
+  }
+
+  private String getQualifiedNameForExtern() {
+    Preconditions.checkState(isExtern());
+
+    String effectivePrefix = JsUtils.isGlobal(jsNamespace) ? JsUtils.GLOBAL_ALIAS : jsNamespace;
+    String effectiveSimpleName = jsName == null ? simpleName : jsName;
+    return Joiner.on(".")
+        .skipNulls()
+        .join(Strings.emptyToNull(effectivePrefix), effectiveSimpleName);
+  }
+
+  /**
+   * Returns the qualified name of the native JS class being proxied.
+   *
+   * <p>This name is needed when generating a proxy forwarding output file.
+   */
+  public String getProxiedQualifiedName() {
+    Preconditions.checkState(!isExtern());
+
     String effectiveSimpleName = jsName == null ? simpleName : jsName;
     String effectivePrefix = jsNamespace;
     if (JsUtils.isGlobal(jsNamespace)) {
-      effectivePrefix = isExtern() ? JsUtils.GLOBAL_ALIAS : "";
+      effectivePrefix = "";
     }
-
-    TypeDescriptor enclosingTypeDescriptor = getEnclosingTypeDescriptor();
-    if (effectivePrefix == null && enclosingTypeDescriptor != null) {
-
-      if (enclosingTypeDescriptor.isNative) {
-        // When there is a type nested within a native type, it's important not to generate a name
-        // like "Array.1" (like would happen if the outer native type was claiming to be native
-        // Array and the nested type was anonymous) since this is almost guaranteed to collide
-        // with other people also creating nested classes within a native type that claims to be
-        // native Array.
-        effectivePrefix = enclosingTypeDescriptor.getSourceName();
-      } else {
-        effectivePrefix = enclosingTypeDescriptor.getQualifiedName();
-      }
+    if (effectivePrefix == null && getEnclosingTypeDescriptor() != null) {
+      effectivePrefix = getEnclosingTypeDescriptor().getProxiedQualifiedName();
     }
     if (effectivePrefix == null) {
       effectivePrefix = packageName;
     }
 
-    // If the user opted in to declareLegacyNamespaces, then JSCompiler will complain when seeing
-    // namespaces like "foo.bar.Baz.4". Prefix anonymous numbered classes with a string to make
-    // JSCompiler happy.
-    if (startsWithNumber(effectiveSimpleName)) {
-      effectiveSimpleName = "$Anonymous" + effectiveSimpleName;
-    }
-    return Joiner.on(".")
-        .skipNulls()
-        .join(Strings.emptyToNull(effectivePrefix), effectiveSimpleName);
+    return effectivePrefix + "." + effectiveSimpleName;
   }
 
   /**
@@ -655,16 +707,12 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return rawTypeDescriptorFactory.getOrCreate(this);
   }
 
-  /**
-   * Returns the unqualified and unenclosed simple name like "Inner".
-   */
+  /** Returns the unqualified and unenclosed simple name like "Inner". */
   public String getSimpleName() {
     return simpleName;
   }
 
-  /**
-   * Returns the fully package qualified source name like "com.google.common.Outer.Inner".
-   */
+  /** Returns the fully package qualified source name like "com.google.common.Outer.Inner". */
   public String getSourceName() {
     return sourceName;
   }
@@ -723,9 +771,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return Objects.hashCode(getUniqueId());
   }
 
-  /**
-   * Returns whether the described type is an array.
-   */
+  /** Returns whether the described type is an array. */
   public boolean isArray() {
     return isArray;
   }
@@ -789,6 +835,10 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return isNative;
   }
 
+  private boolean isProxy() {
+    return isNative;
+  }
+
   public boolean isNullable() {
     return isNullable;
   }
@@ -817,9 +867,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return isTypeVariable;
   }
 
-  /**
-   * Returns whether the described type is a union.
-   */
+  /** Returns whether the described type is a union. */
   public boolean isUnion() {
     return isUnion;
   }

@@ -1,0 +1,13 @@
+/**
+ * @fileoverview native JsType proxy from
+ * com.google.j2cl.transpiler.readable.packageinfosubpackage.Foo$NativeBar
+ */
+goog.module('woo.Foo.NativeBar$$Proxy');
+
+
+// Imports the real native type.
+let _nativeType = goog.require('com.google.j2cl.transpiler.readable.packageinfosubpackage.subpackage.Bar');
+
+
+// Re-exports with a new name.
+exports = _nativeType;

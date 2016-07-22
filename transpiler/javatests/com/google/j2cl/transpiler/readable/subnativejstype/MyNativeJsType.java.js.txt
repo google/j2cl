@@ -1,0 +1,13 @@
+/**
+ * @fileoverview native JsType proxy from
+ * com.google.j2cl.transpiler.readable.subnativejstype.MyNativeJsType
+ */
+goog.module('com.google.j2cl.transpiler.readable.subnativejstype.MyNativeJsType$$Proxy');
+
+
+// Imports the real native type.
+let _nativeType = goog.require('test.foo.MyNativeJsType');
+
+
+// Re-exports with a new name.
+exports = _nativeType;

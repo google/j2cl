@@ -11,8 +11,8 @@ goog.module('com.google.j2cl.transpiler.readable.nativejstypes.Main$impl');
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Foo = goog.forwardDeclare('com.acme.MyFoo');
-let Bar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Bar');
+let Bar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Bar$$Proxy');
+let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Foo$$Proxy');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $JavaScriptObject = goog.forwardDeclare('vmbootstrap.JavaScriptObject$impl');
@@ -131,9 +131,10 @@ class Main extends Object {
    * @public
    */
   static $clinit() {
-    Foo = goog.module.get('com.acme.MyFoo');
     Bar = goog.module.get(
-        'com.google.j2cl.transpiler.readable.nativejstypes.Bar');
+        'com.google.j2cl.transpiler.readable.nativejstypes.Bar$$Proxy');
+    Foo = goog.module.get(
+        'com.google.j2cl.transpiler.readable.nativejstypes.Foo$$Proxy');
     Class = goog.module.get('java.lang.Class$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $JavaScriptObject = goog.module.get('vmbootstrap.JavaScriptObject$impl');

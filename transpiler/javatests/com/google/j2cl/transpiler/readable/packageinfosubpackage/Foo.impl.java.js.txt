@@ -11,7 +11,7 @@ goog.module('woo.Foo$impl');
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Foo$NativeBar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.packageinfosubpackage.subpackage.Bar');
+let Foo$NativeBar = goog.forwardDeclare('woo.Foo.NativeBar$$Proxy');
 
 
 class Foo extends Object {
@@ -72,8 +72,7 @@ class Foo extends Object {
    * @public
    */
   static $clinit() {
-    Foo$NativeBar = goog.module.get(
-        'com.google.j2cl.transpiler.readable.packageinfosubpackage.subpackage.Bar');
+    Foo$NativeBar = goog.module.get('woo.Foo.NativeBar$$Proxy');
     Object.$clinit();
   }
 
