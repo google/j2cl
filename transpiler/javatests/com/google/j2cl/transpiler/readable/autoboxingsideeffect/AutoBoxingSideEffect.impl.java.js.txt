@@ -12,7 +12,6 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Byte = goog.forwardDeclare('java.lang.Byte$impl');
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
@@ -163,7 +162,6 @@ class AutoBoxingSideEffect extends Object {
    */
   static $clinit() {
     Byte = goog.module.get('java.lang.Byte$impl');
-    Class = goog.module.get('java.lang.Class$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');

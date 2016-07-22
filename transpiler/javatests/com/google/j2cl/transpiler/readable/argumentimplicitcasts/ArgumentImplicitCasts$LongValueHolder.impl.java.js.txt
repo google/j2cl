@@ -13,7 +13,6 @@ let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 let $LongUtils = goog.require('vmbootstrap.LongUtils$impl');
 
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 
 
@@ -84,7 +83,6 @@ class ArgumentImplicitCasts$LongValueHolder extends Object {
    * @public
    */
   static $clinit() {
-    Class = goog.module.get('java.lang.Class$impl');
     $long = goog.module.get('vmbootstrap.primitives.$long$impl');
     Object.$clinit();
   }

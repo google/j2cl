@@ -52,7 +52,6 @@ import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableReference;
-
 import java.util.Collections;
 
 /**
@@ -417,7 +416,7 @@ public class ExpressionTranspiler {
       }
 
       private String longsTypeAlias() {
-        return environment.aliasForType(BootstrapType.LONGS.getDescriptor());
+        return environment.aliasForType(BootstrapType.LONG_UTILS.getDescriptor());
       }
 
       private String getJsMethodName(MethodDescriptor methodDescriptor) {

@@ -11,8 +11,6 @@ goog.module('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods$i
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('java.lang.Class$impl');
-
 
 class DefaultMethods extends Object {
   /**
@@ -66,10 +64,7 @@ class DefaultMethods extends Object {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {
-    Class = goog.module.get('java.lang.Class$impl');
-    Object.$clinit();
-  }
+  static $clinit() { Object.$clinit(); }
 
   /**
    * Runs instance field and block initializers.

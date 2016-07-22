@@ -12,7 +12,6 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let MixedNestings$A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A$impl');
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
 class MixedNestings extends Object {
@@ -87,7 +86,6 @@ class MixedNestings extends Object {
   static $clinit() {
     MixedNestings$A = goog.module.get(
         'com.google.j2cl.transpiler.readable.mixednestings.MixedNestings.A$impl');
-    Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }
 

@@ -13,8 +13,6 @@ let IntersectionTypeTest$EmptyA = goog.require('com.google.j2cl.transpiler.reada
 let IntersectionTypeTest$EmptyB = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTypeTest.EmptyB$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('java.lang.Class$impl');
-
 
 /**
  * Abstract class, do not instantiate.
@@ -56,10 +54,7 @@ class IntersectionTypeTest$06IntersectionTypeTest$EmptyA extends
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {
-    Class = goog.module.get('java.lang.Class$impl');
-    IntersectionTypeTest$A.$clinit();
-  }
+  static $clinit() { IntersectionTypeTest$A.$clinit(); }
 
   /**
    * Runs instance field and block initializers.

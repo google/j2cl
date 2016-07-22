@@ -46,9 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Generates JavaScript source impl files.
- */
+/** Generates JavaScript source impl files. */
 public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private String nativeSource;
   private String relativeSourceMapLocation;
@@ -96,16 +94,23 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   @Override
   public String renderOutput() {
-    renderFileOverview();
-    renderImports();
-    renderTypeAnnotation();
-    renderTypeBody();
-    renderStaticFieldDeclarations();
-    renderMarkImplementorCalls();
-    renderNativeSource();
-    renderExports();
-    renderSourceMapLocation();
-    return sourceBuilder.build();
+    try {
+      renderFileOverview();
+      renderImports();
+      renderTypeAnnotation();
+      renderTypeBody();
+      renderStaticFieldDeclarations();
+      renderMarkImplementorCalls();
+      renderNativeSource();
+      renderExports();
+      renderSourceMapLocation();
+      return sourceBuilder.build();
+    } catch (RuntimeException e) {
+      // Catch all unchecked exceptions and rethrow them with more context to make debugging easier.
+      // Yes this is really being done on purpose.
+      throw new RuntimeException(
+          "Error generating source for type " + type.getDescriptor().getBinaryName(), e);
+    }
   }
 
   private void renderFileOverview() {

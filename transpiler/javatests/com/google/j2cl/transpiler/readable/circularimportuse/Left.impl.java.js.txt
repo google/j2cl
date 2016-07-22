@@ -12,7 +12,6 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Right = goog.forwardDeclare('com.google.j2cl.transpiler.readable.circularimportuse.Right$impl');
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 
 class Left extends Object {
@@ -78,7 +77,6 @@ class Left extends Object {
   static $clinit() {
     Right = goog.module.get(
         'com.google.j2cl.transpiler.readable.circularimportuse.Right$impl');
-    Class = goog.module.get('java.lang.Class$impl');
     Object.$clinit();
   }
 

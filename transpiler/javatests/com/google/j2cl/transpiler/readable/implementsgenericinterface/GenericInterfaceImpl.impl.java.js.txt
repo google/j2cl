@@ -12,7 +12,6 @@ let GenericInterface = goog.require('com.google.j2cl.transpiler.readable.impleme
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
 
 
@@ -74,7 +73,6 @@ class GenericInterfaceImpl extends Object {
    * @public
    */
   static $clinit() {
-    Class = goog.module.get('java.lang.Class$impl');
     Number = goog.module.get('java.lang.Number$impl');
     Object.$clinit();
   }

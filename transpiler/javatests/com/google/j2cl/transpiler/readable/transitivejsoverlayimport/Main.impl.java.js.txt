@@ -12,15 +12,9 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Immediate$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Immediate.$Overlay$impl');
-let NonNativeLower = goog.forwardDeclare('com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeLower$impl');
-let NonNativeUpper = goog.forwardDeclare('com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeUpper$impl');
 let Transitive$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Transitive.$Overlay$impl');
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-
-/** @constructor */ let $Transitive = window.Object;
-/** @constructor */ let $Immediate = window.Object;
 
 
 class Main extends Object {
@@ -128,13 +122,8 @@ class Main extends Object {
   static $clinit() {
     Immediate$$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Immediate.$Overlay$impl');
-    NonNativeLower = goog.module.get(
-        'com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeLower$impl');
-    NonNativeUpper = goog.module.get(
-        'com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNativeUpper$impl');
     Transitive$$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Transitive.$Overlay$impl');
-    Class = goog.module.get('java.lang.Class$impl');
     String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     Object.$clinit();

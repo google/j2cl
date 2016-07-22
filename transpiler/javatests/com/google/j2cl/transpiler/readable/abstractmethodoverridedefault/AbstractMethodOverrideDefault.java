@@ -14,10 +14,12 @@ public class AbstractMethodOverrideDefault {
   }
 
   abstract static class A implements I {
+    @Override
     public abstract void foo();
   }
 
   abstract static class B extends A implements J {
+    @SuppressWarnings("unused")
     @Override
     public void bar() {
       if (false) {

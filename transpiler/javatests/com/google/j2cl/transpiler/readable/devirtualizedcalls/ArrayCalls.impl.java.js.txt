@@ -11,10 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.devirtualizedcalls.ArrayCalls$i
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
-let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
 
 
 class ArrayCalls extends Object {
@@ -81,10 +78,7 @@ class ArrayCalls extends Object {
    * @public
    */
   static $clinit() {
-    Class = goog.module.get('java.lang.Class$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
     Object.$clinit();
   }
 

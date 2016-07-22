@@ -11,8 +11,6 @@ goog.module('woo.StaticJsMethodsWithClassNamespace$impl');
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('java.lang.Class$impl');
-
 
 class StaticJsMethodsWithClassNamespace extends Object {
   /**
@@ -75,10 +73,7 @@ class StaticJsMethodsWithClassNamespace extends Object {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {
-    Class = goog.module.get('java.lang.Class$impl');
-    Object.$clinit();
-  }
+  static $clinit() { Object.$clinit(); }
 
   /**
    * Runs instance field and block initializers.

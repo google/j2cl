@@ -923,7 +923,7 @@ public class AstUtils {
     // (LongUtils if the array is a long array, else Arrays)
     TypeDescriptor enclosingClassType;
     if (elementType.equals(TypeDescriptors.get().primitiveLong)) {
-      enclosingClassType = BootstrapType.LONGS.getDescriptor();
+      enclosingClassType = BootstrapType.LONG_UTILS.getDescriptor();
     } else {
       enclosingClassType = BootstrapType.ARRAYS.getDescriptor();
     }

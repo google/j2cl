@@ -93,7 +93,6 @@ public class GeneratorUtils {
   /**
    * Returns the js doc annotations for parameter at {@code index} in {@code method}. It is of
    * the form:
-   *  @param {parameterType} parameterName
    */
   public static String getParameterJsDocAnnotation(
       Method method, int index, GenerationEnvironment environment) {

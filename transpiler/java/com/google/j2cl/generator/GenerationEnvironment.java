@@ -15,17 +15,15 @@
  */
 package com.google.j2cl.generator;
 
+import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.generator.visitors.Import;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Contains alias for variables and Type Descriptors.
- */
+/** Contains aliases for variables and Type Descriptors. */
 public class GenerationEnvironment {
   /**
    * A map from type binary named (e.g. a.b.Foo) to alias for that type. Keyed by binary name so
@@ -51,8 +49,13 @@ public class GenerationEnvironment {
   }
 
   public String aliasForType(TypeDescriptor typeDescriptor) {
-    String alias = aliasByTypeBinaryName.get(typeDescriptor.getBinaryName());
-    return alias == null ? typeDescriptor.getBinaryClassName() : alias;
+    Preconditions.checkState(
+        aliasByTypeBinaryName.containsKey(typeDescriptor.getBinaryName()),
+        "An alias was needed for " + typeDescriptor.getBinaryName() + " but no alias was found.");
+    Preconditions.checkArgument(!typeDescriptor.isTypeVariable());
+    Preconditions.checkArgument(!typeDescriptor.isWildCard());
+
+    return aliasByTypeBinaryName.get(typeDescriptor.getBinaryName());
   }
 
   public TypeDescriptor getEnclosingTypeDescriptor() {

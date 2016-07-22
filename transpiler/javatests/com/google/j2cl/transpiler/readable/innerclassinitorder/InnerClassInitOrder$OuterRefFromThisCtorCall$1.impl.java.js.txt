@@ -11,11 +11,8 @@ goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassI
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let InnerClassInitOrder = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
 let InnerClassInitOrder$OuterRefFromThisCtorCall = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall$impl');
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
-let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
 class InnerClassInitOrder$OuterRefFromThisCtorCall$1 extends Object {
@@ -99,13 +96,9 @@ class InnerClassInitOrder$OuterRefFromThisCtorCall$1 extends Object {
    * @public
    */
   static $clinit() {
-    InnerClassInitOrder = goog.module.get(
-        'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
     InnerClassInitOrder$OuterRefFromThisCtorCall = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall$impl');
-    Class = goog.module.get('java.lang.Class$impl');
     String = goog.module.get('java.lang.String$impl');
-    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     Object.$clinit();
   }
 

@@ -12,11 +12,8 @@ let Main$ApplyFunction = goog.require('com.google.j2cl.transpiler.readable.jsfun
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('java.lang.Class$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
-
-/** @constructor */ let $global_Function = window.Function;
 
 
 /**
@@ -154,7 +151,6 @@ class Main$1 extends Object {
    * @public
    */
   static $clinit() {
-    Class = goog.module.get('java.lang.Class$impl');
     String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     Object.$clinit();

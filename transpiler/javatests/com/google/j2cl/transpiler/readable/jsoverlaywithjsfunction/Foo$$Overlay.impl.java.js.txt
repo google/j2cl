@@ -10,9 +10,6 @@ goog.module('com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo.$Ov
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Foo$Intf = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo.Intf$impl');
-let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
-
 /** @constructor */ let $Foo = window.Object;
 
 
@@ -40,11 +37,7 @@ class Foo$$Overlay {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {
-    Foo$Intf = goog.module.get(
-        'com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo.Intf$impl');
-    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
-  }
+  static $clinit() {}
 };
 
 

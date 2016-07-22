@@ -13,8 +13,6 @@ let Interface$ClassWithAbstractMethod = goog.require('com.google.j2cl.transpiler
 let Interface$NestedInterface = goog.require('com.google.j2cl.transpiler.readable.gwtincompatible.Interface.NestedInterface$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Class = goog.forwardDeclare('java.lang.Class$impl');
-
 
 /**
  * @implements {Interface}
@@ -72,10 +70,7 @@ class Implementor extends Interface$ClassWithAbstractMethod {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {
-    Class = goog.module.get('java.lang.Class$impl');
-    Interface$ClassWithAbstractMethod.$clinit();
-  }
+  static $clinit() { Interface$ClassWithAbstractMethod.$clinit(); }
 
   /**
    * Runs instance field and block initializers.

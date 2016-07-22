@@ -246,7 +246,7 @@ public class TypeDescriptors {
     CASTS(Arrays.asList("vmbootstrap"), "Casts"),
     PRIMITIVES(Arrays.asList("vmbootstrap", "primitives"), "Primitives"),
     ENUMS(Arrays.asList("vmbootstrap"), "Enums"),
-    LONGS(Arrays.asList("vmbootstrap"), "LongUtils"),
+    LONG_UTILS(Arrays.asList("vmbootstrap"), "LongUtils"),
     JAVA_SCRIPT_OBJECT(Arrays.asList("vmbootstrap"), "JavaScriptObject"),
     JAVA_SCRIPT_FUNCTION(Arrays.asList("vmbootstrap"), "JavaScriptFunction"),
     NATIVE_EQUALITY(Arrays.asList("nativebootstrap"), "Equality"),

@@ -12,8 +12,6 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let CharSequence = goog.forwardDeclare('java.lang.CharSequence$impl');
-let Class = goog.forwardDeclare('java.lang.Class$impl');
-let String = goog.forwardDeclare('java.lang.String$impl');
 let $CharSequences = goog.forwardDeclare('vmbootstrap.CharSequences$impl');
 
 
@@ -89,8 +87,6 @@ class CharSequenceCalls extends Object {
    */
   static $clinit() {
     CharSequence = goog.module.get('java.lang.CharSequence$impl');
-    Class = goog.module.get('java.lang.Class$impl');
-    String = goog.module.get('java.lang.String$impl');
     $CharSequences = goog.module.get('vmbootstrap.CharSequences$impl');
     Object.$clinit();
   }
