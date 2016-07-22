@@ -15,14 +15,13 @@
  */
 package com.google.j2cl.generator;
 
-import com.google.j2cl.ast.AnonymousJavaType;
-import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.AnonymousType;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
 import com.google.j2cl.generator.visitors.ImportUtils;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,16 +31,15 @@ import java.util.Set;
 public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
 
   public static final String FILE_SUFFIX = ".java.js";
-  public JavaScriptHeaderGenerator(
-      Errors errors, boolean declareLegacyNamespace, JavaType javaType) {
-    super(errors, declareLegacyNamespace, javaType);
+  public JavaScriptHeaderGenerator(Errors errors, boolean declareLegacyNamespace, Type type) {
+    super(errors, declareLegacyNamespace, type);
   }
 
   @Override
   public String renderOutput() {
-    TypeDescriptor selfTypeDescriptor = javaType.getDescriptor().getRawTypeDescriptor();
+    TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();
     Import selfImport = new Import(selfTypeDescriptor.getSimpleName(), selfTypeDescriptor);
-    String binaryName = javaType.getDescriptor().getRawTypeDescriptor().getBinaryName();
+    String binaryName = type.getDescriptor().getRawTypeDescriptor().getBinaryName();
     sourceBuilder.appendLines(
         "/**",
         " * @fileoverview Header transpiled from " + binaryName,
@@ -51,8 +49,9 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
         "goog.module('" + selfImport.getHeaderModulePath() + "');");
     sourceBuilder.newLine();
 
-    if (declareLegacyNamespace && javaType.getDescriptor().isJsType()
-        && !(javaType instanceof AnonymousJavaType)) {
+    if (declareLegacyNamespace
+        && type.getDescriptor().isJsType()
+        && !(type instanceof AnonymousType)) {
       // Even if opted into declareLegacyNamespace, this only makes sense for classes that are
       // intended to be accessed from the native JS. Thus we only emit declareLegacyNamespace
       // for non-anonymous JsType classes.
@@ -87,7 +86,7 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     sourceBuilder.newLine();
     sourceBuilder.newLine();
 
-    String className = environment.aliasForType(javaType.getDescriptor());
+    String className = environment.aliasForType(type.getDescriptor());
     String implementationPath = selfImport.getImplModulePath();
     sourceBuilder.appendLines(
         "// Re-exports the implementation.",

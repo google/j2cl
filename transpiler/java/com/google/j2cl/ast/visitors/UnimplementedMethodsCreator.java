@@ -18,12 +18,11 @@ package com.google.j2cl.ast.visitors;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
-
 import java.util.List;
 
 /**
@@ -42,19 +41,19 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
 
   private static class UnimplementedMethodsCreatorVisitor extends AbstractVisitor {
     @Override
-    public boolean enterJavaType(JavaType javaType) {
+    public boolean enterType(Type type) {
       // Only stub methods on abstract classes.
-      if (!javaType.isAbstract()) {
+      if (!type.isAbstract()) {
         return true;
       }
-      for (MethodDescriptor methodToStub : javaType.getDescriptor().getAllMethods()) {
+      for (MethodDescriptor methodToStub : type.getDescriptor().getAllMethods()) {
         if (methodToStub.getEnclosingClassTypeDescriptor().isInterface()
             && !methodToStub.isConstructor()
             && !methodToStub.isStatic()) {
-          javaType.addMethod(
+          type.addMethod(
               createEmptyMethod(
                   MethodDescriptor.Builder.from(methodToStub)
-                      .setEnclosingClassTypeDescriptor(javaType.getDescriptor())
+                      .setEnclosingClassTypeDescriptor(type.getDescriptor())
                       .build()));
         }
       }

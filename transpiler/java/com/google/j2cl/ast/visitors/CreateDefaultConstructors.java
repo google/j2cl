@@ -18,9 +18,9 @@ package com.google.j2cl.ast.visitors;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.Visibility;
 
 /**
@@ -37,7 +37,7 @@ public class CreateDefaultConstructors extends NormalizationPass {
 
   private static class Visitor extends AbstractVisitor {
     @Override
-    public boolean enterJavaType(JavaType type) {
+    public boolean enterType(Type type) {
       if (type.isInterface()) {
         return false;
       }
@@ -53,7 +53,7 @@ public class CreateDefaultConstructors extends NormalizationPass {
       return false;
     }
 
-    private void synthesizeDefaultConstructor(JavaType type) {
+    private void synthesizeDefaultConstructor(Type type) {
       Visibility visibility =
           type.getDescriptor().isEnumOrSubclass() ? Visibility.PRIVATE : type.getVisibility();
       MethodDescriptor methodDescriptor =

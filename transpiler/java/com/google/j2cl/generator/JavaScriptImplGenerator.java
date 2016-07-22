@@ -22,16 +22,16 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
-import com.google.j2cl.ast.AnonymousJavaType;
+import com.google.j2cl.ast.AnonymousType;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.InitializerBlock;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Statement;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
@@ -60,10 +60,10 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   public static final String FILE_SUFFIX = ".impl.java.js";
 
-  public JavaScriptImplGenerator(Errors errors, boolean declareLegacyNamespace, JavaType javaType) {
-    super(errors, declareLegacyNamespace, javaType);
-    this.className = environment.aliasForType(javaType.getDescriptor());
-    this.mangledTypeName = ManglingNameUtils.getMangledName(javaType.getDescriptor());
+  public JavaScriptImplGenerator(Errors errors, boolean declareLegacyNamespace, Type type) {
+    super(errors, declareLegacyNamespace, type);
+    this.className = environment.aliasForType(type.getDescriptor());
+    this.mangledTypeName = ManglingNameUtils.getMangledName(type.getDescriptor());
     this.statementTranspiler = new StatementTranspiler(sourceBuilder, environment);
   }
 
@@ -109,7 +109,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderFileOverview() {
-    String transpiledFrom = javaType.getDescriptor().getRawTypeDescriptor().getBinaryName();
+    String transpiledFrom = type.getDescriptor().getRawTypeDescriptor().getBinaryName();
     sourceBuilder.appendLines(
         "/**",
         " * @fileoverview Impl transpiled from " + transpiledFrom + ".",
@@ -121,13 +121,14 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderImports() {
-    TypeDescriptor selfTypeDescriptor = javaType.getDescriptor().getRawTypeDescriptor();
+    TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();
     Import selfImport = new Import(selfTypeDescriptor.getSimpleName(), selfTypeDescriptor);
 
     // goog.module(...) declaration.
     sourceBuilder.appendln("goog.module('" + selfImport.getImplModulePath() + "');");
-    if (declareLegacyNamespace && javaType.getDescriptor().isJsType()
-        && !(javaType instanceof AnonymousJavaType)) {
+    if (declareLegacyNamespace
+        && type.getDescriptor().isJsType()
+        && !(type instanceof AnonymousType)) {
       // Even if opted into declareLegacyNamespace, this only makes sense for classes that are
       // intended to be accessed from the native JS. Thus we only emit declareLegacyNamespace
       // for non-anonymous JsType classes.
@@ -181,36 +182,36 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderTypeAnnotation() {
-    if (javaType.isJsOverlayImplementation()) {
+    if (type.isJsOverlayImplementation()) {
       // Do nothing.
-    } else if (javaType.isInterface()) {
+    } else if (type.isInterface()) {
       sourceBuilder.appendLines("/**", " * @interface");
       sourceBuilder.newLine();
-      if (javaType.getDescriptor().isParameterizedType()) {
-        String templates = getJsDocNames(javaType.getDescriptor().getTypeArgumentDescriptors());
+      if (type.getDescriptor().isParameterizedType()) {
+        String templates = getJsDocNames(type.getDescriptor().getTypeArgumentDescriptors());
         sourceBuilder.appendln(" * @template " + templates);
       }
-      for (TypeDescriptor superInterfaceType : javaType.getSuperInterfaceTypeDescriptors()) {
+      for (TypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
         sourceBuilder.appendln(" * @extends {" + getJsDocName(superInterfaceType, true) + "}");
       }
       sourceBuilder.appendln(" */");
     } else { // Not an interface so it is a Class.
-      if (!GeneratorUtils.hasJsDoc(javaType)) {
+      if (!GeneratorUtils.hasJsDoc(type)) {
         return;
       }
       sourceBuilder.appendln("/**");
-      if (javaType.isAbstract()) {
+      if (type.isAbstract()) {
         sourceBuilder.appendln(" * Abstract class, do not instantiate.");
       }
-      if (javaType.getDescriptor().isParameterizedType()) {
-        String templates = getJsDocNames(javaType.getDescriptor().getTypeArgumentDescriptors());
+      if (type.getDescriptor().isParameterizedType()) {
+        String templates = getJsDocNames(type.getDescriptor().getTypeArgumentDescriptors());
         sourceBuilder.appendln(" * @template " + templates);
       }
-      if (javaType.getSuperTypeDescriptor().isParameterizedType()) {
-        String supertype = getJsDocName(javaType.getSuperTypeDescriptor(), true);
+      if (type.getSuperTypeDescriptor().isParameterizedType()) {
+        String supertype = getJsDocName(type.getSuperTypeDescriptor(), true);
         sourceBuilder.appendln(" * @extends {" + supertype + "}");
       }
-      for (TypeDescriptor superInterfaceType : javaType.getSuperInterfaceTypeDescriptors()) {
+      for (TypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
         sourceBuilder.appendln(" * @implements {" + getJsDocName(superInterfaceType, true) + "}");
       }
       sourceBuilder.appendln(" */");
@@ -218,12 +219,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderTypeBody() {
-    String extendsClause = GeneratorUtils.getExtendsClause(javaType, environment);
+    String extendsClause = GeneratorUtils.getExtendsClause(type, environment);
     sourceBuilder.append("class " + className + " " + extendsClause);
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
-    environment.setEnclosingTypeDescriptor(javaType.getDescriptor());
-    renderJavaTypeMethods();
+    environment.setEnclosingTypeDescriptor(type.getDescriptor());
+    renderTypeMethods();
     renderMarkImplementorMethod();
     renderIsInstanceMethod();
     renderIsAssignableFromMethod();
@@ -239,8 +240,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.newLines(2);
   }
 
-  private void renderJavaTypeMethods() {
-    for (Method method : javaType.getMethods()) {
+  private void renderTypeMethods() {
+    for (Method method : type.getMethods()) {
       if (GeneratorUtils.shouldNotEmitCode(method)) {
         continue;
       }
@@ -264,11 +265,11 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         sourceBuilder.appendln(" * @template " + templateParamNames);
       }
 
-      if (javaType.getDescriptor().isJsFunctionImplementation()
+      if (type.getDescriptor().isJsFunctionImplementation()
           && method.getDescriptor().isPolymorphic()
           && !method.getBody().getStatements().isEmpty()
           && !method.getDescriptor().getName().startsWith("$ctor")) {
-        sourceBuilder.appendln(" * @this {" + getJsDocName(javaType.getDescriptor()) + "}");
+        sourceBuilder.appendln(" * @this {" + getJsDocName(type.getDescriptor()) + "}");
       }
       for (int i = 0; i < method.getParameters().size(); i++) {
         sourceBuilder.appendln(
@@ -291,7 +292,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderMarkImplementorMethod() {
-    if (!javaType.isInterface() || javaType.isJsOverlayImplementation()) {
+    if (!type.isInterface() || type.isJsOverlayImplementation()) {
       return; // Only render markImplementor code for interfaces.
     }
     sourceBuilder.appendLines(
@@ -303,7 +304,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         "static $markImplementor(classConstructor) ");
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
-    for (TypeDescriptor superInterface : javaType.getSuperInterfaceTypeDescriptors()) {
+    for (TypeDescriptor superInterface : type.getSuperInterfaceTypeDescriptors()) {
       if (superInterface.isNative()) {
         continue;
       }
@@ -321,18 +322,18 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO: Move this to the ast in a normalization pass.
   private void renderIsInstanceMethod() {
-    if (javaType.containsMethod(MethodDescriptor.IS_INSTANCE_METHOD_NAME)) {
+    if (type.containsMethod(MethodDescriptor.IS_INSTANCE_METHOD_NAME)) {
       sourceBuilder.appendLines(
           "/**", " * $isInstance() function implementation is provided separately.", " */");
       sourceBuilder.newLine();
       return;
     }
-    if (javaType.isInterface()) {
+    if (type.isInterface()) {
       renderIsInstanceForInterfaceType();
-    } else if (javaType.getDescriptor().isIntersection()) {
+    } else if (type.getDescriptor().isIntersection()) {
       renderIsInstanceForIntersectionType();
     } else {
-      checkState(javaType.isClass());
+      checkState(type.isClass());
       renderIsInstanceForClassType();
     }
   }
@@ -348,14 +349,14 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         "static $isInstance(instance) ");
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
-    if (javaType.getDescriptor().isJsFunctionImplementation()) {
+    if (type.getDescriptor().isJsFunctionImplementation()) {
       sourceBuilder.appendln("return instance != null && instance.$is__" + mangledTypeName + ";");
     } else {
       String className =
           environment.aliasForType(
-              javaType.isJsOverlayImplementation()
-                  ? javaType.getNativeTypeDescriptor().getRawTypeDescriptor()
-                  : javaType.getDescriptor());
+              type.isJsOverlayImplementation()
+                  ? type.getNativeTypeDescriptor().getRawTypeDescriptor()
+                  : type.getDescriptor());
       sourceBuilder.append("return instance instanceof " + className + ";");
     }
     sourceBuilder.closeBrace();
@@ -374,9 +375,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         "static $isInstance(instance) ");
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
-    if (javaType.isJsOverlayImplementation()) {
+    if (type.isJsOverlayImplementation()) {
       sourceBuilder.append("return true;");
-    } else if (javaType.getDescriptor().isJsFunctionInterface()) {
+    } else if (type.getDescriptor().isJsFunctionInterface()) {
       sourceBuilder.append("return instance != null && typeof instance == \"function\";");
     } else {
       sourceBuilder.append(
@@ -400,7 +401,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     String checks =
         Joiner.on(" && ")
             .join(
-                FluentIterable.from(javaType.getDescriptor().getIntersectedTypeDescriptors())
+                FluentIterable.from(type.getDescriptor().getIntersectedTypeDescriptors())
                     .filter(
                         new Predicate<TypeDescriptor>() {
                           @Override
@@ -423,8 +424,8 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO: Move this to the ast in a normalization pass.
   private void renderIsAssignableFromMethod() {
-    if (javaType.isJsOverlayImplementation()
-        || javaType.containsMethod(MethodDescriptor.IS_ASSIGNABLE_FROM_METHOD_NAME)) {
+    if (type.isJsOverlayImplementation()
+        || type.containsMethod(MethodDescriptor.IS_ASSIGNABLE_FROM_METHOD_NAME)) {
       return; // Don't render for overlay types or if the method exists.
     }
     sourceBuilder.appendLines(
@@ -438,7 +439,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
 
-    if (javaType.isInterface()) { // For interfaces
+    if (type.isInterface()) { // For interfaces
       sourceBuilder.append(
           "return classConstructor != null && classConstructor.prototype.$implements__"
               + mangledTypeName
@@ -456,7 +457,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   // TODO: Move this to the ast in a normalization pass.
   // TODO: may copy Objects methods (equals, hashCode, etc. ) as well.
   private void renderCopyMethod() {
-    if (!javaType.getDescriptor().isJsFunctionImplementation()) {
+    if (!type.getDescriptor().isJsFunctionImplementation()) {
       return; // Only render the $copy method for jsfunctions
     }
     sourceBuilder.appendLines(
@@ -468,7 +469,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         " */",
         "static $copy(from, to) ");
     sourceBuilder.openBrace();
-    for (Field field : javaType.getInstanceFields()) {
+    for (Field field : type.getInstanceFields()) {
       String fieldName = ManglingNameUtils.getMangledName(field.getDescriptor());
       sourceBuilder.newLine();
       sourceBuilder.append("to." + fieldName + " = from." + fieldName + ";");
@@ -483,17 +484,17 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   // TODO: Move this to the ast in a normalization pass.
   private void renderClassMetadata() {
-    if (javaType.isJsOverlayImplementation()) {
+    if (type.isJsOverlayImplementation()) {
       // Don't render $getClass for overlay types.
       // implementations.
       return;
     }
     String utilAlias = environment.aliasForType(BootstrapType.NATIVE_UTIL.getDescriptor());
-    String name = javaType.getDescriptor().getBinaryName();
-    if (javaType.isInterface()) {
+    String name = type.getDescriptor().getBinaryName();
+    if (type.isInterface()) {
       sourceBuilder.appendln(
           utilAlias + ".$setClassMetadataForInterface(" + className + ", '" + name + "');");
-    } else if (javaType.isEnum()) {
+    } else if (type.isEnum()) {
       sourceBuilder.appendln(
           utilAlias + ".$setClassMetadataForEnum(" + className + ", '" + name + "');");
     } else {
@@ -502,7 +503,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderStaticFieldGettersSetters() {
-    for (Field staticField : javaType.getStaticFields()) {
+    for (Field staticField : type.getStaticFields()) {
       if (staticField.isCompileTimeConstant()) {
         continue;
       }
@@ -565,7 +566,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         " */",
         "static $clinit() ");
     sourceBuilder.openBrace();
-    if (GeneratorUtils.needRewriteClinit(javaType)) {
+    if (GeneratorUtils.needRewriteClinit(type)) {
       // Set this method to reference an empty function so that it cannot be called again.
       sourceBuilder.newLine();
       sourceBuilder.append(className + ".$clinit = function() {};");
@@ -586,22 +587,22 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         sourceBuilder.append(alias + " = " + previousAlias + ";");
       }
     }
-    if (GeneratorUtils.hasNonNativeSuperClass(javaType)) {
+    if (GeneratorUtils.hasNonNativeSuperClass(type)) {
       // call the super class $clinit.
-      TypeDescriptor superTypeDescriptor = javaType.getSuperTypeDescriptor();
+      TypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
       String superTypeName = environment.aliasForType(superTypeDescriptor);
       sourceBuilder.newLine();
       sourceBuilder.append(superTypeName + ".$clinit();");
     }
     // Static field and static initializer blocks.
-    renderInitializerElements(javaType.getStaticMembers());
+    renderInitializerElements(type.getStaticMembers());
     sourceBuilder.closeBrace();
     sourceBuilder.newLines(2);
   }
 
   // TODO: Move this to the ast in a normalization pass.
   private void renderInitMethod() {
-    if (javaType.isJsOverlayImplementation() || javaType.isInterface()) {
+    if (type.isJsOverlayImplementation() || type.isInterface()) {
       return;
     }
     sourceBuilder.appendLines(
@@ -611,7 +612,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
         " */",
         "$init__" + mangledTypeName + "() ");
     sourceBuilder.openBrace();
-    renderInitializerElements(javaType.getInstanceMembers());
+    renderInitializerElements(type.getInstanceMembers());
     sourceBuilder.closeBrace();
     sourceBuilder.newLines(2);
   }
@@ -645,7 +646,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   }
 
   private void renderStaticFieldDeclarations() {
-    for (Field staticField : javaType.getStaticFields()) {
+    for (Field staticField : type.getStaticFields()) {
       String jsDocType =
           JsDocNameUtils.getJsDocName(staticField.getDescriptor().getTypeDescriptor(), environment);
       if (staticField.isCompileTimeConstant()) {
@@ -680,10 +681,10 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
    * to determine if it implements an interface.
    */
   private void renderMarkImplementorCalls() {
-    if (javaType.isJsOverlayImplementation()) {
+    if (type.isJsOverlayImplementation()) {
       return; // Do nothing
     }
-    if (javaType.isInterface()) {
+    if (type.isInterface()) {
       // TODO: remove cast after b/20102666 is handled in Closure.
       sourceBuilder.appendln(
           className
@@ -693,7 +694,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
               + className
               + "));");
     } else { // Not an interface so it is a Class.
-      for (TypeDescriptor interfaceTypeDescriptor : javaType.getSuperInterfaceTypeDescriptors()) {
+      for (TypeDescriptor interfaceTypeDescriptor : type.getSuperInterfaceTypeDescriptors()) {
         if (interfaceTypeDescriptor.isNative()) {
           continue;
         }

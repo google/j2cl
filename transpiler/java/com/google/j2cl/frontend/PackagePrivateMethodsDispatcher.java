@@ -16,9 +16,9 @@
 package com.google.j2cl.frontend;
 
 import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.Type;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -32,10 +32,8 @@ import org.eclipse.jdt.core.dom.Modifier;
  * and returns the generated dispatch methods.
  */
 public class PackagePrivateMethodsDispatcher {
-  /**
-   * Creates dispatch methods for package private methods and adds them to the java type.
-   */
-  public static void create(ITypeBinding typeBinding, JavaType javaType) {
+  /** Creates dispatch methods for package private methods and adds them to the java type. */
+  public static void create(ITypeBinding typeBinding, Type type) {
     List<Method> dispatchMethods = new ArrayList<>();
     for (Map.Entry<MethodDescriptor, MethodDescriptor> entry :
         findExposedOverriddenMethods(typeBinding).entrySet()) {
@@ -49,7 +47,7 @@ public class PackagePrivateMethodsDispatcher {
               "Forwarding method for package private method.",
               true));
     }
-    javaType.addMethods(dispatchMethods);
+    type.addMethods(dispatchMethods);
   }
 
   /**

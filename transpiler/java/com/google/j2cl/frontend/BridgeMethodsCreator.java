@@ -24,7 +24,6 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
 import com.google.j2cl.ast.ManglingNameUtils;
@@ -36,13 +35,10 @@ import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
 import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.ThisReference;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
-
-import org.eclipse.jdt.core.dom.IMethodBinding;
-import org.eclipse.jdt.core.dom.ITypeBinding;
-
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,15 +48,15 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.eclipse.jdt.core.dom.IMethodBinding;
+import org.eclipse.jdt.core.dom.ITypeBinding;
 
 /**
  * Checks circumstances where a bridge method should be generated and creates the bridge methods.
  */
 public class BridgeMethodsCreator {
-  /**
-   * Creates and adds bridge methods to the java type and fixes the delegated JS methods.
-   */
-  public static void create(ITypeBinding typeBinding, JavaType javaType) {
+  /** Creates and adds bridge methods to the java type and fixes the delegated JS methods. */
+  public static void create(ITypeBinding typeBinding, Type type) {
     // create bridge methods.
     List<Method> generatedBridgeMethods = new ArrayList<>();
     Set<String> generatedBridgeMethodMangledNames = new HashSet<>();
@@ -84,14 +80,14 @@ public class BridgeMethodsCreator {
     }
 
     // fix delegating JsMethods.
-    fixJsDelegatedMethods(javaType, toBeFixedMethodDescriptors);
+    fixJsDelegatedMethods(type, toBeFixedMethodDescriptors);
     // add bridge methods.
-    javaType.addMethods(generatedBridgeMethods);
+    type.addMethods(generatedBridgeMethods);
   }
 
   private static void fixJsDelegatedMethods(
-      JavaType javaType, final Set<MethodDescriptor> toBeFixedMethodDescriptors) {
-    javaType.accept(
+      Type type, final Set<MethodDescriptor> toBeFixedMethodDescriptors) {
+    type.accept(
         new AbstractRewriter() {
           @Override
           public Node rewriteMethod(Method method) {

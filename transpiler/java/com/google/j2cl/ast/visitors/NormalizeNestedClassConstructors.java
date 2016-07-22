@@ -29,16 +29,15 @@ import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.Invocation;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.ThisReference;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,9 +54,9 @@ import java.util.Map;
 public class NormalizeNestedClassConstructors extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    Map<TypeDescriptor, JavaType> javaTypeByTypeDescriptor = new HashMap<>();
-    for (JavaType type : compilationUnit.getTypes()) {
-      javaTypeByTypeDescriptor.put(type.getDescriptor().getRawTypeDescriptor(), type);
+    Map<TypeDescriptor, Type> typeByTypeDescriptor = new HashMap<>();
+    for (Type type : compilationUnit.getTypes()) {
+      typeByTypeDescriptor.put(type.getDescriptor().getRawTypeDescriptor(), type);
     }
 
     // Replace new InnerClass() with the wrapper function call OuterClass.m_$create__InnerClass();
@@ -67,7 +66,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
     compilationUnit.accept(new AddConstructorParameters());
 
     // Normalize method calls to constructors.
-    compilationUnit.accept(new RewriteNestedClassInvocations(javaTypeByTypeDescriptor));
+    compilationUnit.accept(new RewriteNestedClassInvocations(typeByTypeDescriptor));
 
     // Replace field accesses to capturing fields that hold references to the captured variables in
     // constructors with references to corresponding captured variable passing parameters.
@@ -85,8 +84,8 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
   private static class AddConstructorParameters extends AbstractRewriter {
 
     @Override
-    public boolean shouldProcessJavaType(JavaType javaType) {
-      return !javaType.isStatic() && javaType.getEnclosingTypeDescriptor() != null;
+    public boolean shouldProcessType(Type type) {
+      return !type.isStatic() && type.getEnclosingTypeDescriptor() != null;
     }
 
     @Override
@@ -98,7 +97,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
       return Method.Builder.from(getCurrentMethod())
           .addParameters(
               Iterables.transform(
-                  getFieldsForAllCaptures(getCurrentJavaType()),
+                  getFieldsForAllCaptures(getCurrentType()),
                   new Function<Field, Variable>() {
                     @Override
                     public Variable apply(Field capturedField) {
@@ -135,8 +134,8 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
   private static class AddFieldInitializers extends AbstractRewriter {
 
     @Override
-    public boolean shouldProcessJavaType(JavaType javaType) {
-      return !javaType.isStatic() && javaType.getEnclosingTypeDescriptor() != null;
+    public boolean shouldProcessType(Type type) {
+      return !type.isStatic() && type.getEnclosingTypeDescriptor() != null;
     }
 
     @Override
@@ -147,10 +146,10 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
       // Maybe add capturing field initialization statements if the current constructor method does
       // not delegate to any other constructor method in the current class.
       if (!AstUtils.isDelegatedConstructorCall(
-          AstUtils.getConstructorInvocation(method), getCurrentJavaType().getDescriptor())) {
+          AstUtils.getConstructorInvocation(method), getCurrentType().getDescriptor())) {
         Method.Builder methodBuilder = Method.Builder.from(method);
         int i = 0;
-        for (Field capturedField : getFieldsForAllCaptures(getCurrentJavaType())) {
+        for (Field capturedField : getFieldsForAllCaptures(getCurrentType())) {
           Variable parameter = getParameterForCapturedField(capturedField.getDescriptor(), method);
           BinaryExpression initializer =
               new BinaryExpression(
@@ -191,8 +190,8 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
   private static class FixFieldAccessInConstructors extends AbstractRewriter {
 
     @Override
-    public boolean shouldProcessJavaType(JavaType javaType) {
-      return !javaType.isStatic() && javaType.getEnclosingTypeDescriptor() != null;
+    public boolean shouldProcessType(Type type) {
+      return !type.isStatic() && type.getEnclosingTypeDescriptor() != null;
     }
 
     @Override
@@ -215,16 +214,16 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
    * Adds outer class parameter to NewInstance and ctor invocations.
    */
   public static class RewriteNestedClassInvocations extends AbstractRewriter {
-    private final Map<TypeDescriptor, JavaType> javaTypeByTypeDescriptor;
+    private final Map<TypeDescriptor, Type> typeByTypeDescriptor;
 
-    private RewriteNestedClassInvocations(Map<TypeDescriptor, JavaType> javaTypeByTypeDescriptor) {
-      this.javaTypeByTypeDescriptor = javaTypeByTypeDescriptor;
+    private RewriteNestedClassInvocations(Map<TypeDescriptor, Type> typeByTypeDescriptor) {
+      this.typeByTypeDescriptor = typeByTypeDescriptor;
     }
 
     @Override
     public Node rewriteNewInstance(NewInstance newInstance) {
       TypeDescriptor typeDescriptor = newInstance.getTarget().getEnclosingClassTypeDescriptor();
-      JavaType type = getJavaType(typeDescriptor);
+      Type type = getType(typeDescriptor);
       if (type == null || type.isStatic() || type.getEnclosingTypeDescriptor() == null) {
         return newInstance;
       }
@@ -251,10 +250,10 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
       }
 
       MethodCall.Builder methodCallBuilder = MethodCall.Builder.from(methodCall);
-      if (AstUtils.isDelegatedConstructorCall(methodCall, getCurrentJavaType().getDescriptor())) {
+      if (AstUtils.isDelegatedConstructorCall(methodCall, getCurrentType().getDescriptor())) {
         // this() call, expands the given arguments list with references to the captured variable
         // passing parameters in the constructor method.
-        for (Field capturedField : getFieldsForAllCaptures(getCurrentJavaType())) {
+        for (Field capturedField : getFieldsForAllCaptures(getCurrentType())) {
           Variable parameter =
               getParameterForCapturedField(capturedField.getDescriptor(), getCurrentMethod());
           methodCallBuilder.appendArgumentAndUpdateDescriptor(
@@ -282,7 +281,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
      */
     private void addCapturedVariableArguments(
         Invocation.Builder invocationBuilder, TypeDescriptor typeDescriptor) {
-      JavaType type = getJavaType(typeDescriptor);
+      Type type = getType(typeDescriptor);
       if (type == null) {
         return;
       }
@@ -292,7 +291,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
         if (capturedVariable == null) {
           continue;
         }
-        Field capturingField = getCapturingFieldInType(capturedVariable, getCurrentJavaType());
+        Field capturingField = getCapturingFieldInType(capturedVariable, getCurrentType());
         if (capturingField != null) {
           // If the capturedVariable is also a captured variable in current type, pass the
           // corresponding field in current type as an argument.
@@ -308,15 +307,13 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
       }
     }
 
-    private JavaType getJavaType(TypeDescriptor typeDescriptor) {
-      return javaTypeByTypeDescriptor.get(typeDescriptor.getRawTypeDescriptor());
+    private Type getType(TypeDescriptor typeDescriptor) {
+      return typeByTypeDescriptor.get(typeDescriptor.getRawTypeDescriptor());
     }
   }
 
-  /**
-   * Returns all the added fields corresponding to captured variables or enclosing instance.
-   */
-  private static Iterable<Field> getFieldsForAllCaptures(JavaType type) {
+  /** Returns all the added fields corresponding to captured variables or enclosing instance. */
+  private static Iterable<Field> getFieldsForAllCaptures(Type type) {
     return Iterables.filter(
         type.getInstanceFields(),
         new Predicate<Field>() {
@@ -327,7 +324,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
         });
   }
 
-  private static Field getCapturingFieldInType(Variable variable, JavaType type) {
+  private static Field getCapturingFieldInType(Variable variable, Type type) {
     for (Field field : type.getFields()) {
       if (field.getCapturedVariable() == variable) {
         return field;

@@ -23,14 +23,13 @@ import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldDescriptor;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.common.TimingCollector;
-
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -57,10 +56,10 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     return typeDescriptor.getBinaryName().replaceAll("_", "__").replaceAll("\\" + ".", "_");
   }
 
-  public static Map<ImportCategory, Set<Import>> gatherImports(JavaType javaType) {
+  public static Map<ImportCategory, Set<Import>> gatherImports(Type type) {
     TimingCollector.get().startSubSample("Import Gathering Visitor");
 
-    Map<ImportCategory, Set<Import>> map = new ImportGatheringVisitor().doGatherImports(javaType);
+    Map<ImportCategory, Set<Import>> map = new ImportGatheringVisitor().doGatherImports(type);
     TimingCollector.get().endSubSample();
     return map;
   }
@@ -161,13 +160,13 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     addRawTypeDescriptor(importCategory, typeDescriptor.getRawTypeDescriptor());
   }
 
-  private Map<ImportCategory, Set<Import>> doGatherImports(JavaType javaType) {
+  private Map<ImportCategory, Set<Import>> doGatherImports(Type type) {
     TimingCollector timingCollector = TimingCollector.get();
     timingCollector.startSubSample("Add default Classes");
 
-    if (javaType.isJsOverlayImplementation()) {
+    if (type.isJsOverlayImplementation()) {
       // The synthesized JsOverlayImpl type should import the native type eagerly.
-      addTypeDescriptor(javaType.getNativeTypeDescriptor(), ImportCategory.EAGER);
+      addTypeDescriptor(type.getNativeTypeDescriptor(), ImportCategory.EAGER);
     } else {
       // The synthesized JsOverlayImpl type does not need the class literal stuff, thus does not
       // need eagerly import the Class native_boostrap types.
@@ -179,7 +178,7 @@ public class ImportGatheringVisitor extends AbstractVisitor {
 
     // Collect type references.
     timingCollector.startSample("Collect type references");
-    javaType.accept(this);
+    type.accept(this);
 
     timingCollector.startSample("Remove duplicate references");
     typeDescriptorsByCategory
@@ -241,20 +240,6 @@ public class ImportGatheringVisitor extends AbstractVisitor {
   }
 
   @Override
-  public void exitJavaType(JavaType type) {
-    typeDescriptorsDefinedInCompilationUnit.add(type.getDescriptor().getRawTypeDescriptor());
-
-    // Super type and super interface imports are needed eagerly because they are used during the
-    // declaration phase of JS execution. All other imports are lazy.
-    if (type.getSuperTypeDescriptor() != null) {
-      addTypeDescriptor(type.getSuperTypeDescriptor(), ImportCategory.EAGER);
-    }
-    for (TypeDescriptor superInterfaceTypeDescriptor : type.getSuperInterfaceTypeDescriptors()) {
-      addTypeDescriptor(superInterfaceTypeDescriptor, ImportCategory.EAGER);
-    }
-  }
-
-  @Override
   public void exitMethod(Method method) {
     TypeDescriptor returnTypeDescriptor = method.getDescriptor().getReturnTypeDescriptor();
     if (!returnTypeDescriptor.isPrimitive()
@@ -269,6 +254,20 @@ public class ImportGatheringVisitor extends AbstractVisitor {
     TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
     if (needImportForJsDoc(returnTypeDescriptor)) {
       addTypeDescriptor(returnTypeDescriptor, ImportCategory.LAZY);
+    }
+  }
+
+  @Override
+  public void exitType(Type type) {
+    typeDescriptorsDefinedInCompilationUnit.add(type.getDescriptor().getRawTypeDescriptor());
+
+    // Super type and super interface imports are needed eagerly because they are used during the
+    // declaration phase of JS execution. All other imports are lazy.
+    if (type.getSuperTypeDescriptor() != null) {
+      addTypeDescriptor(type.getSuperTypeDescriptor(), ImportCategory.EAGER);
+    }
+    for (TypeDescriptor superInterfaceTypeDescriptor : type.getSuperInterfaceTypeDescriptors()) {
+      addTypeDescriptor(superInterfaceTypeDescriptor, ImportCategory.EAGER);
     }
   }
 

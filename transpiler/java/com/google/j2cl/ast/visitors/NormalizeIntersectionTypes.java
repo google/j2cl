@@ -7,14 +7,13 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.JavaType;
-import com.google.j2cl.ast.JavaType.Kind;
 import com.google.j2cl.ast.Node;
+import com.google.j2cl.ast.Type;
+import com.google.j2cl.ast.Type.Kind;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor.DescriptorFactory;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Visibility;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +34,7 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
           if (intersectionTypesByReplacements.containsKey(typeDescriptor)) {
             return intersectionTypesByReplacements.get(typeDescriptor);
           }
-          final TypeDescriptor enclosingClassTypeDescriptor = getCurrentJavaType().getDescriptor();
+          final TypeDescriptor enclosingClassTypeDescriptor = getCurrentType().getDescriptor();
 
           // Here we synthesize a class name of the form:
           // 00<binaryClassname of first intersected type>
@@ -92,7 +91,7 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
     compilationUnit.accept(new NormalizeIntersectionTypeNaming());
     // Synthesize classes for intersection types.
     for (TypeDescriptor typeDescriptor : intersectionTypesByReplacements.values()) {
-      JavaType syntheticType = new JavaType(Kind.CLASS, Visibility.PACKAGE_PRIVATE, typeDescriptor);
+      Type syntheticType = new Type(Kind.CLASS, Visibility.PACKAGE_PRIVATE, typeDescriptor);
       syntheticType.setAbstract(true);
       compilationUnit.addType(syntheticType);
     }

@@ -21,13 +21,13 @@ import com.google.common.collect.Multiset;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Field;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.StringLiteral;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
@@ -53,7 +53,7 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
       /*
        * Only add parameters to constructor methods in Enum classes..
        */
-      if (!method.isConstructor() || !isEnumOrSubclass(getCurrentJavaType())) {
+      if (!method.isConstructor() || !isEnumOrSubclass(getCurrentType())) {
         return method;
       }
       return Method.Builder.from(method).addParameters(nameVariable, ordinalVariable).build();
@@ -66,7 +66,7 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
        */
       if (getCurrentMethod() == null
           || !getCurrentMethod().isConstructor()
-          || !isEnumOrSubclass(getCurrentJavaType())
+          || !isEnumOrSubclass(getCurrentType())
           || !methodCall.getTarget().isConstructor()) {
         return methodCall;
       }
@@ -81,12 +81,12 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
     public Node rewriteNewInstance(NewInstance newInstance) {
       // Rewrite newInstances for the creation of the enum constants to include the assigned ordinal
       // and name.
-      if (!getCurrentJavaType().isEnum()
+      if (!getCurrentType().isEnum()
           || getCurrentField() == null
           || !getCurrentField()
               .getDescriptor()
               .getTypeDescriptor()
-              .equalsIgnoreNullability(getCurrentJavaType().getDescriptor())) {
+              .equalsIgnoreNullability(getCurrentType().getDescriptor())) {
 
         // Enum constants creations are exactly those that are field initializers for fields
         // whose class is then enum class.
@@ -110,14 +110,14 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
           .build();
     }
 
-    private boolean isEnumOrSubclass(JavaType type) {
+    private boolean isEnumOrSubclass(Type type) {
       if (type.isEnum()) {
         return true;
       }
 
       // Anonymous classes used for enum values are subtypes of an enum type that is defined in the
       // same compilation unit.
-      JavaType superType =
+      Type superType =
           type.getSuperTypeDescriptor() == null
               ? null
               : getCurrentCompilationUnit().getType(type.getSuperTypeDescriptor());

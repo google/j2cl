@@ -48,7 +48,6 @@ import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableReference;
-
 import java.util.Arrays;
 
 /**
@@ -102,7 +101,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
     public boolean shouldProcessMethod(Method method) {
       varargsParameter = null;
       varargsLocalCopy = null;
-      if (!method.getDescriptor().isJsMethodVarargs() || getCurrentJavaType().isInterface()) {
+      if (!method.getDescriptor().isJsMethodVarargs() || getCurrentType().isInterface()) {
         return false;
       }
       varargsParameter = Iterables.getLast(method.getParameters());

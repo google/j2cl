@@ -16,10 +16,10 @@
 package com.google.j2cl.frontend;
 
 import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.Type;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -32,11 +32,9 @@ import org.eclipse.jdt.core.dom.ITypeBinding;
  * Implements inherited default methods as concrete forwarding methods.
  */
 public class DefaultMethodsResolver {
-  /**
-   * Creates forwarding stubs in classes that 'inherit' a default method implementation.
-   */
-  public static void resolve(ITypeBinding typeBinding, JavaType javaType) {
-    if (javaType.isInterface() || javaType.isAbstract()) {
+  /** Creates forwarding stubs in classes that 'inherit' a default method implementation. */
+  public static void resolve(ITypeBinding typeBinding, Type type) {
+    if (type.isInterface() || type.isAbstract()) {
       // Only concrete classes inherit default methods. Nothing to do.
       return;
     }
@@ -59,7 +57,7 @@ public class DefaultMethodsResolver {
     }
 
     // Finally implement the methods by as forwarding stubs to the actual interface method.
-    implementDefaultMethods(javaType, applicableDefaultMethodsBySignature);
+    implementDefaultMethods(type, applicableDefaultMethodsBySignature);
   }
 
   private static Map<String, IMethodBinding> getApplicableDefaultMethodsBySignature(
@@ -112,7 +110,7 @@ public class DefaultMethodsResolver {
   }
 
   private static void implementDefaultMethods(
-      JavaType type, Map<String, IMethodBinding> applicableDefaultMethodsBySignature) {
+      Type type, Map<String, IMethodBinding> applicableDefaultMethodsBySignature) {
     // Finally implement the methods by as forwarding stubs to the actual interface method.
     for (IMethodBinding method : applicableDefaultMethodsBySignature.values()) {
       MethodDescriptor targetMethod = JdtUtils.createMethodDescriptor(method);

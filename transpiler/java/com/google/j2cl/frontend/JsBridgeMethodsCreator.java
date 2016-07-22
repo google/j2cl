@@ -18,10 +18,10 @@ package com.google.j2cl.frontend;
 import com.google.common.base.Function;
 import com.google.common.collect.FluentIterable;
 import com.google.j2cl.ast.AstUtils;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -36,11 +36,9 @@ import org.eclipse.jdt.core.dom.ITypeBinding;
  * Creates bridge methods for instance JsMembers.
  */
 public class JsBridgeMethodsCreator {
-  /**
-   * Creates bridge methods and adds them to the java type.
-   */
-  public static void create(ITypeBinding typeBinding, JavaType javaType) {
-    javaType.addMethods(createBridgeMethods(typeBinding, javaType.getMethods()));
+  /** Creates bridge methods and adds them to the java type. */
+  public static void create(ITypeBinding typeBinding, Type type) {
+    type.addMethods(createBridgeMethods(typeBinding, type.getMethods()));
   }
 
   /**

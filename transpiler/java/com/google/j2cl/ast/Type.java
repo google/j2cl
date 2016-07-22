@@ -24,15 +24,11 @@ import com.google.j2cl.ast.annotations.Visitable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A node that represents a Java Type declaration in the compilation unit.
- */
+/** A node that represents a Java Type declaration in the compilation unit. */
 @Visitable
 @Context
-public class JavaType extends Node {
-  /**
-   * Describes the kind of the Java type.
-   */
+public class Type extends Node {
+  /** Describes the kind of the Java type. */
   public enum Kind {
     CLASS,
     INTERFACE,
@@ -50,12 +46,11 @@ public class JavaType extends Node {
   // Used to store the original native type for a synthesized JsOverlyImpl type.
   private TypeDescriptor overlayTypeDescriptor;
 
-  public JavaType(Kind kind, Visibility visibility, TypeDescriptor typeDescriptor) {
+  public Type(Kind kind, Visibility visibility, TypeDescriptor typeDescriptor) {
     this.kind = kind;
     this.visibility = visibility;
     this.typeDescriptor = typeDescriptor;
   }
-
 
   public Kind getKind() {
     return kind;
@@ -127,6 +122,7 @@ public class JavaType extends Node {
   public void setAbstract(boolean isAbstract) {
     this.isAbstract = isAbstract;
   }
+
   public void setAnonymous(boolean isAnonymous) {
     this.isAnonymous = isAnonymous;
   }
@@ -177,7 +173,7 @@ public class JavaType extends Node {
   }
 
   /**
-   * Since enum fields are just tracked as static final fields in JavaType we want to be able to
+   * Since enum fields are just tracked as static final fields in Type we want to be able to
    * distinguish enum fields from static fields created in the enum body.
    */
   public List<Field> getEnumFields() {
@@ -299,6 +295,6 @@ public class JavaType extends Node {
 
   @Override
   public Node accept(Processor processor) {
-    return Visitor_JavaType.visit(processor, this);
+    return Visitor_Type.visit(processor, this);
   }
 }

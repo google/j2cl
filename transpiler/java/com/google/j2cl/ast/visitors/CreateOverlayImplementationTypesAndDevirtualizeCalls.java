@@ -24,13 +24,13 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.ThisReference;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import java.util.ArrayList;
@@ -93,7 +93,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
   private static class OverlayBridgesCreator {
 
     static void addBridges(
-        JavaType javaType, TypeDescriptor typeDescriptor, TypeDescriptor superTypeDescriptor) {
+        Type type, TypeDescriptor typeDescriptor, TypeDescriptor superTypeDescriptor) {
       for (MethodDescriptor methodDescriptor : superTypeDescriptor.getAllMethods()) {
         // The only methods that need a bridge are JsOverlay methods that will be moved to the
         // Overlay class. This does not include JsProperty(s) since they are not moved to the
@@ -102,13 +102,13 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
           continue;
         }
 
-        javaType.addMethod(createBridgeMethod(typeDescriptor, methodDescriptor));
+        type.addMethod(createBridgeMethod(typeDescriptor, methodDescriptor));
       }
     }
 
     static void applyTo(CompilationUnit compilationUnit) {
-      for (JavaType javaType : compilationUnit.getTypes()) {
-        TypeDescriptor typeDescriptor = javaType.getDescriptor();
+      for (Type type : compilationUnit.getTypes()) {
+        TypeDescriptor typeDescriptor = type.getDescriptor();
         TypeDescriptor superTypeDescriptor = typeDescriptor.getSuperTypeDescriptor();
         // The only classes that should have bridges added are regular classes that are the
         // immediate subclass a native JsType class.
@@ -118,7 +118,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
           continue;
         }
 
-        addBridges(javaType, typeDescriptor, superTypeDescriptor);
+        addBridges(type, typeDescriptor, superTypeDescriptor);
       }
     }
 
@@ -148,28 +148,27 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
   private static class OverlayImplementationTypesCreator {
 
     static void applyTo(CompilationUnit compilationUnit) {
-      List<JavaType> replacementTypeList = new ArrayList<>();
+      List<Type> replacementTypeList = new ArrayList<>();
 
-      for (JavaType javaType : compilationUnit.getTypes()) {
-        if (!javaType.getDescriptor().isNative()) {
-          replacementTypeList.add(javaType);
+      for (Type type : compilationUnit.getTypes()) {
+        if (!type.getDescriptor().isNative()) {
+          replacementTypeList.add(type);
         }
-        if (javaType.getDescriptor().isNative() || javaType.containsDefaultMethods()) {
-          replacementTypeList.add(createOverlayImplementationType(javaType));
+        if (type.getDescriptor().isNative() || type.containsDefaultMethods()) {
+          replacementTypeList.add(createOverlayImplementationType(type));
         }
       }
       compilationUnit.getTypes().clear();
       compilationUnit.getTypes().addAll(replacementTypeList);
     }
 
-    static JavaType createOverlayImplementationType(JavaType javaType) {
+    static Type createOverlayImplementationType(Type type) {
       TypeDescriptor overlayImplTypeDescriptor =
-          TypeDescriptors.createOverlayImplementationClassTypeDescriptor(javaType.getDescriptor());
-      JavaType overlayClass =
-          new JavaType(javaType.getKind(), javaType.getVisibility(), overlayImplTypeDescriptor);
-      overlayClass.setNativeTypeDescriptor(javaType.getDescriptor());
+          TypeDescriptors.createOverlayImplementationClassTypeDescriptor(type.getDescriptor());
+      Type overlayClass = new Type(type.getKind(), type.getVisibility(), overlayImplTypeDescriptor);
+      overlayClass.setNativeTypeDescriptor(type.getDescriptor());
 
-      for (Method method : javaType.getMethods()) {
+      for (Method method : type.getMethods()) {
         // Copy JsOverlay and Default methods. If they're not already static, devirtualize them.
         if (method.getDescriptor().isJsOverlay() || method.getDescriptor().isDefault()) {
           overlayClass.addMethod(createOverlayMethod(method, overlayImplTypeDescriptor));
@@ -178,7 +177,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
         }
       }
 
-      for (Field field : javaType.getFields()) {
+      for (Field field : type.getFields()) {
         // Copy JsOverlay fields, only already static ones are legal.
         if (field.getDescriptor().isJsOverlay()) {
           checkState(field.getDescriptor().isStatic());

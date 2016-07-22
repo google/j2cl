@@ -27,7 +27,6 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Member;
@@ -38,6 +37,7 @@ import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
@@ -118,7 +118,7 @@ public class NormalizeConstructors extends NormalizationPass {
    */
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    for (JavaType type : compilationUnit.getTypes()) {
+    for (Type type : compilationUnit.getTypes()) {
       Method resultingConstructor =
           type.getDescriptor().isOrSubclassesJsConstructorClass()
               ? synthesizeJsConstructor(type)
@@ -153,7 +153,7 @@ public class NormalizeConstructors extends NormalizationPass {
       if (!method.isConstructor()) {
         return false;
       }
-      TypeDescriptor currentType = getCurrentJavaType().getDescriptor();
+      TypeDescriptor currentType = getCurrentType().getDescriptor();
       if (!currentType.isOrSubclassesJsConstructorClass()
           || !AstUtils.hasConstructorInvocation(method)) {
         return false;
@@ -163,7 +163,7 @@ public class NormalizeConstructors extends NormalizationPass {
       // $create method.
       final MethodCall constructorInvocation = AstUtils.getConstructorInvocation(method);
       if (constructorInvocation.getTarget().getEnclosingClassTypeDescriptor()
-          == getCurrentJavaType().getDescriptor().getSuperTypeDescriptor()) {
+          == getCurrentType().getDescriptor().getSuperTypeDescriptor()) {
         // super() call should be called with the es6 "super(args)" in the es6 constructor
         // if the super class is a @JsConstructor or subclass of @JsConstructor.
         // If the super class is just a normal Java class then we should rely on the
@@ -212,8 +212,8 @@ public class NormalizeConstructors extends NormalizationPass {
     }
   }
 
-  private static Method synthesizeJsConstructor(JavaType javaType) {
-    Method primaryConstructor = checkNotNull(AstUtils.getPrimaryConstructor(javaType));
+  private static Method synthesizeJsConstructor(Type type) {
+    Method primaryConstructor = checkNotNull(AstUtils.getPrimaryConstructor(type));
     MethodCall superConstructorInvocation = AstUtils.getConstructorInvocation(primaryConstructor);
     checkArgument(
         superConstructorInvocation == null
@@ -221,9 +221,9 @@ public class NormalizeConstructors extends NormalizationPass {
                 .getTarget()
                 .getEnclosingClassTypeDescriptor()
                 .getRawTypeDescriptor()
-                .equalsIgnoreNullability(javaType.getSuperTypeDescriptor().getRawTypeDescriptor()));
+                .equalsIgnoreNullability(type.getSuperTypeDescriptor().getRawTypeDescriptor()));
 
-    List<Statement> body = AstUtils.generateFieldDeclarations(javaType);
+    List<Statement> body = AstUtils.generateFieldDeclarations(type);
 
     // Must call the corresponding the $ctor method.
     MethodDescriptor ctorDescriptor =
@@ -245,8 +245,8 @@ public class NormalizeConstructors extends NormalizationPass {
     // note that the super call may be null if the super constructor was native.
     // TODO: We should verify that these nodes are not being referenced multiple times in the AST.
     if (superConstructorInvocation == null
-        || !javaType.getSuperTypeDescriptor().isOrSubclassesJsConstructorClass()) {
-      superConstructorInvocation = synthesizeEmptySuperCall(javaType.getSuperTypeDescriptor());
+        || !type.getSuperTypeDescriptor().isOrSubclassesJsConstructorClass()) {
+      superConstructorInvocation = synthesizeEmptySuperCall(type.getSuperTypeDescriptor());
     }
     body.add(0, new ExpressionStatement(superConstructorInvocation));
 
@@ -272,22 +272,21 @@ public class NormalizeConstructors extends NormalizationPass {
   }
 
 
-  private static Method maybeSynthesizePrivateConstructor(JavaType javaType) {
-    if (javaType.isJsOverlayImplementation() || javaType.isInterface()) {
+  private static Method maybeSynthesizePrivateConstructor(Type type) {
+    if (type.isJsOverlayImplementation() || type.isInterface()) {
       return null;
     }
 
-    List<Statement> body = AstUtils.generateFieldDeclarations(javaType);
+    List<Statement> body = AstUtils.generateFieldDeclarations(type);
 
-    if (javaType.getDescriptor().getSuperTypeDescriptor() != null) {
-      body.add(
-          0, new ExpressionStatement(synthesizeEmptySuperCall(javaType.getSuperTypeDescriptor())));
+    if (type.getDescriptor().getSuperTypeDescriptor() != null) {
+      body.add(0, new ExpressionStatement(synthesizeEmptySuperCall(type.getSuperTypeDescriptor())));
     }
 
     MethodDescriptor constructorDescriptor =
         MethodDescriptor.Builder.fromDefault()
             .setIsConstructor(true)
-            .setEnclosingClassTypeDescriptor(javaType.getDescriptor())
+            .setEnclosingClassTypeDescriptor(type.getDescriptor())
             .setVisibility(Visibility.PUBLIC)
             .build();
 
@@ -332,29 +331,29 @@ public class NormalizeConstructors extends NormalizationPass {
    */
   private static class InsertFactoryMethods extends AbstractVisitor {
     @Override
-    public boolean enterJavaType(JavaType javaType) {
-      List<Member> members = javaType.getMembers();
+    public boolean enterType(Type type) {
+      List<Member> members = type.getMembers();
       for (int i = 0; i < members.size(); i++) {
         if (!(members.get(i) instanceof Method)) {
           continue;
         }
         Method method = (Method) members.get(i);
-        if (shouldOutputStaticFactoryCreateMethod(javaType, method)) {
+        if (shouldOutputStaticFactoryCreateMethod(type, method)) {
           // Insert the factory method just before the corresponding constructor, and advance.
-          members.add(i++, factoryMethodForConstructor(method, javaType));
+          members.add(i++, factoryMethodForConstructor(method, type));
         }
       }
       return false;
     }
   }
 
-  static boolean shouldOutputStaticFactoryCreateMethod(JavaType javaType, Method method) {
+  static boolean shouldOutputStaticFactoryCreateMethod(Type type, Method method) {
     if (!method.isConstructor() || method.getDescriptor().isJsConstructor()) {
       return false;
     }
     String mangledNameOfCreate =
         ManglingNameUtils.getFactoryMethodMangledName(method.getDescriptor());
-    if (javaType.containsMethod(mangledNameOfCreate)) {
+    if (type.containsMethod(mangledNameOfCreate)) {
       return false;
     }
     return true;
@@ -380,16 +379,15 @@ public class NormalizeConstructors extends NormalizationPass {
   /**
    * Generates code of the form:
    *
-   * <pre> {@code
+   * <pre>{@code
    * static $create(args)
    *   let $instance = new Type();
    *   $instance.$ctor...(args);
    *   return $instance;
-   * }
-   * </pre>
+   * }</pre>
    */
-  private static Method factoryMethodForConstructor(Method constructor, JavaType javaType) {
-    TypeDescriptor enclosingType = javaType.getDescriptor();
+  private static Method factoryMethodForConstructor(Method constructor, Type type) {
+    TypeDescriptor enclosingType = type.getDescriptor();
     MethodDescriptor javascriptConstructor =
         MethodDescriptor.Builder.fromDefault()
             .setEnclosingClassTypeDescriptor(enclosingType)
@@ -400,7 +398,7 @@ public class NormalizeConstructors extends NormalizationPass {
     List<Expression> arguments = Lists.newArrayList();
     if (enclosingType.isOrSubclassesJsConstructorClass()) {
       // No need for a factory method if we are calling a @JsConstructor
-      if (constructor == AstUtils.getPrimaryConstructor(javaType)) {
+      if (constructor == AstUtils.getPrimaryConstructor(type)) {
         return originalContructorBodyMethod(constructor);
       }
       MethodCall constructorInvocation = AstUtils.getConstructorInvocation(constructor);

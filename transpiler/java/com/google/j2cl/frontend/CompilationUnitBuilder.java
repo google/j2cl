@@ -25,7 +25,7 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.AnonymousJavaType;
+import com.google.j2cl.ast.AnonymousType;
 import com.google.j2cl.ast.ArrayAccess;
 import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.AssertStatement;
@@ -52,8 +52,6 @@ import com.google.j2cl.ast.ForStatement;
 import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.InstanceOfExpression;
-import com.google.j2cl.ast.JavaType;
-import com.google.j2cl.ast.JavaType.Kind;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.LabeledStatement;
 import com.google.j2cl.ast.Method;
@@ -78,6 +76,8 @@ import com.google.j2cl.ast.SynchronizedStatement;
 import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TryStatement;
+import com.google.j2cl.ast.Type;
+import com.google.j2cl.ast.Type.Kind;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeReference;
@@ -122,17 +122,17 @@ public class CompilationUnitBuilder {
     private PackageInfoCache packageInfoCache = PackageInfoCache.get();
     private Map<String, String> lambdaBinaryNameByKey = new HashMap<>();
     private Map<IVariableBinding, Variable> variableByJdtBinding = new HashMap<>();
-    private Map<Variable, JavaType> enclosingTypeByVariable = new HashMap<>();
+    private Map<Variable, Type> enclosingTypeByVariable = new HashMap<>();
     private Multimap<TypeDescriptor, Variable> capturesByTypeDescriptor =
         LinkedHashMultimap.create();
-    private List<JavaType> typeStack = new ArrayList<>();
-    private JavaType currentType = null;
+    private List<Type> typeStack = new ArrayList<>();
+    private Type currentType = null;
 
     private String currentSourceFile;
     private org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit;
     private CompilationUnit j2clCompilationUnit;
 
-    private void pushType(JavaType type) {
+    private void pushType(Type type) {
       checkArgument(!type.getDescriptor().isArray());
       checkArgument(!type.getDescriptor().isUnion());
 
@@ -176,7 +176,7 @@ public class CompilationUnitBuilder {
           // We currently do not produce any output for annotations.
           break;
         case ASTNode.TYPE_DECLARATION:
-          convertAndAddJavaType(
+          convertAndAddType(
               JdtUtils.isInStaticContext(typeDeclaration),
               typeDeclaration.resolveBinding(),
               JdtUtils.<BodyDeclaration>asTypedList(typeDeclaration.bodyDeclarations()));
@@ -194,8 +194,8 @@ public class CompilationUnitBuilder {
     }
 
     private void convert(EnumDeclaration enumDeclaration) {
-      JavaType enumType =
-          convertAndAddJavaType(
+      Type enumType =
+          convertAndAddType(
               JdtUtils.isInStaticContext(enumDeclaration),
               enumDeclaration.resolveBinding(),
               JdtUtils.<BodyDeclaration>asTypedList(enumDeclaration.bodyDeclarations()));
@@ -225,9 +225,9 @@ public class CompilationUnitBuilder {
       EnumMethodsCreator.applyTo(enumType);
     }
 
-    private JavaType convertAndAddJavaType(
+    private Type convertAndAddType(
         boolean inStaticContext, ITypeBinding typeBinding, List<BodyDeclaration> bodyDeclarations) {
-      JavaType type = createJavaType(typeBinding);
+      Type type = createType(typeBinding);
       pushType(type);
       j2clCompilationUnit.addType(type);
       TypeDescriptor currentTypeDescriptor = TypeDescriptors.toNullable(type.getDescriptor());
@@ -463,7 +463,7 @@ public class CompilationUnitBuilder {
       }
     }
 
-    private AnonymousJavaType convertAnonymousClassDeclaration(
+    private AnonymousType convertAnonymousClassDeclaration(
         AnonymousClassDeclaration typeDeclaration, IMethodBinding constructorBinding) {
 
       // Anonymous classes might have default synthesized constructors take parameters.
@@ -473,9 +473,9 @@ public class CompilationUnitBuilder {
           getParameterTypeDescriptors(constructorBinding.getParameterTypes());
 
       ITypeBinding typeBinding = typeDeclaration.resolveBinding();
-      AnonymousJavaType anonymousClass =
-          (AnonymousJavaType)
-              convertAndAddJavaType(
+      AnonymousType anonymousClass =
+          (AnonymousType)
+              convertAndAddType(
                   JdtUtils.isInStaticContext(typeDeclaration),
                   typeBinding,
                   JdtUtils.<BodyDeclaration>asTypedList(typeDeclaration.bodyDeclarations()));
@@ -518,7 +518,7 @@ public class CompilationUnitBuilder {
       ITypeBinding newInstanceTypeBinding = constructorBinding.getDeclaringClass();
 
       Preconditions.checkNotNull(expression.getAnonymousClassDeclaration());
-      AnonymousJavaType anonymousClass =
+      AnonymousType anonymousClass =
           convertAnonymousClassDeclaration(
               expression.getAnonymousClassDeclaration(), constructorBinding);
 
@@ -1090,7 +1090,7 @@ public class CompilationUnitBuilder {
       TypeDescriptor enclosingType = JdtUtils.createTypeDescriptor(enclosingClassTypeBinding);
       TypeDescriptor lambdaTypeDescriptor =
           JdtUtils.createLambda(enclosingType, lambdaBinaryName, functionalInterfaceTypeBinding);
-      JavaType lambdaType = new JavaType(Kind.CLASS, Visibility.PRIVATE, lambdaTypeDescriptor);
+      Type lambdaType = new Type(Kind.CLASS, Visibility.PRIVATE, lambdaTypeDescriptor);
       pushType(lambdaType);
 
       // Construct lambda method and add it to lambda inner class.
@@ -1156,7 +1156,7 @@ public class CompilationUnitBuilder {
       // Note that the original type descriptor for the lambda was computed above.  However, once
       // we traverse the lambda method we determine the captured variables and need to add their
       // type variables to the lambda TypeDescriptor's type arguments.  This new TypeDescriptor
-      // needs to replace the old one throughout the Lambda JavaType.
+      // needs to replace the old one throughout the Lambda Type.
       replaceLambdaTypeDescriptor(lambdaType, lambdaTypeDescriptor);
 
       // Resolve default methods
@@ -1179,12 +1179,11 @@ public class CompilationUnitBuilder {
     }
 
     /**
-     * Replace the type descriptor for a given JavaType. Note that this is only safe for specific
-     * cases where we know the type will not occur recursively inside other TypeDescritpors (the
-     * synthetic lambda class).
+     * Replace the type descriptor for a given Type. Note that this is only safe for specific cases
+     * where we know the type will not occur recursively inside other TypeDescritpors (the synthetic
+     * lambda class).
      */
-    private void replaceLambdaTypeDescriptor(
-        final JavaType type, final TypeDescriptor replacement) {
+    private void replaceLambdaTypeDescriptor(final Type type, final TypeDescriptor replacement) {
       final TypeDescriptor original = type.getDescriptor();
       checkArgument(original.isNullable() && replacement.isNullable());
       type.accept(
@@ -1556,9 +1555,9 @@ public class CompilationUnitBuilder {
       // The binding is for a local variable in a static or instance block. JDT does not allow for
       // retrieving the enclosing class. Answer the question from information we've been gathering
       // while processing the compilation unit.
-      JavaType javaType = enclosingTypeByVariable.get(variableByJdtBinding.get(variableBinding));
-      if (javaType != null) {
-        return javaType.getDescriptor();
+      Type type = enclosingTypeByVariable.get(variableByJdtBinding.get(variableBinding));
+      if (type != null) {
+        return type.getDescriptor();
       }
       // The binding is a simple field and JDT provides direct knowledge of the declaring class.
       if (variableBinding.getDeclaringClass() != null) {
@@ -1885,7 +1884,7 @@ public class CompilationUnitBuilder {
      * <p>Enclosing type is a broader category than declaring type since some variables (fields)
      * have a declaring type (that is also their enclosing type) while other variables do not.
      */
-    private void recordEnclosingType(Variable variable, JavaType enclosingType) {
+    private void recordEnclosingType(Variable variable, Type enclosingType) {
       enclosingTypeByVariable.put(variable, enclosingType);
     }
 
@@ -1916,17 +1915,17 @@ public class CompilationUnitBuilder {
       return lambdaBinaryNameByKey.get(fullyQualifiedUniqueKey);
     }
 
-    private JavaType createJavaType(ITypeBinding typeBinding) {
+    private Type createType(ITypeBinding typeBinding) {
       if (typeBinding == null) {
         return null;
       }
       Kind kind = JdtUtils.getKindFromTypeBinding(typeBinding);
       Visibility visibility = JdtUtils.getVisibility(typeBinding);
       TypeDescriptor typeDescriptor = JdtUtils.createTypeDescriptor(typeBinding);
-      JavaType type =
+      Type type =
           typeBinding.isAnonymous()
-              ? new AnonymousJavaType(kind, visibility, typeDescriptor)
-              : new JavaType(kind, visibility, typeDescriptor);
+              ? new AnonymousType(kind, visibility, typeDescriptor)
+              : new Type(kind, visibility, typeDescriptor);
 
       type.setStatic(JdtUtils.isStatic(typeBinding));
       type.setAbstract(JdtUtils.isAbstract(typeBinding));

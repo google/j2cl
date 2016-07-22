@@ -141,7 +141,7 @@ class ToStringRenderer {
         print("package  " + compilationUnit.getPackageName() + ";");
         newLine();
         newLine();
-        for (JavaType type : compilationUnit.getTypes()) {
+        for (Type type : compilationUnit.getTypes()) {
           accept(type);
           newLine();
         }
@@ -271,33 +271,6 @@ class ToStringRenderer {
         accept(instanceOfExpression.getExpression());
         print(" instanceof ");
         print(instanceOfExpression.getTestTypeDescriptor());
-        return false;
-      }
-
-      @Override
-      public boolean enterJavaType(JavaType javaType) {
-        print(javaType.isInterface() ? "interface " : (javaType.isEnum() ? "enum " : "class "));
-        print(javaType.getDescriptor().toString());
-        if (javaType.getSuperTypeDescriptor() != null) {
-          print(" extends " + javaType.getSuperTypeDescriptor());
-        }
-        String separator = " implements ";
-        for (TypeDescriptor interfaceTypeDescriptor : javaType.getSuperInterfaceTypeDescriptors()) {
-          print(separator);
-          separator = ", ";
-          print(interfaceTypeDescriptor);
-        }
-        print(" {");
-        newLine();
-        indent();
-
-        for (Member member : javaType.getMembers()) {
-          accept(member);
-          newLine();
-        }
-
-        unIndent();
-        newLine();
         return false;
       }
 
@@ -520,6 +493,33 @@ class ToStringRenderer {
           print(" finally ");
           accept(tryStatement.getFinallyBlock());
         }
+        return false;
+      }
+
+      @Override
+      public boolean enterType(Type type) {
+        print(type.isInterface() ? "interface " : (type.isEnum() ? "enum " : "class "));
+        print(type.getDescriptor().toString());
+        if (type.getSuperTypeDescriptor() != null) {
+          print(" extends " + type.getSuperTypeDescriptor());
+        }
+        String separator = " implements ";
+        for (TypeDescriptor interfaceTypeDescriptor : type.getSuperInterfaceTypeDescriptors()) {
+          print(separator);
+          separator = ", ";
+          print(interfaceTypeDescriptor);
+        }
+        print(" {");
+        newLine();
+        indent();
+
+        for (Member member : type.getMembers()) {
+          accept(member);
+          newLine();
+        }
+
+        unIndent();
+        newLine();
         return false;
       }
 

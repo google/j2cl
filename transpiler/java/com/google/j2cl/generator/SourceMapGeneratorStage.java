@@ -4,10 +4,9 @@ import com.google.debugging.sourcemap.FilePosition;
 import com.google.debugging.sourcemap.SourceMapFormat;
 import com.google.debugging.sourcemap.SourceMapGenerator;
 import com.google.debugging.sourcemap.SourceMapGeneratorFactory;
-import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
 import com.google.j2cl.errors.Errors;
-
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.FileSystem;
@@ -51,8 +50,7 @@ public class SourceMapGeneratorStage {
   }
 
   public void generateSourceMaps(
-      JavaType javaType,
-      Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition) {
+      Type type, Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition) {
     try {
       String output =
           generateReadableSourceMaps
@@ -60,13 +58,13 @@ public class SourceMapGeneratorStage {
                   javaSourcePositionByOutputSourcePosition,
                   Paths.get(javaSourceFile),
                   javaScriptImplementationFileContents)
-              : renderSourceMapToString(javaType, javaSourcePositionByOutputSourcePosition);
+              : renderSourceMapToString(type, javaSourcePositionByOutputSourcePosition);
 
       Path absolutePathForSourceMap =
           GeneratorUtils.getAbsolutePath(
               outputFileSystem,
               outputLocationPath,
-              GeneratorUtils.getRelativePath(javaType),
+              GeneratorUtils.getRelativePath(type),
               SOURCE_MAP_SUFFIX);
       GeneratorUtils.writeToFile(absolutePathForSourceMap, output, charset, errors);
     } catch (IOException e) {
@@ -77,8 +75,7 @@ public class SourceMapGeneratorStage {
   }
 
   private String renderSourceMapToString(
-      JavaType javaType,
-      Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition)
+      Type type, Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition)
       throws IOException {
     SourceMapGenerator sourceMapGenerator =
         SourceMapGeneratorFactory.getInstance(SourceMapFormat.V3);
@@ -98,7 +95,7 @@ public class SourceMapGeneratorStage {
           toFilePosition(javaScriptSourcePosition.getEndFilePosition()));
     }
     StringBuilder sb = new StringBuilder();
-    String typeName = javaType.getDescriptor().getBinaryClassName();
+    String typeName = type.getDescriptor().getBinaryClassName();
     sourceMapGenerator.appendTo(sb, typeName + JavaScriptImplGenerator.FILE_SUFFIX);
     return sb.toString();
   }

@@ -37,7 +37,7 @@ public class CompilationUnit extends Node {
 
   private final String filePath;
   private final String packageName;
-  @Visitable List<JavaType> types = new ArrayList<>();
+  @Visitable List<Type> types = new ArrayList<>();
 
   public CompilationUnit(String filePath, String packageName) {
     this.filePath = checkNotNull(filePath);
@@ -65,22 +65,21 @@ public class CompilationUnit extends Node {
     return packageName;
   }
 
-  public void addType(JavaType type) {
+  public void addType(Type type) {
     this.types.add(checkNotNull(type));
   }
 
-  public List<JavaType> getTypes() {
+  public List<Type> getTypes() {
     return types;
   }
 
-  public JavaType getType(final TypeDescriptor typeDescriptor) {
+  public Type getType(final TypeDescriptor typeDescriptor) {
     return FluentIterable.from(types)
         .firstMatch(
-            new Predicate<JavaType>() {
+            new Predicate<Type>() {
               @Override
-              public boolean apply(JavaType javaType) {
-                return javaType
-                    .getDescriptor()
+              public boolean apply(Type type) {
+                return type.getDescriptor()
                     .getRawTypeDescriptor()
                     .equalsIgnoreNullability(typeDescriptor.getRawTypeDescriptor());
               }

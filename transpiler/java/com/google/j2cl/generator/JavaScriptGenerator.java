@@ -15,7 +15,7 @@
  */
 package com.google.j2cl.generator;
 
-import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
 import com.google.j2cl.errors.Errors;
@@ -24,7 +24,6 @@ import com.google.j2cl.generator.visitors.ImportGatheringVisitor;
 import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
 import com.google.j2cl.generator.visitors.ImportUtils;
 import com.google.j2cl.generator.visitors.VariableAliasesGatheringVisitor;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -34,21 +33,21 @@ import java.util.Set;
  * for Header and Impl generation.
  */
 public abstract class JavaScriptGenerator {
-  protected final JavaType javaType;
+  protected final Type type;
   protected GenerationEnvironment environment;
   protected Map<ImportCategory, Set<Import>> importsByCategory;
   protected final SourceBuilder sourceBuilder = new SourceBuilder();
   protected final Errors errors;
   protected final boolean declareLegacyNamespace;
 
-  public JavaScriptGenerator(Errors errors, boolean declareLegacyNamespace, JavaType javaType) {
+  public JavaScriptGenerator(Errors errors, boolean declareLegacyNamespace, Type type) {
     this.errors = errors;
     this.declareLegacyNamespace = declareLegacyNamespace;
-    this.javaType = javaType;
-    importsByCategory = ImportGatheringVisitor.gatherImports(javaType);
+    this.type = type;
+    importsByCategory = ImportGatheringVisitor.gatherImports(type);
     List<Import> sortedImports = ImportUtils.getSortedImports(importsByCategory);
     Map<Variable, String> aliasByVariable =
-        VariableAliasesGatheringVisitor.gatherVariableAliases(sortedImports, javaType);
+        VariableAliasesGatheringVisitor.gatherVariableAliases(sortedImports, type);
     environment = new GenerationEnvironment(sortedImports, aliasByVariable);
   }
 

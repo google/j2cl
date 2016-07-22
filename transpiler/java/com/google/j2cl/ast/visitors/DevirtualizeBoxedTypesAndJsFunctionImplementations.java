@@ -18,10 +18,10 @@ package com.google.j2cl.ast.visitors;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 
@@ -34,7 +34,7 @@ public class DevirtualizeBoxedTypesAndJsFunctionImplementations extends Normaliz
 
   private static class Rewriter extends AbstractRewriter {
     @Override
-    public boolean shouldProcessJavaType(JavaType type) {
+    public boolean shouldProcessType(Type type) {
       // Creates devirtualized static methods for the boxed types (Boolean, Double, String).
       return TypeDescriptors.isBoxedTypeAsJsPrimitives(type.getDescriptor())
           || type.getDescriptor().isJsFunctionImplementation();
@@ -48,7 +48,7 @@ public class DevirtualizeBoxedTypesAndJsFunctionImplementations extends Normaliz
 
       // Add the static method to current type.
       // NOTE: The added method will be traversed, and will be skipped.
-      getCurrentJavaType().addMethod(AstUtils.createDevirtualizedMethod(method));
+      getCurrentType().addMethod(AstUtils.createDevirtualizedMethod(method));
       // Turn the instance method to an empty method since it should not be called. But we should
       // not delete it otherwise it may lead to JSCompiler errors that complains that the class does
       // not implement all the methods in its super interfaces.

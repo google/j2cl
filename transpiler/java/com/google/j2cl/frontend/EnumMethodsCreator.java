@@ -12,7 +12,6 @@ import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.IfStatement;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
@@ -20,6 +19,7 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.ReturnStatement;
 import com.google.j2cl.ast.Statement;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
@@ -42,18 +42,18 @@ public class EnumMethodsCreator {
   private static final String CREATE_MAP_METHOD_NAME = "createMapFromValues";
   private static final String GET_VALUE_METHOD_NAME = "getValueFromNameAndMap";
 
-  private JavaType enumType;
+  private Type enumType;
   private FieldDescriptor namesToValuesMapFieldDescriptor;
   private MethodDescriptor valuesMethodDescriptor;
   private MethodDescriptor valueOfMethodDescriptor;
 
-  public static void applyTo(JavaType enumType) {
+  public static void applyTo(Type enumType) {
     Preconditions.checkArgument(enumType.isEnum());
     EnumMethodsCreator instance = new EnumMethodsCreator(enumType);
     instance.run();
   }
 
-  private EnumMethodsCreator(JavaType enumType) {
+  private EnumMethodsCreator(Type enumType) {
     boolean jsType = enumType.getDescriptor().isJsType();
 
     this.enumType = enumType;

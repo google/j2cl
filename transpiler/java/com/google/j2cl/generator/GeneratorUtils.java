@@ -24,12 +24,12 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.InitializerBlock;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.MemberReference;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
@@ -51,21 +51,17 @@ public class GeneratorUtils {
     return typeDescriptor.getBinaryName();
   }
 
-  /**
-   * Returns the relative output path for a given type.
-   */
-  public static String getRelativePath(JavaType javaType) {
-    TypeDescriptor typeDescriptor = javaType.getDescriptor();
+  /** Returns the relative output path for a given type. */
+  public static String getRelativePath(Type type) {
+    TypeDescriptor typeDescriptor = type.getDescriptor();
     String typeName = typeDescriptor.getBinaryClassName();
     String packageName = typeDescriptor.getPackageName();
     return packageName.replace(".", File.separator) + File.separator + typeName;
   }
 
-  /**
-   * Returns the absolute binary path for a given type.
-   */
-  public static String getAbsolutePath(CompilationUnit compilationUnit, JavaType javaType) {
-    TypeDescriptor typeDescriptor = javaType.getDescriptor();
+  /** Returns the absolute binary path for a given type. */
+  public static String getAbsolutePath(CompilationUnit compilationUnit, Type type) {
+    TypeDescriptor typeDescriptor = type.getDescriptor();
     String typeName = typeDescriptor.getBinaryClassName();
     return compilationUnit.getDirectoryPath() + File.separator + typeName;
   }
@@ -133,17 +129,13 @@ public class GeneratorUtils {
     return Joiner.on(", ").join(parameterNameList);
   }
 
-  /**
-   * Returns true if the type has a superclass that is not a native js type.
-   */
-  public static boolean hasNonNativeSuperClass(JavaType type) {
+  /** Returns true if the type has a superclass that is not a native js type. */
+  public static boolean hasNonNativeSuperClass(Type type) {
     return type.getSuperTypeDescriptor() != null && !type.getSuperTypeDescriptor().isNative();
   }
 
-  /**
-   * Returns whether the $clinit function should be rewritten as NOP.
-   */
-  public static boolean needRewriteClinit(JavaType type) {
+  /** Returns whether the $clinit function should be rewritten as NOP. */
+  public static boolean needRewriteClinit(Type type) {
     for (Member member : type.getStaticMembers()) {
       if (member instanceof Field) {
         Field field = (Field) member;
@@ -175,7 +167,7 @@ public class GeneratorUtils {
     return TypeDescriptors.getDefaultValue(field.getDescriptor().getTypeDescriptor());
   }
 
-  public static boolean hasJsDoc(JavaType type) {
+  public static boolean hasJsDoc(Type type) {
     return !type.getSuperInterfaceTypeDescriptors().isEmpty()
         || type.getDescriptor().isParameterizedType()
         || (type.getSuperTypeDescriptor() != null
@@ -191,8 +183,8 @@ public class GeneratorUtils {
         && (method.getDescriptor().isJsProperty() || method.getDescriptor().isJsMethod());
   }
 
-  public static String getExtendsClause(JavaType javaType, GenerationEnvironment environment) {
-    TypeDescriptor superTypeDescriptor = javaType.getSuperTypeDescriptor();
+  public static String getExtendsClause(Type type, GenerationEnvironment environment) {
+    TypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
     if (superTypeDescriptor == null) {
       return "";
     }

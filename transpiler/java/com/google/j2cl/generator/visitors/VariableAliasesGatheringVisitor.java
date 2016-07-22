@@ -20,19 +20,17 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.AbstractVisitor;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.Variable;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Traverses a JavaType and gathers variable names in each method and creates
- * non colliding local aliases for variables that collide with import module names or collide
- * with JavaScript keywords.
+ * Traverses a Type and gathers variable names in each method and creates non colliding local
+ * aliases for variables that collide with import module names or collide with JavaScript keywords.
  */
 public class VariableAliasesGatheringVisitor extends AbstractVisitor {
   private static final String VARIABLE_PREFIX = "l_";
@@ -72,25 +70,24 @@ public class VariableAliasesGatheringVisitor extends AbstractVisitor {
    * Returns the aliases of the variables whose names collide with import aliases or Javascript
    * keywords.
    */
-  public static Map<Variable, String> gatherVariableAliases(
-      List<Import> imports, JavaType javaType) {
-    return new VariableAliasesGatheringVisitor().doGatherVariableAliases(imports, javaType);
+  public static Map<Variable, String> gatherVariableAliases(List<Import> imports, Type type) {
+    return new VariableAliasesGatheringVisitor().doGatherVariableAliases(imports, type);
   }
 
-  private Map<Variable, String> doGatherVariableAliases(List<Import> imports, JavaType javaType) {
+  private Map<Variable, String> doGatherVariableAliases(List<Import> imports, Type type) {
     // get import aliases from the passing in Imports.
-    getImportAliases(imports, javaType);
+    getImportAliases(imports, type);
 
     // collect variable names in each method.
-    javaType.accept(new VariableNamesCollector());
+    type.accept(new VariableNamesCollector());
 
     // compute variable aliases.
-    javaType.accept(this);
+    type.accept(this);
 
     return this.aliasByVariable;
   }
 
-  private void getImportAliases(List<Import> imports, JavaType javaType) {
+  private void getImportAliases(List<Import> imports, Type type) {
     this
         .importAliases.addAll(
             Lists.transform(
@@ -101,6 +98,6 @@ public class VariableAliasesGatheringVisitor extends AbstractVisitor {
                     return importModule.getAlias();
                   }
                 }));
-    this.importAliases.add(javaType.getDescriptor().getBinaryClassName());
+    this.importAliases.add(type.getDescriptor().getBinaryClassName());
   }
 }

@@ -21,12 +21,12 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.ThisReference;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 
 /**
@@ -55,10 +55,10 @@ public class FixSuperCallQualifiers extends NormalizationPass {
 
   private static class Rewriter extends AbstractRewriter {
     @Override
-    public boolean shouldProcessJavaType(JavaType javaType) {
-      // super class of {@code javaType} is an instance nested class.
-      return javaType.getSuperTypeDescriptor() != null
-          && javaType.getSuperTypeDescriptor().isInstanceNestedClass();
+    public boolean shouldProcessType(Type type) {
+      // super class of {@code type} is an instance nested class.
+      return type.getSuperTypeDescriptor() != null
+          && type.getSuperTypeDescriptor().isInstanceNestedClass();
     }
 
     @Override
@@ -70,8 +70,7 @@ public class FixSuperCallQualifiers extends NormalizationPass {
     public Node rewriteMethodCall(MethodCall methodCall) {
       MethodDescriptor targetMethod = methodCall.getTarget();
       if (!targetMethod.isConstructor()
-          || AstUtils.isDelegatedConstructorCall(
-              methodCall, getCurrentJavaType().getDescriptor())) {
+          || AstUtils.isDelegatedConstructorCall(methodCall, getCurrentType().getDescriptor())) {
         return methodCall;
       }
       // super() call.
@@ -80,7 +79,7 @@ public class FixSuperCallQualifiers extends NormalizationPass {
         return methodCall;
       }
       return MethodCall.Builder.from(methodCall)
-          .setQualifier(findSuperCallQualifier(getCurrentJavaType().getDescriptor()))
+          .setQualifier(findSuperCallQualifier(getCurrentType().getDescriptor()))
           .build();
     }
 

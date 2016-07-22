@@ -20,12 +20,11 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +41,7 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
 
   private static class Pass extends AbstractVisitor {
     @Override
-    public boolean enterJavaType(JavaType type) {
+    public boolean enterType(Type type) {
       return !type.isInterface();
     }
 
@@ -54,7 +53,7 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
        */
       if (!method.isConstructor()
           || AstUtils.hasConstructorInvocation(method)
-          || getCurrentJavaType().getSuperTypeDescriptor() == null) {
+          || getCurrentType().getSuperTypeDescriptor() == null) {
         return false;
       }
       /*
@@ -63,10 +62,10 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
        * TODO: super() call to native type should be inserted somewhere otherwise it will lead to
        * an error if the native type has a non-empty constructor.
        */
-      if (getCurrentJavaType().getSuperTypeDescriptor().isNative()) {
+      if (getCurrentType().getSuperTypeDescriptor().isNative()) {
         return false;
       }
-      synthesizeSuperCall(method, getCurrentJavaType().getSuperTypeDescriptor());
+      synthesizeSuperCall(method, getCurrentType().getSuperTypeDescriptor());
       return false;
     }
 

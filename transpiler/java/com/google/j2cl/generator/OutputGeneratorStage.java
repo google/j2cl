@@ -17,7 +17,7 @@ package com.google.j2cl.generator;
 
 import com.google.common.base.Joiner;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.JavaType;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
 import com.google.j2cl.common.TimingCollector;
@@ -25,7 +25,6 @@ import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;
 import com.google.j2cl.generator.visitors.ImportGatheringVisitor;
 import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -93,21 +92,21 @@ public class OutputGeneratorStage {
     SortedSet<String> exportModulePaths = new TreeSet<>();
 
     for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
-      for (JavaType javaType : j2clCompilationUnit.getTypes()) {
-        if (javaType.getDescriptor().isNative()) {
+      for (Type type : j2clCompilationUnit.getTypes()) {
+        if (type.getDescriptor().isNative()) {
           // Don't generate JS for native JsType.
           continue;
         }
 
         timingReport.startSample("Create impl generator (gather variable aliases)");
         JavaScriptImplGenerator jsImplGenerator =
-            new JavaScriptImplGenerator(errors, declareLegacyNamespace, javaType);
+            new JavaScriptImplGenerator(errors, declareLegacyNamespace, type);
 
         // If the java type contains any native methods, search for matching native file.
         timingReport.startSample("Native files read");
 
-        String typeRelativePath = GeneratorUtils.getRelativePath(javaType);
-        String typeAbsolutePath = GeneratorUtils.getAbsolutePath(j2clCompilationUnit, javaType);
+        String typeRelativePath = GeneratorUtils.getRelativePath(type);
+        String typeAbsolutePath = GeneratorUtils.getAbsolutePath(j2clCompilationUnit, type);
 
         // Locate matching native files that either have the same relative package as their Java
         // class (useful when Java and native.js files started in different directories on disk).
@@ -124,7 +123,7 @@ public class OutputGeneratorStage {
 
         // If not matching native file is found, and the java type contains non-JsMethod native
         // method, reports an error.
-        if (matchingNativeFile == null && javaType.containsNonJsNativeMethods()) {
+        if (matchingNativeFile == null && type.containsNonJsNativeMethods()) {
           errors.error(
               Errors.Error.ERR_NATIVE_JAVA_SOURCE_NO_MATCH,
               typeRelativePath + NativeJavaScriptFile.NATIVE_EXTENSION);
@@ -133,14 +132,13 @@ public class OutputGeneratorStage {
 
         timingReport.startSample("Render impl");
         jsImplGenerator.setRelativeSourceMapLocation(
-            javaType.getDescriptor().getBinaryClassName()
-                + SourceMapGeneratorStage.SOURCE_MAP_SUFFIX);
+            type.getDescriptor().getBinaryClassName() + SourceMapGeneratorStage.SOURCE_MAP_SUFFIX);
 
         Path absolutePathForImpl =
             GeneratorUtils.getAbsolutePath(
                 outputFileSystem,
                 outputLocationPath,
-                GeneratorUtils.getRelativePath(javaType),
+                GeneratorUtils.getRelativePath(type),
                 jsImplGenerator.getSuffix());
         String javaScriptImplementationSource = jsImplGenerator.renderOutput();
         timingReport.startSample("Write impl");
@@ -149,12 +147,12 @@ public class OutputGeneratorStage {
 
         timingReport.startSample("Render header");
         JavaScriptHeaderGenerator jsHeaderGenerator =
-            new JavaScriptHeaderGenerator(errors, declareLegacyNamespace, javaType);
+            new JavaScriptHeaderGenerator(errors, declareLegacyNamespace, type);
         Path absolutePathForHeader =
             GeneratorUtils.getAbsolutePath(
                 outputFileSystem,
                 outputLocationPath,
-                GeneratorUtils.getRelativePath(javaType),
+                GeneratorUtils.getRelativePath(type),
                 jsHeaderGenerator.getSuffix());
         String javaScriptHeaderFile = jsHeaderGenerator.renderOutput();
         timingReport.startSample("Write header");
@@ -163,13 +161,13 @@ public class OutputGeneratorStage {
         timingReport.startSample("Render source maps");
         generateSourceMaps(
             j2clCompilationUnit,
-            javaType,
+            type,
             javaScriptImplementationSource,
             jsImplGenerator.getSourceMappings());
 
         timingReport.startSample("Gather depinfo");
         if (depinfoPath != null) {
-          gatherDepinfo(javaType, importModulePaths, exportModulePaths);
+          gatherDepinfo(type, importModulePaths, exportModulePaths);
         }
       }
 
@@ -194,10 +192,9 @@ public class OutputGeneratorStage {
   }
 
   private void gatherDepinfo(
-      JavaType javaType, Set<String> importModulePaths, Set<String> exportModulePaths) {
+      Type type, Set<String> importModulePaths, Set<String> exportModulePaths) {
     // Gather imports.
-    Map<ImportCategory, Set<Import>> importsByCategory =
-        ImportGatheringVisitor.gatherImports(javaType);
+    Map<ImportCategory, Set<Import>> importsByCategory = ImportGatheringVisitor.gatherImports(type);
     for (ImportCategory importCategory : ImportCategory.values()) {
       // Don't record use of the environment, it is not considered a dependency.
       if (importCategory == ImportCategory.EXTERN) {
@@ -211,7 +208,7 @@ public class OutputGeneratorStage {
     }
 
     // Gather exports.
-    TypeDescriptor selfTypeDescriptor = javaType.getDescriptor().getRawTypeDescriptor();
+    TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();
     Import export = new Import(selfTypeDescriptor.getSimpleName(), selfTypeDescriptor);
     exportModulePaths.add(export.getHeaderModulePath());
     exportModulePaths.add(export.getImplModulePath());
@@ -247,7 +244,7 @@ public class OutputGeneratorStage {
 
   private void generateSourceMaps(
       CompilationUnit j2clUnit,
-      JavaType type,
+      Type type,
       String javaScriptImplementationFileContents,
       Map<SourcePosition, SourcePosition> javaSourcePositionByOutputSourcePosition) {
     String compilationUnitFileName = j2clUnit.getFileName();

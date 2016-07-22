@@ -39,44 +39,44 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkCompilationUnit(CompilationUnit compilationUnit) {
-    for (JavaType javaType : compilationUnit.getTypes()) {
-      checkJavaType(javaType);
+    for (Type type : compilationUnit.getTypes()) {
+      checkType(type);
     }
   }
 
-  private void checkJavaType(JavaType javaType) {
-    if (javaType.getDescriptor().isJsType()) {
-      if (!checkJsType(javaType)) {
+  private void checkType(Type type) {
+    if (type.getDescriptor().isJsType()) {
+      if (!checkJsType(type)) {
         return;
       }
-      checkJsName(javaType.getDescriptor());
-      checkJsNamespace(javaType.getDescriptor());
+      checkJsName(type.getDescriptor());
+      checkJsNamespace(type.getDescriptor());
     }
 
-    if (javaType.getDescriptor().isNative()) {
-      if (!checkNativeJsType(javaType)) {
+    if (type.getDescriptor().isNative()) {
+      if (!checkNativeJsType(type)) {
         return;
       }
     }
 
-    if (javaType.getDescriptor().isJsFunctionInterface()) {
-      checkJsFunctionInterface(javaType);
-    } else if (javaType.getDescriptor().isJsFunctionImplementation()) {
-      checkJsFunctionImplementation(javaType);
+    if (type.getDescriptor().isJsFunctionInterface()) {
+      checkJsFunctionInterface(type);
+    } else if (type.getDescriptor().isJsFunctionImplementation()) {
+      checkJsFunctionImplementation(type);
     } else {
-      checkJsFunctionSubtype(javaType);
+      checkJsFunctionSubtype(type);
     }
 
-    for (Field field : javaType.getFields()) {
+    for (Field field : type.getFields()) {
       checkField(field);
     }
-    for (Method method : javaType.getMethods()) {
+    for (Method method : type.getMethods()) {
       checkMethod(method);
     }
     // TODO: do other checks.
   }
 
-  private boolean checkJsType(JavaType type) {
+  private boolean checkJsType(Type type) {
     if (type.getDescriptor().isLocal()) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
@@ -188,8 +188,8 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private boolean checkNativeJsType(JavaType javaType) {
-    TypeDescriptor typeDescriptor = javaType.getDescriptor();
+  private boolean checkNativeJsType(Type type) {
+    TypeDescriptor typeDescriptor = type.getDescriptor();
     String readableDescription = getReadableDescription(typeDescriptor);
 
     if (typeDescriptor.isEnumOrSubclass()) {
@@ -207,7 +207,7 @@ public class JsInteropRestrictionsChecker {
       return false;
     }
 
-    TypeDescriptor superTypeDescriptor = javaType.getSuperTypeDescriptor();
+    TypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
     if (superTypeDescriptor != null
         && !superTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().javaLangObject)
         && !superTypeDescriptor.isNative()) {
@@ -216,24 +216,24 @@ public class JsInteropRestrictionsChecker {
           "Native JsType '%s' can only extend native JsType classes.",
           readableDescription);
     }
-    for (TypeDescriptor interfaceType : javaType.getSuperInterfaceTypeDescriptors()) {
+    for (TypeDescriptor interfaceType : type.getSuperInterfaceTypeDescriptors()) {
       if (!interfaceType.isNative()) {
         errors.error(
             Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
             "Native JsType '%s' can only %s native JsType interfaces.",
             readableDescription,
-            javaType.isInterface() ? "extend" : "implement");
+            type.isInterface() ? "extend" : "implement");
       }
     }
 
-    if (javaType.hasInstanceInitializerBlocks()) {
+    if (type.hasInstanceInitializerBlocks()) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "Native JsType '%s' cannot have initializer.",
           readableDescription);
     }
 
-    if (javaType.hasStaticInitializerBlocks()) {
+    if (type.hasStaticInitializerBlocks()) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "Native JsType '%s' cannot have static initializer.",
@@ -299,22 +299,22 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private void checkJsFunctionInterface(JavaType javaType) {
-    String readableDescription = getReadableDescription(javaType.getDescriptor());
-    if (!isClinitEmpty(javaType)) {
+  private void checkJsFunctionInterface(Type type) {
+    String readableDescription = getReadableDescription(type.getDescriptor());
+    if (!isClinitEmpty(type)) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "JsFunction '%s' cannot have static initializer.",
           readableDescription);
     }
-    if (!javaType.getSuperInterfaceTypeDescriptors().isEmpty()) {
+    if (!type.getSuperInterfaceTypeDescriptors().isEmpty()) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "JsFunction '%s' cannot extend other interfaces.",
           readableDescription);
     }
 
-    if (javaType.getDescriptor().isJsType()) {
+    if (type.getDescriptor().isJsType()) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "'%s' cannot be both a JsFunction and a JsType at the same time.",
@@ -322,24 +322,23 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private void checkJsFunctionImplementation(JavaType javaType) {
-    String readableDescription = getReadableDescription(javaType.getDescriptor());
-    if (javaType.getSuperInterfaceTypeDescriptors().size() != 1) {
+  private void checkJsFunctionImplementation(Type type) {
+    String readableDescription = getReadableDescription(type.getDescriptor());
+    if (type.getSuperInterfaceTypeDescriptors().size() != 1) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "JsFunction implementation '%s' cannot implement more than one interface.",
           readableDescription);
     }
 
-    if (javaType.getDescriptor().isJsType()) {
+    if (type.getDescriptor().isJsType()) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "'%s' cannot be both a JsFunction implementation and a JsType at the same time.",
           readableDescription);
     }
 
-    if (!javaType
-        .getSuperTypeDescriptor()
+    if (!type.getSuperTypeDescriptor()
         .equalsIgnoreNullability(TypeDescriptors.get().javaLangObject)) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
@@ -348,21 +347,21 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private void checkJsFunctionSubtype(JavaType javaType) {
-    TypeDescriptor superClassTypeDescriptor = javaType.getSuperTypeDescriptor();
+  private void checkJsFunctionSubtype(Type type) {
+    TypeDescriptor superClassTypeDescriptor = type.getSuperTypeDescriptor();
     if (superClassTypeDescriptor != null && superClassTypeDescriptor.isJsFunctionImplementation()) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "'%s' cannot extend JsFunction implementation '%s'.",
-          getReadableDescription(javaType.getDescriptor()),
+          getReadableDescription(type.getDescriptor()),
           getReadableDescription(superClassTypeDescriptor));
     }
-    for (TypeDescriptor superInterface : javaType.getSuperInterfaceTypeDescriptors()) {
+    for (TypeDescriptor superInterface : type.getSuperInterfaceTypeDescriptors()) {
       if (superInterface.isJsFunctionInterface()) {
         errors.error(
             Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
             "'%s' cannot extend JsFunction '%s'.",
-            getReadableDescription(javaType.getDescriptor()),
+            getReadableDescription(type.getDescriptor()),
             getReadableDescription(superInterface));
       }
     }
@@ -469,11 +468,11 @@ public class JsInteropRestrictionsChecker {
    * Returns true if the type does not have any static initialization blocks and does not do any
    * initializations on static fields except for compile time constants.
    */
-  private static boolean isClinitEmpty(JavaType javaType) {
-    if (javaType.hasStaticInitializerBlocks()) {
+  private static boolean isClinitEmpty(Type type) {
+    if (type.hasStaticInitializerBlocks()) {
       return false;
     }
-    for (Field staticField : javaType.getStaticFields()) {
+    for (Field staticField : type.getStaticFields()) {
       if (staticField.hasInitializer() && !staticField.isCompileTimeConstant()) {
         return false;
       }

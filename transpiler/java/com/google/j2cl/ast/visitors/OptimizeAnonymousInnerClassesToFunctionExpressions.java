@@ -23,16 +23,15 @@ import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.FunctionExpression;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.SuperReference;
 import com.google.j2cl.ast.ThisReference;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -45,7 +44,7 @@ import java.util.Set;
 public class OptimizeAnonymousInnerClassesToFunctionExpressions extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    final Map<TypeDescriptor, JavaType> optimizableJsFunctionsByTypeDescriptor =
+    final Map<TypeDescriptor, Type> optimizableJsFunctionsByTypeDescriptor =
         collectOptimizableJsFunctionsByTypeDescriptor(compilationUnit);
 
     // Replace each instantiation with the corresponding functional expression.
@@ -55,7 +54,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
           public Node rewriteNewInstance(NewInstance newInstance) {
             TypeDescriptor targetTypeDescriptor =
                 newInstance.getTarget().getEnclosingClassTypeDescriptor();
-            JavaType optimizableJsFunctionImplementation =
+            Type optimizableJsFunctionImplementation =
                 optimizableJsFunctionsByTypeDescriptor.get(targetTypeDescriptor);
             if (optimizableJsFunctionImplementation != null) {
               // Rewrites
@@ -72,7 +71,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               //  (E e) -> { return e.toString(); }
               //
               Set<Variable> enclosingCaptures =
-                  FluentIterable.from(getCurrentJavaType().getFields())
+                  FluentIterable.from(getCurrentType().getFields())
                       .transform(
                           new Function<Field, Variable>() {
                             @Override
@@ -127,7 +126,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               return new FieldAccess(
                   fieldAccess.getQualifier(),
                   FieldDescriptor.Builder.from(fieldAccess.getTarget())
-                      .setEnclosingClassTypeDescriptor(getCurrentJavaType().getDescriptor())
+                      .setEnclosingClassTypeDescriptor(getCurrentType().getDescriptor())
                       .build());
             }
             return fieldAccess;
@@ -140,18 +139,16 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               // Due to the cascading construction for captures in inner class construction,
               // at the end some this references might be incorrectly referring
               // the removed jsfunction class and need to point to the proper enclosing class.
-              return new ThisReference(getCurrentJavaType().getDescriptor());
+              return new ThisReference(getCurrentType().getDescriptor());
             }
             return thisReference;
           }
         });
   }
 
-  /**
-   * Converts an anonymous inner class that implements a JsFunction into an FunctionExpression.
-   */
+  /** Converts an anonymous inner class that implements a JsFunction into an FunctionExpression. */
   private static FunctionExpression optimizeToFunctionExpression(
-      final JavaType type, final Set<Variable> enclosingCaptures) {
+      final Type type, final Set<Variable> enclosingCaptures) {
     Method jsFunctionMethodImplementation = getSingleDeclaredMethod(type);
     FunctionExpression lambdaMethodImplementaion =
         new FunctionExpression(
@@ -184,10 +181,10 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
     return lambdaMethodImplementaion;
   }
 
-  private static Map<TypeDescriptor, JavaType> collectOptimizableJsFunctionsByTypeDescriptor(
+  private static Map<TypeDescriptor, Type> collectOptimizableJsFunctionsByTypeDescriptor(
       CompilationUnit compilationUnit) {
-    Map<TypeDescriptor, JavaType> optimizableJsFunctionsByTypeDescriptor = new HashMap<>();
-    for (JavaType type : compilationUnit.getTypes()) {
+    Map<TypeDescriptor, Type> optimizableJsFunctionsByTypeDescriptor = new HashMap<>();
+    for (Type type : compilationUnit.getTypes()) {
       if (canBeOptimized(type)) {
         optimizableJsFunctionsByTypeDescriptor.put(type.getDescriptor(), type);
       }
@@ -199,7 +196,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
    * Determines whether an inner class that implements a JsFunction interface can be optimized into
    * a function expression (lambda).
    */
-  private static boolean canBeOptimized(JavaType type) {
+  private static boolean canBeOptimized(Type type) {
     if (!type.isAnonymous() || !type.getDescriptor().isJsFunctionImplementation()) {
       return false;
     }
@@ -224,7 +221,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
     return true;
   }
 
-  private static Method getSingleDeclaredMethod(JavaType type) {
+  private static Method getSingleDeclaredMethod(Type type) {
     Method singleDeclaredMethod = null;
     for (Method method : type.getMethods()) {
       if (method.isBridge()) {
@@ -238,7 +235,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
     return singleDeclaredMethod;
   }
 
-  public static boolean hasThisOrSuperReference(final JavaType type) {
+  public static boolean hasThisOrSuperReference(final Type type) {
 
     final Set<FieldDescriptor> captures = new HashSet<>();
     for (Field field : type.getFields()) {

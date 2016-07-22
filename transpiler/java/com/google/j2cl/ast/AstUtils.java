@@ -159,7 +159,7 @@ public class AstUtils {
    * When requested on an inner type, returns the field that references the enclosing instance,
    * otherwise null.
    */
-  public static Field getEnclosingInstanceField(JavaType type) {
+  public static Field getEnclosingInstanceField(Type type) {
     for (Field field : type.getFields()) {
       if (field.getDescriptor().getName().equals(ENCLOSING_INSTANCE_NAME)) {
         return field;
@@ -737,8 +737,8 @@ public class AstUtils {
    * class or in a child class of a JsConstructor class. This constructor will be generated as the
    * real ES6 constructor.
    */
-  public static Method getPrimaryConstructor(JavaType javaType) {
-    for (Method method : javaType.getMethods()) {
+  public static Method getPrimaryConstructor(Type type) {
+    for (Method method : type.getMethods()) {
       if (method.isPrimaryConstructor()) {
         return method;
       }
@@ -835,7 +835,7 @@ public class AstUtils {
     return TypeDescriptors.getDefaultValue(field.getDescriptor().getTypeDescriptor());
   }
 
-  public static List<Statement> generateFieldDeclarations(JavaType type) {
+  public static List<Statement> generateFieldDeclarations(Type type) {
     List<Statement> fieldInits = new ArrayList<>();
     for (Field field : type.getFields()) {
       if (field.getDescriptor().isStatic()) {

@@ -21,13 +21,13 @@ import java.util.List;
 /**
  * A node that represents an anonymous class declaration.
  *
- * <p>Besides the fields in a regular JavaType, an AnonymousJavaType has some extra fields. An
- * anonymous class is declared by a NewInstance expression, thus it may have implicit constructor
- * parameters (provided by NewInstance arguments) and qualifier for super call (provided by
- * NewInstance qualifier).
+ * <p>Besides the fields in a regular Type, an AnonymousType has some extra fields. An anonymous
+ * class is declared by a NewInstance expression, thus it may have implicit constructor parameters
+ * (provided by NewInstance arguments) and qualifier for super call (provided by NewInstance
+ * qualifier).
  */
-public class AnonymousJavaType extends JavaType {
-  public AnonymousJavaType(Kind kind, Visibility visibility, TypeDescriptor typeDescriptor) {
+public class AnonymousType extends Type {
+  public AnonymousType(Kind kind, Visibility visibility, TypeDescriptor typeDescriptor) {
     super(kind, visibility, typeDescriptor);
   }
 
@@ -44,8 +44,8 @@ public class AnonymousJavaType extends JavaType {
   private List<TypeDescriptor> superConstructorParameterTypeDescriptors = new ArrayList<>();
 
   /**
-   * Qualifier of NewInstance, which is actually the qualifier of the super call and is a
-   * reference to what will be the enclosing instance for this class's super type.
+   * Qualifier of NewInstance, which is actually the qualifier of the super call and is a reference
+   * to what will be the enclosing instance for this class's super type.
    */
   private Expression superCallQualifier;
 

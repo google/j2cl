@@ -16,17 +16,16 @@
 package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
-import com.google.j2cl.ast.AnonymousJavaType;
+import com.google.j2cl.ast.AnonymousType;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
-import com.google.j2cl.ast.JavaType;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
+import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.Variable;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,23 +54,23 @@ public class FixAnonymousClassConstructors extends NormalizationPass {
     private final List<Variable> superConstructorParameters = new ArrayList<>();
 
     @Override
-    public boolean shouldProcessJavaType(JavaType javaType) {
-      if (!(javaType instanceof AnonymousJavaType)) {
+    public boolean shouldProcessType(Type type) {
+      if (!(type instanceof AnonymousType)) {
         return false;
       }
-      AnonymousJavaType anonymousJavaType = (AnonymousJavaType) javaType;
-      // Create and collect parameters for the default constructor of only the current JavaType.
+      AnonymousType anonymousType = (AnonymousType) type;
+      // Create and collect parameters for the default constructor of only the current Type.
       constructorParameters.clear();
       superConstructorParameters.clear();
       int i = 0;
       for (TypeDescriptor parameterTypeDescriptor :
-          anonymousJavaType.getConstructorParameterTypeDescriptors()) {
+          anonymousType.getConstructorParameterTypeDescriptors()) {
         Variable parameter = new Variable("$_" + i++, parameterTypeDescriptor, false, true);
         constructorParameters.add(parameter);
       }
       int j = 0;
       for (TypeDescriptor parameterTypeDescriptor :
-          anonymousJavaType.getSuperConstructorParameterTypeDescriptors()) {
+          anonymousType.getSuperConstructorParameterTypeDescriptors()) {
         Variable parameter = new Variable("$_" + j++, parameterTypeDescriptor, false, true);
         superConstructorParameters.add(parameter);
       }
@@ -124,17 +123,17 @@ public class FixAnonymousClassConstructors extends NormalizationPass {
     private Variable parameterForSuperCallQualifier;
 
     @Override
-    public boolean shouldProcessJavaType(JavaType javaType) {
-      if (!(javaType instanceof AnonymousJavaType)) {
+    public boolean shouldProcessType(Type type) {
+      if (!(type instanceof AnonymousType)) {
         return false;
       }
       parameterForSuperCallQualifier = null;
       // Create parameter that holds the qualifier of super call.
-      if (javaType.getSuperTypeDescriptor().isInstanceMemberClass()) {
+      if (type.getSuperTypeDescriptor().isInstanceMemberClass()) {
         parameterForSuperCallQualifier =
             new Variable(
                 "$super_outer_this",
-                javaType.getSuperTypeDescriptor().getEnclosingTypeDescriptor(),
+                type.getSuperTypeDescriptor().getEnclosingTypeDescriptor(),
                 false,
                 true);
       }
@@ -184,12 +183,12 @@ public class FixAnonymousClassConstructors extends NormalizationPass {
     private Map<TypeDescriptor, Expression> qualifierByTypeDescriptor = new HashMap<>();
 
     private void collectSuperCallQualifiers(CompilationUnit compilationUnit) {
-      for (JavaType javaType : compilationUnit.getTypes()) {
-        if (javaType instanceof AnonymousJavaType) {
-          AnonymousJavaType anonymousJavaType = (AnonymousJavaType) javaType;
-          if (anonymousJavaType.getSuperTypeDescriptor().isInstanceMemberClass()) {
+      for (Type type : compilationUnit.getTypes()) {
+        if (type instanceof AnonymousType) {
+          AnonymousType anonymousType = (AnonymousType) type;
+          if (anonymousType.getSuperTypeDescriptor().isInstanceMemberClass()) {
             qualifierByTypeDescriptor.put(
-                javaType.getDescriptor(), anonymousJavaType.getSuperCallQualifier());
+                type.getDescriptor(), anonymousType.getSuperCallQualifier());
           }
         }
       }
