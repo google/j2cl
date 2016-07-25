@@ -1,6 +1,5 @@
 """Utility functions for the j2cl_* build rules / macros"""
 
-
 def _get_java_root_index(pkg_name):
   """Returns the index of the java_root within a build package"""
   # Find the java folder in the beginning, middle or end of a path.
@@ -24,28 +23,23 @@ def _get_java_root_index(pkg_name):
     index = javatests_index + len("javatests/")
   return index
 
-
 def get_java_root(pkg_name):
   """Extract the path to java root from the build package"""
   return pkg_name[:_get_java_root_index(pkg_name)]
-
 
 def get_java_path(pkg_name):
   """Extract the java path from the build package"""
   return pkg_name[len(get_java_root(pkg_name)):]
 
-
 def get_java_package(pkg_name):
   """Extract the java package from the build package"""
   return get_java_path(pkg_name).replace("/", ".")
-
 
 def get_or_default(key, map, default):
   """Returns the value for the provided key if present and not None, otherwise default"""
   if key in map and map[key]:
     return map[key]
   return default
-
 
 def generate_zip(name, srcs, pkg):
   """Generates a zip target with given srcs.
@@ -83,7 +77,6 @@ def generate_zip(name, srcs, pkg):
       strip_prefix=strip_prefix,
   )
 
-
 # Can't disable property renaming with a simple override because of
 # Blaze bug b/28770521.
 def make_output_readable(flags):
@@ -93,19 +86,20 @@ def make_output_readable(flags):
       "--pretty_print",
   ]
 
-
 load("/javascript/closure/builddefs", "CLOSURE_COMPILER_FLAGS_FULL_TYPED")
-load("/javascript/tools/jscompiler/builddefs/flags",
-     "ADVANCED_OPTIMIZATIONS_FLAGS")
+load(
+    "/javascript/tools/jscompiler/builddefs/flags",
+    "ADVANCED_OPTIMIZATIONS_FLAGS",
+)
 
 J2CL_UNOPTIMIZED_DEFS = [
-    "--j2cl_pass",
+    "--j2cl_pass=true",
     "--language_in=ECMASCRIPT6_STRICT",
     "--language_out=ECMASCRIPT5",
 ]
 
-J2CL_OPTIMIZED_DEFS = (J2CL_UNOPTIMIZED_DEFS + CLOSURE_COMPILER_FLAGS_FULL_TYPED
-                       + ADVANCED_OPTIMIZATIONS_FLAGS)
+J2CL_OPTIMIZED_DEFS = (J2CL_UNOPTIMIZED_DEFS + CLOSURE_COMPILER_FLAGS_FULL_TYPED +
+                       ADVANCED_OPTIMIZATIONS_FLAGS)
 
 # TODO(28940369): convert to optimized defs.
 J2CL_TEST_DEFS = make_output_readable(J2CL_UNOPTIMIZED_DEFS + [

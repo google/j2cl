@@ -14,7 +14,6 @@ _CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
     if flag != "--variable_renaming=ALL"
 ]
 
-
 def j2cl_optimization_test(name, defs=[]):
   j2cl_test(
     name = name,
@@ -23,7 +22,7 @@ def j2cl_optimization_test(name, defs=[]):
     compiler = "//javascript/tools/jscompiler:head",
     data = ["//testing/matrix/nativebrowsers/chrome:stable_data"],
     defs = _CLOSURE_COMPILER_FLAGS_FULL_TYPED + [
-        "--j2cl_pass",
+        "--j2cl_pass=true",
         "--export_test_functions=true",
         "--language_in=ECMASCRIPT6_STRICT",
         "--language_out=ECMASCRIPT5",
