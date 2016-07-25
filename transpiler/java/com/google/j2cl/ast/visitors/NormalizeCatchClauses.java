@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.BinaryOperator;
@@ -25,6 +27,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.IfStatement;
 import com.google.j2cl.ast.JsInfo;
+import com.google.j2cl.ast.JsTypeAnnotation;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
@@ -37,7 +40,6 @@ import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.Visibility;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -91,49 +93,45 @@ public class NormalizeCatchClauses extends NormalizationPass {
     }
 
     private CatchClause mergeClauses(List<CatchClause> clauses) {
-      if (clauses.isEmpty()) {
-        return null;
-      }
-      Variable mainVariable =
-          new Variable(
-              clauses.get(0).getExceptionVar().getName(),
-              (TypeDescriptors.get().javaLangObject),
-              false,
-              false);
-      Statement body = bodyBuilder(clauses, mainVariable);
-      return new CatchClause(new Block(body), mainVariable);
+      checkArgument(!clauses.isEmpty());
+      // Create a temporary exception variable.
+      Variable exceptionVariable =
+          new Variable("__$exc", (TypeDescriptors.get().javaLangObject), false, false);
+      Statement body = bodyBuilder(clauses, exceptionVariable);
+      return new CatchClause(new Block(body), exceptionVariable);
     }
 
-    private Statement bodyBuilder(List<CatchClause> clauses, Variable mainVariable) {
+    private Statement bodyBuilder(List<CatchClause> clauses, Variable exceptionVariable) {
       // Base case. If no more clauses left the last statement throws the exception.
       if (clauses.isEmpty()) {
-        Statement noMatchThrowException = new ThrowStatement(mainVariable.getReference());
+        Statement noMatchThrowException = new ThrowStatement(exceptionVariable.getReference());
         return new Block(Arrays.asList(noMatchThrowException));
       }
 
       CatchClause clause = clauses.get(0);
-      Variable caughtVariable = clause.getExceptionVar();
-      TypeDescriptor exceptionTypeDescriptor = caughtVariable.getTypeDescriptor();
+      Variable catchVariable = clause.getExceptionVar();
+
+      TypeDescriptor exceptionTypeDescriptor = catchVariable.getTypeDescriptor();
       List<TypeDescriptor> typesToCheck =
           exceptionTypeDescriptor.isUnion()
               ? exceptionTypeDescriptor.getUnionedTypeDescriptors()
               : Arrays.asList(exceptionTypeDescriptor);
-      Expression condition = checkTypeExpression(mainVariable, typesToCheck);
+      Expression condition = checkTypeExpression(exceptionVariable, typesToCheck);
       List<Statement> catchClauseBody = new ArrayList<>(clause.getBody().getStatements());
+      TypeDescriptor catchVariableTypeDescriptor =
+          catchVariable.getTypeDescriptor().isUnion()
+              ? catchVariable.getTypeDescriptor().getSuperTypeDescriptor()
+              : catchVariable.getTypeDescriptor();
+      ExpressionStatement assignment =
+          new ExpressionStatement(
+              new VariableDeclarationExpression(
+                  new VariableDeclarationFragment(
+                      catchVariable,
+                      JsTypeAnnotation.createTypeAnnotation(
+                          exceptionVariable.getReference(), catchVariableTypeDescriptor))));
+      catchClauseBody.add(0, assignment);
 
-      // We need to reassign the main variable to the caught variable.
-      if (!mainVariable.getName().equals(caughtVariable.getName())) {
-        Variable caughtVariableWithThrowableType =
-            new Variable(
-                caughtVariable.getName(), TypeDescriptors.get().javaLangObject, false, false);
-        VariableDeclarationFragment assignmentFragment =
-            new VariableDeclarationFragment(
-                caughtVariableWithThrowableType, mainVariable.getReference());
-        ExpressionStatement assignment =
-            new ExpressionStatement(new VariableDeclarationExpression(assignmentFragment));
-        catchClauseBody.add(0, assignment);
-      }
-      Statement rest = bodyBuilder(clauses.subList(1, clauses.size()), mainVariable);
+      Statement rest = bodyBuilder(clauses.subList(1, clauses.size()), exceptionVariable);
       IfStatement ifStatment = new IfStatement(condition, new Block(catchClauseBody), rest);
       return ifStatment;
     }

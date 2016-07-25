@@ -62,13 +62,14 @@ class TryWithResource extends Object {
       try {
         thing = TryWithResource$ClosableThing.$create__();
         let i = 0;
-      } catch (/** @type {*} */ $exceptionFromTry) {
-        $exceptionFromTry = $Exceptions.toJava($exceptionFromTry);
-        if (Throwable.$isInstance($exceptionFromTry)) {
+      } catch (/** @type {*} */ __$exc) {
+        __$exc = $Exceptions.toJava(__$exc);
+        if (Throwable.$isInstance(__$exc)) {
+          let $exceptionFromTry = /**@type {Throwable} */ (__$exc);
           $primaryExc = $exceptionFromTry;
           throw $Exceptions.toJs($exceptionFromTry);
         } else {
-          throw $Exceptions.toJs($exceptionFromTry);
+          throw $Exceptions.toJs(__$exc);
         }
       } finally {
         $primaryExc = $Exceptions.safeClose(thing, $primaryExc);
@@ -95,13 +96,14 @@ class TryWithResource extends Object {
         thing2 = TryWithResource$ClosableThing.$create__();
         let i = 0;
         throw $Exceptions.toJs(Exception.$create__());
-      } catch (/** @type {*} */ $exceptionFromTry) {
-        $exceptionFromTry = $Exceptions.toJava($exceptionFromTry);
-        if (Throwable.$isInstance($exceptionFromTry)) {
+      } catch (/** @type {*} */ __$exc) {
+        __$exc = $Exceptions.toJava(__$exc);
+        if (Throwable.$isInstance(__$exc)) {
+          let $exceptionFromTry = /**@type {Throwable} */ (__$exc);
           $primaryExc = $exceptionFromTry;
           throw $Exceptions.toJs($exceptionFromTry);
         } else {
-          throw $Exceptions.toJs($exceptionFromTry);
+          throw $Exceptions.toJs(__$exc);
         }
       } finally {
         $primaryExc = $Exceptions.safeClose(thing2, $primaryExc);
@@ -110,12 +112,13 @@ class TryWithResource extends Object {
           throw $Exceptions.toJs($primaryExc);
         }
       }
-    } catch (/** @type {*} */ e) {
-      e = $Exceptions.toJava(e);
-      if (Exception.$isInstance(e)) {
+    } catch (/** @type {*} */ __$exc) {
+      __$exc = $Exceptions.toJava(__$exc);
+      if (Exception.$isInstance(__$exc)) {
+        let e = /**@type {Exception} */ (__$exc);
         let b = 10;
       } else {
-        throw $Exceptions.toJs(e);
+        throw $Exceptions.toJs(__$exc);
       }
     }
   }

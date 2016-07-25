@@ -307,7 +307,8 @@ public class TypeDescriptors {
         true);
   }
 
-  public static TypeDescriptor createUnion(List<TypeDescriptor> unionedTypeDescriptors) {
+  public static TypeDescriptor createUnion(
+      List<TypeDescriptor> unionedTypeDescriptors, final TypeDescriptor superTypeDescriptor) {
     String joinedBinaryName = createJoinedBinaryName(unionedTypeDescriptors, " | ");
     return new TypeDescriptor.Builder()
         .setBinaryName(joinedBinaryName)
@@ -318,6 +319,13 @@ public class TypeDescriptors {
               @Override
               public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
                 return selfTypeDescriptor;
+              }
+            })
+        .setSuperTypeDescriptorFactory(
+            new DescriptorFactory<TypeDescriptor>() {
+              @Override
+              public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
+                return superTypeDescriptor;
               }
             })
         .setUnionedTypeDescriptors(unionedTypeDescriptors)

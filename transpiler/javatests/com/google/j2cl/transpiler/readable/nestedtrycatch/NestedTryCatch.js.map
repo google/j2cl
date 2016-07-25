@@ -15,55 +15,63 @@
       }
     }] => [try {
       throw $Exceptions.toJs(Exception.$create__());
-    } catch (/** @type {*} */ ae) {
-      ae = $Exceptions.toJava(ae);
-      if (Exception.$isInstance(ae)) {
+    } catch (/** @type {*} */ __$exc) {
+      __$exc = $Exceptions.toJava(__$exc);
+      if (Exception.$isInstance(__$exc)) {
+        let ae = /**@type {Exception} */ (__$exc);
         try {
           throw $Exceptions.toJs(Exception.$create__());
-        } catch (/** @type {*} */ ie) {
-          ie = $Exceptions.toJava(ie);
-          if (Exception.$isInstance(ie)) {
+        } catch (/** @type {*} */ __$exc) {
+          __$exc = $Exceptions.toJava(__$exc);
+          if (Exception.$isInstance(__$exc)) {
+            let ie = /**@type {Exception} */ (__$exc);
           } else {
-            throw $Exceptions.toJs(ie);
+            throw $Exceptions.toJs(__$exc);
           }
         }
       } else {
-        throw $Exceptions.toJs(ae);
+        throw $Exceptions.toJs(__$exc);
       }
     }]
 [throw new Exception();] => [throw $Exceptions.toJs(Exception.$create__());]
-[UNKNOWN] => [ae = $Exceptions.toJava(ae);]
-[UNKNOWN] => [if (Exception.$isInstance(ae)) {
+[UNKNOWN] => [__$exc = $Exceptions.toJava(__$exc);]
+[UNKNOWN] => [if (Exception.$isInstance(__$exc)) {
+        let ae = /**@type {Exception} */ (__$exc);
         try {
           throw $Exceptions.toJs(Exception.$create__());
-        } catch (/** @type {*} */ ie) {
-          ie = $Exceptions.toJava(ie);
-          if (Exception.$isInstance(ie)) {
+        } catch (/** @type {*} */ __$exc) {
+          __$exc = $Exceptions.toJava(__$exc);
+          if (Exception.$isInstance(__$exc)) {
+            let ie = /**@type {Exception} */ (__$exc);
           } else {
-            throw $Exceptions.toJs(ie);
+            throw $Exceptions.toJs(__$exc);
           }
         }
       } else {
-        throw $Exceptions.toJs(ae);
+        throw $Exceptions.toJs(__$exc);
       }]
+[UNKNOWN] => [let ae = /**@type {Exception} */ (__$exc);]
 [try {
         throw new Exception();
       } catch (Exception ie) {
         // expected empty body.
       }] => [try {
           throw $Exceptions.toJs(Exception.$create__());
-        } catch (/** @type {*} */ ie) {
-          ie = $Exceptions.toJava(ie);
-          if (Exception.$isInstance(ie)) {
+        } catch (/** @type {*} */ __$exc) {
+          __$exc = $Exceptions.toJava(__$exc);
+          if (Exception.$isInstance(__$exc)) {
+            let ie = /**@type {Exception} */ (__$exc);
           } else {
-            throw $Exceptions.toJs(ie);
+            throw $Exceptions.toJs(__$exc);
           }
         }]
 [throw new Exception();] => [throw $Exceptions.toJs(Exception.$create__());]
-[UNKNOWN] => [ie = $Exceptions.toJava(ie);]
-[UNKNOWN] => [if (Exception.$isInstance(ie)) {
+[UNKNOWN] => [__$exc = $Exceptions.toJava(__$exc);]
+[UNKNOWN] => [if (Exception.$isInstance(__$exc)) {
+            let ie = /**@type {Exception} */ (__$exc);
           } else {
-            throw $Exceptions.toJs(ie);
+            throw $Exceptions.toJs(__$exc);
           }]
-[UNKNOWN] => [throw $Exceptions.toJs(ie);]
-[UNKNOWN] => [throw $Exceptions.toJs(ae);]
+[UNKNOWN] => [let ie = /**@type {Exception} */ (__$exc);]
+[UNKNOWN] => [throw $Exceptions.toJs(__$exc);]
+[UNKNOWN] => [throw $Exceptions.toJs(__$exc);]

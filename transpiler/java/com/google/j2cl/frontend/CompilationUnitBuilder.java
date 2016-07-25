@@ -1846,7 +1846,8 @@ public class CompilationUnitBuilder {
         org.eclipse.jdt.core.dom.Type type = (org.eclipse.jdt.core.dom.Type) object;
         unionedTypeDescriptors.add(JdtUtils.createTypeDescriptor(type.resolveBinding()));
       }
-      return TypeDescriptors.createUnion(unionedTypeDescriptors);
+      return TypeDescriptors.createUnion(
+          unionedTypeDescriptors, JdtUtils.createTypeDescriptor(unionType.resolveBinding()));
     }
 
     private VariableDeclarationFragment convert(

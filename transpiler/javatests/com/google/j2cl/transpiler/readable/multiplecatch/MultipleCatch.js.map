@@ -13,31 +13,34 @@
       r = null; // used to show exception variable is transpiled correctly.
     }] => [try {
       throw $Exceptions.toJs(ClassCastException.$create__());
-    } catch (/** @type {*} */ e) {
-      e = $Exceptions.toJava(e);
-      if (NullPointerException.$isInstance(e) || ClassCastException.$isInstance(e)) {
-      } else if (RuntimeException.$isInstance(e)) {
-        let r = e;
+    } catch (/** @type {*} */ __$exc) {
+      __$exc = $Exceptions.toJava(__$exc);
+      if (NullPointerException.$isInstance(__$exc) || ClassCastException.$isInstance(__$exc)) {
+        let e = /**@type {RuntimeException} */ (__$exc);
+      } else if (RuntimeException.$isInstance(__$exc)) {
+        let r = /**@type {RuntimeException} */ (__$exc);
         r = null;
       } else {
-        throw $Exceptions.toJs(e);
+        throw $Exceptions.toJs(__$exc);
       }
     }]
 [throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());]
-[UNKNOWN] => [e = $Exceptions.toJava(e);]
-[UNKNOWN] => [if (NullPointerException.$isInstance(e) || ClassCastException.$isInstance(e)) {
-      } else if (RuntimeException.$isInstance(e)) {
-        let r = e;
+[UNKNOWN] => [__$exc = $Exceptions.toJava(__$exc);]
+[UNKNOWN] => [if (NullPointerException.$isInstance(__$exc) || ClassCastException.$isInstance(__$exc)) {
+        let e = /**@type {RuntimeException} */ (__$exc);
+      } else if (RuntimeException.$isInstance(__$exc)) {
+        let r = /**@type {RuntimeException} */ (__$exc);
         r = null;
       } else {
-        throw $Exceptions.toJs(e);
+        throw $Exceptions.toJs(__$exc);
       }]
-[UNKNOWN] => [if (RuntimeException.$isInstance(e)) {
-        let r = e;
+[UNKNOWN] => [let e = /**@type {RuntimeException} */ (__$exc);]
+[UNKNOWN] => [if (RuntimeException.$isInstance(__$exc)) {
+        let r = /**@type {RuntimeException} */ (__$exc);
         r = null;
       } else {
-        throw $Exceptions.toJs(e);
+        throw $Exceptions.toJs(__$exc);
       }]
-[UNKNOWN] => [let r = e;]
+[UNKNOWN] => [let r = /**@type {RuntimeException} */ (__$exc);]
 [r = null;] => [r = null;]
-[UNKNOWN] => [throw $Exceptions.toJs(e);]
+[UNKNOWN] => [throw $Exceptions.toJs(__$exc);]

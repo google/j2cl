@@ -54,12 +54,13 @@ class SimpleTryCatchThrow extends Object {
   m_main__() {
     try {
       throw $Exceptions.toJs(ClassCastException.$create__());
-    } catch (/** @type {*} */ e) {
-      e = $Exceptions.toJava(e);
-      if (ClassCastException.$isInstance(e)) {
+    } catch (/** @type {*} */ __$exc) {
+      __$exc = $Exceptions.toJava(__$exc);
+      if (ClassCastException.$isInstance(__$exc)) {
+        let e = /**@type {ClassCastException} */ (__$exc);
         SimpleTryCatchThrow.m_doSomething__java_lang_ClassCastException(e);
       } else {
-        throw $Exceptions.toJs(e);
+        throw $Exceptions.toJs(__$exc);
       }
     } finally {
     }

@@ -12,23 +12,26 @@
     } finally {
     }] => [try {
       throw $Exceptions.toJs(ClassCastException.$create__());
-    } catch (/** @type {*} */ e) {
-      e = $Exceptions.toJava(e);
-      if (ClassCastException.$isInstance(e)) {
+    } catch (/** @type {*} */ __$exc) {
+      __$exc = $Exceptions.toJava(__$exc);
+      if (ClassCastException.$isInstance(__$exc)) {
+        let e = /**@type {ClassCastException} */ (__$exc);
         SimpleTryCatchThrow.m_doSomething__java_lang_ClassCastException(e);
       } else {
-        throw $Exceptions.toJs(e);
+        throw $Exceptions.toJs(__$exc);
       }
     } finally {
     }]
 [throw new ClassCastException();] => [throw $Exceptions.toJs(ClassCastException.$create__());]
-[UNKNOWN] => [e = $Exceptions.toJava(e);]
-[UNKNOWN] => [if (ClassCastException.$isInstance(e)) {
+[UNKNOWN] => [__$exc = $Exceptions.toJava(__$exc);]
+[UNKNOWN] => [if (ClassCastException.$isInstance(__$exc)) {
+        let e = /**@type {ClassCastException} */ (__$exc);
         SimpleTryCatchThrow.m_doSomething__java_lang_ClassCastException(e);
       } else {
-        throw $Exceptions.toJs(e);
+        throw $Exceptions.toJs(__$exc);
       }]
+[UNKNOWN] => [let e = /**@type {ClassCastException} */ (__$exc);]
 [doSomething(e);] => [SimpleTryCatchThrow.m_doSomething__java_lang_ClassCastException(e);]
-[UNKNOWN] => [throw $Exceptions.toJs(e);]
+[UNKNOWN] => [throw $Exceptions.toJs(__$exc);]
 [UNKNOWN] => [SimpleTryCatchThrow.$clinit();]
 [System.out.println("saw exception: " + e);] => [System.f_out__java_lang_System.m_println__java_lang_String("saw exception: " + String.m_valueOf__java_lang_Object(e));]
