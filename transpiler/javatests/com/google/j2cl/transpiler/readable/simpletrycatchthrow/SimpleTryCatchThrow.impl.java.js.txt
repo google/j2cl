@@ -12,7 +12,6 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let ClassCastException = goog.forwardDeclare('java.lang.ClassCastException$impl');
-let NullPointerException = goog.forwardDeclare('java.lang.NullPointerException$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
 let System = goog.forwardDeclare('java.lang.System$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
@@ -57,15 +56,24 @@ class SimpleTryCatchThrow extends Object {
       throw $Exceptions.toJs(ClassCastException.$create__());
     } catch (/** @type {*} */ e) {
       e = $Exceptions.toJava(e);
-      if (NullPointerException.$isInstance(e) ||
-          ClassCastException.$isInstance(e)) {
-        System.f_out__java_lang_System.m_println__java_lang_String(
-            'saw exception: ' + String.m_valueOf__java_lang_Object(e));
+      if (ClassCastException.$isInstance(e)) {
+        SimpleTryCatchThrow.m_doSomething__java_lang_ClassCastException(e);
       } else {
         throw $Exceptions.toJs(e);
       }
     } finally {
     }
+  }
+
+  /**
+   * @param {ClassCastException} e
+   * @return {void}
+   * @public
+   */
+  static m_doSomething__java_lang_ClassCastException(e) {
+    SimpleTryCatchThrow.$clinit();
+    System.f_out__java_lang_System.m_println__java_lang_String(
+        'saw exception: ' + String.m_valueOf__java_lang_Object(e));
   }
 
   /**
@@ -94,8 +102,6 @@ class SimpleTryCatchThrow extends Object {
    */
   static $clinit() {
     ClassCastException = goog.module.get('java.lang.ClassCastException$impl');
-    NullPointerException =
-        goog.module.get('java.lang.NullPointerException$impl');
     String = goog.module.get('java.lang.String$impl');
     System = goog.module.get('java.lang.System$impl');
     $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');

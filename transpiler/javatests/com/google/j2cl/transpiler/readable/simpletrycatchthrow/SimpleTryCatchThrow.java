@@ -4,9 +4,13 @@ public class SimpleTryCatchThrow {
   public void main() {
     try {
       throw new ClassCastException();
-    } catch (NullPointerException | ClassCastException e) {
-      System.out.println("saw exception: " + e);
+    } catch (ClassCastException e) {
+      doSomething(e);
     } finally {
     }
+  }
+
+  public static void doSomething(ClassCastException e) {
+    System.out.println("saw exception: " + e);
   }
 }
