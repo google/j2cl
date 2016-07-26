@@ -1,0 +1,130 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.genericequals.GenericEquals.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.genericequals.GenericEquals$impl');
+
+
+let Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+
+
+/**
+ * @template C_T
+ */
+class GenericEquals extends Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() {
+    super();
+    /** @public {C_T} */
+    this.f_value__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_ =
+        null;
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @template C_T
+   * @param {C_T} value
+   * @return {!GenericEquals<C_T>}
+   * @public
+   */
+  static $create__java_lang_Object(value) {
+    GenericEquals.$clinit();
+    let $instance = new GenericEquals();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_genericequals_GenericEquals__java_lang_Object(
+            value);
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {C_T} value
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_genericequals_GenericEquals__java_lang_Object(
+      value) {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_genericequals_GenericEquals();
+    this.f_value__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_ =
+        value;
+  }
+
+  /**
+   * @override
+   * @param {*} obj
+   * @return {boolean}
+   * @public
+   */
+  m_equals__java_lang_Object(obj) {
+    if ($Equality.$same(obj, this)) {
+      return true;
+    }
+    if (!(GenericEquals.$isInstance(obj))) {
+      return false;
+    }
+    let other = /**@type {GenericEquals<*>} */ ($Casts.to(obj, GenericEquals));
+    return $Objects.m_equals__java_lang_Object__java_lang_Object(
+        this.f_value__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_,
+        other
+            .f_value__com_google_j2cl_transpiler_readable_genericequals_GenericEquals_);
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof GenericEquals; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, GenericEquals);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $Equality = goog.module.get('nativebootstrap.Equality$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    $Objects = goog.module.get('vmbootstrap.Objects$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_genericequals_GenericEquals() {}
+};
+
+$Util.$setClassMetadata(
+    GenericEquals,
+    'com.google.j2cl.transpiler.readable.genericequals.GenericEquals');
+
+
+
+/**
+ * Export class.
+ */
+exports = GenericEquals;
+//# sourceMappingURL=GenericEquals.js.map

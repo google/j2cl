@@ -19,9 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.j2cl.ast.annotations.Visitable;
 
-/**
- * A node that represent a type annotation in the Javascript output.
- */
+/** A node that represent a type annotation in the Javascript output. */
 @Visitable
 public class JsTypeAnnotation extends Expression {
   @Visitable Expression expression;
@@ -36,9 +34,7 @@ public class JsTypeAnnotation extends Expression {
     this.isDeclaration = isDeclaration;
   }
 
-  /**
-   * Creates a "@type {type}" cast on an expression.
-   */
+  /** Creates a "@type {type}" cast on an expression. */
   public static JsTypeAnnotation createTypeAnnotation(Expression expression, TypeDescriptor type) {
     if (expression instanceof JsTypeAnnotation) {
       JsTypeAnnotation annotation = (JsTypeAnnotation) expression;
@@ -49,6 +45,7 @@ public class JsTypeAnnotation extends Expression {
 
   /**
    * Creates a "@public {type}" cast on an assignment.
+   *
    * @param expression Must be an assignment expression.
    */
   public static JsTypeAnnotation createDeclarationAnnotation(
@@ -77,9 +74,7 @@ public class JsTypeAnnotation extends Expression {
     return annotationType;
   }
 
-  /**
-   * A Builder for easily and correctly creating modified versions of CastExpressions.
-   */
+  /** A Builder for easily and correctly creating modified versions of CastExpressions. */
   public static class Builder {
     private Expression expression;
     private TypeDescriptor annotationType;

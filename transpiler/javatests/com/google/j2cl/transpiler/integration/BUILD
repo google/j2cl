@@ -132,9 +132,7 @@ js_binary(
         # "--jscomp_error=reportUnknownTypes",
     ],
     externs_list = ["//javascript/externs:common"],
-    extra_inputs = [
-        "conformance_proto.txt",
-    ],
+    extra_inputs = ["conformance_proto.txt"],
     deps = [
         "//transpiler/javatests/com/google/j2cl/transpiler/integration/emptyclass",
     ],

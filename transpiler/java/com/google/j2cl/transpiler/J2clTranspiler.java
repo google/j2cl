@@ -48,6 +48,7 @@ import com.google.j2cl.ast.visitors.NormalizeConstructors;
 import com.google.j2cl.ast.visitors.NormalizeEquality;
 import com.google.j2cl.ast.visitors.NormalizeInstanceOfs;
 import com.google.j2cl.ast.visitors.NormalizeIntersectionTypes;
+import com.google.j2cl.ast.visitors.NormalizeJsTypeAnnotations;
 import com.google.j2cl.ast.visitors.NormalizeJsVarargs;
 import com.google.j2cl.ast.visitors.NormalizeLongs;
 import com.google.j2cl.ast.visitors.NormalizeMultiExpressions;
@@ -68,7 +69,6 @@ import com.google.j2cl.frontend.FrontendOptions;
 import com.google.j2cl.frontend.JdtParser;
 import com.google.j2cl.frontend.PackageInfoCache;
 import com.google.j2cl.generator.OutputGeneratorStage;
-
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -195,10 +195,11 @@ public class J2clTranspiler {
             new NormalizeArrayCreations(),
             new InsertExceptionConversions(),
             new NormalizeMultiExpressions(),
+            new NormalizeJsTypeAnnotations(),
 
             // Dodge JSCompiler limitations.
             new UnimplementedMethodsCreator(),
-            // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
+            // TODO: remove the temporary fix once we switch to JSCompiler's new type checker.
             new FixTypeVariablesInMethods(),
             new RemoveUnusedMultiExpressionReturnValues(),
             new InsertStaticClassInitializerMethods());
