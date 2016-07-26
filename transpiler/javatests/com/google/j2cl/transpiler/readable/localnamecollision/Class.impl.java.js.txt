@@ -11,12 +11,10 @@ goog.module('com.google.j2cl.transpiler.readable.localnamecollision.Class$impl')
 let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_Class = goog.forwardDeclare('java.lang.Class$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
-class com_google_j2cl_transpiler_readable_localnamecollision_Class extends
-    Object {
+class Class extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -25,13 +23,12 @@ class com_google_j2cl_transpiler_readable_localnamecollision_Class extends
 
   /**
    * A particular Java constructor as a factory method.
-   * @return {!com_google_j2cl_transpiler_readable_localnamecollision_Class}
+   * @return {!Class}
    * @public
    */
   static $create__() {
-    com_google_j2cl_transpiler_readable_localnamecollision_Class.$clinit();
-    let $instance =
-        new com_google_j2cl_transpiler_readable_localnamecollision_Class();
+    Class.$clinit();
+    let $instance = new Class();
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_localnamecollision_Class__();
     return $instance;
@@ -51,11 +48,7 @@ class com_google_j2cl_transpiler_readable_localnamecollision_Class extends
    * @return {void}
    * @public
    */
-  m_main__() {
-    /**@type {java_lang_Class<?>} */ ($Objects.m_getClass__java_lang_Object(
-        com_google_j2cl_transpiler_readable_localnamecollision_Class
-            .$create__()));
-  }
+  m_main__() { $Objects.m_getClass__java_lang_Object(Class.$create__()); }
 
   /**
    * Returns whether the provided instance is an instance of this class.
@@ -63,10 +56,7 @@ class com_google_j2cl_transpiler_readable_localnamecollision_Class extends
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) {
-    return instance instanceof
-        com_google_j2cl_transpiler_readable_localnamecollision_Class;
-  }
+  static $isInstance(instance) { return instance instanceof Class; }
 
   /**
    * Returns whether the provided class is or extends this class.
@@ -75,9 +65,7 @@ class com_google_j2cl_transpiler_readable_localnamecollision_Class extends
    * @public
    */
   static $isAssignableFrom(classConstructor) {
-    return $Util.$canCastClass(
-        classConstructor,
-        com_google_j2cl_transpiler_readable_localnamecollision_Class);
+    return $Util.$canCastClass(classConstructor, Class);
   }
 
   /**
@@ -85,7 +73,6 @@ class com_google_j2cl_transpiler_readable_localnamecollision_Class extends
    * @public
    */
   static $clinit() {
-    java_lang_Class = goog.module.get('java.lang.Class$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
     Object.$clinit();
   }
@@ -98,13 +85,12 @@ class com_google_j2cl_transpiler_readable_localnamecollision_Class extends
 };
 
 $Util.$setClassMetadata(
-    com_google_j2cl_transpiler_readable_localnamecollision_Class,
-    'com.google.j2cl.transpiler.readable.localnamecollision.Class');
+    Class, 'com.google.j2cl.transpiler.readable.localnamecollision.Class');
 
 
 
 /**
  * Export class.
  */
-exports = com_google_j2cl_transpiler_readable_localnamecollision_Class;
+exports = Class;
 //# sourceMappingURL=Class.js.map

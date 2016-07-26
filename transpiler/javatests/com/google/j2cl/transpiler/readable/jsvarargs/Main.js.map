@@ -44,9 +44,9 @@
 [UNKNOWN] => [Main.$clinit();]
 [UNKNOWN] => [let $var_args_copy = /**@type {!Array<List<Main>>} */ ($Arrays.$create([arguments.length], List));]
 [UNKNOWN] => [for (let $i = 0; $i < arguments.length; $i++) {
-      /**@type {List<Main>} */ ($Arrays.$set($var_args_copy, $i, arguments[$i]));
+      $Arrays.$set($var_args_copy, $i, arguments[$i]);
     }]
-[UNKNOWN] => [/**@type {List<Main>} */ ($Arrays.$set($var_args_copy, $i, arguments[$i]));]
+[UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i]);]
 [return elements[0].get(0);] => [return $var_args_copy[0].getAtIndex(0);]
 [f1(1, 1, 2);] => [Main.f1(1, 1, 2);]
 [Main.f1(1, 1, 2);] => [Main.f1(1, 1, 2);]

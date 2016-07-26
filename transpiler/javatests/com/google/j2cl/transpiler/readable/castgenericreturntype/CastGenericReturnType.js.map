@@ -13,7 +13,7 @@
       // ?Foo<!Foo<?string>>, which does not match the return type, ?Foo<?Foo<?string>>.
       return inferGeneric(foo);
     }] => [if (!$Equality.$same(foo, null)) {
-      return /**@type {CastGenericReturnType<CastGenericReturnType<?string>>} */ (CastGenericReturnType.m_inferGeneric__java_lang_Object(foo));
+      return CastGenericReturnType.m_inferGeneric__java_lang_Object(foo);
     }]
-[return inferGeneric(foo);] => [return /**@type {CastGenericReturnType<CastGenericReturnType<?string>>} */ (CastGenericReturnType.m_inferGeneric__java_lang_Object(foo));]
+[return inferGeneric(foo);] => [return CastGenericReturnType.m_inferGeneric__java_lang_Object(foo);]
 [return null;] => [return null;]

@@ -35,7 +35,6 @@ import com.google.j2cl.ast.visitors.InsertNarrowingPrimitiveConversions;
 import com.google.j2cl.ast.visitors.InsertNarrowingReferenceConversions;
 import com.google.j2cl.ast.visitors.InsertStaticClassInitializerMethods;
 import com.google.j2cl.ast.visitors.InsertStringConversions;
-import com.google.j2cl.ast.visitors.InsertTypeAnnotationOnGenericReturnTypes;
 import com.google.j2cl.ast.visitors.InsertUnboxingConversions;
 import com.google.j2cl.ast.visitors.InsertUnderflowOverflowConversions;
 import com.google.j2cl.ast.visitors.InsertWideningPrimitiveConversions;
@@ -199,8 +198,6 @@ public class J2clTranspiler {
 
             // Dodge JSCompiler limitations.
             new UnimplementedMethodsCreator(),
-            // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
-            new InsertTypeAnnotationOnGenericReturnTypes(),
             // TODO: remove the temporary fix once switch to JSCompiler's new type checker.
             new FixTypeVariablesInMethods(),
             new RemoveUnusedMultiExpressionReturnValues(),

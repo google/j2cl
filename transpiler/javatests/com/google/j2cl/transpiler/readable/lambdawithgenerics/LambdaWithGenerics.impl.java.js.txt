@@ -89,7 +89,7 @@ class LambdaWithGenerics extends Object {
   static m_test3__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Enum(
       intf, e) {
     LambdaWithGenerics.$clinit();
-    return /**@type {Enum<Enum>} */ (intf.m_foo__java_lang_Object(e));
+    return intf.m_foo__java_lang_Object(e);
   }
 
   /**
@@ -119,14 +119,13 @@ class LambdaWithGenerics extends Object {
              .$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
                  this)),
         Error.$create__());
-    /**@type {Enum<Enum>} */
-    (LambdaWithGenerics
-         .m_test3__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Enum(
-             /**@type {!LambdaWithGenerics$2foo<Enum, C_E>} */
-             (LambdaWithGenerics$2foo
-                  .$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
-                      this)),
-             /**@type {Enum<Enum>} */ ($Casts.to(null, Enum))));
+    LambdaWithGenerics
+        .m_test3__com_google_j2cl_transpiler_readable_lambdawithgenerics_MyInterface__java_lang_Enum(
+            /**@type {!LambdaWithGenerics$2foo<Enum, C_E>} */
+            (LambdaWithGenerics$2foo
+                 .$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(
+                     this)),
+            /**@type {Enum<Enum>} */ ($Casts.to(null, Enum)));
     let f = /**@type {!LambdaWithGenerics$3apply<Enum, C_E>} */ (
         LambdaWithGenerics$3apply
             .$create__com_google_j2cl_transpiler_readable_lambdawithgenerics_LambdaWithGenerics(

@@ -69,9 +69,7 @@ class Number extends Object {
    */
   static m_fromCharCode__arrayOf_int(array) {
     Number.$clinit();
-    return /**@type {$Number$NativeFunction<?string>} */ (
-               $global_String.fromCharCode)
-        .apply(null, array);
+    return $global_String.fromCharCode.apply(null, array);
   }
 
   /**

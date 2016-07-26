@@ -142,8 +142,7 @@ class Main extends Object {
     let $var_args_copy = /**@type {!Array<List<Main>>} */ (
         $Arrays.$create([arguments.length], List));
     for (let $i = 0; $i < arguments.length; $i++) {
-      /**@type {List<Main>} */ (
-          $Arrays.$set($var_args_copy, $i, arguments[$i]));
+      $Arrays.$set($var_args_copy, $i, arguments[$i]);
     }
     return $var_args_copy[0].getAtIndex(0);
   }
