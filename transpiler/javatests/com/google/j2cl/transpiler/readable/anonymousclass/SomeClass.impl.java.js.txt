@@ -30,21 +30,6 @@ class SomeClass extends Object {
   m_foo__() {}
 
   /**
-   * A particular Java constructor as a factory method.
-   * @param {number} i
-   * @return {!SomeClass}
-   * @public
-   */
-  static $create__int(i) {
-    SomeClass.$clinit();
-    let $instance = new SomeClass();
-    $instance
-        .$ctor__com_google_j2cl_transpiler_readable_anonymousclass_SomeClass__int(
-            i);
-    return $instance;
-  }
-
-  /**
    * Initializes instance fields for a particular Java constructor.
    * @param {number} i
    * @return {void}

@@ -348,7 +348,7 @@ public class NormalizeConstructors extends NormalizationPass {
   }
 
   static boolean shouldOutputStaticFactoryCreateMethod(Type type, Method method) {
-    if (!method.isConstructor() || method.getDescriptor().isJsConstructor()) {
+    if (type.isAbstract() || !method.isConstructor() || method.getDescriptor().isJsConstructor()) {
       return false;
     }
     String mangledNameOfCreate =

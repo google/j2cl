@@ -24,22 +24,6 @@ class Main$Foo extends Object {
   constructor() { super(); }
 
   /**
-   * A particular Java constructor as a factory method.
-   * @template C_Foo_T
-   * @param {C_Foo_T} foo
-   * @return {!Main$Foo<C_Foo_T>}
-   * @public
-   */
-  static $create__java_lang_Object(foo) {
-    Main$Foo.$clinit();
-    let $instance = new Main$Foo();
-    $instance
-        .$ctor__com_google_j2cl_transpiler_readable_boundedtypesupercall_Main$Foo__java_lang_Object(
-            foo);
-    return $instance;
-  }
-
-  /**
    * Initializes instance fields for a particular Java constructor.
    * @param {C_Foo_T} foo
    * @return {void}
