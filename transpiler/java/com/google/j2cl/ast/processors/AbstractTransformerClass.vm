@@ -1,6 +1,8 @@
 package ${packageName};
 
 import com.google.common.base.Preconditions;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public abstract class AbstractTransformer<T> extends ProcessorPrivate {
 
@@ -14,13 +16,16 @@ public abstract class AbstractTransformer<T> extends ProcessorPrivate {
 #foreach($clazz in $classes)
 #if(${clazz.isContext()})
 
-  private ${clazz.SimpleName} current${clazz.SimpleName} = null;
-  final void setCurrent${clazz.SimpleName}(${clazz.SimpleName} node) {
-    current${clazz.SimpleName} = node;
-  }
-  public final ${clazz.SimpleName} getCurrent${clazz.SimpleName}() {
-    return current${clazz.SimpleName};
-  }
+    private Deque<${clazz.SimpleName}> stackOf${clazz.SimpleName} = new ArrayDeque<>();
+    final void push${clazz.SimpleName}(${clazz.SimpleName} node) {
+      stackOf${clazz.SimpleName}.push(node);
+    }
+    final ${clazz.SimpleName} pop${clazz.SimpleName}() {
+      return stackOf${clazz.SimpleName}.pop();
+    }
+    public final ${clazz.SimpleName} getCurrent${clazz.SimpleName}() {
+      return stackOf${clazz.SimpleName}.peek();
+    }
 #end
 #end
 #foreach($clazz in $classes)

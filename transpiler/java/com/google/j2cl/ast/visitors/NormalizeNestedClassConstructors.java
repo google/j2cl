@@ -29,6 +29,7 @@ import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
 import com.google.j2cl.ast.Invocation;
+import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -94,7 +95,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
         return method;
       }
       // Add parameters through which to pass captured variables for the current type.
-      return Method.Builder.from(getCurrentMethod())
+      return Method.Builder.from(method)
           .addParameters(
               Iterables.transform(
                   getFieldsForAllCaptures(getCurrentType()),
@@ -196,12 +197,12 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
 
     @Override
     public Node rewriteFieldAccess(FieldAccess fieldAccess) {
-      Method currentMethod = getCurrentMethod();
+      Member currentMember = getCurrentMember();
       // replace references to added field in the constructor with the reference to parameter.
-      if (currentMethod != null
-          && currentMethod.isConstructor()
+      if (currentMember.isConstructor()
           && fieldAccess.getTarget().isFieldDescriptorForAllCaptures()) {
-        Variable parameter = getParameterForCapturedField(fieldAccess.getTarget(), currentMethod);
+        Variable parameter =
+            getParameterForCapturedField(fieldAccess.getTarget(), (Method) currentMember);
         if (parameter != null) {
           return parameter.getReference();
         }
@@ -255,7 +256,8 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
         // passing parameters in the constructor method.
         for (Field capturedField : getFieldsForAllCaptures(getCurrentType())) {
           Variable parameter =
-              getParameterForCapturedField(capturedField.getDescriptor(), getCurrentMethod());
+              getParameterForCapturedField(
+                  capturedField.getDescriptor(), (Method) getCurrentMember());
           methodCallBuilder.appendArgumentAndUpdateDescriptor(
               parameter.getReference(), parameter.getTypeDescriptor());
         }

@@ -1084,6 +1084,7 @@ public class AstUtils {
     return FluentIterable.from(members)
         .transform(
             new Function<Member, Field>() {
+              @Override
               public Field apply(Member member) {
                 if (member instanceof Field) {
                   return (Field) member;
@@ -1099,6 +1100,7 @@ public class AstUtils {
     return FluentIterable.from(members)
         .transform(
             new Function<Member, Method>() {
+              @Override
               public Method apply(Member member) {
                 if (member instanceof Method) {
                   return (Method) member;
@@ -1114,6 +1116,7 @@ public class AstUtils {
     return FluentIterable.from(members)
         .transform(
             new Function<Member, InitializerBlock>() {
+              @Override
               public InitializerBlock apply(Member member) {
                 if (member instanceof InitializerBlock) {
                   return (InitializerBlock) member;

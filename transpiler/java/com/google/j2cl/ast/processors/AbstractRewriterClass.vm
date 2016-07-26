@@ -1,17 +1,22 @@
 package ${packageName};
 
 import com.google.j2cl.ast.common.HasMetadata;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public abstract class AbstractRewriter extends ProcessorPrivate implements Rewriter {
 #foreach($clazz in $classes)
 #if(${clazz.isContext()})
 
-  private ${clazz.SimpleName} current${clazz.SimpleName} = null;
-  final void setCurrent${clazz.SimpleName}(${clazz.SimpleName} node) {
-    current${clazz.SimpleName} = node;
+  private Deque<${clazz.SimpleName}> stackOf${clazz.SimpleName} = new ArrayDeque<>();
+  final void push${clazz.SimpleName}(${clazz.SimpleName} node) {
+    stackOf${clazz.SimpleName}.push(node);
+  }
+  final ${clazz.SimpleName} pop${clazz.SimpleName}() {
+    return stackOf${clazz.SimpleName}.pop();
   }
   public final ${clazz.SimpleName} getCurrent${clazz.SimpleName}() {
-    return current${clazz.SimpleName};
+    return stackOf${clazz.SimpleName}.peek();
   }
 #end
 #end

@@ -20,7 +20,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.AbstractVisitor;
-import com.google.j2cl.ast.Method;
+import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.Variable;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ import java.util.Map;
 public class VariableAliasesGatheringVisitor extends AbstractVisitor {
   private static final String VARIABLE_PREFIX = "l_";
   private List<String> importAliases = new ArrayList<>();
-  private Multimap<Method, String> variableNamesByMethod = HashMultimap.create();
+  private Multimap<Member, String> variableNamesByMember = HashMultimap.create();
   private Map<Variable, String> aliasByVariable = new HashMap<>();
 
   /**
@@ -44,7 +44,7 @@ public class VariableAliasesGatheringVisitor extends AbstractVisitor {
   private class VariableNamesCollector extends AbstractVisitor {
     @Override
     public void exitVariable(Variable variable) {
-      variableNamesByMethod.put(getCurrentMethod(), variable.getName());
+      variableNamesByMember.put(getCurrentMember(), variable.getName());
     }
   }
 
@@ -58,7 +58,7 @@ public class VariableAliasesGatheringVisitor extends AbstractVisitor {
       // add prefix "l_" to the local variable whose name collides with an import alias
       // or collides with a JavaScript keyword.
       variableName = VARIABLE_PREFIX + variableName;
-      while (variableNamesByMethod.containsEntry(getCurrentMethod(), variableName)) {
+      while (variableNamesByMember.containsEntry(getCurrentMember(), variableName)) {
         // add more prefix to ensure the alias does not collide with other local variables.
         variableName = VARIABLE_PREFIX + variableName;
       }

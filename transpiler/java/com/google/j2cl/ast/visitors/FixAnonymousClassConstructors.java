@@ -91,9 +91,7 @@ public class FixAnonymousClassConstructors extends NormalizationPass {
       /*
        * Add arguments to super() calls inside of constructor methods in anonymous classes.
        */
-      if (getCurrentMethod() == null
-          || !getCurrentMethod().isConstructor()
-          || !methodCall.getTarget().isConstructor()) {
+      if (!getCurrentMember().isConstructor() || !methodCall.getTarget().isConstructor()) {
         return methodCall;
       }
 
@@ -151,10 +149,7 @@ public class FixAnonymousClassConstructors extends NormalizationPass {
 
     @Override
     public Node rewriteMethodCall(MethodCall methodCall) {
-      Method currentMethod = getCurrentMethod();
-      if (currentMethod == null
-          || !currentMethod.isConstructor()
-          || !methodCall.getTarget().isConstructor()) {
+      if (!getCurrentMember().isConstructor() || !methodCall.getTarget().isConstructor()) {
         return methodCall;
       }
       // super() call, set the qualifier.

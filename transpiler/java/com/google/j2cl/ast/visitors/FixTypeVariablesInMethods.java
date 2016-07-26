@@ -21,6 +21,7 @@ import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.JsTypeAnnotation;
+import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
@@ -43,12 +44,12 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
   private class Rewriter extends AbstractRewriter {
     @Override
     public Node rewriteJsTypeAnnotation(JsTypeAnnotation annotation) {
-      if (annotation.isDeclaration()) {
+      if (annotation.isDeclaration() || !getCurrentMember().isMethod()) {
         return annotation;
       }
       TypeDescriptor castTypeDescriptor = annotation.getTypeDescriptor();
       TypeDescriptor boundType =
-          replaceTypeVariableWithBound(castTypeDescriptor, getCurrentMethod());
+          replaceTypeVariableWithBound(castTypeDescriptor, (Method) getCurrentMember());
       return JsTypeAnnotation.createTypeAnnotation(annotation.getExpression(), boundType);
     }
 
@@ -95,17 +96,17 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
     return typeDescriptor;
   }
 
-  private boolean isTypeVariableDeclaredByMethod(TypeDescriptor typeDescriptor, Method method) {
+  private boolean isTypeVariableDeclaredByMethod(TypeDescriptor typeDescriptor, Member member) {
     // A JsFunction method uses @this tag to specify the type of 'this', which makes templates
     // unresolved inside the method.
     // TODO: double check if this is the same issue with b/24476009.
     return typeDescriptor.isTypeVariable()
-        && method != null
-        && (method
+        && member.isMethod()
+        && (((Method) member)
                 .getDescriptor()
                 .getTypeParameterTypeDescriptors()
                 .contains(TypeDescriptors.toNonNullable(typeDescriptor))
-            || (method.getDescriptor().isJsFunction()));
+            || (((Method) member).getDescriptor().isJsFunction()));
   }
 
   /**

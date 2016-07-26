@@ -6,21 +6,39 @@ public class Visitor_${className} {
 
   public static Node visit(Processor processor, ${className} node) {
     Node result = node;
+
+    pushContext(processor, node);
+
     ProcessorPrivate processorImpl = (ProcessorPrivate) processor;
-#if (${visitableClass.isContext()})
-    Preconditions.checkState(processorImpl.getCurrent${className}() == null);
-    processorImpl.setCurrent${className}(node);
-#end
     if (processorImpl.shouldProcess${className}(node)) {
       node = processorImpl.preProcess${className}(node);
       visitMembers(processorImpl, node);
       result = processorImpl.postProcess${className}(node);
     }
-#if (${visitableClass.isContext()})
-    Preconditions.checkState(processorImpl.getCurrent${className}() != null);
-    processorImpl.setCurrent${className}(null);
-#end
+    popContext(processor, node);
     return result;
+  }
+
+  static void pushContext(Processor processor, ${className} node) {
+#if(${visitableClass.isTop()})
+#else
+    Visitor_${visitableClass.SuperclassName}.pushContext(processor, node);
+#end
+#if (${visitableClass.isContext()})
+    ProcessorPrivate processorImpl = (ProcessorPrivate) processor;
+    processorImpl.push${className}(node);
+#end
+  }
+
+  static void popContext(Processor processor, ${className} node) {
+#if (${visitableClass.isContext()})
+    ProcessorPrivate processorImpl = (ProcessorPrivate) processor;
+    Preconditions.checkState(processorImpl.pop${className}() == node);
+#end
+#if(${visitableClass.isTop()})
+#else
+    Visitor_${visitableClass.SuperclassName}.popContext(processor, node);
+#end
   }
 
   static void visitMembers(Processor processor, ${className} node) {

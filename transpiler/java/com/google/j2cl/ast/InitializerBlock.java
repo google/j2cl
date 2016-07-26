@@ -40,6 +40,11 @@ public class InitializerBlock extends Member {
   }
 
   @Override
+  public boolean isInitializerBlock() {
+    return true;
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_InitializerBlock.visit(processor, this);
   }

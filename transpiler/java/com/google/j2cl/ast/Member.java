@@ -15,12 +15,30 @@
  */
 package com.google.j2cl.ast;
 
+import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
 
 /** Abstract base class for class members. */
 @Visitable
+@Context
 public abstract class Member extends Node {
   public abstract boolean isStatic();
+
+  public boolean isConstructor() {
+    return false;
+  }
+
+  public boolean isField() {
+    return false;
+  }
+
+  public boolean isMethod() {
+    return false;
+  }
+
+  public boolean isInitializerBlock() {
+    return false;
+  }
 
   @Override
   public Node accept(Processor processor) {

@@ -64,8 +64,7 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
       /*
        * Only add arguments to super() calls inside of constructor methods in Enum classes.
        */
-      if (getCurrentMethod() == null
-          || !getCurrentMethod().isConstructor()
+      if (!getCurrentMember().isConstructor()
           || !isEnumOrSubclass(getCurrentType())
           || !methodCall.getTarget().isConstructor()) {
         return methodCall;
@@ -82,8 +81,8 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
       // Rewrite newInstances for the creation of the enum constants to include the assigned ordinal
       // and name.
       if (!getCurrentType().isEnum()
-          || getCurrentField() == null
-          || !getCurrentField()
+          || !getCurrentMember().isField()
+          || !((Field) getCurrentMember())
               .getDescriptor()
               .getTypeDescriptor()
               .equalsIgnoreNullability(getCurrentType().getDescriptor())) {
@@ -94,7 +93,7 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
       }
       // This is definitely an enum initialization NewInstance.
 
-      Field enumField = getCurrentField();
+      Field enumField = (Field) getCurrentMember();
       Preconditions.checkState(
           enumField != null,
           "Enum values can only be instantiated inside their field initialization");

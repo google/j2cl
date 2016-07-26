@@ -17,7 +17,6 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasMetadata;
 import com.google.j2cl.ast.sourcemap.HasSourcePosition;
@@ -26,7 +25,6 @@ import javax.annotation.Nullable;
 
 /** Field declaration node. */
 @Visitable
-@Context
 public class Field extends Member implements HasSourcePosition {
   @Visitable FieldDescriptor fieldDescriptor;
   @Visitable @Nullable Expression initializer;
@@ -78,6 +76,11 @@ public class Field extends Member implements HasSourcePosition {
   @Override
   public boolean isStatic() {
     return fieldDescriptor.isStatic();
+  }
+
+  @Override
+  public boolean isField() {
+    return true;
   }
 
   @Override

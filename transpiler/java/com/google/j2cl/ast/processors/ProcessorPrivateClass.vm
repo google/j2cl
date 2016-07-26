@@ -4,8 +4,8 @@ abstract class ProcessorPrivate implements Processor {
 #foreach($clazz in $classes)
 #if(${clazz.isContext()})
 
-  abstract void setCurrent${clazz.SimpleName}(${clazz.SimpleName} node);
-  abstract ${clazz.SimpleName} getCurrent${clazz.SimpleName}();
+  abstract void push${clazz.SimpleName}(${clazz.SimpleName} node);
+  abstract ${clazz.SimpleName} pop${clazz.SimpleName}();
 #end
 #end
 
