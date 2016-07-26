@@ -18,7 +18,7 @@ package com.google.j2cl.ast;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
-import com.google.j2cl.ast.common.HasJsName;
+import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.JsUtils;
 import com.google.j2cl.common.J2clUtils;
 import com.google.j2cl.errors.Errors;
@@ -367,17 +367,19 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private <T extends HasJsName> void checkJsName(T item) {
+  private void checkJsName(HasJsNameInfo item) {
     String jsName = item.getJsName();
     if (jsName == null) {
       return;
     }
+    boolean isExtern = JsUtils.isGlobal(item.getJsNamespace()) && item.isNative();
     if (jsName.isEmpty()) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "'%s' cannot have an empty name.",
           getReadableDescription(item));
-    } else if (!JsUtils.isValidJsIdentifier(jsName)) {
+    } else if ((isExtern && !JsUtils.isValidJsQualifiedName(jsName))
+        || (!isExtern && !JsUtils.isValidJsIdentifier(jsName))) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "'%s' has invalid name '%s'.",
@@ -386,7 +388,7 @@ public class JsInteropRestrictionsChecker {
     }
   }
 
-  private <T extends HasJsName> void checkJsNamespace(T item) {
+  private void checkJsNamespace(HasJsNameInfo item) {
     String jsNamespace = item.getJsNamespace();
     if (jsNamespace == null || JsUtils.isGlobal(jsNamespace)) {
       return;
@@ -480,13 +482,13 @@ public class JsInteropRestrictionsChecker {
     return true;
   }
 
-  private String getReadableDescription(HasJsName hasJsName) {
-    if (hasJsName instanceof FieldDescriptor) {
-      return getReadableDescription((FieldDescriptor) hasJsName);
-    } else if (hasJsName instanceof MethodDescriptor) {
-      return getReadableDescription((MethodDescriptor) hasJsName);
-    } else if (hasJsName instanceof TypeDescriptor) {
-      return getReadableDescription((TypeDescriptor) hasJsName);
+  private String getReadableDescription(HasJsNameInfo hasJsNameInfo) {
+    if (hasJsNameInfo instanceof FieldDescriptor) {
+      return getReadableDescription((FieldDescriptor) hasJsNameInfo);
+    } else if (hasJsNameInfo instanceof MethodDescriptor) {
+      return getReadableDescription((MethodDescriptor) hasJsNameInfo);
+    } else if (hasJsNameInfo instanceof TypeDescriptor) {
+      return getReadableDescription((TypeDescriptor) hasJsNameInfo);
     }
     return null;
   }

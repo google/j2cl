@@ -24,7 +24,13 @@ public class StaticJsMembers {
 
     @JsProperty(namespace = "foo.Bar", name = "field")
     public static int field5;
+
+    @JsProperty(namespace = GLOBAL, name = "window.top")
+    public static int field6;
   }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "window.Object")
+  public static class Extern {}
 
   @JsMethod(name = "fun")
   public static void f1(int a) {}
@@ -58,5 +64,9 @@ public class StaticJsMembers {
     n = Native.field3;
     n = Native.field4;
     n = Native.field5;
+    n = Native.field6;
+
+    new Native();
+    new Extern();
   }
 }

@@ -16,11 +16,11 @@
 package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.ast.common.HasJsName;
+import com.google.j2cl.ast.common.HasJsNameInfo;
 
 /** Abstract base class for member descriptors. */
 @Visitable
-public abstract class MemberDescriptor extends Node implements HasJsName {
+public abstract class MemberDescriptor extends Node implements HasJsNameInfo {
 
   public abstract JsInfo getJsInfo();
 
@@ -28,6 +28,7 @@ public abstract class MemberDescriptor extends Node implements HasJsName {
 
   public abstract String getName();
 
+  @Override
   public abstract boolean isNative();
 
   public abstract boolean isStatic();

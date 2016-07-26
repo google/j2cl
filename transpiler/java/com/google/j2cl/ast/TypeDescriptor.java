@@ -27,7 +27,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.j2cl.ast.annotations.Visitable;
-import com.google.j2cl.ast.common.HasJsName;
+import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.JsUtils;
 import com.google.j2cl.common.Interner;
 import com.google.j2cl.common.J2clUtils;
@@ -49,7 +49,7 @@ import java.util.Set;
  * of TypeDescriptor creation.
  */
 @Visitable
-public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, HasJsName {
+public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, HasJsNameInfo {
 
   public static Interner<TypeDescriptor> interner;
 
@@ -831,6 +831,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return isLocal;
   }
 
+  @Override
   public boolean isNative() {
     return isNative;
   }

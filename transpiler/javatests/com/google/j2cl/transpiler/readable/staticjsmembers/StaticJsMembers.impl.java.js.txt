@@ -16,7 +16,9 @@ let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 /** @constructor */ let $global_Math = window.Math;
+/** @constructor */ let $StaticJsMembers$Native = window.Object;
 /** @constructor */ let $global_window = window.window;
+/** @constructor */ let $StaticJsMembers$Extern = window.window.Object;
 
 
 class StaticJsMembers extends Object {
@@ -86,6 +88,9 @@ class StaticJsMembers extends Object {
     n = $global_Math.PI;
     n = $global_window.top;
     n = Bar.field;
+    n = $global_window.window.top;
+    new $StaticJsMembers$Native();
+    new $StaticJsMembers$Extern();
   }
 
   /**

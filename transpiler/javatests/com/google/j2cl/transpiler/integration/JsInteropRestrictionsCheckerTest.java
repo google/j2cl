@@ -18,7 +18,6 @@ package com.google.j2cl.transpiler.integration;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.io.Files;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -1036,11 +1035,13 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         "package jsnameinvalidnames;",
         "import jsinterop.annotations.JsType;",
         "import jsinterop.annotations.JsMethod;",
+        "import jsinterop.annotations.JsPackage;",
         "import jsinterop.annotations.JsProperty;",
         "@JsType(name = \"a.b.c\") public class Buggy {",
         "   @JsMethod(name = \"34s\") public void m() {}",
         "   @JsProperty(name = \"s^\") public int  m;",
         "   @JsProperty(name = \"\") public int n;",
+        "   @JsProperty(namespace = JsPackage.GLOBAL, name = \"a.b.c.d\") public static int o;",
         "}");
 
     assertCompileFails(
@@ -1049,7 +1050,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         "JsInterop error: '$void Buggy.m()' has invalid name '34s'.",
         "JsInterop error: '$int Buggy.m' has invalid name 's^'.",
         "JsInterop error: '$int Buggy.n' cannot have an empty name.",
-        "4 error(s).");
+        "JsInterop error: '$int Buggy.o' has invalid name 'a.b.c.d'.",
+        "5 error(s).");
   }
 
   public void testJsNameInvalidNamespacesFails() throws Exception {
@@ -1095,6 +1097,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         "@JsType(namespace = JsPackage.GLOBAL) public class Buggy {",
         "   @JsMethod(namespace = JsPackage.GLOBAL) public static void m() {}",
         "   @JsProperty(namespace = JsPackage.GLOBAL) public static int  n;",
+        "   @JsMethod(namespace = JsPackage.GLOBAL, name = \"a.b\") public native static int o();",
         "}");
 
     assertCompileSucceeds(sourcePackage);
