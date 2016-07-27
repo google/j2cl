@@ -66,7 +66,10 @@ public class SourceMapGeneratorStage {
               outputLocationPath,
               GeneratorUtils.getRelativePath(type),
               SOURCE_MAP_SUFFIX);
-      GeneratorUtils.writeToFile(absolutePathForSourceMap, output, charset, errors);
+      if (!output.isEmpty() || !generateReadableSourceMaps) {
+        // Do not generate empty readable sourcemaps.
+        GeneratorUtils.writeToFile(absolutePathForSourceMap, output, charset, errors);
+      }
     } catch (IOException e) {
       errors.error(
           Errors.Error.ERR_ERROR,
