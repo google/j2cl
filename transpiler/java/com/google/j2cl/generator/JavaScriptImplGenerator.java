@@ -206,7 +206,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       }
       sourceBuilder.appendln("/**");
       if (type.isAbstract()) {
-        sourceBuilder.appendln(" * Abstract class, do not instantiate.");
+        sourceBuilder.appendln(" * @abstract");
       }
       if (type.getDescriptor().isParameterizedType()) {
         String templates = getJsDocNames(type.getDescriptor().getTypeArgumentDescriptors());
