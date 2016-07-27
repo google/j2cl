@@ -201,25 +201,29 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
       }
       sourceBuilder.appendln(" */");
     } else { // Not an interface so it is a Class.
-      if (!GeneratorUtils.hasJsDoc(type)) {
-        return;
-      }
-      sourceBuilder.appendln("/**");
+      SourceBuilder buffer = new SourceBuilder();
       if (type.isAbstract()) {
-        sourceBuilder.appendln(" * @abstract");
+        buffer.appendln(" * @abstract");
       }
       if (type.getDescriptor().isParameterizedType()) {
         String templates = getJsDocNames(type.getDescriptor().getTypeArgumentDescriptors());
-        sourceBuilder.appendln(" * @template " + templates);
+        buffer.appendln(" * @template " + templates);
       }
-      if (type.getSuperTypeDescriptor().isParameterizedType()) {
+      if (type.getSuperTypeDescriptor() != null
+          && type.getSuperTypeDescriptor().isParameterizedType()) {
         String supertype = getJsDocName(type.getSuperTypeDescriptor(), true);
-        sourceBuilder.appendln(" * @extends {" + supertype + "}");
+        buffer.appendln(" * @extends {" + supertype + "}");
       }
       for (TypeDescriptor superInterfaceType : type.getSuperInterfaceTypeDescriptors()) {
-        sourceBuilder.appendln(" * @implements {" + getJsDocName(superInterfaceType, true) + "}");
+        buffer.appendln(" * @implements {" + getJsDocName(superInterfaceType, true) + "}");
       }
-      sourceBuilder.appendln(" */");
+
+      String annotation = buffer.build();
+      if (!annotation.isEmpty()) {
+        sourceBuilder.appendln("/**");
+        sourceBuilder.append(annotation);
+        sourceBuilder.appendln(" */");
+      }
     }
   }
 

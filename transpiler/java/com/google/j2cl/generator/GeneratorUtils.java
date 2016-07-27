@@ -166,13 +166,6 @@ public class GeneratorUtils {
     return TypeDescriptors.getDefaultValue(field.getDescriptor().getTypeDescriptor());
   }
 
-  public static boolean hasJsDoc(Type type) {
-    return !type.getSuperInterfaceTypeDescriptors().isEmpty()
-        || type.getDescriptor().isParameterizedType()
-        || (type.getSuperTypeDescriptor() != null
-            && type.getSuperTypeDescriptor().isParameterizedType());
-  }
-
   /**
    * If the method is a native method with a different namespace than the current class, or it is a
    * native JsProperty method, no need to output any code for it.
