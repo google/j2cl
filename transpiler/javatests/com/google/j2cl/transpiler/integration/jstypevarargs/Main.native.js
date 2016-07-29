@@ -1,37 +1,37 @@
 /**
  * @return {?number}
  */
-Main.callSumAndMultiply = function() {
-  return Main.sumAndMultiply(1, 1, 2);
+__class.callSumAndMultiply = function() {
+  return __class.sumAndMultiply(1, 1, 2);
 };
 
 /**
  * @return {number}
  */
-Main.callF1 = function() {
-  return Main.f1(10, 1, 2);
+__class.callF1 = function() {
+  return __class.f1(10, 1, 2);
 };
 
 /**
  * @return {number}
  */
-Main.callF2 = function() {
-  return Main.f2(1, 2);
+__class.callF2 = function() {
+  return __class.f2(1, 2);
 };
 
 /**
- * @param {Main} m
+ * @param {__class} m
  * @return {number}
  */
-Main.callF3 = function(m) {
+__class.callF3 = function(m) {
   return m.f3(10, 1, 2);
 };
 
 /**
- * @param {Main} m
+ * @param {__class} m
  * @return {number}
  */
-Main.callF4 = function(m) {
+__class.callF4 = function(m) {
   return m.f4(1, 2);
 };
 
@@ -39,6 +39,6 @@ Main.callF4 = function(m) {
  * @param {*} a
  * @return {number}
  */
-Main.callJsFunction = function(a) {
+__class.callJsFunction = function(a) {
   return (/**@type {Function}*/ (a))(0, null, null);
 };

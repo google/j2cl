@@ -2,6 +2,6 @@
  * @param {?} o
  * @return {number}
  */
-Main.callY = function(o) {
+__class.callY = function(o) {
   return o.y();
 };

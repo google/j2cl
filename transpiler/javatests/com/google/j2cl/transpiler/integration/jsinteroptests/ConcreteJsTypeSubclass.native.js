@@ -2,7 +2,7 @@
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsTypeSubclass.hasPublicMethod = function(obj) {
+__class.hasPublicMethod = function(obj) {
   return obj.publicMethod != null;
 };
 
@@ -10,7 +10,7 @@ ConcreteJsTypeSubclass.hasPublicMethod = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsTypeSubclass.hasPublicSubclassMethod = function(obj) {
+__class.hasPublicSubclassMethod = function(obj) {
   return obj.publicSubclassMethod != null;
 };
 
@@ -18,7 +18,7 @@ ConcreteJsTypeSubclass.hasPublicSubclassMethod = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsTypeSubclass.hasPublicStaticSubclassMethod = function(obj) {
+__class.hasPublicStaticSubclassMethod = function(obj) {
   return obj.publicStaticSubclassMethod != null;
 };
 
@@ -26,7 +26,7 @@ ConcreteJsTypeSubclass.hasPublicStaticSubclassMethod = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsTypeSubclass.hasPrivateSubclassMethod = function(obj) {
+__class.hasPrivateSubclassMethod = function(obj) {
   return obj.privateSubclassMethod != null;
 };
 
@@ -34,7 +34,7 @@ ConcreteJsTypeSubclass.hasPrivateSubclassMethod = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsTypeSubclass.hasProtectedSubclassMethod = function(obj) {
+__class.hasProtectedSubclassMethod = function(obj) {
   return obj.protectedSubclassMethod != null;
 };
 
@@ -42,7 +42,7 @@ ConcreteJsTypeSubclass.hasProtectedSubclassMethod = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsTypeSubclass.hasPackageSubclassMethod = function(obj) {
+__class.hasPackageSubclassMethod = function(obj) {
   return obj.packageSubclassMethod != null;
 };
 
@@ -50,7 +50,7 @@ ConcreteJsTypeSubclass.hasPackageSubclassMethod = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsTypeSubclass.hasPublicSubclassField = function(obj) {
+__class.hasPublicSubclassField = function(obj) {
   return obj.publicSubclassField != null;
 };
 
@@ -58,7 +58,7 @@ ConcreteJsTypeSubclass.hasPublicSubclassField = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsTypeSubclass.hasPublicStaticSubclassField = function(obj) {
+__class.hasPublicStaticSubclassField = function(obj) {
   return obj.publicStaticSubclassField != null;
 };
 
@@ -66,7 +66,7 @@ ConcreteJsTypeSubclass.hasPublicStaticSubclassField = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsTypeSubclass.hasPrivateSubclassField = function(obj) {
+__class.hasPrivateSubclassField = function(obj) {
   return obj.privateSubclassField != null;
 };
 
@@ -74,7 +74,7 @@ ConcreteJsTypeSubclass.hasPrivateSubclassField = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsTypeSubclass.hasProtectedSubclassField = function(obj) {
+__class.hasProtectedSubclassField = function(obj) {
   return obj.protectedSubclassField != null;
 };
 
@@ -82,6 +82,6 @@ ConcreteJsTypeSubclass.hasProtectedSubclassField = function(obj) {
  * @param {*} obj
  * @return {boolean}
  */
-ConcreteJsTypeSubclass.hasPackageSubclassField = function(obj) {
+__class.hasPackageSubclassField = function(obj) {
   return obj.packageSubclassField != null;
 };

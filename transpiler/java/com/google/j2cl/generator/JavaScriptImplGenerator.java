@@ -716,7 +716,12 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderNativeSource() {
     if (nativeSource != null) {
-      sourceBuilder.appendLines("/**", " * Native Method Injection", " */");
+      sourceBuilder.appendLines(
+          "/**",
+          " * Native Method Injection",
+          " */",
+          "// Alias for the class defined in this module",
+          "/** @constructor */ let __class = " + className + ";");
       sourceBuilder.newLine();
       sourceBuilder.appendln(nativeSource);
       sourceBuilder.newLine();

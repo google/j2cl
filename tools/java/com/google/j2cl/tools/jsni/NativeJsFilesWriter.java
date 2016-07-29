@@ -21,7 +21,6 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
-
 import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -60,7 +59,7 @@ public class NativeJsFilesWriter {
         String typeName = type.substring(lastDot + 1);
         String packageName = type.substring(0, lastDot);
 
-        String content = buildContent(typeName, jsniMethodsByTypeName.get(type));
+        String content = buildContent(jsniMethodsByTypeName.get(type));
 
         Preconditions.checkState(
             !Strings.isNullOrEmpty(content),
@@ -89,7 +88,7 @@ public class NativeJsFilesWriter {
     }
   }
 
-  private String buildContent(String typeName, Collection<JsniMethod> jsniMethod) {
+  private String buildContent(Collection<JsniMethod> jsniMethod) {
     StringBuilder contentBuilder = new StringBuilder();
 
     for (JsniMethod method : jsniMethod) {
@@ -98,7 +97,7 @@ public class NativeJsFilesWriter {
 
       contentBuilder.append(
           MessageFormat.format(
-              template, typeName, method.getName(), params, stripEnd(method.getBody())));
+              template, "__class", method.getName(), params, stripEnd(method.getBody())));
     }
 
     return contentBuilder.toString();

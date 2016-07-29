@@ -4,7 +4,7 @@
  * @return {number}
  * @public
  */
-Main.callAsFunction = function(fn, arg) {
+__class.callAsFunction = function(fn, arg) {
   return (/** @type {Function} */ (fn))(arg);
 };
 
@@ -12,7 +12,7 @@ Main.callAsFunction = function(fn, arg) {
  * @return {!Function}
  * @public
  */
-Main.createMyJsFunction = function() {
+__class.createMyJsFunction = function() {
   let myFn = function(a) { return a; };
   return myFn;
 }

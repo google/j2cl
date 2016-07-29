@@ -15,6 +15,7 @@ let NativeClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativ
 let String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
 class Main extends Object {
@@ -55,7 +56,7 @@ class Main extends Object {
   static m_main__arrayOf_java_lang_String(args) {
     Main.$clinit();
     $Asserts.$enabled() &&
-        $Asserts.$assert(String.m_equals__java_lang_String__java_lang_Object(
+        $Asserts.$assert($Objects.m_equals__java_lang_Object__java_lang_Object(
             NativeClass.m_nativeStaticMethod__(), 'nativeSaticMethod'));
     let instance = NativeClass.$create__();
     $Asserts.$enabled() &&
@@ -91,6 +92,7 @@ class Main extends Object {
     String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+    $Objects = goog.module.get('vmbootstrap.Objects$impl');
     Object.$clinit();
   }
 

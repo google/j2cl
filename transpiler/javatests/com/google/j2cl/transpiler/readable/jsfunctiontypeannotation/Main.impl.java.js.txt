@@ -228,12 +228,14 @@ $Util.$setClassMetadata(
 /**
  * Native Method Injection
  */
+// Alias for the class defined in this module
+/** @constructor */ let __class = Main;
 /**
  * @param {function(?number, ?number):?number} fn
  * @return {?number}
  * @public
  */
-Main.callOnFunction =
+__class.callOnFunction =
     function(fn) {
   return fn(1.1, 1.1);
 }

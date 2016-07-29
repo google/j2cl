@@ -1,32 +1,32 @@
 /**
  * @return {Array<*>}
  */
-JsTypeArrayTest.returnJsTypeFromNative = function() {
+__class.returnJsTypeFromNative = function() {
   return [{}, {}];
 };
 
 /**
  * @return {Array<*>}
  */
-JsTypeArrayTest.returnJsTypeWithIdsFromNative = function() {
+__class.returnJsTypeWithIdsFromNative = function() {
   return [{id: 1}, {id: 2}];
 };
 
 /**
  * @param {*} holder
  */
-JsTypeArrayTest.fillArrayField = function(holder) {
+__class.fillArrayField = function(holder) {
   holder.arrayField = [{}, {}];
 };
 
-JsTypeArrayTest.fillArrayParam = function(holder) {
+__class.fillArrayParam = function(holder) {
   holder.setArrayParam([{}, {}]);
 };
 
 /**
  * @return {*}
  */
-JsTypeArrayTest.returnJsType3DimFromNative = function() {
+__class.returnJsType3DimFromNative = function() {
   return [[[{id: 1}, {id: 2}, {}], []]];
 };
 
@@ -34,13 +34,13 @@ JsTypeArrayTest.returnJsType3DimFromNative = function() {
  * @param {number} i
  * @return {*}
  */
-JsTypeArrayTest.getSimpleJsType = function(i) {
+__class.getSimpleJsType = function(i) {
   return {id: i};
 };
 
 /**
  * @return {*}
  */
-JsTypeArrayTest.returnObjectArrayFromNative = function() {
+__class.returnObjectArrayFromNative = function() {
   return ['1', '2', '3'];
 };

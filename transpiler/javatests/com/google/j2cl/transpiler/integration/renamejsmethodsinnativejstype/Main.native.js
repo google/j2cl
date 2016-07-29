@@ -2,6 +2,6 @@
  * @param {*} foo
  * @return {number}
  */
-Main.callSum = function(foo) {
+__class.callSum = function(foo) {
   return foo.mysum();
 };

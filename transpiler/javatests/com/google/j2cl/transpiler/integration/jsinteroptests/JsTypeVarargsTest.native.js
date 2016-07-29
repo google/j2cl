@@ -1,35 +1,35 @@
 /**
  * @return {number}
  */
-JsTypeVarargsTest.varargsMethod1 = function() {
+__class.varargsMethod1 = function() {
   return arguments.length;
 };
 
 /**
  * @return {*}
  */
-JsTypeVarargsTest.callVarargsMethod3FromJSNI = function() {
-  return JsTypeVarargsTest.varargsMethod3(2, '1', '2', '3', '4');
+__class.callVarargsMethod3FromJSNI = function() {
+  return __class.varargsMethod3(2, '1', '2', '3', '4');
 };
 
 /**
  * @return {number}
  */
-JsTypeVarargsTest.callSumAndMultiply = function() {
-  return JsTypeVarargsTest.sumAndMultiply(2, 10, 20);
+__class.callSumAndMultiply = function() {
+  return __class.sumAndMultiply(2, 10, 20);
 };
 
 /**
  * @return {number}
  */
-JsTypeVarargsTest.callSumAndMultiplyInt = function() {
-  return JsTypeVarargsTest.sumAndMultiplyInt(3, 2, 8);
+__class.callSumAndMultiplyInt = function() {
+  return __class.sumAndMultiplyInt(3, 2, 8);
 };
 
 /**
  * @param {Function} f
  * @return {*}
  */
-JsTypeVarargsTest.callAFunction = function(f) {
+__class.callAFunction = function(f) {
   return f(2, null, null, f, null);
 };

@@ -136,13 +136,15 @@ $Util.$setClassMetadata(
 /**
  * Native Method Injection
  */
+// Alias for the class defined in this module
+/** @constructor */ let __class = Main;
 /**
  * @param {*} fn
  * @param {number} arg
  * @return {number}
  * @public
  */
-Main.callAsFunction = function(fn, arg) {
+__class.callAsFunction = function(fn, arg) {
   return (/** @type {Function} */ (fn))(arg);
 };
 
@@ -150,7 +152,7 @@ Main.callAsFunction = function(fn, arg) {
  * @return {!Function}
  * @public
  */
-Main.createMyJsFunction =
+__class.createMyJsFunction =
     function() {
   let myFn = function(a) { return a; };
   return myFn;

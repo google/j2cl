@@ -3,6 +3,6 @@
  * @return {?number}
  * @public
  */
-Main.callOnFunction = function(fn) {
+__class.callOnFunction = function(fn) {
   return fn(1.1, 1.1);
 }

@@ -1,41 +1,41 @@
 /**
  * @return {*}
  */
-NativeJsTypeTest.createNativeJsTypeWithOverlay = function() {
+__class.createNativeJsTypeWithOverlay = function() {
   return { m: function() { return 6; } };
 };
 
 /**
  * @return {*}
  */
-NativeJsTypeTest.createNativeObjectWithToString = function() {
+__class.createNativeObjectWithToString = function() {
   return {toString: function() { return 'Native type'; }};
 };
 
 /**
  * @return {*}
  */
-NativeJsTypeTest.createEmptyNativeObject = function() {
+__class.createEmptyNativeObject = function() {
   return {};
 };
 
 /**
  * @return {*}
  */
-NativeJsTypeTest.createNativeArray = function() {
+__class.createNativeArray = function() {
   return [];
 };
 
 /**
  * @return {*}
  */
-NativeJsTypeTest.createNativeObjectWithEquals = function(x) {
+__class.createNativeObjectWithEquals = function(x) {
   return {field: x, equals: function(other) { return other.field == 10; }};
 };
 
 /**
  * @return {*}
  */
-NativeJsTypeTest.createNativeObjectWithHashCode = function() {
+__class.createNativeObjectWithHashCode = function() {
   return {hashCode: function() { return 100; }};
 };
