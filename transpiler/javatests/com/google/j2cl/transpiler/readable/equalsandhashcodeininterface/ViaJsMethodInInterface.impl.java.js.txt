@@ -1,0 +1,108 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.equalsandhashcodeininterface.ViaJsMethodInInterface.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.equalsandhashcodeininterface.ViaJsMethodInInterface$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Object = goog.forwardDeclare('java.lang.Object$impl');
+
+
+/**
+ * @interface
+ */
+class ViaJsMethodInInterface {
+  /**
+   * @abstract
+   * @return {void}
+   * @public
+   */
+  equals() {}
+
+  /**
+   * @abstract
+   * @return {void}
+   * @public
+   */
+  hashCode() {}
+
+  /**
+   * @abstract
+   * @param {*} obj
+   * @return {boolean}
+   * @public
+   */
+  m_equals__java_lang_Object(obj) {}
+
+  /**
+   * @abstract
+   * @return {number}
+   * @public
+   */
+  m_hashCode__() {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {window.Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_equalsandhashcodeininterface_ViaJsMethodInInterface =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        instance
+            .$implements__com_google_j2cl_transpiler_readable_equalsandhashcodeininterface_ViaJsMethodInInterface;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        classConstructor.prototype
+            .$implements__com_google_j2cl_transpiler_readable_equalsandhashcodeininterface_ViaJsMethodInInterface;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() { Object = goog.module.get('java.lang.Object$impl'); }
+};
+
+$Util.$setClassMetadataForInterface(
+    ViaJsMethodInInterface,
+    'com.google.j2cl.transpiler.readable.equalsandhashcodeininterface.ViaJsMethodInInterface');
+
+
+ViaJsMethodInInterface.$markImplementor(
+    /** @type {window.Function} */ (ViaJsMethodInInterface));
+
+
+/**
+ * Export class.
+ */
+exports = ViaJsMethodInInterface;
+//# sourceMappingURL=ViaJsMethodInInterface.js.map

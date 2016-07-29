@@ -10,6 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.Multipl
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Object = goog.forwardDeclare('java.lang.Object$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
 
 
@@ -25,6 +26,21 @@ class MultipleAbstractParents$Collection {
    * @public
    */
   m_getFoo__java_lang_Object(t) {}
+
+  /**
+   * @abstract
+   * @param {*} obj
+   * @return {boolean}
+   * @public
+   */
+  m_equals__java_lang_Object(obj) {}
+
+  /**
+   * @abstract
+   * @return {number}
+   * @public
+   */
+  m_hashCode__() {}
 
   /**
    * Marks the provided class as implementing this interface.
@@ -69,7 +85,10 @@ class MultipleAbstractParents$Collection {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { String = goog.module.get('java.lang.String$impl'); }
+  static $clinit() {
+    Object = goog.module.get('java.lang.Object$impl');
+    String = goog.module.get('java.lang.String$impl');
+  }
 };
 
 $Util.$setClassMetadataForInterface(

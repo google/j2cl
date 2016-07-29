@@ -12,12 +12,28 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 
 let SomeClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousclass.SomeClass$impl');
 let SomeInterface$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface.$Anonymous1$impl');
+let Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
 /**
  * @interface
  */
 class SomeInterface {
+  /**
+   * @abstract
+   * @param {*} obj
+   * @return {boolean}
+   * @public
+   */
+  m_equals__java_lang_Object(obj) {}
+
+  /**
+   * @abstract
+   * @return {number}
+   * @public
+   */
+  m_hashCode__() {}
+
   /**
    * Marks the provided class as implementing this interface.
    * @param {window.Function} classConstructor
@@ -95,6 +111,7 @@ class SomeInterface {
         'com.google.j2cl.transpiler.readable.anonymousclass.SomeClass$impl');
     SomeInterface$1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface.$Anonymous1$impl');
+    Object = goog.module.get('java.lang.Object$impl');
     SomeInterface
         .$f_implicitlyStatic__com_google_j2cl_transpiler_readable_anonymousclass_SomeInterface =
         SomeInterface$1.$create__int(1);

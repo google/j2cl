@@ -45,6 +45,7 @@ import com.google.j2cl.ast.visitors.NormalizeArrayLiterals;
 import com.google.j2cl.ast.visitors.NormalizeCasts;
 import com.google.j2cl.ast.visitors.NormalizeCatchClauses;
 import com.google.j2cl.ast.visitors.NormalizeConstructors;
+import com.google.j2cl.ast.visitors.NormalizeDefaultInterfaceMethods;
 import com.google.j2cl.ast.visitors.NormalizeEquality;
 import com.google.j2cl.ast.visitors.NormalizeInstanceOfs;
 import com.google.j2cl.ast.visitors.NormalizeIntersectionTypes;
@@ -151,6 +152,7 @@ public class J2clTranspiler {
             new OptimizeAnonymousInnerClassesToFunctionExpressions(),
             // Default constructors and explicit super calls should be synthesized first.
             new CreateDefaultConstructors(),
+            new NormalizeDefaultInterfaceMethods(),
             new InsertExplicitSuperCalls(),
             new DevirtualizeBoxedTypesAndJsFunctionImplementations(),
             new NormalizeIntersectionTypes(),

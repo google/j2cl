@@ -10,6 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyIn
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Object = goog.forwardDeclare('java.lang.Object$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -32,6 +33,21 @@ class MyInterface {
    * @public
    */
   m_bar__int(a) {}
+
+  /**
+   * @abstract
+   * @param {*} obj
+   * @return {boolean}
+   * @public
+   */
+  m_equals__java_lang_Object(obj) {}
+
+  /**
+   * @abstract
+   * @return {number}
+   * @public
+   */
+  m_hashCode__() {}
 
   /**
    * Marks the provided class as implementing this interface.
@@ -77,6 +93,7 @@ class MyInterface {
    * @public
    */
   static $clinit() {
+    Object = goog.module.get('java.lang.Object$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };

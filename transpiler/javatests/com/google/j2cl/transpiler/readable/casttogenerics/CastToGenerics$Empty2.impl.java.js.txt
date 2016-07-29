@@ -10,12 +10,29 @@ goog.module('com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.E
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 /**
  * @interface
  * @template C_Empty2_TT
  */
 class CastToGenerics$Empty2 {
+  /**
+   * @abstract
+   * @param {*} obj
+   * @return {boolean}
+   * @public
+   */
+  m_equals__java_lang_Object(obj) {}
+
+  /**
+   * @abstract
+   * @return {number}
+   * @public
+   */
+  m_hashCode__() {}
+
   /**
    * Marks the provided class as implementing this interface.
    * @param {window.Function} classConstructor
@@ -59,7 +76,7 @@ class CastToGenerics$Empty2 {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() { Object = goog.module.get('java.lang.Object$impl'); }
 };
 
 $Util.$setClassMetadataForInterface(

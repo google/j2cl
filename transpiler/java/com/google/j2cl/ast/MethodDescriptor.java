@@ -42,6 +42,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public static final String IS_ASSIGNABLE_FROM_METHOD_NAME = "$isAssignableFrom";
   public static final String TO_STRING_METHOD_NAME = "toString";
   public static final String CREATE_METHOD_NAME = "$create";
+  public static final String EQUALS_METHOD_NAME = "equals";
+  public static final String HASH_CODE_METHOD_NAME = "hashCode";
 
   @Override
   public abstract boolean isStatic();

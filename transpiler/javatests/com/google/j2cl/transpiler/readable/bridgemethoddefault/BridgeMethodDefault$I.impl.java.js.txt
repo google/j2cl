@@ -10,6 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.bridgemethoddefault.BridgeMetho
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 /**
  * @interface
@@ -23,6 +25,21 @@ class BridgeMethodDefault$I {
    * @public
    */
   m_m__java_lang_Object(t) {}
+
+  /**
+   * @abstract
+   * @param {*} obj
+   * @return {boolean}
+   * @public
+   */
+  m_equals__java_lang_Object(obj) {}
+
+  /**
+   * @abstract
+   * @return {number}
+   * @public
+   */
+  m_hashCode__() {}
 
   /**
    * Marks the provided class as implementing this interface.
@@ -67,7 +84,7 @@ class BridgeMethodDefault$I {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() { Object = goog.module.get('java.lang.Object$impl'); }
 };
 
 $Util.$setClassMetadataForInterface(

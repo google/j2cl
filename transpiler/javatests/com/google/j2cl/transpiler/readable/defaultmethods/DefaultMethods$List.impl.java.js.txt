@@ -10,6 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.L
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 /**
  * @interface
@@ -22,6 +24,21 @@ class DefaultMethods$List {
    * @public
    */
   m_add__java_lang_Object(elem) {}
+
+  /**
+   * @abstract
+   * @param {*} obj
+   * @return {boolean}
+   * @public
+   */
+  m_equals__java_lang_Object(obj) {}
+
+  /**
+   * @abstract
+   * @return {number}
+   * @public
+   */
+  m_hashCode__() {}
 
   /**
    * Marks the provided class as implementing this interface.
@@ -66,7 +83,7 @@ class DefaultMethods$List {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() { Object = goog.module.get('java.lang.Object$impl'); }
 };
 
 $Util.$setClassMetadataForInterface(

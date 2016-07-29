@@ -1,9 +1,7 @@
 Integration tests optimized size report:
 **************************************
-There are 3 size changes.
-Total size (of already existing tests) changed from
-  692128 to 692250 bytes (100%->100.02%) and from
-  263865 to 263904 bytes (100%->100.01%) gzipped.
+There are 18 size changes.
+Total size (of already existing tests) did not change.
 
 
 New reports:
@@ -13,15 +11,20 @@ New reports:
 
 Shrinkage report highlights:
 **************************************
-  none
+      old    new
+     1125   1123 lambdaserializable (-0.18%)
+     2761   2759 casttoreference (-0.07%)
+     3134   3132 boxingsideeffect (-0.06%)
+     1664   1663 varargs (-0.06%)
 
 
 Expansion report highlights:
 **************************************
       old    new
-     1146   1183 jsproperties (3.23%)
-     3063   3064 jstypevarargs (0.03%)
-    11224  11225 jsinteroptests (0.01%)
+     2975   2983 casttoboxedtype (0.27%)
+     1216   1218 implicitparenthesis (0.16%)
+     3766   3771 interfacedevirtualize (0.13%)
+     4054   4059 arrayofboxedtype (0.12%)
 
 
 All reports:
@@ -40,16 +43,16 @@ All reports:
      1592   1592 arrayleafinsertion (unchanged)
      1968   1968 arrayliteral (unchanged)
      1552   1552 arrayobjectcalls (unchanged)
-     4054   4054 arrayofboxedtype (unchanged)
+     4054   4059 arrayofboxedtype (0.12%)
      3497   3497 arrayreadwrite (unchanged)
      1067   1067 assertsimple (unchanged)
       909    909 backwardbridgemethod (unchanged)
       869    869 binaryexpressions (unchanged)
       837    837 blockscoping (unchanged)
-    33744  33744 box2d (unchanged)
-     3134   3134 boxingsideeffect (unchanged)
+    33744  33749 box2d (0.01%)
+     3134   3132 boxingsideeffect (-0.06%)
       880    880 breakstatement (unchanged)
-     2300   2300 bridgejsmethod (unchanged)
+     2300   2301 bridgejsmethod (0.04%)
      1317   1317 bridgemethodaccidentaloverride (unchanged)
      1341   1341 bridgemethodbasic (unchanged)
      1454   1454 bridgemethodmultipleoverrides (unchanged)
@@ -59,15 +62,15 @@ All reports:
       819    819 castdevirtualizedtypes (unchanged)
        62     62 castnull (unchanged)
      1638   1638 casttoarray (unchanged)
-     2975   2975 casttoboxedtype (unchanged)
+     2975   2983 casttoboxedtype (0.27%)
      1219   1219 casttoclass (unchanged)
        62     62 casttoclassdisabled (unchanged)
      1109   1109 casttoclassdisabledresultused (unchanged)
      1572   1572 casttogenerics (unchanged)
-     1238   1238 casttointerface (unchanged)
+     1238   1239 casttointerface (0.08%)
      1172   1172 casttonativetypevariable (unchanged)
-     3873   3873 casttoprimitives (unchanged)
-     2761   2761 casttoreference (unchanged)
+     3873   3871 casttoprimitives (-0.05%)
+     2761   2759 casttoreference (-0.07%)
       988    988 castwithsideeffect (unchanged)
       849    849 circularcompiletimeconstant (unchanged)
      2305   2305 classliteral (unchanged)
@@ -102,7 +105,7 @@ All reports:
       914    914 implementsgenericinterface (unchanged)
       738    738 implementsinterface (unchanged)
       873    873 implementsinterfacesamename (unchanged)
-     1216   1216 implicitparenthesis (unchanged)
+     1216   1218 implicitparenthesis (0.16%)
       971    971 importglobaljstypes (unchanged)
        62     62 importinnerclass (unchanged)
        62     62 importsfullyqualified (unchanged)
@@ -114,12 +117,12 @@ All reports:
      1927   1927 instanceinnerclass (unchanged)
      1123   1123 instancejsmethods (unchanged)
      1167   1167 instanceofarray (unchanged)
-     2592   2592 instanceofboxedtype (unchanged)
+     2592   2595 instanceofboxedtype (0.12%)
       876    876 instanceofclass (unchanged)
       877    877 instanceofinterface (unchanged)
      1024   1024 instancequalifieronstaticfield (unchanged)
        62     62 interfaceabstractimpl (unchanged)
-     3766   3766 interfacedevirtualize (unchanged)
+     3766   3771 interfacedevirtualize (0.13%)
        62     62 interfacejsbridge (unchanged)
        62     62 interfacemethoddispatch (unchanged)
       874    874 interfacewithfields (unchanged)
@@ -132,18 +135,18 @@ All reports:
      1321   1321 jsconstructor (unchanged)
       946    946 jsconstructornested (unchanged)
      1289   1289 jsfunctionbridge (unchanged)
-     2005   2005 jsfunctiontypeannotation (unchanged)
+     2005   2006 jsfunctiontypeannotation (0.05%)
       904    904 jsinnerclass (unchanged)
-    11224  11225 jsinteroptests (0.01%)
+    11225  11226 jsinteroptests (0.01%)
       906    906 jsmethodoverride (unchanged)
       834    834 jsoverlay (unchanged)
       838    838 jsoverlaystaticrefs (unchanged)
        62     62 jsoverlaywithjsfunction (unchanged)
-     1146   1183 jsproperties (3.23%)
-     3063   3064 jstypevarargs (0.03%)
+     1183   1183 jsproperties (unchanged)
+     3064   3063 jstypevarargs (-0.03%)
       882    882 labeledstatement (unchanged)
      1183   1183 lambdas (unchanged)
-     1125   1125 lambdaserializable (unchanged)
+     1125   1123 lambdaserializable (-0.18%)
      1648   1648 lambdasnestedscope (unchanged)
      1036   1036 lambdaswithgenerics (unchanged)
      1203   1203 localclasswithcaptures (unchanged)
@@ -200,7 +203,7 @@ All reports:
       853    853 staticinitorder (unchanged)
       843    843 staticjsmethods (unchanged)
       933    933 staticnestedclass (unchanged)
-     1403   1403 strictequality (unchanged)
+     1403   1404 strictequality (0.07%)
      1418   1418 stringconversion (unchanged)
      1481   1481 stringdevirtualcalls (unchanged)
        62     62 stringescapecodes (unchanged)
@@ -212,12 +215,12 @@ All reports:
       817    817 synchronizedblock (unchanged)
        62     62 systemgetproperty (unchanged)
       949    949 ternaryexpression (unchanged)
-     3825   3825 trywithresource (unchanged)
+     3825   3824 trywithresource (-0.03%)
       956    956 typewildcards (unchanged)
       864    864 unaryexpressions (unchanged)
      2952   2952 underflowoverflowconversion (unchanged)
       219    219 unusedmultiexpressionreturn (unchanged)
-     1664   1664 varargs (unchanged)
+     1664   1663 varargs (-0.06%)
       935    935 variablecollisions (unchanged)
       829    829 whilestatement (unchanged)
      1028   1028 wideningandboxing (unchanged)
