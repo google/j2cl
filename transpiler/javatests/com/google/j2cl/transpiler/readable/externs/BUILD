@@ -4,8 +4,8 @@ package(default_visibility = ["//:__subpackages__"])
 licenses(["unencumbered"])
 
 load(
-    "//transpiler/javatests/com/google/j2cl/transpiler/integration:integration_test.bzl",
-    "integration_test",
+    "//:transpiler/javatests/com/google/j2cl/transpiler/readable/readable_example.bzl",
+    "readable_example",
 )
 
 filegroup(
@@ -14,23 +14,21 @@ filegroup(
 )
 
 js_library(
-    name = "externs",
+    name = "_externs",
     srcs = [
         "//javascript/externs:common",
-        "//javascript/externs/api/client",
         ":foo_externs",
     ],
 )
 
-integration_test(
-    name = "buildtestexterns",
+# Creates verification target
+readable_example(
+    name = "externs",
     srcs = glob(["*.java"]),
-    closure_defines = {
-        "jre.checks.checkLevel": "'NORMAL'",
-        "jre.checkedMode": "'ENABLED'",
-    },
+    native_srcs = ["Main.native.js"],
+    native_srcs_pkg = "CONVENTION",
     test_externs_list = [
-        ":externs",
+        ":_externs",
     ],
     deps = ["//jre/java:gwt-jsinterop-annotations"],
 )

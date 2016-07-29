@@ -1,0 +1,157 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.externs.Main.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.externs.Main$impl');
+
+
+let Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Main$FooImpl = goog.forwardDeclare('com.google.j2cl.transpiler.readable.externs.Main.FooImpl$impl');
+let Main$FooOverlay$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.externs.Main.FooOverlay.$Overlay$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/** @constructor */ let $Main$FooOverlay = window.Foo;
+
+
+class Main extends Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() { super(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!Main}
+   * @public
+   */
+  static $create__() {
+    Main.$clinit();
+    let $instance = new Main();
+    $instance.$ctor__com_google_j2cl_transpiler_readable_externs_Main__();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_externs_Main__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_externs_Main();
+  }
+
+  /**
+   * @param {$Main$FooOverlay} fooOverlay
+   * @return {boolean}
+   * @public
+   */
+  static m_testFooOverlay__com_google_j2cl_transpiler_readable_externs_Main$FooOverlay_$p_com_google_j2cl_transpiler_readable_externs_Main(
+      fooOverlay) {
+    Main.$clinit();
+    return String.m_equals__java_lang_String__java_lang_Object(
+        fooOverlay.foo, 'Hello');
+  }
+
+  /**
+   * @param {*} fooOverlay
+   * @return {void}
+   * @public
+   */
+  // native static
+  // m_useDirectlyAsFoo__java_lang_Object_$p_com_google_j2cl_transpiler_readable_externs_Main(fooOverlay)
+
+  /**
+   * @param {Array<?string>} args
+   * @return {void}
+   * @public
+   */
+  static m_main__arrayOf_java_lang_String(args) {
+    Main.$clinit();
+    Main.m_testFooOverlay__com_google_j2cl_transpiler_readable_externs_Main$FooOverlay_$p_com_google_j2cl_transpiler_readable_externs_Main(
+        /**@type {$Main$FooOverlay} */ ($Casts.to(
+            /**@type {*} */ ($Casts.to(Main$FooImpl.$create__(), Object)),
+            Main$FooOverlay$$Overlay)));
+    Main.m_useDirectlyAsFoo__java_lang_Object_$p_com_google_j2cl_transpiler_readable_externs_Main(
+        Main$FooImpl.$create__());
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof Main; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, Main);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Main$FooImpl = goog.module.get(
+        'com.google.j2cl.transpiler.readable.externs.Main.FooImpl$impl');
+    Main$FooOverlay$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.externs.Main.FooOverlay.$Overlay$impl');
+    String = goog.module.get('java.lang.String$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $Casts = goog.module.get('vmbootstrap.Casts$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_externs_Main() {}
+};
+
+$Util.$setClassMetadata(
+    Main, 'com.google.j2cl.transpiler.readable.externs.Main');
+
+
+
+/**
+ * Native Method Injection
+ */
+/**
+ * @param {Foo} foo
+ * @returns {string}
+ */
+function useFoo(foo) {
+  return foo.foo;
+}
+
+/**
+ * @param {*} foo
+ * @return {void}
+ * @public
+ */
+Main.m_useDirectlyAsFoo__java_lang_Object_$p_com_google_j2cl_transpiler_readable_externs_Main =
+    function(foo) {
+  useFoo(/** @type {Foo} */ (foo));
+};
+
+/**
+ * Export class.
+ */
+exports = Main;
+//# sourceMappingURL=Main.js.map

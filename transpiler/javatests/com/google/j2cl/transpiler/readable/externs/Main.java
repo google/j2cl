@@ -1,4 +1,4 @@
-package com.google.j2cl.transpiler.integration.buildtestexterns;
+package com.google.j2cl.transpiler.readable.externs;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -6,11 +6,7 @@ import jsinterop.annotations.JsType;
 
 public class Main {
   static class FooImpl {
-    @JsProperty public final String foo;
-
-    public FooImpl(String value) {
-      this.foo = value;
-    }
+    @JsProperty String foo;
   }
 
   // Is overlaying extern "Foo", not Java class FooImpl. The extern Foo is just a @typedef that
@@ -22,12 +18,14 @@ public class Main {
     String getFoo();
   }
 
-  private static void testFooOverlay(FooOverlay fooOverlay) {
-    assert fooOverlay instanceof FooOverlay;
-    assert fooOverlay.getFoo().equals("Hello");
+  private static boolean testFooOverlay(FooOverlay fooOverlay) {
+    return fooOverlay.getFoo().equals("Hello");
   }
 
+  private static native void useDirectlyAsFoo(Object fooOverlay);
+
   public static void main(String... args) {
-    testFooOverlay((FooOverlay) (Object) new FooImpl("Hello"));
+    testFooOverlay((FooOverlay) (Object) new FooImpl());
+    useDirectlyAsFoo(new FooImpl());
   }
 }

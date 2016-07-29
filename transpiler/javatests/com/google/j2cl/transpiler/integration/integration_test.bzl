@@ -108,6 +108,8 @@ def integration_test(name,
   # NOTE: --norewrite_polyfills *is* used so that size tracking only focuses on
   #       size issues that are actionable outside of JSCompiler or are expected
   #       to eventually be addressed inside of JSCompiler.
+  if not test_externs_list:
+    test_externs_list = ["//javascript/externs:common"]
   native.js_binary(
       name="optimized_js",
       srcs=["OptHarness.js"],
@@ -116,7 +118,7 @@ def integration_test(name,
           "--closure_entry_point=gen.opt.Harness",
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
-      externs_list=["//javascript/externs:common"],
+      externs_list= test_externs_list,
       deps=srcs_lib_dep,
   )
   # For constructing readable optimized diffs.
@@ -128,7 +130,7 @@ def integration_test(name,
           "--closure_entry_point=gen.opt.Harness",
       ] + defs),
       compiler="//javascript/tools/jscompiler:head",
-      externs_list=["//javascript/externs:common"],
+      externs_list=test_externs_list,
       deps=srcs_lib_dep,
   )
   # For constructing readable unoptimized diffs.
@@ -137,7 +139,7 @@ def integration_test(name,
       srcs=["OptHarness.js"],
       defs=make_output_readable(J2CL_UNOPTIMIZED_DEFS + defs),
       compiler="//javascript/tools/jscompiler:head",
-      externs_list=["//javascript/externs:common"],
+      externs_list=test_externs_list,
       deps=srcs_lib_dep,
   )
 
@@ -235,6 +237,8 @@ try {
   """ % (main_class)
   _genfile("TestHarness.js", test_harness)
 
+  if not test_externs_list:
+    test_externs_list = ["//javascript/externs:common"]
   native.jsunit_test(
       name="uncompiled_test",
       bootstrap_files=["TestBootstrap.js"],
@@ -245,7 +249,7 @@ try {
           "//javascript/closure/testing:testsuite",
       ],
       deps_mgmt="closure",
-      externs_list=["//javascript/externs:common"],
+      externs_list=test_externs_list,
       jvm_flags=["-Dcom.google.testing.selenium.browser=CHROME_LINUX"],
       data=["//testing/matrix/nativebrowsers/chrome:stable_data"],
   )
@@ -263,7 +267,7 @@ try {
           "//javascript/closure/testing:testsuite",
       ],
       deps_mgmt="closure",
-      externs_list=["//javascript/externs:common"],
+      externs_list=test_externs_list,
       jvm_flags=["-Dcom.google.testing.selenium.browser=CHROME_LINUX"],
       data=["//testing/matrix/nativebrowsers/chrome:stable_data"],
   )

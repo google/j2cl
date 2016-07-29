@@ -41,12 +41,8 @@ def run_cmd_get_output(cmd_args, include_stderr=False, cwd=None, shell=False):
   """Runs a cmd command and returns output as a string."""
   global SUCCESS_CODE
 
-  process = (Popen(cmd_args,
-                   shell=shell,
-                   stdin=PIPE,
-                   stdout=PIPE,
-                   stderr=PIPE,
-                   cwd=cwd))
+  process = (Popen(
+      cmd_args, shell=shell, stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=cwd))
   results = process.communicate()
   output = results[0]
   if include_stderr:
@@ -61,9 +57,10 @@ def run_cmd_get_output(cmd_args, include_stderr=False, cwd=None, shell=False):
 def get_js_binary_file_paths():
   """Finds and returns a list of js_binary bundle js file paths."""
   # Gather a list of the names of the test targets we care about
-  test_targets = (run_cmd_get_output(
-      ["blaze", "query", "filter('.*_binary', kind(%s, %s))" % (
-          "js_binary", READABLE_TARGET_PATTERN)]).splitlines())
+  test_targets = (run_cmd_get_output(["blaze", "query",
+                                      "filter('.*_binary', kind(%s, %s))" %
+                                      ("js_binary",
+                                       READABLE_TARGET_PATTERN)]).splitlines())
   test_targets = filter(bool, test_targets)
 
   return [
@@ -77,13 +74,13 @@ def get_readable_target_names():
   global READABLE_TARGET_PATTERN
 
   test_targets = (run_cmd_get_output(
-      ["blaze", "query", "filter('.*:.*_j2cl_transpile', kind(%s, %s))" % (
-          "j2cl_transpile", READABLE_TARGET_PATTERN)]).split("\n"))
+      ["blaze", "query", "filter('.*:.*_j2cl_transpile', kind(%s, %s))" %
+       ("j2cl_transpile", READABLE_TARGET_PATTERN)]).split("\n"))
   test_targets = filter(bool, test_targets)
 
   return [
-      extract_pattern(".*readable/(.*?):.*_j2cl_transpile",
-                      size_target) for size_target in test_targets
+      extract_pattern(".*readable/(.*?):.*_j2cl_transpile", size_target)
+      for size_target in test_targets
   ]
 
 
@@ -109,8 +106,7 @@ def replace_transpiled_js(target_names):
   if not os.path.isdir("/tmp/js.zip"):
     os.mkdir("/tmp/js.zip")
   run_cmd_get_output(
-      ["cp -f blaze-bin/%s**/*.js.zip /tmp/js.zip" % EXAMPLES_DIR],
-      shell=True)
+      ["cp -f blaze-bin/%s**/*.js.zip /tmp/js.zip" % EXAMPLES_DIR], shell=True)
 
   for target_name in target_names:
     zip_file_path = "/tmp/js.zip/%s_j2cl_transpile.js.zip" % target_name
@@ -121,12 +117,9 @@ def replace_transpiled_js(target_names):
       extractDir = JAVA_DIR + "/"
     run_cmd_get_output(["unzip", "-o", "-d", extractDir, zip_file_path])
 
-  # Ignore files under natives_sources/ since these are not generated.
-  find_command_js_sources = ["find", EXAMPLES_DIR, "-name", "*.js", "-not",
-                             "-path", "**/native_sources/*"]
+  find_command_js_sources = ["find", EXAMPLES_DIR, "-name", "*.java.js"]
 
-  find_command_js_test_sources = ["find", EXAMPLES_DIR, "-name", "*.js.txt",
-                                  "-not", "-path", "**/native_sources/*"]
+  find_command_js_test_sources = ["find", EXAMPLES_DIR, "-name", "*.js.txt"]
 
   # Format .js files
   run_cmd_get_output(find_command_js_sources +
@@ -164,8 +157,7 @@ def gather_closure_warnings():
   for build_log in build_logs:
     # Remove unstable build timing lines.
     build_log = "\n".join([
-        line
-        for line in build_log.splitlines()
+        line for line in build_log.splitlines()
         if not line.startswith("_") and "  Compiling" not in line and "Running"
         not in line and "Building" not in line
     ])
