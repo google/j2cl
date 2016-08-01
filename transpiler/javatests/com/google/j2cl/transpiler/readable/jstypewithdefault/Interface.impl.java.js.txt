@@ -1,0 +1,105 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsbridgebackward.MyJsInterface.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsbridgebackward.MyJsInterface$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let Object = goog.forwardDeclare('java.lang.Object$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+/**
+ * @interface
+ */
+class MyJsInterface {
+  /**
+   * @abstract
+   * @param {number} a
+   * @return {number}
+   * @public
+   */
+  foo(a) {}
+
+  /**
+   * @abstract
+   * @param {*} obj
+   * @return {boolean}
+   * @public
+   */
+  m_equals__java_lang_Object(obj) {}
+
+  /**
+   * @abstract
+   * @return {number}
+   * @public
+   */
+  m_hashCode__() {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {window.Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_jsbridgebackward_MyJsInterface =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null &&
+        instance
+            .$implements__com_google_j2cl_transpiler_readable_jsbridgebackward_MyJsInterface;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        classConstructor.prototype
+            .$implements__com_google_j2cl_transpiler_readable_jsbridgebackward_MyJsInterface;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    Object = goog.module.get('java.lang.Object$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    MyJsInterface,
+    'com.google.j2cl.transpiler.readable.jsbridgebackward.MyJsInterface');
+
+
+MyJsInterface.$markImplementor(/** @type {window.Function} */ (MyJsInterface));
+
+
+/**
+ * Export class.
+ */
+exports = MyJsInterface;
+//# sourceMappingURL=MyJsInterface.js.map
