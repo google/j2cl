@@ -6,6 +6,8 @@
 goog.provide('jre');
 
 /** @define {string} */
+goog.define('jre.classMetadata', 'SIMPLE');
+/** @define {string} */
 goog.define('jre.checkedMode', goog.DEBUG ? 'ENABLED' : 'DISABLED');
 
 

@@ -4,6 +4,9 @@
 goog.module('nativebootstrap.Util$impl');
 
 
+const jre = goog.require('jre');
+
+
 /**
  * Miscellaneous utility functions.
  */
@@ -68,11 +71,13 @@ class Util {
    * @public
    */
   static $extractClassName(ctor) {
-    if (CLASS_METADATA_ENABLED_) {
+    if (jre.classMetadata == 'SIMPLE') {
       return ctor.prototype.$$classMetadata[0];
-    } else {
+    } else if (jre.classMetadata == 'STRIPPED') {
       // TODO(goktug): use uniq ID
       return 'Class$obf';
+    } else {
+      throw new Error("Incorrect value: " + jre.classMetadata);
     }
   }
 
@@ -82,10 +87,12 @@ class Util {
    * @public
    */
   static $extractClassType(ctor) {
-    if (CLASS_METADATA_ENABLED_) {
+    if (jre.classMetadata == 'SIMPLE') {
       return ctor.prototype.$$classMetadata[1];
-    } else {
+    } else if (jre.classMetadata == 'STRIPPED') {
       return Util.TYPE_CLASS;
+    } else {
+      throw new Error("Incorrect value: " + jre.classMetadata);
     }
   }
 
@@ -155,15 +162,6 @@ class Util {
  * @public {*}
  */
 Util.$q = null;
-
-
-/**
- * @define {boolean} Whether or not to keep getName() and getCanonicalName()
- *         accurate.
- * @private
- */
-goog.define('CLASS_METADATA_ENABLED_', true);
-
 
 /**
  * @type {number}

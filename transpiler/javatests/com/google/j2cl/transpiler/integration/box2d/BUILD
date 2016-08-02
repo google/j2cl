@@ -21,7 +21,7 @@ integration_test(
     srcs = glob(["*.java"]),
     closure_defines = {
         "ASSERTIONS_ENABLED_": "false",
-        "CLASS_METADATA_ENABLED_": "false",
+        "jre.classMetadata": "'STRIPPED'",
     },
     enable_gwt = True,
     gwt_deps = [
