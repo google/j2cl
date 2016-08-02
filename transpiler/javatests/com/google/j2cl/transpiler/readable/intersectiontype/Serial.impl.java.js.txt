@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.intersectiontype.Serial$impl');
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+let Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
 /**
@@ -34,7 +34,7 @@ class Serial {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -61,7 +61,7 @@ class Serial {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -75,16 +75,14 @@ class Serial {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {
-    java_lang_Object = goog.module.get('java.lang.Object$impl');
-  }
+  static $clinit() { Object = goog.module.get('java.lang.Object$impl'); }
 };
 
 $Util.$setClassMetadataForInterface(
     Serial, 'com.google.j2cl.transpiler.readable.intersectiontype.Serial');
 
 
-Serial.$markImplementor(/** @type {Function} */ (Serial));
+Serial.$markImplementor(/** @type {window.Function} */ (Serial));
 
 
 /**

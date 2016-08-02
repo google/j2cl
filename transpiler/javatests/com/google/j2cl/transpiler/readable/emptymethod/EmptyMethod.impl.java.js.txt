@@ -8,14 +8,14 @@
 goog.module('com.google.j2cl.transpiler.readable.emptymethod.EmptyMethod$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 
-class EmptyMethod extends java_lang_Object {
+class EmptyMethod extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -62,7 +62,7 @@ class EmptyMethod extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -75,9 +75,9 @@ class EmptyMethod extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

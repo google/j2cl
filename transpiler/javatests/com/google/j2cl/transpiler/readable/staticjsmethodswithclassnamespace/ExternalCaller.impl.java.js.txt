@@ -8,13 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.staticjsmethodswithclassnamespace.ExternalCaller$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let StaticJsMethodsWithClassNamespace = goog.forwardDeclare('woo.StaticJsMethodsWithClassNamespace$impl');
 
 
-class ExternalCaller extends java_lang_Object {
+class ExternalCaller extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -60,7 +60,7 @@ class ExternalCaller extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -75,7 +75,7 @@ class ExternalCaller extends java_lang_Object {
   static $clinit() {
     StaticJsMethodsWithClassNamespace =
         goog.module.get('woo.StaticJsMethodsWithClassNamespace$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

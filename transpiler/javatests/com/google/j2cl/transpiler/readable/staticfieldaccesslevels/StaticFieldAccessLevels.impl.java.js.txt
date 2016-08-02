@@ -8,14 +8,14 @@
 goog.module('com.google.j2cl.transpiler.readable.staticfieldaccesslevels.StaticFieldAccessLevels$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class StaticFieldAccessLevels extends java_lang_Object {
+class StaticFieldAccessLevels extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -70,7 +70,7 @@ class StaticFieldAccessLevels extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -197,7 +197,7 @@ class StaticFieldAccessLevels extends java_lang_Object {
   static $clinit() {
     $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

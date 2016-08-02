@@ -666,7 +666,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   private String getQualifiedNameForExtern() {
     Preconditions.checkState(isExtern());
 
-    String effectivePrefix = JsUtils.isGlobal(jsNamespace) ? "" : jsNamespace;
+    String effectivePrefix = JsUtils.isGlobal(jsNamespace) ? JsUtils.GLOBAL_ALIAS : jsNamespace;
     String effectiveSimpleName = jsName == null ? simpleName : jsName;
     return Joiner.on(".")
         .skipNulls()

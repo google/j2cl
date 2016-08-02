@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Main$A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.A$impl');
@@ -17,11 +17,11 @@ let Main$B = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction
 let Double = goog.forwardDeclare('java.lang.Double$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
-class Main extends java_lang_Object {
+class Main extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -52,7 +52,7 @@ class Main extends java_lang_Object {
   }
 
   /**
-   * @param {Function} af
+   * @param {window.Function} af
    * @param {*} o
    * @param {(Number|?number)} n
    * @return {*}
@@ -91,7 +91,7 @@ class Main extends java_lang_Object {
   }
 
   /**
-   * @param {Function} b
+   * @param {window.Function} b
    * @param {*} o
    * @param {Integer} n
    * @return {*}
@@ -153,10 +153,10 @@ class Main extends java_lang_Object {
     Main.$clinit();
     let o =
         /**@type {function(?string, Integer):?string} */ (Main$B.$create__());
-    let b1 = /**@type {Function} */ ($Casts.to(o, Main$B));
+    let b1 = /**@type {window.Function} */ ($Casts.to(o, Main$B));
     let b2 = /**@type {?function(?string, Integer):?string} */ (
         $Casts.to(o, Main$B));
-    let af1 = /**@type {Function} */ ($Casts.to(o, Main$ApplyFunction));
+    let af1 = /**@type {window.Function} */ ($Casts.to(o, Main$ApplyFunction));
     let af2 = /**@type {?function(?string, Integer):?string} */ (
         $Casts.to(o, Main$ApplyFunction));
     let a = /**@type {?function(?number, ?number):?number} */ (
@@ -170,7 +170,7 @@ class Main extends java_lang_Object {
   static m_testNewInstance__() {
     Main.$clinit();
     let b1 = Main$B.$create__();
-    let b2 = /**@type {Function} */ ($Casts.to(
+    let b2 = /**@type {window.Function} */ ($Casts.to(
         /**@type {function(?string, Integer):?string} */ (Main$B.$create__()),
         Main$B));
     let af1 = Main$A.$create__();
@@ -186,7 +186,7 @@ class Main extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -208,9 +208,9 @@ class Main extends java_lang_Object {
     Double = goog.module.get('java.lang.Double$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     Number = goog.module.get('java.lang.Number$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**
@@ -229,7 +229,7 @@ $Util.$setClassMetadata(
  * Native Method Injection
  */
 // Alias for the class defined in this module
-const __class = Main;
+/** @constructor */ let __class = Main;
 /**
  * @param {function(?number, ?number):?number} fn
  * @return {?number}

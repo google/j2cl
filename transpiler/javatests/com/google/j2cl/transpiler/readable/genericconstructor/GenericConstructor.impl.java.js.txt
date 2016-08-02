@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.genericconstructor.GenericConstructor$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Error = goog.forwardDeclare('java.lang.Error$impl');
@@ -18,7 +18,7 @@ let Exception = goog.forwardDeclare('java.lang.Exception$impl');
 /**
  * @template C_T
  */
-class GenericConstructor extends java_lang_Object {
+class GenericConstructor extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -109,7 +109,7 @@ class GenericConstructor extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -124,7 +124,7 @@ class GenericConstructor extends java_lang_Object {
   static $clinit() {
     Error = goog.module.get('java.lang.Error$impl');
     Exception = goog.module.get('java.lang.Exception$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

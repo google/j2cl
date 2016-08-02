@@ -8,14 +8,14 @@
 goog.module('com.google.j2cl.transpiler.readable.arrayliteral.ArrayLiteral$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class ArrayLiteral extends java_lang_Object {
+class ArrayLiteral extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -50,14 +50,14 @@ class ArrayLiteral extends java_lang_Object {
    * @public
    */
   m_main__() {
-    let object = java_lang_Object.$create__();
+    let object = Object.$create__();
     let ints = /**@type {!Array<number>} */ ($Arrays.$init([0, 1, 2], $int));
-    let objects2d = /**@type {!Array<Array<*>>} */ ($Arrays.$init(
-        [[object, object], [object, object]], java_lang_Object, 2));
+    let objects2d = /**@type {!Array<Array<*>>} */ (
+        $Arrays.$init([[object, object], [object, object]], Object, 2));
     let partial =
         /**@type {!Array<Array<number>>} */ ($Arrays.$init([], $int, 2));
     let unbalanced = /**@type {!Array<Array<*>>} */ (
-        $Arrays.$init([[object, object], null], java_lang_Object, 2));
+        $Arrays.$init([[object, object], null], Object, 2));
   }
 
   /**
@@ -70,7 +70,7 @@ class ArrayLiteral extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -85,7 +85,7 @@ class ArrayLiteral extends java_lang_Object {
   static $clinit() {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

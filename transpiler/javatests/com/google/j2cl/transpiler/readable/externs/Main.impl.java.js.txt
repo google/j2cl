@@ -8,17 +8,19 @@
 goog.module('com.google.j2cl.transpiler.readable.externs.Main$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Main$FooImpl = goog.forwardDeclare('com.google.j2cl.transpiler.readable.externs.Main.FooImpl$impl');
 let Main$FooOverlay$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.externs.Main.FooOverlay.$Overlay$impl');
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
+/** @constructor */ let $Main$FooOverlay = window.Foo;
 
-class Main extends java_lang_Object {
+
+class Main extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -48,14 +50,14 @@ class Main extends java_lang_Object {
   }
 
   /**
-   * @param {Foo} fooOverlay
+   * @param {$Main$FooOverlay} fooOverlay
    * @return {boolean}
    * @public
    */
   static m_testFooOverlay__com_google_j2cl_transpiler_readable_externs_Main$FooOverlay_$p_com_google_j2cl_transpiler_readable_externs_Main(
       fooOverlay) {
     Main.$clinit();
-    return java_lang_String.m_equals__java_lang_String__java_lang_Object(
+    return String.m_equals__java_lang_String__java_lang_Object(
         fooOverlay.foo, 'Hello');
   }
 
@@ -75,9 +77,8 @@ class Main extends java_lang_Object {
   static m_main__arrayOf_java_lang_String(args) {
     Main.$clinit();
     Main.m_testFooOverlay__com_google_j2cl_transpiler_readable_externs_Main$FooOverlay_$p_com_google_j2cl_transpiler_readable_externs_Main(
-        /**@type {Foo} */ ($Casts.to(
-            /**@type {*} */ (
-                $Casts.to(Main$FooImpl.$create__(), java_lang_Object)),
+        /**@type {$Main$FooOverlay} */ ($Casts.to(
+            /**@type {*} */ ($Casts.to(Main$FooImpl.$create__(), Object)),
             Main$FooOverlay$$Overlay)));
     Main.m_useDirectlyAsFoo__java_lang_Object_$p_com_google_j2cl_transpiler_readable_externs_Main(
         Main$FooImpl.$create__());
@@ -93,7 +94,7 @@ class Main extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -110,10 +111,10 @@ class Main extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.externs.Main.FooImpl$impl');
     Main$FooOverlay$$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.externs.Main.FooOverlay.$Overlay$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**
@@ -131,8 +132,6 @@ $Util.$setClassMetadata(
 /**
  * Native Method Injection
  */
-// Alias for the class defined in this module
-const __class = Main;
 /**
  * @param {Foo} foo
  * @returns {string}

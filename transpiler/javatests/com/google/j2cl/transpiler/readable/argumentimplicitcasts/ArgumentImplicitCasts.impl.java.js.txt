@@ -8,14 +8,14 @@
 goog.module('com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 let $LongUtils = goog.require('vmbootstrap.LongUtils$impl');
 
 let ArgumentImplicitCasts$IntValueHolder = goog.forwardDeclare('com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.IntValueHolder$impl');
 let ArgumentImplicitCasts$LongValueHolder = goog.forwardDeclare('com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.LongValueHolder$impl');
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 let $byte = goog.forwardDeclare('vmbootstrap.primitives.$byte$impl');
@@ -28,7 +28,7 @@ let $short = goog.forwardDeclare('vmbootstrap.primitives.$short$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.primitives.Primitives$impl');
 
 
-class ArgumentImplicitCasts extends java_lang_Object {
+class ArgumentImplicitCasts extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -283,7 +283,7 @@ class ArgumentImplicitCasts extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -300,7 +300,7 @@ class ArgumentImplicitCasts extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.IntValueHolder$impl');
     ArgumentImplicitCasts$LongValueHolder = goog.module.get(
         'com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.LongValueHolder$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
     $byte = goog.module.get('vmbootstrap.primitives.$byte$impl');
@@ -311,7 +311,7 @@ class ArgumentImplicitCasts extends java_lang_Object {
     $long = goog.module.get('vmbootstrap.primitives.$long$impl');
     $short = goog.module.get('vmbootstrap.primitives.$short$impl');
     $Primitives = goog.module.get('vmbootstrap.primitives.Primitives$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

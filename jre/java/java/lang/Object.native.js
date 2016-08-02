@@ -3,7 +3,7 @@
  * @return {string}
  * @public
  */
-__class.prototype.toString = function() {
+Object.prototype.toString = function() {
   return window.String(this.$javaToString());
 };
 

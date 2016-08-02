@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.arithmeticexpressions.ArithmeticExpressions$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -19,7 +19,7 @@ let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.primitives.Primitives$impl');
 
 
-class ArithmeticExpressions extends java_lang_Object {
+class ArithmeticExpressions extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -95,7 +95,7 @@ class ArithmeticExpressions extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -113,7 +113,7 @@ class ArithmeticExpressions extends java_lang_Object {
     $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
     $long = goog.module.get('vmbootstrap.primitives.$long$impl');
     $Primitives = goog.module.get('vmbootstrap.primitives.Primitives$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

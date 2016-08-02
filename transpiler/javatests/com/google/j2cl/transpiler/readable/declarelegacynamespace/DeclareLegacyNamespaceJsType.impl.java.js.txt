@@ -9,7 +9,7 @@ goog.module('com.google.j2cl.transpiler.readable.declarelegacynamespace.DeclareL
 goog.module.declareLegacyNamespace();
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let DeclareLegacyNamespaceJsType$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.declarelegacynamespace.DeclareLegacyNamespaceJsType.$Anonymous1$impl');
@@ -18,7 +18,7 @@ let DeclareLegacyNamespaceJsType$1 = goog.forwardDeclare('com.google.j2cl.transp
 /**
  * @abstract
  */
-class DeclareLegacyNamespaceJsType extends java_lang_Object {
+class DeclareLegacyNamespaceJsType extends Object {
   /**
    * Real constructor.
    * @public
@@ -58,7 +58,7 @@ class DeclareLegacyNamespaceJsType extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -99,7 +99,7 @@ class DeclareLegacyNamespaceJsType extends java_lang_Object {
     DeclareLegacyNamespaceJsType.$clinit = function() {};
     DeclareLegacyNamespaceJsType$1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.declarelegacynamespace.DeclareLegacyNamespaceJsType.$Anonymous1$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
     DeclareLegacyNamespaceJsType
         .$f_TRUTHY__com_google_j2cl_transpiler_readable_declarelegacynamespace_DeclareLegacyNamespaceJsType =
         DeclareLegacyNamespaceJsType$1.$create__();

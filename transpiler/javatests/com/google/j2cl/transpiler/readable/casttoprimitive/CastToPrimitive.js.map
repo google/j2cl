@@ -61,7 +61,7 @@
 [l = (long) d;] => [l = $Primitives.$narrowDoubleToLong(d);]
 [f = (float) d;] => [f = d;]
 [d = (double) d;] => [d = d;]
-[Object o = new Object();] => [let o = java_lang_Object.$create__();]
+[Object o = new Object();] => [let o = Object.$create__();]
 [boolean bool = (boolean) o;] => [let bool = Boolean.m_booleanValue__java_lang_Boolean(/**@type {?boolean} */ ($Casts.to(o, Boolean)));]
 [byte b = (byte) o;] => [let b = /**@type {Byte} */ ($Casts.to(o, Byte)).m_byteValue__();]
 [char c = (char) o;] => [let c = /**@type {Character} */ ($Casts.to(o, Character)).m_charValue__();]

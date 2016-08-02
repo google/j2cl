@@ -6,6 +6,6 @@
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_ternaryexpression_TernaryExpression();]
 [boolean a = true;] => [let a = true;]
-[int number = a ? 1 : 2;] => [let l_number = a ? 1 : 2;]
-[boolean b = number == 1 ? number == 2 : number == 1;] => [let b = l_number == 1 ? l_number == 2 : l_number == 1;]
+[int number = a ? 1 : 2;] => [let number = a ? 1 : 2;]
+[boolean b = number == 1 ? number == 2 : number == 1;] => [let b = number == 1 ? number == 2 : number == 1;]
 [int value = b ? new Integer(15) : new Integer(30);] => [let value = (b ? Integer.$create__int(15) : Integer.$create__int(30)).m_intValue__();]

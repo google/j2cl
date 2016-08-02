@@ -8,14 +8,14 @@
 goog.module('com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall.InnerClass$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Parent = goog.forwardDeclare('com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent$impl');
 let QualifiedSuperCall = goog.forwardDeclare('com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall$impl');
 
 
-class QualifiedSuperCall$InnerClass extends java_lang_Object {
+class QualifiedSuperCall$InnerClass extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -78,7 +78,7 @@ class QualifiedSuperCall$InnerClass extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -95,7 +95,7 @@ class QualifiedSuperCall$InnerClass extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.qualifiedsupercall.Parent$impl');
     QualifiedSuperCall = goog.module.get(
         'com.google.j2cl.transpiler.readable.qualifiedsupercall.QualifiedSuperCall$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

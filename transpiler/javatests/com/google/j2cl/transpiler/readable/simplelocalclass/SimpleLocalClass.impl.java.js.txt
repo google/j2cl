@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let SimpleLocalClass$1InnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.$Anonymous1InnerClass$impl');
@@ -16,7 +16,7 @@ let SimpleLocalClass$1InnerClassWithoutCaptures = goog.forwardDeclare('com.googl
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class SimpleLocalClass extends java_lang_Object {
+class SimpleLocalClass extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -78,7 +78,7 @@ class SimpleLocalClass extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -96,7 +96,7 @@ class SimpleLocalClass extends java_lang_Object {
     SimpleLocalClass$1InnerClassWithoutCaptures = goog.module.get(
         'com.google.j2cl.transpiler.readable.simplelocalclass.SimpleLocalClass.$Anonymous1InnerClassWithoutCaptures$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

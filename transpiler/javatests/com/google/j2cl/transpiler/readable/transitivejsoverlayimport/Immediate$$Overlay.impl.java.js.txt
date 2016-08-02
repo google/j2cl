@@ -11,10 +11,12 @@ goog.module('com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Immed
 let Transitive$$Overlay = goog.require('com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Transitive.$Overlay$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+/** @constructor */ let $Immediate = window.Object;
+
 
 class Immediate$$Overlay extends Transitive$$Overlay {
   /**
-   * @param {Object} $thisArg
+   * @param {$Immediate} $thisArg
    * @return {void}
    * @public
    */
@@ -29,7 +31,7 @@ class Immediate$$Overlay extends Transitive$$Overlay {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof Object; }
+  static $isInstance(instance) { return instance instanceof $Immediate; }
 
   /**
    * Runs inline static field initializers.

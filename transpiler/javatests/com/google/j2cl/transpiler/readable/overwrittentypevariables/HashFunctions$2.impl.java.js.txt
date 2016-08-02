@@ -9,11 +9,11 @@ goog.module('com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFu
 
 
 let HashFunction = goog.require('com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction$impl');
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Enum = goog.forwardDeclare('java.lang.Enum$impl');
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
@@ -21,7 +21,7 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @template M_T
  * @implements {HashFunction<M_T>}
  */
-class HashFunctions$2 extends java_lang_Object {
+class HashFunctions$2 extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -81,7 +81,7 @@ class HashFunctions$2 extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -95,9 +95,9 @@ class HashFunctions$2 extends java_lang_Object {
    */
   static $clinit() {
     Enum = goog.module.get('java.lang.Enum$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

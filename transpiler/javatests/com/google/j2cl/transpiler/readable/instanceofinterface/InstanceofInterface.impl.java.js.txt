@@ -8,13 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.instanceofinterface.InstanceofInterface$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Serializable = goog.forwardDeclare('java.io.Serializable$impl');
 
 
-class InstanceofInterface extends java_lang_Object {
+class InstanceofInterface extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -49,7 +49,7 @@ class InstanceofInterface extends java_lang_Object {
    * @public
    */
   m_test__() {
-    let o = java_lang_Object.$create__();
+    let o = Object.$create__();
     return Serializable.$isInstance(o);
   }
 
@@ -65,7 +65,7 @@ class InstanceofInterface extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -79,7 +79,7 @@ class InstanceofInterface extends java_lang_Object {
    */
   static $clinit() {
     Serializable = goog.module.get('java.io.Serializable$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

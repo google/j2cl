@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.autoboxingsideeffect.AutoBoxingSideEffect$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Byte = goog.forwardDeclare('java.lang.Byte$impl');
@@ -18,7 +18,7 @@ let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.primitives.Primitives$impl');
 
 
-class AutoBoxingSideEffect extends java_lang_Object {
+class AutoBoxingSideEffect extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -148,7 +148,7 @@ class AutoBoxingSideEffect extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -166,7 +166,7 @@ class AutoBoxingSideEffect extends java_lang_Object {
     $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     $Primitives = goog.module.get('vmbootstrap.primitives.Primitives$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

@@ -8,20 +8,20 @@
 goog.module('com.google.j2cl.transpiler.readable.genericmethod.GenericMethod$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Error = goog.forwardDeclare('java.lang.Error$impl');
 let Exception = goog.forwardDeclare('java.lang.Exception$impl');
 let Number = goog.forwardDeclare('java.lang.Number$impl');
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 
 /**
  * @template C_T
  */
-class GenericMethod extends java_lang_Object {
+class GenericMethod extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -109,11 +109,11 @@ class GenericMethod extends java_lang_Object {
     g.m_foo__java_lang_Object__java_lang_Object(g, g);
     g.m_foo__java_lang_Object__java_lang_Object(
         Error.$create__(), Exception.$create__());
-    g.m_fun__java_lang_Object(java_lang_Object.$create__());
+    g.m_fun__java_lang_Object(Object.$create__());
     g.m_fun__java_lang_Exception(Exception.$create__());
     g.m_fun__java_lang_Error(Error.$create__());
-    g.m_fun__arrayOf_java_lang_Object(/**@type {!Array<?string>} */ (
-        $Arrays.$init(['asdf'], java_lang_String)));
+    g.m_fun__arrayOf_java_lang_Object(
+        /**@type {!Array<?string>} */ ($Arrays.$init(['asdf'], String)));
   }
 
   /**
@@ -126,7 +126,7 @@ class GenericMethod extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -142,9 +142,9 @@ class GenericMethod extends java_lang_Object {
     Error = goog.module.get('java.lang.Error$impl');
     Exception = goog.module.get('java.lang.Exception$impl');
     Number = goog.module.get('java.lang.Number$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.nativejstypes.Main$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Bar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypes.Bar$$Proxy');
@@ -17,8 +17,10 @@ let Class = goog.forwardDeclare('java.lang.Class$impl');
 let $JavaScriptObject = goog.forwardDeclare('vmbootstrap.JavaScriptObject$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
+/** @constructor */ let $Headers = window.Headers;
 
-class Main extends java_lang_Object {
+
+class Main extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -78,7 +80,7 @@ class Main extends java_lang_Object {
    */
   static m_testGlobalNativeJsType__() {
     Main.$clinit();
-    let header = new Headers();
+    let header = new $Headers();
     header.append('Content-Type', 'text/xml');
   }
 
@@ -89,7 +91,7 @@ class Main extends java_lang_Object {
   static m_testNativeTypeClassLiteral__() {
     Main.$clinit();
     let o1 = Class.$get($JavaScriptObject);
-    o1 = Class.$get(java_lang_Object, 1);
+    o1 = Class.$get(Object, 1);
   }
 
   /**
@@ -102,7 +104,7 @@ class Main extends java_lang_Object {
     $Objects.m_toString__java_lang_Object(bar);
     $Objects.m_hashCode__java_lang_Object(bar);
     $Objects.m_equals__java_lang_Object__java_lang_Object(
-        bar, java_lang_Object.$create__());
+        bar, Object.$create__());
   }
 
   /**
@@ -115,7 +117,7 @@ class Main extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -135,7 +137,7 @@ class Main extends java_lang_Object {
     Class = goog.module.get('java.lang.Class$impl');
     $JavaScriptObject = goog.module.get('vmbootstrap.JavaScriptObject$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

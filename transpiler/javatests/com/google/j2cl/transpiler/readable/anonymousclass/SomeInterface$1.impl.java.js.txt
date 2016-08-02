@@ -11,7 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.anonymousclass.SomeInterface.$A
 let SomeClass = goog.require('com.google.j2cl.transpiler.readable.anonymousclass.SomeClass$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -67,7 +67,7 @@ class SomeInterface$1 extends SomeClass {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -80,7 +80,7 @@ class SomeInterface$1 extends SomeClass {
    * @public
    */
   static $clinit() {
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    String = goog.module.get('java.lang.String$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     SomeClass.$clinit();
   }

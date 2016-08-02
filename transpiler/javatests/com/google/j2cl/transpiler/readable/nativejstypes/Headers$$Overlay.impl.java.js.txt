@@ -10,6 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.nativejstypes.Headers.$Overlay$
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+/** @constructor */ let $Headers = window.Headers;
+
 
 class Headers$$Overlay {
   /**
@@ -18,7 +20,7 @@ class Headers$$Overlay {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof Headers; }
+  static $isInstance(instance) { return instance instanceof $Headers; }
 
   /**
    * Runs inline static field initializers.

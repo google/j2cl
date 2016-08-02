@@ -8,14 +8,14 @@
 goog.module('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.Main$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let MyJsType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType$impl');
 let SubJsType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType$impl');
 
 
-class Main extends java_lang_Object {
+class Main extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -75,7 +75,7 @@ class Main extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -92,7 +92,7 @@ class Main extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJsType$impl');
     SubJsType = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

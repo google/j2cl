@@ -9,7 +9,7 @@ goog.module('com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.B
 
 
 let Main$ApplyFunction = goog.require('com.google.j2cl.transpiler.readable.jsfunctiontypeannotation.Main.ApplyFunction$impl');
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
@@ -20,7 +20,7 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @template C_B_T
  * @implements {Main$ApplyFunction<C_B_T, Integer>}
  */
-class Main$B extends java_lang_Object {
+class Main$B extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -73,7 +73,7 @@ class Main$B extends java_lang_Object {
   m_apply__java_lang_Object__java_lang_Number(arg0, arg1) {
     return Main$B
         .m_apply__com_google_j2cl_transpiler_readable_jsfunctiontypeannotation_Main$B__java_lang_Object__java_lang_Integer(
-            this, /**@type {*} */ ($Casts.to(arg0, java_lang_Object)),
+            this, /**@type {*} */ ($Casts.to(arg0, Object)),
             /**@type {Integer} */ ($Casts.to(arg1, Integer)));
   }
 
@@ -105,7 +105,7 @@ class Main$B extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -132,7 +132,7 @@ class Main$B extends java_lang_Object {
   static $clinit() {
     Integer = goog.module.get('java.lang.Integer$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

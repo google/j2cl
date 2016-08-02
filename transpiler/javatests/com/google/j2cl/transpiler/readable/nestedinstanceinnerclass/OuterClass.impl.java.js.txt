@@ -8,14 +8,14 @@
 goog.module('com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let OuterClass$InnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass$impl');
 let OuterClass$InnerClass$InnerInnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass$impl');
 
 
-class OuterClass extends java_lang_Object {
+class OuterClass extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -67,7 +67,7 @@ class OuterClass extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -84,7 +84,7 @@ class OuterClass extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass$impl');
     OuterClass$InnerClass$InnerInnerClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

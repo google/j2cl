@@ -11,10 +11,12 @@ goog.module('com.google.j2cl.transpiler.readable.transitivejsoverlayimport.NonNa
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Immediate$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Immediate.$Overlay$impl');
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
+
+/** @constructor */ let $Immediate = window.Object;
 
 
-class NonNativeUpper extends Object {
+class NonNativeUpper extends $Immediate {
   /**
    * Real constructor.
    * @public
@@ -84,7 +86,7 @@ class NonNativeUpper extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -99,7 +101,7 @@ class NonNativeUpper extends Object {
   static $clinit() {
     Immediate$$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.transitivejsoverlayimport.Immediate.$Overlay$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    String = goog.module.get('java.lang.String$impl');
   }
 
   /**

@@ -8,14 +8,14 @@
 goog.module('com.google.j2cl.transpiler.readable.devirtualizedcalls.CharSequenceCalls$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let CharSequence = goog.forwardDeclare('java.lang.CharSequence$impl');
 let $CharSequences = goog.forwardDeclare('vmbootstrap.CharSequences$impl');
 
 
-class CharSequenceCalls extends java_lang_Object {
+class CharSequenceCalls extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -73,7 +73,7 @@ class CharSequenceCalls extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -88,7 +88,7 @@ class CharSequenceCalls extends java_lang_Object {
   static $clinit() {
     CharSequence = goog.module.get('java.lang.CharSequence$impl');
     $CharSequences = goog.module.get('vmbootstrap.CharSequences$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

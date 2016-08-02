@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.multiplecatch.MultipleCatch$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let ClassCastException = goog.forwardDeclare('java.lang.ClassCastException$impl');
@@ -17,7 +17,7 @@ let RuntimeException = goog.forwardDeclare('java.lang.RuntimeException$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 
-class MultipleCatch extends java_lang_Object {
+class MultipleCatch extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -78,7 +78,7 @@ class MultipleCatch extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -96,7 +96,7 @@ class MultipleCatch extends java_lang_Object {
         goog.module.get('java.lang.NullPointerException$impl');
     RuntimeException = goog.module.get('java.lang.RuntimeException$impl');
     $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

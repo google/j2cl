@@ -9,7 +9,7 @@ goog.module('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGe
 
 
 let MyInterface = goog.require('com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface$impl');
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let LambdaWithGenerics = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$impl');
@@ -20,7 +20,7 @@ let Error = goog.forwardDeclare('java.lang.Error$impl');
  * @template C_E
  * @implements {MyInterface<Error>}
  */
-class LambdaWithGenerics$1foo extends java_lang_Object {
+class LambdaWithGenerics$1foo extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -90,7 +90,7 @@ class LambdaWithGenerics$1foo extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -106,7 +106,7 @@ class LambdaWithGenerics$1foo extends java_lang_Object {
     LambdaWithGenerics = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$impl');
     Error = goog.module.get('java.lang.Error$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

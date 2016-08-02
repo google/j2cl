@@ -7,7 +7,7 @@ import jsinterop.annotations.JsType;
 @JsType(isNative = true, name = "Array", namespace = JsPackage.GLOBAL)
 public final class NativeArray {
   @JsOverlay
-  public final Object getObject() {
+  public final Object a() {
     return new Object() {};
   }
 }

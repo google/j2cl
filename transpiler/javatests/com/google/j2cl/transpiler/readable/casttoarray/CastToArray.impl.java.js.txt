@@ -8,13 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.casttoarray.CastToArray$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 
-class CastToArray extends java_lang_Object {
+class CastToArray extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -49,10 +49,8 @@ class CastToArray extends java_lang_Object {
    * @public
    */
   m_main__() {
-    let foo =
-        /**@type {Array<*>} */ ($Arrays.$castTo(null, java_lang_Object, 1));
-    let bar = /**@type {Array<Array<*>>} */ (
-        $Arrays.$castTo(null, java_lang_Object, 2));
+    let foo = /**@type {Array<*>} */ ($Arrays.$castTo(null, Object, 1));
+    let bar = /**@type {Array<Array<*>>} */ ($Arrays.$castTo(null, Object, 2));
   }
 
   /**
@@ -65,7 +63,7 @@ class CastToArray extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -79,7 +77,7 @@ class CastToArray extends java_lang_Object {
    */
   static $clinit() {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

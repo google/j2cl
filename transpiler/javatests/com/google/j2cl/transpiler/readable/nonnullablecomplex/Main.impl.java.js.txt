@@ -8,16 +8,16 @@
 goog.module('com.google.j2cl.transpiler.readable.nonnullablecomplex.Main$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let NonNullableExample = goog.forwardDeclare('com.google.j2cl.transpiler.integration.nonnullablecomplex.sub.NonNullableExample$impl');
 let NullableExample = goog.forwardDeclare('com.google.j2cl.transpiler.integration.nonnullablecomplex.sub.NullableExample$impl');
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 
-class Main extends java_lang_Object {
+class Main extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -69,7 +69,7 @@ class Main extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -86,9 +86,9 @@ class Main extends java_lang_Object {
         'com.google.j2cl.transpiler.integration.nonnullablecomplex.sub.NonNullableExample$impl');
     NullableExample = goog.module.get(
         'com.google.j2cl.transpiler.integration.nonnullablecomplex.sub.NullableExample$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

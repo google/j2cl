@@ -45,7 +45,7 @@ import java.util.Set;
  * Traverses a Type, gathers imports for all things it references and creates non colliding local
  * aliases for each import.
  */
-public class ImportGatherer extends AbstractVisitor {
+public class ImportGatheringVisitor extends AbstractVisitor {
 
   /**
    * Enums for describing the category of an import.
@@ -64,7 +64,7 @@ public class ImportGatherer extends AbstractVisitor {
     EAGER,
     EXTERN,
     LAZY,
-    SELF,
+    SELF
   }
 
   private static String computeLongAliasName(TypeDescriptor typeDescriptor) {
@@ -74,7 +74,7 @@ public class ImportGatherer extends AbstractVisitor {
   public static Map<ImportCategory, Set<Import>> gatherImports(Type type) {
     TimingCollector.get().startSubSample("Import Gathering Visitor");
 
-    Map<ImportCategory, Set<Import>> map = new ImportGatherer().doGatherImports(type);
+    Map<ImportCategory, Set<Import>> map = new ImportGatheringVisitor().doGatherImports(type);
     TimingCollector.get().endSubSample();
     return map;
   }
@@ -93,7 +93,7 @@ public class ImportGatherer extends AbstractVisitor {
   private final Multimap<ImportCategory, TypeDescriptor> typeDescriptorsByCategory =
       LinkedHashMultimap.create();
 
-  private ImportGatherer() {}
+  private ImportGatheringVisitor() {}
 
   @Override
   public void exitAssertStatement(AssertStatement assertStatement) {
@@ -290,8 +290,6 @@ public class ImportGatherer extends AbstractVisitor {
     importsByCategory.put(
         ImportCategory.EXTERN,
         toImports((Set<TypeDescriptor>) typeDescriptorsByCategory.get(ImportCategory.EXTERN)));
-    // Creates an alias for the current type, last, to make sure that its name dodges externs
-    // when necessary.
     importsByCategory.put(
         ImportCategory.SELF,
         toImports((Set<TypeDescriptor>) typeDescriptorsByCategory.get(ImportCategory.SELF)));
@@ -324,15 +322,7 @@ public class ImportGatherer extends AbstractVisitor {
 
   private void recordLocalNameUses(Set<TypeDescriptor> typeDescriptors) {
     for (TypeDescriptor typeDescriptor : typeDescriptors) {
-      if (typeDescriptor.isExtern()) {
-        // Reserve the top qualifier for externs to avoid clashes. Externs are qualified names such
-        // as window.String, for that scenario only the top level qualifier "window" needs to be
-        // avoided.
-        String topLevelExtern = typeDescriptor.getQualifiedName().split("\\.")[0];
-        localNameUses.add(topLevelExtern);
-      } else {
-        localNameUses.add(getShortAliasName(typeDescriptor));
-      }
+      localNameUses.add(getShortAliasName(typeDescriptor));
     }
   }
 
@@ -341,20 +331,11 @@ public class ImportGatherer extends AbstractVisitor {
     for (TypeDescriptor typeDescriptor : typeDescriptors) {
       Preconditions.checkState(!typeDescriptor.isTypeVariable());
       Preconditions.checkState(typeDescriptor.isNative() || !typeDescriptor.isParameterizedType());
-      imports.add(new Import(computeAlias(typeDescriptor), typeDescriptor));
+      String shortAliasName = getShortAliasName(typeDescriptor);
+      int usageCount = localNameUses.count(shortAliasName);
+      String aliasName = usageCount == 1 ? shortAliasName : computeLongAliasName(typeDescriptor);
+      imports.add(new Import(aliasName, typeDescriptor));
     }
     return imports;
-  }
-
-  private String computeAlias(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor.isExtern()) {
-      return typeDescriptor.getQualifiedName();
-    }
-
-    String shortAliasName = getShortAliasName(typeDescriptor);
-    int usageCount = localNameUses.count(shortAliasName);
-    return usageCount == 1 && JsProtectedNames.isLegalName(shortAliasName)
-        ? shortAliasName
-        : computeLongAliasName(typeDescriptor);
   }
 }

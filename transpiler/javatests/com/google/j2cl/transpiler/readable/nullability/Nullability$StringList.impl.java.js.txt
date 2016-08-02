@@ -11,7 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.nullability.Nullability.StringL
 let ArrayList = goog.require('java.util.ArrayList$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 let Collection$$Overlay = goog.forwardDeclare('java.util.Collection.$Overlay$impl');
 let List$$Overlay = goog.forwardDeclare('java.util.List.$Overlay$impl');
 let Spliterator = goog.forwardDeclare('java.util.Spliterator$impl');
@@ -93,7 +93,7 @@ class Nullability$StringList extends ArrayList {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -106,7 +106,7 @@ class Nullability$StringList extends ArrayList {
    * @public
    */
   static $clinit() {
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    String = goog.module.get('java.lang.String$impl');
     Collection$$Overlay = goog.module.get('java.util.Collection.$Overlay$impl');
     List$$Overlay = goog.module.get('java.util.List.$Overlay$impl');
     Spliterator = goog.module.get('java.util.Spliterator$impl');

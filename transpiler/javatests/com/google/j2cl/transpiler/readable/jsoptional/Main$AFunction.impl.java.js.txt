@@ -9,17 +9,17 @@ goog.module('com.google.j2cl.transpiler.readable.jsoptional.Main.AFunction$impl'
 
 
 let Main$Function = goog.require('com.google.j2cl.transpiler.readable.jsoptional.Main.Function$impl');
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 
 /**
  * @implements {Main$Function}
  */
-class Main$AFunction extends java_lang_Object {
+class Main$AFunction extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -62,7 +62,7 @@ class Main$AFunction extends java_lang_Object {
    */
   m_f1__java_lang_String__arrayOf_java_lang_Object(i, args) {
     let $var_args_copy = /**@type {!Array<*>} */ (
-        $Arrays.$create([arguments.length - 1], java_lang_Object));
+        $Arrays.$create([arguments.length - 1], Object));
     for (let $i = 0; $i < arguments.length - 1; $i++) {
       $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
     }
@@ -83,7 +83,7 @@ class Main$AFunction extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -108,9 +108,9 @@ class Main$AFunction extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

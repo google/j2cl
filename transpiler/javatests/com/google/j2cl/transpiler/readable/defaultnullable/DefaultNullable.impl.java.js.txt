@@ -8,18 +8,18 @@
 goog.module('com.google.j2cl.transpiler.readable.defaultnullable.DefaultNullable$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Double = goog.forwardDeclare('java.lang.Double$impl');
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 let Void = goog.forwardDeclare('java.lang.Void$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let List = goog.forwardDeclare('java.util.List$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 
-class DefaultNullable extends java_lang_Object {
+class DefaultNullable extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -107,7 +107,7 @@ class DefaultNullable extends java_lang_Object {
    */
   m3(args) {
     let $var_args_copy = /**@type {!Array<?string>} */ (
-        $Arrays.$create([arguments.length], java_lang_String));
+        $Arrays.$create([arguments.length], String));
     for (let $i = 0; $i < arguments.length; $i++) {
       $Arrays.$set($var_args_copy, $i, arguments[$i]);
     }
@@ -123,7 +123,7 @@ class DefaultNullable extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -137,12 +137,12 @@ class DefaultNullable extends java_lang_Object {
    */
   static $clinit() {
     Double = goog.module.get('java.lang.Double$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    String = goog.module.get('java.lang.String$impl');
     Void = goog.module.get('java.lang.Void$impl');
     ArrayList = goog.module.get('java.util.ArrayList$impl');
     List = goog.module.get('java.util.List$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**
@@ -165,11 +165,11 @@ class DefaultNullable extends java_lang_Object {
     this.f_f7__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ =
         null;
     this.f_f8__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ =
-        /**@type {!Array<?string>} */ ($Arrays.$init([], java_lang_String));
+        /**@type {!Array<?string>} */ ($Arrays.$init([], String));
     this.f_f9__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ =
-        /**@type {!Array<?string>} */ ($Arrays.$init([], java_lang_String));
+        /**@type {!Array<?string>} */ ($Arrays.$init([], String));
     this.f_f10__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ =
-        /**@type {!Array<?string>} */ ($Arrays.$init([], java_lang_String));
+        /**@type {!Array<?string>} */ ($Arrays.$init([], String));
     this.f_f11__com_google_j2cl_transpiler_readable_defaultnullable_DefaultNullable_ =
         null;
   }

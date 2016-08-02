@@ -10,8 +10,10 @@ goog.module('com.google.j2cl.transpiler.readable.jsmethod.JsMethodExample.$Overl
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+/** @constructor */ let $JsMethodExample = window.console;
 
 
 class JsMethodExample$$Overlay {
@@ -22,7 +24,7 @@ class JsMethodExample$$Overlay {
    */
   static m_main__arrayOf_java_lang_String(args) {
     JsMethodExample$$Overlay.$clinit();
-    console.log('test');
+    $JsMethodExample.log('test');
   }
 
   /**
@@ -31,14 +33,14 @@ class JsMethodExample$$Overlay {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof console; }
+  static $isInstance(instance) { return instance instanceof $JsMethodExample; }
 
   /**
    * Runs inline static field initializers.
    * @public
    */
   static $clinit() {
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
   }
 };

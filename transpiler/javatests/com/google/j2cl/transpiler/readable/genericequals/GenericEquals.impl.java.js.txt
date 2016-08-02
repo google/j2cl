@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.genericequals.GenericEquals$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
@@ -19,7 +19,7 @@ let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 /**
  * @template C_T
  */
-class GenericEquals extends java_lang_Object {
+class GenericEquals extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -91,7 +91,7 @@ class GenericEquals extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -107,7 +107,7 @@ class GenericEquals extends java_lang_Object {
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

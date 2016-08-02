@@ -23,8 +23,8 @@ import com.google.j2cl.ast.sourcemap.SourcePosition;
 import com.google.j2cl.common.TimingCollector;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;
-import com.google.j2cl.generator.visitors.ImportGatherer;
-import com.google.j2cl.generator.visitors.ImportGatherer.ImportCategory;
+import com.google.j2cl.generator.visitors.ImportGatheringVisitor;
+import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -213,7 +213,7 @@ public class OutputGeneratorStage {
   private void gatherDepinfo(
       Type type, Set<String> importModulePaths, Set<String> exportModulePaths) {
     // Gather imports.
-    Map<ImportCategory, Set<Import>> importsByCategory = ImportGatherer.gatherImports(type);
+    Map<ImportCategory, Set<Import>> importsByCategory = ImportGatheringVisitor.gatherImports(type);
     for (ImportCategory importCategory : ImportCategory.values()) {
       // Don't record use of the environment, it is not considered a dependency.
       if (importCategory == ImportCategory.EXTERN) {

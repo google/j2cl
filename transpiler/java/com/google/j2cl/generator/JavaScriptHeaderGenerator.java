@@ -20,7 +20,8 @@ import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;
-import com.google.j2cl.generator.visitors.ImportGatherer.ImportCategory;
+import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
+import com.google.j2cl.generator.visitors.ImportUtils;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -66,7 +67,7 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
 
     Set<String> requiredPaths = new HashSet<>();
     // goog.require(...) for eager imports.
-    for (Import eagerImport : sortImports(importsByCategory.get(ImportCategory.EAGER))) {
+    for (Import eagerImport : ImportUtils.sortedList(importsByCategory.get(ImportCategory.EAGER))) {
       String alias = eagerImport.getAlias();
       String path = eagerImport.getHeaderModulePath();
       if (requiredPaths.add(path)) {
@@ -74,9 +75,9 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
       }
     }
     // goog.require(...) for lazy imports.
-    for (Import lazyImport : sortImports(importsByCategory.get(ImportCategory.LAZY))) {
-      String alias = lazyImport.getAlias();
-      String path = lazyImport.getHeaderModulePath();
+    for (Import eagerImport : ImportUtils.sortedList(importsByCategory.get(ImportCategory.LAZY))) {
+      String alias = eagerImport.getAlias();
+      String path = eagerImport.getHeaderModulePath();
       if (requiredPaths.add(path)) {
         sourceBuilder.appendln("let _" + alias + " = goog.require('" + path + "');");
       }

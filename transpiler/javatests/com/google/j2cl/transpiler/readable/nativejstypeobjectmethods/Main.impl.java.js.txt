@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Main$NativeJsTypeWithToString = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.NativeJsTypeWithToString$$Proxy');
@@ -16,7 +16,7 @@ let Main$NativeJsTypeWithoutToString = goog.forwardDeclare('com.google.j2cl.tran
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
-class Main extends java_lang_Object {
+class Main extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -72,7 +72,7 @@ class Main extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -90,7 +90,7 @@ class Main extends java_lang_Object {
     Main$NativeJsTypeWithoutToString = goog.module.get(
         'com.google.j2cl.transpiler.readable.nativejstypeobjectmethods.Main.NativeJsTypeWithoutToString$$Proxy');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

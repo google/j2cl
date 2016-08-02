@@ -11,16 +11,18 @@ goog.module('com.google.j2cl.transpiler.readable.nestednativetype.NativeArray.$O
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let NativeArray$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.nestednativetype.NativeArray.$Anonymous1$impl');
-let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+let Object = goog.forwardDeclare('java.lang.Object$impl');
+
+/** @constructor */ let $NativeArray = window.Array;
 
 
 class NativeArray$$Overlay {
   /**
-   * @param {Array} $thisArg
+   * @param {$NativeArray} $thisArg
    * @return {*}
    * @public
    */
-  static m_getObject__com_google_j2cl_transpiler_readable_nestednativetype_NativeArray(
+  static m_a__com_google_j2cl_transpiler_readable_nestednativetype_NativeArray(
       $thisArg) {
     NativeArray$$Overlay.$clinit();
     return NativeArray$1
@@ -34,7 +36,7 @@ class NativeArray$$Overlay {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof Array; }
+  static $isInstance(instance) { return instance instanceof $NativeArray; }
 
   /**
    * Runs inline static field initializers.
@@ -43,7 +45,7 @@ class NativeArray$$Overlay {
   static $clinit() {
     NativeArray$1 = goog.module.get(
         'com.google.j2cl.transpiler.readable.nestednativetype.NativeArray.$Anonymous1$impl');
-    java_lang_Object = goog.module.get('java.lang.Object$impl');
+    Object = goog.module.get('java.lang.Object$impl');
   }
 };
 

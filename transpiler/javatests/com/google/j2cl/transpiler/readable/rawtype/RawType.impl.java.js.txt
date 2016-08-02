@@ -8,13 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.rawtype.RawType$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 
 
-class RawType extends java_lang_Object {
+class RawType extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -57,7 +57,7 @@ class RawType extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -71,7 +71,7 @@ class RawType extends java_lang_Object {
    */
   static $clinit() {
     Comparable = goog.module.get('java.lang.Comparable$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

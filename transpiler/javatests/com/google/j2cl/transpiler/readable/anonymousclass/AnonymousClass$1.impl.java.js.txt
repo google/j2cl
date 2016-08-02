@@ -12,7 +12,7 @@ let SomeClass = goog.require('com.google.j2cl.transpiler.readable.anonymousclass
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let AnonymousClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass$impl');
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -78,7 +78,7 @@ class AnonymousClass$1 extends SomeClass {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -93,7 +93,7 @@ class AnonymousClass$1 extends SomeClass {
   static $clinit() {
     AnonymousClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.anonymousclass.AnonymousClass$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    String = goog.module.get('java.lang.String$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     SomeClass.$clinit();
   }

@@ -10,8 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.B
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.Function$impl');
-let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+let Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.Function$impl');
+let Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
 /**
@@ -30,7 +30,7 @@ class BiFunction {
 
   /**
    * @template M_V
-   * @param {com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function<?, ?>} after
+   * @param {Function<?, ?>} after
    * @return {BiFunction<C_T, C_U, M_V>}
    * @public
    */
@@ -54,7 +54,7 @@ class BiFunction {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -81,7 +81,7 @@ class BiFunction {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -96,10 +96,9 @@ class BiFunction {
    * @public
    */
   static $clinit() {
-    com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function =
-        goog.module.get(
-            'com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.Function$impl');
-    java_lang_Object = goog.module.get('java.lang.Object$impl');
+    Function = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.Function$impl');
+    Object = goog.module.get('java.lang.Object$impl');
   }
 };
 
@@ -108,7 +107,7 @@ $Util.$setClassMetadataForInterface(
     'com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction');
 
 
-BiFunction.$markImplementor(/** @type {Function} */ (BiFunction));
+BiFunction.$markImplementor(/** @type {window.Function} */ (BiFunction));
 
 
 /**

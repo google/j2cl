@@ -8,13 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let LambdaNoReturn$0run = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn.$Anonymous0run$impl');
 
 
-class LambdaNoReturn extends java_lang_Object {
+class LambdaNoReturn extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -65,7 +65,7 @@ class LambdaNoReturn extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -80,7 +80,7 @@ class LambdaNoReturn extends java_lang_Object {
   static $clinit() {
     LambdaNoReturn$0run = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn.$Anonymous0run$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

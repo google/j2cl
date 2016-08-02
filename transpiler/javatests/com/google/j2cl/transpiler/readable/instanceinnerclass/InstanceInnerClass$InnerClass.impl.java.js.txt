@@ -8,14 +8,14 @@
 goog.module('com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass.InnerClass$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let InstanceInnerClass = goog.forwardDeclare('com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class InstanceInnerClass$InnerClass extends java_lang_Object {
+class InstanceInnerClass$InnerClass extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -86,7 +86,7 @@ class InstanceInnerClass$InnerClass extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -102,7 +102,7 @@ class InstanceInnerClass$InnerClass extends java_lang_Object {
     InstanceInnerClass = goog.module.get(
         'com.google.j2cl.transpiler.readable.instanceinnerclass.InstanceInnerClass$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

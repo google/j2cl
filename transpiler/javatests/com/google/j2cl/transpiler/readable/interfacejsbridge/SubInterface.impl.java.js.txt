@@ -32,7 +32,7 @@ class SubInterface {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -61,7 +61,7 @@ class SubInterface {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -85,7 +85,7 @@ $Util.$setClassMetadataForInterface(
     'com.google.j2cl.transpiler.readable.interfacejsbridge.SubInterface');
 
 
-SubInterface.$markImplementor(/** @type {Function} */ (SubInterface));
+SubInterface.$markImplementor(/** @type {window.Function} */ (SubInterface));
 
 
 /**

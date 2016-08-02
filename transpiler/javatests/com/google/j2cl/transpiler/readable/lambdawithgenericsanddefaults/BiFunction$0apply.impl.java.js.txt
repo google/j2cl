@@ -9,27 +9,25 @@ goog.module('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.B
 
 
 let BiFunction = goog.require('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction$impl');
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let BiFunction$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction.$Overlay$impl');
-let com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.Function$impl');
+let Function = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.Function$impl');
 
 
 /**
  * @template C_T, C_U, M_V, C_R
  * @implements {BiFunction<C_T, C_U, M_V>}
  */
-class BiFunction$0apply extends java_lang_Object {
+class BiFunction$0apply extends Object {
   /**
    * Defines instance fields.
    * @public
    */
   constructor() {
     super();
-    /** @public
-     * {com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function<?,
-     * ?>} */
+    /** @public {Function<?, ?>} */
     this.$c_after = null;
     /** @public {BiFunction<C_T, C_U, C_R>} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_BiFunction$0apply =
@@ -39,7 +37,7 @@ class BiFunction$0apply extends java_lang_Object {
   /**
    * A particular Java constructor as a factory method.
    * @template C_T, C_U, M_V, C_R
-   * @param {com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function<?, ?>} $c_after
+   * @param {Function<?, ?>} $c_after
    * @param {BiFunction<C_T, C_U, C_R>} $outer_this
    * @return {!BiFunction$0apply<C_T, C_U, M_V, C_R>}
    * @public
@@ -56,7 +54,7 @@ class BiFunction$0apply extends java_lang_Object {
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function<?, ?>} $c_after
+   * @param {Function<?, ?>} $c_after
    * @param {BiFunction<C_T, C_U, C_R>} $outer_this
    * @return {void}
    * @public
@@ -97,7 +95,7 @@ class BiFunction$0apply extends java_lang_Object {
    * Default method forwarding stub.
    * @override
    * @template M_V
-   * @param {com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function<?, ?>} arg0
+   * @param {Function<?, ?>} arg0
    * @return {BiFunction<C_T, C_U, M_V>}
    * @public
    */
@@ -118,7 +116,7 @@ class BiFunction$0apply extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -133,10 +131,9 @@ class BiFunction$0apply extends java_lang_Object {
   static $clinit() {
     BiFunction$$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.BiFunction.$Overlay$impl');
-    com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function =
-        goog.module.get(
-            'com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.Function$impl');
-    java_lang_Object.$clinit();
+    Function = goog.module.get(
+        'com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.Function$impl');
+    Object.$clinit();
   }
 
   /**

@@ -8,13 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.circularimportuse.Right$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Left = goog.forwardDeclare('com.google.j2cl.transpiler.readable.circularimportuse.Left$impl');
 
 
-class Right extends java_lang_Object {
+class Right extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -62,7 +62,7 @@ class Right extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -77,7 +77,7 @@ class Right extends java_lang_Object {
   static $clinit() {
     Left = goog.module.get(
         'com.google.j2cl.transpiler.readable.circularimportuse.Left$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

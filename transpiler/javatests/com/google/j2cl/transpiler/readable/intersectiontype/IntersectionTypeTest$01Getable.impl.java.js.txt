@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTy
 
 let Getable = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.Getable$impl');
 let Setable = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.Setable$impl');
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
@@ -22,7 +22,7 @@ let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
  * @implements {Getable<M_T>}
  * @implements {Setable}
  */
-class IntersectionTypeTest$01Getable extends java_lang_Object {
+class IntersectionTypeTest$01Getable extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -58,7 +58,7 @@ class IntersectionTypeTest$01Getable extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -73,7 +73,7 @@ class IntersectionTypeTest$01Getable extends java_lang_Object {
    */
   static $clinit() {
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

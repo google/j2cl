@@ -19,6 +19,6 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 
 public class Helper {
-  @JsProperty(name = "window.MyClassExport", namespace = JsPackage.GLOBAL)
+  @JsProperty(name = "MyClassExport", namespace = JsPackage.GLOBAL)
   public static native String getExportedString();
 }

@@ -8,25 +8,27 @@
 goog.module('com.google.j2cl.transpiler.readable.nestednativetype.NativeArray.$Anonymous1$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+/** @constructor */ let $NativeArray = window.Array;
 
-class NativeArray$1 extends java_lang_Object {
+
+class NativeArray$1 extends Object {
   /**
    * Defines instance fields.
    * @public
    */
   constructor() {
     super();
-    /** @public {Array} */
+    /** @public {$NativeArray} */
     this.f_$outer_this__com_google_j2cl_transpiler_readable_nestednativetype_NativeArray$1 =
         null;
   }
 
   /**
    * A particular Java constructor as a factory method.
-   * @param {Array} $outer_this
+   * @param {$NativeArray} $outer_this
    * @return {!NativeArray$1}
    * @public
    */
@@ -42,7 +44,7 @@ class NativeArray$1 extends java_lang_Object {
 
   /**
    * Initializes instance fields for a particular Java constructor.
-   * @param {Array} $outer_this
+   * @param {$NativeArray} $outer_this
    * @return {void}
    * @public
    */
@@ -64,7 +66,7 @@ class NativeArray$1 extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -76,7 +78,7 @@ class NativeArray$1 extends java_lang_Object {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { java_lang_Object.$clinit(); }
+  static $clinit() { Object.$clinit(); }
 
   /**
    * Runs instance field and block initializers.

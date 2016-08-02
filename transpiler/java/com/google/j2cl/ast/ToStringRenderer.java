@@ -233,7 +233,7 @@ class ToStringRenderer {
 
       @Override
       public boolean enterForStatement(ForStatement forStatement) {
-        print("for (");
+        print(" for (");
         printSeparated(",", forStatement.getInitializers());
         print(";");
         accept(forStatement.getConditionExpression());
@@ -246,7 +246,7 @@ class ToStringRenderer {
 
       @Override
       public boolean enterFunctionExpression(FunctionExpression functionExpression) {
-        print("function (");
+        print(" function (");
         printSeparated(",", functionExpression.getParameters());
         print(")");
         accept(functionExpression.getBody());
@@ -346,7 +346,7 @@ class ToStringRenderer {
 
       @Override
       public boolean enterNewInstance(NewInstance newInstance) {
-        print("new ");
+        print(" new ");
         printInvocation(newInstance, newInstance.getTarget().getName());
         return false;
       }
@@ -510,8 +510,9 @@ class ToStringRenderer {
           print(interfaceTypeDescriptor);
         }
         print(" {");
-        indent();
         newLine();
+        indent();
+
         for (Member member : type.getMembers()) {
           accept(member);
           newLine();
@@ -519,7 +520,6 @@ class ToStringRenderer {
 
         unIndent();
         newLine();
-        print("}");
         return false;
       }
 

@@ -12,7 +12,7 @@ let MultipleAbstractParents$AbstractList2 = goog.require('com.google.j2cl.transp
 let MultipleAbstractParents$IStringList = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 
 
 /**
@@ -70,7 +70,7 @@ class MultipleAbstractParents$AbstractStringList2 extends
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -84,7 +84,7 @@ class MultipleAbstractParents$AbstractStringList2 extends
    * @public
    */
   static $clinit() {
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    String = goog.module.get('java.lang.String$impl');
     MultipleAbstractParents$AbstractList2.$clinit();
   }
 

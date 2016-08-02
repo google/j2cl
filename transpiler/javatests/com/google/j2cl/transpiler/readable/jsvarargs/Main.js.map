@@ -35,7 +35,7 @@
 [UNKNOWN] => [$Arrays.$set($var_args_copy, $i, arguments[$i]);]
 [return this.field + numbers[1];] => [return this.f_field__com_google_j2cl_transpiler_readable_jsvarargs_Main + $var_args_copy[1];]
 [UNKNOWN] => [Main.$clinit();]
-[UNKNOWN] => [let $var_args_copy = /**@type {!Array<*>} */ ($Arrays.$create([arguments.length], java_lang_Object));]
+[UNKNOWN] => [let $var_args_copy = /**@type {!Array<*>} */ ($Arrays.$create([arguments.length], Object));]
 [UNKNOWN] => [for (let $i = 0; $i < arguments.length; $i++) {
       $Arrays.$set($var_args_copy, $i, arguments[$i]);
     }]
@@ -95,8 +95,8 @@
 [int[] ints = new int[] {1, 2};] => [let ints = /**@type {!Array<number>} */ ($Arrays.$init([1, 2], $int));]
 [m.f4(ints);] => [m.f4(...$Arrays.$checkNotNull(ints));]
 [AFunction a = new AFunction();] => [let a = Main$AFunction.$create__();]
-[Object o1 = new Object();] => [let o1 = java_lang_Object.$create__();]
-[Object o2 = new Object();] => [let o2 = java_lang_Object.$create__();]
+[Object o1 = new Object();] => [let o1 = Object.$create__();]
+[Object o2 = new Object();] => [let o2 = Object.$create__();]
 [a.f1(0, o1, o2);] => [a(0, o1, o2);]
 [a.f1(0);] => [a(0);]
 [a.f1(0, new Object[] {o1, o2});] => [a(0, o1, o2);]

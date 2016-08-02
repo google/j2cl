@@ -13,10 +13,12 @@ let $Util = goog.require('nativebootstrap.Util$impl');
 let MyJsFunctionImpl = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
+/** @constructor */ let $JsArray = window.Array;
+
 
 class JsArray$$Overlay {
   /**
-   * @param {Array} $thisArg
+   * @param {$JsArray} $thisArg
    * @return {void}
    * @public
    */
@@ -32,7 +34,7 @@ class JsArray$$Overlay {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof Array; }
+  static $isInstance(instance) { return instance instanceof $JsArray; }
 
   /**
    * Runs inline static field initializers.

@@ -8,14 +8,16 @@
 goog.module('com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArrays$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let BoundedJsArray$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArray.$Overlay$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
+/** @constructor */ let $BoundedJsArray = window.Array;
 
-class BoundedJsArrays extends java_lang_Object {
+
+class BoundedJsArrays extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -47,7 +49,7 @@ class BoundedJsArrays extends java_lang_Object {
 
   /**
    * @template M_V
-   * @return {Array<M_V>}
+   * @return {$BoundedJsArray<M_V>}
    * @public
    */
   static m_create__() {
@@ -58,7 +60,7 @@ class BoundedJsArrays extends java_lang_Object {
   /**
    * @template M_V
    * @param {number} size
-   * @return {Array<M_V>}
+   * @return {$BoundedJsArray<M_V>}
    * @public
    */
   static m_createWithSize__int(size) {
@@ -76,7 +78,7 @@ class BoundedJsArrays extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -92,7 +94,7 @@ class BoundedJsArrays extends java_lang_Object {
     BoundedJsArray$$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArray.$Overlay$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

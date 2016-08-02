@@ -10,6 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+/** @constructor */ let $StaticJsMembers$Native = window.Object;
+
 
 class StaticJsMembers$Native$$Overlay {
   /**
@@ -18,7 +20,9 @@ class StaticJsMembers$Native$$Overlay {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof Object; }
+  static $isInstance(instance) {
+    return instance instanceof $StaticJsMembers$Native;
+  }
 
   /**
    * Runs inline static field initializers.

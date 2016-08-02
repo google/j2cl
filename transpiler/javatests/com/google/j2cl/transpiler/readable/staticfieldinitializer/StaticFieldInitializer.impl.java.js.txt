@@ -8,13 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.staticfieldinitializer.StaticFieldInitializer$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class StaticFieldInitializer extends java_lang_Object {
+class StaticFieldInitializer extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -56,7 +56,7 @@ class StaticFieldInitializer extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -127,7 +127,7 @@ class StaticFieldInitializer extends java_lang_Object {
   static $clinit() {
     StaticFieldInitializer.$clinit = function() {};
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
     StaticFieldInitializer
         .$f_a__com_google_j2cl_transpiler_readable_staticfieldinitializer_StaticFieldInitializer =
         2;

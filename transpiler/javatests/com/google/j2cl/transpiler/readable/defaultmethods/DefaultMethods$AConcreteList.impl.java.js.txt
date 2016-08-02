@@ -9,7 +9,7 @@ goog.module('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.A
 
 
 let DefaultMethods$List = goog.require('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List$impl');
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let DefaultMethods$List$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List.$Overlay$impl');
@@ -19,7 +19,7 @@ let DefaultMethods$List$$Overlay = goog.forwardDeclare('com.google.j2cl.transpil
  * @template C_AConcreteList_T
  * @implements {DefaultMethods$List<C_AConcreteList_T>}
  */
-class DefaultMethods$AConcreteList extends java_lang_Object {
+class DefaultMethods$AConcreteList extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -75,7 +75,7 @@ class DefaultMethods$AConcreteList extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -90,7 +90,7 @@ class DefaultMethods$AConcreteList extends java_lang_Object {
   static $clinit() {
     DefaultMethods$List$$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.defaultmethods.DefaultMethods.List.$Overlay$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

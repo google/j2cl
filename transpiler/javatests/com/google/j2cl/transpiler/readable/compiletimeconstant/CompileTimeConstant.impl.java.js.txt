@@ -8,19 +8,19 @@
 goog.module('com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTimeConstant$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 let $LongUtils = goog.require('vmbootstrap.LongUtils$impl');
 
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 let $char = goog.forwardDeclare('vmbootstrap.primitives.$char$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 
 
-class CompileTimeConstant extends java_lang_Object {
+class CompileTimeConstant extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -91,7 +91,7 @@ class CompileTimeConstant extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -104,12 +104,12 @@ class CompileTimeConstant extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    String = goog.module.get('java.lang.String$impl');
     $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
     $char = goog.module.get('vmbootstrap.primitives.$char$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     $long = goog.module.get('vmbootstrap.primitives.$long$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

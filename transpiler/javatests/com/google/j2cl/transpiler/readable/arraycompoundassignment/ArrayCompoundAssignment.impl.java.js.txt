@@ -8,14 +8,14 @@
 goog.module('com.google.j2cl.transpiler.readable.arraycompoundassignment.ArrayCompoundAssignment$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class ArrayCompoundAssignment extends java_lang_Object {
+class ArrayCompoundAssignment extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -76,7 +76,7 @@ class ArrayCompoundAssignment extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -91,7 +91,7 @@ class ArrayCompoundAssignment extends java_lang_Object {
   static $clinit() {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

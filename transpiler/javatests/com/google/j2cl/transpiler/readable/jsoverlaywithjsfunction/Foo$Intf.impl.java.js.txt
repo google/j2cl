@@ -26,7 +26,7 @@ class Foo$Intf {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -51,7 +51,7 @@ class Foo$Intf {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -75,7 +75,7 @@ $Util.$setClassMetadataForInterface(
     'com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo$Intf');
 
 
-Foo$Intf.$markImplementor(/** @type {Function} */ (Foo$Intf));
+Foo$Intf.$markImplementor(/** @type {window.Function} */ (Foo$Intf));
 
 
 /**

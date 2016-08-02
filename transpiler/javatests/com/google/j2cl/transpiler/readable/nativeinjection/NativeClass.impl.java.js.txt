@@ -8,13 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.nativeinjection.NativeClass$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 
 
-class NativeClass extends java_lang_Object {
+class NativeClass extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -66,7 +66,7 @@ class NativeClass extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -79,8 +79,8 @@ class NativeClass extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    java_lang_String = goog.module.get('java.lang.String$impl');
-    java_lang_Object.$clinit();
+    String = goog.module.get('java.lang.String$impl');
+    Object.$clinit();
   }
 
   /**
@@ -100,7 +100,7 @@ $Util.$setClassMetadata(
  * Native Method Injection
  */
 // Alias for the class defined in this module
-const __class = NativeClass;
+/** @constructor */ let __class = NativeClass;
 /**
  * Replaces the native instance method 'nativeInstanceMethod' in NativeClass.
  * @return {string}

@@ -8,14 +8,14 @@
 goog.module('com.google.j2cl.transpiler.readable.devirtualizedcalls.StringCalls$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
-class StringCalls extends java_lang_Object {
+class StringCalls extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -51,10 +51,9 @@ class StringCalls extends java_lang_Object {
    */
   m_main__() {
     let literal = 'String';
-    let sub = java_lang_String.m_substring__java_lang_String__int(literal, 1);
-    let sub2 =
-        java_lang_String.m_substring__java_lang_String__int__int(literal, 2, 3);
-    let trimmed = java_lang_String.m_trim__java_lang_String(literal);
+    let sub = String.m_substring__java_lang_String__int(literal, 1);
+    let sub2 = String.m_substring__java_lang_String__int__int(literal, 2, 3);
+    let trimmed = String.m_trim__java_lang_String(literal);
     let newString = $Objects.m_toString__java_lang_Object(literal);
   }
 
@@ -68,7 +67,7 @@ class StringCalls extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -81,9 +80,9 @@ class StringCalls extends java_lang_Object {
    * @public
    */
   static $clinit() {
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    String = goog.module.get('java.lang.String$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

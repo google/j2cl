@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.intersectiontype.IntersectionTy
 
 let Cmp = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.Cmp$impl');
 let Serial = goog.require('com.google.j2cl.transpiler.readable.intersectiontype.Serial$impl');
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 
@@ -19,7 +19,7 @@ let $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {Cmp}
  * @implements {Serial}
  */
-class IntersectionTypeTest$04Cmp extends java_lang_Object {
+class IntersectionTypeTest$04Cmp extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -46,7 +46,7 @@ class IntersectionTypeTest$04Cmp extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -58,7 +58,7 @@ class IntersectionTypeTest$04Cmp extends java_lang_Object {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { java_lang_Object.$clinit(); }
+  static $clinit() { Object.$clinit(); }
 
   /**
    * Runs instance field and block initializers.

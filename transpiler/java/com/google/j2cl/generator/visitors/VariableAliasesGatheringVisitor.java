@@ -16,16 +16,17 @@
 package com.google.j2cl.generator.visitors;
 
 import com.google.common.base.Function;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.Variable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Traverses a Type and gathers variable names in each method and creates non colliding local
@@ -33,63 +34,70 @@ import java.util.Set;
  */
 public class VariableAliasesGatheringVisitor extends AbstractVisitor {
   private static final String VARIABLE_PREFIX = "l_";
+  private List<String> importAliases = new ArrayList<>();
+  private Multimap<Member, String> variableNamesByMember = HashMultimap.create();
+  private Map<Variable, String> aliasByVariable = new HashMap<>();
+
+  /**
+   * Visitor class that is used to collect all variable names in each method.
+   */
+  private class VariableNamesCollector extends AbstractVisitor {
+    @Override
+    public void exitVariable(Variable variable) {
+      variableNamesByMember.put(getCurrentMember(), variable.getName());
+    }
+  }
+
+  @Override
+  public void exitVariable(Variable variable) {
+    if (aliasByVariable.containsKey(variable) || variable.isRaw()) {
+      return;
+    }
+    String variableName = variable.getName();
+    if (importAliases.contains(variableName) || JsProtectedNames.isKeyword(variableName)) {
+      // add prefix "l_" to the local variable whose name collides with an import alias
+      // or collides with a JavaScript keyword.
+      variableName = VARIABLE_PREFIX + variableName;
+      while (variableNamesByMember.containsEntry(getCurrentMember(), variableName)) {
+        // add more prefix to ensure the alias does not collide with other local variables.
+        variableName = VARIABLE_PREFIX + variableName;
+      }
+      aliasByVariable.put(variable, variableName);
+    }
+  }
 
   /**
    * Returns the aliases of the variables whose names collide with import aliases or Javascript
    * keywords.
    */
-  public static Map<Variable, String> gatherVariableAliases(Iterable<Import> imports, Type type) {
-    final Set<String> forbiddenNames =
-        FluentIterable.from(imports)
-            .transform(
+  public static Map<Variable, String> gatherVariableAliases(List<Import> imports, Type type) {
+    return new VariableAliasesGatheringVisitor().doGatherVariableAliases(imports, type);
+  }
+
+  private Map<Variable, String> doGatherVariableAliases(List<Import> imports, Type type) {
+    // get import aliases from the passing in Imports.
+    getImportAliases(imports, type);
+
+    // collect variable names in each method.
+    type.accept(new VariableNamesCollector());
+
+    // compute variable aliases.
+    type.accept(this);
+
+    return this.aliasByVariable;
+  }
+
+  private void getImportAliases(List<Import> imports, Type type) {
+    this
+        .importAliases.addAll(
+            Lists.transform(
+                imports,
                 new Function<Import, String>() {
                   @Override
-                  public String apply(Import anImport) {
-                    if (!anImport.getElement().isExtern()) {
-                      return anImport.getAlias();
-                    }
-                    // Collect the top level name for the extern.
-                    return anImport.getElement().getQualifiedName().split("\\\\.")[0];
+                  public String apply(Import importModule) {
+                    return importModule.getAlias();
                   }
-                })
-            .toSet();
-    final Multimap<Member, String> variableNamesByMember = HashMultimap.create();
-    final Map<Variable, String> aliasByVariable = new HashMap<>();
-
-    class VariableGatherer extends AbstractVisitor {
-      @Override
-      public void exitVariable(Variable variable) {
-        variableNamesByMember.put(getCurrentMember(), variable.getName());
-      }
-    }
-
-    class VariableRenamingVisitor extends AbstractVisitor {
-      @Override
-      public void exitVariable(Variable variable) {
-        if (aliasByVariable.containsKey(variable) || variable.isRaw()) {
-          return;
-        }
-        String variableName = variable.getName();
-        if (isNameForbidden(variableName)) {
-          // add prefix "l_" to the local variable whose name collides with an import alias
-          // or collides with a JavaScript keyword.
-          variableName = VARIABLE_PREFIX + variableName;
-          int suffix = 0;
-          while (isNameForbidden(variableName)
-              || variableNamesByMember.containsEntry(getCurrentMember(), variableName)) {
-            // add more prefix to ensure the alias does not collide with other local variables.
-            variableName = VARIABLE_PREFIX + variableName + suffix++;
-          }
-          aliasByVariable.put(variable, variableName);
-        }
-      }
-
-      private boolean isNameForbidden(String variableName) {
-        return forbiddenNames.contains(variableName) || !JsProtectedNames.isLegalName(variableName);
-      }
-    }
-    type.accept(new VariableGatherer());
-    type.accept(new VariableRenamingVisitor());
-    return aliasByVariable;
+                }));
+    this.importAliases.add(type.getDescriptor().getBinaryClassName());
   }
 }

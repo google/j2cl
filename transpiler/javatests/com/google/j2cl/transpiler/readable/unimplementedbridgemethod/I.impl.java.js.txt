@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.unimplementedbridgemethod.I$imp
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+let Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
 /**
@@ -52,7 +52,7 @@ class I {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -79,7 +79,7 @@ class I {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -93,16 +93,14 @@ class I {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {
-    java_lang_Object = goog.module.get('java.lang.Object$impl');
-  }
+  static $clinit() { Object = goog.module.get('java.lang.Object$impl'); }
 };
 
 $Util.$setClassMetadataForInterface(
     I, 'com.google.j2cl.transpiler.readable.unimplementedbridgemethod.I');
 
 
-I.$markImplementor(/** @type {Function} */ (I));
+I.$markImplementor(/** @type {window.Function} */ (I));
 
 
 /**

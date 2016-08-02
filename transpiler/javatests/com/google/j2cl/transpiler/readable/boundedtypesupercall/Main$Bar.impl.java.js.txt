@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Main$Bar$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar.$Anonymous1$impl');
@@ -18,7 +18,7 @@ let Main$Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.boundedt
 /**
  * @template C_Bar_T
  */
-class Main$Bar extends java_lang_Object {
+class Main$Bar extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -76,7 +76,7 @@ class Main$Bar extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -93,7 +93,7 @@ class Main$Bar extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Bar.$Anonymous1$impl');
     Main$Foo = goog.module.get(
         'com.google.j2cl.transpiler.readable.boundedtypesupercall.Main.Foo$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

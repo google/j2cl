@@ -1,7 +1,7 @@
 [UNKNOWN] => [super();]
 [boolean LocalNameCollision = false;] => [let l_LocalNameCollision = false;]
 [Object RuntimeException = null;] => [let l_RuntimeException = null;]
-[int Asserts = 1;] => [let l_l_Asserts0 = 1;]
+[int Asserts = 1;] => [let l_l_Asserts = 1;]
 [int $Asserts = 1;] => [let l_$Asserts = 1;]
 [int l_Asserts = 1;] => [let l_Asserts = 1;]
 [int com_google_j2cl_transpiler_readable_localnamecollision_Class = 1;] => [let com_google_j2cl_transpiler_readable_localnamecollision_Class = 1;]
@@ -20,10 +20,10 @@
 [return LocalNameCollision
         && Asserts instanceof LocalNameCollision
         && $Asserts instanceof Asserts
-        && (l_Asserts == A);] => [return l_LocalNameCollision && LocalNameCollision.$isInstance(l_l_Asserts0) && Asserts.$isInstance(l_$Asserts) && (l_Asserts == A);]
+        && (l_Asserts == A);] => [return l_LocalNameCollision && LocalNameCollision.$isInstance(l_l_Asserts) && Asserts.$isInstance(l_$Asserts) && (l_Asserts == A);]
 [UNKNOWN] => [LocalNameCollision.$clinit();]
 [UNKNOWN] => [let $instance = new LocalNameCollision();]
-[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_localnamecollision_LocalNameCollision__boolean__java_lang_Object__java_lang_Object__int__int(l_LocalNameCollision, l_l_Asserts0, l_$Asserts, l_Asserts, A);]
+[UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_localnamecollision_LocalNameCollision__boolean__java_lang_Object__java_lang_Object__int__int(l_LocalNameCollision, l_l_Asserts, l_$Asserts, l_Asserts, A);]
 [UNKNOWN] => [return $instance;]
 [UNKNOWN] => [this.$ctor__java_lang_Object__();]
 [UNKNOWN] => [this.$init__com_google_j2cl_transpiler_readable_localnamecollision_LocalNameCollision();]
@@ -31,4 +31,4 @@
         LocalNameCollision
             && Asserts instanceof LocalNameCollision
             && $Asserts instanceof Asserts
-            && (l_Asserts == A);] => [let result = l_LocalNameCollision && LocalNameCollision.$isInstance(l_l_Asserts0) && Asserts.$isInstance(l_$Asserts) && (l_Asserts == A);]
+            && (l_Asserts == A);] => [let result = l_LocalNameCollision && LocalNameCollision.$isInstance(l_l_Asserts) && Asserts.$isInstance(l_$Asserts) && (l_Asserts == A);]

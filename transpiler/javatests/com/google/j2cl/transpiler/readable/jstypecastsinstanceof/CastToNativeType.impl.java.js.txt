@@ -8,18 +8,20 @@
 goog.module('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType$impl');
 
 
-let java_lang_Object = goog.require('java.lang.Object$impl');
+let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let CastToNativeType$NativeJsType = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeJsType$$Proxy');
 let CastToNativeType$NativeJsType$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay$impl');
 let CastToNativeType$NativeObject$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay$impl');
-let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
+let String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
+/** @constructor */ let $CastToNativeType$NativeObject = window.Object;
 
-class CastToNativeType extends java_lang_Object {
+
+class CastToNativeType extends Object {
   /**
    * Defines instance fields.
    * @public
@@ -61,13 +63,15 @@ class CastToNativeType extends java_lang_Object {
     let d = /**@type {Array<CastToNativeType$NativeJsType>} */ (
         $Arrays.$castToNative(a));
     c = $Arrays.$instanceIsOfNative(a);
-    let e = /**@type {Object} */ (
+    let e = /**@type {$CastToNativeType$NativeObject} */ (
         $Casts.to(a, CastToNativeType$NativeObject$$Overlay));
-    let f = /**@type {Object<?string, *>} */ (
+    let f = /**@type {$CastToNativeType$NativeObject<?string, *>} */ (
         $Casts.to(a, CastToNativeType$NativeObject$$Overlay));
     c = CastToNativeType$NativeObject$$Overlay.$isInstance(a);
-    let g = /**@type {Array<Object>} */ ($Arrays.$castToNative(a));
-    let h = /**@type {Array<Object<?string, *>>} */ ($Arrays.$castToNative(a));
+    let g = /**@type {Array<$CastToNativeType$NativeObject>} */ (
+        $Arrays.$castToNative(a));
+    let h = /**@type {Array<$CastToNativeType$NativeObject<?string, *>>} */ (
+        $Arrays.$castToNative(a));
     c = $Arrays.$instanceIsOfNative(a);
   }
 
@@ -81,7 +85,7 @@ class CastToNativeType extends java_lang_Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -100,10 +104,10 @@ class CastToNativeType extends java_lang_Object {
         'com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeJsType.$Overlay$impl');
     CastToNativeType$NativeObject$$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToNativeType.NativeObject.$Overlay$impl');
-    java_lang_String = goog.module.get('java.lang.String$impl');
+    String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    java_lang_Object.$clinit();
+    Object.$clinit();
   }
 
   /**

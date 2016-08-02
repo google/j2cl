@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.methodreferences.MethodReferenc
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+let Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
 /**
@@ -42,7 +42,7 @@ class MethodReferences$Producer {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -69,7 +69,7 @@ class MethodReferences$Producer {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {Function} classConstructor
+   * @param {window.Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -83,9 +83,7 @@ class MethodReferences$Producer {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {
-    java_lang_Object = goog.module.get('java.lang.Object$impl');
-  }
+  static $clinit() { Object = goog.module.get('java.lang.Object$impl'); }
 };
 
 $Util.$setClassMetadataForInterface(
@@ -94,7 +92,7 @@ $Util.$setClassMetadataForInterface(
 
 
 MethodReferences$Producer.$markImplementor(
-    /** @type {Function} */ (MethodReferences$Producer));
+    /** @type {window.Function} */ (MethodReferences$Producer));
 
 
 /**
