@@ -8,14 +8,14 @@
 goog.module('com.google.j2cl.transpiler.readable.equality.Equality$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
 
-class Equality extends Object {
+class Equality extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -55,14 +55,16 @@ class Equality extends Object {
     }
     {
       $Asserts.$enabled() &&
-          $Asserts.$assert(
-              !$Equality.$same(Object.$create__(), Object.$create__()));
+          $Asserts.$assert(!$Equality.$same(
+              java_lang_Object.$create__(), java_lang_Object.$create__()));
     }
     {
       $Asserts.$enabled() &&
-          $Asserts.$assert(!$Equality.$same(null, Object.$create__()));
+          $Asserts.$assert(
+              !$Equality.$same(null, java_lang_Object.$create__()));
       $Asserts.$enabled() &&
-          $Asserts.$assert(!$Equality.$same(Object.$create__(), null));
+          $Asserts.$assert(
+              !$Equality.$same(java_lang_Object.$create__(), null));
     }
   }
 
@@ -76,7 +78,7 @@ class Equality extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -91,7 +93,7 @@ class Equality extends Object {
   static $clinit() {
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

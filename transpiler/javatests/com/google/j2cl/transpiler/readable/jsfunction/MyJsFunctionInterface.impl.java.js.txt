@@ -27,7 +27,7 @@ class MyJsFunctionInterface {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -52,7 +52,7 @@ class MyJsFunctionInterface {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -77,7 +77,7 @@ $Util.$setClassMetadataForInterface(
 
 
 MyJsFunctionInterface.$markImplementor(
-    /** @type {window.Function} */ (MyJsFunctionInterface));
+    /** @type {Function} */ (MyJsFunctionInterface));
 
 
 /**

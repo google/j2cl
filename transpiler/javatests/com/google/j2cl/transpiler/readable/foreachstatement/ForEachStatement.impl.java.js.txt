@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.foreachstatement.ForEachStatement$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Iterable = goog.forwardDeclare('java.lang.Iterable$impl');
@@ -17,7 +17,7 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
-class ForEachStatement extends Object {
+class ForEachStatement extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -76,7 +76,7 @@ class ForEachStatement extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -93,7 +93,7 @@ class ForEachStatement extends Object {
     Throwable = goog.module.get('java.lang.Throwable$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

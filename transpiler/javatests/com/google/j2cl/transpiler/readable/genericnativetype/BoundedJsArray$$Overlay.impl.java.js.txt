@@ -10,16 +10,14 @@ goog.module('com.google.j2cl.transpiler.readable.genericnativetype.BoundedJsArra
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Object = goog.forwardDeclare('java.lang.Object$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
-
-/** @constructor */ let $BoundedJsArray = window.Array;
 
 
 class BoundedJsArray$$Overlay {
   /**
    * @template M_V
-   * @return {$BoundedJsArray<M_V>}
+   * @return {Array<M_V>}
    * @public
    */
   static m_create__() {
@@ -31,12 +29,12 @@ class BoundedJsArray$$Overlay {
   /**
    * @template M_V
    * @param {number} size
-   * @return {$BoundedJsArray<M_V>}
+   * @return {Array<M_V>}
    * @public
    */
   static m_create__int(size) {
     BoundedJsArray$$Overlay.$clinit();
-    let array = /**@type {!$BoundedJsArray<*>} */ (new $BoundedJsArray(size));
+    let array = /**@type {!Array<*>} */ (new Array(size));
     return array;
   }
 
@@ -46,14 +44,14 @@ class BoundedJsArray$$Overlay {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof $BoundedJsArray; }
+  static $isInstance(instance) { return instance instanceof Array; }
 
   /**
    * Runs inline static field initializers.
    * @public
    */
   static $clinit() {
-    Object = goog.module.get('java.lang.Object$impl');
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };

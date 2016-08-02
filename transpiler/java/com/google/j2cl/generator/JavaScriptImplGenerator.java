@@ -22,6 +22,7 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
+import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AnonymousType;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
@@ -40,10 +41,8 @@ import com.google.j2cl.ast.sourcemap.FilePosition;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;
-import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
-import com.google.j2cl.generator.visitors.ImportUtils;
+import com.google.j2cl.generator.visitors.ImportGatherer.ImportCategory;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /** Generates JavaScript source impl files. */
@@ -143,43 +142,31 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
     // goog.require(...) for eager imports.
     Map<String, String> aliasesByPath = new HashMap<>();
-    List<Import> eagerImports = ImportUtils.sortedList(importsByCategory.get(ImportCategory.EAGER));
-    if (!eagerImports.isEmpty()) {
-      for (Import eagerImport : eagerImports) {
-        String alias = eagerImport.getAlias();
-        String path = eagerImport.getImplModulePath();
-        String previousAlias = aliasesByPath.get(path);
-        if (previousAlias == null) {
-          sourceBuilder.appendln("let " + alias + " = goog.require('" + path + "');");
-          aliasesByPath.put(path, alias);
-        } else {
-          // Do not goog.require second time to avoid JsCompiler warnings.
-          sourceBuilder.appendln("let " + alias + " = " + previousAlias + ";");
-        }
+    Iterable<Import> eagerImports = sortImports(importsByCategory.get(ImportCategory.EAGER));
+    for (Import eagerImport : eagerImports) {
+      String alias = eagerImport.getAlias();
+      String path = eagerImport.getImplModulePath();
+      String previousAlias = aliasesByPath.get(path);
+      if (previousAlias == null) {
+        sourceBuilder.appendln("let " + alias + " = goog.require('" + path + "');");
+        aliasesByPath.put(path, alias);
+      } else {
+        // Do not goog.require second time to avoid JsCompiler warnings.
+        sourceBuilder.appendln("let " + alias + " = " + previousAlias + ";");
       }
+    }
+    if (!Iterables.isEmpty(eagerImports)) {
       sourceBuilder.newLine();
     }
 
     // goog.forwardDeclare(...) for lazy imports.
-    List<Import> lazyImports = ImportUtils.sortedList(importsByCategory.get(ImportCategory.LAZY));
-    if (!lazyImports.isEmpty()) {
-      for (Import lazyImport : lazyImports) {
-        String alias = lazyImport.getAlias();
-        String path = lazyImport.getImplModulePath();
-        sourceBuilder.appendln("let " + alias + " = goog.forwardDeclare('" + path + "');");
-      }
-      sourceBuilder.newLine();
+    Iterable<Import> lazyImports = sortImports(importsByCategory.get(ImportCategory.LAZY));
+    for (Import lazyImport : lazyImports) {
+      String alias = lazyImport.getAlias();
+      String path = lazyImport.getImplModulePath();
+      sourceBuilder.appendln("let " + alias + " = goog.forwardDeclare('" + path + "');");
     }
-
-    // = window.Blah; for extern imports (this is really just alias creation).
-    List<Import> externImports =
-        ImportUtils.sortedList(importsByCategory.get(ImportCategory.EXTERN));
-    if (!externImports.isEmpty()) {
-      for (Import externImport : externImports) {
-        String alias = externImport.getAlias();
-        String path = externImport.getImplModulePath();
-        sourceBuilder.appendln("/** @constructor */ let " + alias + " = " + path + ";");
-      }
+    if (!Iterables.isEmpty(lazyImports)) {
       sourceBuilder.newLine();
     }
 
@@ -582,7 +569,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     // goog.module.get(...) for lazy imports.
     Map<String, String> aliasesByPath = new HashMap<>();
-    for (Import lazyImport : ImportUtils.sortedList(importsByCategory.get(ImportCategory.LAZY))) {
+    for (Import lazyImport : sortImports(importsByCategory.get(ImportCategory.LAZY))) {
       String alias = lazyImport.getAlias();
       String path = lazyImport.getImplModulePath();
       String previousAlias = aliasesByPath.get(path);
@@ -721,7 +708,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
           " * Native Method Injection",
           " */",
           "// Alias for the class defined in this module",
-          "/** @constructor */ let __class = " + className + ";");
+          "const __class = " + className + ";");
       sourceBuilder.newLine();
       sourceBuilder.appendln(nativeSource);
       sourceBuilder.newLine();

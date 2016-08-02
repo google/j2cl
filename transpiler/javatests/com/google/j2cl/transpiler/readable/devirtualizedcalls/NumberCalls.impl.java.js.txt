@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.devirtualizedcalls.NumberCalls$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 let $LongUtils = goog.require('vmbootstrap.LongUtils$impl');
 
@@ -23,7 +23,7 @@ let Short = goog.forwardDeclare('java.lang.Short$impl');
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 
 
-class NumberCalls extends Object {
+class NumberCalls extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -158,7 +158,7 @@ class NumberCalls extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -180,7 +180,7 @@ class NumberCalls extends Object {
     Long = goog.module.get('java.lang.Long$impl');
     Short = goog.module.get('java.lang.Short$impl');
     $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

@@ -8,13 +8,13 @@
 goog.module('woo.Foo$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Foo$NativeBar = goog.forwardDeclare('woo.Foo.NativeBar$$Proxy');
 
 
-class Foo extends Object {
+class Foo extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -59,7 +59,7 @@ class Foo extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -73,7 +73,7 @@ class Foo extends Object {
    */
   static $clinit() {
     Foo$NativeBar = goog.module.get('woo.Foo.NativeBar$$Proxy');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

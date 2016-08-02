@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.simplegenerictype.SimpleGenericType$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Error = goog.forwardDeclare('java.lang.Error$impl');
@@ -17,7 +17,7 @@ let Error = goog.forwardDeclare('java.lang.Error$impl');
 /**
  * @template C_T, C_S
  */
-class SimpleGenericType extends Object {
+class SimpleGenericType extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -73,7 +73,7 @@ class SimpleGenericType extends Object {
   m_test__() {
     let g = /**@type {!SimpleGenericType<*, Error>} */ (
         SimpleGenericType.$create__java_lang_Object__java_lang_Object(
-            Object.$create__(), Error.$create__()));
+            java_lang_Object.$create__(), Error.$create__()));
   }
 
   /**
@@ -86,7 +86,7 @@ class SimpleGenericType extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -100,7 +100,7 @@ class SimpleGenericType extends Object {
    */
   static $clinit() {
     Error = goog.module.get('java.lang.Error$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

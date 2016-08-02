@@ -10,13 +10,13 @@ goog.module('com.google.j2cl.transpiler.readable.functiontype.Function$impl');
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Object = goog.forwardDeclare('java.lang.Object$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
 /**
  * @interface
  */
-class Function {
+class com_google_j2cl_transpiler_readable_functiontype_Function {
   /**
    * @abstract
    * @param {*} obj
@@ -34,7 +34,7 @@ class Function {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -61,7 +61,7 @@ class Function {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -75,18 +75,23 @@ class Function {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { Object = goog.module.get('java.lang.Object$impl'); }
+  static $clinit() {
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
+  }
 };
 
 $Util.$setClassMetadataForInterface(
-    Function, 'com.google.j2cl.transpiler.readable.functiontype.Function');
+    com_google_j2cl_transpiler_readable_functiontype_Function,
+    'com.google.j2cl.transpiler.readable.functiontype.Function');
 
 
-Function.$markImplementor(/** @type {window.Function} */ (Function));
+com_google_j2cl_transpiler_readable_functiontype_Function.$markImplementor(
+    /** @type {Function} */ (
+        com_google_j2cl_transpiler_readable_functiontype_Function));
 
 
 /**
  * Export class.
  */
-exports = Function;
+exports = com_google_j2cl_transpiler_readable_functiontype_Function;
 //# sourceMappingURL=Function.js.map

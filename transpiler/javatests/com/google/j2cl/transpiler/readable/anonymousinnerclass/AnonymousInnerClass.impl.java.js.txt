@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let A = goog.forwardDeclare('com.google.j2cl.transpiler.readable.anonymousinnerclass.A$impl');
@@ -18,7 +18,7 @@ let AnonymousInnerClass$3 = goog.forwardDeclare('com.google.j2cl.transpiler.read
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class AnonymousInnerClass extends Object {
+class AnonymousInnerClass extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -81,7 +81,7 @@ class AnonymousInnerClass extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -103,7 +103,7 @@ class AnonymousInnerClass extends Object {
     AnonymousInnerClass$3 = goog.module.get(
         'com.google.j2cl.transpiler.readable.anonymousinnerclass.AnonymousInnerClass.$Anonymous3$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

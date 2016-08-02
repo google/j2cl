@@ -9,19 +9,19 @@ goog.module('com.google.j2cl.transpiler.readable.bridgemethoddefault.BridgeMetho
 
 
 let BridgeMethodDefault$II = goog.require('com.google.j2cl.transpiler.readable.bridgemethoddefault.BridgeMethodDefault.II$impl');
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let BridgeMethodDefault = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgemethoddefault.BridgeMethodDefault$impl');
 let BridgeMethodDefault$II$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgemethoddefault.BridgeMethodDefault.II.$Overlay$impl');
-let String = goog.forwardDeclare('java.lang.String$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
 /**
  * @implements {BridgeMethodDefault$II}
  */
-class BridgeMethodDefault$A extends Object {
+class BridgeMethodDefault$A extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -84,7 +84,8 @@ class BridgeMethodDefault$A extends Object {
    * @public
    */
   m_m__java_lang_Object(arg0) {
-    this.m_m__java_lang_String(/**@type {?string} */ ($Casts.to(arg0, String)));
+    this.m_m__java_lang_String(
+        /**@type {?string} */ ($Casts.to(arg0, java_lang_String)));
   }
 
   /**
@@ -99,7 +100,7 @@ class BridgeMethodDefault$A extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -116,9 +117,9 @@ class BridgeMethodDefault$A extends Object {
         'com.google.j2cl.transpiler.readable.bridgemethoddefault.BridgeMethodDefault$impl');
     BridgeMethodDefault$II$$Overlay = goog.module.get(
         'com.google.j2cl.transpiler.readable.bridgemethoddefault.BridgeMethodDefault.II.$Overlay$impl');
-    String = goog.module.get('java.lang.String$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

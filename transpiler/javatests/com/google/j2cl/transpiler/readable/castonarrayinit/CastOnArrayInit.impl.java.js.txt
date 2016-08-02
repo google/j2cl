@@ -8,14 +8,14 @@
 goog.module('com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let CastOnArrayInit$Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.Foo$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 
-class CastOnArrayInit extends Object {
+class CastOnArrayInit extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -83,7 +83,7 @@ class CastOnArrayInit extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -99,7 +99,7 @@ class CastOnArrayInit extends Object {
     CastOnArrayInit$Foo = goog.module.get(
         'com.google.j2cl.transpiler.readable.castonarrayinit.CastOnArrayInit.Foo$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

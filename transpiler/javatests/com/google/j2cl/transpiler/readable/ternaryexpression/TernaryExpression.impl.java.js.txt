@@ -8,13 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.ternaryexpression.TernaryExpression$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 
 
-class TernaryExpression extends Object {
+class TernaryExpression extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -50,8 +50,8 @@ class TernaryExpression extends Object {
    */
   m_test__() {
     let a = true;
-    let number = a ? 1 : 2;
-    let b = number == 1 ? number == 2 : number == 1;
+    let l_number = a ? 1 : 2;
+    let b = l_number == 1 ? l_number == 2 : l_number == 1;
     let value = (b ? Integer.$create__int(15) : Integer.$create__int(30))
                     .m_intValue__();
   }
@@ -66,7 +66,7 @@ class TernaryExpression extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -80,7 +80,7 @@ class TernaryExpression extends Object {
    */
   static $clinit() {
     Integer = goog.module.get('java.lang.Integer$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

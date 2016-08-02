@@ -11,7 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClas
 let JsConstructorClass$Varargs = goog.require('com.google.j2cl.transpiler.readable.jsconstructor.JsConstructorClass.Varargs$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Object = goog.forwardDeclare('java.lang.Object$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
@@ -66,7 +66,8 @@ class JsConstructorClass$SubVarargs extends JsConstructorClass$Varargs {
    */
   static $create__int(j) {
     JsConstructorClass$SubVarargs.$clinit();
-    let $instance = new JsConstructorClass$SubVarargs(Object.$create__(), j);
+    let $instance =
+        new JsConstructorClass$SubVarargs(java_lang_Object.$create__(), j);
     $instance
         .$ctor__com_google_j2cl_transpiler_readable_jsconstructor_JsConstructorClass$SubVarargs__int(
             j);
@@ -91,7 +92,7 @@ class JsConstructorClass$SubVarargs extends JsConstructorClass$Varargs {
     let s1 = JsConstructorClass$SubVarargs.$create__int(2);
     let s2 =
         JsConstructorClass$SubVarargs.$create__java_lang_Object__arrayOf_int(
-            Object.$create__(),
+            java_lang_Object.$create__(),
             /**@type {!Array<number>} */ ($Arrays.$init([1, 2, 3], $int)));
   }
 
@@ -107,7 +108,7 @@ class JsConstructorClass$SubVarargs extends JsConstructorClass$Varargs {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -120,7 +121,7 @@ class JsConstructorClass$SubVarargs extends JsConstructorClass$Varargs {
    * @public
    */
   static $clinit() {
-    Object = goog.module.get('java.lang.Object$impl');
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     JsConstructorClass$Varargs.$clinit();

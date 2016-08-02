@@ -11,7 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Number = goog.forwardDeclare('java.lang.Number$impl');
-let Object = goog.forwardDeclare('java.lang.Object$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
 /**
@@ -54,7 +54,7 @@ class SomeInterface {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -81,7 +81,7 @@ class SomeInterface {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -97,7 +97,7 @@ class SomeInterface {
    */
   static $clinit() {
     Number = goog.module.get('java.lang.Number$impl');
-    Object = goog.module.get('java.lang.Object$impl');
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
   }
 };
 
@@ -106,7 +106,7 @@ $Util.$setClassMetadataForInterface(
     'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.SomeInterface');
 
 
-SomeInterface.$markImplementor(/** @type {window.Function} */ (SomeInterface));
+SomeInterface.$markImplementor(/** @type {Function} */ (SomeInterface));
 
 
 /**

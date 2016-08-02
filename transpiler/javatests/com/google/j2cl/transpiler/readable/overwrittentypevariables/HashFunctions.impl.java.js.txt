@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let HashFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction$impl');
@@ -17,7 +17,7 @@ let HashFunctions$2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.o
 let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 
 
-class HashFunctions extends Object {
+class HashFunctions extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -77,7 +77,7 @@ class HashFunctions extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -97,7 +97,7 @@ class HashFunctions extends Object {
     HashFunctions$2 = goog.module.get(
         'com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunctions.$Anonymous2$impl');
     Enum = goog.module.get('java.lang.Enum$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

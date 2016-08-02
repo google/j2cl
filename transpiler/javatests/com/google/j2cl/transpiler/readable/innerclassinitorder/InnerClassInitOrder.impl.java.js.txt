@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let InnerClassInitOrder$1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.$Anonymous1$impl');
@@ -33,13 +33,13 @@ let InnerClassInitOrder$OuterRefFromThisCtorCall = goog.forwardDeclare('com.goog
 let InnerClassInitOrder$P1 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1$impl');
 let InnerClassInitOrder$P1$P2 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1.P2$impl');
 let InnerClassInitOrder$P1$P2$P3 = goog.forwardDeclare('com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1.P2.P3$impl');
-let String = goog.forwardDeclare('java.lang.String$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class InnerClassInitOrder extends Object {
+class InnerClassInitOrder extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -408,7 +408,7 @@ class InnerClassInitOrder extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -465,11 +465,11 @@ class InnerClassInitOrder extends Object {
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1.P2$impl');
     InnerClassInitOrder$P1$P2$P3 = goog.module.get(
         'com.google.j2cl.transpiler.readable.innerclassinitorder.InnerClassInitOrder.P1.P2.P3$impl');
-    String = goog.module.get('java.lang.String$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

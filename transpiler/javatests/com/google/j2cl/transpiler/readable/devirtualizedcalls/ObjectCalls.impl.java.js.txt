@@ -8,14 +8,14 @@
 goog.module('com.google.j2cl.transpiler.readable.devirtualizedcalls.ObjectCalls$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
-class ObjectCalls extends Object {
+class ObjectCalls extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -50,7 +50,7 @@ class ObjectCalls extends Object {
    * @public
    */
   m_main__() {
-    let object = Object.$create__();
+    let object = java_lang_Object.$create__();
     $Objects.m_equals__java_lang_Object__java_lang_Object(object, object);
     $Objects.m_hashCode__java_lang_Object(object);
     $Objects.m_toString__java_lang_Object(object);
@@ -69,11 +69,11 @@ class ObjectCalls extends Object {
    * @public
    */
   m_test__() {
-    this.m_equals__java_lang_Object(Object.$create__());
+    this.m_equals__java_lang_Object(java_lang_Object.$create__());
     this.m_hashCode__();
     this.$javaToString();
     this.m_getClass__();
-    this.m_equals__java_lang_Object(Object.$create__());
+    this.m_equals__java_lang_Object(java_lang_Object.$create__());
     this.m_hashCode__();
     this.$javaToString();
     this.m_getClass__();
@@ -89,7 +89,7 @@ class ObjectCalls extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -104,7 +104,7 @@ class ObjectCalls extends Object {
   static $clinit() {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

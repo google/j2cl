@@ -8,13 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.casttoclass.CastToClass$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
-class CastToClass extends Object {
+class CastToClass extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -63,7 +63,7 @@ class CastToClass extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -77,7 +77,7 @@ class CastToClass extends Object {
    */
   static $clinit() {
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

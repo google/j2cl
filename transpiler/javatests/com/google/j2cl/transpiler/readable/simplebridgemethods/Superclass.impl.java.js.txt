@@ -8,14 +8,14 @@
 goog.module('com.google.j2cl.transpiler.readable.simplebridgemethods.Superclass$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 
 /**
  * @template C_T
  */
-class Superclass extends Object {
+class Superclass extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -63,7 +63,7 @@ class Superclass extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -75,7 +75,7 @@ class Superclass extends Object {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { Object.$clinit(); }
+  static $clinit() { java_lang_Object.$clinit(); }
 
   /**
    * Runs instance field and block initializers.

@@ -8,13 +8,13 @@
 goog.module('readable.packageinfo.Outer.Inner$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Outer = goog.forwardDeclare('readable.packageinfo.Outer$impl');
 
 
-class Outer$Inner extends Object {
+class Outer$Inner extends java_lang_Object {
   /**
    * Real constructor.
    * @param {Outer} $outer_this
@@ -54,7 +54,7 @@ class Outer$Inner extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -68,7 +68,7 @@ class Outer$Inner extends Object {
    */
   static $clinit() {
     Outer = goog.module.get('readable.packageinfo.Outer$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

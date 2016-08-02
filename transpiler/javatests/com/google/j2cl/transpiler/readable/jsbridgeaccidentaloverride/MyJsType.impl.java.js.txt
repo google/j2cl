@@ -9,7 +9,7 @@ goog.module('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.MyJs
 
 
 let OtherInterface = goog.require('com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface$impl');
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
@@ -18,7 +18,7 @@ let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 /**
  * @implements {OtherInterface}
  */
-class MyJsType extends Object {
+class MyJsType extends java_lang_Object {
   /**
    * Real constructor.
    * @public
@@ -79,7 +79,7 @@ class MyJsType extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -93,7 +93,7 @@ class MyJsType extends Object {
    */
   static $clinit() {
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

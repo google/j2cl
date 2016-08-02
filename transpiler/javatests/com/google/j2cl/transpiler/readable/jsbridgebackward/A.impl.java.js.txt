@@ -8,13 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.jsbridgebackward.A$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class A extends Object {
+class A extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -60,7 +60,7 @@ class A extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -74,7 +74,7 @@ class A extends Object {
    */
   static $clinit() {
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

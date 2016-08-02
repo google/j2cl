@@ -10,10 +10,10 @@ goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.Multipl
 
 let MultipleAbstractParents$Collection = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.Collection$impl');
 let MultipleAbstractParents$List = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.List$impl');
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let String = goog.forwardDeclare('java.lang.String$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
 /**
@@ -22,7 +22,7 @@ let String = goog.forwardDeclare('java.lang.String$impl');
  * @implements {MultipleAbstractParents$List<C_AbstractListCollection_T>}
  * @implements {MultipleAbstractParents$Collection<C_AbstractListCollection_T>}
  */
-class MultipleAbstractParents$AbstractListCollection extends Object {
+class MultipleAbstractParents$AbstractListCollection extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -60,7 +60,7 @@ class MultipleAbstractParents$AbstractListCollection extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -74,8 +74,8 @@ class MultipleAbstractParents$AbstractListCollection extends Object {
    * @public
    */
   static $clinit() {
-    String = goog.module.get('java.lang.String$impl');
-    Object.$clinit();
+    java_lang_String = goog.module.get('java.lang.String$impl');
+    java_lang_Object.$clinit();
   }
 
   /**

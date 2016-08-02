@@ -8,13 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.arraysimple.ArraySimple$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 
-class ArraySimple extends Object {
+class ArraySimple extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -49,11 +49,12 @@ class ArraySimple extends Object {
    * @public
    */
   m_main__() {
-    let objects = /**@type {!Array<*>} */ ($Arrays.$create([100], Object));
-    let objects2d =
-        /**@type {!Array<Array<*>>} */ ($Arrays.$create([5, 10], Object));
-    let objectsPartial =
-        /**@type {!Array<Array<*>>} */ ($Arrays.$create([20, null], Object));
+    let objects =
+        /**@type {!Array<*>} */ ($Arrays.$create([100], java_lang_Object));
+    let objects2d = /**@type {!Array<Array<*>>} */ (
+        $Arrays.$create([5, 10], java_lang_Object));
+    let objectsPartial = /**@type {!Array<Array<*>>} */ (
+        $Arrays.$create([20, null], java_lang_Object));
     let object = objects[0];
     object = objects2d[0][1];
     $Arrays.$set(objects, 0, null);
@@ -70,7 +71,7 @@ class ArraySimple extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -84,7 +85,7 @@ class ArraySimple extends Object {
    */
   static $clinit() {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

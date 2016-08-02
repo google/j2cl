@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.Main$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let FooCallsSuperObjectMethod = goog.forwardDeclare('com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.FooCallsSuperObjectMethod$impl');
@@ -16,7 +16,7 @@ let SubNumber = goog.forwardDeclare('com.google.j2cl.transpiler.readable.devirtu
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 
 
-class Main extends Object {
+class Main extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -71,7 +71,7 @@ class Main extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -89,7 +89,7 @@ class Main extends Object {
     SubNumber = goog.module.get(
         'com.google.j2cl.transpiler.readable.devirtualizedsupermethodcall.SubNumber$impl');
     $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

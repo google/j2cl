@@ -11,21 +11,23 @@ goog.module('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.F
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Function$1apply = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.Function.$Anonymous1apply$impl');
-let Object = goog.forwardDeclare('java.lang.Object$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
 /**
  * @interface
  * @template C_T, C_R
  */
-class Function {
+class
+    com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function {
   /**
    * @template M_T
-   * @return {Function<M_T, M_T>}
+   * @return {com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function<M_T, M_T>}
    * @public
    */
   static m_identity__() {
-    Function.$clinit();
+    com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function
+        .$clinit();
     return /**@type {!Function$1apply<*>} */ (Function$1apply.$create__());
   }
 
@@ -54,7 +56,7 @@ class Function {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -81,7 +83,7 @@ class Function {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -98,20 +100,23 @@ class Function {
   static $clinit() {
     Function$1apply = goog.module.get(
         'com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.Function.$Anonymous1apply$impl');
-    Object = goog.module.get('java.lang.Object$impl');
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
   }
 };
 
 $Util.$setClassMetadataForInterface(
-    Function,
+    com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function,
     'com.google.j2cl.transpiler.readable.lambdawithgenericsanddefaults.Function');
 
 
-Function.$markImplementor(/** @type {window.Function} */ (Function));
+com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function
+    .$markImplementor(/** @type {Function} */ (
+        com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function));
 
 
 /**
  * Export class.
  */
-exports = Function;
+exports =
+    com_google_j2cl_transpiler_readable_lambdawithgenericsanddefaults_Function;
 //# sourceMappingURL=Function.js.map

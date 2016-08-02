@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInterfac
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Object = goog.forwardDeclare('java.lang.Object$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -43,7 +43,7 @@ class LambdaInterface {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -70,7 +70,7 @@ class LambdaInterface {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -85,7 +85,7 @@ class LambdaInterface {
    * @public
    */
   static $clinit() {
-    Object = goog.module.get('java.lang.Object$impl');
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };
@@ -95,8 +95,7 @@ $Util.$setClassMetadataForInterface(
     'com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInterface');
 
 
-LambdaInterface.$markImplementor(
-    /** @type {window.Function} */ (LambdaInterface));
+LambdaInterface.$markImplementor(/** @type {Function} */ (LambdaInterface));
 
 
 /**

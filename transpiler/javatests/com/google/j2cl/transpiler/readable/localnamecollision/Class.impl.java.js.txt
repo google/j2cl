@@ -8,13 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.localnamecollision.Class$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 
-class Class extends Object {
+class Class extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -60,7 +60,7 @@ class Class extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -74,7 +74,7 @@ class Class extends Object {
    */
   static $clinit() {
     $Objects = goog.module.get('vmbootstrap.Objects$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.nobridgemethods.Entry$impl');
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Object = goog.forwardDeclare('java.lang.Object$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
 /**
@@ -35,7 +35,7 @@ class Entry {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -62,7 +62,7 @@ class Entry {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -76,14 +76,16 @@ class Entry {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { Object = goog.module.get('java.lang.Object$impl'); }
+  static $clinit() {
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
+  }
 };
 
 $Util.$setClassMetadataForInterface(
     Entry, 'com.google.j2cl.transpiler.readable.nobridgemethods.Entry');
 
 
-Entry.$markImplementor(/** @type {window.Function} */ (Entry));
+Entry.$markImplementor(/** @type {Function} */ (Entry));
 
 
 /**

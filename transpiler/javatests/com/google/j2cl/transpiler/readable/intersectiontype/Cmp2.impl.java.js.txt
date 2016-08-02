@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.intersectiontype.Cmp2$impl');
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Object = goog.forwardDeclare('java.lang.Object$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
@@ -43,7 +43,7 @@ class Cmp2 {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -70,7 +70,7 @@ class Cmp2 {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -85,7 +85,7 @@ class Cmp2 {
    * @public
    */
   static $clinit() {
-    Object = goog.module.get('java.lang.Object$impl');
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
 };
@@ -94,7 +94,7 @@ $Util.$setClassMetadataForInterface(
     Cmp2, 'com.google.j2cl.transpiler.readable.intersectiontype.Cmp2');
 
 
-Cmp2.$markImplementor(/** @type {window.Function} */ (Cmp2));
+Cmp2.$markImplementor(/** @type {Function} */ (Cmp2));
 
 
 /**

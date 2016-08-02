@@ -8,11 +8,11 @@
 goog.module('com.google.j2cl.transpiler.readable.methodreferences.MethodReferences$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 
-class MethodReferences extends Object {
+class MethodReferences extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -48,7 +48,7 @@ class MethodReferences extends Object {
    */
   static m_m___$pp_com_google_j2cl_transpiler_readable_methodreferences() {
     MethodReferences.$clinit();
-    return Object.$create__();
+    return java_lang_Object.$create__();
   }
 
   /**
@@ -70,7 +70,7 @@ class MethodReferences extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -82,7 +82,7 @@ class MethodReferences extends Object {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { Object.$clinit(); }
+  static $clinit() { java_lang_Object.$clinit(); }
 
   /**
    * Runs instance field and block initializers.

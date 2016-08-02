@@ -11,7 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.bridgemethoddefault.BridgeMetho
 let BridgeMethodDefault$II = goog.require('com.google.j2cl.transpiler.readable.bridgemethoddefault.BridgeMethodDefault.II$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let String = goog.forwardDeclare('java.lang.String$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
 class BridgeMethodDefault$II$$Overlay {
@@ -39,7 +39,9 @@ class BridgeMethodDefault$II$$Overlay {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { String = goog.module.get('java.lang.String$impl'); }
+  static $clinit() {
+    java_lang_String = goog.module.get('java.lang.String$impl');
+  }
 };
 
 

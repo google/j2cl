@@ -8,13 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.nullability.Nullability.NullableStringComparator$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let Comparator = goog.require('java.util.Comparator$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let String = goog.forwardDeclare('java.lang.String$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let Comparator$$Overlay = goog.forwardDeclare('java.util.Comparator.$Overlay$impl');
-let Function = goog.forwardDeclare('java.util.function.Function$impl');
+let java_util_function_Function = goog.forwardDeclare('java.util.function.Function$impl');
 let ToDoubleFunction = goog.forwardDeclare('java.util.function.ToDoubleFunction$impl');
 let ToIntFunction = goog.forwardDeclare('java.util.function.ToIntFunction$impl');
 let ToLongFunction = goog.forwardDeclare('java.util.function.ToLongFunction$impl');
@@ -24,7 +24,7 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 /**
  * @implements {Comparator<?string>}
  */
-class Nullability$NullableStringComparator extends Object {
+class Nullability$NullableStringComparator extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -89,7 +89,7 @@ class Nullability$NullableStringComparator extends Object {
    * Default method forwarding stub.
    * @override
    * @template M_U
-   * @param {Function<?, ?>} arg0
+   * @param {java_util_function_Function<?, ?>} arg0
    * @return {Comparator<?string>}
    * @public
    */
@@ -103,7 +103,7 @@ class Nullability$NullableStringComparator extends Object {
    * Default method forwarding stub.
    * @override
    * @template M_U
-   * @param {Function<?, ?>} arg0
+   * @param {java_util_function_Function<?, ?>} arg0
    * @param {Comparator<?>} arg1
    * @return {Comparator<?string>}
    * @public
@@ -164,8 +164,8 @@ class Nullability$NullableStringComparator extends Object {
    */
   m_compare__java_lang_Object__java_lang_Object(arg0, arg1) {
     return this.m_compare__java_lang_String__java_lang_String(
-        /**@type {?string} */ ($Casts.to(arg0, String)),
-        /**@type {?string} */ ($Casts.to(arg1, String)));
+        /**@type {?string} */ ($Casts.to(arg0, java_lang_String)),
+        /**@type {?string} */ ($Casts.to(arg1, java_lang_String)));
   }
 
   /**
@@ -180,7 +180,7 @@ class Nullability$NullableStringComparator extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -194,15 +194,16 @@ class Nullability$NullableStringComparator extends Object {
    * @public
    */
   static $clinit() {
-    String = goog.module.get('java.lang.String$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
     Comparator$$Overlay = goog.module.get('java.util.Comparator.$Overlay$impl');
-    Function = goog.module.get('java.util.function.Function$impl');
+    java_util_function_Function =
+        goog.module.get('java.util.function.Function$impl');
     ToDoubleFunction =
         goog.module.get('java.util.function.ToDoubleFunction$impl');
     ToIntFunction = goog.module.get('java.util.function.ToIntFunction$impl');
     ToLongFunction = goog.module.get('java.util.function.ToLongFunction$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

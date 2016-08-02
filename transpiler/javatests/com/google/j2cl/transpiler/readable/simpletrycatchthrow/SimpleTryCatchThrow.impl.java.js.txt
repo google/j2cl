@@ -8,16 +8,16 @@
 goog.module('com.google.j2cl.transpiler.readable.simpletrycatchthrow.SimpleTryCatchThrow$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let ClassCastException = goog.forwardDeclare('java.lang.ClassCastException$impl');
-let String = goog.forwardDeclare('java.lang.String$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let System = goog.forwardDeclare('java.lang.System$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 
-class SimpleTryCatchThrow extends Object {
+class SimpleTryCatchThrow extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -74,7 +74,7 @@ class SimpleTryCatchThrow extends Object {
   static m_doSomething__java_lang_ClassCastException(e) {
     SimpleTryCatchThrow.$clinit();
     System.f_out__java_lang_System.m_println__java_lang_String(
-        'saw exception: ' + String.m_valueOf__java_lang_Object(e));
+        'saw exception: ' + java_lang_String.m_valueOf__java_lang_Object(e));
   }
 
   /**
@@ -89,7 +89,7 @@ class SimpleTryCatchThrow extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -103,10 +103,10 @@ class SimpleTryCatchThrow extends Object {
    */
   static $clinit() {
     ClassCastException = goog.module.get('java.lang.ClassCastException$impl');
-    String = goog.module.get('java.lang.String$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
     System = goog.module.get('java.lang.System$impl');
     $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

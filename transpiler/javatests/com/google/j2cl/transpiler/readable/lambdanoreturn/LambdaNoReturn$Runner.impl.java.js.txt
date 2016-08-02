@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.lambdanoreturn.LambdaNoReturn.R
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Object = goog.forwardDeclare('java.lang.Object$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
 /**
@@ -41,7 +41,7 @@ class LambdaNoReturn$Runner {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -68,7 +68,7 @@ class LambdaNoReturn$Runner {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -82,7 +82,9 @@ class LambdaNoReturn$Runner {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { Object = goog.module.get('java.lang.Object$impl'); }
+  static $clinit() {
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
+  }
 };
 
 $Util.$setClassMetadataForInterface(
@@ -91,7 +93,7 @@ $Util.$setClassMetadataForInterface(
 
 
 LambdaNoReturn$Runner.$markImplementor(
-    /** @type {window.Function} */ (LambdaNoReturn$Runner));
+    /** @type {Function} */ (LambdaNoReturn$Runner));
 
 
 /**

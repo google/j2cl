@@ -10,12 +10,10 @@ goog.module('com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo.$Ov
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-/** @constructor */ let $Foo = window.Object;
-
 
 class Foo$$Overlay {
   /**
-   * @param {$Foo} $thisArg
+   * @param {Object} $thisArg
    * @return {void}
    * @public
    */
@@ -31,7 +29,7 @@ class Foo$$Overlay {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof $Foo; }
+  static $isInstance(instance) { return instance instanceof Object; }
 
   /**
    * Runs inline static field initializers.

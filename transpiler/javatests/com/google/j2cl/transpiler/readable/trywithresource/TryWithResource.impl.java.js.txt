@@ -8,19 +8,19 @@
 goog.module('com.google.j2cl.transpiler.readable.trywithresource.TryWithResource$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let TryWithResource$ClosableThing = goog.forwardDeclare('com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.ClosableThing$impl');
 let Exception = goog.forwardDeclare('java.lang.Exception$impl');
-let String = goog.forwardDeclare('java.lang.String$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 
-class TryWithResource extends Object {
+class TryWithResource extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -133,7 +133,7 @@ class TryWithResource extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -149,12 +149,12 @@ class TryWithResource extends Object {
     TryWithResource$ClosableThing = goog.module.get(
         'com.google.j2cl.transpiler.readable.trywithresource.TryWithResource.ClosableThing$impl');
     Exception = goog.module.get('java.lang.Exception$impl');
-    String = goog.module.get('java.lang.String$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
     Throwable = goog.module.get('java.lang.Throwable$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

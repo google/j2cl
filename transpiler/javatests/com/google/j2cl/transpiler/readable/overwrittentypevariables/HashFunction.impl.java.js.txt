@@ -11,7 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFu
 let MyFunction = goog.require('com.google.j2cl.transpiler.readable.overwrittentypevariables.MyFunction$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let String = goog.forwardDeclare('java.lang.String$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
 /**
@@ -22,7 +22,7 @@ let String = goog.forwardDeclare('java.lang.String$impl');
 class HashFunction {
   /**
    * Marks the provided class as implementing this interface.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -50,7 +50,7 @@ class HashFunction {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -64,7 +64,9 @@ class HashFunction {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { String = goog.module.get('java.lang.String$impl'); }
+  static $clinit() {
+    java_lang_String = goog.module.get('java.lang.String$impl');
+  }
 };
 
 $Util.$setClassMetadataForInterface(
@@ -72,7 +74,7 @@ $Util.$setClassMetadataForInterface(
     'com.google.j2cl.transpiler.readable.overwrittentypevariables.HashFunction');
 
 
-HashFunction.$markImplementor(/** @type {window.Function} */ (HashFunction));
+HashFunction.$markImplementor(/** @type {Function} */ (HashFunction));
 
 
 /**

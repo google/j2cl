@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.jsvarargs.Main.Function$impl');
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Object = goog.forwardDeclare('java.lang.Object$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
@@ -30,7 +30,7 @@ class Main$Function {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -55,7 +55,7 @@ class Main$Function {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -70,7 +70,7 @@ class Main$Function {
    * @public
    */
   static $clinit() {
-    Object = goog.module.get('java.lang.Object$impl');
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
   }
@@ -81,7 +81,7 @@ $Util.$setClassMetadataForInterface(
     'com.google.j2cl.transpiler.readable.jsvarargs.Main$Function');
 
 
-Main$Function.$markImplementor(/** @type {window.Function} */ (Main$Function));
+Main$Function.$markImplementor(/** @type {Function} */ (Main$Function));
 
 
 /**
