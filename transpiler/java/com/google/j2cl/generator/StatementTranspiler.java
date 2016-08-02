@@ -238,8 +238,10 @@ public class StatementTranspiler {
       @Override
       public boolean enterSynchronizedStatement(SynchronizedStatement synchronizedStatement) {
         FilePosition startPosition = builder.getCurrentPosition();
+        String utilAlias = environment.aliasForType(BootstrapType.NATIVE_UTIL.getDescriptor());
+        builder.append(utilAlias + ".$synchronized(");
         renderExpression(synchronizedStatement.getExpression());
-        builder.appendln(";");
+        builder.appendln(");");
         render(synchronizedStatement.getBody());
         addSourceMapping(synchronizedStatement, startPosition, builder.getCurrentPosition());
         return false;

@@ -132,6 +132,17 @@ class Util {
   static $getPrototype(constructor) { return constructor.prototype; }
 
   /**
+   * Helper to accept a reference to something that should be synchronized on.
+   * No synchronization is actually necessary since JS is singlethreaded but
+   * it's important that the parameter be passed since the accessing of it
+   * may have side effects that should be preserved.
+   *
+   * @param {*} value The value to synchronize on.
+   * @public
+   */
+  static $synchronized(value) {}
+
+  /**
    * Runs inline static field initializers.
    * @public
    */
