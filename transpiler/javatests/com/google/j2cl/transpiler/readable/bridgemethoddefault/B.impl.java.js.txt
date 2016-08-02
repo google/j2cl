@@ -1,0 +1,119 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.bridgemethoddefault.B.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.bridgemethoddefault.B$impl');
+
+
+let JJ = goog.require('com.google.j2cl.transpiler.readable.bridgemethoddefault.JJ$impl');
+let Object = goog.require('java.lang.Object$impl');
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let JJ$$Overlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.bridgemethoddefault.JJ.$Overlay$impl');
+
+
+/**
+ * @implements {JJ}
+ */
+class B extends Object {
+  /**
+   * Defines instance fields.
+   * @public
+   */
+  constructor() { super(); }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @return {!B}
+   * @public
+   */
+  static $create__() {
+    B.$clinit();
+    let $instance = new B();
+    $instance
+        .$ctor__com_google_j2cl_transpiler_readable_bridgemethoddefault_B__();
+    return $instance;
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_bridgemethoddefault_B__() {
+    this.$ctor__java_lang_Object__();
+    this.$init__com_google_j2cl_transpiler_readable_bridgemethoddefault_B();
+  }
+
+  /**
+   * Default method forwarding stub.
+   * @override
+   * @param {*} arg0
+   * @return {void}
+   * @public
+   */
+  m(arg0) {
+    JJ$$Overlay
+        .m_m__com_google_j2cl_transpiler_readable_bridgemethoddefault_JJ__java_lang_Object(
+            this, arg0);
+  }
+
+  /**
+   * Bridge to JsMethod.
+   * @override
+   * @param {*} arg0
+   * @return {void}
+   * @public
+   */
+  m_m__java_lang_Object(arg0) { this.m(arg0); }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) { return instance instanceof B; }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {window.Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(classConstructor, B);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    JJ$$Overlay = goog.module.get(
+        'com.google.j2cl.transpiler.readable.bridgemethoddefault.JJ.$Overlay$impl');
+    Object.$clinit();
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_bridgemethoddefault_B() {}
+};
+
+$Util.$setClassMetadata(
+    B, 'com.google.j2cl.transpiler.readable.bridgemethoddefault.B');
+
+
+JJ.$markImplementor(B);
+
+
+/**
+ * Export class.
+ */
+exports = B;
+//# sourceMappingURL=B.js.map

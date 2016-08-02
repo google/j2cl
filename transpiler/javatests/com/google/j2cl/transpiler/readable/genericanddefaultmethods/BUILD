@@ -10,15 +10,10 @@ load(
 
 # Creates verification target
 readable_example(
-    name = "bridgemethoddefault",
-    srcs = [
-        "A.java",
-        "B.java",
-    ],
+    name = "genericanddefaultmethods",
+    srcs = ["ConcreteClass.java"],
     supporting_srcs = [
-        "I.java",
-        "II.java",
-        "JJ.java",
+        "GenericClass.java",
+        "InterfaceWithDefault.java",
     ],
-    deps = ["//jre/java:gwt-jsinterop-annotations"],
 )
