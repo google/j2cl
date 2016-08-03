@@ -1,5 +1,7 @@
 package com.google.j2cl.transpiler.readable.castgenericreturntype;
 
+import java.util.ArrayList;
+
 /**
  * Tests that a cast is inserted when a method call returns a generic type.
  */
@@ -17,5 +19,18 @@ public class CastGenericReturnType<T> {
       return inferGeneric(foo);
     }
     return null;
+  }
+
+  public static <V> ArrayList<V> newArrayList(V foo) {
+    return new ArrayList<>();
+  }
+
+  public static void acceptsArrayListOfSuper(ArrayList<Object> foo) {
+    // empty
+  }
+
+  public static void main() {
+    ArrayList<Object> list = newArrayList("foo");
+    acceptsArrayListOfSuper(list);
   }
 }

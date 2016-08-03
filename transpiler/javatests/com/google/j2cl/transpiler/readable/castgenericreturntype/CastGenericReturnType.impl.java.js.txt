@@ -12,6 +12,7 @@ let Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let String = goog.forwardDeclare('java.lang.String$impl');
+let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 
 
@@ -76,6 +77,36 @@ class CastGenericReturnType extends Object {
   }
 
   /**
+   * @template M_V
+   * @param {M_V} foo
+   * @return {ArrayList<M_V>}
+   * @public
+   */
+  static m_newArrayList__java_lang_Object(foo) {
+    CastGenericReturnType.$clinit();
+    return /**@type {!ArrayList<*>} */ (ArrayList.$create__());
+  }
+
+  /**
+   * @param {ArrayList<*>} foo
+   * @return {void}
+   * @public
+   */
+  static m_acceptsArrayListOfSuper__java_util_ArrayList(foo) {
+    CastGenericReturnType.$clinit();
+  }
+
+  /**
+   * @return {void}
+   * @public
+   */
+  static m_main__() {
+    CastGenericReturnType.$clinit();
+    let list = CastGenericReturnType.m_newArrayList__java_lang_Object('foo');
+    CastGenericReturnType.m_acceptsArrayListOfSuper__java_util_ArrayList(list);
+  }
+
+  /**
    * Returns whether the provided instance is an instance of this class.
    * @param {*} instance
    * @return {boolean}
@@ -101,6 +132,7 @@ class CastGenericReturnType extends Object {
    */
   static $clinit() {
     String = goog.module.get('java.lang.String$impl');
+    ArrayList = goog.module.get('java.util.ArrayList$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     Object.$clinit();
   }
