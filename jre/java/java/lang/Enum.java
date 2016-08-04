@@ -14,12 +14,14 @@
 package java.lang;
 
 import java.io.Serializable;
+import jsinterop.annotations.JsIgnore;
+import jsinterop.annotations.JsType;
 
 /**
- * See <a
- * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Enum.html">the
- * official Java API doc</a> for details.
+ * See <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Enum.html">the official Java API
+ * doc</a> for details.
  */
+@JsType
 public abstract class Enum<E extends Enum<E>> implements Comparable<E>, Serializable {
 
   private final String name;
@@ -48,6 +50,7 @@ public abstract class Enum<E extends Enum<E>> implements Comparable<E>, Serializ
     return this.ordinal - ((Enum) other).ordinal;
   }
 
+  @JsIgnore
   public static native <T extends Enum<T>> T valueOf(Class<T> enumType, String name) /*-{
     return null;
   }-*/;

@@ -12,8 +12,8 @@
 [UNKNOWN] => [let $instance = new SimpleEnum2();]
 [UNKNOWN] => [$instance.$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum__java_lang_String__int(foo, $name, $ordinal);]
 [UNKNOWN] => [return $instance;]
-[this(foo.ordinal());] => [this.$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__int__java_lang_String__int(foo.m_ordinal__(), $name, $ordinal);]
-[UNKNOWN] => [return super.m_compareTo__java_lang_Enum(/**@type {SimpleEnum2} */ ($Casts.to(arg0, SimpleEnum2)));]
+[this(foo.ordinal());] => [this.$ctor__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2__int__java_lang_String__int(foo.ordinal(), $name, $ordinal);]
+[UNKNOWN] => [return super.compareTo(/**@type {SimpleEnum2} */ ($Casts.to(arg0, SimpleEnum2)));]
 [UNKNOWN] => [SimpleEnum2.$clinit();]
 [UNKNOWN] => [if ($Equality.$same(SimpleEnum2.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2_, null)) {
       SimpleEnum2.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2_ = $Enums.createMapFromValues(SimpleEnum2.m_values__());
@@ -26,4 +26,4 @@
 [VALUE2(SimpleEnum.V1)] => [SimpleEnum2.$f_VALUE2__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 = SimpleEnum2.$create__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum__java_lang_String__int(SimpleEnum.f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum, "VALUE2", 1);]
 [VALUE3(5) {}] => [SimpleEnum2.$f_VALUE3__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 = SimpleEnum2$1.$create__int__java_lang_String__int(5, "VALUE3", 2);]
 [UNKNOWN] => [SimpleEnum2.$f_namesToValuesMap__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2_ = null;]
-[int foo = SimpleEnum.V1.ordinal();] => [this.f_foo__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 = SimpleEnum.f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum.m_ordinal__();]
+[int foo = SimpleEnum.V1.ordinal();] => [this.f_foo__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum2 = SimpleEnum.f_V1__com_google_j2cl_transpiler_readable_simpleenum_SimpleEnum.ordinal();]

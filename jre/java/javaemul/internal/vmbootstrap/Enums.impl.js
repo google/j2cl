@@ -19,7 +19,7 @@ class Enums {
   static createMapFromValues(values) {
     let map = {};
     for (var i = 0; i < values.length; i++) {
-      let name = /** @type {Enum} */ (values[i]).m_name__();
+      let name = /** @type {Enum} */ (values[i]).name();
       map[name] = values[i];
     }
     return map;
