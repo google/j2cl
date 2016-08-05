@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.jsfunction.Main$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let MyJsFunctionImpl = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionImpl$impl');
@@ -16,7 +16,7 @@ let MyJsFunctionInterface = goog.forwardDeclare('com.google.j2cl.transpiler.read
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class Main extends Object {
+class Main extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -100,7 +100,7 @@ class Main extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -118,7 +118,7 @@ class Main extends Object {
     MyJsFunctionInterface = goog.module.get(
         'com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionInterface$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**
@@ -137,7 +137,7 @@ $Util.$setClassMetadata(
  * Native Method Injection
  */
 // Alias for the class defined in this module
-/** @constructor */ let __class = Main;
+const __class = Main;
 /**
  * @param {*} fn
  * @param {number} arg

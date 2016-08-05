@@ -10,8 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.Multipl
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Object = goog.forwardDeclare('java.lang.Object$impl');
-let String = goog.forwardDeclare('java.lang.String$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
 /**
@@ -44,7 +44,7 @@ class MultipleAbstractParents$List {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -71,7 +71,7 @@ class MultipleAbstractParents$List {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -86,8 +86,8 @@ class MultipleAbstractParents$List {
    * @public
    */
   static $clinit() {
-    Object = goog.module.get('java.lang.Object$impl');
-    String = goog.module.get('java.lang.String$impl');
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
   }
 };
 
@@ -97,7 +97,7 @@ $Util.$setClassMetadataForInterface(
 
 
 MultipleAbstractParents$List.$markImplementor(
-    /** @type {window.Function} */ (MultipleAbstractParents$List));
+    /** @type {Function} */ (MultipleAbstractParents$List));
 
 
 /**

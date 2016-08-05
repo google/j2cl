@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.jsfunctionoptimization.JsFuncti
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let String = goog.forwardDeclare('java.lang.String$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
 /**
@@ -27,7 +27,7 @@ class JsFunctionOptimization$F {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -52,7 +52,7 @@ class JsFunctionOptimization$F {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -66,7 +66,9 @@ class JsFunctionOptimization$F {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { String = goog.module.get('java.lang.String$impl'); }
+  static $clinit() {
+    java_lang_String = goog.module.get('java.lang.String$impl');
+  }
 };
 
 $Util.$setClassMetadataForInterface(
@@ -75,7 +77,7 @@ $Util.$setClassMetadataForInterface(
 
 
 JsFunctionOptimization$F.$markImplementor(
-    /** @type {window.Function} */ (JsFunctionOptimization$F));
+    /** @type {Function} */ (JsFunctionOptimization$F));
 
 
 /**

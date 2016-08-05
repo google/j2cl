@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.primitivearrays.PrimitiveArrays$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -23,7 +23,7 @@ let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 let $short = goog.forwardDeclare('vmbootstrap.primitives.$short$impl');
 
 
-class PrimitiveArrays extends Object {
+class PrimitiveArrays extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -102,7 +102,7 @@ class PrimitiveArrays extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -124,7 +124,7 @@ class PrimitiveArrays extends Object {
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     $long = goog.module.get('vmbootstrap.primitives.$long$impl');
     $short = goog.module.get('vmbootstrap.primitives.$short$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

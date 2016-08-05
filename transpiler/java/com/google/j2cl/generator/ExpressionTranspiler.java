@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.generator;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractTransformer;
@@ -105,7 +107,7 @@ public class ExpressionTranspiler {
 
       @Override
       public Void transformCastExpression(CastExpression castExpression) {
-        Preconditions.checkArgument(
+        checkArgument(
             false, castExpression + " CastExpression should have been normalized to method call.");
         return null;
       }
@@ -150,8 +152,7 @@ public class ExpressionTranspiler {
 
         String fieldMangledName =
             ManglingNameUtils.getMangledName(fieldAccess.getTarget(), accessBackingPrivateField);
-        process(fieldAccess.getQualifier());
-        sourceBuilder.append("." + fieldMangledName);
+        renderQualifiedName(fieldAccess.getQualifier(), fieldMangledName);
         return null;
       }
 
@@ -172,7 +173,7 @@ public class ExpressionTranspiler {
 
       @Override
       public Void transformInstanceOfExpression(InstanceOfExpression expression) {
-        Preconditions.checkArgument(false, "InstanceOf expression should have been normalized.");
+        checkArgument(false, "InstanceOf expression should have been normalized.");
         return null;
       }
 
@@ -246,11 +247,26 @@ public class ExpressionTranspiler {
       }
 
       private void renderQualifiedName(Expression qualifier, String jsPropertyName) {
-        if (qualifier != null) {
+        if (shouldRenderQualifier(qualifier)) {
           process(qualifier);
           sourceBuilder.append(".");
         }
         sourceBuilder.append(jsPropertyName);
+      }
+
+      private boolean shouldRenderQualifier(Expression qualifier) {
+        if (qualifier == null) {
+          return false;
+        }
+
+        if (!(qualifier instanceof TypeReference)) {
+          return true;
+        }
+
+        // Static members in the global scope are explicitly qualified by a TypeReference node to
+        // the TypeDescriptor representing the global scope.
+        TypeReference typeReference = (TypeReference) qualifier;
+        return typeReference.getReferencedTypeDescriptor() != TypeDescriptors.GLOBAL_NAMESPACE;
       }
 
       /** JsProperty getter is emitted as property access: qualifier.property. */
@@ -268,15 +284,13 @@ public class ExpressionTranspiler {
       }
 
       private void renderMethodCallHeader(MethodCall expression) {
+        checkArgument(!expression.isStaticDispatch());
         MethodDescriptor target = expression.getTarget();
         if (target.isConstructor()) {
           sourceBuilder.append("super");
         } else if (target.isJsFunction()) {
           // Call to a JsFunction method is emitted as the call on the qualifier itself:
           process(expression.getQualifier());
-        } else if (expression.isStaticDispatch()) {
-          String typeName = environment.aliasForType(target.getEnclosingClassTypeDescriptor());
-          sourceBuilder.append(typeName + ".prototype." + getJsMethodName(target));
         } else {
           renderQualifiedName(expression.getQualifier(), getJsMethodName(target));
         }
@@ -290,7 +304,7 @@ public class ExpressionTranspiler {
 
       @Override
       public Void transformNewArray(NewArray newArrayExpression) {
-        Preconditions.checkArgument(false, "NewArray should have been normalized.");
+        checkArgument(false, "NewArray should have been normalized.");
         return null;
       }
 
@@ -324,7 +338,7 @@ public class ExpressionTranspiler {
 
       @Override
       public Void transformPostfixExpression(PostfixExpression expression) {
-        Preconditions.checkArgument(
+        checkArgument(
             !TypeDescriptors.get()
                 .primitiveLong
                 .equalsIgnoreNullability(expression.getTypeDescriptor()));

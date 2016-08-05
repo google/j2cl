@@ -12,7 +12,7 @@ let C = goog.require('com.google.j2cl.transpiler.readable.backwardbridgemethod.C
 let I = goog.require('com.google.j2cl.transpiler.readable.backwardbridgemethod.I$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let String = goog.forwardDeclare('java.lang.String$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
 /**
@@ -83,7 +83,7 @@ class BackwardBridgeMethod extends C {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -96,7 +96,7 @@ class BackwardBridgeMethod extends C {
    * @public
    */
   static $clinit() {
-    String = goog.module.get('java.lang.String$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
     C.$clinit();
   }
 

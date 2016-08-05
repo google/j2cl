@@ -8,14 +8,14 @@
 goog.module('com.google.j2cl.transpiler.readable.varargs.Varargs$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class Varargs extends Object {
+class Varargs extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -97,7 +97,7 @@ class Varargs extends Object {
   static m_bar__java_lang_Object__java_lang_Object(a, b) {
     Varargs.$clinit();
     Varargs.m_fun__arrayOf_java_lang_Object(
-        /**@type {!Array<*>} */ ($Arrays.$init([a, b], Object)));
+        /**@type {!Array<*>} */ ($Arrays.$init([a, b], java_lang_Object)));
   }
 
   /**
@@ -107,8 +107,8 @@ class Varargs extends Object {
   m_main__() {
     let v = Varargs.$create__();
     v.m_test__int__arrayOf_java_lang_Object(1, []);
-    v.m_test__int__arrayOf_java_lang_Object(1, [Object.$create__()]);
-    v.m_test__int__arrayOf_java_lang_Object(1, [Object.$create__()]);
+    v.m_test__int__arrayOf_java_lang_Object(1, [java_lang_Object.$create__()]);
+    v.m_test__int__arrayOf_java_lang_Object(1, [java_lang_Object.$create__()]);
     v.m_test__int__arrayOf_java_lang_Object(1, []);
   }
 
@@ -122,7 +122,7 @@ class Varargs extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -137,7 +137,7 @@ class Varargs extends Object {
   static $clinit() {
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

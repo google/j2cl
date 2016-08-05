@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterfa
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Object = goog.forwardDeclare('java.lang.Object$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
 /**
@@ -43,7 +43,7 @@ class SuperInterface {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -70,7 +70,7 @@ class SuperInterface {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -84,7 +84,9 @@ class SuperInterface {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { Object = goog.module.get('java.lang.Object$impl'); }
+  static $clinit() {
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
+  }
 };
 
 $Util.$setClassMetadataForInterface(
@@ -92,8 +94,7 @@ $Util.$setClassMetadataForInterface(
     'com.google.j2cl.transpiler.readable.accidentaloverride.SuperInterface');
 
 
-SuperInterface.$markImplementor(
-    /** @type {window.Function} */ (SuperInterface));
+SuperInterface.$markImplementor(/** @type {Function} */ (SuperInterface));
 
 
 /**

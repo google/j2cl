@@ -10,15 +10,13 @@ goog.module('com.google.j2cl.transpiler.readable.objectmap.ObjectMap.$Overlay$im
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let String = goog.forwardDeclare('java.lang.String$impl');
-
-/** @constructor */ let $ObjectMap = window.Object;
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
 class ObjectMap$$Overlay {
   /**
    * @template M_T
-   * @return {$ObjectMap<string, M_T>}
+   * @return {Object<string, M_T>}
    * @public
    */
   static m_create___$pp_com_google_j2cl_transpiler_readable_objectmap() {
@@ -27,7 +25,7 @@ class ObjectMap$$Overlay {
   }
 
   /**
-   * @return {$ObjectMap<string, ?string>}
+   * @return {Object<string, ?string>}
    * @public
    */
   static m_createForString___$pp_com_google_j2cl_transpiler_readable_objectmap() {
@@ -41,13 +39,15 @@ class ObjectMap$$Overlay {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof $ObjectMap; }
+  static $isInstance(instance) { return instance instanceof Object; }
 
   /**
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { String = goog.module.get('java.lang.String$impl'); }
+  static $clinit() {
+    java_lang_String = goog.module.get('java.lang.String$impl');
+  }
 };
 
 

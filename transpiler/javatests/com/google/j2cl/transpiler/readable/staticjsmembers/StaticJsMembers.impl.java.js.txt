@@ -8,20 +8,15 @@
 goog.module('com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Bar = goog.forwardDeclare('com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.foo.Bar$$Proxy');
 let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
-/** @constructor */ let $global_Math = window.Math;
-/** @constructor */ let $StaticJsMembers$Native = window.Object;
-/** @constructor */ let $global_window = window.window;
-/** @constructor */ let $StaticJsMembers$Extern = window.window.Object;
 
-
-class StaticJsMembers extends Object {
+class StaticJsMembers extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -74,10 +69,10 @@ class StaticJsMembers extends Object {
     StaticJsMembers.fun(1);
     StaticJsMembers.f2(1);
     StaticJsMembers.f2(1);
-    $global_Math.floor(1.1);
-    $global_Math.floor(1.1);
-    $global_window.isFinite(1.1);
-    $global_window.isFinite(1.1);
+    Math.floor(1.1);
+    Math.floor(1.1);
+    isFinite(1.1);
+    isFinite(1.1);
     Bar.baz();
     Bar.baz();
     let n =
@@ -85,12 +80,12 @@ class StaticJsMembers extends Object {
             .$f_field1__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers;
     n = StaticJsMembers
             .$f_field2__com_google_j2cl_transpiler_readable_staticjsmembers_StaticJsMembers;
-    n = $global_Math.PI;
-    n = $global_window.top;
+    n = Math.PI;
+    n = top;
     n = Bar.field;
-    n = $global_window.window.top;
-    new $StaticJsMembers$Native();
-    new $StaticJsMembers$Extern();
+    n = window.top;
+    new Object();
+    new window.Object();
   }
 
   /**
@@ -103,7 +98,7 @@ class StaticJsMembers extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -170,7 +165,7 @@ class StaticJsMembers extends Object {
         'com.google.j2cl.transpiler.readable.staticjsmembers.StaticJsMembers.foo.Bar$$Proxy');
     $double = goog.module.get('vmbootstrap.primitives.$double$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

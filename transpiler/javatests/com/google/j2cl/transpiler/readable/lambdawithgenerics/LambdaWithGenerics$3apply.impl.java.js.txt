@@ -8,8 +8,8 @@
 goog.module('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics.$Anonymous3apply$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
-let Function = goog.require('java.util.function.Function$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
+let java_util_function_Function = goog.require('java.util.function.Function$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 let $LongUtils = goog.require('vmbootstrap.LongUtils$impl');
 
@@ -21,9 +21,9 @@ let Function$$Overlay = goog.forwardDeclare('java.util.function.Function.$Overla
 
 /**
  * @template M_T, C_E
- * @implements {Function<?, ?>}
+ * @implements {java_util_function_Function<?, ?>}
  */
-class LambdaWithGenerics$3apply extends Object {
+class LambdaWithGenerics$3apply extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -85,8 +85,8 @@ class LambdaWithGenerics$3apply extends Object {
    * Default method forwarding stub.
    * @override
    * @template M_V
-   * @param {Function<?, ?>} arg0
-   * @return {Function<?, M_V>}
+   * @param {java_util_function_Function<?, ?>} arg0
+   * @return {java_util_function_Function<?, M_V>}
    * @public
    */
   m_andThen__java_util_function_Function(arg0) {
@@ -99,8 +99,8 @@ class LambdaWithGenerics$3apply extends Object {
    * Default method forwarding stub.
    * @override
    * @template M_V
-   * @param {Function<?, ?>} arg0
-   * @return {Function<M_V, ?>}
+   * @param {java_util_function_Function<?, ?>} arg0
+   * @return {java_util_function_Function<M_V, ?>}
    * @public
    */
   m_compose__java_util_function_Function(arg0) {
@@ -121,7 +121,7 @@ class LambdaWithGenerics$3apply extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -140,7 +140,7 @@ class LambdaWithGenerics$3apply extends Object {
     Long = goog.module.get('java.lang.Long$impl');
     Function$$Overlay =
         goog.module.get('java.util.function.Function.$Overlay$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**
@@ -156,7 +156,7 @@ $Util.$setClassMetadata(
     'com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$3apply');
 
 
-Function.$markImplementor(LambdaWithGenerics$3apply);
+java_util_function_Function.$markImplementor(LambdaWithGenerics$3apply);
 
 
 /**

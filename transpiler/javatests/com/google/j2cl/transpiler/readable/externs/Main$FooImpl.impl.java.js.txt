@@ -8,13 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.externs.Main.FooImpl$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let String = goog.forwardDeclare('java.lang.String$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
-class Main$FooImpl extends Object {
+class Main$FooImpl extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -58,7 +58,7 @@ class Main$FooImpl extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -71,8 +71,8 @@ class Main$FooImpl extends Object {
    * @public
    */
   static $clinit() {
-    String = goog.module.get('java.lang.String$impl');
-    Object.$clinit();
+    java_lang_String = goog.module.get('java.lang.String$impl');
+    java_lang_Object.$clinit();
   }
 
   /**

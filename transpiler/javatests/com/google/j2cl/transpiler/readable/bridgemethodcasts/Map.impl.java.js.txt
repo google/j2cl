@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.bridgemethodcasts.Map$impl');
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Object = goog.forwardDeclare('java.lang.Object$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
 /**
@@ -44,7 +44,7 @@ class Map {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -71,7 +71,7 @@ class Map {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -85,14 +85,16 @@ class Map {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { Object = goog.module.get('java.lang.Object$impl'); }
+  static $clinit() {
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
+  }
 };
 
 $Util.$setClassMetadataForInterface(
     Map, 'com.google.j2cl.transpiler.readable.bridgemethodcasts.Map');
 
 
-Map.$markImplementor(/** @type {window.Function} */ (Map));
+Map.$markImplementor(/** @type {Function} */ (Map));
 
 
 /**

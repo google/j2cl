@@ -9,17 +9,17 @@ goog.module('com.google.j2cl.transpiler.readable.unimplementedbridgemethod.Bar$i
 
 
 let J = goog.require('com.google.j2cl.transpiler.readable.unimplementedbridgemethod.J$impl');
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let String = goog.forwardDeclare('java.lang.String$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
 /**
  * @abstract
  * @implements {J}
  */
-class Bar extends Object {
+class Bar extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -55,7 +55,7 @@ class Bar extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -68,8 +68,8 @@ class Bar extends Object {
    * @public
    */
   static $clinit() {
-    String = goog.module.get('java.lang.String$impl');
-    Object.$clinit();
+    java_lang_String = goog.module.get('java.lang.String$impl');
+    java_lang_Object.$clinit();
   }
 
   /**

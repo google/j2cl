@@ -11,7 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.Multipl
 let MultipleAbstractParents$List = goog.require('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.List$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let String = goog.forwardDeclare('java.lang.String$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 
 
 /**
@@ -21,15 +21,15 @@ let String = goog.forwardDeclare('java.lang.String$impl');
 class MultipleAbstractParents$IStringList {
   /**
    * @abstract
-   * @param {?string} string
+   * @param {?string} l_string
    * @return {?string}
    * @public
    */
-  m_getFoo__java_lang_String(string) {}
+  m_getFoo__java_lang_String(l_string) {}
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -57,7 +57,7 @@ class MultipleAbstractParents$IStringList {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -71,7 +71,9 @@ class MultipleAbstractParents$IStringList {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { String = goog.module.get('java.lang.String$impl'); }
+  static $clinit() {
+    java_lang_String = goog.module.get('java.lang.String$impl');
+  }
 };
 
 $Util.$setClassMetadataForInterface(
@@ -80,7 +82,7 @@ $Util.$setClassMetadataForInterface(
 
 
 MultipleAbstractParents$IStringList.$markImplementor(
-    /** @type {window.Function} */ (MultipleAbstractParents$IStringList));
+    /** @type {Function} */ (MultipleAbstractParents$IStringList));
 
 
 /**

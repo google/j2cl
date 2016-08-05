@@ -8,13 +8,13 @@
 goog.module('com.google.j2cl.transpiler.readable.srcjar.Srcjar$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Foo = goog.forwardDeclare('com.google.j2cl.transpiler.readable.srcjar.Foo$impl');
 
 
-class Srcjar extends Object {
+class Srcjar extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -62,7 +62,7 @@ class Srcjar extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -77,7 +77,7 @@ class Srcjar extends Object {
   static $clinit() {
     Foo =
         goog.module.get('com.google.j2cl.transpiler.readable.srcjar.Foo$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

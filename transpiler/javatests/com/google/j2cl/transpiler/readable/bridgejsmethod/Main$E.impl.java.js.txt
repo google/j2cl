@@ -12,7 +12,7 @@ let Main$B = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Ma
 let Main$J = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Main.J$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let String = goog.forwardDeclare('java.lang.String$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
@@ -57,7 +57,7 @@ class Main$E extends Main$B {
    * @public
    */
   m_bar__java_lang_Object(arg0) {
-    super.bar(/**@type {?string} */ ($Casts.to(arg0, String)));
+    super.bar(/**@type {?string} */ ($Casts.to(arg0, java_lang_String)));
   }
 
   /**
@@ -68,7 +68,7 @@ class Main$E extends Main$B {
    * @public
    */
   fun(arg0) {
-    return super.fun(/**@type {?string} */ ($Casts.to(arg0, String)));
+    return super.fun(/**@type {?string} */ ($Casts.to(arg0, java_lang_String)));
   }
 
   /**
@@ -81,7 +81,7 @@ class Main$E extends Main$B {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -94,7 +94,7 @@ class Main$E extends Main$B {
    * @public
    */
   static $clinit() {
-    String = goog.module.get('java.lang.String$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     Main$B.$clinit();
   }

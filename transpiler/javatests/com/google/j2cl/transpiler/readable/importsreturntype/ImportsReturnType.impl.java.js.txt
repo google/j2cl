@@ -8,14 +8,14 @@
 goog.module('com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let ImportsReturnType$Entry = goog.forwardDeclare('com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType.Entry$impl');
 let ImportsReturnType$Set = goog.forwardDeclare('com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType.Set$impl');
 
 
-class ImportsReturnType extends Object {
+class ImportsReturnType extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -61,7 +61,7 @@ class ImportsReturnType extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -78,7 +78,7 @@ class ImportsReturnType extends Object {
         'com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType.Entry$impl');
     ImportsReturnType$Set = goog.module.get(
         'com.google.j2cl.transpiler.readable.importsreturntype.ImportsReturnType.Set$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

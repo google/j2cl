@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.simplegenericinterface.SimpleGe
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Object = goog.forwardDeclare('java.lang.Object$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
 /**
@@ -43,7 +43,7 @@ class SimpleGenericInterface {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -70,7 +70,7 @@ class SimpleGenericInterface {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -84,7 +84,9 @@ class SimpleGenericInterface {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { Object = goog.module.get('java.lang.Object$impl'); }
+  static $clinit() {
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
+  }
 };
 
 $Util.$setClassMetadataForInterface(
@@ -93,7 +95,7 @@ $Util.$setClassMetadataForInterface(
 
 
 SimpleGenericInterface.$markImplementor(
-    /** @type {window.Function} */ (SimpleGenericInterface));
+    /** @type {Function} */ (SimpleGenericInterface));
 
 
 /**

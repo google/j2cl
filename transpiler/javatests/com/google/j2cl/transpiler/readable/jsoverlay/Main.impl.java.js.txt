@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.jsoverlay.Main$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Main$NativeJsTypeWithOverlay = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay$$Proxy');
@@ -17,7 +17,7 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class Main extends Object {
+class Main extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -82,7 +82,7 @@ class Main extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -101,7 +101,7 @@ class Main extends Object {
         'com.google.j2cl.transpiler.readable.jsoverlay.Main.NativeJsTypeWithOverlay.$Overlay$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

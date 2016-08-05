@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.primitivefieldsignatures.PrimitiveFieldSignatures$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 let $LongUtils = goog.require('vmbootstrap.LongUtils$impl');
@@ -23,7 +23,7 @@ let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 let $short = goog.forwardDeclare('vmbootstrap.primitives.$short$impl');
 
 
-class PrimitiveFieldSignatures extends Object {
+class PrimitiveFieldSignatures extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -91,7 +91,7 @@ class PrimitiveFieldSignatures extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -112,7 +112,7 @@ class PrimitiveFieldSignatures extends Object {
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     $long = goog.module.get('vmbootstrap.primitives.$long$impl');
     $short = goog.module.get('vmbootstrap.primitives.$short$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

@@ -15,15 +15,18 @@
  */
 package com.google.j2cl.generator;
 
+import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.generator.visitors.Import;
-import com.google.j2cl.generator.visitors.ImportGatheringVisitor;
-import com.google.j2cl.generator.visitors.ImportGatheringVisitor.ImportCategory;
-import com.google.j2cl.generator.visitors.ImportUtils;
+import com.google.j2cl.generator.visitors.ImportGatherer;
+import com.google.j2cl.generator.visitors.ImportGatherer.ImportCategory;
 import com.google.j2cl.generator.visitors.VariableAliasesGatheringVisitor;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -44,11 +47,12 @@ public abstract class JavaScriptGenerator {
     this.errors = errors;
     this.declareLegacyNamespace = declareLegacyNamespace;
     this.type = type;
-    importsByCategory = ImportGatheringVisitor.gatherImports(type);
-    List<Import> sortedImports = ImportUtils.getSortedImports(importsByCategory);
+    importsByCategory = ImportGatherer.gatherImports(type);
+    Set<Import> imports = new LinkedHashSet<>();
+    Iterables.addAll(imports, Iterables.concat(importsByCategory.values()));
     Map<Variable, String> aliasByVariable =
-        VariableAliasesGatheringVisitor.gatherVariableAliases(sortedImports, type);
-    environment = new GenerationEnvironment(sortedImports, aliasByVariable);
+        VariableAliasesGatheringVisitor.gatherVariableAliases(imports, type);
+    environment = new GenerationEnvironment(imports, aliasByVariable);
   }
 
   public Map<SourcePosition, SourcePosition> getSourceMappings() {
@@ -58,4 +62,11 @@ public abstract class JavaScriptGenerator {
   abstract String renderOutput();
 
   abstract String getSuffix();
+
+  static Iterable<Import> sortImports(Iterable<Import> iterable) {
+    List<Import> sortedList = new ArrayList<>();
+    Iterables.addAll(sortedList, iterable);
+    Collections.sort(sortedList);
+    return sortedList;
+  }
 }

@@ -10,7 +10,7 @@ goog.module('com.google.j2cl.transpiler.readable.casttogenerics.CastToGenerics.E
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Object = goog.forwardDeclare('java.lang.Object$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
 /**
@@ -34,7 +34,7 @@ class CastToGenerics$Empty1 {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -61,7 +61,7 @@ class CastToGenerics$Empty1 {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -75,7 +75,9 @@ class CastToGenerics$Empty1 {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { Object = goog.module.get('java.lang.Object$impl'); }
+  static $clinit() {
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
+  }
 };
 
 $Util.$setClassMetadataForInterface(
@@ -84,7 +86,7 @@ $Util.$setClassMetadataForInterface(
 
 
 CastToGenerics$Empty1.$markImplementor(
-    /** @type {window.Function} */ (CastToGenerics$Empty1));
+    /** @type {Function} */ (CastToGenerics$Empty1));
 
 
 /**

@@ -9,7 +9,7 @@ goog.module('com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses
 
 
 let InnerClasses$A = goog.require('com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses.A$impl');
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let InnerClasses = goog.forwardDeclare('com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses$impl');
@@ -19,7 +19,7 @@ let InnerClasses = goog.forwardDeclare('com.google.j2cl.transpiler.readable.abst
  * @abstract
  * @implements {InnerClasses$A}
  */
-class InnerClasses$C extends Object {
+class InnerClasses$C extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -71,7 +71,7 @@ class InnerClasses$C extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -86,7 +86,7 @@ class InnerClasses$C extends Object {
   static $clinit() {
     InnerClasses = goog.module.get(
         'com.google.j2cl.transpiler.readable.abstractinnerclass.InnerClasses$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

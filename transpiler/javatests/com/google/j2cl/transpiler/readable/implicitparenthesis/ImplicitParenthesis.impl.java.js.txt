@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.implicitparenthesis.ImplicitParenthesis$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
@@ -17,7 +17,7 @@ let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 
 
-class ImplicitParenthesis extends Object {
+class ImplicitParenthesis extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -147,7 +147,7 @@ class ImplicitParenthesis extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -164,7 +164,7 @@ class ImplicitParenthesis extends Object {
     Integer = goog.module.get('java.lang.Integer$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
     $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

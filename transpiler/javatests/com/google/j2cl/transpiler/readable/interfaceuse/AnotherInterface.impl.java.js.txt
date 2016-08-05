@@ -26,7 +26,7 @@ class AnotherInterface {
 
   /**
    * Marks the provided class as implementing this interface.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @public
    */
   static $markImplementor(classConstructor) {
@@ -54,7 +54,7 @@ class AnotherInterface {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -76,8 +76,7 @@ $Util.$setClassMetadataForInterface(
     'com.google.j2cl.transpiler.readable.interfaceuse.AnotherInterface');
 
 
-AnotherInterface.$markImplementor(
-    /** @type {window.Function} */ (AnotherInterface));
+AnotherInterface.$markImplementor(/** @type {Function} */ (AnotherInterface));
 
 
 /**

@@ -8,19 +8,19 @@
 goog.module('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let MultipleAbstractParents$ArrayList = goog.forwardDeclare('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.ArrayList$impl');
 let MultipleAbstractParents$IStringList = goog.forwardDeclare('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList$impl');
 let MultipleAbstractParents$StringList = goog.forwardDeclare('com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.StringList$impl');
-let String = goog.forwardDeclare('java.lang.String$impl');
+let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
-class MultipleAbstractParents extends Object {
+class MultipleAbstractParents extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -58,23 +58,26 @@ class MultipleAbstractParents extends Object {
   static m_main__arrayOf_java_lang_String(args) {
     MultipleAbstractParents.$clinit();
     $Asserts.$enabled() &&
-        $Asserts.$assert(String.m_equals__java_lang_String__java_lang_Object(
-            /**@type {!MultipleAbstractParents$ArrayList<?string>} */ (
-                MultipleAbstractParents$ArrayList.$create__())
-                .m_getFoo__java_lang_Object(null),
-            'AbstractCollection'));
+        $Asserts.$assert(
+            java_lang_String.m_equals__java_lang_String__java_lang_Object(
+                /**@type {!MultipleAbstractParents$ArrayList<?string>} */ (
+                    MultipleAbstractParents$ArrayList.$create__())
+                    .m_getFoo__java_lang_Object(null),
+                'AbstractCollection'));
     $Asserts.$enabled() &&
-        $Asserts.$assert(String.m_equals__java_lang_String__java_lang_Object(
-            MultipleAbstractParents$StringList.$create__()
-                .m_getFoo__java_lang_Object(null),
-            'AbstractCollection'));
+        $Asserts.$assert(
+            java_lang_String.m_equals__java_lang_String__java_lang_Object(
+                MultipleAbstractParents$StringList.$create__()
+                    .m_getFoo__java_lang_Object(null),
+                'AbstractCollection'));
     $Asserts.$enabled() &&
-        $Asserts.$assert(String.m_equals__java_lang_String__java_lang_Object(
-            (/**@type {MultipleAbstractParents$IStringList} */ ($Casts.to(
-                 MultipleAbstractParents$StringList.$create__(),
-                 MultipleAbstractParents$IStringList)))
-                .m_getFoo__java_lang_String(null),
-            'AbstractCollection'));
+        $Asserts.$assert(
+            java_lang_String.m_equals__java_lang_String__java_lang_Object(
+                (/**@type {MultipleAbstractParents$IStringList} */ ($Casts.to(
+                     MultipleAbstractParents$StringList.$create__(),
+                     MultipleAbstractParents$IStringList)))
+                    .m_getFoo__java_lang_String(null),
+                'AbstractCollection'));
   }
 
   /**
@@ -89,7 +92,7 @@ class MultipleAbstractParents extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -108,11 +111,11 @@ class MultipleAbstractParents extends Object {
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.IStringList$impl');
     MultipleAbstractParents$StringList = goog.module.get(
         'com.google.j2cl.transpiler.readable.multipleabstractparents.MultipleAbstractParents.StringList$impl');
-    String = goog.module.get('java.lang.String$impl');
+    java_lang_String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

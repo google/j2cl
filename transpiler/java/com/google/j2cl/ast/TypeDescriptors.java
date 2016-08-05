@@ -199,7 +199,7 @@ public class TypeDescriptors {
       createNative(
           JsUtils.JS_PACKAGE_GLOBAL,
           // Native type name
-          JsUtils.GLOBAL_ALIAS,
+          "",
           Collections.emptyList());
 
   /** Returns TypeDescriptor that contains the devirtualized JsOverlay methods of a native type. */

@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.instanceofboxedtype.InstanceofBoxedType$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
@@ -22,7 +22,7 @@ let Number = goog.forwardDeclare('java.lang.Number$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
 
 
-class InstanceofBoxedType extends Object {
+class InstanceofBoxedType extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -81,7 +81,7 @@ class InstanceofBoxedType extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -103,7 +103,7 @@ class InstanceofBoxedType extends Object {
     Long = goog.module.get('java.lang.Long$impl');
     Number = goog.module.get('java.lang.Number$impl');
     Short = goog.module.get('java.lang.Short$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

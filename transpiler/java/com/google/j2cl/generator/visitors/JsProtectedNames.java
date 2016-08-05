@@ -16,18 +16,33 @@
 package com.google.j2cl.generator.visitors;
 
 import com.google.common.collect.Sets;
-
 import java.util.Set;
 
 /**
  * All JavaScript keywords.
  */
 public class JsProtectedNames {
-  private static final Set<String> javaScriptKeywords;
+  private static final Set<String> protectedNames;
 
   static {
-    javaScriptKeywords =
+    protectedNames =
         Sets.newHashSet(
+            // Main closure namespace, used at generation time.
+            "goog",
+            // TODO(rluble): move all uses to ast so that the names are collected uniformly.
+            // Names of externs that might used at generation time without a presence in the ast.
+            // These should be explicitly avoided.
+            "Function",
+            // Names of common externs that are currently not explicitly used. These are renamed to
+            // avoid confusion and they are also commonly used in native.js files.
+            "boolean",
+            "number",
+            "string",
+            "window",
+            "Array",
+            "Object",
+            "String",
+            // Javascript keywords.
             "abstract",
             "arguments",
             "boolean",
@@ -93,7 +108,7 @@ public class JsProtectedNames {
             "yield");
   }
 
-  public static boolean isKeyword(String s) {
-    return javaScriptKeywords.contains(s);
+  public static boolean isLegalName(String s) {
+    return !protectedNames.contains(s);
   }
 }

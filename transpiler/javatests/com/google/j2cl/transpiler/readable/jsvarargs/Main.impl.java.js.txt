@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.jsvarargs.Main$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Main$AFunction = goog.forwardDeclare('com.google.j2cl.transpiler.readable.jsvarargs.Main.AFunction$impl');
@@ -18,7 +18,7 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 
-class Main extends Object {
+class Main extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -124,8 +124,8 @@ class Main extends Object {
    */
   static generics(elements) {
     Main.$clinit();
-    let $var_args_copy =
-        /**@type {!Array<*>} */ ($Arrays.$create([arguments.length], Object));
+    let $var_args_copy = /**@type {!Array<*>} */ (
+        $Arrays.$create([arguments.length], java_lang_Object));
     for (let $i = 0; $i < arguments.length; $i++) {
       $Arrays.$set($var_args_copy, $i, arguments[$i]);
     }
@@ -228,8 +228,8 @@ class Main extends Object {
    */
   m_testJsFunction__() {
     let a = Main$AFunction.$create__();
-    let o1 = Object.$create__();
-    let o2 = Object.$create__();
+    let o1 = java_lang_Object.$create__();
+    let o2 = java_lang_Object.$create__();
     a(0, o1, o2);
     a(0);
     a(0, o1, o2);
@@ -257,7 +257,7 @@ class Main extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -276,7 +276,7 @@ class Main extends Object {
     List = goog.module.get('java.util.List$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

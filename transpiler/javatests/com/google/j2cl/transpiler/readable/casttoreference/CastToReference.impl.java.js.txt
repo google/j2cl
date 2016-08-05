@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.casttoreference.CastToReference$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 let $LongUtils = goog.require('vmbootstrap.LongUtils$impl');
 
@@ -21,7 +21,7 @@ let Short = goog.forwardDeclare('java.lang.Short$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
-class CastToReference extends Object {
+class CastToReference extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -72,14 +72,18 @@ class CastToReference extends Object {
     o = Long.m_valueOf__long(l);
     o = Float.m_valueOf__float(f);
     o = d;
-    o = /**@type {*} */ ($Casts.to(bool, Object));
-    o = /**@type {*} */ ($Casts.to(Byte.m_valueOf__byte(b), Object));
-    o = /**@type {*} */ ($Casts.to(Character.m_valueOf__char(c), Object));
-    o = /**@type {*} */ ($Casts.to(Short.m_valueOf__short(s), Object));
-    o = /**@type {*} */ ($Casts.to(Integer.m_valueOf__int(i), Object));
-    o = /**@type {*} */ ($Casts.to(Long.m_valueOf__long(l), Object));
-    o = /**@type {*} */ ($Casts.to(Float.m_valueOf__float(f), Object));
-    o = /**@type {*} */ ($Casts.to(d, Object));
+    o = /**@type {*} */ ($Casts.to(bool, java_lang_Object));
+    o = /**@type {*} */ ($Casts.to(Byte.m_valueOf__byte(b), java_lang_Object));
+    o = /**@type {*} */ (
+        $Casts.to(Character.m_valueOf__char(c), java_lang_Object));
+    o = /**@type {*} */ (
+        $Casts.to(Short.m_valueOf__short(s), java_lang_Object));
+    o = /**@type {*} */ (
+        $Casts.to(Integer.m_valueOf__int(i), java_lang_Object));
+    o = /**@type {*} */ ($Casts.to(Long.m_valueOf__long(l), java_lang_Object));
+    o = /**@type {*} */ (
+        $Casts.to(Float.m_valueOf__float(f), java_lang_Object));
+    o = /**@type {*} */ ($Casts.to(d, java_lang_Object));
   }
 
   /**
@@ -92,7 +96,7 @@ class CastToReference extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -112,7 +116,7 @@ class CastToReference extends Object {
     Long = goog.module.get('java.lang.Long$impl');
     Short = goog.module.get('java.lang.Short$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

@@ -8,7 +8,7 @@
 goog.module('com.google.j2cl.transpiler.readable.interfacedevirtualize.InterfaceDevirtualize$impl');
 
 
-let Object = goog.require('java.lang.Object$impl');
+let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
@@ -18,7 +18,7 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 let $Comparables = goog.forwardDeclare('vmbootstrap.Comparables$impl');
 
 
-class InterfaceDevirtualize extends Object {
+class InterfaceDevirtualize extends java_lang_Object {
   /**
    * Defines instance fields.
    * @public
@@ -146,7 +146,7 @@ class InterfaceDevirtualize extends Object {
 
   /**
    * Returns whether the provided class is or extends this class.
-   * @param {window.Function} classConstructor
+   * @param {Function} classConstructor
    * @return {boolean}
    * @public
    */
@@ -164,7 +164,7 @@ class InterfaceDevirtualize extends Object {
     Double = goog.module.get('java.lang.Double$impl');
     Integer = goog.module.get('java.lang.Integer$impl');
     $Comparables = goog.module.get('vmbootstrap.Comparables$impl');
-    Object.$clinit();
+    java_lang_Object.$clinit();
   }
 
   /**

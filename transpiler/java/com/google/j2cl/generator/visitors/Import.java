@@ -18,10 +18,13 @@ package com.google.j2cl.generator.visitors;
 import com.google.j2cl.ast.TypeDescriptor;
 
 /**
- * A Node class that represents the goog.require statement
+ * A Node class that represents the goog.require statement:
+ *
+ * <pre>{@code
  * var ClassNameAlias = goog.require('gen.class.File.Name').
+ * }</pre>
  */
-public class Import implements Comparable<Import> {
+public class Import implements Comparable<Import>, Alias<TypeDescriptor> {
 
   private String implModulePath;
   private String headerModulePath;
@@ -63,10 +66,9 @@ public class Import implements Comparable<Import> {
     return headerModulePath;
   }
 
-  /**
-   * Returns the associated type descriptor.
-   */
-  public TypeDescriptor getTypeDescriptor() {
+  /** Returns the associated type descriptor. */
+  @Override
+  public TypeDescriptor getElement() {
     return typeDescriptor;
   }
 

@@ -10,19 +10,17 @@ goog.module('com.google.j2cl.transpiler.readable.jstypecastsinstanceof.CastToTyp
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let Object = goog.forwardDeclare('java.lang.Object$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
-/** @constructor */ let $CastToTypeVariable = window.Object;
-
 
 class CastToTypeVariable$$Overlay {
   /**
    * @template C_T
-   * @param {$CastToTypeVariable<string, C_T>} $thisArg
+   * @param {Object<string, C_T>} $thisArg
    * @param {number} index
    * @param {boolean} value
    * @return {C_T}
@@ -31,9 +29,9 @@ class CastToTypeVariable$$Overlay {
   static m_setField__com_google_j2cl_transpiler_readable_jstypecastsinstanceof_CastToTypeVariable__int__boolean(
       $thisArg, index, value) {
     CastToTypeVariable$$Overlay.$clinit();
-    let o = Object.$create__();
-    let a = /**@type {Array<$CastToTypeVariable>} */ ($Arrays.$castToNative(o));
-    return /**@type {$CastToTypeVariable} */ (
+    let o = java_lang_Object.$create__();
+    let a = /**@type {Array<Object>} */ ($Arrays.$castToNative(o));
+    return /**@type {Object} */ (
         $Casts.to($thisArg, CastToTypeVariable$$Overlay));
   }
 
@@ -43,16 +41,14 @@ class CastToTypeVariable$$Overlay {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) {
-    return instance instanceof $CastToTypeVariable;
-  }
+  static $isInstance(instance) { return instance instanceof Object; }
 
   /**
    * Runs inline static field initializers.
    * @public
    */
   static $clinit() {
-    Object = goog.module.get('java.lang.Object$impl');
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
