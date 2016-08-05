@@ -32,15 +32,10 @@ public class Object {
     return HashCodes.getObjectIdentityHashCode(this);
   }
 
-  @JsMethod(name = "$javaToString")
+  @JsMethod
   public String toString() {
     return getClass().getName() + "@" + Integer.toHexString(hashCode());
   }
-
-  // Defined as native so that we can modify the JsDoc to change return type to non-null.
-  // TODO(goktug): Use @NotNull when available.
-  @JsMethod(name = "toString")
-  private native String toStringBridge();
 
   public final Class<?> getClass() {
     return Class.$get(getConstructor());
