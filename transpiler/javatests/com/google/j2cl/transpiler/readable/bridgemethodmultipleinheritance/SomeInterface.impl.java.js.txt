@@ -11,7 +11,6 @@ goog.module('com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Number = goog.forwardDeclare('java.lang.Number$impl');
-let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 
 
 /**
@@ -36,21 +35,6 @@ class SomeInterface {
    * @public
    */
   m_foo__java_lang_Object__java_lang_Number(t, n) {}
-
-  /**
-   * @abstract
-   * @param {*} obj
-   * @return {boolean}
-   * @public
-   */
-  m_equals__java_lang_Object(obj) {}
-
-  /**
-   * @abstract
-   * @return {number}
-   * @public
-   */
-  m_hashCode__() {}
 
   /**
    * Marks the provided class as implementing this interface.
@@ -95,10 +79,7 @@ class SomeInterface {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {
-    Number = goog.module.get('java.lang.Number$impl');
-    java_lang_Object = goog.module.get('java.lang.Object$impl');
-  }
+  static $clinit() { Number = goog.module.get('java.lang.Number$impl'); }
 };
 
 $Util.$setClassMetadataForInterface(

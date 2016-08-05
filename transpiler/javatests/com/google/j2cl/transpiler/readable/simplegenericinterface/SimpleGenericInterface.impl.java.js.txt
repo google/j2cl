@@ -10,8 +10,6 @@ goog.module('com.google.j2cl.transpiler.readable.simplegenericinterface.SimpleGe
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
-
 
 /**
  * @interface
@@ -25,21 +23,6 @@ class SimpleGenericInterface {
    * @public
    */
   m_fun__java_lang_Object(t) {}
-
-  /**
-   * @abstract
-   * @param {*} obj
-   * @return {boolean}
-   * @public
-   */
-  m_equals__java_lang_Object(obj) {}
-
-  /**
-   * @abstract
-   * @return {number}
-   * @public
-   */
-  m_hashCode__() {}
 
   /**
    * Marks the provided class as implementing this interface.
@@ -84,9 +67,7 @@ class SimpleGenericInterface {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {
-    java_lang_Object = goog.module.get('java.lang.Object$impl');
-  }
+  static $clinit() {}
 };
 
 $Util.$setClassMetadataForInterface(

@@ -10,8 +10,6 @@ goog.module('com.google.j2cl.transpiler.readable.intersectiontype.Getable$impl')
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
-let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
-
 
 /**
  * @interface
@@ -24,21 +22,6 @@ class Getable {
    * @public
    */
   m_get__() {}
-
-  /**
-   * @abstract
-   * @param {*} obj
-   * @return {boolean}
-   * @public
-   */
-  m_equals__java_lang_Object(obj) {}
-
-  /**
-   * @abstract
-   * @return {number}
-   * @public
-   */
-  m_hashCode__() {}
 
   /**
    * Marks the provided class as implementing this interface.
@@ -83,9 +66,7 @@ class Getable {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {
-    java_lang_Object = goog.module.get('java.lang.Object$impl');
-  }
+  static $clinit() {}
 };
 
 $Util.$setClassMetadataForInterface(
