@@ -105,6 +105,7 @@ public class Main {
     assert 9007199254740993L == g; // Binary
   }
 
+  @SuppressWarnings("ConstantOverflow")
   public static void testOverAndUnderflow() {
     long a = 999999999999999999L * 1000L;
     assert 3875820019684211736L == a;
