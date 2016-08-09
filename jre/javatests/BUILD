@@ -12,7 +12,10 @@ load("//build_def:j2cl_mirror_from_gwt.bzl", "j2cl_mirror_from_gwt")
 j2cl_mirror_from_gwt(
     name = "emul_tests_lib",
     generate_build_test = False,
-    javacopts = ["-Xep:SelfComparison:OFF"],
+    javacopts = [
+        "-Xep:SelfComparison:OFF",
+        "-Xep:SelfEquality:OFF",
+    ],
     mirrored_files = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_test"],
     deps = [
         "//jre/java:gwt-jsinterop-annotations",
@@ -39,7 +42,10 @@ java_test(
         ":emul_tests_lib_java_files",
         ":java_emul_internal",
     ],
-    javacopts = ["-Xep:SelfComparison:OFF"],
+    javacopts = [
+        "-Xep:SelfComparison:OFF",
+        "-Xep:SelfEquality:OFF",
+    ],
     test_class = "com.google.gwt.emultest.AllTests",
     deps = [
         "//third_party/java/gwt:gwt-jsinterop-annotations",
