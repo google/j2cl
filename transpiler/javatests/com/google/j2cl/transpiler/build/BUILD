@@ -138,6 +138,18 @@ mss_js_compiled_module_set_flat_files(
     source_filegroup = ":J2clPintoPmfEnhancerMss_filegroup",
 )
 
+load("/tools/build_rules/build_test", "build_test")
+
+build_test(
+    name = "J2clPintoPmfEnhancerMss_en_optimized_J2clPintoPmfEnhancerMss_processed_module_set_build_test",
+    targets = [
+        # This target actually compiles the JS and needs to be referenced by a
+        # test to make sure the compile is attempted. Seems like it should be
+        # part of the MSS target binary compile... but some magic way it is not.
+        ":J2clPintoPmfEnhancerMss_en_optimized_J2clPintoPmfEnhancerMss_processed_module_set",
+    ],
+)
+
 # ********************************************
 
 pinto_module(
