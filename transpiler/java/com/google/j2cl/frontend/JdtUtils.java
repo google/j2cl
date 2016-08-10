@@ -987,16 +987,7 @@ public class JdtUtils {
   }
 
   public static Set<IMethodBinding> getOverriddenMethods(IMethodBinding methodBinding) {
-    Set<IMethodBinding> overriddenMethods = new HashSet<>();
-    ITypeBinding enclosingClass = methodBinding.getDeclaringClass();
-    ITypeBinding superClass = enclosingClass.getSuperclass();
-    if (superClass != null) {
-      overriddenMethods.addAll(getOverriddenMethodsInType(methodBinding, superClass));
-    }
-    for (ITypeBinding superInterface : enclosingClass.getInterfaces()) {
-      overriddenMethods.addAll(getOverriddenMethodsInType(methodBinding, superInterface));
-    }
-    return overriddenMethods;
+    return getOverriddenMethodsInType(methodBinding, methodBinding.getDeclaringClass());
   }
 
   public static Set<IMethodBinding> getOverriddenMethodsInType(
