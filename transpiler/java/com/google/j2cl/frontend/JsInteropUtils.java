@@ -143,31 +143,7 @@ public class JsInteropUtils {
    * directly annotated or it's enclosing class is annotated).
    */
   public static boolean isJsMember(IMethodBinding methodBinding) {
-    // check @JsIgnore annotation
-    IAnnotationBinding jsIgnoreAnnotation =
-        JsInteropAnnotationUtils.getJsIgnoreAnnotation(methodBinding);
-    if (jsIgnoreAnnotation != null) {
-      return false;
-    }
-    // check @JsProperty annotation
-    IAnnotationBinding jsPropertyAnnotation =
-        JsInteropAnnotationUtils.getJsPropertyAnnotation(methodBinding);
-    if (jsPropertyAnnotation != null) {
-      return true;
-    }
-    // check @JsMethod annotation
-    IAnnotationBinding jsMethodAnnotation =
-        JsInteropAnnotationUtils.getJsMethodAnnotation(methodBinding);
-    if (jsMethodAnnotation != null) {
-      return true;
-    }
-    // check @JsType annotation.
-    // In native @JsType all members (regardless of visibility) is implicit JsProperty/JsMethod.
-    IAnnotationBinding jsTypeAnnotation =
-        JsInteropAnnotationUtils.getJsTypeAnnotation(methodBinding.getDeclaringClass());
-    return jsTypeAnnotation != null
-        && (Modifier.isPublic(methodBinding.getModifiers())
-            || JsInteropAnnotationUtils.isNative(jsTypeAnnotation));
+    return getJsInfo(methodBinding).getJsMemberType() != JsMemberType.NONE;
   }
 
   public static boolean isJsProperty(IVariableBinding variableBinding) {

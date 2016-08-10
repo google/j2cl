@@ -35,26 +35,14 @@ public enum JsMemberType {
    * A JsFunction method.
    */
   JS_FUNCTION,
-  /**
-   * A regular Js method. (not a JsProperty method).
-   */
-  METHOD {
-    @Override
-    public boolean isJsMember() {
-      return true;
-    }
-  },
+  /** A regular Js method. (not a JsProperty method). */
+  METHOD,
   /**
    * A JsProperty.
    */
   PROPERTY {
     @Override
     public boolean isJsPropertyAccessor() {
-      return true;
-    }
-
-    @Override
-    public boolean isJsMember() {
       return true;
     }
   },
@@ -81,11 +69,6 @@ public enum JsMemberType {
     public boolean isJsPropertyAccessor() {
       return true;
     }
-
-    @Override
-    public boolean isJsMember() {
-      return true;
-    }
   },
   /**
    * A JsProperty setter method. Usually in the form of setX(x).
@@ -107,25 +90,12 @@ public enum JsMemberType {
     public boolean isJsPropertyAccessor() {
       return true;
     }
-
-    @Override
-    public boolean isJsMember() {
-      return true;
-    }
   };
 
   /**
    * Default is false. Returns true for {@code PROPERTY}, {@code GETTER}, and {@code SETTER}.
    */
   public boolean isJsPropertyAccessor() {
-    return false;
-  }
-
-  /**
-   * Default is false. Returns true for {@code METHOD}, {@code PROPERTY}, {@code GETTER} and
-   * {@code SETTER}.
-   */
-  public boolean isJsMember() {
     return false;
   }
 
