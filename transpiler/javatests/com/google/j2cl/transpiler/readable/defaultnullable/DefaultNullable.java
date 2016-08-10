@@ -7,6 +7,7 @@ import org.checkerframework.checker.nullness.compatqual.NullableType;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 // TODO(simionato): Update this example after there is support for @NotNull.
@@ -24,7 +25,7 @@ public class DefaultNullable {
   // Nullable array of non-nullable strings.
   private String @NullableType [] f10 = {};
   private Void f11 = null;
-
+  @Nonnull private Object f12 = new Object();
   public String m1(String a, List<Double> b) {
     return "";
   }

@@ -612,15 +612,7 @@ public class TypeDescriptors {
         return new NumberLiteral(typeDescriptor, 0L);
     }
 
-    // Objects.
-    if (typeDescriptor.isNullable()) {
-      return NullLiteral.NULL;
-    }
-    // If the type is not nullable, we can't assign null to it, so we cast to the unknown type to
-    // avoid JSCompiler errors. It's assumed that the Java code has already been checked and this
-    // assignment is only temporary and it will be overwritten before the end of the constructor.
-    return JsTypeAnnotation.createTypeAnnotation(
-        NullLiteral.NULL, TypeDescriptors.get().unknownType);
+    return NullLiteral.NULL;
   }
 
   public static String createJoinedBinaryName(

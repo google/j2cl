@@ -30,5 +30,7 @@ readable_example(
     test_externs_list = [
         ":_externs",
     ],
-    deps = ["//jre/java:gwt-jsinterop-annotations"],
+    deps = [
+        "//jre/java:gwt-jsinterop-annotations",
+    ],
 )

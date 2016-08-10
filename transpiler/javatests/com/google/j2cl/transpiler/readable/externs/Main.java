@@ -18,6 +18,8 @@ public class Main {
     String getFoo();
   }
 
+  public FooOverlay aFoo;
+
   private static boolean testFooOverlay(FooOverlay fooOverlay) {
     return fooOverlay.getFoo().equals("Hello");
   }

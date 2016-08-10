@@ -23,6 +23,7 @@ examples_dir="$java_dir/com/google/j2cl/transpiler/readable/"
 transpiler_bin="blaze-bin/third_party/java/j2cl/J2clTranspiler"
 jre_jar="blaze-bin/third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/integration/jre_bundle_deploy.jar"
 jsinterop_jar="blaze-bin/third_party/java_src/gwt/svn/trunk/user/libgwt-jsinterop-annotations.jar"
+java_annotations_jar="/google/src/head/depot/google3/third_party/java/jsr305_annotations/v0_r47/jsr305.jar"
 example_name=$1
 
 # Show commands as they occur
@@ -31,8 +32,10 @@ set -x
 # Fail on any error
 set -e
 
-# Build  JRE
-blaze build third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/integration:jre_bundle_deploy.jar&> /dev/null
+# Build  JRE and other deps
+blaze build third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/transpiler/integration:jre_bundle_deploy.jar \
+        third_party/java_src/j2cl/jre/java:gwt-jsinterop-annotations \
+        &> /dev/null
 
 # Build the transpiler
 blaze build third_party/java/j2cl:J2clTranspiler
@@ -48,4 +51,4 @@ for java_file in $(find $example_dir -name '*.java' -or -name "*.srcjar") ; do
 done
 
 # Transpile and debug it
-$transpiler_bin --debug --jvm_flag=-ea -d /tmp/gen/$example_name -cp $jre_jar:$jsinterop_jar $example_files
+$transpiler_bin --debug --jvm_flag=-ea -d /tmp/gen/$example_name -cp $jre_jar:$jsinterop_jar:$java_annotations_jar $example_files
