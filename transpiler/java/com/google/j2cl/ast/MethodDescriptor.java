@@ -18,10 +18,7 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.auto.value.AutoValue;
-import com.google.common.base.Function;
-import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -148,21 +145,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public abstract boolean isAbstract();
 
   public String getMethodSignature() {
-    return getName()
-        + "("
-        + Joiner.on(", ")
-            .join(
-                FluentIterable.from(getParameterTypeDescriptors())
-                    .transform(
-                        new Function<TypeDescriptor, String>() {
-                          @Override
-                          public String apply(TypeDescriptor type) {
-                            return TypeDescriptors.toNonNullable(type)
-                                .getRawTypeDescriptor()
-                                .getBinaryClassName();
-                          }
-                        }))
-        + ")";
+    String name = getName();
+    ImmutableList<TypeDescriptor> parameterTypeDescriptors = getParameterTypeDescriptors();
+    return MethodDescriptors.getSignature(name, parameterTypeDescriptors);
   }
 
   @Override

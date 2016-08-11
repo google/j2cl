@@ -54,9 +54,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 import org.eclipse.jdt.core.dom.AST;
@@ -1500,19 +1502,17 @@ public class JdtUtils {
             ? overrideTypeArgumentDescriptors
             : getTypeArgumentTypeDescriptors(typeBinding);
 
-    DescriptorFactory<List<MethodDescriptor>> declaredMethods =
-        new DescriptorFactory<List<MethodDescriptor>>() {
+    DescriptorFactory<Map<String, MethodDescriptor>> declaredMethods =
+        new DescriptorFactory<Map<String, MethodDescriptor>>() {
           @Override
-          public List<MethodDescriptor> create(TypeDescriptor selfTypeDescriptor) {
-            return FluentIterable.from(typeBinding.getDeclaredMethods())
-                .transform(
-                    new Function<IMethodBinding, MethodDescriptor>() {
-                      @Override
-                      public MethodDescriptor apply(IMethodBinding methodBinding) {
-                        return JdtUtils.createMethodDescriptor(methodBinding);
-                      }
-                    })
-                .toList();
+          public Map<String, MethodDescriptor> create(TypeDescriptor selfTypeDescriptor) {
+            Map<String, MethodDescriptor> declaredMethodsBySignature = new LinkedHashMap<>();
+            for (IMethodBinding methodBinding : typeBinding.getDeclaredMethods()) {
+              MethodDescriptor methodDescriptor = JdtUtils.createMethodDescriptor(methodBinding);
+              declaredMethodsBySignature.put(
+                  methodDescriptor.getMethodSignature(), methodDescriptor);
+            }
+            return declaredMethodsBySignature;
           }
         };
 

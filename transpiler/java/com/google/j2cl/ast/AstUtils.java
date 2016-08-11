@@ -430,13 +430,7 @@ public class AstUtils {
     TypeDescriptor boxType = TypeDescriptors.getBoxTypeFromPrimitiveType(primitiveType);
 
     MethodDescriptor valueOfMethodDescriptor =
-        MethodDescriptor.Builder.fromDefault()
-            .setIsStatic(true)
-            .setEnclosingClassTypeDescriptor(boxType)
-            .setMethodName(MethodDescriptor.VALUE_OF_METHOD_NAME)
-            .setReturnTypeDescriptor(boxType)
-            .setParameterTypeDescriptors(primitiveType)
-            .build();
+        boxType.getMethodDescriptorByName(MethodDescriptor.VALUE_OF_METHOD_NAME, primitiveType);
     return MethodCall.createMethodCall(null, valueOfMethodDescriptor, expression);
   }
 
@@ -450,11 +444,8 @@ public class AstUtils {
     TypeDescriptor primitiveType = TypeDescriptors.getPrimitiveTypeFromBoxType(boxType);
 
     MethodDescriptor valueMethodDescriptor =
-        MethodDescriptor.Builder.fromDefault()
-            .setEnclosingClassTypeDescriptor(boxType)
-            .setMethodName(primitiveType.getSimpleName() + MethodDescriptor.VALUE_METHOD_SUFFIX)
-            .setReturnTypeDescriptor(primitiveType)
-            .build();
+        boxType.getMethodDescriptorByName(
+            primitiveType.getSimpleName() + MethodDescriptor.VALUE_METHOD_SUFFIX);
 
     // We want "(a ? b : c).intValue()", not "a ? b : c.intValue()".
     expression =
@@ -619,14 +610,11 @@ public class AstUtils {
     return widenedTypeDescriptor;
   }
 
-  public static MethodDescriptor createStringValueOfMethodDescriptor() {
-    return MethodDescriptor.Builder.fromDefault()
-        .setIsStatic(true)
-        .setEnclosingClassTypeDescriptor(TypeDescriptors.get().javaLangString)
-        .setMethodName("valueOf")
-        .setReturnTypeDescriptor(TypeDescriptors.get().javaLangString)
-        .setParameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.get().javaLangObject))
-        .build();
+  public static MethodDescriptor getStringValueOfMethodDescriptor() {
+    return TypeDescriptors.get()
+        .javaLangString
+        .getMethodDescriptorByName(
+            MethodDescriptor.VALUE_OF_METHOD_NAME, TypeDescriptors.get().javaLangObject);
   }
 
   /**
@@ -639,7 +627,7 @@ public class AstUtils {
       return true;
     }
     if (expression instanceof MethodCall) {
-      return ((MethodCall) expression).getTarget() == createStringValueOfMethodDescriptor();
+      return ((MethodCall) expression).getTarget() == getStringValueOfMethodDescriptor();
     }
     if (!(expression instanceof BinaryExpression)) {
       return false;

@@ -94,7 +94,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
 
     static void addBridges(
         Type type, TypeDescriptor typeDescriptor, TypeDescriptor superTypeDescriptor) {
-      for (MethodDescriptor methodDescriptor : superTypeDescriptor.getAllMethods()) {
+      for (MethodDescriptor methodDescriptor : superTypeDescriptor.getMethodDescriptors()) {
         // The only methods that need a bridge are JsOverlay methods that will be moved to the
         // Overlay class. This does not include JsProperty(s) since they are not moved to the
         // Overlay class.

@@ -76,7 +76,7 @@ public class InsertStringConversions extends NormalizationPass {
         // at least a boolean or double primitive that we can treat as a reference type).
         // So use a "String.valueOf()" method call on it.
         return MethodCall.createMethodCall(
-            null, AstUtils.createStringValueOfMethodDescriptor(), operandExpression);
+            null, AstUtils.getStringValueOfMethodDescriptor(), operandExpression);
       }
     };
   }

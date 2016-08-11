@@ -46,7 +46,7 @@ public class UnimplementedMethodsCreator extends NormalizationPass {
       if (!type.isAbstract()) {
         return true;
       }
-      for (MethodDescriptor methodToStub : type.getDescriptor().getAllMethods()) {
+      for (MethodDescriptor methodToStub : type.getDescriptor().getMethodDescriptors()) {
         if (methodToStub.getEnclosingClassTypeDescriptor().isInterface()
             && !methodToStub.isConstructor()
             && !methodToStub.isStatic()) {

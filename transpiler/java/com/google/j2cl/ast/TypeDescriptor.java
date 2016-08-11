@@ -24,15 +24,17 @@ import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.JsUtils;
 import com.google.j2cl.common.Interner;
 import com.google.j2cl.common.J2clUtils;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -151,6 +153,13 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       newTypeDescriptor.unionedTypeDescriptors = typeDescriptor.getUnionedTypeDescriptors();
       newTypeDescriptor.typeArgumentDescriptors = typeDescriptor.getTypeArgumentDescriptors();
       newTypeDescriptor.visibility = typeDescriptor.getVisibility();
+      newTypeDescriptor.declaredMethodDescriptorsFactory =
+          new DescriptorFactory<Map<String, MethodDescriptor>>() {
+            @Override
+            public Map<String, MethodDescriptor> create(TypeDescriptor selfTypeDescriptor) {
+              return typeDescriptor.getDeclaredMethodDescriptorsBySignature();
+            }
+          };
 
       return builder;
     }
@@ -373,7 +382,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     }
 
     public Builder setDeclaredMethodDescriptorsFactory(
-        DescriptorFactory<List<MethodDescriptor>> declaredMethodDescriptorsFactory) {
+        DescriptorFactory<Map<String, MethodDescriptor>> declaredMethodDescriptorsFactory) {
       newTypeDescriptor.declaredMethodDescriptorsFactory = declaredMethodDescriptorsFactory;
       return this;
     }
@@ -436,7 +445,9 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   private List<TypeDescriptor> typeArgumentDescriptors = Collections.emptyList();
   private List<TypeDescriptor> unionedTypeDescriptors = Collections.emptyList();
   private Visibility visibility;
-  private DescriptorFactory<List<MethodDescriptor>> declaredMethodDescriptorsFactory;
+  private DescriptorFactory<Map<String, MethodDescriptor>> declaredMethodDescriptorsFactory;
+  private Map<String, MethodDescriptor> declaredMethodDescriptorssBySignature;
+  private Map<String, MethodDescriptor> methodDescriptorssBySignature;
 
   private TypeDescriptor() {}
 
@@ -885,56 +896,98 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
    * The list of methods declared in the type from the JDT. Note: this does not include methods we
    * synthesize and add to the type like bridge methods.
    */
-  public List<MethodDescriptor> getDeclaredMethodDescriptors() {
-    if (declaredMethodDescriptorsFactory == null) {
-      return Collections.emptyList();
+  private Map<String, MethodDescriptor> getDeclaredMethodDescriptorsBySignature() {
+    if (declaredMethodDescriptorssBySignature == null) {
+      if (declaredMethodDescriptorsFactory == null) {
+        declaredMethodDescriptorssBySignature = ImmutableMap.of();
+      } else {
+        declaredMethodDescriptorssBySignature = declaredMethodDescriptorsFactory.getOrCreate(this);
+      }
     }
-    return declaredMethodDescriptorsFactory.getOrCreate(this);
+    return declaredMethodDescriptorssBySignature;
   }
 
-  // Used to cache the results of getAllMethods()
-  private List<MethodDescriptor> allMethods = null;
-
   /**
-   * The list of all methods available on a given type. TODO: update this code to handle package
-   * private override rules.
+   * The list of methods in the type from the JDT. Note: this does not include methods we synthesize
+   * and add to the type like bridge methods.
    */
-  public List<MethodDescriptor> getAllMethods() {
-    if (allMethods != null) {
-      return allMethods;
+  private Map<String, MethodDescriptor> getMethodDescriptorsBySignature() {
+    // TODO(rluble): update this code to handle package private methods, bridges and verify that it
+    // correctly handles default methods.
+    if (methodDescriptorssBySignature == null) {
+      methodDescriptorssBySignature = new LinkedHashMap<>();
+
+      // Add all methods declared in the current type itself
+      methodDescriptorssBySignature.putAll(getDeclaredMethodDescriptorsBySignature());
+
+      // Add all the methods from the super class.
+      if (getSuperTypeDescriptor() != null) {
+        updateMethodsBySignature(
+            methodDescriptorssBySignature, getSuperTypeDescriptor().getMethodDescriptors());
+      }
+
+      // Finally add the methods that appear in super interfaces.
+      for (TypeDescriptor implementedInterface : getInterfacesTypeDescriptors()) {
+        updateMethodsBySignature(
+            methodDescriptorssBySignature, implementedInterface.getMethodDescriptors());
+      }
     }
-    Map<String, MethodDescriptor> methodsBySignature = Maps.newHashMap();
-    // Add methods declared in the type itself.
-    updateMethodsBySignature(methodsBySignature, getDeclaredMethodDescriptors());
-    // Recursively add methods that appear on super types
-    if (getSuperTypeDescriptor() != null) {
-      updateMethodsBySignature(methodsBySignature, getSuperTypeDescriptor().getAllMethods());
-    }
-    // Add methods that appear on super interfaces.
-    for (TypeDescriptor interfaceType : getInterfacesTypeDescriptors()) {
-      updateMethodsBySignature(methodsBySignature, interfaceType.getAllMethods());
-    }
-    allMethods = Lists.newArrayList(methodsBySignature.values());
-    return allMethods;
+    return methodDescriptorssBySignature;
   }
 
   private static void updateMethodsBySignature(
-      Map<String, MethodDescriptor> methodsBySignature, List<MethodDescriptor> methodDescriptors) {
+      Map<String, MethodDescriptor> methodsBySignature,
+      Iterable<MethodDescriptor> methodDescriptors) {
     for (MethodDescriptor declaredMethod : methodDescriptors) {
-      String methodSignature = declaredMethod.getMethodSignature();
-      if (methodsBySignature.containsKey(methodSignature)) {
-        // We already found a method with this signature.
-        if (declaredMethod.isDefault()
-            && methodsBySignature
-                .get(methodSignature)
-                .getEnclosingClassTypeDescriptor()
-                .isInterface()) {
-          // Allow the method to be replaced.
-        }
-        continue;
+      MethodDescriptor existingMethod = methodsBySignature.get(declaredMethod.getMethodSignature());
+      // TODO(rluble) implement correct default replacement when existing method != null.
+      // Only replace the method if we found a default definition that implements the method at
+      // that type; be sure to have all relevant examples, the semantics are quite particular.
+      if (existingMethod == null) {
+        methodsBySignature.put(declaredMethod.getMethodSignature(), declaredMethod);
       }
-      methodsBySignature.put(methodSignature, declaredMethod);
     }
+  }
+
+  /**
+   * The list of methods declared in the type from the JDT. Note: this does not include methods we
+   * synthesize and add to the type like bridge methods.
+   */
+  public Iterable<MethodDescriptor> getDeclaredMethodDescriptors() {
+    return getDeclaredMethodDescriptorsBySignature().values();
+  }
+
+  /**
+   * Retrieves the method descriptor with signature {@code signature} if there is a declared method
+   * with that signature.
+   */
+  public MethodDescriptor getDeclaredMethodDescriptorBySignature(String signature) {
+    return getDeclaredMethodDescriptorsBySignature().get(signature);
+  }
+
+  /**
+   * Retrieves the method descriptor with name {@code name} and the corresponding parameter types if
+   * there is a declared method with that signature.
+   */
+  public MethodDescriptor getDeclaredMethodDescriptorByName(
+      String methodName, TypeDescriptor... parameters) {
+    return getDeclaredMethodDescriptorsBySignature()
+        .get(MethodDescriptors.getSignature(methodName, Arrays.asList(parameters)));
+  }
+
+  /**
+   * Retrieves the method descriptor with name {@code name} and the corresponding parameter types if
+   * there is a method with that signature.
+   */
+  public MethodDescriptor getMethodDescriptorByName(
+      String methodName, TypeDescriptor... parameters) {
+    return getMethodDescriptorsBySignature()
+        .get(MethodDescriptors.getSignature(methodName, Arrays.asList(parameters)));
+  }
+
+  /** The list of all methods available on a given type. */
+  public Iterable<MethodDescriptor> getMethodDescriptors() {
+    return getMethodDescriptorsBySignature().values();
   }
 
   @Override
