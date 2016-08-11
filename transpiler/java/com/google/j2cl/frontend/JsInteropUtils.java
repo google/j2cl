@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.frontend;
 
-import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.JsMemberType;
 
@@ -146,58 +145,12 @@ public class JsInteropUtils {
     return getJsInfo(methodBinding).getJsMemberType() != JsMemberType.NONE;
   }
 
-  public static boolean isJsProperty(IVariableBinding variableBinding) {
-    Preconditions.checkArgument(variableBinding.isField());
-    // check @JsIgnore annotation
-    IAnnotationBinding jsIgnoreAnnotation =
-        JsInteropAnnotationUtils.getJsIgnoreAnnotation(variableBinding);
-    if (jsIgnoreAnnotation != null) {
-      return false;
-    }
-    // check @JsProperty annotation
-    IAnnotationBinding jsPropertyAnnotation =
-        JsInteropAnnotationUtils.getJsPropertyAnnotation(variableBinding);
-    if (jsPropertyAnnotation != null) {
-      return true;
-    }
-    // check @JsType annotation.
-    IAnnotationBinding jsTypeAnnotation =
-        JsInteropAnnotationUtils.getJsTypeAnnotation(variableBinding.getDeclaringClass());
-    // In native @JsType all members (regardless of visibility) is implicit JsProperty/JsMethod.
-    return jsTypeAnnotation != null
-        && (Modifier.isPublic(variableBinding.getModifiers())
-            || JsInteropAnnotationUtils.isNative(jsTypeAnnotation));
-  }
-
   public static boolean isJsOverlay(IBinding methodBinding) {
     return JsInteropAnnotationUtils.getJsOverlayAnnotation(methodBinding) != null;
   }
 
   public static boolean isJsOptional(IMethodBinding methodBinding, int i) {
     return JsInteropAnnotationUtils.getJsOptionalAnnotation(methodBinding, i) != null;
-  }
-
-  public static boolean isJsConstructor(IMethodBinding methodBinding) {
-    // check @JsIgnore annotation
-    IAnnotationBinding jsIgnoreAnnotation =
-        JsInteropAnnotationUtils.getJsIgnoreAnnotation(methodBinding);
-    if (jsIgnoreAnnotation != null) {
-      return false;
-    }
-    // check @JsConstructor annotation
-    IAnnotationBinding jsConstructorAnnotation =
-        JsInteropAnnotationUtils.getJsConstructorAnnotation(methodBinding);
-    if (jsConstructorAnnotation != null) {
-      return true;
-    }
-    // check @JsType annotation.
-    IAnnotationBinding jsTypeAnnotation =
-        JsInteropAnnotationUtils.getJsTypeAnnotation(methodBinding.getDeclaringClass());
-    // In native @JsType all constructors (regardless of visibility) is implicit JsConstructor.
-    return jsTypeAnnotation != null
-        && methodBinding.isConstructor()
-        && (Modifier.isPublic(methodBinding.getModifiers())
-            || JsInteropAnnotationUtils.isNative(jsTypeAnnotation));
   }
 
   public static boolean isJsType(ITypeBinding typeBinding) {

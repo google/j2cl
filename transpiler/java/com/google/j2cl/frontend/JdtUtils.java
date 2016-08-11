@@ -1063,7 +1063,8 @@ public class JdtUtils {
             new Predicate<IMethodBinding>() {
               @Override
               public boolean apply(IMethodBinding constructor) {
-                return JsInteropUtils.isJsConstructor(constructor);
+                return JsInteropUtils.getJsInfo(constructor).getJsMemberType()
+                    == JsMemberType.CONSTRUCTOR;
               }
             })
         .isEmpty();

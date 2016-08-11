@@ -21,6 +21,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,20 +80,6 @@ public class Type extends Node {
       if (method.isNative()
           && !method.getDescriptor().isJsProperty()
           && !method.getDescriptor().isJsMethod()) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  public boolean containsJsOverlay() {
-    for (Method method : getMethods()) {
-      if (method.getDescriptor().isJsOverlay()) {
-        return true;
-      }
-    }
-    for (Field field : getFields()) {
-      if (field.getDescriptor().isJsOverlay()) {
         return true;
       }
     }
