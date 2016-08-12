@@ -29,9 +29,7 @@ class Objects {
     Objects.$clinit();
 
     // Objects: use the custom 'equals' if it exists.
-    if (obj instanceof Object) {
-      return obj.m_equals__java_lang_Object(other);
-    } else if (obj.equals) {
+    if (obj.equals) {
       return obj.equals(other);
     }
 
@@ -53,9 +51,7 @@ class Objects {
     Objects.$clinit();
 
     // Objects: use the custom 'hashCode' if it exists.
-    if (obj instanceof Object) {
-      return obj.m_hashCode__();
-    } else if (obj.hashCode) {
+    if (obj.hashCode) {
       return obj.hashCode();
     }
 

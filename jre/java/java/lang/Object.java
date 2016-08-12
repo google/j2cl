@@ -24,10 +24,12 @@ import jsinterop.annotations.JsProperty;
  */
 public class Object {
 
+  @JsMethod
   public boolean equals(Object that) {
     return this == that;
   }
 
+  @JsMethod
   public int hashCode() {
     return HashCodes.getObjectIdentityHashCode(this);
   }
