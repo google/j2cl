@@ -83,7 +83,7 @@ def readable_example(
     test_externs_list=["//javascript/externs:common"]
   native.js_binary(
       name=name + "_binary",
-      defs=J2CL_OPTIMIZED_DEFS,
+      defs=J2CL_OPTIMIZED_DEFS + ["--summary_detail_level=3"],
       compiler="//javascript/tools/jscompiler:head",
       externs_list=test_externs_list,
       deps=[":" + name],

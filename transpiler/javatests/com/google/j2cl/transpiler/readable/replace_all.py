@@ -54,21 +54,6 @@ def run_cmd_get_output(cmd_args, include_stderr=False, cwd=None, shell=False):
   return output
 
 
-def get_js_binary_file_paths():
-  """Finds and returns a list of js_binary bundle js file paths."""
-  # Gather a list of the names of the test targets we care about
-  test_targets = (run_cmd_get_output(["blaze", "query",
-                                      "filter('.*_binary', kind(%s, %s))" %
-                                      ("js_binary",
-                                       READABLE_TARGET_PATTERN)]).splitlines())
-  test_targets = filter(bool, test_targets)
-
-  return [
-      size_target.replace("//", "blaze-bin/").replace(":", "/") + "-bundle.js"
-      for size_target in test_targets
-  ]
-
-
 def get_readable_target_names():
   """Finds and returns the names of readable targets."""
   global READABLE_TARGET_PATTERN
@@ -141,14 +126,8 @@ def gather_closure_warnings():
   """
   global READABLE_TARGET_PATTERN
 
-  # Delete the old build.log files before we regenerate them.
-  find_command_build_logs = ["find", EXAMPLES_DIR, "-name", "build.log"]
-  run_cmd_get_output(find_command_build_logs + ["-exec", "rm", "{}", ";"])
-
-  run_cmd_get_output(["rm", "-fr"] + get_js_binary_file_paths())
-
-  # Build both all readable and integrtion targets in one build command so that
-  # Blaze build parallelize all the work. Saves a lot of time.
+  # Build both all readable targets in one build command so that
+  # blaze build parallelizes all the work. Saves a lot of time.
   args = ["blaze", "build", READABLE_TARGET_PATTERN, INTEGRATION_TARGET_PATTERN
          ] + JAVA8_BOOT_CLASS_PATH
   build_logs = run_cmd_get_output(args, include_stderr=True)
@@ -174,6 +153,10 @@ def gather_closure_warnings():
     build_log_path = extract_pattern("//(.*?):", build_log) + "/build.log"
     # Don't write build.log files for integration tests.
     if "readable/" not in build_log_path:
+      continue
+    if "\n0 error(s), 0 warning(s)" in build_log:
+      # No errors, no warnings, delete the build.log file.
+      run_cmd_get_output(["rm", build_log_path])
       continue
     with open(build_log_path, "w") as build_log_file:
       build_log_file.write(build_log)
