@@ -1,4 +1,4 @@
-#!/usr/bin/python2.7
+#!/usr/grte/v4/bin/python2.7
 #
 # Copyright 2015 Google Inc. All Rights Reserved.
 """Regenerates readable JS and build logs."""
@@ -7,11 +7,17 @@ import os
 import re
 from subprocess import PIPE
 from subprocess import Popen
-import sys
+
+from google3.pyglib import app
+from google3.pyglib import flags
+FLAGS = flags.FLAGS
+
+flags.DEFINE_boolean("nologs", False, "skips jscompiler step.")
+flags.DEFINE_string("example_name", "*",
+                    "only process examples matched by this regexp")
+flags.DEFINE_boolean("skip_integration", False, "only build readables.")
 
 # pylint: disable=global-variable-not-assigned
-READABLE_TARGET_PATTERN = ("third_party/java_src/j2cl/transpiler/javatests/"
-                           "com/google/j2cl/transpiler/readable/...:all")
 INTEGRATION_TARGET_PATTERN = ("third_party/java_src/j2cl/transpiler/javatests/"
                               "com/google/j2cl/transpiler/integration/...:all")
 JAVA_DIR = "third_party/java_src/j2cl/transpiler/javatests"
@@ -25,6 +31,16 @@ SUCCESS_CODE = 0
 
 class CmdExecutionError(Exception):
   """Indicates that a cmd execution returned a non-zero exit code."""
+
+
+def readable_binary_target(readable_target_name):
+  return (EXAMPLES_DIR + readable_target_name + ":" +
+          readable_target_name + "_binary")
+
+
+def readable_j2cl_target(readable_target_name):
+  return (EXAMPLES_DIR + readable_target_name + ":" +
+          readable_target_name + "_j2cl_transpile")
 
 
 def extract_pattern(pattern_string, from_value):
@@ -48,8 +64,8 @@ def run_cmd_get_output(cmd_args, include_stderr=False, cwd=None, shell=False):
   if include_stderr:
     output = (output + "\n" if output else "") + results[1]
   if process.wait() != SUCCESS_CODE:
-    raise CmdExecutionError("cmd invocation " + str(cmd_args) + " failed with\n"
-                            + results[1])
+    raise CmdExecutionError("cmd invocation " + str(cmd_args) +
+                            " failed with\n" + results[1])
 
   return output
 
@@ -58,10 +74,15 @@ def get_readable_target_names():
   """Finds and returns the names of readable targets."""
   global READABLE_TARGET_PATTERN
 
+  example_name_re = re.compile(".*/readable/" +
+                               FLAGS.example_name.replace("*", ".*") +
+                               ":.*")
+
   test_targets = (run_cmd_get_output(
       ["blaze", "query", "filter('.*:.*_j2cl_transpile', kind(%s, %s))" %
        ("j2cl_transpile", READABLE_TARGET_PATTERN)]).split("\n"))
-  test_targets = filter(bool, test_targets)
+  test_targets = [item for item in test_targets
+                  if bool(item) and example_name_re.match(item)]
 
   return [
       extract_pattern(".*readable/(.*?):.*_j2cl_transpile", size_target)
@@ -69,22 +90,30 @@ def get_readable_target_names():
   ]
 
 
-def blaze_build(target_names):
+def blaze_build(target_names, build_all):
   """Blaze build everything in 1-go, for speed."""
+  global INTEGRATION_TARGET_PATTERN
+
   args = ["blaze", "build"]
-  args += [EXAMPLES_DIR + target_name + ":" + target_name + "_j2cl_transpile"
-           for target_name in target_names]
+  args += [readable_j2cl_target(target_name) for target_name in target_names]
+
+  if not FLAGS.nologs:
+    readable_binary_targets = [readable_binary_target(target_name)
+                               for target_name in target_names]
+
+    # Build both all readable targets in one build command so that
+    # blaze build parallelizes all the work. Saves a lot of time.
+    args += readable_binary_targets
+
+    if build_all and not FLAGS.skip_integration:
+      args += [INTEGRATION_TARGET_PATTERN]
+
   args += JAVA8_BOOT_CLASS_PATH
-  return run_cmd_get_output(args)
+  return run_cmd_get_output(args, include_stderr=True)
 
 
 def replace_transpiled_js(target_names):
   """Copy and reformat and replace with Blaze built JS."""
-
-  find_command_js_map_sources = ["find", EXAMPLES_DIR, "-name", "*.js.map"]
-
-  # Remove old map files before unzipping the new ones
-  run_cmd_get_output(find_command_js_map_sources + ["-exec", "rm", "{}", ";"])
 
   # Copy all the zips in one COPY command so that some of the
   # network communication is parallelized.
@@ -95,43 +124,40 @@ def replace_transpiled_js(target_names):
 
   for target_name in target_names:
     zip_file_path = "/tmp/js.zip/%s_j2cl_transpile.js.zip" % target_name
-    # Special case for readable example java.lang.String
-    if "javalang" in target_name:
-      extractDir = EXAMPLES_DIR + target_name
-    else:
-      extractDir = JAVA_DIR + "/"
+    extractDir = JAVA_DIR + "/"
+
+    find_command_js_map_sources = ["find", EXAMPLES_DIR + target_name,
+                                   "-name", "*.js.map"]
+
+    # Remove old map files before unzipping the new ones
+    run_cmd_get_output(find_command_js_map_sources
+                       + ["-exec", "rm", "{}", ";"])
+
     run_cmd_get_output(["unzip", "-o", "-d", extractDir, zip_file_path])
 
-  find_command_js_sources = ["find", EXAMPLES_DIR, "-name", "*.java.js"]
+    find_command_js_sources = ["find", EXAMPLES_DIR + target_name,
+                               "-name", "*.java.js"]
 
-  find_command_js_test_sources = ["find", EXAMPLES_DIR, "-name", "*.js.txt"]
+    find_command_js_test_sources = ["find", EXAMPLES_DIR + target_name,
+                                    "-name", "*.js.txt"]
 
-  # Format .js files
-  run_cmd_get_output(find_command_js_sources +
-                     ["-exec", "/usr/bin/clang-format", "-i", "{}", "+"])
+    # Format .js files
+    run_cmd_get_output(find_command_js_sources +
+                       ["-exec", "/usr/bin/clang-format", "-i", "{}", "+"])
 
-  # Remove the old .js.txt files (results from the last run)
-  run_cmd_get_output(find_command_js_test_sources + ["-exec", "rm", "{}", ";"])
+    # Remove the old .js.txt files (results from the last run)
+    run_cmd_get_output(find_command_js_test_sources +
+                       ["-exec", "rm", "{}", ";"])
 
-  # Move the newly unzipped .js => .js.txt
-  run_cmd_get_output(find_command_js_sources + ["-exec", "mv", "{}", "{}.txt",
-                                                ";"])
+    # Move the newly unzipped .js => .js.txt
+    run_cmd_get_output(find_command_js_sources +
+                       ["-exec", "mv", "{}", "{}.txt", ";"])
 
 
-def gather_closure_warnings():
-  """Gather Closure compiler warnings.
+def gather_closure_warnings(build_log):
+  """Gather Closure compiler warnings."""
 
-  Deletes just part of Blaze's cache so that it is forced to rebuild just the
-  js_binary targets. The resulting build logs are split and saved.
-  """
-  global READABLE_TARGET_PATTERN
-
-  # Build both all readable targets in one build command so that
-  # blaze build parallelizes all the work. Saves a lot of time.
-  args = ["blaze", "build", READABLE_TARGET_PATTERN, INTEGRATION_TARGET_PATTERN
-         ] + JAVA8_BOOT_CLASS_PATH
-  build_logs = run_cmd_get_output(args, include_stderr=True)
-  build_logs = build_logs.split("____From Compiling JavaScript ")[1:]
+  build_logs = build_log.split("____From Compiling JavaScript ")[1:]
   build_logs = filter(None, build_logs)
   for build_log in build_logs:
     # Remove unstable build timing lines.
@@ -162,24 +188,31 @@ def gather_closure_warnings():
       build_log_file.write(build_log)
 
 
-def main(argv=sys.argv):
+def main():
+  build_all = FLAGS.example_name == "*"
+
   print "Generating readable JS and build logs:"
   readable_target_names = get_readable_target_names()
 
+  if not build_all:
+    print "\n    ".join(["  (restricted to):"] + readable_target_names)
+
   print "  Blaze building everything"
-  blaze_build(readable_target_names)
+  if FLAGS.nologs:
+    print "     (skipping logs)"
+  build_log = blaze_build(readable_target_names, build_all)
 
   print "  Copying and reformatting transpiled JS"
   replace_transpiled_js(readable_target_names)
 
-  no_logs = (len(argv) > 1 and argv[1] == "--nologs")
-  if no_logs:
+  if FLAGS.nologs:
     print "  Skipping logs!!!"
   else:
-    print "  Re-Closure compiling examples to gather logs"
-    gather_closure_warnings()
+    print "  Processing build logs"
+    gather_closure_warnings(build_log)
 
   print "run 'git gui' to see changes"
 
 
-main()
+if __name__ == "__main__":
+  app.run()
