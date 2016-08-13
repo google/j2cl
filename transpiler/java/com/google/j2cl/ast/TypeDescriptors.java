@@ -83,7 +83,7 @@ public class TypeDescriptors {
 
   private static ThreadLocal<TypeDescriptors> typeDescriptorsStorage = new ThreadLocal<>();
 
-  private static boolean isInitialized = false;
+  private static ThreadLocal<Boolean> isInitialized = new ThreadLocal<>();
 
   public static TypeDescriptors get() {
     Preconditions.checkState(
@@ -95,12 +95,13 @@ public class TypeDescriptors {
     Preconditions.checkState(
         typeDescriptorsStorage.get() == null,
         "TypeDescriptors has already been initialized and cannot be reassigned.");
-    isInitialized = true;
+    isInitialized.set(true);
     typeDescriptorsStorage.set(typeDescriptors);
   }
 
   public static boolean isInitialized() {
-    return isInitialized;
+    Boolean initialized = isInitialized.get();
+    return initialized == null ? false : initialized;
   }
 
   public static TypeDescriptor getBoxTypeFromPrimitiveType(TypeDescriptor primitiveType) {
