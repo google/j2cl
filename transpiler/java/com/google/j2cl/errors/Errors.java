@@ -16,18 +16,13 @@
 package com.google.j2cl.errors;
 
 import com.google.j2cl.common.J2clUtils;
-
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * An error logger class that records the number of errors and provides error print methods.
- */
+/** An error logger class that records the number of errors and provides error print methods. */
 public class Errors {
-  /**
-   * Represents compiler errors.
-   */
+  /** Represents compiler errors. */
   public enum Error {
     ERR_INVALID_FLAG("invalid flag"),
     ERR_FLAG_FILE("cannot load flag file"),
@@ -97,9 +92,7 @@ public class Errors {
     errorMessages.add(error.getErrorMessage() + ": " + J2clUtils.format(detailMessage, args));
   }
 
-  /**
-   * Prints all error messages and a summary.
-   */
+  /** Prints all error messages and a summary. */
   public void report() {
     for (String message : errorMessages) {
       errorStream.println(message);
@@ -107,13 +100,28 @@ public class Errors {
     J2clUtils.printf(errorStream, "%d error(s).%n", errorCount);
   }
 
-  /**
-   * If there were errors, prints a summary and exits.
-   */
+  /** If there were errors, prints a summary and exits. */
   public void maybeReportAndExit() {
     if (errorCount > 0) {
       report();
-      J2clUtils.exit(errorCount);
+      throw new Exit(errorCount);
+    }
+  }
+
+  /**
+   * J2clExit is thrown to signal that a System.exit should be performed at a higher level.
+   *
+   * <p>Note: It should never be caught except on the top level.
+   */
+  public static class Exit extends java.lang.Error {
+    private int exitCode;
+
+    private Exit(int exitCode) {
+      this.exitCode = exitCode;
+    }
+
+    public int getExitCode() {
+      return exitCode;
     }
   }
 }

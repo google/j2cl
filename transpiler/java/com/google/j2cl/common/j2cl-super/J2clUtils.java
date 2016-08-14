@@ -40,21 +40,4 @@ public class J2clUtils {
     // TODO(epmjohnston): This is only a temporary placeholder; should be properly implemented.
     return substring;
   }
-
-  /**
-   * J2cl's implementation of System.exit(status). Throws a J2clExit Error, which should not be
-   * caught.
-   */
-  public static void exit(int status) {
-    throw new J2clExit(status);
-  }
-
-  /** J2clExit is thrown on System.exit and should never be caught. */
-  private static class J2clExit extends Error {
-    public int status;
-
-    public J2clExit(int status) {
-      this.status = status;
-    }
-  }
 }

@@ -103,10 +103,10 @@ public class J2clTranspiler {
 
     FrontendFlags flags = new FrontendFlags(errors);
     flags.parse(args);
-    maybeExitGracefully();
+    errors.maybeReportAndExit();
 
     options = new FrontendOptions(errors, flags);
-    maybeExitGracefully();
+    errors.maybeReportAndExit();
   }
 
   private List<CompilationUnit> convertUnits(
@@ -115,10 +115,10 @@ public class J2clTranspiler {
 
     // Records information about package-info files supplied as byte code.
     PackageInfoCache.init(options.getClasspathEntries(), errors);
-    maybeExitGracefully();
+    errors.maybeReportAndExit();
 
     List<CompilationUnit> compilationUnits = CompilationUnitBuilder.build(jdtUnitsByFilePath);
-    maybeExitGracefully();
+    errors.maybeReportAndExit();
     return compilationUnits;
   }
 
@@ -128,7 +128,7 @@ public class J2clTranspiler {
     JdtParser parser = new JdtParser(options, errors);
     Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath =
         parser.parseFiles(options.getSourceFiles());
-    maybeExitGracefully();
+    errors.maybeReportAndExit();
     return jdtUnitsByFilePath;
   }
 
@@ -138,7 +138,7 @@ public class J2clTranspiler {
     for (CompilationUnit compilationUnit : j2clUnits) {
       JsInteropRestrictionsChecker.check(compilationUnit, errors);
     }
-    maybeExitGracefully();
+    errors.maybeReportAndExit();
   }
 
   private void normalizeUnits(List<CompilationUnit> j2clUnits) {
@@ -237,7 +237,7 @@ public class J2clTranspiler {
             errors)
         .generateOutputs(j2clCompilationUnits);
     timingCollector.endSubSample();
-    maybeExitGracefully();
+    errors.maybeReportAndExit();
   }
 
   private void maybeCloseFileSystem() {
@@ -259,20 +259,6 @@ public class J2clTranspiler {
     }
   }
 
-  private void maybeExitGracefully() {
-    if (errors.errorCount() > 0) {
-      errors.report();
-      throw new ExitGracefullyException();
-    }
-  }
-
-  /**
-   * Indicates that errors were found and reported and transpiler execution should now end silently.
-   *
-   * <p>Is preferred over System.exit() since it is caught here and will not end an external caller.
-   */
-  private static class ExitGracefullyException extends RuntimeException {}
-
   /**
    * Entry point for the tool, which runs the entire J2CL pipeline.
    */
@@ -280,9 +266,9 @@ public class J2clTranspiler {
     J2clTranspiler transpiler = new J2clTranspiler(args);
     try {
       transpiler.run();
-    } catch (ExitGracefullyException e) {
+    } catch (Errors.Exit e) {
       // Error already reported. End execution now and with an exit code that indicates failure.
-      System.exit(1);
+      System.exit(e.getExitCode());
     }
   }
 }

@@ -42,13 +42,4 @@ public class J2clUtils {
   public static String decapitalize(String substring) {
     return Introspector.decapitalize(substring);
   }
-
-  /**
-   * J2cl's implementation of System.exit(status).
-   * Terminates the currently running Java Virtual Machine. The argument serves as a status code;
-   *   by convention, a nonzero status code indicates abnormal termination.
-   */
-  public static void exit(int status) {
-    System.exit(status);
-  }
 }
