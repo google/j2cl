@@ -96,12 +96,24 @@ def _impl(ctx):
   # The transpiler expects each java file path as a separate argument.
   compiler_args += java_files_paths
 
+  # Create an action to write the flag file
+  compiler_args_file = ctx.new_file(ctx.label.name + "_compiler.args")
+  ctx.file_action(
+      output = compiler_args_file,
+      content = " ".join(compiler_args)
+  )
+
+  inputs = java_files
+  inputs += list(dep_files)
+  inputs += js_native_zip_files
+  inputs += [compiler_args_file]
+
   ctx.action(
       progress_message = _get_message(ctx),
-      inputs=java_files + list(dep_files) + js_native_zip_files,
+      inputs=inputs,
       outputs=[js_zip_artifact, dependency_info_artifact],
       executable=ctx.executable.transpiler,
-      arguments=compiler_args,
+      arguments=["@" + compiler_args_file.path],
       env=dict(LANG="en_US.UTF-8"),
   )
 
