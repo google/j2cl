@@ -83,12 +83,12 @@ public class J2clTranspiler {
   private FrontendOptions options;
   private final TimingCollector timingCollector = TimingCollector.get();
 
-  private J2clTranspiler(String[] args) {
+  J2clTranspiler(String[] args) {
     this.args = args;
   }
 
   /** Runs the entire J2CL pipeline. */
-  private void run() {
+  void run() {
     loadOptions();
     List<CompilationUnit> j2clUnits = convertUnits(createJdtUnits());
     checkUnits(j2clUnits);
