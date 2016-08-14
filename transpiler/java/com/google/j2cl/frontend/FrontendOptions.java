@@ -335,6 +335,13 @@ public class FrontendOptions {
   }
 
   private void initZipOutput(Path outputPath) {
+
+    // Ensures that we will not fail if the zip already exists.
+    File zipFile = outputPath.toFile();
+    if (zipFile.exists()) {
+      zipFile.delete();
+    }
+
     try {
       Map<String, String> env = new HashMap<>();
       env.put("create", "true");
