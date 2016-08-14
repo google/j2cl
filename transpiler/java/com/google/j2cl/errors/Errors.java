@@ -30,6 +30,7 @@ public class Errors {
    */
   public enum Error {
     ERR_INVALID_FLAG("invalid flag"),
+    ERR_FLAG_FILE("cannot load flag file"),
     ERR_FILE_NOT_FOUND("file not found"),
     ERR_INVALID_SOURCE_FILE("invalid source file"),
     ERR_INVALID_SOURCE_VERSION("invalid source version"),

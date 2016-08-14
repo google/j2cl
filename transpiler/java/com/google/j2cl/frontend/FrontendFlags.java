@@ -15,20 +15,22 @@
  */
 package com.google.j2cl.frontend;
 
+import com.google.common.base.Splitter;
+import com.google.common.io.Files;
 import com.google.j2cl.errors.Errors;
-
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 import org.kohsuke.args4j.OptionHandlerFilter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * The set of supported flags.
- */
+/** The set of supported flags. */
 public class FrontendFlags {
   @Argument(metaVar = "<source files .java|.srcjar>", usage = "source files")
   protected List<String> files = new ArrayList<>();
@@ -55,9 +57,7 @@ public class FrontendFlags {
   )
   protected String nativesourceszippath = "";
 
-  /**
-   * Option that allows users to swap out the location of the JRE library.
-   */
+  /** Option that allows users to swap out the location of the JRE library. */
   @Option(
     name = "-bootclasspath",
     metaVar = "<path>",
@@ -127,11 +127,17 @@ public class FrontendFlags {
     this.errors = errors;
   }
 
-  /**
-   * Parses the given args list and updates values.
-   */
+  /** Parses the given args list and updates values. */
   public void parse(String[] args) {
     CmdLineParser parser = new CmdLineParser(this);
+
+    try {
+      args = maybeLoadFlagFile(args);
+    } catch (IOException e) {
+      errors.error(Errors.Error.ERR_FLAG_FILE, e.getMessage());
+      return;
+    }
+
     try {
       parser.parseArgument(args);
       if (help) {
@@ -143,5 +149,33 @@ public class FrontendFlags {
       message += "\nuse -help for a list of possible options in more details";
       errors.error(Errors.Error.ERR_INVALID_FLAG, message);
     }
+  }
+
+  private static String[] maybeLoadFlagFile(String[] args) throws IOException {
+    // Loads a potential flag file
+    // Flag files are only allowed as the last parameter and need to start
+    // with an '@'
+    if (args.length == 0) {
+      return args;
+    }
+
+    String potentialFlagFile = args[args.length - 1];
+
+    if (potentialFlagFile == null || !potentialFlagFile.startsWith("@")) {
+      return args;
+    }
+
+    String flagFile = potentialFlagFile.substring(1);
+
+    List<String> combinedArgs = new ArrayList<>();
+    String flagFileContent = Files.toString(new File(flagFile), StandardCharsets.UTF_8);
+    List<String> argsFromFlagFile =
+        Splitter.on(' ').omitEmptyStrings().splitToList(flagFileContent);
+    combinedArgs.addAll(Arrays.asList(args));
+    // remove the flag file entry
+    combinedArgs.remove(combinedArgs.size() - 1);
+    combinedArgs.addAll(argsFromFlagFile);
+
+    return combinedArgs.toArray(new String[0]);
   }
 }
