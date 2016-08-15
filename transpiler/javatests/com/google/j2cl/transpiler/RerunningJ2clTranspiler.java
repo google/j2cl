@@ -13,7 +13,23 @@
  */
 package com.google.j2cl.transpiler;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Sets;
+import com.google.common.collect.Sets.SetView;
+import com.google.common.hash.HashCode;
+import com.google.common.hash.Hashing;
+import com.google.common.io.ByteStreams;
 import com.google.j2cl.errors.Errors;
+import com.google.j2cl.frontend.FrontendFlags;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipException;
+import java.util.zip.ZipFile;
 
 /**
  * A transpiler entry point that compiles code twice.
@@ -57,13 +73,36 @@ public class RerunningJ2clTranspiler {
     }
   }
 
-  public static void main(final String[] args) {
+  public static void main(final String[] args) throws ZipException, IOException {
+    FrontendFlags frontendFlags = new FrontendFlags(new Errors());
+    frontendFlags.parse(args);
+    File outputZip = new File(frontendFlags.output);
+
     boolean firstCompileSuccess = compile(new CompilerRunner(args));
+    Set<OutFile> firstCompileOut = null;
+
+    if (firstCompileSuccess) {
+      firstCompileOut = getOutFilesFromZip(outputZip);
+    }
+
     boolean secondCompileSuccess = compile(new CompilerRunner(args));
 
     if (firstCompileSuccess != secondCompileSuccess) {
       System.err.println("Compiles do not agree on success");
       System.exit(-1);
+    }
+
+    if (secondCompileSuccess) {
+      Set<OutFile> secondCompileOut = getOutFilesFromZip(outputZip);
+      SetView<OutFile> difference = Sets.difference(secondCompileOut, firstCompileOut);
+
+      if (!difference.isEmpty()) {
+        System.err.println("Output of first and second compile do not match");
+        for (OutFile outFile : difference) {
+          System.err.println("File: " + outFile.name);
+        }
+        System.exit(-2);
+      }
     }
   }
 
@@ -74,5 +113,47 @@ public class RerunningJ2clTranspiler {
       System.exit(-1);
       return false;
     }
+  }
+
+  private static class OutFile {
+    public final String name;
+    public final long hash;
+
+    public OutFile(String name, long hash) {
+      this.name = name;
+      this.hash = hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (!(obj instanceof OutFile)) {
+        return false;
+      }
+      OutFile other = (OutFile) obj;
+      return Objects.equal(name, other.name) && Objects.equal(hash, other.hash);
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hashCode(name, hash);
+    }
+  }
+
+  private static Set<OutFile> getOutFilesFromZip(File f) throws ZipException, IOException {
+    Set<OutFile> outFiles = new HashSet<>();
+
+    try (ZipFile zipFile = new ZipFile(f)) {
+      Enumeration<? extends ZipEntry> entries = zipFile.entries();
+
+      while (entries.hasMoreElements()) {
+        ZipEntry zipEntry = entries.nextElement();
+        String name = zipEntry.getName();
+        InputStream inputStream = zipFile.getInputStream(zipEntry);
+        HashCode hashCode = Hashing.sha256().hashBytes(ByteStreams.toByteArray(inputStream));
+        long hash = hashCode.padToLong();
+        outFiles.add(new OutFile(name, hash));
+      }
+    }
+    return outFiles;
   }
 }

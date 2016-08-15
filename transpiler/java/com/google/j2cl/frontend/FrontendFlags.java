@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.frontend;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Splitter;
 import com.google.common.io.Files;
 import com.google.j2cl.errors.Errors;
@@ -71,7 +72,8 @@ public class FrontendFlags {
     usage = "Directory or zip into which to place compiled output."
   )
   // TODO: replace with -output instead of -d
-  protected String output = ".";
+  @VisibleForTesting
+  public String output = ".";
 
   @Option(
     name = "-depinfo",
