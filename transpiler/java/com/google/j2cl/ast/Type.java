@@ -21,7 +21,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -157,6 +156,11 @@ public class Type extends Node {
   public void addFields(List<Field> fields) {
     Preconditions.checkNotNull(fields);
     this.members.addAll(fields);
+  }
+
+  public void addFields(int position, List<Field> fields) {
+    Preconditions.checkNotNull(fields);
+    this.members.addAll(position, fields);
   }
 
   /**

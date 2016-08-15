@@ -212,6 +212,7 @@ public class CompilationUnitBuilder {
       // this is an Enum.
       Preconditions.checkState(enumType.isEnum());
       enumType.addFields(
+          0,
           FluentIterable.from(
                   JdtUtils.<EnumConstantDeclaration>asTypedList(enumDeclaration.enumConstants()))
               .transform(

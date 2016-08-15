@@ -16,6 +16,8 @@ public class Main {
       }
     };
 
+    static Bar[] ENUM_SET = {Bar.BAR, Bar.BAZ, Bar.BANG};
+
     int f;
 
     Bar(int i) {
@@ -49,5 +51,10 @@ public class Main {
     assert Bar.BANG.ordinal() == 2;
     assert Bar.BANG.getF() == 7;
     assert Bar.BANG.name().equals("BANG");
+    // Check use-before-def assigning undefined
+    // Although it isn't likely the test will make it this far
+    for (Bar b : Bar.ENUM_SET) {
+      assert b != null;
+    }
   }
 }
