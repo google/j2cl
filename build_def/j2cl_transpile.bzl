@@ -115,6 +115,7 @@ def _impl(ctx):
       executable=ctx.executable.transpiler,
       arguments=["@" + compiler_args_file.path],
       env=dict(LANG="en_US.UTF-8"),
+      execution_requirements={"supports-workers": "1"},
   )
 
   return struct(

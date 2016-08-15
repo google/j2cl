@@ -116,7 +116,7 @@ public class Errors {
   public static class Exit extends java.lang.Error {
     private int exitCode;
 
-    private Exit(int exitCode) {
+    public Exit(int exitCode) {
       this.exitCode = exitCode;
     }
 
