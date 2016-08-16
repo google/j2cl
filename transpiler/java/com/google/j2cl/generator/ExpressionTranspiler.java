@@ -54,6 +54,7 @@ import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableReference;
+
 import java.util.Collections;
 
 /**
@@ -271,8 +272,7 @@ public class ExpressionTranspiler {
 
       /** JsProperty getter is emitted as property access: qualifier.property. */
       private void renderJsPropertyAccess(MethodCall expression) {
-        String jsPropertyName = expression.getTarget().getJsPropertyName();
-        renderQualifiedName(expression.getQualifier(), jsPropertyName);
+        renderQualifiedName(expression.getQualifier(), expression.getTarget().getJsName());
       }
 
       /** JsProperty setter is emitted as property set: qualifier.property = argument. */

@@ -50,12 +50,10 @@ public enum JsMemberType {
    * A JsProperty getter method. Usually in the form of getX()/isX().
    */
   GETTER {
-    /**
-     * Returns the property name from getter method that follows Java Bean naming conversions.
-     */
+    /** Returns the property name from getter method that follows Java Bean naming conversions. */
     @Override
-    public String computeJsName(MethodDescriptor methodDescriptor) {
-      String methodName = methodDescriptor.getName();
+    public String computeJsName(MemberDescriptor memberDescriptor) {
+      String methodName = memberDescriptor.getName();
       if (startsWithCamelCase(methodName, "get")) {
         return J2clUtils.decapitalize(methodName.substring(3));
       }
@@ -74,12 +72,10 @@ public enum JsMemberType {
    * A JsProperty setter method. Usually in the form of setX(x).
    */
   SETTER {
-    /**
-     * Returns the property name from setter method that follows Java Bean naming conversions.
-     */
+    /** Returns the property name from setter method that follows Java Bean naming conversions. */
     @Override
-    public String computeJsName(MethodDescriptor methodDescriptor) {
-      String methodName = methodDescriptor.getName();
+    public String computeJsName(MemberDescriptor memberDescriptor) {
+      String methodName = memberDescriptor.getName();
       if (startsWithCamelCase(methodName, "set")) {
         return J2clUtils.decapitalize(methodName.substring(3));
       }
@@ -99,10 +95,8 @@ public enum JsMemberType {
     return false;
   }
 
-  public String computeJsName(MethodDescriptor methodDescriptor) {
-    return methodDescriptor.getJsName() == null
-        ? methodDescriptor.getName()
-        : methodDescriptor.getJsName();
+  public String computeJsName(MemberDescriptor memberDescriptor) {
+    return memberDescriptor.getName();
   }
 
   private static boolean startsWithCamelCase(String string, String prefix) {

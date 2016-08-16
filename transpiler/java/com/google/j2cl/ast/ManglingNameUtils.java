@@ -21,6 +21,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.j2cl.common.J2clUtils;
+
 import java.util.List;
 
 /**
@@ -50,8 +51,7 @@ public class ManglingNameUtils {
     if (methodDescriptor.isJsProperty()) {
       // return get/set prefix plus the property name.
       String getterSetterPrefix = methodDescriptor.isJsPropertyGetter() ? "get" : "set";
-      String jsPropertyName = methodDescriptor.getJsPropertyName();
-      return getterSetterPrefix + " " + jsPropertyName;
+      return getterSetterPrefix + " " + methodDescriptor.getJsName();
     }
     if (methodDescriptor.isJsMethod()) {
       return methodDescriptor.getJsName();

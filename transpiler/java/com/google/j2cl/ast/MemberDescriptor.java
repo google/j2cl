@@ -38,7 +38,7 @@ public abstract class MemberDescriptor extends Node implements HasJsNameInfo {
   @Override
   public String getJsName() {
     String jsName = getJsInfo().getJsName();
-    return jsName == null ? getName() : jsName;
+    return jsName != null ? jsName : getJsInfo().getJsMemberType().computeJsName(this);
   }
 
   @Override
