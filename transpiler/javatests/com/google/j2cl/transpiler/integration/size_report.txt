@@ -1,9 +1,9 @@
 Integration tests optimized size report:
 **************************************
-There are 1 size changes.
+There are 13 size changes.
 Total size (of already existing tests) changed from
-  753068 to 753368 bytes (100%->100.04%) and from
-  272682 to 272833 bytes (100%->100.06%) gzipped.
+  753368 to 756333 bytes (100%->100.39%) and from
+  272833 to 273257 bytes (100%->100.16%) gzipped.
 
 
 New reports:
@@ -19,7 +19,10 @@ Shrinkage report highlights:
 Expansion report highlights:
 **************************************
       old    new
-     1187   1338 enums (12.72%)
+     1511   1558 arrayobjectcalls (3.11%)
+     1111   1145 multipleanonymousclass (3.06%)
+     1112   1146 nestedanonymousclass (3.06%)
+     1178   1214 jsbridgemethodaccidentaloverride (3.06%)
 
 
 All reports:
@@ -38,14 +41,14 @@ All reports:
       998    998 arraycastsinglesideeffect (unchanged)
      1569   1569 arrayleafinsertion (unchanged)
      1951   1951 arrayliteral (unchanged)
-     1511   1511 arrayobjectcalls (unchanged)
+     1511   1558 arrayobjectcalls (3.11%)
      4244   4244 arrayofboxedtype (unchanged)
      3510   3510 arrayreadwrite (unchanged)
      1044   1044 assertsimple (unchanged)
       890    890 backwardbridgemethod (unchanged)
       851    851 binaryexpressions (unchanged)
       819    819 blockscoping (unchanged)
-    34801  34801 box2d (unchanged)
+    34801  34833 box2d (0.09%)
      3124   3124 boxingsideeffect (unchanged)
       861    861 breakstatement (unchanged)
      2282   2282 bridgejsmethod (unchanged)
@@ -69,7 +72,7 @@ All reports:
      2881   2881 casttoreference (unchanged)
       970    970 castwithsideeffect (unchanged)
       830    830 circularcompiletimeconstant (unchanged)
-     2284   2284 classliteral (unchanged)
+     2284   2329 classliteral (1.97%)
       857    857 compiletimeconstant (unchanged)
       899    899 complexcascadingconstructor (unchanged)
       865    865 continuestatement (unchanged)
@@ -85,7 +88,7 @@ All reports:
        62     62 emptyclasswithfields (unchanged)
        62     62 emptyclasswithparent (unchanged)
       993    993 enummethods (unchanged)
-     1187   1338 enums (12.72%)
+     1338   1338 enums (unchanged)
      1712   1712 enumspecialfunctions (unchanged)
      1081   1081 exceptionnotcaught (unchanged)
       863    863 exports (unchanged)
@@ -119,14 +122,14 @@ All reports:
       858    858 instanceofinterface (unchanged)
      1005   1005 instancequalifieronstaticfield (unchanged)
      1034   1034 interfaceabstractimpl (unchanged)
-     3740   3740 interfacedevirtualize (unchanged)
+     3740   3749 interfacedevirtualize (0.24%)
        62     62 interfacejsbridge (unchanged)
        62     62 interfacemethoddispatch (unchanged)
       854    854 interfacewithfields (unchanged)
      1656   1656 intersectiontype (unchanged)
      1163   1163 iteratormethodresolution (unchanged)
        62     62 jsbridgebackward (unchanged)
-     1178   1178 jsbridgemethodaccidentaloverride (unchanged)
+     1178   1214 jsbridgemethodaccidentaloverride (3.06%)
        62     62 jsbridgemultipleaccidental (unchanged)
       926    926 jsbridgemultipleexposing (unchanged)
      1304   1304 jsconstructor (unchanged)
@@ -134,7 +137,7 @@ All reports:
      1272   1272 jsfunctionbridge (unchanged)
      1977   1977 jsfunctiontypeannotation (unchanged)
       885    885 jsinnerclass (unchanged)
-    10952  10952 jsinteroptests (unchanged)
+    10952  10959 jsinteroptests (0.06%)
       885    885 jsmethodoverride (unchanged)
       816    816 jsoverlay (unchanged)
       819    819 jsoverlaystaticrefs (unchanged)
@@ -150,7 +153,7 @@ All reports:
      2728   2728 longimplicitcasts (unchanged)
      2339   2339 longoperationsinglesideeffect (unchanged)
       930    930 multipleabstractparents (unchanged)
-     1111   1111 multipleanonymousclass (unchanged)
+     1111   1145 multipleanonymousclass (3.06%)
      1066   1066 multiplecatch (unchanged)
       897    897 multipleconstructors (unchanged)
        62     62 multipleroottypes (unchanged)
@@ -159,7 +162,7 @@ All reports:
        62     62 nativeinjectionapt (unchanged)
       796    796 nativeinjectionwithoutmethods (unchanged)
       932    932 nativejstypes (unchanged)
-     1112   1112 nestedanonymousclass (unchanged)
+     1112   1146 nestedanonymousclass (3.06%)
      1000   1000 nestedgenericclass (unchanged)
       859    859 nestednativetype (unchanged)
      1107   1107 nestedtrycatch (unchanged)
@@ -170,9 +173,9 @@ All reports:
      1049   1049 npecatch (unchanged)
      2290   2290 numberchilddevirtualcalls (unchanged)
      3023   3023 numberdevirtualcalls (unchanged)
-     3010   3010 numberobjectcalls (unchanged)
-     1554   1554 objectchilddevirtualcalls (unchanged)
-     1409   1409 objectdevirtualcalls (unchanged)
+     3010   3042 numberobjectcalls (1.06%)
+     1554   1595 objectchilddevirtualcalls (2.64%)
+     1409   1444 objectdevirtualcalls (2.48%)
        62     62 obviouslydeadcode (unchanged)
        62     62 overloadedmethods (unchanged)
       924    924 overridingclassmethods (unchanged)
@@ -190,7 +193,7 @@ All reports:
      4163   4163 simpleautoboxing (unchanged)
       863    863 simplecascadingconstructor (unchanged)
       848    848 simpleliterals (unchanged)
-     1384   1384 simplestarrayliteral (unchanged)
+     1384   1416 simplestarrayliteral (2.31%)
        62     62 srcjar (unchanged)
       892    892 staticblocklocalvar (unchanged)
      2057   2057 staticcompiletimeconstant (unchanged)
@@ -202,7 +205,7 @@ All reports:
       914    914 staticnestedclass (unchanged)
      1384   1384 strictequality (unchanged)
      1399   1399 stringconversion (unchanged)
-     1488   1488 stringdevirtualcalls (unchanged)
+     1488   1528 stringdevirtualcalls (2.69%)
        62     62 stringescapecodes (unchanged)
       864    864 subclassgenericclass (unchanged)
       907    907 subnativejstype (unchanged)

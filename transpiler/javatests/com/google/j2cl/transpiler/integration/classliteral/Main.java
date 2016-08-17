@@ -140,6 +140,13 @@ public class Main {
     assert !int.class.isInterface() : "int.class.isInterface() returned true";
   }
 
+  public static void testPrimitivesUnboxed() {
+    Object b = true;
+    Object d = 0.1;
+    assertEquals(Boolean.class, b.getClass());
+    assertEquals(Double.class, d.getClass());
+  }
+
   @SuppressWarnings("GetClassOnClass")
   public static void testMisc() {
     assertSame(Class.class, int.class.getClass());

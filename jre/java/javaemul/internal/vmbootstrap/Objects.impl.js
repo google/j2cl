@@ -11,8 +11,6 @@ let String = goog.forwardDeclare('java.lang.String$impl');
 let Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
 let JavaScriptObject = goog.forwardDeclare('vmbootstrap.JavaScriptObject$impl');
-let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
-let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
 let $Hashing = goog.forwardDeclare('nativebootstrap.Hashing$impl');
 
 /**
@@ -102,9 +100,9 @@ class Objects {
     // different classes.
     let type = typeof obj;
     if (type == 'number') {
-      return Class.$get($double);
+      return Class.$get(Double);
     } else if (type == 'boolean') {
-      return Class.$get($boolean);
+      return Class.$get(Boolean);
     } else if (type == 'string') {
       return Class.$get(String);
     } else if (obj instanceof Array) {
@@ -133,8 +131,6 @@ class Objects {
     Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     JavaScriptFunction = goog.module.get('vmbootstrap.JavaScriptFunction$impl');
     JavaScriptObject = goog.module.get('vmbootstrap.JavaScriptObject$impl');
-    $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
-    $double = goog.module.get('vmbootstrap.primitives.$double$impl');
     $Hashing = goog.module.get('nativebootstrap.Hashing$impl');
   }
 };

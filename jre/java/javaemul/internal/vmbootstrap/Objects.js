@@ -16,8 +16,6 @@ let _String = goog.require('java.lang.String');
 let _Arrays = goog.require('vmbootstrap.Arrays');
 let _JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction');
 let _JavaScriptObject = goog.require('vmbootstrap.JavaScriptObject');
-let _$boolean = goog.require('vmbootstrap.primitives.$boolean');
-let _$double = goog.require('vmbootstrap.primitives.$double');
 let _$Hashing = goog.require('nativebootstrap.Hashing');
 
 
