@@ -238,53 +238,63 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderTypeMethods() {
     for (Method method : type.getMethods()) {
-      if (GeneratorUtils.shouldNotEmitCode(method)) {
+      // JsOverlay methods are rendered in their own files.
+      if (method.getDescriptor().isJsOverlay()) {
         continue;
-      }
-      if (method.getDescriptor().isJsOverlay() && !method.getDescriptor().isStatic()) {
-        continue;
-      }
-      sourceBuilder.appendln("/**");
-      if (method.getJsDocDescription() != null && !method.getJsDocDescription().isEmpty()) {
-        sourceBuilder.appendln(" * " + method.getJsDocDescription());
-      }
-      if (method.isAbstract()) {
-        sourceBuilder.appendln(" * @abstract");
-      }
-      if (method.isOverride() && !method.isConstructor()) {
-        sourceBuilder.appendln(" * @override");
-      }
-      if (!method.getDescriptor().getTypeParameterTypeDescriptors().isEmpty()) {
-        String templateParamNames =
-            JsDocNameUtils.getJsDocNames(
-                method.getDescriptor().getTypeParameterTypeDescriptors(), environment);
-        sourceBuilder.appendln(" * @template " + templateParamNames);
       }
 
-      if (type.getDescriptor().isJsFunctionImplementation()
-          && method.getDescriptor().isPolymorphic()
-          && !method.getBody().getStatements().isEmpty()
-          && !method.getDescriptor().getName().startsWith("$ctor")) {
-        sourceBuilder.appendln(" * @this {" + getJsDocName(type.getDescriptor()) + "}");
-      }
-      for (int i = 0; i < method.getParameters().size(); i++) {
-        sourceBuilder.appendln(
-            " * " + GeneratorUtils.getParameterJsDocAnnotation(method, i, environment));
-      }
-      String returnTypeName = getJsDocName(method.getDescriptor().getReturnTypeDescriptor());
-      if (!method.getDescriptor().isConstructor()) {
-        sourceBuilder.appendln(" * @return {" + returnTypeName + "}");
-      }
-      sourceBuilder.appendln(" * @" + GeneratorUtils.visibilityForMethod(method));
-      sourceBuilder.appendln(" */");
       if (method.isNative()) {
+        // If the method is native, output JsDoc comments so it can serve as a template for
+        // native.js. However if the method is pointing to a different namespace then there
+        // is no point on doing that since it cannot be provided via a native.js file.
+        if (method.getDescriptor().hasJsNamespace()) {
+          continue;
+        }
+        renderMethodJsDoc(method);
         sourceBuilder.append("// native " + GeneratorUtils.getMethodHeader(method, environment));
       } else {
+        renderMethodJsDoc(method);
         sourceBuilder.append(GeneratorUtils.getMethodHeader(method, environment) + " ");
         statementTranspiler.renderStatement(method.getBody());
       }
       sourceBuilder.newLines(2);
     }
+  }
+
+  private void renderMethodJsDoc(Method method) {
+    sourceBuilder.appendln("/**");
+    if (method.getJsDocDescription() != null && !method.getJsDocDescription().isEmpty()) {
+      sourceBuilder.appendln(" * " + method.getJsDocDescription());
+    }
+    if (method.isAbstract()) {
+      sourceBuilder.appendln(" * @abstract");
+    }
+    if (method.isOverride() && !method.isConstructor()) {
+      sourceBuilder.appendln(" * @override");
+    }
+    if (!method.getDescriptor().getTypeParameterTypeDescriptors().isEmpty()) {
+      String templateParamNames =
+          JsDocNameUtils.getJsDocNames(
+              method.getDescriptor().getTypeParameterTypeDescriptors(), environment);
+      sourceBuilder.appendln(" * @template " + templateParamNames);
+    }
+
+    if (type.getDescriptor().isJsFunctionImplementation()
+        && method.getDescriptor().isPolymorphic()
+        && !method.getBody().getStatements().isEmpty()
+        && !method.getDescriptor().getName().startsWith("$ctor")) {
+      sourceBuilder.appendln(" * @this {" + getJsDocName(type.getDescriptor()) + "}");
+    }
+    for (int i = 0; i < method.getParameters().size(); i++) {
+      sourceBuilder.appendln(
+          " * " + GeneratorUtils.getParameterJsDocAnnotation(method, i, environment));
+    }
+    String returnTypeName = getJsDocName(method.getDescriptor().getReturnTypeDescriptor());
+    if (!method.getDescriptor().isConstructor()) {
+      sourceBuilder.appendln(" * @return {" + returnTypeName + "}");
+    }
+    sourceBuilder.appendln(" * @" + GeneratorUtils.visibilityForMethod(method));
+    sourceBuilder.appendln(" */");
   }
 
   private void renderMarkImplementorMethod() {

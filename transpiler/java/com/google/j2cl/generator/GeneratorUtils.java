@@ -166,15 +166,6 @@ public class GeneratorUtils {
     return TypeDescriptors.getDefaultValue(field.getDescriptor().getTypeDescriptor());
   }
 
-  /**
-   * If the method is a native method with a different namespace than the current class, or it is a
-   * native JsProperty method, no need to output any code for it.
-   */
-  public static boolean shouldNotEmitCode(Method method) {
-    return method.isNative()
-        && (method.getDescriptor().isJsProperty() || method.getDescriptor().isJsMethod());
-  }
-
   public static String getExtendsClause(Type type, GenerationEnvironment environment) {
     TypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
     if (superTypeDescriptor == null) {
