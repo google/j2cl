@@ -731,16 +731,8 @@ public class CompilationUnitBuilder {
       Expression trueExpression = convert(jdtConditionalExpression.getThenExpression());
       Expression falseExpression = convert(jdtConditionalExpression.getElseExpression());
 
-      // TODO(simionato): Remove this once the pass that inserts casting for nullability is removed.
-      // This is needed when a method returns a conditional expression. In this case the type of the
-      // conditional wil be type return type of the method (including its annotations). This won't
-      // produce the correct cast if the method returns non-null and the ternary is nullable.
-      // To fix it, always convert the type to nullable.
       TypeDescriptor conditionalTypeDescriptor =
           JdtUtils.createTypeDescriptor(jdtConditionalExpression.resolveTypeBinding());
-      if (jdtConditionalExpression.resolveTypeBinding().getTypeAnnotations().length != 0) {
-        conditionalTypeDescriptor = TypeDescriptors.toNullable(conditionalTypeDescriptor);
-      }
 
       return new ConditionalExpression(
           conditionalTypeDescriptor, conditionExpression, trueExpression, falseExpression);

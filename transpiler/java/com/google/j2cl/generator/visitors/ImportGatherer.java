@@ -197,10 +197,6 @@ public class ImportGatherer extends AbstractVisitor {
   }
 
   private void addTypeDescriptor(TypeDescriptor typeDescriptor, ImportCategory importCategory) {
-    // The "unknownType" can't be depended upon.
-    if (typeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().unknownType)) {
-      return;
-    }
     // Type variables can't be depended upon.
     if (typeDescriptor.isTypeVariable() || typeDescriptor.isWildCard()) {
       return;

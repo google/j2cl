@@ -66,8 +66,6 @@ public class TypeDescriptors {
   public TypeDescriptor javaLangComparable;
   public TypeDescriptor javaLangCharSequence;
 
-  public TypeDescriptor unknownType;
-
   public static final String SHORT_TYPE_NAME = "short";
   public static final String LONG_TYPE_NAME = "long";
   public static final String FLOAT_TYPE_NAME = "float";
@@ -642,12 +640,6 @@ public class TypeDescriptors {
     private final TypeDescriptors typeDescriptors = new TypeDescriptors();
 
     public void init() {
-      typeDescriptors.unknownType =
-          TypeDescriptors.createExactly(
-              Collections.emptyList(),
-              Lists.newArrayList("$$unknown$$"),
-              false,
-              Collections.emptyList());
       set(typeDescriptors);
     }
 

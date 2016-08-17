@@ -155,7 +155,7 @@ public class JsDocNameUtils {
           getJsDocName(TypeDescriptors.toNullable(typeDescriptor), shouldUseClassName, environment),
           false /* nullable */);
     }
-    
+
     if (shouldUseClassName) {
       typeDescriptor = TypeDescriptors.toNullable(typeDescriptor);
     }
@@ -163,10 +163,6 @@ public class JsDocNameUtils {
     // Everything below is nullable.
     Preconditions.checkArgument(typeDescriptor.isNullable() || typeDescriptor.isPrimitive());
 
-    // Special cases.
-    if (typeDescriptor == TypeDescriptors.get().unknownType) {
-      return "?";
-    }
     switch (typeDescriptor.getSourceName()) {
       case TypeDescriptors.BYTE_TYPE_NAME:
       case TypeDescriptors.SHORT_TYPE_NAME:
