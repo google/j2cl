@@ -7,7 +7,6 @@ import os
 import re
 from subprocess import PIPE
 from subprocess import Popen
-import sys
 
 from google3.pyglib import app
 from google3.pyglib import flags
@@ -190,7 +189,7 @@ def gather_closure_warnings(build_log):
       build_log_file.write(build_log)
 
 
-def main(argv=sys.argv):
+def main(unused_argv):
   build_all = FLAGS.example_name == "*"
 
   print "Generating readable JS and build logs:"
