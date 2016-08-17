@@ -54,7 +54,6 @@ import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
 import com.google.j2cl.ast.VariableReference;
-
 import java.util.Collections;
 
 /**
@@ -215,8 +214,10 @@ public class ExpressionTranspiler {
       public Void transformMethodCall(MethodCall expression) {
         if (expression.isStaticDispatch()) {
           renderStaticDispatchMethodCall(expression);
-        } else if (expression.getTarget().isJsProperty()) {
-          renderJsPropertyCall(expression);
+        } else if (expression.getTarget().isJsPropertyGetter()) {
+          renderJsPropertyAccess(expression);
+        } else if (expression.getTarget().isJsPropertySetter()) {
+          renderJsPropertySetter(expression);
         } else {
           renderMethodCallHeader(expression);
           renderDelimitedAndSeparated("(", ", ", ")", expression.getArguments());
@@ -237,14 +238,6 @@ public class ExpressionTranspiler {
             ")",
             Iterables.concat(
                 Collections.singletonList(expression.getQualifier()), expression.getArguments()));
-      }
-
-      private void renderJsPropertyCall(MethodCall expression) {
-        if (expression.getTarget().isJsPropertyGetter()) {
-          renderJsPropertyAccess(expression);
-        } else {
-          renderJsPropertySetter(expression);
-        }
       }
 
       private void renderQualifiedName(Expression qualifier, String jsPropertyName) {

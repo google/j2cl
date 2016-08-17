@@ -22,33 +22,20 @@ import com.google.j2cl.common.J2clUtils;
  * regular JsMethod.
  */
 public enum JsMemberType {
-  /**
-   * A regular method.
-   */
+  /** A regular method. */
   NONE,
   /**
    * A directly annotated JsConstructor, (either by JsConstructor annotation on the method, or
    * JsType annotation on the enclosing class).
    */
   CONSTRUCTOR,
-  /**
-   * A JsFunction method.
-   */
+  /** A JsFunction method. */
   JS_FUNCTION,
   /** A regular Js method. (not a JsProperty method). */
   METHOD,
-  /**
-   * A JsProperty.
-   */
-  PROPERTY {
-    @Override
-    public boolean isJsPropertyAccessor() {
-      return true;
-    }
-  },
-  /**
-   * A JsProperty getter method. Usually in the form of getX()/isX().
-   */
+  /** A JsProperty. */
+  PROPERTY,
+  /** A JsProperty getter method. Usually in the form of getX()/isX(). */
   GETTER {
     /** Returns the property name from getter method that follows Java Bean naming conversions. */
     @Override
@@ -62,15 +49,8 @@ public enum JsMemberType {
       }
       return null;
     }
-
-    @Override
-    public boolean isJsPropertyAccessor() {
-      return true;
-    }
   },
-  /**
-   * A JsProperty setter method. Usually in the form of setX(x).
-   */
+  /** A JsProperty setter method. Usually in the form of setX(x). */
   SETTER {
     /** Returns the property name from setter method that follows Java Bean naming conversions. */
     @Override
@@ -81,19 +61,7 @@ public enum JsMemberType {
       }
       return null;
     }
-
-    @Override
-    public boolean isJsPropertyAccessor() {
-      return true;
-    }
   };
-
-  /**
-   * Default is false. Returns true for {@code PROPERTY}, {@code GETTER}, and {@code SETTER}.
-   */
-  public boolean isJsPropertyAccessor() {
-    return false;
-  }
 
   public String computeJsName(MemberDescriptor memberDescriptor) {
     return memberDescriptor.getName();

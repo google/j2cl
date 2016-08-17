@@ -685,7 +685,9 @@ public class AstUtils {
 
   public static Method createDevirtualizedMethod(Method method) {
     checkArgument(
-        !method.getDescriptor().isJsProperty(), "JsProperty should never be devirtualized");
+        !method.getDescriptor().isJsPropertyGetter()
+            && !method.getDescriptor().isJsPropertySetter(),
+        "JsPropery getter and setters should never be devirtualized " + method);
     checkArgument(method.getDescriptor().isPolymorphic());
     // TODO: remove once init() function is synthesized in AST.
     checkArgument(!method.getDescriptor().isInit(), "Do not devirtualize init().");

@@ -24,7 +24,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.Interner;
-
 import javax.annotation.Nullable;
 
 /** A (by signature) reference to a method. */
@@ -91,21 +90,15 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   public boolean isJsPropertyGetter() {
-    return getJsInfo().getJsMemberType().isJsPropertyAccessor()
-        && getParameterTypeDescriptors().isEmpty();
+    return getJsInfo().getJsMemberType() == JsMemberType.GETTER;
   }
 
   public boolean isJsPropertySetter() {
-    return getJsInfo().getJsMemberType().isJsPropertyAccessor()
-        && getParameterTypeDescriptors().size() == 1;
+    return getJsInfo().getJsMemberType() == JsMemberType.SETTER;
   }
 
   public boolean isJsMethod() {
     return getJsInfo().getJsMemberType() == JsMemberType.METHOD;
-  }
-
-  public boolean isJsProperty() {
-    return getJsInfo().getJsMemberType().isJsPropertyAccessor();
   }
 
   public boolean isJsOverlay() {

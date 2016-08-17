@@ -77,7 +77,8 @@ public class Type extends Node {
   public boolean containsNonJsNativeMethods() {
     for (Method method : getMethods()) {
       if (method.isNative()
-          && !method.getDescriptor().isJsProperty()
+          && !method.getDescriptor().isJsPropertyGetter()
+          && !method.getDescriptor().isJsPropertySetter()
           && !method.getDescriptor().isJsMethod()) {
         return true;
       }

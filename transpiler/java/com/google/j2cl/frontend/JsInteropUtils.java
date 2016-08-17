@@ -52,20 +52,11 @@ public class JsInteropUtils {
     if (jsPropertyAnnotation != null) {
       String jsPropertyName = JsInteropAnnotationUtils.getJsName(jsPropertyAnnotation);
       String jsPropertyNamespace = JsInteropAnnotationUtils.getJsNamespace(jsPropertyAnnotation);
-      if (jsPropertyName != null) {
-        // A JsProperty name is specified, it is a {@code PROPERTY} type.
-        return JsInfo.create(
-            JsMemberType.PROPERTY, jsPropertyName, jsPropertyNamespace, isJsOverlay);
-      } else {
-        // Otherwise, it is a JsProperty getter or setter.
-        return JsInfo.create(
-            methodBinding.getParameterTypes().length == 0
-                ? JsMemberType.GETTER
-                : JsMemberType.SETTER,
-            jsPropertyName,
-            jsPropertyNamespace,
-            isJsOverlay);
-      }
+      return JsInfo.create(
+          methodBinding.getParameterTypes().length == 0 ? JsMemberType.GETTER : JsMemberType.SETTER,
+          jsPropertyName,
+          jsPropertyNamespace,
+          isJsOverlay);
     }
     // check @JsMethod annotation
     IAnnotationBinding jsMethodAnnotation =
