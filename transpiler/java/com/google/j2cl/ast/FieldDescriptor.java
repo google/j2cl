@@ -103,18 +103,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   }
 
   @Override
-  public String getJsName() {
-    String jsName = getJsInfo().getJsName();
-    return jsName == null ? getName() : jsName;
-  }
-
-  @Override
-  public String getJsNamespace() {
-    String jsNamespace = getJsInfo().getJsNamespace();
-    return jsNamespace == null ? getEnclosingClassTypeDescriptor().getJsNamespace() : jsNamespace;
-  }
-
-  @Override
   public boolean isPolymorphic() {
     return !isStatic();
   }

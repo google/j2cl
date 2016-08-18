@@ -127,7 +127,7 @@ public class JsInteropRestrictionsChecker {
 
     if (memberDescriptor
         .getJsNamespace()
-        .equals(memberDescriptor.getEnclosingClassTypeDescriptor().getJsNamespace())) {
+        .equals(memberDescriptor.getEnclosingClassTypeDescriptor().getProxiedQualifiedName())) {
       // Namespace set by the enclosing type has already been checked.
       return;
     }
@@ -372,14 +372,13 @@ public class JsInteropRestrictionsChecker {
     if (jsName == null) {
       return;
     }
-    boolean isExtern = JsUtils.isGlobal(item.getJsNamespace()) && item.isNative();
     if (jsName.isEmpty()) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "'%s' cannot have an empty name.",
           getReadableDescription(item));
-    } else if ((isExtern && !JsUtils.isValidJsQualifiedName(jsName))
-        || (!isExtern && !JsUtils.isValidJsIdentifier(jsName))) {
+    } else if ((item.isNative() && !JsUtils.isValidJsQualifiedName(jsName))
+        || (!item.isNative() && !JsUtils.isValidJsIdentifier(jsName))) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "'%s' has invalid name '%s'.",

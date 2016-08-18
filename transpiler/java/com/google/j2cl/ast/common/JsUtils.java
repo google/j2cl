@@ -34,7 +34,6 @@ public class JsUtils {
     return name.matches(JAVASCRIPT_VALID_QUALIFIED_NAME_REGEX);
   }
 
-  public static final String GLOBAL_ALIAS = "window";
   public static final String JS_PACKAGE_GLOBAL = "<global>";
 
   /** Returns whether a type should be considered global based on its namespace. */
