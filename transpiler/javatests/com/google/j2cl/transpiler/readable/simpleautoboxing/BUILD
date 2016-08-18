@@ -12,5 +12,8 @@ load(
 readable_example(
     name = "simpleautoboxing",
     srcs = glob(["*.java"]),
-    javacopts = ["-Xep:UselessBooleanExpression:OFF"],
+    javacopts = [
+        "-Xep:IdentityBinaryExpression:OFF",
+        "-Xep:SelfEquality:OFF",
+    ],
 )

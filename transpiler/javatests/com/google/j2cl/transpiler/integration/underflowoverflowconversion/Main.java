@@ -1,5 +1,6 @@
 package com.google.j2cl.transpiler.integration.underflowoverflowconversion;
 
+@SuppressWarnings("IdentityBinaryExpression")
 public class Main {
 
   public static void main(String... args) {
