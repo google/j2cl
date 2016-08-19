@@ -14,10 +14,11 @@ _CLOSURE_COMPILER_FLAGS_FULL_TYPED = [
     if flag != "--variable_renaming=ALL"
 ]
 
-def j2cl_optimization_test(name, defs=[]):
+def j2cl_optimization_test(name, defs=[], javacopts=[]):
   j2cl_test(
     name = name,
     srcs = [name + ".java"],
+    javacopts = javacopts,
     compile = 1,
     compiler = "//javascript/tools/jscompiler:head",
     data = ["//testing/matrix/nativebrowsers/chrome:stable_data"],

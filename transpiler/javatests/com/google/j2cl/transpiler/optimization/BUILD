@@ -10,6 +10,7 @@ load("j2cl_optimization_test", "j2cl_optimization_test")
 
 j2cl_optimization_test(
     name = "BooleansTest",
+    javacopts = ["-Xep:SelfEquality:OFF"],
 )
 
 j2cl_optimization_test(
