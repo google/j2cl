@@ -11,7 +11,6 @@ goog.module('com.google.j2cl.transpiler.readable.longinitialvalue.LongInitialVal
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
-let $LongUtils = goog.require('vmbootstrap.LongUtils$impl');
 
 let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 
@@ -109,7 +108,7 @@ $Util.$setClassMetadata(
  */
 LongInitialValue
     .$f_LONG_VALUE__com_google_j2cl_transpiler_readable_longinitialvalue_LongInitialValue =
-    $LongUtils.$fromInt(0);
+    $Long.fromBits(0, 0) /* 0 */;
 
 
 

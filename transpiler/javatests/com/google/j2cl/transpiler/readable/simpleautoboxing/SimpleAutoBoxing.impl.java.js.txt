@@ -11,7 +11,6 @@ goog.module('com.google.j2cl.transpiler.readable.simpleautoboxing.SimpleAutoBoxi
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
-let $LongUtils = goog.require('vmbootstrap.LongUtils$impl');
 
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Byte = goog.forwardDeclare('java.lang.Byte$impl');
@@ -23,6 +22,7 @@ let Long = goog.forwardDeclare('java.lang.Long$impl');
 let Short = goog.forwardDeclare('java.lang.Short$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
+let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 let $byte = goog.forwardDeclare('vmbootstrap.primitives.$byte$impl');
 let $char = goog.forwardDeclare('vmbootstrap.primitives.$char$impl');
@@ -208,7 +208,7 @@ class SimpleAutoBoxing extends java_lang_Object {
     let b = 100;
     let f = 1111.0;
     let i = 1111;
-    let l = $LongUtils.$fromInt(1111);
+    let l = $Long.fromBits(1111, 0) /* 1111 */;
     let s = 100;
     let c = 97 /* 'a' */;
     let boxBool = bool;
@@ -225,7 +225,7 @@ class SimpleAutoBoxing extends java_lang_Object {
     boxB = Byte.m_valueOf__byte(0);
     boxF = Float.m_valueOf__float(100.0);
     boxI = Integer.m_valueOf__int(1000);
-    boxL = Long.m_valueOf__long($LongUtils.$fromInt(1000));
+    boxL = Long.m_valueOf__long($Long.fromBits(1000, 0) /* 1000 */);
     boxS = Short.m_valueOf__short(0);
     boxC = Character.m_valueOf__char(0 /* "\u0000" */);
     boxC = Character.m_valueOf__char(97 /* "a" */);
@@ -262,7 +262,7 @@ class SimpleAutoBoxing extends java_lang_Object {
     let boxB = Byte.$create__byte(100);
     let boxF = Float.$create__float(1111.0);
     let boxI = Integer.$create__int(1111);
-    let boxL = Long.$create__long($LongUtils.$fromInt(1111));
+    let boxL = Long.$create__long($Long.fromBits(1111, 0) /* 1111 */);
     let boxS = Short.$create__short(100);
     let boxC = Character.$create__char(97 /* 'a' */);
     let bool = Boolean.m_booleanValue__java_lang_Boolean(boxBool);
@@ -463,6 +463,7 @@ class SimpleAutoBoxing extends java_lang_Object {
     Short = goog.module.get('java.lang.Short$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+    $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
     $boolean = goog.module.get('vmbootstrap.primitives.$boolean$impl');
     $byte = goog.module.get('vmbootstrap.primitives.$byte$impl');
     $char = goog.module.get('vmbootstrap.primitives.$char$impl');

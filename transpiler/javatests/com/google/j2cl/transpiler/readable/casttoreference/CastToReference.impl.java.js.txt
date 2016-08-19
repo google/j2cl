@@ -9,8 +9,8 @@ goog.module('com.google.j2cl.transpiler.readable.casttoreference.CastToReference
 
 
 let java_lang_Object = goog.require('java.lang.Object$impl');
+let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
-let $LongUtils = goog.require('vmbootstrap.LongUtils$impl');
 
 let Byte = goog.forwardDeclare('java.lang.Byte$impl');
 let Character = goog.forwardDeclare('java.lang.Character$impl');
@@ -61,7 +61,7 @@ class CastToReference extends java_lang_Object {
     let c = 97 /* 'a' */;
     let s = 1;
     let i = 1;
-    let l = $LongUtils.$fromInt(1);
+    let l = $Long.fromBits(1, 0) /* 1 */;
     let f = 1.0;
     let d = 1.0;
     let o = bool;

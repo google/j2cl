@@ -9,7 +9,7 @@
 [char c = 1;] => [let c = 1 /* "\u0001" */;]
 [short s = 1;] => [let s = 1;]
 [int i = 1;] => [let i = 1;]
-[long l = 1L;] => [let l = $LongUtils.$fromInt(1);]
+[long l = 1L;] => [let l = $Long.fromBits(1, 0) /* 1 */;]
 [float f = 1.1f;] => [let f = 1.100000023841858;]
 [double d = 1.1;] => [let d = 1.1;]
 [b = (byte) b;] => [b = b;]

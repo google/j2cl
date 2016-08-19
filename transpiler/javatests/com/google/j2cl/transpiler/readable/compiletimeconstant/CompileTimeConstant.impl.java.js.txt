@@ -11,7 +11,6 @@ goog.module('com.google.j2cl.transpiler.readable.compiletimeconstant.CompileTime
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
-let $LongUtils = goog.require('vmbootstrap.LongUtils$impl');
 
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
@@ -47,7 +46,7 @@ class CompileTimeConstant extends java_lang_Object {
         'Tur"tleDo"ve';
     /** @public {!$Long} */
     this.f_G2__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant =
-        $LongUtils.$fromInt(10000);
+        $Long.fromBits(10000, 0) /* 10000 */;
     /** @public {number} */
     this.f_H2__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant =
         65 /* "A" */;
@@ -185,7 +184,7 @@ CompileTimeConstant
  */
 CompileTimeConstant
     .f_G__com_google_j2cl_transpiler_readable_compiletimeconstant_CompileTimeConstant =
-    $LongUtils.$fromInt(10000);
+    $Long.fromBits(10000, 0) /* 10000 */;
 
 
 /**

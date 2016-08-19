@@ -11,7 +11,6 @@ goog.module('com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentI
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
-let $LongUtils = goog.require('vmbootstrap.LongUtils$impl');
 
 let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 
@@ -25,7 +24,7 @@ class ArgumentImplicitCasts$LongValueHolder extends java_lang_Object {
     super();
     /** @public {!$Long} */
     this.f_value__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts$LongValueHolder_ =
-        $LongUtils.$fromInt(0);
+        $Long.fromBits(0, 0) /* 0 */;
   }
 
   /**

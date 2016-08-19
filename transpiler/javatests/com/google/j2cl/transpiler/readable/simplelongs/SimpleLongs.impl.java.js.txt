@@ -11,8 +11,8 @@ goog.module('com.google.j2cl.transpiler.readable.simplelongs.SimpleLongs$impl');
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
-let $LongUtils = goog.require('vmbootstrap.LongUtils$impl');
 
+let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 let $Numbers = goog.forwardDeclare('vmbootstrap.Numbers$impl');
 let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 let $long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
@@ -28,7 +28,7 @@ class SimpleLongs extends java_lang_Object {
     super();
     /** @public {!$Long} */
     this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
-        $LongUtils.$fromInt(0);
+        $Long.fromBits(0, 0) /* 0 */;
     /** @public {number} */
     this.f_sideEffect__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs_ =
         0;
@@ -77,21 +77,20 @@ class SimpleLongs extends java_lang_Object {
    * @public
    */
   m_main__() {
-    let a = $LongUtils.$fromInt(0);
-    a = $LongUtils.$negate($LongUtils.$fromInt(100000));
-    a = $LongUtils.$fromInt(100000);
-    let b = $LongUtils.$negate(
-        $LongUtils.$fromBits(-2147483648, 0) /* 2147483648 */);
-    b = $LongUtils.$fromBits(-2147483648, 0) /* 2147483648 */;
-    b = $LongUtils.$fromBits(0, -2147483648) /* -9223372036854775808 */;
-    b = $LongUtils.$fromBits(-1, 2147483647) /* 9223372036854775807 */;
+    let a = $Long.fromBits(0, 0) /* 0 */;
+    a = $LongUtils.$negate($Long.fromBits(100000, 0) /* 100000 */);
+    a = $Long.fromBits(100000, 0) /* 100000 */;
+    let b = $LongUtils.$negate($Long.fromBits(-2147483648, 0) /* 2147483648 */);
+    b = $Long.fromBits(-2147483648, 0) /* 2147483648 */;
+    b = $Long.fromBits(0, -2147483648) /* -9223372036854775808 */;
+    b = $Long.fromBits(-1, 2147483647) /* 9223372036854775807 */;
     let c = $LongUtils.$plus(a, b);
     c = $LongUtils.$divide(a, b);
-    let e = a = $LongUtils.$plus(a, $LongUtils.$fromInt(1));
+    let e = a = $LongUtils.$plus(a, $Long.fromBits(1, 0) /* 1 */);
     e = this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
         $LongUtils.$plus(
             this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
-            $LongUtils.$fromInt(1));
+            $Long.fromBits(1, 0) /* 1 */);
     e =
         ($Numbers.$q = this.m_getWithSideEffect__(),
          $Numbers.$q
@@ -99,9 +98,9 @@ class SimpleLongs extends java_lang_Object {
              $LongUtils.$plus(
                  $Numbers.$q
                      .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
-                 $LongUtils.$fromInt(1)));
+                 $Long.fromBits(1, 0) /* 1 */));
     let f =
-        ($Numbers.$v = a, a = $LongUtils.$plus(a, $LongUtils.$fromInt(1)),
+        ($Numbers.$v = a, a = $LongUtils.$plus(a, $Long.fromBits(1, 0) /* 1 */),
          $Numbers.$v);
     f =
         ($Numbers.$v =
@@ -109,7 +108,7 @@ class SimpleLongs extends java_lang_Object {
          this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs =
              $LongUtils.$plus(
                  this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
-                 $LongUtils.$fromInt(1)),
+                 $Long.fromBits(1, 0) /* 1 */),
          $Numbers.$v);
     f =
         ($Numbers.$q = this.m_getWithSideEffect__(),
@@ -121,7 +120,7 @@ class SimpleLongs extends java_lang_Object {
              $LongUtils.$plus(
                  $Numbers.$q
                      .f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs,
-                 $LongUtils.$fromInt(1)),
+                 $Long.fromBits(1, 0) /* 1 */),
          $Numbers.$v);
     let g =
         this.f_foo__com_google_j2cl_transpiler_readable_simplelongs_SimpleLongs;
@@ -151,6 +150,7 @@ class SimpleLongs extends java_lang_Object {
    * @public
    */
   static $clinit() {
+    $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
     $Numbers = goog.module.get('vmbootstrap.Numbers$impl');
     $int = goog.module.get('vmbootstrap.primitives.$int$impl');
     $long = goog.module.get('vmbootstrap.primitives.$long$impl');

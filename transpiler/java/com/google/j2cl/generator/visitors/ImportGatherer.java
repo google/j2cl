@@ -102,17 +102,6 @@ public class ImportGatherer extends AbstractVisitor {
 
   @Override
   public void exitField(Field field) {
-    // If the field is not a compile time constant then it will be given some initial value at
-    // field creation. If that initial value is a long then the LongUtils class will need to be
-    // available.
-    if (!field.isCompileTimeConstant()
-        && TypeDescriptors.get()
-            .primitiveLong
-            .equalsIgnoreNullability(field.getDescriptor().getTypeDescriptor())) {
-      // for Long operation method dispatch.
-      addLongUtilsTypeDescriptor();
-    }
-
     addTypeDescriptor(field.getDescriptor().getTypeDescriptor(), ImportCategory.LAZY);
   }
 
@@ -167,22 +156,13 @@ public class ImportGatherer extends AbstractVisitor {
     if (TypeDescriptors.get()
         .primitiveLong
         .equalsIgnoreNullability(numberLiteral.getTypeDescriptor())) {
-      // for Long operation method dispatch.
-      addLongUtilsTypeDescriptor();
+      addTypeDescriptor(BootstrapType.NATIVE_LONG.getDescriptor(), ImportCategory.EAGER);
     }
   }
 
   @Override
   public void exitTypeReference(TypeReference typeReference) {
     addTypeDescriptor(typeReference.getReferencedTypeDescriptor(), ImportCategory.LAZY);
-  }
-
-  private void addLongUtilsTypeDescriptor() {
-    // In particular this import is being done eagerly both because it is safe to do so (the Longs
-    // library should not have extended dependencies) but also because the initialization of
-    // compile time constant values occurs during the declaration phase and this initialization
-    // might use the Longs library $fromBits/$fromInt etc.
-    addTypeDescriptor(BootstrapType.LONG_UTILS.getDescriptor(), ImportCategory.EAGER);
   }
 
   private void addRawTypeDescriptor(

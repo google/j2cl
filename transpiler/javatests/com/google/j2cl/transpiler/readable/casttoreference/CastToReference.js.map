@@ -10,7 +10,7 @@
 [char c = 'a';] => [let c = 97 /* 'a' */;]
 [short s = 1;] => [let s = 1;]
 [int i = 1;] => [let i = 1;]
-[long l = 1L;] => [let l = $LongUtils.$fromInt(1);]
+[long l = 1L;] => [let l = $Long.fromBits(1, 0) /* 1 */;]
 [float f = 1.0f;] => [let f = 1.0;]
 [double d = 1.0;] => [let d = 1.0;]
 [Object o = bool;] => [let o = bool;]

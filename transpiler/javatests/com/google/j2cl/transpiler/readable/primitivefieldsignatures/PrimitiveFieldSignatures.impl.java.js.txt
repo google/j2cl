@@ -11,7 +11,6 @@ goog.module('com.google.j2cl.transpiler.readable.primitivefieldsignatures.Primit
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
-let $LongUtils = goog.require('vmbootstrap.LongUtils$impl');
 
 let $boolean = goog.forwardDeclare('vmbootstrap.primitives.$boolean$impl');
 let $byte = goog.forwardDeclare('vmbootstrap.primitives.$byte$impl');
@@ -41,7 +40,7 @@ class PrimitiveFieldSignatures extends java_lang_Object {
         0;
     /** @public {!$Long} */
     this.f_d__com_google_j2cl_transpiler_readable_primitivefieldsignatures_PrimitiveFieldSignatures =
-        $LongUtils.$fromInt(0);
+        $Long.fromBits(0, 0) /* 0 */;
     /** @public {number} */
     this.f_e__com_google_j2cl_transpiler_readable_primitivefieldsignatures_PrimitiveFieldSignatures =
         0;

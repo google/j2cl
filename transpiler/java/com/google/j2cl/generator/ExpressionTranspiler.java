@@ -179,22 +179,14 @@ public class ExpressionTranspiler {
 
       private void renderLongNumberLiteral(NumberLiteral expression) {
         long longValue = expression.getValue().longValue();
-
-        if (longValue < Integer.MAX_VALUE && longValue > Integer.MIN_VALUE) {
-          // The long value is small enough to fit in an int. Emit the terse initialization.
-          sourceBuilder.append(longsTypeAlias() + ".$fromInt(" + longValue + ")");
-          return;
-        }
-
-        // The long value is pretty large. Emit the verbose initialization.
         long lowOrderBits = longValue << 32 >> 32;
         long highOrderBits = longValue >> 32;
         sourceBuilder.append(
-            longsTypeAlias()
-                + ".$fromBits("
-                + Long.toString(lowOrderBits)
+            environment.aliasForType(BootstrapType.NATIVE_LONG.getDescriptor())
+                + ".fromBits("
+                + lowOrderBits
                 + ", "
-                + Long.toString(highOrderBits)
+                + highOrderBits
                 + ") /* "
                 + longValue
                 + " */");
@@ -420,10 +412,6 @@ public class ExpressionTranspiler {
           currentSeparator = separator;
           process(expression);
         }
-      }
-
-      private String longsTypeAlias() {
-        return environment.aliasForType(BootstrapType.LONG_UTILS.getDescriptor());
       }
 
       private String getJsMethodName(MethodDescriptor methodDescriptor) {

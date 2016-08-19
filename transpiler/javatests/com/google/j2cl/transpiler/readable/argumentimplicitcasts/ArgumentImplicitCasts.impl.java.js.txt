@@ -11,13 +11,13 @@ goog.module('com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentI
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
-let $LongUtils = goog.require('vmbootstrap.LongUtils$impl');
 
 let ArgumentImplicitCasts$IntValueHolder = goog.forwardDeclare('com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.IntValueHolder$impl');
 let ArgumentImplicitCasts$LongValueHolder = goog.forwardDeclare('com.google.j2cl.transpiler.readable.argumentimplicitcasts.ArgumentImplicitCasts.LongValueHolder$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
+let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 let $byte = goog.forwardDeclare('vmbootstrap.primitives.$byte$impl');
 let $char = goog.forwardDeclare('vmbootstrap.primitives.$char$impl');
 let $double = goog.forwardDeclare('vmbootstrap.primitives.$double$impl');
@@ -303,6 +303,7 @@ class ArgumentImplicitCasts extends java_lang_Object {
     java_lang_String = goog.module.get('java.lang.String$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
     $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+    $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
     $byte = goog.module.get('vmbootstrap.primitives.$byte$impl');
     $char = goog.module.get('vmbootstrap.primitives.$char$impl');
     $double = goog.module.get('vmbootstrap.primitives.$double$impl');
@@ -369,7 +370,7 @@ ArgumentImplicitCasts
  */
 ArgumentImplicitCasts
     .f_LONG_MAX_VALUE__com_google_j2cl_transpiler_readable_argumentimplicitcasts_ArgumentImplicitCasts =
-    $LongUtils.$fromBits(-1, 2147483647) /* 9223372036854775807 */;
+    $Long.fromBits(-1, 2147483647) /* 9223372036854775807 */;
 
 
 /**

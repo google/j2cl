@@ -10,8 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGe
 
 let java_lang_Object = goog.require('java.lang.Object$impl');
 let java_util_function_Function = goog.require('java.util.function.Function$impl');
+let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
-let $LongUtils = goog.require('vmbootstrap.LongUtils$impl');
 
 let LambdaWithGenerics = goog.forwardDeclare('com.google.j2cl.transpiler.readable.lambdawithgenerics.LambdaWithGenerics$impl');
 let Enum = goog.forwardDeclare('java.lang.Enum$impl');
@@ -71,7 +71,9 @@ class LambdaWithGenerics$3apply extends java_lang_Object {
    * @return {*}
    * @public
    */
-  lambda3apply(item) { return Long.m_valueOf__long($LongUtils.$fromInt(1)); }
+  lambda3apply(item) {
+    return Long.m_valueOf__long($Long.fromBits(1, 0) /* 1 */);
+  }
 
   /**
    * @override

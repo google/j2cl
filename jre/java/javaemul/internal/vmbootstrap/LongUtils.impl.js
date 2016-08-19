@@ -34,16 +34,6 @@ class LongUtils {
   static $compare(a, b) { return a.compare(b); }
 
   /**
-   * @param {number} lowBits The low 32-bits.
-   * @param {number} highBits The high 32-bits.
-   * @return {!Long} A Long of the given bits.
-   * @public
-   */
-  static $fromBits(lowBits, highBits) {
-    return Long.fromBits(lowBits, highBits);
-  }
-
-  /**
    * @param {number} longInDouble A double holding a small enough long value.
    * @return {!Long} A Long corresponding to the given double.
    * @public
@@ -428,7 +418,7 @@ class LongUtils {
    */
   static $postfixIncrementArray(array, index) {
     const value = array[index];
-    LongUtils.$addSetArray(array, index, LongUtils.$fromNumber(1));
+    LongUtils.$addSetArray(array, index, LongUtils.$fromInt(1));
     return value;
   }
 
@@ -440,7 +430,7 @@ class LongUtils {
    */
   static $postfixDecrementArray(array, index) {
     const value = array[index];
-    LongUtils.$subSetArray(array, index, LongUtils.$fromNumber(1));
+    LongUtils.$subSetArray(array, index, LongUtils.$fromInt(1));
     return value;
   }
 };

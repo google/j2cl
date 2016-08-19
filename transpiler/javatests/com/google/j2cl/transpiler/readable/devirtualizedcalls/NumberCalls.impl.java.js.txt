@@ -9,8 +9,8 @@ goog.module('com.google.j2cl.transpiler.readable.devirtualizedcalls.NumberCalls$
 
 
 let java_lang_Object = goog.require('java.lang.Object$impl');
+let $Long = goog.require('nativebootstrap.Long$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
-let $LongUtils = goog.require('vmbootstrap.LongUtils$impl');
 
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Byte = goog.forwardDeclare('java.lang.Byte$impl');
@@ -128,14 +128,14 @@ class NumberCalls extends java_lang_Object {
     ff.m_intValue__();
     ff.m_longValue__();
     ff.m_shortValue__();
-    let l = Long.$create__long($LongUtils.$fromInt(1));
+    let l = Long.$create__long($Long.fromBits(1, 0) /* 1 */);
     $Numbers.m_byteValue__java_lang_Number(l);
     $Numbers.m_doubleValue__java_lang_Number(l);
     $Numbers.m_floatValue__java_lang_Number(l);
     $Numbers.m_intValue__java_lang_Number(l);
     $Numbers.m_longValue__java_lang_Number(l);
     $Numbers.m_shortValue__java_lang_Number(l);
-    let ll = Long.$create__long($LongUtils.$fromInt(1));
+    let ll = Long.$create__long($Long.fromBits(1, 0) /* 1 */);
     ll.m_byteValue__();
     ll.m_doubleValue__();
     ll.m_floatValue__();
