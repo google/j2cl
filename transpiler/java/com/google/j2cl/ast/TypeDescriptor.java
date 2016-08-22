@@ -115,7 +115,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       newTypeDescriptor.isNative = typeDescriptor.isNative();
       newTypeDescriptor.isNullable = typeDescriptor.isNullable();
       newTypeDescriptor.isPrimitive = typeDescriptor.isPrimitive();
-      newTypeDescriptor.isRaw = typeDescriptor.isRaw();
       newTypeDescriptor.isRawType = typeDescriptor.isRawType();
       newTypeDescriptor.isTypeVariable = typeDescriptor.isTypeVariable();
       newTypeDescriptor.isUnion = typeDescriptor.isUnion();
@@ -283,11 +282,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       return this;
     }
 
-    public Builder setIsRaw(boolean isRaw) {
-      newTypeDescriptor.isRaw = isRaw;
-      return this;
-    }
-
     public Builder setIsRawType(boolean isRawType) {
       newTypeDescriptor.isRawType = isRawType;
       return this;
@@ -426,7 +420,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   private boolean isNative;
   private boolean isNullable;
   private boolean isPrimitive;
-  private boolean isRaw;
   private boolean isRawType;
   private boolean isTypeVariable;
   private boolean isUnion;
@@ -477,9 +470,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   public String getBinaryClassName() {
     if (isPrimitive) {
       return "$" + simpleName;
-    }
-    if (simpleName.equals("?")) {
-      return "?";
     }
     if (isTypeVariable) {
       // skip the top level class component for better output readability.
@@ -859,14 +849,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
 
   public boolean isPrimitive() {
     return isPrimitive;
-  }
-
-  /**
-   * Returns whether this is a Raw reference. Raw references are not mangled in the output and thus
-   * can be used to describe reference to JS apis.
-   */
-  public boolean isRaw() {
-    return isRaw;
   }
 
   public boolean isRawType() {

@@ -230,7 +230,6 @@ public class TypeDescriptors {
         Joiner.on(".").join(typeDescriptor.getPackageComponents()),
         Joiner.on(".").join(classComponents),
         false,
-        false,
         false);
   }
 
@@ -257,7 +256,7 @@ public class TypeDescriptors {
 
     BootstrapType(List<String> pathComponents, String name) {
       this.typeDescriptor =
-          createExactly(pathComponents, Arrays.asList(name), true, Collections.emptyList());
+          createExactly(pathComponents, Arrays.asList(name), Collections.emptyList());
     }
 
     public TypeDescriptor getDescriptor() {
@@ -301,7 +300,6 @@ public class TypeDescriptors {
         typeArgumentDescriptors,
         jsNamespace,
         jsName,
-        false,
         true,
         true);
   }
@@ -385,7 +383,6 @@ public class TypeDescriptors {
   public static TypeDescriptor createExactly(
       List<String> packageComponents,
       List<String> classComponents,
-      boolean isRaw,
       List<TypeDescriptor> typeArgumentDescriptors) {
     checkArgument(!Iterables.getLast(classComponents).contains("<"));
     return createExactly(
@@ -395,7 +392,6 @@ public class TypeDescriptors {
         typeArgumentDescriptors,
         null,
         null,
-        isRaw,
         false,
         false);
   }
@@ -407,7 +403,6 @@ public class TypeDescriptors {
       final List<TypeDescriptor> typeArgumentDescriptors,
       final String jsNamespace,
       final String jsName,
-      final boolean isRaw,
       final boolean isNative,
       final boolean isJsType) {
     DescriptorFactory<TypeDescriptor> rawTypeDescriptorFactory =
@@ -424,7 +419,6 @@ public class TypeDescriptors {
                 emptyTypeArgumentDescriptors,
                 jsNamespace,
                 jsName,
-                isRaw,
                 isNative,
                 isJsType);
           }
@@ -451,7 +445,6 @@ public class TypeDescriptors {
         .setIsJsType(isJsType)
         .setIsNative(isNative)
         .setIsNullable(true)
-        .setIsRaw(isRaw)
         .setJsName(jsName)
         .setJsNamespace(jsNamespace)
         .setPackageComponents(packageComponents)
@@ -583,7 +576,6 @@ public class TypeDescriptors {
         .setDimensions(dimensions)
         .setIsArray(true)
         .setIsNullable(isNullable)
-        .setIsRaw(leafTypeDescriptor.isRaw())
         .setLeafTypeDescriptor(leafTypeDescriptor)
         .setPackageName(packageName)
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
