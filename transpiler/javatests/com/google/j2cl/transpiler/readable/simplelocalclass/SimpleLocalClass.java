@@ -22,4 +22,10 @@ public class SimpleLocalClass {
       int field = localVar;
     }
   }
+
+  // Local class with same name after $.
+  public void foo() {
+    class Abc$InnerClass {}
+    class Klm$InnerClass {}
+  }
 }

@@ -753,9 +753,12 @@ public class JdtUtils {
       String simpleName;
       if (currentType.isLocal()) {
         // JDT binary name for local class is like package.components.EnclosingClass$1SimpleName
-        // Extract the name after the last '$' as the class component here.
-        String binaryName = currentType.getErasure().getBinaryName();
-        simpleName = binaryName.substring(binaryName.lastIndexOf('$') + 1);
+        // Extract the generated name by taking the part after the binary name of the declaring
+        // class.
+        String binaryName = currentType.getBinaryName();
+        String declaringClassPrefix = currentType.getDeclaringClass().getBinaryName() + "$";
+        checkState(binaryName.startsWith(declaringClassPrefix));
+        simpleName = binaryName.substring(declaringClassPrefix.length());
       } else if (currentType.isTypeVariable()) {
         if (currentType.getDeclaringClass() != null) {
           // If it is a class-level type variable, use the simple name (with prefix "C_") as the
