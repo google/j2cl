@@ -135,8 +135,7 @@ public class JsBridgeMethodsCreator {
       return null;
     }
     // native js type is not generated, thus it does not expose any non-js methods.
-    if (JsInteropAnnotationUtils.isNative(
-        JsInteropAnnotationUtils.getJsTypeAnnotation(methodBinding.getDeclaringClass()))) {
+    if (JsInteropUtils.isNativeType(methodBinding.getDeclaringClass())) {
       return null;
     }
     IMethodBinding overriddenNonJsMember = null;

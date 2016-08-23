@@ -66,8 +66,4 @@ public abstract class JsInfo {
     }
     return interner;
   }
-
-  public boolean isNone() {
-    return this == NONE;
-  }
 }

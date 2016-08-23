@@ -921,15 +921,20 @@ public class JdtUtils {
    * Checks overriding chain to compute JsInfo.
    */
   static JsInfo computeJsInfo(IMethodBinding methodBinding) {
-    List<JsInfo> jsInfoList = new ArrayList<>();
-    // Add the JsInfo of the method and all the overridden methods to the list.
     JsInfo jsInfo = JsInteropUtils.getJsInfo(methodBinding);
-    if (!jsInfo.isNone()) {
+    if (jsInfo.isJsOverlay()) {
+      return jsInfo;
+    }
+
+    List<JsInfo> jsInfoList = new ArrayList<>();
+
+    // Add the JsInfo of the method and all the overridden methods to the list.
+    if (jsInfo.getJsMemberType() != JsMemberType.NONE) {
       jsInfoList.add(jsInfo);
     }
     for (IMethodBinding overriddenMethod : getOverriddenMethods(methodBinding)) {
       JsInfo inheritedJsInfo = JsInteropUtils.getJsInfo(overriddenMethod);
-      if (!inheritedJsInfo.isNone()) {
+      if (inheritedJsInfo.getJsMemberType() != JsMemberType.NONE) {
         jsInfoList.add(inheritedJsInfo);
       }
     }

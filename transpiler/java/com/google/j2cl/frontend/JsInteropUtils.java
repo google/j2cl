@@ -30,71 +30,11 @@ import org.eclipse.jdt.core.dom.Modifier;
  * Utility functions for JsInterop properties.
  */
 public class JsInteropUtils {
-  public static boolean isJsFunction(ITypeBinding typeBinding) {
-    return JsInteropAnnotationUtils.getJsFunctionAnnotation(typeBinding) != null;
-  }
-
   /**
    * Simply resolve the JsInfo from annotations. Do not do any extra computations. For example, if
    * there is no "name" is specified in the annotation, just returns null for JsName.
    */
   public static JsInfo getJsInfo(IMethodBinding methodBinding) {
-    // check @JsIgnore annotation
-    IAnnotationBinding jsIgnoreAnnotation =
-        JsInteropAnnotationUtils.getJsIgnoreAnnotation(methodBinding);
-    if (jsIgnoreAnnotation != null) {
-      return JsInfo.NONE;
-    }
-    boolean isJsOverlay = isJsOverlay(methodBinding);
-    // check @JsProperty annotation
-    IAnnotationBinding jsPropertyAnnotation =
-        JsInteropAnnotationUtils.getJsPropertyAnnotation(methodBinding);
-    if (jsPropertyAnnotation != null) {
-      String jsPropertyName = JsInteropAnnotationUtils.getJsName(jsPropertyAnnotation);
-      String jsPropertyNamespace = JsInteropAnnotationUtils.getJsNamespace(jsPropertyAnnotation);
-      return JsInfo.create(
-          methodBinding.getParameterTypes().length == 0 ? JsMemberType.GETTER : JsMemberType.SETTER,
-          jsPropertyName,
-          jsPropertyNamespace,
-          isJsOverlay);
-    }
-    // check @JsMethod annotation
-    IAnnotationBinding jsMethodAnnotation =
-        JsInteropAnnotationUtils.getJsMethodAnnotation(methodBinding);
-    if (jsMethodAnnotation != null) {
-      String jsMethodName = JsInteropAnnotationUtils.getJsName(jsMethodAnnotation);
-      String jsMethodNamespace = JsInteropAnnotationUtils.getJsNamespace(jsMethodAnnotation);
-      return JsInfo.create(JsMemberType.METHOD, jsMethodName, jsMethodNamespace, isJsOverlay);
-    }
-    // check @JsConstructor annotation
-    IAnnotationBinding jsConstructorAnnotation =
-        JsInteropAnnotationUtils.getJsConstructorAnnotation(methodBinding);
-    if (jsConstructorAnnotation != null) {
-      String jsName = JsInteropAnnotationUtils.getJsName(jsConstructorAnnotation);
-      String jsNamespace = JsInteropAnnotationUtils.getJsNamespace(jsConstructorAnnotation);
-      return JsInfo.create(JsMemberType.CONSTRUCTOR, jsName, jsNamespace, isJsOverlay);
-    }
-    // check @JsType annotation
-    IAnnotationBinding jsTypeAnnotation =
-        JsInteropAnnotationUtils.getJsTypeAnnotation(methodBinding.getDeclaringClass());
-    // In native @JsType all members (regardless of visibility) is implicit JsProperty/JsMethod.
-    if (jsTypeAnnotation != null
-        && !isJsOverlay
-        && (Modifier.isPublic(methodBinding.getModifiers())
-            || JsInteropAnnotationUtils.isNative(jsTypeAnnotation))) {
-      return JsInfo.create(
-          methodBinding.isConstructor() ? JsMemberType.CONSTRUCTOR : JsMemberType.METHOD,
-          null,
-          null,
-          false);
-    }
-    // check @JsFunction annotation
-    IAnnotationBinding jsFunctionAnnotation =
-        JsInteropAnnotationUtils.getJsFunctionAnnotation(methodBinding.getDeclaringClass());
-    if (jsFunctionAnnotation != null) {
-      return JsInfo.create(JsMemberType.JS_FUNCTION, null, null, isJsOverlay);
-    }
-
     // Make sure we preserve the JsMethod info for Object methods overridden by interfaces.
     // This code could be removed when we model those methods as overrides internally.
     Set<String> objectMethods =
@@ -103,39 +43,66 @@ public class JsInteropUtils {
       return JsInfo.create(JsMemberType.METHOD, null, null, false);
     }
 
-    return JsInfo.create(JsMemberType.NONE, null, null, isJsOverlay);
+    IAnnotationBinding annotation = JsInteropAnnotationUtils.getJsMethodAnnotation(methodBinding);
+    if (annotation == null) {
+      annotation = JsInteropAnnotationUtils.getJsConstructorAnnotation(methodBinding);
+    }
+    if (annotation == null) {
+      annotation = JsInteropAnnotationUtils.getJsPropertyAnnotation(methodBinding);
+    }
+
+    boolean isPropertyAccessor =
+        JsInteropAnnotationUtils.getJsPropertyAnnotation(methodBinding) != null;
+    return getJsInfo(
+        methodBinding, methodBinding.getDeclaringClass(), annotation, isPropertyAccessor);
   }
 
-  /**
-   * Simply resolve the JsInfo from annotations. Do not do any extra computations. For example, if
-   * there is no "name" is specified in the annotation, just returns null for JsName.
-   */
-  public static JsInfo getJsInfo(IVariableBinding variableBinding) {
-    // check @JsIgnore annotation
-    IAnnotationBinding jsIgnoreAnnotation =
-        JsInteropAnnotationUtils.getJsIgnoreAnnotation(variableBinding);
-    if (jsIgnoreAnnotation != null) {
-      return JsInfo.NONE;
+  public static JsInfo getJsInfo(IVariableBinding field) {
+    IAnnotationBinding annotation = JsInteropAnnotationUtils.getJsPropertyAnnotation(field);
+    return getJsInfo(field, field.getDeclaringClass(), annotation, false);
+  }
+
+  private static JsInfo getJsInfo(
+      IBinding member,
+      ITypeBinding declaringType,
+      IAnnotationBinding memberAnnotation,
+      boolean isAccessor) {
+
+    boolean jsOverlay = isJsOverlay(member);
+
+    if (isJsFunction(declaringType)) {
+      return JsInfo.create(JsMemberType.JS_FUNCTION, null, null, jsOverlay);
     }
-    boolean isJsOverlay = isJsOverlay(variableBinding);
-    // check @JsProperty annotation
-    IAnnotationBinding jsPropertyAnnotation =
-        JsInteropAnnotationUtils.getJsPropertyAnnotation(variableBinding);
-    if (jsPropertyAnnotation != null) {
-      String jsPropertyName = JsInteropAnnotationUtils.getJsName(jsPropertyAnnotation);
-      String jsPropertyNamespace = JsInteropAnnotationUtils.getJsNamespace(jsPropertyAnnotation);
-      return JsInfo.create(JsMemberType.PROPERTY, jsPropertyName, jsPropertyNamespace, isJsOverlay);
+
+    if (JsInteropAnnotationUtils.getJsIgnoreAnnotation(member) != null) {
+      return JsInfo.create(JsMemberType.NONE, null, null, jsOverlay);
     }
-    // check @JsType annotation
-    IAnnotationBinding jsTypeAnnotation =
-        JsInteropAnnotationUtils.getJsTypeAnnotation(variableBinding.getDeclaringClass());
-    // In native @JsType all members (regardless of visibility) is implicit JsProperty/JsMethod.
-    if (jsTypeAnnotation != null
-        && (Modifier.isPublic(variableBinding.getModifiers())
-            || JsInteropAnnotationUtils.isNative(jsTypeAnnotation))) {
-      return JsInfo.create(JsMemberType.PROPERTY, null, null, isJsOverlay);
+
+    boolean publicMemberOfJsType =
+        isJsType(declaringType) && Modifier.isPublic(member.getModifiers());
+    boolean memberOfNativeType = isNativeType(declaringType);
+    if (memberAnnotation == null && (!publicMemberOfJsType && !memberOfNativeType || jsOverlay)) {
+      return JsInfo.create(JsMemberType.NONE, null, null, jsOverlay);
     }
-    return JsInfo.create(JsMemberType.NONE, null, null, isJsOverlay);
+
+    String namespace = JsInteropAnnotationUtils.getJsNamespace(memberAnnotation);
+    String name = JsInteropAnnotationUtils.getJsName(memberAnnotation);
+    JsMemberType memberType = getJsMemberType(member, isAccessor);
+    return JsInfo.create(memberType, name, namespace, jsOverlay);
+  }
+
+  private static JsMemberType getJsMemberType(IBinding member, boolean isPropertyAccessor) {
+    if (member instanceof IVariableBinding) {
+      return JsMemberType.PROPERTY;
+    }
+    IMethodBinding method = (IMethodBinding) member;
+    if (method.isConstructor()) {
+      return JsMemberType.CONSTRUCTOR;
+    }
+    if (isPropertyAccessor) {
+      return method.getParameterTypes().length == 0 ? JsMemberType.GETTER : JsMemberType.SETTER;
+    }
+    return JsMemberType.METHOD;
   }
 
   /**
@@ -156,5 +123,14 @@ public class JsInteropUtils {
 
   public static boolean isJsType(ITypeBinding typeBinding) {
     return JsInteropAnnotationUtils.getJsTypeAnnotation(typeBinding) != null;
+  }
+
+  public static boolean isNativeType(ITypeBinding declaringType) {
+    return JsInteropAnnotationUtils.isNative(
+        JsInteropAnnotationUtils.getJsTypeAnnotation(declaringType));
+  }
+
+  public static boolean isJsFunction(ITypeBinding typeBinding) {
+    return JsInteropAnnotationUtils.getJsFunctionAnnotation(typeBinding) != null;
   }
 }
