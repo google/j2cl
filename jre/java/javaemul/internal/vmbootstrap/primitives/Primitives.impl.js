@@ -137,7 +137,7 @@ class Primitives {
    * Widens a byte to a Long.
    *
    * @param {number} instance
-   * @return {!$Long}
+   * @return {$Long}
    * @public
    */
   static $widenByteToLong(instance) {
@@ -149,7 +149,7 @@ class Primitives {
    * Widens a char to a Long.
    *
    * @param {number} instance
-   * @return {!$Long}
+   * @return {$Long}
    * @public
    */
   static $widenCharToLong(instance) {
@@ -161,7 +161,7 @@ class Primitives {
    * Widens a short to a Long.
    *
    * @param {number} instance
-   * @return {!$Long}
+   * @return {$Long}
    * @public
    */
   static $widenShortToLong(instance) {
@@ -173,7 +173,7 @@ class Primitives {
    * Widens an int to a Long.
    *
    * @param {number} instance
-   * @return {!$Long}
+   * @return {$Long}
    * @public
    */
   static $widenIntToLong(instance) {
@@ -185,7 +185,7 @@ class Primitives {
    * Narrows a float number to a Long.
    *
    * @param {number} instance
-   * @return {!$Long}
+   * @return {$Long}
    * @public
    */
   static $narrowFloatToLong(instance) {
@@ -197,7 +197,7 @@ class Primitives {
    * Narrows a double number to a Long.
    *
    * @param {number} instance
-   * @return {!$Long}
+   * @return {$Long}
    * @public
    */
   static $narrowDoubleToLong(instance) {
