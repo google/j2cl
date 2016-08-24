@@ -100,7 +100,7 @@ def _impl(ctx):
   compiler_args_file = ctx.new_file(ctx.label.name + "_compiler.args")
   ctx.file_action(
       output = compiler_args_file,
-      content = "\n".join(compiler_args)
+      content = " ".join(compiler_args)
   )
 
   inputs = java_files
@@ -116,7 +116,6 @@ def _impl(ctx):
       arguments=["@" + compiler_args_file.path],
       env=dict(LANG="en_US.UTF-8"),
       execution_requirements={"supports-workers": "1"},
-      mnemonic = "J2clTranspile",
   )
 
   return struct(

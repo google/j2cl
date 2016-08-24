@@ -14,6 +14,7 @@
 package com.google.j2cl.transpiler;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Splitter;
 import com.google.devtools.build.lib.worker.WorkerProtocol.WorkRequest;
 import com.google.devtools.build.lib.worker.WorkerProtocol.WorkResponse;
 import com.google.j2cl.errors.Errors;
@@ -153,7 +154,8 @@ public class J2clTranspilerWorker {
   }
 
   private String[] extractArgs(WorkRequest workRequest) {
-    return workRequest.getArgumentsList().toArray(new String[0]);
+    String[] compilerArgs = workRequest.getArgumentsList().toArray(new String[0]);
+    return Splitter.on(' ').omitEmptyStrings().splitToList(compilerArgs[0]).toArray(new String[0]);
   }
 
   private static boolean shouldRunAsWorker(String[] args) {
