@@ -32,12 +32,12 @@ public class ManglingNameUtils {
    */
   public static String getMangledName(TypeDescriptor typeDescriptor) {
     // Method signature should be decided by the erasure type.
-    TypeDescriptor erasureTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
-    if (erasureTypeDescriptor.isArray()) {
-      return Strings.repeat("arrayOf_", erasureTypeDescriptor.getDimensions())
-          + getMangledName(erasureTypeDescriptor.getLeafTypeDescriptor());
+    TypeDescriptor rawTypeDescriptor = typeDescriptor.getRawTypeDescriptor();
+    if (rawTypeDescriptor.isArray()) {
+      return Strings.repeat("arrayOf_", rawTypeDescriptor.getDimensions())
+          + getMangledName(rawTypeDescriptor.getLeafTypeDescriptor());
     }
-    return erasureTypeDescriptor.getBinaryName().replace('.', '_');
+    return rawTypeDescriptor.getBinaryName().replace('.', '_');
   }
 
   /**

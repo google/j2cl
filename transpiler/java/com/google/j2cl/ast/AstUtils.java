@@ -111,7 +111,7 @@ public class AstUtils {
     return MethodDescriptor.Builder.fromDefault()
         .setVisibility(visibility)
         .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
-        .setMethodName(enclosingClassTypeDescriptor.getBinaryClassName())
+        .setMethodName("<init>")
         .setIsConstructor(true)
         .setParameterTypeDescriptors(Arrays.asList(parameterTypeDescriptors))
         .setJsInfo(jsInfo)

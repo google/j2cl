@@ -553,7 +553,10 @@ public class TypeDescriptors {
         new DescriptorFactory<TypeDescriptor>() {
           @Override
           public TypeDescriptor create(TypeDescriptor selfTypeDescriptor) {
-            return selfTypeDescriptor;
+            return getForArray(
+                selfTypeDescriptor.getLeafTypeDescriptor().getRawTypeDescriptor(),
+                selfTypeDescriptor.getDimensions(),
+                selfTypeDescriptor.isNullable());
           }
         };
 

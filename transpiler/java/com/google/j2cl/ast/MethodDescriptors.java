@@ -129,7 +129,7 @@ public class MethodDescriptors {
                           public String apply(TypeDescriptor type) {
                             return TypeDescriptors.toNonNullable(type)
                                 .getRawTypeDescriptor()
-                                .getBinaryClassName();
+                                .getBinaryName();
                           }
                         }))
         + ")";

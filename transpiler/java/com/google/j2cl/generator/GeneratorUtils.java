@@ -47,10 +47,6 @@ import java.util.List;
  * Utility functions related to source generation in the J2CL AST.
  */
 public class GeneratorUtils {
-  public static String getBinaryName(TypeDescriptor typeDescriptor) {
-    return typeDescriptor.getBinaryName();
-  }
-
   /** Returns the relative output path for a given type. */
   public static String getRelativePath(Type type) {
     TypeDescriptor typeDescriptor = type.getDescriptor();

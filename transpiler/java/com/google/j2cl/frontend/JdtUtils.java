@@ -858,10 +858,7 @@ public class JdtUtils {
     TypeDescriptor enclosingClassTypeDescriptor =
         createTypeDescriptor(methodBinding.getDeclaringClass());
     boolean isConstructor = methodBinding.isConstructor();
-    String methodName =
-        isConstructor
-            ? createTypeDescriptor(methodBinding.getDeclaringClass()).getBinaryClassName()
-            : methodBinding.getName();
+    String methodName = methodBinding.getName();
 
     JsInfo jsInfo = computeJsInfo(methodBinding);
 
