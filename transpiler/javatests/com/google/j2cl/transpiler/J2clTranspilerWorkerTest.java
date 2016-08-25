@@ -109,8 +109,10 @@ public class J2clTranspilerWorkerTest {
   @Test
   public void testWorker() throws IOException {
 
-    WorkRequest firstRequest = WorkRequest.newBuilder().addArguments("-d     First.java").build();
-    WorkRequest secondRequest = WorkRequest.newBuilder().addArguments("-d Second.java").build();
+    WorkRequest firstRequest =
+        WorkRequest.newBuilder().addArguments("-d").addArguments("First.java").build();
+    WorkRequest secondRequest =
+        WorkRequest.newBuilder().addArguments("-d").addArguments("Second.java").build();
 
     List<InputStream> inputStreams = createInputStreams(firstRequest, secondRequest);
 
@@ -154,7 +156,8 @@ public class J2clTranspilerWorkerTest {
 
   @Test
   public void testWorkerQuitsIfCompilerFails() throws IOException {
-    WorkRequest firstRequest = WorkRequest.newBuilder().addArguments("-d First.java").build();
+    WorkRequest firstRequest =
+        WorkRequest.newBuilder().addArguments("-d").addArguments("First.java").build();
     List<InputStream> inputStreams = createInputStreams(firstRequest);
     InputStream throwingInputStream = mock(InputStream.class);
     when(throwingInputStream.read()).thenThrow(new IOException());

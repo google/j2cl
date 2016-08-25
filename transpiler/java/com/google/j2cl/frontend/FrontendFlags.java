@@ -172,7 +172,7 @@ public class FrontendFlags {
     List<String> combinedArgs = new ArrayList<>();
     String flagFileContent = Files.toString(new File(flagFile), StandardCharsets.UTF_8);
     List<String> argsFromFlagFile =
-        Splitter.on(' ').omitEmptyStrings().splitToList(flagFileContent);
+        Splitter.on('\n').omitEmptyStrings().splitToList(flagFileContent);
     combinedArgs.addAll(Arrays.asList(args));
     // remove the flag file entry
     combinedArgs.remove(combinedArgs.size() - 1);
