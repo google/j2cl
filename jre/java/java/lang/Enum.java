@@ -54,4 +54,9 @@ public abstract class Enum<E extends Enum<E>> implements Comparable<E>, Serializ
   public static native <T extends Enum<T>> T valueOf(Class<T> enumType, String name) /*-{
     return null;
   }-*/;
+
+  @Override
+  public String toString() {
+    return name();
+  }
 }
