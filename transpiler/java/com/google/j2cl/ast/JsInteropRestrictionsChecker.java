@@ -233,12 +233,6 @@ public class JsInteropRestrictionsChecker {
           readableDescription);
     }
 
-    if (type.hasStaticInitializerBlocks()) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
-          "Native JsType '%s' cannot have static initializer.",
-          readableDescription);
-    }
     return true;
   }
 

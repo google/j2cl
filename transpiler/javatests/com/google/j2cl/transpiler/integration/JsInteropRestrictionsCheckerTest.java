@@ -1343,7 +1343,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         "}");
   }
   
-  public void testNativeJsTypeStaticInitializerFails() throws Exception {
+  public void testNativeJsTypeStaticInitializerSucceeds() throws Exception {
     File sourcePackage = createPackage("nativejstypestaticinitializer");
     createSourceFile(
         sourcePackage,
@@ -1369,11 +1369,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         "  }",
         "}");
 
-    assertCompileFails(
-        sourcePackage,
-        "JsInterop error: Native JsType 'Buggy' cannot have static initializer.",
-        "JsInterop error: Native JsType 'Buggy2' cannot have static initializer.",
-        "2 error(s).");
+    assertCompileSucceeds(sourcePackage);
   }
 
   public void testNativeJsTypeInstanceInitializerFails() throws Exception {
