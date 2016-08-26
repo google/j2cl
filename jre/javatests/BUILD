@@ -15,6 +15,7 @@ j2cl_mirror_from_gwt(
     javacopts = [
         "-Xep:SelfComparison:OFF",
         "-Xep:SelfEquality:OFF",
+        "-Xep:SelfEquals:OFF",
     ],
     mirrored_files = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_test"],
     deps = [
@@ -45,6 +46,7 @@ java_test(
     javacopts = [
         "-Xep:SelfComparison:OFF",
         "-Xep:SelfEquality:OFF",
+        "-Xep:SelfEquals:OFF",
     ],
     test_class = "com.google.gwt.emultest.AllTests",
     deps = [

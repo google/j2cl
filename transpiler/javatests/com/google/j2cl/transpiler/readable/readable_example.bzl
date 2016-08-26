@@ -48,7 +48,8 @@ def readable_example(
         generate_build_test=False,
         javacopts=[
             "-source 8",
-            "-target 8"
+            "-target 8",
+            "-Xep:SelfEquals:OFF",  # See go/self-equals-lsc
         ] + javacopts,
         native_srcs=native_srcs,
         native_srcs_pkg=native_srcs_pkg,
