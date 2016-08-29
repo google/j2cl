@@ -182,8 +182,10 @@ def gather_closure_warnings(build_log):
     if "readable/" not in build_log_path:
       continue
     if "\n0 error(s), 0 warning(s)" in build_log:
-      # No errors, no warnings, delete the build.log file.
-      run_cmd_get_output(["rm", build_log_path])
+      # No errors, no warnings, delete the build.log file if it exists.
+      if os.path.isfile(build_log_path):
+        run_cmd_get_output(["rm", build_log_path])
+
       continue
     with open(build_log_path, "w") as build_log_file:
       build_log_file.write(build_log)
