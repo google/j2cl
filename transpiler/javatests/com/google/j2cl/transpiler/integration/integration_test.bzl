@@ -245,14 +245,16 @@ try {
       name="uncompiled_test",
       bootstrap_files=["TestBootstrap.js"],
       srcs=["TestHarness.js"],
-      compile=0,
       deps=[
           ":" + name,
           "//javascript/closure/testing:testsuite",
       ],
       deps_mgmt="closure",
       externs_list=test_externs_list,
-      jvm_flags=["-Dcom.google.testing.selenium.browser=CHROME_LINUX"],
+      jvm_flags=[
+          "-Dcom.google.testing.selenium.browser=CHROME_LINUX",
+          "-Djsrunner.net.useJsBundles=true"
+      ],
       data=["//testing/matrix/nativebrowsers/chrome:stable_data"],
   )
 
