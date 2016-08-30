@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.tools.integration.clinit;
 
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 
 import junit.framework.TestCase;
@@ -24,7 +25,7 @@ import junit.framework.TestCase;
  */
 class Test extends TestCase {
 
-  @JsProperty(namespace = "window")
+  @JsProperty(namespace = JsPackage.GLOBAL, name = "window.clinitCalled")
   public static native Boolean isClinitCalled();
 
   public void testClinitMethodCalledByStaticNativeMethod() {

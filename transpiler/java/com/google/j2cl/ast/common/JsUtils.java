@@ -38,6 +38,6 @@ public class JsUtils {
 
   /** Returns whether a type should be considered global based on its namespace. */
   public static boolean isGlobal(String jsNamespace) {
-    return JS_PACKAGE_GLOBAL.equals(jsNamespace);
+    return JS_PACKAGE_GLOBAL.equals(jsNamespace) || "window".equals(jsNamespace);
   }
 }

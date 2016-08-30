@@ -15,8 +15,8 @@
  */
 package com.google.j2cl.tools.integration.clinit;
 
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
-
 /**
  * Class that uses a static native method so that we can verify $clinit was called.
  */
@@ -25,7 +25,7 @@ public class Main {
     setClinitCalled(true);
   }
 
-  @JsProperty(namespace = "window")
+  @JsProperty(namespace = JsPackage.GLOBAL, name = "window.clinitCalled")
   public static native void setClinitCalled(Boolean called);
 
   public static native String staticNativeMethod() /*-{
