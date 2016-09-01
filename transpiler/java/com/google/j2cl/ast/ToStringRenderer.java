@@ -236,7 +236,9 @@ class ToStringRenderer {
         print("for (");
         printSeparated(",", forStatement.getInitializers());
         print(";");
-        accept(forStatement.getConditionExpression());
+        if (forStatement.getConditionExpression() != null) {
+          accept(forStatement.getConditionExpression());
+        }
         print(";");
         printSeparated(",", forStatement.getUpdates());
         print(") ");
@@ -293,7 +295,9 @@ class ToStringRenderer {
 
       @Override
       public boolean enterMethod(Method method) {
-        print(method.getDescriptor() + " ");
+        print(method.getDescriptor() + "(");
+        printSeparated(",", method.getParameters());
+        print(") ");
         accept(method.body);
         return false;
       }
