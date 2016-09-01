@@ -27,7 +27,6 @@ import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.StringLiteral;
-import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
@@ -53,7 +52,7 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
       /*
        * Only add parameters to constructor methods in Enum classes..
        */
-      if (!method.isConstructor() || !isEnumOrSubclass(getCurrentType())) {
+      if (!method.isConstructor() || !getCurrentType().getDescriptor().isEnumOrSubclass()) {
         return method;
       }
       return Method.Builder.from(method).addParameters(nameVariable, ordinalVariable).build();
@@ -65,7 +64,7 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
        * Only add arguments to super() calls inside of constructor methods in Enum classes.
        */
       if (!getCurrentMember().isConstructor()
-          || !isEnumOrSubclass(getCurrentType())
+          || !getCurrentType().getDescriptor().isEnumOrSubclass()
           || !methodCall.getTarget().isConstructor()) {
         return methodCall;
       }
@@ -107,20 +106,6 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
               StringLiteral.fromPlainText(enumField.getDescriptor().getName()),
               new NumberLiteral(TypeDescriptors.get().primitiveInt, currentOrdinal))
           .build();
-    }
-
-    private boolean isEnumOrSubclass(Type type) {
-      if (type.isEnum()) {
-        return true;
-      }
-
-      // Anonymous classes used for enum values are subtypes of an enum type that is defined in the
-      // same compilation unit.
-      Type superType =
-          type.getSuperTypeDescriptor() == null
-              ? null
-              : getCurrentCompilationUnit().getType(type.getSuperTypeDescriptor());
-      return superType != null && superType.isEnum();
     }
   }
 }

@@ -1116,4 +1116,17 @@ public class AstUtils {
             })
         .filter(Predicates.notNull());
   }
+
+  /** Get a list of references for {@code variables}. */
+  public static List<Expression> getReferences(List<Variable> variables) {
+    return FluentIterable.from(variables)
+        .transform(
+            new Function<Variable, Expression>() {
+              @Override
+              public Expression apply(Variable variable) {
+                return variable.getReference();
+              }
+            })
+        .toList();
+  }
 }

@@ -18,7 +18,6 @@ package com.google.j2cl.ast.visitors;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
@@ -228,15 +227,7 @@ public class NormalizeConstructors extends NormalizationPass {
     // Must call the corresponding the $ctor method.
     MethodDescriptor ctorDescriptor =
         ctorMethodDescriptorFromJavaConstructor(primaryConstructor.getDescriptor());
-    List<Expression> arguments =
-        Lists.transform(
-            primaryConstructor.getParameters(),
-            new Function<Variable, Expression>() {
-              @Override
-              public Expression apply(Variable var) {
-                return var.getReference();
-              }
-            });
+    List<Expression> arguments = AstUtils.getReferences(primaryConstructor.getParameters());
     MethodCall ctorCall = MethodCall.createMethodCall(null, ctorDescriptor, arguments);
     body.add(new ExpressionStatement(ctorCall));
 
@@ -433,15 +424,7 @@ public class NormalizeConstructors extends NormalizationPass {
     Statement newInstanceStatement = new ExpressionStatement(expression);
 
     // $instance.$ctor...();
-    List<Expression> relayArguments =
-        Lists.transform(
-            constructor.getParameters(),
-            new Function<Variable, Expression>() {
-              @Override
-              public Expression apply(Variable input) {
-                return input.getReference();
-              }
-            });
+    List<Expression> relayArguments = AstUtils.getReferences(constructor.getParameters());
     MethodCall ctorCall =
         MethodCall.createMethodCall(
             newInstance.getReference(), constructor.getDescriptor(), relayArguments);
@@ -484,15 +467,7 @@ public class NormalizeConstructors extends NormalizationPass {
             .build();
 
     // $instance.$ctor...();
-    List<Expression> relayArguments =
-        Lists.transform(
-            primaryConstructor.getParameters(),
-            new Function<Variable, Expression>() {
-              @Override
-              public Expression apply(Variable input) {
-                return input.getReference();
-              }
-            });
+    List<Expression> relayArguments = AstUtils.getReferences(primaryConstructor.getParameters());
 
     MethodDescriptor javascriptConstructorDeclaration =
         MethodDescriptor.Builder.from(javascriptConstructor)
