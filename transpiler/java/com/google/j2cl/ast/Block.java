@@ -47,6 +47,13 @@ public class Block extends Statement {
   }
 
   @Override
+  public Block clone() {
+    Block block = new Block(AstUtils.clone(statements));
+    block.setSourcePosition(this.getSourcePosition());
+    return block;
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_Block.visit(processor, this);
   }

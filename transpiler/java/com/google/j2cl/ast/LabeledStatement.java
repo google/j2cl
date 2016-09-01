@@ -42,6 +42,13 @@ public class LabeledStatement extends Statement {
   }
 
   @Override
+  public LabeledStatement clone() {
+    LabeledStatement labeledStatement = new LabeledStatement(labelName, body.clone());
+    labeledStatement.setSourcePosition(this.getSourcePosition());
+    return labeledStatement;
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_LabeledStatement.visit(processor, this);
   }

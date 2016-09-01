@@ -49,6 +49,11 @@ public class ArrayAccess extends Expression {
   }
 
   @Override
+  public ArrayAccess clone() {
+    return new ArrayAccess(arrayExpression.clone(), indexExpression.clone());
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_ArrayAccess.visit(processor, this);
   }

@@ -20,7 +20,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.annotations.Visitable;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -50,6 +49,11 @@ public class MultiExpression extends Expression {
   @Override
   public TypeDescriptor getTypeDescriptor() {
     return expressions.get(expressions.size() - 1).getTypeDescriptor();
+  }
+
+  @Override
+  public MultiExpression clone() {
+    return new MultiExpression(AstUtils.clone(expressions));
   }
 
   @Override

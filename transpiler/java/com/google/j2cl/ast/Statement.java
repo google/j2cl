@@ -16,15 +16,14 @@
 package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.ast.common.Cloneable;
 import com.google.j2cl.ast.common.HasMetadata;
 import com.google.j2cl.ast.sourcemap.HasSourcePosition;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
 
-/**
- * A base class for Statement.
- */
+/** A base class for Statement. */
 @Visitable
-public abstract class Statement extends Node implements HasSourcePosition {
+public abstract class Statement extends Node implements HasSourcePosition, Cloneable<Statement> {
   // unknown by default.
   private SourcePosition sourcePosition = SourcePosition.UNKNOWN;
 
@@ -42,6 +41,9 @@ public abstract class Statement extends Node implements HasSourcePosition {
   public void copyMetadataFrom(HasMetadata<HasSourcePosition> store) {
     setSourcePosition(store.getMetadata().getSourcePosition());
   }
+
+  @Override
+  public abstract Statement clone();
 
   @Override
   public HasSourcePosition getMetadata() {

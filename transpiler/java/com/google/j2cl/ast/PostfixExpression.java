@@ -38,6 +38,11 @@ public class PostfixExpression extends UnaryExpression {
   }
 
   @Override
+  public PostfixExpression clone() {
+    return new PostfixExpression(getTypeDescriptor(), getOperand().clone(), operator);
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_PostfixExpression.visit(processor, this);
   }

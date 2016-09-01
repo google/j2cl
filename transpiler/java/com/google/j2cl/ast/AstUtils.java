@@ -25,10 +25,13 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
+import com.google.j2cl.ast.common.Cloneable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -1128,6 +1131,76 @@ public class AstUtils {
               }
             })
         .filter(Predicates.notNull());
+  }
+
+  @SuppressWarnings("unchecked")
+  /** Clones a list of expressions */
+  public static <T extends Cloneable<?>> List<T> clone(List<T> nodes) {
+    return FluentIterable.from(nodes)
+        .transform(
+            new Function<T, T>() {
+              @Override
+              public T apply(T node) {
+                return (T) node.clone();
+              }
+            })
+        .toList();
+  }
+
+  @SuppressWarnings("unchecked")
+  /** Clones a cloneable or returns null */
+  public static <T extends Cloneable<?>> T clone(T node) {
+    return node != null ? (T) node.clone() : null;
+  }
+
+  @SuppressWarnings("unchecked")
+  /**
+   * Replaces references to variables in {@code fromVariables} to reference to variables in {@code
+   * toVariables}.
+   */
+  public static <T extends Node> T replaceVariables(
+      List<Variable> fromVariables, List<Variable> toVariable, T node) {
+    class VariableReplacer extends AbstractRewriter {
+      Map<Variable, Variable> toVariableByFromVariable = new HashMap<>();
+
+      public VariableReplacer(List<Variable> fromVariables, List<Variable> toVariables) {
+        checkArgument(fromVariables.size() == toVariables.size());
+        for (int i = 0; i < fromVariables.size(); i++) {
+          toVariableByFromVariable.put(fromVariables.get(i), toVariables.get(i));
+        }
+      }
+
+      @Override
+      public Node rewriteVariable(Variable variable) {
+        Variable toVariable = toVariableByFromVariable.get(variable);
+        return toVariable == null ? variable : toVariable;
+      }
+
+      @Override
+      public Node rewriteVariableReference(VariableReference variableReference) {
+        Variable toVariable = toVariableByFromVariable.get(variableReference.getTarget());
+        if (toVariable != null) {
+          return toVariable.getReference();
+        }
+        return variableReference;
+      }
+    }
+
+    return (T) node.accept(new VariableReplacer(fromVariables, toVariable));
+  }
+
+  /** Collects all variables (including parameters) declared in this method. */
+  public static List<Variable> collectVariables(Method method) {
+    final List<Variable> variables = new ArrayList<>(method.getParameters());
+    method.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitVariableDeclarationFragment(
+              VariableDeclarationFragment variableDeclarationFragment) {
+            variables.add(variableDeclarationFragment.getVariable());
+          }
+        });
+    return variables;
   }
 
   /** Get a list of references for {@code variables}. */

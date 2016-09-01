@@ -39,6 +39,13 @@ public class ThrowStatement extends Statement {
   }
 
   @Override
+  public ThrowStatement clone() {
+    ThrowStatement throwStatement = new ThrowStatement(expression.clone());
+    throwStatement.setSourcePosition(this.getSourcePosition());
+    return throwStatement;
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_ThrowStatement.visit(processor, this);
   }

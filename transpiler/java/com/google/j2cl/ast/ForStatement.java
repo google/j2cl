@@ -18,10 +18,8 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.Nullable;
 
 /**
@@ -59,6 +57,18 @@ public class ForStatement extends Statement {
 
   public List<Expression> getUpdates() {
     return updates;
+  }
+
+  @Override
+  public ForStatement clone() {
+    ForStatement forStatement =
+        new ForStatement(
+            AstUtils.clone(conditionExpression),
+            body.clone(),
+            AstUtils.clone(initializers),
+            AstUtils.clone(updates));
+    forStatement.setSourcePosition(this.getSourcePosition());
+    return forStatement;
   }
 
   @Override

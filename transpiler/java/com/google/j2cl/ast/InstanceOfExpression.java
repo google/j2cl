@@ -46,6 +46,11 @@ public class InstanceOfExpression extends Expression {
   }
 
   @Override
+  public InstanceOfExpression clone() {
+    return new InstanceOfExpression(expression.clone(), testTypeDescriptor);
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_InstanceOfExpression.visit(processor, this);
   }

@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,6 +46,11 @@ public class VariableDeclarationExpression extends Expression {
   @Override
   public TypeDescriptor getTypeDescriptor() {
     return fragments.get(0).getVariable().getTypeDescriptor();
+  }
+
+  @Override
+  public VariableDeclarationExpression clone() {
+    return new VariableDeclarationExpression(AstUtils.clone(fragments));
   }
 
   @Override

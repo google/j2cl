@@ -36,6 +36,11 @@ public class ThisReference extends Expression {
   }
 
   @Override
+  public ThisReference clone() {
+    return new ThisReference(typeDescriptor);
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_ThisReference.visit(processor, this);
   }

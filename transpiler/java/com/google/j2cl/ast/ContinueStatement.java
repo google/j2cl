@@ -16,7 +16,6 @@
 package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.annotations.Visitable;
-
 import javax.annotation.Nullable;
 
 /**
@@ -33,6 +32,13 @@ public class ContinueStatement extends Statement {
 
   public String getLabelName() {
     return labelName;
+  }
+
+  @Override
+  public ContinueStatement clone() {
+    ContinueStatement continueStatement = new ContinueStatement(labelName);
+    continueStatement.setSourcePosition(this.getSourcePosition());
+    return continueStatement;
   }
 
   @Override

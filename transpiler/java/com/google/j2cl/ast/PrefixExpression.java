@@ -17,7 +17,6 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.j2cl.ast.UnaryExpression.Builder;
 import com.google.j2cl.ast.annotations.Visitable;
 
 /**
@@ -41,6 +40,11 @@ public class PrefixExpression extends UnaryExpression {
   @Override
   public Node accept(Processor processor) {
     return Visitor_PrefixExpression.visit(processor, this);
+  }
+
+  @Override
+  public PrefixExpression clone() {
+    return new PrefixExpression(getTypeDescriptor(), getOperand().clone(), operator);
   }
 
   @Override

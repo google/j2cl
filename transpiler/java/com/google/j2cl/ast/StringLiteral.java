@@ -51,6 +51,12 @@ public class StringLiteral extends Expression {
     return TypeDescriptors.get().javaLangString;
   }
 
+  @Override
+  public StringLiteral clone() {
+    // String literals are value types do not need to actually clone.
+    return this;
+  }
+
   /**
    * Creates a StringLiteral from plain text.
    */

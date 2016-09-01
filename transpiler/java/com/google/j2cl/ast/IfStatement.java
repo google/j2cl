@@ -18,7 +18,6 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
-
 import javax.annotation.Nullable;
 
 /**
@@ -47,6 +46,14 @@ public class IfStatement extends Statement {
 
   public Statement getElseStatement() {
     return elseStatement;
+  }
+
+  @Override
+  public IfStatement clone() {
+    IfStatement ifStatement =
+        new IfStatement(conditionExpression, thenStatement.clone(), AstUtils.clone(elseStatement));
+    ifStatement.setSourcePosition(this.getSourcePosition());
+    return ifStatement;
   }
 
   @Override

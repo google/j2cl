@@ -18,12 +18,12 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.ast.common.Cloneable;
+import java.util.Collections;
 
-/**
- * Class for catch clause.
- */
+/** Class for catch clause. */
 @Visitable
-public class CatchClause extends Node {
+public class CatchClause extends Node implements Cloneable<CatchClause> {
   @Visitable Block body;
   @Visitable Variable exceptionVar;
 
@@ -44,12 +44,20 @@ public class CatchClause extends Node {
     this.body = body;
   }
 
-  public void setExceptionVar(Variable exceptionVar) {
-    this.exceptionVar = exceptionVar;
-  }
-
   @Override
   public Node accept(Processor processor) {
     return Visitor_CatchClause.visit(processor, this);
+  }
+
+  @Override
+  public CatchClause clone() {
+    Variable clonedExceptionVariable = exceptionVar.clone();
+    Block clonedBody =
+        AstUtils.replaceVariables(
+            Collections.singletonList(exceptionVar),
+            Collections.singletonList(clonedExceptionVariable),
+            body.clone());
+
+    return new CatchClause(clonedBody, clonedExceptionVariable);
   }
 }

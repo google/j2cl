@@ -19,10 +19,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.Nullable;
 
 /**
@@ -62,6 +60,14 @@ public class NewArray extends Expression {
   @Override
   public TypeDescriptor getTypeDescriptor() {
     return typeDescriptor;
+  }
+
+  @Override
+  public NewArray clone() {
+    return new NewArray(
+        typeDescriptor,
+        AstUtils.clone(dimensionExpressions),
+        arrayLiteral == null ? null : arrayLiteral.clone());
   }
 
   @Override

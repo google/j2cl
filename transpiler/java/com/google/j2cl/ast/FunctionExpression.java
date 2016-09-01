@@ -17,7 +17,6 @@ package com.google.j2cl.ast;
 
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Visitable;
-
 import java.util.List;
 
 /**
@@ -34,6 +33,14 @@ public class FunctionExpression extends Expression {
     return typeDescriptor;
   }
 
+  @Override
+  public FunctionExpression clone() {
+    List<Variable> clonedParameters = AstUtils.clone(parameters);
+    Block clonedBody = AstUtils.replaceVariables(parameters, clonedParameters, body.clone());
+
+    return new FunctionExpression(typeDescriptor, clonedParameters, clonedBody);
+  }
+
   public List<Variable> getParameters() {
     return parameters;
   }
@@ -44,8 +51,12 @@ public class FunctionExpression extends Expression {
 
   public FunctionExpression(
       TypeDescriptor typeDescriptor, List<Variable> parameters, List<Statement> statements) {
-    this.parameters = Lists.newArrayList(parameters);
-    this.body = new Block(statements);
+    this(typeDescriptor, Lists.newArrayList(parameters), new Block(statements));
+  }
+
+  private FunctionExpression(TypeDescriptor typeDescriptor, List<Variable> parameters, Block body) {
+    this.parameters = parameters;
+    this.body = body;
     this.typeDescriptor = typeDescriptor;
   }
 

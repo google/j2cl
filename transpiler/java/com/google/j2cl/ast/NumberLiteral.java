@@ -23,8 +23,8 @@ import com.google.j2cl.ast.annotations.Visitable;
  */
 @Visitable
 public class NumberLiteral extends Expression {
-  private TypeDescriptor typeDescriptor;
-  private Number value;
+  private final TypeDescriptor typeDescriptor;
+  private final Number value;
 
   public NumberLiteral(TypeDescriptor typeDescriptor, Number value) {
     Preconditions.checkNotNull(typeDescriptor);
@@ -39,6 +39,12 @@ public class NumberLiteral extends Expression {
   @Override
   public TypeDescriptor getTypeDescriptor() {
     return typeDescriptor;
+  }
+
+  @Override
+  public NumberLiteral clone() {
+    // Number literals are value types do not need to actually clone.
+    return this;
   }
 
   @Override

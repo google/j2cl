@@ -31,6 +31,12 @@ public class NullLiteral extends Expression {
   }
 
   @Override
+  public NullLiteral clone() {
+    // Null literal is a singleton, no need to clone.
+    return this;
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_NullLiteral.visit(processor, this);
   }

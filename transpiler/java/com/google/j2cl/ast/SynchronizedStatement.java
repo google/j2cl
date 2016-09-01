@@ -41,6 +41,14 @@ public class SynchronizedStatement extends Statement {
   }
 
   @Override
+  public SynchronizedStatement clone() {
+    SynchronizedStatement synchronizedStatement =
+        new SynchronizedStatement(expression.clone(), body.clone());
+    synchronizedStatement.setSourcePosition(this.getSourcePosition());
+    return synchronizedStatement;
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_SynchronizedStatement.visit(processor, this);
   }

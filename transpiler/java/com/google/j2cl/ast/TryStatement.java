@@ -18,10 +18,8 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.annotation.Nullable;
 
 /**
@@ -59,6 +57,18 @@ public class TryStatement extends Statement {
 
   public List<VariableDeclarationExpression> getResourceDeclarations() {
     return resourceDeclarations;
+  }
+
+  @Override
+  public TryStatement clone() {
+    TryStatement tryStatement =
+        new TryStatement(
+            AstUtils.clone(resourceDeclarations),
+            body.clone(),
+            AstUtils.clone(catchClauses),
+            AstUtils.clone(finallyBlock));
+    tryStatement.setSourcePosition(this.getSourcePosition());
+    return tryStatement;
   }
 
   @Override

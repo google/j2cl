@@ -41,6 +41,14 @@ public class WhileStatement extends Statement {
   }
 
   @Override
+  public WhileStatement clone() {
+    WhileStatement whileStatement =
+        new WhileStatement(conditionExpression.clone(), AstUtils.clone(body));
+    whileStatement.setSourcePosition(this.getSourcePosition());
+    return whileStatement;
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_WhileStatement.visit(processor, this);
   }

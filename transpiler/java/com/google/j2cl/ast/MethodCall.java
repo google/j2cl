@@ -18,7 +18,6 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -88,6 +87,12 @@ public class MethodCall extends Invocation {
   @Override
   public TypeDescriptor getTypeDescriptor() {
     return targetMethodDescriptor.getReturnTypeDescriptor();
+  }
+
+  @Override
+  public MethodCall clone() {
+    return new MethodCall(
+        qualifier.clone(), targetMethodDescriptor, AstUtils.clone(arguments), isStaticDispatch);
   }
 
   @Override

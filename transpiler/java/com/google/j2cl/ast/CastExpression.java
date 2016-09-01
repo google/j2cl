@@ -49,6 +49,11 @@ public class CastExpression extends Expression {
     return castTypeDescriptor;
   }
 
+  @Override
+  public CastExpression clone() {
+    return new CastExpression(expression.clone(), castTypeDescriptor);
+  }
+
   public void setExpression(Expression expression) {
     this.expression = expression;
   }

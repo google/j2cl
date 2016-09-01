@@ -18,7 +18,6 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +40,14 @@ public class SwitchStatement extends Statement {
 
   public List<Statement> getBodyStatements() {
     return bodyStatements;
+  }
+
+  @Override
+  public SwitchStatement clone() {
+    SwitchStatement switchStatement =
+        new SwitchStatement(switchExpression.clone(), AstUtils.clone(bodyStatements));
+    switchStatement.setSourcePosition(this.getSourcePosition());
+    return switchStatement;
   }
 
   @Override

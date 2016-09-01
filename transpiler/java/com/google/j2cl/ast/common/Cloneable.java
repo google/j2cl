@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Google Inc.
+ * Copyright 2016 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,24 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.google.j2cl.ast;
+package com.google.j2cl.ast.common;
 
-import com.google.j2cl.ast.annotations.Visitable;
-
-/**
- * Class for empty statements.
- */
-@Visitable
-public class EmptyStatement extends Statement {
-  @Override
-  public EmptyStatement clone() {
-    EmptyStatement emptyStatement = new EmptyStatement();
-    emptyStatement.setSourcePosition(this.getSourcePosition());
-    return emptyStatement;
-  }
-
-  @Override
-  public Node accept(Processor processor) {
-    return Visitor_EmptyStatement.visit(processor, this);
-  }
+/** Interface for cloneable subnodes */
+public interface Cloneable<T> {
+  T clone();
 }

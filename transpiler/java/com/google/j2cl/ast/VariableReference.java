@@ -44,6 +44,11 @@ public class VariableReference extends Expression {
   }
 
   @Override
+  public VariableReference clone() {
+    return new VariableReference(target);
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_VariableReference.visit(processor, this);
   }

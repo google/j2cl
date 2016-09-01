@@ -19,10 +19,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.ast.common.Cloneable;
 
 /** Class for local variable and parameter. */
 @Visitable
-public class Variable extends Node {
+public class Variable extends Node implements Cloneable<Variable> {
   private final String name;
   @Visitable TypeDescriptor typeDescriptor;
   private final boolean isFinal;
@@ -77,6 +78,11 @@ public class Variable extends Node {
 
   public Expression getReference() {
     return new VariableReference(this);
+  }
+
+  @Override
+  public Variable clone() {
+    return Variable.Builder.from(this).build();
   }
 
   /** Builder for Variable. */

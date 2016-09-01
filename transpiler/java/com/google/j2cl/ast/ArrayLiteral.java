@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.common.base.Preconditions;
 import com.google.j2cl.ast.annotations.Visitable;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -50,6 +49,11 @@ public class ArrayLiteral extends Expression {
   @Override
   public TypeDescriptor getTypeDescriptor() {
     return typeDescriptor;
+  }
+
+  @Override
+  public ArrayLiteral clone() {
+    return new ArrayLiteral(typeDescriptor, AstUtils.clone(valueExpressions));
   }
 
   @Override

@@ -18,7 +18,6 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
-
 import javax.annotation.Nullable;
 
 /**
@@ -48,6 +47,14 @@ public class AssertStatement extends Statement {
 
   public void setMessage(Expression message) {
     this.message = message;
+  }
+
+  @Override
+  public AssertStatement clone() {
+    AssertStatement assertStatement =
+        new AssertStatement(expression.clone(), AstUtils.clone(message));
+    assertStatement.setSourcePosition(this.getSourcePosition());
+    return assertStatement;
   }
 
   @Override

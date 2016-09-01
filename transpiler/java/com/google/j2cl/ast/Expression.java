@@ -16,17 +16,19 @@
 package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.ast.common.Cloneable;
 
-/**
- * Base class for expressions.
- */
+/** Base class for expressions. */
 @Visitable
-public abstract class Expression extends Node {
+public abstract class Expression extends Node implements Cloneable<Expression> {
 
   /**
    * Returns the type descriptor of the value that is returned by this expression.
    */
   public abstract TypeDescriptor getTypeDescriptor();
+
+  @Override
+  public abstract Expression clone();
 
   @Override
   public Node accept(Processor processor) {

@@ -74,6 +74,11 @@ public class JsTypeAnnotation extends Expression {
     return annotationType;
   }
 
+  @Override
+  public JsTypeAnnotation clone() {
+    return new JsTypeAnnotation(expression.clone(), annotationType, isDeclaration);
+  }
+
   /** A Builder for easily and correctly creating modified versions of CastExpressions. */
   public static class Builder {
     private Expression expression;

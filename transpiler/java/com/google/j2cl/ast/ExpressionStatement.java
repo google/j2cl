@@ -35,6 +35,13 @@ public class ExpressionStatement extends Statement {
   }
 
   @Override
+  public ExpressionStatement clone() {
+    ExpressionStatement expressionStatement = new ExpressionStatement(expression.clone());
+    expressionStatement.setSourcePosition(this.getSourcePosition());
+    return expressionStatement;
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_ExpressionStatement.visit(processor, this);
   }

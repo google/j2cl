@@ -16,7 +16,6 @@
 package com.google.j2cl.ast;
 
 import com.google.j2cl.ast.annotations.Visitable;
-
 import javax.annotation.Nullable;
 
 /**
@@ -25,23 +24,27 @@ import javax.annotation.Nullable;
 @Visitable
 public class SwitchCase extends Statement {
   @Nullable @Visitable Expression matchExpression;
-  private final boolean isDefault;
 
   public SwitchCase(Expression matchExpression) {
     this.matchExpression = matchExpression;
-    this.isDefault = false;
   }
 
   public SwitchCase() {
-    this.isDefault = true;
   }
 
   public boolean isDefault() {
-    return isDefault;
+    return matchExpression == null;
   }
 
   public Expression getMatchExpression() {
     return matchExpression;
+  }
+
+  @Override
+  public SwitchCase clone() {
+    SwitchCase switchCase = new SwitchCase(AstUtils.clone(matchExpression));
+    switchCase.setSourcePosition(this.getSourcePosition());
+    return switchCase;
   }
 
   @Override

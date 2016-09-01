@@ -35,6 +35,11 @@ public class TypeReference extends Expression {
     return TypeDescriptors.NATIVE_FUNCTION;
   }
 
+  @Override
+  public TypeReference clone() {
+    return new TypeReference(typeDescriptor);
+  }
+
   public TypeDescriptor getReferencedTypeDescriptor() {
     return typeDescriptor;
   }

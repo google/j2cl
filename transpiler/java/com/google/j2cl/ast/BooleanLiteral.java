@@ -40,6 +40,12 @@ public class BooleanLiteral extends Expression {
   }
 
   @Override
+  public BooleanLiteral clone() {
+    // Boolean literals are value types do not need to be actually cloned.
+    return this;
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_BooleanLiteral.visit(processor, this);
   }

@@ -25,8 +25,8 @@ import com.google.j2cl.common.J2clUtils;
  */
 @Visitable
 public class CharacterLiteral extends Expression {
-  private char value;
-  private String escapedValue;
+  private final char value;
+  private final String escapedValue;
 
   public CharacterLiteral(char value) {
     this(value, "\"" + J2clUtils.escapeJavaString(String.valueOf(value)) + "\"");
@@ -48,6 +48,12 @@ public class CharacterLiteral extends Expression {
   @Override
   public TypeDescriptor getTypeDescriptor() {
     return TypeDescriptors.get().primitiveChar;
+  }
+
+  @Override
+  public CharacterLiteral clone() {
+    // Character literals are value types do not need to be actually cloned.
+    return this;
   }
 
   @Override

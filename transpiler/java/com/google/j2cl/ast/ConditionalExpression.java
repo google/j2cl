@@ -58,6 +58,15 @@ public class ConditionalExpression extends Expression {
   }
 
   @Override
+  public ConditionalExpression clone() {
+    return new ConditionalExpression(
+        typeDescriptor,
+        conditionExpression.clone(),
+        trueExpression.clone(),
+        falseExpression.clone());
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_ConditionalExpression.visit(processor, this);
   }

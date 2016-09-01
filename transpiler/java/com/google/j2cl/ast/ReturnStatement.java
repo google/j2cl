@@ -18,7 +18,6 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
-
 import javax.annotation.Nullable;
 
 /**
@@ -47,6 +46,14 @@ public class ReturnStatement extends Statement {
 
   public void setExpression(Expression expression) {
     this.expression = expression;
+  }
+
+  @Override
+  public ReturnStatement clone() {
+    ReturnStatement returnStatement =
+        new ReturnStatement(AstUtils.clone(expression), returnTypeDescriptor);
+    returnStatement.setSourcePosition(this.getSourcePosition());
+    return returnStatement;
   }
 
   @Override

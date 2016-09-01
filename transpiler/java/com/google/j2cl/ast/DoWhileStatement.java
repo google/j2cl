@@ -41,6 +41,14 @@ public class DoWhileStatement extends Statement {
   }
 
   @Override
+  public DoWhileStatement clone() {
+    DoWhileStatement doWhileStatement =
+        new DoWhileStatement(conditionExpression.clone(), AstUtils.clone(body));
+    doWhileStatement.setSourcePosition(this.getSourcePosition());
+    return doWhileStatement;
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_DoWhileStatement.visit(processor, this);
   }

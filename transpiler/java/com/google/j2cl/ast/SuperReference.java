@@ -36,6 +36,11 @@ public class SuperReference extends Expression {
   }
 
   @Override
+  public SuperReference clone() {
+    return new SuperReference(typeDescriptor);
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_SuperReference.visit(processor, this);
   }

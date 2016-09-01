@@ -70,6 +70,12 @@ public class BinaryExpression extends Expression {
   }
 
   @Override
+  public BinaryExpression clone() {
+    return new BinaryExpression(
+        typeDescriptor, leftOperand.clone(), operator, rightOperand.clone());
+  }
+
+  @Override
   public Node accept(Processor processor) {
     return Visitor_BinaryExpression.visit(processor, this);
   }

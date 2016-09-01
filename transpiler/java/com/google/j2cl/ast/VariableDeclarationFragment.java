@@ -18,7 +18,6 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
-
 import javax.annotation.Nullable;
 
 /**
@@ -56,5 +55,17 @@ public class VariableDeclarationFragment extends Expression {
   @Override
   public TypeDescriptor getTypeDescriptor() {
     return TypeDescriptors.get().primitiveVoid;
+  }
+
+  @Override
+  public VariableDeclarationFragment clone() {
+    // TODO(rluble): Move variables to the block and have a variable reference in this class
+    // instead. The proposed representation is better in the sense that variables references will
+    // only be present in children nodes (not sibling nodes).
+    return new VariableDeclarationFragment(
+        // DO NOT clone the variable here as it would make all the references be out of sync
+        // pointing to a different variable instance. Variables are replaced explicitly by using
+        // AstUtils.replaceVariables.
+        variable, initializer != null ? initializer.clone() : null);
   }
 }
