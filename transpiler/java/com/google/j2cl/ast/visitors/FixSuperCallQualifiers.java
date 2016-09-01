@@ -94,10 +94,11 @@ public class FixSuperCallQualifiers extends NormalizationPass {
       while (currentTypeDescriptor.getEnclosingTypeDescriptor() != null
           && !AstUtils.isSubType(currentTypeDescriptor, outerTypeDescriptor)) {
         qualifier =
-            new FieldAccess(
-                qualifier,
-                AstUtils.getFieldDescriptorForEnclosingInstance(
-                    currentTypeDescriptor, currentTypeDescriptor.getEnclosingTypeDescriptor()));
+            FieldAccess.Builder.from(
+                    AstUtils.getFieldDescriptorForEnclosingInstance(
+                        currentTypeDescriptor, currentTypeDescriptor.getEnclosingTypeDescriptor()))
+                .setQualifier(qualifier)
+                .build();
         currentTypeDescriptor = currentTypeDescriptor.getEnclosingTypeDescriptor();
       }
       return qualifier;

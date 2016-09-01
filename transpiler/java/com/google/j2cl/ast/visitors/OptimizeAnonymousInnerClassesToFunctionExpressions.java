@@ -123,11 +123,12 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               // Due to the cascading construction for captures in inner class construction,
               // at the end some field references might be incorrectly referring
               // the removed jsfunction class and need to point to the proper enclosing class.
-              return new FieldAccess(
-                  fieldAccess.getQualifier(),
-                  FieldDescriptor.Builder.from(fieldAccess.getTarget())
-                      .setEnclosingClassTypeDescriptor(getCurrentType().getDescriptor())
-                      .build());
+              return FieldAccess.Builder.from(
+                      FieldDescriptor.Builder.from(fieldAccess.getTarget())
+                          .setEnclosingClassTypeDescriptor(getCurrentType().getDescriptor())
+                          .build())
+                  .setQualifier(fieldAccess.getQualifier())
+                  .build();
             }
             return fieldAccess;
           }

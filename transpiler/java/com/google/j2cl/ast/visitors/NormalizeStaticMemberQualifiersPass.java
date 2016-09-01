@@ -62,10 +62,10 @@ public class NormalizeStaticMemberQualifiersPass extends NormalizationPass {
       if (isStaticMemberReferenceWithInstanceQualifier(fieldAccess)) {
         return new MultiExpression(
             fieldAccess.getQualifier(), // Preserve side effects.
-            new FieldAccess(null, fieldAccess.getTarget()) // Static dispatch
-            );
+            FieldAccess.Builder.from(fieldAccess.getTarget())
+                .setQualifier(null) // Static dispatch.
+                .build());
       }
-
       return fieldAccess;
     }
 

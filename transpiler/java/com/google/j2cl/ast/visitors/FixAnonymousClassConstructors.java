@@ -65,13 +65,23 @@ public class FixAnonymousClassConstructors extends NormalizationPass {
       int i = 0;
       for (TypeDescriptor parameterTypeDescriptor :
           anonymousType.getConstructorParameterTypeDescriptors()) {
-        Variable parameter = new Variable("$_" + i++, parameterTypeDescriptor, false, true);
+        Variable parameter =
+            Variable.Builder.fromDefault()
+                .setName("$_" + i++)
+                .setTypeDescriptor(parameterTypeDescriptor)
+                .setIsParameter(true)
+                .build();
         constructorParameters.add(parameter);
       }
       int j = 0;
       for (TypeDescriptor parameterTypeDescriptor :
           anonymousType.getSuperConstructorParameterTypeDescriptors()) {
-        Variable parameter = new Variable("$_" + j++, parameterTypeDescriptor, false, true);
+        Variable parameter =
+            Variable.Builder.fromDefault()
+                .setName("$_" + j++)
+                .setTypeDescriptor(parameterTypeDescriptor)
+                .setIsParameter(true)
+                .build();
         superConstructorParameters.add(parameter);
       }
       return true;
@@ -129,11 +139,11 @@ public class FixAnonymousClassConstructors extends NormalizationPass {
       // Create parameter that holds the qualifier of super call.
       if (type.getSuperTypeDescriptor().isInstanceMemberClass()) {
         parameterForSuperCallQualifier =
-            new Variable(
-                "$super_outer_this",
-                type.getSuperTypeDescriptor().getEnclosingTypeDescriptor(),
-                false,
-                true);
+            Variable.Builder.fromDefault()
+                .setName("$super_outer_this")
+                .setTypeDescriptor(type.getSuperTypeDescriptor().getEnclosingTypeDescriptor())
+                .setIsParameter(true)
+                .build();
       }
       return true;
     }

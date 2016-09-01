@@ -123,6 +123,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
         return NewInstance.Builder.from(newInstance)
             .appendArgumentAndUpdateDescriptor(
                 newInstance.getQualifier(), targetTypeDescriptor.getEnclosingTypeDescriptor())
+            .setQualifier(null)
             .build();
       }
       return newInstance;
@@ -155,9 +156,11 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
           BinaryExpression initializer =
               new BinaryExpression(
                   capturedField.getDescriptor().getTypeDescriptor(),
-                  new FieldAccess(
-                      new ThisReference(method.getDescriptor().getEnclosingClassTypeDescriptor()),
-                      capturedField.getDescriptor()),
+                  FieldAccess.Builder.from(capturedField.getDescriptor())
+                      .setQualifier(
+                          new ThisReference(
+                              method.getDescriptor().getEnclosingClassTypeDescriptor()))
+                      .build(),
                   BinaryOperator.ASSIGN,
                   parameter.getReference());
           methodBuilder.addStatement(i++, new ExpressionStatement(initializer));
@@ -236,8 +239,10 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
       // Maybe add the qualifier of the NewInstance as the last argument to the constructor of a
       // local class. The qualifier may be null if the local class is in a static context.
       if (type.getDescriptor().isLocal() && newInstance.getQualifier() != null) {
-        newInstanceBuilder.appendArgumentAndUpdateDescriptor(
-            newInstance.getQualifier(), newInstance.getQualifier().getTypeDescriptor());
+        newInstanceBuilder
+            .appendArgumentAndUpdateDescriptor(
+                newInstance.getQualifier(), newInstance.getQualifier().getTypeDescriptor())
+            .setQualifier(null);
       }
 
       return newInstanceBuilder.build();
@@ -298,7 +303,9 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
           // If the capturedVariable is also a captured variable in current type, pass the
           // corresponding field in current type as an argument.
           invocationBuilder.appendArgumentAndUpdateDescriptor(
-              new FieldAccess(new ThisReference(typeDescriptor), capturingField.getDescriptor()),
+              FieldAccess.Builder.from(capturingField.getDescriptor())
+                  .setQualifier(new ThisReference(typeDescriptor))
+                  .build(),
               capturingField.getDescriptor().getTypeDescriptor());
         } else {
           // otherwise, the captured variable is in the scope of the current type, so pass the

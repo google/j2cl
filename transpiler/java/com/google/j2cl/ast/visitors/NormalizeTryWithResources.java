@@ -37,7 +37,6 @@ import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.VariableDeclarationExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -121,7 +120,11 @@ public class NormalizeTryWithResources extends NormalizationPass {
       List<Statement> outputStatements = new ArrayList<>();
 
       Variable primaryException =
-          new Variable("$primaryExc", TypeDescriptors.get().javaLangThrowable, false, false);
+          Variable.Builder.fromDefault()
+              .setName("$primaryExc")
+              .setTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
+              .build();
+
       VariableDeclarationFragment fragment =
           new VariableDeclarationFragment(primaryException, NullLiteral.NULL);
       ExpressionStatement declarePrimaryException =
@@ -151,7 +154,10 @@ public class NormalizeTryWithResources extends NormalizationPass {
       tryBlockBodyStatements.addAll(tryStatement.getBody().getStatements());
 
       Variable exceptionFromTry =
-          new Variable("$exceptionFromTry", TypeDescriptors.get().javaLangThrowable, false, true);
+          Variable.Builder.fromDefault()
+              .setName("$exceptionFromTry")
+              .setTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
+              .build();
 
       List<Statement> catchBlockStatments = new ArrayList<>();
       Expression assignPrimaryExceptionToExceptionFromTry =

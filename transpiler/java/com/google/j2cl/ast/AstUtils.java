@@ -38,7 +38,6 @@ public class AstUtils {
   public static final String OVERLAY_IMPLEMENTATION_CLASS_SUFFIX = "$Overlay";
   public static final String CAPTURES_PREFIX = "$c_";
   public static final String ENCLOSING_INSTANCE_NAME = "$outer_this";
-  public static final String CREATE_PREFIX = "$create_";
   public static final String TYPE_VARIABLE_IN_METHOD_PREFIX = "M_";
   public static final String TYPE_VARIABLE_IN_TYPE_PREFIX = "C_";
   public static final FieldDescriptor ARRAY_LENGTH_FIELD_DESCRIPTION =
@@ -273,7 +272,7 @@ public class AstUtils {
    */
   public static FieldDescriptor getFieldDescriptorForEnclosingInstance(
       TypeDescriptor enclosingClassDescriptor, TypeDescriptor fieldTypeDescriptor) {
-    return FieldDescriptor.Builder.fromDefault(
+    return FieldDescriptor.Builder.from(
             enclosingClassDescriptor, ENCLOSING_INSTANCE_NAME, fieldTypeDescriptor)
         .build();
   }
@@ -282,8 +281,12 @@ public class AstUtils {
    * Returns the added outer parameter in constructor corresponding to the added field.
    */
   public static Variable createOuterParamByField(Field field) {
-    return new Variable(
-        field.getDescriptor().getName(), field.getDescriptor().getTypeDescriptor(), true, true);
+    return Variable.Builder.fromDefault()
+        .setName(field.getDescriptor().getName())
+        .setTypeDescriptor(field.getDescriptor().getTypeDescriptor())
+        .setIsParameter(true)
+        .setIsFinal(true)
+        .build();
   }
 
   /**
@@ -336,7 +339,12 @@ public class AstUtils {
     List<Expression> arguments = new ArrayList<>();
     List<TypeDescriptor> parameterTypes = fromMethodDescriptor.getParameterTypeDescriptors();
     for (int i = 0; i < parameterTypes.size(); i++) {
-      Variable parameter = new Variable("arg" + i, parameterTypes.get(i), false, true);
+      Variable parameter =
+          Variable.Builder.fromDefault()
+              .setName("arg" + i)
+              .setTypeDescriptor(parameterTypes.get(i))
+              .setIsParameter(true)
+              .build();
       parameters.add(parameter);
       arguments.add(parameter.getReference());
     }
@@ -693,8 +701,12 @@ public class AstUtils {
     checkArgument(!method.getDescriptor().isInit(), "Do not devirtualize init().");
 
     final Variable thisArg =
-        new Variable(
-            "$thisArg", method.getDescriptor().getEnclosingClassTypeDescriptor(), false, true);
+        Variable.Builder.fromDefault()
+            .setName("$thisArg")
+            .setTypeDescriptor(method.getDescriptor().getEnclosingClassTypeDescriptor())
+            .setIsParameter(true)
+            .setIsFinal(true)
+            .build();
 
     // Replace all 'this' references in the method with parameter references.
     method.accept(
@@ -787,12 +799,13 @@ public class AstUtils {
         MethodCall.createMethodCall(null, getPrototype, new TypeReference(lambdaType));
 
     FieldAccess applyFunctionFieldAccess =
-        new FieldAccess(
-            getPrototypeCall,
-            FieldDescriptor.Builder.fromDefault(
-                    lambdaType, applyMethodName, TypeDescriptors.NATIVE_FUNCTION)
-                .setJsInfo(JsInfo.RAW_FIELD)
-                .build());
+        FieldAccess.Builder.from(
+                FieldDescriptor.Builder.from(
+                        lambdaType, applyMethodName, TypeDescriptors.NATIVE_FUNCTION)
+                    .setJsInfo(JsInfo.RAW_FIELD)
+                    .build())
+            .setQualifier(getPrototypeCall)
+            .build();
 
     MethodDescriptor makeLambdaCall =
         MethodDescriptor.Builder.fromDefault()
@@ -807,12 +820,12 @@ public class AstUtils {
             .build();
 
     FieldAccess copyFunctionFieldAccess =
-        new FieldAccess(
-            new TypeReference(lambdaType),
-            FieldDescriptor.Builder.fromDefault(
-                    lambdaType, "$copy", TypeDescriptors.NATIVE_FUNCTION)
-                .setJsInfo(JsInfo.RAW_FIELD)
-                .build());
+        FieldAccess.Builder.from(
+                FieldDescriptor.Builder.from(lambdaType, "$copy", TypeDescriptors.NATIVE_FUNCTION)
+                    .setJsInfo(JsInfo.RAW_FIELD)
+                    .build())
+            .setQualifier(new TypeReference(lambdaType))
+            .build();
 
     return MethodCall.createMethodCall(
         null, makeLambdaCall, applyFunctionFieldAccess, instance, copyFunctionFieldAccess);
@@ -836,7 +849,7 @@ public class AstUtils {
               JsTypeAnnotation.createDeclarationAnnotation(
                   new BinaryExpression(
                       TypeDescriptors.get().primitiveVoid,
-                      new FieldAccess(null, field.getDescriptor()),
+                      FieldAccess.Builder.from(field.getDescriptor()).build(),
                       BinaryOperator.ASSIGN,
                       getInitialValue(field)),
                   field.getDescriptor().getTypeDescriptor()));

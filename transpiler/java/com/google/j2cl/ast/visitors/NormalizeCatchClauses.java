@@ -96,7 +96,10 @@ public class NormalizeCatchClauses extends NormalizationPass {
       checkArgument(!clauses.isEmpty());
       // Create a temporary exception variable.
       Variable exceptionVariable =
-          new Variable("__$exc", (TypeDescriptors.get().javaLangObject), false, false);
+          Variable.Builder.fromDefault()
+              .setName("__$exc")
+              .setTypeDescriptor(TypeDescriptors.get().javaLangObject)
+              .build();
       Statement body = bodyBuilder(clauses, exceptionVariable);
       return new CatchClause(new Block(body), exceptionVariable);
     }

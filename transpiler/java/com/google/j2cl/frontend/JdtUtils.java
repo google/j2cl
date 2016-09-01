@@ -139,7 +139,12 @@ public class JdtUtils {
             : createTypeDescriptor(variableBinding.getType());
     boolean isFinal = isFinal(variableBinding);
     boolean isParameter = variableBinding.isParameter();
-    return new Variable(name, typeDescriptor, isFinal, isParameter);
+    return Variable.Builder.fromDefault()
+        .setName(name)
+        .setTypeDescriptor(typeDescriptor)
+        .setIsFinal(isFinal)
+        .setIsParameter(isParameter)
+        .build();
   }
 
   public static BinaryOperator getBinaryOperator(InfixExpression.Operator operator) {
@@ -500,7 +505,11 @@ public class JdtUtils {
         lambdaMethodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors();
     for (int i = 0; i < parameterTypes.size(); i++) {
       Variable parameter =
-          new Variable("arg" + i, parameterTypes.get(i).getRawTypeDescriptor(), false, true);
+          Variable.Builder.fromDefault()
+              .setName("arg" + i)
+              .setTypeDescriptor(parameterTypes.get(i).getRawTypeDescriptor())
+              .setIsParameter(true)
+              .build();
       parameters.add(parameter);
       arguments.add(parameter.getReference());
     }

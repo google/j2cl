@@ -82,12 +82,12 @@ public class NormalizeJsVarargs extends NormalizationPass {
    */
   private static class NormalizeJsMethodsVarargs extends AbstractRewriter {
     private static final Variable ARGUMENTS_PARAMETER =
-        new Variable(
-            "arguments",
-            TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
-            false,
-            true,
-            true);
+        Variable.Builder.fromDefault()
+            .setName("arguments")
+            .setTypeDescriptor(TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1))
+            .setIsParameter(true)
+            .setIsRaw(true)
+            .build();
     private static final TypeDescriptor primitiveInt = TypeDescriptors.get().primitiveInt;
     private static final TypeDescriptor primitiveBoolean = TypeDescriptors.get().primitiveBoolean;
 
@@ -106,7 +106,10 @@ public class NormalizeJsVarargs extends NormalizationPass {
       }
       varargsParameter = Iterables.getLast(method.getParameters());
       varargsLocalCopy =
-          new Variable("$var_args_copy", varargsParameter.getTypeDescriptor(), false, false);
+          Variable.Builder.fromDefault()
+              .setName("$var_args_copy")
+              .setTypeDescriptor(varargsParameter.getTypeDescriptor())
+              .build();
       return true;
     }
 
@@ -131,27 +134,20 @@ public class NormalizeJsVarargs extends NormalizationPass {
       // (1) $var_args_copy = new VarArgsType[arguments.length - varargsIndex];
       Preconditions.checkArgument(!method.getParameters().isEmpty());
       int varargsIndex = method.getParameters().size() - 1;
-      FieldAccess argumentsLengthReference =
-          new FieldAccess(
-              ARGUMENTS_PARAMETER.getReference(), AstUtils.ARRAY_LENGTH_FIELD_DESCRIPTION);
-      Expression arraySize =
-          varargsIndex == 0
-              ? argumentsLengthReference
-              : new BinaryExpression(
-                  primitiveInt,
-                  argumentsLengthReference,
-                  BinaryOperator.MINUS,
-                  new NumberLiteral(primitiveInt, varargsIndex));
       Expression newArray =
           new NewArray(
-              varargsParameter.getTypeDescriptor(), Arrays.<Expression>asList(arraySize), null);
+              varargsParameter.getTypeDescriptor(),
+              Arrays.<Expression>asList(createArraySizeExpression(varargsIndex)),
+              null);
       Statement variableDeclaration =
           new ExpressionStatement(
               new VariableDeclarationExpression(
                   new VariableDeclarationFragment(varargsLocalCopy, newArray)));
 
       // (2) (loop body) $var_args_copy[i] = arguments[i + varargsIndex];
-      Variable loopVariable = new Variable("$i", primitiveInt, false, false);
+      Variable loopVariable =
+          Variable.Builder.fromDefault().setName("$i").setTypeDescriptor(primitiveInt).build();
+
       Expression indexExpression =
           varargsIndex == 0
               ? loopVariable.getReference()
@@ -172,7 +168,10 @@ public class NormalizeJsVarargs extends NormalizationPass {
       Statement forStatement =
           new ForStatement(
               new BinaryExpression(
-                  primitiveBoolean, loopVariable.getReference(), BinaryOperator.LESS, arraySize),
+                  primitiveBoolean,
+                  loopVariable.getReference(),
+                  BinaryOperator.LESS,
+                  createArraySizeExpression(varargsIndex)),
               new Block(body),
               Arrays.<Expression>asList(
                   new VariableDeclarationExpression(
@@ -186,6 +185,21 @@ public class NormalizeJsVarargs extends NormalizationPass {
           .addStatement(0, variableDeclaration)
           .addStatement(1, forStatement)
           .build();
+    }
+
+    private Expression createArraySizeExpression(int varargsIndex) {
+      FieldAccess argumentsLengthReference =
+          FieldAccess.Builder.from(AstUtils.ARRAY_LENGTH_FIELD_DESCRIPTION)
+              .setQualifier(ARGUMENTS_PARAMETER.getReference())
+              .build();
+
+      return varargsIndex == 0
+          ? argumentsLengthReference
+          : new BinaryExpression(
+              primitiveInt,
+              argumentsLengthReference,
+              BinaryOperator.MINUS,
+              new NumberLiteral(primitiveInt, varargsIndex));
     }
   }
 

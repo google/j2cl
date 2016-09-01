@@ -216,11 +216,11 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
       TypeDescriptor overlayTypeDescriptor =
           TypeDescriptors.createOverlayImplementationClassTypeDescriptor(
               targetFieldDescriptor.getEnclosingClassTypeDescriptor());
-      return new FieldAccess(
-          null,
-          FieldDescriptor.Builder.from(targetFieldDescriptor)
-              .setEnclosingClassTypeDescriptor(overlayTypeDescriptor)
-              .build());
+      return FieldAccess.Builder.from(
+              FieldDescriptor.Builder.from(targetFieldDescriptor)
+                  .setEnclosingClassTypeDescriptor(overlayTypeDescriptor)
+                  .build())
+          .build();
     }
 
     static Node createRedirectedStaticMethodCall(

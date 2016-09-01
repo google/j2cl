@@ -138,7 +138,7 @@ public abstract class FieldDescriptor extends MemberDescriptor {
       return builder;
     }
 
-    public static Builder fromDefault(
+    public static Builder from(
         TypeDescriptor enclosingClassTypeDescriptor,
         String fieldName,
         TypeDescriptor typeDescriptor) {

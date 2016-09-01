@@ -62,11 +62,9 @@ public class InsertExceptionConversions extends NormalizationPass {
     @Override
     public Node rewriteCatchClause(CatchClause catchClause) {
       Variable mainVariable =
-          new Variable(
-              catchClause.getExceptionVar().getName(),
-              TypeDescriptors.get().javaLangObject,
-              false,
-              false);
+          Variable.Builder.from(catchClause.getExceptionVar())
+              .setTypeDescriptor(TypeDescriptors.get().javaLangObject)
+              .build();
 
       MethodDescriptor toJava =
           MethodDescriptor.Builder.fromDefault()

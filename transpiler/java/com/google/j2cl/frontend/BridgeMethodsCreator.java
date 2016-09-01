@@ -313,12 +313,14 @@ public class BridgeMethodsCreator {
                 .size();
         i++) {
       Variable parameter =
-          new Variable(
-              "arg" + i,
-              JdtUtils.createTypeDescriptorWithNullability(
-                  bridgeMethod.getParameterTypes()[i], bridgeMethod.getParameterAnnotations(i)),
-              false,
-              true);
+          Variable.Builder.fromDefault()
+              .setName("arg" + i)
+              .setTypeDescriptor(
+                  JdtUtils.createTypeDescriptorWithNullability(
+                      bridgeMethod.getParameterTypes()[i], bridgeMethod.getParameterAnnotations(i)))
+              .setIsParameter(true)
+              .build();
+
       parameters.add(parameter);
       Expression parameterReference = parameter.getReference();
 

@@ -27,7 +27,7 @@ public class FieldAccess extends Expression implements MemberReference {
   @Visitable Expression qualifier;
   @Visitable FieldDescriptor targetFieldDescriptor;
 
-  public FieldAccess(Expression qualifier, FieldDescriptor targetFieldDescriptor) {
+  private FieldAccess(Expression qualifier, FieldDescriptor targetFieldDescriptor) {
     this.targetFieldDescriptor = checkNotNull(targetFieldDescriptor);
     this.qualifier = AstUtils.getExplicitQualifier(qualifier, targetFieldDescriptor);
   }
@@ -54,5 +54,45 @@ public class FieldAccess extends Expression implements MemberReference {
   @Override
   public Node accept(Processor processor) {
     return Visitor_FieldAccess.visit(processor, this);
+  }
+
+  /** Builder for Variable. */
+  public static class Builder {
+
+    private FieldDescriptor targetFieldDescriptor;
+    private Expression qualifier;
+
+    public static Builder from(FieldDescriptor targetFieldDescriptor) {
+      Builder builder = new Builder();
+      builder.targetFieldDescriptor = targetFieldDescriptor;
+      return builder;
+    }
+
+    public static Builder from(Field targetField) {
+      Builder builder = new Builder();
+      builder.targetFieldDescriptor = targetField.getDescriptor();
+      return builder;
+    }
+
+    public static Builder from(FieldAccess fieldAccess) {
+      Builder builder = new Builder();
+      builder.targetFieldDescriptor = fieldAccess.getTarget();
+      builder.qualifier = fieldAccess.getQualifier();
+      return builder;
+    }
+
+    public Builder setTargetFieldDescriptor(FieldDescriptor targetFieldDescriptor) {
+      this.targetFieldDescriptor = targetFieldDescriptor;
+      return this;
+    }
+
+    public Builder setQualifier(Expression qualifier) {
+      this.qualifier = qualifier;
+      return this;
+    }
+
+    public FieldAccess build() {
+      return new FieldAccess(this.qualifier, this.targetFieldDescriptor);
+    }
   }
 }

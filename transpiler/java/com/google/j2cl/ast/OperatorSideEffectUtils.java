@@ -116,9 +116,10 @@ public class OperatorSideEffectUtils {
             target.getEnclosingClassTypeDescriptor(),
             createNumbersFieldAccess(NUMBERS_VALUE_TEMP, target.getTypeDescriptor()),
             BinaryOperator.ASSIGN,
-            new FieldAccess(
-                createNumbersFieldAccess(NUMBERS_QUALIFIER_TEMP, qualifier.getTypeDescriptor()),
-                target)); //Numbers.$v = Numbers.$q.a
+            FieldAccess.Builder.from(target)
+                .setQualifier(
+                    createNumbersFieldAccess(NUMBERS_QUALIFIER_TEMP, qualifier.getTypeDescriptor()))
+                .build()); //Numbers.$v = Numbers.$q.a
     BinaryExpression assignment =
         expandExpressionWithQualifier(
             operand, operator.getUnderlyingBinaryOperator(), createLiteralOne(typeDescriptor));
@@ -178,13 +179,13 @@ public class OperatorSideEffectUtils {
    */
   private static FieldAccess createNumbersFieldAccess(
       String fieldName, TypeDescriptor typeDescriptor) {
-    return new FieldAccess(
-        null,
-        FieldDescriptor.createRaw(
-            true, // isStatic
-            BootstrapType.NUMBERS.getDescriptor(),
-            fieldName,
-            typeDescriptor));
+    return FieldAccess.Builder.from(
+            FieldDescriptor.createRaw(
+                true, // isStatic
+                BootstrapType.NUMBERS.getDescriptor(),
+                fieldName,
+                typeDescriptor))
+        .build();
   }
 
   /**
@@ -269,10 +270,11 @@ public class OperatorSideEffectUtils {
     if (!(expression instanceof FieldAccess)) {
       return expression;
     }
+    FieldAccess fieldAccess = (FieldAccess) expression;
     Expression newQualifier =
         createNumbersFieldAccess(
-            NUMBERS_QUALIFIER_TEMP, ((FieldAccess) expression).getQualifier().getTypeDescriptor());
-    return new FieldAccess(newQualifier, ((FieldAccess) expression).getTarget());
+            NUMBERS_QUALIFIER_TEMP, fieldAccess.getQualifier().getTypeDescriptor());
+    return FieldAccess.Builder.from(fieldAccess).setQualifier(newQualifier).build();
   }
 
   /**

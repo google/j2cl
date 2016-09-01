@@ -43,9 +43,17 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
     private static final String VALUE_NAME_PARAMETER_NAME = "$name";
     private final Multiset<TypeDescriptor> ordinalsByEnumTypeDescriptor = HashMultiset.create();
     private final Variable ordinalVariable =
-        new Variable(ORDINAL_PARAMETER_NAME, TypeDescriptors.get().primitiveInt, false, true);
+        Variable.Builder.fromDefault()
+            .setName(ORDINAL_PARAMETER_NAME)
+            .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
+            .setIsParameter(true)
+            .build();
     private final Variable nameVariable =
-        new Variable(VALUE_NAME_PARAMETER_NAME, TypeDescriptors.get().javaLangString, false, true);
+        Variable.Builder.fromDefault()
+            .setName(VALUE_NAME_PARAMETER_NAME)
+            .setTypeDescriptor(TypeDescriptors.get().javaLangString)
+            .setIsParameter(true)
+            .build();
 
     @Override
     public Node rewriteMethod(Method method) {

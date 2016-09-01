@@ -16,34 +16,30 @@
 package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.ast.annotations.Visitable;
 
 /** Class for local variable and parameter. */
 @Visitable
 public class Variable extends Node {
-  private String name;
+  private final String name;
   @Visitable TypeDescriptor typeDescriptor;
-  private boolean isFinal;
-  private boolean isParameter;
-  private boolean isRaw;
+  private final boolean isFinal;
+  private final boolean isParameter;
+  private final boolean isRaw;
 
-  public Variable(
+  private Variable(
       String name,
       TypeDescriptor typeDescriptor,
       boolean isFinal,
       boolean isParameter,
       boolean isRaw) {
-    setName(name);
+    this.name = checkNotNull(name);
     setTypeDescriptor(typeDescriptor);
     this.isFinal = isFinal;
     this.isParameter = isParameter;
     this.isRaw = isRaw;
-  }
-
-  public Variable(
-      String name, TypeDescriptor typeDescriptor, boolean isFinal, boolean isParameter) {
-    this(name, typeDescriptor, isFinal, isParameter, false);
   }
 
   public String getName() {
@@ -70,20 +66,8 @@ public class Variable extends Node {
     return isRaw;
   }
 
-  public void setName(String name) {
-    this.name = checkNotNull(name);
-  }
-
   public void setTypeDescriptor(TypeDescriptor typeDescriptor) {
     this.typeDescriptor = checkNotNull(typeDescriptor);
-  }
-
-  public void setFinal(boolean isFinal) {
-    this.isFinal = isFinal;
-  }
-
-  public void setParameter(boolean isParameter) {
-    this.isParameter = isParameter;
   }
 
   @Override
@@ -93,5 +77,61 @@ public class Variable extends Node {
 
   public Expression getReference() {
     return new VariableReference(this);
+  }
+
+  /** Builder for Variable. */
+  public static class Builder {
+
+    private String name;
+    private TypeDescriptor typeDescriptor;
+    private boolean isFinal;
+    private boolean isParameter;
+    private boolean isRaw;
+
+    public static Builder fromDefault() {
+      Builder builder = new Builder();
+      return builder;
+    }
+
+    public static Builder from(Variable variable) {
+      Builder builder = new Builder();
+      builder.name = variable.getName();
+      builder.typeDescriptor = variable.getTypeDescriptor();
+      builder.isRaw = variable.isRaw();
+      builder.isFinal = variable.isFinal();
+      builder.isParameter = variable.isParameter;
+      return builder;
+    }
+
+    public Builder setName(String name) {
+      this.name = name;
+      return this;
+    }
+
+    public Builder setTypeDescriptor(TypeDescriptor typeDescriptor) {
+      this.typeDescriptor = typeDescriptor;
+      return this;
+    }
+
+    public Builder setIsRaw(boolean isRaw) {
+      this.isRaw = isRaw;
+      return this;
+    }
+
+    public Builder setIsParameter(boolean isParameter) {
+      this.isParameter = isParameter;
+      return this;
+    }
+
+    public Builder setIsFinal(boolean isFinal) {
+      this.isFinal = isFinal;
+      return this;
+    }
+
+    public Variable build() {
+      checkState(name != null);
+      checkState(typeDescriptor != null);
+      return new Variable(name, typeDescriptor, isFinal, isParameter, isRaw);
+    }
   }
 }

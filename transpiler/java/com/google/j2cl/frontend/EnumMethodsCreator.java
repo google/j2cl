@@ -58,7 +58,7 @@ public class EnumMethodsCreator {
 
     this.enumType = enumType;
     this.namesToValuesMapFieldDescriptor =
-        FieldDescriptor.Builder.fromDefault(
+        FieldDescriptor.Builder.from(
                 enumType.getDescriptor(),
                 NAMES_TO_VALUES_MAP_FIELD_NAME,
                 TypeDescriptors.createNative(
@@ -117,7 +117,12 @@ public class EnumMethodsCreator {
    */
   private Method createValueOfMethod() {
     Variable nameParameter =
-        new Variable("name", TypeDescriptors.get().javaLangString, false, true);
+        Variable.Builder.fromDefault()
+            .setName("name")
+            .setTypeDescriptor(TypeDescriptors.get().javaLangString)
+            .setIsParameter(true)
+            .build();
+
     MethodDescriptor createMapMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
             .setJsInfo(JsInfo.RAW)
@@ -140,15 +145,11 @@ public class EnumMethodsCreator {
                     namesToValuesMapFieldDescriptor.getTypeDescriptor()))
             .build();
 
-    Expression nameParameterAccess = nameParameter.getReference();
-    Expression namesToValuesMapFieldAccess =
-        new FieldAccess(null, this.namesToValuesMapFieldDescriptor);
-
     // If statement
     Expression namesToValuesMapIsNullComparison =
         new BinaryExpression(
             TypeDescriptors.get().primitiveBoolean,
-            namesToValuesMapFieldAccess,
+            FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build(),
             BinaryOperator.EQUALS,
             NullLiteral.NULL);
     Expression valuesCall = MethodCall.createMethodCall(null, valuesMethodDescriptor);
@@ -156,7 +157,8 @@ public class EnumMethodsCreator {
     Expression createMapCall =
         MethodCall.createMethodCall(null, createMapMethodDescriptor, valuesCall);
     Expression assignMapCallToField =
-        BinaryExpression.Builder.asAssignmentTo(namesToValuesMapFieldAccess)
+        BinaryExpression.Builder.asAssignmentTo(
+                FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build())
             .setRightOperand(createMapCall)
             .build();
     Statement thenStatement = new ExpressionStatement(assignMapCallToField);
@@ -166,7 +168,10 @@ public class EnumMethodsCreator {
     // Return statement
     Expression getMethodCall =
         MethodCall.createMethodCall(
-            null, getMethodDescriptor, nameParameterAccess, namesToValuesMapFieldAccess);
+            null,
+            getMethodDescriptor,
+            nameParameter.getReference(),
+            FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build());
     Statement returnStatement =
         new ReturnStatement(
             getMethodCall, TypeDescriptors.getForArray(enumType.getDescriptor(), 1));
@@ -194,7 +199,7 @@ public class EnumMethodsCreator {
     // Create method body.
     List<Expression> values = new ArrayList<>();
     for (Field enumField : enumType.getEnumFields()) {
-      values.add(new FieldAccess(null, enumField.getDescriptor()));
+      values.add(FieldAccess.Builder.from(enumField.getDescriptor()).build());
     }
     Expression arrayOfValues =
         new ArrayLiteral(TypeDescriptors.getForArray(enumType.getDescriptor(), 1), values);

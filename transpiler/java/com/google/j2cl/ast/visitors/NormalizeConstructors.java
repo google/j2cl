@@ -415,7 +415,11 @@ public class NormalizeConstructors extends NormalizationPass {
     }
 
     // let $instance = new Class;
-    Variable newInstance = new Variable("$instance", enclosingType, false, false);
+    Variable newInstance =
+        Variable.Builder.fromDefault()
+            .setName("$instance")
+            .setTypeDescriptor(enclosingType)
+            .build();
     VariableDeclarationFragment frag =
         new VariableDeclarationFragment(
             newInstance, new NewInstance(null, javascriptConstructor, arguments));

@@ -872,13 +872,20 @@ public class CompilationUnitBuilder {
 
       // T[] array = exp.
       Variable arrayVariable =
-          new Variable("$array", JdtUtils.createTypeDescriptor(expressionTypeBinding), true, false);
+          Variable.Builder.fromDefault()
+              .setName("$array")
+              .setTypeDescriptor(JdtUtils.createTypeDescriptor(expressionTypeBinding))
+              .setIsFinal(true)
+              .build();
       VariableDeclarationFragment arrayVariableDeclarationFragment =
           new VariableDeclarationFragment(arrayVariable, convert(statement.getExpression()));
 
       // int index = 0;
       Variable indexVariable =
-          new Variable("$index", TypeDescriptors.get().primitiveInt, true, false);
+          Variable.Builder.fromDefault()
+              .setName("$index")
+              .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
+              .build();
       VariableDeclarationFragment indexVariableDeclarationFragment =
           new VariableDeclarationFragment(
               indexVariable, new NumberLiteral(TypeDescriptors.get().primitiveInt, 0));
@@ -889,8 +896,9 @@ public class CompilationUnitBuilder {
               TypeDescriptors.get().primitiveBoolean,
               indexVariable.getReference(),
               BinaryOperator.LESS,
-              new FieldAccess(
-                  arrayVariable.getReference(), AstUtils.ARRAY_LENGTH_FIELD_DESCRIPTION));
+              FieldAccess.Builder.from(AstUtils.ARRAY_LENGTH_FIELD_DESCRIPTION)
+                  .setQualifier(arrayVariable.getReference())
+                  .build());
 
       ExpressionStatement forVariableDeclarationStatement =
           new ExpressionStatement(
@@ -939,11 +947,13 @@ public class CompilationUnitBuilder {
 
       // Iterator<T> $iterator = (exp).iterator();
       Variable iteratorVariable =
-          new Variable(
-              "$iterator",
-              JdtUtils.createTypeDescriptor(iteratorMethodBinding.getReturnType()),
-              true,
-              false);
+          Variable.Builder.fromDefault()
+              .setName("$iterator")
+              .setTypeDescriptor(
+                  JdtUtils.createTypeDescriptor(iteratorMethodBinding.getReturnType()))
+              .setIsFinal(true)
+              .build();
+
       VariableDeclarationFragment iteratorDeclaration =
           new VariableDeclarationFragment(
               iteratorVariable,
@@ -1315,14 +1325,15 @@ public class CompilationUnitBuilder {
           && !fieldDescriptor
               .getEnclosingClassTypeDescriptor()
               .equalsIgnoreNullability(currentType.getDescriptor())) {
-        return new FieldAccess(
-            convertOuterClassReference(
-                JdtUtils.findCurrentTypeBinding(expression),
-                variableBinding.getDeclaringClass(),
-                false),
-            fieldDescriptor);
+        return FieldAccess.Builder.from(fieldDescriptor)
+            .setQualifier(
+                convertOuterClassReference(
+                    JdtUtils.findCurrentTypeBinding(expression),
+                    variableBinding.getDeclaringClass(),
+                    false))
+            .build();
       }
-      return new FieldAccess(qualifier, fieldDescriptor);
+      return FieldAccess.Builder.from(fieldDescriptor).setQualifier(qualifier).build();
     }
 
     private BinaryExpression convert(org.eclipse.jdt.core.dom.InfixExpression expression) {
@@ -1515,8 +1526,9 @@ public class CompilationUnitBuilder {
       if (binding instanceof IVariableBinding) {
         IVariableBinding variableBinding = (IVariableBinding) binding;
         if (variableBinding.isField()) {
-          return new FieldAccess(
-              convert(expression.getQualifier()), JdtUtils.createFieldDescriptor(variableBinding));
+          return FieldAccess.Builder.from(JdtUtils.createFieldDescriptor(variableBinding))
+              .setQualifier(convert(expression.getQualifier()))
+              .build();
         } else {
           throw new RuntimeException(
               "Need to implement translation for QualifiedName that is not a field.");
@@ -1578,14 +1590,15 @@ public class CompilationUnitBuilder {
               && !fieldDescriptor
                   .getEnclosingClassTypeDescriptor()
                   .equalsIgnoreNullability(currentType.getDescriptor())) {
-            return new FieldAccess(
-                convertOuterClassReference(
-                    JdtUtils.findCurrentTypeBinding(expression),
-                    variableBinding.getDeclaringClass(),
-                    false),
-                fieldDescriptor);
+            return FieldAccess.Builder.from(fieldDescriptor)
+                .setQualifier(
+                    convertOuterClassReference(
+                        JdtUtils.findCurrentTypeBinding(expression),
+                        variableBinding.getDeclaringClass(),
+                        false))
+                .build();
           } else {
-            return new FieldAccess(null, fieldDescriptor);
+            return FieldAccess.Builder.from(fieldDescriptor).build();
           }
         } else {
           // It refers to a local variable or parameter in a method or block.
@@ -1634,10 +1647,11 @@ public class CompilationUnitBuilder {
           .equalsIgnoreNullability(currentType.getDescriptor())) {
         // currentType is a lambda type.
         qualifier =
-            new FieldAccess(
-                qualifier,
-                AstUtils.getFieldDescriptorForEnclosingInstance(
-                    currentType.getDescriptor(), currentType.getEnclosingTypeDescriptor()));
+            FieldAccess.Builder.from(
+                    AstUtils.getFieldDescriptorForEnclosingInstance(
+                        currentType.getDescriptor(), currentType.getEnclosingTypeDescriptor()))
+                .setQualifier(qualifier)
+                .build();
       }
       while (innerTypeBinding.getDeclaringClass() != null) {
         boolean found =
@@ -1653,10 +1667,11 @@ public class CompilationUnitBuilder {
             JdtUtils.createTypeDescriptor(innerTypeBinding.getDeclaringClass());
 
         qualifier =
-            new FieldAccess(
-                qualifier,
-                AstUtils.getFieldDescriptorForEnclosingInstance(
-                    enclosingTypeDescriptor, fieldTypeDescriptor));
+            FieldAccess.Builder.from(
+                    AstUtils.getFieldDescriptorForEnclosingInstance(
+                        enclosingTypeDescriptor, fieldTypeDescriptor))
+                .setQualifier(qualifier)
+                .build();
         innerTypeBinding = innerTypeBinding.getDeclaringClass();
       }
       return qualifier;
@@ -1679,7 +1694,8 @@ public class CompilationUnitBuilder {
       // field created for the captured variable.
       FieldDescriptor fieldDescriptor =
           AstUtils.getFieldDescriptorForCapture(currentType.getDescriptor(), variable);
-      return new FieldAccess(new ThisReference(currentType.getDescriptor()), fieldDescriptor);
+      ThisReference qualifier = new ThisReference(currentType.getDescriptor());
+      return FieldAccess.Builder.from(fieldDescriptor).setQualifier(qualifier).build();
     }
 
     private Variable convert(org.eclipse.jdt.core.dom.SingleVariableDeclaration node) {
@@ -1688,7 +1704,8 @@ public class CompilationUnitBuilder {
           node.getType() instanceof org.eclipse.jdt.core.dom.UnionType
               ? convert((org.eclipse.jdt.core.dom.UnionType) node.getType())
               : JdtUtils.createTypeDescriptor(node.getType().resolveBinding());
-      Variable variable = new Variable(name, typeDescriptor, false, false);
+      Variable variable =
+          Variable.Builder.fromDefault().setName(name).setTypeDescriptor(typeDescriptor).build();
       variableByJdtBinding.put(node.resolveBinding(), variable);
       recordEnclosingType(variable, currentType);
       return variable;
