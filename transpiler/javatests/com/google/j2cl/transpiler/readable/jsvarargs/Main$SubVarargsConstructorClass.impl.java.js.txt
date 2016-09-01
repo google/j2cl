@@ -1,0 +1,110 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsvarargs.Main$SubVarargsConstructorClass.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsvarargs.Main.SubVarargsConstructorClass$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
+
+class Main$SubVarargsConstructorClass extends Object {
+  /**
+   * Real constructor.
+   * @param {number} i
+   * @param {...*} args
+   * @public
+   */
+  constructor(i, args) {
+    let $var_args_copy = /**@type {!Array<*>} */ (
+        $Arrays.$create([arguments.length - 1], java_lang_Object));
+    for (let $i = 0; $i < arguments.length - 1; $i++) {
+      $Arrays.$set($var_args_copy, $i, arguments[$i + 1]);
+    }
+    super(...$Arrays.$checkNotNull($var_args_copy));
+    this.$ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main$SubVarargsConstructorClass__int__arrayOf_java_lang_Object(
+        i, $var_args_copy);
+  }
+
+  /**
+   * A particular Java constructor as a factory method.
+   * @param {number} i
+   * @param {Array<*>} args
+   * @return {!Main$SubVarargsConstructorClass}
+   * @public
+   */
+  static $create__int__arrayOf_java_lang_Object(i, args) {
+    Main$SubVarargsConstructorClass.$clinit();
+    return new Main$SubVarargsConstructorClass(
+        i, ...$Arrays.$checkNotNull(args));
+  }
+
+  /**
+   * Initializes instance fields for a particular Java constructor.
+   * @param {number} i
+   * @param {Array<*>} args
+   * @return {void}
+   * @public
+   */
+  $ctor__com_google_j2cl_transpiler_readable_jsvarargs_Main$SubVarargsConstructorClass__int__arrayOf_java_lang_Object(
+      i, args) {
+    this.$init__com_google_j2cl_transpiler_readable_jsvarargs_Main$SubVarargsConstructorClass();
+  }
+
+  /**
+   * Returns whether the provided instance is an instance of this class.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance instanceof Main$SubVarargsConstructorClass;
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return $Util.$canCastClass(
+        classConstructor, Main$SubVarargsConstructorClass);
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
+    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+    $int = goog.module.get('vmbootstrap.primitives.$int$impl');
+  }
+
+  /**
+   * Runs instance field and block initializers.
+   * @private
+   */
+  $init__com_google_j2cl_transpiler_readable_jsvarargs_Main$SubVarargsConstructorClass() {
+  }
+};
+
+$Util.$setClassMetadata(
+    Main$SubVarargsConstructorClass,
+    'com.google.j2cl.transpiler.readable.jsvarargs.Main$SubVarargsConstructorClass');
+
+
+
+/**
+ * Export class.
+ */
+exports = Main$SubVarargsConstructorClass;
+//# sourceMappingURL=Main$SubVarargsConstructorClass.js.map

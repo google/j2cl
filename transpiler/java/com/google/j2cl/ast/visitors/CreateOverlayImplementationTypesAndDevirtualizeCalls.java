@@ -33,6 +33,7 @@ import com.google.j2cl.ast.ThisReference;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.Variable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -171,8 +172,12 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
         // Copy JsOverlay and Default methods. If they're not already static, devirtualize them.
         if (method.getDescriptor().isJsOverlay() || method.getDescriptor().isDefault()) {
           overlayClass.addMethod(createOverlayMethod(method, overlayImplTypeDescriptor));
-          // clear the method body from the original type.
+
+          // clear the method body from the original type and use a fresh list of parameters.
           method.getBody().getStatements().clear();
+          List<Variable> newParameters = AstUtils.clone(method.getParameters());
+          method.getParameters().clear();
+          method.getParameters().addAll(newParameters);
         }
       }
 
@@ -180,9 +185,11 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
         // Copy JsOverlay fields, only already static ones are legal.
         if (field.getDescriptor().isJsOverlay()) {
           checkState(field.getDescriptor().isStatic());
-
           overlayClass.addField(
-              Field.Builder.from(field).setEnclosingClass(overlayImplTypeDescriptor).build());
+              Field.Builder.from(field)
+                  .setInitializer(AstUtils.clone(field.getInitializer()))
+                  .setEnclosingClass(overlayImplTypeDescriptor)
+                  .build());
         }
       }
 
