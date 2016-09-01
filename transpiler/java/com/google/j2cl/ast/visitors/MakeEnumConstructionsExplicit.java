@@ -27,111 +27,93 @@ import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.StringLiteral;
-import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.Variable;
-import java.util.List;
 
 /** Make the implicit parameters and super calls in enum constructors explicit. */
 public class MakeEnumConstructionsExplicit extends NormalizationPass {
-  private static final String ORDINAL_PARAMETER_NAME = "$ordinal";
-  private static final String VALUE_NAME_PARAMETER_NAME = "$name";
-
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    final Multiset<TypeDescriptor> ordinalsByEnumTypeDescriptor = HashMultiset.create();
+    compilationUnit.accept(new Rewriter());
+  }
 
-    // Rewrite method headers
-    compilationUnit.accept(
-        new AbstractRewriter() {
-          @Override
-          public boolean shouldProcessType(Type type) {
-            return type.getDescriptor().isEnumOrSubclass();
-          }
+  private static class Rewriter extends AbstractRewriter {
+    private static final String ORDINAL_PARAMETER_NAME = "$ordinal";
+    private static final String VALUE_NAME_PARAMETER_NAME = "$name";
+    private final Multiset<TypeDescriptor> ordinalsByEnumTypeDescriptor = HashMultiset.create();
+    private final Variable ordinalVariable =
+        Variable.Builder.fromDefault()
+            .setName(ORDINAL_PARAMETER_NAME)
+            .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
+            .setIsParameter(true)
+            .build();
+    private final Variable nameVariable =
+        Variable.Builder.fromDefault()
+            .setName(VALUE_NAME_PARAMETER_NAME)
+            .setTypeDescriptor(TypeDescriptors.get().javaLangString)
+            .setIsParameter(true)
+            .build();
 
-          @Override
-          public Node rewriteMethod(Method method) {
-            /*
-             * Only add parameters to constructor methods in Enum classes..
-             */
-            if (!method.isConstructor()) {
-              return method;
-            }
-            return Method.Builder.from(method)
-                .addParameters(
-                    Variable.Builder.fromDefault()
-                        .setName(VALUE_NAME_PARAMETER_NAME)
-                        .setTypeDescriptor(TypeDescriptors.get().javaLangString)
-                        .setIsParameter(true)
-                        .build(),
-                    Variable.Builder.fromDefault()
-                        .setName(ORDINAL_PARAMETER_NAME)
-                        .setTypeDescriptor(TypeDescriptors.get().primitiveInt)
-                        .setIsParameter(true)
-                        .build())
-                .build();
-          }
-        });
+    @Override
+    public Node rewriteMethod(Method method) {
+      /*
+       * Only add parameters to constructor methods in Enum classes..
+       */
+      if (!method.isConstructor() || !getCurrentType().getDescriptor().isEnumOrSubclass()) {
+        return method;
+      }
+      return Method.Builder.from(method).addParameters(nameVariable, ordinalVariable).build();
+    }
 
-    // Rewrite new instance calls
-    compilationUnit.accept(
-        new AbstractRewriter() {
-          @Override
-          public boolean shouldProcessType(Type type) {
-            return type.getDescriptor().isEnumOrSubclass();
-          }
+    @Override
+    public Node rewriteMethodCall(MethodCall methodCall) {
+      /*
+       * Only add arguments to super() calls inside of constructor methods in Enum classes.
+       */
+      if (!getCurrentMember().isConstructor()
+          || !getCurrentType().getDescriptor().isEnumOrSubclass()
+          || !methodCall.getTarget().isConstructor()) {
+        return methodCall;
+      }
 
-          @Override
-          public Node rewriteMethodCall(MethodCall methodCall) {
-            // Only add arguments to super() calls inside of constructor methods in Enum classes.
-            if (!getCurrentMember().isConstructor()
-                || !getCurrentType().getDescriptor().isEnumOrSubclass()
-                || !methodCall.getTarget().isConstructor()) {
-              return methodCall;
-            }
+      return MethodCall.Builder.from(methodCall)
+          .appendArgumentsAndUpdateDescriptor(
+              nameVariable.getReference(), ordinalVariable.getReference())
+          .build();
+    }
 
-            List<Variable> methodParameters = ((Method) getCurrentMember()).getParameters();
-            // Retrieve ordinal and name parameters from the method definition.
-            Variable nameVariable = methodParameters.get(methodParameters.size() - 2);
-            Variable ordinalVariable = methodParameters.get(methodParameters.size() - 1);
-            return MethodCall.Builder.from(methodCall)
-                .appendArgumentsAndUpdateDescriptor(
-                    nameVariable.getReference(), ordinalVariable.getReference())
-                .build();
-          }
+    @Override
+    public Node rewriteNewInstance(NewInstance newInstance) {
+      // Rewrite newInstances for the creation of the enum constants to include the assigned ordinal
+      // and name.
+      if (!getCurrentType().isEnum()
+          || !getCurrentMember().isField()
+          || !((Field) getCurrentMember())
+              .getDescriptor()
+              .getTypeDescriptor()
+              .equalsIgnoreNullability(getCurrentType().getDescriptor())) {
 
-          @Override
-          public Node rewriteNewInstance(NewInstance newInstance) {
-            // Rewrite newInstances for the creation of the enum constants to include the assigned
-            // ordinal and name.
-            if (!getCurrentType().isEnum()
-                || !getCurrentMember().isField()
-                || !((Field) getCurrentMember())
-                    .getDescriptor()
-                    .getTypeDescriptor()
-                    .equalsIgnoreNullability(getCurrentType().getDescriptor())) {
+        // Enum constants creations are exactly those that are field initializers for fields
+        // whose class is then enum class.
+        return newInstance;
+      }
+      // This is definitely an enum initialization NewInstance.
 
-              // Enum constants creations are exactly those that are field initializers for fields
-              // whose class is then enum class.
-              return newInstance;
-            }
-            // This is definitely an enum initialization NewInstance.
-            Field enumField = (Field) getCurrentMember();
-            Preconditions.checkState(
-                enumField != null,
-                "Enum values can only be instantiated inside their field initialization");
+      Field enumField = (Field) getCurrentMember();
+      Preconditions.checkState(
+          enumField != null,
+          "Enum values can only be instantiated inside their field initialization");
 
-            int currentOrdinal =
-                ordinalsByEnumTypeDescriptor.add(
-                    enumField.getDescriptor().getEnclosingClassTypeDescriptor(), 1);
+      int currentOrdinal =
+          ordinalsByEnumTypeDescriptor.add(
+              enumField.getDescriptor().getEnclosingClassTypeDescriptor(), 1);
 
-            return NewInstance.Builder.from(newInstance)
-                .appendArgumentsAndUpdateDescriptor(
-                    StringLiteral.fromPlainText(enumField.getDescriptor().getName()),
-                    new NumberLiteral(TypeDescriptors.get().primitiveInt, currentOrdinal))
-                .build();
-          }
-        });
+      return NewInstance.Builder.from(newInstance)
+          .appendArgumentsAndUpdateDescriptor(
+              StringLiteral.fromPlainText(enumField.getDescriptor().getName()),
+              new NumberLiteral(TypeDescriptors.get().primitiveInt, currentOrdinal))
+          .build();
+    }
   }
 }

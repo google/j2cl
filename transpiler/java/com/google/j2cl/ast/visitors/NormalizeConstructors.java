@@ -222,14 +222,12 @@ public class NormalizeConstructors extends NormalizationPass {
                 .getRawTypeDescriptor()
                 .equalsIgnoreNullability(type.getSuperTypeDescriptor().getRawTypeDescriptor()));
 
-    List<Variable> jsConstructorParameters = AstUtils.clone(primaryConstructor.getParameters());
-    List<Expression> arguments = AstUtils.getReferences(primaryConstructor.getParameters());
-
     List<Statement> body = AstUtils.generateFieldDeclarations(type);
+
     // Must call the corresponding the $ctor method.
     MethodDescriptor ctorDescriptor =
         ctorMethodDescriptorFromJavaConstructor(primaryConstructor.getDescriptor());
-
+    List<Expression> arguments = AstUtils.getReferences(primaryConstructor.getParameters());
     MethodCall ctorCall = MethodCall.createMethodCall(null, ctorDescriptor, arguments);
     body.add(new ExpressionStatement(ctorCall));
 
@@ -241,12 +239,7 @@ public class NormalizeConstructors extends NormalizationPass {
         || !type.getSuperTypeDescriptor().isOrSubclassesJsConstructorClass()) {
       superConstructorInvocation = synthesizeEmptySuperCall(type.getSuperTypeDescriptor());
     }
-    body.add(
-        0,
-        AstUtils.replaceVariables(
-            primaryConstructor.getParameters(),
-            jsConstructorParameters,
-            new ExpressionStatement(superConstructorInvocation)));
+    body.add(0, new ExpressionStatement(superConstructorInvocation));
 
     MethodDescriptor.Builder builder =
         MethodDescriptor.Builder.from(primaryConstructor.getDescriptor())
@@ -256,13 +249,14 @@ public class NormalizeConstructors extends NormalizationPass {
     }
     MethodDescriptor constructorDescriptor = builder.build();
 
+    List<Variable> constructorParameters = primaryConstructor.getParameters();
     Method.Builder constructorBuilder =
         Method.Builder.fromDefault()
             .setMethodDescriptor(constructorDescriptor)
-            .setParameters(jsConstructorParameters)
+            .setParameters(constructorParameters)
             .addStatements(body)
             .setJsDocDescription("Real constructor.");
-    for (int i = 0; i < jsConstructorParameters.size(); i++) {
+    for (int i = 0; i < constructorParameters.size(); i++) {
       constructorBuilder.setParameterOptional(i, primaryConstructor.isParameterOptional(i));
     }
     return constructorBuilder.build();
@@ -420,27 +414,21 @@ public class NormalizeConstructors extends NormalizationPass {
               .build();
     }
 
-    List<Variable> factoryMethodParameters = AstUtils.clone(constructor.getParameters());
-    List<Expression> relayArguments = AstUtils.getReferences(factoryMethodParameters);
-
     // let $instance = new Class;
     Variable newInstance =
         Variable.Builder.fromDefault()
             .setName("$instance")
             .setTypeDescriptor(enclosingType)
             .build();
-    VariableDeclarationFragment variableDeclarationFragment =
-        AstUtils.replaceVariables(
-            constructor.getParameters(),
-            factoryMethodParameters,
-            new VariableDeclarationFragment(
-                newInstance, new NewInstance(null, javascriptConstructor, arguments)));
+    VariableDeclarationFragment frag =
+        new VariableDeclarationFragment(
+            newInstance, new NewInstance(null, javascriptConstructor, arguments));
     VariableDeclarationExpression expression =
-        new VariableDeclarationExpression(Arrays.asList(variableDeclarationFragment));
+        new VariableDeclarationExpression(Arrays.asList(frag));
     Statement newInstanceStatement = new ExpressionStatement(expression);
 
-
     // $instance.$ctor...();
+    List<Expression> relayArguments = AstUtils.getReferences(constructor.getParameters());
     MethodCall ctorCall =
         MethodCall.createMethodCall(
             newInstance.getReference(), constructor.getDescriptor(), relayArguments);
@@ -459,7 +447,7 @@ public class NormalizeConstructors extends NormalizationPass {
 
     return Method.Builder.fromDefault()
         .setMethodDescriptor(factoryDescriptorForConstructor(constructor.getDescriptor()))
-        .setParameters(factoryMethodParameters)
+        .setParameters(constructor.getParameters())
         .addStatements(newInstanceStatement, ctorCallStatement, returnStatement)
         .setIsFinal(true)
         .setJsDocDescription("A particular Java constructor as a factory method.")
@@ -482,10 +470,9 @@ public class NormalizeConstructors extends NormalizationPass {
             .setIsVarargs(primaryConstructor.getDescriptor().isVarargs())
             .build();
 
-    List<Variable> factoryMethodParameters = AstUtils.clone(primaryConstructor.getParameters());
-    List<Expression> relayArguments = AstUtils.getReferences(factoryMethodParameters);
-
     // $instance.$ctor...();
+    List<Expression> relayArguments = AstUtils.getReferences(primaryConstructor.getParameters());
+
     MethodDescriptor javascriptConstructorDeclaration =
         MethodDescriptor.Builder.from(javascriptConstructor)
             .setParameterTypeDescriptors(
@@ -502,7 +489,7 @@ public class NormalizeConstructors extends NormalizationPass {
                 primaryConstructor.getDescriptor().getParameterTypeDescriptors())
             .build();
 
-    // return new Class();
+    // return $instance
     Statement returnStatement =
         new ReturnStatement(
             new NewInstance(null, javascriptConstructor, relayArguments),
@@ -510,7 +497,7 @@ public class NormalizeConstructors extends NormalizationPass {
 
     return Method.Builder.fromDefault()
         .setMethodDescriptor(factoryDescriptorForConstructor(primaryConstructor.getDescriptor()))
-        .setParameters(factoryMethodParameters)
+        .setParameters(primaryConstructor.getParameters())
         .addStatements(returnStatement)
         .setIsFinal(true)
         .setJsDocDescription("A particular Java constructor as a factory method.")

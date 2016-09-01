@@ -1,24 +1,11 @@
 package com.google.j2cl.transpiler.readable.jsvarargs;
 
-import java.util.List;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsType;
+
+import java.util.List;
 
 public class Main {
-
-  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
-  static class NativeObject {
-    public NativeObject(Object... pars) {}
-  }
-
-  static class SubVarargsConstructorClass extends NativeObject {
-    public SubVarargsConstructorClass(int i, Object... args) {
-      super(args);
-    }
-  }
-
   @JsFunction
   static interface Function {
     Object f1(int i, Object... args);

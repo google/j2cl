@@ -61,7 +61,6 @@ import com.google.j2cl.ast.visitors.RemoveUnusedMultiExpressionReturnValues;
 import com.google.j2cl.ast.visitors.SplitCompoundLongAssignments;
 import com.google.j2cl.ast.visitors.UnimplementedMethodsCreator;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
-import com.google.j2cl.ast.visitors.VerifySingleAstReference;
 import com.google.j2cl.common.TimingCollector;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.frontend.CompilationUnitBuilder;
@@ -220,7 +219,6 @@ public class J2clTranspiler {
   private void verifyUnit(CompilationUnit j2clUnit) {
     timingCollector.startSample("Verify Unit");
 
-    VerifySingleAstReference.applyTo(j2clUnit);
     VerifyParamAndArgCounts.applyTo(j2clUnit);
   }
 
