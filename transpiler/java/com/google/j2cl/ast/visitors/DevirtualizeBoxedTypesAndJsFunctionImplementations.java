@@ -52,7 +52,10 @@ public class DevirtualizeBoxedTypesAndJsFunctionImplementations extends Normaliz
       // Turn the instance method to an empty method since it should not be called. But we should
       // not delete it otherwise it may lead to JSCompiler errors that complains that the class does
       // not implement all the methods in its super interfaces.
-      return Method.Builder.from(method).clearStatements().build();
+      return Method.Builder.from(method)
+          .clearStatements()
+          .setParameters(AstUtils.clone(method.getParameters()))
+          .build();
     }
 
     private boolean shouldDevirtualize(Method method) {

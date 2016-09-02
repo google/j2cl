@@ -151,4 +151,19 @@ public class JsConstructorClass {
       SubVarargs s2 = new SubVarargs(new Object(), 1, 2, 3);
     }
   }
+
+  public static class RegularType {
+    public RegularType(Object b) {}
+  }
+
+  public static class JsConstructorSubtypeOfRegularType extends RegularType {
+    @JsConstructor
+    public JsConstructorSubtypeOfRegularType(Object object) {
+      super(object);
+    }
+
+    public JsConstructorSubtypeOfRegularType() {
+      super(new Object());
+    }
+  }
 }

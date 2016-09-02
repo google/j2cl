@@ -1158,6 +1158,20 @@ public class AstUtils {
    * Replaces references to variables in {@code fromVariables} to reference to variables in {@code
    * toVariables}.
    */
+  public static <T extends Node> List<T> replaceVariables(
+      List<Variable> fromVariables, List<Variable> toVariable, List<T> nodes) {
+    List<T> result = new ArrayList<>();
+    for (T node : nodes) {
+      result.add(replaceVariables(fromVariables, toVariable, node));
+    }
+    return result;
+  }
+
+  @SuppressWarnings("unchecked")
+  /**
+   * Replaces references to variables in {@code fromVariables} to reference to variables in {@code
+   * toVariables}.
+   */
   public static <T extends Node> T replaceVariables(
       List<Variable> fromVariables, List<Variable> toVariable, T node) {
     class VariableReplacer extends AbstractRewriter {

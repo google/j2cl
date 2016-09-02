@@ -59,7 +59,7 @@ public class OperatorSideEffectUtils {
     // care to only dereference the qualifier once (to avoid double side effects), store it in a
     // temporary variable and use that temporary variable in the rest of the computation.
     // q.a += b; => (Numbers.$q = q, Numbers.$q.a = Numbers.$q.a + b)
-    Expression qualifier = ((FieldAccess) leftOperand).getQualifier();
+    Expression qualifier = ((FieldAccess) leftOperand).getQualifier().clone();
     BinaryExpression assignQualifier =
         new BinaryExpression(
             qualifier.getTypeDescriptor(),
@@ -89,7 +89,9 @@ public class OperatorSideEffectUtils {
               operand); //Numbers.$v = boxA
       BinaryExpression assignment =
           expandExpressionNoQualifier(
-              operand, operator.getUnderlyingBinaryOperator(), createLiteralOne(typeDescriptor));
+              operand.clone(),
+              operator.getUnderlyingBinaryOperator(),
+              createLiteralOne(typeDescriptor));
       return new MultiExpression(
           assignVar,
           assignment,
@@ -102,7 +104,7 @@ public class OperatorSideEffectUtils {
     // q.a++; =>
     // (Numbers.$q = q, Numbers.$v = Numbers.$q.a, Numbers.$q.a = Numbers.$q.a + 1, Numbers.$v)
     FieldAccess fieldAccess = (FieldAccess) operand;
-    Expression qualifier = fieldAccess.getQualifier();
+    Expression qualifier = fieldAccess.getQualifier().clone();
     FieldDescriptor target = fieldAccess.getTarget();
 
     BinaryExpression assignQualifier =
@@ -202,7 +204,7 @@ public class OperatorSideEffectUtils {
             new BinaryExpression(
                 binaryOperationResultType(
                     operator, leftOperand.getTypeDescriptor(), rightOperand.getTypeDescriptor()),
-                leftOperand,
+                leftOperand.clone(),
                 operator,
                 rightOperand))
         .build();
