@@ -15,7 +15,7 @@ __class.createNativeObjectWithToString = function() {
 /**
  * @return {*}
  */
-__class.createEmptyNativeObject = function() {
+__class.createNativeObject = function() {
   return {};
 };
 
@@ -29,13 +29,41 @@ __class.createNativeArray = function() {
 /**
  * @return {*}
  */
-__class.createNativeObjectWithEquals = function(x) {
-  return {field: x, equals: function(other) { return other.field == 10; }};
+__class.createFunction = function() {
+  return function() {};
 };
 
 /**
  * @return {*}
  */
-__class.createNativeObjectWithHashCode = function() {
-  return {hashCode: function() { return 100; }};
+__class.createNumber = function() {
+  return 42;
+};
+
+/**
+ * @return {*}
+ */
+__class.createBoxedNumber = function() {
+  return new Number(42);
+};
+
+/**
+ * @return {*}
+ */
+__class.createBoxedString = function() {
+  return new String('hello');
+};
+
+/**
+ * @return {*}
+ */
+__class.createNativeSubclass = function() {
+  return {
+    add: function(e) { this[0] = e; },
+    remove: function(e) {
+      var ret = this[0] == e;
+      this[0] = undefined;
+      return ret;
+    }
+  };
 };

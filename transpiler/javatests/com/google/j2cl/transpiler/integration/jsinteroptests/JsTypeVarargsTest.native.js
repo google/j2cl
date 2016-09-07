@@ -1,15 +1,15 @@
 /**
  * @return {number}
  */
-__class.varargsMethod1 = function() {
+__class.varargsLengthThruArguments = function() {
   return arguments.length;
 };
 
 /**
  * @return {*}
  */
-__class.callVarargsMethod3FromJSNI = function() {
-  return __class.varargsMethod3(2, '1', '2', '3', '4');
+__class.callGetVarargsSlotUsingJsName = function() {
+  return __class.getVarargsSlot(2, '1', '2', '3', '4');
 };
 
 /**

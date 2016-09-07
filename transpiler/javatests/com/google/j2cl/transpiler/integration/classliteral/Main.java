@@ -1,5 +1,9 @@
 package com.google.j2cl.transpiler.integration.classliteral;
 
+import jsinterop.annotations.JsFunction;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
+
 class GenericClass<T> {}
 
 interface GenericInterface<T> {}
@@ -150,6 +154,19 @@ public class Main {
   @SuppressWarnings("GetClassOnClass")
   public static void testMisc() {
     assertSame(Class.class, int.class.getClass());
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  interface NativeType {}
+
+  @JsFunction
+  interface NativeFunction {
+    void f();
+  }
+
+  public static void testNative() {
+    assertEquals("JavaScriptObject", NativeType.class.getName());
+    assertEquals("JavaScriptFunction", NativeFunction.class.getName());
   }
 
   public static void testGeneric() {

@@ -11,6 +11,7 @@ public class Main {
     runJsTypeTest();
     runNativeJsTypeTest();
     runJsTypeVarargsTest();
+    runJsTypeObjectMethodsTest();
   }
 
   public static void runJsExportTest() {
@@ -148,11 +149,13 @@ public class Main {
   public static void runNativeJsTypeTest() {
     NativeJsTypeTest test = new NativeJsTypeTest();
     test.testClassLiterals();
-    test.testToString();
-    test.testEquals();
-    test.testHashCode();
+    test.testGetClass();
+    test.testEqualityOptimization();
+    test.testClassLiterals();
     test.testNativeJsTypeWithOverlay();
     test.testNativeJsTypeWithStaticIntializer();
+    test.testSpecialNativeInstanceOf();
+    test.testForwaringMethodsOnNativeClasses();
   }
 
   public static void runJsTypeVarargsTest() {
@@ -161,7 +164,15 @@ public class Main {
     test.testVarargsCall_fromJavaScript();
     test.testVarargsCall_jsFunction();
     test.testVarargsCall_regularMethods();
+    test.testVarargsCall_edgeCases();
     test.testVarargsCall_superCalls();
     test.testVarargsCall_sideEffectingInstance();
+  }
+
+  public static void runJsTypeObjectMethodsTest() {
+    JsTypeObjectMethodsTest test = new JsTypeObjectMethodsTest();
+    test.testEquals();
+    test.testHashCode();
+    test.testJavaLangObjectMethodsOrNativeSubtypes();
   }
 }

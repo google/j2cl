@@ -14,4 +14,5 @@ load(
 integration_test(
     name = "classliteral",
     srcs = glob(["*.java"]),
+    deps = ["//jre/java:gwt-jsinterop-annotations"],
 )

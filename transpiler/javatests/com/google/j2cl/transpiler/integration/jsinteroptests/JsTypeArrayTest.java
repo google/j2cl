@@ -17,13 +17,12 @@ package com.google.j2cl.transpiler.integration.jsinteroptests;
 
 import static jsinterop.annotations.JsPackage.GLOBAL;
 
+import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
-/**
- * Tests JsType with array functionality.
- */
+/** Tests JsType with array functionality. */
 public class JsTypeArrayTest extends MyTestCase {
   /* MAKE SURE EACH TYPE IS ONLY USED ONCE PER TEST CASE */
 
@@ -120,11 +119,7 @@ public class JsTypeArrayTest extends MyTestCase {
   public void testObjectArray_castFromNative() {
     SimpleJsTypeReturnForMultiDimArray[] array =
         (SimpleJsTypeReturnForMultiDimArray[]) returnObjectArrayFromNative();
-    try {
-      assertNotNull((Object[]) array);
-
-    } catch (ClassCastException expected) {
-    }
+    assertNotNull((Object[]) array);
     assertEquals(3, array.length);
     assertEquals("1", array[0]);
   }
@@ -157,7 +152,6 @@ public class JsTypeArrayTest extends MyTestCase {
 
   public void testJsTypeArray_instanceOf() {
     Object array = returnJsType3DimFromNative();
-    // currently it returns false in GWT, but should be fixed to return true finally.
     assertTrue(array instanceof Object[]);
     assertFalse(array instanceof Double[]);
     assertFalse(array instanceof int[]);
@@ -167,6 +161,40 @@ public class JsTypeArrayTest extends MyTestCase {
     assertTrue(array instanceof SimpleJsTypeReturnForMultiDimArray[][][]);
   }
 
+  @JsFunction
+  interface SomeFunction {
+    int m(int i);
+  }
+
+  @JsFunction
+  interface SomeOtherFunction {
+    int m(int i);
+  }
+
+  public void testJsFunctionArray() {
+    Object[] array = new SomeFunction[10];
+
+    array[0] = returnSomeFunction();
+
+    assertTrue(array instanceof SomeFunction[]);
+    assertFalse(array instanceof SomeOtherFunction[]);
+
+    try {
+      SomeOtherFunction[] other = (SomeOtherFunction[]) array;
+      fail("Should have thrown");
+    } catch (ClassCastException expected) {
+    }
+
+    try {
+      array[1] = new Object();
+      fail("Should have thrown");
+    } catch (ArrayStoreException expected) {
+    }
+  }
+
   @JsMethod
   private static native Object returnObjectArrayFromNative();
+
+  @JsMethod
+  private static native Object returnSomeFunction();
 }

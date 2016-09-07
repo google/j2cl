@@ -44,3 +44,10 @@ __class.getSimpleJsType = function(i) {
 __class.returnObjectArrayFromNative = function() {
   return ['1', '2', '3'];
 };
+
+/**
+ * @return {*}
+ */
+__class.returnSomeFunction = function() {
+  return function(a) { return a + 2; };
+};

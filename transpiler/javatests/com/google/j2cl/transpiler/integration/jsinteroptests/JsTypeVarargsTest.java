@@ -7,27 +7,43 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsType;
 
 public class JsTypeVarargsTest extends MyTestCase {
-  @JsMethod
-  public static native int varargsMethod1(Object... varargs);
 
   @JsMethod
-  public static int varargsMethod2(Object... varargs) {
+  private static native int varargsLengthThruArguments(Object... varargs);
+
+  @JsMethod
+  private static int varargsLength(Object... varargs) {
     return varargs.length;
   }
 
   @JsMethod
-  public static Object varargsMethod3(int slot, Object... varargs) {
+  private static int stringVarargsLength(String... varargs) {
+    return varargs.length;
+  }
+
+  @JsMethod
+  private int stringVarargsLengthV2(int i, String... varargs) {
+    return varargs.length;
+  }
+
+  @JsMethod
+  private static Object getVarargsSlot(int slot, Object... varargs) {
     return varargs[slot];
   }
 
   @JsMethod
-  public static Object[] varargsMethod4(int slot, Object... varargs) {
+  private Object[] clrearVarargsSlot(int slot, Object... varargs) {
     varargs[slot] = null;
     return varargs;
   }
 
   @JsMethod
-  private static native Object callVarargsMethod3FromJSNI();
+  private Class<?> getVarargsArrayClass(String... varargs) {
+    return varargs.getClass();
+  }
+
+  @JsMethod
+  private static native Object callGetVarargsSlotUsingJsName();
 
   @JsType(isNative = true, namespace = GLOBAL, name = "Object")
   static class NativeJsType {}
@@ -75,34 +91,61 @@ public class JsTypeVarargsTest extends MyTestCase {
   }
 
   public void testVarargsCall_regularMethods() {
-    // pass multiple args
-    assertEquals(3, varargsMethod1("A", "B", "C"));
-    assertEquals(4, varargsMethod2("A", "B", "C", "D"));
-    // pass array literal
-    assertEquals(2, varargsMethod1(new NativeJsType[] {null, null}));
-    assertEquals(5, varargsMethod2(new NativeJsType[] {null, null, null, null, null}));
-    Object[] o1 = new Object[] {"A", "B", "C"};
-    Object[] o2 = new Object[] {"A", "B", "C", "D"};
-    // pass array instance
-    assertEquals(3, varargsMethod1("A", "B", "C"));
-    assertEquals(4, varargsMethod2("A", "B", "C", "D"));
-    // pass no args
-    assertEquals(0, varargsMethod1());
-    assertEquals(0, varargsMethod2());
-    // pass empty array literal
-    assertEquals(0, varargsMethod1(new Object[] {}));
-    assertEquals(0, varargsMethod2(new Object[] {}));
-    // pass empty array instance
-    Object[] o3 = new Object[] {"A", "B", "C"};
-    Object[] o4 = new Object[] {"A", "B", "C", "D"};
-    assertEquals(3, varargsMethod1(o3));
-    assertEquals(4, varargsMethod2(o4));
+    assertEquals(3, varargsLengthThruArguments("A", "B", "C"));
+    assertEquals(4, varargsLength("A", "B", "C", "D"));
+    assertEquals(2, varargsLengthThruArguments(new NativeJsType[] {null, null}));
+    assertEquals(5, varargsLength(new NativeJsType[] {null, null, null, null, null}));
+    assertEquals("C", getVarargsSlot(2, "A", "B", "C", "D"));
+    assertEquals("3", callGetVarargsSlotUsingJsName());
+    assertNull(clrearVarargsSlot(1, "A", "B", "C")[1]);
+    assertEquals("A", clrearVarargsSlot(1, "A", "B", "C")[0]);
+    assertEquals(3, clrearVarargsSlot(1, "A", "B", "C").length);
+    assertSame(String[].class, getVarargsArrayClass("A", "B", "C"));
+  }
 
-    assertEquals("C", varargsMethod3(2, "A", "B", "C", "D"));
-    assertEquals("3", callVarargsMethod3FromJSNI());
-    assertNull(varargsMethod4(1, "A", "B", "C")[1]);
-    assertEquals("A", varargsMethod4(1, "A", "B", "C")[0]);
-    assertEquals(3, varargsMethod4(1, "A", "B", "C").length);
+  public void testVarargsCall_edgeCases() {
+    assertSame(String[].class, getVarargsArrayClass());
+    assertSame(String[].class, getVarargsArrayClass(new String[0]));
+    assertSame(String[].class, getVarargsArrayClass((String) null));
+    try {
+      assertSame(String[].class, getVarargsArrayClass(null));
+      fail("Should have thrown exception");
+    } catch (NullPointerException expected) {
+    }
+    try {
+      assertSame(String[].class, getVarargsArrayClass((String[]) null));
+      fail("Should have thrown exception");
+    } catch (NullPointerException expected) {
+    }
+
+    assertEquals(0, stringVarargsLength());
+    assertEquals(0, stringVarargsLength(new String[0]));
+    assertEquals(1, stringVarargsLength((String) null));
+    try {
+      assertEquals(0, stringVarargsLength(null));
+      fail("Should have thrown exception");
+    } catch (NullPointerException expected) {
+    }
+    try {
+      assertEquals(0, stringVarargsLength((String[]) null));
+      fail("Should have thrown exception");
+    } catch (NullPointerException expected) {
+    }
+
+    // Test with an additional parameter as it results in a slightly different call site.
+    assertEquals(0, stringVarargsLengthV2(0));
+    assertEquals(0, stringVarargsLengthV2(0, new String[0]));
+    assertEquals(1, stringVarargsLengthV2(0, (String) null));
+    try {
+      assertEquals(0, stringVarargsLengthV2(0, null));
+      fail("Should have thrown exception");
+    } catch (NullPointerException expected) {
+    }
+    try {
+      assertEquals(0, stringVarargsLengthV2(0, (String[]) null));
+      fail("Should have thrown exception");
+    } catch (NullPointerException expected) {
+    }
   }
 
   public void testVarargsCall_constructors() {
@@ -118,11 +161,6 @@ public class JsTypeVarargsTest extends MyTestCase {
 
     assertSame(someNativeObject, object.a);
     assertEquals(3, object.b);
-
-    object = new SubNativeWithVarargsConstructor("", someNativeObject, null);
-
-    assertSame(someNativeObject, object.a);
-    assertEquals(4, object.b);
 
     object = new SubNativeWithVarargsConstructor(1, someNativeObject, null);
 
