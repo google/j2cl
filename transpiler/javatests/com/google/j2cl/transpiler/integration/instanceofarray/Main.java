@@ -27,6 +27,7 @@ public class Main {
     assert !(object instanceof Object[][]);
     assert !(object instanceof String[]);
     assert !(object instanceof String[][]);
+    assert !(object instanceof int[]);
 
     Object objects1d = new Object[1];
     assert objects1d instanceof Object;
@@ -34,6 +35,7 @@ public class Main {
     assert !(objects1d instanceof Object[][]);
     assert !(objects1d instanceof String[]);
     assert !(objects1d instanceof String[][]);
+    assert !(objects1d instanceof int[]);
 
     Object strings1d = new String[1];
     assert strings1d instanceof Object;
@@ -41,6 +43,7 @@ public class Main {
     assert !(strings1d instanceof Object[][]);
     assert strings1d instanceof String[];
     assert !(strings1d instanceof String[][]);
+    assert !(strings1d instanceof int[]);
 
     Object objects2d = new Object[1][1];
     assert objects2d instanceof Object;
@@ -48,6 +51,7 @@ public class Main {
     assert objects2d instanceof Object[][];
     assert !(objects2d instanceof String[]);
     assert !(objects2d instanceof String[][]);
+    assert !(objects2d instanceof int[]);
 
     Object strings2d = new String[1][1];
     assert strings2d instanceof Object;
@@ -55,5 +59,15 @@ public class Main {
     assert strings2d instanceof Object[][];
     assert !(strings2d instanceof String[]);
     assert strings2d instanceof String[][];
+    assert !(strings2d instanceof int[]);
+
+    // TODO(b/27535137): uncomment
+    //    Object ints1d = new int[1];
+    //    assert ints1d instanceof Object;
+    //    assert !(ints1d instanceof Object[]);
+    //    assert !(ints1d instanceof Object[][]);
+    //    assert !(ints1d instanceof String[]);
+    //    assert !(ints1d instanceof String[][]);
+    //    assert ints1d instanceof int[];
   }
 }
