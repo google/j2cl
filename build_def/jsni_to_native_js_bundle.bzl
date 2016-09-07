@@ -75,12 +75,12 @@ _jsni_to_j2cl_converter = rule(
         # TODO(cpovirk): Find a less evil solution, maybe based on
         # http://b/27044764
         "deps": attr.label_list(
-            cfg=HOST_CFG,
+            cfg="host",
             allow_files=FileType([".jar"]),
         ),
         "excludes": attr.string_list(default=[]),
         "converter_tool": attr.label(
-            cfg=HOST_CFG,
+            cfg="host",
             allow_files=True,
             executable=True,
             default=Label("//third_party/java/j2cl:JsniConverter")

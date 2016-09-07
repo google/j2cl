@@ -146,7 +146,7 @@ j2cl_transpile = rule(
         "readable_source_maps": attr.bool(default=False),
         "declare_legacy_namespace": attr.bool(default=False),
         "transpiler": attr.label(
-            cfg=HOST_CFG,
+            cfg="host",
             executable=True,
             allow_files=True,
             default=Label("//third_party/java/j2cl:J2clTranspiler"),
