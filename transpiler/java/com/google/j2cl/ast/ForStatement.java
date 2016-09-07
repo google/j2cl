@@ -27,10 +27,13 @@ import javax.annotation.Nullable;
  */
 @Visitable
 public class ForStatement extends Statement {
-  @Visitable @Nullable Expression conditionExpression;
-  @Visitable Statement body;
+  // The visitors traverse the @Visitable members of the class in the order they appear.
+  // The components of the ForStatement need to be traversed in order so that variable declarations
+  // are visited before their references.
   @Visitable List<Expression> initializers = new ArrayList<>();
+  @Visitable @Nullable Expression conditionExpression;
   @Visitable List<Expression> updates = new ArrayList<>();
+  @Visitable Statement body;
 
   public ForStatement(
       Expression conditionExpression,

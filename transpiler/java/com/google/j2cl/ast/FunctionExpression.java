@@ -24,8 +24,10 @@ import java.util.List;
  */
 @Visitable
 public class FunctionExpression extends Expression {
-  @Visitable Block body;
+  // The visitors traverse the @Visitable members of the class in the order they appear.
+  // The parameter declarations need to be traversed before the body.
   @Visitable final List<Variable> parameters;
+  @Visitable Block body;
   private final TypeDescriptor typeDescriptor;
 
   @Override

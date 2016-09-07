@@ -21,7 +21,6 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Visitable;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -96,6 +95,14 @@ public abstract class Invocation extends Expression implements MemberReference {
       arguments.add(argumentExpression);
       methodDescriptor =
           MethodDescriptors.createWithExtraParameters(methodDescriptor, parameterTypeDescriptor);
+      return this;
+    }
+
+    public Builder appendArgumentsAndUpdateDescriptors(
+        Iterable<Expression> extraArguments, Iterable<TypeDescriptor> parameterTypeDescriptors) {
+      Iterables.addAll(arguments, extraArguments);
+      methodDescriptor =
+          MethodDescriptors.createWithExtraParameters(methodDescriptor, parameterTypeDescriptors);
       return this;
     }
 

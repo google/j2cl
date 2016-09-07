@@ -62,6 +62,7 @@ import com.google.j2cl.ast.visitors.SplitCompoundLongAssignments;
 import com.google.j2cl.ast.visitors.UnimplementedMethodsCreator;
 import com.google.j2cl.ast.visitors.VerifyParamAndArgCounts;
 import com.google.j2cl.ast.visitors.VerifySingleAstReference;
+import com.google.j2cl.ast.visitors.VerifyVariableScoping;
 import com.google.j2cl.common.TimingCollector;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.frontend.CompilationUnitBuilder;
@@ -222,6 +223,7 @@ public class J2clTranspiler {
 
     VerifySingleAstReference.applyTo(j2clUnit);
     VerifyParamAndArgCounts.applyTo(j2clUnit);
+    VerifyVariableScoping.applyTo(j2clUnit);
   }
 
   private void generateOutputs(List<CompilationUnit> j2clCompilationUnits) {

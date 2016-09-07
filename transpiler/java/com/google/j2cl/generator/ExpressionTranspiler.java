@@ -38,6 +38,7 @@ import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.NewArray;
 import com.google.j2cl.ast.NewInstance;
+import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NullLiteral;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.PostfixExpression;
@@ -393,24 +394,21 @@ public class ExpressionTranspiler {
       }
 
       private void renderDelimitedAndSeparated(
-          String prefix,
-          String separator,
-          String suffix,
-          Iterable<? extends Expression> expressions) {
+          String prefix, String separator, String suffix, Iterable<? extends Node> nodes) {
         sourceBuilder.append(prefix);
-        renderSeparated(separator, expressions);
+        renderSeparated(separator, nodes);
         sourceBuilder.append(suffix);
       }
 
-      private void renderSeparated(String separator, Iterable<? extends Expression> expressions) {
+      private void renderSeparated(String separator, Iterable<? extends Node> nodes) {
         String currentSeparator = "";
-        for (Expression expression : expressions) {
-          if (expression == null) {
+        for (Node node : nodes) {
+          if (node == null) {
             continue;
           }
           sourceBuilder.append(currentSeparator);
           currentSeparator = separator;
-          process(expression);
+          process(node);
         }
       }
 

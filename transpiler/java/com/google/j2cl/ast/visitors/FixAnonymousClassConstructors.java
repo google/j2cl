@@ -17,6 +17,7 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AnonymousType;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Method;
@@ -51,7 +52,6 @@ public class FixAnonymousClassConstructors extends NormalizationPass {
 
   private static class AnonymousClassConstructorRewriter extends AbstractRewriter {
     private final List<Variable> constructorParameters = new ArrayList<>();
-    private final List<Variable> superConstructorParameters = new ArrayList<>();
 
     @Override
     public boolean shouldProcessType(Type type) {
@@ -61,7 +61,6 @@ public class FixAnonymousClassConstructors extends NormalizationPass {
       AnonymousType anonymousType = (AnonymousType) type;
       // Create and collect parameters for the default constructor of only the current Type.
       constructorParameters.clear();
-      superConstructorParameters.clear();
       int i = 0;
       for (TypeDescriptor parameterTypeDescriptor :
           anonymousType.getConstructorParameterTypeDescriptors()) {
@@ -72,17 +71,6 @@ public class FixAnonymousClassConstructors extends NormalizationPass {
                 .setIsParameter(true)
                 .build();
         constructorParameters.add(parameter);
-      }
-      int j = 0;
-      for (TypeDescriptor parameterTypeDescriptor :
-          anonymousType.getSuperConstructorParameterTypeDescriptors()) {
-        Variable parameter =
-            Variable.Builder.fromDefault()
-                .setName("$_" + j++)
-                .setTypeDescriptor(parameterTypeDescriptor)
-                .setIsParameter(true)
-                .build();
-        superConstructorParameters.add(parameter);
       }
       return true;
     }
@@ -105,12 +93,11 @@ public class FixAnonymousClassConstructors extends NormalizationPass {
         return methodCall;
       }
 
-      MethodCall.Builder methodCallBuilder = MethodCall.Builder.from(methodCall);
-      for (Variable parameter : superConstructorParameters) {
-        methodCallBuilder.appendArgumentAndUpdateDescriptor(parameter.getReference());
-      }
-
-      return methodCallBuilder.build();
+      return MethodCall.Builder.from(methodCall)
+          .appendArgumentsAndUpdateDescriptors(
+              AstUtils.getReferences(constructorParameters),
+              ((AnonymousType) getCurrentType()).getSuperConstructorParameterTypeDescriptors())
+          .build();
     }
   }
 

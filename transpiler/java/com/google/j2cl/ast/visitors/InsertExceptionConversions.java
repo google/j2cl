@@ -28,7 +28,6 @@ import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.ThrowStatement;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
-import com.google.j2cl.ast.Variable;
 
 /**
  * Adds Java Throwable to JavaScript Error conversion.
@@ -61,10 +60,6 @@ public class InsertExceptionConversions extends NormalizationPass {
   private static class Rewriter extends AbstractRewriter {
     @Override
     public Node rewriteCatchClause(CatchClause catchClause) {
-      Variable mainVariable =
-          Variable.Builder.from(catchClause.getExceptionVar())
-              .setTypeDescriptor(TypeDescriptors.get().javaLangObject)
-              .build();
 
       MethodDescriptor toJava =
           MethodDescriptor.Builder.fromDefault()
@@ -77,10 +72,12 @@ public class InsertExceptionConversions extends NormalizationPass {
               .build();
 
       MethodCall toJavaCall =
-          MethodCall.createMethodCall(null, toJava, mainVariable.getReference());
+          MethodCall.createMethodCall(null, toJava, catchClause.getExceptionVar().getReference());
 
       Expression assignment =
-          BinaryExpression.Builder.asAssignmentTo(mainVariable).setRightOperand(toJavaCall).build();
+          BinaryExpression.Builder.asAssignmentTo(catchClause.getExceptionVar())
+              .setRightOperand(toJavaCall)
+              .build();
 
       catchClause.getBody().getStatements().add(0, new ExpressionStatement(assignment));
 

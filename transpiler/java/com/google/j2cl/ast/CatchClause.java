@@ -24,8 +24,10 @@ import java.util.Collections;
 /** Class for catch clause. */
 @Visitable
 public class CatchClause extends Node implements Cloneable<CatchClause> {
-  @Visitable Block body;
+  // The visitors traverse the @Visitable members of the class in the order they appear.
+  // The variable definition needs to be traversed before the body of the the catch clause.
   @Visitable Variable exceptionVar;
+  @Visitable Block body;
 
   public CatchClause(Block body, Variable exceptionVar) {
     this.body = checkNotNull(body);

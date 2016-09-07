@@ -550,9 +550,7 @@ class ToStringRenderer {
       @Override
       public boolean enterVariableDeclarationFragment(
           VariableDeclarationFragment variableDeclarationFragment) {
-        print(variableDeclarationFragment.getTypeDescriptor());
-        print(" ");
-        print(variableDeclarationFragment.getVariable().getName());
+        accept(variableDeclarationFragment.getVariable());
         if (variableDeclarationFragment.getInitializer() != null) {
           print(" = ");
           accept(variableDeclarationFragment.getInitializer());

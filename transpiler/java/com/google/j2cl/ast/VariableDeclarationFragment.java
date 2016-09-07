@@ -18,6 +18,7 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
+import com.google.j2cl.ast.common.Cloneable;
 import javax.annotation.Nullable;
 
 /**
@@ -26,7 +27,8 @@ import javax.annotation.Nullable;
  * <p>From the statement int i = 0; the fragment would represent i = 0;
  */
 @Visitable
-public class VariableDeclarationFragment extends Expression {
+public class VariableDeclarationFragment extends Node
+    implements Cloneable<VariableDeclarationFragment> {
   @Visitable Variable variable;
   @Visitable @Nullable Expression initializer;
 
@@ -50,11 +52,6 @@ public class VariableDeclarationFragment extends Expression {
   @Override
   public Node accept(Processor processor) {
     return Visitor_VariableDeclarationFragment.visit(processor, this);
-  }
-
-  @Override
-  public TypeDescriptor getTypeDescriptor() {
-    return TypeDescriptors.get().primitiveVoid;
   }
 
   @Override

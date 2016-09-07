@@ -27,10 +27,13 @@ import javax.annotation.Nullable;
  */
 @Visitable
 public class TryStatement extends Statement {
+  // The visitors traverse the @Visitable members of the class in the order they appear.
+  // The resource declarations contain variable definitions that need to be traversed before
+  // the rest of the statements.
+  @Visitable final List<VariableDeclarationExpression> resourceDeclarations = new ArrayList<>();
   @Visitable Block body;
   @Visitable List<CatchClause> catchClauses = new ArrayList<>();
   @Visitable @Nullable Block finallyBlock;
-  private List<VariableDeclarationExpression> resourceDeclarations = new ArrayList<>();
 
   public TryStatement(
       List<VariableDeclarationExpression> resourceDeclarations,
