@@ -152,10 +152,10 @@ public class EnumMethodsCreator {
             FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build(),
             BinaryOperator.EQUALS,
             NullLiteral.NULL);
-    Expression valuesCall = MethodCall.createMethodCall(null, valuesMethodDescriptor);
+    Expression valuesCall = MethodCall.Builder.from(valuesMethodDescriptor).build();
 
     Expression createMapCall =
-        MethodCall.createMethodCall(null, createMapMethodDescriptor, valuesCall);
+        MethodCall.Builder.from(createMapMethodDescriptor).setArguments(valuesCall).build();
     Expression assignMapCallToField =
         BinaryExpression.Builder.asAssignmentTo(
                 FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build())
@@ -167,11 +167,11 @@ public class EnumMethodsCreator {
 
     // Return statement
     Expression getMethodCall =
-        MethodCall.createMethodCall(
-            null,
-            getMethodDescriptor,
-            nameParameter.getReference(),
-            FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build());
+        MethodCall.Builder.from(getMethodDescriptor)
+            .setArguments(
+                nameParameter.getReference(),
+                FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build())
+            .build();
     Statement returnStatement =
         new ReturnStatement(
             getMethodCall, TypeDescriptors.getForArray(enumType.getDescriptor(), 1));

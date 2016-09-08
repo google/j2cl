@@ -19,7 +19,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.ast.annotations.Visitable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nullable;
 
@@ -31,19 +30,17 @@ public class NewInstance extends Invocation {
   @Visitable @Nullable Expression qualifier;
   @Visitable MethodDescriptor constructorMethodDescriptor;
   @Visitable List<Expression> arguments = new ArrayList<>();
+  private boolean isAnonymousClassCreation = false;
 
-  public NewInstance(
-      Expression qualifier, MethodDescriptor constructorDescriptor, Expression... arguments) {
-    this(qualifier, constructorDescriptor, Arrays.asList(arguments));
-  }
-
-  public NewInstance(
+  private NewInstance(
       Expression qualifier,
       MethodDescriptor constructorMethodDescriptor,
-      List<Expression> arguments) {
+      List<Expression> arguments,
+      boolean isAnonymousClassCreation) {
     this.constructorMethodDescriptor = checkNotNull(constructorMethodDescriptor);
     this.qualifier = qualifier;
     this.arguments.addAll(checkNotNull(arguments));
+    this.isAnonymousClassCreation = isAnonymousClassCreation;
   }
 
   @Override
@@ -66,12 +63,17 @@ public class NewInstance extends Invocation {
     return constructorMethodDescriptor.getEnclosingClassTypeDescriptor();
   }
 
+  public boolean isAnonymousClassCreation() {
+    return isAnonymousClassCreation;
+  }
+
   @Override
   public NewInstance clone() {
     return new NewInstance(
         qualifier != null ? qualifier.clone() : null,
         constructorMethodDescriptor,
-        AstUtils.clone(arguments));
+        AstUtils.clone(arguments),
+        isAnonymousClassCreation);
   }
 
   @Override
@@ -91,8 +93,37 @@ public class NewInstance extends Invocation {
    * list in sync.
    */
   public static class Builder extends Invocation.Builder {
+    private boolean isAnonymousClassCreation = false;
     public static Builder from(NewInstance newInstance) {
       return new Builder(newInstance);
+    }
+
+    public static Builder from(MethodDescriptor constructorDescriptor) {
+      Builder builder = new Builder();
+      builder.setMethodDescriptor(constructorDescriptor);
+      return builder;
+    }
+
+    @Override
+    public Builder setQualifier(Expression qualifier) {
+      super.setQualifier(qualifier);
+      return this;
+    }
+
+    @Override
+    public Builder setArguments(List<Expression> arguments) {
+      super.setArguments(arguments);
+      return this;
+    }
+
+    public Builder setIsAnonymousClassCreation(boolean anonymousClassCreation) {
+      this.isAnonymousClassCreation = anonymousClassCreation;
+      return this;
+    }
+
+    @Override
+    public NewInstance build() {
+      return (NewInstance) super.build();
     }
 
     @Override
@@ -100,11 +131,14 @@ public class NewInstance extends Invocation {
         Expression qualifierExpression,
         MethodDescriptor methodDescriptor,
         List<Expression> arguments) {
-      return new NewInstance(qualifierExpression, methodDescriptor, arguments);
+      return new NewInstance(
+          qualifierExpression, methodDescriptor, arguments, isAnonymousClassCreation);
     }
     
     private Builder(NewInstance newInstance) {
       super(newInstance);
     }
+
+    private Builder() {}
   }
 }

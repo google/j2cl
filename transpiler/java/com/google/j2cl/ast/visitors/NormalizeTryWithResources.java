@@ -170,12 +170,12 @@ public class NormalizeTryWithResources extends NormalizationPass {
       List<Statement> finallyBlockStatments = new ArrayList<>();
       for (VariableDeclarationExpression declaration : Lists.reverse(resourceDeclarations)) {
         MethodCall safeCloseCall =
-            MethodCall.createMethodCall(
-                null,
-                safeClose,
-                Arrays.asList(
-                    declaration.getFragments().get(0).getVariable().getReference(),
-                    primaryException.getReference()));
+            MethodCall.Builder.from(safeClose)
+                .setArguments(
+                    Arrays.asList(
+                        declaration.getFragments().get(0).getVariable().getReference(),
+                        primaryException.getReference()))
+                .build();
         Expression assignExceptionFromSafeCloseCall =
             BinaryExpression.Builder.asAssignmentTo(primaryException)
                 .setRightOperand(safeCloseCall)

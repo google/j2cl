@@ -355,9 +355,11 @@ public class AstUtils {
     // TODO: Casts are probably needed on arguments if the types differ between the
     // targetMethodDescriptor and its declarationMethodDescriptor.
     Expression forwardingMethodCall =
-        isStaticDispatch
-            ? MethodCall.createStaticDispatchMethodCall(qualifier, toMethodDescriptor, arguments)
-            : MethodCall.createMethodCall(qualifier, toMethodDescriptor, arguments);
+        MethodCall.Builder.from(toMethodDescriptor)
+            .setQualifier(qualifier)
+            .setArguments(arguments)
+            .setIsStaticDispatch(isStaticDispatch)
+            .build();
 
     Statement statement =
         fromMethodDescriptor
@@ -421,7 +423,7 @@ public class AstUtils {
     Expression instance = checkNotNull(methodCall.getQualifier());
     arguments.add(0, instance);
     // Call the method like Objects.foo(instance, ...)
-    return MethodCall.createMethodCall(null, methodDescriptor, arguments);
+    return MethodCall.Builder.from(methodDescriptor).setArguments(arguments).build();
   }
 
   public static MethodCall createDevirtualizedMethodCall(
@@ -442,7 +444,7 @@ public class AstUtils {
 
     MethodDescriptor valueOfMethodDescriptor =
         boxType.getMethodDescriptorByName(MethodDescriptor.VALUE_OF_METHOD_NAME, primitiveType);
-    return MethodCall.createMethodCall(null, valueOfMethodDescriptor, expression);
+    return MethodCall.Builder.from(valueOfMethodDescriptor).setArguments(expression).build();
   }
 
   /**
@@ -462,7 +464,8 @@ public class AstUtils {
     expression =
         isValidMethodCallQualifier(expression) ? expression : new MultiExpression(expression);
 
-    MethodCall methodCall = MethodCall.createMethodCall(expression, valueMethodDescriptor);
+    MethodCall methodCall =
+        MethodCall.Builder.from(valueMethodDescriptor).setQualifier(expression).build();
     if (TypeDescriptors.isBoxedBooleanOrDouble(boxType)) {
       methodCall = createDevirtualizedMethodCall(methodCall, boxType);
     }
@@ -799,7 +802,7 @@ public class AstUtils {
             .build();
 
     MethodCall getPrototypeCall =
-        MethodCall.createMethodCall(null, getPrototype, new TypeReference(lambdaType));
+        MethodCall.Builder.from(getPrototype).setArguments(new TypeReference(lambdaType)).build();
 
     FieldAccess applyFunctionFieldAccess =
         FieldAccess.Builder.from(
@@ -830,8 +833,9 @@ public class AstUtils {
             .setQualifier(new TypeReference(lambdaType))
             .build();
 
-    return MethodCall.createMethodCall(
-        null, makeLambdaCall, applyFunctionFieldAccess, instance, copyFunctionFieldAccess);
+    return MethodCall.Builder.from(makeLambdaCall)
+        .setArguments(applyFunctionFieldAccess, instance, copyFunctionFieldAccess)
+        .build();
   }
 
   private static Expression getInitialValue(Field field) {
@@ -886,7 +890,9 @@ public class AstUtils {
 
     MethodDescriptor arraySetMethodDescriptor =
         createArraySetMethodDescriptor(elementType, methodName, methodParams);
-    return MethodCall.createMethodCall(null, arraySetMethodDescriptor, array, index, value);
+    return MethodCall.Builder.from(arraySetMethodDescriptor)
+        .setArguments(array, index, value)
+        .build();
   }
 
   /**
@@ -912,7 +918,7 @@ public class AstUtils {
 
     MethodDescriptor arraySetMethodDescriptor =
         createArraySetMethodDescriptor(elementType, methodName, methodParams);
-    return MethodCall.createMethodCall(null, arraySetMethodDescriptor, array, index);
+    return MethodCall.Builder.from(arraySetMethodDescriptor).setArguments(array, index).build();
   }
 
   /**

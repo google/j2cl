@@ -257,7 +257,7 @@ public class NormalizeJsVarargs extends NormalizationPass {
               .build();
 
       MethodCall nullToEmpty =
-          MethodCall.createMethodCall(null, nullToEmptyDescriptor, lastArgument);
+          MethodCall.Builder.from(nullToEmptyDescriptor).setArguments(lastArgument).build();
       return MethodCall.Builder.from(invocation)
           .replaceVarargsArgument(
               new PrefixExpression(returnType, nullToEmpty, PrefixOperator.SPREAD))

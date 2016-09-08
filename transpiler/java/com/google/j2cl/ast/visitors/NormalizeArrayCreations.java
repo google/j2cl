@@ -30,7 +30,6 @@ import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeReference;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -77,7 +76,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
         new TypeReference(newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor());
     arguments.add(leafTypeReference);
     MethodCall arrayCreateMethodCall =
-        MethodCall.createMethodCall(null, arrayCreateMethodDescriptor, arguments);
+        MethodCall.Builder.from(arrayCreateMethodDescriptor).setArguments(arguments).build();
     return JsTypeAnnotation.createTypeAnnotation(
         arrayCreateMethodCall,
         TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()));
@@ -120,7 +119,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
           new TypeReference(newArrayExpression.getLeafTypeDescriptor().getRawTypeDescriptor());
       arguments.add(leafTypeReference);
       MethodCall arrayInitMethodCall =
-          MethodCall.createMethodCall(null, arrayInitMethodDescriptor, arguments);
+          MethodCall.Builder.from(arrayInitMethodDescriptor).setArguments(arguments).build();
       return JsTypeAnnotation.createTypeAnnotation(
           arrayInitMethodCall,
           TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()));
@@ -142,7 +141,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
       arguments.add(leafTypeReference);
       arguments.add(new NumberLiteral(TypeDescriptors.get().primitiveInt, dimensionCount));
       MethodCall arrayInitMethodCall =
-          MethodCall.createMethodCall(null, arrayInitMethodDescriptor, arguments);
+          MethodCall.Builder.from(arrayInitMethodDescriptor).setArguments(arguments).build();
 
       return JsTypeAnnotation.createTypeAnnotation(
           arrayInitMethodCall,

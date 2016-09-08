@@ -78,8 +78,9 @@ public class NormalizeLongs extends NormalizationPass {
               .setReturnTypeDescriptor(returnTypeDescriptor)
               .build();
       // LongUtils.$someOperation(leftOperand, rightOperand);
-      return MethodCall.createMethodCall(
-          null, longUtilsMethodDescriptor, Lists.newArrayList(leftArgument, rightArgument));
+      return MethodCall.Builder.from(longUtilsMethodDescriptor)
+          .setArguments(Lists.newArrayList(leftArgument, rightArgument))
+          .build();
     }
 
     @Override
@@ -110,7 +111,7 @@ public class NormalizeLongs extends NormalizationPass {
               .setReturnTypeDescriptor(returnTypeDescriptor)
               .build();
       // LongUtils.$someOperation(operand);
-      return MethodCall.createMethodCall(null, longUtilsMethodDescriptor, argument);
+      return MethodCall.Builder.from(longUtilsMethodDescriptor).setArguments(argument).build();
     }
   }
 

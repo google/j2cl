@@ -56,6 +56,7 @@ import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.LabeledStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
+import com.google.j2cl.ast.MethodCall.Builder;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.MultiExpression;
 import com.google.j2cl.ast.NewArray;
@@ -301,12 +302,15 @@ public class CompilationUnitBuilder {
 
     private Field convert(EnumConstantDeclaration enumConstantDeclaration) {
       Expression initializer =
-          new NewInstance(
-              null,
-              JdtUtils.createMethodDescriptor(enumConstantDeclaration.resolveConstructorBinding()),
-              convertExpressions(
-                  JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(
-                      enumConstantDeclaration.arguments())));
+          NewInstance.Builder.from(
+                  JdtUtils.createMethodDescriptor(
+                      enumConstantDeclaration.resolveConstructorBinding()))
+              .setArguments(
+                  convertExpressions(
+                      JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(
+                          enumConstantDeclaration.arguments())))
+              .build();
+
       FieldDescriptor fieldDescriptor =
           JdtUtils.createFieldDescriptor(enumConstantDeclaration.resolveVariable());
       // Enum fields are always non-nullable.
@@ -474,13 +478,13 @@ public class CompilationUnitBuilder {
           getParameterTypeDescriptors(constructorBinding.getParameterTypes());
 
       ITypeBinding typeBinding = typeDeclaration.resolveBinding();
-      AnonymousType anonymousClass =
+      AnonymousType anonymousType =
           (AnonymousType)
               convertAndAddType(
                   JdtUtils.isInStaticContext(typeDeclaration),
                   typeBinding,
                   JdtUtils.<BodyDeclaration>asTypedList(typeDeclaration.bodyDeclarations()));
-      anonymousClass.addConstructorParameterTypeDescriptors(
+      anonymousType.addConstructorParameterTypeDescriptors(
           Arrays.asList(constructorImplicitParameterTypeDescriptors));
 
       // Record the types of the superclass constructor's parameters, if they exist.
@@ -491,12 +495,12 @@ public class CompilationUnitBuilder {
           // declared type to figure out how to reference the method.
           TypeDescriptor[] superConstructorImplicitParameterTypeDescriptors =
               getParameterTypeDescriptors(methodBinding.getMethodDeclaration().getParameterTypes());
-          anonymousClass.addSuperConstructorParameterTypeDescriptors(
+          anonymousType.addSuperConstructorParameterTypeDescriptors(
               Arrays.asList(superConstructorImplicitParameterTypeDescriptors));
         }
       }
 
-      return anonymousClass;
+      return anonymousType;
     }
 
     private TypeDescriptor[] getParameterTypeDescriptors(ITypeBinding[] parameterTypes) {
@@ -543,7 +547,11 @@ public class CompilationUnitBuilder {
                   newInstanceTypeBinding.getDeclaringClass(),
                   false)
               : null;
-      return new NewInstance(newInstanceQualifier, constructorMethodDescriptor, arguments);
+      return NewInstance.Builder.from(constructorMethodDescriptor)
+          .setQualifier(newInstanceQualifier)
+          .setArguments(arguments)
+          .setIsAnonymousClassCreation(true)
+          .build();
     }
 
     private Expression convertRegularClassCreation(
@@ -551,7 +559,6 @@ public class CompilationUnitBuilder {
         MethodDescriptor constructorMethodDescriptor,
         List<Expression> arguments) {
       IMethodBinding constructorBinding = expression.resolveConstructorBinding();
-      Expression newInstance = null;
       ITypeBinding newInstanceTypeBinding = constructorBinding.getDeclaringClass();
       Expression qualifier =
           expression.getExpression() == null ? null : convert(expression.getExpression());
@@ -561,32 +568,33 @@ public class CompilationUnitBuilder {
               || (newInstanceTypeBinding.isLocal()
                   && !JdtUtils.isStatic(
                       newInstanceTypeBinding.getTypeDeclaration().getDeclaringMember()));
+      checkArgument(
+          qualifier == null || hasQualifier,
+          "NewInstance of non nested class should have no qualifier.");
+
       // Resolve the qualifier of NewInstance that creates an instance of a nested class.
       // Implicit 'this' doesn't always refer to 'this', it may refer to any enclosing instances.
-      if (hasQualifier) {
-        qualifier =
-            qualifier == null
-                ? convertOuterClassReference(
-                    JdtUtils.findCurrentTypeBinding(expression),
-                    newInstanceTypeBinding.getDeclaringClass(),
-                    false) // find the enclosing instance in non-strict mode, which means
-                // for example,
-                // class A {
-                //   class B {}
-                //   class C extends class A{
-                //     // The qualifier of new B() should be C.this, not A.this.
-                //     public void test() { new B(); }
-                //   }
-                // }
-                : qualifier;
-        newInstance = new NewInstance(qualifier, constructorMethodDescriptor, arguments);
-      } else {
-        checkArgument(
-            qualifier == null, "NewInstance of non nested class should have no qualifier.");
-        newInstance = new NewInstance(qualifier, constructorMethodDescriptor, arguments);
-      }
+      qualifier =
+          hasQualifier && qualifier == null
+              // find the enclosing instance in non-strict mode, which means
+              // for example,
+              // class A {
+              //   class B {}
+              //   class C extends class A {
+              //     // The qualifier of new B() should be C.this, not A.this.
+              //     public void test() { new B(); }
+              //   }
+              // }
+              ? convertOuterClassReference(
+                  JdtUtils.findCurrentTypeBinding(expression),
+                  newInstanceTypeBinding.getDeclaringClass(),
+                  false)
+              : qualifier;
 
-      return newInstance;
+      return NewInstance.Builder.from(constructorMethodDescriptor)
+          .setQualifier(qualifier)
+          .setArguments(arguments)
+          .build();
     }
 
     private Expression convert(org.eclipse.jdt.core.dom.Expression expression) {
@@ -957,18 +965,17 @@ public class CompilationUnitBuilder {
       VariableDeclarationFragment iteratorDeclaration =
           new VariableDeclarationFragment(
               iteratorVariable,
-              MethodCall.createMethodCall(
-                  convert(statement.getExpression()),
-                  JdtUtils.createMethodDescriptor(iteratorMethodBinding)));
+              Builder.from(JdtUtils.createMethodDescriptor(iteratorMethodBinding))
+                  .setQualifier(convert(statement.getExpression()))
+                  .build());
 
       // $iterator.hasNext();
       IMethodBinding hasNextMethodBinding =
           JdtUtils.getMethodBinding(iteratorMethodBinding.getReturnType(), "hasNext");
       Expression condition =
-          MethodCall.createMethodCall(
-              iteratorVariable.getReference(),
-              JdtUtils.createMethodDescriptor(hasNextMethodBinding),
-              Collections.<Expression>emptyList());
+          MethodCall.Builder.from(JdtUtils.createMethodDescriptor(hasNextMethodBinding))
+              .setQualifier(iteratorVariable.getReference())
+              .build();
 
       // T v = $iterator.next();
       IMethodBinding nextMethodBinding =
@@ -978,10 +985,9 @@ public class CompilationUnitBuilder {
               new VariableDeclarationExpression(
                   new VariableDeclarationFragment(
                       convert(statement.getParameter()),
-                      MethodCall.createMethodCall(
-                          iteratorVariable.getReference(),
-                          JdtUtils.createMethodDescriptor(nextMethodBinding),
-                          Collections.<Expression>emptyList()))));
+                      MethodCall.Builder.from(JdtUtils.createMethodDescriptor(nextMethodBinding))
+                          .setQualifier(iteratorVariable.getReference())
+                          .build())));
 
       Statement bodyStatement = convert(statement.getBody());
       Block body =
@@ -1178,7 +1184,7 @@ public class CompilationUnitBuilder {
               ? convertOuterClassReference(
                   enclosingClassTypeBinding, enclosingClassTypeBinding, true)
               : null;
-      return new NewInstance(qualifier, constructorMethodDescriptor);
+      return NewInstance.Builder.from(constructorMethodDescriptor).setQualifier(qualifier).build();
     }
 
     /**
@@ -1308,7 +1314,7 @@ public class CompilationUnitBuilder {
           JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(statement.arguments()),
           arguments);
       return new ExpressionStatement(
-          MethodCall.createMethodCall(null, methodDescriptor, arguments));
+          MethodCall.Builder.from(methodDescriptor).setArguments(arguments).build());
     }
 
     private Statement convert(org.eclipse.jdt.core.dom.ExpressionStatement statement) {
@@ -1396,7 +1402,10 @@ public class CompilationUnitBuilder {
           methodBinding,
           JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(methodInvocation.arguments()),
           arguments);
-      return MethodCall.createMethodCall(qualifier, methodDescriptor, arguments);
+      return MethodCall.Builder.from(methodDescriptor)
+          .setQualifier(qualifier)
+          .setArguments(arguments)
+          .build();
     }
 
     private MethodCall convert(org.eclipse.jdt.core.dom.SuperMethodInvocation expression) {
@@ -1411,24 +1420,29 @@ public class CompilationUnitBuilder {
           JdtUtils.<org.eclipse.jdt.core.dom.Expression>asTypedList(expression.arguments()),
           arguments);
       if (expression.getQualifier() == null) {
-        return MethodCall.createMethodCall(
-            new SuperReference(currentType.getSuperTypeDescriptor()), methodDescriptor, arguments);
+        return MethodCall.Builder.from(methodDescriptor)
+            .setQualifier(new SuperReference(currentType.getSuperTypeDescriptor()))
+            .setArguments(arguments)
+            .build();
       } else if (expression.getQualifier().resolveTypeBinding().isInterface()) {
         // This is a default method call.
-        return MethodCall.createStaticDispatchMethodCall(
-            new ThisReference(methodDescriptor.getEnclosingClassTypeDescriptor()),
-            methodDescriptor,
-            arguments);
+        return MethodCall.Builder.from(methodDescriptor)
+            .setQualifier(new ThisReference(methodDescriptor.getEnclosingClassTypeDescriptor()))
+            .setArguments(arguments)
+            .setIsStaticDispatch(true)
+            .build();
       } else {
         // OuterClass.super.fun() is transpiled to
         // SuperClassOfOuterClass.prototype.fun.call(OuterClass.this);
-        return MethodCall.createStaticDispatchMethodCall(
-            convertOuterClassReference(
-                JdtUtils.findCurrentTypeBinding(expression),
-                expression.getQualifier().resolveTypeBinding(),
-                true),
-            methodDescriptor,
-            arguments);
+        return MethodCall.Builder.from(methodDescriptor)
+            .setQualifier(
+                convertOuterClassReference(
+                    JdtUtils.findCurrentTypeBinding(expression),
+                    expression.getQualifier().resolveTypeBinding(),
+                    true))
+            .setArguments(arguments)
+            .setIsStaticDispatch(true)
+            .build();
       }
     }
 
@@ -1756,7 +1770,11 @@ public class CompilationUnitBuilder {
                 superclassBinding.getDeclaringClass(),
                 false);
       }
-      MethodCall superCall = MethodCall.createMethodCall(qualifier, methodDescriptor, arguments);
+      MethodCall superCall =
+          MethodCall.Builder.from(methodDescriptor)
+              .setQualifier(qualifier)
+              .setArguments(arguments)
+              .build();
       return new ExpressionStatement(superCall);
     }
 
@@ -1804,8 +1822,9 @@ public class CompilationUnitBuilder {
               .setParameterTypeDescriptors(Lists.newArrayList(TypeDescriptors.NATIVE_FUNCTION))
               .setReturnTypeDescriptor(javaLangClassTypeDescriptor)
               .build();
-      return MethodCall.createMethodCall(
-          null, classMethodDescriptor, new TypeReference(literalTypeDescriptor));
+      return MethodCall.Builder.from(classMethodDescriptor)
+          .setArguments(new TypeReference(literalTypeDescriptor))
+          .build();
     }
 
     private Expression convertArrayTypeLiteral(
@@ -1824,12 +1843,12 @@ public class CompilationUnitBuilder {
               .setReturnTypeDescriptor(javaLangClassTypeDescriptor)
               .build();
 
-      return MethodCall.createMethodCall(
-          null,
-          classMethodDescriptor,
-          new TypeReference(literalTypeDescriptor.getLeafTypeDescriptor()),
-          new NumberLiteral(
-              TypeDescriptors.get().primitiveInt, literalTypeDescriptor.getDimensions()));
+      return MethodCall.Builder.from(classMethodDescriptor)
+          .setArguments(
+              new TypeReference(literalTypeDescriptor.getLeafTypeDescriptor()),
+              new NumberLiteral(
+                  TypeDescriptors.get().primitiveInt, literalTypeDescriptor.getDimensions()))
+          .build();
     }
 
     private ThrowStatement convert(org.eclipse.jdt.core.dom.ThrowStatement statement) {

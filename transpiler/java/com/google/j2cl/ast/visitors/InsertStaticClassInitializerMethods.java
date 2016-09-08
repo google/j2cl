@@ -45,7 +45,7 @@ public class InsertStaticClassInitializerMethods extends NormalizationPass {
                 .setMethodName("$clinit")
                 .setJsInfo(JsInfo.RAW)
                 .build();
-        MethodCall call = MethodCall.createMethodCall(null, clinitDescriptor);
+        MethodCall call = MethodCall.Builder.from(clinitDescriptor).build();
         return Method.Builder.from(method).addStatement(0, new ExpressionStatement(call)).build();
       }
       return method;

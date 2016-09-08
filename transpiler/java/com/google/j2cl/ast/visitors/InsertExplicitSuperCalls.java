@@ -74,7 +74,8 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
           AstUtils.createDefaultConstructorDescriptor(
               superTypeDescriptor, superTypeDescriptor.getVisibility());
       List<Expression> arguments = new ArrayList<>();
-      MethodCall superCall = MethodCall.createMethodCall(null, methodDescriptor, arguments);
+      MethodCall superCall =
+          MethodCall.Builder.from(methodDescriptor).setArguments(arguments).build();
       method.getBody().getStatements().add(0, new ExpressionStatement(superCall));
     }
   }

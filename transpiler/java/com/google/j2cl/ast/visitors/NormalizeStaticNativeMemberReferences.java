@@ -120,7 +120,7 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
               .setEnclosingClassTypeDescriptor(getNamespaceAsTypeDescriptor(fieldDescriptor))
               .build();
       checkArgument(fieldAccess.getQualifier() instanceof TypeReference);
-      return FieldAccess.Builder.from(newFieldescriptor).setQualifier(null).build();
+      return FieldAccess.Builder.from(newFieldescriptor).build();
     }
 
     @Override
@@ -137,7 +137,9 @@ public class NormalizeStaticNativeMemberReferences extends NormalizationPass {
               .setEnclosingClassTypeDescriptor(getNamespaceAsTypeDescriptor(methodDescriptor))
               .build();
       checkArgument(methodCall.getQualifier() instanceof TypeReference);
-      return MethodCall.createMethodCall(null, newMethodDescriptor, methodCall.getArguments());
+      return MethodCall.Builder.from(newMethodDescriptor)
+          .setArguments(methodCall.getArguments())
+          .build();
     }
   }
 

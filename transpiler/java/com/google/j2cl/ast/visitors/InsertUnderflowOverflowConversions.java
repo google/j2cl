@@ -151,6 +151,6 @@ public class InsertUnderflowOverflowConversions extends NormalizationPass {
             .setReturnTypeDescriptor(toTypeDescriptor)
             .build();
     // Primitives.$toA(expr);
-    return MethodCall.createMethodCall(null, overflowMethodDescriptor, expression);
+    return MethodCall.Builder.from(overflowMethodDescriptor).setArguments(expression).build();
   }
 }

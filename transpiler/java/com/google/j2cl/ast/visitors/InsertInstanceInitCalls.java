@@ -23,7 +23,6 @@ import com.google.j2cl.ast.ExpressionStatement;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +50,8 @@ public class InsertInstanceInitCalls extends NormalizationPass {
               method.getDescriptor().getEnclosingClassTypeDescriptor());
 
       List<Expression> arguments = new ArrayList<>();
-      MethodCall initCall = MethodCall.createMethodCall(null, initMethodDescriptor, arguments);
+      MethodCall initCall =
+          MethodCall.Builder.from(initMethodDescriptor).setArguments(arguments).build();
       // If the constructor has a super() call, insert $init call after it. Otherwise, insert
       // to the top of the method body.
       int insertIndex = AstUtils.hasSuperCall(method) ? 1 : 0;

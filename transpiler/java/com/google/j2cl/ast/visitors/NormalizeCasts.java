@@ -31,7 +31,6 @@ import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
 import com.google.j2cl.ast.TypeReference;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,7 +88,7 @@ public class NormalizeCasts extends NormalizationPass {
 
     // Casts.to(expr, TypeName);
     MethodCall castMethodCall =
-        MethodCall.createMethodCall(null, castToMethodDescriptor, arguments);
+        MethodCall.Builder.from(castToMethodDescriptor).setArguments(arguments).build();
     // /**@type {}*/ ()
     return JsTypeAnnotation.createTypeAnnotation(
         castMethodCall, castExpression.getCastTypeDescriptor());
@@ -137,7 +136,7 @@ public class NormalizeCasts extends NormalizationPass {
 
     // Arrays.$castTo(expr, leafType, dimension);
     MethodCall castMethodCall =
-        MethodCall.createMethodCall(null, castToMethodDescriptor, arguments);
+        MethodCall.Builder.from(castToMethodDescriptor).setArguments(arguments).build();
     // /**@type {}*/ ()
     return JsTypeAnnotation.createTypeAnnotation(castMethodCall, arrayCastTypeDescriptor);
   }
@@ -160,7 +159,7 @@ public class NormalizeCasts extends NormalizationPass {
 
     // Arrays.$castToNative(expr);
     MethodCall castMethodCall =
-        MethodCall.createMethodCall(null, castToMethodDescriptor, arguments);
+        MethodCall.Builder.from(castToMethodDescriptor).setArguments(arguments).build();
     // /**@type {}*/ ()
     return JsTypeAnnotation.createTypeAnnotation(castMethodCall, castTypeDescriptor);
   }

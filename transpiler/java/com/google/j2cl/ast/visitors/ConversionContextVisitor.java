@@ -40,7 +40,6 @@ import com.google.j2cl.ast.SwitchStatement;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.UnaryExpression;
 import com.google.j2cl.ast.VariableDeclarationFragment;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -211,10 +210,9 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public Node rewriteNewInstance(NewInstance newInstance) {
     // method invocation context
-    return new NewInstance(
-        newInstance.getQualifier(),
-        newInstance.getTarget(),
-        rewriteMethodInvocationContextArguments(newInstance));
+    return NewInstance.Builder.from(newInstance)
+        .setArguments(rewriteMethodInvocationContextArguments(newInstance))
+        .build();
   }
 
   @Override

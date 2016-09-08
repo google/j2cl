@@ -150,5 +150,9 @@ public abstract class Invocation extends Expression implements MemberReference {
       this.methodDescriptor = invocation.getTarget();
       this.arguments = Lists.newArrayList(invocation.getArguments());
     }
+
+    protected Builder() {
+      this.arguments = Lists.newArrayList();
+    }
   }
 }

@@ -172,7 +172,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
               .setParameterTypeDescriptors(Arrays.asList(TypeDescriptors.get().javaLangObject))
               .setReturnTypeDescriptor(TypeDescriptors.get().primitiveBoolean)
               .build();
-      return MethodCall.createMethodCall(null, methodDescriptor, exceptionVariable);
+      return MethodCall.Builder.from(methodDescriptor).setArguments(exceptionVariable).build();
     }
   }
 }

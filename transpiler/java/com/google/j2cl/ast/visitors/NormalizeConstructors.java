@@ -204,10 +204,11 @@ public class NormalizeConstructors extends NormalizationPass {
         return methodCall;
       }
 
-      return MethodCall.createMethodCall(
-          methodCall.getQualifier(),
-          ctorMethodDescriptorFromJavaConstructor(methodCall.getTarget()),
-          methodCall.getArguments());
+      return MethodCall.Builder.from(
+              ctorMethodDescriptorFromJavaConstructor(methodCall.getTarget()))
+          .setQualifier(methodCall.getQualifier())
+          .setArguments(methodCall.getArguments())
+          .build();
     }
   }
 
@@ -230,7 +231,7 @@ public class NormalizeConstructors extends NormalizationPass {
     MethodDescriptor ctorDescriptor =
         ctorMethodDescriptorFromJavaConstructor(primaryConstructor.getDescriptor());
 
-    MethodCall ctorCall = MethodCall.createMethodCall(null, ctorDescriptor, arguments);
+    MethodCall ctorCall = MethodCall.Builder.from(ctorDescriptor).setArguments(arguments).build();
     body.add(new ExpressionStatement(ctorCall));
 
     // Note that the super call arguments are empty if this @JsConstructor class is a subclass of a
@@ -303,7 +304,7 @@ public class NormalizeConstructors extends NormalizationPass {
             .setEnclosingClassTypeDescriptor(superType)
             .setIsConstructor(true)
             .build();
-    return MethodCall.createMethodCall(null, superDescriptor);
+    return MethodCall.Builder.from(superDescriptor).build();
   }
 
   /**
@@ -319,8 +320,9 @@ public class NormalizeConstructors extends NormalizationPass {
 
       MethodDescriptor staticFactoryMethod = factoryDescriptorForConstructor(originalConstructor);
 
-      return MethodCall.createMethodCall(
-          null, staticFactoryMethod, AstUtils.clone(constructorInvocation.getArguments()));
+      return MethodCall.Builder.from(staticFactoryMethod)
+          .setArguments(AstUtils.clone(constructorInvocation.getArguments()))
+          .build();
     }
   }
 
@@ -436,7 +438,8 @@ public class NormalizeConstructors extends NormalizationPass {
             constructor.getParameters(),
             factoryMethodParameters,
             new VariableDeclarationFragment(
-                newInstance, new NewInstance(null, javascriptConstructor, arguments)));
+                newInstance,
+                NewInstance.Builder.from(javascriptConstructor).setArguments(arguments).build()));
     VariableDeclarationExpression expression =
         new VariableDeclarationExpression(Arrays.asList(variableDeclarationFragment));
     Statement newInstanceStatement = new ExpressionStatement(expression);
@@ -444,8 +447,10 @@ public class NormalizeConstructors extends NormalizationPass {
 
     // $instance.$ctor...();
     MethodCall ctorCall =
-        MethodCall.createMethodCall(
-            newInstance.getReference(), constructor.getDescriptor(), relayArguments);
+        MethodCall.Builder.from(constructor.getDescriptor())
+            .setQualifier(newInstance.getReference())
+            .setArguments(relayArguments)
+            .build();
     Statement ctorCallStatement = new ExpressionStatement(ctorCall);
 
     Expression newInstanceReference = newInstance.getReference();
@@ -507,7 +512,7 @@ public class NormalizeConstructors extends NormalizationPass {
     // return new Class();
     Statement returnStatement =
         new ReturnStatement(
-            new NewInstance(null, javascriptConstructor, relayArguments),
+            NewInstance.Builder.from(javascriptConstructor).setArguments(relayArguments).build(),
             primaryConstructor.getDescriptor().getEnclosingClassTypeDescriptor());
 
     return Method.Builder.fromDefault()

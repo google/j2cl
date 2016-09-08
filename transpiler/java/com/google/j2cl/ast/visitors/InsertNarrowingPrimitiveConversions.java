@@ -29,7 +29,6 @@ import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeDescriptors.BootstrapType;
-
 import java.util.Set;
 
 /**
@@ -104,6 +103,7 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
         return true;
       }
 
+      @SuppressWarnings("ReferenceEquality")
       private Expression convertLiteral(Object literalValue, TypeDescriptor toTypeDescriptor) {
         if (literalValue instanceof Number) {
           Number numberLiteral = (Number) literalValue;
@@ -156,7 +156,7 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
                 .setReturnTypeDescriptor(toTypeDescriptor)
                 .build();
         // Primitives.$narrowAToB(expr);
-        return MethodCall.createMethodCall(null, narrowMethodDescriptor, expression);
+        return MethodCall.Builder.from(narrowMethodDescriptor).setArguments(expression).build();
       }
     };
   }

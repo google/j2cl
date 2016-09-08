@@ -29,7 +29,6 @@ import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
 import com.google.j2cl.ast.TypeReference;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +70,7 @@ public class NormalizeInstanceOfs extends NormalizationPass {
     arguments.add(instanceOfExpression.getExpression());
 
     // TypeName.$isInstance(expr);
-    return MethodCall.createMethodCall(null, isInstanceMethodDescriptor, arguments);
+    return MethodCall.Builder.from(isInstanceMethodDescriptor).setArguments(arguments).build();
   }
 
   private Node rewriteArrayInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
@@ -102,7 +101,7 @@ public class NormalizeInstanceOfs extends NormalizationPass {
     arguments.add(
         new NumberLiteral(TypeDescriptors.get().primitiveInt, checkTypeDescriptor.getDimensions()));
     // Arrays.$instanceIsOfType(expr, leafType, dimensions);
-    return MethodCall.createMethodCall(null, isInstanceMethodDescriptor, arguments);
+    return MethodCall.Builder.from(isInstanceMethodDescriptor).setArguments(arguments).build();
   }
 
   /**
@@ -126,6 +125,6 @@ public class NormalizeInstanceOfs extends NormalizationPass {
     List<Expression> arguments = new ArrayList<>();
     arguments.add(instanceOfExpression.getExpression());
     // Arrays.$isArray(expr);
-    return MethodCall.createMethodCall(null, isInstanceMethodDescriptor, arguments);
+    return MethodCall.Builder.from(isInstanceMethodDescriptor).setArguments(arguments).build();
   }
 }

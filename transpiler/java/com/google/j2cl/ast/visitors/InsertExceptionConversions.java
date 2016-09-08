@@ -72,7 +72,9 @@ public class InsertExceptionConversions extends NormalizationPass {
               .build();
 
       MethodCall toJavaCall =
-          MethodCall.createMethodCall(null, toJava, catchClause.getExceptionVar().getReference());
+          MethodCall.Builder.from(toJava)
+              .setArguments(catchClause.getExceptionVar().getReference())
+              .build();
 
       Expression assignment =
           BinaryExpression.Builder.asAssignmentTo(catchClause.getExceptionVar())
@@ -97,7 +99,7 @@ public class InsertExceptionConversions extends NormalizationPass {
               .build();
 
       MethodCall toJsCall =
-          MethodCall.createMethodCall(null, toJs, originalStatement.getExpression());
+          MethodCall.Builder.from(toJs).setArguments(originalStatement.getExpression()).build();
 
       return new ThrowStatement(toJsCall);
     }

@@ -50,11 +50,9 @@ public class NormalizeEquality extends NormalizationPass {
       // Rewrite object - object comparisons to avoid JS implicit conversions and still treat null
       // and undefined as equivalent.
       MethodCall sameCall =
-          MethodCall.createMethodCall(
-              null,
-              AstUtils.createUtilSameMethodDescriptor(),
-              binaryExpression.getLeftOperand(),
-              binaryExpression.getRightOperand());
+          MethodCall.Builder.from(AstUtils.createUtilSameMethodDescriptor())
+              .setArguments(binaryExpression.getLeftOperand(), binaryExpression.getRightOperand())
+              .build();
       if (binaryExpression.getOperator() == BinaryOperator.NOT_EQUALS) {
         return new PrefixExpression(sameCall.getTypeDescriptor(), sameCall, PrefixOperator.NOT);
       }

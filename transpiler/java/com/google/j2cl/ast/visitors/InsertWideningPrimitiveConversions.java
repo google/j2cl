@@ -135,6 +135,6 @@ public class InsertWideningPrimitiveConversions extends NormalizationPass {
             .setReturnTypeDescriptor(toTypeDescriptor)
             .build();
     // Primitives.$widenAToB(expr);
-    return MethodCall.createMethodCall(null, widenMethodDescriptor, subjectExpression);
+    return MethodCall.Builder.from(widenMethodDescriptor).setArguments(subjectExpression).build();
   }
 }

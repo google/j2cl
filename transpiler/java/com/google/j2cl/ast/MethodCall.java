@@ -46,21 +46,6 @@ public class MethodCall extends Invocation {
     this.isStaticDispatch = isStaticDispatch;
   }
 
-  public static MethodCall createMethodCall(
-      Expression qualifier, MethodDescriptor targetMethodDescriptor, List<Expression> arguments) {
-    return new MethodCall(qualifier, targetMethodDescriptor, arguments, false);
-  }
-
-  public static MethodCall createMethodCall(
-      Expression qualifier, MethodDescriptor targetMethodDescriptor, Expression... arguments) {
-    return new MethodCall(qualifier, targetMethodDescriptor, Arrays.asList(arguments), false);
-  }
-
-  public static MethodCall createStaticDispatchMethodCall(
-      Expression qualifier, MethodDescriptor targetMethodDescriptor, List<Expression> arguments) {
-    return new MethodCall(qualifier, targetMethodDescriptor, arguments, true);
-  }
-
   @Override
   public Expression getQualifier() {
     return this.qualifier;
@@ -118,9 +103,37 @@ public class MethodCall extends Invocation {
       return new Builder(methodCall);
     }
 
+    public static Builder from(MethodDescriptor methodDescriptor) {
+      Builder builder = new Builder();
+      builder.setMethodDescriptor(methodDescriptor);
+      return builder;
+    }
+
+    @Override
+    public Builder setQualifier(Expression qualifier) {
+      super.setQualifier(qualifier);
+      return this;
+    }
+
+    public Builder setArguments(Expression... arguments) {
+      super.setArguments(Arrays.asList(arguments));
+      return this;
+    }
+
+    @Override
+    public Builder setArguments(List<Expression> arguments) {
+      super.setArguments(arguments);
+      return this;
+    }
+
     public Builder setIsStaticDispatch(boolean isStaticDispatch) {
       this.isStaticDispatch = isStaticDispatch;
       return this;
+    }
+
+    @Override
+    public MethodCall build() {
+      return (MethodCall) super.build();
     }
 
     @Override
@@ -135,5 +148,7 @@ public class MethodCall extends Invocation {
       super(methodCall);
       this.isStaticDispatch = methodCall.isStaticDispatch();
     }
+
+    private Builder() {}
   }
 }
