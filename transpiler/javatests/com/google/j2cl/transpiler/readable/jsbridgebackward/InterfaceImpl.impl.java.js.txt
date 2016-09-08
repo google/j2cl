@@ -23,7 +23,9 @@ class InterfaceImpl extends A {
    * Defines instance fields.
    * @public
    */
-  constructor() { super(); }
+  constructor() {
+    super();
+  }
 
   /**
    * A particular Java constructor as a factory method.
@@ -55,7 +57,9 @@ class InterfaceImpl extends A {
    * @return {number}
    * @public
    */
-  foo(arg0) { return this.m_foo__int(arg0); }
+  foo(arg0) {
+    return this.m_foo__int(arg0);
+  }
 
   /**
    * Returns whether the provided instance is an instance of this class.
@@ -63,7 +67,9 @@ class InterfaceImpl extends A {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof InterfaceImpl; }
+  static $isInstance(instance) {
+    return instance instanceof InterfaceImpl;
+  }
 
   /**
    * Returns whether the provided class is or extends this class.

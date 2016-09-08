@@ -44,21 +44,27 @@ class MyJsType extends java_lang_Object {
    * @return {number}
    * @public
    */
-  foo(a) { return a; }
+  foo(a) {
+    return a;
+  }
 
   /**
    * @param {number} a
    * @return {number}
    * @public
    */
-  bar(a) { return a + 1; }
+  bar(a) {
+    return a + 1;
+  }
 
   /**
    * @param {number} a
    * @return {number}
    * @public
    */
-  fun(a) { return a - 1; }
+  fun(a) {
+    return a - 1;
+  }
 
   /**
    * Bridge method for exposing non-JsMethod.
@@ -67,7 +73,9 @@ class MyJsType extends java_lang_Object {
    * @return {number}
    * @public
    */
-  m_fun__int(arg0) { return this.fun(arg0); }
+  m_fun__int(arg0) {
+    return this.fun(arg0);
+  }
 
   /**
    * Returns whether the provided instance is an instance of this class.
@@ -75,7 +83,9 @@ class MyJsType extends java_lang_Object {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof MyJsType; }
+  static $isInstance(instance) {
+    return instance instanceof MyJsType;
+  }
 
   /**
    * Returns whether the provided class is or extends this class.

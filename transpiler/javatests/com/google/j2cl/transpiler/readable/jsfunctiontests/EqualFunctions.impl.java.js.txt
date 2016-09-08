@@ -24,7 +24,9 @@ class EqualFunctions extends java_lang_Object {
    * Defines instance fields.
    * @public
    */
-  constructor() { super(); }
+  constructor() {
+    super();
+  }
 
   /**
    * A particular Java constructor as a factory method.
@@ -84,7 +86,9 @@ class EqualFunctions extends java_lang_Object {
   static m_withCollection__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunction(
       customFunction) {
     EqualFunctions.$clinit();
-    return ((objA, objB) => { return true; });
+    return ((objA, objB) => {
+      return true;
+    });
   }
 
   /**
@@ -96,7 +100,9 @@ class EqualFunctions extends java_lang_Object {
   static m_createEqualFn__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunction(
       equalFn) {
     EqualFunctions.$clinit();
-    return ((first, second) => { return $Equality.$same(first, second); });
+    return ((first, second) => {
+      return $Equality.$same(first, second);
+    });
   }
 
   /**
@@ -105,7 +111,9 @@ class EqualFunctions extends java_lang_Object {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof EqualFunctions; }
+  static $isInstance(instance) {
+    return instance instanceof EqualFunctions;
+  }
 
   /**
    * Returns whether the provided class is or extends this class.
@@ -218,7 +226,9 @@ class EqualFunctions extends java_lang_Object {
     java_lang_Object.$clinit();
     EqualFunctions
         .$f_forObject__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions =
-        ((first, second) => { return $Equality.$same(first, second); });
+        ((first, second) => {
+          return $Equality.$same(first, second);
+        });
     EqualFunctions
         .$f_forInteger__com_google_j2cl_transpiler_readable_jsfunctiontests_EqualFunctions =
         EqualFunctions.m_objectEqualFunction__();

@@ -25,7 +25,9 @@ class Parent extends SuperParent {
    * Defines instance fields.
    * @public
    */
-  constructor() { super(); }
+  constructor() {
+    super();
+  }
 
   /**
    * A particular Java constructor as a factory method.
@@ -95,7 +97,9 @@ class Parent extends SuperParent {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof Parent; }
+  static $isInstance(instance) {
+    return instance instanceof Parent;
+  }
 
   /**
    * Returns whether the provided class is or extends this class.

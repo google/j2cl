@@ -53,7 +53,9 @@ class SubJsType extends MyJsType {
    * @return {number}
    * @public
    */
-  bar(a) { return a + 2; }
+  bar(a) {
+    return a + 2;
+  }
 
   /**
    * Bridge method for exposing non-JsMethod.
@@ -62,7 +64,9 @@ class SubJsType extends MyJsType {
    * @return {number}
    * @public
    */
-  m_bar__int(arg0) { return this.bar(arg0); }
+  m_bar__int(arg0) {
+    return this.bar(arg0);
+  }
 
   /**
    * Bridge method for exposing non-JsMethod.
@@ -71,7 +75,9 @@ class SubJsType extends MyJsType {
    * @return {number}
    * @public
    */
-  m_foo__int(arg0) { return this.foo(arg0); }
+  m_foo__int(arg0) {
+    return this.foo(arg0);
+  }
 
   /**
    * Returns whether the provided instance is an instance of this class.
@@ -79,7 +85,9 @@ class SubJsType extends MyJsType {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof SubJsType; }
+  static $isInstance(instance) {
+    return instance instanceof SubJsType;
+  }
 
   /**
    * Returns whether the provided class is or extends this class.

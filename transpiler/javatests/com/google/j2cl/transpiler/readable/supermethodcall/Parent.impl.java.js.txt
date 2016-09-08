@@ -20,7 +20,9 @@ class Parent extends GrandParent {
    * Defines instance fields.
    * @public
    */
-  constructor() { super(); }
+  constructor() {
+    super();
+  }
 
   /**
    * A particular Java constructor as a factory method.
@@ -62,7 +64,9 @@ class Parent extends GrandParent {
    * @return {*}
    * @public
    */
-  m_parentWithChangingReturn__() { return null; }
+  m_parentWithChangingReturn__() {
+    return null;
+  }
 
   /**
    * Returns whether the provided instance is an instance of this class.
@@ -70,7 +74,9 @@ class Parent extends GrandParent {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof Parent; }
+  static $isInstance(instance) {
+    return instance instanceof Parent;
+  }
 
   /**
    * Returns whether the provided class is or extends this class.

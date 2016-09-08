@@ -21,7 +21,9 @@ class Child extends Parent {
    * Defines instance fields.
    * @public
    */
-  constructor() { super(); }
+  constructor() {
+    super();
+  }
 
   /**
    * A particular Java constructor as a factory method.
@@ -66,7 +68,9 @@ class Child extends Parent {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof Child; }
+  static $isInstance(instance) {
+    return instance instanceof Child;
+  }
 
   /**
    * Returns whether the provided class is or extends this class.
@@ -82,7 +86,9 @@ class Child extends Parent {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { Parent.$clinit(); }
+  static $clinit() {
+    Parent.$clinit();
+  }
 
   /**
    * Runs instance field and block initializers.

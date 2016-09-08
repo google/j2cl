@@ -23,7 +23,9 @@ class Child extends Parent {
    * Defines instance fields.
    * @public
    */
-  constructor() { super(); }
+  constructor() {
+    super();
+  }
 
   /**
    * A particular Java constructor as a factory method.
@@ -55,7 +57,9 @@ class Child extends Parent {
    * @return {number}
    * @public
    */
-  sum(a, b) { return a + b + 1; }
+  sum(a, b) {
+    return a + b + 1;
+  }
 
   /**
    * @override
@@ -64,7 +68,9 @@ class Child extends Parent {
    * @return {number}
    * @public
    */
-  bar(a, b) { return a * b + 1; }
+  bar(a, b) {
+    return a * b + 1;
+  }
 
   /**
    * @override
@@ -72,13 +78,17 @@ class Child extends Parent {
    * @return {number}
    * @public
    */
-  myFoo(a) { return a; }
+  myFoo(a) {
+    return a;
+  }
 
   /**
    * @return {number}
    * @public
    */
-  intfFoo() { return 1; }
+  intfFoo() {
+    return 1;
+  }
 
   /**
    * Bridge method for exposing non-JsMethod.
@@ -86,7 +96,9 @@ class Child extends Parent {
    * @return {number}
    * @public
    */
-  m_intfFoo__() { return this.intfFoo(); }
+  m_intfFoo__() {
+    return this.intfFoo();
+  }
 
   /**
    * Returns whether the provided instance is an instance of this class.
@@ -94,7 +106,9 @@ class Child extends Parent {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof Child; }
+  static $isInstance(instance) {
+    return instance instanceof Child;
+  }
 
   /**
    * Returns whether the provided class is or extends this class.

@@ -23,7 +23,9 @@ class Implementor extends Interface$ClassWithAbstractMethod {
    * Defines instance fields.
    * @public
    */
-  constructor() { super(); }
+  constructor() {
+    super();
+  }
 
   /**
    * A particular Java constructor as a factory method.
@@ -54,7 +56,9 @@ class Implementor extends Interface$ClassWithAbstractMethod {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof Implementor; }
+  static $isInstance(instance) {
+    return instance instanceof Implementor;
+  }
 
   /**
    * Returns whether the provided class is or extends this class.
@@ -70,7 +74,9 @@ class Implementor extends Interface$ClassWithAbstractMethod {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { Interface$ClassWithAbstractMethod.$clinit(); }
+  static $clinit() {
+    Interface$ClassWithAbstractMethod.$clinit();
+  }
 
   /**
    * Runs instance field and block initializers.

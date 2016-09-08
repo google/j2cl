@@ -54,7 +54,9 @@ class NonNativeLower extends NonNativeUpper {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof NonNativeLower; }
+  static $isInstance(instance) {
+    return instance instanceof NonNativeLower;
+  }
 
   /**
    * Returns whether the provided class is or extends this class.
@@ -70,7 +72,9 @@ class NonNativeLower extends NonNativeUpper {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() { NonNativeUpper.$clinit(); }
+  static $clinit() {
+    NonNativeUpper.$clinit();
+  }
 
   /**
    * Runs instance field and block initializers.

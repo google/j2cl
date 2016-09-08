@@ -19,7 +19,9 @@ class Parent extends SuperParent {
    * Defines instance fields.
    * @public
    */
-  constructor() { super(); }
+  constructor() {
+    super();
+  }
 
   /**
    * A particular Java constructor as a factory method.
@@ -50,7 +52,9 @@ class Parent extends SuperParent {
    * @return {number}
    * @public
    */
-  sum(a, b) { return a + b; }
+  sum(a, b) {
+    return a + b;
+  }
 
   /**
    * @param {number} a
@@ -58,14 +62,18 @@ class Parent extends SuperParent {
    * @return {number}
    * @public
    */
-  bar(a, b) { return a * b; }
+  bar(a, b) {
+    return a * b;
+  }
 
   /**
    * @param {number} a
    * @return {number}
    * @public
    */
-  myFoo(a) { return a; }
+  myFoo(a) {
+    return a;
+  }
 
   /**
    * Bridge method for exposing non-JsMethod.
@@ -75,7 +83,9 @@ class Parent extends SuperParent {
    * @return {number}
    * @public
    */
-  m_bar__int__int(arg0, arg1) { return this.bar(arg0, arg1); }
+  m_bar__int__int(arg0, arg1) {
+    return this.bar(arg0, arg1);
+  }
 
   /**
    * Bridge method for exposing non-JsMethod.
@@ -85,7 +95,9 @@ class Parent extends SuperParent {
    * @return {number}
    * @public
    */
-  m_fun__int__int(arg0, arg1) { return this.sum(arg0, arg1); }
+  m_fun__int__int(arg0, arg1) {
+    return this.sum(arg0, arg1);
+  }
 
   /**
    * Returns whether the provided instance is an instance of this class.
@@ -93,7 +105,9 @@ class Parent extends SuperParent {
    * @return {boolean}
    * @public
    */
-  static $isInstance(instance) { return instance instanceof Parent; }
+  static $isInstance(instance) {
+    return instance instanceof Parent;
+  }
 
   /**
    * Returns whether the provided class is or extends this class.
