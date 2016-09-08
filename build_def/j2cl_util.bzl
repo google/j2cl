@@ -35,12 +35,6 @@ def get_java_package(pkg_name):
   """Extract the java package from the build package"""
   return get_java_path(pkg_name).replace("/", ".")
 
-def get_or_default(key, map, default):
-  """Returns the value for the provided key if present and not None, otherwise default"""
-  if key in map and map[key]:
-    return map[key]
-  return default
-
 def generate_zip(name, srcs, pkg):
   """Generates a zip target with given srcs.
 
