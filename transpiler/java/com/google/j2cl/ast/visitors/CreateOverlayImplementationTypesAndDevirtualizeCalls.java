@@ -24,7 +24,9 @@ import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Field;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FieldDescriptor;
+import com.google.j2cl.ast.InitializerBlock;
 import com.google.j2cl.ast.JsInfo;
+import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -151,6 +153,8 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
     static void applyTo(CompilationUnit compilationUnit) {
       List<Type> replacementTypeList = new ArrayList<>();
 
+      // TODO(goktug): we should actually do proper rewrite of the nodes. Current code leaves
+      // traces of overlay members in the original class that requires us cloning here.
       for (Type type : compilationUnit.getTypes()) {
         replacementTypeList.add(type);
 
@@ -168,28 +172,29 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
       Type overlayClass = new Type(type.getKind(), type.getVisibility(), overlayImplTypeDescriptor);
       overlayClass.setNativeTypeDescriptor(type.getDescriptor());
 
-      for (Method method : type.getMethods()) {
-        // Copy JsOverlay and Default methods. If they're not already static, devirtualize them.
-        if (method.getDescriptor().isJsOverlay() || method.getDescriptor().isDefault()) {
+      for (Member member : type.getMembers()) {
+        if (member instanceof Method) {
+          Method method = (Method) member;
+          if (!method.getDescriptor().isJsOverlay() && !method.getDescriptor().isDefault()) {
+            continue;
+          }
           overlayClass.addMethod(createOverlayMethod(method, overlayImplTypeDescriptor));
-
-          // clear the method body from the original type and use a fresh list of parameters.
-          method.getBody().getStatements().clear();
-          List<Variable> newParameters = AstUtils.clone(method.getParameters());
-          method.getParameters().clear();
-          method.getParameters().addAll(newParameters);
-        }
-      }
-
-      for (Field field : type.getFields()) {
-        // Copy JsOverlay fields, only already static ones are legal.
-        if (field.getDescriptor().isJsOverlay()) {
+        } else if (member instanceof Field) {
+          Field field = (Field) member;
+          if (!field.getDescriptor().isJsOverlay()) {
+            continue;
+          }
           checkState(field.getDescriptor().isStatic());
           overlayClass.addField(
               Field.Builder.from(field)
                   .setInitializer(AstUtils.clone(field.getInitializer()))
                   .setEnclosingClass(overlayImplTypeDescriptor)
                   .build());
+        } else {
+          InitializerBlock initializerBlock = (InitializerBlock) member;
+          checkState(initializerBlock.isStatic());
+          overlayClass.addStaticInitializerBlock(AstUtils.clone(initializerBlock.getBlock()));
+          initializerBlock.getBlock().getStatements().clear();
         }
       }
 
@@ -204,6 +209,13 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
               .setJsInfo(JsInfo.NONE)
               .setEnclosingClass(overlayImplTypeDescriptor)
               .build();
+
+      // clear the method body from the original type and use a fresh list of parameters.
+      method.getBody().getStatements().clear();
+      List<Variable> newParameters = AstUtils.clone(method.getParameters());
+      method.getParameters().clear();
+      method.getParameters().addAll(newParameters);
+
       return movedMethod;
     }
   }

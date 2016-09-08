@@ -182,8 +182,7 @@ public class NativeJsTypeTest extends MyTestCase {
     assertEquals(
         new Integer(5),
         new NativeJsTypeWithStaticInitializationAndInstanceOverlayMethod().getObject());
-    // TODO(b/31273615): uncomment
-    // assertEquals(1, clinitCalled);
+    assertEquals(1, clinitCalled);
   }
 
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Function")
@@ -352,5 +351,18 @@ public class NativeJsTypeTest extends MyTestCase {
     subClass.add("Hi");
     assertTrue(subClass.remove("Hi"));
     assertFalse(subClass.remove("Hi"));
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  static class NativeClassWithStaticOverlayFields {
+    @JsOverlay static String uninitializedString;
+    @JsOverlay static int uninitializedInt;
+    @JsOverlay static int initializedInt = 5;
+  }
+
+  public void testUninitializedStaticOverlayField() {
+    assertEquals(0, NativeClassWithStaticOverlayFields.uninitializedInt);
+    assertEquals(5, NativeClassWithStaticOverlayFields.initializedInt);
+    assertNull(NativeClassWithStaticOverlayFields.uninitializedString);
   }
 }
