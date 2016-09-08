@@ -103,6 +103,7 @@ public class Main {
 
   public static void runJsTypeArrayTest() {
     JsTypeArrayTest test = new JsTypeArrayTest();
+    test.testJsTypeArray();
     test.testJsType3DimArray_castFromNativeWithACall();
     test.testJsTypeArray_asAField();
     test.testJsTypeArray_asAParam();
@@ -112,6 +113,7 @@ public class Main {
     test.testJsTypeArray_returnFromNativeWithACall();
     test.testObjectArray_castFromNative();
     test.testObjectArray_instanceOf();
+    test.testJsFunctionArray();
   }
 
   public static void runJsTypeBridgeTest() {

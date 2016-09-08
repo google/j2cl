@@ -15,10 +15,9 @@
  */
 package com.google.j2cl.transpiler.integration.jsinteroptests;
 
-import static jsinterop.annotations.JsPackage.GLOBAL;
-
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
@@ -26,8 +25,29 @@ import jsinterop.annotations.JsType;
 public class JsTypeArrayTest extends MyTestCase {
   /* MAKE SURE EACH TYPE IS ONLY USED ONCE PER TEST CASE */
 
-  @JsType(isNative = true, namespace = GLOBAL, name = "Object")
-  interface SimpleJsTypeReturnFromNative {}
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "String")
+  private static class SomeJsType {}
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  private static class SomeOtherJsType {}
+
+  public void testJsTypeArray() {
+    Object[] array = new SomeJsType[10];
+
+    array[0] = new SomeJsType();
+    array[0] = new SomeOtherJsType();
+    array[0] = new Object();
+
+    assertTrue(array instanceof SomeJsType[]);
+    assertTrue(array instanceof SomeOtherJsType[]);
+    assertTrue(array instanceof Object[]);
+
+    SomeOtherJsType[] other1 = (SomeOtherJsType[]) array;
+    SomeOtherJsType[] other2 = (SomeOtherJsType[]) new Object[0];
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  private interface SimpleJsTypeReturnFromNative {}
 
   public void testJsTypeArray_returnFromNative() {
     SimpleJsTypeReturnFromNative[] array = returnJsTypeFromNative();
@@ -38,7 +58,7 @@ public class JsTypeArrayTest extends MyTestCase {
   @JsMethod
   private static native SimpleJsTypeReturnFromNative[] returnJsTypeFromNative();
 
-  @JsType(isNative = true, namespace = GLOBAL, name = "Object")
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   interface SimpleJsTypeReturnFromNativeWithAMethod {
     @JsProperty
     int getId();
@@ -52,11 +72,11 @@ public class JsTypeArrayTest extends MyTestCase {
   @JsMethod
   private static native SimpleJsTypeReturnFromNativeWithAMethod[] returnJsTypeWithIdsFromNative();
 
-  @JsType(isNative = true, namespace = GLOBAL, name = "Object")
-  interface SimpleJsTypeAsAField {}
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  private interface SimpleJsTypeAsAField {}
 
   @JsType
-  static class SimpleJsTypeAsAFieldHolder {
+  private static class SimpleJsTypeAsAFieldHolder {
     public SimpleJsTypeAsAField[] arrayField;
   }
 
@@ -72,11 +92,11 @@ public class JsTypeArrayTest extends MyTestCase {
   @JsMethod
   private static native void fillArrayField(SimpleJsTypeAsAFieldHolder holder);
 
-  @JsType(isNative = true, namespace = GLOBAL, name = "Object")
-  interface SimpleJsTypeAsAParam {}
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+  private interface SimpleJsTypeAsAParam {}
 
   @JsType
-  static class SimpleJsTypeAsAParamHolder {
+  private static class SimpleJsTypeAsAParamHolder {
     private SimpleJsTypeAsAParam[] theParam;
 
     public void setArrayParam(SimpleJsTypeAsAParam[] param) {
@@ -96,7 +116,7 @@ public class JsTypeArrayTest extends MyTestCase {
   private static native void fillArrayParam(SimpleJsTypeAsAParamHolder holder);
 
   @JsType(isNative = true)
-  static class SimpleJsTypeReturnForMultiDimArray {
+  private static class SimpleJsTypeReturnForMultiDimArray {
     @JsProperty
     public native int getId();
   }
@@ -162,12 +182,12 @@ public class JsTypeArrayTest extends MyTestCase {
   }
 
   @JsFunction
-  interface SomeFunction {
+  private interface SomeFunction {
     int m(int i);
   }
 
   @JsFunction
-  interface SomeOtherFunction {
+  private interface SomeOtherFunction {
     int m(int i);
   }
 
