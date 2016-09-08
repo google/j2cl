@@ -136,7 +136,6 @@ integration_test_names = [
     "nestedtrycatch",
     "newinnerclasswithsameouter",
     "nobridgemethods",
-    "nonstandardsrcjar",
     "numberchilddevirtualcalls",
     "numberdevirtualcalls",
     "numberobjectcalls",
