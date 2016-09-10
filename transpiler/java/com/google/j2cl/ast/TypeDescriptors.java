@@ -192,6 +192,13 @@ public class TypeDescriptors {
           // Native type name
           "Object",
           Collections.emptyList());
+  public static final TypeDescriptor NATIVE_ARRAY =
+      createNative(
+          JsUtils.JS_PACKAGE_GLOBAL,
+          // Native type name
+          "Array",
+          Collections.emptyList());
+
   public static final TypeDescriptor GLOBAL_NAMESPACE =
       // This is the global window references seen as a (phantom) type that will become the
       // enclosing class of native global methods and properties.

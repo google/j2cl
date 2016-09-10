@@ -60,6 +60,9 @@ class ArrayLiteral extends java_lang_Object {
         /**@type {!Array<Array<number>>} */ ($Arrays.$init([], $int, 2));
     let unbalanced = /**@type {!Array<Array<*>>} */ (
         $Arrays.$init([[object, object], null], java_lang_Object, 2));
+    let nativeObject = new String();
+    let array = /**@type {!Array<Array<String>>} */ (
+        $Arrays.$init([[nativeObject, nativeObject]], String, 2));
   }
 
   /**

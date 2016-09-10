@@ -51,12 +51,16 @@ class ArraySimple extends java_lang_Object {
    * @public
    */
   m_main__() {
-    let objects =
-        /**@type {!Array<*>} */ ($Arrays.$create([100], java_lang_Object));
+    let objects = new Array(100);
     let objects2d = /**@type {!Array<Array<*>>} */ (
         $Arrays.$create([5, 10], java_lang_Object));
     let objectsPartial = /**@type {!Array<Array<*>>} */ (
         $Arrays.$create([20, null], java_lang_Object));
+    let nativeObjects = new Array(100);
+    let nativeObjects2d =
+        /**@type {!Array<Array<String>>} */ ($Arrays.$create([5, 10], String));
+    let nativeObjectsPartial = /**@type {!Array<Array<String>>} */ (
+        $Arrays.$create([20, null], String));
     let object = objects[0];
     object = objects2d[0][1];
     $Arrays.$set(objects, 0, null);

@@ -17,7 +17,6 @@ package com.google.j2cl.ast;
 
 import com.google.auto.value.AutoValue;
 import com.google.j2cl.common.Interner;
-
 import javax.annotation.Nullable;
 
 /**
@@ -46,6 +45,7 @@ public abstract class JsInfo {
    */
   public static final JsInfo NONE = create(JsMemberType.NONE, null, null, false);
   public static final JsInfo RAW = create(JsMemberType.METHOD, null, null, false);
+  public static final JsInfo RAW_CTOR = create(JsMemberType.CONSTRUCTOR, null, null, false);
   public static final JsInfo RAW_FIELD = create(JsMemberType.PROPERTY, null, null, false);
 
   private static Interner<JsInfo> interner;

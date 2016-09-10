@@ -12,4 +12,5 @@ load(
 readable_example(
     name = "arrayliteral",
     srcs = glob(["*.java"]),
+    deps = ["//jre/java:gwt-jsinterop-annotations"],
 )

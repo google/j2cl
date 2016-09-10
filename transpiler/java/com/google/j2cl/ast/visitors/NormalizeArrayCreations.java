@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.ast.visitors;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
@@ -26,6 +28,7 @@ import com.google.j2cl.ast.JsTypeAnnotation;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewArray;
+import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -54,6 +57,21 @@ public class NormalizeArrayCreations extends NormalizationPass {
   /** We transform new Object[100][100]; to Arrays.$create([100, 100], Object); */
   private static Node rewriteArrayCreate(NewArray newArrayExpression) {
     Preconditions.checkArgument(newArrayExpression.getArrayLiteral() == null);
+
+    if (shouldBeUntypedArray(newArrayExpression)) {
+      checkState(newArrayExpression.getDimensionExpressions().size() == 1);
+
+      MethodDescriptor nativeArrayConstructor =
+          MethodDescriptor.Builder.fromDefault()
+              .setIsConstructor(true)
+              .setJsInfo(JsInfo.RAW_CTOR)
+              .setEnclosingClassTypeDescriptor(TypeDescriptors.NATIVE_ARRAY)
+              .build();
+      return NewInstance.Builder.from(nativeArrayConstructor)
+          .appendArgumentAndUpdateDescriptor(newArrayExpression.getDimensionExpressions().get(0))
+          .build();
+    }
+
     MethodDescriptor arrayCreateMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
             .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.ARRAYS.getDescriptor())
@@ -88,6 +106,12 @@ public class NormalizeArrayCreations extends NormalizationPass {
    */
   private static Node rewriteArrayInit(NewArray newArrayExpression) {
     Preconditions.checkArgument(newArrayExpression.getArrayLiteral() != null);
+
+    if (shouldBeUntypedArray(newArrayExpression)) {
+      checkState(newArrayExpression.getDimensionExpressions().size() == 1);
+      return newArrayExpression.getArrayLiteral();
+    }
+
     int dimensionCount = newArrayExpression.getDimensionExpressions().size();
     MethodDescriptor arrayInitMethodDescriptor =
         MethodDescriptor.Builder.fromDefault()
@@ -100,15 +124,8 @@ public class NormalizeArrayCreations extends NormalizationPass {
                     TypeDescriptors.getForArray(TypeDescriptors.get().javaLangObject, 1),
                     TypeDescriptors.get().javaLangObject))
             .build();
+
     if (dimensionCount == 1) {
-      // It's 1 dimensional.
-      if (TypeDescriptors.get()
-          .javaLangObject
-          .equalsIgnoreNullability(newArrayExpression.getLeafTypeDescriptor())) {
-        // And the leaf type is Object. All arrays are implicitly Array<Object> so leave out the
-        // init.
-        return newArrayExpression.getArrayLiteral();
-      }
       // Number of dimensions defaults to 1 so we can leave that parameter out.
 
       List<Expression> arguments = new ArrayList<>();
@@ -147,5 +164,14 @@ public class NormalizeArrayCreations extends NormalizationPass {
           arrayInitMethodCall,
           TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()));
     }
+  }
+
+  /** Returns true for arrays where raw JavaScript array representation is enough. */
+  private static boolean shouldBeUntypedArray(NewArray newArrayExpression) {
+    return newArrayExpression.getDimensionExpressions().size() == 1
+        && (newArrayExpression.getLeafTypeDescriptor().isNative()
+            || TypeDescriptors.get()
+                .javaLangObject
+                .equalsIgnoreNullability(newArrayExpression.getLeafTypeDescriptor()));
   }
 }

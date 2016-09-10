@@ -1,9 +1,9 @@
 Integration tests optimized size report:
 **************************************
-There are 1 size changes.
+There are 14 size changes.
 Total size (of already existing tests) changed from
-  767925 to 768754 bytes (100%->100.11%) and from
-  276959 to 277132 bytes (100%->100.06%) gzipped.
+  768695 to 767501 bytes (100%->99.84%) and from
+  277070 to 276680 bytes (100%->99.86%) gzipped.
 
 
 New reports:
@@ -13,13 +13,19 @@ New reports:
 
 Shrinkage report highlights:
 **************************************
-  none
+      old    new
+      992    869 arraycastsinglesideeffect (-12.40%)
+     1070    944 anonymousclasswithcaptures (-11.78%)
+     1136   1052 casttonativetypevariable (-7.39%)
+     1554   1545 casttogenerics (-0.58%)
 
 
 Expansion report highlights:
 **************************************
       old    new
-    11834  12007 jsinteroptests (1.46%)
+     1189   1192 instanceofarray (0.25%)
+     1707   1710 arraybranchinsertion (0.18%)
+     1622   1623 casttoarray (0.06%)
 
 
 All reports:
@@ -28,24 +34,24 @@ All reports:
       918    918 abstractinnerclass (unchanged)
      2698   2698 alllongoperations (unchanged)
      6840   6840 allsimplebridges (unchanged)
-     1070   1070 anonymousclasswithcaptures (unchanged)
+     1070    944 anonymousclasswithcaptures (-11.78%)
      2268   2268 argumentimplicitcasts (unchanged)
      2346   2346 arithmeticexception (unchanged)
        62     62 arithmeticexceptiondisabled (unchanged)
       800    800 arithmeticexceptiondisabledresultused (unchanged)
       943    943 arrayboundsgwtstyle (unchanged)
-     1707   1707 arraybranchinsertion (unchanged)
-      992    992 arraycastsinglesideeffect (unchanged)
-     1572   1572 arrayleafinsertion (unchanged)
+     1707   1710 arraybranchinsertion (0.18%)
+      992    869 arraycastsinglesideeffect (-12.40%)
+     1572   1569 arrayleafinsertion (-0.19%)
      1952   1952 arrayliteral (unchanged)
      1561   1561 arrayobjectcalls (unchanged)
      4242   4242 arrayofboxedtype (unchanged)
-     3508   3508 arrayreadwrite (unchanged)
+     3508   3505 arrayreadwrite (-0.09%)
      1044   1044 assertsimple (unchanged)
       890    890 backwardbridgemethod (unchanged)
       855    855 binaryexpressions (unchanged)
       819    819 blockscoping (unchanged)
-    34999  34999 box2d (unchanged)
+    34999  34992 box2d (-0.02%)
      3149   3149 boxingsideeffect (unchanged)
       861    861 breakstatement (unchanged)
      2279   2279 bridgejsmethod (unchanged)
@@ -57,14 +63,14 @@ All reports:
       827    827 cascadedstaticinit (unchanged)
       804    804 castdevirtualizedtypes (unchanged)
        62     62 castnull (unchanged)
-     1622   1622 casttoarray (unchanged)
+     1622   1623 casttoarray (0.06%)
      3126   3126 casttoboxedtype (unchanged)
      1199   1199 casttoclass (unchanged)
        62     62 casttoclassdisabled (unchanged)
      1089   1089 casttoclassdisabledresultused (unchanged)
-     1554   1554 casttogenerics (unchanged)
+     1554   1545 casttogenerics (-0.58%)
      1220   1220 casttointerface (unchanged)
-     1136   1136 casttonativetypevariable (unchanged)
+     1136   1052 casttonativetypevariable (-7.39%)
      4039   4039 casttoprimitives (unchanged)
      2891   2891 casttoreference (unchanged)
       964    964 castwithsideeffect (unchanged)
@@ -113,7 +119,7 @@ All reports:
       817    817 instanceinitorder (unchanged)
      1907   1907 instanceinnerclass (unchanged)
      1105   1105 instancejsmethods (unchanged)
-     1189   1189 instanceofarray (unchanged)
+     1189   1192 instanceofarray (0.25%)
      2724   2724 instanceofboxedtype (unchanged)
       858    858 instanceofclass (unchanged)
       858    858 instanceofinterface (unchanged)
@@ -134,7 +140,7 @@ All reports:
      1272   1272 jsfunctionbridge (unchanged)
      1971   1971 jsfunctiontypeannotation (unchanged)
       885    885 jsinnerclass (unchanged)
-    11834  12007 jsinteroptests (1.46%)
+    12007  12000 jsinteroptests (-0.06%)
       885    885 jsmethodoverride (unchanged)
       816    816 jsoverlay (unchanged)
       819    819 jsoverlaystaticrefs (unchanged)
@@ -166,7 +172,6 @@ All reports:
       938    938 newinnerclasswithsameouter (unchanged)
        62     62 nobridgemethods (unchanged)
        62     62 nonnullablecomplex (unchanged)
-       62     62 nonstandardsrcjar (unchanged)
      1049   1049 npecatch (unchanged)
      2290   2290 numberchilddevirtualcalls (unchanged)
      3033   3033 numberdevirtualcalls (unchanged)
@@ -187,7 +192,7 @@ All reports:
       832    832 renamejsmethodsinnativejstype (unchanged)
      2004   2004 returnimplicitcasts (unchanged)
       882    882 shadowedfield (unchanged)
-     4183   4183 simpleautoboxing (unchanged)
+     4183   4177 simpleautoboxing (-0.14%)
       863    863 simplecascadingconstructor (unchanged)
       848    848 simpleliterals (unchanged)
      1418   1418 simplestarrayliteral (unchanged)
@@ -200,7 +205,7 @@ All reports:
       835    835 staticinitorder (unchanged)
       811    811 staticjsmethods (unchanged)
       914    914 staticnestedclass (unchanged)
-     1382   1382 strictequality (unchanged)
+     1382   1375 strictequality (-0.51%)
      1398   1398 stringconversion (unchanged)
      1516   1516 stringdevirtualcalls (unchanged)
        62     62 stringescapecodes (unchanged)
@@ -212,7 +217,7 @@ All reports:
       798    798 synchronizedblock (unchanged)
       767    767 systemgetproperty (unchanged)
       944    944 ternaryexpression (unchanged)
-     3883   3883 trywithresource (unchanged)
+     3883   3861 trywithresource (-0.57%)
       936    936 typewildcards (unchanged)
       847    847 unaryexpressions (unchanged)
      2994   2994 underflowoverflowconversion (unchanged)
