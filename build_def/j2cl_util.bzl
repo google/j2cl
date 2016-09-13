@@ -35,7 +35,7 @@ def get_java_package(pkg_name):
   """Extract the java package from the build package"""
   return get_java_path(pkg_name).replace("/", ".")
 
-def generate_zip(name, srcs, pkg):
+def generate_zip(name, srcs, pkg, testonly = None):
   """Generates a zip target with given srcs.
 
   See j2cl_library for details of pkg handling
@@ -44,7 +44,7 @@ def generate_zip(name, srcs, pkg):
   if not hasattr(native, "genzip"):
     return
 
-  native.genzip(name=name, deps=[name + "_pkg_library"],)
+  native.genzip(name=name, deps=[name + "_pkg_library"], testonly = testonly)
 
   if pkg == "RELATIVE":
     flatten = 0
@@ -69,6 +69,7 @@ def generate_zip(name, srcs, pkg):
       flatten=flatten,
       package_dir=package_dir,
       strip_prefix=strip_prefix,
+      testonly = testonly,
   )
 
 # Can't disable property renaming with a simple override because of
