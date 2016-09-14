@@ -42,14 +42,11 @@ GIT_GOOGLE3_PATH = GIT_MANAGED_REPO_PATH + "/google3"
 CITC_GOOGLE3_PATH = ("/google/src/cloud/%s/j2cl-size/google3" %
                      getpass.getuser())
 
-JAVA8_BOOT_CLASS_PATH = ["--nocheck_visibility",
-                         "--java_toolchain=//tools/jdk:toolchain_java8"]
-
 
 def build_optimized_tests(cwd=None):
   """Blaze builds all integration tests in parallel."""
   process_util.run_cmd_get_output(
-      ["blaze", "build", TEST_TARGET_PATTERN] + JAVA8_BOOT_CLASS_PATH,
+      ["blaze", "build", TEST_TARGET_PATTERN],
       cwd=cwd)
 
 
@@ -65,8 +62,7 @@ def build_obfuscated_optimized_test(test_name, cwd=None):
   global OBFUSCATED_OPT_TEST_PATTERN
 
   process_util.run_cmd_get_output(
-      ["blaze", "build", OBFUSCATED_OPT_TEST_PATTERN % test_name
-      ] + JAVA8_BOOT_CLASS_PATH,
+      ["blaze", "build", OBFUSCATED_OPT_TEST_PATTERN % test_name],
       cwd=cwd)
 
 
@@ -82,8 +78,7 @@ def build_readable_optimized_test(test_name, cwd=None):
   global READABLE_OPT_TEST_PATTERN
 
   process_util.run_cmd_get_output(
-      ["blaze", "build", READABLE_OPT_TEST_PATTERN % test_name
-      ] + JAVA8_BOOT_CLASS_PATH,
+      ["blaze", "build", READABLE_OPT_TEST_PATTERN % test_name],
       cwd=cwd)
 
 
@@ -99,8 +94,7 @@ def build_readable_unoptimized_test(test_name, cwd=None):
   global READABLE_TEST_PATTERN
 
   process_util.run_cmd_get_output(
-      ["blaze", "build", READABLE_TEST_PATTERN % test_name
-      ] + JAVA8_BOOT_CLASS_PATH,
+      ["blaze", "build", READABLE_TEST_PATTERN % test_name],
       cwd=cwd)
 
 

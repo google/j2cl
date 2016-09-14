@@ -25,8 +25,6 @@ JAVA_DIR = "third_party/java_src/j2cl/transpiler/javatests"
 EXAMPLES_DIR = JAVA_DIR + "/com/google/j2cl/transpiler/readable/"
 READABLE_TARGET_PATTERN = ("third_party/java_src/j2cl/transpiler/javatests/"
                            "com/google/j2cl/transpiler/readable/...")
-JAVA8_BOOT_CLASS_PATH = ["--nocheck_visibility",
-                         "--java_toolchain=//tools/jdk:toolchain_java8"]
 SUCCESS_CODE = 0
 
 
@@ -109,7 +107,6 @@ def blaze_build(target_names, build_all):
     if build_all and not FLAGS.skip_integration:
       args += [INTEGRATION_TARGET_PATTERN]
 
-  args += JAVA8_BOOT_CLASS_PATH
   return run_cmd_get_output(args, include_stderr=True)
 
 
