@@ -107,7 +107,7 @@ def integration_test(name,
   # NOTE: --closure_entry_point *is* used because it cuts optimize time nearly
   #       in half and the optimization leaks that it previously hid no longer
   #       exist.
-  # NOTE: --norewrite_polyfills *is* used so that size tracking only focuses on
+  # NOTE: --rewrite_polyfills=false *is* used so that size tracking only focuses on
   #       size issues that are actionable outside of JSCompiler or are expected
   #       to eventually be addressed inside of JSCompiler.
   if not test_externs_list:
@@ -116,7 +116,7 @@ def integration_test(name,
       name="optimized_js",
       srcs=["OptHarness.js"],
       defs=J2CL_OPTIMIZED_DEFS + [
-          "--norewrite_polyfills",
+          "--rewrite_polyfills=false",
           "--closure_entry_point=gen.opt.Harness",
       ] + defs,
       compiler="//javascript/tools/jscompiler:head",
@@ -128,7 +128,7 @@ def integration_test(name,
       name="readable_optimized_js",
       srcs=["OptHarness.js"],
       defs=make_output_readable(J2CL_OPTIMIZED_DEFS + [
-          "--norewrite_polyfills",
+          "--rewrite_polyfills=false",
           "--closure_entry_point=gen.opt.Harness",
       ] + defs),
       compiler="//javascript/tools/jscompiler:head",

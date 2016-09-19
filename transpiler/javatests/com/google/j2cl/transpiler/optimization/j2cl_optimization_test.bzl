@@ -29,7 +29,7 @@ def j2cl_optimization_test(name, defs=[], javacopts=[]):
         "--language_out=ECMASCRIPT5",
         "--property_renaming=OFF",
         "--pretty_print",
-        "--norewrite_polyfills",
+        "--rewrite_polyfills=false",
         "--strict",
         "--variable_renaming=OFF",
         "--define=jre.checkedMode=DISABLED",
