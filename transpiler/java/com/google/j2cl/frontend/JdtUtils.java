@@ -1561,7 +1561,6 @@ public class JdtUtils {
         .setIsNative(isNative)
         .setIsNullable(isNullable)
         .setIsPrimitive(isPrimitive)
-        .setIsRawType(typeBinding.isRawType())
         .setIsTypeVariable(isTypeVariable)
         .setIsWildCard(typeBinding.isWildcardType() || typeBinding.isCapture())
         .setJsFunctionMethodDescriptorFactory(jsFunctionMethodDescriptorFactory)

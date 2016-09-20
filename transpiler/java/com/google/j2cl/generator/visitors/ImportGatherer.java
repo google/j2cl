@@ -281,10 +281,6 @@ public class ImportGatherer extends AbstractVisitor {
    */
   private void mayAddTypeDescriptorsIntroducedByJsFunction(TypeDescriptor typeDescriptor) {
     if (typeDescriptor.isJsFunctionImplementation() || typeDescriptor.isJsFunctionInterface()) {
-      if (typeDescriptor.isRawType()) {
-        // raw type is emit as window.Function.
-        return;
-      }
       MethodDescriptor jsFunctionMethodDescriptor =
           typeDescriptor.getConcreteJsFunctionMethodDescriptor();
       if (jsFunctionMethodDescriptor == null) {

@@ -10,6 +10,8 @@ goog.module('com.google.j2cl.transpiler.readable.jsfunctionbridge.Main.ApplyFunc
 
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
+
 
 /**
  * @interface
@@ -65,7 +67,9 @@ class Main$ApplyFunction {
    * Runs inline static field initializers.
    * @public
    */
-  static $clinit() {}
+  static $clinit() {
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
+  }
 };
 
 $Util.$setClassMetadataForInterface(

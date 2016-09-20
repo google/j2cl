@@ -54,7 +54,7 @@ class Main extends java_lang_Object {
   }
 
   /**
-   * @param {Function} af
+   * @param {?function(*, (Number|?number)):*} af
    * @param {*} o
    * @param {(Number|?number)} n
    * @return {*}
@@ -93,7 +93,7 @@ class Main extends java_lang_Object {
   }
 
   /**
-   * @param {Function} b
+   * @param {?function(*, Integer):*} b
    * @param {*} o
    * @param {Integer} n
    * @return {*}
@@ -155,10 +155,11 @@ class Main extends java_lang_Object {
     Main.$clinit();
     let o =
         /**@type {function(?string, Integer):?string} */ (Main$B.$create__());
-    let b1 = /**@type {Function} */ ($Casts.to(o, Main$B));
+    let b1 = /**@type {?function(*, Integer):*} */ ($Casts.to(o, Main$B));
     let b2 = /**@type {?function(?string, Integer):?string} */ (
         $Casts.to(o, Main$B));
-    let af1 = /**@type {Function} */ ($Casts.to(o, Main$ApplyFunction));
+    let af1 = /**@type {?function(*, (Number|?number)):*} */ (
+        $Casts.to(o, Main$ApplyFunction));
     let af2 = /**@type {?function(?string, Integer):?string} */ (
         $Casts.to(o, Main$ApplyFunction));
     let a = /**@type {?function(?number, ?number):?number} */ (
@@ -172,7 +173,7 @@ class Main extends java_lang_Object {
   static m_testNewInstance__() {
     Main.$clinit();
     let b1 = Main$B.$create__();
-    let b2 = /**@type {Function} */ ($Casts.to(
+    let b2 = /**@type {?function(*, Integer):*} */ ($Casts.to(
         /**@type {function(?string, Integer):?string} */ (Main$B.$create__()),
         Main$B));
     let af1 = Main$A.$create__();

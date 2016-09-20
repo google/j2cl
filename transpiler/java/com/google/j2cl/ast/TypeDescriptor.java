@@ -115,7 +115,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       newTypeDescriptor.isNative = typeDescriptor.isNative();
       newTypeDescriptor.isNullable = typeDescriptor.isNullable();
       newTypeDescriptor.isPrimitive = typeDescriptor.isPrimitive();
-      newTypeDescriptor.isRawType = typeDescriptor.isRawType();
       newTypeDescriptor.isTypeVariable = typeDescriptor.isTypeVariable();
       newTypeDescriptor.isUnion = typeDescriptor.isUnion();
       newTypeDescriptor.isWildCard = typeDescriptor.isWildCard();
@@ -282,11 +281,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       return this;
     }
 
-    public Builder setIsRawType(boolean isRawType) {
-      newTypeDescriptor.isRawType = isRawType;
-      return this;
-    }
-
     public Builder setIsTypeVariable(boolean isTypeVariable) {
       newTypeDescriptor.isTypeVariable = isTypeVariable;
       return this;
@@ -420,7 +414,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
   private boolean isNative;
   private boolean isNullable;
   private boolean isPrimitive;
-  private boolean isRawType;
   private boolean isTypeVariable;
   private boolean isUnion;
   private boolean isWildCard;
@@ -849,10 +842,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
 
   public boolean isPrimitive() {
     return isPrimitive;
-  }
-
-  public boolean isRawType() {
-    return isRawType;
   }
 
   public boolean isTypeVariable() {

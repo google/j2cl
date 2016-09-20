@@ -142,8 +142,7 @@ public class JsDocNameUtils {
 
     // JsFunction interface and implementor is a real JS function.
     // Unlike other js types, functions have to be explicitly set to nullable.
-    if (!typeDescriptor.isRawType()
-        && !shouldUseClassName
+    if (!shouldUseClassName
         && (typeDescriptor.isJsFunctionInterface()
             || typeDescriptor.isJsFunctionImplementation())) {
       return getJsDocNameWithNullability(
@@ -178,16 +177,6 @@ public class JsDocNameUtils {
           return "*";
         }
         break;
-    }
-
-    // Java does not do type checking on raw type, which is very similar as 'window.Function' in
-    // JS compiler's type system. 'window.Function' is both a super class and a sub class of any
-    // function(...): types.
-    if (typeDescriptor.isRawType()
-        && !shouldUseClassName
-        && (typeDescriptor.isJsFunctionInterface()
-            || typeDescriptor.isJsFunctionImplementation())) {
-      return TypeDescriptors.NATIVE_FUNCTION.getQualifiedName();
     }
 
     if (typeDescriptor.isArray()) {
