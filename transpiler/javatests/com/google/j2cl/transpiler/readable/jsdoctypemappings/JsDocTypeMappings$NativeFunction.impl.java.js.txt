@@ -1,0 +1,86 @@
+/**
+ * @fileoverview Impl transpiled from
+ * com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings$NativeFunction.
+ *
+ * @suppress {suspiciousCode, transitionalSuspiciousCodeWarnings, uselessCode,
+ * const, missingRequire}
+ */
+goog.module('com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings.NativeFunction$impl');
+
+
+let $Util = goog.require('nativebootstrap.Util$impl');
+
+let $void = goog.forwardDeclare('vmbootstrap.primitives.$void$impl');
+
+
+/**
+ * @interface
+ */
+class JsDocTypeMappings$NativeFunction {
+  /**
+   * @abstract
+   * @return {void}
+   * @public
+   */
+  m_f__() {}
+
+  /**
+   * Marks the provided class as implementing this interface.
+   * @param {Function} classConstructor
+   * @public
+   */
+  static $markImplementor(classConstructor) {
+    /**
+     * @public {boolean}
+     */
+    classConstructor.prototype
+        .$implements__com_google_j2cl_transpiler_readable_jsdoctypemappings_JsDocTypeMappings$NativeFunction =
+        true;
+  }
+
+  /**
+   * Returns whether the provided instance is of a class that implements this
+   * interface.
+   * @param {*} instance
+   * @return {boolean}
+   * @public
+   */
+  static $isInstance(instance) {
+    return instance != null && typeof instance == 'function';
+  }
+
+  /**
+   * Returns whether the provided class is or extends this class.
+   * @param {Function} classConstructor
+   * @return {boolean}
+   * @public
+   */
+  static $isAssignableFrom(classConstructor) {
+    return classConstructor != null &&
+        classConstructor.prototype
+            .$implements__com_google_j2cl_transpiler_readable_jsdoctypemappings_JsDocTypeMappings$NativeFunction;
+  }
+
+  /**
+   * Runs inline static field initializers.
+   * @public
+   */
+  static $clinit() {
+    $void = goog.module.get('vmbootstrap.primitives.$void$impl');
+  }
+};
+
+$Util.$setClassMetadataForInterface(
+    JsDocTypeMappings$NativeFunction,
+    'com.google.j2cl.transpiler.readable.jsdoctypemappings.JsDocTypeMappings$NativeFunction');
+
+
+JsDocTypeMappings$NativeFunction.$markImplementor(
+    /** @type {Function} */ (JsDocTypeMappings$NativeFunction));
+
+
+/**
+ * Export class.
+ */
+exports = JsDocTypeMappings$NativeFunction;
+//# sourceMappingURL=JsDocTypeMappings$NativeFunction.js.map
