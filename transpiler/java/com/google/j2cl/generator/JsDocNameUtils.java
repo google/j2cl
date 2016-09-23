@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.generator;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
@@ -170,6 +172,9 @@ public class JsDocNameUtils {
       case TypeDescriptors.DOUBLE_TYPE_NAME:
       case TypeDescriptors.CHAR_TYPE_NAME:
         return JS_NUMBER_TYPE_NAME;
+      case TypeDescriptors.VOID_TYPE_NAME:
+      case TypeDescriptors.BOOLEAN_TYPE_NAME:
+        return typeDescriptor.getSourceName();
       case TypeDescriptors.LONG_TYPE_NAME:
         return "!" + environment.aliasForType(BootstrapType.NATIVE_LONG.getDescriptor());
       case "java.lang.Object":
@@ -177,6 +182,8 @@ public class JsDocNameUtils {
           return "*";
         }
         break;
+      default:
+        checkState(!typeDescriptor.isPrimitive());
     }
 
     if (typeDescriptor.isArray()) {
@@ -228,16 +235,14 @@ public class JsDocNameUtils {
           environment.aliasForType(typeDescriptor),
           getJsDocNameOfUnionType(typeDescriptor));
     }
-    if (typeDescriptor.isPrimitive()) {
-      return typeDescriptor.getSimpleName();
-    }
+
     if (typeDescriptor.isTypeVariable()) {
       // Template variable like "C_T".
-      return typeDescriptor.getBinaryClassName();
+      return typeDescriptor.getShortName();
     }
+
     if (typeDescriptor.isWildCard()) {
-      // Wild card like "?".
-      return typeDescriptor.getBinaryClassName();
+      return "?";
     }
 
     return environment.aliasForType(typeDescriptor);

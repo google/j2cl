@@ -459,11 +459,8 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return TypeDescriptors.toNullable(other).equals(TypeDescriptors.toNullable(this));
   }
 
-  /** Returns the unqualified binary name like "Outer$Inner". */
-  public String getBinaryClassName() {
-    if (isPrimitive) {
-      return "$" + simpleName;
-    }
+  /** Returns a readable short name to be used in imports, jsdoc etc. */
+  public String getShortName() {
     if (isTypeVariable) {
       // skip the top level class component for better output readability.
       List<String> nameComponents =
@@ -479,11 +476,18 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
 
       return prefix + Joiner.on('_').join(nameComponents);
     }
+
     if (isArray) {
-      String arraySuffix = Strings.repeat("[]", dimensions);
-      return leafTypeDescriptor.getBinaryClassName() + arraySuffix;
+      return leafTypeDescriptor.getShortName() + Strings.repeat("[]", dimensions);
     }
-    return Joiner.on('$').join(classComponents);
+
+    return getBinaryClassName();
+  }
+
+  /** Returns the unqualified binary name like "Outer$Inner". */
+  public String getBinaryClassName() {
+    // TODO rename to getBinarySimpleName
+    return binaryName.substring(binaryName.lastIndexOf(".") + 1);
   }
 
   /** Returns the fully package qualified binary name like "com.google.common.Outer$Inner". */

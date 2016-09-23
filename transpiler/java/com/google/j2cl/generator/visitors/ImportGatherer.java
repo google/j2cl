@@ -80,12 +80,12 @@ public class ImportGatherer extends AbstractVisitor {
   }
 
   private static String getShortAliasName(TypeDescriptor typeDescriptor) {
-    // Add "$" prefix for bootstrap types and extern types.
+    // Add "$" prefix for bootstrap types and primitive types.
     if (BootstrapType.typeDescriptors.contains(TypeDescriptors.toNullable(typeDescriptor))
-        || typeDescriptor.isExtern()) {
-      return "$" + typeDescriptor.getBinaryClassName();
+        || typeDescriptor.isPrimitive()) {
+      return "$" + typeDescriptor.getShortName();
     }
-    return typeDescriptor.getBinaryClassName();
+    return typeDescriptor.getShortName();
   }
 
   private final Multiset<String> localNameUses = HashMultiset.create();
@@ -295,6 +295,7 @@ public class ImportGatherer extends AbstractVisitor {
   }
 
   private void recordLocalNameUses(Set<TypeDescriptor> typeDescriptors) {
+    // TODO: We should also include TypeVariables on name recording.
     for (TypeDescriptor typeDescriptor : typeDescriptors) {
       if (typeDescriptor.isExtern()) {
         // Reserve the top qualifier for externs to avoid clashes. Externs are qualified names such

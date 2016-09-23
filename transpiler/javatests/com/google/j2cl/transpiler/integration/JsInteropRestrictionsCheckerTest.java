@@ -1047,10 +1047,10 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
     assertCompileFails(
         sourcePackage,
         "JsInterop error: 'Buggy' has invalid name 'a.b.c'.",
-        "JsInterop error: '$void Buggy.m()' has invalid name '34s'.",
-        "JsInterop error: '$int Buggy.m' has invalid name 's^'.",
-        "JsInterop error: '$int Buggy.n' cannot have an empty name.",
-        "JsInterop error: '$int Buggy.o' has invalid name 'a.b.c.d'.",
+        "JsInterop error: 'void Buggy.m()' has invalid name '34s'.",
+        "JsInterop error: 'int Buggy.m' has invalid name 's^'.",
+        "JsInterop error: 'int Buggy.n' cannot have an empty name.",
+        "JsInterop error: 'int Buggy.o' has invalid name 'a.b.c.d'.",
         "5 error(s).");
   }
 
@@ -1075,11 +1075,11 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
     assertCompileFails(
         sourcePackage,
         "JsInterop error: 'Buggy' has invalid namespace 'a.b.'.",
-        "JsInterop error: '$void Buggy.m()' has invalid namespace '34s'.",
-        "JsInterop error: '$int Buggy.n' has invalid namespace 's^'.",
-        "JsInterop error: '$void Buggy.o()' cannot have an empty namespace.",
-        "JsInterop error: Instance member '$int Buggy.p' cannot declare a namespace.",
-        "JsInterop error: Instance member '$void Buggy.q()' cannot declare a " + "namespace.",
+        "JsInterop error: 'void Buggy.m()' has invalid namespace '34s'.",
+        "JsInterop error: 'int Buggy.n' has invalid namespace 's^'.",
+        "JsInterop error: 'void Buggy.o()' cannot have an empty namespace.",
+        "JsInterop error: Instance member 'int Buggy.p' cannot declare a namespace.",
+        "JsInterop error: Instance member 'void Buggy.q()' cannot declare a " + "namespace.",
         "6 error(s).");
   }
 
@@ -1421,7 +1421,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        "JsInterop error: Native JsType constructor 'Buggy.Buggy($int)' cannot have "
+        "JsInterop error: Native JsType constructor 'Buggy.Buggy(int)' cannot have "
             + "non-empty method body.",
         "1 error(s).");
   }
@@ -1862,7 +1862,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        "JsInterop error: JsOverlay method '$void Buggy.m()' cannot override a "
+        "JsInterop error: JsOverlay method 'void Buggy.m()' cannot override a "
             + "supertype method.",
         "1 error(s)");
   }
@@ -1893,7 +1893,7 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        "JsInterop error: JsOverlay method '$void Buggy.m()' cannot override a "
+        "JsInterop error: JsOverlay method 'void Buggy.m()' cannot override a "
             + "supertype method.",
         "1 error(s)");
   }
@@ -1915,8 +1915,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        "JsInterop error: JsOverlay field '$int Buggy.f2' can only be static.",
-        "JsInterop error: JsOverlay method '$void Buggy.m()' cannot be non-final nor " + "native.",
+        "JsInterop error: JsOverlay field 'int Buggy.f2' can only be static.",
+        "JsInterop error: JsOverlay method 'void Buggy.m()' cannot be non-final nor " + "native.",
         "2 error(s).");
   }
 
@@ -1955,8 +1955,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        "JsInterop error: JsOverlay method '$void Buggy.m1()' cannot be non-final nor " + "native.",
-        "JsInterop error: JsOverlay method '$void Buggy.m2()' cannot be non-final nor " + "native.",
+        "JsInterop error: JsOverlay method 'void Buggy.m1()' cannot be non-final nor " + "native.",
+        "JsInterop error: JsOverlay method 'void Buggy.m2()' cannot be non-final nor " + "native.",
         "2 error(s).");
   }
 
@@ -2003,8 +2003,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        "JsInterop error: JsOverlay '$int Buggy.F' can only be declared in a native " + "type.",
-        "JsInterop error: JsOverlay '$void Buggy.m()' can only be declared in a native" + " type.",
+        "JsInterop error: JsOverlay 'int Buggy.F' can only be declared in a native " + "type.",
+        "JsInterop error: JsOverlay 'void Buggy.m()' can only be declared in a native" + " type.",
         "2 error(s).");
   }
 
@@ -2099,13 +2099,12 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        "JsInterop error: Native JsType field '$int Buggy.S' cannot have initializer.",
-        "JsInterop error: Native JsType field '$int Buggy.f' cannot have initializer.",
+        "JsInterop error: Native JsType field 'int Buggy.S' cannot have initializer.",
+        "JsInterop error: Native JsType field 'int Buggy.f' cannot have initializer.",
         "JsInterop error: Native JsType member 'Buggy.Buggy()' cannot have @JsIgnore.",
-        "JsInterop error: Native JsType member '$int Buggy.x' cannot have @JsIgnore.",
-        "JsInterop error: Native JsType member '$void Buggy.n()' cannot have " + "@JsIgnore.",
-        "JsInterop error: Native JsType method '$void Buggy.o()' should be native or "
-            + "abstract.",
+        "JsInterop error: Native JsType member 'int Buggy.x' cannot have @JsIgnore.",
+        "JsInterop error: Native JsType member 'void Buggy.n()' cannot have " + "@JsIgnore.",
+        "JsInterop error: Native JsType method 'void Buggy.o()' should be native or " + "abstract.",
         "6 error(s).");
   }
 
@@ -2522,10 +2521,10 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
             + "'Buggy.Buggy(String, Object, String)' cannot precede parameters that are not "
             + "JsOptional.",
         "JsInterop error: JsOptional parameter 'b' in method "
-            + "'$void Buggy.bar($int, Object, String)' cannot precede parameters that are not "
+            + "'void Buggy.bar(int, Object, String)' cannot precede parameters that are not "
             + "JsOptional.",
         "JsInterop error: JsOptional parameter 'b' in method "
-            + "'$void Buggy.baz(Object, String, Object[])' cannot precede parameters that are not "
+            + "'void Buggy.baz(Object, String, Object[])' cannot precede parameters that are not "
             + "JsOptional.",
         "3 error(s).");
   }
@@ -2547,9 +2546,9 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
     assertCompileFails(
         sourcePackage,
         "JsInterop error: JsOptional parameter 'a' in method '"
-            + "Buggy.Buggy($int)' cannot be of a primitive type.",
+            + "Buggy.Buggy(int)' cannot be of a primitive type.",
         "JsInterop error: JsOptional parameter 'c' in method "
-            + "'$void Buggy.bar($int, Object, String[])' cannot be a varargs parameter.",
+            + "'void Buggy.bar(int, Object, String[])' cannot be a varargs parameter.",
         "2 error(s).");
   }
 
@@ -2573,11 +2572,11 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        "JsInterop error: JsOptional parameter in '$void Buggy.fun($int, Object, "
+        "JsInterop error: JsOptional parameter in 'void Buggy.fun(int, Object, "
             + "String)' can only be declared in a JsMethod, a JsConstructor or a JsFunction.",
-        "JsInterop error: JsOptional parameter in '$void Buggy.bar(Object)' can only "
+        "JsInterop error: JsOptional parameter in 'void Buggy.bar(Object)' can only "
             + "be declared in a JsMethod, a JsConstructor or a JsFunction.",
-        "JsInterop error: JsOptional parameter in '$void Native.fun(Object)' can only "
+        "JsInterop error: JsOptional parameter in 'void Native.fun(Object)' can only "
             + "be declared in a JsMethod, a JsConstructor or a JsFunction.",
         "3 error(s).");
   }
