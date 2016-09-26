@@ -60,9 +60,7 @@ j2cl_source_copy(
     srcs = ["//third_party/java_src/gwt/svn/trunk/user:java8_emul_test"],
 )
 
-load("//third_party/java_src/gwt/build_def:java8_library.bzl", "java8_library")
-
-java8_library(
+java_library(
     name = "jre_tests",
     testonly = 1,
     srcs = [
@@ -70,12 +68,10 @@ java8_library(
         ":emul_tests_lib_java_files",
         ":java_emul_internal",
     ],
-    compile_deps = [
+    deps = [
         "//third_party/java/gwt:gwt-jsinterop-annotations",
-        "//third_party/java/jdk:jdk8-google-v7-64/jre/lib/rt.jar",
         "//third_party/java/junit",
     ],
-    import_deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
 )
 
 java_test(

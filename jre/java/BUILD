@@ -33,30 +33,16 @@ j2cl_mirror_from_gwt(
     deps = [":gwt-jsinterop-annotations"],
 )
 
-# This is very hacky and done like this to avoid branching
-# GWT/J2CL from our external repo and google3.
-#
-# java_library does not allow for Java8 sources right now.
-# However for Java8 day GWT and J2CL need Java8 idioms in
-# their standard runtime. For GWT this is not an issue, since
-# that code is never seen by javac, but in J2CL we actually
-# have to have a jar with .class files for our own emulation.
-# This is why we use javac here directly so that we can compile
-# this one library that actually contains Java 8 idioms.
-# Note: All of this will go away after Java8 day.
-
-load("//third_party/java_src/gwt/build_def:java8_library.bzl", "java8_library")
 load("//third_party/java/j2cl:j2cl_library.bzl", "js_import")
 load("//build_def:j2cl_transpile.bzl", "j2cl_transpile")
 load("//build_def:jsni_to_native_js_bundle.bzl", "jsni_to_native_js_bundle")
 
 # Prepare the 'jre' JavaScript target
 
-java8_library(
+java_library(
     name = "jre_java_library",
     srcs = [":jre_hidden_java_files"],
-    compile_deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
-    import_deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
+    deps = ["//third_party/java/gwt:gwt-jsinterop-annotations"],
 )
 
 jsni_to_native_js_bundle(
