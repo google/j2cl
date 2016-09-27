@@ -15,9 +15,8 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Function;
-import com.google.common.base.Joiner;
-import com.google.common.collect.Iterables;
+import static java.util.stream.Collectors.joining;
+
 import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.JsUtils;
 import com.google.j2cl.common.J2clUtils;
@@ -502,16 +501,12 @@ public class JsInteropRestrictionsChecker {
             : getReadableDescription(methodDescriptor.getReturnTypeDescriptor()) + " ",
         getReadableDescription(methodDescriptor.getEnclosingClassTypeDescriptor()),
         methodDescriptor.getName(),
-        Joiner.on(", ")
-            .join(
-                Iterables.transform(
-                    methodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors(),
-                    new Function<TypeDescriptor, String>() {
-                      @Override
-                      public String apply(TypeDescriptor type) {
-                        return getReadableDescription(type.getRawTypeDescriptor());
-                      }
-                    })));
+        methodDescriptor
+            .getDeclarationMethodDescriptor()
+            .getParameterTypeDescriptors()
+            .stream()
+            .map(type -> getReadableDescription(type.getRawTypeDescriptor()))
+            .collect(joining(", ")));
   }
 
   private String getReadableDescription(TypeDescriptor typeDescriptor) {

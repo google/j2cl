@@ -15,8 +15,9 @@
  */
 package com.google.j2cl.frontend;
 
-import com.google.common.base.Function;
-import com.google.common.collect.FluentIterable;
+import static com.google.common.collect.ImmutableSet.toImmutableSet;
+
+import com.google.common.collect.Streams;
 import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.Method;
@@ -61,15 +62,9 @@ public class JsBridgeMethodsCreator {
     List<Method> generatedBridgeMethods = new ArrayList<>();
     Set<String> generatedBridgeMethodMangledNames = new HashSet<>();
     Set<String> existingMethodMangledNames =
-        FluentIterable.from(existingMethods)
-            .transform(
-                new Function<Method, String>() {
-                  @Override
-                  public String apply(Method method) {
-                    return ManglingNameUtils.getMangledName(method.getDescriptor());
-                  }
-                })
-            .toSet();
+        Streams.stream(existingMethods)
+            .map(method -> ManglingNameUtils.getMangledName(method.getDescriptor()))
+            .collect(toImmutableSet());
     for (Entry<IMethodBinding, IMethodBinding> entry :
         delegatedMethodBindingsByBridgeMethodBinding(typeBinding).entrySet()) {
       Method bridgeMethod = createBridgeMethod(typeBinding, entry.getKey(), entry.getValue());

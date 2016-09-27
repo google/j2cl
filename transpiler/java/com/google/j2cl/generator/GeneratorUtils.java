@@ -17,7 +17,6 @@ package com.google.j2cl.generator;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.CompilationUnit;
@@ -113,14 +112,7 @@ public class GeneratorUtils {
 
   public static String getParameterList(Method method, final GenerationEnvironment environment) {
     List<String> parameterNameList =
-        Lists.transform(
-            method.getParameters(),
-            new Function<Variable, String>() {
-              @Override
-              public String apply(Variable variable) {
-                return environment.aliasForVariable(variable);
-              }
-            });
+        Lists.transform(method.getParameters(), environment::aliasForVariable);
     return Joiner.on(", ").join(parameterNameList);
   }
 

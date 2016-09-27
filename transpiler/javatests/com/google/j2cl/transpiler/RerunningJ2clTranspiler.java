@@ -130,7 +130,7 @@ public class RerunningJ2clTranspiler {
         return false;
       }
       OutFile other = (OutFile) obj;
-      return Objects.equal(name, other.name) && Objects.equal(hash, other.hash);
+      return Objects.equal(name, other.name) && hash == other.hash;
     }
 
     @Override

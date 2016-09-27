@@ -16,25 +16,20 @@
 package com.google.j2cl.ast.processors;
 
 import static com.google.auto.common.MoreElements.isAnnotationPresent;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.auto.common.MoreElements;
 import com.google.auto.service.AutoService;
-import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.base.Throwables;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
-
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -46,7 +41,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-
 import javax.annotation.Nullable;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Processor;
@@ -54,7 +48,6 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
-import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
@@ -62,6 +55,8 @@ import javax.lang.model.util.ElementFilter;
 import javax.lang.model.util.Types;
 import javax.tools.Diagnostic.Kind;
 import javax.tools.JavaFileObject;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
 
 /**
  * The J2clAstProcessor emits a single AbstractVisitor class and a Visitor helper class for each
@@ -95,22 +90,11 @@ public class J2clAstProcessor extends AbstractProcessor {
         PackageElement packageElement =
             processingEnv.getElementUtils().getPackageElement(packageName);
         List<VisitableClass> classes =
-            FluentIterable.from(ElementFilter.typesIn(packageElement.getEnclosedElements()))
-                .filter(
-                    new Predicate<TypeElement>() {
-                      @Override
-                      public boolean apply(TypeElement input) {
-                        return isAnnotationPresent(input, Visitable.class);
-                      }
-                    })
-                .transform(
-                    new Function<TypeElement, VisitableClass>() {
-                      @Override
-                      public VisitableClass apply(TypeElement input) {
-                        return extractVisitableClass(input);
-                      }
-                    })
-                .toList();
+            ElementFilter.typesIn(packageElement.getEnclosedElements())
+                .stream()
+                .filter(input -> isAnnotationPresent(input, Visitable.class))
+                .map(this::extractVisitableClass)
+                .collect(toImmutableList());
 
         writeGeneralClass(ABSTRACT_VISITOR_TEMPLATE_FILE, "AbstractVisitor", packageName, classes);
         writeGeneralClass(
@@ -317,22 +301,20 @@ public class J2clAstProcessor extends AbstractProcessor {
   private VisitableClass extractVisitableClass(final TypeElement typeElement) {
     final Types typeUtils = processingEnv.getTypeUtils();
     ImmutableList<Field> allFieldsNames =
-        FluentIterable.from(ElementFilter.fieldsIn(typeElement.getEnclosedElements()))
+        ElementFilter.fieldsIn(typeElement.getEnclosedElements())
+            .stream()
             .filter(hasAnnotation(Visitable.class))
-            .transform(
-                new Function<VariableElement, Field>() {
-                  @Override
-                  public Field apply(@Nullable VariableElement variableElement) {
-                    TypeElement fieldTypeElement =
-                        (TypeElement)
-                            typeUtils.asElement(typeUtils.erasure(variableElement.asType()));
-                    return new Field(
-                        variableElement.getSimpleName().toString(),
-                        fieldTypeElement,
-                        hasAnnotation(Nullable.class).apply(variableElement));
-                  }
+            .map(
+                variableElement -> {
+                  TypeElement fieldTypeElement =
+                      (TypeElement)
+                          typeUtils.asElement(typeUtils.erasure(variableElement.asType()));
+                  return new Field(
+                      variableElement.getSimpleName().toString(),
+                      fieldTypeElement,
+                      hasAnnotation(Nullable.class).apply(variableElement));
                 })
-            .toList();
+            .collect(toImmutableList());
 
     if (!hasAcceptMethod(typeElement)) {
       abortWithError(
@@ -359,31 +341,22 @@ public class J2clAstProcessor extends AbstractProcessor {
   }
 
   private boolean hasAcceptMethod(final TypeElement typeElement) {
-    return FluentIterable.from(ElementFilter.methodsIn(typeElement.getEnclosedElements()))
+    return ElementFilter.methodsIn(typeElement.getEnclosedElements())
+        .stream()
         .anyMatch(
-            new Predicate<ExecutableElement>() {
-              @Override
-              public boolean apply(@Nullable ExecutableElement executableElement) {
-                return executableElement.getSimpleName().contentEquals("accept")
+            executableElement ->
+                executableElement.getSimpleName().contentEquals("accept")
                     && executableElement.getParameters().size() == 1
                     && processingEnv
                         .getTypeUtils()
                         .asElement(executableElement.getParameters().get(0).asType())
                         .getSimpleName()
-                        .contentEquals("Processor");
-              }
-            });
+                        .contentEquals("Processor"));
   }
 
   private static Predicate<VariableElement> hasAnnotation(
       final Class<? extends Annotation> annotation) {
-    return new Predicate<VariableElement>() {
-
-      @Override
-      public boolean apply(@Nullable VariableElement input) {
-        return isAnnotationPresent(input, annotation);
-      }
-    };
+    return input -> isAnnotationPresent(input, annotation);
   }
 
   private void processType(TypeElement type) {

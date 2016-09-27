@@ -18,8 +18,9 @@ package com.google.j2cl.frontend;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
+import static java.util.stream.Collectors.joining;
 
-import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
@@ -61,6 +62,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.stream.Stream;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
@@ -194,7 +196,7 @@ public class JdtUtils {
   public static Kind getKindFromTypeBinding(ITypeBinding typeBinding) {
     if (typeBinding.isInterface()) {
       return Kind.INTERFACE;
-    } else if (typeBinding.isClass() || typeBinding.isEnum() && typeBinding.isAnonymous()) {
+    } else if (typeBinding.isClass() || (typeBinding.isEnum() && typeBinding.isAnonymous())) {
       // Enum values that are anonymous inner classes, are not consider enums classes in
       // our AST, but are considered enum classes by JDT.
       return Kind.CLASS;
@@ -290,12 +292,7 @@ public class JdtUtils {
       ITypeBinding superTypeBinding, final ITypeBinding typeBinding) {
     return filterMethodBindings(
         superTypeBinding.getDeclaredMethods(),
-        new Predicate<IMethodBinding>() {
-          @Override
-          public boolean apply(IMethodBinding methodBinding) {
-            return !isDeclaredBy(methodBinding, typeBinding);
-          }
-        });
+        methodBinding -> !isDeclaredBy(methodBinding, typeBinding));
   }
 
   /**
@@ -323,7 +320,7 @@ public class JdtUtils {
 
   private static List<IMethodBinding> filterMethodBindings(
       IMethodBinding[] methodBindings, Predicate<IMethodBinding> predicate) {
-    return FluentIterable.from(methodBindings).filter(predicate).toList();
+    return Stream.of(methodBindings).filter(predicate).collect(toImmutableList());
   }
 
   /**
@@ -893,13 +890,7 @@ public class JdtUtils {
     // generate type parameters declared in the method.
     Iterable<TypeDescriptor> typeParameterTypeDescriptors =
         FluentIterable.from(methodBinding.getTypeParameters())
-            .transform(
-                new Function<ITypeBinding, TypeDescriptor>() {
-                  @Override
-                  public TypeDescriptor apply(ITypeBinding typeBinding) {
-                    return createTypeDescriptor(typeBinding);
-                  }
-                });
+            .transform(JdtUtils::createTypeDescriptor);
 
     return MethodDescriptor.Builder.fromDefault()
         .setEnclosingClassTypeDescriptor(enclosingClassTypeDescriptor)
@@ -963,14 +954,7 @@ public class JdtUtils {
   }
 
   public static Set<IMethodBinding> getOverriddenJsMembers(IMethodBinding methodBinding) {
-    return Sets.filter(
-        getOverriddenMethods(methodBinding),
-        new Predicate<IMethodBinding>() {
-          @Override
-          public boolean apply(IMethodBinding overriddenMethod) {
-            return JsInteropUtils.isJsMember(overriddenMethod);
-          }
-        });
+    return Sets.filter(getOverriddenMethods(methodBinding), JsInteropUtils::isJsMember);
   }
 
   /**
@@ -1062,29 +1046,19 @@ public class JdtUtils {
     }
     Collection<IMethodBinding> constructors =
         Collections2.filter(
-            Arrays.asList(typeBinding.getDeclaredMethods()),
-            new Predicate<IMethodBinding>() {
-              @Override
-              public boolean apply(IMethodBinding method) {
-                return method.isConstructor();
-              }
-            });
+            Arrays.asList(typeBinding.getDeclaredMethods()), IMethodBinding::isConstructor);
     if (constructors.isEmpty()
         && Modifier.isPublic(typeBinding.getModifiers())
         && !typeBinding.isEnum()) {
       // A public JsType with default constructor is a JsConstructor class.
       return JsInteropUtils.isJsType(typeBinding);
     }
-    return !Collections2.filter(
-            constructors,
-            new Predicate<IMethodBinding>() {
-              @Override
-              public boolean apply(IMethodBinding constructor) {
-                return JsInteropUtils.getJsInfo(constructor).getJsMemberType()
-                    == JsMemberType.CONSTRUCTOR;
-              }
-            })
-        .isEmpty();
+    return constructors
+        .stream()
+        .anyMatch(
+            constructor ->
+                JsInteropUtils.getJsInfo(constructor).getJsMemberType()
+                    == JsMemberType.CONSTRUCTOR);
   }
 
   /**
@@ -1345,22 +1319,22 @@ public class JdtUtils {
 
     // Compute these first since they're reused in other calculations.
     List<String> classComponents =
-        ImmutableList.copyOf(
-            Iterables.concat(
-                enclosingClassTypeDescriptor.getClassComponents(),
-                Arrays.asList(lambdaBinaryName)));
+        Stream.concat(
+                enclosingClassTypeDescriptor.getClassComponents().stream(),
+                Stream.of(lambdaBinaryName))
+            .collect(toImmutableList());
     List<String> packageComponents = enclosingClassTypeDescriptor.getPackageComponents();
     String simpleName = Iterables.getLast(classComponents);
 
     // Compute everything else.
     String binaryName =
-        Joiner.on(".")
-            .join(
-                Iterables.concat(
-                    packageComponents,
-                    Collections.singleton(Joiner.on("$").join(classComponents))));
+        Stream.concat(
+                packageComponents.stream(),
+                Collections.singleton(Joiner.on("$").join(classComponents)).stream())
+            .collect(joining("."));
     String packageName = Joiner.on(".").join(packageComponents);
-    String sourceName = Joiner.on(".").join(Iterables.concat(packageComponents, classComponents));
+    String sourceName =
+        Stream.concat(packageComponents.stream(), classComponents.stream()).collect(joining("."));
 
     List<TypeDescriptor> typeArgumentDescriptors = Lists.newArrayList();
     for (TypeDescriptor interfaceTypeDescriptor : lambdaInterfaceTypeDescriptors) {
@@ -1478,11 +1452,10 @@ public class JdtUtils {
 
     // Compute everything else.
     String binaryName =
-        Joiner.on(".")
-            .join(
-                Iterables.concat(
-                    packageComponents,
-                    Collections.singleton(Joiner.on("$").join(classComponents))));
+        Stream.concat(
+                packageComponents.stream(),
+                Collections.singleton(Joiner.on("$").join(classComponents)).stream())
+            .collect(joining("."));
 
     if (isTypeVariable) {
       binaryName = binaryName + ":" + typeBinding.getErasure().getBinaryName();
@@ -1511,7 +1484,8 @@ public class JdtUtils {
     }
 
     String packageName = Joiner.on(".").join(packageComponents);
-    String sourceName = Joiner.on(".").join(Iterables.concat(packageComponents, classComponents));
+    String sourceName =
+        Stream.concat(packageComponents.stream(), classComponents.stream()).collect(joining("."));
     List<TypeDescriptor> typeArgumentDescriptors =
         overrideTypeArgumentDescriptors != null
             ? overrideTypeArgumentDescriptors

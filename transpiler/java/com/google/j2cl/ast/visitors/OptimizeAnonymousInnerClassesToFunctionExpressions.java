@@ -13,9 +13,10 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.base.Function;
+import static com.google.common.collect.ImmutableSet.toImmutableSet;
+
 import com.google.common.base.Predicates;
-import com.google.common.collect.FluentIterable;
+import com.google.common.collect.Streams;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.CompilationUnit;
@@ -71,16 +72,10 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               //  (E e) -> { return e.toString(); }
               //
               Set<Variable> enclosingCaptures =
-                  FluentIterable.from(getCurrentType().getFields())
-                      .transform(
-                          new Function<Field, Variable>() {
-                            @Override
-                            public Variable apply(Field field) {
-                              return field.getCapturedVariable();
-                            }
-                          })
+                  Streams.stream(getCurrentType().getFields())
+                      .map(Field::getCapturedVariable)
                       .filter(Predicates.notNull())
-                      .toSet();
+                      .collect(toImmutableSet());
               return optimizeToFunctionExpression(
                   optimizableJsFunctionImplementation, enclosingCaptures);
             }

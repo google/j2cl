@@ -17,8 +17,8 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
-import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicates;
 import com.google.common.collect.FluentIterable;
@@ -1095,14 +1095,11 @@ public class AstUtils {
   public static FluentIterable<Field> filterFields(Iterable<Member> members) {
     return FluentIterable.from(members)
         .transform(
-            new Function<Member, Field>() {
-              @Override
-              public Field apply(Member member) {
-                if (member instanceof Field) {
-                  return (Field) member;
-                }
-                return null;
+            member -> {
+              if (member instanceof Field) {
+                return (Field) member;
               }
+              return null;
             })
         .filter(Predicates.notNull());
   }
@@ -1111,14 +1108,11 @@ public class AstUtils {
   public static FluentIterable<Method> filterMethods(Iterable<Member> members) {
     return FluentIterable.from(members)
         .transform(
-            new Function<Member, Method>() {
-              @Override
-              public Method apply(Member member) {
-                if (member instanceof Method) {
-                  return (Method) member;
-                }
-                return null;
+            member -> {
+              if (member instanceof Method) {
+                return (Method) member;
               }
+              return null;
             })
         .filter(Predicates.notNull());
   }
@@ -1127,14 +1121,11 @@ public class AstUtils {
   public static FluentIterable<InitializerBlock> filterInitializerBlocks(Iterable<Member> members) {
     return FluentIterable.from(members)
         .transform(
-            new Function<Member, InitializerBlock>() {
-              @Override
-              public InitializerBlock apply(Member member) {
-                if (member instanceof InitializerBlock) {
-                  return (InitializerBlock) member;
-                }
-                return null;
+            member -> {
+              if (member instanceof InitializerBlock) {
+                return (InitializerBlock) member;
               }
+              return null;
             })
         .filter(Predicates.notNull());
   }
@@ -1142,15 +1133,7 @@ public class AstUtils {
   @SuppressWarnings("unchecked")
   /** Clones a list of expressions */
   public static <T extends Cloneable<?>> List<T> clone(List<T> nodes) {
-    return FluentIterable.from(nodes)
-        .transform(
-            new Function<T, T>() {
-              @Override
-              public T apply(T node) {
-                return (T) node.clone();
-              }
-            })
-        .toList();
+    return nodes.stream().map(node -> (T) node.clone()).collect(toImmutableList());
   }
 
   @SuppressWarnings("unchecked")
@@ -1225,14 +1208,6 @@ public class AstUtils {
 
   /** Get a list of references for {@code variables}. */
   public static List<Expression> getReferences(List<Variable> variables) {
-    return FluentIterable.from(variables)
-        .transform(
-            new Function<Variable, Expression>() {
-              @Override
-              public Expression apply(Variable variable) {
-                return variable.getReference();
-              }
-            })
-        .toList();
+    return variables.stream().map(Variable::getReference).collect(toImmutableList());
   }
 }

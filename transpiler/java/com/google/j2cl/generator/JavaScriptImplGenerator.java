@@ -16,12 +16,9 @@
 package com.google.j2cl.generator;
 
 import static com.google.common.base.Preconditions.checkState;
+import static java.util.stream.Collectors.joining;
 
-import com.google.common.base.Function;
-import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Predicate;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AnonymousType;
 import com.google.j2cl.ast.Expression;
@@ -405,24 +402,14 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     sourceBuilder.openBrace();
     sourceBuilder.newLine();
     String checks =
-        Joiner.on(" && ")
-            .join(
-                FluentIterable.from(type.getDescriptor().getIntersectedTypeDescriptors())
-                    .filter(
-                        new Predicate<TypeDescriptor>() {
-                          @Override
-                          public boolean apply(TypeDescriptor intersectedType) {
-                            return intersectedType != TypeDescriptors.get().javaLangObject;
-                          }
-                        })
-                    .transform(
-                        new Function<TypeDescriptor, String>() {
-                          @Override
-                          public String apply(TypeDescriptor intersectedType) {
-                            return environment.aliasForType(intersectedType)
-                                + ".$isInstance(instance)";
-                          }
-                        }));
+        type.getDescriptor()
+            .getIntersectedTypeDescriptors()
+            .stream()
+            .filter(intersectedType -> intersectedType != TypeDescriptors.get().javaLangObject)
+            .map(
+                intersectedType ->
+                    environment.aliasForType(intersectedType) + ".$isInstance(instance)")
+            .collect(joining(" && "));
     sourceBuilder.append("return " + checks + ";");
     sourceBuilder.closeBrace();
     sourceBuilder.newLines(2);

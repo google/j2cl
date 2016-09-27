@@ -15,10 +15,11 @@
  */
 package com.google.j2cl.generator.visitors;
 
-import com.google.common.base.Function;
-import com.google.common.collect.FluentIterable;
+import static com.google.common.collect.ImmutableSet.toImmutableSet;
+
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Streams;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Type;
@@ -40,19 +41,16 @@ public class VariableAliasesGatheringVisitor extends AbstractVisitor {
    */
   public static Map<Variable, String> gatherVariableAliases(Iterable<Import> imports, Type type) {
     final Set<String> forbiddenNames =
-        FluentIterable.from(imports)
-            .transform(
-                new Function<Import, String>() {
-                  @Override
-                  public String apply(Import anImport) {
-                    if (!anImport.getElement().isExtern()) {
-                      return anImport.getAlias();
-                    }
-                    // Collect the top level name for the extern.
-                    return anImport.getElement().getQualifiedName().split("\\\\.")[0];
+        Streams.stream(imports)
+            .map(
+                anImport -> {
+                  if (!anImport.getElement().isExtern()) {
+                    return anImport.getAlias();
                   }
+                  // Collect the top level name for the extern.
+                  return anImport.getElement().getQualifiedName().split("\\\\.")[0];
                 })
-            .toSet();
+            .collect(toImmutableSet());
     final Multimap<Member, String> variableNamesByMember = HashMultimap.create();
     final Map<Variable, String> aliasByVariable = new HashMap<>();
 

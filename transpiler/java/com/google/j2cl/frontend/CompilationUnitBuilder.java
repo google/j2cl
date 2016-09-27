@@ -16,11 +16,12 @@
 package com.google.j2cl.frontend;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.ImmutableList.toImmutableList;
+import static java.util.Map.Entry.comparingByKey;
+import static java.util.stream.Collectors.toCollection;
 
-import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ComparisonChain;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
@@ -91,12 +92,12 @@ import com.google.j2cl.ast.sourcemap.SourcePosition;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Stream;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.AbstractTypeDeclaration;
 import org.eclipse.jdt.core.dom.AnonymousClassDeclaration;
@@ -214,16 +215,10 @@ public class CompilationUnitBuilder {
       Preconditions.checkState(enumType.isEnum());
       enumType.addFields(
           0,
-          FluentIterable.from(
-                  JdtUtils.<EnumConstantDeclaration>asTypedList(enumDeclaration.enumConstants()))
-              .transform(
-                  new Function<EnumConstantDeclaration, Field>() {
-                    @Override
-                    public Field apply(EnumConstantDeclaration enumConstantDeclaration) {
-                      return convert(enumConstantDeclaration);
-                    }
-                  })
-              .toList());
+          JdtUtils.<EnumConstantDeclaration>asTypedList(enumDeclaration.enumConstants())
+              .stream()
+              .map(this::convert)
+              .collect(toImmutableList()));
       EnumMethodsCreator.applyTo(enumType);
     }
 
@@ -504,15 +499,9 @@ public class CompilationUnitBuilder {
     }
 
     private TypeDescriptor[] getParameterTypeDescriptors(ITypeBinding[] parameterTypes) {
-      return FluentIterable.from(Arrays.asList(parameterTypes))
-          .transform(
-              new Function<ITypeBinding, TypeDescriptor>() {
-                @Override
-                public TypeDescriptor apply(ITypeBinding typeBinding) {
-                  return JdtUtils.createTypeDescriptor(typeBinding);
-                }
-              })
-          .toArray(TypeDescriptor.class);
+      return Stream.of(parameterTypes)
+          .map(JdtUtils::createTypeDescriptor)
+          .toArray(TypeDescriptor[]::new);
     }
 
     private Expression convertAnonymousClassCreation(
@@ -710,27 +699,11 @@ public class CompilationUnitBuilder {
 
     private List<Expression> convertExpressions(
         List<org.eclipse.jdt.core.dom.Expression> expressions) {
-      return new ArrayList<>(
-          Lists.transform(
-              expressions,
-              new Function<org.eclipse.jdt.core.dom.Expression, Expression>() {
-                @Override
-                public Expression apply(org.eclipse.jdt.core.dom.Expression expression) {
-                  return convert(expression);
-                }
-              }));
+      return expressions.stream().map(this::convert).collect(toCollection(ArrayList::new));
     }
 
     private List<Statement> convertStatements(List<org.eclipse.jdt.core.dom.Statement> statements) {
-      return new ArrayList<>(
-          Lists.transform(
-              statements,
-              new Function<org.eclipse.jdt.core.dom.Statement, Statement>() {
-                @Override
-                public Statement apply(org.eclipse.jdt.core.dom.Statement expression) {
-                  return convert(expression);
-                }
-              }));
+      return statements.stream().map(this::convert).collect(toCollection(ArrayList::new));
     }
 
     private ConditionalExpression convert(
@@ -1245,13 +1218,7 @@ public class CompilationUnitBuilder {
       // generate parameters type descriptors.
       List<TypeDescriptor> parameterTypeDescriptors =
           Lists.transform(
-              Arrays.asList(methodBinding.getParameterTypes()),
-              new Function<ITypeBinding, TypeDescriptor>() {
-                @Override
-                public TypeDescriptor apply(ITypeBinding typeBinding) {
-                  return JdtUtils.createTypeDescriptor(typeBinding);
-                }
-              });
+              Arrays.asList(methodBinding.getParameterTypes()), JdtUtils::createTypeDescriptor);
 
       MethodDescriptor methodDescriptor =
           MethodDescriptor.Builder.fromDefault()
@@ -1994,19 +1961,15 @@ public class CompilationUnitBuilder {
     // freshness of the PackageInfoCache can be trusted.
     Collections.sort(
         entries,
-        new Comparator<Entry<String, ?>>() {
-          @Override
-          public int compare(Entry<String, ?> thisEntry, Entry<String, ?> thatEntry) {
-            String thisFilePath = thisEntry.getKey();
-            String thatFilePath = thatEntry.getKey();
-            boolean thisIsPackageInfo = thisFilePath.endsWith("package-info.java");
-            boolean thatIsPackageInfo = thatFilePath.endsWith("package-info.java");
-            return ComparisonChain.start()
-                .compareTrueFirst(thisIsPackageInfo, thatIsPackageInfo)
-                .compare(thisFilePath, thatFilePath)
-                .result();
-          }
-        });
+        comparingByKey(
+            (thisFilePath, thatFilePath) -> {
+              boolean thisIsPackageInfo = thisFilePath.endsWith("package-info.java");
+              boolean thatIsPackageInfo = thatFilePath.endsWith("package-info.java");
+              return ComparisonChain.start()
+                  .compareTrueFirst(thisIsPackageInfo, thatIsPackageInfo)
+                  .compare(thisFilePath, thatFilePath)
+                  .result();
+            }));
   }
 
   private CompilationUnitBuilder() {}

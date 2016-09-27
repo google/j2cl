@@ -1,8 +1,9 @@
 
 package com.google.j2cl.ast.visitors;
 
+import static java.util.stream.Collectors.joining;
+
 import com.google.common.base.Joiner;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.j2cl.ast.AbstractRewriter;
@@ -17,6 +18,7 @@ import com.google.j2cl.ast.Visibility;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 /**
  * To represent intersection type in the closure type system we need to synthesize a class that has
@@ -67,7 +69,8 @@ public final class NormalizeIntersectionTypes extends NormalizationPass {
                   .setPackageName(packageName)
                   .setSimpleName(simpleName)
                   .setSourceName(
-                      Joiner.on(".").join(Iterables.concat(packageComponents, classComponents)))
+                      Stream.concat(packageComponents.stream(), classComponents.stream())
+                          .collect(joining(".")))
                   // It would be nice to compute this is the JdtUtils.createIntersection however,
                   // since factories are copied before the TypeDescriptor is modified and interned
                   // with a Builder.from it runs the factory in the context before this

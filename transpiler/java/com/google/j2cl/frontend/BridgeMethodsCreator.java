@@ -17,7 +17,6 @@ package com.google.j2cl.frontend;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.ast.AbstractRewriter;
@@ -158,22 +157,18 @@ public class BridgeMethodsCreator {
   private static Collection<IMethodBinding> getPotentialBridgeMethodsInType(ITypeBinding type) {
     return Collections2.filter(
         Arrays.asList(type.getDeclaredMethods()),
-        new Predicate<IMethodBinding>() {
-          @Override
-          /**
-           * If {@code method}, the method with more specific type arguments, has different method
-           * signature with {@code method.getMethodDeclaration()}, the original generic method, it
-           * means this method is a potential method that may need a bridge method.
-           */
-          public boolean apply(IMethodBinding method) {
-            return !method.isConstructor()
+        /**
+         * If {@code method}, the method with more specific type arguments, has different method
+         * signature with {@code method.getMethodDeclaration()}, the original generic method, it
+         * means this method is a potential method that may need a bridge method.
+         */
+        method ->
+            !method.isConstructor()
                 && !method.isSynthetic()
                 // is a parameterized method.
                 && method != method.getMethodDeclaration()
                 // type erasure changes the signature
-                && !JdtUtils.areMethodsOverrideEquivalent(method, method.getMethodDeclaration());
-          }
-        });
+                && !JdtUtils.areMethodsOverrideEquivalent(method, method.getMethodDeclaration()));
   }
 
   /**

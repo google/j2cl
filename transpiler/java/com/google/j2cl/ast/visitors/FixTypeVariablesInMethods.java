@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
@@ -79,13 +78,7 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
           typeDescriptor,
           Lists.transform(
               typeDescriptor.getTypeArgumentDescriptors(),
-              new Function<TypeDescriptor, TypeDescriptor>() {
-                @Override
-                public TypeDescriptor apply(TypeDescriptor typeArgument) {
-                  // Replace type variable in the arguments.
-                  return replaceTypeVariableWithBound(typeArgument, method);
-                }
-              }));
+              typeArgument -> replaceTypeVariableWithBound(typeArgument, method)));
     }
     if (typeDescriptor.isArray()) {
       TypeDescriptor boundTypeDescriptor =

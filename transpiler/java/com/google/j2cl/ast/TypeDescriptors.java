@@ -16,14 +16,14 @@ c * Copyright 2015 Google Inc.
 package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.ImmutableList.toImmutableList;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toCollection;
 
-import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 import com.google.common.collect.BiMap;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -31,10 +31,12 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.j2cl.ast.TypeDescriptor.DescriptorFactory;
 import com.google.j2cl.ast.common.JsUtils;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 /** Utility class holding type descriptors that need to be referenced directly. */
 public class TypeDescriptors {
@@ -224,10 +226,10 @@ public class TypeDescriptors {
                 typeDescriptor.getSuperTypeDescriptor());
 
     List<String> classComponents =
-        Lists.newArrayList(
-            Iterables.concat(
-                typeDescriptor.getClassComponents(),
-                Arrays.asList(AstUtils.OVERLAY_IMPLEMENTATION_CLASS_SUFFIX)));
+        Stream.concat(
+                typeDescriptor.getClassComponents().stream(),
+                Stream.of(AstUtils.OVERLAY_IMPLEMENTATION_CLASS_SUFFIX))
+            .collect(toCollection(ArrayList::new));
 
     return createExactly(
         superTypeDescriptor,
@@ -341,23 +343,13 @@ public class TypeDescriptors {
     final TypeDescriptor superTypeDescriptor =
         Iterables.find(
             intersectedTypeDescriptors,
-            new Predicate<TypeDescriptor>() {
-              @Override
-              public boolean apply(TypeDescriptor typeDescriptor) {
-                return !typeDescriptor.isInterface();
-              }
-            },
+            typeDescriptor -> !typeDescriptor.isInterface(),
             defaultSuperType);
     final List<TypeDescriptor> interfaceTypeDescriptors =
-        FluentIterable.from(intersectedTypeDescriptors)
-            .filter(
-                new Predicate<TypeDescriptor>() {
-                  @Override
-                  public boolean apply(TypeDescriptor typeDescriptor) {
-                    return typeDescriptor.isInterface();
-                  }
-                })
-            .toList();
+        intersectedTypeDescriptors
+            .stream()
+            .filter(TypeDescriptor::isInterface)
+            .collect(toImmutableList());
     String joinedBinaryName =
         TypeDescriptors.createJoinedBinaryName(intersectedTypeDescriptors, " & ");
     Set<TypeDescriptor> typeVars = Sets.newLinkedHashSet();
@@ -440,11 +432,10 @@ public class TypeDescriptors {
 
     String simpleName = Iterables.getLast(classComponents);
     String binaryName =
-        Joiner.on(".")
-            .join(
-                Iterables.concat(
-                    packageComponents,
-                    Collections.singleton(Joiner.on("$").join(classComponents))));
+        Stream.concat(
+                packageComponents.stream(),
+                Collections.singleton(Joiner.on("$").join(classComponents)).stream())
+            .collect(joining("."));
     String packageName = Joiner.on(".").join(packageComponents);
     return new TypeDescriptor.Builder()
         .setBinaryName(binaryName)
@@ -458,7 +449,9 @@ public class TypeDescriptors {
         .setPackageName(packageName)
         .setRawTypeDescriptorFactory(rawTypeDescriptorFactory)
         .setSimpleName(simpleName)
-        .setSourceName(Joiner.on(".").join(Iterables.concat(packageComponents, classComponents)))
+        .setSourceName(
+            Stream.concat(packageComponents.stream(), classComponents.stream())
+                .collect(joining(".")))
         .setSuperTypeDescriptorFactory(superTypeDescriptorFactory)
         .setTypeArgumentDescriptors(typeArgumentDescriptors)
         .setVisibility(Visibility.PUBLIC)
@@ -618,22 +611,19 @@ public class TypeDescriptors {
 
   public static String createJoinedBinaryName(
       final List<TypeDescriptor> typeDescriptors, String separator) {
-    return Joiner.on(separator)
-        .join(
-            Lists.transform(
-                typeDescriptors,
-                new Function<TypeDescriptor, String>() {
-                  @Override
-                  public String apply(TypeDescriptor typeDescriptor) {
-                    String binaryName = typeDescriptor.getBinaryName();
-                    if (typeDescriptor.isParameterizedType()) {
-                      binaryName += "_";
-                      binaryName +=
-                          createJoinedBinaryName(typeDescriptor.getTypeArgumentDescriptors(), "_");
-                    }
-                    return binaryName.replace(".", "_");
-                  }
-                }));
+    return typeDescriptors
+        .stream()
+        .map(
+            typeDescriptor -> {
+              String binaryName = typeDescriptor.getBinaryName();
+              if (typeDescriptor.isParameterizedType()) {
+                binaryName += "_";
+                binaryName +=
+                    createJoinedBinaryName(typeDescriptor.getTypeArgumentDescriptors(), "_");
+              }
+              return binaryName.replace('.', '_');
+            })
+        .collect(joining(separator));
   }
 
   /** Builder for TypeDescriptors. */

@@ -15,10 +15,10 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Function;
-import com.google.common.base.Joiner;
-import com.google.common.collect.FluentIterable;
+import static java.util.stream.Collectors.joining;
+
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Streams;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -120,18 +120,9 @@ public class MethodDescriptors {
   static String getSignature(String name, Iterable<TypeDescriptor> parameterTypeDescriptors) {
     return name
         + "("
-        + Joiner.on(", ")
-            .join(
-                FluentIterable.from(parameterTypeDescriptors)
-                    .transform(
-                        new Function<TypeDescriptor, String>() {
-                          @Override
-                          public String apply(TypeDescriptor type) {
-                            return TypeDescriptors.toNonNullable(type)
-                                .getRawTypeDescriptor()
-                                .getBinaryName();
-                          }
-                        }))
+        + Streams.stream(parameterTypeDescriptors)
+            .map(type -> TypeDescriptors.toNonNullable(type).getRawTypeDescriptor().getBinaryName())
+            .collect(joining(", "))
         + ")";
   }
 }

@@ -17,7 +17,6 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Visitable;
@@ -71,14 +70,7 @@ public abstract class Invocation extends Expression implements MemberReference {
       methodDescriptor =
           MethodDescriptors.createWithExtraParameters(
               methodDescriptor,
-              Iterables.transform(
-                  argumentExpressions,
-                  new Function<Expression, TypeDescriptor>() {
-                    @Override
-                    public TypeDescriptor apply(Expression expression) {
-                      return expression.getTypeDescriptor();
-                    }
-                  }));
+              Iterables.transform(argumentExpressions, Expression::getTypeDescriptor));
       return this;
     }
 

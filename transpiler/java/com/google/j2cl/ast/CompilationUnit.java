@@ -18,8 +18,7 @@ package com.google.j2cl.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.FluentIterable;
+import com.google.common.base.Optional;
 import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.common.J2clUtils;
@@ -74,16 +73,15 @@ public class CompilationUnit extends Node {
   }
 
   public Type getType(final TypeDescriptor typeDescriptor) {
-    return FluentIterable.from(types)
-        .firstMatch(
-            new Predicate<Type>() {
-              @Override
-              public boolean apply(Type type) {
-                return type.getDescriptor()
-                    .getRawTypeDescriptor()
-                    .equalsIgnoreNullability(typeDescriptor.getRawTypeDescriptor());
-              }
-            })
+    return Optional.fromJavaUtil(
+            types
+                .stream()
+                .filter(
+                    type ->
+                        type.getDescriptor()
+                            .getRawTypeDescriptor()
+                            .equalsIgnoreNullability(typeDescriptor.getRawTypeDescriptor()))
+                .findFirst())
         .orNull();
   }
 

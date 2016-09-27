@@ -122,21 +122,18 @@ public class J2clTranspilerWorker {
     // Compiler has no static state, but rather uses thread local variables.
     // Because of this we invoke the compiler on a different thread each time.
     Runnable runnable =
-        new Runnable() {
-          @Override
-          public void run() {
-            J2clTranspiler transpiler = createTranspiler(args);
-            try {
-              transpiler.run();
-              successful.set(true);
-            } catch (Errors.Exit e) {
-              // Compiler is signaling a compile failure for the given code.
-              successful.set(false);
-            } catch (RuntimeException e) {
-              // Compiler had a bug, report this and quit the process.
-              e.printStackTrace(originalStdErr);
-              exit(-2);
-            }
+        () -> {
+          J2clTranspiler transpiler = createTranspiler(args);
+          try {
+            transpiler.run();
+            successful.set(true);
+          } catch (Errors.Exit e) {
+            // Compiler is signaling a compile failure for the given code.
+            successful.set(false);
+          } catch (RuntimeException e) {
+            // Compiler had a bug, report this and quit the process.
+            e.printStackTrace(originalStdErr);
+            exit(-2);
           }
         };
 

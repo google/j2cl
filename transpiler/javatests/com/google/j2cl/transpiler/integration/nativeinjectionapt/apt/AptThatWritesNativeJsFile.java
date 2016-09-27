@@ -15,26 +15,23 @@
  */
 package com.google.j2cl.transpiler.integration.nativeinjectionapt.apt;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
+
 import com.google.auto.common.BasicAnnotationProcessor;
 import com.google.auto.common.MoreElements;
 import com.google.auto.service.AutoService;
-import com.google.common.base.Function;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
-
 import java.io.IOException;
 import java.io.Writer;
 import java.lang.annotation.Annotation;
 import java.util.Set;
-
 import javax.annotation.processing.Processor;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
-import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.ElementFilter;
 import javax.tools.Diagnostic.Kind;
@@ -69,15 +66,10 @@ public class AptThatWritesNativeJsFile extends BasicAnnotationProcessor {
 
         TypeElement typeElement = MoreElements.asType(value);
         ImmutableList<String> methodNames =
-            FluentIterable.from(ElementFilter.methodsIn(typeElement.getEnclosedElements()))
-                .transform(
-                    new Function<ExecutableElement, String>() {
-                      @Override
-                      public String apply(ExecutableElement input) {
-                        return input.getSimpleName().toString();
-                      }
-                    })
-                .toList();
+            ElementFilter.methodsIn(typeElement.getEnclosedElements())
+                .stream()
+                .map(input -> input.getSimpleName().toString())
+                .collect(toImmutableList());
 
         String packageName = MoreElements.getPackage(typeElement).getQualifiedName().toString();
         String className = typeElement.getSimpleName().toString();

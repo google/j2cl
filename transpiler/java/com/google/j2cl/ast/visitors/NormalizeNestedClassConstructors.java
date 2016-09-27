@@ -15,9 +15,7 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.AstUtils;
@@ -98,13 +96,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
       return Method.Builder.from(method)
           .addParameters(
               Iterables.transform(
-                  getFieldsForAllCaptures(getCurrentType()),
-                  new Function<Field, Variable>() {
-                    @Override
-                    public Variable apply(Field capturedField) {
-                      return AstUtils.createOuterParamByField(capturedField);
-                    }
-                  }))
+                  getFieldsForAllCaptures(getCurrentType()), AstUtils::createOuterParamByField))
           .build();
     }
   }
@@ -324,13 +316,7 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
   /** Returns all the added fields corresponding to captured variables or enclosing instance. */
   private static Iterable<Field> getFieldsForAllCaptures(Type type) {
     return Iterables.filter(
-        type.getInstanceFields(),
-        new Predicate<Field>() {
-          @Override
-          public boolean apply(Field field) {
-            return field.getDescriptor().isFieldDescriptorForAllCaptures();
-          }
-        });
+        type.getInstanceFields(), field -> field.getDescriptor().isFieldDescriptorForAllCaptures());
   }
 
   private static Field getCapturingFieldInType(Variable variable, Type type) {

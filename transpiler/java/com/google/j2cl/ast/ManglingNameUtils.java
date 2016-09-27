@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast;
 
-import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
@@ -147,11 +146,6 @@ public class ManglingNameUtils {
   private static List<String> getMangledParameterTypes(MethodDescriptor methodDescriptor) {
     return Lists.transform(
         methodDescriptor.getDeclarationMethodDescriptor().getParameterTypeDescriptors(),
-        new Function<TypeDescriptor, String>() {
-          @Override
-          public String apply(TypeDescriptor parameterTypeDescriptor) {
-            return getMangledName(parameterTypeDescriptor.getRawTypeDescriptor());
-          }
-        });
+        parameterTypeDescriptor -> getMangledName(parameterTypeDescriptor.getRawTypeDescriptor()));
   }
 }

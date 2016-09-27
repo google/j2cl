@@ -17,7 +17,6 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Visitable;
@@ -279,14 +278,7 @@ public class Method extends Member {
               // Update method descriptor parameter types from actual parameter types.
               MethodDescriptor.Builder.from(methodDescriptor)
                   .setParameterTypeDescriptors(
-                      Iterables.transform(
-                          parameters,
-                          new Function<Variable, TypeDescriptor>() {
-                            @Override
-                            public TypeDescriptor apply(Variable parameter) {
-                              return parameter.getTypeDescriptor();
-                            }
-                          }))
+                      Iterables.transform(parameters, Variable::getTypeDescriptor))
                   .build(),
               parameters,
               body,

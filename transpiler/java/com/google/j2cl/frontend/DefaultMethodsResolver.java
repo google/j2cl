@@ -20,7 +20,6 @@ import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Type;
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -84,14 +83,10 @@ public class DefaultMethodsResolver {
     // i.e. subtypes always appear before supertypes.
     Set<ITypeBinding> superInterfaces =
         new TreeSet<>(
-            new Comparator<ITypeBinding>() {
-              @Override
-              public int compare(ITypeBinding thisTypeBinding, ITypeBinding thatTypeBinding) {
-                return thisTypeBinding == thatTypeBinding
+            (thisTypeBinding, thatTypeBinding) ->
+                thisTypeBinding == thatTypeBinding
                     ? 0
-                    : (thisTypeBinding.isSubTypeCompatible(thatTypeBinding) ? -1 : 1);
-              }
-            });
+                    : (thisTypeBinding.isSubTypeCompatible(thatTypeBinding) ? -1 : 1));
 
     collectSuperInterfaces(superInterfaces, type);
     return superInterfaces;

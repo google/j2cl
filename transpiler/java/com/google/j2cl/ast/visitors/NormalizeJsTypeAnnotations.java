@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.ast.visitors;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
@@ -51,14 +50,10 @@ public class NormalizeJsTypeAnnotations extends NormalizationPass {
                   annotationType,
                   Lists.transform(
                       annotationType.getTypeArgumentDescriptors(),
-                      new Function<TypeDescriptor, TypeDescriptor>() {
-                        @Override
-                        public TypeDescriptor apply(TypeDescriptor typeArgument) {
-                          return typeArgument.isWildCard()
+                      typeArgument ->
+                          typeArgument.isWildCard()
                               ? TypeDescriptors.get().javaLangObject
-                              : typeArgument;
-                        }
-                      })))
+                              : typeArgument)))
           .build();
     }
   }

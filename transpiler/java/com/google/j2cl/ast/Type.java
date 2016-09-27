@@ -15,10 +15,12 @@
  */
 package com.google.j2cl.ast;
 
+import static java.util.stream.Collectors.toCollection;
+
 import com.google.common.base.Preconditions;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Streams;
 import com.google.j2cl.ast.annotations.Context;
 import com.google.j2cl.ast.annotations.Visitable;
 import java.util.ArrayList;
@@ -170,15 +172,7 @@ public class Type extends Node {
    */
   public List<Field> getEnumFields() {
     Preconditions.checkArgument(this.kind == Kind.ENUM);
-    Iterable<Field> enumFields =
-        Iterables.filter(
-            getFields(),
-            new Predicate<Field>() {
-              @Override
-              public boolean apply(Field field) {
-                return field.isEnumField();
-              }
-            });
+    Iterable<Field> enumFields = Iterables.filter(getFields(), Field::isEnumField);
     return Lists.newArrayList(enumFields);
   }
 
@@ -248,14 +242,7 @@ public class Type extends Node {
   }
 
   public Iterable<Member> getInstanceMembers() {
-    return Iterables.filter(
-        members,
-        new Predicate<Member>() {
-          @Override
-          public boolean apply(Member member) {
-            return !member.isStatic();
-          }
-        });
+    return Iterables.filter(members, member -> !member.isStatic());
   }
 
   public Iterable<Field> getStaticFields() {
@@ -263,26 +250,13 @@ public class Type extends Node {
   }
 
   public Iterable<Member> getStaticMembers() {
-    return Iterables.filter(
-        members,
-        new Predicate<Member>() {
-          @Override
-          public boolean apply(Member member) {
-            return member.isStatic();
-          }
-        });
+    return Iterables.filter(members, Member::isStatic);
   }
 
   public List<Method> getConstructors() {
-    return Lists.newArrayList(
-        Iterables.filter(
-            getMethods(),
-            new Predicate<Method>() {
-              @Override
-              public boolean apply(Method method) {
-                return method.isConstructor();
-              }
-            }));
+    return Streams.stream(getMethods())
+        .filter(Method::isConstructor)
+        .collect(toCollection(ArrayList::new));
   }
 
   @Override

@@ -16,8 +16,8 @@
 package com.google.j2cl.generator;
 
 import static com.google.common.base.Preconditions.checkState;
+import static java.util.stream.Collectors.joining;
 
-import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
@@ -120,13 +120,7 @@ public class JsDocNameUtils {
       Iterable<TypeDescriptor> typeDescriptors, final GenerationEnvironment environment) {
     Iterable<String> typeParameterDescriptors =
         Iterables.transform(
-            typeDescriptors,
-            new Function<TypeDescriptor, String>() {
-              @Override
-              public String apply(TypeDescriptor typeDescriptor) {
-                return getJsDocName(typeDescriptor, environment);
-              }
-            });
+            typeDescriptors, typeDescriptor -> getJsDocName(typeDescriptor, environment));
     return Joiner.on(", ").join(typeParameterDescriptors);
   }
 
@@ -277,18 +271,16 @@ public class JsDocNameUtils {
   private static String getJsDocNameOfUnionType(TypeDescriptor typeDescriptor) {
     Preconditions.checkArgument(
         unboxedTypeDescriptorsBySuperTypeDescriptor.containsKey(typeDescriptor));
-    return Joiner.on("|")
-        .join(
-            Iterables.transform(
-                unboxedTypeDescriptorsBySuperTypeDescriptor.get(typeDescriptor),
-                new Function<TypeDescriptor, String>() {
-                  @Override
-                  public String apply(TypeDescriptor unboxedTypeDescriptor) {
-                    Preconditions.checkArgument(
-                        jsDocNamesByUnboxedTypeDescriptor.containsKey(unboxedTypeDescriptor));
-                    return jsDocNamesByUnboxedTypeDescriptor.get(unboxedTypeDescriptor);
-                  }
-                }));
+    return unboxedTypeDescriptorsBySuperTypeDescriptor
+        .get(typeDescriptor)
+        .stream()
+        .map(
+            unboxedTypeDescriptor -> {
+              Preconditions.checkArgument(
+                  jsDocNamesByUnboxedTypeDescriptor.containsKey(unboxedTypeDescriptor));
+              return jsDocNamesByUnboxedTypeDescriptor.get(unboxedTypeDescriptor);
+            })
+        .collect(joining("|"));
   }
 
   public static String getJsDocNameForJsFunction(
@@ -327,3 +319,4 @@ public class JsDocNameUtils {
         getJsDocName(jsFunctionMethodDescriptor.getReturnTypeDescriptor(), environment));
   }
 }
+

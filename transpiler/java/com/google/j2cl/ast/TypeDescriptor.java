@@ -17,15 +17,14 @@ package com.google.j2cl.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
+import static java.util.stream.Collectors.joining;
 
-import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
 import com.google.j2cl.ast.annotations.Visitable;
 import com.google.j2cl.ast.common.HasJsNameInfo;
 import com.google.j2cl.ast.common.JsUtils;
@@ -746,16 +745,7 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     }
     return J2clUtils.format(
         "<%s>",
-        Joiner.on(", ")
-            .join(
-                Lists.transform(
-                    typeArgumentDescriptors,
-                    new Function<TypeDescriptor, String>() {
-                      @Override
-                      public String apply(TypeDescriptor typeDescriptor) {
-                        return typeDescriptor.getUniqueId();
-                      }
-                    })));
+        typeArgumentDescriptors.stream().map(TypeDescriptor::getUniqueId).collect(joining(", ")));
   }
 
   public Visibility getVisibility() {
