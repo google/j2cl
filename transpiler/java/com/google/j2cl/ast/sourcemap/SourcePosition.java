@@ -20,6 +20,10 @@ package com.google.j2cl.ast.sourcemap;
  * (line,column)-(line,column); where both line and column are zero-based.
  */
 public class SourcePosition implements Comparable<SourcePosition> {
+
+  // For mappings that should not be displayed in readable output.
+  public static final SourcePosition DUMMY = new SourcePosition(0, 0, 0, 0);
+
   public static final SourcePosition UNKNOWN = new SourcePosition(-1, -1, -1, -1);
 
   private FilePosition startPosition;

@@ -18,7 +18,6 @@ package com.google.j2cl.generator;
 import com.google.common.base.CharMatcher;
 import com.google.common.io.Files;
 import com.google.j2cl.ast.sourcemap.SourcePosition;
-
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
@@ -48,6 +47,12 @@ public class ReadableSourceMapGenerator {
           javaSourcePositionByOutputSourcePosition.entrySet()) {
         SourcePosition javaSourcePosition = entry.getValue();
         SourcePosition javaScriptSourcePosition = entry.getKey();
+
+        // Do not display dummy mappings in readable output.
+        if (javaSourcePosition == SourcePosition.DUMMY) {
+          continue;
+        }
+
         sb.append(extract(javaSourcePosition, javaSourceLines));
         sb.append(" => ");
         sb.append(extract(javaScriptSourcePosition, javaScriptSourceLines).trim());
