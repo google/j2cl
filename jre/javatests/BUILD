@@ -88,16 +88,19 @@ load(":j2cl_multi_test.bzl", "j2cl_multi_test")
 
 j2cl_multi_test(
     name = "BigDecimal",
+    shard_count = 5,
     test_class = "com.google.gwt.emultest.BigDecimalTests",
 )
 
 j2cl_multi_test(
     name = "BigInteger",
+    shard_count = 8,
     test_class = "com.google.gwt.emultest.BigIntegerTests",
 )
 
 j2cl_multi_test(
     name = "Collections",
+    shard_count = 16,
     test_class = "com.google.gwt.emultest.CollectionsTests",
 )
 
@@ -105,6 +108,7 @@ j2cl_multi_test(
     name = "Emul",
     _js_srcs = ["test_defines.js"],
     bootstrap_files = ["test_defines.js"],
+    shard_count = 16,
     test_class = "com.google.gwt.emultest.EmulTests",
 )
 
