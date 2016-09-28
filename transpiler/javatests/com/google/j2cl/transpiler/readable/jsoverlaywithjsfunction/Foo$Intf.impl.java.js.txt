@@ -72,7 +72,8 @@ class Foo$Intf {
 
 $Util.$setClassMetadataForInterface(
     Foo$Intf,
-    'com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo$Intf');
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.jsoverlaywithjsfunction.Foo$Intf'));
 
 
 Foo$Intf.$markImplementor(/** @type {Function} */ (Foo$Intf));

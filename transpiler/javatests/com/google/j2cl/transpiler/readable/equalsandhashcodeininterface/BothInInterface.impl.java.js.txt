@@ -82,7 +82,8 @@ class BothInInterface {
 
 $Util.$setClassMetadataForInterface(
     BothInInterface,
-    'com.google.j2cl.transpiler.readable.equalsandhashcodeininterface.BothInInterface');
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.equalsandhashcodeininterface.BothInInterface'));
 
 
 BothInInterface.$markImplementor(/** @type {Function} */ (BothInInterface));

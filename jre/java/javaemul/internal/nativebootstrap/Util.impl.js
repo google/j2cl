@@ -154,6 +154,21 @@ class Util {
    * @public
    */
   static $clinit() {}
+
+  /**
+   * Helper function used for metadata obfuscation, string replacement passes
+   * can be targeted at this bottleneck.
+   *
+   * TODO(b/31782198): Because J2ClPass runs before ReplaceStrings and inlines
+   * functions, the ReplaceStrings pass never sees calls to $setClassMetadata,
+   * which makes this function neccessary.
+   *
+   * @param {string} className
+   * @return {string}
+   */
+  static $makeClassName(className) {
+    return className;
+  }
 }
 
 

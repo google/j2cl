@@ -108,7 +108,8 @@ class ChildClass extends ParentOuter {
 
 $Util.$setClassMetadata(
     ChildClass,
-    'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass');
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.innerclassinheritance.ChildClass'));
 
 
 

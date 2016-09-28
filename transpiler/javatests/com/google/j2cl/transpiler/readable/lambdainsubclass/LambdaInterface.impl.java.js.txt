@@ -75,7 +75,8 @@ class LambdaInterface {
 
 $Util.$setClassMetadataForInterface(
     LambdaInterface,
-    'com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInterface');
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.lambdainsubclass.LambdaInterface'));
 
 
 LambdaInterface.$markImplementor(/** @type {Function} */ (LambdaInterface));

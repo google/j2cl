@@ -136,7 +136,9 @@ class Parent extends SuperParent {
 };
 
 $Util.$setClassMetadata(
-    Parent, 'com.google.j2cl.transpiler.readable.instancejsmethods.Parent');
+    Parent,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.instancejsmethods.Parent'));
 
 
 

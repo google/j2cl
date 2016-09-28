@@ -71,7 +71,8 @@ class I {
 };
 
 $Util.$setClassMetadataForInterface(
-    I, 'com.google.j2cl.transpiler.readable.bridgemethodsreturn.I');
+    I, $Util.$makeClassName(
+           'com.google.j2cl.transpiler.readable.bridgemethodsreturn.I'));
 
 
 I.$markImplementor(/** @type {Function} */ (I));

@@ -119,7 +119,8 @@ class ConcreteClass extends java_lang_Object {
 
 $Util.$setClassMetadata(
     ConcreteClass,
-    'com.google.j2cl.transpiler.readable.defaultmethodstwointerfaces.ConcreteClass');
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.defaultmethodstwointerfaces.ConcreteClass'));
 
 
 InterfaceWithDefaultMethod.$markImplementor(ConcreteClass);

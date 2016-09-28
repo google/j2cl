@@ -63,7 +63,8 @@ class RegularInterface {
 
 $Util.$setClassMetadataForInterface(
     RegularInterface,
-    'com.google.j2cl.transpiler.readable.markimplementornativetypes.RegularInterface');
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.markimplementornativetypes.RegularInterface'));
 
 
 RegularInterface.$markImplementor(/** @type {Function} */ (RegularInterface));

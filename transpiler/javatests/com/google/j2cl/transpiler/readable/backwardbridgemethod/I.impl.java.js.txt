@@ -74,7 +74,8 @@ class I {
 };
 
 $Util.$setClassMetadataForInterface(
-    I, 'com.google.j2cl.transpiler.readable.backwardbridgemethod.I');
+    I, $Util.$makeClassName(
+           'com.google.j2cl.transpiler.readable.backwardbridgemethod.I'));
 
 
 I.$markImplementor(/** @type {Function} */ (I));

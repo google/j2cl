@@ -75,7 +75,8 @@ class OtherInterface {
 
 $Util.$setClassMetadataForInterface(
     OtherInterface,
-    'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface');
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.OtherInterface'));
 
 
 OtherInterface.$markImplementor(/** @type {Function} */ (OtherInterface));

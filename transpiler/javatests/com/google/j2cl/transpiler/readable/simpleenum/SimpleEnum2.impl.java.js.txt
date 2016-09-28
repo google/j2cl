@@ -328,7 +328,9 @@ class SimpleEnum2 extends Enum {
 };
 
 $Util.$setClassMetadataForEnum(
-    SimpleEnum2, 'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2');
+    SimpleEnum2,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum2'));
 
 
 /**

@@ -118,7 +118,8 @@ class SubJsType extends MyJsType {
 
 $Util.$setClassMetadata(
     SubJsType,
-    'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType');
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.jsbridgeaccidentaloverride.SubJsType'));
 
 
 MyInterface.$markImplementor(SubJsType);

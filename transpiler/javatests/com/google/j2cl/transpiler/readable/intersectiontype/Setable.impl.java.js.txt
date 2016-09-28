@@ -74,7 +74,9 @@ class Setable {
 };
 
 $Util.$setClassMetadataForInterface(
-    Setable, 'com.google.j2cl.transpiler.readable.intersectiontype.Setable');
+    Setable,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.intersectiontype.Setable'));
 
 
 Setable.$markImplementor(/** @type {Function} */ (Setable));

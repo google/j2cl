@@ -85,7 +85,8 @@ class SubclassGenericClass extends GenericClass {
 
 $Util.$setClassMetadata(
     SubclassGenericClass,
-    'com.google.j2cl.transpiler.readable.subclassgenericclass.SubclassGenericClass');
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.subclassgenericclass.SubclassGenericClass'));
 
 
 

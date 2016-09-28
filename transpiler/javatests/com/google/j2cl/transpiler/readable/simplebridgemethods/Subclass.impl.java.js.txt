@@ -108,7 +108,8 @@ class Subclass extends Superclass {
 
 $Util.$setClassMetadata(
     Subclass,
-    'com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass');
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.simplebridgemethods.Subclass'));
 
 
 

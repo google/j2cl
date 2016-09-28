@@ -67,7 +67,8 @@ class MyInterface {
 
 $Util.$setClassMetadataForInterface(
     MyInterface,
-    'com.google.j2cl.transpiler.readable.interfacewithfields.MyInterface');
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.interfacewithfields.MyInterface'));
 
 
 /**

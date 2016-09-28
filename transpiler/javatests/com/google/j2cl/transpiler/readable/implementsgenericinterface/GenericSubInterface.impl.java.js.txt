@@ -67,7 +67,8 @@ class GenericSubInterface {
 
 $Util.$setClassMetadataForInterface(
     GenericSubInterface,
-    'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericSubInterface');
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.implementsgenericinterface.GenericSubInterface'));
 
 
 GenericSubInterface.$markImplementor(

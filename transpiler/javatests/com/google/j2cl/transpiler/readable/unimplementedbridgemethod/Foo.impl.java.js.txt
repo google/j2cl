@@ -84,7 +84,9 @@ class Foo extends java_lang_Object {
 };
 
 $Util.$setClassMetadata(
-    Foo, 'com.google.j2cl.transpiler.readable.unimplementedbridgemethod.Foo');
+    Foo,
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.unimplementedbridgemethod.Foo'));
 
 
 I.$markImplementor(Foo);

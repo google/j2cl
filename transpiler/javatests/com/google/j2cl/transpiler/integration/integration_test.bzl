@@ -38,6 +38,7 @@ def integration_test(name,
                      closure_defines=dict(),
                      generate_build_test=None,
                      test_externs_list=None,
+                     disable_uncompiled_test=False,
                      plugins = []
                     ):
   """Macro that turns Java files into integration test targets.
@@ -241,22 +242,23 @@ try {
 
   if not test_externs_list:
     test_externs_list = ["//javascript/externs:common"]
-  native.jsunit_test(
-      name="uncompiled_test",
-      bootstrap_files=["TestBootstrap.js"],
-      srcs=["TestHarness.js"],
-      deps=[
-          ":" + name,
-          "//javascript/closure/testing:testsuite",
-      ],
-      deps_mgmt="closure",
-      externs_list=test_externs_list,
-      jvm_flags=[
-          "-Dcom.google.testing.selenium.browser=CHROME_LINUX",
-          "-Djsrunner.net.useJsBundles=true"
-      ],
-      data=["//testing/matrix/nativebrowsers/chrome:stable_data"],
-  )
+  if not disable_uncompiled_test:
+    native.jsunit_test(
+        name="uncompiled_test",
+        bootstrap_files=["TestBootstrap.js"],
+        srcs=["TestHarness.js"],
+        deps=[
+            ":" + name,
+            "//javascript/closure/testing:testsuite",
+        ],
+        deps_mgmt="closure",
+        externs_list=test_externs_list,
+        jvm_flags=[
+            "-Dcom.google.testing.selenium.browser=CHROME_LINUX",
+            "-Djsrunner.net.useJsBundles=true"
+        ],
+        data=["//testing/matrix/nativebrowsers/chrome:stable_data"],
+    )
 
   native.jsunit_test(
       name="compiled_test",

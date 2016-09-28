@@ -73,7 +73,8 @@ class MyJsFunctionInterface {
 
 $Util.$setClassMetadataForInterface(
     MyJsFunctionInterface,
-    'com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionInterface');
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.jsfunction.MyJsFunctionInterface'));
 
 
 MyJsFunctionInterface.$markImplementor(

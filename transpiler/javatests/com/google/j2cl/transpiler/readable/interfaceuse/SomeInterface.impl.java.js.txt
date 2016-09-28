@@ -63,7 +63,8 @@ class SomeInterface {
 
 $Util.$setClassMetadataForInterface(
     SomeInterface,
-    'com.google.j2cl.transpiler.readable.interfaceuse.SomeInterface');
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.interfaceuse.SomeInterface'));
 
 
 SomeInterface.$markImplementor(/** @type {Function} */ (SomeInterface));

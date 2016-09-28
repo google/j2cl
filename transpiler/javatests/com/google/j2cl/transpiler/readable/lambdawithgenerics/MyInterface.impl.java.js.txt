@@ -72,7 +72,8 @@ class MyInterface {
 
 $Util.$setClassMetadataForInterface(
     MyInterface,
-    'com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface');
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.lambdawithgenerics.MyInterface'));
 
 
 MyInterface.$markImplementor(/** @type {Function} */ (MyInterface));

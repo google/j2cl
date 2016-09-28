@@ -484,14 +484,21 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
     }
     String utilAlias = environment.aliasForType(BootstrapType.NATIVE_UTIL.getDescriptor());
     String name = type.getDescriptor().getBinaryName();
+    String obfuscatableName = utilAlias + ".$makeClassName('" + name + "')";
     if (type.isInterface()) {
       sourceBuilder.appendln(
-          utilAlias + ".$setClassMetadataForInterface(" + className + ", '" + name + "');");
+          utilAlias
+              + ".$setClassMetadataForInterface("
+              + className
+              + ", "
+              + obfuscatableName
+              + ");");
     } else if (type.isEnum()) {
       sourceBuilder.appendln(
-          utilAlias + ".$setClassMetadataForEnum(" + className + ", '" + name + "');");
+          utilAlias + ".$setClassMetadataForEnum(" + className + ", " + obfuscatableName + ");");
     } else {
-      sourceBuilder.appendln(utilAlias + ".$setClassMetadata(" + className + ", '" + name + "');");
+      sourceBuilder.appendln(
+          utilAlias + ".$setClassMetadata(" + className + ", " + obfuscatableName + ");");
     }
   }
 

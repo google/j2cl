@@ -157,7 +157,8 @@ class BridgeMethod extends Parent {
 
 $Util.$setClassMetadata(
     BridgeMethod,
-    'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod');
+    $Util.$makeClassName(
+        'com.google.j2cl.transpiler.readable.bridgemethodmultipleinheritance.BridgeMethod'));
 
 
 SomeInterface.$markImplementor(BridgeMethod);
