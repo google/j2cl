@@ -261,8 +261,11 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
 
     @Override
     public Node rewriteMethodCall(MethodCall methodCall) {
+      TypeDescriptor enclosingClassTypeDescriptor =
+          methodCall.getTarget().getEnclosingClassTypeDescriptor();
       boolean targetIsJsOverlayInNativeClass =
-          methodCall.getTarget().getEnclosingClassTypeDescriptor().isNative()
+          (enclosingClassTypeDescriptor.isNative()
+                  || enclosingClassTypeDescriptor.isJsFunctionInterface())
               && methodCall.getTarget().isJsOverlay();
       boolean targetIsDefaultMethodAccessedStatically =
           methodCall.getTarget().isDefault() && methodCall.isStaticDispatch();
@@ -270,7 +273,7 @@ public class CreateOverlayImplementationTypesAndDevirtualizeCalls extends Normal
       if (targetIsJsOverlayInNativeClass || targetIsDefaultMethodAccessedStatically) {
         TypeDescriptor targetOverlayTypeDescriptor =
             TypeDescriptors.createOverlayImplementationClassTypeDescriptor(
-                methodCall.getTarget().getEnclosingClassTypeDescriptor());
+                enclosingClassTypeDescriptor);
 
         if (methodCall.getTarget().isStatic()) {
           // Call already-static method directly at their new overlay class location.

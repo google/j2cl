@@ -373,6 +373,7 @@ public class AstUtils {
         .setParameters(parameters)
         .addStatements(statement)
         .setIsOverride(isOverride)
+        .setIsSynthetic(true)
         .setJsDocDescription(jsDocDescription)
         .build();
   }

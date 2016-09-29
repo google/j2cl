@@ -362,6 +362,7 @@ public class BridgeMethodsCreator {
         .addStatements(statement)
         .setIsOverride(true)
         .setIsBridge(true)
+        .setIsSynthetic(true)
         .setJsDocDescription("Bridge method.")
         .build();
   }

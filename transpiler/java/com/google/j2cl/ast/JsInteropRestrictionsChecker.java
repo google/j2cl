@@ -70,6 +70,9 @@ public class JsInteropRestrictionsChecker {
       checkField(field);
     }
     for (Method method : type.getMethods()) {
+      if (method.isSynthetic()) {
+        continue;
+      }
       checkMethod(method);
     }
     // TODO: do other checks.
@@ -145,10 +148,11 @@ public class JsInteropRestrictionsChecker {
   private void checkJsOverlay(Field field) {
     FieldDescriptor fieldDescriptor = field.getDescriptor();
     String readableDescription = getReadableDescription(fieldDescriptor);
-    if (!fieldDescriptor.getEnclosingClassTypeDescriptor().isNative()) {
+    if (!fieldDescriptor.getEnclosingClassTypeDescriptor().isNative()
+        && !fieldDescriptor.getEnclosingClassTypeDescriptor().isJsFunctionInterface()) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
-          "JsOverlay '%s' can only be declared in a native type.",
+          "JsOverlay '%s' can only be declared in a native type or @JsFunction interface.",
           readableDescription);
     }
     if (!fieldDescriptor.isStatic()) {
@@ -162,10 +166,11 @@ public class JsInteropRestrictionsChecker {
   private void checkJsOverlay(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
     String readableDescription = getReadableDescription(methodDescriptor);
-    if (!methodDescriptor.getEnclosingClassTypeDescriptor().isNative()) {
+    if (!methodDescriptor.getEnclosingClassTypeDescriptor().isNative()
+        && !methodDescriptor.getEnclosingClassTypeDescriptor().isJsFunctionInterface()) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
-          "JsOverlay '%s' can only be declared in a native type.",
+          "JsOverlay '%s' can only be declared in a native type or @JsFunction interface.",
           readableDescription);
     }
     if (method.isOverride()) {
@@ -179,7 +184,8 @@ public class JsInteropRestrictionsChecker {
         || (!methodDescriptor.getEnclosingClassTypeDescriptor().isFinal()
             && !method.isFinal()
             && !method.getDescriptor().isStatic()
-            && !method.getDescriptor().getVisibility().isPrivate())) {
+            && !method.getDescriptor().getVisibility().isPrivate()
+            && !method.getDescriptor().isDefault())) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
           "JsOverlay method '%s' cannot be non-final nor native.",
@@ -294,12 +300,6 @@ public class JsInteropRestrictionsChecker {
 
   private void checkJsFunctionInterface(Type type) {
     String readableDescription = getReadableDescription(type.getDescriptor());
-    if (!isClinitEmpty(type)) {
-      errors.error(
-          Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,
-          "JsFunction '%s' cannot have static initializer.",
-          readableDescription);
-    }
     if (!type.getSuperInterfaceTypeDescriptors().isEmpty()) {
       errors.error(
           Errors.Error.ERR_JSINTEROP_RESTRICTIONS_ERROR,

@@ -38,6 +38,7 @@ public class Method extends Member {
   private String jsDocDescription;
   private boolean isFinal;
   private boolean isBridge;
+  private final boolean isSynthetic;
   private BitSet parameterOptionality;
 
   private Method(
@@ -48,6 +49,7 @@ public class Method extends Member {
       boolean isOverride,
       boolean isFinal,
       boolean isBridge,
+      boolean isSynthetic,
       String jsDocDescription) {
     this.methodDescriptor = checkNotNull(methodDescriptor);
     this.parameters.addAll(checkNotNull(parameters));
@@ -57,6 +59,7 @@ public class Method extends Member {
     this.jsDocDescription = jsDocDescription;
     this.body = checkNotNull(body);
     this.isBridge = isBridge;
+    this.isSynthetic = isSynthetic;
   }
 
   public MethodDescriptor getDescriptor() {
@@ -86,6 +89,10 @@ public class Method extends Member {
 
   public boolean isBridge() {
     return isBridge;
+  }
+
+  public boolean isSynthetic() {
+    return isSynthetic;
   }
 
   public boolean isAbstract() {
@@ -154,6 +161,7 @@ public class Method extends Member {
     private boolean isBridge;
     private boolean isFinal;
     private boolean isOverride;
+    private boolean isSynthetic;
     private String jsDocDescription;
     private SourcePosition bodyJavaSourcePosition = SourcePosition.UNKNOWN;
     private BitSet parameterOptionality = new BitSet();
@@ -174,6 +182,7 @@ public class Method extends Member {
       builder.bodyJavaSourcePosition = method.getBody().getSourcePosition();
       builder.parameterOptionality = method.parameterOptionality;
       builder.isBridge = method.isBridge;
+      builder.isSynthetic = method.isSynthetic;
       return builder;
     }
 
@@ -239,6 +248,11 @@ public class Method extends Member {
       return this;
     }
 
+    public Builder setIsSynthetic(boolean isSynthetic) {
+      this.isSynthetic = isSynthetic;
+      return this;
+    }
+
     public Builder setIsFinal(boolean isFinal) {
       this.isFinal = isFinal;
       return this;
@@ -286,6 +300,7 @@ public class Method extends Member {
               isOverride,
               isFinal,
               isBridge,
+              isSynthetic,
               jsDocDescription);
       method.parameterOptionality = parameterOptionality;
       return method;

@@ -1120,17 +1120,42 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
     assertCompileSucceeds(sourcePackage);
   }
   
-  public void testJsFunctionWithNoExtendsSucceeds() throws Exception {
-    File sourcePackage = createPackage("jsfunctionwithnoextends");
+  public void testJsFunctionSucceeds() throws Exception {
+    File sourcePackage = createPackage("jsfunctionsucceeds");
+
+    createSourceFile(
+        sourcePackage,
+        "Function.java",
+        "package jsfunctionsucceeds;",
+        "import jsinterop.annotations.JsFunction;",
+        "import jsinterop.annotations.JsOverlay;",
+        "@JsFunction",
+        "public interface Function {",
+        "  int getFoo();",
+        "  @JsOverlay",
+        "  static String s = new String();",
+        "  @JsOverlay",
+        "  default void m() {}",
+        "  @JsOverlay",
+        "  static void n() {}",
+        "}");
 
     createSourceFile(
         sourcePackage,
         "Buggy.java",
-        "package jsfunctionwithnoextends;",
-        "import jsinterop.annotations.JsFunction;",
-        "@JsFunction",
-        "public interface Buggy {",
-        "  void foo();",
+        "package jsfunctionsucceeds;",
+        "public final class Buggy implements Function {",
+        "  public int getFoo() { return 0; }",
+        "  public final void blah() {}",
+        "  public void blat() {}",
+        "  private void bleh() {}",
+        "  static void blet() {",
+        "    new Function() {",
+        "       public int getFoo() { return 0; }",
+        "    }.getFoo();",
+        "  }",
+        "  String x = new String();",
+        "  static int y;",
         "}");
 
     assertCompileSucceeds(sourcePackage);
@@ -1306,28 +1331,6 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
         sourcePackage,
         "JsInterop error: 'Buggy' cannot be both a JsFunction implementation and a "
             + "JsType at the same time.",
-        "1 error(s).");
-  }
-
-  public void testJsFunctionStaticInitializerFails() throws Exception {
-    File sourcePackage = createPackage("jsfunctionstaticinitializer");
-    createSourceFile(
-        sourcePackage,
-        "EntryPoint.java",
-        "package jsfunctionstaticinitializer;",
-        "import jsinterop.annotations.JsType;",
-        "import jsinterop.annotations.JsFunction;",
-        "public class EntryPoint {",
-        "  public static String someString() { return \"hello\"; }",
-        "  @JsFunction public interface Buggy {",
-        "    static String s = someString();",
-        "    void m();",
-        "  }",
-        "}");
-
-    assertCompileFails(
-        sourcePackage,
-        "JsInterop error: JsFunction 'EntryPoint$Buggy' cannot have static " + "initializer.",
         "1 error(s).");
   }
 
@@ -1955,8 +1958,8 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        "JsInterop error: JsOverlay method 'void Buggy.m1()' cannot be non-final nor " + "native.",
-        "JsInterop error: JsOverlay method 'void Buggy.m2()' cannot be non-final nor " + "native.",
+        "JsInterop error: JsOverlay method 'void Buggy.m1()' cannot be non-final nor native.",
+        "JsInterop error: JsOverlay method 'void Buggy.m2()' cannot be non-final nor native.",
         "2 error(s).");
   }
 
@@ -2003,8 +2006,10 @@ public class JsInteropRestrictionsCheckerTest extends IntegrationTestCase {
 
     assertCompileFails(
         sourcePackage,
-        "JsInterop error: JsOverlay 'int Buggy.F' can only be declared in a native " + "type.",
-        "JsInterop error: JsOverlay 'void Buggy.m()' can only be declared in a native" + " type.",
+        "JsInterop error: JsOverlay 'int Buggy.F' can only be declared in a native type "
+            + "or @JsFunction interface.",
+        "JsInterop error: JsOverlay 'void Buggy.m()' can only be declared in a native type "
+            + "or @JsFunction interface.",
         "2 error(s).");
   }
 

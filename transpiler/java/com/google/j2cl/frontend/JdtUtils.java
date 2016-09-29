@@ -62,6 +62,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTNode;
@@ -1115,11 +1116,24 @@ public class JdtUtils {
     }
     ITypeBinding jsFunctionInterface =
         typeBinding.isInterface() ? typeBinding : typeBinding.getInterfaces()[0];
+
+    // TODO(rluble): all the logic below should be replaced by
+    //
+    //   return jsFunctionInterface.getFunctionalInterfaceMethod()
+    //
+    // but doing so ends up with slightly different generic signatures.
+    //
+    List<IMethodBinding> abstractMethods =
+        Arrays.stream(jsFunctionInterface.getDeclaredMethods())
+            .filter(JdtUtils::isAbstract)
+            .collect(Collectors.toList());
+
     Preconditions.checkArgument(
-        jsFunctionInterface.getDeclaredMethods().length == 1,
-        "Type %s should have one and only one method.",
+        abstractMethods.size() == 1,
+        "Type %s should have one and only one abstract method.",
         jsFunctionInterface.getName());
-    return jsFunctionInterface.getDeclaredMethods()[0];
+
+    return abstractMethods.get(0);
   }
 
   static List<TypeDescriptor> createTypeDescriptors(List<ITypeBinding> typeBindings) {
