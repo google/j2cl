@@ -13,6 +13,7 @@ let java_lang_Object = goog.require('java.lang.Object$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Double = goog.forwardDeclare('java.lang.Double$impl');
+let Number = goog.forwardDeclare('java.lang.Number$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
@@ -65,8 +66,8 @@ class Main$A extends java_lang_Object {
    * Bridge method.
    * @override
    * @this {?function(?number, ?number):?number}
-   * @param {?number} arg0
-   * @param {?number} arg1
+   * @param {*} arg0
+   * @param {(Number|?number)} arg1
    * @return {?number}
    * @public
    */
@@ -130,6 +131,7 @@ class Main$A extends java_lang_Object {
    */
   static $clinit() {
     Double = goog.module.get('java.lang.Double$impl');
+    Number = goog.module.get('java.lang.Number$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     java_lang_Object.$clinit();
   }

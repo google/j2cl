@@ -11,6 +11,7 @@ goog.module('com.google.j2cl.transpiler.readable.simpleenum.SimpleEnum$impl');
 let Enum = goog.require('java.lang.Enum$impl');
 let $Util = goog.require('nativebootstrap.Util$impl');
 
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 let java_lang_String = goog.forwardDeclare('java.lang.String$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
@@ -63,7 +64,7 @@ class SimpleEnum extends Enum {
   /**
    * Bridge method.
    * @override
-   * @param {SimpleEnum} arg0
+   * @param {*} arg0
    * @return {number}
    * @public
    */
@@ -215,6 +216,7 @@ class SimpleEnum extends Enum {
    */
   static $clinit() {
     SimpleEnum.$clinit = function() {};
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
     java_lang_String = goog.module.get('java.lang.String$impl');
     $Equality = goog.module.get('nativebootstrap.Equality$impl');
     $Arrays = goog.module.get('vmbootstrap.Arrays$impl');

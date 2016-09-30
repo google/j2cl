@@ -278,7 +278,12 @@ public class BridgeMethodsCreator {
             ? bridgeMethod.getReturnType() // use its own return type if it is a concrete method
             : targetMethod.getReturnType(); // otherwise use the return type of the target method.
     MethodDescriptor bridgeMethodDescriptor =
-        createMethodDescriptor(typeBinding, bridgeMethod, returnType);
+        MethodDescriptor.Builder.from(createMethodDescriptor(typeBinding, bridgeMethod, returnType))
+            .setParameterTypeDescriptors(
+                Arrays.stream(bridgeMethod.getMethodDeclaration().getParameterTypes())
+                    .map(m -> JdtUtils.createTypeDescriptor(m.getErasure()).getRawTypeDescriptor())
+                    .toArray(TypeDescriptor[]::new))
+            .build();
     // The MethodDescriptor of the delegated method.
     MethodDescriptor targetMethodDescriptor = JdtUtils.createMethodDescriptor(targetMethod);
     JsInfo targetMethodJsInfo = targetMethodDescriptor.getJsInfo();
@@ -310,9 +315,7 @@ public class BridgeMethodsCreator {
       Variable parameter =
           Variable.Builder.fromDefault()
               .setName("arg" + i)
-              .setTypeDescriptor(
-                  JdtUtils.createTypeDescriptorWithNullability(
-                      bridgeMethod.getParameterTypes()[i], bridgeMethod.getParameterAnnotations(i)))
+              .setTypeDescriptor(bridgeMethodDescriptor.getParameterTypeDescriptors().get(i))
               .setIsParameter(true)
               .build();
 

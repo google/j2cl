@@ -13,6 +13,7 @@ let SuperInterface = goog.require('com.google.j2cl.transpiler.readable.accidenta
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Error = goog.forwardDeclare('java.lang.Error$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
@@ -55,7 +56,7 @@ class AccidentalOverride extends Parent {
   /**
    * Bridge method.
    * @override
-   * @param {Error} arg0
+   * @param {*} arg0
    * @return {void}
    * @public
    */
@@ -89,6 +90,7 @@ class AccidentalOverride extends Parent {
    */
   static $clinit() {
     Error = goog.module.get('java.lang.Error$impl');
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     Parent.$clinit();
   }

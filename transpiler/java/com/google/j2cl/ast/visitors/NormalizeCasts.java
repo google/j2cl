@@ -18,6 +18,7 @@ package com.google.j2cl.ast.visitors;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
+import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
@@ -59,6 +60,18 @@ public class NormalizeCasts extends NormalizationPass {
     Preconditions.checkArgument(!castExpression.getCastTypeDescriptor().isArray());
     Preconditions.checkArgument(!castExpression.getCastTypeDescriptor().isUnion());
 
+    Expression resultingExpression =
+        AstUtils.canRemoveCast(
+                castExpression.getExpression().getTypeDescriptor(),
+                castExpression.getTypeDescriptor())
+            ? castExpression.getExpression()
+            : createCheckCastCall(castExpression);
+    // /**@type {}*/ ()
+    return JsTypeAnnotation.createTypeAnnotation(
+        resultingExpression, castExpression.getCastTypeDescriptor());
+  }
+
+  private static MethodCall createCheckCastCall(CastExpression castExpression) {
     TypeDescriptor castTypeDescriptor = castExpression.getCastTypeDescriptor();
     TypeDescriptor rawCastTypeDescriptor =
         castExpression.getCastTypeDescriptor().getRawTypeDescriptor();
@@ -87,11 +100,7 @@ public class NormalizeCasts extends NormalizationPass {
     arguments.add(new TypeReference(castTypeDescriptorArgument));
 
     // Casts.to(expr, TypeName);
-    MethodCall castMethodCall =
-        MethodCall.Builder.from(castToMethodDescriptor).setArguments(arguments).build();
-    // /**@type {}*/ ()
-    return JsTypeAnnotation.createTypeAnnotation(
-        castMethodCall, castExpression.getCastTypeDescriptor());
+    return MethodCall.Builder.from(castToMethodDescriptor).setArguments(arguments).build();
   }
 
   private static Node createArrayCastExpression(CastExpression castExpression) {

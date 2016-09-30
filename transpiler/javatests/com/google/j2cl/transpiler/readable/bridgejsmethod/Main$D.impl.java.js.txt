@@ -13,6 +13,7 @@ let Main$I = goog.require('com.google.j2cl.transpiler.readable.bridgejsmethod.Ma
 let $Util = goog.require('nativebootstrap.Util$impl');
 
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
+let java_lang_Object = goog.forwardDeclare('java.lang.Object$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 
@@ -64,7 +65,7 @@ class Main$D extends Main$A {
   /**
    * Bridge method.
    * @override
-   * @param {Integer} arg0
+   * @param {*} arg0
    * @return {Integer}
    * @public
    */
@@ -99,6 +100,7 @@ class Main$D extends Main$A {
    */
   static $clinit() {
     Integer = goog.module.get('java.lang.Integer$impl');
+    java_lang_Object = goog.module.get('java.lang.Object$impl');
     $Casts = goog.module.get('vmbootstrap.Casts$impl');
     Main$A.$clinit();
   }
