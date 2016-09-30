@@ -34,9 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Utility functions to manipulate J2CL AST.
- */
+/** Utility functions to manipulate J2CL AST. */
 public class AstUtils {
   public static final String OVERLAY_IMPLEMENTATION_CLASS_SUFFIX = "$Overlay";
   public static final String CAPTURES_PREFIX = "$c_";
@@ -47,9 +45,7 @@ public class AstUtils {
       FieldDescriptor.createRaw(
           false, TypeDescriptors.get().primitiveVoid, "length", TypeDescriptors.get().primitiveInt);
 
-  /**
-   * Return the String with first letter capitalized.
-   */
+  /** Return the String with first letter capitalized. */
   public static String toProperCase(String string) {
     if (string.isEmpty()) {
       return string;
@@ -57,9 +53,7 @@ public class AstUtils {
     return string.substring(0, 1).toUpperCase() + string.substring(1, string.length());
   }
 
-  /**
-   * Create "$init" MethodDescriptor.
-   */
+  /** Create "$init" MethodDescriptor. */
   public static MethodDescriptor createInitMethodDescriptor(
       TypeDescriptor enclosingClassTypeDescriptor) {
     return MethodDescriptor.Builder.fromDefault()
@@ -69,9 +63,7 @@ public class AstUtils {
         .build();
   }
 
-  /**
-   * Create "Equality.$same()" MethodDescriptor.
-   */
+  /** Create "Equality.$same()" MethodDescriptor. */
   public static MethodDescriptor createUtilSameMethodDescriptor() {
     return MethodDescriptor.Builder.fromDefault()
         .setIsStatic(true)
@@ -85,9 +77,7 @@ public class AstUtils {
         .build();
   }
 
-  /**
-   * Create "Equality.$notSame()" MethodDescriptor.
-   */
+  /** Create "Equality.$notSame()" MethodDescriptor. */
   public static MethodDescriptor createUtilNotSameMethodDescriptor() {
     return MethodDescriptor.Builder.fromDefault()
         .setIsStatic(true)
@@ -170,9 +160,7 @@ public class AstUtils {
     return null;
   }
 
-  /**
-   * Returns whether the specified constructor has a this() call.
-   */
+  /** Returns whether the specified constructor has a this() call. */
   public static boolean hasThisCall(Method method) {
     MethodCall constructorInvocation = getConstructorInvocation(method);
     return constructorInvocation != null
@@ -182,9 +170,7 @@ public class AstUtils {
             .equals(method.getDescriptor().getEnclosingClassTypeDescriptor());
   }
 
-  /**
-   * Returns whether the specified constructor has a super() call.
-   */
+  /** Returns whether the specified constructor has a super() call. */
   public static boolean hasSuperCall(Method method) {
     MethodCall constructorInvocation = getConstructorInvocation(method);
     return constructorInvocation != null
@@ -194,17 +180,13 @@ public class AstUtils {
             .equals(method.getDescriptor().getEnclosingClassTypeDescriptor());
   }
 
-  /**
-   * Returns whether the specified constructor has a this() or a super() call.
-   */
+  /** Returns whether the specified constructor has a this() or a super() call. */
   public static boolean hasConstructorInvocation(Method method) {
     MethodCall constructorInvocation = getConstructorInvocation(method);
     return constructorInvocation != null;
   }
 
-  /**
-   * Returns whether other is a subtype of one.
-   */
+  /** Returns whether other is a subtype of one. */
   public static boolean isSubType(TypeDescriptor one, TypeDescriptor other) {
     return one != null
         && (one.equalsIgnoreNullability(other) || isSubType(one.getSuperTypeDescriptor(), other));
@@ -213,14 +195,14 @@ public class AstUtils {
   /**
    * The following is the cast table between primitive types. The cell marked as 'X' indicates that
    * no cast is needed.
-   * <p>
-   * For other cases, cast from A to B is translated to method call $castAToB.
-   * <p>
-   * The general pattern is that you need casts that shrink, all casts involving 'long' (because it
-   * has a custom boxed implementation) and the byte->char and char->short casts because char is
+   *
+   * <p>For other cases, cast from A to B is translated to method call $castAToB.
+   *
+   * <p>The general pattern is that you need casts that shrink, all casts involving 'long' (because
+   * it has a custom boxed implementation) and the byte->char and char->short casts because char is
    * unsigned.
-   * <p>
-   * <code>
+   *
+   * <p><code>
    * from\to       byte |  char | short | int   | long | float | double|
    * -------------------------------------------------------------------
    * byte        |  X   |       |   X   |   X   |      |   X   |   X   |
@@ -258,9 +240,7 @@ public class AstUtils {
             && fromTypeDescriptor.equalsIgnoreNullability(TypeDescriptors.get().primitiveByte));
   }
 
-  /**
-   * Returns the added field descriptor corresponding to the captured variable.
-   */
+  /** Returns the added field descriptor corresponding to the captured variable. */
   public static FieldDescriptor getFieldDescriptorForCapture(
       TypeDescriptor enclosingClassTypeDescriptor, Variable capturedVariable) {
     return FieldDescriptor.createRaw(
@@ -270,9 +250,7 @@ public class AstUtils {
         capturedVariable.getTypeDescriptor());
   }
 
-  /**
-   * Returns the added field corresponding to the enclosing instance.
-   */
+  /** Returns the added field corresponding to the enclosing instance. */
   public static FieldDescriptor getFieldDescriptorForEnclosingInstance(
       TypeDescriptor enclosingClassDescriptor, TypeDescriptor fieldTypeDescriptor) {
     return FieldDescriptor.Builder.from(
@@ -280,9 +258,7 @@ public class AstUtils {
         .build();
   }
 
-  /**
-   * Returns the added outer parameter in constructor corresponding to the added field.
-   */
+  /** Returns the added outer parameter in constructor corresponding to the added field. */
   public static Variable createOuterParamByField(Field field) {
     return Variable.Builder.fromDefault()
         .setName(field.getDescriptor().getName())
@@ -296,8 +272,7 @@ public class AstUtils {
    * Creates static forwarding method that has the same signature of {@code targetMethodDescriptor}
    * in type {@code fromTypeDescriptor}, and delegates to {@code targetMethodDescriptor}, e.g.
    *
-   * fromTypeDescriptor.method (args) { return Target.prototype.method.call(this,args); }
-   * }
+   * <p>fromTypeDescriptor.method (args) { return Target.prototype.method.call(this,args); } }
    */
   public static Method createStaticForwardingMethod(
       MethodDescriptor targetMethodDescriptor,
@@ -383,8 +358,7 @@ public class AstUtils {
    * {@code enclosingClassTypeDescriptor} with the {@code instanceTypeDescriptor} as the first
    * parameter type.
    *
-   * <p>
-   * instance.instanceMethod(a, b) => staticMethod(instance, a, b)
+   * <p>instance.instanceMethod(a, b) => staticMethod(instance, a, b)
    */
   public static MethodCall createDevirtualizedMethodCall(
       MethodCall methodCall,
@@ -394,9 +368,10 @@ public class AstUtils {
     checkArgument(!targetMethodDescriptor.isConstructor());
     checkArgument(!targetMethodDescriptor.isStatic());
 
-    Iterable<TypeDescriptor> parameterTypes = Iterables.concat(
-        Arrays.asList(sourceTypeDescriptor), // add the first parameter type.
-        targetMethodDescriptor.getParameterTypeDescriptors());
+    Iterable<TypeDescriptor> parameterTypes =
+        Iterables.concat(
+            Arrays.asList(sourceTypeDescriptor), // add the first parameter type.
+            targetMethodDescriptor.getParameterTypeDescriptors());
     Iterable<TypeDescriptor> methodDeclarationParameterTypes =
         Iterables.concat(
             Arrays.asList(sourceTypeDescriptor), // add the first parameter type.
@@ -473,9 +448,7 @@ public class AstUtils {
     return methodCall;
   }
 
-  /**
-   * Returns whether the given expression is a syntactically valid qualifier for a MethodCall.
-   */
+  /** Returns whether the given expression is a syntactically valid qualifier for a MethodCall. */
   private static boolean isValidMethodCallQualifier(Expression expression) {
     return !(expression instanceof ConditionalExpression
         || expression instanceof BinaryExpression
@@ -498,17 +471,14 @@ public class AstUtils {
   /**
    * See JLS 5.2.
    *
-   * <p>
-   * Would normally also verify that the right operand type is being changed, but we're leaving that
-   * check up to our conversion implementation(s)
+   * <p>Would normally also verify that the right operand type is being changed, but we're leaving
+   * that check up to our conversion implementation(s)
    */
   public static boolean matchesAssignmentContext(BinaryOperator binaryOperator) {
     return binaryOperator.hasSideEffect();
   }
 
-  /**
-   * See JLS 5.4.
-   */
+  /** See JLS 5.4. */
   public static boolean matchesStringContext(BinaryExpression binaryExpression) {
     BinaryOperator operator = binaryExpression.getOperator();
     return (operator == BinaryOperator.PLUS_ASSIGN || operator == BinaryOperator.PLUS)
@@ -517,9 +487,7 @@ public class AstUtils {
             .equalsIgnoreNullability(TypeDescriptors.get().javaLangString);
   }
 
-  /**
-   * See JLS 5.6.1.
-   */
+  /** See JLS 5.6.1. */
   public static boolean matchesUnaryNumericPromotionContext(PrefixExpression prefixExpression) {
     PrefixOperator operator = prefixExpression.getOperator();
     return TypeDescriptors.isBoxedOrPrimitiveType(prefixExpression.getTypeDescriptor())
@@ -528,23 +496,17 @@ public class AstUtils {
             || operator == PrefixOperator.COMPLEMENT);
   }
 
-  /**
-   * See JLS 5.6.1.
-   */
+  /** See JLS 5.6.1. */
   public static boolean matchesUnaryNumericPromotionContext(TypeDescriptor returnTypeDescriptor) {
     return TypeDescriptors.isBoxedOrPrimitiveType(returnTypeDescriptor);
   }
 
-  /**
-   * See JLS 5.6.1.
-   */
+  /** See JLS 5.6.1. */
   public static boolean matchesUnaryNumericPromotionContext(BinaryExpression binaryExpression) {
     return binaryExpression.getOperator().isShiftOperator();
   }
 
-  /**
-   * See JLS 5.6.2.
-   */
+  /** See JLS 5.6.2. */
   public static boolean matchesBinaryNumericPromotionContext(BinaryExpression binaryExpression) {
     // Both operands must be boxed or primitive.
     Expression leftOperand = binaryExpression.getLeftOperand();
@@ -554,9 +516,7 @@ public class AstUtils {
     return matchesBinaryNumericPromotionContext(leftOperand, operator, rightOperand);
   }
 
-  /**
-   * See JLS 5.6.2.
-   */
+  /** See JLS 5.6.2. */
   public static boolean matchesBinaryNumericPromotionContext(
       Expression leftOperand, BinaryOperator operator, Expression rightOperand) {
     if (!TypeDescriptors.isBoxedOrPrimitiveType(leftOperand.getTypeDescriptor())
@@ -596,9 +556,7 @@ public class AstUtils {
   }
 
   /**
-   * See JLS 5.6.2.
-   *
-   * <code>
+   * See JLS 5.6.2. <code>
    * X and double -> double
    * X and float -> float
    * X and long -> long
@@ -633,16 +591,12 @@ public class AstUtils {
   }
 
   /**
-   * Returns true if {@code expression} is a string literal, or if it is String.valueOf() method
-   * call, or if it is a BinaryExpression that matches String conversion context and one of its
-   * operands is non null String.
+   * Returns true if {@code expression} is a string literal or if it is a BinaryExpression that
+   * matches String conversion context and one of its operands is non null String.
    */
   public static boolean isNonNullString(Expression expression) {
     if (expression instanceof StringLiteral) {
       return true;
-    }
-    if (expression instanceof MethodCall) {
-      return ((MethodCall) expression).getTarget() == getStringValueOfMethodDescriptor();
     }
     if (!(expression instanceof BinaryExpression)) {
       return false;
@@ -674,9 +628,7 @@ public class AstUtils {
         : new ThisReference(enclosingClassTypeDescriptor);
   }
 
-  /**
-   * Returns true if the qualifier of the given member reference is 'this' reference.
-   */
+  /** Returns true if the qualifier of the given member reference is 'this' reference. */
   public static boolean hasThisReferenceAsQualifier(MemberReference memberReference) {
     Expression qualifier = memberReference.getQualifier();
     return qualifier instanceof ThisReference
@@ -782,7 +734,7 @@ public class AstUtils {
   /**
    * Generates the following code:
    *
-   * $Util.$makeLambdaFunction( $Util.$getPrototype(Type).m_equal, $instance, Type.$copy);
+   * <p>$Util.$makeLambdaFunction( $Util.$getPrototype(Type).m_equal, $instance, Type.$copy);
    */
   public static MethodCall createLambdaInstance(TypeDescriptor lambdaType, Expression instance) {
     checkArgument(lambdaType.isJsFunctionImplementation());
@@ -794,7 +746,8 @@ public class AstUtils {
     // Util getPrototype
     MethodDescriptor getPrototype =
         MethodDescriptor.Builder.fromDefault()
-            .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor())
+            .setEnclosingClassTypeDescriptor(
+                TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor())
             .setMethodName("$getPrototype")
             .setIsStatic(true)
             .setJsInfo(JsInfo.RAW)
@@ -816,7 +769,8 @@ public class AstUtils {
 
     MethodDescriptor makeLambdaCall =
         MethodDescriptor.Builder.fromDefault()
-            .setEnclosingClassTypeDescriptor(TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor())
+            .setEnclosingClassTypeDescriptor(
+                TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor())
             .setMethodName("$makeLambdaFunction")
             .setIsStatic(true)
             .setJsInfo(JsInfo.RAW)
@@ -868,6 +822,7 @@ public class AstUtils {
 
   /**
    * Create a call to an array set expression for a binary operator.
+   *
    * @param array
    * @param index
    * @param operator
@@ -885,9 +840,10 @@ public class AstUtils {
 
     // Create the parameter type descriptor list.
     TypeDescriptor[] methodParams = {
-        BootstrapType.ARRAYS.getDescriptor(), // array
-        TypeDescriptors.get().primitiveInt, // index
-        elementType}; // value
+      BootstrapType.ARRAYS.getDescriptor(), // array
+      TypeDescriptors.get().primitiveInt, // index
+      elementType
+    }; // value
 
     MethodDescriptor arraySetMethodDescriptor =
         createArraySetMethodDescriptor(elementType, methodName, methodParams);
@@ -898,6 +854,7 @@ public class AstUtils {
 
   /**
    * Create a call to an array set expression for a postfix operator.
+   *
    * @param array
    * @param index
    * @param operator
@@ -914,8 +871,9 @@ public class AstUtils {
 
     // Create the parameter type descriptor list.
     TypeDescriptor[] methodParams = {
-        BootstrapType.ARRAYS.getDescriptor(), // array
-        TypeDescriptors.get().primitiveInt}; // index
+      BootstrapType.ARRAYS.getDescriptor(), // array
+      TypeDescriptors.get().primitiveInt
+    }; // index
 
     MethodDescriptor arraySetMethodDescriptor =
         createArraySetMethodDescriptor(elementType, methodName, methodParams);
@@ -924,6 +882,7 @@ public class AstUtils {
 
   /**
    * Create a method descriptor for a call to an array set expression for a binary operator.
+   *
    * @param elementType
    * @param methodName
    * @param methodParams
@@ -954,6 +913,7 @@ public class AstUtils {
 
   /**
    * Get the name of the method that should be called for an array set expression.
+   *
    * @param elementType
    * @param operator
    * @return The string method name.
@@ -1012,6 +972,7 @@ public class AstUtils {
 
   /**
    * Get the name of the method that should be called for an array set expression.
+   *
    * @param elementType
    * @param operator
    * @return The string method name.
@@ -1040,8 +1001,9 @@ public class AstUtils {
   }
 
   /**
-   * Get the binary compound assignment operator corresponding to the given operator.
-   * + or ++ will return +=. - or -- will return -=.
+   * Get the binary compound assignment operator corresponding to the given operator. + or ++ will
+   * return +=. - or -- will return -=.
+   *
    * @param operator
    * @return The corresponding compound assignment binary operator.
    */
@@ -1056,9 +1018,7 @@ public class AstUtils {
     }
   }
 
-  /**
-   * Returns all type variables that appear in the subtree.
-   */
+  /** Returns all type variables that appear in the subtree. */
   public static Set<TypeDescriptor> getAllTypeVariables(Node node) {
     final Set<TypeDescriptor> lambdaTypeParameterTypeDescriptors = new LinkedHashSet<>();
     node.accept(
