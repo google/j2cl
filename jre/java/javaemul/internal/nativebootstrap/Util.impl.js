@@ -169,6 +169,17 @@ class Util {
   static $makeClassName(className) {
     return className;
   }
+
+  /**
+   * Helper function used for enum obfuscation, string replacement passes
+   * can be targeted at this bottleneck.
+   *
+   * @param {string} enumName
+   * @return {string}
+   */
+  static $makeEnumName(enumName) {
+    return enumName;
+  }
 }
 
 

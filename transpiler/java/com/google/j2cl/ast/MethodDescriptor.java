@@ -39,6 +39,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   public static final String IS_ASSIGNABLE_FROM_METHOD_NAME = "$isAssignableFrom";
   public static final String TO_STRING_METHOD_NAME = "toString";
   public static final String CREATE_METHOD_NAME = "$create";
+  public static final String MAKE_ENUM_NAME_METHOD_NAME = "$makeEnumName";
 
   @Override
   public abstract boolean isStatic();

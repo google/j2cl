@@ -17,12 +17,16 @@ package com.google.j2cl.ast.visitors;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.HashMultiset;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multiset;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
+import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.Field;
+import com.google.j2cl.ast.JsInfo;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
+import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewInstance;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.NumberLiteral;
@@ -101,6 +105,23 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
                 .build();
           }
 
+          private MethodCall enumReplaceStringMethodCall(Expression nameVariable) {
+            MethodDescriptor makeEnumNameMethodDescriptor =
+                MethodDescriptor.Builder.fromDefault()
+                    .setIsStatic(true)
+                    .setJsInfo(JsInfo.RAW)
+                    .setEnclosingClassTypeDescriptor(
+                        TypeDescriptors.BootstrapType.NATIVE_UTIL.getDescriptor())
+                    .setMethodName(MethodDescriptor.MAKE_ENUM_NAME_METHOD_NAME)
+                    .setReturnTypeDescriptor(TypeDescriptors.get().javaLangString)
+                    .setParameterTypeDescriptors(
+                        Lists.newArrayList(TypeDescriptors.get().javaLangString))
+                    .build();
+            return MethodCall.Builder.from(makeEnumNameMethodDescriptor)
+                .setArguments(nameVariable)
+                .build();
+          }
+
           @Override
           public Node rewriteNewInstance(NewInstance newInstance) {
             // Rewrite newInstances for the creation of the enum constants to include the assigned
@@ -128,7 +149,8 @@ public class MakeEnumConstructionsExplicit extends NormalizationPass {
 
             return NewInstance.Builder.from(newInstance)
                 .appendArgumentsAndUpdateDescriptor(
-                    StringLiteral.fromPlainText(enumField.getDescriptor().getName()),
+                    enumReplaceStringMethodCall(
+                        StringLiteral.fromPlainText(enumField.getDescriptor().getName())),
                     new NumberLiteral(TypeDescriptors.get().primitiveInt, currentOrdinal))
                 .build();
           }
