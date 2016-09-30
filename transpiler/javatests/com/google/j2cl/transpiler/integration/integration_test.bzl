@@ -32,14 +32,15 @@ def integration_test(name,
                      defs=[],
                      native_srcs=[],
                      native_srcs_pkg="CONVENTION",
-                     js_deps=[], main_class=None,
+                     js_deps=[],
+                     main_class=None,
                      enable_gwt=False,
                      gwt_deps=[],
                      closure_defines=dict(),
                      generate_build_test=None,
                      test_externs_list=None,
                      disable_uncompiled_test=False,
-                     plugins = []
+                     plugins = [],
                     ):
   """Macro that turns Java files into integration test targets.
 
@@ -53,6 +54,20 @@ def integration_test(name,
     main_class = java_package + ".Main"
 
   deps = [absolute_label(dep) for dep in deps]
+
+  optimized_extra_defs = [
+      # OPTIMIZE ENUMS:
+      # TODO(cromwellian): investigate why JSCompiler doesn't preserve original
+      # name before ReplaceStrings sees it.
+      "--replace_strings=module$exports$nativebootstrap$Util$impl.$makeEnumName(?)",
+      # Polyfill re-write is disabled so that size tracking only focuses on
+      # size issues that are actionable outside of JSCompiler or are expected
+      # to eventually be addressed inside of JSCompiler.
+      "--rewrite_polyfills=false",
+      # Cuts optimize time nearly in half and the optimization leaks that it
+      # previously hid no longer exist.
+      "--closure_entry_point=gen.opt.Harness",
+  ]
 
   # Since integration tests are used for optimized size tracking, set
   # behavior to the mode with the smallest output size which is what we expect
@@ -105,21 +120,12 @@ def integration_test(name,
   _genfile("OptHarness.js", opt_harness)
 
 
-  # NOTE: --closure_entry_point *is* used because it cuts optimize time nearly
-  #       in half and the optimization leaks that it previously hid no longer
-  #       exist.
-  # NOTE: --rewrite_polyfills=false *is* used so that size tracking only focuses on
-  #       size issues that are actionable outside of JSCompiler or are expected
-  #       to eventually be addressed inside of JSCompiler.
   if not test_externs_list:
     test_externs_list = ["//javascript/externs:common"]
   native.js_binary(
       name="optimized_js",
       srcs=["OptHarness.js"],
-      defs=J2CL_OPTIMIZED_DEFS + [
-          "--rewrite_polyfills=false",
-          "--closure_entry_point=gen.opt.Harness",
-      ] + defs,
+      defs=J2CL_OPTIMIZED_DEFS + optimized_extra_defs + defs,
       compiler="//javascript/tools/jscompiler:head",
       externs_list= test_externs_list,
       deps=srcs_lib_dep,
@@ -128,10 +134,7 @@ def integration_test(name,
   native.js_binary(
       name="readable_optimized_js",
       srcs=["OptHarness.js"],
-      defs=make_output_readable(J2CL_OPTIMIZED_DEFS + [
-          "--rewrite_polyfills=false",
-          "--closure_entry_point=gen.opt.Harness",
-      ] + defs),
+      defs=make_output_readable(J2CL_OPTIMIZED_DEFS + optimized_extra_defs + defs),
       compiler="//javascript/tools/jscompiler:head",
       externs_list=test_externs_list,
       deps=srcs_lib_dep,
