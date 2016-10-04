@@ -5,7 +5,6 @@ import com.google.j2cl.ast.AnonymousType;
 import com.google.j2cl.ast.Type;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.errors.Errors;
-import com.google.j2cl.generator.visitors.Import;
 
 /**
  * Generates files that are dependency forwarding proxies for native JsTypes.
@@ -33,13 +32,12 @@ public class NativeJsTypeProxyGenerator extends JavaScriptGenerator {
   String renderOutput() {
     TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();
 
-    Import selfImport = new Import(selfTypeDescriptor.getSimpleName(), selfTypeDescriptor);
     String binaryName = selfTypeDescriptor.getBinaryName();
     sourceBuilder.appendLines(
         "/**",
         " * @fileoverview native JsType proxy from " + binaryName,
         " */",
-        "goog.module('" + selfImport.getHeaderModulePath() + "');");
+        "goog.module('" + selfTypeDescriptor.getModuleName() + "');");
     sourceBuilder.newLine();
 
     if (declareLegacyNamespace

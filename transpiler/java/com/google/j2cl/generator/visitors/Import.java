@@ -26,26 +26,16 @@ import com.google.j2cl.ast.TypeDescriptor;
  */
 public class Import implements Comparable<Import>, Alias<TypeDescriptor> {
 
-  private String implModulePath;
-  private String headerModulePath;
   private String alias;
   private TypeDescriptor typeDescriptor;
 
-  public Import(String alias, TypeDescriptor typeDescriptor) {
-    String baseModulePath = computeModulePath(typeDescriptor);
-
-    this.headerModulePath = baseModulePath;
-    this.implModulePath =
-        typeDescriptor.isNative() || typeDescriptor.isExtern()
-            ? baseModulePath
-            : baseModulePath + "$impl";
+  Import(String alias, TypeDescriptor typeDescriptor) {
     this.alias = alias;
     this.typeDescriptor = typeDescriptor;
   }
 
-  /**
-   * Returns the alias.
-   */
+  /** Returns the alias. */
+  @Override
   public String getAlias() {
     return alias;
   }
@@ -55,7 +45,7 @@ public class Import implements Comparable<Import>, Alias<TypeDescriptor> {
    * in the case of JsTypes with a customized namespace.
    */
   public String getImplModulePath() {
-    return implModulePath;
+    return typeDescriptor.getImplModuleName();
   }
 
   /**
@@ -63,7 +53,7 @@ public class Import implements Comparable<Import>, Alias<TypeDescriptor> {
    * path in the case of JsTypes with a customized namespace.
    */
   public String getHeaderModulePath() {
-    return headerModulePath;
+    return typeDescriptor.getModuleName();
   }
 
   /** Returns the associated type descriptor. */
@@ -77,13 +67,6 @@ public class Import implements Comparable<Import>, Alias<TypeDescriptor> {
    */
   @Override
   public int compareTo(Import that) {
-    return this.implModulePath.compareTo(that.implModulePath);
-  }
-
-  private static String computeModulePath(TypeDescriptor typeDescriptor) {
-    if (typeDescriptor.isPrimitive()) {
-      return "vmbootstrap.primitives.$" + typeDescriptor.getBinaryName();
-    }
-    return typeDescriptor.getQualifiedName();
+    return this.getImplModulePath().compareTo(that.getImplModulePath());
   }
 }

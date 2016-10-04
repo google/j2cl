@@ -124,10 +124,9 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
 
   private void renderImports() {
     TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();
-    Import selfImport = new Import(selfTypeDescriptor.getSimpleName(), selfTypeDescriptor);
 
     // goog.module(...) declaration.
-    sourceBuilder.appendln("goog.module('" + selfImport.getImplModulePath() + "');");
+    sourceBuilder.appendln("goog.module('" + selfTypeDescriptor.getImplModuleName() + "');");
     if (declareLegacyNamespace
         && type.getDescriptor().isJsType()
         && !(type instanceof AnonymousType)) {

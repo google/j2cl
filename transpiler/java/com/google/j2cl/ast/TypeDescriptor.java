@@ -494,6 +494,15 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     return binaryName;
   }
 
+  public String getModuleName() {
+    // TODO(goktug): fix the qualified name for primitives at construction phase.
+    return isPrimitive() ? "vmbootstrap.primitives.$" + getQualifiedName() : getQualifiedName();
+  }
+
+  public String getImplModuleName() {
+    return isNative() || isExtern() ? getModuleName() : getModuleName() + "$impl";
+  }
+
   /**
    * Returns a list of Strings representing the current type's simple name and enclosing type simple
    * names. For example for "com.google.foo.Outer" the class components are ["Outer"] and for

@@ -228,9 +228,8 @@ public class OutputGeneratorStage {
 
     // Gather exports.
     TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();
-    Import export = new Import(selfTypeDescriptor.getSimpleName(), selfTypeDescriptor);
-    exportModulePaths.add(export.getHeaderModulePath());
-    exportModulePaths.add(export.getImplModulePath());
+    exportModulePaths.add(selfTypeDescriptor.getModuleName());
+    exportModulePaths.add(selfTypeDescriptor.getImplModuleName());
   }
 
   private void gatherNativeJsTypeProxyDepInfo(
@@ -240,8 +239,7 @@ public class OutputGeneratorStage {
 
     // Export the name by which the native JS class is being forwarded.
     TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();
-    Import selfImport = new Import(selfTypeDescriptor.getSimpleName(), selfTypeDescriptor);
-    exportModulePaths.add(selfImport.getHeaderModulePath());
+    exportModulePaths.add(selfTypeDescriptor.getModuleName());
   }
 
   private void writeDepinfo(

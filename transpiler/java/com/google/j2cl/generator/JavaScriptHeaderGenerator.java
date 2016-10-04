@@ -37,7 +37,6 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
   @Override
   public String renderOutput() {
     TypeDescriptor selfTypeDescriptor = type.getDescriptor().getRawTypeDescriptor();
-    Import selfImport = new Import(selfTypeDescriptor.getSimpleName(), selfTypeDescriptor);
     String binaryName = type.getDescriptor().getRawTypeDescriptor().getBinaryName();
     sourceBuilder.appendLines(
         "/**",
@@ -45,7 +44,7 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
         " *",
         " * @suppress {lateProvide}",
         " */",
-        "goog.module('" + selfImport.getHeaderModulePath() + "');");
+        "goog.module('" + selfTypeDescriptor.getModuleName() + "');");
     sourceBuilder.newLine();
 
     if (declareLegacyNamespace
@@ -86,7 +85,7 @@ public class JavaScriptHeaderGenerator extends JavaScriptGenerator {
     sourceBuilder.newLine();
 
     String className = environment.aliasForType(type.getDescriptor());
-    String implementationPath = selfImport.getImplModulePath();
+    String implementationPath = selfTypeDescriptor.getImplModuleName();
     sourceBuilder.appendLines(
         "// Re-exports the implementation.",
         "var " + className + " = goog.require('" + implementationPath + "');",
