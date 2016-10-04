@@ -17,18 +17,16 @@ package com.google.j2cl.transpiler.integration;
 
 import java.io.IOException;
 
-/**
- * Tests srcjar IO errors.
- */
+/** Tests srcjar IO errors. */
 public class SrcjarTest extends IntegrationTestCase {
   public void testMissingSrcjar() throws IOException, InterruptedException {
     TranspileResult transpileResult =
         transpileDirectory("missingsrcjar", OutputType.DIR, "/foo/bar/Missing.srcjar");
-    assertLogContainsSnippet(transpileResult.errorLines, "file not found");
+    assertLogContainsSnippet(transpileResult.errorLines, "File not found");
   }
 
   public void testCorruptSrcjar() throws IOException, InterruptedException {
     TranspileResult transpileResult = transpileDirectory("corruptsrcjar", OutputType.DIR);
-    assertLogContainsSnippet(transpileResult.errorLines, "cannot extract zip");
+    assertLogContainsSnippet(transpileResult.errorLines, "Cannot extract zip");
   }
 }

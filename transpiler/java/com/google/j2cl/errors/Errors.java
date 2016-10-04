@@ -24,28 +24,30 @@ import java.util.List;
 public class Errors {
   /** Represents compiler errors. */
   public enum Error {
-    ERR_INVALID_FLAG("invalid flag"),
-    ERR_FLAG_FILE("cannot load flag file"),
-    ERR_FILE_NOT_FOUND("file not found"),
-    ERR_INVALID_SOURCE_FILE("invalid source file"),
-    ERR_INVALID_SOURCE_VERSION("invalid source version"),
-    ERR_UNSUPPORTED_ENCODING("unsupported encoding"),
-    ERR_CANNOT_GENERATE_OUTPUT("cannot generate output, please see Velocity runtime log"),
-    ERR_CANNOT_FIND_UNIT("cannot find CompilationUnit for type "),
+    ERR_INVALID_FLAG("Invalid flag"),
+    ERR_FLAG_FILE("Cannot load flag file"),
+    ERR_FILE_NOT_FOUND("File not found"),
+    ERR_INVALID_SOURCE_FILE("Invalid source file"),
+    ERR_INVALID_SOURCE_VERSION("Invalid source version"),
+    ERR_UNSUPPORTED_ENCODING("Unsupported encoding"),
+    ERR_CANNOT_GENERATE_OUTPUT("Cannot generate output, please see Velocity runtime log"),
+    ERR_CANNOT_FIND_UNIT("Cannot find CompilationUnit for type "),
     ERR_OUTPUT_LOCATION("-output location must be a directory or .zip file"),
-    ERR_CANNOT_EXTRACT_ZIP("cannot extract zip"),
-    ERR_CANNOT_OPEN_ZIP("cannot open zip"),
-    ERR_CANNOT_CLOSE_ZIP("cannot close zip"),
-    ERR_NATIVE_JAVA_SOURCE_NO_MATCH("cannot find matching native file"),
-    ERR_NATIVE_UNUSED_NATIVE_SOURCE("native JavaScript file not used"),
-    ERR_CANNOT_CREATE_TEMP_DIR("cannot create temporary directory"),
-    ERR_CANNOT_OPEN_FILE("cannot open file"),
+    ERR_CANNOT_EXTRACT_ZIP("Cannot extract zip"),
+    ERR_CANNOT_OPEN_ZIP("Cannot open zip"),
+    ERR_CANNOT_CLOSE_ZIP("Cannot close zip"),
+    ERR_NATIVE_JAVA_SOURCE_NO_MATCH("Cannot find matching native file"),
+    ERR_NATIVE_UNUSED_NATIVE_SOURCE("Native JavaScript file not used"),
+    ERR_CANNOT_CREATE_TEMP_DIR("Cannot create temporary directory"),
+    ERR_CANNOT_OPEN_FILE("Cannot open file"),
     ERR_JSINTEROP_RESTRICTIONS_ERROR("JsInterop error"),
-    ERR_AMBIGUOUS_NATIVE_FILE_MATCH("native JavaScript file matched multiple srcs"),
-    ERR_PACKAGE_INFO_PARSE("resource was found but it failed to parse"),
-    ERR_CLASS_PATH_URL("class path entry is not a valid url"),
-    ERR_ERROR("error"),
-    ; // used for customized error message.
+    ERR_AMBIGUOUS_NATIVE_FILE_MATCH("Native JavaScript file matched multiple srcs"),
+    ERR_PACKAGE_INFO_PARSE("Resource was found but it failed to parse"),
+    ERR_CLASS_PATH_URL("Class path entry is not a valid url"),
+    ERR_ERROR("Error"),
+    ;
+
+    // used for customized error message.
     private String errorMessage;
 
     Error(String errorMessage) {

@@ -16,21 +16,16 @@
 package com.google.j2cl.transpiler.integration;
 
 import com.google.j2cl.generator.NativeJavaScriptFile;
-
 import java.io.IOException;
 
-/**
- * Tests for the -nativesources flag error messages.
- */
+/** Tests for the -nativesources flag error messages. */
 public class NativeSourcesErrorTest extends IntegrationTestCase {
   private static final String PACKAGE_NAME =
       "com/google/j2cl/transpiler/integration/nativesourceserror/";
   private static final String NATIVE_SOURCES_ERROR_PATH =
       "third_party/java_src/j2cl/transpiler/javatests/" + PACKAGE_NAME;
 
-  /**
-   * Tries to load nonexistent.zip which doesn't exist.
-   */
+  /** Tries to load nonexistent.zip which doesn't exist. */
   public void testMissingZip() throws IOException, InterruptedException {
     TranspileResult transpileResult =
         transpileDirectory(
@@ -46,7 +41,7 @@ public class NativeSourcesErrorTest extends IntegrationTestCase {
             NATIVE_SOURCES_ERROR_PATH + "nonexistent.zip");
     assertLogContainsSnippet(
         transpileResult.errorLines,
-        "file not found: " + NATIVE_SOURCES_ERROR_PATH + "nonexistent.zip");
+        "File not found: " + NATIVE_SOURCES_ERROR_PATH + "nonexistent.zip");
   }
 
   /**
@@ -70,8 +65,9 @@ public class NativeSourcesErrorTest extends IntegrationTestCase {
             NATIVE_SOURCES_ERROR_PATH + "bad_name_native_sources.zip");
     assertLogContainsSnippet(
         transpileResult.errorLines,
-        "cannot find matching native file: "
-            + PACKAGE_NAME + "NativeClass"
+        "Cannot find matching native file: "
+            + PACKAGE_NAME
+            + "NativeClass"
             + NativeJavaScriptFile.NATIVE_EXTENSION);
   }
 
@@ -80,8 +76,8 @@ public class NativeSourcesErrorTest extends IntegrationTestCase {
    * com/google/j2cl/transpiler/integration/nativesourceserror/NativeClass.native.js
    * com/google/j2cl/transpiler/integration/nativesourceserror/ExtraClass.native.js
    *
-   * <p>The compilation fails because there is no ExtraClass.java so not all the native sources
-   * are used.
+   * <p>The compilation fails because there is no ExtraClass.java so not all the native sources are
+   * used.
    */
   public void testUnUsedSource() throws IOException, InterruptedException {
     TranspileResult transpileResult =
@@ -98,7 +94,7 @@ public class NativeSourcesErrorTest extends IntegrationTestCase {
             NATIVE_SOURCES_ERROR_PATH + "too_many_native_sources.zip");
     assertLogContainsSnippet(
         transpileResult.errorLines,
-        "native JavaScript file not used: "
+        "Native JavaScript file not used: "
             + NATIVE_SOURCES_ERROR_PATH
             + "too_many_native_sources.zip!/"
             + PACKAGE_NAME

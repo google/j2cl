@@ -28,8 +28,8 @@ public class InvalidOptionTest extends IntegrationTestCase {
     String[] args =
         new String[] {IntegrationTestCase.TRANSPILER_BINARY, "-source", "2.0", "-encoding", "abc"};
     TranspileResult transpileResult = transpile(args);
-    assertLogContainsSnippet(transpileResult.errorLines, "invalid source version: 2.0");
-    assertLogContainsSnippet(transpileResult.errorLines, "unsupported encoding: abc");
+    assertLogContainsSnippet(transpileResult.errorLines, "Invalid source version: 2.0");
+    assertLogContainsSnippet(transpileResult.errorLines, "Unsupported encoding: abc");
   }
 
   public void testInvalidOutputOption() throws IOException, InterruptedException {

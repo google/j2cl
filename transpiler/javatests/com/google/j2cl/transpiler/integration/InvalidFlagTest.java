@@ -25,7 +25,7 @@ public class InvalidFlagTest extends IntegrationTestCase {
     String[] args = new String[] {IntegrationTestCase.TRANSPILER_BINARY, "-unknown", "abc"};
     TranspileResult transpileResult = transpile(args);
     assertLogContainsSnippet(
-        transpileResult.errorLines, "invalid flag: \"-unknown\" is not a valid option");
+        transpileResult.errorLines, "Invalid flag: \"-unknown\" is not a valid option");
     assertLogContainsSnippet(transpileResult.errorLines, "Valid options:");
     assertLogContainsSnippet(transpileResult.errorLines, "1 error(s).");
   }
