@@ -16,6 +16,7 @@
 package com.google.j2cl.frontend;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.errors.Errors;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import org.eclipse.jdt.core.BindingKey;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.compiler.IProblem;
 import org.eclipse.jdt.core.dom.AST;
@@ -32,6 +34,7 @@ import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.FileASTRequestor;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
+import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
@@ -82,10 +85,18 @@ public class JdtParser {
     this.errors = errors;
   }
 
-  /**
-   * Returns a map from file paths to compilation units after JDT parsing.
-   */
-  public Map<String, CompilationUnit> parseFiles(List<String> filePaths) {
+  private static final List<String> wellKnownClassNames =
+      ImmutableList.of(
+          "java.lang.Class",
+          "java.lang.CharSequence",
+          "java.lang.Comparable",
+          "java.lang.Number",
+          "java.lang.Object",
+          "java.lang.String",
+          "java.lang.Throwable");
+
+  /** Returns a map from file paths to compilation units after JDT parsing. */
+  public CompilationUnitsAndTypeBindings parseFiles(List<String> filePaths) {
     // Preprocess every file and writes the preprocessed content to a temporary file.
     JavaPreprocessor preprocessor = new JavaPreprocessor(compilerOptions);
     final Map<String, String> preprocessedFilesByOriginal =
@@ -100,8 +111,9 @@ public class JdtParser {
     ASTParser parser = newASTParser(true);
 
     // The map must be ordered because it will be iterated over later and if it was not ordered then
-    // our output would be unstable.
+    // our output would be unstable
     final Map<String, CompilationUnit> compilationUnitsByFilePath = new LinkedHashMap<>();
+    final List<ITypeBinding> wellKnownTypeBindings = new ArrayList<>();
 
     FileASTRequestor astRequestor =
         new FileASTRequestor() {
@@ -114,14 +126,22 @@ public class JdtParser {
               compilationUnitsByFilePath.put(originalFilePath, compilationUnit);
             }
           }
+
+          @Override
+          public void acceptBinding(String bindingKey, IBinding binding) {
+            wellKnownTypeBindings.add((ITypeBinding) binding);
+          }
         };
     parser.createASTs(
-        Iterables.toArray(preprocessedFilesByOriginal.keySet(), String.class),
+        preprocessedFilesByOriginal.keySet().stream().toArray(String[]::new),
         getEncodings(filePaths.size()),
-        new String[] {},
+        wellKnownClassNames
+            .stream()
+            .map(name -> BindingKey.createTypeBindingKey(name))
+            .toArray(String[]::new),
         astRequestor,
         null);
-    return compilationUnitsByFilePath;
+    return new CompilationUnitsAndTypeBindings(compilationUnitsByFilePath, wellKnownTypeBindings);
   }
 
   public void setIncludeRunningVMBootclasspath(boolean includeRunningVMBootclasspath) {

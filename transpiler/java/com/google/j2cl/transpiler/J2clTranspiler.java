@@ -66,6 +66,7 @@ import com.google.j2cl.ast.visitors.VerifyVariableScoping;
 import com.google.j2cl.common.TimingCollector;
 import com.google.j2cl.errors.Errors;
 import com.google.j2cl.frontend.CompilationUnitBuilder;
+import com.google.j2cl.frontend.CompilationUnitsAndTypeBindings;
 import com.google.j2cl.frontend.FrontendFlags;
 import com.google.j2cl.frontend.FrontendOptions;
 import com.google.j2cl.frontend.JdtParser;
@@ -74,7 +75,6 @@ import com.google.j2cl.generator.OutputGeneratorStage;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Translation tool for generating JavaScript source files from Java sources.
@@ -92,7 +92,9 @@ public class J2clTranspiler {
   /** Runs the entire J2CL pipeline. */
   void run() {
     loadOptions();
-    List<CompilationUnit> j2clUnits = convertUnits(createJdtUnits());
+    CompilationUnitsAndTypeBindings jdtUnitsAndResolvedBindings =
+        createJdtUnitsAndResolveBindings();
+    List<CompilationUnit> j2clUnits = convertUnits(jdtUnitsAndResolvedBindings);
     checkUnits(j2clUnits);
     normalizeUnits(j2clUnits);
     generateOutputs(j2clUnits);
@@ -112,26 +114,27 @@ public class J2clTranspiler {
   }
 
   private List<CompilationUnit> convertUnits(
-      Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath) {
+      CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings) {
     timingCollector.startSample("AST Conversion");
 
     // Records information about package-info files supplied as byte code.
     PackageInfoCache.init(options.getClasspathEntries(), errors);
     errors.maybeReportAndExit();
 
-    List<CompilationUnit> compilationUnits = CompilationUnitBuilder.build(jdtUnitsByFilePath);
+    List<CompilationUnit> compilationUnits =
+        CompilationUnitBuilder.build(compilationUnitsAndTypeBindings);
     errors.maybeReportAndExit();
     return compilationUnits;
   }
 
-  private Map<String, org.eclipse.jdt.core.dom.CompilationUnit> createJdtUnits() {
+  private CompilationUnitsAndTypeBindings createJdtUnitsAndResolveBindings() {
     timingCollector.startSample("JDT Parse");
 
     JdtParser parser = new JdtParser(options, errors);
-    Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath =
+    CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
         parser.parseFiles(options.getSourceFiles());
     errors.maybeReportAndExit();
-    return jdtUnitsByFilePath;
+    return compilationUnitsAndTypeBindings;
   }
 
   private void checkUnits(List<CompilationUnit> j2clUnits) {

@@ -16,7 +16,6 @@
 package com.google.j2cl.frontend;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.util.stream.Collectors.joining;
@@ -48,6 +47,7 @@ import com.google.j2cl.ast.Type.Kind;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptor.DescriptorFactory;
 import com.google.j2cl.ast.TypeDescriptors;
+import com.google.j2cl.ast.TypeDescriptors.SingletonInitializer;
 import com.google.j2cl.ast.Variable;
 import com.google.j2cl.ast.Visibility;
 import java.util.ArrayList;
@@ -1148,93 +1148,47 @@ public class JdtUtils {
     return createTypeDescriptors(Arrays.asList(typeBindings));
   }
 
-  public static void initTypeDescriptors(AST ast) {
+  public static void initTypeDescriptors(AST ast, Iterable<ITypeBinding> typeBindings) {
     if (TypeDescriptors.isInitialized()) {
       return;
     }
-    new TypeDescriptors.SingletonInitializer()
-        // Add primitive void type.
-        .addPrimitiveType(
-            createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.VOID_TYPE_NAME)))
-        // Add primitive boxed types.
-        .addPrimitiveBoxedTypeDescriptorPair(
-            createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.BOOLEAN_TYPE_NAME)),
-            createTypeDescriptor(ast.resolveWellKnownType("java.lang.Boolean")))
-        .addPrimitiveBoxedTypeDescriptorPair(
-            createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.BYTE_TYPE_NAME)),
-            createTypeDescriptor(ast.resolveWellKnownType("java.lang.Byte")))
-        .addPrimitiveBoxedTypeDescriptorPair(
-            createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.CHAR_TYPE_NAME)),
-            createTypeDescriptor(ast.resolveWellKnownType("java.lang.Character")))
-        .addPrimitiveBoxedTypeDescriptorPair(
-            createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.DOUBLE_TYPE_NAME)),
-            createTypeDescriptor(ast.resolveWellKnownType("java.lang.Double")))
-        .addPrimitiveBoxedTypeDescriptorPair(
-            createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.FLOAT_TYPE_NAME)),
-            createTypeDescriptor(ast.resolveWellKnownType("java.lang.Float")))
-        .addPrimitiveBoxedTypeDescriptorPair(
-            createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.INT_TYPE_NAME)),
-            createTypeDescriptor(ast.resolveWellKnownType("java.lang.Integer")))
-        .addPrimitiveBoxedTypeDescriptorPair(
-            createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.LONG_TYPE_NAME)),
-            createTypeDescriptor(ast.resolveWellKnownType("java.lang.Long")))
-        .addPrimitiveBoxedTypeDescriptorPair(
-            createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.SHORT_TYPE_NAME)),
-            createTypeDescriptor(ast.resolveWellKnownType("java.lang.Short")))
-        // Add well-known, non-primitive types.
-        .addReferenceType(createTypeDescriptor(ast.resolveWellKnownType("java.lang.String")))
-        .addReferenceType(createTypeDescriptor(ast.resolveWellKnownType("java.lang.Class")))
-        .addReferenceType(createTypeDescriptor(ast.resolveWellKnownType("java.lang.Object")))
-        .addReferenceType(createTypeDescriptor(ast.resolveWellKnownType("java.lang.Throwable")))
-        // Add not-well-known, non-primitive types.
-        .addReferenceType(createJavaLangNumber(ast))
-        .addReferenceType(createJavaLangComparable(ast))
-        .addReferenceType(createJavaLangCharSequence(ast))
-        .init();
-  }
-
-  /**
-   * Create TypeDescriptor for java.lang.Number, which is not a well known type by JDT.
-   */
-  public static TypeDescriptor createJavaLangNumber(AST ast) {
-    ITypeBinding javaLangInteger = ast.resolveWellKnownType("java.lang.Integer");
-    checkNotNull(javaLangInteger);
-    TypeDescriptor numberDescriptor = createTypeDescriptor(javaLangInteger.getSuperclass());
-    Preconditions.checkState("java.lang.Number".equals(numberDescriptor.getSourceName()));
-    return numberDescriptor;
-  }
-
-  /**
-   * Create TypeDescriptor for java.lang.Comparable, which is not a well known type by JDT.
-   */
-  public static TypeDescriptor createJavaLangComparable(AST ast) {
-    ITypeBinding javaLangInteger = ast.resolveWellKnownType("java.lang.Integer");
-    checkNotNull(javaLangInteger);
-    ITypeBinding[] interfaces = javaLangInteger.getInterfaces();
-    checkArgument(interfaces.length == 1);
-    TypeDescriptor comparableDescriptor = createTypeDescriptor(interfaces[0].getErasure());
-    Preconditions.checkState("java.lang.Comparable".equals(comparableDescriptor.getSourceName()));
-    return comparableDescriptor;
-  }
-
-  /**
-   * Create TypeDescriptor for java.lang.CharSequence, which is not a well known type by JDT.
-   */
-  private static TypeDescriptor createJavaLangCharSequence(AST ast) {
-    ITypeBinding javaLangString = ast.resolveWellKnownType("java.lang.String");
-    checkNotNull(javaLangString);
-    ITypeBinding[] interfaces = javaLangString.getInterfaces();
-    checkArgument(interfaces.length == 3);
-    for (ITypeBinding i : interfaces) {
-      if (i.getBinaryName().equals("java.lang.CharSequence")) {
-        TypeDescriptor charSequenceDescriptor = createTypeDescriptor(i);
-        Preconditions.checkState(
-            "java.lang.CharSequence".equals(charSequenceDescriptor.getSourceName()));
-        return charSequenceDescriptor;
-      }
+    SingletonInitializer singletonInitializer =
+        new SingletonInitializer()
+            // Add primitive void type.
+            .addPrimitiveType(
+                createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.VOID_TYPE_NAME)))
+            // Add primitive boxed types.
+            .addPrimitiveBoxedTypeDescriptorPair(
+                createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.BOOLEAN_TYPE_NAME)),
+                createTypeDescriptor(ast.resolveWellKnownType("java.lang.Boolean")))
+            .addPrimitiveBoxedTypeDescriptorPair(
+                createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.BYTE_TYPE_NAME)),
+                createTypeDescriptor(ast.resolveWellKnownType("java.lang.Byte")))
+            .addPrimitiveBoxedTypeDescriptorPair(
+                createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.CHAR_TYPE_NAME)),
+                createTypeDescriptor(ast.resolveWellKnownType("java.lang.Character")))
+            .addPrimitiveBoxedTypeDescriptorPair(
+                createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.DOUBLE_TYPE_NAME)),
+                createTypeDescriptor(ast.resolveWellKnownType("java.lang.Double")))
+            .addPrimitiveBoxedTypeDescriptorPair(
+                createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.FLOAT_TYPE_NAME)),
+                createTypeDescriptor(ast.resolveWellKnownType("java.lang.Float")))
+            .addPrimitiveBoxedTypeDescriptorPair(
+                createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.INT_TYPE_NAME)),
+                createTypeDescriptor(ast.resolveWellKnownType("java.lang.Integer")))
+            .addPrimitiveBoxedTypeDescriptorPair(
+                createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.LONG_TYPE_NAME)),
+                createTypeDescriptor(ast.resolveWellKnownType("java.lang.Long")))
+            .addPrimitiveBoxedTypeDescriptorPair(
+                createTypeDescriptor(ast.resolveWellKnownType(TypeDescriptors.SHORT_TYPE_NAME)),
+                createTypeDescriptor(ast.resolveWellKnownType("java.lang.Short")));
+    // Add well-known, non-primitive types.
+    for (ITypeBinding typeBinding : typeBindings) {
+      singletonInitializer.addReferenceType(createTypeDescriptor(typeBinding));
     }
-    return null;
+    singletonInitializer.init();
   }
+
 
   public static TypeDescriptor createLambda(
       final TypeDescriptor enclosingClassTypeDescriptor,

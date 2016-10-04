@@ -23,19 +23,17 @@ import com.google.common.flags.FlagSpec;
 import com.google.common.flags.Flags;
 import com.google.common.flags.InvalidFlagValueException;
 import com.google.j2cl.errors.Errors;
+import com.google.j2cl.frontend.CompilationUnitsAndTypeBindings;
 import com.google.j2cl.frontend.JdtParser;
 import com.google.j2cl.frontend.PackageInfoCache;
-
-import org.eclipse.jdt.core.dom.CompilationUnit;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import org.eclipse.jdt.core.dom.CompilationUnit;
 
 /**
  * Main class for the converter. This class will parse the different flags passed as arguments and
@@ -99,7 +97,7 @@ public class JsniConverter {
     }
   }
 
-  private static Map<String, CompilationUnit> getCompilationUnitsByPath(
+  private static CompilationUnitsAndTypeBindings getCompilationUnitsAndTypeBindings(
       List<String> javaFileNames, List<String> classPathEntries) {
     // Since this tool is currently for a one-time extraction of GWT's standard library JSNI there
     // is no special care being taken to ensure that the classpath is being properly constructed.
@@ -110,9 +108,10 @@ public class JsniConverter {
         new JdtParser(
             "1.8", classPathEntries, new ArrayList<>(), new ArrayList<>(), "UTF-8", errors);
     jdtParser.setIncludeRunningVMBootclasspath(true);
-    Map<String, CompilationUnit> compilationUnitsByPath = jdtParser.parseFiles(javaFileNames);
+    CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
+        jdtParser.parseFiles(javaFileNames);
     errors.maybeReportAndExit();
-    return compilationUnitsByPath;
+    return compilationUnitsAndTypeBindings;
   }
 
   private final String outputFile;
@@ -128,15 +127,18 @@ public class JsniConverter {
     PackageInfoCache.init(classPathEntries, errors);
     errors.maybeReportAndExit();
 
+    CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
+        getCompilationUnitsAndTypeBindings(javaFileNames, classPathEntries);
     for (Entry<String, CompilationUnit> entry :
-        getCompilationUnitsByPath(javaFileNames, classPathEntries).entrySet()) {
+        compilationUnitsAndTypeBindings.getCompilationUnitsByFilePath().entrySet()) {
       if (excludeFileNames.contains(entry.getKey())) {
         continue;
       }
 
       log("Converting %s", entry.getKey());
       jsniMethodsByType.putAll(
-          NativeMethodExtractor.getJsniMethodsByType(entry.getKey(), entry.getValue()));
+          NativeMethodExtractor.getJsniMethodsByType(
+              entry.getKey(), entry.getValue(), compilationUnitsAndTypeBindings.getTypeBindings()));
     }
 
     new NativeJsFilesWriter(outputFile).write(jsniMethodsByType);

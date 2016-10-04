@@ -149,8 +149,10 @@ public class CompilationUnitBuilder {
 
     @SuppressWarnings({"cast", "unchecked"})
     private CompilationUnit convert(
-        String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
-      JdtUtils.initTypeDescriptors(jdtCompilationUnit.getAST());
+        String sourceFilePath,
+        org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit,
+        Iterable<ITypeBinding> wellKnownTypeBindings) {
+      JdtUtils.initTypeDescriptors(jdtCompilationUnit.getAST(), wellKnownTypeBindings);
       this.jdtCompilationUnit = jdtCompilationUnit;
 
       currentSourceFile = sourceFilePath;
@@ -1932,13 +1934,20 @@ public class CompilationUnitBuilder {
   }
 
   private CompilationUnit buildCompilationUnit(
-      String sourceFilePath, org.eclipse.jdt.core.dom.CompilationUnit compilationUnit) {
+      String sourceFilePath,
+      org.eclipse.jdt.core.dom.CompilationUnit compilationUnit,
+      Iterable<ITypeBinding> wellKnownTypeBindings) {
     ASTConverter converter = new ASTConverter();
-    return converter.convert(sourceFilePath, compilationUnit);
+    return converter.convert(sourceFilePath, compilationUnit, wellKnownTypeBindings);
   }
 
   public static List<CompilationUnit> build(
-      Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath) {
+      CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings) {
+
+    Map<String, org.eclipse.jdt.core.dom.CompilationUnit> jdtUnitsByFilePath =
+        compilationUnitsAndTypeBindings.getCompilationUnitsByFilePath();
+    Iterable<ITypeBinding> wellKnownTypeBindings =
+        compilationUnitsAndTypeBindings.getTypeBindings();
     CompilationUnitBuilder compilationUnitBuilder = new CompilationUnitBuilder();
 
     List<CompilationUnit> compilationUnits = new ArrayList<>();
@@ -1950,7 +1959,8 @@ public class CompilationUnitBuilder {
 
     for (Entry<String, org.eclipse.jdt.core.dom.CompilationUnit> entry : entries) {
       compilationUnits.add(
-          compilationUnitBuilder.buildCompilationUnit(entry.getKey(), entry.getValue()));
+          compilationUnitBuilder.buildCompilationUnit(
+              entry.getKey(), entry.getValue(), wellKnownTypeBindings));
     }
     return compilationUnits;
   }

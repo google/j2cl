@@ -18,12 +18,11 @@ package com.google.j2cl.tools.jsni;
 import com.google.common.collect.Multimap;
 import com.google.common.io.Files;
 import com.google.j2cl.frontend.JdtUtils;
-
-import org.eclipse.jdt.core.dom.CompilationUnit;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import org.eclipse.jdt.core.dom.CompilationUnit;
+import org.eclipse.jdt.core.dom.ITypeBinding;
 
 /**
  * Drives traversal of a CompilationUnit and Java file to extract native methods.
@@ -31,8 +30,10 @@ import java.nio.charset.Charset;
 public class NativeMethodExtractor {
 
   public static Multimap<String, JsniMethod> getJsniMethodsByType(
-      String fileName, CompilationUnit compilationUnit) {
-    JdtUtils.initTypeDescriptors(compilationUnit.getAST());
+      String fileName,
+      CompilationUnit compilationUnit,
+      Iterable<ITypeBinding> wellKnownTypeBindings) {
+    JdtUtils.initTypeDescriptors(compilationUnit.getAST(), wellKnownTypeBindings);
     JsniMethodVisitor methodVisitor = new JsniMethodVisitor(readJavaCode(fileName));
     compilationUnit.accept(methodVisitor);
 

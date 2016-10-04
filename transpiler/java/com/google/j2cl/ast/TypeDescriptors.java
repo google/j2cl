@@ -1,5 +1,5 @@
 /*
-c * Copyright 2015 Google Inc.
+ * Copyright 2015 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -644,6 +644,8 @@ public class TypeDescriptors {
     }
 
     public SingletonInitializer addPrimitiveType(TypeDescriptor primitiveType) {
+      checkArgument(
+          primitiveType.isPrimitive(), "%s is not a primitive type", primitiveType.getSourceName());
       String name = primitiveType.getSourceName();
       switch (name) {
         case TypeDescriptors.BOOLEAN_TYPE_NAME:
@@ -674,61 +676,65 @@ public class TypeDescriptors {
           typeDescriptors.primitiveVoid = primitiveType;
           break;
         default:
-          throw new IllegalStateException("Boxed type descriptor not found: " + name);
+          throw new IllegalStateException("Unexpected primitive type in well known set: " + name);
       }
       return this;
     }
 
-    public SingletonInitializer addReferenceType(TypeDescriptor boxedType) {
-      String name = boxedType.getSourceName();
+    public SingletonInitializer addReferenceType(TypeDescriptor referenceType) {
+      checkArgument(
+          !referenceType.isPrimitive(),
+          "%s is not a reference type",
+          referenceType.getSourceName());
+      String name = referenceType.getSourceName();
       switch (name) {
         case "java.lang.Boolean":
-          typeDescriptors.javaLangBoolean = boxedType;
+          typeDescriptors.javaLangBoolean = referenceType;
           break;
         case "java.lang.Byte":
-          typeDescriptors.javaLangByte = boxedType;
+          typeDescriptors.javaLangByte = referenceType;
           break;
         case "java.lang.Character":
-          typeDescriptors.javaLangCharacter = boxedType;
+          typeDescriptors.javaLangCharacter = referenceType;
           break;
         case "java.lang.Double":
-          typeDescriptors.javaLangDouble = boxedType;
+          typeDescriptors.javaLangDouble = referenceType;
           break;
         case "java.lang.Float":
-          typeDescriptors.javaLangFloat = boxedType;
+          typeDescriptors.javaLangFloat = referenceType;
           break;
         case "java.lang.Integer":
-          typeDescriptors.javaLangInteger = boxedType;
+          typeDescriptors.javaLangInteger = referenceType;
           break;
         case "java.lang.Long":
-          typeDescriptors.javaLangLong = boxedType;
+          typeDescriptors.javaLangLong = referenceType;
           break;
         case "java.lang.Short":
-          typeDescriptors.javaLangShort = boxedType;
+          typeDescriptors.javaLangShort = referenceType;
           break;
         case "java.lang.String":
-          typeDescriptors.javaLangString = boxedType;
+          typeDescriptors.javaLangString = referenceType;
           break;
         case "java.lang.Class":
-          typeDescriptors.javaLangClass = boxedType;
+          typeDescriptors.javaLangClass = referenceType;
           break;
         case "java.lang.Object":
-          typeDescriptors.javaLangObject = boxedType;
+          typeDescriptors.javaLangObject = referenceType;
           break;
         case "java.lang.Throwable":
-          typeDescriptors.javaLangThrowable = boxedType;
+          typeDescriptors.javaLangThrowable = referenceType;
           break;
         case "java.lang.Number":
-          typeDescriptors.javaLangNumber = boxedType;
+          typeDescriptors.javaLangNumber = referenceType;
           break;
         case "java.lang.Comparable":
-          typeDescriptors.javaLangComparable = boxedType;
+          typeDescriptors.javaLangComparable = referenceType;
           break;
         case "java.lang.CharSequence":
-          typeDescriptors.javaLangCharSequence = boxedType;
+          typeDescriptors.javaLangCharSequence = referenceType;
           break;
         default:
-          throw new IllegalStateException("Non-primitive type descriptor not found: " + name);
+          throw new IllegalStateException("Unexpected reference type in well known set: " + name);
       }
       return this;
     }
