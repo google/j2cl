@@ -122,7 +122,6 @@ import org.eclipse.jdt.core.dom.VariableDeclaration;
 public class CompilationUnitBuilder {
   private class ASTConverter {
     private PackageInfoCache packageInfoCache = PackageInfoCache.get();
-    private Map<String, String> lambdaBinaryNameByKey = new HashMap<>();
     private Map<IVariableBinding, Variable> variableByJdtBinding = new HashMap<>();
     private Map<Variable, Type> enclosingTypeByVariable = new HashMap<>();
     private Multimap<TypeDescriptor, Variable> capturesByTypeDescriptor =
@@ -133,6 +132,7 @@ public class CompilationUnitBuilder {
     private String currentSourceFile;
     private org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit;
     private CompilationUnit j2clCompilationUnit;
+    private int lambdaCounter;
 
     private void pushType(Type type) {
       checkArgument(!type.getDescriptor().isArray());
@@ -1056,11 +1056,7 @@ public class CompilationUnitBuilder {
       ITypeBinding enclosingClassTypeBinding = JdtUtils.findCurrentTypeBinding(expression);
 
       IMethodBinding lambdaMethodBinding = expression.resolveMethodBinding();
-      String lambdaBinaryName =
-          getLambdaBinaryName(
-              enclosingClassTypeBinding.getBinaryName(),
-              lambdaMethodBinding.getName(),
-              lambdaMethodBinding.getKey());
+      String lambdaName = lambdaCounter++ + lambdaMethodBinding.getName();
 
       ITypeBinding functionalInterfaceTypeBinding = expression.resolveTypeBinding();
 
@@ -1073,12 +1069,12 @@ public class CompilationUnitBuilder {
 
       TypeDescriptor enclosingType = JdtUtils.createTypeDescriptor(enclosingClassTypeBinding);
       TypeDescriptor lambdaTypeDescriptor =
-          JdtUtils.createLambda(enclosingType, lambdaBinaryName, functionalInterfaceTypeBinding);
+          JdtUtils.createLambda(enclosingType, lambdaName, functionalInterfaceTypeBinding);
       Type lambdaType = new Type(Kind.CLASS, Visibility.PRIVATE, lambdaTypeDescriptor);
       pushType(lambdaType);
 
       // Construct lambda method and add it to lambda inner class.
-      String lambdaMethodBinaryName = "lambda" + lambdaBinaryName;
+      String lambdaMethodBinaryName = "lambda" + lambdaName;
       Method lambdaMethod =
           createLambdaMethod(lambdaMethodBinaryName, expression, lambdaType.getDescriptor());
       lambdaType.addMethod(lambdaMethod);
@@ -1896,22 +1892,6 @@ public class CompilationUnitBuilder {
         variableDeclarations.add(convert(fragment));
       }
       return new ExpressionStatement(new VariableDeclarationExpression(variableDeclarations));
-    }
-
-    /**
-     * Calculates or returns a consistent binary name for the given lambda method source name +
-     * unique key.
-     */
-    private String getLambdaBinaryName(
-        String enclosingTypeName, String lambdaSourceName, String lambdaKey) {
-      String fullyQualifiedUniqueKey = enclosingTypeName + lambdaKey;
-      if (!lambdaBinaryNameByKey.containsKey(fullyQualifiedUniqueKey)) {
-        // Construct the binary name as the unique index number + the source name, so that it is
-        // both unique and somewhat readable.
-        String lambdaBinaryName = lambdaBinaryNameByKey.size() + lambdaSourceName;
-        lambdaBinaryNameByKey.put(fullyQualifiedUniqueKey, lambdaBinaryName);
-      }
-      return lambdaBinaryNameByKey.get(fullyQualifiedUniqueKey);
     }
 
     private Type createType(ITypeBinding typeBinding) {
