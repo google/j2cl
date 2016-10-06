@@ -13,3 +13,8 @@ readable_example(
     name = "instancefieldinitializer",
     srcs = glob(["*.java"]),
 )
+
+filegroup(
+    name = "readable_js",
+    data = glob(["*.js.txt"]),
+)
