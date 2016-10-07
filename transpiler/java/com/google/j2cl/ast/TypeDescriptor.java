@@ -551,14 +551,6 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
     checkArgument(!typeDescriptor.isUnion() || typeVariables.isEmpty());
   }
 
-  private static boolean startsWithNumber(String string) {
-    if (Strings.isNullOrEmpty(string)) {
-      return false;
-    }
-    char firstChar = string.charAt(0);
-    return firstChar >= '0' && firstChar <= '9';
-  }
-
   public ImmutableList<TypeDescriptor> getInterfacesTypeDescriptors() {
     if (interfacesTypeDescriptorsFactory == null) {
       return ImmutableList.of();
@@ -620,19 +612,13 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
       // A proxy type must be imported with a modified name, otherwise it might collide with the
       // proxied type if it had the same name.
       if (isProxy()) {
-        effectiveSimpleName = simpleName + "$$Proxy";
+        effectiveSimpleName = getSimpleName() + "$$Proxy";
       }
       if (effectiveSimpleName == null) {
         effectiveSimpleName = jsName;
       }
       if (effectiveSimpleName == null) {
-        effectiveSimpleName = simpleName;
-      }
-      // If the user opted in to declareLegacyNamespaces, then JSCompiler will complain when seeing
-      // namespaces like "foo.bar.Baz.4". Prefix anonymous numbered classes with a string to make
-      // JSCompiler happy.
-      if (startsWithNumber(effectiveSimpleName)) {
-        effectiveSimpleName = "$Anonymous" + effectiveSimpleName;
+        effectiveSimpleName = getSimpleName();
       }
     }
 
@@ -713,7 +699,15 @@ public class TypeDescriptor extends Node implements Comparable<TypeDescriptor>, 
 
   /** Returns the unqualified and unenclosed simple name like "Inner". */
   public String getSimpleName() {
-    return simpleName;
+    // If the user opted in to declareLegacyNamespaces, then JSCompiler will complain when seeing
+    // namespaces like "foo.bar.Baz.4". Prefix anonymous numbered classes with a string to make
+    // JSCompiler happy.
+    return startsWithNumber(simpleName) ? "$" + simpleName : simpleName;
+  }
+
+  private static boolean startsWithNumber(String string) {
+    char firstChar = string.charAt(0);
+    return firstChar >= '0' && firstChar <= '9';
   }
 
   /** Returns the fully package qualified source name like "com.google.common.Outer.Inner". */

@@ -358,6 +358,7 @@ public class TypeDescriptors {
     }
     return new TypeDescriptor.Builder()
         .setIsIntersection(true)
+        .setSimpleName(joinedBinaryName)
         .setTypeArgumentDescriptors(typeVars)
         .setBinaryName(joinedBinaryName)
         .setVisibility(Visibility.PUBLIC)
