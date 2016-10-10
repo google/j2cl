@@ -36,7 +36,7 @@ import java.util.Set;
 
 /** Utility functions to manipulate J2CL AST. */
 public class AstUtils {
-  public static final String OVERLAY_IMPLEMENTATION_CLASS_SUFFIX = "$Overlay";
+  public static final String OVERLAY_IMPLEMENTATION_CLASS_SUFFIX = "$$Overlay";
   public static final String CAPTURES_PREFIX = "$c_";
   public static final String ENCLOSING_INSTANCE_NAME = "$outer_this";
   public static final String TYPE_VARIABLE_IN_METHOD_PREFIX = "M_";
