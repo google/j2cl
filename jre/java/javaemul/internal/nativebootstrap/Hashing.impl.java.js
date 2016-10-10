@@ -17,14 +17,11 @@ class Hashing {
    */
   static $getHashCode(obj) {
     let o = /** @type {Object} */ (obj);
-    return o.$systemHashCode ||
-           (window.Object.defineProperties(
-                o,
-                {
-                  $systemHashCode:
-                      {value: Hashing.$getNextHashId(), enumerable: false}
-                }),
-            o.$systemHashCode);
+    return o.$systemHashCode || (window.Object.defineProperties(o, {
+             $systemHashCode:
+                 {value: Hashing.$getNextHashId(), enumerable: false}
+           }),
+                                 o.$systemHashCode);
   }
 
   /**
@@ -33,7 +30,9 @@ class Hashing {
    * @return {number}
    * @private
    */
-  static $getNextHashId() { return ++Hashing.$nextHashId_; }
+  static $getNextHashId() {
+    return ++Hashing.$nextHashId_;
+  }
 };
 
 

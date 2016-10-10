@@ -4,8 +4,7 @@
 goog.module('vmbootstrap.Asserts$impl');
 
 
-let AssertionError =
-     goog.forwardDeclare('java.lang.AssertionError$impl');
+let AssertionError = goog.forwardDeclare('java.lang.AssertionError$impl');
 let Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 
@@ -16,8 +15,8 @@ class Asserts {
   static $assert(condition) {
     Asserts.$clinit();
     if (!condition) {
-      throw Exceptions.toJs(AssertionError.
-          $create__java_lang_String('Assertion failed.'));
+      throw Exceptions.toJs(
+          AssertionError.$create__java_lang_String('Assertion failed.'));
     }
   }
 
@@ -28,8 +27,7 @@ class Asserts {
   static $assertWithMessage(condition, message) {
     Asserts.$clinit();
     if (!condition) {
-      throw Exceptions.toJs(AssertionError.
-          $create__java_lang_String(message));
+      throw Exceptions.toJs(AssertionError.$create__java_lang_String(message));
     }
   }
 

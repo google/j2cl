@@ -3,8 +3,7 @@
  */
 goog.module('vmbootstrap.Enums$impl');
 
-let IllegalArgumentException =
-    goog.forwardDeclare('java.lang.IllegalArgumentException$impl');
+let IllegalArgumentException = goog.forwardDeclare('java.lang.IllegalArgumentException$impl');
 let Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 let Enum = goog.forwardDeclare('java.lang.Enum$impl');
 

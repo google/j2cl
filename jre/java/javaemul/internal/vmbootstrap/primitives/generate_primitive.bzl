@@ -8,7 +8,7 @@ def generate_primitive_type(name, **kwargs):
   if not hasattr(native, "js_library"):
     return
 
-  templates = ["primitive.js", "primitive.impl.js"]
+  templates = ["primitive.java.js", "primitive.impl.java.js"]
   native.filegroup(
     name = "src_" + name,
     srcs = [ _gen_src_from_template(t, name, **kwargs) for t in templates]

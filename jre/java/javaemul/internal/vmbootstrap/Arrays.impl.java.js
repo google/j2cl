@@ -8,16 +8,13 @@ goog.module('vmbootstrap.Arrays$impl');
 // that will miss some multiline goog.require's.
 let Hashing = goog.require('nativebootstrap.Hashing$impl');
 
-let ArrayIndexOutOfBoundsException =
-    goog.forwardDeclare('java.lang.ArrayIndexOutOfBoundsException$impl');
+let ArrayIndexOutOfBoundsException = goog.forwardDeclare('java.lang.ArrayIndexOutOfBoundsException$impl');
 let Class = goog.forwardDeclare('java.lang.Class');
 let Object = goog.forwardDeclare('java.lang.Object');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
-let NullPointerException =
-    goog.forwardDeclare('java.lang.NullPointerException$impl');
+let NullPointerException = goog.forwardDeclare('java.lang.NullPointerException$impl');
 let Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
-let InternalPreconditions =
-    goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
+let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 
 /**
  * Static Array helper and devirtualized functions.
@@ -284,7 +281,9 @@ class Arrays {
    * @return {boolean}
    * @public
    */
-  static $instanceIsOfNative(instance) { return Array.isArray(instance); }
+  static $instanceIsOfNative(instance) {
+    return Array.isArray(instance);
+  }
 
   /**
    * Casts the provided instance to the provided array type.
@@ -350,7 +349,7 @@ class Arrays {
   static m_toString__java_lang_Object(obj) {
     Arrays.$clinit();
     return Arrays.m_getClass__java_lang_Object(obj).m_getName__() + '@' +
-           Integer.m_toHexString__int(Hashing.$getHashCode(obj));
+        Integer.m_toHexString__int(Hashing.$getHashCode(obj));
   }
 
   /**
@@ -572,7 +571,7 @@ class Arrays {
         goog.module.get('java.lang.NullPointerException$impl');
     Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
     InternalPreconditions =
-      goog.module.get('javaemul.internal.InternalPreconditions$impl');
+        goog.module.get('javaemul.internal.InternalPreconditions$impl');
   }
 };
 
