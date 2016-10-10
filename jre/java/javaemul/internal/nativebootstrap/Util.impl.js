@@ -77,7 +77,7 @@ class Util {
       // TODO(goktug): use uniq ID
       return 'Class$obf';
     } else {
-      throw new Error('Incorrect value: ' + jre.classMetadata);
+      throw new Error("Incorrect value: " + jre.classMetadata);
     }
   }
 
@@ -92,7 +92,7 @@ class Util {
     } else if (jre.classMetadata == 'STRIPPED') {
       return Util.TYPE_CLASS;
     } else {
-      throw new Error('Incorrect value: ' + jre.classMetadata);
+      throw new Error("Incorrect value: " + jre.classMetadata);
     }
   }
 
@@ -107,8 +107,7 @@ class Util {
    * @public
    */
   static $canCastClass(fromClass, toClass) {
-    return (
-        fromClass != null &&
+    return (fromClass != null &&
         (fromClass == toClass || fromClass.prototype instanceof toClass));
   }
 
@@ -137,9 +136,7 @@ class Util {
    * @return {*}
    * @public
    */
-  static $getPrototype(constructor) {
-    return constructor.prototype;
-  }
+  static $getPrototype(constructor) { return constructor.prototype; }
 
   /**
    * Helper to accept a reference to something that should be synchronized on.

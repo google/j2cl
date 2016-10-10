@@ -40,9 +40,7 @@ class Exceptions {
    * @param {*} e
    * @return {Throwable}
    */
-  static toJava(e) {
-    return Throwable.of(e);
-  }
+  static toJava(e) { return Throwable.of(e); }
 
   /**
    * @param {Throwable} t

@@ -68,9 +68,7 @@ class Primitives {
    * @return {number}
    * @public
    */
-  static $widenByteToChar(instance) {
-    return Primitives.$toChar(instance);
-  }
+  static $widenByteToChar(instance) { return Primitives.$toChar(instance); }
 
   /**
    * Narrows a char to a byte.
@@ -79,9 +77,7 @@ class Primitives {
    * @return {number}
    * @public
    */
-  static $narrowCharToByte(instance) {
-    return Primitives.$toByte(instance);
-  }
+  static $narrowCharToByte(instance) { return Primitives.$toByte(instance); }
 
   /**
    * Narrows a char to a short.
@@ -90,9 +86,7 @@ class Primitives {
    * @return {number}
    * @public
    */
-  static $narrowCharToShort(instance) {
-    return Primitives.$toShort(instance);
-  }
+  static $narrowCharToShort(instance) { return Primitives.$toShort(instance); }
 
   /**
    * Narrows a short to a byte.
@@ -101,9 +95,7 @@ class Primitives {
    * @return {number}
    * @public
    */
-  static $narrowShortToByte(instance) {
-    return Primitives.$toByte(instance);
-  }
+  static $narrowShortToByte(instance) { return Primitives.$toByte(instance); }
 
   /**
    * Narrows a short to a char.
@@ -112,9 +104,7 @@ class Primitives {
    * @return {number}
    * @public
    */
-  static $narrowShortToChar(instance) {
-    return Primitives.$toChar(instance);
-  }
+  static $narrowShortToChar(instance) { return Primitives.$toChar(instance); }
 
   /**
    * Narrows an int to a byte.
@@ -123,9 +113,7 @@ class Primitives {
    * @return {number}
    * @public
    */
-  static $narrowIntToByte(instance) {
-    return Primitives.$toByte(instance);
-  }
+  static $narrowIntToByte(instance) { return Primitives.$toByte(instance); }
 
   /**
    * Narrows an int to a byte.
@@ -134,9 +122,7 @@ class Primitives {
    * @return {number}
    * @public
    */
-  static $narrowIntToChar(instance) {
-    return Primitives.$toChar(instance);
-  }
+  static $narrowIntToChar(instance) { return Primitives.$toChar(instance); }
 
   /**
    * Narrows an int to a short.
@@ -145,9 +131,7 @@ class Primitives {
    * @return {number}
    * @public
    */
-  static $narrowIntToShort(instance) {
-    return Primitives.$toShort(instance);
-  }
+  static $narrowIntToShort(instance) { return Primitives.$toShort(instance); }
 
   /**
    * Widens a byte to a Long.
