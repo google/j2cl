@@ -120,7 +120,7 @@ class ToStringRenderer {
       }
 
       @Override
-      public boolean enterJsTypeAnnotation(JsTypeAnnotation annotation) {
+      public boolean enterJsDocAnnotatedExpression(JsDocAnnotatedExpression annotation) {
         if (annotation.isDeclaration()) {
           print(J2clUtils.format("/** @public {%s} */ ", annotation.getTypeDescriptor()));
         } else {

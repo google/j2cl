@@ -808,7 +808,7 @@ public class AstUtils {
       }
       Statement declaration =
           new ExpressionStatement(
-              JsTypeAnnotation.createDeclarationAnnotation(
+              JsDocAnnotatedExpression.createDeclarationAnnotatedExpression(
                   new BinaryExpression(
                       TypeDescriptors.get().primitiveVoid,
                       FieldAccess.Builder.from(field.getDescriptor()).build(),

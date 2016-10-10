@@ -18,7 +18,7 @@ package com.google.j2cl.ast.visitors;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.JsTypeAnnotation;
+import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.Node;
 import com.google.j2cl.ast.TypeDescriptor;
 import com.google.j2cl.ast.TypeDescriptors;
@@ -29,7 +29,7 @@ import com.google.j2cl.ast.TypeDescriptors;
  * <p>They are functionally equivalent except that the first trips up JSCompiler's unknown
  * properties checker.
  */
-public class NormalizeJsTypeAnnotations extends NormalizationPass {
+public class NormalizeJsDocAnnotatedExpression extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new Rewriter());
@@ -37,19 +37,19 @@ public class NormalizeJsTypeAnnotations extends NormalizationPass {
 
   private static class Rewriter extends AbstractRewriter {
     @Override
-    public Node rewriteJsTypeAnnotation(JsTypeAnnotation jsTypeAnnotation) {
-      if (jsTypeAnnotation.isDeclaration()
-          || jsTypeAnnotation.getTypeDescriptor().getTypeArgumentDescriptors().isEmpty()) {
-        return jsTypeAnnotation;
+    public Node rewriteJsDocAnnotatedExpression(JsDocAnnotatedExpression jsDocAnnotatedExpression) {
+      if (jsDocAnnotatedExpression.isDeclaration()
+          || jsDocAnnotatedExpression.getTypeDescriptor().getTypeArgumentDescriptors().isEmpty()) {
+        return jsDocAnnotatedExpression;
       }
 
-      TypeDescriptor annotationType = jsTypeAnnotation.getTypeDescriptor();
-      return JsTypeAnnotation.Builder.from(jsTypeAnnotation)
+      TypeDescriptor annotationTypeDescriptor = jsDocAnnotatedExpression.getTypeDescriptor();
+      return JsDocAnnotatedExpression.Builder.from(jsDocAnnotatedExpression)
           .setAnnotationType(
               TypeDescriptors.replaceTypeArgumentDescriptors(
-                  annotationType,
+                  annotationTypeDescriptor,
                   Lists.transform(
-                      annotationType.getTypeArgumentDescriptors(),
+                      annotationTypeDescriptor.getTypeArgumentDescriptors(),
                       typeArgument ->
                           typeArgument.isWildCard()
                               ? TypeDescriptors.get().javaLangObject

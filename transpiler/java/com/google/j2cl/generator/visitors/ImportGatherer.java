@@ -23,7 +23,7 @@ import com.google.common.collect.Multiset;
 import com.google.j2cl.ast.AbstractVisitor;
 import com.google.j2cl.ast.AssertStatement;
 import com.google.j2cl.ast.Field;
-import com.google.j2cl.ast.JsTypeAnnotation;
+import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -120,8 +120,8 @@ public class ImportGatherer extends AbstractVisitor {
   }
 
   @Override
-  public void exitJsTypeAnnotation(JsTypeAnnotation jsTypeAnnotation) {
-    addTypeDescriptor(jsTypeAnnotation.getTypeDescriptor(), ImportCategory.LAZY);
+  public void exitJsDocAnnotatedExpression(JsDocAnnotatedExpression jsDocAnnotatedExpression) {
+    addTypeDescriptor(jsDocAnnotatedExpression.getTypeDescriptor(), ImportCategory.LAZY);
   }
 
   @Override

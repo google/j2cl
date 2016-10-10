@@ -19,7 +19,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.CompilationUnit;
-import com.google.j2cl.ast.JsTypeAnnotation;
+import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.Member;
 import com.google.j2cl.ast.Method;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -42,14 +42,15 @@ public class FixTypeVariablesInMethods extends NormalizationPass {
 
   private class Rewriter extends AbstractRewriter {
     @Override
-    public Node rewriteJsTypeAnnotation(JsTypeAnnotation annotation) {
+    public Node rewriteJsDocAnnotatedExpression(JsDocAnnotatedExpression annotation) {
       if (annotation.isDeclaration() || !getCurrentMember().isMethod()) {
         return annotation;
       }
       TypeDescriptor castTypeDescriptor = annotation.getTypeDescriptor();
       TypeDescriptor boundType =
           replaceTypeVariableWithBound(castTypeDescriptor, (Method) getCurrentMember());
-      return JsTypeAnnotation.createTypeAnnotation(annotation.getExpression(), boundType);
+      return JsDocAnnotatedExpression.createCastAnnotatedExpression(
+          annotation.getExpression(), boundType);
     }
 
   }

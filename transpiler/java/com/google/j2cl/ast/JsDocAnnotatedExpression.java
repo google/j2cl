@@ -21,26 +21,27 @@ import com.google.j2cl.ast.annotations.Visitable;
 
 /** A node that represent a type annotation in the Javascript output. */
 @Visitable
-public class JsTypeAnnotation extends Expression {
+public class JsDocAnnotatedExpression extends Expression {
   @Visitable Expression expression;
   @Visitable TypeDescriptor annotationType;
   private boolean isDeclaration;
 
-  private JsTypeAnnotation(
+  private JsDocAnnotatedExpression(
       Expression expression, TypeDescriptor annotationType, boolean isDeclaration) {
-    checkArgument(!(expression instanceof JsTypeAnnotation));
+    checkArgument(!(expression instanceof JsDocAnnotatedExpression));
     this.expression = expression;
     this.annotationType = annotationType;
     this.isDeclaration = isDeclaration;
   }
 
   /** Creates a "@type {type}" cast on an expression. */
-  public static JsTypeAnnotation createTypeAnnotation(Expression expression, TypeDescriptor type) {
-    if (expression instanceof JsTypeAnnotation) {
-      JsTypeAnnotation annotation = (JsTypeAnnotation) expression;
-      return new JsTypeAnnotation(annotation.getExpression(), type, false);
+  public static JsDocAnnotatedExpression createCastAnnotatedExpression(
+      Expression expression, TypeDescriptor type) {
+    if (expression instanceof JsDocAnnotatedExpression) {
+      JsDocAnnotatedExpression annotation = (JsDocAnnotatedExpression) expression;
+      return new JsDocAnnotatedExpression(annotation.getExpression(), type, false);
     }
-    return new JsTypeAnnotation(expression, type, false);
+    return new JsDocAnnotatedExpression(expression, type, false);
   }
 
   /**
@@ -48,12 +49,12 @@ public class JsTypeAnnotation extends Expression {
    *
    * @param expression Must be an assignment expression.
    */
-  public static JsTypeAnnotation createDeclarationAnnotation(
+  public static JsDocAnnotatedExpression createDeclarationAnnotatedExpression(
       Expression expression, TypeDescriptor type) {
     String message = "Declaration annotations can only applied to assignments.";
     checkArgument(expression instanceof BinaryExpression, message);
     checkArgument(((BinaryExpression) expression).getOperator() == BinaryOperator.ASSIGN, message);
-    return new JsTypeAnnotation(expression, type, true);
+    return new JsDocAnnotatedExpression(expression, type, true);
   }
 
   public Expression getExpression() {
@@ -66,7 +67,7 @@ public class JsTypeAnnotation extends Expression {
 
   @Override
   public Node accept(Processor processor) {
-    return Visitor_JsTypeAnnotation.visit(processor, this);
+    return Visitor_JsDocAnnotatedExpression.visit(processor, this);
   }
 
   @Override
@@ -75,8 +76,8 @@ public class JsTypeAnnotation extends Expression {
   }
 
   @Override
-  public JsTypeAnnotation clone() {
-    return new JsTypeAnnotation(expression.clone(), annotationType, isDeclaration);
+  public JsDocAnnotatedExpression clone() {
+    return new JsDocAnnotatedExpression(expression.clone(), annotationType, isDeclaration);
   }
 
   /** A Builder for easily and correctly creating modified versions of CastExpressions. */
@@ -85,9 +86,9 @@ public class JsTypeAnnotation extends Expression {
     private TypeDescriptor annotationType;
     private boolean isDeclaration;
 
-    public static Builder from(JsTypeAnnotation annotation) {
+    public static Builder from(JsDocAnnotatedExpression annotation) {
       Builder builder = new Builder();
-      checkArgument(!(annotation.getExpression() instanceof JsTypeAnnotation));
+      checkArgument(!(annotation.getExpression() instanceof JsDocAnnotatedExpression));
       builder.expression = annotation.getExpression();
       builder.annotationType = annotation.getTypeDescriptor();
       builder.isDeclaration = annotation.isDeclaration();
@@ -104,8 +105,8 @@ public class JsTypeAnnotation extends Expression {
       return this;
     }
 
-    public JsTypeAnnotation build() {
-      return new JsTypeAnnotation(expression, annotationType, isDeclaration);
+    public JsDocAnnotatedExpression build() {
+      return new JsDocAnnotatedExpression(expression, annotationType, isDeclaration);
     }
   }
 }

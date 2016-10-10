@@ -22,8 +22,8 @@ import com.google.j2cl.ast.AstUtils;
 import com.google.j2cl.ast.CastExpression;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.JsInfo;
-import com.google.j2cl.ast.JsTypeAnnotation;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.Node;
@@ -67,7 +67,7 @@ public class NormalizeCasts extends NormalizationPass {
             ? castExpression.getExpression()
             : createCheckCastCall(castExpression);
     // /**@type {}*/ ()
-    return JsTypeAnnotation.createTypeAnnotation(
+    return JsDocAnnotatedExpression.createCastAnnotatedExpression(
         resultingExpression, castExpression.getCastTypeDescriptor());
   }
 
@@ -147,7 +147,8 @@ public class NormalizeCasts extends NormalizationPass {
     MethodCall castMethodCall =
         MethodCall.Builder.from(castToMethodDescriptor).setArguments(arguments).build();
     // /**@type {}*/ ()
-    return JsTypeAnnotation.createTypeAnnotation(castMethodCall, arrayCastTypeDescriptor);
+    return JsDocAnnotatedExpression.createCastAnnotatedExpression(
+        castMethodCall, arrayCastTypeDescriptor);
   }
 
   private static Node createNativeJsArrayCastExpression(CastExpression castExpression) {
@@ -170,6 +171,7 @@ public class NormalizeCasts extends NormalizationPass {
     MethodCall castMethodCall =
         MethodCall.Builder.from(castToMethodDescriptor).setArguments(arguments).build();
     // /**@type {}*/ ()
-    return JsTypeAnnotation.createTypeAnnotation(castMethodCall, castTypeDescriptor);
+    return JsDocAnnotatedExpression.createCastAnnotatedExpression(
+        castMethodCall, castTypeDescriptor);
   }
 }

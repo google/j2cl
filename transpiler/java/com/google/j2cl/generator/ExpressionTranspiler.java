@@ -31,7 +31,7 @@ import com.google.j2cl.ast.Expression;
 import com.google.j2cl.ast.FieldAccess;
 import com.google.j2cl.ast.FunctionExpression;
 import com.google.j2cl.ast.InstanceOfExpression;
-import com.google.j2cl.ast.JsTypeAnnotation;
+import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.ManglingNameUtils;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
@@ -114,7 +114,7 @@ public class ExpressionTranspiler {
       }
 
       @Override
-      public Void transformJsTypeAnnotation(JsTypeAnnotation annotation) {
+      public Void transformJsDocAnnotatedExpression(JsDocAnnotatedExpression annotation) {
         String jsdoc =
             JsDocNameUtils.getJsDocName(annotation.getTypeDescriptor(), false, environment);
         if (annotation.isDeclaration()) {

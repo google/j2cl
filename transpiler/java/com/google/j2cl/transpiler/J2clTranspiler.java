@@ -48,7 +48,7 @@ import com.google.j2cl.ast.visitors.NormalizeConstructors;
 import com.google.j2cl.ast.visitors.NormalizeEquality;
 import com.google.j2cl.ast.visitors.NormalizeInstanceOfs;
 import com.google.j2cl.ast.visitors.NormalizeIntersectionTypes;
-import com.google.j2cl.ast.visitors.NormalizeJsTypeAnnotations;
+import com.google.j2cl.ast.visitors.NormalizeJsDocAnnotatedExpression;
 import com.google.j2cl.ast.visitors.NormalizeJsVarargs;
 import com.google.j2cl.ast.visitors.NormalizeLongs;
 import com.google.j2cl.ast.visitors.NormalizeMultiExpressions;
@@ -200,7 +200,7 @@ public class J2clTranspiler {
             new NormalizeArrayCreations(),
             new InsertExceptionConversions(),
             new NormalizeMultiExpressions(),
-            new NormalizeJsTypeAnnotations(),
+            new NormalizeJsDocAnnotatedExpression(),
 
             // Dodge JSCompiler limitations.
             new UnimplementedMethodsCreator(),

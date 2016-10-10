@@ -23,8 +23,8 @@ import com.google.j2cl.ast.AbstractRewriter;
 import com.google.j2cl.ast.ArrayLiteral;
 import com.google.j2cl.ast.CompilationUnit;
 import com.google.j2cl.ast.Expression;
+import com.google.j2cl.ast.JsDocAnnotatedExpression;
 import com.google.j2cl.ast.JsInfo;
-import com.google.j2cl.ast.JsTypeAnnotation;
 import com.google.j2cl.ast.MethodCall;
 import com.google.j2cl.ast.MethodDescriptor;
 import com.google.j2cl.ast.NewArray;
@@ -95,7 +95,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
     arguments.add(leafTypeReference);
     MethodCall arrayCreateMethodCall =
         MethodCall.Builder.from(arrayCreateMethodDescriptor).setArguments(arguments).build();
-    return JsTypeAnnotation.createTypeAnnotation(
+    return JsDocAnnotatedExpression.createCastAnnotatedExpression(
         arrayCreateMethodCall,
         TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()));
   }
@@ -137,7 +137,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
       arguments.add(leafTypeReference);
       MethodCall arrayInitMethodCall =
           MethodCall.Builder.from(arrayInitMethodDescriptor).setArguments(arguments).build();
-      return JsTypeAnnotation.createTypeAnnotation(
+      return JsDocAnnotatedExpression.createCastAnnotatedExpression(
           arrayInitMethodCall,
           TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()));
     } else {
@@ -160,7 +160,7 @@ public class NormalizeArrayCreations extends NormalizationPass {
       MethodCall arrayInitMethodCall =
           MethodCall.Builder.from(arrayInitMethodDescriptor).setArguments(arguments).build();
 
-      return JsTypeAnnotation.createTypeAnnotation(
+      return JsDocAnnotatedExpression.createCastAnnotatedExpression(
           arrayInitMethodCall,
           TypeDescriptors.toNonNullable(newArrayExpression.getTypeDescriptor()));
     }
