@@ -68,6 +68,9 @@ java_library(
         ":emul_tests_lib_java_files",
         ":java_emul_internal",
     ],
+    javacopts = [
+        "-Xep:SelfEquals:OFF",
+    ],
     deps = [
         "//third_party/java/gwt:gwt-jsinterop-annotations",
         "//third_party/java/junit",
@@ -77,6 +80,9 @@ java_library(
 java_test(
     name = "AllEmulTest_Java8",
     size = "small",
+    javacopts = [
+        "-Xep:SelfEquals:OFF",
+    ],
     test_class = "com.google.gwt.emultest.EmulJava8Suite",
     runtime_deps = [
         ":jre_tests",
